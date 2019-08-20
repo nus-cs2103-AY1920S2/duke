@@ -14,3 +14,7 @@ application {
     // Change this to your main class.
     mainClassName = "seedu.duke.Duke"
 }
+
+run {
+    standardInput = System.in
+}
