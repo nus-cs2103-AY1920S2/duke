@@ -11,39 +11,50 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
         System.out.println("____________________________________________________________");
-        String[] input = new String[100];
+        Task[] tasks = new Task[100];
         int i = 0;
-        String current = "";
-        while(!(current = sc.nextLine()).equals("bye")) {
-            switch (current) {
-                case "read book":
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("    added: " + current);
-                    System.out.println("    ____________________________________________________________");
-                    break;
-                case "return book":
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("    added: " + current);
-                    System.out.println("    ____________________________________________________________");
-                    break;
+
+        String command = "";
+
+        while(!(command).equals("bye")) {
+            String[] current = sc.nextLine().split(" ");
+            command = current[0];
+
+            switch (command) {
                 case "list":
                     System.out.println("    ____________________________________________________________");
                     for(int count = 0; count < i; count++){
-                        System.out.println("    " + (count+1) + ". " + input[count]);
+                        System.out.println("    " + (count+1) + ". " + tasks[count].getStatusIcon() + " "
+                                + tasks[count].description);
                     }
 
                     System.out.println("    ____________________________________________________________");
                     break;
+                case "done":
+                    int value = Integer.parseInt(current[1]);
+                    tasks[value-1].markAsDone();
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Nice! I've marked this task as done: \n");
+                    System.out.println("    " + tasks[value-1].getStatusIcon() + " "
+                            + tasks[value-1].description);
+                    System.out.println("    ____________________________________________________________");
+                    break;
                 default:
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("    " + current);
+                    String description  = String.join(" ", current);
+                    System.out.println("    added:  " + description);
+
+
+
                     System.out.println("    ____________________________________________________________");
+                    tasks[i] = new Task(description);
+                    i++;
                     break;
 
 
             }
-            input[i] = current;
-            i++;
+
+
 
         }
 
