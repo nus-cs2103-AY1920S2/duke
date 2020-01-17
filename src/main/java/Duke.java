@@ -6,7 +6,7 @@ public class Duke {
     public static void main(String[] args) {
         System.out.print(createGreeting());
         Scanner sc = new Scanner(System.in);
-        List<String> texts = new ArrayList<String>();
+        List<Task> tasks = new ArrayList<Task>();
         while (true) {
             String cmd = sc.nextLine();
             if (cmd.equalsIgnoreCase("bye")) {
@@ -14,21 +14,21 @@ public class Duke {
                 sc.close();
                 return;
             } else if (cmd.equalsIgnoreCase("list")) {
-                System.out.print(formatReply(list(texts)));
+                System.out.print(formatReply(list(tasks)));
             } else {
-                texts.add(cmd);
+                tasks.add(new Todo(cmd));
                 System.out.print(formatReply("added: " + cmd));
             }
         }
     }
 
-    private static String list(List<String> texts) {
+    private static String list(List<Task> tasks) {
         int counter = 1;
         StringBuilder sb = new StringBuilder();
-        for (String text : texts) {
+        for (Task task : tasks) {
             sb.append(counter);
             sb.append(". ");
-            sb.append(text);
+            sb.append(task);
             sb.append("\n");
             counter += 1;
         }
