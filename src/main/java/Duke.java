@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Duke {
     private void run() {
-        Scanner sc = new Scanner(System.in);
         String logo = "*******   **     ** **   ** ********\n"
                 + "/**////** /**    /**/**  ** /**/////\n"
                 + "/**    /**/**    /**/** **  /**\n"
@@ -11,10 +10,13 @@ public class Duke {
                 + "/**    ** /**    /**/**//** /**\n"
                 + "/*******  //******* /** //**/********\n"
                 + "///////    ///////  //   // //////// \n";
-        System.out.println("\nHi hi I'm \n" + logo);
-        String[] text = {"Master! I'm so glad you used me!", "What will you do to me today?"};
-        dukeSays(text);
+
+        Scanner sc = new Scanner(System.in);
         boolean running = true;
+        ArrayList<String> tasks = new ArrayList<String>();
+
+        System.out.println("\nHi hi I'm \n" + logo);
+        dukeSays(new String[] {"Master! I'm so glad you used me!", "What will you do to me today?"});
         while(running){
             System.out.print("\nMaster: ");
             String inp = sc.nextLine();
@@ -23,12 +25,15 @@ public class Duke {
                 case "bye":
                     running = false;
                     break;
+                case "list":
+                    dukeSays("Master already forgotten what Master wanted to do?!");
+                    break;
                 default:
-                    dukeSays(inp);
+                    dukeSays("So Master wants to " + inp + "...");
+                    tasks.add(inp);
             }
         }
-        text = new String[] {"Are you leaving already?", "Please come back and play with Duke soon..."};
-        dukeSays(text);
+        dukeSays(new String[] {"Are you leaving already?", "Please come back and play with Duke soon..."});
     }
 
     private void dukeSays(String[] text) {
@@ -44,8 +49,8 @@ public class Duke {
         }
     }
 
-    private void dukeSays(String text) {
-        System.out.println("Duke: " + text);
+    private void dukeSays(String line) {
+        System.out.println("Duke: " + line);
     }
 
     public static void main(String[] args) {
