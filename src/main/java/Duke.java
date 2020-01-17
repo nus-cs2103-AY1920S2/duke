@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    private boolean sayFirst = true;
+    private boolean sayNumbered = false;
+
     private void run() {
         String logo = "*******   **     ** **   ** ********\n"
                 + "/**////** /**    /**/**  ** /**/////\n"
@@ -19,7 +22,7 @@ public class Duke {
         System.out.println("\nHi hi I'm \n" + logo);
         dukeSays(new String[] {"Master! I'm so glad you used me!", "What will you do to me today?"});
         while (running) {
-            System.out.print("\nMaster: ");
+            System.out.println("\nMaster: ");
             String inp = sc.nextLine();
             System.out.println("");
             switch (inp) {
@@ -27,7 +30,16 @@ public class Duke {
                 running = false;
                 break;
             case "list":
-                dukeSays("Master already forgotten what Master wanted to do?!");
+                dukeSays(new String[] {"Master already forgotten what Master wanted to do?!"
+                    ,"Duke has no choice but to remind Master then!"});
+                if (tasks.size()==0) {
+                    dukeSays("Huh there are no tasks! Master is so forgetful...");
+                } else {
+                    dukeSays("These are the tasks which Master forgot:");
+                    this.sayFirst = false;
+                    this.sayNumbered = true;
+                    dukeSays(tasks.toArray(new String[tasks.size()]));
+                }
                 break;
             default:
                 dukeSays("So Master wants to " + inp + "...");
@@ -38,9 +50,13 @@ public class Duke {
     }
 
     private void dukeSays(String[] text) {
-        boolean first = true;
+        boolean first = this.sayFirst;
+        int i = 1;
         for (String line : text) {
-            if (first) {
+            if (this.sayNumbered) {
+                System.out.print("      " + Integer.toString(i) + ". ");
+                i += 1;
+            } else if (first) {
                 System.out.print("Duke: ");
                 first = false;
             } else {
@@ -48,10 +64,12 @@ public class Duke {
             }
             System.out.println(line);
         }
+        this.sayFirst = true;
+        this.sayNumbered = false;
     }
 
     private void dukeSays(String line) {
-        System.out.println("Duke: " + line);
+        dukeSays(new String[] {line});
     }
 
     public static void main(String[] args) {
