@@ -25,6 +25,7 @@ public class Duke {
             System.out.println(lines);
             System.out.println("        "+input);
             System.out.println(lines);
+            
 
         }
     }
