@@ -27,15 +27,15 @@ public class AutoResponder {
             }
 
             System.out.println("--------------------------------------------");
-//            if (input.equals("list")) {
-//                for (int i = 1; i <= todoList.size(); ++i) {
-//                    System.out.println(i + ". " + todoList.get(i - 1));
-//                }
-//            } else {
-//                todoList.add(input);
-//                System.out.println("Task added: " + input);
-//            }
-            System.out.println(input);
+            if (input.equals("list")) {
+                for (int i = 1; i <= todoList.size(); ++i) {
+                    System.out.println(i + ". " + todoList.get(i - 1));
+                }
+            } else {
+                todoList.add(input);
+                System.out.println("Task added: " + input);
+            }
+//            System.out.println(input);
             System.out.println("--------------------------------------------");
 
         }
