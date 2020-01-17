@@ -2,16 +2,16 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        System.out.println(createGreeting());
+        System.out.print(createGreeting());
         Scanner sc = new Scanner(System.in);
         while (true) {
             String cmd = sc.nextLine();
             if (cmd.equalsIgnoreCase("bye")) {
-                System.out.println(wrapLineBreak("Bye. Hope to see you again soon!"));
+                System.out.print(formatReply("Bye. Hope to see you again soon!"));
                 sc.close();
                 return;
             }
-            System.out.println(wrapLineBreak(cmd));
+            System.out.print(formatReply(cmd));
         }
     }
 
@@ -22,16 +22,23 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        sb.append("Hello from\n");
         sb.append(logo);
-        sb.append(wrapLineBreak("Hello! I'm Duke\nWhat can I do for you?"));
+        sb.append("\n");
+        sb.append(formatReply("Hello! I'm Duke\nWhat can I do for you?"));
         return sb.toString();
     }
 
-    private static String wrapLineBreak(String str) {
-        return "____________________________________________________________\n"
-            + str
-            + "\n"
-            + "____________________________________________________________\n";
+    private static String formatReply(String str) {
+        String[] lines = str.split("\\r?\\n");
+        StringBuilder sb = new StringBuilder();
+        String lineBreak = "===========================================================\n";
+        for (String line : lines) {
+            sb.append("> ");
+            sb.append(line);
+            sb.append("\n");
+        }
+        sb.append(lineBreak);
+        return sb.toString();
     }
+
 }
