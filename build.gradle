@@ -1,6 +1,12 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+}
+
+checkstyle {
+    project.ext.checkstyleVersion = '8.28'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 group 'seedu.duke'
@@ -12,7 +18,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }
 
 run {
