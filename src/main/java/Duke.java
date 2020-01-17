@@ -5,6 +5,11 @@ public class Duke {
     private static String hori_line = "______________________________________";
     private Task[] task_list;
     private int num_tasks;
+    enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     public static void main(String[] args) {
 
@@ -59,8 +64,20 @@ public class Duke {
                     int doneTaskNum = in.nextInt();
                     DoneATask(doneTaskNum - 1);
                     break;
+                case "todo":
+                    AddToList(in.nextLine().trim(), TaskType.TODO);
+                    break;
+                case "deadline":
+                    AddToList(in.nextLine(), TaskType.DEADLINE);
+                    break;
+                case "event":
+                    AddToList(in.nextLine(), TaskType.EVENT);
+                    break;
                 default:
-                    AddToList(input + in.nextLine()); // nextLine for handling multi-word tasks
+                    in.nextLine();
+                    PrintWithIndent(hori_line);
+                    PrintWithIndent("Sorry, I have no idea what you mean. Try again?");
+                    PrintWithIndent(hori_line);
                     break;
             }
         } while (!is_exiting);
@@ -68,10 +85,30 @@ public class Duke {
         Exit();
     }
 
-    private void AddToList(String newTask) {
-        task_list[num_tasks++] = new Task(newTask);
+    private void AddToList(String newTask, TaskType taskType) {
+        String[] str_arr;
+        switch (taskType) {
+            case TODO:
+                task_list[num_tasks++] = new ToDo(newTask);
+                break;
+            case DEADLINE:
+                // newTask string consists of "<actual task name> /by <deadline>"
+                str_arr = newTask.split("/by");
+                task_list[num_tasks++] = new Deadline(str_arr[0].trim(), str_arr[1].trim());
+                break;
+            case EVENT:
+                // newTask string consists of "<actual task name> /at <datetime>"
+                str_arr = newTask.split("/at");
+                task_list[num_tasks++] = new Event(str_arr[0].trim(), str_arr[1].trim());
+                break;
+            default:
+                task_list[num_tasks++] = new Task(newTask);
+                break;
+        }
         PrintWithIndent(hori_line);
-        PrintWithIndent("added: " + newTask);
+        PrintWithIndent("Got it. I've added this task:");
+        PrintWithIndent(task_list[num_tasks - 1].toString());
+        PrintWithIndent("Now you have " + num_tasks + " tasks in the list.");
         PrintWithIndent(hori_line);
     }
 
