@@ -15,6 +15,12 @@ public class Duke {
                 return;
             } else if (cmd.equalsIgnoreCase("list")) {
                 System.out.print(formatReply(list(tasks)));
+            } else if (cmd.toLowerCase().startsWith("done")) {
+                int taskNo = Integer.parseInt(cmd.split(" ")[1]);
+                Task task = tasks.get(taskNo - 1);
+                task.markAsDone();
+                String reply = "Nice! I've marked this task as done:\n";
+                System.out.print(formatReply(reply + "  " + task));
             } else {
                 tasks.add(new Todo(cmd));
                 System.out.print(formatReply("added: " + cmd));
@@ -27,7 +33,7 @@ public class Duke {
         StringBuilder sb = new StringBuilder();
         for (Task task : tasks) {
             sb.append(counter);
-            sb.append(". ");
+            sb.append(".");
             sb.append(task);
             sb.append("\n");
             counter += 1;
