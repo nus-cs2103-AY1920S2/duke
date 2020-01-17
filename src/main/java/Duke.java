@@ -38,7 +38,6 @@ public class Duke {
             System.out.println(lines);
             System.out.println("         added: "+input);
             System.out.println(lines);
-
         }
     }
 }
