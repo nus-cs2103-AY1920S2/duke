@@ -1,7 +1,21 @@
 plugins {
     id 'java'
     id 'application'
+//    id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
+//
+//checkstyle {
+//    toolVersion = '8.23'
+//}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+
+
 
 group 'seedu.duke'
 version '0.1.0'
