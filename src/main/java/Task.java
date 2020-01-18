@@ -9,11 +9,11 @@ public class Task {
     }
 
     protected void setType(String type){
-        if (type.equals("todo")){
+        if (type.equalsIgnoreCase(Operation.TODO.toString())){
             this.type = "T";
-        } else if (type.equals("deadline")) {
+        } else if (type.equalsIgnoreCase(Operation.DEADLINE.toString())) {
             this.type = "D";
-        } else if (type.equals("event")) {
+        } else if (type.equalsIgnoreCase(Operation.EVENT.toString())) {
             this.type = "E";
         } else {
             this.type = "";

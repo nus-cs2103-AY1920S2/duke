@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 public class Duke {
     static int i;
     static List<Task> tasks;
+
+
     public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
 
@@ -21,17 +23,17 @@ public class Duke {
         tasks = new ArrayList<>();
         String command = "";
 
-        while (!(command).equals("bye")) {
+        while (!(command).equalsIgnoreCase(Operation.BYE.toString())) {
             String[] current = sc.nextLine().split(" ");
             command = current[0];
-            if ((command).equals("bye")) {
+            if ((command).equalsIgnoreCase(Operation.BYE.toString())) {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("    Bye. Hope to see you again soon!");
                 System.out.println("    ____________________________________________________________");
                 break;
             }
 
-            if (command.equals("list")) {
+            if (command.equalsIgnoreCase(Operation.LIST.toString())) {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("      Here are the tasks in your list: \n");
                 for (int count = 0; count < i; count++) {
@@ -40,7 +42,8 @@ public class Duke {
                 }
 
                 System.out.println("    ____________________________________________________________");
-            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            } else if (command.equalsIgnoreCase(Operation.TODO.toString()) || command.equalsIgnoreCase(Operation.DEADLINE.toString())
+                        || command.equalsIgnoreCase(Operation.EVENT.toString())) {
                 try {
                     addTask(current);
                 } catch(DukeException ex){
@@ -49,7 +52,7 @@ public class Duke {
                     System.out.println("    ____________________________________________________________");
                 }
 
-            } else if (command.equals("done")) {
+            } else if (command.equalsIgnoreCase(Operation.DONE.toString())) {
                 int value = Integer.parseInt(current[1]);
                 Task cur = tasks.get(value - 1);
                 cur.markAsDone();
@@ -58,16 +61,14 @@ public class Duke {
                 System.out.println("    " + cur.getStatusIcon() + " "
                         + cur.getDescription());
                 System.out.println("    ____________________________________________________________");
-            } else if (command.equals("delete")) {
-                int value = Integer.parseInt(current[1]);
-                Task cur = tasks.get(value - 1);
-                tasks.remove(cur);
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     Noted. I've removed this task: \n");
-                System.out.println("    " + cur);
-                i--;
-                System.out.println("      Now you have " + i + " tasks in the list.  \n");
-                System.out.println("    ____________________________________________________________");
+            } else if (command.equalsIgnoreCase(Operation.DELETE.toString())) {
+                try {
+                    deleteTask(Integer.parseInt(current[1]));
+                }catch(IndexOutOfBoundsException ex){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Please enter a valid task number");
+                    System.out.println("    ____________________________________________________________");
+                }
 
             }else
              {
@@ -85,6 +86,17 @@ public class Duke {
 
     }
 
+    public static void deleteTask(int value) {
+        Task cur = tasks.get(value - 1);
+        tasks.remove(cur);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Noted. I've removed this task: \n");
+        System.out.println("    " + cur);
+        i--;
+        System.out.println("      Now you have " + i + " tasks in the list.  \n");
+        System.out.println("    ____________________________________________________________");
+    }
+
     public static void addTask(String[] current) throws DukeException{
         String[] words =  Arrays.stream(current).skip(1).toArray(String[]::new);
         String command = current[0];
@@ -92,7 +104,7 @@ public class Duke {
         if (words.length == 0) {
             throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
         }
-        if (command.equals("deadline")){
+        if (command.equalsIgnoreCase(Operation.DEADLINE.toString())){
             int position = 0 ;
             boolean specifyDate = false;
             for (String w: words){
@@ -117,7 +129,7 @@ public class Duke {
                 tasks.add(i, t);
             }
 
-        } else if (command.equals("event")){
+        } else if (command.equalsIgnoreCase(Operation.EVENT.toString())){
             int position = 0 ;
             boolean specifyDate = false;
             for (String w: words){
