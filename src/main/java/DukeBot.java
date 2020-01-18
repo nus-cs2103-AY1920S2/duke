@@ -36,12 +36,20 @@ public class DukeBot {
                 case "event":
                     addTask(command, TaskType.EVENT);
                     break;
+                case "delete":
+                    deleteTask(Integer.parseInt(commandArray[1]));
+                    break;
                 default:
                     System.out.println("Oh no! I have no idea what you're trying to tell me :(((, try again?");
             }
         } catch(DukeException e) {
             System.out.println(e);
-        } catch(Exception e) {
+        } catch(NumberFormatException e) {
+            System.out.println("OOPS!! Looks like you didn't enter a number, so we can't remove your task! Try again?");
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("OOPS!! Looks like we can't find your task in the list, so we can't remove it!");
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -106,7 +114,17 @@ public class DukeBot {
         System.out.println(String.format("You now have %d tasks in your list.", taskList.size()));
     }
 
+    public void deleteTask(int taskNumber) throws IndexOutOfBoundsException{
+        int taskIndex = taskNumber - 1;
+
+        Task removedTask = taskList.remove(taskIndex);
+        System.out.println("Noted! I've deleted your task: ");
+        System.out.println(removedTask);
+        System.out.println(String.format("You now have %d tasks in your list.", taskList.size()));
+    }
+
     public void printTaskList() {
+        System.out.println("You have the following tasks entered into your list: ");
         for(int i = 0; i < taskList.size(); i++) {
             System.out.println((i+1) + ". " + taskList.get(i));
         }
