@@ -1,24 +1,19 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
+
+import duke.tasks.Task;
+import duke.commands.CommandHandler;
 
 public class Duke {
     public static void main(String[] args) {
         System.out.print(createGreeting());
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
-        HashMap<String, Command> commandMap = new HashMap<>();
-        // Register commands
-        commandMap.put("list", new ListAll());
-        commandMap.put("done", new MarkTaskAsDone());
-        commandMap.put("todo", new CreateTodo());
-        commandMap.put("deadline", new CreateDeadline());
-        commandMap.put("event", new CreateEvent());
-        // commandMap.put("help", new ListCommands());
-        commandMap.put("null", new NullCommand());
-        CommandHandler handler = new CommandHandler(tasks, commandMap);
-        while (handler.isActive) {
+        CommandHandler handler = new CommandHandler(tasks);
+        while (handler.isActive()) {
             handler.executeCmd(sc.nextLine());
         }
         System.out.print(formatReply("Bye. Hope to see you again soon!"));

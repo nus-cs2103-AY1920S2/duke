@@ -1,14 +1,24 @@
+package duke.commands;
+
+import duke.tasks.Task;
 import java.util.List;
 import java.util.HashMap;
 
-class CommandHandler {
+public class CommandHandler {
     protected List<Task> tasks;
     protected HashMap<String, Command> commands;
     protected boolean isActive;
 
-    public CommandHandler(List<Task> tasks, HashMap<String, Command> commands) {
+    public CommandHandler(List<Task> tasks) {
         this.tasks = tasks;
-        this.commands = commands;
+        this.commands = new HashMap<>();
+        // Register commands
+        commands.put("list", new ListAll());
+        commands.put("done", new MarkTaskAsDone());
+        commands.put("todo", new CreateTodo());
+        commands.put("deadline", new CreateDeadline());
+        commands.put("event", new CreateEvent());
+        commands.put("null", new NullCommand());
         isActive = true;
     }
 
@@ -34,6 +44,9 @@ class CommandHandler {
         } else {
             commands.get("null").execute(arg, tasks);
         }
-        
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }
