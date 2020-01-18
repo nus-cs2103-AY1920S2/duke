@@ -30,7 +30,7 @@ public class Duke {
             String[] inputArr = input.split(" ");
             String instruction = inputArr[0];
             if (instruction.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.print(stringWrapper("Bye. Hope to see you again soon!"));
                 break;
             } else if (instruction.equals("done")) {
                 int taskNumber = Integer.parseInt(inputArr[1]);
@@ -85,7 +85,10 @@ public class Duke {
     }
 
     private static String stringWrapper(String string) {
-        return "____________________\n" + string + "\n" + "____________________\n";
+        return "____________________________________________________________\n"
+                + string
+                + "\n"
+                + "____________________________________________________________\n";
     }
 
 }
