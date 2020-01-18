@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 import java.util.Arrays;
 
 public class Task {

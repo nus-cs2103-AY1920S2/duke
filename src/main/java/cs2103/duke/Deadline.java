@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 public class Deadline extends Task {
     private String time;
 

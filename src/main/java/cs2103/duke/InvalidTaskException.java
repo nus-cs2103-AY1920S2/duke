@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 public class InvalidTaskException extends Throwable {
     public InvalidTaskException(String message) {
         super(message);

@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import cs2103.duke.Task;
+import cs2103.duke.InvalidTaskException;
 
 public class Duke {
     private static final String logo = "*******   **     ** **   ** ********\n"
@@ -109,8 +111,8 @@ public class Duke {
             System.out.println("      "
                 + i + ". "
                 + task
-                + " (" + task.getType() + ")"
-                + (task.getDone() ? " (Done!)" : "")
+                + " [" + task.getType() + "]"
+                + (task.getDone() ? " [Done!]" : "")
             );
             i += 1;
         }
