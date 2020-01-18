@@ -1,4 +1,4 @@
-package cs2103.duke;
+package gerhean.cs2103.duke;
 
 public class Event extends Task {
     private String time;
@@ -9,9 +9,9 @@ public class Event extends Task {
         this.taskType = TaskType.Event;
     }
 
-    public String getTime() {
-        return(this.time);
-    }
+    //    public String getTime() {
+    //        return (this.time);
+    //    }
 
     @Override
     public String toString() {

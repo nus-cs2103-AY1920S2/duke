@@ -1,8 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import cs2103.duke.Task;
-import cs2103.duke.InvalidTaskException;
+import gerhean.cs2103.duke.Task;
+import gerhean.cs2103.duke.InvalidTaskException;
 
+/**
+ * Main class.
+ */
 public class Duke {
     private static final String logo = "*******   **     ** **   ** ********\n"
             + "/**////** /**    /**/**  ** /**/////\n"
@@ -17,12 +20,12 @@ public class Duke {
     private void run() {
 
         Scanner sc = new Scanner(System.in);
-        boolean running = true;
         ArrayList<Task> tasks = new ArrayList<>();
 
         System.out.println("\nHi hi I'm \n" + logo);
         dukeSays("Master! Duke's so glad Master used Duke!");
         dukeSays("What will Master do today?");
+        boolean running = true;
         while (running) {
             sayFirst = true;
             System.out.println("\nMaster: ");
@@ -113,19 +116,19 @@ public class Duke {
         dukeSays("Please come back and play with Duke soon...");
     }
 
-//    private void dukeSays(String[] text) {
-//        boolean first = this.sayFirst;
-//        for (String line : text) {
-//            if (first) {
-//                System.out.print("Duke: ");
-//                first = false;
-//                this.sayFirst = false;
-//            } else {
-//                System.out.print("      ");
-//            }
-//            System.out.println(line);
-//        }
-//    }
+    //    private void dukeSays(String[] text) {
+    //        boolean first = this.sayFirst;
+    //        for (String line : text) {
+    //            if (first) {
+    //                System.out.print("Duke: ");
+    //                first = false;
+    //                this.sayFirst = false;
+    //            } else {
+    //                System.out.print("      ");
+    //            }
+    //            System.out.println(line);
+    //        }
+    //    }
 
     private void dukeSays(String line) {
         if (this.sayFirst) {
@@ -150,6 +153,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method.
+     */
     public static void main(String[] args) {
         Duke newDuke = new Duke();
         newDuke.run();
