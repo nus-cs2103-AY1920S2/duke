@@ -1,7 +1,12 @@
 badcommand
+todo
 todo borrow book
+deadline
 deadline return book /by Sunday
+event project meeting /at
 event project meeting /at Mon 2-4pm
+done two
+done 5
 done 2
 list
 bye
