@@ -4,25 +4,34 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
 
-        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         printLogo();
         printGreeting();
 
         while (true) {
-            String input = sc.nextLine();
+            String[] input = sc.nextLine().split(" ");
             printDivider();
-            if (input.toLowerCase().equals("bye")) {
+            if (input[0].toLowerCase().equals("bye")) {
                 break;
-            } else if (input.toLowerCase().equals("list")) {
+            } else if (input[0].toLowerCase().equals("list")) {
 
-                for(int i = 0; i < arrayList.size(); i++) {
-                    System.out.println((i + 1) + ". " + arrayList.get(i));
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println((i + 1) + "." + taskList.get(i));
                 }
+            } else if (input[0].equals("done")) {
+                System.out.println("> Another task off the list. Good job!");
+                taskList.get(Integer.parseInt(input[1]) - 1).markAsDone();
+                System.out.println("  " + taskList.get(Integer.parseInt(input[1]) - 1));
             } else {
-                arrayList.add(input);
-                System.out.println("> Added: " + input);
+                StringBuilder builder = new StringBuilder(input[0]);
+                for (int i = 1; i < input.length; i++) {
+                    builder.append(" ");
+                    builder.append(input[i]);
+                }
+                taskList.add(new Task(builder.toString()));
+                System.out.println("> Added: " + builder.toString());
             }
             printDivider();
         }
