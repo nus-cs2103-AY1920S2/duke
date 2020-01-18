@@ -5,6 +5,6 @@ class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatus(), name);
+        return String.format("[T][%s] %s", getStatus(), name);
     }
 }

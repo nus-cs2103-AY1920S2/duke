@@ -1,44 +1,25 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 public class Duke {
     public static void main(String[] args) {
         System.out.print(createGreeting());
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<Task>();
-        while (true) {
-            String cmd = sc.nextLine();
-            if (cmd.equalsIgnoreCase("bye")) {
-                System.out.print(formatReply("Bye. Hope to see you again soon!"));
-                sc.close();
-                return;
-            } else if (cmd.equalsIgnoreCase("list")) {
-                System.out.print(formatReply(list(tasks)));
-            } else if (cmd.toLowerCase().startsWith("done")) {
-                int taskNo = Integer.parseInt(cmd.split(" ")[1]);
-                Task task = tasks.get(taskNo - 1);
-                task.markAsDone();
-                String reply = "Nice! I've marked this task as done:\n";
-                System.out.print(formatReply(reply + "  " + task));
-            } else {
-                tasks.add(new Todo(cmd));
-                System.out.print(formatReply("added: " + cmd));
-            }
+        List<Task> tasks = new ArrayList<>();
+        HashMap<String, Command> commandMap = new HashMap<>();
+        // Register commands
+        commandMap.put("list", new ListAll());
+        commandMap.put("done", new MarkTaskAsDone());
+        commandMap.put("todo", new CreateTodo());
+        commandMap.put("null", new NullCommand());
+        CommandHandler handler = new CommandHandler(tasks, commandMap);
+        while (handler.isActive) {
+            handler.executeCmd(sc.nextLine());
         }
-    }
-
-    private static String list(List<Task> tasks) {
-        int counter = 1;
-        StringBuilder sb = new StringBuilder();
-        for (Task task : tasks) {
-            sb.append(counter);
-            sb.append(".");
-            sb.append(task);
-            sb.append("\n");
-            counter += 1;
-        }
-        return sb.toString();
+        System.out.print(formatReply("Bye. Hope to see you again soon!"));
+        sc.close();
     }
 
     private static String createGreeting() {
