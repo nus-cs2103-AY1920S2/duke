@@ -58,12 +58,24 @@ class CreateDeadline implements Command {
     public void execute(String arg, List<Task> tasks) {
         String[] args = arg.split("/by");
         if (args.length < 2) {
-            System.out.print(formatReply("Usage: deadline [task name] /by [due date]"));
+            System.out.print(formatReply("Usage: deadline [task name] /by [time]"));
             return;
         }
         Task newTask = new Deadline(args[0].strip(), args[1].strip());
         tasks.add(newTask);
         System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
+    }
+}
 
+class CreateEvent implements Command {
+    public void execute(String arg, List<Task> tasks) {
+        String[] args = arg.split("/at");
+        if (args.length < 2) {
+            System.out.print(formatReply("Usage: event [task name] /at [time]"));
+            return;
+        }
+        Task newTask = new Event(args[0].strip(), args[1].strip());
+        tasks.add(newTask);
+        System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
     }
 }

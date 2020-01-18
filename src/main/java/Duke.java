@@ -14,6 +14,7 @@ public class Duke {
         commandMap.put("done", new MarkTaskAsDone());
         commandMap.put("todo", new CreateTodo());
         commandMap.put("deadline", new CreateDeadline());
+        commandMap.put("event", new CreateEvent());
         // commandMap.put("help", new ListCommands());
         commandMap.put("null", new NullCommand());
         CommandHandler handler = new CommandHandler(tasks, commandMap);
