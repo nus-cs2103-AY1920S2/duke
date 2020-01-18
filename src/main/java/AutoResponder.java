@@ -23,6 +23,7 @@ public class AutoResponder {
         Pattern pEvent = Pattern.compile("event (.+) /at (.+)");
         Pattern pTodo = Pattern.compile("todo (.+)");
         Pattern pDone = Pattern.compile("done (\\d+)");
+        Pattern pEmptyCommand = Pattern.compile("(todo|event|deadline)\\s*");
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -50,7 +51,12 @@ public class AutoResponder {
                     System.out.println(taskList.get(index));
                 }
             } else {
-                if (pDeadline.matcher(input).find()) {
+                if (pEmptyCommand.matcher(input).find()) {
+                    Matcher m = pEmptyCommand.matcher(input); m.find();
+                    System.out.println("☹ OOPS!!! The description of a " + m.group(1) + " cannot be empty.");
+                    System.out.println("--------------------------------------------");
+                    continue;
+                } else if (pDeadline.matcher(input).find()) {
                     Matcher m = pDeadline.matcher(input); m.find();
                     Task t = new Deadline(m.group(1), m.group(2));
                     taskList.add(t);
@@ -63,7 +69,7 @@ public class AutoResponder {
                     Task t = new Todo(m.group(1));
                     taskList.add(t);
                 } else {
-                    System.out.println("No matching command found");
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println("--------------------------------------------");
                     continue;
                 }
