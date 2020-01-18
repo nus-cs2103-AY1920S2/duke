@@ -19,6 +19,7 @@ public class CommandHandler {
         commands.put("todo", new CreateTodo());
         commands.put("deadline", new CreateDeadline());
         commands.put("event", new CreateEvent());
+        commands.put("delete", new DeleteTask());
         isActive = true;
     }
 
