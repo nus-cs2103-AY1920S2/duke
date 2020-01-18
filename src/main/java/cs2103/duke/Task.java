@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Task {
     protected String description;
     private boolean isDone;
-    protected String taskType;
+    protected TaskType taskType;
 
     protected Task(String description) {
         this.description = description;
@@ -62,7 +62,7 @@ public class Task {
     }
 
     public String getType() {
-        return this.taskType;
+        return this.taskType.toString();
     }
 
     @Override

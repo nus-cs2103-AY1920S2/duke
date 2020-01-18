@@ -98,7 +98,7 @@ public class Duke {
                             Task task = tasks.get(taskInd);
                             tasks.remove(taskInd);
                             dukeSays("For Master, Duke can forget anything, even the:");
-                            dukeSays(task.getType() + ": " + task);
+                            dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
                         }
                     } catch (NumberFormatException e) {
                         dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");

@@ -6,7 +6,7 @@ public class Deadline extends Task {
     protected Deadline(String description, String time) {
         super(description);
         this.time = time;
-        this.taskType = "Deadline";
+        this.taskType = TaskType.DEADLINE;
     }
 
     public String getTime() {

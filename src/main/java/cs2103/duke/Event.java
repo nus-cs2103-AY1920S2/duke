@@ -6,7 +6,7 @@ public class Event extends Task {
     protected Event(String description, String time) {
         super(description);
         this.time = time;
-        this.taskType = "Event";
+        this.taskType = TaskType.Event;
     }
 
     public String getTime() {
