@@ -1,20 +1,29 @@
 import java.util.Scanner;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Duke {
+    private static List<String> tasks;
+
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        tasks = new ArrayList<>();
+        String input = sc.nextLine();
         while (true) {
-            switch (command) {
+            switch (input) {
             case "bye":
                 exit();
                 break;
+            case "list":
+                list();
+                break;
             default:
-                echo(command);
+                addTask(input);
                 break;
             }
-            command = sc.nextLine();
+            input = sc.nextLine();
         }
     }
 
@@ -35,8 +44,20 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void echo(String message) {
-        System.out.println(style(message));
+    private static void addTask(String task) {
+        tasks.add(task);
+        System.out.println(style("added: " + task));
+    }
+
+    private static void list() {
+        StringBuilder list = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i > 0) {
+                list.append("\n");
+            }
+            list.append((i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println(style(list.toString()));
     }
 
     private static String style(String message) {
