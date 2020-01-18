@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -5,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Duke {
     static int i;
-    static Task[] tasks;
+    static List<Task> tasks;
     public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
 
@@ -17,7 +18,7 @@ public class Duke {
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
         System.out.println("____________________________________________________________");
 
-        tasks = new Task[100];
+        tasks = new ArrayList<>();
         String command = "";
 
         while (!(command).equals("bye")) {
@@ -35,13 +36,7 @@ public class Duke {
                 System.out.println("      Here are the tasks in your list: \n");
                 for (int count = 0; count < i; count++) {
                     System.out.print("     " + (count+1) + ". ");
-                    if (tasks[i] instanceof Deadline) {
-                        System.out.println(((Deadline)tasks[count]).toString());
-                    } else if (tasks[i] instanceof EventObj){
-                        System.out.println(((EventObj)tasks[count]).toString());
-                    } else{
-                        System.out.println(tasks[count]);
-                    }
+                    System.out.println(tasks.get(count));
                 }
 
                 System.out.println("    ____________________________________________________________");
@@ -55,15 +50,27 @@ public class Duke {
                 }
 
             } else if (command.equals("done")) {
-
                 int value = Integer.parseInt(current[1]);
-                tasks[value - 1].markAsDone();
+                Task cur = tasks.get(value - 1);
+                cur.markAsDone();
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Nice! I've marked this task as done: \n");
-                System.out.println("    " + tasks[value - 1].getStatusIcon() + " "
-                        + tasks[value - 1].description);
+                System.out.println("    " + cur.getStatusIcon() + " "
+                        + cur.getDescription());
                 System.out.println("    ____________________________________________________________");
-            } else {
+            } else if (command.equals("delete")) {
+                int value = Integer.parseInt(current[1]);
+                Task cur = tasks.get(value - 1);
+                tasks.remove(cur);
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Noted. I've removed this task: \n");
+                System.out.println("    " + cur);
+                i--;
+                System.out.println("      Now you have " + i + " tasks in the list.  \n");
+                System.out.println("    ____________________________________________________________");
+
+            }else
+             {
                 try {
                     throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }catch(Exception ex){
@@ -92,7 +99,9 @@ public class Duke {
                 if (w.equals("/by")){
                     String description = String.join(" ", List.of(words).subList(0, position));
                     String date = List.of(words).stream().skip(position+1).collect(Collectors.joining(" "));
-                    tasks[i] = new Deadline(description, date);
+                    Task t = new Deadline(description, date);
+                    t.setType(command);
+                    tasks.add(i, t);
                     specifyDate = true;
                     break;
                 } else{
@@ -103,7 +112,9 @@ public class Duke {
 
             if (!specifyDate){
                 String description = String.join(" ", words);
-                tasks[i] = new Deadline(description, "");
+                Task t = new Deadline(description, "");
+                t.setType(command);
+                tasks.add(i, t);
             }
 
         } else if (command.equals("event")){
@@ -113,7 +124,9 @@ public class Duke {
                 if (w.equals("/at")){
                     String description = String.join(" ", List.of(words).subList(0, position));
                     String datetime = List.of(words).stream().skip(position+1).collect(Collectors.joining(" "));
-                    tasks[i] = new EventObj(description, datetime);
+                    Task t = new EventObj(description, datetime);
+                    t.setType(command);
+                    tasks.add(i, t);
                     specifyDate = true;
                     break;
                 } else{
@@ -124,26 +137,30 @@ public class Duke {
 
             if (!specifyDate){
                 String description = String.join(" ", words);
-                tasks[i] = new EventObj(description, "");
+                Task t = new EventObj(description, "");
+                t.setType(command);
+                tasks.add(i, t);
             }
 
         } else {
-            tasks[i] = new Task(String.join(" ", words));
+            Task t = new Task(String.join(" ", words));
+            t.setType(command);
+            tasks.add(i, t);
 
         }
 
-        tasks[i].setType(command);
 
         System.out.println("    ____________________________________________________________");
         System.out.println("      Got it. I've added this task:  \n");
 
         System.out.print("      ");
-        if (tasks[i] instanceof Deadline) {
-            System.out.println(((Deadline)tasks[i]).toString());
-        } else if (tasks[i] instanceof EventObj){
-            System.out.println(((EventObj)tasks[i]).toString());
+        Task t = tasks.get(i);
+        if (t instanceof Deadline) {
+            System.out.println(t.toString());
+        } else if (t instanceof EventObj){
+            System.out.println(((EventObj)t).toString());
         } else{
-            System.out.println(tasks[i]);
+            System.out.println(t);
         }
         i++;
         System.out.println("      Now you have " + i + " tasks in the list.  \n");
