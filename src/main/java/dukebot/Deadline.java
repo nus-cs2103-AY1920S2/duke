@@ -1,4 +1,4 @@
-package gerhean.cs2103.duke;
+package dukebot;
 
 public class Deadline extends Task {
     private String time;

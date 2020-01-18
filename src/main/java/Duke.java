@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import gerhean.cs2103.duke.Task;
-import gerhean.cs2103.duke.InvalidTaskException;
+import dukebot.Task;
+import dukebot.InvalidTaskException;
 
 /**
  * Main class.
