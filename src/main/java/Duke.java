@@ -23,6 +23,7 @@ public class Duke {
         // User Input
 
         while (true) {
+            // test
             String input = scanner.nextLine();
             System.out.println(input);
             String output = "";
