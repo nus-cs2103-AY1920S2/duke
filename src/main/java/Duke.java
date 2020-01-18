@@ -25,44 +25,26 @@ public class Duke {
         while (true) {
             String input = scanner.nextLine();
             System.out.println(input);
+            String description = "";
             String output = "";
             String[] inputArr = input.split(" ");
-            String instruction = inputArr[0];
-            if (instruction.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (instruction.equals("done")) {
+            if (inputArr[0].equals("done")) {
+                description = "Nice! I've marked this task as done: \n";
                 int taskNumber = Integer.parseInt(inputArr[1]);
                 Task task = arrList.get(taskNumber - 1);
                 task.completeTask();
-                output = "Nice! I've marked this task as done: \n" + task.toString();
-            } else if (instruction.equals("list")) {
+                output = description + task.toString();
+            } else if (input.equals("list")) {
+                description = "Here are the tasks in your list: \n";
                 String currentList = getCurrentList();
-                output = "Here are the tasks in your list: \n" + currentList;
+                output = description + currentList;
+            } else if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
             } else {
-                int idx = input.indexOf(" ");
-                String taskInput = input.substring(idx + 1);
-                String[] taskInputArr = taskInput.split("/");
-                String taskName = taskInputArr[0];
-                Task newTask = null;
-                if (instruction.equals("todo")) {
-                    newTask = new ToDo(taskName);
-                } else if (instruction.equals("deadline")) {
-                    String dateTime = taskInputArr[1];
-                    idx = dateTime.indexOf(" ");
-                    dateTime = dateTime.substring(idx + 1);
-                    newTask = new Deadline(taskName, dateTime);
-                } else if (instruction.equals("event")) {
-                    String dateTime = taskInputArr[1];
-                    idx = dateTime.indexOf(" ");
-                    dateTime = dateTime.substring(idx + 1);
-                    newTask = new Event(taskName, dateTime);
-                }
+                Task newTask = new Task(input);
                 arrList.add(newTask);
-                output = "Got it. I've added this task: \n"
-                        + newTask.toString() + "\n" +
-                        "Now you have " + arrList.size()
-                        + " tasks in the list.";
+                output = "added: " + input;
             }
             output = stringWrapper(output);
             System.out.println(output);
