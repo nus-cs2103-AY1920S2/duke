@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AutoResponder {
     public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class AutoResponder {
         System.out.println("What do you wish to do?");
 
         Scanner sc = new Scanner(System.in);
-        List<String> todoList = new ArrayList<>();
+        List<Task> todoList = new ArrayList<>();
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
@@ -31,8 +33,20 @@ public class AutoResponder {
                 for (int i = 1; i <= todoList.size(); ++i) {
                     System.out.println(i + ". " + todoList.get(i - 1));
                 }
+            } else if (input.matches("done \\d+")) {
+                Pattern matchDone = Pattern.compile("done (\\d+)");
+                Matcher matcher = matchDone.matcher(input);
+                matcher.find();
+                int index = Integer.parseInt(matcher.group(1)) - 1;
+                if (index < 0 || index > todoList.size()) {
+                    System.out.println("Index must correspond to list size of " + todoList.size());
+                } else {
+                    todoList.set(index, new Task(todoList.get(index), true));
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(todoList.get(index));
+                }
             } else {
-                todoList.add(input);
+                todoList.add(new Task(input));
                 System.out.println("Task added: " + input);
             }
 //            System.out.println(input);
