@@ -68,19 +68,19 @@ Verify that the `ScrollPane` scrolls as intended.
 
 In the mockup of the UI, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
 
-Let’s create our custom control `DialogBoxOld`:
+Let’s create our custom control `DialogBox`:
 ```java
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class DialogBoxOld extends HBox {
+public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBoxOld(Label l, ImageView iv) {
+    public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
 
@@ -131,8 +131,8 @@ private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-            new DialogBoxOld(userText, new ImageView(user)),
-            new DialogBoxOld(dukeText, new ImageView(duke))
+            new DialogBox(userText, new ImageView(user)),
+            new DialogBox(dukeText, new ImageView(duke))
     );
     userInput.clear();
 }
@@ -168,9 +168,9 @@ Run the program and see how it works.
 
 ![DialogBoxes Iteration 2](assets/DialogBoxesIteration2.png) 
 
-## Iteration 3 – Adding custom behavior to DialogBoxOld
+## Iteration 3 – Adding custom behavior to DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBoxOld`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
 
 ```java
 /**
@@ -183,12 +183,12 @@ private void flip() {
     this.getChildren().setAll(tmp);
 }
 
-public static DialogBoxOld getUserDialog(Label l, ImageView iv) {
-    return new DialogBoxOld(l, iv);
+public static DialogBox getUserDialog(Label l, ImageView iv) {
+    return new DialogBox(l, iv);
 }
 
-public static DialogBoxOld getDukeDialog(Label l, ImageView iv) {
-    var db = new DialogBoxOld(l, iv);
+public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    var db = new DialogBox(l, iv);
     db.flip();
     return db;
 }
@@ -205,15 +205,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 ```
 
-Now, we can go back to the `Main` class and change the event handler to use our new `DialogBoxOld`. 
+Now, we can go back to the `Main` class and change the event handler to use our new `DialogBox`. 
 
 ```java
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-            DialogBoxOld.getUserDialog(userText, new ImageView(user)),
-            DialogBoxOld.getDukeDialog(dukeText, new ImageView(duke))
+            DialogBox.getUserDialog(userText, new ImageView(user)),
+            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
     );
     userInput.clear();
 }
@@ -229,7 +229,7 @@ You have successfully implemented a fully functional GUI for Duke!
 ## Exercises
 
 1. While the GUI looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these tasks:
-   * Add padding between each DialogBoxOld
+   * Add padding between each DialogBox
    * Add padding between each ImageView and its Label
    * Clip the ImageView into a circle
    * Add background color to each dialog box
