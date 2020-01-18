@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,6 +8,7 @@ public class Duke {
     protected static final String NEWLINE = System.lineSeparator();
     protected static final String INDENTATION = "    ";
     protected static Scanner scanner;
+    protected ArrayList<String> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -55,12 +57,24 @@ public class Duke {
         scanner = new Scanner(inputStream);
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
-            if (command.equalsIgnoreCase("bye")) {
+            switch (command) {
+            case "bye":
+                return;
+            case "list":
+                printTextWithIndentation(HORIZONTAL_BAR);
+                int taskCount = 1;
+                for (String task : tasks) {
+                    printTextWithIndentation("" + taskCount + ". " + tasks.get(taskCount - 1));
+                    taskCount++;
+                }
+                printTextWithIndentation(HORIZONTAL_BAR);
                 break;
-            } else {
+            default:
+                tasks.add(command);
                 printTextWithIndentation(HORIZONTAL_BAR);
-                printTextWithIndentation(command);
+                printTextWithIndentation("added: " + command);
                 printTextWithIndentation(HORIZONTAL_BAR);
+                break;
             }
         }
         scanner.close();
