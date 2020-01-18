@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static String lines = "        ____________________________________________________________";
+    private static String space = "        ";
     public static void main(String[] args) {
         ArrayList<Task> stored_list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -12,8 +14,7 @@ public class Duke {
                 "____________________________________________________________";
 
         // Lines are for in between the two words
-        String lines = "        ____________________________________________________________";
-        String space = "        ";
+
 
         System.out.println(welcome_message);
 
@@ -52,13 +53,8 @@ public class Duke {
                 Task new_todo_task = new Todo(input);
                 String todo_task = new_todo_task.format_tasks();
                 new_todo_task.setDescription(todo_task);
-                System.out.println(lines);
                 stored_list.add(new_todo_task);
-                new_todo_task.got_it_line();
-                System.out.println(space + new_todo_task);
-                System.out.println(space + " Now you have " + (stored_list.size()) + " tasks in the list.");
-                System.out.println(lines);
-
+                print(new_todo_task, stored_list);
             }
 
             // If the task is a deadline
@@ -67,25 +63,16 @@ public class Duke {
                 Deadline new_deadline = new Deadline(input, "");
                 new_deadline.setDescription(input);
                 new_deadline.setBy(input);
-                System.out.println(lines);
                 stored_list.add(new_deadline);
-                new_deadline.got_it_line();
-                System.out.println(space + new_deadline);
-                System.out.println(space + " Now you have " + (stored_list.size()) + " tasks in the list.");
-                System.out.println(lines);
+                print(new_deadline, stored_list);
             }
 
             else if(input.contains("event")) {
                 Event new_event = new Event(input, "");
                 new_event.setDescription(input);
                 new_event.setAt(input);
-                System.out.println(lines);
                 stored_list.add(new_event);
-                new_event.got_it_line();
-                System.out.println(space + new_event);
-                System.out.println(space + " Now you have " + (stored_list.size()) + " tasks in the list.");
-                System.out.println(lines);
-
+                print(new_event, stored_list);
             }
 
             else {
@@ -97,6 +84,15 @@ public class Duke {
                 System.out.println(lines);
             }
         }
+    }
+
+    // For the print formatting for to-do, deadline and event
+    private static void print(Task task, ArrayList<Task> list) {
+        System.out.println(lines);
+        task.got_it_line();
+        System.out.println(space + task);
+        System.out.println(space + " Now you have " + (list.size()) + " tasks in the list.");
+        System.out.println(lines);
     }
 
 
