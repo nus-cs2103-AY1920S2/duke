@@ -23,7 +23,7 @@ public class Driver {
             System.out.println("------------------------");
             duke.processCommand(command);
             System.out.println("------------------------");
-            command = scanner.next();
+            command = readCommand(scanner);
         }
 
         System.out.println("Bye. Hope to see you again soon!");
