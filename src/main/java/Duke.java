@@ -103,8 +103,8 @@ public class Duke {
                     }
                     arrList.add(newTask);
                     output = "Got it. I've added this task: \n"
-                            + newTask.toString() + "\n" +
-                            "Now you have " + arrList.size()
+                            + newTask.toString() + "\n"
+                            + "Now you have " + arrList.size()
                             + " tasks in the list.";
 
                 } else {
@@ -116,13 +116,16 @@ public class Duke {
             } catch (DukeException e) {
                 System.err.println(e.toString());
                 continue;
+                
             } catch (ArrayIndexOutOfBoundsException x) {
                 Exception e = new DukeException("Please enter a valid instruction!");
                 System.err.println(e.toString());
                 continue;
             }
+
             output = stringWrapper(output);
             System.out.println(output);
+
         }
 
     }
