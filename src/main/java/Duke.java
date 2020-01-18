@@ -4,6 +4,8 @@ public class Duke {
 
     public static void main(String[] args) {
 
+        // Level 1
+
         String intro =
             "Hello! I'm Duke\n" +
             "What can I do for you?\n";
