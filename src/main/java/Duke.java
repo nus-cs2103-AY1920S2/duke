@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Duke {
     static int i;
     static Task[] tasks;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -46,7 +46,13 @@ public class Duke {
 
                 System.out.println("    ____________________________________________________________");
             } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-                addTask(current);
+                try {
+                    addTask(current);
+                } catch(DukeException ex){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     " + ex.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                }
 
             } else if (command.equals("done")) {
 
@@ -57,6 +63,14 @@ public class Duke {
                 System.out.println("    " + tasks[value - 1].getStatusIcon() + " "
                         + tasks[value - 1].description);
                 System.out.println("    ____________________________________________________________");
+            } else {
+                try {
+                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }catch(Exception ex){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     " + ex.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                }
             }
 
 
@@ -64,9 +78,13 @@ public class Duke {
 
     }
 
-    public static void addTask(String[] current){
+    public static void addTask(String[] current) throws DukeException{
         String[] words =  Arrays.stream(current).skip(1).toArray(String[]::new);
         String command = current[0];
+
+        if (words.length == 0) {
+            throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+        }
         if (command.equals("deadline")){
             int position = 0 ;
             boolean specifyDate = false;
@@ -111,6 +129,7 @@ public class Duke {
 
         } else {
             tasks[i] = new Task(String.join(" ", words));
+
         }
 
         tasks[i].setType(command);
@@ -130,4 +149,5 @@ public class Duke {
         System.out.println("      Now you have " + i + " tasks in the list.  \n");
         System.out.println("    ____________________________________________________________");
     }
+
 }
