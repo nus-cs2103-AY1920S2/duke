@@ -18,7 +18,12 @@ public class AutoResponder {
         System.out.println("What do you wish to do?");
 
         Scanner sc = new Scanner(System.in);
-        List<Task> todoList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        Pattern pDeadline = Pattern.compile("deadline (.+) /by (.+)");
+        Pattern pEvent = Pattern.compile("event (.+) /at (.+)");
+        Pattern pTodo = Pattern.compile("todo (.+)");
+        Pattern pDone = Pattern.compile("done (\\d+)");
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
@@ -30,26 +35,41 @@ public class AutoResponder {
 
             System.out.println("--------------------------------------------");
             if (input.equals("list")) {
-                for (int i = 1; i <= todoList.size(); ++i) {
-                    System.out.println(i + ". " + todoList.get(i - 1));
+                for (int i = 1; i <= taskList.size(); ++i) {
+                    System.out.println(i + ". " + taskList.get(i - 1));
                 }
-            } else if (input.matches("done \\d+")) {
-                Pattern matchDone = Pattern.compile("done (\\d+)");
-                Matcher matcher = matchDone.matcher(input);
-                matcher.find();
-                int index = Integer.parseInt(matcher.group(1)) - 1;
-                if (index < 0 || index > todoList.size()) {
-                    System.out.println("Index must correspond to list size of " + todoList.size());
+            } else if (pDone.matcher(input).find()) {
+                Matcher m = pDone.matcher(input);
+                m.find();
+                int index = Integer.parseInt(m.group(1)) - 1;
+                if (index < 0 || index >= taskList.size()) {
+                    System.out.println("Index must correspond to list with size of " + taskList.size());
                 } else {
-                    todoList.set(index, new Task(todoList.get(index), true));
+                    taskList.set(index, taskList.get(index).makeCompleted());
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(todoList.get(index));
+                    System.out.println(taskList.get(index));
                 }
             } else {
-                todoList.add(new Task(input));
-                System.out.println("Task added: " + input);
+                if (pDeadline.matcher(input).find()) {
+                    Matcher m = pDeadline.matcher(input); m.find();
+                    Task t = new Deadline(m.group(1), m.group(2));
+                    taskList.add(t);
+                } else if (pEvent.matcher(input).find()) {
+                    Matcher m = pEvent.matcher(input); m.find();
+                    Task t = new Event(m.group(1), m.group(2));
+                    taskList.add(t);
+                } else if (pTodo.matcher(input).find()) {
+                    Matcher m = pTodo.matcher(input); m.find();
+                    Task t = new Todo(m.group(1));
+                    taskList.add(t);
+                } else {
+                    System.out.println("No matching command found");
+                    System.out.println("--------------------------------------------");
+                    continue;
+                }
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(taskList.get(taskList.size() - 1));
             }
-//            System.out.println(input);
             System.out.println("--------------------------------------------");
 
         }
