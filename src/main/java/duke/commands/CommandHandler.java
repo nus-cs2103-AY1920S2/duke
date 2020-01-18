@@ -1,8 +1,9 @@
 package duke.commands;
 
-import duke.tasks.Task;
 import java.util.List;
 import java.util.HashMap;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
 
 public class CommandHandler {
     protected List<Task> tasks;
@@ -18,7 +19,6 @@ public class CommandHandler {
         commands.put("todo", new CreateTodo());
         commands.put("deadline", new CreateDeadline());
         commands.put("event", new CreateEvent());
-        commands.put("null", new NullCommand());
         isActive = true;
     }
 
@@ -39,14 +39,29 @@ public class CommandHandler {
             cmdWord = cmd.substring(0, spaceIndex).toLowerCase();
             arg = cmd.substring(spaceIndex + 1);
         }
-        if (commands.containsKey(cmdWord)) {
+        try {
             commands.get(cmdWord).execute(arg, tasks);
-        } else {
-            commands.get("null").execute(arg, tasks);
+        } catch (NullPointerException e) {
+            System.out.print(formatReply("Command " + cmdWord + " does not exist!"));
+        } catch (DukeException e) {
+            System.out.print(formatReply(e.getMessage()));
         }
     }
 
     public boolean isActive() {
         return isActive;
+    }
+
+    private String formatReply(String str) {
+        String[] lines = str.split("\\r?\\n");
+        StringBuilder sb = new StringBuilder();
+        String lineBreak = "===========================================================\n";
+        for (String line : lines) {
+            sb.append("> ");
+            sb.append(line);
+            sb.append("\n");
+        }
+        sb.append(lineBreak);
+        return sb.toString();
     }
 }

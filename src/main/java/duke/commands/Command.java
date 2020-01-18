@@ -2,9 +2,10 @@ package duke.commands;
 
 import java.util.List;
 import duke.tasks.Task;
+import duke.exceptions.DukeException;
 
 public interface Command {
-    void execute(String arg, List<Task> tasks);
+    void execute(String arg, List<Task> tasks) throws DukeException;
 
     default String formatReply(String str) {
         String[] lines = str.split("\\r?\\n");
