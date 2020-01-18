@@ -14,14 +14,19 @@ public class Event extends Task {
     }
 
     @Override
-    void setDescription(String s) {
-        String event_task = s.substring(s.indexOf("event"), s.indexOf("/"));
-        String event_task2= event_task.replaceAll("event", "").trim();
-        super.setDescription(event_task2);
+    void setDescription(String s) throws DukeException {
+
+         try {
+             String event_task = s.substring(s.indexOf("event"), s.indexOf("/"));
+             String event_task2 = event_task.replaceAll("event", "").trim();
+             super.setDescription(event_task2);
+         } catch(Exception e) {
+             throw new DukeException("OOPS!!! The description of an event cannot be empty");
+         }
     }
 
     @Override
     public String toString() {
-        return " [E]" + super.toString() + " (at: " + at + ")";
+        return " [" + Task_Codes.E + "]" + super.toString() + " (at: " + at + ")";
     }
 }

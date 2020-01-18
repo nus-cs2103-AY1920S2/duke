@@ -1,4 +1,10 @@
 class Task {
+
+    // For whether its To-do(T), Deadline (D), Event (E)
+    public enum Task_Codes {
+        T, D, E
+    }
+
     private String description;
     private boolean isDone;
     private String space = "        ";
@@ -11,7 +17,7 @@ class Task {
     }
 
 
-    String format_tasks() {
+    String format_tasks() throws DukeException {
         return "";
     }
 
@@ -29,7 +35,7 @@ class Task {
         isDone = done;
     }
 
-    void setDescription(String s) {
+    void setDescription(String s) throws DukeException {
         this.description = s;
     }
 
@@ -41,6 +47,5 @@ class Task {
     public String toString(){
          return  " [" + this.getStatusIcon() + "] " + getDescription();
     }
-
-
 }
+

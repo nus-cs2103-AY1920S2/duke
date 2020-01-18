@@ -7,9 +7,14 @@ public class Todo extends Task {
     }
 
     @Override
-    String format_tasks() {
+    String format_tasks() throws DukeException {
         // Needed the space after "to do" due to space formatting.
         String[] splited_string = super.getDescription().split("todo ");
+
+        if(splited_string.length <2) {
+            throw new DukeException("OOPS. The Description of a todo cannot be empty");
+        }
+
         StringBuilder task = new StringBuilder();
 
         for(int i=1; i< splited_string.length; i++) {
@@ -23,14 +28,14 @@ public class Todo extends Task {
     }
 
     @Override
-    void setDescription(String s) {
+    void setDescription(String s) throws DukeException {
         super.setDescription(s);
     }
 
 
     @Override
     public String toString() {
-        return  " [T]" + super.toString();
+        return " [" + Task_Codes.T + "]" + super.toString();
     }
 
 
