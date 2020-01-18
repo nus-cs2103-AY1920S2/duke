@@ -18,7 +18,7 @@ public class Duke {
         // Initialisation
 
         Scanner scanner = new Scanner(System.in);
-        arrList = new ArrayList<>();
+        arrList = new ArrayList<>(100);
 
         // User Input
 
