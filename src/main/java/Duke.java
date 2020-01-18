@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
 
+        ArrayList<String> arrayList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         printLogo();
@@ -13,8 +15,14 @@ public class Duke {
             printDivider();
             if (input.toLowerCase().equals("bye")) {
                 break;
+            } else if (input.toLowerCase().equals("list")) {
+
+                for(int i = 0; i < arrayList.size(); i++) {
+                    System.out.println((i + 1) + ". " + arrayList.get(i));
+                }
             } else {
-                System.out.println("> " + input);
+                arrayList.add(input);
+                System.out.println("> Added: " + input);
             }
             printDivider();
         }
