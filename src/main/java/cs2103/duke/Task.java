@@ -19,6 +19,9 @@ public class Task {
         switch (taskType) {
             case "todo":
                 description = String.join(" ", Arrays.copyOfRange(inp, 1, inp.length));
+                if (description.length() == 0) {
+                    throw new InvalidTaskException("Duke doesn't see any description of the todo...");
+                }
                 return new Todo(description);
             case "deadline":
                 int byInd = Arrays.asList(inp).indexOf("/by");
