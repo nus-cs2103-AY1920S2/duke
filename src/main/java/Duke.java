@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    static ArrayList<String> arrList;
+    static ArrayList<Task> arrList;
 
     public static void main(String[] args) {
 
@@ -25,30 +25,44 @@ public class Duke {
         while (true) {
             String input = scanner.nextLine();
             System.out.println(input);
-            if (input.equals("list")) {
+            String description = "";
+            String output = "";
+            String[] inputArr = input.split(" ");
+            if (inputArr[0].equals("done")) {
+                description = "Nice! I've marked this task as done: \n";
+                int taskNumber = Integer.parseInt(inputArr[1]);
+                Task task = arrList.get(taskNumber - 1);
+                task.completeTask();
+                output = description + task.toString();
+            } else if (input.equals("list")) {
+                description = "Here are the tasks in your list: \n";
                 String currentList = getCurrentList();
-                System.out.println(stringWrapper(currentList));
+                output = description + currentList;
             } else if (input.equals("bye")) {
-                System.out.println(stringWrapper("Bye. Hope to see you again soon!"));
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else {
-                arrList.add(input);
-                System.out.println(stringWrapper("added: " + input));
+                Task newTask = new Task(input);
+                arrList.add(newTask);
+                output = "added: " + input;
             }
+            output = stringWrapper(output);
+            System.out.println(output);
         }
 
     }
 
     private static String getCurrentList() {
-        String output = "";
+        String list = "";
         for (int i = 0; i < arrList.size(); i++) {
-            if (i == arrList.size() - 1) {
-                output += (i + 1) + ". " + arrList.get(i);
-            } else {
-                output += (i + 1) + ". " + arrList.get(i) + "\n";
+            String count = (i + 1) + "";
+            String task = arrList.get(i).toString();
+            list += count + ". " + task;
+            if (i != arrList.size() - 1) {
+                list += "\n";
             }
         }
-        return output;
+        return list;
     }
 
     private static String stringWrapper(String string) {
