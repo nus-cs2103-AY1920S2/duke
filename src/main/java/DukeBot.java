@@ -15,25 +15,34 @@ public class DukeBot {
 
     public void processCommand(String command) {
         String[] commandArray = command.split(" ", 2);
-        switch(commandArray[0]) {
-            case "bye":
-                dukeBye();
-                break;
-            case "list":
-                printTaskList();
-                break;
-            case "done":
-                dukeDone(Integer.parseInt(commandArray[1]));
-                break;
-            case "todo":
-                addTask(commandArray[1], TaskType.TODO);
-                break;
-            case "deadline":
-                addTask(commandArray[1], TaskType.DEADLINE);
-                break;
-            case "event":
-                addTask(commandArray[1], TaskType.EVENT);
-                break;
+
+        try {
+            switch (commandArray[0]) {
+                case "bye":
+                    dukeBye();
+                    break;
+                case "list":
+                    printTaskList();
+                    break;
+                case "done":
+                    dukeDone(Integer.parseInt(commandArray[1]));
+                    break;
+                case "todo":
+                    addTask(command, TaskType.TODO);
+                    break;
+                case "deadline":
+                    addTask(command, TaskType.DEADLINE);
+                    break;
+                case "event":
+                    addTask(command, TaskType.EVENT);
+                    break;
+                default:
+                    System.out.println("Oh no! I have no idea what you're trying to tell me :(((, try again?");
+            }
+        } catch(DukeException e) {
+            System.out.println(e);
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -59,23 +68,39 @@ public class DukeBot {
         System.out.println("Nice! I've marked this task as done: " + selectedTask);
     }
 
-    public void addTask(String description, TaskType taskType) {
-        System.out.println("Great! I've added the following task to your list: ");
+    public void addTask(String description, TaskType taskType) throws DukeException {
+
+        String[] descArray = description.split(" ", 2);
+
         Task task = new Task("");
         switch(taskType) {
             case TODO:
-                task = new TodoTask(description);
+                if(descArray.length < 2) {
+                    throw new DukeException("OOPS!! The description of \"todo\" cannot be empty!");
+                }
+                task = new TodoTask(descArray[1]);
                 break;
             case DEADLINE:
-                String[] deadlineArray = description.split(" /by ", 2);
+                if(descArray.length < 2) {
+                    throw new DukeException("OOPS!! The description of \"deadline\" cannot be empty!");
+                } else if(!descArray[1].contains("/by")) {
+                    throw new DukeException("OOPS!! You didn't set a deadline for this deadline task!");
+                }
+                String[] deadlineArray = descArray[1].split(" /by ", 2);
                 task = new DeadlineTask(deadlineArray[0], deadlineArray[1]);
                 break;
             case EVENT:
-                String[] eventArray = description.split(" /at ", 2);
+                if(descArray.length < 2) {
+                    throw new DukeException("OOPS!! The description of \"event\" cannot be empty!");
+                } else if(!descArray[1].contains("/at")) {
+                    throw new DukeException("OOPS!! You didn't set a timing for this event!");
+                }
+                String[] eventArray = descArray[1].split(" /at ", 2);
                 task = new EventTask(eventArray[0], eventArray[1]);
                 break;
         }
 
+        System.out.println("Great! I've added the following task to your list: ");
         taskList.add(task);
         System.out.println(task);
         System.out.println(String.format("You now have %d tasks in your list.", taskList.size()));
