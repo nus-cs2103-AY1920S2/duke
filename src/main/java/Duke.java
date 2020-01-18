@@ -21,8 +21,10 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<>();
 
         System.out.println("\nHi hi I'm \n" + logo);
-        dukeSays(new String[] {"Master! I'm so glad you used me!", "What will you do today?"});
+        dukeSays("Master! Duke's so glad Master used Duke!");
+        dukeSays("What will Master do today?");
         while (running) {
+            sayFirst = true;
             System.out.println("\nMaster: ");
             String inp = sc.nextLine();
             System.out.println();
@@ -31,13 +33,18 @@ public class Duke {
             case "":
                 dukeSays("I can't hear anything Master... Is Master all right?");
                 break;
+            case "Duke":
+            case "duke":
+            case "Master":
+            case "master":
+                dukeSays("Master!");
+                break;
             case "bye":
                 running = false;
                 break;
             case "list":
-                dukeSays(new String[] {"Master already forgotten what Master wanted to do?!",
-                    "Duke has no choice but to remind Master then!"});
-                sayFirst = false;
+                dukeSays("Master already forgotten what Master wanted to do?!");
+                dukeSays("Duke has no choice but to remind Master then!");
                 if (tasks.size() == 0) {
                     dukeSays("Huh there are no tasks! Master is so forgetful...");
                 } else {
@@ -58,9 +65,8 @@ public class Duke {
                             if (task.getDone()) {
                                 dukeSays("Didn't Master already do that?");
                             } else {
-                                dukeSays(new String[] {"So Master finally completed " + task + "?",
-                                        "Duke's really proud of Master!"
-                                });
+                                dukeSays("So Master finally completed " + task + "?");
+                                dukeSays("Duke's really proud of Master!");
                                 task.setDone();
                             }
                         }
@@ -80,29 +86,55 @@ public class Duke {
                     dukeSays(e.getMessage());
                 }
                 break;
+            case "delete":
+                if (inpArr.length == 1) {
+                    dukeSays("Master, please don't delete Duke...");
+                } else {
+                    try {
+                        int taskInd = Integer.parseInt(inpArr[1]) - 1;
+                        if (taskInd >= tasks.size() || taskInd < 0) {
+                            dukeSays("That item already doesn't exist in Duke's memory...");
+                        } else {
+                            Task task = tasks.get(taskInd);
+                            tasks.remove(taskInd);
+                            dukeSays("For Master, Duke can forget anything, even the:");
+                            dukeSays(task.getType() + ": " + task);
+                        }
+                    } catch (NumberFormatException e) {
+                        dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");
+                    }
+                }
+                break;
             default:
                 dukeSays("Duke doesn't understand Master...");
             }
         }
-        dukeSays(new String[] {"Are you leaving already?", "Please come back and play with Duke soon..."});
+        dukeSays("Is Master leaving already?");
+        dukeSays("Please come back and play with Duke soon...");
     }
 
-    private void dukeSays(String[] text) {
-        boolean first = this.sayFirst;
-        for (String line : text) {
-            if (first) {
-                System.out.print("Duke: ");
-                first = false;
-            } else {
-                System.out.print("      ");
-            }
-            System.out.println(line);
-        }
-        this.sayFirst = true;
-    }
+//    private void dukeSays(String[] text) {
+//        boolean first = this.sayFirst;
+//        for (String line : text) {
+//            if (first) {
+//                System.out.print("Duke: ");
+//                first = false;
+//                this.sayFirst = false;
+//            } else {
+//                System.out.print("      ");
+//            }
+//            System.out.println(line);
+//        }
+//    }
 
     private void dukeSays(String line) {
-        dukeSays(new String[] {line});
+        if (this.sayFirst) {
+            System.out.print("Duke: ");
+            this.sayFirst = false;
+        } else {
+            System.out.print("      ");
+        }
+        System.out.println(line);
     }
 
     private void sayTasks(ArrayList<Task> tasks) {
@@ -110,8 +142,8 @@ public class Duke {
         for (Task task : tasks) {
             System.out.println("      "
                 + i + ". "
+                + "[" + task.getType() + "] "
                 + task
-                + " [" + task.getType() + "]"
                 + (task.getDone() ? " [Done!]" : "")
             );
             i += 1;
