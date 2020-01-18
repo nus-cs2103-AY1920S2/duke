@@ -1,6 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,7 +8,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        List<String> usrInputs = new LinkedList<>();
+        List<Task> usrInputs = new ArrayList<>();
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
@@ -18,29 +16,39 @@ public class Duke {
         while(true) {
             String command = sc.next();
             boolean wantToQuit = false;
-            boolean wantToList = false;
+            boolean nothingToAdd = false;
             switch (command) {
                 case "bye":
                     wantToQuit = true;
                     System.out.println("Goodbye!! See you some time soon.");
                     break;
+
                 case "list":
-                    wantToList = true;
+                    nothingToAdd = true;
                     int count = 1;
-                    for (String usrInput : usrInputs) {
-                        System.out.println(count + ". " + usrInput);
+                    for (Task usrTask : usrInputs) {
+                        System.out.println(count + ". " + usrTask);
                         count++;
                     }
                     break;
+                    
+                case "done":
+                    int index = sc.nextInt();
+                    Task completedTask = usrInputs.get(index - 1);
+                    completedTask.setDone();
+                    System.out.println("Good job, mate. I have marked the following task as done.\n" + completedTask);
+                    nothingToAdd = true;
+                    break;
+
             }
 
             if(wantToQuit) {
                 break;
-            } else if(wantToList) {
+            } else if(nothingToAdd) {
                 continue;
             }
 
-            usrInputs.add(command);
+            usrInputs.add(new Task(command));
             System.out.println("added: " + command);
         }
 
