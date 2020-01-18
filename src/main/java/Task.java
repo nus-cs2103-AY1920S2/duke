@@ -1,10 +1,18 @@
 class Task {
     private String description;
     private boolean isDone;
+    private String space = "        ";
+    private String lines = "        ____________________________________________________________";
 
-     Task(String description) {
+
+    Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+
+    String format_tasks() {
+        return "";
     }
 
     String getStatusIcon() {
@@ -20,4 +28,19 @@ class Task {
      void setDone(boolean done) {
         isDone = done;
     }
+
+    void setDescription(String s) {
+        this.description = s;
+    }
+
+    void got_it_line() {
+        System.out.println(space + " Got it. I've added this task: ");
+    }
+
+    @Override
+    public String toString(){
+         return  " [" + this.getStatusIcon() + "] " + getDescription();
+    }
+
+
 }

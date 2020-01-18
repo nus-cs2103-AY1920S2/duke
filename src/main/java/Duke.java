@@ -28,11 +28,10 @@ public class Duke {
             } else if (input.equals("list")) {
                 System.out.println(lines);
                 for(int i=0; i< stored_list.size(); i++) {
-                    System.out.println(space + (i+1) + ". [" + stored_list.get(i).getStatusIcon() + "]"
-                     +" "+ stored_list.get(i).getDescription());
+                    System.out.println(space + (i+1) + "." + stored_list.get(i));
                 }
                 System.out.println(lines);
-                continue;
+
             } else if (input.contains("done")) {
                 // To split the done with the number
                 // Will think of a smarter way tomorrow.
@@ -45,15 +44,60 @@ public class Duke {
                 System.out.println(space + " [" + finished_task.getStatusIcon() + "]"
                         +" "+ finished_task.getDescription());
                 System.out.println(lines);
-                continue;
+
+            }
+            // If the input consists of to-do
+            else if(input.contains("todo")) {
+
+                Task new_todo_task = new Todo(input);
+                String todo_task = new_todo_task.format_tasks();
+                new_todo_task.setDescription(todo_task);
+                System.out.println(lines);
+                stored_list.add(new_todo_task);
+                new_todo_task.got_it_line();
+                System.out.println(space + new_todo_task);
+                System.out.println(space + " Now you have " + (stored_list.size()) + " tasks in the list.");
+                System.out.println(lines);
+
             }
 
-            // Else we add new tasks to the list.
-            stored_list.add(new Task(input));
-            // Print out the input
-            System.out.println(lines);
-            System.out.println("         added: "+input);
-            System.out.println(lines);
+            // If the task is a deadline
+            else if (input.contains("deadline")) {
+
+                Deadline new_deadline = new Deadline(input, "");
+                new_deadline.setDescription(input);
+                new_deadline.setBy(input);
+                System.out.println(lines);
+                stored_list.add(new_deadline);
+                new_deadline.got_it_line();
+                System.out.println(space + new_deadline);
+                System.out.println(space + " Now you have " + (stored_list.size()) + " tasks in the list.");
+                System.out.println(lines);
+            }
+
+            else if(input.contains("event")) {
+                Event new_event = new Event(input, "");
+                new_event.setDescription(input);
+                new_event.setAt(input);
+                System.out.println(lines);
+                stored_list.add(new_event);
+                new_event.got_it_line();
+                System.out.println(space + new_event);
+                System.out.println(space + " Now you have " + (stored_list.size()) + " tasks in the list.");
+                System.out.println(lines);
+
+            }
+
+            else {
+                // Else we add new tasks to the list.
+                stored_list.add(new Task(input));
+                // Print out the input
+                System.out.println(lines);
+                System.out.println("         added: " + input);
+                System.out.println(lines);
+            }
         }
     }
+
+
 }
