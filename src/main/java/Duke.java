@@ -52,6 +52,25 @@ public class Duke {
                     task.completeTask();
                     output = "Nice! I've marked this task as done: \n" + task.toString();
 
+                } else if (instruction.equals("delete")) {
+                    if (inputArr.length <= 1) {
+                        // EXCEPTION
+                        String message = stringWrapper("☹ OOPS!!! Please specify a task number to be deleted!");
+                        throw new DukeException(message);
+                    }
+                    int taskNumber = Integer.parseInt(inputArr[1]);
+                    if (taskNumber > arrList.size()) {
+                        // EXCEPTION
+                        String message = stringWrapper("☹ OOPS!!! Please specify a valid task number!");
+                        throw new DukeException(message);
+                    }
+                    Task task = arrList.get(taskNumber - 1);
+                    arrList.remove(taskNumber - 1);
+                    output = "Noted! I've removed this task: \n"
+                            + task.toString() + "\n"
+                            + "Now you have " + arrList.size()
+                            + " tasks in the list.";;
+
                 } else if (instruction.equals("list")) {
                     String currentList = getCurrentList();
                     output = "Here are the tasks in your list: \n" + currentList;
