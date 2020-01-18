@@ -52,33 +52,36 @@ public class Duke {
 
         do {
             input = in.next();
-            //is_exiting = input.compareToIgnoreCase("bye") == 0;
-            switch (input.toLowerCase()) {
-                case "list":
-                    ShowList();
-                    break;
-                case "bye":
-                    is_exiting = true;
-                    break;
-                case "done":
-                    int doneTaskNum = in.nextInt();
-                    DoneATask(doneTaskNum - 1);
-                    break;
-                case "todo":
-                    AddToList(in.nextLine().trim(), TaskType.TODO);
-                    break;
-                case "deadline":
-                    AddToList(in.nextLine(), TaskType.DEADLINE);
-                    break;
-                case "event":
-                    AddToList(in.nextLine(), TaskType.EVENT);
-                    break;
-                default:
-                    in.nextLine();
-                    PrintWithIndent(hori_line);
-                    PrintWithIndent("Sorry, I have no idea what you mean. Try again?");
-                    PrintWithIndent(hori_line);
-                    break;
+
+            try {
+                switch (input.toLowerCase()) {
+                    case "list":
+                        ShowList();
+                        break;
+                    case "bye":
+                        is_exiting = true;
+                        break;
+                    case "done":
+                        int doneTaskNum = in.nextInt();
+                        DoneATask(doneTaskNum - 1);
+                        break;
+                    case "todo":
+                        AddToList(in.nextLine().trim(), TaskType.TODO);
+                        break;
+                    case "deadline":
+                        AddToList(in.nextLine(), TaskType.DEADLINE);
+                        break;
+                    case "event":
+                        AddToList(in.nextLine(), TaskType.EVENT);
+                        break;
+                    default:
+                        in.nextLine();
+                        throw new DukeException.InvalidCommand();
+                }
+            } catch (DukeException.InvalidCommand e) {
+                PrintWithIndent(hori_line);
+                PrintWithIndent(e.getMessage());
+                PrintWithIndent(hori_line);
             }
         } while (!is_exiting);
 
@@ -87,29 +90,65 @@ public class Duke {
 
     private void AddToList(String newTask, TaskType taskType) {
         String[] str_arr;
-        switch (taskType) {
-            case TODO:
-                task_list[num_tasks++] = new ToDo(newTask);
-                break;
-            case DEADLINE:
-                // newTask string consists of "<actual task name> /by <deadline>"
-                str_arr = newTask.split("/by");
-                task_list[num_tasks++] = new Deadline(str_arr[0].trim(), str_arr[1].trim());
-                break;
-            case EVENT:
-                // newTask string consists of "<actual task name> /at <datetime>"
-                str_arr = newTask.split("/at");
-                task_list[num_tasks++] = new Event(str_arr[0].trim(), str_arr[1].trim());
-                break;
-            default:
-                task_list[num_tasks++] = new Task(newTask);
-                break;
+        String task_name;
+        try {
+            switch (taskType) {
+                case TODO:
+                    if (newTask.isBlank())
+                        throw new DukeException.EmptyToDo();
+                    task_list[num_tasks++] = new ToDo(newTask);
+                    break;
+                case DEADLINE:
+                    // newTask string consists of "<actual task name> /by <deadline>"
+                    str_arr = newTask.split("/by");
+                    task_name = str_arr[0].trim();
+                    if (task_name.isBlank())
+                        throw new DukeException.EmptyDeadlineName();
+                    String deadline;
+                    try {
+                        deadline = str_arr[1].trim();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // This will occur when user did not use a /by command
+                        throw new DukeException.NoDeadlineTime();
+                    }
+                    // /by was used but is followed by blank
+                    if (deadline.isBlank())
+                        throw new DukeException.NoDeadlineTime();
+                    task_list[num_tasks++] = new Deadline(task_name, deadline);
+                    break;
+                case EVENT:
+                    // newTask string consists of "<actual task name> /at <datetime>"
+                    str_arr = newTask.split("/at");
+                    task_name = str_arr[0].trim();
+                    if (task_name.isBlank())
+                        throw new DukeException.EmptyEvent();
+                    String eventTime;
+                    try {
+                        eventTime = str_arr[1].trim();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // This will occur when user did not use a /at command
+                        throw new DukeException.NoEventDatetime();
+                    }
+                    // /at was used but is followed by blank
+                    if (eventTime.isBlank())
+                        throw new DukeException.NoEventDatetime();
+                    task_list[num_tasks++] = new Event(task_name, eventTime);
+                    break;
+                default:
+                    task_list[num_tasks++] = new Task(newTask);
+                    break;
+            }
+            PrintWithIndent(hori_line);
+            PrintWithIndent("Got it. I've added this task:");
+            PrintWithIndent(task_list[num_tasks - 1].toString());
+            PrintWithIndent("Now you have " + num_tasks + " tasks in the list.");
+            PrintWithIndent(hori_line);
+        } catch (DukeException.EmptyToDo | DukeException.EmptyDeadlineName | DukeException.NoDeadlineTime | DukeException.EmptyEvent | DukeException.NoEventDatetime e) {
+            // currently all exceptions are handled just by relaying a message. Nothing special, yet.
+            PrintWithIndent(hori_line);
+            PrintWithIndent(e.getMessage());
+            PrintWithIndent(hori_line);
         }
-        PrintWithIndent(hori_line);
-        PrintWithIndent("Got it. I've added this task:");
-        PrintWithIndent(task_list[num_tasks - 1].toString());
-        PrintWithIndent("Now you have " + num_tasks + " tasks in the list.");
-        PrintWithIndent(hori_line);
     }
 
     private void ShowList() {
