@@ -17,15 +17,18 @@ interface Command {
     }
 }
 
-class NullCommand implements Command {
-    public void execute(String arg, List<Task> tasks) {
-        System.out.print(formatReply("Command not found!"));
+interface TaskCreation {
+    default String CreateTaskReply(Task newTask, List<Task> tasks) {
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", newTask,
+                tasks.size());
     }
 }
+
 class ListAll implements Command {
     public void execute(String arg, List<Task> tasks) {
         int counter = 1;
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (Task task : tasks) {
             sb.append(counter);
             sb.append(".");
@@ -46,15 +49,15 @@ class MarkTaskAsDone implements Command {
     }
 }
 
-class CreateTodo implements Command {
+class CreateTodo implements Command, TaskCreation {
     public void execute(String arg, List<Task> tasks) {
         Task newTask = new Todo(arg);
         tasks.add(newTask);
-        System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
+        System.out.print(formatReply(CreateTaskReply(newTask, tasks)));
     }
 }
 
-class CreateDeadline implements Command {
+class CreateDeadline implements Command, TaskCreation {
     public void execute(String arg, List<Task> tasks) {
         String[] args = arg.split("/by");
         if (args.length < 2) {
@@ -63,11 +66,11 @@ class CreateDeadline implements Command {
         }
         Task newTask = new Deadline(args[0].strip(), args[1].strip());
         tasks.add(newTask);
-        System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
+        System.out.print(formatReply(CreateTaskReply(newTask, tasks)));
     }
 }
 
-class CreateEvent implements Command {
+class CreateEvent implements Command, TaskCreation {
     public void execute(String arg, List<Task> tasks) {
         String[] args = arg.split("/at");
         if (args.length < 2) {
@@ -76,6 +79,12 @@ class CreateEvent implements Command {
         }
         Task newTask = new Event(args[0].strip(), args[1].strip());
         tasks.add(newTask);
-        System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
+        System.out.print(formatReply(CreateTaskReply(newTask, tasks)));
+    }
+}
+
+class NullCommand implements Command {
+    public void execute(String arg, List<Task> tasks) {
+        System.out.print(formatReply("Command not found!"));
     }
 }
