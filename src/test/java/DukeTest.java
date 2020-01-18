@@ -1,10 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,9 +17,16 @@ class DukeTest {
     final String INDENTATION = "    ";
     final String HORIZONTAL_BAR =
             "____________________________________________________________";
+    final String HORIZONTAL_DIVIDER = INDENTATION + HORIZONTAL_BAR + NEWLINE;
+    String taskDoneIcon = "\u2713";
+    String taskNotDoneIcon = "\u2718";
     Duke duke;
     PrintStream console = System.out;
     ByteArrayOutputStream output;
+
+    static Stream<Arguments> generateOneTask() {
+        return Stream.of(Arguments.of(new Task("read book", false)));
+    }
 
     @BeforeEach
     void init() {
@@ -33,10 +44,10 @@ class DukeTest {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n" + NEWLINE;
-        expected += INDENTATION + HORIZONTAL_BAR + NEWLINE;
+        expected += HORIZONTAL_DIVIDER;
         expected += INDENTATION + "Hello! I'm Duke" + NEWLINE;
         expected += INDENTATION + "What can I do for you?" + NEWLINE;
-        expected += INDENTATION + HORIZONTAL_BAR + NEWLINE;
+        expected += HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString());
     }
 
@@ -46,13 +57,14 @@ class DukeTest {
         System.setOut(new PrintStream(output));
         String input = "read book" + NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
-        String expected = INDENTATION + HORIZONTAL_BAR + NEWLINE +
+        String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "added: read book" + NEWLINE +
-                INDENTATION + HORIZONTAL_BAR + NEWLINE;
+                HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString());
         // Check list of tasks
         assertEquals(1, duke.tasks.size());
-        assertEquals("read book", duke.tasks.get(0));
+        // Check task description
+        assertEquals("read book", duke.tasks.get(0).getDescription());
     }
 
     @Test
@@ -73,17 +85,59 @@ class DukeTest {
                 "return book" + NEWLINE +
                 "list" + NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
-        String expected = INDENTATION + HORIZONTAL_BAR + NEWLINE +
-                INDENTATION + "added: read book" + NEWLINE +
-                INDENTATION + HORIZONTAL_BAR + NEWLINE;
-        expected += INDENTATION + HORIZONTAL_BAR + NEWLINE +
-                INDENTATION + "added: return book" + NEWLINE +
-                INDENTATION + HORIZONTAL_BAR + NEWLINE;
-        expected += INDENTATION + HORIZONTAL_BAR + NEWLINE +
-                INDENTATION + "1. read book" + NEWLINE +
-                INDENTATION + "2. return book" + NEWLINE +
-                INDENTATION + HORIZONTAL_BAR + NEWLINE;
-        assertEquals(expected, output.toString());
+        StringBuilder expected = new StringBuilder();
+        // Add first task
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("added: read book").append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        // Add second task
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("added: return book").append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        // List out tasks
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE);
+        expected.append(INDENTATION).append("1.[").append(taskNotDoneIcon).append("] ")
+                .append("read book").append(NEWLINE);
+        expected.append(INDENTATION).append("2.[").append(taskNotDoneIcon).append("] ")
+                .append("return book").append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        assertEquals(expected.toString(), output.toString());
+    }
+
+    @ParameterizedTest
+    @DisplayName("Duke: Test for marking task as done")
+    @MethodSource("generateOneTask")
+    void processCommands_createNewTaskAndMarkAsDone_taskMarkedDone(Task task) {
+        String taskDescription = task.getDescription();
+        System.setOut(new PrintStream(output));
+        String input = taskDescription + NEWLINE +
+                "list" + NEWLINE +
+                "done 1" + NEWLINE +
+                "list" + NEWLINE + "bye";
+        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        // Add task
+        StringBuilder expected = new StringBuilder();
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("added: ").append(taskDescription).append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        // List initial task (Should be marked as not done)
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE);
+        expected.append(INDENTATION);
+        expected.append("1.[").append(taskNotDoneIcon).append("] ").append(taskDescription).append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        // Mark task as done
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("Nice! I've marked this task as done:").append(NEWLINE);
+        expected.append(INDENTATION).append("[" + taskDoneIcon + "] " + taskDescription).append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        // List task again (Should be marked as done)
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE);
+        expected.append(INDENTATION).append("1.[" + taskDoneIcon + "] " + taskDescription).append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        assertEquals(expected.toString(), output.toString());
     }
 
     @Test
@@ -91,9 +145,9 @@ class DukeTest {
     void goodbye() {
         System.setOut(new PrintStream(output));
         duke.goodbye();
-        String expected = INDENTATION + HORIZONTAL_BAR + NEWLINE +
+        String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "Bye. Hope to see you again soon!" + NEWLINE +
-                INDENTATION + HORIZONTAL_BAR + NEWLINE;
+                HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString());
     }
 }
