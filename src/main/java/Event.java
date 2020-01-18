@@ -1,13 +1,18 @@
 public class Event extends Task {
     private String time;
-    protected final String taskType = "Deadline";
 
-    public Event(String description, String time) {
+    protected Event(String description, String time) {
         super(description);
         this.time = time;
+        this.taskType = "Event";
     }
 
     public String getTime() {
         return(this.time);
+    }
+
+    @Override
+    public String toString() {
+        return (this.description + " (at: " + this.time + ")");
     }
 }

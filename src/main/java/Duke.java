@@ -56,7 +56,7 @@ public class Duke {
                             if (task.getDone()) {
                                 dukeSays("Didn't Master already do that?");
                             } else {
-                                dukeSays(new String[] {"So master finally completed " + task + "?",
+                                dukeSays(new String[] {"So Master finally completed " + task + "?",
                                         "Duke's really proud of Master!"
                                 });
                                 task.setDone();
@@ -67,9 +67,19 @@ public class Duke {
                     }
                 }
                 break;
+            case "todo":
+            case "deadline":
+            case "event":
+                try {
+                    Task newTask = Task.makeTask(inpArr);
+                    tasks.add(newTask);
+                    dukeSays("So Master has " + newTask.getType() + ": " + newTask + "...");
+                } catch (InvalidTaskException e) {
+                    dukeSays(e.getMessage());
+                }
+                break;
             default:
-                dukeSays("So Master wants to " + inp + "...");
-                tasks.add(new Task(inp));
+                dukeSays("Duke doesn't understand Master...");
             }
         }
         dukeSays(new String[] {"Are you leaving already?", "Please come back and play with Duke soon..."});
@@ -99,6 +109,7 @@ public class Duke {
             System.out.println("      "
                 + i + ". "
                 + task
+                + " (" + task.getType() + ")"
                 + (task.getDone() ? " (Done!)" : "")
             );
             i += 1;

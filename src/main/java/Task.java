@@ -5,26 +5,46 @@ public class Task {
     private boolean isDone;
     protected String taskType;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public static Task makeTask(String taskType, String[] inp) throws InvalidTaskException {
+    public static Task makeTask(String[] inp) throws InvalidTaskException {
+        String taskType = inp[0];
         String description;
         String time;
         switch (taskType) {
-            case "Todo":
+            case "todo":
                 description = String.join(" ", Arrays.copyOfRange(inp, 1, inp.length));
                 return new Todo(description);
-            case "Deadline":
+            case "deadline":
                 int byInd = Arrays.asList(inp).indexOf("/by");
-                if (byInd > 1) {
+                if (byInd == inp.length - 1) {
+                    throw new InvalidTaskException("Duke doesn't see any deadline...");
+                } else if (byInd > 1) {
                     description = String.join(" ", Arrays.copyOfRange(inp, 1, byInd));
-                    time = String.join(" ", Arrays.copyOfRange(inp, byInd, inp.length));
-            }
+                    time = String.join(" ", Arrays.copyOfRange(inp, byInd + 1, inp.length));
+                    return new Deadline(description, time);
+                } else {
+                    throw new InvalidTaskException("Master, use '/by' to indicate deadline,"
+                            + " Duke wouldn't know otherwise...");
+                }
+            case "event":
+                int atInd = Arrays.asList(inp).indexOf("/at");
+                if (atInd == inp.length - 1) {
+                    throw new InvalidTaskException("Duke doesn't see any start time...");
+                } else if (atInd > 1) {
+                    description = String.join(" ", Arrays.copyOfRange(inp, 1, atInd));
+                    time = String.join(" ", Arrays.copyOfRange(inp, atInd + 1, inp.length));
+                    return new Event(description, time);
+                } else {
+                    throw new InvalidTaskException("Master, use '/at' to indicate starting time,"
+                            + " Duke wouldn't know otherwise...");
+                }
             default:
-                throw new InvalidTaskException();
+//                This should never be triggered;
+                throw new InvalidTaskException("Unknown task type");
         }
     }
 
@@ -36,8 +56,8 @@ public class Task {
         return this.isDone;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    public String getType() {
+        return this.taskType;
     }
 
     @Override
