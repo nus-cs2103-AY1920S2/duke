@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ChatBot {
    // class for the chat-bot for the Duke Project
@@ -10,6 +11,8 @@ public class ChatBot {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+
+    private ArrayList<String> tasks = new ArrayList<>(); // store the list of tasks from the user
 
     /**
      * Function to greet user
@@ -36,11 +39,27 @@ public class ChatBot {
      */
     public boolean respondToUser(String command) {
         switch(command) {
+            case "list":
+                String listings = "";
+                int count = 1;
+                for (String task : this.tasks) {
+                    listings += count + ". " + task;
+                    if (count != this.tasks.size()) {
+                        listings += "\n";
+                    } else {
+                        break;
+                    }
+                    count++;
+                    listings += "\t";
+                }
+                this.prettyPrinting(listings);
+                break;
             case "bye":
                 this.prettyPrinting("Bye. Hope to see you again soon!");
                 return false;
             default:
-                this.prettyPrinting(command);
+                this.tasks.add(command);
+                this.prettyPrinting("added: " + command);
         }
         return true;
     }
@@ -53,8 +72,8 @@ public class ChatBot {
         String inputCommand;
         boolean continueRunning = true;
         this.greetUser();
-        while (sc.hasNext()) {
-            inputCommand = sc.next();
+        while (sc.hasNextLine()) {
+            inputCommand = sc.nextLine();
             continueRunning = respondToUser(inputCommand);
             if (!continueRunning) {
                 break;
