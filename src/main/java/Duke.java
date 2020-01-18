@@ -8,7 +8,7 @@ public class Duke {
     protected static final String NEWLINE = System.lineSeparator();
     protected static final String INDENTATION = "    ";
     protected static Scanner scanner;
-    protected ArrayList<String> tasks = new ArrayList<>();
+    protected ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -57,20 +57,39 @@ public class Duke {
         scanner = new Scanner(inputStream);
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
-            switch (command) {
+            // Remove leading and trailing whitespace
+            command = command.trim();
+            String[] commandWords = command.split("\\s+");
+            // No input is given or only whitespace given
+            if (commandWords.length == 0 || commandWords[0].equals("")) {
+                continue;
+            }
+            // Check first word of command
+            switch (commandWords[0]) {
             case "bye":
                 return;
             case "list":
                 printTextWithIndentation(HORIZONTAL_BAR);
                 int taskCount = 1;
-                for (String task : tasks) {
-                    printTextWithIndentation("" + taskCount + ". " + tasks.get(taskCount - 1));
+                printTextWithIndentation("Here are the tasks in your list:");
+                for (Task task : tasks) {
+                    printTextWithIndentation("" + taskCount + "." + task.toString());
                     taskCount++;
                 }
                 printTextWithIndentation(HORIZONTAL_BAR);
                 break;
+            case "done":
+                // Get task to mark as done
+                int taskNumber = Integer.parseInt(commandWords[1]);
+                Task task = tasks.get(taskNumber - 1);
+                task.markAsDone();
+                printTextWithIndentation(HORIZONTAL_BAR);
+                printTextWithIndentation("Nice! I've marked this task as done:");
+                printTextWithIndentation(task.toString());
+                printTextWithIndentation(HORIZONTAL_BAR);
+                break;
             default:
-                tasks.add(command);
+                tasks.add(new Task(command));
                 printTextWithIndentation(HORIZONTAL_BAR);
                 printTextWithIndentation("added: " + command);
                 printTextWithIndentation(HORIZONTAL_BAR);
