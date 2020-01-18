@@ -39,5 +39,15 @@
 > 2.[D][?] return book (by: Sunday)
 > 3.[E][?] project meeting (at: Mon 2-4pm)
 ===========================================================
+> Task number provided is out of bounds!
+===========================================================
+> Noted. I've removed this task:
+>   [D][?] return book (by: Sunday)
+> Now you have 2 tasks in the list.
+===========================================================
+> Here are the tasks in your list:
+> 1.[T][?] borrow book
+> 2.[E][?] project meeting (at: Mon 2-4pm)
+===========================================================
 > Bye. Hope to see you again soon!
 ===========================================================

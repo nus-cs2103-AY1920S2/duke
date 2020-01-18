@@ -9,4 +9,7 @@ done two
 done 5
 done 2
 list
+delete 5
+delete 2
+list
 bye
