@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 public class Duke {
     private static final String logo = "*******   **     ** **   ** ********\n"
