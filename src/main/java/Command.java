@@ -48,13 +48,22 @@ class MarkTaskAsDone implements Command {
 
 class CreateTodo implements Command {
     public void execute(String arg, List<Task> tasks) {
-        tasks.add(new Todo(arg));
-        System.out.print(formatReply("added: " + arg));
+        Task newTask = new Todo(arg);
+        tasks.add(newTask);
+        System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
     }
 }
 
-// class CreateDeadline implements Command {
-//     public void execute(String arg, List<Task> tasks) {
+class CreateDeadline implements Command {
+    public void execute(String arg, List<Task> tasks) {
+        String[] args = arg.split("/by");
+        if (args.length < 2) {
+            System.out.print(formatReply("Usage: deadline [task name] /by [due date]"));
+            return;
+        }
+        Task newTask = new Deadline(args[0].strip(), args[1].strip());
+        tasks.add(newTask);
+        System.out.print(formatReply("Got it. I've added this task:\n  " + newTask));
 
-//     }
-// }
+    }
+}

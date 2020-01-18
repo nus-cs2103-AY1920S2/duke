@@ -13,6 +13,8 @@ public class Duke {
         commandMap.put("list", new ListAll());
         commandMap.put("done", new MarkTaskAsDone());
         commandMap.put("todo", new CreateTodo());
+        commandMap.put("deadline", new CreateDeadline());
+        // commandMap.put("help", new ListCommands());
         commandMap.put("null", new NullCommand());
         CommandHandler handler = new CommandHandler(tasks, commandMap);
         while (handler.isActive) {
