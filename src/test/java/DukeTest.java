@@ -38,17 +38,50 @@ class DukeTest {
         expected += INDENTATION + "What can I do for you?" + NEWLINE;
         expected += INDENTATION + HORIZONTAL_BAR + NEWLINE;
         assertEquals(expected, output.toString());
-        System.setOut(console);
     }
 
     @Test
-    @DisplayName("Duke: Test for invalid command")
-    void processCommands_invalidCommand_repeatCommand() {
+    @DisplayName("Duke: Test for adding task")
+    void processCommands_addTaskCommand_addTaskToList() {
         System.setOut(new PrintStream(output));
-        String input = "invalid" + NEWLINE + "bye";
+        String input = "read book" + NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
         String expected = INDENTATION + HORIZONTAL_BAR + NEWLINE +
-                INDENTATION + "invalid" + NEWLINE +
+                INDENTATION + "added: read book" + NEWLINE +
+                INDENTATION + HORIZONTAL_BAR + NEWLINE;
+        assertEquals(expected, output.toString());
+        // Check list of tasks
+        assertEquals(1, duke.tasks.size());
+        assertEquals("read book", duke.tasks.get(0));
+    }
+
+    @Test
+    @DisplayName("Duke: Test for Immediate exit command")
+    void processCommands_exitCommand_noMessagePrinted() {
+        System.setOut(new PrintStream(output));
+        String input = "bye" + NEWLINE;
+        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        String expected = "";
+        assertEquals(expected, output.toString());
+    }
+
+    @Test
+    @DisplayName("Duke: Test for list command")
+    void processCommands_listCommand_listStoredItems() {
+        System.setOut(new PrintStream(output));
+        String input = "read book" + NEWLINE +
+                "return book" + NEWLINE +
+                "list" + NEWLINE + "bye";
+        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        String expected = INDENTATION + HORIZONTAL_BAR + NEWLINE +
+                INDENTATION + "added: read book" + NEWLINE +
+                INDENTATION + HORIZONTAL_BAR + NEWLINE;
+        expected += INDENTATION + HORIZONTAL_BAR + NEWLINE +
+                INDENTATION + "added: return book" + NEWLINE +
+                INDENTATION + HORIZONTAL_BAR + NEWLINE;
+        expected += INDENTATION + HORIZONTAL_BAR + NEWLINE +
+                INDENTATION + "1. read book" + NEWLINE +
+                INDENTATION + "2. return book" + NEWLINE +
                 INDENTATION + HORIZONTAL_BAR + NEWLINE;
         assertEquals(expected, output.toString());
     }
