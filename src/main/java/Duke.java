@@ -9,26 +9,32 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         System.out.println("\n    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         System.out.println("    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n");
 
 
-        String command = sc.nextLine();
-        while (!command.equals("bye")) {
+        String[] command = sc.nextLine().split(" ", 2);
+        while (!command[0].equals("bye")) {
             System.out.println("\n    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
-            if (command.equals("list")) {
+            if (command[0].equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println("     " + (i + 1) + ". " + tasks.get(i));
                 }
+            } else if (command[0].equals("done")) {
+                Task task = tasks.get(Integer.parseInt(command[1]) - 1);
+                task.markAsDone();
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("       " + task);
             } else {
-                System.out.println("     added: " + command);
-                tasks.add(command);
+                Task task = new Task(command[0] + " " + command[1]);
+                System.out.println("     added: " + command[0] + " " + command[1]);
+                tasks.add(task);
             }
             System.out.println("    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n");
-            command = sc.nextLine();
+            command = sc.nextLine().split(" ", 2);
         }
 
         System.out.println("\n    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
