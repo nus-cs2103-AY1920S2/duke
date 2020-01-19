@@ -12,72 +12,145 @@ public class Duke {
         printGreeting();
 
         while (true) {
-            //Split the input line into description and time portions
-            String[] input = sc.nextLine().split("/");
-            //Further split the description for command checking
-            String[] descriptionTokens = input[0].split(" ");
-            printDivider();
-            if (input.length < 2) {  //Regular commands and Todo
-                if (descriptionTokens[0].toLowerCase().equals("bye")) {
-                    break;
+            try {
+                //Split the input line into description and time portions
+                String[] input = sc.nextLine().split("/");
+                if (input.length == 0) {
+                    throw new EmptyInputAelitaException();
+                }
+                //Further split the description for command checking
+                String[] descriptionTokens = input[0].split(" ");
 
-                } else if (descriptionTokens[0].toLowerCase().equals("list")) {
-                    System.out.println("> Here's your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                printDivider();
+                if (input.length < 2) {  //Regular commands and Todo
+                    if (descriptionTokens[0].toLowerCase().equals("bye")) {
+                        break;
+
+                    } else if (descriptionTokens[0].toLowerCase().equals("list")) {
+                        if (taskList.size() == 0) {
+                            throw new EmptyListAelitaException();
+                        }
+                        System.out.println("> Here's your list:");
+                        for (int i = 0; i < taskList.size(); i++) {
+                            System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                        }
+
+                    } else if (descriptionTokens[0].toLowerCase().equals("done")) {
+                        if (descriptionTokens.length < 2) {
+                            throw new InsufficientArgumentAelitaException("done");
+                        }
+
+                        int index = Integer.parseInt(descriptionTokens[1]) - 1;
+                        if (index >= taskList.size() || index <= 0) {
+                            throw new InvalidListItemAelitaException();
+                        }
+                        taskList.get(index).markAsDone();
+                        System.out.println("> Another task off the list. Good job!");
+                        System.out.println("  " + taskList.get(Integer.parseInt(descriptionTokens[1]) - 1));
+
+                    } else if (descriptionTokens[0].toLowerCase().equals("todo")) {
+                        if (descriptionTokens.length == 1) {
+                            throw new InsufficientArgumentAelitaException("description");
+                        }
+                        StringBuilder builder = new StringBuilder(descriptionTokens[1]);
+                        for (int i = 2; i < descriptionTokens.length; i++) {
+                            builder.append(" ");
+                            builder.append(descriptionTokens[i]);
+                        }
+
+                        taskList.add(new Todo(builder.toString()));
+                        System.out.println("> I've got your back. Adding the new task:");
+                        System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                        System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+
+                    } else if (descriptionTokens[0].toLowerCase().equals("deadline") || descriptionTokens[0].toLowerCase().equals("event")) {
+                        if (descriptionTokens.length == 1) {
+                            //Description is missing
+                            throw new InsufficientArgumentAelitaException("description");
+                        } else {
+                            //Timing is missing
+                            throw new InsufficientArgumentAelitaException("time");
+                        }
+
+                    } else {
+                        throw new InvalidCommandAelitaException();
+
                     }
-
-                } else if (descriptionTokens[0].toLowerCase().equals("done")) {
-                    System.out.println("> Another task off the list. Good job!");
-                    taskList.get(Integer.parseInt(descriptionTokens[1]) - 1).markAsDone();
-                    System.out.println("  " + taskList.get(Integer.parseInt(descriptionTokens[1]) - 1));
-
-                } else if (descriptionTokens[0].toLowerCase().equals("todo")) {
-                    StringBuilder builder = new StringBuilder(descriptionTokens[1]);
+                } else {
+                    if (descriptionTokens.length < 2) {
+                        throw new InsufficientArgumentAelitaException("description");
+                    }
+                    //Concat the description tokens back to one string
+                    StringBuilder description = new StringBuilder(descriptionTokens[1]);
                     for (int i = 2; i < descriptionTokens.length; i++) {
-                        builder.append(" ");
-                        builder.append(descriptionTokens[i]);
+                        description.append(" ");
+                        description.append(descriptionTokens[i]);
                     }
 
-                    taskList.add(new Todo(builder.toString()));
-                    System.out.println("> I've got your back. Adding the new task:");
-                    System.out.println("  " + taskList.get(taskList.size() - 1).toString());
-                    System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                    //Check what type of task
+                    if (descriptionTokens[0].toLowerCase().equals("deadline")) {
 
-                }
-            } else {
-                //Concat the description tokens back to one string
-                StringBuilder description = new StringBuilder(descriptionTokens[1]);
-                for (int i = 2; i < descriptionTokens.length; i++) {
-                    description.append(" ");
-                    description.append(descriptionTokens[i]);
-                }
+                        taskList.add(new Deadline(description.toString(), input[1].substring(3)));
+                        System.out.println("> I've got your back. Adding the new task:");
+                        System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                        System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
 
-                //Check what type of task
-                if (descriptionTokens[0].toLowerCase().equals("deadline")) {
-                    taskList.add(new Deadline(description.toString(), input[1].substring(3)));
-                    System.out.println("> I've got your back. Adding the new task:");
-                    System.out.println("  " + taskList.get(taskList.size() - 1).toString());
-                    System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                    } else if (descriptionTokens[0].toLowerCase().equals("event")) {
 
-                } else if (descriptionTokens[0].toLowerCase().equals("event")) {
-                    String[] endTokens = input[1].split("-");  //Get the end timing
-                    String[] frontTokens = endTokens[0].split(" "); //Seperate start time from date
+                        String[] endTokens = input[1].split("-");  //Get the end timing
+                        if (endTokens.length == 1) {
+                            throw new InsufficientArgumentAelitaException("end time");
+                        }
+                        String[] frontTokens = endTokens[0].split(" "); //Seperate start time from date
+                        if (frontTokens.length < 3) {
+                            throw new InsufficientArgumentAelitaException("date-time");
+                        }
+                        //Concat the date into one string
+                        StringBuilder date = new StringBuilder(frontTokens[1]);
 
-                    //Concat the date into one string
-                    StringBuilder date = new StringBuilder(frontTokens[1]);
-                    for (int i = 2; i < frontTokens.length - 1; i++) {
-                        date.append(" ");
-                        date.append(frontTokens[i]);
+                        for (int i = 2; i < frontTokens.length - 1; i++) {
+                            date.append(" ");
+                            date.append(frontTokens[i]);
+                        }
+
+                        taskList.add(new Event(description.toString(), date.toString(), frontTokens[frontTokens.length - 1],
+                                endTokens[1]));
+                        System.out.println("> I've got your back. Adding the new task:");
+                        System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                        System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+
+                    } else {
+                        throw new InvalidCommandAelitaException();
                     }
-
-                    taskList.add(new Event(description.toString(), date.toString(), frontTokens[frontTokens.length - 1],
-                            endTokens[1]));
-                    System.out.println("> I've got your back. Adding the new task:");
-                    System.out.println("  " + taskList.get(taskList.size() - 1).toString());
-                    System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
-
                 }
+            } catch (EmptyInputAelitaException e) {
+                System.out.println("> Aren't you a quiet type.");
+            } catch (InvalidCommandAelitaException e) {
+                System.out.println("> I don't understand your request.");
+            } catch (InsufficientArgumentAelitaException e) {
+                switch (e.getMessage()) {
+                    case "date-time":
+                        System.out.println("> I don't recognize the date or time.");
+                        break;
+                    case "description":
+                        System.out.println("> What is the task about?");
+                        break;
+                    case "done":
+                        System.out.println("> Which task have you completed?");
+                        break;
+                    case "end time":
+                        System.out.println("> When is the deadline?");
+                        break;
+                    case "time":
+                        System.out.println("> The time is missing.");
+                        break;
+                }
+            } catch (EmptyListAelitaException e) {
+                System.out.println("> You have nothing to do today.");
+            } catch (DuplicateMarkAelitaException e) {
+                System.out.println("> You have already done that task.");
+            } catch (InvalidListItemAelitaException e) {
+                System.out.println("> That item is not on your list.");
             }
             printDivider();
         }

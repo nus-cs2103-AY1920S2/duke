@@ -22,7 +22,10 @@ public class Task {
         return (isDone ? "✓" : "✘");
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws DuplicateMarkAelitaException {
+        if (isDone) {
+            throw new DuplicateMarkAelitaException();
+        }
         isDone = true;
     }
 
