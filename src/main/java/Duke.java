@@ -41,7 +41,7 @@ public class Duke {
                         }
 
                         int index = Integer.parseInt(descriptionTokens[1]) - 1;
-                        if (index >= taskList.size() || index <= 0) {
+                        if (index >= taskList.size() || index < 0) {
                             throw new InvalidListItemAelitaException();
                         }
                         taskList.get(index).markAsDone();
