@@ -10,7 +10,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DukeTest {
     final String NEWLINE = System.lineSeparator();
@@ -20,6 +21,7 @@ class DukeTest {
     final String HORIZONTAL_DIVIDER = INDENTATION + HORIZONTAL_BAR + NEWLINE;
     String taskDoneIcon = "\u2713";
     String taskNotDoneIcon = "\u2718";
+    String exceptionIcon = "\u2639";
     Duke duke;
     PrintStream console = System.out;
     ByteArrayOutputStream output;
@@ -42,12 +44,13 @@ class DukeTest {
     void init() {
         duke = new Duke();
         output = new ByteArrayOutputStream();
+        // Change output stream
+        System.setOut(new PrintStream(output));
     }
 
     @Test
     @DisplayName("Duke: Test for Greeting message")
     void greet() {
-        System.setOut(new PrintStream(output));
         duke.greet();
         String expected = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -58,14 +61,23 @@ class DukeTest {
         expected += INDENTATION + "Hello! I'm Duke" + NEWLINE;
         expected += INDENTATION + "What can I do for you?" + NEWLINE;
         expected += HORIZONTAL_DIVIDER;
-        assertEquals(expected, output.toString());
+        assertEquals(expected, output.toString(), "Should display greeting message");
+    }
+
+    @Test
+    void dukeException_invalidCommand_displayInvalidCommandMessage() {
+        String input = "blah" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new ByteArrayInputStream(input.getBytes())));
+        // Check exception message
+        assertEquals(exceptionIcon + " OOPS!!! I'm sorry, but I don't know what that means :-(",
+                exception.getMessage());
     }
 
     @ParameterizedTest
     @MethodSource("generateOneEventTask")
     @DisplayName("Duke: Test for adding one event task")
     void processCommands_addEventTask_addEventTaskToList(Event task) {
-        System.setOut(new PrintStream(output));
         String delimiter = "/at";
         String eventDescription = task.getDescription();
         String eventTime = task.getEventTime();
@@ -80,17 +92,17 @@ class DukeTest {
                 INDENTATION + expectedEventDescription + NEWLINE +
                 INDENTATION + "Now you have 1 tasks in the list." + NEWLINE +
                 HORIZONTAL_DIVIDER;
-        assertEquals(expected, output.toString());
+        assertEquals(expected, output.toString(), "Should add event task to list");
         // Check if task has been added to list
-        assertEquals(1, duke.tasks.size());
-        assertEquals(eventDescription, duke.tasks.get(0).getDescription());
+        assertEquals(1, duke.tasks.size(), "Tasks list should have one more item");
+        assertEquals(eventDescription, duke.tasks.get(0).getDescription(),
+                "Event description should match");
     }
 
     @ParameterizedTest
     @MethodSource("generateOneDeadlineTask")
     @DisplayName("Duke: Test for adding one deadline task")
     void processCommands_addDeadlineTask_addDeadlineTaskToList(Deadline task) {
-        System.setOut(new PrintStream(output));
         String delimiter = "/by";
         String deadlineDescription = task.getDescription();
         String deadline = task.getDeadline();
@@ -107,25 +119,25 @@ class DukeTest {
                 HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString());
         // Check if task has been added to list
-        assertEquals(1, duke.tasks.size());
+        assertEquals(1, duke.tasks.size(), "Should increase task list size by one");
         // Check task description
-        assertEquals(deadlineDescription, duke.tasks.get(0).getDescription());
+        assertEquals(deadlineDescription, duke.tasks.get(0).getDescription(),
+                "Task description should match");
     }
 
     @Test
     @DisplayName("Duke: Test for Immediate exit command")
     void processCommands_exitCommand_noMessagePrinted() {
-        System.setOut(new PrintStream(output));
         String input = "bye" + NEWLINE;
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
         String expected = "";
-        assertEquals(expected, output.toString());
+        assertEquals(expected, output.toString(),
+                "Immediate exit: No output should be present");
     }
 
     @Test
     @DisplayName("Duke: Test for list command")
     void processCommands_listCommand_listStoredItems() {
-        System.setOut(new PrintStream(output));
         String input = "todo read book" + NEWLINE +
                 "todo return book" + NEWLINE +
                 "list" + NEWLINE + "bye";
@@ -153,7 +165,8 @@ class DukeTest {
         expected.append(INDENTATION).append("2.[T][").append(taskNotDoneIcon).append("] ")
                 .append("return book").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
-        assertEquals(expected.toString(), output.toString());
+        assertEquals(expected.toString(), output.toString(),
+                "Should list out tasks in correct format");
     }
 
     @ParameterizedTest
@@ -163,7 +176,6 @@ class DukeTest {
         String taskDescription = task.getDescription();
         String taskCommand = task.getTaskType().toString().toLowerCase() + " " +
                 taskDescription;
-        System.setOut(new PrintStream(output));
         String input = taskCommand + NEWLINE +
                 "list" + NEWLINE +
                 "done 1" + NEWLINE +
@@ -195,17 +207,16 @@ class DukeTest {
         expected.append(INDENTATION);
         expected.append("1.").append(expectedTaskDoneString).append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
-        assertEquals(expected.toString(), output.toString());
+        assertEquals(expected.toString(), output.toString(), "Should mark new task as done");
     }
 
     @Test
     @DisplayName("Duke: Test for Goodbye message")
     void goodbye() {
-        System.setOut(new PrintStream(output));
         duke.goodbye();
         String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "Bye. Hope to see you again soon!" + NEWLINE +
                 HORIZONTAL_DIVIDER;
-        assertEquals(expected, output.toString());
+        assertEquals(expected, output.toString(), "Should print goodbye message");
     }
 }
