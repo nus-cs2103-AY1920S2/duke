@@ -1,12 +1,14 @@
-public class Task {
+public abstract class Task {
 
-    private String taskname; //name of the given task
-    private boolean done; //whether the task is done or not
+    public String taskname; //name of the given task
+    public boolean done; //whether the task is done or not
+    public String Tasktype;
 
     // constructor
-    public Task(String taskname) {
+    public Task(String taskname, String Tasktype) {
         this.taskname = taskname;
         this.done = false;
+        this.Tasktype = Tasktype;
     }
 
     /**
