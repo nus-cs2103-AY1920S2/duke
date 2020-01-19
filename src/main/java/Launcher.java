@@ -25,7 +25,11 @@ public class Launcher {
                 System.out.println("--------------------------------------------");
                 break;
             }
-            ar = ar.readInput(input).printToConsole();
+            try {
+                ar = ar.readInput(input).printToConsole();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             System.out.println("--------------------------------------------");
         }
     }

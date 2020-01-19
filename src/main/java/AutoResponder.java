@@ -46,10 +46,8 @@ public class AutoResponder {
         } else if (pEmptyCommand.matcher(input).find()) { //TODO Change to Exception
             Matcher m = pEmptyCommand.matcher(input);
             m.find();
-            System.out.println(m);
-            StringBuilder sb = new StringBuilder(toPrint);
-            sb.append("☹ OOPS!!! The description of a ").append(m.group(1)).append(" cannot be empty.\n");
-            return new AutoResponder(taskList, sb).printToConsole();
+            throw new IllegalArgumentException("☹ OOPS!!! The description of a " +
+                    m.group(1) + " cannot be empty.");
         } else if (pDeadline.matcher(input).find()) {
             Matcher m = pDeadline.matcher(input);
             m.find();
@@ -62,10 +60,8 @@ public class AutoResponder {
             Matcher m = pTodo.matcher(input);
             m.find();
             return this.addTodo(m.group(1));
-        } else { //TODO Change to Exception
-            StringBuilder sb = new StringBuilder(toPrint);
-            sb.append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-            return new AutoResponder(taskList, sb).printToConsole();
+        } else {
+            throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -81,7 +77,8 @@ public class AutoResponder {
         StringBuilder sb = new StringBuilder(toPrint);
         List<Task> tl = new ArrayList<>(taskList);
         if (index < 0 || index >= taskList.size()) {
-            sb.append("Index must correspond to list with size of ").append(taskList.size()).append("\n");
+            throw new IndexOutOfBoundsException("Index of " + (index + 1) +
+                    " does not correspond to task list of size " + taskList.size());
         } else {
             tl.set(index, taskList.get(index).makeCompleted());
             sb.append("Nice! I've marked this task as done:\n\t");
@@ -94,7 +91,8 @@ public class AutoResponder {
         StringBuilder sb = new StringBuilder(toPrint);
         List<Task> tl = new ArrayList<>(taskList);
         if (index < 0 || index >= taskList.size()) {
-            sb.append("Index must correspond to list with size of ").append(taskList.size()).append("\n");
+            throw new IndexOutOfBoundsException("Index of " + (index + 1) +
+                    " does not correspond to task list of size " + taskList.size());
         } else {
             sb.append("Noted! I've removed this task:\n\t");
             sb.append(tl.get(index)).append("\n");
