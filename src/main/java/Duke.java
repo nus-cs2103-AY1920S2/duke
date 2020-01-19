@@ -20,21 +20,44 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                printTasks();
-            } else if (input.substring(0, 4).equals("done")) {
-                int taskId = Integer.parseInt(input.substring(5));
-                Task task = tasks.get(taskId - 1);
-                task.markAsDone();
-                print("Nice! I've marked this task as done: \n  " + task);
-            } else {
-                tasks.add(new Task(input));
-                print("added: " + input);
+            String[] inputArr = input.split(" ", 2);
+            switch(inputArr[0]) {
+                case "todo":
+                    addTask(new Todo(inputArr[1]));
+                    break;
+                case "deadline":
+                    String[] deadlineArr = inputArr[1].split(" /by ");
+                    addTask(new Deadline(deadlineArr[0], deadlineArr[1]));
+                    break;
+                case "event":
+                    String[] eventArr = inputArr[1].split(" /at ");
+                    addTask(new Event(eventArr[0], eventArr[1]));
+                    break;
+                case "done":
+                    int taskId = Integer.parseInt(inputArr[1]);
+                    Task task = tasks.get(taskId - 1);
+                    task.markAsDone();
+                    print("Nice! I've marked this task as done: \n  " + task);
+                    break;
+                case "list":
+                    printTasks();
+                    break;
+                default:
+                    print("Invalid input.");
             }
             input = sc.nextLine();
         }
         print("Bye. Hope to see you again soon!");
         sc.close();
+    }
+
+    private static void addTask(Task task) {
+        tasks.add(task);
+        System.out.println(indent + horizontal_line);
+        System.out.println(indent + "Got it. I've added this task: ");
+        System.out.println(indent + "  " + task);
+        System.out.println(indent + "Now you have " + Task.getNumOfTasks() + " tasks in the list.");
+        System.out.println(indent + horizontal_line + "\n");
     }
 
     private static void print(String text) {
