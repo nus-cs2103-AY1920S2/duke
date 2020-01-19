@@ -1,7 +1,9 @@
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Duke {
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
 
     public void listTasks() {
         for (int i = 1; i <= tasks.size(); i++) {
@@ -10,8 +12,13 @@ public class Duke {
     }
 
     public void addTask(String task) {
-        tasks.add(task);
+        Task new_task = new Task(task);
+        tasks.add(new_task);
         System.out.printf("added: %s\n", task);
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index - 1);
     }
 
     public Duke() {
@@ -19,8 +26,14 @@ public class Duke {
     }
 
     public void processCommand(String command) {
-        if (command.equals("list")) {
+        String[] splitted_arguments = command.split(" ");
+        if (splitted_arguments[0].equals("list")) {
             listTasks();
+        } else if (splitted_arguments[0].equals("done")) {
+            Task task = getTask(Integer.parseInt(splitted_arguments[1]));
+            task.markAsDone();
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.printf("   %s\n", task.toString());
         } else {
             addTask(command);
         }
