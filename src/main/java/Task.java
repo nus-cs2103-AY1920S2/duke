@@ -5,13 +5,15 @@ import java.util.List;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static int taskCount = 0;
     protected static List<Task> taskList = new ArrayList<>(100);
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        taskCount++;
+    }
+
+    private static int getTaskCount() {
+        return taskList.size();
     }
 
     public static void setDone(int index) {
@@ -19,6 +21,13 @@ public class Task {
         completedTask.isDone = true;
         System.out.print("Nice, I've marked this as done:");
         System.out.println(completedTask);
+    }
+
+    public static void deleteTask(int index) {
+        Task deletedTask = taskList.remove(index);
+        System.out.print("Deleted: ");
+        System.out.println(deletedTask);
+        System.out.format("You now have %d tasks in the list\n", getTaskCount());
     }
 
     public static void printTaskList() {
@@ -36,33 +45,34 @@ public class Task {
         if (instArr[0].equals("todo")) {
             String description = String.join(" ", Arrays.copyOfRange(instArr, 1, instArr.length));
             Task newTask = new ToDo(description);
-            printAddedTask(newTask);
+            AddTaskHelper(newTask);
         } else if (instArr[0].equals("deadline")) {
             // exception to handle non existence of /by and correspondingly /at
             int seperator = instList.indexOf("/by");
+            if (seperator == -1) {
+                throw new InvalidFormatException("correct format: deadline task /by date");
+            }
             String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, seperator));
             String by = String.join(" ", Arrays.copyOfRange(instArr, seperator + 1, instArr.length));
             Task newTask = new Deadline(description, by);
-            printAddedTask(newTask);
+            AddTaskHelper(newTask);
         } else if (instArr[0].equals("event")) {
             int seperator = instList.indexOf("/at");
+            if (seperator == -1) {
+                throw new InvalidFormatException("correct format: event task /at place");
+            }
             String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, seperator));
             String at = String.join(" ", Arrays.copyOfRange(instArr, seperator + 1, instArr.length));
             Task newTask = new Event(description, at);
-            printAddedTask(newTask);
-        }  /*
-            else {
-            // handle invalid task type entered as exception in level 5
-            System.out.println("Invalid task type");
+            AddTaskHelper(newTask);
         }
-        */
     }
 
-    private static void printAddedTask(Task addedTask) {
+    private static void AddTaskHelper(Task addedTask) {
         taskList.add(addedTask);
         System.out.print("Added: ");
         System.out.println(addedTask);
-        System.out.format("You now have %d tasks in the list\n", taskCount);
+        System.out.format("You now have %d tasks in the list\n", getTaskCount());
     }
 
     public String getStatusIcon() {
