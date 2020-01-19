@@ -12,6 +12,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
+        // Start the duke program
         System.out.println("Hello from\n" + logo);
         System.out.println(
                 "    ____________________________________________________________\n" +
@@ -21,45 +22,66 @@ public class Duke {
         );
 
         BufferedReader bufferedReader = new BufferedReader (new InputStreamReader(System.in));
+        String[] inputTokens;
         String input;
-        List<String> list = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         // Parse each command by user
         while (true) {
             // Get command entered by user
             try {
                  input = bufferedReader.readLine();
+                 inputTokens = input.split(" ");
             } catch (IOException e) {
                 System.out.println("Error in reading input");
                 break;
             }
 
-            switch (input) {
+            switch (inputTokens[0]) {
                 case "bye":
                     // Exit program
                     prettyPrint("Sorry to see you go. Hope to see you again soon! (＾▽＾)／");
                     break;
                 case "list":
-                    String listItems = "";
-                    Integer listSize = list.size();
+                    String tasksString = "";
+                    Integer size = tasks.size();
 
                     // Print out all items in list
-                    for(int i = 0; i < listSize; i++) {
-                        listItems += (i + 1) + ". " + list.get(i);
-                        if (i != listSize - 1) {
-                            listItems += "\n     ";
+                    for(int i = 0; i < size; i++) {
+                        tasksString += (i + 1) + "." + tasks.get(i);
+                        if (i != size - 1) {
+                            tasksString += "\n     ";
                         }
                     }
-                    listItems = listItems.equals("") ? "There is nothing on your list." : listItems;
-                    prettyPrint(listItems);
+                    tasksString = tasksString.equals("") ? "There is nothing on your list." : tasksString;
+                    prettyPrint(tasksString);
+                    break;
+                case "done":
+                    // Mark the task with given index as done
+                    Integer index = Integer.parseInt(inputTokens[1]) - 1;
+                    if (index < tasks.size()) {
+                        Task task = tasks.get(index);
+                        task.markAsDone(true);
+                        prettyPrint("Nice! I've marked this task as done: \n" +
+                                "       " + task);
+                    } else {
+                        System.out.println("No such task index");
+                    }
                     break;
                 default:
-                    list.add(input);
+                    // Add new task to task list
+                    Task newTask = new Task(input);
+                    tasks.add(newTask);
                     prettyPrint("You have added " + input);
             }
         }
     }
 
+    /**
+     * Format the given line into a pretty format and print it
+     *
+     * @param  line   the line to be formatted
+     */
     public static void prettyPrint(String line) {
         System.out.println(
                 "    _____________________________DUKE___________________________\n" +
