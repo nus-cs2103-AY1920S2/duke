@@ -9,19 +9,19 @@ public class Driver {
         Scanner scanner = new Scanner(System.in);
         Duke duke = new Duke();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Add your command here!");
-        System.out.println("");
+        System.out.println("------------------------");
+        System.out.println("Hello I'm Duke!");
+        System.out.println("Add your command here!\n");
 
         String command = readCommand(scanner);
+        System.out.println("------------------------");
         while (!command.equals("bye")) {
-            System.out.println("------------------------");
-            duke.processCommand(command);
+            try {
+                duke.processCommand(command);
+            } catch(DukeException e) {
+                System.err.println(e);
+            }
+
             System.out.println("------------------------");
             command = readCommand(scanner);
         }

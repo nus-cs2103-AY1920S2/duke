@@ -1,9 +1,22 @@
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Optional;
 
 public class Duke {
     private ArrayList<Task> tasks;
+    private HashMap<String, Command> valid_commands;
+
+    public Duke() {
+        this.tasks = new ArrayList<>();
+        this.valid_commands = new HashMap<String, Command>() {
+            {
+                put("list", Command.LIST);
+                put("todo", Command.TODO);
+                put("deadline", Command.DEADLINE);
+                put("event", Command.EVENT);
+            }
+        };
+    }
 
     public void listTasks() {
         for (int i = 1; i <= tasks.size(); i++) {
@@ -47,13 +60,10 @@ public class Duke {
         return tasks.get(index - 1);
     }
 
-    public Duke() {
-        this.tasks = new ArrayList<>();
-    }
-
     public void processCommand(String arguments) {
         String[] splitted_arguments = arguments.split(" ");
-        String command = splitted_arguments[0];
+        String command_string = splitted_arguments[0];
+
         if (command.equals("list")) {
             listTasks();
         } else if (command.equals("done")) {
