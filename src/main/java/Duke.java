@@ -9,7 +9,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        List<String> storedText = new ArrayList<>();
+        List<Task> storedTasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,27 +21,38 @@ public class Duke {
 
         while(true) {
             String input = scan.nextLine(); //reads in user input
-
-            switch(input) {
+            String[] command = input.split(" ");
+            switch(command[0]) {
                 case "bye":
                     divider("Aww okay, see you next time!");
                     return;
                 case "list":
-                    if (storedText.size() < 1) {
-                        divider("nothing in list");
+                    if (storedTasks.size() < 1) {
+                        divider("no tasks");
                         break;
                     }
                     divider("");
+                    System.out.println("Here are the tasks in your list:");
                     int index = 1;
                     String output = "";
-                    for (String s: storedText) {
-                        output = index + ". " + s;
+                    for (Task t: storedTasks) {
+                        output = index + ". " + t.toString();
                         System.out.println(output);
+                        index++;
                     }
                     divider("");
                     break;
+                case "done":
+                    int taskNum = Integer.parseInt(command[1]);
+                    storedTasks.get(taskNum - 1).setDone();
+                    divider("");
+                    System.out.println("Nice! I've marked this task as done:\n" +
+                                        storedTasks.get(taskNum - 1).toString());
+                    divider("");
+                    break;
+
                 default:
-                    storedText.add(input); //stores input to storedText List
+                    storedTasks.add(new Task(input)); //stores input to storedText List
                     divider("added " + input);
             }
         }
