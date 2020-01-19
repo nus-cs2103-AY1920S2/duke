@@ -18,6 +18,10 @@ public class Event implements Task {
         this.isDone = isDone;
     }
 
+    public String getEventTime() {
+        return eventTime;
+    }
+
     /**
      * Returns a String (Unicode Character) based on Task completion status.
      * @return String representing Unicode character for check mark or cross
