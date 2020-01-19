@@ -3,22 +3,22 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
+        String horizontalLine = "    ________________________________________________________";
+        /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);*/
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+        System.out.println("\n" + horizontalLine);
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        System.out.println("    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n");
-
+        System.out.println(horizontalLine + "\n");
 
         String[] command = sc.nextLine().split(" ", 2);
         while (!command[0].equals("bye")) {
-            System.out.println("\n    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+            System.out.println("\n" + horizontalLine);
             if (command[0].equals("list")) {
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
@@ -45,12 +45,12 @@ public class Duke {
                 tasks.add(task);
                 System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
             }
-            System.out.println("    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n");
+            System.out.println(horizontalLine + "\n");
             command = sc.nextLine().split(" ", 2);
         }
 
-        System.out.println("\n    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+        System.out.println("\n" + horizontalLine);
         System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ––––––––––––––––––––––––––––––––––––––––––––––––––––––––\n");
+        System.out.println(horizontalLine + "\n");
     }
 }
