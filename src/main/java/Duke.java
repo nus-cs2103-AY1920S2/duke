@@ -18,7 +18,10 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
+                System.out.println("Here are your tasks in your list:");
                 System.out.print(todo);
+            } else if (input.substring(0, 4).equals("done")) {
+                System.out.println(todo.markDone(Integer.parseInt(input.substring(5))));
             } else {
                 System.out.println(todo.add(input));
             }
