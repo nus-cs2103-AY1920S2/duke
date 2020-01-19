@@ -7,9 +7,10 @@ public class Duke {
     /**
      * main method for Duke.
      */
+    static Scanner scan = new Scanner(System.in);
+    static List<Task> storedTasks = new ArrayList<>();
+
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        List<Task> storedTasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -51,6 +52,25 @@ public class Duke {
                     divider("");
                     break;
 
+                case "todo":
+                    Task task = new Todo(input.substring(5)); //stores input to storedText List
+                    insertTask(task);
+                    break;
+
+                case "deadline":
+                    String deadlineDescription = input.split("/by")[0].substring(9);
+                    String by = input.split("/by")[1].substring(1);
+                    Task deadline = new Deadline(deadlineDescription, by);
+                    insertTask(deadline);
+                    break;
+
+                case "event":
+                    String eventDescription = input.split("/at")[0].substring(6);
+                    String at = input.split("/at")[1].substring(1);
+                    Task event = new Event(eventDescription, at);
+                    insertTask(event);
+                    break;
+
                 default:
                     storedTasks.add(new Task(input)); //stores input to storedText List
                     divider("added " + input);
@@ -66,5 +86,12 @@ public class Duke {
             return;
         }
         System.out.println("____________________________________________________________\n");
+    }
+
+    private static void insertTask(Task task) {
+        storedTasks.add(task);
+        divider("Got it. I've added this task:\n" +
+                task.toString()+"\n" +
+                "Now you have " + storedTasks.size() + " tasks in the list.");
     }
 }
