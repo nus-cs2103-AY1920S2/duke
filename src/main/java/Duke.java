@@ -118,7 +118,8 @@ public class Duke {
     private void printTaskAddition(Task task) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Got it. I've added this task:");
-        printTextWithIndentation(task.toString());
+        // Add more indentation for task description
+        printTextWithIndentation("  " + task.toString());
         printTextWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
         printTextWithIndentation(HORIZONTAL_BAR);
     }
