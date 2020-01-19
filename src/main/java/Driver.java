@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Driver {
     public static String readCommand(Scanner scanner) {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public static void main(String[] args) {
