@@ -21,6 +21,9 @@ public class Duke {
                     String[] temp = op.split(" ", 2);
                     String cmd = temp[0];
                     switch (cmd) {
+                        case "delete":
+                            delete(temp, list);
+                            break;
                         case "done":
                             done(temp, list);
                             break;
@@ -45,6 +48,26 @@ public class Duke {
         }
         output(new String[]{"Bye. Hope to see you again soon!"});
     }
+
+    private static void delete(String[] temp, ArrayList<Task> list) throws DukeException {
+        try {
+            if (temp[1].trim().equals("")) {
+                throw new DukeException("OOPS!!! The description of delete cannot be empty.");
+            }
+            String body = temp[1];
+            Task task = list.remove(Integer.parseInt(body) - 1);
+            int size = list.size();
+            output(new String[]{"Noted. I've removed this task:", " " + task.toString(),
+                "Now you have " + size + " tasks in the list."});
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of delete cannot be empty.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Index is out of bounds.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! The description of delete have to be a number.");
+        }
+    }
+
     private static void done(String[] temp, ArrayList<Task> list) throws DukeException {
         try {
             if (temp[1].trim().equals("")) {
