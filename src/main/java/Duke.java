@@ -18,32 +18,54 @@ public class Duke {
 
         String[] command = sc.nextLine().split(" ", 2);
         while (!command[0].equals("bye")) {
-            System.out.println("\n" + horizontalLine);
-            if (command[0].equals("list")) {
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println("     " + (i + 1) + ". " + tasks.get(i));
+            try {
+                System.out.println("\n" + horizontalLine);
+                if (command[0].equals("list")) {
+                    System.out.println("     Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println("     " + (i + 1) + ". " + tasks.get(i));
+                    }
+                } else if (command[0].equals("done")) {
+                    try {
+                        Task task = tasks.get(Integer.parseInt(command[1]) - 1);
+                        task.markAsDone();
+                        System.out.println("     Nice! I've marked this task as done:");
+                        System.out.println("       " + task);
+                    } catch (Exception e) {
+                        throw new DukeException("OOPS!!! Which task is done?");
+                    }
+                } else {
+                    Task task = null;
+                    if (command[0].equals("todo")) {
+                        try {
+                            task = new Todo(command[1]);
+                        } catch (Exception e) {
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                        }
+                    } else if (command[0].equals("deadline")) {
+                        try {
+                            String[] info = command[1].split(" /by ");
+                            task = new Deadline(info[0], info[1]);
+                        } catch (Exception e) {
+                            throw new DukeException("OOPS!!! Missing information regarding deadline.");
+                        }
+                    } else if (command[0].equals("event")) {
+                        try {
+                            String[] info = command[1].split(" /at ");
+                            task = new Event(info[0], info[1]);
+                        } catch (Exception e) {
+                            throw new DukeException(("OOPS!!! Missing information regarding event."));
+                        }
+                    } else {
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    System.out.println("     Got it. I've added this task:");
+                    System.out.println("       " + task);
+                    tasks.add(task);
+                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                 }
-            } else if (command[0].equals("done")) {
-                Task task = tasks.get(Integer.parseInt(command[1]) - 1);
-                task.markAsDone();
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + task);
-            } else {
-                Task task = null;
-                if (command[0].equals("todo")) {
-                    task = new Todo(command[1]);
-                } else if (command[0].equals("deadline")) {
-                    String[] info = command[1].split(" /by ");
-                    task = new Deadline(info[0], info[1]);
-                } else if (command[0].equals("event")) {
-                    String[] info = command[1].split(" /at ");
-                    task = new Event(info[0], info[1]);
-                }
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("       " + task);
-                tasks.add(task);
-                System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+            } catch (DukeException e) {
+                System.out.println("     " + e);
             }
             System.out.println(horizontalLine + "\n");
             command = sc.nextLine().split(" ", 2);
