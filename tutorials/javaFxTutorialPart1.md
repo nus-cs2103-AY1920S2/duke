@@ -10,7 +10,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
 ## Setting up Java FX
 
-#### If you are not using Gradle
+### If you are not using Gradle
 
 1. Download the [JavaFX 11 SDK](https://gluonhq.com/products/javafx/) and unzip it.
 
@@ -23,7 +23,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
    `--module-path {JAVAFX_HOME}/lib --add-modules javafx.controls,javafx.fxml`<br>
    e.g., `--module-path C:/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml`
 
-#### If you are using Gradle
+### If you are using Gradle
 
 Update your `build.gradle` to include the following lines:
 ```groovy
@@ -51,7 +51,7 @@ dependencies {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Create a new `HelloWorld.java` class in the `duke.seedu` package. Have the class extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -59,11 +59,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class HelloWorld extends Application {
-
-    public static void main(String[] args) {
-        launch();
-    }
+public class Duke extends Application {
+    
+    // ...
 
     @Override
     public void start(Stage stage) {
@@ -78,7 +76,23 @@ public class HelloWorld extends Application {
 
 Note how we have created a `Label` to contain the text that we want to show. We then create the `Scene` and set its content. Finally, we set the stage and show it. 
 
-Run the program and you should see something like this:
+Next, we create another Java class, `Launcher`, as an entry point to our application.
+The `Launcher` class is reproduced below in its entirety.
+
+```java
+import javafx.application.Application;
+
+/**
+ * A launcher class to workaround classpath issues.
+ */
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Duke.class, args);
+    }
+}
+```
+
+Run `Launcher` and you should see something like this:
 
 ![Hello World](assets/HelloWorld.png) 
 
@@ -98,6 +112,6 @@ Congratulations! You have created your first GUI application!
    1. Can you have more than one `Stage` an application?
    1. Try creating another stage and showing it! What happens?
 
-----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 **Authors:**
 * Initial Version: Jeffry Lum
