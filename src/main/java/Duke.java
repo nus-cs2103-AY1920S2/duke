@@ -1,19 +1,24 @@
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
     protected static final String HORIZONTAL_BAR =
             "____________________________________________________________";
     protected static final String NEWLINE = System.lineSeparator();
     protected static final String INDENTATION = "    ";
-    protected static Scanner scanner;
+    protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     protected ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        duke.processCommands(System.in);
+        boolean requestExit = false;
+        while (!requestExit) {
+            // Run process command, check if user has terminated program
+            requestExit = duke.processCommandWrapper(reader);
+        }
         duke.goodbye();
     }
 
@@ -54,23 +59,50 @@ public class Duke {
     }
 
     /**
-     * Process input given by user and execute relevant actions.
+     * Function used to catch any exceptions resulting from executing commands
+     * @param inputReader used to receive user input
+     * @return boolean indicating whether user exited normally
      */
-    protected void processCommands(InputStream inputStream) {
-        scanner = new Scanner(inputStream);
-        while (scanner.hasNext()) {
-            String command = scanner.nextLine();
+    protected boolean processCommandWrapper(BufferedReader inputReader) {
+        boolean normalExit = true;
+        try {
+            processCommands(inputReader);
+        } catch (IOException ioException) {
+            printTextWithIndentation(HORIZONTAL_BAR);
+            printTextWithIndentation("Unable to read user input...");
+            printTextWithIndentation(HORIZONTAL_BAR);
+            normalExit = false;
+        } catch (DukeException dukeException) {
+            // Print error message
+            printTextWithIndentation(HORIZONTAL_BAR);
+            printTextWithIndentation(dukeException.getMessage());
+            printTextWithIndentation(HORIZONTAL_BAR);
+            normalExit = false;
+        }
+        return normalExit;
+    }
+
+    /**
+     * Process input given by user and execute relevant actions.
+     * @param inputReader used for user input
+     */
+    protected void processCommands(BufferedReader inputReader) throws DukeException, IOException {
+        reader = inputReader;
+        String command = "";
+        while (!(command.equals("bye"))) {
+            command = reader.readLine();
             // Remove leading and trailing whitespace
             command = command.trim();
             String[] commandWords = command.split("\\s+");
             // No input is given or only whitespace given
             if (commandWords.length == 0 || commandWords[0].equals("")) {
+                printTextWithIndentation(HORIZONTAL_BAR);
+                printTextWithIndentation("404 Not Found... Are you there?");
+                printTextWithIndentation(HORIZONTAL_BAR);
                 continue;
             }
             // Check first word of command
             switch (commandWords[0]) {
-            case "bye":
-                return;
             case "list":
                 printTextWithIndentation(HORIZONTAL_BAR);
                 int taskCount = 1;
@@ -83,9 +115,13 @@ public class Duke {
                 break;
             case "done":
                 // Get task to mark as done
-                int taskNumber = Integer.parseInt(commandWords[1]);
-                Task task = tasks.get(taskNumber - 1);
-                markTaskAsDone(task);
+                try {
+                    int taskNumber = Integer.parseInt(commandWords[1]);
+                    Task task = tasks.get(taskNumber - 1);
+                    markTaskAsDone(task);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid Task Number given!");
+                }
                 break;
             case "todo":
                 // Get task description, get substring starting at index 5
@@ -129,11 +165,7 @@ public class Duke {
                 break;
             }
         }
-        scanner.close();
-    }
-
-    protected void throwAndHandleDukeException(String message) {
-
+        reader.close();
     }
 
     protected void printTaskAddition(Task task) {
