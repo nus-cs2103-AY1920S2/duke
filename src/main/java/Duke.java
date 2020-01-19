@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    private static List<String> tasks;
+    private static List<Task> tasks;
 
     public static void main(String[] args) {
         greet();
@@ -44,9 +44,9 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void addTask(String task) {
-        tasks.add(task);
-        System.out.println(style("added: " + task));
+    private static void addTask(String description) {
+        tasks.add(new Task(description));
+        System.out.println(style("added: " + description));
     }
 
     private static void list() {
