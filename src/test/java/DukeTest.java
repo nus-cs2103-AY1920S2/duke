@@ -33,6 +33,11 @@ class DukeTest {
                 new Deadline("return book", "Sunday")));
     }
 
+    static Stream<Arguments> generateOneEventTask() {
+        return Stream.of(Arguments.of(
+                new Event("project meeting", "Mon 2-4pm")));
+    }
+
     @BeforeEach
     void init() {
         duke = new Duke();
@@ -56,6 +61,30 @@ class DukeTest {
         assertEquals(expected, output.toString());
     }
 
+    @ParameterizedTest
+    @MethodSource("generateOneEventTask")
+    @DisplayName("Duke: Test for adding one event task")
+    void processCommands_addEventTask_addEventTaskToList(Event task) {
+        System.setOut(new PrintStream(output));
+        String delimiter = "/at";
+        String eventDescription = task.getDescription();
+        String eventTime = task.getEventTime();
+        String input = String.format("event %s %s %s", eventDescription, delimiter,
+                eventTime);
+        input += NEWLINE + "bye";
+        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        String expectedEventDescription = "  " + String.format("[E][%s] %s (at: %s)",
+                taskNotDoneIcon, eventDescription, eventTime);
+        String expected = HORIZONTAL_DIVIDER +
+                INDENTATION + "Got it. I've added this task:" + NEWLINE +
+                INDENTATION + expectedEventDescription + NEWLINE +
+                INDENTATION + "Now you have 1 tasks in the list." + NEWLINE +
+                HORIZONTAL_DIVIDER;
+        assertEquals(expected, output.toString());
+        // Check if task has been added to list
+        assertEquals(1, duke.tasks.size());
+        assertEquals(eventDescription, duke.tasks.get(0).getDescription());
+    }
 
     @ParameterizedTest
     @MethodSource("generateOneDeadlineTask")
@@ -69,7 +98,7 @@ class DukeTest {
                 delimiter, deadline);
         input += NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
-        String expectedDeadlineDescription = String.format("[D][%s] %s (by: %s)",
+        String expectedDeadlineDescription = "  " + String.format("[D][%s] %s (by: %s)",
                 taskNotDoneIcon, deadlineDescription, deadline);
         String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "Got it. I've added this task:" + NEWLINE +
@@ -103,14 +132,14 @@ class DukeTest {
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
         StringBuilder expected = new StringBuilder();
         // Add first task
-        String firstTaskDescription = String.format("[T][%s] read book", taskNotDoneIcon);
+        String firstTaskDescription = "  " + String.format("[T][%s] read book", taskNotDoneIcon);
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE);
         expected.append(INDENTATION).append(firstTaskDescription).append(NEWLINE);
         expected.append(INDENTATION).append("Now you have 1 tasks in the list.").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // Add second task
-        String secondTaskDescription = String.format("[T][%s] return book", taskNotDoneIcon);
+        String secondTaskDescription = "  " + String.format("[T][%s] return book", taskNotDoneIcon);
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE);
         expected.append(INDENTATION).append(secondTaskDescription).append(NEWLINE);
@@ -145,7 +174,7 @@ class DukeTest {
         String expectedTaskDescription = String.format("[T][%s] %s", taskNotDoneIcon, taskDescription);
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE);
-        expected.append(INDENTATION).append(expectedTaskDescription).append(NEWLINE);
+        expected.append(INDENTATION).append("  ").append(expectedTaskDescription).append(NEWLINE);
         expected.append(INDENTATION).append("Now you have 1 tasks in the list.").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // List initial task (Should be marked as not done)
