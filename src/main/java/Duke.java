@@ -25,7 +25,7 @@ public class Duke {
                     Task task = list.get(Integer.parseInt(body) - 1);
                     task.markAsDone();
                     output(new String[]{"Nice! I've marked this task as done:",
-                            task.toString()});
+                            " " + task.toString()});
                 } else if (cmd.equals("todo")) {
                     Task task = new ToDo(body);
                     int size = list.size();
