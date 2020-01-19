@@ -12,7 +12,7 @@ public class ChatBot {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
 
-    private ArrayList<String> tasks = new ArrayList<>(); // store the list of tasks from the user
+    private ArrayList<Task> tasks = new ArrayList<>(); // store the list of tasks from the user
 
     /**
      * Function to greet user
@@ -20,6 +20,10 @@ public class ChatBot {
     public void greetUser() {
         System.out.println(this.greetings);
         System.out.println("Hello! I am Duke, and I am pleased to serve you!");
+        System.out.println("Here are the following commands (case sensitive):");
+        System.out.println("1) list: List out all the tasks added");
+        System.out.println("2) done x: Set the task number (x) to done");
+        System.out.println("3) Any other text: add that text to the task list!");
     }
 
     /**
@@ -38,27 +42,47 @@ public class ChatBot {
      * @return true or false, true means continue chat-bot, false means exit chat-bot
      */
     public boolean respondToUser(String command) {
-        switch(command) {
+        // split the string
+        String[] inputCommand = command.split(" ");
+        switch(inputCommand[0]) {
             case "list":
-                String listings = "";
-                int count = 1;
-                for (String task : this.tasks) {
-                    listings += count + ". " + task;
-                    if (count != this.tasks.size()) {
-                        listings += "\n";
+                int counter = 1;
+                String line = "";
+                for (Task t : this.tasks) {
+                    if (t.getDone()) {
+                        line += counter + " [" + "\u2713" + "] " + t.getTaskname();
                     } else {
-                        break;
+                        line += counter + " [" + "X" + "] "  + t.getTaskname();
                     }
-                    count++;
-                    listings += "\t";
+                    if (counter != this.tasks.size()) {
+                        line += "\n";
+                        line += "\t";
+                    }
+                    counter++;
                 }
-                this.prettyPrinting(listings);
+                // now we do the pretty printing to get the right output
+                this.prettyPrinting(line);
                 break;
             case "bye":
                 this.prettyPrinting("Bye. Hope to see you again soon!");
                 return false;
+            case "done":
+                int taskToBeDone = Integer.parseInt(inputCommand[1]); // all assuming correct input
+                try {
+                    Task t = this.tasks.get(Integer.parseInt(inputCommand[1]) - 1);
+                    if (t.getDone()) {
+                        this.prettyPrinting("Task already set done!");
+                    } else {
+                        t.setDone();
+                        this.prettyPrinting("Task set to done!");
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    this.prettyPrinting("I believe you gave an incorrect task number! Please try again!");
+                }
+                break;
             default:
-                this.tasks.add(command);
+                Task t = new Task(command);
+                this.tasks.add(t);
                 this.prettyPrinting("added: " + command);
         }
         return true;
