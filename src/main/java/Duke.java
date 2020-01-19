@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//deadline timing not working returns null
+//event toString not done
+
 public class Duke {
+
     public static void main(String[] args) {
 
         ArrayList<Task> taskList = new ArrayList<>();
@@ -11,27 +15,71 @@ public class Duke {
         printGreeting();
 
         while (true) {
-            String[] input = sc.nextLine().split(" ");
+            //Split the input line into description and time portions
+            String[] input = sc.nextLine().split("/");
+            //Further split the description for command checking
+            String[] descriptionTokens = input[0].split(" ");
             printDivider();
-            if (input[0].toLowerCase().equals("bye")) {
-                break;
-            } else if (input[0].toLowerCase().equals("list")) {
+            if (input.length < 2) {  //Regular commands and Todo
+                if (descriptionTokens[0].toLowerCase().equals("bye")) {
+                    break;
 
-                for (int i = 0; i < taskList.size(); i++) {
-                    System.out.println((i + 1) + "." + taskList.get(i));
+                } else if (descriptionTokens[0].toLowerCase().equals("list")) {
+                    for (int i = 0; i < taskList.size(); i++) {
+                        System.out.println((i + 1) + "." + taskList.get(i));
+                    }
+
+                } else if (descriptionTokens[0].toLowerCase().equals("done")) {
+                    System.out.println("> Another task off the list. Good job!");
+                    taskList.get(Integer.parseInt(descriptionTokens[1]) - 1).markAsDone();
+                    System.out.println("  " + taskList.get(Integer.parseInt(descriptionTokens[1]) - 1));
+
+                } else if (descriptionTokens[0].toLowerCase().equals("todo")) {
+                    StringBuilder builder = new StringBuilder(descriptionTokens[1]);
+                    for (int i = 2; i < descriptionTokens.length; i++) {
+                        builder.append(" ");
+                        builder.append(descriptionTokens[i]);
+                    }
+
+                    taskList.add(new Todo(builder.toString()));
+                    System.out.println("> I've got your back. Adding the new task: ");
+                    System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                    System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+
                 }
-            } else if (input[0].equals("done")) {
-                System.out.println("> Another task off the list. Good job!");
-                taskList.get(Integer.parseInt(input[1]) - 1).markAsDone();
-                System.out.println("  " + taskList.get(Integer.parseInt(input[1]) - 1));
             } else {
-                StringBuilder builder = new StringBuilder(input[0]);
-                for (int i = 1; i < input.length; i++) {
-                    builder.append(" ");
-                    builder.append(input[i]);
+                //Concat the description tokens back to one string
+                StringBuilder description = new StringBuilder(descriptionTokens[1]);
+                for (int i = 2; i < descriptionTokens.length; i++) {
+                    description.append(" ");
+                    description.append(descriptionTokens[i]);
                 }
-                taskList.add(new Task(builder.toString()));
-                System.out.println("> Added: " + builder.toString());
+
+                //Check what type of task
+                if (descriptionTokens[0].toLowerCase().equals("deadline")) {
+                    taskList.add(new Deadline(description.toString(), input[1].substring(3)));
+                    System.out.println("> I've got your back. Adding the new task: ");
+                    System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                    System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+
+                } else if (descriptionTokens[0].toLowerCase().equals("event")) {
+                    String[] endTokens = input[1].split("-");  //Get the end timing
+                    String[] frontTokens = endTokens[0].split(" "); //Seperate start time from date
+
+                    //Concat the date into one string
+                    StringBuilder date = new StringBuilder(frontTokens[1]);
+                    for (int i = 2; i < frontTokens.length - 1; i++) {
+                        date.append(" ");
+                        date.append(frontTokens[i]);
+                    }
+
+                    taskList.add(new Event(description.toString(), date.toString(), frontTokens[frontTokens.length - 1],
+                            endTokens[1]));
+                    System.out.println("> I've got your back. Adding the new task: ");
+                    System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                    System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+
+                }
             }
             printDivider();
         }
