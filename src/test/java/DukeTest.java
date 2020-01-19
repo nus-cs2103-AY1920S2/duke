@@ -24,8 +24,13 @@ class DukeTest {
     PrintStream console = System.out;
     ByteArrayOutputStream output;
 
-    static Stream<Arguments> generateOneTask() {
-        return Stream.of(Arguments.of(new Task("read book", false)));
+    static Stream<Arguments> generateOneTodoTask() {
+        return Stream.of(Arguments.of(new Todo("read book", false)));
+    }
+
+    static Stream<Arguments> generateOneDeadlineTask() {
+        return Stream.of(Arguments.of(
+                new Deadline("return book", "Sunday")));
     }
 
     @BeforeEach
@@ -51,20 +56,31 @@ class DukeTest {
         assertEquals(expected, output.toString());
     }
 
-    @Test
-    @DisplayName("Duke: Test for adding task")
-    void processCommands_addTaskCommand_addTaskToList() {
+
+    @ParameterizedTest
+    @MethodSource("generateOneDeadlineTask")
+    @DisplayName("Duke: Test for adding one deadline task")
+    void processCommands_addDeadlineTask_addDeadlineTaskToList(Deadline task) {
         System.setOut(new PrintStream(output));
-        String input = "read book" + NEWLINE + "bye";
+        String delimiter = "/by";
+        String deadlineDescription = task.getDescription();
+        String deadline = task.getDeadline();
+        String input = String.format("deadline %s %s %s", deadlineDescription,
+                delimiter, deadline);
+        input += NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        String expectedDeadlineDescription = String.format("[D][%s] %s (by: %s)",
+                taskNotDoneIcon, deadlineDescription, deadline);
         String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "added: read book" + NEWLINE +
+                INDENTATION + "Got it. I've added this task:" + NEWLINE +
+                INDENTATION + expectedDeadlineDescription + NEWLINE +
+                INDENTATION + "Now you have 1 tasks in the list." + NEWLINE +
                 HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString());
-        // Check list of tasks
+        // Check if task has been added to list
         assertEquals(1, duke.tasks.size());
         // Check task description
-        assertEquals("read book", duke.tasks.get(0).getDescription());
+        assertEquals(deadlineDescription, duke.tasks.get(0).getDescription());
     }
 
     @Test
@@ -81,61 +97,74 @@ class DukeTest {
     @DisplayName("Duke: Test for list command")
     void processCommands_listCommand_listStoredItems() {
         System.setOut(new PrintStream(output));
-        String input = "read book" + NEWLINE +
-                "return book" + NEWLINE +
+        String input = "todo read book" + NEWLINE +
+                "todo return book" + NEWLINE +
                 "list" + NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
         StringBuilder expected = new StringBuilder();
         // Add first task
+        String firstTaskDescription = String.format("[T][%s] read book", taskNotDoneIcon);
         expected.append(HORIZONTAL_DIVIDER);
-        expected.append(INDENTATION).append("added: read book").append(NEWLINE);
+        expected.append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE);
+        expected.append(INDENTATION).append(firstTaskDescription).append(NEWLINE);
+        expected.append(INDENTATION).append("Now you have 1 tasks in the list.").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // Add second task
+        String secondTaskDescription = String.format("[T][%s] return book", taskNotDoneIcon);
         expected.append(HORIZONTAL_DIVIDER);
-        expected.append(INDENTATION).append("added: return book").append(NEWLINE);
+        expected.append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE);
+        expected.append(INDENTATION).append(secondTaskDescription).append(NEWLINE);
+        expected.append(INDENTATION).append("Now you have 2 tasks in the list.").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // List out tasks
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE);
-        expected.append(INDENTATION).append("1.[").append(taskNotDoneIcon).append("] ")
+        expected.append(INDENTATION).append("1.[T][").append(taskNotDoneIcon).append("] ")
                 .append("read book").append(NEWLINE);
-        expected.append(INDENTATION).append("2.[").append(taskNotDoneIcon).append("] ")
+        expected.append(INDENTATION).append("2.[T][").append(taskNotDoneIcon).append("] ")
                 .append("return book").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         assertEquals(expected.toString(), output.toString());
     }
 
     @ParameterizedTest
-    @DisplayName("Duke: Test for marking task as done")
-    @MethodSource("generateOneTask")
-    void processCommands_createNewTaskAndMarkAsDone_taskMarkedDone(Task task) {
+    @DisplayName("Duke: Test for marking todo task as done")
+    @MethodSource("generateOneTodoTask")
+    void processCommands_createNewTodoTaskAndMarkAsDone_todoTaskMarkedDone(Todo task) {
         String taskDescription = task.getDescription();
+        String taskCommand = task.getTaskType().toString().toLowerCase() + " " +
+                taskDescription;
         System.setOut(new PrintStream(output));
-        String input = taskDescription + NEWLINE +
+        String input = taskCommand + NEWLINE +
                 "list" + NEWLINE +
                 "done 1" + NEWLINE +
                 "list" + NEWLINE + "bye";
         duke.processCommands(new ByteArrayInputStream(input.getBytes()));
         // Add task
         StringBuilder expected = new StringBuilder();
+        String expectedTaskDescription = String.format("[T][%s] %s", taskNotDoneIcon, taskDescription);
         expected.append(HORIZONTAL_DIVIDER);
-        expected.append(INDENTATION).append("added: ").append(taskDescription).append(NEWLINE);
+        expected.append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE);
+        expected.append(INDENTATION).append(expectedTaskDescription).append(NEWLINE);
+        expected.append(INDENTATION).append("Now you have 1 tasks in the list.").append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // List initial task (Should be marked as not done)
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE);
         expected.append(INDENTATION);
-        expected.append("1.[").append(taskNotDoneIcon).append("] ").append(taskDescription).append(NEWLINE);
+        expected.append("1.").append(expectedTaskDescription).append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // Mark task as done
+        String expectedTaskDoneString = String.format("[T][%s] %s", taskDoneIcon, taskDescription);
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Nice! I've marked this task as done:").append(NEWLINE);
-        expected.append(INDENTATION).append("[" + taskDoneIcon + "] " + taskDescription).append(NEWLINE);
+        expected.append(INDENTATION).append(expectedTaskDoneString).append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         // List task again (Should be marked as done)
         expected.append(HORIZONTAL_DIVIDER);
         expected.append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE);
-        expected.append(INDENTATION).append("1.[" + taskDoneIcon + "] " + taskDescription).append(NEWLINE);
+        expected.append(INDENTATION);
+        expected.append("1.").append(expectedTaskDoneString).append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         assertEquals(expected.toString(), output.toString());
     }
