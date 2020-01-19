@@ -20,7 +20,7 @@ public class Duke {
 
             } else if (input.equals("list")) {
                 if (duke.getSize() == 0) {
-                    System.out.println("Yay! There are no tasks in your list!");
+                    System.out.println("Oops! There are no tasks in your list!");
                 } else {
                     System.out.println("Here are your tasks in your list:");
                     System.out.print(duke);

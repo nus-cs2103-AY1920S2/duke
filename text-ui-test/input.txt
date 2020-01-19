@@ -1,0 +1,21 @@
+hi
+test
+add
+add test9
+list
+todo test9
+todo test 3
+list
+deadline test4 /by Sunday
+list
+event test5 /at 10/2/20 11:59am
+todo test10
+list
+done 2
+done 3
+list
+done 2
+list
+done 4
+list
+bye
