@@ -95,18 +95,32 @@ public class Duke {
                 break;
             case "deadline":
                 // Get deadline, find index of "/by"
-                String delimiter = "/by";
+                String deadlineDelimiter = "/by";
                 // Get first word's index for deadline
                 // 1 additional character is considered for whitespace
-                int deadlineStartIndex = command.indexOf(delimiter) + delimiter.length() + 1;
+                int deadlineStartIndex = command.indexOf(deadlineDelimiter) + deadlineDelimiter.length() + 1;
                 // Remove first word "deadline" and remove delimiter word e.g. " /by "
                 String deadlineDescription = command.substring("deadline".length() + 1,
-                        deadlineStartIndex - delimiter.length() - 2);
+                        deadlineStartIndex - deadlineDelimiter.length() - 2);
                 String deadline = command.substring(deadlineStartIndex);
                 // Add new task
                 Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
                 tasks.add(newDeadlineTask);
                 printTaskAddition(newDeadlineTask);
+                break;
+            case "event":
+                // Find index of delimiter
+                String eventDelimiter = "/at";
+                int eventDelimiterIndex = command.indexOf(eventDelimiter);
+                // Get event description, account for whitespace before delimiter
+                String eventDescription = command.substring("event".length() + 1,
+                        eventDelimiterIndex - 1);
+                // Get event time, account for whitespace after delimiter
+                String eventTime = command.substring(eventDelimiterIndex + eventDelimiter.length() + 1);
+                // Add new event to task list
+                Task newEvent = new Event(eventDescription, eventTime);
+                tasks.add(newEvent);
+                printTaskAddition(newEvent);
                 break;
             default:
                 break;
