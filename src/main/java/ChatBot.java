@@ -24,7 +24,9 @@ public class ChatBot {
         System.out.println("Here are the following commands (case sensitive):");
         System.out.println("1) list: List out all the tasks added");
         System.out.println("2) done x: Set the task number (x) to done");
-        System.out.println("3) Any other text: add that text to the task list!");
+        System.out.println("3) todo [taskname]: Add a To-Do task with taskname!");
+        System.out.println("4) event [taskname] /at [datetime]: Add an event with a taskname together with the date/time!");
+        System.out.println("5) deadline [taskname] /by [datetime]: Add an deadline with a taskname together with the date/time!");
     }
 
     /**

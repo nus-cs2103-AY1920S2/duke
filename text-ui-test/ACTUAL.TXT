@@ -1,0 +1,49 @@
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I am Duke, and I am pleased to serve you!
+Here are the following commands (case sensitive):
+1) list: List out all the tasks added
+2) done x: Set the task number (x) to done
+3) todo [taskname]: Add a To-Do task with taskname!
+4) event [taskname] /at [datetime]: Add an event with a taskname together with the date/time!
+5) deadline [taskname] /by [datetime]: Add an deadline with a taskname together with the date/time!
+	************************
+	borrow book added!
+	************************
+	************************
+	return book added!
+	************************
+	************************
+	project meeting added!
+	************************
+	************************
+	1.[T][✘] borrow book
+	2.[D][✘] return book (by: sunday)
+	3.[E][✘] project meeting (at: Mon 2-4pm)
+	************************
+	************************
+	study for CS2103 added!
+	************************
+	************************
+	swimming added!
+	************************
+	************************
+	Task set to done!
+	************************
+	************************
+	Task set to done!
+	************************
+	************************
+	1.[T][✘] borrow book
+	2.[D][✓] return book (by: sunday)
+	3.[E][✘] project meeting (at: Mon 2-4pm)
+	4.[D][✘] study for CS2103 (by: this week)
+	5.[T][✓] swimming
+	************************
+	************************
+	Bye. Hope to see you again soon!
+	************************
