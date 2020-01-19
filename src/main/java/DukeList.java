@@ -28,9 +28,15 @@ public class DukeList {
         return add(task);
     }
 
-
     public String markDone(int taskID) {
         return list.get(taskID - 1).markDone();
+    }
+
+    public String deleteTask(int taskID) {
+        String output = "Removed this task:\n    " + list.get(taskID - 1);
+        list.remove(taskID - 1);
+        output = output + "\nNow you have "+ list.size() + (list.size() == 1 ? " task" : " tasks") + " in the list.";
+        return output;
     }
 
     public int getSize() {

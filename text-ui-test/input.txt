@@ -1,21 +1,29 @@
 hi
 test
 add
-add test9
+add Buy Textbooks
 list
-todo test9
-todo test 3
+todo Buy Textbooks
+todo Buy Eggs
 list
-deadline test4 /by Sunday
+deadline
+deadline Homework /by Sunday
 list
-event test5 /at 10/2/20 11:59am
+event Project Meeting
+event Project Meeting /at 10/2/20 11:59am
 todo test10
 list
 done 2
 done 3
+deadline Finish Presentation Slides
 list
+deadline Finish Presentation Slides /by 23/1/20
 done 2
 list
 done 4
+done 9
+list
+delete 2
+delete 3
 list
 bye

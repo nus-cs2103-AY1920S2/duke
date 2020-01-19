@@ -32,7 +32,7 @@ public class Task {
             return "Oops! This task was already marked as done!";
         }
         this.isDone = true;
-        return "Marked this task as done: " + taskName;
+        return "Marked this task as done:\n    " + this;
     }
 
     @Override

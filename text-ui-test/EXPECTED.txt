@@ -5,39 +5,42 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 What can I do for you today?
-> Oops! Unknown command!
+> Oops! Unknown action!
 
-> Oops! Unknown command!
+> Oops! Unknown action!
 
-> Oops! Unknown command!
+> Oops! Unknown action!
 
-> Oops! Unknown command!
-
+> 
 > Oops! There are no tasks in your list!
 
 > New task has been added:
-    [T] [✘] test9
+    [T] [✘] Buy Textbooks
 Now you have 1 task in the list.
 
 > New task has been added:
-    [T] [✘] test 3
+    [T] [✘] Buy Eggs
 Now you have 2 tasks in the list.
 
 > Here are your tasks in your list:
-1. [T] [✘] test9
-2. [T] [✘] test 3
+1. [T] [✘] Buy Textbooks
+2. [T] [✘] Buy Eggs
+
+> Oops! Not enough information to create task!
 
 > New task has been added:
-    [D] [✘] test4 (by: Sunday)
+    [D] [✘] Homework (by: Sunday)
 Now you have 3 tasks in the list.
 
 > Here are your tasks in your list:
-1. [T] [✘] test9
-2. [T] [✘] test 3
-3. [D] [✘] test4 (by: Sunday)
+1. [T] [✘] Buy Textbooks
+2. [T] [✘] Buy Eggs
+3. [D] [✘] Homework (by: Sunday)
+
+> Oops! This task needs a date/time!
 
 > New task has been added:
-    [E] [✘] test5 (at: 10/2/20 11:59am)
+    [E] [✘] Project Meeting (at: 10/2/20 11:59am)
 Now you have 4 tasks in the list.
 
 > New task has been added:
@@ -45,40 +48,67 @@ Now you have 4 tasks in the list.
 Now you have 5 tasks in the list.
 
 > Here are your tasks in your list:
-1. [T] [✘] test9
-2. [T] [✘] test 3
-3. [D] [✘] test4 (by: Sunday)
-4. [E] [✘] test5 (at: 10/2/20 11:59am)
+1. [T] [✘] Buy Textbooks
+2. [T] [✘] Buy Eggs
+3. [D] [✘] Homework (by: Sunday)
+4. [E] [✘] Project Meeting (at: 10/2/20 11:59am)
 5. [T] [✘] test10
 
-> Marked this task as done: test 3
+> Marked this task as done:
+    [T] [✓] Buy Eggs
 
-> Marked this task as done: test4 
+> Marked this task as done:
+    [D] [✓] Homework (by: Sunday)
+
+> Oops! This task needs a date/time!
 
 > Here are your tasks in your list:
-1. [T] [✘] test9
-2. [T] [✓] test 3
-3. [D] [✓] test4 (by: Sunday)
-4. [E] [✘] test5 (at: 10/2/20 11:59am)
+1. [T] [✘] Buy Textbooks
+2. [T] [✓] Buy Eggs
+3. [D] [✓] Homework (by: Sunday)
+4. [E] [✘] Project Meeting (at: 10/2/20 11:59am)
 5. [T] [✘] test10
+
+> New task has been added:
+    [D] [✘] Finish Presentation Slides (by: 23/1/20)
+Now you have 6 tasks in the list.
 
 > Oops! This task was already marked as done!
 
 > Here are your tasks in your list:
-1. [T] [✘] test9
-2. [T] [✓] test 3
-3. [D] [✓] test4 (by: Sunday)
-4. [E] [✘] test5 (at: 10/2/20 11:59am)
+1. [T] [✘] Buy Textbooks
+2. [T] [✓] Buy Eggs
+3. [D] [✓] Homework (by: Sunday)
+4. [E] [✘] Project Meeting (at: 10/2/20 11:59am)
 5. [T] [✘] test10
+6. [D] [✘] Finish Presentation Slides (by: 23/1/20)
 
-> Marked this task as done: test5 
+> Marked this task as done:
+    [E] [✓] Project Meeting (at: 10/2/20 11:59am)
+
+> Oops! Task not found!
 
 > Here are your tasks in your list:
-1. [T] [✘] test9
-2. [T] [✓] test 3
-3. [D] [✓] test4 (by: Sunday)
-4. [E] [✓] test5 (at: 10/2/20 11:59am)
+1. [T] [✘] Buy Textbooks
+2. [T] [✓] Buy Eggs
+3. [D] [✓] Homework (by: Sunday)
+4. [E] [✓] Project Meeting (at: 10/2/20 11:59am)
 5. [T] [✘] test10
+6. [D] [✘] Finish Presentation Slides (by: 23/1/20)
+
+> Removed this task:
+    [T] [✓] Buy Eggs
+Now you have 5 tasks in the list.
+
+> Removed this task:
+    [E] [✓] Project Meeting (at: 10/2/20 11:59am)
+Now you have 4 tasks in the list.
+
+> Here are your tasks in your list:
+1. [T] [✘] Buy Textbooks
+2. [D] [✓] Homework (by: Sunday)
+3. [T] [✘] test10
+4. [D] [✘] Finish Presentation Slides (by: 23/1/20)
 
 > Thank you for using Duke.
 Have a nice day!

@@ -36,8 +36,13 @@ public class Duke {
                     parameters = result[1];
 
                     if (command.equals("done")) {
-                        int taskID = Integer.parseInt(parameters);
-                        System.out.println(duke.markDone(taskID));
+                        try {
+                            int taskID = Integer.parseInt(parameters);
+                            System.out.println(duke.markDone(taskID));
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Oops! Task not found!");
+                        }
+
 
                     } else if (command.equals("todo")) {
                         String taskName = parameters;
@@ -58,19 +63,29 @@ public class Duke {
                         try {
                             String[] taskDetails = parameters.split("/at");
                             String taskName = taskDetails[0].strip();
-                            String taskTime = " (by: " + taskDetails[1].strip() + ")";
+                            String taskTime = " (at: " + taskDetails[1].strip() + ")";
                             System.out.println(duke.newEvent('E', taskName, taskTime));
 
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("Oops! This task needs a date/time!");
                         }
+                    } else if (command.equals("delete")) {
+                        try {
+                            int taskID = Integer.parseInt(parameters);
+                            System.out.println(duke.deleteTask(taskID));
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Oops! Task not found!");
+                        }
+
                     }
 
                 } catch (ArrayIndexOutOfBoundsException e) {
                     if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                         System.out.println("Oops! Not enough information to create task!");
-                    } else if (command.equals("done")) {
+
+                    } else if (command.equals("done") || command.equals("delete")) {
                         System.out.println("Oops! Task not found!");
+
                     } else {
                         System.out.println("Oops! Unknown action!");
                     }
