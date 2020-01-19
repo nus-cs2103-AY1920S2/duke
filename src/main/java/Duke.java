@@ -31,8 +31,22 @@ public class Duke {
                         task.markAsDone();
                         System.out.println("     Nice! I've marked this task as done:");
                         System.out.println("       " + task);
-                    } catch (Exception e) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("OOPS!!! Which task is done?");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("OOPS!!! Do you have this task number?");
+                    }
+                } else if (command[0].equals("delete")) {
+                    try {
+                        Task task = tasks.get(Integer.parseInt(command[1]) - 1);
+                        tasks.remove(task);
+                        System.out.println("     Noted. I've removed this task:");
+                        System.out.println("       " + task);
+                        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("OOPS!!! Which task should I remove?");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("OOPS!!! Do you have this task number?");
                     }
                 } else {
                     Task task = null;
