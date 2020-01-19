@@ -6,7 +6,7 @@ public class Duke {
     private static final String indent = "    ";
     private static final String horizontal_line = "____________________________________________________________";
 
-    private static List<String> list = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -21,9 +21,14 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                printList();
+                printTasks();
+            } else if (input.substring(0, 4).equals("done")) {
+                int taskId = Integer.parseInt(input.substring(5));
+                Task task = tasks.get(taskId - 1);
+                task.markAsDone();
+                print("Nice! I've marked this task as done: \n  " + task);
             } else {
-                list.add(input);
+                tasks.add(new Task(input));
                 print("added: " + input);
             }
             input = sc.nextLine();
@@ -41,10 +46,10 @@ public class Duke {
         System.out.println(indent + horizontal_line + "\n");
     }
 
-    private static void printList() {
+    private static void printTasks() {
         System.out.println(indent + horizontal_line);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(indent + (i + 1) + ". " + list.get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(indent + (i + 1) + ". " + tasks.get(i));
         }
         System.out.println(indent + horizontal_line + "\n");
     }
