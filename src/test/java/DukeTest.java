@@ -52,14 +52,17 @@ class DukeTest {
     @DisplayName("Duke: Test for Greeting message")
     void greet() {
         duke.greet();
-        String expected = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n" + NEWLINE;
+        String expected = "  __  __        _____       _           _   " + NEWLINE +
+                " |  \\/  |      |  __ \\     | |         | |  " + NEWLINE +
+                " | \\  / |_ __  | |__) |___ | |__   ___ | |_ " + NEWLINE +
+                " | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|" + NEWLINE +
+                " | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ " + NEWLINE +
+                " |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|" + NEWLINE;
         expected += HORIZONTAL_DIVIDER;
-        expected += INDENTATION + "Hello! I'm Duke" + NEWLINE;
-        expected += INDENTATION + "What can I do for you?" + NEWLINE;
+        expected += INDENTATION + "Hello friend. Hello friend?" + NEWLINE;
+        expected += INDENTATION + "That's lame. Maybe I should give you a name." + NEWLINE;
+        expected += INDENTATION + "But that's a slippery slope, you're only in my head," + NEWLINE;
+        expected += INDENTATION + "we have to remember that." + NEWLINE;
         expected += HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString(), "Should display greeting message");
     }
@@ -215,7 +218,7 @@ class DukeTest {
     void goodbye() {
         duke.goodbye();
         String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Bye. Hope to see you again soon!" + NEWLINE +
+                INDENTATION + "Goodbye friend." + NEWLINE +
                 HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString(), "Should print goodbye message");
     }

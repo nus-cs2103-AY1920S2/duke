@@ -29,15 +29,18 @@ public class Duke {
      * Prints greeting message.
      */
     protected void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "  __  __        _____       _           _   " + NEWLINE +
+                " |  \\/  |      |  __ \\     | |         | |  " + NEWLINE +
+                " | \\  / |_ __  | |__) |___ | |__   ___ | |_ " + NEWLINE +
+                " | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|" + NEWLINE +
+                " | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ " + NEWLINE +
+                " |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|";
         System.out.println(logo);
         printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Hello! I'm Duke");
-        printTextWithIndentation("What can I do for you?");
+        printTextWithIndentation("Hello friend. Hello friend?");
+        printTextWithIndentation("That's lame. Maybe I should give you a name.");
+        printTextWithIndentation("But that's a slippery slope, you're only in my head,");
+        printTextWithIndentation("we have to remember that.");
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 
@@ -46,7 +49,7 @@ public class Duke {
      */
     protected void goodbye() {
         printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Bye. Hope to see you again soon!");
+        printTextWithIndentation("Goodbye friend.");
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 
@@ -129,7 +132,11 @@ public class Duke {
         scanner.close();
     }
 
-    private void printTaskAddition(Task task) {
+    protected void throwAndHandleDukeException(String message) {
+
+    }
+
+    protected void printTaskAddition(Task task) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Got it. I've added this task:");
         // Add more indentation for task description
@@ -138,7 +145,7 @@ public class Duke {
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 
-    private void markTaskAsDone(Task task) {
+    protected void markTaskAsDone(Task task) {
         task.markAsDone();
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Nice! I've marked this task as done:");
