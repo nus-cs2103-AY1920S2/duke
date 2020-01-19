@@ -12,12 +12,16 @@ public class Duke {
         tasks = new ArrayList<>();
         String input = sc.nextLine();
         while (true) {
-            switch (input) {
+            switch (input.split("\\s+")[0]) {
             case "bye":
                 exit();
                 break;
             case "list":
                 list();
+                break;
+            case "done":
+                int taskNumber = Integer.parseInt(input.split("\\s+")[1]);
+                completeTask(taskNumber);
                 break;
             default:
                 addTask(input);
@@ -58,6 +62,13 @@ public class Duke {
             list.append((i + 1) + ". " + tasks.get(i));
         }
         System.out.println(style(list.toString()));
+    }
+
+    private static void completeTask(int taskNumber) {
+        int taskIndex = taskNumber - 1;
+        Task completedTask = tasks.get(taskIndex).complete();
+        tasks.set(taskIndex, completedTask);
+        System.out.println(style("Nice! I've marked this task as done:\n  " + completedTask));
     }
 
     private static String style(String message) {
