@@ -46,6 +46,9 @@ public class Duke {
             case "done":
                 completeTask(inputArr);
                 break;
+            case "delete":
+                deleteTask(inputArr);
+                break;
             case "list":
                 printTasks();
                 break;
@@ -97,11 +100,11 @@ public class Duke {
 
     private static void addTask(Task task) {
         tasks.add(task);
-        System.out.println(indent + horizontal_line);
-        System.out.println(indent + "Got it. I've added this task: ");
-        System.out.println(indent + "  " + task);
-        System.out.println(indent + "Now you have " + Task.getNumOfTasks() + " tasks in the list.");
-        System.out.println(indent + horizontal_line + "\n");
+        List<String> lines = new ArrayList<>();
+        lines.add("Got it. I've added this task: ");
+        lines.add("  " + task);
+        lines.add("Now you have " + Task.getNumOfTasks() + " tasks in the list.");
+        print(lines);
     }
 
     private static void completeTask(String[] inputArr) throws DukeException {
@@ -112,7 +115,33 @@ public class Duke {
             int taskId = Integer.parseInt(inputArr[1]);
             Task task = tasks.get(taskId - 1);
             task.markAsDone();
-            print("Nice! I've marked this task as done: \n  " + task);
+            List<String> lines = new ArrayList<>();
+            lines.add("Nice! I've marked this task as done: ");
+            lines.add("  " + task);
+            print(lines);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The ID of a task done cannot be empty.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task cannot be found.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("The ID of task done should be a number.");
+        }
+    }
+
+    private static void deleteTask(String[] inputArr) throws DukeException {
+        try {
+            if (inputArr[1].trim().equals("")) {
+                throw new DukeException("The ID of a task done cannot be empty.");
+            }
+            int taskId = Integer.parseInt(inputArr[1]);
+            Task task = tasks.get(taskId - 1);
+            tasks.remove(task);
+            Task.numOfTasks--;
+            List<String> lines = new ArrayList<>();
+            lines.add("Noted. I've removed this task: ");
+            lines.add("  " + task);
+            lines.add("Now you have " + Task.getNumOfTasks() + " tasks in the list.");
+            print(lines);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The ID of a task done cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
@@ -131,10 +160,23 @@ public class Duke {
         System.out.println(indent + horizontal_line + "\n");
     }
 
+    private static void print(List<String> lines) {
+        System.out.println(indent + horizontal_line);
+        for (String line : lines) {
+            System.out.println(indent + line);
+        }
+        System.out.println(indent + horizontal_line + "\n");
+    }
+
     private static void printTasks() {
         System.out.println(indent + horizontal_line);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(indent + (i + 1) + ". " + tasks.get(i));
+        if (tasks.isEmpty()) {
+            System.out.println(indent + "There are no tasks in the list.");
+        } else {
+            System.out.println(indent + "Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(indent + (i + 1) + ". " + tasks.get(i));
+            }
         }
         System.out.println(indent + horizontal_line + "\n");
     }
