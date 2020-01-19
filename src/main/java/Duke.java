@@ -82,20 +82,52 @@ public class Duke {
                 // Get task to mark as done
                 int taskNumber = Integer.parseInt(commandWords[1]);
                 Task task = tasks.get(taskNumber - 1);
-                task.markAsDone();
-                printTextWithIndentation(HORIZONTAL_BAR);
-                printTextWithIndentation("Nice! I've marked this task as done:");
-                printTextWithIndentation(task.toString());
-                printTextWithIndentation(HORIZONTAL_BAR);
+                markTaskAsDone(task);
+                break;
+            case "todo":
+                // Get task description, get substring starting at index 5
+                // Remove first word
+                String todoDescription = command.substring("todo".length() + 1);
+                Task newTodoTask = new Todo(todoDescription);
+                tasks.add(newTodoTask);
+                // Print out information about added task
+                printTaskAddition(newTodoTask);
+                break;
+            case "deadline":
+                // Get deadline, find index of "/by"
+                String delimiter = "/by";
+                // Get first word's index for deadline
+                // 1 additional character is considered for whitespace
+                int deadlineStartIndex = command.indexOf(delimiter) + delimiter.length() + 1;
+                // Remove first word "deadline" and remove delimiter word e.g. " /by "
+                String deadlineDescription = command.substring("deadline".length() + 1,
+                        deadlineStartIndex - delimiter.length() - 2);
+                String deadline = command.substring(deadlineStartIndex);
+                // Add new task
+                Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
+                tasks.add(newDeadlineTask);
+                printTaskAddition(newDeadlineTask);
                 break;
             default:
-                tasks.add(new Task(command));
-                printTextWithIndentation(HORIZONTAL_BAR);
-                printTextWithIndentation("added: " + command);
-                printTextWithIndentation(HORIZONTAL_BAR);
                 break;
             }
         }
         scanner.close();
+    }
+
+    private void printTaskAddition(Task task) {
+        printTextWithIndentation(HORIZONTAL_BAR);
+        printTextWithIndentation("Got it. I've added this task:");
+        printTextWithIndentation(task.toString());
+        printTextWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
+        printTextWithIndentation(HORIZONTAL_BAR);
+    }
+
+    private void markTaskAsDone(Task task) {
+        task.markAsDone();
+        printTextWithIndentation(HORIZONTAL_BAR);
+        printTextWithIndentation("Nice! I've marked this task as done:");
+        printTextWithIndentation(task.toString());
+        printTextWithIndentation(HORIZONTAL_BAR);
     }
 }
