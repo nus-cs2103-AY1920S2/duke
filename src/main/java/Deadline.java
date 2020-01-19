@@ -1,21 +1,19 @@
 public class Deadline extends Task {
-    public String date;
     public Deadline(String description, String date) {
-        super(description);
-        this.date = date;
+        super(description, date);
         type = "D";
     }
 
     @Override
     public String toString(){
-        return super.toString() + "(by: " + date + ")";
+        return super.toString() + "(by: " + printDateTime()  + ")";
     }
 
 
     @Override
     public String print(){
         return getType() + " | " + (isDone ? String.valueOf(1) : String.valueOf(0)) + " | " + getDescription()
-                + (!date.equals("") ? " | " + date : "");
+                + (!userKeyedDateString.equals("") ? " | " + printDateTime() : "");
     }
 
 

@@ -1,20 +1,20 @@
+import java.util.stream.Collectors;
+import java.util.Arrays;
 public class EventObj extends Task {
-    protected String datetime;
     public EventObj(String description, String datetime) {
-        super(description);
-        this.datetime = datetime;
+        super(description, datetime);
         type = "E";
     }
 
     @Override
     public String toString(){
-        return super.toString() + "(at: " + datetime + ")";
+        return super.toString() + "(at: " + printDateTime() + ")";
     }
 
     @Override
     public String print(){
         return getType() + " | " + (isDone ? String.valueOf(1) : String.valueOf(0)) + " | " + getDescription()
-                + (!datetime.equals("") ? " | " + datetime : "");
+                + (!userKeyedDateString.equals("") ? " | " + printDateTime() : "");
     }
 
     public static EventObj parse(String taskString){
@@ -22,7 +22,7 @@ public class EventObj extends Task {
         String desc = parts[2];
         Task t = new EventObj(desc, "");
         if (parts.length > 3){
-            t = new EventObj(desc, parts[3]);
+            t = new EventObj(desc, String.join("", java.util.Arrays.stream(parts).skip(3).toArray(String[]::new)));
         }
         t.isDone = parts[1].trim().equals("1") ? true : false;
 
