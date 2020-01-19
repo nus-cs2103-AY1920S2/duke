@@ -41,12 +41,32 @@ public class Duke {
                         }
 
                         int index = Integer.parseInt(descriptionTokens[1]) - 1;
-                        if (index >= taskList.size() || index <= 0) {
+                        if (index >= taskList.size() || index < 0) {
                             throw new InvalidListItemAelitaException();
                         }
                         taskList.get(index).markAsDone();
                         System.out.println("> Another task off the list. Good job!");
-                        System.out.println("  " + taskList.get(Integer.parseInt(descriptionTokens[1]) - 1));
+                        System.out.println("  " + taskList.get(index));
+
+                    } else if (descriptionTokens[0].toLowerCase().equals("delete")) {
+                        if (descriptionTokens.length < 2) {
+                            throw new InsufficientArgumentAelitaException("delete");
+                        }
+
+                        int index = Integer.parseInt(descriptionTokens[1]) - 1;
+                        if (index >= taskList.size() || index < 0) {
+                            throw new InvalidListItemAelitaException();
+                        }
+
+                        System.out.println("> The task has been removed.");
+                        System.out.println("  " + taskList.get(index));
+                        taskList.remove(index);
+                        Task.setTotalTaskCount(Task.getTotalTaskCount() - 1);
+                        if(Task.getTotalTaskCount() == 0) {
+                            System.out.println("  You have no more task today.");
+                        } else {
+                            System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                        }
 
                     } else if (descriptionTokens[0].toLowerCase().equals("todo")) {
                         if (descriptionTokens.length == 1) {
@@ -132,6 +152,9 @@ public class Duke {
                     case "date-time":
                         System.out.println("> I don't recognize the date or time.");
                         break;
+                    case "delete":
+                        System.out.println("> Which task do you want to delete?");
+                        break;
                     case "description":
                         System.out.println("> What is the task about?");
                         break;
@@ -162,8 +185,8 @@ public class Duke {
     }
 
     private static void printGreeting() {
-        System.out.println("Hi! I'm Aelita, guardian of Lyoko.");
-        System.out.println("How can I help you?");
+        System.out.println("> Hi! I'm Aelita, guardian of Lyoko.");
+        System.out.println("  How can I help you?");
         printDivider();
     }
 

@@ -29,6 +29,10 @@ public class Task {
         isDone = true;
     }
 
+    public static void setTotalTaskCount(int totalTaskCount) {
+        Task.totalTaskCount = totalTaskCount;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
