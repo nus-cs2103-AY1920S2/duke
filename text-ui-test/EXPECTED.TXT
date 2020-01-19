@@ -38,9 +38,9 @@ Here are the following commands (case sensitive):
     Task set to done!
     ************************
     ************************
-	1.[T][✘] borrow book
-	2.[D][✓] return book (by: sunday)
-	3.[E][✘] project meeting (at: Mon 2-4pm)
+    1.[T][✘] borrow book
+    2.[D][✓] return book (by: sunday)
+    3.[E][✘] project meeting (at: Mon 2-4pm)
     4.[D][✘] study for CS2103 (by: this week)
     5.[T][✓] swimming
     ************************
