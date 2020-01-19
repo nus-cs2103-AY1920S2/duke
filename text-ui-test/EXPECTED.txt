@@ -1,0 +1,68 @@
+     __             _   _     _
+    /  \           | | / \   | |
+   / /\ \     ___  | | \_/ __| |__   ___ _
+  / /__\ \   / _ \ | |  _ |__   __| / _ | |
+ / ______ \ |  __/ | | | |   | |   | |_|  |
+/_/      \_\ \___\ |_| |_|   |_|    \___/\_\
+============================================
+Hi! I'm Aelita, guardian of Lyoko.
+How can I help you?
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [T][✘] read book
+  Now you've 1 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [D][✘] return book (by: June 6th)
+  Now you've 2 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> Another task off the list. Good job!
+  [T][✓] read book
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [E][✘] project meeting (at: Aug 6th 2-4pm)
+  Now you've 3 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [T][✘] join sports club
+  Now you've 4 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> Another task off the list. Good job!
+  [T][✓] join sports club
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [T][✘] borrow book
+  Now you've 5 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> Here's your list:
+  1.[T][✓] read book
+  2.[D][✘] return book (by: June 6th)
+  3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+  4.[T][✓] join sports club
+  5.[T][✘] borrow book
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [D][✘] return book (by: Sunday)
+  Now you've 6 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [E][✘] project meeting (at: Mon 2-4pm)
+  Now you've 7 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> I've got your back. Adding the new task:
+  [D][✘] do homework (by: no idea :-P)
+  Now you've 8 task(s) in your list
+--------------------------------------------
+--------------------------------------------
+> It's nice talking to you. See you soon! ;)

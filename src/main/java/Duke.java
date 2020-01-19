@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//deadline timing not working returns null
-//event toString not done
-
 public class Duke {
 
     public static void main(String[] args) {
@@ -25,8 +22,9 @@ public class Duke {
                     break;
 
                 } else if (descriptionTokens[0].toLowerCase().equals("list")) {
+                    System.out.println("> Here's your list:");
                     for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println((i + 1) + "." + taskList.get(i));
+                        System.out.println("  " + (i + 1) + "." + taskList.get(i));
                     }
 
                 } else if (descriptionTokens[0].toLowerCase().equals("done")) {
@@ -42,7 +40,7 @@ public class Duke {
                     }
 
                     taskList.add(new Todo(builder.toString()));
-                    System.out.println("> I've got your back. Adding the new task: ");
+                    System.out.println("> I've got your back. Adding the new task:");
                     System.out.println("  " + taskList.get(taskList.size() - 1).toString());
                     System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
 
@@ -58,7 +56,7 @@ public class Duke {
                 //Check what type of task
                 if (descriptionTokens[0].toLowerCase().equals("deadline")) {
                     taskList.add(new Deadline(description.toString(), input[1].substring(3)));
-                    System.out.println("> I've got your back. Adding the new task: ");
+                    System.out.println("> I've got your back. Adding the new task:");
                     System.out.println("  " + taskList.get(taskList.size() - 1).toString());
                     System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
 
@@ -75,7 +73,7 @@ public class Duke {
 
                     taskList.add(new Event(description.toString(), date.toString(), frontTokens[frontTokens.length - 1],
                             endTokens[1]));
-                    System.out.println("> I've got your back. Adding the new task: ");
+                    System.out.println("> I've got your back. Adding the new task:");
                     System.out.println("  " + taskList.get(taskList.size() - 1).toString());
                     System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
 
