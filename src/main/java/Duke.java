@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Todo todo = new Todo();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,11 +14,13 @@ public class Duke {
 
         while(true) {
             System.out.print("> ");
-            String input = scanner.next();
+            String input = scanner.nextLine();
             if (input.equals("bye")) {
                 break;
+            } else if (input.equals("list")) {
+                System.out.print(todo);
             } else {
-                System.out.println(input);
+                System.out.println(todo.add(input));
             }
         }
 
