@@ -1,0 +1,82 @@
+
+    ________________________________________________________
+     Hello! I'm Duke
+     What can I do for you?
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [T][N] read book
+     Now you have 1 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [D][N] return book (by: June 6th)
+     Now you have 2 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [E][N] project meeting (at: Aug 6th 2-4pm)
+     Now you have 3 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [T][N] join sports club
+     Now you have 4 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Nice! I've marked this task as done:
+       [T][Y] read book
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Nice! I've marked this task as done:
+       [T][Y] join sports club
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [T][N] borrow book
+     Now you have 5 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Here are the tasks in your list:
+     1. [T][Y] read book
+     2. [D][N] return book (by: June 6th)
+     3. [E][N] project meeting (at: Aug 6th 2-4pm)
+     4. [T][Y] join sports club
+     5. [T][N] borrow book
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [D][N] return book (by: Sunday)
+     Now you have 6 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Got it. I've added this task:
+       [E][N] project meeting (at: Mon 2-4pm)
+     Now you have 7 tasks in the list.
+    ________________________________________________________
+
+
+    ________________________________________________________
+     Bye. Hope to see you again soon!
+    ________________________________________________________
+
