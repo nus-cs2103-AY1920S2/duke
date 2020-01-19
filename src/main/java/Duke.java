@@ -12,9 +12,10 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "What can I do for you today?");
 
-        while(true) {
+        while (true) {
             System.out.print("> ");
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().strip();
+
             if (input.equals("bye")) {
                 break;
 
@@ -26,36 +27,58 @@ public class Duke {
                     System.out.print(duke);
                 }
 
-            } else if (input.contains("done ") && input.substring(0, 4).equals("done")) {
-                int taskID = (Integer.parseInt(input.substring(5)));
-                System.out.println(duke.markDone(taskID));
+            } else {
+                String command = "";
+                String parameters = "";
+                try {
+                    String[] result = input.split(" ", 2);
+                    command = result[0];
+                    parameters = result[1];
 
-            } else if (input.contains("todo ") && input.substring(0, 4).equals("todo")) {
-                String newTaskName = input.substring(5);
-                char taskType = 'T';
-                System.out.println(duke.newTodo(taskType, newTaskName));
+                    if (command.equals("done")) {
+                        int taskID = Integer.parseInt(parameters);
+                        System.out.println(duke.markDone(taskID));
 
-            } else if (input.contains("deadline ") && input.substring(0, 8).equals("deadline")) {
-                String[] taskDetails = input.substring(9).split("/by");
-                String newTaskName = taskDetails[0];
-                String newTaskDeadline = "(by:" + taskDetails[1] + ")";
-                char taskType = 'D';
-                System.out.println(duke.newDeadline(taskType, newTaskName, newTaskDeadline));
+                    } else if (command.equals("todo")) {
+                        String taskName = parameters;
+                        System.out.println(duke.newTodo('T', taskName));
 
-            } else if (input.contains("event ") && input.substring(0, 5).equals("event")) {
-                String[] taskDetails = input.substring(6).split("/at");
-                String newTaskName = taskDetails[0];
-                String newTaskDeadline = "(at:" + taskDetails[1] + ")";
-                char taskType = 'E';
-                System.out.println(duke.newEvent(taskType, newTaskName, newTaskDeadline));
+                    } else if (command.equals("deadline")) {
+                        try {
+                            String[] taskDetails = parameters.split("/by");
+                            String taskName = taskDetails[0].strip();
+                            String taskTime = " (by: " + taskDetails[1].strip() + ")";
+                            System.out.println(duke.newDeadline('D', taskName, taskTime));
 
-            }
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("Oops! This task needs a date/time!");
+                        }
 
-            else {
-                System.out.println("Oops! Unknown command!");
+                    } else if (command.equals("event")) {
+                        try {
+                            String[] taskDetails = parameters.split("/at");
+                            String taskName = taskDetails[0].strip();
+                            String taskTime = " (by: " + taskDetails[1].strip() + ")";
+                            System.out.println(duke.newEvent('E', taskName, taskTime));
+
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("Oops! This task needs a date/time!");
+                        }
+                    }
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                        System.out.println("Oops! Not enough information to create task!");
+                    } else if (command.equals("done")) {
+                        System.out.println("Oops! Task not found!");
+                    } else {
+                        System.out.println("Oops! Unknown action!");
+                    }
+                }
             }
 
             System.out.println("");
+
         }
 
         System.out.println("Thank you for using Duke.\nHave a nice day!\n");

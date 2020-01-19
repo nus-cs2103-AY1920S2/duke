@@ -9,12 +9,9 @@ public class DukeList {
 
     public String add(Task task) {
         this.list.add(task);
-
-
         return "New task has been added:\n    " + task
                 + "\nNow you have "+ list.size() + (list.size() == 1 ? " task" : " tasks") + " in the list.";
     }
-
 
     public String newTodo(char taskType, String taskName) {
         Task task = new Todo(taskName, taskType);
