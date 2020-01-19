@@ -5,13 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DukeTest {
     final String NEWLINE = System.lineSeparator();
@@ -71,7 +68,8 @@ class DukeTest {
     void dukeException_invalidCommand_displayInvalidCommandMessage() {
         String input = "blah" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
-                () -> duke.processCommands(new ByteArrayInputStream(input.getBytes())));
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
         // Check exception message
         assertEquals(exceptionIcon + " OOPS!!! I'm sorry, but I don't know what that means :-(",
                 exception.getMessage());
@@ -87,7 +85,14 @@ class DukeTest {
         String input = String.format("event %s %s %s", eventDescription, delimiter,
                 eventTime);
         input += NEWLINE + "bye";
-        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        try {
+            duke.processCommands(new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        } catch (IOException ioException) {
+            fail("Should not throw IOException");
+        } catch (DukeException dukeException) {
+            fail("Should not throw exception");
+        }
         String expectedEventDescription = "  " + String.format("[E][%s] %s (at: %s)",
                 taskNotDoneIcon, eventDescription, eventTime);
         String expected = HORIZONTAL_DIVIDER +
@@ -112,7 +117,14 @@ class DukeTest {
         String input = String.format("deadline %s %s %s", deadlineDescription,
                 delimiter, deadline);
         input += NEWLINE + "bye";
-        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        try {
+            duke.processCommands(new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        } catch (IOException ioException) {
+            fail("Should not throw IOException");
+        } catch (DukeException dukeException) {
+            fail("Should not throw exception");
+        }
         String expectedDeadlineDescription = "  " + String.format("[D][%s] %s (by: %s)",
                 taskNotDoneIcon, deadlineDescription, deadline);
         String expected = HORIZONTAL_DIVIDER +
@@ -132,7 +144,14 @@ class DukeTest {
     @DisplayName("Duke: Test for Immediate exit command")
     void processCommands_exitCommand_noMessagePrinted() {
         String input = "bye" + NEWLINE;
-        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        try {
+            duke.processCommands(new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        } catch (IOException ioException) {
+            fail("Should not throw IOException");
+        } catch (DukeException dukeException) {
+            fail("Should not throw exception");
+        }
         String expected = "";
         assertEquals(expected, output.toString(),
                 "Immediate exit: No output should be present");
@@ -144,7 +163,14 @@ class DukeTest {
         String input = "todo read book" + NEWLINE +
                 "todo return book" + NEWLINE +
                 "list" + NEWLINE + "bye";
-        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        try {
+            duke.processCommands(new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        } catch (IOException ioException) {
+            fail("Should not throw IOException");
+        } catch (DukeException dukeException) {
+            fail("Should not throw exception");
+        }
         StringBuilder expected = new StringBuilder();
         // Add first task
         String firstTaskDescription = "  " + String.format("[T][%s] read book", taskNotDoneIcon);
@@ -183,7 +209,14 @@ class DukeTest {
                 "list" + NEWLINE +
                 "done 1" + NEWLINE +
                 "list" + NEWLINE + "bye";
-        duke.processCommands(new ByteArrayInputStream(input.getBytes()));
+        try {
+            duke.processCommands(new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        } catch (IOException ioException) {
+            fail("Should not throw IOException");
+        } catch (DukeException dukeException) {
+            fail("Should not throw exception");
+        }
         // Add task
         StringBuilder expected = new StringBuilder();
         String expectedTaskDescription = String.format("[T][%s] %s", taskNotDoneIcon, taskDescription);
