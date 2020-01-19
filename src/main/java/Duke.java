@@ -20,35 +20,79 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            String[] inputArr = input.split(" ", 2);
-            switch(inputArr[0]) {
-                case "todo":
-                    addTask(new Todo(inputArr[1]));
-                    break;
-                case "deadline":
-                    String[] deadlineArr = inputArr[1].split(" /by ");
-                    addTask(new Deadline(deadlineArr[0], deadlineArr[1]));
-                    break;
-                case "event":
-                    String[] eventArr = inputArr[1].split(" /at ");
-                    addTask(new Event(eventArr[0], eventArr[1]));
-                    break;
-                case "done":
-                    int taskId = Integer.parseInt(inputArr[1]);
-                    Task task = tasks.get(taskId - 1);
-                    task.markAsDone();
-                    print("Nice! I've marked this task as done: \n  " + task);
-                    break;
-                case "list":
-                    printTasks();
-                    break;
-                default:
-                    print("Invalid input.");
+            try {
+                run(input);
+            } catch (DukeException e) {
+                print("OOPS!!! " + e.getMessage());
             }
             input = sc.nextLine();
         }
         print("Bye. Hope to see you again soon!");
         sc.close();
+    }
+
+    private static void run(String input) throws DukeException {
+        String[] inputArr = input.split(" ", 2);
+        switch(inputArr[0]) {
+            case "todo":
+                addTodo(inputArr);
+                break;
+            case "deadline":
+                addDeadline(inputArr);
+                break;
+            case "event":
+                addEvent(inputArr);
+                break;
+            case "done":
+                completeTask(inputArr);
+                break;
+            case "list":
+                printTasks();
+                break;
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static void addTodo(String[] inputArr) throws DukeException {
+        try {
+            if (inputArr[1].trim().equals("")) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+            addTask(new Todo(inputArr[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+    }
+
+    private static void addDeadline(String[] inputArr) throws DukeException {
+        try {
+            if (inputArr[1].trim().equals("")) {
+                throw new DukeException("The description and due date of a deadline cannot be empty.");
+            }
+            String[] deadlineArr = inputArr[1].split(" /by ");
+            if (deadlineArr[0].trim().equals("") || deadlineArr[1].trim().equals("")) {
+                throw new DukeException("The description and due date of a deadline cannot be empty.");
+            }
+            addTask(new Deadline(deadlineArr[0], deadlineArr[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The description and due date of a deadline cannot be empty.");
+        }
+    }
+
+    private static void addEvent(String[] inputArr) throws DukeException {
+        try {
+            if (inputArr[1].trim().equals("")) {
+                throw new DukeException("The description and time of an event cannot be empty.");
+            }
+            String[] eventArr = inputArr[1].split(" /at ");
+            if (eventArr[0].trim().equals("") || eventArr[1].trim().equals("")) {
+                throw new DukeException("The description and time of an event cannot be empty.");
+            }
+            addTask(new Event(eventArr[0], eventArr[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The description and time of an event cannot be empty.");
+        }
     }
 
     private static void addTask(Task task) {
@@ -58,6 +102,24 @@ public class Duke {
         System.out.println(indent + "  " + task);
         System.out.println(indent + "Now you have " + Task.getNumOfTasks() + " tasks in the list.");
         System.out.println(indent + horizontal_line + "\n");
+    }
+
+    private static void completeTask(String[] inputArr) throws DukeException {
+        try {
+            if (inputArr[1].trim().equals("")) {
+                throw new DukeException("The ID of a task done cannot be empty.");
+            }
+            int taskId = Integer.parseInt(inputArr[1]);
+            Task task = tasks.get(taskId - 1);
+            task.markAsDone();
+            print("Nice! I've marked this task as done: \n  " + task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The ID of a task done cannot be empty.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task cannot be found.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("The ID of task done should be a number.");
+        }
     }
 
     private static void print(String text) {

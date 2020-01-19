@@ -10,11 +10,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "Y" : "N"); //return tick or X symbols
+        return (isDone ? "Y" : "N");
 //        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("Task is already marked as done.");
+        }
         this.isDone = true;
     }
 
