@@ -26,12 +26,17 @@ public class Duke {
                 command = sc.nextLine();
                 continue;
             }
-            if (command.contains("done")){
+            else if (command.contains("done")){
                 String[] splitCommand = command.split(" ");
                 int index = Integer.parseInt(splitCommand[1]);
                 dukeList.get(index - 1).markAsDone();
                 System.out.println("You have completed this task.\n");
                 System.out.println(dukeList.get(index - 1));
+                command = sc.nextLine();
+                continue;
+            }
+            else if (command.contains("delete")) {
+                Duke.deleteTask(command, dukeList);
                 command = sc.nextLine();
                 continue;
             }
@@ -97,5 +102,12 @@ public class Duke {
         else {
             throw (new CommandException());
         }
+    }
+    public static void deleteTask(String str, ArrayList<Task> dukeList) {
+        String[] splitStr = str.split(" ");
+        int index = Integer.parseInt(splitStr[1]) - 1;
+        System.out.println(dukeList.get(index) + " has been removed.");
+        dukeList.remove(index);
+        System.out.println("Items in the list: " + dukeList.size());
     }
 }
