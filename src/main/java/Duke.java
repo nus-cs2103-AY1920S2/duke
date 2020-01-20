@@ -55,6 +55,9 @@ public class Duke {
     /**
      * Run the duke program, parse each command entered by user
      * and execute the command
+     * @param  input   the input by the user
+     * @param  tasks   the list of all tasks
+     * @return a list of updated tasks
      */
     public static List<Task> executeCommand(String input, List<Task> tasks) throws DukeException {
         String[] inputTokens = input.split(" ");
@@ -78,9 +81,14 @@ public class Duke {
                 break;
             case "done":
                 // Mark the task with given index as done
-                int index = Integer.parseInt(inputTokens[1]) - 1;
-                if (index < tasks.size()) {
-                    Task task = tasks.get(index);
+                int doneIndex;
+                try {
+                    doneIndex = Integer.parseInt(inputTokens[1]) - 1;
+                } catch (Exception e) {
+                    throw new DukeException("☹ OOPS!!! No such task index!");
+                }
+                if (doneIndex < tasks.size()) {
+                    Task task = tasks.get(doneIndex);
                     task.markAsDone(true);
                     prettyPrint("Nice! I've marked this task as done: \n" +
                             "       " + task);
@@ -125,6 +133,21 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
                 }
                 break;
+            case "delete":
+                int deleteIndex;
+                try {
+                    deleteIndex = Integer.parseInt(inputTokens[1]) - 1;
+                } catch (Exception e) {
+                    throw new DukeException("☹ OOPS!!! No such task index!");
+                }
+                if (deleteIndex < tasks.size()) {
+                    Task deleteTask = tasks.get(deleteIndex);
+                    tasks.remove(deleteIndex);
+                    printDeleteTask(deleteTask, tasks.size());
+                } else {
+                    throw new DukeException("☹ OOPS!!! No such task index!");
+                }
+                break;
             default:
                 // Cannot parse command, throw exception
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -155,6 +178,19 @@ public class Duke {
         String taskWord = (size > 1) ? "tasks" : "task";
         prettyPrint("Got it. I've added this task: \n" +
                 "       " + task + "\n"+
+                "     Now you have " + size + " " + taskWord + " in the list.");
+    }
+
+    /**
+     * Format the task deleted into a pretty format and print it
+     *
+     * @param  task   the task deleted
+     * @param  size   the total number of tasks
+     */
+    public static void printDeleteTask(Task task, Integer size) {
+        String taskWord = (size > 1) ? "tasks" : "task";
+        prettyPrint("Noted. I've removed this task: \n" +
+                "       " + task + "\n" +
                 "     Now you have " + size + " " + taskWord + " in the list.");
     }
 }
