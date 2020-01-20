@@ -11,12 +11,12 @@ public class Duke { //extends Application {
                 "     Hello! I'm Grapie\n" +
                 "     What can I do for you?\n" +
                 "    #__________________________________________________________#");
+        
     }
 
     public static void echo() {
         Scanner sc = new Scanner(System.in);
-
-        String nextStr = sc.next();
+        String nextStr = sc.nextLine();
 
         while (!nextStr.equals("bye")) {
             System.out.println("    #__________________________________________________________#");
@@ -30,6 +30,7 @@ public class Duke { //extends Application {
         System.out.println("    Okie!! Goodbye!");
         System.out.println("    #__________________________________________________________#");
     }
+
 
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
