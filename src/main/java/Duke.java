@@ -162,6 +162,8 @@ public class Duke {
             case "event":
                 // Find index of delimiter
                 String eventDelimiter = "/at";
+                // Verify user input
+                verifyEventInput(command, eventDelimiter);
                 int eventDelimiterIndex = command.indexOf(eventDelimiter);
                 // Get event description, account for whitespace before delimiter
                 String eventDescription = command.substring("event".length() + 1,
@@ -183,10 +185,41 @@ public class Duke {
     }
 
     /**
-     * Throws DukeException if given command has any invalid parameters
+     * Throws DukeException if given command has invalid parameters.
+     * @param command used for checking user input
+     * @param eventDelimiter used to separate event description and event time
+     * @throws DukeException for invalid command parameters
+     */
+    protected void verifyEventInput(String command, String eventDelimiter) throws DukeException {
+        int eventDelimiterIndex = command.indexOf(eventDelimiter);
+        int eventDelimiterLength = eventDelimiter.length();
+        int commandLength = command.length();
+
+        if (commandLength == "event".length()) {
+            // Empty event command given (e.g. "event")
+            throw new DukeException(DukeException.exceptionIcon +
+                    " Wrong input format for adding an event... " +
+                    "Format: event [description] /at [event time]");
+        }
+        if (!command.contains(eventDelimiter)) {
+            // No delimiter present (e.g. "event project meeting Mon 2-4pm")
+            throw new DukeException(DukeException.exceptionIcon +
+                    " Wrong input format for adding an event... " +
+                    "Format: event [description] /at [event time]");
+        }
+        if (eventDelimiterIndex + eventDelimiterLength == commandLength) {
+            // Delimiter is at the end of command (e.g. "event /at")
+            throw new DukeException(DukeException.exceptionIcon +
+                    " Wrong input format for adding an event... " +
+                    "Format: event [description] /at [event time]");
+        }
+    }
+
+    /**
+     * Throws DukeException if given command has any invalid parameters.
      * @param command used to check user input
      * @param deadlineDelimiter used to separate deadline description and deadline due date
-     * @throws DukeException for invalid command parameter
+     * @throws DukeException for invalid command parameters
      */
     protected void verifyDeadlineInput(String command, String deadlineDelimiter) throws DukeException {
         int deadlineDelimiterIndex = command.indexOf(deadlineDelimiter);
