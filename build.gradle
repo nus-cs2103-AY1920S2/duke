@@ -1,6 +1,19 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }
 
 group 'main.java'
@@ -17,4 +30,8 @@ application {
 
 run {
     standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
 }
