@@ -140,12 +140,15 @@ public class Duke {
             case "deadline":
                 // Get deadline, find index of "/by"
                 String deadlineDelimiter = "/by";
+                int deadlineDelimiterIndex = command.indexOf(deadlineDelimiter);
+                int deadlineDelimiterLength = deadlineDelimiter.length();
+                verifyDeadlineInput(command, deadlineDelimiter);
                 // Get first word's index for deadline
                 // 1 additional character is considered for whitespace
-                int deadlineStartIndex = command.indexOf(deadlineDelimiter) + deadlineDelimiter.length() + 1;
+                int deadlineStartIndex = deadlineDelimiterIndex + deadlineDelimiterLength + 1;
                 // Remove first word "deadline" and remove delimiter word e.g. " /by "
                 String deadlineDescription = command.substring("deadline".length() + 1,
-                        deadlineStartIndex - deadlineDelimiter.length() - 2);
+                        deadlineStartIndex - deadlineDelimiterLength - 2);
                 String deadline = command.substring(deadlineStartIndex);
                 // Add new task
                 Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
@@ -171,6 +174,34 @@ public class Duke {
             }
         }
         reader.close();
+    }
+
+    /**
+     * Throws DukeException if given command has any invalid parameters
+     * @param command used to check user input
+     * @param deadlineDelimiter used to separate deadline description and deadline due date
+     * @throws DukeException for invalid command parameter
+     */
+    protected void verifyDeadlineInput(String command, String deadlineDelimiter) throws DukeException {
+        int deadlineDelimiterIndex = command.indexOf(deadlineDelimiter);
+        int deadlineDelimiterLength = deadlineDelimiter.length();
+        int commandLength = command.length();
+
+        if (commandLength == "deadline".length()) {
+            // Empty deadline command given (e.g. "deadline")
+            throw new DukeException(DukeException.exceptionIcon +
+                    " The description of a deadline cannot be empty...");
+        }
+        if (!command.contains(deadlineDelimiter)) {
+            // No due date given (e.g. "deadline read book")
+            throw new DukeException(DukeException.exceptionIcon +
+                    " No deadline given... Format: deadline [description] /by [due by]");
+        }
+        if (deadlineDelimiterIndex + deadlineDelimiterLength == commandLength) {
+            // Delimiter is at the end of command (e.g. "deadline /by")
+            throw new DukeException(DukeException.exceptionIcon +
+                    " No deadline given... Format: deadline [description] /by [due by]");
+        }
     }
 
     protected void printTaskAddition(Task task) {
