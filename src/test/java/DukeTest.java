@@ -75,6 +75,17 @@ class DukeTest {
                 exception.getMessage());
     }
 
+    @Test
+    void dukeException_emptyTodoCommand_displayInvalidTodoMessage() {
+        String input = "todo" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        assertEquals(exceptionIcon + " The description of a todo cannot be empty...",
+                exception.getMessage());
+    }
+
     @ParameterizedTest
     @MethodSource("generateOneEventTask")
     @DisplayName("Duke: Test for adding one event task")
