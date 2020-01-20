@@ -1,10 +1,21 @@
 import java.util.*;
 
 public class Duke {
-    //private enum  possibleTasks { todo, deadline, event }
+    private enum  possibleTasks { todo, deadline, event }
     private static Scanner sc = new Scanner(System.in);
 
     private static Task taskHandler(String taskType) throws InvalidInputException{
+        boolean isAllowedTask = false;
+        for(possibleTasks task : possibleTasks.values()) {
+            if(taskType.equals(task.name())) {
+                isAllowedTask = true;
+            };
+        }
+
+        if(!isAllowedTask) {
+            throw new UnknownTaskTypeException();
+        }
+
         String taskDescription = sc.nextLine();
         if(taskDescription.equals("")) {
             throw new EmptyTaskException();
@@ -14,11 +25,13 @@ public class Duke {
             case "todo":
                 return new ToDoTask(taskDescription);
             case "deadline":
+                if(taskAndTiming.length < 2) { throw new InvalidInputException();}
                 return new DeadlineTask(taskAndTiming[0], taskAndTiming[1]);
             case "event":
+                if(taskAndTiming.length < 2) { throw new InvalidInputException(); }
                 return new EventTask(taskAndTiming[0], taskAndTiming[1]);
         }
-        throw new UnknownTaskTypeException();
+        throw new InvalidInputException();
     }
 
     public static void main(String[] args) {
@@ -38,6 +51,8 @@ public class Duke {
 
             boolean wantToQuit = false;
             boolean nothingToAdd = false;
+            boolean invalidIndex = false;
+
             switch (command) {
                 case "bye":
                     wantToQuit = true;
@@ -55,9 +70,34 @@ public class Duke {
 
                 case "done":
                     int index = sc.nextInt();
+                    try {
+                        if(index > usrInputs.size()) {
+                            throw new InvalidIndexException();
+                        }
+                    } catch(InvalidIndexException e) {
+                        System.out.println(e);
+                        invalidIndex = true;
+                        break;
+                    }
                     Task completedTask = usrInputs.get(index - 1);
                     completedTask.setDone();
                     System.out.println("Good job, mate. I have marked the following task as done.\n" + completedTask);
+                    nothingToAdd = true;
+                    break;
+
+                case "delete":
+                    int indice = sc.nextInt();
+                    try {
+                        if(indice > usrInputs.size()) {
+                            throw new InvalidIndexException();
+                        }
+                    } catch(InvalidIndexException e) {
+                        System.out.println(e);
+                        invalidIndex = true;
+                        break;
+                    }
+                    Task removedTask = usrInputs.remove(indice - 1);
+                    System.out.println("I have removed the following task\n" + removedTask);
                     nothingToAdd = true;
                     break;
 
@@ -66,7 +106,7 @@ public class Duke {
 
             if(wantToQuit) {
                 break;
-            } else if(nothingToAdd) {
+            } else if(nothingToAdd || invalidIndex) {
                 continue;
             }
 
