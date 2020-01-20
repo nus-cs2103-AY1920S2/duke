@@ -9,10 +9,6 @@ public class Task {
         isDone = false;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public void complete() {
         isDone = true;
     }
