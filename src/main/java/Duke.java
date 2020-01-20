@@ -47,6 +47,9 @@ public class Duke {
                     Integer size = tasks.size();
 
                     // Print out all items in list
+                    if (size > 0) {
+                        tasksString += "Here are the tasks in your list:\n     ";
+                    }
                     for(int i = 0; i < size; i++) {
                         tasksString += (i + 1) + "." + tasks.get(i);
                         if (i != size - 1) {
@@ -66,6 +69,37 @@ public class Duke {
                                 "       " + task);
                     } else {
                         System.out.println("No such task index");
+                    }
+                    break;
+                case "todo":
+                    // Add a To-do task
+                    Task newTodoTask = new Todo(input.replaceFirst("^todo ", ""));
+                    tasks.add(newTodoTask);
+                    printAddTask(newTodoTask, tasks.size());
+                    break;
+                case "deadline":
+                    // Add a Deadline task
+                    String[] deadlineTokens = input.split(" /by ");
+                    if (deadlineTokens.length > 1) {
+                        String dateOrTime = deadlineTokens[1];
+                        String description = deadlineTokens[0].replaceFirst("^deadline ", "");
+                        Task newDeadlineTask = new Deadline(description, dateOrTime);
+                        tasks.add(newDeadlineTask);
+                        printAddTask(newDeadlineTask, tasks.size());
+                    } else {
+                        System.out.println("Deadline tasks require a specific time or date");
+                    }
+                    break;
+                case "event":
+                    String[] eventTokens = input.split(" /at ");
+                    if (eventTokens.length > 1) {
+                        String dateOrTime = eventTokens[1];
+                        String description = eventTokens[0].replaceFirst("^event ", "");
+                        Task newEventTask = new Event(description, dateOrTime);
+                        tasks.add(newEventTask);
+                        printAddTask(newEventTask, tasks.size());
+                    } else {
+                        System.out.println("Event tasks require a specific time and date");
                     }
                     break;
                 default:
@@ -88,5 +122,12 @@ public class Duke {
                 "     " + line + "\n" +
                 "    _________★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜★_______\n"
         );
+    }
+
+    public static void printAddTask(Task task, Integer size) {
+        String taskWord = (size > 1) ? "tasks" : "task";
+        prettyPrint("Got it. I've added this task: \n" +
+                "       " + task + "\n"+
+                "     Now you have " + size + " " + taskWord + " in the list.");
     }
 }
