@@ -134,6 +134,15 @@ public class ChatBot {
                 }
                 this.prettyPrinting(listings);
                 break;
+            case "delete":
+                int taskToBeDeleted = Integer.parseInt(inputCommand[1]); //task to be deleted
+                try {
+                    Task T = this.tasks.remove(taskToBeDeleted - 1); // if index not found -> will auto throw indexoutofbounds exception
+                    this.prettyPrinting(T.toString() + " has been removed from the tasklist!");
+                } catch (IndexOutOfBoundsException E) {
+                    this.prettyPrinting("I believe you gave an incorrect task number! Please try again!");
+                }
+                break;
             default:
                 this.prettyPrinting("Invalid command! Please try again!"); // handle the case where the user input something not recognised
         }
