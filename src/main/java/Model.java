@@ -15,7 +15,7 @@ public class Model {
             model=new Model();
             return model;
         }
-        throw new SingletonException(ErrorMessage.SINGLETON.toString()+" model.");
+        throw new SingletonException("There should only be one model.");
     }
 
     public void addTask(Task task){
@@ -42,14 +42,14 @@ public class Model {
     public Task getTask(int index) throws DukeException {
         getSize();
         if(index<0 || index>=taskList.size()){
-            throw new DukeException(ErrorMessage.INDEX_OUT_OF_BOUND.toString());
+            throw new DukeException("Index out of bound.");
         }
         return taskList.get(index);
     }
 
     public int getSize() throws DukeException {
         if(taskList.size()==0){
-            throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
+            throw new DukeException("Task list is empty.");
         }
         return taskList.size();
     }

@@ -15,7 +15,7 @@ public class Common {
             common=new Common();
             return common;
         }
-        throw new SingletonException(ErrorMessage.SINGLETON.toString()+" common.");
+        throw new SingletonException("There should be only one common.");
     }
 
     public String[] addTask(Task task) throws DukeException {
