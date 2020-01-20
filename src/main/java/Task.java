@@ -18,6 +18,13 @@ public class Task {
 
     @Override
     public String toString(){
-        return this.name;
+        String doneCheck = "[✓] ";
+        String notDoneCheck = "[✗] ";
+
+        if (completed){
+            return doneCheck + this.name;
+        } else {
+            return notDoneCheck + this.name;            
+        }
     }
 }

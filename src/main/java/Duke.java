@@ -9,8 +9,7 @@ public class Duke {
 
         //store tasks
         List<Task> tasks = new ArrayList<>();
-        String doneCheck = "[✓]";
-        String notDoneCheck = "[✗]";
+    
 
         String logo = "\n\n____________________¶¶¶¶¶¶¶¶¶¶¶ \n" +
                 "_______________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n" +
@@ -47,7 +46,7 @@ public class Duke {
         
         System.out.println("Arghhhh... It's you again.\n" + logo);
 
-        String saveReply = "Saving now....: ";
+        String saveReply = "Saving now....:";
         String input = "";
 
         //reply to input
@@ -60,8 +59,7 @@ public class Duke {
                 //loop through to the tasks
                 for(int i = 0; i < tasks.size(); i++){
                     int numbering = i + 1;
-                    String check = (tasks.get(i).completed) ? doneCheck : notDoneCheck;
-                    reply += (numbering + "." + check + " ");
+                    reply += (numbering + ".");
 
                     reply += (tasks.get(i) + "\n    ");
                 }
@@ -69,8 +67,17 @@ public class Duke {
             } else if (inputArr[0].equals("done")){
                 int taskNo = Integer.parseInt(inputArr[1]) - 1;
                 tasks.set(taskNo, tasks.get(taskNo).complete());
-                reply = "I've marked this task as done: [✓] " + tasks.get(taskNo);
+                reply = "I've marked this task as done: " + tasks.get(taskNo);
             } else {
+                //check which type of task
+                if (inputArr[0].equals("event")){
+
+                } else if (inputArr[0].equals("deadline")){
+
+                } else {
+
+                }
+
                 // format the input tasks
                 Task newTask = new Task(input);
                 tasks.add(newTask);
