@@ -1,6 +1,30 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Duchess {
+    private ArrayList<String> stringList;
+    private Scanner scanner;
+    private String command;
+
+    Duchess() {
+        this.stringList = new ArrayList<String>(100);
+        this.scanner = new Scanner(System.in);
+    }
+
+    private void awaitInput() {
+        this.command = scanner.nextLine();
+        switch (command.toLowerCase()) {
+            case "list":
+                printList();
+                break;
+            case "bye":
+                goodbye();
+                break;
+            default:
+                addToList(command);
+                break;
+        }
+    }
 
     private void introduction() {
         String logo = " _____             _                   \n"
@@ -15,8 +39,23 @@ class Duchess {
     }
 
     private void echo(String input) {
-        System.out.println("Oh? You said \"" + input + "\"? Interesting.");
+        System.out.println("Oh? You said \"" + input + "\"? How interesting.");
         System.out.println("Anything else?");
+    }
+
+    private void addToList(String input) {
+        echo(input);
+        this.stringList.add(input);
+        awaitInput();
+    }
+
+    private void printList() {
+        System.out.println("Sighs... you never remember what you say, don't you.");
+        System.out.println("You said these:");
+        for (int i = 0; i < this.stringList.size(); i++) {
+            System.out.println((i + 1) + ".\t" + this.stringList.get(i));
+        }
+        awaitInput();
     }
 
     private void goodbye() {
@@ -26,12 +65,6 @@ class Duchess {
 
     void run() {
         introduction();
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        while (!input.toLowerCase().equals("bye")) {
-            echo(input);
-            input = scanner.nextLine();
-        }
-        goodbye();
+        awaitInput();
     }
 }
