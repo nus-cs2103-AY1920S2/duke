@@ -1,6 +1,6 @@
 import java.util.*;
 public class Duke {
-    public static final String string = "    _________________________________________";
+    public static final String string = "    ____________________________________________________________";
     public static final String space = "     ";
     public static ArrayList<String> lst = new ArrayList<>();
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -20,13 +20,6 @@ public class Duke {
         System.out.println(bye);
     }
 
-    public static void Blah() {
-        String blah = string + "\n" + space +
-                "blah\n" +
-                string;
-        System.out.println(blah);
-    }
-
     public static void List() {
         System.out.println(string);
         System.out.println(space + "Here are the tasks in your list:");
@@ -37,15 +30,15 @@ public class Duke {
         System.out.println(string);
     }
 
-    public static void Add(String action) {
-        String add = string + "\n" + space +
-                "added: " + action + "\n" +
-                string;
-        lst.add(action);
-        Task task = new Task(action);
-        tasks.add(task);
-        System.out.println(add);
-    }
+//    public static void Add(String action) {
+//        String add = string + "\n" + space +
+//                "added: " + action + "\n" +
+//                string;
+//        lst.add(action);
+//        Task task = new Task(action);
+//        tasks.add(task);
+//        System.out.println(add);
+//    }
 
     public static void Done(String str) {
         System.out.println(string);
@@ -117,26 +110,60 @@ public class Duke {
             String[] str = line.split(" ");
             if (line.equals("list")) {
                 List();
-            } else if (line.equals("blah")) {
-                Blah();
             } else if (line.equals("bye")){
                 Bye();
                 break;
             } else if (str[0].equals("done")){
-                Done(str[1]);
+                try {
+                    if (line.length() <= 4) {
+                        throw new DoneException();
+                    } else {
+                        Done(str[1]);
+                    }
+                } catch (DoneException doneErr){
+                    System.out.println(doneErr);
+                }
             } else if (str[0].equals("deadline")) {
-                String[] d = line.split(" ", 2);
-                String[] helper = d[1].split("/");
-                Deadline(helper[0], helper[1]);
+                try {
+                    if (line.length() <= 8) {
+                        throw new EmptyException();
+                    } else {
+                        String[] d = line.split(" ", 2);
+                        String[] helper = d[1].split("/");
+                        Deadline(helper[0], helper[1]);
+                    }
+                } catch (EmptyException emErr) {
+                    System.out.println(emErr);
+                }
             } else if (str[0].equals("event")) {
-                String[] e = line.split(" ", 2);
-                String[] helper = e[1].split("/");
-                Event(helper[0], helper[1]);
+                try {
+                    if (line.length() <= 5) {
+                        throw new EmptyException();
+                    } else {
+                        String[] e = line.split(" ", 2);
+                        String[] helper = e[1].split("/");
+                        Event(helper[0], helper[1]);
+                    }
+                } catch (EmptyException emErr){
+                    System.out.println(emErr);
+                }
             } else if (str[0].equals("todo")) {
-                String[] e = line.split(" ", 2);
-                Todo(e[1]);
+                try {
+                    if (line.length() <= 4) {
+                        throw new EmptyException();
+                    } else {
+                        String[] e = line.split(" ", 2);
+                        Todo(e[1]);
+                    }
+                } catch (EmptyException emErr){
+                    System.out.println(emErr);
+                }
             } else {
-                Add(line);
+                try {
+                    throw new UnknownException();
+                } catch (UnknownException unknownErr) {
+                    System.out.println(unknownErr);
+                }
             }
         }
         sc.close();
