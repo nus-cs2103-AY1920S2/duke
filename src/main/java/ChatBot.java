@@ -52,29 +52,58 @@ public class ChatBot {
         int index_found = 0;
         switch(inputCommand[0]) {
             case "todo":
-                for (int i = 1; i < inputCommand.length; i++) {
-                    taskname.append(inputCommand[i]);
-                    if (i != inputCommand.length - 1) {
-                        taskname.append(" ");
+                try {
+                    if (inputCommand.length == 1) {
+                        // means empty to-do message - need to throw exception!
+                        throw new DukeException("OOPS! :( The description of to-do cannot be empty!");
                     }
+                    for (int i = 1; i < inputCommand.length; i++) {
+                        taskname.append(inputCommand[i]);
+                        if (i != inputCommand.length - 1) {
+                            taskname.append(" ");
+                        }
+                    }
+                    ToDo t = new ToDo(taskname.toString());
+                    this.tasks.add(t);
+                    this.prettyPrinting(taskname.toString() + " added!");
+                } catch (DukeException e) {
+                    this.prettyPrinting(e.toString());
                 }
-                ToDo t = new ToDo(taskname.toString());
-                this.tasks.add(t);
-                this.prettyPrinting(taskname.toString() + " added!");
                 break;
             case "deadline":
-                index_found = this.grabTaskName(taskname, inputCommand, "/by");
-                this.grabDateTime(index_found, inputCommand ,DateTime);
-                Deadline d = new Deadline(taskname.toString(), DateTime.toString());
-                this.tasks.add(d);
-                this.prettyPrinting(taskname.toString() + " added!");
+                try {
+                    if (inputCommand.length == 1) {
+                        throw new DukeException("Deadline description cannot be empty! :("); // error as stated in the error msg
+                    }
+                    if (!command.contains("/by")) {
+                        //means incorrect input of the deadline command as stated, throw exception
+                        throw new DukeException("Deadline command must contain [/by] as stated!");
+                    }
+                    index_found = this.grabTaskName(taskname, inputCommand, "/by");
+                    this.grabDateTime(index_found, inputCommand, DateTime);
+                    Deadline d = new Deadline(taskname.toString(), DateTime.toString());
+                    this.tasks.add(d);
+                    this.prettyPrinting(taskname.toString() + " added!");
+                } catch (DukeException e) {
+                    this.prettyPrinting(e.toString());
+                }
                 break;
             case "event":
-                index_found = this.grabTaskName(taskname, inputCommand, "/at");
-                this.grabDateTime(index_found, inputCommand, DateTime);
-                Event e = new Event(taskname.toString(), DateTime.toString());
-                this.tasks.add(e);
-                this.prettyPrinting(taskname.toString() + " added!");
+                try {
+                    if (inputCommand.length == 1) {
+                        throw new DukeException("Event description cannot be empty!");
+                    }
+                    if (!command.contains("/at")) {
+                        throw new DukeException("Event command must contain [/at] as stated!"); //all the exceptions as stated in the error msg
+                    }
+                    index_found = this.grabTaskName(taskname, inputCommand, "/at");
+                    this.grabDateTime(index_found, inputCommand, DateTime);
+                    Event e = new Event(taskname.toString(), DateTime.toString());
+                    this.tasks.add(e);
+                    this.prettyPrinting(taskname.toString() + " added!");
+                } catch (DukeException e) {
+                    this.prettyPrinting(e.toString());
+                }
                 break;
             case "bye":
                 this.prettyPrinting("Bye. Hope to see you again soon!");
@@ -106,7 +135,7 @@ public class ChatBot {
                 this.prettyPrinting(listings);
                 break;
             default:
-                this.prettyPrinting("Invalid command! Please try again!");
+                this.prettyPrinting("Invalid command! Please try again!"); // handle the case where the user input something not recognised
         }
         return true;
     }
