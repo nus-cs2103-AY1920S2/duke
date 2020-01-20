@@ -27,7 +27,7 @@ public class Duke { //extends Application {
         }
 
         System.out.println("    #__________________________________________________________#");
-        System.out.println("    Goodbye!! Hope to see you again soon!");
+        System.out.println("    Okie!! Goodbye!");
         System.out.println("    #__________________________________________________________#");
     }
 
