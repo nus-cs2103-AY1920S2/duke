@@ -15,8 +15,13 @@ public class Duke {
                 put("todo", Command.TODO);
                 put("deadline", Command.DEADLINE);
                 put("event", Command.EVENT);
+                put("delete", Command.DELETE);
             }
         };
+    }
+
+    public boolean isInRange(int index) {
+        return index > 0 && index <= tasks.size() && tasks.size() > 0;
     }
 
     public void listTasks() {
@@ -70,7 +75,19 @@ public class Duke {
         System.out.printf("    %s\n", new_task);
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
     }
-    
+
+    public void deleteTask(int index) throws DukeException {
+        if (!isInRange(index)) {
+            throw new DukeException("☹ OOPS!!! The index given is out of bound.");
+        }
+
+        Task task = getTask(index);
+        tasks.remove(index - 1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.printf("    %s\n", task);
+        System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
+    }
+
     public Task getTask(int index) {
         return tasks.get(index - 1);
     }
@@ -104,6 +121,16 @@ public class Duke {
                     }
                     break;
 
+                case DELETE:
+                    try {
+                        String index_string = arguments.split(" ", 2)[1];
+                        int index = Integer.parseInt(index_string);
+                        deleteTask(index);
+
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("☹ OOPS!!! The done argument requires a number.");
+                    }
+                    break;
                 default:
                     String[] command_and_description = arguments.split(" ", 2);
                     try {

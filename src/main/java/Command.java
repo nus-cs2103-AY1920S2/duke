@@ -1,3 +1,3 @@
 public enum Command {
-    LIST, TODO, DEADLINE, EVENT, DONE;
+    LIST, DONE, TODO, DEADLINE, EVENT, DELETE;
 }
