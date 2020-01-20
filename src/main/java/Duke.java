@@ -45,7 +45,9 @@ public class Duke {
         //reply to input
         input = s.nextLine();
         while(!input.equals("bye")){
-            System.out.println(input);
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    " + input);
+            System.out.println("    ____________________________________________________________");
             input = s.nextLine();
         }
         System.out.println("Bye. Hope never to see you again!");
