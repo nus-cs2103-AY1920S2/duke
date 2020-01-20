@@ -21,7 +21,6 @@ public class DukeProcessor {
 
     public void processInput(String input) {
         String[] inputArgs = input.split(" ", 2);
-        String args = input;
         DukeCommand command;
 
         switch(inputArgs[0]) {
@@ -33,13 +32,21 @@ public class DukeProcessor {
                 break;
             case "done":
                 command = createCommand(CommandType.DONE);
-                args = inputArgs[1];
+                break;
+            case "todo":
+                command = createCommand(CommandType.TODO);
+                break;
+            case "deadline":
+                command = createCommand(CommandType.DEADLINE);
+                break;
+            case "event":
+                command = createCommand(CommandType.EVENT);
                 break;
             default:
-                command = createCommand(CommandType.ADD);
+                command = createCommand(CommandType.INVALID);
         }
 
-        command.execute(this, args);
+        command.execute(this, input);
     }
 
     private DukeCommand createCommand(CommandType commandType) {
@@ -59,8 +66,17 @@ public class DukeProcessor {
             case DONE:
                 command = new CommandDone();
                 break;
+            case TODO:
+                command = new CommandTodo();
+                break;
+            case DEADLINE:
+                command = new CommandDeadline();
+                break;
+            case EVENT:
+                command = new CommandEvent();
+                break;
             default:
-                command = new CommandAdd();
+                command = new CommandInvalid();
         }
 
         return command;

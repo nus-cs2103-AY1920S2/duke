@@ -6,7 +6,9 @@ import tasks.Task;
 public class CommandDone implements DukeCommand {
 
     public void execute(DukeProcessor processor, String args) {
-        int taskNumber = Integer.parseInt(args);
+        String[] argsArray = args.split(" ", 2);
+
+        int taskNumber = Integer.parseInt(argsArray[1]);
         int taskIndex = taskNumber - 1;
 
         Task selectedTask = processor.getTaskList().get(taskIndex);
