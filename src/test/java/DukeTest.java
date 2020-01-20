@@ -110,6 +110,19 @@ class DukeTest {
                 "Should throw exception message for deadline command with no due date");
     }
 
+    @Test
+    void dukeException_onlyDeadlineDelimiterPresent_displayInvalidDeadlineMessage() {
+        String input = "deadline /by" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        String expectedMessage = String.format("%s No deadline given... Format: deadline [description] /by " +
+                "[due by]", exceptionIcon);
+        assertEquals(expectedMessage, exception.getMessage(),
+                "Should throw exception message for deadline command with no arguments");
+    }
+
     @ParameterizedTest
     @MethodSource("generateOneEventTask")
     @DisplayName("Duke: Test for adding one event task")
