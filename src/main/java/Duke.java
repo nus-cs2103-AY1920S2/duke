@@ -1,11 +1,14 @@
 import java.util.*;
 
 public class Duke {
-    //private enum  possibleTasks { todo, deadline, }
+    //private enum  possibleTasks { todo, deadline, event }
     private static Scanner sc = new Scanner(System.in);
 
     private static Task taskHandler(String taskType) throws InvalidInputException{
         String taskDescription = sc.nextLine();
+        if(taskDescription.equals("")) {
+            throw new EmptyTaskException();
+        }
         String[] taskAndTiming = taskDescription.split("/");
         switch(taskType) {
             case "todo":
@@ -15,7 +18,7 @@ public class Duke {
             case "event":
                 return new EventTask(taskAndTiming[0], taskAndTiming[1]);
         }
-        return new Task(taskDescription);
+        throw new UnknownTaskTypeException();
     }
 
     public static void main(String[] args) {
@@ -31,6 +34,8 @@ public class Duke {
 
         while(true) {
             String command = sc.next();
+
+
             boolean wantToQuit = false;
             boolean nothingToAdd = false;
             switch (command) {
