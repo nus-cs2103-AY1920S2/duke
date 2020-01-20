@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage<T> {
+public class Storage<T extends Task> {
 	private List<T> containers;
 
 	public Storage() {
@@ -12,7 +12,13 @@ public class Storage<T> {
 		containers.add(action);
 	}
 
-	List<T> getList() {
+	public List<T> getList() {
 		return this.containers;
 	} 
+
+	public void markAsDone(List<Integer> needy) {
+		for (Integer index: needy) {
+			this.containers.get(index).markAsDone();
+		}
+	}
 }
