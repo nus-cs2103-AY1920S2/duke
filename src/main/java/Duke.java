@@ -12,7 +12,7 @@ public class Duke {
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 for (int i = 0; i < nextIndex; i++) {
-                    System.out.println(tasks[i]);
+                    System.out.println(i+1 + ". " + tasks[i]);
                 }
             } else {
                 tasks[nextIndex] = userInput;
