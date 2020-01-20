@@ -43,7 +43,7 @@ public class Duke {
                 "_____________¶¶¶¶¶¶¶¶¶¶1111¶¶¶¶¶¶¶¶¶¶ \n" +
                 "_________________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n";
         
-        System.out.println("Arghhhh... It's you again.\n" + logo);
+        System.out.println(logo + "Arghhhh... It's you again.\n" );
 
         String saveReply = "Saving now....:\n     ";
         String input = "";
@@ -66,7 +66,7 @@ public class Duke {
             } else if (inputArr[0].equals("done")){
                 int taskNo = Integer.parseInt(inputArr[1]) - 1;
                 tasks.set(taskNo, tasks.get(taskNo).complete());
-                reply = "I've marked this task as done: " + tasks.get(taskNo);
+                reply = "Okcan, I mark this task as done:\n     " + tasks.get(taskNo);
             } else {
                 //check which type of task
                 int pointer;
@@ -100,6 +100,7 @@ public class Duke {
 
                     reply = saveReply + newTask;
                 }
+                reply += "\n    Aiyo still got " + tasks.size() + " task(s), what you doing sia";
             }
 
             //printing replys
