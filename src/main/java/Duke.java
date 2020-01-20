@@ -2,7 +2,6 @@ import java.util.*;
 public class Duke {
     public static final String string = "    ____________________________________________________________";
     public static final String space = "     ";
-    public static ArrayList<String> lst = new ArrayList<>();
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void Greeting() {
@@ -29,16 +28,6 @@ public class Duke {
         }
         System.out.println(string);
     }
-
-//    public static void Add(String action) {
-//        String add = string + "\n" + space +
-//                "added: " + action + "\n" +
-//                string;
-//        lst.add(action);
-//        Task task = new Task(action);
-//        tasks.add(task);
-//        System.out.println(add);
-//    }
 
     public static void Done(String str) {
         System.out.println(string);
@@ -86,6 +75,21 @@ public class Duke {
         System.out.println(space + "Got it. I've added this task:");
         System.out.println(space + "  " + todo.toString());
         tasks.add(todo);
+        if (tasks.size() == 1 || tasks.size() == 0) {
+            System.out.println(space + "Now you have " + tasks.size() + " task in the list");
+        } else {
+            System.out.println(space + "Now you have " + tasks.size() + " tasks in the list");
+        }
+        System.out.println(string);
+    }
+
+    public static void Delete(String action) {
+        System.out.println(string);
+        int num = Integer.parseInt(action);
+        Task task = tasks.get(num - 1);
+        tasks.remove(task);
+        System.out.println(space + "Noted. I've removed this task: ");
+        System.out.println(space + "  " + task.toString());
         if (tasks.size() == 1 || tasks.size() == 0) {
             System.out.println(space + "Now you have " + tasks.size() + " task in the list");
         } else {
@@ -154,6 +158,16 @@ public class Duke {
                     } else {
                         String[] e = line.split(" ", 2);
                         Todo(e[1]);
+                    }
+                } catch (EmptyException emErr){
+                    System.out.println(emErr);
+                }
+            } else if (str[0].equals("delete")) {
+                try {
+                    if (line.length() <= 6) {
+                        throw new EmptyException();
+                    } else {
+                        Delete(str[1]);
                     }
                 } catch (EmptyException emErr){
                     System.out.println(emErr);
