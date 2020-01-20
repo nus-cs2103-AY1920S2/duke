@@ -1,22 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    /**
-     * Main method of Duke. It initialises the bot and reads user input.
-     * @param args No args applicable.
-     */
+
+
     public static void main(String[] args) {
-        DukeBot duke = new DukeBot();
-        duke.dukeHi();
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("I'm your personal chat bot assistant! How may I be of service today?");
 
         Scanner sc = new Scanner(System.in);
 
-        while(duke.isActive()) {
-            String command = sc.nextLine();
-            duke.processCommand(command);
+        boolean isActive = true;
+        while(isActive) {
+            String command = sc.next();
+
+            switch(command) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    isActive = false;
+                    break;
+                default:
+                    System.out.println(command);
+            }
         }
     }
 }
