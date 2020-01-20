@@ -35,7 +35,12 @@ public class Duke {
                 command = sc.nextLine();
                 continue;
             }
-            Duke.addCommand(command, dukeList);
+            try {
+                Duke.addCommand(command, dukeList);
+            } catch (CommandException | DescriptionException e) {
+                command = sc.nextLine();
+                continue;
+            }
             System.out.println("Understood. I have added: " + dukeList.get(dukeList.size() - 1));
             System.out.println("Items in the list: " + dukeList.size());
             command = sc.nextLine();
@@ -45,9 +50,12 @@ public class Duke {
 
     }
 
-    public static void addCommand(String str, ArrayList<Task> dukeList) {
+    public static void addCommand(String str, ArrayList<Task> dukeList) throws CommandException, DescriptionException {
         if (str.contains("deadline")) {
             String[] splitStr = str.split("/by ");
+            if (splitStr.length < 2) {
+                throw (new DescriptionException());
+            }
             String description = splitStr[0];
             String timing = splitStr[1];
             String[] splitCommand = description.split(" ");
@@ -62,6 +70,9 @@ public class Duke {
         }
         else if (str.contains("event")) {
             String[] splitStr = str.split("/at ");
+            if (splitStr.length < 2) {
+                throw (new DescriptionException());
+            }
             String description = splitStr[0];
             String timing = splitStr[1];
             String[] splitCommand = description.split(" ");
@@ -75,17 +86,16 @@ public class Duke {
             }
         }
         else if (str.contains("todo")) {
-            String[] splitStr = str.split("todo");
-            String description = splitStr[0];
-            String[] splitCommand = description.split(" ");
+            String[] splitStr = str.split("todo ");
 
-            StringBuilder builder = new StringBuilder();
-            for(int i = 1; i < splitCommand.length; i ++) {
-                builder.append(splitCommand[i]);
-                builder.append(" ");
-                description = builder.toString();
+            if (splitStr.length == 1) {
+                throw (new DescriptionException());
             }
+            String description = splitStr[1];
             dukeList.add(new ToDo(description));
+        }
+        else {
+            throw (new CommandException());
         }
     }
 }
