@@ -5,6 +5,10 @@ public class Duke {
         //initialise scanner
         Scanner s = new Scanner(System.in);
 
+        //store tasks
+        String[] tasks = new String[100];
+        int indexOfTasks = 1;
+
         String logo = "\n\n____________________¶¶¶¶¶¶¶¶¶¶¶ \n" +
                 "_______________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n" +
                 "____________¶¶¶¶¶¶¶¶1111111111¶¶¶¶¶¶¶¶ \n" +
@@ -40,14 +44,34 @@ public class Duke {
         
         System.out.println("Arghhhh... It's you again.\n" + logo);
 
+        String saveReply = "Saving now....: ";
         String input = "";
 
         //reply to input
         input = s.nextLine();
-        while(!input.equals("bye")){
+        while(!input.equals("bye")){    
+            String reply = "";   
+
+            if (!input.equals("list")){
+                //format the input tasks
+                tasks[indexOfTasks++] = input;
+
+                reply = saveReply + input;
+            } else {
+                //loop through to the tasks
+                for(int i = 1; i < indexOfTasks; i++){
+                    reply += (i + ". " + tasks[i]);
+                    reply += "\n    ";
+                }
+                reply += "\n    I told you save liao loh........";
+            }
+
+            //printing replys
             System.out.println("    ____________________________________________________________");
-            System.out.println("    " + input);
+            System.out.println("    " + reply);
             System.out.println("    ____________________________________________________________");
+            
+            //next input
             input = s.nextLine();
         }
         System.out.println("Bye. Hope never to see you again!");
