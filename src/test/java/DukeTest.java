@@ -86,6 +86,30 @@ class DukeTest {
                 exception.getMessage());
     }
 
+    @Test
+    void dukeException_emptyDeadlineCommand_displayInvalidDeadlineMessage() {
+        String input = "deadline" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        assertEquals(exceptionIcon + " The description of a deadline cannot be empty...",
+                exception.getMessage(), "Should throw exception for empty deadline command");
+    }
+
+    @Test
+    void dukeException_missingDeadlineDelimiter_displayInvalidDeadlineMessage() {
+        String input = "deadline return book" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        String expectedMessage = String.format("%s No deadline given... Format: deadline [description] /by " +
+                "[due by]", exceptionIcon);
+        assertEquals(expectedMessage, exception.getMessage(),
+                "Should throw exception message for deadline command with no due date");
+    }
+
     @ParameterizedTest
     @MethodSource("generateOneEventTask")
     @DisplayName("Duke: Test for adding one event task")
