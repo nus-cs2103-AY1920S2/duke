@@ -5,14 +5,15 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 What can I do for you today?
-> Oops! Unknown action!
+> Oops! Command not found!
 
-> Oops! Unknown action!
+> Oops! Command not found!
 
-> Oops! Unknown action!
+> Oops! Command not found!
 
-> 
-> Oops! There are no tasks in your list!
+> Oops! Command not found!
+
+> Yay! There are no tasks in your list!
 
 > New task has been added:
     [T] [✘] Buy Textbooks
@@ -26,7 +27,7 @@ Now you have 2 tasks in the list.
 1. [T] [✘] Buy Textbooks
 2. [T] [✘] Buy Eggs
 
-> Oops! Not enough information to create task!
+> Oops! This task needs a name and date/time!
 
 > New task has been added:
     [D] [✘] Homework (by: Sunday)

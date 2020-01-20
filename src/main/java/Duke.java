@@ -1,8 +1,12 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        List<String> commandList = new ArrayList<String>(
+                List.of("todo", "event", "deadline", "list", "done", "delete", "bye"));
         DukeList duke = new DukeList();
 
         String logo = " ____        _        \n"
@@ -16,80 +20,86 @@ public class Duke {
             System.out.print("> ");
             String input = scanner.nextLine().strip();
 
-            if (input.equals("bye")) {
-                break;
+            String command = "";
+            String message = "";
 
-            } else if (input.equals("list")) {
-                if (duke.getSize() == 0) {
-                    System.out.println("Oops! There are no tasks in your list!");
-                } else {
-                    System.out.println("Here are your tasks in your list:");
-                    System.out.print(duke);
-                }
-
+            if (!input.contains(" ")) {
+                command = input;
             } else {
-                String command = "";
-                String parameters = "";
-                try {
-                    String[] result = input.split(" ", 2);
-                    command = result[0];
-                    parameters = result[1];
+                String[] s = input.split(" ", 2);
+                command = s[0];
+                message = s[1];
+            }
 
-                    if (command.equals("done")) {
-                        try {
-                            int taskID = Integer.parseInt(parameters);
-                            System.out.println(duke.markDone(taskID));
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("Oops! Task not found!");
-                        }
-
-
-                    } else if (command.equals("todo")) {
-                        String taskName = parameters;
+            if (commandList.contains(command)) {
+                if (command.equals("todo")) {
+                    if (!message.equals("")) {
+                        String taskName = message;
                         System.out.println(duke.newTodo('T', taskName));
-
-                    } else if (command.equals("deadline")) {
-                        try {
-                            String[] taskDetails = parameters.split("/by");
-                            String taskName = taskDetails[0].strip();
-                            String taskTime = " (by: " + taskDetails[1].strip() + ")";
-                            System.out.println(duke.newDeadline('D', taskName, taskTime));
-
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println("Oops! This task needs a date/time!");
-                        }
-
-                    } else if (command.equals("event")) {
-                        try {
-                            String[] taskDetails = parameters.split("/at");
-                            String taskName = taskDetails[0].strip();
-                            String taskTime = " (at: " + taskDetails[1].strip() + ")";
-                            System.out.println(duke.newEvent('E', taskName, taskTime));
-
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println("Oops! This task needs a date/time!");
-                        }
-                    } else if (command.equals("delete")) {
-                        try {
-                            int taskID = Integer.parseInt(parameters);
-                            System.out.println(duke.deleteTask(taskID));
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("Oops! Task not found!");
-                        }
-
-                    }
-
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-                        System.out.println("Oops! Not enough information to create task!");
-
-                    } else if (command.equals("done") || command.equals("delete")) {
-                        System.out.println("Oops! Task not found!");
-
                     } else {
-                        System.out.println("Oops! Unknown action!");
+                        System.out.println("Oops! This task needs a name!");
                     }
-                }
+
+                } else if (command.equals("event")) {
+                    try {
+                        String[] taskDetails = message.split("/at");
+                        String taskName = taskDetails[0].strip();
+                        String taskTime = " (at: " + taskDetails[1].strip() + ")";
+                        System.out.println(duke.newEvent('E', taskName, taskTime));
+
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        if (message.equals("")) {
+                            System.out.println("Oops! This task needs a name and date/time!");
+                        } else {
+                            System.out.println("Oops! This task needs a date/time!");
+                        }
+                    }
+
+                } else if (command.equals("deadline")) {
+                    try {
+                        String[] taskDetails = message.split("/by");
+                        String taskName = taskDetails[0].strip();
+                        String taskTime = " (by: " + taskDetails[1].strip() + ")";
+                        System.out.println(duke.newEvent('D', taskName, taskTime));
+
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        if (message.equals("")) {
+                            System.out.println("Oops! This task needs a name and date/time!");
+                        } else {
+                            System.out.println("Oops! This task needs a date/time!");
+                        }
+                    }
+
+                } else if (command.equals("list")) {
+                    if (duke.getSize() == 0) {
+                        System.out.println("Yay! There are no tasks in your list!");
+                    } else {
+                        System.out.println("Here are your tasks in your list:");
+                        System.out.print(duke);
+                    }
+
+                } else if (command.equals("done")) {
+                    try {
+                        int taskID = Integer.parseInt(message);
+                        System.out.println(duke.markDone(taskID));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Oops! Task not found!");
+                    }
+
+                } else if (command.equals("delete")) {
+                    try {
+                        int taskID = Integer.parseInt(message);
+                        System.out.println(duke.deleteTask(taskID));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Oops! Task not found!");
+                    }
+
+                } else if (command.equals("bye")) {
+                    break;
+
+                } else {}
+            } else {
+                System.out.println("Oops! Command not found!");
             }
 
             System.out.println("");
