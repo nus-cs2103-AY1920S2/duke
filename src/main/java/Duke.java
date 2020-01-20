@@ -41,16 +41,16 @@ public class Duke {
                 case "bye":
                     // Exit program
                     prettyPrint("Sorry to see you go. Hope to see you again soon! (＾▽＾)／");
-                    break;
+                    return;
                 case "list":
                     String tasksString = "";
-                    Integer size = tasks.size();
+                    int size = tasks.size();
 
                     // Print out all items in list
                     if (size > 0) {
                         tasksString += "Here are the tasks in your list:\n     ";
                     }
-                    for(int i = 0; i < size; i++) {
+                    for (int i = 0; i < size; i++) {
                         tasksString += (i + 1) + "." + tasks.get(i);
                         if (i != size - 1) {
                             tasksString += "\n     ";
@@ -61,7 +61,7 @@ public class Duke {
                     break;
                 case "done":
                     // Mark the task with given index as done
-                    Integer index = Integer.parseInt(inputTokens[1]) - 1;
+                    int index = Integer.parseInt(inputTokens[1]) - 1;
                     if (index < tasks.size()) {
                         Task task = tasks.get(index);
                         task.markAsDone(true);
