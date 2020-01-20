@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
@@ -6,8 +8,9 @@ public class Duke {
         Scanner s = new Scanner(System.in);
 
         //store tasks
-        String[] tasks = new String[100];
-        int indexOfTasks = 1;
+        List<Task> tasks = new ArrayList<>();
+        String doneCheck = "[✓]";
+        String notDoneCheck = "[✗]";
 
         String logo = "\n\n____________________¶¶¶¶¶¶¶¶¶¶¶ \n" +
                 "_______________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n" +
@@ -51,19 +54,28 @@ public class Duke {
         input = s.nextLine();
         while(!input.equals("bye")){    
             String reply = "";   
+            String[] inputArr = input.split(" ");
 
-            if (!input.equals("list")){
-                //format the input tasks
-                tasks[indexOfTasks++] = input;
-
-                reply = saveReply + input;
-            } else {
+            if (inputArr[0].equals("list")){
                 //loop through to the tasks
-                for(int i = 1; i < indexOfTasks; i++){
-                    reply += (i + ". " + tasks[i]);
-                    reply += "\n    ";
+                for(int i = 0; i < tasks.size(); i++){
+                    int numbering = i + 1;
+                    String check = (tasks.get(i).completed) ? doneCheck : notDoneCheck;
+                    reply += (numbering + "." + check + " ");
+
+                    reply += (tasks.get(i) + "\n    ");
                 }
                 reply += "\n    I told you save liao loh........";
+            } else if (inputArr[0].equals("done")){
+                int taskNo = Integer.parseInt(inputArr[1]) - 1;
+                tasks.set(taskNo, tasks.get(taskNo).complete());
+                reply = "I've marked this task as done: [✓] " + tasks.get(taskNo);
+            } else {
+                // format the input tasks
+                Task newTask = new Task(input);
+                tasks.add(newTask);
+
+                reply = saveReply + newTask;
             }
 
             //printing replys
