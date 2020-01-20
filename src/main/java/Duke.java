@@ -7,7 +7,7 @@ import dukebot.InvalidTaskException;
  * Main class.
  */
 public class Duke {
-    private static final String logo = "*******   **     ** **   ** ********\n"
+    private static final String LOGO = "*******   **     ** **   ** ********\n"
             + "/**////** /**    /**/**  ** /**/////\n"
             + "/**    /**/**    /**/** **  /**\n"
             + "/**    /**/**    /**/****   /*******\n"
@@ -22,7 +22,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
 
-        System.out.println("\nHi hi I'm \n" + logo);
+        System.out.println("\nHi hi I'm \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
         dukeSays("What will Master do today?");
         boolean running = true;
@@ -114,6 +114,7 @@ public class Duke {
         }
         dukeSays("Is Master leaving already?");
         dukeSays("Please come back and play with Duke soon...");
+        System.exit(0);
     }
 
     //    private void dukeSays(String[] text) {

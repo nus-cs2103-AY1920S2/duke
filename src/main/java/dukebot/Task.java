@@ -2,7 +2,7 @@ package dukebot;
 
 import java.util.Arrays;
 
-public class Task {
+public abstract class Task {
     protected String description;
     private boolean isDone;
     protected TaskType taskType;
