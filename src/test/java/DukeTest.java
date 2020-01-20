@@ -337,8 +337,7 @@ class DukeTest {
     @MethodSource("generateOneTodoTask")
     void processCommands_createNewTodoTaskAndMarkAsDone_todoTaskMarkedDone(Todo task) {
         String taskDescription = task.getDescription();
-        String taskCommand = task.getTaskType().toString().toLowerCase() + " " +
-                taskDescription;
+        String taskCommand = "todo " + taskDescription;
         String input = taskCommand + NEWLINE +
                 "list" + NEWLINE +
                 "done 1" + NEWLINE +

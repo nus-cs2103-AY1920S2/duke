@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Duke {
     protected static final String HORIZONTAL_BAR =
@@ -10,6 +11,18 @@ public class Duke {
     protected static final String INDENTATION = "    ";
     protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     protected ArrayList<Task> tasks = new ArrayList<>();
+    HashMap<String, CommandType> validCommands;
+
+    public Duke() {
+        this.validCommands = new HashMap<>();
+        this.validCommands.put("deadline", CommandType.DEADLINE);
+        this.validCommands.put("event", CommandType.EVENT);
+        this.validCommands.put("todo", CommandType.TODO);
+        this.validCommands.put("list", CommandType.LIST);
+        this.validCommands.put("bye", CommandType.BYE);
+        this.validCommands.put("done", CommandType.DONE);
+        this.validCommands.put("delete", CommandType.DELETE);
+    }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -59,7 +72,7 @@ public class Duke {
     }
 
     /**
-     * Function used to catch any exceptions resulting from executing commands
+     * Used to catch any exceptions resulting from executing commands.
      * @param inputReader used to receive user input
      * @return boolean indicating whether user exited normally
      */
@@ -95,11 +108,16 @@ public class Duke {
             command = command.trim();
             String[] commandWords = command.split("\\s+");
             // No input is given or only whitespace given
-            if (commandWords.length == 0 || commandWords[0].equals("")) {
+            if (command.length() == 0) {
                 printTextWithIndentation(HORIZONTAL_BAR);
                 printTextWithIndentation("404 Not Found... Are you there?");
                 printTextWithIndentation(HORIZONTAL_BAR);
                 continue;
+            }
+            if (!validCommands.containsKey(commandWords[0])) {
+                // First word of command does not match list of valid commands
+                throw new DukeException(DukeException.exceptionIcon +
+                        " OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             // Check first word of command
             switch (commandWords[0]) {
@@ -181,9 +199,7 @@ public class Duke {
                 printTaskDeletion(removedTask);
                 break;
             default:
-                // Invalid command given
-                throw new DukeException(DukeException.exceptionIcon +
-                        " OOPS!!! I'm sorry, but I don't know what that means :-(");
+                break;
             }
         }
         reader.close();
@@ -248,6 +264,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints out newly added task information.
+     * @param task used for printing information related to task
+     */
     protected void printTaskAddition(Task task) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Got it. I've added this task:");
@@ -257,6 +277,10 @@ public class Duke {
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 
+    /**
+     * Mark a given task as done and print out updated task information.
+     * @param task to mark as done
+     */
     protected void markTaskAsDone(Task task) {
         task.markAsDone();
         printTextWithIndentation(HORIZONTAL_BAR);
@@ -265,6 +289,10 @@ public class Duke {
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 
+    /**
+     * Deletes a given task and prints information about deleted task.
+     * @param task to be deleted
+     */
     protected void printTaskDeletion(Task task) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Noted. I've removed this task:");
