@@ -6,16 +6,16 @@ public class Common {
 
     private Model model;
 
-    private Common(){
-        model=Model.getInstance();
+    private Common() throws SingletonException{
+        model = Model.getInstance();
     }
 
-    public static Common getInstance(){
+    public static Common getInstance() throws SingletonException{
         if(common==null){
             common=new Common();
             return common;
         }
-        return null;
+        throw new SingletonException("There should be only one common.");
     }
 
     public String[] addTask(Task task){
@@ -27,18 +27,13 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
-    public String[] printList(){
-        if(model.formatList()==null){
-            ArrayList<String> s=new ArrayList<>();
-            s.add("The list is empty");
-            return s.toArray(new String[0]);
-        }
+    public String[] printList() throws DukeException {
         ArrayList<String> s=model.formatList();
         s.add(0,"Here are the tasks in your list:");
         return s.toArray(new String[0]);
     }
 
-    public String[] markTask(int index){
+    public String[] markTask(int index) throws DukeException {
         model.markDone(index);
         ArrayList<String> s=new ArrayList<>();
         s.add("Nice! I've marked this task as done: :");

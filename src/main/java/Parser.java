@@ -4,15 +4,15 @@ public class Parser {
 
     private Parser(){}
 
-    public static Parser getInstance(){
+    public static Parser getInstance() throws SingletonException{
         if(parser==null){
             parser=new Parser();
             return parser;
         }
-        return null;
+        throw new SingletonException("There should only be one parser.");
     }
 
-    public Command parse(String userInput){
+    public Command parse(String userInput) throws DukeException {
 
         if(userInput.contains(" ")){
             String keyword=userInput.substring(0,userInput.indexOf(" "));
@@ -27,8 +27,6 @@ public class Parser {
                     return parseDeadline(information);
                 case "event":
                     return parseEvent(information);
-                default:
-                    return null;
             }
         }else{
             switch (userInput){
@@ -36,11 +34,9 @@ public class Parser {
                     return parseList();
                 case "bye":
                     return parseBye();
-                default:
-                    return null;
             }
         }
-
+        throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
 
@@ -52,48 +48,56 @@ public class Parser {
         return new Command_List();
     }
 
-    private Command parseDone(String information){
-        if(isNumeric(information)){
-            int index=Integer.parseInt(information)-1;
+    private Command parseDone(String information) throws DukeException {
+        try {
+            int index = Integer.parseInt(information) - 1;
             return new Command_MarkAsDone(index);
+        }catch (NumberFormatException e){
+            throw new DukeException("The input for done must contain a number.");
         }
-        return null;
     }
 
-    private Command parseTodo(String information){
+    private Command parseTodo(String information) throws DukeException {
+        if(information.trim().length()==0) {
+            throw new DukeException("The description of the todo cannot be empty.");
+        }
         return new Command_AddToDo(information);
     }
 
-    private Command parseDeadline(String information){
-        if(information.contains(" /by ")){
-            String description=information.substring(0,information.indexOf(" /by "));
-            String time=information.substring(information.indexOf(" /by ")+5);
-
-            return new Command_AddDeadline(description,time);
+    private Command parseDeadline(String information) throws DukeException {
+        if(!information.contains(" /by ")){
+            throw new DukeException("The input for deadline must contain /by ");
         }
-        return null;
+
+        String description=information.substring(0,information.indexOf(" /by "));
+        if(description.trim().length()==0) {
+            throw new DukeException("The description of the deadline cannot be empty.");
+        }
+
+        String time=information.substring(information.indexOf(" /by ")+5);
+        if(time.trim().length()==0) {
+            throw new DukeException("The time of the deadline cannot be empty.");
+        }
+
+        return new Command_AddDeadline(description,time);
     }
 
-    private Command parseEvent(String information){
-        if(information.contains(" /at ")){
-            String description=information.substring(0,information.indexOf(" /at "));
-            String time=information.substring(information.indexOf(" /at ")+5);
+    private Command parseEvent(String information) throws DukeException {
+        if(!information.contains(" /at ")){
+            throw new DukeException("The input for event must contain /at ");
+        }
 
-            return new Command_AddEvent(description,time);
+        String description=information.substring(0,information.indexOf(" /at "));
+        if(description.trim().length()==0) {
+            throw new DukeException("The description of the event cannot be empty.");
         }
-        return null;
-    }
 
-    private boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
+        String time=information.substring(information.indexOf(" /at ")+5);
+        if(time.trim().length()==0) {
+            throw new DukeException("The time of the event cannot be empty.");
         }
-        try {
-            Integer.parseInt(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+
+        return new Command_AddEvent(description,time);
     }
 
 }

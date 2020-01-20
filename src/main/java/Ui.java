@@ -21,6 +21,9 @@ public class Ui {
         display("Bye.");
     }
 
+    public void errorLog(String error){
+        display(error);
+    }
 
     public void display(String... msg){
         System.out.println("\t________________________________________________________________________________________________________________________");

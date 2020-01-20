@@ -7,7 +7,7 @@ public class Command_MarkAsDone extends Command{
     }
 
     @Override
-    public void execute(Common common, Ui ui) {
+    public void execute(Common common, Ui ui) throws DukeException {
         ui.display(common.markTask(index));
     }
 }

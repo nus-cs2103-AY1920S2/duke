@@ -1,42 +1,41 @@
-public class Duke {
 
-    private static Duke duke =null;
+public class Duke {
 
     private Ui ui;
     private Common common;
     private Parser parser;
 
-    private Duke(){
+    public Duke(){
         ui=new Ui();
-        common=Common.getInstance();
-        parser=Parser.getInstance();
+        try {
+            common = Common.getInstance();
+            parser = Parser.getInstance();
+        }catch (SingletonException e){
+            ui.errorLog(e.getMessage());
+        }
     }
 
-    public static Duke getInstance(){
-        if(duke ==null){
-            duke =new Duke();
-            return duke;
-        }
-        return null;
-    }
 
     public void run(){
         ui.preLog();
 
-        Boolean isExit=false;
+        boolean isExit=false;
 
         while(!isExit){
             String userInput=ui.getInput();
-            Command command=parser.parse(userInput);
-            command.execute(common,ui);
-            isExit=command.isExit();
+            try {
+                Command command = parser.parse(userInput);
+                command.execute(common,ui);
+                isExit=command.isExit();
+            }catch (DukeException e){
+                ui.errorLog(e.getMessage());
+            }
         }
 
     }
 
     public static void main(String[] args) {
-        Duke duke = Duke.getInstance();
-        assert duke != null;
+        Duke duke = new Duke();
         duke.run();
     }
 }
