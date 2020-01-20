@@ -36,7 +36,7 @@ public class Duke {
                 continue;
             }
             Duke.addCommand(command, dukeList);
-            System.out.println("Understood. I have added: " + command);
+            System.out.println("Understood. I have added: " + dukeList.get(dukeList.size() - 1));
             System.out.println("Items in the list: " + dukeList.size());
             command = sc.nextLine();
         }
@@ -46,31 +46,46 @@ public class Duke {
     }
 
     public static void addCommand(String str, ArrayList<Task> dukeList) {
-        String[] splitStr = str.split("/");
-        String description = splitStr[0];
-        String timing = "";
-        if (splitStr.length > 1) {
-            timing = splitStr[1];
-        }
-        String[] splitCommand = description.split(" ");
-        String taskType = splitCommand[0];
+        if (str.contains("deadline")) {
+            String[] splitStr = str.split("/by ");
+            String description = splitStr[0];
+            String timing = splitStr[1];
+            String[] splitCommand = description.split(" ");
 
-        StringBuilder builder = new StringBuilder();
-        for(int i = 1; i < splitCommand.length; i ++) {
-            builder.append(splitCommand[i]);
-            builder.append(" ");
-            description = builder.toString();
+            StringBuilder builder = new StringBuilder();
+            for(int i = 1; i < splitCommand.length; i ++) {
+                builder.append(splitCommand[i]);
+                builder.append(" ");
+                description = builder.toString();
+                dukeList.add(new Deadline(description, timing));
+            }
         }
+        else if (str.contains("event")) {
+            String[] splitStr = str.split("/at ");
+            String description = splitStr[0];
+            String timing = splitStr[1];
+            String[] splitCommand = description.split(" ");
 
-        if (taskType.equals("todo")) {
+            StringBuilder builder = new StringBuilder();
+            for(int i = 1; i < splitCommand.length; i ++) {
+                builder.append(splitCommand[i]);
+                builder.append(" ");
+                description = builder.toString();
+                dukeList.add(new Event(description, timing));
+            }
+        }
+        else if (str.contains("todo")) {
+            String[] splitStr = str.split("todo");
+            String description = splitStr[0];
+            String[] splitCommand = description.split(" ");
+
+            StringBuilder builder = new StringBuilder();
+            for(int i = 1; i < splitCommand.length; i ++) {
+                builder.append(splitCommand[i]);
+                builder.append(" ");
+                description = builder.toString();
+            }
             dukeList.add(new ToDo(description));
         }
-        else if (taskType.equals("deadline")) {
-            dukeList.add(new Deadline(description, timing));
-        }
-        else if (taskType.equals("event")) {
-            dukeList.add(new Event(description, timing));
-        }
-
     }
 }
