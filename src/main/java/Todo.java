@@ -3,15 +3,15 @@ import java.util.regex.Pattern;
 
 public class Todo extends Task {
     private static String messageFormat = "todo description";
-    private static Pattern messageRegex = Pattern.compile("todo (.+)");
+    private static Pattern messageRegex = Pattern.compile("todo\\s+(\\S+.*)");
 
-    public static Todo parseTodo(String msg) throws ParsingException {
+    public static Todo parseTodo(String msg) throws MessageInterpretationException {
         Matcher m = messageRegex.matcher(msg);
         
         if (m.matches()) {
             return new Todo(m.group(1));
         } else {
-            throw new ParsingException(messageFormat);
+            throw new MessageInterpretationException(messageFormat);
         }
     }
 

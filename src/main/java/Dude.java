@@ -60,7 +60,7 @@ public class Dude {
                                 "  bye");
                         continue;
                     }
-                } catch (ParsingException e) {
+                } catch (MessageInterpretationException e) {
                     respondError("Sorry mate, I didn't quite getcha", e.getMessage());
                 }
             }
@@ -72,6 +72,11 @@ public class Dude {
     }
 
     private void listTasks() {
+        if (tasks.isEmpty()) {
+            respond("You got nothing to do, dude. Ain't that awesome??");
+            return;
+        }
+        
         respond(() -> {
             speak("These are your tasks, dude:");
             int index = 1;
