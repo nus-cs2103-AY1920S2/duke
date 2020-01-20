@@ -41,6 +41,9 @@ public class DukeProcessor {
             case "event":
                 command = createCommand(CommandType.EVENT);
                 break;
+            case "delete":
+                command = createCommand(CommandType.DELETE);
+                break;
             default:
                 command = createCommand(CommandType.INVALID);
         }
@@ -86,6 +89,9 @@ public class DukeProcessor {
                 break;
             case EVENT:
                 command = new CommandEvent();
+                break;
+            case DELETE:
+                command = new CommandDelete();
                 break;
             default:
                 command = new CommandInvalid();
