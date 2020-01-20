@@ -11,22 +11,22 @@ Here are the following commands (case sensitive):
 3) todo [taskname]: Add a To-Do task with taskname!
 4) event [taskname] /at [datetime]: Add an event with a taskname together with the date/time!
 5) deadline [taskname] /by [datetime]: Add an deadline with a taskname together with the date/time!
-	************************
-	borrow book added!
-	************************
-	************************
-	return book added!
-	************************
-	************************
-	project meeting added!
-	************************
-	************************
-	1.[T][✘] borrow book
-	2.[D][✘] return book (by: sunday)
-	3.[E][✘] project meeting (at: Mon 2-4pm)
-	************************
-	************************
-	study for CS2103 added!
+    ************************
+    borrow book added!
+    ************************
+    ************************
+    return book added!
+    ************************
+    ************************
+    project meeting added!
+    ************************
+    ************************
+    1.[T][✘] borrow book
+    2.[D][✘] return book (by: sunday)
+    3.[E][✘] project meeting (at: Mon 2-4pm)
+    ************************
+    ************************
+    study for CS2103 added!
     ************************
     ************************
     swimming added!
@@ -38,9 +38,9 @@ Here are the following commands (case sensitive):
     Task set to done!
     ************************
     ************************
-	1.[T][✘] borrow book
-	2.[D][✓] return book (by: sunday)
-	3.[E][✘] project meeting (at: Mon 2-4pm)
+    1.[T][✘] borrow book
+    2.[D][✓] return book (by: sunday)
+    3.[E][✘] project meeting (at: Mon 2-4pm)
     4.[D][✘] study for CS2103 (by: this week)
     5.[T][✓] swimming
     ************************
