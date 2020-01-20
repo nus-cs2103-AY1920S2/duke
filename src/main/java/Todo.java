@@ -4,7 +4,6 @@
 public class Todo implements Task {
     protected String description;
     protected boolean isDone;
-    protected TaskType taskType = TaskType.TODO;
 
     public Todo(String description) {
         this(description, false);
@@ -42,11 +41,6 @@ public class Todo implements Task {
         } else {
             return "\u2718";
         }
-    }
-
-    @Override
-    public TaskType getTaskType() {
-        return taskType;
     }
 
     @Override

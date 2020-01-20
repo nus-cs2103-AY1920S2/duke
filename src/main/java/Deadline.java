@@ -6,7 +6,6 @@ public class Deadline implements Task {
     protected String description;
     protected String deadline;
     protected boolean isDone;
-    protected TaskType taskType = TaskType.DEADLINE;
 
     public Deadline(String description, String deadline) {
         this(description, deadline, false);
@@ -49,11 +48,6 @@ public class Deadline implements Task {
     @Override
     public void markAsIncomplete() {
         this.isDone = false;
-    }
-
-    @Override
-    public TaskType getTaskType() {
-        return taskType;
     }
 
     @Override

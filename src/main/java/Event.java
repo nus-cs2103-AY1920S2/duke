@@ -6,7 +6,6 @@ public class Event implements Task {
     protected String description;
     protected String eventTime;
     protected boolean isDone;
-    protected TaskType taskType = TaskType.EVENT;
 
     public Event(String description, String eventTime) {
         this(description, eventTime, false);
@@ -49,11 +48,6 @@ public class Event implements Task {
     @Override
     public void markAsIncomplete() {
         this.isDone = false;
-    }
-
-    @Override
-    public TaskType getTaskType() {
-        return taskType;
     }
 
     @Override
