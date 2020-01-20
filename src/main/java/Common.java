@@ -18,7 +18,7 @@ public class Common {
         throw new SingletonException("There should be only one common.");
     }
 
-    public String[] addTask(Task task){
+    public String[] addTask(Task task) throws DukeException {
         model.addTask(task);
         ArrayList<String> s=new ArrayList<>();
         s.add("Got it. I've added this task: :");
@@ -33,14 +33,23 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
-    public String[] markTask(int index) throws DukeException {
+    public String[] markAsDone(int index) throws DukeException {
         model.markDone(index);
         ArrayList<String> s=new ArrayList<>();
-        s.add("Nice! I've marked this task as done: :");
+        s.add("Nice! I've marked this task as done: ");
         s.add(""+model.getTask(index));
         return s.toArray(new String[0]);
     }
 
+    public String[] deleteTask(int index) throws DukeException {
+        Task task=model.getTask(index);
+        model.deleteTask(index);
+        ArrayList<String> s=new ArrayList<>();
+        s.add("Noted. I've removed this task: ");
+        s.add(""+task);
+        s.add("Now you have "+model.getSize()+" tasks in the list.");
+        return s.toArray(new String[0]);
+    }
 
 
 }

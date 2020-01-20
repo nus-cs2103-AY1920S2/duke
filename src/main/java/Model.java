@@ -23,12 +23,8 @@ public class Model {
     }
 
     public ArrayList<String> formatList() throws DukeException {
-        if(taskList.isEmpty()){
-            throw new DukeException("The task list is empty.");
-        }
-
         ArrayList<String> s=new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             s.add((i + 1) + ". " + taskList.get(i));
         }
         return s;
@@ -39,14 +35,22 @@ public class Model {
         getTask(index).setDone();
     }
 
+    public void deleteTask(int index) throws DukeException{
+        taskList.remove(getTask(index));
+    }
+
     public Task getTask(int index) throws DukeException {
+        getSize();
         if(index<0 || index>=taskList.size()){
             throw new DukeException("Index out of bound.");
         }
         return taskList.get(index);
     }
 
-    public int getSize(){
+    public int getSize() throws DukeException {
+        if(taskList.size()==0){
+            throw new DukeException("Task list is empty.");
+        }
         return taskList.size();
     }
 

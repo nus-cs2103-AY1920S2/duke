@@ -7,7 +7,7 @@ public abstract class Command_AddTask extends Command{
     }
 
     @Override
-    public void execute(Common common, Ui ui) {
+    public void execute(Common common, Ui ui) throws DukeException {
         ui.display(common.addTask(task));
     }
 }

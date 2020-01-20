@@ -21,6 +21,8 @@ public class Parser {
             switch (keyword){
                 case "done":
                     return parseDone(information);
+                case "delete":
+                    return parseDelete(information);
                 case "todo":
                     return parseTodo(information);
                 case "deadline":
@@ -51,7 +53,16 @@ public class Parser {
     private Command parseDone(String information) throws DukeException {
         try {
             int index = Integer.parseInt(information) - 1;
-            return new Command_MarkAsDone(index);
+            return new Command_Done(index);
+        }catch (NumberFormatException e){
+            throw new DukeException("The input for done must contain a number.");
+        }
+    }
+
+    private Command parseDelete(String information) throws DukeException {
+        try {
+            int index = Integer.parseInt(information) - 1;
+            return new Command_Delete(index);
         }catch (NumberFormatException e){
             throw new DukeException("The input for done must contain a number.");
         }

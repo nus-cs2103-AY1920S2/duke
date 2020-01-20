@@ -1,13 +1,13 @@
-public class Command_MarkAsDone extends Command{
+public class Command_Delete extends Command{
 
     private int index;
 
-    public Command_MarkAsDone(int index){
+    public Command_Delete(int index){
         this.index=index;
     }
 
     @Override
     public void execute(Common common, Ui ui) throws DukeException {
-        ui.display(common.markTask(index));
+        ui.display(common.deleteTask(index));
     }
 }
