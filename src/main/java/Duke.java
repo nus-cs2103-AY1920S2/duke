@@ -7,28 +7,39 @@ import java.util.*;
 
 public class Duke { //extends Application {
     public static void greetings() {
-        System.out.println("    #__________________________________________________________#\n" +
-                "     Hello! I'm Grapie\n" +
-                "     What can I do for you?\n" +
-                "    #__________________________________________________________#");
-        
+                String intro = "Hello! I'm Grapie\n" +
+                "     What can I do for you?\n" ;
+
+                formattingDivider(intro);
+
+    }
+
+    public static void formattingDivider(String contentStr) {
+        System.out.println("    #__________________________________________________________#");
+        System.out.println("    " + contentStr);
+        System.out.println("    #__________________________________________________________# \n");
+
     }
 
     public static void echo() {
         Scanner sc = new Scanner(System.in);
         String nextStr = sc.nextLine();
 
-        while (!nextStr.equals("bye")) {
-            System.out.println("    #__________________________________________________________#");
-            System.out.println("    " + nextStr);
-            System.out.println("    #__________________________________________________________#");
+        List<String> storingList = new ArrayList<>();
 
-            nextStr = sc.next();
+        if (nextStr.equals("list")) {
+            //formattingDivider("added: " + nextStr);
+            
+        } else {
+            while (!nextStr.equals("bye")) {
+                formattingDivider("added: " + nextStr);
+
+                storingList.add(nextStr);
+                nextStr = sc.nextLine();
+            }
         }
 
-        System.out.println("    #__________________________________________________________#");
-        System.out.println("    Okie!! Goodbye!");
-        System.out.println("    #__________________________________________________________#");
+        formattingDivider("Okie!! Goodbye!");
     }
 
 
