@@ -65,6 +65,7 @@ class DukeTest {
     }
 
     @Test
+    @DisplayName("Duke: Test for invalid command")
     void dukeException_invalidCommand_displayInvalidCommandMessage() {
         String input = "blah" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
@@ -76,6 +77,7 @@ class DukeTest {
     }
 
     @Test
+    @DisplayName("Duke: Test for empty Todo command")
     void dukeException_emptyTodoCommand_displayInvalidTodoMessage() {
         String input = "todo" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
@@ -87,6 +89,7 @@ class DukeTest {
     }
 
     @Test
+    @DisplayName("Duke: Test for deadline command with no arguments")
     void dukeException_emptyDeadlineCommand_displayInvalidDeadlineMessage() {
         String input = "deadline" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
@@ -98,6 +101,7 @@ class DukeTest {
     }
 
     @Test
+    @DisplayName("Duke: Test for deadline command with missing delimiter")
     void dukeException_missingDeadlineDelimiter_displayInvalidDeadlineMessage() {
         String input = "deadline return book" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
@@ -111,6 +115,7 @@ class DukeTest {
     }
 
     @Test
+    @DisplayName("Duke: Test for deadline command with only delimiter")
     void dukeException_onlyDeadlineDelimiterPresent_displayInvalidDeadlineMessage() {
         String input = "deadline /by" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
@@ -121,6 +126,48 @@ class DukeTest {
                 "[due by]", exceptionIcon);
         assertEquals(expectedMessage, exception.getMessage(),
                 "Should throw exception message for deadline command with no arguments");
+    }
+
+    @Test
+    @DisplayName("Duke: Test for event command with no arguments")
+    void dukeException_emptyEventCommand_displayInvalidEventMessage() {
+        String input = "event" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        String expectedMessage = String.format("%s Wrong input format for adding an event... Format: event " +
+                "[description] /at [event time]", exceptionIcon);
+        assertEquals(expectedMessage, exception.getMessage(),
+                "Should throw exception message for event command with no arguments");
+    }
+
+    @Test
+    @DisplayName("Duke: Test for event command missing delimiter")
+    void dukeException_missingEventDelimiterCommand_displayInvalidEventMessage() {
+        String input = "event project meeting Mon 2-4pm" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        String expectedMessage = String.format("%s Wrong input format for adding an event... Format: event " +
+                "[description] /at [event time]", exceptionIcon);
+        assertEquals(expectedMessage, exception.getMessage(),
+                "Should throw exception message for event command with no arguments");
+    }
+
+    @Test
+    @DisplayName("Duke: Test for event command with only delimiter")
+    void dukeException_onlyEventDelimiterPresent_displayInvalidEventMessage() {
+        String input = "event /at" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        String expectedMessage = String.format("%s Wrong input format for adding an event... Format: event " +
+                "[description] /at [event time]", exceptionIcon);
+        assertEquals(expectedMessage, exception.getMessage(),
+                "Should throw exception message for event command with no arguments");
     }
 
     @ParameterizedTest
