@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.*;
 import java.util.stream.Stream;
@@ -99,6 +100,20 @@ class DukeTest {
         assertEquals("Invalid task number given for deletion...",
                 exception.getMessage(),
                 "Should display invalid message for delete command with invalid task number");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"done", "done 10"})
+    void dukeException_invalidDoneCommand_displayInvalidDoneCommandMessage(String s) {
+        // Add newline to input string, to ensure command is executed
+        String input =  s + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        assertEquals("Invalid Task Number given!",
+                exception.getMessage(),
+                "Should display invalid message for done command with invalid task number");
     }
 
     @Test
