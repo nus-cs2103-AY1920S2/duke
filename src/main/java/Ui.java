@@ -21,6 +21,7 @@ public class Ui {
         display("Bye.");
     }
 
+
     public void display(String... msg){
         System.out.println("\t________________________________________________________________________________________________________________________");
         for(String str:msg) {
