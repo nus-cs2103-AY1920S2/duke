@@ -13,12 +13,11 @@ public class Ui {
     }
 
     public void preLog(){
-        display("Hello! I'm Duke",
-                "What can I do for you?");
+        display(UiMessage.GREETING.getMsg());
     }
 
     public void endLog(){
-        display("Bye.");
+        display(UiMessage.FAREWELL.getMsg());
     }
 
     public void errorLog(String error){
