@@ -175,6 +175,11 @@ public class Duke {
                 tasks.add(newEvent);
                 printTaskAddition(newEvent);
                 break;
+            case "delete":
+                int taskNumberToDelete = Integer.parseInt(commandWords[1]);
+                Task removedTask = tasks.remove(taskNumberToDelete - 1);
+                printTaskDeletion(removedTask);
+                break;
             default:
                 // Invalid command given
                 throw new DukeException(DukeException.exceptionIcon +
@@ -257,6 +262,14 @@ public class Duke {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Nice! I've marked this task as done:");
         printTextWithIndentation(task.toString());
+        printTextWithIndentation(HORIZONTAL_BAR);
+    }
+
+    protected void printTaskDeletion(Task task) {
+        printTextWithIndentation(HORIZONTAL_BAR);
+        printTextWithIndentation("Noted. I've removed this task:");
+        printTextWithIndentation("  " + task.toString());
+        printTextWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 }

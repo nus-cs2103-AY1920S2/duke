@@ -288,10 +288,6 @@ class DukeTest {
         expected.append(HORIZONTAL_DIVIDER)
                 .append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE)
                 .append(HORIZONTAL_DIVIDER);
-        // Add goodbye message
-        expected.append(HORIZONTAL_DIVIDER)
-                .append(INDENTATION).append("Goodbye friend.").append(NEWLINE)
-                .append(HORIZONTAL_DIVIDER);
         assertEquals(expected.toString(), output.toString(), "Task should be deleted");
     }
 
