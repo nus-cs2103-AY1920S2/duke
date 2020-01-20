@@ -1,30 +1,63 @@
 package main;
 
+import commands.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DukeProcessor {
 
+    private List<String> textList;
     private boolean isActive;
 
     public DukeProcessor() {
+        textList = new ArrayList<String>();
         isActive = true;
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I help you with today? :)");
+        DukeCommand sayHello = createCommand(CommandType.HI, "");
+        sayHello.execute(this, "");
     }
 
     public void processInput(String input) {
+        DukeCommand command;
+
         switch(input) {
             case "bye":
-                System.out.println("Ok see you!");
-                disable();
+                command = createCommand(CommandType.BYE, "");
+                break;
+            case "list":
+                command = createCommand(CommandType.LIST, "");
                 break;
             default:
-                System.out.println(input);
+                command = createCommand(CommandType.ADD, input);
         }
+
+        command.execute(this, input);
+    }
+
+    public DukeCommand createCommand(CommandType commandType, String content) {
+
+        DukeCommand command;
+
+        switch(commandType) {
+            case HI:
+                command = new CommandHi();
+                break;
+            case BYE:
+                command = new CommandBye();
+                break;
+            case LIST:
+                command = new CommandList();
+                break;
+            default:
+                command = new CommandAdd();
+        }
+
+        return command;
+    }
+
+    public List<String> getTextList() {
+        return textList;
     }
 
     public void disable() {
