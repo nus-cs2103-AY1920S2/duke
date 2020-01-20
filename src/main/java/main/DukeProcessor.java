@@ -1,6 +1,7 @@
 package main;
 
 import commands.*;
+import exceptions.DukeException;
 import tasks.Task;
 
 import java.util.ArrayList;
@@ -14,9 +15,7 @@ public class DukeProcessor {
     public DukeProcessor() {
         taskList = new ArrayList<Task>();
         isActive = true;
-
-        DukeCommand sayHello = createCommand(CommandType.HI);
-        sayHello.execute(this, "");
+        sayHello();
     }
 
     public void processInput(String input) {
@@ -46,7 +45,20 @@ public class DukeProcessor {
                 command = createCommand(CommandType.INVALID);
         }
 
-        command.execute(this, input);
+        try {
+            command.execute(this, input);
+        } catch(DukeException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void sayHello() {
+        DukeCommand sayHello = createCommand(CommandType.HI);
+        try {
+            sayHello.execute(this, "");
+        } catch(DukeException e) {
+            e.printStackTrace();
+        }
     }
 
     private DukeCommand createCommand(CommandType commandType) {
