@@ -1,5 +1,8 @@
+/**
+ * The To-do class represents a task without any date/time attached to it
+ * e.g., visit new theme park
+ */
 public class Todo extends Task {
-
     public Todo(String description) {
         super(description);
     }
