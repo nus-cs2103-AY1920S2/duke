@@ -24,15 +24,19 @@ public class Duchess {
 
     }
 
-    public static void main(String[] args) {
-        Duchess duchess = new Duchess();
-        duchess.introduction();
+    private void run() {
+        introduction();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.toLowerCase().equals("bye")) {
-            duchess.echo(input);
+            echo(input);
             input = scanner.nextLine();
         }
-        duchess.goodbye();
+        goodbye();
+    }
+
+    public static void main(String[] args) {
+        Duchess duchess = new Duchess();
+        duchess.run();
     }
 }
