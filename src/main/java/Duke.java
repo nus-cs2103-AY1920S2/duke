@@ -124,6 +124,11 @@ public class Duke {
                 }
                 break;
             case "todo":
+                // Check if valid command is given
+                if (command.length() <= "todo".length()) {
+                    throw new DukeException(DukeException.exceptionIcon +
+                            " The description of a todo cannot be empty...");
+                }
                 // Get task description, get substring starting at index 5
                 // Remove first word
                 String todoDescription = command.substring("todo".length() + 1);
