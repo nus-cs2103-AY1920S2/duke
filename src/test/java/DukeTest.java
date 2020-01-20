@@ -73,7 +73,32 @@ class DukeTest {
                         new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
         // Check exception message
         assertEquals(exceptionIcon + " OOPS!!! I'm sorry, but I don't know what that means :-(",
-                exception.getMessage());
+                exception.getMessage(), "Should display invalid command message");
+    }
+
+    @Test
+    @DisplayName("Duke: Test for empty delete command")
+    void dukeException_deleteCommandWithNoNumber_displayInvalidDeleteCommandMessage() {
+        String input = "delete" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        assertEquals("Invalid task number given for deletion...", exception.getMessage(),
+                "Should display invalid message for empty delete command");
+    }
+
+    @Test
+    @DisplayName("Duke: Test for delete command with invalid task number")
+    void dukeException_deleteCommandWithOutOfBoundsTaskNumber_displayInvalidDeleteCommandMessage() {
+        String input = "delete 10" + NEWLINE;
+        Exception exception = assertThrows(DukeException.class,
+                () -> duke.processCommands(new BufferedReader(
+                        new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
+        // Check exception message
+        assertEquals("Invalid task number given for deletion...",
+                exception.getMessage(),
+                "Should display invalid message for delete command with invalid task number");
     }
 
     @Test
@@ -85,7 +110,8 @@ class DukeTest {
                         new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
         // Check exception message
         assertEquals(exceptionIcon + " The description of a todo cannot be empty...",
-                exception.getMessage());
+                exception.getMessage(),
+                "Should display invalid message for empty todo command");
     }
 
     @Test
