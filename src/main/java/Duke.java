@@ -103,6 +103,9 @@ public class Duke {
             }
             // Check first word of command
             switch (commandWords[0]) {
+            case "bye":
+                // User request for exit
+                break;
             case "list":
                 printTextWithIndentation(HORIZONTAL_BAR);
                 int taskCount = 1;
@@ -140,9 +143,10 @@ public class Duke {
             case "deadline":
                 // Get deadline, find index of "/by"
                 String deadlineDelimiter = "/by";
+                // Verify user input
+                verifyDeadlineInput(command, deadlineDelimiter);
                 int deadlineDelimiterIndex = command.indexOf(deadlineDelimiter);
                 int deadlineDelimiterLength = deadlineDelimiter.length();
-                verifyDeadlineInput(command, deadlineDelimiter);
                 // Get first word's index for deadline
                 // 1 additional character is considered for whitespace
                 int deadlineStartIndex = deadlineDelimiterIndex + deadlineDelimiterLength + 1;
@@ -170,7 +174,9 @@ public class Duke {
                 printTaskAddition(newEvent);
                 break;
             default:
-                break;
+                // Invalid command given
+                throw new DukeException(DukeException.exceptionIcon +
+                        " OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         reader.close();
