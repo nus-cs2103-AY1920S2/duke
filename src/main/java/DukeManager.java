@@ -22,27 +22,75 @@ public class DukeManager {
 
     public void handleCommand(String inputString) {
         String[] splitS = inputString.split(" ");
-        String s = splitS[0];
+        String command = splitS[0];
 
         String bye = "bye";
         String list = "list";
         String done = "done";
+        String todo = "todo";
+        String deadline = "deadline";
+        String event = "event";
+
+
 
         System.out.println(line);
 
-        if(s.equals(bye)) {
+        if(command.equals(bye)) {
             System.out.println("    " + "Bye. Hope to see you again soon!");
-        } else if (s.equals(list)) {
+        } else if (command.equals(list)) {
             dl.view_task();
-        } else if (s.equals(done)) {
+        } else if (command.equals(done)) {
             dl.markTaskAsDone(Integer.parseInt(splitS[1]));
+        } else if (command.equals(todo)) {
+            String taskDes = findTaskDes(inputString);
+            Todo newTask = new Todo(taskDes);
+            dl.addTask(newTask);
+        } else if(command.equals(deadline)){
+            String deadlineBy = findDeadline(inputString);
+            String deadlineDes = findTaskDes(inputString);
+            Deadline newDL = new Deadline(deadlineDes, deadlineBy);
+            dl.addTask(newDL);
+        } else if(command.equals(event)){
+            String eventAt = findDeadline(inputString);
+            String eventDes = findTaskDes(inputString);
+            Event newEvent = new Event(eventDes, eventAt);
+            dl.addTask(newEvent);
         }
         else {
-            Task newTask = new Task(inputString);
-            dl.add_task(newTask);
+            System.out.println("placeholder");
         }
 
         System.out.println(line);
+    }
+
+    public String findDeadline(String S) {
+        String[] curr = S.split("/");
+        return findTaskDes(curr[1]);
+    }
+
+    public String findTaskDes(String S) {
+        if(S.indexOf("/") <= 0) {
+            return findTaskDesHelper(S);
+        } else {
+            String[] findingDes = S.split("/");
+            for(String x : findingDes) {
+                System.out.println("x: " + x);
+            }
+            return findTaskDesHelper(findingDes[0]);
+        }
+    }
+
+    private String findTaskDesHelper(String S) {
+        String[] help = S.split(" ");
+        int descriptionLength = help.length;
+
+        String output = help[1];
+
+        for(int x = 2; x < descriptionLength; x++) {
+            output +=  " " + help[x];
+        }
+
+        return output;
     }
 
 }

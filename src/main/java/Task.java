@@ -11,13 +11,14 @@ public class Task {
         isDone = true;
     }
 
+
     public String toString() {
         String output = "";
 
         if(isDone) {
-            output = "    [O] " + taskName;
+            output = "[O] " + taskName;
         } else {
-            output = "    [X] " + taskName;
+            output = "[X] " + taskName;
         }
         return output;
     }
