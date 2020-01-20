@@ -4,10 +4,10 @@ public class Model {
 
     private static Model model=null;
 
-    private ArrayList<String> list;
+    private ArrayList<Task> taskList;
 
     private Model(){
-        list=new ArrayList<>();
+        taskList =new ArrayList<>();
     }
 
     public static Model getInstance(){
@@ -18,27 +18,35 @@ public class Model {
         return null;
     }
 
-    public void addList(String description){
-        list.add(description);
+    public void addTask(Task task){
+        taskList.add(task);
     }
 
     public String[] formatList(){
-        ArrayList<String> s=new ArrayList<>();
+        if(taskList.isEmpty()){
+            return null;
+        }
 
-        if(list.isEmpty()){
-            s.add("The list is empty.");
-        }else {
-            for (int i = 0; i < list.size(); i++) {
-                s.add((i + 1) + ". " + list.get(i));
-            }
+        ArrayList<String> s=new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            s.add((i + 1) + ". " + taskList.get(i));
         }
         return s.toArray(new String[0]);
     }
 
 
+    public void markDone(int index){
+        Task task=getTask(index);
+        if(task!=null){
+            task.setDone();
+        }
+    }
 
-
-
-
+    public Task getTask(int index){
+        if(index<0 || index>=taskList.size()){
+            return null;
+        }
+        return taskList.get(index);
+    }
 
 }

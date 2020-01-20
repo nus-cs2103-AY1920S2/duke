@@ -3,11 +3,13 @@ public class Duke {
     private static Duke duke =null;
 
     private Ui ui;
-    private Model model;
+    private Common common;
+    private Parser parser;
 
     private Duke(){
         ui=new Ui();
-        model=Model.getInstance();
+        common=Common.getInstance();
+        parser=Parser.getInstance();
     }
 
     public static Duke getInstance(){
@@ -18,27 +20,23 @@ public class Duke {
         return null;
     }
 
-
     public void run(){
         ui.preLog();
 
-        while(true){
+        Boolean isExit=false;
+
+        while(!isExit){
             String userInput=ui.getInput();
-            if(userInput.equals("bye")){
-                ui.endLog();
-                break;
-            }else if(userInput.equals("list")){
-                ui.display(model.formatList());
-            }else {
-                model.addList(userInput);
-                ui.display("added: "+userInput);
-            }
+            Command command=parser.parse(userInput);
+            command.execute(common,ui);
+            isExit=command.isExit();
         }
 
     }
 
     public static void main(String[] args) {
         Duke duke = Duke.getInstance();
+        assert duke != null;
         duke.run();
     }
 }
