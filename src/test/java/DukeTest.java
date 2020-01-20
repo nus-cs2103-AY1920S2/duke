@@ -252,6 +252,49 @@ class DukeTest {
                 "Immediate exit: No output should be present");
     }
 
+    @ParameterizedTest
+    @MethodSource("generateOneTodoTask")
+    @DisplayName("Duke: Test for delete command")
+    void processCommands_deleteCommand_removeItemFromList(Task task) {
+        String input = "todo " + task.getDescription() + NEWLINE +
+                "delete 1" + NEWLINE +
+                "list" + NEWLINE + "bye";
+        try {
+            duke.processCommands(new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        } catch (IOException e) {
+            fail("Should not throw IOException");
+        } catch (DukeException e) {
+            fail("Should not throw DukeException");
+        }
+        StringBuilder expected = new StringBuilder();
+        // Add task
+        expected.append(HORIZONTAL_DIVIDER)
+                .append(INDENTATION).append("Got it. I've added this task:").append(NEWLINE)
+                .append(INDENTATION)
+                .append(String.format("  [T][%s] %s", taskNotDoneIcon, task.getDescription()))
+                .append(NEWLINE)
+                .append(INDENTATION).append("Now you have 1 tasks in the list.").append(NEWLINE)
+                .append(HORIZONTAL_DIVIDER);
+        // Delete task
+        expected.append(HORIZONTAL_DIVIDER)
+                .append(INDENTATION).append("Noted. I've removed this task:").append(NEWLINE)
+                .append(INDENTATION)
+                .append(String.format("  [T][%s] %s", taskNotDoneIcon, task.getDescription()))
+                .append(NEWLINE)
+                .append(INDENTATION).append("Now you have 0 tasks in the list.").append(NEWLINE)
+                .append(HORIZONTAL_DIVIDER);
+        // List out tasks (Should be empty)
+        expected.append(HORIZONTAL_DIVIDER)
+                .append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE)
+                .append(HORIZONTAL_DIVIDER);
+        // Add goodbye message
+        expected.append(HORIZONTAL_DIVIDER)
+                .append(INDENTATION).append("Goodbye friend.").append(NEWLINE)
+                .append(HORIZONTAL_DIVIDER);
+        assertEquals(expected.toString(), output.toString(), "Task should be deleted");
+    }
+
     @Test
     @DisplayName("Duke: Test for list command")
     void processCommands_listCommand_listStoredItems() {
@@ -264,7 +307,7 @@ class DukeTest {
         } catch (IOException ioException) {
             fail("Should not throw IOException");
         } catch (DukeException dukeException) {
-            fail("Should not throw exception");
+            fail("Should not throw DukeException");
         }
         StringBuilder expected = new StringBuilder();
         // Add first task
@@ -310,7 +353,7 @@ class DukeTest {
         } catch (IOException ioException) {
             fail("Should not throw IOException");
         } catch (DukeException dukeException) {
-            fail("Should not throw exception");
+            fail("Should not throw DukeException");
         }
         // Add task
         StringBuilder expected = new StringBuilder();
