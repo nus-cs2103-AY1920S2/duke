@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    ArrayList<String> textArr = new ArrayList<String>();
-
     public static void main(String[] args) {
 
         Duke duke = new Duke();
@@ -15,42 +13,46 @@ public class Duke {
 
     public void frontDesk() {
         try {
-            String greetings = "____________________________________________________________ \n" +
-                    "Hello! I'm Chu Chu \n" +
-                    "What can I do for you ? \n" +
-                    "____________________________________________________________\n";
+            String greetings = "____________________________________________________________ \n"
+                    + "Hello! I'm Chu Chu \n"
+                    + "What can I do for you ? \n"
+                    + "____________________________________________________________\n";
             System.out.println(greetings);
 
             InputStreamReader rd = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(rd);
+            String[] commandArr = null;
             String command = null;
+            Parser parser = new Parser();
 
-            while (!(command = br.readLine()).equals("bye")) {
+            while (true) {
 
-                if (command.equals("list")) {
-                    String header = "____________________________________________________________ ";
-                    System.out.println(header);
-                    String text = null;
+                command = br.readLine();
+                commandArr = parser.parse(command);
 
-                    for(int i = 0; i < textArr.size(); i++) {
-                      text = (i + 1) + "." + " " + textArr.get(i);
-                      System.out.println(text);
-                    }
+                if (commandArr[0].equals("bye")) {
 
-                    String foot = "____________________________________________________________ ";
-                    System.out.println(foot);
+                    break;
+
+                } else if (commandArr[0].equals("list")) {
+
+                    Task.list();
+
+                } else if (commandArr[0].equals("done")) {
+
+                    Task t = Task.getTask(Integer.parseInt(commandArr[1]));
+                    t.markDone();
+
                 } else {
-                    textArr.add(command);
-                    String text = "____________________________________________________________ \n" +
-                            "added: " + command + "\n" +
-                            "____________________________________________________________ \n";
-                    System.out.println(text);
+
+                    Task.addTask(command);
                 }
             }
 
             System.out.println("Bye. I hope you liked the service and hope to see you soon ! \n");
 
         } catch (IOException e) {
+
             System.out.print(e);
         }
 
