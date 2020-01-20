@@ -1,23 +1,24 @@
 public class Task {
     private String taskName;
-    private boolean isDone = false;
+    protected boolean isDone = false;
 
-    public static String tick = Character.toString((char) 10003);
-    public static String cross = Character.toString((char) 10060);
+    public static String tick = "[" + (char) 10003 + "]";
+    public static String cross = "[" + (char) 10060 + "]";
 
     public Task(String taskName) {
         this.taskName = taskName;
     }
+    public Task() {}
 
     public String toString() {
-        String taskDescription = "[";
+        String taskDescription = "";
         if(isDone) {
             taskDescription += tick;
         } else {
             taskDescription += cross;
         }
 
-        taskDescription += "] " + taskName;
+        taskDescription += taskName;
         return taskDescription;
     }
 

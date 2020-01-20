@@ -1,8 +1,24 @@
 import java.util.*;
 
 public class Duke {
+    //private enum  possibleTasks { todo, deadline, }
+    private static Scanner sc = new Scanner(System.in);
+
+    private static Task taskHandler(String taskType) throws InvalidInputException{
+        String taskDescription = sc.nextLine();
+        String[] taskAndTiming = taskDescription.split("/");
+        switch(taskType) {
+            case "todo":
+                return new ToDoTask(taskDescription);
+            case "deadline":
+                return new DeadlineTask(taskAndTiming[0], taskAndTiming[1]);
+            case "event":
+                return new EventTask(taskAndTiming[0], taskAndTiming[1]);
+        }
+        return new Task(taskDescription);
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,7 +47,7 @@ public class Duke {
                         count++;
                     }
                     break;
-                    
+
                 case "done":
                     int index = sc.nextInt();
                     Task completedTask = usrInputs.get(index - 1);
@@ -39,6 +55,7 @@ public class Duke {
                     System.out.println("Good job, mate. I have marked the following task as done.\n" + completedTask);
                     nothingToAdd = true;
                     break;
+
 
             }
 
@@ -48,8 +65,14 @@ public class Duke {
                 continue;
             }
 
-            usrInputs.add(new Task(command));
-            System.out.println("added: " + command);
+            try {
+                Task currentTask = taskHandler(command);
+                usrInputs.add(currentTask);
+                System.out.println("Got it! I've added the following task \n" + currentTask +
+                        "\nNow you have " + usrInputs.size() + " tasks");
+            } catch (InvalidInputException e) {
+                System.out.println(e);
+            }
         }
 
 
