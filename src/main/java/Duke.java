@@ -11,8 +11,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Greetings, I am\n" + logo);
         System.out.println("How may I be of assistance today?");
-        String command = sc.nextLine();
 
+        String command = sc.nextLine();
         while (!command.equals("bye")) {
             System.out.println(command);
             command = sc.nextLine();
