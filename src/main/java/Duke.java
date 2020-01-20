@@ -194,9 +194,13 @@ public class Duke {
                 printTaskAddition(newEvent);
                 break;
             case "delete":
-                int taskNumberToDelete = Integer.parseInt(commandWords[1]);
-                Task removedTask = tasks.remove(taskNumberToDelete - 1);
-                printTaskDeletion(removedTask);
+                try {
+                    int taskNumberToDelete = Integer.parseInt(commandWords[1]);
+                    Task removedTask = tasks.remove(taskNumberToDelete - 1);
+                    printTaskDeletion(removedTask);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid task number given for deletion...");
+                }
                 break;
             default:
                 break;
