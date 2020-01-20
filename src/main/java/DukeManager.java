@@ -4,34 +4,35 @@ import java.util.Scanner;
 // Handles the functioning of Duke
 public class DukeManager {
     private static String line = "    ____________________________________________________________";
-    private ArrayList<String> listOfTasks;
+    private DukeList dl;
 
     public DukeManager() {
-        listOfTasks = new ArrayList<>();
+        dl = new DukeList();
     }
 
     public void run() {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        String bye = "bye";
 
         while(true) {
-            printResponse(command);
-            if(command.equals(bye)) {
-                break;
-            } else {
-                command = sc.nextLine();
-            }
+            handleCommand(command);
+            command = sc.nextLine();
         }
     }
 
-    public void printResponse(String s) {
+    public void handleCommand(String s) {
+        String bye = "bye";
+        String list = "list";
         System.out.println(line);
-        if(s.equals("bye")) {
+
+        if(s.equals(bye)) {
             System.out.println("    " + "Bye. Hope to see you again soon!");
+        } else if (s.equals(list)) {
+            dl.view_task();
         } else {
-            System.out.println("    " + s);
+            dl.add_task(s);
         }
+
         System.out.println(line);
     }
 
