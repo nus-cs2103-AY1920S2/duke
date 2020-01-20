@@ -1,4 +1,4 @@
-public class CommandList extends Command{
+public class Command_List extends Command{
 
     @Override
     public void execute(Common common, Ui ui) {

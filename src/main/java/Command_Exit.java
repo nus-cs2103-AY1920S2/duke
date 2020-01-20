@@ -1,4 +1,4 @@
-public class CommandExit extends Command{
+public class Command_Exit extends Command{
 
     @Override
     public void execute(Common common,Ui ui) {

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     private String description;
     private boolean isDone;
@@ -12,12 +12,14 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public abstract String getTypeIcon();
+
     public void setDone(){
         isDone=true;
     }
 
     @Override
     public String toString() {
-        return "["+getStatusIcon()+"] "+description;
+        return "["+getTypeIcon()+"] ["+getStatusIcon()+"] "+description;
     }
 }

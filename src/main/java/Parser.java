@@ -21,8 +21,14 @@ public class Parser {
             switch (keyword){
                 case "done":
                     return parseDone(information);
+                case "todo":
+                    return parseTodo(information);
+                case "deadline":
+                    return parseDeadline(information);
+                case "event":
+                    return parseEvent(information);
                 default:
-                    return parseAdd(userInput);
+                    return null;
             }
         }else{
             switch (userInput){
@@ -31,7 +37,7 @@ public class Parser {
                 case "bye":
                     return parseBye();
                 default:
-                    return parseAdd(userInput);
+                    return null;
             }
         }
 
@@ -39,27 +45,46 @@ public class Parser {
 
 
     private Command parseBye(){
-        return new CommandExit();
+        return new Command_Exit();
     }
 
     private Command parseList(){
-        return new CommandList();
-    }
-
-    private Command parseAdd(String userInput){
-        return new CommandAddTask(userInput);
+        return new Command_List();
     }
 
     private Command parseDone(String information){
         if(isNumeric(information)){
             int index=Integer.parseInt(information)-1;
-            return new CommandMarkAsDone(index);
+            return new Command_MarkAsDone(index);
         }
         return null;
     }
 
+    private Command parseTodo(String information){
+        return new Command_AddToDo(information);
+    }
 
-    public boolean isNumeric(String strNum) {
+    private Command parseDeadline(String information){
+        if(information.contains(" /by ")){
+            String description=information.substring(0,information.indexOf(" /by "));
+            String time=information.substring(information.indexOf(" /by ")+5);
+
+            return new Command_AddDeadline(description,time);
+        }
+        return null;
+    }
+
+    private Command parseEvent(String information){
+        if(information.contains(" /at ")){
+            String description=information.substring(0,information.indexOf(" /at "));
+            String time=information.substring(information.indexOf(" /at ")+5);
+
+            return new Command_AddEvent(description,time);
+        }
+        return null;
+    }
+
+    private boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
@@ -70,4 +95,5 @@ public class Parser {
         }
         return true;
     }
+
 }

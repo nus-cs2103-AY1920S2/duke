@@ -18,11 +18,12 @@ public class Common {
         return null;
     }
 
-    public String[] addTask(String description){
-        Task task=new Task(description);
+    public String[] addTask(Task task){
         model.addTask(task);
         ArrayList<String> s=new ArrayList<>();
-        s.add("added:"+task);
+        s.add("Got it. I've added this task: :");
+        s.add(""+task);
+        s.add("Now you have "+model.getSize()+" tasks in the list.");
         return s.toArray(new String[0]);
     }
 
@@ -32,7 +33,9 @@ public class Common {
             s.add("The list is empty");
             return s.toArray(new String[0]);
         }
-        return model.formatList();
+        ArrayList<String> s=model.formatList();
+        s.add(0,"Here are the tasks in your list:");
+        return s.toArray(new String[0]);
     }
 
     public String[] markTask(int index){

@@ -1,8 +1,8 @@
-public class CommandMarkAsDone extends Command{
+public class Command_MarkAsDone extends Command{
 
     private int index;
 
-    public CommandMarkAsDone(int index){
+    public Command_MarkAsDone(int index){
         this.index=index;
     }
 

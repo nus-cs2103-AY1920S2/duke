@@ -22,7 +22,7 @@ public class Model {
         taskList.add(task);
     }
 
-    public String[] formatList(){
+    public ArrayList<String> formatList(){
         if(taskList.isEmpty()){
             return null;
         }
@@ -31,7 +31,7 @@ public class Model {
         for (int i = 0; i < taskList.size(); i++) {
             s.add((i + 1) + ". " + taskList.get(i));
         }
-        return s.toArray(new String[0]);
+        return s;
     }
 
 
@@ -47,6 +47,10 @@ public class Model {
             return null;
         }
         return taskList.get(index);
+    }
+
+    public int getSize(){
+        return taskList.size();
     }
 
 }
