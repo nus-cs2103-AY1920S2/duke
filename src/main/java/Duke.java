@@ -2,6 +2,7 @@ import java.util.*;
 public class Duke {
     public static final String string = "    _________________________________________";
     public static final String space = "     ";
+    public static ArrayList<String> lst = new ArrayList<>();
 
     public static void Greeting() {
         String greeting = string + "\n"+ space +
@@ -26,10 +27,19 @@ public class Duke {
     }
 
     public static void List() {
-        String list = string + "\n" + space +
-                "list\n" +
+        System.out.println(string);
+        for (int i = 1; i <= lst.size(); i++) {
+            System.out.println(space + i + ". " + lst.get(i-1));
+        }
+        System.out.println(string);
+    }
+
+    public static void Add(String action) {
+        String add = string + "\n" + space +
+                "added: " + action + "\n" +
                 string;
-        System.out.println(list);
+        lst.add(action);
+        System.out.println(add);
     }
 
     public static void main(String[] args) {
@@ -49,9 +59,11 @@ public class Duke {
                 List();
             } else if (line.equals("blah")) {
                 Blah();
-            } else {
+            } else if (line.equals("bye")){
                 Bye();
                 break;
+            } else {
+                Add(line);
             }
         }
         sc.close();
