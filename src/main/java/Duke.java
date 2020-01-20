@@ -5,12 +5,6 @@ public class Duke {
 	static final String greetingMessage = "Salue! Je suis Duke. \nWhat can I do for you?";
 	static final String goodByeMessage = "Au revoir!";
 
-	static void printMessage(String message) {
-		System.out.println(separation);
-		System.out.println(message);
-		System.out.println(separation);
-	}
-
 	public static void main(String[] args) {
 		String logo = " ____        _        \n"
 				+ "|  _ \\ _   _| | _____ \n"
@@ -19,18 +13,22 @@ public class Duke {
 				+ "|____/ \\__,_|_|\\_\\___|\n";
 		System.out.println("Hello from\n" + logo);
 
-		printMessage(greetingMessage);
+		Interpreter.printMessage(greetingMessage);
+		Storage storage = new Storage<String>();
 
 		Scanner cin = new Scanner(System.in);
 		while (true) {
 			String command = cin.nextLine();
 
 			if (command.equals("bye")) {
-				printMessage(goodByeMessage);
+				Interpreter.printMessage(goodByeMessage);
 				break;
+			} 
+			else if (command.equals("list")) {
+				Interpreter.printList(storage.getList());
 			} else {
-				printMessage(command);
-				continue;
+				storage.addAction(command);
+				Interpreter.printMessage("added :" + command);
 			}
 		}
 	}
