@@ -16,12 +16,7 @@ public class Driver {
         String command = readCommand(scanner);
         System.out.println("------------------------");
         while (!command.equals("bye")) {
-            try {
-                duke.processCommand(command);
-            } catch(DukeException e) {
-                System.err.println(e);
-            }
-
+            duke.processCommand(command);
             System.out.println("------------------------");
             command = readCommand(scanner);
         }
