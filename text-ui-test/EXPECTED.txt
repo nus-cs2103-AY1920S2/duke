@@ -1,0 +1,33 @@
+    _________________________________________
+     Hello! I'm Duke
+     What can I do for you?
+    _________________________________________
+todo buy bread
+    _________________________________________
+     Got it. I've added this task:
+       [T][✗] buy bread
+     Now you have 1 task in the list
+    _________________________________________
+deadline do homework /by Sunday
+    _________________________________________
+     Got it. I've added this task:
+       [D][✗] do homework (by: Sunday)
+     Now you have 2 tasks in the list
+    _________________________________________
+event project meeting /at Tues 10-12pm
+    _________________________________________
+     Got it. I've added this task:
+       [E][✗] project meeting (at: Tues 10-12pm)
+     Now you have 3 tasks in the list
+    _________________________________________
+list
+    _________________________________________
+     Here are the tasks in your list:
+     1.[T][✗] buy bread
+     2.[D][✗] do homework (by: Sunday)
+     3.[E][✗] project meeting (at: Tues 10-12pm)
+    _________________________________________
+bye
+    _________________________________________
+     Bye. Hope to see you again soon!
+    _________________________________________
