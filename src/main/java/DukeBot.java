@@ -1,5 +1,3 @@
-import jdk.jfr.Event;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,7 @@ public class DukeBot {
     }
 
     public void processCommand(String command) {
-        String[] commandArray = command.split(" ", 2);
+        String[] commandArray = command.split(" ");
         switch(commandArray[0]) {
             case "bye":
                 dukeBye();
@@ -25,15 +23,9 @@ public class DukeBot {
             case "done":
                 dukeDone(Integer.parseInt(commandArray[1]));
                 break;
-            case "todo":
-                addTask(commandArray[1], TaskType.TODO);
-                break;
-            case "deadline":
-                addTask(commandArray[1], TaskType.DEADLINE);
-                break;
-            case "event":
-                addTask(commandArray[1], TaskType.EVENT);
-                break;
+            default:
+                Task task = new Task(command);
+                addTask(task);
         }
     }
 
@@ -59,26 +51,9 @@ public class DukeBot {
         System.out.println("Nice! I've marked this task as done: " + selectedTask);
     }
 
-    public void addTask(String description, TaskType taskType) {
-        System.out.println("Great! I've added the following task to your list: ");
-        Task task = new Task("");
-        switch(taskType) {
-            case TODO:
-                task = new TodoTask(description);
-                break;
-            case DEADLINE:
-                String[] deadlineArray = description.split(" /by ", 2);
-                task = new DeadlineTask(deadlineArray[0], deadlineArray[1]);
-                break;
-            case EVENT:
-                String[] eventArray = description.split(" /at ", 2);
-                task = new EventTask(eventArray[0], eventArray[1]);
-                break;
-        }
-
+    public void addTask(Task task) {
         taskList.add(task);
-        System.out.println(task);
-        System.out.println(String.format("You now have %d tasks in your list.", taskList.size()));
+        System.out.println("added: " + task.getDescription());
     }
 
     public void printTaskList() {
