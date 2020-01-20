@@ -1,34 +1,44 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The DukeBot class. It contains methods available for DukeBot to use, and also stores content that DukeBot needs.
+ */
+
 public class DukeBot {
 
-    private List<Task> taskList;
+    private List<String> wordList;
     private boolean isActive;
 
+    /**
+     * The constructor method of DukeBot. It initialises our list of words, and sets the bot to an "active" state.
+     */
     public DukeBot() {
-        taskList = new ArrayList<Task>();
+        wordList = new ArrayList<String>();
         isActive = true;
     }
 
+    /**
+     * Process command method of DukeBot. It processes the user input from the main class and the logic behind each
+     * command is carried out here.
+     * @param command A String object that is the command as entered by the user.
+     */
     public void processCommand(String command) {
-        String[] commandArray = command.split(" ");
-        switch(commandArray[0]) {
+        switch(command) {
             case "bye":
                 dukeBye();
                 break;
             case "list":
-                printTaskList();
-                break;
-            case "done":
-                dukeDone(Integer.parseInt(commandArray[1]));
+                printWordList();
                 break;
             default:
-                Task task = new Task(command);
-                addTask(task);
+                addString(command);
         }
     }
 
+    /**
+     * DukeBot's hello command. Used to introduce itself.
+     */
     public void dukeHi() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -39,34 +49,44 @@ public class DukeBot {
         System.out.println("I'm your personal chat bot assistant! How may I be of service today?");
     }
 
+    /**
+     * DukeBot's goodbye command. Used to disable DukeBot.
+     */
     public void dukeBye() {
         System.out.println("Bye! Hope to see you again soon :)");
         disableDuke();
     }
 
-    public void dukeDone(int taskNumber) {
-        int taskIndex = taskNumber - 1;
-        Task selectedTask = taskList.get(taskIndex);
-        selectedTask.completeTask();
-        System.out.println("Nice! I've marked this task as done: " + selectedTask);
+    /**
+     * DukeBot's add String command. It adds a String to the word list for storage.
+     * @param string A String object to be stored in DukeBot's word list.
+     */
+    public void addString(String string) {
+        wordList.add(string);
+        System.out.println("added: " + string);
     }
 
-    public void addTask(Task task) {
-        taskList.add(task);
-        System.out.println("added: " + task.getDescription());
-    }
-
-    public void printTaskList() {
-        for(int i = 0; i < taskList.size(); i++) {
-            System.out.println((i+1) + ". " + taskList.get(i));
+    /**
+     * DukeBot's print word list command. It prints all the words in the word list in the order they were added.
+     */
+    public void printWordList() {
+        for(int i = 0; i < wordList.size(); i++) {
+            System.out.println((i+1) + ". " + wordList.get(i));
         }
     }
 
+    /**
+     * DukeBot's disable command. It sets the boolean "isActive" to false to disable the bot.
+     */
     public void disableDuke() {
         isActive = false;
     }
 
+    /**
+     * DukeBot's isActive command. It checks whether the bot is active or not.
+     * @return Returns a boolean value, true if the bot is active and false if it is not.
+     */
     public boolean isActive() {
-        return isActive;
+        return this.isActive;
     }
 }
