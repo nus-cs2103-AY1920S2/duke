@@ -1,17 +1,17 @@
-public class Luke {
+public class Duke {
 
-    private static Luke luke =null;
+    private static Duke duke =null;
 
     private Ui ui;
 
-    private Luke(){
+    private Duke(){
         ui=new Ui();
     }
 
-    public static Luke getInstance(){
-        if(luke ==null){
-            luke =new Luke();
-            return luke;
+    public static Duke getInstance(){
+        if(duke ==null){
+            duke =new Duke();
+            return duke;
         }
         return null;
     }
@@ -33,7 +33,7 @@ public class Luke {
     }
 
     public static void main(String[] args) {
-        Luke luke = Luke.getInstance();
-        luke.run();
+        Duke duke = Duke.getInstance();
+        duke.run();
     }
 }
