@@ -18,9 +18,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello, I am \n" + logo + "your personal buddy. What's up?\n" +
-                            "____________________________________________________________\n");
+                "____________________________________________________________\n");
 
-        while(true) {
+        while (true) {
             String input = scan.nextLine(); //reads in user input
             String[] command = input.split(" ");
             try {
@@ -44,11 +44,18 @@ public class Duke {
                         }
                         divider("");
                         break;
-                    case "done":
-                        if (command.length <= 1) {throw new DukeException("OOPS boi. Need moar arguments!!");}
-                        try {Integer.parseInt(command[1]);} catch(Exception e) {throw new DukeException("Input a number boi.");}
+                    case "done": {
+                        if (command.length <= 1) {
+                            throw new DukeException("OOPS boi. Need moar arguments!!");
+                        }
+                        try {
+                            Integer.parseInt(command[1]);
+                        } catch (Exception e) {
+                            throw new DukeException("Input a number boi.");
+                        }
                         if (Integer.parseInt(command[1]) > storedTasks.size()) {
-                            throw new DukeException("Boi. You don't have that many tasks boi! :)");}
+                            throw new DukeException("Boi. You don't have that many tasks boi! :)");
+                        }
 
                         int taskNum = Integer.parseInt(command[1]);
                         storedTasks.get(taskNum - 1).setDone();
@@ -57,9 +64,34 @@ public class Duke {
                                 storedTasks.get(taskNum - 1).toString());
                         divider("");
                         break;
+                    }
+
+                    case "delete": {
+                        if (command.length <= 1) {
+                            throw new DukeException("OOPS boi. Need moar arguments!!");
+                        }
+                        try {
+                            Integer.parseInt(command[1]);
+                        } catch (Exception e) {
+                            throw new DukeException("Input a number boi.");
+                        }
+                        if (Integer.parseInt(command[1]) > storedTasks.size()) {
+                            throw new DukeException("Boi. You don't have that many tasks boi! :)");
+                        }
+
+                        int taskNum = Integer.parseInt(command[1]);
+                        divider("");
+                        System.out.println("Boi. I've went and deleted that task \n" +
+                                storedTasks.get(taskNum - 1).toString());
+                        storedTasks.remove(taskNum - 1);
+                        divider("");
+                        break;
+                    }
 
                     case "todo":
-                        if (command.length <= 1) {throw new DukeException("OOPS boi. Need moar arguments!!");}
+                        if (command.length <= 1) {
+                            throw new DukeException("OOPS boi. Need moar arguments!!");
+                        }
                         Task task = new Todo(input.substring(5)); //stores input to storedText List
                         insertTask(task);
                         break;
@@ -93,9 +125,9 @@ public class Duke {
 //                    storedTasks.add(new Task(input)); //stores input to storedText List
 //                    divider("added " + input);
                 }
-            } catch(DukeException d) {
+            } catch (DukeException d) {
                 divider(d.getMessage());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 divider("General error caught boi: " + e.toString());
             }
         }
@@ -114,7 +146,7 @@ public class Duke {
     private static void insertTask(Task task) {
         storedTasks.add(task);
         divider("Got it. I've added this task:\n" +
-                task.toString()+"\n" +
+                task.toString() + "\n" +
                 "Now you have " + storedTasks.size() + " tasks in the list.");
     }
 }
