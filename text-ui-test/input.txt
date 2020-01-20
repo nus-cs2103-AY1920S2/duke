@@ -1,0 +1,7 @@
+todo hello world
+deadline Do homework /by yesterday
+event Go for lecture /at 2pm
+list
+done 2
+list
+bye

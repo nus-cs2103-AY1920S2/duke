@@ -1,4 +1,4 @@
-package main;
+import main.DukeProcessor;
 
 import java.util.Scanner;
 
