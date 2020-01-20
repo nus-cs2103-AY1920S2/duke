@@ -1,4 +1,4 @@
-package projectdirectoryjava;
+package packagedirectory.test;
 
 public class ToDos extends Tasks {
     private String logo = "[T]";

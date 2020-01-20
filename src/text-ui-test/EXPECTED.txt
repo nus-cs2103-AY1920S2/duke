@@ -1,1 +1,35 @@
-HelloWorld Friend
+--------------------------------------------------
+Hello Edmond! How can i help you?
+What can I do for you?
+--------------------------------------------------
+
+--------------------------------------------------
+Got it. I've added this task:
+[T][x] borrow book
+
+Now you have 1 tasks in the list.
+--------------------------------------------------
+
+--------------------------------------------------
+Here are the tasks in your list:
+1: [T][x] borrow book
+--------------------------------------------------
+
+--------------------------------------------------
+Nice! I've finish this task:
+[T][o] borrow book
+--------------------------------------------------
+
+--------------------------------------------------
+Got it. I've added this task:
+[D][x] return book (by:  Sunday)
+
+Now you have 2 tasks in the list.
+--------------------------------------------------
+
+--------------------------------------------------
+Here are the tasks in your list:
+1: [T][o] borrow book
+2: [D][x] return book (by:  Sunday)
+--------------------------------------------------
+

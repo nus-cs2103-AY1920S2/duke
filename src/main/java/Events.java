@@ -1,4 +1,4 @@
-package projectdirectoryjava;
+package packagedirectory.test;
 
 public class Events extends Tasks {
     private String logo = "[E]";

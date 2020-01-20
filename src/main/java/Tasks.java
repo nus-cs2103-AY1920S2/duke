@@ -1,4 +1,4 @@
-package projectdirectoryjava;
+package packagedirectory.test;
 
 public class Tasks {
 

@@ -1,5 +1,4 @@
-import projectdirectoryjava.ChatBox;
-import java.util.Scanner;
+import packagedirectory.test.ChatBox;
 
 public class Duke {
 

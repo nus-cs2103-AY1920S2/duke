@@ -1,4 +1,4 @@
-package projectdirectoryjava;
+package packagedirectory.test;
 
 public class Message {
     public static String lines = "--------------------------------------------------\n";

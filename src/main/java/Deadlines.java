@@ -1,4 +1,4 @@
-package projectdirectoryjava;
+package packagedirectory.test;
 
 public class Deadlines extends Tasks {
     private String logo = "[D]";
