@@ -1,6 +1,16 @@
 public class Todo extends Task{
+
+    public Todo(String name) {
+        super(name);
+    }
+
     public Todo(String name, boolean completed){
         super(name, completed);
+    }
+
+    @Override
+    public Todo complete() {
+        return new Todo(this.name, true);
     }
 
     @Override

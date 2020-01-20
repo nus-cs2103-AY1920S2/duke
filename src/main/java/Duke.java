@@ -10,7 +10,6 @@ public class Duke {
         //store tasks
         List<Task> tasks = new ArrayList<>();
     
-
         String logo = "\n\n____________________¶¶¶¶¶¶¶¶¶¶¶ \n" +
                 "_______________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n" +
                 "____________¶¶¶¶¶¶¶¶1111111111¶¶¶¶¶¶¶¶ \n" +
@@ -46,7 +45,7 @@ public class Duke {
         
         System.out.println("Arghhhh... It's you again.\n" + logo);
 
-        String saveReply = "Saving now....:";
+        String saveReply = "Saving now....:\n     ";
         String input = "";
 
         //reply to input
@@ -70,19 +69,37 @@ public class Duke {
                 reply = "I've marked this task as done: " + tasks.get(taskNo);
             } else {
                 //check which type of task
+                int pointer;
+                String nameOfEvent;
+                String dateTime;
+                Task newTask;
+                String date;
+
+                int arrLength = inputArr.length;
+
                 if (inputArr[0].equals("event")){
+                    pointer = findIndex("/at", inputArr);
+                    nameOfEvent = combineString(inputArr, 1, pointer);
+                    dateTime = combineString(inputArr, pointer + 1, arrLength);
 
+                    newTask = new Event(nameOfEvent, dateTime);
+                    tasks.add(newTask);
+                    reply = saveReply + newTask;
                 } else if (inputArr[0].equals("deadline")){
+                    pointer = findIndex("/by", inputArr);
+                    nameOfEvent = combineString(inputArr, 1, pointer);
+                    date = combineString(inputArr, pointer + 1, arrLength);
 
+                    newTask = new Deadline(nameOfEvent, date);
+                    tasks.add(newTask);
+                    reply = saveReply + newTask;
                 } else {
+                    nameOfEvent = combineString(inputArr, 1, arrLength);
+                    newTask = new Todo(input);
+                    tasks.add(newTask);
 
+                    reply = saveReply + newTask;
                 }
-
-                // format the input tasks
-                Task newTask = new Task(input);
-                tasks.add(newTask);
-
-                reply = saveReply + newTask;
             }
 
             //printing replys
@@ -94,5 +111,25 @@ public class Duke {
             input = s.nextLine();
         }
         System.out.println("Bye. Hope never to see you again!");
+    }
+
+    public static int findIndex(String s, String[] arr){
+        for (int i = 0; i < arr.length; i++){
+            if (arr[i].equals(s)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static String combineString(String[] arr, int start, int end){
+        String ans = "";
+        for(int i = start; i < end; i++){
+            ans += arr[i];
+            if (i != end - 1){
+                ans += " ";
+            }
+        }
+        return ans;
     }
 }
