@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duchess {
+class Duchess {
 
     private void introduction() {
         String logo = " _____             _                   \n"
@@ -24,7 +24,7 @@ public class Duchess {
 
     }
 
-    private void run() {
+    void run() {
         introduction();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -33,10 +33,5 @@ public class Duchess {
             input = scanner.nextLine();
         }
         goodbye();
-    }
-
-    public static void main(String[] args) {
-        Duchess duchess = new Duchess();
-        duchess.run();
     }
 }
