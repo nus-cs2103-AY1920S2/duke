@@ -20,11 +20,6 @@ public class Message {
         return message;
     }
 
-    public void added() {
-        String output = lines + "added: " + message + "\n" + lines;
-        System.out.println(output);
-    }
-
     public static void welcome() {
         System.out.println(lines + "Hello Edmond! How can i help you?\n"
                 + "What can I do for you?\n" + lines);

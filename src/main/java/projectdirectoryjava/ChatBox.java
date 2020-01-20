@@ -27,8 +27,26 @@ public class ChatBox {
                 folder.finishTasks(i);
                 break;
             default:
-                folder.add(new Tasks(input));
-                input.added();
+                Tasks tasks;
+                if(key.equals("todo")) {
+                    String s = input.getMsg().split("todo ")[1];
+                    tasks = new ToDos(new Message(s));
+                } else if(key.equals("deadline")) {
+                    String s1 = input.getMsg().split("deadline ")[1];
+                    String s2 = s1.split("/by")[0];
+                    String s3 = s1.split("/by")[1];
+                    tasks = new Deadlines(new Message(s2 + "(by: " + s3 +")"));
+                } else if(key.equals("event")) {
+                    String s1 = input.getMsg().split("event ")[1];
+                    String s2 = s1.split("/at")[0];
+                    String s3 = s1.split("/at")[1];
+                    tasks = new Deadlines(new Message(s2 + "(by: " + s3 +")"));
+                } else {
+                    tasks = new Tasks(input);
+                }
+                folder.add(tasks);
+                tasks.added();
+
         }
     }
 

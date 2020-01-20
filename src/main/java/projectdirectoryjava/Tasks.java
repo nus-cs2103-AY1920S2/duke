@@ -2,12 +2,19 @@ package projectdirectoryjava;
 
 public class Tasks {
 
-    private Message msg;
-    private String status;
+    protected Message msg;
+    protected String status;
+    public static int count;
 
     public Tasks(Message msg) {
         this.msg = msg;
         this.status = "[x]";
+        count++;
+    }
+
+    public void added() {
+        String output = Message.lines + "added: " + msg.getMsg() + "\n" + Message.lines;
+        System.out.println(output);
     }
 
     public void done() {
