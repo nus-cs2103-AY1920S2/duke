@@ -57,6 +57,50 @@ public class Duke {
         System.out.println(string);
     }
 
+    public static void Deadline(String action, String by) {
+        System.out.println(string);
+        String[] b = by.split(" ", 2);
+        Deadline deadline = new Deadline(action, b[1]);
+        System.out.println(space + "Got it. I've added this task:");
+        System.out.println(space + "  " + deadline.toString());
+        tasks.add(deadline);
+        if (tasks.size() == 1 || tasks.size() == 0) {
+            System.out.println(space + "Now you have " + tasks.size() + " task in the list");
+        } else {
+            System.out.println(space + "Now you have " + tasks.size() + " tasks in the list");
+        }
+        System.out.println(string);
+    }
+
+    public static void Event(String action, String at) {
+        System.out.println(string);
+        String[] a = at.split(" ", 2);
+        Event event = new Event(action, a[1]);
+        System.out.println(space + "Got it. I've added this task:");
+        System.out.println(space + "  " + event.toString());
+        tasks.add(event);
+        if (tasks.size() == 1 || tasks.size() == 0) {
+            System.out.println(space + "Now you have " + tasks.size() + " task in the list");
+        } else {
+            System.out.println(space + "Now you have " + tasks.size() + " tasks in the list");
+        }
+        System.out.println(string);
+    }
+
+    public static void Todo(String action) {
+        System.out.println(string);
+        Todo todo = new Todo(action);
+        System.out.println(space + "Got it. I've added this task:");
+        System.out.println(space + "  " + todo.toString());
+        tasks.add(todo);
+        if (tasks.size() == 1 || tasks.size() == 0) {
+            System.out.println(space + "Now you have " + tasks.size() + " task in the list");
+        } else {
+            System.out.println(space + "Now you have " + tasks.size() + " tasks in the list");
+        }
+        System.out.println(string);
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -80,6 +124,17 @@ public class Duke {
                 break;
             } else if (str[0].equals("done")){
                 Done(str[1]);
+            } else if (str[0].equals("deadline")) {
+                String[] d = line.split(" ", 2);
+                String[] helper = d[1].split("/");
+                Deadline(helper[0], helper[1]);
+            } else if (str[0].equals("event")) {
+                String[] e = line.split(" ", 2);
+                String[] helper = e[1].split("/");
+                Event(helper[0], helper[1]);
+            } else if (str[0].equals("todo")) {
+                String[] e = line.split(" ", 2);
+                Todo(e[1]);
             } else {
                 Add(line);
             }
