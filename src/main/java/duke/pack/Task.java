@@ -37,12 +37,12 @@ public class Task {
 
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    Fantastic job! I have marked this task as done:");
-        System.out.println("      " +  description + " [" + getStatusIcon() + "] ");
+        System.out.println("      " +  this);
         System.out.println("    ------------------------------------------------------------");
     }
 
     @Override
     public String toString() {
-        return (description + " [" + getStatusIcon() + "]");
+        return ("[" + getStatusIcon() + "] " + description);
     }
 }

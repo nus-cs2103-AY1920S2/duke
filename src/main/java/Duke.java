@@ -1,4 +1,7 @@
 import duke.pack.Task;
+import duke.pack.Deadline;
+import duke.pack.Event;
+import duke.pack.Todo;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -10,7 +13,6 @@ public class Duke {
     public static void main(String[] args) {
         // Scanner object
         Scanner sc = new Scanner(System.in);
-
         arrList = new ArrayList<>();
 
         // greeting
@@ -32,9 +34,26 @@ public class Duke {
                 int taskNum = Integer.parseInt(c[1]);
                 arrList.get(taskNum - 1).markAsDone();
 
+            } else if (c[0].equals("deadline")) {
+                String[] arr = command.split("/by");
+                String[] arr2 = arr[0].split("deadline");
+
+                // add to list
+                Task d = new Deadline(arr2[1].trim(), arr[1].trim());
+                add(d);
+
+            } else if (c[0].equals("event")) {
+                String[] arr = command.split("/at");
+                String[] arr2 = arr[0].split("event");
+
+                // add to list
+                Task e = new Event(arr2[1].trim(), arr[1].trim());
+                add(e);
+
             } else {
-                // add task to list
-                Task t = new Task(command);
+                String[] arr = command.split("todo");
+                // add to list
+                Task t = new Todo(arr[1].trim());
                 add(t);
             }
 
@@ -83,7 +102,8 @@ public class Duke {
     public static void add(Task t) {
         arrList.add(t);
         System.out.println("    ------------------------------------------------------------");
-        System.out.println("    added: " + t);
+        System.out.println("    Alright! I have added: \n    " + t
+                + "\n    You now have " + arrList.size() + " tasks in your list!");
         System.out.println("    ------------------------------------------------------------");
     }
 
