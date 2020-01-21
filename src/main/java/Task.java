@@ -1,4 +1,8 @@
 public class Task {
+    enum TaskType {
+        toDo, deadline, event;
+    }
+
     public static final String doneSymbol = "\u2714";
     public static final String notDoneYetSymbol = "\u2718";
 
