@@ -5,7 +5,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         TasksList tasksList = new TasksList();
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("____________________________________________________________\n"
+                + "Hello! I'm Duke\nWhat can I do for you?\n"
+                + "____________________________________________________________");
 
         String userInput = sc.nextLine();
         String[] inputs = userInput.split(" ");
@@ -32,6 +34,8 @@ public class Duke {
             inputs = userInput.split(" ");
         }
 
-        System.out.print("Bye. Hope to see you again soon!");
+        System.out.print("____________________________________________________________\n"
+                + "Bye. Hope to see you again soon!\n"
+                + "____________________________________________________________");
     }
 }
