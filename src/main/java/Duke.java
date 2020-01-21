@@ -24,9 +24,20 @@ public class Duke {
         System.out.println(String.format(FORMAT_STRING, HORIZONTAL_LINE));
     }
 
+    private static void greet() {
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Hello! I'm Alfred!");
+        outputStreamBuffer.add("How may I help you today?");
+        print(outputStreamBuffer);
+    }
+
+    private static void bye() {
+        print("Bye. Hope to see you again soon!");
+    }
+
     private void printList() {
         if (this.list.isEmpty()) {
-            print("List is empty.");
+            print("List is empty");
             return;
         }
 
@@ -48,13 +59,8 @@ public class Duke {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         String input;
-        List<String> outputStreamBuffer;
 
-        // greeting message
-        outputStreamBuffer = new ArrayList<>();
-        outputStreamBuffer.add("Hello! I'm Alfred!");
-        outputStreamBuffer.add("How may I help you today?");
-        print(outputStreamBuffer);
+        greet();
 
         while (true) {
             input = sc.nextLine();
@@ -68,6 +74,6 @@ public class Duke {
             }
         }
 
-        print("Bye. Hope to see you again soon!");
+        bye();
     }
 }
