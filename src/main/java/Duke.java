@@ -16,14 +16,14 @@ public class Duke {
     
     private static ArrayList<Task> tasks = new ArrayList<>();
     
-    private static boolean doneCommand(String command) {
+    private static boolean doneCommand(String command) throws DukeException {
         Pattern donePattern = Pattern.compile("^done( (.*))?");
         Matcher doneMatcher = donePattern.matcher(command);
         if (doneMatcher.find()) {
             try {
                 String taskString = doneMatcher.group(2);
                 if (taskString == null || taskString.isEmpty()) {
-                    throw new IllegalArgumentException("Task string is empty");
+                    throw new DukeException("Task number cannot be empty");
                 } else {
                     int taskIndex = Integer.parseInt(taskString);
                     Task task = tasks.get(taskIndex - 1);
@@ -32,11 +32,9 @@ public class Duke {
                     PrintUtil.indentedPrintf("Marked task as done:\n  %s\n", task);
                 }
             } catch (NumberFormatException e) {
-                PrintUtil.indentedPrintln("Error: Task number must be an integer.");
-            } catch (IllegalArgumentException e) {
-                PrintUtil.indentedPrintln("Error: Task number cannot be empty.");
+                throw new DukeException("Task number must be an integer");
             } catch(IndexOutOfBoundsException e) {
-                PrintUtil.indentedPrintln("Error: Task number must be within the range of current tasks.");
+                throw new DukeException("Task number must be within the range of current tasks");
             }
             return true;
         } else {
@@ -50,19 +48,15 @@ public class Duke {
         PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
     }
     
-    private static boolean todoCommand(String command) {
+    private static boolean todoCommand(String command) throws DukeException {
         Pattern donePattern = Pattern.compile("^todo( (.*))?");
         Matcher doneMatcher = donePattern.matcher(command);
         if (doneMatcher.find()) {
-            try {
-                String taskString = doneMatcher.group(2);
-                if (taskString == null || taskString.isEmpty()) {
-                    throw new IllegalArgumentException("Task string is empty");
-                } else {
-                    addTask(new Todo(taskString));
-                }
-            } catch (IllegalArgumentException e) {
-                PrintUtil.indentedPrintln("Error: Todo task description cannot be empty.");
+            String taskString = doneMatcher.group(2);
+            if (taskString == null || taskString.isEmpty()) {
+                throw new DukeException("Task description cannot be empty");
+            } else {
+                addTask(new Todo(taskString));
             }
             return true;
         } else {
@@ -70,22 +64,18 @@ public class Duke {
         }
     }
     
-    private static boolean deadlineCommand(String command) {
+    private static boolean deadlineCommand(String command) throws DukeException {
         Pattern deadlinePattern = Pattern.compile("^deadline ?((.*?)( /by ?(.*))?)$");
         Matcher deadlineMatcher = deadlinePattern.matcher(command);
         if (deadlineMatcher.find()) {
-            try {
-                String taskDescription = deadlineMatcher.group(2);
-                String deadline = deadlineMatcher.group(4);
-                if (taskDescription == null || taskDescription.isEmpty()) {
-                    throw new IllegalArgumentException("Task description cannot be empty");
-                } else if (deadline == null || deadline.isEmpty()) {
-                    throw new IllegalArgumentException("Deadline cannot be empty");
-                } else {
-                    addTask(new Deadline(taskDescription, deadline));
-                }
-            } catch (IllegalArgumentException e) {
-                PrintUtil.indentedPrintf("Error: %s\n", e.getMessage());
+            String taskDescription = deadlineMatcher.group(2);
+            String deadline = deadlineMatcher.group(4);
+            if (taskDescription == null || taskDescription.isEmpty()) {
+                throw new DukeException("Task description cannot be empty");
+            } else if (deadline == null || deadline.isEmpty()) {
+                throw new DukeException("Deadline cannot be empty");
+            } else {
+                addTask(new Deadline(taskDescription, deadline));
             }
             return true;
         } else {
@@ -93,22 +83,18 @@ public class Duke {
         }
     }
     
-    private static boolean eventCommand(String command) {
+    private static boolean eventCommand(String command) throws DukeException {
         Pattern eventPattern = Pattern.compile("^event ?((.*?)( /at ?(.*))?)$");
         Matcher eventMatcher = eventPattern.matcher(command);
         if (eventMatcher.find()) {
-            try {
-                String taskDescription = eventMatcher.group(2);
-                String eventTime = eventMatcher.group(4);
-                if (taskDescription == null || taskDescription.isEmpty()) {
-                    throw new IllegalArgumentException("Task description cannot be empty");
-                } else if (eventTime == null || eventTime.isEmpty()) {
-                    throw new IllegalArgumentException("Event time cannot be empty");
-                } else {
-                    addTask(new Event(taskDescription, eventTime));
-                }
-            } catch (IllegalArgumentException e) {
-                PrintUtil.indentedPrintf("Error: %s\n", e.getMessage());
+            String taskDescription = eventMatcher.group(2);
+            String eventTime = eventMatcher.group(4);
+            if (taskDescription == null || taskDescription.isEmpty()) {
+                throw new DukeException("Task description cannot be empty");
+            } else if (eventTime == null || eventTime.isEmpty()) {
+                throw new DukeException("Event time cannot be empty");
+            } else {
+                addTask(new Event(taskDescription, eventTime));
             }
             return true;
         } else {
@@ -121,17 +107,21 @@ public class Duke {
             PrintUtil.indentedPrintln("Goodbye");
             return false;
         }
-
-        if (command.equals("list")) {
-            for (int i = 0; i < tasks.size(); i++) {
-                PrintUtil.indentedPrintf("%d.%s\n", i+1, tasks.get(i));
+        
+        try {
+            if (command.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    PrintUtil.indentedPrintf("%d.%s\n", i+1, tasks.get(i));
+                }
+            } else if ( doneCommand(command)
+                     || todoCommand(command)
+                     || deadlineCommand(command)
+                     || eventCommand(command)) {
+            } else {
+                PrintUtil.indentedPrintf("Error: Unknown command: %s\n", command);
             }
-        } else if ( doneCommand(command)
-                 || todoCommand(command)
-                 || deadlineCommand(command)
-                 || eventCommand(command)) {
-        } else {
-            PrintUtil.indentedPrintf("Unknown command: %s\n", command);
+        } catch (DukeException e) {
+            PrintUtil.indentedPrintf("Error: %s\n",e.getMessage());
         }
         return true;
     }
