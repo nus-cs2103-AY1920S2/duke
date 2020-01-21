@@ -36,6 +36,10 @@ public class Duke {
                     int taskNo = Integer.parseInt(context);
                     tasks.markDone(taskNo);
 
+                } else if (action.equalsIgnoreCase("delete")) {
+                    String context = command_broken[1];
+                    int taskNo = Integer.parseInt(context);
+                    tasks.removeTask(taskNo);
 
                 } else if (action.equalsIgnoreCase(("deadline"))) {
                     String context = command_broken[1];
