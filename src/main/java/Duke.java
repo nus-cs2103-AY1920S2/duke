@@ -17,14 +17,24 @@ public class Duke {
         boolean loop = true;
         do {
             String input = scanner.nextLine();
+            String[] inputSplit = input.split(" ");
 
-            switch (input) {
+            /*
+            At this moment switch block cannot catch invalid done cases
+            eg "done work" will be treated as done block rather than default (add)
+             */
+            switch (inputSplit[0]) {
                 case "bye":
                     sword.exit();
                     loop = false;
                     break;
                 case "list":
                     sword.list();
+                    break;
+                case "done":
+                    int index;
+                    index = Integer.parseInt(inputSplit[1]);
+                    sword.done(index);
                     break;
                 default:
                     sword.add(input);

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Boxer {
     // Variables
-    private ArrayList<String> taskList = new ArrayList<String>(100);
+    private ArrayList<Task> taskList = new ArrayList<Task>(100);
 
     public void greet() {
         String greeting = "Hey there, Red. Anything I can do for you?";
@@ -10,13 +10,21 @@ public class Boxer {
     }
 
     public void add(String task) {
-        taskList.add(task);
+        Task newTask = new Task(task);
+        taskList.add(newTask);
         print("added: " + task);
     }
 
     public void list() {
-        taskList.forEach(
-                task -> print((taskList.indexOf(task) + 1) + ". " + task));
+        taskList.forEach(task -> printTask(task));
+    }
+
+    public void done(int taskIndex) {
+        Task task = taskList.get(taskIndex - 1);
+        task.markAsDone();
+        print("That's another one down. That'll be: ");
+        printTask(task);
+
     }
 
     public void exit() {
@@ -26,6 +34,13 @@ public class Boxer {
 
     public void print(String toPrint) {
         System.out.println(toPrint);
+    }
+
+    public void printTask(Task task) {
+        print(String.format(
+                "%d. %s %s", taskList.indexOf(task) + 1,
+                task.getStatusIcon(),
+                task.getDescription()));
     }
 
     /* Defunct methods
