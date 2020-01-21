@@ -32,16 +32,38 @@ public class Duke {
                     System.out.println("There are no remaining tasks");
                     System.out.println("____________________________________________________________");
                 }
-            } else if ((command.split(" ")[0]).equals("done")) {
-                int i = Integer.parseInt(command.split(" ")[1]) - 1;
-                tasks.get(i).markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(tasks.get(i));
-                System.out.println("____________________________________________________________");
             } else {
-                tasks.add(new Task(command));
-                System.out.println("added: " + command);
-                System.out.println("____________________________________________________________");
+                if ((command.split(" ")[0]).equals("done")) {
+                    int i = Integer.parseInt(command.split(" ")[1]) - 1;
+                    tasks.get(i).markAsDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println(tasks.get(i));
+                    System.out.println("____________________________________________________________");
+                } else {
+                    Task t = null;
+                    String taskType = command.split(" ")[0];
+                    command = command.substring(command.indexOf(" "));
+                    switch (taskType) {
+                        case "todo":
+                            t = new Todo(command);
+                            break;
+                        case "event":
+                            t = new Event(command.split("/")[0], command.split("/")[1]);
+                            break;
+                        case "deadline":
+                            t = new Deadline(command.split("/")[0], command.split("/")[1]);
+                            break;
+                    }
+                    tasks.add(t);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + t);
+                    if (tasks.size() == 1) {
+                        System.out.println("Now you have " + tasks.size() + " task in the list.");
+                    } else {
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    }
+                    System.out.println("____________________________________________________________");
+                }
             }
             command = sc.nextLine();
         }
