@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,25 +13,33 @@ public class Duke {
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
         System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
-        int counter = 0;
-        String[] tasks = new String[101];
+        ArrayList<Task> tasks = new ArrayList<>();
         while(scanner.hasNextLine()){
             String word = scanner.nextLine();
-            if(word.equals("list")){
+            String[] command = word.split(" ");
+            if(command[0].equals("list")){
                 System.out.print(line);
-                for(int i = 1; i < counter + 1; i++){
-                    System.out.println(fiveSpaces + Integer.toString(i) + ". " + tasks[i]);
+                for(Task task : tasks){
+                    System.out.println(task);
                 }
                 System.out.println(line);
             }
-            else if(word.equals("bye")){
+            else if(command[0].equals("bye")){
                 System.out.println(line + fiveSpaces + "See ya later alligator!\n"+ line);
                 break;
             }
+            else if(command[0].equals("done")){
+                int taskNum = Integer.parseInt(command[1]) - 1;
+                tasks.get(taskNum).isDone = true;
+                System.out.print(line);
+                System.out.println("     Nice! I've marked this task as done:");
+                tasks.get(taskNum).printDone();
+                System.out.println(line);
+            }
             else{
                 String add = fiveSpaces + "added: ";
-                counter++;
-                tasks[counter] = word;
+                Task task = new Task(word);
+                tasks.add(task);
                 System.out.println(line + add + word + "\n" + line);
             }
         }
