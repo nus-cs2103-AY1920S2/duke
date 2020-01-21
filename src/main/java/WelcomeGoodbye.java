@@ -1,16 +1,23 @@
 public class WelcomeGoodbye {
 
-    private String horizontalLine = "____________________________________________________________\n";
+    private String horizontalLine = "____________________________________________________________";
 
     public void welcome() {
-        print(horizontalLine + "Hello, Duke here! :D \n"
-                + "I'm feeling good and ready to go! What can I do for you?\n"
-                + horizontalLine);
+        printLine();
+        print("Hello, Duke here! :D \n"
+                + "I'm feeling good and ready to go! "
+                + "What can I do for you?");
+        printLine();
     }
 
     public void goodbye() {
-        print(horizontalLine + "Alright byeee and see ya soon!\n"
-                + horizontalLine);
+        printLine();
+        print("====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D");
+        printLine();
+    }
+
+    private void printLine() {
+        print(horizontalLine);
     }
 
     private void print(String s) {

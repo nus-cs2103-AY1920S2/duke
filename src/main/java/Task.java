@@ -1,15 +1,27 @@
 public class Task {
 
+    // main task that user wants to log
     private String command;
-    private String horizontalLine = "____________________________________________________________\n";
+    // for utility
+    private String horizontalLine = "____________________________________________________________";
 
     public Task(String command) {
         this.command = command;
     }
 
-    // Prints the Task
-    public void print() {
-        System.out.println(horizontalLine + this + "\n" + horizontalLine);
+    // Prints the indication that the Task's command has been added
+    public void taskAddedMessage() {
+        printLine();
+        System.out.println("==> Added unique task: " + this);
+        printLine();
+    }
+
+    private void printLine() {
+        print(horizontalLine);
+    }
+
+    private void print(String s) {
+        System.out.println(s);
     }
 
     public String toString() {
