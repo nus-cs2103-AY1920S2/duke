@@ -18,9 +18,15 @@ public class Main {
 
         while (!userInput.equals(Duke.byeCommand)) {
             userInput = scanner.nextLine();
+
             if (userInput.equals(Duke.byeCommand))
                 break;
-            bot.echo(userInput);
+            if (userInput.equals(Duke.listCommand)) {
+                bot.listStoredItems();
+                continue;
+            }
+
+            bot.storeUserInput(userInput);
         }
 
         bot.byeBye();
