@@ -1,19 +1,30 @@
 package e0148811.duke;
 
 public class Task {
+    static String TICK = "\u2714";
+    static String CROSS = "\u2718";
     private boolean isDone;
     private String task;
 
-    Task(String task) {
+    public Task(String task) {
         isDone = false;
         this.task = task;
     }
 
-    String getTask() {
+    public String getTask() {
         return task;
     }
 
-    boolean isDone() {
-        return isDone;
+    public void setDone() {
+        isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        if (isDone) {
+            return "[" + Task.TICK + "] " + task;
+        } else {
+            return "[" + Task.CROSS + "] " + task;
+        }
     }
 }
