@@ -123,7 +123,7 @@ public class Duke {
                 duke.markTaskAsDone(taskIndex);
             } else if (command.equals(TODO_COMMAND) ||
                     command.equals(DEADLINE_COMMAND) ||
-                    command.equals(EVENT_AT)) {
+                    command.equals(EVENT_COMMAND)) {
                 duke.createAndAddTask(lineInput);
             } else {
                 print("Error: unknown command");
