@@ -1,20 +1,24 @@
 import java.util.LinkedList;
 
 public class Tracker {
-    private LinkedList<String> list;
-    private int totalItems;
+    private LinkedList<Task> list;
+    private int totalTasks;
 
     public Tracker() {
         this.list = new LinkedList();
-        this.totalItems = 0;
+        this.totalTasks = 0;
     }
 
     public void add(String text) {
-        this.totalItems++;
-        this.list.add(this.totalItems + ". " + text);
+        this.totalTasks++;
+        this.list.add(new Task(text));
     }
 
-    public LinkedList<String> showList() {
+    public LinkedList<Task> showList() {
         return this.list;
+    }
+
+    public int getTotalTasks() {
+        return this.totalTasks;
     }
 }

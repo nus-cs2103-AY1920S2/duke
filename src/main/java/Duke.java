@@ -17,8 +17,10 @@ public class Duke {
 
         while (command.isBye() == false) {
             if (command.isList()) {
-                for (String item : tracker.showList()) {
-                    System.out.println(item);
+                for (int i = 0; i < tracker.getTotalTasks(); i++) {
+                    int itemNo = i + 1;
+                    Task task = tracker.showList().get(i);
+                    System.out.println(itemNo + "." + task.getStatus());
                 }
             } else {
                 tracker.add(command.getCmd());
