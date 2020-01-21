@@ -28,13 +28,19 @@ public class TaskHandler {
                 break;
 
             default:
+                // This is the only part where we create new tasks
                 Task currentTask = new Task(command);
-                allTasks.add(currentTask);
-                currentTask.taskAddedMessage();
+                addTaskToStored(currentTask);
 
             }
 
         }
+    }
+
+    // adds the Task to store in the ArrayList, and prints added message
+    private void addTaskToStored(Task t) {
+        allTasks.add(t);
+        t.taskAddedMessage();
     }
 
     private void printAllTasks() {
