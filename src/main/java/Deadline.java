@@ -1,4 +1,14 @@
-package PACKAGE_NAME;
+public class Deadline extends Task {
+    private String date;
 
-public class Deadline {
+    public Deadline(int id, String task, String date) {
+        super(id, task);
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        if (done) return  "[D][✓] " + task + " (by: " + date + ")";
+        else return "[D][✗] " + task + " (by: " + date + ")";
+    }
 }
