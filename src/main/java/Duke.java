@@ -1,32 +1,68 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final String line = "    ____________________________________________________________";
     private static final String space = "    ";
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Greetings, I am\n" + logo);
-        System.out.println("How may I help you in this fine day today?");
-
+        greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.next();
-            if (input.equals("bye")) {
-                System.out.println(line);
-                System.out.println(space + "I bid you adieu. Until the day we meet again.");
-                System.out.println(line);
+            String input = sc.nextLine();
+            String[] inputs = input.split(" ");
+            if (inputs[0].equals("bye")) {
+                sayGoodbye();
                 break;
+            } else if (inputs[0].equals("list")){
+                displayList();
             } else {
-                System.out.println(line);
-                System.out.println(space + input);
-                System.out.println(line);
+                addTask(input);
             }
         }
+    }
 
+    private static void printLine() {
+        System.out.println(line);
+    }
+    private static void indent(String toIndent) {
+        System.out.printf(space);
+        System.out.println(toIndent);
+    }
+
+    private static void greet() {
+        printLine();
+        String logo = space
+                + " ____        _        \n" + space
+                + "|  _ \\ _   _| | _____ \n" + space
+                + "| | | | | | | |/ / _ \\\n" + space
+                + "| |_| | |_| |   <  __/\n" + space
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        indent("Greetings, you may call me\n" + logo);
+        indent("How may I help you in this fine day today?");
+        printLine();
+    }
+
+    private static void sayGoodbye() {
+        printLine();
+        indent("I bid you adieu. Until the day we meet again.");
+        printLine();
+    }
+
+    private static void displayList() {
+        printLine();
+        for (int i = 0; i < tasks.size(); i++) {
+            indent(i + ". " +tasks.get(i).toString());
+        }
+        printLine();
+    }
+
+    private static void addTask(String input) {
+        tasks.add(new Task(input));
+        printLine();
+        indent("Acknowledged. I have added: " + input);
+        printLine();
     }
 }
