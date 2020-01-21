@@ -17,6 +17,10 @@ public class Folder {
         listTasks.get(i-1).done();
     }
 
+    public void deleteTasks(int i) {
+        listTasks.remove(i-1).removed();
+    }
+
     public void show() {
         int i = 1;
         String output = Message.lines + "Here are the tasks in your list:\n";

@@ -29,6 +29,10 @@ public class ChatBox {
                     int i = Integer.parseInt(msg[1]);
                     folder.finishTasks(i);
                     break;
+                case "delete":
+                    int b = Integer.parseInt(msg[1]);
+                    folder.deleteTasks(b);
+                    break;
                 default:
                     Tasks tasks;
                     if (key.equals("todo")) {

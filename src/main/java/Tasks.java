@@ -23,6 +23,11 @@ public class Tasks {
         System.out.println(output);
     }
 
+    public void removed() {
+        Message output = new Message("Noted. I've removed this task:\n" + status + " " + msg.getMsg());
+        System.out.println(output);
+    }
+
     @Override
     public String toString() {
         return status + " " + msg.getMsg() + "\n";
