@@ -13,19 +13,35 @@ public class Duke {
 
     public static void output() {
         String reply = SCANNER.nextLine();
-        ArrayList<String> taskList = new ArrayList<>();
+
+        ArrayList<Task> taskList = new ArrayList<>();
 
 
         while(!reply.equals("bye")) {
-            if(reply.equals("list")) {
-                String completeList = "";
-                for(String task :taskList) {
-                    completeList += ((taskList.indexOf(task) + 1) + ". " + task) + "\n    ";
+            String[] replyArr = reply.split(" ");
+            String instruction = replyArr[0];
+            if(instruction.equals("list")) {
+                String completeList = "Task(s) in your list:";
+                for (Task task : taskList) {
+                    completeList += "\n    " + ((taskList.indexOf(task) + 1) + ". [" + task.getStatusIcon() + "] "
+                            + task.getDescription());
                 }
                 printWithBorder(completeList);
                 reply = SCANNER.nextLine();
+            } else if (instruction.equals("done")) {
+                int taskNum = Integer.parseInt(replyArr[1]) - 1;
+                Task currTask = taskList.get(taskNum);
+                currTask.isDone = true;
+
+                String doneMsg = "Nice! Task marked as done: \n    " + " [" + currTask.getStatusIcon() + "] "
+                                + currTask.getDescription();
+                printWithBorder(doneMsg);
+
+                reply = SCANNER.nextLine();
+
             } else {
-                taskList.add(reply);
+                Task currTask = new Task(reply);
+                taskList.add(currTask);
                 printWithBorder("Added: " + reply);
                 reply = SCANNER.nextLine();
             }
