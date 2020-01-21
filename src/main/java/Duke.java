@@ -37,6 +37,7 @@ public class Duke {
             int i = 1;
             for (String str : storedItems) {
                 System.out.println(padding + i + ". " + str);
+                i++;
             }
         }
         System.out.println(padding + uselessLine);
