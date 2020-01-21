@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -6,5 +7,23 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+        Boxer sword = new Boxer();
+        sword.greet();
+
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        while(true) {
+            input = scanner.next();
+
+            if (input.equals("bye")) {
+                sword.exit();
+                break;
+            } else {
+                sword.echo(input);
+            }
+        }
+
     }
 }
