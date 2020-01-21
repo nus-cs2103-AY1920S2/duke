@@ -1,9 +1,11 @@
+import duke.pack.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     // ArrayList of tasks
-    private static ArrayList<String> arrList;
+    private static ArrayList<Task> arrList;
 
     public static void main(String[] args) {
         // Scanner object
@@ -19,12 +21,21 @@ public class Duke {
 
         // continue processing user's command, as long as command is not bye
         while (!command.equals("bye")) {
+            String[] c = command.split(" ");
+
             if (command.equals("list")) {
                 // prints tasks in list if command is list
                 printList();
+
+            } else if (c[0].equals("done")){
+                // mark the specified task as done
+                int taskNum = Integer.parseInt(c[1]);
+                arrList.get(taskNum - 1).markAsDone();
+
             } else {
                 // add task to list
-                add(command);
+                Task t = new Task(command);
+                add(t);
             }
 
             command = sc.nextLine();
@@ -67,12 +78,12 @@ public class Duke {
 
     /**
      * adds user's command to arrList
-     * @param comm command given by user
+     * @param t command given by user
      */
-    public static void add(String comm) {
-        arrList.add(comm);
+    public static void add(Task t) {
+        arrList.add(t);
         System.out.println("    ------------------------------------------------------------");
-        System.out.println("    added: " + comm);
+        System.out.println("    added: " + t);
         System.out.println("    ------------------------------------------------------------");
     }
 
@@ -81,6 +92,8 @@ public class Duke {
      */
     public static void printList() {
         System.out.println("    ------------------------------------------------------------");
+        System.out.println("    Here are your tasks:");
+
         for (int i = 1; i <= arrList.size(); i++) {
             System.out.println("    " + i + ". " + arrList.get(i - 1));
         }
