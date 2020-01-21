@@ -6,10 +6,9 @@ public class Event extends Task {
         this.time = time;
     }
 
-    //need to convert time to () form
 
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + " " + time;
+        return "[D]" + super.toString() + " (at: " + time + ")";
     }
 }
