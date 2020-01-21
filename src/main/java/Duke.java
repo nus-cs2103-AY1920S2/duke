@@ -35,8 +35,41 @@ public class Duke {
         if (pos != -1) {
             markItemAsDone(pos);
         } else {
-            storeUserInput(str);
+            Task.TaskType type = commandType(str);
         }
+    }
+
+    private Task.TaskType commandType(String str) {
+        Task.TaskType ret = Task.TaskType.unknown;
+        Scanner sc = new Scanner(str);
+
+        while (sc.hasNext()) {
+            String ss = sc.next();
+            if (ss.equals(Task.toDoCommand))
+                ret = Task.TaskType.toDo;
+            else if (ss.equals(Task.deadlineCommand))
+                ret = Task.TaskType.deadline;
+            else if (ss.equals(Task.eventCommand))
+                ret = Task.TaskType.event;
+            else {
+                // Place-holder space. Will throw error later
+            }
+        }
+
+        sc.close();
+        return ret;
+    }
+
+    private void handleToDo(String str) {
+
+    }
+
+    private void handleDeadline(String str) {
+
+    }
+
+    private void handleEvent(String str) {
+
     }
 
     private void markItemAsDone(int pos) {
