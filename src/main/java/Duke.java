@@ -1,67 +1,84 @@
 import java.util.Scanner;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
-    private static final int indentLevels = 4;
-    
-    private static String indentString(String s) {
-        //https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
-        return s.replaceAll("(?m)^", " ".repeat(indentLevels));
-    }
-    
-    private static void indentedPrintln(String s) {
-        System.out.println(indentString(s));
-    }
-    
-    private static void indentedPrintf(String format, Object... args) {
-        System.out.print(indentString(String.format(format, args)));
-    }
-    
-    private static void printHeaderLine() {
-        indentedPrintln("____________________________________________________________");
-    }
-    
     private static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        indentedPrintln("Hello from\n" + logo);
+        PrintUtil.indentedPrintln("Hello from\n" + logo);
     }
     
-    private static ArrayList<String> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    
+    private static boolean doneCommand(String command) {
+        Pattern donePattern = Pattern.compile("^done( (.*))?");
+        Matcher doneMatcher = donePattern.matcher(command);
+        if (doneMatcher.find()) {
+            try {
+                String taskString = doneMatcher.group(2);
+                if (taskString == null || taskString.isEmpty()) {
+                    throw new IllegalArgumentException("Task string is empty");
+                } else {
+                    int taskIndex = Integer.parseInt(taskString);
+                    Task task = tasks.get(taskIndex - 1);
+                    task.markAsDone();
+                    
+                    PrintUtil.indentedPrintf("Marked task as done:\n  %s\n", task);
+                }
+            } catch (NumberFormatException e) {
+                PrintUtil.indentedPrintln("Error: Task number must be an integer.");
+            } catch (IllegalArgumentException e) {
+                PrintUtil.indentedPrintln("Error: Task number cannot be empty.");
+            } catch(IndexOutOfBoundsException e) {
+                PrintUtil.indentedPrintln("Error: Task number must be within the range of current tasks.");
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     private static boolean runCommand(String command) {
         if (command.equals("bye")) {
-            indentedPrintln("Goodbye");
+            PrintUtil.indentedPrintln("Goodbye");
             return false;
         } else if (command.equals("list")) {
             for (int i = 0; i < tasks.size(); i++) {
-                String task = tasks.get(i);
-                indentedPrintf("%d: %s\n", i+1, task);
+                PrintUtil.indentedPrintf("%d: %s\n", i+1, tasks.get(i));
             }
-        } else {
-            tasks.add(command);
-            indentedPrintf("added: %s\n", command);
+            return true;
         }
+        
+        if (doneCommand(command)) {
+            return true;
+        }
+        
+        Task newTask = new Task(command);
+        tasks.add(newTask);
+        PrintUtil.indentedPrintf("Added task:\n  %s\n", newTask);
+        PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
         return true;
     }
     
     public static void main(String[] args) {
-        printHeaderLine();
+        PrintUtil.printHeaderLine();
         greet();
-        printHeaderLine();
+        PrintUtil.printHeaderLine();
         
         Scanner sc = new Scanner(System.in);
         boolean running = true;
         while (running) {
             String command = sc.nextLine();
             
-            printHeaderLine();
+            PrintUtil.printHeaderLine();
             running = runCommand(command);
-            printHeaderLine();
+            PrintUtil.printHeaderLine();
         }
     }
 }
