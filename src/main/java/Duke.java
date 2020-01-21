@@ -11,8 +11,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
-        while(sc.hasNext()) {
-            String command = sc.next();
+        while(sc.hasNextLine()) {
+            String command = sc.nextLine();
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
