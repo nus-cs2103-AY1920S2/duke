@@ -9,7 +9,7 @@ public class Event extends Item {
     }
 
     public String toString() {
-        String temp = "[E]" + super.toString() + " (at: "+ time + ")\n";
+        String temp = "   [E]" + super.toString() + " (at: "+ time + ")\n";
         return temp;
     }
 }

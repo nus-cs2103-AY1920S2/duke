@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+    static String space = "     ";
+    static String line = space + "____________________________________________________________";
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -8,8 +10,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greeting);
+        String greeting = line + "\n" + space + " Hello! I'm Duke\n" + space + " What can I do for you?\n" + line + "\n";
+        System.out.print(greeting);
         Scanner sc = new Scanner(System.in);
         processlist(sc);
     }
@@ -29,7 +31,7 @@ public class Duke {
                 }
             }
             if (temp.equals("list")) {
-                System.out.println(list);
+                System.out.println(line + "\n" + list);
             } else if (tmp[0].equals("done")) {
                 int index = Integer.parseInt(tmp[1]);
                 list.items[index-1].markDone();
@@ -46,8 +48,8 @@ public class Duke {
                 list.addItem(ddl);
             }
         }
-        String bye = "Bye. Hope to see you again soon!";
-        System.out.println(bye);
+        String bye = line + "\n" + space + " Bye. Hope to see you again soon!\n" + line;
+        System.out.print(bye);
         return;
     }
 }

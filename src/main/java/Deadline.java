@@ -9,7 +9,7 @@ public class Deadline extends Item {
     }
 
     public String toString() {
-        String temp = "[D]" + super.toString() + " (by: "+ time + ")\n";
+        String temp = "   [D]" + super.toString() + " (by: "+ time + ")\n";
         return temp;
     }
 }

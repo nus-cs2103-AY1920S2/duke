@@ -7,7 +7,7 @@ public class Todo extends Item {
     }
 
     public String toString() {
-        String temp = "[T]"+ super.toString() + "\n";
+        String temp = "   [T]"+ super.toString() + "\n";
         return temp;
     }
 }

@@ -17,3 +17,7 @@ bin/
 src/main/java/Duke.class
 src/main/java/List.class
 src/main/java/Item.class
+src/main/java/Event.class
+src/main/java/Todo.class
+src/main/java/Deadline.class
+
