@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cathulhu {
@@ -5,6 +6,7 @@ public class Cathulhu {
     private void interact() {
         Scanner sc = new Scanner(System.in);
         String cmd = "";
+        ArrayList<String> items = new ArrayList<>();
         String catLeaves = "......................................................................\n"
         +".......................................Iä! Iä! .......................\n"
         +"...........................................Cthul......................\n"
@@ -29,8 +31,14 @@ public class Cathulhu {
                 System.out.println("\tBe gone then, mortal.\n");
                 System.out.println(catLeaves);
                 break;
+            } else if (cmd.equalsIgnoreCase("list")) {
+                for (int i=1;i<=items.size();i++) {
+                    System.out.println("\t" + i + ". " + items.get(i-1));
+                }
+            } else {
+                items.add(cmd);
+                System.out.println("\tadded: " + cmd);
             }
-            System.out.println("\t" + cmd);
             System.out.println("\t----------------M-E-O-W-S----------------\n\n");
         }
         sc.close();
