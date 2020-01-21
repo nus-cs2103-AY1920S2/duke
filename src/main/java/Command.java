@@ -1,5 +1,5 @@
 public enum Command {
-    LIST, DONE, TODO, DEADLINE, EVENT;
+    LIST, DONE, TODO, DEADLINE, EVENT, DELETE;
 
     public static Command lookUp(String str) throws InvalidCommandException {
         try {
