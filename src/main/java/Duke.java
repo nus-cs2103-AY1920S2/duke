@@ -16,8 +16,8 @@ public class Duke {
         int size = 0;
         while(!command.equals("bye")) {
             int breakPoint = command.indexOf('/');
-            String[] nextLine = command.split(" ");
-            if(nextLine[0].equals("list")){
+            String[] nextLine = command.split("\\s+");
+            if(nextLine[0].equals("list")) {
                 System.out.println("____________________________");
                 for(int i = 0; i < size; i++) {
                     System.out.println(i + 1 + "." + tasks[i].printTask());
@@ -32,34 +32,51 @@ public class Duke {
                 System.out.println("____________________________");
             } else {
                 if (nextLine[0].equals("todo")) {
-                    tasks[size] = new Todo(command.substring(5));
-                    size++;
-                    System.out.println("____________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks[size-1].printTask());
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                    System.out.println("____________________________");
-                } else if (nextLine[0].equals("event") && breakPoint != -1) {
-                    tasks[size] = new Event(command.substring(6, breakPoint), command.substring(breakPoint + 4));
-                    size++;
-                    System.out.println("____________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks[size-1].printTask());
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                    System.out.println("____________________________");
-                } else if (nextLine[0].equals("deadline") && breakPoint != -1) {
-                    tasks[size] = new Deadline(command.substring(9, breakPoint), command.substring(breakPoint + 4));
-                    size++;
-                    System.out.println("____________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks[size-1].printTask());
-                    System.out.println("Now you have " + size + " tasks in the list.");
-                    System.out.println("____________________________");
+                    if (nextLine.length == 1) {
+                        System.out.println("____________________________");
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println("____________________________");
+                    } else {
+                        tasks[size] = new Todo(command.substring(5));
+                        size++;
+                        System.out.println("____________________________");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("  " + tasks[size - 1].printTask());
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        System.out.println("____________________________");
+                    }
+                } else if (nextLine[0].equals("event")) {
+                    if (breakPoint != -1) {
+                        tasks[size] = new Event(command.substring(6, breakPoint), command.substring(breakPoint + 4));
+                        size++;
+                        System.out.println("____________________________");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("  " + tasks[size - 1].printTask());
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        System.out.println("____________________________");
+                    } else {
+                        System.out.println("____________________________");
+                        System.out.println("☹ OOPS!!! Information about the event is missing");
+                        System.out.println("____________________________");
+                    }
+                } else if (nextLine[0].equals("deadline")) {
+                    if (breakPoint != -1) {
+                        tasks[size] = new Deadline(command.substring(9, breakPoint), command.substring(breakPoint + 4));
+                        size++;
+                        System.out.println("____________________________");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("  " + tasks[size - 1].printTask());
+                        System.out.println("Now you have " + size + " tasks in the list.");
+                        System.out.println("____________________________");
+                    } else {
+                        System.out.println("____________________________");
+                        System.out.println("☹ OOPS!!! Information about the deadline is missing");
+                        System.out.println("____________________________");
+                    }
                 } else {
                     System.out.println("____________________________");
-                    System.out.println("Invalid command for task creation: " + command);
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println("____________________________");
-
                 }
             }
             command = sc.nextLine();
