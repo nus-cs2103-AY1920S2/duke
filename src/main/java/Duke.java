@@ -1,6 +1,7 @@
 import e0148811.duke.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,13 +21,26 @@ class Duke {
         String instruction;
         while (!(instruction = sc.nextLine()).equals("bye")) {
             String[] instructionByWord = instruction.split(" ");
-            if (instruction.equals("list")) {
+            switch (instructionByWord[0]) {
+            case "list":
                 printList(list);
-            } else if (instructionByWord.length == 2 && instructionByWord[0].equals("done")) {
-                markATaskDone(list.get(Integer.parseInt(instructionByWord[1]) - 1));
-            } else {
-                addAPendingTask(list, instruction);
+                break;
+            case "todo":
+                addAPendingTask(list, String.join(" ",
+                        Arrays.copyOfRange(instructionByWord, 1, instructionByWord.length)));
+                break;
+            case "deadline":
+                break;
+            case "event":
+                break;
             }
+
+//            if (instruction.equals("list")) {
+//            } else if (instructionByWord.length == 2 && instructionByWord[0].equals("done")) {
+//                markATaskDone(list.get(Integer.parseInt(instructionByWord[1]) - 1));
+//            } else {
+//                addAPendingTask(list, instruction);
+//            }
         }
 
         System.out.println("Goodbye. See you next time!");

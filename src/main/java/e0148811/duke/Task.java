@@ -6,9 +6,9 @@ public class Task {
     private boolean isDone;
     private String task;
 
-    public Task(String task) {
+    public Task(String description) {
         isDone = false;
-        this.task = task;
+        task = description;
     }
 
     public String getTask() {
