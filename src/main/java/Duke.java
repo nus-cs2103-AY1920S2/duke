@@ -29,30 +29,35 @@ public class Duke {
                     int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
                     if (taskNumber < 1 || taskNumber > numberOfTasks) {
                         printFormattedOutput("Please input a valid task number between 0 - " + numberOfTasks);
+                        continue;
                     }
                     list[taskNumber].markAsDone();
                     printDone(list[taskNumber]);
                     break;
-//                case "todo":
-//                    Task newTodo =  new Todo(input.split("todo ")[1]);
-//                    list[numberOfTasks] = newTodo;
-//                    numberOfTasks++;
-//                    printNewTask(newTodo, numberOfTasks);
-//                    break;
-//                case "event":
-//                    Task newEvent =  new Event(input.split("event ")[1]);
-//                    list[numberOfTasks] = newEvent;
-//                    numberOfTasks++;
-//                    printNewTask(newEvent, numberOfTasks);
-//                    break;
-//                case "deadline":
-//                    break;
-                default:
-//                    printFormattedOutput("Please enter a valid action!");
-                    Task newTask = new Task(input);
-                    list[numberOfTasks] = newTask;
+                case "todo":
+                    Task newTodo =  new Todo(input.split("todo ")[1]);
+                    list[numberOfTasks] = newTodo;
                     numberOfTasks++;
-                    printFormattedOutput("added: " + input);
+                    printNewTask(newTodo, numberOfTasks);
+                    break;
+                case "event":
+                    String event = input.split("event ")[1];
+                    String[] fields = event.split("/at ");
+                    Task newEvent =  new Event(fields[0], fields[1]);
+                    list[numberOfTasks] = newEvent;
+                    numberOfTasks++;
+                    printNewTask(newEvent, numberOfTasks);
+                    break;
+                case "deadline":
+                    String deadline = input.split("deadline ")[1];
+                    fields = deadline.split("/by ");
+                    Task newDeadline =  new Deadline(fields[0], fields[1]);
+                    list[numberOfTasks] = newDeadline;
+                    numberOfTasks++;
+                    printNewTask(newDeadline, numberOfTasks);
+                    break;
+                default:
+                    printFormattedOutput("Please enter a valid action!");
                     break;
             }
 
