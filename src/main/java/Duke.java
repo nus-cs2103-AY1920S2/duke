@@ -34,7 +34,8 @@ public class Duke {
                 System.out.println(lineBreak);
             }
         }
-        //Exit
+        System.out.println(lineBreak);
         System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(lineBreak);
     }
 }
