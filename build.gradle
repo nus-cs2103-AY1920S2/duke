@@ -1,12 +1,12 @@
 plugins {
     id 'java'
     id 'application'
-    // id 'checkstyle'
+    id 'checkstyle'
 }
 
-// checkstyle {
-//     toolVersion = '8.23'
-// }
+checkstyle {
+    toolVersion = '8.23'
+}
 
 group 'seedu.duke'
 version '0.1.0'
