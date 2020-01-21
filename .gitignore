@@ -12,3 +12,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# class file
+src/main/java/Duke.class
+src/main/java/List.class
+src/main/java/Item.class

@@ -15,17 +15,19 @@ public class Duke {
     }
 
     private static void processlist(Scanner sc) {
-        String[] list = new String[100];
+        String[] lists = new String[100];
+        List list = new List();
         int count = 0;
         while (!sc.hasNext("bye")) {
             String temp = sc.nextLine();
+            String[] tmp = temp.split(" ");
             if (temp.equals("list")) {
-                for (int i = 1; i <= count; i++) {
-                    System.out.println(i + ". " + list[i]);
-                }
+                System.out.println(list);
+            } else if (tmp[0].equals("done")) {
+                int index = Integer.parseInt(tmp[1]);
+                list.items[index-1].markDone();
             } else {
-                count++;
-                list[count] = temp;
+                list.addItem(temp);
             }
         }
         String bye = "Bye. Hope to see you again soon!";
