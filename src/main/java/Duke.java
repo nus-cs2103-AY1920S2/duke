@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Duke {
     static List list = new ArrayList<>();
     private static String horizontalLine = "__________________________________________";
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -17,6 +18,7 @@ public class Duke {
         while (scan.hasNextLine()) {
             String command = scan.nextLine();
             Task task = new Task(command);
+
             if (command.equals("bye")) {
                 System.out.println(horizontalLine
                         + "\n"
@@ -24,8 +26,17 @@ public class Duke {
                         + "\n"
                         + horizontalLine);
                 break;
-            } else {
-                System.out.println(task);
+            } else if (command.equals("list")) {
+                System.out.println(horizontalLine);
+                for (Object t : list) {
+                    System.out.println(t);
+                }
+                System.out.println(horizontalLine);
+            }
+            else {
+                list.add(task);
+                System.out.println(command + "\n" + horizontalLine);
+                System.out.println("added: " + command + "\n" + horizontalLine);
             }
         }
     }

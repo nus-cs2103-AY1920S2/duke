@@ -2,12 +2,13 @@ public class Task {
     private static String horizontalLine = "__________________________________________";
     protected String taskName;
     protected static int taskNumber = 1; // for Level 2
+    protected int currentTaskNumber;
     protected boolean isDone; // for Level 3
 
     Task(String taskName) {
         this.isDone = false;
         this.taskName = taskName;
-        this.taskNumber = taskNumber;
+        currentTaskNumber = taskNumber;
         this.taskNumber++;
     }
 
@@ -19,8 +20,16 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public int getTaskNumber() {
+        return currentTaskNumber;
+    }
+
     @Override
     public String toString() {
-            return horizontalLine + "\n" + this.taskName + "\n" + horizontalLine;
+            return getTaskNumber() + ". " + getTaskName();
     }
 }
