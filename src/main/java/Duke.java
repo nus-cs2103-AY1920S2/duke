@@ -82,19 +82,21 @@ public class Duke {
                     replyDone(num);
                 } else {
                     database.addData(userInput);
-                    reply("added: " + userInput);
+                    replyAdded();
                 }
             } else {
                 reply("Bye. Hope to see you again soon!");
                 dialogContinue = false;
             }
-        } catch (IndexOutOfBoundsException message) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index input!");
+        } catch (NoSuchFieldException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     /**
-     * Duke reply the message given to the user
+     * Duke reply one sentence to the user
      * @param sentence message reply to user
      */
     public static void reply(String sentence) {
@@ -113,6 +115,22 @@ public class Duke {
     }
 
     /**
+     * Reply the user that respective task has been added to the list
+     */
+    public static void replyAdded() {
+        int AmtOfTask = database.getAmountOfTask();
+        message.clearMessage();
+        message.addSentence("Got it. I've added this task:");
+        message.addSentence("  " + database.getTask(AmtOfTask).toString());
+        if (AmtOfTask > 1) {
+            message.addSentence("Now you have "+ AmtOfTask +" tasks in the list.");
+        } else {
+            message.addSentence("Now you have 1 task in the list.");
+        }
+        System.out.print(message.replyMessage());
+    }
+
+    /**
      * Reply the user that the task has marked done
      * @param num index where the task located
      */
@@ -121,7 +139,7 @@ public class Duke {
         Task task = database.getTask(num);
         message.clearMessage();
         message.addSentence("Nice! I've marked this task as done:");
-        message.addSentence("  [" + task.getStatusIcon() + "] " + task.getDescription());
+        message.addSentence("  " + task.toString());
         System.out.print(message.replyMessage());
     }
 }

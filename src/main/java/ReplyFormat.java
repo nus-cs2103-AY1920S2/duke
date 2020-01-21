@@ -56,7 +56,7 @@ public class ReplyFormat {
     public void addList(List<Task> listing) {
         int count = 1;
         for (Task task : listing) {
-            addSentence(count + ".[" + task.getStatusIcon() + "] " + task.getDescription());
+            addSentence(count + "." + task.toString());
             count += 1;
         }
     }
