@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Integer;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,7 +14,7 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         boolean isListening = true;
-        UserText inputs = new UserText();
+        UserText tasks = new UserText();
 
         while(isListening) {
             String command = input.nextLine();
@@ -22,10 +23,16 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 isListening = false;
             } else if (command.equalsIgnoreCase("list")) {
-                inputs.printInputs();
+                tasks.printInputs();
+            } else if (command.length()>3
+                    && command.substring(0,4).equalsIgnoreCase("done")) {
+                String s[] = command.split(" ");
+                int taskNo = Integer.parseInt(s[1]);
+                tasks.markDone(taskNo);
+
             } else {
                 System.out.println(command);
-                inputs.addInput(command);
+                tasks.addInput(new Task(command));
             }
         }
     }
