@@ -66,12 +66,20 @@ public class Duke {
                 } else if (inputArr[0].equals("done")){
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
                     tasks.set(taskNo, tasks.get(taskNo).complete());
-                    reply = "Okcan, I mark this task as done:\n     " + tasks.get(taskNo);
+                    reply += "Okcan, I mark this task as done:\n     " + tasks.get(taskNo);
                 } else if (inputArr[0].equals("delete")) {
                     if (inputArr.length < 2){
                         throw new DukeException(DukeExceptionType.NONUMBERDELETE);
                     } else {
-
+                        int taskToDelete = Integer.parseInt(inputArr[1]);
+                        if (taskToDelete > tasks.size()) {
+                            throw new DukeException(DukeExceptionType.NOSUCHDELETE);
+                        } else {
+                            String whichTaskDelete = tasks.get(taskToDelete - 1).toString();
+                            tasks.remove(taskToDelete - 1);
+                            reply += "Okcan. I will remove this task:\n     " + whichTaskDelete 
+                                    + "\n    But you still have " + tasks.size() + " task(s) in the list.";
+                        }
                     }
                 } else {
                     //check which type of task
@@ -88,7 +96,7 @@ public class Duke {
             // next input
             input = s.nextLine();
         }
-        System.out.println("Yes. FINALLY. Hope never to see you again!");
+        System.out.println("\nYes. FINALLY. Hope never to see you again!");
     }
 
     private static String createNew(String[] inputArr, List<Task> tasks) throws DukeException {
