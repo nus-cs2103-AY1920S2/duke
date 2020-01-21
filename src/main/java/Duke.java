@@ -32,7 +32,7 @@ public class Duke {
                 String event = sc.nextLine();
                 int eventDate = event.indexOf("/");
                 Task taskEvent = new Event(tasks.size() + 1, event.substring(0, eventDate),
-                        event.substring(eventDate));
+                        event.substring(eventDate + 4));
                 tasks.add(taskEvent);
                 System.out.println("I've added this task: \n" +
                         "  " + taskEvent + "\n Now you have " +
@@ -42,7 +42,7 @@ public class Duke {
                 String deadline = sc.nextLine();
                 int dLineDate = deadline.indexOf("/");
                 Task taskDLine = new Deadline(tasks.size() + 1, deadline.substring(0, dLineDate),
-                        deadline.substring(dLineDate));
+                        deadline.substring(dLineDate + 4));
                 tasks.add(taskDLine);
                 System.out.println("I've added this task: \n" +
                         "  " + taskDLine + "\n Now you have " +
