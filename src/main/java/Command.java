@@ -9,6 +9,10 @@ public class Command {
         return this.input.equals("bye");
     }
 
+    public boolean isList() {
+        return this.input.equals("list");
+    }
+
     public String getCmd() {
         return this.input;
     }

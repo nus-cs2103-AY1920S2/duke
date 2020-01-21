@@ -6,4 +6,8 @@ public class Tracker {
     public Tracker() {
         this.list = new LinkedList();
     }
+
+    public void add(String text) {
+        this.list.add(text);
+    }
 }

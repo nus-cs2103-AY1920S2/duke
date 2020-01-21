@@ -16,7 +16,11 @@ public class Duke {
         Command command = new Command(scanner.nextLine());
 
         while (command.isBye() == false) {
-            System.out.println(command.getCmd());
+            if (command.isList()) {
+            } else {
+                tracker.add(command.getCmd());
+            }
+
             command = new Command(scanner.nextLine());
         }
 
