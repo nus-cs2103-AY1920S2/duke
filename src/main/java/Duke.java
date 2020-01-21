@@ -36,6 +36,19 @@ public class Duke {
             markItemAsDone(pos);
         } else {
             Task.TaskType type = commandType(str);
+            switch (type) {
+                case toDo:
+                    handleToDo(str);
+                    break;
+                case deadline:
+                    handleDeadline(str);
+                    break;
+                case event:
+                    handleEvent(str);
+                    break;
+                default:
+                    break; // Will throw error later? commandType already throws so idk
+            }
         }
     }
 
@@ -52,7 +65,7 @@ public class Duke {
             else if (ss.equals(Task.eventCommand))
                 ret = Task.TaskType.event;
             else {
-                // Place-holder space. Will throw error later
+                // Place-holder clause. Will throw error later
             }
         }
 
@@ -60,16 +73,27 @@ public class Duke {
         return ret;
     }
 
-    private void handleToDo(String str) {
+    // Not very optimal handling these 3 methods are...
+    // But usable hmm
 
+    private void handleToDo(String str) {
+        Scanner sc = new Scanner(str);
+        sc.next();
+        Task todo = new ToDo(sc.nextLine());
+        storeUserInput(todo);
+        sc.close();
     }
 
     private void handleDeadline(String str) {
+        Scanner sc = new Scanner(str);
 
+        sc.close();
     }
 
     private void handleEvent(String str) {
+        Scanner sc = new Scanner(str);
 
+        sc.close();
     }
 
     private void markItemAsDone(int pos) {
@@ -102,10 +126,10 @@ public class Duke {
         return ret;
     }
 
-    public void storeUserInput(String str) {
-        storedItems.add(new Task(str));
+    private void storeUserInput(Task task) {
+        storedItems.add(task);
         System.out.println(padding + uselessLine + '\n' +
-                padding + addedPhrase + str + '\n' +
+                padding + addedPhrase + task + '\n' +
                 padding + uselessLine);
     }
 
@@ -124,7 +148,7 @@ public class Duke {
         System.out.println(padding + uselessLine);
     }
 
-    public void echo(String str) {
+    private void echo(String str) {
         System.out.println(padding + uselessLine + '\n' +
                 padding + str + '\n' +
                 padding + uselessLine);
