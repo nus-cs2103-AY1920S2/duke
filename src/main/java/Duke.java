@@ -39,15 +39,18 @@ public class Duke { //extends Application {
         List<String> storingList = new ArrayList<>();
 
         while (!nextStr.equals("bye")) { //check for ending input
-            if (nextStr.length() >= 4 && nextStr.substring(0, 4).equals("done")) {
-                System.out.println("ha");
+            if (nextStr.length() >= 6 && nextStr.substring(0, 4).equals("done")) {
+                //can we assume its always a number after done?
+//                int numberDone =
+
+                //System.out.println("ha ahhahaha");
             } else if (nextStr.equals("list")) { //check for listing input
 
                 int sizeOfList = storingList.size();
                 String stringList = "     Here are the tasks in your list: \n";
 
                 for (int i = 1; i <= sizeOfList; i++) {
-                    stringList = stringList + "    " + i + ". [✗] " + storingList.get(i - 1) + "\n"; //add tasks
+                    stringList = stringList + "    " + i + ". [X] " + storingList.get(i - 1) + "\n"; //add tasks
                 }
 
                 formattingDivider(stringList);
