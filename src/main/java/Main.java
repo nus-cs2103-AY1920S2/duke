@@ -26,7 +26,7 @@ public class Main {
                 continue;
             }
 
-            bot.storeUserInput(userInput);
+            bot.processUserInput(userInput);
         }
 
         bot.byeBye();

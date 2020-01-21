@@ -1,6 +1,6 @@
 public class Task {
-    public static final String doneSymbol = "\u2611";
-    public static final String notDoneYetSymbol = "\u2612";
+    public static final String doneSymbol = "\u2714";
+    public static final String notDoneYetSymbol = "\u2718";
 
     private String name;
     private boolean isDone;
@@ -21,8 +21,8 @@ public class Task {
     @Override
     public String toString() {
         if (isDone)
-            return doneSymbol + " " + name;
+            return '[' + doneSymbol + "] " + name;
         else
-            return notDoneYetSymbol + " " + name;
+            return '[' + notDoneYetSymbol + "] " + name;
     }
 }
