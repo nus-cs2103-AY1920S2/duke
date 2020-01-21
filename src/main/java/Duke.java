@@ -42,9 +42,40 @@ public class Duke {
         }
     }
     
+    private static boolean deleteCommand(String command) throws DukeException {
+        Pattern donePattern = Pattern.compile("^delete( (.*))?");
+        Matcher doneMatcher = donePattern.matcher(command);
+        if (doneMatcher.find()) {
+            try {
+                String taskString = doneMatcher.group(2);
+                if (taskString == null || taskString.isEmpty()) {
+                    throw new DukeException("Task number cannot be empty");
+                } else {
+                    int taskIndex = Integer.parseInt(taskString);
+                    removeTask(taskIndex - 1);
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeException("Task number must be an integer");
+            } catch(IndexOutOfBoundsException e) {
+                throw new DukeException("Task number must be within the range of current tasks");
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     private static void addTask(Task newTask) {
         tasks.add(newTask);
         PrintUtil.indentedPrintf("Added task:\n  %s\n", newTask);
+        PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
+    }
+    
+    private static void removeTask(int index) {
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        
+        PrintUtil.indentedPrintf("Removed task:\n  %s\n", task);
         PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
     }
     
@@ -114,6 +145,7 @@ public class Duke {
                     PrintUtil.indentedPrintf("%d.%s\n", i+1, tasks.get(i));
                 }
             } else if ( doneCommand(command)
+                     || deleteCommand(command)
                      || todoCommand(command)
                      || deadlineCommand(command)
                      || eventCommand(command)) {
