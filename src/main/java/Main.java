@@ -6,18 +6,36 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         List list = new List();
 
-        System.out.println("Hello, Luke! I'm Your Father \nWhat can I do for you today?");
+        System.out.println("Hello Master\nWhat can I do for you today?");
 
-        String word = sc.nextLine();
-        while(!word.equals("bye")){
-            if(word.equals("list")){
-                list.printList();
-            } else {
-                list.setListArray(word);
+        while(sc.hasNext()){
+
+            String word = sc.nextLine();
+
+            if(word.equals("bye")){
+                System.out.println("Have a nice day sir!");
+                break;
             }
-            word = sc.nextLine();
+
+            else if(word.equals("list")){
+                list.printList();
+            }
+
+            else if(word.contains("done")){
+                String[] split = word.split(" ");
+                int num = Integer.parseInt(split[1]);
+                Task toComplete = list.getTask(num);
+                toComplete.setCompleted(true);
+                System.out.println("I shall mark task " + num + " as completed");
+                System.out.println(toComplete);
+            }
+
+            else {
+                Task task = new Task(word);
+                list.setListArray(task);
+            }
+
         }
-        System.out.println("Noooo Join the Dark Side, Luke, don't leave me");
 
         sc.close();
 

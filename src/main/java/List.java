@@ -2,13 +2,17 @@ public class List{
 
     public List(){}
 
-    private String[] listArray = new String[100];
+    private Task[] listArray = new Task[100];
     private int counter = 0;
 
-    public void setListArray(String list){
-        this.listArray[counter] = list;
-        System.out.println("added: " + list);
+    public void setListArray(Task task){
+        this.listArray[counter] = task;
+        System.out.println("added: " + task);
         counter++;
+    }
+
+    public Task getTask(int num){
+        return listArray[num-1];
     }
 
     public void printList(){
