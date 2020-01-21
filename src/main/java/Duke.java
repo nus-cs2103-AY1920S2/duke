@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         //initialise scanner
         Scanner s = new Scanner(System.in);
 
@@ -54,64 +54,72 @@ public class Duke {
             String reply = "";   
             String[] inputArr = input.split(" ");
 
-            if (inputArr[0].equals("list")){
-                //loop through to the tasks
-                for(int i = 0; i < tasks.size(); i++){
-                    int numbering = i + 1;
-                    reply += (numbering + ".");
+            try{
+                if (inputArr[0].equals("list")){
+                    //loop through to the tasks
+                    for(int i = 0; i < tasks.size(); i++){
+                        int numbering = i + 1;
+                        reply += (numbering + ".");
 
-                    reply += (tasks.get(i) + "\n    ");
-                }
-                reply += "\n    I told you save liao loh........";
-            } else if (inputArr[0].equals("done")){
-                int taskNo = Integer.parseInt(inputArr[1]) - 1;
-                tasks.set(taskNo, tasks.get(taskNo).complete());
-                reply = "Okcan, I mark this task as done:\n     " + tasks.get(taskNo);
-            } else {
-                //check which type of task
-                int pointer;
-                String nameOfEvent;
-                String dateTime;
-                Task newTask;
-                String date;
-
-                int arrLength = inputArr.length;
-
-                if (inputArr[0].equals("event")){
-                    pointer = findIndex("/at", inputArr);
-                    nameOfEvent = combineString(inputArr, 1, pointer);
-                    dateTime = combineString(inputArr, pointer + 1, arrLength);
-
-                    newTask = new Event(nameOfEvent, dateTime);
-                    tasks.add(newTask);
-                    reply = saveReply + newTask;
-                } else if (inputArr[0].equals("deadline")){
-                    pointer = findIndex("/by", inputArr);
-                    nameOfEvent = combineString(inputArr, 1, pointer);
-                    date = combineString(inputArr, pointer + 1, arrLength);
-
-                    newTask = new Deadline(nameOfEvent, date);
-                    tasks.add(newTask);
-                    reply = saveReply + newTask;
+                        reply += (tasks.get(i) + "\n    ");
+                    }
+                    reply += "\n    I told you save liao loh........";
+                } else if (inputArr[0].equals("done")){
+                    int taskNo = Integer.parseInt(inputArr[1]) - 1;
+                    tasks.set(taskNo, tasks.get(taskNo).complete());
+                    reply = "Okcan, I mark this task as done:\n     " + tasks.get(taskNo);
                 } else {
-                    nameOfEvent = combineString(inputArr, 1, arrLength);
-                    newTask = new Todo(input);
-                    tasks.add(newTask);
+                    //check which type of task
+                    int pointer;
+                    String nameOfEvent;
+                    String dateTime;
+                    Task newTask;
+                    String date;
 
-                    reply = saveReply + newTask;
+                    int arrLength = inputArr.length;
+
+                    if (inputArr[0].equals("event")){
+                        pointer = findIndex("/at", inputArr);
+                        nameOfEvent = combineString(inputArr, 1, pointer);
+                        dateTime = combineString(inputArr, pointer + 1, arrLength);
+
+                        newTask = new Event(nameOfEvent, dateTime);
+                        tasks.add(newTask);
+                        reply = saveReply + newTask;
+                        reply += "\n    Aiyo still got " + tasks.size() + " task(s), what you doing sia";
+                    } else if (inputArr[0].equals("deadline")){
+                        pointer = findIndex("/by", inputArr);
+                        nameOfEvent = combineString(inputArr, 1, pointer);
+                        date = combineString(inputArr, pointer + 1, arrLength);
+
+                        newTask = new Deadline(nameOfEvent, date);
+                        tasks.add(newTask);
+                        reply = saveReply + newTask;
+                        reply += "\n    Aiyo still got " + tasks.size() + " task(s), what you doing sia";
+                    } else if (inputArr[0].equals("todo")){
+                        nameOfEvent = combineString(inputArr, 1, arrLength);
+                        newTask = new Todo(input);
+                        tasks.add(newTask);
+
+                        reply = saveReply + newTask;
+                        reply += "\n    Aiyo still got " + tasks.size() + " task(s), what you doing sia";
+                    } else {
+                        throw new DukeException(DukeExceptionType.UNKNOWNCOMMAND);
+                    }
                 }
-                reply += "\n    Aiyo still got " + tasks.size() + " task(s), what you doing sia";
+                //printing replies
+                System.out.println("    ____________________________________________________________");
+                System.out.println("    " + reply);
+                System.out.println("    ____________________________________________________________");
+                
+                
+            } catch (DukeException e){
+                System.err.println(e);
             }
-
-            //printing replys
-            System.out.println("    ____________________________________________________________");
-            System.out.println("    " + reply);
-            System.out.println("    ____________________________________________________________");
-            
-            //next input
+            // next input
             input = s.nextLine();
         }
-        System.out.println("Bye. Hope never to see you again!");
+        System.out.println("Yes. FINALLY. Hope never to see you again!");
     }
 
     public static int findIndex(String s, String[] arr){
