@@ -5,6 +5,6 @@ public class DukeTest {
 
     @Test
     void echoMessageTest() {
-        assertEquals();
+
     }
 }
