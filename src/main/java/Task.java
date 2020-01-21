@@ -13,7 +13,10 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "[Y]" : "[N]");
+        // The symbols for the check marks and crosses do not seem to work and have been replaced by "Y" and "N" to
+        // represent 'Yes' and 'No' respectively.
+
     }
 
     public void markAsDone() {
@@ -30,6 +33,6 @@ public class Task {
 
     @Override
     public String toString() {
-            return getTaskNumber() + ". " + getTaskName();
+            return getTaskNumber() + ". " + getStatusIcon() + " " + getTaskName();
     }
 }
