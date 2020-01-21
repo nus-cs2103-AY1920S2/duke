@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LevelMethods {
-    List<String> storingList = new ArrayList<>();
+    List<Task> storingList = new ArrayList<>();
 
     public LevelMethods() {
 
@@ -38,18 +38,15 @@ public class LevelMethods {
      */
     public void echo (String inputStr) {
         formattingDivider("    added: " + inputStr);
+        Task task = new Task(inputStr);
 
-        storingList.add(inputStr);
+        storingList.add(task);
     }
 
-    /**
-     * Function to change ✗ to ✓
-     * @param uncompletedTask
-     * @return
-     */
+
     public void completeTask(int taskNum) {
         if (storingList.size() >= taskNum) {
-            String currTask = storingList.get(taskNum-1);
+            Task currTask = storingList.get(taskNum - 1);
 
 
         } else {
@@ -63,7 +60,7 @@ public class LevelMethods {
         String stringList = "     Here are the tasks in your list: \n";
 
         for (int i = 1; i <= sizeOfList; i++) {
-            stringList = stringList + "    " + i + ". [X] " + storingList.get(i - 1) + "\n"; //add tasks
+            stringList = stringList + "    " + i + ". " + storingList.get(i - 1) + "\n"; //add tasks
         }
 
         formattingDivider(stringList);
