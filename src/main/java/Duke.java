@@ -52,25 +52,41 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
+    private void markTaskAsDone(int taskIndex) {
+        Task selectedTask = this.list.get(taskIndex);
+        selectedTask.markAsDone();
+
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Nice! I've marked this task as done: ");
+        outputStreamBuffer.add("  " + selectedTask);
+        print(outputStreamBuffer);
+    }
+
     public static void main(String[] args) {
         final String END_COMMAND = "bye";
         final String LIST_COMMAND = "list";
+        final String DONE_COMMAND = "done";
 
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
-        String input;
 
         greet();
 
         while (true) {
-            input = sc.nextLine();
-            if (input.equals(END_COMMAND)) {
+            String lineInput = sc.nextLine();
+            String[] splitInput = lineInput.split(" ");
+            String command = splitInput[0];
+
+            if (command.equals(END_COMMAND)) {
                 break;
-            } else if (input.equals((LIST_COMMAND))) {
+            } else if (command.equals((LIST_COMMAND))) {
                 duke.printList();
+            } else if (command.equals(DONE_COMMAND)) {
+                int taskNumber = Integer.parseInt(splitInput[1]);
+                duke.markTaskAsDone(taskNumber - 1);
             } else {
-                duke.list.add(new Task(input));
-                print("added: " + input);
+                duke.list.add(new Task(lineInput));
+                print("added: " + lineInput);
             }
         }
 
