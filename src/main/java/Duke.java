@@ -5,8 +5,7 @@ public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
 
-    public static void readCommand(String str) {
-        Command command = Command.lookUp(str);
+    public static void readCommand(Command command) {
         switch (command) {
             case LIST:
                 System.out.println("Here are all your tasks:");
@@ -59,8 +58,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String lineBreak = "_________________________" +
-                "_________________________";
+        String lineBreak = "_____________________________" +
+                "_______________________________";
         sc = new Scanner(System.in);
         tasks = new ArrayList<>();
 
@@ -73,9 +72,16 @@ public class Duke {
             String next = sc.next();
             if (next.equals("bye")) break;
             else {
-                System.out.println(lineBreak);
-                readCommand(next);
-                System.out.println(lineBreak);
+                try {
+                    Command command = Command.lookUp(next);
+                    System.out.println(lineBreak);
+                    readCommand(command);
+                    System.out.println(lineBreak);
+                } catch (InvalidCommandException e) {
+                    System.out.println(lineBreak);
+                    System.out.println("Sorry I do not know what that means!");
+                    System.out.println(lineBreak);
+                }
             }
         }
         System.out.println(lineBreak);
