@@ -17,6 +17,7 @@ public class Duke {
         while (!input.equals("bye")) {
             if (input.equals(("list"))) {
                 printHorizontalLine();
+                printIndented("Here are the tasks in your list: ");
                 for (int i = 0; i < tasks.size(); i++) {
                     printIndented(String.format("%d.%s", i + 1, tasks.get(i)));
                 }
@@ -34,11 +35,20 @@ public class Duke {
                 printIndented(" " + tasks.get(index));
                 printHorizontalLine();
             } else {
+                String typeRemoved = input.split(" ", 2)[1];
+
                 Task task = input.contains("todo")
-                        ? new ToDo(input)
+                        ? new ToDo(typeRemoved)
                         : input.contains("deadline")
-                        ? new Deadline(input)
-                        : new Event(input);
+                        ? new Deadline(typeRemoved)
+                        : new Event(typeRemoved);
+                tasks.add(task);
+
+                printHorizontalLine();
+                printIndented("Got it. I've added this task: ");
+                printIndented(" " + task);
+                printIndented(String.format("Now you have %d tasks in the list.", tasks.size()));
+                printHorizontalLine();
             }
 
             input = sc.nextLine();

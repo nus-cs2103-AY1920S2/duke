@@ -2,8 +2,8 @@ public class Deadline extends Task {
     private String time;
 
     public Deadline(String deadline) {
-        super(deadline.split("/")[0]);
-        this.time = deadline.split("/")[1];
+        super(deadline.split("/by")[0]);
+        this.time = deadline.split("/by")[1];
     }
 
     @Override
