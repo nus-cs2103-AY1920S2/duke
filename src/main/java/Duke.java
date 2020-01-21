@@ -32,6 +32,10 @@ public class Duke {
                 Task task;
 
                 switch (command.getCmd()) {
+                    case "event":
+                        String [] contentArray = content.split("/");
+                        task = new Event(contentArray[0], contentArray[1]);
+                        break;
                     default:
                         task = new ToDo(content);
                 }
