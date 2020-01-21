@@ -25,13 +25,14 @@ public class Duke {
     private static void print(List<String> stringList) {
         final String HORIZONTAL_LINE = "------------------------------------------------------------";
         final String OUTPUT_INDENTATION = "    ";
-        final String FORMAT_STRING = OUTPUT_INDENTATION +  "|%-" + HORIZONTAL_LINE.length() + "s|";
+        final String FORMAT_STRING_FOR_H_LINE = OUTPUT_INDENTATION +  "|%-" + HORIZONTAL_LINE.length() + "s|";
+        final String FORMAT_STRING_FOR_CONTENT = OUTPUT_INDENTATION +  "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
 
-        System.out.println(String.format(FORMAT_STRING, HORIZONTAL_LINE));
+        System.out.println(String.format(FORMAT_STRING_FOR_H_LINE, HORIZONTAL_LINE));
         for (String s : stringList) {
-            System.out.println(String.format(FORMAT_STRING, s));
+            System.out.println(String.format(FORMAT_STRING_FOR_CONTENT, s));
         }
-        System.out.println(String.format(FORMAT_STRING, HORIZONTAL_LINE));
+        System.out.println(String.format(FORMAT_STRING_FOR_H_LINE, HORIZONTAL_LINE));
     }
 
     private static void greet() {
