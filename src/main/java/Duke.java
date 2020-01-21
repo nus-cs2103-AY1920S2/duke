@@ -11,6 +11,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
+        Tracker tracker = new Tracker();
         Scanner scanner = new Scanner(System.in);
         Command command = new Command(scanner.nextLine());
 
