@@ -1,5 +1,4 @@
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 
 public class Task implements TaskPrintable, Parseable {
     protected String description;
@@ -11,22 +10,19 @@ public class Task implements TaskPrintable, Parseable {
     public Task(String description) {
         this.type = "T";
         this.description = description;
-        this.userKeyedDateString = userKeyedDateString;
+
         this.isDone = false;
     }
 
     public Task(String description, String datetime){
-        this.type = type;
         this.userKeyedDateString = datetime;
         setDatetime(datetime);
         this.description = description;
-        this.isDone = isDone;
     }
 
     private Task(boolean isDone, String description){
         this.type = "T";
         this.description = description;
-        this.userKeyedDateString = userKeyedDateString;
         this.isDone = isDone;
     }
 

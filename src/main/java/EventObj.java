@@ -1,5 +1,3 @@
-import java.util.stream.Collectors;
-import java.util.Arrays;
 public class EventObj extends Task {
     public EventObj(String description, String datetime) {
         super(description, datetime);

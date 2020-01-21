@@ -19,7 +19,6 @@ public class Deadline extends Task {
 
     public static Deadline parse(String taskString){
         String[] parts = taskString.split("\\|");
-        String type = parts[0];
         String desc = parts[2];
         Task t = new Deadline(desc, "");
         if (parts.length > 3){

@@ -1,5 +1,5 @@
 public class DukeException extends IllegalArgumentException {
-    protected static int ID = 1001;
+    private static final long serialVersionUID = 1L;
     protected DukeException(String message){
         super(message);
     }
