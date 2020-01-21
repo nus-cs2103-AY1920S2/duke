@@ -1,0 +1,23 @@
+list
+done 0
+done
+invalidcommand
+todo A
+event 
+event B /invalid
+event B /at
+event B /by
+event B /by X
+event B /at X
+deadline
+deadline C /invalid
+deadline C /at
+deadline C /at Y
+deadline C /by Y
+done 1
+list
+done 2
+list
+done 3
+list
+bye
