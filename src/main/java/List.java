@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class List {
-    Item[] items = new Item[100];
+    ArrayList<Item> items = new ArrayList<Item>();
     static String space = "     ";
     static String line = space + "____________________________________________________________";
     int count = 0;
@@ -9,9 +11,9 @@ public class List {
     }
 
     public void addItem(Item item) {
-        this.items[this.count] = item;
+        this.items.add(item);
         this.count ++;
-        String response = line + "\n" + space + " Got it. I've added this task:\n" + space + this.items[this.count-1]
+        String response = line + "\n" + space + " Got it. I've added this task:\n" + space + this.items.get(items.size()-1)
             + space + " Now you have " + this.count + " task";
         if (this.count > 1) {
             response += "s";
@@ -21,6 +23,19 @@ public class List {
         System.out.println(response);
     }
 
+    public List delete(int index) {
+        count--;
+        String response = line + "\n" + "Noted. I've removed this task:\n" + this.items.get(index) + "Now you have " + count + " task";
+        if (this.count > 1) {
+            response += "s";
+        }
+        response += " in the list.\n";
+        response += line;
+        System.out.println(response);
+        this.items.remove(index);
+        return this;
+    }
+
     @Override
     public String toString() {
         String temp = space + " Here are the tasks in your list:\n";
@@ -28,7 +43,7 @@ public class List {
             temp += space;
             temp += " ";
             temp += Integer.toString(i+1);
-            temp += this.items[i];
+            temp += this.items.get(i);
         }
         temp += line;
         return temp;

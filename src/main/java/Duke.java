@@ -16,7 +16,7 @@ public class Duke {
         processlist(sc);
     }
 
-    private static void processlist(Scanner sc) throws IllegalInstructionException {
+    private static void processlist(Scanner sc) throws IllegalInstructionException, NumberFormatException {
         String[] lists = new String[100];
         List list = new List();
         int count = 0;
@@ -33,9 +33,20 @@ public class Duke {
                 }
                 if (temp.equals("list")) {
                     System.out.println(line + "\n" + list);
-                } else if (tmp[0].equals("done")) {
+                } else if (tmp[0].equals("done") || tmp[0].equals("delete")) {
+                    if (tmp.length < 2) {
+                        throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The index of a task cannot be empty.\n"
+                                + line);
+                    } else if (Integer.parseInt(tmp[1]) > list.items.size()) {
+                        throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The index of a task is out of range.\n"
+                                + line);
+                    }
                     int index = Integer.parseInt(tmp[1]);
-                    list.items[index - 1].markDone();
+                    if (tmp[0].equals("done")) {
+                        list.items.get(index - 1).markDone();
+                    } else {
+                        list.delete(index - 1);
+                    }
                 } else if (tmp[0].equals("todo")) {
                     if (task.equals("")) {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The description of a todo cannot be empty.\n"
@@ -67,12 +78,15 @@ public class Duke {
                     }
                     Deadline ddl = new Deadline(d[0], d[1]);
                     list.addItem(ddl);
-                } else {
+                }  else {
                     throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                             + line);
                 }
             } catch (IllegalInstructionException e) {
                 System.err.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.err.println(line + "\n" + space + "☹ OOPS!!! The format of index is wrong.\n"
+                        + line);
             }
         }
         String bye = line + "\n" + space + " Bye. Hope to see you again soon!\n" + line;
