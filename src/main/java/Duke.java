@@ -10,9 +10,19 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        String[] items = new String[100];
+        int i = 0;
 
         while (!input.equals("bye")) {
-            System.out.println(input);
+            if (input.equals("list")) {
+                for (int j = 0; j < i; j++) {
+                    System.out.println(j + 1 + ". " + items[j]);
+                }
+            } else {
+                items[i] = input;
+                i++;
+                System.out.println("added: " + input);
+            }
             input = sc.nextLine();
         }
 
