@@ -1,12 +1,15 @@
 package e0148811.duke;
 
 public class Event extends Task {
-    public Event(String description) {
+    private String time;
+
+    public Event(String description, String time) {
         super(description);
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString();
+        return "[E]" + super.toString() + " (at: " + time + ")";
     }
 }
