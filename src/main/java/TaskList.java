@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-
 class TaskList {
     // List of tasks; assume no more than 100 tasks.
-    private ArrayList<Task> lTasks = new ArrayList<>();
+    private Task[] lTasks = new Task[100];
     // int representing number of tasks in the list
     private int nTasks = 0;
 
@@ -38,7 +36,7 @@ class TaskList {
     }
 
     private String[] add(Task s) {
-        lTasks.add(s);
+        lTasks[nTasks] = s;
         nTasks++;
         return new String[]{"Got it. I've added this task:", "  " + s.toString(), String.format("Now you have %d tasks in the list.", nTasks) };
     }
