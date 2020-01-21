@@ -1,6 +1,8 @@
 public class Item {
     private String name;
     private boolean done;
+    Item() {}
+
     Item(String name) {
         this.name = name;
         this.done = false;
@@ -13,7 +15,7 @@ public class Item {
         } else {
             temp += "✗";
         }
-        temp += "] "+this.name + "\n";
+        temp += "] "+this.name;
         return temp;
     }
 

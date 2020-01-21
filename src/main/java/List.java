@@ -6,9 +6,16 @@ public class List {
         this.count = count;
     }
 
-    public void addItem(String temp) {
-        this.items[this.count] = new Item(temp);
-        this.count++;
+    public void addItem(Item item) {
+        this.items[this.count] = item;
+        this.count ++;
+        String response = "Got it. I've added this task:\n" + this.items[this.count-1]
+            + "Now you have " + this.count + " task";
+        if (this.count > 1) {
+            response += "s";
+        }
+            response += " in the list";
+        System.out.println(response);
     }
 
     @Override
