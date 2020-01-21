@@ -17,7 +17,7 @@ public class Duke {
 
         String bye = "Bye. Hope to see you again soon!";
 
-        List<String> store = new ArrayList<>();
+        List<Task> store = new ArrayList<>();
 
         System.out.println(greet);
 
@@ -28,16 +28,24 @@ public class Duke {
         int counter = 0;
 
         while(!command.equals("bye") ) {
-            if (!command.equals("list")) {
-                store.add(command);
+            if (command.contains("done")) {
+                int num = Integer.parseInt(command.split(" ")[1]);
+                Task t = store.get(num-1);
+                t.markAsDone();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(t);
+                command = scan.nextLine();
+            } else if (!command.equals("list")) {
+                Task t = new Task(command);
+                store.add(t);
                 System.out.println("added: " + command);
                 command = scan.nextLine();
-            } else {
-                while(store.size() != 0) {
-                    counter++;
-                    System.out.println(counter + ". " + store.get(0));
-                    store.remove(0);
-                }
+            } else if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list: ");
+                for (int i =0 ;i< store.size(); i++) {
+                    counter ++;
+                    System.out.println(counter + ". " + store.get(i));
+                    }
                 command = scan.nextLine();
             }
         }
