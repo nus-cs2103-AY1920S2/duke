@@ -2,32 +2,41 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        
+        Scanner in = new Scanner(System.in);
+        TaskList tasks = new TaskList();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         // System.out.println("Hello from\n" + logo);
-        System.out.println(addBorders("Hello! I'm Duke\n  What can I do for you?"));
-        Scanner in = new Scanner(System.in);
+        out("Hello! I'm Duke", "What can I do for you?");
         while (in.hasNext()) {
             String next = in.next();
             if (next.equals("bye")) {
-                System.out.println(addBorders("Bye. Hope to see you again soon!"));
+                out("Bye. Hope to see you again soon!");
                 break;
-            } else {
-                System.out.println(addBorders(echo(next)));
+            } else if(next.equals("list")) {
+                out(tasks.list());
+            }else {
+                out(tasks.add(next));
             }
         }
         in.close();
     }
 
-    private static String addBorders(String s) {
-        String border = "____________________________________________________________";
-        return String.format("    %s\n     %s\n    %s", border, s, border);
+    private static void out(String... ss) {
+        String border = "    ____________________________________________________________";
+        System.out.println(border);
+        for (String s : ss) {
+            System.out.println("    " + s);
+        }
+        System.out.println(border);
     }
 
-    public static String echo(String s) {
+    private static String echo(String s) {
         return s;
     }
 }
