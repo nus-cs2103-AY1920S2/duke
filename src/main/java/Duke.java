@@ -17,8 +17,12 @@ public class Duke {
 
         while (command.isBye() == false) {
             if (command.isList()) {
+                for (String item : tracker.showList()) {
+                    System.out.println(item);
+                }
             } else {
                 tracker.add(command.getCmd());
+                System.out.println("added: " + command.getCmd());
             }
 
             command = new Command(scanner.nextLine());
