@@ -68,7 +68,7 @@ public class Duke { //extends Application {
 //    }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //throws DukeExceptions {
         //Methods implemented in diff levels
         LevelMethods levelMethods = new LevelMethods();
         levelMethods.greetings(); //greet
@@ -78,7 +78,9 @@ public class Duke { //extends Application {
         String nextStr = sc.nextLine();
 
         //loop
+
         while (!nextStr.equals("bye")) { //check for ending input
+
 
             if (nextStr.length() >= 6 && nextStr.substring(0, 4).equals("done")) {
                 //can we assume its always a number after done?
@@ -92,11 +94,18 @@ public class Duke { //extends Application {
                 levelMethods.listTheList();
             } else {
                 //echo
-                levelMethods.echo(nextStr);
+                try {
+                    levelMethods.echo(nextStr);
+                } catch (DukeExceptions ex) {
+                    //System.out.println("yes");
+                    System.err.println(ex);
+                }
             }
+
 
             nextStr = sc.nextLine();
         }
+
 
         levelMethods.sayonara(); //goodbye
 

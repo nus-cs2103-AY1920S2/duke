@@ -46,20 +46,24 @@ public class LevelMethods {
      *
      * @param inputStr
      */
-    public void echo(String inputStr) {
+    public void echo(String inputStr) throws DukeExceptions {
 
         if (inputStr.contains("todo")) {
-            if (inputStr.substring(0, 4).equals("todo")) {
-                Task todo = new Todo(inputStr);
+            if (inputStr.substring(0, 4).equals("todo") && inputStr.length() > 5) {
+                String detailsStr = inputStr.substring(5, inputStr.length());
+
+                Task todo = new Todo(detailsStr);
                 storingList.add(todo);
 
                 printAddingTask(todo);
             } else {
-                formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+                //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+
+                throw new DukeExceptions("OOPS!!! The description of a todo cannot be empty.");
             }
 
         } else if (inputStr.contains("event")) {
-            if (inputStr.substring(0, 5).equals("event")) {
+            if (inputStr.substring(0, 5).equals("event") && inputStr.length() > 6) {
                 String[] eventAndTime = inputStr.substring(6, inputStr.length()).split(" /at ");
 
                 Task event = new Event(eventAndTime[0], eventAndTime[1]);
@@ -70,24 +74,38 @@ public class LevelMethods {
 
 
             } else {
-                formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+                //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+                System.out.println("here");
+                throw new DukeExceptions("OOPS!!! The description of a event cannot be empty.");
             }
 
         } else if (inputStr.contains("deadline")) {
-            if (inputStr.substring(0, 8).equals("deadline")) {
-                String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
-                Task deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
-                storingList.add(deadline);
+            if (inputStr.substring(0, 8).equals("deadline") && inputStr.length() > 9) {
 
-                //print
-                printAddingTask(deadline);
+                String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
+
+                if (eventAndTime.length > 1) {
+
+                    Task deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
+                    storingList.add(deadline);
+
+                    //print
+                    printAddingTask(deadline);
+                } else {
+                    //System.out.println("hie");
+                    throw new DukeExceptions("OOPS!! Please format your Deadline correctly!!!");
+                }
 
             } else {
-                formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+                //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+                throw new DukeExceptions("OOPS!!! The description of a deadline cannot be empty.");
             }
         } else {
             //correctFormat = false;
-            formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+            //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
+
+            throw new DukeExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
         }
 
 //        Task task = new Task(inputStr);
