@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 public class Duke {
     private static final int indentLevels = 4;
@@ -30,12 +31,20 @@ public class Duke {
         indentedPrintln("Hello from\n" + logo);
     }
     
+    private static ArrayList<String> tasks = new ArrayList<>();
+    
     private static boolean runCommand(String command) {
         if (command.equals("bye")) {
             indentedPrintln("Goodbye");
             return false;
+        } else if (command.equals("list")) {
+            for (int i = 0; i < tasks.size(); i++) {
+                String task = tasks.get(i);
+                indentedPrintf("%d: %s\n", i+1, task);
+            }
         } else {
-            indentedPrintln(command);
+            tasks.add(command);
+            indentedPrintf("added: %s\n", command);
         }
         return true;
     }
@@ -48,7 +57,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean running = true;
         while (running) {
-            
             String command = sc.nextLine();
             
             printHeaderLine();
