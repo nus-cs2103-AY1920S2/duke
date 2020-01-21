@@ -4,33 +4,20 @@ class TaskList {
     // int representing number of tasks in the list
     private int nTasks = 0;
 
-    public String[] addTodo(String... ss) throws IncorrectArgumentException {
-        if (ss[0].equals("")) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: Task Description");
-        } else if (ss.length > 1) {
-            throw new IncorrectArgumentException("Too many arguments!");
-        }
+    public String[] addTodo(String... ss) {
         return add(new Todo(ss[0]));
     }
     
     public String[] addDeadline(String... ss) throws IncorrectArgumentException {
-        if (ss[0].equals("")) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, by.." : "Task Description"));
-        } else if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: by..");
-        } else if (ss.length > 2) {
-            throw new IncorrectArgumentException("Too many arguments!");
+        if (ss.length < 2) {
+            throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "task" : "task, by.."));
         }
         return add(new Deadline(ss[0], ss[1]));
     }
     
     public String[] addEvent(String... ss) throws IncorrectArgumentException {
-        if (ss[0].equals("")) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, at.." : "Task Description"));
-        } else if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: at..");
-        } else if (ss.length > 2) {
-            throw new IncorrectArgumentException("Too many arguments!");
+        if (ss.length < 2) {
+            throw new IncorrectArgumentException("Oops! Missing required arguments".concat(ss.length == 1 ? "task" : "task, at.."));
         }
         return add(new Event(ss[0], ss[1]));
     }

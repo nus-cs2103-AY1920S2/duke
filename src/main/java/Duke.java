@@ -20,10 +20,8 @@ public class Duke {
                     out(tasks.done(in.nextInt()));
                     break;
                 case "todo":
-                    try {
+                    {
                         out(tasks.addTodo(in.nextLine().split("/")));
-                    } catch(IncorrectArgumentException e) {
-                        System.out.println(e.getMessage());
                     }
                     break;
                 case "deadline":
@@ -35,7 +33,7 @@ public class Duke {
                     break;
                 case "event":
                     try {
-                        out(tasks.addEvent(in.nextLine().split(" /at ")));
+                        out(tasks.addDeadline(in.nextLine().split(" /by ")));
                     } catch(IncorrectArgumentException e) {
                         System.out.println(e.getMessage());
                     }
