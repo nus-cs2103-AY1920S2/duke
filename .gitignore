@@ -20,4 +20,5 @@ src/main/java/Item.class
 src/main/java/Event.class
 src/main/java/Todo.class
 src/main/java/Deadline.class
+src/main/java/IllegalInstructionException.class
 
