@@ -41,6 +41,17 @@ public class Duke {
                             + "     Nice! I've marked this task as done:");
                     System.out.printf("     %s\n", taskToMark);
                     System.out.println("    ____________________________________________________________");
+                } else if (command.equals("delete")) {
+                    int taskNum = Integer.parseInt(commandLine[1]);
+                    if (taskNum > tasks.size() || taskNum <= 0) {
+                        throw new InvalidCommandException("     ☹ OOPS!!! I cannot delete a non-existent task.");
+                    }
+
+                    Task taskToDelete = tasks.remove(taskNum - 1);
+                    System.out.println("    ____________________________________________________________");
+                    System.out.printf("     Noted. I've removed this task:\n         %s\n", taskToDelete);
+                    System.out.printf("     Now you have %d tasks in the list.\n", tasks.size());
+                    System.out.println("    ____________________________________________________________");
                 } else if (command.equals("todo")) {
                     if (commandLine.length < 2) {
                         throw new InvalidCommandException("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -48,7 +59,7 @@ public class Duke {
                     Task newTask = new Todo(commandLine[1]);
                     tasks.add(newTask);
                     System.out.println("    ____________________________________________________________");
-                    System.out.printf("     Got it. I've added this task: \n       %s\n", newTask);
+                    System.out.printf("     Got it. I've added this task:\n       %s\n", newTask);
                     System.out.printf("     Now you have %d tasks in the list.\n", tasks.size());
                     System.out.println("    ____________________________________________________________");
                 } else if (command.equals("deadline")) {
@@ -60,7 +71,7 @@ public class Duke {
                     Task newTask = new Deadline(deadlineDescriptionDate[0], deadlineDescriptionDate[1]);
                     tasks.add(newTask);
                     System.out.println("    ____________________________________________________________");
-                    System.out.printf("     Got it. I've added this task: \n       %s\n", newTask);
+                    System.out.printf("     Got it. I've added this task:\n       %s\n", newTask);
                     System.out.printf("     Now you have %d tasks in the list.\n", tasks.size());
                     System.out.println("    ____________________________________________________________");
                 } else if (command.equals("event")) {
@@ -71,7 +82,7 @@ public class Duke {
                     Task newTask = new Event(eventDescriptionDate[0], eventDescriptionDate[1]);
                     tasks.add(newTask);
                     System.out.println("    ____________________________________________________________");
-                    System.out.printf("     Got it. I've added this task: \n       %s\n", newTask);
+                    System.out.printf("     Got it. I've added this task:\n       %s\n", newTask);
                     System.out.printf("     Now you have %d tasks in the list.\n", tasks.size());
                     System.out.println("    ____________________________________________________________");
                 } else {
