@@ -11,4 +11,7 @@ event project meeting /at Mon 2-4pm
 list
 todo
 blah
+delete 1
+delete 2
+list
 bye

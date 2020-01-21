@@ -30,6 +30,13 @@ public class Duke {
                 printIndented("Nice! I've marked this task as done: ");
                 printIndented(" " + tasks.get(index));
                 printHorizontalLine();
+            } else if (input.contains("delete")) {
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+
+                printHorizontalLine();
+                printIndented("Noted. I've removed this task: ");
+                printIndented(" " + tasks.remove(index));
+                printHorizontalLine();
             } else if (input.contains("todo") || input.contains("deadline") || input.contains(("event"))) {
                 try {
                     String typeRemoved = input.strip().split(" ", 2)[1];
