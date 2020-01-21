@@ -13,16 +13,19 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         boolean isListening = true;
+        UserText inputs = new UserText();
+
         while(isListening) {
             String command = input.nextLine();
 
-            if (command.equals("bye")) {
+            if (command.equalsIgnoreCase("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 isListening = false;
-            }
-
-            else {
+            } else if (command.equalsIgnoreCase("list")) {
+                inputs.printInputs();
+            } else {
                 System.out.println(command);
+                inputs.addInput(command);
             }
         }
     }
