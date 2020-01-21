@@ -22,28 +22,43 @@ public class Duke {
 
             String action = command_broken[0];
 
-            if (action.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again!");
-                isListening = false;
+            try {
 
-            } else if (action.equalsIgnoreCase("list")) {
-                tasks.printInputs();
+                if (action.equalsIgnoreCase("bye")) {
+                    System.out.println("Bye. Hope to see you again!");
+                    isListening = false;
 
-            } else if (action.equalsIgnoreCase("done")) {
-                String context = command_broken[1];
-                int taskNo = Integer.parseInt(context);
-                tasks.markDone(taskNo);
+                } else if (action.equalsIgnoreCase("list")) {
+                    tasks.printInputs();
 
-            } else if (action.equalsIgnoreCase(("deadline"))){
-                String context = command_broken[1];
-                String[] context_broken = context.split("/by",2);
-                tasks.addInput(new Deadlines(context_broken[0], context_broken[1]));
-            } else if (action.equalsIgnoreCase(("todo"))){
-                tasks.addInput(new ToDos(command_broken[1]));
-            } else if (action.equalsIgnoreCase(("event"))){
-                String context = command_broken[1];
-                String[] context_broken = context.split("/at",2);
-                tasks.addInput(new Events(context_broken[0], context_broken[1]));
+                } else if (action.equalsIgnoreCase("done")) {
+                    String context = command_broken[1];
+                    int taskNo = Integer.parseInt(context);
+                    tasks.markDone(taskNo);
+
+
+                } else if (action.equalsIgnoreCase(("deadline"))) {
+                    String context = command_broken[1];
+                    String[] context_broken = context.split("/by", 2);
+                    tasks.addInput(new Deadlines(context_broken[0], context_broken[1]));
+
+                } else if (action.equalsIgnoreCase(("todo"))) {
+                    if (command_broken.length == 1) {
+                        throw new DukeException("Ooops! The description of a ToDo cannot be empty.");
+                    }
+                    tasks.addInput(new ToDos(command_broken[1]));
+
+                } else if (action.equalsIgnoreCase(("event"))) {
+                    String context = command_broken[1];
+                    String[] context_broken = context.split("/at", 2);
+                    tasks.addInput(new Events(context_broken[0], context_broken[1]));
+
+                } else {
+                    throw new DukeException("Ooops! I'm sorry, i don't know what it means");
+                }
+
+            } catch (DukeException exception) {
+                System.out.println(exception.getMessage());
             }
         }
     }
