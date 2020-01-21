@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,6 +26,14 @@ public class Duke {
             else if (next.equals("list")) {
                 System.out.println(lineBreak);
                 tasks.forEach(System.out::println);
+                System.out.println(lineBreak);
+            } else if (next.substring(0, 4).equals("done")) {
+                int id = Integer.parseInt(next.substring(5)) - 1;
+                Task task = tasks.get(id);
+                task.done = true;
+                System.out.println(lineBreak);
+                System.out.println("Nice! I've marked this task as done: \n" +
+                        "  [✓] " + task.task);
                 System.out.println(lineBreak);
             } else {
                 tasks.add(new Task(count, next));
