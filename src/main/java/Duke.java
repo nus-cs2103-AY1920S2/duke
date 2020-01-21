@@ -31,9 +31,19 @@ public class Duke {
                 data[option-1].setDone();
                 System.out.println("Nice! I've marked this task as done:\n  " + data[option-1]);
             } else {
-                data[slot] = new Task(input);
-                System.out.println("added: " + input);
+                System.out.println("Got it. I've added this task: ");
+                if (action.equals("todo")) {
+                    data[slot] = new Todo(inputArr[1]);
+                } else if (action.equals("deadline")) {
+                    String[] dArr = inputArr[1].split(" /by ", 2);
+                    data[slot] = new Deadline(dArr[0], dArr[1]);
+                } else { //event
+                    String[] eArr = inputArr[1].split(" /at ", 2);
+                    data[slot] = new Deadline(eArr[0], eArr[1]);
+                }
+                System.out.println("  " + data[slot]);
                 slot++;
+                System.out.println("Now you have " + slot + " tasks in the list.");
             }
         }
 
