@@ -47,6 +47,9 @@ public class Duke {
                     handleEvent(str);
                     break;
                 default:
+                    System.out.println(padding + uselessLine + '\n' +
+                            padding + "Umm, please just write something legit.\n" +
+                            padding + uselessLine);
                     break; // Will throw error later? commandType already throws so idk
             }
         }
@@ -67,6 +70,7 @@ public class Duke {
             else {
                 // Place-holder clause. Will throw error later
             }
+            break;
         }
 
         sc.close();
@@ -86,13 +90,19 @@ public class Duke {
 
     private void handleDeadline(String str) {
         Scanner sc = new Scanner(str);
-
+        sc.next();
+        String[] parts = sc.nextLine().split("/");
+        Task deadline = new Deadline(parts[0], parts[1]);
+        storeUserInput(deadline);
         sc.close();
     }
 
     private void handleEvent(String str) {
         Scanner sc = new Scanner(str);
-
+        sc.next();
+        String[] parts = sc.nextLine().split("/");
+        Task event = new Event(parts[0], parts[1]);
+        storeUserInput(event);
         sc.close();
     }
 
@@ -130,6 +140,7 @@ public class Duke {
         storedItems.add(task);
         System.out.println(padding + uselessLine + '\n' +
                 padding + addedPhrase + task + '\n' +
+                padding + "Now you have " + storedItems.size() + " tasks\n" +
                 padding + uselessLine);
     }
 
