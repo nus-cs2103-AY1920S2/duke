@@ -1,5 +1,5 @@
 abstract class Task {
-    
+
     protected String taskDescription;
     protected boolean isDone;
 
@@ -15,9 +15,9 @@ abstract class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[✓] " + taskDescription;
+            return "[O] " + taskDescription;
         } else {
-            return "[✗] " + taskDescription;
+            return "[X] " + taskDescription;
         }
     }
 }
