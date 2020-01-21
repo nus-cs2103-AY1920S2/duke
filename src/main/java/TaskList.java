@@ -15,7 +15,7 @@ class TaskList {
     public String[] list() {
         String[] tasks = new String[nTasks];
         for (int i = 0; i < nTasks; i++) {
-            tasks[i] = String.format("%d.%s %s", i + 1, lDone[i] ? "[✓]" : "[✗]", lTasks[i]);
+            tasks[i] = String.format("%d.%s %s", i + 1, lDone[i] ? "[✓]" : "[X]", lTasks[i]);
         }
         return tasks;
     }
