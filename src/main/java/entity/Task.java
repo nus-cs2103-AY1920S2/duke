@@ -1,8 +1,15 @@
 package entity;
 
 public class Task {
+
     private boolean isDone;
     private String taskName;
+    private String addedInfo;
+
+    public Task() {
+        this.isDone = false;
+        this.taskName = "";
+    }
 
     public Task(String taskName) {
         this.isDone = false;
@@ -23,5 +30,17 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public String getAddedInfo() {
+        return addedInfo;
+    }
+
+    public void setAddedInfo(String addedInfo) {
+        this.addedInfo = addedInfo;
+    }
+
+    public String printTask() {
+        return "[" +  (isDone ? "\u2713" : "\u2718" ) + "] " + taskName;
     }
 }
