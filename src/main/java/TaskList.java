@@ -4,22 +4,16 @@ class TaskList {
     // int representing number of tasks in the list
     private int nTasks = 0;
 
-    public String[] addTodo(String... ss) {
-        return add(new Todo(ss[0]));
+    public String[] addTodo(String s) {
+        return add(new Todo(s));
     }
     
-    public String[] addDeadline(String... ss) throws IncorrectArgumentException {
-        if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "task" : "task, by.."));
-        }
-        return add(new Deadline(ss[0], ss[1]));
+    public String[] addDeadline(String s, String by) {
+        return add(new Deadline(s, by));
     }
     
-    public String[] addEvent(String... ss) throws IncorrectArgumentException {
-        if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments".concat(ss.length == 1 ? "task" : "task, at.."));
-        }
-        return add(new Event(ss[0], ss[1]));
+    public String[] addEvent(String s, String at) {
+        return add(new Event(s, at));
     }
 
     private String[] add(Task s) {

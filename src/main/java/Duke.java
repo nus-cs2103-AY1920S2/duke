@@ -9,7 +9,7 @@ public class Duke {
         out("Hello! I'm Duke", "What can I do for you?");
         input: while (in.hasNext()) {
             String next = in.next();
-            switch (next.toLowerCase()) {
+            switch (next) {
                 case "bye":
                     out("Bye. Hope to see you again soon!");
                     break input;
@@ -21,21 +21,20 @@ public class Duke {
                     break;
                 case "todo":
                     {
-                        out(tasks.addTodo(in.nextLine().split("/")));
+                        String[] params = in.nextLine().split("/");
+                        out(tasks.addTodo(params[0]));
                     }
                     break;
                 case "deadline":
-                    try {
-                        out(tasks.addDeadline(in.nextLine().split(" /by ")));
-                    } catch(IncorrectArgumentException e) {
-                        System.out.println(e.getMessage());
+                    {
+                        String[] params = in.nextLine().split(" /by ");
+                        out(tasks.addDeadline(params[0], params[1]));
                     }
                     break;
                 case "event":
-                    try {
-                        out(tasks.addDeadline(in.nextLine().split(" /by ")));
-                    } catch(IncorrectArgumentException e) {
-                        System.out.println(e.getMessage());
+                    {
+                        String[] params = in.nextLine().split(" /at ");
+                        out(tasks.addEvent(params[0], params[1]));
                     }
                     break;
                 default:
