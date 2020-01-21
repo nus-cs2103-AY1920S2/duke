@@ -40,9 +40,6 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case "delete":
-                    out(tasks.delete(in.nextInt()));
-                    break;
                 default:
                     out("invalid command:", echo(next), "please try again");
                     break;
