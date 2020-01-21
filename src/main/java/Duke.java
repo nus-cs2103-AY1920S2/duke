@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -12,18 +14,23 @@ public class Duke {
         sword.greet();
 
         Scanner scanner = new Scanner(System.in);
-        String input;
+        boolean loop = true;
+        do {
+            String input = scanner.nextLine();
 
-        while(true) {
-            input = scanner.next();
-
-            if (input.equals("bye")) {
-                sword.exit();
-                break;
-            } else {
-                sword.echo(input);
+            switch (input) {
+                case "bye":
+                    sword.exit();
+                    loop = false;
+                    break;
+                case "list":
+                    sword.list();
+                    break;
+                default:
+                    sword.add(input);
+                    break;
             }
-        }
+        } while (loop);
 
     }
 }
