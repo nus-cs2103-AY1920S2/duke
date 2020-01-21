@@ -14,4 +14,8 @@ public class Task {
             return "[\u2718] " + content;
         }
     }
+
+    public void setDone() {
+        this.isDone = true;
+    }
 }

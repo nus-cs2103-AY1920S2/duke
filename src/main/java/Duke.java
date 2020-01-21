@@ -22,6 +22,11 @@ public class Duke {
                     Task task = tracker.showList().get(i);
                     System.out.println(itemNo + "." + task.getStatus());
                 }
+            } else if (command.isDone()) {
+                int itemNo = Integer.parseInt(command.getCmd().substring(5)) - 1;
+                System.out.println("Nice! I've marked this task as done");
+                tracker.markDone(itemNo);
+
             } else {
                 tracker.add(command.getCmd());
                 System.out.println("added: " + command.getCmd());
