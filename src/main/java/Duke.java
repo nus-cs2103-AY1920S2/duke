@@ -73,10 +73,13 @@ public class Duke {
      * @param userInput string input by the user
      */
     public static void processUserInput(String userInput) {
-        if (userInput != null) {
+        try {
             if (!userInput.equals("bye")) {
                 if (userInput.equals("list")) {
                     replyListing();
+                } else if (userInput.startsWith("done")) {
+                    int num = Integer.parseInt(userInput.substring(5));
+                    replyDone(num);
                 } else {
                     database.addData(userInput);
                     reply("added: " + userInput);
@@ -85,8 +88,8 @@ public class Duke {
                 reply("Bye. Hope to see you again soon!");
                 dialogContinue = false;
             }
-        } else {
-            System.out.println("Null encountered during user input!");
+        } catch (IndexOutOfBoundsException message) {
+            System.out.println("Invalid Index input!");
         }
     }
 
@@ -106,6 +109,19 @@ public class Duke {
     public static void replyListing() {
         message.clearMessage();
         message.addList(database.getListing());
+        System.out.print(message.replyMessage());
+    }
+
+    /**
+     * Reply the user that the task has marked done
+     * @param num index where the task located
+     */
+    public static void replyDone(int num) {
+        database.markDone(num);
+        Task task = database.getTask(num);
+        message.clearMessage();
+        message.addSentence("Nice! I've marked this task as done:");
+        message.addSentence("  [" + task.getStatusIcon() + "] " + task.getDescription());
         System.out.print(message.replyMessage());
     }
 }

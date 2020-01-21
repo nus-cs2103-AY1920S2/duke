@@ -1,10 +1,10 @@
 import java.util.List;
 
 public class ReplyFormat {
-    String indentationInFront;
-    String message;
-    String outline = "______________________________________";
-    int numOfIndentInFront;
+    protected String indentationInFront;
+    protected String message;
+    protected String outline = "______________________________________";
+    protected int numOfIndentInFront;
 
     /**
      * Initialise the reply message format
@@ -53,10 +53,10 @@ public class ReplyFormat {
      * Adding list of data to the reply
      * @param listing listing to display
      */
-    public void addList(List<String> listing) {
+    public void addList(List<Task> listing) {
         int count = 1;
-        for (String data : listing) {
-            addSentence(count + ". " + data);
+        for (Task task : listing) {
+            addSentence(count + ".[" + task.getStatusIcon() + "] " + task.getDescription());
             count += 1;
         }
     }
