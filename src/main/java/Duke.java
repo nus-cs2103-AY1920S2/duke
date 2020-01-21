@@ -2,9 +2,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
+/*
+ * Duke
+ *
+ * CS2103 AY19/20 Semester 2
+ * Individual Project
+ * Duke Project
+ *
+ * 21 Jan 2020
+ *
+ */
+
+/**
+ * <p>The Duke class is the main class of the bot,
+ * where the command processing happens.</p>
+ * @author Mario Lorenzo
+ */
+
 public class Duke {
     private ArrayList<Task> tasks;
     private HashMap<String, Command> valid_commands;
+
+    /**
+     * Constructs the Duke instance that has a list that
+     * stores tasks, as well as the list of all valid commands
+     * that the Duke instance can perform, stored in a HashMap.
+     */
 
     public Duke() {
         this.tasks = new ArrayList<>();
@@ -20,15 +43,24 @@ public class Duke {
         };
     }
 
+    /**
+     * isInRange method verifies whether the index
+     * provided is within the range or not.
+     * @param index the index of the task
+     * @return the boolean value of whether the index given is
+     * within the valid range.
+     */
+
     public boolean isInRange(int index) {
         return index > 0 && index <= tasks.size() && tasks.size() > 0;
     }
 
-    public void listTasks() {
-        for (int i = 1; i <= tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i, tasks.get(i - 1));
-        }
-    }
+    /**
+     * markDone method marks the task of a particular index
+     * to be done, and inform the client later. This method is
+     * being called when a done command is entered by a client.
+     * @param index The index of a particular task in the task list.
+     */
 
     public void markDone(int index) {
         Task task = getTask(index);
@@ -38,9 +70,61 @@ public class Duke {
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
     }
 
+    /**
+     * getCommand method gets the Command enums of the corresponding
+     * command string provided. Optional instances are used to handle cases
+     * where the command string entered by the client is invalid, thus returning
+     * null value.
+     * @param command_string The command provided by the client to be processed.
+     * @return The corresponding Command enums, packed in form of an Optional instance.
+     */
+
+    public Optional<Command> getCommand(String command_string) {
+        return Optional.ofNullable(valid_commands.get(command_string));
+    }
+
+    /**
+     * getTask method gets the task of a given index
+     * from the list of tasks. The index value is normalized
+     * by subtracting the value with 1 since the value starts
+     * from 1.
+     * @param index The index of the task in the list.
+     * @return The Task instance of an index provided by the client.
+     */
+
+    public Task getTask(int index) {
+        return tasks.get(index - 1);
+    }
+
+    /**
+     * listTasks method prints all the tasks stored in the ArrayList
+     * of the Duke instance.
+     */
+
+    public void listTasks() {
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.printf("%d. %s\n", i, tasks.get(i - 1));
+        }
+    }
+
+    /**
+     * addTask method adds the task with the corresponding
+     * type, and the description provided by the client.
+     * @param command The type of task that is requested.
+     * @param description The description of the task.
+     * @throws DukeException If there is a format error in the command.
+     */
+
     public void addTask(Command command, String description) throws DukeException {
         Task new_task;
         String[] description_with_schedule;
+
+        /*
+         The switch block uses to provide the appropriate task
+         as requested by the client. The default block is used
+         for the EVENT case.
+         */
+
         switch (command) {
             case TODO:
                 new_task = new Todo(description);
@@ -76,6 +160,13 @@ public class Duke {
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
     }
 
+    /**
+     * deleteTask deletes the task of a particular index
+     * from the list.
+     * @param index The index of the task in the list to be deleted.
+     * @throws DukeException If the index given is not within the valid range.
+     */
+
     public void deleteTask(int index) throws DukeException {
         if (!isInRange(index)) {
             throw new DukeException("☹ OOPS!!! The index given is out of bound.");
@@ -88,22 +179,40 @@ public class Duke {
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
     }
 
-    public Task getTask(int index) {
-        return tasks.get(index - 1);
-    }
-
-    public Optional<Command> getCommand(String command_string) {
-        return Optional.ofNullable(valid_commands.get(command_string));
-    }
+    /**
+     * processCommand method parses the input entered by the client.<br>
+     *     The following are valid commands that Duke can process:
+     *     <ul>
+     *         <li><tt>list</tt> - lists all the tasks that Duke has stored.</li>
+     *         <li><tt>done [index]</tt> - marks the task of a particular index as done.</li>
+     *         <li><tt>delete [index]</tt> - deletes the task of a particular index.</li>
+     *         <li><tt>todo [description]</tt> - adds the Todo task to the list.</li>
+     *         <li><tt>deadline [description] /by [date]</tt> - adds the Deadline task to the list.</li>
+     *         <li><tt>event [description] /at [date]</tt> - adds the Event task to the list.</li>
+     *     </ul>
+     * @param arguments The instruction provided by the client.
+     */
 
     public void processCommand(String arguments) {
+        // Splits the arguments with a space as the delimiter. The first word is the command.
         String[] splitted_arguments = arguments.split(" ");
         String command_string = splitted_arguments[0];
 
         try {
+            /*
+             If boxed_command is empty, it means that the command is not found.
+             Therefore, it will throw the exception to inform the client.
+             */
+
             Optional<Command> boxed_command = getCommand(command_string);
             Command command = boxed_command.orElseThrow(() ->
                     new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+
+            /*
+             The switch block performs the corresponding command,
+             as requested by the client. The default method is being
+             used for adding the tasks to the list. A DukeException
+             will be thrown if the input format is not valid.*/
 
             switch (command) {
                 case LIST:
