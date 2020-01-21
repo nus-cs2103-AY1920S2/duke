@@ -22,13 +22,17 @@ public class Duke {
         while (sc.hasNext()) {
             String next = sc.nextLine();
             if (next.equals("bye")) break;
-            else {
+            else if (next.equals("list")) {
+                System.out.println(lineBreak);
+                tasks.forEach(System.out::println);
+                System.out.println(lineBreak);
+            } else {
                 tasks.add(new Task(count, next));
                 count++;
+                System.out.println(lineBreak);
+                System.out.println("added: " + next);
+                System.out.println(lineBreak);
             }
-            System.out.println(lineBreak);
-            tasks.forEach(System.out::println);
-            System.out.println(lineBreak);
         }
         //Exit
         System.out.println("Bye. Hope to see you again soon!");
