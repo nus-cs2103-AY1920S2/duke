@@ -1,7 +1,7 @@
 public class Task {
 
     private String command;
-    String horizontalLine = "____________________________________________________________\n";
+    private String horizontalLine = "____________________________________________________________\n";
 
     public Task(String command) {
         this.command = command;

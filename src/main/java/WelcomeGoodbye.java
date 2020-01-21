@@ -1,6 +1,6 @@
 public class WelcomeGoodbye {
 
-    String horizontalLine = "____________________________________________________________\n";
+    private String horizontalLine = "____________________________________________________________\n";
 
     public void welcome() {
         print(horizontalLine + "Hello, Duke here! :D \n"
