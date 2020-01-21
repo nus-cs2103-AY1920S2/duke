@@ -15,7 +15,7 @@ public class Duke {
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            String[] inputArr = input.split("\\s+");
+            String[] inputArr = input.split("\\s+", 2);
             String action = inputArr[0];
 
             if (input.equals("bye")) {
@@ -24,12 +24,12 @@ public class Duke {
             } else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < slot; i++) {
-                    System.out.println(i + 1 + ".[" + data[i].getStatusIcon() + "] " + data[i].task);
+                    System.out.println(i + 1 + ". " + data[i]);
                 }
             } else if (action.equals("done")) {
                 int option = Integer.parseInt(inputArr[1]);
                 data[option-1].setDone();
-                System.out.println("Nice! I've marked this task as done:\n  [" + data[option-1].getStatusIcon() + "] " + data[option-1].task);
+                System.out.println("Nice! I've marked this task as done:\n  " + data[option-1]);
             } else {
                 data[slot] = new Task(input);
                 System.out.println("added: " + input);
