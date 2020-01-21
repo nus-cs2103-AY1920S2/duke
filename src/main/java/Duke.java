@@ -17,18 +17,19 @@ public class Duke {
 
     private static void input() {
         Scanner sc;
-        String statement;
         ArrayList<Task> arrList = new ArrayList<>();
+        String taskType, task, date, word, statement;
+        Task t;
 
         sc = new Scanner(System.in);
         statement = sc.nextLine();
 
         while (!statement.equals("bye")) {
             if (statement.equals("list") && arrList.size() != 0) {
-                System.out.println("These are the tasks in your list:");
+                System.out.println("Here are the tasks in your list:");
                 for (int i=1; i <= arrList.size(); i++) {
-                    Task t = arrList.get(i-1);
-                    System.out.println(i + ". [" +t.getStatusIcon()+ "] " +t.description);
+                    t = arrList.get(i-1);
+                    System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.description);
                 }
                 System.out.println();
             }
@@ -36,18 +37,38 @@ public class Duke {
                 System.out.println("Empty");
                 System.out.println();
             }
-            else if ((statement.split(" ")[0]).equals("done")) {
-                int a = Integer.parseInt(statement.split(" ")[1])-1;
-                arrList.get(a).markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("  [" +arrList.get(a).getStatusIcon()+ "] " +arrList.get(a).description);
-                System.out.println();
-            }
             else {
-                Task t = new Task(statement);
-                arrList.add(t);
-                System.out.println("added: " + statement);
-                System.out.println();
+                taskType = statement.split(" ")[0];
+                if ((statement.split(" ")[0]).equals("done")) {
+                    int a = Integer.parseInt(statement.split(" ")[1]) - 1;
+                    arrList.get(a).markAsDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("  [" + arrList.get(a).getStatusIcon() + "] " + arrList.get(a).description);
+                    System.out.println();
+                }
+                else {
+                    statement = statement.substring(statement.indexOf(" "), statement.length());
+                    if (!taskType.equals("todo")) {
+                        task = statement.split("/")[0];
+                        date = statement.split("/")[1];
+                        word = date.substring(0, date.indexOf(" "));
+                        date = date.substring(date.indexOf(" ") + 1, date.length());
+                        if (task.equals("event")) {
+                            t = new Event(task, word, date);
+                        }
+                        else {
+                            t = new Deadline(task, word, date);
+                        }
+                    }
+                    else {
+                        t = new Todo(statement);
+                    }
+                    arrList.add(t);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
+                    System.out.println("Now you have " +arrList.size()+ " tasks in the list.");
+                    System.out.println();
+                }
             }
             sc = new Scanner(System.in);
             statement = sc.nextLine();
