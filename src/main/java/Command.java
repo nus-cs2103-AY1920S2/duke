@@ -16,4 +16,8 @@ public class Command {
     public boolean isDone() {
         return this.input.equals("done");
     }
+
+    public String getCmd() {
+        return this.input;
+    }
 }

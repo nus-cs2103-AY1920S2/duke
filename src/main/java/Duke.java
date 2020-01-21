@@ -20,7 +20,7 @@ public class Duke {
                 for (int i = 0; i < tracker.getTotalTasks(); i++) {
                     int itemNo = i + 1;
                     Task task = tracker.showList().get(i);
-                    System.out.println(itemNo + "." + task.toString());
+                    System.out.println(itemNo + "." + task);
                 }
             } else if (command.isDone()) {
                 int itemNo = scanner.nextInt() - 1;
@@ -29,8 +29,17 @@ public class Duke {
 
             } else {
                 String content = scanner.nextLine();
-                tracker.add(new ToDo(content));
-                System.out.println("added: " + content);
+                Task task;
+
+                switch (command.getCmd()) {
+                    default:
+                        task = new ToDo(content);
+                }
+
+                tracker.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + tracker.getTotalTasks() + " tasks in the list.");
             }
 
             command = new Command(scanner.next());
