@@ -14,10 +14,10 @@ public class Duke {
                 }
                 break;
             case DONE:
-                int id = sc.nextInt();
-                tasks.get(id - 1).setDone(true);
+                int done = sc.nextInt();
+                tasks.get(done - 1).setDone(true);
                 System.out.println("Nice! I've marked this task as done: \n" +
-                        "  " + tasks.get(id - 1));
+                        "  " + tasks.get(done - 1));
                 break;
             case TODO:
                 String todo = sc.nextLine();
@@ -25,7 +25,7 @@ public class Duke {
                 Task taskToDo = new Todo(tasks.size() + 1, todo);
                 tasks.add(taskToDo);
                 System.out.println("I've added this task: \n" +
-                        "  " + taskToDo + "\n Now you have " +
+                        "  " + taskToDo + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
                 break;
             case EVENT:
@@ -36,7 +36,7 @@ public class Duke {
                         event.substring(eventDate + 4));
                 tasks.add(taskEvent);
                 System.out.println("I've added this task: \n" +
-                        "  " + taskEvent + "\n Now you have " +
+                        "  " + taskEvent + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
                 break;
             case DEADLINE:
@@ -47,8 +47,16 @@ public class Duke {
                         deadline.substring(dLineDate + 4));
                 tasks.add(taskDLine);
                 System.out.println("I've added this task: \n" +
-                        "  " + taskDLine + "\n Now you have " +
+                        "  " + taskDLine + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                break;
+            case DELETE:
+                int delete = sc.nextInt();
+                Task deletedTask = tasks.get(delete - 1);
+                tasks.remove(delete - 1);
+                System.out.println("Okay! I have deleted this task:\n" +
+                        "  " + deletedTask + "\nNow you have " +
+                        tasks.size() + " tasks in the list.");
                 break;
             default:
                 break;
