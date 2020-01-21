@@ -23,7 +23,6 @@ public class Duke {
                 printHorizontalLine();
             } else if (input.equals(("blah"))) {
                 printHorizontalLine();
-                printIndented("Here are the tasks in your list: ");
                 printIndented("blah");
                 printHorizontalLine();
             } else if (input.contains("done")) {
@@ -35,10 +34,11 @@ public class Duke {
                 printIndented(" " + tasks.get(index));
                 printHorizontalLine();
             } else {
-                tasks.add(new Task(input));
-                printHorizontalLine();
-                printIndented("added: " + input);
-                printHorizontalLine();
+                Task task = input.contains("todo")
+                        ? new ToDo(input)
+                        : input.contains("deadline")
+                        ? new Deadline(input)
+                        : new Event(input);
             }
 
             input = sc.nextLine();
