@@ -15,8 +15,9 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         Command command = new Command(scanner.next());
 
-        while (command.isBye() == false) {
+        while (!command.isBye()) {
             if (command.isList()) {
+                System.out.println("Here are the tasks in your list");
                 for (int i = 0; i < tracker.getTotalTasks(); i++) {
                     int itemNo = i + 1;
                     Task task = tracker.showList().get(i);
@@ -32,9 +33,13 @@ public class Duke {
                 Task task;
 
                 switch (command.getCmd()) {
+                    case "deadline":
+                        String [] deadlineArray = content.split(" /by ");
+                        task = new Deadline(deadlineArray[0], deadlineArray[1]);
+                        break;
                     case "event":
-                        String [] contentArray = content.split("/");
-                        task = new Event(contentArray[0], contentArray[1]);
+                        String [] eventArray = content.split(" /at ");
+                        task = new Event(eventArray[0], eventArray[1]);
                         break;
                     default:
                         task = new ToDo(content);
