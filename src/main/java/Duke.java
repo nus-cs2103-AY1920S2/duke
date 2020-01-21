@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    private List<String> list = new ArrayList<>();
+
     private static void print(String s) {
         List<String> temp = new ArrayList<>();
         temp.add(s);
@@ -22,9 +24,28 @@ public class Duke {
         System.out.println(String.format(FORMAT_STRING, HORIZONTAL_LINE));
     }
 
+    private void printList() {
+        if (this.list.isEmpty()) {
+            print("List is empty.");
+            return;
+        }
+
+        List<String> outputStreamBuffer = new ArrayList<>();
+
+        for (int i = 0; i < this.list.size(); i++) {
+            String str = this.list.get(i);
+            String newStr = String.format("%d. %s", i + 1, str);
+            outputStreamBuffer.add(newStr);
+        }
+
+        print(outputStreamBuffer);
+    }
+
     public static void main(String[] args) {
         final String END_COMMAND = "bye";
+        final String LIST_COMMAND = "list";
 
+        Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         String input;
         List<String> outputStreamBuffer;
@@ -39,8 +60,12 @@ public class Duke {
             input = sc.nextLine();
             if (input.equals(END_COMMAND)) {
                 break;
+            } else if (input.equals((LIST_COMMAND))) {
+                duke.printList();
+            } else {
+                duke.list.add(input);
+                print("added: " + input);
             }
-            print(input);
         }
 
         print("Bye. Hope to see you again soon!");
