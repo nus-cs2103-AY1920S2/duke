@@ -19,7 +19,7 @@ public class Duke {
      * @param lst list to be formatted.
      * @return Formatted list ready to be printed.
      */
-    public static String dukeFormatList(ArrayList<String> lst) {
+    public static String dukeFormatList(ArrayList<Task> lst) {
         String res = "";
         res += indent + fill + "\n";
         for (int i = 0; i < lst.size(); i++) {
@@ -31,7 +31,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> lst = new ArrayList<>(100);
+        ArrayList<Task> lst = new ArrayList<>(100);
         String getInput = null;
 
         System.out.println(dukeFormat("Hello I'm your mum. What can I do for you?"));
@@ -45,8 +45,22 @@ public class Duke {
             } else if (getInput.equals("list")) {
                 // prints list
                 System.out.println(dukeFormatList(lst));
+            } else if (getInput.equals("done")) {
+
+                // validate input for list index
+                int getNumber = sc.nextInt();
+                while (!(getNumber == (int)getNumber) || getNumber <= 0 || getNumber > lst.size()) {
+                    System.out.println(dukeFormat("Invalid input, please try again."));
+                    getNumber = sc.nextInt();
+                }
+
+                Task currTask = lst.get(getNumber - 1);
+                currTask.setDone(true);
+                System.out.println(dukeFormat("Sure I will mark this task as done.\n" + indent + currTask));
+
             } else {
-                lst.add(getInput);
+                Task task = new Task(getInput);
+                lst.add(task);
                 System.out.println(dukeFormat("added: " + getInput));
             }
             getInput = sc.next();
