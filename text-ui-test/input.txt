@@ -9,8 +9,11 @@ event    feed mice /at 5oclock
 list
   list 
 BYE
+   delete 1
+delete    foo
+delete   1
 done   4
 done 4
-done 3
+done 2
 done feed   cats
 bye
