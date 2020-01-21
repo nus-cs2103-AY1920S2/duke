@@ -11,9 +11,19 @@ public class DukeException extends Exception {
             return "*************************************************************\n" 
                     + "☹ Can you give me a proper command... >:("
                     + "\n*************************************************************";
+        } else if (this.type == DukeExceptionType.NODATETIME) {
+            return "*************************************************************\n"
+                    + "☹ Please also provide date and time of the event! >:("
+                    + "\n*************************************************************";
+        } else if (this.type == DukeExceptionType.NODATE) {
+            return "*************************************************************\n"
+                    + "☹ Please also provide date of the deadline! >:("
+                    + "\n*************************************************************";
+        } else {
+            return "*************************************************************\n"
+                    + "☹ Please also provide the description of the task! >:("
+                    + "\n*************************************************************";
         }
-        return "asd";
     }
 }
 
-//"  ☹ Can you give me a proper command... >:(";
