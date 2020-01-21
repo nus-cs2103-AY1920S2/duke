@@ -2,6 +2,43 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    static Scanner sc;
+    static ArrayList<Task> tasks;
+    static int count;
+
+    public static void readCommand(String str) {
+        Command command = Command.lookUp(str);
+        switch (command) {
+            case LIST:
+                System.out.println("Here are all your tasks:");
+                for (Task task: tasks) {
+                    System.out.println(task.getId() + "." + task);
+                }
+                break;
+            case DONE:
+                int id = sc.nextInt();
+                tasks.get(id - 1).setDone(true);
+                System.out.println("Nice! I've marked this task as done: \n" +
+                        "  " + tasks.get(id - 1));
+                break;
+            case TODO:
+                String todo = sc.nextLine();
+                Task task = new Todo(tasks.size() + 1, todo);
+                tasks.add(task);
+                System.out.println("I've added this task: \n" +
+                        "  " + task + "\n Now you have " +
+                        tasks.size() + " tasks in the list." );
+                break;
+            case EVENT:
+
+                break;
+            case DEADLINE:
+
+                break;
+            default:
+                break;
+        }
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -11,9 +48,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String lineBreak = "_________________________" +
                 "_________________________";
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
-        int count = 1;
+        sc = new Scanner(System.in);
+        tasks = new ArrayList<>();
+        count = 1;
 
         System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
@@ -21,25 +58,11 @@ public class Duke {
         System.out.println(lineBreak);
 
         while (sc.hasNext()) {
-            String next = sc.nextLine();
+            String next = sc.next();
             if (next.equals("bye")) break;
-            else if (next.equals("list")) {
+            else {
                 System.out.println(lineBreak);
-                tasks.forEach(System.out::println);
-                System.out.println(lineBreak);
-            } else if (next.substring(0, 4).equals("done")) {
-                int id = Integer.parseInt(next.substring(5)) - 1;
-                Task task = tasks.get(id);
-                task.done = true;
-                System.out.println(lineBreak);
-                System.out.println("Nice! I've marked this task as done: \n" +
-                        "  [✓] " + task.task);
-                System.out.println(lineBreak);
-            } else {
-                tasks.add(new Task(count, next));
-                count++;
-                System.out.println(lineBreak);
-                System.out.println("added: " + next);
+                readCommand(next);
                 System.out.println(lineBreak);
             }
         }
