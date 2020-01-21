@@ -22,10 +22,6 @@ public class Duke {
                     printIndented(String.format("%d.%s", i + 1, tasks.get(i)));
                 }
                 printHorizontalLine();
-            } else if (input.equals(("blah"))) {
-                printHorizontalLine();
-                printIndented("blah");
-                printHorizontalLine();
             } else if (input.contains("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 tasks.get(index).doTask();
@@ -34,20 +30,31 @@ public class Duke {
                 printIndented("Nice! I've marked this task as done: ");
                 printIndented(" " + tasks.get(index));
                 printHorizontalLine();
+            } else if (input.contains("todo") || input.contains("deadline") || input.contains(("event"))) {
+                try {
+                    String typeRemoved = input.strip().split(" ", 2)[1];
+
+                    Task task = input.contains("todo")
+                            ? new ToDo(typeRemoved)
+                            : input.contains("deadline")
+                            ? new Deadline(typeRemoved)
+                            : new Event(typeRemoved);
+                    tasks.add(task);
+
+                    printHorizontalLine();
+                    printIndented("Got it. I've added this task: ");
+                    printIndented(" " + task);
+                    printIndented(String.format("Now you have %d tasks in the list.", tasks.size()));
+                    printHorizontalLine();
+                } catch (IndexOutOfBoundsException e) {
+                    printHorizontalLine();
+                    printIndented("☹ OOPS!!! The description of a " +
+                            input.split(" ")[0] + " cannot be empty.");
+                    printHorizontalLine();
+                }
             } else {
-                String typeRemoved = input.split(" ", 2)[1];
-
-                Task task = input.contains("todo")
-                        ? new ToDo(typeRemoved)
-                        : input.contains("deadline")
-                        ? new Deadline(typeRemoved)
-                        : new Event(typeRemoved);
-                tasks.add(task);
-
                 printHorizontalLine();
-                printIndented("Got it. I've added this task: ");
-                printIndented(" " + task);
-                printIndented(String.format("Now you have %d tasks in the list.", tasks.size()));
+                printIndented("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 printHorizontalLine();
             }
 
