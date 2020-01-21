@@ -2,9 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    // ArrayList of tasks
+    private static ArrayList<String> arrList;
+
     public static void main(String[] args) {
         // Scanner object
         Scanner sc = new Scanner(System.in);
+
+        arrList = new ArrayList<>();
 
         // greeting
         greet();
@@ -14,7 +19,14 @@ public class Duke {
 
         // continue processing user's command, as long as command is not bye
         while (!command.equals("bye")) {
-            echo(command);
+            if (command.equals("list")) {
+                // prints tasks in list if command is list
+                printList();
+            } else {
+                // add task to list
+                add(command);
+            }
+
             command = sc.nextLine();
         }
 
@@ -50,6 +62,28 @@ public class Duke {
     public static void echo(String comm) {
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    " + comm);
+        System.out.println("    ------------------------------------------------------------");
+    }
+
+    /**
+     * adds user's command to arrList
+     * @param comm command given by user
+     */
+    public static void add(String comm) {
+        arrList.add(comm);
+        System.out.println("    ------------------------------------------------------------");
+        System.out.println("    added: " + comm);
+        System.out.println("    ------------------------------------------------------------");
+    }
+
+    /**
+     * prints list of tasks user has added
+     */
+    public static void printList() {
+        System.out.println("    ------------------------------------------------------------");
+        for (int i = 1; i <= arrList.size(); i++) {
+            System.out.println("    " + i + ". " + arrList.get(i - 1));
+        }
         System.out.println("    ------------------------------------------------------------");
     }
 
