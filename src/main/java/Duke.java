@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import exceptions.EmptyDescriptionException;
 import exceptions.EmptyTimeException;
@@ -26,7 +27,7 @@ public class Duke {
         // Chat logic
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<Task>();
         int numberOfTasks = 0;
 
         while (!input.equals("bye")) {
@@ -41,8 +42,18 @@ public class Duke {
                         if (taskNumber < 1 || taskNumber > numberOfTasks) {
                             throw new InvalidTaskNumberException(numberOfTasks);
                         }
-                        list[taskNumber - 1].markAsDone();
-                        printDone(list[taskNumber - 1]);
+                        list.get(taskNumber - 1).markAsDone();
+                        printDone(list.get(taskNumber - 1));
+                        break;
+                    case "delete":
+                        taskNumber = Integer.parseInt(input.split(" ")[1]);
+                        if (taskNumber < 1 || taskNumber > numberOfTasks) {
+                            throw new InvalidTaskNumberException(numberOfTasks);
+                        }
+                        Task deleteTask = list.get(taskNumber - 1);
+                        list.remove(taskNumber - 1);
+                        numberOfTasks--;
+                        printDelete(deleteTask, numberOfTasks);
                         break;
                     case "todo":
                         try {
@@ -51,7 +62,7 @@ public class Duke {
                                 throw new EmptyDescriptionException("todo");
                             }
                             Task newTodo =  new Todo(fields[1]);
-                            list[numberOfTasks] = newTodo;
+                            list.add(newTodo);
                             numberOfTasks++;
                             printNewTask(newTodo, numberOfTasks);
                         } catch (EmptyDescriptionException ex) {
@@ -67,8 +78,8 @@ public class Duke {
                             }
 
                             fields = action.equals("event")
-                                    ? fields[1].split("/at ")
-                                    : fields[1].split("/by ");
+                                    ? fields[1].split(" /at ")
+                                    : fields[1].split(" /by ");
                             if (fields.length < 2) {
                                 throw new EmptyTimeException(action, fields);
                             }
@@ -77,7 +88,7 @@ public class Duke {
                                     ? new Event(fields[0], fields[1])
                                     : new Deadline(fields[0], fields[1]);
 
-                            list[numberOfTasks] = newTask;
+                            list.add(newTask);
                             numberOfTasks++;
                             printNewTask(newTask, numberOfTasks);
                         } catch (EmptyDescriptionException ex) {
@@ -93,7 +104,7 @@ public class Duke {
                                 Task newTask =  action.equals("event")
                                         ? new Event(fields[0], input)
                                         : new Deadline(fields[0], input);
-                                list[numberOfTasks] = newTask;
+                                list.add(newTask);
                                 numberOfTasks++;
                                 printNewTask(newTask, numberOfTasks);
                             } else {
@@ -120,23 +131,19 @@ public class Duke {
     // Print formatters
 
     public static void printFormattedOutput(String output) {
-//        String bar = "    *****************************************************\n";
-
         System.out.println(bar + "    " + output + "\n" + bar);
     }
 
-    public static void printList(Task[] list, int size) {
-//        String bar = "    *****************************************************\n";
+    public static void printList(ArrayList<Task> list, int size) {
         System.out.print(bar);
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < size; i++) {
-            System.out.println("    " + (i + 1) + ". " + list[i]);
+            System.out.println("    " + (i + 1) + ". " + list.get(i));
         }
         System.out.println(bar);
     }
 
     public static void printNewTask(Task task, int sizeOfList) {
-//        String bar = "    *****************************************************\n";
         System.out.print(bar);
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + task);
@@ -145,10 +152,17 @@ public class Duke {
     }
 
     public static void printDone(Task task) {
-//        String bar = "    *****************************************************\n";
         System.out.print(bar);
         System.out.println("    Nice! I've marked this task as done:");
         System.out.println("      " + task);
+        System.out.println(bar);
+    }
+
+    public static void printDelete(Task task, int sizeOfList) {
+        System.out.print(bar);
+        System.out.println("    Noted. I've removed this task:");
+        System.out.println("      " + task);
+        System.out.println("    Now you have " + sizeOfList + " tasks on the list.");
         System.out.println(bar);
     }
 }

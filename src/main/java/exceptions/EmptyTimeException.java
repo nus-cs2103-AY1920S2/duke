@@ -20,7 +20,7 @@ public class EmptyTimeException extends Exception {
     public String toString() {
         String taskType;
 
-        return ":( OOPS!!! The time/date of a " + this.taskType + " cannot be empty.";
+        return ":( OOPS!!! The time/date of the " + this.taskType + " cannot be empty.";
     }
 
     public String[] getFields() {
