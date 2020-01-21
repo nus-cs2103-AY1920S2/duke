@@ -47,4 +47,8 @@ public class Task {
         return this.command;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
 }

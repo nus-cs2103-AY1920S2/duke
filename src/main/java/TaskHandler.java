@@ -32,8 +32,13 @@ public class TaskHandler {
             case "done":
                 // user inputs will be "done _____"
                 // Take only the very next token which must be an integer
-                Task currentTaskDone = allTasks.get(Integer.valueOf(commandWords[1]) - 1);
-                doTask(currentTaskDone);
+                if (commandWords.length > 1) {
+                    Task currentTaskDone = allTasks.get(Integer.valueOf(commandWords[1]) - 1);
+                    doTask(currentTaskDone);
+                } else {
+                    print("Seems like you are kinda tired. Please remember to define a Task Number!"
+                        + "Or, you could also take a break. :)");
+                }
                 break;
 
             default:
@@ -53,10 +58,10 @@ public class TaskHandler {
         t.taskAddedMessage();
     }
 
-    // Mark task as completed, and prints completion message
+    // Mark task complete and prints completion message
     private void doTask(Task t) {
-        t.doTask();
         printTaskComplete(t);
+        t.doTask();
     }
 
     // Prints all tasks, their number order, and their completion
@@ -70,14 +75,20 @@ public class TaskHandler {
 
     // for utility
     private void printTaskComplete(Task t) {
-        print("Nice! The following task has been marked completed:\n"
-                + "[\u2713] " + t);
+        printLine();
+        if (t.getIsDone()) {
+            print("That's already done, try another. Or did you make a careless mistake? XD");
+        } else {
+            print("Nice! The following task has been marked completed:\n"
+                    + "===> [\u2713] " + t + " <===");
+        }
+        printLine();
     }
 
     // for utility
     private void printTaskFromStored(int i) {
         String tickOrCross = allTasks.get(i).obtainStatusIcon();
-        print(String.valueOf(i+1) + ". [" + tickOrCross + "]" + allTasks.get(i));
+        print(String.valueOf(i+1) + ". [" + tickOrCross + "] " + allTasks.get(i));
     }
 
     // for utility
