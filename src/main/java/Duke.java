@@ -15,27 +15,30 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            switch (input) {
-            case "list":
+            if (input.equals(("list"))) {
                 printHorizontalLine();
                 for (int i = 0; i < tasks.size(); i++) {
                     printIndented(String.format("%d.%s", i + 1, tasks.get(i)));
                 }
                 printHorizontalLine();
-                break;
-
-            case "blah":
+            } else if (input.equals(("blah"))) {
                 printHorizontalLine();
+                printIndented("Here are the tasks in your list: ");
                 printIndented("blah");
                 printHorizontalLine();
-                break;
+            } else if (input.contains("done")) {
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                tasks.get(index).doTask();
 
-            default:
+                printHorizontalLine();
+                printIndented("Nice! I've marked this task as done: ");
+                printIndented(" " + tasks.get(index));
+                printHorizontalLine();
+            } else {
                 tasks.add(new Task(input));
                 printHorizontalLine();
                 printIndented("added: " + input);
                 printHorizontalLine();
-                break;
             }
 
             input = sc.nextLine();
