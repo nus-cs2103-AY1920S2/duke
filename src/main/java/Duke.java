@@ -6,24 +6,40 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         TaskList tasks = new TaskList();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
         out("Hello! I'm Duke", "What can I do for you?");
-        while (in.hasNext()) {
+        input: while (in.hasNext()) {
             String next = in.next();
-            if (next.equals("bye")) {
-                out("Bye. Hope to see you again soon!");
-                break;
-            } else if (next.equals("list")) {
-                out(tasks.list());
-            } else if (next.equals("done")) {
-                out(tasks.done(in.nextInt()));  
-            } else {
-                out(tasks.add(next));
+            switch (next) {
+                case "bye":
+                    out("Bye. Hope to see you again soon!");
+                    break input;
+                case "list":
+                    out(tasks.list());
+                    break;
+                case "done":
+                    out(tasks.done(in.nextInt()));
+                    break;
+                case "todo":
+                    {
+                        String[] params = in.nextLine().split("/");
+                        out(tasks.addTodo(params[0]));
+                    }
+                    break;
+                case "deadline":
+                    {
+                        String[] params = in.nextLine().split(" /by ");
+                        out(tasks.addDeadline(params[0], params[1]));
+                    }
+                    break;
+                case "event":
+                    {
+                        String[] params = in.nextLine().split(" /at ");
+                        out(tasks.addEvent(params[0], params[1]));
+                    }
+                    break;
+                default:
+                    out("invalid command:", echo(next), "please try again");
+                    break;
             }
         }
         in.close();
