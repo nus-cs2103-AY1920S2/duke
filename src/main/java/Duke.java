@@ -18,21 +18,32 @@ public class Duke {
 
         while(isListening) {
             String command = input.nextLine();
+            String[] command_broken = command.split(" ",2);
 
-            if (command.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+            String action = command_broken[0];
+
+            if (action.equalsIgnoreCase("bye")) {
+                System.out.println("Bye. Hope to see you again!");
                 isListening = false;
-            } else if (command.equalsIgnoreCase("list")) {
+
+            } else if (action.equalsIgnoreCase("list")) {
                 tasks.printInputs();
-            } else if (command.length()>3
-                    && command.substring(0,4).equalsIgnoreCase("done")) {
-                String s[] = command.split(" ");
-                int taskNo = Integer.parseInt(s[1]);
+
+            } else if (action.equalsIgnoreCase("done")) {
+                String context = command_broken[1];
+                int taskNo = Integer.parseInt(context);
                 tasks.markDone(taskNo);
 
-            } else {
-                System.out.println(command);
-                tasks.addInput(new Task(command));
+            } else if (action.equalsIgnoreCase(("deadline"))){
+                String context = command_broken[1];
+                String[] context_broken = context.split("/by",2);
+                tasks.addInput(new Deadlines(context_broken[0], context_broken[1]));
+            } else if (action.equalsIgnoreCase(("todo"))){
+                tasks.addInput(new ToDos(command_broken[1]));
+            } else if (action.equalsIgnoreCase(("event"))){
+                String context = command_broken[1];
+                String[] context_broken = context.split("/at",2);
+                tasks.addInput(new Events(context_broken[0], context_broken[1]));
             }
         }
     }

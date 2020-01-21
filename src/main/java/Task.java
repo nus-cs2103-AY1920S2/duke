@@ -3,6 +3,7 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
+        System.out.println("Got it, I've added this task");
         this.description = description;
         this.isDone = false;
     }

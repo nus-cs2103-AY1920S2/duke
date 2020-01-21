@@ -8,13 +8,14 @@ public class UserText {
         userInput = new ArrayList<>();
     }
 
-    public List<Task> addInput(Task s) {
+    public void addInput(Task s) {
         this.userInput.add(s);
-        return this.userInput;
+        System.out.println("Now you have " + userInput.size() + " tasks in the list.");
     }
 
     public void printInputs() {
         int count = 1;
+        System.out.println("Here is your list");
         for (Task s : userInput) {
             System.out.println(count + ". " + s);
             count++;
