@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,11 +13,19 @@ public class Duke {
         System.out.println("Hello, this is Duke. Please give me an instruction.");
 
         Scanner sc = new Scanner(System.in);
+        List<String> list = new ArrayList<>();
         String instruction;
         while (!(instruction = sc.nextLine()).equals("bye")) {
-            System.out.println(instruction);
+            if (instruction.equals("list")) {
+                for (int i = 1; i <= list.size(); i++) {
+                    System.out.println(i + ". " + list.get(i - 1));
+                }
+            } else {
+                list.add(instruction);
+                System.out.println("added: "+ instruction);
+            }
         }
-        
+
         System.out.println("Goodbye. See you next time!");
     }
 }
