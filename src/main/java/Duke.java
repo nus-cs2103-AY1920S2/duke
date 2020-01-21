@@ -45,6 +45,34 @@ public class Duke {
             } else if (getInput.equals("list")) {
                 // prints list
                 System.out.println(dukeFormatList(lst));
+            } else if (getInput.equals("todo") || getInput.equals("deadline") || getInput.equals("event")) {
+                // Adds a todo, deadline or event based on user input
+
+                String res = "";
+                String line = sc.nextLine();
+                res += "As your mummy, I have added this task to your list:\n    ";
+                if (getInput.equals("todo")) {
+                    Todo todo = new Todo(line);
+                    lst.add(todo);
+                    res += todo;
+                } else if (getInput.equals("deadline")) {
+                    int indexCut = line.indexOf("/by");
+                    String desc = line.substring(0, indexCut - 1);
+                    String by = line.substring(indexCut + 4);
+                    Deadline deadline = new Deadline(desc, by);
+                    lst.add(deadline);
+                    res += deadline;
+                } else {
+                    int indexCut = line.indexOf("/at");
+                    String desc = line.substring(0, indexCut - 1);
+                    String at = line.substring(indexCut + 4);
+                    Event event = new Event(desc, at);
+                    lst.add(event);
+                    res += event;
+                }
+                res += "\n    You have " + String.valueOf(lst.size()) + " tasks in the list.";
+                System.out.println(dukeFormat(res));
+
             } else if (getInput.equals("done")) {
 
                 // validate input for list index
@@ -59,9 +87,7 @@ public class Duke {
                 System.out.println(dukeFormat("Sure I will mark this task as done.\n" + indent + currTask));
 
             } else {
-                Task task = new Task(getInput);
-                lst.add(task);
-                System.out.println(dukeFormat("added: " + getInput));
+                System.out.println(dukeFormat("Invalid input"));
             }
             getInput = sc.next();
         }
