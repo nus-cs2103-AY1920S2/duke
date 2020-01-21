@@ -7,8 +7,8 @@ public class Duke {
     static List<String> added = new ArrayList<>();
 
     /**
-     * Displays Duke logo.
-     * @param args input
+     * Accepts input for Duke to handle
+     * @param args not used
      */
     public static void main(String[] args) {
         System.out.println(separator + "\nHello! I'm Duke\nWhat can I do for you?\n" + separator);
