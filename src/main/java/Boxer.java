@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Boxer {
     // Variables
@@ -9,22 +10,42 @@ public class Boxer {
         print(greeting);
     }
 
-    public void add(String task) {
-        Task newTask = new Task(task);
+    public void event(String task) {
+        String[] split = task.split("/", 2);
+        Event newTask = new Event(split[0], split[1]);
+        taskList.add(newTask);
+        print("added: " + task);
+    }
+
+    public void deadline(String task) {
+        String[] split = task.split("/", 2);
+        print(Arrays.toString(split));
+        Deadline newTask = new Deadline(split[0], split[1]);
+        print(newTask.printTaskDetails());
+        taskList.add(newTask);
+        print("added: " + task);
+    }
+
+    public void todo(String task) {
+        Todo newTask = new Todo(task);
         taskList.add(newTask);
         print("added: " + task);
     }
 
     public void list() {
-        taskList.forEach(task -> printTask(task));
+        taskList.forEach(task -> Boxer.print(String.format(
+                "%d. %s",
+                (taskList.indexOf(task) + 1),
+                task.printTaskDetails())));
+        print(String.format(
+                "That's %d in the list.", taskList.size()));
     }
 
     public void done(int taskIndex) {
         Task task = taskList.get(taskIndex - 1);
         task.markAsDone();
         print("That's another one down. That'll be: ");
-        printTask(task);
-
+        print(task.printTaskDetails());
     }
 
     public void exit() {
@@ -32,15 +53,8 @@ public class Boxer {
         print(farewell);
     }
 
-    public void print(String toPrint) {
+    public static void print(String toPrint) {
         System.out.println(toPrint);
-    }
-
-    public void printTask(Task task) {
-        print(String.format(
-                "%d. %s %s", taskList.indexOf(task) + 1,
-                task.getStatusIcon(),
-                task.getDescription()));
     }
 
     /* Defunct methods

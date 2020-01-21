@@ -17,16 +17,21 @@ public class Duke {
         boolean loop = true;
         do {
             String input = scanner.nextLine();
-            String[] inputSplit = input.split(" ");
+            String[] inputSplit = input.split(" ", 2);
 
             /*
-            At this moment switch block cannot catch invalid done cases
+            At this moment switch block cannot catch invalid cases
             eg "done work" will be treated as done block rather than default (add)
              */
             switch (inputSplit[0]) {
-                case "bye":
-                    sword.exit();
-                    loop = false;
+                case "todo":
+                    sword.todo(inputSplit[1]);
+                    break;
+                case "deadline":
+                    sword.deadline(inputSplit[1]);
+                    break;
+                case "event":
+                    sword.event(inputSplit[1]);
                     break;
                 case "list":
                     sword.list();
@@ -36,8 +41,12 @@ public class Duke {
                     index = Integer.parseInt(inputSplit[1]);
                     sword.done(index);
                     break;
+                case "bye":
+                    sword.exit();
+                    loop = false;
+                    break;
                 default:
-                    sword.add(input);
+                    sword.print("Uhh... You're gonna have to say that again, Red.");
                     break;
             }
         } while (loop);
