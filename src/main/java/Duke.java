@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> inputs = new ArrayList<>();
 
         printHorizontalLine();
         printIndented("Hello! I'm Duke");
@@ -16,7 +18,9 @@ public class Duke {
             switch (input) {
             case "list":
                 printHorizontalLine();
-                printIndented("list");
+                for (int i = 0; i < inputs.size(); i++) {
+                    printIndented(i + 1 + ". " + inputs.get(i));
+                }
                 printHorizontalLine();
                 break;
 
@@ -27,6 +31,10 @@ public class Duke {
                 break;
 
             default:
+                inputs.add(input);
+                printHorizontalLine();
+                printIndented("added: " + input);
+                printHorizontalLine();
                 break;
             }
 
