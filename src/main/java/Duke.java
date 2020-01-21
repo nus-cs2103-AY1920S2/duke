@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
-    static int count;
 
     public static void readCommand(String str) {
         Command command = Command.lookUp(str);
@@ -23,17 +22,31 @@ public class Duke {
                 break;
             case TODO:
                 String todo = sc.nextLine();
-                Task task = new Todo(tasks.size() + 1, todo);
-                tasks.add(task);
+                Task taskToDo = new Todo(tasks.size() + 1, todo);
+                tasks.add(taskToDo);
                 System.out.println("I've added this task: \n" +
-                        "  " + task + "\n Now you have " +
+                        "  " + taskToDo + "\n Now you have " +
                         tasks.size() + " tasks in the list." );
                 break;
             case EVENT:
-
+                String event = sc.nextLine();
+                int eventDate = event.indexOf("/");
+                Task taskEvent = new Event(tasks.size() + 1, event.substring(0, eventDate),
+                        event.substring(eventDate));
+                tasks.add(taskEvent);
+                System.out.println("I've added this task: \n" +
+                        "  " + taskEvent + "\n Now you have " +
+                        tasks.size() + " tasks in the list." );
                 break;
             case DEADLINE:
-
+                String deadline = sc.nextLine();
+                int dLineDate = deadline.indexOf("/");
+                Task taskDLine = new Deadline(tasks.size() + 1, deadline.substring(0, dLineDate),
+                        deadline.substring(dLineDate));
+                tasks.add(taskDLine);
+                System.out.println("I've added this task: \n" +
+                        "  " + taskDLine + "\n Now you have " +
+                        tasks.size() + " tasks in the list." );
                 break;
             default:
                 break;
@@ -50,7 +63,6 @@ public class Duke {
                 "_________________________";
         sc = new Scanner(System.in);
         tasks = new ArrayList<>();
-        count = 1;
 
         System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
