@@ -13,6 +13,7 @@ public class Task {
         } else {
             return "O";
         }
+
         //return (isDone ? "yep" : "no"); //return tick or X symbols
     }
 

@@ -69,22 +69,20 @@ public class Duke { //extends Application {
 
 
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-
+        //Methods implemented in diff levels
         LevelMethods levelMethods = new LevelMethods();
         levelMethods.greetings(); //greet
 
+        //Scanner class for input
         Scanner sc = new Scanner(System.in);
         String nextStr = sc.nextLine();
 
+        //loop
         while (!nextStr.equals("bye")) { //check for ending input
+
             if (nextStr.length() >= 6 && nextStr.substring(0, 4).equals("done")) {
                 //can we assume its always a number after done?
+
                 String strNumberDone = nextStr.substring(5, nextStr.length());
                 int numDone = Integer.parseInt(strNumberDone); //convert to number
 
