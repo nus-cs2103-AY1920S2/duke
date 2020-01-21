@@ -3,30 +3,35 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int nextIndex = 0;
+        TasksList tasksList = new TasksList();
 
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greeting);
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         String userInput = sc.nextLine();
+        String[] inputs = userInput.split(" ");
+
         while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                for (int i = 0; i < nextIndex; i++) {
-                    System.out.println(i+1 + tasks[i].toString());
-                }
-            } else if (userInput.length() > 5 && userInput.substring(0, 4).equals("done")){
-                int index = Integer.valueOf(userInput.substring(5));
-                tasks[index].markDone();
-                System.out.println("Nice! I've marked this task as done:\n  "
-                        + tasks[index].toString());
-            } else {
-                tasks[nextIndex] = new Task(userInput);
-                nextIndex++;
-                System.out.println("added: " + userInput);
+            switch(inputs[0]) {
+                case "list":
+                    tasksList.list();
+                    break;
+                case "todo":
+                    tasksList.addTodo(userInput);
+                    break;
+                case "deadline":
+                    tasksList.addDeadline(userInput);
+                    break;
+                case "event":
+                    tasksList.addEvent(userInput);
+                    break;
+                case "done":
+                    tasksList.markDone(Integer.valueOf(inputs[1]));
+                    break;
             }
             userInput = sc.nextLine();
+            inputs = userInput.split(" ");
         }
+
         System.out.print("Bye. Hope to see you again soon!");
     }
 }
