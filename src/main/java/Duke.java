@@ -26,13 +26,13 @@ public class Duke {
                     printList(list, numberOfTasks);
                     break;
                 case "done":
-                    int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
+                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
                     if (taskNumber < 1 || taskNumber > numberOfTasks) {
-                        printFormattedOutput("Please input a valid task number between 0 - " + numberOfTasks);
+                        printFormattedOutput("Please input a valid task number between 1 - " + numberOfTasks);
                         continue;
                     }
-                    list[taskNumber].markAsDone();
-                    printDone(list[taskNumber]);
+                    list[taskNumber - 1].markAsDone();
+                    printDone(list[taskNumber - 1]);
                     break;
                 case "todo":
                     Task newTodo =  new Todo(input.split("todo ")[1]);
