@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> inputs = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         printHorizontalLine();
         printIndented("Hello! I'm Duke");
@@ -18,8 +18,8 @@ public class Duke {
             switch (input) {
             case "list":
                 printHorizontalLine();
-                for (int i = 0; i < inputs.size(); i++) {
-                    printIndented(i + 1 + ". " + inputs.get(i));
+                for (int i = 0; i < tasks.size(); i++) {
+                    printIndented(String.format("%d.%s", i + 1, tasks.get(i)));
                 }
                 printHorizontalLine();
                 break;
@@ -31,7 +31,7 @@ public class Duke {
                 break;
 
             default:
-                inputs.add(input);
+                tasks.add(new Task(input));
                 printHorizontalLine();
                 printIndented("added: " + input);
                 printHorizontalLine();
