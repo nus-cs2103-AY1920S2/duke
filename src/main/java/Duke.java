@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,7 +22,9 @@ public class Duke {
         exit();
     }
 
-    // prints greeting to user
+    /**
+     * prints greeting to user
+     */
     public static void greet() {
         System.out.println("    ------------------------------------------------------------");
 
@@ -40,14 +43,19 @@ public class Duke {
         System.out.println("    ------------------------------------------------------------");
     }
 
-    // echos user's command
+    /**
+     * echos user's command
+     * @param comm command given by user
+     */
     public static void echo(String comm) {
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    " + comm);
         System.out.println("    ------------------------------------------------------------");
     }
 
-    // exits
+    /**
+     * exits
+     */
     public static void exit() {
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    See you later!");
