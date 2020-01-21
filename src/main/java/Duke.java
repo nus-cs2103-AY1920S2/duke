@@ -6,7 +6,7 @@ public class Duke {
     public static final String byeCommand = "bye";
 
     private String padding = "       ";
-    private String uselessLine = "--------------------------------------";
+    private String uselessLine = "----------------------------------------------------------";
     private String addedPhrase = "added: ";
     private ArrayList<String> storedItems;
 
@@ -23,6 +23,11 @@ public class Duke {
     }
 
     public void storeUserInput(String str) {
+        if (str.equals("")) {
+            System.out.println(padding + uselessLine + '\n' +
+                    padding + "Please type something. Don't leave it blank, plsss!\n" +
+                    padding + uselessLine);
+        }
         storedItems.add(str);
         System.out.println(padding + uselessLine + '\n' +
                 padding + addedPhrase + str + '\n' +
