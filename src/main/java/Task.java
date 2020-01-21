@@ -1,7 +1,7 @@
-class Task {
+abstract class Task {
     
-    private String taskDescription;
-    private boolean isDone;
+    protected String taskDescription;
+    protected boolean isDone;
 
     Task(String taskDescription) {
         this.taskDescription = taskDescription;

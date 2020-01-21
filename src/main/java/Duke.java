@@ -1,8 +1,18 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
+
+    private static final String END_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_BY = "/by";
+    private static final String EVENT_COMMAND = "event";
+    private static final String EVENT_AT = "/at";
 
     private List<Task> list = new ArrayList<>();
 
@@ -62,11 +72,38 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
-    public static void main(String[] args) {
-        final String END_COMMAND = "bye";
-        final String LIST_COMMAND = "list";
-        final String DONE_COMMAND = "done";
+    private void createAndAddTask(String lineInput) {
+        String[] splitInput = lineInput.split(" ");
+        String command = splitInput[0];
+        String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);
+        Task newTask;
 
+        if (command.equals(TODO_COMMAND)) {
+            String taskDescription = String.join(" ", inputWithoutCommand);
+            newTask = new Todo(taskDescription);
+        } else {
+            String keyword = command.equals(DEADLINE_COMMAND) ? DEADLINE_BY : EVENT_AT;
+            int keywordIndex = Arrays.asList(splitInput).indexOf(keyword);
+
+            String description = String.join(" ",
+                    Arrays.copyOfRange(splitInput, 1, keywordIndex));
+            String deadlineOrTime = String.join(" ",
+                    Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
+
+            newTask = command.equals(DEADLINE_COMMAND) ?
+                    new Deadline(description, deadlineOrTime) : new Event(description, deadlineOrTime);
+        }
+
+        this.list.add(newTask);
+
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Got it. I've added this task: ");
+        outputStreamBuffer.add("  " + newTask);
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", list.size()));
+        print(outputStreamBuffer);
+    }
+
+    public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
 
@@ -79,14 +116,17 @@ public class Duke {
 
             if (command.equals(END_COMMAND)) {
                 break;
-            } else if (command.equals((LIST_COMMAND))) {
+            } else if (command.equals(LIST_COMMAND)) {
                 duke.printList();
             } else if (command.equals(DONE_COMMAND)) {
-                int taskNumber = Integer.parseInt(splitInput[1]);
-                duke.markTaskAsDone(taskNumber - 1);
+                int taskIndex = Integer.parseInt(splitInput[1]) - 1;
+                duke.markTaskAsDone(taskIndex);
+            } else if (command.equals(TODO_COMMAND) ||
+                    command.equals(DEADLINE_COMMAND) ||
+                    command.equals(EVENT_AT)) {
+                duke.createAndAddTask(lineInput);
             } else {
-                duke.list.add(new Task(lineInput));
-                print("added: " + lineInput);
+                print("Error: unknown command");
             }
         }
 
