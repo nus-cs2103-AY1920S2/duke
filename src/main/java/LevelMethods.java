@@ -45,8 +45,17 @@ public class LevelMethods {
 
 
     public void completeTask(int taskNum) {
-        if (storingList.size() >= taskNum) {
+        if (storingList.size() >= taskNum && taskNum != 0) {
             Task currTask = storingList.get(taskNum - 1);
+
+            //currTask.isDone = true;
+            Task updatedTask = new Task(currTask.description);
+            updatedTask.isDone = true;
+
+            storingList.set(taskNum - 1, updatedTask);
+
+            String printStr = "    Nice! I've marked this task as done: \n    " + updatedTask.description;
+            formattingDivider(printStr);
 
 
         } else {

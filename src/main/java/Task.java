@@ -8,7 +8,12 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : "O"); //return tick or X symbols
+        if (!isDone) {
+            return "X";
+        } else {
+            return "O";
+        }
+        //return (isDone ? "yep" : "no"); //return tick or X symbols
     }
 
     @Override
