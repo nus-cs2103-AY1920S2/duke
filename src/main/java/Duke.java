@@ -6,6 +6,7 @@ public class Duke{
         Scanner sc = new Scanner(System.in);
         String mesInput = "";
         Task [] tasks = new Task[100];
+        ArrayList<Task> arrTask = new ArrayList<Task>();
         int index = 0; // to store inside array
 
         while(!mesInput.equalsIgnoreCase("bye")){
@@ -16,15 +17,15 @@ public class Duke{
             // store task
             if(mesInput.contains("todo") && !mesInput.equalsIgnoreCase("todo")){
                 s = mesInput.split("todo ");
-                tasks[index] = new Task(s[1]);
+                arrTask.add(new Task(s[1]));
                 System.out.println("   Got it. I've added this task:");
-                System.out.println("   "+tasks[index].toString());
+                System.out.println("   "+arrTask.get(index).toString());
                 index = index + 1;
                 System.out.println("     Now you have "+index+" tasks in the list");
             }else if(mesInput.contains("list")) {
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < index; i++) {
-                    System.out.println((i + 1) + ". " + tasks[i].toString());
+                    System.out.println((i + 1) + ". " + arrTask.get(i).toString());
                 }
             }else if (mesInput.contains("deadline") && !mesInput.equalsIgnoreCase("deadline")) {
                 s = mesInput.split("deadline ");
@@ -32,8 +33,8 @@ public class Duke{
                 String taskName = temp[0];
                 String date = temp[1];
                 System.out.println("   Got it. I've added this task:");
-                tasks[index] = new Deadline(taskName,date);
-                System.out.println("     "+tasks[index].toString());
+                arrTask.add(new Deadline(taskName,date));
+                System.out.println("     "+arrTask.get(index).toString());
                 index = index + 1;
                 System.out.println("     Now you have "+index+" tasks in the list.");
             }else if (mesInput.contains("event") && !mesInput.equalsIgnoreCase("event")) {
@@ -42,19 +43,28 @@ public class Duke{
                 String taskName = temp[0];
                 String date = temp[1];
                 System.out.println("   Got it. I've added this task:");
-                tasks[index] = new Event(taskName, date);
-                System.out.println("     " + tasks[index].toString());
+                arrTask.add(new Event(taskName, date));
+                System.out.println("     " + arrTask.get(index).toString());
                 index = index + 1;
                 System.out.println("     Now you have " + index + " tasks in the list");
             }else if (mesInput.contains("done") && !mesInput.equalsIgnoreCase("done")){
                 String [] temp = mesInput.split(" ");
                 int arrPos = Integer.parseInt(temp[1]);
-                tasks[arrPos-1].setDone();
+                arrTask.get(arrPos-1).setDone();
                 System.out.println("  -------------");
                 System.out.println("    Nice! I've marked this task as done: ");
-                System.out.println("    ["+tasks[arrPos-1].getStatusIcon()+"] "+tasks[arrPos-1].getDescription());
+                System.out.println("    ["+arrTask.get(arrPos-1).getStatusIcon()+"] "+arrTask.get(arrPos-1).getDescription());
                 System.out.println("  -------------");
-            }else if(mesInput.equalsIgnoreCase("todo")){
+            }else if(mesInput.contains("delete") && !mesInput.equalsIgnoreCase("delete")){
+                String [] temp = mesInput.split(" ");
+                int arrPos = Integer.parseInt(temp[1]);
+                System.out.println("  -------------");
+                System.out.println("    Noted. I've removed this task: ");
+                System.out.println("    "+arrTask.get(arrPos-1).toString());
+                arrTask.remove(arrPos-1);
+                index = index - 1 ;
+                System.out.println("     Now you have " + index + " tasks in the list");
+            }else if (mesInput.equalsIgnoreCase("todo")){
                 try {
                     throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");
                 } catch (IncorrectInputException e) {
