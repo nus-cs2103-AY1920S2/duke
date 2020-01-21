@@ -1,5 +1,5 @@
 //Adapted from https://nus-cs2103-ay1920s2.github.io/website/schedule/week2/project.html
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 

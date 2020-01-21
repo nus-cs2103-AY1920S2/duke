@@ -44,25 +44,95 @@ public class Duke {
         }
     }
     
+    private static void addTask(Task newTask) {
+        tasks.add(newTask);
+        PrintUtil.indentedPrintf("Added task:\n  %s\n", newTask);
+        PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
+    }
+    
+    private static boolean todoCommand(String command) {
+        Pattern donePattern = Pattern.compile("^todo( (.*))?");
+        Matcher doneMatcher = donePattern.matcher(command);
+        if (doneMatcher.find()) {
+            try {
+                String taskString = doneMatcher.group(2);
+                if (taskString == null || taskString.isEmpty()) {
+                    throw new IllegalArgumentException("Task string is empty");
+                } else {
+                    addTask(new Todo(taskString));
+                }
+            } catch (IllegalArgumentException e) {
+                PrintUtil.indentedPrintln("Error: Todo task description cannot be empty.");
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private static boolean deadlineCommand(String command) {
+        Pattern deadlinePattern = Pattern.compile("^deadline ?((.*?)( /by ?(.*))?)$");
+        Matcher deadlineMatcher = deadlinePattern.matcher(command);
+        if (deadlineMatcher.find()) {
+            try {
+                String taskDescription = deadlineMatcher.group(2);
+                String deadline = deadlineMatcher.group(4);
+                if (taskDescription == null || taskDescription.isEmpty()) {
+                    throw new IllegalArgumentException("Task description cannot be empty");
+                } else if (deadline == null || deadline.isEmpty()) {
+                    throw new IllegalArgumentException("Deadline cannot be empty");
+                } else {
+                    addTask(new Deadline(taskDescription, deadline));
+                }
+            } catch (IllegalArgumentException e) {
+                PrintUtil.indentedPrintf("Error: %s\n", e.getMessage());
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private static boolean eventCommand(String command) {
+        Pattern eventPattern = Pattern.compile("^event ?((.*?)( /at ?(.*))?)$");
+        Matcher eventMatcher = eventPattern.matcher(command);
+        if (eventMatcher.find()) {
+            try {
+                String taskDescription = eventMatcher.group(2);
+                String eventTime = eventMatcher.group(4);
+                if (taskDescription == null || taskDescription.isEmpty()) {
+                    throw new IllegalArgumentException("Task description cannot be empty");
+                } else if (eventTime == null || eventTime.isEmpty()) {
+                    throw new IllegalArgumentException("Event time cannot be empty");
+                } else {
+                    addTask(new Event(taskDescription, eventTime));
+                }
+            } catch (IllegalArgumentException e) {
+                PrintUtil.indentedPrintf("Error: %s\n", e.getMessage());
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     private static boolean runCommand(String command) {
         if (command.equals("bye")) {
             PrintUtil.indentedPrintln("Goodbye");
             return false;
-        } else if (command.equals("list")) {
+        }
+
+        if (command.equals("list")) {
             for (int i = 0; i < tasks.size(); i++) {
-                PrintUtil.indentedPrintf("%d: %s\n", i+1, tasks.get(i));
+                PrintUtil.indentedPrintf("%d.%s\n", i+1, tasks.get(i));
             }
-            return true;
+        } else if ( doneCommand(command)
+                 || todoCommand(command)
+                 || deadlineCommand(command)
+                 || eventCommand(command)) {
+        } else {
+            PrintUtil.indentedPrintf("Unknown command: %s\n", command);
         }
-        
-        if (doneCommand(command)) {
-            return true;
-        }
-        
-        Task newTask = new Task(command);
-        tasks.add(newTask);
-        PrintUtil.indentedPrintf("Added task:\n  %s\n", newTask);
-        PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
         return true;
     }
     
