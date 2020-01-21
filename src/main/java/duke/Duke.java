@@ -1,10 +1,12 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private Scanner sc;
-    public static final String separator = "--------------------------------";
+    private ArrayList<String> tasks;
+    public static final String separator = "____________________________________________________________";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -17,16 +19,34 @@ public class Duke {
 
     public Duke() {
         this.sc = new Scanner(System.in);
+        this.tasks = new ArrayList<String>();
     }
 
     public void start() {
         while (true) {
             String input = sc.nextLine();
+            echo(dispatch(input));
             if (input.equals("bye"))
                 break;
-            echo(input);
         }
-        echo("Bye. Hope to see you again soon!");
+    }
+
+    private String dispatch(String input) {
+        switch (input) {
+        case "list":
+            StringBuilder sb = new StringBuilder();
+            int tasksLength = this.tasks.size();
+            for (int i = 0; i < tasksLength - 1; i++) {
+                sb.append(String.format("%d. %s\n", i + 1, this.tasks.get(i)));
+            }
+            sb.append(String.format("%d. %s", tasksLength, this.tasks.get(tasksLength - 1)));
+            return sb.toString();
+        case "bye":
+            return "Bye. Hope to see you again soon!";
+        default:
+            this.tasks.add(input);
+            return String.format("added: %s", input);
+        }
     }
 
     private void echo(String toEcho) {
