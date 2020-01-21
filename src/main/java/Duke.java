@@ -8,18 +8,27 @@ public class Duke {
         System.out.println("Hi! I am Duke! What would you like to tell me today?:)");
 
         String command = sc.nextLine();
-        String exit = "bye";
         int index = 1;
-        while (!command.equals(exit)) {
+        while (!command.equals("bye")) {
             if (command.contains("done")) {
                 String[] strArr = command.split(" ");
                 Task currTask = arr.get(Integer.parseInt(strArr[1]) - 1);
                 currTask.setDone();
                 System.out.println("Okay noted! You have completed the below task: ");
-                System.out.println("[" + currTask.getDoneSymbol() + "] " + currTask.getCommand());
+                System.out.println(currTask);
             } else if (command.contains("todo")) {
                 String[] cmd = command.split(" ", 2);
                 Todo newTask = new Todo(cmd[1], index);
+                arr.add(newTask);
+                System.out.println("Okay! I have taken note of the following: ");
+                System.out.println(newTask);
+                index++;
+                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            } else if (command.contains("deadline")) {
+                String[] strArr = command.split("/", 2);
+                String deadline = strArr[1].split(" ", 2)[1];
+                command = strArr[0].split(" ", 2)[1];
+                Deadline newTask = new Deadline(command, index, deadline);
                 arr.add(newTask);
                 System.out.println("Okay! I have taken note of the following: ");
                 System.out.println(newTask);
