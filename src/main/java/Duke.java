@@ -39,7 +39,7 @@ public class Duke {
                     data[slot] = new Deadline(dArr[0], dArr[1]);
                 } else { //event
                     String[] eArr = inputArr[1].split(" /at ", 2);
-                    data[slot] = new Deadline(eArr[0], eArr[1]);
+                    data[slot] = new Event(eArr[0], eArr[1]);
                 }
                 System.out.println("  " + data[slot]);
                 slot++;
