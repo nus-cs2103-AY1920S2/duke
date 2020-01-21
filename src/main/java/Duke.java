@@ -67,17 +67,15 @@ public class Duke {
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
                     tasks.set(taskNo, tasks.get(taskNo).complete());
                     reply = "Okcan, I mark this task as done:\n     " + tasks.get(taskNo);
+                } else if (inputArr[0].equals("delete")) {
+                    if (inputArr.length < 2){
+                        throw new DukeException(DukeExceptionType.NONUMBERDELETE);
+                    } else {
+
+                    }
                 } else {
                     //check which type of task
-                    if (inputArr[0].equals("event")){
-                        reply = createNew(inputArr, TaskType.EVENT, tasks);
-                    } else if (inputArr[0].equals("deadline")){
-                        reply = createNew(inputArr, TaskType.DEADLINE, tasks);
-                    } else if (inputArr[0].equals("todo")){
-                        reply = createNew(inputArr, TaskType.TODO, tasks);
-                    } else {
-                        throw new DukeException(DukeExceptionType.UNKNOWNCOMMAND);
-                    }
+                    reply = createNew(inputArr, tasks);
                 }
                 //printing replies
                 System.out.println("    ____________________________________________________________");
@@ -93,7 +91,7 @@ public class Duke {
         System.out.println("Yes. FINALLY. Hope never to see you again!");
     }
 
-    private static String createNew(String[] inputArr, TaskType t, List<Task> tasks) throws DukeException {
+    private static String createNew(String[] inputArr, List<Task> tasks) throws DukeException {
         int pointer;
         String nameOfEvent;
         Task newTask;
@@ -104,7 +102,7 @@ public class Duke {
 
         String saveReply = "Saving now....:\n     ";
         
-        if (t == TaskType.EVENT) {
+        if (inputArr[0].equals("event")) {
             pointer = findIndex("/at", inputArr);
             if (pointer == -1 || pointer == arrLength - 1) {
                 throw new DukeException(DukeExceptionType.NODATETIME);
@@ -114,7 +112,7 @@ public class Duke {
 
             newTask = new Event(nameOfEvent, dateTime);
             
-        } else if (t == TaskType.DEADLINE) {
+        } else if (inputArr[0].equals("deadline")) {
             pointer = findIndex("/by", inputArr);
             if (pointer == -1 || pointer == arrLength - 1) {
                 throw new DukeException(DukeExceptionType.NODATE);
@@ -123,10 +121,12 @@ public class Duke {
             date = combineString(inputArr, pointer + 1, arrLength);
 
             newTask = new Deadline(nameOfEvent, date);
-        } else {
+        } else if (inputArr[0].equals("todo")) {
             nameOfEvent = combineString(inputArr, 1, arrLength);
             newTask = new Todo(nameOfEvent);
-        }
+        } else {
+            throw new DukeException(DukeExceptionType.UNKNOWNCOMMAND);
+         }
 
         tasks.add(newTask);
         return saveReply + newTask + "\n    Aiyo still got " + tasks.size() + " task(s), what you doing sia";
