@@ -7,39 +7,61 @@ import java.util.*;
 
 public class Duke { //extends Application {
     public static void greetings() {
-                String intro = "Hello! I'm Grapie\n" +
-                "     What can I do for you?\n" ;
+        String intro = "    Hello! I'm Grapie\n" +
+                "    What can I do for you?\n";
 
-                formattingDivider(intro);
+        formattingDivider(intro);
 
     }
 
     public static void formattingDivider(String contentStr) {
         System.out.println("    #__________________________________________________________#");
-        System.out.println("    " + contentStr);
+        System.out.println(contentStr);
         System.out.println("    #__________________________________________________________# \n");
 
     }
 
+    /**
+     * Function to change ✗ to ✓
+     * @param uncompletedTask
+     * @return
+     */
+    public static String completetTask(String uncompletedTask) {
+        return "ha"; //dummy
+    }
+
     public static void echo() {
+        //scanner system to take in input
         Scanner sc = new Scanner(System.in);
         String nextStr = sc.nextLine();
 
+        //arraylist to store list
         List<String> storingList = new ArrayList<>();
 
-        if (nextStr.equals("list")) {
-            //formattingDivider("added: " + nextStr);
-            
-        } else {
-            while (!nextStr.equals("bye")) {
-                formattingDivider("added: " + nextStr);
+        while (!nextStr.equals("bye")) { //check for ending input
+            if (nextStr.length() >= 4 && nextStr.substring(0, 4).equals("done")) {
+                System.out.println("ha");
+            } else if (nextStr.equals("list")) { //check for listing input
+
+                int sizeOfList = storingList.size();
+                String stringList = "     Here are the tasks in your list: \n";
+
+                for (int i = 1; i <= sizeOfList; i++) {
+                    stringList = stringList + "    " + i + ". [✗] " + storingList.get(i - 1) + "\n"; //add tasks
+                }
+
+                formattingDivider(stringList);
+            } else { //echo
+                formattingDivider("    added: " + nextStr);
 
                 storingList.add(nextStr);
-                nextStr = sc.nextLine();
             }
+
+            nextStr = sc.nextLine(); //next input
         }
 
-        formattingDivider("Okie!! Goodbye!");
+
+        formattingDivider("    Okie!! Goodbye!");
     }
 
 
