@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private List<String> list = new ArrayList<>();
+    private List<Task> list = new ArrayList<>();
 
     private static void print(String s) {
         List<String> temp = new ArrayList<>();
@@ -36,16 +36,16 @@ public class Duke {
     }
 
     private void printList() {
-        if (this.list.isEmpty()) {
+        if (list.isEmpty()) {
             print("List is empty");
             return;
         }
 
         List<String> outputStreamBuffer = new ArrayList<>();
 
-        for (int i = 0; i < this.list.size(); i++) {
-            String str = this.list.get(i);
-            String newStr = String.format("%d. %s", i + 1, str);
+        for (int i = 0; i < list.size(); i++) {
+            String str = list.get(i).toString();
+            String newStr = String.format("%d.%s", i + 1, str);
             outputStreamBuffer.add(newStr);
         }
 
@@ -69,7 +69,7 @@ public class Duke {
             } else if (input.equals((LIST_COMMAND))) {
                 duke.printList();
             } else {
-                duke.list.add(input);
+                duke.list.add(new Task(input));
                 print("added: " + input);
             }
         }
