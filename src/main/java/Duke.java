@@ -18,11 +18,9 @@ public class Duke {
             if (next.equals("bye")) {
                 out("Bye. Hope to see you again soon!");
                 break;
-            } else if (next.equals("list")) {
+            } else if(next.equals("list")) {
                 out(tasks.list());
-            } else if (next.equals("done")) {
-                out(tasks.done(in.nextInt()));  
-            } else {
+            }else {
                 out(tasks.add(next));
             }
         }
