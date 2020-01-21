@@ -5,7 +5,7 @@ public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
 
-    public static void readCommand(Command command) {
+    public static void readCommand(Command command) throws DukeDescriptionException {
         switch (command) {
             case LIST:
                 System.out.println("Here are all your tasks:");
@@ -21,6 +21,7 @@ public class Duke {
                 break;
             case TODO:
                 String todo = sc.nextLine();
+                if (todo.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 Task taskToDo = new Todo(tasks.size() + 1, todo);
                 tasks.add(taskToDo);
                 System.out.println("I've added this task: \n" +
@@ -29,6 +30,7 @@ public class Duke {
                 break;
             case EVENT:
                 String event = sc.nextLine();
+                if (event.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 int eventDate = event.indexOf("/");
                 Task taskEvent = new Event(tasks.size() + 1, event.substring(0, eventDate),
                         event.substring(eventDate + 4));
@@ -39,6 +41,7 @@ public class Duke {
                 break;
             case DEADLINE:
                 String deadline = sc.nextLine();
+                if (deadline.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 int dLineDate = deadline.indexOf("/");
                 Task taskDLine = new Deadline(tasks.size() + 1, deadline.substring(0, dLineDate),
                         deadline.substring(dLineDate + 4));
@@ -73,13 +76,14 @@ public class Duke {
             if (next.equals("bye")) break;
             else {
                 try {
+                    System.out.println(lineBreak);
                     Command command = Command.lookUp(next);
-                    System.out.println(lineBreak);
                     readCommand(command);
-                    System.out.println(lineBreak);
                 } catch (InvalidCommandException e) {
-                    System.out.println(lineBreak);
                     System.out.println("Sorry I do not know what that means!");
+                } catch (DukeDescriptionException e) {
+                    System.out.println("OOPS! You forgot to include a description!");
+                } finally {
                     System.out.println(lineBreak);
                 }
             }
