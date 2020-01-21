@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class LevelMethods {
     List<Task> storingList = new ArrayList<>();
+    String ha;
 
     public LevelMethods() {
-
+        //no stuff
     }
 
     /**
