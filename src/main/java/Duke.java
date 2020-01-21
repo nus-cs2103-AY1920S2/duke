@@ -46,43 +46,52 @@ public class Duke {
                     System.out.println(error.errorMsg(taskArray[0]));
                     System.out.println("");
                 }
-                else {
-                    taskType = taskArray[0];
-                    if ((statement.split(" ")[0]).equals("done")) {
-                        int a = Integer.parseInt(statement.split(" ")[1]) - 1;
-                        if (a <= arrList.size() && a!=-1) {
-                            arrList.get(a).markAsDone();
-                            System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println("  [" + arrList.get(a).getStatusIcon() + "] " + arrList.get(a).description);
-                            System.out.println();
-                        }
-                        else {
-                            DukeException error = new DukeException();
-                            System.out.println(error.outOfBound());
-                            System.out.println();
-                        }
+                else if (taskArray[0].equals("delete") || taskArray[0].equals("done")) {
+                    int a = Integer.parseInt(taskArray[1]);
+                    Action action = new Action(a, arrList);
+                    if (action.checkNum() == 0) {
+                        DukeException error = new DukeException();
+                        System.out.println(error.outOfBound());
+                        System.out.println("");
                     }
                     else {
-                        statement = statement.substring(statement.indexOf(" "), statement.length());
-                        if (!taskType.equals("todo")) {
-                            task = statement.split("/")[0];
-                            date = statement.split("/")[1];
-                            word = date.substring(0, date.indexOf(" "));
-                            date = date.substring(date.indexOf(" ") + 1, date.length());
-                            if (task.equals("event")) {
-                                t = new Event(task, word, date);
-                            } else {
-                                t = new Deadline(task, word, date);
-                            }
+                        if (taskArray[0].equals("delete")) {
+                            Delete delete = new Delete(a, arrList);
+                            String deleteAction = delete.printAction();
+                            System.out.println(delete.deleteTask());
+                            System.out.println(deleteAction);
+                            System.out.println("Now you have " + arrList.size() + " tasks in the list.");
+                            System.out.println("");
                         } else {
-                            t = new Todo(statement);
+                            Done done = new Done(a, arrList);
+                            System.out.println(done.markDone());
+                            System.out.println(done.printAction());
+                            System.out.println("Now you have " + arrList.size() + " tasks in the list.");
+                            System.out.println("");
                         }
-                        arrList.add(t);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.getTask());
-                        System.out.println("Now you have " + arrList.size() + " tasks in the list.");
-                        System.out.println();
                     }
+                }
+                else {
+                    taskType = taskArray[0];
+                    statement = statement.substring(statement.indexOf(" "), statement.length());
+                    if (!taskType.equals("todo")) {
+                        task = statement.split("/")[0];
+                        date = statement.split("/")[1];
+                        word = date.substring(0, date.indexOf(" "));
+                        date = date.substring(date.indexOf(" ") + 1, date.length());
+                        if (task.equals("event")) {
+                            t = new Event(task, word, date);
+                        } else {
+                            t = new Deadline(task, word, date);
+                        }
+                    } else {
+                        t = new Todo(statement);
+                    }
+                    arrList.add(t);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.getTask());
+                    System.out.println("Now you have " + arrList.size() + " tasks in the list.");
+                    System.out.println();
                 }
             }
             sc = new Scanner(System.in);
