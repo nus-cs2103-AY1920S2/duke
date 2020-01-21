@@ -13,26 +13,27 @@ public class Duke {
 
         Tracker tracker = new Tracker();
         Scanner scanner = new Scanner(System.in);
-        Command command = new Command(scanner.nextLine());
+        Command command = new Command(scanner.next());
 
         while (command.isBye() == false) {
             if (command.isList()) {
                 for (int i = 0; i < tracker.getTotalTasks(); i++) {
                     int itemNo = i + 1;
                     Task task = tracker.showList().get(i);
-                    System.out.println(itemNo + "." + task.getStatus());
+                    System.out.println(itemNo + "." + task.toString());
                 }
             } else if (command.isDone()) {
-                int itemNo = Integer.parseInt(command.getCmd().substring(5)) - 1;
+                int itemNo = scanner.nextInt() - 1;
                 System.out.println("Nice! I've marked this task as done");
                 tracker.markDone(itemNo);
 
             } else {
-                tracker.add(command.getCmd());
-                System.out.println("added: " + command.getCmd());
+                String content = scanner.nextLine();
+                tracker.add(new ToDo(content));
+                System.out.println("added: " + content);
             }
 
-            command = new Command(scanner.nextLine());
+            command = new Command(scanner.next());
         }
 
         System.out.println("Bye. Hope to see you again soon!");

@@ -9,15 +9,15 @@ public class Tracker {
         this.totalTasks = 0;
     }
 
-    public void add(String text) {
+    public void add(Task task) {
         this.totalTasks++;
-        this.list.add(new Task(text));
+        this.list.add(task);
     }
 
     public void markDone(int index) {
         Task task = this.list.get(index);
         task.setDone();
-        System.out.println(task.getStatus());
+        System.out.println(task.toString());
     }
 
     public LinkedList<Task> showList() {

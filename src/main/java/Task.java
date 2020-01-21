@@ -7,15 +7,16 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatus() {
+    public void setDone() {
+        this.isDone = true;
+    }
+
+    @Override
+    public String toString() {
         if (isDone) {
             return "[\u2713] " + content;
         } else {
             return "[\u2718] " + content;
         }
-    }
-
-    public void setDone() {
-        this.isDone = true;
     }
 }
