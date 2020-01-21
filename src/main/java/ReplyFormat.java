@@ -50,6 +50,18 @@ public class ReplyFormat {
     }
 
     /**
+     * Adding list of data to the reply
+     * @param listing listing to display
+     */
+    public void addList(List<String> listing) {
+        int count = 1;
+        for (String data : listing) {
+            addSentence(count + ". " + data);
+            count += 1;
+        }
+    }
+
+    /**
      * Set the amount of indentation in front of message
      * @param numOfIndent number of indentation required
      */

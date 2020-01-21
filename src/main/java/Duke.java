@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     static String indentation = "       ";
     static int numOfIndentation = 7;
+    static Database database;
     static ReplyFormat message;
     static String userInput;
     static Scanner user;
@@ -28,6 +29,7 @@ public class Duke {
     public static void initialise() {
         message = new ReplyFormat();
         message.setIndentationInFront(7);
+        database = new Database();
         user = new Scanner(System.in);
         userInput = "";
         dialogContinue = true;
@@ -73,7 +75,12 @@ public class Duke {
     public static void processUserInput(String userInput) {
         if (userInput != null) {
             if (!userInput.equals("bye")) {
-                reply(userInput);
+                if (userInput.equals("list")) {
+                    replyListing();
+                } else {
+                    database.addData(userInput);
+                    reply("added: " + userInput);
+                }
             } else {
                 reply("Bye. Hope to see you again soon!");
                 dialogContinue = false;
@@ -90,6 +97,15 @@ public class Duke {
     public static void reply(String sentence) {
         message.clearMessage();
         message.addSentence(sentence);
+        System.out.print(message.replyMessage());
+    }
+
+    /**
+     * Reply all the data in the database in list format
+     */
+    public static void replyListing() {
+        message.clearMessage();
+        message.addList(database.getListing());
         System.out.print(message.replyMessage());
     }
 }
