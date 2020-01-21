@@ -1,0 +1,105 @@
+    **************************************************************
+    Hello! I'm Duke
+    What can I do for you?
+    **************************************************************
+
+    **************************************************************
+    Got it. I've added this task:
+      [T][X] read book
+    Now you have 1 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Got it. I've added this task:
+      [T][X] return book
+    Now you have 2 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Got it. I've added this task:
+      [E][X] project meeting (at: Monday 4pm)
+    Now you have 3 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Got it. I've added this task:
+      [D][X] homework (by: Tuesday)
+    Now you have 4 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Got it. I've added this task:
+      [E][X] lunch with friends (at: Wednesday 12pm)
+    Now you have 5 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Got it. I've added this task:
+      [D][X] quiz by (by: Thursday)
+    Now you have 6 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Nice! I've marked this task as done:
+      [T][O] read book
+    **************************************************************
+
+    **************************************************************
+    Here are the tasks in your list:
+    1. [T][O] read book
+    2. [T][X] return book
+    3. [E][X] project meeting (at: Monday 4pm)
+    4. [D][X] homework (by: Tuesday)
+    5. [E][X] lunch with friends (at: Wednesday 12pm)
+    6. [D][X] quiz by (by: Thursday)
+    **************************************************************
+
+    **************************************************************
+    Nice! I've marked this task as done:
+      [T][O] return book
+    **************************************************************
+
+    **************************************************************
+    Here are the tasks in your list:
+    1. [T][O] read book
+    2. [T][O] return book
+    3. [E][X] project meeting (at: Monday 4pm)
+    4. [D][X] homework (by: Tuesday)
+    5. [E][X] lunch with friends (at: Wednesday 12pm)
+    6. [D][X] quiz by (by: Thursday)
+    **************************************************************
+
+    **************************************************************
+    Nice! I've marked this task as done:
+      [D][O] homework (by: Tuesday)
+    **************************************************************
+
+    **************************************************************
+    Here are the tasks in your list:
+    1. [T][O] read book
+    2. [T][O] return book
+    3. [E][X] project meeting (at: Monday 4pm)
+    4. [D][O] homework (by: Tuesday)
+    5. [E][X] lunch with friends (at: Wednesday 12pm)
+    6. [D][X] quiz by (by: Thursday)
+    **************************************************************
+
+    **************************************************************
+    Noted. I've removed this task:
+      [T][O] read book
+    Now you have 5 tasks on the list.
+    **************************************************************
+
+    **************************************************************
+    Here are the tasks in your list:
+    1. [T][O] return book
+    2. [E][X] project meeting (at: Monday 4pm)
+    3. [D][O] homework (by: Tuesday)
+    4. [E][X] lunch with friends (at: Wednesday 12pm)
+    5. [D][X] quiz by (by: Thursday)
+    **************************************************************
+
+    **************************************************************
+    Bye. Hope to see you again soon!
+    **************************************************************
+
