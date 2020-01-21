@@ -6,8 +6,8 @@ public class Task {
     public static final String doneSymbol = "\u2714";
     public static final String notDoneYetSymbol = "\u2718";
 
-    private String name;
-    private boolean isDone;
+    protected String name;
+    protected boolean isDone;
 
     public Task(String name) {
         this.name = name;
