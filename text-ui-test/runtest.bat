@@ -7,9 +7,8 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-cd ..
-gradlew run --console=plain --quiet < text-ui-test\input.txt > text-ui-test\ACTUAL.TXT
-cd text-ui-test
+dir /s /B ..\src\main\java\*.java > sources.txt
+javac  -cp ..\src -Xlint:none -d ..\bin @sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
