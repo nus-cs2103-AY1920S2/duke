@@ -6,6 +6,7 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> memory = new ArrayList<>();
         System.out.println("Greeting, traveler. My name is Andrew. What can I do for you?");
+
         while (scan.hasNext()) {
             String input = scan.nextLine();
             if (input.equals("bye")) {
