@@ -4,13 +4,6 @@ import java.util.Scanner;
 public class Duke {
     private ArrayList<Task> storage = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.greet();
-        bot.run();
-
-    }
-
     private void greet() {
         System.out.println("Greeting, traveler. My name is Andrew. What can I do for you?");
     }
@@ -21,7 +14,7 @@ public class Duke {
 
     private void outputList() {
         for (int i = 0; i < storage.size(); i++) {
-            System.out.printf("%d - %s\n", i + 1, storage.get(i).toString());
+            System.out.printf("%d -%s\n", i + 1, storage.get(i));
         }
     }
 
@@ -30,7 +23,11 @@ public class Duke {
     }
 
     private void completeTask(int i) {
-        storage.get(i).setDone();
+        try {
+            storage.get(i).setDone();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void run() {
@@ -53,10 +50,22 @@ public class Duke {
                 System.out.printf("Task successfully completed: \n\t %s\n", storage.get(index));
                 break;
             default:
-                storage.add(new Task(input));
-                System.out.printf("Added: %s\n", input);
-                break;
+                try {
+                    storage.add(Task.generateTask(input));
+                    System.out.printf("Added: %s\n", storage.get(storage.size() - 1));
+                    System.out.printf("You now have %d tasks in your list\n", Task.getSize());
+                    break;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
+
+    public static void main(String[] args) {
+        Duke bot = new Duke();
+        bot.greet();
+        bot.run();
+    }
+
 }
