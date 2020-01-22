@@ -4,15 +4,14 @@ public class Duke {
     public static void main(String[] args) {
         String separator_top = "\n------------------------------------------";
         String separator_btm = "------------------------------------------\n";
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("Hello from\n" + logo);
 
         while (sc.hasNext()) {
             String command = sc.next();
