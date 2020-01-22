@@ -89,6 +89,20 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(dukeFormat("Please try again, your number is out of range."));
                     }
+
+                } else if (getInput.equals("delete")) {
+                    try {
+                        // validate input for list index
+                        String getNumberString = sc.next();
+                        int getNumber = Integer.valueOf(getNumberString);
+                        Task currTask = lst.get(getNumber - 1);
+                        lst.remove(getNumber - 1);
+                        System.out.println(dukeFormat("Sure I will delete this task.\n" + indent + currTask + "\n    Now you have " + String.valueOf(lst.size()) + " tasks."));
+                    } catch (NumberFormatException e) {
+                        System.out.println(dukeFormat("Please input an integer."));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(dukeFormat("Please try again, your number is out of range."));
+                    }
                 } else {
                     throw new DukeException("Invalid Input");
                 }
