@@ -139,7 +139,7 @@ public class Duke {
         stringBuilder.append(INDENT + " ");
         stringBuilder.append("  " + message + "\n");
         stringBuilder.append(INDENT + " ");
-        stringBuilder.append(String.format("Now you have %d tasks in list.", size));
+        stringBuilder.append(String.format(" Now you have %d tasks in list.", size));
         return stringBuilder.toString();
     }
 
@@ -147,7 +147,7 @@ public class Duke {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(BORDER + "\n");
         stringBuilder.append(INDENT);
-        stringBuilder.append(" Very productive! I've slayed this task:\n");
+        stringBuilder.append("  Very productive! I've slayed this task:\n");
         stringBuilder.append(INDENT);
         stringBuilder.append(String.format("   [%s]%s\n", markedIcon, taskName));
         stringBuilder.append(BORDER);
