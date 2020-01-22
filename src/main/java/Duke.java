@@ -60,6 +60,14 @@ public class Duke {
                     System.out.println("     Nice! I've marked this task as done:");
                     System.out.println("       " + list.get(num));
                     printLine();
+                } else if (split[0].equals("delete")) {
+                    int num = Integer.parseInt(split[1]) - 1;
+                    printLine();
+                    System.out.println("     Noted. I've removed this task:");
+                    System.out.println("       " + list.get(num));
+                    list.remove(num);
+                    System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                    printLine();
                 } else { // creating new task
                     // error: invalid task
                     if (!split[0].equals("todo") && !split[0].equals("deadline") && !split[0].equals("event")) {
