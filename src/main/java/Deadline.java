@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    void setDescription(String s) throws DukeException{
+    void setDescription(String s) throws DukeException {
 
         try {
             String deadline_task = s.substring(s.indexOf("deadline"), s.indexOf("/"));
@@ -25,14 +25,14 @@ public class Deadline extends Task {
 
 
             super.setDescription(deadline_task2);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException("OOPS!! The description of a Deadline cannot be empty");
         }
     }
 
     @Override
     public String toString() {
-        return " [" + Task_Codes.D+ "]" + super.toString() + " (by: " + by + ")";
+        return " [" + Task_Codes.D + "]" + super.toString() + " (by: " + by + ")";
     }
 
 }

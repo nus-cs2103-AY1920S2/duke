@@ -1,8 +1,12 @@
-class Task {
+abstract class Task {
 
     // For whether its To-do(T), Deadline (D), Event (E)
     public enum Task_Codes {
         T, D, E
+    }
+
+    public enum Task_Type {
+        Todo, Deadline, Event
     }
 
     private String description;
@@ -26,12 +30,12 @@ class Task {
     }
 
     // Get the description
-     String getDescription() {
+    String getDescription() {
         return description;
     }
 
     // Set the task as complete
-     void setDone(boolean done) {
+    void setDone(boolean done) {
         isDone = done;
     }
 
@@ -44,8 +48,8 @@ class Task {
     }
 
     @Override
-    public String toString(){
-         return  " [" + this.getStatusIcon() + "] " + getDescription();
+    public String toString() {
+        return " [" + this.getStatusIcon() + "] " + getDescription();
     }
 }
 
