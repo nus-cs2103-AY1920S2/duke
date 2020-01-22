@@ -19,10 +19,15 @@ public class Duke {
         String word = input.nextLine();
         while (!word.equalsIgnoreCase("bye")) {
             System.out.println("____________________________________________________________");
-            if (word.equalsIgnoreCase("list")){
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < commandList.size(); i++) {
-                    System.out.println(commandList.get(i));
+            if (word.equalsIgnoreCase("list")) {
+                if (commandList.size() > 0) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < commandList.size(); i++) {
+                        int a = i + 1;
+                        System.out.print(a + ". " + commandList.get(i));
+                    }
+                } else {
+                    System.out.println("☹ OOPS!!! I'm sorry, I can't find any task");
                 }
             }
 
@@ -42,14 +47,28 @@ public class Duke {
                     }
 
                 }
+
+                else if (words[0].equalsIgnoreCase("delete") && words[1].matches("\\d+")) {
+                    int deleteTarget = Integer.parseInt(words[1]);
+                    if (deleteTarget > 0 && deleteTarget <= commandList.size()) {
+                        Task task = commandList.get(deleteTarget - 1);
+                        commandList.remove(deleteTarget - 1);
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.print(task);
+                        System.out.println("Now you have "+commandList.size()+" tasks in the list.");
+                    } else {
+                        System.out.println("☹ OOPS!!! I'm sorry, I can't find that task");
+                    }
+
+                }
                 else if (words[0].equalsIgnoreCase("todo")){
                     if (word.contains("todo ") && !word.substring(5).isEmpty()) {
                         String substr = word.substring(5);
-                        ToDo task = new ToDo(commandList.size() + 1, substr);
+                        ToDo task = new ToDo(substr);
                         commandList.add(task);
                         System.out.println("Got it. I've added this task: ");
-                        System.out.println(task);
-                        System.out.println("Now you have " + Task.count + " tasks in the list.");
+                        System.out.print(task);
+                        System.out.println("Now you have " + commandList.size()+ " tasks in the list.");
                     } else {
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -59,11 +78,12 @@ public class Duke {
                     String substr = word.substring(9);
                     if (substr.contains(" /")) {
                     String[] deadlineSplit = substr.split(" /");
-                    Deadline task = new Deadline(commandList.size() + 1, deadlineSplit[0], deadlineSplit[1]);
+                    Deadline task = new Deadline(deadlineSplit[0], deadlineSplit[1]);
                     commandList.add(task);
                     System.out.println("Got it. I've added this task: ");
-                    System.out.println(task);
-                    System.out.println("Now you have "+Task.count+" tasks in the list."); }
+                    System.out.print(task);
+                    System.out.println("Now you have "+commandList.size()+" tasks in the list.");
+                    }
                     else {
                         System.out.println("☹ OOPS!!! I'm sorry, but you need to specify the deadline");
                     }
@@ -74,11 +94,11 @@ public class Duke {
                     String substr = word.substring(9);
                     if (substr.contains(" /")) {
                     String[] eventSplit = substr.split(" /");
-                    Event task = new Event(commandList.size() + 1, eventSplit[0], eventSplit[1]);
+                    Event task = new Event(eventSplit[0], eventSplit[1]);
                     commandList.add(task);
                     System.out.println("Got it. I've added this task: ");
-                    System.out.println(task);
-                    System.out.println("Now you have "+Task.count+" tasks in the list.");}
+                    System.out.print(task);
+                    System.out.println("Now you have "+commandList.size()+" tasks in the list.");}
                     else {
                         System.out.println("☹ OOPS!!! I'm sorry, but you need to specify the event time");
                     }

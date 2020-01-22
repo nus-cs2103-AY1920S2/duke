@@ -1,7 +1,7 @@
 public class ToDo extends Task {
 
-    public ToDo(int id, String name) {
-        super(id, name);
+    public ToDo(String name) {
+        super(name);
         done = false;
         count++;
 
@@ -9,10 +9,10 @@ public class ToDo extends Task {
 
     public String toString() {
         if (done) {
-            return (id + ".[T][✓] " + name);
+            return ("[T][✓] " + name+"\n");
         }
 
-        return (id + ".[T][✗] " + name);
+        return ("[T][✗] " + name+"\n");
     }
 
 

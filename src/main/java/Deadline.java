@@ -1,8 +1,8 @@
 public class Deadline extends Task {
     public String time;
 
-    public Deadline(int id, String name, String time) {
-        super(id, name);
+    public Deadline(String name, String time) {
+        super(name);
         done = false;
         this.time = time;
         count++;
@@ -10,9 +10,9 @@ public class Deadline extends Task {
     }
     public String toString() {
         if (done) {
-            return (id + ".[D][✓] " + name + " (by: "+time+ ")");
+            return ("[D][✓] " + name + " (by: "+time+ ")\n");
         }
 
-        return (id + ".[D][✗] " + name+ " (by: "+time+ ")");
+        return ("[D][✗] " + name+ " (by: "+time+ ")\n");
     }
 }

@@ -1,11 +1,10 @@
 public class Task {
-    public int id;
     public String name;
     public boolean done;
     public static int count = 0;
 
-    public Task(int id, String name) {
-        this.id = id;
+    public Task(String name) {
+
         this.name = name;
         done = false;
     }

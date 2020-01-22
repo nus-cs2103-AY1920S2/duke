@@ -1,8 +1,8 @@
 public class Event extends Task {
     public String time;
 
-    public Event(int id, String name, String time) {
-        super(id, name);
+    public Event(String name, String time) {
+        super(name);
         done = false;
         this.time = time;
         count++;
@@ -10,9 +10,9 @@ public class Event extends Task {
     }
     public String toString() {
         if (done) {
-            return (id + ".[E][✓] " + name + " (at: "+time+ ")");
+            return ("[E][✓] " + name + " (at: "+time+ ")\n");
         }
 
-        return (id + ".[E][✗] " + name+ " (at: "+time+ ")");
+        return ("[E][✗] " + name+ " (at: "+time+ ")\n");
     }
 }
