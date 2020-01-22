@@ -1,5 +1,3 @@
-package tasks;
-
 public abstract class Task {
 
     /**
@@ -53,7 +51,7 @@ public abstract class Task {
      * @return a String of a tick(completed) or a cross(incomplete)
      */
     public final String obtainStatusIcon() {
-        return (this.isDone) ? "\u2713" : "\u2718";
+        return (this.isDone) ? "V" : "X";
     }
 
     /**

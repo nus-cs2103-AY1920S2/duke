@@ -1,5 +1,3 @@
-package greetings;
-
 public class WelcomeGoodbye {
 
     /**

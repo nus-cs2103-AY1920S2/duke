@@ -1,10 +1,3 @@
-package utilities;
-
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -197,7 +190,7 @@ public class TaskHandler {
             print("That's already done, try another. Or did you make a careless mistake? XD");
         } else {
             print("Nice! The following task has been marked completed:\n"
-                    + "===> [\u2713] " + t + " <===");
+                    + "===> [V] " + t + " <===");
         }
         printLine();
     }

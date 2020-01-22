@@ -1,5 +1,3 @@
-package tasks;
-
 public class Deadline extends Task {
 
     /**
