@@ -23,7 +23,7 @@ public class Duke {
                 padding + uselessLine);
     }
 
-    public void processUserInput(String str) {
+    public void processUserInput(String str) throws InvalidCommandException {
         if (str.equals("")) {
             System.out.println(padding + uselessLine + "\n" +
                     padding + "Please type something. Don't leave it blank, plsss!\n" +
@@ -47,10 +47,7 @@ public class Duke {
                     handleEvent(str);
                     break;
                 default:
-                    System.out.println(padding + uselessLine + "\n" +
-                            padding + "Umm, please just write something legit.\n" +
-                            padding + uselessLine);
-                    break; // Will throw error later? commandType already throws so idk
+                    throw new InvalidCommandException(str);
             }
         }
     }
@@ -67,9 +64,6 @@ public class Duke {
                 ret = Task.TaskType.deadline;
             else if (ss.equals(Task.eventCommand))
                 ret = Task.TaskType.event;
-            else {
-                // Place-holder clause. Will throw error later
-            }
             break;
         }
 
