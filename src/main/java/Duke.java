@@ -1,25 +1,31 @@
+import main.java.Deadline;
 import main.java.Task;
+import main.java.Todo;
+import main.java.Event;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";*/
+        
+        /**Declaration of variables */
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Task> Tasks = new ArrayList<>();
+
+        /**Welcome Message */
         System.out.println("-------------------------------------------------------------");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println();
         System.out.println("-------------------------------------------------------------");
         System.out.println();
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> Tasks = new ArrayList<>();
-
+        
+        /**Run program */
         while(true) {
-            String x = sc.nextLine();
-            if (x.equals("bye")) {
+            String[] x = sc.nextLine().split(" ",2);
+            String command = x[0];
+            if (command.equals("bye")) {
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println();
@@ -27,26 +33,51 @@ public class Duke {
                 System.out.println();
                 sc.close();
                 System.exit(0);
-            } else if (x.equals("list")) {
+            } else if (command.equals("list")) {
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < Tasks.size(); i++) {
-                    System.out.println(i+1 + ". " + Tasks.get(i).getStatusIcon() + Tasks.get(i).getDescription());
+                    System.out.println(i+1 + ". " + Tasks.get(i));
                 }
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
-            } else if (x.contains("done")) {
-                int index = Integer.valueOf(x.split(" ",2)[1]);
+            } else if (command.equals("done")) {
+                String rest = x[1];
+                int index = Integer.valueOf(rest);
                 Tasks.get(index-1).markAsDone();
-            }
-            else {
+            } else if (command.equals("todo")) {
+                String rest = x[1];
+                Todo todo = new Todo(rest);
+                Tasks.add(todo);
                 System.out.println("-------------------------------------------------------------");
-                Task t = new Task(x);
-                Tasks.add(t);
-                System.out.println("added: " + t.getDescription());
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(todo);
+                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
+            } else if (command.equals("deadline")) {
+                String rest = x[1];
+                String[] q = rest.split("/");
+                Deadline deadline = new Deadline(q[0], q[1]);
+                Tasks.add(deadline);
+                System.out.println("-------------------------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(deadline);
+                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
                 System.out.println();
+                System.out.println("-------------------------------------------------------------");
+
+            } else if (command.equals("event")) {
+                String rest = x[1];
+                String[] q = rest.split("/");
+                Event event = new Event(q[0], q[1]);
+                Tasks.add(event);
+                System.out.println("-------------------------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(event);
+                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
+                System.out.println();
+                System.out.println("-------------------------------------------------------------");
             }
         }
 

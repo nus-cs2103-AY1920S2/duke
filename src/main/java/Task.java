@@ -26,5 +26,10 @@ public class Task {
         System.out.println("-------------------------------------------------------------");
     }
 
+    
+    public String toString() {
+        return this.getStatusIcon() + " " + description;
+    }
+
     //...
 }
