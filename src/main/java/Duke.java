@@ -83,13 +83,6 @@ public class Duke {
         printLine();
     }
 
-    private static void unrecognisedCommand() {
-        printLine();
-        indent("Unfortunately, I do not recognise what you have entered. ");
-        indent("Please try again.");
-        printLine();
-    }
-
     private static void markTaskAsDone(int taskNo) throws InvalidIndexException {
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new InvalidIndexException();
