@@ -1,4 +1,13 @@
-package PACKAGE_NAME;
+public class Event extends Task {
+    String timeframe;
 
-public class Event {
+    Event(String description, String timeframe) {
+        super(description);
+        this.timeframe = timeframe;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + this.timeframe + ")";
+    }
 }
