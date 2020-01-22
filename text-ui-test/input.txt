@@ -1,0 +1,6 @@
+todo read book
+event meeeting /at 5pm
+deadline project /by Sunday
+list
+done 2
+bye
