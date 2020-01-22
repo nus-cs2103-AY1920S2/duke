@@ -28,7 +28,7 @@ public class Duke {
      */
     public static void initialise() {
         message = new ReplyFormat();
-        message.setIndentationInFront(7);
+        message.setIndentationInFront(4);
         database = new Database();
         user = new Scanner(System.in);
         userInput = "";
@@ -63,8 +63,8 @@ public class Duke {
      * Duke greet the user
      */
     public static void greet() {
-        message.addSentence("Hello! I'm Duke");
-        message.addSentence("What can I do for you?");
+        message.addSentence("Hello! I'm Duke", 1);
+        message.addSentence("What can I do for you?", 1);
         System.out.print(message.replyMessage());
     }
 
@@ -88,10 +88,8 @@ public class Duke {
                 reply("Bye. Hope to see you again soon!");
                 dialogContinue = false;
             }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid Index input!");
-        } catch (NoSuchFieldException e) {
-            System.out.println(e.getMessage());
+        } catch (DukeException e) {
+            reply(e.getMessage());
         }
     }
 
@@ -101,7 +99,7 @@ public class Duke {
      */
     public static void reply(String sentence) {
         message.clearMessage();
-        message.addSentence(sentence);
+        message.addSentence(sentence, 1);
         System.out.print(message.replyMessage());
     }
 
@@ -110,6 +108,7 @@ public class Duke {
      */
     public static void replyListing() {
         message.clearMessage();
+        message.addSentence("Here are the tasks in your list:", 1);
         message.addList(database.getListing());
         System.out.print(message.replyMessage());
     }
@@ -120,12 +119,12 @@ public class Duke {
     public static void replyAdded() {
         int AmtOfTask = database.getAmountOfTask();
         message.clearMessage();
-        message.addSentence("Got it. I've added this task:");
-        message.addSentence("  " + database.getTask(AmtOfTask).toString());
+        message.addSentence("Got it. I've added this task:", 1);
+        message.addSentence(database.getTask(AmtOfTask).toString(), 3);
         if (AmtOfTask > 1) {
-            message.addSentence("Now you have "+ AmtOfTask +" tasks in the list.");
+            message.addSentence("Now you have "+ AmtOfTask +" tasks in the list.", 1);
         } else {
-            message.addSentence("Now you have 1 task in the list.");
+            message.addSentence("Now you have 1 task in the list.", 1);
         }
         System.out.print(message.replyMessage());
     }
@@ -138,8 +137,8 @@ public class Duke {
         database.markDone(num);
         Task task = database.getTask(num);
         message.clearMessage();
-        message.addSentence("Nice! I've marked this task as done:");
-        message.addSentence("  " + task.toString());
+        message.addSentence("Nice! I've marked this task as done:", 1);
+        message.addSentence("  " + task.toString(), 3);
         System.out.print(message.replyMessage());
     }
 }

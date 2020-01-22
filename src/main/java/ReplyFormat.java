@@ -3,7 +3,7 @@ import java.util.List;
 public class ReplyFormat {
     protected String indentationInFront;
     protected String message;
-    protected String outline = "______________________________________";
+    protected String outline = "____________________________________________________________";
     protected int numOfIndentInFront;
 
     /**
@@ -18,9 +18,10 @@ public class ReplyFormat {
     /**
      * Adding one sentence to the reply
      * @param sentence message required to add
+     * @param numOfIndent number of additional indent required to add
      */
-    public void addSentence(String sentence) {
-        message = message + indentationInFront + sentence + '\n';
+    public void addSentence(String sentence, int numOfIndent) {
+        message = message + indentationInFront + setAdditionalIndent(numOfIndent) + sentence + '\n';
     }
 
     /**
@@ -45,7 +46,7 @@ public class ReplyFormat {
      */
     public void addParagraph(List<String> paragraph) {
         for (String sentence : paragraph) {
-            addSentence(sentence);
+            addSentence(sentence, 1);
         }
     }
 
@@ -56,9 +57,22 @@ public class ReplyFormat {
     public void addList(List<Task> listing) {
         int count = 1;
         for (Task task : listing) {
-            addSentence(count + "." + task.toString());
+            addSentence(count + "." + task.toString(), 1);
             count += 1;
         }
+    }
+
+    /**
+     * Add additional indent required
+     * @param numOfIndent number of indent required to add
+     * @return the amount of spaces
+     */
+    public String setAdditionalIndent(int numOfIndent) {
+        String indent = "";
+        for (int i = 0; i < numOfIndent; i++) {
+            indent = indent.concat(" ");
+        }
+        return indent;
     }
 
     /**
