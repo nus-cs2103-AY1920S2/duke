@@ -51,7 +51,7 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     throw new DukeException("OOPS! Please use an Integer together with the done command");
                 }
-                if(intOfInterest >= store.size()) {
+                if(intOfInterest >= store.size() || intOfInterest < 0) {
                     throw new DukeException("OOPS! The Integer you used is invalid. Index of Array is out of bounds.");
                 }
                 System.out.println("Nice! I've marked this task as done:");
@@ -130,6 +130,26 @@ public class Duke {
                 store.add(event);
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + event);
+                System.out.println("Now you have " + store.size() + " tasks in the list.");
+                break;
+            case "delete":
+                if(check.length == 1) {
+                    throw new DukeException("OOPS! The description of a delete cannot be empty.");
+                }
+                int intOfInterestD;
+                try {
+                    intOfInterestD = Integer.parseInt(check[1]) - 1;
+                } catch (NumberFormatException e) {
+                    throw new DukeException("OOPS! Please use an Integer together with the delete command");
+                }
+                if(intOfInterestD >= store.size() || intOfInterestD < 0) {
+                    throw new DukeException("OOPS! The Integer you used is invalid. Index of Array is out of bounds.");
+                }
+
+                Task temp = store.get(intOfInterestD);
+                store.remove(intOfInterestD);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + temp);
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
                 break;
             default:
