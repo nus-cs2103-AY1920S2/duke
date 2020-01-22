@@ -12,21 +12,60 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-        List<String> texts = new ArrayList<>();
+        List<String> tasks = new ArrayList<>();
+        List<Boolean> areTasksCompleted = new ArrayList<>();
 
         System.out.println("Hello from\n" + logo);
         while (isRunning && sc.hasNextLine()) {
             String input = sc.nextLine();
-            switch (input) {
+            String command = input;
+            String[] arguments = new String[0];
+            if (input.contains(" ")) {
+                String[] inputs = input.split(" ", 2);
+                command = inputs[0];
+                if (inputs[1].contains(" ")) {
+                    arguments = inputs[1].split(" ");
+                } else {
+                    arguments = new String[] {inputs[1]};
+                }
+            }
+            switch (command) {
             case "list": {
-                StringBuilder output = new StringBuilder("List so far:\n");
-                ListIterator<String> iterator = texts.listIterator();
+                StringBuilder output = new StringBuilder("Tasks so far:\n");
+                ListIterator<String> iterator = tasks.listIterator();
                 while (iterator.hasNext()) {
-                    int index = iterator.nextIndex() + 1;
-                    String text = iterator.next();
-                    output.append(index + ". " + text + "\n");
+                    int index = iterator.nextIndex();
+                    String symbol = areTasksCompleted.get(index) ? "X" : " ";
+                    String task = iterator.next();
+                    output.append(String.format(
+                            "%d.[%s] %s\n",
+                            (index + 1), symbol, task
+                    ));
                 }
                 System.out.print(output);
+                break;
+            }
+            case "done": {
+                int taskIndex;
+                try {
+                    taskIndex = Integer.parseInt(arguments[0]) - 1;
+                } catch (NumberFormatException e) {
+                    System.out.println(String.format(
+                            "'%s' is not valid task number!",
+                            arguments[0]
+                    ));
+                    break;
+                }
+                if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                    System.out.println(String.format(
+                            "Task #%d supplied is not within 1 to %d!",
+                            (taskIndex + 1), tasks.size()
+                    ));
+                    break;
+                }
+                String task = tasks.get(taskIndex);
+                areTasksCompleted.set(taskIndex, true);
+                System.out.println(String.format("Marked '%s' as done", task));
                 break;
             }
             case "bye": {
@@ -34,8 +73,9 @@ public class Duke {
                 break;
             }
             default: {
-                texts.add(input);
-                System.out.println("Added: '" + input + "'");
+                tasks.add(input);
+                areTasksCompleted.add(false);
+                System.out.println(String.format("Added: '%s'", input));
             }
             }
         }
