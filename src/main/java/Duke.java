@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String logo = " ____        _        \n"
+        /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);*/
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
         System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
@@ -38,7 +38,7 @@ public class Duke {
                         tasks.get(taskNum).isDone = true;
                         System.out.print(line);
                         System.out.println("     Nice! I've marked this task as done:");
-                        tasks.get(taskNum).printDone();
+                        System.out.println("       " + tasks.get(taskNum).toString());
                         System.out.println(line);
                         break;
 
@@ -51,7 +51,7 @@ public class Duke {
                         tasks.add(todoTask);
                         System.out.print(line);
                         System.out.println("     Got it. I've added this task:");
-                        System.out.println("      " + todoTask.toString());
+                        System.out.println("       " + todoTask.toString());
                         System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                         System.out.println(line);
                         break;
@@ -66,7 +66,7 @@ public class Duke {
                         tasks.add(newDeadLineTask);
                         System.out.print(line);
                         System.out.println("     Got it. I've added this task:");
-                        System.out.println("      " + newDeadLineTask.toString());
+                        System.out.println("       " + newDeadLineTask.toString());
                         System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                         System.out.println(line);
                         break;
@@ -81,7 +81,7 @@ public class Duke {
                         tasks.add(newEventTask);
                         System.out.print(line);
                         System.out.println("     Got it. I've added this task:");
-                        System.out.println("      " + newEventTask.toString());
+                        System.out.println("       " + newEventTask.toString());
                         System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                         System.out.println(line);
                         break;

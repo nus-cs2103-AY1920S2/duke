@@ -7,6 +7,6 @@ public class Event extends Task {
 
     @Override
     public String toString(){
-        return "[E]" + getStatusIcon() + description + "(at: " + dayAndDuration + ")";
+        return "[E]" + super.toString() + "(at: " + dayAndDuration + ")";
     }
 }
