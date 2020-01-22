@@ -14,19 +14,16 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(line);
 
+        Store lib = new Store();
         while(sn.hasNext()){
             String input = sn.nextLine();
-
-            if(input.equals("bye")){
-                System.out.println(line);
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(line);
+            if(input.equals("bye")) {
+                lib.bye();
+            } else if (input.equals("list")) {
+                lib.list();
             } else {
-                System.out.println(line);
-                System.out.println(input);
-                System.out.println(line);
+                lib.AddNewAction(input);
             }
-
 
         }
 
