@@ -1,4 +1,8 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     /**
@@ -12,8 +16,7 @@ public class Duke {
 
     public static void main(String[] args) {
         boolean isTrue = true;
-        Task[] list = new Task[100];
-        int currentTask = 0;
+        List<Task> list = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -38,30 +41,46 @@ public class Duke {
                         isTrue = false;
                         break;
                     case "list":
+                        if (list.isEmpty()) {
+                            System.out.println("\tList is empty.");
+                            break;
+                        }
                         System.out.println("\tHere are the tasks in your list:");
                         int taskNumber = 1;
-                        while (list[taskNumber - 1] != null) {
-                            System.out.println("\t" + taskNumber + ". " + list[taskNumber - 1]);
+                        for (Task task : list) {
+                            System.out.println("\t" + taskNumber + ". " + task);
                             taskNumber++;
                         }
                         break;
-                    case "done":
-                        int doneTaskNumber = Integer.parseInt(input[1]);
-                        if (doneTaskNumber > currentTask) {
+                    case "delete":
+                        int deletedTaskNumber = Integer.parseInt(input[1]);
+                        if (deletedTaskNumber > list.size()) {
                             throw new DukeException("☹ OOPS!!! There is no such task.");
                         }
-                        Task doneTask = list[doneTaskNumber - 1];
+                        Task deletedTask = list.get(deletedTaskNumber - 1);
+                        list.remove(deletedTaskNumber - 1);
+                        System.out.println("\tNoted. I've removed this task: ");
+                        System.out.println("\t\t" + deletedTask);
+                        Task.taskDeleted();
+                        Task.getTotalTasks();
+                        break;
+                    case "done":
+                        int doneTaskNumber = Integer.parseInt(input[1]);
+                        if (doneTaskNumber > list.size()) {
+                            throw new DukeException("☹ OOPS!!! There is no such task.");
+                        }
+                        Task doneTask = list.get(doneTaskNumber - 1);
                         doneTask.setDone();
                         System.out.println("\tNice! I've marked this task as done: ");
-                        System.out.println("\t\t" + list[Integer.parseInt(input[1]) - 1]);
+                        System.out.println("\t\t" + list.get(Integer.parseInt(input[1]) - 1));
                         break;
                     case "todo":
                         if (input.length < 2) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         String[] task = input[1].split("/");
-                        newTask = new Todo(input[1]);
-                        list[currentTask++] = newTask;
+                        list.add(new Todo(input[1]));
+                        Task.getTotalTasks();
                         break;
                     case "deadline":
                         if (input.length < 2) {
@@ -71,8 +90,8 @@ public class Duke {
                         if (by.length < 2) {
                             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
                         }
-                        newTask = new Deadline(by[0], by[1]);
-                        list[currentTask++] = newTask;
+                        list.add(new Deadline(by[0], by[1]));
+                        Task.getTotalTasks();
                         break;
                     case "event":
                         if (input.length < 2) {
@@ -82,8 +101,8 @@ public class Duke {
                         if (at.length < 2) {
                             throw new DukeException("☹ OOPS!!! The date of a event cannot be empty.");
                         }
-                        newTask = new Event(at[0], at[1]);
-                        list[currentTask++] = newTask;
+                        list.add(new Event(at[0], at[1]));
+                        Task.getTotalTasks();
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
