@@ -38,7 +38,14 @@ public class Duke {
                         task.setCheck();
                         System.out.println("Nice! I've marked this task as done:\n" + task.toString());
 
-                    } else if (action.equals("deadline")){
+                    } else if (action.equals("delete")) {
+                        int val = Integer.parseInt(stringArr[1]);
+                        Task t = list.get(val - 1);
+                        list.remove(val - 1);
+                        int numTask = list.size();
+                        System.out.println("Noted. I've removed this task:\n" + t.toString() + "\n" + "Now you have " + numTask + " tasks in the list.");
+                    }
+                    else if (action.equals("deadline")){
                         String[] splitTaskName = taskName.split("/"); // to obtain command when splitting
                         String[] splitTaskName2 = splitTaskName[1].split(" ", 2); // to obtain date when splitting
                         Deadline deadline = new Deadline(splitTaskName[0], splitTaskName2[1]);
