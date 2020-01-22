@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("====================================================================================");
         Scanner sc = new Scanner(System.in);
         String exitCommand = "bye";
-        ArrayList<String> listOfText = new ArrayList<String>();
+        ArrayList<Task> listOfText = new ArrayList<Task>();
         int counter = 1;
 
         while (sc.hasNext()) {
@@ -30,11 +30,20 @@ public class Duke {
                 }
                 continue;
             }
+            String[] splitStr = input.split("\\s+");
+            if (splitStr[0].toLowerCase().equals("done")) {
+                int index = Integer.parseInt(splitStr[1]) - 1;
+                Task currentTask = listOfText.get(index);
+                currentTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done and dusted:");
+                System.out.println(currentTask);
+                continue;
 
+            }
             System.out.println("added: " + input);
-            listOfText.add(counter + ". " + input);
+            Task t = new Task(counter + ". " + input);
+            listOfText.add(t);
             counter++;
-
 
 
         }
