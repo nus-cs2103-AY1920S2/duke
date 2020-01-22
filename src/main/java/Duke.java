@@ -116,7 +116,7 @@ public class Duke {
 
         }
         System.out.println(horizontalLine);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!!");
         System.out.println(horizontalLine);
     }
 
