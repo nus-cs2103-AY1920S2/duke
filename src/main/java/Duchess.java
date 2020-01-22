@@ -6,14 +6,14 @@ class Duchess {
     private ArrayList<Task> tasks;
     private Scanner scanner;
 
-    public Duchess() {
-        this.tasks = new ArrayList<Task>(100);
+    Duchess() {
+        this.tasks = new ArrayList<>(100);
         this.scanner = new Scanner(System.in);
     }
 
     private void awaitInput() {
         String input = scanner.nextLine();
-        ArrayList<String> commands = new ArrayList<String>(Arrays.asList(input.split("\\s", 2)));
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(input.split("\\s", 2)));
         switch (commands.get(0).toLowerCase()) {
         case "done":
             completeTask(commands.get(1));
@@ -31,12 +31,12 @@ class Duchess {
     }
 
     private void introduce() {
-        String logo = " _____             _                   \n"
-                + "|  __ \\           | |                  \n"
-                + "| |  | |_   _  ___| |__   ___  ___ ___ \n"
-                + "| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
-                + "| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
-                + "|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
+        String logo = "\t _____             _                   \n"
+                + "\t|  __ \\           | |                  \n"
+                + "\t| |  | |_   _  ___| |__   ___  ___ ___ \n"
+                + "\t| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
+                + "\t| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
+                + "\t|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
         System.out.println("\tHello from\n" + logo);
         System.out.println("\tMy name is Duchess, as you can see above.");
         System.out.println("\tHow may I help you?");
@@ -57,7 +57,7 @@ class Duchess {
         System.out.println("\tSighs... you never remember what you say, don't you.");
         System.out.println("\tYou said these:");
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i).getTaskInformation());
+            System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i));
         }
         awaitInput();
     }
@@ -80,7 +80,7 @@ class Duchess {
             Task taskToComplete = this.tasks.get(indexAsInt - 1);
             taskToComplete.toggleIsCompleted();
             System.out.println("\tOh? You actually completed something? Impressive...");
-            System.out.println("\t" + taskToComplete.getTaskInformation());
+            System.out.println("\t" + taskToComplete);
             awaitInput();
         }
     }
