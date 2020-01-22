@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
-        String[] events = new String[100];
-        int eventNumber = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
+        int taskNumber = 0;
 
         printLogo();
         printGreet();
@@ -13,10 +15,10 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                list(events, eventNumber);
+                list(tasks, taskNumber);
             } else {
-                eventNumber++;
-                add(input, events, eventNumber);
+                taskNumber++;
+                add(input, tasks);
             }
             input = reader.nextLine();
         }
@@ -56,18 +58,21 @@ public class Duke {
         printBreak();
     }
 
-    private static void list(String[] events, int eventNumber) {
+    private static void list(ArrayList<Task> tasks, int taskNumber) {
         printBreak();
-        for (int i = 1; i <= eventNumber; i++) {
-            System.out.println("    " + i + ". " + events[eventNumber - 1]);
+        System.out.println("    Here are the tasks in your list:");
+        for (int i = 1; i <= taskNumber; i++) {
+            Task currTask = tasks.get(i - 1);
+            System.out.println("    " + i + ".[" + currTask.getStatusIcon() + "] " +
+                    currTask.getDescription());
         }
         printBreak();
     }
 
-    private static void add(String input, String[] events, int eventNumber) {
+    private static void add(String input, ArrayList<Task> tasks) {
         printBreak();
         System.out.println("    added: " + input);
-        events[eventNumber - 1] = input;
+        tasks.add(new Task(input));
         printBreak();
     }
 }
