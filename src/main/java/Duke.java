@@ -30,7 +30,7 @@ public class Duke {
                     listStart++;
                 }
                 nextLine = sc.nextLine();
-                break;
+                continue;
             }
 
             // normal addition of task
