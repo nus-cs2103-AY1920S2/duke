@@ -30,6 +30,19 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(index + 1 + "." + tasks[index].printTask());
                 System.out.println("____________________________");
+            } else if (nextLine[0].equals("delete")) {
+                int index = Integer.parseInt(nextLine[1]) - 1;
+                Task toBeDeleted = tasks[index];
+                for(int i = index; i < tasks.length - 1; i++) {
+                    tasks[index] = tasks[index + 1];
+                }
+                size--;
+                System.out.println("____________________________");
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + toBeDeleted.printTask());
+                System.out.println("Now you have " + size + " tasks in the list.");
+                System.out.println("____________________________");
+
             } else {
                 if (nextLine[0].equals("todo")) {
                     if (nextLine.length == 1) {
