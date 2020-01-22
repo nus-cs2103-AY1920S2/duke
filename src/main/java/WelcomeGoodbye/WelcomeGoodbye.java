@@ -12,7 +12,7 @@ public class WelcomeGoodbye {
      */
     public void welcome() {
         printLine();
-        print("Hello, Driver.Duke here! :D \n"
+        print("Hello, Duke here! :D \n"
                 + "I'm feeling good and ready to go! "
                 + "What can I do for you?");
         printLine();

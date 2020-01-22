@@ -1,0 +1,8 @@
+hi
+todo good
+event ABC /at Sunday, 7-9pm
+deadline XYZ /by Friday 2359
+list
+done 3
+list
+bye
