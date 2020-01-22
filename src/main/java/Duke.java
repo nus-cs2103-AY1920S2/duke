@@ -32,9 +32,15 @@ public class Duke {
         int counter = 0;
 
         while(!command.equals("bye") ) {
-            if (!command.contains("todo") || !command.contains("deadline") ||
-                !command.contains("event") || !command.contains("done") ||
-                !command.contains("list")) {
+            if (command.contains("delete")) {
+                int num = Integer.parseInt(command.split(" ")[1]);
+                System.out.println("Noted. I've removed this task:\n " + store.get(num-1));
+                store.remove(num-1);
+                System.out.println("Now you have " + store.size() + " tasks in the list.");
+                command = scan.nextLine();
+            } else if (!command.contains("todo") && !command.contains("deadline") &&
+                !command.contains("event") && !command.contains("done") &&
+                !command.contains("list") && !command.contains("delete")) {
                 throw new DukeException( " ))-: OOPS!!! I'm sorry, but I don't know what that means :-(");
 
             } else if (command.contains("todo")) {
