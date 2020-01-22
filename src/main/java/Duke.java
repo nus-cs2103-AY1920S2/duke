@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Duke {
     static String separator = "____________________________________________________________";
-    static List<String> added = new ArrayList<>();
+    static List<Task> added = new ArrayList<>();
 
     /**
      * Accepts input for Duke to handle
@@ -13,22 +13,32 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(separator + "\nHello! I'm Duke\nWhat can I do for you?\n" + separator);
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = sc.next();
         while (!input.equals("bye")) {
             StringBuilder sb = new StringBuilder(separator + "\n");
             if (input.equals("list")) {
+                sb.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < added.size(); i++) {
+                    Task t = added.get(i);
                     sb.append(i + 1);
-                    sb.append(". " + added.get(i) + "\n");
+                    sb.append(".[" + t.getStatusIcon() + "] "  + t.description);
                 }
-
+            } else if (input.equals("done")) {
+                sb.append("Nice! I've marked this task as done:\n");
+                Task t = added.get(sc.nextInt());
+                t.markAsDone();
+                sb.append("[" + t.getStatusIcon() + "] " + t.description);
             } else {
-                added.add(input);
-                sb.append("added: " + input + "\n");
+                StringBuilder tmp = new StringBuilder(input);
+                if (sc.hasNextLine()) {
+                    tmp.append(sc.nextLine());
+                }
+                added.add(new Task(tmp.toString()));
+                sb.append("added: " + tmp);
             }
-            sb.append(separator + "\n");
+            sb.append("\n" + separator + "\n");
             System.out.println(sb);
-            input = sc.nextLine();
+            input = sc.next();
         }
 
         if (input.equals("bye")) {
