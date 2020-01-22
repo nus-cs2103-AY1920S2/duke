@@ -17,9 +17,9 @@ public class List{
 
     public void printCounter(){
         if(counter <= 1){
-            System.out.println("You have " + counter + " task on the agenda, sir");
+            System.out.println("You have " + counter + " task on the agenda");
         } else {
-            System.out.println("You have " + counter + " tasks on the agenda, sir");
+            System.out.println("You have " + counter + " tasks on the agenda");
         }
         
     }
