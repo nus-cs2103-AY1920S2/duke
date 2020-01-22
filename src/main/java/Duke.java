@@ -65,14 +65,14 @@ public class Duke {
     }
 
     private static void addDeadline(String input) {
-        String[] info = input.split("\\s+", 2)[1].split("\\s*\\\\by\\s*");
+        String[] info = input.split("\\s+", 2)[1].split("\\s*/by\\s*");
         Deadline deadline = new Deadline(info[0], info[1]);
         tasks.add(deadline);
         printTask(deadline);
     }
 
     private static void addEvent(String input) {
-        String[] info = input.split("\\s+", 2)[1].split("\\s*\\\\at\\s*");
+        String[] info = input.split("\\s+", 2)[1].split("\\s*/at\\s*");
         Event event = new Event(info[0], info[1]);
         tasks.add(event);
         printTask(event);
