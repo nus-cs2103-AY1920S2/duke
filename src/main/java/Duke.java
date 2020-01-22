@@ -56,6 +56,7 @@ public class Duke {
                         }
                         break;
                     case "todo":
+
                         try {
                             task = new Todo(command[1]);
                             addTask(task);
