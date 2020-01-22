@@ -10,7 +10,6 @@ public class Duke {
         System.out.println("____________________________________________________________\n Hello! I'm Duke\n What can I do for you?\n____________________________________________________________");
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
-
         while (flag) {
             String sentence = sc.nextLine();
             if (sentence.equalsIgnoreCase("bye")) {
