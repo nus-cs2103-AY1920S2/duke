@@ -12,17 +12,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            String[] inputs = input.split(" ");
-            if (inputs[0].equals("bye")) {
+            String[] inputs = input.split(" ", 2);
+            String command = inputs[0];
+            if (command.equals("bye")) {
                 sayGoodbye();
                 break;
-            } else if (inputs[0].equals("list")) {
+            } else if (command.equals("list")) {
                 displayList();
-            } else if (inputs[0].equals("done")) {
+            } else if (command.equals("done")) {
                 int taskNo = Integer.parseInt(inputs[1]);
                 markTaskAsDone(taskNo);
+            } else if (command.equals("deadline")){
+                addDeadline(inputs[1]);
+            } else if (command.equals("event")) {
+                addEvent(inputs[1]);
+            } else if (command.equals("todo")) {
+                addTodo(inputs[1]);
             } else {
-                addTask(input);
+                unrecognisedCommand();
             }
         }
     }
@@ -63,10 +70,10 @@ public class Duke {
         printLine();
     }
 
-    private static void addTask(String input) {
-        tasks.add(new Task(input));
+    private static void unrecognisedCommand() {
         printLine();
-        indent("Acknowledged. I have added: " + input);
+        indent("Unfortunately, I do not recognise what you have entered. ");
+        indent("Please try again.");
         printLine();
     }
 
@@ -79,4 +86,47 @@ public class Duke {
         indent(space + task.toString());
         printLine();
     }
+
+    private static void printTaskCount() {
+        int len = tasks.size();
+        if (len == 0 || len == 1) {
+            indent("As of now, you have " + len + " task in the list.");
+        } else {
+            indent("As of now, you have " + len + " tasks in the list.");
+        }
+    }
+
+    private static void addDeadline(String args) {
+        String[] descAndBy = args.split(" /by ");
+        Task deadline = new Deadline(descAndBy[0], descAndBy[1]);
+        tasks.add(deadline);
+        printLine();
+        indent("Acknowledged. I have added: ");
+        indent(space + deadline.toString());
+        printTaskCount();
+        printLine();
+    }
+
+    private static void addEvent(String args) {
+        String[] descAndAt = args.split(" /at ");
+        Task event = new Event(descAndAt[0], descAndAt[1]);
+        tasks.add(event);
+        printLine();
+        indent("Acknowledged. I have added: ");
+        indent(space + event.toString());
+        printTaskCount();
+        printLine();
+    }
+
+    private static void addTodo(String args) {
+        Task todo = new Todo(args);
+        tasks.add(todo);
+        printLine();
+        indent("Acknowledged. I have added: ");
+        indent(space + todo.toString());
+        printTaskCount();
+        printLine();
+    }
+
+
 }
