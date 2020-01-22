@@ -58,15 +58,33 @@ class Duke {
                     break;
                 case "done":
                     if (instructionByWord.length != 2) {
-                        throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
+                        throw new DukeException(FORMAT_CORRECTION
+                                + "\"done a_positive_integer_indicating_the_index_of_the_task_done\"");
                     }
                     try {
                         int index = Integer.parseInt(instructionByWord[1]) - 1;
-                        if (index >= list.size() || index < 1) {
+                        if (index >= list.size() || index < 0) {
                             throw new DukeException("Invalid index.\n" + getNumOfTasks(list)
                                     + " Please note that the index is one-based (begins with 1 instead of 0).");
                         } else {
                             markATaskDone(list.get(index));
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
+                    }
+                case "delete":
+                    if (instructionByWord.length != 2) {
+                        throw new DukeException(FORMAT_CORRECTION
+                                + "\"delete a_positive_integer_indicating_the_index_of_the_task_to_be_removed\"");
+                    }
+                    try {
+                        int index = Integer.parseInt(instructionByWord[1]) - 1;
+                        if (index >= list.size() || index < 0) {
+                            throw new DukeException("Invalid index.\n" + getNumOfTasks(list)
+                                    + " Please note that the index is one-based (begins with 1 instead of 0).");
+                        } else {
+                            deleteATask(list, index);
                         }
                         break;
                     } catch (NumberFormatException e) {
@@ -80,6 +98,7 @@ class Duke {
                 System.err.println(e.getMessage());
             }
         }
+        
         System.out.println("Goodbye. See you next time!");
     }
 
@@ -90,7 +109,7 @@ class Duke {
                 indexOfAt = i;
             }
         }
-        if (indexOfAt == -1 || indexOfAt == 1 ||indexOfAt == lengthOfArray) {
+        if (indexOfAt == -1 || indexOfAt == 1 || indexOfAt == lengthOfArray) {
             throw new DukeException(FORMAT_CORRECTION
                     + "\"event a_string_describing_the_task /at a_string_describing_the_time\"");
         }
@@ -137,6 +156,13 @@ class Duke {
         taskToBeCompleted.setDone();
         System.out.println("Noted, the following task is marked done:");
         System.out.println(taskToBeCompleted);
+    }
+
+    private static void deleteATask(List<Task> list, int index) {
+        Task t = list.remove(index);
+        System.out.println("Noted, the following task is removed from the list:");
+        System.out.println(t);
+        System.out.println(getNumOfTasks(list));
     }
 
     private static void printList(List<Task> list) {
