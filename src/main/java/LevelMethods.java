@@ -32,7 +32,7 @@ public class LevelMethods {
      * Greet the user
      */
     public void greetings() {
-        String intro = "Hello! I'm Grapie\n" +
+        String intro = "Hello! I'm Grapie \n" +
                 "What can I do for you?\n";
 
         formattingDivider(intro);
@@ -63,8 +63,6 @@ public class LevelMethods {
 
                 printAddingTask(todo);
             } else {
-                //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
-
                 throw new DukeExceptions("OOPS!!! The description of a todo cannot be empty.");
             }
 
@@ -84,8 +82,6 @@ public class LevelMethods {
                 }
 
             } else {
-                //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
-                System.out.println("here");
                 throw new DukeExceptions("OOPS!!! The description of a event cannot be empty.");
             }
 
@@ -102,22 +98,14 @@ public class LevelMethods {
                     //print
                     printAddingTask(deadline);
                 } else {
-                    //System.out.println("hie");
-                    //throw new DukeExceptions("OOPS!! Please format your Deadline correctly!!!");
                     throw new DukeExceptions("OOPS!!! Deadline is not created in correct format. Please use: deadline your_deadline /by your_time");
                 }
 
             } else {
-                //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
-
                 throw new DukeExceptions("OOPS!!! The description of a deadline cannot be empty.");
             }
         } else {
-            //correctFormat = false;
-            //formattingDivider("    Eh, tell me if it is todo, deadline or event please :(");
-
             throw new DukeExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
-
         }
 
 //        Task task = new Task(inputStr);
