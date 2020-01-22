@@ -11,7 +11,7 @@ public class Task {
         if (this.isCompleted) {
             return "[" + '\u2713' + "] " + this.description;
         } else {
-            return "[" + '\u274C' + "] " + this.description;
+            return "[" + '\u2718' + "] " + this.description;
         }
     }
 
