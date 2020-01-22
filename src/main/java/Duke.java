@@ -8,16 +8,12 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String logo2 = "_______  \n"
-                +      "|_   _|  ____    ___    "
-                +      "      \n"
-                +      "  | |    |  |   |   |  \\/\n"
-                +      "  |_|    |__|   |   |  /";
         //To run using gradle go and search in Help > Delegate Run > build tools > gradle
-        String logo3 = " _____    |   _" +
-                "     _| |_    |\n"
-                +      "|_____   _|  | |   |_   _|   |__\n"
-                +      "|_____  |_|  |_|     |_|     |  |";
+        String logo3 = " _____    |   _"
+                +                     "    _| |_   |\n"
+                +      "|_____   _|  | |  |_   _|  |__\n"
+                +      "|_____  |_|  |_|    |_|    |  |";
+
         System.out.println("" + logo3);
         System.out.println("Hello! My name is Edith. Tony Stark's Personal Assistant"+ "\n" + "What can I do for you?");
 
@@ -51,7 +47,7 @@ public class Duke {
                 int indexOfTaskDeleted = Integer.parseInt(helper[1]);
                 manager.deleteTask(indexOfTaskDeleted);
                 textEntered = fr.nextLine();
-            }else{ //nonsence input
+            }else{ //nonsense input
 
                 try{
                     manager.nonsenceInput();
