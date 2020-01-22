@@ -110,7 +110,6 @@ public class Duke {
                 command = sc.nextLine().trim();
             }
 
-            //command = sc.nextLine();
         }
 
         // exit
