@@ -15,7 +15,7 @@ public class Duke {
                 +      "|_____  |_|  |_|    |_|    |  |";
 
         System.out.println("" + logo3);
-        System.out.println("Hello! My name is Edith. Tony Stark's Personal Assistant"+ "\n" + "What can I do for you?");
+        System.out.println("Hello!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n" + "What can I do for you?");
 
         FastReader fr = new FastReader();
         String textEntered = fr.nextLine();
