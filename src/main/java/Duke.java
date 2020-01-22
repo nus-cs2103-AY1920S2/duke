@@ -21,7 +21,11 @@ public class Duke {
                 lib.bye();
             } else if (input.equals("list")) {
                 lib.list();
-            } else {
+            } else if(input.contains("done")) {
+                String[] splited = input.split(" ");
+                int index = Integer.parseInt(splited[1]);
+                lib.done(index);
+            }else {
                 lib.AddNewAction(input);
             }
 

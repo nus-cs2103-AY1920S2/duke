@@ -5,7 +5,7 @@ public class Store {
     String line = "____________________________________________________________";
     String cmd;
     Integer counter;
-    ArrayList<String> Storage;
+    ArrayList<Task> Storage;
 
     public Store(){
         counter = 1;
@@ -16,7 +16,8 @@ public class Store {
         System.out.println(line);
         System.out.println("added: " + cmd);
         System.out.println(line);
-        Storage.add(String.format("%d. ", counter) + cmd);
+        Task T = new Task(cmd, counter);
+        Storage.add(T);
         counter = counter + 1;
     }
     public void bye() {
@@ -27,9 +28,17 @@ public class Store {
     }
     public void list() {
         System.out.println(line);
-        for(String act:Storage) {
-            System.out.println(act);
+        for(Task act:Storage) {
+            System.out.println(String.format("%d.",act.index) + act.toString());
         }
+        System.out.println(line);
+    }
+    public void done(int index){
+        Task UpdateCurrAction = Storage.get(index-1);
+        UpdateCurrAction.isDone = true;
+        System.out.println(line);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(UpdateCurrAction.toString());
         System.out.println(line);
     }
 }
