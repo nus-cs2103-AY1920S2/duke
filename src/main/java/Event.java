@@ -1,7 +1,7 @@
 public class Event extends Task {
 
     private String time;
-    private final String eventLogo = "E";
+    protected final String eventLogo = "E";
 
     public Event(String taskName, String time) {
         super(taskName);

@@ -1,6 +1,6 @@
 public class Deadline extends Task{
 
-    private final String deadlineLogo = "D";
+    protected final String deadlineLogo = "D";
     private String by;
 
     public Deadline(String taskName, String by) {

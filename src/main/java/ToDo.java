@@ -1,5 +1,5 @@
 public class ToDo extends Task{
-    private final String toDoLogo = "T";
+    protected final String toDoLogo = "T";
 
     public ToDo(String taskName) {
         super(taskName);

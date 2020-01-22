@@ -1,7 +1,8 @@
 public enum CommandList {
     DEADLINE,
+    DELETE,
     DONE,
     EVENT,
-    TODO,
-    LIST;
+    LIST,
+    TODO;
 }

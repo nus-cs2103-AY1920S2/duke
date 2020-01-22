@@ -116,6 +116,21 @@ public class Duke {
                         replyMessage = customiseMessage((currentDeadline.toString()), listOfTask.size());
                         System.out.println(addBorder(replyMessage));
                         break;
+                    case DELETE:
+                        int deleteTaskNumber = Integer.parseInt(inputArr[1]) - 1;
+                        try {
+                            Task removedTask = listOfTask.remove(deleteTaskNumber);
+                            StringBuilder stringBuilder = new StringBuilder();
+                            stringBuilder.append("      Noted. I've removed this task:\n");
+                            stringBuilder.append(INDENT + "   " + removedTask.toString() + "\n");
+                            stringBuilder
+                                    .append(String
+                                            .format("      Now you have %d task(s) in the list.", listOfTask.size()));
+                            System.out.println(addBorder(stringBuilder.toString()));
+                        } catch (IndexOutOfBoundsException ex) {
+                            System.err.println(ex.getMessage());
+                        }
+                        break;
                     case DONE:
                         int taskNumber = Integer.parseInt(inputArr[1]) - 1;
                         try {
@@ -125,7 +140,7 @@ public class Duke {
                                     currentTask.getTask()));
                         } catch (IndexOutOfBoundsException exception) {
                             // do own class exception here
-                            System.out.println(exception.getMessage());
+                            System.err.println(exception.getMessage());
                         }
                         break;
                     case LIST:
