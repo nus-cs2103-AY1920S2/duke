@@ -3,7 +3,7 @@ public class TaskList {
     private static final int DEFAULT_MAX_TASKS = 100;
 
     /** Stores a list of tasks. */
-    private final String[] taskList;
+    private final Task[] taskList;
     /** Counts the number of tasks in the list. */
     private final int numTasks;
 
@@ -18,26 +18,52 @@ public class TaskList {
      * @param maxTasks the maximum number of tasks that can be stored.
      * */
     public TaskList(int maxTasks) {
-        this(new String[maxTasks], 0); // Check if will cause null references
+        this(new Task[maxTasks], 0); // Check if will cause null references
     }
 
-    private TaskList(String[] taskList, int numTasks) {
+    private TaskList(Task[] taskList, int numTasks) {
         this.taskList = taskList;
         this.numTasks = numTasks;
     }
 
     /**
+     * Returns the task at the specified position in the list.
+     *
+     * @param taskId the position of the task in the list, starting from #1.
+     * @return the task at the specified position in the list.
+     */
+    public Task get(int taskId) {
+        return taskList[taskId - 1];
+    }
+
+    /**
      * Adds a new tasks into the TaskList.
      *
-     * @param task a new task.
-     * */
-    public TaskList addTask(String task) {
-        String[] newList = new String[taskList.length];
+     * @param taskDescription a description for the new task.
+     * @return a copy of this TaskList with the newly added task.
+     */
+    public TaskList addTask(String taskDescription) {
+        Task[] newList = new Task[taskList.length];
 
         System.arraycopy(taskList, 0, newList, 0, numTasks);
-        newList[numTasks] = task;
+        newList[numTasks] = new Task(taskDescription);
 
         return new TaskList(newList, numTasks + 1);
+    }
+
+    /**
+     * Marks a task in the TaskList as done.
+     *
+     * @param taskId the id of the task in the list.
+     * @return a copy of this TaskList with the specified task marked as done.
+     */
+    public TaskList doneTask(int taskId) {
+        Task[] newList = new Task[taskList.length];
+
+        System.arraycopy(taskList, 0, newList, 0, numTasks);
+        newList[taskId - 1] = newList[taskId - 1].markDone();
+
+        return new TaskList(newList, numTasks);
     }
 
     @Override
@@ -45,7 +71,7 @@ public class TaskList {
         StringBuilder tasks = new StringBuilder();
 
         for (int i = 0; i < numTasks; i++) {
-            tasks.append(String.format("%2d. %s\n", i + 1, taskList[i]));
+            tasks.append(String.format("%2d.%s\n", i + 1, taskList[i]));
         }
 
         if (tasks.length() > 0) {
