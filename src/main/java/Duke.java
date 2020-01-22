@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,14 +32,25 @@ public class Duke {
         int counter = 0;
 
         while(!command.equals("bye") ) {
-            if (command.contains("todo")) {
-                String todo = command.substring(5);
-                Task taskDo = new Todo(todo);
-                store.add(taskDo);
-                System.out.println(gotIt);
-                System.out.println(taskDo);
-                System.out.println("Now you have " + store.size() + " tasks in the list.");
-                command = scan.nextLine();
+            if (!command.contains("todo") || !command.contains("deadline") ||
+                !command.contains("event") || !command.contains("done") ||
+                !command.contains("list")) {
+                throw new DukeException( " ))-: OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+            } else if (command.contains("todo")) {
+                //String todo = command.substring(5);
+                if (command.split(" ").length > 1 ) {
+                    String todo = command.substring(5);
+                    Task taskDo = new Todo(todo);
+                    store.add(taskDo);
+                    System.out.println(gotIt);
+                    System.out.println(taskDo);
+                    System.out.println("Now you have " + store.size() + " tasks in the list.");
+                    command = scan.nextLine();
+                } else {
+                    throw new DukeException( "))-: OOPS!!! The description of a todo cannot be empty. " );
+                }
+
             } else if (command.contains("deadline")) {
                 String by = command.split("/")[1].substring(3);
                 String description = command.split("/")[0].substring(9);
