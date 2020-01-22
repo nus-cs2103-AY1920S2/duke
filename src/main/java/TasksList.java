@@ -6,8 +6,17 @@ public class TasksList {
         return tasks[index];
     }
 
-    public void markDone(int num) {
-        int index = num - 1;
+    public void markDone(String done) {
+        if (done.length() <= 5) {
+            throw new DukeMissingDescriptionException();
+        }
+        String num = done.substring(5);
+        try {
+            Integer.valueOf(num);
+        } catch(NumberFormatException e) {
+            throw new DukeUnknownInputException();
+        }
+        int index = Integer.valueOf(num) - 1;
         tasks[index].markDone();
         System.out.println("____________________________________________________________");
         System.out.println("Nice! I've marked this task as done:\n" + tasks[index]);
@@ -15,8 +24,10 @@ public class TasksList {
     }
 
     public void addTodo(String todo) {
-        String description = todo.substring(5);
-        tasks[nextIndex] = new Todo(description);
+        if (todo.length() <= 5) {
+            throw new DukeMissingDescriptionException();
+        }
+        tasks[nextIndex] = new Todo(todo.substring(5));
         nextIndex++;
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:\n" + tasks[nextIndex-1]
@@ -25,8 +36,13 @@ public class TasksList {
     }
 
     public void addDeadline(String deadline) {
-        String temp = deadline.substring(9);
-        String[] splitted = temp.split(" /by ", 2);
+        if (deadline.length() <= 9) {
+            throw new DukeMissingDescriptionException();
+        }
+        String[] splitted = deadline.substring(9).split(" /by ", 2);
+        if (splitted.length < 2) {
+            throw new DukeUnknownInputException();
+        }
         tasks[nextIndex] = new Deadline(splitted[0], splitted[1]);
         nextIndex++;
         System.out.println("____________________________________________________________");
@@ -36,8 +52,13 @@ public class TasksList {
     }
 
     public void addEvent(String event) {
-        String temp = event.substring(6);
-        String[] splitted = temp.split(" /at ", 2);
+        if (event.length() <= 6) {
+            throw new DukeMissingDescriptionException();
+        }
+        String[] splitted = event.substring(6).split(" /at ", 2);
+        if (splitted.length < 2) {
+            throw new DukeUnknownInputException();
+        }
         tasks[nextIndex] = new Event(splitted[0], splitted[1]);
         nextIndex++;
         System.out.println("____________________________________________________________");
