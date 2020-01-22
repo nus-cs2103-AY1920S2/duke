@@ -1,20 +1,17 @@
 import java.util.Scanner;
 
 public class TaskHandler {
-
-
     public void handle(Boxer boxer) {
         Scanner scanner = new Scanner(System.in);
+        ExceptionHandler exceptionHandler = new ExceptionHandler();
         boolean loop = true;
         do {
             String input = scanner.nextLine();
             String[] inputSplit = input.split(" ", 2);
 
-            /*
-            At this moment switch block cannot catch invalid cases
-            eg "done work" will be treated as done block rather than default (add)
-             */
             try {
+                exceptionHandler.checkEmptyField(inputSplit, inputSplit[0]);
+
                 switch (inputSplit[0]) {
                     case "todo":
                         boxer.todo(inputSplit[1]);
@@ -41,8 +38,8 @@ public class TaskHandler {
                         Boxer.print("Uhh... You're gonna have to say that again, Red.");
                         break;
                 }
-            } catch(Exception e) {
-
+            } catch(EmptyFieldException ex) {
+                System.err.println(ex);
             }
         } while (loop);
     }
