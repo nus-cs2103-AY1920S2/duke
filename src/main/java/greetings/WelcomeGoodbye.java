@@ -1,4 +1,4 @@
-package WelcomeGoodbye;
+package greetings;
 
 public class WelcomeGoodbye {
 

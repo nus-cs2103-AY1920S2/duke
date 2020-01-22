@@ -108,7 +108,7 @@ Let's implement the `MainWindow` controller class that we specified in `MainWind
 
 **MainWindow.java**
 ```java
-import Driver.Duke;import javafx.fxml.FXML;
+import driver.Duke;import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;

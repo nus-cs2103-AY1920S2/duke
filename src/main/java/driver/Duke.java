@@ -1,7 +1,7 @@
-package Driver;
+package driver;
 
-import Utilities.TaskHandler;
-import WelcomeGoodbye.WelcomeGoodbye;
+import utilities.TaskHandler;
+import greetings.WelcomeGoodbye;
 
 public class Duke {
 

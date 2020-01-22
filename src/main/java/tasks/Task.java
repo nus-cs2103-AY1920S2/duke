@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 public abstract class Task {
 

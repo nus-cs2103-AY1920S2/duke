@@ -73,7 +73,7 @@ Next, we create another Java class, `Launcher`, as an entry point to our applica
 The `Launcher` class is reproduced below in its entirety.
 
 ```java
-import Driver.Duke;import javafx.application.Application;
+import driver.Duke;import javafx.application.Application;
 
 /**
  * A launcher class to workaround classpath issues.

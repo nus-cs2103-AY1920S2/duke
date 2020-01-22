@@ -1,9 +1,9 @@
-package Utilities;
+package utilities;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 
 import java.util.Scanner;
 import java.util.ArrayList;
