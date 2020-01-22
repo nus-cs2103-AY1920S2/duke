@@ -2,7 +2,8 @@ import java.util.*;
 
 public class Duke {
     public static final String line = "    ____________________________________________________________";
-    static ArrayList<Task> newList = new ArrayList<>();
+    static Task[] tasks = new Task[100];
+    public static int totalTasks = 0;
 
     public static String hello() {
         String s1 = "     hello! i'm dUKE!";
@@ -11,14 +12,14 @@ public class Duke {
     }
 
     public static String list() {
-        String listContent = line + "\n";
-        for (int i = 1; i <= newList.size(); i++) {
-            Task curTask = newList.get(i-1);
-            listContent += "     " + i + ".[" + curTask.getStatusIcon()
-                                + "] " + newList.get(i-1) + "\n";
+        StringBuilder listContent = new StringBuilder(line + "\n");
+        listContent.append("     Here are the tasks in your list:" + "\n");
+        for (int i = 1; i <= totalTasks; i++) {
+            Task curTask = tasks[i-1];
+            listContent.append("     ").append(i).append(".").append(curTask.toString()).append("\n");
         }
-        listContent += line + "\n";
-        return listContent;
+        listContent.append(line + "\n");
+        return listContent.toString();
     }
 
     public static String blah() {
@@ -26,7 +27,7 @@ public class Duke {
     }
 
     public static String bye() {
-        return line + "\n" + "     bye see you again（ｉДｉ）" + "\n" + line + "\n";
+        return line + "\n" + "     Bye see you again（ｉДｉ）" + "\n" + line + "\n";
     }
 
 
@@ -52,17 +53,27 @@ public class Duke {
             } else if (input.equals("bye")) {
                 System.out.println(bye());
                 break;
-            } else if (input.length() > 5) {
+            } else if (input.substring(0,4).equals("done")) {
                 int index = Integer.parseInt(input.substring(5)) - 1;
-                Task comTask = newList.get(index);
+                Task comTask = tasks[index];
                 comTask.markAsDone();
-                System.out.println(line + "\n" + "     wow you finally completed something: " + "\n"
-                            + "      [" + comTask.getStatusIcon() + "] " + comTask.toString()
-                            + "\n" + line + "\n");
+                System.out.println(line + "\n" + "     Wow you finally completed something: " + "\n"
+                            + "       " + comTask.toString() + "\n" + line + "\n");
             } else {
-                System.out.println(line + "\n" + "     adding into list: " + input+ "\n" + line + "\n");
-                Task t = new Task(input);
-                newList.add(t);
+                String task = line + "\n" + "     Got it! i've added this task!:" + "\n";
+                if (input.contains("/by")) {
+                    String[] temp = input.split(" /by ");
+                    tasks[totalTasks] = new Deadline(temp[0].substring(9), temp[1]);
+                } else if (input.contains(" /at")) {
+                    String[] temp = input.split(" /at ");
+                    tasks[totalTasks] = new Event(temp[0].substring(6), temp[1]);
+                } else { //todoTask
+                    tasks[totalTasks] = new Todo(input.substring(5));
+                }
+                totalTasks++;
+                task += "       " + tasks[totalTasks-1] + "\n";
+                task += "     Now you have " + totalTasks + " tasks in the list.";
+                System.out.println(task);
             }
         }
 
