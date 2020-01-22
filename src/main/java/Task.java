@@ -1,14 +1,14 @@
 public class Task {
-    private String content;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
-    public Task(String content, boolean isDone) {
-        this.content = content;
+    public Task(String description, boolean isDone) {
+        this.description = description;
         this.isDone = isDone;
     }
 
-    public String getContent() {
-        return this.content;
+    public String getDescription() {
+        return this.description;
     }
 
     public String getIsDone() {
@@ -21,5 +21,17 @@ public class Task {
 
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        if (this.isDone) {
+            str += "[\u2713] ";
+        } else {
+            str += "[\u2718] ";
+        }
+        str += this.description;
+        return str;
     }
 }

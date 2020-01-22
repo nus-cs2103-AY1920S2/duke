@@ -3,55 +3,55 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! :) I'm Duke.\n" +
-                "     How can I help you today?\n" +
-                "    ____________________________________________________________");
-
+        printIntro();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> lst = new ArrayList<>();
+        TaskList taskList = new TaskList();
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] split = input.split(" ");
+            String command = split[0];
 
             if (input.compareTo("bye") != 0) {
                 if (input.compareTo("list") == 0) {
-                    printList(lst);
-                } else if (split[0].compareTo("done") == 0) {
-                    Task currentTask = lst.get(Integer.parseInt(split[1]) - 1);
-                    currentTask.setIsDone(true);
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Good job, you completed a task!");
-                    System.out.println("     [\u2713] " + currentTask.getContent());
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(taskList.toString());
+                } else if (command.compareTo("done") == 0) {
+                    taskList.doTask(Integer.parseInt(split[1]) - 1);
+                } else if (command.compareTo("todo") == 0) {
+                    String description = input.substring(input.indexOf(" ") + 1);
+                    Todo todo = new Todo(description, false);
+                    taskList.addTask(todo);
+                } else if (command.compareTo("event") == 0) {
+                    String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+                    String time = input.substring(input.indexOf("/") + 4);
+                    Event event = new Event(description, false, time);
+                    taskList.addTask(event);
+                } else if (command.compareTo("deadline") == 0) {
+                    String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+                    String time = input.substring(input.indexOf("/") + 4);
+                    Deadline deadline = new Deadline(description, false, time);
+                    taskList.addTask(deadline);
                 } else {
-                    Task task = new Task(input, false);
-                    lst.add(task);
-                    System.out.println("    ____________________________________________________________");
-                    System.out.println("     Added: " + task.getContent());
-                    System.out.println("    ____________________________________________________________");
+                    printLines("Sorry, invalid command. Try again with the following:\n     todo, deadline, event");
                 }
             } else {
-                System.out.println("    ____________________________________________________________\n"
-                        + "     Goodbye. See you again soon!\n"
-                        + "    ____________________________________________________________");
+                printLines("Goodbye. See you again soon!");
                 break;
             }
         }
     }
 
-    public static void printList(ArrayList<Task> lst) {
+    public static void printIntro() {
+        String intro = "    ____________________________________________________________\n" +
+                "     Hello! :) I'm Duke.\n" +
+                "     How can I help you today?\n" +
+                "    ____________________________________________________________";
+        System.out.println(intro);
+    }
+
+    public static void printLines(String content) {
         System.out.println("    ____________________________________________________________");
-        if (lst.isEmpty()) {
-            System.out.println("     Sorry, your list is currently empty!");
-        }
-        for (int i = 0; i < lst.size(); i++) {
-            Task task = lst.get(i);
-            String str = "     " + (i+1) + ".";
-            str += task.getIsDone() + task.getContent();
-            System.out.println(str);
-        }
+        System.out.println("     " + content);
         System.out.println("    ____________________________________________________________");
     }
 }
