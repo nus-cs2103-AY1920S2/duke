@@ -9,9 +9,8 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
         while (true) {
-            input = sc.next();
+            String input = sc.next();
             if (input.equals("bye")) {
                 printBye();
                 break;
@@ -24,7 +23,6 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + input);
         System.out.println("    ____________________________________________________________");
-
     }
 
     public static void printBye() {
