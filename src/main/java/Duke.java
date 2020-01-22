@@ -43,13 +43,40 @@ public class Duke {
                     // Search for a command
                     String[] comArs = line.split("\\s", 2);
                     if (comArs[0].equals("done")) {
+                        if (comArs.length == 1) {
+                            throw new DEIndex("done");
+                        }
+
                         int index = Integer.parseInt(comArs[1]) - 1;
+                        if (index > lst.size() - 1) {
+                            throw new DEIndex("done");
+                        }
+
                         lst.get(index).markDone();
                         String done = borderDesign
                                 + "     Nice! I've marked this task as done: \n"
                                 + "       " + lst.get(index) + "\n"
                                 + borderDesign;
                         System.out.println(done);
+
+                    } else if (comArs[0].equals("delete")) {
+                        if (comArs.length == 1) {
+                            throw new DEIndex("delete");
+                        }
+
+                        int index = Integer.parseInt(comArs[1]) - 1;
+                        if (index > lst.size() - 1) {
+                            throw new DEIndex("delete");
+                        }
+
+                        Task t = lst.get(index);
+                        lst.remove(index);
+                        String del = borderDesign
+                                + "     Noted. I've removed this task: \n"
+                                + "       " + t + "\n"
+                                + "     Now you have " + lst.size() + " tasks in the list.\n"
+                                + borderDesign;
+                        System.out.println(del);
 
                     } else { // add a task
                         Task t = new Task("");
@@ -91,15 +118,11 @@ public class Duke {
                         }
 
                         lst.add(t);
-                        String grammar = "tasks";
-                        if (first) {
-                            grammar = "task";
-                            first = false;
-                        }
+
                         String tnew = borderDesign
                                 + "     Got it. I've added this task:\n"
                                 + "       " + t + "\n"
-                                + "     Now you have " + lst.size() + " " + grammar + " in the list.\n"
+                                + "     Now you have " + lst.size() + " tasks in the list.\n"
                                 + borderDesign;
                         System.out.println(tnew);
                     }
