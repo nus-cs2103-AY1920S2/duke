@@ -15,34 +15,53 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                printBye();
-                break;
-            } else if (input.equals("list")) {
-                printList(list);
-            } else if (input.contains("done")) {
-                String[] inputArr = input.split(" ");
-                int num = Integer.parseInt(inputArr[1]);
-                doneAction(list, num);
-            } else if (input.contains("todo")) {
-                String name = input.substring(5);
-                Task todo = new ToDos(name);
-                addToList(todo , list);
-            } else if (input.contains("deadline")) {
-                int index = input.indexOf("/");
-                String by = input.substring(index + 1);
-                String name = input.substring(9, index);
-                Task deadline = new Deadline(name, by);
-                addToList(deadline, list);
-            } else if (input.contains("event")) {
-                int index = input.indexOf("/");
-                String by = input.substring(index + 1);
-                String name = input.substring(6, index);
-                Task event = new Event(name, by);
-                addToList(event, list);
+            try {
+                if (input.equals("bye")) {
+                    printBye();
+                    break;
+                } else if (input.equals("list")) {
+                    printList(list);
+                } else if (input.contains("done")) {
+                    String[] inputArr = input.split(" ");
+                    int num = Integer.parseInt(inputArr[1]);
+                    doneAction(list, num);
+                } else if (input.contains("todo")) {
+                    if (input.split(" ").length == 1) {
+                        throw new DukeException("Sorry! Description of todo cannot be empty");
+                    } else {
+                        String name = input.substring(5);
+                        Task todo = new ToDos(name);
+                        addToList(todo, list);
+                    }
+                } else if (input.contains("deadline")) {
+                    if (input.split(" ").length == 1) {
+                        throw new DukeException("Sorry! Description of deadline cannot be empty");
+                    } else {
+                        int index = input.indexOf("/");
+                        String by = input.substring(index + 1);
+                        String name = input.substring(9, index);
+                        Task deadline = new Deadline(name, by);
+                        addToList(deadline, list);
+                    }
+                } else if (input.contains("event")) {
+                    if (input.split(" ").length == 1) {
+                        throw new DukeException("Sorry! Description of event cannot be empty");
+                    } else {
+                        int index = input.indexOf("/");
+                        String by = input.substring(index + 1);
+                        String name = input.substring(6, index);
+                        Task event = new Event(name, by);
+                        addToList(event, list);
+                    }
+                } else {
+                    throw new DukeException("Sorry, I dont know what that means");
+                }
+            } catch (DukeException e){
+                System.out.println(e);
             }
         }
     }
+
 
     public static void addToList(Task task, ArrayList<Task> list) {
         list.add(task);
