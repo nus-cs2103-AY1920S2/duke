@@ -85,6 +85,7 @@ public class Duke {
                 Task currTask = lst.get(getNumber - 1);
                 currTask.setDone(true);
                 System.out.println(dukeFormat("Sure I will mark this task as done.\n" + indent + currTask));
+                break;
 
             } else {
                 System.out.println(dukeFormat("Invalid input"));
