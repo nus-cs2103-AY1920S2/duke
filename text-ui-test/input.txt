@@ -1,3 +1,4 @@
+done 1
 todo borrow book
 list
 deadline return book /by Sunday
@@ -9,3 +10,5 @@ deadline return book /at Sunday
 event return book /by Sunday
 event  /by Sunday
 event  asdf /at 
+delete 1
+delete 4

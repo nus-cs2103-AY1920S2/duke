@@ -7,6 +7,11 @@ Hello from
 
 How may duke serve the master today?
 
+done 1
+    ____________________________________________________________
+     WARNING!! Task list is empty!
+    ____________________________________________________________
+
 todo borrow book
     ____________________________________________________________
      Got it. I've added this task: 
@@ -74,5 +79,17 @@ event  /by Sunday
 event  asdf /at 
     ____________________________________________________________
      WARNING!! Please provide a time
+    ____________________________________________________________
+
+delete 1
+    ____________________________________________________________
+     Noted. I've removed this task:
+       [T][N] borrow book
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+delete 4
+    ____________________________________________________________
+     Please choose an index that is between 1 and 2 (inclusive)
     ____________________________________________________________
 
