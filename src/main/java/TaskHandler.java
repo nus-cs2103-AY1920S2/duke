@@ -23,51 +23,65 @@ public class TaskHandler {
 
         while (io.hasNextLine()) {
 
-            // obtain String command and split it to find the intention of the user (first word)
-            String command = io.nextLine();
-            String[] commandWords = command.split("\\s");
+            try {
+                // obtain String command and split it to find the intention of the user (first word)
+                String command = io.nextLine();
+                String[] commandWords = command.split("\\s");
 
-            switch (commandWords[0]) {
+                switch (commandWords[0]) {
 
-            case "bye":
-                return;
+                    case "bye":
+                        return;
 
-            case "list":
-                printAllTasks();
-                break;
+                    case "list":
+                        printAllTasks();
+                        break;
 
-            case "done":
-                // user inputs will be "done _____"
-                // Take only the very next token which must be an integer
-                if (commandWords.length > 1) {
-                    // this is a valid command
-                    if (Integer.valueOf(commandWords[1]) <= allTasks.size()) {
-                        // this valid command has a valid number
-                        Task currentTaskDone = allTasks.get(Integer.valueOf(commandWords[1]) - 1);
-                        doTask(currentTaskDone);
-                    } else {
-                        printUnsure();
-                    }
-                } else {
-                    printAlreadyDone();
+                    case "done":
+                        // user inputs will be "done _____"
+                        // Take only the very next token which must be an integer
+                        if (commandWords.length > 1) {
+                            // this is a valid command
+                            if (Integer.valueOf(commandWords[1]) <= allTasks.size()) {
+                                // this valid command has a valid number
+                                Task currentTaskDone = allTasks.get(Integer.valueOf(commandWords[1]) - 1);
+                                doTask(currentTaskDone);
+                            } else {
+                                throw new InputUnclearException("");
+                            }
+                        } else {
+                            throw new AlreadyDoneException("");
+                        }
+                        break;
+
+                    case "todo":
+                        addNewToDo(command);
+                        break;
+
+                    case "deadline":
+                        addNewDeadline(command);
+                        break;
+
+                    case "event":
+                        addNewEvent(command);
+                        break;
+
+                    default:
+                        throw new InputUnclearException("");
+
                 }
-                break;
-
-            case "todo":
-                addNewToDo(command);
-                break;
-
-            case "deadline":
-                addNewDeadline(command);
-                break;
-
-            case "event":
-                addNewEvent(command);
-                break;
-
-            default:
+            } catch (InputUnclearException iue) {
                 printUnsure();
-
+            } catch (AlreadyDoneException ade) {
+                printAlreadyDone();
+            } catch (ToDoException tde) {
+                printToDoExceptionMessage();
+            } catch (EventException ee) {
+                printEventExceptionMessage();
+            } catch (DeadlineException de) {
+                printDeadlineExceptionMessage();
+            } catch (EmptyTaskListException etle) {
+                printEmptyTaskListExceptionMessage();
             }
 
         }
@@ -77,8 +91,12 @@ public class TaskHandler {
      * Adds a new Task for user to do
      *
      * @param command basic raw information entered to create the Task
+     * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs
      */
-    private final void addNewToDo(String command) {
+    private final void addNewToDo(String command) throws ToDoException {
+        if (command.length() < 6) {
+            throw new ToDoException("");
+        }
         String toDoCommand = command.substring("todo".length() + 1);
         addTaskToStored(new ToDo(toDoCommand));
     }
@@ -87,24 +105,34 @@ public class TaskHandler {
      * Adds a new Deadline Task
      *
      * @param command basic raw information entered to create the Task
+     * @throws DeadlineException Exception arising from creating Deadline Task due to wrong inputs
      */
-    private final void addNewDeadline(String command) {
-        // need to identify deadline limit
-        String deadlineLimit = getRestriction("/by", command);
-        String deadlineCommand = getCommand("deadline", "/by", command);
-        addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
+    private final void addNewDeadline(String command) throws DeadlineException {
+        try {
+            // need to identify deadline limit
+            String deadlineLimit = getRestriction("/by", command);
+            String deadlineCommand = getCommand("deadline", "/by", command);
+            addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
+        } catch (Exception e) {
+            throw new DeadlineException("");
+        }
     }
 
     /**
      * Adds a new Event Task
      *
      * @param command basic raw information entered to create the Task
+     * @throws EventException Exception arising from Event Task creation due to wrong inputs
      */
-    private final void addNewEvent(String command) {
-        // need to identify event time
-        String eventTime = getRestriction("/at", command);
-        String eventCommand = getCommand("event", "/at", command);
-        addTaskToStored(new Event(eventCommand, eventTime));
+    private final void addNewEvent(String command) throws EventException {
+        try {
+            // need to identify event time
+            String eventTime = getRestriction("/at", command);
+            String eventCommand = getCommand("event", "/at", command);
+            addTaskToStored(new Event(eventCommand, eventTime));
+        } catch (Exception e) {
+            throw new EventException("");
+        }
     }
 
     /**
@@ -165,13 +193,48 @@ public class TaskHandler {
     }
 
     /**
+     * Prints issues arising from creating to-do tasks creation prompting user to re-enter input
+     */
+    private final void printToDoExceptionMessage() {
+        printLine();
+        print("ToDo tasks should be named/specified, Silly! XD\nPlease try again!");
+        printLine();
+    }
+
+    /**
+     * Prints issues arising from creating Event tasks creation prompting user to re-enter input
+     */
+    private final void printEventExceptionMessage() {
+        printLine();
+        print("Event tasks should be named/specified with time duration, Blur! XD\nPlease try again!");
+        printLine();
+    }
+
+    /**
+     * Prints issues arising from creating Deadline tasks creation prompting user to re-enter input
+     */
+    private final void printDeadlineExceptionMessage() {
+        printLine();
+        print("Deadline tasks should be named/specified with the deadline, Funny! XD\nPlease try again!");
+        printLine();
+    }
+    /**
+     * Prints issues arising from trying to list down Tasks when there is no available Task to do
+     */
+    private final void printEmptyTaskListExceptionMessage() {
+        printLine();
+        print("No tasks! You're good to go!\nPlease exit using 'bye' command. :)");
+        printLine();
+    }
+
+
+    /**
      * Prints all tasks, their number order, and their completion for list command
      */
-    private final void printAllTasks() {
+    private final void printAllTasks() throws EmptyTaskListException {
         printLine();
         if (allTasks.isEmpty()) {
-            print("No tasks! You're good to go!\n"
-                + "Please exit using 'bye' command. :)");
+            throw new EmptyTaskListException("");
         }
         for (int i = 0; i < allTasks.size(); i++) {
             printTaskFromStored(i);
@@ -221,7 +284,7 @@ public class TaskHandler {
      */
     private final void printAlreadyDone() {
         printLine();
-        print("Seems like you are kinda tired. Please remember to define a Task Number!"
+        print("Seems like you are kinda tired. Please remember to define a Task Number!\n"
                 + "Or, you could also take a break. :)");
         printLine();
     }
