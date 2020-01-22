@@ -19,6 +19,12 @@ public class Duke {
         }
     }
 
+    private void deleteTask(int i) {
+        System.out.printf("Your burden has been lifted, removed: \n\t %s\n", storage.get(i));
+        storage.remove(i);
+        System.out.printf("You now have %d tasks in your list\n", storage.size());
+    }
+
     private void completeTask(int i) {
         try {
             storage.get(i).setDone();
@@ -47,6 +53,10 @@ public class Duke {
                 case "done":
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     this.completeTask(index);
+                    break;
+                case "delete":
+                    int ind = Integer.parseInt(inputArray[1]) - 1;
+                    this.deleteTask(ind);
                     break;
                 default:
                     try {
