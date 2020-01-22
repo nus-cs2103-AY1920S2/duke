@@ -28,12 +28,32 @@ public class Duke {
     public static void runDuke() {
         printGreeting();
 
+        String[] tasks = new String[100];
+        int tasksIdx = 0;
+
+        // commands: list, bye
+        // any other input will be added to tasks
         String input = getUserInput();
         while (!input.equals("bye")) {
-            System.out.println(input + "\n");
+            if (input.equals("list")) {
+                printList(tasks, tasksIdx - 1);
+            } else {
+                tasks[tasksIdx] = input;
+                tasksIdx++;
+
+                System.out.format("added: %s%n%n", input);
+            }
+
             input = getUserInput();
         }
 
         System.out.println("Have a nice day!");
+    }
+
+    public static void printList(String[] list, int lastIdx) {
+        for (int i = 0; i <= lastIdx; i++) {
+            System.out.format("%d. %s%n", i + 1, list[i]);
+        }
+        System.out.println();
     }
 }
