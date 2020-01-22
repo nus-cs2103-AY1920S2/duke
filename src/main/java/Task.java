@@ -2,7 +2,7 @@ public class Task {
     public boolean doneStatus;
     public String taskName;
 
-    Task(String taskName) {
+    public Task(String taskName) {
         this.taskName = taskName;
         this.doneStatus = false;
     }
@@ -15,9 +15,9 @@ public class Task {
     public String toString() {
         String symbol;
         if (doneStatus) {
-            symbol = "complete";
+            symbol = "  complete  ";
         } else {
-            symbol = "incomplete";
+            symbol = " incomplete ";
         }
         return "[" + symbol + "] " + taskName;
     }

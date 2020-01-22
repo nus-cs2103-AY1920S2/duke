@@ -24,18 +24,33 @@ public class Duke {
                 String[] inputArr = input.split(" ");
                 int num = Integer.parseInt(inputArr[1]);
                 doneAction(list, num);
-            } else {
-                addToList(input, list);
+            } else if (input.contains("todo")) {
+                String name = input.substring(5);
+                Task todo = new ToDos(name);
+                addToList(todo , list);
+            } else if (input.contains("deadline")) {
+                int index = input.indexOf("/");
+                String by = input.substring(index + 1);
+                String name = input.substring(9, index);
+                Task deadline = new Deadline(name, by);
+                addToList(deadline, list);
+            } else if (input.contains("event")) {
+                int index = input.indexOf("/");
+                String by = input.substring(index + 1);
+                String name = input.substring(6, index);
+                Task event = new Event(name, by);
+                addToList(event, list);
             }
         }
     }
 
-    public static void addToList(String input, ArrayList<Task> list) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    added: " + input);
-        System.out.println("    ____________________________________________________________");
-        Task task = new Task(input);
+    public static void addToList(Task task, ArrayList<Task> list) {
         list.add(task);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + task);
+        System.out.println("    Now you have " + list.size() + " tasks in the list");
+        System.out.println("    ____________________________________________________________");
     }
 
     public static void printList(ArrayList<Task> list) {
