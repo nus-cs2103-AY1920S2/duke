@@ -1,7 +1,8 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
 
+    static ArrayList<String> tasks = new ArrayList<String>();
     static Scanner sc = new Scanner(System.in);
 
     static void printIntro() {
@@ -15,7 +16,7 @@ public class Duke {
     static void printReply(String input) {
         System.out.print(
                 "____________________________________________________________\n" +
-                input +
+                "added: " + input +
                 "\n____________________________________________________________\n");
     }
 
@@ -25,11 +26,25 @@ public class Duke {
                         "Bye. Hope to see you again soon!" +
                         "\n____________________________________________________________\n");
     }
+
+    static void printList(ArrayList<String> tasks){
+        System.out.print("____________________________________________________________\n");
+        for (int i =  0; i < tasks.size(); i++){
+            System.out.println(Integer.toString(i + 1) + ": " + tasks.get(i));
+        }
+        System.out.print("____________________________________________________________\n");
+    }
+
     public static void main(String[] args) {
         printIntro();
         String input = sc.nextLine();
         while (!input.toLowerCase().equals("bye")){
-            printReply(input);
+            if (input.toLowerCase().equals("list")){
+                printList(tasks);
+            } else {
+                tasks.add(input);
+                printReply(input);
+            }
             input = sc.nextLine();
         }
         printGoodbye();
