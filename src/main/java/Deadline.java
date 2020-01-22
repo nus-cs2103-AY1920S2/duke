@@ -1,18 +1,10 @@
 public class Deadline extends Task {
 
-    protected String by;
+    protected String by = null;
 
     public Deadline(String description, String by) {
         super(description);
-        try {
-            String[] time = (by.split(" ", 2));
-            if (time.length < 2) {
-                throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.");
-            }
-            this.by = time[1];
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+        this.by = by;
     }
 
     @Override

@@ -27,12 +27,15 @@ public class Duke {
                         }
                     }
 
-                } else if (command.startsWith("done ")) {
+                } else if (command.startsWith("done")) {
                     String[] arr = command.split(" ");
                     if (arr.length < 2) {
                         throw new DukeException("The task to be marked as done must be specified");
                     }
                     int i = Integer.valueOf(arr[1]) - 1;
+                    if (i >= newList.size()) {
+                        throw new DukeException("Task " + arr[1] + " does not exist");
+                    }
                     Task task = newList.get(i);
                     newList.get(i).markAsDone();
                     System.out.printf("Nice! I've marked this task as done: \n%s\n",
@@ -53,14 +56,23 @@ public class Duke {
                         } if (arr.length < 2) {
                             throw new DukeException("The time of a deadline cannot be empty.");
                         }
-                        newList.add(new Deadline(description[1], arr[1]));
+                        String[] time = (arr[1].split(" ", 2));
+                        if (time.length < 2) {
+                            throw new DukeException("The time of a deadline cannot be empty.");
+                        }
+                        newList.add(new Deadline(description[1], time[1]));
+
                     } else if (command.startsWith("event")) {
                         if (description.length < 2) {
                             throw new DukeException("The description of an event cannot be empty.");
                         } if (arr.length < 2) {
-                            throw new DukeException("The time of a deadline cannot be empty.");
+                            throw new DukeException("The time of an event cannot be empty.");
                         }
-                        newList.add(new Event(description[1], arr[1]));
+                        String[] time = (arr[1].split(" ", 2));
+                        if (time.length < 2) {
+                            throw new DukeException("The time of an event cannot be empty.");
+                        }
+                        newList.add(new Event(description[1], time[1]));
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
