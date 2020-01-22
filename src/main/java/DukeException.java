@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class DukeException extends Exception {
 
-public class DukeException {
+    public DukeException(String message) {
+        super(message);
+    }
+
 }
