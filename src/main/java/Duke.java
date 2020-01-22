@@ -43,14 +43,18 @@ public class Duke {
                 }
                 textEntered = fr.nextLine();
             }else if (textEntered.contains("delete")) {
-                String[] helper = textEntered.split(" ");
-                int indexOfTaskDeleted = Integer.parseInt(helper[1]);
-                manager.deleteTask(indexOfTaskDeleted);
+                try {
+                    String[] helper = textEntered.split(" ");
+                    int indexOfTaskDeleted = Integer.parseInt(helper[1]);
+                    manager.deleteTask(indexOfTaskDeleted);
+                }catch (DukeException ex){
+                    System.out.println(ex);
+                }
                 textEntered = fr.nextLine();
             }else{ //nonsense input
 
                 try{
-                    manager.nonsenceInput();
+                    manager.nonsenseInput();
 
                 }catch (DukeException ex){
                     System.out.println(ex);

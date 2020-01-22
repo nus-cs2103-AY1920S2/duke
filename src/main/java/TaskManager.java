@@ -59,17 +59,23 @@ public class TaskManager {
         System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
     }
 
-    public void nonsenceInput() throws DukeException{
+    public void nonsenseInput() throws DukeException{
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
-    public void deleteTask(int indexOfTaskToDelete){
-        indexOfTaskToDelete = indexOfTaskToDelete - 1;
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " +  listOfTasks.get(indexOfTaskToDelete).toString());
-        System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
+    public void deleteTask(int indexOfTaskToDelete) throws DukeException{
 
-        listOfTasks.remove(indexOfTaskToDelete);
+
+        indexOfTaskToDelete = indexOfTaskToDelete - 1;
+        if(listOfTasks.get(indexOfTaskToDelete) == null){
+            throw new DukeException("Cannot delete because the task do not exist.");
+        }else {
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + listOfTasks.get(indexOfTaskToDelete).toString());
+            System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
+
+            listOfTasks.remove(indexOfTaskToDelete);
+        }
 
 
     }
