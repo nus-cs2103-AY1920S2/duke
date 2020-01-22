@@ -3,29 +3,15 @@ import java.util.ArrayList;
 public class Chatbot {
 
     private String name;
-    private ArrayList<Item> items;
+    private TaskList tasks;
 
     public Chatbot(String name) {
         this.name = name;
-        this.items = new ArrayList<>();
+        this.tasks = new TaskList();
     }
 
     String greet() {
         return "I'm busy. What do you want?";
-    }
-
-    /**
-     * Convert list to string and number it.
-     * @return The string format of the list.
-     */
-    String listItems() {
-        String output = "This is your list:\n";
-        output += "----------\n";
-        for (int i = 0; i < items.size(); i++) {
-            output += String.format("%d. %s\n", i + 1, items.get(i));
-        }
-        output += "----------";
-        return output;
     }
 
     /**
@@ -34,13 +20,18 @@ public class Chatbot {
      * @return Chatbot's reply to the message.
      */
     String parse(String message) {
-        switch (message.toLowerCase()) {
+        String[] tokens = message.split(" ");
+        switch (tokens[0].toLowerCase()) {
         case "list":
-            return listItems();
+            return "This is your stupid list.\n" + tasks.toString();
+        case "done":
+            int index = Integer.parseInt(tokens[1]);
+            tasks.markDone(index);
+            return "Tsk! I've marked this, you owe me.\n" + tasks.getItem(index);
         case "bye":
             return "Bye, see you never!";
         default:
-            items.add(new Item(message));
+            tasks.add(message);
             return String.format("[Added] %s", message);
         }
     }
