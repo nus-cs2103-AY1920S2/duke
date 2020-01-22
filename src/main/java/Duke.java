@@ -78,8 +78,15 @@ public class Duke {
                     System.out.println(event + "\n");
                     System.out.println("You currently have " + list.size() + " task(s) in the list.");
                     System.out.println(horizontalLine);
-                } else {
-                    throw new DukeException("");
+                } else if (command.startsWith("delete")) {
+                    String[] commands = command.split(" ");
+                    Task toBeRemoved = list.get(Integer.parseInt(commands[1])-1);
+                    list.remove(Integer.parseInt(commands[1])-1);
+                    System.out.println(horizontalLine + "\n" + "Alright, I've removed this task:" + "\n");
+                    System.out.println(toBeRemoved + "\n");
+                    System.out.println("You currently have " + list.size() + " task(s) in the list.");
+                    System.out.println(horizontalLine);
+                } else { throw new DukeException("");
                 }
             } catch (DukeException e) {
                 System.err.println(horizontalLine);
