@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeException;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -7,6 +9,7 @@ public class Task {
   protected String description;
   protected boolean isDone;
   protected String type;
+  private static String[] taskTypes = {"todo", "event", "deadline"};
 
   public Task(String type, String description) {
     this.type = type;
@@ -30,33 +33,58 @@ public class Task {
     return Task.isTodo(description) || Task.isEvent(description) || Task.isDeadline(description);
   }
 
-  public static Task newTask(String description) {
-    try {
-      String content = description.substring(description.indexOf(" ") + 1);
-      if (isTodo(description)) {
-        return new Todo(content);
-      } else if (isEvent(description)) {
-        return new Event(content);
-      } else if (isDeadline(description)) {
-        return new Deadline(content);
-      } else {
-        throw new IllegalArgumentException("This is not a right task input");
-      }
-    } catch (Exception e) {
-      throw new IllegalArgumentException("This is not a right task input");
+  private static String getType(String words) {
+    for (String type : Task.taskTypes) {
+      if (words.contains(type))
+        return type;
+    }
+    return "";
+  }
+
+  public static Task newTask(String description) throws DukeException {
+    if (Task.getType(description) == "")
+      throw new DukeException("Task not recognized");
+
+    String type = Task.getType(description.split(" ")[0]);
+    if (type == "") // if type exists, but is not at the front
+      throw new DukeException("Please start with event type");
+
+    String typeLess = description.substring(type.length()).trim();
+
+    switch (type) {
+      case "todo":
+        return new Todo(typeLess);
+      case "event":
+        return new Event(typeLess);
+      case "deadline":
+        return new Deadline(typeLess);
+      default:
+        throw new DukeException("Task not recognized");
     }
   }
 
-  public static String getTime(String description) {
-    Matcher matcher = Pattern.compile("(/by|/at)").matcher(description);
+  public static String getTime(String description, String regex) throws DukeException {
+    Matcher matcher = Pattern.compile(regex).matcher(description);
     int index = matcher.find() ? matcher.start() : -1;
-    return description.substring(index + 3).trim();
+    if (index == -1) {
+      throw new DukeException(String.format("Please provide %s for this event type", regex));
+    }
+    String time = description.substring(index + regex.length()).trim();
+    if (time.length() == 0)
+      throw new DukeException("Please provide a time");
+    return time;
   }
 
-  public static String getContent(String description) {
+  public static String getContent(String description) throws DukeException {
     Matcher matcher = Pattern.compile("(/by|/at)").matcher(description);
     int index = matcher.find() ? matcher.start() : -1;
-    return description.substring(0, index).trim();
+    if (index == -1 && description.trim().length() > 0) {
+      return description.trim();
+    }
+    String content = description.substring(0, index).trim();
+    if (content.length() > 0)
+      return content;
+    throw new DukeException("Content cannot be empty!");
   }
 
   public String getStatusIcon() {

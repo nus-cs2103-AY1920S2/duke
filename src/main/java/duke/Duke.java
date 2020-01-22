@@ -1,8 +1,9 @@
 package duke;
 
 import task.Task;
+import exception.DukeException;
+
 import java.util.Scanner;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -40,7 +41,11 @@ public class Duke {
             String input = sc.nextLine();
             System.out.println(input);
             Duke.out(Duke.separator, indent1);
-            dispatch(input);
+            try {
+                dispatch(input);
+            } catch (DukeException err) {
+                Duke.out(err.getMessage(), indent2);
+            }
             Duke.out(Duke.separator, indent1);
             System.out.println();
             if (input.equals("bye")) {
@@ -50,7 +55,7 @@ public class Duke {
         }
     }
 
-    private void dispatch(String input) {
+    private void dispatch(String input) throws DukeException {
         switch (input) {
             case "list":
                 int tasksLength = this.tasks.size();
@@ -76,21 +81,14 @@ public class Duke {
                     Duke.out("Nice! I've marked this task as done:", indent2);
                     Duke.out(currTask.toString(), indent3);
                     return;
-                } else if (Task.isTask(input)) {
-                    try {
-                        Task newTask = Task.newTask(input);
-                        this.tasks.add(newTask);
-                        Duke.out("Got it. I've added this task: ", indent2);
-                        Duke.out(newTask.toString(), indent3);
-                        Duke.out(String.format("Now you have %d %s in the list.", this.tasks.size(),
-                                this.tasks.size() > 1 ? "tasks" : "task"), indent2);
-                        return;
-                    } catch (IllegalArgumentException e) {
-                        Duke.out("Please provide a valid input!", indent2);
-                        return;
-                    }
                 } else {
-                    Duke.out("Please provide a valid input!", indent2);
+                    Task newTask = Task.newTask(input);
+                    this.tasks.add(newTask);
+                    Duke.out("Got it. I've added this task: ", indent2);
+                    Duke.out(newTask.toString(), indent3);
+                    Duke.out(String.format("Now you have %d %s in the list.", this.tasks.size(),
+                            this.tasks.size() > 1 ? "tasks" : "task"), indent2);
+                    return;
                 }
         }
     }

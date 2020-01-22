@@ -1,11 +1,13 @@
 package task;
 
+import exception.DukeException;
+
 public class Deadline extends Task {
   protected String time;
 
-  public Deadline(String description) {
+  public Deadline(String description) throws DukeException {
     super("[D]", Task.getContent(description));
-    this.time = Task.getTime(description);
+    this.time = Task.getTime(description, "/by");
   }
 
   @Override

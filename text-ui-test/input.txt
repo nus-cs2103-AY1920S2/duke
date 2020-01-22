@@ -5,3 +5,7 @@ event project meeting /at Mon 2-4pm
 list
 done 3
 list
+deadline return book /at Sunday
+event return book /by Sunday
+event  /by Sunday
+event  asdf /at 

@@ -1,11 +1,13 @@
 package task;
 
+import exception.DukeException;
+
 public class Event extends Task {
   protected String time;
 
-  public Event(String description) {
+  public Event(String description) throws DukeException {
     super("[E]", Task.getContent(description));
-    this.time = Task.getTime(description);
+    this.time = Task.getTime(description, "/at");
   }
 
   @Override
