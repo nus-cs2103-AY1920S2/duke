@@ -31,7 +31,7 @@ public class Duke {
                 System.out.println("    Bye. Hope to see you again soon!");
                 printLine();
                 break;
-            } if (token.equals("list")) {
+            } else if (token.equals("list")) {
                 printLine();
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
@@ -53,8 +53,5 @@ public class Duke {
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> parent of ca8864d... Level-2
+
