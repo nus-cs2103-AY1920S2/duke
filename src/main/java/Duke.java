@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static final String line = "    ____________________________________________________________";
+    static ArrayList<String> newList = new ArrayList<>();
 
     public static String hello() {
         String s1 = "    hello! i'm dUKE!";
@@ -10,7 +11,12 @@ public class Duke {
     }
 
     public static String list() {
-        return line + "\n" + "    there's nothing to list here" + "\n" + line + "\n";
+        String listContent = line + "\n";
+        for (int i = 1; i <= newList.size(); i++) {
+            listContent += "     " + i + ". " + newList.get(i-1) + "\n";
+        }
+        listContent += line + "\n";
+        return listContent;
     }
 
     public static String blah() {
@@ -41,9 +47,12 @@ public class Duke {
                 System.out.println(list());
             } else if (input.equals("blah")) {
                 System.out.println(blah());
-            } else {
+            } else if (input.equals("bye")){
                 System.out.println(bye());
                 break;
+            } else {
+                System.out.println(line + "\n" + "    adding into list: " + input+ "\n" + line + "\n");
+                newList.add(input);
             }
         }
 
