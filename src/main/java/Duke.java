@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
@@ -38,58 +39,63 @@ public class Duke {
         getInput = sc.next();
 
         while (true) {
-            if (getInput.equals("bye")) {
-                // exits program
-                System.out.println(dukeFormat("Bye, have a good day!"));
-                break;
-            } else if (getInput.equals("list")) {
-                // prints list
-                System.out.println(dukeFormatList(lst));
-            } else if (getInput.equals("todo") || getInput.equals("deadline") || getInput.equals("event")) {
-                // Adds a todo, deadline or event based on user input
+            try {
+                if (getInput.equals("bye")) {
+                    // exits program
+                    System.out.println(dukeFormat("Bye, have a good day!"));
+                    break;
+                } else if (getInput.equals("list")) {
+                    // prints list
+                    System.out.println(dukeFormatList(lst));
+                } else if (getInput.equals("todo") || getInput.equals("deadline") || getInput.equals("event")) {
+                    // Adds a todo, deadline or event based on user input
 
-                String res = "";
-                String line = sc.nextLine();
-                res += "As your mummy, I have added this task to your list:\n    ";
-                if (getInput.equals("todo")) {
-                    Todo todo = new Todo(line);
-                    lst.add(todo);
-                    res += todo;
-                } else if (getInput.equals("deadline")) {
-                    int indexCut = line.indexOf("/by");
-                    String desc = line.substring(0, indexCut - 1);
-                    String by = line.substring(indexCut + 4);
-                    Deadline deadline = new Deadline(desc, by);
-                    lst.add(deadline);
-                    res += deadline;
+                    String res = "";
+                    String line = sc.nextLine();
+                    res += "As your mummy, I have added this task to your list:\n    ";
+                    if (getInput.equals("todo")) {
+                        Todo todo = new Todo(line);
+                        lst.add(todo);
+                        res += todo;
+                    } else if (getInput.equals("deadline")) {
+                        int indexCut = line.indexOf("/by");
+                        String desc = line.substring(0, indexCut - 1);
+                        String by = line.substring(indexCut + 4);
+                        Deadline deadline = new Deadline(desc, by);
+                        lst.add(deadline);
+                        res += deadline;
+                    } else {
+                        int indexCut = line.indexOf("/at");
+                        String desc = line.substring(0, indexCut - 1);
+                        String at = line.substring(indexCut + 4);
+                        Event event = new Event(desc, at);
+                        lst.add(event);
+                        res += event;
+                    }
+                    res += "\n    You have " + String.valueOf(lst.size()) + " tasks in the list.";
+                    System.out.println(dukeFormat(res));
+
+                } else if (getInput.equals("done")) {
+
+                    // validate input for list index
+                    try {
+                        String getNumberString = sc.next();
+                        int getNumber = Integer.valueOf(getNumberString);
+                        Task currTask = lst.get(getNumber - 1);
+                        currTask.setDone(true);
+                        System.out.println(dukeFormat("Sure I will mark this task as done.\n" + indent + currTask));
+                    } catch (NumberFormatException e) {
+                        System.out.println(dukeFormat("Please input an integer."));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(dukeFormat("Please try again, your number is out of range."));
+                    }
                 } else {
-                    int indexCut = line.indexOf("/at");
-                    String desc = line.substring(0, indexCut - 1);
-                    String at = line.substring(indexCut + 4);
-                    Event event = new Event(desc, at);
-                    lst.add(event);
-                    res += event;
+                    throw new DukeException("Invalid Input");
                 }
-                res += "\n    You have " + String.valueOf(lst.size()) + " tasks in the list.";
-                System.out.println(dukeFormat(res));
-
-            } else if (getInput.equals("done")) {
-
-                // validate input for list index
-                int getNumber = sc.nextInt();
-                while (!(getNumber == (int)getNumber) || getNumber <= 0 || getNumber > lst.size()) {
-                    System.out.println(dukeFormat("Invalid input, please try again."));
-                    getNumber = sc.nextInt();
-                }
-
-                Task currTask = lst.get(getNumber - 1);
-                currTask.setDone(true);
-                System.out.println(dukeFormat("Sure I will mark this task as done.\n" + indent + currTask));
-                break;
-
-            } else {
-                System.out.println(dukeFormat("Invalid input"));
+            } catch (DukeException e) {
+                System.out.println(dukeFormat("Please try again, your input is invalid."));
             }
+
             getInput = sc.next();
         }
     }
