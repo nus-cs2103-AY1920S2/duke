@@ -15,6 +15,10 @@ public class Task {
         return (isDone ? "[✓]" : "[✗]");
     }
 
+    public int getStatusNum() {
+        return (isDone ? 1 : 0);
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -25,5 +29,9 @@ public class Task {
 
     public String toString() {
         return getStatusIcon() + " " + getDescription();
+    }
+
+    public String saveString() {
+        return getStatusNum() + " | " + getDescription();
     }
 }

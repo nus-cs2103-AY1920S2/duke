@@ -1,8 +1,13 @@
 import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
     public static final String string = "    ____________________________________________________________";
     public static final String space = "     ";
     public static ArrayList<Task> tasks = new ArrayList<>();
+    public static String filePath = "/Users/catherine/Desktop/Duke CS2103/duke.txt";
 
     public static void Greeting() {
         String greeting = string + "\n"+ space +
@@ -10,6 +15,19 @@ public class Duke {
                 "What can I do for you?\n" +
                 string;
         System.out.println(greeting);
+    }
+
+    public static void writeToFile() {
+        try {
+            BufferedWriter wr = new BufferedWriter(new FileWriter(filePath));
+            for (Task t : tasks) {
+                wr.write(t.saveString());
+                wr.newLine();
+            }
+            wr.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public static void Bye() {
@@ -34,6 +52,7 @@ public class Duke {
         int num = Integer.parseInt(str);
         Task task = tasks.get(num - 1);
         task.markDone();
+        writeToFile();
         System.out.println(space + "Nice! I've marked this done as done: ");
         System.out.println(space + "  " + task.toString());
         System.out.println(string);
@@ -46,6 +65,7 @@ public class Duke {
         System.out.println(space + "Got it. I've added this task:");
         System.out.println(space + "  " + deadline.toString());
         tasks.add(deadline);
+        writeToFile();
         if (tasks.size() == 1 || tasks.size() == 0) {
             System.out.println(space + "Now you have " + tasks.size() + " task in the list");
         } else {
@@ -61,6 +81,7 @@ public class Duke {
         System.out.println(space + "Got it. I've added this task:");
         System.out.println(space + "  " + event.toString());
         tasks.add(event);
+        writeToFile();
         if (tasks.size() == 1 || tasks.size() == 0) {
             System.out.println(space + "Now you have " + tasks.size() + " task in the list");
         } else {
@@ -75,6 +96,7 @@ public class Duke {
         System.out.println(space + "Got it. I've added this task:");
         System.out.println(space + "  " + todo.toString());
         tasks.add(todo);
+        writeToFile();
         if (tasks.size() == 1 || tasks.size() == 0) {
             System.out.println(space + "Now you have " + tasks.size() + " task in the list");
         } else {
@@ -88,6 +110,7 @@ public class Duke {
         int num = Integer.parseInt(action);
         Task task = tasks.get(num - 1);
         tasks.remove(task);
+        writeToFile();
         System.out.println(space + "Noted. I've removed this task: ");
         System.out.println(space + "  " + task.toString());
         if (tasks.size() == 1 || tasks.size() == 0) {
