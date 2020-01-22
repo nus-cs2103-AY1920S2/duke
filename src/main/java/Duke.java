@@ -62,7 +62,6 @@ public class Duke {
         } catch (NumberFormatException nfe) {
             System.out.println("Please give me a sign. A sign. A number.");
         }
-
     }
 
     public static void main(String[] args) {
