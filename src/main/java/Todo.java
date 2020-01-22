@@ -6,7 +6,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String printTaskDetails() {
+    public String toString() {
         return String.format(
                 "[%s][%s] %s",
                 this.getType(),

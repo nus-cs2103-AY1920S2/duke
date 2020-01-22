@@ -25,6 +25,4 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public abstract String printTaskDetails();
-
 }

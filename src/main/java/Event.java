@@ -7,7 +7,7 @@ public class Event extends Task{
     }
 
     @Override
-    public String printTaskDetails() {
+    public String toString() {
         return String.format(
                 "[%s][%s] %s (%s)",
                 this.getType(),
