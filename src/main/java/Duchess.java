@@ -1,10 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Duchess {
     private ArrayList<Task> tasks;
     private Scanner scanner;
-    private String command;
 
     public Duchess() {
         this.tasks = new ArrayList<Task>(100);
@@ -12,8 +12,12 @@ class Duchess {
     }
 
     private void awaitInput() {
-        this.command = scanner.nextLine();
-        switch (command.toLowerCase()) {
+        String input = scanner.nextLine();
+        ArrayList<String> commands = new ArrayList<String>(Arrays.asList(input.split("\\s", 2)));
+        switch (commands.get(0).toLowerCase()) {
+        case "done":
+            completeTask(commands.get(1));
+            break;
         case "list":
             printTasks();
             break;
@@ -21,7 +25,7 @@ class Duchess {
             sayGoodbye();
             break;
         default:
-            addToList(command);
+            addToList(input);
             break;
         }
     }
@@ -66,5 +70,18 @@ class Duchess {
     void run() {
         introduce();
         awaitInput();
+    }
+
+    private void completeTask(String index) {
+        int indexAsInt = Integer.parseInt(index.trim());
+        if (indexAsInt < 0 || indexAsInt > this.tasks.size()) {
+            throw new IllegalArgumentException("The index given is out of bounds!");
+        } else {
+            Task taskToComplete = this.tasks.get(indexAsInt - 1);
+            taskToComplete.toggleIsCompleted();
+            System.out.println("\tOh? You actually completed something? Impressive...");
+            System.out.println("\t" + taskToComplete.getTaskInformation());
+            awaitInput();
+        }
     }
 }
