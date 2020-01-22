@@ -20,12 +20,11 @@ public class Task {
         }
 
         public void printDone(){
-            System.out.println("       " + "[Done] " + description);
+            System.out.println("      " + "[Done] " + description);
         }
 
         @Override
         public String toString(){
-            return "     " + Integer.toString(thisTaskNum) + "." + getStatusIcon() + description;
-
+            return "";
         }
 }
