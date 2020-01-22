@@ -1,0 +1,17 @@
+todo borrow book
+todo set a date with CRUSH
+deadline do IP week 2 /by todayy
+event CS2030 meeting /at Wednesday 6-7pm
+list
+done 2
+deadline do CS4231 homework /by Sunday
+done 4
+list
+list
+blab blab
+hello
+done 5
+list
+todo get CAP 5.0
+list
+bye

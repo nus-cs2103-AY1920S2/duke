@@ -17,7 +17,7 @@ public class Duke {
     }
 
     public void greet() {
-        System.out.println(padding + uselessLine + '\n' +
+        System.out.println(padding + uselessLine + "\n" +
                 padding + "Greetings! This is " + botName + ", and I am your friend!\n" +
                 padding + "You don't have to be formal. Relax and tell me how I can help you\n" +
                 padding + uselessLine);
@@ -25,7 +25,7 @@ public class Duke {
 
     public void processUserInput(String str) {
         if (str.equals("")) {
-            System.out.println(padding + uselessLine + '\n' +
+            System.out.println(padding + uselessLine + "\n" +
                     padding + "Please type something. Don't leave it blank, plsss!\n" +
                     padding + uselessLine);
             return;
@@ -47,7 +47,7 @@ public class Duke {
                     handleEvent(str);
                     break;
                 default:
-                    System.out.println(padding + uselessLine + '\n' +
+                    System.out.println(padding + uselessLine + "\n" +
                             padding + "Umm, please just write something legit.\n" +
                             padding + uselessLine);
                     break; // Will throw error later? commandType already throws so idk
@@ -109,9 +109,9 @@ public class Duke {
     private void markItemAsDone(int pos) {
         assert (pos < storedItems.size() && pos >= 0);
         storedItems.get(pos).markDone();
-        System.out.println(padding + uselessLine + '\n' +
+        System.out.println(padding + uselessLine + "\n" +
                 padding + "Nice nice. I've marked the task as done for you.\n" +
-                padding + "   " + storedItems.get(pos) + '\n' +
+                padding + "   " + storedItems.get(pos) + "\n" +
                 padding + uselessLine);
     }
 
@@ -138,8 +138,8 @@ public class Duke {
 
     private void storeUserInput(Task task) {
         storedItems.add(task);
-        System.out.println(padding + uselessLine + '\n' +
-                padding + addedPhrase + task + '\n' +
+        System.out.println(padding + uselessLine + "\n" +
+                padding + addedPhrase + task + "\n" +
                 padding + "Now you have " + storedItems.size() + " tasks\n" +
                 padding + uselessLine);
     }
@@ -160,13 +160,13 @@ public class Duke {
     }
 
     private void echo(String str) {
-        System.out.println(padding + uselessLine + '\n' +
-                padding + str + '\n' +
+        System.out.println(padding + uselessLine + "\n" +
+                padding + str + "\n" +
                 padding + uselessLine);
     }
 
     public void byeBye() {
-        System.out.println(padding + uselessLine + '\n' +
+        System.out.println(padding + uselessLine + "\n" +
                 padding + "Bye-bye. It was nice talking to you. See ya soon!\n" +
                 padding + uselessLine);
     }
