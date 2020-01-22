@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println("____________________________________________________________");
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,7 +16,7 @@ public class Duke {
         run();
     }
 
-    private static void run() {
+    private static void run() throws Exception {
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         String command = sc.nextLine();
@@ -29,16 +29,26 @@ public class Duke {
                     }
                     System.out.println("____________________________________________________________");
                 } else {
-                    System.out.println("There are no remaining tasks");
-                    System.out.println("____________________________________________________________");
+                    throw new DukeException("There are no remaining tasks in the list");
                 }
             } else {
-                if ((command.split(" ")[0]).equals("done")) {
+                if (command.split(" ").length == 1) {
+                    String errorMsg = command.split(" ")[0];
+                    if (errorMsg.equals("todo") || errorMsg.equals("deadline") || errorMsg.equals("event")) {
+                        throw new DukeException("☹ OOPS!!! The description of a " + errorMsg + " cannot be empty.");
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                } else if ((command.split(" ")[0]).equals("done")) {
                     int i = Integer.parseInt(command.split(" ")[1]) - 1;
-                    tasks.get(i).markAsDone();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(tasks.get(i));
-                    System.out.println("____________________________________________________________");
+                    if (i >= tasks.size() || i < 0) {
+                        throw new DukeException("There is no such task in the list!");
+                    } else {
+                        tasks.get(i).markAsDone();
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println(tasks.get(i));
+                        System.out.println("____________________________________________________________");
+                    }
                 } else {
                     Task t = null;
                     String taskType = command.split(" ")[0];
