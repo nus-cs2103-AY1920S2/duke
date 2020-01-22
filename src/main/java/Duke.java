@@ -25,7 +25,7 @@ public class Duke {
 
         FastReader fr = new FastReader();
         String textEntered = fr.nextLine();
-        ArrayList<String> level2List = new ArrayList<>();
+        ArrayList<Task> level3List = new ArrayList<>();
 
         TaskManager manager = new TaskManager();
 
@@ -86,12 +86,22 @@ public class Duke {
              */
             System.out.println(horizontalLine);
             if(textEntered.contains("list")){
-                for(int i = 0 ; i < level2List.size() ; i++){
-                    System.out.println(i+1 + ". " + level2List.get(i));
+                System.out.println("Here are the tasks in your list:");
+                for(int i = 0 ; i < level3List.size() ; i++){
+                    System.out.println(i+1 + ". " + level3List.get(i));
                 }
+            }else if(textEntered.contains("done")) {
+
+                System.out.println("Nice! I've marked this task as done: ");
+                String[] helper = textEntered.split(" ");
+                int indexOfTaskDone = Integer.parseInt(helper[1]);
+                level3List.get(indexOfTaskDone-1).markAsDone();
+
+                System.out.println("  " + level3List.get(indexOfTaskDone-1).toString());
+
             }else{
 
-                level2List.add(textEntered);
+                level3List.add(new Task(textEntered));
                 System.out.println("added: "+ textEntered);
             }
             System.out.println(horizontalLine);
