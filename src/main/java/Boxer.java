@@ -47,6 +47,13 @@ public class Boxer {
         print(task.toString());
     }
 
+    public void delete(int taskIndex) {
+        Task task = taskList.get(taskIndex - 1);
+        taskList.remove(taskIndex - 1);
+        print("Don't need this here anymore eh? Off it goes.");
+        print(task.toString());
+    }
+
     public void exit() {
         String farewell = "Guess that's enough for now. I've got your back, so you keep me close.";
         print(farewell);

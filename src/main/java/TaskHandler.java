@@ -28,6 +28,10 @@ public class TaskHandler {
                         index = Integer.parseInt(inputSplit[1]);
                         boxer.done(index);
                         break;
+                    case "delete":
+                        index = Integer.parseInt(inputSplit[1]);
+                        boxer.delete(index);
+                        break;
                     case "list":
                         boxer.list();
                         break;

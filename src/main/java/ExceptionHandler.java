@@ -25,6 +25,7 @@ public class ExceptionHandler {
                 || type.equals("event")
                 || type.equals("list")
                 || type.equals("done")
+                || type.equals("delete")
                 || type.equals("bye"))) {
             throw new WrongCommandException(
                     "Uhh... You're gonna have to say that again, Red.");
