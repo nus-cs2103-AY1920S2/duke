@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
-public class DECommand {
+public class DECommand extends DukeException{
+    public DECommand() {
+        super.errorMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    }
 }

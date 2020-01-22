@@ -17,6 +17,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return type + status + " " + msg + " " + time;
+        return type + status + msg + " " + time;
     }
 }
