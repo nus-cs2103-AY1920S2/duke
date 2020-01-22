@@ -1,27 +1,12 @@
-public class Task {
-    private String task;
-    private boolean isDone;
+public class ToDo extends Task{
+    private final String toDoLogo = "T";
 
-    public Task(String taskName) {
-        this.task = taskName;
-        this.isDone = false;
+    public ToDo(String taskName) {
+        super(taskName);
     }
 
-    public Task() {
-        task = "";
-    }
-
-    public String getStatusIcon() {
-        // return tick or cross symbols respectively.
-        return (isDone ? "\u2713" : "\u2718");
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    public String getTask() {
-        return task;
+    public ToDo() {
+        super("");
     }
 
     /**
@@ -47,6 +32,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.task);
+        return String.format("[%s]%s", toDoLogo, super.toString());
     }
 }
