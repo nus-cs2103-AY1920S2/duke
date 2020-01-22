@@ -7,7 +7,7 @@ public class Duke {
     public final static String INDENT = "    ";
     public final static String BORDER = INDENT + "____________________________________________________________";
     public final static String EXIT = "bye";
-    public final static String GOODBYE_MESSAGE = INDENT + " Goodbye and have a beautiful time!";
+    public final static String GOODBYE_MESSAGE = INDENT + "  Goodbye and have a beautiful time!";
 
     public static void main(String[] args) {
         String logo = INDENT + "  _____  __    __  _____ \n"
@@ -18,8 +18,8 @@ public class Duke {
                 + INDENT + " |_____||__/  \\__\\|_____| \n";
         System.out.println(BORDER);
         System.out.println(logo);
-        System.out.println(INDENT + "Hello! I'm EXE, I'll execute anything on your command! :)");
-        System.out.println(INDENT + "What do you want to exe?");
+        System.out.println(INDENT + "  Hello! I'm EXE, I'll execute anything on your command! :)");
+        System.out.println(INDENT + "  What do you want to exe?");
         System.out.println(BORDER);
 
         Scanner scanner = new Scanner(System.in);
@@ -37,7 +37,7 @@ public class Duke {
                     commandValue = CommandList.valueOf(command.toUpperCase());
                 } catch (IllegalArgumentException exception) {
                     // do own exception class here
-                    System.out.println("Whoops me smol brain don't understand :D, try again!");
+                    System.out.println(INDENT + "  Whoops me smol brain don't understand :D, try again!");
                     userInput = scanner.nextLine();
                     continue;
                 }
@@ -59,7 +59,6 @@ public class Duke {
                             String[] descriptionArr = eventDetails[0].split("event");
                             if (descriptionArr.length > 1) {
                                 eventDescription = descriptionArr[1].trim();
-                                System.out.println(eventDescription);
                             } else {
                                 // throw own class exception ehre also
                             }
@@ -136,11 +135,11 @@ public class Duke {
     public static String customiseMessage(String message, int size) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + " ");
-        stringBuilder.append("Got it. I've added this task:\n");
+        stringBuilder.append(" Got it. I've added this task:\n");
         stringBuilder.append(INDENT + " ");
         stringBuilder.append("  " + message + "\n");
         stringBuilder.append(INDENT + " ");
-        stringBuilder.append(String.format("now you have %d tasks in list.", size));
+        stringBuilder.append(String.format(" Now you have %d tasks in list.", size));
         return stringBuilder.toString();
     }
 
@@ -148,9 +147,9 @@ public class Duke {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(BORDER + "\n");
         stringBuilder.append(INDENT);
-        stringBuilder.append("Very productive! You do, I execute! This task has been slayed:\n");
+        stringBuilder.append("  Very productive! I've slayed this task:\n");
         stringBuilder.append(INDENT);
-        stringBuilder.append(String.format("[%s]%s\n", markedIcon, taskName));
+        stringBuilder.append(String.format("   [%s]%s\n", markedIcon, taskName));
         stringBuilder.append(BORDER);
         return stringBuilder.toString();
     }
