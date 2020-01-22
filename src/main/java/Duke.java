@@ -28,6 +28,7 @@ public class Duke {
 
         while(!textEntered.equals("bye")){
 
+            /*
             if(textEntered.equals("list")){
                 manager.listAllTasks();
                 System.out.println(horizontalLine);
@@ -78,6 +79,10 @@ public class Duke {
 
 
             }
+
+             */
+            manager.echo(textEntered);
+            textEntered = fr.nextLine();
 
         }
         System.out.println("Bye. Hope to see you again soon!");

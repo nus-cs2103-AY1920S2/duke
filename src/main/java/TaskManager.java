@@ -79,7 +79,9 @@ public class TaskManager {
 
             listOfTasks.remove(indexOfTaskToDelete);
         }
+    }
 
-
+    public void echo(String textEntered){
+        System.out.println(textEntered);
     }
 }
