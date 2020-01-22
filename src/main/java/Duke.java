@@ -6,8 +6,8 @@ public class Duke {
     public static int totalTasks = 0;
 
     public static String hello() {
-        String s1 = "     hello! i'm dUKE!";
-        String s2 = "     what do you want from me (・∀・)";
+        String s1 = "     Hello! i'm dUKE!";
+        String s2 = "     How can I help you!";
         return line + "\n" + s1 + "\n" + s2 + "\n" + line + "\n";
     }
 
@@ -27,20 +27,13 @@ public class Duke {
     }
 
     public static String bye() {
-        return line + "\n" + "     Bye see you again（ｉДｉ）" + "\n" + line + "\n";
+        return line + "\n" + "     Bye see you again（ｉДｉ）" + "\n" + line;
     }
 
 
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
         System.out.println(hello());
 
@@ -72,7 +65,7 @@ public class Duke {
                 }
                 totalTasks++;
                 task += "       " + tasks[totalTasks-1] + "\n";
-                task += "     Now you have " + totalTasks + " tasks in the list.";
+                task += "     Now you have " + totalTasks + " tasks in the list." + "\n" + line + "\n";
                 System.out.println(task);
             }
         }
