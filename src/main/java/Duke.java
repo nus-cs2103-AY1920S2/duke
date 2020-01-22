@@ -17,11 +17,19 @@ public class Duke {
 
     private void echo(Scanner sc) {
         String userInput = sc.nextLine();
+        int inputLength = userInput.length();
 
         if (userInput.equals("list")) {
             printList();
             System.out.println();
             echo(new Scanner(System.in));
+        } else if (inputLength >= 4 && userInput.substring(0, 4).equals("done") && userInput.charAt(4) == ' ') {
+            int targetIdx = Integer.parseInt(userInput.substring(5,inputLength)) - 1;
+            this.tasks.get(targetIdx).markDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.printf("%d. [%s] %s\n\n", targetIdx + 1, tasks.get(targetIdx).getStatusIcon(), tasks.get(targetIdx).getTaskName());
+            echo(new Scanner(System.in));
+
         } else if (!userInput.equals("bye")) {
             tasks.add(Task.createTask(userInput));
             System.out.println("added " + userInput);
@@ -34,7 +42,7 @@ public class Duke {
 
     private void printList() {
         for (int i = 0; i < tasks.size(); ++i) {
-            System.out.printf("%d. %s\n", i + 1, tasks.get(i).getTaskName());
+            System.out.printf("%d. [%s] %s\n", i + 1, tasks.get(i).getStatusIcon(), tasks.get(i).getTaskName());
         }
     }
 
