@@ -19,7 +19,6 @@ public class Boxer {
 
     public void deadline(String task) {
         String[] split = task.split("/", 2);
-        print(Arrays.toString(split));
         Deadline newTask = new Deadline(split[0], split[1]);
         print(newTask.toString());
         taskList.add(newTask);
