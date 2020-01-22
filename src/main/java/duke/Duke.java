@@ -1,11 +1,14 @@
-package seedu.duke;
+package duke;
 
+import task.Task;
 import java.util.Scanner;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Duke {
     private Scanner sc;
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
     public static final String separator = "____________________________________________________________";
 
     public static void main(String[] args) {
@@ -19,7 +22,7 @@ public class Duke {
 
     public Duke() {
         this.sc = new Scanner(System.in);
-        this.tasks = new ArrayList<String>();
+        this.tasks = new ArrayList<>();
     }
 
     public void start() {
@@ -44,14 +47,22 @@ public class Duke {
         case "bye":
             return "Bye. Hope to see you again soon!";
         default:
-            this.tasks.add(input);
-            return String.format("added: %s", input);
+            if (Pattern.matches("^done\\s+\\d$", input)) {
+                int doneInd = Integer.parseInt((input.split(" "))[1]) - 1;
+                Task currTask = this.tasks.get(doneInd);
+                currTask.setDone();
+                return String.format("Nice! I've marked this task as done:\n  %s", currTask);
+            } else {
+                this.tasks.add(new Task(input));
+                return String.format("added: %s", input);
+            }
         }
     }
 
     private void echo(String toEcho) {
         System.out.println(Duke.separator);
-        System.out.println(toEcho);
+        PrintWriter printWriter = new PrintWriter(System.out, true);
+        printWriter.println(toEcho);
         System.out.println(Duke.separator);
     }
 
