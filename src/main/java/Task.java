@@ -10,9 +10,11 @@ public class Task {
         this.index = index;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-    }
+//    public String getStatusIcon() {
+//        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+//    }
+//    public String getStatusIcon() { return (isDone ? Character.toString(10003) : Character.toString(10005));} //return tick or X symbols
+    public String getStatusIcon() { return (isDone ? "✓" : "✖"); }
 
     @Override
     public String toString(){
