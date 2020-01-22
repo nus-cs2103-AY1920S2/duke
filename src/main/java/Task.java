@@ -1,12 +1,23 @@
 public class Task {
-    private String desc;
+    protected String desc;
+    protected boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
+        this.isDone = false;
+    }
+
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     @Override
     public String toString() {
-        return desc;
+        String doneStatus = "[" + getStatusIcon() + "]";
+        return doneStatus + " " + desc;
     }
 }
