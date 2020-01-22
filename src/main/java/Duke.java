@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
-import java.lang.StringBuilder;
 
 public class Duke {
     public static void main(String[] args) {
@@ -32,17 +30,20 @@ public class Duke {
             //add inputs, list record and mark as done when asked
             while(!command.equals("bye")) {
                 try {
-                    if (command.equals("list")) {
+                    if(command.equals("list")) {
                         bot.listRecord();
-                    } else if (command.equals("done")) {
+                    } else if(command.equals("done")) {
                         int num = Integer.parseInt(arr[1]);
                         bot.setDone(num);
-                    } else if (command.equals("todo")) {
-                        if (arr.length == 1) {
+                    } else if(command.equals("delete")) {
+                        int num = Integer.parseInt(arr[1]);
+                        bot.delete(num);
+                    } else if(command.equals("todo")) {
+                        if(arr.length == 1) {
                             throw new DukeException("todo");
                         } else {
                             //get task description
-                            for (int i = 1; i < arr.length - 1; i++) {
+                            for(int i = 1; i < arr.length - 1; i++) {
                                 description = description + arr[i] + " ";
                             }
                             description = description + arr[arr.length - 1];
@@ -50,12 +51,12 @@ public class Duke {
                             //add to do
                             bot.addToDo(description);
                         }
-                    } else if (command.equals("deadline")) {
+                    } else if(command.equals("deadline")) {
                         if(arr.length == 1) {
                             throw new DukeException("deadline");
                         } else {
                             //get task description
-                            for (int i = 1; i < arr.length - 1; i++) {
+                            for(int i = 1; i < arr.length - 1; i++) {
                                 description = description + arr[i] + " ";
                             }
                             description = description + arr[arr.length - 1];
@@ -64,12 +65,12 @@ public class Duke {
                             //add deadline
                             bot.addDeadline(array[0], array[1]);
                         }
-                    } else if (command.equals("event")) {
+                    } else if(command.equals("event")) {
                         if(arr.length == 1) {
                             throw new DukeException("event");
                         } else {
                             //get task description
-                            for (int i = 1; i < arr.length - 1; i++) {
+                            for(int i = 1; i < arr.length - 1; i++) {
                                 description = description + arr[i] + " ";
                             }
                             description = description + arr[arr.length - 1];
@@ -82,7 +83,7 @@ public class Duke {
                         throw new DukeException("");
                     }
 
-                } catch (Exception e){
+                } catch(Exception e){
                     System.out.println(e);
                 }
                     //get new inputs

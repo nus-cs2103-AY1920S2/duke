@@ -86,7 +86,7 @@ public class Chatbot implements Chat {
     public void listRecord() {
         System.out.println("--------------------------------------------------");
 
-        for (int i = 0; i < record.size(); i++) {
+        for(int i = 0; i < record.size(); i++) {
             int j = i + 1;
             Task current = record.get(i);
             System.out.print(j + "." + current + "\n");
@@ -103,6 +103,16 @@ public class Chatbot implements Chat {
         System.out.println("--------------------------------------------------");
         System.out.println("Next time do yourself la! No paper meh?");
         System.out.println(task);
+        System.out.println("--------------------------------------------------\n");
+    }
+
+    public void delete(int num) {
+        Task task = record.remove(num);
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("Destroyed: ");
+        System.out.println(" " + task);
+        System.out.println("You has " + this.record.size() + " tasks in the list");
         System.out.println("--------------------------------------------------\n");
     }
 }
