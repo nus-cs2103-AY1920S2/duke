@@ -5,7 +5,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
-        int taskNumber = 0;
 
         printLogo();
         printGreet();
@@ -14,14 +13,28 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                list(tasks, taskNumber);
+                list(tasks);
             } else {
                 String[] words = input.split(" ");
-                if (words[0].equals("done")) {
-                    markDone(tasks.get(Integer.valueOf(words[1]) - 1));
-                } else {
-                    taskNumber++;
-                    add(input, tasks);
+                switch (words[0]) {
+                    case "done":
+                        markDone(tasks.get(Integer.valueOf(words[1]) - 1));
+                        break;
+                    case "todo":
+                        add(new Todo(input.substring(5)), tasks);
+                        break;
+                    case "deadline":
+                        String[] ddlDetails = getTaskDetails(input.substring(9),
+                                " /by ");
+                        add(new Deadline(ddlDetails[0], ddlDetails[1]), tasks);
+                        break;
+                    case "event":
+                        String[] eventDetails = getTaskDetails(input.substring(6),
+                                " /at ");
+                        add(new Event(eventDetails[0], eventDetails[1]), tasks);
+                        break;
+                    default:
+                        add(input, tasks);
                 }
             }
             input = reader.nextLine();
@@ -62,10 +75,10 @@ public class Duke {
         printBreak();
     }
 
-    private static void list(ArrayList<Task> tasks, int taskNumber) {
+    private static void list(ArrayList<Task> tasks) {
         printBreak();
         System.out.println("    Here are the tasks in your list:");
-        for (int i = 1; i <= taskNumber; i++) {
+        for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i - 1);
             System.out.println("    " + i + "." + currTask);
         }
@@ -79,11 +92,25 @@ public class Duke {
         printBreak();
     }
 
+    private static void add(Task t, ArrayList<Task> tasks) {
+        printBreak();
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + t);
+        tasks.add(t);
+        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+        printBreak();
+    }
+
     private static void markDone(Task currTask) {
         printBreak();
         System.out.println("    Nice! I've marked this task as done:");
         currTask.markAsDone();
         System.out.println("      " + currTask);
         printBreak();
+    }
+
+    private static String[] getTaskDetails(String str, String spliter) {
+        String[] details = str.split(spliter);
+        return details;
     }
 }
