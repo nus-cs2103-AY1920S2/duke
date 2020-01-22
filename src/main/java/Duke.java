@@ -36,10 +36,24 @@ public class Duke {
                     if (i >= newList.size()) {
                         throw new DukeException("Task " + arr[1] + " does not exist");
                     }
-                    Task task = newList.get(i);
                     newList.get(i).markAsDone();
                     System.out.printf("Nice! I've marked this task as done: \n%s\n",
                             newList.get(i).toString());
+
+                } else if (command.startsWith("delete")) {
+                String[] arr = command.split(" ");
+                if (arr.length < 2) {
+                    throw new DukeException("The task to be deleted must be specified");
+                }
+                int i = Integer.valueOf(arr[1]) - 1;
+                if (i >= newList.size()) {
+                    throw new DukeException("Task " + arr[1] + " does not exist");
+                }
+                Task task = newList.get(i);
+                newList.remove(i);
+                System.out.printf("Noted. I've removed this task:\n" +
+                                "%s\n" + "Now you have %d tasks in the list.",
+                        task.toString(), newList.size());
 
                 } else {
                     String[] arr = command.split("/");
@@ -82,7 +96,7 @@ public class Duke {
                             newList.get(newList.size() - 1).toString(), newList.size());
                 }
             } catch (DukeException e) {
-                System.out.println("☹ OOPS!!!" + e.getMessage());
+                System.out.println("☹ OOPS!!! " + e.getMessage());
             } finally {
                 command = sc.nextLine();
             }
