@@ -7,11 +7,11 @@ public class Task {
         this.isCompleted = false;
     }
 
-    public void printTask() {
+    public String getTaskInformation() {
         if (this.isCompleted) {
-            System.out.println("[" + '\u2713' + "] " + this.description);
+            return "[" + '\u2713' + "] " + this.description;
         } else {
-            System.out.println("[" + '\u274C' + "] " + this.description);
+            return "[" + '\u274C' + "] " + this.description;
         }
     }
 
