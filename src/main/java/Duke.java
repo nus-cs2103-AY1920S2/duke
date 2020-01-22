@@ -14,9 +14,15 @@ public class Duke {
             if (command.equals("bye")) {
                 sayBye();
                 break;
-            } else if (command.equals("read") || command.equals("return")) {
-                Task task = new Task(input);
-                addToList(task);
+            } else if (command.equals("todo")) {
+                String desc = inputs[1];
+                addTodo(desc);
+            } else if (command.equals("deadline")) {
+                String desc = inputs[1];
+                addDeadline(desc);
+            } else if (command.equals("event")) {
+                String desc = inputs[1];
+                addEvent(desc);
             } else if (command.equals("list")) {
                 printList();
             } else if (command.equals("done")) {
@@ -36,9 +42,52 @@ public class Duke {
         System.out.println("Stop procrastinating. See you!");
     }
 
-    private static void addToList(Task task) {
+    /*private static void addToList(Task task) {
         tasks.add(task);
         System.out.println("added: " + task.getDescription());
+    }*/
+    private static void printAddToList() {
+        System.out.println("Gotcha. Added this to your list:");
+    }
+
+    private static void printNumTask() {
+        String taskWord;
+        if (tasks.size() == 1) {
+            taskWord = "task";
+        } else {
+            taskWord = "tasks";
+        }
+        System.out.printf("Now you got %d %s in your list!\n", tasks.size(), taskWord);
+    }
+
+    private static void addEvent(String desc) {
+        String[] descs = desc.split(" /at ");
+        String eventDesc = descs[0];
+        String eventTime = descs[1];
+        Task event = new Event(eventDesc, eventTime);
+        tasks.add(event);
+        printAddToList();
+        System.out.println(event.toString());
+        printNumTask();
+    }
+
+    private static void addDeadline(String desc) {
+        String[] descs = desc.split(" /by ");
+        String deadlineDesc = descs[0];
+        String deadlineTime = descs[1];
+        Task deadline = new Deadline(deadlineDesc, deadlineTime);
+        tasks.add(deadline);
+        printAddToList();
+        System.out.println(deadline.toString());
+        printNumTask();
+    }
+
+    private static void addTodo(String desc) {
+        Task todo = new Todo(desc);
+        tasks.add(todo);
+        printAddToList();
+        System.out.println(todo.toString());
+        printNumTask();
     }
 
     private static void printList() {
