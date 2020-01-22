@@ -5,4 +5,8 @@ done 3
 done 2
 done 1
 list
+delete 2
+list
+todo
+asnfdian
 bye

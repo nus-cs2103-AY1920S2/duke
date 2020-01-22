@@ -1,14 +1,14 @@
 public class Task {
         protected String description;
         protected boolean isDone;
-        protected static int taskNum = 0;
-        protected int thisTaskNum = 0;
+        /*protected static int taskNum = 0;
+        protected int thisTaskNum = 0;*/
 
         public Task(String description) {
             this.description = description;
             this.isDone = false;
-            taskNum++;
-            thisTaskNum = taskNum;
+            /*taskNum++;
+            thisTaskNum = taskNum;*/
         }
 
         public String getStatusIcon() {

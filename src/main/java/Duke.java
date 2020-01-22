@@ -30,18 +30,31 @@ public class Duke {
                             case "list":
                                 System.out.print(line);
                                 System.out.println("     Here are the tasks in your list:");
-                                for (Task task : tasks) {
+                                /*for (Task task : tasks) {
                                     System.out.println("      " + Integer.toString(task.thisTaskNum) + "." + task);
+                                }*/
+                                for(int i = 0; i < tasks.size(); i++){
+                                    System.out.println("      " + Integer.toString(i + 1) + "." + tasks.get(i));
                                 }
                                 System.out.println(line);
                                 break;
 
                             case "done":
-                                int taskNum = Integer.parseInt(commandScanner.next()) - 1;
-                                tasks.get(taskNum).isDone = true;
+                                int doneTaskNum = Integer.parseInt(commandScanner.next()) - 1;
+                                tasks.get(doneTaskNum).isDone = true;
                                 System.out.print(line);
                                 System.out.println("     Nice! I've marked this task as done:");
-                                System.out.println("       " + tasks.get(taskNum).toString());
+                                System.out.println("       " + tasks.get(doneTaskNum).toString());
+                                System.out.println(line);
+                                break;
+
+                            case "delete":
+                                int deleteTaskNum = Integer.parseInt(commandScanner.next()) - 1;
+                                System.out.print(line);
+                                System.out.println("     Noted. I've removed this task:");
+                                System.out.println("       " + tasks.get(deleteTaskNum).toString());
+                                tasks.remove(deleteTaskNum);
+                                System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                                 System.out.println(line);
                                 break;
 
@@ -99,9 +112,9 @@ public class Duke {
                     }
                 }
             } catch (DukeException ex) {
-                System.err.print(line);
-                System.err.println(ex);
-                System.err.println(line);
+                System.out.print(line);
+                System.out.println(ex);
+                System.out.println(line);
             }
         } while(continueDoLoop);
     }
