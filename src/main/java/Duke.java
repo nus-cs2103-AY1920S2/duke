@@ -12,8 +12,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-        List<String> tasks = new ArrayList<>();
-        List<Boolean> areTasksCompleted = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         System.out.println("Hello from\n" + logo);
         while (isRunning && sc.hasNextLine()) {
@@ -32,14 +31,14 @@ public class Duke {
             switch (command) {
             case "list": {
                 StringBuilder output = new StringBuilder("Tasks so far:\n");
-                ListIterator<String> iterator = tasks.listIterator();
+                ListIterator<Task> iterator = tasks.listIterator();
                 while (iterator.hasNext()) {
                     int index = iterator.nextIndex();
-                    String symbol = areTasksCompleted.get(index) ? "X" : " ";
-                    String task = iterator.next();
+                    Task task = iterator.next();
+                    char icon = task.getStatusIcon();
                     output.append(String.format(
                             "%d.[%s] %s\n",
-                            (index + 1), symbol, task
+                            (index + 1), icon, task
                     ));
                 }
                 System.out.print(output);
@@ -63,8 +62,8 @@ public class Duke {
                     ));
                     break;
                 }
-                String task = tasks.get(taskIndex);
-                areTasksCompleted.set(taskIndex, true);
+                Task task = tasks.get(taskIndex);
+                task.markAsCompleted();
                 System.out.println(String.format("Marked '%s' as done", task));
                 break;
             }
@@ -73,8 +72,7 @@ public class Duke {
                 break;
             }
             default: {
-                tasks.add(input);
-                areTasksCompleted.add(false);
+                tasks.add(new Task(input));
                 System.out.println(String.format("Added: '%s'", input));
             }
             }
