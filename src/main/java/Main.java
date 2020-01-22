@@ -4,7 +4,7 @@ public class Main {
     static final Scanner scanner = new Scanner(System.in);
     static final Duke bot = new Duke();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws OutOfBoundMarkingRequestException, InvalidCommandException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

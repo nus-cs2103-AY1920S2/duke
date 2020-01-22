@@ -23,7 +23,7 @@ public class Duke {
                 padding + uselessLine);
     }
 
-    public void processUserInput(String str) throws InvalidCommandException {
+    public void processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException {
         if (str.equals("")) {
             System.out.println(padding + uselessLine + "\n" +
                     padding + "Please type something. Don't leave it blank, plsss!\n" +
@@ -100,8 +100,9 @@ public class Duke {
         sc.close();
     }
 
-    private void markItemAsDone(int pos) {
-        assert (pos < storedItems.size() && pos >= 0);
+    private void markItemAsDone(int pos) throws OutOfBoundMarkingRequestException{
+        if (pos > storedItems.size() || pos < 0)
+            throw new OutOfBoundMarkingRequestException(pos, storedItems.size());
         storedItems.get(pos).markDone();
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Nice nice. I've marked the task as done for you.\n" +
