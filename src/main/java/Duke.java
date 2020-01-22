@@ -107,10 +107,10 @@ public class Duke {
     }
 
     private static String style(String message) {
-        String horizontalLine = new String(new char[76]).replace("\0", "-") + "\n";
-        message = horizontalLine + message + "\n" + horizontalLine;
+        String horizontalLine = new String(new char[76]).replace("\0", "-");
+        message = horizontalLine + "\n" + message + "\n" + horizontalLine;
         return message.lines()
-            .map(x -> "    " + x + "\n")
-            .reduce("", (x, y) -> x + y);
+            .map(x -> "    " + x)
+            .reduce("", (x, y) -> x + "\n" + y);
     }
 }
