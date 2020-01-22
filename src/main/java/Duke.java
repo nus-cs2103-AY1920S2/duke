@@ -17,14 +17,22 @@ public class Duke {
             replyUser("Your list is empty!");
         } else {
             System.out.println("\n------------------------------------------");
-            System.out.println("Your list of tasks: ");
+            System.out.println("Here is your list of tasks: ");
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
                 int index = i + 1;
-                System.out.println(index + ". " + task.getDescription());
+                System.out.println(index + "." + task.toString());
             }
             System.out.println("------------------------------------------\n");
         }
+    }
+
+    // Mark the specified task as done.
+    public static void markTaskAsDone(String userIndex) {
+        int index = Integer.parseInt(userIndex) - 1;
+        Task t = taskList.get(index);
+        t.markAsDone();
+        replyUser("Nice! I've marked this task as done:\n" + "    " + t.toString());
     }
 
     public static void main(String[] args) {
@@ -40,12 +48,15 @@ public class Duke {
 
         while (true) {
             String command = sc.nextLine();
+            String[] commandArray = command.split(" ");
 
             if (command.toLowerCase().equals("bye")) {
                 replyUser("Hope to see you again!");
                 break;
             } else if (command.toLowerCase().equals("list")) {
                 showList();
+            } else if (commandArray[0].toLowerCase().equals("done")){
+                markTaskAsDone(commandArray[1]);
             } else {
                 Task newTask = new Task(command);
                 taskList.add(newTask);
