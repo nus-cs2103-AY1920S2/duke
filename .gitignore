@@ -12,3 +12,11 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/main/java/Duke.class
+src/main/java/e0148811/duke/Deadline.class
+src/main/java/e0148811/duke/Event.class
+src/main/java/e0148811/duke/Task.class
+src/main/java/e0148811/duke/Todo.class
+text-ui-test/EXPECTED.txt
+text-ui-test/input.txt
+text-ui-test/runtest.bat

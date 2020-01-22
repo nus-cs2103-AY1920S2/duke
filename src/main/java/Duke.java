@@ -1,4 +1,5 @@
 import e0148811.duke.Deadline;
+import e0148811.duke.DukeException;
 import e0148811.duke.Event;
 import e0148811.duke.Task;
 import e0148811.duke.Todo;
@@ -9,54 +10,89 @@ import java.util.List;
 import java.util.Scanner;
 
 class Duke {
+    static String FORMAT_CORRECTION = "Invalid format of this instruction.\n"
+            + "The correct format should be ";
+
     public static void main(String[] args) {
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("Hello, this is Duke. " +
-                "Please give me an instruction or specify a task to be stored.");
+        System.out.println("Hello, this is Duke. "
+                + "Please give me an instruction followed by relevant description.");
 
         Scanner sc = new Scanner(System.in);
         List<Task> list = new ArrayList<>();
         String instruction;
+
         while (!(instruction = sc.nextLine()).equals("bye")) {
-            String[] instructionByWord = instruction.split(" ");
-            int lengthOfArray = instructionByWord.length;
-            String actionWord = instructionByWord[0];
-            switch (actionWord) {
-            case "list":
-                printList(list);
-                break;
-            case "todo":
-                Task t = createATodoTask(instructionByWord, lengthOfArray);
-                addTaskToList(list, t);
-                break;
-            case "deadline":
-                t = createADeadlineTask(instructionByWord, lengthOfArray);
-                addTaskToList(list, t);
-                break;
-            case "event":
-                t = createAnEventTask(instructionByWord, lengthOfArray);
-                addTaskToList(list, t);
-                break;
-            case "done":
-                markATaskDone(list.get(Integer.parseInt(instructionByWord[1]) - 1));
-                break;
+            try {
+                String[] instructionByWord = instruction.split(" ");
+                int lengthOfArray = instructionByWord.length;
+                String actionWord = instructionByWord[0];
+                switch (actionWord) {
+                case "list":
+                    if (instructionByWord.length != 1) {
+                        throw new DukeException(FORMAT_CORRECTION + "\"list\"");
+                    }
+                    printList(list);
+                    break;
+                case "todo":
+                    if (instructionByWord.length == 1) {
+                        throw new DukeException(FORMAT_CORRECTION
+                                + "\"todo a_string_describing_the_task\"");
+                    }
+                    Task t = createATodoTask(instructionByWord, lengthOfArray);
+                    addTaskToList(list, t);
+                    break;
+                case "deadline":
+                    t = createADeadlineTask(instructionByWord, lengthOfArray);
+                    addTaskToList(list, t);
+                    break;
+                case "event":
+                    t = createAnEventTask(instructionByWord, lengthOfArray);
+                    addTaskToList(list, t);
+                    break;
+                case "done":
+                    if (instructionByWord.length != 2) {
+                        throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
+                    }
+                    try {
+                        int index = Integer.parseInt(instructionByWord[1]) - 1;
+                        if (index >= list.size() || index < 1) {
+                            throw new DukeException("Invalid index.\n" + getNumOfTasks(list)
+                                    + " Please note that the index is one-based (begins with 1 instead of 0).");
+                        } else {
+                            markATaskDone(list.get(index));
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
+                    }
+                default:
+                    throw new DukeException("I don't understand this instruction.\n"
+                            + "The valid instructions include: todo, deadline, event, list, done, bye.");
+                }
+            } catch (DukeException e) {
+                System.err.println(e.getMessage());
             }
         }
-
         System.out.println("Goodbye. See you next time!");
     }
 
-    static Task createAnEventTask(String[] instructionByWord, int lengthOfArray) {
+    static Task createAnEventTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         int indexOfAt = -1;
         for (int i = 1; i < lengthOfArray; i++) {
             if (instructionByWord[i].equals("/at")) {
                 indexOfAt = i;
             }
+        }
+        if (indexOfAt == -1 || indexOfAt == 1 ||indexOfAt == lengthOfArray) {
+            throw new DukeException(FORMAT_CORRECTION
+                    + "\"event a_string_describing_the_task /at a_string_describing_the_time\"");
         }
         String description = String.join(" ",
                 Arrays.copyOfRange(instructionByWord, 1, indexOfAt));
@@ -65,13 +101,17 @@ class Duke {
         return new Event(description, time);
     }
 
-    static Task createADeadlineTask(String[] instructionByWord, int lengthOfArray) {
+    static Task createADeadlineTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         int indexOfBy = -1;
         for (int i = 1; i < lengthOfArray; i++) {
             if (instructionByWord[i].equals("/by")) {
                 indexOfBy = i;
                 break;
             }
+        }
+        if (indexOfBy == -1 || indexOfBy == 1 || indexOfBy == (lengthOfArray - 1)) {
+            throw new DukeException(FORMAT_CORRECTION
+                    + "\"deadline a_string_describing_the_task /by a_string_describing_the_deadline_time\"");
         }
         String description = String.join(" ",
                 Arrays.copyOfRange(instructionByWord, 1, indexOfBy));
@@ -88,9 +128,9 @@ class Duke {
 
     static void addTaskToList(List<Task> list, Task task) {
         list.add(task);
-        System.out.println("Noted, the following pending task is stored:");
+        System.out.println("Noted, the following task is stored:");
         System.out.println(task);
-        System.out.println("Currently there are " + list.size() + " tasks in the list.");
+        System.out.println(getNumOfTasks(list));
     }
 
     static void markATaskDone(Task taskToBeCompleted) {
@@ -99,10 +139,15 @@ class Duke {
         System.out.println(taskToBeCompleted);
     }
 
-    static void printList(List<Task> list) {
+    private static void printList(List<Task> list) {
         System.out.println("Here is the task list:");
         for (int i = 1; i <= list.size(); i++) {
             System.out.println(i + ". " + list.get(i - 1));
         }
+        System.out.println(getNumOfTasks(list));
+    }
+
+    private static String getNumOfTasks(List<Task> list) {
+        return "Currently there is/are " + list.size() + " task(s) in the list.";
     }
 }
