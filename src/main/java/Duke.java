@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<String> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
@@ -15,35 +15,47 @@ public class Duke {
                 sayBye();
                 break;
             } else if (command.equals("read") || command.equals("return")) {
-                addToList(input);
+                Task task = new Task(input);
+                addToList(task);
             } else if (command.equals("list")) {
                 printList();
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(inputs[1]);
+                markTaskAsDone(index);
             } else {
                 sayInvalidInput();
             }
         }
     }
 
-    public static void greet() {
+    private static void greet() {
         System.out.println("Hi there, I'm Dodo!\nHow may I help you today?");
     }
 
-    public static void sayBye() {
+    private static void sayBye() {
         System.out.println("Stop procrastinating. See you!");
     }
 
-    public static void addToList(String input) {
-        tasks.add(input);
-        System.out.println("added: " + input);
+    private static void addToList(Task task) {
+        tasks.add(task);
+        System.out.println("added: " + task.getDescription());
     }
 
-    public static void printList() {
+    private static void printList() {
+        System.out.println("Stop procrastinating. Do it now!");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+            System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
         }
     }
 
-    public static void sayInvalidInput() {
+    private static void markTaskAsDone(int index) {
+        Task task = tasks.get(index - 1);
+        task.markAsDone();
+        System.out.println("Good job! One off your chest!");
+        System.out.println(task.toString());
+    }
+
+    private static void sayInvalidInput() {
         System.out.println("Apologies, I'm too dumb to understand that!");
     }
 }
