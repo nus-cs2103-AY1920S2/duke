@@ -2,6 +2,7 @@ import duke.pack.Task;
 import duke.pack.Deadline;
 import duke.pack.Event;
 import duke.pack.Todo;
+import duke.pack.DukeException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class Duke {
     // ArrayList of tasks
     private static ArrayList<Task> arrList;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         // Scanner object
         Scanner sc = new Scanner(System.in);
         arrList = new ArrayList<>();
@@ -19,45 +20,87 @@ public class Duke {
         greet();
 
         // take in user's command
-        String command = sc.nextLine();
+        String command = sc.nextLine().trim();
 
         // continue processing user's command, as long as command is not bye
         while (!command.equals("bye")) {
             String[] c = command.split(" ");
 
-            if (command.equals("list")) {
-                // prints tasks in list if command is list
-                printList();
+            try {
+                if (command.equals("list")) {
+                    // prints tasks in list if command is list
+                    printList();
 
-            } else if (c[0].equals("done")){
-                // mark the specified task as done
-                int taskNum = Integer.parseInt(c[1]);
-                arrList.get(taskNum - 1).markAsDone();
+                } else if (c[0].equals("done")) {
+                    // if task number is not given
+                    if (c.length == 1) {
+                        throw new DukeException("    Oh no! You have to specify which task is done!");
+                    }
 
-            } else if (c[0].equals("deadline")) {
-                String[] arr = command.split("/by");
-                String[] arr2 = arr[0].split("deadline");
+                    // mark the specified task as done
+                    int taskNum = Integer.parseInt(c[1]);
+                    arrList.get(taskNum - 1).markAsDone();
 
-                // add to list
-                Task d = new Deadline(arr2[1].trim(), arr[1].trim());
-                add(d);
+                } else if (c[0].equals("deadline")) {
+                    // if no description is given
+                    if (c.length == 1) {
+                        throw new DukeException("    Oh no! A deadline cannot be empty!");
+                    }
 
-            } else if (c[0].equals("event")) {
-                String[] arr = command.split("/at");
-                String[] arr2 = arr[0].split("event");
+                    String[] arr = command.split("/by");
+                    // if no "by" is given
+                    if (arr.length == 1) {
+                        throw new DukeException("    Oh no! You need to follow the format!");
+                    }
 
-                // add to list
-                Task e = new Event(arr2[1].trim(), arr[1].trim());
-                add(e);
+                    String[] arr2 = arr[0].split("deadline");
 
-            } else {
-                String[] arr = command.split("todo");
-                // add to list
-                Task t = new Todo(arr[1].trim());
-                add(t);
+                    // add to list
+                    Task d = new Deadline(arr2[1].trim(), arr[1].trim());
+                    add(d);
+
+                } else if (c[0].equals("event")) {
+                    // if no description is given
+                    if (c.length == 1) {
+                        throw new DukeException("    Oh no! An event cannot be empty!");
+                    }
+
+                    String[] arr = command.split("/at");
+                    // if no "at" is given
+                    if (arr.length == 1) {
+                        throw new DukeException("    Oh no! You need to follow the format!");
+                    }
+
+                    String[] arr2 = arr[0].split("event");
+
+                    // add to list
+                    Task e = new Event(arr2[1].trim(), arr[1].trim());
+                    add(e);
+
+                } else if (c[0].equals("todo")) {
+                    String[] arr = command.split("todo");
+
+                    // if no description is given
+                    if (c.length == 1) {
+                        throw new DukeException("    Oh no! A todo cannot be empty!");
+                    }
+
+                    // add to list
+                    Task t = new Todo(arr[1].trim());
+                    add(t);
+
+                } else {
+                    // if command does not exist
+                    throw new DukeException("    Oh no! I'm sorry, I do not understand that, please try again!");
+
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+            } finally {
+                command = sc.nextLine().trim();
             }
 
-            command = sc.nextLine();
+            //command = sc.nextLine();
         }
 
         // exit
