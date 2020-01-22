@@ -88,9 +88,9 @@ public class Ui {
      *
      * @param tl the tl
      */
-    public void showTasks(TaskList tl) {
+    public void showTasks(TaskList tl, boolean isFind) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("      Here are the tasks in your list: \n");
+        System.out.println("      Here are the " + (isFind ? "matching " : "") + "tasks in your list: \n");
         for (int count = 0; count < tl.getSize(); count++) {
             System.out.print("      " + (count + 1) + ". ");
             System.out.println(tl.get(count));

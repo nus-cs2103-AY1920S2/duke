@@ -171,8 +171,9 @@ public class TaskList {
             for (Task t : tasks) {
                 sb.append(t.print() + "\n");
             }
-            storage.writeToFile(sb.toString());
+
         }
+        storage.writeToFile(sb.toString());
 
         ui.taskRemoveSuccess(cur, getSize());
 

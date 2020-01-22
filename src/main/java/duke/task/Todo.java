@@ -29,7 +29,9 @@ public class Todo extends Task {
         String[] parts = taskString.split("\\|");
         boolean d = parts[1].trim().equals("1");
         String desc = parts[2].trim();
-        return new Todo(desc);
+        Todo t = new Todo(desc);
+        t.isDone = d;
+        return t;
     }
 
     /**

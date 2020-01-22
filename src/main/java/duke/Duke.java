@@ -7,6 +7,7 @@ package duke;
 
 import duke.command.Operation;
 import duke.storage.Storage;
+import duke.task.SearchTask;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -34,7 +35,7 @@ public class Duke {
      * The tasks.
      */
     private TaskList tasks;
-
+    private TaskList temp;
     /**
      * The ui.
      */
@@ -70,6 +71,8 @@ public class Duke {
      */
     public void run() {
         tasks = new TaskList();
+        temp = new TaskList();
+
 
         ui.welcome();
         String command = "";
@@ -84,7 +87,9 @@ public class Duke {
             }
 
             if (command.equalsIgnoreCase(Operation.LIST.toString())) {
-                ui.showTasks(tasks);
+                temp.getTasks().clear();
+                tasks = storage.loadTasks();
+                ui.showTasks(tasks, false);
 
             } else if (command.equalsIgnoreCase(Operation.TODO.toString())
                     || command.equalsIgnoreCase(Operation.DEADLINE.toString())
@@ -95,17 +100,26 @@ public class Duke {
                     ui.showMessage(Arrays.asList(ex.getMessage()));
                 }
 
+            } else if (command.equalsIgnoreCase(Operation.FIND.toString())) {
+                temp = storage.findTasks(current[1]);
+                ui.showTasks(temp, true);
             } else if (command.equalsIgnoreCase(Operation.DONE.toString())) {
                 int value = Integer.parseInt(current[1]);
                 try {
                     Task cur = tasks.get(value - 1);
+                    StringBuilder sb = new StringBuilder();
+                    if (!temp.getTasks().isEmpty()) {
+                        cur = tasks.get(((SearchTask) temp.get(value - 1)).getKey());
+
+
+                    }
                     cur.markAsDone();
                     tasks.deleteTask(value, storage);
                     tasks.addTask(value - 1, cur);
-                    StringBuilder sb = new StringBuilder();
                     for (Task t : tasks.getTasks()) {
                         sb.append(t.print() + "\n");
                     }
+
                     storage.writeToFile(sb.toString());
                     ui.taskMarkDone(cur);
                 } catch (IndexOutOfBoundsException ex) {
@@ -114,7 +128,11 @@ public class Duke {
 
             } else if (command.equalsIgnoreCase(Operation.DELETE.toString())) {
                 try {
-                    tasks.deleteTask(Integer.parseInt(current[1]), storage);
+                    int keyToDelete = Integer.parseInt(current[1]);
+                    if (tasks.get(0) instanceof SearchTask) {
+                        keyToDelete = ((SearchTask) tasks.get(keyToDelete)).getKey();
+                    }
+                    tasks.deleteTask(keyToDelete, storage);
                 } catch (IndexOutOfBoundsException ex) {
                     ui.taskNumberError();
                 }

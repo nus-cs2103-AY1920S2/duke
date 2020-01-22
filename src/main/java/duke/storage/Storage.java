@@ -8,12 +8,14 @@ import duke.task.Deadline;
 import duke.task.EventObj;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.task.SearchTask;
+import duke.task.Task;
 
-import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -68,11 +70,12 @@ public class Storage {
      *
      * @return the task list
      */
-    TaskList loadTasks() {
+    public TaskList loadTasks() {
         TaskList tasks = new TaskList();
         try {
             File file = new File(filePath);
             if (!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             BufferedReader rd = new BufferedReader(new FileReader(filePath));
@@ -96,5 +99,23 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    /**
+     * Find tasks containing the user search term.
+     *
+     * @return the task list
+     */
+    public TaskList findTasks(String searchTerm) {
+        TaskList tasks = loadTasks();
+        TaskList temp = new TaskList();
+        int pos = 0;
+        for (Task task : tasks.getTasks()) {
+            if (task.getDescription().contains(searchTerm)) {
+                temp.addTask(new SearchTask(pos, task.isDone(), task.getDescription(), task.getType()));
+            }
+            pos++;
+        }
+        return temp;
     }
 }

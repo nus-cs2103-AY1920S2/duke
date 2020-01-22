@@ -34,6 +34,19 @@ public abstract class Task implements TaskPrintable, Parseable {
     }
 
     /**
+=======
+     * This constructor is used to retain most useful properties needed to create
+     * task at its core.
+     *
+     * @param description the description
+     */
+    public Task(boolean isDone, String description, String type) {
+        this.isDone = isDone;
+        this.description = description;
+        this.type = type;
+    }
+
+    /**
      * Instantiates a new task.
      *
      * @param description the description
