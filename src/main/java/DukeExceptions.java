@@ -3,4 +3,6 @@ public class DukeExceptions extends Exception {
     public DukeExceptions(String exceptionMsg) {
         super(exceptionMsg);
     }
+
+
 }

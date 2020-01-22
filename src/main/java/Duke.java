@@ -81,14 +81,19 @@ public class Duke { //extends Application {
 
         while (!nextStr.equals("bye")) { //check for ending input
 
-
             if (nextStr.length() >= 6 && nextStr.substring(0, 4).equals("done")) {
                 //can we assume its always a number after done?
 
                 String strNumberDone = nextStr.substring(5, nextStr.length());
                 int numDone = Integer.parseInt(strNumberDone); //convert to number
 
-                levelMethods.completeTask(numDone);
+                try {
+                    levelMethods.completeTask(numDone);
+                } catch (DukeExceptions ex) {
+                    System.out.println("    #__________________________________________________________# \n");
+                    System.out.println("      " + ex);
+                    System.out.println("    #__________________________________________________________#");
+                }
             } else if (nextStr.equals("list")) {
                 //check for listing input
                 levelMethods.listTheList();
@@ -98,7 +103,10 @@ public class Duke { //extends Application {
                     levelMethods.echo(nextStr);
                 } catch (DukeExceptions ex) {
                     //System.out.println("yes");
-                    System.err.println(ex);
+                    //System.out.println(ex);
+                    System.out.println("    #__________________________________________________________# \n");
+                    System.out.println("      " + ex);
+                    System.out.println("    #__________________________________________________________#");
                 }
             }
 
