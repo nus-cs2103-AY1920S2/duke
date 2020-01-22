@@ -54,7 +54,7 @@ public class Duke {
     private static void displayList() {
         printLine();
         for (int i = 0; i < tasks.size(); i++) {
-            indent(i + ". " +tasks.get(i).toString());
+            indent((i + 1) + ". " +tasks.get(i).toString());
         }
         printLine();
     }
