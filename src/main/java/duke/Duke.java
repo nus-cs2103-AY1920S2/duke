@@ -1,21 +1,50 @@
+/*
+ * @author leslieharland
+ */
+
 package duke;
 
-import duke.command.*;
-import duke.storage.*;
-import duke.task.*;
+
+import duke.command.Operation;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 
+/**
+ * The Class Duke.
+ */
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    /**
+     * The i.
+     */
     static int i;
 
+    /**
+     * The storage.
+     */
+    private Storage storage;
+
+    /**
+     * The tasks.
+     */
+    private TaskList tasks;
+
+    /**
+     * The ui.
+     */
+    private Ui ui;
+
+    /**
+     * Instantiates a new duke.
+     *
+     * @param filePath the file path
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +56,18 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
+    public static void main(String[] args) {
+        new Duke("../data/duke.txt").run();
+    }
+
+    /**
+     * Run.
+     */
     public void run() {
         tasks = new TaskList();
 
@@ -45,7 +86,8 @@ public class Duke {
             if (command.equalsIgnoreCase(Operation.LIST.toString())) {
                 ui.showTasks(tasks);
 
-            } else if (command.equalsIgnoreCase(Operation.TODO.toString()) || command.equalsIgnoreCase(Operation.DEADLINE.toString())
+            } else if (command.equalsIgnoreCase(Operation.TODO.toString())
+                    || command.equalsIgnoreCase(Operation.DEADLINE.toString())
                     || command.equalsIgnoreCase(Operation.EVENT.toString())) {
                 try {
                     tasks.addTask(current, storage);
@@ -79,17 +121,14 @@ public class Duke {
 
             } else {
                 try {
-                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException(
+                            " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } catch (Exception ex) {
                     ui.showMessage(Arrays.asList(ex.getMessage()));
                 }
             }
         }
 
-    }
-
-    public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
     }
 
 }
