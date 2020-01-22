@@ -1,7 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        ArrayList<String> commandList = new ArrayList<>();
+
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,14 +19,26 @@ public class Duke {
         String word = input.nextLine();
         while (!word.equalsIgnoreCase("bye")) {
             System.out.println("____________________________________________________________");
-            System.out.println(word);
+            if (word.equalsIgnoreCase("list")){
+
+                for (int i = 1; i <= commandList.size(); i++) {
+                    System.out.println(i + ". " + commandList.get(i-1));
+                }
+            }
+            else {
+
+                commandList.add(word);
+                System.out.println("added: " + word);
+
+
+            }
             System.out.println("____________________________________________________________");
             word = input.nextLine();
-
         }
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
 
     }
+
 }
