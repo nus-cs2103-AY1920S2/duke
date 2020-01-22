@@ -1,8 +1,8 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        printGreeting();
         runDuke();
     }
 
@@ -27,13 +27,6 @@ public class Duke {
     }
 
     public static void runDuke() {
-        printGreeting();
-
-        // index 0 -> task #1
-        String[] taskList = new String[100];
-        Boolean[] isDoneList = new Boolean[100];
-        int currTaskIdx = 0;
-
         // commands: bye, list, done
         // any other input will be added to tasks
         String input = getUserInput();
@@ -41,15 +34,15 @@ public class Duke {
             String command = input.split(" ")[0];
 
             if (command.equals("list")) {
-                printTasks(taskList, isDoneList, currTaskIdx - 1);
+                Task.printTasks();
             } else if (command.equals("done")) {
                 int doneTaskNum = Integer.parseInt(input.split(" ")[1]);
-                isDoneList[doneTaskNum - 1] = true;
-                printMarkAsDone(taskList[doneTaskNum - 1]);
+                Task doneTask = Task.tasks[doneTaskNum - 1];
+                doneTask.markAsDone();
+
+                Task.printMarkedAsDone(doneTask);
             } else {
-                taskList[currTaskIdx] = input;
-                isDoneList[currTaskIdx] = false;
-                currTaskIdx++;
+                Task.addTask(input);
 
                 System.out.format("added: %s%n%n", input);
             }
@@ -58,17 +51,5 @@ public class Duke {
         }
 
         System.out.println("Have a nice day!");
-    }
-
-    public static void printTasks(String[] taskList, Boolean[] isDoneList, int lastIdx) {
-        for (int i = 0; i <= lastIdx; i++) {
-            System.out.format("%d.[%s] %s%n", i + 1, isDoneList[i] ? "✔" : "✘", taskList[i]);
-        }
-        System.out.println();
-    }
-
-    public static void printMarkAsDone(String task) {
-        System.out.println("Noted. I have marked this task as done:");
-        System.out.format("    [✔] %s%n%n", task);
     }
 }
