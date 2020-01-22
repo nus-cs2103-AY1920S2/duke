@@ -8,7 +8,9 @@ public class Duke {
         greet();
 
         Scanner sc = new Scanner(System.in);
-        inputCommands(sc);
+        TaskList taskList = new TaskList();
+
+        inputCommands(sc, taskList);
 
         exit();
     }
@@ -29,21 +31,25 @@ public class Duke {
      *
      * @param sc the scanner accepting user input
      */
-    public static void inputCommands(Scanner sc) {
+    public static void inputCommands(Scanner sc, TaskList taskList) {
         // Terminates the chat-bot if true
         boolean exit = false;
 
-        while (!exit && sc.hasNext()) {
-            String command = sc.next();
+        while (!exit && sc.hasNextLine()) {
+            String input = sc.nextLine();
             System.out.println();
 
             // Handle different commands
-            switch (command) {
+            switch (input) {
             case "bye":
                 exit = true; // Terminate the program
                 break;
+            case "list":
+                list(taskList);
+                break;
             default:
-                echo(command); // Repeat the user's command
+                taskList = add(taskList, input);
+                //echo(command); // Repeat the user's command
                 break;
             }
         }
@@ -78,7 +84,7 @@ public class Duke {
     public static void echo(String message) {
         drawLine();
 
-        System.out.println(indent(message, 5));
+        System.out.println(indent(message + "\n", 5));
 
         drawLine();
         System.out.println(); // New line below each chat-bot message
@@ -97,5 +103,17 @@ public class Duke {
         String farewell = "Bye! Please give a review if you like this program!";
 
         echo(farewell);
+    }
+
+    /** Adds a task into the chat-bot. */
+    public static TaskList add(TaskList taskList, String task) {
+        echo("added: " + task);
+
+        return taskList.addTask(task);
+    }
+
+    /** Lists all tasks in the chat-bot. */
+    public static void list(TaskList taskList) {
+        echo(taskList.toString());
     }
 }
