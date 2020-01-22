@@ -21,7 +21,7 @@ public class Boxer {
         String[] split = task.split("/", 2);
         print(Arrays.toString(split));
         Deadline newTask = new Deadline(split[0], split[1]);
-        print(newTask.printTaskDetails());
+        print(newTask.toString());
         taskList.add(newTask);
         print("added: " + task);
     }
@@ -36,7 +36,7 @@ public class Boxer {
         taskList.forEach(task -> Boxer.print(String.format(
                 "%d. %s",
                 (taskList.indexOf(task) + 1),
-                task.printTaskDetails())));
+                task.toString())));
         print(String.format(
                 "That's %d in the list.", taskList.size()));
     }
@@ -45,7 +45,7 @@ public class Boxer {
         Task task = taskList.get(taskIndex - 1);
         task.markAsDone();
         print("That's another one down. That'll be: ");
-        print(task.printTaskDetails());
+        print(task.toString());
     }
 
     public void exit() {
