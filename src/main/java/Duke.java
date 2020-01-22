@@ -1,21 +1,22 @@
 import java.util.*;
 
 public class Duke {
-    String[] list;
+    Task[] list;
     int latest_index = 0;
 
     public void printList() {
 
         for (int i = 1; i < latest_index + 1; i++) {
-            System.out.println(i + ". " + list[i-1]);
+            System.out.println(i + ". " + list[i-1].toString());
         }
+        System.out.println("\n");
     }
 
     public void run() {
 
-        System.out.println("Hello ! I'm Ashley\nOi What u want");
+        System.out.println("Hello ! I'm Ashley\nOi What u want\n");
 
-        list = new String[100];
+        list = new Task[100];
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
@@ -28,10 +29,23 @@ public class Duke {
             } else if (str.equals("list")) {
                 printList();
 
-            }
-            else {
-                list[latest_index++] = str;
+            } else if (str.contains("done ")) {
+
+                str = str.substring(5);
+                int i = Integer.parseInt(str) - 1;
+
+                if (!list[i].isDone) {
+                    list[i].isDone = true;
+                    System.out.println("Nice! You have done this:\n" + list[i].toString() + "\n");
+                } else {
+                    System.out.println("You have already done\n" + list[i].toString() + "\nNo need to do it again!\n");
+                }
+
+            } else {
+                Task task = new Task(str);
+                list[latest_index++] = task;
                 System.out.println("added: " + str + "\n");
+
             }
         }
     }

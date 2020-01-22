@@ -4,5 +4,6 @@ class Main {
 
         Duke duke = new Duke();
         duke.run();
+
     }
 }
