@@ -46,7 +46,7 @@ public class ChatBot {
      */
     public boolean respondToUser(String command) {
         // split the string
-        String[] inputCommand = command.split(" ");
+        String[] inputCommand = command.trim().split(" ");
         StringBuilder taskname = new StringBuilder();
         StringBuilder DateTime = new StringBuilder();
         int index_found = 0;
