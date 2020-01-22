@@ -27,7 +27,11 @@ public class Duke {
                 String[] splited = input.split(" ");
                 int index = Integer.parseInt(splited[1]);
                 lib.done(index);
-            } else if(input.contains("todo")) {
+            } else if(input.contains("delete")) {
+                String[] splited = input.split(" ");
+                int index = Integer.parseInt(splited[1]);
+                lib.delete(index);
+            }else if(input.contains("todo")) {
                 CheckInput = input.split(" ");
                 if (CheckInput.length <2 ){
                     DE.IncorrectInputTodo();

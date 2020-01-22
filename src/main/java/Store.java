@@ -6,17 +6,19 @@ public class Store {
     private String cmd;
     private Integer counter;
     private ArrayList<Task> Storage;
+    private DukeException DE;
 
     public Store(){
-        counter = 1;
-        Storage = new ArrayList<>();
+        this.counter = 1;
+        this.Storage = new ArrayList<>();
+        this.DE = new DukeException();
     }
     public void AddNewAction(String S) {
         this.cmd = S;
         System.out.println(line);
         System.out.println("added: " + cmd);
         System.out.println(line);
-        Task T = new Task(cmd, counter);
+        Task T = new Task(cmd);
         Storage.add(T);
         counter = counter + 1;
     }
@@ -28,39 +30,63 @@ public class Store {
     }
     public void list() {
         System.out.println(line);
-        for(Task act:Storage) {
-            System.out.println(String.format("%d.",act.index) + act.toString());
+        for(int i = 0; i < Storage.size(); i++) {
+            System.out.println(String.format("%d.",i+1) + Storage.get(i).toString());
         }
         System.out.println(line);
     }
     public void done(int index){
-        Task UpdateCurrAction = Storage.get(index-1);
-        UpdateCurrAction.isDone = true;
-        System.out.println(line);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(UpdateCurrAction.toString());
-        System.out.println(line);
+        if(index > Storage.size() || index <= 0){
+            DE.ExceedList();
+        } else {
+            Task UpdateCurrAction = Storage.get(index - 1);
+            UpdateCurrAction.isDone = true;
+            System.out.println(line);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(UpdateCurrAction.toString());
+            System.out.println(line);
+        }
     }
     public void todo(String S){
         this.cmd = S;
-        Task T = new Todo(cmd, counter);
-        Storage.add(T);
+        Task T = new Todo(cmd);
         T.Output();
+        System.out.println(String.format("Now you have %d tasks in the list.", counter));
+        System.out.println(line);
+        Storage.add(T);
         counter = counter + 1;
     }
     public void deadline(String[] ActionTime){
         this.cmd = ActionTime[0];
-        Task T = new Deadline(cmd, counter, ActionTime[1]);
-        Storage.add(T);
+        Task T = new Deadline(cmd, ActionTime[1]);
         T.Output();
+        System.out.println(String.format("Now you have %d tasks in the list.", counter));
+        System.out.println(line);
+        Storage.add(T);
         counter = counter + 1;
     }
     public void event(String[] ActionTime){
         this.cmd = ActionTime[0];
-        Task T = new Event(cmd, counter, ActionTime[1]);
-        Storage.add(T);
+        Task T = new Event(cmd, ActionTime[1]);
         T.Output();
+        System.out.println(String.format("Now you have %d tasks in the list.", counter));
+        System.out.println(line);
+        Storage.add(T);
         counter = counter + 1;
+    }
+    public void delete(int index){
+        if(index > Storage.size() || index <= 0){
+            DE.ExceedList();
+        } else {
+            Task UpdateCurrAction = Storage.get(index - 1);
+            System.out.println(line);
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(UpdateCurrAction.toString());
+            Storage.remove(index - 1);
+            System.out.println(String.format("Now you have %d tasks in the list", Storage.size()));
+            System.out.println(line);
+
+        }
     }
 }
 

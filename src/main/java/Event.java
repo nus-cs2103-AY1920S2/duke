@@ -2,8 +2,8 @@ public class Event extends Task {
 
     private String time;
 
-    public Event (String description, int index, String time){
-        super(description, index);
+    public Event (String description, String time){
+        super(description);
         this.time = time.substring(3).strip();
     }
 
@@ -15,7 +15,5 @@ public class Event extends Task {
         System.out.println(super.line);
         System.out.println("Got it. I've added this task: ");
         System.out.println(" [E]" + super.toString() + "(at: " + time + ")");
-        System.out.println(String.format("Now you have %d tasks in the list.", index));
-        System.out.println(super.line);
     }
 }

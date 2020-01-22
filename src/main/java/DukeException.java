@@ -32,5 +32,10 @@ public class DukeException {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         System.out.println(line);
     }
+    public void ExceedList(){
+        System.out.println(line);
+        System.out.println("☹ Invalid Number. Please Enter a valid number.");
+        System.out.println(line);
+    }
 
 }
