@@ -21,8 +21,9 @@ public class Duke {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
                 int index = i + 1;
-                System.out.println("\n" + index + ". " + task.getDescription());
+                System.out.println(index + ". " + task.getDescription());
             }
+            System.out.println("------------------------------------------\n");
         }
     }
 
@@ -35,10 +36,10 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        System.out.println("What can I do for you?\n");
 
         while (true) {
-            String command = sc.next();
+            String command = sc.nextLine();
 
             if (command.toLowerCase().equals("bye")) {
                 replyUser("Hope to see you again!");
@@ -48,7 +49,7 @@ public class Duke {
             } else {
                 Task newTask = new Task(command);
                 taskList.add(newTask);
-                replyUser("added:" + command);
+                replyUser("added: " + command);
             }
         }
     }
