@@ -77,7 +77,6 @@ public class Database {
             } catch(IndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The duration of a events cannot be empty.");
             }
-            System.out.println(duration);
             if (duration.strip().equals("")) {
                 throw new DukeException("☹ OOPS!!! The duration of a event cannot be empty.");
             }
