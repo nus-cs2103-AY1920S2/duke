@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Duchess {
-    private ArrayList<String> stringList;
+    private ArrayList<String> strings;
     private Scanner scanner;
     private String command;
 
@@ -14,19 +14,19 @@ class Duchess {
     private void awaitInput() {
         this.command = scanner.nextLine();
         switch (command.toLowerCase()) {
-            case "list":
-                printList();
-                break;
-            case "bye":
-                goodbye();
-                break;
-            default:
-                addToList(command);
-                break;
+        case "list":
+            printList();
+            break;
+        case "bye":
+            sayGoodbye();
+            break;
+        default:
+            addToList(command);
+            break;
         }
     }
 
-    private void introduction() {
+    private void introduce() {
         String logo = " _____             _                   \n"
                 + "|  __ \\           | |                  \n"
                 + "| |  | |_   _  ___| |__   ___  ___ ___ \n"
@@ -45,26 +45,26 @@ class Duchess {
 
     private void addToList(String input) {
         echo(input);
-        this.stringList.add(input);
+        this.strings.add(input);
         awaitInput();
     }
 
     private void printList() {
         System.out.println("\tSighs... you never remember what you say, don't you.");
         System.out.println("\tYou said these:");
-        for (int i = 0; i < this.stringList.size(); i++) {
-            System.out.println("\t\t" + (i + 1) + ".\t" + this.stringList.get(i));
+        for (int i = 0; i < this.strings.size(); i++) {
+            System.out.println("\t\t" + (i + 1) + ".\t" + this.strings.get(i));
         }
         awaitInput();
     }
 
-    private void goodbye() {
+    private void sayGoodbye() {
         System.out.println("\tBye, is it? Shoo shoo then.");
 
     }
 
     void run() {
-        introduction();
+        introduce();
         awaitInput();
     }
 }
