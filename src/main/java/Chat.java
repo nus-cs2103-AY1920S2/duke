@@ -9,5 +9,7 @@ public interface Chat {
         void setGoodbye(String goodbye);
         void goodbye();
         void echo(String command);
+        void addRecord(String record);
+        void listRecord();
 
 }

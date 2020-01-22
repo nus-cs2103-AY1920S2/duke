@@ -23,11 +23,23 @@ public class Duke {
         //read first input
         String command = sc.nextLine();
 
-        //echo inputs
+        //add inputs and list record when asked
         while(!command.equals("bye")) {
-            bot.echo(command);
+            if(command.equals("list")) {
+                System.out.println("--------------------------------------------------");
+                bot.listRecord();
+                System.out.println("--------------------------------------------------\n");
+            } else {
+                bot.addRecord(command);
+                System.out.println("--------------------------------------------------");
+                System.out.println("piaked in: " + command);
+                System.out.println("--------------------------------------------------\n");
+            }
+
             command = sc.nextLine();
         }
+
+
 
         //exit
         bot.goodbye();

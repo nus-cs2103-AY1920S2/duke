@@ -4,9 +4,11 @@ public class Chatbot implements Chat {
     private String name;
     private String greeting;
     private String goodbye;
+    private ArrayList<String> record;
 
     public Chatbot(String name) {
         this.name = name;
+        this.record = new ArrayList<>();
     }
 
     public String getName() {
@@ -46,5 +48,16 @@ public class Chatbot implements Chat {
 
     public void goodbye() {
         System.out.println(this.goodbye);
+    }
+
+    public void addRecord(String record) {
+        this.record.add(record);
+    }
+
+    public void listRecord() {
+        for (int i = 0; i < record.size(); i++) {
+            int j = i + 1;
+            System.out.print(j + ". " + record.get(i) + "\n");
+        }
     }
 }
