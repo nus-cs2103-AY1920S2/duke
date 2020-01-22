@@ -1,14 +1,25 @@
 public class Task {
+    protected String taskType;
     protected String description;
     protected boolean isDone;
+    protected String date;
 
-    public Task(String description) {
+    public Task(String taskType, String description) {
+        this.taskType = taskType;
         this.description = description;
         this.isDone = false;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public String getTaskType() {
+        return (taskType.equals("todo") ? "T" : taskType.equals("deadline") ? "D" : "E");
     }
 
     public void markAsDone() {
@@ -17,6 +28,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return description;
+        return description + (!taskType.equals("todo") ? " (" + date.substring(0, 2) + ": " +
+                date.substring(3, date.length()) + ")" : "");
     }
 }
