@@ -49,6 +49,22 @@ public class Duke {
                         System.out.println(tasks.get(i));
                         System.out.println("____________________________________________________________");
                     }
+                } else if ((command.split(" ")[0]).equals("delete")) {
+                    int i = Integer.parseInt(command.split(" ")[1]) - 1;
+                    if (i >= tasks.size() || i < 0) {
+                        throw new DukeException("There is no such task in the list!");
+                    } else {
+                        tasks.get(i).markAsDeleted();
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.println("  " + tasks.get(i));
+                        tasks.remove(tasks.get(i));
+                        if (tasks.size() > 1) {
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        } else {
+                            System.out.println("Now you have " + tasks.size() + " task in the list.");
+                        }
+                        System.out.println("____________________________________________________________");
+                    }
                 } else {
                     Task t = null;
                     String taskType = command.split(" ")[0];
