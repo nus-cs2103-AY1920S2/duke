@@ -17,37 +17,20 @@ public class Task {
     this.isDone = false;
   }
 
-  private static Boolean isTodo(String description) {
-    return Pattern.matches("^todo .*", description);
-  }
-
-  private static Boolean isEvent(String description) {
-    return Pattern.matches("^event .* /at .*", description);
-  }
-
-  private static Boolean isDeadline(String description) {
-    return Pattern.matches("^deadline .* /by .*", description);
-  }
-
-  public static Boolean isTask(String description) {
-    return Task.isTodo(description) || Task.isEvent(description) || Task.isDeadline(description);
-  }
-
-  private static String getType(String words) {
-    for (String type : Task.taskTypes) {
-      if (words.contains(type))
-        return type;
+  private static String getType(String words) throws DukeException {
+    String acceptedTypes = String.format("(%s)", String.join("|", Task.taskTypes));
+    if (Pattern.matches(acceptedTypes + ".*", words)) {
+      if (Pattern.matches(String.format("^%s .*", acceptedTypes), words)) {
+        return words.split(" ")[0];
+      } else {
+        throw new DukeException("Please start with event type");
+      }
     }
-    return "";
+    throw new DukeException("No accepted types present");
   }
 
   public static Task newTask(String description) throws DukeException {
-    if (Task.getType(description) == "")
-      throw new DukeException("Task not recognized");
-
-    String type = Task.getType(description.split(" ")[0]);
-    if (type == "") // if type exists, but is not at the front
-      throw new DukeException("Please start with event type");
+    String type = Task.getType(description);
 
     String typeLess = description.substring(type.length()).trim();
 
@@ -88,7 +71,7 @@ public class Task {
   }
 
   public String getStatusIcon() {
-    return (this.isDone ? "Y" : "N"); // return tick or X symbols
+    return (this.isDone ? "Y" : "N"); // Couldn't view the ticks and crosses on my terminal
   }
 
   public void setDone() {

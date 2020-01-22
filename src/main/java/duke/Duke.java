@@ -17,8 +17,9 @@ public class Duke {
     private final int indent2 = 5;
     private final int indent3 = 7;
 
-    public static void out(String in, int indent) {
-        System.out.println(" ".repeat(indent) + in);
+    public Duke() {
+        this.sc = new Scanner(System.in);
+        this.tasks = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -31,9 +32,12 @@ public class Duke {
         bot.start();
     }
 
-    public Duke() {
-        this.sc = new Scanner(System.in);
-        this.tasks = new ArrayList<>();
+    public static void out(String in, int indent) {
+        System.out.println(" ".repeat(indent) + in);
+    }
+
+    private int taskSize() {
+        return this.tasks.size();
     }
 
     public void start() {
@@ -58,7 +62,7 @@ public class Duke {
     private void dispatch(String input) throws DukeException {
         switch (input.trim()) {
             case "list":
-                int tasksLength = this.tasks.size();
+                int tasksLength = taskSize();
                 Duke.out("Here are the tasks in your list:", indent2);
                 for (int i = 0; i < tasksLength; i++) {
                     Duke.out(String.format("%d.%s", i + 1, this.tasks.get(i)), indent2);
@@ -73,10 +77,10 @@ public class Duke {
                         throw new DukeException("Task list is empty!");
                     }
                     int taskIndex = Integer.parseInt((input.split(" "))[1]) - 1;
-                    if (taskIndex >= this.tasks.size()) {
+                    if (taskIndex >= taskSize()) {
                         Duke.out(String.format(
                                 "Please choose an index that is between 1 and %d (inclusive)",
-                                this.tasks.size()), indent2);
+                                taskSize()), indent2);
                         return;
                     }
                     if (input.contains("done")) {
@@ -89,8 +93,8 @@ public class Duke {
                         Task removedTask = this.tasks.remove(taskIndex);
                         Duke.out("Noted. I've removed this task:", indent2);
                         Duke.out(removedTask.toString(), indent3);
-                        Duke.out(String.format("Now you have %d tasks in the list.",
-                                this.tasks.size()), indent2);
+                        Duke.out(String.format("Now you have %d tasks in the list.", taskSize()),
+                                indent2);
                         return;
                     }
                 } else {
@@ -98,8 +102,8 @@ public class Duke {
                     this.tasks.add(newTask);
                     Duke.out("Got it. I've added this task: ", indent2);
                     Duke.out(newTask.toString(), indent3);
-                    Duke.out(String.format("Now you have %d %s in the list.", this.tasks.size(),
-                            this.tasks.size() > 1 ? "tasks" : "task"), indent2);
+                    Duke.out(String.format("Now you have %d %s in the list.", taskSize(),
+                            taskSize() > 1 ? "tasks" : "task"), indent2);
                     return;
                 }
         }
