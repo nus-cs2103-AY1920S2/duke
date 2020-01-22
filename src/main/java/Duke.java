@@ -1,4 +1,4 @@
-import main.java.Echo;
+import main.java.Task;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -15,8 +15,7 @@ public class Duke {
         System.out.println("-------------------------------------------------------------");
         System.out.println();
         Scanner sc = new Scanner(System.in);
-        Echo echo_obj = new Echo();
-        ArrayList<String> Tasks = new ArrayList<>();
+        ArrayList<Task> Tasks = new ArrayList<>();
 
         while(true) {
             String x = sc.nextLine();
@@ -30,15 +29,21 @@ public class Duke {
                 System.exit(0);
             } else if (x.equals("list")) {
                 System.out.println("-------------------------------------------------------------");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < Tasks.size(); i++) {
-                    System.out.println(i+1 + ". " + Tasks.get(i));
+                    System.out.println(i+1 + ". " + Tasks.get(i).getStatusIcon() + Tasks.get(i).getDescription());
                 }
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
-            } else {
+            } else if (x.contains("done")) {
+                int index = Integer.valueOf(x.split(" ",2)[1]);
+                Tasks.get(index-1).markAsDone();
+            }
+            else {
                 System.out.println("-------------------------------------------------------------");
-                Tasks.add(x);
-                System.out.println("added: " + echo_obj.echo(x));
+                Task t = new Task(x);
+                Tasks.add(t);
+                System.out.println("added: " + t.getDescription());
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
                 System.out.println();
