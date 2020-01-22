@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -25,12 +26,21 @@ public class Duke {
                 } else if (instruction.equals("done")) {
                     doneInstruction(replyArr, taskList);
                     reply = SCANNER.nextLine();
-                } else if (instruction.equals("todo") || instruction.equals("deadline") ||
-                        instruction.equals("event")) {
-                    taskVariants(instruction, reply, taskList, replyArr);
+                } else if(instruction.equals("deadline")) {
+                    handleDeadline(reply, taskList);
+                    reply = SCANNER.nextLine();
+                } else if (instruction.equals("todo")) {
+                    handleTodo(reply, taskList);
+                    reply = SCANNER.nextLine();
+                } else if (instruction.equals("event")) {
+                    handleEvent(reply, taskList);
+                    reply = SCANNER.nextLine();
+                } else if (instruction.equals("delete")) {
+                    deleteInstruction(replyArr, taskList);
                     reply = SCANNER.nextLine();
                 } else {
                     otherInstructions(instruction);
+                    reply = SCANNER.nextLine();
                 }
             } catch (DukeException ex) {
                 printWithBorder(ex.toString());
@@ -48,8 +58,7 @@ public class Duke {
         } else {
             Task currTask = taskList.get(taskNum);
             currTask.isDone = true;
-            String doneMsg = "Nice! Task marked as done: \n    " + " [" + currTask.getStatusIcon() + "] "
-                    + currTask.getDescription();
+            String doneMsg = "Nice! Task marked as done: \n    " + currTask.toString();
             printWithBorder(doneMsg);
         }
     }
@@ -61,6 +70,20 @@ public class Duke {
         }
         printWithBorder(completeList);
     }
+
+    public static void deleteInstruction(String[] replyArr, ArrayList<Task> taskList) throws DukeException {
+        int taskNum = Integer.parseInt(replyArr[1]) - 1;
+        try {
+            Task currTask = taskList.get(taskNum);
+            String deleteMsg = "Okay! Task removed: \n      " + currTask.toString() + "\n    Now you have "
+                    + (taskList.size() - 1) + " task(s) in your list!";
+            printWithBorder(deleteMsg);
+            taskList.remove(taskNum);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("Task doesn't exist! Add a new task!");
+        }
+    }
+
 
     public static void taskAdded(Task task, ArrayList<Task> taskList) {
         printWithBorder("Alright! Task added:\n      " + task.toString() + "\n    Now you have " + taskList.size()
@@ -127,15 +150,15 @@ public class Duke {
         }
     }
 
-    public static void taskVariants(String instruction, String reply, ArrayList<Task> taskList, String[] replyArr) {
-        if (instruction.equals("deadline")) {
-            handleDeadline(reply, taskList);
-        } else if (instruction.equals("event")) {
-            handleEvent(reply, taskList);
-        } else if (instruction.equals("todo")) {
-            handleTodo(reply, taskList);
-        }
-    }
+//    public static void taskVariants(String instruction, String reply, ArrayList<Task> taskList, String[] replyArr) {
+//        if (instruction.equals("deadline")) {
+//            handleDeadline(reply, taskList);
+//        } else if (instruction.equals("event")) {
+//            handleEvent(reply, taskList);
+//        } else if (instruction.equals("todo")) {
+//            handleTodo(reply, taskList);
+//        }
+//    }
 
     public static void otherInstructions(String instruction) throws DukeException {
         throw new DukeException("Sorry! I don't understand what is " + instruction);
