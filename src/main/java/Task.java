@@ -49,10 +49,14 @@ class TodoTask extends Task {
         if (inputArr.length < 2) {
             throw new Exception("Todo tasks must have a non-empty description!");
         }
-        size++;
         this.description = Arrays.stream(inputArr)
                 .map(str -> str.toLowerCase().equals("todo") ? "" : str.equals("/at") ? "at" : str)
                 .collect(Collectors.joining(" "));
+
+        if (!this.description.contains("at")) {
+            throw new Exception("Missing @t");
+        }
+        size++;
     }
 
     @Override
@@ -81,10 +85,13 @@ class DeadlineTask extends Task {
         if (inputArr.length < 2) {
             throw new Exception("Deadline tasks must have a non-empty description!");
         }
-        size++;
         this.description = Arrays.stream(inputArr)
                 .map(str -> str.toLowerCase().equals("deadline") ? "" : str.equals("/by") ? "by" : str)
                 .collect(Collectors.joining(" "));
+        if (!this.description.contains("by")) {
+            throw new Exception("Ain't no lie by by by missing");
+        }
+        size++;
     }
 
     @Override

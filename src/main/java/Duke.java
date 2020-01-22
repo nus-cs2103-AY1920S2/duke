@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private int drunkCounter = 0;
     private ArrayList<Task> storage = new ArrayList<>();
 
     private void greet() {
@@ -18,13 +19,11 @@ public class Duke {
         }
     }
 
-    private void deleteTask(int i) {
-        storage.remove(i);
-    }
-
     private void completeTask(int i) {
         try {
             storage.get(i).setDone();
+            System.out.printf("Task successfully completed: \n\t %s\n", storage.get(i));
+            System.out.printf("You now have %d tasks in your list\n", storage.size());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -33,33 +32,37 @@ public class Duke {
     private void run() {
         Scanner scan = new Scanner(System.in);
         label:
-        while (scan.hasNext()) {
-            String input = scan.nextLine();
-            String[] inputArray = input.split("\\s");
-            switch (inputArray[0]) {
-            case "bye":
-                this.bidFarewell();
-                break label;
-            case "list":
-                System.out.println("Thy list is here:");
-                this.outputList();
-                break;
-            case "done":
-                int index = Integer.parseInt(inputArray[1]) - 1;
-                this.completeTask(index);
-                System.out.printf("Task successfully completed: \n\t %s\n", storage.get(index));
-                break;
-            default:
-                try {
-                    storage.add(Task.generateTask(input));
-                    System.out.printf("Added: %s\n", storage.get(storage.size() - 1));
-                    System.out.printf("You now have %d tasks in your list\n", Task.getSize());
+        try {
+            while (scan.hasNext()) {
+                String input = scan.nextLine();
+                String[] inputArray = input.split("\\s");
+                switch (inputArray[0]) {
+                case "bye":
+                    this.bidFarewell();
+                    break label;
+                case "list":
+                    System.out.println("Thy list is here:");
+                    this.outputList();
                     break;
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                case "done":
+                    int index = Integer.parseInt(inputArray[1]) - 1;
+                    this.completeTask(index);
+                    break;
+                default:
+                    try {
+                        storage.add(Task.generateTask(input));
+                        int storageSize = storage.size();
+                        System.out.printf("Added: %s\n", storage.get(storageSize - 1));
+                        System.out.printf("You now have %d tasks in your list\n", storageSize);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
+        } catch (NumberFormatException nfe) {
+            System.out.println("Please give me a sign. A sign. A number.");
         }
+
     }
 
     public static void main(String[] args) {
