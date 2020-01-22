@@ -11,25 +11,38 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] inputs = input.split(" ", 2);
-            String command = inputs[0];
-            if (command.equals("bye")) {
-                sayGoodbye();
-                break;
-            } else if (command.equals("list")) {
-                displayList();
-            } else if (command.equals("done")) {
-                int taskNo = Integer.parseInt(inputs[1]);
-                markTaskAsDone(taskNo);
-            } else if (command.equals("deadline")){
-                addDeadline(inputs[1]);
-            } else if (command.equals("event")) {
-                addEvent(inputs[1]);
-            } else if (command.equals("todo")) {
-                addTodo(inputs[1]);
-            } else {
-                unrecognisedCommand();
+            try {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" ", 2);
+                String command = inputs[0];
+
+                if (command.equals("bye")) {
+                    sayGoodbye();
+                    break;
+                } else if (command.equals("list")) {
+                    displayList();
+                } else if (command.equals("done")) {
+                    int taskNo = Integer.parseInt(inputs[1]);
+                    markTaskAsDone(taskNo);
+                } else if (command.equals("deadline")) {
+                    if (inputs.length == 1) { throw new EmptyDescriptionException(); };
+                    if (tasks.size() == 100) { throw new TooManyTasksException(); };
+                    addDeadline(inputs[1]);
+                } else if (command.equals("event")) {
+                    if (inputs.length == 1) { throw new EmptyDescriptionException(); };
+                    if (tasks.size() == 100) { throw new TooManyTasksException(); };
+                    addEvent(inputs[1]);
+                } else if (command.equals("todo")) {
+                    if (inputs.length == 1) { throw new EmptyDescriptionException(); };
+                    if (tasks.size() == 100) { throw new TooManyTasksException(); };
+                    addTodo(inputs[1]);
+                } else {
+                    throw new UnknownCommandException();
+                }
+            } catch (DukeException e) {
+                printLine();
+                indent(e.toString());
+                printLine();
             }
         }
     }
@@ -77,7 +90,10 @@ public class Duke {
         printLine();
     }
 
-    private static void markTaskAsDone(int taskNo) {
+    private static void markTaskAsDone(int taskNo) throws InvalidIndexException {
+        if (taskNo < 1 || taskNo > tasks.size()) {
+            throw new InvalidIndexException();
+        }
         Task task = tasks.get(taskNo - 1); // The user starts counting from 1
         task.markAsDone();
 
@@ -127,6 +143,4 @@ public class Duke {
         printTaskCount();
         printLine();
     }
-
-
 }
