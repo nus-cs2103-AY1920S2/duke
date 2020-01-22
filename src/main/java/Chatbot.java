@@ -105,4 +105,14 @@ public class Chatbot implements Chat {
         System.out.println(task);
         System.out.println("--------------------------------------------------\n");
     }
+
+    public void delete(int num) {
+        Task task = record.remove(num - 1);
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("Destroyed: ");
+        System.out.println(" " + task);
+        System.out.println("You has " + this.record.size() + " tasks in the list");
+        System.out.println("--------------------------------------------------\n");
+    }
 }

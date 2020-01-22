@@ -14,5 +14,6 @@ public interface Chat {
         void addEvent(String record, String at);
         void listRecord();
         void setDone(int num);
+        void delete(int num);
 
 }
