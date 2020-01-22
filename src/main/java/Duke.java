@@ -13,10 +13,10 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo);
 
-        while (sc.hasNext()) {
+        while (true) {
             String command = sc.next();
 
-            if (command.equals("bye")) {
+            if (command.toLowerCase().equals("bye")) {
                 System.out.println(separator_top);
                 System.out.println("Hope to see you again!");
                 System.out.println(separator_btm);
