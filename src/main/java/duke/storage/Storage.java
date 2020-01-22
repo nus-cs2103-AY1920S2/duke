@@ -1,21 +1,46 @@
+/*
+ * @author leslieharland
+ */
+
 package duke.storage;
 
-import duke.task.*;
 
-import java.io.BufferedWriter;
+import duke.task.Deadline;
+import duke.task.EventObj;
+import duke.task.SearchTask;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
+
+/**
+ * The Class Storage.
+ */
 public class Storage {
     public String filePath;
+
+    /**
+     * Instantiates a new storage.
+     *
+     * @param filePath the file path
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-	public void writeToFile(String mycontent) {
+    /**
+     * Write to file.
+     *
+     * @param mycontent the mycontent
+     */
+    public void writeToFile(String mycontent) {
         BufferedWriter writer = null;
         try {
             File file = new File(filePath);
@@ -32,19 +57,26 @@ public class Storage {
             ioe.printStackTrace();
         } finally {
             try {
-                if (writer != null)
+                if (writer != null) {
                     writer.close();
+                }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
     }
 
-    TaskList loadTasks(){
+    /**
+     * Load tasks.
+     *
+     * @return the task list
+     */
+    public TaskList loadTasks() {
         TaskList tasks = new TaskList();
         try {
             File file = new File(filePath);
             if (!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             BufferedReader rd = new BufferedReader(new FileReader(filePath));
@@ -58,7 +90,7 @@ public class Storage {
                 } else if (type.equals("T")) {
                     tasks.addTask(Todo.parse(line));
                 } else {
-
+                    //add code
                 }
             }
             rd.close();
@@ -68,5 +100,23 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    /**
+     * Find tasks containing the user search term.
+     *
+     * @return the task list
+     */
+    public TaskList findTasks(String searchTerm) {
+        TaskList tasks = loadTasks();
+        TaskList temp = new TaskList();
+        int pos = 0;
+        for (Task task : tasks.getTasks()) {
+            if (task.getDescription().contains(searchTerm)) {
+                temp.addTask(new SearchTask(pos, task.isDone(), task.getDescription(), task.getType()));
+            }
+            pos++;
+        }
+        return temp;
     }
 }
