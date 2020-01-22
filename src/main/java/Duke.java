@@ -36,20 +36,34 @@ public class Duke {
                 try {
                     commandValue = CommandList.valueOf(command.toUpperCase());
                 } catch (IllegalArgumentException exception) {
-                    // do own exception class here
-                    System.out.println(INDENT + "  Whoops me smol brain don't understand :D, try again!");
-                    userInput = scanner.nextLine();
-                    continue;
+                    try {
+                        throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
+                    } catch (DukeException dukeException) {
+                        System.err.println(addBorder(dukeException.toString()));
+                    } finally {
+                        userInput = scanner.nextLine();
+                        continue;
+                    }
                 }
                 switch (commandValue) {
                     case TODO:
-                        String[] todoArr = userInput.split("todo");
-                        String todoDescription = todoArr[1].trim();
-                        ToDo currentToDo = new ToDo(todoDescription);
-                        listOfTask.add(currentToDo);
-                        replyMessage = customiseMessage(currentToDo.toString(), listOfTask.size());
-                        System.out.println(addBorder(replyMessage));
-                        break;
+                        try {
+                            String[] todoArr = userInput.split("todo");
+                            if (todoArr.length == 0 || todoArr[1].trim().length() == 0) {
+                                throw new DukeException("Empty ToDo description",
+                                        DukeErrorType.EMPTY_DESCRIPTION, command);
+                            } else {
+                                String todoDescription = todoArr[1].trim();
+                                ToDo currentToDo = new ToDo(todoDescription);
+                                listOfTask.add(currentToDo);
+                                replyMessage = customiseMessage(currentToDo.toString(), listOfTask.size());
+                                System.out.println(addBorder(replyMessage));
+                            }
+                        } catch (DukeException exception){
+                            System.err.println(addBorder(exception.toString()));
+                        }finally {
+                            break;
+                        }
                     case EVENT:
                         String[] eventDetails = userInput.split("/at");
                         if (eventDetails.length > 1) {
@@ -59,8 +73,23 @@ public class Duke {
                             String[] descriptionArr = eventDetails[0].split("event");
                             if (descriptionArr.length > 1) {
                                 eventDescription = descriptionArr[1].trim();
+                                try {
+                                    if (eventDescription.length() == 0) {
+                                        throw new DukeException("Empty Event description",
+                                                DukeErrorType.EMPTY_DESCRIPTION,
+                                                command);
+                                    }
+                                } catch (DukeException exception) {
+                                    System.err.println(addBorder(exception.toString()));
+                                }
                             } else {
-                                // throw own class exception ehre also
+                                // throw own class exception here also
+                                try {
+                                    throw new DukeException("Empty Event description", DukeErrorType.EMPTY_DESCRIPTION,
+                                            command);
+                                } catch (DukeException exception) {
+                                    System.err.println(addBorder(exception.toString()));
+                                }
                             }
                             Event currentEvent = new Event(eventDescription, eventTime);
                             listOfTask.add(currentEvent);
@@ -69,6 +98,11 @@ public class Duke {
 
                         } else {
                             // Do my own exception class here
+                            try {
+                                throw new DukeException("Empty Event time", DukeErrorType.EMPTY_TIME, command);
+                            } catch (DukeException exception) {
+                                System.err.println(addBorder(exception.toString()));
+                            }
                         }
                         break;
                     case DEADLINE:
