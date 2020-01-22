@@ -24,7 +24,11 @@ public class Duke {
                 } else if (input.contains("done")) {
                     String[] inputArr = input.split(" ");
                     int num = Integer.parseInt(inputArr[1]);
-                    doneAction(list, num);
+                    if (num > list.size()) {
+                        throw new DukeException("Sorry! That is an invalid task number");
+                    } else {
+                        doneAction(list, num);
+                    }
                 } else if (input.contains("todo")) {
                     if (input.split(" ").length == 1) {
                         throw new DukeException("Sorry! Description of todo cannot be empty");
@@ -38,23 +42,43 @@ public class Duke {
                         throw new DukeException("Sorry! Description of deadline cannot be empty");
                     } else {
                         int index = input.indexOf("/");
-                        String by = input.substring(index + 1);
-                        String name = input.substring(9, index);
-                        Task deadline = new Deadline(name, by);
-                        addToList(deadline, list);
+                        if (index == -1) {
+                            throw new DukeException("Sorry! Please enter a deadline");
+                        } else {
+                            String by = input.substring(index + 1);
+                            String name = input.substring(9, index);
+                            Task deadline = new Deadline(name, by);
+                            addToList(deadline, list);
+                        }
                     }
                 } else if (input.contains("event")) {
                     if (input.split(" ").length == 1) {
                         throw new DukeException("Sorry! Description of event cannot be empty");
                     } else {
                         int index = input.indexOf("/");
-                        String by = input.substring(index + 1);
-                        String name = input.substring(6, index);
-                        Task event = new Event(name, by);
-                        addToList(event, list);
+                        if (index == -1) {
+                            throw new DukeException("Sorry! Please enter a date and time");
+                        } else {
+                            String by = input.substring(index + 1);
+                            String name = input.substring(6, index);
+                            Task event = new Event(name, by);
+                            addToList(event, list);
+                        }
+                    }
+                } else if (input.contains("delete")) {
+                    if (input.split(" ").length == 1) {
+                        throw new DukeException("Sorry! Please specify a task number");
+                    } else {
+                        String[] inputArr = input.split(" ");
+                        int num = Integer.parseInt(inputArr[1]);
+                        if (num > list.size()) {
+                            throw new DukeException("Sorry! That is an invalid task number");
+                        } else {
+                            removeAction(list, num);
+                        }
                     }
                 } else {
-                    throw new DukeException("Sorry, I dont know what that means");
+                    throw new DukeException("Sorry! I dont know what that means");
                 }
             } catch (DukeException e){
                 System.out.println(e);
@@ -89,6 +113,16 @@ public class Duke {
         System.out.println("    Nice! I've marked this task as completed:");
         System.out.println("      " + doneTask);
         System.out.println("    ____________________________________________________________");
+    }
+
+    public static void removeAction(ArrayList<Task> list, int num) {
+        Task removed = list.get(num - 1);
+        list.remove(num - 1);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("      " + removed);
+        System.out.println("    Now you have " + list.size() + " tasks in the list");
+        System.out.println("    ____________________________________________________________");
+
     }
 
     public static void printBye() {
