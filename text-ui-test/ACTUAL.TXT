@@ -1,0 +1,26 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hey there, Red. Anything I can do for you?
+Uhh... You're gonna have to say that again, Red.
+That's 0 in the list.
+added: stay alive
+[return the Transistor , by this Sunday midnight]
+[D][?] return the Transistor  (by this Sunday midnight)
+added: return the Transistor /by this Sunday midnight
+added: concert at the Empty Set /at this Saturday 6pm-9pm
+1. [T][?] stay alive
+2. [D][?] return the Transistor  (by this Sunday midnight)
+3. [E][?] concert at the Empty Set  (at this Saturday 6pm-9pm)
+That's 3 in the list.
+That's another one down. That'll be: 
+[E][?] concert at the Empty Set  (at this Saturday 6pm-9pm)
+1. [T][?] stay alive
+2. [D][?] return the Transistor  (by this Sunday midnight)
+3. [E][?] concert at the Empty Set  (at this Saturday 6pm-9pm)
+That's 3 in the list.
+Guess that's enough for now. I've got your back, so you keep me close.
