@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,8 +16,13 @@ public class Duke {
             if (input.equals("list")) {
                 list(tasks, taskNumber);
             } else {
-                taskNumber++;
-                add(input, tasks);
+                String[] words = input.split(" ");
+                if (words[0].equals("done")) {
+                    markDone(tasks.get(Integer.valueOf(words[1]) - 1));
+                } else {
+                    taskNumber++;
+                    add(input, tasks);
+                }
             }
             input = reader.nextLine();
         }
@@ -63,8 +67,7 @@ public class Duke {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 1; i <= taskNumber; i++) {
             Task currTask = tasks.get(i - 1);
-            System.out.println("    " + i + ".[" + currTask.getStatusIcon() + "] " +
-                    currTask.getDescription());
+            System.out.println("    " + i + "." + currTask);
         }
         printBreak();
     }
@@ -73,6 +76,14 @@ public class Duke {
         printBreak();
         System.out.println("    added: " + input);
         tasks.add(new Task(input));
+        printBreak();
+    }
+
+    private static void markDone(Task currTask) {
+        printBreak();
+        System.out.println("    Nice! I've marked this task as done:");
+        currTask.markAsDone();
+        System.out.println("      " + currTask);
         printBreak();
     }
 }
