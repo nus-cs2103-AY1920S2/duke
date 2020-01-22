@@ -17,7 +17,7 @@ public class Duke {
         while (sc.hasNext()) {
             String input = sc.next();
             if (input.toLowerCase().equals(exitCommand)) {
-                break;he
+                break;
             }
             System.out.println(input);
 
