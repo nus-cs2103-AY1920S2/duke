@@ -16,8 +16,11 @@ public class Duke {
             if (inputs[0].equals("bye")) {
                 sayGoodbye();
                 break;
-            } else if (inputs[0].equals("list")){
+            } else if (inputs[0].equals("list")) {
                 displayList();
+            } else if (inputs[0].equals("done")) {
+                int taskNo = Integer.parseInt(inputs[1]);
+                markTaskAsDone(taskNo);
             } else {
                 addTask(input);
             }
@@ -27,6 +30,7 @@ public class Duke {
     private static void printLine() {
         System.out.println(line);
     }
+
     private static void indent(String toIndent) {
         System.out.printf(space);
         System.out.println(toIndent);
@@ -63,6 +67,16 @@ public class Duke {
         tasks.add(new Task(input));
         printLine();
         indent("Acknowledged. I have added: " + input);
+        printLine();
+    }
+
+    private static void markTaskAsDone(int taskNo) {
+        Task task = tasks.get(taskNo - 1); // The user starts counting from 1
+        task.markAsDone();
+
+        printLine();
+        indent("Excellent! You have completed this task: ");
+        indent(space + task.toString());
         printLine();
     }
 }

@@ -15,6 +15,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String getDesc() {
+        return this.desc;
+    }
+
     @Override
     public String toString() {
         String doneStatus = "[" + getStatusIcon() + "]";
