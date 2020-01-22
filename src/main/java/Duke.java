@@ -15,23 +15,31 @@ public class Duke {
 
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<Task> arr = new ArrayList<>();
 
 
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
-            if (userInput.equalsIgnoreCase("bye")) {
+            String[] arrString = userInput.split(" ");
+            if (arrString[0].equalsIgnoreCase("bye")) {
                 System.out.println(botReplyLine + "\n Duke: I'll say goodnight now \n" + botReplyLine);
                 break;
-            } else if (userInput.equalsIgnoreCase("list")) {
+            } else if (arrString[0].equalsIgnoreCase("list")) {
                 System.out.println(botReplyLine);
-                for (int i=0; i<arr.size(); i++) {
-                    System.out.println(i +". "+ arr.get(i));
+                for (int i = 0; i < arr.size(); i++) {
+                    System.out.println(i + 1 + ". [" + arr.get(i).getStatusIcon() + "] " + arr.get(i).description);
                 }
                 System.out.println(botReplyLine);
-
+            } else if (arrString[0].equalsIgnoreCase("done")) {
+                int taskNumber = Integer.parseInt(arrString[1]) - 1;
+                arr.get(taskNumber).doneTask();
+                System.out.println(botReplyLine);
+                System.out.println("Consider it done.");
+                System.out.println("[" + arr.get(taskNumber).getStatusIcon() + "] " + arr.get(taskNumber).description);
+                System.out.println(botReplyLine);
             } else {
-                arr.add(userInput);
+                Task task = new Task(userInput);
+                arr.add(task);
                 System.out.println(botReplyLine + "\n Duke: added " + userInput + "\n" + botReplyLine);
             }
         }
