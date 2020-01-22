@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -8,11 +9,19 @@ public class Duke {
                 "    ____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> lst = new ArrayList<>();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if (input.compareTo("bye") != 0) {
-                System.out.println("    ____________________________________________________________\n"
-                        + "     " + input + "\n    ____________________________________________________________");
+                if (input.compareTo("list") != 0) {
+                    lst.add(input);
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     added: " + input);
+                    System.out.println("    ____________________________________________________________");
+                } else {
+                    printList(lst);
+                }
             } else {
                 System.out.println("    ____________________________________________________________\n"
                         + "     Bye. Hope to see you again soon!\n"
@@ -20,5 +29,13 @@ public class Duke {
                 break;
             }
         }
+    }
+
+    private static void printList(ArrayList lst) {
+        System.out.println("    ____________________________________________________________");
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println("    " + (i+1) + ". " + lst.get(i));
+        }
+        System.out.println("    ____________________________________________________________");
     }
 }
