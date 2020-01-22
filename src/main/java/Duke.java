@@ -25,6 +25,7 @@ public class Duke {
         List<Task> list = new ArrayList<>();
         while (true) {
             String token = scanner.nextLine();
+            // String[] words = token.split("/");
             String[] split = token.split(" ", 2);
             if (token.equals("bye")) {
                 printLine();
@@ -46,9 +47,22 @@ public class Duke {
                 System.out.println("       " + list.get(num));
                 printLine();
             } else {
-                list.add(new Task(token));
+                char tag = split[0].toUpperCase().charAt(0);
+                Task task = new Task(token);
+                if (tag == 'T') {
+                    task = new Todo(split[1]);
+                    list.add(new Todo(split[1]));
+                } else if (tag == 'D') {
+                    task = new Deadline(split[1]);
+                    list.add(new Deadline(split[1]));
+                } else if (tag == 'E') {
+                    task = new Event(split[1]);
+                    list.add(new Event(split[1]));
+                }
                 printLine();
-                System.out.println("    added: " + token);
+                System.out.println("     Got it. I've added this task: ");
+                System.out.println("       " + task);
+                System.out.println("     Now you have " + list.size() + " tasks in the list.");
                 printLine();
             }
         }
