@@ -33,9 +33,18 @@ public class Duke {
                 System.out.printf("Nice! I've marked this task as done: \n%s\n",
                         newList.get(i).toString());
             } else {
-                Task newTask = new Task(command);
-                newList.add(newTask);
-                System.out.printf("added: %s\n", command);
+                String[] arr = command.split("/");
+                String description = (arr[0].split(" ", 2))[1];
+                if (command.startsWith("todo ")) {
+                    newList.add(new ToDo(description));
+                } else if(command.startsWith("deadline ")) {
+                    newList.add(new Deadline(description, arr[1]));
+                } else if(command.startsWith("event ")) {
+                    newList.add(new Event(description, arr[1]));
+                }
+                System.out.printf("Got it. I've added this task:\n%s\n" +
+                        "Now you have %d tasks in the list.\n",
+                        newList.get(newList.size() - 1).toString(), newList.size());
             }
             command = sc.nextLine();
         }
