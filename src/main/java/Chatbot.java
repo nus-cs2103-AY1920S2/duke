@@ -1,13 +1,31 @@
+import java.util.ArrayList;
+
 public class Chatbot {
 
     private String name;
+    private ArrayList<Item> items;
 
     public Chatbot(String name) {
         this.name = name;
+        this.items = new ArrayList<>();
     }
 
     String greet() {
         return "I'm busy. What do you want?";
+    }
+
+    /**
+     * Convert list to string and number it.
+     * @return The string format of the list.
+     */
+    String listItems() {
+        String output = "This is your list:\n";
+        output += "----------\n";
+        for (int i = 0; i < items.size(); i++) {
+            output += String.format("%d. %s\n", i + 1, items.get(i));
+        }
+        output += "----------";
+        return output;
     }
 
     /**
@@ -16,10 +34,15 @@ public class Chatbot {
      * @return Chatbot's reply to the message.
      */
     String parse(String message) {
-        if (message.toLowerCase().equals("bye")) {
+        switch (message.toLowerCase()) {
+        case "list":
+            return listItems();
+        case "bye":
             return "Bye, see you never!";
+        default:
+            items.add(new Item(message));
+            return String.format("[Added] %s", message);
         }
-        return message;
     }
 
     /**
