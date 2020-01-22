@@ -11,8 +11,8 @@ public class Duke {
         String divider = "____________________________________________________________";
         System.out.println("My name is Jarvis!\nHow may I provide my services on this fine day?\n" + divider);
 
-
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
+        //String[] tasks = new String[100];
         int i = 0;
         Scanner sc = new Scanner(System.in);
         String nextLine = sc.nextLine();
@@ -20,8 +20,9 @@ public class Duke {
 
             // to check if 'list' service is called
             if (nextLine.equals("list")) {
+                System.out.println("Here are the current tasks in your list:");
                 int listStart = 1;
-                for (String task : tasks) {
+                for (Task task : tasks) {
                     if (task == null) {
                         System.out.println(divider);
                         break;
@@ -33,8 +34,20 @@ public class Duke {
                 continue;
             }
 
+            // if the action is done
+            if (nextLine.contains("done")) {
+                String[] substrings = nextLine.split(" ");
+                int taskNum = Integer.parseInt(substrings[1]);
+                tasks[taskNum - 1].taskDone();
+                System.out.println("Alright! You have successfully completed:");
+                System.out.println(tasks[taskNum - 1]);
+                System.out.println(divider);
+                nextLine = sc.nextLine();
+                continue;
+            }
+
             // normal addition of task
-            tasks[i] = nextLine;
+            tasks[i] = new Task(nextLine);
             System.out.println("added: " + nextLine);
             System.out.println(divider);
             nextLine = sc.nextLine();
