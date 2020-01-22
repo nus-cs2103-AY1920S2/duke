@@ -41,5 +41,26 @@ public class Store {
         System.out.println(UpdateCurrAction.toString());
         System.out.println(line);
     }
+    public void todo(String S){
+        this.cmd = S;
+        Task T = new Todo(cmd, counter);
+        Storage.add(T);
+        T.Output();
+        counter = counter + 1;
+    }
+    public void deadline(String[] ActionTime){
+        this.cmd = ActionTime[0];
+        Task T = new Deadline(cmd, counter, ActionTime[1]);
+        Storage.add(T);
+        T.Output();
+        counter = counter + 1;
+    }
+    public void event(String[] ActionTime){
+        this.cmd = ActionTime[0];
+        Task T = new Event(cmd, counter, ActionTime[1]);
+        Storage.add(T);
+        T.Output();
+        counter = counter + 1;
+    }
 }
 

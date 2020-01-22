@@ -25,7 +25,19 @@ public class Duke {
                 String[] splited = input.split(" ");
                 int index = Integer.parseInt(splited[1]);
                 lib.done(index);
-            }else {
+            } else if(input.contains("todo")) {
+                String[] CheckInput = input.split(" ");
+                String NewInput = input.substring(5);
+                lib.todo(NewInput);
+            } else if (input.contains("deadline")){
+                String NewInput = input.substring(9);
+                String[] ActionTime = NewInput.split("/");
+                lib.deadline(ActionTime);
+            } else if (input.contains("event")) {
+                String NewInput = input.substring(6);
+                String[] ActionTime = NewInput.split("/");
+                lib.event(ActionTime);
+            } else {
                 lib.AddNewAction(input);
             }
 
