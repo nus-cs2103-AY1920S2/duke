@@ -4,7 +4,7 @@ public class Chatbot implements Chat {
     private String name;
     private String greeting;
     private String goodbye;
-    private ArrayList<String> record;
+    private ArrayList<Task> record;
 
     public Chatbot(String name) {
         this.name = name;
@@ -33,8 +33,8 @@ public class Chatbot implements Chat {
 
     public void echo(String command) {
         String str = "--------------------------------------------------\n" +
-                     command + "\n" +
-                     "--------------------------------------------------\n";
+                command + "\n" +
+                "--------------------------------------------------\n";
         System.out.println(str);
     }
 
@@ -51,13 +51,34 @@ public class Chatbot implements Chat {
     }
 
     public void addRecord(String record) {
-        this.record.add(record);
+        Task task = new Task(record);
+        this.record.add(task);
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("piaked in: " + record);
+        System.out.println("--------------------------------------------------\n");
     }
 
     public void listRecord() {
+        System.out.println("--------------------------------------------------");
+
         for (int i = 0; i < record.size(); i++) {
             int j = i + 1;
-            System.out.print(j + ". " + record.get(i) + "\n");
+            Task current = record.get(i);
+            System.out.print(j + ".[" + current.getStatusIcon() + "] "+ current.getDescription() + "\n");
         }
+
+        System.out.println("--------------------------------------------------\n");
+    }
+
+    public void setDone(int num) {
+        Task task = record.get(num - 1);
+
+        task.setIsDone();
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("Next time do yourself la! No paper meh?");
+        System.out.println(" [" + task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println("--------------------------------------------------\n");
     }
 }

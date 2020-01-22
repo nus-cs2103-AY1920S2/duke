@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,28 +22,27 @@ public class Duke {
         bot.setGoodbye(goodbye);
 
         //read first input
-        String command = sc.nextLine();
+        String input = sc.nextLine();
+        StringTokenizer tokenizer = new StringTokenizer(input);
+        String command = tokenizer.nextToken();
 
-        //add inputs and list record when asked
+        //add inputs, list record and mark as done when asked
         while(!command.equals("bye")) {
             if(command.equals("list")) {
-                System.out.println("--------------------------------------------------");
                 bot.listRecord();
-                System.out.println("--------------------------------------------------\n");
+            } else if(command.equals("done")) {
+                int num = Integer.parseInt(tokenizer.nextToken());
+                bot.setDone(num);
             } else {
-                bot.addRecord(command);
-                System.out.println("--------------------------------------------------");
-                System.out.println("piaked in: " + command);
-                System.out.println("--------------------------------------------------\n");
+                bot.addRecord(input);
             }
 
-            command = sc.nextLine();
+            input = sc.nextLine();
+            tokenizer = new StringTokenizer(input);
+            command = tokenizer.nextToken();
         }
-
-
 
         //exit
         bot.goodbye();
     }
 }
-

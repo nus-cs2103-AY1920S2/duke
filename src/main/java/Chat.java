@@ -11,5 +11,5 @@ public interface Chat {
         void echo(String command);
         void addRecord(String record);
         void listRecord();
-
+        void setDone(int num);
 }
