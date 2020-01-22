@@ -26,9 +26,13 @@ public class Task {
         isDone = true;
     }
 
+    public boolean isTaskDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
-        return description + (!taskType.equals("todo") ? " (" + date.substring(0, 2) + ": " +
-                date.substring(3, date.length()) + ")" : "");
+        return description + (!taskType.equals("todo") ? " (" + date.split(" ", 2)[0] + ": " +
+                date.split(" ", 2)[1] + ")" : "");
     }
 }

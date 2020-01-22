@@ -6,6 +6,8 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
+☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Got it. I've added this task:
     [T][✘] borrow book
 Now you have 1 tasks in the list.
