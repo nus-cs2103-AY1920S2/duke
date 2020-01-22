@@ -44,16 +44,25 @@ public class Duke {
             case "bye":
                 exit = true; // Terminate the program
                 break;
+            case "deadline":
+                taskList = add(taskList, inputDeadline(sc));
+                break;
             case "done":
                 int taskId = sc.nextInt();
                 taskList = done(taskList, taskId);
+                break;
+            case "event":
+                taskList = add(taskList, inputEvent(sc));
                 break;
             case "list":
                 list(taskList);
                 sc.nextLine();
                 break;
+            case "todo":
+                taskList = add(taskList, inputTodo(sc));
+                break;
             default:
-                taskList = add(taskList, input + sc.nextLine());
+                //taskList = add(taskList, input + sc.nextLine());
                 //echo(command); // Repeat the user's command
                 break;
             }
@@ -120,13 +129,63 @@ public class Duke {
      * Adds a task into the chat-bot.
      *
      * @param taskList the list of tasks.
-     * @param taskDescription the details of the new task.
+     * @param task the task to add to the list.
      * @return a copy of the TaskList with the newly added task.
      */
-    public static TaskList add(TaskList taskList, String taskDescription) {
-        echo("added: " + taskDescription);
+    public static TaskList add(TaskList taskList, Task task) {
+        TaskList newList = taskList.addTask(task);
 
-        return taskList.addTask(taskDescription);
+        String confirmation = "Okie! I've added this task:\n";
+        String count = "There are now " + newList.getNumTasks() + " tasks in the list.";
+
+        echo(confirmation + indent(task.toString(), 2) + "\n" + count);
+
+        return newList;
+    }
+
+    /**
+     * Creates a new To-do from user input.
+     *
+     * @param sc the scanner for user input.
+     * @return a new To-do from user input.
+     */
+    public static Todo inputTodo(Scanner sc) {
+        return new Todo(sc.nextLine().strip());
+    }
+
+    /**
+     * Creates a new Deadline from user input.
+     *
+     * @param sc the scanner for user input.
+     * @return a new Deadline from user input.
+     */
+    public static Deadline inputDeadline(Scanner sc) {
+        // Split string using " /by " as the delimiter
+        String[] splitInput = sc.nextLine().strip().split(" /by ");
+
+        // Left of split input is description, right is date/time
+        return new Deadline(splitInput[0], splitInput[1]);
+    }
+
+    /**
+     * Creates a new Event from user input.
+     *
+     * @param sc the scanner for user input.
+     * @return a new Event from user input.
+     */
+    public static Event inputEvent(Scanner sc) {
+        // Split string using " /at " as the delimiter
+        String[] splitInput = sc.nextLine().strip().split(" /at ");
+
+        // Left of split input is description
+        String description = splitInput[0];
+
+        // Right of split input can be divided further:
+        // - last word is timeSlot, and everything before that is date
+        String at = splitInput[1].substring(0, splitInput[1].lastIndexOf(" "));
+        String timeSlot = splitInput[1].substring(splitInput[1].lastIndexOf(" ") + 1);
+
+        return new Event(description, at, timeSlot);
     }
 
     /**

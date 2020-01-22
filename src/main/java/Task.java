@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     /** Details about the task. */
     protected final String description;
     /** Keeps track of whether the task has been completed. */
@@ -9,11 +9,11 @@ public class Task {
      *
      * @param description details about the task.
      */
-    public Task(String description) {
+    protected Task(String description) {
         this(description, false);
     }
 
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -23,7 +23,7 @@ public class Task {
      *
      * @return a tick (if task is completed) or an X (if not complete).
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "✓" : "✘");
         //return (isDone ? "\u2713" : "\u2718");
     }
@@ -33,9 +33,7 @@ public class Task {
      *
      * @return a copy of this task that has been marked as completed.
      */
-    public Task markDone() {
-        return new Task(description, true);
-    }
+    public abstract Task markDone();
 
     @Override
     public String toString() {

@@ -37,16 +37,25 @@ public class TaskList {
     }
 
     /**
+     * Returns the number of tasks in the list.
+     *
+     * @return the number of tasks in the list.
+     */
+    public int getNumTasks() {
+        return numTasks;
+    }
+
+    /**
      * Adds a new tasks into the TaskList.
      *
-     * @param taskDescription a description for the new task.
+     * @param task the task to add into the list.
      * @return a copy of this TaskList with the newly added task.
      */
-    public TaskList addTask(String taskDescription) {
+    public TaskList addTask(Task task) {
         Task[] newList = new Task[taskList.length];
 
         System.arraycopy(taskList, 0, newList, 0, numTasks);
-        newList[numTasks] = new Task(taskDescription);
+        newList[numTasks] = task;
 
         return new TaskList(newList, numTasks + 1);
     }
