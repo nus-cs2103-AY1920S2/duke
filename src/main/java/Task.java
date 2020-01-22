@@ -79,4 +79,13 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Obtains the Task's (irrelevant of subtype) actual command/action to complete
+     *
+     * @return The Task-of-interest's command/action
+     */
+    public final String getCommand() {
+        return this.command;
+    }
+
 }

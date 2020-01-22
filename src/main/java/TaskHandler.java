@@ -37,6 +37,10 @@ public class TaskHandler {
                         printAllTasks();
                         break;
 
+                    case "delete":
+                        deleteTask(command);
+                        break;
+
                     case "done":
                         // user inputs will be "done _____"
                         // Take only the very next token which must be an integer
@@ -82,18 +86,36 @@ public class TaskHandler {
                 printDeadlineExceptionMessage();
             } catch (EmptyTaskListException etle) {
                 printEmptyTaskListExceptionMessage();
+            } catch (DeleteException delE) {
+                printDeleteExceptionMessage();
             }
 
         }
     }
 
     /**
-     * Adds a new Task for user to do
+     * Deletes the given Task based on the command's keyword (a number representing index in ArrayList)
+     *
+     * @param command raw text containing all information given to delete the Task
+     * @throws InputUnclearException where deleting task is not possible due to incorrect command/index entered by user
+     */
+    private void deleteTask(String command) throws DeleteException {
+        try {
+            int indexToRemove = Integer.valueOf(command.substring("delete ".length())) - 1; // item i is stored at index (i-1)
+            allTasks.remove(indexToRemove);
+            printTaskRemoval(indexToRemove);
+        } catch (Exception e) {
+            throw new DeleteException("");
+        }
+    }
+
+    /**
+     * Adds a new Task for user to do, specifying the actual action as Task command
      *
      * @param command basic raw information entered to create the Task
      * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs
      */
-    private final void addNewToDo(String command) throws ToDoException {
+    private void addNewToDo(String command) throws ToDoException {
         if (command.length() < 6) {
             throw new ToDoException("");
         }
@@ -102,12 +124,12 @@ public class TaskHandler {
     }
 
     /**
-     * Adds a new Deadline Task
+     * Adds a new Deadline Task, specifying the actual Task command and time limit
      *
      * @param command basic raw information entered to create the Task
      * @throws DeadlineException Exception arising from creating Deadline Task due to wrong inputs
      */
-    private final void addNewDeadline(String command) throws DeadlineException {
+    private void addNewDeadline(String command) throws DeadlineException {
         try {
             // need to identify deadline limit
             String deadlineLimit = getRestriction("/by", command);
@@ -119,12 +141,12 @@ public class TaskHandler {
     }
 
     /**
-     * Adds a new Event Task
+     * Adds a new Event Task, specifying the actual Task command and the time duration
      *
      * @param command basic raw information entered to create the Task
      * @throws EventException Exception arising from Event Task creation due to wrong inputs
      */
-    private final void addNewEvent(String command) throws EventException {
+    private void addNewEvent(String command) throws EventException {
         try {
             // need to identify event time
             String eventTime = getRestriction("/at", command);
@@ -142,7 +164,7 @@ public class TaskHandler {
      * @param command basic raw information entered to create the Task
      * @return the String representing the Restriction on the Task
      */
-    private final String getRestriction(String keyword, String command) {
+    private String getRestriction(String keyword, String command) {
         int indexOfKeyword = indexSearchInString(keyword, command);
         return command.substring(indexOfKeyword + keyword.length() + 1);
     }
@@ -155,7 +177,7 @@ public class TaskHandler {
      * @param command basic raw information entered to create the Task
      * @return String representation of description of the command of the Task
      */
-    private final String getCommand(String taskType, String keyword, String command) {
+    private String getCommand(String taskType, String keyword, String command) {
         int indexOfTimeKeyword = indexSearchInString(keyword, command) - 1; // due to whitespace
         int startIndex = taskType.length() + 1; // due to whitespace
         return command.substring(startIndex, indexOfTimeKeyword);
@@ -168,7 +190,7 @@ public class TaskHandler {
      * @param searchSpace the full String to search from
      * @return index in which the keyword appears first
      */
-    private final int indexSearchInString(String keyword, String searchSpace) {
+    private int indexSearchInString(String keyword, String searchSpace) {
         return searchSpace.indexOf(keyword);
     }
 
@@ -177,7 +199,7 @@ public class TaskHandler {
      *
      * @param t Task to be done
      */
-    private final void doTask(Task t) {
+    private void doTask(Task t) {
         printTaskComplete(t);
         t.doTask(); // task marked as complete
     }
@@ -187,15 +209,33 @@ public class TaskHandler {
      *
      * @param t Task to be stored
      */
-    private final void addTaskToStored(Task t) {
+    private void addTaskToStored(Task t) {
         allTasks.add(t);
         t.taskAddedMessage();
     }
 
     /**
+     * Prints removal of a given task, of its index then and the current number of Tasks remaining
+     *
+     * @param index index of current Task to remove
+     */
+    private void printTaskRemoval(int index) {
+        printLine();
+        print("Removed Task #" + (index + 1) + ". Hope it's worth it!\nYou are now left with "
+                + allTasks.size() + " tasks.");
+        printLine();
+    }
+
+    private void printDeleteExceptionMessage() {
+        printLine();
+        print("Deleting Tasks require a valid task number and the task needs to be previously entered!");
+        printLine();
+    }
+
+    /**
      * Prints issues arising from creating to-do tasks creation prompting user to re-enter input
      */
-    private final void printToDoExceptionMessage() {
+    private void printToDoExceptionMessage() {
         printLine();
         print("ToDo tasks should be named/specified, Silly! XD\nPlease try again!");
         printLine();
@@ -204,7 +244,7 @@ public class TaskHandler {
     /**
      * Prints issues arising from creating Event tasks creation prompting user to re-enter input
      */
-    private final void printEventExceptionMessage() {
+    private void printEventExceptionMessage() {
         printLine();
         print("Event tasks should be named/specified with time duration, Blur! XD\nPlease try again!");
         printLine();
@@ -213,25 +253,25 @@ public class TaskHandler {
     /**
      * Prints issues arising from creating Deadline tasks creation prompting user to re-enter input
      */
-    private final void printDeadlineExceptionMessage() {
+    private void printDeadlineExceptionMessage() {
         printLine();
         print("Deadline tasks should be named/specified with the deadline, Funny! XD\nPlease try again!");
         printLine();
     }
+
     /**
      * Prints issues arising from trying to list down Tasks when there is no available Task to do
      */
-    private final void printEmptyTaskListExceptionMessage() {
+    private void printEmptyTaskListExceptionMessage() {
         printLine();
         print("No tasks! You're good to go!\nPlease exit using 'bye' command. :)");
         printLine();
     }
 
-
     /**
      * Prints all tasks, their number order, and their completion for list command
      */
-    private final void printAllTasks() throws EmptyTaskListException {
+    private void printAllTasks() throws EmptyTaskListException {
         printLine();
         if (allTasks.isEmpty()) {
             throw new EmptyTaskListException("");
@@ -247,7 +287,7 @@ public class TaskHandler {
      *
      * @param t Task that has been completed via doTask method
      */
-    private final void printTaskComplete(Task t) {
+    private void printTaskComplete(Task t) {
         printLine();
         if (t.getIsDone()) {
             print("That's already done, try another. Or did you make a careless mistake? XD");
@@ -263,7 +303,7 @@ public class TaskHandler {
      *
      * @param i index of storage of the Task in the container/collection
      */
-    private final void printTaskFromStored(int i) {
+    private void printTaskFromStored(int i) {
         String tickOrCross = allTasks.get(i).obtainStatusIcon();
         print(String.valueOf(i+1) + ". [" + tickOrCross + "] " + allTasks.get(i));
     }
@@ -271,7 +311,7 @@ public class TaskHandler {
     /**
      * Prompts user to re-enter command input
      */
-    private final void printUnsure() {
+    private void printUnsure() {
         printLine();
         print("Please enter another command, this time, with "
                 + "a known command word/valid number;\n"
@@ -282,7 +322,7 @@ public class TaskHandler {
     /**
      * Prompts user to enter another command as the current Task is done
      */
-    private final void printAlreadyDone() {
+    private void printAlreadyDone() {
         printLine();
         print("Seems like you are kinda tired. Please remember to define a Task Number!\n"
                 + "Or, you could also take a break. :)");
@@ -292,7 +332,7 @@ public class TaskHandler {
     /**
      * Prints a horizontal formatting line
      */
-    private final void printLine() {
+    private void printLine() {
         print(horizontalLine);
     }
 
@@ -301,7 +341,7 @@ public class TaskHandler {
      *
      * @param s String to be printed
      */
-    private final void print(String s) {
+    private void print(String s) {
         System.out.println(s);
     }
 
