@@ -20,7 +20,7 @@ public class Duke {
         while (!word.equalsIgnoreCase("bye")) {
             System.out.println("____________________________________________________________");
             if (word.equalsIgnoreCase("list")){
-
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < commandList.size(); i++) {
                     System.out.println(commandList.get(i));
                 }
@@ -30,6 +30,7 @@ public class Duke {
 
             else {
                 String[] words = word.split(" ");
+
                 if (words[0].equalsIgnoreCase("done") && words[1].matches("\\d+")) {
                     int doneTarget = Integer.parseInt(words[1]);
                     if (doneTarget > 0 && doneTarget <= commandList.size()) {
@@ -37,15 +38,56 @@ public class Duke {
                         System.out.println("Nice! I've marked this task as done: ");
                         System.out.println(commandList.get(doneTarget - 1));
                     } else {
-                        System.out.println("Sorry! I can't find that task");
+                        System.out.println("☹ OOPS!!! I'm sorry, I can't find that task");
                     }
 
                 }
-                else {
-                    Task task = new Task(commandList.size() + 1, word);
-                    commandList.add(task);
-                    System.out.println("added: " + word);
+                else if (words[0].equalsIgnoreCase("todo")){
+                    if (word.contains("todo ") && !word.substring(5).isEmpty()) {
+                        String substr = word.substring(5);
+                        ToDo task = new ToDo(commandList.size() + 1, substr);
+                        commandList.add(task);
+                        System.out.println("Got it. I've added this task: ");
+                        System.out.println(task);
+                        System.out.println("Now you have " + Task.count + " tasks in the list.");
+                    } else {
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                 }
+
+                else if (words[0].equalsIgnoreCase("deadline")){
+                    String substr = word.substring(9);
+                    if (substr.contains(" /")) {
+                    String[] deadlineSplit = substr.split(" /");
+                    Deadline task = new Deadline(commandList.size() + 1, deadlineSplit[0], deadlineSplit[1]);
+                    commandList.add(task);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(task);
+                    System.out.println("Now you have "+Task.count+" tasks in the list."); }
+                    else {
+                        System.out.println("☹ OOPS!!! I'm sorry, but you need to specify the deadline");
+                    }
+
+                }
+
+                else if (words[0].equalsIgnoreCase("event")){
+                    String substr = word.substring(9);
+                    if (substr.contains(" /")) {
+                    String[] eventSplit = substr.split(" /");
+                    Event task = new Event(commandList.size() + 1, eventSplit[0], eventSplit[1]);
+                    commandList.add(task);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(task);
+                    System.out.println("Now you have "+Task.count+" tasks in the list.");}
+                    else {
+                        System.out.println("☹ OOPS!!! I'm sorry, but you need to specify the event time");
+                    }
+                }
+                else{
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+
+
             }
             System.out.println("____________________________________________________________");
             word = input.nextLine();

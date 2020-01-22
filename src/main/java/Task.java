@@ -2,6 +2,7 @@ public class Task {
     public int id;
     public String name;
     public boolean done;
+    public static int count = 0;
 
     public Task(int id, String name) {
         this.id = id;
@@ -13,13 +14,7 @@ public class Task {
         done = true;
     }
 
-    public String toString() {
-        if (done) {
-            return (id + ".[✓] " + name);
-        }
 
-        return (id + ".[✗] " + name);
-    }
 }
 
 
