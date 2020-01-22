@@ -6,6 +6,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString();
+        return "[T]" + super.toString();
     }
 }

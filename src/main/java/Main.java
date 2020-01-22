@@ -63,6 +63,13 @@ public class Main {
                     list.printCounter();
                 }
 
+                else if(word.contains("delete")){
+                    String[] split = word.split(" ");
+                    int num = Integer.parseInt(split[1]);
+                    list.deleteTask(num);
+                    list.printCounter();
+                }
+
                 else {
                     throw new DukeException("I'm sorry, but I do not understand what you mean");
                 }

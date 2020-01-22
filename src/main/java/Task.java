@@ -9,6 +9,10 @@ public class Task{
         System.out.println(item + " has been added to list");
     }
 
+    public String getItem(){
+        return this.item;
+    }
+
     public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
