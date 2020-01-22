@@ -102,8 +102,8 @@ public class TaskHandler {
     private void deleteTask(String command) throws DeleteException {
         try {
             int indexToRemove = Integer.valueOf(command.substring("delete ".length())) - 1; // item i is stored at index (i-1)
-            allTasks.remove(indexToRemove);
-            printTaskRemoval(indexToRemove);
+            Task removedTask = allTasks.remove(indexToRemove);
+            printTaskRemoval(indexToRemove, removedTask);
         } catch (Exception e) {
             throw new DeleteException("");
         }
@@ -219,9 +219,10 @@ public class TaskHandler {
      *
      * @param index index of current Task to remove
      */
-    private void printTaskRemoval(int index) {
+    private void printTaskRemoval(int index, Task removedTask) {
         printLine();
-        print("Removed Task #" + (index + 1) + ". Hope it's worth it!\nYou are now left with "
+        print("Removed Task #" + (index + 1) + ": " + removedTask
+                + "\nHope it's worth it!\nYou are now left with "
                 + allTasks.size() + " tasks.");
         printLine();
     }
