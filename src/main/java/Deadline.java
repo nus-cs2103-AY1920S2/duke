@@ -14,6 +14,7 @@ public class Deadline extends Task {
         this.by = by.substring(by.indexOf("by ")).replaceAll("by", "");
     }
 
+
     @Override
     void setDescription(String s) throws DukeException {
 
@@ -26,7 +27,7 @@ public class Deadline extends Task {
 
             super.setDescription(deadline_task2);
         } catch (Exception e) {
-            throw new DukeException("OOPS!! The description of a Deadline cannot be empty");
+            throw new DukeException("", "Deadline");
         }
     }
 
