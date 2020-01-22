@@ -35,9 +35,6 @@ public class Duke {
                     } else if(command.equals("done")) {
                         int num = Integer.parseInt(arr[1]);
                         bot.setDone(num);
-                    } else if(command.equals("delete")) {
-                        int num = Integer.parseInt(arr[1]);
-                        bot.delete(num);
                     } else if(command.equals("todo")) {
                         if(arr.length == 1) {
                             throw new DukeException("todo");
