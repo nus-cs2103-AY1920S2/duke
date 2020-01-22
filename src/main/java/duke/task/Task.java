@@ -4,7 +4,7 @@ import duke.command.Operation;
 
 import java.time.format.DateTimeFormatter;
 
-public class Task implements TaskPrintable, Parseable {
+public abstract class Task implements TaskPrintable, Parseable {
     protected String description;
     protected boolean isDone;
     protected String type;
@@ -12,9 +12,7 @@ public class Task implements TaskPrintable, Parseable {
     protected java.time.LocalDate datetime;
 
     public Task(String description) {
-        this.type = "T";
         this.description = description;
-
         this.isDone = false;
     }
 
@@ -25,7 +23,6 @@ public class Task implements TaskPrintable, Parseable {
     }
 
     private Task(boolean isDone, String description){
-        this.type = "T";
         this.description = description;
         this.isDone = isDone;
     }
@@ -46,7 +43,7 @@ public class Task implements TaskPrintable, Parseable {
         }
     }
 
-    protected String printDateTime(){
+    public String printDateTime(){
         DateTimeFormatter outputformatter = java.time.format.DateTimeFormatter.ofPattern("MMM d yyyy");
         try{
             String output  = (datetime).format(outputformatter);
@@ -73,6 +70,10 @@ public class Task implements TaskPrintable, Parseable {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public String getDescription(){
         return description;
     }
@@ -94,12 +95,4 @@ public class Task implements TaskPrintable, Parseable {
         return getType() + " | " + (isDone ? String.valueOf(1) : String.valueOf(0)) + " | " + getDescription();
     }
 
-
-    public static Task parse(String taskString){
-
-        String[] parts = taskString.split("\\|");
-        boolean d = parts[1].trim().equals("1") ? true : false;
-        String desc = parts[2];
-        return new Task(d, desc);
-    }
 }

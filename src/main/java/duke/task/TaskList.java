@@ -94,8 +94,8 @@ public class TaskList {
                 tasks.add(getSize(), t);
             }
 
-        } else {
-            Task t = new Task(String.join(" ", words));
+        } else if (command.equalsIgnoreCase(Operation.TODO.toString())){
+            Task t = new Todo(String.join(" ", words));
             tasks.add(getSize(), t);
 
         }

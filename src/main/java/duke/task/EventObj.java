@@ -20,12 +20,12 @@ public class EventObj extends Task {
     public static EventObj parse(String taskString){
         String[] parts = taskString.split("\\|");
         String desc = parts[2];
-        Task t = new EventObj(desc, "");
+        EventObj t = new EventObj(desc, "");
         if (parts.length > 3){
             t = new EventObj(desc, String.join("", java.util.Arrays.stream(parts).skip(3).toArray(String[]::new)));
         }
-        t.isDone = parts[1].trim().equals("1") ? true : false;
+        t.isDone = parts[1].trim().equals("1");
 
-        return (EventObj )t;
+        return t;
     }
 }

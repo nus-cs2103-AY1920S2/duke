@@ -22,12 +22,12 @@ public class Deadline extends Task {
     public static Deadline parse(String taskString){
         String[] parts = taskString.split("\\|");
         String desc = parts[2];
-        Task t = new Deadline(desc, "");
+        Deadline t = new Deadline(desc, "");
         if (parts.length > 3){
             t = new Deadline(desc, parts[3]);
         }
-        t.isDone = parts[1].trim().equals("1") ? true : false;
+        t.isDone = parts[1].trim().equals("1");
 
-        return (Deadline) t;
+        return t;
     }
 }

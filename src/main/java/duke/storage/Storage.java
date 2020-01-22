@@ -1,9 +1,6 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.EventObj;
-import duke.task.TaskList;
-import duke.task.Task;
+import duke.task.*;
 
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
@@ -59,7 +56,7 @@ public class Storage {
                 } else if (type.equals("D")) {
                     tasks.addTask(Deadline.parse(line));
                 } else if (type.equals("T")) {
-                    tasks.addTask(Task.parse(line));
+                    tasks.addTask(Todo.parse(line));
                 } else {
 
                 }
