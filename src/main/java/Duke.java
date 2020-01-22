@@ -27,6 +27,14 @@ public class Duke {
                 }
             }
 
+            else if(in.substring(0,Math.min(in.length(), 6)).equals("delete")) {
+                int toDel = Integer.parseInt(in.substring(7));
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(taskList.get(toDel - 1));
+                taskList.remove(toDel - 1);
+                System.out.printf("Now you have %s tasks in the list\n", taskList.size());
+            }
+
             else if(in.substring(0,Math.min(in.length(), 4)).equals("done")) {
                 int index = Integer.parseInt(in.substring(5,in.length()));
                 taskList.get(index - 1).doTask();
@@ -42,11 +50,11 @@ public class Duke {
                     String[] commands = in.split(" /");
                     String[] eventType = commands[0].split(" ");
 
-                    if(!((commands[0].equals("todo"))|| commands[0].equals("deadline")|| commands[0].equals("event"))) {
+                    if(!((eventType[0].equals("todo"))|| eventType[0].equals("deadline")|| eventType[0].equals("event"))) {
                         throw new DukeException("I'm sorry, but I do not know what that means :-(");
                     }
 
-                    if(commands.length == 1) {
+                    if(eventType.length == 1) {
                         throw new DukeException("The description of a " + commands[0] + " cannot be empty.");
                     }
 
