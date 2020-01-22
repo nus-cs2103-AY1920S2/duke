@@ -11,10 +11,34 @@ public class Duke {
         System.out.println("------------------------------------------\n");
     }
 
+    public static void addTask(String input, String type) {
+        String taskCounter = "\nCurrent number of task(s): ";
+
+        if (type.equals("T")) {
+            Todo todo = new Todo(input);
+            taskList.add(todo);
+            replyUser("The following task has been added:\n    " + todo.toString() + taskCounter + taskList.size());
+        } else if (type.equals("D")) {
+            String[] arr = input.split("/", 2);
+            String description = arr[0];
+            String by = arr[1].split(" ", 2)[1];
+            Deadline deadline = new Deadline(description, by);
+            taskList.add(deadline);
+            replyUser("The following task has been added:\n    " + deadline.toString() + taskCounter + taskList.size());
+        } else if (type.equals("E")) {
+            String[] arr = input.split("/", 2);
+            String description = arr[0];
+            String at = arr[1].split(" ", 2)[1];
+            Event event = new Event(description, at);
+            taskList.add(event);
+            replyUser("The following task has been added:\n    " + event.toString() + taskCounter + taskList.size());
+        }
+    }
+
     // Prints the user's task list.
     public static void showList() {
         if (taskList.isEmpty()) {
-            replyUser("Your list is empty!");
+            replyUser("Your list is empty.");
         } else {
             System.out.println("\n------------------------------------------");
             System.out.println("Here is your list of tasks: ");
@@ -32,7 +56,7 @@ public class Duke {
         int index = Integer.parseInt(userIndex) - 1;
         Task t = taskList.get(index);
         t.markAsDone();
-        replyUser("Nice! I've marked this task as done:\n" + "    " + t.toString());
+        replyUser("As per requested, the following task has been marked as done:\n" + "    " + t.toString());
     }
 
     public static void main(String[] args) {
@@ -43,24 +67,28 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?\n");
+        System.out.println("Booting up...\n" + logo);
+        System.out.println("How can I serve you?\n");
 
         while (true) {
             String command = sc.nextLine();
-            String[] commandArray = command.split(" ");
+            String[] commandArray = command.split(" ", 2);
 
             if (command.toLowerCase().equals("bye")) {
-                replyUser("Hope to see you again!");
+                replyUser("I believe this is farewell, my friend.");
                 break;
             } else if (command.toLowerCase().equals("list")) {
                 showList();
-            } else if (commandArray[0].toLowerCase().equals("done")){
+            } else if (commandArray[0].toLowerCase().equals("done")) {
                 markTaskAsDone(commandArray[1]);
+            } else if (commandArray[0].toLowerCase().equals("todo")) {
+                addTask(commandArray[1], "T");
+            } else if (commandArray[0].toLowerCase().equals("deadline")) {
+                addTask(commandArray[1], "D");
+            } else if (commandArray[0].toLowerCase().equals("event")) {
+                addTask(commandArray[1], "E");
             } else {
-                Task newTask = new Task(command);
-                taskList.add(newTask);
-                replyUser("added: " + command);
+                replyUser("Apologies, I do not recognise this command.");
             }
         }
     }
