@@ -11,7 +11,7 @@ public class Duke {
 
         while(input.hasNextLine()) {
             String taskDescription = input.nextLine();
-            String taskDesc[] = taskDescription.split(" ");
+            String[] taskDesc = taskDescription.split(" ");
 
             if (taskDescription.equals("bye")) {
 
@@ -44,13 +44,30 @@ public class Duke {
 
                 System.out.println("I... I've marked this as done... notice me pls: \n" + "[✓] " + newTask.getDescription());
 
-            } else {
+            } else if (taskDesc[0].equals("todo")) {
 
-                Task newTask = new Task(taskDescription);
+                String taskDescString = "";
+                for (int i = 1; i < taskDesc.length; i++) {
+                    taskDescString += taskDesc[i];
+                }
+                Task newTask = new Task(taskDescString);
                 taskList.add(newTask);
-                System.out.println("added: " + newTask.getDescription());
+                System.out.println("Senpai I have added this task: \n" + "[T][✗] " + newTask.getDescription() + "\n"
+                + "Now you have " + taskList.size() + " number of tasks in the list.");
+
+            } else if (taskDesc[0].equals("deadline")) {
+
+                String taskDescString = "";
+                for (int i = 1; i < taskDesc.length; i++) {
+                    taskDescString += taskDesc[i];
+                }
+                Task newTask = new Task(taskDescString);
+                taskList.add(newTask);
+                System.out.println("Senpai I have added this task: \n" + "[T][✗] " + newTask.getDescription() + "\n"
+                        + "Now you have " + taskList.size() + " number of tasks in the list.");
 
             }
+
         }
 
 
