@@ -10,6 +10,7 @@ public class TaskHandler {
             String[] inputSplit = input.split(" ", 2);
 
             try {
+                exceptionHandler.checkWrongCommand(inputSplit[0]);
                 exceptionHandler.checkEmptyField(inputSplit, inputSplit[0]);
 
                 switch (inputSplit[0]) {
@@ -38,7 +39,7 @@ public class TaskHandler {
                         Boxer.print("Uhh... You're gonna have to say that again, Red.");
                         break;
                 }
-            } catch(EmptyFieldException ex) {
+            } catch(DukeException ex) {
                 System.err.println(ex);
             }
         } while (loop);
