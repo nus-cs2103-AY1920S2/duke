@@ -20,14 +20,14 @@ public class Duke {
 
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
-            String[] arrString = userInput.split(" ");
+            String[] arrString = userInput.split(" ", 2);
             if (arrString[0].equalsIgnoreCase("bye")) {
                 System.out.println(botReplyLine + "\n Duke: I'll say goodnight now \n" + botReplyLine);
                 break;
             } else if (arrString[0].equalsIgnoreCase("list")) {
                 System.out.println(botReplyLine);
                 for (int i = 0; i < arr.size(); i++) {
-                    System.out.println(i + 1 + ". [" + arr.get(i).getStatusIcon() + "] " + arr.get(i).description);
+                    System.out.println(i + 1 + ". " + arr.get(i).toString());
                 }
                 System.out.println(botReplyLine);
             } else if (arrString[0].equalsIgnoreCase("done")) {
@@ -35,12 +35,25 @@ public class Duke {
                 arr.get(taskNumber).doneTask();
                 System.out.println(botReplyLine);
                 System.out.println("Consider it done.");
-                System.out.println("[" + arr.get(taskNumber).getStatusIcon() + "] " + arr.get(taskNumber).description);
+                System.out.println(arr.get(taskNumber).toString());
                 System.out.println(botReplyLine);
-            } else {
-                Task task = new Task(userInput);
-                arr.add(task);
-                System.out.println(botReplyLine + "\n Duke: added " + userInput + "\n" + botReplyLine);
+            } else if (arrString[0].equalsIgnoreCase("todo")) {
+                Todo todo = new Todo(arrString[1]);
+                arr.add(todo);
+                System.out.println(botReplyLine + "\n Duke: added your command." + "\n" + botReplyLine);
+                System.out.println(todo.toString());
+            } else if (arrString[0].equalsIgnoreCase("event")) {
+                String[] eventString = arrString[1].split("/");
+                Event event = new Event(eventString[0], eventString[1].substring(3));
+                arr.add(event);
+                System.out.println(botReplyLine + "\n Duke: added your command." + "\n" + botReplyLine);
+                System.out.println(event.toString());
+            } else if (arrString[0].equalsIgnoreCase("deadline")) {
+                String[] deadlineString = arrString[1].split("/");
+                Deadline deadline = new Deadline(deadlineString[0], deadlineString[1].substring(3));
+                arr.add(deadline);
+                System.out.println(botReplyLine + "\n Duke: added your command." + "\n" + botReplyLine);
+                System.out.println(deadline.toString());
             }
         }
 
