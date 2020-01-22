@@ -14,6 +14,11 @@ public class Deadline extends Task {
         this.by = by.substring(by.indexOf("by ")).replaceAll("by", "");
     }
 
+    @Override
+    Task_Codes getTaskCodes() {
+        return Task_Codes.D;
+    }
+
 
     @Override
     void setDescription(String s) throws DukeException {

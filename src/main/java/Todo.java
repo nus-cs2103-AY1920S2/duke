@@ -33,6 +33,10 @@ public class Todo extends Task {
     }
 
 
+    @Override
+    Task_Codes getTaskCodes() {
+        return Task_Codes.T;
+    }
 
     @Override
     public String toString() {

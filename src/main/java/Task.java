@@ -54,10 +54,10 @@ abstract class Task {
     // Save the task into the hard disk
     //Need to get the task type through the string
     //HAHA
-    void saveTask(String type) {
+    void saveTask() {
         File file = new File("data/fruits.txt");
         try {
-            writeToFile(file.getPath(),   "" + Task_Codes.valueOf(type) + " |  " + getStatusIcon()
+            writeToFile(file.getPath(),   "" + getTaskCodes() + " |  " + getStatusIcon()
                     + " | " + getDescription() +System.lineSeparator()
                    );
         } catch(IOException e) {
@@ -68,6 +68,8 @@ abstract class Task {
     void got_it_line() {
         System.out.println(space + " Got it. I've added this task: ");
     }
+
+    abstract Task_Codes getTaskCodes();
 
 
     private static void writeToFile(String filePath, String textToAppend) throws IOException {

@@ -9,7 +9,7 @@ public class Duke {
     private static String lines = "        ____________________________________________________________";
     private static String space = "        ";
 
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
+    public static void main(String[] args) throws DukeException {
         ArrayList<Task> stored_list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
@@ -23,27 +23,11 @@ public class Duke {
 
         System.out.println(welcome_message);
 
-        //File Class Demo
-
-        // Creating the new reference to the file we wanna save stuff in
-
-
-
-
-//        // To print the files
-//        try{
-//            printFileContents("data/fruits.txt");
-//        } catch (FileNotFoundException e) {
-//            System.out.println("File not Found");
-//        }
-
-
-
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
-               Print.print_bye();
-               stored_list.clear();
+                Print.print_bye();
+                stored_list.clear();
                 break;
             } else if (input.equals("list")) {
                 System.out.println(lines);
@@ -80,7 +64,7 @@ public class Duke {
                 new_todo_task.setDescription(todo_task);
                 stored_list.add(new_todo_task);
                 Print.print(new_todo_task, stored_list);
-                new_todo_task.saveTask("T");
+                new_todo_task.saveTask();
             }
 
             // If the task is a deadline
@@ -91,14 +75,14 @@ public class Duke {
                 new_deadline.setBy(input);
                 stored_list.add(new_deadline);
                 Print.print(new_deadline, stored_list);
-                new_deadline.saveTask("D");
+                new_deadline.saveTask();
             } else if (input.contains("event")) {
                 Event new_event = new Event(input, "");
                 new_event.setDescription(input);
                 new_event.setAt(input);
                 stored_list.add(new_event);
                 Print.print(new_event, stored_list);
-                new_event.saveTask("E");
+                new_event.saveTask();
             } else if (input.contains("delete")) {
                 String[] splited_string = input.split(" ");
                 Integer number = Integer.valueOf(splited_string[1]);
@@ -114,19 +98,20 @@ public class Duke {
     }
 
 
-    private static void printFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
-
-    private static void writeToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath,true);
-        fw.write(textToAppend);
-        fw.close();
-    }
+    // To print file contents, saved here if needed to use in the future.
+//    private static void printFileContents(String filePath) throws FileNotFoundException {
+//        File f = new File(filePath);
+//        Scanner s = new Scanner(f);
+//        while (s.hasNext()) {
+//            System.out.println(s.nextLine());
+//        }
+//    }
+    //        To print the files
+//        try{
+//            printFileContents("data/fruits.txt");
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not Found");
+//        }
 
 }
 
