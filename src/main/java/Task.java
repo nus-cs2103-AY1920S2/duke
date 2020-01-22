@@ -2,6 +2,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected String type = "-";
 
     public Task(String description) {
         this.description = description;
@@ -14,7 +15,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String temp = "[" + getStatusIcon() + "] " + description;
+        String temp = "[" + type + "]" + "[" + getStatusIcon() + "] " + description;
         return temp;
     }
 }
