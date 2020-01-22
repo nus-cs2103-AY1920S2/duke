@@ -1,12 +1,23 @@
 public class Task {
     private String task;
+    private boolean isDone;
 
     Task(String taskName) {
         this.task = taskName;
+        this.isDone = false;
     }
 
     Task() {
         task = "";
+    }
+
+    public String getStatusIcon() {
+        // return tick or cross symbols respectively.
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     public String getTask() {
