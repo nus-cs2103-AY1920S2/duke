@@ -9,7 +9,10 @@ public interface Chat {
         void setGoodbye(String goodbye);
         void goodbye();
         void echo(String command);
-        void addRecord(String record);
+        void addToDo(String record);
+        void addDeadline(String record, String by);
+        void addEvent(String record, String at);
         void listRecord();
         void setDone(int num);
+
 }
