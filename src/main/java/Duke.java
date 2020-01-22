@@ -31,12 +31,19 @@ public class Duke {
             return;
         }
 
-        int pos = isMarkingTaskRequest(str);
-        if (pos != -2) {
+        int markPos = isMarkingTaskRequest(str);
+        int delPos = isDeleteTaskRequest(str);
+        if (markPos != -2) {
             try {
-                markItemAsDone(pos);
+                markItemAsDone(markPos);
             } catch (OutOfBoundMarkingRequestException e) {
-                System.out.println(String.format("%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
+                System.out.println(String.format("markPos error\n%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
+            }
+        } else if (delPos != -2) {
+            try {
+                deleteItem(delPos);
+            } catch (OutOfBoundMarkingRequestException e) {
+                System.out.println(String.format("delPos error\n%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
             }
         } else {
             try {
@@ -63,6 +70,7 @@ public class Duke {
 
         }
     }
+
 
     private Task.TaskType commandType(String str) {
         Task.TaskType ret = Task.TaskType.unknown;
@@ -126,14 +134,43 @@ public class Duke {
         sc.close();
     }
 
-    private void markItemAsDone(int pos) throws OutOfBoundMarkingRequestException{
+    private void deleteItem(int pos) throws OutOfBoundMarkingRequestException {
         if (pos >= storedItems.size() || pos < 0)
-            throw new OutOfBoundMarkingRequestException(pos);
+            throw new OutOfBoundMarkingRequestException(pos+1);
+        Task t = storedItems.remove(pos);
+        System.out.println(String.format("%s%s\n%sI've removed this task for you\n%s   %s\n%sYou have %d tasks left\n%s%s",
+                padding, uselessLine, padding, padding, t.toString(),padding, storedItems.size(), padding, uselessLine));
+    }
+
+    private void markItemAsDone(int pos) throws OutOfBoundMarkingRequestException {
+        if (pos >= storedItems.size() || pos < 0)
+            throw new OutOfBoundMarkingRequestException(pos+1);
         storedItems.get(pos).markDone();
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Nice nice. I've marked the task as done for you.\n" +
                 padding + "   " + storedItems.get(pos) + "\n" +
                 padding + uselessLine);
+    }
+
+    private int isDeleteTaskRequest(String str) {
+        int ret = -2;
+        String ss = "";
+        Scanner sc = new Scanner(str);
+
+        while (sc.hasNext()) {
+            ss = sc.next();
+            if (!ss.equals("delete"))
+                break;
+            if (!sc.hasNextInt())
+                break;
+            ret = sc.nextInt() - 1;
+            if (sc.hasNext())
+                ret = -2;
+            break;
+        }
+
+        sc.close();
+        return ret;
     }
 
     private int isMarkingTaskRequest(String str) {
