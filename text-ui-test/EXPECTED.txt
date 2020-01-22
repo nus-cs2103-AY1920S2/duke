@@ -1,0 +1,57 @@
+Hello from 
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+How may duke serve the master today?
+
+todo borrow book
+    ____________________________________________________________
+     Got it. I've added this task: 
+       [T][N] borrow book
+     Now you have 1 task in the list.
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][N] borrow book
+    ____________________________________________________________
+
+deadline return book /by Sunday
+    ____________________________________________________________
+     Got it. I've added this task: 
+       [D][N] return book (by: Sunday)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+event project meeting /at Mon 2-4pm
+    ____________________________________________________________
+     Got it. I've added this task: 
+       [E][N] project meeting (at: Mon 2-4pm)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][N] borrow book
+     2.[D][N] return book (by: Sunday)
+     3.[E][N] project meeting (at: Mon 2-4pm)
+    ____________________________________________________________
+
+done 3
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [E][Y] project meeting (at: Mon 2-4pm)
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][N] borrow book
+     2.[D][N] return book (by: Sunday)
+     3.[E][Y] project meeting (at: Mon 2-4pm)
+    ____________________________________________________________
