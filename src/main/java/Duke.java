@@ -20,6 +20,9 @@ public class Duke {
                     case "done":
                         markDone(tasks.get(Integer.valueOf(words[1]) - 1));
                         break;
+                    case "delete":
+                        delete(Integer.valueOf(words[1]), tasks);
+                        break;
                     case "todo":
                         try {
                             add(new Todo(input.substring(5)), tasks);
@@ -113,5 +116,14 @@ public class Duke {
     private static String[] getTaskDetails(String str, String spliter) {
         String[] details = str.split(spliter);
         return details;
+    }
+
+    private static void delete(int taskNumber, ArrayList<Task> tasks) {
+        printBreak();
+        System.out.println("    Noted. I've removed this task:");
+        System.out.println("      " + tasks.get(taskNumber - 1));
+        tasks.remove(taskNumber - 1);
+        System.out.println("    sNow you have " + tasks.size() + " tasks in the list.");
+        printBreak();
     }
 }
