@@ -24,6 +24,9 @@ public class Duke {
                 } else if (command.equals("done")) {
                     int taskNo = Integer.parseInt(inputs[1]);
                     markTaskAsDone(taskNo);
+                } else if (command.equals("delete")) {
+                    int taskNo = Integer.parseInt(inputs[1]);
+                    deleteTask(taskNo);
                 } else if (command.equals("deadline")) {
                     if (inputs.length == 1) { throw new EmptyDescriptionException(); };
                     if (tasks.size() == 100) { throw new TooManyTasksException(); };
@@ -93,6 +96,20 @@ public class Duke {
         printLine();
         indent("Excellent! You have completed this task: ");
         indent(space + task.toString());
+        printLine();
+    }
+
+    private static void deleteTask(int taskNo) throws InvalidIndexException {
+        if (taskNo < 1 || taskNo > tasks.size()) {
+            throw new InvalidIndexException();
+        }
+        Task task = tasks.get(taskNo - 1); // The user starts counting from 1
+        tasks.remove(taskNo - 1);
+
+        printLine();
+        indent("Understood. I have now removed this task: ");
+        indent(space + task.toString());
+        printTaskCount();
         printLine();
     }
 
