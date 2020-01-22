@@ -41,6 +41,16 @@ public class Duke {
                     int taskNum = Integer.parseInt(c[1]);
                     arrList.get(taskNum - 1).markAsDone();
 
+                } else if (c[0].equals("delete")) {
+                    // if task number is not given
+                    if (c.length == 1) {
+                        throw new DukeException("    Oh no! You have to specify which task to delete!");
+                    }
+
+                    // delete the specified task
+                    int taskNum = Integer.parseInt(c[1]);
+                    delete(taskNum);
+
                 } else if (c[0].equals("deadline")) {
                     // if no description is given
                     if (c.length == 1) {
@@ -146,6 +156,14 @@ public class Duke {
         arrList.add(t);
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    Alright! I have added: \n    " + t
+                + "\n    You now have " + arrList.size() + " tasks in your list!");
+        System.out.println("    ------------------------------------------------------------");
+    }
+
+    public static void delete(int taskNum) {
+        Task t = arrList.remove(taskNum - 1);
+        System.out.println("    ------------------------------------------------------------");
+        System.out.println("    Yeet! I have tossed the task: \n    " + t
                 + "\n    You now have " + arrList.size() + " tasks in your list!");
         System.out.println("    ------------------------------------------------------------");
     }
