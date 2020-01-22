@@ -10,7 +10,7 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         tasks = new ArrayList<>();
-        String input = sc.nextLine();
+        String input = sc.nextLine().strip();
         while (true) {
             switch (input.split("\\s+")[0]) {
             case "bye":
@@ -23,11 +23,20 @@ public class Duke {
                 int taskNumber = Integer.parseInt(input.split("\\s+")[1]);
                 completeTask(taskNumber);
                 break;
+            case "todo":
+                addTodo(input);
+                break;
+            case "deadline":
+                addDeadline(input);
+                break;
+            case "event":
+                addEvent(input);
+                break;
             default:
-                addTask(input);
+                System.out.println(style("Oops! I don't know what that means :("));
                 break;
             }
-            input = sc.nextLine();
+            input = sc.nextLine().strip();
         }
     }
 
@@ -48,9 +57,35 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void addTask(String description) {
-        tasks.add(new Task(description));
-        System.out.println(style("added: " + description));
+    private static void addTodo(String input) {
+        String description = input.split("\\s+", 2)[1];
+        Todo todo = new Todo(description);
+        tasks.add(todo);
+        printTask(todo);
+    }
+
+    private static void addDeadline(String input) {
+        String[] info = input.split("\\s+", 2)[1].split("\\s*\\\\by\\s*");
+        Deadline deadline = new Deadline(info[0], info[1]);
+        tasks.add(deadline);
+        printTask(deadline);
+    }
+
+    private static void addEvent(String input) {
+        String[] info = input.split("\\s+", 2)[1].split("\\s*\\\\at\\s*");
+        Event event = new Event(info[0], info[1]);
+        tasks.add(event);
+        printTask(event);
+    }
+
+    private static void printTask(Task task) {
+        String numberOfTasks;
+        if (tasks.size() == 1) {
+            numberOfTasks = "There is now 1 task in the list.";
+        } else {
+            numberOfTasks = "There are now " + tasks.size() + " tasks in the list.";
+        }
+        System.out.println(style("Got it. I've added this task:\n  " + task + "\n" + numberOfTasks));
     }
 
     private static void list() {
