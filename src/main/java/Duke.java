@@ -8,28 +8,41 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] inputs = input.split(" ", 2);
-            String command = inputs[0];
-            if (command.equals("bye")) {
-                sayBye();
-                break;
-            } else if (command.equals("todo")) {
-                String desc = inputs[1];
-                addTodo(desc);
-            } else if (command.equals("deadline")) {
-                String desc = inputs[1];
-                addDeadline(desc);
-            } else if (command.equals("event")) {
-                String desc = inputs[1];
-                addEvent(desc);
-            } else if (command.equals("list")) {
-                printList();
-            } else if (command.equals("done")) {
-                int index = Integer.parseInt(inputs[1]);
-                markTaskAsDone(index);
-            } else {
-                sayInvalidInput();
+            try {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" ", 2);
+                String command = inputs[0];
+                if (command.equals("bye")) {
+                    sayBye();
+                    break;
+                } else if (command.equals("todo")) {
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    }
+                    String desc = inputs[1];
+                    addTodo(desc);
+                } else if (command.equals("deadline")) {
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    }
+                    String desc = inputs[1];
+                    addDeadline(desc);
+                } else if (command.equals("event")) {
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    }
+                    String desc = inputs[1];
+                    addEvent(desc);
+                } else if (command.equals("list")) {
+                    printList();
+                } else if (command.equals("done")) {
+                    int index = Integer.parseInt(inputs[1]);
+                    markTaskAsDone(index);
+                } else {
+                    throw new InvalidCommandException();
+                }
+            } catch (DukeException e) {
+                System.out.println(e.toString());
             }
         }
     }
@@ -42,10 +55,6 @@ public class Duke {
         System.out.println("Stop procrastinating. See you!");
     }
 
-    /*private static void addToList(Task task) {
-        tasks.add(task);
-        System.out.println("added: " + task.getDescription());
-    }*/
     private static void printAddToList() {
         System.out.println("Gotcha. Added this to your list:");
     }
@@ -102,9 +111,5 @@ public class Duke {
         task.markAsDone();
         System.out.println("Good job! One off your chest!");
         System.out.println(task.toString());
-    }
-
-    private static void sayInvalidInput() {
-        System.out.println("Apologies, I'm too dumb to understand that!");
     }
 }
