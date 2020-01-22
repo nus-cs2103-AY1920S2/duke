@@ -15,6 +15,15 @@ public class List{
         return listArray[num-1];
     }
 
+    public void printCounter(){
+        if(counter <= 1){
+            System.out.println("You have " + counter + " task on the agenda, sir");
+        } else {
+            System.out.println("You have " + counter + " tasks on the agenda, sir");
+        }
+        
+    }
+
     public void printList(){
         for(int i=0; i<counter; i++){
             System.out.println(i+1 + ". " + listArray[i]);

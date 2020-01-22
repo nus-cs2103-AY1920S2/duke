@@ -30,9 +30,31 @@ public class Main {
                 System.out.println(toComplete);
             }
 
+            else if(word.contains("deadline")){
+                String[] retrieveDateArray = word.split(" /by ");
+                String[] retrieveTaskArray = retrieveDateArray[0].split(" ", 2);
+                Deadline deadline = new Deadline(retrieveTaskArray[1], retrieveDateArray[1]);
+                list.setListArray(deadline);
+                list.printCounter();
+            }
+
+            else if(word.contains("event")){
+                String[] retrieveDateArray = word.split(" /at ");
+                String[] retrieveTaskArray = retrieveDateArray[0].split(" ", 2);
+                Event event = new Event(retrieveTaskArray[1], retrieveDateArray[1]);
+                list.setListArray(event);
+                list.printCounter();
+            }
+
+            else if(word.contains("todo")){
+                String[] retrieveTaskArray = word.split(" ", 2);
+                Todo todo = new Todo(retrieveTaskArray[1]);
+                list.setListArray(todo);
+                list.printCounter();
+            }
+
             else {
-                Task task = new Task(word);
-                list.setListArray(task);
+                continue;
             }
 
         }
