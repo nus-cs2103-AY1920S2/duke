@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Duchess {
-    private ArrayList<String> strings;
+    private ArrayList<Task> tasks;
     private Scanner scanner;
     private String command;
 
-    Duchess() {
-        this.stringList = new ArrayList<String>(100);
+    public Duchess() {
+        this.tasks = new ArrayList<Task>(100);
         this.scanner = new Scanner(System.in);
     }
 
@@ -15,7 +15,7 @@ class Duchess {
         this.command = scanner.nextLine();
         switch (command.toLowerCase()) {
         case "list":
-            printList();
+            printTasks();
             break;
         case "bye":
             sayGoodbye();
@@ -45,15 +45,15 @@ class Duchess {
 
     private void addToList(String input) {
         echo(input);
-        this.strings.add(input);
+        this.tasks.add(new Task(input));
         awaitInput();
     }
 
-    private void printList() {
+    private void printTasks() {
         System.out.println("\tSighs... you never remember what you say, don't you.");
         System.out.println("\tYou said these:");
-        for (int i = 0; i < this.strings.size(); i++) {
-            System.out.println("\t\t" + (i + 1) + ".\t" + this.strings.get(i));
+        for (int i = 0; i < this.tasks.size(); i++) {
+            System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i).getTaskInformation());
         }
         awaitInput();
     }
