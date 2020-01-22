@@ -8,4 +8,8 @@ public class Task {
     public static Task createTask(String taskName) {
         return new Task(taskName);
     }
+
+    public String getTaskName() {
+        return taskName;
+    }
 }

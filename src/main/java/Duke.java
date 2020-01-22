@@ -4,21 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
+    private List<Task> tasks;
+
+    private Duke() {
+        this.tasks = new ArrayList<>();
+    }
 
     private static void greet() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
-    private static void echo(Scanner sc) {
+    private void echo(Scanner sc) {
         String userInput = sc.nextLine();
 
-        if (!userInput.equals("bye")) {
-            System.out.println(userInput);
+        if (userInput.equals("list")) {
+            printList();
             System.out.println();
-            Duke.echo(new Scanner(System.in));
+            echo(new Scanner(System.in));
+        } else if (!userInput.equals("bye")) {
+            tasks.add(Task.createTask(userInput));
+            System.out.println("added " + userInput);
+            System.out.println();
+            echo(new Scanner(System.in));
         } else {
             Duke.printByeMsg();
+        }
+    }
+
+    private void printList() {
+        for (int i = 0; i < tasks.size(); ++i) {
+            System.out.printf("%d. %s\n", i + 1, tasks.get(i).getTaskName());
         }
     }
 
@@ -27,10 +43,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        List<Task> list = new ArrayList<>();
+
+        Duke duke  = new Duke();
 
         Duke.greet();
 
-        Duke.echo(new Scanner(System.in));
+        duke.echo(new Scanner(System.in));
     }
 }
