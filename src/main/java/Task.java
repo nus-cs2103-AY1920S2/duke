@@ -1,9 +1,13 @@
 public class Task {
-    private String str;
-    private String status;
+    protected String msg;
+    protected String status;
+    protected String type;
+    protected String time;
 
-    public Task (String str) {
-        this.str = str;
+    public Task (String msg) {
+        this.msg = msg;
+        this.type = "";
+        this.time = "";
         status = "[✗]";
     }
 
@@ -13,6 +17,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return status + " " + str;
+        return type + status + " " + msg + " " + time;
     }
 }
