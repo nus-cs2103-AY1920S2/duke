@@ -4,9 +4,11 @@ public class Task {
     protected static int totalTasks = 0;
 
     public Task(String description) {
+        System.out.println("\tGot it. I've added this task: ");
         this.description = description;
         this.isDone = false;
         taskAdded();
+        System.out.println(String.format("\tNow you have %d tasks in the list.", Task.getTotalTasks()));
     }
 
     public String getStatusIcon() {

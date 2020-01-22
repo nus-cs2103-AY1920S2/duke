@@ -5,6 +5,7 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+        System.out.println("\t\t" + this);
     }
 
     @Override
