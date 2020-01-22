@@ -15,7 +15,8 @@ public class Database {
 
     /**
      * Add data into database
-     * @param data data required to add
+     * @param data input from user
+     * @throws DukeException when wrong format or invalid input or missing information occurs
      */
     public void addData(String data) throws DukeException{
         int indexForSeparator;
@@ -96,13 +97,36 @@ public class Database {
     }
 
     /**
-     * Set the status of the task to done
-     * @param num the index the task at
+     * Set the task as Done
+     * @param num index where the task at
+     * @throws DukeException when no task found in that index
      */
-    public void markDone(int num) {
-        Task task = records.get(num - 1);
-        task.setStatusDone();
-        records.set(num - 1, task);
+    public void markDone(int num) throws DukeException{
+        try {
+            Task task = records.get(num - 1);
+            task.setStatusDone();
+            records.set(num - 1, task);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException("No task found in that index!");
+        }
+    }
+
+    /**
+     * Delete the task at the index
+     * @param num index where the task located at
+     * @return task that being deleted
+     * @throws DukeException when no task found in that index
+     */
+    public Task deleteTask(int num) throws DukeException{
+        Task task;
+        try {
+            task = records.get(num - 1);
+            records.remove(num - 1);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException("No task found in that index!");
+        }
+        amtOfTask -= 1;
+        return task;
     }
 
     /**
