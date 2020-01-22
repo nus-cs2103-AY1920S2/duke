@@ -31,7 +31,7 @@ public class Duke {
 
         while(!textEntered.equals("bye")){
 
-            /*
+            System.out.println(horizontalLine);
             if(textEntered.equals("list")){
                 manager.listAllTasks();
                 System.out.println(horizontalLine);
@@ -83,7 +83,9 @@ public class Duke {
 
             }
 
-             */
+
+
+            /*
             System.out.println(horizontalLine);
             if(textEntered.contains("list")){
                 System.out.println("Here are the tasks in your list:");
@@ -106,6 +108,8 @@ public class Duke {
             }
             System.out.println(horizontalLine);
             textEntered = fr.nextLine();
+            */
+
 
 
 
