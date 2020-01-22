@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Task {
     public static ArrayList<Task> tasks = new ArrayList<>();
-    private String todo;
-    private Boolean done = false;
+    protected String task;
+    protected Boolean done = false;
 
     Task(String todo) {
-        this.todo = todo;
+        this.task = todo;
     }
 
     public void done() {
@@ -16,9 +16,9 @@ public class Task {
     @Override
     public String toString() {
         if (done) {
-            return "[✓] " + this.todo;
+            return "[✓] " + this.task;
         } else {
-            return "[✗] " + this.todo;
+            return "[✗] " + this.task;
         }
     }
 
