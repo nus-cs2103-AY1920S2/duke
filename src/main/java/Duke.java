@@ -40,22 +40,22 @@ public class Duke {
             String input = scan.nextLine();
             String[] inputArray = input.split("\\s");
             switch (inputArray[0]) {
-                case "bye":
-                    this.bidFarewell();
-                    break label;
-                case "list":
-                    System.out.println("Thy list is here:");
-                    this.outputList();
-                    break;
-                case "done":
-                    int index = Integer.parseInt(inputArray[1]) - 1;
-                    this.completeTask(index);
-                    System.out.printf("Task successfully completed: \n\t %s\n", storage.get(index));
-                    break;
-                default:
-                    storage.add(new Task(input));
-                    System.out.printf("Added: %s\n", input);
-                    break;
+            case "bye":
+                this.bidFarewell();
+                break label;
+            case "list":
+                System.out.println("Thy list is here:");
+                this.outputList();
+                break;
+            case "done":
+                int index = Integer.parseInt(inputArray[1]) - 1;
+                this.completeTask(index);
+                System.out.printf("Task successfully completed: \n\t %s\n", storage.get(index));
+                break;
+            default:
+                storage.add(new Task(input));
+                System.out.printf("Added: %s\n", input);
+                break;
             }
         }
     }
