@@ -113,24 +113,6 @@ public class LevelMethods {
 
     }
 
-
-//    public void completeTask(int taskNum) throws DukeExceptions {
-//        if (storingList.size() >= taskNum && taskNum != 0) {
-//
-//            storingList.get(taskNum - 1).isDone = true;
-//            //storingList.set(taskNum - 1, updatedTask);
-//
-//            String printStr = "Nice! I've marked this task as done: \n" + storingList.get(taskNum - 1);
-//            formattingDivider(printStr);
-//
-//
-//        } else {
-//            //formattingDivider("There is no task " + taskNum + "!!!");
-//            throw new DukeExceptions("OOPS!!! There is no task " + taskNum + "!!! Please create task " + taskNum + "first.");
-//        }
-//
-//    }
-
     public static boolean isNumber(String numStr) {
         try {
             Integer.parseInt(numStr);
@@ -162,7 +144,6 @@ public class LevelMethods {
                     String printStr = "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
                     formattingDivider(printStr);
 
-
                 } else {
                     //formattingDivider("There is no task " + taskNum + "!!!");
                     throw new DukeExceptions("OOPS!!! There is no task " + numDone + "!!! Please create task " + numDone + " first.");
@@ -174,8 +155,36 @@ public class LevelMethods {
 
     }
 
-    public void deleteTask(String deleteString) {
-        
+    public void deleteTask(String inputStr) throws DukeExceptions {
+        if (inputStr.length() <= 7) {
+            throw new DukeExceptions("Please input a valid number behind 'delete'!!");
+        } else {
+            String strNumberDeleted = inputStr.substring(7, inputStr.length());
+            strNumberDeleted.replaceAll("\\s+",""); //remove all white spaces
+
+            boolean isANumber = isNumber(strNumberDeleted);
+
+            if (isANumber) {
+                int numToDelete = Integer.parseInt(strNumberDeleted);
+
+                if (storingList.size() >= numToDelete) {
+
+                    int newSize = storingList.size() - 1;
+                    String toPrint = " Noted. I've removed this task: \n"
+                            + storingList.get(numToDelete-1)
+                            + "\n Now you have " +  newSize + " tasks in the list." ;
+
+                    storingList.remove(numToDelete - 1);
+
+                    formattingDivider(toPrint);
+
+                } else {
+                    throw new DukeExceptions("No number " + numToDelete + " in task list!!!");
+                }
+            } else {
+                throw new DukeExceptions("Please input a valid number behind 'delete'!!");
+            }
+        }
     }
 
     public void listTheList() {
