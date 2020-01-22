@@ -1,7 +1,15 @@
-import java.util.Scanner;
+package Driver;
+
+import Utilities.TaskHandler;
+import WelcomeGoodbye.WelcomeGoodbye;
 
 public class Duke {
 
+    /**
+     * Main driver method
+     *
+     * @param args standard argument
+     */
     public static void main(String[] args) {
 
         // Welcomes the user
