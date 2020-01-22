@@ -30,13 +30,20 @@ public class Duke {
                     case "done":
                         tasksList.markDone(userInput);
                         break;
+                    case "delete":
+                        tasksList.delete(userInput);
+                        break;
                     default:
                         throw new DukeUnknownInputException();
                 }
             } catch (DukeMissingDescriptionException mE) {
+                System.out.println("____________________________________________________________");
                 System.out.println("OOPS!!! The description cannot be empty.");
+                System.out.println("____________________________________________________________");
             } catch (DukeUnknownInputException uE) {
+                System.out.println("____________________________________________________________");
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :<");
+                System.out.println("____________________________________________________________");
             }
             userInput = sc.nextLine();
             inputs = userInput.split(" ", 2);

@@ -1,9 +1,10 @@
+import java.util.ArrayList;
+
 public class TasksList {
-    protected Task[] tasks = new Task[100];
-    protected int nextIndex = 0;
+    protected ArrayList<Task> tasks = new ArrayList<>();
 
     public Task getTask(int index) {
-        return tasks[index];
+        return tasks.get(index);
     }
 
     public void markDone(String done) {
@@ -17,9 +18,11 @@ public class TasksList {
             throw new DukeUnknownInputException();
         }
         int index = Integer.valueOf(num) - 1;
-        tasks[index].markDone();
+        Task currTask = tasks.get(index);
+        currTask.markDone();
+        tasks.set(index, currTask);
         System.out.println("____________________________________________________________");
-        System.out.println("Nice! I've marked this task as done:\n" + tasks[index]);
+        System.out.println("Nice! I've marked this task as done:\n" + tasks.get(index));
         System.out.println("____________________________________________________________");
     }
 
@@ -27,11 +30,11 @@ public class TasksList {
         if (todo.length() <= 5) {
             throw new DukeMissingDescriptionException();
         }
-        tasks[nextIndex] = new Todo(todo.substring(5));
-        nextIndex++;
+        tasks.add(new Todo(todo.substring(5)));
+        int taskNum = tasks.size();
         System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:\n" + tasks[nextIndex-1]
-                + "\nNow you have " + nextIndex + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
+                + "\nNow you have " + taskNum + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
 
@@ -43,11 +46,11 @@ public class TasksList {
         if (splitted.length < 2) {
             throw new DukeUnknownInputException();
         }
-        tasks[nextIndex] = new Deadline(splitted[0], splitted[1]);
-        nextIndex++;
+        tasks.add(new Deadline(splitted[0], splitted[1]));
+        int taskNum = tasks.size();
         System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:\n" + tasks[nextIndex-1]
-                + "\nNow you have " + nextIndex + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
+                + "\nNow you have " + taskNum + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
 
@@ -59,20 +62,38 @@ public class TasksList {
         if (splitted.length < 2) {
             throw new DukeUnknownInputException();
         }
-        tasks[nextIndex] = new Event(splitted[0], splitted[1]);
-        nextIndex++;
+        tasks.add(new Event(splitted[0], splitted[1]));
+        int taskNum = tasks.size();
         System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:\n" + tasks[nextIndex-1]
-                + "\nNow you have " + nextIndex + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
+                + "\nNow you have " + taskNum + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
 
     public void list() {
         System.out.println("____________________________________________________________");
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < nextIndex; i++) {
-            System.out.println(i+1 + "." + tasks[i]);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i+1 + "." + tasks.get(i));
         }
         System.out.println("____________________________________________________________");
+    }
+
+    public void delete(String delete) {
+        if (delete.length() <= 7) {
+            throw new DukeMissingDescriptionException();
+        }
+        String num = delete.substring(7);
+        try {
+            Integer.valueOf(num);
+        } catch(NumberFormatException e) {
+            throw new DukeUnknownInputException();
+        }
+        int index = Integer.valueOf(num) - 1;
+        System.out.println("____________________________________________________________");
+        System.out.println("Noted. I've removed this task:\n" + tasks.get(index)
+                +  "\nNow you have " + (tasks.size()-1) + " tasks in the list.");
+        System.out.println("____________________________________________________________");
+        tasks.remove(index);
     }
 }

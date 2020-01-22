@@ -8,6 +8,9 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+OOPS!!! The description cannot be empty.
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
 [D][N] return book (by: Sunday)
 Now you have 2 tasks in the list.
@@ -18,10 +21,16 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Got it. I've added this task:
+[E][N] cry in bed (at: Anytime)
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
 1.[T][N] borrow book
 2.[D][N] return book (by: Sunday)
 3.[E][N] project meeting (at: Mon 2-4pm)
+4.[E][N] cry in bed (at: Anytime)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -32,10 +41,32 @@ Nice! I've marked this task as done:
 [D][Y] return book (by: Sunday)
 ____________________________________________________________
 ____________________________________________________________
+OOPS!!! The description cannot be empty.
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
 1.[T][Y] borrow book
 2.[D][Y] return book (by: Sunday)
 3.[E][N] project meeting (at: Mon 2-4pm)
+4.[E][N] cry in bed (at: Anytime)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! I'm sorry, but I don't know what that means :<
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+[D][Y] return book (by: Sunday)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+[E][N] project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][Y] borrow book
+2.[E][N] cry in bed (at: Anytime)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
