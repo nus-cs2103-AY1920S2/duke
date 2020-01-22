@@ -8,7 +8,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
         taskAdded();
-        System.out.println(String.format("\tNow you have %d tasks in the list.", Task.getTotalTasks()));
     }
 
     public String getStatusIcon() {
@@ -23,8 +22,18 @@ public class Task {
         totalTasks++;
     }
 
-    public static int getTotalTasks() {
-        return totalTasks;
+    public static void taskDeleted() {
+        totalTasks--;
+    }
+
+    public static void getTotalTasks() {
+        if (totalTasks == 0) {
+            System.out.println("\tNow you have no tasks in the list.");
+        } else if (totalTasks == 1) {
+            System.out.println(String.format("\tNow you have %d task in the list.", totalTasks));
+        } else {
+            System.out.println(String.format("\tNow you have %d tasks in the list.", totalTasks));
+        }
     }
 
     @Override
