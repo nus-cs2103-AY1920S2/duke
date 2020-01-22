@@ -32,23 +32,33 @@ public class Duke {
         }
 
         int pos = isMarkingTaskRequest(str);
-        if (pos != -1) {
-            markItemAsDone(pos);
-        } else {
-            Task.TaskType type = commandType(str);
-            switch (type) {
-                case toDo:
-                    handleToDo(str);
-                    break;
-                case deadline:
-                    handleDeadline(str);
-                    break;
-                case event:
-                    handleEvent(str);
-                    break;
-                default:
-                    throw new InvalidCommandException(str);
+        if (pos != -2) {
+            try {
+                markItemAsDone(pos);
+            } catch (OutOfBoundMarkingRequestException e) {
+                System.out.println(String.format("%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
             }
+        } else {
+            try {
+                Task.TaskType type = commandType(str);
+                switch (type) {
+                    case toDo:
+                        handleToDo(str);
+                        break;
+                    case deadline:
+                        handleDeadline(str);
+                        break;
+                    case event:
+                        handleEvent(str);
+                        break;
+                    default:
+                        throw new InvalidCommandException(str);
+                }
+            } catch (InvalidCommandException e) {
+                System.out.println(String.format("%s%s\n%s%s\n%sPlease type something legit\n%s%s",
+                        padding,uselessLine,padding,e,padding,padding,uselessLine));
+            }
+
         }
     }
 
@@ -101,8 +111,8 @@ public class Duke {
     }
 
     private void markItemAsDone(int pos) throws OutOfBoundMarkingRequestException{
-        if (pos > storedItems.size() || pos < 0)
-            throw new OutOfBoundMarkingRequestException(pos, storedItems.size());
+        if (pos >= storedItems.size() || pos < 0)
+            throw new OutOfBoundMarkingRequestException(pos);
         storedItems.get(pos).markDone();
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Nice nice. I've marked the task as done for you.\n" +
@@ -111,7 +121,7 @@ public class Duke {
     }
 
     private int isMarkingTaskRequest(String str) {
-        int ret = -1;
+        int ret = -2;
         String ss = "";
         Scanner sc = new Scanner(str);
 
@@ -123,7 +133,7 @@ public class Duke {
                 break;
             ret = sc.nextInt() - 1;
             if (sc.hasNext())
-                ret = -1;
+                ret = -2;
             break;
         }
 
