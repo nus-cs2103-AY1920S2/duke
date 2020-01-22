@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-
     /** The main method is where the chat-bot is created and executed. */
     public static void main(String[] args) {
         displayLogo();
@@ -30,13 +29,14 @@ public class Duke {
      * exit command is the next input.
      *
      * @param sc the scanner accepting user input
+     * @param taskList the list of tasks.
      */
     public static void inputCommands(Scanner sc, TaskList taskList) {
         // Terminates the chat-bot if true
         boolean exit = false;
 
-        while (!exit && sc.hasNextLine()) {
-            String input = sc.nextLine();
+        while (!exit && sc.hasNext()) {
+            String input = sc.next();
             System.out.println();
 
             // Handle different commands
@@ -44,11 +44,16 @@ public class Duke {
             case "bye":
                 exit = true; // Terminate the program
                 break;
+            case "done":
+                int taskId = sc.nextInt();
+                taskList = done(taskList, taskId);
+                break;
             case "list":
                 list(taskList);
+                sc.nextLine();
                 break;
             default:
-                taskList = add(taskList, input);
+                taskList = add(taskList, input + sc.nextLine());
                 //echo(command); // Repeat the user's command
                 break;
             }
@@ -60,9 +65,15 @@ public class Duke {
         return indent(text, 4);
     }
 
-    /** Adds an indent to all lines of a given text. */
+    /**
+     * Adds an indent to all lines of a given text.
+     *
+     * @param text the text to indent.
+     * @param indentWidth the character width of the indentation.
+     * @return the indented text.
+     */
     private static String indent(String text, int indentWidth) {
-        String indent = " ".repeat(indentWidth); // Change this number for different indent widths
+        String indent = " ".repeat(indentWidth);
 
         return text.replaceAll("(?m)^", indent);
     }
@@ -105,15 +116,45 @@ public class Duke {
         echo(farewell);
     }
 
-    /** Adds a task into the chat-bot. */
-    public static TaskList add(TaskList taskList, String task) {
-        echo("added: " + task);
+    /**
+     * Adds a task into the chat-bot.
+     *
+     * @param taskList the list of tasks.
+     * @param taskDescription the details of the new task.
+     * @return a copy of the TaskList with the newly added task.
+     */
+    public static TaskList add(TaskList taskList, String taskDescription) {
+        echo("added: " + taskDescription);
 
-        return taskList.addTask(task);
+        return taskList.addTask(taskDescription);
     }
 
-    /** Lists all tasks in the chat-bot. */
+    /**
+     * Lists all tasks in the chat-bot.
+     *
+     * @param taskList the list of tasks to display.
+     */
     public static void list(TaskList taskList) {
-        echo(taskList.toString());
+        String title = "Here are the tasks in your list:\n";
+
+        echo(title + taskList.toString());
+    }
+
+    /**
+     * Marks a task as completed in the chat-bot.
+     *
+     * @param taskList the list of tasks.
+     * @param taskId the number of the task in the list to be marked as done.
+     * @return a copy of the TaskList with the specified task marked as done.
+     */
+    public static TaskList done(TaskList taskList, int taskId) {
+        String praise = "Good job completing this task!"
+                + " Here's a tick for completing it!\n";
+
+        TaskList newList = taskList.doneTask(taskId);
+
+        echo(praise + indent(newList.get(taskId).toString(), 2));
+
+        return newList;
     }
 }
