@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -50,7 +55,7 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
         System.out.println("      Here are the tasks in your list: \n");
         for (int count = 0; count < tl.getSize(); count++) {
-            System.out.print("     " + (count + 1) + ". ");
+            System.out.print("      ." + (count + 1) + " ");
             System.out.println(tl.get(count));
         }
         System.out.println("    ____________________________________________________________");

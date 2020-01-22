@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.*;
+import duke.storage.*;
+import duke.task.*;
+import duke.ui.Ui;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -27,7 +34,7 @@ public class Duke {
         String command = "";
         Scanner sc = ui.getScanner();
 
-        while (!(command).equalsIgnoreCase(Operation.BYE.toString())) {
+        while (sc.hasNextLine() && !(command).equalsIgnoreCase(Operation.BYE.toString())) {
             String[] current = sc.nextLine().split(" ");
             command = current[0];
             if ((command).equalsIgnoreCase(Operation.BYE.toString())) {
@@ -82,7 +89,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("../data/duke.txt").run();
     }
 
 }

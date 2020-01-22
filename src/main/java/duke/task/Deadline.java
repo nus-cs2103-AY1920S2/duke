@@ -1,13 +1,16 @@
-public class EventObj extends Task {
-    public EventObj(String description, String datetime) {
-        super(description, datetime);
-        type = "E";
+package duke.task;
+
+public class Deadline extends Task {
+    public Deadline(String description, String date) {
+        super(description, date);
+        type = "D";
     }
 
     @Override
     public String toString(){
-        return super.toString() + "(at: " + printDateTime() + ")";
+        return super.toString() + "(by: " + printDateTime()  + ")";
     }
+
 
     @Override
     public String print(){
@@ -15,15 +18,16 @@ public class EventObj extends Task {
                 + (!userKeyedDateString.equals("") ? " | " + printDateTime() : "");
     }
 
-    public static EventObj parse(String taskString){
+
+    public static Deadline parse(String taskString){
         String[] parts = taskString.split("\\|");
         String desc = parts[2];
-        Task t = new EventObj(desc, "");
+        Task t = new Deadline(desc, "");
         if (parts.length > 3){
-            t = new EventObj(desc, String.join("", java.util.Arrays.stream(parts).skip(3).toArray(String[]::new)));
+            t = new Deadline(desc, parts[3]);
         }
         t.isDone = parts[1].trim().equals("1") ? true : false;
 
-        return (EventObj )t;
+        return (Deadline) t;
     }
 }

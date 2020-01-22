@@ -1,3 +1,10 @@
+package duke.storage;
+
+import duke.task.Deadline;
+import duke.task.EventObj;
+import duke.task.TaskList;
+import duke.task.Task;
+
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,21 +13,17 @@ import java.io.FileWriter;
 import java.io.FileReader;
 
 public class Storage {
-    protected String filePath;
-    Storage(String filePath) {
+    public String filePath;
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-	void writeToFile(String mycontent) {
-        try {
-            new FileWriter(filePath, false).close();
-        } catch (IOException ex) {
-            System.out.println("file not cleared");
-        }
+	public void writeToFile(String mycontent) {
         BufferedWriter writer = null;
         try {
             File file = new File(filePath);
             if (!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             FileWriter fw = new FileWriter(file);

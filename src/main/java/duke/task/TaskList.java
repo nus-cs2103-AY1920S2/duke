@@ -1,3 +1,10 @@
+package duke.task;
+
+import duke.DukeException;
+import duke.command.Operation;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,28 +16,28 @@ public class TaskList {
     private List<Task> tasks;
     private Ui ui;
 
-    protected TaskList(){
+    public TaskList(){
         tasks = new ArrayList<>();
         ui = new Ui();
     }
 
-    protected List<Task> getTasks(){
+    public List<Task> getTasks(){
         return tasks;
     }
 
-    protected Task get(int v){
+    public Task get(int v){
         return tasks.get(v);
     }
 
-    protected int getSize(){
+    public int getSize(){
         return tasks.size();
     }
 
-    protected void addTask(Task t){
+    public void addTask(Task t){
         tasks.add(t);
     }
 
-    protected void addTask(int pos, Task t){
+    public void addTask(int pos, Task t){
         tasks.add(pos, t);
     }
 
@@ -114,12 +121,6 @@ public class TaskList {
                 sb.append(t.print() + "\n");
             }
             storage.writeToFile(sb.toString());
-        } else{
-            try {
-                new FileWriter(storage.filePath, false).close();
-            } catch (IOException ex) {
-                System.out.println("file not cleared");
-            }
         }
 
         ui.taskRemoveSuccess(cur, getSize());

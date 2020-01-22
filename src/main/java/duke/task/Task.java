@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.command.Operation;
+
 import java.time.format.DateTimeFormatter;
 
 public class Task implements TaskPrintable, Parseable {
