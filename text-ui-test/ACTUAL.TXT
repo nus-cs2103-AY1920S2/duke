@@ -6,13 +6,8 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
-added: read book
+☹ OOPS!!! The description of a todo cannot be empty.
 
-1. read book
-
-added: return book
-
-1. read book
-2. return book
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 
 Bye. Hope to see you again soon!
