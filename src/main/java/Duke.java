@@ -19,10 +19,10 @@ public class Duke {
             }
 
             else if(in.equals("list")) {
-                System.out.println("Here are the items in your list:");
+                System.out.println("Here are the tasks in your list:");
                 x = 1;
                 for(Task A: taskList) {
-                    System.out.printf("%d.[%s] %s\n", x, A.getStatusIcon(),A.getDescription());
+                    System.out.printf("%d.%s\n", x, A);
                     x++;
                 }
             }
@@ -31,13 +31,41 @@ public class Duke {
                 int index = Integer.parseInt(in.substring(5,in.length()));
                 taskList.get(index - 1).doTask();
                 System.out.println("Nice, I've marked this task as done:");
-                System.out.printf("[%s] %s\n", taskList.get(index - 1).getStatusIcon(), taskList.get(index - 1).getDescription());
+                //System.out.printf("[%s] %s\n", taskList.get(index - 1).getStatusIcon(), taskList.get(index - 1).getDescription());
+                System.out.println(taskList.get(index - 1));
 
             }
 
             else {
-                taskList.add(T);
-                System.out.printf("added: %s\n", T.getDescription());
+                String[] commands = in.split(" /");
+                String[] eventType = commands[0].split(" ");
+                if(eventType[0].equals("event")) {
+                    String[] subS = commands[1].split(" ");
+                    taskList.add(new Event(commands[0].substring(6,commands[0].length()), subS[0], commands[1].substring(subS[0].length())));
+                }
+
+                else if (eventType[0].equals("deadline")) {
+                    taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
+                }
+
+                else {
+                    if (eventType[0].equals("todo")) {
+                        taskList.add(new ToDo(commands[0].substring(5, commands[0].length())));
+                    }
+                    else {
+                        taskList.add(new ToDo(commands[0]));
+                    }
+                }
+
+                //taskList.add(T);
+                System.out.printf("Got it. I've added this task:\n");
+                System.out.println("  " +taskList.get(taskList.size() - 1));
+                if(taskList.size() < 2) {
+                    System.out.println("Now you have 1 task in the list.");
+                }
+                else {
+                    System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
+                }
             }
         }
 
