@@ -1,4 +1,13 @@
-package PACKAGE_NAME;
+public class Deadline extends Task {
+    protected String by;
 
-public class Deadline {
+    Deadline(String taskName, String by) {
+        super(taskName);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + "(by:" + by + ")";
+    }
 }

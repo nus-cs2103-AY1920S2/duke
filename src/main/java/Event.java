@@ -1,4 +1,12 @@
-package PACKAGE_NAME;
+public class Event extends Task {
+    protected String at;
+    Event(String taskName, String at) {
+        super(taskName);
+        this.at = at;
+    }
 
-public class Event {
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + "(at:" + at + ")";
+    }
 }
