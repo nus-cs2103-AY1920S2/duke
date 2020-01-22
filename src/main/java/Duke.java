@@ -35,6 +35,11 @@ public class Duke {
                     System.out.println(ex);
                 }
                 textEntered = fr.nextLine();
+            }else if (textEntered.contains("delete")) {
+                String[] helper = textEntered.split(" ");
+                int indexOfTaskDeleted = Integer.parseInt(helper[1]);
+                manager.deleteTask(indexOfTaskDeleted);
+                textEntered = fr.nextLine();
             }else{ //nonsence input
 
                 try{

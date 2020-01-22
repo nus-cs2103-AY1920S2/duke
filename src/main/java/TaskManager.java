@@ -62,4 +62,15 @@ public class TaskManager {
     public void nonsenceInput() throws DukeException{
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
+
+    public void deleteTask(int indexOfTaskToDelete){
+        indexOfTaskToDelete = indexOfTaskToDelete - 1;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " +  listOfTasks.get(indexOfTaskToDelete).toString());
+        System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
+
+        listOfTasks.remove(indexOfTaskToDelete);
+
+
+    }
 }
