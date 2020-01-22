@@ -1,5 +1,6 @@
 import main.java.Echo;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,6 +16,7 @@ public class Duke {
         System.out.println();
         Scanner sc = new Scanner(System.in);
         Echo echo_obj = new Echo();
+        ArrayList<String> Tasks = new ArrayList<>();
 
         while(true) {
             String x = sc.nextLine();
@@ -26,9 +28,17 @@ public class Duke {
                 System.out.println();
                 sc.close();
                 System.exit(0);
+            } else if (x.equals("list")) {
+                System.out.println("-------------------------------------------------------------");
+                for (int i = 0; i < Tasks.size(); i++) {
+                    System.out.println(i+1 + ". " + Tasks.get(i));
+                }
+                System.out.println();
+                System.out.println("-------------------------------------------------------------");
             } else {
                 System.out.println("-------------------------------------------------------------");
-                System.out.println(echo_obj.echo(x));
+                Tasks.add(x);
+                System.out.println("added: " + echo_obj.echo(x));
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
                 System.out.println();
