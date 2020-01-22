@@ -114,21 +114,68 @@ public class LevelMethods {
     }
 
 
-    public void completeTask(int taskNum) throws DukeExceptions {
-        if (storingList.size() >= taskNum && taskNum != 0) {
+//    public void completeTask(int taskNum) throws DukeExceptions {
+//        if (storingList.size() >= taskNum && taskNum != 0) {
+//
+//            storingList.get(taskNum - 1).isDone = true;
+//            //storingList.set(taskNum - 1, updatedTask);
+//
+//            String printStr = "Nice! I've marked this task as done: \n" + storingList.get(taskNum - 1);
+//            formattingDivider(printStr);
+//
+//
+//        } else {
+//            //formattingDivider("There is no task " + taskNum + "!!!");
+//            throw new DukeExceptions("OOPS!!! There is no task " + taskNum + "!!! Please create task " + taskNum + "first.");
+//        }
+//
+//    }
 
-            storingList.get(taskNum - 1).isDone = true;
-            //storingList.set(taskNum - 1, updatedTask);
+    public static boolean isNumber(String numStr) {
+        try {
+            Integer.parseInt(numStr);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
 
-            String printStr = "Nice! I've marked this task as done: \n" + storingList.get(taskNum - 1);
-            formattingDivider(printStr);
-
-
+    public void completeTask(String doneTaskStr) throws DukeExceptions {
+        if (doneTaskStr.length() <= 5) {
+            //no number behind
+            throw new DukeExceptions("Please input a valid number behind 'done'!!");
         } else {
-            //formattingDivider("There is no task " + taskNum + "!!!");
-            throw new DukeExceptions("OOPS!!! There is no task " + taskNum + "!!! Please create task " + taskNum + "first.");
+
+            String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
+            strNumberDone.replaceAll("\\s+",""); //remove all white spaces
+
+            boolean isANumber = isNumber(strNumberDone);
+
+            if (isANumber) {
+                int numDone = Integer.parseInt(strNumberDone); //convert to number
+
+                if (storingList.size() >= numDone && numDone != 0) {
+
+                    storingList.get(numDone - 1).isDone = true;
+                    //storingList.set(taskNum - 1, updatedTask);
+
+                    String printStr = "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
+                    formattingDivider(printStr);
+
+
+                } else {
+                    //formattingDivider("There is no task " + taskNum + "!!!");
+                    throw new DukeExceptions("OOPS!!! There is no task " + numDone + "!!! Please create task " + numDone + " first.");
+                }
+            } else {
+                throw new DukeExceptions("Please input a valid number behind 'done'!!");
+            }
         }
 
+    }
+
+    public void deleteTask(String deleteString) {
+        
     }
 
     public void listTheList() {

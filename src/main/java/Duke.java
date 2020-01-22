@@ -20,22 +20,25 @@ public class Duke { //extends Application {
 
         while (!nextStr.equals("bye")) { //check for ending input
 
-            if (nextStr.length() >= 6 && nextStr.substring(0, 4).equals("done")) {
+            if (nextStr.substring(0, 4).equals("done")) {
                 //can we assume its always a number after done?
 
-                String strNumberDone = nextStr.substring(5, nextStr.length());
-                int numDone = Integer.parseInt(strNumberDone); //convert to number
+//                    String strNumberDone = nextStr.substring(5, nextStr.length());
+//                    int numDone = Integer.parseInt(strNumberDone); //convert to number
 
-                try {
-                    levelMethods.completeTask(numDone);
-                } catch (DukeExceptions ex) {
-                    System.out.println("    #__________________________________________________________# \n");
-                    System.out.println("      " + ex);
-                    System.out.println("    #__________________________________________________________#");
-                }
+                    try {
+                        //levelMethods.completeTask(numDone);
+                        levelMethods.completeTask(nextStr);
+                    } catch (DukeExceptions ex) {
+                        System.out.println("    #__________________________________________________________# \n");
+                        System.out.println("      " + ex);
+                        System.out.println("    #__________________________________________________________#");
+                    }
             } else if (nextStr.equals("list")) {
                 //check for listing input
                 levelMethods.listTheList();
+            } else if (nextStr.length() >= 7 && nextStr.substring(0, 6).equals("delete")) {
+
             } else {
                 //echo
                 try {
