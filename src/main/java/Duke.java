@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -28,18 +29,27 @@ public class Duke {
     public static void runDuke() {
         printGreeting();
 
-        String[] tasks = new String[100];
-        int tasksIdx = 0;
+        // index 0 -> task #1
+        String[] taskList = new String[100];
+        Boolean[] isDoneList = new Boolean[100];
+        int currTaskIdx = 0;
 
-        // commands: list, bye
+        // commands: bye, list, done
         // any other input will be added to tasks
         String input = getUserInput();
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                printList(tasks, tasksIdx - 1);
+            String command = input.split(" ")[0];
+
+            if (command.equals("list")) {
+                printTasks(taskList, isDoneList, currTaskIdx - 1);
+            } else if (command.equals("done")) {
+                int doneTaskNum = Integer.parseInt(input.split(" ")[1]);
+                isDoneList[doneTaskNum - 1] = true;
+                printMarkAsDone(taskList[doneTaskNum - 1]);
             } else {
-                tasks[tasksIdx] = input;
-                tasksIdx++;
+                taskList[currTaskIdx] = input;
+                isDoneList[currTaskIdx] = false;
+                currTaskIdx++;
 
                 System.out.format("added: %s%n%n", input);
             }
@@ -50,10 +60,15 @@ public class Duke {
         System.out.println("Have a nice day!");
     }
 
-    public static void printList(String[] list, int lastIdx) {
+    public static void printTasks(String[] taskList, Boolean[] isDoneList, int lastIdx) {
         for (int i = 0; i <= lastIdx; i++) {
-            System.out.format("%d. %s%n", i + 1, list[i]);
+            System.out.format("%d.[%s] %s%n", i + 1, isDoneList[i] ? "✔" : "✘", taskList[i]);
         }
         System.out.println();
+    }
+
+    public static void printMarkAsDone(String task) {
+        System.out.println("Noted. I have marked this task as done:");
+        System.out.format("    [✔] %s%n%n", task);
     }
 }
