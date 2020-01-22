@@ -1,0 +1,9 @@
+todo sleep
+todo borrow book
+todo read book
+deadline return book /by Sunday
+deadline revise for test /by Thurs
+list
+event meeting /at Sunday 10am
+done 3
+list

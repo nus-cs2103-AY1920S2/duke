@@ -1,0 +1,35 @@
+Hi! I am Duke! What would you like to tell me today?:)
+Okay! I have taken note of the following:
+[T][✗] sleep
+Now you have 1 tasks in the list.
+Okay! I have taken note of the following:
+[T][✗] borrow book
+Now you have 2 tasks in the list.
+Okay! I have taken note of the following:
+[T][✗] read book
+Now you have 3 tasks in the list.
+Okay! I have taken note of the following:
+[D][✗] return book (by: Sunday)
+Now you have 4 tasks in the list.
+Okay! I have taken note of the following:
+[D][✗] revise for test (by: Thurs)
+Now you have 5 tasks in the list.
+The below is what you have told me so far. Have you completed them?
+[T][✗] sleep
+[T][✗] borrow book
+[T][✗] read book
+[D][✗] return book (by: Sunday)
+[D][✗] revise for test (by: Thurs)
+Okay! I have taken note of the following:
+[E][✗] meeting (at: Sunday 10am)
+Now you have 6 tasks in the list.
+Okay noted! You have completed the below task:
+[T][✓] read book
+The below is what you have told me so far. Have you completed them?
+[T][✗] sleep
+[T][✗] borrow book
+[T][✓] read book
+[D][✗] return book (by: Sunday)
+[D][✗] revise for test (by: Thurs)
+[E][✗] meeting (at: Sunday 10am)
+Okay then! Goodbye!
