@@ -10,13 +10,13 @@ public class Duke  {
     public static void main(String[] args) {
         Duke chatbot = new Duke(new ArrayList<>());
         chatbot.greet();
-        chatbot.chat();
+        chatbot.initiateChat();
     }
     public void greet() {
         System.out.println("Hello! I'm Duke\n" +
                 "     What can I do for you?");
     }
-    public void chat() {
+    public void initiateChat() {
         Scanner sc = new Scanner(System.in);
         String action = sc.next();
         while(!action.equals("bye")) {
@@ -29,21 +29,32 @@ public class Duke  {
                 this.printText();
             }
             else {
+                System.out.println("Got it. I've added this task:");
                 String description = sc.nextLine();
-                System.out.println("added: " + action + " " + description);
-                this.taskStorage.add(new Task(action + " " + description));
+                if (action.equals("todo")) {
+                    this.taskStorage.add(new Task(description));
+                }
+                 else if (action.equals("deadline")) {
+                    String[] tokens = description.split("/by");
+                    this.taskStorage.add(new Deadlines(tokens[0],tokens[1]));
+                } else { // this is for events
+                    String[] tokens = description.split("/at");
+                    this.taskStorage.add(new Deadlines(tokens[0],tokens[1]));
+                }
+                int numbOfTask = this.taskStorage.size();
+                System.out.println(this.taskStorage.get(numbOfTask - 1).toString());
+                System.out.println("Now you have " + numbOfTask + " tasks in the list.");
             }
-            action = sc.next();
-        }
+                action = sc.next();
+            }
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     public void printText() {
         int counter = 1;
         for(Task task : this.taskStorage){
-            System.out.println(counter + ". " + task.toString());
+            System.out.println(counter + "." + task.toString());
             counter++;
+        }
     }
-    }
-
 }
