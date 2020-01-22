@@ -4,7 +4,15 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        this.at = (at.split(" ", 2))[1];
+        try {
+            String[] time = (at.split(" ", 2));
+            if (time.length < 2) {
+                throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.");
+            }
+            this.at = time[1];
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
