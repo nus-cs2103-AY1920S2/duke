@@ -7,8 +7,19 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke"+ "\n" + "What can I do for you?");
+
+        String logo2 = "_______  \n"
+                +      "|_   _|  ____    ___    "
+                +      "      \n"
+                +      "  | |    |  |   |   |  \\/\n"
+                +      "  |_|    |__|   |   |  /";
+        //To run using gradle go and search in Help > Delegate Run > build tools > gradle
+        String logo3 = " _____    |   _" +
+                "     _| |_    |\n"
+                +      "|_____   _|  | |   |_   _|   |__\n"
+                +      "|_____  |_|  |_|     |_|     |  |";
+        System.out.println("" + logo3);
+        System.out.println("Hello! My name is Edith. Tony Stark's Personal Assistant"+ "\n" + "What can I do for you?");
 
         FastReader fr = new FastReader();
         String textEntered = fr.nextLine();
