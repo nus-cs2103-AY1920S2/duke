@@ -56,7 +56,7 @@ public class Duke {
     }
 
     private void dispatch(String input) throws DukeException {
-        switch (input) {
+        switch (input.trim()) {
             case "list":
                 int tasksLength = this.tasks.size();
                 Duke.out("Here are the tasks in your list:", indent2);
@@ -68,19 +68,31 @@ public class Duke {
                 Duke.out("Bye. Hope to see you again soon!", indent2);
                 return;
             default:
-                if (Pattern.matches("^done\\s+\\d$", input)) {
-                    int doneInd = Integer.parseInt((input.split(" "))[1]) - 1;
-                    if (doneInd >= this.tasks.size()) {
+                if (Pattern.matches("^(done|delete)\\s+\\d$", input)) {
+                    if (this.tasks.isEmpty()) {
+                        throw new DukeException("Task list is empty!");
+                    }
+                    int taskIndex = Integer.parseInt((input.split(" "))[1]) - 1;
+                    if (taskIndex >= this.tasks.size()) {
                         Duke.out(String.format(
-                                "Please choose an index that is lesser or equal to the length of the list: %d",
+                                "Please choose an index that is between 1 and %d (inclusive)",
                                 this.tasks.size()), indent2);
                         return;
                     }
-                    Task currTask = this.tasks.get(doneInd);
-                    currTask.setDone();
-                    Duke.out("Nice! I've marked this task as done:", indent2);
-                    Duke.out(currTask.toString(), indent3);
-                    return;
+                    if (input.contains("done")) {
+                        Task currTask = this.tasks.get(taskIndex);
+                        currTask.setDone();
+                        Duke.out("Nice! I've marked this task as done:", indent2);
+                        Duke.out(currTask.toString(), indent3);
+                        return;
+                    } else {
+                        Task removedTask = this.tasks.remove(taskIndex);
+                        Duke.out("Noted. I've removed this task:", indent2);
+                        Duke.out(removedTask.toString(), indent3);
+                        Duke.out(String.format("Now you have %d tasks in the list.",
+                                this.tasks.size()), indent2);
+                        return;
+                    }
                 } else {
                     Task newTask = Task.newTask(input);
                     this.tasks.add(newTask);
