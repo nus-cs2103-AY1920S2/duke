@@ -39,7 +39,7 @@ public class Duke  {
                     this.taskStorage.add(new Deadlines(tokens[0],tokens[1]));
                 } else { // this is for events
                     String[] tokens = description.split("/at");
-                    this.taskStorage.add(new Deadlines(tokens[0],tokens[1]));
+                    this.taskStorage.add(new Events(tokens[0],tokens[1]));
                 }
                 int numbOfTask = this.taskStorage.size();
                 System.out.println(this.taskStorage.get(numbOfTask - 1).toString());
