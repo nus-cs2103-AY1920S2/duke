@@ -63,8 +63,11 @@ public class TaskManager {
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
-    public void deleteTask(int indexOfTaskToDelete) throws DukeException{
+    public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException{
 
+        if(listOfTasks.size() == 0){
+            throw new DukeException("Nothing to delete because list is empty.");
+        }
 
         indexOfTaskToDelete = indexOfTaskToDelete - 1;
         if(listOfTasks.get(indexOfTaskToDelete) == null){

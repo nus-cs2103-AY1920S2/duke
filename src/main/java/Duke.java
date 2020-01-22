@@ -2,6 +2,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
+
+        String horizontalLine = "*******************************************";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +17,9 @@ public class Duke {
                 +      "|_____  |_|  |_|    |_|    |  |";
 
         System.out.println("" + logo3);
-        System.out.println("Hello!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n" + "What can I do for you?");
+        System.out.println("Hello!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
+                + "What can I do for you?");
+        System.out.println(horizontalLine);
 
         FastReader fr = new FastReader();
         String textEntered = fr.nextLine();
@@ -26,13 +30,17 @@ public class Duke {
 
             if(textEntered.equals("list")){
                 manager.listAllTasks();
+                System.out.println(horizontalLine);
                 textEntered = fr.nextLine();
+
 
             }else if(textEntered.contains("done")){
                 String[] helper = textEntered.split(" ");
                 int indexOfTaskDone = Integer.parseInt(helper[1]);
                 manager.setTaskAsDone(indexOfTaskDone);
+                System.out.println(horizontalLine);
                 textEntered = fr.nextLine();
+
 
             }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
                     || textEntered.contains("event")) {//create a task
@@ -41,7 +49,9 @@ public class Duke {
                 }catch (DukeException ex){
                     System.out.println(ex);
                 }
+                System.out.println(horizontalLine);
                 textEntered = fr.nextLine();
+
             }else if (textEntered.contains("delete")) {
                 try {
                     String[] helper = textEntered.split(" ");
@@ -49,8 +59,12 @@ public class Duke {
                     manager.deleteTask(indexOfTaskDeleted);
                 }catch (DukeException ex){
                     System.out.println(ex);
+                } catch (IndexOutOfBoundsException ex){
+                    System.out.println(ex);
                 }
+                System.out.println(horizontalLine);
                 textEntered = fr.nextLine();
+
             }else{ //nonsense input
 
                 try{
@@ -59,7 +73,9 @@ public class Duke {
                 }catch (DukeException ex){
                     System.out.println(ex);
                 }
+                System.out.println(horizontalLine);
                 textEntered = fr.nextLine();
+
 
             }
 
