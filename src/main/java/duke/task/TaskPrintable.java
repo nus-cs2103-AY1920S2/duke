@@ -1,5 +1,12 @@
+/*
+ * @author leslieharland
+ */
+
 package duke.task;
 
-public interface TaskPrintable{
-    public String print();
+/**
+ * The Interface TaskPrintable.
+ */
+public interface TaskPrintable {
+    String print();
 }

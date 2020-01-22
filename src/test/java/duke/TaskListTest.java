@@ -8,9 +8,9 @@ import java.util.Arrays;
 
 public class TaskListTest {
     @Test
-    public void runTest(){
+    public void runTest() {
         TaskList tl = new TaskList();
         tl.addTask(Arrays.asList("todo", "borrow", "book").toArray(String[]::new), new Storage("../data/duke.txt"));
-        assert(tl.getSize() == 1);
+        assert (tl.getSize() == 1);
     }
 }
