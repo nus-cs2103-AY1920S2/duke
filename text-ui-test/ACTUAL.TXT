@@ -6,10 +6,13 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
-list
+added: read book
 
-blah
+1. read book
 
-hello
+added: return book
+
+1. read book
+2. return book
 
 Bye. Hope to see you again soon!

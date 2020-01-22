@@ -1,4 +1,5 @@
+read book
 list
-blah
-hello
+return book
+list
 bye
