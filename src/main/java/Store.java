@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class Store {
 
-    String line = "____________________________________________________________";
-    String cmd;
-    Integer counter;
-    ArrayList<Task> Storage;
+    private String line = "____________________________________________________________";
+    private String cmd;
+    private Integer counter;
+    private ArrayList<Task> Storage;
 
     public Store(){
         counter = 1;

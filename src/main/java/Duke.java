@@ -9,12 +9,14 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String line = "____________________________________________________________";
+        String[] CheckInput;
         System.out.println("Hello from\n" + logo);
         System.out.println(line);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(line);
 
         Store lib = new Store();
+        DukeException DE = new DukeException();
         while(sn.hasNext()){
             String input = sn.nextLine();
             if(input.equals("bye")) {
@@ -26,19 +28,37 @@ public class Duke {
                 int index = Integer.parseInt(splited[1]);
                 lib.done(index);
             } else if(input.contains("todo")) {
-                String[] CheckInput = input.split(" ");
-                String NewInput = input.substring(5);
-                lib.todo(NewInput);
+                CheckInput = input.split(" ");
+                if (CheckInput.length <2 ){
+                    DE.IncorrectInputTodo();
+                } else {
+                    String NewInput = input.substring(5);
+                    lib.todo(NewInput);
+                }
             } else if (input.contains("deadline")){
-                String NewInput = input.substring(9);
-                String[] ActionTime = NewInput.split("/");
-                lib.deadline(ActionTime);
+                CheckInput = input.split(" ");
+                if (CheckInput.length <2 ){
+                    DE.IncorrectInputDeadline();
+                } else if (!input.contains("/")){
+                    DE.DeadlineMissingDate();
+                } else {
+                    String NewInput = input.substring(9);
+                    String[] ActionTime = NewInput.split("/");
+                    lib.deadline(ActionTime);
+                }
             } else if (input.contains("event")) {
-                String NewInput = input.substring(6);
-                String[] ActionTime = NewInput.split("/");
-                lib.event(ActionTime);
+                CheckInput = input.split(" ");
+                if (CheckInput.length <2 ){
+                    DE.IncorrectInputEvent();
+                } else if (!input.contains("/")) {
+                    DE.EventMissingDate();
+                }else {
+                    String NewInput = input.substring(6);
+                    String[] ActionTime = NewInput.split("/");
+                    lib.event(ActionTime);
+                }
             } else {
-                lib.AddNewAction(input);
+                DE.InvalidInput();
             }
 
         }
