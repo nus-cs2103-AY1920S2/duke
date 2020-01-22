@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Duke {
 
 
@@ -23,6 +25,7 @@ public class Duke {
 
         FastReader fr = new FastReader();
         String textEntered = fr.nextLine();
+        ArrayList<String> level2List = new ArrayList<>();
 
         TaskManager manager = new TaskManager();
 
@@ -81,11 +84,26 @@ public class Duke {
             }
 
              */
-            manager.echo(textEntered);
+            System.out.println(horizontalLine);
+            if(textEntered.contains("list")){
+                for(int i = 0 ; i < level2List.size() ; i++){
+                    System.out.println(i+1 + ". " + level2List.get(i));
+                }
+            }else{
+
+                level2List.add(textEntered);
+                System.out.println("added: "+ textEntered);
+            }
+            System.out.println(horizontalLine);
             textEntered = fr.nextLine();
 
+
+
+
         }
+        System.out.println(horizontalLine);
         System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(horizontalLine);
     }
 
 
