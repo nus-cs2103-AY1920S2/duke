@@ -30,7 +30,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 printLine();
                 break;
-            } if (token.equals("list")) {
+            } else if (token.equals("list")) {
                 printLine();
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println((i + 1) + ". " + list.get(i));
@@ -45,3 +45,4 @@ public class Duke {
         }
     }
 }
+
