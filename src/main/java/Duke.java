@@ -3,6 +3,8 @@ import entity.Event;
 import entity.Task;
 import entity.Todo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,35 +14,30 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("____________________________");
         String command = sc.nextLine();
-        Task[] tasks = new Task[100];
-        int size = 0;
+        List<Task> tasks = new ArrayList<Task>();
         while(!command.equals("bye")) {
             int breakPoint = command.indexOf('/');
             String[] nextLine = command.split("\\s+");
             if(nextLine[0].equals("list")) {
                 System.out.println("____________________________");
-                for(int i = 0; i < size; i++) {
-                    System.out.println(i + 1 + "." + tasks[i].printTask());
+                for(int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i + 1 + "." + tasks.get(i).printTask());
                 }
                 System.out.println("____________________________");
             } else if (nextLine[0].equals("done")) {
                 int index = Integer.parseInt(nextLine[1]) - 1;
-                tasks[index].markAsDone(true);
+                tasks.get(index).markAsDone(true);
                 System.out.println("____________________________");
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(index + 1 + "." + tasks[index].printTask());
+                System.out.println(index + 1 + "." + tasks.get(index).printTask());
                 System.out.println("____________________________");
             } else if (nextLine[0].equals("delete")) {
                 int index = Integer.parseInt(nextLine[1]) - 1;
-                Task toBeDeleted = tasks[index];
-                for(int i = index; i < tasks.length - 1; i++) {
-                    tasks[index] = tasks[index + 1];
-                }
-                size--;
+                Task toBeDeleted = tasks.remove(index);
                 System.out.println("____________________________");
                 System.out.println("Noted. I've removed this task:");
                 System.out.println("  " + toBeDeleted.printTask());
-                System.out.println("Now you have " + size + " tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 System.out.println("____________________________");
 
             } else {
@@ -50,22 +47,20 @@ public class Duke {
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                         System.out.println("____________________________");
                     } else {
-                        tasks[size] = new Todo(command.substring(5));
-                        size++;
+                        tasks.add(new Todo(command.substring(5)));
                         System.out.println("____________________________");
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + tasks[size - 1].printTask());
-                        System.out.println("Now you have " + size + " tasks in the list.");
+                        System.out.println("  " + tasks.get(tasks.size() - 1).printTask());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println("____________________________");
                     }
                 } else if (nextLine[0].equals("event")) {
                     if (breakPoint != -1) {
-                        tasks[size] = new Event(command.substring(6, breakPoint), command.substring(breakPoint + 4));
-                        size++;
+                        tasks.add(new Event(command.substring(6, breakPoint), command.substring(breakPoint + 4)));
                         System.out.println("____________________________");
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + tasks[size - 1].printTask());
-                        System.out.println("Now you have " + size + " tasks in the list.");
+                        System.out.println("  " + tasks.get(tasks.size() - 1).printTask());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println("____________________________");
                     } else {
                         System.out.println("____________________________");
@@ -74,12 +69,11 @@ public class Duke {
                     }
                 } else if (nextLine[0].equals("deadline")) {
                     if (breakPoint != -1) {
-                        tasks[size] = new Deadline(command.substring(9, breakPoint), command.substring(breakPoint + 4));
-                        size++;
+                        tasks.add(new Deadline(command.substring(9, breakPoint), command.substring(breakPoint + 4)));
                         System.out.println("____________________________");
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + tasks[size - 1].printTask());
-                        System.out.println("Now you have " + size + " tasks in the list.");
+                        System.out.println("  " + tasks.get(tasks.size() - 1).printTask());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println("____________________________");
                     } else {
                         System.out.println("____________________________");
