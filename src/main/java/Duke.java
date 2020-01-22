@@ -21,7 +21,13 @@ public class Duke {
                         markDone(tasks.get(Integer.valueOf(words[1]) - 1));
                         break;
                     case "todo":
-                        add(new Todo(input.substring(5)), tasks);
+                        try {
+                            add(new Todo(input.substring(5)), tasks);
+                        } catch (IndexOutOfBoundsException e) {
+                            printBreak();
+                            System.out.println("    OOPS!!! The description of a todo cannot be empty.");
+                            printBreak();
+                        }
                         break;
                     case "deadline":
                         String[] ddlDetails = getTaskDetails(input.substring(9),
@@ -34,7 +40,9 @@ public class Duke {
                         add(new Event(eventDetails[0], eventDetails[1]), tasks);
                         break;
                     default:
-                        add(input, tasks);
+                        printBreak();
+                        System.out.println("    OOPS!!! I'm sorry, but I don't know what that meas :-(");
+                        printBreak();
                 }
             }
             input = reader.nextLine();
@@ -82,13 +90,6 @@ public class Duke {
             Task currTask = tasks.get(i - 1);
             System.out.println("    " + i + "." + currTask);
         }
-        printBreak();
-    }
-
-    private static void add(String input, ArrayList<Task> tasks) {
-        printBreak();
-        System.out.println("    added: " + input);
-        tasks.add(new Task(input));
         printBreak();
     }
 
