@@ -7,7 +7,7 @@ public class Duke {
     public static final String string = "    ____________________________________________________________";
     public static final String space = "     ";
     public static ArrayList<Task> tasks = new ArrayList<>();
-    public static String filePath = "/Users/catherine/Desktop/Duke CS2103/duke.txt";
+    public static String filePath = "/Users/catherine/Desktop/Duke/src/main/duke.txt";
 
     public static void Greeting() {
         String greeting = string + "\n"+ space +
