@@ -9,7 +9,7 @@ public class Duke {
     }
 
     private static void echo(Scanner sc) {
-        String userInput = sc.next();
+        String userInput = sc.nextLine();
 
         if (!userInput.equals("bye")) {
             System.out.println(userInput);
