@@ -33,14 +33,14 @@ class Duchess {
                 + "| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
                 + "| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
                 + "|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("My name is Duchess, as you can see above.");
-        System.out.println("How may I help you?");
+        System.out.println("\tHello from\n" + logo);
+        System.out.println("\tMy name is Duchess, as you can see above.");
+        System.out.println("\tHow may I help you?");
     }
 
     private void echo(String input) {
-        System.out.println("Oh? You said \"" + input + "\"? How interesting.");
-        System.out.println("Anything else?");
+        System.out.println("\tOh? You said \"" + input + "\"? How interesting.");
+        System.out.println("\tAnything else?");
     }
 
     private void addToList(String input) {
@@ -50,16 +50,16 @@ class Duchess {
     }
 
     private void printList() {
-        System.out.println("Sighs... you never remember what you say, don't you.");
-        System.out.println("You said these:");
+        System.out.println("\tSighs... you never remember what you say, don't you.");
+        System.out.println("\tYou said these:");
         for (int i = 0; i < this.stringList.size(); i++) {
-            System.out.println((i + 1) + ".\t" + this.stringList.get(i));
+            System.out.println("\t\t" + (i + 1) + ".\t" + this.stringList.get(i));
         }
         awaitInput();
     }
 
     private void goodbye() {
-        System.out.println("Bye, is it? Shoo shoo then.");
+        System.out.println("\tBye, is it? Shoo shoo then.");
 
     }
 
