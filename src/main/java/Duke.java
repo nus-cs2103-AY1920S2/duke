@@ -32,9 +32,13 @@ public class Duke {
                 String[] words = word.split(" ");
                 if (words[0].equalsIgnoreCase("done") && words[1].matches("\\d+")) {
                     int doneTarget = Integer.parseInt(words[1]);
-                    commandList.get(doneTarget-1).setDone();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(commandList.get(doneTarget-1));
+                    if (doneTarget > 0 && doneTarget <= commandList.size()) {
+                        commandList.get(doneTarget - 1).setDone();
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println(commandList.get(doneTarget - 1));
+                    } else {
+                        System.out.println("Sorry! I can't find that task");
+                    }
 
                 }
                 else {
