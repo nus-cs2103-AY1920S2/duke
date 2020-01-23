@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    public final static String NEWLINE =  System.lineSeparator();
     public final static String INDENT = "    ";
     public final static String BORDER = INDENT + "____________________________________________________________";
     public final static String EXIT = "bye";
     public final static String GOODBYE_MESSAGE = INDENT + "  Goodbye and have a beautiful time!";
 
     public static void main(String[] args) {
-        String logo = INDENT + "  _____  __    __  _____ \n"
-                + INDENT + " |  ___||  \\  /  ||  ___| \n"
-                + INDENT + " | |__   \\  \\/  / | |__\n"
-                + INDENT + " |  __|   |    |  |  __|\n"
-                + INDENT + " | |___  /  /\\  \\ | |___\n"
-                + INDENT + " |_____||__/  \\__\\|_____| \n";
+        String logo = INDENT + "  _____  __    __  _____" + NEWLINE
+                + INDENT + " |  ___||  \\  /  ||  ___|" + NEWLINE
+                + INDENT + " | |__   \\  \\/  / | |__" + NEWLINE
+                + INDENT + " |  __|   |    |  |  __|" + NEWLINE
+                + INDENT + " | |___  /  /\\  \\ | |___" + NEWLINE
+                + INDENT + " |_____||__/  \\__\\|_____|" + NEWLINE;
         System.out.println(BORDER);
         System.out.println(logo);
         System.out.println(INDENT + "  Hello! I'm EXE, I'll execute anything on your command! :)");
@@ -39,7 +40,7 @@ public class Duke {
                     try {
                         throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
                     } catch (DukeException dukeException) {
-                        System.err.println(addBorder(dukeException.toString()));
+                        System.out.println(addBorder(dukeException.toString()));
                     } finally {
                         userInput = scanner.nextLine();
                         continue;
@@ -60,7 +61,7 @@ public class Duke {
                                 System.out.println(addBorder(replyMessage));
                             }
                         } catch (DukeException exception){
-                            System.err.println(addBorder(exception.toString()));
+                            System.out.println(addBorder(exception.toString()));
                         }finally {
                             break;
                         }
@@ -80,7 +81,7 @@ public class Duke {
                                                 command);
                                     }
                                 } catch (DukeException exception) {
-                                    System.err.println(addBorder(exception.toString()));
+                                    System.out.println(addBorder(exception.toString()));
                                 }
                             } else {
                                 // throw own class exception here also
@@ -88,7 +89,7 @@ public class Duke {
                                     throw new DukeException("Empty Event description", DukeErrorType.EMPTY_DESCRIPTION,
                                             command);
                                 } catch (DukeException exception) {
-                                    System.err.println(addBorder(exception.toString()));
+                                    System.out.println(addBorder(exception.toString()));
                                 }
                             }
                             Event currentEvent = new Event(eventDescription, eventTime);
@@ -101,7 +102,7 @@ public class Duke {
                             try {
                                 throw new DukeException("Empty Event time", DukeErrorType.EMPTY_TIME, command);
                             } catch (DukeException exception) {
-                                System.err.println(addBorder(exception.toString()));
+                                System.out.println(addBorder(exception.toString()));
                             }
                         }
                         break;
@@ -128,7 +129,7 @@ public class Duke {
                                             .format("      Now you have %d task(s) in the list.", listOfTask.size()));
                             System.out.println(addBorder(stringBuilder.toString()));
                         } catch (IndexOutOfBoundsException ex) {
-                            System.err.println(ex.getMessage());
+                            System.out.println(ex.getMessage());
                         }
                         break;
                     case DONE:
@@ -140,7 +141,7 @@ public class Duke {
                                     currentTask.getTask()));
                         } catch (IndexOutOfBoundsException exception) {
                             // do own class exception here
-                            System.err.println(exception.getMessage());
+                            System.out.println(exception.getMessage());
                         }
                         break;
                     case LIST:
