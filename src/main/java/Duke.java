@@ -38,7 +38,19 @@ public class Duke {
                 }
                 case "done": {
                     try {
-                        Duke.markTask(input, tasks);
+                        String message = Duke.markTask(input, tasks);
+                        System.out.println(message);
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                        break;
+                    }
+                }
+                case "delete": {
+                    try {
+                        String message = Duke.deleteTask(input, tasks);
+                        System.out.println(message);
+                        break;
                     } catch (DukeException e) {
                         System.out.println(e);
                         break;
@@ -60,7 +72,7 @@ public class Duke {
         sc.close();
     }
 
-    public static void markTask(UserInput input, TaskList tasks) throws DukeException {
+    public static String markTask(UserInput input, TaskList tasks) throws DukeException {
         if (input.getArguments().length == 0) {
             throw new DukeNoArgumentsException(input.getCommand());
         }
@@ -70,8 +82,22 @@ public class Duke {
         try {
             int taskIndex = Integer.parseInt(input.getArguments()[0]) - 1;
             Task task = tasks.getTask(taskIndex);
-            String message = task.markAsCompleted();
-            System.out.println(message);
+            return task.markAsCompleted();
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeInvalidTaskException(input.getArguments()[0]);
+        }
+    }
+
+    public static String deleteTask(UserInput input, TaskList tasks) throws DukeException {
+        if (input.getArguments().length == 0) {
+            throw new DukeNoArgumentsException(input.getCommand());
+        }
+        if (tasks.isEmpty()) {
+            throw new DukeEmptyTaskListException();
+        }
+        try {
+            int taskIndex = Integer.parseInt(input.getArguments()[0]) - 1;
+            return tasks.removeTask(taskIndex);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeInvalidTaskException(input.getArguments()[0]);
         }

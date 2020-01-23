@@ -26,6 +26,11 @@ public class TaskList {
         return String.format("Added: '%s'", task.getDescription());
     }
 
+    public String removeTask(int index) {
+        Task task = tasks.remove(index);
+        return String.format("Removed: '%s'", task.getDescription());
+    }
+
     @Override
     public String toString() {
         if (tasks.isEmpty()) {
