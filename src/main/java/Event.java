@@ -1,5 +1,5 @@
 public class Event extends Task {
-    String timeframe;
+    private String timeframe;
 
     Event(String description, String timeframe) {
         super(description);

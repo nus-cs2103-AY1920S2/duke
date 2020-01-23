@@ -1,5 +1,5 @@
-public class DuchessException extends Exception {
-    public DuchessException(String errorMessage) {
+class DuchessException extends Exception {
+    DuchessException(String errorMessage) {
         super("\tStop causing me trouble...\n\t" + errorMessage);
     }
 }
