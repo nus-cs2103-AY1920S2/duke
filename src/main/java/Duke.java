@@ -33,7 +33,7 @@ public class Duke {
             }
             case "event": {
                 String[] parts = input.getArgumentsAsString().split(" /at ", 2);
-                DeadlineTask newTask = new DeadlineTask(parts[0], parts[1]);
+                EventTask newTask = new EventTask(parts[0], parts[1]);
                 String message = tasks.addTask(newTask);
                 System.out.println(message);
                 break;
