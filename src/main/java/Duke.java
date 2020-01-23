@@ -39,7 +39,29 @@ public class Duke {
                 tasks.get(idx).finishTask();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(tasks.get(idx));
-            } else {
+            } else if (input[0].equals("todo")) {
+                System.out.println("Got it. I've added this task:");
+                Todo todo = new Todo(t.substring(5));
+                System.out.println("   " + todo);
+                tasks.add(todo);
+                System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+            } else if (input[0].equals("deadline")) {
+                System.out.println("Got it. I've added this task:");
+                String deadline = t.split("/")[1].substring(3);
+                String task = t.split("/")[0].split(" ", 2)[1];
+                Deadline newDeadline = new Deadline(task, deadline);
+                System.out.println("   " + newDeadline);
+                tasks.add(newDeadline);
+                System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+            } else if (input[0].equals("event")) {
+                System.out.println("Got it. I've added this task:");
+                String event = t.split("/")[1].substring(3);
+                String task = t.split("/")[0].split(" ", 2)[1];
+                Event newEvent = new Event(task, event);
+                System.out.println("   " + newEvent);
+                tasks.add(newEvent);
+                System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+            }   else {
                 Task task = new Task(t);
                 System.out.println("   > added: " + t);
                 tasks.add(task);
