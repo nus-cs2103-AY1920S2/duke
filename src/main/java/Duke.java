@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.*;
+import task.*;
 
 public class Duke {
 	static final String separation = "_________________________________________________";
@@ -56,9 +58,20 @@ public class Duke {
 					break;
 
 				case ADD:
-					Task currentTask = new Task(commandText);
+					Function<String,Task> getTask = (String text) -> {
+						TaskType taskType = Task.getType(text);
+						switch (taskType) {
+							case TODO:
+								return new ToDo(text);
+							case EVENT:
+								return new Event(text);
+							default:
+								return new Deadline(text);
+						}
+					};
+					Task currentTask = getTask.apply(commandText);
 					storage.addAction(currentTask);
-					Interpreter.printMessage("added :" + commandText);
+					Interpreter.printAdd(currentTask, storage.getNum());
 					break;
 
 				case DONE: 

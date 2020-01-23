@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import task.*;
 
 public class Storage<T extends Task> {
 	private List<T> containers;
@@ -15,6 +16,10 @@ public class Storage<T extends Task> {
 	public List<T> getList() {
 		return this.containers;
 	} 
+
+	public int getNum() {
+		return containers.size();
+	}
 
 	public void markAsDone(List<Integer> needy) {
 		for (Integer index: needy) {

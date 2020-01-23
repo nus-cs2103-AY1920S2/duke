@@ -1,4 +1,5 @@
 import java.util.List;
+import task.*;
 
 public class Interpreter {
 	static private final String separation = "_________________________________________________";
@@ -15,6 +16,14 @@ public class Interpreter {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println((i + 1) + ". " + list.get(i));
 		}
+		System.out.println(separation);
+	}
+
+	static public void printAdd(Task task, int numberOfCurrentTasks) {
+		System.out.println(separation);
+		System.out.println("Got it. I've added this task:");
+		System.out.println(task);
+		System.out.println("Now you have " + numberOfCurrentTasks + " in the list!");
 		System.out.println(separation);
 	}
 
