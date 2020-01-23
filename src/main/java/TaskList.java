@@ -23,7 +23,7 @@ public class TaskList {
         String result = "";
         result += "    ____________________________________________________________";
         if (this.tasks.isEmpty()) {
-            System.out.println("     Sorry, your list is currently empty!");
+            result += "\n     Sorry, your list is currently empty!";
         }
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = this.tasks.get(i);
