@@ -12,13 +12,15 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I am\n" + logo + "\nWhat can I do for you?");
 
-        while (sc.hasNext()) {
-            String command = sc.next();
+        Lister lister = new Lister();
+
+        while (sc.hasNextLine()) {
+            String command = sc.nextLine();
             if(command.equals("bye")) {
                 System.out.println("Bye! Hope to see you again soon!");
                 break;
             } else {
-                System.out.println(command);
+                lister.record(command);
             }
         }
     }
