@@ -7,6 +7,7 @@ public class Duke {
         int count = 0;
         int count2 = 0;
         int count3 = 1;
+        int count4 = 0;
         String content2;
         String content3;
         boolean isProblem = false;
@@ -52,6 +53,22 @@ public class Duke {
                         count2++;
                     }
                     System.out.println("    ____________________________________________________________");
+
+                }else if (userInput.contains("delete")){
+                    content2 = userInput.substring(7);
+                    count4 = Integer.parseInt(content2) - 1;
+                    if(count4 == count){
+                        count = count - 1;
+
+
+                    } else {
+                        while (count4 <= count) {
+                            tasks[count4] = tasks[count4 + 1];
+                            count4++;
+                        }
+                        count = count - 1;
+                    }
+
                 } else {
                     if (userInput.contains("todo")) {
                         content2 = userInput.substring(5);
@@ -89,9 +106,9 @@ public class Duke {
     }
 
     public static void testMessage(String userInput) throws DukeException {
-        if (!userInput.contains(" ")) {
+        if (!userInput.contains(" ") && !userInput.contains("list")) {
             if ((userInput.equals("todo")) || (userInput.equals("deadline")) || (userInput.equals("event"))
-                    || (userInput.equals("list")) || (userInput.equals("bye"))) {
+                    || (userInput.equals("list")) || (userInput.equals("bye")) || (userInput.equals("delete"))) {
                 System.out.println("    ____________________________________________________________\n"
                         + "     ☹ OOPS!!! The description of a todo cannot be empty.\n"
                         + "    ____________________________________________________________\n");
@@ -104,11 +121,11 @@ public class Duke {
                 throw new DukeException("Empty");
             }
 
-        } else {
+        } else if(!userInput.contains("list")){
             String content1 = userInput.substring(0, userInput.indexOf(" "));
 
             if ((!content1.equals("todo")) && (!content1.equals("deadline")) && (!content1.equals("event"))
-                    && (!content1.equals("list")) && (!content1.equals("bye"))) {
+                    && (!content1.equals("list")) && (!content1.equals("bye"))  && (userInput.equals("delete"))) {
                 System.out.println("    ____________________________________________________________\n"
                         + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                         + "    ____________________________________________________________\n");
