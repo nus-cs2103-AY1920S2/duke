@@ -1,0 +1,29 @@
+My name is Jarvis!
+How may I provide my services on this fine day?
+____________________________________________________________
+Successfully added:
+[T]? borrow book
+You now have 1 number of tasks in the list
+____________________________________________________________
+Successfully added:
+[E]? return book (at: 3pm Tuesday)
+You now have 2 number of tasks in the list
+____________________________________________________________
+Successfully added:
+[D]? CS2103T Project deliverables (by: 2359 Thursday)
+You now have 3 number of tasks in the list
+____________________________________________________________
+Here are the current tasks in your list:
+1. [T]? borrow book
+2. [E]? return book (at: 3pm Tuesday)
+3. [D]? CS2103T Project deliverables (by: 2359 Thursday)
+____________________________________________________________
+Alright! You have successfully completed:
+[E]? return book (at: 3pm Tuesday)
+____________________________________________________________
+Here are the current tasks in your list:
+1. [T]? borrow book
+2. [E]? return book (at: 3pm Tuesday)
+3. [D]? CS2103T Project deliverables (by: 2359 Thursday)
+____________________________________________________________
+Hope my service has been of great help! See you again!

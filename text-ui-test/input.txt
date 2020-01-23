@@ -1,0 +1,7 @@
+todo borrow book
+event return book /at 3pm Tuesday
+deadline CS2103T Project deliverables /by 2359 Thursday
+list
+done 2
+list
+bye
