@@ -15,10 +15,13 @@ public class Functionality {
             done(Integer.parseInt(s.substring(5)));
         } else if (s.length() > 6 && s.substring(0,6).equals("delete")) {
             delete(Integer.parseInt(s.substring(7)));
+        } else if (s.length() < 5 || !s.contains(" ")) {
+            error(s);
         } else {
             add(s);
         }
     }
+
 
     public void list() {
         System.out.println(linedivider + "Here are the tasks in your list:");
@@ -48,11 +51,12 @@ public class Functionality {
                 tasks.add(t);
                 System.out.println(linedivider + "Got it. I've added this task:\n " + t
                         + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
-            } else {
+            } else if (taskType.equals("event")) {
                 Event t = new Event(theTask, date, tasks.size() + 1);
                 tasks.add(t);
                 System.out.println(linedivider + "Got it. I've added this task:\n " + t
-                        + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);            }
+                        + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
+            }
 
         }
     }
@@ -67,6 +71,20 @@ public class Functionality {
         Task rm = tasks.remove(n - 1);
         System.out.println(linedivider + "Noted. I've removed this task:\n" + rm + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.\n" + linedivider);
+    }
+
+    public void error(String s) {
+        if (s.length() < 4 && !s.contains(" ")) {
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (s.length() >= 4){
+            if (s.equals("todo")) {
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else if (s.equals("deadline")) {
+                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+            } else {
+                System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+            }
+        }
     }
 
 }
