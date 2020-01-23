@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,7 +9,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
-        List<Task> tasks = new ArrayList<>();
+        TaskList tasks = new TaskList();
 
         System.out.println("Hello from\n" + logo);
         while (isRunning && sc.hasNextLine()) {
@@ -30,18 +27,7 @@ public class Duke {
             }
             switch (command) {
             case "list": {
-                StringBuilder output = new StringBuilder("Tasks so far:\n");
-                ListIterator<Task> iterator = tasks.listIterator();
-                while (iterator.hasNext()) {
-                    int index = iterator.nextIndex();
-                    Task task = iterator.next();
-                    char icon = task.getStatusIcon();
-                    output.append(String.format(
-                            "%d.[%s] %s\n",
-                            (index + 1), icon, task
-                    ));
-                }
-                System.out.print(output);
+                System.out.println(tasks);
                 break;
             }
             case "done": {
@@ -64,7 +50,10 @@ public class Duke {
                 }
                 Task task = tasks.get(taskIndex);
                 task.markAsCompleted();
-                System.out.println(String.format("Marked '%s' as done", task));
+                System.out.println(String.format(
+                        "Marked '%s' as done",
+                        task.getDescription()
+                ));
                 break;
             }
             case "bye": {
@@ -72,8 +61,12 @@ public class Duke {
                 break;
             }
             default: {
-                tasks.add(new Task(input));
-                System.out.println(String.format("Added: '%s'", input));
+                Task newTask = new Task(input);
+                tasks.add(newTask);
+                System.out.println(String.format(
+                        "Added: '%s'",
+                        newTask.getDescription()
+                ));
             }
             }
         }

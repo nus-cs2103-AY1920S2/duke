@@ -14,12 +14,19 @@ public class Task {
         isCompleted = true;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public char getStatusIcon() {
         return isCompleted ? Task.COMPLETED : Task.PENDING;
     }
 
     @Override
     public String toString() {
-        return description;
+        return String.format(
+                "[%c] %s",
+                getStatusIcon(), getDescription()
+        );
     }
 }
