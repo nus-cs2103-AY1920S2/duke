@@ -36,7 +36,10 @@ public class Duke {
                     int itemNo = scanner.nextInt() - 1;
                     System.out.println("Nice! I've marked this task as done");
                     tracker.markDone(itemNo);
-
+                } else if (command.isDelete()) {
+                    int itemNo = scanner.nextInt() - 1;
+                    System.out.println("Noted. I've removed this task:");
+                    tracker.delete(itemNo);
                 } else {
                     Input content;
 

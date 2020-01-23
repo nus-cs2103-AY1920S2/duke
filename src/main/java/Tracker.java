@@ -17,7 +17,14 @@ public class Tracker {
     public void markDone(int index) {
         Task task = this.list.get(index);
         task.setDone();
-        System.out.println(task.toString());
+        System.out.println("  " + task);
+    }
+
+    public void delete(int index) {
+        Task task = this.list.get(index);
+        this.list.remove(index);
+        this.totalTasks--;
+        System.out.println("  " + task);
     }
 
     public LinkedList<Task> showList() {

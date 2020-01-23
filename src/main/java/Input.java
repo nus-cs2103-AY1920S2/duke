@@ -7,7 +7,7 @@ public class Input {
 
     public Input(String command) throws DukeException {
         if (command.equals("bye")|command.equals("list")|command.equals("done")|command.equals("todo")
-                |command.equals("deadline")|command.equals("event")) {
+                |command.equals("deadline")|command.equals("event")|command.equals("delete")) {
             this.type = COMMAND;
             this.cmd = command.toLowerCase();
         } else {
@@ -47,6 +47,10 @@ public class Input {
 
     public boolean isDone() {
         return this.cmd.equals("done");
+    }
+
+    public boolean isDelete() {
+        return this.cmd.equals("delete");
     }
 
     public String getCommand() {
