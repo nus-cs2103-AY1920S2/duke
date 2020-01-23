@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,31 +12,43 @@ public class Duke {
         String divider = "____________________________________________________________";
         System.out.println("My name is Jarvis!\nHow may I provide my services on this fine day?\n" + divider);
 
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
+//        Task[] tasks = new Task[100];
         //String[] tasks = new String[100];
         int i = 0;
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext() /*!nextLine.equals("bye")*/) {
-            // to check if 'list' service is called
             String nextLine = sc.nextLine();
             try {
                 validate(nextLine);
             } catch (Exception e) {
                 System.out.println(e);
                 System.out.println("Please try again!");
+                System.out.println(divider);
                 continue;
             }
+
+            // action: DELETE
+            if(nextLine.contains("delete")) {
+                String[] substrings = nextLine.split(" ");
+                System.out.println("Successfully deleted the following task:\n"
+                        + tasks.get(Integer.parseInt(substrings[1])-1));
+                tasks.remove(Integer.parseInt(substrings[1])-1);
+                i--;
+                System.out.println("You have " + i + " tasks in your list currently.");
+                System.out.println(divider);
+                continue;
+            }
+
+            // to check if 'list' service is called
             if (nextLine.equals("list")) {
                 System.out.println("Here are the current tasks in your list:");
                 int listStart = 1;
                 for (Task task : tasks) {
-                    if (task == null) {
-                        System.out.println(divider);
-                        break;
-                    }
                     System.out.println(listStart + ". " + task);
                     listStart++;
                 }
+                System.out.println(divider);
                 continue;
             } else if (nextLine.contains("bye")) {
                 break;
@@ -45,26 +58,25 @@ public class Duke {
             if (nextLine.contains("done")) {
                 String[] substrings = nextLine.split(" ");
                 int taskNum = Integer.parseInt(substrings[1]);
-                tasks[taskNum - 1].taskDone();
+                tasks.get(taskNum - 1).taskDone();
                 System.out.println("Alright! You have successfully completed:");
-                System.out.println(tasks[taskNum - 1]);
+                System.out.println(tasks.get(taskNum - 1));
                 System.out.println(divider);
                 continue;
             }
 
-            // normal addition of task
-            // to do creation
+            // different Task additions
             if (nextLine.contains("todo")) {
                 String[] substrings = nextLine.split(" ",2);
-                tasks[i] = new Todo(substrings[1]);
+                tasks.add(new Todo(substrings[1]));
             } else if (nextLine.contains("event")) { // event creation
                 String[] substrings = nextLine.split(" ",2);
-                tasks[i] = new Event(substrings[1].split(" /at")[0], substrings[1].split("/at ")[1]);
+                tasks.add(new Event(substrings[1].split(" /at")[0], substrings[1].split("/at ")[1]));
             } else if (nextLine.contains("deadline")) {            // deadline creation
                 String[] substrings = nextLine.split(" ",2);
-                tasks[i] = new Deadline(substrings[1].split(" /by")[0], substrings[1].split("/by ")[1]);
+                tasks.add(new Deadline(substrings[1].split(" /by")[0], substrings[1].split("/by ")[1]));
             }
-            System.out.println("Successfully added:\n" + tasks[i].toString());
+            System.out.println("Successfully added:\n" + tasks.get(i).toString());
             i++;
             System.out.println("You now have " + i + " number of tasks in the list");
             System.out.println(divider);
@@ -73,10 +85,13 @@ public class Duke {
     }
 
     public static void validate(String s) throws DukeException {
-        if (!s.contains("list") && !s.contains("done") && !s.contains("todo")
-                && !s.contains("event") && !s.contains("deadline") && !s.contains("bye")) {
+        String action = s.split(" ")[0];
+        if (!action.equals("list") && !action.equals("done") && !action.equals("todo")
+                && !action.equals("event") && !action.equals("deadline") && !action.equals("bye")
+                && !action.equals("delete")) {
             throw new DukeException("This is not a valid action you may take sir.");
-        } else if ((s.contains("todo") || s.contains("event") || s.contains("deadline") || s.contains("done")) && s.split(" ").length == 1) {
+        } else if ((s.contains("todo") || s.contains("event") || s.contains("deadline")
+                || s.contains("done") || s.contains("delete")) && s.split(" ").length == 1) {
             throw new DukeException("Your description may not be empty");
         }
     }
