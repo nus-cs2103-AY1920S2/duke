@@ -35,12 +35,16 @@ public class Duke {
 
     private void waitInput() {
         String input = sc.nextLine();
-        switch (input) {
+        String[] cmd = input.split("\\s", 2);
+        switch (cmd[0]) {
             case "bye":
                 System.out.println("\tBye. Hope to see you again soon!");
                 break;
             case "list":
                 printTasks();
+                break;
+            case "done":
+                markAsDone(cmd[1]);
                 break;
             default:
                 System.out.println("\tadded: " + input);
@@ -48,6 +52,15 @@ public class Duke {
                 this.waitInput();
                 break;
         }
+    }
+
+    private void markAsDone(String index) {
+        int num = Integer.parseInt(index.trim());
+        Task toBeDone = this.tasks.get(num - 1);
+        toBeDone.toggleIsDone();
+        System.out.println("\tGood job! You have completed this task!");
+        System.out.println("\t\t" + toBeDone);
+        this.waitInput();
     }
 
     public void run() {
