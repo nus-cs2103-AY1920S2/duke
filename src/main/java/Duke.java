@@ -16,16 +16,22 @@ public class Duke {
         TaskList taskList = new TaskList();
 
         while (true) {
-            String command = sc.nextLine();
-            String token = parser.parse(command);
-            if (token == null) {
+            String userCommand = sc.nextLine();
+            String[] userCommandArr = userCommand.split(" ");
+            Command command = parser.parse(userCommandArr[0]);
+
+            if (command == Command.EXIT_DUKE) {
                 break;
-            } else if (token.equals("list")) {
+            } else if (command == Command.LIST_TASKS) {
                 this.print(taskList.listTasks());
-            } else {
-                Task task = new Task(token);
+            } else if (command == Command.ADD_TASK) {
+                Task task = new Task(userCommand);
                 taskList.addTask(task);
                 this.print("added: " + task.getDescription());
+            } else if (command == Command.MARK_TASK_AS_DONE) {
+                int taskIndex = Integer.parseInt(userCommandArr[1]) - 1;
+                Task task = taskList.markAsDone(taskIndex);
+                this.print("Marked as done:\n      " + task.getDescriptionWithIsDone());
             }
         }
         sc.close();

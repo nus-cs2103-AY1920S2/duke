@@ -1,8 +1,12 @@
 public class Parser {
-    public String parse(String command) {
+    public Command parse(String command) {
         if (command.equals("bye")) {
-            return null;
+            return Command.EXIT_DUKE;
+        } else if (command.equals("list")) {
+            return Command.LIST_TASKS;
+        } else if (command.equals("done")) {
+            return Command.MARK_TASK_AS_DONE;
         }
-        return command;
+        return Command.ADD_TASK;
     }
 }

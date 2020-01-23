@@ -7,10 +7,16 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public Task markAsDone(int index) {
+        Task task = taskList.get(index);
+        task.markAsDone();
+        return task;
+    }
+
     public String listTasks() {
         String formattedString = "";
         for (int i = 0; i < this.taskList.size(); i++) {
-            formattedString += (i + 1) + ". " + this.taskList.get(i).getDescription() + "\n    ";
+            formattedString += (i + 1) + ". " + this.taskList.get(i).getDescriptionWithIsDone() + "\n    ";
         }
         return formattedString.trim();
     }
