@@ -1,0 +1,59 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Your personal assistant chatbot.
+
+Duke: I'm busy. What do you want?
+
+You:  
+Duke: What's this? You're wasting my time!
+
+You:  
+Duke: Added the task.
+----------
+  [T][✗] borrow book
+----------
+You have 1 tasks in the list. :(
+
+You:  
+Duke: Added the task.
+----------
+  [D][✗] return book (by: Sunday)
+----------
+You have 2 tasks in the list. :(
+
+You:  
+Duke: This is your stupid list.
+----------
+1.[T][✗] borrow book
+2.[D][✗] return book (by: Sunday)
+----------
+
+You:  
+Duke: Tsk! I've marked this as done, you owe me.
+----------
+  [T][✓] borrow book
+----------
+
+You:  
+Duke: Added the task.
+----------
+  [E][✗] project meeting (at: Mon 2-4pm)
+----------
+You have 3 tasks in the list. :(
+
+You:  
+Duke: This is your stupid list.
+----------
+1.[T][✓] borrow book
+2.[D][✗] return book (by: Sunday)
+3.[E][✗] project meeting (at: Mon 2-4pm)
+----------
+
+You:  
+Duke: Bye, see you never!
+
