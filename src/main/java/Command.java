@@ -36,6 +36,10 @@ public class Command {
 			return CommandType.DONE;
 		}
 
+		if (tokens.length >= 1 && tokens[0].equals("delete")) {
+			return CommandType.DELETE;
+		}
+
 		if (this.isAddCommand()) {
 			return CommandType.ADD;
 		}

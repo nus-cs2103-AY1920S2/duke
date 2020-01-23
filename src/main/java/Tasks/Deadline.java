@@ -24,8 +24,9 @@ public class Deadline extends Task {
 		StringBuilder sb = new StringBuilder();
 		sb.append("  [D]")
 		  .append(super.getStatusIcon())
+		  .append(" ")
 		  .append(super.description)
-		  .append(" (by ")
+		  .append(" (by")
 		  .append(super.getRemainingTokens())
 		  .append(")");
 		return sb.toString();

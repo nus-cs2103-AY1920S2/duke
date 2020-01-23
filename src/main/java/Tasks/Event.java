@@ -25,7 +25,7 @@ public class Event extends Task {
 		sb.append("  [E]")
 		  .append(super.getStatusIcon())
 		  .append(super.description)
-		  .append(" (by ")
+		  .append(" (by")
 		  .append(super.getRemainingTokens())
 		  .append(")");
 		return sb.toString();
