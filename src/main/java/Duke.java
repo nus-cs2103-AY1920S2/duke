@@ -7,6 +7,8 @@ public class Duke {
         int count = 0;
         int count2 = 0;
         int count3 = 1;
+        String content2;
+        String content3;
 
         System.out.println("    ____________________________________________________________");
         System.out.println("     Hello! I'm Duke");
@@ -22,7 +24,7 @@ public class Duke {
                 count2 = 0;
                 count3 = 1;
                 while(count2 < count){
-                    System.out.println("     " + count3 + ".[" + tasks[count2].getStatusIcon() + "] " + tasks[count2].getDescription());
+                    System.out.println("     " + count3 + "." + tasks[count2].toString());
                     count2++;
                     count3++;
                 }
@@ -40,12 +42,25 @@ public class Duke {
                 }
                 System.out.println("    ____________________________________________________________");
             } else {
-                Task t = new Task(userInput);
-                tasks[count] = t;
+                if(userInput.contains("todo")){
+                    content2 = userInput.substring(5);
+                    Task t = new Todo(content2);
+                    tasks[count] = t;
+
+                } else if(userInput.contains("deadline")){
+                    userInput = userInput.substring(9);
+                    content2 = userInput.substring(0, userInput.indexOf("/by") - 1);
+                    content3 = userInput.substring(userInput.indexOf("/by") + 4);
+                    Task t = new Deadline(content2, content3);
+                    tasks[count] = t;
+                } else {
+                    userInput = userInput.substring(6);
+                    content2 = userInput.substring(0, userInput.indexOf("/at") - 1);
+                    content3 = userInput.substring(userInput.indexOf("/at") + 4);
+                    Task t = new Event(content2, content3);
+                    tasks[count] = t;
+                }
                 count++;
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     added: " + userInput);
-                System.out.println("    ____________________________________________________________\n");
             }
             userInput = myObj.nextLine();
         }
