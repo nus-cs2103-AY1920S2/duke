@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,8 +6,7 @@ public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static String userInput = "";
     private static String userArgs = "";
-    private static Task[] items = new Task[100];
-    private static int itemsCounter = 0;
+    private static ArrayList<Task> items = new ArrayList<Task>();
 
     /**
      * Main method. Entry point for the Duke program.
@@ -45,35 +45,32 @@ public class Duke {
                     case "done":
                         int taskNo = Integer.parseInt(userArgs) - 1;
                         System.out.println(taskNo);
-                        if (taskNo < 0 || taskNo >= itemsCounter) {
+                        if (taskNo < 0 || taskNo >= items.size()) {
                             throw new DukeException(4);
                         } else {
                             markAsDone(taskNo);
                             dukePrompt(new String[]{"Got it boss! Just to confirm, this is the one I marked as done",
-                                items[taskNo].toString()});
+                                items.get(taskNo).toString()});
                         }
                         break;
                     case "deadline":
-                        items[itemsCounter] = new Deadline(userArgs);
-                        itemsCounter++;
+                        items.add(new Deadline(userArgs));
                         dukePrompt(new String[]{"Oooh, important deadline eh, boss? Don't worry, I got it",
-                            items[(itemsCounter - 1)].toString(),
-                            "Now you have " + itemsCounter + " tasks in the list"});
+                            items.get(items.size() - 1).toString(),
+                            "Now you have " + items.size() + " tasks in the list"});
                         break;
                     case "todo":
-                        items[itemsCounter] = new ToDo(userArgs);
-                        itemsCounter++;
+                        items.add(new ToDo(userArgs));
                         dukePrompt(new String[]{"Got it, boss. I'll write this one down",
-                            items[(itemsCounter - 1)].toString(),
-                            "Now you have " + itemsCounter + " tasks in the list"});
+                            items.get(items.size() - 1).toString(),
+                            "Now you have " + items.size() + " tasks in the list"});
                         break;
                     case "event":
-                        items[itemsCounter] = new Event(userArgs);
-                        itemsCounter++;
+                        items.add(new Event(userArgs));
                         dukePrompt(new String[]{
                             "A special event I see. Don't worry boss, I'll remind you",
-                            items[(itemsCounter - 1)].toString(),
-                            "Now you have " + itemsCounter + " tasks in the list"});
+                            items.get(items.size() - 1).toString(),
+                            "Now you have " + items.size() + " tasks in the list"});
                         break;
                     default:
                         throw new DukeException(0);
@@ -109,19 +106,19 @@ public class Duke {
 
     private static String[] listItems() {
         String[] temp;
-        if (itemsCounter == 0) {
+        if (items.size() == 0) {
             temp = new String[]{"Boss, my notepad is empty. You sure you told me anything?"};
         } else {
-            temp = new String[itemsCounter + 1];
+            temp = new String[items.size() + 1];
             temp[0] = "Here's what I've written down, boss.";
-            for (int i = 0; i < itemsCounter; i++) {
-                temp[i + 1] = (i + 1) + ". " + items[i];
+            for (int i = 0; i < items.size(); i++) {
+                temp[i + 1] = (i + 1) + ". " + items.get(i).toString();
             }
         }
         return temp;
     }
 
     private static void markAsDone(int taskNo) {
-        items[taskNo].setTaskDone();
+        items.get(taskNo).setTaskDone();
     }
 }
