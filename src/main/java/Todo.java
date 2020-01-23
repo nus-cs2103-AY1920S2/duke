@@ -1,5 +1,4 @@
 public class Todo extends Task {
-
     /**
      * Constructs a new to-do.
      *

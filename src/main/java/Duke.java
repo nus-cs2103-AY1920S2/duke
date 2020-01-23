@@ -35,36 +35,40 @@ public class Duke {
         // Terminates the chat-bot if true
         boolean exit = false;
 
+        // Keep waiting for user input until the exit command is entered
         while (!exit && sc.hasNext()) {
             String input = sc.next();
             System.out.println();
 
-            // Handle different commands
-            switch (input) {
-            case "bye":
-                exit = true; // Terminate the program
-                break;
-            case "deadline":
-                taskList = add(taskList, inputDeadline(sc));
-                break;
-            case "done":
-                int taskId = sc.nextInt();
-                taskList = done(taskList, taskId);
-                break;
-            case "event":
-                taskList = add(taskList, inputEvent(sc));
-                break;
-            case "list":
-                list(taskList);
-                sc.nextLine();
-                break;
-            case "todo":
-                taskList = add(taskList, inputTodo(sc));
-                break;
-            default:
-                //taskList = add(taskList, input + sc.nextLine());
-                //echo(command); // Repeat the user's command
-                break;
+            try {
+                // Handle different commands
+                switch (input) {
+                case "bye":
+                    checkOneWordCommand(sc, "bye"); // Exception if command is not one word
+                    exit = true;
+                    break;
+                case "deadline":
+                    taskList = add(taskList, inputDeadline(sc));
+                    break;
+                case "done":
+                    taskList = done(taskList, sc);
+                    break;
+                case "event":
+                    taskList = add(taskList, inputEvent(sc));
+                    break;
+                case "list":
+                    checkOneWordCommand(sc, "list");
+                    list(taskList);
+                    break;
+                case "todo":
+                    taskList = add(taskList, inputTodo(sc));
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :(");
+                }
+            } catch (DukeException e) {
+                // Output exception message
+                echo(e.getMessage());
             }
         }
     }
@@ -148,9 +152,18 @@ public class Duke {
      *
      * @param sc the scanner for user input.
      * @return a new To-do from user input.
+     * @throws DukeException if user input is blank.
      */
-    public static Todo inputTodo(Scanner sc) {
-        return new Todo(sc.nextLine().strip());
+    public static Todo inputTodo(Scanner sc) throws DukeException {
+        String input = sc.nextLine().strip();
+
+        // Check input is not blank
+        if (!input.isEmpty()) {
+            return new Todo(input);
+        } else {
+            // Throw exception for blank inputs
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
     }
 
     /**
@@ -158,13 +171,40 @@ public class Duke {
      *
      * @param sc the scanner for user input.
      * @return a new Deadline from user input.
+     * @throws DukeException if user input is blank.
+     * @throws DukeException if user input has incorrect format.
      */
-    public static Deadline inputDeadline(Scanner sc) {
-        // Split string using " /by " as the delimiter
-        String[] splitInput = sc.nextLine().strip().split(" /by ");
+    public static Deadline inputDeadline(Scanner sc) throws DukeException {
+        String delimiter = " /by ";
 
-        // Left of split input is description, right is date/time
-        return new Deadline(splitInput[0], splitInput[1]);
+        String input = sc.nextLine().strip();
+
+        // Check input is not blank
+        if (!input.isEmpty()) {
+            int delimiterIndex = input.indexOf(delimiter);
+
+            // Check input format
+            if (delimiterIndex >= 0) {
+                String description = input.substring(0, delimiterIndex)
+                        .strip();
+
+                String by = input.substring(delimiterIndex + delimiter.length())
+                        .strip();
+
+                return new Deadline(description, by);
+
+            } else {
+                // Throw exception for incorrect inputs
+                throw new DukeException("☹ OOPS!!!"
+                        + " To input a deadline, please enter:\n"
+                        + "    a non-empty description, followed by\n"
+                        + "    the keyword /by, then\n"
+                        + "    the cut-off date/time for the deadline.");
+            }
+        } else {
+            // Throw exception for blank inputs
+            throw new DukeException("☹ OOPS!!! You didn't input anything. Please try again.");
+        }
     }
 
     /**
@@ -172,20 +212,52 @@ public class Duke {
      *
      * @param sc the scanner for user input.
      * @return a new Event from user input.
+     * @throws DukeException if user input is blank.
+     * @throws DukeException if user input has incorrect format.
      */
-    public static Event inputEvent(Scanner sc) {
-        // Split string using " /at " as the delimiter
-        String[] splitInput = sc.nextLine().strip().split(" /at ");
+    public static Event inputEvent(Scanner sc) throws DukeException {
+        String delimiter = " /at ";
 
-        // Left of split input is description
-        String description = splitInput[0];
+        String input = sc.nextLine().strip();
 
-        // Right of split input can be divided further:
-        // - last word is timeSlot, and everything before that is date
-        String at = splitInput[1].substring(0, splitInput[1].lastIndexOf(" "));
-        String timeSlot = splitInput[1].substring(splitInput[1].lastIndexOf(" ") + 1);
+        // Check input is not blank
+        if (!input.isEmpty()) {
+            int delimiterIndex = input.indexOf(delimiter);
 
-        return new Event(description, at, timeSlot);
+            // Check input format
+            if (delimiterIndex >= 0) {
+                String description = input.substring(0, delimiterIndex)
+                        .strip();
+
+                String otherDetails = input.substring(delimiterIndex + delimiter.length())
+                        .strip();
+
+                int lastSpace = otherDetails.lastIndexOf(" ");
+
+                // Check input format again
+                if (lastSpace >= 0) {
+                    String at = otherDetails.substring(0, lastSpace).strip();
+                    String timeSlot = otherDetails.substring(lastSpace + 1).strip();
+
+                    return new Event(description, at, timeSlot);
+                } else {
+                    // Throw exception for blank inputs
+                    throw new DukeException("☹ OOPS!!! The time range of the event cannot be empty.");
+                }
+
+            } else {
+                // Throw exception for incorrect inputs
+                throw new DukeException("☹ OOPS!!!"
+                        + " To input an event, please enter:\n"
+                        + "    a non-empty description, followed by\n"
+                        + "    the keyword /at, then\n"
+                        + "    the date of the event, and finally\n"
+                        + "    the start-end time as one word, in time-time format.");
+            }
+        } else {
+            // Throw exception for blank inputs
+            throw new DukeException("☹ OOPS!!! You didn't input anything. Please try again.");
+        }
     }
 
     /**
@@ -203,17 +275,53 @@ public class Duke {
      * Marks a task as completed in the chat-bot.
      *
      * @param taskList the list of tasks.
-     * @param taskId the number of the task in the list to be marked as done.
+     * @param sc the scanner accepting user input.
      * @return a copy of the TaskList with the specified task marked as done.
+     * @throws DukeException if next input is not a single integer.
+     * @throws DukeException if next input is not a valid task number.
      */
-    public static TaskList done(TaskList taskList, int taskId) {
-        String praise = "Good job completing this task!"
-                + " Here's a tick for completing it!\n";
+    public static TaskList done(TaskList taskList, Scanner sc) throws DukeException {
+        try {
+            // Check if the next input is a number
+            String remainingInput = sc.nextLine().strip();
 
-        TaskList newList = taskList.doneTask(taskId);
+            // Convert remaining input to an integer if possible
+            // Throws a NumberFormatException if input otherwise
+            int taskId = Integer.parseInt(remainingInput);
 
-        echo(praise + indent(newList.get(taskId).toString(), 2));
+            // Check if task number is valid
+            if (0 < taskId && taskId <= taskList.getNumTasks()) {
+                String praise = "Good job completing this task!"
+                        + " Here's a tick for completing it!\n";
 
-        return newList;
+                TaskList newList = taskList.doneTask(taskId);
+                echo(praise + indent(newList.get(taskId).toString(), 2));
+
+                return newList;
+
+            } else {
+                // Invalid task number
+                throw new DukeException("☹ OOPS!!! Your task number does not exist.");
+            }
+        } catch (NumberFormatException e) {
+            // Incorrect input format
+            throw new DukeException("☹ OOPS!!! Please ensure your input is a single integer.");
+        }
+    }
+
+    /**
+     * Will validate whether a previous user input was a single word command.
+     *
+     * @param sc the scanner accepting user input.
+     * @param command the user command for printing the correct exception
+     * @throws DukeException if command contains trailing words.
+     */
+    private static void checkOneWordCommand(Scanner sc, String command) throws DukeException {
+        String remainingInput = sc.nextLine().strip();
+
+        // Verify command is one word
+        if (!remainingInput.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! " + command + " is a one word command.");
+        }
     }
 }
