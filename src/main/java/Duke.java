@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     // Attributes
-    private static ArrayList<String> textList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,7 +18,7 @@ public class Duke {
         Duke.runDuke();
     }
 
-    // Carry out Add, List commands if entered by user
+    // Carry out Add, List, Done commands if entered by user
     // Terminates when user gives exit signal
     private static void runDuke() {
         Scanner scanner = new Scanner(System.in);
@@ -31,12 +31,23 @@ public class Duke {
             }
             // Handle List command if any
             if (nextInput.equals("list")) {
+                // fflush
+                System.out.println("");
                 Duke.handleCommandList();
                 continue;
             }
 
+            // Check and Handle Done command
+            // Possible source of error
+            String[] doneCommandArgs = nextInput.split(" ");
+            if (doneCommandArgs[0].equals("done")) {
+                handleCommandDone(Integer.parseInt(doneCommandArgs[1]));
+                continue;
+            }
+
             // Handle Add Command
-            Duke.handleCommandAdd(nextInput);
+            Task t = new Task(nextInput);
+            Duke.handleCommandAdd(t);
         }
     }
 
@@ -47,15 +58,23 @@ public class Duke {
     }
 
     private static void handleCommandList() {
+        System.out.println("Here are the tasks in your list:");
         int counter = 1;
-        for (String s : Duke.textList) {
+        for (Task s : Duke.taskList) {
             System.out.println("    " + counter + ". " + s);
             counter++;
         }
     }
 
-    private static void handleCommandAdd(String newText) {
-        Duke.textList.add(newText);
-        System.out.println("    added: " + newText);
+    private static void handleCommandAdd(Task newTask) {
+        Duke.taskList.add(newTask);
+        System.out.println("    added: " + newTask.getDescription());
+    }
+
+    private static void handleCommandDone(int TaskNumber) {
+        Duke.taskList.get(TaskNumber - 1).markAsDone();
+        System.out.println("Nice! I've marked this task as done:\n"
+                + "    " + Duke.taskList.get(TaskNumber - 1));
+
     }
 }
