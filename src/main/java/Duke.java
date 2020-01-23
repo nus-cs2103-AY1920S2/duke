@@ -9,48 +9,55 @@ public class Duke {
         boolean done = false;
         while (done != true) {
             String output = sc.nextLine();
-            if (output.equals("bye")) {
-                System.out.println("Bye! See you around:)");
-                done = true;
-            } else if (output.equals("list")) {
-                int counter = 1;
-                for (int i = 0; i < lst.size(); i++) {
-                    if (!lst.get(i).getType().equals("todo")) {
-                        System.out.println(counter + ".[" + initialsT(lst.get(i).getType()) + "]" +"[" + lst.get(i).getStatusIcon() + "] " +lst.get(i).getD() + "(" + breakDate(lst.get(i).getTime() +")") +")");
-                    } else {
-                        System.out.println(counter + ".[" + initialsT(lst.get(i).getType()) + "]" +"[" + lst.get(i).getStatusIcon() + "] " +lst.get(i).getD() );
+            if (validationInput(output)) {
+                if (output.equals("bye")) {
+                    System.out.println("Bye! See you around:)");
+                    done = true;
+                } else if (output.equals("list")) {
+                    int counter = 1;
+                    for (int i = 0; i < lst.size(); i++) {
+                        if (!lst.get(i).getType().equals("todo")) {
+                            System.out.println("  ____________________________________________________________");
+                            System.out.println("  " + counter + ".[" + initialsT(lst.get(i).getType()) + "]" +"[" + lst.get(i).getStatusIcon() + "] " +lst.get(i).getD() + "(" + breakDate(lst.get(i).getTime() +")") +")");
+                            System.out.println("  ____________________________________________________________");
+                        } else {
+                            System.out.println("  ____________________________________________________________");
+                            System.out.println("  " + counter + ".[" + initialsT(lst.get(i).getType()) + "]" +"[" + lst.get(i).getStatusIcon() + "] " +lst.get(i).getD() );
+                            System.out.println("  ____________________________________________________________");
+                        }
+                        counter++;
                     }
-                    counter++;
-                }
-            } else if (output.split(" ")[0].equals("done")) {
-                int space = Integer.parseInt(output.split(" ")[1]) -1;
-                lst.get(space).doAct();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + initialsT(lst.get(space).getType()) + "] " + lst.get(space).getD());
-            } else {
-                String typeD = output.split(" ")[0];
-                if (!typeD.equals("todo")) {
-                    String[] temp = output.split("/");
-                    String name = convertN(temp[0]);
-                    String time = temp[1];
-                    Task task = new Task(name,typeD);
-                    task.setTime(time);
-                    lst.add(task);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I added this task: ");
-                    System.out.println("  [" + initialsT(typeD) + "][" + task.getStatusIcon() + "] "+ name + "(" + breakDate(time) +")");
-                    System.out.println("Now you have " + lst.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
+                } else if (output.split(" ")[0].equals("done")) {
+                    int space = Integer.parseInt(output.split(" ")[1]) -1;
+                    lst.get(space).doAct();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[" + initialsT(lst.get(space).getType()) + "] " + lst.get(space).getD());
                 } else {
-                    String name = convertN(output);
-                    Task task = new Task(name,typeD);
-                    lst.add(task);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I added this task: ");
-                    System.out.println("[" + initialsT(typeD) + "][" + task.getStatusIcon() + "] " + name);
-                    System.out.println("Now you have " + lst.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
+                    String typeD = output.split(" ")[0];
+                    if (!typeD.equals("todo")) {
+                        String[] temp = output.split("/");
+                        String name = convertN(temp[0]);
+                        String time = temp[1];
+                        Task task = new Task(name,typeD);
+                        task.setTime(time);
+                        lst.add(task);
+                        System.out.println("  ____________________________________________________________");
+                        System.out.println("  Got it. I added this task: ");
+                        System.out.println("    [" + initialsT(typeD) + "][" + task.getStatusIcon() + "] "+ name + "(" + breakDate(time) +")");
+                        System.out.println("  Now you have " + lst.size() + " tasks in the list.");
+                        System.out.println("  ____________________________________________________________");
+                    } else {
+                        String name = convertN(output);
+                        Task task = new Task(name,typeD);
+                        lst.add(task);
+                        System.out.println("  ____________________________________________________________");
+                        System.out.println("  Got it. I added this task: ");
+                        System.out.println("    [" + initialsT(typeD) + "][" + task.getStatusIcon() + "] " + name);
+                        System.out.println("  Now you have " + lst.size() + " tasks in the list.");
+                        System.out.println("  ____________________________________________________________");
+                    }
                 }
+                  
             }
         }
         sc.close();
@@ -86,6 +93,30 @@ public class Duke {
             }
         }
         return result;
+    }
+
+    public static boolean validationInput(String input) {
+        String[] temp = input.split(" ");
+        if (input.length() == 0) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     ☹ OOPS!!! The input cannot be empty. Please enter something!");
+            System.out.println("    ____________________________________________________________");
+            return false;
+        } else if (temp.length == 1) {
+            if (!input.equals("bye")) {
+                if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     ☹ OOPS!!! The description of a " + input + " cannot be empty.");
+                    System.out.println("    ____________________________________________________________");
+                } else {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("    ____________________________________________________________");
+                }
+                return false;
+            }  
+        }
+        return true;
     }
 }
 
