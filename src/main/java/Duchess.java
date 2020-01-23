@@ -11,35 +11,37 @@ class Duchess {
     }
 
     private void awaitInput() {
-        String input = scanner.nextLine();
-        String[] commands = input.split("\\s", 2);
-        switch (commands[0].toLowerCase()) {
-        case "todo":
-            Task newTask = new ToDo(commands[1].trim());
-            this.addToTasks(newTask);
-            break;
-        case "event":
-            String[] details = commands[1].split("/at");
-            newTask = new Event(details[0].trim(), details[1].trim());
-            this.addToTasks(newTask);
-            break;
-        case "deadline":
-            details = commands[1].split("/by");
-            newTask = new Deadline(details[0].trim(), details[1].trim());
-            this.addToTasks(newTask);
-            break;
-        case "done":
-            this.completeTask(commands[1]);
-            break;
-        case "list":
-            this.printTasks();
-            break;
-        case "bye":
-            this.sayGoodbye();
-            break;
-        default:
-            echo(input);
-            break;
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String input = scanner.nextLine();
+                String[] commands = input.split("\\s", 2);
+                switch (commands[0].toLowerCase().trim()) {
+                case "todo":
+                case "event":
+                case "deadline":
+                    if (commands.length < 2) {
+                        throw new DuchessException("Your " + commands[0].trim() + " description cannot be empty!");
+                    }
+                    this.createTask(commands[0], commands[1]);
+                    break;
+                case "done":
+                    this.completeTask(commands[1]);
+                    break;
+                case "list":
+                    this.printTasks();
+                    break;
+                case "bye":
+                    this.sayGoodbye();
+                    isRunning = false;
+                    break;
+                default:
+                    echo(input);
+                    break;
+                }
+            } catch (DuchessException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -58,15 +60,6 @@ class Duchess {
     private void echo(String input) {
         System.out.println("\tOh? You said \"" + input + "\"? How interesting.");
         System.out.println("\tBut I don't see what I can do with that.");
-        this.awaitInput();
-    }
-
-    private void addToTasks(Task task) {
-        System.out.println("\tAs always, needing someone to keep track of things for you...");
-        this.tasks.add(task);
-        System.out.println("\t\t" + task);
-        System.out.println("\tI've already tracked " + this.tasks.size() + " tasks for you.");
-        this.awaitInput();
     }
 
     private void printTasks() {
@@ -75,7 +68,6 @@ class Duchess {
         for (int i = 0; i < this.tasks.size(); i++) {
             System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i));
         }
-        this.awaitInput();
     }
 
     private void sayGoodbye() {
@@ -87,16 +79,52 @@ class Duchess {
         this.awaitInput();
     }
 
-    private void completeTask(String index) {
+    private void createTask(String type, String description) throws DuchessException {
+        switch (type) {
+        case "todo":
+            Task newTask = new ToDo(description.trim());
+            this.addToTasks(newTask);
+            break;
+        case "event":
+            String[] details = description.split("/at");
+            if (details.length < 2) {
+                throw new DuchessException(
+                        "I don't know when is your event! Please use /at [time here].");
+            }
+            newTask = new Event(details[0].trim(), details[1].trim());
+            this.addToTasks(newTask);
+            break;
+        case "deadline":
+            details = description.split("/by");
+            if (details.length < 2) {
+                throw new DuchessException(
+                        "I don't know when is your deadline! Please use /by [deadline here].");
+            }
+            newTask = new Deadline(details[0].trim(), details[1].trim());
+            this.addToTasks(newTask);
+            break;
+        default:
+            break;
+        }
+        return;
+    }
+
+    private void addToTasks(Task task) {
+        System.out.println("\tAs always, needing someone to keep track of things for you...");
+        this.tasks.add(task);
+        System.out.println("\t\t" + task);
+        System.out.println("\tI've already tracked " + this.tasks.size() + " tasks for you.");
+    }
+
+    private void completeTask(String index) throws DuchessException {
         int indexAsInt = Integer.parseInt(index.trim());
         if (indexAsInt < 0 || indexAsInt > this.tasks.size()) {
-            throw new IllegalArgumentException("The index given is out of bounds!");
+            throw new DuchessException("You're referring to a task that does not exist!");
         } else {
             Task taskToComplete = this.tasks.get(indexAsInt - 1);
             taskToComplete.toggleIsCompleted();
             System.out.println("\tOh? You actually completed something? Impressive...");
             System.out.println("\t\t" + taskToComplete);
-            this.awaitInput();
         }
     }
 }
