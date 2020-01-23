@@ -1,0 +1,3 @@
+Got it, I've added the following task:
+  [E][✘] project meeting (at: Mon 2-4pm)
+Now you have 1 tasks in the list.
