@@ -2,11 +2,11 @@ import java.lang.StringBuilder;
 
 public class Task {
     boolean isDone;
-    String description;
+    String input;
 
-    Task(String description) {
+    Task(String input) {
         this.isDone = false;
-        this.description = description;
+        this.input = input;
     }
 
     public void setDone() {
@@ -24,7 +24,7 @@ public class Task {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getStatusIcon());
-        str.append(" ").append(description);
+        str.append(" ").append(input);
         return str.toString();
     }
 }
