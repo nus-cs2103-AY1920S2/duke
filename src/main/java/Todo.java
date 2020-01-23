@@ -4,7 +4,7 @@
  */
 public class Todo extends Task {
     public Todo(String td) {
-        super(td);
+        super(td.substring(Command.TODO.word.length()), "");
     }
 
     @Override

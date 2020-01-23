@@ -4,16 +4,21 @@
  */
 public abstract class Task {
     private String taskDetails;
+    private String taskTime;
     private boolean doneStatus;
 
     /**
      * Constructor for a Task
      *
      * @param td String that represents what
-     *           was entered to create the task
+     *           was entered to create the Task
+     *
+     * @param tt String that represents a time
+     *           associated with the Task
      */
-    public Task(String td) {
+    public Task(String td, String tt) {
         this.taskDetails = td;
+        this.taskTime = tt;
         this.doneStatus = false;
     }
 
@@ -59,6 +64,7 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + this.type() + "]" +
-            this.doneGet() + " " + this.taskDetails;
+            this.doneGet() + " " + this.taskDetails +
+            " " + this.taskTime;
     }
 }
