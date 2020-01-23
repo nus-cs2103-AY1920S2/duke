@@ -101,30 +101,66 @@ public class Duke extends Application {
     }
 
     private int handleUserInput() {
+
         String curText = userInput.getText();
         int needExit = 0;
+
+        boolean isTodo = false, isDeadline = false, isEvent = false;
+
         dialogContainer.getChildren().add(getDialogLabel(curText));
         if (curText.equals("bye")) {
+
+//          exit the program
+
             curText = "Bye. Hope to see you again soon!";
             needExit = 1;
+
         } else if (curText.equals("list")) {
-            curText = "";
+
+//            query the list of task
+
+            curText = "Here are the tasks in your list:";
             for (int i = 0; i < listing.size(); i++) {
                 curText += (i + 1);
                 curText += ". " + listing.get(i) + '\n';
             }
-        } else if (curText.substring(0, Math.min(curText.length(), 4)).equals("done")) {
+
+        } else if (isSubstringEqual(curText, "done")) {
+
+//            done doing task
+
             int taskNum = Integer.parseInt(curText.substring(4).trim()) - 1;
             curText = "Nice! I've marked this task as done:\n";
             curText += listing.get(taskNum).done();
-        } else {
-            listing.add(new Task(curText));
-            curText = "added: " + curText;
+
+        } else if ((isTodo = isSubstringEqual(curText, "todo")) ||
+                (isDeadline = isSubstringEqual(curText, "deadline")) ||
+                (isEvent = isSubstringEqual(curText, "event"))) {
+
+//          add task to do
+
+            Task tmp = new Task(curText);
+            if (isTodo) {
+                tmp = new Task(curText);
+            } else if (isDeadline){
+                tmp = new Deadline(curText);
+            } else if (isEvent) {
+                tmp = new Event(curText);
+            }
+            listing.add(tmp);
+            curText = "Got it. I've added this task:\n";
+            curText += tmp + "\n";
+            curText += "Now you have " + listing.size() + " tasks in the list.";
         }
         dialogContainer.getChildren().add(getDialogLabel(curText));
         userInput.clear();
         return needExit;
     }
+
+    private boolean isSubstringEqual(String oriString, String checkString){
+        return (oriString.substring(0, Math.min(oriString.length(), checkString.length())).equals(checkString));
+    }
+
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
