@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -15,10 +16,27 @@ public class Duke {
             if (in.equals("list")){
                 Task.printList();
             } else if (in.contains("done")) {
-                int num = Integer.parseInt(in.substring(5));
-                Task.printDone(num);
+                try {
+                    int num = Integer.parseInt(in.substring(5));
+                    Task.printDone(num);
+                } catch (IndexOutOfBoundsException e){ // when no int arg provided
+                    System.err.println("OOPS!!! Done must take a valid number in the range of the task list.");
+                } catch (NumberFormatException e) { // when non-int arg provided
+                    System.err.println("OOPS!!! Done must take a valid integer in the range of the task list.");
+                }
             } else {
-                Task.addTask(in);
+                try {
+                    String taskType = in.split(" ", 2)[0];
+                    if (Task.isValidTask(taskType)){
+                        Task.addTask(in);
+                    } else if (in.isEmpty() || in == null){
+                        System.err.println("     ☹ OOPS!!! Please type something here.");
+                    } else {
+                        throw new IOException();
+                    }
+                } catch (IOException e) { // when its an invalid task type
+                    System.err.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
             }
             in = sc.nextLine();
         }

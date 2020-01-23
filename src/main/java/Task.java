@@ -5,22 +5,26 @@ public interface Task{
     static List<Task> taskList = new ArrayList<>();
 
     public static void addTask(String taskName){
-        String taskType = taskName.split(" ", 2)[0];
-        String taskDesc = taskName.split(" ", 2)[1];
-        Task newTask;
-        if (taskType.equals("todo")){
-            newTask = new ToDo(taskDesc);
-        } else if (taskType.equals("deadline")){
-            String[] in = taskDesc.split("/");
-            newTask = new Deadline(in[0], in[1]);
-        } else {
-            String[] in = taskDesc.split("/");
-            newTask = new Event(in[0], in[1]);
+        try {
+            String taskType = taskName.split(" ", 2)[0];
+            String taskDesc = taskName.split(" ", 2)[1];
+            Task newTask;
+            if (taskType.equals("todo")) {
+                newTask = new ToDo(taskDesc);
+            } else if (taskType.equals("deadline")) {
+                String[] in = taskDesc.split("/");
+                newTask = new Deadline(in[0], in[1]);
+            } else {
+                String[] in = taskDesc.split("/");
+                newTask = new Event(in[0], in[1]);
+            }
+            taskList.add(newTask);
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + newTask);
+            System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException e){
+            System.err.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        taskList.add(newTask);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + newTask);
-        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void printList(){
@@ -40,5 +44,8 @@ public interface Task{
         System.out.println(out);
     }
 
+    public static boolean isValidTask(String task){
+        return task.equals("todo") || task.equals("event") || task.equals("deadline");
+    }
     public void markDone();
 }
