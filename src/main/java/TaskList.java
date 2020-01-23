@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 /**
  * create a complete class
@@ -10,12 +10,10 @@ import java.util.Scanner;
 
 
 public class TaskList{
-    private Task[] taskList;
-    int count;
+    private ArrayList<Task> taskList;
 
     public TaskList(){
-        this.taskList = new Task[100];
-        this.count = 1;
+        this.taskList = new ArrayList<>();
     }
 
 
@@ -41,34 +39,35 @@ public class TaskList{
     }
 
     private void totalTask(){
-        System.out.println("You have " + (count -1) + " task on your list.");
+        System.out.println("You have " + (taskList.size()) + " task on your list.");
     }
 
-    private void addTodo(int ID, String task){
-        taskList[ID - 1] = new Todo(task, ID);
+    private void addTodo(String task){
+        taskList.add(new Todo(task));
         System.out.println("Affirmative. Adding a to-do task :) \n" + "added: " + task);
         totalTask();
     }
 
-    private void addDead(int ID, String task, String timing){
-        taskList[ID - 1] = new Deadline(task, ID, timing);
+    private void addDead(String task, String timing){
+        taskList.add(new Deadline(task, timing));
         System.out.println("Affirmative. Adding a task with a deadline. :) \n" + "added: " + task + " " + timing);
         totalTask();
     }
 
-    private void addEvent(int ID, String task, String timing){
-        taskList[ID - 1] = new Event(task, ID, timing);
+    private void addEvent(String task, String timing){
+        taskList.add(new Event(task, timing));
         System.out.println("Affirmative. Adding an event. :) \n" + "added: " + task + " " + timing);
         totalTask();
     }
 
-    private String makeTask(String[] arr){
+    private String makeTask (String[] arr) throws Exception{
         String task = "";
         int i = 1;
         while(i < arr.length && !arr[i].startsWith("/")){
             task += arr[i++] + " ";
         }
-        return task;
+        if(task.equals("")) throw new Exception();
+        else return task;
     }
 
     private String makeTiming(String[] arr){
@@ -89,9 +88,10 @@ public class TaskList{
     }
 
     private void printList(){
+        int i = 1;
         for(Task x: taskList){
             if(x != null) {
-                System.out.println(x);
+                System.out.println((i++) + "" + x);
             }
         }
     }
@@ -110,17 +110,32 @@ public class TaskList{
                     printList();
                     break;
                 case TODO:
-                    addTodo(count++, makeTask(inputAsArray));
+                    try{
+                        addTodo(makeTask(inputAsArray));
+                    }catch(Exception e){
+                        System.out.println("Missing description. Describe abit more leh.");
+                    }
                     break;
                 case DEADLINE:
-                    addDead(count++, makeTask(inputAsArray), makeTiming(inputAsArray));
+                    try{
+                        addDead(makeTask(inputAsArray), makeTiming(inputAsArray));
+                    }catch(Exception e){
+                        System.out.println("Missing description. Describe abit more leh.");
+                    }
                     break;
                 case EVENT:
-                    addEvent(count++, makeTask(inputAsArray), makeTiming(inputAsArray));
+                    try{
+                        addEvent(makeTask(inputAsArray), makeTiming(inputAsArray));
+                    }catch(Exception e){
+                        System.out.println("Missing description. Describe abit more leh.");
+                    }
                     break;
                 case DONE:
                     int num = Integer.valueOf(inputAsArray[1]);
-                    taskList[num - 1].completeTask();
+                    taskList.set(num - 1, taskList.get(num - 1).completeTask());
+                    break;
+                default:
+                    System.out.println("What you talking? Me no understand your command :(");
                     break;
             }
             if(cmd == Command.BYE){break;}

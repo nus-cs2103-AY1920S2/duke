@@ -1,10 +1,10 @@
 public class Todo extends Task {
-    public Todo(String task, int id){
-        super(task, id);
+    public Todo(String task){
+        super(task);
     }
 
     @Override
     public String toString(){
-        return id + ". " + "[T] " + complete + task;
+        return ". " + "[T] " + complete + task;
     }
 }
