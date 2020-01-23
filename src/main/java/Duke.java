@@ -50,6 +50,9 @@ public class Duke {
                 case "deadline":
                     taskList = add(taskList, inputDeadline(sc));
                     break;
+                case "delete":
+                    taskList = delete(taskList, sc);
+                    break;
                 case "done":
                     taskList = done(taskList, sc);
                     break;
@@ -296,6 +299,47 @@ public class Duke {
 
                 TaskList newList = taskList.doneTask(taskId);
                 echo(praise + indent(newList.get(taskId).toString(), 2));
+
+
+                return newList;
+
+            } else {
+                // Invalid task number
+                throw new DukeException("☹ OOPS!!! Your task number does not exist.");
+            }
+        } catch (NumberFormatException e) {
+            // Incorrect input format
+            throw new DukeException("☹ OOPS!!! Please ensure your input is a single integer.");
+        }
+    }
+
+    /**
+     * Removes a task from the list of tasks in the chat-bot.
+     *
+     * @param taskList the list of tasks.
+     * @param sc the scanner accepting user input.
+     * @return a copy of the TaskList with the specified task removed.
+     * @throws DukeException if next input is not a single integer.
+     * @throws DukeException if next input is not a valid task number.
+     */
+    public static TaskList delete(TaskList taskList, Scanner sc) throws DukeException {
+        try {
+            // Check if the next input is a number
+            String remainingInput = sc.nextLine().strip();
+
+            // Convert remaining input to an integer if possible
+            // Throws a NumberFormatException if input otherwise
+            int taskId = Integer.parseInt(remainingInput);
+
+            // Check if task number is valid
+            if (0 < taskId && taskId <= taskList.getNumTasks()) {
+                Task deletedTask = taskList.get(taskId);
+                TaskList newList = taskList.deleteTask(taskId);
+
+                String comment = "Alright! I'll remove this task:\n";
+                String count = "There are now " + newList.getNumTasks() + " tasks in the list.";
+
+                echo(comment + indent(deletedTask.toString(), 2) + "\n" + count);
 
                 return newList;
 
