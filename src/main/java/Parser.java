@@ -29,6 +29,10 @@ public class Parser {
                 // assumes command is only "done" and an int
                 // the input is 1-indexed. DoneCommand takes in 0-indexed
                 return new DoneCommand(Integer.parseInt(otherArgs) - 1);
+            } else if (firstArg.equals("delete")) {
+                // assumes command is only "delete" and an int
+                // the input is 1-indexed. DeleteCommand takes in 0-indexed
+                return new DeleteCommand(Integer.parseInt(otherArgs) - 1);
             } else {
                 throw new UndefinedCommandException();
             }

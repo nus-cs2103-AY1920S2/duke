@@ -43,7 +43,7 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getErrorMessage());
             } finally {
-
+                // do nothing
             }
         }
 
