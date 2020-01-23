@@ -76,6 +76,20 @@ public class Duke {
         }
     }
 
+    // Delete the specified task from the list.
+    public static void deleteTask(String userIndex) throws DukeArgumentException {
+        int index = Integer.parseInt(userIndex) - 1;
+        if (taskList.isEmpty()) {
+            replyUser("There is no task in your list to be deleted.");
+        } else if (index < taskList.size()) {
+            Task t = taskList.get(index);
+            taskList.remove(index);
+            replyUser("As per requested, the following task has been deleted:\n" + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
+        } else {
+            throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -102,6 +116,12 @@ public class Duke {
                         markTaskAsDone(commandArray[1]);
                     } else {
                         throw new DukeArgumentException("Please specify which task to be marked as done.");
+                    }
+                } else if (commandArray[0].toLowerCase().equals("delete")) {
+                    if (commandArray.length >= 2) {
+                        deleteTask(commandArray[1]);
+                    } else {
+                        throw new DukeArgumentException("Please specify which task to be deleted.");
                     }
                 } else if (commandArray[0].toLowerCase().equals("todo")) {
                     if (commandArray.length >= 2) {
