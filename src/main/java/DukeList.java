@@ -1,3 +1,6 @@
+import DukeExceptions.EmptyListException;
+import DukeExceptions.InvalidEntryException;
+
 import java.util.ArrayList;
 
 public class DukeList {
@@ -32,6 +35,27 @@ public class DukeList {
         for (int x = 0; x < numOfTasks; x++) {
             String output = String.format("    %d.%s", x + 1, listOfTasks.get(x).toString());
             System.out.println(output);
+        }
+    }
+
+    public void delete_task(int index) throws InvalidEntryException, EmptyListException {
+        if(numOfTasks == 0) {
+            throw new EmptyListException("List is empty! How to delete?!");
+        } else if(index > numOfTasks) {
+            String exceptionOutput = String.format("List only has %d item(s), how to delete item no. %d", numOfTasks, index);
+            throw new InvalidEntryException(exceptionOutput);
+        } else if(index < 1) {
+            throw new InvalidEntryException("Can only remove positive indexes!");
+        } else{
+            Task removedTask = listOfTasks.remove(index - 1);
+            numOfTasks--;
+            System.out.println("    The task requested has been successfully removed:");
+            System.out.println("      " + removedTask);
+            if(numOfTasks == 1) {
+                System.out.println("    There is " + numOfTasks + " task left.");
+            } else {
+                System.out.println("    There are " + numOfTasks + " tasks left.");
+            }
         }
     }
 }

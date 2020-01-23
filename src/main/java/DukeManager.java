@@ -31,6 +31,7 @@ public class DukeManager {
         String deadline = "deadline";
         String event = "event";
         String help = "help";
+        String delete = "delete";
 
 
         System.out.println(line);
@@ -57,15 +58,21 @@ public class DukeManager {
                 dl.addTask(newEvent);
             } else if (command.equals(help)) {
                 System.out.println(helpMessage());
+            } else if (command.equals(delete)) {
+                dl.delete_task(Integer.parseInt(splitS[1]));
             } else {
-                throw new UnknownCommandException();
+                throw new UnknownCommandException("Sorry! I don't understand that command.");
             }
         } catch (UnknownCommandException e) {
-            System.out.println("    Sorry! I don't understand that command!");
+            System.out.println("    " + e.getMessage());
         } catch (MissingDescriptionException e) {
-            System.out.println("    Hey! Your command doesn't have a description! Please try again.");
+            System.out.println("    " + e.getMessage());
         } catch (MissingTimingException e) {
-            System.out.println("    Hey! Your deadline/event has no timing! Please re-enter with timing!");
+            System.out.println("    " + e.getMessage());
+        } catch (EmptyListException e) {
+            System.out.println("    " + e.getMessage());
+        } catch (InvalidEntryException e) {
+            System.out.println("    " + e.getMessage());
         }
 
         System.out.println(line);
@@ -80,7 +87,7 @@ public class DukeManager {
         String[] help = S.split(" ");
         int descriptionLength = help.length;
         if(descriptionLength == 1) {
-            throw new MissingTimingException();
+            throw new MissingTimingException("Hey! Your deadline/event has no timing! Please re-enter with timing!");
         } else {
             String output = help[1];
 
@@ -106,7 +113,7 @@ public class DukeManager {
         String[] help = S.split(" ");
         int descriptionLength = help.length;
         if(descriptionLength == 1) {
-            throw new MissingDescriptionException();
+            throw new MissingDescriptionException("Hey! Your command doesn't have a description! Please try again");
         } else {
             String output = help[1];
 
@@ -124,7 +131,8 @@ public class DukeManager {
                 "    2. 'list' to see all listed tasks.\n" +
                 "    3. 'todo x' where x is an event description to note a To-Do event.\n" +
                 "    4. 'deadline x /by y' where is x is an event description and y is a time period.\n" +
-                "    5. 'event x /at y where x is an event description and y is a time period.";
+                "    5. 'event x /at y where x is an event description and y is a time period." +
+                "    6. 'delete x where x in the task in the list you want to delete (1 -  indexed.)";
     }
 
 }
