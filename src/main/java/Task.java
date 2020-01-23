@@ -21,12 +21,5 @@ public class Task {
         this.task = task;
         done = false;
     }
-
-    @Override
-    public String toString() {
-        String output = id + ".";
-        if (done) output = output + "[✓] " + task;
-        else output = output + "[✗] " + task;
-        return output;
-    }
+    
 }
