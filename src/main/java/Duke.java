@@ -12,6 +12,7 @@ public class Duke {
     public static void main(String[] args) {
         commandList.add("list");
         commandList.add("done");
+        commandList.add("delete");
         commandList.add("todo");
         commandList.add("event");
         commandList.add("deadline");
@@ -23,12 +24,10 @@ public class Duke {
                 checkCommand(command);
                 if (command.equals("list")) {
                     list();
-                } else if (command.equals("done")) {
-                    markAsDone();
                 } else {
                     String details = sc.nextLine();
                     try {
-                        addTask(command, details);
+                        checkDetails(command, details);
                     } catch (EmptyDescriptionException ex){
                         System.out.println(ex.getMessage());
                     }
@@ -59,12 +58,21 @@ public class Duke {
         }
     }
 
-    public static void markAsDone() {
-        int i = sc.nextInt();
+    public static void markAsDone(String details) {
+        int i = Integer.parseInt(details.substring(1));
         Task task = list.get(i-1);
         task.markAsDone();
         System.out.println(machine + "Alright dude this task is marked as done:");
         System.out.println("      " + i + ". " + task);
+    }
+
+    public static void deleteTask(String details) {
+        int i = Integer.parseInt(details.substring(1));
+        Task task = list.get(i-1);
+        list.remove(task);
+        System.out.println(machine + "And woop it's gone:");
+        System.out.println("      " + i + ". " + task);
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void checkCommand(String command) throws InvalidCommandException {
@@ -73,12 +81,18 @@ public class Duke {
         }
     }
 
-    public static void addTask(String command, String details) throws EmptyDescriptionException{
+    public static void checkDetails(String command, String details) throws EmptyDescriptionException{
         if (details.equals("")) {
             throw new EmptyDescriptionException("      Wait dude your task is...?");
         }
         String[] arr = new String[2];
         switch (command) {
+            case "done":
+                markAsDone(details);
+                break;
+            case "delete":
+                deleteTask(details);
+                break;
             case "todo":
                 addTodo(details);
                 break;
@@ -98,7 +112,7 @@ public class Duke {
         list.add(task);
         System.out.println(machine + "Dude now you have even more things to do:");
         System.out.println("      " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void addDeadline(String description, String by) {
@@ -106,7 +120,7 @@ public class Duke {
         list.add(task);
         System.out.println(machine + "That's strange dude your pile of deadlines suddenly grew:");
         System.out.println("      " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void addEvent(String description, String at) {
@@ -114,6 +128,6 @@ public class Duke {
         list.add(task);
         System.out.println(machine + "Woohoo what an eventful life:");
         System.out.println("      " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
     }
 }
