@@ -19,6 +19,8 @@ public class Duke {
                 "      '-._____.-'      / \\/";
         String initialMessage = "4LC3N-BOT initialised.\nGreetings, humans!";
         String awaitingMessage = "\n> ENTER your input:";
+        String storeMessage = "I have stored this text in my memory. Use" +
+                " \"list\" to retrieve it!";
 
         System.out.println(greetings);
         System.out.println(load);
@@ -39,6 +41,7 @@ public class Duke {
                 store.readStorage();
             } else if (next == Instruction.STORE) {
                 store.store(command);
+                System.out.println(storeMessage);
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;
