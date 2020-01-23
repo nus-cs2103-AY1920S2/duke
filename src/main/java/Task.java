@@ -1,20 +1,23 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Task {
+public interface Task{
     static List<Task> taskList = new ArrayList<>();
-    String taskName;
-    boolean isDone;
 
-    public Task(String taskName){
-        this.taskName = taskName;
-        this.isDone = false;
-    }
-
-    public static String addTask(String taskName){
-        Task newTask = new Task(taskName);
+    public static void addTask(String taskName){
+        String taskType = taskName.split(" ")[0];
+        Task newTask;
+        if (taskType.equals("todo")){
+            newTask = new ToDo(taskName);
+        } else if (taskType.equals("deadline")){
+            newTask = new Deadline(taskName);
+        } else {
+            newTask = new Event(taskName);
+        }
         taskList.add(newTask);
-        return "     added: " + taskName;
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + newTask);
+        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void printList(){
@@ -26,20 +29,13 @@ public class Task {
         }
     }
 
-    public static void markDone(int num){
+    public static void printDone(int num){
         System.out.println("     Nice! I've marked this task as done: ");
         Task taskDone = taskList.get(num - 1);
-        taskDone.isDone = true;
+        taskDone.markDone();
         String out =  "       " + taskDone;
         System.out.println(out);
     }
 
-    private String taskStateString(){
-        return (this.isDone) ? "[✓]" : "[✗]";
-    }
-
-    @Override
-    public String toString(){
-        return taskStateString() + " " + this.taskName;
-    }
+    public void markDone();
 }

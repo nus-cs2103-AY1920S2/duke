@@ -15,10 +15,9 @@ public class Duke {
                 Task.printList();
             } else if (in.contains("done")) {
                 int num = Integer.parseInt(in.substring(5));
-                Task.markDone(num);
+                Task.printDone(num);
             } else {
-                String out = Task.addTask(in);
-                System.out.println(out);
+                Task.addTask(in);
             }
             in = sc.nextLine();
         }
