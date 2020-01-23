@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Duchess {
@@ -15,18 +16,19 @@ class Duchess {
         while (isRunning) {
             try {
                 String input = scanner.nextLine();
-                String[] commands = input.split("\\s", 2);
-                switch (commands[0].toLowerCase().trim()) {
+                ArrayList<String> commands = new ArrayList<>(Arrays.asList(input.split("\\s", 2)));
+                switch (commands.get(0).toLowerCase().trim()) {
                 case "todo":
                 case "event":
                 case "deadline":
-                    if (commands.length < 2) {
-                        throw new DuchessException("Your " + commands[0].trim() + " description cannot be empty!");
+                    if (commands.size() < 2) {
+                        throw new DuchessException(
+                                "Your " + commands.get(0).trim() + " description cannot be empty!");
                     }
-                    this.createTask(commands[0], commands[1]);
+                    this.createTask(commands.get(0), commands.get(1));
                     break;
                 case "done":
-                    this.completeTask(commands[1]);
+                    this.completeTask(commands.get(1));
                     break;
                 case "list":
                     this.printTasks();
@@ -86,27 +88,26 @@ class Duchess {
             this.addToTasks(newTask);
             break;
         case "event":
-            String[] details = description.split("/at");
-            if (details.length < 2) {
+            ArrayList<String> details = new ArrayList<>(Arrays.asList(description.split("/at")));
+            if (details.size() < 2) {
                 throw new DuchessException(
                         "I don't know when is your event! Please use /at [time here].");
             }
-            newTask = new Event(details[0].trim(), details[1].trim());
+            newTask = new Event(details.get(0).trim(), details.get(1).trim());
             this.addToTasks(newTask);
             break;
         case "deadline":
-            details = description.split("/by");
-            if (details.length < 2) {
+            details = new ArrayList<>(Arrays.asList(description.split("/by")));
+            if (details.size() < 2) {
                 throw new DuchessException(
                         "I don't know when is your deadline! Please use /by [deadline here].");
             }
-            newTask = new Deadline(details[0].trim(), details[1].trim());
+            newTask = new Deadline(details.get(0).trim(), details.get(1).trim());
             this.addToTasks(newTask);
             break;
         default:
             break;
         }
-        return;
     }
 
     private void addToTasks(Task task) {
