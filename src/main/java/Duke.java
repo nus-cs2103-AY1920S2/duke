@@ -12,16 +12,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
-        int i = 0;
 
         while (!input.equals("bye")) {
             String[] inputs = input.split(" ", 2);
             try {
                 if (inputs[0].equals("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int j = 0; j < i; j++) {
-                        System.out.println(j + 1 + "." + tasks.get(j).getTaskType()
-                                + tasks.get(j).getStatusIcon() + " " + tasks.get(j));
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(i + 1 + "." + tasks.get(i));
                     }
                 } else if (inputs[0].equals("done")) {
                     try {
@@ -32,49 +30,52 @@ public class Duke {
                             continue;
                         }
                         tasks.get(taskNumber).markAsDone();
-                        System.out.println("Nice! I've marked this task as done:\n    [\u2713] " + tasks.get(taskNumber));
+                        System.out.println("Nice! I've marked this task as done:\n    " + tasks.get(taskNumber));
                     } catch (Exception e) {
                         throw new DukeException("☹ OOPS!!! Please provide a task number within range.");
                     }
                 } else if (inputs[0].equals("todo")) {
                     try {
-                        tasks.add(new Task(inputs[0], inputs[1]));
+                        Task todo = new Todo(inputs[1]);
+                        tasks.add(todo);
                         System.out.println("Got it. I've added this task:\n    " +
-                                tasks.get(i).getTaskType() + "[\u2718] " + tasks.get(i) + "\nNow you have " + (i + 1) + " tasks in the list.");
-                        i++;
+                                todo + "\nNow you have " + tasks.size() + " tasks in the list.");
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                } else if (inputs[0].equals("deadline") || inputs[0].equals("event")) {
+                } else if (inputs[0].equals("deadline")) {
                     try {
                         String[] taskDetails = inputs[1].split("/");
-                        tasks.add(new Task(inputs[0], taskDetails[0].trim()));
                         try {
-                            tasks.get(i).setDate(taskDetails[1]);
+                            Task deadline = new Deadline(taskDetails[0].trim(), taskDetails[1]);
+                            tasks.add(deadline);
                             System.out.println("Got it. I've added this task:\n    " +
-                                    tasks.get(i).getTaskType() + "[\u2718] " + tasks.get(i) + "\nNow you have " + (i + 1) + " tasks in the list.");
-                            i++;
+                                    deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
                         } catch (IndexOutOfBoundsException e) {
-                            if (inputs[0].equals("deadline")) {
-                                throw new DukeException("☹ OOPS!!! Please provide a date using '/by '.");
-                            } else {
-                                throw new DukeException("☹ OOPS!!! Please provide a date using '/on '.");
-                            }
+                            throw new DukeException("☹ OOPS!!! Please provide a date using '/by '.");
                         }
                     } catch (IndexOutOfBoundsException e) {
-                        if (inputs[0].equals("deadline")) {
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                        } else {
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                } else if (inputs[0].equals("event")) {
+                    try {
+                        String[] taskDetails = inputs[1].split("/");
+                        try {
+                            Task event = new Event(taskDetails[0].trim(), taskDetails[1]);
+                            tasks.add(event);
+                            System.out.println("Got it. I've added this task:\n    " +
+                                    event + "\nNow you have " + tasks.size() + " tasks in the list.");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! Please provide a date using '/on '.");
                         }
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                     }
                 } else if (inputs[0].equals("delete")) {
                     try {
                         Task deletedTask = tasks.remove(Integer.parseInt(inputs[1]) - 1);
-                        i--;
-                        System.out.println("Noted. I've removed this task: \n    " + deletedTask.getTaskType()
-                                + deletedTask.getStatusIcon() + " " + deletedTask);
-                        System.out.println("Now you have " + i + " tasks in the list.");
+                        System.out.println("Noted. I've removed this task: \n    " + deletedTask);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     } catch (Exception e) {
                         throw new DukeException("☹ OOPS!!! Please provide a task number within range.");
                     }
