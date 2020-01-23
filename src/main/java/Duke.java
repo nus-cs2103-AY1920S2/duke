@@ -15,7 +15,7 @@ public class Duke {
         while (!in.equals("bye")){
             if (in.equals("list")){
                 Task.printList();
-            } else if (in.contains("done")) {
+            } else if (in.contains("done")) { //TODO: change from using contains to 1st word
                 try {
                     int num = Integer.parseInt(in.substring(5));
                     Task.printDone(num);
@@ -25,18 +25,17 @@ public class Duke {
                     System.err.println("OOPS!!! Done must take a valid integer in the range of the task list.");
                 }
             } else {
-                try {
                     String taskType = in.split(" ", 2)[0];
+                    if (taskType.equals("delete")){
+                        Task.deleteTask(in);
+                    }
                     if (Task.isValidTask(taskType)){
                         Task.addTask(in);
                     } else if (in.isEmpty() || in == null){
                         System.err.println("     ☹ OOPS!!! Please type something here.");
                     } else {
-                        throw new IOException();
+//                        System.err.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                } catch (IOException e) { // when its an invalid task type
-                    System.err.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
             }
             in = sc.nextLine();
         }

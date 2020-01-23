@@ -27,6 +27,20 @@ public interface Task{
         }
     }
 
+    public static void deleteTask(String taskName){
+        try {
+            String taskNum = taskName.split(" ", 2)[1];
+            Task currTask = taskList.get(Integer.parseInt(taskNum) - 1);
+            taskList.remove(currTask);
+            System.out.println("     Noted. I've removed this task: ");
+            System.out.println("       " + currTask);
+            System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException e){
+            System.err.println("     ☹ OOPS!!! Please input a valid number in the range of the task list to delete.");
+        } catch (NumberFormatException e) { // when non-int arg provided
+            System.err.println("OOPS!!! Delete must take a valid integer in the range of the task list.");
+        }
+    }
     public static void printList(){
         System.out.println("     Here are the tasks in your list:");
         int i = 1;
