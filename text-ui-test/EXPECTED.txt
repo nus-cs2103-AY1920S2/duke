@@ -1,0 +1,10 @@
+Hello I am Duke.
+What can I do for you?
+Got it. I've added this task:
+[T][✘] borrow book
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] borrow book
+Got it. I've added this task:
+[D][✘] return book (by: Sunday)
+Now you have 2 tasks in the list.

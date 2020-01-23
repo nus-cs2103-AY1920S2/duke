@@ -9,7 +9,7 @@ public class Lister {
 
     public void record(String command) {
         if (command.equals("list")) {
-            System.out.println("Here are the tasks in your list: ");
+            System.out.println("Here are the tasks in your list:");
             for (int i=0; i<store.size(); i++) {
                 System.out.println((i + 1) + "." + store.get(i).toString());
             }
@@ -43,7 +43,7 @@ public class Lister {
     }
 
     public void printTask(Task task) {
-        System.out.println("Got it. I've added this task: \n" + task.toString());
+        System.out.println("Got it. I've added this task:\n" + task.toString());
         System.out.println("Now you have " + store.size() + " tasks in the list.");
     }
 }
