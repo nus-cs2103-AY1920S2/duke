@@ -1,0 +1,31 @@
+*******************************************
+ _____    |   _    _| |_   |
+|_____   _|  | |  |_   _|  |__
+|_____  |_|  |_|    |_|    |  |
+Hello! My name is Edith. Tony Stark's Personal Assistant
+What can I do for you?
+*******************************************
+*******************************************
+DukeException: I'm sorry, but I don't know what that means :-(
+*******************************************
+*******************************************
+DukeException: I'm sorry, but I don't know what that means :-(
+*******************************************
+*******************************************
+Got it. I've added this task:
+  [D][?] CS2103T duke (by: Thursday 23:59)
+Now you have 1 tasks in the list.
+*******************************************
+*******************************************
+Got it. I've added this task:
+  [T][?] CS2103T duke
+Now you have 2 tasks in the list.
+*******************************************
+*******************************************
+Got it. I've added this task:
+  [E][?] CS2101 CA component 1  (at: Thursday 08:00)
+Now you have 3 tasks in the list.
+*******************************************
+*******************************************
+Bye. Hope to see you again soon!
+*******************************************
