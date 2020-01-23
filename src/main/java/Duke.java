@@ -44,6 +44,13 @@ public class Duke {
                 say("Here are your procrastinated tasks:\n"
                         + getTasks());
                 break;
+            case "done":
+                int index = Integer.parseInt(words[1]);
+                tickTask(index);
+
+                say("Yay. You've finally done this task:\n\t"
+                        + getTask(index));
+                break;
             default:
                 addTask(speech);
                 say("Added: " + speech);
@@ -70,6 +77,14 @@ public class Duke {
 
     private void addTask(String task) {
         tasks.add(new Task(task));
+    }
+
+    private void tickTask(int index) {
+        tasks.get(index - 1).tick();
+    }
+
+    private String getTask(int index) {
+        return tasks.get(index - 1).toString();
     }
 
     private String getTasks() {
