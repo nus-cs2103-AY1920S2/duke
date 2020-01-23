@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,9 +16,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         //store user task
-        Task[] task = new Task[100];
-        int index = 0;
-
+        ArrayList<Task> task = new ArrayList<>();
         String input = "";
         input = scanner.nextLine();
 
@@ -25,18 +24,18 @@ public class Duke {
             System.out.println(separator);
             String[] split_input = input.split(" ");
             if (input.equals("list")) {
-                for (int i = 0; i < index; i++) {
-                    System.out.println((i+1) + ". " + task[i]);
+                for (int i = 0; i < task.size(); i++) {
+                    System.out.println((i+1) + ". " + task.get(i));
                 }
             } else if (split_input[0].equals("done")) {
                 try {
                     int num = Integer.parseInt(input.split(" ")[1]) - 1;
-                    if (num >= index || num <= 0) {
+                    if (num >= task.size() || num < 0) {
                         throw new DoneException();
                     } else {
                         System.out.println("Nice! I've marked this task as done: ");
-                        task[num].markDone();
-                        System.out.println("  " + task[num]);
+                        task.get(num).markDone();
+                        System.out.println("  " + task.get(num));
                     }
                 } catch (DoneException e) {
                     System.out.println(e.toString());
@@ -45,12 +44,11 @@ public class Duke {
                 }
             } else if (split_input[0].equals("todo")) {
                 try {
-                    task[index] = new Todo(input.split(" ", 2)[1]);
-                    index++;
+                    task.add(new Todo(input.split(" ", 2)[1]));
 
                     System.out.println("Got it. I've added this task: ");
-                    System.out.println(task[index-1]);
-                    System.out.printf("Now you have %d tasks in the list.\n", index);
+                    System.out.println(task.get(task.size()-1));
+                    System.out.printf("Now you have %d tasks in the list.\n", task.size());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
@@ -59,12 +57,11 @@ public class Duke {
                     String[] ori = input.split(" ", 2)[1].split("/by ");
                     String desc = ori[0];
                     String by = ori[1];
-                    task[index] = new Deadline(desc, by);
-                    index++;
+                    task.add(new Deadline(desc, by));
 
                     System.out.println("Got it. I've added this task: ");
-                    System.out.println(task[index-1]);
-                    System.out.printf("Now you have %d tasks in the list.\n", index);
+                    System.out.println(task.get(task.size()-1));
+                    System.out.printf("Now you have %d tasks in the list.\n", task.size());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
@@ -75,14 +72,29 @@ public class Duke {
                     String[] ori = input.split(" ", 2)[1].split("/at ");
                     String desc = ori[0];
                     String at = ori[1];
-                    task[index] = new Event(desc, at);
-                    index++;
+                    task.add(new Event(desc, at));
 
                     System.out.println("Got it. I've added this task: ");
-                    System.out.println(task[index-1]);
-                    System.out.printf("Now you have %d tasks in the list.\n", index);
+                    System.out.println(task.get(task.size()-1));
+                    System.out.printf("Now you have %d tasks in the list.\n", task.size());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+                }
+            } else if (split_input[0].equals("delete")) {
+                try {
+                    int num = Integer.parseInt(input.split(" ")[1]) - 1;
+                    if (num >= task.size() || num < 0) {
+                        throw new DeleteException();
+                    } else {
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.println(task.get(num));
+                        task.remove(num);
+                        System.out.printf("Now you have %d tasks in the list.\n", task.size());
+                    }
+                } catch (DeleteException e) {
+                    System.out.println(e.toString());
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("☹ OOPS!!! The number of a done cannot be empty.");
                 }
             } else {
                 //display reply
