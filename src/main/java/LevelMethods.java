@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LevelMethods {
     List<Task> storingList = new ArrayList<>();
@@ -32,8 +31,18 @@ public class LevelMethods {
      * Greet the user
      */
     public void greetings() {
-        String intro = "Hello! I'm Grapie \n" +
-                "What can I do for you?\n";
+        String intro = "Hello! I'm Grapie! \n"
+                + "   _____                 _      \n"
+                + "  / ____|               (_)     \n"
+                + " | |  __ _ __ __ _ _ __  _  ___ \n"
+                + " | | |_ | '__/ _` | '_ \\| |/ _ \\ \n"
+                + " | |__| | | | (_| | |_) | |  __/ \n"
+                + "  \\_____|_|  \\__,_| .__/|_|\\___| \n"
+                + "                  | |           \n"
+                + "                  |_|           \n"
+
+
+                + "What do ya need from me?\n";
 
         formattingDivider(intro);
     }
@@ -52,18 +61,26 @@ public class LevelMethods {
      *
      * @param inputStr
      */
-    public void echo(String inputStr) throws DukeExceptions {
+    public void echo(String inputStr) throws GrapieExceptions {
 
         if (inputStr.contains("todo")) {
             if (inputStr.substring(0, 4).equals("todo") && inputStr.length() > 5) {
                 String detailsStr = inputStr.substring(5, inputStr.length());
 
-                Task todo = new Todo(detailsStr);
-                storingList.add(todo);
+                String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s","");
 
-                printAddingTask(todo);
+                if (checkIfTodoIsEmpty.length() == 0) {
+                    //That means it is empty behing todo
+                    throw new GrapieExceptions("OOPS!!! The description of a todo cannot be empty.");
+                } else {
+
+                    Task todo = new Todo(detailsStr);
+                    storingList.add(todo);
+
+                    printAddingTask(todo);
+                }
             } else {
-                throw new DukeExceptions("OOPS!!! The description of a todo cannot be empty.");
+                throw new GrapieExceptions("OOPS!!! The description of a todo cannot be empty.");
             }
 
         } else if (inputStr.contains("event")) {
@@ -72,7 +89,7 @@ public class LevelMethods {
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
-                    throw new DukeExceptions("OOPS!!! Event is not created in correct format. Please use: event your_event /at your_time");
+                    throw new GrapieExceptions("OOPS!!! Event is not created in correct format. Please use: event your_event /at your_time");
                 } else {
                     Task event = new Event(eventAndTime[0], eventAndTime[1]);
                     storingList.add(event);
@@ -82,7 +99,7 @@ public class LevelMethods {
                 }
 
             } else {
-                throw new DukeExceptions("OOPS!!! The description of a event cannot be empty.");
+                throw new GrapieExceptions("OOPS!!! The description of a event cannot be empty.");
             }
 
         } else if (inputStr.contains("deadline")) {
@@ -98,14 +115,14 @@ public class LevelMethods {
                     //print
                     printAddingTask(deadline);
                 } else {
-                    throw new DukeExceptions("OOPS!!! Deadline is not created in correct format. Please use: deadline your_deadline /by your_time");
+                    throw new GrapieExceptions("OOPS!!! Deadline is not created in correct format. Please use: deadline your_deadline /by your_time");
                 }
 
             } else {
-                throw new DukeExceptions("OOPS!!! The description of a deadline cannot be empty.");
+                throw new GrapieExceptions("OOPS!!! The description of a deadline cannot be empty.");
             }
         } else {
-            throw new DukeExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new GrapieExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
 //        Task task = new Task(inputStr);
@@ -122,10 +139,10 @@ public class LevelMethods {
         }
     }
 
-    public void completeTask(String doneTaskStr) throws DukeExceptions {
+    public void completeTask(String doneTaskStr) throws GrapieExceptions {
         if (doneTaskStr.length() <= 5) {
             //no number behind
-            throw new DukeExceptions("Please input a valid number behind 'done'!!");
+            throw new GrapieExceptions("Please input a valid number behind 'done'!!");
         } else {
 
             String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
@@ -146,18 +163,18 @@ public class LevelMethods {
 
                 } else {
                     //formattingDivider("There is no task " + taskNum + "!!!");
-                    throw new DukeExceptions("OOPS!!! There is no task " + numDone + "!!! Please create task " + numDone + " first.");
+                    throw new GrapieExceptions("OOPS!!! There is no task " + numDone + "!!! Please create task " + numDone + " first.");
                 }
             } else {
-                throw new DukeExceptions("Please input a valid number behind 'done'!!");
+                throw new GrapieExceptions("Please input a valid number behind 'done'!!");
             }
         }
 
     }
 
-    public void deleteTask(String inputStr) throws DukeExceptions {
+    public void deleteTask(String inputStr) throws GrapieExceptions {
         if (inputStr.length() <= 7) {
-            throw new DukeExceptions("Please input a valid number behind 'delete'!!");
+            throw new GrapieExceptions("Please input a valid number behind 'delete'!!");
         } else {
             String strNumberDeleted = inputStr.substring(7, inputStr.length());
             strNumberDeleted.replaceAll("\\s+",""); //remove all white spaces
@@ -179,10 +196,10 @@ public class LevelMethods {
                     formattingDivider(toPrint);
 
                 } else {
-                    throw new DukeExceptions("No number " + numToDelete + " in task list!!!");
+                    throw new GrapieExceptions("No number " + numToDelete + " in task list!!!");
                 }
             } else {
-                throw new DukeExceptions("Please input a valid number behind 'delete'!!");
+                throw new GrapieExceptions("Please input a valid number behind 'delete'!!");
             }
         }
     }

@@ -9,9 +9,9 @@ public class Task {
 
     public String getStatusIcon() {
         if (!isDone) {
-            return "X";
+            return "X"; //not done
         } else {
-            return "O";
+            return "O"; //done
         }
 
         //return (isDone ? "yep" : "no"); //return tick or X symbols

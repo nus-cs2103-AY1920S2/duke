@@ -25,10 +25,11 @@ public class Duke { //extends Application {
 
 //                    String strNumberDone = nextStr.substring(5, nextStr.length());
 //                    int numDone = Integer.parseInt(strNumberDone); //convert to number
+
                     try {
                         //levelMethods.completeTask(numDone);
                         levelMethods.completeTask(nextStr);
-                    } catch (DukeExceptions ex) {
+                    } catch (GrapieExceptions ex) {
                         System.out.println("    #__________________________________________________________# \n");
                         System.out.println("      " + ex);
                         System.out.println("    #__________________________________________________________#");
@@ -41,7 +42,7 @@ public class Duke { //extends Application {
                 //delete
                 try {
                     levelMethods.deleteTask(nextStr);
-                } catch (DukeExceptions ex) {
+                } catch (GrapieExceptions ex) {
                     System.out.println("    #__________________________________________________________# \n");
                     System.out.println("      " + ex);
                     System.out.println("    #__________________________________________________________#");
@@ -50,7 +51,7 @@ public class Duke { //extends Application {
                 //echo
                 try {
                     levelMethods.echo(nextStr);
-                } catch (DukeExceptions ex) {
+                } catch (GrapieExceptions ex) {
                     //System.out.println("yes");
                     //System.out.println(ex);
                     System.out.println("    #__________________________________________________________# \n");
