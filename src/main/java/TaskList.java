@@ -7,6 +7,13 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public Task removeTask(int index) throws DukeException {
+        if (index >= taskList.size()) {
+            throw new DukeException("Sorry! Task does not exist!");
+        }
+        return taskList.remove(index);
+    }
+
     public Task markAsDone(int index) throws DukeException {
         if (index >= taskList.size()) {
             throw new DukeException("Sorry! Task does not exist!");

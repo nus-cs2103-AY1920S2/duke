@@ -39,6 +39,9 @@ public class Duke {
                 } else if (command == Command.MARK_TASK_AS_DONE) {
                     Task task = taskList.markAsDone(parser.getTaskIndex());
                     this.print("Marked as done: " + task.getFullDescription() + "\n    " + taskList.printNumTasks());
+                } else if (command == Command.DELETE_TASK) {
+                    Task task = taskList.removeTask(parser.getTaskIndex());
+                    this.print("Deleted: " + task.getFullDescription() + "\n    " + taskList.printNumTasks());
                 }
             } catch (DukeException e) {
                 this.print(e.getMessage());

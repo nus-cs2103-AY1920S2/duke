@@ -46,6 +46,11 @@ public class Parser {
                 throw new DukeException("Sorry! Please input a task number.");
             }
             this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+        } else if (this.command == Command.DELETE_TASK) {
+            if (userInputSplit.length == 1) {
+                throw new DukeException("Sorry! Please input a task number.");
+            }
+            this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
         } else if (this.command == Command.NOT_FOUND) {
             throw new DukeException("Sorry! I don't know what you mean!");
         }
@@ -64,6 +69,8 @@ public class Parser {
             return Command.ADD_DEADLINE;
         } else if (command.equals("event")) {
             return Command.ADD_EVENT;
+        } else if (command.equals("delete")) {
+            return Command.DELETE_TASK;
         }
         return Command.NOT_FOUND;
     }
