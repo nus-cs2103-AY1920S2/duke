@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
     // Attributes
@@ -39,15 +40,31 @@ public class Duke {
 
             // Check and Handle Done command
             // Possible source of error
-            String[] doneCommandArgs = nextInput.split(" ");
-            if (doneCommandArgs[0].equals("done")) {
-                handleCommandDone(Integer.parseInt(doneCommandArgs[1]));
+            String[] commandArgs = nextInput.split(" ");
+
+            if (commandArgs[0].equals("done")) {
+                handleCommandDone(Integer.parseInt(commandArgs[1]));
                 continue;
             }
 
             // Handle Add Command
-            Task t = new Task(nextInput);
-            Duke.handleCommandAdd(t);
+            Task t = null;
+            try {
+                switch (commandArgs[0]) {
+                    case "event":
+                        t = Event.createTask(commandArgs);
+                        break;
+                    case "todo":
+                        System.out.println("hello");
+                        t = Todo.createTask(commandArgs);
+                        break;
+                    case "deadline":
+                        t = Deadline.createTask(commandArgs);
+                        break;
+                }
+            } finally {
+                Duke.handleCommandAdd(t);
+            }
         }
     }
 
@@ -68,7 +85,9 @@ public class Duke {
 
     private static void handleCommandAdd(Task newTask) {
         Duke.taskList.add(newTask);
-        System.out.println("    added: " + newTask.getDescription());
+        System.out.println("    Got it. I've added this task:\n"
+                + "      " + newTask);
+        System.out.println("    Now you have " + Duke.taskList.size() + " tasks in the list.");
     }
 
     private static void handleCommandDone(int TaskNumber) {
