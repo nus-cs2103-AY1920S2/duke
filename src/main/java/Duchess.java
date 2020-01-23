@@ -17,30 +17,31 @@ class Duchess {
             try {
                 String input = scanner.nextLine();
                 ArrayList<String> commands = new ArrayList<>(Arrays.asList(input.split("\\s", 2)));
-                switch (commands.get(0).toLowerCase().trim()) {
-                case "todo":
-                case "event":
-                case "deadline":
+                switch (this.getCommandType(commands.get(0))) {
+                case TODO:
+                case EVENT:
+                case DEADLINE:
                     if (commands.size() < 2) {
                         throw new DuchessException(
                                 "Your " + commands.get(0).trim() + " description cannot be empty!");
                     }
                     this.createTask(commands.get(0), commands.get(1));
                     break;
-                case "done":
+                case DONE:
                     this.completeTask(commands.get(1));
                     break;
-                case "delete":
+                case DELETE:
                     this.deleteTask(commands.get(1));
                     break;
-                case "list":
+                case LIST:
                     this.printTasks();
                     break;
-                case "bye":
+                case BYE:
                     this.sayGoodbye();
                     isRunning = false;
                     break;
                 default:
+                    // never reached, but here as good practice
                     echo(input);
                     break;
                 }
@@ -77,6 +78,15 @@ class Duchess {
 
     private void sayGoodbye() {
         System.out.println("\tBye, is it? Shoo shoo then.");
+    }
+
+    private CommandType getCommandType(String input) throws DuchessException {
+        try {
+            return CommandType.valueOf(input.toUpperCase());
+        } catch (IllegalArgumentException error) {
+            throw new DuchessException(
+                    "I don't see what I can do with what you just told me.");
+        }
     }
 
     void run() {
