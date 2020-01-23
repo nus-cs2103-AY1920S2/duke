@@ -3,5 +3,5 @@
  * to the bot from CommandParser
  */
 public enum Instruction {
-    AWAIT, TERMINATE
+    AWAIT, READ_STORAGE, STORE, TERMINATE
 }

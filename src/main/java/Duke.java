@@ -17,7 +17,7 @@ public class Duke {
                 "   \\  '.       .'  /   \\  `(.-')\n" +
                 "    '.  `'---'`  .'     > ._>-'\n" +
                 "      '-._____.-'      / \\/";
-        String initialMessage = "4LC3N-BOT initialised.";
+        String initialMessage = "4LC3N-BOT initialised.\nGreetings, humans!";
         String awaitingMessage = "\n> ENTER your input:";
 
         System.out.println(greetings);
@@ -25,6 +25,7 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         CommandParser parser = new CommandParser();
+        Storage store = new Storage();
 
         System.out.println(initialMessage);
         System.out.println(awaitingMessage);
@@ -34,13 +35,17 @@ public class Duke {
             String command = input.next();
             // parse the command
             Instruction next = parser.parse(command);
-            if (next == Instruction.TERMINATE) {
+            if (next == Instruction.READ_STORAGE) {
+                store.readStorage();
+            } else if (next == Instruction.STORE) {
+                store.store(command);
+            } else if (next == Instruction.TERMINATE) {
+                // terminate the bot program
                 break;
             } else {
                 // next == Instruction.AWAIT
-                System.out.println(awaitingMessage);
-                continue;
             }
+            System.out.println(awaitingMessage);
         }
         input.close();
         String goodbye = "\nGoodbye! You will be missed" +
