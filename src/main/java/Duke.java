@@ -20,7 +20,7 @@ public class Duke {
 
         String cmd = readNextCommand();
         while (!cmd.equals("bye")) {
-            String[] cmdSplit = cmd.split(" ");
+            String[] cmdSplit = cmd.split(" ", 2);
 
             if (cmdSplit[0].equals("list")) {
                 displayList(tasks);
@@ -29,8 +29,19 @@ public class Duke {
                 task.markAsDone();
                 printMessage("Nice! I've marked this task as done:\n\t" + task.toString());
             } else {
-                tasks.add(new Task(cmd));
-                printMessage("added: " + cmd);
+                Task newTask = null;
+                if (cmdSplit[0].equals("deadline")) {
+                    String[] arguments = cmdSplit[1].split(" /by ", 2);
+                    newTask = new Deadline(arguments[0], arguments[1]);
+                } else if (cmdSplit[0].equals("event")) {
+                    String[] arguments = cmdSplit[1].split(" /at ", 2);
+                    newTask = new Event(arguments[0], arguments[1]);
+                } else if (cmdSplit[0].equals("todo")) {
+                    newTask = new Todo(cmdSplit[1]);
+                }
+
+                tasks.add(newTask);
+                printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
             }
             cmd = readNextCommand();
         }
