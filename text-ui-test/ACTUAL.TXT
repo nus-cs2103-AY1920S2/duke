@@ -3,13 +3,37 @@ Hello I'm your task manager!
 What tasks do you have dude?
 
     -----
+    MissingTimeException: Event is missing time!
+    -----
+    -----
+    MissingTimeException: Deadline is missing time!
+    -----
+    -----
+    InvalidIndexException: 1 is an invalid index!
+    -----
+    -----
     Got it. I've added this task:
     [T][✗] borrow book
     Now you have 1 tasks in the list.
     -----
     -----
+    UnknownCommandException: Sorry my guy, I don't know the command: 'blah'
+    -----
+    -----
+    UnknownCommandException: Sorry my guy, I don't know the command: ''
+    -----
+    -----
     Here are the tasks in your list:
     1. [T][✗] borrow book
+    -----
+    -----
+    EmptyDescriptionException: The description of Event cannot be empty.
+    -----
+    -----
+    EmptyDescriptionException: The description of Todo cannot be empty.
+    -----
+    -----
+    EmptyDescriptionException: The description of Deadline cannot be empty.
     -----
     -----
     Got it. I've added this task:
@@ -42,6 +66,20 @@ What tasks do you have dude?
     2. [D][✓] return book (by: Sunday)
     3. [E][✗] project meeting (at: Mon 2-4pm)
     4. [D][✗] do homework (by: no idea :-p)
+    -----
+    -----
+    InvalidIndexException: a is an invalid index!
+    -----
+    -----
+    Nice! I've marked this task as done:
+    [D][✓] do homework (by: no idea :-p)
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [T][✗] borrow book
+    2. [D][✓] return book (by: Sunday)
+    3. [E][✗] project meeting (at: Mon 2-4pm)
+    4. [D][✓] do homework (by: no idea :-p)
     -----
     -----
     Bye bye friend!

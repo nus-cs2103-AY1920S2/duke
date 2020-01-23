@@ -13,7 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java ../src/main/java/Deadline.java ../src/main/java/Task.java ../src/main/java/Event.java ../src/main/java/Todo.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1

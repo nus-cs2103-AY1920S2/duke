@@ -1,9 +1,20 @@
+event read book no time
+deadline dead line no time
+done 1
 todo borrow book
+blah
+
 list
+event
+todo
+deadline
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 done 2
 deadline do homework /by no idea :-p
+list
+done a
+done 4
 list
 bye
