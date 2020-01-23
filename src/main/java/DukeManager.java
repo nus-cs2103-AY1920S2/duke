@@ -31,8 +31,6 @@ public class DukeManager {
         String deadline = "deadline";
         String event = "event";
 
-
-
         System.out.println(line);
 
         if(command.equals(bye)) {
@@ -73,9 +71,6 @@ public class DukeManager {
             return findTaskDesHelper(S);
         } else {
             String[] findingDes = S.split("/");
-            for(String x : findingDes) {
-                System.out.println("x: " + x);
-            }
             return findTaskDesHelper(findingDes[0]);
         }
     }
