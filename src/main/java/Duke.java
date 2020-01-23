@@ -41,6 +41,12 @@ public class Duke {
                         throw new TaskIndexOutOfBoundsException();
                     }
                     markTaskAsDone(index);
+                } else if (command.equals("delete")) {
+                    int index = Integer.parseInt(inputs[1]);
+                    if (index < 1 || index > tasks.size()) {
+                        throw new TaskIndexOutOfBoundsException();
+                    }
+                    deleteTask(index);
                 } else {
                     throw new InvalidCommandException();
                 }
@@ -48,6 +54,18 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
+    }
+
+    private static void deleteTask(int index) {
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        printRemoveTask();
+        System.out.println(task.toString());
+        printNumTask();
+    }
+
+    private static void printRemoveTask() {
+        System.out.println("Okay, I have removed this task for you:");
     }
 
     private static void greet() {
@@ -64,7 +82,7 @@ public class Duke {
 
     private static void printNumTask() {
         String taskWord;
-        if (tasks.size() == 1) {
+        if (tasks.size() <= 1) {
             taskWord = "task";
         } else {
             taskWord = "tasks";
