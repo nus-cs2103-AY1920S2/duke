@@ -14,7 +14,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         //store user task
-        String[] task = new String[100];
+        Task[] task = new Task[100];
         int index = 0;
 
         String input = "";
@@ -28,12 +28,17 @@ public class Duke {
                 }
                 System.out.println(separator);
 
+            } else if (input.split(" ")[0].equals("done")) {
+                System.out.println("Nice! I've marked this task as done: ");
+                int num = Integer.parseInt(input.split(" ")[1]) - 1;
+                task[num].markDone();
+                System.out.println("  " + task[num]);
             } else {
-                task[index] = input;
+                task[index] = new Task(input);
 
                 //display reply
                 System.out.println(separator);
-                System.out.println("added: " + task[index]);
+                System.out.println("added: " + task[index].getDescription());
                 System.out.println(separator);
 
                 index++;
