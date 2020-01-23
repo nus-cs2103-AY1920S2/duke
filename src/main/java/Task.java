@@ -50,12 +50,24 @@ public interface Task{
         }
     }
 
-    public static void printDone(int num){
-        System.out.println("     Nice! I've marked this task as done: ");
-        Task taskDone = taskList.get(num - 1);
-        taskDone.markDone();
-        String out =  "       " + taskDone;
-        System.out.println(out);
+    public static void printDone(String in){
+//        System.out.println("     Nice! I've marked this task as done: ");
+//        Task taskDone = taskList.get(num - 1);
+//        taskDone.markDone();
+//        String out =  "       " + taskDone;
+//        System.out.println(out);
+        try{
+            int num = Integer.parseInt(in.substring(5));
+            System.out.println("     Nice! I've marked this task as done: ");
+            Task taskDone = taskList.get(num - 1);
+            taskDone.markDone();
+            String out =  "       " + taskDone;
+            System.out.println(out);
+        } catch (IndexOutOfBoundsException e){ // when no int arg provided
+            System.err.println("OOPS!!! Done must take a valid number in the range of the task list.");
+        } catch (NumberFormatException e) { // when non-int arg provided
+            System.err.println("OOPS!!! Done must take a valid integer in the range of the task list.");
+        }
     }
 
     public static boolean isValidTask(String task){

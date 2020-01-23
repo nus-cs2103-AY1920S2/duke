@@ -15,18 +15,21 @@ public class Duke {
         while (!in.equals("bye")){
             if (in.equals("list")){
                 Task.printList();
-            } else if (in.contains("done")) { //TODO: change from using contains to 1st word
-                try {
-                    int num = Integer.parseInt(in.substring(5));
-                    Task.printDone(num);
-                } catch (IndexOutOfBoundsException e){ // when no int arg provided
-                    System.err.println("OOPS!!! Done must take a valid number in the range of the task list.");
-                } catch (NumberFormatException e) { // when non-int arg provided
-                    System.err.println("OOPS!!! Done must take a valid integer in the range of the task list.");
-                }
-            } else {
+            } else { //TODO: change from using contains to 1st word
+
+//            } else {
                     String taskType = in.split(" ", 2)[0];
-                    if (taskType.equals("delete")){
+                    if (taskType.equals("done")) {
+//                        try {
+                            Task.printDone(in);
+//                            int num = Integer.parseInt(in.substring(5));
+//                            Task.printDone(num);
+//                        } catch (IndexOutOfBoundsException e){ // when no int arg provided
+//                            System.err.println("OOPS!!! Done must take a valid number in the range of the task list.");
+//                        } catch (NumberFormatException e) { // when non-int arg provided
+//                            System.err.println("OOPS!!! Done must take a valid integer in the range of the task list.");
+//                        }
+                    } else if (taskType.equals("delete")){
                         Task.deleteTask(in);
                     } else if (Task.isValidTask(taskType)){
                         Task.addTask(in);
