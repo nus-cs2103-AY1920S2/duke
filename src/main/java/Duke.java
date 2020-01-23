@@ -20,37 +20,51 @@ public class Duke {
 
         String cmd = readNextCommand();
         while (true) {
-            String[] cmdSplit = cmd.split(" ", 2);
+            try {
+                String[] cmdSplit = cmd.split(" ", 2);
 
-            if (cmdSplit[0].equals("list")) {
-                displayList(tasks);
-            } else if (cmdSplit[0].equals("done")) {
-                Task task = tasks.get(Integer.valueOf(cmdSplit[1]) - 1);
-                task.markAsDone();
-                printMessage("Nice! I've marked this task as done:\n\t" + task.toString());
-            } else if (cmdSplit[0].equals("delete")) {
-                Task taskToDelete = tasks.get(Integer.valueOf(cmdSplit[1]) - 1);
-                tasks.remove(Integer.valueOf(cmdSplit[1]) - 1);
-                printMessage("Noted! I've removed this task:\n\t\t" + taskToDelete.toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
-            } else if (cmdSplit[0].equals("bye")) {
-                printMessage("Bye! Hope you visit again soon!");
-                break;
-            } else {
-                Task newTask = null;
-                if (cmdSplit[0].equals("deadline")) {
+                if (cmdSplit[0].equals("list")) {
+                    displayList(tasks);
+                } else if (cmdSplit[0].equals("done")) {
+                    int index = Integer.valueOf(cmdSplit[1]) - 1;
+                    if (index < 0 || index >= tasks.size()) {
+                        throw new DukeException("☹ OOPS!!! Task number out of range!");
+                    } else {
+                        Task task = tasks.get(index);
+                        task.markAsDone();
+                        printMessage("Nice! I've marked this task as done:\n\t" + task.toString());
+                    }
+                } else if (cmdSplit[0].equals("delete")) {
+                    int index = Integer.valueOf(cmdSplit[1]) - 1;
+                    if (index < 0 || index >= tasks.size()) {
+                        throw new DukeException("☹ OOPS!!! Task number out of range!");
+                    } else {
+                        Task taskToDelete = tasks.get(index);
+                        tasks.remove(index);
+                        printMessage("Noted! I've removed this task:\n\t\t" + taskToDelete.toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                    }
+                } else if (cmdSplit[0].equals("deadline")) {
                     String[] arguments = cmdSplit[1].split(" /by ", 2);
-                    newTask = new Deadline(arguments[0], arguments[1]);
+                    tasks.add(new Deadline(arguments[0], arguments[1]));
+                    printMessage("Got it! I've added the task:\n\t\t" + tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
                 } else if (cmdSplit[0].equals("event")) {
                     String[] arguments = cmdSplit[1].split(" /at ", 2);
-                    newTask = new Event(arguments[0], arguments[1]);
+                    tasks.add(new Event(arguments[0], arguments[1]));
+                    printMessage("Got it! I've added the task:\n\t\t" + tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
                 } else if (cmdSplit[0].equals("todo")) {
-                    newTask = new Todo(cmdSplit[1]);
+                    tasks.add(new Todo(cmdSplit[1]));
+                    printMessage("Got it! I've added the task:\n\t\t" + tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                } else if (cmdSplit[0].equals("bye")) {
+                    printMessage("Bye! Hope you visit again soon!");
+                    break;
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-
-                tasks.add(newTask);
-                printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                cmd = readNextCommand();
+            } catch (DukeException ex) {
+                printMessage(ex.getMessage());
+                cmd = readNextCommand();
             }
-            cmd = readNextCommand();
         }
     }
 
