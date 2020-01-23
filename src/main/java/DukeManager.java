@@ -23,58 +23,57 @@ public class DukeManager {
     public void handleCommand(String inputString) {
         String[] splitS = inputString.split(" ");
         String command = splitS[0];
-
-        String bye = "bye";
-        String list = "list";
-        String done = "done";
-        String todo = "todo";
-        String deadline = "deadline";
-        String event = "event";
-        String help = "help";
-        String delete = "delete";
-
+        DukeCommandEnums DukeCommand = getEnum(command);
 
         System.out.println(line);
-        try {
-            if (command.equals(bye)) {
-                System.out.println("    " + "Bye. Hope to see you again soon!");
-            } else if (command.equals(list)) {
-                dl.view_task();
-            } else if (command.equals(done)) {
-                dl.markTaskAsDone(Integer.parseInt(splitS[1]));
-            } else if (command.equals(todo)) {
-                String taskDes = findTaskDes(inputString);
-                Todo newTask = new Todo(taskDes);
-                dl.addTask(newTask);
-            } else if (command.equals(deadline)) {
-                String deadlineBy = findDeadline(inputString);
-                String deadlineDes = findTaskDes(inputString);
-                Deadline newDL = new Deadline(deadlineDes, deadlineBy);
-                dl.addTask(newDL);
-            } else if (command.equals(event)) {
-                String eventAt = findDeadline(inputString);
-                String eventDes = findTaskDes(inputString);
-                Event newEvent = new Event(eventDes, eventAt);
-                dl.addTask(newEvent);
-            } else if (command.equals(help)) {
-                System.out.println(helpMessage());
-            } else if (command.equals(delete)) {
-                dl.delete_task(Integer.parseInt(splitS[1]));
-            } else {
-                throw new UnknownCommandException("Sorry! I don't understand that command.");
+        try{
+            switch(DukeCommand) {
+                case DELETE:
+                    dl.delete_task(Integer.parseInt(splitS[1]));
+                    break;
+                case HELP:
+                    System.out.println(helpMessage());
+                    break;
+                case EVENT:
+                    String eventAt = findDeadline(inputString);
+                    String eventDes = findTaskDes(inputString);
+                    Event newEvent = new Event(eventDes, eventAt);
+                    dl.addTask(newEvent);
+                    break;
+                case DEADLINE:
+                    String deadlineBy = findDeadline(inputString);
+                    String deadlineDes = findTaskDes(inputString);
+                    Deadline newDL = new Deadline(deadlineDes, deadlineBy);
+                    dl.addTask(newDL);
+                    break;
+                case TODO:
+                    String taskDes = findTaskDes(inputString);
+                    Todo newTask = new Todo(taskDes);
+                    dl.addTask(newTask);
+                    break;
+                case DONE:
+                    dl.markTaskAsDone(Integer.parseInt(splitS[1]));
+                    break;
+                case LIST:
+                    dl.view_task();
+                    break;
+                case BYE:
+                    System.out.println("    " + "Bye. Hope to see you again soon!");
+                    break;
+                case UNKNOWN:
+                    throw new UnknownCommandException("Sorry! I don't understand that command.");
             }
         } catch (UnknownCommandException e) {
-            System.out.println("    " + e.getMessage());
-        } catch (MissingDescriptionException e) {
-            System.out.println("    " + e.getMessage());
-        } catch (MissingTimingException e) {
-            System.out.println("    " + e.getMessage());
-        } catch (EmptyListException e) {
-            System.out.println("    " + e.getMessage());
-        } catch (InvalidEntryException e) {
-            System.out.println("    " + e.getMessage());
-        }
-
+                System.out.println("    " + e.getMessage());
+            } catch (MissingDescriptionException e) {
+                System.out.println("    " + e.getMessage());
+            } catch (MissingTimingException e) {
+                System.out.println("    " + e.getMessage());
+            } catch (EmptyListException e) {
+                System.out.println("    " + e.getMessage());
+            } catch (InvalidEntryException e) {
+                System.out.println("    " + e.getMessage());
+            }
         System.out.println(line);
     }
 
@@ -125,13 +124,35 @@ public class DukeManager {
         }
     }
 
+    private DukeCommandEnums getEnum(String s) {
+        if(s.equals("bye")) {
+            return DukeCommandEnums.BYE;
+        } else if(s.equals("list")) {
+            return DukeCommandEnums.LIST;
+        } else if(s.equals("done")) {
+            return DukeCommandEnums.DONE;
+        } else if(s.equals("todo")) {
+            return DukeCommandEnums.TODO;
+        } else if(s.equals("deadline")) {
+            return DukeCommandEnums.DEADLINE;
+        } else if(s.equals("event")) {
+            return DukeCommandEnums.EVENT;
+        } else if(s.equals("help")) {
+            return DukeCommandEnums.HELP;
+        } else if(s.equals("delete")) {
+            return DukeCommandEnums.DELETE;
+        } else {
+            return DukeCommandEnums.UNKNOWN;
+        }
+    }
+
     private String helpMessage() {
         return "    All available commands are: \n" +
                 "    1. 'help' to see all available commands.\n" +
                 "    2. 'list' to see all listed tasks.\n" +
                 "    3. 'todo x' where x is an event description to note a To-Do event.\n" +
                 "    4. 'deadline x /by y' where is x is an event description and y is a time period.\n" +
-                "    5. 'event x /at y where x is an event description and y is a time period." +
+                "    5. 'event x /at y where x is an event description and y is a time period.\n" +
                 "    6. 'delete x where x in the task in the list you want to delete (1 -  indexed.)";
     }
 

@@ -23,11 +23,20 @@ public class DukeList {
         System.out.printf("    Now you have %d tasks in the list.\n", numOfTasks);
     }
 
-    public void markTaskAsDone(int taskIndex) {
-        Task curr = listOfTasks.get(taskIndex - 1);
-        curr.done();
-        System.out.println("    Nice! I've marked this task as done:");
-        System.out.println("    " + curr);
+    public void markTaskAsDone(int taskIndex) throws EmptyListException, InvalidEntryException{
+        if(numOfTasks == 0) {
+            throw new EmptyListException("List is empty! Which task can you complete?!");
+        } else if(taskIndex > numOfTasks) {
+            String exceptionOutput = String.format("List only has %d item(s), how to complete item no. %d", numOfTasks, taskIndex);
+            throw new InvalidEntryException(exceptionOutput);
+        } else if(taskIndex < 1) {
+            throw new InvalidEntryException("Can only complete positive indexes!");
+        } else {
+            Task curr = listOfTasks.get(taskIndex - 1);
+            curr.done();
+            System.out.println("    Nice! I've marked this task as done:");
+            System.out.println("    " + curr);
+        }
     }
 
     public void view_task() {
