@@ -46,34 +46,47 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
-        printIntro();
-        String input = sc.nextLine();
-        while (!input.toLowerCase().equals("bye")) {
+    static void addTask(String input) throws DukeException, TodoException{
+        try {
             if (input.toLowerCase().equals("list")) {
                 printList(tasks);
             } else if (input.split(" ")[0].equals("done")) {
                 int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
                 markTaskDone(tasks.get(taskNumber));
+            } else if (input.split(" ")[0].equals("todo")) {
+                if (input.split(" ").length == 1){
+                    throw new TodoException(input);
+                }
+                Task task = new Todo(input.split(" ", 2)[1]);
+                tasks.add(task);
+                printReply(task);
+            } else if (input.split(" ")[0].equals("deadline")) {
+                Task task = new Deadline(input.split("/by", 2)[0].split(" ", 2)[1], input.split("/by", 2)[1]);
+                tasks.add(task);
+                printReply(task);
+            } else if (input.split(" ")[0].equals("event")) {
+                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], input.split("/at", 2)[1]);
+                tasks.add(task);
+                printReply(task);
+            } else {
+                throw new DukeException(input);
             }
-            else {
-                if (input.split(" ")[0].equals("todo")){
-                    Task task = new Todo(input.split(" ",2)[1]);
-                    tasks.add(task);
-                    printReply(task);
-                } else if (input.split(" ")[0].equals("deadline")){
-                    Task task = new Deadline(input.split("/by",2)[0].split(" ", 2)[1], input.split("/by",2)[1]);
-                    tasks.add(task);
-                    printReply(task);
-                } else if (input.split(" ")[0].equals("event")){
-                    Task task = new Event(input.split("/at",2)[0].split(" ", 2)[1], input.split("/at",2)[1]);
-                    tasks.add(task);
-                    printReply(task);
-                } else {}
-            }
+        }
+        catch (TodoException e){
+            System.out.println(e.toString());
+        }
+        catch(DukeException e){
+            System.out.println(e.toString());
+        }
+    }
+
+    public static void main(String[] args) throws DukeException {
+        printIntro();
+        String input = sc.nextLine();
+            while (!input.toLowerCase().equals("bye")) {
+            addTask(input);
             input = sc.nextLine();
         }
         printGoodbye();
     }
-
 }
