@@ -7,14 +7,14 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String separator = "---------------------------------------------------------";
+        String separator = "________________________________________________";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you? :)\n");
 
         Scanner scanner = new Scanner(System.in);
 
-        //store user input items
-        String[] items = new String[100];
+        //store user task
+        String[] task = new String[100];
         int index = 0;
 
         String input = "";
@@ -22,18 +22,21 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
+                System.out.println(separator);
                 for (int i = 0; i < index; i++) {
-                    System.out.println(separator);
-                    System.out.println((i+1) + ". " + items[i]);
-                    System.out.println(separator);
+                    System.out.println((i+1) + ". " + task[i]);
                 }
+                System.out.println(separator);
+
             } else {
-                items[index++] = input;
+                task[index] = input;
 
                 //display reply
                 System.out.println(separator);
-                System.out.println("added: " + input);
+                System.out.println("added: " + task[index]);
                 System.out.println(separator);
+
+                index++;
             }
             //next input
             input = scanner.nextLine();
