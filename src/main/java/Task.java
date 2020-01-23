@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String name;
     private boolean isDone;
 
@@ -17,7 +17,5 @@ public class Task {
         return "[" + done + "] " + name;
     }
 
-    public Task setDone() {
-        return new Task(this.name, true);
-    }
+    public abstract Task setDone();
 }

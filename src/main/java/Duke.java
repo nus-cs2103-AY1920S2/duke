@@ -26,7 +26,6 @@ public class Duke {
                 for (Task s: tasks) {
                     System.out.println("\t" + i + "." + s.toString());
                     i++;
-
                 }
             } else if ((next.trim().split(" ")[0]).equals("done")) {
                 Integer taskNumber = Integer.valueOf((next.split(" ")[1]));
@@ -35,8 +34,23 @@ public class Duke {
                 System.out.println("\tNice! I've marked this task as done:");
                 System.out.println("\t\t" + updatedTask);
             } else {
-                tasks.add(new Task(next));
-                System.out.println("\tadded: " + next);
+                System.out.println("\tGot it. I've added this task:");
+                Task newTask;
+                if (next.trim().split(" ")[0].equals("todo")) {
+                    String taskName = next.substring(next.indexOf(" ") + 1);
+                    newTask = new ToDo(taskName);
+                } else {
+                    String taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
+                    String taskDate = next.substring(next.indexOf("/") + 1);
+                    if (next.trim().split(" ")[0].equals("deadline")) {
+                        newTask = new Deadline(taskName, taskDate);
+                    } else {
+                        newTask = new Event(taskName, taskDate);
+                    }
+                }
+                tasks.add(newTask);
+                System.out.println("\t\t" + newTask);
+                System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
             }
             System.out.println("\t" + line);
             next = sc.nextLine();
