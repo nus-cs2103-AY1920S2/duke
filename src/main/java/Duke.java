@@ -33,12 +33,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -85,28 +79,42 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
+        dialogContainer.getChildren().add(getDialogLabel("Hello! I'm Duke\nWhat can I do for you?"));
+
         //step 3
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            String curText = userInput.getText();
+            boolean needExit = false;
+            dialogContainer.getChildren().add(getDialogLabel(curText));
+            if (curText.equals("bye")) {
+                curText = "Bye. Hope to see you again soon!";
+                needExit = true;
+            }
+            dialogContainer.getChildren().add(getDialogLabel("\t" + curText));
             userInput.clear();
+            if (needExit) {
+               stage.close();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            String curText = userInput.getText();
+            boolean needExit = false;
+            dialogContainer.getChildren().add(getDialogLabel(curText));
+            if (curText.equals("bye")) {
+                curText = "Bye. Hope to see you again soon!";
+                needExit = true;
+            }
+            dialogContainer.getChildren().add(getDialogLabel("\t" + curText));
             userInput.clear();
+            if (needExit) {
+                stage.close()
+            }
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
-        // more code to be added here later
     }
-
 
     /**
      * Iteration 1:
@@ -122,22 +130,5 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-//    private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                new DialogBox(userText, new ImageView(user)),
-//                new DialogBox(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-//
-//    /**
-//     * You should have your own function to generate a response to user input.
-//     * Replace this stub with your completed method.
-//     */
-//    private String getResponse(String input) {
-//        return "Duke heard: " + input;
-//    }
 }
 
