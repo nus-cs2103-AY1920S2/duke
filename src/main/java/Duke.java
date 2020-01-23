@@ -26,13 +26,14 @@ public class Duke {
                 for (Task s: tasks) {
                     System.out.println("\t" + i + "." + s.toString());
                     i++;
+
                 }
             } else if ((next.trim().split(" ")[0]).equals("done")) {
                 Integer taskNumber = Integer.valueOf((next.split(" ")[1]));
                 Task updatedTask = tasks.get(taskNumber - 1).setDone();
                 tasks.set(taskNumber - 1, updatedTask);
                 System.out.println("\tNice! I've marked this task as done:");
-                System.out.println("\t" + updatedTask);
+                System.out.println("\t\t" + updatedTask);
             } else {
                 tasks.add(new Task(next));
                 System.out.println("\tadded: " + next);
