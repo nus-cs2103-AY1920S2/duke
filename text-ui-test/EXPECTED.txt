@@ -2,47 +2,48 @@ Hello ! I'm Ashley Bot
 Oi What u want
 
 --------------------------------------------------------------
-General task added: hello
+OOPs Idk what that means :/
+ Try 'todo', 'event' or 'deadline' commands instead!
 --------------------------------------------------------------
 
 
 --------------------------------------------------------------
 Got it. I have added this task:
 [E][N] project meeting  (at: Mon 2-4pm)
-Now you have a total of 2 Tasks in your list
+Now you have a total of 1 Tasks in your list
 --------------------------------------------------------------
 
 
 --------------------------------------------------------------
 Got it. I have added this task:
 [D][N] return book  (by: Sunday)
-Now you have a total of 3 Tasks in your list
+Now you have a total of 2 Tasks in your list
 --------------------------------------------------------------
 
 
 --------------------------------------------------------------
 Got it. I have added this task:
 [D][N] do homework  (by: no idea :-p)
-Now you have a total of 4 Tasks in your list
+Now you have a total of 3 Tasks in your list
 --------------------------------------------------------------
 
 
 --------------------------------------------------------------
 Got it. I have added this task:
 [T][N] borrow book
-Now you have a total of 5 Tasks in your list
+Now you have a total of 4 Tasks in your list
 --------------------------------------------------------------
 
 
 --------------------------------------------------------------
 Nice! You have done this:
-[-][Y] hello
+[E][Y] project meeting  (at: Mon 2-4pm)
 --------------------------------------------------------------
 
 
 --------------------------------------------------------------
 Nice! You have done this:
-[D][Y] return book  (by: Sunday)
+[D][Y] do homework  (by: no idea :-p)
 --------------------------------------------------------------
 
 
