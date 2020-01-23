@@ -8,8 +8,8 @@ public class Duke {
 
     /**
      * Perform the necessary action based on the input.
-     * @param s1
-     * @param comm
+     * @param s1 String to be executed on
+     * @param comm instance of the enum class
      */
     public static void operate(String s1, DukeCommand comm) {
         comm.execute(s1);
@@ -21,6 +21,9 @@ public class Duke {
     public static void initialize() {
         commandpairing.put("list", " ");
         commandpairing.put("done", " ");
+        commandpairing.put("todo", " ");
+        commandpairing.put("event", " ");
+        commandpairing.put("deadline", " ");
     }
 
     public static void HorizontalLine() {
@@ -43,41 +46,51 @@ public class Duke {
     public static void exit(){
         HorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("");
         HorizontalLine();
     }
 
     /**
      * Find out the type of command and execute it.
-     * @param input
+     * @param input The line input by the user
      */
     public static void execcommand(String input) {
         String[] arguments = input.split(" ");
 
-        if (commandpairing.containsKey(arguments[0])) {
+        //if (commandpairing.containsKey(arguments[0])) {
             //Either list or done command
-            operate(input, DukeCommand.valueOf(arguments[0].toUpperCase()));
-        } else {
+        operate(input, DukeCommand.valueOf(arguments[0].toUpperCase()));
+        //} else {
             // Add command
-            add(input);
-        }
+        //    add(input);
+        //}
 
     }
 
     /**
-     * Adds the task into the list.
-     * @param line
+     * Adds Task (Todo, Event, Deadline) to the list.
+     * @param mytask The Task to be added
      */
-    public static void add(String line) {
+    public static void add(Task mytask) {
         HorizontalLine();
-        listOfTask[count++] = new Task(line);
-        System.out.println("added: " + line);
+        System.out.println("Got it. I've added this task:");
+        listOfTask[count++] = mytask;
+        System.out.println(mytask);
+        System.out.println("Now you have " + count + " tasks in the list.");
         HorizontalLine();
     }
-
+    /*
+    public static void addToList(Task mytask) {
+        HorizontalLine();
+        System.out.println("Got it. I've added this task:");
+        listOfTask[count++] = mytask;
+        System.out.println(mytask);
+        System.out.println("Now you have " + count + " tasks in the list.");
+        HorizontalLine();
+    }
+    */
     /**
-     * The main driver class Duke.
-     * @param args
+     * The main method of the class Duke.
+     * @param args Unused
      **/
     public static void main(String[] args) {
 

@@ -19,7 +19,7 @@ public enum DukeCommand {
         public void execute(String s1) {
             // Split the string to get the
             // index of the task to be done
-            String[] arr = s1.split(" ");
+            String[] arr = s1.split("\\s+");
             int pos = Integer.parseInt(arr[1]) - 1;
 
             Duke.HorizontalLine();
@@ -28,6 +28,41 @@ public enum DukeCommand {
             System.out.println(Duke.listOfTask[pos]);
             Duke.HorizontalLine();
         }
+    },
+    TODO {
+        @Override
+        public void execute(String s1) {
+            String[] arr = s1.split("\\s+", 2);
+            Duke.add(new Todo(s1));
+        }
+    },
+    DEADLINE {
+        @Override
+        public void execute(String s1) {
+            // Manipulating the String by separating the actual command
+            // and the word '/by' to get the description and date/time
+            int limit = s1.lastIndexOf("/by") - 1;
+            String[] arr = s1.split("\\s+", 2);
+            int dateindex = arr[1].lastIndexOf("/by");
+            String substr = arr[1].substring(dateindex);
+            String[] strarr = substr.split("\\s+", 2);
+
+            Duke.add(new Deadline(s1.substring(9, limit), strarr[1]));
+        }
+    },
+    EVENT {
+        public void execute(String s1){
+            // Manipulating the String by separating the actual command
+            // and the word '/at' to get the description and date/time
+            int limit = s1.lastIndexOf("/at") - 1;
+            String[] arr = s1.split("\\s+", 2);
+            int dateindex = arr[1].lastIndexOf("/at");
+            String substr = arr[1].substring(dateindex);
+            String[] strarr = substr.split("\\s+", 2);
+
+            Duke.add(new Event(s1.substring(6, limit), strarr[1]));
+        }
     };
+
     public abstract void execute(String s1);
 }
