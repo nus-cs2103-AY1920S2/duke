@@ -1,13 +1,13 @@
 import java.util.*;
 
 public class Duke {
-    Task[] list;
+    ArrayList<Task> list;
     int latest_index = 0;
 
     public void printList() {
 
         for (int i = 1; i < latest_index + 1; i++) {
-            System.out.println(i + ". " + list[i-1].toString());
+            System.out.println(i + ". " + list.get(i-1).toString());
         }
     }
 
@@ -16,7 +16,7 @@ public class Duke {
 
         System.out.println("Hello ! I'm Ashley Bot\nOi What u want\n");
 
-        list = new Task[100];
+        list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
@@ -43,14 +43,42 @@ public class Duke {
             } else if (str.contains("deadline")) {
                 deadline(str);
 
-            } else if (str.contains("event ")) {
+            } else if (str.contains("event")) {
                 event(str);
+
+            } else if (str.contains("delete")) {
+                delete(str);
 
             } else {
                 System.out.println("OOPs Idk what that means :/\n Try 'todo', 'event' or 'deadline' commands instead!");
 
             }
             System.out.println("--------------------------------------------------------------\n\n");
+        }
+    }
+
+    public void delete(String string) {
+        string = string.replace("delete","");
+        string = string.trim();
+        try {
+            int i = Integer.parseInt(string) - 1;
+
+            if (!list.get(i).isDone) {
+                System.out.println("I have removed an unfinished task:\n" + list.get(i).toString());
+            } else {
+                System.out.println("I have removed a finished task:\n" + list.get(i).toString());
+            }
+
+            list.remove(i);
+            latest_index--;
+
+            System.out.println("\nNow you have a total of " + latest_index + " Tasks in your list");
+
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is no such number on your List! :/");
+
+        } catch (NumberFormatException e) {
+            System.out.println("Please input a number instead!");
         }
     }
 
@@ -72,7 +100,8 @@ public class Duke {
             return;
         }
         Todo todo = new Todo(string);
-        list[latest_index++] = todo;
+        list.add(todo);
+        latest_index++;
 
         System.out.println("Got it. I have added this task:\n" + todo.toString() +
                 "\nNow you have a total of " + latest_index + " Tasks in your list");
@@ -85,17 +114,20 @@ public class Duke {
         try {
             int i = Integer.parseInt(string) - 1;
 
-            if (!list[i].isDone) {
-                list[i].isDone = true;
-                System.out.println("Nice! You have done this:\n" + list[i].toString());
+            if (!list.get(i).isDone) {
+                list.get(i).isDone = true;
+                System.out.println("Nice! You have done this:\n" + list.get(i).toString());
             } else {
-                System.out.println("You have already done\n" + list[i].toString() + "\nNo need to do it again!");
+                System.out.println("You have already done\n" + list.get(i).toString() + "\nNo need to do it again!");
             }
-        } catch (NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no such number on your List! :/");
 
         } catch (NumberFormatException e) {
-            System.out.println("Please input a number instead!");
+            System.out.println("Please input a number insead!");
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -120,13 +152,17 @@ public class Duke {
             }
 
             Deadline deadline = new Deadline(strings[0], strings[1]);
-            list[latest_index++] = deadline;
+            list.add(deadline);
+            latest_index++;
 
             System.out.println("Got it. I have added this task:\n" + deadline.toString() +
                     "\nNow you have a total of " + latest_index + " Tasks in your list");
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please give me an approximate timing using '/by'!");
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -151,7 +187,8 @@ public class Duke {
             }
 
             Event event = new Event(strings[0],strings[1]);
-            list[latest_index++] = event;
+            list.add(event);
+            latest_index++;
 
             System.out.println("Got it. I have added this task:\n" + event.toString() +
                     "\nNow you have a total of " + latest_index + " Tasks in your list");
@@ -159,6 +196,8 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please give me an approximate timing using '/at'!");
 
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
