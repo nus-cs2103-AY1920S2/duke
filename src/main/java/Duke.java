@@ -13,7 +13,7 @@ public class Duke {
                 "    /=_.-~-~-~-._=\\      .-.  _\n" +
                 "   :    _     _    :     | | / )\n" +
                 "  /    (o)   (o)    \\    | |/ /\n" +
-                "  |  _ _ _ _ _ _ _  |   _|__ /_\n" +
+                "  |   _ _ _ _ _ _   |   _|__ /_\n" +
                 "  |  \\           /  |  / __)-' )\n" +
                 "   \\  '.       .'  /   \\  `(.-')\n" +
                 "    '.  `'---'`  .'     > ._>-'\n" +
@@ -30,6 +30,17 @@ public class Duke {
                 "   \\    '_ _ _'    /\n" +
                 "    '.           .'\n" +
                 "      '-._____.-'";
+        String deletedMessage = "Garbage cleared successfully." +
+                "\n\n      _.-'''''-._  \n" +
+                "    /=_.-~-~-~-._=\\\n" +
+                "   :    _     _    :\n" +
+                "  /    (o)   (o)    \\\n" +
+                "  |                 |\n" +
+                "  |  \\           /  |\n" +
+                "   \\  '.       .'  /\n" +
+                "    '.  `'---'`  .'\n" +
+                "      '-._____.-'\n\n" +
+                "Take one last look at what I deleted:";
 
         System.out.println(greetings);
         System.out.println(load);
@@ -57,9 +68,9 @@ public class Duke {
             if (next == Instruction.MARK_DONE) {
                 int index;
                 try {
-                    index = getDoneIndex(command);
+                    index = getListIndex(command, Command.DONE);
                 } catch (InadequateArgumentsException |
-                    NumberFormatException | TooManyArgumentsException e
+                        NumberFormatException | TooManyArgumentsException e
                 ) {
                     System.err.println(e.getMessage());
                     System.err.println(errorMessage);
@@ -68,6 +79,21 @@ public class Duke {
                 store.markAsDone(index);
                 System.out.println(doneMessage);
                 System.out.println(store.retrieve(index));
+            } else if (next == Instruction.DELETE) {
+                int index;
+                try {
+                    index = getListIndex(command, Command.DELETE);
+                } catch (InadequateArgumentsException |
+                        NumberFormatException | TooManyArgumentsException e
+                ) {
+                    System.err.println(e.getMessage());
+                    System.err.println(errorMessage);
+                    continue;
+                }
+                String toBeDeleted = store.retrieve(index);
+                store.delete(index);
+                System.out.println(deletedMessage);
+                System.out.println(toBeDeleted);
             } else if (next == Instruction.READ_STORAGE) {
                 store.readStorage();
             } else if (next == Instruction.STORE_DDL) {
@@ -141,16 +167,20 @@ public class Duke {
     }
 
     /**
-     * Gets the index of a "done" command, given the
-     * raw String input of the command
+     * Gets the index of a Storage modifying command, given the
+     * raw String input of the command (e.g. "done" and "delete").
+     * Such a command is composed of one word and one number,
+     * separated by a space
      *
      * @param doneCommand The original command input
+     * @param com The Command action to be executed
+     *
      * @return An integer representing the index in the
      *         list to set as "done"
      * @throws InadequateArgumentsException
-     *         When no numbers found after "done"
+     *         When no numbers found after the command word
      */
-    private static int getDoneIndex(String doneCommand)
+    private static int getListIndex(String doneCommand, Command com)
         throws InadequateArgumentsException, NumberFormatException,
             TooManyArgumentsException
     {
@@ -158,9 +188,9 @@ public class Duke {
         if (words.length == 2) {
             return Integer.parseInt(words[1]);
         } else if (words.length < 2) {
-            throw new InadequateArgumentsException(Command.DONE.word);
+            throw new InadequateArgumentsException(com.word);
         } else {
-            throw new TooManyArgumentsException(Command.DONE.word);
+            throw new TooManyArgumentsException(com.word);
         }
     }
 }

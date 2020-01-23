@@ -61,4 +61,15 @@ public class Storage {
     public int getNumTasks() {
         return this.storage.size();
     }
+
+    /**
+     * Removes an entry from the stored
+     * items (at index i)
+     *
+     * @param i Index of the item as it appears
+     *          in the list
+     */
+    public void delete(int i) {
+        this.storage.remove(i - 1);
+    }
 }

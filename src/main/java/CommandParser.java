@@ -18,6 +18,8 @@ public class CommandParser {
         String firstWord = command.split("\\s+", 2)[0];
         if (firstWord.equals(Command.BYE.word)) {
             return Instruction.TERMINATE;
+        } else if (firstWord.equals(Command.DELETE.word)) {
+            return Instruction.DELETE;
         } else if (firstWord.equals(Command.DONE.word)) {
             return Instruction.MARK_DONE;
         } else if (firstWord.equals(Command.LIST.word)) {
