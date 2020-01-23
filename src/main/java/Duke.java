@@ -16,8 +16,8 @@ public class Duke {
             } else if (command.equals("done")) {
                 markAsDone();
             } else {
-                command += sc.nextLine();
-                addTask(command);
+                String details = sc.nextLine();
+                addTask(command, details);
             }
             System.out.print(user);
             command = sc.next();
@@ -40,11 +40,6 @@ public class Duke {
         }
     }
 
-    public static void addTask(String command) {
-        Task task = new Task(command);
-        list.add(task);
-        System.out.println(machine + task + " is added");
-    }
     public static void markAsDone() {
         int i = sc.nextInt();
         Task task = list.get(i-1);
@@ -53,4 +48,44 @@ public class Duke {
         System.out.println("      " + i + ". " + task);
     }
 
+    public static void addTask(String command, String details) {
+        String[] arr = new String[2];
+        switch (command) {
+            case "todo":
+                addTodo(details);
+                break;
+            case "event":
+                arr = details.split("/at");
+                addEvent(arr[0], arr[1]);
+                break;
+            case "deadline":
+                arr = details.split("/by");
+                addDeadline(arr[0], arr[1]);
+                break;
+        }
+    }
+
+    public static void addTodo(String details) {
+        Task task = new Todo(details);
+        list.add(task);
+        System.out.println(machine + "Dude now you have even more things to do:");
+        System.out.println("      " + task);
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+    }
+
+    public static void addDeadline(String description, String by) {
+        Task task = new Deadline(description, by);
+        list.add(task);
+        System.out.println(machine + "That's strange dude your pile of deadlines suddenly grew:");
+        System.out.println("      " + task);
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+    }
+
+    public static void addEvent(String description, String at) {
+        Task task = new Event(description, at);
+        list.add(task);
+        System.out.println(machine + "Woohoo what an eventful life:");
+        System.out.println("      " + task);
+        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+    }
 }
