@@ -10,7 +10,7 @@ public class TaskList {
     public String listTasks() {
         String formattedString = "";
         for (int i = 0; i < this.taskList.size(); i++) {
-            formattedString += (i + 1) + ". " + this.taskList.get(i).toString() + "\n    ";
+            formattedString += (i + 1) + ". " + this.taskList.get(i).getDescription() + "\n    ";
         }
         return formattedString.trim();
     }

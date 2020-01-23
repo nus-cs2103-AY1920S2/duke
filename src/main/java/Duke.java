@@ -25,7 +25,7 @@ public class Duke {
             } else {
                 Task task = new Task(token);
                 taskList.addTask(task);
-                this.print("added: " + task.toString());
+                this.print("added: " + task.getDescription());
             }
         }
         sc.close();
