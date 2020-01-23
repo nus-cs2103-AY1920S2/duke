@@ -6,8 +6,7 @@ import java.util.ArrayList;
  * as done
  */
 public class Storage {
-    private final ArrayList<String> storage = new ArrayList<String>();
-    private final ArrayList<Boolean> done = new ArrayList<Boolean>();
+    private final ArrayList<Task> storage = new ArrayList<Task>();
 
     /**
      * Adds a String to the stored items
@@ -15,8 +14,7 @@ public class Storage {
      * @param toStore The String to be stored
      */
     public void store(String toStore) {
-        this.storage.add(toStore);
-        this.done.add(false);
+        this.storage.add(new Task(toStore));
     }
 
     /**
@@ -38,7 +36,7 @@ public class Storage {
      *              as it appears in the list
      */
     public void markAsDone(int index) {
-        this.done.set(index - 1, true);
+        this.storage.get(index - 1).markAsDone();
     }
 
     /**
@@ -66,7 +64,7 @@ public class Storage {
      *         or a cross character
      */
     private String doneGet(int index) {
-        if (this.done.get(index)) {
+        if (this.storage.get(index).isDone()) {
             return "[✓]";
         } else {
             return "[✗]";
