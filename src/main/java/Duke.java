@@ -24,14 +24,22 @@ public class Duke  {
                     int taskNo = Integer.parseInt(userInput[1]);
                     this.taskStorage.get(taskNo - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done:\n  " + this.taskStorage.get(taskNo - 1).toString());
-                } else if (action.equals("list")) {
+                }
+                else if (action.equals("delete")){
+                    int taskNo = Integer.parseInt(userInput[1]) - 1;
+                    Task removedTask = this.taskStorage.get(taskNo);
+                    this.taskStorage.remove(taskNo);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(removedTask.toString() + "\nNow you have " + this.taskStorage.size() + " tasks in the list");
+                }
+                else if (action.equals("list")) {
                     this.printText();
                 } else {
                     String description = Duke.arrayToString(userInput);
                     if (action.equals("todo")) {
-                        if (userInput.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                        }
+                           if (userInput.length == 1) {
+                               throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                           }
                             System.out.println("Got it. I've added this task:");
                             this.taskStorage.add(new Task(description));
                     }
@@ -52,7 +60,6 @@ public class Duke  {
                     } else {
                         throw new DukeException("  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-
                     int numbOfTask = this.taskStorage.size();
                     System.out.println(this.taskStorage.get(numbOfTask - 1).toString());
                     System.out.println("Now you have " + numbOfTask + " tasks in the list.");
@@ -60,7 +67,6 @@ public class Duke  {
                 userInput = sc.nextLine().split(" ");
                 action = userInput[0];
             }
-
         System.out.println("Bye. Hope to see you again soon!");
 
     }
