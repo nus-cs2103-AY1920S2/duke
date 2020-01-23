@@ -3,7 +3,7 @@ public class Event extends AbstractTask {
 
     public Event(String taskName, String date){
         super(taskName);
-        this.date = this.date = date.replaceFirst(" ", ": ");
+        this.date = date.replaceFirst(" ", ": ");
     }
 
     @Override
