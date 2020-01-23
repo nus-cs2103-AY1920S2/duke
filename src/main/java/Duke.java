@@ -21,6 +21,7 @@ public class Duke {
         input = scanner.nextLine();
 
         while (!input.equals("bye")) {
+            String[] split_input = input.split(" ");
             if (input.equals("list")) {
                 System.out.println(separator);
                 for (int i = 0; i < index; i++) {
@@ -28,11 +29,50 @@ public class Duke {
                 }
                 System.out.println(separator);
 
-            } else if (input.split(" ")[0].equals("done")) {
+            } else if (split_input[0].equals("done")) {
+                System.out.println(separator);
                 System.out.println("Nice! I've marked this task as done: ");
                 int num = Integer.parseInt(input.split(" ")[1]) - 1;
                 task[num].markDone();
                 System.out.println("  " + task[num]);
+                System.out.println(separator);
+
+            } else if (split_input[0].equals("todo")) {
+                task[index] = new Todo(input.split(" ", 2)[1]);
+                index++;
+
+                System.out.println(separator);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(task[index-1]);
+                System.out.printf("Now you have %d tasks in the list.\n", index);
+                System.out.println(separator);
+
+            } else if (split_input[0].equals("deadline")) {
+                String[] ori = input.split(" ", 2)[1].split("/by ");
+                String desc = ori[0];
+                String by = ori[1];
+                task[index] = new Deadline(desc, by);
+                index++;
+
+                System.out.println(separator);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(task[index-1]);
+                System.out.printf("Now you have %d tasks in the list.\n", index);
+                System.out.println(separator);
+
+            } else if (split_input[0].equals("event")) {
+                String[] ori = input.split(" ", 2)[1].split("/at ");
+                String desc = ori[0];
+                String at = ori[1];
+                task[index] = new Event(desc, at);
+                index++;
+
+                System.out.println(separator);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(task[index-1]);
+                System.out.printf("Now you have %d tasks in the list.\n", index);
+                System.out.println(separator);
+
             } else {
                 task[index] = new Task(input);
 
