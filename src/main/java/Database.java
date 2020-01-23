@@ -22,14 +22,19 @@ public class Database {
         int indexForSeparator;
 
         if (data.startsWith("todo")) {
-            String info = data.substring(4).stripLeading();
-            if (info.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            String info;
+            if (!(data.charAt(4) == ' ')) {
+                throw new DukeException("Please indicate in this format: todo [description]");
             }
-            records.add(new Todo(data.substring(5)));
+
+            info = data.substring(5);
+            if (info.equals("")) {
+                throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+            }
+            records.add(new Todo(info));
         } else if (data.startsWith("deadline")) {
             String due;
-            if(data.contains("/by")) {
+            if(data.contains(" /by ")) {
                 try {
                     indexForSeparator = data.indexOf('/');
                 } catch (IndexOutOfBoundsException e) {
@@ -43,20 +48,20 @@ public class Database {
                 throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
             }
             if (description.strip().equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             }
             try {
                 due = data.substring(indexForSeparator + 3);
             } catch(IndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The due date of a deadline cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The due date of a deadline cannot be empty.");
             }
             if (due.strip().equals("")) {
-                throw new DukeException("☹ OOPS!!! The due date of a deadline cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The due date of a deadline cannot be empty.");
             }
             records.add(new Deadline(description, due));
         } else if (data.startsWith("event")) {
             String duration;
-            if(data.contains("/at")) {
+            if(data.contains(" /at ")) {
                 try {
                     indexForSeparator = data.indexOf('/');
                 } catch(IndexOutOfBoundsException e) {
@@ -71,19 +76,19 @@ public class Database {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
             if (description.strip().equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a event cannot be empty.");
             }
             try {
                 duration = data.substring(indexForSeparator + 4);
             } catch(IndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The duration of a events cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The duration of a events cannot be empty.");
             }
             if (duration.strip().equals("")) {
-                throw new DukeException("☹ OOPS!!! The duration of a event cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The duration of a event cannot be empty.");
             }
             records.add(new Event(description, duration));
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         amtOfTask += 1;
     }
