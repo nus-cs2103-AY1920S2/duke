@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Duke {
     public static void main(String[] args) {
@@ -27,7 +29,14 @@ public class Duke {
     }
 
     private void process(String speech) {
-        say(speech);
+        String[] words = speech.split(" ");
+        String firstWord = words[0];
+
+        switch (firstWord) {
+            default:
+                say("Added: " + speech);
+                break;
+        }
     }
 
     private void bye() {
