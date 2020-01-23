@@ -47,7 +47,7 @@ public class Duke {
                         if (taskArray[i] == null) {
                             break;
                         }
-                        listOverView = listOverView + taskArray[i] + "\n";
+                        listOverView = listOverView + Integer.toString(i + 1) + ". " + taskArray[i] + "\n";
                     }
                     listOverView = listOverView + line;
                     System.out.println(listOverView);
