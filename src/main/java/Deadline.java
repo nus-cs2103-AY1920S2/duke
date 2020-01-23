@@ -1,7 +1,7 @@
 public class Deadline extends Task {
 
-    public Deadline(int index, String date, String taskDescription) {
-        super(index, date, taskDescription);
+    public Deadline(String date, String taskDescription) {
+        super(date, taskDescription);
     }
 
     @Override

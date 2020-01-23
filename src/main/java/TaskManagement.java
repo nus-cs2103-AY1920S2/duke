@@ -20,15 +20,15 @@ public class TaskManagement {
         System.out.println("Got it. I've added this task:");
         switch (type) {
             case ToDo:
-                ToDo task1 = new ToDo(Task.totalTask++, date, taskDescription);
+                ToDo task1 = new ToDo(date, taskDescription);
                 taskArr.add(task1);
                 return task1;
             case Deadline:
-                Deadline task2 = new Deadline(Task.totalTask++, date, taskDescription);
+                Deadline task2 = new Deadline(date, taskDescription);
                 taskArr.add(task2);
                 return task2;
             case Event:
-                Event task3 = new Event(Task.totalTask++, date, taskDescription);
+                Event task3 = new Event(date, taskDescription);
                 taskArr.add(task3);
                 return task3;
             default:
@@ -37,19 +37,29 @@ public class TaskManagement {
         return null;
     }
 
+    public Task deleteTask(int index) {
+
+        Task task = taskArr.remove(index - 1);
+        System.out.println("Noted. I've removed this task:" );
+        return task;
+
+    }
+
     public String reportTotal() {
-        return "Now you have " + Task.totalTask + " tasks in the list";
+        return "Now you have " + taskArr.size() + " tasks in the list";
     }
 
     public Task getTask(int index) {
         return taskArr.get(index - 1);
     }
 
-    public void markDone(Task task) {
+    public Task markDone(Task task) {
+
         task.changeStatus(true);
-        String action = "Nice! I've marked this task as done:\n";
-        String taskDescription = task.toString();
-        System.out.println(action + taskDescription);
+        String action = "Nice! I've marked this task as done:";
+        System.out.println(action);
+        return task;
+
     }
 
 }

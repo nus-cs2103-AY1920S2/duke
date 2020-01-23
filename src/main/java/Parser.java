@@ -15,19 +15,29 @@ public class Parser {
         String[] inputArr = new String[3];
 
        if(input.equals("list") || input.equals("bye")) {
+
            inputArr[0] = input;
            inputArr[1] = "";
            inputArr[2] = "";
-           return inputArr;
-       } else if (input.split(" ")[0].equals("done")) {
 
-           if(input.length() < 5) {
+           return inputArr;
+
+       } else if (input.startsWith("done") || input.startsWith("delete")) {
+
+         String[] splitInput = input.split(" ");
+
+           if( splitInput.length < 2) {
+
                inputArr[0] = "MissingTaskNumber";
                inputArr[1] = "";
                inputArr[2] = "";
+
                return inputArr;
+
            } else {
-               return input.split(" ");
+
+               return splitInput;
+
            }
 
        }

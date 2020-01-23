@@ -2,9 +2,6 @@ import java.util.ArrayList;
 
 public class Task {
 
-    static int totalTask = 0;
-
-    protected int index;
     protected String taskDescription;
     protected String date;
     protected boolean isDone;
@@ -17,11 +14,12 @@ public class Task {
         Y, N
     }
 
-    public Task(int index, String date, String taskDescription) {
-        this.index = index;
+    public Task(String date, String taskDescription) {
+
         this.taskDescription = taskDescription;
         this.date = date;
         this.isDone = false;
+
     }
 
     public void changeStatus(boolean newStatus) {

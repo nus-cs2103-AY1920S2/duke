@@ -86,7 +86,13 @@ public class Duke {
 
                     Task t = manager.getTask(Integer.parseInt(taskDescriptionArr[1]));
                     System.out.println(header);
-                    manager.markDone(t);
+                    System.out.println(manager.markDone(t));
+                    System.out.println(footer);
+
+                } else if (taskDescriptionArr[0].equals("delete")) {
+
+                    System.out.println(header);
+                    System.out.println(manager.deleteTask(Integer.parseInt(taskDescriptionArr[1])));
                     System.out.println(footer);
 
                 } else {

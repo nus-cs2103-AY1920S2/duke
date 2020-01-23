@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.23">
+<file name="/Users/xpxp/Desktop/duke/src/main/java/Duke.java">
+<error line="8" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="14" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/Parser.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/Task.java">
+<error line="12" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="18" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="31" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="44" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="59" severity="error" message="Unicode escape(s) usage should be avoided." source="com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck"/>
+<error line="61" severity="error" message="Unicode escape(s) usage should be avoided." source="com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck"/>
+</file>
+</checkstyle>
