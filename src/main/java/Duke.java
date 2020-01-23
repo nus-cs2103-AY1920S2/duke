@@ -11,39 +11,89 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.contains("done")) {
                 String[] strArr = command.split(" ");
-                Task currTask = arr.get(Integer.parseInt(strArr[1]) - 1);
-                currTask.setDone();
-                System.out.println("Okay noted! You have completed the below task:");
-                System.out.println(currTask);
+                try {
+                    if (strArr.length == 1) {
+                        throw new DukeException(7);
+                    }
+                    Task currTask = arr.get(Integer.parseInt(strArr[1]) - 1);
+                    currTask.setDone();
+                    System.out.println("Okay noted! You have completed the below task:");
+                    System.out.println(currTask);
+                } catch (DukeException ex) {
+                    System.out.println(ex.toString());
+                }
             } else if (command.contains("todo")) {
-                String[] cmd = command.split(" ", 2);
-                Todo newTask = new Todo(cmd[1]);
-                arr.add(newTask);
-                System.out.println("Okay! I have taken note of the following:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                String[] strArr = command.split(" ", 2);
+                try {
+                    if (strArr.length == 1) {
+                        throw new DukeException(1);
+                    }
+                    Todo newTask = new Todo(strArr[1]);
+                    arr.add(newTask);
+                    System.out.println("Okay! I have taken note of the following:");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                } catch (DukeException ex) {
+                    System.out.println(ex.toString());
+                }
             } else if (command.contains("deadline")) {
-                String[] strArr = command.split("/", 2);
-                String deadline = strArr[1].split(" ", 2)[1];
-                command = strArr[0].split(" ", 2)[1];
-                Deadline newTask = new Deadline(command, deadline);
-                arr.add(newTask);
-                System.out.println("Okay! I have taken note of the following:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                String[] strArr = command.split(" ", 2);
+                try {
+                    if (strArr.length == 1) {
+                        throw new DukeException(2);
+                    }
+                    String[] cmdArr = strArr[1].split("/", 2);
+                    try {
+                        if (cmdArr.length == 1) {
+                            throw new DukeException(3);
+                        }
+                        command = cmdArr[0];
+                        String deadline = cmdArr[1].split(" ", 2)[1];
+                        Deadline newTask = new Deadline(command, deadline);
+                        arr.add(newTask);
+                        System.out.println("Okay! I have taken note of the following:");
+                        System.out.println(newTask);
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    } catch (DukeException ex) {
+                        System.out.println(ex.toString());
+                    }
+                } catch (DukeException ex) {
+                    System.out.println(ex.toString());
+                }
             } else if (command.contains("event")) {
-                String[] strArr = command.split("/", 2);
-                String timing = strArr[1].split(" ", 2)[1];
-                command = strArr[0].split(" ", 2)[1];
-                Event newTask = new Event(command, timing);
-                arr.add(newTask);
-                System.out.println("Okay! I have taken note of the following:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                String[] strArr = command.split(" ", 2);
+                try {
+                    if (strArr.length == 1) {
+                        throw new DukeException(4);
+                    }
+                    String[] cmdArr = strArr[1].split("/", 2);
+                    try {
+                        if (cmdArr.length == 1) {
+                            throw new DukeException(5);
+                        }
+                        command = cmdArr[0];
+                        String timing = cmdArr[1].split(" ", 2)[1];
+                        Event newTask = new Event(command, timing);
+                        arr.add(newTask);
+                        System.out.println("Okay! I have taken note of the following:");
+                        System.out.println(newTask);
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    } catch (DukeException ex) {
+                        System.out.println(ex.toString());
+                    }
+                } catch (DukeException ex) {
+                    System.out.println(ex.toString());
+                }
             } else if (command.equals("list")) {
                 System.out.println("The below is what you have told me so far. Have you completed them?");
                 for (Task task : arr) {
                     System.out.println(task);
+                }
+            } else {
+                try {
+                    throw new DukeException(6);
+                } catch (DukeException ex) {
+                    System.out.println(ex.toString());
                 }
             }
             if (sc.hasNextLine()) {
