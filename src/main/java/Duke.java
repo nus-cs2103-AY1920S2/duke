@@ -21,6 +21,7 @@ public class Duke {
         String awaitingMessage = "\n> ENTER your input:";
         String storeMessage = "I have stored this text in my memory. Use" +
                 " \"list\" to retrieve it!";
+        String doneMessage = "You have completed: ";
 
         System.out.println(greetings);
         System.out.println(load);
@@ -37,7 +38,12 @@ public class Duke {
             String command = input.nextLine();
             // parse the command
             Instruction next = parser.parse(command);
-            if (next == Instruction.READ_STORAGE) {
+            if (next == Instruction.MARK_DONE) {
+                int index = Integer.parseInt(command.split("\\s+")[1]);
+                store.markAsDone(index);
+                System.out.println(doneMessage);
+                System.out.println(store.retrieve(index));
+            } else if (next == Instruction.READ_STORAGE) {
                 store.readStorage();
             } else if (next == Instruction.STORE) {
                 store.store(command);

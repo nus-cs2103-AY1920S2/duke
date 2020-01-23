@@ -12,17 +12,18 @@ public class CommandParser {
      *
      * @param command The command, as a String
      * @return Instruction to the bot, telling
-     *      it what to do next
+     *         it what to do next
      */
     public Instruction parse(String command) {
-        switch (command) {
-            case "bye":
-                return Instruction.TERMINATE;
-            case "list":
-                return Instruction.READ_STORAGE;
-            default:
-                // store the item
-                return Instruction.STORE;
+        if (command.equals("bye")) {
+            return Instruction.TERMINATE;
+        } else if (command.startsWith("done ")) {
+            return Instruction.MARK_DONE;
+        } else if (command.equals("list")) {
+            return Instruction.READ_STORAGE;
+        } else {
+            // store the item
+            return Instruction.STORE;
         }
     }
 
