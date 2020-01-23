@@ -37,16 +37,17 @@ public abstract class Task {
 
 	public static TaskType getType(String commandText) {
 		String[] tokens = commandText.split(" ");
+		System.out.println("length is " + tokens.length);	
 
-		if (tokens.length == 1 && tokens[0].equals("todo")) {
+		if (tokens.length > 2 && tokens[0].equals("todo")) {
 			return TaskType.TODO;
 		}
 
-		if (tokens.length == 1 && tokens[0].equals("deadline")) {
+		if (tokens.length > 2 && tokens[0].equals("deadline")) {
 			return TaskType.DEADLINE;
 		}
 
-		if (tokens.length == 1 && tokens[0].equals("event")) {
+		if (tokens.length > 2 && tokens[0].equals("event")) {
 			return TaskType.EVENT;
 		}
 

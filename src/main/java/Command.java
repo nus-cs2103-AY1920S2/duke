@@ -7,6 +7,22 @@ public class Command {
 		tokens = command.split(" ");
 	}
 
+	private boolean isAddCommand() {
+		if (tokens.length < 3){
+			return false;
+		}
+		if (tokens[0].equals("event")) {
+			return true;
+		}
+		if (tokens[0].equals("todo")) {
+			return true;
+		}
+		if (tokens[0].equals("deadline")) {
+			return true;
+		}
+		return false;
+	}
+
 	public CommandType getType() {
 		if (tokens.length == 1 && tokens[0].equals("bye")) {
 			return CommandType.BYE;
@@ -20,6 +36,9 @@ public class Command {
 			return CommandType.DONE;
 		}
 
-		return CommandType.ADD;
+		if (this.isAddCommand()) {
+			return CommandType.ADD;
+		}
+		return CommandType.UNDEFINED;
 	}
 }

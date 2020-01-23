@@ -3,5 +3,6 @@ public enum CommandType {
 	DONE,
 	ADD, 
 	LIST,
-	NONE
+	DELETE,
+	UNDEFINED
 }

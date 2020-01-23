@@ -58,20 +58,27 @@ public class Duke {
 					break;
 
 				case ADD:
-					Function<String,Task> getTask = (String text) -> {
+					Function<String, Optional<Task>> getTask = (String text) -> {
 						TaskType taskType = Task.getType(text);
 						switch (taskType) {
 							case TODO:
-								return new ToDo(text);
+								return Optional.of(new ToDo(text));
 							case EVENT:
-								return new Event(text);
+								return Optional.of(new Event(text));
+							case DEADLINE:
+								return Optional.of(new Deadline(text));
 							default:
-								return new Deadline(text);
+								System.out.println("Adding command is wrong!");
+								return Optional.empty();
 						}
 					};
-					Task currentTask = getTask.apply(commandText);
-					storage.addAction(currentTask);
-					Interpreter.printAdd(currentTask, storage.getNum());
+
+					Optional<Task> currentTask = getTask.apply(commandText);
+					if (currentTask.isEmpty()) {
+						break;
+					}
+					storage.addAction(currentTask.get());
+					Interpreter.printAdd(currentTask.get(), storage.getNum());
 					break;
 
 				case DONE: 
@@ -80,6 +87,8 @@ public class Duke {
 						storage.markAsDone(indexes.get());
 					}
 					break;
+				default:
+					System.out.println("I cannot understand you!");
 			}
 		}
 	}
