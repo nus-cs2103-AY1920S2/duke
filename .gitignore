@@ -20,3 +20,5 @@ src/main/java/e0148811/duke/Todo.class
 text-ui-test/EXPECTED.txt
 text-ui-test/input.txt
 text-ui-test/runtest.bat
+src/main/java/e0148811/duke/DukeException.class
+test/DukeTest.java
