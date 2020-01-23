@@ -21,6 +21,9 @@ public class Duke {
             handleDone(keywords[1]);
             break;
 
+          case "delete" :
+            handleDelete(keywords[1]);
+            break;
           case "todo":
             if (keywords.length == 1) throw new EmptyDescriptionException("Todo");
             handleTodo(keywords[1]);
@@ -73,6 +76,21 @@ public class Duke {
     }
     System.out.println("    Nice! I've marked this task as done:");
     System.out.println("    " + Task.tasks.get(index));
+  }
+
+  public static void handleDelete(String keyword) throws InvalidIndexException {
+    int index = 0;
+    Task delete = null;
+    try {
+      index = Integer.parseInt(keyword) - 1;
+      delete = Task.tasks.get(index);
+      Task.tasks.remove(delete);
+    } catch (Exception e) {
+      throw new InvalidIndexException(keyword);
+    }
+    System.out.println("    Nice! I've deleted this task:");
+    System.out.println("    " + delete);
+    System.out.println("    Now you have " + Task.tasks.size() + " tasks in the list.");
   }
 
   public static void handleEvent(String desc) throws MissingTimeException {

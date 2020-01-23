@@ -82,5 +82,19 @@ What tasks do you have dude?
     4. [D][✓] do homework (by: no idea :-p)
     -----
     -----
+    Nice! I've deleted this task:
+    [T][✗] borrow book
+    Now you have 3 tasks in the list.
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [D][✓] return book (by: Sunday)
+    2. [E][✗] project meeting (at: Mon 2-4pm)
+    3. [D][✓] do homework (by: no idea :-p)
+    -----
+    -----
+    InvalidIndexException: 4 is an invalid index!
+    -----
+    -----
     Bye bye friend!
     -----
