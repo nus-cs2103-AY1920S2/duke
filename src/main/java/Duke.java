@@ -31,66 +31,80 @@ public class Duke {
                 System.out.println(arr.get(doneTask - 1).status + " " + arr.get(doneTask - 1).getDescription());
             }
             else if (userInput.split("\\s")[0].equals("todo")) {
-                String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
-                String taskDescription = "";
-                for (int i = 0; i < taskRequest.length; i++) {
-                    if (i == 0) {
-                        taskDescription += taskRequest[i];
+                if (userInput.split("\\s").length == 1) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                else {
+                    String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
+                    String taskDescription = "";
+                    for (int i = 0; i < taskRequest.length; i++) {
+                        if (i == 0) {
+                            taskDescription += taskRequest[i];
+                        } else {
+                            taskDescription += " " + taskRequest[i];
+                        }
                     }
-                    else {
-                        taskDescription += " " + taskRequest[i];
+                    Task curr = new Task("todo", taskDescription);
+                    arr.add(curr);
+                    if (!userInput.equals("bye")) {
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
                     }
                 }
-                Task curr = new Task("todo", taskDescription);
-                arr.add(curr);
-                if (!userInput.equals("bye")) {
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                }
-
             }
             else if (userInput.split("\\s")[0].equals("deadline")) {
-                String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
-                String taskDescriptionDate = "";
-                for (int i = 0; i < taskRequest.length; i++) {
-                    if (i == 0) {
-                        taskDescriptionDate += taskRequest[i];
-                    }
-                    else {
-                        taskDescriptionDate += " " + taskRequest[i];
-                    }
+                if (userInput.split("\\s").length == 1) {
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
-                String taskDescription = taskDescriptionDate.split("/")[0];
-                Task curr = new Task("deadline", taskDescription);
-                curr.addDate(taskDescriptionDate.split("/")[1]);
-                arr.add(curr);
-                if (!userInput.equals("bye")) {
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                else {
+                    String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
+                    String taskDescriptionDate = "";
+                    for (int i = 0; i < taskRequest.length; i++) {
+                        if (i == 0) {
+                            taskDescriptionDate += taskRequest[i];
+                        } else {
+                            taskDescriptionDate += " " + taskRequest[i];
+                        }
+                    }
+                    String taskDescription = taskDescriptionDate.split("/")[0];
+                    Task curr = new Task("deadline", taskDescription);
+                    curr.addDate(taskDescriptionDate.split("/")[1]);
+                    arr.add(curr);
+                    if (!userInput.equals("bye")) {
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    }
                 }
             }
             else if (userInput.split("\\s")[0].equals("event")) {
-                String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
-                String taskDescriptionDate = "";
-                for (int i = 0; i < taskRequest.length; i++) {
-                    if (i == 0) {
-                        taskDescriptionDate += taskRequest[i];
+                if (userInput.split("\\s").length == 1) {
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                }
+                else {
+                    String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
+                    String taskDescriptionDate = "";
+                    for (int i = 0; i < taskRequest.length; i++) {
+                        if (i == 0) {
+                            taskDescriptionDate += taskRequest[i];
+                        } else {
+                            taskDescriptionDate += " " + taskRequest[i];
+                        }
                     }
-                    else {
-                        taskDescriptionDate += " " + taskRequest[i];
+                    String taskDescription = taskDescriptionDate.split("/")[0];
+                    Task curr = new Task("event", taskDescription);
+                    curr.addDate(taskDescriptionDate.split("/")[1]);
+                    arr.add(curr);
+                    if (!userInput.equals("bye")) {
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
                     }
                 }
-                String taskDescription = taskDescriptionDate.split("/")[0];
-                Task curr = new Task("event", taskDescription);
-                curr.addDate(taskDescriptionDate.split("/")[1]);
-                arr.add(curr);
-                if (!userInput.equals("bye")) {
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                }
+            }
+            else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
 
