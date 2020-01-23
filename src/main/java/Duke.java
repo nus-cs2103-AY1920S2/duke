@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.ArrayList;
 
 public class Duke extends Application {
 
@@ -18,6 +19,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private ArrayList<String> listing = new ArrayList<>();
 
     //private Image user = new Image(this.getClass().getResourceAsStream("/src/main/resources/images/DaUser.png"));
 //    private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.png"));
@@ -105,8 +107,17 @@ public class Duke extends Application {
         if (curText.equals("bye")) {
             curText = "Bye. Hope to see you again soon!";
             needExit = 1;
+        } else if (curText.equals("list")) {
+            curText = "";
+            for (int i = 0; i < listing.size(); i++) {
+                curText += (i + 1);
+                curText += ". " + listing.get(i) + '\n';
+            }
+        } else {
+            listing.add(curText);
+            curText = "added: " + curText;
         }
-        dialogContainer.getChildren().add(getDialogLabel("\t" + curText));
+        dialogContainer.getChildren().add(getDialogLabel(curText));
         userInput.clear();
         return needExit;
     }
