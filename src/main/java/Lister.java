@@ -14,32 +14,55 @@ public class Lister {
                 System.out.println((i + 1) + "." + store.get(i).toString());
             }
         } else {
-            int x = command.indexOf(' ');
-            switch (command.substring(0, x)) {
-                case "done":
-                    int y = Integer.valueOf(command.substring(x + 1)) - 1;
-                    store.get(y).markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + store.get(y).toString());
-                    break;
-                case "deadline":
-                    int z = command.indexOf('/');
-                    Task newDeadline = new Deadline(command.substring(x + 1, z - 1), command.substring(z+4));
-                    store.add(newDeadline);
-                    printTask(newDeadline);
-                    break;
-                case "event":
-                    int a = command.indexOf('/');
-                    Task newEvent = new Event(command.substring(x + 1, a - 1), command.substring(a+4));
-                    store.add(newEvent);
-                    printTask(newEvent);
-                    break;
+            try {
+                int x = getIndex(command);
+                switch (command.substring(0, x)) {
+                    case "done":
+                        int y = Integer.valueOf(command.substring(x + 1)) - 1;
+                        store.get(y).markAsDone();
+                        System.out.println("Nice! I've marked this task as done:\n" + store.get(y).toString());
+                        break;
+                    case "deadline":
+                        int z = command.indexOf('/');
+                        Task newDeadline = new Deadline(command.substring(x + 1, z - 1), command.substring(z + 4));
+                        store.add(newDeadline);
+                        printTask(newDeadline);
+                        break;
+                    case "event":
+                        int a = command.indexOf('/');
+                        Task newEvent = new Event(command.substring(x + 1, a - 1), command.substring(a + 4));
+                        store.add(newEvent);
+                        printTask(newEvent);
+                        break;
+                    case "todo":
+                        Task newToDo = new ToDo(command.substring(x + 1));
+                        store.add(newToDo);
+                        printTask(newToDo);
+                        break;
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+    }
+
+    public int getIndex(String command) throws DukeException {
+        int x = 0;
+        try {
+            x = command.indexOf(' ');
+            if (x < 0) {
+                throw new StringIndexOutOfBoundsException();
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            switch (command) {
                 case "todo":
-                    Task newToDo = new ToDo(command.substring(x + 1));
-                    store.add(newToDo);
-                    printTask(newToDo);
-                    break;
+                    throw new DukeException("The description of a todo cannot be empty");
+                default:
+                    throw new DukeException("I'm sorry but I don't know what that means :(");
             }
         }
+        return x > 0 ? x : 0;
     }
 
     public void printTask(Task task) {
