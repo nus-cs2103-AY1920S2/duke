@@ -14,8 +14,28 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         while (isRunning && sc.hasNextLine()) {
             UserInput input = new UserInput(sc.nextLine());
-            switch (input.command) {
+            switch (input.getCommand()) {
             case "": {
+                break;
+            }
+            case "todo": {
+                TodoTask newTask = new TodoTask(input.getArgumentsAsString());
+                String message = tasks.addTask(newTask);
+                System.out.println(message);
+                break;
+            }
+            case "deadline": {
+                String[] parts = input.getArgumentsAsString().split(" /by ", 2);
+                DeadlineTask newTask = new DeadlineTask(parts[0], parts[1]);
+                String message = tasks.addTask(newTask);
+                System.out.println(message);
+                break;
+            }
+            case "event": {
+                String[] parts = input.getArgumentsAsString().split(" /at ", 2);
+                DeadlineTask newTask = new DeadlineTask(parts[0], parts[1]);
+                String message = tasks.addTask(newTask);
+                System.out.println(message);
                 break;
             }
             case "list": {
@@ -25,11 +45,11 @@ public class Duke {
             case "done": {
                 int taskIndex;
                 try {
-                    taskIndex = Integer.parseInt(input.arguments[0]) - 1;
+                    taskIndex = Integer.parseInt(input.getArguments()[0]) - 1;
                 } catch (NumberFormatException e) {
                     System.out.println(String.format(
                             "'%s' is not valid task number!",
-                            input.arguments[0]
+                            input.getArguments()[0]
                     ));
                     break;
                 }
@@ -40,9 +60,9 @@ public class Duke {
                     ));
                     break;
                 }
-                Task task = tasks.get(taskIndex);
-                task.markAsCompleted();
-                System.out.println(String.format("Marked '%s' as done", task));
+                Task task = tasks.getTask(taskIndex);
+                String message = task.markAsCompleted();
+                System.out.println(message);
                 break;
             }
             case "bye": {
@@ -51,8 +71,8 @@ public class Duke {
             }
             default: {
                 Task newTask = new Task(input.toString());
-                tasks.add(newTask);
-                System.out.println(String.format("Added: '%s'", newTask));
+                String message = tasks.addTask(newTask);
+                System.out.println(message);
             }
             }
         }

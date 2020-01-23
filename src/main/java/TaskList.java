@@ -13,12 +13,13 @@ public class TaskList {
         return tasks.size();
     }
 
-    public Task get(int index) {
+    public Task getTask(int index) {
         return tasks.get(index);
     }
 
-    public boolean add(Task task) {
-        return tasks.add(task);
+    public String addTask(Task task) {
+        tasks.add(task);
+        return String.format("Added: '%s'", task.getDescription());
     }
 
     @Override

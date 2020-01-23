@@ -17,6 +17,18 @@ public class UserInput {
         }
     }
 
+    public String getCommand() {
+        return command;
+    }
+
+    public String[] getArguments() {
+        return arguments;
+    }
+
+    public String getArgumentsAsString() {
+        return String.join(" ", arguments);
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(command);

@@ -10,8 +10,9 @@ public class Task {
         this.isCompleted = false;
     }
 
-    public void markAsCompleted() {
+    public String markAsCompleted() {
         isCompleted = true;
+        return String.format("Marked '%s' as done", getDescription());
     }
 
     public String getDescription() {
