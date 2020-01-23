@@ -17,8 +17,8 @@ public class Duke {
     public static void main(String[] args) {
         boolean isTrue = true;
         List<Task> list = new ArrayList<>();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -28,9 +28,9 @@ public class Duke {
         System.out.println("\tHello! I'm Duke\n"
                 + "\tWhat can I do for you?");
         Duke.horizontalLine();
+        Scanner sc = new Scanner(System.in);
 
         while (isTrue) {
-            Scanner sc = new Scanner(System.in);
             String[] input = sc.nextLine().split(" ", 2);
             Duke.horizontalLine();
             Task newTask;
@@ -59,7 +59,7 @@ public class Duke {
                         }
                         Task deletedTask = list.get(deletedTaskNumber - 1);
                         list.remove(deletedTaskNumber - 1);
-                        System.out.println("\tNoted. I've removed this task: ");
+                        System.out.println("\tNoted. I've removed this task:");
                         System.out.println("\t\t" + deletedTask);
                         Task.taskDeleted();
                         Task.getTotalTasks();
@@ -71,7 +71,7 @@ public class Duke {
                         }
                         Task doneTask = list.get(doneTaskNumber - 1);
                         doneTask.setDone();
-                        System.out.println("\tNice! I've marked this task as done: ");
+                        System.out.println("\tNice! I've marked this task as done:");
                         System.out.println("\t\t" + list.get(Integer.parseInt(input[1]) - 1));
                         break;
                     case "todo":

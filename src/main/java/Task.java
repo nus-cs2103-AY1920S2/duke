@@ -4,7 +4,7 @@ public class Task {
     protected static int totalTasks = 0;
 
     public Task(String description) {
-        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\tGot it. I've added this task:");
         this.description = description;
         this.isDone = false;
         taskAdded();

@@ -1,0 +1,9 @@
+todo read notes
+deadline 2103 project /thursday 2359
+event 2103 lecture /friday 2pm
+list
+done 3
+list
+delete 3
+list
+bye
