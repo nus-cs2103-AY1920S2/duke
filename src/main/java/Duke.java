@@ -58,6 +58,13 @@ public class Duke {
                     System.out.println("\t\t" + toComplete);
                     break;
 
+                case "delete":
+                    Task deleted = taskList.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+                    System.out.println("\t" + "Got it! I've removed this task:");
+                    System.out.println("\t\t" + deleted);
+                    System.out.println("\t" + "Now, you have " + taskList.size() + " tasks in the list.");
+                    break;
+
                 case "bye":
                     activeMode = false;
                     System.out.println("\t" + "Adios. It was my pleasure assisting you. Keep smiling " + name + ".");
