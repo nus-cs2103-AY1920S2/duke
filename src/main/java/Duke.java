@@ -13,8 +13,10 @@ public class Duke {
         print("Hello! I'm Duke \nWhat can I do for you?");
 
         while (scanner.hasNext()) {
-            String[] input = scanner.nextLine().split("\\s+");
-            String command = input[0];
+            String input = scanner.nextLine();
+            String[] split = input.split("\\s+");
+            String command = split[0];
+            int numOfTask;
 
             if (command.equals("bye")) {
                 print("Bye. Hope to see you again soon!");
@@ -24,16 +26,35 @@ public class Duke {
                 print(taskList.toString());
             
             } else if (command.equals("done")) {
-                int index = Integer.parseInt(input[1]) - 1;
+                int index = Integer.parseInt(split[1]) - 1;
                 Task done = taskList.list.get(index);
                 done.markAsDone();
                 print("Nice! I've marked this task as done: \n" + done);
-                
-            } else {
-                String output = String.join(" ", input);
-                taskList.list.add(new Task(output));
-                print(" > added: " + output);
-            }
+
+            } else if (command.equals("todo")) {
+                String desc = input.substring(5);
+                Task t = new ToDoTask(desc);
+                taskList.list.add(t);
+                numOfTask = taskList.list.size();
+                print("Got it. I've added this task: \n" + t + "\nNow you have " 
+                        + numOfTask + " tasks in the list.");
+
+            } else if (command.equals("deadline")) {
+                String[] arr = input.split("/by");
+                Task t = new DeadlineTask(arr[0].substring(9), arr[1]);
+                taskList.list.add(t);
+                numOfTask = taskList.list.size();
+                print("Got it. I've added this task: \n" + t + "\nNow you have " 
+                        + numOfTask + " tasks in the list.");
+
+            } else if (command.equals("event")) {
+                String[] arr = input.split("/at");
+                Task t = new EventTask(arr[0].substring(5), arr[1]);
+                taskList.list.add(t);
+                numOfTask = taskList.list.size();
+                print("Got it. I've added this task: \n" + t + "\nNow you have " 
+                        + numOfTask + " tasks in the list.");
+            } 
         }
         scanner.close();
     }
