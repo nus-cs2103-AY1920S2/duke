@@ -13,19 +13,11 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
         while (isRunning && sc.hasNextLine()) {
-            String input = sc.nextLine();
-            String command = input;
-            String[] arguments = new String[0];
-            if (input.contains(" ")) {
-                String[] inputs = input.split(" ", 2);
-                command = inputs[0];
-                if (inputs[1].contains(" ")) {
-                    arguments = inputs[1].split(" ");
-                } else {
-                    arguments = new String[] {inputs[1]};
-                }
+            UserInput input = new UserInput(sc.nextLine());
+            switch (input.command) {
+            case "": {
+                break;
             }
-            switch (command) {
             case "list": {
                 System.out.println(tasks);
                 break;
@@ -33,11 +25,11 @@ public class Duke {
             case "done": {
                 int taskIndex;
                 try {
-                    taskIndex = Integer.parseInt(arguments[0]) - 1;
+                    taskIndex = Integer.parseInt(input.arguments[0]) - 1;
                 } catch (NumberFormatException e) {
                     System.out.println(String.format(
                             "'%s' is not valid task number!",
-                            arguments[0]
+                            input.arguments[0]
                     ));
                     break;
                 }
@@ -50,10 +42,7 @@ public class Duke {
                 }
                 Task task = tasks.get(taskIndex);
                 task.markAsCompleted();
-                System.out.println(String.format(
-                        "Marked '%s' as done",
-                        task.getDescription()
-                ));
+                System.out.println(String.format("Marked '%s' as done", task));
                 break;
             }
             case "bye": {
@@ -61,12 +50,9 @@ public class Duke {
                 break;
             }
             default: {
-                Task newTask = new Task(input);
+                Task newTask = new Task(input.toString());
                 tasks.add(newTask);
-                System.out.println(String.format(
-                        "Added: '%s'",
-                        newTask.getDescription()
-                ));
+                System.out.println(String.format("Added: '%s'", newTask));
             }
             }
         }
