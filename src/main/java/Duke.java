@@ -40,9 +40,22 @@ public class Duke {
                 System.out.println(taskList[taskNumber-1]);
             } else {
                 //Add task
-                taskList[taskLength] = new Task(command);
+                Task newTask = new Task("placeholder");
+                if (command.contains("todo")) {
+                    newTask = new ToDo(command.substring(5));
+                }
+                if (command.contains("deadline")) {
+                    int breakPos = command.indexOf("/");
+                    newTask = new Deadline(command.substring(0, breakPos-1), command.substring(breakPos+4));
+                }
+                if (command.contains("event")) {
+                    int breakPos = command.indexOf("/");
+                    newTask = new Event(command.substring(0, breakPos-1), command.substring(breakPos+4));
+                }
+                taskList[taskLength] = newTask;
                 taskLength++;
-                System.out.println("added: " + command);
+                System.out.println("Got it. I've added this task: \n" + newTask);
+                System.out.println("Now you have " + taskLength + " tasks in the list");
             }
         }
     }
