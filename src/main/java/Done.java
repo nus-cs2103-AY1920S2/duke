@@ -6,7 +6,7 @@ public class Done extends Command {
         ob.setDone();
         System.out.println("Nice! I've marked this task as done:");
         Print print_obj=new Print();
-        print_obj.printTask(number);
+        System.out.println(print_obj.printTask(number));
         System.out.println("____________________________________________________________");
     }
 }

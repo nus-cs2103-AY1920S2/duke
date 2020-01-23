@@ -1,7 +1,6 @@
 public class Print extends Command {
     void printList(){
         System.out.println("____________________________________________________________");
-
         System.out.println("Here are the tasks in your list:");
         for(int i=0;i<Duke.pos_in_list;i++){
             Task ob=Duke.list.get(i);
@@ -11,9 +10,8 @@ public class Print extends Command {
         System.out.println("____________________________________________________________");
     }
 
-    void printTask(int i){
-
+    String printTask(int i){
         Task ob=Duke.list.get(i-1);
-        System.out.println(ob.toString());
+        return(ob.toString());
     }
 }

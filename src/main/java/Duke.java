@@ -18,6 +18,10 @@ public class Duke {
             String first_word=(loc_of_space==-1)?sentence:sentence.substring(0,loc_of_space);
 
             switch (first_word) {
+                case "delete":
+                    Delete del_obj=new Delete();
+                    del_obj.deleteFromList(sentence.substring(loc_of_space+1));
+                    break;
                 case "done":
                     Done done_object=new Done();
                     done_object.markAsDone(sentence.substring(loc_of_space+1));
