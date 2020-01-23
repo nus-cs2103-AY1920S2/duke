@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
         String divider = "____________________________________________________________";
         System.out.println("My name is Jarvis!\nHow may I provide my services on this fine day?\n" + divider);
 
@@ -47,12 +47,25 @@ public class Duke {
             }
 
             // normal addition of task
-            tasks[i] = new Task(nextLine);
-            System.out.println("added: " + nextLine);
+            // to do creation
+            if (nextLine.contains("todo")) {
+                String[] substrings = nextLine.split(" ",2);
+                tasks[i] = new Todo(substrings[1]);
+            } else if (nextLine.contains("event")) { // event creation
+                String[] substrings = nextLine.split(" ",2);
+                tasks[i] = new Event(substrings[1].split(" /at")[0], substrings[1].split("/at ")[1]);
+            } else if (nextLine.contains("deadline")) {            // deadline creation
+                String[] substrings = nextLine.split(" ",2);
+                tasks[i] = new Deadline(substrings[1].split(" /by")[0], substrings[1].split("/by ")[1]);
+            }
+            System.out.println("Successfully added:\n" + tasks[i].toString());
+            i++;
+            System.out.println("You now have " + i + " number of tasks in the list");
             System.out.println(divider);
             nextLine = sc.nextLine();
-            i++;
         }
         System.out.println("Hope my service has been of great help! See you again!");
     }
 }
+
+
