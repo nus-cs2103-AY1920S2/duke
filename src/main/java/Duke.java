@@ -14,7 +14,6 @@ public class Duke {
     }
 
     static void printReply(Task task) {
-        //TODO: Update this method
         System.out.print(
                 "____________________________________________________________\n" +
                 "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + Integer.toString(tasks.size()) +
@@ -80,11 +79,25 @@ public class Duke {
         }
     }
 
+    static void deleteTask(String input){
+        int pos = Integer.parseInt(input.split(" ")[1]);
+        Task task = tasks.remove(pos-1);
+        System.out.println("____________________________________________________________\n"
+                + " Noted. I've removed this task: \n  "
+                + task.toString() + "\n Now you have 4 tasks in the list."
+                + "____________________________________________________________");
+    }
+
     public static void main(String[] args) throws DukeException {
         printIntro();
         String input = sc.nextLine();
             while (!input.toLowerCase().equals("bye")) {
-            addTask(input);
+                if (input.split(" ")[0].toLowerCase().equals("delete")) {
+                    deleteTask(input);
+                }
+                else {
+                    addTask(input);
+                }
             input = sc.nextLine();
         }
         printGoodbye();
