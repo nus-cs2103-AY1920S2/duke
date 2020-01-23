@@ -103,6 +103,13 @@ public class Duke {
                     }
                 }
             }
+            else if (userInput.split("\\s")[0].equals("delete")) {
+                int removedTask = Integer.parseInt(userInput.split("\\s")[1]);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(arr.get(removedTask - 1).getIcon() + arr.get(removedTask - 1).status + " " + arr.get(removedTask - 1).getDescription());
+                arr.remove(removedTask - 1);
+                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+            }
             else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
