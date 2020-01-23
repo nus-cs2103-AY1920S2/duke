@@ -30,6 +30,14 @@ public class Duke {
                 String[] inputArr = input.split(" ");
                 int taskNum = Integer.parseInt(inputArr[1]);
                 taskDone(taskList, taskNum);
+            } else if (input.contains("todo")) {
+                addList(new ToDo(input.substring(5)), taskList);
+            } else if (input.contains("deadline")) {
+                int index = input.indexOf("/");
+                addList(new Deadline(input.substring(9, index), input.substring(index + 1)), taskList);
+            } else if (input.contains("event")) {
+                int index = input.indexOf("/");
+                addList(new Event(input.substring(6, index), input.substring(index + 1)), taskList);
             } else {
                 addList(new Task(input), taskList);
             }
@@ -46,10 +54,11 @@ public class Duke {
     }
 
     public static void addList(Task task, ArrayList<Task> list) {
-        System.out.println("    ____________________________________________________________\n" +
-                "     added: " + task + "\n" +
-                "    ____________________________________________________________");
         list.add(task);
+        System.out.println("    ____________________________________________________________\n" +
+                "     Got it. I've added this task: \n" +
+                "       " + task + "\n" +
+                "     Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void printList(ArrayList<Task> list) {
