@@ -70,9 +70,10 @@ public class Duke {
                 break;
             }
             default: {
-                Task newTask = new Task(input.toString());
-                String message = tasks.addTask(newTask);
-                System.out.println(message);
+                System.out.println(String.format(
+                        "Oops what's '%s'?",
+                        input.getCommand()
+                ));
             }
             }
         }
