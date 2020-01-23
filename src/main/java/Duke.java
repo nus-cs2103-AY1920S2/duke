@@ -9,7 +9,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
+        System.out.println(horizontalLine);
         //To run using gradle go and search in Help > Delegate Run > build tools > gradle
         String logo3 = " _____    |   _"
                 +                     "    _| |_   |\n"
