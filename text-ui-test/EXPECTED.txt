@@ -1,0 +1,31 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+What can I do for you?
+Oops I guess it's an invalid command!! Try again :3
+There is no task in your list! Please continue...
+Got it. I've added this task:
+   [T][x] borrow book
+Now you have 1 task(s) in the list.
+Got it. I've added this task:
+   [D][x] return book (by: Sunday)
+Now you have 2 task(s) in the list.
+Got it. I've added this task:
+   [E][x] project meeting (at: Mon 2-4pm)
+Now you have 3 task(s) in the list.
+Got it. I've added this task:
+   [D][x] do homework (by: no idea :-p)
+Now you have 4 task(s) in the list.
+Nice! I've marked this task as done:
+[T][^] borrow book
+Nice! I've marked this task as done:
+[D][^] do homework (by: no idea :-p)
+Here are the tasks in your list:
+1.  [T][^] borrow book
+2.  [D][x] return book (by: Sunday)
+3.  [E][x] project meeting (at: Mon 2-4pm)
+4.  [D][^] do homework (by: no idea :-p)

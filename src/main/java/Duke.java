@@ -62,10 +62,7 @@ public class Duke {
                 tasks.add(newEvent);
                 System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
             }   else {
-                Task task = new Task(t);
-                System.out.println("   > added: " + t);
-                tasks.add(task);
-                continue;
+                System.out.println("Oops I guess it's an invalid command!! Try again :3");
             }
         }
     }
