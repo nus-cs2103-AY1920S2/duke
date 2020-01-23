@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String line = "\n_____________________ \n";
+        TaskList taskList = new TaskList(new ArrayList<Task>());
+        String line = "\n______________________________________ \n";
 
         System.out.println(line + "Hello! I'm Duke \nWhat can I do for you?" + line);
 
@@ -12,8 +14,11 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println(line + "Bye. Hope to see you again soon!" + line);
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(line + taskList.toString() + line);
             } else {
-                System.out.println(line + " > " + input + line);
+                taskList.list.add(new Task(input));
+                System.out.println(line + " > added: " + input + line);
             }
         }
         scanner.close();
@@ -22,6 +27,5 @@ public class Duke {
         //         + "| | | | | | | |/ / _ \\\n"
         //         + "| |_| | |_| |   <  __/\n"
         //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
     }
 }
