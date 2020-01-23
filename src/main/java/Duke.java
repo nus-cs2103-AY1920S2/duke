@@ -2,30 +2,39 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    public static void print(String toPrint) {
+        String line = "\n______________________________________ \n";
+        System.out.println(line + toPrint + line);
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList(new ArrayList<Task>());
-        String line = "\n______________________________________ \n";
 
-        System.out.println(line + "Hello! I'm Duke \nWhat can I do for you?" + line);
+        print("Hello! I'm Duke \nWhat can I do for you?");
 
         while (scanner.hasNext()) {
-            String input = scanner.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(line + "Bye. Hope to see you again soon!" + line);
+            String[] input = scanner.nextLine().split("\\s+");
+            String command = input[0];
+
+            if (command.equals("bye")) {
+                print("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) {
-                System.out.println(line + taskList.toString() + line);
+            
+            } else if (command.equals("list")) {
+                print(taskList.toString());
+            
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(input[1]) - 1;
+                Task done = taskList.list.get(index);
+                done.markAsDone();
+                print("Nice! I've marked this task as done: \n" + done);
+                
             } else {
-                taskList.list.add(new Task(input));
-                System.out.println(line + " > added: " + input + line);
+                String output = String.join(" ", input);
+                taskList.list.add(new Task(output));
+                print(" > added: " + output);
             }
         }
         scanner.close();
-        // String logo = " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
     }
 }
