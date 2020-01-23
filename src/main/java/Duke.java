@@ -82,6 +82,12 @@ public class Duke {
                 say("Yay. You've finally done this task:\n\t"
                         + getTask(index));
                 break;
+            case "delete":
+                int number = Integer.parseInt(words[1]);
+
+                say("Giving up already? Removed this:\n\t"
+                        + popTask(number));
+                break;
             default:
                 say("Unknown command. Program it yourself or get a dictionary.");
                 break;
@@ -123,6 +129,10 @@ public class Duke {
 
     private void tickTask(int index) {
         tasks.get(index - 1).tick();
+    }
+
+    private String popTask(int index) {
+        return tasks.remove(index - 1).toString();
     }
 
     private String getTask(int index) {
