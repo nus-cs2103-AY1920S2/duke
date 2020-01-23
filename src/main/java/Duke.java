@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static List<Task> todo;
+    static List<Task> taskList;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -13,7 +13,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        todo = new ArrayList<>();
+        taskList = new ArrayList<>();
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
@@ -35,23 +35,37 @@ public class Duke {
     }
 
     public static void add(String s) {
-        todo.add(new Task(s));
-        System.out.println("added: " + s);
+        String typeOfTask = s.split(" ", 2)[0];
+        String task = s.split(" ", 2)[1];
+        Task toAdd = new Task();
+        if (typeOfTask.equals("todo")) {
+            toAdd = new Todo(task);
+        } else if (typeOfTask.equals("event")) {
+            String[] taskParts = task.split(" /at ");
+            toAdd = new Event(taskParts[0], taskParts[1]);
+        } else if (typeOfTask.equals("deadline")) {
+            String[] taskParts = task.split(" /by ");
+            toAdd = new Deadline(taskParts[0], taskParts[1]);
+        }
+        taskList.add(toAdd);
+        System.out.println("Got it. I've added this task:\n"
+                + "  " + toAdd +"\n"
+                + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void showList() {
         System.out.println("Here are the tasks in your list:");
         int count = 1;
-        for (Task t : todo) {
-            System.out.println(count + ".[" + t.getStatusIcon() + "] " + t);
+        for (Task t : taskList) {
+            System.out.println(count + "." + t);
             count++;
         }
     }
 
     public static void done(int i) {
-        todo.get(i-1).markAsDone();
+        taskList.get(i-1).markAsDone();
         System.out.println("Nice! I've marked this task as done: \n" +
-                "  [" + todo.get(i-1).getStatusIcon() + "] " + todo.get(i-1));
+                "  " + taskList.get(i-1));
     }
 
     public static void exit() {
