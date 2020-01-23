@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     private static void respond(String response) {
@@ -21,7 +23,20 @@ public class Duke {
         System.out.println(botResponse);
     }
 
+    private static String createList(List<String> tasks) {
+        String lst = "";
+        int counter = 1;
+        for (String t: tasks) {
+            lst += (counter + "."); // Index of task
+            lst += (" " + t + '\n'); // Description of task and whether it is done
+            counter++;
+        }
+        return lst;
+    }
+
     public static void main(String[] args) {
+        ArrayList<String> arrTasks = new ArrayList<>();
+
         String greeting = "Hello! I'm Woody and I'm always here to keep you company.\n"
                 + "Let me know what you need and I'll be right on it.\n";
         String farewell = "Good day my friend! I'm here anytime you need me :)";
@@ -34,8 +49,12 @@ public class Duke {
                 case "bye": // Exit
                     respond(farewell);
                     return;
+                case "list": // List all tasks
+                    respond(createList(arrTasks));
+                    break;
                 default: // Add new task
-                    respond(userCmd);
+                    arrTasks.add(userCmd);
+                    respond("added: " + userCmd);
             }
         }
     }
