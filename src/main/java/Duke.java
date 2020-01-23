@@ -20,36 +20,59 @@ public class Duke {
         String input;
         while (true) {
             input = sc.nextLine();
-            if (input.equals("list")) {
-                showList();
-            } else if (input.equals("bye")) {
-                exit();
-                break;
-            } else if (input.split(" ")[0].equals("done")) {
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
-                done(taskNum);
-            } else {
-                add(input);
+            try {
+                if (input.equals("list")) {
+                    showList();
+                } else if (input.equals("bye")) {
+                    exit();
+                    break;
+                } else if (input.split(" ")[0].equals("done")) {
+                    int taskNum = Integer.parseInt(input.split(" ")[1]);
+                    done(taskNum);
+                } else if (input.split(" ")[0].equals("todo") ||
+                           input.split(" ")[0].equals("event") ||
+                           input.split(" ")[0].equals("deadline")) {
+                    add(input);
+                }
+                else {
+                    throw new DukeException();
+                }
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
         }
     }
 
-    public static void add(String s) {
+    public static void add(String s) throws DukeException {
         String typeOfTask = s.split(" ", 2)[0];
-        String task = s.split(" ", 2)[1];
         Task toAdd = new Task();
         if (typeOfTask.equals("todo")) {
-            toAdd = new Todo(task);
+            try {
+                String task = s.split(" ", 2)[1];
+                toAdd = new Todo(task);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new TodoException();
+            }
         } else if (typeOfTask.equals("event")) {
-            String[] taskParts = task.split(" /at ");
-            toAdd = new Event(taskParts[0], taskParts[1]);
+            try {
+                String task = s.split(" ", 2)[1];
+                String[] taskParts = task.split(" /at ");
+                toAdd = new Event(taskParts[0], taskParts[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new EventException();
+            }
         } else if (typeOfTask.equals("deadline")) {
-            String[] taskParts = task.split(" /by ");
-            toAdd = new Deadline(taskParts[0], taskParts[1]);
+            try {
+                String task = s.split(" ", 2)[1];
+                String[] taskParts = task.split(" /by ");
+                toAdd = new Deadline(taskParts[0], taskParts[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DeadlineException();
+            }
         }
         taskList.add(toAdd);
         System.out.println("Got it. I've added this task:\n"
-                + "  " + toAdd +"\n"
+                + "  " + toAdd + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
