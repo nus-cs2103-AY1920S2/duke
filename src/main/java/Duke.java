@@ -19,11 +19,11 @@ public class Duke {
      * Add commands available to user.
      */
     public static void initialize() {
-        commandpairing.put("list", " ");
-        commandpairing.put("done", " ");
-        commandpairing.put("todo", " ");
-        commandpairing.put("event", " ");
-        commandpairing.put("deadline", " ");
+        commandpairing.put("list", "1");
+        commandpairing.put("done", "2");
+        commandpairing.put("todo", "2");
+        commandpairing.put("event", "/at");
+        commandpairing.put("deadline", "/by");
     }
 
     public static void HorizontalLine() {
@@ -56,14 +56,7 @@ public class Duke {
     public static void execcommand(String input) {
         String[] arguments = input.split(" ");
 
-        //if (commandpairing.containsKey(arguments[0])) {
-            //Either list or done command
         operate(input, DukeCommand.valueOf(arguments[0].toUpperCase()));
-        //} else {
-            // Add command
-        //    add(input);
-        //}
-
     }
 
     /**
@@ -78,16 +71,26 @@ public class Duke {
         System.out.println("Now you have " + count + " tasks in the list.");
         HorizontalLine();
     }
-    /*
-    public static void addToList(Task mytask) {
-        HorizontalLine();
-        System.out.println("Got it. I've added this task:");
-        listOfTask[count++] = mytask;
-        System.out.println(mytask);
-        System.out.println("Now you have " + count + " tasks in the list.");
-        HorizontalLine();
+
+    public static boolean inputhandling(String input) {
+        String[] arguments = input.split(" ");
+        try {
+            if (!commandpairing.containsKey(arguments[0]))
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+        } catch (DukeException ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+        // Execute the error-checking and return true if there is no error
+        // with the command
+        boolean validInput = DukeEnumExceptions.valueOf(arguments[0].toUpperCase())
+                .checkerror(input, commandpairing.get(arguments[0]));
+
+        return validInput;
     }
-    */
+
     /**
      * The main method of the class Duke.
      * @param args Unused
@@ -104,8 +107,15 @@ public class Duke {
         // Exits when the user types 'bye'
         String line = sc.nextLine();
         while (!line.equals("bye")) {
-            // Execute the input command
-            execcommand(line);
+            // Check for any errors in the command
+            // execute command if no errors
+            if (inputhandling(line))
+                // Assumption : To add things into the list, the user has to
+                // type a [command][description]. For example, to add
+                // "read book" into the list, the user has to type
+                // "todo read book" instead of just typing "read book"
+                // as typing "read book" will cause the code to throw an exception
+                execcommand(line);
             // Wait for command
             line = sc.nextLine();
         }
