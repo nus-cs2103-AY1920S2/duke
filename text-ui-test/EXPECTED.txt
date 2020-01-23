@@ -1,0 +1,48 @@
+Booting up...
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+How can I serve you?
+
+
+------------------------------------------
+Apologies, I do not recognise this command.
+------------------------------------------
+
+
+------------------------------------------
+The following task has been added:
+    [T][✗] set up text UI Testing
+Current number of task(s): 1
+------------------------------------------
+
+
+------------------------------------------
+The following task has been added:
+    [D][✗] finish IP week 2  (by: today 2359)
+Current number of task(s): 2
+------------------------------------------
+
+
+------------------------------------------
+The following task has been added:
+    [E][✗] CNY  (at: 25 January)
+Current number of task(s): 3
+------------------------------------------
+
+
+------------------------------------------
+Here is your list of tasks:
+1.[T][✗] set up text UI Testing
+2.[D][✗] finish IP week 2  (by: today 2359)
+3.[E][✗] CNY  (at: 25 January)
+------------------------------------------
+
+
+------------------------------------------
+I believe this is farewell, my friend.
+------------------------------------------
+

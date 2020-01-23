@@ -1,0 +1,6 @@
+hello
+todo set up text UI Testing
+deadline finish IP week 2 /by today 2359
+event CNY /at 25 January
+list
+bye

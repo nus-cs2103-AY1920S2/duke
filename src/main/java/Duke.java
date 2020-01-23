@@ -11,6 +11,7 @@ public class Duke {
         System.out.println("------------------------------------------\n");
     }
 
+    // Add Task to list with specified type (i.e. "T", "D", "E").
     public static void addTask(String input, String type) {
         String taskCounter = "\nCurrent number of task(s): ";
 
@@ -60,13 +61,13 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
-        Scanner sc = new Scanner(System.in);
         System.out.println("Booting up...\n" + logo);
         System.out.println("How can I serve you?\n");
 
