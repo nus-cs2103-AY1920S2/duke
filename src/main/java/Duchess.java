@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 class Duchess {
@@ -13,19 +12,33 @@ class Duchess {
 
     private void awaitInput() {
         String input = scanner.nextLine();
-        ArrayList<String> commands = new ArrayList<>(Arrays.asList(input.split("\\s", 2)));
-        switch (commands.get(0).toLowerCase()) {
+        String[] commands = input.split("\\s", 2);
+        switch (commands[0].toLowerCase()) {
+        case "todo":
+            Task newTask = new ToDo(commands[1].trim());
+            this.addToTasks(newTask);
+            break;
+        case "event":
+            String[] details = commands[1].split("/at");
+            newTask = new Event(details[0].trim(), details[1].trim());
+            this.addToTasks(newTask);
+            break;
+        case "deadline":
+            details = commands[1].split("/by");
+            newTask = new Deadline(details[0].trim(), details[1].trim());
+            this.addToTasks(newTask);
+            break;
         case "done":
-            completeTask(commands.get(1));
+            this.completeTask(commands[1]);
             break;
         case "list":
-            printTasks();
+            this.printTasks();
             break;
         case "bye":
-            sayGoodbye();
+            this.sayGoodbye();
             break;
         default:
-            addToList(input);
+            echo(input);
             break;
         }
     }
@@ -44,13 +57,16 @@ class Duchess {
 
     private void echo(String input) {
         System.out.println("\tOh? You said \"" + input + "\"? How interesting.");
-        System.out.println("\tAnything else?");
+        System.out.println("\tBut I don't see what I can do with that.");
+        this.awaitInput();
     }
 
-    private void addToList(String input) {
-        echo(input);
-        this.tasks.add(new Task(input));
-        awaitInput();
+    private void addToTasks(Task task) {
+        System.out.println("\tAs always, needing someone to keep track of things for you...");
+        this.tasks.add(task);
+        System.out.println("\t\t" + task);
+        System.out.println("\tI've already tracked " + this.tasks.size() + " tasks for you.");
+        this.awaitInput();
     }
 
     private void printTasks() {
@@ -59,17 +75,16 @@ class Duchess {
         for (int i = 0; i < this.tasks.size(); i++) {
             System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i));
         }
-        awaitInput();
+        this.awaitInput();
     }
 
     private void sayGoodbye() {
         System.out.println("\tBye, is it? Shoo shoo then.");
-
     }
 
     void run() {
-        introduce();
-        awaitInput();
+        this.introduce();
+        this.awaitInput();
     }
 
     private void completeTask(String index) {
@@ -80,8 +95,8 @@ class Duchess {
             Task taskToComplete = this.tasks.get(indexAsInt - 1);
             taskToComplete.toggleIsCompleted();
             System.out.println("\tOh? You actually completed something? Impressive...");
-            System.out.println("\t" + taskToComplete);
-            awaitInput();
+            System.out.println("\t\t" + taskToComplete);
+            this.awaitInput();
         }
     }
 }
