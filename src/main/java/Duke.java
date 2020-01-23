@@ -5,18 +5,6 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static final String END_COMMAND = "bye";
-    private static final String LIST_COMMAND = "list";
-    private static final String DONE_COMMAND = "done";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DELETE_COMMAND = "delete";
-
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String DEADLINE_BY = "/by";
-
-    private static final String EVENT_COMMAND = "event";
-    private static final String EVENT_AT = "/at";
-
     private List<Task> list = new ArrayList<>();
 
     private static void print(String s) {
@@ -99,12 +87,14 @@ public class Duke {
         String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         Task newTask;
 
-        if (command.equals(TODO_COMMAND)) {
+        if (command.equals(DukeCommand.TODO_COMMAND.getCommand())) {
             // empty string array would become empty string
             String taskDescription = String.join(" ", inputWithoutCommand);
             newTask = new Todo(taskDescription);
         } else {
-            String keyword = command.equals(DEADLINE_COMMAND) ? DEADLINE_BY : EVENT_AT;
+            String keyword = command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ?
+                    DukeCommand.DEADLINE_BY.getCommand() :
+                    DukeCommand.EVENT_AT.getCommand();
             int keywordIndex = Arrays.asList(splitInput).indexOf(keyword);
 
             if (keywordIndex == -1) {
@@ -116,7 +106,7 @@ public class Duke {
             String deadlineOrTime = String.join(" ",
                     Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
 
-            newTask = command.equals(DEADLINE_COMMAND) ?
+            newTask = command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ?
                     new Deadline(description, deadlineOrTime) : new Event(description, deadlineOrTime);
         }
 
@@ -134,19 +124,19 @@ public class Duke {
         // empty line would output string array of size 1, where the element is empty string
         String command = splitInput[0];
 
-        if (command.equals(END_COMMAND)) {
+        if (command.equals(DukeCommand.END_COMMAND.getCommand())) {
             bye();
-        } else if (command.equals(LIST_COMMAND)) {
+        } else if (command.equals(DukeCommand.LIST_COMMAND.getCommand())) {
             this.printList();
-        } else if (command.equals(DONE_COMMAND)) {
+        } else if (command.equals(DukeCommand.DONE_COMMAND.getCommand())) {
             int taskIndex = Integer.parseInt(splitInput[1]) - 1;
             this.markTaskAsDone(taskIndex);
-        } else if (command.equals(DELETE_COMMAND)) {
+        } else if (command.equals(DukeCommand.DELETE_COMMAND.getCommand())) {
             int taskIndex = Integer.parseInt(splitInput[1]) - 1;
             this.deleteTask(taskIndex);
-        } else if (command.equals(TODO_COMMAND) ||
-                command.equals(DEADLINE_COMMAND) ||
-                command.equals(EVENT_COMMAND)) {
+        } else if (command.equals(DukeCommand.TODO_COMMAND.getCommand()) ||
+                command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ||
+                command.equals(DukeCommand.EVENT_COMMAND.getCommand())) {
             try {
                 this.createAndAddTask(lineInput);
             } catch (Exception e) {
