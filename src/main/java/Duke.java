@@ -12,34 +12,44 @@ public class Duke {
     }
 
     // Add Task to list with specified type (i.e. "T", "D", "E").
-    public static void addTask(String input, String type) {
-        String taskCounter = "\nCurrent number of task(s): ";
+    public static void addTask(String input, String type) throws DukeTaskException {
+        String str = "\nCurrent number of task(s): ";
 
         if (type.equals("T")) {
             Todo todo = new Todo(input);
             taskList.add(todo);
-            replyUser("The following task has been added:\n    " + todo.toString() + taskCounter + taskList.size());
+            replyUser("The following ToDo has been added:\n    " + todo.toString() + str + taskList.size());
+
         } else if (type.equals("D")) {
             String[] arr = input.split("/", 2);
-            String description = arr[0];
-            String by = arr[1].split(" ", 2)[1];
-            Deadline deadline = new Deadline(description, by);
-            taskList.add(deadline);
-            replyUser("The following task has been added:\n    " + deadline.toString() + taskCounter + taskList.size());
+            if (arr.length > 1) {
+                String description = arr[0];
+                String by = arr[1].split(" ", 2)[1];
+                Deadline deadline = new Deadline(description, by);
+                taskList.add(deadline);
+                replyUser("The following task has been added:\n    " + deadline.toString() + str + taskList.size());
+            } else {
+                throw new DukeTaskException("\'/by\' field is missing.");
+            }
+
         } else if (type.equals("E")) {
             String[] arr = input.split("/", 2);
-            String description = arr[0];
-            String at = arr[1].split(" ", 2)[1];
-            Event event = new Event(description, at);
-            taskList.add(event);
-            replyUser("The following task has been added:\n    " + event.toString() + taskCounter + taskList.size());
+            if (arr.length > 1) {
+                String description = arr[0];
+                String at = arr[1].split(" ", 2)[1];
+                Event event = new Event(description, at);
+                taskList.add(event);
+                replyUser("The following task has been added:\n    " + event.toString() + str + taskList.size());
+            } else {
+                throw new DukeTaskException("\'/at\' field is missing.");
+            }
         }
     }
 
     // Prints the user's task list.
     public static void showList() {
         if (taskList.isEmpty()) {
-            replyUser("Your list is empty.");
+            replyUser("Your task list is empty.");
         } else {
             System.out.println("\n------------------------------------------");
             System.out.println("Here is your list of tasks: ");
@@ -53,11 +63,17 @@ public class Duke {
     }
 
     // Mark the specified task as done.
-    public static void markTaskAsDone(String userIndex) {
+    public static void markTaskAsDone(String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
-        Task t = taskList.get(index);
-        t.markAsDone();
-        replyUser("As per requested, the following task has been marked as done:\n" + "    " + t.toString());
+        if (taskList.isEmpty()) {
+            replyUser("There is no task in your list to be marked as done.");
+        } else if (index < taskList.size()) {
+            Task t = taskList.get(index);
+            t.markAsDone();
+            replyUser("As per requested, the following task has been marked as done:\n" + "    " + t.toString());
+        } else {
+            throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
+        }
     }
 
     public static void main(String[] args) {
@@ -72,24 +88,30 @@ public class Duke {
         System.out.println("How can I serve you?\n");
 
         while (true) {
-            String command = sc.nextLine();
-            String[] commandArray = command.split(" ", 2);
+            try {
+                String command = sc.nextLine();
+                String[] commandArray = command.split(" ", 2);
 
-            if (command.toLowerCase().equals("bye")) {
-                replyUser("I believe this is farewell, my friend.");
-                break;
-            } else if (command.toLowerCase().equals("list")) {
-                showList();
-            } else if (commandArray[0].toLowerCase().equals("done")) {
-                markTaskAsDone(commandArray[1]);
-            } else if (commandArray[0].toLowerCase().equals("todo")) {
-                addTask(commandArray[1], "T");
-            } else if (commandArray[0].toLowerCase().equals("deadline")) {
-                addTask(commandArray[1], "D");
-            } else if (commandArray[0].toLowerCase().equals("event")) {
-                addTask(commandArray[1], "E");
-            } else {
-                replyUser("Apologies, I do not recognise this command.");
+                if (command.toLowerCase().equals("bye")) {
+                    replyUser("I believe this is farewell, my friend.");
+                    break;
+                } else if (command.toLowerCase().equals("list")) {
+                    showList();
+                } else if (commandArray.length < 2) {
+                    throw new DukeArgumentException("Missing field detected in your '" + commandArray[0] + "' command.");
+                } else if (commandArray[0].toLowerCase().equals("done")) {
+                    markTaskAsDone(commandArray[1]);
+                } else if (commandArray[0].toLowerCase().equals("todo")) {
+                    addTask(commandArray[1], "T");
+                } else if (commandArray[0].toLowerCase().equals("deadline")) {
+                    addTask(commandArray[1], "D");
+                } else if (commandArray[0].toLowerCase().equals("event")) {
+                    addTask(commandArray[1], "E");
+                } else {
+                    throw new DukeUnknownException("Apologies, I do not recognise this command.");
+                }
+            } catch (DukeException err) {
+                replyUser(err.getMessage());
             }
         }
     }
