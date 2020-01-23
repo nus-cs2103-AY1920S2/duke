@@ -9,7 +9,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.printf("Hello! I'm Duke\nWhat can I do for you?\n");
+        dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> newList = new ArrayList<Task>();
@@ -18,42 +18,27 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    if (newList.size() == 0) {
-                        System.out.printf("You currently have no tasks in your list\n");
-                    } else {
-                        System.out.printf("Here are the tasks in your list:\n");
-                        for (int i = 0; i < newList.size(); i += 1) {
-                            System.out.printf("%d. %s\n", i + 1, newList.get(i).toString());
-                        }
-                    }
+                    list(newList);
 
                 } else if (command.startsWith("done")) {
                     String[] arr = command.split(" ");
                     if (arr.length < 2) {
                         throw new DukeException("The task to be marked as done must be specified");
                     }
-                    int i = Integer.valueOf(arr[1]) - 1;
-                    if (i >= newList.size()) {
+                    if (Integer.valueOf(arr[1]) - 1 >= newList.size()) {
                         throw new DukeException("Task " + arr[1] + " does not exist");
                     }
-                    newList.get(i).markAsDone();
-                    System.out.printf("Nice! I've marked this task as done: \n%s\n",
-                            newList.get(i).toString());
+                    done(newList, Integer.valueOf(arr[1]) - 1);
 
                 } else if (command.startsWith("delete")) {
                 String[] arr = command.split(" ");
                 if (arr.length < 2) {
                     throw new DukeException("The task to be deleted must be specified");
                 }
-                int i = Integer.valueOf(arr[1]) - 1;
-                if (i >= newList.size()) {
+                if (Integer.valueOf(arr[1]) - 1 >= newList.size()) {
                     throw new DukeException("Task " + arr[1] + " does not exist");
                 }
-                Task task = newList.get(i);
-                newList.remove(i);
-                System.out.printf("Noted. I've removed this task:\n" +
-                                "%s\n" + "Now you have %d tasks in the list.",
-                        task.toString(), newList.size());
+                delete(newList, Integer.valueOf(arr[1]) - 1);
 
                 } else {
                     String[] arr = command.split("/");
@@ -64,6 +49,7 @@ public class Duke {
                             throw new DukeException("The description of a todo cannot be empty.");
                         }
                         newList.add(new ToDo(description[1]));
+
                     } else if (command.startsWith("deadline")) {
                         if (description.length < 2) {
                             throw new DukeException("The description of a deadline cannot be empty.");
@@ -87,22 +73,59 @@ public class Duke {
                             throw new DukeException("The time of an event cannot be empty.");
                         }
                         newList.add(new Event(description[1], time[1]));
+
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
 
-                    System.out.printf("Got it. I've added this task:\n%s\n" +
-                                    "Now you have %d tasks in the list.\n",
-                            newList.get(newList.size() - 1).toString(), newList.size());
+                    dukePrint("Got it. I've added this task:\n"+
+                            newList.get(newList.size() - 1).toString()+"\n" +
+                            "Now you have "+newList.size()+" tasks in the list.\n");
                 }
             } catch (DukeException e) {
-                System.out.println("☹ OOPS!!! " + e.getMessage());
+                System.out.print(horizontalLines()+"☹ OOPS!!! " + e.getMessage()+
+                        "\n"+horizontalLines());
             } finally {
                 command = sc.nextLine();
             }
         }
 
-        System.out.printf("Bye. Hope to see you again soon!\n");
+        dukePrint("Bye. Hope to see you again soon!\n");
         sc.close();
+    }
+
+    public static String horizontalLines() {
+        return "__________________________________________________________________________________________________________\n";
+    }
+
+    public static void dukePrint (String input) {
+        System.out.print(horizontalLines());
+        System.out.print(input);
+        System.out.print(horizontalLines());
+    }
+
+    public static void list(ArrayList<Task> newList) {
+        if (newList.size() == 0) {
+            dukePrint("You currently have no tasks in your list\n");
+        } else {
+            System.out.print(horizontalLines() + "Here are the tasks in your list:\n");
+            for (int i = 0; i < newList.size(); i += 1) {
+                System.out.print((i + 1)+". "+ newList.get(i).toString()+"\n");
+            }
+            System.out.print(horizontalLines());
+        }
+    }
+
+    public static void done(ArrayList<Task> newList, int i) {
+        newList.get(i).markAsDone();
+        dukePrint("Nice! I've marked this task as done: \n"+
+                newList.get(i).toString()+"\n");
+    }
+
+    public static void delete(ArrayList<Task> newList, int i) {
+        Task task = newList.get(i);
+        newList.remove(i);
+        dukePrint("Noted. I've removed this task:\n"+task.toString()+"\n" +
+                "Now you have "+newList.size()+" tasks in the list.\n");
     }
 }
