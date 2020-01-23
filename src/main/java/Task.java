@@ -2,6 +2,7 @@ public class Task {
 
     public String description;
     public int status = 0;
+    public String type;
 
     public Task (String description) {
 
@@ -23,5 +24,18 @@ public class Task {
         status = 1;
     }
 
+    @Override
+    public String toString() {
 
+        return description;
+    }
+
+    public String getType() {
+
+        return "Weirdly, this is just a normal task.";
+    }
+
+    public String getBy() {
+        return "This doesn't have a getBy date";
+    }
 }
