@@ -14,18 +14,37 @@ public class Duke {
                     for (int i = 0; i < userInputList.size(); i++) {
                         System.out.println("\t" + (i + 1) + ". " + userInputList.get(i));
                     }
-                } else if (userInput.startsWith("done")) { // to mark tasks as done
-                    System.out.println("☛ dude, you're fast!");
-                    Integer taskNumber = Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
-                    userInputList.get(taskNumber).markAsDone();
                 }
-                else { // to add different tasks: todos, deadlines, events
+
+                else if (userInput.startsWith("done")) { // to mark tasks as done
+                    try {
+                        int taskNumber = Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
+                        userInputList.get(taskNumber).markAsDone();
+                        System.out.println("☛ dude, nicely! you're done with:");
+                        System.out.println("\t" + userInputList.get(taskNumber));
+                    }
+                    catch(IndexOutOfBoundsException e) {
+                        System.out.println(new DukeException("done"));
+                    }
+                } else if (userInput.startsWith("delete")) { // to delete tasks from list
+                    try {
+                        int taskNumber = Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
+                        Task t = userInputList.get(taskNumber);
+                        System.out.println("☛ dude. deleting:");
+                        System.out.println("\t" + userInputList.get(taskNumber));
+                        userInputList.remove(t);
+                    }
+                    catch(IndexOutOfBoundsException e) {
+                        System.out.println(new DukeException("delete"));
+                    }
+                }
+                else { // commands to add different tasks: todos, deadlines, events
                     try {
                         Task task;
                         String[] split = userInput.split(" ", 2);
                         String taskType = split[0];
                         if (split.length <= 1) {
-                            throw new DukeException(taskType);
+                            throw new DukeException("task", taskType);
                         }
                         String taskLine = split[1];
                         if (taskType.equals("todo")) { // to add todos (tasks with no date/time attached)
@@ -36,14 +55,14 @@ public class Duke {
                             task = new Event(taskLine);
                         }
                         else {
-                            throw new DukeException(taskType);
+                            throw new DukeException("task", taskType);
                         }
                         userInputList.add(task);
                         System.out.println("☛ fine, I will take note of: " + task);
                         System.out.println("☛ you made me remember " + userInputList.size() + " task(s)");
                     }
                     catch(DukeException e) {
-                        System.err.println(e);
+                        System.out.println(e);
                     }
                 }
             userInput = sc.nextLine();
