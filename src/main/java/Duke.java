@@ -12,9 +12,25 @@ public class Duke {
 */
         Scanner sc = new Scanner(System.in);
         String userInput = "";
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+        String[] arr = new String[100];
+        int arrPointer = 1;
         do {
-            userInput = sc.next();
-            System.out.println(userInput);
+            userInput = sc.nextLine();
+            if (!userInput.equals("list")) {
+                arr[arrPointer] = userInput;
+                arrPointer++;
+                if (!userInput.equals("bye")) {
+                    System.out.println("added: " + userInput);
+                }
+
+            }
+            else {
+                for (int i = 1; i < arrPointer; i++) {
+                    System.out.println(i + ". " + arr[i]);
+                }
+            }
         } while (!userInput.equals("bye"));
         System.out.println("Bye. Hope to see you again soon!");
     }
