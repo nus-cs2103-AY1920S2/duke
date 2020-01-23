@@ -1,0 +1,52 @@
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hi, I'm Duke!
+What can I do for you?
+
+> 	Here are your tasks:
+	<No tasks have been added>
+
+> 	Alright! The following task has been added:
+		[T][?] borrow book
+	You now have 1 task in the list.
+
+> 	Here are your tasks:
+	1.[T][?] borrow book
+
+> 	Alright! The following task has been added:
+		[D][?] return book (by: Sunday)
+	You now have 2 tasks in the list.
+
+> 	Here are your tasks:
+	1.[T][?] borrow book
+	2.[D][?] return book (by: Sunday)
+
+> 	Alright! The following task has been added:
+		[E][?] project meeting (by: Mon 2-4pm)
+	You now have 3 tasks in the list.
+
+> 	Here are your tasks:
+	1.[T][?] borrow book
+	2.[D][?] return book (by: Sunday)
+	3.[E][?] project meeting (by: Mon 2-4pm)
+
+> 	Noted. I have marked this task as done:
+		[D][?] return book (by: Sunday)
+
+> 	Here are your tasks:
+	1.[T][?] borrow book
+	2.[D][?] return book (by: Sunday)
+	3.[E][?] project meeting (by: Mon 2-4pm)
+
+> 	I'm sorry! I don't recognize that command. Please try again.
+
+> 	Here are your tasks:
+	1.[T][?] borrow book
+	2.[D][?] return book (by: Sunday)
+	3.[E][?] project meeting (by: Mon 2-4pm)
+
+> 	Have a nice day!

@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         printGreeting();
         runDuke();
@@ -19,16 +20,12 @@ public class Duke {
         System.out.println("What can I do for you?\n");
     }
 
-    public static String getUserInput() {
-        System.out.print("> ");
-
+    public static void runDuke() {
         Scanner sc = new Scanner(System.in);
 
-        return sc.nextLine();
-    }
+        System.out.print("> ");
+        String input = sc.nextLine();
 
-    public static void runDuke() {
-        String input = getUserInput();
         String command = extractCommand(input);  // commands: bye, list, done, todo, deadline, event
 
         while (!command.equals("bye")) {
@@ -38,6 +35,7 @@ public class Duke {
                 int doneTaskNum = Integer.parseInt(extractFirstParam(input));
                 Task doneTask = Task.tasks[doneTaskNum - 1];
                 doneTask.markAsDone();
+                
                 Task.printMarkedAsDone(doneTask);
             } else if (command.equals("todo")) {
                 String description = extractDescription(input);
@@ -63,11 +61,12 @@ public class Duke {
                 System.out.println("\tI'm sorry! I don't recognize that command. Please try again.\n");
             }
 
-            input = getUserInput();
+            System.out.print("> ");
+            input = sc.nextLine();
             command = extractCommand(input);
         }
 
-        System.out.println("Have a nice day!");
+        System.out.println("\tHave a nice day!");
     }
 
     public static String extractCommand(String input) {
