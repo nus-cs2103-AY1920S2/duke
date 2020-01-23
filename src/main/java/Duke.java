@@ -19,7 +19,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private ArrayList<String> listing = new ArrayList<>();
+    private ArrayList<Task> listing = new ArrayList<>();
 
     //private Image user = new Image(this.getClass().getResourceAsStream("/src/main/resources/images/DaUser.png"));
 //    private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.png"));
@@ -113,8 +113,12 @@ public class Duke extends Application {
                 curText += (i + 1);
                 curText += ". " + listing.get(i) + '\n';
             }
+        } else if (curText.substring(0, Math.min(curText.length(), 4)).equals("done")) {
+            int taskNum = Integer.parseInt(curText.substring(4).trim()) - 1;
+            curText = "Nice! I've marked this task as done:\n";
+            curText += listing.get(taskNum).done();
         } else {
-            listing.add(curText);
+            listing.add(new Task(curText));
             curText = "added: " + curText;
         }
         dialogContainer.getChildren().add(getDialogLabel(curText));
