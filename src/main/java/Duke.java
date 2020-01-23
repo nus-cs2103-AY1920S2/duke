@@ -1,14 +1,13 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Duke {
-    String[] tasks;
-    int taskCount;
+    ArrayList<Task> tasks;
 
     public Duke() {
-        tasks = new String[100];
-        taskCount = 0;
+        tasks = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -42,7 +41,8 @@ public class Duke {
 
         switch (firstWord) {
             case "list":
-                say(getTasks());
+                say("Here are your procrastinated tasks:\n"
+                        + getTasks());
                 break;
             default:
                 addTask(speech);
@@ -69,15 +69,16 @@ public class Duke {
     }
 
     private void addTask(String task) {
-        tasks[taskCount++] = task;
+        tasks.add(new Task(task));
     }
 
     private String getTasks() {
         String result = "";
 
-        for (int i = 0; i < taskCount; i++) {
-            result += (i + 1)
-                    + ". " + tasks[i] + "\n";
+        int index = 1;
+        for (Task t : tasks) {
+            result += index++
+                    + "." + t + "\n";
         }
 
         return result;
