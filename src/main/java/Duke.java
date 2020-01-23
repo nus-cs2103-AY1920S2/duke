@@ -15,7 +15,7 @@ public class Duke {
         System.out.println(greetingText);
 
         Scanner sc = new Scanner(System.in);
-
+        ArrayList<String> taskList = new ArrayList<String>();
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
@@ -24,10 +24,27 @@ public class Duke {
                         "    ____________________________________________________________";
                 System.out.println(byeText);
                 break;
+            } else if (input.equals("list")){
+                printList(taskList);
             } else {
-                System.out.println(wrapHorizontalLines(input));
+                addList(input, taskList);
             }
         }
+    }
+
+    public static void addList(String task, ArrayList<String> list) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     added: " + task + "\n" +
+                "    ____________________________________________________________");
+        list.add(task);
+    }
+
+    public static void printList(ArrayList<String> list) {
+        System.out.println("    ____________________________________________________________");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("     " + (i+1) + ". " + list.get(i));
+        }
+        System.out.println("    ____________________________________________________________");
     }
 
     public static String wrapHorizontalLines(String input) {
