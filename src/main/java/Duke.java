@@ -34,7 +34,7 @@ public class Duke {
 
         // main bot system loop
         while(input.hasNext()) {
-            String command = input.next();
+            String command = input.nextLine();
             // parse the command
             Instruction next = parser.parse(command);
             if (next == Instruction.READ_STORAGE) {
