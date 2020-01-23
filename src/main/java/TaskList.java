@@ -13,10 +13,14 @@ public class TaskList {
         return task;
     }
 
+    public String printNumTasks() {
+        return "Number of tasks: " + taskList.size();
+    }
+
     public String listTasks() {
         String formattedString = "";
         for (int i = 0; i < this.taskList.size(); i++) {
-            formattedString += (i + 1) + ". " + this.taskList.get(i).getDescriptionWithIsDone() + "\n    ";
+            formattedString += (i + 1) + ". " + this.taskList.get(i).getFullDescription() + "\n    ";
         }
         return formattedString.trim();
     }

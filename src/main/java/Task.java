@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -22,4 +22,6 @@ public class Task {
     public String getDescriptionWithIsDone() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
+
+    public abstract String getFullDescription();
 }

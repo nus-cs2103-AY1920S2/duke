@@ -11,27 +11,33 @@ public class Duke {
     }
 
     private void getCommands() {
-        Parser parser = new Parser();
-        Scanner sc =  new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
 
         while (true) {
-            String userCommand = sc.nextLine();
-            String[] userCommandArr = userCommand.split(" ");
-            Command command = parser.parse(userCommandArr[0]);
+            String userInput = sc.nextLine();
+            Parser parser = new Parser(userInput);
+            Command command = parser.getCommand();
 
             if (command == Command.EXIT_DUKE) {
                 break;
             } else if (command == Command.LIST_TASKS) {
                 this.print(taskList.listTasks());
-            } else if (command == Command.ADD_TASK) {
-                Task task = new Task(userCommand);
-                taskList.addTask(task);
-                this.print("added: " + task.getDescription());
+            } else if (command == Command.ADD_TODO) {
+                Todo todo = new Todo(parser.getDescription());
+                taskList.addTask(todo);
+                this.print("Added: " + todo.getFullDescription() + "\n    " + taskList.printNumTasks());
+            } else if (command == Command.ADD_DEADLINE) {
+                Deadline deadline = new Deadline(parser.getDescription(), parser.getBy());
+                taskList.addTask(deadline);
+                this.print("Added: " + deadline.getFullDescription() + "\n    " + taskList.printNumTasks());
+            } else if (command == Command.ADD_EVENT) {
+                Event event = new Event(parser.getDescription(), parser.getAt());
+                taskList.addTask(event);
+                this.print("Added: " + event.getFullDescription() + "\n    " + taskList.printNumTasks());
             } else if (command == Command.MARK_TASK_AS_DONE) {
-                int taskIndex = Integer.parseInt(userCommandArr[1]) - 1;
-                Task task = taskList.markAsDone(taskIndex);
-                this.print("Marked as done:\n      " + task.getDescriptionWithIsDone());
+                Task task = taskList.markAsDone(parser.getTaskIndex());
+                this.print("Marked as done: " + task.getFullDescription() + "\n    " + taskList.printNumTasks());
             }
         }
         sc.close();
