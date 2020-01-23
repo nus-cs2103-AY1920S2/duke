@@ -15,17 +15,18 @@ public class CommandParser {
      *         it what to do next
      */
     public Instruction parse(String command) throws UnknownInstructionException {
-        if (command.equals(Command.BYE.word)) {
+        String firstWord = command.split("\\s+", 2)[0];
+        if (firstWord.equals(Command.BYE.word)) {
             return Instruction.TERMINATE;
-        } else if (command.startsWith(Command.DONE.word)) {
+        } else if (firstWord.equals(Command.DONE.word)) {
             return Instruction.MARK_DONE;
-        } else if (command.equals(Command.LIST.word)) {
+        } else if (firstWord.equals(Command.LIST.word)) {
             return Instruction.READ_STORAGE;
-        } else if (command.startsWith(Command.DEADLINE.word)) {
+        } else if (firstWord.equals(Command.DEADLINE.word)) {
             return Instruction.STORE_DDL;
-        } else if (command.startsWith(Command.EVENT.word)) {
+        } else if (firstWord.equals(Command.EVENT.word)) {
             return Instruction.STORE_EVENT;
-        } else if (command.startsWith(Command.TODO.word)) {
+        } else if (firstWord.equals(Command.TODO.word)) {
             return Instruction.STORE_TODO;
         } else {
             throw new UnknownInstructionException(command);

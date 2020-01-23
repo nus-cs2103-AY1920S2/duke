@@ -29,7 +29,7 @@ public class Deadline extends Task {
         if (indexFirst == -1) {
             throw new InadequateArgumentsException(Command.DEADLINE.word);
         }
-        return t.substring(0, indexFirst).stripTrailing();
+        return t.substring(0, indexFirst).stripTrailing().stripLeading();
     }
 
     /**

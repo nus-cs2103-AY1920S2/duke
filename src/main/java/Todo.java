@@ -4,7 +4,9 @@
  */
 public class Todo extends Task {
     public Todo(String td) throws InadequateArgumentsException {
-        super(Todo.nonEmptyCheck(td.substring(Command.TODO.word.length())), "");
+        super(Todo.nonEmptyCheck(
+            td.substring(Command.TODO.word.length()).stripLeading()),
+         "");
     }
 
     @Override
