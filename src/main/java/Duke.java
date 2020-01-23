@@ -56,7 +56,7 @@ public class Duke {
 
         } else if (command.equals("event")) {
             String[] arr = input.split("/at");
-            Task t = new EventTask(arr[0].substring(5), arr[1]);
+            Task t = new EventTask(arr[0].substring(6), arr[1]);
             taskList.list.add(t);
             numOfTask = taskList.list.size();
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
