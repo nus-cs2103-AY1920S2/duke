@@ -13,7 +13,6 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<String> items = new ArrayList<>();
-        int itemCount = 0;
 
         while (sc.hasNext()) {
             String item = sc.nextLine();
@@ -22,10 +21,8 @@ public class Duke {
                 return;
             }
             if (item.equals("list")) {
-                for (String i: items) {
-                    System.out.print(itemCount + 1);
-                    System.out.println(". " + i);
-                    itemCount++;
+                for (int i = 1; i <= items.size(); i++) {
+                    System.out.println(i + ".  " + items.get(i - 1));
                 }
                 continue;
             }
