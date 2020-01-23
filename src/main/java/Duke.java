@@ -4,7 +4,12 @@ public class Duke {
     ArrayList<Task> list;
     int latest_index = 0;
 
+
     public void printList() {
+
+        if (latest_index == 0) {
+            System.out.println("There is nothing in your list now");
+        }
 
         for (int i = 1; i < latest_index + 1; i++) {
             System.out.println(i + ". " + list.get(i-1).toString());
