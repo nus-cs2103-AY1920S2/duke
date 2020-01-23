@@ -1,0 +1,34 @@
+	============================================================
+	 Hello. I'm Duke.
+	 Oh, it's you, can you please stop coming?
+	============================================================
+
+	============================================================
+	 Another task? Oh well, here's the task:
+	 	[D][✘] CS2103 Project (by: Thursday 2359)
+	 Now you have 1 tasks in the list.
+	============================================================
+
+	============================================================
+	 Another task? Oh well, here's the task:
+	 	[E][✘] charITeach (at: 21 March 9am-6pm)
+	 Now you have 2 tasks in the list.
+	============================================================
+
+	============================================================
+	 Another task? Oh well, here's the task:
+	 	[T][✘] go to therapist
+	 Now you have 3 tasks in the list.
+	============================================================
+
+	============================================================
+	 Here are your procrastinated tasks:
+	 1.[D][✘] CS2103 Project (by: Thursday 2359)
+	 2.[E][✘] charITeach (at: 21 March 9am-6pm)
+	 3.[T][✘] go to therapist
+	============================================================
+
+	============================================================
+	 Bye. Please don't come back again or I'll call the cops.
+	============================================================
+

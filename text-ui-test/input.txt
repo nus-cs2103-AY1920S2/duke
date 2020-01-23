@@ -1,0 +1,5 @@
+deadline CS2103 Project /by Thursday 2359
+event charITeach /at 21 March 9am-6pm
+todo go to therapist
+list
+bye
