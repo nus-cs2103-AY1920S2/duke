@@ -38,8 +38,8 @@ public class Duke {
      * within the valid range.
      */
 
-    public boolean isInRange(int index) {
-        return index > 0 && index <= tasks.size() && tasks.size() > 0;
+    public boolean isNotInRange(int index) {
+        return index <= 0 || index > tasks.size() || tasks.size() <= 0;
     }
 
     /**
@@ -47,9 +47,14 @@ public class Duke {
      * to be done, and inform the client later. This method is
      * being called when a done command is entered by a client.
      * @param index The index of a particular task in the task list.
+     * @throws DukeInvalidArgumentFormatException If the index given is out of bound.
      */
 
-    public void markDone(int index) {
+    public void markDone(int index) throws DukeInvalidArgumentFormatException {
+        if (isNotInRange(index)) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
+        }
+
         Task task = getTask(index);
         task.markAsDone();
         System.out.println("Nice! I've marked this task as done: ");
@@ -66,7 +71,7 @@ public class Duke {
      * @return The Task instance of an index provided by the client.
      */
 
-    public Task getTask(int index) {
+    private Task getTask(int index) {
         return tasks.get(index - 1);
     }
 
@@ -76,6 +81,9 @@ public class Duke {
      */
 
     public void listTasks() {
+        if (tasks.size() == 0) {
+            System.out.println("The list is currently empty. Fill me please!");
+        }
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.printf("%d. %s\n", i, tasks.get(i - 1));
         }
@@ -85,10 +93,10 @@ public class Duke {
      * addTask method adds the task with the corresponding
      * type, and the description provided by the client.
      * @param argument The argument of the add task.
-     * @throws DukeException If there is a format error in the command.
+     * @throws DukeInvalidArgumentFormatException If there is a format error in the command.
      */
 
-    public void addTask(Argument argument) throws DukeException {
+    public void addTask(Argument argument) throws DukeInvalidArgumentFormatException {
         Command command = argument.getCommand();
         Task new_task;
 
@@ -128,12 +136,12 @@ public class Duke {
      * deleteTask deletes the task of a particular index
      * from the list.
      * @param index The index of the task in the list to be deleted.
-     * @throws DukeException If the index given is not within the valid range.
+     * @throws DukeInvalidArgumentFormatException If the index given is not within the valid range.
      */
 
-    public void deleteTask(int index) throws DukeException {
-        if (!isInRange(index)) {
-            throw new DukeException("☹ OOPS!!! The index given is out of bound.");
+    public void deleteTask(int index) throws DukeInvalidArgumentFormatException {
+        if (isNotInRange(index)) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
         }
 
         Task task = getTask(index);
@@ -188,7 +196,7 @@ public class Duke {
                     addTask(argument);
                     break;
             }
-        } catch (DukeException exc) {
+        } catch (DukeInvalidArgumentFormatException | DukeUnknownKeywordException exc) {
             System.err.println(exc);
         }
     }

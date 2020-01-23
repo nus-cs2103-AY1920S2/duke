@@ -20,21 +20,14 @@
 public class DukeException extends Exception {
 
     /**
-     * Constructs a DukeException class with the error
-     * message.
-     * @param message The error message of the DukeException;
-     */
-
-    public DukeException(String message) {
-        super(message);
-    }
-
-    /**
      * The toString method overrides the Object's toString method
      * and it returns the error message so that the client is informed
      * about the error.
      * @return the String about the error message
      */
+    public DukeException(String message) {
+        super(message);
+    }
 
     @Override
     public String toString() {
