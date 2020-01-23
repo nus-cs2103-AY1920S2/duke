@@ -1,11 +1,12 @@
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
-    public static int count = 0;
-    public static Task[] listOfTask = new Task[100];
-    public static HashMap<String, String> commandpairing = new HashMap<String, String>();
 
+    public static HashMap<String, String> commandpairing = new HashMap<String, String>();
+    public static List<Task> listOfTask = new ArrayList<Task>();
     /**
      * Perform the necessary action based on the input.
      * @param s1 String to be executed on
@@ -24,6 +25,7 @@ public class Duke {
         commandpairing.put("todo", "2");
         commandpairing.put("event", "/at");
         commandpairing.put("deadline", "/by");
+        commandpairing.put("delete", "2");
     }
 
     public static void HorizontalLine() {
@@ -66,16 +68,17 @@ public class Duke {
     public static void add(Task mytask) {
         HorizontalLine();
         System.out.println("Got it. I've added this task:");
-        listOfTask[count++] = mytask;
+        listOfTask.add(mytask);
         System.out.println(mytask);
-        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("Now you have " + listOfTask.size() + " tasks in the list.");
         HorizontalLine();
     }
 
     public static boolean inputhandling(String input) {
         String[] arguments = input.split(" ");
+
         try {
-            if (!commandpairing.containsKey(arguments[0]))
+            if (!commandpairing.containsKey((arguments[0]).toLowerCase()))
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         } catch (DukeException ex){

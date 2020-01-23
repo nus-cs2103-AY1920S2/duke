@@ -8,9 +8,12 @@ public enum DukeCommand {
         public void execute(String s1) {
             Duke.HorizontalLine();
             // Print all the tasks added
-            for (int j = 0; j < Duke.count; j++) {
-                System.out.println(j + 1 + "." + Duke.listOfTask[j]);
+
+            int counter = 1;
+            for (Task currtask : Duke.listOfTask) {
+                System.out.println(counter++ + "." + currtask);
             }
+
             Duke.HorizontalLine();
         }
     },
@@ -24,8 +27,8 @@ public enum DukeCommand {
 
             Duke.HorizontalLine();
             System.out.println("Nice! I've marked this as done:");
-            Duke.listOfTask[pos].taskIsDone(); // Mark this task as done
-            System.out.println(Duke.listOfTask[pos]);
+            (Duke.listOfTask).get(pos).taskIsDone(); // Mark this task as done
+            System.out.println((Duke.listOfTask).get(pos));
             Duke.HorizontalLine();
         }
     },
@@ -61,6 +64,23 @@ public enum DukeCommand {
             String[] strarr = substr.split("\\s+", 2);
 
             Duke.add(new Event(s1.substring(6, limit), strarr[1]));
+        }
+    },
+    DELETE {
+        @Override
+        public void execute(String s1) {
+            // Split the string to get the
+            // index of the task to be deleted
+            String[] arrdel = s1.split("\\s+");
+            int pos = Integer.parseInt(arrdel[1]) - 1;
+
+            Duke.HorizontalLine();
+            System.out.println("Noted. I've removed this task:");
+            System.out.println((Duke.listOfTask).get(pos));
+            (Duke.listOfTask).remove(pos); // Mark this task as done
+
+            System.out.println("Now you have " + Duke.listOfTask.size() + " tasks in the list.");
+            Duke.HorizontalLine();
         }
     };
 
