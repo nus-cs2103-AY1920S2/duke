@@ -7,7 +7,12 @@ public class Duke {
     static ArrayList<Task> arr;
     static Scanner scanner;
 
-    public static void main(String[] args) {
+    Duke() {
+        arr = new ArrayList<>();
+        scanner = new Scanner(System.in);
+    }
+
+    public static void start() {
         String line = "-----------------------------------";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,9 +23,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
         System.out.println(line);
-        arr = new ArrayList<>();
-
-        scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
             checkCommand(input);
@@ -33,39 +35,57 @@ public class Duke {
         String line = "-----------------------------------";
         String[] strArr = input.split(" ");
         String command = strArr[0];
-        switch (command) {
-            case "bye":
-                printWithFormat("", "bye");
-                break;
-            case "list":
-                printWithFormat("", "list");
-                break;
-            case "done":
-                int index = Integer.parseInt(strArr[1]) - 1;
-                Task taskToBeDone = arr.get(index);
-                taskToBeDone.setDone();
-                printWithFormat(taskToBeDone.toString(), "done");
-                break;
-            case "deadline":
-                Deadline d = new Deadline(input);
-                arr.add(d);
-                printWithFormat(d.toString(), "task");
-                break;
-            case "event":
-                Event e = new Event(input);
-                arr.add(e);
-                printWithFormat(e.toString(), "task");
-                break;
-            case "todo":
-                Todo td = new Todo(input);
-                arr.add(td);
-                printWithFormat(td.toString(), "task");
-                break;
-            default:
-                Task t = new Task(input);
-                arr.add(t);
-                printWithFormat(t.toString(), "");
-                break;
+        try {
+            int length = strArr.length;
+            switch (command) {
+                case "bye":
+                    printWithFormat("", "bye");
+                    break;
+                case "list":
+                    printWithFormat("", "list");
+                    break;
+                case "done":
+                    if (length > 1) {
+                        int index = Integer.parseInt(strArr[1]) - 1;
+                        Task taskToBeDone = arr.get(index);
+                        taskToBeDone.setDone();
+                        printWithFormat(taskToBeDone.toString(), "done");
+                        break;
+                    } else {
+                        throw new DukeException("empty", command);
+                    }
+                case "deadline":
+                    if (length > 1) {
+                        Deadline d = new Deadline(input);
+                        arr.add(d);
+                        printWithFormat(d.toString(), "task");
+                        break;
+                    } else {
+                        throw new DukeException("empty", command);
+                    }
+                case "event":
+                    if (length > 1) {
+                        Event e = new Event(input);
+                        arr.add(e);
+                        printWithFormat(e.toString(), "task");
+                        break;
+                    } else {
+                        throw new DukeException("empty", command);
+                    }
+                case "todo":
+                    if (length > 1) {
+                        Todo td = new Todo(input);
+                        arr.add(td);
+                        printWithFormat(td.toString(), "task");
+                        break;
+                    } else {
+                        throw new DukeException("empty", command);
+                    }
+                default:
+                    throw new DukeException("invalid", command);
+            }
+        } catch (DukeException d){
+            printWithFormat(d.getMessage(), "");
         }
     }
 
@@ -97,7 +117,7 @@ public class Duke {
                 System.out.println(input);
                 break;
             default:
-                System.out.println("added: " + input);
+                System.out.println(input);
                 break;
         }
         System.out.println(line);
