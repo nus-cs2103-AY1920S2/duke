@@ -28,13 +28,12 @@ public class Duke {
                     String taskType = in.split(" ", 2)[0];
                     if (taskType.equals("delete")){
                         Task.deleteTask(in);
-                    }
-                    if (Task.isValidTask(taskType)){
+                    } else if (Task.isValidTask(taskType)){
                         Task.addTask(in);
                     } else if (in.isEmpty() || in == null){
                         System.err.println("     ☹ OOPS!!! Please type something here.");
                     } else {
-//                        System.err.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.err.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
             }
             in = sc.nextLine();
