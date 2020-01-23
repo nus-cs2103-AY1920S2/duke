@@ -10,18 +10,20 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         */
         String line = "____________________________________________________________";
-        System.out.println(line);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println(line);
+        System.out.println("\t" + line);
+        System.out.println("\tHello! I'm Duke");
+        System.out.println("\tWhat can I do for you?");
+        System.out.println("\t" + line);
         Scanner sc = new Scanner(System.in);
-        String next = sc.next();
+        String next = sc.nextLine();
         while (!next.equals("bye")) {
-            System.out.println(line);
-            System.out.println(next);
-            System.out.println(line);
-            next = sc.next();
+            System.out.println("\t" + line);
+            System.out.println("\t" + next);
+            System.out.println("\t" + line);
+            next = sc.nextLine();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("\t" + line);
+        System.out.println("\t" + "Bye. Hope to see you again soon!");
+        System.out.println("\t" + line);
     }
 }
