@@ -20,7 +20,7 @@ public class ToDo implements Task {
 
     @Override
     public String toString(){
-        return taskStateString() + " " + this.taskName;
+        return "[T]" + taskStateString() + " " + this.taskName;
     }
 
 }

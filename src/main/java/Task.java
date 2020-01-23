@@ -5,14 +5,15 @@ public interface Task{
     static List<Task> taskList = new ArrayList<>();
 
     public static void addTask(String taskName){
-        String taskType = taskName.split(" ")[0];
+        String taskType = taskName.split(" ", 2)[0];
+        String taskDesc = taskName.split(" ", 2)[1];
         Task newTask;
         if (taskType.equals("todo")){
-            newTask = new ToDo(taskName);
+            newTask = new ToDo(taskDesc);
         } else if (taskType.equals("deadline")){
-            newTask = new Deadline(taskName);
+            newTask = new Deadline(taskDesc);
         } else {
-            newTask = new Event(taskName);
+            newTask = new Event(taskDesc);
         }
         taskList.add(newTask);
         System.out.println("     Got it. I've added this task: ");
