@@ -1,4 +1,5 @@
-import java.util.Arrays;
+package duke;
+
 import java.lang.StringBuilder;
 
 public class Event extends Task {

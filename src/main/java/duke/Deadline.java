@@ -1,5 +1,6 @@
+package duke;
+
 import java.lang.StringBuilder;
-import java.util.Arrays;
 
 public class Deadline extends Task {
     String timing;

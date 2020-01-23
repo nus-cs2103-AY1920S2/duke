@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
@@ -7,7 +9,7 @@ public class Duke {
     static ArrayList<Task> arr;
     static Scanner scanner;
 
-    Duke() {
+    public Duke() {
         arr = new ArrayList<>();
         scanner = new Scanner(System.in);
     }

@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     String errorType;
     String inputType;
