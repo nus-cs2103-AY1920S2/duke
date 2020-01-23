@@ -33,6 +33,13 @@ public class Duke {
                 tasks.set(taskNumber - 1, updatedTask);
                 System.out.println("\tNice! I've marked this task as done:");
                 System.out.println("\t\t" + updatedTask);
+            } else if (next.trim().split(" ")[0].equals("delete")) {
+                Integer taskNumber = Integer.valueOf((next.split(" ")[1]));
+                Task removedTask = tasks.get(taskNumber - 1);
+                tasks.remove(removedTask);
+                System.out.println("\tNoted. I've removed this task:");
+                System.out.println("\t\t" + removedTask);
+                System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
             } else {
                 try {
                     Task newTask;
