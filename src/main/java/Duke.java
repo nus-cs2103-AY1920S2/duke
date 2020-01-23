@@ -76,6 +76,9 @@ public class Duke {
                     }
                 }
                 break;
+            case "delete":
+                deleteTask(cmd[1]);
+                break;
             case "list":
                 printTasks();
                 break;
@@ -94,14 +97,14 @@ public class Duke {
     private void markAsDone(String index) {
         int num = Integer.parseInt(index.trim());
         if (num < 1 || num > this.tasks.size()) {
-            throw new IllegalArgumentException("The index inputted is out of bounds!");
+            System.out.println("\tThe index inputted is not in the list!");
         } else {
             Task toBeDone = this.tasks.get(num - 1);
             toBeDone.toggleIsDone();
             System.out.println("\tGood job! You have completed this task!");
             System.out.println("\t\t" + toBeDone);
-            this.waitInput();
         }
+        this.waitInput();
     }
 
     private void addTask(Task task) {
@@ -111,6 +114,21 @@ public class Duke {
         System.out.println("\tYou have total of " + this.tasks.size() + " tasks in the list.");
         this.waitInput();
     }
+
+    private void deleteTask(String index) {
+        int num = Integer.parseInt(index.trim());
+        if (num < 1 || num > this.tasks.size()) {
+            System.out.println("\tThe index inputted is not in the list!");
+        } else {
+            Task deleted = this.tasks.get(num - 1);
+            System.out.println("\tOkay! I've removed this task!");
+            System.out.println("\t\t" + deleted);
+            this.tasks.remove(num - 1);
+            System.out.println("\tYou have total of " + this.tasks.size() + " tasks in the list.");
+        }
+        this.waitInput();
+    }
+
     public void run() {
         this.intro();
         this.waitInput();
