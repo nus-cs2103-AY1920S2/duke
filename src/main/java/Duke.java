@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -59,7 +59,7 @@ public class Duke {
                 deadline = deadline.substring(0, deadline.length() - 1);
                 Deadline d = new Deadline(deadline, date);
                 listOfText.add(d);
-                System.out.println("Got you covered! Added this task to the list: ");
+                System.out.println("Got you covered! Added this task to the list:");
                 System.out.println(d);
                 System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
 
