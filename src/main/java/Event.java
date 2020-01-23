@@ -24,9 +24,9 @@ public class Event extends Task {
     public String toString() {
 
         if (super.getStatus() == 0) {
-            return "[E][✗]" + super.toString() + " (by: " + by + ")";
+            return "[E][✗]" + super.toString() + " (at: " + by + ")";
         } else {
-            return "[E][✓]" + super.toString() + " (by: " + by + ")";
+            return "[E][✓]" + super.toString() + " (at: " + by + ")";
         }
     }
 }
