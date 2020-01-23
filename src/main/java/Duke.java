@@ -50,8 +50,6 @@ public class Duke {
                     int index = Integer.valueOf(rest);
                     Tasks.get(index-1).markAsDone();
                 }
-                
-                
             } else if (command.equals("todo")) {
                 if (x.length == 1) {
                     throw new DukeException("Tell me the description of the task!!");
@@ -94,6 +92,19 @@ public class Duke {
                 System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
+            } else if (command.equals("delete")) {
+                if (x.length == 1) {
+                    throw new DukeException("Tell me which task you want to delete!!");
+                } else {
+                    String rest = x[1];
+                    int index = Integer.valueOf(rest);
+                    Tasks.get(index-1).deleteTask();
+                    System.out.println("Now you have " + Tasks.size()-1 + " tasks in the list.");
+                    System.out.println();
+                    System.out.println("-------------------------------------------------------------");
+                    Tasks.remove(index-1);
+
+                }
             } else {
                 throw new DukeException("Oops I'm sorry, what is this?");
             }

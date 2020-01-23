@@ -26,6 +26,12 @@ public class Task {
         System.out.println("-------------------------------------------------------------");
     }
 
+    public void deleteTask() {
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("Noted, I have deleted this task:");
+        System.out.println(this);
+    }
+
     
     public String toString() {
         return this.getStatusIcon() + " " + description;
