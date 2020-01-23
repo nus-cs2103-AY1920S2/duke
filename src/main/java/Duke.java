@@ -44,6 +44,7 @@ public class Duke {
 
     private static void bye() {
         print("Bye. Hope to see you again soon!");
+        System.exit(0);
     }
 
     private void printList() {
@@ -73,18 +74,28 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
-    private void createAndAddTask(String lineInput) {
+    private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
         String[] splitInput = lineInput.split(" ");
         String command = splitInput[0];
+
+        if (splitInput.length == 1) {
+            throw new DukeEmptyDescriptionException("OOPS!!! The description of a task cannot be empty.");
+        }
+
         String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         Task newTask;
 
         if (command.equals(TODO_COMMAND)) {
+            // empty string array would become empty string
             String taskDescription = String.join(" ", inputWithoutCommand);
             newTask = new Todo(taskDescription);
         } else {
             String keyword = command.equals(DEADLINE_COMMAND) ? DEADLINE_BY : EVENT_AT;
             int keywordIndex = Arrays.asList(splitInput).indexOf(keyword);
+
+            if (keywordIndex == -1) {
+                throw new DukeNoKeywordException("OOPS!!! The description must contain a keyword.");
+            }
 
             String description = String.join(" ",
                     Arrays.copyOfRange(splitInput, 1, keywordIndex));
@@ -104,6 +115,31 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
+    private void processInput(String lineInput) {
+        String[] splitInput = lineInput.split(" ");
+        // empty line would output string array of size 1, where the element is empty string
+        String command = splitInput[0];
+
+        if (command.equals(END_COMMAND)) {
+            bye();
+        } else if (command.equals(LIST_COMMAND)) {
+            this.printList();
+        } else if (command.equals(DONE_COMMAND)) {
+            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
+            this.markTaskAsDone(taskIndex);
+        } else if (command.equals(TODO_COMMAND) ||
+                command.equals(DEADLINE_COMMAND) ||
+                command.equals(EVENT_COMMAND)) {
+            try {
+                this.createAndAddTask(lineInput);
+            } catch (Exception e) {
+                print(e.toString());
+            }
+        } else {
+            print("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
@@ -112,25 +148,7 @@ public class Duke {
 
         while (true) {
             String lineInput = sc.nextLine();
-            String[] splitInput = lineInput.split(" ");
-            String command = splitInput[0];
-
-            if (command.equals(END_COMMAND)) {
-                break;
-            } else if (command.equals(LIST_COMMAND)) {
-                duke.printList();
-            } else if (command.equals(DONE_COMMAND)) {
-                int taskIndex = Integer.parseInt(splitInput[1]) - 1;
-                duke.markTaskAsDone(taskIndex);
-            } else if (command.equals(TODO_COMMAND) ||
-                    command.equals(DEADLINE_COMMAND) ||
-                    command.equals(EVENT_COMMAND)) {
-                duke.createAndAddTask(lineInput);
-            } else {
-                print("Error: unknown command");
-            }
+            duke.processInput(lineInput);
         }
-
-        bye();
     }
 }

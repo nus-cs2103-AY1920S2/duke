@@ -7,4 +7,9 @@ done 1
 done 3
 blah blah
 list
+todo
+event
+deadline
+event something something
+deadline something something
 bye
