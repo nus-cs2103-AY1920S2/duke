@@ -9,7 +9,7 @@ public class Parser {
             parser=new Parser();
             return parser;
         }
-        throw new SingletonException(ErrorMessage.SINGLETON.toString()+" parser.");
+        throw new SingletonException("There should only be one parser.");
     }
 
     public Command parse(String userInput) throws DukeException {
@@ -36,12 +36,9 @@ public class Parser {
                     return parseList();
                 case "bye":
                     return parseBye();
-                case "done": case "delete": case "todo": case "deadline":
-                case "event":
-                    throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
             }
         }
-        throw new DukeException(ErrorMessage.UNKNOWN_INPUT.toString());
+        throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
 
@@ -58,7 +55,7 @@ public class Parser {
             int index = Integer.parseInt(information) - 1;
             return new Command_Done(index);
         }catch (NumberFormatException e){
-            throw new DukeException(ErrorMessage.LACK_NUMBER.toString());
+            throw new DukeException("The input for done must contain a number.");
         }
     }
 
@@ -67,50 +64,48 @@ public class Parser {
             int index = Integer.parseInt(information) - 1;
             return new Command_Delete(index);
         }catch (NumberFormatException e){
-            throw new DukeException(ErrorMessage.LACK_NUMBER.toString());
+            throw new DukeException("The input for done must contain a number.");
         }
     }
 
     private Command parseTodo(String information) throws DukeException {
         if(information.trim().length()==0) {
-            throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
+            throw new DukeException("The description of the todo cannot be empty.");
         }
         return new Command_AddToDo(information);
     }
 
     private Command parseDeadline(String information) throws DukeException {
-        String BY = " /by ";
-        if(!information.contains(BY)){
-            throw new DukeException(ErrorMessage.LACK_INPUT.toString()+ BY);
+        if(!information.contains(" /by ")){
+            throw new DukeException("The input for deadline must contain /by ");
         }
 
-        String description=information.substring(0,information.indexOf(BY));
+        String description=information.substring(0,information.indexOf(" /by "));
         if(description.trim().length()==0) {
-            throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
+            throw new DukeException("The description of the deadline cannot be empty.");
         }
 
-        String time=information.substring(information.indexOf(BY)+5);
+        String time=information.substring(information.indexOf(" /by ")+5);
         if(time.trim().length()==0) {
-            throw new DukeException(ErrorMessage.LACK_TIME.toString());
+            throw new DukeException("The time of the deadline cannot be empty.");
         }
 
         return new Command_AddDeadline(description,time);
     }
 
     private Command parseEvent(String information) throws DukeException {
-        String AT = " /at ";
-        if(!information.contains(AT)){
-            throw new DukeException(ErrorMessage.LACK_INPUT.toString()+ AT);
+        if(!information.contains(" /at ")){
+            throw new DukeException("The input for event must contain /at ");
         }
 
-        String description=information.substring(0,information.indexOf(AT));
+        String description=information.substring(0,information.indexOf(" /at "));
         if(description.trim().length()==0) {
-            throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
+            throw new DukeException("The description of the event cannot be empty.");
         }
 
-        String time=information.substring(information.indexOf(AT)+5);
+        String time=information.substring(information.indexOf(" /at ")+5);
         if(time.trim().length()==0) {
-            throw new DukeException(ErrorMessage.LACK_TIME.toString());
+            throw new DukeException("The time of the event cannot be empty.");
         }
 
         return new Command_AddEvent(description,time);
