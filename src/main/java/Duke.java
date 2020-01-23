@@ -44,6 +44,9 @@ public class Duke {
                 } else if (viewListKey.equals(input)) {
                     String listOverView = line;
                     for (int i = 0; i < taskArray.length; i++) {
+                        if (taskArray[i] == null) {
+                            break;
+                        }
                         listOverView = listOverView + taskArray[i] + "\n";
                     }
                     listOverView = listOverView + line;
