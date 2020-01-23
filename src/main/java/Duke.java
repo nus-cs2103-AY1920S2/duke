@@ -27,30 +27,39 @@ public class Duke {
         hLine();
     }
 
-    private static void printTasks(ArrayList<String> tasks) {
-        hLine();
+    private static void printTasks(ArrayList<Task> tasks) {
+//        hLine();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            System.out.println((i + 1) + ". " + tasks.get(i).toString());
         }
-        hLine();
+//        hLine();
     }
 
     public static void main(String[] args) {
         printWelcomeMessage();
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         String input = scanner.nextLine();
+        String[] inputsplit = input.split(" ");
+
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 printTasks(tasks);
+            } else if (inputsplit[0].equals("done")) {
+                int doneId = Integer.parseInt(inputsplit[1]);
+                tasks.get(doneId - 1).markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n" +
+                        tasks.get(doneId - 1).toString());
+
             } else {
-                printWithHLine("added: " + input);
-                tasks.add(input);
+                System.out.println("added: " + input);
+                tasks.add(new Task(input));
             }
 
             input = scanner.nextLine();
+            inputsplit = input.split(" ");
         }
 
         printWithHLine("Bye. Hope to see you again soon!");
