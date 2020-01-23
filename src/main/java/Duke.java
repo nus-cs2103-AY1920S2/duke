@@ -14,35 +14,83 @@ public class Duke {
         String userInput = "";
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        String[] arr = new String[100];
-        String[] doneArr = new String[100];
-        int arrPointer = 1;
-        String doneLogo = "[✓]";
-        String notDoneLogo = "[✗]";
-        for (int i = 0; i < 100; i++) {
-            doneArr[i] = notDoneLogo;
-        }
+        ArrayList <Task> arr = new ArrayList<Task>();
+
         do {
             userInput = sc.nextLine();
             if (userInput.equals("list")) {                                                  //Lists out the tasks
                 System.out.println("Here are the tasks in your list: ");
-                for (int i = 1; i < arrPointer; i++) {
-                    System.out.println(i + "." + doneArr[i] + " " + arr[i]);
+                for (int i = 1; i <= arr.size(); i++) {
+                    System.out.println(i + "." + arr.get(i - 1).getIcon() + arr.get(i - 1).status + " " + arr.get(i - 1).getDescription());
                 }
             }
             else if (userInput.split("\\s")[0].equals("done")) {
                 int doneTask = Integer.parseInt(userInput.split("\\s")[1]);
-                doneArr[doneTask] = doneLogo;
+                arr.get(doneTask - 1).setDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(doneLogo + " " + arr[doneTask]);
+                System.out.println(arr.get(doneTask - 1).status + " " + arr.get(doneTask - 1).getDescription());
             }
-            else {
-                arr[arrPointer] = userInput;
-                arrPointer++;
+            else if (userInput.split("\\s")[0].equals("todo")) {
+                String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
+                String taskDescription = "";
+                for (int i = 0; i < taskRequest.length; i++) {
+                    if (i == 0) {
+                        taskDescription += taskRequest[i];
+                    }
+                    else {
+                        taskDescription += " " + taskRequest[i];
+                    }
+                }
+                Task curr = new Task("todo", taskDescription);
+                arr.add(curr);
                 if (!userInput.equals("bye")) {
-                    System.out.println("added: " + userInput);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
                 }
 
+            }
+            else if (userInput.split("\\s")[0].equals("deadline")) {
+                String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
+                String taskDescriptionDate = "";
+                for (int i = 0; i < taskRequest.length; i++) {
+                    if (i == 0) {
+                        taskDescriptionDate += taskRequest[i];
+                    }
+                    else {
+                        taskDescriptionDate += " " + taskRequest[i];
+                    }
+                }
+                String taskDescription = taskDescriptionDate.split("/")[0];
+                Task curr = new Task("deadline", taskDescription);
+                curr.addDate(taskDescriptionDate.split("/")[1]);
+                arr.add(curr);
+                if (!userInput.equals("bye")) {
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                }
+            }
+            else if (userInput.split("\\s")[0].equals("event")) {
+                String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
+                String taskDescriptionDate = "";
+                for (int i = 0; i < taskRequest.length; i++) {
+                    if (i == 0) {
+                        taskDescriptionDate += taskRequest[i];
+                    }
+                    else {
+                        taskDescriptionDate += " " + taskRequest[i];
+                    }
+                }
+                String taskDescription = taskDescriptionDate.split("/")[0];
+                Task curr = new Task("event", taskDescription);
+                curr.addDate(taskDescriptionDate.split("/")[1]);
+                arr.add(curr);
+                if (!userInput.equals("bye")) {
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(curr.getIcon() + curr.status + " " + curr.getDescription());
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                }
             }
 
 
