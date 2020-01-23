@@ -1,0 +1,23 @@
+  ____
+ (.__.)
+<|>
+ /\
+_  _
+☛ dude, what do you want? 
+☛ give me a command!
+dude, ☛ fine, I will take note of: [T][✘] borrow book
+☛ you made me remember 1 task(s)
+dude, ☛ fine, I will take note of: [D][✘] return book (by: Sunday)
+☛ you made me remember 2 task(s)
+dude, ☛ fine, I will take note of: [D][✘] project meeting (at: Mon 2-4pm)
+☛ you made me remember 3 task(s)
+dude, ☛ you asked to:
+	1. [T][✘] borrow book
+	2. [D][✘] return book (by: Sunday)
+	3. [D][✘] project meeting (at: Mon 2-4pm)
+dude, ☛ dude, you're fast!
+dude, ☛ you asked to:
+	1. [T][✘] borrow book
+	2. [D][✔] return book (by: Sunday)
+	3. [D][✘] project meeting (at: Mon 2-4pm)
+dude, ☛ dude, stop wasting my time! shoo!
