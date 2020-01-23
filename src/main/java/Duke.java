@@ -3,6 +3,14 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Duke {
+    String[] tasks;
+    int taskCount;
+
+    public Duke() {
+        tasks = new String[100];
+        taskCount = 0;
+    }
+
     public static void main(String[] args) {
         Duke chatbot = new Duke();
 
@@ -33,7 +41,11 @@ public class Duke {
         String firstWord = words[0];
 
         switch (firstWord) {
+            case "list":
+                say(getTasks());
+                break;
             default:
+                addTask(speech);
                 say("Added: " + speech);
                 break;
         }
@@ -54,5 +66,20 @@ public class Duke {
         String result = separator + indented + separator;
 
         System.out.println(result);
+    }
+
+    private void addTask(String task) {
+        tasks[taskCount++] = task;
+    }
+
+    private String getTasks() {
+        String result = "";
+
+        for (int i = 0; i < taskCount; i++) {
+            result += (i + 1)
+                    + ". " + tasks[i] + "\n";
+        }
+
+        return result;
     }
 }
