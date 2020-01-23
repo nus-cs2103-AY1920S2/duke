@@ -1,5 +1,6 @@
 package akshay;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Akshay {
@@ -13,9 +14,8 @@ public class Akshay {
 
     public static void main(String[] args) {
         say("Hello I am [AKSHAY]!\nHow may I help you?");
-        Task[] arr = new Task[100];
+        ArrayList<Task> arr = new ArrayList<>(100);
         Scanner sc =  new Scanner(System.in);
-        int count = 0;
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             String[] c = input.split(" ", 2);
@@ -23,22 +23,21 @@ public class Akshay {
                 case ("list"):
                     System.out.println(line);
                     System.out.println("Here are the items in your list:");
-                    for (var i = 0; i < count; i++) {
-                        Task t = arr[i];
+                    for (var i = 0; i < arr.size(); i++) {
+                        Task t = arr.get(i);
                         System.out.println(i + 1 + ": " + t.toString());
                     }
                     System.out.println(line);
                     break;
                 case ("done"):
-                    Task curr = arr[Integer.parseInt(c[1]) - 1];
+                    Task curr = arr.get(Integer.parseInt(c[1]) - 1);
                     curr.mark();
                     say("Marked as done:\n" + curr.toString());
                     break;
                 case ("todo"):
                     try {
                         Task todo = new Todo(c[1]);
-                        arr[count] = todo;
-                        count++;
+                        arr.add(todo);
                         say("Added: " + todo.toString());
                     } catch (ArrayIndexOutOfBoundsException e) {
                         say("OOPS!!! The description of a todo cannot be empty.");
@@ -47,16 +46,23 @@ public class Akshay {
                 case ("deadline"):
                     String[] dl = c[1].split("/by",2);
                     Task d = new Deadline(dl[0], dl[1]);
-                    arr[count] = d;
-                    count++;
+                    arr.add(d);
                     say("Added: " + d.toString());
                     break;
                 case ("event"):
                     String[] ev = c[1].split("/at",2);
                     Task e = new Event(ev[0], ev[1]);
-                    arr[count] = e;
-                    count++;
+                    arr.add(e);
                     say("Added: " + e.toString());
+                    break;
+                case ("delete") :
+                    try {
+                        Task del = arr.get(Integer.parseInt(c[1]) - 1);
+                        arr.remove(Integer.parseInt(c[1]) - 1);
+                        say("Deleted item:\n" + del.toString());
+                    } catch (Exception i) {
+                        say("Failed to delete item!!!");
+                    }
                     break;
                 default:
                     try {
