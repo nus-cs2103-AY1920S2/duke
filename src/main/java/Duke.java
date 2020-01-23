@@ -21,7 +21,6 @@ import java.util.Optional;
 
 public class Duke {
     private ArrayList<Task> tasks;
-    private HashMap<String, Command> valid_commands;
 
     /**
      * Constructs the Duke instance that has a list that
@@ -31,16 +30,6 @@ public class Duke {
 
     public Duke() {
         this.tasks = new ArrayList<>();
-        this.valid_commands = new HashMap<String, Command>() {
-            {
-                put("list", Command.LIST);
-                put("done", Command.DONE);
-                put("todo", Command.TODO);
-                put("deadline", Command.DEADLINE);
-                put("event", Command.EVENT);
-                put("delete", Command.DELETE);
-            }
-        };
     }
 
     /**
@@ -68,19 +57,6 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.printf("   %s\n", task.toString());
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
-    }
-
-    /**
-     * getCommand method gets the Command enums of the corresponding
-     * command string provided. Optional instances are used to handle cases
-     * where the command string entered by the client is invalid, thus returning
-     * null value.
-     * @param command_string The command provided by the client to be processed.
-     * @return The corresponding Command enums, packed in form of an Optional instance.
-     */
-
-    public Optional<Command> getCommand(String command_string) {
-        return Optional.ofNullable(valid_commands.get(command_string));
     }
 
     /**
@@ -193,29 +169,21 @@ public class Duke {
      * @param arguments The instruction provided by the client.
      */
 
-    public void processCommand(String arguments) {
-        // Splits the arguments with a space as the delimiter. The first word is the command.
-        String[] splitted_arguments = arguments.split(" ");
-        String command_string = splitted_arguments[0];
-
+    public void processCommand(String commands) {
         try {
-            /*
-             If boxed_command is empty, it means that the command is not found.
-             Therefore, it will throw the exception to inform the client.
-             */
-
-            Optional<Command> boxed_command = getCommand(command_string);
-            Command command = boxed_command.orElseThrow(() ->
-                    new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            Argument argument = Argument.createArgument(commands);
+            Command command = argument.getCommand();
 
             /*
              The switch block performs the corresponding command,
              as requested by the client. The default method is being
              used for adding the tasks to the list. A DukeException
-             will be thrown if the input format is not valid.*/
+             will be thrown if the input format is not valid.
+             */
 
             switch (command) {
                 case LIST:
+                    Argument.isValidListCommand();
                     listTasks();
                     break;
 
