@@ -12,17 +12,16 @@ public class Duke {
         String in = sc.nextLine();
         while (!in.equals("bye")){
             if (in.equals("list")){
-                int i = 1;
-                for(Task task : Task.taskList){
-                    System.out.println(i + ". " + task);
-                    i++;
-                }
+                Task.printList();
+            } else if (in.contains("done")) {
+                int num = Integer.parseInt(in.substring(5));
+                Task.markDone(num);
             } else {
                 String out = Task.addTask(in);
                 System.out.println(out);
             }
             in = sc.nextLine();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("     Bye. Hope to see you again soon!");
     }
 }
