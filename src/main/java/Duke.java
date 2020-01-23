@@ -1,23 +1,22 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
-    public static Task list[]=new Task[100];
+    public static ArrayList<Task> list=new ArrayList<Task>(100);
     static int pos_in_list=0;
+
     public static void main(String args[]){
         System.out.println("____________________________________________________________\n Hello! I'm Duke\n What can I do for you?\n____________________________________________________________");
         Scanner sc=new Scanner(System.in);
         boolean flag=true;
+
         while(flag)
         {
 
             String sentence=sc.nextLine();
             int loc_of_space=sentence.indexOf(" ");
-            String first_word="";
-            if(loc_of_space==-1){
-                first_word=sentence;
-            }
-            else {
-                first_word = sentence.substring(0, loc_of_space);
-            }
+
+            String first_word=(loc_of_space==-1)?sentence:sentence.substring(0,loc_of_space);
 
             switch (first_word) {
                 case "done":
@@ -32,10 +31,37 @@ public class Duke {
                     System.out.println("____________________________________________________________\n Bye. Hope to see you again soon!\n____________________________________________________________");
                     flag=false;
                     break;
-                default:
-                    Add add_object=new Add();
-                    add_object.addToList(sentence);
+                    case "deadline":
+                        formatter(sentence,loc_of_space,"deadline");
+                        break;
+                    case "todo":
+                        Todo todo_obj=new Todo(sentence.substring(loc_of_space+1));
+                        Add add_objec=new Add();
+                        add_objec.addToList(todo_obj);
+                        break;
+                    case "event":
+                        formatter(sentence,loc_of_space,"event");
+                        break;
+
+                    default:
+
+
+                }
             }
         }
+
+        public static void formatter(String sentence, int loc_of_space, String type){
+            int loc_of_slash=sentence.indexOf("/");
+            String description=sentence.substring(loc_of_space+1,loc_of_slash-1);
+            String time=sentence.substring(loc_of_slash+4);
+            Task obj;
+            if(type.equals("deadline")) {
+                obj = new Deadline(description, time);
+            }
+            else{
+                obj=new Event(description,time);
+            }
+            Add add_object=new Add();
+            add_object.addToList(obj);
+        }
     }
-}

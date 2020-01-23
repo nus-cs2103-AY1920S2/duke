@@ -1,11 +1,10 @@
 public class Add extends Command{
 
-    void addToList(String word){
-        Task ob=new Task();
-        Duke.list[Duke.pos_in_list]=ob;
-        ob.setTaskName(word);
+    void addToList(Task ob){
+        Duke.list.add(ob);
         Duke.pos_in_list++;
-        System.out.println("____________________________________________________________\n  added: "+word+"\n____________________________________________________________");
+        String k=ob.toString();
+        System.out.println("____________________________________________________________\nGot it. I've added this task:\n  "+k+"\nNow you have "+Duke.pos_in_list+" tasks in the list.\n____________________________________________________________");
     }
 
 }

@@ -2,24 +2,18 @@ public class Print extends Command {
     void printList(){
         System.out.println("____________________________________________________________");
 
-
+        System.out.println("Here are the tasks in your list:");
         for(int i=0;i<Duke.pos_in_list;i++){
-            //System.out.println(i+1+". "+Duke.list[i]);
-            Task ob=Duke.list[i];
-            String tick="";
-            if(ob.getDone()==0) {
-                tick="[N]";
-            }
-            else{
-                tick="[Y]";
-            }
-            System.out.println(i + 1 + ". "+tick+" " + ob.getTaskName());
+            Task ob=Duke.list.get(i);
+            String tick=(ob.getDone()==0)?"[N]":"[Y]";
+            System.out.println(i + 1 + ". "+ob.toString());
         }
         System.out.println("____________________________________________________________");
     }
 
     void printTask(int i){
-        Task ob=Duke.list[i];
-        System.out.println("[Y] " + ob.getTaskName());
+
+        Task ob=Duke.list.get(i-1);
+        System.out.println(ob.toString());
     }
 }
