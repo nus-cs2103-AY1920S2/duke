@@ -37,35 +37,57 @@ public class Duke {
             }
 
             else {
-                String[] commands = in.split(" /");
-                String[] eventType = commands[0].split(" ");
-                if(eventType[0].equals("event")) {
-                    String[] subS = commands[1].split(" ");
-                    taskList.add(new Event(commands[0].substring(6,commands[0].length()), subS[0], commands[1].substring(subS[0].length())));
-                }
 
-                else if (eventType[0].equals("deadline")) {
-                    taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
-                }
+                try {
+                    String[] commands = in.split(" /");
+                    String[] eventType = commands[0].split(" ");
 
-                else {
-                    if (eventType[0].equals("todo")) {
+                    if(!((eventType[0].equals("todo"))|| eventType[0].equals("deadline")|| eventType[0].equals("event"))) {
+                        throw new DukeException("I'm sorry, but I do not know what that means :-(");
+                    }
+
+                    if(eventType.length == 1) {
+                        throw new DukeException("The description of a " + commands[0] + " cannot be empty.");
+                    }
+
+                    if (eventType[0].equals("event")) {
+                        if(commands.length == 1) {
+                            throw new DukeException("It appears that no timing was provided for this event!");
+                        }
+                        String[] subS = commands[1].split(" ");
+                        if(subS.length == 1) {
+                            throw new DukeException("It appears that no due date was provided for this event!");
+                        }
+
+                        taskList.add(new Event(commands[0].substring(6, commands[0].length()), subS[0], commands[1].substring(subS[0].length())));
+                    } else if (eventType[0].equals("deadline")) {
+                        if(commands.length == 1) {
+                            throw new DukeException("It appears that no due date provided for this deadline!");
+                        }
+                        String[] subS = commands[1].split(" ");
+                        if(subS.length == 1) {
+                            throw new DukeException("It appears that no due date was provided for this deadline!");
+                        }
+                        taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
+                    } else if (eventType[0].equals("todo")) {
                         taskList.add(new ToDo(commands[0].substring(5, commands[0].length())));
                     }
+
+                    System.out.printf("Got it. I've added this task:\n");
+                    System.out.println("  " +taskList.get(taskList.size() - 1));
+                    if(taskList.size() < 2) {
+                        System.out.println("Now you have 1 task in the list.");
+                    }
                     else {
-                        taskList.add(new ToDo(commands[0]));
+                        System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
                     }
                 }
 
-                //taskList.add(T);
-                System.out.printf("Got it. I've added this task:\n");
-                System.out.println("  " +taskList.get(taskList.size() - 1));
-                if(taskList.size() < 2) {
-                    System.out.println("Now you have 1 task in the list.");
+                catch (DukeException e) {
+                    System.out.println(e);
+                    //break;
                 }
-                else {
-                    System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
-                }
+
             }
         }
 
