@@ -18,7 +18,7 @@ public interface Task{
             newTask = new Event(in[0], in[1]);
         }
         taskList.add(newTask);
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask);
         System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
     }
@@ -27,7 +27,7 @@ public interface Task{
         System.out.println("     Here are the tasks in your list:");
         int i = 1;
         for(Task task : Task.taskList){
-            System.out.println("     " + i + ". " + task);
+            System.out.println("     " + i + "." + task);
             i++;
         }
     }

@@ -12,3 +12,5 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+text-ui-test/ACTUAL.TXT

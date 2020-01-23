@@ -3,12 +3,12 @@ public class Event extends AbstractTask {
 
     public Event(String taskName, String date){
         super(taskName);
-        this.date = date;
+        this.date = this.date = date.replaceFirst(" ", ": ");
     }
 
     @Override
     public String toString(){
-        return "[E]" + taskStateString() + " " + this.taskName + "(" + this.date + ") ";
+        return "[E]" + taskStateString() + " " + this.taskName + "(" + this.date + ")";
     }
 
 }
