@@ -16,12 +16,8 @@ public class Duke {
 
     /** Outputs the program's logo in the chat-bot. */
     private static void displayLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(indent("Hello from\n" + logo));
+        String header = DukeFormat.indent("Hello from\n" + DukeFormat.LOGO);
+        System.out.println(header);
     }
 
     /**
@@ -76,32 +72,6 @@ public class Duke {
         }
     }
 
-    /** Adds a four-space indent to all lines of a given text. */
-    private static String indent(String text) {
-        return indent(text, 4);
-    }
-
-    /**
-     * Adds an indent to all lines of a given text.
-     *
-     * @param text the text to indent.
-     * @param indentWidth the character width of the indentation.
-     * @return the indented text.
-     */
-    private static String indent(String text, int indentWidth) {
-        String indent = " ".repeat(indentWidth);
-
-        return text.replaceAll("(?m)^", indent);
-    }
-
-    /** Outputs an indented line in the chat-bot. */
-    private static void drawLine() {
-        String lineSymbol = "-";
-        int lineWidth = 60;
-
-        System.out.println(indent(lineSymbol.repeat(lineWidth)));
-    }
-
     /**
      * Outputs the given message into the chat-bot. The message will be
      * sandwiched between two lines and indented.
@@ -109,11 +79,11 @@ public class Duke {
      * @param message the text to output into the chat-bot
      */
     public static void echo(String message) {
-        drawLine();
+        System.out.println(DukeFormat.indentedLine());
 
-        System.out.println(indent(message + "\n", 5));
+        System.out.println(DukeFormat.indent(message + "\n", 5));
 
-        drawLine();
+        System.out.println(DukeFormat.indentedLine());
         System.out.println(); // New line below each chat-bot message
     }
 
@@ -145,7 +115,7 @@ public class Duke {
         String confirmation = "Okie! I've added this task:\n";
         String count = "There are now " + newList.getNumTasks() + " tasks in the list.";
 
-        echo(confirmation + indent(task.toString(), 2) + "\n" + count);
+        echo(confirmation + DukeFormat.indent(task.toString(), 2) + "\n" + count);
 
         return newList;
     }
@@ -298,7 +268,7 @@ public class Duke {
                         + " Here's a tick for completing it!\n";
 
                 TaskList newList = taskList.doneTask(taskId);
-                echo(praise + indent(newList.get(taskId).toString(), 2));
+                echo(praise + DukeFormat.indent(newList.get(taskId).toString(), 2));
 
 
                 return newList;
@@ -339,7 +309,7 @@ public class Duke {
                 String comment = "Alright! I'll remove this task:\n";
                 String count = "There are now " + newList.getNumTasks() + " tasks in the list.";
 
-                echo(comment + indent(deletedTask.toString(), 2) + "\n" + count);
+                echo(comment + DukeFormat.indent(deletedTask.toString(), 2) + "\n" + count);
 
                 return newList;
 
