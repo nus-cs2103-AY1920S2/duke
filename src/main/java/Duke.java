@@ -41,12 +41,15 @@ public class Duke {
 
         switch (firstWord) {
             case "todo":
-                String todo = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
-                addTodo(todo);
-
-                say("Another task? Oh well, here's the task:\n"
-                        + "\t" + getTask(getTaskCount()) + "\n"
-                        + "Now you have " + getTaskCount() + " tasks in the list.");
+                if (words.length > 1) {
+                    String todo = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+                    addTodo(todo);
+                    say("Another task? Oh well, here's the task:\n"
+                            + "\t" + getTask(getTaskCount()) + "\n"
+                            + "Now you have " + getTaskCount() + " tasks in the list.");
+                } else {
+                    say("Your todo is as empty as your brain. Try again properly.");
+                }
                 break;
             case "deadline":
                 String entry = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
@@ -80,7 +83,7 @@ public class Duke {
                         + getTask(index));
                 break;
             default:
-                say("Added: " + speech);
+                say("Unknown command. Program it yourself or get a dictionary.");
                 break;
         }
     }
