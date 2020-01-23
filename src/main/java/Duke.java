@@ -36,15 +36,29 @@ public class Duke {
     private void waitInput() {
         String input = sc.nextLine();
         String[] cmd = input.split("\\s", 2);
-        switch (cmd[0]) {
-            case "bye":
-                System.out.println("\tBye. Hope to see you again soon!");
+        switch (cmd[0].toLowerCase()) {
+            case "todo":
+                Task newTask = new Todo(cmd[1].trim());
+                this.addTask(newTask);
+                break;
+            case "event":
+                String[] info = cmd[1].split("/at");
+                newTask = new Event(info[0].trim(), info[1].trim());
+                this.addTask(newTask);
+                break;
+            case "deadline":
+                info = cmd[1].split("/by");
+                newTask = new Deadline(info[0].trim(), info[1].trim());
+                this.addTask(newTask);
                 break;
             case "list":
                 printTasks();
                 break;
             case "done":
                 markAsDone(cmd[1]);
+                break;
+            case "bye":
+                System.out.println("\tBye. Hope to see you again soon!");
                 break;
             default:
                 System.out.println("\tadded: " + input);
@@ -63,6 +77,13 @@ public class Duke {
         this.waitInput();
     }
 
+    private void addTask(Task task) {
+        System.out.println("\tGot it! I've added this task:");
+        this.tasks.add(task);
+        System.out.println("\t\t" + task);
+        System.out.println("\tYou have total of " + this.tasks.size() + " tasks in the list.");
+        this.waitInput();
+    }
     public void run() {
         this.intro();
         this.waitInput();
