@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
 
 /*
  * Duke
@@ -86,14 +84,13 @@ public class Duke {
     /**
      * addTask method adds the task with the corresponding
      * type, and the description provided by the client.
-     * @param command The type of task that is requested.
-     * @param description The description of the task.
+     * @param argument The argument of the add task.
      * @throws DukeException If there is a format error in the command.
      */
 
-    public void addTask(Command command, String description) throws DukeException {
+    public void addTask(Argument argument) throws DukeException {
+        Command command = argument.getCommand();
         Task new_task;
-        String[] description_with_schedule;
 
         /*
          The switch block uses to provide the appropriate task
@@ -103,30 +100,21 @@ public class Duke {
 
         switch (command) {
             case TODO:
-                new_task = new Todo(description);
+                new_task = new Todo(argument.checkValidTodoArgument());
                 break;
 
             case DEADLINE:
-                description_with_schedule = description.split(" /by ");
-                try {
-                    String caption = description_with_schedule[0];
-                    String by_schedule = description_with_schedule[1];
-                    new_task = new Deadline(caption, by_schedule);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("☹ OOPS!!! You should indicate the date of the deadline.");
-                }
+                Pair<String, String> description_schedule_pair = argument.checkValidDeadlineArgument();
+                String description = description_schedule_pair.getFirst();
+                String schedule = description_schedule_pair.getSecond();
+                new_task = new Deadline(description, schedule);
                 break;
 
             default:
-                description_with_schedule = description.split(" /at ");
-                try {
-                    String caption = description_with_schedule[0];
-                    String at_schedule = description_with_schedule[1];
-                    new_task = new Event(caption, at_schedule);
-
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("☹ OOPS!!! You should indicate the date of the event.");
-                }
+                Pair<String, String> description_date_pair = argument.checkValidEventArgument();
+                String desc = description_date_pair.getFirst();
+                String date = description_date_pair.getSecond();
+                new_task = new Event(desc, date);
                 break;
         }
 
@@ -166,7 +154,7 @@ public class Duke {
      *         <li><tt>deadline [description] /by [date]</tt> - adds the Deadline task to the list.</li>
      *         <li><tt>event [description] /at [date]</tt> - adds the Event task to the list.</li>
      *     </ul>
-     * @param arguments The instruction provided by the client.
+     * @param commands The instruction provided by the client.
      */
 
     public void processCommand(String commands) {
@@ -183,41 +171,22 @@ public class Duke {
 
             switch (command) {
                 case LIST:
-                    Argument.isValidListCommand();
+                    argument.checkValidListArgument();
                     listTasks();
                     break;
 
                 case DONE:
-                    try {
-                        String index_string = arguments.split(" ", 2)[1];
-                        int index = Integer.parseInt(index_string);
-                        markDone(index);
-
-                    } catch (NumberFormatException e) {
-                        throw new DukeException("☹ OOPS!!! The done argument requires a number.");
-                    }
+                    int index = argument.checkValidDoneArgument();
+                    markDone(index);
                     break;
 
                 case DELETE:
-                    try {
-                        String index_string = arguments.split(" ", 2)[1];
-                        int index = Integer.parseInt(index_string);
-                        deleteTask(index);
-
-                    } catch (NumberFormatException e) {
-                        throw new DukeException("☹ OOPS!!! The done argument requires a number.");
-                    }
+                    int value = argument.checkValidDeleteArgument();
+                    deleteTask(value);
                     break;
                 default:
-                    String[] command_and_description = arguments.split(" ", 2);
-                    try {
-                        String description = command_and_description[1];
-                        addTask(command, description);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException(("☹ OOPS!!! The number of arguments is not sufficient."));
-                    } catch (DukeException e) {
-                        System.err.println(e);
-                    }
+                    addTask(argument);
+                    break;
             }
         } catch (DukeException exc) {
             System.err.println(exc);
