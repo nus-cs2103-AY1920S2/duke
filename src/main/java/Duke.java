@@ -76,20 +76,6 @@ public class Duke {
         }
     }
 
-    // Delete the specified task from the list.
-    public static void deleteTask(String userIndex) throws DukeArgumentException {
-        int index = Integer.parseInt(userIndex) - 1;
-        if (taskList.isEmpty()) {
-            replyUser("There is no task in your list to be deleted.");
-        } else if (index < taskList.size()) {
-            Task t = taskList.get(index);
-            taskList.remove(index);
-            replyUser("As per requested, the following task has been deleted:\n" + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
-        } else {
-            throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
-        }
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -111,18 +97,30 @@ public class Duke {
                     break;
                 } else if (command.toLowerCase().equals("list")) {
                     showList();
-                } else if (commandArray.length < 2) {
-                    throw new DukeArgumentException("Missing field detected in your '" + commandArray[0] + "' command.");
                 } else if (commandArray[0].toLowerCase().equals("done")) {
-                    markTaskAsDone(commandArray[1]);
-                } else if (commandArray[0].toLowerCase().equals("delete")) {
-                    deleteTask(commandArray[1]);
+                    if (commandArray.length >= 2) {
+                        markTaskAsDone(commandArray[1]);
+                    } else {
+                        throw new DukeArgumentException("Please specify which task to be marked as done.");
+                    }
                 } else if (commandArray[0].toLowerCase().equals("todo")) {
-                    addTask(commandArray[1], "T");
+                    if (commandArray.length >= 2) {
+                        addTask(commandArray[1], "T");
+                    } else {
+                        throw new DukeArgumentException("Missing field in todo command.");
+                    }
                 } else if (commandArray[0].toLowerCase().equals("deadline")) {
-                    addTask(commandArray[1], "D");
+                    if (commandArray.length >= 2) {
+                        addTask(commandArray[1], "D");
+                    } else {
+                        throw new DukeArgumentException("Missing field in deadline command.");
+                    }
                 } else if (commandArray[0].toLowerCase().equals("event")) {
-                    addTask(commandArray[1], "E");
+                    if (commandArray.length >= 2) {
+                        addTask(commandArray[1], "E");
+                    } else {
+                        throw new DukeArgumentException("Missing field in event command.");
+                    }
                 } else {
                     throw new DukeUnknownException("Apologies, I do not recognise this command.");
                 }
