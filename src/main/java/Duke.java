@@ -18,7 +18,7 @@ public class Duke {
             }
 
             if (input.equals("list")) {
-                if (tasks.isEmpty()) {
+                if (!tasks.isEmpty()) {
                     System.out.println("Here are the tasks in your list");
                 } else {
                     System.out.println("There are no tasks in your list");
@@ -57,6 +57,13 @@ public class Duke {
                 tasks.add(event);
                 System.out.println("Got it, I've added the following task:\n" + "  " + event + "\n"
                         + "Now you have " + tasks.size() + " tasks in the list.");
+            } else if (command.equals("delete")) {
+                int toDelete = Integer.parseInt(input.substring(input.indexOf(' ') + 1, input.length())) - 1;
+                Task task = tasks.get(toDelete);
+                tasks.remove(toDelete);
+                System.out.println("Noted, I've removed the following task:\n" + "  " + task + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.");
+
             }
 
             input = sc.nextLine();
@@ -73,7 +80,8 @@ public class Duke {
             if (!input.equals("todo") &&
                     !input.equals("deadline") &&
                     !input.equals("event") &&
-                    !input.equals("list")) {
+                    !input.equals("list") &&
+                    !input.equals("delete")) {
                 throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
             } else {
                 // command is not valid
@@ -83,7 +91,8 @@ public class Duke {
             if (!input.substring(0, input.indexOf(' ')).equals("todo") &&
                     !input.substring(0, input.indexOf(' ')).equals("deadline") &&
                     !input.substring(0, input.indexOf(' ')).equals("event") &&
-                    !input.substring(0, input.indexOf(' ')).equals("list")) {
+                    !input.substring(0, input.indexOf(' ')).equals("list") &&
+                    !input.substring(0, input.indexOf(' ')).equals("delete")) {
                 throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
             } else {
                 return input.substring(0, input.indexOf(' '));
