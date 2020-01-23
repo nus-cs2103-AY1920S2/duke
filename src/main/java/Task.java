@@ -51,11 +51,6 @@ public interface Task{
     }
 
     public static void printDone(String in){
-//        System.out.println("     Nice! I've marked this task as done: ");
-//        Task taskDone = taskList.get(num - 1);
-//        taskDone.markDone();
-//        String out =  "       " + taskDone;
-//        System.out.println(out);
         try{
             int num = Integer.parseInt(in.substring(5));
             System.out.println("     Nice! I've marked this task as done: ");
