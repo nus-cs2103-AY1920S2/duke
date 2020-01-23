@@ -9,7 +9,7 @@ public class Duke {
                 "                  LOADING ... ... ...\n" +
                 "=======================================================";
         String logo = "      _.-'''''-._\n" +
-                "    /=_.-~-~-~-._=\\      .-.  _\n" +
+                "   k /=_.-~-~-~-._=\\      .-.  _\n" +
                 "   :    _     _    :     | | / )\n" +
                 "  /    (o)   (o)    \\    | |/ /\n" +
                 "  |  _ _ _ _ _ _ _  |   _|__ /_\n" +
@@ -23,7 +23,20 @@ public class Duke {
         System.out.println(load);
 
         Scanner input = new Scanner(System.in);
+        CommandParser parser = new CommandParser();
 
         System.out.println(initialMessage);
+
+        while(input.hasNext()) {
+            String command = input.next();
+            // parse the command
+            Instruction next = parser.parse(command);
+            if (next == Instruction.TERMINATE) {
+                break;
+            } else {
+                // next == Instruction.AWAIT
+                continue;
+            }
+        }
     }
 }
