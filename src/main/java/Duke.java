@@ -15,10 +15,16 @@ public class Duke {
         //String[] tasks = new String[100];
         int i = 0;
         Scanner sc = new Scanner(System.in);
-        String nextLine = sc.nextLine();
-        while (!nextLine.equals("bye")) {
-
+        while (sc.hasNext() /*!nextLine.equals("bye")*/) {
             // to check if 'list' service is called
+            String nextLine = sc.nextLine();
+            try {
+                validate(nextLine);
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("Please try again!");
+                continue;
+            }
             if (nextLine.equals("list")) {
                 System.out.println("Here are the current tasks in your list:");
                 int listStart = 1;
@@ -30,8 +36,9 @@ public class Duke {
                     System.out.println(listStart + ". " + task);
                     listStart++;
                 }
-                nextLine = sc.nextLine();
                 continue;
+            } else if (nextLine.contains("bye")) {
+                break;
             }
 
             // if the action is done
@@ -42,7 +49,6 @@ public class Duke {
                 System.out.println("Alright! You have successfully completed:");
                 System.out.println(tasks[taskNum - 1]);
                 System.out.println(divider);
-                nextLine = sc.nextLine();
                 continue;
             }
 
@@ -62,9 +68,17 @@ public class Duke {
             i++;
             System.out.println("You now have " + i + " number of tasks in the list");
             System.out.println(divider);
-            nextLine = sc.nextLine();
         }
         System.out.println("Hope my service has been of great help! See you again!");
+    }
+
+    public static void validate(String s) throws DukeException {
+        if (!s.contains("list") && !s.contains("done") && !s.contains("todo")
+                && !s.contains("event") && !s.contains("deadline") && !s.contains("bye")) {
+            throw new DukeException("This is not a valid action you may take sir.");
+        } else if ((s.contains("todo") || s.contains("event") || s.contains("deadline") || s.contains("done")) && s.split(" ").length == 1) {
+            throw new DukeException("Your description may not be empty");
+        }
     }
 }
 
