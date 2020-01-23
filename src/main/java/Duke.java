@@ -84,38 +84,32 @@ public class Duke extends Application {
 
         //step 3
         sendButton.setOnMouseClicked((event) -> {
-            String curText = userInput.getText();
-            boolean needExit = false;
-            dialogContainer.getChildren().add(getDialogLabel(curText));
-            if (curText.equals("bye")) {
-                curText = "Bye. Hope to see you again soon!";
-                needExit = true;
-            }
-            dialogContainer.getChildren().add(getDialogLabel("\t" + curText));
-            userInput.clear();
-            if (needExit) {
-               stage.close();
+            if (handleUserInput() == 1) {
+                stage.close();
             }
         });
 
         userInput.setOnAction((event) -> {
-            String curText = userInput.getText();
-            boolean needExit = false;
-            dialogContainer.getChildren().add(getDialogLabel(curText));
-            if (curText.equals("bye")) {
-                curText = "Bye. Hope to see you again soon!";
-                needExit = true;
-            }
-            dialogContainer.getChildren().add(getDialogLabel("\t" + curText));
-            userInput.clear();
-            if (needExit) {
-                stage.close()
+            if (handleUserInput() == 1) {
+                stage.close();
             }
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
     }
 
+    private int handleUserInput() {
+        String curText = userInput.getText();
+        int needExit = 0;
+        dialogContainer.getChildren().add(getDialogLabel(curText));
+        if (curText.equals("bye")) {
+            curText = "Bye. Hope to see you again soon!";
+            needExit = 1;
+        }
+        dialogContainer.getChildren().add(getDialogLabel("\t" + curText));
+        userInput.clear();
+        return needExit;
+    }
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
