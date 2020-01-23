@@ -24,6 +24,9 @@ public class TaskList {
 
     @Override
     public String toString() {
+        if (tasks.isEmpty()) {
+            return "No tasks so far";
+        }
         StringBuilder output = new StringBuilder("Tasks so far:");
         ListIterator<Task> iterator = tasks.listIterator();
         while (iterator.hasNext()) {
