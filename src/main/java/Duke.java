@@ -12,7 +12,15 @@ public class Duke {
         String linedivider = "____________________________________________________________\n";
         System.out.println(linedivider + "Hello! I'm Duke\nWhat can I do for you?\n" + linedivider);
         Scanner sc = new Scanner(System.in);
-        Levelone lvl = new Levelone();
-        System.out.println(linedivider + lvl.reply(sc.nextLine()) + "\n" + linedivider);
+        Functionality lvl = new Functionality();
+        String entry = "";
+        while (true) {
+            entry = sc.nextLine();
+            if (entry.equals("bye")) {
+                break;
+            }
+            System.out.println(linedivider + lvl.levelone(entry) + "\n" + linedivider);
+        }
+        System.out.println(linedivider + "Bye. Hope to see you again soon!" + "\n" + linedivider);
     }
 }
