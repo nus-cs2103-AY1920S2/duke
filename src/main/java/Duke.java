@@ -9,8 +9,11 @@ public class Duke {
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
     private static final String TODO_COMMAND = "todo";
+    private static final String DELETE_COMMAND = "delete";
+
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String DEADLINE_BY = "/by";
+
     private static final String EVENT_COMMAND = "event";
     private static final String EVENT_AT = "/at";
 
@@ -74,6 +77,17 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
+    private void deleteTask(int taskIndex) {
+        Task selectedTask = this.list.get(taskIndex);
+        this.list.remove(taskIndex);
+
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Noted. I've removed this task: ");
+        outputStreamBuffer.add("  " + selectedTask);
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", list.size()));
+        print(outputStreamBuffer);
+    }
+
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
         String[] splitInput = lineInput.split(" ");
         String command = splitInput[0];
@@ -127,6 +141,9 @@ public class Duke {
         } else if (command.equals(DONE_COMMAND)) {
             int taskIndex = Integer.parseInt(splitInput[1]) - 1;
             this.markTaskAsDone(taskIndex);
+        } else if (command.equals(DELETE_COMMAND)) {
+            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
+            this.deleteTask(taskIndex);
         } else if (command.equals(TODO_COMMAND) ||
                 command.equals(DEADLINE_COMMAND) ||
                 command.equals(EVENT_COMMAND)) {
