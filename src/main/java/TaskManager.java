@@ -14,6 +14,14 @@ public class TaskManager {
         return response;
     }
 
+    public String removeTask(int i) {
+        Task t = this.arrTasks.get(i);
+        this.arrTasks.remove(i);
+        String response = "Noted. I've removed this task:\n" + t + '\n';
+        response += "Now you have " + this.arrTasks.size() + " tasks in the list.";
+        return response;
+    }
+
     public String markTaskAsDone(int index) {
         Task t = this.arrTasks.get(index);
         t.setDone();

@@ -49,6 +49,10 @@ public class Duke {
                         int taskArrIndex = Integer.parseInt(cmdInstructionArr[1]) - 1; // Array index of required task
                         respond(lstTasks.markTaskAsDone(taskArrIndex));
                         break;
+                    case "delete": // Delete task
+                        int taskRemoveIndex = Integer.parseInt(cmdInstructionArr[1]) - 1;
+                        respond(lstTasks.removeTask(taskRemoveIndex));
+                        break;
                     case "todo": // Add ToDo task
                         if (!hasInstruction)
                             throw new EmptyDescriptionException("todo");
