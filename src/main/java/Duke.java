@@ -54,12 +54,12 @@ public class Duke {
                     }
                     System.out.println("    ____________________________________________________________");
 
-                }else if (userInput.contains("delete")){
+                } else if (userInput.contains("delete")){
                     content2 = userInput.substring(7);
                     count4 = Integer.parseInt(content2) - 1;
                     if(count4 == count){
                         count = count - 1;
-
+                        Task.taskNo = Task.taskNo - 1;
 
                     } else {
                         while (count4 <= count) {
@@ -67,6 +67,7 @@ public class Duke {
                             count4++;
                         }
                         count = count - 1;
+                        Task.taskNo = Task.taskNo - 1;
                     }
 
                 } else {
