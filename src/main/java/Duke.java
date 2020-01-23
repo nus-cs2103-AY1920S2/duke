@@ -51,6 +51,14 @@ public class Duke {
                         int index = input.indexOf("/");
                         addList(new Event(input.substring(6, index), input.substring(index + 1)), taskList);
                     }
+                } else if (input.contains("delete")) {
+                    if (input.split(" ").length == 1) {
+                        throw new DukeException("OOPS!!! Please specify a task number.");
+                    } else {
+                        String[] inputArr = input.split(" ");
+                        int taskNum = Integer.parseInt(inputArr[1]);
+                        deleteTask(taskList, taskNum);
+                    }
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -58,6 +66,15 @@ public class Duke {
                 System.out.println(e);
             }
         }
+    }
+
+    public static void deleteTask(ArrayList<Task> list, int taskNum) {
+        Task removedTask = list.get(taskNum - 1);
+        list.remove(taskNum - 1);
+        System.out.println("   ____________________________________________________________\n" +
+                "     Noted. I've removed this task: \n" +
+                "       " + removedTask + "\n" +
+                "     Now you have " + list.size() +" tasks in the list.");
     }
 
     public static void taskDone(ArrayList<Task> list, int taskNum) {
