@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package akshay;
+
 import java.util.Scanner;
 
 public class Akshay {
