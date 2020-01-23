@@ -18,22 +18,14 @@ public class Duke {
             case "": {
                 break;
             }
-            case "todo": {
-                TodoTask newTask = new TodoTask(input.getArgumentsAsString());
-                String message = tasks.addTask(newTask);
-                System.out.println(message);
-                break;
-            }
-            case "deadline": {
-                String[] parts = input.getArgumentsAsString().split(" /by ", 2);
-                DeadlineTask newTask = new DeadlineTask(parts[0], parts[1]);
-                String message = tasks.addTask(newTask);
-                System.out.println(message);
-                break;
-            }
+            case "todo": 
+            case "deadline": 
             case "event": {
-                String[] parts = input.getArgumentsAsString().split(" /at ", 2);
-                EventTask newTask = new EventTask(parts[0], parts[1]);
+                Task newTask = Duke.createTask(input);
+                if (newTask == null) {
+                    System.out.println("Cannot add new task!");
+                    break;
+                }
                 String message = tasks.addTask(newTask);
                 System.out.println(message);
                 break;
@@ -79,5 +71,42 @@ public class Duke {
         }
         System.out.println("Goodbye!");
         sc.close();
+    }
+
+    public static Task createTask(UserInput input) {
+        String taskType = input.getCommand();
+        if (input.getArguments().length == 0) {
+            System.out.println(String.format(
+                    "No description given for %s task!",
+                    taskType
+            ));
+            return null;
+        }
+        switch (taskType) {
+        case "todo": {
+            return new TodoTask(input.getArgumentsAsString());
+        }
+        case "deadline": {
+            String[] parts = input.getArgumentsAsString().split(" /by ", 2);
+            if (parts.length != 2) {
+                System.out.println("Invalid arguments for deadline task!");
+                return null;
+            }
+            return new DeadlineTask(parts[0], parts[1]);
+        }
+        case "event": {
+            String[] parts = input.getArgumentsAsString().split(" /at ", 2);
+            if (parts.length != 2) {
+                System.out.println("Invalid arguments for event task!");
+                return null;
+            }
+            return new EventTask(parts[0], parts[1]);
+        }
+        default: {
+            break;
+        }
+        }
+        System.out.println(String.format("What is a '%s' task?", taskType));
+        return null;
     }
 }
