@@ -57,7 +57,6 @@ public class Duke {
                 System.out.println("Added: " + deadlineTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                //echo(new Scanner(System.in));
                 sc = sc.useDelimiter("\\p{javaWhitespace}+");
                 echo(sc);
                 break;
@@ -70,7 +69,6 @@ public class Duke {
                 System.out.println("Added: " + eventTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                //echo(new Scanner(System.in));
                 sc = sc.useDelimiter("\\p{javaWhitespace}+");
                 echo(sc);
                 break;
