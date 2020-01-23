@@ -1,17 +1,18 @@
 public class Event extends Task {
 
+    protected String connector;
     protected String datetime;
 
-    public Event(String description) {
+    public Event(String description, String connector, String datetime) {
         super(description);
-        String[] parts = description.split("/");
-        this.description = parts[0];
-        this.datetime = parts[1].substring(3);
+        this.description = description;
+        this.connector = connector;
+        this.datetime = datetime;
     }
 
     @Override
     public String toString() {
-        return ("[E][" + getStatusIcon() + "] " + description + " (at: " + datetime + ")");
+        return ("[E][" + getStatusIcon() + "] " + description + " (" + connector + ": " + datetime + ")");
     }
 
 }

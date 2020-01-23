@@ -108,52 +108,69 @@ public class Duke extends Application {
         boolean isTodo = false, isDeadline = false, isEvent = false;
 
         dialogContainer.getChildren().add(getDialogLabel(curText));
-        if (curText.equals("bye")) {
+        try {
+            if (curText.equals("bye")) {
 
-//          exit the program
+    //          exit the program
 
-            curText = "Bye. Hope to see you again soon!";
-            needExit = 1;
+                curText = "Bye. Hope to see you again soon!";
+                needExit = 1;
 
-        } else if (curText.equals("list")) {
+            } else if (curText.equals("list")) {
 
-//            query the list of task
+    //            query the list of task
 
-            curText = "Here are the tasks in your list:";
-            for (int i = 0; i < listing.size(); i++) {
-                curText += (i + 1);
-                curText += ". " + listing.get(i) + '\n';
+                curText = "Here are the tasks in your list:\n";
+                for (int i = 0; i < listing.size(); i++) {
+                    curText += (i + 1);
+                    curText += ". " + listing.get(i) + '\n';
+                }
+
+            } else if (isSubstringEqual(curText, "done")) {
+
+    //            done doing task
+
+                int taskNum = Integer.parseInt(curText.substring(4).trim()) - 1;
+                curText = "Nice! I've marked this task as done:\n";
+                curText += listing.get(taskNum).done();
+
+            } else if ((isTodo = isSubstringEqual(curText, "todo")) ||
+                    (isDeadline = isSubstringEqual(curText, "deadline")) ||
+                    (isEvent = isSubstringEqual(curText, "event"))) {
+
+    //          add task to do
+
+                Task tmp = new Task(curText);
+                if (isTodo) {
+                    tmp = new Task(curText);
+                } else {
+                    try {
+                        String[] parts = curText.split("/");
+                        String description = parts[0].split(" ", 2)[1];
+                        String connector = parts[1].split(" ", 2)[0];
+                        String datetime = parts[1].split(" ", 2)[1];
+                        if (isDeadline){
+                            tmp = new Deadline(description, connector, datetime);
+                        } else if (isEvent) {
+                            tmp = new Event(description, connector, datetime);
+                        }
+                    } catch (Exception e) {
+                        throw new DukeException("☹ OOPS!!! The description of a " + tmp.getClass().getSimpleName() + " is not well formatted.");
+                    }
+                }
+                listing.add(tmp);
+                curText = "Got it. I've added this task:\n";
+                curText += tmp + "\n";
+                curText += "Now you have " + listing.size() + " tasks in the list.";
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-
-        } else if (isSubstringEqual(curText, "done")) {
-
-//            done doing task
-
-            int taskNum = Integer.parseInt(curText.substring(4).trim()) - 1;
-            curText = "Nice! I've marked this task as done:\n";
-            curText += listing.get(taskNum).done();
-
-        } else if ((isTodo = isSubstringEqual(curText, "todo")) ||
-                (isDeadline = isSubstringEqual(curText, "deadline")) ||
-                (isEvent = isSubstringEqual(curText, "event"))) {
-
-//          add task to do
-
-            Task tmp = new Task(curText);
-            if (isTodo) {
-                tmp = new Task(curText);
-            } else if (isDeadline){
-                tmp = new Deadline(curText);
-            } else if (isEvent) {
-                tmp = new Event(curText);
-            }
-            listing.add(tmp);
-            curText = "Got it. I've added this task:\n";
-            curText += tmp + "\n";
-            curText += "Now you have " + listing.size() + " tasks in the list.";
+            dialogContainer.getChildren().add(getDialogLabel(curText));
+            userInput.clear();
+        } catch (DukeException e) {
+            dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+            userInput.clear();
         }
-        dialogContainer.getChildren().add(getDialogLabel(curText));
-        userInput.clear();
         return needExit;
     }
 

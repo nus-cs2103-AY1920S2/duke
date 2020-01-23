@@ -1,17 +1,18 @@
 public class Deadline extends Task {
 
+    protected String connector;
     protected String datetime;
 
-    public Deadline(String description) {
+    public Deadline(String description, String connector, String datetime) {
         super(description);
-        String[] parts = description.split("/");
-        this.description = parts[0];
-        this.datetime = parts[1].substring(3);
+        this.description = description;
+        this.connector = connector;
+        this.datetime = datetime;
     }
 
     @Override
     public String toString() {
-        return ("[D][" + getStatusIcon() + "] " + description + " (by: " + datetime + ")");
+        return ("[D][" + getStatusIcon() + "] " + description + " (" + connector + ": " + datetime + ")");
     }
 
 }
