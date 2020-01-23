@@ -33,8 +33,10 @@ public class Duke {
                            input.split(" ")[0].equals("event") ||
                            input.split(" ")[0].equals("deadline")) {
                     add(input);
-                }
-                else {
+                } else if (input.split(" ")[0].equals("delete")) {
+                    int taskNum = Integer.parseInt(input.split(" ")[1]);
+                    delete(taskNum);
+                } else {
                     throw new DukeException();
                 }
             } catch (Exception ex) {
@@ -73,6 +75,13 @@ public class Duke {
         taskList.add(toAdd);
         System.out.println("Got it. I've added this task:\n"
                 + "  " + toAdd + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public static void delete(int i) {
+        Task t = taskList.remove(i-1);
+        System.out.println("Noted. I've removed this task: \n"
+                +  "  " + t + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
