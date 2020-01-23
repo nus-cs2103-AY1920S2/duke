@@ -2,8 +2,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    public Task(){ // default constructor with no parameters
+
+    }
+
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
