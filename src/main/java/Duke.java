@@ -31,6 +31,22 @@ public class Duke {
 		return Optional.of(result);
 	}
 
+	static Optional<Integer> getDeleteCommand(String command) {
+		String[] tokens = command.split(" ");
+		if (tokens.length != 2) {
+			return Optional.empty();
+		}
+		if (!tokens[0].equals("delete")) {
+			return Optional.empty();
+		}
+		try {
+			int index = Integer.parseInt(tokens[1]);
+			return Optional.of(index);
+		} catch (NumberFormatException e) {
+			return Optional.empty();
+		}
+	}
+
 	public static void main(String[] args) {
 		String logo = " ____        _        \n"
 				+ "|  _ \\ _   _| | _____ \n"
@@ -79,6 +95,17 @@ public class Duke {
 					}
 					storage.addAction(currentTask.get());
 					Interpreter.printAdd(currentTask.get(), storage.getNum());
+					break;
+
+				case DELETE:
+					Optional<Integer> index = getDeleteCommand(commandText);
+					if (index.isPresent()) {
+						int realIndex = index.get() - 1;
+						Interpreter.printDelete(storage.getTask(realIndex), storage.getNum());
+						storage.deleteAction(realIndex);
+					} else {
+						System.out.println("Delete command is not valid!");
+					}
 					break;
 
 				case DONE: 

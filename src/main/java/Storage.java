@@ -13,9 +13,17 @@ public class Storage<T extends Task> {
 		containers.add(action);
 	}
 
+	public void deleteAction(int position) {
+		containers.remove(position);
+	}
+
 	public List<T> getList() {
 		return this.containers;
 	} 
+
+	public T getTask(int index) {
+		return this.containers.get(index);
+	}
 
 	public int getNum() {
 		return containers.size();

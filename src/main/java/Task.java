@@ -19,15 +19,12 @@ public abstract class Task {
 
 		int start;
 		for (start = 1; start < tokens.length; start++) { 
-			System.out.println(" this is " + tokens[start] + " and " + this.getSeparator());
 			if (tokens[start].equals(this.getSeparator())) {
 				this.description = builder.toString();
 				break;
 			}
 			builder.append(tokens[start]).append(" ");
 		}
-
-		System.out.println(" this is " + builder.toString());
 
 		remainingTokens = new ArrayList<String>();
 		for (start = start + 1; start < tokens.length; start++) {
@@ -37,7 +34,6 @@ public abstract class Task {
 
 	public static TaskType getType(String commandText) {
 		String[] tokens = commandText.split(" ");
-		System.out.println("length is " + tokens.length);	
 
 		if (tokens.length > 2 && tokens[0].equals("todo")) {
 			return TaskType.TODO;
@@ -69,7 +65,7 @@ public abstract class Task {
     protected String getRemainingTokens() {
     	StringBuilder builder = new StringBuilder();
     	for (String token: remainingTokens) {
-    		builder.append(token).append(" ");
+    		builder.append(" ").append(token);
     	}
     	return builder.toString();
     }
