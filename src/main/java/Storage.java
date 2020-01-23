@@ -53,21 +53,4 @@ public class Storage {
         return i + ". " + doneGet(i - 1)
                 + " " + this.storage.get(i - 1);
     }
-
-    /**
-     * Checks the status of an item located
-     * at a certain ArrayList index
-     *
-     * @param index The actual index of the item
-     *              in the ArrayList
-     * @return A String with a tick character
-     *         or a cross character
-     */
-    private String doneGet(int index) {
-        if (this.storage.get(index).isDone()) {
-            return "[✓]";
-        } else {
-            return "[✗]";
-        }
-    }
 }

@@ -21,9 +21,14 @@ public class CommandParser {
             return Instruction.MARK_DONE;
         } else if (command.equals("list")) {
             return Instruction.READ_STORAGE;
+        } else if (command.startsWith("deadline ")) {
+            return Instruction.STORE_DDL;
+        } else if (command.startsWith("event ")) {
+            return Instruction.STORE_EVENT;
+        } else if (command.startsWith("todo ")) {
+            return Instruction.STORE_TODO;
         } else {
-            // store the item
-            return Instruction.STORE;
+            return Instruction.AWAIT;
         }
     }
 

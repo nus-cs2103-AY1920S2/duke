@@ -3,5 +3,7 @@
  * to the bot from CommandParser
  */
 public enum Instruction {
-    AWAIT, MARK_DONE, READ_STORAGE, STORE, TERMINATE
+    AWAIT, MARK_DONE, READ_STORAGE,
+    STORE_DDL, STORE_EVENT, STORE_TODO,
+    TERMINATE
 }

@@ -19,7 +19,7 @@ public class Duke {
                 "      '-._____.-'      / \\/";
         String initialMessage = "4LC3N-BOT initialised.\nGreetings, humans!";
         String awaitingMessage = "\n> ENTER your input:";
-        String storeMessage = "I have stored this text in my memory. Use" +
+        String storeMessage = "I have stored this task in my memory. Use" +
                 " \"list\" to retrieve it!";
         String doneMessage = "You have completed: ";
 
@@ -45,7 +45,13 @@ public class Duke {
                 System.out.println(store.retrieve(index));
             } else if (next == Instruction.READ_STORAGE) {
                 store.readStorage();
-            } else if (next == Instruction.STORE) {
+            } else if (next == Instruction.STORE_DDL) {
+                store.store(command);
+                System.out.println(storeMessage);
+            } else if (next == Instruction.STORE_EVENT) {
+                store.store(command);
+                System.out.println(storeMessage);
+            } else if (next == Instruction.STORE_TODO) {
                 store.store(command);
                 System.out.println(storeMessage);
             } else if (next == Instruction.TERMINATE) {
@@ -53,6 +59,7 @@ public class Duke {
                 break;
             } else {
                 // next == Instruction.AWAIT
+                parser.echo(command);
             }
             System.out.println(awaitingMessage);
         }
