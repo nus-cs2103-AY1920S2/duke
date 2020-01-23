@@ -29,6 +29,6 @@ public class TaskManager {
             allTasks += (" " + t + '\n'); // Description of task and whether it is done
             counter++;
         }
-        return allTasks;        
+        return allTasks;
     }
 }

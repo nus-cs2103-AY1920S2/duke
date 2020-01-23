@@ -45,6 +45,17 @@ public class Duke {
                     int taskArrIndex = Integer.parseInt(cmdInstructionArr[1]) - 1; // Array index of required task
                     respond(lstTasks.markTaskAsDone(taskArrIndex));
                     break;
+                case "todo": // Add ToDo task
+                    respond(lstTasks.addTask(new ToDo(cmdInstructionArr[1])));
+                    break;
+                case "deadline": // Add Deadline task
+                    String descByArr[] = cmdInstructionArr[1].split(" /by ", 2);
+                    respond(lstTasks.addTask(new Deadline(descByArr[0], descByArr[1])));
+                    break;
+                case "event": // Add Event task
+                    String descAtArr[] = cmdInstructionArr[1].split(" /at ", 2);
+                    respond(lstTasks.addTask(new Event(descAtArr[0], descAtArr[1])));
+                    break;
                 default: // Add new task
                     respond(lstTasks.addTask(new Task(userCmd)));
             }
