@@ -10,10 +10,10 @@ public class TaskList {
 
     /**
      * Add a new item to the list.
-     * @param message The message of the item to be added.
+     * @param item The item to be added.
      */
-    public void add(String message) {
-        items.add(new Item(message));
+    public void add(Item item) {
+        items.add(item);
     }
 
     /**
@@ -23,6 +23,14 @@ public class TaskList {
      */
     public Item getItem(int index) {
         return items.get(index - 1);
+    }
+
+    /**
+     * Obtain the number of items in the list.
+     * @return The length of the list.
+     */
+    public int getLength() {
+        return items.size();
     }
 
     /**
