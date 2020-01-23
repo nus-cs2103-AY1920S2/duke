@@ -16,7 +16,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n");
 
-        printMessage("Hello! I'm Duke!\n\tWhat can I do for you?");
+        printMessage("Greetings! I'm Duke!\n\tHow may I help you?");
 
         String cmd = readNextCommand();
         while (!cmd.equals("bye")) {
@@ -35,7 +35,7 @@ public class Duke {
             cmd = readNextCommand();
         }
 
-        printMessage("Bye! Hope to see you again soon!");
+        printMessage("Bye! Hope you visit again soon!");
     }
 
     public static String readNextCommand() {
