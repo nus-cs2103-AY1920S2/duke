@@ -30,6 +30,9 @@ class Duchess {
                 case "done":
                     this.completeTask(commands.get(1));
                     break;
+                case "delete":
+                    this.deleteTask(commands.get(1));
+                    break;
                 case "list":
                     this.printTasks();
                     break;
@@ -114,7 +117,24 @@ class Duchess {
         System.out.println("\tAs always, needing someone to keep track of things for you...");
         this.tasks.add(task);
         System.out.println("\t\t" + task);
-        System.out.println("\tI've already tracked " + this.tasks.size() + " tasks for you.");
+        int size = this.tasks.size();
+        System.out.println(
+                "\tI've already tracked " + size + " " + (size == 1 ? "task" : "tasks") + " for you.");
+    }
+
+    private void deleteTask(String index) throws DuchessException {
+        int indexAsInt = Integer.parseInt(index.trim());
+        if (indexAsInt < 0 || indexAsInt > this.tasks.size()) {
+            throw new DuchessException("You're referring to a task that does not exist!");
+        } else {
+            Task taskToComplete = this.tasks.get(indexAsInt - 1);
+            System.out.println("\tGreat! One less thing for me to track for you.");
+            System.out.println("\t\t" + taskToComplete);
+            this.tasks.remove(indexAsInt - 1);
+            int size = this.tasks.size();
+            System.out.println(
+                    "\tNow I'm tracking " + size + " " + (size == 1 ? "task" : "tasks") + " for you.");
+        }
     }
 
     private void completeTask(String index) throws DuchessException {
