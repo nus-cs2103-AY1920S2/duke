@@ -1,14 +1,12 @@
 public class Event extends Task {
     protected String time;
-    Event(String todo) {
+    Event(String todo, String time) {
         super(todo);
-        String[] strArr = todo.split("/", 2);
-        this.task = strArr[0];
-        this.time = strArr[1].substring(2);
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s(at:%s)", super.toString(), time);
+        return String.format("[E]%s (at: %s)", super.toString(), time);
     }
 }
