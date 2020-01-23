@@ -1,10 +1,12 @@
+package dude;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
 
 public class Dude {
-    /** Usage strings for valid commands to Dude */
+    /** Usage strings for valid commands to dude.Dude */
     public static final String LIST_USAGE = "list";
     public static final String DONE_USAGE = "done index_of_task";
     public static final String DELETE_USAGE = "delete index_of_task";
@@ -15,7 +17,7 @@ public class Dude {
 
         Scanner sc = new Scanner(System.in);
         
-        chatbot.serve(() -> sc.nextLine());
+        chatbot.serve(sc::nextLine);
 
         sc.close();
     }
@@ -23,7 +25,7 @@ public class Dude {
     private ArrayList<Task> tasks;
 
     /** 
-     * Initializes Dude chatbot with internal ArrayList keeping track of tasks
+     * Initializes dude.Dude chatbot with internal ArrayList keeping track of tasks
      * Greets the user
      */
     public Dude() {
@@ -58,14 +60,13 @@ public class Dude {
                 addTask(Event::parseEvent, msg);
             } else {
                 helpCommands();
-                continue;
             }
         }
     }
 
     private void helpCommands() {
         respond("Sorry mate, I didn't catch your drift",
-                "Maybe you could try talking to me in one of these formats:\n",
+                "Maybe you could try talking to me in one of these formats:" + System.lineSeparator(),
                 "  " + LIST_USAGE,
                 "  " + DONE_USAGE,
                 "  " + DELETE_USAGE,
@@ -144,7 +145,7 @@ public class Dude {
         taskListOperation(deleteTaskAtIndex, msg, DELETE_USAGE);
     }
 
-    /** Dude reply formatting convenience functions */ 
+    /** dude.Dude reply formatting convenience functions */
     private void respond(String ...responses) {
         respond(() -> {
             for (String response : responses) {
@@ -154,12 +155,10 @@ public class Dude {
     }
 
     private void respondError(String errorMsg, String usageMsg) {
-        respond(() -> {
-            speak(errorMsg);
-            speak("Just tell me what you want to do like this:\n");
-            speak("  " + usageMsg + "\n");
-            speak("Then we're chill");
-        });
+        respond(errorMsg,
+                "Just tell me what you want to do like this:" + System.lineSeparator(),
+                "  " + usageMsg + System.lineSeparator(),
+                "Then we're chill");        
     }
 
     private void respond(Runnable r) {

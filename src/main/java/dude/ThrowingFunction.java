@@ -1,3 +1,5 @@
+package dude;
+
 /**
  * Helper functional interface for functions that throw checked exceptions
  * 

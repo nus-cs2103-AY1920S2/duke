@@ -1,3 +1,5 @@
+package dude;
+
 public class Task {
     private final String details;
     private boolean isDone;
