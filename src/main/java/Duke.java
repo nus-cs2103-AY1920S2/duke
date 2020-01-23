@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +18,11 @@ public class Duke {
             }
 
             if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list");
+                if (tasks.isEmpty()) {
+                    System.out.println("Here are the tasks in your list");
+                } else {
+                    System.out.println("There are no tasks in your list");
+                }
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println(i+1 + "." + tasks.get(i));
                 }
@@ -24,9 +30,16 @@ public class Duke {
                 continue;
             }
 
-            String command = input.substring(0, input.indexOf(' '));
+            String command = "";
+            try {
+                command = getCommand(input);
+            } catch(DukeException d) {
+                System.out.println(d.getMessage());
+            }
+
             if (command.equals("todo")) {
-                Todo todo = new Todo(input.substring(input.indexOf(' '), input.length()));
+                String task = input.substring(input.indexOf(' '), input.length());
+                Todo todo = new Todo(task);
                 tasks.add(todo);
                 System.out.println("Got it, I've added the following task:\n" + "  " + todo + "\n"
                         + "Now you have " + tasks.size() + " tasks in the list.");
@@ -51,6 +64,31 @@ public class Duke {
 
         System.out.println("GOODBYE!! MUAHAHHAHAHAHHAAHAHHAHAHA");
 
+    }
+
+
+    public static String getCommand(String input) throws DukeException {
+        if (!input.contains(" ")) {
+            // check if the command is correct
+            if (!input.equals("todo") &&
+                    !input.equals("deadline") &&
+                    !input.equals("event") &&
+                    !input.equals("list")) {
+                throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
+            } else {
+                // command is not valid
+                throw new DukeException("OOPS! The description of a " + input + " cannot be empty");
+            }
+        } else {
+            if (!input.substring(0, input.indexOf(' ')).equals("todo") &&
+                    !input.substring(0, input.indexOf(' ')).equals("deadline") &&
+                    !input.substring(0, input.indexOf(' ')).equals("event") &&
+                    !input.substring(0, input.indexOf(' ')).equals("list")) {
+                throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
+            } else {
+                return input.substring(0, input.indexOf(' '));
+            }
+        }
     }
 }
 
@@ -113,5 +151,11 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+}
+
+class DukeException extends Exception {
+    DukeException(String s) {
+        super(s);
     }
 }
