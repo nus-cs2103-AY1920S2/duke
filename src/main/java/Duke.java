@@ -13,6 +13,7 @@ public class Duke {
     private static void greet() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+        System.out.println();
     }
 
     private void echo(Scanner sc) {
@@ -30,6 +31,7 @@ public class Duke {
                 this.tasks.get(targetIdx).markDone();
                 System.out.println("Good job! I've marked this task as done:");
                 System.out.printf("%d. %s\n", targetIdx + 1, tasks.get(targetIdx).toString());
+                System.out.println();
                 echo(new Scanner(System.in));
                 break;
 
