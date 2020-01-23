@@ -17,6 +17,12 @@ public class Lister {
             try {
                 int x = getIndex(command);
                 switch (command.substring(0, x)) {
+                    case "delete":
+                        int b = Integer.valueOf(command.substring(x + 1)) - 1;
+                        store.remove(b);
+                        System.out.println("Noted. I've removed this task:\n" + store.get(b).toString());
+                        System.out.println("Now you have " + store.size() + " tasks in the list.");
+                        break;
                     case "done":
                         int y = Integer.valueOf(command.substring(x + 1)) - 1;
                         store.get(y).markAsDone();
