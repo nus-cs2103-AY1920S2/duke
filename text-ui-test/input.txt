@@ -5,4 +5,6 @@ deadline do homework /by no idea :-p
 todo borrow book
 done 1
 done 3
-
+delete 3
+delete 1
+event /at 

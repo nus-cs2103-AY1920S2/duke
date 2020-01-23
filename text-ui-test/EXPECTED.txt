@@ -47,3 +47,24 @@ Nice! You have done this:
 --------------------------------------------------------------
 
 
+--------------------------------------------------------------
+I have removed a finished task:
+[D][Y] do homework  (by: no idea :-p)
+
+Now you have a total of 3 Tasks in your list
+--------------------------------------------------------------
+
+
+--------------------------------------------------------------
+I have removed a finished task:
+[E][Y] project meeting  (at: Mon 2-4pm)
+
+Now you have a total of 2 Tasks in your list
+--------------------------------------------------------------
+
+
+--------------------------------------------------------------
+Please give me an approximate timing using '/at'!
+--------------------------------------------------------------
+
+
