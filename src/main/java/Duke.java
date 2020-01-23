@@ -28,9 +28,16 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 //List all tasks
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < taskLength; i++) {
                     System.out.println(i + 1 + ". " + taskList[i]);
                 }
+            } else if ((command.length() > 3) && (command.substring(0, 4).equals("done"))) {
+                //Mark task as done
+                int taskNumber = Integer.parseInt(command.substring(5));
+                taskList[taskNumber-1].markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(taskList[taskNumber-1]);
             } else {
                 //Add task
                 taskList[taskLength] = new Task(command);
