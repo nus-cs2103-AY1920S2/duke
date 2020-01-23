@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
@@ -56,18 +57,6 @@ public class Duke {
         }
     }
 
-    private static void deleteTask(int index) {
-        Task task = tasks.get(index - 1);
-        tasks.remove(index - 1);
-        printRemoveTask();
-        System.out.println(task.toString());
-        printNumTask();
-    }
-
-    private static void printRemoveTask() {
-        System.out.println("Okay, I have removed this task for you:");
-    }
-
     private static void greet() {
         System.out.println("Hi there, I'm Dodo!\nHow may I help you today?");
     }
@@ -90,17 +79,11 @@ public class Duke {
         System.out.printf("Now you got %d %s in your list!\n", tasks.size(), taskWord);
     }
 
-    private static void addEvent(String desc) throws NoTimeSpecifiedException {
-        String[] descs = desc.split(" /at ");
-        if (descs.length == 1) { // there is no specified event time indicated by " /at "
-            throw new NoTimeSpecifiedException();
-        }
-        String eventDesc = descs[0];
-        String eventTime = descs[1];
-        Task event = new Event(eventDesc, eventTime);
-        tasks.add(event);
+    private static void addTodo(String desc) {
+        Task todo = new Todo(desc);
+        tasks.add(todo);
         printAddToList();
-        System.out.println(event.toString());
+        System.out.println(todo.toString());
         printNumTask();
     }
 
@@ -118,18 +101,28 @@ public class Duke {
         printNumTask();
     }
 
-    private static void addTodo(String desc) {
-        Task todo = new Todo(desc);
-        tasks.add(todo);
+    private static void addEvent(String desc) throws NoTimeSpecifiedException {
+        String[] descs = desc.split(" /at ");
+        if (descs.length == 1) { // there is no specified event time indicated by " /at "
+            throw new NoTimeSpecifiedException();
+        }
+        String eventDesc = descs[0];
+        String eventTime = descs[1];
+        Task event = new Event(eventDesc, eventTime);
+        tasks.add(event);
         printAddToList();
-        System.out.println(todo.toString());
+        System.out.println(event.toString());
         printNumTask();
     }
 
     private static void printList() {
-        System.out.println("Stop procrastinating. Do it now!");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
+        if (tasks.size() == 0) {
+            System.out.println("You currently don't have any task. Start listing now!");
+        } else {
+            System.out.println("Stop procrastinating. Do it now!");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
+            }
         }
     }
 
@@ -138,5 +131,17 @@ public class Duke {
         task.markAsDone();
         System.out.println("Good job! One off your chest!");
         System.out.println(task.toString());
+    }
+
+    private static void deleteTask(int index) {
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        printRemoveTask();
+        System.out.println(task.toString());
+        printNumTask();
+    }
+
+    private static void printRemoveTask() {
+        System.out.println("Okay, I have removed this task for you:");
     }
 }
