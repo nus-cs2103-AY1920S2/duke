@@ -10,26 +10,57 @@ public class Parser {
 
     }
 
-    public String parseCommand(String command) {
-        this.command = command;
-        int index = command.indexOf("/");
+    public String[] parseInput(String input) {
 
-        if (index == -1) {
-            return command;
+        String[] inputArr = new String[3];
+
+       if(input.equals("list") || input.equals("bye")) {
+           inputArr[0] = input;
+           inputArr[1] = "";
+           inputArr[2] = "";
+           return inputArr;
+       } else if (input.split(" ")[0].equals("done")) {
+
+           if(input.length() < 5) {
+               inputArr[0] = "MissingTaskNumber";
+               inputArr[1] = "";
+               inputArr[2] = "";
+               return inputArr;
+           } else {
+               return input.split(" ");
+           }
+
+       }
+
+        int index = input.indexOf("/");
+        int whiteSpaceIndex = input.indexOf(" ");
+
+        if(whiteSpaceIndex == -1) {
+
+            inputArr[0] = input;
+            inputArr[1] = "EmptyDescription";
+            inputArr[2] = "";
+
+        } else if (input.startsWith("todo")) {
+
+            inputArr[0] = "todo";
+            inputArr[1] = input.substring(whiteSpaceIndex+ 1);
+            inputArr[2] = "";
+
+        } else if (index == -1) {
+
+            inputArr[0] = input.substring(0, whiteSpaceIndex);
+            inputArr[1] = "EmptyDate";
+            inputArr[2] = "";
+
         } else {
-            int whiteSpaceIndex = command.indexOf(" ");
-            return command.substring(whiteSpaceIndex, index);
-        }
-    }
 
-    public String parseDate() {
-        int index = command.indexOf("/");
+            inputArr[0] = input.substring(0, whiteSpaceIndex);
+            inputArr[1] = input.substring(whiteSpaceIndex + 1, index);
+            inputArr[2] = input.substring(index + 4);
 
-        if (index == -1) {
-            return null;
         }
-        String substring = command.substring(index + 4);
-        return substring;
+        return inputArr;
     }
 
 

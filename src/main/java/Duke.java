@@ -23,32 +23,67 @@ public class Duke {
 
             InputStreamReader rd = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(rd);
-            String command = null;
-            String taskDescription = null;
+            String input = null;
             String[] taskDescriptionArr = null;
             String date = null;
             Parser parser = new Parser();
             TaskManagement manager = new TaskManagement();
+            ErrorHandler handler = new ErrorHandler();
 
             while (true) {
 
-                command = br.readLine();
-                taskDescription = parser.parseCommand(command);
-                date = parser.parseDate();
+                input = br.readLine();
+                taskDescriptionArr = parser.parseInput(input);
 
-                if (command.startsWith("bye")) {
+                if(taskDescriptionArr[1].equals("EmptyDescription") || taskDescriptionArr[1].equals("EmptyDate")
+                        || taskDescriptionArr[0].equals("MissingTaskNumber")) {
+                    System.out.print(header);
 
+                    if(taskDescriptionArr[0].equals("MissingTaskNumber")) {
+
+                        System.out.println(handler.handleError(taskDescriptionArr[0], null));
+                        System.out.println(footer);
+                        continue;
+                    }
+
+                    if(taskDescriptionArr[0].equals("todo")) {
+
+                        System.out.println(handler.handleError(taskDescriptionArr[1], Task.Types.ToDo));
+                        System.out.println(footer);
+                        continue;
+
+                    } else if (taskDescriptionArr[0].equals("deadline")) {
+
+                        System.out.println(handler.handleError(taskDescriptionArr[1], Task.Types.Deadline));
+                        System.out.println(footer);
+                        continue;
+
+                    } else if(taskDescriptionArr[0].equals("event")) {
+
+                        System.out.println(handler.handleError(taskDescriptionArr[1], Task.Types.Event));
+                        System.out.println(footer);
+                        continue;
+
+                    }
+
+                }
+
+
+                if (taskDescriptionArr[0].equals("bye")) {
+
+                    System.out.println(header);
+                    System.out.println("Bye. I hope you liked the service and hope to see you soon !");
+                    System.out.println(footer);
                     break;
 
-                } else if (command.startsWith("list")) {
+                } else if (taskDescriptionArr[0].equals("list")) {
 
                     System.out.print(header);
                     manager.list();
                     System.out.print(footer + "\n");
 
-                } else if (command.startsWith("done")) {
+                } else if (taskDescriptionArr[0].equals("done")) {
 
-                    taskDescriptionArr = taskDescription.split(" ");
                     Task t = manager.getTask(Integer.parseInt(taskDescriptionArr[1]));
                     System.out.println(header);
                     manager.markDone(t);
@@ -56,37 +91,40 @@ public class Duke {
 
                 } else {
 
-                    if (command.startsWith("todo")) {
+                    if (taskDescriptionArr[0].equals("todo")) {
 
                         System.out.println(header);
-                        System.out.println(manager.addTask(taskDescription, date, Task.Types.ToDo));
+                        System.out.println(manager.addTask(taskDescriptionArr[1], taskDescriptionArr[2], Task.Types.ToDo));
                         System.out.println(manager.reportTotal());
                         System.out.println(footer);
 
-                    } else if (command.startsWith("deadline")) {
+                    } else if (taskDescriptionArr[0].equals("deadline")) {
 
                         System.out.println(header);
-                        System.out.println(manager.addTask(taskDescription, date, Task.Types.Deadline));
+                        System.out.println(manager.addTask(taskDescriptionArr[1], taskDescriptionArr[2], Task.Types.Deadline));
                         System.out.println(manager.reportTotal());
                         System.out.println(footer);
 
-                    } else if (command.startsWith("event")) {
+                    } else if (taskDescriptionArr[0].equals("event")) {
 
                         System.out.println(header);
-                        System.out.println(manager.addTask(taskDescription, date, Task.Types.Event));
+                        System.out.println(manager.addTask(taskDescriptionArr[1], taskDescriptionArr[2], Task.Types.Event));
                         System.out.println(manager.reportTotal());
                         System.out.println(footer);
 
                     } else {
-                        System.out.println("invalid input!");
+
+                        System.out.println(header);
+                        System.out.println(handler.handleError("InvalidInput", null));
+                        System.out.println(footer);
+                        continue;
+
                     }
 
                 }
             }
 
-            System.out.println(header);
-            System.out.println("Bye. I hope you liked the service and hope to see you soon !");
-            System.out.println(footer);
+
 
         } catch (IOException e) {
 
