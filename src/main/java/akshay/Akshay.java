@@ -3,7 +3,7 @@ package akshay;
 import java.util.Scanner;
 
 public class Akshay {
-    private static String line = "~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
     private static void say(String s) {
         System.out.println(line);
@@ -35,10 +35,14 @@ public class Akshay {
                     say("Marked as done:\n" + curr.toString());
                     break;
                 case ("todo"):
-                    Task todo = new Todo(c[1]);
-                    arr[count] = todo;
-                    count++;
-                    say("Added: " + todo.toString());
+                    try {
+                        Task todo = new Todo(c[1]);
+                        arr[count] = todo;
+                        count++;
+                        say("Added: " + todo.toString());
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        say("OOPS!!! The description of a todo cannot be empty.");
+                    }
                     break;
                 case ("deadline"):
                     String[] dl = c[1].split("/by",2);
@@ -55,7 +59,11 @@ public class Akshay {
                     say("Added: " + e.toString());
                     break;
                 default:
-                    say("Please enter correct input.");
+                    try {
+                        throw new DukeException();
+                    } catch (DukeException de) {
+                        say("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
             }
             input = sc.nextLine();
         }
