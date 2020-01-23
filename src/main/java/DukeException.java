@@ -21,6 +21,8 @@ public class DukeException extends Exception {
                 return "Oh no! I am not sure what you are talking about:(";
             case 7: // for not specifying which task is done
                 return "Please let me know which task you are done with!:)";
+            case 8: // for not specifying which task to delete
+                return "Please let me know which task you want to delete!:)";
         }
         return "ERROR";
     }

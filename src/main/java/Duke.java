@@ -89,6 +89,20 @@ public class Duke {
                 for (Task task : arr) {
                     System.out.println(task);
                 }
+            } else if (command.contains("delete")) {
+                String[] strArr = command.split(" ");
+                try {
+                    if (strArr.length == 1) {
+                        throw new DukeException(8);
+                    }
+                    Task currTask = arr.get(Integer.parseInt(strArr[1]) - 1);
+                    arr.remove(currTask);
+                    System.out.println("Okay noted! I have deleted the below task:");
+                    System.out.println(currTask);
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                } catch (DukeException ex) {
+                    System.out.println(ex.toString());
+                }
             } else {
                 try {
                     throw new DukeException(6);

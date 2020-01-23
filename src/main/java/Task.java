@@ -12,7 +12,7 @@ public class Task {
     protected void setDone() {
         done = TRUE;
     }
-//return done ? "\u2713" : "\u2717" ;
+
     protected String getDoneSymbol() {
         return done ? "✓" : "✗" ;
     }
