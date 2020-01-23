@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -5,19 +6,36 @@ public class Duke {
     public static Scanner sc = new Scanner(System.in);
     public static String machine = "Dude: ";
     public static String user = "dude: ";
+    public static ArrayList<String> commandList = new ArrayList<>();
     public static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
+        commandList.add("list");
+        commandList.add("done");
+        commandList.add("todo");
+        commandList.add("event");
+        commandList.add("deadline");
         greeting();
         String command = sc.next();
+
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                list();
-            } else if (command.equals("done")) {
-                markAsDone();
-            } else {
-                String details = sc.nextLine();
-                addTask(command, details);
+            try{
+                checkCommand(command);
+                if (command.equals("list")) {
+                    list();
+                } else if (command.equals("done")) {
+                    markAsDone();
+                } else {
+                    String details = sc.nextLine();
+                    try {
+                        addTask(command, details);
+                    } catch (EmptyDescriptionException ex){
+                        System.out.println(ex.getMessage());
+                    }
+                }
+            }
+            catch (InvalidCommandException ex) {
+                System.out.println(ex.getMessage());
             }
             System.out.print(user);
             command = sc.next();
@@ -36,7 +54,8 @@ public class Duke {
     public static void list() {
         System.out.println(machine + "Here's your list of tasks dude:");
         for (int i = 1; i <= list.size(); i++) {
-            System.out.println("      " + i + ". " + list.get(i-1));
+            Task task = list.get(i-1);
+            System.out.println("      " + i + ". " + task);
         }
     }
 
@@ -48,7 +67,16 @@ public class Duke {
         System.out.println("      " + i + ". " + task);
     }
 
-    public static void addTask(String command, String details) {
+    public static void checkCommand(String command) throws InvalidCommandException {
+        if (!commandList.contains(command)) {
+            throw new InvalidCommandException("      Sorry dude but that won't command me!");
+        }
+    }
+
+    public static void addTask(String command, String details) throws EmptyDescriptionException{
+        if (details.equals("")) {
+            throw new EmptyDescriptionException("      Wait dude your task is...?");
+        }
         String[] arr = new String[2];
         switch (command) {
             case "todo":
@@ -70,7 +98,7 @@ public class Duke {
         list.add(task);
         System.out.println(machine + "Dude now you have even more things to do:");
         System.out.println("      " + task);
-        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void addDeadline(String description, String by) {
@@ -78,7 +106,7 @@ public class Duke {
         list.add(task);
         System.out.println(machine + "That's strange dude your pile of deadlines suddenly grew:");
         System.out.println("      " + task);
-        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void addEvent(String description, String at) {
@@ -86,6 +114,6 @@ public class Duke {
         list.add(task);
         System.out.println(machine + "Woohoo what an eventful life:");
         System.out.println("      " + task);
-        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 }
