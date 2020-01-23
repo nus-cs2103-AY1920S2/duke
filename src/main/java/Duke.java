@@ -45,18 +45,32 @@ public class Duke {
                 continue;
             }
 
+            if (splitStr[0].toLowerCase().equals("delete")) {
+                int index = Integer.parseInt(splitStr[1]) - 1;
+                Task currentTask = listOfText.get(index);
+                listOfText.remove(index);
+                System.out.println("Bye bye Task! I've removed this task:");
+                System.out.println(currentTask);
+                System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                continue;
+            }
+
             if (splitStr[0].toLowerCase().equals("deadline")) {
              try {   String date = "";
                 String deadline = "";
                 for (int i = 1; i < splitStr.length; i++) {
                     if ((splitStr[i].equals("/by"))) {
-                        date = splitStr[i + 1];
+                        for (int j = i + 1; j < splitStr.length; j++) {
+                            date += splitStr[j] + " ";
+                        }
                         break;
                     } else {
                         deadline += splitStr[i] + " ";
                     }
                 }
                 deadline = deadline.substring(0, deadline.length() - 1);
+                date = date.substring(0,date.length() - 1);
+
                 if (date.equals("")) {
                     throw new DukeException("☹ OOPS!!! When is this due????? use /by to tell me! ☹ OOPS!!!");
                 } else {
@@ -133,10 +147,7 @@ public class Duke {
                 }
             }
 
-
-
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
-
     }
 
         System.out.println("\n");
