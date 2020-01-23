@@ -1,0 +1,106 @@
+4LC3N v0.0.1
+      _.-'''''-._
+    /=_.-~-~-~-._=\      .-.  _
+   :    _     _    :     | | / )
+  /    (o)   (o)    \    | |/ /
+  |  _ _ _ _ _ _ _  |   _|__ /_
+  |  \           /  |  / __)-' )
+   \  '.       .'  /   \  `(.-')
+    '.  `'---'`  .'     > ._>-'
+      '-._____.-'      / \/
+=======================================================
+                  LOADING ... ... ...
+=======================================================
+4LC3N-BOT initialised.
+Greetings, humans!
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 1 tasks stored
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 2 tasks stored
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 3 tasks stored
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 4 tasks stored
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 5 tasks stored
+
+> ENTER your input:
+1. [T][✗] read book 
+2. [D][✗] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club 
+5. [T][✗] borrow book 
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 6 tasks stored
+
+> ENTER your input:
+I have stored this task in my memory. Use "list" to retrieve it!
+Total of 7 tasks stored
+
+> ENTER your input:
+1. [T][✗] read book 
+2. [D][✗] return book (by: June 6th)
+3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club 
+5. [T][✗] borrow book 
+6. [D][✗] return book (by: Sunday)
+7. [E][✗] project meeting (at: Mon 2-4pm)
+
+> ENTER your input:
+You have completed: 
+6. [D][✓] return book (by: Sunday)
+
+> ENTER your input:
+You have completed: 
+3. [E][✓] project meeting (at: Aug 6th 2-4pm)
+
+> ENTER your input:
+You have completed: 
+2. [D][✓] return book (by: June 6th)
+
+> ENTER your input:
+1. [T][✗] read book 
+2. [D][✓] return book (by: June 6th)
+3. [E][✓] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club 
+5. [T][✗] borrow book 
+6. [D][✓] return book (by: Sunday)
+7. [E][✗] project meeting (at: Mon 2-4pm)
+
+> ENTER your input:
+You have completed: 
+1. [T][✓] read book 
+
+> ENTER your input:
+1. [T][✓] read book 
+2. [D][✓] return book (by: June 6th)
+3. [E][✓] project meeting (at: Aug 6th 2-4pm)
+4. [T][✗] join sports club 
+5. [T][✗] borrow book 
+6. [D][✓] return book (by: Sunday)
+7. [E][✗] project meeting (at: Mon 2-4pm)
+
+> ENTER your input:
+
+Goodbye! You will be missed
+      _.-'''''-._  
+    /=_.-~-~-~-._=\
+   :    _     _    :
+  /    (o)   (o)    \
+  |           `     |
+  |     .-----.     |
+   \   :       :   /
+    '.           .'
+      '-._____.-'
