@@ -1,0 +1,11 @@
+todo Learn about Java
+deadline Java quiz /by Jan 26th
+deadline Individual project /by Jan 23rd
+event CS2101 Tutorial /at Thursday Jan 23rd 2-4pm
+todo set up meeting for project
+list
+done 1
+done 3
+list
+deadline fix my life /by ASAP!
+bye
