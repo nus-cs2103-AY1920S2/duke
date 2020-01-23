@@ -8,6 +8,9 @@
 /build/
 src/main/resources/docs/
 
+# Automated testing file
+text-ui-test/ACTUAL.txt
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
