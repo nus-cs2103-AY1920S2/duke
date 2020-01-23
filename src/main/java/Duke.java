@@ -82,7 +82,9 @@ public class Duke {
         if (taskList.isEmpty()) {
             replyUser("There is no task in your list to be deleted.");
         } else if (index < taskList.size()) {
+            Task t = taskList.get(index);
             taskList.remove(index);
+            replyUser("As per requested, the following task has been deleted:\n" + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
