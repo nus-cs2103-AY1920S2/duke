@@ -1,9 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static boolean dukeActive = true;
     private static final Scanner scanner = new Scanner(System.in);
     private static String userInput = "";
+    private static String[] items = new String[100];
+    private static int itemsCounter = 0;
 
     /**
      * Main method. Entry point for the Duke program.
@@ -16,18 +19,23 @@ public class Duke {
 
         System.out.println(logoDivider + logo + "\n" + logoDivider);
 
-        dukePrompt(new String[]{"Hello! I'm Duke", "What can I do for you?"});
+        dukePrompt(new String[]{"Hey boss! Duke here, at your service.", "What do you need me to do?"});
         while (dukeActive) {
             userInput = readUserInput();
 
             switch (userInput) {
+            case "list":
+                dukePrompt("Here's what I've written down, boss.");
+                listItems();
+                break;
             case "bye":
                 dukeActive = false;
-                dukePrompt("Bye. Hope to see you again!");
+                dukePrompt("Good bye boss! Call me if you need me. I'll be waiting!");
                 break;
-
             default:
-                dukePrompt(userInput);
+                items[itemsCounter] = userInput;
+                dukePrompt("Added: " + userInput);
+                itemsCounter++;
                 break;
             }
         }
@@ -50,5 +58,11 @@ public class Duke {
     private static String readUserInput() {
         System.out.printf("You:  ");
         return scanner.nextLine();
+    }
+
+    private static void listItems() {
+        for (int i = 0; i < itemsCounter; i++) {
+            System.out.println("      " + (i + 1) + ". " + items[i]);
+        }
     }
 }
