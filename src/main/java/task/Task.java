@@ -19,8 +19,9 @@ public class Task {
 
   private static String getType(String words) throws DukeException {
     String acceptedTypes = String.format("(%s)", String.join("|", Task.taskTypes));
-    if (Pattern.matches(acceptedTypes + ".*", words)) {
-      if (Pattern.matches(String.format("^%s .*", acceptedTypes), words)) {
+    if (Pattern.matches(String.format("^%s\\s+.*|.*\\s+%s$|.*\\s+%s\\s+.*", acceptedTypes,
+        acceptedTypes, acceptedTypes), words)) {
+      if (Pattern.matches(String.format("^%s\\s+.*", acceptedTypes), words)) {
         return words.split(" ")[0];
       } else {
         throw new DukeException("Please start with event type");

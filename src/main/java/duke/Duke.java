@@ -72,11 +72,21 @@ public class Duke {
                 Duke.out("Bye. Hope to see you again soon!", indent2);
                 return;
             default:
-                if (Pattern.matches("^(done|delete)\\s+\\d$", input)) {
+                // as long as done/delete inside
+                if (Pattern.matches(
+                        ("(^(done|delete)\\s+.*|(.*\\s+(done|delete)\\s+.*)|.*\\s+(done|delete)$)"),
+                        input)) {
                     if (this.tasks.isEmpty()) {
                         throw new DukeException("Task list is empty!");
                     }
-                    int taskIndex = Integer.parseInt((input.split(" "))[1]) - 1;
+                    if (!Pattern.matches("^(done|delete)\\s+.*", input)) {
+                        throw new DukeException("Action should be at the front");
+                    }
+                    if (!Pattern.matches("^(done|delete)\\s+\\d+$", input)) {
+                        throw new DukeException("A task number must be provided");
+                    }
+                    String[] splitInput = input.split(" ");
+                    int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
                     if (taskIndex >= taskSize()) {
                         Duke.out(String.format(
                                 "Please choose an index that is between 1 and %d (inclusive)",
