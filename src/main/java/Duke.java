@@ -76,6 +76,18 @@ public class Duke {
         }
     }
 
+    // Delete the specified task from the list.
+    public static void deleteTask(String userIndex) throws DukeArgumentException {
+        int index = Integer.parseInt(userIndex) - 1;
+        if (taskList.isEmpty()) {
+            replyUser("There is no task in your list to be deleted.");
+        } else if (index < taskList.size()) {
+            taskList.remove(index);
+        } else {
+            throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -101,6 +113,8 @@ public class Duke {
                     throw new DukeArgumentException("Missing field detected in your '" + commandArray[0] + "' command.");
                 } else if (commandArray[0].toLowerCase().equals("done")) {
                     markTaskAsDone(commandArray[1]);
+                } else if (commandArray[0].toLowerCase().equals("delete")) {
+                    deleteTask(commandArray[1]);
                 } else if (commandArray[0].toLowerCase().equals("todo")) {
                     addTask(commandArray[1], "T");
                 } else if (commandArray[0].toLowerCase().equals("deadline")) {
