@@ -6,8 +6,26 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
-☹ OOPS!!! The description of a todo cannot be empty.
+added: read book
 
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+added: return book
+
+added: buy bread
+
+These are the tasks in your list:
+1. [✗] read book
+2. [✗] return book
+3. [✗] buy bread
+
+Nice! I've marked this task as done: 
+  [✓] return book
+
+Nice! I've marked this task as done: 
+  [✓] buy bread
+
+These are the tasks in your list:
+1. [✓] read book
+2. [✓] return book
+3. [✓] buy bread
 
 Bye. Hope to see you again soon!

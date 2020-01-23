@@ -8,11 +8,22 @@ Hello from
 What can I do for you?
 added: read book
 
-1. read book
-
 added: return book
 
-1. read book
-2. return book
+added: buy bread
+
+1. [✗] read book
+2. [✗] return book
+3. [✗] buy bread
+
+Nice! I've marked this task as done: 
+  [✓] return book
+
+Nice! I've marked this task as done: 
+  [✓] buy bread
+
+1. [✗] read book
+2. [✓] return book
+3. [✓] buy bread
 
 Bye. Hope to see you again soon!
