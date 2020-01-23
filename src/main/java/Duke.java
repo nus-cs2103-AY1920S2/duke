@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public enum typeOfError {
+        TODO_NODESC, DEADLINE_NODESC, DEADLINE_NODEADLINE, EVENT_NODESC, EVENT_NODATEANDTIME, OTHERS, UNKTASKDONE, UNKTASKTODELETE
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> arr = new ArrayList<>();
@@ -13,7 +17,7 @@ public class Duke {
                 String[] strArr = command.split(" ");
                 try {
                     if (strArr.length == 1) {
-                        throw new DukeException(7);
+                        throw new DukeException(typeOfError.UNKTASKDONE.ordinal());
                     }
                     Task currTask = arr.get(Integer.parseInt(strArr[1]) - 1);
                     currTask.setDone();
@@ -26,7 +30,7 @@ public class Duke {
                 String[] strArr = command.split(" ", 2);
                 try {
                     if (strArr.length == 1) {
-                        throw new DukeException(1);
+                        throw new DukeException(typeOfError.TODO_NODESC.ordinal());
                     }
                     Todo newTask = new Todo(strArr[1]);
                     arr.add(newTask);
@@ -40,12 +44,12 @@ public class Duke {
                 String[] strArr = command.split(" ", 2);
                 try {
                     if (strArr.length == 1) {
-                        throw new DukeException(2);
+                        throw new DukeException(typeOfError.DEADLINE_NODESC.ordinal());
                     }
                     String[] cmdArr = strArr[1].split("/", 2);
                     try {
                         if (cmdArr.length == 1) {
-                            throw new DukeException(3);
+                            throw new DukeException(typeOfError.DEADLINE_NODEADLINE.ordinal());
                         }
                         command = cmdArr[0];
                         String deadline = cmdArr[1].split(" ", 2)[1];
@@ -64,12 +68,12 @@ public class Duke {
                 String[] strArr = command.split(" ", 2);
                 try {
                     if (strArr.length == 1) {
-                        throw new DukeException(4);
+                        throw new DukeException(typeOfError.EVENT_NODESC.ordinal());
                     }
                     String[] cmdArr = strArr[1].split("/", 2);
                     try {
                         if (cmdArr.length == 1) {
-                            throw new DukeException(5);
+                            throw new DukeException(typeOfError.EVENT_NODATEANDTIME.ordinal());
                         }
                         command = cmdArr[0];
                         String timing = cmdArr[1].split(" ", 2)[1];
@@ -93,7 +97,7 @@ public class Duke {
                 String[] strArr = command.split(" ");
                 try {
                     if (strArr.length == 1) {
-                        throw new DukeException(8);
+                        throw new DukeException(typeOfError.UNKTASKTODELETE.ordinal());
                     }
                     Task currTask = arr.get(Integer.parseInt(strArr[1]) - 1);
                     arr.remove(currTask);
@@ -105,7 +109,7 @@ public class Duke {
                 }
             } else {
                 try {
-                    throw new DukeException(6);
+                    throw new DukeException(typeOfError.OTHERS.ordinal());
                 } catch (DukeException ex) {
                     System.out.println(ex.toString());
                 }
