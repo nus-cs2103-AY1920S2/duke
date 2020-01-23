@@ -10,16 +10,32 @@ public class Duke {
         String separator = "---------------------------------------------------------";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you? :)\n");
-        
+
         Scanner scanner = new Scanner(System.in);
+
+        //store user input items
+        String[] items = new String[100];
+        int index = 0;
 
         String input = "";
         input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            System.out.println(separator);
-            System.out.println(input);
-            System.out.println(separator);
+            if (input.equals("list")) {
+                for (int i = 0; i < index; i++) {
+                    System.out.println(separator);
+                    System.out.println((i+1) + ". " + items[i]);
+                    System.out.println(separator);
+                }
+            } else {
+                items[index++] = input;
+
+                //display reply
+                System.out.println(separator);
+                System.out.println("added: " + input);
+                System.out.println(separator);
+            }
+            //next input
             input = scanner.nextLine();
         }
 
