@@ -82,8 +82,20 @@ public class Duke {
                 case "bye":
                     Duke.printByeMsg();
                     break;
+                case "delete":
+                    int delIdx = sc.nextInt() - 1;
+                    if (delIdx >= tasks.size() || delIdx < 0) {
+                        throw new DukeException("Oops! Target object is out of bounds!");
+                    }
+                    Task delTask = tasks.get(delIdx);
+                    tasks.remove(delIdx);
+                    System.out.printf("Deleted: %s\n\n", delTask.toString());
+                    echo(sc);
+                    break;
+
                 default:
                 throw new DukeException("Oops! Invalid commmand word, perhaps you would want to try on of the following: todo 2.deadline 3.event 4.list 5.done 6.bye");
+
             }
         } catch (DukeException ex) {
             System.err.println(ex.getMessage());
