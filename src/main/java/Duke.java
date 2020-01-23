@@ -1,3 +1,4 @@
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Duke {
@@ -20,6 +21,15 @@ public class Duke {
         String initialMessage = "4LC3N-BOT initialised.\nGreetings, humans!";
         String awaitingMessage = "\n> ENTER your input:";
         String doneMessage = "You have completed: ";
+        String errorMessage = "      _.-'''''-._  \n" +
+                "    /=_.-~-~-~-._=\\\n" +
+                "   :               :\n" +
+                "  /    (X)   (X)    \\\n" +
+                "  |                 |\n" +
+                "  |     .-----.     |\n" +
+                "   \\    '_ _ _'    /\n" +
+                "    '.           .'\n" +
+                "      '-._____.-'";
 
         System.out.println(greetings);
         System.out.println(load);
@@ -35,22 +45,63 @@ public class Duke {
         while(input.hasNext()) {
             String command = input.nextLine();
             // parse the command
-            Instruction next = parser.parse(command);
+            Instruction next;
+            try {
+                next = parser.parse(command);
+            } catch (UnknownInstructionException e) {
+                System.err.println(e.getMessage());
+                System.err.println(errorMessage);
+                continue;
+            }
+
             if (next == Instruction.MARK_DONE) {
-                int index = Integer.parseInt(command.split("\\s+")[1]);
+                int index;
+                try {
+                    index = getDoneIndex(command);
+                } catch (InadequateArgumentsException |
+                    NumberFormatException | TooManyArgumentsException e
+                ) {
+                    System.err.println(e.getMessage());
+                    System.err.println(errorMessage);
+                    continue;
+                }
                 store.markAsDone(index);
                 System.out.println(doneMessage);
                 System.out.println(store.retrieve(index));
             } else if (next == Instruction.READ_STORAGE) {
                 store.readStorage();
             } else if (next == Instruction.STORE_DDL) {
-                store.store(new Deadline(command));
+                Deadline ddl;
+                try {
+                    ddl = new Deadline(command);
+                } catch (InadequateArgumentsException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println(errorMessage);
+                    continue;
+                }
+                store.store(ddl);
                 Duke.printTaskStoreMessage(store.getNumTasks());
             } else if (next == Instruction.STORE_EVENT) {
-                store.store(new Event(command));
+                Event evn;
+                try {
+                    evn = new Event(command);
+                } catch (InadequateArgumentsException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println(errorMessage);
+                    continue;
+                }
+                store.store(evn);
                 Duke.printTaskStoreMessage(store.getNumTasks());
             } else if (next == Instruction.STORE_TODO) {
-                store.store(new Todo(command));
+                Todo tdo;
+                try {
+                    tdo = new Todo(command);
+                } catch (InadequateArgumentsException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println(errorMessage);
+                    continue;
+                }
+                store.store(tdo);
                 Duke.printTaskStoreMessage(store.getNumTasks());
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
@@ -87,5 +138,29 @@ public class Duke {
                 " \"list\" to retrieve it!\nTotal of ";
         String tasks = " tasks stored";
         System.out.println(storeMessage + storeSize + tasks);
+    }
+
+    /**
+     * Gets the index of a "done" command, given the
+     * raw String input of the command
+     *
+     * @param doneCommand The original command input
+     * @return An integer representing the index in the
+     *         list to set as "done"
+     * @throws InadequateArgumentsException
+     *         When no numbers found after "done"
+     */
+    private static int getDoneIndex(String doneCommand)
+        throws InadequateArgumentsException, NumberFormatException,
+            TooManyArgumentsException
+    {
+        String[] words = doneCommand.split("\\s+");
+        if (words.length == 2) {
+            return Integer.parseInt(words[1]);
+        } else if (words.length < 2) {
+            throw new InadequateArgumentsException(Command.DONE.word);
+        } else {
+            throw new TooManyArgumentsException(Command.DONE.word);
+        }
     }
 }

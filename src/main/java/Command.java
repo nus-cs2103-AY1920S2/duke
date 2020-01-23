@@ -4,11 +4,11 @@
  */
 public enum Command {
     BYE("bye"),
-    DONE("done "),
+    DONE("done"),
     LIST("list"),
-    DEADLINE("deadline "),
-    EVENT("event "),
-    TODO("todo ");
+    DEADLINE("deadline"),
+    EVENT("event"),
+    TODO("todo");
 
     public final String word;
 

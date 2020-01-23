@@ -14,7 +14,7 @@ public class CommandParser {
      * @return Instruction to the bot, telling
      *         it what to do next
      */
-    public Instruction parse(String command) {
+    public Instruction parse(String command) throws UnknownInstructionException {
         if (command.equals(Command.BYE.word)) {
             return Instruction.TERMINATE;
         } else if (command.startsWith(Command.DONE.word)) {
@@ -28,7 +28,7 @@ public class CommandParser {
         } else if (command.startsWith(Command.TODO.word)) {
             return Instruction.STORE_TODO;
         } else {
-            return Instruction.AWAIT;
+            throw new UnknownInstructionException(command);
         }
     }
 

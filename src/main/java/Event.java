@@ -5,7 +5,7 @@
 public class Event extends Task {
     public static final String AT = "/at ";
 
-    public Event(String td) {
+    public Event(String td) throws InadequateArgumentsException {
         super(Event.descMaker(td.substring(Command.EVENT.word.length())),
                 Event.timeMaker(td.substring(Command.EVENT.word.length())));
     }
@@ -24,8 +24,11 @@ public class Event extends Task {
      *
      * @return The formatted String description
      */
-    private static String descMaker(String t) {
+    private static String descMaker(String t) throws InadequateArgumentsException {
         int indexFirst = t.indexOf(Event.AT);
+        if (indexFirst == -1) {
+            throw new InadequateArgumentsException(Command.EVENT.word);
+        }
         return t.substring(0, indexFirst).stripTrailing();
     }
 
