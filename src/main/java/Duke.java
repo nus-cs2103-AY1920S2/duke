@@ -1,12 +1,11 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import main.java.Deadline;
 import main.java.DukeException;
+import main.java.Event;
 import main.java.Task;
 import main.java.Todo;
-import main.java.Event;
-
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) throws DukeException{
@@ -99,7 +98,8 @@ public class Duke {
                     String rest = x[1];
                     int index = Integer.valueOf(rest);
                     Tasks.get(index-1).deleteTask();
-                    System.out.println("Now you have " + Tasks.size()-1 + " tasks in the list.");
+                    int currsize = Tasks.size()-1;
+                    System.out.println("Now you have " + currsize + " tasks in the list.");
                     System.out.println();
                     System.out.println("-------------------------------------------------------------");
                     Tasks.remove(index-1);
