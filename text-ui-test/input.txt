@@ -1,0 +1,8 @@
+hello
+event project meeting /at Mon 2-4pm
+deadline return book /by Sunday
+deadline do homework /by no idea :-p
+todo borrow book
+done 1
+done 3
+
