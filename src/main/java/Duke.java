@@ -11,9 +11,9 @@ public class Duke {
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
-                System.out.println("You asked to:");
-                for (String item : userInputList) {
-                    System.out.println("☛ " + item);
+                System.out.println("☛ You asked to:");
+                for (int i = 0; i < userInputList.size(); i++) {
+                    System.out.println("\t" + (i + 1) + ". " + userInputList.get(i));
                 }
             }
             else {
