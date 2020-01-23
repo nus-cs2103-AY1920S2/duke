@@ -4,4 +4,6 @@ todo go to therapist
 list
 todo
 blah
+delete 2
+list
 bye
