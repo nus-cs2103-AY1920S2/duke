@@ -21,55 +21,70 @@ public class Duke {
 
         dukePrompt(new String[]{"Hey boss! Duke here, at your service.", "What do you need me to do?"});
         while (dukeActive) {
-            userInput = readUserInput();
-            System.out.println();
-
-            switch (userInput) {
-            case "list":
-                dukePrompt(listItems());
-                break;
-            case "bye":
-                dukeActive = false;
-                dukePrompt("Good bye, boss! Call me if you need me. I'll be waiting!");
-                break;
-            default:
-                String[] splitString = userInput.split(" ", 2);
-                userInput = splitString[0];
-                userArgs = splitString[1];
+            try {
+                userInput = readUserInput();
+                System.out.println();
 
                 switch (userInput) {
-                case "done":
-                    int taskNo = Integer.parseInt(splitString[1]) - 1;
-                    markAsDone(taskNo);
-                    dukePrompt(new String[]{"Got it boss! Just to confirm, this is the one I marked as done",
-                        items[taskNo].toString()});
+                case "list":
+                    dukePrompt(listItems());
                     break;
-                case "deadline":
-                    items[itemsCounter] = new Deadline(userArgs);
-                    itemsCounter++;
-                    dukePrompt(new String[]{"Oooh, this one's important eh, boss? I got it",
-                        items[(itemsCounter - 1)].toString(),
-                        "Now you have " + itemsCounter + " tasks in the list"});
-                    break;
-                case "todo":
-                    items[itemsCounter] = new ToDo(userArgs);
-                    itemsCounter++;
-                    dukePrompt(new String[]{"Got it, boss. I'll write this one down",
-                        items[(itemsCounter - 1)].toString(),
-                        "Now you have " + itemsCounter + " tasks in the list"});
-                    break;
-                case "event":
-                    items[itemsCounter] = new Event(userArgs);
-                    itemsCounter++;
-                    dukePrompt(new String[]{
-                        "A special event I see. Don't worry boss, I'll remind you",
-                        items[(itemsCounter - 1)].toString(),
-                        "Now you have " + itemsCounter + " tasks in the list"});
+                case "bye":
+                    dukeActive = false;
+                    dukePrompt("Good bye, boss! Call me if you need me. I'll be waiting!");
                     break;
                 default:
-                    break;
-                };
+                    String[] splitString = userInput.split(" ", 2);
+                    if (splitString.length != 2) {
+                        throw new DukeException(1);
+                    }
+                    userInput = splitString[0];
+                    userArgs = splitString[1];
+
+                    switch (userInput) {
+                    case "done":
+                        int taskNo = Integer.parseInt(userArgs) - 1;
+                        System.out.println(taskNo);
+                        if (taskNo < 0 || taskNo >= itemsCounter) {
+                            throw new DukeException(4);
+                        } else {
+                            markAsDone(taskNo);
+                            dukePrompt(new String[]{"Got it boss! Just to confirm, this is the one I marked as done",
+                                items[taskNo].toString()});
+                        }
+                        break;
+                    case "deadline":
+                        items[itemsCounter] = new Deadline(userArgs);
+                        itemsCounter++;
+                        dukePrompt(new String[]{"Oooh, important deadline eh, boss? Don't worry, I got it",
+                            items[(itemsCounter - 1)].toString(),
+                            "Now you have " + itemsCounter + " tasks in the list"});
+                        break;
+                    case "todo":
+                        items[itemsCounter] = new ToDo(userArgs);
+                        itemsCounter++;
+                        dukePrompt(new String[]{"Got it, boss. I'll write this one down",
+                            items[(itemsCounter - 1)].toString(),
+                            "Now you have " + itemsCounter + " tasks in the list"});
+                        break;
+                    case "event":
+                        items[itemsCounter] = new Event(userArgs);
+                        itemsCounter++;
+                        dukePrompt(new String[]{
+                            "A special event I see. Don't worry boss, I'll remind you",
+                            items[(itemsCounter - 1)].toString(),
+                            "Now you have " + itemsCounter + " tasks in the list"});
+                        break;
+                    default:
+                        throw new DukeException(0);
+                    };
+                }
+            } catch (DukeException e) {
+                dukePrompt(e.getMessage());
+                //TODO: Implement "help" command
             }
+            userInput = "";
+            userArgs = "";
         }
     }
 

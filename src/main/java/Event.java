@@ -5,10 +5,15 @@ public class Event extends Task {
      * Event constructor.
      *
      * @param eventArgs Joined string of the user input command arguements
+     * @throws DukeException Incorrect format/missing date
      */
-    public Event(String eventArgs) {
+    public Event(String eventArgs) throws DukeException {
         super(eventArgs.split(" /at ")[0]);
-        this.eventDate = eventArgs.split(" /at ")[1];
+        try {
+            this.eventDate = eventArgs.split(" /at ")[1];
+        } catch (Exception e) {
+            throw new DukeException(2);
+        }
     }
 
     /**

@@ -5,10 +5,15 @@ public class Deadline extends Task {
      * Deadline constructor.
      *
      * @param deadlineArgs Joined string of the user input command arguements
+     * @throws DukeException Incorrect format/missing date
      */
-    public Deadline(String deadlineArgs) {
+    public Deadline(String deadlineArgs) throws DukeException {
         super(deadlineArgs.split(" /by ")[0]);
-        this.deadlineDate = deadlineArgs.split(" /by ")[1];
+        try {
+            this.deadlineDate = deadlineArgs.split(" /by ")[1];
+        } catch (Exception e) {
+            throw new DukeException(3);
+        }
     }
 
     /**
