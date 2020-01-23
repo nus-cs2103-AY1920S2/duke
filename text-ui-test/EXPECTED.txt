@@ -11,7 +11,7 @@ Duke: Hey boss! Duke here, at your service.
       What do you need me to do?
 
 You:  
-Duke: Oooh, this one's important eh, boss? I got it
+Duke: Oooh, important deadline eh, boss? Don't worry, I got it
       [D][✗] homework (by: Thursday-2359)
       Now you have 1 tasks in the list
 
