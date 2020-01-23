@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
     private static void respond(String response) {
@@ -23,19 +21,8 @@ public class Duke {
         System.out.println(botResponse);
     }
 
-    private static String createList(List<String> tasks) {
-        String lst = "";
-        int counter = 1;
-        for (String t: tasks) {
-            lst += (counter + "."); // Index of task
-            lst += (" " + t + '\n'); // Description of task and whether it is done
-            counter++;
-        }
-        return lst;
-    }
-
     public static void main(String[] args) {
-        ArrayList<String> arrTasks = new ArrayList<>();
+        TaskManager lstTasks = new TaskManager();
 
         String greeting = "Hello! I'm Woody and I'm always here to keep you company.\n"
                 + "Let me know what you need and I'll be right on it.\n";
@@ -45,16 +32,21 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String userCmd = sc.nextLine();
-            switch (userCmd) {
+            String cmdInstructionArr[] = userCmd.split(" ", 2);
+            String command = cmdInstructionArr[0];
+            switch (command) {
                 case "bye": // Exit
                     respond(farewell);
                     return;
                 case "list": // List all tasks
-                    respond(createList(arrTasks));
+                    respond(lstTasks.showTasks());
+                    break;
+                case "done": // Mark task as done
+                    int taskArrIndex = Integer.parseInt(cmdInstructionArr[1]) - 1; // Array index of required task
+                    respond(lstTasks.markTaskAsDone(taskArrIndex));
                     break;
                 default: // Add new task
-                    arrTasks.add(userCmd);
-                    respond("added: " + userCmd);
+                    respond(lstTasks.addTask(new Task(userCmd)));
             }
         }
     }
