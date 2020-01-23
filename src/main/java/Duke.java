@@ -6,6 +6,7 @@ public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static String userInput = "";
     private static String userArgs = "";
+    private static int taskNo = 0;
     private static ArrayList<Task> items = new ArrayList<Task>();
 
     /**
@@ -43,8 +44,7 @@ public class Duke {
 
                     switch (userInput) {
                     case "done":
-                        int taskNo = Integer.parseInt(userArgs) - 1;
-                        System.out.println(taskNo);
+                        taskNo = Integer.parseInt(userArgs) - 1;
                         if (taskNo < 0 || taskNo >= items.size()) {
                             throw new DukeException(4);
                         } else {
@@ -53,24 +53,35 @@ public class Duke {
                                 items.get(taskNo).toString()});
                         }
                         break;
+                    case "delete":
+                        taskNo = Integer.parseInt(userArgs) - 1;
+                        if (taskNo < 0 || taskNo >= items.size()) {
+                            throw new DukeException(4);
+                        } else {
+                            Task deletedTask = items.remove(taskNo);
+                            dukePrompt(new String[]{"Aaaaand deleted! Don't kill me if it's the wrong one, boss",
+                                deletedTask.toString(),
+                                getTasksTotal()});
+                        } 
+                        break;
                     case "deadline":
                         items.add(new Deadline(userArgs));
                         dukePrompt(new String[]{"Oooh, important deadline eh, boss? Don't worry, I got it",
                             items.get(items.size() - 1).toString(),
-                            "Now you have " + items.size() + " tasks in the list"});
+                            getTasksTotal()});
                         break;
                     case "todo":
                         items.add(new ToDo(userArgs));
                         dukePrompt(new String[]{"Got it, boss. I'll write this one down",
                             items.get(items.size() - 1).toString(),
-                            "Now you have " + items.size() + " tasks in the list"});
+                            getTasksTotal()});
                         break;
                     case "event":
                         items.add(new Event(userArgs));
                         dukePrompt(new String[]{
                             "A special event I see. Don't worry boss, I'll remind you",
                             items.get(items.size() - 1).toString(),
-                            "Now you have " + items.size() + " tasks in the list"});
+                            getTasksTotal()});
                         break;
                     default:
                         throw new DukeException(0);
@@ -82,6 +93,7 @@ public class Duke {
             }
             userInput = "";
             userArgs = "";
+            taskNo = 0;
         }
     }
 
@@ -120,5 +132,9 @@ public class Duke {
 
     private static void markAsDone(int taskNo) {
         items.get(taskNo).setTaskDone();
+    }
+
+    private static String getTasksTotal() {
+        return "Now you have " + items.size() + " tasks in the list";
     }
 }
