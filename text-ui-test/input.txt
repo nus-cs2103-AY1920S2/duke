@@ -1,0 +1,6 @@
+todo read book
+deadline return book /by Sun 4pm
+event buy bread /at Mon 8am
+list
+done 2
+bye

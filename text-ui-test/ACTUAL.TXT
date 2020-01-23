@@ -1,0 +1,32 @@
+    ---------------------------------------------------------
+    Hello! I'm Woody and I'm always here to keep you company.
+    Let me know what you need and I'll be right on it.
+    ---------------------------------------------------------
+    ---------------------------------
+    Got it. I've added this task:
+    [T][?] read book
+    Now you have 1 tasks in the list.
+    ---------------------------------
+    ---------------------------------
+    Got it. I've added this task:
+    [D][?] return book (by: Sun 4pm)
+    Now you have 2 tasks in the list.
+    ---------------------------------
+    ---------------------------------
+    Got it. I've added this task:
+    [E][?] buy bread (at: Mon 8am)
+    Now you have 3 tasks in the list.
+    ---------------------------------
+    -----------------------------------
+    Here are the tasks in your list:
+    1. [T][?] read book
+    2. [D][?] return book (by: Sun 4pm)
+    3. [E][?] buy bread (at: Mon 8am)
+    -----------------------------------
+    ------------------------------------
+    Nice! I've marked this task as done:
+    [D][?] return book (by: Sun 4pm)
+    ------------------------------------
+    ---------------------------------------------------
+    Good day my friend! I'm here anytime you need me :)
+    ---------------------------------------------------
