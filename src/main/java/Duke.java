@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -50,13 +51,12 @@ public class Duke {
             try {
                 int doneTaskNum = Integer.parseInt(extractFirstParam(input));
                 
-                if (doneTaskNum <= 0 || Task.taskIdx < doneTaskNum) {
-                    throw new InvalidInstructionException(String.format("Task #%d does not exist", doneTaskNum));
+                if (doneTaskNum <= 0 || doneTaskNum > Task.getTotalNumOfTasks()) {
+                    throw new InvalidInstructionException(
+                            String.format("Task #%d does not exist", doneTaskNum));
                 }
-
-                Task doneTask = Task.tasks[doneTaskNum - 1];
-                doneTask.markAsDone();
-                Task.printMarkedAsDone(doneTask);
+                
+                Task.setAsDone(doneTaskNum);
             } catch (NumberFormatException e) {
                 throw new InvalidInstructionException("Task number given is not an integer");
             }
@@ -65,21 +65,31 @@ public class Duke {
             Task todo = new Todo(description);
 
             Task.addTask(todo);
-            Task.printAddedTask(todo);
         } else if (command.equals("deadline")) {
             String description = extractDescription(input);
             String by = extractTime(input);
 
             Task deadline = new Deadline(description, by);
             Task.addTask(deadline);
-            Task.printAddedTask(deadline);
         } else if (command.equals("event")) {
             String description = extractDescription(input);
             String at = extractTime(input);
 
             Task event = new Event(description, at);
             Task.addTask(event);
-            Task.printAddedTask(event);
+        } else if (command.equals("delete")) {
+            try {
+                int delTaskNum = Integer.parseInt(extractFirstParam(input));
+
+                if (delTaskNum <= 0 || delTaskNum > Task.getTotalNumOfTasks()) {
+                    throw new InvalidInstructionException(
+                            String.format("Task #%d does not exist", delTaskNum));
+                }
+
+                Task.removeTask(delTaskNum);
+            } catch (NumberFormatException e) {
+                throw new InvalidInstructionException("Task number given is not an integer");
+            }
         } else {
             throw new InvalidInstructionException(
                     String.format("Command \"%s\" is not recognized", command));

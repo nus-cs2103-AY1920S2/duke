@@ -1,9 +1,10 @@
+import java.util.ArrayList;
+
 public class Task {
     protected String description;
     protected boolean isDone;
 
-    public static Task[] tasks = new Task[100];
-    public static int taskIdx = 0;
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -20,6 +21,9 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+        
+        System.out.println("\tNoted. I have marked this task as done:");
+        System.out.format("\t\t%s%n%n", this);
     }
 
     @Override
@@ -28,33 +32,47 @@ public class Task {
     }
 
     public static void addTask(Task task) {
-        tasks[taskIdx] = task;
-        taskIdx++;
+        tasks.add(task);
+
+        System.out.println("\tAlright! The following task has been added:");
+        System.out.format("\t\t%s%n", task);
+        System.out.format("\tYou now have %d %s in the list.%n%n",
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 
     public static void printTasks() {
         System.out.println("\tHere are your tasks:");
 
-        if (taskIdx == 0) {
+        if (tasks.isEmpty()) {
             System.out.println("\t<No tasks have been added>");
         }
 
-        for (int i = 0; i < taskIdx; i++) {
-            Task currTask = tasks[i];
-            System.out.format("%s%d.%s%n", "\t", i + 1, currTask);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.format("\t%d.%s%n", i + 1, tasks.get(i));
         }
 
         System.out.println();
     }
-
-    public static void printAddedTask(Task task) {
-        System.out.println("\tAlright! The following task has been added:");
-        System.out.format("%s%s%n", "\t\t", task);
-        System.out.format("\tYou now have %d %s in the list.%n%n", taskIdx, taskIdx == 1 ? "task" : "tasks");
+    
+    public static Task getTask(int taskNumber) {
+        return tasks.get(taskNumber - 1);
     }
+    
+    public static int getTotalNumOfTasks() {
+        return tasks.size();
+    }
+    
+    public static void removeTask(int taskNumber) {
+        Task temp = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
 
-    public static void printMarkedAsDone(Task task) {
-        System.out.println("\tNoted. I have marked this task as done:");
-        System.out.format("%s%s%n%n", "\t\t", task);
+        System.out.println("\tNoted. I have removed this task:");
+        System.out.format("\t\t%s%n", temp);
+        System.out.format("\tYou now have %d %s in the list.%n%n",
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+    }
+    
+    public static void setAsDone(int taskNumber) {
+        tasks.get(taskNumber - 1).markAsDone();
     }
 }
