@@ -56,7 +56,7 @@ public class Duke {
                         }
                         String[] subS = commands[1].split(" ");
                         if(subS.length == 1) {
-                            throw new DukeException("It appears that no due date was provided for this event!");
+                            throw new DukeException("It appears that no timing was provided for this event!");
                         }
 
                         taskList.add(new Event(commands[0].substring(6, commands[0].length()), subS[0], commands[1].substring(subS[0].length())));
