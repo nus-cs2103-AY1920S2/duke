@@ -40,6 +40,34 @@ public class Duke {
         String firstWord = words[0];
 
         switch (firstWord) {
+            case "todo":
+                String todo = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+                addTodo(todo);
+
+                say("Another task? Oh well, here's the task:\n"
+                        + "\t" + getTask(getTaskCount()) + "\n"
+                        + "Now you have " + getTaskCount() + " tasks in the list.");
+                break;
+            case "deadline":
+                String entry = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+                String description = entry.split("/")[0].strip();
+                String time = entry.split("/")[1];
+
+                addDeadline(description, time);
+                say("Another task? Oh well, here's the task:\n"
+                        + "\t" + getTask(getTaskCount()) + "\n"
+                        + "Now you have " + getTaskCount() + " tasks in the list.");
+                break;
+            case "event":
+                String input = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+                String event = input.split("/")[0].strip();
+                String timeRange = input.split("/")[1];
+
+                addEvent(event, timeRange);
+                say("Another task? Oh well, here's the task:\n"
+                        + "\t" + getTask(getTaskCount()) + "\n"
+                        + "Now you have " + getTaskCount() + " tasks in the list.");
+                break;
             case "list":
                 say("Here are your procrastinated tasks:\n"
                         + getTasks());
@@ -52,7 +80,6 @@ public class Duke {
                         + getTask(index));
                 break;
             default:
-                addTask(speech);
                 say("Added: " + speech);
                 break;
         }
@@ -79,12 +106,28 @@ public class Duke {
         tasks.add(new Task(task));
     }
 
+    private void addTodo(String todo) {
+        tasks.add(new Todo(todo));
+    }
+
+    private void addDeadline(String description, String time) {
+        tasks.add(new Deadline(description, time));
+    }
+
+    private void addEvent(String description, String timeRange) {
+        tasks.add(new Event(description, timeRange));
+    }
+
     private void tickTask(int index) {
         tasks.get(index - 1).tick();
     }
 
     private String getTask(int index) {
         return tasks.get(index - 1).toString();
+    }
+
+    private int getTaskCount() {
+        return tasks.size();
     }
 
     private String getTasks() {
