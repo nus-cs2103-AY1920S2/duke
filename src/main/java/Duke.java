@@ -8,8 +8,8 @@ public class Duke {
         String load = "=======================================================\n" +
                 "                  LOADING ... ... ...\n" +
                 "=======================================================";
-        String logo = "      _.-'''''-._\n" +
-                "   k /=_.-~-~-~-._=\\      .-.  _\n" +
+        String greetings = "      _.-'''''-._\n" +
+                "    /=_.-~-~-~-._=\\      .-.  _\n" +
                 "   :    _     _    :     | | / )\n" +
                 "  /    (o)   (o)    \\    | |/ /\n" +
                 "  |  _ _ _ _ _ _ _  |   _|__ /_\n" +
@@ -18,15 +18,18 @@ public class Duke {
                 "    '.  `'---'`  .'     > ._>-'\n" +
                 "      '-._____.-'      / \\/";
         String initialMessage = "4LC3N-BOT initialised.";
+        String awaitingMessage = "\n> ENTER your input:";
 
-        System.out.println(logo);
+        System.out.println(greetings);
         System.out.println(load);
 
         Scanner input = new Scanner(System.in);
         CommandParser parser = new CommandParser();
 
         System.out.println(initialMessage);
+        System.out.println(awaitingMessage);
 
+        // main bot system loop
         while(input.hasNext()) {
             String command = input.next();
             // parse the command
@@ -35,8 +38,22 @@ public class Duke {
                 break;
             } else {
                 // next == Instruction.AWAIT
+                System.out.println(awaitingMessage);
                 continue;
             }
         }
+        input.close();
+        String goodbye = "\nGoodbye! You will be missed" +
+                "\n      _.-'''''-._  \n" +
+                "    /=_.-~-~-~-._=\\\n" +
+                "   :    _     _    :\n" +
+                "  /    (o)   (o)    \\\n" +
+                "  |           `     |\n" +
+                "  |     .-----.     |\n" +
+                "   \\   :       :   /\n" +
+                "    '.           .'\n" +
+                "      '-._____.-'";
+        System.out.println(goodbye);
+
     }
 }
