@@ -1,6 +1,7 @@
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Database.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Deadline.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Duke.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\DukeException.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Event.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\ReplyFormat.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Task.java

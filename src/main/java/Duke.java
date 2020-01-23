@@ -48,22 +48,17 @@ public class Duke {
     }
 
     /**
-     * Duke greet with logo
+     * Duke greet the user
      */
-    public static void greetWithLogo() {
+    public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    /**
-     * Duke greet the user
-     */
-    public static void greet() {
-        message.addSentence("Hello! I'm Duke", 1);
+        message.addSentence("Hello! I'm ", 1);
+        message.addParagraph(logo, 15);
+        message.addEmptyLine();
         message.addSentence("What can I do for you?", 1);
         System.out.print(message.replyMessage());
     }
@@ -96,7 +91,7 @@ public class Duke {
                     replyAdded();
                 }
             } else {
-                reply("Bye. Hope to see you again soon!");
+                reply("Alright! See you next time!");
                 dialogContinue = false;
             }
         } catch (DukeException e) {

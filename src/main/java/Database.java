@@ -26,7 +26,6 @@ public class Database {
             if (!(data.charAt(4) == ' ')) {
                 throw new DukeException("Please indicate in this format: todo [description]");
             }
-
             info = data.substring(5);
             if (info.equals("")) {
                 throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");

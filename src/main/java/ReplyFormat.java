@@ -43,11 +43,20 @@ public class ReplyFormat {
     /**
      * Adding paragraph to the reply
      * @param paragraph paragraph to add
+     * @param numOfIndent number of additional spaces required in front
      */
-    public void addParagraph(List<String> paragraph) {
-        for (String sentence : paragraph) {
-            addSentence(sentence, 1);
+    public void addParagraph(String paragraph, int numOfIndent) {
+        String[] sentences = paragraph.split("\n");
+        for (String sentence : sentences) {
+            addSentence(sentence, numOfIndent);
         }
+    }
+
+    /**
+     * Adding empty line in between
+     */
+    public void addEmptyLine() {
+        addSentence("", 0);
     }
 
     /**

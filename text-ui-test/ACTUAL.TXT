@@ -1,5 +1,11 @@
     ____________________________________________________________
-     Hello! I'm Duke
+     Hello! I'm 
+                    ____        _        
+                   |  _ \ _   _| | _____ 
+                   | | | | | | | |/ / _ \
+                   | |_| | |_| |   <  __/
+                   |____/ \__,_|_|\_\___|
+    
      What can I do for you?
     ____________________________________________________________
 todo borrow book
@@ -16,16 +22,16 @@ list
 deadline return book /by Sunday
     ____________________________________________________________
      Got it. I've added this task:
-       [D][?] return book (by: Sunday)
+       [D][?]  return book (by:  Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 event project meeting /at Mon 2-4pm
     ____________________________________________________________
      Got it. I've added this task:
-       [E][?] project meeting (at: Mon 2-4pm)
+       [E][?]  project meeting (at: Mon 2-4pm)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 bye
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     Alright! See you next time!
     ____________________________________________________________
