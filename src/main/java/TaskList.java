@@ -18,7 +18,7 @@ public class TaskList{
 
 
     private enum Command{
-        TASK, TODO, DEADLINE, EVENT, DONE, LIST, BYE;
+        TASK, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE;
         public static Command convert(String cmd){
             if(cmd.equals("bye")){
                 return BYE;
@@ -32,6 +32,8 @@ public class TaskList{
                 return DEADLINE;
             }else if(cmd.equals("event")){
                 return EVENT;
+            }else if(cmd.equals("delete")) {
+                return DELETE;
             }else{
                 return TASK;
             }
@@ -57,6 +59,12 @@ public class TaskList{
     private void addEvent(String task, String timing){
         taskList.add(new Event(task, timing));
         System.out.println("Affirmative. Adding an event. :) \n" + "added: " + task + " " + timing);
+        totalTask();
+    }
+
+    private void deleteTask(int index){
+        System.out.println("Deleting this task. now you have less things to do :)");
+        taskList.remove(index - 1);
         totalTask();
     }
 
@@ -133,6 +141,9 @@ public class TaskList{
                 case DONE:
                     int num = Integer.valueOf(inputAsArray[1]);
                     taskList.set(num - 1, taskList.get(num - 1).completeTask());
+                    break;
+                case DELETE:
+                    deleteTask(Integer.valueOf(inputAsArray[1]));
                     break;
                 default:
                     System.out.println("What you talking? Me no understand your command :(");
