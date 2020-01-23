@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(botResponse);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownCommandException, EmptyDescriptionException {
         TaskManager lstTasks = new TaskManager();
 
         String greeting = "Hello! I'm Woody and I'm always here to keep you company.\n"
@@ -34,30 +34,45 @@ public class Duke {
             String userCmd = sc.nextLine();
             String cmdInstructionArr[] = userCmd.split(" ", 2);
             String command = cmdInstructionArr[0];
-            switch (command) {
-                case "bye": // Exit
-                    respond(farewell);
-                    return;
-                case "list": // List all tasks
-                    respond(lstTasks.showTasks());
-                    break;
-                case "done": // Mark task as done
-                    int taskArrIndex = Integer.parseInt(cmdInstructionArr[1]) - 1; // Array index of required task
-                    respond(lstTasks.markTaskAsDone(taskArrIndex));
-                    break;
-                case "todo": // Add ToDo task
-                    respond(lstTasks.addTask(new ToDo(cmdInstructionArr[1])));
-                    break;
-                case "deadline": // Add Deadline task
-                    String descByArr[] = cmdInstructionArr[1].split(" /by ", 2);
-                    respond(lstTasks.addTask(new Deadline(descByArr[0], descByArr[1])));
-                    break;
-                case "event": // Add Event task
-                    String descAtArr[] = cmdInstructionArr[1].split(" /at ", 2);
-                    respond(lstTasks.addTask(new Event(descAtArr[0], descAtArr[1])));
-                    break;
-                default: // Add new task
-                    respond(lstTasks.addTask(new Task(userCmd)));
+            boolean hasInstruction = false;
+            if (cmdInstructionArr.length == 2)
+                hasInstruction = true;
+            try {
+                switch (command) {
+                    case "bye": // Exit
+                        respond(farewell);
+                        return;
+                    case "list": // List all tasks
+                        respond(lstTasks.showTasks());
+                        break;
+                    case "done": // Mark task as done
+                        int taskArrIndex = Integer.parseInt(cmdInstructionArr[1]) - 1; // Array index of required task
+                        respond(lstTasks.markTaskAsDone(taskArrIndex));
+                        break;
+                    case "todo": // Add ToDo task
+                        if (!hasInstruction)
+                            throw new EmptyDescriptionException("todo");
+                        respond(lstTasks.addTask(new ToDo(cmdInstructionArr[1])));
+                        break;
+                    case "deadline": // Add Deadline task
+                        if (!hasInstruction)
+                            throw new EmptyDescriptionException("deadline");
+                        String descByArr[] = cmdInstructionArr[1].split(" /by ", 2);
+                        respond(lstTasks.addTask(new Deadline(descByArr[0], descByArr[1])));
+                        break;
+                    case "event": // Add Event task
+                        if (!hasInstruction)
+                            throw new EmptyDescriptionException("event");
+                        String descAtArr[] = cmdInstructionArr[1].split(" /at ", 2);
+                        respond(lstTasks.addTask(new Event(descAtArr[0], descAtArr[1])));
+                        break;
+                    default: // Add new task
+                        throw new UnknownCommandException();
+                }
+            } catch (UnknownCommandException uce) {
+                respond("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (EmptyDescriptionException ede) {
+                respond("OOPS!!! The description of a " + ede.getTaskType() + " cannot be empty");
             }
         }
     }
