@@ -1,0 +1,77 @@
+    ------------------
+    Hello, I am Duke 💁, your personal assistant.
+    ------------------
+    ------------------
+    😭 Sorry! Description of a Todo must not be empty.
+    ------------------
+    ------------------
+    😭 Sorry! Please provide the description and due date.
+    ------------------
+    ------------------
+    😭 Sorry! Please provide the description and due date.
+    ------------------
+    ------------------
+    😭 Sorry! Make sure to use the '/by' keyword.
+    ------------------
+    ------------------
+    😭 Sorry! Make sure to use the '/at' keyword.
+    ------------------
+    ------------------
+    😭 Sorry! Description of a Deadline must not be empty.
+    ------------------
+    ------------------
+    😭 Sorry! Description of an Event must not be empty.
+    ------------------
+    ------------------
+    😭 Sorry! Description of a Deadline must not be empty.
+    ------------------
+    ------------------
+    😭 Sorry! Description of an Event must not be empty.
+    ------------------
+    ------------------
+    😭 Sorry! Please provide a due date.
+    ------------------
+    ------------------
+    😭 Sorry! Please provide a date range.
+    ------------------
+    ------------------
+    😭 Sorry! Task does not exist!
+    ------------------
+    ------------------
+    😭 Sorry! Task does not exist!
+    ------------------
+    ------------------
+    Added: [T][✘] some todo
+    Number of tasks: 1
+    ------------------
+    ------------------
+    Added: [D][✘] some deadline (by: Monday)
+    Number of tasks: 2
+    ------------------
+    ------------------
+    Added: [E][✘] some event (at: 2-4pm)
+    Number of tasks: 3
+    ------------------
+    ------------------
+    Marked as done: [D][✓] some deadline (by: Monday)
+    Number of tasks: 3
+    ------------------
+    ------------------
+    1. [T][✘] some todo
+    2. [D][✓] some deadline (by: Monday)
+    3. [E][✘] some event (at: 2-4pm)
+    ------------------
+    ------------------
+    Deleted: [E][✘] some event (at: 2-4pm)
+    Number of tasks: 2
+    ------------------
+    ------------------
+    😭 Sorry! Task does not exist!
+    ------------------
+    ------------------
+    1. [T][✘] some todo
+    2. [D][✓] some deadline (by: Monday)
+    ------------------
+    ------------------
+    Bye! 👋
+    ------------------

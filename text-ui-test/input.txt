@@ -1,0 +1,22 @@
+todo
+deadline
+event
+deadline nonsense
+event nonsense
+deadline /by
+event /at
+deadline /by Monday
+event /at 2-4pm
+deadline some task /by
+event some task /at
+done 2
+delete 1
+todo some todo
+deadline some deadline /by Monday
+event some event /at 2-4pm
+done 2
+list
+delete 3
+delete 3
+list
+bye
