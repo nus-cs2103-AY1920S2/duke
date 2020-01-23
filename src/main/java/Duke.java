@@ -1,11 +1,10 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     private static boolean dukeActive = true;
     private static final Scanner scanner = new Scanner(System.in);
     private static String userInput = "";
-    private static String[] items = new String[100];
+    private static Task[] items = new Task[100];
     private static int itemsCounter = 0;
 
     /**
@@ -33,10 +32,21 @@ public class Duke {
                 dukePrompt("Good bye boss! Call me if you need me. I'll be waiting!");
                 break;
             default:
-                items[itemsCounter] = userInput;
-                dukePrompt("Added: " + userInput);
-                itemsCounter++;
-                break;
+                String[] splitString = userInput.split(" ", 2);
+
+                switch (splitString[0]) {
+                case "done":
+                    int taskNo = Integer.parseInt(splitString[1]) - 1;
+                    markAsDone(taskNo);
+                    dukePrompt(new String[]{"Nice! I've marked this task as done:",
+                        items[taskNo].toString()});
+                    break;
+                default:
+                    items[itemsCounter] = new Task(userInput);
+                    dukePrompt("Added: " + userInput);
+                    itemsCounter++;
+                    break;
+                };
             }
         }
     }
@@ -64,5 +74,9 @@ public class Duke {
         for (int i = 0; i < itemsCounter; i++) {
             System.out.println("      " + (i + 1) + ". " + items[i]);
         }
+    }
+
+    private static void markAsDone(int taskNo) {
+        items[taskNo].setTaskDone();
     }
 }
