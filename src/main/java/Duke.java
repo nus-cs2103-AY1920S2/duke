@@ -7,7 +7,7 @@ public class Duke {
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,10 +20,16 @@ public class Duke {
 
         String cmd = readNextCommand();
         while (!cmd.equals("bye")) {
-            if (cmd.equals("list")) {
+            String[] cmdSplit = cmd.split(" ");
+
+            if (cmdSplit[0].equals("list")) {
                 displayList(tasks);
+            } else if (cmdSplit[0].equals("done")) {
+                Task task = tasks.get(Integer.valueOf(cmdSplit[1]) - 1);
+                task.markAsDone();
+                printMessage("Nice! I've marked this task as done:\n\t" + task.toString());
             } else {
-                tasks.add(cmd);
+                tasks.add(new Task(cmd));
                 printMessage("added: " + cmd);
             }
             cmd = readNextCommand();
@@ -43,7 +49,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void displayList(ArrayList<String> tasks) {
+    public static void displayList(ArrayList<Task> tasks) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             if (i != tasks.size() - 1) {
