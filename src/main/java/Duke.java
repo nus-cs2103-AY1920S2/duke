@@ -32,7 +32,7 @@ public class Duke {
                     System.out.println(counter + ". " + listOfText.get(i));
                     counter++;
                 }
-
+                continue;
             }
 
             String[] splitStr = input.split("\\s+");
@@ -42,11 +42,11 @@ public class Duke {
                 currentTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done and dusted:");
                 System.out.println(currentTask);
-
+                continue;
             }
 
             if (splitStr[0].toLowerCase().equals("deadline")) {
-                String date = "";
+             try {   String date = "";
                 String deadline = "";
                 for (int i = 1; i < splitStr.length; i++) {
                     if ((splitStr[i].equals("/by"))) {
@@ -57,56 +57,91 @@ public class Duke {
                     }
                 }
                 deadline = deadline.substring(0, deadline.length() - 1);
-                Deadline d = new Deadline(deadline, date);
-                listOfText.add(d);
-                System.out.println("Got you covered! Added this task to the list:");
-                System.out.println(d);
-                System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                if (date.equals("")) {
+                    throw new DukeException("☹ OOPS!!! When is this due????? use /by to tell me! ☹ OOPS!!!");
+                } else {
+                    Deadline d = new Deadline(deadline, date);
+                    listOfText.add(d);
+                    System.out.println("Got you covered! Added this task to the list:");
+                    System.out.println(d);
+                    System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                }
+                } catch (DukeException e) {
+                 System.out.println(e);
+
+                } finally {
+                 continue;
+                }
 
             }
 
             if (splitStr[0].toLowerCase().equals("event")) {
-                //handle date
-                String at = "";
-                String event = "";
-                for (int i = 1; i < splitStr.length; i++) {
-                    if ((splitStr[i].equals("/at"))) {
-                        for (int j = i + 1; j < splitStr.length; j++) {
-                            at += splitStr[j] + " ";
+                try {
+                    String at = "";
+                    String event = "";
+                    for (int i = 1; i < splitStr.length; i++) {
+                        if ((splitStr[i].equals("/at"))) {
+                            for (int j = i + 1; j < splitStr.length; j++) {
+                                at += splitStr[j] + " ";
+                            }
+                            break;
+                        } else {
+                            event += splitStr[i] + " ";
                         }
-                        break;
-                    } else {
-                        event += splitStr[i] + " ";
                     }
-                }
-                event = event.substring(0, event.length() - 1);
-                at = at.substring(0,at.length() - 1);
+                    if (at.equals("")) {
+                    throw new DukeException("☹ OOPS!!! Where is this event????? use /at to tell me! ☹ OOPS!!!");
+                    } else {
+                        event = event.substring(0, event.length() - 1);
+                        at = at.substring(0, at.length() - 1);
 
-                Event e = new Event(event, at);
-                listOfText.add(e);
-                System.out.println("Got you covered! Added this task to the list: ");
-                System.out.println(e);
-                System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                        Event e = new Event(event, at);
+                        listOfText.add(e);
+                        System.out.println("Got you covered! Added this task to the list: ");
+                        System.out.println(e);
+                        System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                    }
+                } catch (DukeException e){
+                    System.out.println(e);
+
+                } finally {
+                    continue;
+                }
             }
 
             if (splitStr[0].toLowerCase().equals("todo")) {
-                String todo = "";
-                for (int i = 1; i < splitStr.length; i ++) {
-                    todo += splitStr[i] + " ";
+                try {
+                    if (splitStr.length < 2) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. ☹ OOPS!!!");
+                    } else {
+                        String todo = "";
+                        for (int i = 1; i < splitStr.length; i++) {
+                            todo += splitStr[i] + " ";
+                        }
+                        todo.substring(0, todo.length() - 1);
+                        Todo t = new Todo(todo);
+                        listOfText.add(t);
+                        System.out.println("Got you covered! Added this task to the list: ");
+                        System.out.println(t);
+                        System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                    }
+                } catch (DukeException m) {
+                    System.out.println(m);
+
+                } finally {
+                    continue;
                 }
-                todo.substring(0,todo.length() - 1);
-                Todo t = new Todo(todo);
-                listOfText.add(t);
-                System.out.println("Got you covered! Added this task to the list: ");
-                System.out.println(t);
-                System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
             }
 
-        }
+
+
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
+
+    }
 
         System.out.println("\n");
         System.out.println("====================================================================================");
         System.out.println("Bye bye! Thank you for using me! Hope to see you again soon.");
 
-    }
+}
 }
