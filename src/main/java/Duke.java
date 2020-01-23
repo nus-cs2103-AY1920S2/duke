@@ -1,32 +1,5 @@
 import java.util.*;
 
-class Task {
-
-    protected String description;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
-    }
-
-    public String getDescription(){
-        return this.description;
-    }
-
-    public String printTask(){
-        return "[" + getStatusIcon() + "] " + getDescription();
-    }
-
-    public void markAsDone(){
-        this.isDone = true;
-    }
-}
-
 public class Duke {
 
     static ArrayList<Task> tasks = new ArrayList<Task>();
@@ -40,10 +13,12 @@ public class Duke {
                         "____________________________________________________________\n\n");
     }
 
-    static void printReply(String input) {
+    static void printReply(Task task) {
+        //TODO: Update this method
         System.out.print(
                 "____________________________________________________________\n" +
-                "added: " + input +
+                "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + Integer.toString(tasks.size()) +
+                        " tasks in the list." +
                 "\n____________________________________________________________\n");
     }
 
@@ -58,7 +33,7 @@ public class Duke {
         System.out.print("____________________________________________________________\n" +
                 "Here are the tasks in your list:\n");
         for (int i =  0; i < tasks.size(); i++){
-            System.out.println(Integer.toString(i + 1) + ". " + tasks.get(i).printTask());
+            System.out.println(Integer.toString(i + 1) + ". " + tasks.get(i).toString());
         }
         System.out.print("____________________________________________________________\n");
     }
@@ -66,7 +41,7 @@ public class Duke {
     static void markTaskDone(Task task){
         task.markAsDone();
         System.out.println("____________________________________________________________\n"
-            + "Nice! I've marked this task as done:\n" + task.printTask()
+            + "Nice! I've marked this task as done:\n" + task.toString()
                 + "\n____________________________________________________________\n");
 
     }
@@ -82,9 +57,19 @@ public class Duke {
                 markTaskDone(tasks.get(taskNumber));
             }
             else {
-                Task task = new Task(input);
-                tasks.add(task);
-                printReply(input);
+                if (input.split(" ")[0].equals("todo")){
+                    Task task = new Todo(input.split(" ",2)[1]);
+                    tasks.add(task);
+                    printReply(task);
+                } else if (input.split(" ")[0].equals("deadline")){
+                    Task task = new Deadline(input.split("/by",2)[0].split(" ", 2)[1], input.split("/by",2)[1]);
+                    tasks.add(task);
+                    printReply(task);
+                } else if (input.split(" ")[0].equals("event")){
+                    Task task = new Event(input.split("/at",2)[0].split(" ", 2)[1], input.split("/at",2)[1]);
+                    tasks.add(task);
+                    printReply(task);
+                } else {}
             }
             input = sc.nextLine();
         }
