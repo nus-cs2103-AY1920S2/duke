@@ -138,18 +138,26 @@ public class Duke extends Application {
                     (isDeadline = isSubstringEqual(curText, "deadline")) ||
                     (isEvent = isSubstringEqual(curText, "event"))) {
 
-    //          add task to do
+                //          add task to do
 
                 Task tmp = new Task(curText);
                 if (isTodo) {
-                    tmp = new Task(curText);
+                    try {
+                        curText = curText.substring(5).trim();
+                        tmp = new Task(curText);
+                        if (curText.equals("")) {
+                            throw new Exception();
+                        }
+                    } catch (Exception e){
+                        throw new DukeException("☹ OOPS!!! The description of a " + tmp.getClass().getSimpleName() + " is not well formatted.");
+                    }
                 } else {
                     try {
                         String[] parts = curText.split("/");
                         String description = parts[0].split(" ", 2)[1];
                         String connector = parts[1].split(" ", 2)[0];
                         String datetime = parts[1].split(" ", 2)[1];
-                        if (isDeadline){
+                        if (isDeadline) {
                             tmp = new Deadline(description, connector, datetime);
                         } else if (isEvent) {
                             tmp = new Event(description, connector, datetime);
@@ -162,12 +170,21 @@ public class Duke extends Application {
                 curText = "Got it. I've added this task:\n";
                 curText += tmp + "\n";
                 curText += "Now you have " + listing.size() + " tasks in the list.";
+            } else if (isSubstringEqual(curText, "delete")) {
+                int taskNum = Integer.parseInt(curText.substring(6).trim()) - 1;
+                curText = "Noted. I've removed this task:\n";
+                curText += listing.get(taskNum) + "\n";
+                listing.remove(taskNum);
+                curText += "Now you have " + listing.size() + " tasks in the list.\n";
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             dialogContainer.getChildren().add(getDialogLabel(curText));
             userInput.clear();
         } catch (DukeException e) {
+            dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+            userInput.clear();
+        } catch (Exception e) {
             dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
             userInput.clear();
         }
