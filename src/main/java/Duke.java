@@ -10,16 +10,16 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         */
-        String line = "____________________________________________________________";
-        System.out.println("\t" + line);
+        String line = "   ____________________________________________________________";
+        System.out.println(line);
         System.out.println("\tHello! I'm Duke");
         System.out.println("\tWhat can I do for you?");
-        System.out.println("\t" + line);
+        System.out.println(line);
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
         String next = sc.nextLine();
         while (!next.trim().equals("bye")) {
-            System.out.println("\t" + line);
+            System.out.println(line);
             if (next.trim().equals("list")) {
                 System.out.println("\tHere are the tasks in your list:");
                 int i = 1;
@@ -77,12 +77,12 @@ public class Duke {
                     System.out.println(de);
                 }
             }
-            System.out.println("\t" + line);
+            System.out.println(line);
             next = sc.nextLine();
         }
-        System.out.println("\t" + line);
+        System.out.println(line);
         System.out.println("\t" + "Bye. Hope to see you again soon!");
-        System.out.println("\t" + line);
+        System.out.println(line);
     }
 
     static void printTask(Task newTask, int size) {
