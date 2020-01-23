@@ -23,7 +23,7 @@ public class Duke {
                     }
                 } else if (command.equals("done")) {
                     int index = sc.nextInt()-1;
-                    if (index < 1 || index > tasksArr.size()-1) {
+                    if (index < 0 || index > tasksArr.size()-1) {
                         throw new DukeException("done");
                     } else {
                         tasksArr.get(index).markAsDone();
@@ -37,7 +37,7 @@ public class Duke {
                         tasksArr.add(t);
                         System.out.println("Got it desu! uwu Watashi hasu added des tasku (´・(oo)・｀): \n");
                         System.out.println("        " + t + "\n");
-                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list");
+                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list!");
                     } else {
                         throw new DukeException("todo");
                     }
@@ -49,7 +49,7 @@ public class Duke {
                         tasksArr.add(t);
                         System.out.println("Gotcha! Watashi hasu added des tasku [^._.^]ﾉ: \n");
                         System.out.println("        " + t + "\n");
-                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list");
+                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list!");
                     } else {
                         throw new DukeException("todo");
                     }
@@ -61,9 +61,20 @@ public class Duke {
                         tasksArr.add(t);
                         System.out.println("Gotcha! Watashi hasu added des tasku (=＾● ⋏ ●＾=): \n");
                         System.out.println("        " + t + "\n");
-                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list");
+                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list!");
                     } else {
                         throw new DukeException("event");
+                    }
+                } else if (command.equals("delete")) {
+                    int index = sc.nextInt()-1;
+                    if (index < 0 || index > tasksArr.size()-1) {
+                        throw new DukeException("delete");
+                    } else {
+                        Task t = tasksArr.get(index);
+                        tasksArr.remove(index);
+                        System.out.println("Noted desu! Watashi has removed this task! ʕ ᵒ ᴥ ᵒʔ: \n");
+                        System.out.println("        " + t + "\n");
+                        System.out.println("nuw omae has " + tasksArr.size()+ " tasks in the list!");
                     }
                 } else {
                     throw new DukeException("invalid");

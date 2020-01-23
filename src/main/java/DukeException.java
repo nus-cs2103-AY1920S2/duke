@@ -22,6 +22,9 @@ public class DukeException extends Exception {
             case "invalid" :
                 str = "Gomenanasai~ Boku dont know what this means desu >.<";
                 break;
+            case "delete" :
+                str = "Gomenanasai~ Da task number is invalid!! >:(";
+                break;
         }
         return str;
     }
