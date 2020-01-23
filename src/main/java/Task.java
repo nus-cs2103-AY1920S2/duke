@@ -15,11 +15,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
     public String getTaskType() {
-        return (taskType.equals("todo") ? "T" : taskType.equals("deadline") ? "D" : "E");
+        return (taskType.equals("todo") ? "[T]" : taskType.equals("deadline") ? "[D]" : "[E]");
     }
 
     public void markAsDone() {
