@@ -1,0 +1,44 @@
+	Hello from
+	 _____             _
+	|  __ \           | |
+	| |  | |_   _  ___| |__   ___  ___ ___
+	| |  | | | | |/ __| '_ \ / _ \/ __/ __|
+	| |__| | |_| | (__| | | |  __/\__ \__ \
+	|_____/ \__,_|\___|_| |_|\___||___/___/
+	My name is Duchess, as you can see above.
+	How may I help you?
+	Oh? You said "Hello"? How interesting.
+	But I don't see what I can do with that.
+	As always, needing someone to keep track of things for you...
+		[T][✘] Go for a run
+	I've already tracked 1 tasks for you.
+	As always, needing someone to keep track of things for you...
+		[E][✘] Go for CS2103 class (at: Friday 2-4pm)
+	I've already tracked 2 tasks for you.
+	As always, needing someone to keep track of things for you...
+		[D][✘] Finish Week 2 IP (by: Thursday 11:59pm)
+	I've already tracked 3 tasks for you.
+	Sighs... you never remember what you say, don't you.
+	You said these:
+		1.	[T][✘] Go for a run
+		2.	[E][✘] Go for CS2103 class (at: Friday 2-4pm)
+		3.	[D][✘] Finish Week 2 IP (by: Thursday 11:59pm)
+	Oh? You actually completed something? Impressive...
+		[T][✓] Go for a run
+	Sighs... you never remember what you say, don't you.
+	You said these:
+		1.	[T][✓] Go for a run
+		2.	[E][✘] Go for CS2103 class (at: Friday 2-4pm)
+		3.	[D][✘] Finish Week 2 IP (by: Thursday 11:59pm)
+	As always, needing someone to keep track of things for you...
+		[T][✘] Commit these changes
+	I've already tracked 4 tasks for you.
+	Sighs... you never remember what you say, don't you.
+	You said these:
+		1.	[T][✓] Go for a run
+		2.	[E][✘] Go for CS2103 class (at: Friday 2-4pm)
+		3.	[D][✘] Finish Week 2 IP (by: Thursday 11:59pm)
+		4.	[T][✘] Commit these changes
+	Oh? You said "Goodbye"? How interesting.
+	But I don't see what I can do with that.
+	Bye, is it? Shoo shoo then.

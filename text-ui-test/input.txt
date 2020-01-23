@@ -1,0 +1,11 @@
+Hello
+todo Go for a run
+event Go for CS2103 class /at Friday 2-4pm
+deadline Finish Week 2 IP /by Thursday 11:59pm
+list
+done 1
+list
+todo Commit these changes
+list
+Goodbye
+bye
