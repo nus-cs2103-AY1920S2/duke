@@ -1,21 +1,9 @@
-public class Event implements Task {
-    String taskName;
-    boolean isDone;
+public class Event extends AbstractTask {
     String date;
 
-    public Event(String taskName){
-        String[] in = taskName.split("/");
-        this.taskName = in[0];
-        this.date = in[1];
-        this.isDone = false;
-    }
-
-    private String taskStateString(){
-        return (this.isDone) ? "[✓]" : "[✗]";
-    }
-
-    public void markDone(){
-        this.isDone = true;
+    public Event(String taskName, String date){
+        super(taskName);
+        this.date = date;
     }
 
     @Override

@@ -11,9 +11,11 @@ public interface Task{
         if (taskType.equals("todo")){
             newTask = new ToDo(taskDesc);
         } else if (taskType.equals("deadline")){
-            newTask = new Deadline(taskDesc);
+            String[] in = taskDesc.split("/");
+            newTask = new Deadline(in[0], in[1]);
         } else {
-            newTask = new Event(taskDesc);
+            String[] in = taskDesc.split("/");
+            newTask = new Event(in[0], in[1]);
         }
         taskList.add(newTask);
         System.out.println("     Got it. I've added this task: ");

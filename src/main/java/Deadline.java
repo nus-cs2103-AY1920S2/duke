@@ -1,21 +1,9 @@
-public class Deadline implements Task {
-    String taskName;
-    boolean isDone;
+public class Deadline extends AbstractTask {
     String date;
 
-    public Deadline(String taskName){
-        String[] in = taskName.split("/");
-        this.taskName = in[0];
-        this.date = in[1];
-        this.isDone = false;
-    }
-
-    private String taskStateString(){
-        return (this.isDone) ? "[✓]" : "[✗]";
-    }
-
-    public void markDone(){
-        this.isDone = true;
+    public Deadline(String taskName, String date){
+        super(taskName);
+        this.date = date;
     }
 
     @Override

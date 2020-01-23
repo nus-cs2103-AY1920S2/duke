@@ -1,21 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDo implements Task {
-    String taskName;
-    boolean isDone;
+public class ToDo extends AbstractTask {
 
     public ToDo(String taskName){
-        this.taskName = taskName;
-        this.isDone = false;
-    }
-
-    private String taskStateString(){
-        return (this.isDone) ? "[✓]" : "[✗]";
-    }
-
-    public void markDone(){
-        this.isDone = true;
+        super(taskName);
     }
 
     @Override
