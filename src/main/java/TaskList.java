@@ -7,7 +7,10 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public Task markAsDone(int index) {
+    public Task markAsDone(int index) throws DukeException {
+        if (index >= taskList.size()) {
+            throw new DukeException("Sorry! Task does not exist!");
+        }
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
@@ -18,6 +21,9 @@ public class TaskList {
     }
 
     public String listTasks() {
+        if (taskList.isEmpty()) {
+            return "Nothing in the list, good job! " + new String(Character.toChars(0x1F60A));
+        }
         String formattedString = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             formattedString += (i + 1) + ". " + this.taskList.get(i).getFullDescription() + "\n    ";
