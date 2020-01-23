@@ -1,4 +1,5 @@
 import main.java.Deadline;
+import main.java.DukeException;
 import main.java.Task;
 import main.java.Todo;
 import main.java.Event;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         
         /**Declaration of variables */
         Scanner sc = new Scanner(System.in);
@@ -42,10 +43,19 @@ public class Duke {
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
             } else if (command.equals("done")) {
-                String rest = x[1];
-                int index = Integer.valueOf(rest);
-                Tasks.get(index-1).markAsDone();
+                if (x.length == 1) {
+                    throw new DukeException("Tell me which task you have completed!!");
+                } else {
+                    String rest = x[1];
+                    int index = Integer.valueOf(rest);
+                    Tasks.get(index-1).markAsDone();
+                }
+                
+                
             } else if (command.equals("todo")) {
+                if (x.length == 1) {
+                    throw new DukeException("Tell me the description of the task!!");
+                } 
                 String rest = x[1];
                 Todo todo = new Todo(rest);
                 Tasks.add(todo);
@@ -56,6 +66,9 @@ public class Duke {
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
             } else if (command.equals("deadline")) {
+                if (x.length == 1) {
+                    throw new DukeException("Tell me the description of the task!!");
+                } 
                 String rest = x[1];
                 String[] q = rest.split("/");
                 Deadline deadline = new Deadline(q[0], q[1]);
@@ -68,6 +81,9 @@ public class Duke {
                 System.out.println("-------------------------------------------------------------");
 
             } else if (command.equals("event")) {
+                if (x.length == 1) {
+                    throw new DukeException("Tell me the description of the task!!");
+                } 
                 String rest = x[1];
                 String[] q = rest.split("/");
                 Event event = new Event(q[0], q[1]);
@@ -78,6 +94,8 @@ public class Duke {
                 System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
                 System.out.println();
                 System.out.println("-------------------------------------------------------------");
+            } else {
+                throw new DukeException("Oops I'm sorry, what is this?");
             }
         }
 
