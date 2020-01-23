@@ -23,7 +23,8 @@ public class Duke {
             case "list":
                 this.printList();
                 System.out.println();
-                echo(new Scanner(System.in));
+                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                echo(sc);
                 break;
 
             case "done":
@@ -32,7 +33,8 @@ public class Duke {
                 System.out.println("Good job! I've marked this task as done:");
                 System.out.printf("%d. %s\n", targetIdx + 1, tasks.get(targetIdx).toString());
                 System.out.println();
-                echo(new Scanner(System.in));
+                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                echo(sc);
                 break;
 
             case "todo":
@@ -42,7 +44,9 @@ public class Duke {
                 System.out.println("Added: " + todoTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                echo(new Scanner(System.in));
+                //echo(new Scanner(System.in);
+                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                echo(sc);
                 break;
             case "deadline":
                 sc = sc.useDelimiter("\\s*/by\\s*|\\n");
@@ -53,7 +57,9 @@ public class Duke {
                 System.out.println("Added: " + deadlineTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                echo(new Scanner(System.in));
+                //echo(new Scanner(System.in));
+                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                echo(sc);
                 break;
             case "event":
                 sc = sc.useDelimiter("\\s*/at\\s*|\\n");
@@ -64,7 +70,9 @@ public class Duke {
                 System.out.println("Added: " + eventTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                echo(new Scanner(System.in));
+                //echo(new Scanner(System.in));
+                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                echo(sc);
                 break;
 
             case "bye":
