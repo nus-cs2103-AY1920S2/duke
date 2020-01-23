@@ -18,6 +18,18 @@ public class TaskList {
         Duke.printLines("Added: " + task.toString() + "\n     Now you have " + this.tasks.size() + " task(s) in the list.");
     }
 
+    public void deleteTask(int idx) {
+        try {
+            Task task = this.tasks.get(idx);
+            this.tasks.remove(idx);
+            Duke.printLines("Noted. I've removed this task:\n     "
+            + task.toString()
+            + "\n     Now you have " + this.tasks.size() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException e) {
+            Duke.printLines("Task index is invalid. Try again!");
+        }
+    }
+
     @Override
     public String toString() {
         String result = "";

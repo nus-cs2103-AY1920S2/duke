@@ -17,6 +17,8 @@ public class Duke {
                 } else if (input.compareTo("bye") == 0) {
                     printGoodbye();
                     break;
+                } else if (command.compareTo("delete") == 0) {
+                    taskList.deleteTask(Integer.parseInt(split[1]) - 1);
                 } else if (command.compareTo("done") == 0) {
                     taskList.doTask(Integer.parseInt(split[1]) - 1);
                 } else if (command.compareTo("todo") == 0) {
@@ -39,7 +41,7 @@ public class Duke {
     }
 
     public static void printIntro() {
-        printLines("     Hello! :) I'm Duke.\n" + "     How can I help you today?");
+        printLines("Hello! :) I'm Duke.\n" + "     How can I help you today?");
     }
 
     public static void printGoodbye() {
