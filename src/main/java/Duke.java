@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        Task[] tasks = new Task[100];
         Scanner myObj = new Scanner(System.in);
-        Task[] userInputList = new Task[100];
         int count = 0;
         int count2 = 0;
         int count3 = 1;
@@ -22,7 +22,7 @@ public class Duke {
                 count2 = 0;
                 count3 = 1;
                 while(count2 < count){
-                    System.out.println("     " + count3 + ".[" + userInputList[count2].getStatusIcon() + "] " + userInputList[count2].getDescription());
+                    System.out.println("     " + count3 + ".[" + tasks[count2].getStatusIcon() + "] " + tasks[count2].getDescription());
                     count2++;
                     count3++;
                 }
@@ -33,15 +33,15 @@ public class Duke {
                 System.out.println("     Nice! I've marked this task as done: ");
                 count2 = 0;
                 while(count2 < count){
-                    if(userInputList[count2].getDone() == true) {
-                        System.out.println("       " + userInputList[count2].getStatusIcon() + " " + userInputList[count2].getDescription());
+                    if(tasks[count2].getDone() == true) {
+                        System.out.println("       " + tasks[count2].getStatusIcon() + " " + tasks[count2].getDescription());
                     }
                     count2++;
                 }
                 System.out.println("    ____________________________________________________________");
             } else {
                 Task t = new Task(userInput);
-                userInputList[count] = t;
+                tasks[count] = t;
                 count++;
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     added: " + userInput);
