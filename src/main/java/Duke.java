@@ -1,9 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
 
+        ArrayList<String> storage = new ArrayList<>();
+
         final String ExitCommand = "bye";
+        final String ListCommand = "list";
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,14 +28,22 @@ public class Duke {
             String line = scanner.nextLine().trim();
             String command = line.split(" ")[0];
 
+            switch (command) {
+                case ExitCommand:
+                    System.out.println("\t Bye. Hope to see you again soon!");
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case ListCommand:
+                    for(int i = 0; i < storage.size(); i++){
+                        System.out.println("\t " + i + ". " + storage.get(i));
+                    }
+                    break;
 
-            if (command.equals(ExitCommand)) {
-                System.out.println("\tBye. Hope to see you again soon!");
-                System.out.println("\t____________________________________________________________");
-                break;
+                default:
+                    System.out.println("\t added: " + line);
+                    storage.add(line);
             }
 
-            System.out.println("\t" + line);
             System.out.println("\t____________________________________________________________");
         }
     }
