@@ -1,5 +1,5 @@
 public class Parser {
-    public static Command parse(String fullcommand) {
+    public static Command parse(String fullcommand) throws DukeException {
         int spaceIndex = fullcommand.indexOf(" ");
 
         if (spaceIndex == -1) {
@@ -8,10 +8,10 @@ public class Parser {
                 return new ListCommand();
             } else if (fullcommand.equals("bye")) {
                 return new ExitCommand();
+            } else if (fullcommand.equals("todo")) {
+                throw new EmptyToDoException();
             } else {
-                // else you have some unknown command here
-                System.out.println("unknown single word command being parsed, terminating");
-                return new InvalidCommand();
+                throw new UndefinedCommandException();
             }
         } else {
             String firstArg = fullcommand.substring(0, spaceIndex);
@@ -30,8 +30,7 @@ public class Parser {
                 // the input is 1-indexed. DoneCommand takes in 0-indexed
                 return new DoneCommand(Integer.parseInt(otherArgs) - 1);
             } else {
-                System.out.println("unknown multiple word command being parsed, terminating");
-                return new InvalidCommand();
+                throw new UndefinedCommandException();
             }
         }
     }

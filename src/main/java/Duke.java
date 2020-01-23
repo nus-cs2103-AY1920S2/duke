@@ -35,10 +35,16 @@ public class Duke {
 
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = scanner.nextLine();
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks);
-            isExit = c.isExit();
+            try {
+                String fullCommand = scanner.nextLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                System.out.println(e.getErrorMessage());
+            } finally {
+
+            }
         }
 
         printWithHLine("Bye. Hope to see you again soon!");
