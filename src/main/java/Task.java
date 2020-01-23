@@ -12,10 +12,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone? "✓" : "✗");
+        return (isDone ? "✓" : "✗");
     }
+
     @Override
     public String toString() {
-        return '['+getStatusIcon()+']' + this.description;
+        return '[' + getStatusIcon() + ']' + this.description;
     }
 }
