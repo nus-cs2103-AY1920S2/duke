@@ -71,7 +71,16 @@ public class Duke {
                     System.out.println("   " + newEvent);
                     tasks.add(newEvent);
                     System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
-                } else {
+                } else if (input[0].equals("delete")) {
+                    int idx = Integer.parseInt(input[1]) - 1;
+                    if (tasks.size() <= idx || idx < 0) {
+                        throw new InvalidIndexException("This index does not match any task in our list!! Try again...");
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(tasks.get(idx));
+                    tasks.remove(tasks.get(idx));
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                }   else {
                     throw new CommandNotFoundException("Sorry I don't recognize this command SIA!");
                 }
             } catch (DukeException ex) {
