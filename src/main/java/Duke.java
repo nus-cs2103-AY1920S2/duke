@@ -19,7 +19,7 @@ public class Duke {
             if (entry.equals("bye")) {
                 break;
             }
-            lvl.leveltwo(entry);
+            lvl.enter(entry);
         }
         System.out.println(linedivider + "Bye. Hope to see you again soon!" + "\n" + linedivider);
     }
