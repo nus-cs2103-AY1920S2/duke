@@ -16,19 +16,25 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         System.out.println("\t" + line);
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> things = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         String next = sc.nextLine();
-        while (!next.equals("bye")) {
+        while (!next.trim().equals("bye")) {
             System.out.println("\t" + line);
-            if (next.equals("list")) {
+            if (next.trim().equals("list")) {
+                System.out.println("\tHere are the tasks in your list:");
                 int i = 1;
-                for (String s: things) {
-                    System.out.println("\t" + i + ". " + s);
+                for (Task s: tasks) {
+                    System.out.println("\t" + i + "." + s.toString());
                     i++;
-
                 }
+            } else if ((next.trim().split(" ")[0]).equals("done")) {
+                Integer taskNumber = Integer.valueOf((next.split(" ")[1]));
+                Task updatedTask = tasks.get(taskNumber - 1).setDone();
+                tasks.set(taskNumber - 1, updatedTask);
+                System.out.println("\tNice! I've marked this task as done:");
+                System.out.println("\t" + updatedTask);
             } else {
-                things.add(next);
+                tasks.add(new Task(next));
                 System.out.println("\tadded: " + next);
             }
             System.out.println("\t" + line);
