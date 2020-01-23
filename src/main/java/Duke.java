@@ -37,6 +37,9 @@ public class Duke {
                     printList();
                 } else if (command.equals("done")) {
                     int index = Integer.parseInt(inputs[1]);
+                    if (index < 1 || index > tasks.size()) {
+                        throw new TaskIndexOutOfBoundsException();
+                    }
                     markTaskAsDone(index);
                 } else {
                     throw new InvalidCommandException();
@@ -69,8 +72,11 @@ public class Duke {
         System.out.printf("Now you got %d %s in your list!\n", tasks.size(), taskWord);
     }
 
-    private static void addEvent(String desc) {
+    private static void addEvent(String desc) throws NoTimeSpecifiedException {
         String[] descs = desc.split(" /at ");
+        if (descs.length == 1) { // there is no specified event time indicated by " /at "
+            throw new NoTimeSpecifiedException();
+        }
         String eventDesc = descs[0];
         String eventTime = descs[1];
         Task event = new Event(eventDesc, eventTime);
@@ -80,8 +86,11 @@ public class Duke {
         printNumTask();
     }
 
-    private static void addDeadline(String desc) {
+    private static void addDeadline(String desc) throws NoTimeSpecifiedException {
         String[] descs = desc.split(" /by ");
+        if (descs.length == 1) { // there is no specified deadline time indicated by " /by "
+            throw new NoTimeSpecifiedException();
+        }
         String deadlineDesc = descs[0];
         String deadlineTime = descs[1];
         Task deadline = new Deadline(deadlineDesc, deadlineTime);
