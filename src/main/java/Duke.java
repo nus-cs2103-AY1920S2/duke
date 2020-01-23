@@ -21,16 +21,13 @@ public class Duke {
                 Integer taskNumber = Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
                 userInputList.get(taskNumber).markAsDone();
             }
-            else if (userInput.equals("bye")) { // to quit with 'bye' command
-                System.out.println("☛ dude, stop wasting my time! shoo!");
-            }
             else { // to add different tasks: todos, deadlines, events
                 Task task = new Task();
                 String[] split = userInput.split(" ", 2);
                 String taskType = split[0];
                 String taskLine = split[1];
                 if (taskType.equals("todo")) { // to add todos (tasks with no date/time attached)
-                    task = new Todo(taskLine);
+                    task = new ToDo(taskLine);
                 } else if (userInput.startsWith("deadline")) { // to add deadlines (tasks that must be done by specific date/time)
                     task = new Deadline(taskLine);
                 } else if (userInput.startsWith("event")) { // to add event (tasks that start at a specific time and ends at a specific time)
@@ -43,6 +40,7 @@ public class Duke {
             System.out.print("dude, ");
             userInput = sc.nextLine();
         }
+        System.out.println("☛ dude, stop wasting my time! shoo!"); // 'bye' message
 
 
 
