@@ -15,7 +15,7 @@ public class Duke {
         System.out.println(greetingText);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskList = new ArrayList<String>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
@@ -24,32 +24,41 @@ public class Duke {
                         "    ____________________________________________________________";
                 System.out.println(byeText);
                 break;
-            } else if (input.equals("list")){
+            } else if (input.equals("list")) {
                 printList(taskList);
+            } else if (input.contains("done")) {
+                String[] inputArr = input.split(" ");
+                int taskNum = Integer.parseInt(inputArr[1]);
+                taskDone(taskList, taskNum);
             } else {
-                addList(input, taskList);
+                addList(new Task(input), taskList);
             }
         }
     }
 
-    public static void addList(String task, ArrayList<String> list) {
+    public static void taskDone(ArrayList<Task> list, int taskNum) {
+        Task doneTask = list.get(taskNum - 1);
+        doneTask.toggleDone();
+        System.out.println("    ____________________________________________________________\n" +
+                "     Nice! I've marked this task as done: \n" +
+                "       " + doneTask + "\n" +
+                "    ____________________________________________________________");
+    }
+
+    public static void addList(Task task, ArrayList<Task> list) {
         System.out.println("    ____________________________________________________________\n" +
                 "     added: " + task + "\n" +
                 "    ____________________________________________________________");
         list.add(task);
     }
 
-    public static void printList(ArrayList<String> list) {
-        System.out.println("    ____________________________________________________________");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("     " + (i+1) + ". " + list.get(i));
+    public static void printList(ArrayList<Task> list) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     Here are the tasks in your list:");
+        for (Task s : list) {
+            System.out.println("     " + (list.indexOf(s)+1) + ". " + s);
         }
         System.out.println("    ____________________________________________________________");
     }
 
-    public static String wrapHorizontalLines(String input) {
-        return "    ____________________________________________________________\n" +
-                "     " + input + "\n" +
-                "    ____________________________________________________________";
-    }
 }
