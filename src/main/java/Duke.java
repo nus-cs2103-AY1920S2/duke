@@ -28,6 +28,11 @@ public class Duke {
                 Task task = tasks.get(Integer.valueOf(cmdSplit[1]) - 1);
                 task.markAsDone();
                 printMessage("Nice! I've marked this task as done:\n\t" + task.toString());
+            } else if (cmdSplit[0].equals("delete")) {
+                Task taskToDelete = tasks.get(Integer.valueOf(cmdSplit[1]) - 1);
+                tasks.remove(Integer.valueOf(cmdSplit[1]) - 1);
+                printMessage("Noted! I've removed this task:\n\t\t" + taskToDelete.toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+
             } else {
                 Task newTask = null;
                 if (cmdSplit[0].equals("deadline")) {
