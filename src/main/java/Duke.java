@@ -14,73 +14,73 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         while (isRunning && sc.hasNextLine()) {
             UserInput input = new UserInput(sc.nextLine());
-            switch (input.getCommand()) {
-            case "": {
-                break;
-            }
-            case "todo": 
-            case "deadline": 
-            case "event": {
-                Task newTask = Duke.createTask(input);
-                if (newTask == null) {
-                    System.out.println("Cannot add new task!");
+            try {
+                switch (input.getCommand()) {
+                case "": {
                     break;
                 }
-                String message = tasks.addTask(newTask);
-                System.out.println(message);
-                break;
-            }
-            case "list": {
-                System.out.println(tasks);
-                break;
-            }
-            case "done": {
-                int taskIndex;
-                try {
-                    taskIndex = Integer.parseInt(input.getArguments()[0]) - 1;
-                } catch (NumberFormatException e) {
-                    System.out.println(String.format(
-                            "'%s' is not valid task number!",
-                            input.getArguments()[0]
-                    ));
+                case "todo": 
+                case "deadline": 
+                case "event": {
+                    try {
+                        Task newTask = Duke.createTask(input);
+                        String message = tasks.addTask(newTask);
+                        System.out.println(message);
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                        break;
+                    }
+                }
+                case "list": {
+                    System.out.println(tasks);
                     break;
                 }
-                if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                    System.out.println(String.format(
-                            "Task #%d supplied is not within 1 to %d!",
-                            (taskIndex + 1), tasks.size()
-                    ));
+                case "done": {
+                    try {
+                        Duke.markTask(input, tasks);
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                        break;
+                    }
+                }
+                case "bye": {
+                    isRunning = false;
                     break;
                 }
-                Task task = tasks.getTask(taskIndex);
-                String message = task.markAsCompleted();
-                System.out.println(message);
-                break;
-            }
-            case "bye": {
-                isRunning = false;
-                break;
-            }
-            default: {
-                System.out.println(String.format(
-                        "Oops what's '%s'?",
-                        input.getCommand()
-                ));
-            }
+                default: {
+                    throw new DukeUnrecognisedCommandException(input.getCommand());
+                }
+                }
+            } catch (DukeUnrecognisedCommandException e) {
+                System.out.println(e);
             }
         }
         System.out.println("Goodbye!");
         sc.close();
     }
 
-    public static Task createTask(UserInput input) {
+    public static void markTask(UserInput input, TaskList tasks) throws DukeException {
+        if (input.getArguments().length == 0) {
+            throw new DukeNoArgumentsException(input.getCommand());
+        }
+        if (tasks.isEmpty()) {
+            throw new DukeEmptyTaskListException();
+        }
+        try {
+            int taskIndex = Integer.parseInt(input.getArguments()[0]) - 1;
+            Task task = tasks.getTask(taskIndex);
+            String message = task.markAsCompleted();
+            System.out.println(message);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeInvalidTaskException(input.getArguments()[0]);
+        }
+    }
+
+    public static Task createTask(UserInput input) throws DukeException {
         String taskType = input.getCommand();
         if (input.getArguments().length == 0) {
-            System.out.println(String.format(
-                    "No description given for %s task!",
-                    taskType
-            ));
-            return null;
+            throw new DukeNoArgumentsException(taskType);
         }
         switch (taskType) {
         case "todo": {
@@ -89,24 +89,20 @@ public class Duke {
         case "deadline": {
             String[] parts = input.getArgumentsAsString().split(" /by ", 2);
             if (parts.length != 2) {
-                System.out.println("Invalid arguments for deadline task!");
-                return null;
+                throw new DukeInvalidArgumentsException(taskType, 2, parts.length);
             }
             return new DeadlineTask(parts[0], parts[1]);
         }
         case "event": {
             String[] parts = input.getArgumentsAsString().split(" /at ", 2);
             if (parts.length != 2) {
-                System.out.println("Invalid arguments for event task!");
-                return null;
+                throw new DukeInvalidArgumentsException(taskType, 2, parts.length);
             }
             return new EventTask(parts[0], parts[1]);
         }
         default: {
-            break;
+            throw new DukeUnrecognisedTaskException(taskType);
         }
         }
-        System.out.println(String.format("What is a '%s' task?", taskType));
-        return null;
     }
 }
