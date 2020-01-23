@@ -13,22 +13,39 @@ public class Duke {
         while (!input.isEmpty()) {
             if (input.equals("bye")) {
                 break;
-            } else if (input.length() > 4 && input.substring(0, 4).equals("done")) {
-                // mark task as done
-                int task = Integer.parseInt(input.substring(5, input.length()));
-                tasks.get(task - 1).markAsDone();
-                System.out.println("Good job! I have marked the following task as done:");
-                System.out.println(tasks.get(task - 1));
-
-            } else if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(i + 1 + "." + tasks.get(i));
-                }
-            } else {
-                tasks.add(new Task(input));
-                System.out.println("added: " + input);
             }
+
+            if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i+1 + "." + tasks.get(i));
+                }
+                input = sc.nextLine();
+                continue;
+            }
+
+            String command = input.substring(0, input.indexOf(' '));
+            if (command.equals("todo")) {
+                Todo todo = new Todo(input.substring(input.indexOf(' '), input.length()));
+                tasks.add(todo);
+                System.out.println("Got it, I've added the following task:\n" + "  " + todo + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.");
+            } else if (command.equals("deadline")) {
+                String by = input.substring(input.indexOf('/') + 4);
+                String task = input.substring(input.indexOf(' ') + 1, input.indexOf('/') -1);
+                Deadline deadline = new Deadline(task, by);
+                tasks.add(deadline);
+                System.out.println("Got it, I've added the following task:\n" + "  " + deadline + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.");
+            } else if (command.equals("event")) {
+                String at = input.substring(input.indexOf('/') + 4);
+                String task = input.substring(input.indexOf(' ') + 1, input.indexOf('/') -1);
+                Event event = new Event(task, at);
+                tasks.add(event);
+                System.out.println("Got it, I've added the following task:\n" + "  " + event + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.");
+            }
+
             input = sc.nextLine();
         }
 
@@ -57,5 +74,44 @@ class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+}
+
+class Deadline extends Task {
+    private String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+class Todo extends Task {
+    public Todo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Event extends Task {
+    private String at;
+
+    public Event(String description, String at) {
+        super(description);
+        this.at = at;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }
