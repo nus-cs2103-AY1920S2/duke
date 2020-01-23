@@ -13,13 +13,15 @@ public class Functionality {
             list();
         } else if (s.length() > 5 && s.substring(0,4).equals("done")) {
             done(Integer.parseInt(s.substring(5)));
+        } else if (s.length() > 6 && s.substring(0,6).equals("delete")) {
+            delete(Integer.parseInt(s.substring(7)));
         } else {
             add(s);
         }
     }
 
     public void list() {
-        System.out.println(linedivider + "Here are the tasks in your list:\n");
+        System.out.println(linedivider + "Here are the tasks in your list:");
         int entryno = 1;
         for (Task ls : tasks) {
             System.out.println(entryno + ". " + ls);
@@ -59,6 +61,12 @@ public class Functionality {
         tasks.get(n-1).makeDone();
         System.out.println(linedivider + "Nice! I've marked this task as done:\n" + tasks.get(n-1)
                 + "\n" + linedivider);
+    }
+
+    public void delete(int n) {
+        Task rm = tasks.remove(n - 1);
+        System.out.println(linedivider + "Noted. I've removed this task:\n" + rm + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n" + linedivider);
     }
 
 }
