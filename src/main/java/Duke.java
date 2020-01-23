@@ -19,7 +19,7 @@ public class Duke {
         printMessage("Greetings! I'm Duke!\n\tHow may I help you?");
 
         String cmd = readNextCommand();
-        while (!cmd.equals("bye")) {
+        while (true) {
             String[] cmdSplit = cmd.split(" ", 2);
 
             if (cmdSplit[0].equals("list")) {
@@ -32,7 +32,9 @@ public class Duke {
                 Task taskToDelete = tasks.get(Integer.valueOf(cmdSplit[1]) - 1);
                 tasks.remove(Integer.valueOf(cmdSplit[1]) - 1);
                 printMessage("Noted! I've removed this task:\n\t\t" + taskToDelete.toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
-
+            } else if (cmdSplit[0].equals("bye")) {
+                printMessage("Bye! Hope you visit again soon!");
+                break;
             } else {
                 Task newTask = null;
                 if (cmdSplit[0].equals("deadline")) {
@@ -50,8 +52,6 @@ public class Duke {
             }
             cmd = readNextCommand();
         }
-
-        printMessage("Bye! Hope you visit again soon!");
     }
 
     public static String readNextCommand() {
