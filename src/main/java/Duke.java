@@ -69,6 +69,18 @@ public class Duke {
 
 
 
+            // DELETE will delete the task in the ArrayList according to index number
+            } else if (taskDesc[0].equals("delete")) {
+
+                String indexString = taskDesc[1];
+                int index = Integer.parseInt(indexString);
+                Task oldTask = taskList.get(index - 1);
+                taskList.remove(index - 1);
+                System.out.println("Noted. I've removed this task: \n" + "  " + oldTask.toString() + "\n" +
+                                "Now you have " + taskList.size()  + " tasks in the list.");
+
+
+
             // TODO will add a new todo task in the list, checkbox will automatically be [✗]
             } else if (taskDesc[0].equals("todo")) {
 
