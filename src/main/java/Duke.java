@@ -27,6 +27,13 @@ public class Duke {
             done.markAsDone();
             print("Nice! I've marked this task as done: \n" + done);
 
+        } else if (command.equals("delete")) {
+            int index = Integer.parseInt(split[1]) - 1;
+            Task remove = taskList.list.remove(index);
+            numOfTask = taskList.list.size();
+            print("Noted. I've removed this task: \n" + remove 
+                + "\nNow you have " + numOfTask + " task(s) in the list");
+        
         } else if (command.equals("todo")) {
             if (split.length == 1) {
                 throw new DukeException("\u2639 OOPS!!!"
