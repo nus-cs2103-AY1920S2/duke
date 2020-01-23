@@ -22,7 +22,7 @@ public class Duke {
     }
 
     private void echo(String input) {
-        System.out.println("    " + input);
+        System.out.println("I'm sorry, but I don't know what that means!");
         this.waitInput();
     }
 
@@ -38,18 +38,43 @@ public class Duke {
         String[] cmd = input.split("\\s", 2);
         switch (cmd[0].toLowerCase()) {
             case "todo":
-                Task newTask = new Todo(cmd[1].trim());
-                this.addTask(newTask);
+                if (cmd.length < 2 || cmd[1].trim().equals("")) {
+                    System.out.println("\tOOPS! The description of a todo cannot be empty.");
+                    this.waitInput();
+                } else {
+                    Task newTask = new Todo(cmd[1].trim());
+                    this.addTask(newTask);
+                }
                 break;
             case "event":
-                String[] info = cmd[1].split("/at");
-                newTask = new Event(info[0].trim(), info[1].trim());
-                this.addTask(newTask);
+                if (cmd.length < 2 || cmd[1].trim().equals("")) {
+                    System.out.println("\tOOPS! The description of a event cannot be empty.");
+                    this.waitInput();
+                } else {
+                    String[] info = cmd[1].split("/at");
+                    if (info.length < 2 || info[1].trim().equals("")) {
+                        System.out.println("\tOOPS! Please input /at Date Time (e.g. /at Mon 2-4pm)");
+                        this.waitInput();
+                    } else {
+                        Task newTask = new Event(info[0].trim(), info[1].trim());
+                        this.addTask(newTask);
+                    }
+                }
                 break;
             case "deadline":
-                info = cmd[1].split("/by");
-                newTask = new Deadline(info[0].trim(), info[1].trim());
-                this.addTask(newTask);
+                if (cmd.length < 2 || cmd[1].trim().equals("")) {
+                    System.out.println("\tOOPS! The description of a deadline cannot be empty.");
+                    this.waitInput();
+                } else {
+                    String[] info = cmd[1].split("/by");
+                    if (info.length < 2 || info[1].trim().equals("")) {
+                        System.out.println("\tOOPS! Please input /by Date (e.g. /by Feb 3rd)");
+                        this.waitInput();
+                    } else {
+                        Task newTask = new Deadline(info[0].trim(), info[1].trim());
+                        this.addTask(newTask);
+                    }
+                }
                 break;
             case "list":
                 printTasks();
@@ -61,20 +86,22 @@ public class Duke {
                 System.out.println("\tBye. Hope to see you again soon!");
                 break;
             default:
-                System.out.println("\tadded: " + input);
-                tasks.add(new Task(input));
-                this.waitInput();
+                echo(input);
                 break;
         }
     }
 
     private void markAsDone(String index) {
         int num = Integer.parseInt(index.trim());
-        Task toBeDone = this.tasks.get(num - 1);
-        toBeDone.toggleIsDone();
-        System.out.println("\tGood job! You have completed this task!");
-        System.out.println("\t\t" + toBeDone);
-        this.waitInput();
+        if (num < 1 || num > this.tasks.size()) {
+            throw new IllegalArgumentException("The index inputted is out of bounds!");
+        } else {
+            Task toBeDone = this.tasks.get(num - 1);
+            toBeDone.toggleIsDone();
+            System.out.println("\tGood job! You have completed this task!");
+            System.out.println("\t\t" + toBeDone);
+            this.waitInput();
+        }
     }
 
     private void addTask(Task task) {
