@@ -14,10 +14,9 @@ public class Akshay {
         say("Hello I am [AKSHAY]!\nHow may I help you?");
         Task[] arr = new Task[100];
         Scanner sc =  new Scanner(System.in);
-        String input = "";
         int count = 0;
+        String input = sc.nextLine();
         while (!input.equals("bye")) {
-            input = sc.nextLine();
             String[] c = input.split(" ");
             switch (c[0]) {
                 case ("list"):
@@ -39,6 +38,7 @@ public class Akshay {
                     count++;
                     say("Added: " + input);
             }
+            input = sc.nextLine();
         }
         say("Bye! Hope to see you again!");
     }
