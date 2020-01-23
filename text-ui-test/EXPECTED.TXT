@@ -1,0 +1,33 @@
+Hello from
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+What can I do for you?
+	Got it! I've added this task:
+		[T][?] play game
+	You have total of 1 tasks in the list.
+	Got it! I've added this task:
+		[E][?] Go for CS2103 lecture (at: Friday 2-4pm)
+	You have total of 2 tasks in the list.
+	Got it! I've added this task:
+		[D][?] Finish Week 2 IP (by: Thursday 11:59pm)
+	You have total of 3 tasks in the list.
+	1. [T][?] play game
+	2. [E][?] Go for CS2103 lecture (at: Friday 2-4pm)
+	3. [D][?] Finish Week 2 IP (by: Thursday 11:59pm)
+	Good job! You have completed this task!
+		[T][?] play game
+	1. [T][?] play game
+	2. [E][?] Go for CS2103 lecture (at: Friday 2-4pm)
+	3. [D][?] Finish Week 2 IP (by: Thursday 11:59pm)
+	Got it! I've added this task:
+		[T][?] take a break
+	You have total of 4 tasks in the list.
+	1. [T][?] play game
+	2. [E][?] Go for CS2103 lecture (at: Friday 2-4pm)
+	3. [D][?] Finish Week 2 IP (by: Thursday 11:59pm)
+	4. [T][?] take a break
+	Bye. Hope to see you again soon!
