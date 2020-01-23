@@ -5,51 +5,88 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    final String header = "____________________________________________________________\n";
+    final String footer = "____________________________________________________________\n";
 
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.frontDesk();
     }
 
     public void frontDesk() {
         try {
-            String greetings = "____________________________________________________________ \n"
-                    + "Hello! I'm Chu Chu \n"
+            String greetings = header
+                    + "\nHello! I'm Chu Chu \n"
                     + "What can I do for you ? \n"
-                    + "____________________________________________________________\n";
+                    + footer;
             System.out.println(greetings);
 
             InputStreamReader rd = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(rd);
-            String[] commandArr = null;
             String command = null;
+            String taskDescription = null;
+            String[] taskDescriptionArr = null;
+            String date = null;
             Parser parser = new Parser();
+            TaskManagement manager = new TaskManagement();
 
             while (true) {
 
                 command = br.readLine();
-                commandArr = parser.parse(command);
+                taskDescription = parser.parseCommand(command);
+                date = parser.parseDate();
 
-                if (commandArr[0].equals("bye")) {
+                if (command.startsWith("bye")) {
 
                     break;
 
-                } else if (commandArr[0].equals("list")) {
+                } else if (command.startsWith("list")) {
 
-                    Task.list();
+                    System.out.print(header);
+                    manager.list();
+                    System.out.print(footer + "\n");
 
-                } else if (commandArr[0].equals("done")) {
+                } else if (command.startsWith("done")) {
 
-                    Task t = Task.getTask(Integer.parseInt(commandArr[1]));
-                    t.markDone();
+                    taskDescriptionArr = taskDescription.split(" ");
+                    Task t = manager.getTask(Integer.parseInt(taskDescriptionArr[1]));
+                    System.out.println(header);
+                    manager.markDone(t);
+                    System.out.println(footer);
 
                 } else {
 
-                    Task.addTask(command);
+                    if (command.startsWith("todo")) {
+
+                        System.out.println(header);
+                        System.out.println(manager.addTask(taskDescription, date, Task.Types.ToDo));
+                        System.out.println(manager.reportTotal());
+                        System.out.println(footer);
+
+                    } else if (command.startsWith("deadline")) {
+
+                        System.out.println(header);
+                        System.out.println(manager.addTask(taskDescription, date, Task.Types.Deadline));
+                        System.out.println(manager.reportTotal());
+                        System.out.println(footer);
+
+                    } else if (command.startsWith("event")) {
+
+                        System.out.println(header);
+                        System.out.println(manager.addTask(taskDescription, date, Task.Types.Event));
+                        System.out.println(manager.reportTotal());
+                        System.out.println(footer);
+
+                    } else {
+                        System.out.println("invalid input!");
+                    }
+
                 }
             }
 
-            System.out.println("Bye. I hope you liked the service and hope to see you soon ! \n");
+            System.out.println(header);
+            System.out.println("Bye. I hope you liked the service and hope to see you soon !");
+            System.out.println(footer);
 
         } catch (IOException e) {
 
