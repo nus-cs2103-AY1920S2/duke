@@ -21,7 +21,7 @@ public class Chatbot {
      * @throws DukeException The command syntax error.
      */
     String parseTodo(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
+        if (tokens.length < 1) {
             throw new DukeException("TODO requires a description.");
         }
 
@@ -153,6 +153,40 @@ public class Chatbot {
     }
 
     /**
+     * Parse delete command.
+     * @param tokens The input tokens.
+     * @return The reply to the done command.
+     * @throws DukeException The command syntax error.
+     */
+    String parseDelete(String[] tokens) throws DukeException {
+        DukeException invalidIndex = 
+                new DukeException("DELETE requires an index in the list to mark.");
+        int index;
+        
+        if (tokens.length != 1) {
+            throw invalidIndex;
+        }
+
+        try {
+            index = Integer.parseInt(tokens[0]);
+        } catch (NumberFormatException e) {
+            throw invalidIndex;
+        }
+
+        if (index < 1 || index > tasks.getLength()) {
+            throw invalidIndex;
+        }
+
+        Item item = tasks.getItem(index);
+        tasks.deleteItem(index);
+        return "Removed and never to be seen again.\n"
+                + "----------\n"
+                + "  " + item + "\n"
+                + "----------\n"
+                + "You have " + tasks.getLength() + " tasks in the list. :(";
+    }
+
+    /**
      * Parsing the user's input and returning a reply.
      * @param message The user input message.
      * @return Chatbot's reply to the message.
@@ -178,6 +212,8 @@ public class Chatbot {
                     + tasks.toString();
         case "DONE":
             return parseDone(tokens);
+        case "DELETE":
+            return parseDelete(tokens);
         case "BYE":
             return "Bye, see you never!";
         default:

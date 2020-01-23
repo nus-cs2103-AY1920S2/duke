@@ -41,6 +41,14 @@ public class TaskList {
         items.get(index - 1).markDone();
     }
 
+    /**
+     * Delete an item in the list.
+     * @param index The index of the item in the list.
+     */
+    public void deleteItem(int index) {
+        items.remove(index - 1);
+    }
+
     @Override
     public String toString() {
         String output = "----------\n";
