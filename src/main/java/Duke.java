@@ -32,7 +32,7 @@ public class Duke {
             message = in.nextLine();
             System.out.println();
 
-            duke.say(duke.parse(message));
+            duke.say(duke.reply(message));
         } while (!message.toLowerCase().equals("bye"));
 
         in.close();
