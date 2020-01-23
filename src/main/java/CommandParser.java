@@ -39,7 +39,7 @@ public class CommandParser {
      *
      * @param command The command, as a String
      */
-    private void echo(String command) {
+    public void echo(String command) {
         System.out.println(command);
     }
 }

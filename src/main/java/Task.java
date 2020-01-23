@@ -50,7 +50,7 @@ public abstract class Task {
 
     /**
      * Gives the type of the current Task
-     * as a single letter between square brackets.
+     * as a single letter
      *
      * @return Type of the Task as a String
      */
@@ -58,6 +58,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return this.type() + this.taskDetails;
+        return "[" + this.type() + "]" +
+            this.doneGet() + " " + this.taskDetails;
     }
 }

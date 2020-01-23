@@ -19,8 +19,6 @@ public class Duke {
                 "      '-._____.-'      / \\/";
         String initialMessage = "4LC3N-BOT initialised.\nGreetings, humans!";
         String awaitingMessage = "\n> ENTER your input:";
-        String storeMessage = "I have stored this task in my memory. Use" +
-                " \"list\" to retrieve it!";
         String doneMessage = "You have completed: ";
 
         System.out.println(greetings);
@@ -46,14 +44,14 @@ public class Duke {
             } else if (next == Instruction.READ_STORAGE) {
                 store.readStorage();
             } else if (next == Instruction.STORE_DDL) {
-                store.store(command);
-                System.out.println(storeMessage);
+                store.store(new Deadline(command));
+                Duke.printTaskStoreMessage(store.getNumTasks());
             } else if (next == Instruction.STORE_EVENT) {
-                store.store(command);
-                System.out.println(storeMessage);
+                store.store(new Event(command));
+                Duke.printTaskStoreMessage(store.getNumTasks());
             } else if (next == Instruction.STORE_TODO) {
-                store.store(command);
-                System.out.println(storeMessage);
+                store.store(new Todo(command));
+                Duke.printTaskStoreMessage(store.getNumTasks());
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;
@@ -76,5 +74,18 @@ public class Duke {
                 "      '-._____.-'";
         System.out.println(goodbye);
 
+    }
+
+    /**
+     * Prints a default message for storing a Task
+     *
+     * @param storeSize Number of Tasks already in
+     *                  the Storage
+     */
+    private static void printTaskStoreMessage(int storeSize) {
+        String storeMessage = "I have stored this task in my memory. Use" +
+                " \"list\" to retrieve it!\nTotal of ";
+        String tasks = " tasks stored";
+        System.out.println(storeMessage + storeSize + tasks);
     }
 }

@@ -11,10 +11,10 @@ public class Storage {
     /**
      * Adds a String to the stored items
      *
-     * @param toStore The String to be stored
+     * @param toStore The Task to be stored
      */
-    public void store(String toStore) {
-        this.storage.add(new Task(toStore));
+    public void store(Task toStore) {
+        this.storage.add(toStore);
     }
 
     /**
@@ -50,7 +50,15 @@ public class Storage {
      *         and its "done" status
      */
     public String retrieve(int i) {
-        return i + ". " + doneGet(i - 1)
-                + " " + this.storage.get(i - 1);
+        return i + ". " + this.storage.get(i - 1);
+    }
+
+    /**
+     * Gets the number of Tasks currently logged.
+     *
+     * @return int representing number of Tasks.
+     */
+    public int getNumTasks() {
+        return this.storage.size();
     }
 }
