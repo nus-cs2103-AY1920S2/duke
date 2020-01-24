@@ -7,22 +7,23 @@ public class Todo extends Task {
     public static final String USAGE = "todo description";
     private static Pattern messageRegex = Pattern.compile("todo\\s+(\\S+.*)");
 
-    public static Todo parseTodo(String msg) throws MessageInterpretationException {
+    public static Todo parseTodo(String msg) throws ParsingException {
         Matcher m = messageRegex.matcher(msg);
         
         if (m.matches()) {
-            return new Todo(m.group(1));
+            return new Todo(m.group(1).strip(), false);
         } else {
-            throw new MessageInterpretationException(USAGE);
+            throw new ParsingException(USAGE);
         }
     }
 
-    public Todo(String details) {
-        super(details);
+    public Todo(String details, boolean isDone) {
+        super(details, isDone);
     }
 
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
+
 }

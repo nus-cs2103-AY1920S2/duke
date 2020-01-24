@@ -4,9 +4,9 @@ public class Task {
     private final String details;
     private boolean isDone;
 
-    public Task(String details) {
+    public Task(String details, boolean isDone) {
         this.details = details;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {

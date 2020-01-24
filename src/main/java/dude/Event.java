@@ -8,18 +8,18 @@ public class Event extends Task {
     private String eventTime;
     private static Pattern messageRegex = Pattern.compile("event\\s+(\\S+.*)\\s+/at\\s+(\\S+.*)");
 
-    public static Event parseEvent(String msg) throws MessageInterpretationException {
+    public static Event parseEvent(String msg) throws ParsingException {
         Matcher m = messageRegex.matcher(msg);
         
         if (m.matches()) {
-            return new Event(m.group(1), m.group(2));
+            return new Event(m.group(1).strip(), m.group(2).strip(), false);
         } else {
-            throw new MessageInterpretationException(USAGE);
+            throw new ParsingException(USAGE);
         }
     }
 
-    public Event(String details, String eventTime) {
-        super(details);
+    public Event(String details, String eventTime, boolean isDone) {
+        super(details, isDone);
         this.eventTime = eventTime;
     }
 
@@ -27,4 +27,5 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)", eventTime);
     }
+
 }
