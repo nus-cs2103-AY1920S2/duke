@@ -1,0 +1,21 @@
+[31mHello! I'm Duke
+What's up?[0m
+[31mI've added this task to the list:
+ [T][✗] read book
+Now you have 1 task(s) in the list[0m
+[31mI've added this task to the list:
+ [D][✗] return book (by: june 6th)
+Now you have 2 task(s) in the list[0m
+[31mI've added this task to the list:
+ [E][✗] project meeting (at: aug 6th / 2-4pm)
+Now you have 3 task(s) in the list[0m
+[31m1.[T][✗] read book
+2.[D][✗] return book (by: june 6th)
+3.[E][✗] project meeting (at: aug 6th / 2-4pm)[0m
+[31mNice! Task(s) marked as done:
+ [✓] read book[0m
+[31m1.[T][✓] read book
+2.[D][✗] return book (by: june 6th)
+3.[E][✗] project meeting (at: aug 6th / 2-4pm)[0m
+[31mI don't understand what you want[0m
+[31mBye ciao adios[0m
