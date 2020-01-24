@@ -1,6 +1,19 @@
 public class Todo extends Task {
+
+    public TType getType() {
+        return TType.TODO;
+    }
+
+    public String getDate() {
+        return null;
+    }
+
     public Todo(int id, String task) {
         super(id, task);
+    }
+
+    public Todo(int id, boolean done, String task) {
+        super(id, done, task);
     }
 
     @Override
