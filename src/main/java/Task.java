@@ -30,11 +30,11 @@ public class Task {
             }
             else if (task instanceof Deadline) {
                 taskString += "D/" + task.getStatusIconInBin() + "/";
-                taskString += task.description + "/" + ((Deadline) task).day + "\n";
+                taskString += task.description + "/" + ((Deadline) task).date.toString() + "\n";
             }
             else {               //instance of event
                 taskString += "E/" + task.getStatusIconInBin() + "/";
-                taskString += task.description + "/" + ((Event) task).dayAndDuration + "\n";
+                taskString += task.description + "/" + ((Event) task).date.toString() + "\n";
             }
         }
         return taskString;

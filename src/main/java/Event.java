@@ -3,19 +3,14 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Event extends Task {
-<<<<<<< HEAD
-    protected String dayAndDuration;
-    public Event(String description, String dayAndDuration){
-=======
     LocalDate date;
     public Event(String description, LocalDate date){
->>>>>>> branch-Level-8
         super (description);
         this.date = date;
     }
 
     public String toStringTaskstxt(){
-        return "D/" + getStatusIconInBin() + "/" + description + "/" + dayAndDuration + "\n";
+        return "D/" + getStatusIconInBin() + "/" + description + "/" + date.toString() + "\n";
     }
 
     @Override

@@ -1,3 +1,2 @@
-T/1/borrow book
-E/0/project meeting /Mon 2-4pm
-E/1/fk me /2020-01-24
+T/0/me
+D/1/eat shit /2089-08-23
