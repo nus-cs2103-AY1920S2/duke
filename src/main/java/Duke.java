@@ -9,7 +9,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        reply("What can I do for you");
+        reply("    What can I do for you");
 
         Scanner sc = new Scanner(System.in);
         String command;
@@ -22,7 +22,7 @@ public class Duke {
             }
 
         }
-        reply("Bye. Hope to see you again soon!");
+        reply("    Bye. Hope to see you again soon!");
     }
 
     public static void handle(String string) throws DukeException{
@@ -55,16 +55,16 @@ public class Duke {
 
     public static void reply(String string) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    " + string);
+        System.out.println("        " + string);
         System.out.println("    ____________________________________________________________");
     }
 
     public static void printList() {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Here are the tasks in your list:");
+        System.out.println("        Here are the tasks in your list:");
         int count = 1;
         for (Task task : tasks) {
-            System.out.print("    " + count + ".");
+            System.out.print("        " + count + ".");
             task.taskSummary();
             count++;
         }
@@ -73,28 +73,28 @@ public class Duke {
 
     public static void doneMessage(Task task) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Nice! I've marked this task as done: ");
-        System.out.print("    ");
+        System.out.println("        Nice! I've marked this task as done: ");
+        System.out.print("        ");
         task.taskSummary();
         System.out.println("    ____________________________________________________________");
     }
 
     public static void addMessage(Task task) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Got it. I've added this task:");
-        System.out.print("        ");
+        System.out.println("        Got it. I've added this task:");
+        System.out.print("            ");
         task.taskSummary();
-        System.out.println("    Now you have " + Task.totalTasks + " tasks in the list.");
+        System.out.println("        Now you have " + Task.totalTasks + " tasks in the list.");
         System.out.println("    ____________________________________________________________");
 
     }
 
     public static void deleteMessage(Task task) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Noted. I've removed this task:");
-        System.out.print("    ");
+        System.out.println("        Noted. I've removed this task:");
+        System.out.print("        ");
         task.taskSummary();
-        System.out.println("    Now you have " + (Task.totalTasks - 1) +  " tasks in the list.");
+        System.out.println("        Now you have " + (Task.totalTasks - 1) +  " tasks in the list.");
         System.out.println("    ____________________________________________________________");
     }
 
