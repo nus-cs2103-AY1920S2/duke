@@ -35,7 +35,7 @@ deadline return book /by 19-12-2019 4pm
 event project meeting /at 02/11/2020 2359
     ____________________________________________________________
      Got it. I've added this task: 
-       [E][N] project meeting (by: 02 Nov 2020 23:59)
+       [E][N] project meeting (at: 02 Nov 2020 23:59)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
@@ -44,13 +44,13 @@ list
      Here are the tasks in your list:
      1.[T][N] borrow book
      2.[D][N] return book (by: 19 Dec 2019 16:00)
-     3.[E][N] project meeting (by: 02 Nov 2020 23:59)
+     3.[E][N] project meeting (at: 02 Nov 2020 23:59)
     ____________________________________________________________
 
 done 3
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [E][Y] project meeting (by: 02 Nov 2020 23:59)
+       [E][Y] project meeting (at: 02 Nov 2020 23:59)
     ____________________________________________________________
 
 list
@@ -58,7 +58,7 @@ list
      Here are the tasks in your list:
      1.[T][N] borrow book
      2.[D][N] return book (by: 19 Dec 2019 16:00)
-     3.[E][Y] project meeting (by: 02 Nov 2020 23:59)
+     3.[E][Y] project meeting (at: 02 Nov 2020 23:59)
     ____________________________________________________________
 
 deadline return book /at Sunday
