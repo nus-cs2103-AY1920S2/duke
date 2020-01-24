@@ -12,7 +12,7 @@ public class Duke {
         System.out.println(Constants.ANSI_RED + "Hello! I'm Duke\n" + "What's up?" + Constants.ANSI_RESET);
         String request = "";
         DukeWorker worker = new DukeWorker();
-        while (!request.toLowerCase().equals("bye")) {
+        while (!request.split(" ")[0].toLowerCase().equals("bye")) {
             request = sc.nextLine();
             request = request.trim().toLowerCase();
             System.out.println(Constants.ANSI_RED + worker.handleRequest(request) + Constants.ANSI_RESET);

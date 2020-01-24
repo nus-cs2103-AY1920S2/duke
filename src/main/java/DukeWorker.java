@@ -28,7 +28,7 @@ public class DukeWorker {
                 return "No such task number";
             }
             task.get(taskId).markAsDone();
-            String response = "Nice! Task(s) marked as done:\n " + task.get(taskId).getDoneString() + " " +
+            String response = "Nice! Task(s) marked as done(unknown task number ignored):\n " + task.get(taskId).getDoneString() + " " +
                     task.get(taskId).getTaskName();
 
             for (int i = 1; i < indices.length; i++) {
@@ -46,11 +46,14 @@ public class DukeWorker {
             }
             return response;
         } else if (token[0].equals("todo") || token[0].equals("deadline") || token[0].equals("event")) {
+           if (token.length < 2) {
+               return "Adding task failed, task body cannot be empty";
+           }
            if (addToList(token[1], token[0])) {
                return "I've added this task to the list:\n " + task.get(task.size() - 1) + "\n" +
                        "Now you have " + task.size() + " task(s) in the list";
            } else {
-               return "Adding task failed, please check your request";
+               return "Adding task failed, either task body is empty or required time is not specified";
            }
         } else {
             return "I don't understand what you want";
