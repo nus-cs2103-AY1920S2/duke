@@ -22,11 +22,21 @@ public class Duke {
     public static void handle(String string) {
         if (string.equals("list")) {
             printList();
+        } else if (string.split(" ")[0].equals("done")) {
+            int taskNo = Integer.parseInt(string.split(" ")[1]);
+            if (taskNo > tasks.size()) {
+                reply("Not a valid number");
+            } else {
+                doneMessage(taskNo);
+                //tasks.remove(taskNo);
+                tasks.get(taskNo - 1).markAsDone();
+            }
         } else {
             Task task = new Task(string);
             tasks.add(task);
             reply("added: " + string);
         }
+
     }
 
     public static void reply(String string) {
@@ -39,9 +49,16 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         int count = 1;
         for (Task task : tasks) {
-            System.out.println("    " + count + "." + task.action);
+            System.out.println("    " + count + "." + task.getStatusIcon() + task.description);
             count++;
         }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void doneMessage(int i) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Nice! I've marked this task as done: ");
+        System.out.println("    [✓] " + tasks.get(i - 1).description);
         System.out.println("    ____________________________________________________________");
     }
 }

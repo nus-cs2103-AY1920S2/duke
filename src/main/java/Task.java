@@ -1,10 +1,18 @@
 import java.util.*;
 
 public class Task {
-    String action;
-    boolean done;
-    public Task(String action) {
-        this.action = action;
-        this.done = false;
+    protected String description;
+    protected boolean isDone;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    public String getStatusIcon() {
+        return (isDone? "[✓] " : "[✗] ");
     }
 }
