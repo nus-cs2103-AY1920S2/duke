@@ -1,11 +1,15 @@
 package duke.tasks;
 
-public class Event extends Task {
-    protected String dateTime;
+import java.time.LocalDateTime;
 
-    public Event(String name, String dateTime) {
+public class Event extends TimedTask {
+    protected LocalDateTime start;
+    protected LocalDateTime end;
+
+    public Event(String name, LocalDateTime start, LocalDateTime end) {
         super(name);
-        this.dateTime = dateTime;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
@@ -15,6 +19,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", getStatus(), name, dateTime);
+        return String.format("[E][%s] %s (at: %s to %s)", getStatus(), name, formatTime(start), formatTime(end));
     }
 }

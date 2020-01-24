@@ -1,9 +1,11 @@
 package duke.tasks;
 
-public class Deadline extends Task {
-    protected String dateTime;
+import java.time.LocalDateTime;
 
-    public Deadline(String name, String dateTime) {
+public class Deadline extends TimedTask {
+    protected LocalDateTime dateTime;
+
+    public Deadline(String name, LocalDateTime dateTime) {
         super(name);
         this.dateTime = dateTime;
     }
@@ -15,6 +17,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", getStatus(), name, dateTime);
+        return String.format("[D][%s] %s (by: %s)", getStatus(), name, formatTime(dateTime));
     }
 }
