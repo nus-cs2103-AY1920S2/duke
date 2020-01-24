@@ -11,8 +11,21 @@ public class Event extends Task {
      * @param taskType Type of task: Event.
      * @param timing Timing of event.
      */
-    public Event(String description, String taskType, String timing) {
+    public Event(String description, char taskType, String timing) {
         super(description, taskType);
+        this.timing = timing;
+    }
+
+    /**
+     * Class constructor to be used when loading data from hard disk during start-up.
+     *
+     * @param description Task description.
+     * @param taskType Type of task: Event.
+     * @param timing Timing of event.
+     * @param isDone Status of event, when done or not.
+     */
+    public Event(String description, char taskType, String timing, boolean isDone) {
+        super(description, taskType, isDone);
         this.timing = timing;
     }
 

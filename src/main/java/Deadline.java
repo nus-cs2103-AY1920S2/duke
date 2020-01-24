@@ -11,8 +11,21 @@ public class Deadline extends Task {
      * @param taskType Type of task: Deadline.
      * @param deadline Deadline of task.
      */
-    public Deadline(String description, String taskType, String deadline) {
+    public Deadline(String description, char taskType, String deadline) {
         super(description, taskType);
+        this.deadline = deadline;
+    }
+
+    /**
+     * Class constructor to be used when loading data from hard disk during start-up.
+     *
+     * @param description Task description.
+     * @param taskType Type of task: Deadline.
+     * @param deadline Deadline of task.
+     * @param isDone Status of task, whether done or not.
+     */
+    public Deadline(String description, char taskType, String deadline, boolean isDone) {
+        super(description, taskType, isDone);
         this.deadline = deadline;
     }
 
