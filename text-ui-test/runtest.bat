@@ -8,8 +8,7 @@ del ACTUAL.TXT
 del storage\file.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\Duke.java ..\src\main\java\task\*.java ..\src\main\java\exception\*.java ..\src\main\java\storage\*.java
-REM javac  -cp ..\src -Xlint:none -d ..\bin\main ..\src\main\java\task\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java ..\src\main\java\parser\*.java ..\src\main\java\task\*.java ..\src\main\java\exception\*.java ..\src\main\java\parser\*.java ..\src\main\java\storage\*.java
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********

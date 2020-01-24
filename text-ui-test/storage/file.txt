@@ -1,2 +1,2 @@
-[D]|N|return book|Sunday
-[E]|Y|project meeting|Mon 2-4pm
+[D]|N|return book|2019-12-19|16:00
+[E]|Y|project meeting|2020-11-02|23:59

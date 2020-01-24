@@ -3,10 +3,9 @@ package duke;
 import task.Task;
 import storage.Storage;
 import exception.DukeException;
-
+import parser.Parser;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import java.nio.file.Paths;
 import java.nio.file.Path;
@@ -79,17 +78,9 @@ public class Duke {
                 return;
             default:
                 // as long as done/delete inside
-                if (Pattern.matches(
-                        ("(^(done|delete)\\s+.*|(.*\\s+(done|delete)\\s+.*)|.*\\s+(done|delete)$)"),
-                        input)) {
+                if (Parser.isDoneDelete(input)) {
                     if (this.tasks.isEmpty()) {
                         throw new DukeException("Task list is empty!");
-                    }
-                    if (!Pattern.matches("^(done|delete)\\s+.*", input)) {
-                        throw new DukeException("Action should be at the front");
-                    }
-                    if (!Pattern.matches("^(done|delete)\\s+\\d+$", input)) {
-                        throw new DukeException("A task number must be provided");
                     }
                     String[] splitInput = input.split(" ");
                     int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
