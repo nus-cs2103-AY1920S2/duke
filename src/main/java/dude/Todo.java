@@ -1,5 +1,6 @@
 package dude;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +20,11 @@ public class Todo extends Task {
 
     public Todo(String details, boolean isDone) {
         super(details, isDone);
+    }
+
+    @Override
+    boolean occursOn(LocalDate date) {
+        return false;
     }
 
     @Override

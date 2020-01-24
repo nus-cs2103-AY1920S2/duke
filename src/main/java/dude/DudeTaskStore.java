@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DudeTaskStore implements IDudeTaskStore {
     private static String fileLocation = "data/dude.txt";
     private static Pattern storageFormat =
@@ -19,7 +22,7 @@ public class DudeTaskStore implements IDudeTaskStore {
                     + "\\[(?<isDone>[OX])]"
                     + " (?<details>\\S+.*?)"
                     + "( \\(by: (?<by>\\S+.*)\\))?"
-                    + "( \\(at: (?<at>\\S+.*)\\))?");
+                    + "( \\((?<from>.*) to (?<to>.*)\\))?");
 
     public static DudeTaskStore restoreSession() {
         DudeTaskStore taskStore = new DudeTaskStore();
@@ -44,24 +47,22 @@ public class DudeTaskStore implements IDudeTaskStore {
                         taskStore.addTask(new Todo(details, isDone));
                         break;
                     case "D":
-                        String by = m.group("by");
-                        if (by == null) {
-                            throw new ParsingException();
-                        }
+                        LocalDate by = LocalDate.parse(m.group("by"),
+                                DateTimeFormatter.ofPattern("d MMM yyyy"));
                         taskStore.addTask(new Deadline(details, by, isDone));
                         break;
                     case "E":
-                        String at = m.group("at");
-                        if (at == null) {
-                            throw new ParsingException();
-                        }
-                        taskStore.addTask(new Event(details, at, isDone));
+                        LocalDate from = LocalDate.parse(m.group("from"),
+                                DateTimeFormatter.ofPattern("d MMM yyyy"));
+                        LocalDate to = LocalDate.parse(m.group("to"),
+                                DateTimeFormatter.ofPattern("d MMM yyyy"));
+                        taskStore.addTask(new Event(details, from, to, isDone));
                         break;
                     }
                 } else {
                     throw new ParsingException();
                 }
-            } catch (ParsingException e) {
+            } catch (Exception e) {
                 System.out.println("Warning: An error occurred while reading your existing todos. "
                         + "Some of your data may have been lost");
             }

@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     public static final String USAGE = "deadline description /by yyyy-mm-dd";
@@ -16,7 +17,11 @@ public class Deadline extends Task {
         Matcher m = messageRegex.matcher(msg);
         
         if (m.matches()) {
-            return new Deadline(m.group(1).strip(), LocalDate.parse(m.group(2)), false);
+            try {
+                return new Deadline(m.group(1).strip(), LocalDate.parse(m.group(2)), false);
+            } catch (DateTimeParseException e) {
+                throw new ParsingException(USAGE);
+            }
         } else {
             throw new ParsingException(USAGE);
         }
@@ -25,6 +30,11 @@ public class Deadline extends Task {
     public Deadline(String details, LocalDate dueDate, boolean isDone) {
         super(details, isDone);
         this.dueDate = dueDate;
+    }
+
+    @Override
+    boolean occursOn(LocalDate date) {
+        return date.isEqual(this.dueDate);
     }
 
     @Override

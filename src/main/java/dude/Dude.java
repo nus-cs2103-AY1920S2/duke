@@ -1,14 +1,19 @@
 package dude;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
+
+import java.time.LocalDate;
 
 public class Dude {
     /** Usage strings for valid commands to dude.Dude */
     public static final String LIST_USAGE = "list";
     public static final String DONE_USAGE = "done index_of_task";
     public static final String DELETE_USAGE = "delete index_of_task";
+    public static final String CHECK_USAGE = "check yyyy-mm-dd";
+    public static final String TODAY_USAGE = "today";
     public static final String BYE_USAGE = "bye";
 
     public static void main(String[] args) {
@@ -52,6 +57,10 @@ public class Dude {
                 completeTask(msg);
             } else if (msg.startsWith("delete")) {
                 deleteTask(msg);
+            } else if (msg.equals("today")) {
+                showTasksOnDate(LocalDate.now());
+            } else if (msg.startsWith("check")) {
+                checkTasksOnDate(msg);
             } else if (msg.startsWith("todo")) {
                 addTask(Todo::parseTodo, msg);
             } else if (msg.startsWith("deadline")) {
@@ -74,6 +83,8 @@ public class Dude {
                 "  " + LIST_USAGE,
                 "  " + DONE_USAGE,
                 "  " + DELETE_USAGE,
+                "  " + CHECK_USAGE,
+                "  " + TODAY_USAGE,
                 "  " + Todo.USAGE,
                 "  " + Deadline.USAGE,
                 "  " + Event.USAGE,
@@ -90,6 +101,33 @@ public class Dude {
             speak("These are your tasks, dude:");
             for (String t : tasks.showAllTasks()) {
                 speak(t);
+            }
+        });
+    }
+
+    private void checkTasksOnDate(String msg) {
+        String[] args = msg.split("\\s+");
+
+        if (args.length != 2) {
+            respondError("I don't get you, dude!", CHECK_USAGE);
+            return;
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(args[1]);
+            showTasksOnDate(date);
+        } catch (DateTimeParseException e) {
+            respondError("What date do you want to check man?", CHECK_USAGE);
+        }
+    }
+
+    private void showTasksOnDate(LocalDate date) {
+        respond(() -> {
+            speak("These are what you have on this day");
+            for (int i = 1; i <= tasks.taskCount(); i++) {
+                if (tasks.getTask(i).occursOn(date)) {
+                    speak(String.format("%d.%s", i, tasks.getTask(i)));
+                }
             }
         });
     }

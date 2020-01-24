@@ -1,6 +1,8 @@
 package dude;
 
-public class Task {
+import java.time.LocalDate;
+
+abstract class Task {
     private final String details;
     private boolean isDone;
 
@@ -12,6 +14,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    abstract boolean occursOn(LocalDate date);
 
     @Override
     public String toString() {

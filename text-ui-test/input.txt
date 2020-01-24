@@ -2,13 +2,20 @@ hello
   todo feed cats
 todo 
 todo feed   cats 
-deadline feed hamsters /by 2359 Jan 21
+deadline feed hamsters /by 2020-01-24
 list
-event    feed mice  at 5oclock
-event    feed mice /at 5oclock 
+event    feed mice  from 5oclock
+event    feed mice /from    1999-
+event feed mice /from 2020-01-01 /to 2020-01-01
+today
 list
   list 
 BYE
+deadline eat lunch /by 2020-01-30
+event eat anything /from 1997-03-04 /to 2060-12-31
+today
+check 2050-01-01
+check 2000 09 03
    delete 1
 delete    foo
 delete   1

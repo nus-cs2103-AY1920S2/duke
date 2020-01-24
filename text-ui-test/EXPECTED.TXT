@@ -8,9 +8,11 @@
        list
        done index_of_task
        delete index_of_task
+       check yyyy-mm-dd
+       today
        todo description
-       deadline description /by due_date
-       event description /at event_time
+       deadline description /by yyyy-mm-dd
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
        bye
     ____________________________________________________________
     ____________________________________________________________
@@ -20,9 +22,11 @@
        list
        done index_of_task
        delete index_of_task
+       check yyyy-mm-dd
+       today
        todo description
-       deadline description /by due_date
-       event description /at event_time
+       deadline description /by yyyy-mm-dd
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
        bye
     ____________________________________________________________
     ____________________________________________________________
@@ -35,37 +39,48 @@
     ____________________________________________________________
     ____________________________________________________________
      I gotcha my dude. I've added this task:
-       [T][X] feed   cats 
+       [T][X] feed   cats
      Now you got 1 tasks in your list
     ____________________________________________________________
     ____________________________________________________________
      I gotcha my dude. I've added this task:
-       [D][X] feed hamsters (by: 2359 Jan 21)
+       [D][X] feed hamsters (by: 24 Jan 2020)
      Now you got 2 tasks in your list
     ____________________________________________________________
     ____________________________________________________________
      These are your tasks, dude:
-     1.[T][X] feed   cats 
-     2.[D][X] feed hamsters (by: 2359 Jan 21)
+     1.[T][X] feed   cats
+     2.[D][X] feed hamsters (by: 24 Jan 2020)
     ____________________________________________________________
     ____________________________________________________________
      Sorry mate, I didn't quite getcha
      Just tell me what you want to do like this:
 
-       event description /at event_time
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
+
+     Then we're chill
+    ____________________________________________________________
+    ____________________________________________________________
+     Sorry mate, I didn't quite getcha
+     Just tell me what you want to do like this:
+
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
 
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________
      I gotcha my dude. I've added this task:
-       [E][X] feed mice (at: 5oclock )
+       [E][X] feed mice (1 Jan 2020 to 1 Jan 2020)
      Now you got 3 tasks in your list
     ____________________________________________________________
     ____________________________________________________________
+     These are what you have on this day
+    ____________________________________________________________
+    ____________________________________________________________
      These are your tasks, dude:
-     1.[T][X] feed   cats 
-     2.[D][X] feed hamsters (by: 2359 Jan 21)
-     3.[E][X] feed mice (at: 5oclock )
+     1.[T][X] feed   cats
+     2.[D][X] feed hamsters (by: 24 Jan 2020)
+     3.[E][X] feed mice (1 Jan 2020 to 1 Jan 2020)
     ____________________________________________________________
     ____________________________________________________________
      Sorry mate, I didn't catch your drift
@@ -74,9 +89,11 @@
        list
        done index_of_task
        delete index_of_task
+       check yyyy-mm-dd
+       today
        todo description
-       deadline description /by due_date
-       event description /at event_time
+       deadline description /by yyyy-mm-dd
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
        bye
     ____________________________________________________________
     ____________________________________________________________
@@ -86,10 +103,38 @@
        list
        done index_of_task
        delete index_of_task
+       check yyyy-mm-dd
+       today
        todo description
-       deadline description /by due_date
-       event description /at event_time
+       deadline description /by yyyy-mm-dd
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
        bye
+    ____________________________________________________________
+    ____________________________________________________________
+     I gotcha my dude. I've added this task:
+       [D][X] eat lunch (by: 30 Jan 2020)
+     Now you got 4 tasks in your list
+    ____________________________________________________________
+    ____________________________________________________________
+     I gotcha my dude. I've added this task:
+       [E][X] eat anything (4 Mar 1997 to 31 Dec 2060)
+     Now you got 5 tasks in your list
+    ____________________________________________________________
+    ____________________________________________________________
+     These are what you have on this day
+     5.[E][X] eat anything (4 Mar 1997 to 31 Dec 2060)
+    ____________________________________________________________
+    ____________________________________________________________
+     These are what you have on this day
+     5.[E][X] eat anything (4 Mar 1997 to 31 Dec 2060)
+    ____________________________________________________________
+    ____________________________________________________________
+     I don't get you, dude!
+     Just tell me what you want to do like this:
+
+       check yyyy-mm-dd
+
+     Then we're chill
     ____________________________________________________________
     ____________________________________________________________
      Sorry mate, I didn't catch your drift
@@ -98,9 +143,11 @@
        list
        done index_of_task
        delete index_of_task
+       check yyyy-mm-dd
+       today
        todo description
-       deadline description /by due_date
-       event description /at event_time
+       deadline description /by yyyy-mm-dd
+       event description /from yyyy-mm-dd /to yyyy-mm-dd
        bye
     ____________________________________________________________
     ____________________________________________________________
@@ -113,28 +160,20 @@
     ____________________________________________________________
     ____________________________________________________________
      I gotcha my dude. I've taken out this task:
-       [T][X] feed   cats 
-     Now you got 2 tasks in your list
-    ____________________________________________________________
-    ____________________________________________________________
-     You don't have such a task, dude!
-     Just tell me what you want to do like this:
-
-       done index_of_task
-
-     Then we're chill
-    ____________________________________________________________
-    ____________________________________________________________
-     You don't have such a task, dude!
-     Just tell me what you want to do like this:
-
-       done index_of_task
-
-     Then we're chill
+       [T][X] feed   cats
+     Now you got 4 tasks in your list
     ____________________________________________________________
     ____________________________________________________________
      Good job dude! I've marked this task as done:
-       [E][O] feed mice (at: 5oclock )
+       [E][O] eat anything (4 Mar 1997 to 31 Dec 2060)
+    ____________________________________________________________
+    ____________________________________________________________
+     Good job dude! I've marked this task as done:
+       [E][O] eat anything (4 Mar 1997 to 31 Dec 2060)
+    ____________________________________________________________
+    ____________________________________________________________
+     Good job dude! I've marked this task as done:
+       [E][O] feed mice (1 Jan 2020 to 1 Jan 2020)
     ____________________________________________________________
     ____________________________________________________________
      I don't get you, dude!
