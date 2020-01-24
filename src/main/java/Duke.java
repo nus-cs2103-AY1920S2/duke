@@ -5,7 +5,7 @@ public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
 
-    public static void readCommand(Command command) throws DukeDescriptionException {
+    public static void readCommand(Command command) throws DukeDescriptionException, BadDescriptionException {
         switch (command) {
             case LIST:
                 System.out.println("Here are all your tasks:");
@@ -14,10 +14,18 @@ public class Duke {
                 }
                 break;
             case DONE:
-                int done = sc.nextInt();
-                tasks.get(done - 1).setDone(true);
-                System.out.println("Nice! I've marked this task as done: \n" +
-                        "  " + tasks.get(done - 1));
+                try {
+                    String strDone = sc.nextLine();
+                    if (strDone.isEmpty()) throw new DukeDescriptionException("Empty Description");
+                    int done = Integer.parseInt(strDone.substring(1)); //there must be a space between command and input
+                    if (done <= 0 || done > tasks.size())
+                        throw new BadDescriptionException("" + done);
+                    tasks.get(done - 1).setDone(true);
+                    System.out.println("Nice! I've marked this task as done: \n" +
+                            "  " + tasks.get(done - 1));
+                } catch (NumberFormatException e) {
+                    throw new BadDescriptionException("Non-Integer");
+                }
                 break;
             case TODO:
                 String todo = sc.nextLine();
@@ -51,12 +59,20 @@ public class Duke {
                         tasks.size() + " tasks in the list." );
                 break;
             case DELETE:
-                int delete = sc.nextInt();
-                Task deletedTask = tasks.get(delete - 1);
-                tasks.remove(delete - 1);
-                System.out.println("Okay! I have deleted this task:\n" +
-                        "  " + deletedTask + "\nNow you have " +
-                        tasks.size() + " tasks in the list.");
+                try {
+                    String strDelete = sc.nextLine();
+                    if (strDelete.isEmpty()) throw new DukeDescriptionException("Empty Description");
+                    int delete = Integer.parseInt(strDelete.substring(1)); //there must be a space between command and input
+                    if (delete <= 0 || delete > tasks.size())
+                        throw new BadDescriptionException("" + delete);
+                    Task deletedTask = tasks.get(delete - 1);
+                    tasks.remove(delete - 1);
+                    System.out.println("Okay! I have deleted this task:\n" +
+                            "  " + deletedTask + "\nNow you have " +
+                            tasks.size() + " tasks in the list.");
+                } catch (NumberFormatException e) {
+                    throw new BadDescriptionException("Non-Integer");
+                }
                 break;
             default:
                 break;
@@ -91,6 +107,8 @@ public class Duke {
                     System.out.println("Sorry I do not know what that means!");
                 } catch (DukeDescriptionException e) {
                     System.out.println("OOPS! You forgot to include a description!");
+                } catch (BadDescriptionException e) {
+                    System.out.println("OPPS! The number input for done/delete cannot be " + e.getMessage());
                 } finally {
                     System.out.println(lineBreak);
                 }
