@@ -64,6 +64,11 @@ public class Storage {
     }
 
     public Storage (String filepath) {
-            f = new File(filepath);
+        f = new File(filepath);
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            System.err.println("Unable to create file");
+        }
     }
 }
