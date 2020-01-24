@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     public final boolean completed;
     public final String name;
@@ -18,6 +20,10 @@ public class Task {
 
     public String storeFormat() {
         return completed + "|" + name;
+    }
+    
+    public boolean compareDate(LocalDate inputDate) {
+        return false;
     }
 
     @Override

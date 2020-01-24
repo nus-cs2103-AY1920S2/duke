@@ -1,5 +1,4 @@
 public class NoDescriptionException extends DukeException {
-
     @Override
     public String toString() { 
         return "*************************************************************\n"

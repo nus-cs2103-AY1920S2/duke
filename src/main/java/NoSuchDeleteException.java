@@ -1,5 +1,4 @@
 public class NoSuchDeleteException extends DukeException {
-
     @Override
     public String toString() {
         return "*************************************************************\n"

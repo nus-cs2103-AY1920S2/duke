@@ -1,5 +1,4 @@
 public class NoDateException extends DukeException {
-
     @Override
     public String toString() {
         return "*************************************************************\n"
