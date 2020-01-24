@@ -2,7 +2,7 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
-public class Event extends Task {
+public class Event extends TimedTask {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
@@ -14,6 +14,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s to %s)", getStatus(), name, start, end);
+        return String.format("[E][%s] %s (at: %s to %s)", getStatus(), name, formatTime(start), formatTime(end));
     }
 }
