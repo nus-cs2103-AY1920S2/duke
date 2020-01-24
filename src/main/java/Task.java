@@ -9,6 +9,12 @@ abstract class Task {
         Todo, Deadline, Event
     }
 
+    // In case event or deadline use monday-friday
+    public enum Days_of_week{
+        Mon, Tue, Wed, Thur, Fri, Sat, Sun,
+        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    }
+
     private String description;
     private boolean isDone;
     private String space = "        ";
