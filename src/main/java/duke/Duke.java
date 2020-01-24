@@ -1,17 +1,23 @@
 package duke;
 
 import task.Task;
+import storage.Storage;
 import exception.DukeException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import java.nio.file.Paths;
+import java.nio.file.Path;
+
 public class Duke {
     private Scanner sc;
     private ArrayList<Task> tasks;
     public static final String separator =
             "____________________________________________________________";
+    public static final Path storagePath = Paths.get("storage", "file.txt");
+    private static Storage taskStorage = new Storage(Duke.storagePath);
 
     private final int indent1 = 4;
     private final int indent2 = 5;
@@ -19,7 +25,7 @@ public class Duke {
 
     public Duke() {
         this.sc = new Scanner(System.in);
-        this.tasks = new ArrayList<>();
+        this.tasks = Duke.taskStorage.getTasksFromStorage();
     }
 
     public static void main(String[] args) {
@@ -88,24 +94,21 @@ public class Duke {
                     String[] splitInput = input.split(" ");
                     int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
                     if (taskIndex >= taskSize()) {
-                        Duke.out(String.format(
+                        throw new DukeException(String.format(
                                 "Please choose an index that is between 1 and %d (inclusive)",
-                                taskSize()), indent2);
-                        return;
+                                taskSize()));
                     }
                     if (input.contains("done")) {
                         Task currTask = this.tasks.get(taskIndex);
                         currTask.setDone();
                         Duke.out("Nice! I've marked this task as done:", indent2);
                         Duke.out(currTask.toString(), indent3);
-                        return;
                     } else {
                         Task removedTask = this.tasks.remove(taskIndex);
                         Duke.out("Noted. I've removed this task:", indent2);
                         Duke.out(removedTask.toString(), indent3);
                         Duke.out(String.format("Now you have %d tasks in the list.", taskSize()),
                                 indent2);
-                        return;
                     }
                 } else {
                     Task newTask = Task.newTask(input);
@@ -114,8 +117,9 @@ public class Duke {
                     Duke.out(newTask.toString(), indent3);
                     Duke.out(String.format("Now you have %d %s in the list.", taskSize(),
                             taskSize() > 1 ? "tasks" : "task"), indent2);
-                    return;
                 }
+
+                Duke.taskStorage.update(this.tasks);
         }
     }
 }

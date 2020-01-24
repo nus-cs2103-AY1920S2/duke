@@ -11,6 +11,12 @@ public class Task {
   protected String type;
   private static String[] taskTypes = {"todo", "event", "deadline"};
 
+  public Task(String type, String description, String isDone) {
+    this.type = type;
+    this.description = description;
+    this.isDone = isDone.equals("Y");
+  }
+
   public Task(String type, String description) {
     this.type = type;
     this.description = description;
@@ -47,6 +53,22 @@ public class Task {
     }
   }
 
+  public static Task newTaskFromMemory(String entry) throws DukeException {
+    String[] splitEntry = entry.split("\\|");
+    String type = splitEntry[0];
+    switch (type) {
+      case "[T]":
+        return new Todo(splitEntry[2], splitEntry[1]);
+      case "[E]":
+        return new Event(splitEntry[2], splitEntry[1], splitEntry[3]);
+      case "[D]":
+        return new Deadline(splitEntry[2], splitEntry[1], splitEntry[3]);
+      default:
+        throw new DukeException("Task not recognized");
+    }
+  }
+
+
   public static String getTime(String description, String regex) throws DukeException {
     Matcher matcher = Pattern.compile(regex).matcher(description);
     int index = matcher.find() ? matcher.start() : -1;
@@ -82,5 +104,9 @@ public class Task {
   @Override
   public String toString() {
     return String.format("%s[%s] %s", this.type, this.getStatusIcon(), description);
+  }
+
+  public String toStorable() {
+    return String.format("%s|%s|%s", this.type, this.isDone ? "Y" : "N", this.description);
   }
 }
