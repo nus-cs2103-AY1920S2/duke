@@ -156,9 +156,9 @@ public class ChatBot {
      * @param delimiter
      * @return index for the by/at depending on the type of task, not applicable for to-do tasks
      */
-    public int grabTaskName(StringBuilder taskname, String[] inputCommand, String delimiter) {
+    public int grabTaskName(StringBuilder taskname, String[] inputCommand, String delimiter)  throws DukeException {
         int index_found = 0; //find the index for the delimiter
-        for (int i = 1; i < inputCommand.length - 1; i++) {
+        for (int i = 1; i <= inputCommand.length - 1; i++) {
             if (inputCommand[i].equals(delimiter)) {
                 index_found = i;
                 break;
@@ -172,6 +172,8 @@ public class ChatBot {
                 }
             }
         }
+        // if the inputCommand array index 1 == delimiter, means no description was given, throw exception
+        if (index_found == 1) throw new DukeException("Description of deadline/event cannot be empty!");
         return index_found;
     }
 
@@ -181,7 +183,11 @@ public class ChatBot {
      * @param inputCommand
      * @param DateTime
      */
-    public void grabDateTime(int index_found, String[] inputCommand, StringBuilder DateTime) {
+    public void grabDateTime(int index_found, String[] inputCommand, StringBuilder DateTime)  throws DukeException {
+        if (index_found == inputCommand.length - 1) {
+            // means that there is no description of date of task after the delimiter
+            throw new DukeException("Date and time of the event/deadline cannot be empty!");
+        }
         for (int i = index_found + 1; i < inputCommand.length; i++) {
             DateTime.append(inputCommand[i]);
             if (i != inputCommand.length - 1) {
