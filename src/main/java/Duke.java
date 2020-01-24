@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -109,6 +112,7 @@ public class Duke {
 
         if (tasks.size() == 0) {
             writer.write("");
+            writer.close();
             return;
         }
 
@@ -136,30 +140,46 @@ public class Duke {
             String task = readFile.nextLine();
             char taskType = task.charAt(1);
             char isDone = task.charAt(4);
-            String description = task.substring(7, task.length());
+            String description = task.substring(7);
 
             switch (taskType) {
             case 'D':
                 int position = description.indexOf("by");
-                String deadline = description.substring(position - 1);
-                description = description.substring(0, position - 2);
+                String date = description.substring(position + 3, position + 14);
+                String time = description.substring(position + 15);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                LocalDate localDate = LocalDate.parse(date, formatter);
+
+                formatter = DateTimeFormatter.ofPattern("hh:mm a");
+                LocalTime localTime = LocalTime.parse(time, formatter);
+
+                description = description.substring(0, position - 1);
 
                 if (isDone == 'X') {
-                    tasks.add(new Deadline(description, taskType, deadline, false));
+                    tasks.add(new Deadline(description, taskType, localDate, localTime, false));
                 } else {
-                    tasks.add(new Deadline(description, taskType, deadline, true));
+                    tasks.add(new Deadline(description, taskType, localDate, localTime, true));
                 }
 
                 break;
             case 'E':
                 int pos = description.indexOf("at");
-                String timing = description.substring(pos - 1);
-                description = description.substring(0, pos - 2);
+                String eventDate = description.substring(pos + 3, pos + 14);
+                String eventTime = description.substring(pos + 15);
+
+                DateTimeFormatter forFormatting = DateTimeFormatter.ofPattern("MMM d yyyy");
+                LocalDate localEventDate = LocalDate.parse(eventDate, forFormatting);
+
+                forFormatting = DateTimeFormatter.ofPattern("hh:mm a");
+                LocalTime localEventTime = LocalTime.parse(eventTime, forFormatting);
+
+                description = description.substring(0, pos - 1);
 
                 if (isDone == 'X') {
-                    tasks.add(new Event(description, taskType, timing, false));
+                    tasks.add(new Event(description, taskType, localEventDate, localEventTime, false));
                 } else {
-                    tasks.add(new Event(description, taskType, timing, true));
+                    tasks.add(new Event(description, taskType, localEventDate, localEventTime, true));
                 }
 
                 break;
@@ -201,33 +221,27 @@ public class Duke {
                         + inputs[0] + " cannot be empty\n");
             }
 
-            int j = 2;
-
             task = inputs[1];
+
+            int j = 2;
             while (j != inputs.length && inputs[j].charAt(0) != '/') {
                 task = task.concat(" " + inputs[j]);
                 j++;
             }
 
-            String timing = "";
-            j++;
-
-            while (j < inputs.length) {
-                timing = timing.concat(" " + inputs[j]);
-                j++;
-            }
-
-            if (timing.equals("")) {
+            if (j == inputs.length || (j + 1) == inputs.length) {
                 throw new DukeException("\u2639" + " OOPS!!! This task requires a timing\n");
             }
 
+            LocalDate date = LocalDate.parse(inputs[++j]);
+            LocalTime timing = LocalTime.parse(inputs[++j]);
+
             if (inputs[0].equals("event")) {
-                timing = "(at:" + timing + ")";
-                tasks.add(new Event(task, 'E', timing));
+                tasks.add(new Event(task, 'E', date, timing));
             } else {
-                timing = "(by:" + timing + ")";
-                tasks.add(new Deadline(task, 'D', timing));
+                tasks.add(new Deadline(task, 'D', date, timing));
             }
+
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }

@@ -1,18 +1,25 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This type of tasks have a specific start and end timing.
  */
 public class Event extends Task {
-    private String timing;
+    private LocalDate date;
+    private LocalTime timing;
 
     /**
      * Class constructor.
      *
      * @param description Task description.
      * @param taskType Type of task: Event.
+     * @param date Date of event.
      * @param timing Timing of event.
      */
-    public Event(String description, char taskType, String timing) {
+    public Event(String description, char taskType, LocalDate date, LocalTime timing) {
         super(description, taskType);
+        this.date = date;
         this.timing = timing;
     }
 
@@ -21,21 +28,32 @@ public class Event extends Task {
      *
      * @param description Task description.
      * @param taskType Type of task: Event.
+     * @param date Date of event.
      * @param timing Timing of event.
      * @param isDone Status of event, when done or not.
      */
-    public Event(String description, char taskType, String timing, boolean isDone) {
+    public Event(String description, char taskType, LocalDate date, LocalTime timing, boolean isDone) {
         super(description, taskType, isDone);
+        this.date = date;
         this.timing = timing;
     }
 
     /**
-     * Returns the timing of the event.
+     * Returns the date of the event in the correct format.
      *
-     * @return timing of event.
+     * @return Date of event.
+     */
+    public String getDate() {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    /**
+     * Returns the timing of the event in the correct format.
+     *
+     * @return Timing of event.
      */
     public String getTiming() {
-        return timing;
+        return timing.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     /**
@@ -45,6 +63,6 @@ public class Event extends Task {
      */
     public String obtainTaskInfo() {
         String taskInfo = super.obtainTaskInfo();
-        return taskInfo + " " + this.getTiming();
+        return taskInfo + " at " + this.getDate() + " " + this.getTiming();
     }
 }
