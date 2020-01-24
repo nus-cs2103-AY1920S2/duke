@@ -1,25 +1,25 @@
 package duke.commands;
 
 import java.util.List;
+
 import duke.tasks.Task;
 import duke.tasks.Event;
+import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
 class CreateEvent implements Command, TaskCreation {
     public void execute(String arg, List<Task> tasks) throws DukeException {
         String[] args = arg.split("/at");
         if (args.length < 2) {
-            throw new DukeException("Usage: event [task name] /at [time]");
+            throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
         }
         String taskName = args[0].strip();
-        String dateTime = args[1].strip();
-        if (taskName.length() == 0) {
-            throw new DukeException("Event description cannot be empty!");
+        String[] dateTimes = args[1].strip().split("to");
+        if (taskName.length() == 0 || dateTimes.length < 2) {
+            throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
         }
-        if (dateTime.length() == 0) {
-            throw new DukeException("Event date/time cannot be empty!");
-        }
-        Task newTask = new Event(taskName, dateTime);
+        DateTimeParser dtp = new DateTimeParser();
+        Task newTask = new Event(taskName, dtp.parse(dateTimes[0].strip()), dtp.parse(dateTimes[1].strip()));
         tasks.add(newTask);
         System.out.print(formatReply(CreateTaskReply(newTask, tasks)));
     }

@@ -31,6 +31,6 @@ public class DateTimeParser {
                 continue;
             }
         }
-        throw new DukeException("Date/Time cannot be parsed! Suggested format: dd/MM/yyyy HH:mm:ss");
+        throw new DukeException("Cannot parse datetime! Suggested format: dd/MM/yyyy HH:mm:ss");
     }
 }

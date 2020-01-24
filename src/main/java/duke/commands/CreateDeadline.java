@@ -11,12 +11,12 @@ class CreateDeadline implements Command, TaskCreation {
     public void execute(String arg, List<Task> tasks) throws DukeException {
         String[] args = arg.split("/by");
         if (args.length < 2) {
-            throw new DukeException("Usage: deadline [task name] /by [dd/MM/yyyy] [HH:mm:ssss]");
+            throw new DukeException("Usage: deadline [task name] /by [datetime]");
         }
         String taskName = args[0].strip();
         String dateTime = args[1].strip();
         if (taskName.length() == 0 || dateTime.length() == 0) {
-            throw new DukeException("Usage: deadline [task name] /by [dd/MM/yyyy] [HH:mm:ssss]");
+            throw new DukeException("Usage: deadline [task name] /by [datetime]");
         }
         DateTimeParser dtp = new DateTimeParser();
         Task newTask = new Deadline(taskName, dtp.parse(dateTime));
