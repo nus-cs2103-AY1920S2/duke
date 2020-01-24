@@ -1,11 +1,14 @@
-public class Todos implements Task {
+public class Deadlines implements Task {
 
     private boolean done = false;
     private String name;
+    private String time;
 
-    public Todos(String name) {
+    public Deadlines(String name, String time) {
         this.name = name;
+        this.time = time;
     }
+
     @Override
     public boolean isDone() {
         return done;
@@ -18,7 +21,11 @@ public class Todos implements Task {
 
     @Override
     public String getTaskType() {
-        return "[T]";
+        return "[D]";
+    }
+
+    public String getTaskTime() {
+        return time;
     }
 
     @Override
@@ -37,6 +44,6 @@ public class Todos implements Task {
 
     @Override
     public String toString() {
-        return getTaskType() + getDoneString() + " " + getTaskName();
+        return getTaskType() + getDoneString() + " " + getTaskName() + " (by: " + getTaskTime() + ")";
     }
 }
