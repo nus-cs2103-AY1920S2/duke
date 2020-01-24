@@ -106,6 +106,12 @@ public class Duke {
      */
     private static void updateFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter("data/duke.txt");
+
+        if (tasks.size() == 0) {
+            writer.write("");
+            return;
+        }
+
         writer.write(tasks.get(0).obtainTaskInfo());
         writer.close();
 
