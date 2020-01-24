@@ -1,18 +1,12 @@
-import java.time.LocalDate;
-import java.time.format.TextStyle;
-import java.util.Locale;
-
 public class Deadline extends Task {
-    LocalDate date;
-    public Deadline(String description, LocalDate date){
+    String day;
+    public Deadline(String description, String day){
         super (description);
-        this.date = date;
+        this.day = day;
     }
 
     @Override
     public String toString(){
-        String fullDate = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
-                            Integer.toString(date.getDayOfMonth()) + " " + Integer.toString(date.getYear());
-        return "[D]" + super.toString() + "(by: " + fullDate + ")";
+        return "[D]" + super.toString() + "(by: " + day + ")";
     }
 }
