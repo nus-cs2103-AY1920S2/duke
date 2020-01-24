@@ -14,6 +14,7 @@ public class Duke {
         DukeWorker worker = new DukeWorker();
         while (!request.toLowerCase().equals("bye")) {
             request = sc.nextLine();
+            request = request.trim().toLowerCase();
             System.out.println(Constants.ANSI_RED + worker.handleRequest(request) + Constants.ANSI_RESET);
         }
     }
