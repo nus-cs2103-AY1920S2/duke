@@ -109,7 +109,7 @@ public class Storage {
     public TaskList findTasks(String searchTerm) {
         TaskList tasks = loadTasks();
         TaskList temp = new TaskList();
-        int pos = 0;
+        int pos = 1;
         for (Task task : tasks.getTasks()) {
             if (task.getDescription().contains(searchTerm)) {
                 temp.addTask(new SearchTask(pos, task.isDone(), task.getDescription(), task.getType()));

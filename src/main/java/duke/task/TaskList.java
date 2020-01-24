@@ -83,7 +83,7 @@ public class TaskList {
      * @param storage the storage
      * @throws DukeException the duke exception
      */
-    public void addTask(String[] current, Storage storage) throws DukeException {
+    public Task addTask(String[] current, Storage storage) throws DukeException {
         String[] words = Arrays.stream(current).skip(1).toArray(String[]::new);
         String command = current[0];
 
@@ -151,9 +151,8 @@ public class TaskList {
         }
         storage.writeToFile(sb.toString());
 
+        return tasks.get(getSize() - 1);
 
-        Task t = tasks.get(getSize() - 1);
-        ui.taskAddSuccess(t, getSize());
     }
 
     /**
@@ -162,7 +161,7 @@ public class TaskList {
      * @param value   the value
      * @param storage the storage
      */
-    public void deleteTask(int value, Storage storage) {
+    public Task deleteTask(int value, Storage storage) {
         Task cur = tasks.get(value - 1);
         tasks.remove(cur);
         StringBuilder sb = new StringBuilder();
@@ -174,9 +173,6 @@ public class TaskList {
 
         }
         storage.writeToFile(sb.toString());
-
-        ui.taskRemoveSuccess(cur, getSize());
-
-
+        return cur;
     }
 }

@@ -26,6 +26,30 @@ public class Ui {
         return new Ui();
     }
 
+    public static String logo() {
+        StringBuilder sb = new StringBuilder();
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        sb.append(logo);
+        return sb.toString();
+    }
+
+    /**
+     * Welcome.
+     */
+    public static String welcome() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello I'm Duke\nWhat can I do for you?");
+        return sb.toString();
+    }
+
+    public static String makeLine() {
+        return "    ____________________________________________________________";
+    }
+
     /**
      * Gets the scanner.
      *
@@ -37,37 +61,22 @@ public class Ui {
     }
 
     /**
-     * Welcome.
-     */
-    public void welcome() {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Hello I'm Duke\nWhat can I do for you?");
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
      * Clean.
      */
-    public void clean() {
+    public String clean() {
         List<String> msgs = new ArrayList<>();
         msgs.add("Bye. Hope to see you again soon!");
-        showMessage(msgs);
-        sc.close();
+        return showMessage(msgs);
+
     }
 
     /**
      * Show loading error.
      */
-    public void showLoadingError() {
+    public String showLoadingError() {
         List<String> msgs = new ArrayList<>();
         msgs.add("Cannot start program");
-        showMessage(msgs);
+        return showMessage(msgs);
     }
 
     /**
@@ -75,12 +84,12 @@ public class Ui {
      *
      * @param msg the msg
      */
-    public void showMessage(List<String> msg) {
-        System.out.println("    ____________________________________________________________");
+    public String showMessage(List<String> msg) {
+        StringBuilder sb = new StringBuilder();
         for (String m : msg) {
-            System.out.println("     " + m);
+            sb.append("     " + m);
         }
-        System.out.println("    ____________________________________________________________");
+        return sb.toString();
     }
 
     /**
@@ -88,14 +97,15 @@ public class Ui {
      *
      * @param tl the tl
      */
-    public void showTasks(TaskList tl, boolean isFind) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("      Here are the " + (isFind ? "matching " : "") + "tasks in your list: \n");
+    public String showTasks(TaskList tl, boolean isFind) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      Here are the " + (isFind ? "matching " : "") + "tasks in your list: \n");
         for (int count = 0; count < tl.getSize(); count++) {
-            System.out.print("      " + (count + 1) + ". ");
-            System.out.println(tl.get(count));
+            sb.append("      " + (count + 1) + ". ");
+            sb.append(tl.get(count) + "\n");
         }
-        System.out.println("    ____________________________________________________________");
+
+        return sb.toString();
     }
 
     /**
@@ -103,21 +113,21 @@ public class Ui {
      *
      * @param cur the cur
      */
-    public void taskMarkDone(Task cur) {
-        List<String> msgs = new ArrayList<>();
-        msgs.add("Nice! I've marked this task as done: ");
-        msgs.add(cur.getStatusIcon() + " "
+    public String taskMarkDone(Task cur) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done: \n");
+        sb.append(cur.getStatusIcon() + " "
                 + cur.getDescription());
-        showMessage(msgs);
+        return sb.toString();
     }
 
     /**
      * Task number error.
      */
-    public void taskNumberError() {
-        List<String> msgs = new ArrayList<>();
-        msgs.add("Please enter a valid task number");
-        showMessage(msgs);
+    public String taskNumberError() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Please enter a valid task number \n");
+        return sb.toString();
     }
 
     /**
@@ -126,13 +136,12 @@ public class Ui {
      * @param cur  the cur
      * @param size the size
      */
-    public void taskRemoveSuccess(Task cur, int size) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("      Noted. I've removed this task: ");
-        System.out.println("      " + cur);
-        System.out.println("      Now you have " + size + " tasks in the list.  \n");
-        System.out.println("    ____________________________________________________________");
-
+    public String taskRemoveSuccess(Task cur, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      Noted. I've removed this task: \n");
+        sb.append("      " + cur + "\n");
+        sb.append("      Now you have " + size + " tasks in the list.  \n");
+        return sb.toString();
     }
 
     /**
@@ -141,13 +150,12 @@ public class Ui {
      * @param cur  the cur
      * @param size the size
      */
-    public void taskAddSuccess(Task cur, int size) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("      Got it. I've added this task:  ");
-        System.out.println("      " + cur);
-        System.out.println("      Now you have " + size + " tasks in the list.  \n");
-        System.out.println("    ____________________________________________________________");
-
+    public String taskAddSuccess(Task cur, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      Got it. I've added this task:  \n");
+        sb.append("      " + cur + "\n");
+        sb.append("      Now you have " + size + " tasks in the list.  \n");
+        return sb.toString();
     }
 
 }

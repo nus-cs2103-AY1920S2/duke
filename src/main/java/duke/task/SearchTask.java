@@ -5,6 +5,7 @@ public class SearchTask extends Task {
 
     public SearchTask(int key, boolean isDone, String description, String type) {
         super(isDone, description, type);
+        this.key = key;
     }
 
     public int getKey() {
