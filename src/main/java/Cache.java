@@ -1,6 +1,7 @@
 package main.java;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -21,8 +22,7 @@ public class Cache {
             while (s.hasNextLine()) {
                 String[] command = s.nextLine().split("/");
                 String taskType = command[0].trim();
-                boolean isDone;
-                isDone = command[1].trim().equals("\u2713");
+                boolean isDone = command[1].trim().equals("\u2713");
 
                 switch (taskType) {
                     case "deadline":
@@ -50,7 +50,7 @@ public class Cache {
                         break;
                 }
             }
-        } catch (FileNotFoundException e1) {
+        } catch (FileNotFoundException | ParseException e1) {
             System.out.println(e1.getMessage());
         }
 

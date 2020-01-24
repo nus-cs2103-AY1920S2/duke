@@ -1,1 +1,2 @@
-todo/✘/see doctor
+deadline /✘ /return/ 2019-02-02
+deadline /✘ /bye / 2019-09-09
