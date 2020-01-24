@@ -30,20 +30,23 @@ public class Duke {
             printList();
         } else {
             String type = string.split(" ")[0];
-            if (type.equals("done")) {
+            if (type.equals("done") || type.equals("delete")) {
                 int taskNo = Integer.parseInt(string.split(" ")[1]);
                 if (taskNo > tasks.size() || taskNo <= 0) {
                     throw new DukeException("☹ OOPS!! Not a valid number");
                 } else {
-                    tasks.get(taskNo - 1).markAsDone();
-                    doneMessage(tasks.get(taskNo - 1));
+                    if (type.equals("done")) {
+                        tasks.get(taskNo - 1).markAsDone();
+                        doneMessage(tasks.get(taskNo - 1));
+                    } else if (type.equals("delete")) {
+                        deleteMessage(tasks.get(taskNo - 1));
+                        tasks.remove(taskNo - 1);
+                    }
                 }
             } else {
                 // create new task -> add to tasks -> reply
                 Task task = createAndAddTask(type, string);
                 addMessage(task);
-
-
 
             }
         }
@@ -86,9 +89,17 @@ public class Duke {
 
     }
 
+    public static void deleteMessage(Task task) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Noted. I've removed this task:");
+        System.out.print("    ");
+        task.taskSummary();
+        System.out.println("    Now you have " + (Task.totalTasks - 1) +  " tasks in the list.");
+        System.out.println("    ____________________________________________________________");
+    }
+
     public static Task createAndAddTask(String type, String whole) throws DukeException {
         Task task;
-        System.out.println("[" + type + "], [" + whole + "]");
         if (whole.split(" ").length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
         }
