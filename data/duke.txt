@@ -1,6 +1,0 @@
-T|true|lalala
-D|true|return book|Sunday
-E|false|project meeting|Mon 2-4pm
-T|false|lalala
-D|false|return book|Sunday
-E|false|project meeting|Mon 2-4pm

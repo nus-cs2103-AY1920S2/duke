@@ -1,8 +1,9 @@
 public class NoDateTimeException extends DukeException {
+    private static final String errorLine = "   " + "**************************************************************";
+
     @Override
     public String toString() {
-        return "*************************************************************\n"
-            + "☹ OI. Provide date and time of the event! >:("
-            + "\n*************************************************************";
+        return errorLine + "\n    ☹ OI. Provide date and time of the event! >:(\n"
+                + errorLine;
     }
 }

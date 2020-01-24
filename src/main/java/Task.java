@@ -19,7 +19,7 @@ public class Task {
     }
 
     public String storeFormat() {
-        return completed + "|" + name;
+        return completed + "| |" + name;
     }
     
     public boolean compareDate(LocalDate inputDate) {

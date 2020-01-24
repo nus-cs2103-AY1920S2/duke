@@ -1,8 +1,8 @@
 public class UnknownCommandException extends DukeException {
+    private static final String errorLine = "   " + "**************************************************************";
     @Override
     public String toString() {
-        return "*************************************************************\n"
-                + "☹ OI. Can you give me a proper command... >:("
-                + "\n*************************************************************";
+        return errorLine + "\n    ☹ OI. Can you give me a proper command... >:(\n"
+                + errorLine;
     }
 }

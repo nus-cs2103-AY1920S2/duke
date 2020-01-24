@@ -15,7 +15,7 @@ public class Todo extends Task{
 
     @Override
     public String storeFormat() {
-        return "T|" + completed + "|" + name;
+        return "T| |" + completed + "| |" + name;
     }
 
     @Override

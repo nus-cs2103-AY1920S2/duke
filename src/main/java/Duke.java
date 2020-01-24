@@ -10,8 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Duke {
-    private static final String space = "   ";
-    private static final String line = "____________________________________________________________";
+    private static final String space = "    ";
+    private static final String line = "   " + "<------------------------------------------------------------>";
+    private static final String errorLine = "   " + "**************************************************************";
     private static final String home = System.getProperty("user.dir");
     private static final Path path = Paths.get(home, "..", "..", "..", "data", "duke.txt");
     public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -59,54 +60,66 @@ public class Duke {
                     reply = createNew(inputArr, tasks);
                 }
                 //printing replies
-                System.out.println(space + line);
+                System.out.println(line);
                 System.out.println(space + reply);
-                System.out.println(space + line);
+                System.out.println(line);
                 
             } catch (DukeException e){
                 System.err.println(e);
             } catch (IOException e){
                 System.err.println(e);
             } catch (DateTimeParseException e) {
-                System.err.println("*************************************************************\n" 
-                    + "☹ DATE FORMAT is yyyy/mm/dd!\n  TIME FORMAT is HHmm!"
-                    + "\n*************************************************************");
+                System.err.println(errorLine + "\n    ☹ DATE FORMAT is yyyy/mm/dd!\n" + space + "  TIME FORMAT is HHmm!\n" + errorLine);
             }
             // next input
             input = s.nextLine();
         }
-        System.out.println("\nYes. FINALLY. Hope never to see you again!");
+        goodBye();
+    }
+
+    private static void goodBye() {
+        System.out.println(line);
+        System.out.println(space + "Yes. FINALLY. Hope never to see you again!");
+        System.out.println(line);
     }
     
     private static void sayHi() {
-         String logo = "\n\n____________________¶¶¶¶¶¶¶¶¶¶¶ \n" + "_______________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n"
-                + "____________¶¶¶¶¶¶¶¶1111111111¶¶¶¶¶¶¶¶ \n" + "__________¶¶¶¶¶11111111111111111111¶¶¶¶¶¶ \n"
-                + "________¶¶¶¶¶1111111111111111111111111¶¶¶¶¶ \n" + "_______¶¶¶¶11111111111111111111111111111¶¶¶¶ \n"
-                + "_____¶¶¶¶1111¶¶¶1111111111111111111¶¶¶111¶¶¶¶ \n"
-                + "____¶¶¶¶11111¶¶¶1111111111111111111¶¶¶11111¶¶¶ \n"
-                + "___¶¶¶1111111¶¶¶1111111111111111111¶¶¶111111¶¶¶ \n"
-                + "__¶¶¶¶1111¶¶¶¶¶¶1111111111111111111¶¶¶¶¶¶1111¶¶¶ \n"
-                + "__¶¶¶111¶¶¶¶¶¶¶¶1111111111111111111¶¶¶¶¶¶¶¶111¶¶¶ \n"
-                + "_¶¶¶111¶¶¶¶___¶¶¶11111111111111111¶¶¶___¶¶¶¶11¶¶¶ \n"
-                + "_¶¶¶11¶¶¶____¶¶¶¶¶1111111111111111¶¶¶¶____¶¶¶11¶¶ \n"
-                + "_¶¶11¶¶¶_____¶¶¶¶¶¶11111111111111¶¶¶¶¶_____¶¶11¶¶¶ \n"
-                + "¶¶¶11¶¶¶_____¶¶¶¶¶¶¶¶11111111111¶¶¶¶¶¶_____¶¶¶1¶¶¶ \n"
-                + "¶¶¶11¶¶¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_____¶¶111¶¶ \n"
-                + "¶¶¶111¶¶¶____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____¶¶¶111¶¶ \n"
-                + "¶¶¶111¶¶¶¶___¶¶¶¶¶¶¶¶¶¶11111¶¶¶¶¶¶¶¶¶¶___¶¶¶111¶¶¶ \n"
-                + "¶¶¶1111¶¶¶¶___¶¶¶¶¶¶¶¶111111¶¶¶¶¶¶¶¶¶___¶¶¶¶111¶¶¶ \n"
-                + "_¶¶111111¶¶¶¶¶¶¶¶¶¶¶¶111111111¶¶¶¶¶¶¶¶¶¶¶¶11111¶¶¶ \n"
-                + "_¶¶¶1111111¶¶¶¶¶¶¶¶1111111111111¶¶¶¶¶¶¶¶1111111¶¶ \n"
-                + "_¶¶¶111111111111111111111111111111111111111111¶¶¶ \n"
-                + "__¶¶¶1111111111111111¶¶¶¶¶¶¶¶¶111111111111111¶¶¶ \n"
-                + "___¶¶¶11111111111111¶¶¶¶¶¶¶¶¶¶¶11111111111111¶¶¶ \n"
-                + "____¶¶¶11111111111¶¶¶¶1111111¶¶¶¶11111111111¶¶¶ \n"
-                + "____¶¶¶¶1111111111¶¶¶111111111¶¶¶111111111¶¶¶¶ \n"
-                + "______¶¶¶¶1111111111111111111111111111111¶¶¶¶ \n" + "_______¶¶¶¶1111111111111111111111111111¶¶¶¶ \n"
-                + "_________¶¶¶¶¶11111111111111111111111¶¶¶¶¶ \n" + "___________¶¶¶¶¶¶11111111111111111¶¶¶¶¶¶ \n"
-                + "_____________¶¶¶¶¶¶¶¶¶¶1111¶¶¶¶¶¶¶¶¶¶ \n" + "_________________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n";
-
-        System.out.println(logo + "Arghhhh... It's you again.\n");
+         String logo = "\n\n                    ¶¶¶¶¶¶¶¶¶¶¶ \n" 
+                + "               ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n"
+                + "            ¶¶¶¶¶¶¶¶1111111111¶¶¶¶¶¶¶¶ \n" 
+                + "          ¶¶¶¶¶11111111111111111111¶¶¶¶¶¶ \n"
+                + "        ¶¶¶¶¶1111111111111111111111111¶¶¶¶¶ \n" 
+                + "       ¶¶¶¶11111111111111111111111111111¶¶¶¶ \n"
+                + "     ¶¶¶¶1111¶¶¶1111111111111111111¶¶¶111¶¶¶¶ \n"
+                + "    ¶¶¶¶11111¶¶¶1111111111111111111¶¶¶11111¶¶¶ \n"
+                + "   ¶¶¶1111111¶¶¶1111111111111111111¶¶¶111111¶¶¶ \n"
+                + "  ¶¶¶¶1111¶¶¶¶¶¶1111111111111111111¶¶¶¶¶¶1111¶¶¶ \n"
+                + "  ¶¶¶111¶¶¶¶¶¶¶¶1111111111111111111¶¶¶¶¶¶¶¶111¶¶¶ \n"
+                + " ¶¶¶111¶¶¶¶   ¶¶¶11111111111111111¶¶¶   ¶¶¶¶11¶¶¶ \n"
+                + " ¶¶¶11¶¶¶    ¶¶¶¶¶1111111111111111¶¶¶¶    ¶¶¶11¶¶ \n"
+                + " ¶¶11¶¶¶     ¶¶¶¶¶¶11111111111111¶¶¶¶¶     ¶¶11¶¶¶ \n"
+                + "¶¶¶11¶¶¶     ¶¶¶¶¶¶¶¶11111111111¶¶¶¶¶¶     ¶¶¶1¶¶¶ \n"
+                + "¶¶¶11¶¶¶     ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶     ¶¶111¶¶ \n"
+                + "¶¶¶111¶¶¶    ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶    ¶¶¶111¶¶ \n"
+                + "¶¶¶111¶¶¶¶   ¶¶¶¶¶¶¶¶¶¶11111¶¶¶¶¶¶¶¶¶¶   ¶¶¶111¶¶¶ \n"
+                + "¶¶¶1111¶¶¶¶   ¶¶¶¶¶¶¶¶111111¶¶¶¶¶¶¶¶¶   ¶¶¶¶111¶¶¶ \n"
+                + " ¶¶111111¶¶¶¶¶¶¶¶¶¶¶¶111111111¶¶¶¶¶¶¶¶¶¶¶¶11111¶¶¶ \n"
+                + " ¶¶¶1111111¶¶¶¶¶¶¶¶1111111111111¶¶¶¶¶¶¶¶1111111¶¶ \n"
+                + " ¶¶¶111111111111111111111111111111111111111111¶¶¶ \n"
+                + "  ¶¶¶1111111111111111¶¶¶¶¶¶¶¶¶111111111111111¶¶¶ \n"
+                + "   ¶¶¶11111111111111¶¶¶¶¶¶¶¶¶¶¶11111111111111¶¶¶ \n"
+                + "    ¶¶¶11111111111¶¶¶¶1111111¶¶¶¶11111111111¶¶¶ \n"
+                + "    ¶¶¶¶1111111111¶¶¶111111111¶¶¶111111111¶¶¶¶ \n"
+                + "      ¶¶¶¶1111111111111111111111111111111¶¶¶¶ \n" 
+                + "       ¶¶¶¶1111111111111111111111111111¶¶¶¶ \n"
+                + "         ¶¶¶¶¶11111111111111111111111¶¶¶¶¶ \n" 
+                + "           ¶¶¶¶¶¶11111111111111111¶¶¶¶¶¶ \n"
+                + "             ¶¶¶¶¶¶¶¶¶¶1111¶¶¶¶¶¶¶¶¶¶ \n" 
+                + "                 ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n";
+        System.out.println(logo);
+        System.out.println(line);
+        System.out.println(space + "Arghhhh... It's you again.");
+        System.out.println(line);
     }
 
     private static List<Task> readFromSave() {
@@ -161,9 +174,9 @@ public class Duke {
             for (int i = 0; i < tasks.size(); i++) {
                 int numbering = i + 1;
                 reply += (numbering + ".");
-                reply += (tasks.get(i) + "\n    ");
+                reply += (tasks.get(i) + "\n" + space);
             }
-            reply += "\n    I told you save liao loh........";
+            reply += "\n" + space  + "I told you save liao loh........";
         } else {
             String dateS = arr[1];
             LocalDate date = LocalDate.parse(dateS, inputFormatter);
@@ -173,11 +186,11 @@ public class Duke {
                 if(currentTask instanceof Deadline || currentTask instanceof Event){
                     if(currentTask.compareDate(date)){
                         reply += (numbering++ + ".");
-                        reply += (currentTask + "\n    ");
+                        reply += (currentTask + "\n" + space );
                     }
                 } 
             }
-            reply += "\n    This are all the tasks with that date";
+            reply += ("\n" + space + "This are all the tasks with that date");
         }
         return reply;
     }

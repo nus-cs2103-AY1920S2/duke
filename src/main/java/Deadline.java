@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String storeFormat() {
-        return "D|" + completed + "|" + name + "|" + date;
+        return "D| |" + completed + "| |" + name + "| |" + date.format(inputFormatter);
     }
 
     @Override

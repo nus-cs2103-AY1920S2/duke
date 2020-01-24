@@ -1,6 +1,6 @@
 todo lalala
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2013/12/01
+event project meeting /at 2013/12/01 1412
 done 1
 list
 bye

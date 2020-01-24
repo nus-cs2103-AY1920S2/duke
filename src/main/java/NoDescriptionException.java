@@ -1,9 +1,9 @@
 public class NoDescriptionException extends DukeException {
-    @Override
-    public String toString() { 
-        return "*************************************************************\n"
-                + "☹ OI. Provide the description of the task! >:("
-                + "\n*************************************************************";
+    private static final String errorLine = "   " + "**************************************************************";
 
+    @Override
+    public String toString() {
+        return errorLine + "\n    ☹ OI. Provide the description of the task! >:(\n"
+                + errorLine;
     }
 }
