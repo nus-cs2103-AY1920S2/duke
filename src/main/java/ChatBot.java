@@ -1,6 +1,8 @@
+import java.io.*;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File.*;
 
 public class ChatBot {
    // class for the chat-bot for the Duke Project
@@ -13,8 +15,12 @@ public class ChatBot {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
 
-    private ArrayList<Task> tasks = new ArrayList<>(); // store the list of tasks from the user
+    private ArrayList<Task> tasks; // store the list of tasks from the user
+    private String fileLocation = "./Data/Tasks.txt"; //hard-coded relative file location of stored tasks
+    private Storage storage = new Storage();
 
+    // constructor for chat-bot to initialise the file that was saved, if does not exist, then create new one
+    
     /**
      * Function to greet user
      */
@@ -204,10 +210,13 @@ public class ChatBot {
         String inputCommand;
         boolean continueRunning = true;
         this.greetUser();
+        this.tasks = this.storage.getTaskFromStorage();
         while (sc.hasNextLine()) {
             inputCommand = sc.nextLine();
             continueRunning = respondToUser(inputCommand);
             if (!continueRunning) {
+                // update file with updated tasklist
+                storage.writeToFile(this.tasks);
                 break;
             }
         }
