@@ -25,6 +25,7 @@ public class Duke {
                     tasks.get(done - 1).setDone(true);
                     System.out.println("Nice! I've marked this task as done: \n" +
                             "  " + tasks.get(done - 1));
+                    storage.writeListIntoFile(tasks);
                 } catch (NumberFormatException e) {
                     throw new BadDescriptionException("Non-Integer");
                 }
@@ -37,6 +38,7 @@ public class Duke {
                 System.out.println("I've added this task: \n" +
                         "  " + taskToDo + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                storage.writeListIntoFile(tasks);
                 break;
             case EVENT:
                 String event = sc.nextLine();
@@ -48,6 +50,7 @@ public class Duke {
                 System.out.println("I've added this task: \n" +
                         "  " + taskEvent + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                storage.writeListIntoFile(tasks);
                 break;
             case DEADLINE:
                 String deadline = sc.nextLine();
@@ -59,6 +62,7 @@ public class Duke {
                 System.out.println("I've added this task: \n" +
                         "  " + taskDLine + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                storage.writeListIntoFile(tasks);
                 break;
             case DELETE:
                 try {
@@ -72,6 +76,7 @@ public class Duke {
                     System.out.println("Okay! I have deleted this task:\n" +
                             "  " + deletedTask + "\nNow you have " +
                             tasks.size() + " tasks in the list.");
+                    storage.writeListIntoFile(tasks);
                 } catch (NumberFormatException e) {
                     throw new BadDescriptionException("Non-Integer");
                 }
@@ -119,7 +124,6 @@ public class Duke {
                 }
             }
         }
-        storage.writeListIntoFile(tasks);
         System.out.println(lineBreak);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lineBreak);
