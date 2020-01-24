@@ -93,6 +93,6 @@ delete 1
 
 delete 4
     ____________________________________________________________
-     Please choose an index that is between 1 and 2 (inclusive)
+     WARNING!! Please choose an index that is between 1 and 2 (inclusive)
     ____________________________________________________________
 
