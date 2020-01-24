@@ -27,6 +27,7 @@ public class Deadline extends Task {
      * @return the deadline
      */
     public static Deadline parse(String taskString) {
+        assert(!taskString.isEmpty());
         String[] parts = taskString.split("\\|");
         String desc = parts[2];
         Deadline t = new Deadline(desc, "");

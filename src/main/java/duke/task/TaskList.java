@@ -84,6 +84,7 @@ public class TaskList {
      * @throws DukeException the duke exception
      */
     public Task addTask(String[] current, Storage storage) throws DukeException {
+        assert(storage != null);
         String[] words = Arrays.stream(current).skip(1).toArray(String[]::new);
         String command = current[0];
 
@@ -143,12 +144,15 @@ public class TaskList {
             Task t = new Todo(String.join(" ", words));
             tasks.add(getSize(), t);
 
+        } else {
+            assert(Arrays.stream(Operation.values()).noneMatch(o -> o.name().equals(command)));
         }
 
         StringBuilder sb = new StringBuilder();
-        for (Task t : tasks) {
-            sb.append(t.print() + "\n");
-        }
+        tasks.forEach(t -> sb.append(t.print() + "\n"));
+
+        assert (storage != null);
+        assert(sb.toString().split("\\|").length > 1);
         storage.writeToFile(sb.toString());
 
         return tasks.get(getSize() - 1);
@@ -167,12 +171,19 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
 
         if (tasks.size() > 0) {
-            for (Task t : tasks) {
-                sb.append(t.print() + "\n");
-            }
+            tasks.forEach(t -> sb.append(t.print() + "\n"));
 
         }
         storage.writeToFile(sb.toString());
         return cur;
     }
+
+    //TODO add multiple tasks
+    //e.g event borrow book /at 6pm, deadline return book /by 6pm
+
+    //TODO delete multiple tasks
+    //e.g. delete 1, 2
+
+    //TODO file multiple tasks
+    //e.g. todo/event borrow book
 }

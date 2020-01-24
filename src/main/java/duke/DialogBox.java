@@ -23,9 +23,9 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img, boolean isSimpleDialogBox) {
         String resourceName;
-        if (!isSimpleDialogBox){
+        if (!isSimpleDialogBox) {
             resourceName = "/view/DialogBox.fxml";
-        } else{
+        } else {
             resourceName = "/view/SimpleDialogBox.fxml";
         }
         try {

@@ -23,7 +23,7 @@ import java.util.Arrays;
 /**
  * The Class Storage.
  */
-public class Storage {
+public class Storage implements CheckTask {
     public String filePath;
 
     /**
@@ -38,9 +38,9 @@ public class Storage {
     /**
      * Write to file.
      *
-     * @param mycontent the mycontent
+     * @param myContent
      */
-    public void writeToFile(String mycontent) {
+    public void writeToFile(String myContent) {
         BufferedWriter writer = null;
         try {
             File file = new File(filePath);
@@ -50,7 +50,7 @@ public class Storage {
             }
             FileWriter fw = new FileWriter(file);
             writer = new BufferedWriter(fw);
-            writer.write(mycontent);
+            writer.write(myContent);
             writer.flush();
 
         } catch (IOException ioe) {
@@ -118,5 +118,10 @@ public class Storage {
             pos++;
         }
         return temp;
+    }
+
+    @Override
+    public boolean test(String task) {
+        return task.equals("T") || task.equals("E") || task.equals("D");
     }
 }

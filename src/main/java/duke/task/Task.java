@@ -74,6 +74,7 @@ public abstract class Task implements TaskPrintable, Parseable {
      * @param dt the new datetime
      */
     protected void setDatetime(String dt) {
+        assert(!dt.isEmpty());
         dt = dt.replaceAll("\\s", "");
         try {
             java.time.format.DateTimeFormatter formatter
