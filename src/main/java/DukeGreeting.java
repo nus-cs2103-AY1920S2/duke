@@ -1,5 +1,7 @@
 package main.java;
 
+
+/**Class to customize greetings/user outputs */
 public class DukeGreeting {
     
 public DukeGreeting(){}
