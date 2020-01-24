@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -59,7 +60,6 @@ public class Duke {
                     for(int i = 0; i < tasks.size(); i++){
                         int numbering = i + 1;
                         reply += (numbering + ".");
-
                         reply += (tasks.get(i) + "\n    ");
                     }
                     reply += "\n    I told you save liao loh........";
@@ -92,6 +92,10 @@ public class Duke {
                 
             } catch (DukeException e){
                 System.err.println(e);
+            } catch (DateTimeParseException e) {
+                System.err.println("*************************************************************\n" 
+                    + "☹ DATE FORMAT is yyyy/mm/dd!\n  TIME FORMAT is HHmm!"
+                    + "\n*************************************************************");
             }
             // next input
             input = s.nextLine();
