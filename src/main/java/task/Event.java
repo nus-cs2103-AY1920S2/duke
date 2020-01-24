@@ -7,13 +7,13 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends TimeTask {
   public Event(String description) throws DukeException {
-    super("[E]", description);
-    this.time = Parser.getTime(description, "/at");
-    this.date = Parser.getDate(description, "/at");
+    super(Constant.EVENT.getType(), description);
+    this.time = Parser.getTime(description, Constant.EVENT.getTimeDelimiter());
+    this.date = Parser.getDate(description, Constant.EVENT.getTimeDelimiter());
   }
 
   public Event(String[] fromMemory) {
-    super("[E]", fromMemory);
+    super(Constant.EVENT.getType(), fromMemory);
   }
 
   @Override

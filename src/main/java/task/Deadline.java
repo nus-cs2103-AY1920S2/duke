@@ -6,14 +6,15 @@ import parser.Parser;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends TimeTask {
+
   public Deadline(String description) throws DukeException {
-    super("[D]", description);
-    this.time = Parser.getTime(description, "/by");
-    this.date = Parser.getDate(description, "/by");
+    super(Constant.DEADLINE.getType(), description);
+    this.time = Parser.getTime(description, Constant.DEADLINE.getTimeDelimiter());
+    this.date = Parser.getDate(description, Constant.DEADLINE.getTimeDelimiter());
   }
 
   public Deadline(String[] fromMemory) {
-    super("[D]", fromMemory);
+    super(Constant.DEADLINE.getType(), fromMemory);
   }
 
   @Override

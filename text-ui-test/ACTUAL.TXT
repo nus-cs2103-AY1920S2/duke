@@ -28,7 +28,7 @@ list
 deadline return book /by 19-12-2019 4pm
     ____________________________________________________________
      Got it. I've added this task: 
-       [D][N] return book (by: 19 Dec 2019 16:00)
+       [D][N] return book (at: 19 Dec 2019 16:00)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
@@ -43,7 +43,7 @@ list
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][N] borrow book
-     2.[D][N] return book (by: 19 Dec 2019 16:00)
+     2.[D][N] return book (at: 19 Dec 2019 16:00)
      3.[E][N] project meeting (at: 02 Nov 2020 23:59)
     ____________________________________________________________
 
@@ -57,7 +57,7 @@ list
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][N] borrow book
-     2.[D][N] return book (by: 19 Dec 2019 16:00)
+     2.[D][N] return book (at: 19 Dec 2019 16:00)
      3.[E][Y] project meeting (at: 02 Nov 2020 23:59)
     ____________________________________________________________
 

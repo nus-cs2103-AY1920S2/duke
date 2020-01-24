@@ -2,10 +2,10 @@ package task;
 
 public class Todo extends Task {
   public Todo(String description) {
-    super("[T]", description);
+    super(Constant.TODO.getType(), description);
   }
 
   public Todo(String[] fromMemory) {
-    super("[T]", fromMemory[1], fromMemory[2]);
+    super(Constant.TODO.getType(), fromMemory[1], fromMemory[2]);
   }
 }
