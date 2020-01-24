@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class DukeWorker {
@@ -19,6 +21,9 @@ public class DukeWorker {
             }
             return list;
         } else if (token[0].equals("done")) {
+            if (token.length < 2) {
+                return "Please specify which task to mark as done";
+            }
             String[] indices = token[1].split(" ");
             if (indices.length < 1 || isNumeric(indices[0]) != true) {
                 return "Please specify which task to mark as done";
@@ -28,22 +33,58 @@ public class DukeWorker {
                 return "No such task number";
             }
             task.get(taskId).markAsDone();
-            String response = "Nice! Task(s) marked as done(unknown task number ignored):\n " + task.get(taskId).getDoneString() + " " +
-                    task.get(taskId).getTaskName();
+            String response = "Nice! Task(s) marked as done(unknown task number ignored):\n " + task.get(taskId);
 
             for (int i = 1; i < indices.length; i++) {
                 if (isNumeric(indices[i]) != true) {
-                    break;
+                    continue;
                 } else {
                     taskId = Integer.parseInt(indices[i]) - 1;
                     if (taskId >= task.size() || taskId < 0) {
-                        break;
+                        continue;
                     }
                     task.get(taskId).markAsDone();
-                    response = response + "\n " + task.get(taskId).getDoneString() + " " +
-                            task.get(taskId).getTaskName();
+                    response = response + "\n " + task.get(taskId);
                 }
             }
+            return response;
+        } else if (token[0].equals("delete")) {
+            if (token.length < 2) {
+                return "Please specify which task to delete";
+            }
+            String[] indices = token[1].split(" ");
+            if (!isNumeric(indices[0])) {
+                return "Please specify which task to delete";
+            }
+            List<Integer> toBeDeleted = new ArrayList<>();
+            for (int i = 0; i < indices.length; i++) {
+                if (isNumeric(indices[i]) != true) {
+                    continue;
+                } else {
+                    toBeDeleted.add(Integer.parseInt(indices[i]) - 1);
+                }
+            }
+            Collections.sort(toBeDeleted);
+            if (toBeDeleted.size() < 1) {
+                return "Please specify which task to delete";
+            }
+            if (toBeDeleted.get(0) >= task.size() || toBeDeleted.get(toBeDeleted.size() - 1) < 0) {
+                return "No such task number";
+            }
+            String response = "";
+            for (int i = toBeDeleted.size() - 1; toBeDeleted.size() > 0 && i >= 0; i--) {
+                int taskId = toBeDeleted.get(i);
+                if (taskId >= task.size() || taskId < 0) {
+                    continue;
+                }
+                if (response.equals("")) {
+                    response = task.get(taskId) + response;
+                } else {
+                    response = task.get(taskId) + "\n " + response;
+                }
+                task.remove(taskId);
+            }
+            response = "Nice! Deleted tasks(unknown task number ignored):\n " + response;
             return response;
         } else if (token[0].equals("todo") || token[0].equals("deadline") || token[0].equals("event")) {
            if (token.length < 2) {
