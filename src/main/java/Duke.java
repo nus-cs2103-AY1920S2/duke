@@ -1,33 +1,17 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
+enum Command {
+    EXIT_COMMAND,
+    LIST_COMMAND,
+    DONE_COMMAND,
+    DELETE_COMMAND,
+    TODO_COMMAND,
+    DEADLINE_COMMAND,
+    EVENT_COMMAND
+}
+
 public class Duke {
-
-    static final String ExitCommand = "bye";
-    static final String ListCommand = "list";
-    static final String DoneCommand = "done";
-    static final String TodoCommand = "todo";
-    static final String DeadlineCommand = "deadline";
-    static final String EventCommand = "event";
-    static final String DeleteCommand = "delete";
-
-    static final String[] validCommands = {
-            ExitCommand,
-            ListCommand,
-            DoneCommand,
-            TodoCommand,
-            DeadlineCommand,
-            EventCommand,
-            DeleteCommand
-    };
-
-    public static void verifyDukeCommand(String command) throws InvalidDukeCommandException {
-        if (!Arrays.asList(validCommands).contains(command)) {
-            throw new InvalidDukeCommandException();
-        }
-    }
-
     public static void addTaskReport(Task task, int numOfTasks) {
         System.out.println("\t Got it. I've added this task: \n" +
                 "\t\t" + task + "\n" +
@@ -59,126 +43,134 @@ public class Duke {
             System.out.println("\t____________________________________________________________");
             String line = scanner.nextLine().trim();
             String[] separateLine = line.split(" ", 2);
-            String command = separateLine[0];
+            String commandStr = separateLine[0];
             String parameters = separateLine.length > 1 ? separateLine[1] : "";
-
-            try {
-                verifyDukeCommand(command);
-            } catch (InvalidDukeCommandException invalidDukeCommandException) {
-                System.out.println("\t " + invalidDukeCommandException);
-                System.out.println("\t____________________________________________________________");
-                continue;
-            }
 
             Task task;
             String[] taskInfo;
-            switch (command) {
-                case ExitCommand:
-                    System.out.println("\t Bye. Hope to see you again soon!");
-                    System.out.println("\t____________________________________________________________");
-                    break main;
-                case ListCommand:
-                    for (int i = 1; i <= tasks.size(); i++) {
-                        System.out.println("\t " + i + ". " + tasks.get(i - 1));
-                    }
-                    break;
-                case DoneCommand:
-                    try {
-                        String[] splited = line.split(" ");
-                        if (splited.length < 2) {
+            String[] splitted;
+            int taskId;
+
+            try {
+
+                Command command;
+
+                switch (commandStr) {
+                    case "bye":
+                        command = Command.EXIT_COMMAND;
+                        break;
+                    case "list":
+                        command = Command.LIST_COMMAND;
+                        break;
+                    case "done":
+                        command = Command.DONE_COMMAND;
+                        break;
+                    case "delete":
+                        command = Command.DELETE_COMMAND;
+                        break;
+                    case "todo":
+                        command = Command.TODO_COMMAND;
+                        break;
+                    case "deadline":
+                        command = Command.DEADLINE_COMMAND;
+                        break;
+                    case "event":
+                        command = Command.EVENT_COMMAND;
+                        break;
+                    default:
+                        throw new InvalidDukeCommandException();
+                }
+                switch (command) {
+                    case EXIT_COMMAND:
+                        System.out.println("\t Bye. Hope to see you again soon!");
+                        System.out.println("\t____________________________________________________________");
+                        break main;
+                    case LIST_COMMAND:
+                        for (int i = 1; i <= tasks.size(); i++) {
+                            System.out.println("\t " + i + ". " + tasks.get(i - 1));
+                        }
+                        break;
+                    case DONE_COMMAND:
+                        splitted = line.split(" ");
+                        if (splitted.length < 2) {
                             throw new InvalidDukeFormatException("The index of a done cannot be empty.");
                         }
-                        int taskId = Integer.parseInt(splited[1]);
+                        taskId = Integer.parseInt(splitted[1]);
                         if (taskId <= 0 || taskId > tasks.size()) {
                             throw new InvalidDukeFormatException("Invalid task index provided!");
                         }
 
                         task = tasks.get(taskId - 1);
-                    } catch (InvalidDukeFormatException | ArrayIndexOutOfBoundsException e) {
-                        System.out.println("\t " + e);
-                        System.out.println("\t____________________________________________________________");
-                        continue;
-                    }
 
-                    task.markAsDone();
-                    System.out.println("\t Nice! I've marked this task as done: ");
-                    System.out.println("\t\t" + task);
-                    break;
-                case DeleteCommand:
-                    try {
-                        String[] splited = line.split(" ");
-                        if (splited.length < 2) {
+
+                        task.markAsDone();
+                        System.out.println("\t Nice! I've marked this task as done: ");
+                        System.out.println("\t\t" + task);
+                        break;
+                    case DELETE_COMMAND: {
+                        splitted = line.split(" ");
+                        if (splitted.length < 2) {
                             throw new InvalidDukeFormatException("The index of a delete cannot be empty.");
                         }
-                        int taskId = Integer.parseInt(splited[1]);
+                        taskId = Integer.parseInt(splitted[1]);
                         if (taskId <= 0 || taskId > tasks.size()) {
                             throw new InvalidDukeFormatException("Invalid task index provided!");
                         }
-
-                        task = tasks.remove(taskId - 1);
-                    } catch (InvalidDukeFormatException | ArrayIndexOutOfBoundsException e) {
-                        System.out.println("\t " + e);
-                        System.out.println("\t____________________________________________________________");
-                        continue;
                     }
+
+                    task = tasks.remove(taskId - 1);
+
                     System.out.println("\t Noted. I've removed this task: ");
                     System.out.println("\t\t" + task);
                     break;
 
-                case TodoCommand:
-                    try {
+                    case TODO_COMMAND:
+
                         task = new TodoTask(parameters);
-                    } catch (InvalidDukeFormatException e) {
-                        System.out.println("\t " + e);
-                        System.out.println("\t____________________________________________________________");
-                        continue;
-                    }
-                    tasks.add(task);
-                    addTaskReport(task, tasks.size());
-                    break;
-                case DeadlineCommand:
-                    taskInfo = parameters.split("/by");
-                    desc = "";
-                    timestamp = "";
-                    if (taskInfo.length > 0) {
-                        desc = taskInfo[0].trim();
-                    }
-                    if (taskInfo.length > 1) {
-                        timestamp = taskInfo[1].trim();
-                    }
-                    try {
+
+                        tasks.add(task);
+                        addTaskReport(task, tasks.size());
+                        break;
+                    case DEADLINE_COMMAND:
+                        taskInfo = parameters.split("/by");
+                        desc = "";
+                        timestamp = "";
+                        if (taskInfo.length > 0) {
+                            desc = taskInfo[0].trim();
+                        }
+                        if (taskInfo.length > 1) {
+                            timestamp = taskInfo[1].trim();
+                        }
+
                         task = new DeadlineTask(desc, timestamp);
-                    } catch (InvalidDukeFormatException e) {
-                        System.out.println("\t " + e);
-                        System.out.println("\t____________________________________________________________");
-                        continue;
-                    }
-                    tasks.add(task);
-                    addTaskReport(task, tasks.size());
-                    break;
 
-                case EventCommand:
-                    taskInfo = parameters.split("/at");
+                        tasks.add(task);
+                        addTaskReport(task, tasks.size());
+                        break;
 
-                    if (taskInfo.length > 0) {
-                        desc = taskInfo[0].trim();
-                    }
-                    if (taskInfo.length > 1) {
-                        timestamp = taskInfo[1].trim();
-                    }
-                    try {
+                    case EVENT_COMMAND:
+                        taskInfo = parameters.split("/at");
+
+                        if (taskInfo.length > 0) {
+                            desc = taskInfo[0].trim();
+                        }
+                        if (taskInfo.length > 1) {
+                            timestamp = taskInfo[1].trim();
+                        }
+
                         task = new EventTask(desc, timestamp);
-                    } catch (InvalidDukeFormatException e) {
-                        System.out.println("\t " + e);
-                        System.out.println("\t____________________________________________________________");
-                        continue;
-                    }
-                    tasks.add(task);
-                    addTaskReport(task, tasks.size());
-                    break;
-            }
 
-            System.out.println("\t____________________________________________________________");
+                        tasks.add(task);
+                        addTaskReport(task, tasks.size());
+                        break;
+                }
+
+                System.out.println("\t____________________________________________________________");
+            } catch (DukeException e) {
+                System.out.println("\t " + e);
+                System.out.println("\t____________________________________________________________");
+            }
         }
+
     }
 }
