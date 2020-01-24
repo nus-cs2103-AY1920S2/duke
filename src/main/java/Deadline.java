@@ -6,6 +6,7 @@ public class Deadline extends Task{
     protected String by;
     protected LocalDate date;
     protected LocalTime time;
+    public String taskType = "D";
 
     public Deadline(String description, String by) {
         super(description);
@@ -37,6 +38,11 @@ public class Deadline extends Task{
     public String timeToString() {
         setDateTime();
         return this.time.format(DateTimeFormatter.ofPattern("h:mm a"));
+    }
+
+    @Override
+    public String getTaskType() {
+        return taskType;
     }
 
     @Override

@@ -1,3 +1,0 @@
-T | 1 | sleep 
-D | 1 | cs3243 tutorial | Jan 31 2020
-E | 0 | dinner | Feb 5 2020 7:00 PM

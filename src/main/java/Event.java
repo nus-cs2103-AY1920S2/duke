@@ -6,6 +6,7 @@ public class Event extends Task {
     protected String at;
     protected LocalDate date;
     protected LocalTime time;
+    public String taskType = "E";
 
     public Event(String description, String at) {
         super(description);
@@ -37,6 +38,11 @@ public class Event extends Task {
     public String timeToString() {
         setDateTime();
         return this.time.format(DateTimeFormatter.ofPattern("h:mm a"));
+    }
+
+    @Override
+    public String getTaskType() {
+        return taskType;
     }
 
     @Override
