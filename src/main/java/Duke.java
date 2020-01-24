@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,7 +90,7 @@ public class Duke {
                 task = task.concat(" " + inputs[i]);
             }
 
-            tasks.add(new ToDo(task, "T"));
+            tasks.add(new ToDo(task, 'T'));
         } else if (inputs[0].equals("event") || inputs[0].equals("deadline")) {
             if (inputs.length == 1) {
                 throw new DukeException("\u2639" + " OOPS!!! The description of a "
@@ -103,24 +105,18 @@ public class Duke {
                 j++;
             }
 
-            String timing = "";
-            j++;
-
-            while (j < inputs.length) {
-                timing = timing.concat(" " + inputs[j]);
-                j++;
-            }
-
-            if (timing.equals("")) {
+            if (j == inputs.length || (j + 1) == inputs.length) {
                 throw new DukeException("\u2639" + " OOPS!!! This task requires a timing\n");
             }
 
+            LocalDate date = LocalDate.parse(inputs[++j]);
+
+            LocalTime timing = LocalTime.parse(inputs[++j]);
+
             if (inputs[0].equals("event")) {
-                timing = "(at:" + timing + ")";
-                tasks.add(new Event(task, "E", timing));
+                tasks.add(new Event(task, 'E', date, timing));
             } else {
-                timing = "(by:" + timing + ")";
-                tasks.add(new Deadline(task, "D", timing));
+                tasks.add(new Deadline(task, 'D', date, timing));
             }
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");

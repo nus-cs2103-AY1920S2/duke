@@ -3,7 +3,7 @@
  */
 public class Task {
     private String description;
-    private String taskType;
+    private char taskType;
     private boolean isDone;
 
     /**
@@ -12,7 +12,7 @@ public class Task {
      * @param description Task description.
      * @param taskType Type of task: deadline, event, to-do.
      */
-    public Task(String description, String taskType) {
+    public Task(String description, char taskType) {
         this.description = description;
         this.taskType = taskType;
         this.isDone = false;
@@ -45,7 +45,7 @@ public class Task {
      *
      * @return Type of task.
      */
-    public String getTaskType() {
+    public char getTaskType() {
         return taskType;
     }
 

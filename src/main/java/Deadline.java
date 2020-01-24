@@ -1,28 +1,45 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * This type of tasks need to be done by a certain deadline.
  */
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDate date;
+    private LocalTime timing;
 
     /**
      * Class constructor.
      *
      * @param description Task description.
      * @param taskType Type of task: Deadline.
-     * @param deadline Deadline of task.
+     * @param date Date of the deadline of task.
+     * @param timing Timing of the deadline of task.
      */
-    public Deadline(String description, String taskType, String deadline) {
+    public Deadline(String description, char taskType, LocalDate date, LocalTime timing) {
         super(description, taskType);
-        this.deadline = deadline;
+        this.date = date;
+        this.timing = timing;
     }
 
     /**
-     * Returns the deadline of the task.
+     * Returns the date of the deadline of the task in the correct format.
      *
-     * @return deadline of task.
+     * @return Date of deadline of task.
      */
-    public String getDeadline() {
-        return deadline;
+    public String getDate() {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    /**
+     * Returns the timing of the deadline of the task in the correct format.
+     *
+     * @return Timing of deadline of task.
+     */
+    public String getTiming() {
+        return timing.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     /**
@@ -32,6 +49,6 @@ public class Deadline extends Task {
      */
     public String obtainTaskInfo() {
         String taskInfo = super.obtainTaskInfo();
-        return taskInfo + " " + this.getDeadline();
+        return taskInfo + " " + this.getDate() + " " + this.getTiming();
     }
 }

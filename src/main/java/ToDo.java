@@ -8,7 +8,7 @@ public class ToDo extends Task {
      * @param description Task description.
      * @param taskType type of task: to-do.
      */
-    public ToDo(String description, String taskType) {
+    public ToDo(String description, char taskType) {
         super(description, taskType);
     }
 }
