@@ -2,8 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
+    public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     public static void main(String[] args) throws DukeException {
         //initialise scanner
         Scanner s = new Scanner(System.in);
@@ -56,13 +59,7 @@ public class Duke {
 
             try{
                 if (inputArr[0].equals("list")){
-                    //loop through to the tasks
-                    for(int i = 0; i < tasks.size(); i++){
-                        int numbering = i + 1;
-                        reply += (numbering + ".");
-                        reply += (tasks.get(i) + "\n    ");
-                    }
-                    reply += "\n    I told you save liao loh........";
+                    reply = list(inputArr, tasks);
                 } else if (inputArr[0].equals("done")){
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
                     tasks.set(taskNo, tasks.get(taskNo).complete());
@@ -101,6 +98,34 @@ public class Duke {
             input = s.nextLine();
         }
         System.out.println("\nYes. FINALLY. Hope never to see you again!");
+    }
+
+    private static String list(String[] arr, List<Task> tasks) throws DateTimeParseException{ 
+        String reply = "";
+        
+        if (arr.length == 1) {
+            for (int i = 0; i < tasks.size(); i++) {
+                int numbering = i + 1;
+                reply += (numbering + ".");
+                reply += (tasks.get(i) + "\n    ");
+            }
+            reply += "\n    I told you save liao loh........";
+        } else {
+            String dateS = arr[1];
+            LocalDate date = LocalDate.parse(dateS, inputFormatter);
+            int numbering = 1;
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currentTask = tasks.get(i);
+                if(currentTask instanceof Deadline || currentTask instanceof Event){
+                    if(currentTask.compareDate(date)){
+                        reply += (numbering++ + ".");
+                        reply += (currentTask + "\n    ");
+                    }
+                } 
+            }
+            reply += "\n    This are all the tasks with that date";
+        }
+        return reply;
     }
 
     private static String createNew(String[] inputArr, List<Task> tasks) throws DukeException {

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     public final boolean completed;
     public final String name;
@@ -14,6 +16,10 @@ public class Task {
 
     public Task complete(){
         return new Task(this.name, true);
+    }
+
+    public boolean compareDate(LocalDate inputDate) {
+        return false;
     }
 
     @Override

@@ -22,6 +22,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean compareDate(LocalDate inputDate) {
+        return this.date.equals(inputDate);
+    }
+
+    @Override
     public Deadline complete() {
         return new Deadline(this.name, true, this.date);
     }

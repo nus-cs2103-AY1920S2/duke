@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
@@ -24,6 +25,11 @@ public class Event extends Task {
     @Override
     public Event complete() {
         return new Event(this.name, true, this.dateTime);
+    }
+
+    @Override
+    public boolean compareDate(LocalDate inputDate) {
+        return this.dateTime.toLocalDate().equals(inputDate);
     }
 
     @Override
