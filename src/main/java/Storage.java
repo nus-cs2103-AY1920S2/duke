@@ -64,15 +64,6 @@ public class Storage {
     }
 
     public Storage (String filepath) {
-        //try {
             f = new File(filepath);
-            /*if (!f.exists()) {
-                f.createNewFile();
-                System.out.println("new file");
-            } else System.out.println("file exists");
-            //fw = new FileWriter(f);
-        } catch (IOException e) {
-            System.err.println("File IO Exception");
-        }*/
     }
 }
