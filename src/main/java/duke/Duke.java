@@ -8,15 +8,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.nio.file.Paths;
-import java.nio.file.Path;
 
 public class Duke {
     private Scanner sc;
-    private ArrayList<Task> tasks;
+    private TaskList taskList;
     public static final String separator =
             "____________________________________________________________";
-    public static final Path storagePath = Paths.get("storage", "file.txt");
-    private static Storage taskStorage = new Storage(Duke.storagePath);
+    private static Storage storage = new Storage(Paths.get("storage", "file.txt"));
 
     private final int indent1 = 4;
     private final int indent2 = 5;
@@ -24,7 +22,7 @@ public class Duke {
 
     public Duke() {
         this.sc = new Scanner(System.in);
-        this.tasks = Duke.taskStorage.getTasksFromStorage();
+        this.taskList = new TaskList(Duke.storage.getTasksFromStorage());
     }
 
     public static void main(String[] args) {
@@ -39,10 +37,6 @@ public class Duke {
 
     public static void out(String in, int indent) {
         System.out.println(" ".repeat(indent) + in);
-    }
-
-    private int taskSize() {
-        return this.tasks.size();
     }
 
     public void start() {
@@ -67,11 +61,10 @@ public class Duke {
     private void dispatch(String input) throws DukeException {
         switch (input.trim()) {
             case "list":
-                int tasksLength = taskSize();
+                String[] output = this.taskList.allTasks();
                 Duke.out("Here are the tasks in your list:", indent2);
-                for (int i = 0; i < tasksLength; i++) {
-                    Duke.out(String.format("%d.%s", i + 1, this.tasks.get(i)), indent2);
-                }
+                for (String s : output)
+                    Duke.out(s, indent2);
                 return;
             case "bye":
                 Duke.out("Bye. Hope to see you again soon!", indent2);
@@ -79,38 +72,36 @@ public class Duke {
             default:
                 // as long as done/delete inside
                 if (Parser.isDoneDelete(input)) {
-                    if (this.tasks.isEmpty()) {
+                    if (this.taskList.isEmpty()) {
                         throw new DukeException("Task list is empty!");
                     }
+                    // Shift to parser to check for length
                     String[] splitInput = input.split(" ");
                     int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
-                    if (taskIndex >= taskSize()) {
+                    if (taskIndex >= this.taskList.size()) {
                         throw new DukeException(String.format(
                                 "Please choose an index that is between 1 and %d (inclusive)",
-                                taskSize()));
+                                this.taskList.size()));
                     }
                     if (input.contains("done")) {
-                        Task currTask = this.tasks.get(taskIndex);
-                        currTask.setDone();
+                        this.taskList.markDone(taskIndex);
                         Duke.out("Nice! I've marked this task as done:", indent2);
-                        Duke.out(currTask.toString(), indent3);
+                        Duke.out(this.taskList.getTask(taskIndex), indent3);
                     } else {
-                        Task removedTask = this.tasks.remove(taskIndex);
+                        Task removedTask = this.taskList.popTask(taskIndex);
                         Duke.out("Noted. I've removed this task:", indent2);
                         Duke.out(removedTask.toString(), indent3);
-                        Duke.out(String.format("Now you have %d tasks in the list.", taskSize()),
-                                indent2);
+                        Duke.out(String.format("Now you have %d tasks in the list.",
+                                this.taskList.size()), indent2);
                     }
                 } else {
-                    Task newTask = Task.newTask(input);
-                    this.tasks.add(newTask);
+                    Task newTask = this.taskList.addTask(input);
                     Duke.out("Got it. I've added this task: ", indent2);
                     Duke.out(newTask.toString(), indent3);
-                    Duke.out(String.format("Now you have %d %s in the list.", taskSize(),
-                            taskSize() > 1 ? "tasks" : "task"), indent2);
+                    Duke.out(String.format("Now you have %d %s in the list.", this.taskList.size(),
+                            this.taskList.size() > 1 ? "tasks" : "task"), indent2);
                 }
-
-                Duke.taskStorage.update(this.tasks);
+                Duke.storage.update(this.taskList.getAllTask());
         }
     }
 }
