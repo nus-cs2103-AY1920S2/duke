@@ -23,6 +23,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
+        main:
         while (scanner.hasNextLine()) {
             System.out.println("\t____________________________________________________________");
             String line = scanner.nextLine().trim();
@@ -32,7 +33,7 @@ public class Duke {
                 case ExitCommand:
                     System.out.println("\t Bye. Hope to see you again soon!");
                     System.out.println("\t____________________________________________________________");
-                    break;
+                    break main;
                 case ListCommand:
                     for(int i = 0; i < storage.size(); i++){
                         System.out.println("\t " + i + ". " + storage.get(i));
