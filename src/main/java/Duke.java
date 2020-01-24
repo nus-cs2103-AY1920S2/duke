@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,20 +14,26 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command;
         while (!(command = sc.nextLine()).equals("bye")) {
-            handle(command);
+            try {
+                handle(command);
+            }
+            catch (DukeException ex) {
+                System.out.println(ex.getMessage());
+            }
+
         }
         reply("Bye. Hope to see you again soon!");
     }
 
-    public static void handle(String string) {
+    public static void handle(String string) throws DukeException{
         if (string.equals("list")) {
             printList();
         } else {
             String type = string.split(" ")[0];
             if (type.equals("done")) {
                 int taskNo = Integer.parseInt(string.split(" ")[1]);
-                if (taskNo > tasks.size()) {
-                    reply("Not a valid number");
+                if (taskNo > tasks.size() || taskNo <= 0) {
+                    throw new DukeException("☹ OOPS!! Not a valid number");
                 } else {
                     tasks.get(taskNo - 1).markAsDone();
                     doneMessage(tasks.get(taskNo - 1));
@@ -36,13 +42,9 @@ public class Duke {
                 // create new task -> add to tasks -> reply
                 Task task = createAndAddTask(type, string);
                 addMessage(task);
-//                if (type.equals("todo")) {
-//                    addMessage(task);
-//                } else if (type.equals("event")) {
-//
-//                } else if (type.equals("deadline")) {
-//
-//                }
+
+
+
             }
         }
 
@@ -84,8 +86,13 @@ public class Duke {
 
     }
 
-    public static Task createAndAddTask(String type, String whole) {
+    public static Task createAndAddTask(String type, String whole) throws DukeException {
         Task task;
+        System.out.println("[" + type + "], [" + whole + "]");
+        if (whole.split(" ").length == 1) {
+            throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        }
+
         if (type.equals("todo")) {
             String desc = whole.substring(5);
             task = new ToDo(desc);
@@ -95,10 +102,12 @@ public class Duke {
             String at = whole.substring(6).split("/at ")[1];
             task = new Event(desc, at);
 
-        } else {
+        } else if (type.equals("deadline")) {
             String desc = whole.substring(9).split("/by ")[0];
             String by = whole.substring(9).split("/by ")[1];
             task = new Deadline(desc, by);
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
         return task;
