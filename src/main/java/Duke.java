@@ -1,5 +1,6 @@
 import main.java.*;
 import java.lang.StringBuilder;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -70,7 +71,11 @@ public class Duke {
                 builder.append(splitCommand[i]);
                 builder.append(" ");
                 description = builder.toString();
-                dukeList.add(new Deadline(description, timing));
+                try {
+                    dukeList.add(new Deadline(description, timing));
+                } catch (ParseException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
         else if (str.contains("event")) {
@@ -87,7 +92,11 @@ public class Duke {
                 builder.append(splitCommand[i]);
                 builder.append(" ");
                 description = builder.toString();
-                dukeList.add(new Event(description, timing));
+                try {
+                    dukeList.add(new Event(description, timing));
+                } catch (ParseException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
         else if (str.contains("todo")) {
