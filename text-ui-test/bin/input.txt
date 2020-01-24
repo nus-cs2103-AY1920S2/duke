@@ -1,7 +1,0 @@
-todo eat rice
-deadline sleep /by 7pm
-event conference /at Sun 3pm
-list
-done 3
-list
-bye
