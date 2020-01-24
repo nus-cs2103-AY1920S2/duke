@@ -17,7 +17,7 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
 
         // Create list
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         boolean endInput = false;
 
@@ -26,28 +26,50 @@ public class Duke {
         while (!endInput) {
             // Read user input
             String input = sc.nextLine();
-            String lowInput = input.toLowerCase();
+            String[] splitInput = input.split(" ");
+            // Get the command
+            String cmd = splitInput[0];
 
-            switch (input) {
+            switch (cmd) {
             case "bye":
                 endInput = true;
                 break;
             case "list":
                 // Print out the list
                 System.out.println("\t____________________________________________________________");
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println("\t" + (i + 1) + ". " + list.get(i));
+                System.out.println("\tHere are the tasks in your list:");
+                for (int i = 0; i < taskList.size(); i++) {
+                    // Print task number first
+                    System.out.print("\t" + (i + 1) + ".");
+                    // Get the task and print it
+                    Task currTask = taskList.get(i);
+                    System.out.println(currTask);
                 }
                 System.out.println("\t____________________________________________________________");
                 break;
+            case "done":
+                // Read the task number as the next element of splitInput
+                int taskNumber = Integer.parseInt(splitInput[1]);
+
+                // Get the task from the list
+                Task requestedTask = taskList.get(taskNumber - 1);
+
+                // Mark the task as done
+                requestedTask.setDone();
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\tNice! I've marked this task as done:");
+                System.out.println("\t" + requestedTask);
+                System.out.println("\t____________________________________________________________");
+                break;
             default:
-                list.add(input);
+                // If the cmd is none of the above, add the task into list
+                Task task = new Task(input);
+                taskList.add(task);
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tadded: " + input);
                 System.out.println("\t____________________________________________________________");
                 break;
             }
-
 
         }
 
