@@ -7,6 +7,7 @@ Hello from
 
 How may duke serve the master today?
 
+
 done 1
     ____________________________________________________________
      WARNING!! Task list is empty!
@@ -78,7 +79,7 @@ event  /by Sunday
      WARNING!! Content cannot be empty!
     ____________________________________________________________
 
-event  asdf /at 
+event  asdf /at
     ____________________________________________________________
      WARNING!! Missing time/date information 
  please provide date then time separated by a space
@@ -96,3 +97,7 @@ delete 4
      WARNING!! Please choose an index that is between 1 and 2 (inclusive)
     ____________________________________________________________
 
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________

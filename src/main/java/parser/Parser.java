@@ -29,11 +29,12 @@ public class Parser {
   }
 
   public static String getType(String words) throws DukeException {
+    String lowerCaseWords = words.toLowerCase();
     String acceptedTypes = String.format("(%s)", String.join("|", Parser.taskTypes));
     if (Pattern.matches(String.format("^%s\\s+.*|.*\\s+%s$|.*\\s+%s\\s+.*", acceptedTypes,
-        acceptedTypes, acceptedTypes), words)) {
-      if (Pattern.matches(String.format("^%s\\s+.*", acceptedTypes), words)) {
-        return words.split(" ")[0];
+        acceptedTypes, acceptedTypes), lowerCaseWords)) {
+      if (Pattern.matches(String.format("^%s\\s+.*", acceptedTypes), lowerCaseWords)) {
+        return words.split(" ")[0].toLowerCase();
       } else {
         throw new DukeException("Please start with event type");
       }

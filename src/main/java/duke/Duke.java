@@ -4,70 +4,49 @@ import task.Task;
 import storage.Storage;
 import exception.DukeException;
 import parser.Parser;
-import java.util.Scanner;
+
 import java.util.ArrayList;
 
 import java.nio.file.Paths;
 
 public class Duke {
-    private Scanner sc;
+    private UserInterface UI;
     private TaskList taskList;
-    public static final String separator =
-            "____________________________________________________________";
+
     private static Storage storage = new Storage(Paths.get("storage", "file.txt"));
 
-    private final int indent1 = 4;
-    private final int indent2 = 5;
-    private final int indent3 = 7;
-
     public Duke() {
-        this.sc = new Scanner(System.in);
+        this.UI = new UserInterface();
         this.taskList = new TaskList(Duke.storage.getTasksFromStorage());
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("How may duke serve the master today?\n");
         Duke bot = new Duke();
         bot.start();
     }
 
-    public static void out(String in, int indent) {
-        System.out.println(" ".repeat(indent) + in);
-    }
-
     public void start() {
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            System.out.println(input);
-            Duke.out(Duke.separator, indent1);
+        while (!UI.isExit()) {
+            String input = UI.getInput();
+            UI.showSep();
             try {
                 dispatch(input);
             } catch (DukeException err) {
-                Duke.out(err.getMessage(), indent2);
-            }
-            Duke.out(Duke.separator, indent1);
-            System.out.println();
-            if (input.equals("bye")) {
-                this.sc.close();
-                break;
+                UI.showErr(err.getMessage());
+            } finally {
+                UI.showSep();
             }
         }
     }
 
     private void dispatch(String input) throws DukeException {
-        switch (input.trim()) {
+        switch (input) {
             case "list":
                 String[] output = this.taskList.allTasks();
-                Duke.out("Here are the tasks in your list:", indent2);
-                for (String s : output)
-                    Duke.out(s, indent2);
+                UI.showList(output);
                 return;
             case "bye":
-                Duke.out("Bye. Hope to see you again soon!", indent2);
+                UI.showBye();
                 return;
             default:
                 // as long as done/delete inside
@@ -85,21 +64,21 @@ public class Duke {
                     }
                     if (input.contains("done")) {
                         this.taskList.markDone(taskIndex);
-                        Duke.out("Nice! I've marked this task as done:", indent2);
-                        Duke.out(this.taskList.getTask(taskIndex), indent3);
+                        UI.out2("Nice! I've marked this task as done:");
+                        UI.out3(this.taskList.getTask(taskIndex));
                     } else {
                         Task removedTask = this.taskList.popTask(taskIndex);
-                        Duke.out("Noted. I've removed this task:", indent2);
-                        Duke.out(removedTask.toString(), indent3);
-                        Duke.out(String.format("Now you have %d tasks in the list.",
-                                this.taskList.size()), indent2);
+                        UI.out2("Noted. I've removed this task:");
+                        UI.out3(removedTask.toString());
+                        UI.out2(String.format("Now you have %d tasks in the list.",
+                                this.taskList.size()));
                     }
                 } else {
                     Task newTask = this.taskList.addTask(input);
-                    Duke.out("Got it. I've added this task: ", indent2);
-                    Duke.out(newTask.toString(), indent3);
-                    Duke.out(String.format("Now you have %d %s in the list.", this.taskList.size(),
-                            this.taskList.size() > 1 ? "tasks" : "task"), indent2);
+                    UI.out2("Got it. I've added this task: ");
+                    UI.out3(newTask.toString());
+                    UI.out2(String.format("Now you have %d %s in the list.", this.taskList.size(),
+                            this.taskList.size() > 1 ? "tasks" : "task"));
                 }
                 Duke.storage.update(this.taskList.getAllTask());
         }
