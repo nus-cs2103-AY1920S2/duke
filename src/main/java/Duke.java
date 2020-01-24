@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import main.java.Deadline;
 import main.java.DukeException;
+import main.java.DukeGreeting;
 import main.java.Event;
 import main.java.Task;
 import main.java.Todo;
@@ -13,24 +14,17 @@ public class Duke {
         /**Declaration of variables */
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> Tasks = new ArrayList<>();
+        DukeGreeting dg = new DukeGreeting();
 
         /**Welcome Message */
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        System.out.println();
-        System.out.println("-------------------------------------------------------------");
-        System.out.println();
+        dg.showWelcomeMessage();
         
         /**Run program */
         while(true) {
             String[] x = sc.nextLine().split(" ",2);
             String command = x[0];
             if (command.equals("bye")) {
-                System.out.println("-------------------------------------------------------------");
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println();
-                System.out.println("-------------------------------------------------------------");
-                System.out.println();
+                dg.showGoodbyeMessage();
                 sc.close();
                 System.exit(0);
             } else if (command.equals("list")) {
@@ -39,7 +33,6 @@ public class Duke {
                 for (int i = 0; i < Tasks.size(); i++) {
                     System.out.println(i+1 + ". " + Tasks.get(i));
                 }
-                System.out.println();
                 System.out.println("-------------------------------------------------------------");
             } else if (command.equals("done")) {
                 if (x.length == 1) {
@@ -58,9 +51,7 @@ public class Duke {
                 Tasks.add(todo);
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(todo);
-                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
-                System.out.println();
+                System.out.println(todo + "\n" + "Now you have " + Tasks.size() + " tasks in the list." + "\n");
                 System.out.println("-------------------------------------------------------------");
             } else if (command.equals("deadline")) {
                 if (x.length == 1) {
@@ -72,9 +63,7 @@ public class Duke {
                 Tasks.add(deadline);
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(deadline);
-                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
-                System.out.println();
+                System.out.println(deadline +"\n" + "Now you have " + Tasks.size() + " tasks in the list." + "\n");
                 System.out.println("-------------------------------------------------------------");
 
             } else if (command.equals("event")) {
@@ -87,9 +76,7 @@ public class Duke {
                 Tasks.add(event);
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(event);
-                System.out.println("Now you have " + Tasks.size() + " tasks in the list.");
-                System.out.println();
+                System.out.println(event + "\n" + "Now you have " + Tasks.size() + " tasks in the list." + "\n");
                 System.out.println("-------------------------------------------------------------");
             } else if (command.equals("delete")) {
                 if (x.length == 1) {
@@ -97,13 +84,11 @@ public class Duke {
                 } else {
                     String rest = x[1];
                     int index = Integer.valueOf(rest);
-                    Tasks.get(index-1).deleteTask();
                     int currsize = Tasks.size()-1;
-                    System.out.println("Now you have " + currsize + " tasks in the list.");
-                    System.out.println();
+                    Tasks.get(index-1).deleteTask();
+                    System.out.println("Now you have " + currsize + " tasks in the list." + "\n");
                     System.out.println("-------------------------------------------------------------");
                     Tasks.remove(index-1);
-
                 }
             } else {
                 throw new DukeException("Oops I'm sorry, what is this?");
