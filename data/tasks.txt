@@ -1,2 +1,11 @@
-[T][✘] read book
-[D][✘] return book (by: 9pm)
+todo
+read book
+false
+deadline
+return book
+9pm
+true
+event
+book convention
+7pm
+false

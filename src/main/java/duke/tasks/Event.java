@@ -9,6 +9,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveable() {
+        return String.format("event\n%s\n%s\n%s", name, dateTime, isDone);
+    }
+
+    @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatus(), name, dateTime);
     }
