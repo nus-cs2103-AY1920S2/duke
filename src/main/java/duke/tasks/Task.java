@@ -16,6 +16,10 @@ public abstract class Task {
     public String getStatus() {
         return isDone ? "\u2713" : "\u2718";
     }
+
+    public String toSaveable() {
+        return toString();
+    }
     
     @Override
     abstract public String toString();

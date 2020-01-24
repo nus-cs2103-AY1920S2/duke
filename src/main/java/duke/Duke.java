@@ -3,6 +3,10 @@ package duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import duke.tasks.Task;
 import duke.commands.CommandHandler;
@@ -11,12 +15,25 @@ public class Duke {
     public static void main(String[] args) {
         System.out.print(createGreeting());
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        String filePath = "data/tasks.txt";
+        List<Task> tasks;
+        try {
+            tasks = load(filePath);
+        } catch (FileNotFoundException e) {
+            new File(filePath);
+            tasks = new ArrayList<>();
+        }
         CommandHandler handler = new CommandHandler(tasks);
         while (handler.isActive()) {
             handler.executeCmd(sc.nextLine());
         }
-        System.out.print(formatReply("Bye. Hope to see you again soon!"));
+        try {
+            save(filePath, tasks);
+            System.out.print(formatReply("Save Success! See you next time!"));
+        } catch (IOException e) {
+            System.out.print(formatReply("Save Failure :-(. Try again next time!"));
+            System.out.print(formatReply(e.getMessage()));
+        }
         sc.close();
     }
 
@@ -41,6 +58,18 @@ public class Duke {
         }
         sb.append(lineBreak);
         return sb.toString();
+    }
+
+    private static List<Task> load(String filePath) throws FileNotFoundException {
+        throw new FileNotFoundException();
+    }
+
+    private static void save(String filePath, List<Task> tasks) throws IOException {        
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : tasks) {
+            fw.write(task.toSaveable() + System.lineSeparator());
+        }
+        fw.close();
     }
 
 }
