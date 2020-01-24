@@ -1,12 +1,8 @@
 public class Deadline extends Task {
-    protected String day;
+    String day;
     public Deadline(String description, String day){
         super (description);
         this.day = day;
-    }
-
-    public String toStringTaskstxt(){
-        return "D/" + getStatusIconInBin() + "/" + description + "/" + day + "\n";
     }
 
     @Override

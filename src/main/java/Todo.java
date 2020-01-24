@@ -4,11 +4,6 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toStringTaskstxt(){
-        return "T/" + getStatusIconInBin() + "/" + description + "\n";
-    }
-
-    @Override
     public String toString(){
         return "[T]" + super.toString();
     }
