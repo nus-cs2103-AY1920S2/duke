@@ -1,0 +1,9 @@
+hello  world
+list
+todo clean my room
+deadline do ma homework /by tonight?
+event take a nap /at asap
+list
+done 2
+list
+bye
