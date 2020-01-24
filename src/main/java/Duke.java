@@ -4,10 +4,13 @@ import java.util.ArrayList;
 public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
+    static Storage storage;
 
     public static void readCommand(Command command) throws DukeDescriptionException, BadDescriptionException {
         switch (command) {
             case LIST:
+                //test
+                System.out.println(tasks);
                 System.out.println("Here are all your tasks:");
                 for (Task task: tasks) {
                     System.out.println(task.getId() + "." + task);
@@ -88,7 +91,8 @@ public class Duke {
         String lineBreak = "_____________________________" +
                 "_______________________________";
         sc = new Scanner(System.in);
-        tasks = new ArrayList<>();
+        storage = new Storage("./data/Task.txt");
+        tasks = storage.printFileIntoList();
 
         System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
@@ -108,12 +112,14 @@ public class Duke {
                 } catch (DukeDescriptionException e) {
                     System.out.println("OOPS! You forgot to include a description!");
                 } catch (BadDescriptionException e) {
-                    System.out.println("OPPS! The number input for done/delete cannot be " + e.getMessage());
+                    System.out.println("OOPS! The number input for " +
+                            "done/delete cannot be " + e.getMessage());
                 } finally {
                     System.out.println(lineBreak);
                 }
             }
         }
+        storage.writeListIntoFile(tasks);
         System.out.println(lineBreak);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lineBreak);
