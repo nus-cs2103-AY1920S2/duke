@@ -39,7 +39,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         int count = 1;
         for (Task task : tasks) {
-            System.out.println(count + ". " + task.action);
+            System.out.println("    " + count + ". " + task.action);
         }
         System.out.println("    ____________________________________________________________");
     }
