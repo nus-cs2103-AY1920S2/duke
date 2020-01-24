@@ -1,12 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 public class Event extends Task {
-    String dayAndDuration;
-    public Event(String description, String dayAndDuration){
+    LocalDate date;
+    public Event(String description, LocalDate date){
         super (description);
-        this.dayAndDuration = dayAndDuration;
+        this.date = date;
     }
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + "(at: " + dayAndDuration + ")";
+        String fullDate = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
+                Integer.toString(date.getDayOfMonth()) + " " + Integer.toString(date.getYear());
+        return "[E]" + super.toString() + "(at: " + fullDate + ")";
     }
 }
