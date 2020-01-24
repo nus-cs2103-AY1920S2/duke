@@ -9,8 +9,6 @@ public class Duke {
     public static void readCommand(Command command) throws DukeDescriptionException, BadDescriptionException {
         switch (command) {
             case LIST:
-                //test
-                System.out.println(tasks);
                 System.out.println("Here are all your tasks:");
                 for (Task task: tasks) {
                     System.out.println(task.getId() + "." + task);
