@@ -6,29 +6,29 @@
     ____________________________________________________________
      Got it. I've added this task:
        [T][Not Done] borrow book
-     Now you have 1 tasks in the list.
+     Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
        [D][Not Done] return book (by: Sunday)
-     Now you have 2 tasks in the list.
+     Now you have 4 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
        [E][Not Done] project meeting (at: Mon 2-4pm)
-     Now you have 3 tasks in the list.
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][Done] borrow book
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
        [E][Done] project meeting (at: Mon 2-4pm)
-    ____________________________________________________________
-
-    ____________________________________________________________
-     Nice! I've marked this task as done:
-       [D][Done] return book (by: Sunday)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -39,20 +39,24 @@
     ____________________________________________________________
      Here are the tasks in your list:
       1.[T][Done] borrow book
-      2.[D][Done] return book (by: Sunday)
-      3.[E][Done] project meeting (at: Mon 2-4pm)
+      2.[E][Done] project meeting (at: Mon 2-4pm)
+      3.[T][Done] borrow book
+      4.[D][Not Done] return book (by: Sunday)
+      5.[E][Not Done] project meeting (at: Mon 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [D][Done] return book (by: Sunday)
-     Now you have 2 tasks in the list.
+       [E][Done] project meeting (at: Mon 2-4pm)
+     Now you have 4 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
       1.[T][Done] borrow book
-      2.[E][Done] project meeting (at: Mon 2-4pm)
+      2.[T][Done] borrow book
+      3.[D][Not Done] return book (by: Sunday)
+      4.[E][Not Done] project meeting (at: Mon 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
