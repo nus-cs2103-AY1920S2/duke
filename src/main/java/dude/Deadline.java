@@ -8,18 +8,18 @@ public class Deadline extends Task {
     private String dueDate;
     private static Pattern messageRegex = Pattern.compile("deadline\\s+(\\S+.*)\\s+/by\\s+(\\S+.*)");
 
-    public static Deadline parseDeadline(String msg) throws MessageInterpretationException {
+    public static Deadline parseDeadline(String msg) throws ParsingException {
         Matcher m = messageRegex.matcher(msg);
         
         if (m.matches()) {
-            return new Deadline(m.group(1), m.group(2));
+            return new Deadline(m.group(1).strip(), m.group(2).strip(), false);
         } else {
-            throw new MessageInterpretationException(USAGE);
+            throw new ParsingException(USAGE);
         }
     }
 
-    public Deadline(String details, String dueDate) {
-        super(details);
+    public Deadline(String details, String dueDate, boolean isDone) {
+        super(details, isDone);
         this.dueDate = dueDate;
     }
 
@@ -27,4 +27,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)", dueDate);
     }
+
 }

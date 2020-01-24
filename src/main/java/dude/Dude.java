@@ -1,7 +1,6 @@
 package dude;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
 
@@ -20,16 +19,17 @@ public class Dude {
         chatbot.serve(sc::nextLine);
 
         sc.close();
+        chatbot.saveState();
     }
 
-    private ArrayList<Task> tasks;
+    private IDudeTaskStore tasks;
 
     /** 
-     * Initializes dude.Dude chatbot with internal ArrayList keeping track of tasks
+     * Initializes dude.Dude chatbot
      * Greets the user
      */
     public Dude() {
-        this.tasks = new ArrayList<>(100);
+        this.tasks = DudeTaskStore.restoreSession();
         respond("Wassup dude!");
     }
 
@@ -64,6 +64,10 @@ public class Dude {
         }
     }
 
+    public void saveState() {
+        this.tasks.saveTasksToMemory();
+    }
+
     private void helpCommands() {
         respond("Sorry mate, I didn't catch your drift",
                 "Maybe you could try talking to me in one of these formats:" + System.lineSeparator(),
@@ -76,34 +80,28 @@ public class Dude {
                 "  " + BYE_USAGE);
     }
 
-    private Task getTask(int index) {
-        return tasks.get(index - 1);
-    }
-
     private void listTasks() {
-        if (tasks.isEmpty()) {
+        if (tasks.taskCount() == 0) {
             respond("You got nothing to do, dude. Ain't that awesome??");
             return;
         }
         
         respond(() -> {
             speak("These are your tasks, dude:");
-            int index = 1;
-            for (Task t : tasks) {
-                speak(String.format("%d.%s", index, t));
-                index++;
+            for (String t : tasks.showAllTasks()) {
+                speak(t);
             }
         });
     }
 
-    private void addTask(ThrowingFunction<String, Task, MessageInterpretationException> parser, String msg) {
+    private void addTask(ThrowingFunction<String, Task, ParsingException> parser, String msg) {
         try {
             Task task = parser.apply(msg);
-            tasks.add(task);
+            tasks.addTask(task);
             respond("I gotcha my dude. I've added this task:",
                     String.format("  %s", task),
-                    String.format("Now you got %d tasks in your list", tasks.size()));
-        } catch (MessageInterpretationException e) {
+                    String.format("Now you got %d tasks in your list", tasks.taskCount()));
+        } catch (ParsingException e) {
             respondError("Sorry mate, I didn't quite getcha", e.getMessage());
         }
     }
@@ -128,7 +126,7 @@ public class Dude {
 
     private void completeTask(String msg) {
         Consumer<Integer> completeTaskAtIndex = index -> {
-            Task completed = getTask(index);
+            Task completed = tasks.getTask(index);
             completed.markAsDone();
             respond("Good job dude! I've marked this task as done:", "  " + completed);
         };
@@ -137,10 +135,10 @@ public class Dude {
     
     private void deleteTask(String msg) {
         Consumer<Integer> deleteTaskAtIndex = index -> {
-            Task deleted = tasks.remove(index - 1);
+            Task deleted = tasks.removeTask(index);
             respond("I gotcha my dude. I've taken out this task:",
                     String.format("  %s", deleted),
-                    String.format("Now you got %d tasks in your list", tasks.size()));
+                    String.format("Now you got %d tasks in your list", tasks.taskCount()));
         };
         taskListOperation(deleteTaskAtIndex, msg, DELETE_USAGE);
     }
