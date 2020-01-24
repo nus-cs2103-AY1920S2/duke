@@ -96,14 +96,14 @@ public class Dude {
         });
     }
 
-    private void addTask(ThrowingFunction<String, Task, MessageInterpretationException> parser, String msg) {
+    private void addTask(ThrowingFunction<String, Task, ParsingException> parser, String msg) {
         try {
             Task task = parser.apply(msg);
             tasks.add(task);
             respond("I gotcha my dude. I've added this task:",
                     String.format("  %s", task),
                     String.format("Now you got %d tasks in your list", tasks.size()));
-        } catch (MessageInterpretationException e) {
+        } catch (ParsingException e) {
             respondError("Sorry mate, I didn't quite getcha", e.getMessage());
         }
     }
