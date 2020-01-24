@@ -1,0 +1,5 @@
+todo buy bread
+event meeting /at 2pm
+list
+done 2
+bye
