@@ -100,9 +100,9 @@ public class Duke {
     }
 
     /**
-     * Saves tasks in hard disk when task list changes
+     * Saves tasks in hard disk when task list changes.
      *
-     * @param tasks List of saved tasks
+     * @param tasks List of saved tasks.
      */
     private static void updateFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter("data/duke.txt");
@@ -119,7 +119,7 @@ public class Duke {
     }
 
     /**
-     * Prints the tasks that have been saved in duke.txt
+     * Prints the tasks that have been saved in duke.txt.
      */
     private static void loadFileContents(ArrayList<Task> tasks) throws FileNotFoundException {
         File file = new File("data/duke.txt");
