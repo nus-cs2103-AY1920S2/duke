@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+=======
+import java.time.LocalDate;
+>>>>>>> branch-Level-8
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -63,6 +67,7 @@ public class Duke {
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
         System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
+<<<<<<< HEAD
         String filePath = "/Users/freddy/Desktop/duke/src/main/java/tasks.txt";
         try{
             loadFileContents(filePath, tasks);
@@ -100,6 +105,37 @@ public class Duke {
                             writeToFile(filePath, Task.toStringDukeTasks(tasks));
                             break;
 
+=======
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            try {
+                Scanner commandScanner = new Scanner(scanner.nextLine());
+                String word = commandScanner.next();
+                if (word.equals("bye")) {
+                    System.out.println(line + fiveSpaces + "See ya later alligator!\n" + line);
+                    break;
+                } else {
+                    String taskName = "";
+                    switch (word) {
+                        case "list":
+                            System.out.print(line);
+                            System.out.println("     Here are the tasks in your list:");
+                            for (int i = 0; i < tasks.size(); i++) {
+                                System.out.println("      " + Integer.toString(i + 1) + "." + tasks.get(i));
+                            }
+                            System.out.println(line);
+                            break;
+
+                        case "done":
+                            int doneTaskNum = Integer.parseInt(commandScanner.next()) - 1;
+                            tasks.get(doneTaskNum).isDone = true;
+                            System.out.print(line);
+                            System.out.println("     Nice! I've marked this task as done:");
+                            System.out.println("       " + tasks.get(doneTaskNum).toString());
+                            System.out.println(line);
+                            break;
+
+>>>>>>> branch-Level-8
                         case "delete":
                             int deleteTaskNum = Integer.parseInt(commandScanner.next()) - 1;
                             System.out.print(line);
@@ -108,7 +144,10 @@ public class Duke {
                             tasks.remove(deleteTaskNum);
                             System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                             System.out.println(line);
+<<<<<<< HEAD
                             writeToFile(filePath, Task.toStringDukeTasks(tasks));
+=======
+>>>>>>> branch-Level-8
                             break;
 
                         case "todo":
@@ -136,14 +175,21 @@ public class Duke {
                             }
                             taskName = taskName.substring(0, taskName.length() - 1);
                             String deadlineTask[] = taskName.split("/by ");
+<<<<<<< HEAD
                             Task newDeadLineTask = new Deadline(deadlineTask[0], deadlineTask[1]);
+=======
+                            Task newDeadLineTask = new Deadline(deadlineTask[0], LocalDate.parse(deadlineTask[1]));
+>>>>>>> branch-Level-8
                             tasks.add(newDeadLineTask);
                             System.out.print(line);
                             System.out.println("     Got it. I've added this task:");
                             System.out.println("       " + newDeadLineTask.toString());
                             System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                             System.out.println(line);
+<<<<<<< HEAD
                             appendToFile(filePath, newDeadLineTask.toStringTaskstxt());
+=======
+>>>>>>> branch-Level-8
                             break;
 
                         case "event":
@@ -152,19 +198,30 @@ public class Duke {
                             }
                             taskName = taskName.substring(0, taskName.length() - 1);
                             String eventTask[] = taskName.split("/at ");
+<<<<<<< HEAD
                             Task newEventTask = new Event(eventTask[0], eventTask[1]);
+=======
+                            Task newEventTask = new Event(eventTask[0], LocalDate.parse(eventTask[1]));
+>>>>>>> branch-Level-8
                             tasks.add(newEventTask);
                             System.out.print(line);
                             System.out.println("     Got it. I've added this task:");
                             System.out.println("       " + newEventTask.toString());
                             System.out.println("     Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
                             System.out.println(line);
+<<<<<<< HEAD
                             appendToFile(filePath, newEventTask.toStringTaskstxt());
                             break;
 
                         default:
                             throw new DukeException("");
 
+=======
+                            break;
+
+                        default:
+                            throw new DukeException("");
+>>>>>>> branch-Level-8
                     }
                 }
             }
@@ -173,11 +230,18 @@ public class Duke {
                 System.out.println(ex);
                 System.out.println(line);
             }
+<<<<<<< HEAD
             catch (IOException io) {
                 System.out.println("file not found");
             }
+=======
+>>>>>>> branch-Level-8
         }
     }
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch-Level-8
