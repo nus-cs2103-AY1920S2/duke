@@ -38,22 +38,29 @@ Arghhhh... It's you again.
    ____________________________________________________________
    Saving now....:
      [T][✗] lalala
-   Aiyo still got 1 task(s), what you doing sia
+   Aiyo still got 4 task(s), what you doing sia
    ____________________________________________________________
    ____________________________________________________________
    Saving now....:
      [D][✗] return book (by: Sunday)
-   Aiyo still got 2 task(s), what you doing sia
+   Aiyo still got 5 task(s), what you doing sia
    ____________________________________________________________
    ____________________________________________________________
    Saving now....:
      [E][✗] project meeting (at: Mon 2-4pm)
-   Aiyo still got 3 task(s), what you doing sia
+   Aiyo still got 6 task(s), what you doing sia
    ____________________________________________________________
    ____________________________________________________________
-   1.[T][✗] lalala
-   2.[D][✗] return book (by: Sunday)
+   Okcan, I mark this task as done:
+   [T][✓] lalala
+   ____________________________________________________________
+   ____________________________________________________________
+   1.[T][✓] lalala
+   2.[D][✓] return book (by: Sunday)
    3.[E][✗] project meeting (at: Mon 2-4pm)
+   4.[T][✗] lalala
+   5.[D][✗] return book (by: Sunday)
+   6.[E][✗] project meeting (at: Mon 2-4pm)
    
    I told you save liao loh........
    ____________________________________________________________

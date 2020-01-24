@@ -17,6 +17,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String storeFormat() {
+        return "D|" + completed + "|" + name + "|" + date;
+    }
+
+    @Override
     public String toString() {
         String doneCheck = "[✓] ";
         String notDoneCheck = "[✗] ";

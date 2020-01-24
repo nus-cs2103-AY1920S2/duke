@@ -16,6 +16,10 @@ public class Task {
         return new Task(this.name, true);
     }
 
+    public String storeFormat() {
+        return completed + "|" + name;
+    }
+
     @Override
     public String toString(){
         String doneCheck = "[✓] ";

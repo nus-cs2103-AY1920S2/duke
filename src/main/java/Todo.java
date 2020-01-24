@@ -14,6 +14,11 @@ public class Todo extends Task{
     }
 
     @Override
+    public String storeFormat() {
+        return "T|" + completed + "|" + name;
+    }
+
+    @Override
     public String toString() {
         String doneCheck = "[✓] ";
         String notDoneCheck = "[✗] ";
