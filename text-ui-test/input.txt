@@ -10,5 +10,10 @@ list
 done
 done 2
 done 1000
+todo test task
+list
+delete
+delete 1000
+delete 1
 list
 bye

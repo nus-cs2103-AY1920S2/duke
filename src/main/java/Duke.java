@@ -10,6 +10,7 @@ public class Duke {
     static final String TodoCommand = "todo";
     static final String DeadlineCommand = "deadline";
     static final String EventCommand = "event";
+    static final String DeleteCommand = "delete";
 
     static final String[] validCommands = {
             ExitCommand,
@@ -17,7 +18,8 @@ public class Duke {
             DoneCommand,
             TodoCommand,
             DeadlineCommand,
-            EventCommand
+            EventCommand,
+            DeleteCommand
     };
 
     public static void verifyDukeCommand(String command) throws InvalidDukeCommandException {
@@ -100,6 +102,26 @@ public class Duke {
 
                     task.markAsDone();
                     System.out.println("\t Nice! I've marked this task as done: ");
+                    System.out.println("\t\t" + task);
+                    break;
+                case DeleteCommand:
+                    try {
+                        String[] splited = line.split(" ");
+                        if (splited.length < 2) {
+                            throw new InvalidDukeFormatException("The index of a delete cannot be empty.");
+                        }
+                        int taskId = Integer.parseInt(splited[1]);
+                        if (taskId <= 0 || taskId > tasks.size()) {
+                            throw new InvalidDukeFormatException("Invalid task index provided!");
+                        }
+
+                        task = tasks.remove(taskId - 1);
+                    } catch (InvalidDukeFormatException | ArrayIndexOutOfBoundsException e) {
+                        System.out.println("\t " + e);
+                        System.out.println("\t____________________________________________________________");
+                        continue;
+                    }
+                    System.out.println("\t Noted. I've removed this task: ");
                     System.out.println("\t\t" + task);
                     break;
 
