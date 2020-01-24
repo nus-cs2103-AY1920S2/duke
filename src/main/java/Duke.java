@@ -35,6 +35,9 @@ public class Duke {
                     int taskNumber = Integer.parseInt(splitInput[1]);
                     markTaskAsDone(taskList, taskNumber);
                     break;
+                case "delete":
+                    int taskNumberDelete = Integer.parseInt(splitInput[1]);
+                    deleteTask(taskList, taskNumberDelete);
                 case "todo":
                 case "deadline":
                 case "event":
@@ -107,6 +110,16 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    public static void deleteTask(ArrayList<Task> taskList, int taskNumber) {
+        // Get the task from the list
+        Task taskToDelete = taskList.get(taskNumber - 1);
+        taskList.remove(taskToDelete);
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t Noted. I've removed this task:");
+        System.out.println("\t  " + taskToDelete);
+        System.out.println("\t Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("\t____________________________________________________________");
+    }
     public static void addTaskToList(ArrayList<Task> taskList, String[] splitInput) throws DukeException {
         // Now, we must check what kind of task is added, it will be the first element of splitInput
         // Must check if the input is valid
