@@ -5,7 +5,7 @@ public class Todo extends Task {
     super("[T]", description);
   }
 
-  public Todo(String description, String isDone) {
-    super("[T]", description, isDone);
+  public Todo(String[] fromMemory) {
+    super("[T]", fromMemory[1], fromMemory[2]);
   }
 }

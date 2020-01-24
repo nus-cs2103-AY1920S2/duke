@@ -11,7 +11,7 @@ public class Task {
   protected String type;
   private static String[] taskTypes = {"todo", "event", "deadline"};
 
-  public Task(String type, String description, String isDone) {
+  public Task(String type, String isDone, String description) {
     this.type = type;
     this.description = description;
     this.isDone = isDone.equals("Y");
@@ -58,11 +58,11 @@ public class Task {
     String type = splitEntry[0];
     switch (type) {
       case "[T]":
-        return new Todo(splitEntry[2], splitEntry[1]);
+        return new Todo(splitEntry);
       case "[E]":
-        return new Event(splitEntry[2], splitEntry[1], splitEntry[3]);
+        return new Event(splitEntry);
       case "[D]":
-        return new Deadline(splitEntry[2], splitEntry[1], splitEntry[3]);
+        return new Deadline(splitEntry);
       default:
         throw new DukeException("Task not recognized");
     }

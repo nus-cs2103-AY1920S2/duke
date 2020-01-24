@@ -5,9 +5,10 @@ if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
 del ACTUAL.TXT
+del storage\file.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\Duke.java ..\src\main\java\task\*.java ..\src\main\java\exception\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\Duke.java ..\src\main\java\task\*.java ..\src\main\java\exception\*.java ..\src\main\java\storage\*.java
 REM javac  -cp ..\src -Xlint:none -d ..\bin\main ..\src\main\java\task\*.java
 
 IF ERRORLEVEL 1 (
@@ -21,3 +22,4 @@ java -cp ../bin duke.Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+FC storage\file.TXT EXPECTED_STORAGE.TXT

@@ -10,9 +10,9 @@ public class Deadline extends Task {
     this.time = Task.getTime(description, "/by");
   }
 
-  public Deadline(String description, String isDone, String time) {
-    super("[D]", description, isDone);
-    this.time = time;
+  public Deadline(String[] fromMemory) {
+    super("[D]", fromMemory[1], fromMemory[2]);
+    this.time = fromMemory[3];
   }
 
   @Override

@@ -10,9 +10,9 @@ public class Event extends Task {
     this.time = Task.getTime(description, "/at");
   }
 
-  public Event(String description, String isDone, String time) {
-    super("[E]", description, isDone);
-    this.time = time;
+  public Event(String[] fromMemory) {
+    super("[E]", fromMemory[1], fromMemory[2]);
+    this.time = fromMemory[3];
   }
 
   @Override
