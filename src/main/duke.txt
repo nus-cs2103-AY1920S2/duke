@@ -1,4 +1,3 @@
-T | 1 | read book
-D | 1 | CS2100 tutorial | June 6th
-E | 0 | project meeting | Jan 30th 2-4pm
-T | 0 | join sports club
+T | 1 | sleep 
+D | 1 | cs3243 tutorial | Jan 31 2020
+E | 0 | dinner | Feb 5 2020 7:00 PM

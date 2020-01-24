@@ -12,6 +12,12 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    public Deadline(String status, String description, String by) {
+        super(description);
+        this.setStatus(status);
+        this.by = by;
+    }
+
     public void setDateTime() {
         String[] b = this.by.split(" ");
         if (b.length > 1) {
@@ -46,6 +52,12 @@ public class Deadline extends Task{
 
     @Override
     public String saveString() {
-        return "D | " + super.saveString() + "| " + by;
+        //return "D | " + super.saveString() + "| " + by;
+        String[] b = this.by.split(" ");
+        if (b.length > 1) {
+            return "D | " + super.saveString() + "| " + dateToString() + " " + timeToString();
+        } else {
+            return "D | " + super.saveString() + "| " + dateToString();
+        }
     }
 }

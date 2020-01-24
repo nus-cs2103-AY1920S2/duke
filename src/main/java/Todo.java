@@ -3,6 +3,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String status, String description) {
+        super(description);
+        this.setStatus(status);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

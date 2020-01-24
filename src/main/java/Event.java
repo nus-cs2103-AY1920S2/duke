@@ -12,6 +12,12 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String status, String description, String at) {
+        super(description);
+        this.setStatus(status);
+        this.at = at;
+    }
+
     public void setDateTime() {
         String[] b = this.at.split(" ");
         if (b.length > 1) {
@@ -38,14 +44,20 @@ public class Event extends Task {
         //return "[E]" + super.toString() + "(at: " + at + ")";
         String[] b = this.at.split(" ");
         if (b.length > 1) {
-            return "[E]" + super.toString() + "(by: " + dateToString() + " " + timeToString()+ ")";
+            return "[E]" + super.toString() + "(at: " + dateToString() + " " + timeToString()+ ")";
         } else {
-            return "[E]" + super.toString() + "(by: " + dateToString() + ")";
+            return "[E]" + super.toString() + "(at: " + dateToString() + ")";
         }
     }
 
     @Override
     public String saveString() {
-        return "E | " + super.saveString() + "| " + at;
+        //return "E | " + super.saveString() + "| " + at;
+        String[] b = this.at.split(" ");
+        if (b.length > 1) {
+            return "E | " + super.saveString() + "| " + dateToString() + " " + timeToString();
+        } else {
+            return "E | " + super.saveString() + "| " + dateToString();
+        }
     }
 }
