@@ -1,5 +1,5 @@
 todo eat rice
-deadline sleep /by 7pm
+deadline sleep /by 8pm
 event conference /at Sun 3pm
 list
 done 3
