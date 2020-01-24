@@ -1,0 +1,3 @@
+T| |false| |lalala
+D| |true| |return book| |Sunday
+E| |false| |project meeting| |Mon 2-4pm
