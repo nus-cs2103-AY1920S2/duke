@@ -26,10 +26,10 @@ public class Duke {
         }
     }
 
-    public static void addTaskReport(Task task, int numOfTasks){
+    public static void addTaskReport(Task task, int numOfTasks) {
         System.out.println("\t Got it. I've added this task: \n" +
-                "\t\t"+ task +"\n" +
-                "\t Now you have "+ numOfTasks+ " tasks in the list.");
+                "\t\t" + task + "\n" +
+                "\t Now you have " + numOfTasks + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -76,22 +76,22 @@ public class Duke {
                     System.out.println("\t____________________________________________________________");
                     break main;
                 case ListCommand:
-                    for(int i = 1; i <= tasks.size(); i++){
-                        System.out.println("\t " + i + ". " + tasks.get(i-1));
+                    for (int i = 1; i <= tasks.size(); i++) {
+                        System.out.println("\t " + i + ". " + tasks.get(i - 1));
                     }
                     break;
                 case DoneCommand:
                     try {
                         String[] splited = line.split(" ");
-                        if(splited.length < 2){
+                        if (splited.length < 2) {
                             throw new InvalidDukeFormatException("The index of a done cannot be empty.");
                         }
                         int taskId = Integer.parseInt(splited[1]);
-                        if (taskId <= 0 || taskId > tasks.size()){
+                        if (taskId <= 0 || taskId > tasks.size()) {
                             throw new InvalidDukeFormatException("Invalid task index provided!");
                         }
 
-                        task = tasks.get(taskId  - 1);
+                        task = tasks.get(taskId - 1);
                     } catch (InvalidDukeFormatException | ArrayIndexOutOfBoundsException e) {
                         System.out.println("\t " + e);
                         System.out.println("\t____________________________________________________________");
@@ -118,10 +118,10 @@ public class Duke {
                     taskInfo = parameters.split("/by");
                     desc = "";
                     timestamp = "";
-                    if (taskInfo.length > 0){
+                    if (taskInfo.length > 0) {
                         desc = taskInfo[0].trim();
                     }
-                    if (taskInfo.length > 1 ){
+                    if (taskInfo.length > 1) {
                         timestamp = taskInfo[1].trim();
                     }
                     try {
@@ -138,10 +138,10 @@ public class Duke {
                 case EventCommand:
                     taskInfo = parameters.split("/at");
 
-                    if (taskInfo.length > 0){
+                    if (taskInfo.length > 0) {
                         desc = taskInfo[0].trim();
                     }
-                    if (taskInfo.length > 1 ){
+                    if (taskInfo.length > 1) {
                         timestamp = taskInfo[1].trim();
                     }
                     try {

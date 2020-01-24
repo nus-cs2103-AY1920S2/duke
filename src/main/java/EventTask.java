@@ -12,7 +12,7 @@ public class EventTask extends Task {
     }
 
     @Override
-    public String toString(){
-        return "[D] " + super.toString() + " (by: "+ this.at + ")";
+    public String toString() {
+        return "[D] " + super.toString() + " (by: " + this.at + ")";
     }
 }
