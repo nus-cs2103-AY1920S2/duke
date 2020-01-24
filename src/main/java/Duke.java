@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     static Scanner sc;
@@ -89,7 +90,8 @@ public class Duke {
         String lineBreak = "_____________________________" +
                 "_______________________________";
         sc = new Scanner(System.in);
-        storage = new Storage("./data/Task.txt");
+        storage = new Storage("." + File.separator +
+                "data" + File.separator + "Task.txt");
         tasks = storage.printFileIntoList();
 
         System.out.println(lineBreak);
