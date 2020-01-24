@@ -1,12 +1,16 @@
 import main.java.*;
+
+import java.io.IOException;
 import java.lang.StringBuilder;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> dukeList = new ArrayList<>();
+        Cache cache = new Cache ("data/duke.txt");
+        ArrayList<Task> dukeList = cache.readFile();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -37,12 +41,19 @@ public class Duke {
             }
             else if (command.contains("delete")) {
                 Duke.deleteTask(command, dukeList);
-                command = sc.nextLine();
-                continue;
+                try {
+                    cache.saveFile(dukeList);
+                    command = sc.nextLine();
+                    continue;
+                } catch (IOException e) {
+                    command = sc.nextLine();
+                    continue;
+                }
             }
             try {
                 Duke.addCommand(command, dukeList);
-            } catch (CommandException | DescriptionException e) {
+                cache.saveFile(dukeList);
+            } catch (CommandException | DescriptionException | IOException e) {
                 command = sc.nextLine();
                 continue;
             }
@@ -58,9 +69,11 @@ public class Duke {
     public static void addCommand(String str, ArrayList<Task> dukeList) throws CommandException, DescriptionException {
         if (str.contains("deadline")) {
             String[] splitStr = str.split("/by ");
+
             if (splitStr.length < 2) {
                 throw (new DescriptionException());
             }
+
             String description = splitStr[0];
             String timing = splitStr[1];
             String[] splitCommand = description.split(" ");
@@ -103,6 +116,7 @@ public class Duke {
             throw (new CommandException());
         }
     }
+
     public static void deleteTask(String str, ArrayList<Task> dukeList) {
         String[] splitStr = str.split(" ");
         int index = Integer.parseInt(splitStr[1]) - 1;
