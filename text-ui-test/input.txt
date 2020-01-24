@@ -1,9 +1,14 @@
 hello  world
 list
+todo
 todo clean my room
+deadline do smth
 deadline do ma homework /by tonight?
+event take a nap?
 event take a nap /at asap
 list
+done
 done 2
+done 1000
 list
 bye
