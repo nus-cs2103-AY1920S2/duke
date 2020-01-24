@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 /**
@@ -106,12 +107,12 @@ public class Storage {
      *
      * @return the task list
      */
-    public TaskList findTasks(String searchTerm) {
+    public TaskList findTasks(String... searchTerm) {
         TaskList tasks = loadTasks();
         TaskList temp = new TaskList();
         int pos = 1;
         for (Task task : tasks.getTasks()) {
-            if (task.getDescription().contains(searchTerm)) {
+            if (Arrays.stream(searchTerm).parallel().anyMatch(task.getDescription()::contains)) {
                 temp.addTask(new SearchTask(pos, task.isDone(), task.getDescription(), task.getType()));
             }
             pos++;
