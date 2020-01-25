@@ -60,8 +60,8 @@ public class Duke {
                             int num = Integer.parseInt(input.split(" ")[1]);
                             if (toDo.size() == 0){
                                 printError("☹ OOPS!!! You have no tasks currently.");
-                            }  else if (num  == 0){
-                                printError("☹ OOPS!!! Task number cannot be 0");
+                            }  else if (num  <= 0){
+                                printError("☹ OOPS!!! Task number cannot be equal to or less than 0");
                             } else if (num > toDo.size()){
                                 printError("☹ OOPS!!! The number of a done command cannot be greater than the number of tasks " +
                                         "you have.");
@@ -86,8 +86,8 @@ public class Duke {
                             int num = Integer.parseInt(input.split(" ")[1]);
                             if (toDo.size() == 0){
                                 printError("☹ OOPS!!! You have no tasks currently.");
-                            }  else if (num  == 0){
-                                printError("☹ OOPS!!! Task number cannot be 0");
+                            }  else if (num  <= 0){
+                                printError("☹ OOPS!!! Task number cannot be equal to or less than 0");
                             } else if (num > toDo.size()){
                                 printError("☹ OOPS!!! The number of a delete command cannot be greater than the number of tasks " +
                                         "you have.");
