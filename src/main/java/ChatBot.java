@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File.*;
 
+
 public class ChatBot {
    // class for the chat-bot for the Duke Project
 
@@ -87,11 +88,15 @@ public class ChatBot {
                     }
                     index_found = this.grabTaskName(taskname, inputCommand, "/by");
                     this.grabDateTime(index_found, inputCommand, DateTime);
+                    // validate date inputted
+                    Deadline.validDate(DateTime.toString());
                     Deadline d = new Deadline(taskname.toString(), DateTime.toString());
                     this.tasks.add(d);
                     this.prettyPrinting(taskname.toString() + " added!");
                 } catch (DukeException e) {
                     this.prettyPrinting(e.toString());
+                } catch (Exception e) {
+                    this.prettyPrinting("Incorrect date format! Please refer to following example: 31-12-2020 23:59");
                 }
                 break;
             case "event":
