@@ -5,7 +5,7 @@ public class DukeException extends Exception {
     }
 
     @Override
-    public String toString(){
+    public String getMessage(){
         if (exception.equals("todo")){
             return "      OOPS!!! The description of a todo cannot be empty.";
         }

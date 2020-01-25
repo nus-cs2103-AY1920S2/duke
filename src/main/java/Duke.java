@@ -7,7 +7,55 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static void loadFileContents(String filePath , ArrayList<Task> tasks) throws FileNotFoundException {
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) throws IOException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.showLoadingError();
+            File file = new File("data");
+            if (!file.exists()) {
+                //create new data dir and duke.file
+                new File("data").mkdir();
+            }
+            new File(filePath).createNewFile();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
+            catch (IOException io) {
+                ui.showSavingError();
+            }
+            finally{
+
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke("data/duke.txt").run();
+    }
+    /*private static void loadFileContents(String filePath , ArrayList<Task> tasks) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
@@ -64,7 +112,7 @@ public class Duke {
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
         System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
-        String filePath = "data/duke.txt";
+        String filePath = "/Users/freddy/Desktop/duke/src/main/java/tasks.txt";
         try{
             loadFileContents(filePath, tasks);
         }
@@ -177,5 +225,5 @@ public class Duke {
                 System.out.println("file not found");
             }
         }
-    }
+    }*/
 }

@@ -1,6 +1,3 @@
-T/1/me
-T/0/u
-D/1/sdadaoin /2401-04-26
-T/0/undsa
-D/0/uiadhfi /2103-03-09
-E/1/3ewon /2103-12-18
+T/1/go for a run 
+E/0/project meeting /2020-01-25
+D/0/return book /2020-01-27
