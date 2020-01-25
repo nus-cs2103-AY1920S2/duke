@@ -12,7 +12,7 @@ public class listCommand extends Command {
         if (taskList.size() == 0) {
             ui.sayLine(LineName.LIST_EMPTY);
         } else {
-            ui.sayTasks(taskList.taskList);
+            ui.sayTasks(taskList.getTaskList());
         }
     }
 }

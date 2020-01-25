@@ -5,6 +5,7 @@ import dukebot.tasklist.TaskList;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Storage {
     private boolean failedSave;
@@ -15,31 +16,31 @@ public class Storage {
     }
 
     public void saveToFile(TaskList tasks) {
-        ArrayList<Task> data = tasks.taskList;
-        try{
+        ArrayList<Task> taskList = tasks.getTaskList();
+        try {
             FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-
-            writeStream.writeObject(data);
+            Task[] taskArr = taskList.toArray(new Task[taskList.size()]);
+            writeStream.writeObject(taskArr);
             writeStream.flush();
             writeStream.close();
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             // e.printStackTrace();
         }
     }
 
     public ArrayList<Task> loadFromFile() {
-        if (new File(this.storagePath).isFile()) {
-            try{
-                FileInputStream readData = new FileInputStream(new File(this.storagePath));
+        File file = new File(this.storagePath);
+        if (file.isFile()) {
+            try {
+                FileInputStream readData = new FileInputStream(file);
                 ObjectInputStream readStream = new ObjectInputStream(readData);
-
-                ArrayList<Task> data = (ArrayList<Task>) readStream.readObject();
-                readStream.close();
-
-                return data;
-            }catch (IOException | ClassNotFoundException e) {
+                Object obj = readStream.readObject();
+                if (obj instanceof Task[]) {
+                    return new ArrayList<>(Arrays.asList((Task[]) obj));
+                }
+            } catch (IOException | ClassNotFoundException e) {
                 // e.printStackTrace();
             }
         }
