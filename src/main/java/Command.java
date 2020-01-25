@@ -29,7 +29,7 @@ public class Command {
         return String.join(" ", arguments);
     }
 
-    public String execute(TaskList tasks) throws DukeException {
+    public String execute(Duke program) throws DukeException {
         switch (getCommandName()) {
         case "": {
             throw new DukeNoCommandException();
@@ -38,16 +38,18 @@ public class Command {
         case "deadline": 
         case "event": {
             Task newTask = createTask();
+            TaskList tasks = program.getTaskList();
             return tasks.addTask(newTask);
         }
         case "list": {
+            TaskList tasks = program.getTaskList();
             return tasks.toString();
         }
         case "done": {
-            return markTask(tasks);
+            return markTask(program);
         }
         case "delete": {
-            return deleteTask(tasks);
+            return deleteTask(program);
         }
         case "bye": {
             return "Goodbye!";
@@ -88,7 +90,8 @@ public class Command {
         }
     }
 
-    private String markTask(TaskList tasks) throws DukeException {
+    private String markTask(Duke program) throws DukeException {
+        TaskList tasks = program.getTaskList();
         if (getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(getCommandName());
         }
@@ -104,7 +107,8 @@ public class Command {
         }
     }
 
-    private String deleteTask(TaskList tasks) throws DukeException {
+    private String deleteTask(Duke program) throws DukeException {
+        TaskList tasks = program.getTaskList();
         if (getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(getCommandName());
         }
