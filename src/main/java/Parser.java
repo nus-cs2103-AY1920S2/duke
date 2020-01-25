@@ -3,10 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-
     public static DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MMM uuuu");
-
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MM uu");
 
@@ -16,6 +14,14 @@ public class Parser {
             return LocalDate.parse(str, formatter);
         } catch (DateTimeParseException e) {
             throw new BadDateException("Bad date format");
+        }
+    }
+
+    public static Command commandParser(String str) throws InvalidCommandException {
+        try {
+            return Command.valueOf(str.toUpperCase());
+        } catch (IllegalArgumentException e){
+            throw new InvalidCommandException(str + " is an invalid command");
         }
     }
 }
