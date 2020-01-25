@@ -10,9 +10,8 @@ public class Deadline extends TimedTask {
         this.dateTime = dateTime;
     }
 
-    @Override
-    public String toSaveable() {
-        return String.format("deadline\n%s\n%s\n%s", name, dateTime, isDone);
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     @Override

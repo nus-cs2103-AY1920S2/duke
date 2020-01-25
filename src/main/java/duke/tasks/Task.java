@@ -13,12 +13,15 @@ public abstract class Task {
         isDone = true;
     }
 
-    public String getStatus() {
-        return isDone ? "\u2713" : "\u2718";
+    public String getName() {
+        return name;
     }
 
-    public String toSaveable() {
-        return toString();
+    public boolean getIsDone() {
+        return isDone;
+    }
+    public String getStatus() {
+        return isDone ? "\u2713" : "\u2718";
     }
     
     @Override

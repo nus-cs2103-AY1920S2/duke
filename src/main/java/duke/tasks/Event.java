@@ -12,9 +12,12 @@ public class Event extends TimedTask {
         this.end = end;
     }
 
-    @Override
-    public String toSaveable() {
-        return String.format("event\n%s\n%s\n%s\n%s", name, start, end, isDone);
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
     }
 
     @Override
