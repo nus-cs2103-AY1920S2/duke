@@ -1,7 +1,9 @@
-package dukebot;
+package dukebot.storage;
 
+import dukebot.exception.DukeException;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
+import dukebot.ui.LineName;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +22,7 @@ public class Storage {
         this.storagePath = storagePath;
     }
 
-    public void saveToFile(TaskList tasks) throws DukeException{
+    public void saveToFile(TaskList tasks) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         try {
             FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));

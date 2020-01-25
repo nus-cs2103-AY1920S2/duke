@@ -1,7 +1,5 @@
 package dukebot.tasklist;
 
-import dukebot.DukeException;
-
 import java.util.ArrayList;
 
 public class TaskList {

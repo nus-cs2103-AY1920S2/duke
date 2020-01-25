@@ -1,4 +1,4 @@
-package dukebot;
+package dukebot.ui;
 
 import dukebot.tasklist.Task;
 

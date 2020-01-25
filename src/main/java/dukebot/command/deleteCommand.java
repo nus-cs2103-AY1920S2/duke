@@ -1,11 +1,11 @@
 package dukebot.command;
 
-import dukebot.DukeException;
-import dukebot.LineName;
-import dukebot.Storage;
-import dukebot.Ui;
+import dukebot.exception.DukeException;
+import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
+import dukebot.ui.LineName;
+import dukebot.ui.Ui;
 
 public class deleteCommand extends Command {
     private String[] inpArr;

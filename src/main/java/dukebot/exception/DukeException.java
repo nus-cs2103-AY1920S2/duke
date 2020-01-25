@@ -1,4 +1,6 @@
-package dukebot;
+package dukebot.exception;
+
+import dukebot.ui.LineName;
 
 public class DukeException extends Throwable {
     private LineName errorLineName = null;

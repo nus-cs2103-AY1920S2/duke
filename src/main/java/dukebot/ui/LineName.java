@@ -1,4 +1,4 @@
-package dukebot;
+package dukebot.ui;
 
 public enum LineName {
     DATE_TIME_PARSE_FAIL,

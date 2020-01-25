@@ -1,6 +1,6 @@
 package dukebot.command;
 
-import dukebot.LineName;
+import dukebot.ui.LineName;
 
 public class Parser {
     public static Command parse(String input) {

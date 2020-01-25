@@ -1,7 +1,7 @@
 package dukebot.tasklist;
 
-import dukebot.DukeException;
-import dukebot.LineName;
+import dukebot.exception.DukeException;
+import dukebot.ui.LineName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
