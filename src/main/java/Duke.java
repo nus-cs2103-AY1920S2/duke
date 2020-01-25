@@ -14,8 +14,8 @@ public class Duke {
         //initialise scanner
         Scanner s = new Scanner(System.in);
         Storage storage = new Storage(home);
-
         TaskList tasks = new TaskList(storage.loadFromSave());
+        Parser parser = new Parser();
 
         sayHi();
 
