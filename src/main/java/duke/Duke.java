@@ -6,6 +6,7 @@ import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.io.FileNotFoundException;
 
 import duke.tasks.Task;
@@ -68,22 +69,22 @@ public class Duke {
     private static List<Task> load(String filePath) throws FileNotFoundException, DukeException {
         List<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(new File(filePath));
-        while (s.hasNext()) {
+        while (s.hasNextLine()) {
             Task task;
-            switch (s.next()) {
+            switch (s.nextLine()) {
             case "todo":
-                task = new Todo(s.next());
+                task = new Todo(s.nextLine());
                 break;
             case "deadline":
-                task = new Deadline(s.next(), s.next());
+                task = new Deadline(s.nextLine(), LocalDateTime.parse(s.nextLine()));
                 break;
             case "event":
-                task = new Event(s.next(), s.next());
+                task = new Event(s.nextLine(), LocalDateTime.parse(s.nextLine()), LocalDateTime.parse(s.nextLine()));
                 break;
             default:
                 throw new DukeException("Save file corrupt!");
             }
-            if (s.next().equals("true")) {
+            if (s.nextLine().equals("true")) {
                 task.markAsDone();
             }
             tasks.add(task);

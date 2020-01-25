@@ -14,7 +14,7 @@ public class Event extends TimedTask {
 
     @Override
     public String toSaveable() {
-        return String.format("event\n%s\n%s\n%s", name, dateTime, isDone);
+        return String.format("event\n%s\n%s\n%s\n%s", name, start, end, isDone);
     }
 
     @Override
