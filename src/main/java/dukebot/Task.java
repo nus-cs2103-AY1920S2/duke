@@ -101,7 +101,7 @@ public abstract class Task implements Serializable{
             return "";
         } else if (dateTime.toLocalDate().equals(LocalDate.now())) {
             return "Today " + dateTime.toLocalTime().toString();
-        } else if (dateTime.compareTo(LocalDateTime.now()) > 0) {
+        } else if (dateTime.compareTo(LocalDateTime.now()) < 0) {
             return this.dateTime.format(DEFAULT_FORMAT) + " [Over]";
         } else {
             return this.dateTime.format(DEFAULT_FORMAT);

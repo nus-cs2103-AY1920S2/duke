@@ -11,24 +11,24 @@ import java.util.Scanner;
 public class DateTimeParse {
     private static final DateTimeFormatter[] formats = {
             new DateTimeFormatterBuilder()
-                    .appendPattern("yyyy/MM/dd")
+                    .appendPattern("yyyy/M/d")
                     .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                     .toFormatter(),
             new DateTimeFormatterBuilder()
-                    .appendPattern("dd/MM/yyyy")
+                    .appendPattern("d/M/yyyy")
                     .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                     .toFormatter(),
             new DateTimeFormatterBuilder()
-                    .appendPattern("dd/MM")
+                    .appendPattern("d/M")
                     .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                     .parseDefaulting(ChronoField.YEAR, ZonedDateTime.now().getYear())
                     .toFormatter(),
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"),
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
             new DateTimeFormatterBuilder()
-                    .appendPattern("dd/MM HHmm")
+                    .appendPattern("d/M HHmm")
                     .parseDefaulting(ChronoField.YEAR, ZonedDateTime.now().getYear())
                     .toFormatter(),
             new DateTimeFormatterBuilder()
@@ -37,7 +37,7 @@ public class DateTimeParse {
                     .parseDefaulting(ChronoField.MONTH_OF_YEAR, ZonedDateTime.now().getMonthValue())
                     .parseDefaulting(ChronoField.YEAR, ZonedDateTime.now().getYear())
                     .toFormatter(),
-            DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm")
+            DateTimeFormatter.ofPattern("yyyy/M/d HHmm")
     };
     //    private static final DateTimeFormatter format_ddMMyyyy = DateTimeFormatter.ofPattern("dd MM yyyy");
     //    private static final DateTimeFormatter format_ddMMyyyyHHmm = DateTimeFormatter.ofPattern("dd MM yyyy HHmm");
