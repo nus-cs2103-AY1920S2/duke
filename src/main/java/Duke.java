@@ -91,11 +91,11 @@ public class Duke {
                     break;
                 case "deadline":
                     String deadline = taskWords[3];
-                    tasks.add(new Deadline(description, deadline));
+                    tasks.add(new Deadline(description, deadline, isDone));
                     break;
                 case "event":
                     String eventTime = taskWords[3];
-                    tasks.add(new Event(description, eventTime));
+                    tasks.add(new Event(description, eventTime, isDone));
                     break;
                 default:
                     break;
@@ -195,6 +195,7 @@ public class Duke {
             switch (commandWords[0]) {
             case "bye":
                 // User request for exit
+                updateSaveFile();
                 break;
             case "list":
                 printTextWithIndentation(HORIZONTAL_BAR);
@@ -212,6 +213,7 @@ public class Duke {
                     int taskNumber = Integer.parseInt(commandWords[1]);
                     Task task = tasks.get(taskNumber - 1);
                     markTaskAsDone(task);
+                    updateSaveFile();
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid Task Number given!");
                 }
@@ -229,6 +231,7 @@ public class Duke {
                 tasks.add(newTodoTask);
                 // Print out information about added task
                 printTaskAddition(newTodoTask);
+                updateSaveFile();
                 break;
             case "deadline":
                 // Get deadline, find index of "/by"
@@ -248,6 +251,7 @@ public class Duke {
                 Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
                 tasks.add(newDeadlineTask);
                 printTaskAddition(newDeadlineTask);
+                updateSaveFile();
                 break;
             case "event":
                 // Find index of delimiter
@@ -264,12 +268,14 @@ public class Duke {
                 Task newEvent = new Event(eventDescription, eventTime);
                 tasks.add(newEvent);
                 printTaskAddition(newEvent);
+                updateSaveFile();
                 break;
             case "delete":
                 try {
                     int taskNumberToDelete = Integer.parseInt(commandWords[1]);
                     Task removedTask = tasks.remove(taskNumberToDelete - 1);
                     printTaskDeletion(removedTask);
+                    updateSaveFile();
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid task number given for deletion...");
                 }
@@ -337,6 +343,20 @@ public class Duke {
             // Delimiter is at the end of command (e.g. "deadline /by")
             throw new DukeException(DukeException.exceptionIcon +
                     " No deadline given... Format: deadline [description] /by [due by]");
+        }
+    }
+
+    protected void updateSaveFile() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(saveFilePath));
+            // Write all tasks to file
+            for (Task task : tasks) {
+                writer.write(task.stringToSaveToDisk());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
