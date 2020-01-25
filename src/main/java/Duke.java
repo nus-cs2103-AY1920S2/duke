@@ -11,6 +11,9 @@ public class Duke {
         }
         System.out.println(LINE);
     }
+    private void error(String s){
+        response("☹ OOPS!!! " + s);
+    }
     public static void main(String[] args) {
         new Duke().start();
     }
@@ -23,7 +26,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
         Scanner inputSc;
-        String command, input;
+        String command, input, name, datetime, rest;
         mainLoop: while (true){
             input = sc.nextLine().trim();
             inputSc = new Scanner(input);
@@ -36,33 +39,74 @@ public class Duke {
                     listTasks();
                     break;
                 case "done":
-                    Task t = tasks.get(inputSc.nextInt() - 1);
+                    if (tasks.size() == 0){
+                        error("There are no tasks in the list :(");
+                        break;
+                    }
+                    if (!inputSc.hasNextInt()){
+                        error("The index of the task is missing :/");
+                        break;
+                    }
+                    int index = inputSc.nextInt() - 1;
+                    if (index < 0 || index >= tasks.size()){
+                        error("Please enter a valid index, from 1 to " + tasks.size());
+                        break;
+                    }
+                    Task t = tasks.get(index);
                     t.markAsDone();
                     response("Awesome! I've marked this task as done:", t.toString());
                     break;
                 case "todo":
-                    Todo todo = new Todo(input.substring(command.length()).trim());
+                    name = input.substring(command.length()).trim();
+                    if (name.length() == 0){
+                        error("The description of a todo cannot be empty.");
+                        break;
+                    }
+                    Todo todo = new Todo(name);
                     addTask(todo);
                     break;
                 case "deadline":
-                    int byIndex = input.indexOf("/by");
-                    Deadline dl = new Deadline(
-                            input.substring(command.length(), byIndex).trim(),
-                            input.substring(byIndex + 3).trim()
-                    );
+                    rest = input.substring(command.length()).trim();
+                    int byIndex = rest.indexOf("/by");
+                    if (byIndex == -1){
+                        error("Please include the deadline datetime after the \"/by\" keyword");
+                        break;
+                    }
+                    name = rest.substring(0, byIndex).trim();
+                    if (name.length() == 0){
+                        error("The description of a deadline cannot be empty.");
+                        break;
+                    }
+                    datetime = rest.substring(byIndex + 3).trim();
+                    if (datetime.length() == 0){
+                        error("The deadline datetime cannot be empty.");
+                        break;
+                    }
+                    Deadline dl = new Deadline(name, datetime);
                     addTask(dl);
                     break;
                 case "event":
-                    int atIndex = input.indexOf("/at");
-                    Event e = new Event(
-                            input.substring(command.length(), atIndex).trim(),
-                            input.substring(atIndex + 3).trim()
-                    );
+                    rest = input.substring(command.length()).trim();
+                    int atIndex = rest.indexOf("/at");
+                    if (atIndex == -1){
+                        error("Please include the event datetime after the \"/at\" keyword");
+                        break;
+                    }
+                    name = rest.substring(0, atIndex).trim();
+                    if (name.length() == 0){
+                        error("The description of a event cannot be empty.");
+                        break;
+                    }
+                    datetime = rest.substring(atIndex + 3).trim();
+                    if (datetime.length() == 0){
+                        error("The event datetime cannot be empty.");
+                        break;
+                    }
+                    Event e = new Event(name, datetime);
                     addTask(e);
                     break;
                 default:
-                    tasks.add(new Task(input));
-                    response("added: " + input);
+                    error("I'm sorry, but I don't know what that means :-(");
             }
         }
     }
