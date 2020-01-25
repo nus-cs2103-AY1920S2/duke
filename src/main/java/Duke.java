@@ -17,56 +17,57 @@ public class Duke  {
     }
     public void initiateChat() {
         Scanner sc = new Scanner(System.in);
-        String[] userInput = sc.nextLine().split(" ");
+        String[] userInput = sc.nextLine().split(" ",2);
         String action = userInput[0];
         while (!action.equals("bye")) {
-                if (action.equals("done")) {
-                    int taskNo = Integer.parseInt(userInput[1]);
-                    this.taskStorage.get(taskNo - 1).markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n  " + this.taskStorage.get(taskNo - 1).toString());
-                }
-                else if (action.equals("delete")){
-                    int taskNo = Integer.parseInt(userInput[1]) - 1;
-                    Task removedTask = this.taskStorage.get(taskNo);
-                    this.taskStorage.remove(taskNo);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(removedTask.toString() + "\nNow you have " + this.taskStorage.size() + " tasks in the list");
-                }
-                else if (action.equals("list")) {
-                    this.printText();
-                } else {
-                    String description = Duke.arrayToString(userInput);
-                    if (action.equals("todo")) {
-                           if (userInput.length == 1) {
-                               throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                           }
-                            System.out.println("Got it. I've added this task:");
-                            this.taskStorage.add(new Task(description));
-                    }
-                    else if (action.equals("deadline")) {
-                        if (userInput.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                        }
-                        String[] tokens = description.split("/by");
+            try {
+                ExceptionGenerator.checkInputLength(userInput);
+                ExceptionGenerator.checkInputAction(userInput);
+                switch (action) {
+                    case "done":
+                        int taskNo = Integer.parseInt(userInput[1]);
+                        this.taskStorage.get(taskNo - 1).markAsDone();
+                        System.out.println("Nice! I've marked this task as done:\n  "
+                                + this.taskStorage.get(taskNo - 1).toString());
+                        break;
+                    case "delete":
+                        taskNo = Integer.parseInt(userInput[1]) - 1;
+                        Task removedTask = this.taskStorage.get(taskNo);
+                        this.taskStorage.remove(taskNo);
+                        System.out.println("Noted. I've removed this task:\n"
+                                + removedTask.toString());
+                        break;
+                    case "list":
+                        this.printText();
+                        break;
+                    case "todo":
+                        String description = userInput[1];
+                        System.out.println("Got it. I've added this task:");
+                        this.taskStorage.add(new Task(description));
+                        break;
+                    case "deadline":
+                        String[] tokens = userInput[1].split("/by");
                         System.out.println("Got it. I've added this task:");
                         this.taskStorage.add(new Deadlines(tokens[0], tokens[1]));
-                    } else if (action.equals("event")) {
-                        if (userInput.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                        }
-                        String[] tokens = description.split("/at");
+                        break;
+                    case "event":
+                        tokens = userInput[1].split("/at");
                         System.out.println("Got it. I've added this task:");
                         this.taskStorage.add(new Events(tokens[0], tokens[1]));
-                    } else {
-                        throw new DukeException("  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-                    int numbOfTask = this.taskStorage.size();
-                    System.out.println(this.taskStorage.get(numbOfTask - 1).toString());
-                    System.out.println("Now you have " + numbOfTask + " tasks in the list.");
+                        break;
                 }
-                userInput = sc.nextLine().split(" ");
-                action = userInput[0];
+                int numbOfTask = this.taskStorage.size();
+                if(numbOfTask > 0 && !action.equals("list") && !action.equals("delete") && !action.equals("done")) {
+                    System.out.println(this.taskStorage.get(numbOfTask - 1).toString());
+                }
+                    System.out.println("Now you have " + numbOfTask + " tasks in the list.");
+            } catch (DukeException ex){
+                //System.err.println(ex);
+                ex.printStackTrace();
             }
+            userInput = sc.nextLine().split(" ", 2);
+            action = userInput[0];
+        }
         System.out.println("Bye. Hope to see you again soon!");
 
     }
