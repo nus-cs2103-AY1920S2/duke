@@ -4,12 +4,12 @@ public class Task {
     public final boolean completed;
     public final String name;
 
-    public Task(String name){
+    protected Task(String name){
         this.name = name;
         this.completed = false;
     }
 
-    public Task(String name, boolean completed){
+    protected Task(String name, boolean completed){
         this.name = name;
         this.completed = completed;
     }

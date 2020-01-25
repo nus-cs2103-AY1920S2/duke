@@ -1,3 +1,12 @@
-todo lalala
-deadline return book /by 2013/12/0sa
+todo 1
+deadline 2 /by 2013/12/0sa
+deadline 3 /by 2013/12/23
+deadline 4 /at 2013/12/23
+event 5 /at 2013/12/23 1231
+list
+list 2013/12/23
+check 1
+done 1
+delete 2
+list
 bye

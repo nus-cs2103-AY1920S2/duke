@@ -1,27 +1,22 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.IOException;
 
 public class Duke {
     private static final String space = "    ";
     private static final String line = "   " + "<------------------------------------------------------------>";
     private static final String errorLine = "   " + "**************************************************************";
     private static final String home = System.getProperty("user.dir");
-    private static final Path path = Paths.get(home, "..", "..", "..", "data", "duke.txt");
     public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     public static void main(String[] args) {
         //initialise scanner
         Scanner s = new Scanner(System.in);
-        List<Task> tasks;
-
-        tasks = readFromSave();
+        Storage storage = new Storage(home);
+        List<Task> tasks = storage.loadFromSave();
 
         sayHi();
 
@@ -40,7 +35,7 @@ public class Duke {
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
                     tasks.set(taskNo, tasks.get(taskNo).complete());
                     reply += "Okcan, I mark this task as done:\n" + space + tasks.get(taskNo);
-                    saveToSave(tasks);
+                    storage.saveToSave();
                 } else if (inputArr[0].equals("delete")) {
                     if (inputArr.length < 2){
                         throw new NoNumberDeleteException();
@@ -120,51 +115,6 @@ public class Duke {
         System.out.println(line);
         System.out.println(space + "Arghhhh... It's you again.");
         System.out.println(line);
-    }
-
-    private static List<Task> readFromSave() {
-        List<Task> tasks = new ArrayList<Task>();
-        try{
-            List<String> lines = Files.readAllLines(path);
-            String outputLine;
-            String[] arr;
-            String type;
-            boolean completed;
-            String name;
-            String others;
-
-            for (int i = 0; i < lines.size(); i++) {
-                outputLine = lines.get(i);
-                arr = outputLine.split("\\| \\|");
-                type = arr[0];
-                completed = (arr[1].equals("true"));
-                name = arr[2];
-
-                switch (type) {
-                case "E":
-                    others = arr[3];
-                    tasks.add(new Event(name, completed, others));
-                    break;
-                case "D":
-                    others = arr[3];
-                    tasks.add(new Deadline(name, completed, others));
-                    break;
-                case "T":
-                    tasks.add(new Todo(name, completed));
-                    break;
-                default:
-                }
-            }
-        } catch(IOException e) {}
-        return tasks;
-    }
-    
-    private static void saveToSave(List<Task> tasks) throws IOException {
-        String content = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            content += (tasks.get(i).storeFormat() + "\n");
-        }
-        Files.writeString(path, content);
     }
 
     private static String list(String[] arr, List<Task> tasks) throws DateTimeParseException{ 
