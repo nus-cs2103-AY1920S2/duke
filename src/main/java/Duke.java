@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 class Duke {
-    static String FORMAT_CORRECTION = "Invalid format of this instruction.\n"
+    // a common error (invalid format) handling message prefix
+    static String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
             + "The correct format should be ";
 
     public static void main(String[] args) {
@@ -90,6 +91,10 @@ class Duke {
                     } catch (NumberFormatException e) {
                         throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
                     }
+                case "":
+                    throw new DukeException("Empty line input. "
+                            + "Please specify an instruction followed by relevant description.\n"
+                            + "The valid instructions include: todo, deadline, event, list, done, bye.");
                 default:
                     throw new DukeException("I don't understand this instruction.\n"
                             + "The valid instructions include: todo, deadline, event, list, done, bye.");
