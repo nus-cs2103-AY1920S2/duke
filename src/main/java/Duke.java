@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,19 +15,32 @@ public class Duke {
                 + "    -----------------------------------");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> strArr = new ArrayList<>();
+        ArrayList<Task> strArr = new ArrayList<>();
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
+            String arr[] = input.split(" ", 2);
+            Task t = new Task(input);
+
             if (!input.equals("bye")) {
                 if (input.equals("list")) {
                     System.out.println("    -----------------------------------");
                     for (int i = 1; i < strArr.size() + 1; i++) {
-                        System.out.println("      " + i + ". " + strArr.get(i-1));
+                        Task current = strArr.get(i-1);
+                        System.out.println("      " + i + ". [" + current.getStatusIcon() + "] " + current.getTask());
                     }
                     System.out.println("    -----------------------------------");
+
+                } else if (arr[0].equals("done")) {
+                    Task current = strArr.get(Integer.parseInt(arr[1]) - 1);
+                    current.markDone();
+                    System.out.println("    -----------------------------------\n"
+                            + "      Nice! I've marked this task as done:\n "
+                            + "        [" + current.getStatusIcon() + "] " + current.getTask() + "\n"
+                            + "    -----------------------------------");
+
                 } else {
-                    strArr.add(input);
+                    strArr.add(t);
                     System.out.println("    -----------------------------------\n"
                             + "      added: " + input +"\n"
                             + "    -----------------------------------");
