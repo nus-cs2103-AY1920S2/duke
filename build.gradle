@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'seedu.duke'
@@ -18,6 +19,13 @@ checkstyle {
 application {
     // Change this to your main class.
     mainClassName = "Duke"
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }
 
 dependencies {
