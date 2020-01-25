@@ -1,16 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Event implements Task {
     private final String name;
     private final boolean completed;
     private final LocalDateTime deadline;
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
     public Event(String name, LocalDateTime deadline) {
         this.name = name;
@@ -55,7 +54,7 @@ public class Event implements Task {
         List<String> list = Collections.list(new StringTokenizer(s, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
-        return new Event(list.get(1), LocalDateTime.parse(list.get(2), formatter), Boolean.parseBoolean(list.get(3)));
+        return new Event(list.get(1), LocalDateTime.parse(list.get(2)), Boolean.parseBoolean(list.get(3)));
     }
 
     @Override
