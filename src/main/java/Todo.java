@@ -10,28 +10,29 @@ public class Todo extends Task {
     String format_tasks(String s) throws DukeException {
         // Needed the space after "to do" due to space formatting.
 
-        String[] abcd = s.split(" ");
-        System.out.println("Hello " + abcd[0]);
+        String[] splited_string = getDescription().split("todo ");
 
-
-
-        if(super.format_tasks(s).length() <5) {
-            throw new DukeException("You cannot leave the description empty ");
-        } else {
-           return super.format_tasks(s);
+        try{
+            if(splited_string[1].length()<1) {
+                // Checks if the to-do is empty a not
+            }
+            return super.format_tasks(s);
+        }catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("You cannot leave the description empty");
+        } catch(Exception e) {
+            throw new DukeException("Please enter the correct format for the TODO");
         }
-
-
 
     }
 
     @Override
     void setDescription(String s) throws DukeException {
-        try {
-            super.setDescription(s);
-        } catch (Exception e) {
-            throw new DukeException("Please enter the correct format for the TODO");
-        }
+//        try {
+//            super.setDescription(s);
+//        } catch (Exception e) {
+//            throw new DukeException("Please enter the correct format for the TODO");
+//        }
+       super.setDescription(s);
     }
 
 

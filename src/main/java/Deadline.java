@@ -2,6 +2,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -47,11 +48,21 @@ public class Deadline extends Task {
             for (int i = 0; i < splitted_string.length - 1; i++) {
                 this.by += splitted_string[i] + "/";
             }
-            this.by += splitted_string[splitted_string.length - 1];
+            if (splitted_string[2].length() > 4) {
+                hasTime = true;
+                this.by += splitted_string[2];
+            } else {
+                this.by += splitted_string[splitted_string.length - 1];
+            }
         }
 
         else {
-            this.by = day_of_week_in_string;
+            // Means theres a time component
+            if(days.length > 1) {
+                hasTime = true;
+            } else {
+                this.by = day_of_week_in_string;
+            }
         }
     }
     private String getBy() {
@@ -59,7 +70,7 @@ public class Deadline extends Task {
     }
 
     // Get the date as a localdate event
-    LocalDate getD1() {
+    LocalDateTime getD1() {
         return d1;
     }
 
@@ -69,12 +80,19 @@ public class Deadline extends Task {
 
     @Override
     String format_tasks(String s) throws DukeException {
-        try {
 
-            return s.substring(s.indexOf("by")).replaceAll("by ", "");
-        } catch (Exception e) {
-            throw new DukeException("Please use ../by for deadline");
+        String[] splited_string = getDescription().split("deadline ");
+        if(splited_string[0].length() <1) {
+            throw new DukeException("You cannot leave the description empty");
+        } else {
+            try{
+                return s.substring(s.indexOf("by")).replaceAll("by ", "");
+
+            } catch (Exception e) {
+                throw new DukeException("Please use ../by instead of any other identifiers ");
+            }
         }
+
     }
 
     @Override
@@ -91,7 +109,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return " [" + Task_Codes.D + "]" + super.toString() + " (by: " +
-                d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                d1.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 
 }
