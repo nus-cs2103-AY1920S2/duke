@@ -14,9 +14,9 @@ public class Deadline extends Task {
     public String toString() {
         String str = "[D]";
         if (this.isDone) {
-            str += "[\u2713] ";
+            str += "[O] ";
         } else {
-            str += "[\u2718] ";
+            str += "[X] ";
         }
         str += this.description;
         str += " (by: " + this.time + ")";

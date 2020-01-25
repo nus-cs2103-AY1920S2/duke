@@ -22,16 +22,4 @@ public class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-
-    @Override
-    public String toString() {
-        String str = "";
-        if (this.isDone) {
-            str += "[\u2713] ";
-        } else {
-            str += "[\u2718] ";
-        }
-        str += this.description;
-        return str;
-    }
 }
