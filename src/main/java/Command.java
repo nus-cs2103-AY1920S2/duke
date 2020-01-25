@@ -1,36 +1,36 @@
-public class UserInput {
-    private String command;
+public class Command {
+    private String name;
     private String[] arguments;
 
-    public UserInput(String input) {
+    public Command(String input) {
         if (input.contains(" ")) {
             String[] inputs = input.split(" ", 2);
-            this.command = inputs[0];
+            this.name = inputs[0];
             if (inputs[1].contains(" ")) {
                 this.arguments = inputs[1].split(" ");
             } else {
                 this.arguments = new String[] {inputs[1]};
             }
         } else {
-            this.command = input;
+            this.name = input;
             this.arguments = new String[0];
         }
     }
 
-    public String getCommand() {
-        return command;
+    public String getCommandName() {
+        return name;
     }
 
-    public String[] getArguments() {
+    public String[] getArgumentList() {
         return arguments;
     }
 
-    public String getArgumentsAsString() {
+    public String getArgumentString() {
         return String.join(" ", arguments);
     }
 
     public String execute(TaskList tasks) throws DukeException {
-        switch (getCommand()) {
+        switch (getCommandName()) {
         case "": {
             throw new DukeNoCommandException();
         }
@@ -56,27 +56,27 @@ public class UserInput {
             break;
         }
         }
-        throw new DukeUnrecognisedCommandException(getCommand());
+        throw new DukeUnrecognisedCommandException(getCommandName());
     }
 
     private Task createTask() throws DukeException {
-        String taskType = getCommand();
-        if (getArguments().length == 0) {
+        String taskType = getCommandName();
+        if (getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(taskType);
         }
         switch (taskType) {
         case "todo": {
-            return new TodoTask(getArgumentsAsString());
+            return new TodoTask(getArgumentString());
         }
         case "deadline": {
-            String[] parts = getArgumentsAsString().split(" /by ", 2);
+            String[] parts = getArgumentString().split(" /by ", 2);
             if (parts.length != 2) {
                 throw new DukeInvalidNumberOfArgumentsException(taskType, 2, parts.length);
             }
             return new DeadlineTask(parts[0], parts[1]);
         }
         case "event": {
-            String[] parts = getArgumentsAsString().split(" /at ", 2);
+            String[] parts = getArgumentString().split(" /at ", 2);
             if (parts.length != 2) {
                 throw new DukeInvalidNumberOfArgumentsException(taskType, 2, parts.length);
             }
@@ -89,43 +89,44 @@ public class UserInput {
     }
 
     private String markTask(TaskList tasks) throws DukeException {
-        if (getArguments().length == 0) {
-            throw new DukeNoArgumentsException(getCommand());
+        if (getArgumentList().length == 0) {
+            throw new DukeNoArgumentsException(getCommandName());
         }
         if (tasks.isEmpty()) {
             throw new DukeEmptyTaskListException();
         }
         try {
-            int taskIndex = Integer.parseInt(getArguments()[0]) - 1;
+            int taskIndex = Integer.parseInt(getArgumentList()[0]) - 1;
             Task task = tasks.getTask(taskIndex);
             return task.markAsCompleted();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeInvalidTaskException(getArguments()[0]);
+            throw new DukeInvalidTaskException(getArgumentList()[0]);
         }
     }
 
     private String deleteTask(TaskList tasks) throws DukeException {
-        if (getArguments().length == 0) {
-            throw new DukeNoArgumentsException(getCommand());
+        if (getArgumentList().length == 0) {
+            throw new DukeNoArgumentsException(getCommandName());
         }
         if (tasks.isEmpty()) {
             throw new DukeEmptyTaskListException();
         }
         try {
-            int taskIndex = Integer.parseInt(getArguments()[0]) - 1;
+            int taskIndex = Integer.parseInt(getArgumentList()[0]) - 1;
             return tasks.removeTask(taskIndex);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeInvalidTaskException(getArguments()[0]);
+            throw new DukeInvalidTaskException(getArgumentList()[0]);
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder(command);
+        StringBuilder output = new StringBuilder(getCommandName());
         if (arguments.length > 0) {
-            output.append(" ");
-            output.append(String.join(" ", arguments));
+            output.append(String.format(" %s", getArgumentString()));
         }
         return output.toString();
     }
 }
+
+

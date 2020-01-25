@@ -11,18 +11,18 @@ public class Duke {
         TaskList tasks = new TaskList();
 
         System.out.println("Hello from\n" + logo);
-        UserInput input;
+        Command command;
         do {
-            input = new UserInput(sc.nextLine());
+            command = new Command(sc.nextLine());
             try {
-                String message = input.execute(tasks);
+                String message = command.execute(tasks);
                 System.out.println(message);
             } catch (DukeNoCommandException e) {
                 continue;
             } catch (DukeException e) {
                 System.out.println(e);
             }
-        } while (!input.getCommand().equals("bye") && sc.hasNextLine());
+        } while (!command.getCommandName().equals("bye") && sc.hasNextLine());
         sc.close();
         System.exit(0);
     }
