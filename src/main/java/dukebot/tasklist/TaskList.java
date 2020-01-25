@@ -19,10 +19,8 @@ public class TaskList {
         return this.taskList.get(taskInd);
     }
 
-    public Task addNewTask(String[] inpArr) throws DukeException {
-        Task newTask = Task.makeTask(inpArr);
-        this.taskList.add(newTask);
-        return newTask;
+    public void addTask(Task task) {
+        this.taskList.add(task);
     }
 
     public Task deleteTask(int taskInd) {

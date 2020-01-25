@@ -27,12 +27,12 @@ public class Ui {
         dukeSays("What will Master do today?");
     }
 
-    public String[] readCommand() {
+    public String readCommand() {
         sayFirst = true;
         System.out.println("\nMaster: ");
         String inp = sc.nextLine();
         System.out.println();
-        return inp.split(" ");
+        return inp;
     }
 
     //    public void setSayFirst() {

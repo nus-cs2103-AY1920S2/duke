@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
+    private boolean failedSave;
     private String storagePath;
 
     public Storage(String storagePath) {
@@ -24,7 +25,7 @@ public class Storage {
             writeStream.close();
 
         }catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -39,7 +40,7 @@ public class Storage {
 
                 return data;
             }catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
             }
         }
         System.out.println("fail load");
