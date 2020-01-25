@@ -47,54 +47,79 @@ public class Duke {
         List<Task> charmanderList = new ArrayList<>();
 
         while (true) {
-            String command = sc.nextLine();
-            String[] words = command.split(" ", 2);
-            String[] dates; //splits between task and date with (/by)
+            try {
+                String command = sc.nextLine();
+                String[] words = command.split(" ", 2);
+                String[] dates; //splits between task and date with (/by)
 
-            if (command.equals("bye")) break;
+                if (command.equals("bye")) break;
 
-            String task = "";
-            switch (words[0]) {
+                String task = "";
+                switch (words[0]) {
 
-                case "list":
-                    int listNo = 1;
+                    case "list":
+                        int listNo = 1;
 
-                    System.out.println("Charmander presents the list to you:");
-                    for (Task item : charmanderList) {
-                        System.out.println(listNo + " " + item);
-                        listNo++;
-                    }
-                    System.out.println("Charmander hopes you liked it!");
-                    break;
-                case "done":
-                    int listValue = Integer.parseInt(words[1]) - 1;
-                    charmanderList.get(listValue).markAsDone();
-                    System.out.println("Charmander crosses out the task.");
-                    System.out.println(charmanderList.get(listValue));
-                    break;
-                case "todo":
-                    task = words[1];
-                    Todo newTodo = new Todo(task);
-                    charmanderList.add(newTodo);
-                    System.out.println("Charmander writes a Todo. You peek over and it says:");
-                    System.out.println(newTodo);
-                    System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
-                    break;
-                case "deadline":
-                    dates = words[1].split(" /by ", 2);
-                    Deadline newDeadline = new Deadline(dates[0], dates[1]);
-                    charmanderList.add(newDeadline);
-                    System.out.println("Charmander writes a Deadline. You peek over and it says:");
-                    System.out.println(newDeadline);
-                    System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
-                    break;
-                case "event":
-                    dates = words[1].split(" /by ", 2);
-                    Event newEvent = new Event(dates[0], dates[1]);
-                    charmanderList.add(newEvent);
-                    System.out.println("Charmander writes a Event. You peek over and it says:");
-                    System.out.println(newEvent);
-                    System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                        System.out.println("Charmander presents the list to you:");
+                        for (Task item : charmanderList) {
+                            System.out.println(listNo + " " + item);
+                            listNo++;
+                        }
+                        System.out.println("Charmander hopes you liked it!");
+                        break;
+                    case "done":
+                        int listValue = Integer.parseInt(words[1]) - 1;
+                        charmanderList.get(listValue).markAsDone();
+                        System.out.println("Charmander crosses out the task.");
+                        System.out.println(charmanderList.get(listValue));
+                        break;
+                    case "todo":
+                        try {
+                            task = words[1];
+                        } catch (ArrayIndexOutOfBoundsException err) {
+                            throw new DukeException("Charmander needs a todo description to write it down!");
+                        }
+                        Todo newTodo = new Todo(task);
+                        charmanderList.add(newTodo);
+                        System.out.println("Charmander writes a Todo. You peek over and it says:");
+                        System.out.println(newTodo);
+                        System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                        break;
+                    case "deadline":
+                        if (words.length < 2) {
+                            throw new DukeException("Charmander needs a deadline description to write it down!");
+                        }
+                        try {
+                            dates = words[1].split(" /by ", 2);
+                            Deadline newDeadline = new Deadline(dates[0], dates[1]);
+                            charmanderList.add(newDeadline);
+                            System.out.println("Charmander writes a Deadline. You peek over and it says:");
+                            System.out.println(newDeadline);
+                            System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                        } catch (ArrayIndexOutOfBoundsException err) {
+                            throw new DukeException("Charmander needs a description AND a date to write it down!");
+                        }
+                        break;
+                    case "event":
+                        if (words.length < 2) {
+                            throw new DukeException("Charmander needs an event description to write it down!");
+                        }
+                        try {
+                            dates = words[1].split(" /by ", 2);
+                            Event newEvent = new Event(dates[0], dates[1]);
+                            charmanderList.add(newEvent);
+                            System.out.println("Charmander writes a Event. You peek over and it says:");
+                            System.out.println(newEvent);
+                            System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                        } catch (ArrayIndexOutOfBoundsException err) {
+                            throw new DukeException("Charmander needs a description AND a date to write it down!");
+                        }
+                        break;
+                    default:
+                        throw new DukeException("Charmander hurt itself in its confusion!");
+                }
+            } catch (DukeException err) {
+                System.out.println(err);
             }
         }
 
