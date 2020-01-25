@@ -2,8 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void run() {
+    public static final String FILEPATH = "./duke.txt";
+
+    public static void run(String filePath) {
         Scanner scanner = new Scanner(System.in);
+        Task.initTasks(FileHandler.loadFile(filePath));
         String prompt = "Anything Duke can do for you?";
         String border = new String(new char[50]).replace('\0', '_');;
         String input = "";
@@ -38,6 +41,7 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+        FileHandler.saveFile(filePath, Task.getTaskList());
         scanner.close();
     }
 
@@ -51,7 +55,7 @@ public class Duke {
         String exitInfo = "Enter bye to exit!";
         String exitMessage = "Goodbye, see you again!";
         System.out.println(exitInfo);
-        Duke.run();
+        Duke.run(FILEPATH);
         System.out.println(exitMessage);
     }
 }

@@ -12,6 +12,14 @@ public class Task {
         this.isDone = false;
     }
 
+    public static void initTasks(List<Task> tasks) {
+        taskList = tasks;
+    }
+
+    public static List<Task> getTaskList() {
+        return taskList;
+    }
+
     private static int getTaskCount() {
         return taskList.size();
     }
