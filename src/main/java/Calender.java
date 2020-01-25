@@ -15,9 +15,13 @@ public class Calender {
         }
     }
 
-    public ArrayList<Task> searchDate(LocalDate date) {
-        if (!hm.containsKey(date)) return new ArrayList<>();
-        return hm.get(date);
+    public void searchDate(LocalDate date) {
+        if (hm.containsKey(date)) {
+            ArrayList<Task> tasks = hm.get(date);
+            for (Task task : tasks) {
+                System.out.println("  " + task);
+            }
+        }
     }
 
     public Calender() {
