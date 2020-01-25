@@ -1,0 +1,76 @@
+              _.--""`-..
+            ,'          `.
+          ,'          __  `.
+         /|          " __   \
+        , |           / |.   .
+        |,'          !_.'|   |
+      ,'             '   |   |
+     /              |`--'|   |
+    |                `---'   |
+     .   ,                   |                       ,".
+      ._     '           _'  |                    , ' \ `
+  `.. `.`-...___,...---""    |       __,.        ,`"   L,|
+  |, `- .`._        _,-,.'   .  __.-'-. /        .   ,    \
+-:..     `. `-..--_.,.<       `"      / `.        `-/ |   .
+  `,         """"'     `.              ,'         |   |  ',,
+    `.      '            '            /          '    |'. |/
+      `.   |              \       _,-'           |       ''
+        `._'               \   '"\                .      |
+           |                '     \                `._  ,'
+           |                 '     \                 .'|
+           |                 .      \                | |
+           |                 |       L              ,' |
+           `                 |       |             /   '
+            \                |       |           ,'   /
+          ,' \               |  _.._ ,-..___,..-'    ,'
+         /     .             .      `!             ,j'
+        /       `.          /        .           .'/
+       .          `.       /         |        _.'.'
+        `.          7`'---'          |------"'_.'
+       _,.`,_     _'                ,''-----"'
+   _,-_    '       `.     .'      ,\
+   -" /`.         _,'     | _  _  _.|
+    ""--'---"""""'        `' '! |! /
+                            `" " -'
+Char! Charmander!
+Charmander writes a Todo. You peek over and it says:
+[T][?] beat elite four
+Charmander holds out 1 finger(s).
+Charmander writes a Todo. You peek over and it says:
+[T][?] find missingno
+Charmander holds out 2 finger(s).
+Charmander writes a Deadline. You peek over and it says:
+[D][?] ride s.s. Anne (by: tomorrow)
+Charmander holds out 3 finger(s).
+Charmander writes a Deadline. You peek over and it says:
+[D][?] evolve (by: level 16)
+Charmander holds out 4 finger(s).
+Charmander writes a Event. You peek over and it says:
+[E][?] release of mystery dungeon dx (date: yesterday-ish)
+Charmander holds out 5 finger(s).
+Charmander writes a Event. You peek over and it says:
+[E][?] year of the pikachu (date: 25 Jan 2020)
+Charmander holds out 6 finger(s).
+Charmander presents the list to you:
+1 [T][?] beat elite four
+2 [T][?] find missingno
+3 [D][?] ride s.s. Anne (by: tomorrow)
+4 [D][?] evolve (by: level 16)
+5 [E][?] release of mystery dungeon dx (date: yesterday-ish)
+6 [E][?] year of the pikachu (date: 25 Jan 2020)
+Charmander hopes you liked it!
+Charmander crosses out the task.
+[E][?] year of the pikachu (date: 25 Jan 2020)
+Charmander crosses out the task.
+[D][?] evolve (by: level 16)
+Charmander crosses out the task.
+[D][?] ride s.s. Anne (by: tomorrow)
+Charmander presents the list to you:
+1 [T][?] beat elite four
+2 [T][?] find missingno
+3 [D][?] ride s.s. Anne (by: tomorrow)
+4 [D][?] evolve (by: level 16)
+5 [E][?] release of mystery dungeon dx (date: yesterday-ish)
+6 [E][?] year of the pikachu (date: 25 Jan 2020)
+Charmander hopes you liked it!
+Charmander! Char char!
