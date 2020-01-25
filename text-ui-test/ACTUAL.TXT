@@ -7,11 +7,11 @@
 	|_____/ \__,_|\___|_| |_|\___||___/___/
 	My name is Duchess, as you can see above.
 	How may I help you?
-	Oh? You said "Hello"? How interesting.
-	But I don't see what I can do with that.
+	Stop causing me trouble...
+	I don't see what I can do with what you just told me.
 	As always, needing someone to keep track of things for you...
 		[T][✘] Go for a run
-	I've already tracked 1 tasks for you.
+	I've already tracked 1 task for you.
 	As always, needing someone to keep track of things for you...
 		[E][✘] Go for CS2103 class (at: Friday 2-4pm)
 	I've already tracked 2 tasks for you.
@@ -39,6 +39,6 @@
 		2.	[E][✘] Go for CS2103 class (at: Friday 2-4pm)
 		3.	[D][✘] Finish Week 2 IP (by: Thursday 11:59pm)
 		4.	[T][✘] Commit these changes
-	Oh? You said "Goodbye"? How interesting.
-	But I don't see what I can do with that.
+	Stop causing me trouble...
+	I don't see what I can do with what you just told me.
 	Bye, is it? Shoo shoo then.
