@@ -7,7 +7,7 @@ public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
     static Storage storage;
-    static Calender CALENDER;
+    static Calender CALENDER = new Calender();
 
     public static void readCommand(Command command) throws DukeDescriptionException,
             BadDescriptionException, BadDateException {
@@ -114,7 +114,6 @@ public class Duke {
         storage = new Storage("." + File.separator +
                 "data" + File.separator + "Task.txt");
         tasks = storage.printFileIntoList();
-        CALENDER = new Calender();
 
         System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
