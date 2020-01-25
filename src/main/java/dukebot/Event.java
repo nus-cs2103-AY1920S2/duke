@@ -1,20 +1,20 @@
 package dukebot;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String time;
+    private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    protected Event(String description, String time) {
-        super(description);
-        this.time = time;
-        this.taskType = TaskType.Event;
+    protected Event(String description, LocalDateTime dateTime) {
+        super(description, TaskType.DEADLINE, dateTime);
     }
-
     //    public String getTime() {
     //        return (this.time);
     //    }
 
     @Override
     public String toString() {
-        return (this.description + " (at: " + this.time + ")");
+        return (this.description + " (at: " + this.dateTimeToString() + ")");
     }
 }

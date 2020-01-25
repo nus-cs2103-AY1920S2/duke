@@ -1,14 +1,22 @@
 package dukebot;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.io.Serializable;
 
 public abstract class Task implements Serializable{
-    protected String description;
+    private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected final String description;
     private boolean isDone;
-    protected TaskType taskType;
+    protected final TaskType taskType;
+    protected final LocalDateTime dateTime;
 
-    protected Task(String description) {
+    protected Task(String description, TaskType taskType, LocalDateTime dateTime) {
+        this.taskType = taskType;
+        this.dateTime = dateTime;
         this.description = description;
         this.isDone = false;
     }
@@ -34,7 +42,12 @@ public abstract class Task implements Serializable{
             } else if (byInd > 1) {
                 description = String.join(" ", Arrays.copyOfRange(inp, 1, byInd));
                 time = String.join(" ", Arrays.copyOfRange(inp, byInd + 1, inp.length));
-                return new Deadline(description, time);
+                try {
+                    LocalDateTime parsedDate = DateTimeParse.parseDate(time);
+                    return new Deadline(description, parsedDate);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidTaskException("Master gave a date that Duke cannot read...");
+                }
             } else {
                 throw new InvalidTaskException("Master, use '/by' to indicate deadline,"
                         + " Duke wouldn't know otherwise...");
@@ -46,7 +59,12 @@ public abstract class Task implements Serializable{
             } else if (atInd > 1) {
                 description = String.join(" ", Arrays.copyOfRange(inp, 1, atInd));
                 time = String.join(" ", Arrays.copyOfRange(inp, atInd + 1, inp.length));
-                return new Event(description, time);
+                try {
+                    LocalDateTime parsedDate = DateTimeParse.parseDate(time);
+                    return new Event(description, parsedDate);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidTaskException("Master gave a date that Duke cannot read...");
+                }
             } else {
                 throw new InvalidTaskException("Master, use '/at' to indicate starting time,"
                         + " Duke wouldn't know otherwise...");
@@ -76,6 +94,19 @@ public abstract class Task implements Serializable{
      */
     public String getType() {
         return this.taskType.toString();
+    }
+
+    public String dateTimeToString() {
+        if (dateTime == null) {
+            return "";
+        } else if (dateTime.toLocalDate().equals(LocalDate.now())) {
+            return "Today " + dateTime.toLocalTime().toString();
+        } else if (dateTime.compareTo(LocalDateTime.now()) > 0) {
+            return this.dateTime.format(DEFAULT_FORMAT) + " [Over]";
+        } else {
+            return this.dateTime.format(DEFAULT_FORMAT);
+        }
+
     }
 
     @Override
