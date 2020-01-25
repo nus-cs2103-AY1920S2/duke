@@ -1,5 +1,5 @@
 public class EventTask extends Task {
-    public static char ICON = 'E';
+    public static final char ICON = 'E';
 
     private String at;
 

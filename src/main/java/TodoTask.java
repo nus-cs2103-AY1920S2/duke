@@ -1,5 +1,5 @@
 public class TodoTask extends Task {
-    public static char ICON = 'T';
+    public static final char ICON = 'T';
 
     public TodoTask(String description) {
         super(description);

@@ -11,7 +11,7 @@ public class Duke {
         return tasks;
     }
 
-    public void run() {
+    private void run() {
         ui.printWelcome();
         while (true) {
             String input;

@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();

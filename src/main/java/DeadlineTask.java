@@ -1,5 +1,5 @@
 public class DeadlineTask extends Task {
-    public static char ICON = 'D';
+    public static final char ICON = 'D';
 
     private String by;
 

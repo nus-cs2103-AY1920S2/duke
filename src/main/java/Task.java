@@ -1,6 +1,6 @@
 public abstract class Task {
-    public static char COMPLETED = 'X';
-    public static char PENDING = ' ';
+    public static final char COMPLETED = 'X';
+    public static final char PENDING = ' ';
 
     protected String description;
     protected boolean isCompleted;
