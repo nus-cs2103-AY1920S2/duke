@@ -3,12 +3,13 @@ import java.util.ArrayList;
 import dukebot.Task;
 import dukebot.InvalidTaskException;
 import dukebot.TaskList;
+import dukebot.Storage;
 
 /**
  * Main class.
  */
 public class Duke {
-    private static final String STORAGEPATH = "./dukeStore.txt";
+    private static final String PATH = "./dukeStore.txt";
     private static final String LOGO = "*******   **     ** **   ** ********\n"
             + "/**////** /**    /**/**  ** /**/////\n"
             + "/**    /**/**    /**/** **  /**\n"
@@ -22,7 +23,9 @@ public class Duke {
     private void run() {
 
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList(STORAGEPATH);
+        Storage storage = new Storage(PATH);
+        ArrayList<Task> savedTasks = storage.loadFromFile();
+        TaskList tasks = new TaskList(savedTasks);
 
         System.out.println("\nHi hi I'm \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
@@ -66,12 +69,14 @@ public class Duke {
                         if (taskInd >= tasks.size() || taskInd < 0) {
                             dukeSays("Duke can't seem to recall that item...");
                         } else {
-                            if (tasks.getIsDone(taskInd)) {
+                            Task doneTask = tasks.getTask(taskInd);
+                            if (doneTask.getDone()) {
                                 dukeSays("Didn't Master already do that?");
                             } else {
-                                dukeSays("So Master finally completed " + tasks.getTask(taskInd) + "?");
+                                dukeSays("So Master finally completed " + doneTask + "?");
                                 dukeSays("Duke's really proud of Master!");
-                                tasks.setDone(taskInd);
+                                doneTask.setDone();
+                                storage.saveToFile(tasks);
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -84,6 +89,7 @@ public class Duke {
             case "event":
                 try {
                     Task newTask = tasks.addNewTask(inpArr);
+                    storage.saveToFile(tasks);
                     dukeSays("So Master has " + newTask.getType() + ": " + newTask + "...");
                 } catch (InvalidTaskException e) {
                     dukeSays(e.getMessage());
@@ -101,6 +107,7 @@ public class Duke {
                         } else {
                             dukeSays("For Master, Duke can forget anything, even the:");
                             dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
+                            storage.saveToFile(tasks);
                         }
                     } catch (NumberFormatException e) {
                         dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");

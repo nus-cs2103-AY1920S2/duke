@@ -10,7 +10,8 @@ public class Storage {
         this.storagePath = storagePath;
     }
 
-    public void saveToFile(ArrayList<Task> data) {
+    public void saveToFile(TaskList tasks) {
+        ArrayList<Task> data = tasks.taskList;
         try{
             FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
