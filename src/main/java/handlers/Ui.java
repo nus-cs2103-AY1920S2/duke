@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import tasks.Task;
 
 public class Ui {
-    public static final String STRING= "    ____________________________________________________________";
-    public static final String SPACE = "     ";
+    private static final String STRING= "    ____________________________________________________________";
+    private static final String SPACE = "     ";
     Scanner sc;
 
     public Ui() {

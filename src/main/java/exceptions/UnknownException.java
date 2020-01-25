@@ -1,7 +1,7 @@
 package exceptions;
 
 public class UnknownException extends Exception{
-    public static final String SPACE = "     ";
+    private static final String SPACE = "     ";
     public UnknownException() {};
 
     public String toString() {

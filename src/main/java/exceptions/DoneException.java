@@ -1,7 +1,8 @@
 package exceptions;
 
 public class DoneException extends Exception{
-    public static final String SPACE = "     ";
+    private static final String SPACE = "     ";
+
     public DoneException() {};
 
     public String toString() {
