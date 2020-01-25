@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class Duke {
 
         BufferedReader bufferedReader = new BufferedReader (new InputStreamReader(System.in));
         String input;
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = getListFromFile();
 
         // Parse each command by user
         while (true) {
@@ -90,6 +89,9 @@ public class Duke {
                 if (doneIndex < tasks.size()) {
                     Task task = tasks.get(doneIndex);
                     task.markAsDone(true);
+                    if (!writeListToFile(tasks)) {
+                        throw new DukeException("☹ OOPS!!! Failed to save list!");
+                    }
                     prettyPrint("Nice! I've marked this task as done: \n" +
                             "       " + task);
                 } else {
@@ -102,6 +104,9 @@ public class Duke {
                     Task newTodoTask = new Todo(input.replaceFirst("^todo ", ""));
                     tasks.add(newTodoTask);
                     printAddTask(newTodoTask, tasks.size());
+                    if (!writeListToFile(tasks)) {
+                        throw new DukeException("☹ OOPS!!! Failed to save list!");
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
@@ -116,6 +121,9 @@ public class Duke {
                     Task newDeadlineTask = new Deadline(description, dateOrTime);
                     tasks.add(newDeadlineTask);
                     printAddTask(newDeadlineTask, tasks.size());
+                    if (!writeListToFile(tasks)) {
+                        throw new DukeException("☹ OOPS!!! Failed to save list!");
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! Deadline tasks require a specific time or date.");
                 }
@@ -129,6 +137,9 @@ public class Duke {
                     Task newEventTask = new Event(description, dateOrTime);
                     tasks.add(newEventTask);
                     printAddTask(newEventTask, tasks.size());
+                    if (!writeListToFile(tasks)) {
+                        throw new DukeException("☹ OOPS!!! Failed to save list!");
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
                 }
@@ -144,6 +155,9 @@ public class Duke {
                     Task deleteTask = tasks.get(deleteIndex);
                     tasks.remove(deleteIndex);
                     printDeleteTask(deleteTask, tasks.size());
+                    if (!writeListToFile(tasks)) {
+                        throw new DukeException("☹ OOPS!!! Failed to save list!");
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! No such task index!");
                 }
@@ -153,6 +167,96 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return tasks;
+    }
+
+    public static String convertListToString(List<Task> list) {
+        String listString = "";
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            int isDone = (task.isDone) ? 1 : 0;
+            if (task instanceof Deadline) {
+                listString += "D | " + isDone + " | " + task.description + " | " + ((Deadline) task).by;
+            } else if (task instanceof Event) {
+                listString += "E | " + isDone + " | " + task.description + " | " + ((Event) task).atDateAndTime;
+            } else if (task instanceof Todo) {
+                listString += "T | " + isDone + " | " + task.description;
+            }
+            if (i != list.size() - 1) {
+                listString += "\n";
+            }
+        }
+        return listString;
+    }
+
+    public static List<Task> convertStringToList(String listString) {
+        List<Task> list = new ArrayList<>();
+        String[] listItems = listString.split("\n");
+        for (int i = 0; i < listItems.length; i++) {
+            String listItem = listItems[i];
+            String[] taskItems = listItem.split(" \\| ");
+//            for (int j = 0; j < taskItems.length; j++) {
+//                System.out.println(taskItems[j]);
+//            }
+            if (taskItems.length < 3) {
+                return list;
+            }
+            Task task = null;
+            boolean isDone = (Integer.parseInt(taskItems[1]) == 0) ? false : true;
+            switch (taskItems[0]) {
+                case "T":
+                    task = new Todo(taskItems[2]);
+                    break;
+                case "D":
+                    task = new Deadline(taskItems[2], taskItems[3]);
+                    break;
+                case "E":
+                    task = new Event(taskItems[2], taskItems[3]);
+                    break;
+            }
+            if (task == null) {
+                return list;
+            }
+            task.isDone = isDone;
+            list.add(task);
+        }
+        return list;
+    }
+
+    public static boolean writeListToFile(List<Task> list) {
+        String listString = convertListToString(list);
+        System.out.println(listString);
+
+        File dataPath = new File(System.getProperty("user.dir"));
+        File newFile = new File(dataPath.getAbsolutePath() + File.separator + "duke.txt");
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(newFile));
+            writer.write(listString);
+
+            writer.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static List<Task> getListFromFile() {
+        File dataPath = new File(System.getProperty("user.dir"));
+        File newFile = new File(dataPath.getAbsolutePath() + File.separator + "duke.txt");
+        List<Task> list = new ArrayList<>();
+        String listString = "";
+//        String listString = "T | 0 | 123\n" + "D | 0 | 124 | js\n";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(newFile));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                listString += line;
+            }
+        } catch (Exception e) {
+            return list;
+        }
+        list = convertStringToList(listString);
+        return list;
     }
 
     /**
