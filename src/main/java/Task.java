@@ -1,12 +1,10 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected boolean isDeleted;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.isDeleted = false;
     }
 
     public String getStatusIcon() {
@@ -15,10 +13,6 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-    }
-
-    public void markAsDeleted() {
-        this.isDeleted = true;
     }
 
     @Override
