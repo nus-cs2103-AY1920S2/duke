@@ -66,6 +66,42 @@ public class Duke {
                         System.out.println(line);
                     }
                 }
+            }  else if (input.split(" ")[0].equals("delete")){
+                if (input.split(" ").length == 1){
+                    System.out.println(line);
+                    System.out.println(indent + "☹ OOPS!!! The number of a delete command cannot be empty.");
+                    System.out.println(line);
+                } else {
+                    try{
+                        int num = Integer.parseInt(input.split(" ")[1]);
+                        if (toDo.size() == 0){
+                            System.out.println(line);
+                            System.out.println(indent + "☹ OOPS!!! You have no tasks currently.");
+                            System.out.println(line);
+                        }  else if (num  == 0){
+                            System.out.println(line);
+                            System.out.println(indent + "☹ OOPS!!! Task number cannot be 0");
+                            System.out.println(line);
+                        } else if (num > toDo.size()){
+                            System.out.println(line);
+                            System.out.println(indent + "☹ OOPS!!! The number of a delete command cannot be greater than the number of tasks " +
+                                    "you have.");
+                            System.out.println(line);
+                        } else {
+                            Task removedTask = toDo.remove(num - 1);
+                            System.out.println(line);
+                            System.out.println(indent + "Noted. I've removed this task: ");
+                            System.out.println(indent + indent + removedTask);
+                            System.out.println(indent + "Now you have " + String.valueOf(toDo.size()) + " tasks in the list.");
+                            System.out.println(line);
+                        }
+                    }catch (NumberFormatException ex) {
+                        //handle exception here
+                        System.out.println(line);
+                        System.out.println(indent + "☹ OOPS!!! Enter a valid number after done command");
+                        System.out.println(line);
+                    }
+                }
             } else if (input.split(" ")[0].equals("todo")){
                 if (input.split(" ").length == 1){
                     System.out.println(line);
