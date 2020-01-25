@@ -93,14 +93,16 @@ public class Duke {
                         int indexCut = line.indexOf("/by");
                         String desc = line.substring(0, indexCut - 1);
                         String by = line.substring(indexCut + 4);
-                        Deadline deadline = new Deadline(desc, by);
+                        TaskDate td = new TaskDate(by);
+                        Deadline deadline = new Deadline(desc, td);
                         lst.add(deadline);
                         res += deadline;
                     } else {
                         int indexCut = line.indexOf("/at");
                         String desc = line.substring(0, indexCut - 1);
                         String at = line.substring(indexCut + 4);
-                        Event event = new Event(desc, at);
+                        TaskDate td = new TaskDate(at);
+                        Event event = new Event(desc, td);
                         lst.add(event);
                         res += event;
                     }
