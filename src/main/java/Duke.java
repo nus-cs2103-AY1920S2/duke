@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,8 +9,8 @@ public class Duke {
 
     /**
      * Formats a string to an output produced by Duke.
-     * @param s String to be formatted.
-     * @return Formatted string ready to be printed.
+     * @param s string to be formatted.
+     * @return formatted string ready to be printed.
      */
     public static String dukeFormat(String s) {
         return indent + fill + "\n" + indent + s + "\n" + indent + fill;
@@ -30,10 +31,41 @@ public class Duke {
         return res;
     }
 
+    /**
+     * Saves the current state of the task list in persistent storage.
+     * @param file file name specified
+     * @param lst updated list to be saved
+     */
+    public static void save(String file, ArrayList<Task> lst) {
+        try {
+            FileOutputStream fos= new FileOutputStream ("src/main/data/tasks.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(lst);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> lst = new ArrayList<>(100);
         String getInput = null;
+
+        try {
+            File savedData = new File("src/main/data/tasks.ser");
+            FileInputStream fis = new FileInputStream(savedData);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Task> lstSaved = (ArrayList<Task>) ois.readObject();
+            ois.close();
+            lst = lstSaved;
+            System.out.println(indent + "Retrieving my little boy's history..");
+        } catch (FileNotFoundException e) {
+            System.out.println(indent + "Initialising new list for my little boy..");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(dukeFormat("Hello I'm your mum. What can I do for you?"));
         getInput = sc.next();
@@ -72,6 +104,8 @@ public class Duke {
                         lst.add(event);
                         res += event;
                     }
+
+                    save("src/main/data/tasks.ser", lst);
                     res += "\n    You have " + String.valueOf(lst.size()) + " tasks in the list.";
                     System.out.println(dukeFormat(res));
 
@@ -108,6 +142,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(dukeFormat("Please try again, your input is invalid."));
+            } catch (Exception e) {
+                System.out.println(e.getClass());
             }
 
             getInput = sc.next();
