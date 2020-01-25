@@ -1,4 +1,8 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -94,12 +98,12 @@ public class Duke {
             case 'D':
                 task_info = taskString.substring(2, taskString.length());
                 sep = task_info.split("@");
-                task_list.add(new Deadline(sep[0], sep[1]));
+                task_list.add(new Deadline(sep[0], LocalDateTime.parse(sep[1])));
                 break;
             case 'E':
                 task_info = taskString.substring(2, taskString.length());
                 sep = task_info.split("@");
-                task_list.add(new Event(sep[0], sep[1]));
+                task_list.add(new Event(sep[0], LocalDateTime.parse(sep[1])));
                 break;
             default:
                 break;
@@ -167,6 +171,9 @@ public class Duke {
                     case "delete":
                         int deleteTaskNum = in.nextInt();
                         DeleteTask(deleteTaskNum - 1);
+                        break;
+                    case "date":
+                        PrintAllOnDate(in.nextLine().trim());
                         break;
                     default:
                         in.nextLine();
@@ -236,7 +243,7 @@ public class Duke {
             PrintWithIndent(hori_line);
             PrintWithIndent("Got it. I've added this task:");
             PrintWithIndent(task_list.get(task_list.size() - 1).toString());
-            PrintWithIndent("Now you have " + task_list.size() + " tasks in the list.");
+            PrintWithIndent("Now you have " + task_list.size() + " task" + (task_list.size() != 1 ? "s" : "") + " in the list.");
             PrintWithIndent(hori_line);
         } catch (DukeException.EmptyToDo | DukeException.EmptyDeadlineName | DukeException.NoDeadlineTime | DukeException.EmptyEvent | DukeException.NoEventDatetime e) {
             // currently all exceptions are handled just by relaying a message. Nothing special, yet.
@@ -251,7 +258,6 @@ public class Duke {
         if (!task_list.isEmpty()) {
             for (int i = 1; i <= task_list.size(); i++) {
                 PrintWithIndent(i + "." + task_list.get(i - 1).toString());
-                //PrintWithIndent(i + "." + task_list[i - 1].toString());
             }
         } else {
             PrintWithIndent("Empty List. You are currently free! Upz lah!");
@@ -284,13 +290,43 @@ public class Duke {
             PrintWithIndent(hori_line);
             PrintWithIndent("Noted! I've removed this task:");
             PrintWithIndent(TaskToRemove);
-            PrintWithIndent("Now you have " + task_list.size() + " tasks in the list.");
+            PrintWithIndent("Now you have " + task_list.size() + " task" + (task_list.size() != 1 ? "s" : "") + " in the list.");
             PrintWithIndent(hori_line);
 
         } else {
             // Task does not exist
             PrintWithIndent(hori_line);
             PrintWithIndent("Sorry, mate! No such task.");
+            PrintWithIndent(hori_line);
+        }
+    }
+
+    private void PrintAllOnDate(String dateStr) {
+        try {
+            LocalDate date =  LocalDate.parse(dateStr);
+            PrintWithIndent(hori_line);
+            int count = 0;
+            for (Task t: task_list) {
+                if (t instanceof Deadline) {
+                    Deadline d = (Deadline)t;
+                    if (d.getDeadline().toLocalDate().isEqual(date)) {
+                        count++;
+                        PrintWithIndent(count + "." + d.toString());
+                    }
+                } else if (t instanceof Event) {
+                    Event e = (Event)t;
+                    if (e.getDatetime().toLocalDate().isEqual(date)) {
+                        count++;
+                        PrintWithIndent(count + "." + e.toString());
+                    }
+                }
+            }
+            PrintWithIndent("You have " + count + " thing" + (count != 1 ? "s" : "")
+                    + " happening on: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            PrintWithIndent(hori_line);
+        } catch (DateTimeParseException e) {
+            PrintWithIndent(hori_line);
+            PrintWithIndent("Please in put a valid date. E.g. 2020-12-26");
             PrintWithIndent(hori_line);
         }
     }
