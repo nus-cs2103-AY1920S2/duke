@@ -1,11 +1,13 @@
 package duke.commands;
 
 import java.util.List;
+
+import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.exceptions.DukeException;
 
 class ListAll implements Command {
-    public void execute(String arg, List<Task> tasks) throws DukeException {
+    public void execute(String arg, List<Task> tasks, Ui ui) throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks.");
         }
@@ -19,6 +21,6 @@ class ListAll implements Command {
             sb.append("\n");
             counter += 1;
         }
-        System.out.print(formatReply(sb.toString()));
+        ui.showReply(sb.toString());
     }
 }

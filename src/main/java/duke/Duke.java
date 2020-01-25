@@ -13,57 +13,37 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.ui.Ui;
+import duke.ui.TextUi;
 import duke.commands.CommandHandler;
 import duke.exceptions.DukeException;
 
 public class Duke {
     public static void main(String[] args) {
-        System.out.print(createGreeting());
+        Ui ui = new TextUi();
         Scanner sc = new Scanner(System.in);
         String filePath = "data/tasks.txt";
         List<Task> tasks = new ArrayList<>();
+        ui.showGreeting();
         try {
             tasks = load(filePath);
-            System.out.print(formatReply("Save file loaded!"));
+            ui.showReply("Save file loaded!");
         } catch (FileNotFoundException e) {
-            System.out.print(formatReply("Save file not found!"));
+            ui.showError("Save file not found!");
         } catch (DukeException e) {
-            System.out.print(formatReply(e.getMessage()));
+            ui.showError(e.getMessage());
         }
-        CommandHandler handler = new CommandHandler(tasks);
+        CommandHandler handler = new CommandHandler(tasks, ui);
         while (handler.isActive()) {
             handler.executeCmd(sc.nextLine());
         }
         try {
             save(filePath, tasks);
-            System.out.print(formatReply("Save Success! See you next time!"));
+            ui.showReply("Save Success! See you next time!");
         } catch (IOException e) {
-            System.out.print(formatReply("Save Failure :-(. Try again next time!"));
+            ui.showError("Save Failure :-(. Try again next time!");
         }
         sc.close();
-    }
-
-    private static String createGreeting() {
-        StringBuilder sb = new StringBuilder();
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        sb.append(logo);
-        sb.append("\n");
-        sb.append(formatReply("Hello! I'm Duke\nGive me a moment while I locate your save file..."));
-        return sb.toString();
-    }
-
-    private static String formatReply(String str) {
-        String[] lines = str.split("\\r?\\n");
-        StringBuilder sb = new StringBuilder();
-        String lineBreak = "===========================================================\n";
-        for (String line : lines) {
-            sb.append("> ");
-            sb.append(line);
-            sb.append("\n");
-        }
-        sb.append(lineBreak);
-        return sb.toString();
     }
 
     private static List<Task> load(String filePath) throws FileNotFoundException, DukeException {
