@@ -1,0 +1,9 @@
+[T][N] learn java
+[D][Y] CS2103 quiz 2 (by: Sunday 2359)
+[D][N] CS2103 project (by: Tuesday 2359)
+[E][N] Team Meeting (at: Monday 2-4pm)
+[E][Y] gathering (at: 25 Jan 2019 5pm)
+[D][N] read notes (by: Wednesday 2pm)
+[D][Y] AI quiz (by: tonight)
+[E][N] lunch (at: 13 Feb 2pm)
+[T][Y] revise content
