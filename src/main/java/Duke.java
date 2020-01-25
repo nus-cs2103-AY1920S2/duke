@@ -4,9 +4,11 @@ import java.util.Scanner;
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
     private final String LINE = "\t__________________________________________________________";
-    private void response(String s){
+    private void response(String... strs){
         System.out.println(LINE);
-        System.out.println("\t" + s);
+        for(String s: strs){
+            System.out.println("\t" + s);
+        }
         System.out.println(LINE);
     }
     public static void main(String[] args) {
@@ -36,7 +38,27 @@ public class Duke {
                 case "done":
                     Task t = tasks.get(inputSc.nextInt() - 1);
                     t.markAsDone();
-                    response("Awesome! I've marked this task as done:\n\t" + t.toString());
+                    response("Awesome! I've marked this task as done:", t.toString());
+                    break;
+                case "todo":
+                    Todo todo = new Todo(input.substring(command.length()).trim());
+                    addTask(todo);
+                    break;
+                case "deadline":
+                    int byIndex = input.indexOf("/by");
+                    Deadline dl = new Deadline(
+                            input.substring(command.length(), byIndex).trim(),
+                            input.substring(byIndex + 3).trim()
+                    );
+                    addTask(dl);
+                    break;
+                case "event":
+                    int atIndex = input.indexOf("/at");
+                    Event e = new Event(
+                            input.substring(command.length(), atIndex).trim(),
+                            input.substring(atIndex + 3).trim()
+                    );
+                    addTask(e);
                     break;
                 default:
                     tasks.add(new Task(input));
@@ -45,6 +67,10 @@ public class Duke {
         }
     }
 
+    private void addTask(Task t){
+        tasks.add(t);
+        response("Got it, I've added this task:", t.toString(), "Now you have " + tasks.size() + " task(s) in the list.");
+    }
     private void listTasks() {
         System.out.println(LINE);
         for (int i=0; i<tasks.size(); i++){
