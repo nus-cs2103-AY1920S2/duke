@@ -5,15 +5,27 @@ import storage.Storage;
 import exception.DukeException;
 import parser.Parser;
 
-import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.nio.file.Paths;
 
-public class Duke {
+public class Duke extends Application {
     private UserInterface UI;
     private TaskList taskList;
 
     private static Storage storage = new Storage(Paths.get("storage", "file.txt"));
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 
     public Duke() {
         this.UI = new UserInterface();
@@ -23,6 +35,10 @@ public class Duke {
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.start();
+    }
+
+    public String getResponse(String input) {
+        dispatch(input);
     }
 
     public void start() {
