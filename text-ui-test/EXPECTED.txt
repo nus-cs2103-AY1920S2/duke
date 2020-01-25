@@ -22,7 +22,7 @@ todo borrow book
 
 list
     ____________________________________________________________
-     Here are the tasks in your list:
+     Here are all your tasks:
      1.[T][N] borrow book
     ____________________________________________________________
 
@@ -42,7 +42,7 @@ event project meeting /at 02/11/2020 2359
 
 list
     ____________________________________________________________
-     Here are the tasks in your list:
+     Here are all your tasks:
      1.[T][N] borrow book
      2.[D][N] return book (by: 19 Dec 2019 16:00)
      3.[E][N] project meeting (at: 02 Nov 2020 23:59)
@@ -56,7 +56,7 @@ done 3
 
 list
     ____________________________________________________________
-     Here are the tasks in your list:
+     Here are all your tasks:
      1.[T][N] borrow book
      2.[D][N] return book (by: 19 Dec 2019 16:00)
      3.[E][Y] project meeting (at: 02 Nov 2020 23:59)

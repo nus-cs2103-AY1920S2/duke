@@ -42,8 +42,7 @@ public class Duke {
     private void dispatch(String input) throws DukeException {
         switch (input) {
             case "list":
-                String[] output = this.taskList.allTasks();
-                UI.showList(output);
+                UI.showList(this.taskList.getAllTaskString());
                 return;
             case "bye":
                 UI.showBye();
@@ -73,6 +72,12 @@ public class Duke {
                         UI.out2(String.format("Now you have %d tasks in the list.",
                                 this.taskList.size()));
                     }
+                } else if (Parser.isFind(input)) {
+                    if (this.taskList.isEmpty()) {
+                        throw new DukeException("Task list is empty!");
+                    }
+                    String searchTerm = input.substring(5).trim();
+                    UI.showSearch(taskList.search(searchTerm));
                 } else {
                     Task newTask = this.taskList.addTask(input);
                     UI.out2("Got it. I've added this task: ");

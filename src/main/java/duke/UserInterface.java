@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class UserInterface {
     private String logo =
@@ -47,25 +48,43 @@ public class UserInterface {
     }
 
     public void showSep() {
-        out(this.separator, indent1);
+        out1(this.separator);
     }
 
     public void showErr(String errMsg) {
-        out(errMsg, indent2);
+        out2(errMsg);
     }
 
-    public void showList(String[] tasks) {
-        out("Here are the tasks in your list:", indent2);
-        for (String s : tasks)
-            out(s, indent2);
+    private void printList(ArrayList<String> list) {
+        for (String items : list) {
+            out2(items);
+        }
+    }
+
+    public void showList(ArrayList<String> tasks) {
+        if (tasks.size() > 0) {
+            out2("Here are all your tasks:");
+            printList(tasks);
+        } else {
+            out2("List is empty!");
+        }
+    }
+
+    public void showSearch(ArrayList<String> tasks) {
+        if (tasks.size() > 0) {
+            out2("Here are the matches:");
+            printList(tasks);
+        } else {
+            out2("No matches found!");
+        }
     }
 
     public void showBye() {
-        out("Bye. Hope to see you again soon!", indent2);
+        out2("Bye. Hope to see you again soon!");
     }
 
     public void showDone(String task) {
-        out("Nice! I've marked this task as done:", indent2);
+        out2("Nice! I've marked this task as done:");
         out(task, indent3);
     }
 
@@ -75,6 +94,10 @@ public class UserInterface {
 
     public void out3(String in) {
         System.out.println(" ".repeat(indent3) + in);
+    }
+
+    public void out1(String in) {
+        System.out.println(" ".repeat(indent1) + in);
     }
 
     public void out(String in, int indent) {

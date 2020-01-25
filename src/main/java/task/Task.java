@@ -55,6 +55,10 @@ public class Task {
         return (this.isDone ? "Y" : "N"); // Couldn't view the ticks and crosses on my terminal
     }
 
+    public Boolean contains(String term) {
+        return this.description.contains(term);
+    }
+
     public void setDone() {
         this.isDone = true;
     }

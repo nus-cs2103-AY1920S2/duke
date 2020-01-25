@@ -20,7 +20,23 @@ public class Parser {
             if (!Pattern.matches("^(done|delete)\\s+.*", input)) {
                 throw new DukeException("Action should be at the front");
             }
+            if (Pattern.matches("^(done|delete)\\s+\\d+.+$", input)) {
+                throw new DukeException("Must end with a number and provide only one number!");
+            }
             if (!Pattern.matches("^(done|delete)\\s+\\d+$", input)) {
+                throw new DukeException("A task number must be provided");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static Boolean isFind(String input) throws DukeException {
+        if (Pattern.matches("^(find\\s+.*)|(.*\\s+find\\s+.*)|(.*\\s+find$)", input)) {
+            if (!Pattern.matches("^find\\s+.*", input)) {
+                throw new DukeException("Action should be at the front");
+            }
+            if (!Pattern.matches("^find\\s+.*", input)) {
                 throw new DukeException("A task number must be provided");
             }
             return true;
