@@ -20,15 +20,23 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        String input;
+        Scanner inputSc;
+        String command, input;
         mainLoop: while (true){
             input = sc.nextLine().trim();
-            switch(input){
+            inputSc = new Scanner(input);
+            command = inputSc.next();
+            switch(command){
                 case "bye":
                     response("Goodbye! Hope to hear from you soon :)");
                     break mainLoop;
                 case "list":
                     listTasks();
+                    break;
+                case "done":
+                    Task t = tasks.get(inputSc.nextInt() - 1);
+                    t.markAsDone();
+                    response("Awesome! I've marked this task as done:\n\t" + t.toString());
                     break;
                 default:
                     tasks.add(new Task(input));
