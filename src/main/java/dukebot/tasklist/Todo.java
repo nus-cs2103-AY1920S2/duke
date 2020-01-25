@@ -1,4 +1,4 @@
-package dukebot;
+package dukebot.tasklist;
 
 public class Todo extends Task {
 

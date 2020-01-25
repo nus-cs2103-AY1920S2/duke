@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import dukebot.*;
+import dukebot.tasklist.Task;
+import dukebot.tasklist.TaskList;
 
 /**
  * Main class.
@@ -70,7 +72,7 @@ public class Duke {
                     storage.saveToFile(tasks);
                     ui.newTask(newTask);
                 } catch (DukeException e) {
-                    ui.dukeSays(e.getMessage());
+                    ui.sayLine(e.getErrorLineName());
                 }
                 break;
             case "delete":

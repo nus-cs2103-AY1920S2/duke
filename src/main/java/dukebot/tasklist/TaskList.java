@@ -1,4 +1,6 @@
-package dukebot;
+package dukebot.tasklist;
+
+import dukebot.DukeException;
 
 import java.util.ArrayList;
 

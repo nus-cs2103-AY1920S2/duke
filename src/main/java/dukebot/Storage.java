@@ -1,5 +1,8 @@
 package dukebot;
 
+import dukebot.tasklist.Task;
+import dukebot.tasklist.TaskList;
+
 import java.io.*;
 import java.util.ArrayList;
 

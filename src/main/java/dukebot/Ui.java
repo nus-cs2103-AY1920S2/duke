@@ -1,5 +1,7 @@
 package dukebot;
 
+import dukebot.tasklist.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
