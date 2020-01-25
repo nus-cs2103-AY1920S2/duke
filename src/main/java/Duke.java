@@ -38,11 +38,34 @@ public class Duke {
                 System.out.println(indent + "Nice! I've marked this task as done: ");
                 System.out.println(indent + indent + toDo.get(num - 1));
                 System.out.println(line);
-            } else {
-                Task newTask = new Task(input);
+            } else if (input.split(" ")[0].equals("todo")){
+                String description = input.replaceFirst("todo ", "");
+                Task newTask = new ToDos(description);
                 toDo.add(newTask);
                 System.out.println(line);
-                System.out.println(indent + "added: " + input);
+                System.out.println(indent + "Got it. I've added this task:");
+                System.out.println(indent + indent + newTask);
+                System.out.println(indent + "Now you have " + String.valueOf(toDo.size()) + " tasks in the list.");
+                System.out.println(line);
+            } else if (input.split(" ")[0].equals("deadline")){
+                String description = input.replaceFirst("deadline ", "").split("/")[0].trim();
+                String datetime = input.replaceFirst("deadline ", "").split("/")[1].replaceFirst("by ", "");
+                Task newTask = new Deadlines(description, datetime);
+                toDo.add(newTask);
+                System.out.println(line);
+                System.out.println(indent + "Got it. I've added this task:");
+                System.out.println(indent + indent + newTask);
+                System.out.println(indent + "Now you have " + String.valueOf(toDo.size()) + " tasks in the list.");
+                System.out.println(line);
+            } else if (input.split(" ")[0].equals("event")){
+                String description = input.replaceFirst("event ", "").split("/")[0].trim();
+                String datetime = input.replaceFirst("event ", "").split("/")[1].replaceFirst("at ", "");
+                Task newTask = new Events(description, datetime);
+                toDo.add(newTask);
+                System.out.println(line);
+                System.out.println(indent + "Got it. I've added this task:");
+                System.out.println(indent + indent + newTask);
+                System.out.println(indent + "Now you have " + String.valueOf(toDo.size()) + " tasks in the list.");
                 System.out.println(line);
             }
         }
