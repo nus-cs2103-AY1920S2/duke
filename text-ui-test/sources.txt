@@ -4,3 +4,5 @@ C:\Users\zain_\OneDrive\Desktop\iP\src\main\java\DukeException.java
 C:\Users\zain_\OneDrive\Desktop\iP\src\main\java\Event.java
 C:\Users\zain_\OneDrive\Desktop\iP\src\main\java\Task.java
 C:\Users\zain_\OneDrive\Desktop\iP\src\main\java\Todo.java
+C:\Users\zain_\OneDrive\Desktop\iP\src\main\java\DukeInvalidCommandException.java
+C:\Users\zain_\OneDrive\Desktop\iP\src\main\java\DukeInvalidTaskException.java
