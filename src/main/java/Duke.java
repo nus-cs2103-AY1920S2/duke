@@ -13,16 +13,22 @@ public class Duke {
         System.out.println("    Hello! I'm Duke\n" + "  What can I do for you?");
         String input = sc.nextLine();
         int listCounter = 0;
-        if (!input.equals("bye") && !input.equals("list")) {
+        if (!input.equals("bye") && !input.equals("list") && !input.equals("done")) {
             System.out.println("added: " + input);
             arr[listCounter] = new Task(input);
             listCounter++;
         } else if (input.equals("list")) {
+            System.out.println("Here are the tasks in your list:");
             for(int i = 0; i < arr.length; i++) {
-                System.out.println(i + 1 + ". " + arr[i].getDescription());
+                System.out.println(i + 1 + ".[" + arr[i].getStatusIcon() +"] " + arr[i].getDescription());
             }
         } else if (input.equals("bye")){
             System.out.println("Bye. Hope to see you again soon!");
+        } else {
+            char charArr[] = input.toCharArray();
+            int taskNum = charArr[5];
+            taskNum -= 1;
+            arr[taskNum].isDone = true;
         }
     }
 }
