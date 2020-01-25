@@ -27,43 +27,7 @@ public class Deadline extends Task {
     // Or two elements.
     void setBy(String by) {
 
-        // date_time is equal to everything after " /by"
-
-        String[] splitted_string = by.split("/");
-        String day_of_week_in_string = splitted_string[0];
-        days = day_of_week_in_string.split(" ");
-        if (dm.getHm().containsKey(days[0].toUpperCase())) {
-            isDay = true;
-        }
-
-        // If the user enters "2" instead or "02", this changes it to "02"
-
-        if (!isDay) {
-            for (int j = 0; j < 2; j++) {
-                if (splitted_string[j].length() != 2) {
-                    splitted_string[j] = ("0" + splitted_string[j]);
-                }
-            }
-
-            for (int i = 0; i < splitted_string.length - 1; i++) {
-                this.by += splitted_string[i] + "/";
-            }
-            if (splitted_string[2].length() > 4) {
-                hasTime = true;
-                this.by += splitted_string[2];
-            } else {
-                this.by += splitted_string[splitted_string.length - 1];
-            }
-        }
-
-        else {
-            // Means theres a time component
-            if(days.length > 1) {
-                hasTime = true;
-            } else {
-                this.by = day_of_week_in_string;
-            }
-        }
+        this.by = super.set_by_at(by);
     }
     private String getBy() {
         return by;

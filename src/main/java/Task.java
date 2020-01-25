@@ -7,13 +7,13 @@ class Task {
 
     private String description;
     private boolean isDone;
-    protected LocalDateTime d1;
-    protected DaysOfWeek dm = new DaysOfWeek();
-    protected String[] days;
-    protected boolean isDay;
+    LocalDateTime d1;
+    private DaysOfWeek dm = new DaysOfWeek();
+    private String[] days;
+    private boolean isDay;
     // To check if there is time inclusive in the command a not
-    protected boolean hasTime;
-    protected String time;
+    private boolean hasTime;
+
 
     Task(String description) {
         this.description = description;
@@ -44,7 +44,7 @@ class Task {
         this.description = s;
     }
 
-    protected void setD1(String at) throws DukeException {
+    void setD1(String at) throws DukeException {
         if (!isDay) {
             // Means the string is entered as "2/12/2019",
             // We format it so that the date becomes "2019-12-02"
@@ -114,27 +114,19 @@ class Task {
     // Between "-" date formats and "/" date formats. Same
     private void Comparision_between_inputs(String at, DateTimeFormatter dateFormat) {
         if(!hasTime) {
-            LocalDateTime date = LocalDateTime.parse(at + " 00:00" , dateFormat);
-            this.d1 = date;
+            this.d1 = LocalDateTime.parse(at + " 00:00" , dateFormat);
         }
         // If there is a time component
         else {
-            System.out.println("Hello");
             //TODO Find a way not to force the substring values.
             String day_and_time = at.substring(11 , 13) + ':' + at.substring(13, 15);
 
             String[] split_date_from_time = at.split(" ");
             String date_only = split_date_from_time[0];
-
-            LocalDateTime date = LocalDateTime.parse(date_only + " " + day_and_time , dateFormat);
-            this.d1 = date;
+            this.d1 = LocalDateTime.parse(date_only + " " + day_and_time , dateFormat);
         }
     }
 
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     @Override
     public String toString() {
@@ -150,6 +142,59 @@ class Task {
         Todo, Deadline, Event
     }
 
+    // Main method to set the At and By for deadline and Event classes
+    String set_by_at(String s) {
+        StringBuilder returned = new StringBuilder();
+        String[] splitted_string = s.split("/");
+        String day_of_week_in_string = splitted_string[0];
+        days = day_of_week_in_string.split(" ");
+        if (this.dm.getHm().containsKey(days[0].toUpperCase())) {
+            isDay = true;
+        }
+
+        // If its a date. Not a day.
+
+        if (!isDay) {
+            // If the user enters "2" instead or "02", this changes it to "02"
+
+
+            // Means if the splitted string has time. Eg: "2/12/2019 1800"
+            for (int j = 0; j < 2; j++) {
+                if (splitted_string[j].length() != 2) {
+                    splitted_string[j] = ("0" + splitted_string[j]);
+                }
+            }
+
+            for (int i = 0; i < splitted_string.length - 1; i++) {
+                returned.append(splitted_string[i]).append("/");
+            }
+
+
+            // Check if the time component is inside
+            // if its include splitted_string[2] should be 2/12/[2019 1800]
+            if (splitted_string[2].length() > 4) {
+                hasTime = true;
+                returned.append(splitted_string[2]);
+            } else {
+                returned.append(splitted_string[splitted_string.length - 1]);
+            }
+        }
+
+
+
+        // Means theres a day component included. Eg :Monday/Tuesday
+        else {
+
+            // Means theres a time component
+            if(days.length > 1) {
+                hasTime = true;
+            } else {
+                returned = new StringBuilder(day_of_week_in_string);
+
+            }
+        }
+        return returned.toString();
+    }
 
 }
 

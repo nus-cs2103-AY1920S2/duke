@@ -22,53 +22,9 @@ public class Event extends Task {
     }
 
     void setAt(String s) {
-        String[] splitted_string = s.split("/");
-        String day_of_week_in_string = splitted_string[0];
-        days = day_of_week_in_string.split(" ");
-        if (super.dm.getHm().containsKey(days[0].toUpperCase())) {
-            isDay = true;
-        }
 
-        // If its a date. Not a day.
+        this.at = super.set_by_at(s);
 
-        if (!isDay) {
-            // If the user enters "2" instead or "02", this changes it to "02"
-
-
-            // Means if the splitted string has time. Eg: "2/12/2019 1800"
-            for (int j = 0; j < 2; j++) {
-                if (splitted_string[j].length() != 2) {
-                    splitted_string[j] = ("0" + splitted_string[j]);
-                }
-            }
-
-            for (int i = 0; i < splitted_string.length - 1; i++) {
-                this.at += splitted_string[i] + "/";
-            }
-
-
-            // Check if the time component is inside
-            // if its include splitted_string[2] should be 2/12/[2019 1800]
-            if (splitted_string[2].length() > 4) {
-                hasTime = true;
-                this.at += splitted_string[2];
-            } else {
-                this.at += splitted_string[splitted_string.length - 1];
-            }
-        }
-
-
-
-        // Means theres a day component included. Eg :Monday/Tuesday
-        else {
-
-            // Means theres a time component
-            if(days.length > 1) {
-                hasTime = true;
-            } else {
-                this.at = day_of_week_in_string;
-            }
-        }
     }
 
 
