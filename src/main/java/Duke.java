@@ -1,9 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
+    static Storage storage;
 
     public static void readCommand(Command command) throws DukeDescriptionException, BadDescriptionException {
         switch (command) {
@@ -23,6 +25,7 @@ public class Duke {
                     tasks.get(done - 1).setDone(true);
                     System.out.println("Nice! I've marked this task as done: \n" +
                             "  " + tasks.get(done - 1));
+                    storage.writeListIntoFile(tasks);
                 } catch (NumberFormatException e) {
                     throw new BadDescriptionException("Non-Integer");
                 }
@@ -35,6 +38,7 @@ public class Duke {
                 System.out.println("I've added this task: \n" +
                         "  " + taskToDo + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                storage.writeListIntoFile(tasks);
                 break;
             case EVENT:
                 String event = sc.nextLine();
@@ -46,6 +50,7 @@ public class Duke {
                 System.out.println("I've added this task: \n" +
                         "  " + taskEvent + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                storage.writeListIntoFile(tasks);
                 break;
             case DEADLINE:
                 String deadline = sc.nextLine();
@@ -57,6 +62,7 @@ public class Duke {
                 System.out.println("I've added this task: \n" +
                         "  " + taskDLine + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
+                storage.writeListIntoFile(tasks);
                 break;
             case DELETE:
                 try {
@@ -70,6 +76,7 @@ public class Duke {
                     System.out.println("Okay! I have deleted this task:\n" +
                             "  " + deletedTask + "\nNow you have " +
                             tasks.size() + " tasks in the list.");
+                    storage.writeListIntoFile(tasks);
                 } catch (NumberFormatException e) {
                     throw new BadDescriptionException("Non-Integer");
                 }
@@ -88,7 +95,9 @@ public class Duke {
         String lineBreak = "_____________________________" +
                 "_______________________________";
         sc = new Scanner(System.in);
-        tasks = new ArrayList<>();
+        storage = new Storage("." + File.separator +
+                "data" + File.separator + "Task.txt");
+        tasks = storage.printFileIntoList();
 
         System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
@@ -108,7 +117,8 @@ public class Duke {
                 } catch (DukeDescriptionException e) {
                     System.out.println("OOPS! You forgot to include a description!");
                 } catch (BadDescriptionException e) {
-                    System.out.println("OPPS! The number input for done/delete cannot be " + e.getMessage());
+                    System.out.println("OOPS! The number input for " +
+                            "done/delete cannot be " + e.getMessage());
                 } finally {
                     System.out.println(lineBreak);
                 }
