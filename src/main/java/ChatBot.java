@@ -32,7 +32,7 @@ public class ChatBot {
         System.out.println("2) done x: Set the task number (x) to done");
         System.out.println("3) todo [taskname]: Add a To-Do task with taskname!");
         System.out.println("4) event [taskname] /at [datetime]: Add an event with a taskname together with the date/time!");
-        System.out.println("5) deadline [taskname] /by [datetime]: Add an deadline with a taskname together with the date/time!");
+        System.out.println("5) deadline [taskname] /by [date time] (DD-MM-YYYY HH:mm format eg: 31-12-2020 23:59): Add an deadline with a taskname together with the date/time!");
     }
 
     /**
