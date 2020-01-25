@@ -3,6 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -160,13 +163,13 @@ public class AutoResponder {
 
     private AutoResponder addDeadline(String name, String date) {
         List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Deadline(name, date));
+        tl.add(new Deadline(name, AutoResponder.parseDateTime(date)));
         return new AutoResponder(tl, toPrint).taskAdded();
     }
 
     private AutoResponder addEvent(String name, String date) {
         List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Event(name, date));
+        tl.add(new Event(name, AutoResponder.parseDateTime(date)));
         return new AutoResponder(tl, toPrint).taskAdded();
     }
 
@@ -187,6 +190,20 @@ public class AutoResponder {
     public static AutoResponder initialise() {
         AutoResponder ar = new AutoResponder();
         return ar.loadList();
+    }
+
+    public static LocalDateTime parseDateTime(String s) {
+        Pattern pDateTime = Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s+\\d{4}");
+        Pattern pDate = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+
+        if (pDateTime.matcher(s).find()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            return LocalDateTime.parse(s, formatter);
+        } else if (pDate.matcher(s).find()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+            return LocalDate.parse(s, formatter).atStartOfDay();
+        }
+        throw new UnsupportedOperationException("Supplied string is not of proper format.");
     }
 
 }

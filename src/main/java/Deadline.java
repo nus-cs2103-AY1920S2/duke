@@ -3,18 +3,22 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline implements Task {
     private final String name;
     private final boolean completed;
-    private final String deadline;
+    private final LocalDateTime deadline;
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, LocalDateTime deadline) {
         this.name = name;
         this.completed = false;
         this.deadline = deadline;
     }
 
-    public Deadline(String name, String deadline, boolean completed) {
+    public Deadline(String name, LocalDateTime deadline, boolean completed) {
         this.name = name;
         this.completed = completed;
         this.deadline = deadline;
@@ -38,7 +42,7 @@ public class Deadline implements Task {
         return this.completed;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
@@ -51,11 +55,12 @@ public class Deadline implements Task {
         List<String> list = Collections.list(new StringTokenizer(s, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
-        return new Deadline(list.get(1), list.get(2), Boolean.parseBoolean(list.get(3)));
+        return new Deadline(list.get(1), LocalDateTime.parse(list.get(2), formatter), Boolean.parseBoolean(list.get(3)));
     }
 
     @Override
     public String toString() {
-        return "[D][" + (completed ? "✓" : "✗") + "] " + name + " (by: " + deadline + ")";
+        return "[D][" + (completed ? "✓" : "✗") + "] " + name + " (by: "
+                + deadline.format(formatter) + ")";
     }
 }
