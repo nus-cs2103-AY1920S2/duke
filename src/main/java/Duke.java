@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,21 +66,9 @@ public class Duke {
         String[] inputTokens = input.split(" ");
         switch (inputTokens[0]) {
             case "list":
-                String tasksString = "";
-                int size = tasks.size();
-
-                // Print out all items in list
-                if (size > 0) {
-                    tasksString += "Here are the tasks in your list:\n     ";
-                }
-                for (int i = 0; i < size; i++) {
-                    tasksString += (i + 1) + "." + tasks.get(i);
-                    if (i != size - 1) {
-                        tasksString += "\n     ";
-                    }
-                }
-                tasksString = tasksString.equals("") ? "There is nothing on your list." : tasksString;
-                prettyPrint(tasksString);
+                String dateString = (inputTokens.length > 1) ? inputTokens[1] : "";
+                List<Task> filteredTasks = filterTasksByDate(tasks, dateString);
+                prettyPrintList(filteredTasks);
                 break;
             case "done":
                 // Mark the task with given index as done
@@ -98,40 +89,21 @@ public class Duke {
                 break;
             case "todo":
                 // Add a To-do task
-                if (inputTokens.length > 1) {
-                    Task newTodoTask = new Todo(input.replaceFirst("^todo ", ""));
-                    tasks.add(newTodoTask);
-                    printAddTask(newTodoTask, tasks.size());
-                } else {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
+                Task newTodoTask = makeNewTodoTask(input);
+                tasks.add(newTodoTask);
+                printAddTask(newTodoTask, tasks.size());
                 break;
             case "deadline":
                 // Add a Deadline task
-                String[] deadlineTokens = input.split(" /by ");
-                // If there is a description and a deadline
-                if (deadlineTokens.length > 1) {
-                    String dateOrTime = deadlineTokens[1];
-                    String description = deadlineTokens[0].replaceFirst("^deadline ", "");
-                    Task newDeadlineTask = new Deadline(description, dateOrTime);
-                    tasks.add(newDeadlineTask);
-                    printAddTask(newDeadlineTask, tasks.size());
-                } else {
-                    throw new DukeException("☹ OOPS!!! Deadline tasks require a specific time or date.");
-                }
+                Task newDeadlineTask = makeNewDeadlineTask(input);
+                tasks.add(newDeadlineTask);
+                printAddTask(newDeadlineTask, tasks.size());
                 break;
             case "event":
-                String[] eventTokens = input.split(" /at ");
-                // If there is a description and a time/date
-                if (eventTokens.length > 1) {
-                    String dateOrTime = eventTokens[1];
-                    String description = eventTokens[0].replaceFirst("^event ", "");
-                    Task newEventTask = new Event(description, dateOrTime);
-                    tasks.add(newEventTask);
-                    printAddTask(newEventTask, tasks.size());
-                } else {
-                    throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
-                }
+                // Add an Event task
+                Task newEventTask = makeNewEventTask(input);
+                tasks.add(newEventTask);
+                printAddTask(newEventTask, tasks.size());
                 break;
             case "delete":
                 int deleteIndex;
@@ -155,6 +127,90 @@ public class Duke {
         return tasks;
     }
 
+    public static List<Task> filterTasksByDate(List<Task> tasks, String dateString) {
+        List<Task> filteredTasks;
+        if (dateString != "") {
+            LocalDate date = LocalDate.parse(dateString);
+            filteredTasks = new ArrayList<>();
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                if (task instanceof Event && ((Event) task).date.equals(date)) {
+                    filteredTasks.add(task);
+                } else if (task instanceof Deadline && ((Deadline) task).date.equals(date)) {
+                    filteredTasks.add(task);
+                }
+            }
+        } else {
+            filteredTasks = tasks;
+        }
+        return filteredTasks;
+    }
+
+    public static Todo makeNewTodoTask(String input) throws DukeException {
+        String[] todoTokens = input.split(" ");
+
+        // If there is a description
+        if (todoTokens.length > 1) {
+            Todo newTodoTask = new Todo(input.replaceFirst("^todo ", ""));
+            return newTodoTask;
+        }
+
+        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+    }
+
+    public static Event makeNewEventTask(String input) throws DukeException {
+        String[] eventTokens = input.split(" /at ");
+
+        // If there is a description and a time/date
+        if (eventTokens.length > 1) {
+            String dateOrTime = eventTokens[1];
+            String[] dateOrTimeTokens = dateOrTime.split(" ");
+
+            // If there is a date and time
+            if (dateOrTimeTokens.length <= 1) {
+                throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
+            }
+
+            try {
+                LocalDate date = LocalDate.parse(dateOrTimeTokens[0]);
+                String description = eventTokens[0].replaceFirst("^event ", "");
+                Event newEventTask = new Event(description, date, dateOrTimeTokens[1]);
+                return newEventTask;
+            } catch (Exception e) {
+                throw new DukeException("☹ OOPS!!! Cannot parse date or time.");
+            }
+        }
+
+        throw new DukeException("☹ OOPS!!! Event tasks require a description, and a specific time and date (e.g. 2019-12-12 2-4pm).");
+    }
+
+    public static Deadline makeNewDeadlineTask(String input) throws DukeException {
+        String[] deadlineTokens = input.split(" /by ");
+
+        // If there is a description and a deadline
+        if (deadlineTokens.length > 1) {
+            String dateOrTime = deadlineTokens[1];
+            String[] dateOrTimeTokens = dateOrTime.split(" ");
+
+            // If there is a date and time
+            if (dateOrTimeTokens.length <= 1) {
+                throw new DukeException("☹ OOPS!!! Deadline tasks require a specific time and date.");
+            }
+
+            try {
+                LocalDate date = LocalDate.parse(dateOrTimeTokens[0]);
+                LocalTime time = LocalTime.parse(dateOrTimeTokens[1], DateTimeFormatter.ofPattern("HHmm"));
+                String description = deadlineTokens[0].replaceFirst("^deadline ", "");
+                Deadline newDeadlineTask = new Deadline(description, date, time);
+                return newDeadlineTask;
+            } catch (Exception e) {
+                throw new DukeException("☹ OOPS!!! Cannot parse date or time.");
+            }
+        }
+
+        throw new DukeException("☹ OOPS!!! Deadline tasks require a description, and a specific time and date (e.g. 2019-12-12 1800).");
+    }
+
     /**
      * Format the given line into a pretty format and print it
      *
@@ -166,6 +222,24 @@ public class Duke {
                 "     " + line + "\n" +
                 "    _________★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜★_______\n"
         );
+    }
+
+    public static void prettyPrintList(List<Task> tasks) {
+        String tasksString = "";
+        int size = tasks.size();
+
+        // Print out all items in list
+        if (size > 0) {
+            tasksString += "Here are the tasks in your list:\n     ";
+        }
+        for (int i = 0; i < size; i++) {
+            tasksString += (i + 1) + "." + tasks.get(i);
+            if (i != size - 1) {
+                tasksString += "\n     ";
+            }
+        }
+        tasksString = tasksString.equals("") ? "There is nothing on your list." : tasksString;
+        prettyPrint(tasksString);
     }
 
     /**
