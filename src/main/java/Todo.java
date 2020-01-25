@@ -1,35 +1,37 @@
-public class Todo extends Task {
+import javax.management.DescriptorKey;
 
-    String formatted_todo_string = "";
+public class Todo extends Task {
 
     Todo(String description) {
         super(description);
     }
 
     @Override
-    String format_tasks() throws DukeException {
+    String format_tasks(String s) throws DukeException {
         // Needed the space after "to do" due to space formatting.
-        String[] splited_string = super.getDescription().split("todo ");
 
-        if (splited_string.length < 2) {
-            throw new DukeException("", "Todo");
+        String[] abcd = s.split(" ");
+        System.out.println("Hello " + abcd[0]);
+
+
+
+        if(super.format_tasks(s).length() <5) {
+            throw new DukeException("You cannot leave the description empty ");
+        } else {
+           return super.format_tasks(s);
         }
 
-        StringBuilder task = new StringBuilder();
 
-        for (int i = 1; i < splited_string.length; i++) {
-            if (i == splited_string.length - 1) {
-                task.append(splited_string[i]);
-            } else {
-                task.append(splited_string[i]).append(" ");
-            }
-        }
-        return task.toString();
+
     }
 
     @Override
     void setDescription(String s) throws DukeException {
-        super.setDescription(s);
+        try {
+            super.setDescription(s);
+        } catch (Exception e) {
+            throw new DukeException("Please enter the correct format for the TODO");
+        }
     }
 
 

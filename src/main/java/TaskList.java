@@ -4,8 +4,7 @@ import java.util.NoSuchElementException;
 // Has operations to add or remove tasks in the list
 class TaskList{
 
-    ArrayList<Task> list = new ArrayList<>();
-    private static String space = "        ";
+    private ArrayList<Task> list = new ArrayList<>();
 
     // Getting the list of the task.
      ArrayList<Task> getList() {
@@ -34,6 +33,7 @@ class TaskList{
     // To print out every element in the list
      void print_elements() {
         for (int i = 0; i < list.size(); i++) {
+            String space = "        ";
             System.out.println( space + (i + 1) + "." + list.get(i));
         }
     }
