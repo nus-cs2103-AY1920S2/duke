@@ -12,13 +12,25 @@ public class Duke {
     private static final String PATH = "./dukeStore.txt";
 
     private void run() {
-
         Storage storage = new Storage(PATH);
-        ArrayList<Task> savedTasks = storage.loadFromFile();
-        TaskList tasks = new TaskList(savedTasks);
         Ui ui = new Ui();
-
         ui.showWelcome();
+
+        TaskList tasks;
+        try {
+            ArrayList<Task> taskArrayList = storage.loadFromFile();
+            tasks = new TaskList(taskArrayList);
+        } catch (DukeException e) {
+            ui.sayLine(e.getErrorLineName());
+            ArrayList<Task> taskArrayList = new ArrayList<>();
+            tasks = new TaskList(taskArrayList);
+            try {
+                storage.saveToFile(tasks);
+            } catch (DukeException g) {
+                ui.sayLine(g.getErrorLineName());
+            }
+        }
+
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();

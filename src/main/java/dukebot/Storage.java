@@ -3,19 +3,24 @@ package dukebot;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Storage {
-    private boolean failedSave;
+    private boolean saveAlreadyFailed = false;
     private String storagePath;
 
     public Storage(String storagePath) {
         this.storagePath = storagePath;
     }
 
-    public void saveToFile(TaskList tasks) {
+    public void saveToFile(TaskList tasks) throws DukeException{
         ArrayList<Task> taskList = tasks.getTaskList();
         try {
             FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
@@ -27,10 +32,14 @@ public class Storage {
 
         } catch (IOException e) {
             // e.printStackTrace();
+            if (!saveAlreadyFailed) {
+                saveAlreadyFailed = true;
+                throw new DukeException(LineName.SAVE_FAIL);
+            }
         }
     }
 
-    public ArrayList<Task> loadFromFile() {
+    public ArrayList<Task> loadFromFile() throws DukeException{
         File file = new File(this.storagePath);
         if (file.isFile()) {
             try {
@@ -44,7 +53,6 @@ public class Storage {
                 // e.printStackTrace();
             }
         }
-        System.out.println("fail load");
-        return new ArrayList<>();
+        throw new DukeException(LineName.LOAD_FAIL);
     }
 }

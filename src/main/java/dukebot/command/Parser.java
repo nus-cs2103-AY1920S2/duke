@@ -12,7 +12,7 @@ public class Parser {
         case "duke":
         case "Master":
         case "master":
-            return new uiOnlyCommand(LineName.DUKE);
+            return new uiOnlyCommand(LineName.SAY_DUKE);
         case "bye":
             return new exitCommand();
         case "list":

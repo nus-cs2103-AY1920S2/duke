@@ -1,5 +1,6 @@
 package dukebot.command;
 
+import dukebot.DukeException;
 import dukebot.LineName;
 import dukebot.Storage;
 import dukebot.Ui;
@@ -29,6 +30,8 @@ public class deleteCommand extends Command {
                 }
             } catch (NumberFormatException e) {
                 ui.sayLine(LineName.NOT_A_NUMBER);
+            } catch (DukeException e) {
+                ui.sayLine(e.getErrorLineName());
             }
         }
     }

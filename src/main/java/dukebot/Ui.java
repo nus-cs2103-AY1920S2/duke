@@ -44,7 +44,7 @@ public class Ui {
         case NO_INPUT:
             dukeSays("Duke can't hear anything Master... Is Master all right?");
             break;
-        case DUKE:
+        case SAY_DUKE:
             dukeSays("Master!");
             break;
         case LIST:
@@ -103,7 +103,18 @@ public class Ui {
             dukeSays("Is Master leaving already?");
             dukeSays("Please come back and play with Duke soon...");
             break;
+        case SAVE_FAIL:
+            dukeSays("Duke feels dizzy...");
+            dukeSays("It seems that Duke will forget everything when Master leaves...");
+            break;
+        case LOAD_FAIL:
+            dukeSays("There does not seem to be any existing save file.");
+            dukeSays("Is this the first time Master has ever used Duke?");
+            dukeSays("Type 'help' to see the list of commands.");
+            dukeSays("Thanks for using Duke. Duke is really happy.");
+            break;
         case ERROR_PLACEHOLDER:
+            // Purely for testing, should never be called in deployment
             // Fallthrough
         default:
             dukeSays("There is an unexpected error :(");
