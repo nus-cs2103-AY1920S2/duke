@@ -126,6 +126,8 @@ public class Duke {
                         System.out.println(dukeFormat("Please try again, your number is out of range."));
                     }
 
+                    save("src/main/data/tasks.ser", lst);
+
                 } else if (getInput.equals("delete")) {
                     try {
                         // validate input for list index
@@ -139,6 +141,9 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(dukeFormat("Please try again, your number is out of range."));
                     }
+
+                    save("src/main/data/tasks.ser", lst);
+
                 } else {
                     throw new DukeException("Invalid Input");
                 }
