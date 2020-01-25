@@ -41,6 +41,7 @@ public class Duke {
                     } else if (type.equals("delete")) {
                         deleteMessage(tasks.get(taskNo - 1));
                         tasks.remove(taskNo - 1);
+                        Task.totalTasks--;
                     }
                 }
             } else {
@@ -84,7 +85,7 @@ public class Duke {
         System.out.println("        Got it. I've added this task:");
         System.out.print("            ");
         task.taskSummary();
-        System.out.println("        Now you have " + Task.totalTasks + " tasks in the list.");
+        System.out.println("        Now you have " + Task.totalTasks + " " + (Task.totalTasks == 1? "task" : "tasks") + " in the list.");
         System.out.println("    ____________________________________________________________");
 
     }
@@ -94,7 +95,7 @@ public class Duke {
         System.out.println("        Noted. I've removed this task:");
         System.out.print("        ");
         task.taskSummary();
-        System.out.println("        Now you have " + (Task.totalTasks - 1) +  " tasks in the list.");
+        System.out.println("        Now you have " + Task.totalTasks + " " + (Task.totalTasks == 1? "task" : "tasks") + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 
