@@ -1,3 +1,5 @@
+package main;
+
 import processor.DukeProcessor;
 
 import java.util.Scanner;
