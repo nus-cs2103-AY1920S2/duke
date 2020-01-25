@@ -69,10 +69,14 @@ class Duchess {
     }
 
     private void printTasks() {
-        System.out.println("\tSighs... you never remember what you say, don't you.");
-        System.out.println("\tYou said these:");
-        for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i));
+        if (this.tasks.size() > 0) {
+            System.out.println("\tSighs... you never remember what you say, don't you.");
+            System.out.println("\tYou said these:");
+            for (int i = 0; i < this.tasks.size(); i++) {
+                System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i));
+            }
+        } else {
+            System.out.println("\tIs this a trick question? You have not told me anything about 'tasks'.");
         }
     }
 
