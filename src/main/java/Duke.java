@@ -1,86 +1,64 @@
-import java.util.Scanner;
 import java.util.ArrayList;
-import dukebot.Task;
-import dukebot.InvalidTaskException;
-import dukebot.TaskList;
-import dukebot.Storage;
+import dukebot.*;
 
 /**
  * Main class.
  */
 public class Duke {
     private static final String PATH = "./dukeStore.txt";
-    private static final String LOGO = "*******   **     ** **   ** ********\n"
-            + "/**////** /**    /**/**  ** /**/////\n"
-            + "/**    /**/**    /**/** **  /**\n"
-            + "/**    /**/**    /**/****   /*******\n"
-            + "/**    /**/**    /**/**/**  /**////\n"
-            + "/**    ** /**    /**/**//** /**\n"
-            + "/*******  //******* /** //**/********\n"
-            + "///////    ///////  //   // //////// \n";
-    private boolean sayFirst = true;
 
     private void run() {
 
-        Scanner sc = new Scanner(System.in);
         Storage storage = new Storage(PATH);
         ArrayList<Task> savedTasks = storage.loadFromFile();
         TaskList tasks = new TaskList(savedTasks);
+        Ui ui = new Ui();
 
-        System.out.println("\nHi hi I'm \n" + LOGO);
-        dukeSays("Master! Duke's so glad Master used Duke!");
-        dukeSays("What will Master do today?");
+        ui.showWelcome();
         boolean running = true;
         while (running) {
-            sayFirst = true;
-            System.out.println("\nMaster: ");
-            String inp = sc.nextLine();
-            System.out.println();
-            String[] inpArr = inp.split(" ");
+            String[] inpArr = ui.readCommand();
             switch (inpArr[0]) {
             case "":
-                dukeSays("I can't hear anything Master... Is Master all right?");
+                ui.sayLine(LineName.NO_INPUT);
                 break;
             case "Duke":
             case "duke":
             case "Master":
             case "master":
-                dukeSays("Master!");
+                ui.sayLine(LineName.DUKE);
                 break;
             case "bye":
                 running = false;
                 break;
             case "list":
-                dukeSays("Master already forgotten what Master wanted to do?!");
-                dukeSays("Duke has no choice but to remind Master then!");
+                ui.sayLine(LineName.LIST);
                 if (tasks.size() == 0) {
-                    dukeSays("Huh there are no tasks! Master is so forgetful...");
+                    ui.sayLine(LineName.LIST_EMPTY);
                 } else {
-                    dukeSays("These are the tasks which Master forgot:");
-                    sayTasks(tasks.taskList);
+                    ui.sayTasks(tasks.taskList);
                 }
                 break;
             case "done":
                 if (inpArr.length == 1) {
-                    dukeSays("Duke doesn't think Master has done anything yet...");
+                    ui.sayLine(LineName.DONE_EMPTY);
                 } else {
                     try {
                         int taskInd = Integer.parseInt(inpArr[1]) - 1;
                         if (taskInd >= tasks.size() || taskInd < 0) {
-                            dukeSays("Duke can't seem to recall that item...");
+                            ui.sayLine(LineName.DONE_OUT_OF_INDEX);
                         } else {
                             Task doneTask = tasks.getTask(taskInd);
                             if (doneTask.getDone()) {
-                                dukeSays("Didn't Master already do that?");
+                                ui.sayLine(LineName.DONE_ALREADY);
                             } else {
-                                dukeSays("So Master finally completed " + doneTask + "?");
-                                dukeSays("Duke's really proud of Master!");
+                                ui.doneSuccess(doneTask);
                                 doneTask.setDone();
                                 storage.saveToFile(tasks);
                             }
                         }
                     } catch (NumberFormatException e) {
-                        dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");
+                        ui.sayLine(LineName.NOT_A_NUMBER);
                     }
                 }
                 break;
@@ -90,75 +68,36 @@ public class Duke {
                 try {
                     Task newTask = tasks.addNewTask(inpArr);
                     storage.saveToFile(tasks);
-                    dukeSays("So Master has " + newTask.getType() + ": " + newTask + "...");
+                    ui.newTask(newTask);
                 } catch (InvalidTaskException e) {
-                    dukeSays(e.getMessage());
+                    ui.dukeSays(e.getMessage());
                 }
                 break;
             case "delete":
                 if (inpArr.length == 1) {
-                    dukeSays("Master, please don't delete Duke...");
+                    ui.sayLine(LineName.DELETE_EMPTY);
                 } else {
                     try {
                         int taskInd = Integer.parseInt(inpArr[1]) - 1;
                         Task task = tasks.deleteTask(taskInd);
                         if (task == null) {
-                            dukeSays("That item already doesn't exist in Duke's memory...");
+                            ui.sayLine(LineName.DELETE_OUT_OF_INDEX);
                         } else {
-                            dukeSays("For Master, Duke can forget anything, even the:");
-                            dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
+                            ui.deleteSuccess(task);
                             storage.saveToFile(tasks);
                         }
                     } catch (NumberFormatException e) {
-                        dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");
+                        ui.sayLine(LineName.NOT_A_NUMBER);
                     }
                 }
                 break;
             default:
-                dukeSays("Duke doesn't understand Master...");
+                ui.sayLine(LineName.INVALID_COMMAND);
                 break;
             }
         }
-        dukeSays("Is Master leaving already?");
-        dukeSays("Please come back and play with Duke soon...");
+        ui.sayLine(LineName.EXIT);
         System.exit(0);
-    }
-
-    //    private void dukeSays(String[] text) {
-    //        boolean first = this.sayFirst;
-    //        for (String line : text) {
-    //            if (first) {
-    //                System.out.print("Duke: ");
-    //                first = false;
-    //                this.sayFirst = false;
-    //            } else {
-    //                System.out.print("      ");
-    //            }
-    //            System.out.println(line);
-    //        }
-    //    }
-
-    private void dukeSays(String line) {
-        if (this.sayFirst) {
-            System.out.print("Duke: ");
-            this.sayFirst = false;
-        } else {
-            System.out.print("      ");
-        }
-        System.out.println(line);
-    }
-
-    private void sayTasks(ArrayList<Task> tasks) {
-        int i = 1;
-        for (Task task : tasks) {
-            System.out.println("      "
-                    + i + ". "
-                    + "[" + task.getType() + "] "
-                    + task
-                    + (task.getDone() ? " [Done!]" : "")
-            );
-            i += 1;
-        }
     }
 
     /**

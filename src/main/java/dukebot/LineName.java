@@ -1,0 +1,19 @@
+package dukebot;
+
+public enum LineName {
+    NO_INPUT,
+    DUKE,
+    LIST,
+    LIST_EMPTY,
+    LIST_EXISTS,
+    DONE_EMPTY,
+    DONE_OUT_OF_INDEX,
+    DONE_ALREADY,
+    DONE_SUCCESS,
+    NOT_A_NUMBER,
+    DELETE_EMPTY,
+    DELETE_OUT_OF_INDEX,
+    DELETE_SUCCESS,
+    EXIT,
+    INVALID_COMMAND;
+}

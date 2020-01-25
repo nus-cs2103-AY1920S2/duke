@@ -1,0 +1,126 @@
+package dukebot;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Ui {
+    private static final String LOGO = "*******   **     ** **   ** ********\n"
+            + "/**////** /**    /**/**  ** /**/////\n"
+            + "/**    /**/**    /**/** **  /**\n"
+            + "/**    /**/**    /**/****   /*******\n"
+            + "/**    /**/**    /**/**/**  /**////\n"
+            + "/**    ** /**    /**/**//** /**\n"
+            + "/*******  //******* /** //**/********\n"
+            + "///////    ///////  //   // //////// \n";
+    private boolean sayFirst = true;
+    private final Scanner sc;
+
+    public Ui() {
+        sc  = new Scanner(System.in);
+    }
+
+    public void showWelcome() {
+        System.out.println("\nHi hi I'm \n" + LOGO);
+        dukeSays("Master! Duke's so glad Master used Duke!");
+        dukeSays("What will Master do today?");
+    }
+
+    public String[] readCommand() {
+        sayFirst = true;
+        System.out.println("\nMaster: ");
+        String inp = sc.nextLine();
+        System.out.println();
+        return inp.split(" ");
+    }
+
+    //    public void setSayFirst() {
+    //        sayFirst = true;
+    //    }
+
+    public void sayLine(LineName lineName) {
+        switch (lineName) {
+            case NO_INPUT:
+                dukeSays("Duke can't hear anything Master... Is Master all right?");
+                break;
+            case DUKE:
+                dukeSays("Master!");
+                break;
+            case LIST:
+                dukeSays("Master already forgotten what Master wanted to do?!");
+                dukeSays("Duke has no choice but to remind Master then!");
+                break;
+            case LIST_EMPTY:
+                dukeSays("Huh there are no tasks! Master is so forgetful...");
+                break;
+            case LIST_EXISTS:
+                dukeSays("These are the tasks which Master forgot:");
+                break;
+            case DONE_EMPTY:
+                dukeSays("Duke doesn't think Master has done anything yet...");
+                break;
+            case DONE_OUT_OF_INDEX:
+                dukeSays("Duke can't seem to recall that item...");
+                break;
+            case DONE_ALREADY:
+                dukeSays("Didn't Master already do that?");
+                break;
+            case DONE_SUCCESS:
+                // use another function;
+                break;
+            case NOT_A_NUMBER:
+                dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");
+                break;
+            case DELETE_EMPTY:
+                dukeSays("Master, please don't delete Duke...");
+                break;
+            case DELETE_OUT_OF_INDEX:
+                dukeSays("That item already doesn't exist in Duke's memory...");
+                break;
+            case INVALID_COMMAND:
+                dukeSays("Duke doesn't understand Master...");
+            case EXIT:
+                dukeSays("Is Master leaving already?");
+                dukeSays("Please come back and play with Duke soon...");
+                break;
+
+        }
+    }
+
+    public void sayTasks(ArrayList<Task> tasks) {
+        dukeSays("These are the tasks which Master forgot:");
+        int i = 1;
+        for (Task task : tasks) {
+            System.out.println("      "
+                    + i + ". "
+                    + "[" + task.getType() + "] "
+                    + task
+                    + (task.getDone() ? " [Done!]" : "")
+            );
+            i += 1;
+        }
+    }
+
+    public void doneSuccess(Task task) {
+        dukeSays("So Master finally completed " + task + "?");
+        dukeSays("Duke's really proud of Master!");
+    }
+
+    public void newTask(Task task) {
+        dukeSays("So Master has " + task.getType() + ": " + task + "...");
+    }
+
+    public void deleteSuccess(Task task) {
+        dukeSays("For Master, Duke can forget anything, even the:");
+        dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
+    }
+
+    public void dukeSays(String line) {
+        if (this.sayFirst) {
+            System.out.print("Duke: ");
+            this.sayFirst = false;
+        } else {
+            System.out.print("      ");
+        }
+        System.out.println(line);
+    }
+}
