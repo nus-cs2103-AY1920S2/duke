@@ -1,14 +1,18 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    private String date;
+    private LocalDate date;
 
     public Deadline(int id, String task, String date) {
         super(id, task);
-        this.date = date;
+        this.date = Parser.dateParser(date);
     }
 
     @Override
     public String toString() {
-        if (done) return  "[D][✓] " + task + " (by: " + date + ")";
-        else return "[D][✗] " + task + " (by: " + date + ")";
+        if (done) return  "[D][✓] " + task + " (by: " +
+                date.format(Parser.DATE_FORMATTER) + ")";
+        else return "[D][✗] " + task + " (by: " +
+                date.format(Parser.DATE_FORMATTER) + ")";
     }
 }
