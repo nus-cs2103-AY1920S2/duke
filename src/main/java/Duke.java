@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -44,30 +42,14 @@ public class Duke {
         System.out.println(charmander);
         System.out.println("Char! Charmander!");
 
-        List<String> charmanderList = new ArrayList<>();
+        String command = sc.nextLine();
 
-        while (true) {
-            String command = sc.nextLine();
+        while (!command.equals("bye")){
+            System.out.println(command);
 
-            if (command.equals("bye")) break;
-
-            switch (command) {
-                case "list":
-                    int listNo = 1;
-
-                    System.out.println("Charmander presents the list to you:");
-                    for (String item: charmanderList) {
-                        System.out.println(listNo + " " + item);
-                        listNo++;
-                    }
-                    System.out.println("Charmander hopes you liked it!");
-                    break;
-                default:
-                    charmanderList.add(command);
-                    System.out.println("Charmander scribbles something on the list. You think it says (" + command + ").");
-            }
+            command = sc.nextLine();
         }
 
-        System.out.println("Charmander! Char char!"); //Goodbye
+        System.out.println("Charmander! Char char!");
     }
 }
