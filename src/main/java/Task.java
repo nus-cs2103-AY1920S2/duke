@@ -1,7 +1,11 @@
-public class Task {
+import java.time.LocalDate;
+
+public abstract class Task {
     protected int id;
     protected String task;
     protected boolean done;
+
+    public abstract LocalDate getDate();
 
     public int getId() {
         return id;
