@@ -19,5 +19,11 @@ public class CommandDone implements DukeCommand {
 
         System.out.println("Great job on being productive! I've marked the following task as completed:");
         System.out.println(selectedTask);
+
+        try {
+            processor.getTaskListHandler().saveTasks();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

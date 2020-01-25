@@ -9,7 +9,7 @@ import tasks.TodoTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandDeadline implements DukeCommand {
+public class CommandDeadline extends CommandTask {
 
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] inputArgs = args.split(" ", 2)[1].split(" /by ");
@@ -25,7 +25,7 @@ public class CommandDeadline implements DukeCommand {
 
         System.out.println("I've got it! Added the following task:");
         System.out.println(task);
-        System.out.println("You've now got " + taskList.size() + " tasks in your list.");
 
+        super.execute(processor, args);
     }
 }

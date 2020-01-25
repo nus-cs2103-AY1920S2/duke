@@ -3,6 +3,7 @@ package main;
 import commands.*;
 import exceptions.DukeException;
 import tasks.Task;
+import tasks.TaskListHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +12,24 @@ public class DukeProcessor {
 
     private List<Task> taskList;
     private boolean isActive;
+    private TaskListHandler taskListHandler;
 
     public DukeProcessor() {
+        init();
+    }
+
+    private void init() {
         taskList = new ArrayList<Task>();
+        taskListHandler = new TaskListHandler(this);
         isActive = true;
         sayHello();
+
+        try {
+            taskList = taskListHandler.loadTasks();
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("It looks like you have no previously saved tasks! Starting a new list for you...");
+        }
     }
 
     public void processInput(String input) {
@@ -102,6 +116,10 @@ public class DukeProcessor {
 
     public List<Task> getTaskList() {
         return taskList;
+    }
+
+    public TaskListHandler getTaskListHandler() {
+        return taskListHandler;
     }
 
     public void disable() {

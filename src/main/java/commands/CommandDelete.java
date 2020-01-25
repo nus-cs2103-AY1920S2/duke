@@ -19,5 +19,11 @@ public class CommandDelete implements DukeCommand {
         System.out.println("Noted! I've deleted the following task:");
         System.out.println(selectedTask);
         System.out.println("You now have " + processor.getTaskList().size() + " tasks remaining!");
+
+        try {
+            processor.getTaskListHandler().saveTasks();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

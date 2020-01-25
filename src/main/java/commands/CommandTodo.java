@@ -8,7 +8,7 @@ import tasks.TodoTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandTodo implements DukeCommand {
+public class CommandTodo extends CommandTask {
 
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
@@ -23,6 +23,7 @@ public class CommandTodo implements DukeCommand {
 
         System.out.println("I've got it! Added the following task:");
         System.out.println(task);
-        System.out.println("You've now got " + taskList.size() + " tasks in your list.");
+
+        super.execute(processor, args);
     }
 }
