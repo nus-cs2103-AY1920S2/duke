@@ -75,6 +75,14 @@ public class Duke {
                     ui.printUpdateError(exception);
                 }
                 break;
+            case "find":
+                try {
+                    this.findTarget(parser);
+                } catch (DukeException exception) {
+                    ui.printException(exception);
+                }
+
+                break;
             default:
                 try {
                     this.addTask(parser);
@@ -124,6 +132,20 @@ public class Duke {
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
+    }
+
+    /**
+     * Prints list of tasks that contains keyword.
+     *
+     * @param parser Parser to interpret user input command.
+     * @throws DukeException Thrown when description and hence keyword is empty.
+     */
+    public void findTarget(Parser parser) throws DukeException {
+        String keyword = parser.getDescription();
+
+        ArrayList<String> targets = tasks.findTargets(keyword);
+
+        ui.printTargets(targets);
     }
 
     public static void main(String[] args) {
