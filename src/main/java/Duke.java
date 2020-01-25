@@ -31,7 +31,7 @@ public class Duke {
 
             try {
                 if (cmd.equals("list")) {
-                    listTasks(sb, grammar);
+                    listTasks(sb);
                 } else if (cmd.equals("delete")) {
                     deleteTask(sb, grammar, splitInput);
                 } else if (cmd.equals("done")) {
@@ -66,6 +66,74 @@ public class Duke {
         }
     }
 
+    private static void listTasks(StringBuilder sb) {
+        sb.append("Below is your task list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append("\t");
+            sb.append(i + 1);
+            sb.append("." + tasks.get(i));
+        }
+    }
+
+    private static void deleteTask(StringBuilder sb, String grammar, String[] splitInput)
+            throws NoTaskNumberException, InvalidIndexException {
+        int size = tasks.size();
+        if (splitInput.length > 1) {
+            int n = Integer.parseInt(splitInput[1]);
+            if (n < 1 || n > size) {
+                throw new InvalidIndexException(n, size);
+            } else {
+                sb.append("Noted. I've removed this task:\n\t" + tasks.get(n - 1));
+                tasks.remove(n - 1);
+                sb.append("Now you have " + tasks.size() + grammar + " in the list.\n");
+            }
+        } else {
+            throw new NoTaskNumberException();
+        }
+    }
+
+    private static void markTaskAsDone(StringBuilder sb, String[] splitInput)
+            throws NoTaskNumberException, InvalidIndexException {
+        int size = tasks.size();
+        if (splitInput.length > 1) {
+            int taskNum = Integer.parseInt(splitInput[1]);
+            if (taskNum < 1 || taskNum > size) {
+                throw new InvalidIndexException(taskNum, size);
+            }
+            sb.append("Nice! I've marked this task as done:\n\t");
+            Task t = tasks.get(taskNum - 1);
+            t.markAsDone();
+            sb.append(t);
+        } else {
+            throw new NoTaskNumberException();
+        }
+    }
+
+    private static void generateDeadlineEvent(StringBuilder sb, String[] splitInput, String id)
+            throws NoDescriptionException, NoDateProvidedException {
+        if (splitInput.length < 2) {
+            throw new NoDescriptionException();
+        } else {
+            if (splitInput[1].contains(id)) {
+                String[] temp = splitInput[1].split(id);
+                if (id.equals(" /by ")) {
+                    tasks.add(new Deadline(temp[0].trim().toString(), temp[1]));
+                } else {
+                    tasks.add(new Event(temp[0].trim().toString(), temp[1]));
+                }
+                actionConfirmation(sb, tasks.size() > 1 ? " tasks" : " task");
+            } else {
+                throw new NoDateProvidedException(id.trim().replace("/", ""));
+            }
+        }
+    }
+
+    private static void actionConfirmation(StringBuilder sb, String grammar) {
+        int size = tasks.size();
+        sb.append("Got it. I've added this task:\n\t" + tasks.get(size - 1));
+        sb.append("Now you have " + size + grammar + " in the list.\n");
+    }
+
     private static void bye() {
         boolean flag = true;
         for (Task t : tasks) {
@@ -77,70 +145,6 @@ public class Duke {
         }
         if (flag) {
             System.out.println("Bye! Come back again if you have more tasks to complete!");
-        }
-    }
-
-    private static void generateDeadlineEvent(StringBuilder sb, String[] splitInput, String id)
-            throws NoDescriptionException, NoDateProvidedException {
-        if (splitInput.length < 2) {
-            throw new NoDescriptionException();
-        } else {
-            if (splitInput[1].contains(id)) {
-                String[] temp = splitInput[1].split(id);
-                tasks.add(new Deadline(temp[0].trim().toString(), temp[1]));
-                actionConfirmation(sb, tasks.size() > 1 ? " tasks" : " task");
-            } else {
-                throw new NoDateProvidedException(id.trim().replace("/", ""));
-            }
-        }
-    }
-
-    private static void markTaskAsDone(StringBuilder sb, String[] splitInput)
-            throws NoTaskNumberException, InvalidIndexException {
-        int size = tasks.size();
-        if (splitInput.length > 1) {
-            int taskNum = Integer.parseInt(splitInput[1]);
-            if (taskNum < 1 || taskNum > size) {
-                throw new InvalidIndexException(size);
-            }
-            sb.append("Nice! I've marked this task as done:\n\t");
-            Task t = tasks.get(taskNum);
-            t.markAsDone();
-            sb.append(t);
-        } else {
-            throw new NoTaskNumberException();
-        }
-    }
-
-    private static void listTasks(StringBuilder sb, String grammar) {
-        sb.append("Below is your list of " + grammar + ":\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append("\t");
-            sb.append(i + 1);
-            sb.append("." + tasks.get(i));
-        }
-    }
-
-    private static void actionConfirmation(StringBuilder sb, String grammar) {
-        int size = tasks.size();
-        sb.append("Got it. I've added this task:\n\t" + tasks.get(size - 1));
-        sb.append("Now you have " + size + grammar + " in the list.\n");
-    }
-
-    private static void deleteTask(StringBuilder sb, String grammar, String[] splitInput)
-            throws NoTaskNumberException, InvalidIndexException {
-        int size = tasks.size();
-        if (splitInput.length > 1) {
-            int n = Integer.parseInt(splitInput[1]);
-            if (n < 1 || n > size) {
-                throw new InvalidIndexException(size);
-            } else {
-                sb.append("Noted. I've removed this task:\n\t" + tasks.get(n - 1));
-                tasks.remove(n - 1);
-                sb.append("Now you have " + size + grammar + " in the list.\n");
-            }
-        } else {
-            throw new NoTaskNumberException();
         }
     }
 }
