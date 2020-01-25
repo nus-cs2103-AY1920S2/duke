@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Duke {
     //set a horizontal line
@@ -30,17 +31,51 @@ public class Duke {
                         li.append("         ").append(i + 1).append(": ").append(list[i]).append("\n");
                     }
                     typeSetting(li.toString());
-                } else if (str.length() > 5 && str.substring(0, 5).equals("Done ")) {
-                    //to mark certain task as done
-                    int num = Integer.parseInt(str.substring(5));
-                    list[num - 1].markAsDone();
-                    typeSetting("    \uD83D\uDC4D Nice! I've marked this task as done: " + num
-                                + "\n" + "      " + list[num - 1]);
                 } else {
-                    //add the message into the list
-                    list[index] = new Task(str);
-                    typeSetting("    added: " + str + "\n");
-                    index++;
+                    StringTokenizer st = new StringTokenizer(str);
+                    String first = st.nextToken(" ");
+                    switch (first) {
+                        //decide which action to be done by the first token
+                        case "done":
+                            int num = Integer.parseInt(str.substring(5));
+                            list[num - 1].markAsDone();
+                            typeSetting("    \uD83D\uDC4D Nice! I've marked this task as done: " + num
+                                    + "\n" + "      " + list[num - 1]);
+                            break;
+
+                        case "todo":
+                            Todo td = new Todo(st.nextToken("").substring(1));
+                            list[index] = td;
+                            index++;
+                            typeSetting("    Got it. I've added this task: \n      " +
+                                        td + "\n" +
+                                        "    Now you have " + index + " tasks in the list.");
+                            break;
+
+                        case "deadline":
+                            String temp = st.nextToken("/").substring(1);
+                            String des1 = temp.substring(0, temp.length() - 1);
+                            String by = st.nextToken("/").substring(3);
+                            Deadline ddl = new Deadline(des1, by);
+                            list[index] = ddl;
+                            index++;
+                            typeSetting("    Got it. I've added this task: \n      " +
+                                    ddl + "\n" +
+                                    "    Now you have " + index + " tasks in the list.");
+                            break;
+
+                        case "event":
+                            String temp2 = st.nextToken("/").substring(1);
+                            String des2 = temp2.substring(0, temp2.length() - 1);
+                            String at = st.nextToken("/").substring(3);
+                            Event ev = new Event(des2, at);
+                            list[index] = ev;
+                            index++;
+                            typeSetting("    Got it. I've added this task: \n      " +
+                                    ev + "\n" +
+                                    "    Now you have " + index + " tasks in the list.");
+                            break;
+                    }
                 }
                 str = sc.nextLine();
             }
