@@ -1,16 +1,9 @@
-import java.util.Scanner;
-
 public class Duke {
-    public static String logo = ""
-            + " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
+    private Ui ui;
     private TaskList tasks;
 
     public Duke() {
+        this.ui = new Ui();
         this.tasks = new TaskList();
     }
 
@@ -19,21 +12,29 @@ public class Duke {
     }
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Hello from\n" + Duke.logo);
-        Command command;
-        do {
-            command = new Command(sc.nextLine());
+        ui.printWelcome();
+        while (true) {
+            String input;
+            try {
+                input = ui.readInput();
+            } catch (DukeNoSuchInputException e) {
+                break;
+            }
+            Command command = new Command(input);
+            if (command.getCommandName().equals("bye")) {
+                break;
+            }
             try {
                 String message = command.execute(this);
-                System.out.println(message);
+                ui.print(message);
             } catch (DukeNoCommandException e) {
                 continue;
             } catch (DukeException e) {
-                System.out.println(e);
+                ui.printException(e);
             }
-        } while (!command.getCommandName().equals("bye") && sc.hasNextLine());
-        sc.close();
+        }
+        ui.printGoodbye();
+        ui.close();
     }
 
     public static void main(String[] args) {
