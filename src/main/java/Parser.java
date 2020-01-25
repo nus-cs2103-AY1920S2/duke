@@ -29,7 +29,7 @@ public class Parser {
     /**
      * Return index of task to be deleted/marked as done.
      *
-     * @return Index of task to be deleted/marked as done
+     * @return Index of task to be deleted/marked as done.
      */
     public int getTaskIndex() {
         return Integer.valueOf(inputs[1]);

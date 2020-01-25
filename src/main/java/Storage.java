@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deals with loading tasks from file and saving tasks in file
+ * Deals with loading tasks from file and saving tasks in file.
  */
 public class Storage {
 

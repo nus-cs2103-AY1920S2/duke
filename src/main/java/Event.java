@@ -31,7 +31,7 @@ public class Event extends Task {
      * @param taskType Type of task: Event.
      * @param date Date of event.
      * @param timing Timing of event.
-     * @param isDone Status of event, when done or not.
+     * @param isDone Status of event, whether done or not.
      */
     public Event(String description, char taskType, LocalDate date, LocalTime timing, boolean isDone) {
         super(description, taskType, isDone);

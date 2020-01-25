@@ -3,12 +3,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Deals with interactions with user
+ * Deals with interactions with user.
  */
 public class Ui {
 
     private Scanner scanner;
 
+    /**
+     * Class constructor.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
@@ -56,7 +59,7 @@ public class Ui {
      * Prints message to notify user when a task is successfully marked as done.
      *
      * @param tasks List of tasks.
-     * @param completedTaskIndex Index of task marked done.
+     * @param completedTaskIndex Index of task marked as done.
      */
     public void printDoneSuccess(TaskList tasks, int completedTaskIndex) {
         System.out.println("Nice! I've marked this task as done:");

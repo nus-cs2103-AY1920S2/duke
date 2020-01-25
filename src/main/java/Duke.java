@@ -36,6 +36,7 @@ public class Duke {
 
     /**
      * Runner of Duke.
+     * Triggered upon start-up.
      */
     public void run() {
         ui.printGreeting();
@@ -100,11 +101,11 @@ public class Duke {
     }
 
     /**
-     * Adds a task to the list of saved tasks.
+     * Attempts to add a task to the list of saved tasks.
      *
      * @param parser Parser to interpret user input command.
      * @throws DukeException Exception thrown when empty description is found,
-     * empty timing for event/deadline, incomprehensible command.
+     * empty date/timing for event/deadline, incomprehensible command.
      */
     public void addTask(Parser parser) throws DukeException {
         if (parser.getCommand().equals("todo")) {
