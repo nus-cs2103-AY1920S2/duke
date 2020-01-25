@@ -7,6 +7,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toSaveString() {
+        //D0Fnish project@June 6
+        return "D" +
+                (isDone ? "1" : "0") +
+                name + "@" +
+                deadline;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }

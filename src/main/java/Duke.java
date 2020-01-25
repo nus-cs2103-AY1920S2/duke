@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,12 +11,12 @@ public class Duke {
         DEADLINE,
         EVENT
     }
+    private File saveFile;
 
     public static void main(String[] args) {
 
         // Init Duke
         Duke d = new Duke();
-
         // Greet user on start
         d.Greet();
         // Duke's behaviour loop
@@ -29,6 +30,95 @@ public class Duke {
     Duke() {
         // Assume there will be <= 100 tasks at any given time
         task_list = new ArrayList<Task>(100);
+        CheckLocalData();
+        GenerateTasksFromFile();
+    }
+
+    private void CheckLocalData() {
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        saveFile = new File(dir, "userdata.txt");
+        if (!saveFile.exists()) {
+            try {
+                saveFile.createNewFile();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    private void SaveTaskToFile(Task task) {
+        FileWriter writer;
+        try {
+            writer = new FileWriter(saveFile, true);
+            PrintWriter pw = new PrintWriter(writer);
+            pw.println(task.toSaveString());
+            pw.close();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    private void SaveTaskListToFile() {
+        FileWriter writer;
+        PrintWriter pw;
+        try {
+            // Clear save
+            writer = new FileWriter(saveFile);
+            pw = new PrintWriter(writer);
+            pw.print("");
+            // Save from scratch
+            writer = new FileWriter(saveFile, true);
+            pw = new PrintWriter(writer);
+            pw.print("");
+            for (Task t: task_list) {
+                pw.println(t.toSaveString());
+            }
+            pw.close();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+
+    }
+
+    private void AddStringAsTask(String taskString) {
+        // Takes in a string representation of a task and adds to list
+        String task_info;
+        String[] sep;
+        switch (taskString.charAt(0)) {
+            case 'T':
+                task_list.add(new ToDo(taskString.substring(2, taskString.length())));
+                break;
+            case 'D':
+                task_info = taskString.substring(2, taskString.length());
+                sep = task_info.split("@");
+                task_list.add(new Deadline(sep[0], sep[1]));
+                break;
+            case 'E':
+                task_info = taskString.substring(2, taskString.length());
+                sep = task_info.split("@");
+                task_list.add(new Event(sep[0], sep[1]));
+                break;
+            default:
+                break;
+        }
+        if (taskString.charAt(1) == '1')
+            task_list.get(task_list.size() - 1).MarkAsDone();
+    }
+
+    private void GenerateTasksFromFile() {
+        try {
+            Scanner reader = new Scanner(saveFile);
+            String data;
+            while (reader.hasNextLine()) {
+                data = reader.nextLine();
+                AddStringAsTask(data);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void Greet() {
@@ -42,6 +132,7 @@ public class Duke {
         PrintWithIndent(hori_line);
         PrintWithIndent("Bye. Hope to see you again soon!");
         PrintWithIndent(hori_line);
+        SaveTaskListToFile();
     }
 
     private void Loop() {
@@ -100,7 +191,6 @@ public class Duke {
                     if (newTask.isBlank())
                         throw new DukeException.EmptyToDo();
                     task_list.add(new ToDo(newTask));
-                    //[num_tasks++] = new ToDo(newTask);
                     break;
                 case DEADLINE:
                     // newTask string consists of "<actual task name> /by <deadline>"
@@ -119,7 +209,6 @@ public class Duke {
                     if (deadline.isBlank())
                         throw new DukeException.NoDeadlineTime();
                     task_list.add(new Deadline(task_name, deadline));
-                    //task_list[num_tasks++] = new Deadline(task_name, deadline);
                     break;
                 case EVENT:
                     // newTask string consists of "<actual task name> /at <datetime>"
@@ -138,15 +227,15 @@ public class Duke {
                     if (eventTime.isBlank())
                         throw new DukeException.NoEventDatetime();
                     task_list.add(new Event(task_name, eventTime));
-                    //task_list[num_tasks++] = new Event(task_name, eventTime);
                     break;
                 default:
                     break;
             }
+            // Save with every new task added
+            SaveTaskToFile(task_list.get(task_list.size() - 1));
             PrintWithIndent(hori_line);
             PrintWithIndent("Got it. I've added this task:");
             PrintWithIndent(task_list.get(task_list.size() - 1).toString());
-            //PrintWithIndent(task_list[num_tasks - 1].toString());
             PrintWithIndent("Now you have " + task_list.size() + " tasks in the list.");
             PrintWithIndent(hori_line);
         } catch (DukeException.EmptyToDo | DukeException.EmptyDeadlineName | DukeException.NoDeadlineTime | DukeException.EmptyEvent | DukeException.NoEventDatetime e) {
@@ -173,7 +262,7 @@ public class Duke {
     private void DoneATask(int task_index) {
         if (task_index < task_list.size() && task_index >= 0) {
             task_list.get(task_index).MarkAsDone();
-            //task_list[task_index].MarkAsDone();
+            SaveTaskListToFile();
             PrintWithIndent(hori_line);
             PrintWithIndent("Nice! I've marked this task as done:");
             PrintWithIndent(task_list.get(task_index).toString());
@@ -191,6 +280,7 @@ public class Duke {
         if (task_index < task_list.size() && task_index >= 0) {
             String TaskToRemove = task_list.get(task_index).toString();
             task_list.remove(task_index);
+            SaveTaskListToFile();
             PrintWithIndent(hori_line);
             PrintWithIndent("Noted! I've removed this task:");
             PrintWithIndent(TaskToRemove);
