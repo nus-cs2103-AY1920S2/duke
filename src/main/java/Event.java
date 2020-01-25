@@ -1,9 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event implements Task {
     private final String name;
     private final boolean completed;
-    private final String deadline;
+    private final LocalDateTime deadline;
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    public Event(String name, String deadline) {
+    public Event(String name, LocalDateTime deadline) {
         this.name = name;
         this.completed = false;
         this.deadline = deadline;
@@ -27,12 +31,13 @@ public class Event implements Task {
         return this.completed;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
     @Override
     public String toString() {
-        return "[E][" + (completed ? "✓" : "✗") + "] " + name + " (at: " + deadline + ")";
+        return "[E][" + (completed ? "✓" : "✗") + "] " + name + " (at: " +
+                deadline.format(formatter) + ")";
     }
 }
