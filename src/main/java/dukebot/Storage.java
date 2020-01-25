@@ -19,10 +19,8 @@ public class Storage {
             writeStream.writeObject(data);
             writeStream.flush();
             writeStream.close();
-            System.out.println("done");
 
         }catch (IOException e) {
-            System.out.println("fail");
             e.printStackTrace();
         }
     }

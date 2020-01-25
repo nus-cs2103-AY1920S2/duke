@@ -24,7 +24,7 @@ public abstract class Task implements Serializable{
     /**
      * Creates a task.
      */
-    public static Task makeTask(String[] inp) throws InvalidTaskException {
+    public static Task makeTask(String[] inp) throws DukeException {
         String taskType = inp[0];
         String description;
         String time;
@@ -32,13 +32,13 @@ public abstract class Task implements Serializable{
         case "todo":
             description = String.join(" ", Arrays.copyOfRange(inp, 1, inp.length));
             if (description.length() == 0) {
-                throw new InvalidTaskException("Duke doesn't see any description of the todo...");
+                throw new DukeException("Duke doesn't see any description of the todo...");
             }
             return new Todo(description);
         case "deadline":
             int byInd = Arrays.asList(inp).indexOf("/by");
             if (byInd == inp.length - 1) {
-                throw new InvalidTaskException("Duke doesn't see any deadline...");
+                throw new DukeException("Duke doesn't see any deadline...");
             } else if (byInd > 1) {
                 description = String.join(" ", Arrays.copyOfRange(inp, 1, byInd));
                 time = String.join(" ", Arrays.copyOfRange(inp, byInd + 1, inp.length));
@@ -46,16 +46,16 @@ public abstract class Task implements Serializable{
                     LocalDateTime parsedDate = DateTimeParse.parseDate(time);
                     return new Deadline(description, parsedDate);
                 } catch (DateTimeParseException e) {
-                    throw new InvalidTaskException("Master gave a date that Duke cannot read...");
+                    throw new DukeException("Master gave a date that Duke cannot read...");
                 }
             } else {
-                throw new InvalidTaskException("Master, use '/by' to indicate deadline,"
+                throw new DukeException("Master, use '/by' to indicate deadline,"
                         + " Duke wouldn't know otherwise...");
             }
         case "event":
             int atInd = Arrays.asList(inp).indexOf("/at");
             if (atInd == inp.length - 1) {
-                throw new InvalidTaskException("Duke doesn't see any start time...");
+                throw new DukeException("Duke doesn't see any start time...");
             } else if (atInd > 1) {
                 description = String.join(" ", Arrays.copyOfRange(inp, 1, atInd));
                 time = String.join(" ", Arrays.copyOfRange(inp, atInd + 1, inp.length));
@@ -63,15 +63,15 @@ public abstract class Task implements Serializable{
                     LocalDateTime parsedDate = DateTimeParse.parseDate(time);
                     return new Event(description, parsedDate);
                 } catch (DateTimeParseException e) {
-                    throw new InvalidTaskException("Master gave a date that Duke cannot read...");
+                    throw new DukeException("Master gave a date that Duke cannot read...");
                 }
             } else {
-                throw new InvalidTaskException("Master, use '/at' to indicate starting time,"
+                throw new DukeException("Master, use '/at' to indicate starting time,"
                         + " Duke wouldn't know otherwise...");
             }
         default:
             //                This should never be triggered;
-            throw new InvalidTaskException("Unknown task type");
+            throw new DukeException("Unknown task type");
         }
     }
 

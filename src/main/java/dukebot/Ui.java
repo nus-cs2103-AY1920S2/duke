@@ -82,7 +82,9 @@ public class Ui {
                 dukeSays("Is Master leaving already?");
                 dukeSays("Please come back and play with Duke soon...");
                 break;
-
+            default:
+                dukeSays("There is an unexpected error :(");
+                break;
         }
     }
 

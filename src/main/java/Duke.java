@@ -69,7 +69,7 @@ public class Duke {
                     Task newTask = tasks.addNewTask(inpArr);
                     storage.saveToFile(tasks);
                     ui.newTask(newTask);
-                } catch (InvalidTaskException e) {
+                } catch (DukeException e) {
                     ui.dukeSays(e.getMessage());
                 }
                 break;
