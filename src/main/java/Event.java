@@ -4,7 +4,6 @@ public class Event extends Task {
 
     // for the date and time option
     private String at;
-    private String time;
 
     // isDay if the user uses "../at Monday" instead of a standard yyyy-mm-dd format
     //private static boolean isDay = false;
