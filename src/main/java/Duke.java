@@ -8,6 +8,7 @@ public class Duke {
 
     /**
      * The main method is where Duke introduces itself
+     * 
      * @param args not used
      */
     public static void main(String[] args) {
@@ -32,7 +33,7 @@ public class Duke {
                 if (cmd.equals("list")) {
                     listTasks(sb, grammar);
                 } else if (cmd.equals("delete")) {
-                    deleteTask(sb,  grammar, splitInput);
+                    deleteTask(sb, grammar, splitInput);
                 } else if (cmd.equals("done")) {
                     markTaskAsDone(sb, splitInput);
                 } else if (cmd.equals("todo")) {
@@ -61,15 +62,26 @@ public class Duke {
         }
 
         if (input.equals("bye")) {
-            if (tasks.size() > 0) {
-                System.out.println(separator + "\nCome back! You still have unfinished tasks to complete!\n" + separator);
-            } else {
-                System.out.println(separator + "\nBye! Do come back to track more tasks!!\n" + separator);
-            }
+            bye();
         }
     }
 
-    private static void generateDeadlineEvent(StringBuilder sb, String[] splitInput, String id) throws NoDescriptionException, NoDateProvidedException {
+    private static void bye() {
+        boolean flag = true;
+        for (Task t : tasks) {
+            if (t.getStatusIcon().equals("\u2718")) {
+                System.out.println("Come back! You still have unfinished tasks to complete!");
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            System.out.println("Bye! Come back again if you have more tasks to complete!");
+        }
+    }
+
+    private static void generateDeadlineEvent(StringBuilder sb, String[] splitInput, String id)
+            throws NoDescriptionException, NoDateProvidedException {
         if (splitInput.length < 2) {
             throw new NoDescriptionException();
         } else {
@@ -83,7 +95,8 @@ public class Duke {
         }
     }
 
-    private static void markTaskAsDone(StringBuilder sb, String[] splitInput) throws NoTaskNumberException, InvalidIndexException {
+    private static void markTaskAsDone(StringBuilder sb, String[] splitInput)
+            throws NoTaskNumberException, InvalidIndexException {
         int size = tasks.size();
         if (splitInput.length > 1) {
             int taskNum = Integer.parseInt(splitInput[1]);
@@ -114,7 +127,8 @@ public class Duke {
         sb.append("Now you have " + size + grammar + " in the list.\n");
     }
 
-    private static void deleteTask(StringBuilder sb, String grammar, String[] splitInput) throws NoTaskNumberException, InvalidIndexException {
+    private static void deleteTask(StringBuilder sb, String grammar, String[] splitInput)
+            throws NoTaskNumberException, InvalidIndexException {
         int size = tasks.size();
         if (splitInput.length > 1) {
             int n = Integer.parseInt(splitInput[1]);
