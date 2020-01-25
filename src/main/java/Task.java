@@ -1,4 +1,8 @@
-import java.util.*;
+/**
+ * Represents a task that needs to be completed.
+ * It contains a description of the task,
+ * and a boolean isDone that states if the task is completed or not.
+ */
 
 public class Task {
     protected String description;

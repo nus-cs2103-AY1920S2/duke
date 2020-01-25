@@ -1,6 +1,11 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+/**
+ * Represents the class which contains the storage,
+ * and handles the methods which writes to an external text file,
+ * and retrieves the tasks from an external text file.
+ */
 
 public class Storage {
     protected String filePath;

@@ -1,3 +1,7 @@
+/**
+ *  Handles the command when a user adds a new task.
+ *  For the execute method, it is to add the task to the tasklist.
+ */
 public class AddCommand extends Command {
     protected Task taskToAdd;
 

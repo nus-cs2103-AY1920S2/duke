@@ -2,6 +2,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the deadline task. It contains a description and a
+ * 'by' date and time that the task has to be completed by.
+ */
+
 public class Deadline extends Task{
     protected String by;
     protected LocalDate date;

@@ -1,3 +1,7 @@
+/**
+ * Handles the exception of an improper done command is given.
+ */
+
 public class DoneException extends Exception{
     public static final String space = "     ";
     public DoneException() {};

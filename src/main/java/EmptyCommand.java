@@ -1,3 +1,8 @@
+/**
+ * Handles the error in the parse method,
+ * as there is a need to return something.
+ */
+
 public class EmptyCommand extends Command {
     public EmptyCommand() {}
 

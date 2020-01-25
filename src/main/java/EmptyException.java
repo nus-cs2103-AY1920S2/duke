@@ -1,3 +1,7 @@
+/**
+ * Handles the exception of the description of the task is not given.
+ */
+
 public class EmptyException extends Exception {
     public static final String space = "     ";
     public EmptyException() {};

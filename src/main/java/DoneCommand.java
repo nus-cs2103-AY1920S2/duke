@@ -1,3 +1,8 @@
+/**
+ * Handles the command when the user completes the task.
+ * For the execute method, it sets the task to 'Done'.
+ */
+
 public class DoneCommand extends Command {
     protected Task doneTask;
 

@@ -2,6 +2,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the event task. It contains a description of the task, and a
+ * 'at' date and time that represents when the event is taking place.
+ */
+
 public class Event extends Task {
     protected String at;
     protected LocalDate date;

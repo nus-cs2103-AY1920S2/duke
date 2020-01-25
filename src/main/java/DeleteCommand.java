@@ -1,3 +1,8 @@
+/**
+ * Handles the command when the user wants a task deleted.
+ * For the execute method, it removes the task from the tasklist.
+ */
+
 public class DeleteCommand extends Command {
     protected int taskToDelete;
 

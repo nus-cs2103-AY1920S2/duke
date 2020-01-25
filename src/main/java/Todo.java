@@ -1,3 +1,8 @@
+/**
+ * Represents the todo task, which has to be completed.
+ * It contains a description of the task.
+ */
+
 public class Todo extends Task {
     public String taskType = "T";
     public Todo(String description) {

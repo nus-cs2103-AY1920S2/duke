@@ -1,3 +1,9 @@
+/**
+ * Handles the command "bye", when the user wants to leave the application.
+ * isExit is set to true to break the loop.
+ * For the execute method, the tasks are saved into a text file.
+ */
+
 public class ByeCommand extends Command{
     public ByeCommand(String command) {
         this.command = command;

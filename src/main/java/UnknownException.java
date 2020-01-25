@@ -1,3 +1,8 @@
+/**
+ * Handles the exception if the user
+ * gives an inappropriate command.
+ */
+
 public class UnknownException extends Exception{
     public static final String space = "     ";
     public UnknownException() {};

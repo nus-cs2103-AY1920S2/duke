@@ -1,4 +1,11 @@
 import java.util.ArrayList;
+
+/**
+ * Represents a list of tasks. It has methods for handling the tasks,
+ * such as adding a task, removing a task, getting a task,
+ * returning the list of tasks, and setting a task to be done.
+ */
+
 public class TaskList {
     protected ArrayList<Task> tasks;
 

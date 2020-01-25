@@ -1,4 +1,10 @@
 import java.util.*;
+
+/**
+ * Represents the Ui of Duke,
+ * printing out the appropriate message for each of the different commands.
+ */
+
 public class Ui {
     public static final String string = "    ____________________________________________________________";
     public static final String space = "     ";

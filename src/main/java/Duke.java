@@ -1,3 +1,7 @@
+/**
+ * The main class that runs the whole Task manager
+ */
+
 public class Duke {
     public static String filePath = "/Users/catherine/Desktop/Duke/src/main/duke.txt";
     private Storage storage;

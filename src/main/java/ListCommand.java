@@ -1,3 +1,8 @@
+/**
+ * Handles the command when the user gives a 'list' command.
+ * For the execute method, it is to print out all the tasks in the tasklist.
+ */
+
 public class ListCommand extends Command {
     public ListCommand(String command) {
         this.command = command;

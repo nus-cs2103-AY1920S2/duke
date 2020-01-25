@@ -1,3 +1,8 @@
+/**
+ * Represents the class which parses each command given by the user.
+ * It see which command is given, and returns the corresponding command.
+ */
+
 public class Parser {
     public Parser() {}
 
