@@ -1,6 +1,6 @@
 public class UserInput {
-    protected String command;
-    protected String[] arguments;
+    private String command;
+    private String[] arguments;
 
     public UserInput(String input) {
         if (input.contains(" ")) {
@@ -27,6 +27,96 @@ public class UserInput {
 
     public String getArgumentsAsString() {
         return String.join(" ", arguments);
+    }
+
+    public String execute(TaskList tasks) throws DukeException {
+        switch (getCommand()) {
+        case "": {
+            throw new DukeNoCommandException();
+        }
+        case "todo": 
+        case "deadline": 
+        case "event": {
+            Task newTask = createTask();
+            return tasks.addTask(newTask);
+        }
+        case "list": {
+            return tasks.toString();
+        }
+        case "done": {
+            return markTask(tasks);
+        }
+        case "delete": {
+            return deleteTask(tasks);
+        }
+        case "bye": {
+            return "Goodbye!";
+        }
+        default: {
+            break;
+        }
+        }
+        throw new DukeUnrecognisedCommandException(getCommand());
+    }
+
+    private Task createTask() throws DukeException {
+        String taskType = getCommand();
+        if (getArguments().length == 0) {
+            throw new DukeNoArgumentsException(taskType);
+        }
+        switch (taskType) {
+        case "todo": {
+            return new TodoTask(getArgumentsAsString());
+        }
+        case "deadline": {
+            String[] parts = getArgumentsAsString().split(" /by ", 2);
+            if (parts.length != 2) {
+                throw new DukeInvalidNumberOfArgumentsException(taskType, 2, parts.length);
+            }
+            return new DeadlineTask(parts[0], parts[1]);
+        }
+        case "event": {
+            String[] parts = getArgumentsAsString().split(" /at ", 2);
+            if (parts.length != 2) {
+                throw new DukeInvalidNumberOfArgumentsException(taskType, 2, parts.length);
+            }
+            return new EventTask(parts[0], parts[1]);
+        }
+        default: {
+            throw new DukeUnrecognisedTaskTypeException(taskType);
+        }
+        }
+    }
+
+    private String markTask(TaskList tasks) throws DukeException {
+        if (getArguments().length == 0) {
+            throw new DukeNoArgumentsException(getCommand());
+        }
+        if (tasks.isEmpty()) {
+            throw new DukeEmptyTaskListException();
+        }
+        try {
+            int taskIndex = Integer.parseInt(getArguments()[0]) - 1;
+            Task task = tasks.getTask(taskIndex);
+            return task.markAsCompleted();
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeInvalidTaskException(getArguments()[0]);
+        }
+    }
+
+    private String deleteTask(TaskList tasks) throws DukeException {
+        if (getArguments().length == 0) {
+            throw new DukeNoArgumentsException(getCommand());
+        }
+        if (tasks.isEmpty()) {
+            throw new DukeEmptyTaskListException();
+        }
+        try {
+            int taskIndex = Integer.parseInt(getArguments()[0]) - 1;
+            return tasks.removeTask(taskIndex);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeInvalidTaskException(getArguments()[0]);
+        }
     }
 
     @Override
