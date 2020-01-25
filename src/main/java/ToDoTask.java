@@ -5,7 +5,16 @@ public class ToDoTask extends Task {
         this.task = task;
     }
 
-    @Override
+    public String formatToStore() {
+        String format = "todo " + task + " /";
+        if(isDone) {
+            format += " 1";
+        } else {
+            format += " 0";
+        }
+        return format;
+    }
+
     public String toString() {
         String taskWords =  "[T]";
         if(isDone) {

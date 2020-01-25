@@ -1,38 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
-    private enum  possibleTasks { todo, deadline, event }
     private static Scanner sc = new Scanner(System.in);
-
-    private static Task taskHandler(String taskType) throws InvalidInputException{
-        boolean isAllowedTask = false;
-        for(possibleTasks task : possibleTasks.values()) {
-            if(taskType.equals(task.name())) {
-                isAllowedTask = true;
-            };
-        }
-
-        if(!isAllowedTask) {
-            throw new UnknownTaskTypeException();
-        }
-
-        String taskDescription = sc.nextLine();
-        if(taskDescription.equals("")) {
-            throw new EmptyTaskException();
-        }
-        String[] taskAndTiming = taskDescription.split("/");
-        switch(taskType) {
-            case "todo":
-                return new ToDoTask(taskDescription);
-            case "deadline":
-                if(taskAndTiming.length < 2) { throw new InvalidInputException();}
-                return new DeadlineTask(taskAndTiming[0], taskAndTiming[1]);
-            case "event":
-                if(taskAndTiming.length < 2) { throw new InvalidInputException(); }
-                return new EventTask(taskAndTiming[0], taskAndTiming[1]);
-        }
-        throw new InvalidInputException();
-    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -41,6 +12,12 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         List<Task> usrInputs = new ArrayList<>();
+
+        try{
+            usrInputs = Storage.readFromFile();
+        } catch(FileNotFoundException e) {
+
+        }
 
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
@@ -111,13 +88,19 @@ public class Duke {
             }
 
             try {
-                Task currentTask = taskHandler(command);
+                String taskDescription = sc.nextLine();
+                Task currentTask = TaskHandler.taskHandler(command, taskDescription);
                 usrInputs.add(currentTask);
                 System.out.println("Got it! I've added the following task \n" + currentTask +
                         "\nNow you have " + usrInputs.size() + " tasks");
             } catch (InvalidInputException e) {
                 System.out.println(e);
             }
+        }
+        try {
+            Storage.storeIntoFile(usrInputs);
+        } catch(IOException e) {
+            System.out.println(e);
         }
 
 
