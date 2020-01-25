@@ -48,11 +48,14 @@ public class Duke {
 
         while (true) {
             String command = sc.nextLine();
-            String[] words = command.split(" ");
+            String[] words = command.split(" ", 2);
+            String[] dates; //splits between task and date with (/by)
 
             if (command.equals("bye")) break;
 
+            String task = "";
             switch (words[0]) {
+
                 case "list":
                     int listNo = 1;
 
@@ -69,10 +72,29 @@ public class Duke {
                     System.out.println("Charmander crosses out the task.");
                     System.out.println(charmanderList.get(listValue));
                     break;
-                default:
-                    Task newTask = new Task(command);
-                    charmanderList.add(newTask);
-                    System.out.println("Charmander scribbles something on the list. You think it says (" + command + ").");
+                case "todo":
+                    task = words[1];
+                    Todo newTodo = new Todo(task);
+                    charmanderList.add(newTodo);
+                    System.out.println("Charmander writes a Todo. You peek over and it says:");
+                    System.out.println(newTodo);
+                    System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                    break;
+                case "deadline":
+                    dates = words[1].split(" /by ", 2);
+                    Deadline newDeadline = new Deadline(dates[0], dates[1]);
+                    charmanderList.add(newDeadline);
+                    System.out.println("Charmander writes a Deadline. You peek over and it says:");
+                    System.out.println(newDeadline);
+                    System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                    break;
+                case "event":
+                    dates = words[1].split(" /by ", 2);
+                    Event newEvent = new Event(dates[0], dates[1]);
+                    charmanderList.add(newEvent);
+                    System.out.println("Charmander writes a Event. You peek over and it says:");
+                    System.out.println(newEvent);
+                    System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
             }
         }
 
