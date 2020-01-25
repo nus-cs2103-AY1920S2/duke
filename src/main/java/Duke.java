@@ -14,10 +14,10 @@ public class Duke {
                 + indent + "| | | | | | | |/ / _ \\\n"
                 + indent + "| |_| | |_| |   <  __/\n"
                 + indent + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(line + "\n" + indent + "Hello! I'm Snow\n" + indent + "What can I do for you?\n" + logo + line + "\n");
+        System.out.println(line + "\n" + indent + "Hello! I'm Snow\n" + indent + "What can I do for you?\n" + logo + line);
 
         String input = "";
-        while (true) {
+        while (sc.hasNextLine()) {
             input = sc.nextLine();
             if (input.equals("bye")){
                 System.out.println(line);
