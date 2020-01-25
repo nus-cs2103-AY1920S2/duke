@@ -1,8 +1,9 @@
 package dukebot;
 
 import java.util.Arrays;
+import java.io.Serializable;
 
-public abstract class Task {
+public abstract class Task implements Serializable{
     protected String description;
     private boolean isDone;
     protected TaskType taskType;
