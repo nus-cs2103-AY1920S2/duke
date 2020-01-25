@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Locale;
 
 import static java.time.format.TextStyle.SHORT;
 
-public class TaskDate {
+public class TaskDate implements Serializable {
     protected String dateString;
     protected LocalDate localDate;
     protected String time;
