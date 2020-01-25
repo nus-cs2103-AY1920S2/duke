@@ -11,7 +11,7 @@ public class Duke {
                 + "     |____/ \\__,_|_|\\_\\___|\n";
         System.out.println("    -----------------------------------\n"
                 + "      Hello! I'm\n" + logo);
-        System.out.println("      What can I do for you?\n"
+        System.out.println("      What can I do for you? :)\n"
                 + "    -----------------------------------");
 
         Scanner sc = new Scanner(System.in);
@@ -32,12 +32,20 @@ public class Duke {
                     System.out.println("    -----------------------------------");
 
                 } else if (arr[0].equals("done")) {
-                    Task current = strArr.get(Integer.parseInt(arr[1]) - 1);
-                    current.markDone();
-                    System.out.println("    -----------------------------------\n"
-                            + "      Nice! I've marked this task as done:\n "
-                            + "        [" + current.getStatusIcon() + "] " + current.getTask() + "\n"
-                            + "    -----------------------------------");
+                    int taskNum = Integer.parseInt(arr[1]) - 1;
+
+                    if (taskNum < strArr.size()) {
+                        Task current = strArr.get(taskNum);
+                        current.markDone();
+                        System.out.println("    -----------------------------------\n"
+                                + "      Nice! I've marked this task as done:\n "
+                                + "        [" + current.getStatusIcon() + "] " + current.getTask() + "\n"
+                                + "    -----------------------------------");
+                    } else {
+                        System.out.println("    -----------------------------------\n"
+                                + "      Sorry, this task does not exist :(\n "
+                                + "    -----------------------------------");
+                    }
 
                 } else {
                     strArr.add(t);
