@@ -1,0 +1,3 @@
+[T][X] borrow book
+[D][X] CS2103 Submission by Jan 26 2020 11:59 PM
+[E][X] CNY at Jan 25 2020 12:00 PM

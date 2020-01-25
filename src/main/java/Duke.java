@@ -60,7 +60,6 @@ public class Duke {
                 } catch (IOException exception) {
                     ui.printUpdateError(exception);
                 }
-
                 break;
             case "delete":
                 int removeTask = parser.getTaskIndex();
@@ -75,7 +74,6 @@ public class Duke {
                 } catch (IOException exception) {
                     ui.printUpdateError(exception);
                 }
-
                 break;
             default:
                 try {
@@ -89,11 +87,9 @@ public class Duke {
                     } catch (IOException exception) {
                         ui.printUpdateError(exception);
                     }
-
                 } catch (DukeException exception) {
                     ui.printException(exception);
                 }
-
                 break;
             }
 
@@ -125,7 +121,6 @@ public class Duke {
             } else {
                 tasks.addDeadline(description, date, timing);
             }
-
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
