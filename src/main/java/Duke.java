@@ -53,22 +53,12 @@ public class Duke {
                         int taskRemoveIndex = Integer.parseInt(cmdInstructionArr[1]) - 1;
                         respond(lstTasks.removeTask(taskRemoveIndex));
                         break;
-                    case "todo": // Add ToDo task
+                    case "todo":
+                    case "deadline":
+                    case "event":
                         if (!hasInstruction)
-                            throw new EmptyDescriptionException("todo");
-                        respond(lstTasks.addTask(new ToDo(cmdInstructionArr[1])));
-                        break;
-                    case "deadline": // Add Deadline task
-                        if (!hasInstruction)
-                            throw new EmptyDescriptionException("deadline");
-                        String descByArr[] = cmdInstructionArr[1].split(" /by ", 2);
-                        respond(lstTasks.addTask(new Deadline(descByArr[0], descByArr[1])));
-                        break;
-                    case "event": // Add Event task
-                        if (!hasInstruction)
-                            throw new EmptyDescriptionException("event");
-                        String descAtArr[] = cmdInstructionArr[1].split(" /at ", 2);
-                        respond(lstTasks.addTask(new Event(descAtArr[0], descAtArr[1])));
+                            throw new EmptyDescriptionException(command);
+                        respond(lstTasks.addTask(command, cmdInstructionArr[1]));
                         break;
                     default: // Add new task
                         throw new UnknownCommandException();
