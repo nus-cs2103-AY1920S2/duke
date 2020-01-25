@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     public static char COMPLETED = 'X';
     public static char PENDING = ' ';
 
@@ -11,8 +11,15 @@ public class Task {
     }
 
     public String markAsCompleted() {
-        isCompleted = true;
-        return String.format("Marked '%s' as done", getDescription());
+        if (isCompleted) {
+            return String.format(
+                    "'%s' has already been done",
+                    getDescription()
+            );
+        } else {
+            isCompleted = true;
+            return String.format("Marked '%s' as done", getDescription());
+        }
     }
 
     public String getDescription() {
