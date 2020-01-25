@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
 
     public TType getType() {
         return TType.TODO;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return null;
     }
 

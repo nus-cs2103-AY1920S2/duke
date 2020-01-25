@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     protected int id;
     protected String task;
@@ -5,7 +7,7 @@ public abstract class Task {
 
     public abstract TType getType();
 
-    public abstract String getDate();
+    public abstract LocalDate getDate();
 
     public int getId() {
         return id;

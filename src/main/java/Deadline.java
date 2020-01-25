@@ -1,27 +1,31 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    private String date;
+    private LocalDate date;
+
+    public LocalDate getDate() {
+        return date;
+    }
 
     public TType getType() {
         return TType.DEADLINE;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public Deadline(int id, String task, String date) {
+    public Deadline(int id, String task, String date) throws BadDateException {
         super(id, task);
-        this.date = date;
+        this.date = Parser.dateParser(date);
     }
 
-    public Deadline(int id, boolean done, String task, String date) {
+    public Deadline(int id, boolean done, String task, String date) throws BadDateException {
         super(id, done, task);
-        this.date = date;
+        this.date = Parser.dateParser(date);
     }
 
     @Override
     public String toString() {
-        if (done) return  "[D][✓] " + task + " (by: " + date + ")";
-        else return "[D][✗] " + task + " (by: " + date + ")";
+        if (done) return  "[D][✓] " + task + " (by: " +
+                date.format(Parser.DATE_FORMATTER) + ")";
+        else return "[D][✗] " + task + " (by: " +
+                date.format(Parser.DATE_FORMATTER) + ")";
     }
 }

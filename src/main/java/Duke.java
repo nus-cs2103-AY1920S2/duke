@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -6,8 +7,10 @@ public class Duke {
     static Scanner sc;
     static ArrayList<Task> tasks;
     static Storage storage;
+    static Calender CALENDER;
 
-    public static void readCommand(Command command) throws DukeDescriptionException, BadDescriptionException {
+    public static void readCommand(Command command) throws DukeDescriptionException,
+            BadDescriptionException, BadDateException {
         switch (command) {
             case LIST:
                 System.out.println("Here are all your tasks:");
@@ -47,6 +50,7 @@ public class Duke {
                 Task taskEvent = new Event(tasks.size() + 1, event.substring(0, eventDate),
                         event.substring(eventDate + 4));
                 tasks.add(taskEvent);
+                CALENDER.addDate(taskEvent);
                 System.out.println("I've added this task: \n" +
                         "  " + taskEvent + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
@@ -59,6 +63,7 @@ public class Duke {
                 Task taskDLine = new Deadline(tasks.size() + 1, deadline.substring(0, dLineDate),
                         deadline.substring(dLineDate + 4));
                 tasks.add(taskDLine);
+                CALENDER.addDate(taskDLine);
                 System.out.println("I've added this task: \n" +
                         "  " + taskDLine + "\nNow you have " +
                         tasks.size() + " tasks in the list." );
@@ -81,6 +86,17 @@ public class Duke {
                     throw new BadDescriptionException("Non-Integer");
                 }
                 break;
+            case SEARCH:
+                String search = sc.nextLine();
+                if (search.isEmpty()) throw new DukeDescriptionException("Empty Description");
+                LocalDate date = Parser.dateParser(search.substring(1));
+                ArrayList<Task> list = CALENDER.searchDate(date);
+                System.out.println("Here are the events on " +
+                        date.format(Parser.DATE_FORMATTER) + ":");
+                for (Task task: list) {
+                    System.out.println("  " + task);
+                }
+                break;
             default:
                 break;
         }
@@ -98,6 +114,7 @@ public class Duke {
         storage = new Storage("." + File.separator +
                 "data" + File.separator + "Task.txt");
         tasks = storage.printFileIntoList();
+        CALENDER = new Calender();
 
         System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
@@ -119,6 +136,9 @@ public class Duke {
                 } catch (BadDescriptionException e) {
                     System.out.println("OOPS! The number input for " +
                             "done/delete cannot be " + e.getMessage());
+                } catch (BadDateException e) {
+                    System.out.println("Sorry I don't recognise this date format!\n" +
+                            "Please make sure the format is: dd mm yy");
                 } finally {
                     System.out.println(lineBreak);
                 }

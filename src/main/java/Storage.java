@@ -33,6 +33,9 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.err.println("File not found");
             return null;
+        } catch (BadDateException e) {
+            System.err.println("Bad dates in File\n Please correct and reload");
+            return null;
         }
     }
 
@@ -46,12 +49,14 @@ public class Storage {
                                 + System.lineSeparator());
                         break;
                     case EVENT:
-                        fw.write("E|" + task.getDone() + "|" + task.getTask()
-                                + "|" + task.getDate() + System.lineSeparator());
+                        fw.write("E|" + task.getDone() + "|" + task.getTask() + "|" +
+                                task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                                + System.lineSeparator());
                         break;
                     case DEADLINE:
-                        fw.write("D|" + task.getDone() + "|" + task.getTask()
-                                + "|" + task.getDate() + System.lineSeparator());
+                        fw.write("D|" + task.getDone() + "|" + task.getTask() + "|" +
+                                task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                                + System.lineSeparator());
                         break;
                     default:
                         break;
