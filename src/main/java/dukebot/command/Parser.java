@@ -15,6 +15,8 @@ public class Parser {
             return new uiOnlyCommand(LineName.SAY_DUKE);
         case "bye":
             return new exitCommand();
+        case "help":
+            return new uiOnlyCommand(LineName.HELP);
         case "list":
             return new listCommand();
         case "done":

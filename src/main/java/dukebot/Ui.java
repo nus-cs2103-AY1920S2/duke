@@ -41,6 +41,15 @@ public class Ui {
 
     public void sayLine(LineName lineName) {
         switch (lineName) {
+        case HELP:
+            dukeSays("todo <name> -- Adds a todo to your task list.");
+            dukeSays("deadline <name> /by <time> -- Adds a dead line to your task list.");
+            dukeSays("event <name> /at <time> -- Adds a event to your task list.");
+            dukeSays("list -- Displays your task list.");
+            dukeSays("done <task index> -- Marks the task as done.");
+            dukeSays("delete <task index> -- Deletes the task.");
+            dukeSays("bye -- Exits this application");
+            break;
         case NO_INPUT:
             dukeSays("Duke can't hear anything Master... Is Master all right?");
             break;
