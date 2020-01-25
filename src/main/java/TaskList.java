@@ -16,16 +16,22 @@ public class TaskList {
         return tasks.get(num);
     }
 
-    public void addTodo(String name){
-        this.tasks.add(new Todo(name));
+    public String addTodo(String name){
+        Task newT = new Todo(name);
+        this.tasks.add(newT);
+        return newT.toString();
     }
 
-    public void addEvent(String name, String dateTime) {
-        this.tasks.add(new Event(name, dateTime));
+    public String addEvent(String name, String dateTime) {
+        Task newE = new Event(name, dateTime);
+        this.tasks.add(newE);
+        return newE.toString();
     }
 
-    public void addDeadline(String name, String date) {
-        this.tasks.add(new Deadline(name, date));
+    public String addDeadline(String name, String date) {
+        Task newD = new Deadline(name, date);
+        this.tasks.add(newD);
+        return newD.toString();
     }
 
     public void removeTask(int num){

@@ -23,42 +23,57 @@ public class Duke {
 
         //reply to input
         input = s.nextLine();
-        while(!input.equals("bye")){    
-            String reply = "";   
-            String[] inputArr = input.split(" ");
 
+        while(!input.equals("bye")){
+            String reply = "";
+            String[] inputArr = input.split(" ");
+            Command command = parser.parse(input);
             try{
-                if (inputArr[0].equals("list")){
-                    reply = list(inputArr, tasks);
-                } else if (inputArr[0].equals("done")){
-                    int taskNo = Integer.parseInt(inputArr[1]) - 1;
-                    tasks.checkDone(taskNo);
-                    reply += "Okcan, I mark this task as done:\n" + space + tasks.getTask(taskNo);
-                    storage.saveToSave(tasks);
-                } else if (inputArr[0].equals("delete")) {
-                    if (inputArr.length < 2){
-                        throw new NoNumberDeleteException();
-                    } else {
-                        int taskToDelete = Integer.parseInt(inputArr[1]);
-                        if (taskToDelete > tasks.size()) {
-                            throw new NoSuchDeleteException();
+                switch (command){
+                    case BYE:
+                        goodBye();
+                        break;
+                    case LIST:
+                        reply = list(inputArr, tasks);
+                        break;
+                    case DONE:
+                        int taskNo = Integer.parseInt(inputArr[1]) - 1;
+                        tasks.checkDone(taskNo);
+                        reply += "Okcan, I mark this task as done:\n" + space + tasks.getTask(taskNo);
+                        storage.saveToSave(tasks);
+                        break;
+                    case DELETE:
+                        if (inputArr.length < 2) {
+                            throw new NoNumberDeleteException();
                         } else {
-                            String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
-                            tasks.removeTask(taskToDelete - 1);
-                            reply += "Okcan. I will remove this task:\n" + space + "  " + whichTaskDelete 
-                                    + "\n" + space + "But you still have " + tasks.size() + " task(s) in the list.";
+                            int taskToDelete = Integer.parseInt(inputArr[1]);
+                            if (taskToDelete > tasks.size()) {
+                                throw new NoSuchDeleteException();
+                            } else {
+                                String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
+                                tasks.removeTask(taskToDelete - 1);
+                                reply += "Okcan. I will remove this task:\n" + space + "  " + whichTaskDelete + "\n" + space
+                                        + "But you still have " + tasks.size() + " task(s) in the list.";
+                            }
                         }
-                    }
-                } else {
-                    //check which type of task
-                    reply = createNew(inputArr, tasks);
-                }
+                        break;
+                    case CREATETODO:
+                        reply = createNew(inputArr, tasks);
+                        break;
+                    case CREATEEVENT:
+                        reply = createNew(inputArr, tasks);
+                        break;
+                    case CREATEDEADLINE:
+                        reply = createNew(inputArr, tasks);
+                        break;
+                    default:   
+                        throw new UnknownCommandException();
+                }    
                 //printing replies
                 System.out.println(line);
                 System.out.println(space + reply);
                 System.out.println(line);
-                
-            } catch (DukeException e){
+            }catch (DukeException e){
                 System.err.println(e);
             } catch (IOException e){
                 System.err.println(e);
@@ -68,7 +83,7 @@ public class Duke {
             // next input
             input = s.nextLine();
         }
-        goodBye();
+            
     }
 
     private static void goodBye() {
@@ -125,7 +140,7 @@ public class Duke {
                 reply += (numbering + ".");
                 reply += (tasks.getTask(i) + "\n" + space);
             }
-            reply += "\n" + space  + "I told you save liao loh........";
+            reply += "\n" + space + "I told you save liao loh........";
         } else {
             String dateS = arr[1];
             LocalDate date = LocalDate.parse(dateS, inputFormatter);
@@ -147,7 +162,6 @@ public class Duke {
     private static String createNew(String[] inputArr, TaskList tasks) throws DukeException {
         int pointer;
         String nameOfEvent;
-        Task newTask;
         String dateTime;
         String date;
         
@@ -162,9 +176,7 @@ public class Duke {
             }
             nameOfEvent = combineString(inputArr, 1, pointer);
             dateTime = combineString(inputArr, pointer + 1, arrLength);
-
-            tasks.addEvent(nameOfEvent, dateTime);
-            
+            saveReply += tasks.addEvent(nameOfEvent, dateTime);
         } else if (inputArr[0].equals("deadline")) {
             pointer = findIndex("/by", inputArr);
             if (pointer == -1 || pointer == arrLength - 1) {
@@ -172,11 +184,10 @@ public class Duke {
             }
             nameOfEvent = combineString(inputArr, 1, pointer);
             date = combineString(inputArr, pointer + 1, arrLength);
-
-            tasks.addDeadline(nameOfEvent, date);
+            saveReply += tasks.addDeadline(nameOfEvent, date);
         } else if (inputArr[0].equals("todo")) {
             nameOfEvent = combineString(inputArr, 1, arrLength);
-            tasks.addTodo(nameOfEvent);
+            saveReply += tasks.addTodo(nameOfEvent);
         } else {
             throw new UnknownCommandException();
          }

@@ -10,8 +10,6 @@ public class Parser{
             return Command.DONE;
         } else if (inputArr[0].equals("delete")){
             return Command.DELETE;
-        } else if (inputArr[0].equals("done")){
-            return Command.DONE;
         } else if (inputArr[0].equals("todo")){
             return Command.CREATETODO;
         } else if (inputArr[0].equals("event")){
@@ -21,5 +19,6 @@ public class Parser{
         } else {
             return Command.INVALID;
         }
+    }
            
 }
