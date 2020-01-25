@@ -68,10 +68,25 @@ public class Duke {
                         System.out.println("Charmander hopes you liked it!");
                         break;
                     case "done":
-                        int listValue = Integer.parseInt(words[1]) - 1;
-                        charmanderList.get(listValue).markAsDone();
-                        System.out.println("Charmander crosses out the task.");
-                        System.out.println(charmanderList.get(listValue));
+                        try {
+                            int listValue = Integer.parseInt(words[1]) - 1;
+                            charmanderList.get(listValue).markAsDone();
+                            System.out.println("Charmander crosses out the task.");
+                            System.out.println(charmanderList.get(listValue));
+                        } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                            throw new DukeException("Charmander needs a valid number from the list!");
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            int listValue = Integer.parseInt(words[1]) - 1;
+                            System.out.println("Charmander used delete on the task");
+                            System.out.println(charmanderList.remove(listValue));
+                            System.out.println("it's super effective!");
+                            System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
+                        } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                            throw new DukeException("Charmander needs a valid number from the list!");
+                        }
                         break;
                     case "todo":
                         try {
