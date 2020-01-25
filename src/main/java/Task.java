@@ -3,4 +3,5 @@ public interface Task {
     void markAsDone();
     void markAsIncomplete();
     String getDescription();
+    String stringToSaveToDisk();
 }

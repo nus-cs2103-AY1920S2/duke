@@ -53,4 +53,14 @@ public class Todo implements Task {
         // e.g. format: [T][✗] borrow book
         return String.format("[T][%s] %s", getStatusIcon(), description);
     }
+
+    /**
+     * To return a String representation of Todo instance
+     * @return String representing task in save file
+     */
+    @Override
+    public String stringToSaveToDisk() {
+        // e.g. format: todo,1,read book
+        return String.format("todo,%s,%s", isDone ? 1 : 0, description);
+    }
 }
