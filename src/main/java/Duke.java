@@ -125,9 +125,7 @@ public class Duke {
                     break;
 
                     case TODO_COMMAND:
-
                         task = new TodoTask(parameters);
-
                         tasks.add(task);
                         addTaskReport(task, tasks.size());
                         break;
@@ -164,7 +162,6 @@ public class Duke {
                         addTaskReport(task, tasks.size());
                         break;
                 }
-
                 System.out.println("\t____________________________________________________________");
             } catch (DukeException e) {
                 System.out.println("\t " + e);
