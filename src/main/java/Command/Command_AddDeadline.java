@@ -1,3 +1,7 @@
+package Command;
+
+import Task.Task_Deadline;
+
 public class Command_AddDeadline extends Command_AddTask{
 
     public Command_AddDeadline(String description, String time){

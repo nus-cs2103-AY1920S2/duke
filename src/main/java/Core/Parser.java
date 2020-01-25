@@ -1,10 +1,17 @@
+package Core;
+
+import Command.*;
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
+
+
 public class Parser {
 
     private static Parser parser=null;
 
     private Parser(){}
 
-    public static Parser getInstance() throws SingletonException{
+    public static Parser getInstance() throws SingletonException {
         if(parser==null){
             parser=new Parser();
             return parser;

@@ -1,3 +1,9 @@
+package Core;
+
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
+import Task.Task;
+
 import java.util.ArrayList;
 
 public class Common {
@@ -6,11 +12,11 @@ public class Common {
 
     private Model model;
 
-    private Common() throws SingletonException{
+    private Common() throws SingletonException {
         model = Model.getInstance();
     }
 
-    public static Common getInstance() throws SingletonException{
+    public static Common getInstance() throws SingletonException {
         if(common==null){
             common=new Common();
             return common;

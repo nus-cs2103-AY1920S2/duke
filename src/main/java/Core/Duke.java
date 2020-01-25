@@ -1,3 +1,8 @@
+package Core;
+
+import Command.Command;
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
 
 public class Duke {
 

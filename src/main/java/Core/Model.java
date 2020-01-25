@@ -1,3 +1,9 @@
+package Core;
+
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
+import Task.Task;
+
 import java.util.ArrayList;
 
 public class Model {
@@ -10,7 +16,7 @@ public class Model {
         taskList =new ArrayList<>();
     }
 
-    public static Model getInstance() throws SingletonException{
+    public static Model getInstance() throws SingletonException {
         if(model==null){
             model=new Model();
             return model;
@@ -35,7 +41,7 @@ public class Model {
         getTask(index).setDone();
     }
 
-    public void deleteTask(int index) throws DukeException{
+    public void deleteTask(int index) throws DukeException {
         taskList.remove(getTask(index));
     }
 
@@ -49,7 +55,7 @@ public class Model {
 
     public int getSize() throws DukeException {
         if(taskList.size()==0){
-            throw new DukeException("Task list is empty.");
+            throw new DukeException("Task.Task list is empty.");
         }
         return taskList.size();
     }

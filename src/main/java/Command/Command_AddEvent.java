@@ -1,3 +1,7 @@
+package Command;
+
+import Task.Task_Event;
+
 public class Command_AddEvent extends Command_AddTask{
 
     public Command_AddEvent(String description, String time){

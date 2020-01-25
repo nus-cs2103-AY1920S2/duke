@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -13,7 +15,7 @@ public class Ui {
     }
 
     public void preLog(){
-        display("Hello! I'm Duke",
+        display("Hello! I'm Core.Duke",
                 "What can I do for you?");
     }
 
