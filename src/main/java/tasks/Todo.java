@@ -1,5 +1,8 @@
+package tasks;
+
 public class Todo extends Task {
-    public String taskType = "T";
+    private String taskType = "T";
+
     public Todo(String description) {
         super(description);
     }

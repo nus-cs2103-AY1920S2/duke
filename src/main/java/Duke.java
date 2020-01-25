@@ -1,3 +1,13 @@
+import commands.Command;
+
+import exceptions.DukeException;
+
+import tasks.TaskList;
+
+import handlers.Parser;
+import handlers.Storage;
+import handlers.Ui;
+
 public class Duke {
     public static String filePath = "/Users/catherine/Desktop/Duke/src/main/duke.txt";
     private Storage storage;

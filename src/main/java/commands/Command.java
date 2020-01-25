@@ -1,3 +1,10 @@
+package commands;
+
+import tasks.TaskList;
+
+import handlers.Storage;
+import handlers.Ui;
+
 public abstract class Command {
     protected String command;
 

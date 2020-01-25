@@ -1,4 +1,4 @@
-import java.util.*;
+package tasks;
 
 public class Task {
     protected String description;

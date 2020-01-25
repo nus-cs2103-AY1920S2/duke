@@ -1,3 +1,11 @@
+package commands;
+
+import tasks.Task;
+import tasks.TaskList;
+
+import handlers.Storage;
+import handlers.Ui;
+
 public class AddCommand extends Command {
     protected Task taskToAdd;
 

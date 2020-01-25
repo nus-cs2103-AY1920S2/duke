@@ -1,31 +1,33 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
-    protected String by;
+public class Event extends Task {
+    protected String at;
     protected LocalDate date;
     protected LocalTime time;
-    public String taskType = "D";
+    private String taskType = "E";
 
-    public Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
-    public Deadline(String status, String description, String by) {
+    public Event(String status, String description, String at) {
         super(description);
         this.setStatus(status);
-        this.by = by;
+        this.at = at;
     }
 
     public void setDateTime() {
-        String[] b = this.by.split(" ");
+        String[] b = this.at.split(" ");
         if (b.length > 1) {
             this.date = LocalDate.parse(b[0]);
             this.time = LocalTime.parse(b[1]);
         } else {
-            this.date = LocalDate.parse(this.by);
+            this.date = LocalDate.parse(this.at);
             this.time = null;
         }
     }
@@ -47,23 +49,23 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        //return "[D]" + super.toString() + "(by: " + by + ")";
-        String[] b = this.by.split(" ");
+        //return "[E]" + super.toString() + "(at: " + at + ")";
+        String[] b = this.at.split(" ");
         if (b.length > 1) {
-            return "[D]" + super.toString() + "(by: " + dateToString() + " " + timeToString()+ ")";
+            return "[E]" + super.toString() + "(at: " + dateToString() + " " + timeToString()+ ")";
         } else {
-            return "[D]" + super.toString() + "(by: " + dateToString() + ")";
+            return "[E]" + super.toString() + "(at: " + dateToString() + ")";
         }
     }
 
     @Override
     public String saveString() {
-        //return "D | " + super.saveString() + "| " + by;
-        String[] b = this.by.split(" ");
+        //return "E | " + super.saveString() + "| " + at;
+        String[] b = this.at.split(" ");
         if (b.length > 1) {
-            return "D | " + super.saveString() + "| " + dateToString() + " " + timeToString();
+            return "E | " + super.saveString() + "| " + dateToString() + " " + timeToString();
         } else {
-            return "D | " + super.saveString() + "| " + dateToString();
+            return "E | " + super.saveString() + "| " + dateToString();
         }
     }
 }
