@@ -64,7 +64,7 @@ public class Duke {
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
         System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
-        String filePath = "/Users/freddy/Desktop/duke/src/main/java/tasks.txt";
+        String filePath = "data/duke.txt";
         try{
             loadFileContents(filePath, tasks);
         }

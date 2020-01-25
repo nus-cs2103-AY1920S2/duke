@@ -10,7 +10,7 @@ public class Event extends Task {
     }
 
     public String toStringTaskstxt(){
-        return "D/" + getStatusIconInBin() + "/" + description + "/" + date.toString() + "\n";
+        return "E/" + getStatusIconInBin() + "/" + description + "/" + date.toString() + "\n";
     }
 
     @Override
