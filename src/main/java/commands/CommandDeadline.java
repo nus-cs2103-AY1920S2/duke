@@ -1,10 +1,10 @@
 package commands;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
+import processor.DukeProcessor;
+import processor.Ui;
 import tasks.DeadlineTask;
 import tasks.Task;
-import tasks.TodoTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,10 @@ public class CommandDeadline extends CommandTask {
         }
 
         DeadlineTask task = new DeadlineTask(inputArgs[0], inputArgs[1]);
+        processor.getTaskList().add(task);
 
-        List<Task> taskList = (ArrayList<Task>) processor.getTaskList();
-        taskList.add(task);
-
-        System.out.println("I've got it! Added the following task:");
-        System.out.println(task);
+        Ui.print("I've got it! Added the following task:");
+        Ui.print(task.toString());
 
         super.execute(processor, args);
     }

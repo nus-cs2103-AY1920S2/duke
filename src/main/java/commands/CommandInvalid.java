@@ -1,9 +1,10 @@
 package commands;
 
-import main.DukeProcessor;
+import processor.DukeProcessor;
+import processor.Ui;
 
-public class CommandInvalid implements DukeCommand {
+public class CommandInvalid implements Command {
     public void execute(DukeProcessor processor, String args) {
-        System.out.println("Sorry, but I don't think you've entered a valid command! :(");
+        Ui.print("Sorry, but I don't think you've entered a valid command! :(");
     }
 }

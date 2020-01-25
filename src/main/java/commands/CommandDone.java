@@ -1,10 +1,12 @@
 package commands;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
+import processor.DukeProcessor;
+import processor.Storage;
+import processor.Ui;
 import tasks.Task;
 
-public class CommandDone implements DukeCommand {
+public class CommandDone implements Command {
 
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
@@ -17,11 +19,11 @@ public class CommandDone implements DukeCommand {
         Task selectedTask = processor.getTaskList().get(taskIndex);
         selectedTask.complete();
 
-        System.out.println("Great job on being productive! I've marked the following task as completed:");
-        System.out.println(selectedTask);
+        Ui.print("Great job on being productive! I've marked the following task as completed:");
+        Ui.print(selectedTask.toString());
 
         try {
-            processor.getTaskListHandler().saveTasks();
+            Storage.saveTasks(processor);
         } catch(Exception e) {
             e.printStackTrace();
         }

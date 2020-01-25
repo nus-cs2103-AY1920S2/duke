@@ -1,11 +1,12 @@
 package commands;
 
-import main.DukeProcessor;
+import processor.DukeProcessor;
+import processor.Ui;
 
-public class CommandBye implements DukeCommand {
+public class CommandBye implements Command {
 
     public void execute(DukeProcessor processor, String args) {
-        System.out.println("Ok see you! Hopefully I could help you in some way! :)");
+        Ui.print("Ok see you! Hopefully I could help you in some way! :)");
         processor.disable();
     }
 }

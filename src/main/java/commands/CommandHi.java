@@ -1,8 +1,9 @@
 package commands;
 
-import main.DukeProcessor;
+import processor.DukeProcessor;
+import processor.Ui;
 
-public class CommandHi implements DukeCommand {
+public class CommandHi implements Command {
 
     public void execute(DukeProcessor processor, String args) {
         String logo = " ____        _        \n"
@@ -10,7 +11,7 @@ public class CommandHi implements DukeCommand {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I help you with today? :)");
+        Ui.print("Hello from\n" + logo);
+        Ui.print("What can I help you with today? :)");
     }
 }

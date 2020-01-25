@@ -1,8 +1,8 @@
 package commands;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
-import tasks.DeadlineTask;
+import processor.DukeProcessor;
+import processor.Ui;
 import tasks.EventTask;
 import tasks.Task;
 
@@ -16,17 +16,14 @@ public class CommandEvent extends CommandTask{
 
         if(!args.contains(" /at ") || inputArgs.length < 2) {
             throw new DukeException("Your 'event' command is incorrect! Please follow the format: event <item> " +
-                    "/at <time>");
+                    "/at <time> to <time>");
         }
 
-
         EventTask task = new EventTask(inputArgs[0], inputArgs[1]);
+        processor.getTaskList().add(task);
 
-        List<Task> taskList = (ArrayList<Task>) processor.getTaskList();
-        taskList.add(task);
-
-        System.out.println("I've got it! Added the following task:");
-        System.out.println(task);
+        Ui.print("I've got it! Added the following task:");
+        Ui.print(task.toString());
 
         super.execute(processor, args);
     }

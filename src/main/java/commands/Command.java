@@ -1,9 +1,9 @@
 package commands;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
+import processor.DukeProcessor;
 
-public interface DukeCommand {
+public interface Command {
 
     public void execute(DukeProcessor processor, String args) throws DukeException;
 }

@@ -1,7 +1,8 @@
 package commands;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
+import processor.DukeProcessor;
+import processor.Ui;
 import tasks.Task;
 import tasks.TodoTask;
 
@@ -17,12 +18,11 @@ public class CommandTodo extends CommandTask {
                     "<item>");
         }
 
-        List<Task> taskList = (ArrayList<Task>) processor.getTaskList();
         TodoTask task = new TodoTask(argsArray[1]);
-        taskList.add(task);
+        processor.getTaskList().add(task);
 
-        System.out.println("I've got it! Added the following task:");
-        System.out.println(task);
+        Ui.print("I've got it! Added the following task:");
+        Ui.print(task.toString());
 
         super.execute(processor, args);
     }

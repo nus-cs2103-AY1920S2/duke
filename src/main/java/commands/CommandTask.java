@@ -1,20 +1,18 @@
 package commands;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
-import tasks.Task;
+import processor.DukeProcessor;
+import processor.Storage;
+import processor.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CommandTask implements DukeCommand {
+public class CommandTask implements Command {
 
     public void execute(DukeProcessor processor, String args) throws DukeException {
-        List<Task> taskList = (ArrayList<Task>) processor.getTaskList();
-        System.out.println("You've now got " + taskList.size() + " tasks in your list.");
+
+        Ui.print("You've now got " + processor.getTaskList().size() + " tasks in your list.");
 
         try {
-            processor.getTaskListHandler().saveTasks();
+            Storage.saveTasks(processor);
         } catch(Exception e) {
             e.printStackTrace();
         }

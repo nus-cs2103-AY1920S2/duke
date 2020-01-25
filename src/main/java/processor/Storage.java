@@ -1,23 +1,21 @@
-package tasks;
+package processor;
 
 import exceptions.DukeException;
-import main.DukeProcessor;
+import tasks.DeadlineTask;
+import tasks.EventTask;
+import tasks.Task;
+import tasks.TodoTask;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskListHandler {
+public class Storage {
 
-    DukeProcessor processor;
-
-    public TaskListHandler(DukeProcessor processor) {
-        this.processor = processor;
-        init();
-    }
-
-    public void init() {
+    public static void init() {
         try {
             File taskFile = new File("data/tasks.txt");
             if(!taskFile.exists()) {
@@ -29,7 +27,7 @@ public class TaskListHandler {
         }
     }
 
-    public void saveTasks() throws IOException {
+    public static void saveTasks(DukeProcessor processor) throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt");
         fw.write("");
         for(int i = 0; i < processor.getTaskList().size(); i ++) {
@@ -45,7 +43,7 @@ public class TaskListHandler {
         fw.close();
     }
 
-    public List<Task> loadTasks() throws IOException, DukeException {
+    public static List<Task> loadTasks(DukeProcessor processor) throws IOException, DukeException {
         File taskFile = new File("data/tasks.txt");
 
         if(!taskFile.exists()) {
@@ -63,14 +61,14 @@ public class TaskListHandler {
         }
 
         if(outputTaskList.size() != 0) {
-            System.out.println(String.format("Looks like you've saved some tasks before! You have %d tasks in your list.",
+            Ui.print(String.format("Looks like you've saved some tasks before! You have %d tasks in your list.",
                     outputTaskList.size()));
         }
 
         return outputTaskList;
     }
 
-    private String packageTask(Task task) {
+    private static String packageTask(Task task) {
         String output = "";
         int doneIndicator = 0;
 
@@ -91,7 +89,7 @@ public class TaskListHandler {
         return output;
     }
 
-    private Task processPackagedTask(String taskString) throws DukeException {
+    private static Task processPackagedTask(String taskString) throws DukeException {
         Task outputTask;
 
         String[] taskArray = taskString.split("\\^_\\^", 4);
