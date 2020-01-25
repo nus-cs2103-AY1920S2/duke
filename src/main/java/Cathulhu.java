@@ -6,7 +6,7 @@ public class Cathulhu {
     private void interact() {
         Scanner sc = new Scanner(System.in);
         String cmd = "";
-        ArrayList<String> items = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         String catLeaves = "......................................................................\n"
         +".......................................Iä! Iä! .......................\n"
         +"...........................................Cthul......................\n"
@@ -26,17 +26,26 @@ public class Cathulhu {
 
         while (true) {
             System.out.println("\t-------------C-A-T-H-U-L-H-U-------------");
-            cmd = sc.nextLine();
-            if (cmd.equalsIgnoreCase("bye")) {
+            cmd = sc.nextLine().strip();
+            if ( cmd.equalsIgnoreCase("bye") ) {
                 System.out.println("\tBe gone then, mortal.\n");
                 System.out.println(catLeaves);
                 break;
-            } else if (cmd.equalsIgnoreCase("list")) {
-                for (int i=1;i<=items.size();i++) {
-                    System.out.println("\t" + i + ". " + items.get(i-1));
+            } else if ( cmd.equalsIgnoreCase("list") ) {
+                for (int i = 1; i <= tasks.size(); i++) {
+                    System.out.println("\t" + i + ". " + tasks.get(i-1) );
+                }
+            } else if (cmd.matches("^done[ ]+[0-9]+?")) {
+                int taskIndex = Integer.parseInt(cmd.split("[ ]+")[1])-1;
+                if (tasks.size() > taskIndex) {
+                    tasks.get(taskIndex).markAsDone();
+                    System.out.println("Mortal, thou have completed this task:");
+                    System.out.println(tasks.get(taskIndex));
+                } else {
+                    System.out.println("Mortal, thou have no such task! ");
                 }
             } else {
-                items.add(cmd);
+                tasks.add(new Task(cmd));
                 System.out.println("\tadded: " + cmd);
             }
             System.out.println("\t----------------M-E-O-W-S----------------\n\n");
@@ -58,7 +67,7 @@ public class Cathulhu {
         +"      `-.______ / / /   | |_  |  '.'| |     | | |   `'.  |'---' | |     | | |   `'.  |  \n"
         +"               `  \\ \\._,\\ '/  |   / | '.    | '.'   .'|  '/     | '.    | '.'   .'|  '/ \n"
         +"                  `--'  `\"   `'-'  '---'   '---'`-'  `--'      '---'   '---'`-'  `--'  \n";
-        System.out.println(logo + "\n\n\tIt's you again, mortal. \n\tWhy have you summoned meow this time?");
+        System.out.println(logo + "\n\n\tIt's you again, mortal. \n\tWhy have thou summoned meow this time?");
         Cathulhu newCathulhu = new Cathulhu();
         newCathulhu.interact();
     }
