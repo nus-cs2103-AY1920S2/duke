@@ -27,6 +27,7 @@ public class CommandHandler {
     }
 
     public void executeCmd(String cmd) {
+        // First parse command
         String cmdWord, arg;
         // Check if command is bye
         if (cmd.equalsIgnoreCase("bye")) {
@@ -46,7 +47,7 @@ public class CommandHandler {
         try {
             commands.get(cmdWord).execute(arg, tasks, ui);
         } catch (NullPointerException e) {
-            ui.showReply("Command " + cmdWord + " does not exist!");
+            ui.showError("Command " + cmdWord + " does not exist!");
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
