@@ -1,5 +1,11 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,9 +19,10 @@ public class AutoResponder {
     static Pattern pDelete = Pattern.compile("delete (\\d+)");
     static Pattern pEmptyCommand = Pattern.compile("(todo|event|deadline)\\s*$");
     static Pattern pList = Pattern.compile("list\\s*$");
+    static Pattern pSave = Pattern.compile("save\\s*$");
 
 
-    public AutoResponder() {
+    private AutoResponder() {
         this.taskList = new ArrayList<>();
         this.toPrint = new StringBuilder();
     }
@@ -30,21 +37,24 @@ public class AutoResponder {
         return new AutoResponder(taskList, new StringBuilder());
     }
 
-    public AutoResponder readInput(String input) {
-        if (pList.matcher(input).find()) {
+    public AutoResponder readInput(String input) throws IOException {
+        String lowerInput = input.toLowerCase();
+        if (pList.matcher(lowerInput).find()) {
             return this.processList();
-        } else if (pDone.matcher(input).find()) {
-            Matcher m = pDone.matcher(input);
+        } else if (pDone.matcher(lowerInput).find()) {
+            Matcher m = pDone.matcher(lowerInput);
             m.find();
             int index = Integer.parseInt(m.group(1)) - 1;
             return this.markTaskDone(index);
-        } else if (pDelete.matcher(input).find()) {
-            Matcher m = pDelete.matcher(input);
+        } else if (pDelete.matcher(lowerInput).find()) {
+            Matcher m = pDelete.matcher(lowerInput);
             m.find();
             int index = Integer.parseInt(m.group(1)) - 1;
             return this.deleteTask(index);
-        } else if (pEmptyCommand.matcher(input).find()) { //TODO Change to Exception
-            Matcher m = pEmptyCommand.matcher(input);
+        } else if (pSave.matcher(lowerInput).find()) {
+            return this.saveList();
+        } else if (pEmptyCommand.matcher(lowerInput).find()) {
+            Matcher m = pEmptyCommand.matcher(lowerInput);
             m.find();
             throw new IllegalArgumentException("☹ OOPS!!! The description of a " +
                     m.group(1) + " cannot be empty.");
@@ -71,6 +81,53 @@ public class AutoResponder {
             sb.append(i).append(". ").append(taskList.get(i - 1)).append("\n");
         }
         return new AutoResponder(taskList, sb).printToConsole();
+    }
+
+    private AutoResponder saveList() throws IOException {
+        StringBuilder writeContents = new StringBuilder();
+        for (Task v : taskList) {
+            writeContents.append(v.writeFormat());
+            writeContents.append("\n");
+        }
+        if (!Files.exists(Paths.get("./data"))) {
+            boolean ok = new File("./data").mkdir();
+            if (!ok) {
+                System.err.println("Error in creating directory.\n");
+            }
+        }
+        File f = new File("./data/duke.txt");
+        String path = f.getAbsolutePath();
+        FileWriter fw = new FileWriter(path);
+        fw.write(writeContents.toString());
+        fw.close();
+        toPrint.append("Tasks saved successfully.\n");
+        return this.printToConsole();
+    }
+
+    private AutoResponder loadList() {
+        try {
+            File f = new File("./data/duke.txt");
+            Scanner sc = new Scanner(f);
+            String s;
+            while (sc.hasNextLine()) {
+                s = sc.nextLine();
+                switch (s.charAt(0)) {
+                    case 'T':
+                        taskList.add(Todo.readFormat(s));
+                        break;
+                    case 'D':
+                        taskList.add(Deadline.readFormat(s));
+                        break;
+                    case 'E':
+                        taskList.add(Event.readFormat(s));
+                        break;
+                }
+            }
+            toPrint.append("Task file loaded successfully!\n");
+        } catch (Exception e) {
+            toPrint.append("Task file not loaded. Check if file exists or is corrupted.\n");
+        }
+        return this.printToConsole();
     }
 
     private AutoResponder markTaskDone(int index) {
@@ -125,6 +182,11 @@ public class AutoResponder {
         sb.append(taskList.get(taskList.size() - 1));
         sb.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.\n");
         return new AutoResponder(taskList, sb).printToConsole();
+    }
+
+    public static AutoResponder initialise() {
+        AutoResponder ar = new AutoResponder();
+        return ar.loadList();
     }
 
 }

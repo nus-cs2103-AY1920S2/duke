@@ -13,7 +13,7 @@ public class Launcher {
         System.out.println("Hello from\n" + logo);
         System.out.println("What do you wish to do?");
 
-        AutoResponder ar = new AutoResponder();
+        AutoResponder ar = AutoResponder.initialise();
         Scanner sc = new Scanner(System.in);
         String input = "";
 
