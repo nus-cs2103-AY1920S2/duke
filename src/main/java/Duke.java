@@ -1,34 +1,32 @@
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 
 public class Duke {
-    static Scanner sc;
-    static ArrayList<Task> tasks;
-    static Storage storage;
-    static Calender CALENDER = new Calender();
+    private TaskList tasklist;
+    private Storage storage;
+    private Calender calender;
+    private Ui ui;
+    private Scanner sc;
 
-    public static void readCommand(Command command) throws DukeDescriptionException,
+    public void readCommand(Command command) throws DukeDescriptionException,
             BadDescriptionException, BadDateException {
         switch (command) {
             case LIST:
                 System.out.println("Here are all your tasks:");
-                for (Task task: tasks) {
-                    System.out.println(task.getId() + "." + task);
-                }
+                tasklist.printTask();
                 break;
             case DONE:
                 try {
                     String strDone = sc.nextLine();
                     if (strDone.isEmpty()) throw new DukeDescriptionException("Empty Description");
                     int done = Integer.parseInt(strDone.substring(1)); //there must be a space between command and input
-                    if (done <= 0 || done > tasks.size())
+                    if (done <= 0 || done > tasklist.getSize())
                         throw new BadDescriptionException("" + done);
-                    tasks.get(done - 1).setDone(true);
+                    tasklist.getTask(done - 1).setDone(true);
                     System.out.println("Nice! I've marked this task as done: \n" +
-                            "  " + tasks.get(done - 1));
-                    storage.writeListIntoFile(tasks);
+                            "  " + tasklist.getTask(done - 1));
+                    storage.writeListIntoFile(tasklist.getList());
                 } catch (NumberFormatException e) {
                     throw new BadDescriptionException("Non-Integer");
                 }
@@ -36,52 +34,52 @@ public class Duke {
             case TODO:
                 String todo = sc.nextLine();
                 if (todo.isEmpty()) throw new DukeDescriptionException("Empty Description");
-                Task taskToDo = new Todo(tasks.size() + 1, todo);
-                tasks.add(taskToDo);
+                Task taskToDo = new Todo(tasklist.getSize() + 1, todo);
+                tasklist.addTask(taskToDo);
                 System.out.println("I've added this task: \n" +
                         "  " + taskToDo + "\nNow you have " +
-                        tasks.size() + " tasks in the list." );
-                storage.writeListIntoFile(tasks);
+                        tasklist.getSize() + " tasks in the list." );
+                storage.writeListIntoFile(tasklist.getList());
                 break;
             case EVENT:
                 String event = sc.nextLine();
                 if (event.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 int eventDate = event.indexOf("/");
-                Task taskEvent = new Event(tasks.size() + 1, event.substring(0, eventDate),
+                Task taskEvent = new Event(tasklist.getSize() + 1, event.substring(0, eventDate),
                         event.substring(eventDate + 4));
-                tasks.add(taskEvent);
-                CALENDER.addDate(taskEvent);
+                tasklist.addTask(taskEvent);
+                calender.addDate(taskEvent);
                 System.out.println("I've added this task: \n" +
                         "  " + taskEvent + "\nNow you have " +
-                        tasks.size() + " tasks in the list." );
-                storage.writeListIntoFile(tasks);
+                        tasklist.getSize() + " tasks in the list." );
+                storage.writeListIntoFile(tasklist.getList());
                 break;
             case DEADLINE:
                 String deadline = sc.nextLine();
                 if (deadline.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 int dLineDate = deadline.indexOf("/");
-                Task taskDLine = new Deadline(tasks.size() + 1, deadline.substring(0, dLineDate),
+                Task taskDLine = new Deadline(tasklist.getSize() + 1, deadline.substring(0, dLineDate),
                         deadline.substring(dLineDate + 4));
-                tasks.add(taskDLine);
-                CALENDER.addDate(taskDLine);
+                tasklist.addTask(taskDLine);
+                calender.addDate(taskDLine);
                 System.out.println("I've added this task: \n" +
                         "  " + taskDLine + "\nNow you have " +
-                        tasks.size() + " tasks in the list." );
-                storage.writeListIntoFile(tasks);
+                        tasklist.getSize() + " tasks in the list." );
+                storage.writeListIntoFile(tasklist.getList());
                 break;
             case DELETE:
                 try {
                     String strDelete = sc.nextLine();
                     if (strDelete.isEmpty()) throw new DukeDescriptionException("Empty Description");
                     int delete = Integer.parseInt(strDelete.substring(1)); //there must be a space between command and input
-                    if (delete <= 0 || delete > tasks.size())
+                    if (delete <= 0 || delete > tasklist.getSize())
                         throw new BadDescriptionException("" + delete);
-                    Task deletedTask = tasks.get(delete - 1);
-                    tasks.remove(delete - 1);
+                    Task deletedTask = tasklist.getTask(delete - 1);
+                    tasklist.removeTask(delete - 1);
                     System.out.println("Okay! I have deleted this task:\n" +
                             "  " + deletedTask + "\nNow you have " +
-                            tasks.size() + " tasks in the list.");
-                    storage.writeListIntoFile(tasks);
+                            tasklist.getSize() + " tasks in the list.");
+                    storage.writeListIntoFile(tasklist.getList());
                 } catch (NumberFormatException e) {
                     throw new BadDescriptionException("Non-Integer");
                 }
@@ -90,43 +88,24 @@ public class Duke {
                 String search = sc.nextLine();
                 if (search.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 LocalDate date = Parser.dateParser(search.substring(1));
-                ArrayList<Task> list = CALENDER.searchDate(date);
                 System.out.println("Here are the events on " +
                         date.format(Parser.DATE_FORMATTER) + ":");
-                for (Task task: list) {
-                    System.out.println("  " + task);
-                }
+                calender.searchDate(date);
                 break;
             default:
                 break;
         }
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String lineBreak = "_____________________________" +
-                "_______________________________";
-        sc = new Scanner(System.in);
-        storage = new Storage("." + File.separator +
-                "data" + File.separator + "Task.txt");
-        tasks = storage.printFileIntoList();
-
-        System.out.println(lineBreak);
-        System.out.println("Hello I am \n" + logo
-                + "\nWhat can I do for you?");
-        System.out.println(lineBreak);
-
+    public void run() {
+        ui.introduction();
         while (sc.hasNext()) {
             String next = sc.next();
             if (next.equals("bye")) break;
             else {
                 try {
-                    System.out.println(lineBreak);
-                    Command command = Command.lookUp(next);
+                    ui.lineBreak();
+                    Command command = Parser.commandParser(next);
                     readCommand(command);
                 } catch (InvalidCommandException e) {
                     System.out.println("Sorry I do not know what that means!");
@@ -139,12 +118,23 @@ public class Duke {
                     System.out.println("Sorry I don't recognise this date format!\n" +
                             "Please make sure the format is: dd mm yy");
                 } finally {
-                    System.out.println(lineBreak);
+                    ui.lineBreak();
                 }
             }
         }
-        System.out.println(lineBreak);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(lineBreak);
+        ui.exit();
+    }
+
+    public Duke(String filepath) {
+        ui = new Ui();
+        calender = new Calender();
+        storage = new Storage(filepath);
+        tasklist = new TaskList(storage.printFileIntoList(calender));
+        sc = new Scanner(System.in);
+    }
+
+    public static void main(String[] args) {
+        new Duke("." + File.separator + "data" +
+                File.separator + "Task.txt").run();
     }
 }
