@@ -1,13 +1,12 @@
 package duke.commands;
 
-import java.util.List;
-
 import duke.ui.Ui;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
 class MarkTaskAsDone implements Command {
-    public void execute(String arg, List<Task> tasks, Ui ui)  throws DukeException {
+    public void execute(String arg, TaskList tasks, Ui ui)  throws DukeException {
         int taskNo;
         try {
             taskNo = Integer.parseInt(arg);
@@ -15,7 +14,7 @@ class MarkTaskAsDone implements Command {
             throw new DukeException("Usage: done [int]");
         }
         try {
-            Task task = tasks.get(taskNo - 1);
+            Task task = tasks.get(taskNo);
             task.markAsDone();
             ui.showReply("Nice! I've marked this task as done:\n  " + task);
         } catch (IndexOutOfBoundsException e) {

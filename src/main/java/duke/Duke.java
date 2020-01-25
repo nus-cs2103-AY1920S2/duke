@@ -1,14 +1,12 @@
 package duke;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
 import duke.ui.Ui;
 import duke.ui.TextUi;
-import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.storage.Storage;
 import duke.storage.TextStorage;
 import duke.commands.CommandHandler;
@@ -20,10 +18,10 @@ public class Duke {
         String filePath = "data/tasks.txt";
         Storage storage = new TextStorage(filePath);
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        TaskList tasks = new TaskList();
         ui.showGreeting();
         try {
-            tasks = storage.load();
+            tasks.add(storage.load());
             ui.showReply("Save file loaded!");
         } catch (FileNotFoundException e) {
             ui.showError("Save file not found!");
@@ -35,7 +33,7 @@ public class Duke {
             handler.executeCmd(sc.nextLine());
         }
         try {
-            storage.save(tasks);
+            storage.save(tasks.getAllTasks());
             ui.showReply("Save Success! See you next time!");
         } catch (IOException e) {
             ui.showError("Save Failure :-(. Try again next time!");

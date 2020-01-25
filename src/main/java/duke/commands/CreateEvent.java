@@ -1,15 +1,14 @@
 package duke.commands;
 
-import java.util.List;
-
 import duke.ui.Ui;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.Event;
 import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
 class CreateEvent implements Command, TaskCreation {
-    public void execute(String arg, List<Task> tasks, Ui ui) throws DukeException {
+    public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
         String[] args = arg.split("/at");
         if (args.length < 2) {
             throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");

@@ -1,19 +1,18 @@
 package duke.commands;
 
-import java.util.List;
 import java.util.HashMap;
 
 import duke.ui.Ui;
-import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
 public class CommandHandler {
-    protected List<Task> tasks;
+    protected TaskList tasks;
     protected HashMap<String, Command> commands;
     protected boolean isActive;
     protected Ui ui;
 
-    public CommandHandler(List<Task> tasks, Ui ui) {
+    public CommandHandler(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
         this.commands = new HashMap<>();
