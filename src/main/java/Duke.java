@@ -44,26 +44,34 @@ public class Duke {
         System.out.println(charmander);
         System.out.println("Char! Charmander!");
 
-        List<String> charmanderList = new ArrayList<>();
+        List<Task> charmanderList = new ArrayList<>();
 
         while (true) {
             String command = sc.nextLine();
+            String[] words = command.split(" ");
 
             if (command.equals("bye")) break;
 
-            switch (command) {
+            switch (words[0]) {
                 case "list":
                     int listNo = 1;
 
                     System.out.println("Charmander presents the list to you:");
-                    for (String item: charmanderList) {
+                    for (Task item : charmanderList) {
                         System.out.println(listNo + " " + item);
                         listNo++;
                     }
                     System.out.println("Charmander hopes you liked it!");
                     break;
+                case "done":
+                    int listValue = Integer.parseInt(words[1]) - 1;
+                    charmanderList.get(listValue).markAsDone();
+                    System.out.println("Charmander crosses out the task.");
+                    System.out.println(charmanderList.get(listValue));
+                    break;
                 default:
-                    charmanderList.add(command);
+                    Task newTask = new Task(command);
+                    charmanderList.add(newTask);
                     System.out.println("Charmander scribbles something on the list. You think it says (" + command + ").");
             }
         }
