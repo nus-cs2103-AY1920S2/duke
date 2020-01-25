@@ -1,5 +1,6 @@
 package tasks;
 
+import exceptions.DukeException;
 import main.DukeProcessor;
 
 import java.io.*;
@@ -44,7 +45,7 @@ public class TaskListHandler {
         fw.close();
     }
 
-    public List<Task> loadTasks() throws IOException {
+    public List<Task> loadTasks() throws IOException, DukeException {
         File taskFile = new File("data/tasks.txt");
 
         if(!taskFile.exists()) {
@@ -90,7 +91,7 @@ public class TaskListHandler {
         return output;
     }
 
-    private Task processPackagedTask(String taskString) {
+    private Task processPackagedTask(String taskString) throws DukeException {
         Task outputTask;
 
         String[] taskArray = taskString.split("\\^_\\^", 4);
