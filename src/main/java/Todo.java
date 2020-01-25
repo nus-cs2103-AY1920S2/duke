@@ -1,6 +1,15 @@
 public class Todo extends Task{
     public Todo(String description) {
-        super(description);
+        super(description, false);
+    }
+
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    @Override
+    public String getSaveRepresentation() {
+        return "T|||" + getIsDone() + "|||" + getDescription() + "\n";
     }
 
     @Override
