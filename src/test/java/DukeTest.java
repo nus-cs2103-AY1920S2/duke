@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,7 @@ class DukeTest {
     final String HORIZONTAL_BAR =
             "____________________________________________________________";
     final String HORIZONTAL_DIVIDER = INDENTATION + HORIZONTAL_BAR + NEWLINE;
+    final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
     String taskDoneIcon = "\u2713";
     String taskNotDoneIcon = "\u2718";
     String exceptionIcon = "\u2639";
@@ -30,12 +32,12 @@ class DukeTest {
 
     static Stream<Arguments> generateOneDeadlineTask() {
         return Stream.of(Arguments.of(
-                new Deadline("return book", "Sunday")));
+                new Deadline("return book", "2020-12-03")));
     }
 
     static Stream<Arguments> generateOneEventTask() {
         return Stream.of(Arguments.of(
-                new Event("project meeting", "Mon 2-4pm")));
+                new Event("project meeting", "2020-01-25")));
     }
 
     @BeforeEach
@@ -217,9 +219,9 @@ class DukeTest {
     void processCommands_addEventTask_addEventTaskToList(Event task) {
         String delimiter = "/at";
         String eventDescription = task.getDescription();
-        String eventTime = task.getEventTime();
+        String eventTime = task.getEventTime().format(dateTimeFormatter);
         String input = String.format("event %s %s %s", eventDescription, delimiter,
-                eventTime);
+                task.getEventTime().toString());
         input += NEWLINE + "bye";
         try {
             duke.processCommands(new BufferedReader(
@@ -249,9 +251,9 @@ class DukeTest {
     void processCommands_addDeadlineTask_addDeadlineTaskToList(Deadline task) {
         String delimiter = "/by";
         String deadlineDescription = task.getDescription();
-        String deadline = task.getDeadline();
+        String deadline = task.getDeadline().format(dateTimeFormatter);
         String input = String.format("deadline %s %s %s", deadlineDescription,
-                delimiter, deadline);
+                delimiter, task.getDeadline().toString());
         input += NEWLINE + "bye";
         try {
             duke.processCommands(new BufferedReader(
