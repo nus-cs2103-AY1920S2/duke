@@ -1,12 +1,13 @@
 package dukebot;
 
-public class Deadline extends Task {
-    private String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    protected Deadline(String description, String time) {
-        super(description);
-        this.time = time;
-        this.taskType = TaskType.DEADLINE;
+public class Deadline extends Task {
+    private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+    protected Deadline(String description, LocalDateTime dateTime) {
+        super(description, TaskType.DEADLINE, dateTime);
     }
 
     //    public String getTime() {
@@ -15,7 +16,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return (this.description + " (by: " + this.time + ")");
+        return (this.description + " (by: " + this.dateTimeToString() + ")");
     }
 }
-
