@@ -2,6 +2,7 @@
  * This type of tasks do not have any date/time attached to it.
  */
 public class ToDo extends Task {
+
     /**
      * Class constructor.
      *

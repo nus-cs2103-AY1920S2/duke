@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
  * This type of tasks have a specific start and end timing.
  */
 public class Event extends Task {
+
     private LocalDate date;
     private LocalTime timing;
 

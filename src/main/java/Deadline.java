@@ -7,6 +7,7 @@ import java.util.Date;
  * This type of tasks need to be done by a certain deadline.
  */
 public class Deadline extends Task {
+
     private LocalDate date;
     private LocalTime timing;
 

@@ -2,6 +2,7 @@
  * Each object of class Task represents a task to be saved.
  */
 public class Task {
+
     private String description;
     private char taskType;
     private boolean isDone;
