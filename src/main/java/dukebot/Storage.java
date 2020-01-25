@@ -4,30 +4,32 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
-    public String path;
+    private String storagePath;
 
-    public Storage(String path) {
-        this.path = path;
+    public Storage(String storagePath) {
+        this.storagePath = storagePath;
     }
 
     public void saveToFile(ArrayList<Task> data) {
         try{
-            FileOutputStream writeData = new FileOutputStream(this.path);
+            FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 
             writeStream.writeObject(data);
             writeStream.flush();
             writeStream.close();
+            System.out.println("done");
 
         }catch (IOException e) {
+            System.out.println("fail");
             e.printStackTrace();
         }
     }
 
     public ArrayList<Task> loadFromFile() {
-        if (new File(this.path).isFile()) {
+        if (new File(this.storagePath).isFile()) {
             try{
-                FileInputStream readData = new FileInputStream(this.path);
+                FileInputStream readData = new FileInputStream(new File(this.storagePath));
                 ObjectInputStream readStream = new ObjectInputStream(readData);
 
                 ArrayList<Task> data = (ArrayList<Task>) readStream.readObject();
@@ -38,6 +40,7 @@ public class Storage {
                 e.printStackTrace();
             }
         }
+        System.out.println("fail load");
         return new ArrayList<>();
     }
 }

@@ -2,11 +2,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import dukebot.Task;
 import dukebot.InvalidTaskException;
+import dukebot.TaskList;
 
 /**
  * Main class.
  */
 public class Duke {
+    private static final String STORAGEPATH = "./dukeStore.txt";
     private static final String LOGO = "*******   **     ** **   ** ********\n"
             + "/**////** /**    /**/**  ** /**/////\n"
             + "/**    /**/**    /**/** **  /**\n"
@@ -20,7 +22,7 @@ public class Duke {
     private void run() {
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        TaskList tasks = new TaskList(STORAGEPATH);
 
         System.out.println("\nHi hi I'm \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
@@ -52,7 +54,7 @@ public class Duke {
                     dukeSays("Huh there are no tasks! Master is so forgetful...");
                 } else {
                     dukeSays("These are the tasks which Master forgot:");
-                    sayTasks(tasks);
+                    sayTasks(tasks.taskList);
                 }
                 break;
             case "done":
@@ -64,13 +66,12 @@ public class Duke {
                         if (taskInd >= tasks.size() || taskInd < 0) {
                             dukeSays("Duke can't seem to recall that item...");
                         } else {
-                            Task task = tasks.get(taskInd);
-                            if (task.getDone()) {
+                            if (tasks.getIsDone(taskInd)) {
                                 dukeSays("Didn't Master already do that?");
                             } else {
-                                dukeSays("So Master finally completed " + task + "?");
+                                dukeSays("So Master finally completed " + tasks.getTask(taskInd) + "?");
                                 dukeSays("Duke's really proud of Master!");
-                                task.setDone();
+                                tasks.setDone(taskInd);
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -82,8 +83,7 @@ public class Duke {
             case "deadline":
             case "event":
                 try {
-                    Task newTask = Task.makeTask(inpArr);
-                    tasks.add(newTask);
+                    Task newTask = tasks.addNewTask(inpArr);
                     dukeSays("So Master has " + newTask.getType() + ": " + newTask + "...");
                 } catch (InvalidTaskException e) {
                     dukeSays(e.getMessage());
@@ -95,11 +95,10 @@ public class Duke {
                 } else {
                     try {
                         int taskInd = Integer.parseInt(inpArr[1]) - 1;
-                        if (taskInd >= tasks.size() || taskInd < 0) {
+                        Task task = tasks.deleteTask(taskInd);
+                        if (task == null) {
                             dukeSays("That item already doesn't exist in Duke's memory...");
                         } else {
-                            Task task = tasks.get(taskInd);
-                            tasks.remove(taskInd);
                             dukeSays("For Master, Duke can forget anything, even the:");
                             dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
                         }
@@ -110,6 +109,7 @@ public class Duke {
                 break;
             default:
                 dukeSays("Duke doesn't understand Master...");
+                break;
             }
         }
         dukeSays("Is Master leaving already?");
@@ -145,10 +145,10 @@ public class Duke {
         int i = 1;
         for (Task task : tasks) {
             System.out.println("      "
-                + i + ". "
-                + "[" + task.getType() + "] "
-                + task
-                + (task.getDone() ? " [Done!]" : "")
+                    + i + ". "
+                    + "[" + task.getType() + "] "
+                    + task
+                    + (task.getDone() ? " [Done!]" : "")
             );
             i += 1;
         }
