@@ -17,6 +17,16 @@ public class TaskManager {
         return this.taskToRegex.get(task);
     }
 
+    private String generateInvalidIdxMsg() {
+        String msg = "OOPS!!! The index you have entered is invalid.\n";
+        if (this.arrTasks.size() == 0) {
+            msg += "There are no tasks in the list. Please add a task.";
+        } else {
+            msg += "Please enter a number between 1 and " + this.arrTasks.size() + ".";
+        }
+        return msg;
+    }
+
     private String addTask(Task t) {
         this.arrTasks.add(t);
         String response = "Got it. I've added this task:\n" + t + '\n';
@@ -24,36 +34,53 @@ public class TaskManager {
         return response;
     }
 
-    public String addTask(String command, String desc) {
+    public String addTask(String command, String desc) throws MissingInfoException {
         String response = "";
         String descTimeArr[] = desc.split(this.getRegex(command), 2);
+        boolean hasDateTime = false;
+        if (descTimeArr.length == 2)
+            hasDateTime = true;
         switch (command) {
             case "todo":
                 response = this.addTask(new ToDo(descTimeArr[0]));
                 break;
             case "deadline":
+                if (!hasDateTime)
+                    throw new MissingInfoException(command, true);
                 response = this.addTask(new Deadline(descTimeArr[0], descTimeArr[1]));
                 break;
             case "event":
+                if (!hasDateTime)
+                    throw new MissingInfoException(command, true);
                 response = this.addTask(new Event(descTimeArr[0], descTimeArr[1]));
                 break;
         }
         return response;
     }
 
-    public String removeTask(int i) {
-        Task t = this.arrTasks.get(i);
-        this.arrTasks.remove(i);
-        String response = "Noted. I've removed this task:\n" + t + '\n';
-        response += "Now you have " + this.arrTasks.size() + " tasks in the list.";
-        return response;
+    public String removeTask(String s) {
+        try {
+            int i = Integer.parseInt(s) - 1;
+            Task t = this.arrTasks.get(i);
+            this.arrTasks.remove(i);
+            String response = "Noted. I've removed this task:\n" + t + '\n';
+            response += "Now you have " + this.arrTasks.size() + " tasks in the list.";
+            return response;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            return this.generateInvalidIdxMsg();
+        }
     }
 
-    public String markTaskAsDone(int index) {
-        Task t = this.arrTasks.get(index);
-        t.setDone();
-        String response = "Nice! I've marked this task as done:\n" + t;
-        return response;
+    public String markTaskAsDone(String s) {
+        try {
+            int i = Integer.parseInt(s) - 1;
+            Task t = this.arrTasks.get(i);
+            t.setDone();
+            String response = "Nice! I've marked this task as done:\n" + t;
+            return response;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            return this.generateInvalidIdxMsg();
+        }
     }
 
     public String showTasks() {

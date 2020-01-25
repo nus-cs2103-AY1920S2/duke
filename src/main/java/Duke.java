@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(botResponse);
     }
 
-    public static void main(String[] args) throws UnknownCommandException, EmptyDescriptionException {
+    public static void main(String[] args) throws UnknownCommandException, MissingInfoException {
         TaskManager lstTasks = new TaskManager();
 
         String greeting = "Hello! I'm Woody and I'm always here to keep you company.\n"
@@ -46,27 +46,25 @@ public class Duke {
                         respond(lstTasks.showTasks());
                         break;
                     case "done": // Mark task as done
-                        int taskArrIndex = Integer.parseInt(cmdInstructionArr[1]) - 1; // Array index of required task
-                        respond(lstTasks.markTaskAsDone(taskArrIndex));
+                        respond(lstTasks.markTaskAsDone(cmdInstructionArr[1]));
                         break;
                     case "delete": // Delete task
-                        int taskRemoveIndex = Integer.parseInt(cmdInstructionArr[1]) - 1;
-                        respond(lstTasks.removeTask(taskRemoveIndex));
+                        respond(lstTasks.removeTask(cmdInstructionArr[1]));
                         break;
                     case "todo":
                     case "deadline":
                     case "event":
                         if (!hasInstruction)
-                            throw new EmptyDescriptionException(command);
+                            throw new MissingInfoException(command, false);
                         respond(lstTasks.addTask(command, cmdInstructionArr[1]));
                         break;
-                    default: // Add new task
+                    default:
                         throw new UnknownCommandException();
                 }
             } catch (UnknownCommandException uce) {
                 respond("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } catch (EmptyDescriptionException ede) {
-                respond("OOPS!!! The description of a " + ede.getTaskType() + " cannot be empty");
+            } catch (MissingInfoException ede) {
+                respond("OOPS!!! The " + ede.getMissingInfoName() + " of a " + ede.getTaskType() + " cannot be empty");
             }
         }
     }
