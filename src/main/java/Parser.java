@@ -69,7 +69,7 @@ public class Parser {
      *
      * @return Index of date.
      */
-    public int dateIndex() {
+    public int getDateIndex() {
         int i = 2;
 
         while (i != inputs.length && inputs[i].charAt(0) != '/') {
@@ -86,7 +86,7 @@ public class Parser {
      * @throws DukeException Thrown when date is not found.
      */
     public LocalDate getDate() throws DukeException {
-        int dateIndex = this.dateIndex() + 1;
+        int dateIndex = this.getDateIndex() + 1;
 
         if (dateIndex == (inputs.length + 1) || dateIndex == inputs.length) {
             throw new DukeException("\u2639" + " OOPS!!! This task requires a date\n");
@@ -104,7 +104,7 @@ public class Parser {
      * @throws DukeException Thrown when time is not found.
      */
     public LocalTime getTime() throws DukeException {
-        int timeIndex = this.dateIndex() + 2;
+        int timeIndex = this.getDateIndex() + 2;
 
         if (timeIndex == inputs.length) {
             throw new DukeException("\u2639" + " OOPS!!! This task requires a timing\n");
