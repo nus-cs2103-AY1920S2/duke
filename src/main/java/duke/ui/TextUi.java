@@ -1,6 +1,7 @@
 package duke.ui;
 
 public class TextUi implements Ui {
+    private String lineBreak = "===========================================================\n";
 
     public void showReply(String reply) {
         System.out.print(formatReply(reply));
@@ -20,10 +21,9 @@ public class TextUi implements Ui {
         System.out.print(sb.toString());
     }
 
-    private static String formatReply(String str) {
+    private String formatReply(String str) {
         String[] lines = str.split("\\r?\\n");
         StringBuilder sb = new StringBuilder();
-        String lineBreak = "===========================================================\n";
         for (String line : lines) {
             sb.append("> ");
             sb.append(line);
