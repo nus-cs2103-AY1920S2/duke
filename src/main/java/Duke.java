@@ -116,6 +116,9 @@ public class Duke {
         } else {
             if (splitInput[1].contains(id)) {
                 String[] temp = splitInput[1].split(id);
+                if (temp.length < 2) {
+                    throw new NoDateProvidedException(id.trim().replace("/", ""));
+                }
                 if (id.equals(" /by ")) {
                     tasks.add(new Deadline(temp[0].trim().toString(), temp[1]));
                 } else {
