@@ -52,7 +52,7 @@ public class Storage {
     public void saveToSave(TaskList tasks) throws IOException {
         String content = "";
         for (int i = 0; i < tasks.size(); i++) {
-            content += (tasks.get(i).storeFormat() + "\n");
+            content += (tasks.getTask(i).storeFormat() + "\n");
         }
         Files.writeString(path, content);
     }

@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,7 +32,7 @@ public class Duke {
                     reply = list(inputArr, tasks);
                 } else if (inputArr[0].equals("done")){
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
-                    tasks.set(taskNo, tasks.get(taskNo).complete());
+                    tasks.checkDone(taskNo);
                     reply += "Okcan, I mark this task as done:\n" + space + tasks.getTask(taskNo);
                     storage.saveToSave(tasks);
                 } else if (inputArr[0].equals("delete")) {
@@ -45,7 +44,7 @@ public class Duke {
                             throw new NoSuchDeleteException();
                         } else {
                             String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
-                            tasks.remove(taskToDelete - 1);
+                            tasks.removeTask(taskToDelete - 1);
                             reply += "Okcan. I will remove this task:\n" + space + "  " + whichTaskDelete 
                                     + "\n" + space + "But you still have " + tasks.size() + " task(s) in the list.";
                         }
@@ -117,14 +116,14 @@ public class Duke {
         System.out.println(line);
     }
 
-    private static String list(String[] arr, List<Task> tasks) throws DateTimeParseException{ 
+    private static String list(String[] arr, TaskList tasks) throws DateTimeParseException{ 
         String reply = "";
         
         if (arr.length == 1) {
             for (int i = 0; i < tasks.size(); i++) {
                 int numbering = i + 1;
                 reply += (numbering + ".");
-                reply += (tasks.get(i) + "\n" + space);
+                reply += (tasks.getTask(i) + "\n" + space);
             }
             reply += "\n" + space  + "I told you save liao loh........";
         } else {
@@ -132,7 +131,7 @@ public class Duke {
             LocalDate date = LocalDate.parse(dateS, inputFormatter);
             int numbering = 1;
             for (int i = 0; i < tasks.size(); i++) {
-                Task currentTask = tasks.get(i);
+                Task currentTask = tasks.getTask(i);
                 if(currentTask instanceof Deadline || currentTask instanceof Event){
                     if(currentTask.compareDate(date)){
                         reply += (numbering++ + ".");
@@ -182,7 +181,7 @@ public class Duke {
             throw new UnknownCommandException();
          }
 
-        return saveReply + newTask + "\n" + space + "Aiyo still got " + tasks.size() + " task(s), what you doing sia";
+        return saveReply  + "\n" + space + "Aiyo still got " + tasks.size() + " task(s), what you doing sia";
     }
 
     private static int findIndex(String s, String[] arr){

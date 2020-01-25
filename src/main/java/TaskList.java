@@ -39,4 +39,8 @@ public class TaskList {
     public void checkDone(int num){
         this.tasks.set(num, tasks.get(num).complete());
     }
+
+    public int size() {
+        return this.tasks.size();
+    }
 }
