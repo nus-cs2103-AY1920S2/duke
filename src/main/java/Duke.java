@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
@@ -16,7 +15,8 @@ public class Duke {
         //initialise scanner
         Scanner s = new Scanner(System.in);
         Storage storage = new Storage(home);
-        List<Task> tasks = storage.loadFromSave();
+
+        TaskList tasks = new TaskList(storage.loadFromSave());
 
         sayHi();
 
@@ -34,8 +34,8 @@ public class Duke {
                 } else if (inputArr[0].equals("done")){
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
                     tasks.set(taskNo, tasks.get(taskNo).complete());
-                    reply += "Okcan, I mark this task as done:\n" + space + tasks.get(taskNo);
-                    storage.saveToSave();
+                    reply += "Okcan, I mark this task as done:\n" + space + tasks.getTask(taskNo);
+                    storage.saveToSave(tasks);
                 } else if (inputArr[0].equals("delete")) {
                     if (inputArr.length < 2){
                         throw new NoNumberDeleteException();
@@ -44,7 +44,7 @@ public class Duke {
                         if (taskToDelete > tasks.size()) {
                             throw new NoSuchDeleteException();
                         } else {
-                            String whichTaskDelete = tasks.get(taskToDelete - 1).toString();
+                            String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
                             tasks.remove(taskToDelete - 1);
                             reply += "Okcan. I will remove this task:\n" + space + "  " + whichTaskDelete 
                                     + "\n" + space + "But you still have " + tasks.size() + " task(s) in the list.";
@@ -145,7 +145,7 @@ public class Duke {
         return reply;
     }
 
-    private static String createNew(String[] inputArr, List<Task> tasks) throws DukeException {
+    private static String createNew(String[] inputArr, TaskList tasks) throws DukeException {
         int pointer;
         String nameOfEvent;
         Task newTask;
@@ -164,7 +164,7 @@ public class Duke {
             nameOfEvent = combineString(inputArr, 1, pointer);
             dateTime = combineString(inputArr, pointer + 1, arrLength);
 
-            newTask = new Event(nameOfEvent, dateTime);
+            tasks.addEvent(nameOfEvent, dateTime);
             
         } else if (inputArr[0].equals("deadline")) {
             pointer = findIndex("/by", inputArr);
@@ -174,15 +174,14 @@ public class Duke {
             nameOfEvent = combineString(inputArr, 1, pointer);
             date = combineString(inputArr, pointer + 1, arrLength);
 
-            newTask = new Deadline(nameOfEvent, date);
+            tasks.addDeadline(nameOfEvent, date);
         } else if (inputArr[0].equals("todo")) {
             nameOfEvent = combineString(inputArr, 1, arrLength);
-            newTask = new Todo(nameOfEvent);
+            tasks.addTodo(nameOfEvent);
         } else {
             throw new UnknownCommandException();
          }
 
-        tasks.add(newTask);
         return saveReply + newTask + "\n" + space + "Aiyo still got " + tasks.size() + " task(s), what you doing sia";
     }
 

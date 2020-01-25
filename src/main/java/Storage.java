@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class Storage {
     private final Path path;
-    public final List<Task> tasks = new ArrayList<Task>();
 
     public Storage(String location){
         this.path = Paths.get(location, "..", "..", "..", "data", "duke.txt");
     }
 
     public List<Task> loadFromSave() {
+        List<Task> tasks = new ArrayList<>();
         try{
             List<String> lines = Files.readAllLines(path);
             String outputLine;
@@ -49,7 +49,7 @@ public class Storage {
         return tasks;
     }
 
-    public void saveToSave() throws IOException {
+    public void saveToSave(TaskList tasks) throws IOException {
         String content = "";
         for (int i = 0; i < tasks.size(); i++) {
             content += (tasks.get(i).storeFormat() + "\n");
