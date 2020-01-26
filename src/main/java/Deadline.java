@@ -61,4 +61,15 @@ public class Deadline implements Task {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(),
                 description, deadline);
     }
+
+    /**
+     * To return a String representation of Deadline instance
+     * @return String representing task in save file
+     */
+    @Override
+    public String stringToSaveToDisk() {
+        // e.g. format: deadline,0,return book,June 6th
+        return String.format("deadline,%s,%s,%s", isDone ? 1 : 0, description,
+                deadline);
+    }
 }

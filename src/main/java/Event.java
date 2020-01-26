@@ -61,4 +61,15 @@ public class Event implements Task {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description,
                 eventTime);
     }
+
+    /**
+     * To return a String representation of Event instance
+     * @return String representing task in save file
+     */
+    @Override
+    public String stringToSaveToDisk() {
+        // e.g. format: event,0,project meeting,Aug 6th 2-4pm
+        return String.format("event,%s,%s,%s", isDone ? 1 : 0, description,
+                eventTime);
+    }
 }
