@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public class EventTask extends Task {
     public static final char ICON = 'E';

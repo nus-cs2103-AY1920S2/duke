@@ -1,8 +1,10 @@
-package duke;
+package duke.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import duke.task.Task;
 
 public class TaskList {
     private List<Task> tasks;

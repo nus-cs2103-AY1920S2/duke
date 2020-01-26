@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 @SuppressWarnings("serial")
 public class DukeProgramTerminatedException extends DukeException {

@@ -1,5 +1,13 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeNoCommandException;
+import duke.exception.DukeNoSuchInputException;
+import duke.exception.DukeProgramTerminatedException;
+import duke.ui.Ui;
+import duke.utils.TaskList;
+
 public class Duke {
     private Ui ui;
     private TaskList tasks;

@@ -1,7 +1,9 @@
-package duke;
+package duke.ui;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import duke.exception.DukeNoSuchInputException;
 
 public class Ui {
     public static final String LOGO = ""

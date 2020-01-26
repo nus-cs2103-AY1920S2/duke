@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public abstract class Task {
     public static final char COMPLETED = 'X';

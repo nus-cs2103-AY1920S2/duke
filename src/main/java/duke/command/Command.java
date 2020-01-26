@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.Duke;
+import duke.command.method.*;
+import duke.exception.DukeException;
+import duke.exception.DukeNoCommandException;
+import duke.exception.DukeUnrecognisedCommandException;
 
 public class Command {
     private String name;

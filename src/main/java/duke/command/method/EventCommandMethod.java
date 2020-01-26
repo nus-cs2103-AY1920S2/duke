@@ -1,4 +1,11 @@
-package duke;
+package duke.command.method;
+
+import duke.Duke;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidNumberOfArgumentsException;
+import duke.exception.DukeNoArgumentsException;
+import duke.task.EventTask;
 
 public class EventCommandMethod implements CommandMethod {
     public static final String NAME = "event";
@@ -13,8 +20,7 @@ public class EventCommandMethod implements CommandMethod {
                     EventCommandMethod.NAME, 2, parts.length
             );
         }
-        Task newTask = new EventTask(parts[0], parts[1]);
-        TaskList tasks = program.getTaskList();
-        return tasks.addTask(newTask);
+        EventTask newTask = new EventTask(parts[0], parts[1]);
+        return program.getTaskList().addTask(newTask);
     }
 }

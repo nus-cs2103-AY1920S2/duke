@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public class DeadlineTask extends Task {
     public static final char ICON = 'D';

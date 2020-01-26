@@ -1,4 +1,12 @@
-package duke;
+package duke.command.method;
+
+import duke.Duke;
+import duke.command.Command;
+import duke.exception.DukeEmptyTaskListException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidTaskException;
+import duke.exception.DukeNoArgumentsException;
+import duke.utils.TaskList;
 
 public class DeleteCommandMethod implements CommandMethod {
     public static final String NAME = "delete";
