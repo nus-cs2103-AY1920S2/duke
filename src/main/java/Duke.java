@@ -17,8 +17,8 @@ public class Duke {
         //read user input
         while(true) {
             String input = sc.nextLine();
-            String firstWord = input.split(" ")[0];
             String[] words = input.split(" ");
+            String firstWord = words[1];
             if (input.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -73,6 +73,13 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
                 }
+            } else if (firstWord.equals("delete")) {
+                int deleteNum = Integer.parseInt(words[1]);
+                Task deleted = list.get(deleteNum - 1);
+                list.remove(deleteNum - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(deleted);
+                System.out.println(String.format("Now you have %d tasks in your list", list.size()));
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
