@@ -17,7 +17,9 @@ public class Duke {
 
                 System.out.println(line + LF);
             } catch (IOException e) {
-
+                System.out.println("Sorry, an error has occurred:");
+                e.printStackTrace();
+                break;
             }
         }
     }
