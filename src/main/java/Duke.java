@@ -1,11 +1,17 @@
 import java.security.InvalidKeyException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Duke {
     //set a horizontal line
     public static StringBuilder horizontalLine = new StringBuilder("   ").append("\u02DC".repeat(80)).append("\n");
+
+    public static HashMap<String, Message> availableMessage = new HashMap<>() {{
+        put("done", Message.DONE);
+        put("delete", Message.DELETE);
+        put("todo", Message.TODO);
+        put("deadline", Message.DEADLINE);
+        put("event", Message.EVENT);
+    }};
 
     //to add horizontal line around the message and print it out
     public static void typeSetting(String s) {
@@ -42,6 +48,12 @@ public class Duke {
         }
     }
 
+    //get the corresponding Message indicated from the user input String
+    public static Message getMessage(String str) throws InvalidKeyException {
+        return Optional.ofNullable(availableMessage.get(str))
+                .orElseThrow(() -> new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-("));
+    }
+
     //to process different requests which is decided by the first token of the message user entered
     public static ArrayList<Task> processRequest(String str, ArrayList<Task> list)
             throws InvalidKeyException, IllegalArgumentException, EmptyDescriptionException {
@@ -53,9 +65,9 @@ public class Duke {
         StringTokenizer st = new StringTokenizer(str);
         String first = st.nextToken(" ");
 
-        switch (first) {
+        switch (getMessage(first)) {
             //decide which action to be done by the first token
-            case "done":
+            case DONE:
                 checkDescription(str, "done".length());
                 int num = Integer.parseInt(str.substring(5));
                 if (!inRange(num, index)) {
@@ -66,7 +78,7 @@ public class Duke {
                         + "\n" + "      " + list.get(num - 1));
                 break;
 
-            case "delete":
+            case DELETE:
                 checkDescription(str, "delete".length());
                 int num2 = Integer.parseInt(str.substring(7));
                 if (!inRange(num2, index)) {
@@ -79,7 +91,7 @@ public class Duke {
                         "    Now you have " + index + " tasks in the list.");
                 break;
 
-            case "todo":
+            case TODO:
                 checkDescription(str, "todo".length());
                 Todo td = new Todo(st.nextToken("").substring(1));
                 list.add(td);
@@ -89,7 +101,7 @@ public class Duke {
                         "    Now you have " + index + " tasks in the list.");
                 break;
 
-            case "deadline":
+            case DEADLINE:
                 checkDescription(str, "deadline".length());
                 String[] strings = stringSplitting(st);
                 Deadline ddl = new Deadline(strings[0], strings[1]);
@@ -100,7 +112,7 @@ public class Duke {
                         "    Now you have " + index + " tasks in the list.");
                 break;
 
-            case "event":
+            case EVENT:
                 checkDescription(str, "event".length());
                 String[] strings2 = stringSplitting(st);
                 Event ev = new Event(strings2[0], strings2[1]);
@@ -122,7 +134,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean exiting = false;
         ArrayList<Task> list = new ArrayList<>();
-        int index = 0;
 
         //welcome message
         typeSetting("    Hello, I'm Bob. \uD83D\uDC76 \uD83D\uDC76 \uD83D\uDC76\n    " +
