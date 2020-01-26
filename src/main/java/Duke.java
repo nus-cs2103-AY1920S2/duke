@@ -12,7 +12,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
-        tasks = new ArrayList<>();
+        Storage storage = new Storage("data/duke.txt");
+        tasks = storage.load();
         Scanner sc = new Scanner(System.in);
         System.out.println("\n" + horizontalLine);
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
@@ -92,6 +93,7 @@ public class Duke {
             command = sc.nextLine().split(" ", 2);
         }
 
+        storage.writeToFile(tasks);
         System.out.println("\n" + horizontalLine);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(horizontalLine + "\n");

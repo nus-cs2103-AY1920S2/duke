@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -6,6 +6,13 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public abstract String formatSavingName();
 
     public String getStatusIcon() {
         return (isDone ? "[Y]" : "[N]");
