@@ -35,6 +35,9 @@ public class Parser {
             case "delete":
                 command = Commander.createCommand(CommandType.DELETE);
                 break;
+            case "find":
+                command = Commander.createCommand(CommandType.FIND);
+                break;
             default:
                 command = Commander.createCommand(CommandType.INVALID);
         }

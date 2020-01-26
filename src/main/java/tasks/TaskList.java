@@ -93,4 +93,18 @@ public class TaskList {
         }
     }
 
+    public void printTasksContaining(String searchText) {
+        List<Task> filteredTaskList = new ArrayList<Task>();
+
+        for(Task task : taskList) {
+            if(task.getDescription().contains(searchText)) {
+                filteredTaskList.add(task);
+            }
+        }
+
+        for(Task task : filteredTaskList) {
+            Ui.print(task.toString());
+        }
+    }
+
 }
