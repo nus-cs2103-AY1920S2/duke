@@ -1,10 +1,52 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 class TaskList {
-    // List of tasks; assume no more than 100 tasks.
+    /** List of tasks; assume no more than 100 tasks. */
     private ArrayList<Task> lTasks = new ArrayList<>();
 
-    public String[] addTodo(String... ss) throws IncorrectArgumentException {
+    @SuppressWarnings("unchecked")
+    public boolean loadFromFile(Path path) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream fileIn = null;
+        ObjectInputStream objIn = null;
+        ArrayList<Task> tasks = null;
+        boolean loadSuccessful = false;
+        try {
+            fileIn = new FileInputStream(new File(path.toString())); // read serialized object from file as a String
+		    objIn = new ObjectInputStream(fileIn);
+            tasks = (ArrayList<Task>) objIn.readObject(); // supressed uncheck cast warning: no way to verify type of generic at runtime
+        } finally {
+            if(fileIn != null) {
+                fileIn.close();
+            }
+            if(objIn != null) {
+                objIn.close();
+            }
+            if (tasks != null) {
+                lTasks = tasks;
+                loadSuccessful = true;
+            }
+        }
+        return loadSuccessful;
+    }
+
+    public boolean saveToFile(Path path) throws IOException{
+        FileOutputStream  fileOut = new FileOutputStream(new File(path.toString())); // read serialized object from file as a String
+        ObjectOutputStream  objOut = new ObjectOutputStream(fileOut);
+        objOut.writeObject(lTasks);
+        fileOut.close();
+        objOut.close();
+        return true;
+    }
+
+	public String[] addTodo (String... ss) throws IncorrectArgumentException {
         if (ss[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: Task Description");
         } else if (ss.length > 1) {
@@ -13,7 +55,7 @@ class TaskList {
         return add(new Todo(ss[0]));
     }
     
-    public String[] addDeadline(String... ss) throws IncorrectArgumentException {
+    public String[] addDeadline (String... ss) throws IncorrectArgumentException {
         if (ss[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, by.." : "Task Description"));
         } else if (ss.length < 2) {
@@ -24,7 +66,7 @@ class TaskList {
         return add(new Deadline(ss[0], ss[1]));
     }
     
-    public String[] addEvent(String... ss) throws IncorrectArgumentException {
+    public String[] addEvent (String... ss) throws IncorrectArgumentException {
         if (ss[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, at.." : "Task Description"));
         } else if (ss.length < 2) {

@@ -1,5 +1,11 @@
-abstract class Task {
+import java.io.Serializable;
+
+abstract class Task implements Serializable {
+    /** Serializable classes must include a serialVersionUID to identify the class. */
+    private static final long serialVersionUID = 1561807677731348300L;
+    /** Description of the task */
     protected String description;
+    /** Status of the task (true represents a completed task, and vice versa) */
     protected boolean isDone; // defaults to false
 
     public Task(String description) {
