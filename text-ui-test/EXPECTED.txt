@@ -10,9 +10,9 @@
     ____________________________________________________________
 todo borrow book
     ____________________________________________________________
-     Got it. I've added this duke.task:
+     Got it. I've added this task:
        [T][✗] borrow book
-     Now you have 1 duke.task in the list.
+     Now you have 1 task in the list.
     ____________________________________________________________
 list
     ____________________________________________________________
@@ -21,13 +21,13 @@ list
     ____________________________________________________________
 deadline return book /by Sunday
     ____________________________________________________________
-     Got it. I've added this duke.task:
+     Got it. I've added this task:
        [D][✗] return book (by: Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 event project meeting /at Mon 2-4pm
     ____________________________________________________________
-     Got it. I've added this duke.task:
+     Got it. I've added this task:
        [E][✗] project meeting (at: Mon 2-4pm)
      Now you have 3 tasks in the list.
     ____________________________________________________________
