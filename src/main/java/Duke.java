@@ -7,9 +7,9 @@ public class Duke {
         System.out.println("Hello there! I am Duke, your personal assistant. May I know your name?");
         String name = scanner.nextLine();
         ArrayList<Task> taskList = new ArrayList<>();
-        boolean activeMode = true;
+        boolean isActiveMode = true;
 
-        while (activeMode) {
+        while (isActiveMode) {
             System.out.println("How may I help you " + name + "?");
             String command = scanner.nextLine();
             String keyWord = command.split(" ")[0].toLowerCase();
@@ -113,7 +113,7 @@ public class Duke {
                     break;
 
                 case "bye":
-                    activeMode = false;
+                    isActiveMode = false;
                     System.out.println("\t" + "Adios. It was my pleasure assisting you. Keep smiling " + name + ".");
                     break;
 
