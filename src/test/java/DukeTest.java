@@ -72,25 +72,6 @@ class DukeTest {
     }
 
     @Test
-    @DisplayName("Duke: Test for Greeting message")
-    void greet() {
-        duke.greet();
-        String expected = "  __  __        _____       _           _   " + NEWLINE +
-                " |  \\/  |      |  __ \\     | |         | |  " + NEWLINE +
-                " | \\  / |_ __  | |__) |___ | |__   ___ | |_ " + NEWLINE +
-                " | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|" + NEWLINE +
-                " | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ " + NEWLINE +
-                " |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|" + NEWLINE;
-        expected += HORIZONTAL_DIVIDER;
-        expected += INDENTATION + "Hello friend. Hello friend?" + NEWLINE;
-        expected += INDENTATION + "That's lame. Maybe I should give you a name." + NEWLINE;
-        expected += INDENTATION + "But that's a slippery slope, you're only in my head," + NEWLINE;
-        expected += INDENTATION + "we have to remember that." + NEWLINE;
-        expected += HORIZONTAL_DIVIDER;
-        assertEquals(expected, output.toString(), "Should display greeting message");
-    }
-
-    @Test
     @DisplayName("Duke: Test for invalid command")
     void dukeException_invalidCommand_displayInvalidCommandMessage() {
         String input = "blah" + NEWLINE;
@@ -443,15 +424,5 @@ class DukeTest {
         expected.append("1.").append(expectedTaskDoneString).append(NEWLINE);
         expected.append(HORIZONTAL_DIVIDER);
         assertEquals(expected.toString(), output.toString(), "Should mark new task as done");
-    }
-
-    @Test
-    @DisplayName("Duke: Test for Goodbye message")
-    void goodbye() {
-        duke.goodbye();
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Goodbye friend." + NEWLINE +
-                HORIZONTAL_DIVIDER;
-        assertEquals(expected, output.toString(), "Should print goodbye message");
     }
 }
