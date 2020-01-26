@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+
 /**
  * Deals with user interactions
  */
@@ -6,6 +9,18 @@ public class Ui {
             "____________________________________________________________";
     public static final String NEWLINE = System.lineSeparator();
     public static final String INDENTATION = "    ";
+
+    /**
+     * Accepts user input from stdin.
+     * @param inputReader used to read user input
+     * @return String representing a user command
+     * @throws IOException when BufferedReader fails to read user input
+     */
+    protected String readCommand(BufferedReader inputReader) throws IOException {
+        String command;
+        command = inputReader.readLine().trim();
+        return command;
+    }
 
     /**
      * Prints given text with indentation: specified in Duke class.
