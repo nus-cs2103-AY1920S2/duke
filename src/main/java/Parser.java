@@ -46,7 +46,7 @@ public class Parser {
             ui.printTasks(new_deadLine, taskList.getList());
         } else if (user_input.contains("event")) {
             Event new_event = new Event(user_input);
-            new_event.setDescription(user_input);
+            new_event.setDescription(user_input); 
             new_event.setAt(new_event.format_tasks(user_input));
             new_event.setD1();
             taskList.add_to_list(new_event);
