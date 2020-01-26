@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream
 import java.util.*;
+=======
+import org.jetbrains.annotations.NotNull;
+
+import java.time.format.DateTimeParseException;
+import java.util.*;
+import java.io.*;
+import java.time.*;
+>>>>>>> Stashed changes
 
 public class Duke {
     public static void main(String[] args) {
@@ -76,7 +85,13 @@ public class Duke {
                         if(subS.length == 1) {
                             throw new DukeException("It appears that no due date was provided for this deadline!");
                         }
-                        taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
+                       try{
+                           taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
+                       }
+                       catch (DateTimeParseException e) {
+                           throw new DukeException("Invalid date format for deadline used! Please re-try using the date format 'yyyy-mm-dd HHMM'");
+
+                       }
                     } else if (eventType[0].equals("todo")) {
                         taskList.add(new ToDo(commands[0].substring(5, commands[0].length())));
                     }
@@ -100,4 +115,65 @@ public class Duke {
         }
 
     }
+<<<<<<< Updated upstream
+=======
+
+    public static void saveData(ArrayList<Task> taskList) throws IOException{
+        FileWriter wr = new FileWriter("data/duke.txt");
+        wr.write("");
+        wr.close();
+        if(taskList.size() < 1) {
+            return;
+        }
+        FileWriter taskAdd = new FileWriter("data/duke.txt",true);
+        int i = 0;
+        for(i = 0; i < taskList.size(); i++) {
+            taskAdd.write(taskList.get(i) + "\n");
+        }
+        taskAdd.close();
+
+    }
+
+    public static void loadData(ArrayList<Task> taskList) throws FileNotFoundException {
+        File dataBank = new File("data/duke.txt");
+        Scanner reader = new Scanner(dataBank);
+
+        while(reader.hasNext()) {
+            String task = reader.nextLine();
+            char initial = task.charAt(1);
+            char status = task.charAt(4);
+            String desc = task.substring(7);
+
+            if(initial == 'T') {
+                taskList.add(new ToDo(desc));
+
+            }
+
+            else if(initial == 'E'){
+                String[] subStringy = desc.split(" \\(at: ");
+                taskList.add (new Event(subStringy[0], subStringy[1].substring(0, subStringy[1].length() - 1)));
+
+            }
+
+            else if(initial == 'D'){
+                String[] subStringy = desc.split(" \\(by: ");
+                String day = subStringy[1].substring(0,2);
+                String month = subStringy[1].substring(3,5);
+                String year = subStringy[1].substring(6,10);
+                //String timing = subStringy[1].substring(11, subStringy[1].length() - 1);
+                String timing = subStringy[1].substring(11, 15);
+                String reString = year + "-" + month + "-" + day + " " + timing;
+
+                //taskList.add (new Deadline(subStringy[0], subStringy[1].substring(0, subStringy[1].length() - 1)));
+                taskList.add(new Deadline(subStringy[0], reString));
+
+            }
+
+            if(status == 'Y') {
+                taskList.get(taskList.size() - 1 ).doTask();
+            }
+
+        }
+    }
+>>>>>>> Stashed changes
 }
