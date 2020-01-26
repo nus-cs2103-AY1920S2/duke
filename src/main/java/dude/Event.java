@@ -51,4 +51,8 @@ public class Event extends Task {
                 eventEnd.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
     }
 
+    @Override
+    public String storeFormat() {
+        return String.format("E|%s|%s|%s|%s", getStatusIcon(), getDetails(), this.eventStart, this.eventEnd);
+    }
 }

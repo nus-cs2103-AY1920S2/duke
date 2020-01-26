@@ -1,15 +1,14 @@
 package dude;
 
-import dude.component.DudeTaskStore;
-import dude.component.IDudeTaskStore;
 import dude.component.IUserInterface;
 import dude.component.UI;
+import dude.component.IStorage;
+import dude.component.TextStorage;
+import dude.component.TaskList;
 
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.function.Supplier;
 import java.util.function.Consumer;
 
+import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 public class Dude {
@@ -23,13 +22,12 @@ public class Dude {
 
     public static void main(String[] args) {
         Dude chatbot = new Dude();
-        
         chatbot.serve();
-
         chatbot.close();
     }
 
-    private IDudeTaskStore tasks;
+    private IStorage storage;
+    private TaskList tasks;
     private IUserInterface ui;
 
     /** 
@@ -37,8 +35,9 @@ public class Dude {
      * Greets the user
      */
     public Dude() {
-        this.tasks = DudeTaskStore.restoreSession();
         this.ui = new UI();
+        this.storage = new TextStorage();
+        this.tasks = this.storage.restoreSession(this.ui);
     }
 
     /**
@@ -75,7 +74,7 @@ public class Dude {
     }
 
     public void close() {
-        this.tasks.saveTasksToMemory();
+        this.storage.saveSession(this.ui, this.tasks);
         this.ui.close();
     }
 

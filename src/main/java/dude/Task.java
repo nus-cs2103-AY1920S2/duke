@@ -15,6 +15,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDetails() {
+        return details;
+    }
+
     abstract boolean occursOn(LocalDate date);
 
     @Override
@@ -22,7 +26,9 @@ public abstract class Task {
         return String.format("[%s] %s", getStatusIcon(), details);
     }
 
-    private String getStatusIcon() {
+    public abstract String storeFormat();
+
+    protected String getStatusIcon() {
         return (isDone ? "O" : "X"); 
     }
 }

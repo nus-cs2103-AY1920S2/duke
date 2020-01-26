@@ -32,4 +32,8 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public String storeFormat() {
+        return String.format("T|%s|%s", getStatusIcon(), getDetails());
+    }
 }

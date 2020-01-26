@@ -43,4 +43,8 @@ public class Deadline extends Task {
                 dueDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
     }
 
+    @Override
+    public String storeFormat() {
+        return String.format("D|%s|%s|%s", getStatusIcon(), getDetails(), this.dueDate);
+    }
 }
