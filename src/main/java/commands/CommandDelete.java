@@ -6,8 +6,17 @@ import processor.Storage;
 import processor.Ui;
 import tasks.Task;
 
+/**
+ * Handles the deletion of tasks from the processor's TaskList.
+ */
 public class CommandDelete implements Command {
 
+    /**
+     * Deletes the task from the list and updates the list thereafter.
+     * @param processor The instantiated DukeProcessor object.
+     * @param args      The arguments as entered by the user.
+     * @throws DukeException
+     */
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
         if(argsArray.length < 2) {

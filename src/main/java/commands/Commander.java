@@ -1,7 +1,15 @@
 package commands;
 
+/**
+ * Commander handles the creation of commands to be executed.
+ */
 public class Commander {
 
+    /**
+     * Creates the command indicated by the processor to be executed.
+     * @param commandType The type of command that the processor has requested.
+     * @return Returns a command, to be executed.
+     */
     public static Command createCommand(CommandType commandType) {
         Command command;
 

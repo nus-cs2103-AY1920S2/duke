@@ -13,8 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles the storing of tasks on a local text file.
+ */
 public class Storage {
 
+    /**
+     * Initiates the storage process by checking if a .txt file exists on the local computer. If it does not, it
+     * creates a new file for input.
+     */
     public static void init() {
         try {
             File taskFile = new File("data/tasks.txt");
@@ -27,6 +34,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Attempts to save tasks to the created .txt file on the local computer. Tasks are first packaged before storage.
+     * @param processor Duke's processor.
+     * @throws IOException
+     */
     public static void saveTasks(DukeProcessor processor) throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt");
         fw.write("");
@@ -43,6 +55,14 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Attempts to load tasks from the .txt file on the local computer, and processes packaged tasks from the file
+     * before returning the list of saved tasks.
+     * @param processor Duke's processor.
+     * @return The list of tasks saved previously by Duke.
+     * @throws IOException
+     * @throws DukeException
+     */
     public static List<Task> loadTasks(DukeProcessor processor) throws IOException, DukeException {
         File taskFile = new File("data/tasks.txt");
 
@@ -68,6 +88,11 @@ public class Storage {
         return outputTaskList;
     }
 
+    /**
+     * Packages the tasks into a format that can be stored and re-processed when loaded in the future.
+     * @param task Task to be packaged.
+     * @return Task object in the form of a packaged String, ready to be stored.
+     */
     private static String packageTask(Task task) {
         String output = "";
         int doneIndicator = 0;
@@ -89,6 +114,12 @@ public class Storage {
         return output;
     }
 
+    /**
+     * Attempts to process and create a Task object from the String read from the .txt file.
+     * @param taskString String from .txt file to be processed.
+     * @return Task object that was defined from the taskString.
+     * @throws DukeException
+     */
     private static Task processPackagedTask(String taskString) throws DukeException {
         Task outputTask;
 
