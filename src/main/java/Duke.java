@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static final String FILEPATH = "./duke.txt";
+    public static final String FILEPATH = "data\\duke.txt";
 
     public static void run(String filePath) {
         Scanner scanner = new Scanner(System.in);

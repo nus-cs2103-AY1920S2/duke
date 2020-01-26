@@ -16,25 +16,26 @@ public class FileHandler {
         }
     }
 
-    private static List<Task> loadFileHelper(String filePath) throws IOException, ClassNotFoundException {
-        FileInputStream fi = new FileInputStream(new File("filePath"));
-        ObjectInputStream oi = new ObjectInputStream(fi);
-        List<Task> tasks = (List<Task>) oi.readObject();
-        oi.close();
-        fi.close();
-        return tasks;
-    }
-
     public static List<Task> loadFile(String filePath) {
         List<Task> tasks = new ArrayList<>();
         try {
-            tasks =  loadFileHelper(filePath);
-        } catch (Exception e) {
             File file = new File(filePath);
-            boolean made = file.mkdir();
-            System.out.println("Enjoy your virgin duke experience!");
-        } finally {
-            return tasks;
+            if (!file.exists()) {
+                File directory = new File(file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                file.createNewFile();
+            } else {
+                FileInputStream fi = new FileInputStream(file);
+                ObjectInputStream oi = new ObjectInputStream(fi);
+                tasks = (List<Task>) oi.readObject();
+                oi.close();
+                fi.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return tasks;
     }
 }
