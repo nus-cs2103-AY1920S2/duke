@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,13 @@ public class LevelMethods {
     }
 
     public void time() {
+        /*
+        Minimal: Store deadline dates as a java.time.LocalDate in your task objects.
+        Accept dates in a format such as yyyy-mm-dd format (e.g., 2019-10-15)
+        and print in a different format such as MMM d yyyy e.g., (Oct 15 2019).
+         */
+
+
 
     }
 
@@ -93,9 +101,10 @@ public class LevelMethods {
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
-                    throw new GrapieExceptions("OOPS!!! Event is not created in correct format. Please use: event your_event /at your_time");
+                    throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD");
                 } else {
-                    Task event = new Event(eventAndTime[0], eventAndTime[1]);
+                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+                    Event event = new Event(eventAndTime[0], localDate);
                     storingList.add(event);
 
                     //printing
@@ -112,14 +121,16 @@ public class LevelMethods {
                 String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
 
                 if (eventAndTime.length > 1) {
-
-                    Task deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
+                    //LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+                    //String haha = "2019-12-01";
+                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+                    Deadline deadline = new Deadline(eventAndTime[0], localDate);
                     storingList.add(deadline);
 
                     //print
                     printAddingTask(deadline);
                 } else {
-                    throw new GrapieExceptions("OOPS!!! Deadline is not created in correct format. Please use: deadline your_deadline /by your_time");
+                    throw new GrapieExceptions("OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD");
                 }
 
             } else {
