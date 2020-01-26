@@ -25,6 +25,8 @@ public class TextStorage implements Storage {
     public List<Task> load() throws FileNotFoundException, DukeException {
         List<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(new File(filePath));
+
+        // Read file line by line and populate tasks
         while (s.hasNextLine()) {
             Task task;
             switch (s.nextLine()) {

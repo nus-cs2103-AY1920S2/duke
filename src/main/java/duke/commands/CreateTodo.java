@@ -11,8 +11,12 @@ class CreateTodo implements Command, TaskCreation {
         if (arg.length() == 0) {
             throw new DukeException("Todo description cannot be empty!");
         }
+
+        // Create new Task
         Task newTask = new Todo(arg);
         tasks.add(newTask);
+
+        // Display reply
         ui.showReply(CreateTaskReply(newTask, tasks));
     }
 }

@@ -10,6 +10,8 @@ class ListAll implements Command {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks.");
         }
+
+        // Concat String representations of tasks
         int counter = 1;
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
@@ -20,6 +22,8 @@ class ListAll implements Command {
             sb.append("\n");
             counter += 1;
         }
+        
+        // Display reply
         ui.showReply(sb.toString());
     }
 }

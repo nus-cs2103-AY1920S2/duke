@@ -27,7 +27,7 @@ public class TaskList {
     public Task get(int taskNo) {
         return tasks.get(taskNo - 1);
     }
-    
+
     public Task remove(int taskNo) {
         return tasks.remove(taskNo - 1);
     }

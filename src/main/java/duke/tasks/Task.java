@@ -20,10 +20,11 @@ public abstract class Task {
     public boolean getIsDone() {
         return isDone;
     }
+
     public String getStatus() {
         return isDone ? "\u2713" : "\u2718";
     }
-    
+
     @Override
     abstract public String toString();
 }

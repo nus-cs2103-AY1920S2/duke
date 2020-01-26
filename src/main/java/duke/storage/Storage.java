@@ -9,5 +9,6 @@ import duke.tasks.Task;
 
 public interface Storage {
     void save(List<Task> tasks) throws IOException, DukeException;
+
     List<Task> load() throws FileNotFoundException, DukeException;
 }

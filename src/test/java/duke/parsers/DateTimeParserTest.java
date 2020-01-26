@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 import duke.exceptions.DukeException;
 
-
 public class DateTimeParserTest {
 
     @Test
@@ -23,7 +22,7 @@ public class DateTimeParserTest {
         LocalDateTime expectedDate = LocalDate.parse("2000-12-11").atStartOfDay();
         String validDateTime = "11/12/2000 1600";
         LocalDateTime expectedDateTime = LocalDateTime.parse("2000-12-11T16:00:00");
-        
+
         assertThrows(DukeException.class, () -> dtp.parse(invalidDate));
         assertEquals(expectedDate, dtp.parse(validDateWithSlash));
         assertEquals(expectedDate, dtp.parse(validDateWithDash));
