@@ -14,62 +14,46 @@ public class Duke {
         boolean done = false;
         list = new ArrayList<>();
         String param = "";
+        String[] params;
+        String command;
         int index;
         Task t;
         while (true) {
             try {
                 input = scanner.nextLine();
-                tokens = input.split(" ");
-                switch (tokens[0]) {
+                tokens = input.split(" ", 2);
+                command = tokens[0];
+                if (tokens.length > 1) {
+                    param = tokens[1];
+                } else {
+                    param = "";
+                }
+                switch (command) {
                     case "todo":
-                        if (tokens.length < 2) {
+                        if (param.equals("")) {
                             throw new MissingDescriptionException();
                         }
-                        buffer = tokens[1];
-                        for (int i = 2; i < tokens.length; i++) {
-                            buffer += " " + tokens[i];
-                        }
-                        t = new ToDo(buffer);
+                        t = new ToDo(param);
                         addTask(t);
                         break;
                     case "deadline":
-                        if (tokens.length < 2) {
+                        if (param.equals("")) {
                             throw new MissingDescriptionException();
-                        } else if (!input.contains("/by")) {
+                        } else if (!param.contains(" /by ")) {
                             throw new MissingDeadlineParamException();
                         }
-                        buffer = tokens[1];
-                        for (int i = 2; i < tokens.length; i++) {
-                            if (tokens[i].equals("/by")) {
-                                param = tokens[i + 1];
-                                for (int j = i + 2; j < tokens.length; j++) {
-                                    param += " " + tokens[j];
-                                }
-                                break;
-                            }
-                            buffer += " " + tokens[i];
-                        }
-                        t = new Deadline(buffer, param);
+                        params = param.split(" /by ");
+                        t = new Deadline(params[0], params[1]);
                         addTask(t);
                         break;
                     case "event":
-                        if (tokens.length < 2) {
+                        if (param.equals("")) {
                             throw new MissingDescriptionException();
-                        } else if (!input.contains("/at")) {
+                        } else if (!param.contains(" /at ")) {
                             throw new MissingEventParamException();
                         }
-                        buffer = tokens[1];
-                        for (int i = 2; i < tokens.length; i++) {
-                            if (tokens[i].equals("/at")) {
-                                param = tokens[i + 1];
-                                for (int j = i + 2; j < tokens.length; j++) {
-                                    param += " " + tokens[j];
-                                }
-                                break;
-                            }
-                            buffer += " " + tokens[i];
-                        }
-                        t = new Event(buffer, param);
+                        params = param.split(" /at ");
+                        t = new Event(params[0], params[1]);
                         addTask(t);
                         break;
                     case "bye":
