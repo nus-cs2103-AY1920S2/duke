@@ -48,4 +48,14 @@ Here are the tasks in your list:
 2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
 3.[D][✓] Assignment 1 (by: 27 Jan 2020, 3 PM)
 4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+☹ OOPS!!! The description cannot be empty.
+☹ OOPS!!! The description cannot be empty.
+☹ OOPS!!! The description cannot be empty.
+Noted. I've removed this task:
+[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+Now you have 3 tasks in the list.
+Noted. I've removed this task:
+[T][✓] Homework
+Now you have 2 tasks in the list.
+☹ OOPS!!! That's an invalid argument. Please check your inputs and try again!
 Bye. Hope to see you again soon!

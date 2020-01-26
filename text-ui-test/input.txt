@@ -13,4 +13,10 @@ done 1
 list
 done 3
 list
+todo
+event
+deadline
+delete 2
+delete 1
+delete 10
 bye

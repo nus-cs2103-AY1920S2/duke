@@ -1,6 +1,6 @@
-public class MissingDesriptionException extends DukeException {
+public class MissingDescriptionException extends DukeException {
     @Override
     public String toString() {
-        return "☹ OOPS!!! The description of a todo cannot be empty.";
+        return "☹ OOPS!!! The description cannot be empty.";
     }
 }
