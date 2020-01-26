@@ -107,7 +107,7 @@ public class Duke {
                                 + delete);
                     Task deletedTask = tasklist.getTask(delete - 1);
                     tasklist.removeTask(delete - 1);
-                    calender.removeTask(deletedTask);
+                    calender.removeTask(deletedTask, deletedTask.getDate());
                     System.out.println("Okay! I have deleted this task:\n" +
                             "  " + deletedTask + "\nNow you have " +
                             tasklist.getSize() + " tasks in the list.");
