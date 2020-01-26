@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Task {
+public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
     protected static List<Task> taskList = new ArrayList<>(100);
@@ -10,6 +11,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public static void initTasks(List<Task> tasks) {
+        taskList = tasks;
+    }
+
+    public static List<Task> getTaskList() {
+        return taskList;
     }
 
     private static int getTaskCount() {
