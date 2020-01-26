@@ -18,7 +18,7 @@ public class Task {
     }
 
     public LocalDateTime parseDate(String taskTime) throws DateTimeParseException {
-        return LocalDateTime.parse(taskTime, DateTimeFormatter.ofPattern("dd/M/yyyy HH:mm"));
+        return LocalDateTime.parse(taskTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     public boolean checkIsDone() {
@@ -39,7 +39,7 @@ public class Task {
 
     public String getTaskTime() {
         return this.taskTime.getDayOfMonth() + "/" + this.taskTime.getMonthValue() + "/" + this.taskTime.getYear()
-                + " " + this.taskTime.getHour() + ":"
+                + " " + this.taskTime.getHour()
                 + (this.taskTime.getMinute() > 9 ? this.taskTime.getMinute() : "0" + this.taskTime.getMinute());
     }
 
