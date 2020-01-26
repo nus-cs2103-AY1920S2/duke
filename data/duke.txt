@@ -1,5 +1,5 @@
 T | 1 | read book
-D | 0 | return book | Sunday 2pm
+D | 0 | return book | Mar 5 2020
 T | 1 | meet pao
-E | 0 | go church | Sunday 9-11am
-D | 0 | submit assignment | Monday 2359
+E | 0 | go church | Jun 30 2020
+D | 0 | submit assignment | Feb 1 2020

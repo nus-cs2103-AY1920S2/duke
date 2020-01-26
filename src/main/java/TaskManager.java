@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.time.format.DateTimeParseException;
 
 public class TaskManager {
     private ArrayList<Task> arrTasks;
@@ -49,20 +50,24 @@ public class TaskManager {
         boolean hasDateTime = false;
         if (descTimeArr.length == 2)
             hasDateTime = true;
-        switch (command) {
-            case "todo":
-                response = this.addTask(new ToDo(descTimeArr[0]));
-                break;
-            case "deadline":
-                if (!hasDateTime)
-                    throw new MissingInfoException(command, true);
-                response = this.addTask(new Deadline(descTimeArr[0], descTimeArr[1]));
-                break;
-            case "event":
-                if (!hasDateTime)
-                    throw new MissingInfoException(command, true);
-                response = this.addTask(new Event(descTimeArr[0], descTimeArr[1]));
-                break;
+        try {
+            switch (command) {
+                case "todo":
+                    response = this.addTask(new ToDo(descTimeArr[0]));
+                    break;
+                case "deadline":
+                    if (!hasDateTime)
+                        throw new MissingInfoException(command, true);
+                    response = this.addTask(new Deadline(descTimeArr[0], descTimeArr[1]));
+                    break;
+                case "event":
+                    if (!hasDateTime)
+                        throw new MissingInfoException(command, true);
+                    response = this.addTask(new Event(descTimeArr[0], descTimeArr[1]));
+                    break;
+            }
+        } catch (DateTimeParseException e) {
+            response = "OOPS!!! Invalid date entered. Enter date in the form: yyyy-mm-dd.";
         }
         this.writeTasks();
         return response;
