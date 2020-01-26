@@ -28,11 +28,15 @@ public class Database {
 
         if (data.startsWith("todo")) {
             String info;
-            if (!(data.charAt(4) == ' ')) {
+            try {
+                if (!(data.charAt(4) == ' ')) {
+                    throw new DukeException("Please indicate in this format: todo [description]");
+                }
+            } catch(StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please indicate in this format: todo [description]");
             }
             info = data.substring(5);
-            if (info.equals("")) {
+            if (info.strip().equals("")) {
                 throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
             records.add(new Todo(info));
@@ -47,7 +51,10 @@ public class Database {
             } else {
                 throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
             }
-            String description = data.substring(8, indexForSeparator - 1);
+            if (indexForSeparator <= 9) {
+                throw new DukeException("Please indicate in this format: event [description] /at [duration].");
+            }
+            String description = data.substring(9, indexForSeparator - 1);
             if (!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
             }
@@ -74,8 +81,10 @@ public class Database {
             } else {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
-
-            String description = data.substring(5, indexForSeparator - 1);
+            if (indexForSeparator <= 6) {
+                throw new DukeException("Please indicate in this format: event [description] /at [duration].");
+            }
+            String description = data.substring(6, indexForSeparator - 1);
             if (!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
