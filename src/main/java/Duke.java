@@ -34,10 +34,17 @@ public class Duke {
     }
 
     public static void echo(String input) {
+        echo(new String[]{input});
+    }
+
+    public static void echo(String[] inputs) {
         ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.printWithIndentation(input);
+        for (int i = 0; i < inputs.length; ++i) {
+            ProgramOutputHandler.printWithIndentation(inputs[i]);
+        }
         ProgramOutputHandler.printLineSeperator();
         ProgramOutputHandler.nextLine();
+
     }
 
     private static void listTasks() {
@@ -53,20 +60,45 @@ public class Duke {
     }
 
     public static void processInput(Scanner sc) {
-        String wholeInput = sc.nextLine();
-        String[] inputs = wholeInput.split("\\s+"); // Regex \\s selects a space and + selects multiple
+        String[] inputs = sc.nextLine().split(" ", 2);
+        String command = inputs[0];
+        String args = inputs.length > 1 ? inputs[1] : "";
 
-        switch (inputs[0]) {
+        switch (command) {
         case "bye":
             printGoodbyeMessage();
             System.exit(0);
             break;
+
         case "list":
             listTasks();
             break;
+
+        case "todo":
+            // Add new todo
+            Task newTodo = new Todo(args);
+            tasks.add(newTodo);
+            echo(new String[]{"New todo added:", "\t" + newTodo.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            break;
+
+        case "deadline":
+            // Add new deadline
+            String[] splitByInputTime = args.split(" /by ");
+            Task newDeadline = new Deadline(splitByInputTime[0], splitByInputTime[1]);
+            tasks.add(newDeadline);
+            echo(new String[]{"New deadline added:", "\t" + newDeadline.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            break;
+
+        case "event":
+            // Add new deadline
+            String[] splitByEventTime = args.split(" /at ");
+            Task newEvent = new Event(splitByEventTime[0], splitByEventTime[1]);
+            tasks.add(newEvent);
+            echo(new String[]{"New event added:", "\t" + newEvent.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            break;
+
         case "done":
-            assert (inputs.length >= 2);
-            int index = Integer.parseInt(inputs[1]) - 1;
+            int index = Integer.parseInt(args) - 1;
             if (index < 0 || index >= tasks.size()) {
                 // TODO: Handle exception or throw error message
                 return;
@@ -75,11 +107,9 @@ public class Duke {
             tasks.get(index).setIsDone(true);
             listTasks();
             break;
+
         default:
-            // Add new task
-            Task newTask = new Task(wholeInput);
-            tasks.add(newTask);
-            echo("added: " + wholeInput);
+            echo(command + " is not a recognized command. Please try again.");
             break;
         }
     }
