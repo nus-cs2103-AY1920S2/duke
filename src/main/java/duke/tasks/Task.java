@@ -1,6 +1,6 @@
-package main.duke.tasks;
+package main.java.duke.tasks;
 
-import main.duke.enums.TType;
+import main.java.duke.enums.TType;
 
 import java.time.LocalDate;
 

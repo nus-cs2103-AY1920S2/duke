@@ -1,4 +1,4 @@
-package main.duke.exception;
+package main.java.duke.exception;
 
 public class DukeException extends Exception {
     public DukeException (String errorMsg) {

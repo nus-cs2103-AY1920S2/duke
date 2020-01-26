@@ -1,4 +1,4 @@
-package main.duke;
+package main.java.duke;
 
 public class Ui {
     private String logo;
