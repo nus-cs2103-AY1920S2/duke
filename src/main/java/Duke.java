@@ -45,7 +45,7 @@ public class Duke {
 
                     System.out.println();
                 } else if (cmd.startsWith(DONE_CMD)) {
-                    str1 = cmd.split(" ");
+                    str1 = cmd.split("\\s+");
 
                     if (str1.length < 2) {
                         throw new DukeException("The task to mark done cannot be empty");
