@@ -4,11 +4,7 @@ public abstract class Task {
     protected String name;
     protected boolean isDone;
 
-    public enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
+    public enum TaskType { TODO, DEADLINE, EVENT }
 
     /**
      * Task constructor.
@@ -22,7 +18,7 @@ public abstract class Task {
     /**
      * Sets task's status to done.
      */
-    public void MarkAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 

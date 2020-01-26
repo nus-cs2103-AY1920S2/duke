@@ -12,7 +12,7 @@ public class ListCommand extends Command {
      * @param storage to access save-load functionality.
      */
     public void execute(TaskList taskList, Storage storage) {
-        Ui.ShowAllTasks(taskList);
+        Ui.showAllTasks(taskList);
     }
 
     /**

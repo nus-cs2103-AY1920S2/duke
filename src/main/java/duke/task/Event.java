@@ -43,10 +43,7 @@ public class Event extends Task {
     @Override
     public String toSaveString() {
         //E1Anna's Birthday@May 15
-        return "E" +
-                (isDone ? "1" : "0") +
-                name + "@" +
-                datetime;
+        return "E" + (isDone ? "1" : "0") + name + "@" + datetime;
     }
 
     @Override
