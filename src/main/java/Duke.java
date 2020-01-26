@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    enum TaskList {
+        TODO, DEADLINE, EVENT
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         /*String logo = " ____        _        \n"
@@ -12,6 +15,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);*/
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         ArrayList<Task> todo = new ArrayList<>();
+        TaskList taskList;
         try {
             while (true) {
                 String readtext = scanner.nextLine();
@@ -40,32 +44,43 @@ public class Duke {
                         todo.remove(Integer.parseInt(num) - 1);
                         System.out.println("Now you have " + todo.size() + " tasks in the list");
                     } else {
-                            if (readtext.contains("todo")) {
-                                String spli = readtext.split("todo")[1];
-                                Task t = new Todo(spli);
+                        Task t;
+                        String spli;
+                        String des;
+                        String fin;
+                        String comm = readtext.split(" ")[0];
+                        System.out.println(comm);
+                        taskList = TaskList.valueOf(comm.toUpperCase());
+                        switch (taskList) {
+                            case TODO:
+                                spli = readtext.split("todo")[1];
+                                t = new Todo(spli);
                                 todo.add(t);
                                 System.out.println("Got it. I've added this task");
                                 System.out.println(t.toString());
                                 System.out.println("Now you have " + todo.size() + " tasks in the list");
-                            } else if (readtext.contains("deadline")) {
-                                String spli = readtext.split("deadline")[1];
-                                String des = spli.split("/by")[0];
-                                String fin = spli.split("/by")[1];
-                                Task t = new Deadline(des, fin);
+                                break;
+                            case DEADLINE:
+                                spli = readtext.split("deadline")[1];
+                                des = spli.split("/by")[0];
+                                fin = spli.split("/by")[1];
+                                t = new Deadline(des, fin);
                                 todo.add(t);
                                 System.out.println("Got it. I've added this task");
                                 System.out.println(t.toString());
                                 System.out.println("Now you have " + todo.size() + " tasks in the list");
-                            } else if (readtext.contains("event")) {
-                                String spli = readtext.split("event")[1];
-                                String des = spli.split("/at")[0];
-                                String fin = spli.split("/at")[1];
-                                Task t = new Event(des, fin);
+                                break;
+                            case EVENT:
+                                spli = readtext.split("event")[1];
+                                des = spli.split("/at")[0];
+                                fin = spli.split("/at")[1];
+                                t = new Event(des, fin);
                                 todo.add(t);
                                 System.out.println("Got it. I've added this task");
                                 System.out.println(t.toString());
                                 System.out.println("Now you have " + todo.size() + " tasks in the list");
-                            } else {
+                                break;
+                            default:
                                 throw new UnknownCommandException();
                             }
                         }
