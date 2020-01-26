@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/taskStore.txt
+src/main/java/test.txt
+src/main/java/src/taskStore.txt
