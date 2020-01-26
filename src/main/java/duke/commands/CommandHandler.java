@@ -6,6 +6,10 @@ import duke.ui.Ui;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
+/**
+ * <code>CommandHandler</code> parses user-entered strings and executes them as <code>Commands</code>.
+ * Remains active until user deactivates with "bye"
+ */
 public class CommandHandler {
     protected TaskList tasks;
     protected HashMap<String, Command> commands;
@@ -26,6 +30,11 @@ public class CommandHandler {
         isActive = true;
     }
 
+    /**
+     * Parses the user string into a <code>Command</code> and executes it.
+     *
+     * @param cmd User-entered string to be parsed.
+     */
     public void executeCmd(String cmd) {
         // First parse command
         String cmdWord, arg;

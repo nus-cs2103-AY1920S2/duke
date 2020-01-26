@@ -2,6 +2,9 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a <code>Task</code> that has a specific start time and end time.
+ */
 public class Event extends TimedTask {
     protected LocalDateTime start;
     protected LocalDateTime end;

@@ -15,6 +15,9 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.exceptions.DukeException;
 
+/**
+ * Stores data in raw text to a local file.
+ */
 public class TextStorage implements Storage {
     private String filePath;
 

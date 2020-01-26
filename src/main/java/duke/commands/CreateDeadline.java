@@ -7,6 +7,9 @@ import duke.tasks.Deadline;
 import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
+/**
+ * Creates a <code>Deadline</code> Task and adds it to the TaskList.
+ */
 class CreateDeadline implements Command, TaskCreation {
     public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
         String[] args = arg.split("/by");

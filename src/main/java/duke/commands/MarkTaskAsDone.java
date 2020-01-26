@@ -5,6 +5,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
+/**
+ * Marks as a specific Task as completed.
+ */
 class MarkTaskAsDone implements Command {
     public void execute(String arg, TaskList tasks, Ui ui)  throws DukeException {
         int taskNo;

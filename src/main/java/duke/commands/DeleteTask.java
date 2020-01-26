@@ -5,6 +5,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
+/**
+ * Deletes a Task from the TaskList.
+ */
 class DeleteTask implements Command {
     public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
         int taskNo;
