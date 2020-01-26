@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     Ui ui;
-    Parser parser;
+    Parser parser = new Parser();
 
     static boolean break_checker = false;
 
@@ -28,9 +28,8 @@ public class Duke {
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            parser = new Parser(input);
 
-            parser.understand_user_input();
+            parser.understand_user_input(input);
             if(break_checker) {
                 break;
             }

@@ -16,9 +16,9 @@ class Ui {
     }
 
 
-    void printList(TaskList tasklist) {
+    void printList(TaskList taskList) {
         System.out.println(lines);
-        tasklist.print_elements();
+        taskList.print_elements();
         System.out.println(lines);
     }
 
@@ -48,7 +48,7 @@ class Ui {
         System.out.println(lines);
         System.out.println(space + "Noted. I've removed this task:");
         System.out.println(space + deleted_task);
-        System.out.println(space + "Now you have " + taskList + " tasks in the list.");
+        System.out.println(space + "Now you have " + taskList.size_of_list() + " tasks in the list.");
         System.out.println(lines);
     }
 
