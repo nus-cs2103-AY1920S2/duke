@@ -1,27 +1,20 @@
+package task;
+
 import java.util.ArrayList;
 
-public class Task {
-    protected String description;
-    protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+public class TaskList {
+    public ArrayList<Task> tasks;
+
+    public TaskList(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "[Done] " : "[Not Done] "); //return tick or X symbols
+    public TaskList(){
+        tasks = new ArrayList<>();
     }
 
-    public String getStatusIconInBin(){
-        return (isDone ? "1" : "0"); //1 means done, 0 means not done
-    }
-
-    public void markDone(){
-        this.isDone = true;
-    }
-
-    public static String toStringDukeTasks(ArrayList<Task> tasks) {
+    public String toStringDukeTasks() {
         String taskString = "";
         for (Task task : tasks) {
             if (task instanceof Todo) {
@@ -40,12 +33,16 @@ public class Task {
         return taskString;
     }
 
-    public String toStringTaskstxt(){
-        return "";
+    public void add(Task task){
+        tasks.add(task);
     }
 
-    @Override
-    public String toString() {
-        return getStatusIcon() + description;
+    public void delete(int taskNum){
+        tasks.remove(taskNum);
     }
+
+    public Task getTask(int taskNum){
+        return tasks.get(taskNum);
+    }
+
 }

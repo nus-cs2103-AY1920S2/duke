@@ -1,3 +1,5 @@
+package dukeException;
+
 public class DukeException extends Exception {
     protected String exception;
     public DukeException(String exception){

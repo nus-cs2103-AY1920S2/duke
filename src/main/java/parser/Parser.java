@@ -1,4 +1,8 @@
+package parser;
 import java.time.LocalDate;
+import command.*;
+import dukeException.*;
+import task.*;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException{

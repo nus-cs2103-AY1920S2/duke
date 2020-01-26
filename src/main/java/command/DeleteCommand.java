@@ -1,3 +1,7 @@
+package command;
+import task.*;
+import ui.Ui;
+import storage.*;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

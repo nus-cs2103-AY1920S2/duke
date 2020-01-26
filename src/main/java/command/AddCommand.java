@@ -1,4 +1,8 @@
+package command;
 import java.io.IOException;
+import task.*;
+import ui.*;
+import storage.*;
 
 public class AddCommand extends Command{
     Task task;
