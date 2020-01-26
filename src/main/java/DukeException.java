@@ -12,7 +12,7 @@ public class DukeException extends Exception {
 
 
     public String toString() {
-        if (type.equals("task")) {
+        if (type.equals("task")) { // exception under creation of tasks
             if (givenInput.equals("todo") || givenInput.equals("deadline") || givenInput.equals("event")) {
                 return "☛ dude, elaborate more!";
             }
