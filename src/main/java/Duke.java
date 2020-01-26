@@ -1,6 +1,6 @@
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -13,7 +13,7 @@ public class Duke {
         scanner = new Scanner(System.in);
         inputs = new ArrayList<String>();
 
-        while (true)  {
+        while (true) {
             processInput(scanner);
         }
     }
