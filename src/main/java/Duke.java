@@ -15,6 +15,7 @@ public class Duke { //extends Application {
 
         //import task from hard disk
         levelMethods.createStorage();
+        levelMethods.updateListFromFile();
 
         //Scanner class for input
         Scanner sc = new Scanner(System.in);
