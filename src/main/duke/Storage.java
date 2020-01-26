@@ -25,18 +25,15 @@ public class Storage {
                 String str = sc.nextLine();
                 String[] parts = str.split("\\|");
                 if (parts[0].equals("T")) {
-                    Task task = new Todo(tasks.size() + 1,
-                            Boolean.parseBoolean(parts[1]), parts[2]);
+                    Task task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
                     tasks.add(task);
                     calender.addDate(task);
                 } else if (parts[0].equals("E")) {
-                    Task task = new Event(tasks.size() + 1,
-                            Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
+                    Task task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
                     calender.addDate(task);
                 } else if (parts[0].equals("D")) {
-                    Task task = new Deadline(tasks.size() + 1,
-                            Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
+                    Task task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
                     calender.addDate(task);
                 }

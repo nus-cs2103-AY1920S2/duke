@@ -48,7 +48,7 @@ public class Main {
             case TODO:
                 String todo = sc.nextLine();
                 if (todo.isEmpty()) throw new DukeDescriptionException("Empty Description");
-                Task taskToDo = new Todo(tasklist.getSize() + 1, todo);
+                Task taskToDo = new Todo(todo.substring(1));
                 tasklist.addTask(taskToDo);
                 System.out.println("I've added this task: \n" +
                         "  " + taskToDo + "\nNow you have " +
@@ -59,7 +59,7 @@ public class Main {
                 String event = sc.nextLine();
                 if (event.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 int eventDate = event.indexOf("/");
-                Task taskEvent = new Event(tasklist.getSize() + 1, event.substring(0, eventDate),
+                Task taskEvent = new Event(event.substring(1, eventDate),
                         event.substring(eventDate + 4));
                 tasklist.addTask(taskEvent);
                 calender.addDate(taskEvent);
@@ -72,7 +72,7 @@ public class Main {
                 String deadline = sc.nextLine();
                 if (deadline.isEmpty()) throw new DukeDescriptionException("Empty Description");
                 int dLineDate = deadline.indexOf("/");
-                Task taskDLine = new Deadline(tasklist.getSize() + 1, deadline.substring(0, dLineDate),
+                Task taskDLine = new Deadline(deadline.substring(1, dLineDate),
                         deadline.substring(dLineDate + 4));
                 tasklist.addTask(taskDLine);
                 calender.addDate(taskDLine);
