@@ -55,6 +55,10 @@ public class LevelMethods {
         formattingDivider(printStr);
     }
 
+    public void time() {
+
+    }
+
 
     /**
      * Grapie's replies
