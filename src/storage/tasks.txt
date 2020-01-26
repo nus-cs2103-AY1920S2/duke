@@ -1,0 +1,4 @@
+T | 0 | list
+E | 0 |  sunday | 6th june 2-4p,
+D | 0 |  sunday |  6th june
+T | 0 | hi /by sdfsa
