@@ -61,13 +61,18 @@ public class Duke {
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(eventMsg);
                         break;
+                    case "delete":
+                        int num = Integer.parseInt(st.nextToken());
+                        tasks.remove(num - 1);
+                        System.out.printf("now you have %d tasks in your list.", tasks.size());
+                        break;
                     default:
                         throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             System.out.println(e);
-        } 
+        }
 
     }
 
