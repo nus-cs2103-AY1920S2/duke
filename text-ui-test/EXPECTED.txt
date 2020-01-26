@@ -1,0 +1,54 @@
+Hello! I'm Duke
+What can I do for you?
+
+Here are your task(s):
+
+Got it! I've added this task:
+    [T][✘] borrow book
+Now, you have 1 item(s) in your list.
+
+Here are your task(s):
+    1. [T][✘] borrow book
+
+Got it! I've added this task:
+    [D][✘] return book (by: Sunday)
+Now, you have 2 item(s) in your list.
+
+Here are your task(s):
+    1. [T][✘] borrow book
+    2. [D][✘] return book (by: Sunday)
+
+Nice! I've marked this task as done:
+    [D][✓] return book (by: Sunday)
+
+Here are your task(s):
+    1. [T][✘] borrow book
+    2. [D][✓] return book (by: Sunday)
+
+Got it! I've added this task:
+    [E][✘] project meeting (at: Mon 2-4pm)
+Now, you have 3 item(s) in your list.
+
+Here are your task(s):
+    1. [T][✘] borrow book
+    2. [D][✓] return book (by: Sunday)
+    3. [E][✘] project meeting (at: Mon 2-4pm)
+
+Nice! I've marked this task as done:
+    [T][✓] borrow book
+
+Here are your task(s):
+    1. [T][✓] borrow book
+    2. [D][✓] return book (by: Sunday)
+    3. [E][✘] project meeting (at: Mon 2-4pm)
+
+Nice! I've marked this task as done:
+    [E][✓] project meeting (at: Mon 2-4pm)
+
+Here are your task(s):
+    1. [T][✓] borrow book
+    2. [D][✓] return book (by: Sunday)
+    3. [E][✓] project meeting (at: Mon 2-4pm)
+
+Bye, hope to see you again soon!
+
