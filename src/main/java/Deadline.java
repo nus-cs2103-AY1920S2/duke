@@ -1,5 +1,4 @@
-public class Deadline extends Task{
-    protected String due;
+public class Deadline extends Task {
 
     /**
      * Constructor for Deadline
@@ -7,11 +6,12 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String due) {
         super(description);
-        this.due = due;
+        period = due;
+        type = "deadline";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due + ")";
+        return "[D]" + super.toString() + " (by: " + period + ")";
     }
 }

@@ -1,5 +1,4 @@
-public class Event extends Task{
-    String duration;
+public class Event extends Task {
 
     /**
      * Constructor for Event
@@ -7,11 +6,12 @@ public class Event extends Task{
      */
     public Event(String description, String duration) {
         super(description);
-        this.duration = duration;
+        this.period = duration;
+        type = "event";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + duration + ")";
+        return "[E]" + super.toString() + " (at: " + period + ")";
     }
 }

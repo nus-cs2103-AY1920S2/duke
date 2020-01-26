@@ -1,6 +1,8 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
+    protected String period;
 
     /**
      * Constructor of Task
@@ -9,6 +11,15 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.period = "NIL";
+    }
+
+    /**
+     * Get the period for the task
+     * @return period of the task
+     */
+    public String getPeriod() {
+        return period;
     }
 
     /**
@@ -17,6 +28,14 @@ public class Task {
      */
     public String getStatusIcon() {
         return isDone? "\u2713" : "\u2718";
+    }
+
+    /**
+     * Get status of the task
+     * @return task status
+     */
+    public boolean getStatus() {
+        return isDone;
     }
 
     /**
@@ -39,6 +58,14 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Get the task type
+     * @return type of the task
+     */
+    public String getType() {
+        return type;
     }
 
     /**
