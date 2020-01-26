@@ -28,8 +28,8 @@ public class TaskList {
     }
 
     public void printTask() {
-        for (Task task: tasks) {
-            System.out.println(task.getId() + "." + task);
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.println(i + "." + tasks.get(i - 1));
         }
     }
 
