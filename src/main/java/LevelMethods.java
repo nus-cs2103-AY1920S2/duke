@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import java.io.*;
+=======
+import java.time.LocalDate;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -57,6 +61,7 @@ public class LevelMethods {
         formattingDivider(printStr);
     }
 
+<<<<<<< HEAD
     public void createStorage() throws IOException {
 
         // inserts correct file path separator on *nix and Windows
@@ -210,6 +215,17 @@ public class LevelMethods {
         Scanner myReader = new Scanner(file);
 
         fr.close();
+=======
+    public void time() {
+        /*
+        Minimal: Store deadline dates as a java.time.LocalDate in your task objects.
+        Accept dates in a format such as yyyy-mm-dd format (e.g., 2019-10-15)
+        and print in a different format such as MMM d yyyy e.g., (Oct 15 2019).
+         */
+
+
+
+>>>>>>> branch-Level-8
     }
 
 
@@ -248,8 +264,12 @@ public class LevelMethods {
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
-                    throw new GrapieExceptions("OOPS!!! Event is not created in correct format. Please use: event your_event /at your_time");
+                    throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD TTTT");
                 } else {
+<<<<<<< HEAD
+=======
+//                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+>>>>>>> branch-Level-8
                     Event event = new Event(eventAndTime[0], eventAndTime[1]);
                     storingList.add(event);
 
@@ -272,7 +292,13 @@ public class LevelMethods {
                 String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
 
                 if (eventAndTime.length > 1) {
+<<<<<<< HEAD
 
+=======
+                    //LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+                    //String haha = "2019-12-01";
+//                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+>>>>>>> branch-Level-8
                     Deadline deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
                     storingList.add(deadline);
 
@@ -282,7 +308,7 @@ public class LevelMethods {
                     //store into hard disk
                     convertToHardDiskFormatAndStore(deadline, "T", deadline.time);
                 } else {
-                    throw new GrapieExceptions("OOPS!!! Deadline is not created in correct format. Please use: deadline your_deadline /by your_time");
+                    throw new GrapieExceptions("OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT");
                 }
 
             } else {
