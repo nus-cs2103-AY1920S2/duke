@@ -66,6 +66,7 @@ public class Storage {
     public Storage (String filepath) {
         f = new File(filepath);
         try {
+            f.getParentFile().mkdir(); //makes data directory if does not exists
             f.createNewFile();
         } catch (IOException e) {
             System.err.println("Unable to create file");
