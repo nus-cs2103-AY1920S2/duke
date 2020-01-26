@@ -16,7 +16,8 @@ public class AddCommand extends Command {
 
     public void execute(TaskList taskList, Storage storage) {
         Task newTask = taskList.AddTask(toAdd, taskType);
-        storage.SaveTaskToFile(newTask);
+        if (newTask != null)
+            storage.SaveTaskToFile(newTask);
     }
 
     public boolean isExit() {

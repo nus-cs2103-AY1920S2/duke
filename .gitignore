@@ -13,3 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 data
+MANIFEST.MF

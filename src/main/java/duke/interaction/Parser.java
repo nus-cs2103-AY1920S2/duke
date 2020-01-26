@@ -17,15 +17,15 @@ public class Parser {
                 case "bye":
                     return new ExitCommand();
                 case "done":
-                    return new DoneCommand(in.nextInt() - 1);
+                    return new DoneCommand((in.hasNextInt() ? in.nextInt() - 1 : -1));
                 case "todo":
-                    return new AddCommand(in.nextLine().trim(), Task.TaskType.TODO);
+                    return new AddCommand((in.hasNextLine() ? in.nextLine().trim() : ""), Task.TaskType.TODO);
                 case "deadline":
-                    return new AddCommand(in.nextLine(), Task.TaskType.DEADLINE);
+                    return new AddCommand((in.hasNextLine() ? in.nextLine().trim() : ""), Task.TaskType.DEADLINE);
                 case "event":
-                    return new AddCommand(in.nextLine(), Task.TaskType.EVENT);
+                    return new AddCommand((in.hasNextLine() ? in.nextLine().trim() : ""), Task.TaskType.EVENT);
                 case "delete":
-                    return new DeleteCommand(in.nextInt() - 1);
+                    return new DeleteCommand((in.hasNextInt() ? in.nextInt() - 1 : -1));
                 case "date":
                     return new DateCommand(in.nextLine().trim());
                 default:
