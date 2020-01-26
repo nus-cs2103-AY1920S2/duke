@@ -14,15 +14,59 @@ public class Duke {
         String input = sc.nextLine();
         int listCounter = 0;
         while(!input.equals("bye")) {
-            if (!input.equals("list") && !input.contains("done")){
-                System.out.println("added: " + input);
-                arr[listCounter] = new Task(input);
+            if (!input.equals("list") && !input.contains("done")) {
+                char[] inputArr = input.toCharArray();
+                if(input.contains("todo")) {
+                    String todoInput = "";
+                    for(int i = 5; i < inputArr.length; i++) {
+                        todoInput += inputArr[i];
+                    }
+                    Todo task = new Todo(todoInput);
+                    arr[listCounter] = task;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task.toString());
+                } else if (input.contains("event")) {
+                    int marker = 0;
+                    String date = "";
+                    String desc = "";
+                    for(int i = inputArr.length - 1; (inputArr[i] != '/'); i--) {
+                        marker = i;
+                    }
+                    for(int i = marker + 2; i < inputArr.length; i++) {
+                        date += inputArr[i];
+                    }
+                    for (int i = 6; i < marker; i++) {
+                        desc += inputArr[i];
+                    }
+                    Event task = new Event(desc, date);
+                    arr[listCounter] = task;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task.toString());
+                } else if (input.contains("deadline")) {
+                    int marker = 0;
+                    String by = "";
+                    String desc = "";
+                    for(int i = inputArr.length - 1; (inputArr[i] != '/'); i--) {
+                        marker = i;
+                    }
+                    for(int i = marker + 2; i < inputArr.length; i++) {
+                        by += inputArr[i];
+                    }
+                    for (int i = 9; i < marker; i++) {
+                        desc += inputArr[i];
+                    }
+                    Deadline task = new Deadline(desc, by);
+                    arr[listCounter] = task;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task.toString());
+                }
                 listCounter++;
+                System.out.println("Now you have " + listCounter + " tasks in the list.");
                 input = sc.nextLine();
             } else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < listCounter; i++) {
-                    System.out.println(i + 1 + ".[" + arr[i].getStatusIcon() + "] " + arr[i].getDescription());
+                    System.out.println(i + 1 + "." + arr[i].toString());
                 }
                 input = sc.nextLine();
             } else {
