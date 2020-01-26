@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
@@ -10,10 +11,9 @@ public class Event extends Task {
     // Days array to determine if its a day or a yyyy-mm-dd format
     //String[] days;
 
-    Event(String description, String at) {
+    Event(String description) {
 
         super(description);
-        this.at = at.trim();
     }
 
     private String getAt() {
@@ -21,11 +21,12 @@ public class Event extends Task {
     }
 
     void setAt(String s) {
-
         this.at = super.set_by_at(s);
-
     }
 
+    LocalDateTime getD1(){
+        return super.d1;
+    }
 
     void setD1() throws DukeException {
         super.setD1(getAt());
@@ -50,7 +51,6 @@ public class Event extends Task {
                 throw new DukeException("Please use ../at instead of any other identifiers ");
             }
         }
-
     }
 
     // Ensures the user uses the correct format for an event

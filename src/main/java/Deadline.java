@@ -12,10 +12,10 @@ public class Deadline extends Task {
     // d1 is the date that is being parsed
     // Time is the deadline completion time (IF THERE IS!)
     private String by;
+    private Ui ui;
 
-    Deadline(String description, String by) {
+    Deadline(String description) {
         super(description);
-        this.by = by.trim();
     }
 
 
@@ -26,7 +26,6 @@ public class Deadline extends Task {
     // Then for the date wise right, can just check if there is only one element
     // Or two elements.
     void setBy(String by) {
-
         this.by = super.set_by_at(by);
     }
     private String getBy() {
@@ -42,6 +41,8 @@ public class Deadline extends Task {
         super.setD1(getBy());
     }
 
+
+    //Get the task from the given input.
     @Override
     String format_tasks(String s) throws DukeException {
 
@@ -59,6 +60,7 @@ public class Deadline extends Task {
 
     }
 
+    // Removes the "deadline" from the given input.
     @Override
     void setDescription(String s) throws DukeException {
         try {
