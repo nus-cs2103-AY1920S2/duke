@@ -29,6 +29,8 @@ public class CommandHandler {
         commands.put("deadline", new CreateDeadline());
         commands.put("event", new CreateEvent());
         commands.put("delete", new DeleteTask());
+        commands.put("find", new FindTasks());
+        isActive = true;
     }
 
     /**

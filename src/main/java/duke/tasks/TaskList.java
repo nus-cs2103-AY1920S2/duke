@@ -38,6 +38,23 @@ public class TaskList {
     }
 
     /**
+     * Retrives all <code>Tasks</code> containing a keyword from the TaskList.
+     * 
+     * @param keyword Keyword to be checked (case-insensitive).
+     * @return List of Tasks containing the keyword.
+     */
+    public List<Task> search(String keyword) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            // Case insensitive check
+            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Retrives a specified <code>Task</code> from the TaskList.
      * 
      * @param taskNo <code>Task</code> number to be retrieved.
