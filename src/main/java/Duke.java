@@ -16,6 +16,8 @@ import main.java.ToDoTask;
 import main.java.EventTask;
 import main.java.DeadLineTask;
 
+import main.java.NoDescriptionException;
+
 public class Duke {
 
     protected String user_name;
@@ -100,12 +102,16 @@ public class Duke {
                 }
                 else if (todoMatcher.find()){
                     String description = todoMatcher.group(2).trim();
-                    ToDoTask currentTask = new ToDoTask(description);
-                    String addTaskEndStr = addTaskEnd.insert(13, nextInsertPin + 1).toString();
-                    taskArray[nextInsertPin] = currentTask;
-                    nextInsertPin ++;
-                    System.out.println(line + addTaskStart + currentTask.toString() + "\n" +
-                            addTaskEndStr + line);
+                    if ("".equals(description)) {
+                        System.out.println(line + "☹ OOPS!!! The description of a todo cannot be empty.\n" + line);
+                    } else {
+                        ToDoTask currentTask = new ToDoTask(description);
+                        String addTaskEndStr = addTaskEnd.insert(13, nextInsertPin + 1).toString();
+                        taskArray[nextInsertPin] = currentTask;
+                        nextInsertPin ++;
+                        System.out.println(line + addTaskStart + currentTask.toString() + "\n" +
+                                addTaskEndStr + line);
+                    }
                 }
                 else if (deadlineMatcher.find()){
                     String description = deadlineMatcher.group(2).trim();
@@ -128,6 +134,9 @@ public class Duke {
                     nextInsertPin ++;
                     System.out.println(line + addTaskStart + currentTask.toString() + "\n" +
                             addTaskEndStr + line);
+                }
+                else {
+                    System.out.println(line + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
                 }
             }
         } catch (IOException e) {
