@@ -27,9 +27,13 @@ public class Duke {
                 input = sc.nextLine();
             } else {
                 char charArr[] = input.toCharArray();
-                int taskNum = charArr[5];
-                taskNum -= 1;
-                arr[taskNum].isDone = true;
+                String taskNum = "";
+                for (int i = 5; i < charArr.length; i++) {
+                    taskNum += i;
+                }
+                int taskInt = Integer.parseInt(taskNum);
+                taskInt -= 1;
+                arr[taskInt].isDone = true;
                 input = sc.nextLine();
             }
         }
