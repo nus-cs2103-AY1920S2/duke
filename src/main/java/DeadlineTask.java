@@ -14,7 +14,16 @@ public class DeadlineTask extends Task {
         this.deadline = sc.nextLine();
     }
 
-    @Override
+    public String formatToStore() {
+        String format = "deadline " + taskDescription + " / by " + deadline + " /";
+        if(isDone) {
+            format += " 1";
+        } else {
+            format += " 0";
+        }
+        return format;
+    }
+
     public String toString() {
         String taskWords =  "[D]";
         if(isDone) {

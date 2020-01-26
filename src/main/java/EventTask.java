@@ -14,7 +14,16 @@ public class EventTask extends Task {
         this.timing = sc.nextLine();
     }
 
-    @Override
+    public String formatToStore() {
+        String format = "event " + taskDescription + " / at " + timing + " /";
+        if(isDone) {
+            format += " 1";
+        } else {
+            format += " 0";
+        }
+        return format;
+    }
+
     public String toString() {
         String taskWords =  "[E]";
         if(isDone) {
