@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,8 +11,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Task[] taskList = new Task[100];
-        int taskLength = 0;
+        ArrayList<Task> taskList = new ArrayList<>();
 
         //Greet the user
         System.out.println("Hello! I'm Duke");
@@ -29,25 +29,36 @@ public class Duke {
             } else if (command.equals("list")) {
                 //List all tasks
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskLength; i++) {
-                    System.out.println(i + 1 + ". " + taskList[i]);
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println(i + 1 + ". " + taskList.get(i));
                 }
             } else if ((command.length() > 3) && (command.substring(0, 4).equals("done"))) {
                 //Mark task as done
                 int taskNumber = Integer.parseInt(command.substring(5));
-                taskList[taskNumber-1].markAsDone();
+                taskList.get(taskNumber-1).markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(taskList[taskNumber-1]);
+                System.out.println(taskList.get(taskNumber-1));
+            } else if ((command.length() > 5) && (command.substring(0, 6).equals("delete"))) {
+                //Delete task
+                try {
+                    int taskNumber = Integer.parseInt(command.substring(7));
+                    Task temp = taskList.remove(taskNumber-1);
+                    System.out.println("Nice! I have removed this task:");
+                    System.out.println(temp);
+                } catch (StringIndexOutOfBoundsException e){
+                    System.out.println("Please add a task number to delete");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Cannot delete from an empty list");
+                }
             } else {
                 //Add task
                 Task newTask = new Task("placeholder");
                 if (command.contains("todo")) {
                     try {
                         newTask = new ToDo(command.substring(5));
-                        taskList[taskLength] = newTask;
-                        taskLength++;
+                        taskList.add(newTask);
                         System.out.println("Got it. I've added this task: \n" + newTask);
-                        System.out.println("Now you have " + taskLength + " tasks in the list");
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list");
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("ToDo description cannot be empty");
                     }
@@ -57,10 +68,9 @@ public class Duke {
                         int breakPos = command.indexOf("/");
                         if ((breakPos == -1) && (command.length() == 8)) throw new DukeException("No desc Deadline");
                         newTask = new Deadline(command.substring(0, breakPos - 1), command.substring(breakPos + 4));
-                        taskList[taskLength] = newTask;
-                        taskLength++;
+                        taskList.add(newTask);
                         System.out.println("Got it. I've added this task: \n" + newTask);
-                        System.out.println("Now you have " + taskLength + " tasks in the list");
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list");
                     } catch (DukeException e) {
                         System.out.println("Deadline description cannot be empty");
                     } catch (IndexOutOfBoundsException e) {
@@ -72,10 +82,9 @@ public class Duke {
                         int breakPos = command.indexOf("/");
                         if ((breakPos == -1) && (command.length() == 5)) throw new DukeException("No desc Event");
                         newTask = new Event(command.substring(0, breakPos - 1), command.substring(breakPos + 4));
-                        taskList[taskLength] = newTask;
-                        taskLength++;
+                        taskList.add(newTask);
                         System.out.println("Got it. I've added this task: \n" + newTask);
-                        System.out.println("Now you have " + taskLength + " tasks in the list");
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list");
                     } catch (DukeException e) {
                     System.out.println("Event description cannot be empty");
                     } catch (IndexOutOfBoundsException e) {
