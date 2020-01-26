@@ -50,6 +50,10 @@ public class Duke {
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
                 } else if (cmd.startsWith(TODO_CMD)) {
+                    String[] str  = cmd.split("todo ");
+                    if (str.length < 2) {
+                        throw new DukeException("The description of a todo cannot  be empty");
+                    }
                     Task t = new Todo(cmd.split("todo ")[1]);
 
                     tasks.add(t);
@@ -83,6 +87,8 @@ public class Duke {
                 System.out.println("Sorry, an error has occurred:");
                 e.printStackTrace();
                 break;
+            } catch (DukeException e) {
+                System.out.println(e + LF);
             }
         }
     }
