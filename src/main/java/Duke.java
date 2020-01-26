@@ -36,13 +36,20 @@ public class Duke {
                 System.out.println("________________________________________");
 
             } else if (keyword.equals("done")) {
-                int taskNumber =  Integer.valueOf(arrSplit[1]);
+                int taskNumber = Integer.valueOf(arrSplit[1]);
                 list.get(taskNumber - 1).markAsDone();
 
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(list.get(taskNumber - 1).getStatusIcon() +
                         " " + list.get(taskNumber - 1).getTask());
                 System.out.println("________________________________________");
+            } else if (keyword.equals("delete")) {
+                int taskNumber = Integer.valueOf(arrSplit[1]);
+                System.out.println("Noted. I've removed this task");
+                System.out.println(list.get(taskNumber - 1));
+                list.remove(taskNumber - 1);
+                System.out.println("Now you have " + list.size() + " in the list.");
+
             } else {
 
                 String therest = arrSplit[1];
