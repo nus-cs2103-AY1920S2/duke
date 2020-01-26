@@ -31,30 +31,17 @@ public class Duke {
         boolean requestExit = false;
         while (!requestExit) {
             // Run process command, check if user has terminated program
-            requestExit = processCommandWrapper(reader);
+            try {
+                processCommands(reader);
+                requestExit = true;
+            } catch (IOException ioException) {
+                ui.unableToReadUserInput();
+            } catch (DukeException dukeException) {
+                // Print error message
+                ui.showExceptionMessage(dukeException);
+            }
         }
         ui.goodbye();
-    }
-
-    /**
-     * Used to catch any exceptions resulting from executing commands.
-     *
-     * @param inputReader used to receive user input
-     * @return boolean indicating whether user exited normally
-     */
-    protected boolean processCommandWrapper(BufferedReader inputReader) {
-        boolean normalExit = true;
-        try {
-            processCommands(inputReader);
-        } catch (IOException ioException) {
-            ui.unableToReadUserInput();
-            normalExit = false;
-        } catch (DukeException dukeException) {
-            // Print error message
-            ui.showExceptionMessage(dukeException);
-            normalExit = false;
-        }
-        return normalExit;
     }
 
     /**
