@@ -8,6 +8,7 @@ public class Ui {
     public static final String ADD = "add";
     public static final String DELETE = "delete";
     public static final String DONE = "done";
+    public static final String FIND = "find";
 
 
     /**
@@ -78,6 +79,15 @@ public class Ui {
         } else if (commandArr.equals(DELETE)) {
             try {
                 tasks.deleteTask(command);
+            } catch (GrapieExceptions grapieExceptions) {
+                System.out.println("    #__________________________________________________________# \n");
+                System.out.println("      " + grapieExceptions);
+                System.out.println("    #__________________________________________________________#");
+            }
+        } else if (commandArr.equals(FIND)) {
+            //find
+            try {
+                tasks.findFromList(command);
             } catch (GrapieExceptions grapieExceptions) {
                 System.out.println("    #__________________________________________________________# \n");
                 System.out.println("      " + grapieExceptions);

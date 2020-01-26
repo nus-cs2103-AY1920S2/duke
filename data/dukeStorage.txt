@@ -1,3 +1,7 @@
 T | O | hehe
 T | O | fow
 T | X | smooch
+T | X | read book
+T | X | read love me
+T | O | read hehe
+T | X | haha

@@ -228,6 +228,28 @@ public class TaskList {
         }
     }
 
+    public void findFromList(String command) throws GrapieExceptions {
+        if (command.length() <= 5) {
+            throw new GrapieExceptions(ErrorMsg.emptyKeywordError);
+        } else {
+            //remember to add check for already completed task
+            String keyword = command.substring(5, command.length());
+
+            int counter = 1;
+            System.out.println("    #__________________________________________________________# \n");
+            System.out.println("    Here are the matching tasks in your list:");
+            for (int i = 0; i < storingList.size(); i++) {
+                Task task = storingList.get(i);
+
+                if (task.description.contains(keyword)) {
+                    System.out.println("      " + counter + "." + task);
+                    counter++;
+                }
+            }
+            System.out.println("    #__________________________________________________________# \n");
+        }
+    }
+
     /**
      * List the tasks in task list.
      */
