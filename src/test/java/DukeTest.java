@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,12 +8,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DukeTest {
+    final String FILE_SEPARATOR = File.separator;
+    // Map project path to the directory from which you run your program
+    final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
+    String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
+    String saveFile = "test.txt";
     final String NEWLINE = System.lineSeparator();
     final String INDENTATION = "    ";
     final String HORIZONTAL_BAR =
@@ -40,12 +48,27 @@ class DukeTest {
                 new Event("project meeting", "2020-01-25")));
     }
 
+    void deleteSaveFile() {
+        try {
+            Files.deleteIfExists(Paths.get(dataDirectoryPath + FILE_SEPARATOR + saveFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @BeforeEach
     void init() {
-        duke = new Duke();
+        // Delete any save file
+        deleteSaveFile();
+        duke = new Duke(saveFile);
         output = new ByteArrayOutputStream();
         // Change output stream
         System.setOut(new PrintStream(output));
+    }
+
+    @AfterEach
+    void cleanUp() {
+        deleteSaveFile();
     }
 
     @Test
