@@ -15,7 +15,8 @@ _  _
 	1. [T][✘] borrow book
 	2. [D][✘] return book (by: Sunday)
 	3. [D][✘] project meeting (at: Mon 2-4pm)
-☛ dude, you're fast!
+☛ dude, nicely! you're done with:
+	[D][✔] return book (by: Sunday)
 ☛ you asked to:
 	1. [T][✘] borrow book
 	2. [D][✔] return book (by: Sunday)
