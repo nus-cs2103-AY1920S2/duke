@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,8 +8,15 @@ public class Duke {
         //Duke Setup
         boolean dukeRunning = true;
         int taskNo = 0;
-        List<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        //Try to read form saved data file and restore index, if not create a list to save later
+        List<Task> taskList = dataRead();
+        if (taskList == null) {
+            taskList = new ArrayList<>();
+        } else {
+            taskNo = taskList.size();
+        }
 
         //Welcome Text
         print("Hello! I'm Duke\nWhat can I do for you?");
@@ -29,6 +37,7 @@ public class Duke {
                 switch (dukeSwitchCase) {
                     case BYE:
                         print("Bye. Hope to see you again soon!");
+                        dataSave(taskList);
                         dukeRunning = false;
                         break;
 
@@ -84,7 +93,7 @@ public class Duke {
                             try {
                                 taskList.add(new Event(false, taskNo++, atEvent[0], atEvent[1]));
                                 print("Got it. I've added this task:\n\t[E][✗] "
-                                        + atEvent[0] + " (by: " + atEvent[1] + ")" +
+                                        + atEvent[0] + " (at: " + atEvent[1] + ")" +
                                         "\nNow you have " + taskList.size() + " task(s) in the list.");
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 taskNo--;
@@ -116,6 +125,43 @@ public class Duke {
             } catch (DukeException e) {
                 print(e.toString());
             }
+        }
+    }
+
+    //Custom dataRead Method to read from file
+    static List<Task> dataRead() {
+        try {
+            try {
+                FileInputStream dataFile = new FileInputStream("./data/duke.txt");
+                ObjectInputStream in = new ObjectInputStream(dataFile);
+                ArrayList<Task> taskList = (ArrayList<Task>) in.readObject();
+                in.close();
+                dataFile.close();
+
+                return taskList;
+            } catch (IOException | ClassNotFoundException ignored) {
+                throw new CannotReadFileException();
+            }
+        } catch (DukeException e) {
+            print(e.toString());
+            return null;
+        }
+    }
+
+    //Custom dataSave Method to save to file
+    static void dataSave(List<Task> taskList) {
+        try {
+            try {
+                FileOutputStream dataFile = new FileOutputStream("./data/duke.txt");
+                ObjectOutputStream out = new ObjectOutputStream(dataFile);
+                out.writeObject(taskList);
+                out.close();
+                dataFile.close();
+            } catch (IOException ignored) {
+                throw new CannotSaveFileException();
+            }
+        } catch (DukeException e) {
+            print(e.toString());
         }
     }
 
