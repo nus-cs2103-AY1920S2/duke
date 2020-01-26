@@ -82,4 +82,9 @@ public class Main {
         sc.close();
 
     }
+
+    static public void printLines(){
+        System.out.println("_______________________________________________");
+    }
+
 }
