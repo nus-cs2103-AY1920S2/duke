@@ -1,16 +1,25 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TaskManager {
     private ArrayList<Task> arrTasks;
     private HashMap<String, String> taskToRegex;
+    private TaskWriter w;
+    private static final String filePath = "../../../data/duke.txt";
 
     public TaskManager() {
-        this.arrTasks = new ArrayList<>();
+        try {
+            this.arrTasks = new TaskReader().getTasksFromFile(filePath);
+        } catch (FileNotFoundException e) {
+            this.arrTasks = new ArrayList<>();
+        }
         this.taskToRegex = new HashMap<>();
         this.taskToRegex.put("todo", "\n");
         this.taskToRegex.put("deadline", " /by ");
         this.taskToRegex.put("event", " /at ");
+        this.w = new TaskWriter();
     }
 
     private String getRegex(String task) {
@@ -55,6 +64,7 @@ public class TaskManager {
                 response = this.addTask(new Event(descTimeArr[0], descTimeArr[1]));
                 break;
         }
+        this.writeTasks();
         return response;
     }
 
@@ -63,6 +73,7 @@ public class TaskManager {
             int i = Integer.parseInt(s) - 1;
             Task t = this.arrTasks.get(i);
             this.arrTasks.remove(i);
+            this.writeTasks();
             String response = "Noted. I've removed this task:\n" + t + '\n';
             response += "Now you have " + this.arrTasks.size() + " tasks in the list.";
             return response;
@@ -76,6 +87,7 @@ public class TaskManager {
             int i = Integer.parseInt(s) - 1;
             Task t = this.arrTasks.get(i);
             t.setDone();
+            this.writeTasks();
             String response = "Nice! I've marked this task as done:\n" + t;
             return response;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -92,5 +104,13 @@ public class TaskManager {
             counter++;
         }
         return allTasks;
+    }
+
+    private void writeTasks() {
+        try {
+            this.w.writeTasks(filePath, this.arrTasks);
+        } catch (IOException e) {
+            System.out.println("IOException: There is a problem when trying to write to the file.");
+        }
     }
 }

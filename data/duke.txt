@@ -1,0 +1,5 @@
+T | 1 | read book
+D | 0 | return book | Sunday 2pm
+T | 1 | meet pao
+E | 0 | go church | Sunday 9-11am
+D | 0 | submit assignment | Monday 2359
