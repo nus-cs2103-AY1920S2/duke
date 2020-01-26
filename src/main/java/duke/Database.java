@@ -109,6 +109,14 @@ public class Database {
     }
 
     /**
+     * Add task into database
+     * @param task task to be added
+     */
+    public void addTask(Task task) {
+        records.add(task);
+    }
+
+    /**
      * Get the listing in database
      * @return listing in database
      */
