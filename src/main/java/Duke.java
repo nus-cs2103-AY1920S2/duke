@@ -45,7 +45,7 @@ public class Duke {
         while (!input.equals("bye")) {
             Parser parser = new Parser(input);
 
-            switch (parser.getCommand()) {
+            switch (parser.getIdentifier()) {
 
             case "list":
                 ui.printList(tasks);
@@ -108,16 +108,16 @@ public class Duke {
      * empty date/timing for event/deadline, incomprehensible command.
      */
     public void addTask(Parser parser) throws DukeException {
-        if (parser.getCommand().equals("todo")) {
+        if (parser.getIdentifier().equals("todo")) {
             String toDo = parser.getDescription();
             tasks.addToDo(toDo);
-        } else if (parser.getCommand().equals("event") || parser.getCommand().equals("deadline")) {
+        } else if (parser.getIdentifier().equals("event") || parser.getIdentifier().equals("deadline")) {
             String description = parser.getDescription();
 
             LocalDate date = parser.getDate();
             LocalTime timing = parser.getTime();
 
-            if (parser.getCommand().equals("event")) {
+            if (parser.getIdentifier().equals("event")) {
                 tasks.addEvent(description, date, timing);
             } else {
                 tasks.addDeadline(description, date, timing);

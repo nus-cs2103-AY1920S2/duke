@@ -11,18 +11,18 @@ public class Parser {
     /**
      * Class constructor.
      *
-     * @param input User input to be interpreted.
+     * @param input User command to be interpreted.
      */
     public Parser(String input) {
         this.inputs = input.split(" ");
     }
 
     /**
-     * Returns command of user input.
+     * Returns identifier of user input.
      *
-     * @return Command of user input.
+     * @return Identifier of user input.
      */
-    public String getCommand() {
+    public String getIdentifier() {
         return inputs[0];
     }
 

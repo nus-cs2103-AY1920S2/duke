@@ -3,7 +3,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
- * Contains the task list
+ * Contains the task list.
  */
 public class TaskList {
 

@@ -44,9 +44,9 @@ public class Storage {
 
             switch (taskType) {
             case 'D':
-                int position = description.indexOf("by");
-                String date = description.substring(position + 3, position + 14);
-                String time = description.substring(position + 15);
+                int position = description.indexOf(" by ");
+                String date = description.substring(position + 4, position + 15);
+                String time = description.substring(position + 16);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate localDate = LocalDate.parse(date, formatter);
@@ -54,7 +54,7 @@ public class Storage {
                 formatter = DateTimeFormatter.ofPattern("hh:mm a");
                 LocalTime localTime = LocalTime.parse(time, formatter);
 
-                description = description.substring(0, position - 1);
+                description = description.substring(0, position);
 
                 if (isDone == 'X') {
                     tasks.add(new Deadline(description, taskType, localDate, localTime, false));
@@ -64,9 +64,9 @@ public class Storage {
 
                 break;
             case 'E':
-                int pos = description.indexOf("at");
-                String eventDate = description.substring(pos + 3, pos + 14);
-                String eventTime = description.substring(pos + 15);
+                int pos = description.indexOf(" at ");
+                String eventDate = description.substring(pos + 4, pos + 15);
+                String eventTime = description.substring(pos + 16);
 
                 DateTimeFormatter forFormatting = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate localEventDate = LocalDate.parse(eventDate, forFormatting);
@@ -74,7 +74,7 @@ public class Storage {
                 forFormatting = DateTimeFormatter.ofPattern("hh:mm a");
                 LocalTime localEventTime = LocalTime.parse(eventTime, forFormatting);
 
-                description = description.substring(0, pos - 1);
+                description = description.substring(0, pos);
 
                 if (isDone == 'X') {
                     tasks.add(new Event(description, taskType, localEventDate, localEventTime, false));
