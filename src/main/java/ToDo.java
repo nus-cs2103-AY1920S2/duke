@@ -1,14 +1,11 @@
 public class ToDo extends Task {
 
-    protected String at;
-
-    public ToDo(String description, String at) {
+    public ToDo(String description) {
         super(description);
-        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[T]" + super.toString();
     }
 }
