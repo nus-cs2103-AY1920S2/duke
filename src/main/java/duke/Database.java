@@ -87,7 +87,6 @@ public class Database {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
             String description = data.substring(5, indexForSeparator - 1);
-            System.out.println(description);
             if (!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
