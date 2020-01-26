@@ -21,7 +21,7 @@ public class Duke {
                 input = sc.nextLine();
             } else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < arr.length; i++) {
+                for (int i = 0; i < listCounter; i++) {
                     System.out.println(i + 1 + ".[" + arr[i].getStatusIcon() + "] " + arr[i].getDescription());
                 }
                 input = sc.nextLine();
