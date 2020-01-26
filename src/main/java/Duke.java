@@ -20,7 +20,7 @@ public class Duke {
             } else if (readtext.equals("list")) {
                 System.out.println("Here are the task in your list:");
                 for(int i=0;i <todo.size(); i++){
-                    System.out.println((i + 1) + ". " + "[" + todo.get(i).getStatusIcon() +"] " + todo.get(i).getDescription());
+                    System.out.println((i + 1) + ". " + todo.get(i).toString());
                 }
             } else {
                 if (readtext.contains("done")) {
@@ -29,9 +29,32 @@ public class Duke {
                     todo.get(Integer.parseInt(num)-1).markAsDone();
                     System.out.println(num + ". " + "[" + todo.get(Integer.parseInt(num)-1).getStatusIcon() +"] " + todo.get(Integer.parseInt(num)-1).getDescription());
                 } else {
-                    Task t = new Task(readtext);
-                    todo.add(t);
-                    System.out.println("added: "  + readtext);
+                    if (readtext.contains("todo")) {
+                        String spli = readtext.split("todo")[1];
+                        Task t = new Todo(spli);
+                        todo.add(t);
+                        System.out.println("Got it. I've added this task");
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + todo.size() + " tasks in the list");
+                    } else if (readtext.contains("deadline")) {
+                        String spli = readtext.split("deadline")[1];
+                        String des = spli.split("/by")[0];
+                        String fin = spli.split("/by")[1];
+                        Task t = new Deadline(des, fin);
+                        todo.add(t);
+                        System.out.println("Got it. I've added this task");
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + todo.size() + " tasks in the list");
+                    } else if (readtext.contains("event")) {
+                        String spli = readtext.split("event")[1];
+                        String des = spli.split("/at")[0];
+                        String fin = spli.split("/at")[1];
+                        Task t = new Event(des, fin);
+                        todo.add(t);
+                        System.out.println("Got it. I've added this task");
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + todo.size() + " tasks in the list");
+                    }
                 }
             }
         }
