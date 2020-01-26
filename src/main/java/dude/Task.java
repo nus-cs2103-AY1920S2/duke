@@ -2,7 +2,7 @@ package dude;
 
 import java.time.LocalDate;
 
-abstract class Task {
+public abstract class Task {
     private final String details;
     private boolean isDone;
 

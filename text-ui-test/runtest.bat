@@ -3,6 +3,9 @@
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
+REM delete storage in dude.txt
+del ..\data\dude.txt
+
 REM delete output from previous run
 del ACTUAL.TXT
 

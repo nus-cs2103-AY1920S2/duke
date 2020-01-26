@@ -1,5 +1,10 @@
 package dude;
 
+import dude.component.DudeTaskStore;
+import dude.component.IDudeTaskStore;
+import dude.component.IUserInterface;
+import dude.component.UI;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.function.Supplier;
@@ -18,16 +23,14 @@ public class Dude {
 
     public static void main(String[] args) {
         Dude chatbot = new Dude();
-
-        Scanner sc = new Scanner(System.in);
         
-        chatbot.serve(sc::nextLine);
+        chatbot.serve();
 
-        sc.close();
-        chatbot.saveState();
+        chatbot.close();
     }
 
     private IDudeTaskStore tasks;
+    private IUserInterface ui;
 
     /** 
      * Initializes dude.Dude chatbot
@@ -35,21 +38,19 @@ public class Dude {
      */
     public Dude() {
         this.tasks = DudeTaskStore.restoreSession();
-        respond("Wassup dude!");
+        this.ui = new UI();
     }
 
     /**
      * Repeatedly takes user input and responds to commands appropriately
      * until "bye" is given as input
-     * 
-     * @param input Supplier of user input (eg. Scanner object)
      */
-    public void serve(Supplier<String> input) { 
+    public void serve() {
         while (true) {                          
-            String msg = input.get();
+            String msg = ui.readCommand();
 
             if (msg.equals("bye")) {
-                respond("See ya!");
+                ui.respond("See ya!");
                 return;
             } else if (msg.equals("list")) {
                 listTasks();
@@ -73,12 +74,13 @@ public class Dude {
         }
     }
 
-    public void saveState() {
+    public void close() {
         this.tasks.saveTasksToMemory();
+        this.ui.close();
     }
 
     private void helpCommands() {
-        respond("Sorry mate, I didn't catch your drift",
+        ui.respond("Sorry mate, I didn't catch your drift",
                 "Maybe you could try talking to me in one of these formats:" + System.lineSeparator(),
                 "  " + LIST_USAGE,
                 "  " + DONE_USAGE,
@@ -93,14 +95,14 @@ public class Dude {
 
     private void listTasks() {
         if (tasks.taskCount() == 0) {
-            respond("You got nothing to do, dude. Ain't that awesome??");
+            ui.respond("You got nothing to do, dude. Ain't that awesome??");
             return;
         }
         
-        respond(() -> {
-            speak("These are your tasks, dude:");
+        ui.respond(() -> {
+            ui.speak("These are your tasks, dude:");
             for (String t : tasks.showAllTasks()) {
-                speak(t);
+                ui.speak(t);
             }
         });
     }
@@ -109,7 +111,7 @@ public class Dude {
         String[] args = msg.split("\\s+");
 
         if (args.length != 2) {
-            respondError("I don't get you, dude!", CHECK_USAGE);
+            ui.respondError("I don't get you, dude!", CHECK_USAGE);
             return;
         }
 
@@ -117,16 +119,16 @@ public class Dude {
             LocalDate date = LocalDate.parse(args[1]);
             showTasksOnDate(date);
         } catch (DateTimeParseException e) {
-            respondError("What date do you want to check man?", CHECK_USAGE);
+            ui.respondError("What date do you want to check man?", CHECK_USAGE);
         }
     }
 
     private void showTasksOnDate(LocalDate date) {
-        respond(() -> {
-            speak("These are what you have on this day");
+        ui.respond(() -> {
+            ui.speak("These are what you have on this day");
             for (int i = 1; i <= tasks.taskCount(); i++) {
                 if (tasks.getTask(i).occursOn(date)) {
-                    speak(String.format("%d.%s", i, tasks.getTask(i)));
+                    ui.speak(String.format("%d.%s", i, tasks.getTask(i)));
                 }
             }
         });
@@ -136,11 +138,11 @@ public class Dude {
         try {
             Task task = parser.apply(msg);
             tasks.addTask(task);
-            respond("I gotcha my dude. I've added this task:",
+            ui.respond("I gotcha my dude. I've added this task:",
                     String.format("  %s", task),
                     String.format("Now you got %d tasks in your list", tasks.taskCount()));
         } catch (ParsingException e) {
-            respondError("Sorry mate, I didn't quite getcha", e.getMessage());
+            ui.respondError("Sorry mate, I didn't quite getcha", e.getMessage());
         }
     }
 
@@ -148,7 +150,7 @@ public class Dude {
         String[] args = msg.split("\\s+");
 
         if (args.length != 2) {
-            respondError("I don't get you, dude!", usage);
+            ui.respondError("I don't get you, dude!", usage);
             return;          
         }
         
@@ -156,9 +158,9 @@ public class Dude {
             int index = Integer.parseInt(args[1]);
             tasksOp.accept(index);
         } catch (NumberFormatException e) {
-            respondError("That's not a number, dude!", usage);
+            ui.respondError("That's not a number, dude!", usage);
         } catch (IndexOutOfBoundsException e) {
-            respondError("You don't have such a task, dude!", usage);
+            ui.respondError("You don't have such a task, dude!", usage);
         }
     }
 
@@ -166,7 +168,7 @@ public class Dude {
         Consumer<Integer> completeTaskAtIndex = index -> {
             Task completed = tasks.getTask(index);
             completed.markAsDone();
-            respond("Good job dude! I've marked this task as done:", "  " + completed);
+            ui.respond("Good job dude! I've marked this task as done:", "  " + completed);
         };
         taskListOperation(completeTaskAtIndex, msg, DONE_USAGE);
     }
@@ -174,37 +176,10 @@ public class Dude {
     private void deleteTask(String msg) {
         Consumer<Integer> deleteTaskAtIndex = index -> {
             Task deleted = tasks.removeTask(index);
-            respond("I gotcha my dude. I've taken out this task:",
+            ui.respond("I gotcha my dude. I've taken out this task:",
                     String.format("  %s", deleted),
                     String.format("Now you got %d tasks in your list", tasks.taskCount()));
         };
         taskListOperation(deleteTaskAtIndex, msg, DELETE_USAGE);
-    }
-
-    /** dude.Dude reply formatting convenience functions */
-    private void respond(String ...responses) {
-        respond(() -> {
-            for (String response : responses) {
-                speak(response);
-            }
-        });
-    }
-
-    private void respondError(String errorMsg, String usageMsg) {
-        respond(errorMsg,
-                "Just tell me what you want to do like this:" + System.lineSeparator(),
-                "  " + usageMsg + System.lineSeparator(),
-                "Then we're chill");        
-    }
-
-    private void respond(Runnable r) {
-        String line = "    ____________________________________________________________";
-        System.out.println(line);
-        r.run();
-        System.out.println(line);
-    }
-
-    private void speak(String str) {
-        System.out.println("     " + str);
     }
 }

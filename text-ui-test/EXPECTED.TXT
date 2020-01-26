@@ -34,7 +34,7 @@
      Just tell me what you want to do like this:
 
        todo description
-
+     
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________
@@ -57,7 +57,7 @@
      Just tell me what you want to do like this:
 
        event description /from yyyy-mm-dd /to yyyy-mm-dd
-
+     
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________
@@ -65,7 +65,7 @@
      Just tell me what you want to do like this:
 
        event description /from yyyy-mm-dd /to yyyy-mm-dd
-
+     
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________
@@ -133,7 +133,7 @@
      Just tell me what you want to do like this:
 
        check yyyy-mm-dd
-
+     
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________
@@ -155,7 +155,7 @@
      Just tell me what you want to do like this:
 
        delete index_of_task
-
+     
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________
@@ -180,7 +180,7 @@
      Just tell me what you want to do like this:
 
        done index_of_task
-
+     
      Then we're chill
     ____________________________________________________________
     ____________________________________________________________

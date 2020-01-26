@@ -1,6 +1,7 @@
-package dude;
+package dude.component;
 
-import java.io.IOException;
+import dude.Task;
+
 import java.util.List;
 
 public interface IDudeTaskStore {
