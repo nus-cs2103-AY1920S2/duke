@@ -1,0 +1,6 @@
+T |  ✘ | read book
+D |  ✘ | return book
+E |  ✘ | project meeting
+T |  ✘ | join sports club
+T |  ✘ | sleep
+T |  ✘ | run
