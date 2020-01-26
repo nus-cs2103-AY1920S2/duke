@@ -103,8 +103,8 @@ public class LevelMethods {
                     //not able to split string properly
                     throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD");
                 } else {
-                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
-                    Event event = new Event(eventAndTime[0], localDate);
+//                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+                    Event event = new Event(eventAndTime[0], eventAndTime[1]);
                     storingList.add(event);
 
                     //printing
@@ -123,8 +123,8 @@ public class LevelMethods {
                 if (eventAndTime.length > 1) {
                     //LocalDate localDate = LocalDate.parse(eventAndTime[1]);
                     //String haha = "2019-12-01";
-                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
-                    Deadline deadline = new Deadline(eventAndTime[0], localDate);
+//                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
+                    Deadline deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
                     storingList.add(deadline);
 
                     //print

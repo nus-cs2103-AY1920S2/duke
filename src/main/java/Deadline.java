@@ -3,10 +3,13 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     LocalDate localDate;
+    String time;
 
-    public Deadline(String description, LocalDate localDate) {
+    public Deadline(String description, String time) {
         super(description);
-        this.localDate = localDate;
+        this.time = time;
+
+        localDate = LocalDate.parse(time);
     }
 
     @Override
