@@ -5,6 +5,13 @@ public class Event extends Task {
     String time;
     LocalDate localDate;
 
+    /**
+     * Constructor for Event object.
+     *
+     * @param description Event's description.
+     * @param time The time and date for the event.
+     * @throws GrapieExceptions Throws error for incorrect formatting.
+     */
     public Event(String description, String time) throws GrapieExceptions {//String time) {
         super(description);
 

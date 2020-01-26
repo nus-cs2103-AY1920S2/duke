@@ -5,12 +5,23 @@ public class TaskList {
     private List<Task> storingList;
     Storage storage;
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param load the arrayList obtained from Storage class's load method. Contains task from hard disk.
+     * @param storage Storage class previously created from Duke.
+     */
     public TaskList(List<Task> load, Storage storage) {
         //contains the task list e.g., it has operations to add/delete tasks in the list
         storingList = load;
         this.storage = storage;
     }
 
+    /**
+     * Format the output.
+     *
+     * @param contentStr The string to be formatted.
+     */
     public static void formattingDivider(String contentStr) {
         System.out.println("    #__________________________________________________________#");
         String lines[] = contentStr.split("\\r?\\n");
@@ -24,6 +35,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Format for printing the task added.
+     *
+     * @param task The task to be formatted.
+     */
     public void printAddingTask(Task task) {
         String printStr = "Alrighty. I've added this task: \n"
                 + task + "\n"
@@ -32,6 +48,14 @@ public class TaskList {
         formattingDivider(printStr);
     }
 
+    /**
+     * Check for todo, event, deadline and add to list correspondingly.
+     * Also checks for invalid input.
+     *
+     * @param inputStr the user input.
+     * @throws GrapieExceptions Errors thrown.
+     * @throws IOException
+     */
     public void addToList(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.contains("todo")) {
             if (inputStr.substring(0, 4).equals("todo") && inputStr.length() > 5) {
@@ -110,6 +134,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Check if a valid number is inputted in String form.
+     *
+     * @param numStr the string to be checked.
+     * @return Boolean stating if the String is a valid number.
+     */
     public boolean isNumber(String numStr) {
         try {
             Integer.parseInt(numStr);
@@ -119,7 +149,14 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Help mark a task as completed (O).
+     * Also checks if its a valid task number or if the task is already completed.
+     *
+     * @param doneTaskStr Task the user wants to be marked as complete.
+     * @throws GrapieExceptions Invalid task number, or already completed task thrown as error.
+     * @throws IOException
+     */
     public void completeTask(String doneTaskStr) throws GrapieExceptions, IOException {
         if (doneTaskStr.length() <= 5) {
             //no number behind
@@ -161,6 +198,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete task the user specifies.
+     * Help check if the task number exists.
+     *
+     * @param inputStr User's input, delete command and task to be deleted.
+     * @throws GrapieExceptions Error if the task number to be deleted do not exist.
+     * @throws IOException
+     */
     public void deleteTask(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.length() <= 7) {
             throw new GrapieExceptions(ErrorMsg.invalidNumberError);
@@ -196,6 +241,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * List the tasks in task list.
+     */
     public void listTheList() {
         int sizeOfList = storingList.size();
         String stringList = "Here are the tasks in your list: \n";

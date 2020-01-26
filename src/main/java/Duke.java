@@ -11,12 +11,24 @@ public class Duke { //extends Application {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Main constructor for Duke
+     *
+     * @param filePath
+     * @throws IOException
+     * @throws GrapieExceptions
+     */
     public Duke(String filePath) throws IOException, GrapieExceptions {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load(), storage);
         ui = new Ui();
     }
 
+    /**
+     * Main method for Duke, to run the program
+     *
+     * @throws IOException
+     */
     public void runDuke() throws IOException {
         ui.greetings();
 

@@ -6,6 +6,15 @@ public class Parser {
         //deals with making sense of the user command
     }
 
+    /**
+     * Main method for Parser to make sense of User Commands.
+     *
+     * Aims to sort user command into List, Delete, Done and Add.
+     * Add consist of everything else, including illegal commands, which will be handled in the TaskList class.
+     *
+     * @param command The user's input.
+     * @return Returns a string stating if its a list, done, delete, or add (todo, event, deadline) command.
+     */
     public String makeSenseOfUserCommand(String command) {
         command = command.trim();
 

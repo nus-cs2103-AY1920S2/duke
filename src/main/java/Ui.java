@@ -10,6 +10,9 @@ public class Ui {
     public static final String DONE = "done";
 
 
+    /**
+     * Constructor for Ui
+     */
     public Ui() {
         //deals with interactions with the user
         //this.userInput = userInput;
@@ -37,11 +40,20 @@ public class Ui {
         TaskList.formattingDivider(intro);
     }
 
+    /**
+     * Says goodbye to the user
+     */
     public void sayonara() {
         TaskList.formattingDivider("Okie!! Goodbye!");
     }
 
-
+    /**
+     * Use Parser to read user's command to call correct method, and prints out any error encountered.
+     *
+     * @param command User's input.
+     * @param tasks TaskList class created in Duke.
+     * @throws IOException
+     */
     public void readCommand(String command, TaskList tasks) throws IOException {
         String commandArr = parser.makeSenseOfUserCommand(command);
 

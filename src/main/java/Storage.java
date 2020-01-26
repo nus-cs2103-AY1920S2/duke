@@ -5,8 +5,15 @@ import java.util.Scanner;
 
 public class Storage {
     String filePath;
+
+    /**
+     * Constructor for Storage class
+     *
+     * @param filePath The filepath to get the Hard Disk data from.
+     * @throws IOException
+     */
     public Storage(String filePath) throws IOException {
-        // deals with loading tasks from the file and saving tasks in the file
+        // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
         this.filePath = filePath;
 
         File file = new File(filePath);
@@ -14,6 +21,13 @@ public class Storage {
         file.createNewFile();
     }
 
+    /**
+     * Load hard disk information into an ArrayList for TaskList class to use.
+     *
+     * @return Returns an ArrayList of Task, loaded from the Hard Disk.
+     * @throws FileNotFoundException
+     * @throws GrapieExceptions
+     */
     public List<Task> load() throws FileNotFoundException, GrapieExceptions {
         List<Task> storingList = new ArrayList<>();
 
@@ -73,6 +87,14 @@ public class Storage {
         return storingList; //return the filled list
     }
 
+    /**
+     * Convert task into correct format, and store in dukeStorage.txt file.
+     *
+     * @param task The task to be converted into the new format.
+     * @param type Todo, Event or Deadline.
+     * @param time The date and time for the Tasks.
+     * @throws IOException
+     */
     public void convertToHardDiskFormatAndStore(Task task, String type, String time) throws IOException {
             /*
             T | 1 | read book
@@ -126,6 +148,13 @@ public class Storage {
         fr.close();
     }
 
+    /**
+     * Modify the done value in the dukeStorage.txt file.
+     * Change not done (X) into done (O)
+     *
+     * @param lineNumber The line number to be deleted from hard disk.
+     * @throws IOException
+     */
     public void replaceLineFromHardDisk(int lineNumber) throws IOException {
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
@@ -156,6 +185,12 @@ public class Storage {
         fileOut.close();
     }
 
+    /**
+     * Delete the corresponding line from dukeStorage.txt file according to the task deleted.
+     *
+     * @param lineNumber The line number to be deleted from hard disk.
+     * @throws IOException
+     */
     public void deleteLineFromHardDisk(int lineNumber) throws IOException {
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);

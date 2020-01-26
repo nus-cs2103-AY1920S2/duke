@@ -1,6 +1,8 @@
 public class ErrorMsg {
+    /**
+     * All Error Messages thrown by GrapieExceptions are under this class.
+     */
     public ErrorMsg() {}
-
 
     public static String emptyDescriptionError = "OOPS!!! The description cannot be empty.";
     public static String invalidNumberError = "OOPS!!! Please input a valid number behind!!";
