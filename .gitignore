@@ -12,3 +12,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# VSCode Java project settings
+.vscode
+.settings
+.classpath
+.project
