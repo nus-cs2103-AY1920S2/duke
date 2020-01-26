@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class TaskHandler {
     private enum  possibleTasks { todo, deadline, event }
 

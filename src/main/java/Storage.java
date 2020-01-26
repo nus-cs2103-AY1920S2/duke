@@ -33,7 +33,7 @@ public class Storage {
                 Task currentTask = TaskHandler.parseFromFile(taskType, taskDescription);
                 tasks.add(currentTask);
             } catch (InvalidInputException e) {
-                System.out.println(e);
+                System.out.println("Cannot parse from text file");
             }
 
 

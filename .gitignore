@@ -12,6 +12,12 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+<<<<<<< HEAD
 src/main/java/src/taskStore.txt
 src/taskStore.txt
 src/main/java/test.txt
+=======
+src/taskStore.txt
+src/main/java/test.txt
+src/main/java/src/taskStore.txt
+>>>>>>> branch-Level-8
