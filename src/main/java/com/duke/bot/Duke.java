@@ -20,26 +20,30 @@ public class Duke {
     }
 
     public void run() {
-        String input = scanner.nextLine();
-        while (!input.equalsIgnoreCase("bye")) {
+        boolean hasNext = true;
+        do {
             try {
-                parseInput(input);
+                hasNext = runOneCycle();
             } catch(DukeException exception) {
                 print(List.of(exception.getMessage()));
             }
-            input = scanner.nextLine();
-        }
-
-        if (input.equalsIgnoreCase("bye")) {
-            print(List.of("Bye. Hope to see you again soon!"));
-        }
+        } while (hasNext);
     }
 
-    private void parseInput(String input) throws DukeException {
+    private boolean runOneCycle() throws DukeException {
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("bye")) {
+            handleByeInput();
+            return false;
+        }
+
         if (input.equalsIgnoreCase("list")) {
             handleListInput(); 
         } else if (input.startsWith("done")) {
             handleDoneInput(input); 
+        } else if (input.startsWith("delete")) {
+            handleDeleteInput(input);
         } else if (input.startsWith("todo")) {
             handleTodoInput(input); 
         } else if (input.startsWith("event")) {
@@ -49,6 +53,11 @@ public class Duke {
         } else {
             throw new DukeException(String.format("☹ OOPS!!! '%s' is an invalid input.", input));
         }
+        return true;
+    }
+
+    private void handleByeInput() {
+        print(List.of("Bye. Hope to see you again soon!"));
     }
     
     private void handleListInput() {
@@ -78,6 +87,27 @@ public class Duke {
             }
         } else {
             throw new DukeException("☹ OOPS!!! Invalid done index.");
+        }
+    }
+
+    private void handleDeleteInput(String input) throws DukeException {
+        Pattern deletePattern = Pattern.compile("^delete\\s+(\\d+)$");
+        Matcher deleteMatcher = deletePattern.matcher(input);
+        if (deleteMatcher.matches()) {
+            int deleteIndex = Integer.parseInt(deleteMatcher.group(1)) - 1;
+            if (deleteIndex >= 0 && deleteIndex < tasks.size()) {
+                Task deleteTask = tasks.get(deleteIndex);
+                tasks.remove(deleteIndex);
+                print(List.of(
+                        "Noted. I've removed this task:",
+                        "  " + deleteTask,
+                        String.format("Now you have %d tasks in the list", tasks.size())
+                ));
+            } else {
+                throw new DukeException("☹ OOPS!!! Invalid delete index.");
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! Invalid delete index.");
         }
     }
 
