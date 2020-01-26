@@ -110,9 +110,9 @@ public class Duke {
             echo(new String[]{"New event added:", "\t" + newEvent.toString(), "You now have " + tasks.size() + " tasks in the list"});
             break;
 
-        case "done":
+        case "delete":
             if (args.equals(""))
-                throw new DukeException("Missing task number for the command 'done'.");
+                throw new DukeException("Missing task number for the command 'delete'.");
 
             int index = Integer.parseInt(args) - 1;
 
@@ -120,7 +120,21 @@ public class Duke {
                 throw new DukeException("The input task number is invalid.");
             }
 
-            tasks.get(index).setIsDone(true);
+            Task task = tasks.remove(index);
+            echo(new String[]{"You have removed the following task:", "\t" + task.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            break;
+
+        case "done":
+            if (args.equals(""))
+                throw new DukeException("Missing task number for the command 'done'.");
+
+            int deleteIndex = Integer.parseInt(args) - 1;
+
+            if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
+                throw new DukeException("The input task number is invalid.");
+            }
+
+            tasks.get(deleteIndex).setIsDone(true);
             listTasks();
             break;
 
