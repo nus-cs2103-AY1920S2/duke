@@ -14,7 +14,11 @@ public class Duke {
         tasks = new ArrayList<Task>();
 
         while (true) {
-            processInput(scanner);
+            try {
+                processInput(scanner);
+            } catch (DukeException e) {
+                echo(e.getMessage());
+            }
         }
     }
 
@@ -59,7 +63,7 @@ public class Duke {
         ProgramOutputHandler.nextLine();
     }
 
-    public static void processInput(Scanner sc) {
+    public static void processInput(Scanner sc) throws DukeException {
         String[] inputs = sc.nextLine().split(" ", 2);
         String command = inputs[0];
         String args = inputs.length > 1 ? inputs[1] : "";
@@ -75,6 +79,9 @@ public class Duke {
             break;
 
         case "todo":
+            if (args.equals(""))
+                throw new DukeException("The description of a todo cannot be empty");
+
             // Add new todo
             Task newTodo = new Todo(args);
             tasks.add(newTodo);
@@ -82,6 +89,9 @@ public class Duke {
             break;
 
         case "deadline":
+            if (args.equals(""))
+                throw new DukeException("The description of a deadline cannot be empty");
+
             // Add new deadline
             String[] splitByInputTime = args.split(" /by ");
             Task newDeadline = new Deadline(splitByInputTime[0], splitByInputTime[1]);
@@ -90,6 +100,9 @@ public class Duke {
             break;
 
         case "event":
+            if (args.equals(""))
+                throw new DukeException("The description of a deadline cannot be empty");
+
             // Add new deadline
             String[] splitByEventTime = args.split(" /at ");
             Task newEvent = new Event(splitByEventTime[0], splitByEventTime[1]);
@@ -98,10 +111,13 @@ public class Duke {
             break;
 
         case "done":
+            if (args.equals(""))
+                throw new DukeException("Missing task number for the command 'done'.");
+
             int index = Integer.parseInt(args) - 1;
+
             if (index < 0 || index >= tasks.size()) {
-                // TODO: Handle exception or throw error message
-                return;
+                throw new DukeException("The input task number is invalid.");
             }
 
             tasks.get(index).setIsDone(true);
@@ -109,8 +125,7 @@ public class Duke {
             break;
 
         default:
-            echo(command + " is not a recognized command. Please try again.");
-            break;
+            throw new DukeException(command + " is not a recognized command. Please try again.");
         }
     }
 }
