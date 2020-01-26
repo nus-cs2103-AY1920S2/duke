@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+
 public enum DukeCommand {
     BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT;
 

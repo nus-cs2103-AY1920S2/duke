@@ -1,3 +1,12 @@
+package duke;
+
+import duke.ui.Ui;
+import duke.task.Storage;
+import duke.task.TaskList;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.Parser;
+import duke.exception.InvalidCommandException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;

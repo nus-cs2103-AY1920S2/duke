@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+
 public class Parser {
     public static Command parseCommand(String input) throws InvalidCommandException {
         String[] commandLine = input.split(" ", 2);
