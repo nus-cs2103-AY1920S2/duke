@@ -1,10 +1,12 @@
 package duke.task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected String period;
+    protected LocalDate period;
 
     /**
      * Constructor of duke.task.Task
@@ -13,15 +15,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.period = "NIL";
     }
 
     /**
-     * Get the period for the duke.task
-     * @return period of the duke.task
+     * Get period
+     * @return date in "MMM d yyyy"
      */
     public String getPeriod() {
-        return period;
+        return period.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
