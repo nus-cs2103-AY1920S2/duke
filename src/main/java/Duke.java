@@ -7,23 +7,39 @@ import java.util.ArrayList;
  */
 public class Duke {
     static String terminateCommand = "bye";
-    static ArrayList<String> commands = new ArrayList<String>();
+    static ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
      * Switching logic for different commands.
      * @param command user command
      */
     private static void commandProcessor(String command) {
-        switch (command) {
+        switch (command.split(" ")[0]) {
         case "list":
-            for (int i = 0; i < commands.size(); i++) {
-                System.out.println(i + " " + commands.get(i));
+            // In case command might be like : list all your homework, then it should be added as a task
+            if (command.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf("%s[%c] %s\n", i, (char)(Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
+                            tasks.get(i).description);
+                }
+                return;
+            }
+            break;
+        case "done":
+            if (command.split(" ").length == 2) {
+                Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+                if (taskIndex < tasks.size()) {
+                    tasks.get(taskIndex).markDone();
+                    return;
+                }
             }
             break;
         default:
-            commands.add(command);
-            System.out.println("added: " + command);
+            break;
         }
+        Task t = new Task(command);
+        tasks.add(t);
+        System.out.println("added: " + command);
     }
 
     /**
