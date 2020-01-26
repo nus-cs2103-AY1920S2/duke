@@ -51,6 +51,7 @@ public class Parser {
 
         if (inputs[0].equals("event") || inputs[0].equals("deadline")) {
             int j = 2;
+
             while (j != inputs.length && inputs[j].charAt(0) != '/') {
                 description = description.concat(" " + inputs[j]);
                 j++;
