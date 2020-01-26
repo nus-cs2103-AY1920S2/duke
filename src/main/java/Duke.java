@@ -117,7 +117,7 @@ public class Duke {
                 else if (todoMatcher.find()){
                     String description = todoMatcher.group(2).trim();
                     if ("".equals(description)) {
-                        System.out.println(line + "☹ OOPS!!! The description of a todo cannot be empty.\n" + line);
+                        System.out.println(line + "OOPS!!! The description of a todo cannot be empty.\n" + line);
                     } else {
                         ToDoTask currentTask = new ToDoTask(description);
                         totalTask ++;
@@ -153,7 +153,7 @@ public class Duke {
                             addTaskEndStr + line);
                 }
                 else {
-                    System.out.println(line + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
+                    System.out.println(line + "OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
                 }
             }
         } catch (IOException e) {
