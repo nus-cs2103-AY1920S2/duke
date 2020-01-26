@@ -1,8 +1,13 @@
+import task.Task;
+import task.Todo;
+import task.Deadline;
+import task.Event;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello there! I am Duke, your personal assistant. May I know your name?");
         String name = scanner.nextLine();
@@ -96,7 +101,7 @@ public class Duke {
                         System.out.println("\t\t" + toComplete);
                     }
                     catch (Exception e) {
-                        System.out.println(e);
+                        System.out.println("\t\t" + "Please specify which task you wish to mark as completed.");
                     }
                     break;
 
@@ -108,7 +113,7 @@ public class Duke {
                         System.out.println("\t" + "Now, you have " + taskList.size() + " tasks in the list.");
                     }
                     catch (Exception e) {
-                        System.out.println(e);
+                        System.out.println("\t\t" + "Please specify which task you wish to delete.");
                     }
                     break;
 
