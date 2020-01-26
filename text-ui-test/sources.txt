@@ -1,8 +1,8 @@
-C:\Users\engxu\IdeaProjects\duke\src\main\java\Database.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Deadline.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\Duke.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\DukeException.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Event.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\ReplyFormat.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Task.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Todo.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.Database.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.task.Deadline.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.Duke.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.DukeException.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.task.Event.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.ReplyFormat.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.task.Task.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke.task.Todo.java

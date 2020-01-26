@@ -1,10 +1,10 @@
-package task;
+package duke.task;
 
 public class Deadline extends Task {
 
     /**
-     * Constructor for task.Deadline
-     * @param description description of task.Deadline
+     * Constructor for duke.task.Deadline
+     * @param description description of duke.task.Deadline
      */
     public Deadline(String description, String due) {
         super(description);

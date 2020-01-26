@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Task {
     protected String description;
@@ -7,8 +7,8 @@ public class Task {
     protected String period;
 
     /**
-     * Constructor of task.Task
-     * @param description description of the task
+     * Constructor of duke.task.Task
+     * @param description description of the duke.task
      */
     public Task(String description) {
         this.description = description;
@@ -17,8 +17,8 @@ public class Task {
     }
 
     /**
-     * Get the period for the task
-     * @return period of the task
+     * Get the period for the duke.task
+     * @return period of the duke.task
      */
     public String getPeriod() {
         return period;
@@ -33,8 +33,8 @@ public class Task {
     }
 
     /**
-     * Get status of the task
-     * @return task status
+     * Get status of the duke.task
+     * @return duke.task status
      */
     public boolean getStatus() {
         return isDone;
@@ -55,23 +55,23 @@ public class Task {
     }
 
     /**
-     * Get the description of the task
-     * @return description of the task
+     * Get the description of the duke.task
+     * @return description of the duke.task
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Get the task type
-     * @return type of the task
+     * Get the duke.task type
+     * @return type of the duke.task
      */
     public String getType() {
         return type;
     }
 
     /**
-     * Return status icon and description of the task
+     * Return status icon and description of the duke.task
      * @return status icon and description
      */
     @Override

@@ -1,7 +1,9 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,7 @@ public class Database {
             if (indexForSeparator <= 9) {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
-            String description = data.substring(9, indexForSeparator - 1);
+            String description = data.substring(8, indexForSeparator - 1);
             if (!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
             }
@@ -69,7 +71,7 @@ public class Database {
             if (due.strip().equals("")) {
                 throw new DukeException("\u2639 OOPS!!! The due date of a deadline cannot be empty.");
             }
-            records.add(new Deadline(description, due));
+            records.add(new Deadline(description.substring(1), due));
         } else if (data.startsWith("event")) {
             String duration;
             if(data.contains(" /at ")) {
@@ -84,7 +86,8 @@ public class Database {
             if (indexForSeparator <= 6) {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
-            String description = data.substring(6, indexForSeparator - 1);
+            String description = data.substring(5, indexForSeparator - 1);
+            System.out.println(description);
             if (!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
@@ -99,7 +102,7 @@ public class Database {
             if (duration.strip().equals("")) {
                 throw new DukeException("\u2639 OOPS!!! The duration of a event cannot be empty.");
             }
-            records.add(new Event(description, duration));
+            records.add(new Event(description.substring(1), duration));
         } else {
             throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -115,9 +118,9 @@ public class Database {
     }
 
     /**
-     * Set the task as Done
-     * @param num index where the task at
-     * @throws DukeException when no task found in that index
+     * Set the duke.task as Done
+     * @param num index where the duke.task at
+     * @throws DukeException when no duke.task found in that index
      */
     public void markDone(int num) throws DukeException{
         try {
@@ -125,15 +128,15 @@ public class Database {
             task.setStatusDone();
             records.set(num - 1, task);
         } catch(IndexOutOfBoundsException e) {
-            throw new DukeException("No task found in that index!");
+            throw new DukeException("No duke.task found in that index!");
         }
     }
 
     /**
-     * Delete the task at the index
-     * @param num index where the task located at
-     * @return task that being deleted
-     * @throws DukeException when no task found in that index
+     * Delete the duke.task at the index
+     * @param num index where the duke.task located at
+     * @return duke.task that being deleted
+     * @throws DukeException when no duke.task found in that index
      */
     public Task deleteTask(int num) throws DukeException{
         Task task;
@@ -141,16 +144,16 @@ public class Database {
             task = records.get(num - 1);
             records.remove(num - 1);
         } catch(IndexOutOfBoundsException e) {
-            throw new DukeException("No task found in that index!");
+            throw new DukeException("No duke.task found in that index!");
         }
         amtOfTask -= 1;
         return task;
     }
 
     /**
-     * Get task.Task at specific index
-     * @param num index the task locate at
-     * @return task.Task at the index
+     * Get duke.task.Task at specific index
+     * @param num index the duke.task locate at
+     * @return duke.task.Task at the index
      */
     public Task getTask(int num) {
         return records.get(num - 1);

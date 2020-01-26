@@ -1,4 +1,6 @@
-import task.Task;
+package duke;
+
+import duke.task.Task;
 
 import java.util.Scanner;
 
@@ -50,7 +52,7 @@ public class Duke {
     }
 
     /**
-     * Duke greet the user
+     * duke.Duke greet the user
      */
     public static void greet() {
         String logo = " ____        _        \n"
@@ -102,7 +104,7 @@ public class Duke {
     }
 
     /**
-     * Duke reply one sentence to the user
+     * duke.Duke reply one sentence to the user
      * @param sentence message reply to user
      */
     public static void reply(String sentence) {
@@ -122,44 +124,44 @@ public class Duke {
     }
 
     /**
-     * Reply the user that respective task has been added to the list
+     * Reply the user that respective duke.task has been added to the list
      */
     public static void replyAdded() {
         int AmtOfTask = database.getAmountOfTask();
         message.clearMessage();
-        message.addSentence("Got it. I've added this task:", 1);
+        message.addSentence("Got it. I've added this duke.task:", 1);
         message.addSentence(database.getTask(AmtOfTask).toString(), 3);
         if (AmtOfTask > 1) {
             message.addSentence("Now you have "+ AmtOfTask +" tasks in the list.", 1);
         } else {
-            message.addSentence("Now you have 1 task in the list.", 1);
+            message.addSentence("Now you have 1 duke.task in the list.", 1);
         }
         System.out.print(message.replyMessage());
     }
 
     /**
-     * Reply the user that the task has marked done
-     * @param num index where the task located
-     * @throws DukeException when no task found in that index
+     * Reply the user that the duke.task has marked done
+     * @param num index where the duke.task located
+     * @throws DukeException when no duke.task found in that index
      */
     public static void replyDone(int num) throws DukeException{
         database.markDone(num);
         Task task = database.getTask(num);
         message.clearMessage();
-        message.addSentence("Nice! I've marked this task as done:", 1);
+        message.addSentence("Nice! I've marked this duke.task as done:", 1);
         message.addSentence("  " + task.toString(), 3);
         System.out.print(message.replyMessage());
     }
 
     /**
-     * Reply the user that the task has deleted
-     * @param num index where the task located
-     * @throws DukeException when no task found in that index
+     * Reply the user that the duke.task has deleted
+     * @param num index where the duke.task located
+     * @throws DukeException when no duke.task found in that index
      */
     public static void replyDelete(int num) throws DukeException{
         Task task = database.deleteTask(num);
         message.clearMessage();
-        message.addSentence("Noted. I've removed this task:", 1);
+        message.addSentence("Noted. I've removed this duke.task:", 1);
         message.addSentence("  " + task.toString(), 3);
         System.out.print(message.replyMessage());
     }

@@ -1,9 +1,9 @@
-package task;
+package duke.task;
 
 public class Todo extends Task {
     /**
-     * Constructor for task.Todo
-     * @param description description of task.Todo
+     * Constructor for duke.task.Todo
+     * @param description description of duke.task.Todo
      */
     public Todo(String description) {
         super(description);

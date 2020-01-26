@@ -1,10 +1,10 @@
-package task;
+package duke.task;
 
 public class Event extends Task {
 
     /**
-     * Constructor for task.Event
-     * @param description description of task.Event
+     * Constructor for duke.task.Event
+     * @param description description of duke.task.Event
      */
     public Event(String description, String duration) {
         super(description);
