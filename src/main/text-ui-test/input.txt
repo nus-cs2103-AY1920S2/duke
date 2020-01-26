@@ -1,0 +1,16 @@
+list
+todo Homework
+list
+event Exam /at 26 Jan 2020, 5 PM
+list
+deadline Assignment 1 /by 27 Jan 2020, 3 PM
+list
+event Exam /at 26 Jan 2020, 5 PM
+list
+done 2
+list
+done 1
+list
+done 3
+list
+bye

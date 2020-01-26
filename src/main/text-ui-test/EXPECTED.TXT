@@ -1,0 +1,51 @@
+Hello! I'm Duke
+What can I do for you?
+You have no tasks in your list.
+Got it. I've added this task:
+[T][✘] Homework
+Now you have 1 task in the list.
+Here are the tasks in your list:
+1.[T][✘] Homework
+Got it. I've added this task:
+[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] Homework
+2.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Got it. I've added this task:
+[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] Homework
+2.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+Got it. I've added this task:
+[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] Homework
+2.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Nice! I've marked this task as done:
+[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+Here are the tasks in your list:
+1.[T][✘] Homework
+2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Nice! I've marked this task as done:
+[T][✓] Homework
+Here are the tasks in your list:
+1.[T][✓] Homework
+2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Nice! I've marked this task as done:
+[D][✓] Assignment 1 (by: 27 Jan 2020, 3 PM)
+Here are the tasks in your list:
+1.[T][✓] Homework
+2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+3.[D][✓] Assignment 1 (by: 27 Jan 2020, 3 PM)
+4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+Bye. Hope to see you again soon!
