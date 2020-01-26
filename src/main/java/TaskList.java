@@ -6,6 +6,10 @@ public class TaskList {
 
     public ArrayList<Task> taskList = new ArrayList<>();
 
+    public TaskList() {
+        this.taskList = new ArrayList<Task>();
+    }
+
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
@@ -22,7 +26,7 @@ public class TaskList {
         taskList.remove(index);
     }
 
-    public void setDone (int index) {
+    public void setDone (int index) throws IndexOutOfBoundsException {
         taskList.get(index).markAsDone();
     }
 

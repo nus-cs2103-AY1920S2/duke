@@ -15,7 +15,7 @@ public class Parser {
         return sc.nextLine();
     }
 
-    public String getCommandType(String command) {
+    public String getCommandType(String command) throws DukeException {
         if (command.contains("list")) {
             return "list";
         } else if (command.contains("bye")) {
@@ -30,7 +30,7 @@ public class Parser {
             return "event";
         } else if (command.contains("todo")) {
             return "todo";
-        } else return "Command not understood. Please try again";
+        } else throw new DukeException("Invalid command. Please try again.");
     }
 
     public Deadline getDeadline(String str) throws DukeException, ParseException {
