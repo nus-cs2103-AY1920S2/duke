@@ -17,7 +17,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you today?");
+        System.out.println(logo + "Welcome! What can I do for you today?");
 
         while (true) {
             System.out.print("> ");
