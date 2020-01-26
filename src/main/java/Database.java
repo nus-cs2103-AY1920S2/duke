@@ -1,3 +1,8 @@
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,9 +139,9 @@ public class Database {
     }
 
     /**
-     * Get Task at specific index
+     * Get task.Task at specific index
      * @param num index the task locate at
-     * @return Task at the index
+     * @return task.Task at the index
      */
     public Task getTask(int num) {
         return records.get(num - 1);
