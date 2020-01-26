@@ -47,7 +47,11 @@ public class TaskDate implements Serializable {
         if (timeInt >= 0 && timeInt <= 59) {
             hour = 12;
         } else if (timeInt >= 1200) {
-            hour -= 12;
+            if (timeInt <= 1259) {
+                hour = 12;
+            } else {
+                hour -= 12;
+            }
             m = "pm";
         }
         String hourRes = String.valueOf(hour);
