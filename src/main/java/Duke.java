@@ -27,6 +27,8 @@ public class Duke {
 
         List<Task> tasks = new ArrayList<>();
 
+        String[] str1, str2 = null;
+
         while (true) {
             try {
                 String cmd = br.readLine();
@@ -50,19 +52,32 @@ public class Duke {
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
                 } else if (cmd.startsWith(TODO_CMD)) {
-                    String[] str  = cmd.split("todo ");
-                    if (str.length < 2) {
+                    str1  = cmd.split("todo ");
+
+                    if (str1.length < 2) {
                         throw new DukeException("The description of a todo cannot  be empty");
                     }
-                    Task t = new Todo(cmd.split("todo ")[1]);
+                    Task t = new Todo(str1[1]);
 
                     tasks.add(t);
 
                     printAddedTask(t, tasks);
                 } else if (cmd.startsWith(DEADLINE_CMD)) {
-                    String temp = cmd.split("deadline ")[1];
-                    String name = temp.split(" /by ")[0];
-                    String by = temp.split(" /by ")[1];
+                    str1 = cmd.split("deadline ");
+
+                    if (str1.length < 2) {
+                        throw new DukeException("The description and timing of a deadline cannot be empty");
+                    }
+
+                    String temp = str1[1];
+                    str2 = temp.split(" /by ");
+
+                    if (str2.length < 2) {
+                        throw new DukeException("Both the description and timing of a deadline cannot be empty");
+                    }
+
+                    String name = str2[0];
+                    String by = str2[1];
 
                     Task t = new Deadline(name, by);
 
@@ -70,9 +85,22 @@ public class Duke {
 
                     printAddedTask(t, tasks);
                 } else if (cmd.startsWith(EVENT_CMD)) {
-                    String temp = cmd.split("event ")[1];
-                    String name = temp.split(" /at ")[0];
-                    String by = temp.split(" /at ")[1];
+                    str1 = cmd.split("event ");
+
+                    if (str1.length < 2) {
+                        throw new DukeException("The description and timing of an event cannot be empty");
+                    }
+
+                    String temp = str1[1];
+
+                    str2 = temp.split(" /at ");
+
+                    if (str2.length < 2) {
+                        throw new DukeException("Both the description and timing of an event cannot be empty");
+                    }
+
+                    String name = str2[0];
+                    String by = str2[1];
 
                     Task t = new Event(name, by);
 
@@ -82,6 +110,8 @@ public class Duke {
                 } else if (cmd.equals(BYE_CMD)) {
                     System.out.println(BYE_MSG);
                     break;
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (IOException e) {
                 System.out.println("Sorry, an error has occurred:");
