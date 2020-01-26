@@ -1,11 +1,3 @@
-<<<<<<< .merge_file_a04196
-public class Deadline extends Task {
-    String time;
-
-    public Deadline(String description, String time) {
-        super(description);
-        this.time = time;
-=======
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,18 +30,14 @@ public class Deadline extends Task {
             throw new GrapieExceptions("OOPS!!! Please format your date like this: YYYY-MM-DD TTTT");
         }
 
->>>>>>> .merge_file_a06784
     }
 
     @Override
     public String toString() {
-<<<<<<< .merge_file_a04196
-        return "[D]" + super.toString() + " (by: " + time + ")";
-=======
         return "[D]" + super.toString() + " (by: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
->>>>>>> .merge_file_a06784
     }
 }
+
 
 
 

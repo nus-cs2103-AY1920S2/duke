@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import java.io.*;
-=======
 import java.time.LocalDate;
->>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,7 +58,6 @@ public class LevelMethods {
         formattingDivider(printStr);
     }
 
-<<<<<<< HEAD
     public void createStorage() throws IOException {
 
         // inserts correct file path separator on *nix and Windows
@@ -106,7 +102,7 @@ public class LevelMethods {
         file.createNewFile();
     }
 
-    public void updateListFromFile() throws IOException {
+    public void updateListFromFile() throws IOException, GrapieExceptions {
 //        String str = "Hello";
 //        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
 //        writer.write(str);
@@ -149,7 +145,7 @@ public class LevelMethods {
                 //is a event or deadline
                 if (dataSplited[0].equals("E")) {
                     //event
-                    Task task = new Event(dataSplited[2], dataSplited[3]);
+                    Event task = new Event(dataSplited[2], dataSplited[3]);
                     if (dataSplited[1].equals("O")) {
                         task.isDone = true;
                     }
@@ -158,7 +154,7 @@ public class LevelMethods {
 
                 } else {
                     //deadline
-                    Task task = new Deadline(dataSplited[2], dataSplited[3]);
+                    Deadline task = new Deadline(dataSplited[2], dataSplited[3]);
                     if (dataSplited[1].equals("O")) {
                         task.isDone = true;
                     }
@@ -186,27 +182,27 @@ public class LevelMethods {
             [T][O] join sports club
              */
 
-            String doneOrNotDone = "";
-            if (task.isDone) {
-                doneOrNotDone += "O";
-            } else {
-                doneOrNotDone += "X";
-            }
+        String doneOrNotDone = "";
+        if (task.isDone) {
+            doneOrNotDone += "O";
+        } else {
+            doneOrNotDone += "X";
+        }
 
-            String newDescription = "";
-            if (type.equals("T")) {
-                //todo
+        String newDescription = "";
+        if (type.equals("T")) {
+            //todo
 //                String doneOrNotDone = description.substring(4,5);
 //                String todoDescription = description.substring(7, description.length());
 
-                newDescription += type + " | " + doneOrNotDone + " | " + task.description;
-            } else {
-                //event & deadline
+            newDescription += type + " | " + doneOrNotDone + " | " + task.description;
+        } else {
+            //event & deadline
 //                String doneOrNotDone = description.substring(4,5);
 //                String todoDescription = description.substring(7, description.length());
 
-                newDescription += type + " | " + doneOrNotDone + " | " + task.description + " | " + time;
-            }
+            newDescription += type + " | " + doneOrNotDone + " | " + task.description + " | " + time;
+        }
 
         File file = new File(filePath);
         FileWriter fr = new FileWriter(file, true);
@@ -215,17 +211,6 @@ public class LevelMethods {
         Scanner myReader = new Scanner(file);
 
         fr.close();
-=======
-    public void time() {
-        /*
-        Minimal: Store deadline dates as a java.time.LocalDate in your task objects.
-        Accept dates in a format such as yyyy-mm-dd format (e.g., 2019-10-15)
-        and print in a different format such as MMM d yyyy e.g., (Oct 15 2019).
-         */
-
-
-
->>>>>>> branch-Level-8
     }
 
 
@@ -239,7 +224,7 @@ public class LevelMethods {
             if (inputStr.substring(0, 4).equals("todo") && inputStr.length() > 5) {
                 String detailsStr = inputStr.substring(5, inputStr.length());
 
-                String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s","");
+                String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s", "");
 
                 if (checkIfTodoIsEmpty.length() == 0) {
                     //That means it is empty behing todo
@@ -266,10 +251,7 @@ public class LevelMethods {
                     //not able to split string properly
                     throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD TTTT");
                 } else {
-<<<<<<< HEAD
-=======
-//                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
->>>>>>> branch-Level-8
+
                     Event event = new Event(eventAndTime[0], eventAndTime[1]);
                     storingList.add(event);
 
@@ -292,13 +274,7 @@ public class LevelMethods {
                 String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
 
                 if (eventAndTime.length > 1) {
-<<<<<<< HEAD
 
-=======
-                    //LocalDate localDate = LocalDate.parse(eventAndTime[1]);
-                    //String haha = "2019-12-01";
-//                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
->>>>>>> branch-Level-8
                     Deadline deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
                     storingList.add(deadline);
 
@@ -327,7 +303,7 @@ public class LevelMethods {
         try {
             Integer.parseInt(numStr);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -369,7 +345,7 @@ public class LevelMethods {
             //remember to add check for already completed task
 
             String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
-            strNumberDone.replaceAll("\\s+",""); //remove all white spaces
+            strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
 
             boolean isANumber = isNumber(strNumberDone);
 
@@ -435,7 +411,7 @@ public class LevelMethods {
             throw new GrapieExceptions("Please input a valid number behind 'delete'!!");
         } else {
             String strNumberDeleted = inputStr.substring(7, inputStr.length());
-            strNumberDeleted.replaceAll("\\s+",""); //remove all white spaces
+            strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
 
             boolean isANumber = isNumber(strNumberDeleted);
 
@@ -446,8 +422,8 @@ public class LevelMethods {
 
                     int newSize = storingList.size() - 1;
                     String toPrint = " Alrighty. I've removed this task: \n"
-                            + storingList.get(numToDelete-1)
-                            + "\n Now you have " +  newSize + " tasks in the list." ;
+                            + storingList.get(numToDelete - 1)
+                            + "\n Now you have " + newSize + " tasks in the list.";
 
                     storingList.remove(numToDelete - 1);
 
@@ -475,7 +451,6 @@ public class LevelMethods {
 
         formattingDivider(stringList);
     }
-
 
 
     public void sayonara() {
