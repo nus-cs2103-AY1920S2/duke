@@ -1,7 +1,9 @@
+package task;
+
 public class Todo extends Task {
     /**
-     * Constructor for Todo
-     * @param description description of Todo
+     * Constructor for task.Todo
+     * @param description description of task.Todo
      */
     public Todo(String description) {
         super(description);

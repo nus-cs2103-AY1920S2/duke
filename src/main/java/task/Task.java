@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -5,7 +7,7 @@ public class Task {
     protected String period;
 
     /**
-     * Constructor of Task
+     * Constructor of task.Task
      * @param description description of the task
      */
     public Task(String description) {

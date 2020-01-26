@@ -1,8 +1,8 @@
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Database.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\Deadline.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Deadline.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\Duke.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\DukeException.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\Event.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Event.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\ReplyFormat.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\Task.java
-C:\Users\engxu\IdeaProjects\duke\src\main\java\Todo.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Task.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\task.Todo.java

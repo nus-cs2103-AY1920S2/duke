@@ -1,8 +1,10 @@
+package task;
+
 public class Event extends Task {
 
     /**
-     * Constructor for Event
-     * @param description description of Event
+     * Constructor for task.Event
+     * @param description description of task.Event
      */
     public Event(String description, String duration) {
         super(description);
