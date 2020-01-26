@@ -15,6 +15,8 @@ public abstract class Task {
         isDone = false;
     }
 
+    public String getName() { return this.name; }
+
     public void MarkAsDone() {
         isDone = true;
     }

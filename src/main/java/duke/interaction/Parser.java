@@ -28,6 +28,8 @@ public class Parser {
                     return new DeleteCommand((in.hasNextInt() ? in.nextInt() - 1 : -1));
                 case "date":
                     return new DateCommand(in.nextLine().trim());
+                case "find":
+                    return new FindCommand((in.hasNextLine() ? in.nextLine().trim() : ""));
                 default:
                     if (in.hasNextLine())
                         in.nextLine();
