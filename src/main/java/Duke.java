@@ -23,6 +23,9 @@ public class Duke {
             else if (splitstr[0].toLowerCase().equals("done")) { // done
                 markCompleted(tasks, Integer.parseInt(splitstr[1])-1); // whichever task is marked completed
             }
+            else if (splitstr[0].toLowerCase().equals("delete")) { // delete
+                deleteTask(tasks, Integer.parseInt(splitstr[1])-1); // whichever task you want to delete
+            }
             else {
                 String[] time_split = user_input.split("/"); // the 2nd half contains the deadline
                 if (splitstr[0].toLowerCase().equals("todo")) {
@@ -122,6 +125,29 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:");
         tasks[taskNum].updateisDone(true);
         System.out.println("[" + tasks[taskNum].checkIfComplete() + "] " + tasks[taskNum].getDescription());
+    }
+
+    public static void deleteTask(Task[] tasks, int taskNum) {
+        System.out.println("Noted. I've removed this task:");
+        if (tasks[taskNum].getTaskType().equals("[T]")) { // if it's a todo
+            System.out.println(tasks[taskNum].getTaskType() + tasks[taskNum].getCompletionStatus()
+                    + tasks[taskNum].getDescription());
+        }
+        else if (tasks[taskNum].getTaskType().equals("D")) { // it's a deadline
+            System.out.println(tasks[taskNum].getTaskType() + tasks[taskNum].getCompletionStatus()
+                    + tasks[taskNum].getDescription() + tasks[taskNum].getDeadline());
+        }
+        else { // it's an event liao
+            System.out.println(tasks[taskNum].getTaskType() + tasks[taskNum].getCompletionStatus()
+                    + tasks[taskNum].getDescription() + tasks[taskNum].getDeadline());
+        }
+
+        // here, we implement some for loop to shift all the tasks forward
+        for (int i = taskNum; i < counter-1; i++) {
+            tasks[i] = tasks[i+1];
+        }
+        counter--;
+        System.out.println("Now you have " + Integer.toString(counter) + " tasks in the list.");
     }
 
 }
