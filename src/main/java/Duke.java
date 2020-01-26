@@ -1,7 +1,7 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 import java.io.*;
+import java.time.format.DateTimeParseException;
+import java.time.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -100,7 +100,13 @@ public class Duke {
                         if(subS.length == 1) {
                             throw new DukeException("It appears that no due date was provided for this deadline!");
                         }
-                        taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
+                       try{
+                           taskList.add(new Deadline(commands[0].substring(9, commands[0].length()), commands[1].substring(3)));
+                       }
+                       catch (DateTimeParseException e) {
+                           throw new DukeException("Invalid date format for deadline used! Please re-try using the date format 'yyyy-mm-dd HHMM'");
+
+                       }
                     } else if (eventType[0].equals("todo")) {
                         taskList.add(new ToDo(commands[0].substring(5, commands[0].length())));
                     }
@@ -131,7 +137,6 @@ public class Duke {
         }
 
     }
-
     public static void saveData(ArrayList<Task> taskList) throws IOException{
         FileWriter wr = new FileWriter("data/duke.txt");
         wr.write("");
@@ -171,7 +176,16 @@ public class Duke {
 
             else if(initial == 'D'){
                 String[] subStringy = desc.split(" \\(by: ");
-                taskList.add (new Deadline(subStringy[0], subStringy[1].substring(0, subStringy[1].length() - 1)));
+                //taskList.add (new Deadline(subStringy[0], subStringy[1].substring(0, subStringy[1].length() - 1)));
+                String day = subStringy[1].substring(0,2);
+                String month = subStringy[1].substring(3,5);
+                String year = subStringy[1].substring(6,10);
+                //String timing = subStringy[1].substring(11, subStringy[1].length() - 1);
+                String timing = subStringy[1].substring(11, 15);
+                String reString = year + "-" + month + "-" + day + " " + timing;
+
+                //taskList.add (new Deadline(subStringy[0], subStringy[1].substring(0, subStringy[1].length() - 1)));
+                taskList.add(new Deadline(subStringy[0], reString));
 
             }
 
