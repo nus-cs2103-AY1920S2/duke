@@ -9,10 +9,19 @@ public class FindCommand extends Command {
 
     private String keyword;
 
+    /**
+     * FindCommand constructor.
+     * @param keyword of the word user wants to match.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes Find behaviour of finding all tasks containing a keyword.
+     * @param taskList to access collection of tasks.
+     * @param storage to access save-load functionality.
+     */
     public void execute(TaskList taskList, Storage storage) {
         Ui.showLine();
         if (keyword.isBlank()) {
@@ -31,5 +40,9 @@ public class FindCommand extends Command {
         Ui.showLine();
     }
 
+    /**
+     * Inform if command is an exit command.
+     * @return boolean indicating if command is an exit command.
+     */
     public boolean isExit() { return false; }
 }
