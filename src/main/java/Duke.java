@@ -1,12 +1,8 @@
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Scanner;
-import java.nio.file.Paths;
 
 public class Duke {
     /**
@@ -20,10 +16,7 @@ public class Duke {
 
         try {
             readStorage();
-            for (Task t: storedTasks) {
-                System.out.println(t.store());
-            }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println(e.toString());
             System.exit(1);
         }
@@ -146,51 +139,50 @@ public class Duke {
         }
     }
 
-    private static <T extends Task> void readStorage() {
+    private static void readStorage() {
         Scanner scan;
         try {
             File storage = new File("./data/duke.txt");
             scanner = new Scanner(storage);
-            while(scanner.hasNext()) {
+            while (scanner.hasNext()) {
                 String elementLine = scanner.nextLine();
-                System.out.println("ElementLine: " + elementLine);
                 String[] elements = elementLine.split("\\|");
-                System.out.println(elements[2]);
-                switch(elements[0]) {
-                    case "T":
-                        storedTasks.add(Todo.create(elements));
-                        break;
-                    case "E":
-                        storedTasks.add(Event.create(elements));
+                switch (elements[0]) {
+                case "T":
+                    storedTasks.add(Todo.create(elements));
                     break;
-                    case"D":
-                        storedTasks.add(Deadline.create(elements));
-                        break;
-                    default:
-                        storedTasks.add(Task.create(elements));
-                        break;
+                case "E":
+                    storedTasks.add(Event.create(elements));
+                    break;
+                case "D":
+                    storedTasks.add(Deadline.create(elements));
+                    break;
+                default:
+                    storedTasks.add(Task.create(elements));
+                    break;
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println("Error reading from storage file duke.txt");
         }
     }
+
     private static void updateStorage() {
         FileWriter writer;
         try {
             File storage = new File("./data/duke.txt");
             writer = new FileWriter(storage);
-            for(Task t : storedTasks) {
-                System.out.println("writing "+ t.store());
+            for (Task t : storedTasks) {
                 writer.write(t.store() + "\n");
             }
             writer.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error opening duke.txt to write to");
         } finally {
             return;
         }
     }
+
     private static void divider(String s) {
         if (s.length() > 0) {
             System.out.println("____________________________________________________________\n" + s + "\n"
