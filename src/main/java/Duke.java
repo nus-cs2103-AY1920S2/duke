@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,12 +40,34 @@ public class Duke {
                             String[] byDeadline = inputBreakdown[1].split(" /by ");
 
                             try {
+                                //Initialising proTip; also used as a silent check for MissingByDeadlineException
+                                String proTip = byDeadline[1];
+
+                                try {
+                                    try {
+                                        DateTimeFormatter inputDTF = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                                        LocalDateTime outputDT = LocalDateTime.parse(byDeadline[1], inputDTF);
+                                        DateTimeFormatter outputDTF = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mma");
+                                        byDeadline[1] = outputDT.format(outputDTF);
+                                    } catch (DateTimeParseException e) {
+                                        throw new UnknownDateTimeException();
+                                    }
+                                } catch (DukeException e) {
+                                    proTip = e.toString();
+                                }
+
                                 taskList.add(new Deadline(false, taskNo++, byDeadline[0], byDeadline[1]));
-                                print("Got it. I've added this task:\n\t[D][✗] "
+
+                                String deadlineOutput = ("Got it. I've added this task:\n\t[D][✗] "
                                         + byDeadline[0] + " (by: " + byDeadline[1] + ")" +
                                         "\nNow you have " + taskList.size() + " task(s) in the list.");
+
+                                if (!proTip.isEmpty()) {
+                                    deadlineOutput = deadlineOutput + "\nPS: " + proTip;
+                                }
+
+                                print(deadlineOutput);
                             } catch (ArrayIndexOutOfBoundsException e) {
-                                taskNo--;
                                 throw new MissingByDeadlineException();
                             }
                         } catch (ArrayIndexOutOfBoundsException e) {
