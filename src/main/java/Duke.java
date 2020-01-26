@@ -1,30 +1,28 @@
-import java.io.*;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.DateTimeException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Duke {
-    private static final String FILE_SEPARATOR = File.separator;
-    // Map project path to the directory from which you run your program
-    public static final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
-    private static String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
-    private static String saveFilePath;
+    private Storage storage;
+    protected TaskList tasks;
     protected static final String HORIZONTAL_BAR =
             "____________________________________________________________";
     protected static final String NEWLINE = System.lineSeparator();
     protected static final String INDENTATION = "    ";
     protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    protected ArrayList<Task> tasks = new ArrayList<>();
     HashMap<String, CommandType> validCommands;
 
     public Duke(String saveFile) {
-        saveFilePath = dataDirectoryPath + FILE_SEPARATOR + saveFile;
-        setupDataDirectory();
-        createSaveFile();
-        loadSaveFile();
+        storage = new Storage(saveFile);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            // Did not load tasks from save file
+            e.printStackTrace();
+            tasks = new TaskList();
+        }
         setupValidCommands();
     }
 
@@ -51,64 +49,6 @@ public class Duke {
         this.validCommands.put("bye", CommandType.BYE);
         this.validCommands.put("done", CommandType.DONE);
         this.validCommands.put("delete", CommandType.DELETE);
-    }
-
-    protected void setupDataDirectory() {
-        try {
-            // Create directories along path if they don't exist
-            Files.createDirectories(Paths.get(dataDirectoryPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected void createSaveFile() {
-        try {
-            // Create a new file, exception will be thrown if file already exists
-            Files.createFile(Paths.get(saveFilePath));
-        } catch (FileAlreadyExistsException e) {
-            // File exists
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected void loadSaveFile() {
-        try (BufferedReader saveFile = new BufferedReader(new FileReader(saveFilePath))) {
-            // Load data into tasks
-            String line = saveFile.readLine();
-            /* Format of save file
-            [task type],[complete status],[task information]...
-            Example:
-            todo,1,read book
-            deadline,0,return book,June 6th
-            event,0,project meeting,Aug 6th 2-4pm
-            */
-            while (line != null) {
-                // Store task
-                String[] taskWords = line.split(",");
-                boolean isDone = taskWords[1].equals("1");
-                String description = taskWords[2];
-                switch(taskWords[0].toLowerCase()) {
-                case "todo":
-                    tasks.add(new Todo(taskWords[2], isDone));
-                    break;
-                case "deadline":
-                    String deadline = taskWords[3];
-                    tasks.add(new Deadline(description, deadline, isDone));
-                    break;
-                case "event":
-                    String eventTime = taskWords[3];
-                    tasks.add(new Event(description, eventTime, isDone));
-                    break;
-                default:
-                    break;
-                }
-                line = saveFile.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -199,7 +139,7 @@ public class Duke {
             switch (commandWords[0]) {
             case "bye":
                 // User request for exit
-                updateSaveFile();
+                storage.updateSaveFile(tasks);
                 break;
             case "list":
                 printTextWithIndentation(HORIZONTAL_BAR);
@@ -217,7 +157,7 @@ public class Duke {
                     int taskNumber = Integer.parseInt(commandWords[1]);
                     Task task = tasks.get(taskNumber - 1);
                     markTaskAsDone(task);
-                    updateSaveFile();
+                    storage.updateSaveFile(tasks);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid Task Number given!");
                 }
@@ -231,11 +171,10 @@ public class Duke {
                 // Get task description, get substring starting at index 5
                 // Remove first word
                 String todoDescription = command.substring("todo".length() + 1);
-                Task newTodoTask = new Todo(todoDescription);
-                tasks.add(newTodoTask);
+                Task newTodoTask = tasks.addTodoTask(todoDescription);
                 // Print out information about added task
                 printTaskAddition(newTodoTask);
-                updateSaveFile();
+                storage.updateSaveFile(tasks);
                 break;
             case "deadline":
                 // Get deadline, find index of "/by"
@@ -253,10 +192,9 @@ public class Duke {
                 String deadline = command.substring(deadlineStartIndex);
                 // Add new task
                 try {
-                    Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
-                    tasks.add(newDeadlineTask);
+                    Task newDeadlineTask = tasks.addDeadlineTask(deadlineDescription, deadline);
                     printTaskAddition(newDeadlineTask);
-                    updateSaveFile();
+                    storage.updateSaveFile(tasks);
                 } catch (DateTimeException e) {
                     // Given deadline string was not in correct format
                     throw new DukeException("Given deadline task due date was not in correct format" +
@@ -276,10 +214,9 @@ public class Duke {
                 String eventTime = command.substring(eventDelimiterIndex + eventDelimiter.length() + 1);
                 // Add new event to task list
                 try {
-                    Task newEvent = new Event(eventDescription, eventTime);
-                    tasks.add(newEvent);
+                    Task newEvent = tasks.addEventTask(eventDescription, eventTime);
                     printTaskAddition(newEvent);
-                    updateSaveFile();
+                    storage.updateSaveFile(tasks);
                 } catch (DateTimeException e) {
                     // Given event time could not be converted a valid date
                     throw new DukeException("Given event task due date was not in correct format" +
@@ -291,7 +228,7 @@ public class Duke {
                     int taskNumberToDelete = Integer.parseInt(commandWords[1]);
                     Task removedTask = tasks.remove(taskNumberToDelete - 1);
                     printTaskDeletion(removedTask);
-                    updateSaveFile();
+                    storage.updateSaveFile(tasks);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid task number given for deletion...");
                 }
@@ -359,20 +296,6 @@ public class Duke {
             // Delimiter is at the end of command (e.g. "deadline /by")
             throw new DukeException(DukeException.exceptionIcon +
                     " No deadline given... Format: deadline [description] /by [due by]");
-        }
-    }
-
-    protected void updateSaveFile() {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(saveFilePath));
-            // Write all tasks to file
-            for (Task task : tasks) {
-                writer.write(task.stringToSaveToDisk());
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
