@@ -12,11 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class to handle the list of tasks as entered by the user. Has methods to modify the list of tasks.
+ */
 public class TaskList {
 
     List<Task> taskList;
     DukeProcessor processor;
 
+    /**
+     * Constructor of a TaskList.
+     * @param processor Duke's processor.
+     */
     public TaskList(DukeProcessor processor) {
         this.processor = processor;
         taskList = new ArrayList<Task>();
@@ -24,6 +31,9 @@ public class TaskList {
         init();
     }
 
+    /**
+     * Initiates the TaskList. Attempts to load the tasks from a external .txt file using Storage class.
+     */
     private void init() {
         try {
             Storage.init();
@@ -34,26 +44,52 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to the task list.
+     * @param task Task to be added to the list.
+     */
     public void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Removes a task from the task list.
+     * @param task Task to be removed.
+     * @return Boolean indicating whether the task was successfully removed or not. True if removed.
+     */
     public boolean remove(Task task) {
         return taskList.remove(task);
     }
 
+    /**
+     * Removes the task from the task list at that index.
+     * @param index Index of task to be removed.
+     * @return Task that was removed from the list at that index.
+     */
     public Task removeAt(int index) {
         return taskList.remove(index);
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     * @return Size of the task list.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Gets the task stored in the task list at that index.
+     * @param index Index of task to get.
+     * @return Task at the chosen index.
+     */
     public Task get(int index) {
         return taskList.get(index);
     }
 
+    /**
+     * Prints the tasks in the order in which they were in the list.
+     */
     public void printTasks() {
         if(taskList.size() == 0) {
             Ui.print("Looks like you don't have any tasks entered! Try entering one with the " +
@@ -66,6 +102,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the tasks that start on the selected searchDate.
+     * @param searchDate Date to filter tasks.
+     */
     public void printTasksOn(LocalDate searchDate) {
         List<Task> outputTaskList = new ArrayList<Task>();
         for(Task task : taskList) {

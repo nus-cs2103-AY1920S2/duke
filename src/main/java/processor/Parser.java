@@ -4,8 +4,17 @@ import commands.CommandType;
 import commands.Commander;
 import commands.Command;
 
+/**
+ * Handles the parsing of user input.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns the Command he has requested for. Invalid command is returned for an invalid
+     * command.
+     * @param input User input.
+     * @return Command that user has requested for.
+     */
     public static Command parseInput(String input) {
         String[] inputArgs = input.split(" ", 2);
         Command command;

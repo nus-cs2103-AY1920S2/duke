@@ -6,8 +6,17 @@ import processor.Storage;
 import processor.Ui;
 import tasks.Task;
 
+/**
+ * Command that handles marking a task as done in the TaskList.
+ */
 public class CommandDone implements Command {
 
+    /**
+     * Attempts to find the task selected by the user, then marks it as done, saving thereafter.
+     * @param processor The instantiated DukeProcessor object.
+     * @param args      The arguments as entered by the user.
+     * @throws DukeException
+     */
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
         if(argsArray.length < 2) {
