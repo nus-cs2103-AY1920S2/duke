@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * The Task class represents a task, which has a description and whether it is completed
+ * The duke.task.Task class represents a task, which has a description and whether it is completed
  * or not
  */
 public class Task {
@@ -17,6 +19,14 @@ public class Task {
 
     public void markAsDone(Boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override

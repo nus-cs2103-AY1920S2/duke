@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.*;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,15 +26,15 @@ public class Storage {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            int isDone = (task.isDone) ? 1 : 0;
+            int isDone = (task.getIsDone()) ? 1 : 0;
             if (task instanceof Deadline) {
-                listString += "D | " + isDone + " | " + task.description + " | " +
-                        ((Deadline) task).date + " " + ((Deadline) task).time;
+                listString += "D | " + isDone + " | " + task.getDescription() + " | " +
+                        ((Deadline) task).getDate() + " " + ((Deadline) task).getTime();
             } else if (task instanceof Event) {
-                listString += "E | " + isDone + " | " + task.description + " | " +
-                        ((Event) task).date + " " + ((Event) task).fromTimeToTime;
+                listString += "E | " + isDone + " | " + task.getDescription() + " | " +
+                        ((Event) task).getDate() + " " + ((Event) task).getFromTimeToTime();
             } else if (task instanceof Todo) {
-                listString += "T | " + isDone + " | " + task.description;
+                listString += "T | " + isDone + " | " + task.getDescription();
             }
             if (i != list.size() - 1) {
                 listString += "\n";
@@ -79,7 +84,7 @@ public class Storage {
                         break;
                 }
                 if (task != null) {
-                    task.isDone = isDone;
+                    task.markAsDone(isDone);
                     list.add(task);
                 }
             });

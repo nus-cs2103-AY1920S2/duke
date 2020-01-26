@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -67,7 +71,7 @@ public class TaskList {
 
             // If there is a date and time
             if (dateOrTimeTokens.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
+                throw new DukeException("☹ OOPS!!! duke.task.Event tasks require a specific time and date.");
             }
 
             try {
@@ -79,7 +83,7 @@ public class TaskList {
             }
         }
 
-        throw new DukeException("☹ OOPS!!! Event tasks require a description, and a specific time and date (e.g. 2019-12-12 2-4pm).");
+        throw new DukeException("☹ OOPS!!! duke.task.Event tasks require a description, and a specific time and date (e.g. 2019-12-12 2-4pm).");
     }
 
     /**
@@ -98,7 +102,7 @@ public class TaskList {
 
             // If there is a date and time
             if (dateOrTimeTokens.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Deadline tasks require a specific time and date.");
+                throw new DukeException("☹ OOPS!!! duke.task.Deadline tasks require a specific time and date.");
             }
 
             try {
@@ -111,6 +115,6 @@ public class TaskList {
             }
         }
 
-        throw new DukeException("☹ OOPS!!! Deadline tasks require a description, and a specific time and date (e.g. 2019-12-12 1800).");
+        throw new DukeException("☹ OOPS!!! duke.task.Deadline tasks require a description, and a specific time and date (e.g. 2019-12-12 1800).");
     }
 }

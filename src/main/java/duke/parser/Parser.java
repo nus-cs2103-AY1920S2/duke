@@ -1,10 +1,13 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
+package duke.parser;
+
+import duke.command.*;
+import duke.command.Command;
+import duke.exception.DukeException;
 
 public class Parser {
 
     /**
-     * Parse the command entered by user into a Command object if command exists
+     * Parse the command entered by user into a duke.command.Command object if command exists
      * @param  command   the input by the user
      * @return the parsed command
      */

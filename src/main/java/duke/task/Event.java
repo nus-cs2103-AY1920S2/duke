@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event class represents a task that start at a specific time
+ * The duke.task.Event class represents a task that start at a specific time
  * and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
  */
 public class Event extends Task {
@@ -13,6 +15,14 @@ public class Event extends Task {
         super(description);
         this.date = date;
         this.fromTimeToTime = fromTimeToTime;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public String getFromTimeToTime() {
+        return this.fromTimeToTime;
     }
 
     @Override
