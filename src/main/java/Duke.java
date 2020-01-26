@@ -9,9 +9,17 @@ public class Duke {
     private static final String WELCOME_MSG = "Hello! I'm Duke" + LF + "What can I do for you?" + LF;
     private static final String BYE_MSG = "Bye, hope to see you again soon!" + LF;
     private static final String BYE_CMD = "bye";
+    private static final String TODO_CMD = "todo";
+    private static final String EVENT_CMD = "event";
+    private static final String DEADLINE_CMD = "deadline";
     private static final String LIST_CMD = "list";
     private static final String DONE_CMD = "done";
 
+    private static void printAddedTask(Task t, List<Task> tasks) {
+        System.out.println("Got it! I've added this task:" + LF + "    " + t + LF
+                + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
+
+    }
     public static void main(String[] args) {
         System.out.println(WELCOME_MSG);
 
@@ -24,7 +32,7 @@ public class Duke {
                 String cmd = br.readLine();
 
                 if (cmd.equals(LIST_CMD)) {
-                    System.out.println("Here are your tasks:");
+                    System.out.println("Here are your task(s):");
 
                     int len = tasks.size();
 
@@ -41,12 +49,35 @@ public class Duke {
                     t.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
+                } else if (cmd.startsWith(TODO_CMD)) {
+                    Task t = new Todo(cmd.split("todo ")[1]);
+
+                    tasks.add(t);
+
+                    printAddedTask(t, tasks);
+                } else if (cmd.startsWith(DEADLINE_CMD)) {
+                    String temp = cmd.split("deadline ")[1];
+                    String name = temp.split(" /by ")[0];
+                    String by = temp.split(" /by ")[1];
+
+                    Task t = new Deadline(name, by);
+
+                    tasks.add(t);
+
+                    printAddedTask(t, tasks);
+                } else if (cmd.startsWith(EVENT_CMD)) {
+                    String temp = cmd.split("event ")[1];
+                    String name = temp.split(" /at ")[0];
+                    String by = temp.split(" /at ")[1];
+
+                    Task t = new Event(name, by);
+
+                    tasks.add(t);
+
+                    printAddedTask(t, tasks);
                 } else if (cmd.equals(BYE_CMD)) {
                     System.out.println(BYE_MSG);
                     break;
-                } else {
-                    tasks.add(new Task(cmd));
-                    System.out.println("added: " + cmd + LF);
                 }
             } catch (IOException e) {
                 System.out.println("Sorry, an error has occurred:");
