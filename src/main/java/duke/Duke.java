@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;
 
-public class Main {
+public class Duke {
     private TaskList tasklist;
     private Storage storage;
     private Calender calender;
@@ -140,7 +140,7 @@ public class Main {
         ui.exit();
     }
 
-    public Main(String filepath) {
+    public Duke(String filepath) {
         ui = new Ui();
         calender = new Calender();
         storage = new Storage(filepath);
@@ -149,7 +149,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        new Main("." + File.separator + "data" +
+        new Duke("." + File.separator + "data" +
                 File.separator + "Task.txt").run();
     }
 }
