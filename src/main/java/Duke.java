@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         List<String> log = new ArrayList<String>();
-        TaskList tasklist = Storage.load();
 
-        Ui.firstRun();
+        Ui.showLogo();
+        TaskList tasklist = Storage.load();
+        Ui.showWelcomeMessage();
 
         boolean hasNotExited = true;
         while (hasNotExited) {
@@ -17,7 +17,7 @@ public class Duke {
             log.add(thisResult);
 
             if (thisResult.equals("exit")) {
-                if (log.isEmpty() || log.get(log.size() - 1).equals("save")) {
+                if (log.isEmpty() || tasklist.list.isEmpty()) {
                     hasNotExited = false;
                 } else {
                     hasNotExited = Ui.askBeforeQuitting(scanner, tasklist);

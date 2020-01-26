@@ -1,13 +1,18 @@
 import java.util.Scanner;
 
 public class Ui {
-    public static void firstRun() {
+    public static void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "Welcome! What can I do for you today?");
+        System.out.println(logo);
+    }
+
+    public static void showWelcomeMessage() {
+        System.out.println("-------------------------------------");
+        System.out.println("Welcome! What can I do for you today?");
     }
 
     public static boolean askBeforeQuitting(Scanner scanner, TaskList tasklist) {

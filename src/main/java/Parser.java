@@ -1,21 +1,20 @@
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Parser {
-    public static List<String> commandList = new ArrayList<String>(
-            List.of("todo", "event", "deadline",
-                    "list", "done", "delete",
-                    "save", "exit"));
+    public static HashSet<String> commandList = new HashSet<String>(
+            List.of("todo", "event", "deadline", "list", "done", "delete", "find", "save", "exit"));
 
-    public static String commandNotFound = "Oops! Command not found!";
-    public static String taskNeedsName = "Oops! This task needs a name!";
-    public static String taskNeedsDateTime = "Oops! This task needs a date/time!";
-    public static String wrongDateTimeFormat = "Oops! The date/time needs to be DD/MM/YYYY HHMM (24hr) format!";
-    public static String noTaskFound = "Oops! Task not found!";
-    public static String noTaskInList = "Yay! There are no tasks in your list!";
-    public static String displayTaskList = "Here are your tasks in your list:";
-    public static String changesSaved = "Changes saved!";
+    static String commandNotFound = "Oops! Command not found!";
+    static String taskNeedsName = "Oops! This task needs a name!";
+    static String taskNeedsDateTime = "Oops! This task needs a date/time!";
+    static String wrongDateTimeFormat = "Oops! The date/time needs to be DD/MM/YYYY HHMM (24hr) format!";
+    static String noTaskFound = "Oops! Task not found in the list!";
+    static String noTaskInList = "Yay! There are no tasks in your list!";
+    static String displayTaskList = "Here are your tasks in your list:";
+    static String displayMatchingTaskList = "Here are your tasks that matched your query:";
+    static String changesSaved = "Changes saved!";
 
 
     public static String[] parseInput(String input) {
@@ -91,6 +90,19 @@ public class Parser {
                         return tasklist.deleteTask(taskID);
                     } catch (IndexOutOfBoundsException e) {
                         return noTaskFound;
+                    }
+
+                case "find":
+                    TaskList query = new TaskList();
+                    for (Task thisTask : tasklist.list) {
+                        if (thisTask.getTaskName().contains(command[1])) {
+                            query.add(thisTask);
+                        }
+                    }
+                    if (query.list.isEmpty()) {
+                        return noTaskFound;
+                    } else {
+                        return displayMatchingTaskList + "\n" + query;
                     }
 
                 case "save":
