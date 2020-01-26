@@ -35,6 +35,16 @@ public class Calender {
         }
     }
 
+    public void removeTask(Task task) {
+        if (hm.containsKey(task.getDate())) {
+            ArrayList<Task> list = hm.get(task.getDate());
+            list.remove(task);
+        } else {
+            System.out.println("Task: " + task
+                    + " is not found in the calender");
+        }
+    }
+
     public Calender() {
         hm = new HashMap<>();
     }
