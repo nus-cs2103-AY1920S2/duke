@@ -12,10 +12,19 @@ public class DateCommand extends Command {
 
     private String dateStr;
 
+    /**
+     * DateCommand constructor.
+     * @param dateStr of the date user wants to check.
+     */
     public DateCommand(String dateStr) {
         this.dateStr = dateStr;
     }
 
+    /**
+     * Executes Date behaviour of finding all tasks on a given date.
+     * @param taskList to access collection of tasks.
+     * @param storage to access save-load functionality.
+     */
     public void execute(TaskList taskList, Storage storage) {
         try {
             LocalDate date =  LocalDate.parse(dateStr);
@@ -46,6 +55,10 @@ public class DateCommand extends Command {
         }
     }
 
+    /**
+     * Inform if command is an exit command.
+     * @return boolean indicating if command is an exit command.
+     */
     public boolean isExit() {
         return false;
     }

@@ -8,20 +8,38 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime datetime;
 
+    /**
+     * Event constructor with LocalDateTime for date.
+     * @param  name of the deadline task.
+     * @param datetime of the task.
+     */
     public Event(String name, LocalDateTime datetime) {
         super(name);
         this.datetime = datetime;
     }
 
+    /**
+     * Event constructor with String for date.
+     * @param  name of the deadline task.
+     * @param datetime of the task.
+     */
     public Event(String name, String datetime) {
         super(name);
         this.datetime = DateTimeUtil.stringAsDateTime(datetime);
     }
 
+    /**
+     * Getter for a reference to the LocalDateTime of the datetime.
+     * @return the LocalDateTime representation of the datetime.
+     */
     public LocalDateTime getDatetime() {
         return datetime;
     }
 
+    /**
+     * Gets the save-string representation of the task.
+     * @return the String representation of the task Storage can save.
+     */
     @Override
     public String toSaveString() {
         //E1Anna's Birthday@May 15

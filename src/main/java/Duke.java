@@ -17,17 +17,30 @@ public class Duke {
         d.Loop();
     }
 
+    /**
+     * Duke's constructor initializes Storage and TaskList
+     * and loads user data into the new task list.
+     */
     Duke() {
         storage = new Storage();
         taskList = new TaskList();
         storage.Load(taskList);
     }
 
+    /**
+     * Duke's exit behaviour involves UI output
+     * and final storage saving.
+     * @return void
+     */
     private void Exit() {
         Ui.SayBye();
         storage.SaveTaskListToFile(taskList);
     }
 
+    /**
+     * Duke's behaviour loop after set-up to before exit.
+     * @return void
+     */
     private void Loop() {
         boolean is_exiting = false;
         Command c;

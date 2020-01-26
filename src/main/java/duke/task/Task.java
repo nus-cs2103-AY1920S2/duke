@@ -10,15 +10,26 @@ public abstract class Task {
         EVENT
     }
 
+    /**
+     * Task constructor.
+     * @param  name of the task.
+     */
     public Task(String name) {
         this.name = name;
         isDone = false;
     }
 
+    /**
+     * Sets task's status to done.
+     */
     public void MarkAsDone() {
         isDone = true;
     }
 
+    /**
+     * Gets the save-string representation of the task.
+     * @return the String representation of the task Storage can save.
+     */
     public abstract String toSaveString();
 
     @Override

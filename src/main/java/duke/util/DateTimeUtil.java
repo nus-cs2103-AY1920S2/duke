@@ -8,6 +8,11 @@ import java.time.temporal.TemporalAccessor;
 public class DateTimeUtil {
     private static DateTimeFormatter formatter = null;
 
+    /**
+     * A conversion tool from String to LocalDateTime.
+     * @param dt_string to be converted to LocalDateTime object
+     * @return the LocalDateTime representation of the input string
+     */
     public static LocalDateTime stringAsDateTime(String dt_string) {
         if (formatter == null) {
             formatter = DateTimeFormatter

@@ -8,20 +8,38 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Deadline constructor with LocalDateTime for date.
+     * @param name of the deadline task.
+     * @param deadline of the task.
+     */
     public Deadline(String name, LocalDateTime deadline) {
         super(name);
         this.deadline = deadline;
     }
 
+    /**
+     * Deadline constructor with String for date,
+     * @param name of the deadline task.
+     * @param deadline of the task.
+     */
     public Deadline(String name, String deadline) {
         super(name);
         this.deadline = DateTimeUtil.stringAsDateTime(deadline);
     }
 
+    /**
+     * Getter for a reference to the LocalDateTime of the deadline.
+     * @return the LocalDateTime representation of the deadline.
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }
 
+    /**
+     * Gets the save-string representation of the task.
+     * @return the String representation of the task Storage can save.
+     */
     @Override
     public String toSaveString() {
         //D0Fnish project@June 6

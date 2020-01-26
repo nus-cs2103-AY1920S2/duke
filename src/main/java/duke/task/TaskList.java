@@ -10,14 +10,27 @@ public class TaskList {
 
     private ArrayList<Task> task_list;
 
+    /**
+     * TaskList constructor initializes array list of tasks
+     * with initial capacity 100.
+     */
     public TaskList() {
         task_list = new ArrayList<>(100);
     }
 
+    /**
+     * Getter for a reference to the task list data structure.
+     * @return the ArrayList collection of tasks.
+     */
     public ArrayList<Task> getList() {
         return task_list;
     }
 
+    /**
+     * Adds to the task collection a task object generated
+     * from the save-string representation.
+     * @param taskString of a save-string representation of the task.
+     */
     public void AddSaveStringAsTask(String taskString) {
         // Takes in a string representation of a task and adds to list
         String task_info;
@@ -43,6 +56,12 @@ public class TaskList {
             task_list.get(task_list.size() - 1).MarkAsDone();
     }
 
+    /**
+     * Adds to the task collection a new task object.
+     * @param newTask name of the new task to add.
+     * @param taskType for the type of task to add.
+     * @return a reference to the new task object.
+     */
     public Task AddTask(String newTask, Task.TaskType taskType) {
         String[] str_arr;
         String task_name;
@@ -101,7 +120,11 @@ public class TaskList {
         }
     }
 
-    // DoneTask() returns true if task was found (set to done), else false
+    /**
+     * Updates a task object in collection to "Done".
+     * @param task_index of the task (in collection) to be set "Done".
+     * @return a boolean representing if task was found (set to done), else false
+     */
     public boolean DoneTask(int task_index) {
         if (task_index < task_list.size() && task_index >= 0) {
             task_list.get(task_index).MarkAsDone();
@@ -114,7 +137,11 @@ public class TaskList {
         }
     }
 
-    // DeleteTask() returns true if task was found (then deleted), else false
+    /**
+     * Deletes a task object from collection.
+     * @param task_index of the task (in collection) to be deleted.
+     * @return a boolean representing if task was found (then deleted), else false
+     */
     public boolean DeleteTask(int task_index) {
         if (task_index < task_list.size() && task_index >= 0) {
             String TaskToRemove = task_list.get(task_index).toString();

@@ -8,6 +8,12 @@ import java.util.Scanner;
 public class Storage {
     private File saveFile;
 
+    /**
+     * Storage's constructor checks if
+     * "data/userdata.txt" exists. If not,
+     * it creates the relevant directory and file.
+     * Finally, initializes saveFile with that file.
+     */
     public Storage() {
         File dir = new File("data");
         if (!dir.exists()) {
@@ -23,10 +29,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Getter for a reference to the File data with user data.
+     * @return the File object representing user data
+     */
     public File getSave() {
         return this.saveFile;
     }
 
+    /**
+     * Writes the information of a single task to the
+     * save file (For single task additions by user).
+     * @param task a reference to a Task object to save
+     * @return void
+     */
     public void SaveTaskToFile(Task task) {
         FileWriter writer;
         try {
@@ -39,6 +55,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Traverses whole list of tasks from TaskList object and
+     * writes out to the save file.
+     * @param taskList a reference to the TaskList object to read tasks from
+     * @return void
+     */
     public void SaveTaskListToFile(TaskList taskList) {
         FileWriter writer;
         PrintWriter pw;
@@ -61,6 +83,12 @@ public class Storage {
 
     }
 
+    /**
+     * Reads through the save file and adds in any existing tasks into
+     * a task list object.
+     * @param taskList a reference to the TaskList object to add tasks to
+     * @return void
+     */
     public void Load(TaskList taskList) {
         try {
             Scanner reader = new Scanner(saveFile);
