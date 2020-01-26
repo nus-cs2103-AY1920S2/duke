@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Duke {
 
     protected static Scanner scanner;
-    protected static List<String> inputs;
+    protected static List<Task> tasks;
 
     public static void main(String[] args) {
         printWelcomeMessage();
 
         scanner = new Scanner(System.in);
-        inputs = new ArrayList<String>();
+        tasks = new ArrayList<Task>();
 
         while (true) {
             processInput(scanner);
@@ -40,11 +40,12 @@ public class Duke {
         ProgramOutputHandler.nextLine();
     }
 
-    private static void listPastInputs() {
+    private static void listTasks() {
         ProgramOutputHandler.printLineSeperator();
 
-        for (int i = 0; i < inputs.size(); ++i) {
-            ProgramOutputHandler.printWithIndentation(i + 1 + ". " + inputs.get(i));
+        for (int i = 0; i < tasks.size(); ++i) {
+            Task t = tasks.get(i);
+            ProgramOutputHandler.printWithIndentation((i + 1) + "." + t);
         }
 
         ProgramOutputHandler.printLineSeperator();
@@ -52,23 +53,34 @@ public class Duke {
     }
 
     public static void processInput(Scanner sc) {
-        String input = sc.nextLine();
+        String wholeInput = sc.nextLine();
+        String[] inputs = wholeInput.split("\\s+"); // Regex \\s selects a space and + selects multiple
 
-        // Exit application
-        if (input.equals("bye")) {
+        switch (inputs[0]) {
+        case "bye":
             printGoodbyeMessage();
             System.exit(0);
-            return;
-        }
+            break;
+        case "list":
+            listTasks();
+            break;
+        case "done":
+            assert (inputs.length >= 2);
+            int index = Integer.parseInt(inputs[1]) - 1;
+            if (index < 0 || index >= tasks.size()) {
+                // TODO: Handle exception or throw error message
+                return;
+            }
 
-        // List inputs
-        if (input.equals("list")) {
-            listPastInputs();
-            return;
+            tasks.get(index).setIsDone(true);
+            listTasks();
+            break;
+        default:
+            // Add new task
+            Task newTask = new Task(wholeInput);
+            tasks.add(newTask);
+            echo("added: " + wholeInput);
+            break;
         }
-
-        // Add input to list
-        inputs.add(input);
-        echo("added: " + input);
     }
 }
