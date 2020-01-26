@@ -17,13 +17,13 @@ public class Deadline extends Task {
         return TType.DEADLINE;
     }
 
-    public Deadline(int id, String task, String date) throws BadDateException {
-        super(id, task);
+    public Deadline(String task, String date) throws BadDateException {
+        super(task);
         this.date = Parser.dateParser(date);
     }
 
-    public Deadline(int id, boolean done, String task, String date) throws BadDateException {
-        super(id, done, task);
+    public Deadline(boolean done, String task, String date) throws BadDateException {
+        super(done, task);
         this.date = Parser.dateParser(date);
     }
 

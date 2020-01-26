@@ -17,13 +17,13 @@ public class Event extends Task {
         return TType.EVENT;
     }
 
-    public Event(int id, String task, String date) throws BadDateException {
-        super(id, task);
+    public Event(String task, String date) throws BadDateException {
+        super(task);
         this.date = Parser.dateParser(date);
     }
 
-    public Event(int id, boolean done, String task, String date) throws BadDateException {
-        super(id, done, task);
+    public Event(boolean done, String task, String date) throws BadDateException {
+        super(done, task);
         this.date = Parser.dateParser(date);
     }
 

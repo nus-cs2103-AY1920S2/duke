@@ -5,7 +5,6 @@ import main.duke.enums.TType;
 import java.time.LocalDate;
 
 public abstract class Task {
-    protected int id;
     protected String task;
     protected boolean done;
 
@@ -13,9 +12,6 @@ public abstract class Task {
 
     public abstract LocalDate getDate();
 
-    public int getId() {
-        return id;
-    }
     public String getTask() {
         return task;
     }
@@ -26,14 +22,13 @@ public abstract class Task {
         done = bool;
     }
 
-    public Task (int id, String task) {
-        this.id = id;
+    public Task (String task) {
         this.task = task;
         done = false;
     }
 
-    public Task(int id, boolean done, String task) {
-        this(id, task);
+    public Task(boolean done, String task) {
+        this(task);
         this.done = done;
     }
 

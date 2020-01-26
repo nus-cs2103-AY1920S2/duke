@@ -14,12 +14,12 @@ public class Todo extends Task {
         return null;
     }
 
-    public Todo(int id, String task) {
-        super(id, task);
+    public Todo(String task) {
+        super(task);
     }
 
-    public Todo(int id, boolean done, String task) {
-        super(id, done, task);
+    public Todo(boolean done, String task) {
+        super(done, task);
     }
 
     @Override
