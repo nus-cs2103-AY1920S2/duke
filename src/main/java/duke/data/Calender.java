@@ -28,9 +28,9 @@ public class Calender {
         }
     }
 
-    public void removeTask(Task task) {
-        if (hm.containsKey(task.getDate())) {
-            ArrayList<Task> list = hm.get(task.getDate());
+    public void removeTask(Task task, LocalDate date) {
+        if (hm.containsKey(date)) {
+            ArrayList<Task> list = hm.get(date);
             list.remove(task);
         } else {
             System.out.println("Task: " + task
