@@ -14,19 +14,13 @@ public class Duke {
     private void run() {
         ui.printWelcome();
         while (true) {
-            String input;
             try {
-                input = ui.readInput();
-            } catch (DukeNoSuchInputException e) {
-                break;
-            }
-            Command command = new Command(input);
-            if (command.getCommandName().equals("bye")) {
-                break;
-            }
-            try {
+                String input = ui.readInput();
+                Command command = Command.createCommand(input);
                 String message = command.execute(this);
                 ui.print(message);
+            } catch (DukeNoSuchInputException | DukeProgramTerminatedException e) {
+                break;
             } catch (DukeNoCommandException e) {
                 continue;
             } catch (DukeException e) {

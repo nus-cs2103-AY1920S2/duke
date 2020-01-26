@@ -1,20 +1,59 @@
 public class Command {
     private String name;
     private String[] arguments;
+    private CommandMethod method;
 
-    public Command(String input) {
+    public static Command createCommand(String input) throws DukeException {
+        String name;
+        String[] arguments;
         if (input.contains(" ")) {
             String[] inputs = input.split(" ", 2);
-            this.name = inputs[0];
+            name = inputs[0];
             if (inputs[1].contains(" ")) {
-                this.arguments = inputs[1].split(" ");
+                arguments = inputs[1].split(" ");
             } else {
-                this.arguments = new String[] {inputs[1]};
+                arguments = new String[] {inputs[1]};
             }
         } else {
-            this.name = input;
-            this.arguments = new String[0];
+            name = input;
+            arguments = new String[0];
         }
+        switch (name) {
+            case "": {
+                throw new DukeNoCommandException();
+            }
+            case TodoCommandMethod.NAME: {
+                return new Command(name, arguments, new TodoCommandMethod());
+            }
+            case EventCommandMethod.NAME: {
+                return new Command(name, arguments, new EventCommandMethod());
+            }
+            case DeadlineCommandMethod.NAME: {
+                return new Command(name, arguments, new DeadlineCommandMethod());
+            }
+            case ListCommandMethod.NAME: {
+                return new Command(name, arguments, new ListCommandMethod());
+            }
+            case DoneCommandMethod.NAME: {
+                return new Command(name, arguments, new DoneCommandMethod());
+            }
+            case DeleteCommandMethod.NAME: {
+                return new Command(name, arguments, new DeleteCommandMethod());
+            }
+            case ByeCommandMethod.NAME: {
+                return new Command(name, arguments, new ByeCommandMethod());
+            }
+            default: {
+                break;
+            }
+        }
+        throw new DukeUnrecognisedCommandException(name);
+    }
+
+    private Command(String name, String[] arguments, CommandMethod method) {
+        this.name = name;
+        this.arguments = arguments;
+        this.method = method;
     }
 
     public String getCommandName() {
@@ -30,97 +69,7 @@ public class Command {
     }
 
     public String execute(Duke program) throws DukeException {
-        switch (getCommandName()) {
-        case "": {
-            throw new DukeNoCommandException();
-        }
-        case "todo": 
-        case "deadline": 
-        case "event": {
-            Task newTask = createTask();
-            TaskList tasks = program.getTaskList();
-            return tasks.addTask(newTask);
-        }
-        case "list": {
-            TaskList tasks = program.getTaskList();
-            return tasks.toString();
-        }
-        case "done": {
-            return markTask(program);
-        }
-        case "delete": {
-            return deleteTask(program);
-        }
-        case "bye": {
-            return "Goodbye!";
-        }
-        default: {
-            break;
-        }
-        }
-        throw new DukeUnrecognisedCommandException(getCommandName());
-    }
-
-    private Task createTask() throws DukeException {
-        String taskType = getCommandName();
-        if (getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(taskType);
-        }
-        switch (taskType) {
-        case "todo": {
-            return new TodoTask(getArgumentString());
-        }
-        case "deadline": {
-            String[] parts = getArgumentString().split(" /by ", 2);
-            if (parts.length != 2) {
-                throw new DukeInvalidNumberOfArgumentsException(taskType, 2, parts.length);
-            }
-            return new DeadlineTask(parts[0], parts[1]);
-        }
-        case "event": {
-            String[] parts = getArgumentString().split(" /at ", 2);
-            if (parts.length != 2) {
-                throw new DukeInvalidNumberOfArgumentsException(taskType, 2, parts.length);
-            }
-            return new EventTask(parts[0], parts[1]);
-        }
-        default: {
-            throw new DukeUnrecognisedTaskTypeException(taskType);
-        }
-        }
-    }
-
-    private String markTask(Duke program) throws DukeException {
-        TaskList tasks = program.getTaskList();
-        if (getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(getCommandName());
-        }
-        if (tasks.isEmpty()) {
-            throw new DukeEmptyTaskListException();
-        }
-        try {
-            int taskIndex = Integer.parseInt(getArgumentList()[0]) - 1;
-            Task task = tasks.getTask(taskIndex);
-            return task.markAsCompleted();
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeInvalidTaskException(getArgumentList()[0]);
-        }
-    }
-
-    private String deleteTask(Duke program) throws DukeException {
-        TaskList tasks = program.getTaskList();
-        if (getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(getCommandName());
-        }
-        if (tasks.isEmpty()) {
-            throw new DukeEmptyTaskListException();
-        }
-        try {
-            int taskIndex = Integer.parseInt(getArgumentList()[0]) - 1;
-            return tasks.removeTask(taskIndex);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeInvalidTaskException(getArgumentList()[0]);
-        }
+        return method.execute(program, this);
     }
 
     @Override
@@ -132,5 +81,3 @@ public class Command {
         return output.toString();
     }
 }
-
-

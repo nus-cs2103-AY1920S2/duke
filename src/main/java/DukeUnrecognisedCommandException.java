@@ -1,6 +1,6 @@
 @SuppressWarnings("serial")
 public class DukeUnrecognisedCommandException extends DukeException {
-    public DukeUnrecognisedCommandException(String command) {
-        super(String.format("Unrecognised command: %s", command));
+    public DukeUnrecognisedCommandException(String commandName) {
+        super(String.format("Unrecognised command: %s", commandName));
     }
 }
