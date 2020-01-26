@@ -1,9 +1,13 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LevelMethods {
     List<Task> storingList = new ArrayList<>();
-    String ha;
+    String filePath;
 
     public LevelMethods() {
         //no stuff
@@ -48,13 +52,44 @@ public class LevelMethods {
     }
 
     public void printAddingTask(Task task) {
-        String printStr = "Got it. I've added this task: \n"
+        String printStr = "Alrighty. I've added this task: \n"
                 + task + "\n"
                 + "Now you have " + storingList.size() + " tasks in the list.";
 
         formattingDivider(printStr);
     }
 
+    public void createStorage() throws IOException {
+        String home = System.getProperty("user.home");
+
+        // inserts correct file path separator on *nix and Windows
+        // works on *nix
+        // works on Windows
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "Duke","data", "dukeStorage.txt");
+//        boolean directoryExists = java.nio.file.Files.exists(path);
+
+        //..\bin ..\src\main\java\*.java
+
+        //trying to get path???
+        filePath = new File("").getAbsolutePath();
+        System.out.println("1. " + filePath);
+        filePath = filePath + "\\data\\dukeStorage";
+        System.out.println("2. " + filePath);
+
+        File file = new File(filePath);
+        //boolean exists = tmpDir.exists();
+
+        file.createNewFile();
+    }
+
+    public void updateListFromFile() throws IOException {
+
+        String str = "Hello";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.write(str);
+
+        writer.close();
+    }
 
     /**
      * Grapie's replies
@@ -187,7 +222,7 @@ public class LevelMethods {
                 if (storingList.size() >= numToDelete) {
 
                     int newSize = storingList.size() - 1;
-                    String toPrint = " Noted. I've removed this task: \n"
+                    String toPrint = " Alrighty. I've removed this task: \n"
                             + storingList.get(numToDelete-1)
                             + "\n Now you have " +  newSize + " tasks in the list." ;
 
@@ -214,6 +249,8 @@ public class LevelMethods {
 
         formattingDivider(stringList);
     }
+
+
 
     public void sayonara() {
         formattingDivider("Okie!! Goodbye!");

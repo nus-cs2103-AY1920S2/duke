@@ -3,14 +3,18 @@
 //import javafx.scene.control.Label;
 //import javafx.stage.Stage;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke { //extends Application {
 
-    public static void main(String[] args) { //throws DukeExceptions {
-        //Methods implemented in diff levels
+    public static void main(String[] args) throws IOException {
+        //Methods
         LevelMethods levelMethods = new LevelMethods();
         levelMethods.greetings(); //greet
+
+        //import task from hard disk
+        levelMethods.createStorage();
 
         //Scanner class for input
         Scanner sc = new Scanner(System.in);
