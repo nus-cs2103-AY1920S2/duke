@@ -1,8 +1,8 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.enums.Command;
-import main.java.duke.exception.BadDateException;
-import main.java.duke.exception.InvalidCommandException;
+import duke.enums.Command;
+import duke.exception.BadDateException;
+import duke.exception.InvalidCommandException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

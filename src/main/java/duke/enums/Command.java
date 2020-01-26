@@ -1,4 +1,4 @@
-package main.java.duke.enums;
+package duke.enums;
 
 public enum Command {
     LIST, DONE, TODO, DEADLINE, EVENT, DELETE, SEARCH;

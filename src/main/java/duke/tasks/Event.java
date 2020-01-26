@@ -1,8 +1,8 @@
-package main.java.duke.tasks;
+package duke.tasks;
 
-import main.java.duke.Parser;
-import main.java.duke.enums.TType;
-import main.java.duke.exception.BadDateException;
+import duke.Parser;
+import duke.enums.TType;
+import duke.exception.BadDateException;
 
 import java.time.LocalDate;
 

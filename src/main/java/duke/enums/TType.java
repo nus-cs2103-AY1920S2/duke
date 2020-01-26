@@ -1,4 +1,4 @@
-package main.java.duke.enums;
+package duke.enums;
 
 public enum TType {
     EVENT, TODO, DEADLINE;
