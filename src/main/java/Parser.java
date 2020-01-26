@@ -3,6 +3,7 @@
 // Then pass it to the corresponding classes to handle it
 
 import javax.swing.text.DateFormatter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -14,11 +15,14 @@ public class Parser {
     Ui ui = new Ui();
     private TaskList taskList = new TaskList();
     private Deadline_event_hash deadline_event_hash = new Deadline_event_hash();
+    Storage storage;
 
-
+    public Parser(Storage storage) {
+        this.storage = storage;
+    }
 
     // To understand and comprehend the user's input
-    void understand_user_input(String user_input) throws DukeException {
+    void understand_user_input(String user_input) throws DukeException, IOException {
         if(user_input.contains("bye")) {
             ui.printBye();
             taskList.getList().clear();
@@ -33,6 +37,7 @@ public class Parser {
             Task new_todo_task = new Todo(user_input);
             new_todo_task.setDescription(new_todo_task.format_tasks("todo"));
             taskList.add_to_list(new_todo_task);
+            storage.saveTask(new_todo_task);
             ui.printTasks(new_todo_task, taskList.getList());
         } else if (user_input.contains("deadline")) {
             Deadline new_deadLine = new Deadline(user_input);
@@ -40,8 +45,7 @@ public class Parser {
             new_deadLine.setBy(new_deadLine.format_tasks(user_input));
             new_deadLine.setD1();
             taskList.add_to_list(new_deadLine);
-
-
+            storage.saveTask(new_deadLine);
           //  deadline_event_hash.addToHashMap(new_deadLine.d1.toLocalDate().toString(), new_deadLine);
             ui.printTasks(new_deadLine, taskList.getList());
         } else if (user_input.contains("event")) {
@@ -51,6 +55,7 @@ public class Parser {
             new_event.setD1();
             taskList.add_to_list(new_event);
             deadline_event_hash.addToHashMap(new_event.d1.toLocalDate().toString(), new_event);
+            storage.saveTask(new_event);
             ui.printTasks(new_event, taskList.getList());
         } else if(user_input.contains("delete")) {
             Task deleted_task = taskList.getList().get(split_done_string(" ", user_input));

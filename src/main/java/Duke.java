@@ -1,21 +1,27 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    Ui ui;
-    Parser parser = new Parser();
+    private Ui ui;
+    private Parser parser;
+    private Storage storage;
 
     static boolean break_checker = false;
 
-    public static void main(String[] args) throws DukeException {
-        new Duke().run();
+    public static void main(String[] args) throws DukeException, IOException {
+        new Duke("data/fruits.txt").run();
     }
 
-
-    private void run() throws DukeException{
-        Scanner sc = new Scanner(System.in);
+    public Duke(String filePath) {
         ui = new Ui();
+        storage = new Storage(filePath);
+        parser = new Parser(storage);
+    }
+
+    private void run() throws DukeException, IOException {
+        Scanner sc = new Scanner(System.in);
 
 
         // Welcome message for the user

@@ -4,3 +4,7 @@ E |  ✘ | project meeting
 T |  ✘ | join sports club
 T |  ✘ | sleep
 T |  ✘ | run
+ [T] [✘] running [T] [✘] nus [T] [✘] lala [D] [✘] running (by: Jan 27 2020 18:00)
+ [D] [✘] sleeping (by: Jan 27 2020 00:00)
+ [D] [✘] haha (by: Dec 2 2019 00:00)
+ [D] [✘] hehe (by: Dec 2 2019 18:00)
