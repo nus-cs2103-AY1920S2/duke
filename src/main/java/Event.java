@@ -1,23 +1,27 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents tasks that start at a specific time and ends at a specific time
  * e.g., team project meeting on 2/10/2019 2-4pm
  */
 public class Event implements Task {
     protected String description;
-    protected String eventTime;
+    protected LocalDate eventTime;
     protected boolean isDone;
 
     public Event(String description, String eventTime) {
         this(description, eventTime, false);
     }
 
-    public Event(String description, String eventTime, boolean isDone) {
+    public Event(String description, String eventTime, boolean isDone) throws DateTimeException {
         this.description = description;
-        this.eventTime = eventTime;
+        this.eventTime = LocalDate.parse(eventTime);
         this.isDone = isDone;
     }
 
-    public String getEventTime() {
+    public LocalDate getEventTime() {
         return eventTime;
     }
 
@@ -57,9 +61,11 @@ public class Event implements Task {
 
     @Override
     public String toString() {
-        // e.g. format: [E][✗] project meeting (at: Aug 6th 2-4pm)
+        // Deadline in yyyy-mm-dd format (e.g. 2020-10-15)
+        // Output in MMM d yyyy e.g. (Oct 15 2020)
+        // e.g. format: [E][✗] project meeting (at: Oct 15 2020)
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description,
-                eventTime);
+                eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**

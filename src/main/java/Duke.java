@@ -2,6 +2,10 @@ import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -248,10 +252,16 @@ public class Duke {
                         deadlineStartIndex - deadlineDelimiterLength - 2);
                 String deadline = command.substring(deadlineStartIndex);
                 // Add new task
-                Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
-                tasks.add(newDeadlineTask);
-                printTaskAddition(newDeadlineTask);
-                updateSaveFile();
+                try {
+                    Task newDeadlineTask = new Deadline(deadlineDescription, deadline);
+                    tasks.add(newDeadlineTask);
+                    printTaskAddition(newDeadlineTask);
+                    updateSaveFile();
+                } catch (DateTimeException e) {
+                    // Given deadline string was not in correct format
+                    throw new DukeException("Given deadline task due date was not in correct format" +
+                            ": [yyyy-mm-dd]");
+                }
                 break;
             case "event":
                 // Find index of delimiter
@@ -265,10 +275,16 @@ public class Duke {
                 // Get event time, account for whitespace after delimiter
                 String eventTime = command.substring(eventDelimiterIndex + eventDelimiter.length() + 1);
                 // Add new event to task list
-                Task newEvent = new Event(eventDescription, eventTime);
-                tasks.add(newEvent);
-                printTaskAddition(newEvent);
-                updateSaveFile();
+                try {
+                    Task newEvent = new Event(eventDescription, eventTime);
+                    tasks.add(newEvent);
+                    printTaskAddition(newEvent);
+                    updateSaveFile();
+                } catch (DateTimeException e) {
+                    // Given event time could not be converted a valid date
+                    throw new DukeException("Given event task due date was not in correct format" +
+                            ": [yyyy-mm-dd]");
+                }
                 break;
             case "delete":
                 try {
