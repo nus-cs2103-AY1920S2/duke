@@ -66,12 +66,25 @@ public class Duke {
                         + "\n" + "      " + list.get(num - 1));
                 break;
 
+            case "delete":
+                checkDescription(str, "delete".length());
+                int num2 = Integer.parseInt(str.substring(7));
+                if (!inRange(num2, index)) {
+                    throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
+                }
+                Task t = list.remove(num2 - 1);
+                index--;
+                typeSetting("    \uD83D\uDC4C Noted. I've removed this task: " + num2
+                        + "\n" + "      " + t + "\n" +
+                        "    Now you have " + index + " tasks in the list.");
+                break;
+
             case "todo":
                 checkDescription(str, "todo".length());
                 Todo td = new Todo(st.nextToken("").substring(1));
                 list.add(td);
                 index++;
-                typeSetting("    Got it. I've added this task: \n      " +
+                typeSetting("    \uD83D\uDFE2 Got it. I've added this task: \n      " +
                         td + "\n" +
                         "    Now you have " + index + " tasks in the list.");
                 break;
@@ -82,7 +95,7 @@ public class Duke {
                 Deadline ddl = new Deadline(strings[0], strings[1]);
                 list.add(ddl);
                 index++;
-                typeSetting("    Got it. I've added this task: \n      " +
+                typeSetting("    \uD83D\uDD34 Got it. I've added this task: \n      " +
                         ddl + "\n" +
                         "    Now you have " + index + " tasks in the list.");
                 break;
@@ -93,7 +106,7 @@ public class Duke {
                 Event ev = new Event(strings2[0], strings2[1]);
                 list.add(ev);
                 index++;
-                typeSetting("    Got it. I've added this task: \n      " +
+                typeSetting("    \uD83D\uDD35 Got it. I've added this task: \n      " +
                         ev + "\n" +
                         "    Now you have " + index + " tasks in the list.");
                 break;
@@ -112,7 +125,8 @@ public class Duke {
         int index = 0;
 
         //welcome message
-        typeSetting("    Hello, I'm Bob.\n    What can I do for you? \uD83D\uDE03\n");
+        typeSetting("    Hello, I'm Bob. \uD83D\uDC76 \uD83D\uDC76 \uD83D\uDC76\n    " +
+                "What can I do for you? \uD83D\uDE03\n");
 
         //talking to Bob
         String str = sc.nextLine();
