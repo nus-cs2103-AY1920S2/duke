@@ -21,7 +21,6 @@ public class DukeProcessor {
 
     public void processInput(String input) {
         Command command = Parser.parseInput(input);
-
         try {
             command.execute(this, input);
         } catch(DukeException e) {

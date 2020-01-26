@@ -38,7 +38,6 @@ public class Parser {
             default:
                 command = Commander.createCommand(CommandType.INVALID);
         }
-
         return command;
     }
 

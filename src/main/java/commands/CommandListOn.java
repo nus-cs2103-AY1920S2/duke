@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 public class CommandListOn implements Command {
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
-
         try {
             LocalDate searchDate = LocalDate.parse(argsArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             processor.getTaskList().printTasksOn(searchDate);

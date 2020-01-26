@@ -8,7 +8,6 @@ import processor.Ui;
 public class CommandTask implements Command {
 
     public void execute(DukeProcessor processor, String args) throws DukeException {
-
         Ui.print("You've now got " + processor.getTaskList().size() + " tasks in your list.");
 
         try {

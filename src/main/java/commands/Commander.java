@@ -4,7 +4,6 @@ public class Commander {
 
     public static Command createCommand(CommandType commandType) {
         Command command;
-
         switch(commandType) {
             case HI:
                 command = new CommandHi();
@@ -36,7 +35,6 @@ public class Commander {
             default:
                 command = new CommandInvalid();
         }
-
         return command;
     }
 }

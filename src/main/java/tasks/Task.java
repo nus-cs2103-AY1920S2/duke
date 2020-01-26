@@ -29,7 +29,6 @@ public class Task {
         } else {
             marker = "✗";
         }
-
         return String.format("[%s] %s", marker, description);
     }
 }
