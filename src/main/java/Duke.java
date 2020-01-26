@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    public static void promptUser(String message) {
+        System.out.println(message);
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -14,6 +18,7 @@ public class Duke {
         while(true) {
             String input = sc.nextLine();
             String firstWord = input.split(" ")[0];
+            String[] words = input.split(" ");
             if (input.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -28,28 +33,48 @@ public class Duke {
                 list.get(num-1).markAsDone();
                 System.out.println(list.get(num-1));
             } else if (firstWord.equals("todo")) {
-                System.out.println("Got it. I've added this task:");
-                Task todo = new ToDo(input.substring(5));
-                System.out.println(todo);
-                list.add(todo);
-                System.out.println(String.format("Now you have %d tasks in your list", list.size()));
+                try {
+                    if(words.length == 1) {
+                        throw new StringIndexOutOfBoundsException("without argument");
+                    }
+                    Task todo = new ToDo(input.substring(5));
+                    list.add(todo);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(todo);
+                    System.out.println(String.format("Now you have %d tasks in your list", list.size()));
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
             } else if (firstWord.equals("deadline")) {
-                System.out.println("Got it. I've added this task:");
-                Task deadline = new Deadline(input.substring(9, input.indexOf('/')),
-                        input.substring(input.indexOf('/') + 4));
-                System.out.println(deadline);
-                list.add(deadline);
-                System.out.println(String.format("Now you have %d tasks in your list", list.size()));
+                try {
+                    if(words.length == 1) {
+                        throw new StringIndexOutOfBoundsException("without argument");
+                    }
+                    Task deadline = new Deadline(input.substring(9, input.indexOf('/')),
+                            input.substring(input.indexOf('/') + 4));
+                    list.add(deadline);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(deadline);
+                    System.out.println(String.format("Now you have %d tasks in your list", list.size()));
+                } catch(StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
             } else if (firstWord.equals("event")) {
-                System.out.println("Got it. I've added this task:");
-                Task event = new Event(input.substring(6, input.indexOf('/')),
+                try {
+                    if(words.length == 1) {
+                        throw new StringIndexOutOfBoundsException("without argument");
+                    }
+                    Task event = new Event(input.substring(6, input.indexOf('/')),
                         input.substring(input.indexOf('/') + 4));
-                System.out.println(event);
-                list.add(event);
-                System.out.println(String.format("Now you have %d tasks in your list", list.size()));
+                    list.add(event);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(event);
+                    System.out.println(String.format("Now you have %d tasks in your list", list.size()));
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                }
             } else {
-                list.add(new Task(input));
-                System.out.println("added: " + input);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
