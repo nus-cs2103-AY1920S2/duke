@@ -1,16 +1,16 @@
 package com.duke.bot;
 
 public class Task {
-    private String name;
+    private String title;
     private boolean isDone;
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String title) {
+        this.title = title;
         isDone = false;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public boolean isDone() {
