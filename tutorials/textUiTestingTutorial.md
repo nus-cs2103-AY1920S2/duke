@@ -67,7 +67,7 @@
 1. Update the `javac` and `java` commands in the script to match the name/location of your main class.
 1. Add an `EXPECTED.txt` to the same folder, containing the expected output.
 1. Add an `input.txt` containing the input commands.
-1. Run the `.bat`/`.sh` file to execute the test.
+1. Run the `.bat`/`.sh` file to execute the test. On Mac/Linux, you can do so by executing `chmod +x runtest.sh` and then `./runtest.sh`. 
 
 --------------------------------------------------------------------------------
 **Authors:**
