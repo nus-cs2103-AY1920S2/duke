@@ -84,7 +84,7 @@ public class Duke {
 
     private static Path getSaveDirectory() {
         String dir = System.getProperty("user.dir");
-        Path path = Paths.get(dir, "data");
+        Path path = Paths.get(dir, "data.duke");
         return path;
     }
 

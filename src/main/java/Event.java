@@ -1,5 +1,7 @@
 public class Event extends Task {
 
+    /** as good practice every class should have it's own private serialVersionUID */
+    private static final long serialVersionUID = 7761205144753475365L;
     protected String at;
 
     public Event(String description, String at) {

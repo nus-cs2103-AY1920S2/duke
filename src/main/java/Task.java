@@ -1,5 +1,6 @@
 import java.io.Serializable;
 
+// TODO: change Task to an Interface and redefine tostring, status, etc. all in child class.
 abstract class Task implements Serializable {
     /** Serializable classes must include a serialVersionUID to identify the class. */
     private static final long serialVersionUID = 1561807677731348300L;
