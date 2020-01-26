@@ -144,6 +144,7 @@ public class LevelMethods {
             //no number behind
             throw new GrapieExceptions("Please input a valid number behind 'done'!!");
         } else {
+            //remember to add check for already completed task
 
             String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
             strNumberDone.replaceAll("\\s+",""); //remove all white spaces
