@@ -1,3 +1,5 @@
+package duke;
+
 public class DeadlineCommandMethod implements CommandMethod {
     public static final String NAME = "deadline";
 

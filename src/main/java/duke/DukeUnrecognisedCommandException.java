@@ -1,3 +1,5 @@
+package duke;
+
 @SuppressWarnings("serial")
 public class DukeUnrecognisedCommandException extends DukeException {
     public DukeUnrecognisedCommandException(String commandName) {

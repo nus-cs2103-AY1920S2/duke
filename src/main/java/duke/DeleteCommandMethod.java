@@ -1,5 +1,7 @@
-public class DoneCommandMethod implements CommandMethod {
-    public static final String NAME = "done";
+package duke;
+
+public class DeleteCommandMethod implements CommandMethod {
+    public static final String NAME = "delete";
 
     public String execute(Duke program, Command command) throws DukeException { 
         TaskList tasks = program.getTaskList();
@@ -12,8 +14,7 @@ public class DoneCommandMethod implements CommandMethod {
         String firstArgument = command.getArgumentList()[0];
         try {
             int taskIndex = Integer.parseInt(firstArgument) - 1;
-            Task task = tasks.getTask(taskIndex);
-            return task.markAsCompleted();
+            return tasks.removeTask(taskIndex);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeInvalidTaskException(firstArgument);
         }

@@ -1,3 +1,5 @@
+package duke;
+
 @SuppressWarnings("serial")
 public class DukeNoSuchInputException extends DukeException {
     public DukeNoSuchInputException() {

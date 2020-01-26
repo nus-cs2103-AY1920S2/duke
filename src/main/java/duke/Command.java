@@ -1,3 +1,5 @@
+package duke;
+
 public class Command {
     private String name;
     private String[] arguments;

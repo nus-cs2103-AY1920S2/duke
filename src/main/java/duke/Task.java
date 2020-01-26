@@ -1,3 +1,5 @@
+package duke;
+
 public abstract class Task {
     public static final char COMPLETED = 'X';
     public static final char PENDING = ' ';

@@ -1,3 +1,5 @@
+package duke;
+
 @SuppressWarnings("serial")
 public class DukeInvalidNumberOfArgumentsException extends DukeException {
     public DukeInvalidNumberOfArgumentsException(String command, int expected, int received) {

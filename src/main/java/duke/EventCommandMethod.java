@@ -1,3 +1,5 @@
+package duke;
+
 public class EventCommandMethod implements CommandMethod {
     public static final String NAME = "event";
 

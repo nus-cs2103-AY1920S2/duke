@@ -1,3 +1,5 @@
+package duke;
+
 public class ListCommandMethod implements CommandMethod {
     public static final String NAME = "list";
 

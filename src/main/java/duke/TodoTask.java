@@ -1,3 +1,5 @@
+package duke;
+
 public class TodoTask extends Task {
     public static final char ICON = 'T';
 

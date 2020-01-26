@@ -1,3 +1,5 @@
+package duke;
+
 @SuppressWarnings("serial")
 public class DukeUnrecognisedTaskTypeException extends DukeException {
     public DukeUnrecognisedTaskTypeException(String taskType) {

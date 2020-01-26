@@ -1,3 +1,5 @@
+package duke;
+
 @SuppressWarnings("serial")
 public class DukeEmptyTaskListException extends DukeException {
     public DukeEmptyTaskListException() {

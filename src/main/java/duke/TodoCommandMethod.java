@@ -1,3 +1,5 @@
+package duke;
+
 public class TodoCommandMethod implements CommandMethod {
     public static final String NAME = "todo";
 
