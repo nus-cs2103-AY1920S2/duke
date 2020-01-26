@@ -133,4 +133,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the tasks that contain the search String.
+     * @param searchText Text to filter the tasks by.
+     */
+    public void printTasksContaining(String searchText) {
+        List<Task> filteredTaskList = new ArrayList<Task>();
+
+        for(Task task : taskList) {
+            if(task.getDescription().contains(searchText)) {
+                filteredTaskList.add(task);
+            }
+        }
+
+        for(Task task : filteredTaskList) {
+            Ui.print(task.toString());
+        }
+    }
+
 }

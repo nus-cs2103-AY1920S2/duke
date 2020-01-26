@@ -40,6 +40,9 @@ public class Commander {
             case LISTON:
                 command = new CommandListOn();
                 break;
+            case FIND:
+                command = new CommandFind();
+                break;
             default:
                 command = new CommandInvalid();
         }
