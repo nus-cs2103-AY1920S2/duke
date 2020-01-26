@@ -68,7 +68,7 @@ public class Duke {
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
                 } else if (cmd.startsWith(TODO_CMD)) {
-                    str1  = cmd.split("todo ");
+                    str1  = cmd.split("todo\\s+");
 
                     if (str1.length < 2) {
                         throw new DukeException("The description of a todo cannot be empty");
