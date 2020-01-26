@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    enum Command {
+        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, DEFAULT
+    }
     static Scanner scanner = new Scanner(System.in);
     static String buffer;
     static String input;
@@ -15,28 +18,28 @@ public class Duke {
         list = new ArrayList<>();
         String param = "";
         String[] params;
-        String command;
+        Command command;
         int index;
         Task t;
         while (true) {
             try {
                 input = scanner.nextLine();
                 tokens = input.split(" ", 2);
-                command = tokens[0];
+                command = Command.valueOf(tokens[0].toUpperCase());
                 if (tokens.length > 1) {
                     param = tokens[1];
                 } else {
                     param = "";
                 }
                 switch (command) {
-                    case "todo":
+                    case TODO:
                         if (param.equals("")) {
                             throw new MissingDescriptionException();
                         }
                         t = new ToDo(param);
                         addTask(t);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         if (param.equals("")) {
                             throw new MissingDescriptionException();
                         } else if (!param.contains(" /by ")) {
@@ -46,7 +49,7 @@ public class Duke {
                         t = new Deadline(params[0], params[1]);
                         addTask(t);
                         break;
-                    case "event":
+                    case EVENT:
                         if (param.equals("")) {
                             throw new MissingDescriptionException();
                         } else if (!param.contains(" /at ")) {
@@ -56,11 +59,11 @@ public class Duke {
                         t = new Event(params[0], params[1]);
                         addTask(t);
                         break;
-                    case "bye":
+                    case BYE:
                         System.out.println("Bye. Hope to see you again soon!");
                         done = true;
                         break;
-                    case "list":
+                    case LIST:
                         if (list.size() == 0) {
                             System.out.println("You have no tasks in your list.");
                         } else {
@@ -70,7 +73,7 @@ public class Duke {
                             }
                         }
                         break;
-                    case "done":
+                    case DONE:
                         try {
                             index = Integer.parseInt(tokens[1]);
                             list.get(index - 1).markAsDone();
@@ -82,7 +85,7 @@ public class Duke {
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(list.get(index - 1));
                         break;
-                    case "delete":
+                    case DELETE:
                         try {
                             index = Integer.parseInt(tokens[1]);
                             t = list.remove(index - 1);
