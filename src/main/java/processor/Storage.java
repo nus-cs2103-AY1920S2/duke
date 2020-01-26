@@ -122,7 +122,6 @@ public class Storage {
      */
     private static Task processPackagedTask(String taskString) throws DukeException {
         Task outputTask;
-
         String[] taskArray = taskString.split("\\^_\\^", 4);
 
         if(taskArray[0].equals("TODO")) {
