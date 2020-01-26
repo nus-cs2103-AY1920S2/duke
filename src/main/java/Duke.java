@@ -24,66 +24,66 @@ public class Duke {
                 System.out.println("\n" + horizontalLine);
                 Task task = null;
                 switch(command[0]) {
-                    case "list":
-                        System.out.println("     Here are the tasks in your list:");
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println("     " + (i + 1) + ". " + tasks.get(i));
-                        }
-                        break;
-                    case "done":
-                        try {
-                            task = tasks.get(Integer.parseInt(command[1]) - 1);
-                            task.markAsDone();
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS!!! Please give me the task number.");
-                        } catch (Exception e) {
-                            throw new DukeException("OOPS!!! Which task is done?");
-                        }
-                        break;
-                    case "delete":
-                        try {
-                            task = tasks.get(Integer.parseInt(command[1]) - 1);
-                            tasks.remove(task);
-                            System.out.println("     Noted. I've removed this task:");
-                            System.out.println("       " + task);
-                            System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeException("OOPS!!! Which task should I remove?");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("OOPS!!! Do you have this task number?");
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("OOPS!!! Please give me the task number to delete.");
-                        }
-                        break;
-                    case "todo":
+                case "list":
+                    System.out.println("     Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println("     " + (i + 1) + ". " + tasks.get(i));
+                    }
+                    break;
+                case "done":
+                    try {
+                        task = tasks.get(Integer.parseInt(command[1]) - 1);
+                        task.markAsDone();
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS!!! Please give me the task number.");
+                    } catch (Exception e) {
+                        throw new DukeException("OOPS!!! Which task is done?");
+                    }
+                    break;
+                case "delete":
+                    try {
+                        task = tasks.get(Integer.parseInt(command[1]) - 1);
+                        tasks.remove(task);
+                        System.out.println("     Noted. I've removed this task:");
+                        System.out.println("       " + task);
+                        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("OOPS!!! Which task should I remove?");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("OOPS!!! Do you have this task number?");
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS!!! Please give me the task number to delete.");
+                    }
+                    break;
+                case "todo":
 
-                        try {
-                            task = new Todo(command[1]);
-                            addTask(task);
-                        } catch (Exception e) {
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        break;
-                    case "deadline":
-                        try {
-                            String[] info = command[1].split(" /by ");
-                            task = new Deadline(info[0], info[1]);
-                            addTask(task);
-                        } catch (Exception e) {
-                            throw new DukeException("OOPS!!! Missing information regarding deadline.");
-                        }
-                        break;
-                    case "event":
-                        try {
-                            String[] info = command[1].split(" /at ");
-                            task = new Event(info[0], info[1]);
-                            addTask(task);
-                        } catch (Exception e) {
-                            throw new DukeException(("OOPS!!! Missing information regarding event."));
-                        }
-                        break;
-                    default:
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    try {
+                        task = new Todo(command[1]);
+                        addTask(task);
+                    } catch (Exception e) {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    break;
+                case "deadline":
+                    try {
+                        String[] info = command[1].split(" /by ");
+                        task = new Deadline(info[0], info[1]);
+                        addTask(task);
+                    } catch (Exception e) {
+                        throw new DukeException("OOPS!!! Missing information regarding deadline.");
+                    }
+                    break;
+                case "event":
+                    try {
+                        String[] info = command[1].split(" /at ");
+                        task = new Event(info[0], info[1]);
+                        addTask(task);
+                    } catch (Exception e) {
+                        throw new DukeException(("OOPS!!! Missing information regarding event."));
+                    }
+                    break;
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println("     " + e);
