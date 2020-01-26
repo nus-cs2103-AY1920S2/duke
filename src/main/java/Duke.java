@@ -32,12 +32,14 @@ public class Duke {
                     for(int i = inputArr.length - 1; (inputArr[i] != '/'); i--) {
                         marker = i;
                     }
-                    for(int i = marker + 2; i < inputArr.length; i++) {
+                    for(int i = marker + 3; i < inputArr.length; i++) {
                         date += inputArr[i];
                     }
-                    for (int i = 6; i < marker; i++) {
+                    System.out.println(date);
+                    for (int i = 6; i < marker - 2; i++) {
                         desc += inputArr[i];
                     }
+                    System.out.println(desc);
                     Event task = new Event(desc, date);
                     arr[listCounter] = task;
                     System.out.println("Got it. I've added this task:");
@@ -49,12 +51,14 @@ public class Duke {
                     for(int i = inputArr.length - 1; (inputArr[i] != '/'); i--) {
                         marker = i;
                     }
-                    for(int i = marker + 2; i < inputArr.length; i++) {
+                    for(int i = marker + 3; i < inputArr.length; i++) {
                         by += inputArr[i];
                     }
-                    for (int i = 9; i < marker; i++) {
+                    System.out.println(by);
+                    for (int i = 9; i < marker - 2; i++) {
                         desc += inputArr[i];
                     }
+                    System.out.println(desc);
                     Deadline task = new Deadline(desc, by);
                     arr[listCounter] = task;
                     System.out.println("Got it. I've added this task:");
