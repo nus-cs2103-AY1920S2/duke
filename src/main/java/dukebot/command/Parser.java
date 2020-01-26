@@ -22,11 +22,11 @@ public class Parser {
         case "done":
             return new DoneCommand(inpArr);
         case "todo":
-            // Fallthrough
+            return new NewTodoCommand(inpArr);
         case "deadline":
-            // Fallthrough
+            return new NewDeadlineCommand(inpArr);
         case "event":
-            return new NewTaskCommand(inpArr);
+            return new NewEventCommand(inpArr);
         case "delete":
             return new DeleteCommand(inpArr);
         default:

@@ -1,4 +1,4 @@
-package dukebot.tasklist;
+package dukebot.command;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -64,12 +64,4 @@ public class DateTimeParse {
         }
     }
 
-    //    public static void main(String[] args) {
-    //        System.out.println("\nMaster: ");
-    //        while (true) {
-    //            Scanner sc = new Scanner(System.in);
-    //            String inp = sc.nextLine();
-    //            parseDate(inp);
-    //        }
-    //    }
 }
