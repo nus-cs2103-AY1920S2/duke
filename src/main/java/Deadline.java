@@ -15,6 +15,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    Task_Codes getTaskCodes() {
+        return Task_Codes.D;
+    }
+
+
+    @Override
     void setDescription(String s) throws DukeException {
 
         try {
@@ -26,7 +32,7 @@ public class Deadline extends Task {
 
             super.setDescription(deadline_task2);
         } catch (Exception e) {
-            throw new DukeException("OOPS!! The description of a Deadline cannot be empty");
+            throw new DukeException("", "Deadline");
         }
     }
 

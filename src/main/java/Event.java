@@ -26,6 +26,11 @@ public class Event extends Task {
     }
 
     @Override
+    Task_Codes getTaskCodes() {
+        return Task_Codes.E;
+    }
+
+    @Override
     public String toString() {
         return " [" + Task_Codes.E + "]" + super.toString() + " (at: " + at + ")";
     }

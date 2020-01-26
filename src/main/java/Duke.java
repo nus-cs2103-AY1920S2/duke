@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,9 +26,7 @@ public class Duke {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                System.out.println(lines);
-                System.out.println("        Bye. Hope to see you again soon");
-                System.out.println(lines);
+                Print.print_bye();
                 stored_list.clear();
                 break;
             } else if (input.equals("list")) {
@@ -41,7 +43,7 @@ public class Duke {
                 Integer number = Integer.valueOf(splited_string[1]);
 
                 // If you want to do
-                if (number > stored_list.size() - 1) {
+                if (number > stored_list.size()) {
                     throw new DukeException("You have entered an invalid number!");
                 }
 
@@ -61,7 +63,8 @@ public class Duke {
                 String todo_task = new_todo_task.format_tasks();
                 new_todo_task.setDescription(todo_task);
                 stored_list.add(new_todo_task);
-                print(new_todo_task, stored_list);
+                Print.print(new_todo_task, stored_list);
+                new_todo_task.saveTask();
             }
 
             // If the task is a deadline
@@ -71,23 +74,22 @@ public class Duke {
                 new_deadline.setDescription(input);
                 new_deadline.setBy(input);
                 stored_list.add(new_deadline);
-                print(new_deadline, stored_list);
+                Print.print(new_deadline, stored_list);
+                new_deadline.saveTask();
             } else if (input.contains("event")) {
                 Event new_event = new Event(input, "");
                 new_event.setDescription(input);
                 new_event.setAt(input);
                 stored_list.add(new_event);
-                print(new_event, stored_list);
+                Print.print(new_event, stored_list);
+                new_event.saveTask();
             } else if (input.contains("delete")) {
                 String[] splited_string = input.split(" ");
                 Integer number = Integer.valueOf(splited_string[1]);
                 Task deleted_task = stored_list.get(number - 1);
                 stored_list.remove(deleted_task);
-                System.out.println(lines);
-                System.out.println(space + "Noted. I've removed this task:");
-                System.out.println(space + deleted_task);
-                System.out.println(space + "Now you have " + stored_list.size() + " tasks in the list.");
-                System.out.println(lines);
+                Print.print_delete(deleted_task, stored_list.size());
+
             } else {
                 System.out.println(lines);
                 throw new DukeException(" OOPS!!! I'm sorry but I do not know what taht means :-(");
@@ -95,14 +97,21 @@ public class Duke {
         }
     }
 
-    // For the print formatting for to-do, deadline and event
-    private static void print(Task task, ArrayList<Task> list) {
-        System.out.println(lines);
-        task.got_it_line();
-        System.out.println(space + task);
-        System.out.println(space + " Now you have " + (list.size()) + " tasks in the list.");
-        System.out.println(lines);
-    }
 
+    // To print file contents, saved here if needed to use in the future.
+//    private static void printFileContents(String filePath) throws FileNotFoundException {
+//        File f = new File(filePath);
+//        Scanner s = new Scanner(f);
+//        while (s.hasNext()) {
+//            System.out.println(s.nextLine());
+//        }
+//    }
+    //        To print the files
+//        try{
+//            printFileContents("data/fruits.txt");
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not Found");
+//        }
 
 }
+
