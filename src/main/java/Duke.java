@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    enum CommandType {
+        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, DEFAULT
+    }
+
     public static void main(String[] args) {
         //Duke Setup
         boolean dukeRunning = true;
@@ -17,14 +21,22 @@ public class Duke {
         while (dukeRunning) {
             String input = sc.nextLine();
             String[] inputBreakdown = input.split(" ", 2);
+            CommandType dukeSwitchCase = CommandType.DEFAULT;
 
-            switch (inputBreakdown[0].toLowerCase()) {
-                case "bye":
+            try {
+                dukeSwitchCase = CommandType.valueOf(inputBreakdown[0].toUpperCase());
+            } catch (IllegalArgumentException e) {
+                print(new UnknownCommandException().toString());
+            }
+
+
+            switch (dukeSwitchCase) {
+                case BYE:
                     print("Bye. Hope to see you again soon!");
                     dukeRunning = false;
                     break;
 
-                case "deadline":
+                case DEADLINE:
                     try {
                         String[] byDeadline = inputBreakdown[1].split(" /by ");
 
@@ -42,7 +54,7 @@ public class Duke {
                     }
                     break;
 
-                case "delete":
+                case DELETE:
                     try {
                         int deleteTaskNo = Integer.parseInt(inputBreakdown[1]) - 1;
                         Task deletedShadowTask = taskList.get(deleteTaskNo);
@@ -59,7 +71,7 @@ public class Duke {
                     }
                     break;
 
-                case "done":
+                case DONE:
                     try {
                         int doneTaskNo = Integer.parseInt(inputBreakdown[1]) - 1;
                         taskList.get(doneTaskNo).taskCompleted = true;
@@ -69,7 +81,7 @@ public class Duke {
                     }
                     break;
 
-                case "event":
+                case EVENT:
                     try {
                         String[] atEvent = inputBreakdown[1].split(" /at ");
 
@@ -87,11 +99,11 @@ public class Duke {
                     }
                     break;
 
-                case "list":
+                case LIST:
                     showList(taskList);
                     break;
 
-                case "todo":
+                case TODO:
                     try {
                         taskList.add(new Todo(false, taskNo++, inputBreakdown[1]));
                         print("Got it. I've added this task:\n\t[T][✗] "
@@ -103,7 +115,7 @@ public class Duke {
                     break;
 
                 default:
-                    print(new UnknownCommandException().toString());
+                    break;
             }
         }
     }
