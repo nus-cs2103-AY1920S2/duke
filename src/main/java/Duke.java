@@ -7,20 +7,18 @@ import java.util.HashMap;
 public class Duke {
     private Storage storage;
     protected TaskList tasks;
-    protected static final String HORIZONTAL_BAR =
-            "____________________________________________________________";
-    protected static final String NEWLINE = System.lineSeparator();
-    protected static final String INDENTATION = "    ";
+    private Ui ui;
     protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     HashMap<String, CommandType> validCommands;
 
     public Duke(String saveFile) {
+        ui = new Ui();
         storage = new Storage(saveFile);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             // Did not load tasks from save file
-            e.printStackTrace();
+            ui.showLoadingError();
             tasks = new TaskList();
         }
         setupValidCommands();
@@ -31,13 +29,13 @@ public class Duke {
     }
 
     public void run() {
-        greet();
+        ui.greet();
         boolean requestExit = false;
         while (!requestExit) {
             // Run process command, check if user has terminated program
             requestExit = processCommandWrapper(reader);
         }
-        goodbye();
+        ui.goodbye();
     }
 
     protected void setupValidCommands() {
@@ -52,42 +50,6 @@ public class Duke {
     }
 
     /**
-     * Prints given text with indentation: specified in Duke class.
-     * @param text used for formatting and printing
-     */
-    protected void printTextWithIndentation(String text) {
-        System.out.println(INDENTATION + text);
-    }
-
-    /**
-     * Prints greeting message.
-     */
-    protected void greet() {
-        String logo = "  __  __        _____       _           _   " + NEWLINE +
-                " |  \\/  |      |  __ \\     | |         | |  " + NEWLINE +
-                " | \\  / |_ __  | |__) |___ | |__   ___ | |_ " + NEWLINE +
-                " | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|" + NEWLINE +
-                " | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ " + NEWLINE +
-                " |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|";
-        System.out.println(logo);
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Hello friend. Hello friend?");
-        printTextWithIndentation("That's lame. Maybe I should give you a name.");
-        printTextWithIndentation("But that's a slippery slope, you're only in my head,");
-        printTextWithIndentation("we have to remember that.");
-        printTextWithIndentation(HORIZONTAL_BAR);
-    }
-
-    /**
-     * Prints goodbye message.
-     */
-    protected void goodbye() {
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Goodbye friend.");
-        printTextWithIndentation(HORIZONTAL_BAR);
-    }
-
-    /**
      * Used to catch any exceptions resulting from executing commands.
      * @param inputReader used to receive user input
      * @return boolean indicating whether user exited normally
@@ -97,15 +59,11 @@ public class Duke {
         try {
             processCommands(inputReader);
         } catch (IOException ioException) {
-            printTextWithIndentation(HORIZONTAL_BAR);
-            printTextWithIndentation("Unable to read user input...");
-            printTextWithIndentation(HORIZONTAL_BAR);
+            ui.unableToReadUserInput();
             normalExit = false;
         } catch (DukeException dukeException) {
             // Print error message
-            printTextWithIndentation(HORIZONTAL_BAR);
-            printTextWithIndentation(dukeException.getMessage());
-            printTextWithIndentation(HORIZONTAL_BAR);
+            ui.showExceptionMessage(dukeException);
             normalExit = false;
         }
         return normalExit;
@@ -125,9 +83,7 @@ public class Duke {
             String[] commandWords = command.split("\\s+");
             // No input is given or only whitespace given
             if (command.length() == 0) {
-                printTextWithIndentation(HORIZONTAL_BAR);
-                printTextWithIndentation("404 Not Found... Are you there?");
-                printTextWithIndentation(HORIZONTAL_BAR);
+                ui.commandNotFound();
                 continue;
             }
             if (!validCommands.containsKey(commandWords[0])) {
@@ -142,21 +98,14 @@ public class Duke {
                 storage.updateSaveFile(tasks);
                 break;
             case "list":
-                printTextWithIndentation(HORIZONTAL_BAR);
-                int taskCount = 1;
-                printTextWithIndentation("Here are the tasks in your list:");
-                for (Task task : tasks) {
-                    printTextWithIndentation("" + taskCount + "." + task.toString());
-                    taskCount++;
-                }
-                printTextWithIndentation(HORIZONTAL_BAR);
+                ui.listTasks(tasks);
                 break;
             case "done":
                 // Get task to mark as done
                 try {
                     int taskNumber = Integer.parseInt(commandWords[1]);
                     Task task = tasks.get(taskNumber - 1);
-                    markTaskAsDone(task);
+                    ui.markTaskAsDone(task);
                     storage.updateSaveFile(tasks);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid Task Number given!");
@@ -173,7 +122,7 @@ public class Duke {
                 String todoDescription = command.substring("todo".length() + 1);
                 Task newTodoTask = tasks.addTodoTask(todoDescription);
                 // Print out information about added task
-                printTaskAddition(newTodoTask);
+                ui.printTaskAddition(newTodoTask, tasks.size());
                 storage.updateSaveFile(tasks);
                 break;
             case "deadline":
@@ -193,7 +142,7 @@ public class Duke {
                 // Add new task
                 try {
                     Task newDeadlineTask = tasks.addDeadlineTask(deadlineDescription, deadline);
-                    printTaskAddition(newDeadlineTask);
+                    ui.printTaskAddition(newDeadlineTask, tasks.size());
                     storage.updateSaveFile(tasks);
                 } catch (DateTimeException e) {
                     // Given deadline string was not in correct format
@@ -215,7 +164,7 @@ public class Duke {
                 // Add new event to task list
                 try {
                     Task newEvent = tasks.addEventTask(eventDescription, eventTime);
-                    printTaskAddition(newEvent);
+                    ui.printTaskAddition(newEvent, tasks.size());
                     storage.updateSaveFile(tasks);
                 } catch (DateTimeException e) {
                     // Given event time could not be converted a valid date
@@ -227,7 +176,7 @@ public class Duke {
                 try {
                     int taskNumberToDelete = Integer.parseInt(commandWords[1]);
                     Task removedTask = tasks.remove(taskNumberToDelete - 1);
-                    printTaskDeletion(removedTask);
+                    ui.printTaskDeletion(removedTask, tasks.size());
                     storage.updateSaveFile(tasks);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid task number given for deletion...");
@@ -297,42 +246,5 @@ public class Duke {
             throw new DukeException(DukeException.exceptionIcon +
                     " No deadline given... Format: deadline [description] /by [due by]");
         }
-    }
-
-    /**
-     * Prints out newly added task information.
-     * @param task used for printing information related to task
-     */
-    protected void printTaskAddition(Task task) {
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Got it. I've added this task:");
-        // Add more indentation for task description
-        printTextWithIndentation("  " + task.toString());
-        printTextWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
-        printTextWithIndentation(HORIZONTAL_BAR);
-    }
-
-    /**
-     * Mark a given task as done and print out updated task information.
-     * @param task to mark as done
-     */
-    protected void markTaskAsDone(Task task) {
-        task.markAsDone();
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Nice! I've marked this task as done:");
-        printTextWithIndentation(task.toString());
-        printTextWithIndentation(HORIZONTAL_BAR);
-    }
-
-    /**
-     * Deletes a given task and prints information about deleted task.
-     * @param task to be deleted
-     */
-    protected void printTaskDeletion(Task task) {
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Noted. I've removed this task:");
-        printTextWithIndentation("  " + task.toString());
-        printTextWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
-        printTextWithIndentation(HORIZONTAL_BAR);
     }
 }
