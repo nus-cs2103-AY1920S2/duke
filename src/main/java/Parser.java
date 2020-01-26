@@ -6,15 +6,6 @@ public class Parser {
         //deals with making sense of the user command
     }
 
-    public boolean isNumber(String numStr) {
-        try {
-            Integer.parseInt(numStr);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     public String makeSenseOfUserCommand(String command) {
         command = command.trim();
 
