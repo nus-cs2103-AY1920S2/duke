@@ -1,3 +1,9 @@
+package duke.interaction;
+
+import duke.command.*;
+import duke.task.Task;
+import duke.util.DukeException;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -23,7 +29,8 @@ public class Parser {
                 case "date":
                     return new DateCommand(in.nextLine().trim());
                 default:
-                    in.nextLine();
+                    if (in.hasNextLine())
+                        in.nextLine();
                     throw new DukeException.InvalidCommand();
             }
         } catch (DukeException.InvalidCommand e) {

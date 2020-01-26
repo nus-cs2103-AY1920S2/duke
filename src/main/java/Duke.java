@@ -1,3 +1,8 @@
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.interaction.*;
+
 public class Duke {
 
     private TaskList taskList;
@@ -24,13 +29,15 @@ public class Duke {
     }
 
     private void Loop() {
-        boolean is_exiting;
+        boolean is_exiting = false;
         Command c;
         do {
             String fullCommand = Ui.ReadCommand();
             c = Parser.parse(fullCommand);
-            c.execute(taskList, storage);
-            is_exiting = c.isExit();
+            if (c != null) {
+                c.execute(taskList, storage);
+                is_exiting = c.isExit();
+            }
         } while (!is_exiting);
 
         Exit();

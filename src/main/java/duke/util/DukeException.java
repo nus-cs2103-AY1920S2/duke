@@ -1,3 +1,5 @@
+package duke.util;
+
 public class DukeException {
 
     public static class InvalidCommand extends Exception {

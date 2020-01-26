@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.util.Storage;
+
 public class DoneCommand extends Command {
 
     int doneIndex;

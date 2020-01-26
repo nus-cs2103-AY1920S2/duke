@@ -1,8 +1,10 @@
+package duke.task;
+
 public abstract class Task {
     protected String name;
     protected boolean isDone;
 
-    enum TaskType {
+    public enum TaskType {
         TODO,
         DEADLINE,
         EVENT
