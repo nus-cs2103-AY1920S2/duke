@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,18 +19,26 @@ public class Task {
         return taskList.size();
     }
 
-    public static void setDone(int index) {
-        Task completedTask = taskList.get(index);
-        completedTask.isDone = true;
-        System.out.print("Nice, I've marked this as done:");
-        System.out.println(completedTask);
+    public static void setDone(String num) {
+        try {
+            Task completedTask = taskList.get(Integer.parseInt(num) - 1);
+            completedTask.isDone = true;
+            System.out.print("Nice, I've marked this as done:");
+            System.out.println(completedTask);
+        } catch (Exception e) {
+            throw new InvalidFormatException("Enter \"done number\", make sure number exists in list!");
+        }
     }
 
-    public static void deleteTask(int index) {
-        Task deletedTask = taskList.remove(index);
-        System.out.print("Deleted: ");
-        System.out.println(deletedTask);
-        System.out.format("You now have %d tasks in the list\n", getTaskCount());
+    public static void deleteTask(String num) {
+        try {
+            Task deletedTask = taskList.remove(Integer.parseInt(num) - 1);
+            System.out.print("Deleted: ");
+            System.out.println(deletedTask);
+            System.out.format("You now have %d tasks in the list\n", getTaskCount());
+        } catch (Exception e) {
+            throw new InvalidFormatException("Enter \"delete number\", make sure number exists in list!");
+        }
     }
 
     public static void printTaskList() {
@@ -53,9 +64,14 @@ public class Task {
                 throw new InvalidFormatException("correct format: deadline task /by date");
             }
             String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, seperator));
-            String by = String.join(" ", Arrays.copyOfRange(instArr, seperator + 1, instArr.length));
-            Task newTask = new Deadline(description, by);
-            AddTaskHelper(newTask);
+            String dateTime = String.join(" ", Arrays.copyOfRange(instArr, seperator + 1, instArr.length));
+            try {
+                LocalDateTime by = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                Task newTask = new Deadline(description, by);
+                AddTaskHelper(newTask);
+            } catch (DateTimeParseException e) {
+                throw new InvalidFormatException("Make sure you entered valid date: yyyy-MM-dd HH:mm");
+            }
         } else if (instArr[0].equals("event")) {
             int seperator = instList.indexOf("/at");
             if (seperator == -1) {

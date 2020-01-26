@@ -20,11 +20,9 @@ public class Duke {
                 } else if (instruction.equals("list")) {
                     Task.printTaskList();
                 } else if (instruction.equals("done")) {
-                    // 1. handle if done x, x is not int    https://www.baeldung.com/java-check-string-number
-                    // 2. handle if done x, x does not exist
-                    Task.setDone(Integer.valueOf(inputWords[1]) - 1);
+                    Task.setDone(inputWords[1]);
                 } else if (instruction.equals("delete")) {
-                    Task.deleteTask(Integer.valueOf(inputWords[1]) - 1);
+                    Task.deleteTask(inputWords[1]);
                 } else if ((instruction.equals("todo")
                         || instruction.equals("deadline")
                         || instruction.equals("event"))) {

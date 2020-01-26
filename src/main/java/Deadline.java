@@ -3,18 +3,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDateTime dateTime;
-    private DateTimeFormatter defaultFormatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+    protected LocalDateTime by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
-        this.dateTime = LocalDateTime.parse(by, defaultFormatter);;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateTime.toString() + ")";
+        String formatDateTime = by.format(DateTimeFormatter.ofPattern("dd LLL yyyy HH:mma"));
+        return "[D]" + super.toString() + " (by: " + formatDateTime + ")";
     }
 }
