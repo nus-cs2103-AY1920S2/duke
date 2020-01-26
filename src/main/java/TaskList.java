@@ -3,7 +3,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
- * Contains the task list
+ * Contains the task list.
  */
 public class TaskList {
 
@@ -38,7 +38,7 @@ public class TaskList {
      * Returns a particular task.
      *
      * @param taskIndex Index of task to be returned.
-     * @return
+     * @return Task at index taskIndex.
      */
     public Task getTask(int taskIndex) {
         return tasks.get(taskIndex);
