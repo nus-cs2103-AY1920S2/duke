@@ -11,8 +11,7 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "com.duke.bot.Duke"
 }
 
 run {
