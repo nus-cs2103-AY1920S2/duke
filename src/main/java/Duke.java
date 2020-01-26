@@ -37,60 +37,60 @@ public class Duke {
         String input = sc.nextLine();
         String[] cmd = input.split("\\s", 2);
         switch (cmd[0].toLowerCase()) {
-            case "todo":
-                if (cmd.length < 2 || cmd[1].trim().equals("")) {
-                    System.out.println("\tOOPS! The description of a todo cannot be empty.");
+        case "todo":
+            if (cmd.length < 2 || cmd[1].trim().equals("")) {
+                System.out.println("\tOOPS! The description of a todo cannot be empty.");
+                this.waitInput();
+            } else {
+                Task newTask = new Todo(cmd[1].trim());
+                this.addTask(newTask);
+            }
+            break;
+        case "event":
+            if (cmd.length < 2 || cmd[1].trim().equals("")) {
+                System.out.println("\tOOPS! The description of a event cannot be empty.");
+                this.waitInput();
+            } else {
+                String[] info = cmd[1].split("/at");
+                if (info.length < 2 || info[1].trim().equals("")) {
+                    System.out.println("\tOOPS! Please input /at Date Time (e.g. /at Mon 2-4pm)");
                     this.waitInput();
                 } else {
-                    Task newTask = new Todo(cmd[1].trim());
+                    Task newTask = new Event(info[0].trim(), info[1].trim());
                     this.addTask(newTask);
                 }
-                break;
-            case "event":
-                if (cmd.length < 2 || cmd[1].trim().equals("")) {
-                    System.out.println("\tOOPS! The description of a event cannot be empty.");
+            }
+            break;
+        case "deadline":
+            if (cmd.length < 2 || cmd[1].trim().equals("")) {
+                System.out.println("\tOOPS! The description of a deadline cannot be empty.");
+                this.waitInput();
+            } else {
+                String[] info = cmd[1].split("/by");
+                if (info.length < 2 || info[1].trim().equals("")) {
+                    System.out.println("\tOOPS! Please input /by Date (e.g. /by Feb 3rd)");
                     this.waitInput();
                 } else {
-                    String[] info = cmd[1].split("/at");
-                    if (info.length < 2 || info[1].trim().equals("")) {
-                        System.out.println("\tOOPS! Please input /at Date Time (e.g. /at Mon 2-4pm)");
-                        this.waitInput();
-                    } else {
-                        Task newTask = new Event(info[0].trim(), info[1].trim());
-                        this.addTask(newTask);
-                    }
+                    Task newTask = new Deadline(info[0].trim(), info[1].trim());
+                    this.addTask(newTask);
                 }
-                break;
-            case "deadline":
-                if (cmd.length < 2 || cmd[1].trim().equals("")) {
-                    System.out.println("\tOOPS! The description of a deadline cannot be empty.");
-                    this.waitInput();
-                } else {
-                    String[] info = cmd[1].split("/by");
-                    if (info.length < 2 || info[1].trim().equals("")) {
-                        System.out.println("\tOOPS! Please input /by Date (e.g. /by Feb 3rd)");
-                        this.waitInput();
-                    } else {
-                        Task newTask = new Deadline(info[0].trim(), info[1].trim());
-                        this.addTask(newTask);
-                    }
-                }
-                break;
-            case "delete":
-                deleteTask(cmd[1]);
-                break;
-            case "list":
-                printTasks();
-                break;
-            case "done":
-                markAsDone(cmd[1]);
-                break;
-            case "bye":
-                System.out.println("\tBye. Hope to see you again soon!");
-                break;
-            default:
-                echo(input);
-                break;
+            }
+            break;
+        case "delete":
+            deleteTask(cmd[1]);
+            break;
+        case "list":
+            printTasks();
+            break;
+        case "done":
+            markAsDone(cmd[1]);
+            break;
+        case "bye":
+            System.out.println("\tBye. Hope to see you again soon!");
+            break;
+        default:
+            echo(input);
+            break;
         }
     }
 
