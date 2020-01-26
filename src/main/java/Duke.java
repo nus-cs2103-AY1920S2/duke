@@ -1,3 +1,5 @@
+import java.security.InvalidKeyException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -11,10 +13,11 @@ public class Duke {
     }
 
     //get a list which listing all the tasks recorded
-    public static void gettingList(int index, Task[] list) {
+    public static void gettingList(ArrayList<Task> list) {
+        int index = list.size();
         StringBuilder li = new StringBuilder("    \uD83D\uDCDC Here are the tasks in your list:\n");
         for (int i = 0; i < index; i++) {
-            li.append("         ").append(i + 1).append(": ").append(list[i]).append("\n");
+            li.append("         ").append(i + 1).append(": ").append(list.get(i)).append("\n");
         }
         typeSetting(li.toString());
     }
@@ -27,22 +30,46 @@ public class Duke {
         return new String[]{description, byOrAt};
     }
 
+    //to check whether the number input is valid
+    public static boolean inRange(int num, int index) {
+        return num > 0 && num <= index;
+    }
+
+    //To check whether the input for description is empty or not
+    public static void checkDescription(String str, int i) throws EmptyDescriptionException {
+        if (str.length() <= i + 1) {
+            throw new EmptyDescriptionException("OOPS!!! The description of a task cannot be empty.");
+        }
+    }
+
     //to process different requests which is decided by the first token of the message user entered
-    public static Task[] processRequest(String str, Task[] list, int index) {
+    public static ArrayList<Task> processRequest(String str, ArrayList<Task> list)
+            throws InvalidKeyException, IllegalArgumentException, EmptyDescriptionException {
+        if (str.equals("")) {
+            throw new InvalidKeyException("Try to say something to me.");
+        }
+
+        int index = list.size();
         StringTokenizer st = new StringTokenizer(str);
         String first = st.nextToken(" ");
+
         switch (first) {
             //decide which action to be done by the first token
             case "done":
+                checkDescription(str, "done".length());
                 int num = Integer.parseInt(str.substring(5));
-                list[num - 1].markAsDone();
+                if (!inRange(num, index)) {
+                    throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
+                }
+                list.get(num - 1).markAsDone();
                 typeSetting("    \uD83D\uDC4D Nice! I've marked this task as done: " + num
-                        + "\n" + "      " + list[num - 1]);
+                        + "\n" + "      " + list.get(num - 1));
                 break;
 
             case "todo":
+                checkDescription(str, "todo".length());
                 Todo td = new Todo(st.nextToken("").substring(1));
-                list[index] = td;
+                list.add(td);
                 index++;
                 typeSetting("    Got it. I've added this task: \n      " +
                         td + "\n" +
@@ -50,9 +77,10 @@ public class Duke {
                 break;
 
             case "deadline":
+                checkDescription(str, "deadline".length());
                 String[] strings = stringSplitting(st);
                 Deadline ddl = new Deadline(strings[0], strings[1]);
-                list[index] = ddl;
+                list.add(ddl);
                 index++;
                 typeSetting("    Got it. I've added this task: \n      " +
                         ddl + "\n" +
@@ -60,14 +88,18 @@ public class Duke {
                 break;
 
             case "event":
+                checkDescription(str, "event".length());
                 String[] strings2 = stringSplitting(st);
                 Event ev = new Event(strings2[0], strings2[1]);
-                list[index] = ev;
+                list.add(ev);
                 index++;
                 typeSetting("    Got it. I've added this task: \n      " +
                         ev + "\n" +
                         "    Now you have " + index + " tasks in the list.");
                 break;
+
+            default:
+                throw new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return list;
     }
@@ -76,7 +108,7 @@ public class Duke {
         //setting up
         Scanner sc = new Scanner(System.in);
         boolean exiting = false;
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
         int index = 0;
 
         //welcome message
@@ -89,15 +121,13 @@ public class Duke {
             while (!str.equals("bye")) {
                 if (str.equals("list")) {
                     //print out the whole list
-                    gettingList(index, list);
+                    gettingList(list);
                 } else {
-                    list = processRequest(str, list, index);
-                    index = 0;
-                    for (Task t: list) {
-                        if (t == null)
-                            break;
-                        else
-                            index++;
+                    //update the list of tasks
+                    try {
+                        list = processRequest(str, list);
+                    } catch (InvalidKeyException | IllegalArgumentException |  EmptyDescriptionException e) {
+                        System.err.println(e);
                     }
                 }
                 str = sc.nextLine();
