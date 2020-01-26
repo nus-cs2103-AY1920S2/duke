@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 public class Storage {
     public static File init() {
@@ -77,7 +78,7 @@ public class Storage {
                 String taskStr = thisTask.getTaskType() + " ~ "
                         + (thisTask.checkIsDone() ? "1" : "0") + " ~ "
                         + thisTask.getTaskName() + " ~ "
-                        + thisTask.getDeadline() + "\n";
+                        + (thisTask.getTaskType() == 'T' ? "" : thisTask.getTaskTime()) + "\n";
                 bw.write(taskStr);
             }
             bw.close();

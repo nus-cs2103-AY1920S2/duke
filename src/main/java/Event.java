@@ -1,5 +1,5 @@
 public class Event extends Task {
-    public Event(String newTask, boolean isDone, char taskType, String taskTime) {
-        super(newTask, isDone, taskType, taskTime);
+    public Event(char taskType, boolean isDone, String taskName, String taskTime) {
+        super(taskType, isDone, taskName, taskTime);
     }
 }

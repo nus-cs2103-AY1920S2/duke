@@ -1,14 +1,24 @@
-public class Task {
-    private String taskName;
-    private boolean isDone;
-    private char taskType;
-    private String taskTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Task(String newTask, boolean isDone, char taskType, String taskTime) {
-        this.taskName = newTask;
-        this.isDone = isDone;
+public class Task {
+    private char taskType;
+    private boolean isDone;
+    private String taskName;
+    private LocalDateTime taskTime;
+
+    public Task(char taskType, boolean isDone, String taskName, String taskTime) {
         this.taskType = taskType;
-        this.taskTime = taskTime;
+        this.isDone = isDone;
+        this.taskName = taskName;
+        this.taskTime = taskTime.isEmpty()
+                ? LocalDateTime.MIN
+                : this.parseDate(taskTime);
+    }
+
+    public LocalDateTime parseDate(String taskTime) throws DateTimeParseException {
+        return LocalDateTime.parse(taskTime, DateTimeFormatter.ofPattern("dd/M/yyyy HH:mm"));
     }
 
     public boolean checkIsDone() {
@@ -27,8 +37,10 @@ public class Task {
         return this.taskType;
     }
 
-    public String getDeadline() {
-        return this.taskTime;
+    public String getTaskTime() {
+        return this.taskTime.getDayOfMonth() + "/" + this.taskTime.getMonthValue() + "/" + this.taskTime.getYear()
+                + " " + this.taskTime.getHour() + ":"
+                + (this.taskTime.getMinute() > 9 ? this.taskTime.getMinute() : "0" + this.taskTime.getMinute());
     }
 
     public String markDone() {
@@ -41,6 +53,16 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + taskType + "] " + "[" + getStatus() + "] " + this.taskName + this.taskTime;
+        if (this.taskType == 'T') {
+            return "[" + taskType + "] " + "[" + getStatus() + "] " + this.taskName;
+
+        } else if (this.taskType == 'D') {
+            return "[" + taskType + "] " + "[" + getStatus() + "] " + this.taskName + " (by: " + this.getTaskTime() + ")";
+
+        } else if (this.taskType == 'E') {
+            return "[" + taskType + "] " + "[" + getStatus() + "] " + this.taskName + " (at: " + this.getTaskTime() + ")";
+        } else {
+            return "";
+        }
     }
 }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -46,7 +47,7 @@ public class Duke {
                     try {
                         String[] taskDetails = message.split("/at");
                         String taskName = taskDetails[0].strip();
-                        String taskTime = " (at: " + taskDetails[1].strip() + ")";
+                        String taskTime = taskDetails[1].strip();
                         System.out.println(tasklist.newEvent('E', false, taskName, taskTime));
 
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -55,13 +56,15 @@ public class Duke {
                         } else {
                             System.out.println("Oops! This task needs a date/time!");
                         }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Oops! The date/time might be in the wrong format!");
                     }
 
                 } else if (command.equals("deadline")) {
                     try {
                         String[] taskDetails = message.split("/by");
                         String taskName = taskDetails[0].strip();
-                        String taskTime = " (by: " + taskDetails[1].strip() + ")";
+                        String taskTime = taskDetails[1].strip();
                         System.out.println(tasklist.newDeadline('D', false, taskName, taskTime));
 
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -70,6 +73,8 @@ public class Duke {
                         } else {
                             System.out.println("Oops! This task needs a date/time!");
                         }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Oops! The date/time might be in the wrong format!");
                     }
 
                 } else if (command.equals("list")) {

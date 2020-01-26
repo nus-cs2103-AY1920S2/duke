@@ -1,5 +1,6 @@
-import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TaskList {
     protected ArrayList<Task> list;
@@ -15,17 +16,17 @@ public class TaskList {
     }
 
     public String newTodo(char taskType, boolean isDone, String taskName) {
-        Task task = new Todo(taskName, isDone, taskType);
+        Task task = new Todo(taskType, isDone, taskName);
         return add(task);
     }
 
     public String newEvent(char taskType, boolean isDone, String taskName, String taskTime) {
-        Task task = new Event(taskName, isDone, taskType, taskTime);
+        Task task = new Event(taskType, isDone, taskName, taskTime);
         return add(task);
     }
 
     public String newDeadline(char taskType, boolean isDone, String taskName, String taskTime) {
-        Task task = new Deadline(taskName, isDone, taskType, taskTime);
+        Task task = new Deadline(taskType, isDone, taskName, taskTime);
         return add(task);
     }
 

@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    public Deadline(String newTask, boolean isDone, char taskType, String taskTime) {
-        super(newTask, isDone, taskType, taskTime);
+    public Deadline(char taskType, boolean isDone, String taskName, String taskTime) {
+        super(taskType, isDone, taskName, taskTime);
     }
 }
