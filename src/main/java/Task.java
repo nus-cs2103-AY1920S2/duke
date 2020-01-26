@@ -1,4 +1,6 @@
-class Task {
+import java.io.Serializable;
+
+class Task implements Serializable {
     boolean taskCompleted;
     int taskNo;
     String taskName;
