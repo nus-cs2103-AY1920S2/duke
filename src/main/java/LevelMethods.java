@@ -101,7 +101,7 @@ public class LevelMethods {
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
-                    throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD");
+                    throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD TTTT");
                 } else {
 //                    LocalDate localDate = LocalDate.parse(eventAndTime[1]);
                     Event event = new Event(eventAndTime[0], eventAndTime[1]);
@@ -130,7 +130,7 @@ public class LevelMethods {
                     //print
                     printAddingTask(deadline);
                 } else {
-                    throw new GrapieExceptions("OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD");
+                    throw new GrapieExceptions("OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT");
                 }
 
             } else {
