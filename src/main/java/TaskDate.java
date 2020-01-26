@@ -1,9 +1,8 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.Locale;
-
-import static java.time.format.TextStyle.SHORT;
 
 public class TaskDate implements Serializable {
     protected String dateString;
@@ -29,7 +28,7 @@ public class TaskDate implements Serializable {
     private String getDate() {
         String res = "";
         Month month = this.localDate.getMonth();
-        String monthString = month.getDisplayName(SHORT, Locale.ENGLISH);
+        String monthString = month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
         res += String.valueOf(this.localDate.getDayOfMonth());
         res += " ";
         res += monthString;

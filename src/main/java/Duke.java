@@ -1,158 +1,90 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
-    static String fill = "----------------------------------------";
-    static String indent = "    ";
 
-    /**
-     * Formats a string to an output produced by Duke.
-     * @param s string to be formatted.
-     * @return formatted string ready to be printed.
-     */
-    public static String dukeFormat(String s) {
-        return indent + fill + "\n" + indent + s + "\n" + indent + fill;
-    }
+    private Storage storage;
+    private TaskList lst;
+    private Ui ui;
+    private Parser parser;
 
-    /**
-     * Formats a list to an output produced by Duke.
-     * @param lst list to be formatted.
-     * @return Formatted list ready to be printed.
-     */
-    public static String dukeFormatList(ArrayList<Task> lst) {
-        String res = "";
-        res += indent + fill + "\n";
-        for (int i = 0; i < lst.size(); i++) {
-            res += indent + String.valueOf(i + 1) + ". " + lst.get(i) + "\n";
-        }
-        res += indent + fill;
-        return res;
-    }
-
-    /**
-     * Saves the current state of the task list in persistent storage.
-     * @param file file name specified
-     * @param lst updated list to be saved
-     */
-    public static void save(String file, ArrayList<Task> lst) {
-        try {
-            FileOutputStream fos= new FileOutputStream ("src/main/data/tasks.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(lst);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Duke(String filepath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filepath);
+        this.lst = storage.load();
+        this.parser = new Parser();
     }
 
     public static void main(String[] args) {
+        new Duke("src/main/data/tasks.ser").run();
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> lst = new ArrayList<>(100);
+        ui.showGreeting();
+
         String getInput = null;
-
-        try {
-            File savedData = new File("src/main/data/tasks.ser");
-            FileInputStream fis = new FileInputStream(savedData);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ArrayList<Task> lstSaved = (ArrayList<Task>) ois.readObject();
-            ois.close();
-            lst = lstSaved;
-            System.out.println(indent + "Retrieving my little boy's history..");
-        } catch (FileNotFoundException e) {
-            System.out.println(indent + "Initialising new list for my little boy..");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(dukeFormat("Hello I'm your mum. What can I do for you?"));
         getInput = sc.next();
 
         while (true) {
             try {
-                if (getInput.equals("bye")) {
-                    // exits program
-                    System.out.println(dukeFormat("Bye, have a good day!"));
+                String command = parser.parse(getInput);
+                if (command.equals("bye")) {
+                    ui.showBye();
                     break;
-                } else if (getInput.equals("list")) {
-                    // prints list
-                    System.out.println(dukeFormatList(lst));
-                } else if (getInput.equals("todo") || getInput.equals("deadline") || getInput.equals("event")) {
-                    // Adds a todo, deadline or event based on user input
 
-                    String res = "";
+                } else if (command.equals("list")) {
+                    ui.showList(lst);
+
+                } else if (command.equals("add")) {
                     String line = sc.nextLine();
-                    res += "As your mummy, I have added this task to your list:\n    ";
                     if (getInput.equals("todo")) {
                         Todo todo = new Todo(line);
-                        lst.add(todo);
-                        res += todo;
+                        lst.addTask(todo);
+                        ui.showAddTask(todo, lst.getSize());
                     } else if (getInput.equals("deadline")) {
                         int indexCut = line.indexOf("/by");
                         String desc = line.substring(0, indexCut - 1);
                         String by = line.substring(indexCut + 4);
                         TaskDate td = new TaskDate(by);
                         Deadline deadline = new Deadline(desc, td);
-                        lst.add(deadline);
-                        res += deadline;
+                        lst.addTask(deadline);
+                        ui.showAddTask(deadline, lst.getSize());
                     } else {
                         int indexCut = line.indexOf("/at");
                         String desc = line.substring(0, indexCut - 1);
                         String at = line.substring(indexCut + 4);
                         TaskDate td = new TaskDate(at);
                         Event event = new Event(desc, td);
-                        lst.add(event);
-                        res += event;
+                        lst.addTask(event);
+                        ui.showAddTask(event, lst.getSize());
                     }
+                    storage.save(lst);
 
-                    save("src/main/data/tasks.ser", lst);
-                    res += "\n    You have " + String.valueOf(lst.size()) + " tasks in the list.";
-                    System.out.println(dukeFormat(res));
+                } else if (command.equals("done")) {
+                    String getNumberString = sc.next();
+                    int getNumber = Integer.valueOf(getNumberString);
+                    if (lst.doneTask(getNumber - 1)) {
+                        Task task = lst.getTask(getNumber - 1);
+                        ui.showDoneTask(task);
+                    };
+                    storage.save(lst);
 
-                } else if (getInput.equals("done")) {
-
-                    // validate input for list index
-                    try {
-                        String getNumberString = sc.next();
-                        int getNumber = Integer.valueOf(getNumberString);
-                        Task currTask = lst.get(getNumber - 1);
-                        currTask.setDone(true);
-                        System.out.println(dukeFormat("Sure I will mark this task as done.\n" + indent + currTask));
-                    } catch (NumberFormatException e) {
-                        System.out.println(dukeFormat("Please input an integer."));
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(dukeFormat("Please try again, your number is out of range."));
+                } else if (command.equals("delete")) {
+                    String getNumberString = sc.next();
+                    int getNumber = Integer.valueOf(getNumberString);
+                    if (lst.deleteTask(getNumber - 1)) {
+                        Task task = lst.getTask(getNumber - 1);
+                        ui.showDeleteTask(task, lst.getSize());
                     }
-
-                    save("src/main/data/tasks.ser", lst);
-
-                } else if (getInput.equals("delete")) {
-                    try {
-                        // validate input for list index
-                        String getNumberString = sc.next();
-                        int getNumber = Integer.valueOf(getNumberString);
-                        Task currTask = lst.get(getNumber - 1);
-                        lst.remove(getNumber - 1);
-                        System.out.println(dukeFormat("Sure I will delete this task.\n" + indent + currTask + "\n    Now you have " + String.valueOf(lst.size()) + " tasks."));
-                    } catch (NumberFormatException e) {
-                        System.out.println(dukeFormat("Please input an integer."));
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(dukeFormat("Please try again, your number is out of range."));
-                    }
-
-                    save("src/main/data/tasks.ser", lst);
+                    storage.save(lst);
 
                 } else {
                     throw new DukeException("Invalid Input");
                 }
-            } catch (DukeException e) {
-                System.out.println(dukeFormat("Please try again, your input is invalid."));
-            } catch (Exception e) {
-                System.out.println(e.getClass());
-            }
 
+            } catch (DukeException e) {
+                ui.showErrInvalidInput();
+            }
             getInput = sc.next();
         }
     }
