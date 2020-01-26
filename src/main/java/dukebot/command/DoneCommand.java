@@ -7,10 +7,10 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
-public class doneCommand extends Command {
+public class DoneCommand extends Command {
     private String[] inpArr;
 
-    public doneCommand(String[] inpArr) {
+    public DoneCommand(String[] inpArr) {
         this.inpArr = inpArr;
     }
 

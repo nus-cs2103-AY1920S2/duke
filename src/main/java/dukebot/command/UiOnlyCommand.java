@@ -5,10 +5,10 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
-public class uiOnlyCommand extends Command{
+public class UiOnlyCommand extends Command{
     private LineName toSay;
 
-    public uiOnlyCommand(LineName toSay) {
+    public UiOnlyCommand(LineName toSay) {
         this.toSay = toSay;
     }
 

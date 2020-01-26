@@ -9,6 +9,10 @@ checkstyle {
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
@@ -23,4 +27,8 @@ application {
 
 run {
     standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
 }

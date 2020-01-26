@@ -6,10 +6,10 @@ import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.Ui;
 
-public class newTaskCommand extends Command {
+public class NewTaskCommand extends Command {
     private String[] inpArr;
 
-    public newTaskCommand(String[] inpArr) {
+    public NewTaskCommand(String[] inpArr) {
         this.inpArr = inpArr;
     }
 

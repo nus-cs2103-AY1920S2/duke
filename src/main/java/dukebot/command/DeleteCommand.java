@@ -7,10 +7,10 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
-public class deleteCommand extends Command {
+public class DeleteCommand extends Command {
     private String[] inpArr;
 
-    public deleteCommand(String[] inpArr) {
+    public DeleteCommand(String[] inpArr) {
         this.inpArr = inpArr;
     }
 

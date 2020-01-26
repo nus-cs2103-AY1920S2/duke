@@ -7,30 +7,30 @@ public class Parser {
         String[] inpArr = input.split(" ");
         switch (inpArr[0]) {
         case "":
-            return new uiOnlyCommand(LineName.NO_INPUT);
+            return new UiOnlyCommand(LineName.NO_INPUT);
         case "Duke":
         case "duke":
         case "Master":
         case "master":
-            return new uiOnlyCommand(LineName.SAY_DUKE);
+            return new UiOnlyCommand(LineName.SAY_DUKE);
         case "bye":
-            return new exitCommand();
+            return new ExitCommand();
         case "help":
-            return new uiOnlyCommand(LineName.HELP);
+            return new UiOnlyCommand(LineName.HELP);
         case "list":
-            return new listCommand();
+            return new ListCommand();
         case "done":
-            return new doneCommand(inpArr);
+            return new DoneCommand(inpArr);
         case "todo":
             // Fallthrough
         case "deadline":
             // Fallthrough
         case "event":
-            return new newTaskCommand(inpArr);
+            return new NewTaskCommand(inpArr);
         case "delete":
-            return new deleteCommand(inpArr);
+            return new DeleteCommand(inpArr);
         default:
-            return new uiOnlyCommand(LineName.INVALID_COMMAND);
+            return new UiOnlyCommand(LineName.INVALID_COMMAND);
         }
     }
 }
