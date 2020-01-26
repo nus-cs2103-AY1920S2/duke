@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.File;
 
-public class Cache {
+public class Storage {
 
     private File file;
 
-    public Cache(String filepath) {
+    public Storage(String filepath) {
         this.file = new File(filepath);
     }
 
@@ -53,15 +53,14 @@ public class Cache {
         } catch (FileNotFoundException | ParseException e1) {
             System.out.println(e1.getMessage());
         }
-
         return dukeList;
     }
 
-    public void saveFile (ArrayList<Task> dukeList) throws IOException {
+    public void saveFile (ArrayList<Task> taskList) throws IOException {
 
         try {
             FileWriter writer = new FileWriter(file);
-            for (Task task : dukeList) {
+            for (Task task : taskList) {
                 if (task instanceof ToDo) {
                     String str = "todo" + "/" + task.getStatusIcon() + "/" + task.getDescription() + "\n";
                     writer.write(str);
