@@ -15,13 +15,11 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-
         dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
 
         Scanner sc = new Scanner(System.in);
         newList = new ArrayList<Task>();
         retrieveInfo();
-
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
@@ -30,58 +28,29 @@ public class Duke {
                     list(newList);
 
                 } else if (command.startsWith("done")) {
-                    String[] arr = command.split(" ");
-                    if (arr.length < 2) {
-                        throw new DukeException("The task to be marked as done must be specified");
-                    }
-                    if (Integer.valueOf(arr[1]) - 1 >= newList.size()) {
-                        throw new DukeException("Task " + arr[1] + " does not exist");
-                    }
-                    done(newList, Integer.valueOf(arr[1]) - 1);
+                    checkCommand(command, "done");
+                    done(newList, Integer.valueOf(command.split(" ")[1]) - 1);
 
                 } else if (command.startsWith("delete")) {
-                String[] arr = command.split(" ");
-                if (arr.length < 2) {
-                    throw new DukeException("The task to be deleted must be specified");
-                }
-                if (Integer.valueOf(arr[1]) - 1 >= newList.size()) {
-                    throw new DukeException("Task " + arr[1] + " does not exist");
-                }
-                delete(newList, Integer.valueOf(arr[1]) - 1);
-
+                    checkCommand(command, "delete");
+                    delete(newList, Integer.valueOf(command.split(" ")[1]) - 1);
                 } else {
                     String[] arr = command.split("/");
                     String[] description = (arr[0].split(" ", 2));
 
                     if (command.startsWith("todo")) {
-                        if (description.length < 2) {
-                            throw new DukeException("The description of a todo cannot be empty.");
-                        }
+                        checkDescription(description, "todo");
                         newList.add(new ToDo(description[1]));
 
                     } else if (command.startsWith("deadline")) {
-                        if (description.length < 2) {
-                            throw new DukeException("The description of a deadline cannot be empty.");
-                        } if (arr.length < 2) {
-                            throw new DukeException("The time of a deadline cannot be empty.");
-                        }
-                        String[] time = (arr[1].split(" ", 2));
-                        if (time.length < 2) {
-                            throw new DukeException("The time of a deadline cannot be empty.");
-                        }
-                        newList.add(new Deadline(description[1], time[1]));
+                        checkDescription(description, "deadline");
+                        checkTime(arr, "deadline");
+                        newList.add(new Deadline(description[1], arr[1].split(" ", 2)[1]));
 
                     } else if (command.startsWith("event")) {
-                        if (description.length < 2) {
-                            throw new DukeException("The description of an event cannot be empty.");
-                        } if (arr.length < 2) {
-                            throw new DukeException("The time of an event cannot be empty.");
-                        }
-                        String[] time = (arr[1].split(" ", 2));
-                        if (time.length < 2) {
-                            throw new DukeException("The time of an event cannot be empty.");
-                        }
-                        newList.add(new Event(description[1], time[1]));
+                        checkDescription(description, "event");
+                        checkTime(arr, "event");
+                        newList.add(new Event(description[1], arr[1].split(" ", 2)[1]));
 
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -92,8 +61,7 @@ public class Duke {
                             "Now you have "+newList.size()+" tasks in the list.\n");
                 }
             } catch (DukeException e) {
-                System.out.print(horizontalLines()+"☹ OOPS!!! " + e.getMessage()+
-                        "\n"+horizontalLines());
+                dukePrint("☹ OOPS!!! " + e.getMessage()+ "\n");
             } finally {
                 command = sc.nextLine();
             }
@@ -137,6 +105,32 @@ public class Duke {
         newList.remove(i);
         dukePrint("Noted. I've removed this task:\n"+task.toString()+"\n" +
                 "Now you have "+newList.size()+" tasks in the list.\n");
+    }
+
+    public static void checkCommand(String command, String insert) throws DukeException {
+        String[] arr = command.split(" ");
+        if (arr.length < 2) {
+            throw new DukeException("The task to be marked as " + insert + " must be specified");
+        }
+        if (Integer.valueOf(arr[1]) - 1 >= newList.size()) {
+            throw new DukeException("Task " + arr[1] + " does not exist");
+        }
+    }
+
+    public static void checkDescription (String[] description, String insert) throws DukeException {
+        if (description.length < 2) {
+            throw new DukeException("The description of a " + insert + " cannot be empty.");
+        }
+    }
+
+    public static void checkTime (String[] arr, String insert) throws DukeException {
+        if (arr.length < 2) {
+            throw new DukeException("The time of a " + insert + " cannot be empty.");
+        }
+        String[] time = (arr[1].split(" ", 2));
+        if (time.length < 2) {
+            throw new DukeException("The time of a " + insert + " cannot be empty.");
+        }
     }
 
     public static void retrieveInfo() {
