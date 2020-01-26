@@ -68,6 +68,11 @@ public class Event extends Task {
     }
 
     @Override
+    Task_Codes getTaskCodes() {
+        return Task_Codes.E;
+    }
+
+    @Override
     public String toString() {
         return " [" + Task_Codes.E + "]" + super.toString() + " (at: " +
                 // The format is to change the formatting patterns (Dec 2 2019 OR 2/12/2019)
