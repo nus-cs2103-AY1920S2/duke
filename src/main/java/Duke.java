@@ -10,36 +10,43 @@ public class Duke {
     private static final String BYE_MSG = "Bye, hope to see you again soon!" + LF;
     private static final String BYE_CMD = "bye";
     private static final String LIST_CMD = "list";
+    private static final String DONE_CMD = "done";
 
     public static void main(String[] args) {
         System.out.println(WELCOME_MSG);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
-        mainLoop:
         while (true) {
             try {
                 String cmd = br.readLine();
 
-                switch (cmd) {
-                    case LIST_CMD:
-                        System.out.println("Here are your tasks:");
+                if (cmd.equals(LIST_CMD)) {
+                    System.out.println("Here are your tasks:");
 
-                        for (String task : tasks) {
-                            System.out.println(task);
-                        }
+                    int len = tasks.size();
 
-                        System.out.println();
-                        break;
-                    case BYE_CMD:
-                        System.out.println(BYE_MSG);
-                        break mainLoop;
-                    default:
-                        tasks.add(cmd);
-                        System.out.println("added: " + cmd + LF);
-                        break;
+                    for (int i = 0; i < len; ++i) {
+                        Task t = tasks.get(i);
+                        System.out.println("    " + (i + 1) + ". " + t);
+                    }
+
+                    System.out.println();
+                } else if (cmd.startsWith(DONE_CMD)) {
+                    int id = Integer.parseInt(cmd.split(" ")[1]);
+                    Task t = tasks.get(id - 1);
+
+                    t.markAsDone();
+
+                    System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
+                } else if (cmd.equals(BYE_CMD)) {
+                    System.out.println(BYE_MSG);
+                    break;
+                } else {
+                    tasks.add(new Task(cmd));
+                    System.out.println("added: " + cmd + LF);
                 }
             } catch (IOException e) {
                 System.out.println("Sorry, an error has occurred:");

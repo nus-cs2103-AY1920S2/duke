@@ -15,11 +15,12 @@ public class Task {
         isDone = true;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
-    }
-
     public boolean getDone() {
         return isDone;
+    }
+
+    @Override
+    public String toString() {
+        return ("[" + (isDone ? "\u2713" : "\u2718") + "] " + name);
     }
 }
