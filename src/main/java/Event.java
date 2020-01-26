@@ -59,7 +59,7 @@ public class Event implements Task {
 
     @Override
     public String toString() {
-        return "[E][" + (completed ? "✓" : "✗") + "] " + name + " (at: " +
-                deadline.format(formatter) + ")";
+        return "[E][" + (completed ? "✓" : "✗") + "] " + name + " (at: "
+                + deadline.format(formatter) + ")";
     }
 }

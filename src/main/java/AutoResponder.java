@@ -59,8 +59,8 @@ public class AutoResponder {
         } else if (pEmptyCommand.matcher(lowerInput).find()) {
             Matcher m = pEmptyCommand.matcher(lowerInput);
             m.find();
-            throw new IllegalArgumentException("☹ OOPS!!! The description of a " +
-                    m.group(1) + " cannot be empty.");
+            throw new IllegalArgumentException("☹ OOPS!!! The description of a "
+                    + m.group(1) + " cannot be empty.");
         } else if (pDeadline.matcher(input).find()) {
             Matcher m = pDeadline.matcher(input);
             m.find();
@@ -124,6 +124,8 @@ public class AutoResponder {
                     case 'E':
                         taskList.add(Event.readFormat(s));
                         break;
+                    default:
+                        throw new IllegalArgumentException("No corresponding command found");
                 }
             }
             toPrint.append("Task file loaded successfully!\n");
@@ -137,8 +139,8 @@ public class AutoResponder {
         StringBuilder sb = new StringBuilder(toPrint);
         List<Task> tl = new ArrayList<>(taskList);
         if (index < 0 || index >= taskList.size()) {
-            throw new IndexOutOfBoundsException("Index of " + (index + 1) +
-                    " does not correspond to task list of size " + taskList.size());
+            throw new IndexOutOfBoundsException("Index of " + (index + 1)
+                    + " does not correspond to task list of size " + taskList.size());
         } else {
             tl.set(index, taskList.get(index).makeCompleted());
             sb.append("Nice! I've marked this task as done:\n\t");
@@ -151,8 +153,8 @@ public class AutoResponder {
         StringBuilder sb = new StringBuilder(toPrint);
         List<Task> tl = new ArrayList<>(taskList);
         if (index < 0 || index >= taskList.size()) {
-            throw new IndexOutOfBoundsException("Index of " + (index + 1) +
-                    " does not correspond to task list of size " + taskList.size());
+            throw new IndexOutOfBoundsException("Index of " + (index + 1)
+                    + " does not correspond to task list of size " + taskList.size());
         } else {
             sb.append("Noted! I've removed this task:\n\t");
             sb.append(tl.get(index)).append("\n");
@@ -193,13 +195,13 @@ public class AutoResponder {
     }
 
     public static LocalDateTime parseDateTime(String s) {
-        Pattern pDateTime = Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s+\\d{4}");
-        Pattern pDate = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+        Pattern patternDateTime = Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s+\\d{4}");
+        Pattern patternDate = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
 
-        if (pDateTime.matcher(s).find()) {
+        if (patternDateTime.matcher(s).find()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(s, formatter);
-        } else if (pDate.matcher(s).find()) {
+        } else if (patternDate.matcher(s).find()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
             return LocalDate.parse(s, formatter).atStartOfDay();
         }
