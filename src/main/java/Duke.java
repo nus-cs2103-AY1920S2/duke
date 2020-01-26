@@ -55,16 +55,24 @@ public class Duke {
                         t = Event.createTask(commandArgs);
                         break;
                     case "todo":
-                        System.out.println("hello");
                         t = Todo.createTask(commandArgs);
                         break;
                     case "deadline":
                         t = Deadline.createTask(commandArgs);
                         break;
+                    default:
+                        // Unrecognised command
+                        throw new IllegalCommandException();
                 }
-            } finally {
-                Duke.handleCommandAdd(t);
+            } catch (IllegalArgumentException e1){
+                System.out.println("    " + e1.getMessage());
+                continue;
+            } catch (IllegalCommandException e2) {
+                System.out.println("    " + e2.getMessage());
+                continue;
             }
+
+            Duke.handleCommandAdd(t);
         }
     }
 

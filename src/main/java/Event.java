@@ -7,7 +7,8 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public static Task createTask(String[] commandArgs) {
+    // Todo: Handle exceptional cases
+    public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
         String description = "";
         String at = "";
 

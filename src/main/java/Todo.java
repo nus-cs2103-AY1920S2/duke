@@ -4,13 +4,19 @@ public class Todo extends Task {
         super(description);
     }
 
-    public static Task createTask(String[] commandArgs) {
+    // Todo: Handle exceptional cases if any
+    public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
         String description = "";
         for (String s : commandArgs) {
             if (s.equals("todo")) {
                 continue;
             }
             description += s + " ";
+        }
+
+        // Todo cannot be empty
+        if (description.equals("")) {
+            throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
         return new Todo(description.trim());

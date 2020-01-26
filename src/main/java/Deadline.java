@@ -6,7 +6,8 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public static Task createTask(String[] commandArgs) {
+    // Todo: Handle exceptional cases
+    public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
         String description = "";
         String by = "";
 

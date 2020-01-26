@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public static Task createTask(String[] commandArgs) {return null;};
+    public static Task createTask(String[] commandArgs) throws IllegalArgumentException {return null;};
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
