@@ -2,9 +2,6 @@ import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +11,7 @@ public class Duke {
     // Map project path to the directory from which you run your program
     public static final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
     private static String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
-    private static String saveFilePath = dataDirectoryPath + FILE_SEPARATOR + "duke.txt";
+    private static String saveFilePath;
     protected static final String HORIZONTAL_BAR =
             "____________________________________________________________";
     protected static final String NEWLINE = System.lineSeparator();
@@ -23,7 +20,8 @@ public class Duke {
     protected ArrayList<Task> tasks = new ArrayList<>();
     HashMap<String, CommandType> validCommands;
 
-    public Duke() {
+    public Duke(String saveFile) {
+        saveFilePath = dataDirectoryPath + FILE_SEPARATOR + saveFile;
         setupDataDirectory();
         createSaveFile();
         loadSaveFile();
@@ -31,14 +29,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
+        new Duke("duke.txt").run();
+    }
+
+    public void run() {
+        greet();
         boolean requestExit = false;
         while (!requestExit) {
             // Run process command, check if user has terminated program
-            requestExit = duke.processCommandWrapper(reader);
+            requestExit = processCommandWrapper(reader);
         }
-        duke.goodbye();
+        goodbye();
     }
 
     protected void setupValidCommands() {
@@ -73,8 +74,7 @@ public class Duke {
     }
 
     protected void loadSaveFile() {
-        try {
-            BufferedReader saveFile = new BufferedReader(new FileReader(saveFilePath));
+        try (BufferedReader saveFile = new BufferedReader(new FileReader(saveFilePath))) {
             // Load data into tasks
             String line = saveFile.readLine();
             /* Format of save file
