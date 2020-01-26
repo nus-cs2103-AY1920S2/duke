@@ -1,18 +1,21 @@
 Hello! I'm Duke
      What can I do for you?
 Got it. I've added this task:
- [T][?] borrow money
+ [T][?]borrow money
 Now you have 1 tasks in the list.
-1. [T][?] borrow money
+1. [T][?]borrow money
+Now you have 1 tasks in the list.
 Got it. I've added this task:
- [D][?] return money (by: Sunday)
+ [D][?]return money (by: Sunday)
 Now you have 2 tasks in the list.
 Got it. I've added this task:
- [E][?] project conference (at: Mon 2-4pm)
+ [E][?]project conference (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 Nice! I've marked this task as done:
-   [D][?] return money (by: Sunday)
-1. [T][?] borrow money
-2. [D][?] return money (by: Sunday)
-3. [E][?] project conference (at: Mon 2-4pm)
+  [D][?]return money (by: Sunday)
+Now you have 3 tasks in the list.
+1. [T][?]borrow money
+2. [D][?]return money (by: Sunday)
+3. [E][?]project conference (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
 Bye. Hope to see you again soon!

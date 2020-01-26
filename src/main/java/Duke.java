@@ -27,7 +27,7 @@ public class Duke  {
                     case "done":
                         int taskNo = Integer.parseInt(userInput[1]);
                         this.taskStorage.get(taskNo - 1).markAsDone();
-                        System.out.println("Nice! I've marked this task as done:\n  "
+                        System.out.println("Nice! I've marked this task as done:\n "
                                 + this.taskStorage.get(taskNo - 1).toString());
                         break;
                     case "delete":
@@ -62,7 +62,6 @@ public class Duke  {
                 }
                     System.out.println("Now you have " + numbOfTask + " tasks in the list.");
             } catch (DukeException ex){
-                //System.err.println(ex);
                 ex.printStackTrace();
             }
             userInput = sc.nextLine().split(" ", 2);
