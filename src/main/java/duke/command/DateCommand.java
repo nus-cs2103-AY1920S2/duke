@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.interaction.Ui;
 import duke.util.Storage;
 
@@ -19,30 +22,30 @@ public class DateCommand extends Command {
     public void execute(TaskList taskList, Storage storage) {
         try {
             LocalDate date =  LocalDate.parse(dateStr);
-            Ui.ShowLine();
+            Ui.showLine();
             int count = 0;
             for (Task t: taskList.getList()) {
                 if (t instanceof Deadline) {
                     Deadline d = (Deadline)t;
                     if (d.getDeadline().toLocalDate().isEqual(date)) {
                         count++;
-                        Ui.PrintWithIndent(count + "." + d.toString());
+                        Ui.printWithIndent(count + "." + d.toString());
                     }
                 } else if (t instanceof Event) {
                     Event e = (Event)t;
                     if (e.getDatetime().toLocalDate().isEqual(date)) {
                         count++;
-                        Ui.PrintWithIndent(count + "." + e.toString());
+                        Ui.printWithIndent(count + "." + e.toString());
                     }
                 }
             }
-            Ui.PrintWithIndent("You have " + count + " thing" + (count != 1 ? "s" : "")
+            Ui.printWithIndent("You have " + count + " thing" + (count != 1 ? "s" : "")
                     + " happening on: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-            Ui.ShowLine();
+            Ui.showLine();
         } catch (DateTimeParseException e) {
-            Ui.ShowLine();
-            Ui.PrintWithIndent("Please input a valid date. E.g. 2020-12-26");
-            Ui.ShowLine();
+            Ui.showLine();
+            Ui.printWithIndent("Please input a valid date. E.g. 2020-12-26");
+            Ui.showLine();
         }
     }
 

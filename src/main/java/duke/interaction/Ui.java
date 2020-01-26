@@ -10,78 +10,78 @@ public class Ui {
     private static String indentation = "    ";
     private static String hori_line = "______________________________________";
 
-    public static void PrintWithIndent(String toPrint) {
+    public static void printWithIndent(String toPrint) {
         System.out.println(indentation + toPrint);
     }
 
-    public static void ShowLine() {
-        PrintWithIndent(hori_line);
+    public static void showLine() {
+        printWithIndent(hori_line);
     }
 
-    public static void Greet() {
-        ShowLine();
-        PrintWithIndent("Hello! I'm Duke");
-        PrintWithIndent("What can I do for you?");
-        ShowLine();
+    public static void greet() {
+        showLine();
+        printWithIndent("Hello! I'm Duke");
+        printWithIndent("What can I do for you?");
+        showLine();
     }
 
-    public static void SayBye() {
-        ShowLine();
-        PrintWithIndent("Bye. Hope to see you again soon!");
-        ShowLine();
+    public static void sayBye() {
+        showLine();
+        printWithIndent("Bye. Hope to see you again soon!");
+        showLine();
     }
 
-    public static void ShowError(Exception e) {
-        ShowLine();
-        PrintWithIndent(e.getMessage());
-        ShowLine();
+    public static void showError(Exception e) {
+        showLine();
+        printWithIndent(e.getMessage());
+        showLine();
     }
 
-    public static void ShowTaskAdded(Task added, int total) {
-        ShowLine();
-        PrintWithIndent("Got it. I've added this task:");
-        PrintWithIndent(added.toString());
-        PrintWithIndent("Now you have " + total + " task"
+    public static void showTaskAdded(Task added, int total) {
+        showLine();
+        printWithIndent("Got it. I've added this task:");
+        printWithIndent(added.toString());
+        printWithIndent("Now you have " + total + " task"
                 + (total != 1 ? "s" : "") + " in the list.");
-        ShowLine();
+        showLine();
     }
 
-    public static void ShowAllTasks(TaskList taskList) {
-        ShowLine();
+    public static void showAllTasks(TaskList taskList) {
+        showLine();
         ArrayList<Task> task_list = taskList.getList();
         if (!task_list.isEmpty()) {
             for (int i = 1; i <= task_list.size(); i++) {
-                PrintWithIndent(i + "." + task_list.get(i - 1).toString());
+                printWithIndent(i + "." + task_list.get(i - 1).toString());
             }
         } else {
-            PrintWithIndent("Empty List. You are currently free! Upz lah!");
+            printWithIndent("Empty List. You are currently free! Upz lah!");
         }
-        ShowLine();
+        showLine();
     }
 
-    public static void ShowTaskDone(Task done) {
-        ShowLine();
-        PrintWithIndent("Nice! I've marked this task as done:");
-        PrintWithIndent(done.toString());
-        ShowLine();
+    public static void showTaskDone(Task done) {
+        showLine();
+        printWithIndent("Nice! I've marked this task as done:");
+        printWithIndent(done.toString());
+        showLine();
     }
 
-    public static void ShowTaskDelete(String deleted, int total) {
-        ShowLine();
-        PrintWithIndent("Noted! I've removed this task:");
-        PrintWithIndent(deleted);
-        PrintWithIndent("Now you have " + total
+    public static void showTaskDelete(String deleted, int total) {
+        showLine();
+        printWithIndent("Noted! I've removed this task:");
+        printWithIndent(deleted);
+        printWithIndent("Now you have " + total
                 + " task" + (total != 1 ? "s" : "") + " in the list.");
-        ShowLine();
+        showLine();
     }
 
-    public static void ShowTaskNotFound() {
-        ShowLine();
-        PrintWithIndent("Sorry, mate! No such task.");
-        ShowLine();
+    public static void showTaskNotFound() {
+        showLine();
+        printWithIndent("Sorry, mate! No such task.");
+        showLine();
     }
 
-    public static String ReadCommand() {
+    public static String readCommand() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }

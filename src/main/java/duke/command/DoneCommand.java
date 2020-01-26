@@ -12,8 +12,8 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList taskList, Storage storage) {
-        if (taskList.DoneTask(doneIndex))
-            storage.SaveTaskListToFile(taskList);
+        if (taskList.doneTask(doneIndex))
+            storage.saveTaskListToFile(taskList);
     }
 
     public boolean isExit() {

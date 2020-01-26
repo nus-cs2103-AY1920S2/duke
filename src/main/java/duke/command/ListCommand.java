@@ -7,7 +7,7 @@ import duke.util.Storage;
 public class ListCommand extends Command {
 
     public void execute(TaskList taskList, Storage storage) {
-        Ui.ShowAllTasks(taskList);
+        Ui.showAllTasks(taskList);
     }
 
     public boolean isExit() {

@@ -12,8 +12,8 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(TaskList taskList, Storage storage) {
-        if (taskList.DeleteTask(indexToDelete))
-            storage.SaveTaskListToFile(taskList);
+        if (taskList.deleteTask(indexToDelete))
+            storage.saveTaskListToFile(taskList);
     }
 
     public boolean isExit() {

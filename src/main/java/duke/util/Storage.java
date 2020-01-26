@@ -1,8 +1,13 @@
 package duke.util;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Storage {
@@ -27,7 +32,7 @@ public class Storage {
         return this.saveFile;
     }
 
-    public void SaveTaskToFile(Task task) {
+    public void saveTaskToFile(Task task) {
         FileWriter writer;
         try {
             writer = new FileWriter(saveFile, true);
@@ -39,7 +44,7 @@ public class Storage {
         }
     }
 
-    public void SaveTaskListToFile(TaskList taskList) {
+    public void saveTaskListToFile(TaskList taskList) {
         FileWriter writer;
         PrintWriter pw;
         try {
@@ -61,13 +66,13 @@ public class Storage {
 
     }
 
-    public void Load(TaskList taskList) {
+    public void load(TaskList taskList) {
         try {
             Scanner reader = new Scanner(saveFile);
             String data;
             while (reader.hasNextLine()) {
                 data = reader.nextLine();
-                taskList.AddSaveStringAsTask(data);
+                taskList.addSaveStringAsTask(data);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -4,18 +4,14 @@ public abstract class Task {
     protected String name;
     protected boolean isDone;
 
-    public enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
+    public enum TaskType { TODO, DEADLINE, EVENT }
 
     public Task(String name) {
         this.name = name;
         isDone = false;
     }
 
-    public void MarkAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 
