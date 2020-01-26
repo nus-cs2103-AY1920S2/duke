@@ -1,0 +1,8 @@
+list
+todo read book
+deadline this project /by midnight tonight
+event lou hei /at my office
+list
+done 2
+list
+bye
