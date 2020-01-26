@@ -4,11 +4,15 @@ public class Task {
     private char taskType;
     private String taskTime;
 
-    public Task(String newTask, char taskType, String taskTime) {
+    public Task(String newTask, boolean isDone, char taskType, String taskTime) {
         this.taskName = newTask;
-        this.isDone = false;
+        this.isDone = isDone;
         this.taskType = taskType;
         this.taskTime = taskTime;
+    }
+
+    public boolean checkIsDone() {
+        return isDone;
     }
 
     public String getStatus() {

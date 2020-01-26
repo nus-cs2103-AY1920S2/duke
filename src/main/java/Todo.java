@@ -1,5 +1,5 @@
 public class Todo extends Task {
-    public Todo(String newTask, char taskType) {
-        super(newTask, taskType, "");
+    public Todo(String newTask, boolean isDone, char taskType) {
+        super(newTask, isDone, taskType, "");
     }
 }

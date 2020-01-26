@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class DukeList {
-    private ArrayList<Task> list;
+public class TaskList {
+    protected ArrayList<Task> list;
 
-    public DukeList() {
+    public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
@@ -13,18 +14,18 @@ public class DukeList {
                 + "\nNow you have "+ list.size() + (list.size() == 1 ? " task" : " tasks") + " in the list.";
     }
 
-    public String newTodo(char taskType, String taskName) {
-        Task task = new Todo(taskName, taskType);
+    public String newTodo(char taskType, boolean isDone, String taskName) {
+        Task task = new Todo(taskName, isDone, taskType);
         return add(task);
     }
 
-    public String newEvent(char taskType, String taskName, String taskTime) {
-        Task task = new Event(taskName, taskType, taskTime);
+    public String newEvent(char taskType, boolean isDone, String taskName, String taskTime) {
+        Task task = new Event(taskName, isDone, taskType, taskTime);
         return add(task);
     }
 
-    public String newDeadline(char taskType, String taskName, String taskTime) {
-        Task task = new Deadline(taskName, taskType, taskTime);
+    public String newDeadline(char taskType, boolean isDone, String taskName, String taskTime) {
+        Task task = new Deadline(taskName, isDone, taskType, taskTime);
         return add(task);
     }
 
