@@ -79,14 +79,14 @@ public class Duke {
 
                     printAddedTask(t, tasks);
                 } else if (cmd.startsWith(DEADLINE_CMD)) {
-                    str1 = cmd.split("deadline ");
+                    str1 = cmd.split("deadline\\s+");
 
                     if (str1.length < 2) {
                         throw new DukeException("The description and timing of a deadline cannot be empty");
                     }
 
                     String temp = str1[1];
-                    str2 = temp.split(" /by ");
+                    str2 = temp.split("\\s+/by\\s+");
 
                     if (str2.length < 2) {
                         throw new DukeException("Both the description and timing of a deadline cannot be empty");
@@ -101,7 +101,7 @@ public class Duke {
 
                     printAddedTask(t, tasks);
                 } else if (cmd.startsWith(EVENT_CMD)) {
-                    str1 = cmd.split("event ");
+                    str1 = cmd.split("event\\s+");
 
                     if (str1.length < 2) {
                         throw new DukeException("The description and timing of an event cannot be empty");
@@ -109,7 +109,7 @@ public class Duke {
 
                     String temp = str1[1];
 
-                    str2 = temp.split(" /at ");
+                    str2 = temp.split("\\s+/at\\s+");
 
                     if (str2.length < 2) {
                         throw new DukeException("Both the description and timing of an event cannot be empty");
