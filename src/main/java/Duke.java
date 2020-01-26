@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 
 import javafx.css.Match;
 import main.java.Task;
+import main.java.ToDoTask;
+import main.java.EventTask;
+import main.java.DeadLineTask;
 
 public class Duke {
     public static void main(String[] args) {
@@ -33,13 +36,19 @@ public class Duke {
                 "What can I do for you?\n" + line;
 
         String taskCompleteCongrats = "Nice! I've marked this task as done:\n";
+        String exitGreeting = line + "Bye. Hope to see you again soon!\n" + line;
 
         String exitKey = "bye";
         String viewListKey = "list";
         String finishKey = "(done)(\\s+)(\\d+)";
-        Pattern finishPattern = Pattern.compile(finishKey);
+        String todoKey = "(todo)(.*)";
+        String deadlineKey = "(deadline)(.*)(\\/by)(.*)";
+        String eventKey = "(event)(.*)(\\/at)(.*)";
 
-        String exitGreeting = line + "Bye. Hope to see you again soon!\n" + line;
+        Pattern finishPattern = Pattern.compile(finishKey);
+        Pattern todoPattern = Pattern.compile(todoKey);
+        Pattern deadlinePattern = Pattern.compile(deadlineKey);
+        Pattern eventPattern = Pattern.compile(eventKey);
 
         try {
             br = new BufferedReader(new InputStreamReader(System.in));
@@ -49,11 +58,15 @@ public class Duke {
             while (true) {
                 String input = br.readLine();
                 Matcher finishMatcher = finishPattern.matcher(input);
+                Matcher todoMatcher = todoPattern.matcher(input);
+                Matcher deadlineMatcher = deadlinePattern.matcher(input);
+                Matcher eventMatcher = eventPattern.matcher(input);
 
                 if (exitKey.equals(input)) {
                     System.out.println(exitGreeting);
                     System.exit(0);
-                } else if (viewListKey.equals(input)) {
+                }
+                else if (viewListKey.equals(input)) {
                     String listOverView = line;
                     for (int i = 0; i < taskArray.length; i++) {
                         if (taskArray[i] == null) {
@@ -64,18 +77,36 @@ public class Duke {
                     }
                     listOverView = listOverView + line;
                     System.out.println(listOverView);
-                } else if (finishMatcher.find()) {
+                }
+                else if (finishMatcher.find()) {
                     Integer finishedTaskIndex = Integer.parseInt(finishMatcher.group(3)) - 1;
                     Task finishedTask = taskArray[finishedTaskIndex];
                     finishedTask.markAsDone();
 
-                    System.out.println(line + taskCompleteCongrats + " " + finishedTask.getStatus() + "\n" + line);
+                    System.out.println(line + taskCompleteCongrats + " " + finishedTask.toString() + "\n" + line);
                 }
-                else {
-                    Task currentTask = new Task(input);
+                else if (todoMatcher.find()){
+                    String description = todoMatcher.group(2).trim();
+                    ToDoTask currentTask = new ToDoTask(description);
                     taskArray[nextInsertPin] = currentTask;
                     nextInsertPin ++;
-                    System.out.println(line + "added: " + input + "\n" + line);
+                    System.out.println(line + "added: " + currentTask.toString() + "\n" + line);
+                }
+                else if (deadlineMatcher.find()){
+                    String description = deadlineMatcher.group(2).trim();
+                    String by = deadlineMatcher.group(4).trim();
+                    DeadLineTask currentTask = new DeadLineTask(description, by);
+                    taskArray[nextInsertPin] = currentTask;
+                    nextInsertPin ++;
+                    System.out.println(line + "added: " + currentTask.toString() + "\n" + line);
+                }
+                else if (eventMatcher.find()){
+                    String description = eventMatcher.group(2).trim();
+                    String at = eventMatcher.group(4).trim();
+                    EventTask currentTask = new EventTask(description, at);
+                    taskArray[nextInsertPin] = currentTask;
+                    nextInsertPin ++;
+                    System.out.println(line + "added: " + currentTask.toString() + "\n" + line);
                 }
             }
         } catch (IOException e) {

@@ -21,7 +21,7 @@ public class Task {
         return this.description;
     }
 
-    public String getStatus() {
+    public String toString() {
         return "[" + this.getStatusIcon() + "]" + " " + this.getDescription();
     }
 }
