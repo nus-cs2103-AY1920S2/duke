@@ -45,7 +45,23 @@ public class Duke {
 
                     System.out.println();
                 } else if (cmd.startsWith(DONE_CMD)) {
-                    int id = Integer.parseInt(cmd.split(" ")[1]);
+                    str1 = cmd.split(" ");
+
+                    if (str1.length < 2) {
+                        throw new DukeException("The task to mark done cannot be empty");
+                    }
+
+                    int id;
+                    try {
+                        id = Integer.parseInt(str1[1]);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("The task to mark done is not in the list");
+                    }
+
+                    if ((id - 1) > tasks.size() - 1) {
+                        throw new DukeException("The task to mark done is not in the list");
+                    }
+
                     Task t = tasks.get(id - 1);
 
                     t.markAsDone();
@@ -55,7 +71,7 @@ public class Duke {
                     str1  = cmd.split("todo ");
 
                     if (str1.length < 2) {
-                        throw new DukeException("The description of a todo cannot  be empty");
+                        throw new DukeException("The description of a todo cannot be empty");
                     }
                     Task t = new Todo(str1[1]);
 
