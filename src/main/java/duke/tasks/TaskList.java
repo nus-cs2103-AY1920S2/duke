@@ -24,6 +24,17 @@ public class TaskList {
         tasks.addAll(moreTasks);
     }
 
+    public List<Task> search(String keyword) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            // Case insensitive check
+            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
     public Task get(int taskNo) {
         return tasks.get(taskNo - 1);
     }
