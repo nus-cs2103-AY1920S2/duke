@@ -33,7 +33,7 @@ public class Duke {
             // Handle List command if any
             if (nextInput.equals("list")) {
                 // fflush
-                System.out.println("");
+                //System.out.println("");
                 Duke.handleCommandList();
                 continue;
             }
@@ -43,7 +43,14 @@ public class Duke {
             String[] commandArgs = nextInput.split(" ");
 
             if (commandArgs[0].equals("done")) {
+                // Todo: Add exception handling
                 handleCommandDone(Integer.parseInt(commandArgs[1]));
+                continue;
+            }
+
+            if (commandArgs[0].equals("delete")) {
+                // Todo: Add exception handling
+                handleCommandDelete(Integer.parseInt(commandArgs[1]));
                 continue;
             }
 
@@ -83,7 +90,7 @@ public class Duke {
     }
 
     private static void handleCommandList() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("    Here are the tasks in your list:");
         int counter = 1;
         for (Task s : Duke.taskList) {
             System.out.println("    " + counter + ". " + s);
@@ -102,6 +109,12 @@ public class Duke {
         Duke.taskList.get(TaskNumber - 1).markAsDone();
         System.out.println("Nice! I've marked this task as done:\n"
                 + "    " + Duke.taskList.get(TaskNumber - 1));
+    }
 
+    private static void handleCommandDelete(int TaskNumber) {
+        System.out.println("    Noted. I've removed this task:\n"
+                + "    " + Duke.taskList.get(TaskNumber - 1));
+        Duke.taskList.remove(TaskNumber - 1);
+        System.out.println("    Now you have " + Duke.taskList.size() + " tasks in the list.");
     }
 }
