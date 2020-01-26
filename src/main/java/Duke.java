@@ -1,15 +1,17 @@
-import javafx.application.Application;
-
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
 
     protected static Scanner scanner;
+    protected static List<String> inputs;
 
     public static void main(String[] args) {
         printWelcomeMessage();
 
         scanner = new Scanner(System.in);
+        inputs = new ArrayList<String>();
 
         while (true)  {
             processInput(scanner);
@@ -31,21 +33,42 @@ public class Duke {
         ProgramOutputHandler.nextLine();
     }
 
+    public static void echo(String input) {
+        ProgramOutputHandler.printLineSeperator();
+        ProgramOutputHandler.printWithIndentation(input);
+        ProgramOutputHandler.printLineSeperator();
+        ProgramOutputHandler.nextLine();
+    }
+
+    private static void listPastInputs() {
+        ProgramOutputHandler.printLineSeperator();
+
+        for (int i = 0; i < inputs.size(); ++i) {
+            ProgramOutputHandler.printWithIndentation(i + 1 + ". " + inputs.get(i));
+        }
+
+        ProgramOutputHandler.printLineSeperator();
+        ProgramOutputHandler.nextLine();
+    }
+
     public static void processInput(Scanner sc) {
         String input = sc.nextLine();
+
+        // Exit application
         if (input.equals("bye")) {
             printGoodbyeMessage();
             System.exit(0);
             return;
         }
 
-        echoInput(input);
-    }
+        // List inputs
+        if (input.equals("list")) {
+            listPastInputs();
+            return;
+        }
 
-    public static void echoInput(String input) {
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.printWithIndentation(input);
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.nextLine();
+        // Add input to list
+        inputs.add(input);
+        echo("added: " + input);
     }
 }
