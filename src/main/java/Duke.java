@@ -61,6 +61,30 @@ public class Duke {
                     System.out.println(ex.getMessage());
                 }
 
+            } else if (arr[0].equals("delete")) {
+
+                try {
+                    checkNum(arr.length);
+
+                    int taskNum = Integer.parseInt(arr[1]) - 1;
+                    if (taskList.size() > taskNum) {
+                        Task current = taskList.get(taskNum);
+                        taskList.remove(taskNum);
+                        System.out.println("    -------------------------------------------------\n"
+                                + "      I've removed this task:\n "
+                                + "        " + current + "\n"
+                                + "      Now you have " + taskList.size() + " tasks in the list.\n"
+                                + "    -------------------------------------------------");
+                    } else {
+                        System.out.println("    -------------------------------------------------\n"
+                                + "      Sorry, this task does not exist :(\n"
+                                + "    -------------------------------------------------");
+                    }
+
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
+                }
+
             } else {
                 try {
                     checkAction(arr[0]);
