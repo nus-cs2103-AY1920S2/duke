@@ -59,5 +59,22 @@ public abstract class Task implements Serializable {
         return (description);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            Task task = (Task) obj;
+            if (taskType.equals(task.taskType)) {
+                if (description.equals(task.description)) {
+                    if ((dateTime == null && task.dateTime == null) || dateTime.equals(task.dateTime)) {
+                        if (isDone == task.isDone) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     //...
 }

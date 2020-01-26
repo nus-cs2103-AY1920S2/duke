@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TodoTest {
     @Test
-    public void testTodo() {
+    void testTodo() {
         // Test if getters and setters are working properly
         Task task = new Todo("test");
 
