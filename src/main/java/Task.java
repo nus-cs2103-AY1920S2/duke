@@ -7,6 +7,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getShortName() {
+        return "Task";
+    }
+
     public String getStatusIcon() {
         return (isDone ? "2713" : "2718"); //return tick or X symbols
     }

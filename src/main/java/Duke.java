@@ -19,7 +19,9 @@ public class Duke {
             // In case command might be like : list all your homework, then it should be added as a task
             if (command.equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%s[%c] %s\n", i, (char)(Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
+                    System.out.printf("%s[%s][%c] %s\n",
+                            i, tasks.get(i).getShortName(),
+                            (char)(Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
                             tasks.get(i).description);
                 }
                 return;
@@ -35,11 +37,26 @@ public class Duke {
             }
             break;
         default:
-            break;
+            Task t;
+            String taskType = command.split(" ", 2)[0];
+            String content = command.split(" ", 2)[1];
+            if (taskType.equals("todo")) {
+                t = new Todo(content);
+            } else if (taskType.equals("deadline")) {
+                String desc = content.split("/by")[0];
+                String deadlineTime = content.split("/by")[1];
+                t = new Deadline(desc, deadlineTime);
+            } else if (taskType.equals("event")) {
+                String desc = content.split("/at")[0];
+                String eventTime = content.split("/at")[1];
+                t = new Event(desc, eventTime);
+            } else {
+                return;
+            }
+            tasks.add(t);
+            System.out.println("Got it. I've added this task: " + command);
+            System.out.printf("Now you have %s tasks in this list\n", tasks.size());
         }
-        Task t = new Task(command);
-        tasks.add(t);
-        System.out.println("added: " + command);
     }
 
     /**
