@@ -83,4 +83,22 @@ public class TaskList {
     public void addDeadline(String description, LocalDate date, LocalTime time) {
         tasks.add(new Deadline(description, 'D', date, time));
     }
+
+    /**
+     * Returns a list of tasks that contains keyword.
+     *
+     * @param keyword Keyword to be found in the description.
+     * @return List of tasks that contains keyword.
+     */
+    public ArrayList<String> findTargets(String keyword) {
+        ArrayList<String> targets = new ArrayList<String>();
+
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.getTask(i).getDescription().contains(keyword)) {
+                targets.add(this.getTask(i).obtainTaskInfo());
+            }
+        }
+
+        return targets;
+    }
 }

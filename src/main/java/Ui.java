@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -51,6 +52,20 @@ public class Ui {
 
         for (int i = 1; i < tasks.getSize() + 1; i++) {
             System.out.println(i + "." + tasks.getTask(i - 1).obtainTaskInfo());
+        }
+        System.out.println();
+    }
+
+    /**
+     * Prints the list of tasks that contains keyword.
+     *
+     * @param targets List of tasks that matches keyword.
+     */
+    public void printTargets(ArrayList<String> targets) {
+        System.out.println("Here are the matching tasks in your list:");
+
+        for (int i = 1; i < targets.size() + 1; i++) {
+            System.out.println(i + "." + targets.get(i - 1));
         }
         System.out.println();
     }
