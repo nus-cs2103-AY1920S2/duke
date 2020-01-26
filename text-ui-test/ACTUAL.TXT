@@ -22,7 +22,7 @@ list
 deadline return book /by Sunday
     ____________________________________________________________
      Got it. I've added this task:
-       [D][?]  return book (by:  Sunday)
+       [D][?]  return book (by: Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 event project meeting /at Mon 2-4pm

@@ -50,7 +50,7 @@ public class Database {
                 throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             }
             try {
-                due = data.substring(indexForSeparator + 3);
+                due = data.substring(indexForSeparator + 4);
             } catch(IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 OOPS!!! The due date of a deadline cannot be empty.");
             }
