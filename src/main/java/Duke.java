@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(botResponse);
     }
 
-    public static void main(String[] args) throws UnknownCommandException, MissingInfoException {
+    public static void main(String[] args) {
         TaskManager lstTasks = new TaskManager();
 
         String greeting = "Hello! I'm Woody and I'm always here to keep you company.\n"
