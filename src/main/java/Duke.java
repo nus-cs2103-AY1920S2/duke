@@ -29,11 +29,13 @@ public class Duke {
                 char charArr[] = input.toCharArray();
                 String taskNum = "";
                 for (int i = 5; i < charArr.length; i++) {
-                    taskNum += i;
+                    taskNum += charArr[i];
                 }
                 int taskInt = Integer.parseInt(taskNum);
                 taskInt -= 1;
                 arr[taskInt].isDone = true;
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  [" + arr[taskInt].getStatusIcon() + "] " + arr[taskInt].getDescription());
                 input = sc.nextLine();
             }
         }
