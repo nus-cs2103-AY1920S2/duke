@@ -1,0 +1,7 @@
+todo some todo
+deadline some deadline /by 20 march
+event some event /at 45 august
+done 1
+done 2
+done 3
+bye
