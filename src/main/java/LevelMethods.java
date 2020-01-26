@@ -60,41 +60,19 @@ public class LevelMethods {
 
     public void createStorage() throws IOException {
 
-        // inserts correct file path separator on *nix and Windows
-        // works on *nix
-        // works on Windows
-//        java.nio.file.Path path = java.nio.file.Paths.get(home, "Duke","data", "dukeStorage.txt");
-//        boolean directoryExists = java.nio.file.Files.exists(path);
-
-        //..\bin ..\src\main\java\*.java
 
         //trying to get path???
-        filePath = new File("").getAbsolutePath();
+        //filePath = new File("").getAbsolutePath();
         //System.out.println("1. " + filePath);
-        filePath = filePath + "\\data\\dukeStorage";
+        //filePath = filePath + "\\data\\dukeStorage";
         //System.out.println("2. " + filePath);
 
+        filePath = "data/dukeStorage.txt";
 
         //java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir")
 
         String home = System.getProperty("user.home");
 
-        // inserts correct file path separator on *nix and Windows
-        // works on *nix
-        // works on Windows
-        //String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
-
-        //String[] pathString = filePath.split("\\|");
-        //java.nio.file.Path path = java.nio.file.Paths.get(home, pathString);
-
-
-        //boolean directoryExists = java.nio.file.Files.exists(path);
-//
-//        if (directoryExists) {
-//            System.out.println("yey");
-//        } else {
-//            System.out.println("sobs");
-//        }
 
         File file = new File(filePath);
         //boolean exists = tmpDir.exists();
@@ -191,9 +169,6 @@ public class LevelMethods {
 
         String newDescription = "";
         if (type.equals("T")) {
-            //todo
-//                String doneOrNotDone = description.substring(4,5);
-//                String todoDescription = description.substring(7, description.length());
 
             newDescription += type + " | " + doneOrNotDone + " | " + task.description;
         } else {
@@ -206,7 +181,18 @@ public class LevelMethods {
 
         File file = new File(filePath);
         FileWriter fr = new FileWriter(file, true);
-        fr.write("\n" + newDescription);
+
+        //System.out.println("size of list is: " + storingList.size());
+        if (storingList.size() == 1) {
+            //System.out.println("nou");
+            fr.write(newDescription);
+        } else {
+            //System.out.println("fk");
+            fr.write("\n" + newDescription);
+
+        }
+
+        //System.out.println("size of list is: " + storingList.size());
 
         Scanner myReader = new Scanner(file);
 
@@ -228,7 +214,7 @@ public class LevelMethods {
 
                 if (checkIfTodoIsEmpty.length() == 0) {
                     //That means it is empty behing todo
-                    throw new GrapieExceptions("OOPS!!! The description of a todo cannot be empty.");
+                    throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
                 } else {
 
                     Task todo = new Todo(detailsStr);
@@ -240,7 +226,7 @@ public class LevelMethods {
 
                 }
             } else {
-                throw new GrapieExceptions("OOPS!!! The description of a todo cannot be empty.");
+                throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
             }
 
         } else if (inputStr.contains("event")) {
@@ -249,7 +235,7 @@ public class LevelMethods {
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
-                    throw new GrapieExceptions("OOPS!!! Event in wrong format. Please use: event your_event /at YYYY-MM-DD TTTT");
+                    throw new GrapieExceptions(ErrorMsg.wrongFormatError("event your_event /at YYYY-MM-DD"));
                 } else {
 
                     Event event = new Event(eventAndTime[0], eventAndTime[1]);
@@ -265,7 +251,7 @@ public class LevelMethods {
                 }
 
             } else {
-                throw new GrapieExceptions("OOPS!!! The description of a event cannot be empty.");
+                throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
             }
 
         } else if (inputStr.contains("deadline")) {
@@ -284,14 +270,15 @@ public class LevelMethods {
                     //store into hard disk
                     convertToHardDiskFormatAndStore(deadline, "T", deadline.time);
                 } else {
-                    throw new GrapieExceptions("OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT");
+                    //"OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT"
+                    throw new GrapieExceptions(ErrorMsg.wrongFormatError("deadline your_deadline /by YYYY-MM-DD"));
                 }
 
             } else {
-                throw new GrapieExceptions("OOPS!!! The description of a deadline cannot be empty.");
+                throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
             }
         } else {
-            throw new GrapieExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new GrapieExceptions(ErrorMsg.wakarimasenError);
         }
 
 //        Task task = new Task(inputStr);
@@ -317,6 +304,7 @@ public class LevelMethods {
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
 
+            //System.out.println(data);
             if (counter == lineNumber) {
                 data = data.substring(0, 4) + "O" + data.substring(5, data.length());
             }
@@ -340,7 +328,7 @@ public class LevelMethods {
     public void completeTask(String doneTaskStr) throws GrapieExceptions, IOException {
         if (doneTaskStr.length() <= 5) {
             //no number behind
-            throw new GrapieExceptions("Please input a valid number behind 'done'!!");
+            throw new GrapieExceptions(ErrorMsg.invalidNumberError);
         } else {
             //remember to add check for already completed task
 
@@ -354,21 +342,26 @@ public class LevelMethods {
 
                 if (storingList.size() >= numDone && numDone != 0) {
 
-                    storingList.get(numDone - 1).isDone = true;
-                    //storingList.set(taskNum - 1, updatedTask);
+                    if (storingList.get(numDone - 1).isDone) {
+                        //if already true
+                        throw new GrapieExceptions(ErrorMsg.taskNumIsAlreadyDone(numDone));
+                    } else {
 
-                    String printStr = "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
-                    formattingDivider(printStr);
+                        storingList.get(numDone - 1).isDone = true;
+                        //storingList.set(taskNum - 1, updatedTask);
 
-                    //update hard disk :(
-                    replaceLineFromHardDisk(numDone);
+                        String printStr = "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
+                        formattingDivider(printStr);
+
+                        //update hard disk :(
+                        replaceLineFromHardDisk(numDone);
+                    }
 
                 } else {
-                    //formattingDivider("There is no task " + taskNum + "!!!");
-                    throw new GrapieExceptions("OOPS!!! There is no task " + numDone + "!!! Please create task " + numDone + " first.");
+                    throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numDone));
                 }
             } else {
-                throw new GrapieExceptions("Please input a valid number behind 'done'!!");
+                throw new GrapieExceptions(ErrorMsg.invalidNumberError);
             }
         }
 
@@ -408,7 +401,7 @@ public class LevelMethods {
 
     public void deleteTask(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.length() <= 7) {
-            throw new GrapieExceptions("Please input a valid number behind 'delete'!!");
+            throw new GrapieExceptions(ErrorMsg.invalidNumberError);
         } else {
             String strNumberDeleted = inputStr.substring(7, inputStr.length());
             strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
@@ -433,10 +426,10 @@ public class LevelMethods {
                     deleteLineFromHardDisk(numToDelete);
 
                 } else {
-                    throw new GrapieExceptions("No number " + numToDelete + " in task list!!!");
+                    throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
                 }
             } else {
-                throw new GrapieExceptions("Please input a valid number behind 'delete'!!");
+                throw new GrapieExceptions(ErrorMsg.invalidNumberError);
             }
         }
     }
