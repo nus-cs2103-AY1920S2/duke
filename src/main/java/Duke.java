@@ -1,3 +1,5 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -68,8 +70,10 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] info = command[1].split(" /by ");
-                        task = new Deadline(info[0], info[1]);
+                        task = new Deadline(info[0], LocalDate.parse(info[1]));
                         addTask(task);
+                    } catch (DateTimeException e) {
+                        throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
                     } catch (Exception e) {
                         throw new DukeException("OOPS!!! Missing information regarding deadline.");
                     }
@@ -77,10 +81,12 @@ public class Duke {
                 case "event":
                     try {
                         String[] info = command[1].split(" /at ");
-                        task = new Event(info[0], info[1]);
+                        task = new Event(info[0], LocalDate.parse(info[1]));
                         addTask(task);
+                    } catch (DateTimeException e) {
+                        throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
                     } catch (Exception e) {
-                        throw new DukeException(("OOPS!!! Missing information regarding event."));
+                        throw new DukeException("OOPS!!! Missing information regarding event.");
                     }
                     break;
                 default:
