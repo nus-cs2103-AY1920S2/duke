@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 public class Duke {
     private static final String LF = "\n";
     private static final String WELCOME_MSG = "Hello! I'm Duke" + LF + "What can I do for you?" + LF;
+    private static final String BYE_MSG = "Bye, hope to see you again soon!" + LF;
+    private static final String BYE_CMD = "bye";
 
     public static void main(String[] args) {
         System.out.println(WELCOME_MSG);
@@ -15,7 +17,12 @@ public class Duke {
             try {
                 String line = br.readLine();
 
-                System.out.println(line + LF);
+                if (line.equals(BYE_CMD)) {
+                    System.out.println(BYE_MSG);
+                    break;
+                } else {
+                    System.out.println(line + LF);
+                }
             } catch (IOException e) {
                 System.out.println("Sorry, an error has occurred:");
                 e.printStackTrace();
