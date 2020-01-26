@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 
 public class Duke {
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static int numTasks = 0;
+
     public static void main(String[] args) {
         runDuke();
     }
@@ -42,12 +45,11 @@ public class Duke {
     }
 
     public static void doInstructions(String input) throws DukeException {
-        Task[] list = new Task[100];
-        int numTasks = 0;
+//        Task[] list = new Task[100];
         String command = getCommand(input);
 
         if (command.equals("list")) {
-            printList(list, numTasks);
+            printList(numTasks);
         } else if (command.equals("done")) {
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             // check for
@@ -55,10 +57,19 @@ public class Duke {
             // 2. empty task num
             // 3. if task is already done?
             // implement ui class? if have time to print out done statement
-            list[taskNum - 1].markAsDone();
+            tasks.get(taskNum - 1).markAsDone();
             System.out.println(delimiter());
             System.out.println("I've finally done this task:");
-            System.out.println(list[taskNum - 1].toString());
+            System.out.println(tasks.get(taskNum - 1).toString());
+            System.out.println(delimiter() + "\n");
+        } else if (command.equals("delete")) {
+            int taskNum = Integer.parseInt(input.split(" ")[1]);
+            String desc = tasks.get(taskNum - 1).toString();
+            tasks.remove(taskNum - 1);
+            numTasks -= 1;
+            System.out.println(delimiter());
+            System.out.println("Do you really want to remove this? Fine. I've removed:\n    " + desc);
+            System.out.printf("Now you have %d tasks in your list\n", numTasks);
             System.out.println(delimiter() + "\n");
         } else {
             Task newTask;
@@ -73,8 +84,9 @@ public class Duke {
                 newTask = new Event(getDescription(input), getTime(input));
             }
 
-            list[numTasks] = newTask;
-            numTasks++;
+            tasks.add(newTask);
+            System.out.println(tasks);
+            numTasks += 1;
             System.out.println(delimiter());
             System.out.println("Alrighty, you added:");
             System.out.println("  " + newTask.toString());
@@ -87,7 +99,7 @@ public class Duke {
         // if command doesnt exist
         String command = input.split(" ")[0];
         List<String> commandList = new ArrayList<>();
-        commandList = Arrays.asList("bye", "list", "done", "todo", "deadline", "event");
+        commandList = Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete");
         if (!commandList.contains(command)) {
             throw new DukeException("No such command");
         } else {
@@ -117,11 +129,11 @@ public class Duke {
         return String.join(" ", cleaned);
     }
 
-    public static void printList(Task[] list, int numTasks) {
+    public static void printList(int numTasks) {
         System.out.println(delimiter());
         System.out.println("Here are the tasks that you will never complete: ");
-        for (int i = 1; i <= numTasks; i++) {
-            System.out.printf("%d. %s\n", i, list[i - 1]);
+        for (int i = 0; i < numTasks; i++) {
+            System.out.printf("%d. %s\n", i + 1, tasks.get(i));
         }
         System.out.println(delimiter() + "\n");
     }
