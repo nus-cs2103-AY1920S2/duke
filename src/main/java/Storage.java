@@ -30,7 +30,7 @@ public class Storage {
      * @return list of tasks that were previously saved in duke.txt.
      * @throws FileNotFoundException Thrown when file to load from cannot be found.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> loadFile() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         File file = new File(filePath);
