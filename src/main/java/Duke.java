@@ -1,10 +1,29 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner sc = new Scanner(System.in);
+
+        //Welcome Text
+        print("Hello! I'm Duke\nWhat can I do for you?");
+
+        //Main Program Loop, possible change to Switch Case later on
+        while (true) {
+            String input = sc.nextLine();
+
+            if (input.equals("bye")) {
+                print("Bye. Hope to see you again soon!");
+                break;
+            } else {
+                print(input);
+            }
+        }
+    }
+
+    //Custom print Method to print the
+    static void print(String output) {
+        System.out.println("____________________________________________________________");
+        System.out.println(output);
+        System.out.println("____________________________________________________________\n");
     }
 }
