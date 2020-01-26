@@ -218,12 +218,16 @@ public class Duke {
 
         for (Task task : tasksList) {
             if (task.getClass().equals(Deadline.class)) {
-                DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mma)");
-                LocalDateTime testDate = LocalDateTime.parse(((Deadline) task).byDeadline.substring(5), DTF);
-                LocalDate taskDate = testDate.toLocalDate();
+                try {
+                    DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mma)");
+                    LocalDateTime testDate = LocalDateTime.parse(((Deadline) task).byDeadline.substring(5), DTF);
+                    LocalDate taskDate = testDate.toLocalDate();
 
-                if (taskDate.equals(calendarDate)) {
-                    calendarList.add(task.toString());
+                    if (taskDate.equals(calendarDate)) {
+                        calendarList.add(task.toString());
+                    }
+                } catch (DateTimeParseException ignored) {
+
                 }
             }
         }
