@@ -1,7 +1,8 @@
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.interaction.*;
+import duke.interaction.Ui;
+import duke.interaction.Parser;
 
 public class Duke {
 
@@ -12,27 +13,40 @@ public class Duke {
         // Init Duke
         Duke d = new Duke();
         // Greet user on start
-        Ui.Greet();
+        Ui.greet();
         // Duke's behaviour loop
-        d.Loop();
+        d.loop();
     }
 
+    /**
+     * Duke's constructor initializes Storage and TaskList
+     * and loads user data into the new task list.
+     */
     Duke() {
         storage = new Storage();
         taskList = new TaskList();
-        storage.Load(taskList);
+        storage.load(taskList);
     }
 
-    private void Exit() {
-        Ui.SayBye();
-        storage.SaveTaskListToFile(taskList);
+    /**
+     * Duke's exit behaviour involves UI output
+     * and final storage saving.
+     * @return void
+     */
+    private void exit() {
+        Ui.sayBye();
+        storage.saveTaskListToFile(taskList);
     }
 
-    private void Loop() {
+    /**
+     * Duke's behaviour loop after set-up to before exit.
+     * @return void
+     */
+    private void loop() {
         boolean is_exiting = false;
         Command c;
         do {
-            String fullCommand = Ui.ReadCommand();
+            String fullCommand = Ui.readCommand();
             c = Parser.parse(fullCommand);
             if (c != null) {
                 c.execute(taskList, storage);
@@ -40,6 +54,6 @@ public class Duke {
             }
         } while (!is_exiting);
 
-        Exit();
+        exit();
     }
 }

@@ -14,21 +14,21 @@ public class FindCommand extends Command {
     }
 
     public void execute(TaskList taskList, Storage storage) {
-        Ui.ShowLine();
+        Ui.showLine();
         if (keyword.isBlank()) {
-            Ui.PrintWithIndent("Sorry, I need a keyword.");
+            Ui.printWithIndent("Sorry, I need a keyword.");
         } else {
             int count = 0;
             for (Task t: taskList.getList()) {
                 if (t.getName().contains(keyword)) {
                     count++;
-                    Ui.PrintWithIndent(count + "." + t.toString());
+                    Ui.printWithIndent(count + "." + t.toString());
                 }
             }
-            Ui.PrintWithIndent("You have " + count + " matching task" + (count != 1 ? "s" : "")
+            Ui.printWithIndent("You have " + count + " matching task" + (count != 1 ? "s" : "")
                     + " for keyword: " + keyword);
         }
-        Ui.ShowLine();
+        Ui.showLine();
     }
 
     public boolean isExit() { return false; }

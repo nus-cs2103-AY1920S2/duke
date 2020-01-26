@@ -4,12 +4,12 @@ public abstract class Task {
     protected String name;
     protected boolean isDone;
 
-    public enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
+    public enum TaskType { TODO, DEADLINE, EVENT }
 
+    /**
+     * Task constructor.
+     * @param  name of the task.
+     */
     public Task(String name) {
         this.name = name;
         isDone = false;
@@ -17,10 +17,17 @@ public abstract class Task {
 
     public String getName() { return this.name; }
 
-    public void MarkAsDone() {
+    /**
+     * Sets task's status to done.
+     */
+    public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Gets the save-string representation of the task.
+     * @return the String representation of the task Storage can save.
+     */
     public abstract String toSaveString();
 
     @Override

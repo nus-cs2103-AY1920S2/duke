@@ -1,13 +1,24 @@
 package duke.util;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Storage {
     private File saveFile;
 
+    /**
+     * Storage's constructor checks if
+     * "data/userdata.txt" exists. If not,
+     * it creates the relevant directory and file.
+     * Finally, initializes saveFile with that file.
+     */
     public Storage() {
         File dir = new File("data");
         if (!dir.exists()) {
@@ -23,11 +34,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Getter for a reference to the File data with user data.
+     * @return the File object representing user data
+     */
     public File getSave() {
         return this.saveFile;
     }
 
-    public void SaveTaskToFile(Task task) {
+    /**
+     * Writes the information of a single task to the
+     * save file (For single task additions by user).
+     * @param task a reference to a Task object to save
+     * @return void
+     */
+    public void saveTaskToFile(Task task) {
         FileWriter writer;
         try {
             writer = new FileWriter(saveFile, true);
@@ -39,7 +60,13 @@ public class Storage {
         }
     }
 
-    public void SaveTaskListToFile(TaskList taskList) {
+    /**
+     * Traverses whole list of tasks from TaskList object and
+     * writes out to the save file.
+     * @param taskList a reference to the TaskList object to read tasks from
+     * @return void
+     */
+    public void saveTaskListToFile(TaskList taskList) {
         FileWriter writer;
         PrintWriter pw;
         try {
@@ -61,13 +88,19 @@ public class Storage {
 
     }
 
-    public void Load(TaskList taskList) {
+    /**
+     * Reads through the save file and adds in any existing tasks into
+     * a task list object.
+     * @param taskList a reference to the TaskList object to add tasks to
+     * @return void
+     */
+    public void load(TaskList taskList) {
         try {
             Scanner reader = new Scanner(saveFile);
             String data;
             while (reader.hasNextLine()) {
                 data = reader.nextLine();
-                taskList.AddSaveStringAsTask(data);
+                taskList.addSaveStringAsTask(data);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

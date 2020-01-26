@@ -1,12 +1,26 @@
 package duke.interaction;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.ListCommand;
+import duke.command.ExitCommand;
+import duke.command.DoneCommand;
+import duke.command.DateCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.task.Task;
 import duke.util.DukeException;
 
 import java.util.Scanner;
 
 public class Parser {
+
+    /**
+     * Analyses a full command string and converts
+     * to an executable Command object.
+     * @param fullCommand read from user input.
+     * @return Command object parsed from a full command string
+     */
     public static Command parse(String fullCommand) {
         Scanner in = new Scanner(fullCommand);
         String input = in.next();
@@ -36,7 +50,7 @@ public class Parser {
                     throw new DukeException.InvalidCommand();
             }
         } catch (DukeException.InvalidCommand e) {
-            Ui.ShowError(e);
+            Ui.showError(e);
             return null;
         }
     }
