@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;
 
-public class Duke {
+public class Main {
     private TaskList tasklist;
     private Storage storage;
     private Calender calender;
@@ -125,7 +125,7 @@ public class Duke {
         ui.exit();
     }
 
-    public Duke(String filepath) {
+    public Main(String filepath) {
         ui = new Ui();
         calender = new Calender();
         storage = new Storage(filepath);
@@ -134,7 +134,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("." + File.separator + "data" +
+        new Main("." + File.separator + "data" +
                 File.separator + "Task.txt").run();
     }
 }
