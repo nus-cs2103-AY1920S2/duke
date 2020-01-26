@@ -31,7 +31,7 @@ public class Duke {
 
         while (true) {
             try {
-                String cmd = br.readLine();
+                String cmd = br.readLine().trim();
 
                 if (cmd.equals(LIST_CMD)) {
                     System.out.println("Here are your task(s):");
