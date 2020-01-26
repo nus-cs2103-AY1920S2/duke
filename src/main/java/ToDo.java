@@ -1,4 +1,4 @@
-public class ToDo extends Task {
+public class ToDo extends Task implements java.io.Serializable{
 
     protected ToDo(String desciption){
         super(desciption);

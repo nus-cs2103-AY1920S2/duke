@@ -1,12 +1,46 @@
+import java.io.*;
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskManager implements java.io.Serializable{
 
     ArrayList<Task> listOfTasks;
 
     public TaskManager(){
         listOfTasks = new ArrayList<>();
     }
+
+    public void loadExistingData(){
+        try {
+            FileInputStream fileIn = new FileInputStream("data/data.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            listOfTasks = (ArrayList<Task>) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+            return;
+        }catch(ClassNotFoundException c) {
+            System.out.println("List class not found");
+            c.printStackTrace();
+            return;
+        }
+    }
+
+    public void saveExistingData(){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("data/data.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(listOfTasks);
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized data is saved in data/data.txt");
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+
+
 
     public void listAllTasks(){
         System.out.println("Here are your tasks in your list: ");

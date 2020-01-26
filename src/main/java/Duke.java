@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 public class Duke {
 
 
@@ -22,10 +27,14 @@ public class Duke {
                 + "What can I do for you?");
         System.out.println(horizontalLine);
 
+
+
         FastReader fr = new FastReader();
         String textEntered = fr.nextLine();
 
         TaskManager manager = new TaskManager();
+
+        manager.loadExistingData();
 
         while(!textEntered.equals("bye")){
 
@@ -83,6 +92,10 @@ public class Duke {
             }
 
         }
+
+        //Must say bye to save data!
+        manager.saveExistingData();
+
         System.out.println(horizontalLine);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);

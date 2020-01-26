@@ -1,4 +1,4 @@
-public class Deadline extends Task {
+public class Deadline extends Task implements java.io.Serializable{
 
     protected String by;
 
