@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -11,6 +12,7 @@ public class Task {
         this.isDone = false;
     }
 
+
     /**
      * Getter for the status icons, depending on whether the task has been completed:
      * "Y" is returned if the task is completed
@@ -22,6 +24,7 @@ public class Task {
         //return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+
     /**
      * Sets the status of this task to done (Default: not done)
      */
@@ -29,6 +32,11 @@ public class Task {
         this.isDone = true;
     }
 
+
+    /**
+     * Formats this object as a String to be printed out
+     * @return String
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
