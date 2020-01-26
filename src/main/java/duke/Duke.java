@@ -124,6 +124,7 @@ public class Duke {
                     readCommand(command);
                 } catch (InvalidCommandException e) {
                     System.out.println("Sorry I do not know what that means!");
+                    sc.nextLine();
                 } catch (DukeDescriptionException e) {
                     System.out.println("OOPS! You forgot to include a description!");
                 } catch (BadDescriptionException e) {
