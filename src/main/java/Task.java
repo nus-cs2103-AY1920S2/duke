@@ -25,8 +25,6 @@ public class Task {
         } else {
             return "O"; //done
         }
-
-        //return (isDone ? "yep" : "no"); //return tick or X symbols
     }
 
     @Override

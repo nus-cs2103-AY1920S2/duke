@@ -60,21 +60,18 @@ public class TaskList {
         if (inputStr.contains("todo")) {
             if (inputStr.substring(0, 4).equals("todo") && inputStr.length() > 5) {
                 String detailsStr = inputStr.substring(5, inputStr.length());
-
                 String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s", "");
 
                 if (checkIfTodoIsEmpty.length() == 0) {
                     //That means it is empty behing todo
                     throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
                 } else {
-
                     Task todo = new Todo(detailsStr);
                     storingList.add(todo);
                     printAddingTask(todo);
 
                     //store into hard disk
                     storage.convertToHardDiskFormatAndStore(todo, "T", "");
-
                 }
             } else {
                 throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
@@ -88,19 +85,15 @@ public class TaskList {
                     //not able to split string properly
                     throw new GrapieExceptions(ErrorMsg.eventFormatError);
                 } else {
-
                     Event event = new Event(eventAndTime[0], eventAndTime[1]);
                     storingList.add(event);
 
                     //printing
                     printAddingTask(event);
 
-
                     //store into hard disk
                     storage.convertToHardDiskFormatAndStore(event, "T", event.time);
-
                 }
-
             } else {
                 throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
             }
@@ -111,7 +104,6 @@ public class TaskList {
                 String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
 
                 if (eventAndTime.length > 1) {
-
                     Deadline deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
                     storingList.add(deadline);
 
@@ -124,7 +116,6 @@ public class TaskList {
                     //"OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT"
                     throw new GrapieExceptions(ErrorMsg.deadlineFormatError);
                 }
-
             } else {
                 throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
             }
@@ -163,7 +154,6 @@ public class TaskList {
             throw new GrapieExceptions(ErrorMsg.invalidNumberError);
         } else {
             //remember to add check for already completed task
-
             String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
             strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
 
@@ -171,9 +161,7 @@ public class TaskList {
 
             if (isANumber) {
                 int numDone = Integer.parseInt(strNumberDone); //convert to number
-
                 if (storingList.size() >= numDone && numDone != 0) {
-
                     if (storingList.get(numDone - 1).isDone) {
                         //if already true
                         throw new GrapieExceptions(ErrorMsg.taskNumIsAlreadyDone(numDone));
@@ -228,7 +216,6 @@ public class TaskList {
                     storingList.remove(numToDelete - 1);
 
                     formattingDivider(toPrint);
-
                     //delete from hard disk
                     storage.deleteLineFromHardDisk(numToDelete);
 

@@ -21,9 +21,8 @@ public class Parser {
         if (command.equals("list")) {
             return Ui.LIST;
         } else {
-//            ADD,
-//            DONE,
-//            DELETE,
+            //ADD, DONE, DELETE,
+
             if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
                 return Ui.DONE;
             } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")) {

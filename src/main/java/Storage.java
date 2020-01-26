@@ -15,9 +15,7 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
         this.filePath = filePath;
-
         File file = new File(filePath);
-        //boolean exists = tmpDir.exists();
         file.createNewFile();
     }
 
@@ -119,13 +117,10 @@ public class Storage {
 
         String newDescription = "";
         if (type.equals("T")) {
-
+            //todo
             newDescription += type + " | " + doneOrNotDone + " | " + task.description;
         } else {
             //event & deadline
-//                String doneOrNotDone = description.substring(4,5);
-//                String todoDescription = description.substring(7, description.length());
-
             newDescription += type + " | " + doneOrNotDone + " | " + task.description + " | " + time;
         }
 
@@ -134,17 +129,13 @@ public class Storage {
 
         //System.out.println("size of list is: " + storingList.size());
         if (file.length() == 0) {
-            //System.out.println("nou");
             fr.write(newDescription);
         } else {
             fr.write("\n" + newDescription);
-
         }
 
         //System.out.println("size of list is: " + storingList.size());
-
-        Scanner myReader = new Scanner(file);
-
+        //Scanner myReader = new Scanner(file);
         fr.close();
     }
 
@@ -163,8 +154,8 @@ public class Storage {
         int counter = 1;
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-
             //System.out.println(data);
+
             if (counter == lineNumber) {
                 data = data.substring(0, 4) + "O" + data.substring(5, data.length());
             }
@@ -179,7 +170,6 @@ public class Storage {
         }
 
 //        System.out.println(newData);
-
         FileOutputStream fileOut = new FileOutputStream(filePath);
         fileOut.write(newData.getBytes());
         fileOut.close();
