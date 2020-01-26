@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -35,6 +36,16 @@ public class Duke {
                         dukeRunning = false;
                         break;
 
+                    case CALENDAR:
+                        try {
+                            DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d/M/yyyy");
+                            LocalDate calendarDate = LocalDate.parse(inputBreakdown[1], DTF);
+                            showCalendar(taskList, calendarDate);
+                        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+                            throw new UnknownDateTimeException();
+                        }
+                        break;
+
                     case DEADLINE:
                         try {
                             String[] byDeadline = inputBreakdown[1].split(" /by ");
@@ -42,6 +53,7 @@ public class Duke {
                             try {
                                 //Initialising proTip; also used as a silent check for MissingByDeadlineException
                                 String proTip = byDeadline[1];
+                                boolean unknownDate = false;
 
                                 try {
                                     try {
@@ -53,6 +65,7 @@ public class Duke {
                                         throw new UnknownDateTimeException();
                                     }
                                 } catch (DukeException e) {
+                                    unknownDate = true;
                                     proTip = e.toString();
                                 }
 
@@ -62,7 +75,7 @@ public class Duke {
                                         + byDeadline[0] + " (by: " + byDeadline[1] + ")" +
                                         "\nNow you have " + taskList.size() + " task(s) in the list.");
 
-                                if (!proTip.isEmpty()) {
+                                if (unknownDate) {
                                     deadlineOutput = deadlineOutput + "\nPS: " + proTip;
                                 }
 
@@ -148,6 +161,37 @@ public class Duke {
     static void print(String output) {
         System.out.println("____________________________________________________________");
         System.out.println(output);
+        System.out.println("____________________________________________________________\n");
+    }
+
+    //Custom showCalendar Method to print the list with the horizontal borders + running index
+    static void showCalendar(List<Task> tasksList, LocalDate calendarDate) {
+        System.out.println("____________________________________________________________");
+
+        List<String> calendarList = new ArrayList<>();
+
+        for (Task task : tasksList) {
+            if (task.getClass().equals(Deadline.class)) {
+                DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mma)");
+                LocalDateTime testDate = LocalDateTime.parse(((Deadline) task).byDeadline.substring(5), DTF);
+                LocalDate taskDate = testDate.toLocalDate();
+
+                if (taskDate.equals(calendarDate)) {
+                    calendarList.add(task.toString());
+                }
+            }
+        }
+
+        if (calendarList.size() == 0) {
+            System.out.println("No matching deadlines found.");
+        } else {
+            System.out.println("Here are the task(s) in your list on that date:");
+
+            for (String task : calendarList) {
+                System.out.println(task);
+            }
+        }
+
         System.out.println("____________________________________________________________\n");
     }
 
