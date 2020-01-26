@@ -52,7 +52,7 @@ public class Duke {
                 break;
             case "done":
                 int completedTask = parser.getTaskIndex();
-                tasks.getTask(completedTask - 1).markAsDone();
+                tasks.getTask(completedTask - 1).setDone();
 
                 ui.printDoneSuccess(tasks, completedTask - 1);
 
