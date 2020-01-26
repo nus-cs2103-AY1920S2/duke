@@ -44,24 +44,15 @@ public class DateTimeParse {
 
     public static LocalDateTime parseDate(String dateTime) throws DateTimeParseException {
         dateTime = dateTime.replaceAll("[\\\\/\\-]+", "/");
-        LocalDateTime parsedDate = null;
-        boolean isFound = false;
         for (DateTimeFormatter dateFormat: formats) {
             try {
-                parsedDate = LocalDateTime.parse(dateTime, dateFormat);
-                isFound = true;
-                break;
+                return LocalDateTime.parse(dateTime, dateFormat);
             } catch (DateTimeParseException e) {
                 // System.out.println(e);
             }
         }
-        if (isFound) {
-            // System.out.println(parsedDate);
-            return parsedDate;
-        } else {
-            // This throws a DateTimeParseException
-            return LocalDateTime.parse(dateTime, formats[3]);
-        }
+        // This throws a DateTimeParseException
+        return LocalDateTime.parse(dateTime, formats[3]);
     }
 
 }

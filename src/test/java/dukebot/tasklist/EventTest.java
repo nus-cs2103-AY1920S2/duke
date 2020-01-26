@@ -2,19 +2,22 @@ package dukebot.tasklist;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TodoTest {
+class EventTest {
     @Test
-    public void testTodo() {
+    void testEvent() {
         // Test if getters and setters are working properly
-        Task task = new Todo("test");
+        LocalDateTime testTime = LocalDateTime.of(2020,1,2,3,4);
+        Task task = new Deadline("test", testTime);
 
-        assertEquals("Todo", task.getType());
-        assertEquals("", task.dateTimeToString());
-        assertEquals("test", task.toString());
+        assertEquals("Event", task.getType());
+        // assertEquals("", task.dateTimeToString());
+        assertEquals("test" + "(at: " + task.dateTimeToString() + ")", task.toString());
 
         assertFalse(task.getDone());
         task.setDone();
