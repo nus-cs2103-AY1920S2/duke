@@ -9,13 +9,16 @@ import duke.exceptions.DukeException;
  * Marks as a specific Task as completed.
  */
 class MarkTaskAsDone implements Command {
-    public void execute(String arg, TaskList tasks, Ui ui)  throws DukeException {
+    public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
+        // Check if task number is valid
         int taskNo;
         try {
             taskNo = Integer.parseInt(arg);
         } catch (NumberFormatException e) {
             throw new DukeException("Usage: done [int]");
         }
+        
+        // Mark task as done
         try {
             Task task = tasks.get(taskNo);
             task.markAsDone();
@@ -23,6 +26,6 @@ class MarkTaskAsDone implements Command {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number provided is out of bounds!");
         }
-        
+
     }
 }

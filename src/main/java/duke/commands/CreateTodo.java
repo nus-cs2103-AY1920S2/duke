@@ -14,8 +14,12 @@ class CreateTodo implements Command, TaskCreation {
         if (arg.length() == 0) {
             throw new DukeException("Usage: todo [task name]");
         }
+
+        // Create new Task
         Task newTask = new Todo(arg);
         tasks.add(newTask);
+
+        // Display reply
         ui.showReply(CreateTaskReply(newTask, tasks));
     }
 }

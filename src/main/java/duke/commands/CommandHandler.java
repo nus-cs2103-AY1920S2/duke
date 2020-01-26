@@ -20,6 +20,8 @@ public class CommandHandler {
         this.tasks = tasks;
         this.ui = ui;
         this.commands = new HashMap<>();
+        isActive = true;
+
         // Register commands
         commands.put("list", new ListAll());
         commands.put("done", new MarkTaskAsDone());
@@ -27,7 +29,6 @@ public class CommandHandler {
         commands.put("deadline", new CreateDeadline());
         commands.put("event", new CreateEvent());
         commands.put("delete", new DeleteTask());
-        isActive = true;
     }
 
     /**
@@ -37,12 +38,16 @@ public class CommandHandler {
      */
     public void executeCmd(String cmd) {
         // First parse command
-        String cmdWord, arg;
+        String cmdWord;
+        String arg;
+
         // Check if command is bye
         if (cmd.equalsIgnoreCase("bye")) {
             isActive = false;
             return;
         }
+
+        // Parse other types of commands
         int spaceIndex = cmd.indexOf(" ");
         if (spaceIndex == -1) {
             // No spaces found, so must be single-word command
@@ -53,6 +58,8 @@ public class CommandHandler {
             cmdWord = cmd.substring(0, spaceIndex).toLowerCase();
             arg = cmd.substring(spaceIndex + 1);
         }
+
+        // Execute parsed command
         try {
             commands.get(cmdWord).execute(arg, tasks, ui);
         } catch (NullPointerException e) {

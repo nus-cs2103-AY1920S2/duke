@@ -11,12 +11,14 @@ public interface Ui {
 
     /**
      * Displays a reply to the user.
+     * 
      * @param reply Reply to be displayed.
      */
     void showReply(String reply);
 
     /**
      * Displays an error to the user.
+     * 
      * @param error Error to be displayed.
      */
     void showError(String error);
