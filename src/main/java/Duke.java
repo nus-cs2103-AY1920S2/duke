@@ -13,6 +13,7 @@ public class Duke {
     private static final String EVENT_CMD = "event";
     private static final String DEADLINE_CMD = "deadline";
     private static final String LIST_CMD = "list";
+    private static final String DELETE_CMD = "delete";
     private static final String DONE_CMD = "done";
 
     private static void printAddedTask(Task t, List<Task> tasks) {
@@ -58,7 +59,7 @@ public class Duke {
                         throw new DukeException("The task to mark done is not in the list");
                     }
 
-                    if ((id - 1) > tasks.size() - 1) {
+                    if ((id - 1) > tasks.size() - 1 || (id - 1) < 0) {
                         throw new DukeException("The task to mark done is not in the list");
                     }
 
@@ -67,6 +68,31 @@ public class Duke {
                     t.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
+
+                } else if (cmd.startsWith(DELETE_CMD)) {
+                    str1 = cmd.split("\\s+");
+
+                    if (str1.length < 2) {
+                        throw new DukeException("The task to delete cannot be empty");
+                    }
+
+                    int id;
+                    try {
+                        id = Integer.parseInt(str1[1]);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("The task to delete is not in the list");
+                    }
+
+                    if ((id - 1) > tasks.size() - 1 || (id - 1) < 0) {
+                        throw new DukeException("The task to delete is not in the list");
+                    }
+
+                    Task t = tasks.get(id - 1);
+
+                    tasks.remove(id - 1);
+
+                    System.out.println("Noted! I've removed this task:" + LF + "    " + t + LF
+                            + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
                 } else if (cmd.startsWith(TODO_CMD)) {
                     str1  = cmd.split("todo\\s+");
 
