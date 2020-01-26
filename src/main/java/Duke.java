@@ -7,71 +7,43 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke { //extends Application {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void main(String[] args) throws IOException, GrapieExceptions {
-        //Methods
-        LevelMethods levelMethods = new LevelMethods();
-        levelMethods.greetings(); //greet
+    public Duke(String filePath) throws IOException, GrapieExceptions {
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load(), storage);
+        ui = new Ui();
+    }
 
-        //import task from hard disk
-        levelMethods.createStorage();
-        levelMethods.updateListFromFile();
+    public void runDuke() throws IOException {
+        ui.greetings();
 
         //Scanner class for input
         Scanner sc = new Scanner(System.in);
         String nextStr = sc.nextLine();
 
         //loop
-
         while (!nextStr.equals("bye")) { //check for ending input
-
-            if (nextStr.length() >= 4 && nextStr.substring(0, 4).equals("done")) {
-                //can we assume its always a number after done?
-
-//                    String strNumberDone = nextStr.substring(5, nextStr.length());
-//                    int numDone = Integer.parseInt(strNumberDone); //convert to number
-
-                    try {
-                        //levelMethods.completeTask(numDone);
-                        levelMethods.completeTask(nextStr);
-                    } catch (GrapieExceptions ex) {
-                        System.out.println("    #__________________________________________________________# \n");
-                        System.out.println("      " + ex);
-                        System.out.println("    #__________________________________________________________#");
-                    }
-            } else if (nextStr.equals("list")) {
-                //check for listing input
-                levelMethods.listTheList();
-
-            } else if (nextStr.length() >= 6 && nextStr.substring(0, 6).equals("delete")) {
-                //delete
-                try {
-                    levelMethods.deleteTask(nextStr);
-                } catch (GrapieExceptions ex) {
-                    System.out.println("    #__________________________________________________________# \n");
-                    System.out.println("      " + ex);
-                    System.out.println("    #__________________________________________________________#");
-                }
-            } else {
-                //echo
-                try {
-                    levelMethods.echo(nextStr);
-                } catch (GrapieExceptions ex) {
-                    //System.out.println("yes");
-                    //System.out.println(ex);
-                    System.out.println("    #__________________________________________________________# \n");
-                    System.out.println("      " + ex);
-                    System.out.println("    #__________________________________________________________#");
-                }
-            }
-
-
+            ui.readCommand(nextStr, tasks);
             nextStr = sc.nextLine();
         }
 
+        ui.sayonara();
 
-        levelMethods.sayonara(); //goodbye
+    }
 
+    public static void main(String[] args) throws IOException {
+        Duke duke = null;
+        try {
+            duke = new Duke("data/dukeStorage.txt");
+        } catch (GrapieExceptions grapieExceptions) {
+            System.out.println("    #__________________________________________________________# \n");
+            System.out.println("      " + grapieExceptions);
+            System.out.println("    #__________________________________________________________#");
+        }
+        duke.runDuke();
     }
 
 //    @Override

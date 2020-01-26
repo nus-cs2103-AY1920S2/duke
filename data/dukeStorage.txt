@@ -1,1 +1,3 @@
-T | X | lobe
+T | O | hehe
+T | O | fow
+T | X | smooch
