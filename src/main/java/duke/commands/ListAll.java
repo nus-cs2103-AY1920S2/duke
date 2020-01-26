@@ -5,6 +5,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
+/**
+ * Displays all Tasks in the TaskList.
+ */
 class ListAll implements Command {
     public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
         if (tasks.size() == 0) {

@@ -7,6 +7,9 @@ import duke.tasks.Event;
 import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
+/**
+ * Creates an <code>Event</code> Task and adds it to the TaskList.
+ */
 class CreateEvent implements Command, TaskCreation {
     public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
         String[] args = arg.split("/at");

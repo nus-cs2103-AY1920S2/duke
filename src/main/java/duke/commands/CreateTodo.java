@@ -6,10 +6,13 @@ import duke.tasks.Todo;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
+/**
+ * Creates a <code>Todo</code> Task and adds it to the TaskList.
+ */
 class CreateTodo implements Command, TaskCreation {
     public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
         if (arg.length() == 0) {
-            throw new DukeException("Todo description cannot be empty!");
+            throw new DukeException("Usage: todo [task name]");
         }
         Task newTask = new Todo(arg);
         tasks.add(newTask);

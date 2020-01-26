@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * Displays output to the user in text (CLI).
+ */
 public class TextUi implements Ui {
     private String lineBreak = "===========================================================\n";
 
