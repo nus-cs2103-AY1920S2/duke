@@ -1,3 +1,17 @@
+package main.duke;
+
+import main.duke.data.Calender;
+import main.duke.data.TaskList;
+import main.duke.enums.Command;
+import main.duke.exception.BadDateException;
+import main.duke.exception.BadDescriptionException;
+import main.duke.exception.DukeDescriptionException;
+import main.duke.exception.InvalidCommandException;
+import main.duke.tasks.Deadline;
+import main.duke.tasks.Event;
+import main.duke.tasks.Task;
+import main.duke.tasks.Todo;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;

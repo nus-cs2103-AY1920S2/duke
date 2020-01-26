@@ -1,3 +1,7 @@
+package main.duke.data;
+
+import main.duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {

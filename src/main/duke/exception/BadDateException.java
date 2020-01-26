@@ -1,4 +1,4 @@
-package main.exception;
+package main.duke.exception;
 
 public class BadDateException extends DukeException {
     public BadDateException(String errorMsg) {

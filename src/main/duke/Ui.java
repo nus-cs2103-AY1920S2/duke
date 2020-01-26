@@ -1,3 +1,5 @@
+package main.duke;
+
 public class Ui {
     private String logo;
     private String linebreak;

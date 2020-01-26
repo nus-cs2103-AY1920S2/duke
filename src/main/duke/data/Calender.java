@@ -1,3 +1,7 @@
+package main.duke.data;
+
+import main.duke.tasks.Task;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;

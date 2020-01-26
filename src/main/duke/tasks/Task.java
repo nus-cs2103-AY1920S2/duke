@@ -1,3 +1,7 @@
+package main.duke.tasks;
+
+import main.duke.enums.TType;
+
 import java.time.LocalDate;
 
 public abstract class Task {

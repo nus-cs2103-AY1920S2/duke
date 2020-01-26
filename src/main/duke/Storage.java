@@ -1,3 +1,12 @@
+package main.duke;
+
+import main.duke.data.Calender;
+import main.duke.exception.BadDateException;
+import main.duke.tasks.Deadline;
+import main.duke.tasks.Event;
+import main.duke.tasks.Task;
+import main.duke.tasks.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -1,3 +1,9 @@
+package main.duke.tasks;
+
+import main.duke.Parser;
+import main.duke.enums.TType;
+import main.duke.exception.BadDateException;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
