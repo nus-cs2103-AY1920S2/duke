@@ -42,6 +42,23 @@ public class Duke {
                     }
                     break;
 
+                case "delete":
+                    try {
+                        int deleteTaskNo = Integer.parseInt(inputBreakdown[1]) - 1;
+                        Task deletedShadowTask = taskList.get(deleteTaskNo);
+                        taskList.remove(deleteTaskNo);
+
+                        for (Task task : taskList) {
+                            task.taskNo = taskList.indexOf(task) + 1;
+                        }
+
+                        print("Noted. I've removed this task:\n\t" + deletedShadowTask
+                                + "\nNow you have " + taskList.size() + " task(s) in the list.");
+                    } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                        print(new UnknownTaskException().toString());
+                    }
+                    break;
+
                 case "done":
                     try {
                         int doneTaskNo = Integer.parseInt(inputBreakdown[1]) - 1;
