@@ -8,8 +8,13 @@ public class Event extends Task {
         this.at = at;
     }   
 
+
+    public String getDate() {
+        return this.at.split("/at ")[1];
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(" + at + ")";
+        return "[E]" + super.toString() + at ;
     }
 }

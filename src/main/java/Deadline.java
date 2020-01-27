@@ -8,9 +8,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getDate() {
+        return this.by.split("/by ")[1];
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(" + by + ")";
+        return "[D]" + super.toString() +  by ;
     }
 }
 
