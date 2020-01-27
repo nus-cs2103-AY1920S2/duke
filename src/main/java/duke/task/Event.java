@@ -1,34 +1,34 @@
-package duke;
+package duke.task;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represent tasks that need to be done before a specific date/time
- * e.g., submit report by 11/10/2019 5pm
+ * Represents tasks that start at a specific time and ends at a specific time
+ * e.g., team project meeting on 2/10/2019 2-4pm
  */
-public class Deadline implements Task {
+public class Event implements Task {
     protected String description;
-    protected LocalDate deadline;
+    protected LocalDate eventTime;
     protected boolean isDone;
 
-    public Deadline(String description, String deadline) {
-        this(description, deadline, false);
+    public Event(String description, String eventTime) {
+        this(description, eventTime, false);
     }
 
-    public Deadline(String description, String deadline, boolean isDone) throws DateTimeException {
+    public Event(String description, String eventTime, boolean isDone) throws DateTimeException {
         this.description = description;
-        this.deadline = LocalDate.parse(deadline);
+        this.eventTime = LocalDate.parse(eventTime);
         this.isDone = isDone;
     }
 
-    public LocalDate getDeadline() {
-        return deadline;
+    public LocalDate getEventTime() {
+        return eventTime;
     }
 
     /**
-     * Returns a String (Unicode Character) based on duke.Task completion status.
+     * Returns a String (Unicode Character) based on duke.task.Task completion status.
      * @return String representing Unicode character for check mark or cross
      */
     @Override
@@ -63,23 +63,22 @@ public class Deadline implements Task {
 
     @Override
     public String toString() {
-        // duke.Deadline in yyyy-mm-dd format (e.g. 2020-10-15)
+        // duke.task.Deadline in yyyy-mm-dd format (e.g. 2020-10-15)
         // Output in MMM d yyyy e.g. (Oct 15 2020)
-        // e.g. format: [D][✗] return book (by: Oct 15 2020)
-        return String.format("[D][%s] %s (by: %s)", getStatusIcon(),
-                description,
-                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        // e.g. format: [E][✗] project meeting (at: Oct 15 2020)
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description,
+                eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**
-     * To return a String representation of duke.Deadline instance
+     * To return a String representation of duke.task.Event instance
      * @return String representing task in save file
      */
     @Override
     public String stringToSaveToDisk() {
-        // e.g. format: deadline,0,return book,June 6th
-        return String.format("deadline,%s,%s,%s", isDone ? 1 : 0, description,
-                deadline);
+        // e.g. format: event,0,project meeting,Aug 6th 2-4pm
+        return String.format("event,%s,%s,%s", isDone ? 1 : 0, description,
+                eventTime);
     }
 
     @Override

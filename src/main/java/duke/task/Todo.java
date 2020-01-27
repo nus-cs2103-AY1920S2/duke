@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents tasks without any date/time attached to it e.g., visit new theme park.
@@ -33,7 +33,7 @@ public class Todo implements Task {
     }
 
     /**
-     * Returns a String (Unicode Character) based on duke.Task completion status.
+     * Returns a String (Unicode Character) based on duke.task.Task completion status.
      * @return String representing Unicode character for check mark or cross
      */
     @Override
@@ -57,7 +57,7 @@ public class Todo implements Task {
     }
 
     /**
-     * To return a String representation of duke.Todo instance
+     * To return a String representation of duke.task.Todo instance
      * @return String representing task in save file
      */
     @Override

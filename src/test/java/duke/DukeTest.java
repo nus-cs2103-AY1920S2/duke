@@ -1,5 +1,9 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -121,14 +125,14 @@ class DukeTest {
                 () -> duke.run(new BufferedReader(
                         new InputStreamReader(new ByteArrayInputStream(input.getBytes())))));
         // Check exception message
-        assertEquals("Invalid duke.Task Number given!",
+        assertEquals("Invalid duke.task.Task Number given!",
                 exception.getMessage(),
                 "Should display invalid message for done command with invalid task number");
     }
 
     @Disabled
     @Test
-    @DisplayName("duke.Duke: Test for empty duke.Todo command")
+    @DisplayName("duke.Duke: Test for empty duke.task.Todo command")
     void dukeException_emptyTodoCommand_displayInvalidTodoMessage() {
         String input = "todo" + NEWLINE;
         Exception exception = assertThrows(DukeException.class,
@@ -252,7 +256,7 @@ class DukeTest {
         // Check if task has been added to list
         assertEquals(1, duke.tasks.size(), "Tasks list should have one more item");
         assertEquals(eventDescription, duke.tasks.get(0).getDescription(),
-                "duke.Event description should match");
+                "duke.task.Event description should match");
     }
 
     @Disabled
@@ -280,7 +284,7 @@ class DukeTest {
         assertEquals(1, duke.tasks.size(), "Should increase task list size by one");
         // Check task description
         assertEquals(deadlineDescription, duke.tasks.get(0).getDescription(),
-                "duke.Task description should match");
+                "duke.task.Task description should match");
     }
 
     @Disabled
@@ -329,7 +333,7 @@ class DukeTest {
         expected.append(HORIZONTAL_DIVIDER)
                 .append(INDENTATION).append("Here are the tasks in your list:").append(NEWLINE)
                 .append(HORIZONTAL_DIVIDER);
-        assertEquals(expected.toString(), output.toString(), "duke.Task should be deleted");
+        assertEquals(expected.toString(), output.toString(), "duke.task.Task should be deleted");
     }
 
     @Disabled

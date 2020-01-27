@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Task;
-import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class AddTaskCommand extends Command {
     protected Task task;

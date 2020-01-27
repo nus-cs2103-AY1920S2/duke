@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;

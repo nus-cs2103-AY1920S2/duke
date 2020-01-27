@@ -1,5 +1,8 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -79,7 +82,7 @@ public class Ui {
     }
 
     /**
-     * Prints out all tasks present in given duke.TaskList.
+     * Prints out all tasks present in given duke.task.TaskList.
      * @param tasks for printing task information
      */
     public void listTasks(TaskList tasks) {

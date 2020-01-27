@@ -1,6 +1,9 @@
 package duke;
 
 import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.time.DateTimeException;
 import java.util.HashMap;
@@ -192,7 +195,7 @@ public class Parser {
         commandTypeFormatInfo.put("event", "Incorrect event format given... Correct format: event " +
                 "[description] /at [event time in yyyy-mm-dd]");
         commandTypeFormatInfo.put("deadline", "Incorrect deadline task format given... Correct " +
-                "format: duke.Deadline task format: deadline [description] /by " +
+                "format: duke.task.Deadline task format: deadline [description] /by " +
                 "[due date in yyyy-mm-dd]");
         commandTypeFormatInfo.put("todo", "Incorrect todo task format given... Correct format: todo " +
                 "[description]");
