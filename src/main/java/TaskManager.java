@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 import java.io.*;
-=======
+
 import java.time.LocalDateTime;
->>>>>>> branch-Level-8
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
