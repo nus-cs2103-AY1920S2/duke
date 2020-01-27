@@ -144,21 +144,6 @@ public class Duke {
         return toReturn;
     }
 
-//    private void loadSavedTaskList(Path path) throws IOException {
-//        if (Files.exists(path)) {
-//            List<String> lines = Files.readAllLines(path);
-//            this.tasks = lines.stream().map(Duke::decode).collect(Collectors.toList());
-//        }
-//    }
-
-//    private void saveTaskList(Path path) throws IOException {
-//        if (!Files.exists(path)) {
-//            Files.createDirectories(path.getParent());
-//        }
-//        List<String> lines = this.tasks.stream().map(Task::toStringForSaving).collect(Collectors.toList());
-//        Files.write(path, lines, StandardOpenOption.CREATE);
-//    }
-
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
         String[] splitInput = lineInput.split(Pattern.quote(" "));
         String commandString = splitInput[0];
