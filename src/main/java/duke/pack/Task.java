@@ -29,6 +29,10 @@ public class Task {
         return description; //return task description
     }
 
+    public void setDone(Boolean b) {
+        isDone = b;
+    }
+
     /**
      * marks the task as done
      */

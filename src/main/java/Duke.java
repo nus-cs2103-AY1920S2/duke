@@ -6,15 +6,28 @@ import duke.pack.DukeException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     // ArrayList of tasks
     private static ArrayList<Task> arrList;
+    private static File file;
 
     public static void main(String[] args) throws DukeException {
-        // Scanner object
-        Scanner sc = new Scanner(System.in);
         arrList = new ArrayList<>();
+        file = new File("data/duke.txt");
+
+        // Scanner object for input
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            loadFileContent();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
 
         // greeting
         greet();
@@ -145,6 +158,37 @@ public class Duke {
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    " + comm);
         System.out.println("    ------------------------------------------------------------");
+    }
+
+    public static void loadFileContent() throws FileNotFoundException {
+        Scanner fileScanner = new Scanner(file);
+        while (fileScanner.hasNext()) {
+            String task = fileScanner.nextLine();
+            String[] taskArr = task.split("\\|");
+            String taskType = taskArr[0].trim();
+
+            if (taskType.equals("T")) {
+                Task todo = new Todo(taskArr[2].trim());
+                if (taskArr[1].trim().equals("1")) {
+                    todo.setDone(true);
+                }
+                arrList.add(todo);
+
+            } else if (taskType.equals("E")) {
+                Task event = new Event(taskArr[2].trim(), taskArr[3].trim());
+                if (taskArr[1].trim().equals("1")) {
+                    event.setDone(true);
+                }
+                arrList.add(event);
+
+            } else if (taskType.equals("D")) {
+                Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim());
+                if (taskArr[1].trim().equals("1")) {
+                    deadline.setDone(true);
+                }
+                arrList.add(deadline);
+            }
+        }
     }
 
     /**
