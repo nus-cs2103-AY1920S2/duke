@@ -109,7 +109,7 @@ public class Ui {
     public void replyDone(Task task) {
         message.clearMessage();
         message.addSentence("Nice! I've marked this task as done:", 1);
-        message.addSentence("  " + task.toString(), 3);
+        message.addSentence(task.toString(), 5);
         System.out.print(message.replyMessage());
     }
 
