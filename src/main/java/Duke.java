@@ -1,11 +1,17 @@
-import storage.*;
-import task.*;
-import ui.Ui;
-import command.*;
-import dukeexception.*;
-import parser.*;
 import java.io.File;
 import java.io.IOException;
+
+import command.Command;
+
+import dukeexception.DukeException;
+
+import parser.Parser;
+
+import storage.Storage;
+
+import task.TaskList;
+
+import ui.Ui;
 
 public class Duke {
 

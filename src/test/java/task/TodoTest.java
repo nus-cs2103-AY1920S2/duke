@@ -1,7 +1,6 @@
 package task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoTest {
 
@@ -11,7 +10,7 @@ public class TodoTest {
         String expectedFirst = "[T][Not Done] " + "Task";
         String actualFirst = todo.toString();
         String expectedSec = "T/0/Task\n";
-        String actualSec = todo.toStringTaskstxt();
+        String actualSec = todo.toStringTasks();
         assertEquals(expectedFirst, actualFirst);
         assertEquals(expectedSec, actualSec);
     }

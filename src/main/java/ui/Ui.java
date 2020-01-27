@@ -1,6 +1,8 @@
 package ui;
 import java.util.Scanner;
-import task.*;
+
+import task.Task;
+import task.TaskList;
 /**
  * Represents the user interface displayed to the user.
  */

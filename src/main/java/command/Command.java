@@ -1,11 +1,13 @@
 package command;
-import task.*;
-import ui.*;
-import storage.*;
 import java.io.IOException;
+
+import storage.Storage;
+
+import task.TaskList;
+
+import ui.Ui;
 /**
- * Represents the command to be executed. A <code>Command</code> object corresponds to the command
- * to be executed.
+ * Represents the command to be executed. A <code>Command</code> object corresponds to the command to be executed.
  */
 public abstract class Command {
     /**

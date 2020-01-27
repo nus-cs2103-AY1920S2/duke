@@ -16,8 +16,7 @@ public class DukeException extends Exception {
     public String getMessage(){
         if (exception.equals("todo")){
             return "      OOPS!!! The description of a todo cannot be empty.";
-        }
-        else{
+        } else {
             return "      OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }

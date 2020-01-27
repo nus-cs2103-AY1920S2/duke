@@ -1,11 +1,14 @@
 package command;
-import task.*;
-import ui.*;
-import storage.*;
 import java.io.IOException;
+
+import storage.Storage;
+
+import task.TaskList;
+
+import ui.Ui;
 /**
- * Represents the command of exiting the program. A <code>ByeCommand</code> object corresponds to the command
- * of exiting the program.
+ * Represents the command of exiting the program. A <code>ByeCommand</code> object corresponds to the command of exiting
+ * the program.
  */
 public class ByeCommand extends Command {
     /**

@@ -1,6 +1,7 @@
 package task;
-import java.time.LocalDate;
 import java.time.format.TextStyle;
+import java.time.LocalDate;
+
 import java.util.Locale;
 /**
  * Represents an event task. A <code>Event</code> object corresponds to a event task e.g.,

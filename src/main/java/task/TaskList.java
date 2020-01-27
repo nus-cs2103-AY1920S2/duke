@@ -1,9 +1,8 @@
 package task;
-
 import java.util.ArrayList;
 /**
- * Represents a task list. A <code>TaskList</code> object corresponds to a task list e.g.,
- * <code>ArrayList<Task> taskList</code>
+ * Represents a task list. A <code>TaskList</code> object corresponds to a task list e.g., <code>ArrayList<Task>
+ *     taskList</code>
  */
 public class TaskList {
     public ArrayList<Task> tasks;

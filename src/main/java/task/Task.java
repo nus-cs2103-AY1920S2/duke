@@ -43,12 +43,10 @@ public abstract class Task {
             if (task instanceof Todo) {
                 taskString += "T/" + task.getStatusIconInBin() + "/";
                 taskString += task.description + "\n";
-            }
-            else if (task instanceof Deadline) {
+            } else if (task instanceof Deadline) {
                 taskString += "D/" + task.getStatusIconInBin() + "/";
                 taskString += task.description + "/" + ((Deadline) task).date.toString() + "\n";
-            }
-            else {               //instance of event
+            } else {               //instance of event
                 taskString += "E/" + task.getStatusIconInBin() + "/";
                 taskString += task.description + "/" + ((Event) task).date.toString() + "\n";
             }

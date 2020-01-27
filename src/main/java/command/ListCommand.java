@@ -1,11 +1,14 @@
 package command;
-import task.*;
-import ui.*;
-import storage.*;
 import java.io.IOException;
+
+import storage.Storage;
+
+import task.TaskList;
+
+import ui.Ui;
 /**
- * Represents the command of displaying the task list. A <code>ListCommand</code> object
- * corresponds to the command of displaying the current task list.
+ * Represents the command of displaying the task list. A <code>ListCommand</code> object corresponds to the command of
+ * displaying the current task list.
  */
 public class ListCommand extends Command {
     /**

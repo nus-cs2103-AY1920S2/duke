@@ -1,11 +1,18 @@
 package storage;
-import task.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 /**
  * Loads or save the storage file as requested. A <code>Storage</code> object corresponds to a file represented by the
  * file path e.g., <code>"duke/src/java"</code>
@@ -31,37 +38,33 @@ public class Storage {
             String[] taskString = nextLine.split("/");
             String taskTitle = taskString[0];
             switch (taskTitle){
-                case "T":
-                    Task todoTask = new Todo(taskString[2]);
-                    if(taskString[1].equals("1")){
-                        todoTask.markDone();
-                    }
-                    tasks.add(todoTask);
-                    break;
-
-                case "D":
-                    Task deadlineTask = new Deadline(taskString[2], LocalDate.parse(taskString[3]));
-                    if(taskString[1].equals("1")){
-                        deadlineTask.markDone();
-                    }
-                    tasks.add(deadlineTask);
-                    break;
-
-                case "E":
-                    Task eventTask = new Event(taskString[2], LocalDate.parse(taskString[3]));
-                    if(taskString[1].equals("1")){
-                        eventTask.markDone();
-                    }
-                    tasks.add(eventTask);
-                    break;
-
-                default:
-                    break;
+            case "T":
+                Task todoTask = new Todo(taskString[2]);
+                if(taskString[1].equals("1")){
+                    todoTask.markDone();
+                }
+                tasks.add(todoTask);
+                break;
+            case "D":
+                Task deadlineTask = new Deadline(taskString[2], LocalDate.parse(taskString[3]));
+                if(taskString[1].equals("1")){
+                    deadlineTask.markDone();
+                }
+                tasks.add(deadlineTask);
+                break;
+            case "E":
+                Task eventTask = new Event(taskString[2], LocalDate.parse(taskString[3]));
+                if(taskString[1].equals("1")){
+                    eventTask.markDone();
+                }
+                tasks.add(eventTask);
+                break;
+            default:
+                break;
             }
         }
         return tasks;
     }
-
     /**
      * Updates the task list.
      * If the storage file cannot be found, an error message is shown.

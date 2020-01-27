@@ -1,8 +1,12 @@
 package command;
 import java.io.IOException;
-import task.*;
-import ui.*;
-import storage.*;
+
+import storage.Storage;
+
+import task.Task;
+import task.TaskList;
+
+import ui.Ui;
 /**
  * Represents the command of adding a task into the task list. A <code>AddCommand</code> object corresponds to a task
  * to be added to the task list e.g., <code>Task</code>

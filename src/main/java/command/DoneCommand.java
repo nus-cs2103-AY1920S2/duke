@@ -1,11 +1,14 @@
 package command;
-import ui.*;
-import storage.*;
 import java.io.IOException;
-import task.*;
+
+import storage.Storage;
+
+import task.TaskList;
+
+import ui.Ui;
 /**
- * Represents the command of marking a task at the index as done. A <code>DoneCommand</code> object
- * corresponds to the command of marking the task at the index as done e.g., <code>2</code>
+ * Represents the command of marking a task at the index as done. A <code>DoneCommand</code> object corresponds to the
+ * command of marking the task at the index as done e.g., <code>2</code>
  */
 public class DoneCommand extends Command{
     int taskNum;

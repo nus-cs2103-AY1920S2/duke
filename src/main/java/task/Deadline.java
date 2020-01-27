@@ -1,6 +1,7 @@
 package task;
-import java.time.LocalDate;
 import java.time.format.TextStyle;
+import java.time.LocalDate;
+
 import java.util.Locale;
 /**
  * Represents a deadline task. A <code>Deadline</code> object corresponds to a deadline task e.g.,

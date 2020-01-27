@@ -1,8 +1,12 @@
 package command;
-import task.*;
-import ui.Ui;
-import storage.*;
 import java.io.IOException;
+
+import storage.Storage;
+
+import task.Task;
+import task.TaskList;
+
+import ui.Ui;
 /**
  * Represents the command of deleting a task using the index of the task. A <code>DeleteCommand</code> object
  * corresponds to the command of deleting a task using the index e.g., <code>2</code>
