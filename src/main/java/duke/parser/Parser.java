@@ -9,8 +9,18 @@ import duke.task.Todo;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param fullCommand full user input string.
+     * @return the command based on user input.
+     * @throws DukeException if the user input is incomplete or in the wrong format.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] partialCommands = fullCommand.split(" ", 2);
         Command toReturn;
