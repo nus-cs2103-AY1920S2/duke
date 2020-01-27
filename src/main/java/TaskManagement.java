@@ -3,9 +3,9 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class TaskManagement {
 
@@ -29,7 +29,7 @@ public class TaskManagement {
 
     }
 
-    public Task addTask(String taskDescription, String date, Task.Types type) throws IOException {
+    public Task addTask(String taskDescription, LocalDateTime date, Task.Types type) throws IOException {
 
         System.out.println("Got it. I've added this task:");
         Task task = null;
@@ -59,7 +59,7 @@ public class TaskManagement {
     }
 
 
-    public Task addTask(String taskDescription, String date, Task.Types type, Task.status status) throws IOException {
+    public Task addTask(String taskDescription, LocalDateTime date, Task.Types type, Task.status status) throws IOException {
 
         Task task = null;
         switch (type) {
@@ -127,6 +127,7 @@ public class TaskManagement {
 
         try {
             File f = new File (path);
+            f.createNewFile();
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -159,11 +160,11 @@ public class TaskManagement {
                     case "Deadline":
                         if (status.equals("Y")) {
 
-                            addTask(contentArr[2], contentArr[3], Task.Types.Deadline, Task.status.Y);
+                            addTask(contentArr[2], LocalDateTime.parse(contentArr[3]), Task.Types.Deadline, Task.status.Y);
 
                         } else {
 
-                            addTask(contentArr[2], contentArr[3], Task.Types.Deadline, Task.status.N);
+                            addTask(contentArr[2], LocalDateTime.parse(contentArr[3]), Task.Types.Deadline, Task.status.N);
 
                         }
                         break;
@@ -171,12 +172,12 @@ public class TaskManagement {
                     case "Event":
                         if (status.equals("Y")) {
 
-                            addTask(contentArr[2], contentArr[3], Task.Types.Event, Task.status.Y);
+                            addTask(contentArr[2], LocalDateTime.parse(contentArr[3]), Task.Types.Event, Task.status.Y);
 
 
                         } else {
 
-                            addTask(contentArr[2], contentArr[3], Task.Types.Event, Task.status.N);
+                            addTask(contentArr[2], LocalDateTime.parse(contentArr[3]), Task.Types.Event, Task.status.N);
 
                         }
                         break;
@@ -210,9 +211,9 @@ public class TaskManagement {
         String type = task.getType().toString();
         String status = task.getStatus().toString();
         String taskDescription = task.getTaskDescription();
-        String date = task.getDate();
+        LocalDateTime dateTime = task.getDateTime();
 
-        return type + "//" + status + "//" + taskDescription + "//" + date + "\n";
+        return type + "//" + status + "//" + taskDescription + "//" + dateTime + "\n";
 
     }
 

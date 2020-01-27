@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class Task {
 
     protected String taskDescription;
-    protected String date;
+    protected LocalDateTime dateTime;
     protected status isDone;
 
     public enum Types {
@@ -14,10 +14,10 @@ public class Task {
         Y, N;
     }
 
-    public Task(String date, String taskDescription) {
+    public Task(LocalDateTime dateTime, String taskDescription) {
 
         this.taskDescription = taskDescription;
-        this.date = date;
+        this.dateTime = dateTime;
         this.isDone = status.N;
 
     }
@@ -28,9 +28,9 @@ public class Task {
 
     }
 
-    public String getDate() {
+    public LocalDateTime getDateTime() {
 
-        return date;
+        return dateTime;
 
     }
 

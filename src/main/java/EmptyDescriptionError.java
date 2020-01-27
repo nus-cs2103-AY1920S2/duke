@@ -1,6 +1,6 @@
 public class EmptyDescriptionError extends Exceptions {
 
-    public EmptyDescriptionError(Task.Types type) {
+    public EmptyDescriptionError(String type) {
         super(type);
     }
 

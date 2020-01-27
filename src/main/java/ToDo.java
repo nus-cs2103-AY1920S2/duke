@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class ToDo extends Task {
 
 
-    public ToDo(String date, String taskDescription) {
+    public ToDo(LocalDateTime dateTime, String taskDescription) {
 
-        super(date, taskDescription);
+        super(dateTime, taskDescription);
 
     }
 

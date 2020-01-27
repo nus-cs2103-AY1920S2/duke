@@ -1,22 +1,24 @@
-public class Exceptions {
+public class Exceptions extends Exception {
 
-    protected Task.Types type;
+    protected String type;
 
 
-    public Exceptions(Task.Types type) {
+    public Exceptions(String type) {
+
         this.type = type;
+
     }
 
     public String errorMessage() {
+
         return this.errorMessage();
+
     }
 
-    public Task.Types getType() {
+    public String getType() {
+
         return type;
+
     }
 
-    @Override
-    public String toString() {
-        return this.toString();
-    }
 }

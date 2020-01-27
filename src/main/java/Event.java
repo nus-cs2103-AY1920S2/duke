@@ -1,18 +1,24 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    public Event (String date, String taskDescription) {
+    public Event (LocalDateTime dateTime, String taskDescription) {
 
-        super(date, taskDescription);
+        super(dateTime, taskDescription);
 
     }
 
     @Override
     public String toString() {
 
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String date = super.getDateTime().format(format);
+
         return "[" + Types.Event + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
-                + "(at:" + super.getDate() + ")";
+                + "(at:" + date + ")";
     }
 
     @Override
