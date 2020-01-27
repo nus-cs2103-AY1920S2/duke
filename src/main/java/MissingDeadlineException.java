@@ -1,5 +1,5 @@
 class MissingDeadlineException extends InvalidCommandException {
     MissingDeadlineException() {
-        super("Oops! The deadline of the task is missing.");
+        super("Oh no! The deadline of the task is missing.");
     }
 }
