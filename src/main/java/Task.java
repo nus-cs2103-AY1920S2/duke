@@ -15,6 +15,14 @@ public class Task {
         this.isDone = true;
     }
 
+    public String toSaveName() {
+        if (this.isDone) {
+            return " | 1 | " + this.description;
+        } else {
+            return " | 0 | " + this.description;
+        }
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + this.description;

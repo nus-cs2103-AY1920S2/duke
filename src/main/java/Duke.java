@@ -1,3 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,8 +18,15 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         output(new String[]{"Hello! I'm Duke\n     What can I do for you?"});
         Scanner sc = new Scanner(System.in);
+
+        ArrayList<Task> list;
+        try {
+            list = loadFileContents();
+        } catch(FileNotFoundException e) {
+            list = new ArrayList<>();
+            createNewFile();
+        }
         String op = sc.nextLine();
-        ArrayList<Task> list = new ArrayList<>();
         while(!op.equals("bye")) {
             if (op.equals("list")) {
                 show_list(list);
@@ -21,23 +35,23 @@ public class Duke {
                     String[] temp = op.split(" ", 2);
                     String cmd = temp[0];
                     switch (cmd) {
-                        case "delete":
-                            delete(temp, list);
-                            break;
-                        case "done":
-                            done(temp, list);
-                            break;
-                        case "todo":
-                            todo(temp, list);
-                            break;
-                        case "deadline":
-                            deadline(temp, list);
-                            break;
-                        case "event":
-                            event(temp, list);
-                            break;
-                        default:
-                            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    case "delete":
+                        delete(temp, list);
+                        break;
+                    case "done":
+                        done(temp, list);
+                        break;
+                    case "todo":
+                        todo(temp, list);
+                        break;
+                    case "deadline":
+                        deadline(temp, list);
+                        break;
+                    case "event":
+                        event(temp, list);
+                        break;
+                    default:
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException e) {
                     output(new String[]{e.getMessage()});
@@ -46,7 +60,61 @@ public class Duke {
             }
             op = sc.nextLine();
         }
+        saveTasksToFile(list);
         output(new String[]{"Bye. Hope to see you again soon!"});
+    }
+
+    private static void createNewFile() {
+        try {
+            Path path = Paths.get("data/duke.txt");
+            Path parent = path.getParent();
+            Files.createDirectories(parent);
+            Files.createFile(path);
+        } catch (IOException e) {
+            output(new String[] {"Could no create file!"});
+        }
+    }
+
+    private static ArrayList<Task> loadFileContents() throws FileNotFoundException {
+        File f = new File("data/duke.txt");
+        Scanner s = new Scanner(f);
+        ArrayList<Task> list = new ArrayList<>();
+        while (s.hasNextLine()) {
+            String[] task = s.nextLine().split(" \\| ");
+            Task temp = null;
+            switch (task[0]) {
+                case "T":
+                    temp = new ToDo(task[2]);
+                    break;
+                case "D":
+                    temp = new Deadline(task[2], task[3]);
+                    break;
+                case "E":
+                    temp = new Event(task[2], task[3]);
+                    break;
+                default:
+                    break;
+            }
+            if (task[1].equals("1")) {
+                temp.markAsDone();
+            }
+            list.add(temp);
+        }
+        s.close();
+        return list;
+    }
+
+    private static void saveTasksToFile(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (Task task: list) {
+                fw.write(task.toSaveName());
+            }
+            fw.close();
+        } catch (IOException e) {
+            output(new String[] {"OOPS!!! Could not save data."});
+        }
+
     }
 
     private static void delete(String[] temp, ArrayList<Task> list) throws DukeException {
