@@ -19,11 +19,8 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Nice I have marked this task as done");
-        System.out.println(this.getStatusIcon() + " " + this.getDescription());
-        System.out.println();
-        System.out.println("-------------------------------------------------------------");
+        Ui ui = new Ui(this.getDescription());
+        ui.doneTask(this);
     }
 
     public void deleteTask() {
