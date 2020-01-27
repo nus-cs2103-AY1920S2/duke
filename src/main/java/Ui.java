@@ -2,8 +2,8 @@
  * Handles user output.
  */
 public class Ui {
-    static String fill = "----------------------------------------";
-    static String indent = "    ";
+    protected static String fill = "----------------------------------------";
+    protected static String indent = "    ";
 
     /**
      * Prints output for adding a task into the TaskList
@@ -11,7 +11,8 @@ public class Ui {
      * @param size current size of TaskList.
      */
     public void showAddTask(Task task, int size) {
-        System.out.println(dukeFormat("Sure I will add this task.\n    " + task + "\n    Now you have " + String.valueOf(size) + " tasks."));
+        System.out.println(dukeFormat("Sure I will add this task.\n    " + task +
+                "\n    Now you have " + String.valueOf(size) + " tasks."));
     }
 
     /**
@@ -28,7 +29,8 @@ public class Ui {
      * @param size current size of TaskList.
      */
     public void showDeleteTask(Task task, int size) {
-        System.out.println(dukeFormat("Sure I will delete this task.\n    " + task + "\n    Now you have " + String.valueOf(size) + " tasks."));
+        System.out.println(dukeFormat("Sure I will delete this task.\n    " + task
+                + "\n    Now you have " + String.valueOf(size) + " tasks."));
     }
 
     /**
