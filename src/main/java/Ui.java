@@ -1,4 +1,5 @@
 package main.java;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -54,10 +55,20 @@ public class Ui {
         System.out.println("Number of items in the list: " + listSize);
     }
 
+<<<<<<< HEAD
     /**
      * Method to print a farewell message before closing the Duke bot.
      */
+=======
+>>>>>>> Level-9
     public void printBye() {
         System.out.println("It was my pleasure to help you.\n");
+    }
+
+    public void printFind(ArrayList<Task> matchedTasks) {
+        System.out.println("These are the tasks that matched what you were looking for.");
+        for (Task tasks : matchedTasks) {
+            System.out.println(tasks);
+        }
     }
 }

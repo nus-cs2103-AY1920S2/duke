@@ -84,5 +84,17 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
+
+    public ArrayList<Task> find(String str) {
+        ArrayList<Task> matchedTasks = new ArrayList<Task>();
+        for (int i = 0; i < taskList.size(); i ++) {
+            String description = taskList.get(i).getDescription();
+            if (description.contains(str)) {
+                matchedTasks.add(taskList.get(i));
+            }
+        }
+        return matchedTasks;
+    }
+
 }
 
