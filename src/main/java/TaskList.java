@@ -25,22 +25,26 @@ public class TaskList {
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         String nameOfEvent = combineString(inputArr, 1, arrLength);
+        if(nameOfEvent.equals("")){
+            throw new NoDescriptionException();
+        }
         Task newT = new Todo(nameOfEvent);
         tasks.add(newT);
         saveReply += newT.toString();
         return saveReply + "\n" + SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia";
     }
 
-    public String addEvent(String[] inputArr) throws NoDateTimeException {
+    public String addEvent(String[] inputArr) throws NoDateTimeException, NoDescriptionException {
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         int pointer = findIndex("/at", inputArr);
-
         if (pointer == -1 || pointer == arrLength - 1) {
             throw new NoDateTimeException();
         }
-
         String nameOfEvent = combineString(inputArr, 1, pointer);
+        if (nameOfEvent.equals("")) {
+            throw new NoDescriptionException();
+        }
         String dateTime = combineString(inputArr, pointer + 1, arrLength);
         Task newE = new Event(nameOfEvent, dateTime);
         tasks.add(newE);
@@ -48,16 +52,17 @@ public class TaskList {
         return saveReply + "\n" + SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia";
     }
 
-    public String addDeadline(String[] inputArr) throws DukeException {
+    public String addDeadline(String[] inputArr) throws NoDateException, NoDescriptionException {
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         int pointer = findIndex("/by", inputArr);
-
         if (pointer == -1 || pointer == arrLength - 1) {
             throw new NoDateException();
         }
-
         String nameOfEvent = combineString(inputArr, 1, pointer);
+        if (nameOfEvent.equals("")) {
+            throw new NoDescriptionException();
+        }
         String date = combineString(inputArr, pointer + 1, arrLength);
         Task newD = new Deadline(nameOfEvent, date);
         this.tasks.add(newD);

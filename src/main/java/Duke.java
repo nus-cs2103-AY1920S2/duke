@@ -2,9 +2,6 @@ import java.time.format.DateTimeParseException;
 import java.io.IOException;
 
 public class Duke {
-    private static final String SPACE = "    ";
-    private static final String HOME = System.getProperty("user.dir");
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -28,15 +25,13 @@ public class Duke {
 
         // reply to input
         String input = ui.getCommand();
+        Command command = parser.parse(input);
 
-        while (!input.equals("bye")) {
+        while (command != Command.BYE) {
             String[] inputArr = input.split(" ");
-            Command command = parser.parse(input);
+            
             try {
                 switch (command) {
-                case BYE:
-                    ui.goodBye();
-                    break;
                 case LIST:
                     ui.reply(tasks.list(inputArr));
                     break;
@@ -72,10 +67,12 @@ public class Duke {
             }
             // next input
             input = ui.getCommand();
+            command = parser.parse(input);
         }
 
+        ui.goodBye();
     }
     public static void main(String[] args) {
-        new Duke(HOME).run();       
+        new Duke(System.getProperty("user.dir")).run();       
     }
 }

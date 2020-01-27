@@ -4,6 +4,9 @@ deadline 3 /by 2013/12/23
 deadline 4 /at 2013/12/23
 event 5 /at 2013/12/23 1231
 list
+asdasd
+todo
+deadline 
 list 2013/12/23
 check 1
 done 1
