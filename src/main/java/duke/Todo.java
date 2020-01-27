@@ -65,4 +65,9 @@ public class Todo implements Task {
         // e.g. format: todo,1,read book
         return String.format("todo,%s,%s", isDone ? 1 : 0, description);
     }
+
+    @Override
+    public boolean getTaskCompletionStatus() {
+        return isDone;
+    }
 }

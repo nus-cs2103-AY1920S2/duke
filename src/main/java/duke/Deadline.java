@@ -81,4 +81,9 @@ public class Deadline implements Task {
         return String.format("deadline,%s,%s,%s", isDone ? 1 : 0, description,
                 deadline);
     }
+
+    @Override
+    public boolean getTaskCompletionStatus() {
+        return isDone;
+    }
 }

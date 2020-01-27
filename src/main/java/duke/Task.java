@@ -6,4 +6,5 @@ public interface Task {
     void markAsIncomplete();
     String getDescription();
     String stringToSaveToDisk();
+    boolean getTaskCompletionStatus();
 }

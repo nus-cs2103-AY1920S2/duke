@@ -80,4 +80,9 @@ public class Event implements Task {
         return String.format("event,%s,%s,%s", isDone ? 1 : 0, description,
                 eventTime);
     }
+
+    @Override
+    public boolean getTaskCompletionStatus() {
+        return isDone;
+    }
 }

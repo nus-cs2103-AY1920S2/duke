@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UiTest {
     Ui ui;
@@ -22,7 +22,7 @@ class UiTest {
     final String NEWLINE = Ui.NEWLINE;
     final String HORIZONTAL_DIVIDER = INDENTATION + HORIZONTAL_BAR + NEWLINE;
 
-    static Stream<Arguments> generateTaskForDeletion() {
+    static Stream<Arguments> generateAllTaskTypes() {
         return Stream.of(
                 Arguments.of(new Todo("Read book"), 0),
                 Arguments.of(new Event("Birthday Party", "2020-01-01"), 0),
@@ -87,12 +87,19 @@ class UiTest {
     void printTaskAddition() {
     }
 
-    @Test
-    void markTaskAsDone() {
+    @ParameterizedTest
+    @MethodSource("generateAllTaskTypes")
+    void markTaskAsDone(Task task, int totalTasks) {
+        // Check if task is initially marked as undone
+        assertFalse(task.getTaskCompletionStatus());
+        // Mark task as done
+        task.markAsDone();
+        // Check if task has been marked as done
+        assertTrue(task.getTaskCompletionStatus());
     }
 
     @ParameterizedTest
-    @MethodSource("generateTaskForDeletion")
+    @MethodSource("generateAllTaskTypes")
     void printTaskDeletion(Task task, int totalTasks) {
         String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "Noted. I've removed this task:" + NEWLINE +
