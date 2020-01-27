@@ -51,7 +51,7 @@ public class Parser {
             break;
         case "todo":
             try {
-                if (partialCommand[1].equals("")) {
+                if (partialCommands[1].equals("")) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
                 toReturn = new AddCommand(new Todo(partialCommands[1]));
@@ -81,10 +81,10 @@ public class Parser {
             break;
         case "find":
             try {
-                if (command[1].equals("")) {
+                if (partialCommands[1].equals("")) {
                     throw new DukeException("OOPS!!! Please give me the keyword to look for!");
                 }
-                toReturn = new FindCommand(command[1]);
+                toReturn = new FindCommand(partialCommands[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! Please give me the keyword to look for!");
             }
