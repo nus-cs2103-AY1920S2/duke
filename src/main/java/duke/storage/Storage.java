@@ -19,41 +19,41 @@ public class Storage {
     /**
      * Get the string format of a list of task objects
      *
-     * @param  list   the list of task objects
+     * @param  tasks   the list of task objects
      * @return  listString    the list of tasks in string format
      */
-    public String convertListToString(TaskList list) {
-        String listString = "";
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
+    public String convertListToString(TaskList tasks) {
+        String tasksString = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             int isDone = (task.getIsDone()) ? 1 : 0;
             if (task instanceof Deadline) {
-                listString += "D | " + isDone + " | " + task.getDescription() + " | " +
+                tasksString += "D | " + isDone + " | " + task.getDescription() + " | " +
                         ((Deadline) task).getDate() + " " + ((Deadline) task).getTime();
             } else if (task instanceof Event) {
-                listString += "E | " + isDone + " | " + task.getDescription() + " | " +
+                tasksString += "E | " + isDone + " | " + task.getDescription() + " | " +
                         ((Event) task).getDate() + " " + ((Event) task).getFromTimeToTime();
             } else if (task instanceof Todo) {
-                listString += "T | " + isDone + " | " + task.getDescription();
+                tasksString += "T | " + isDone + " | " + task.getDescription();
             }
-            if (i != list.size() - 1) {
-                listString += "\n";
+            if (i != tasks.size() - 1) {
+                tasksString += "\n";
             }
         }
-        return listString;
+        return tasksString;
     }
 
     /**
      * Get a list of tasks from the string format of list
      *
-     * @param  listString   the list of tasks in string format
+     * @param  tasksString   the list of tasks in string format
      * @return  list    the list of task objects
      */
-    public List<Task> convertStringToList(String listString) throws DukeException {
-        List<Task> list = new ArrayList<>();
+    public List<Task> convertStringToList(String tasksString) throws DukeException {
+        List<Task> tasks = new ArrayList<>();
 
         try {
-            listString.lines().forEach((listItem) -> {
+            tasksString.lines().forEach((listItem) -> {
                 String[] taskItems = listItem.split(" \\| ");
                 Task task = null;
                 boolean isDone = (Integer.parseInt(taskItems[1]) != 0);
@@ -85,23 +85,23 @@ public class Storage {
                 }
                 if (task != null) {
                     task.markAsDone(isDone);
-                    list.add(task);
+                    tasks.add(task);
                 }
             });
         } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! Data is corrupted.");
         }
-        return list;
+        return tasks;
     }
 
     /**
      * Save the list of tasks to file on the disk
      *
-     * @param   list    the list of tasks to be saved
+     * @param   tasks    the list of tasks to be saved
      * @return  isSuccessful   whether save to file is successful
      */
-    public boolean save(TaskList list) {
-        String listString = convertListToString(list);
+    public boolean save(TaskList tasks) {
+        String listString = convertListToString(tasks);
 
         File dataPath = new File(System.getProperty("user.dir"));
         File newFile = new File(dataPath.getAbsolutePath() + File.separator + "duke.txt");
@@ -125,19 +125,19 @@ public class Storage {
     public List<Task> load() throws DukeException {
         File dataPath = new File(System.getProperty("user.dir"));
         File newFile = new File(dataPath.getAbsolutePath() + File.separator + "duke.txt");
-        String listString = "";
-        List<Task> list;
+        String tasksString = "";
+        List<Task> tasks;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(newFile));
             String line;
             while ((line = reader.readLine()) != null) {
-                listString += "\n" + line;
+                tasksString += "\n" + line;
             }
-            list = convertStringToList(listString.substring(1));
+            tasks = convertStringToList(tasksString.substring(1));
         } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! Failed to load list!");
         }
-        return list;
+        return tasks;
     }
 }

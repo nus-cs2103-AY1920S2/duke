@@ -42,15 +42,15 @@ public class TaskList {
     /**
      * Try to make a new to-do task from the input
      *
-     * @param  input   the input which contains the to-do task information
+     * @param  taskString   the input which contains the to-do task information
      * @return  task    the new to-do task
      */
-    public Todo makeNewTodoTask(String input) throws DukeException {
-        String[] todoTokens = input.split(" ");
+    public Todo makeNewTodoTask(String taskString) throws DukeException {
+        String[] todoTokens = taskString.split(" ");
 
         // If there is a description
         if (todoTokens.length > 1) {
-            return new Todo(input.replaceFirst("^todo ", ""));
+            return new Todo(taskString.replaceFirst("^todo ", ""));
         }
 
         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -59,11 +59,11 @@ public class TaskList {
     /**
      * Try to make a new event task from the input
      *
-     * @param  input   the input which contains the event task information
+     * @param  taskString   the input which contains the event task information
      * @return  task    the new event task
      */
-    public Event makeNewEventTask(String input) throws DukeException {
-        String[] eventTokens = input.split(" /at ");
+    public Event makeNewEventTask(String taskString) throws DukeException {
+        String[] eventTokens = taskString.split(" /at ");
 
         // If there is a description and a time/date
         if (eventTokens.length > 1) {
@@ -90,11 +90,11 @@ public class TaskList {
     /**
      * Try to make a new deadline task from the input
      *
-     * @param  input   the input which contains the deadline task information
+     * @param  taskString   the input which contains the deadline task information
      * @return  task    the new deadline task
      */
-    public Deadline makeNewDeadlineTask(String input) throws DukeException {
-        String[] deadlineTokens = input.split(" /by ");
+    public Deadline makeNewDeadlineTask(String taskString) throws DukeException {
+        String[] deadlineTokens = taskString.split(" /by ");
 
         // If there is a description and a deadline
         if (deadlineTokens.length > 1) {
