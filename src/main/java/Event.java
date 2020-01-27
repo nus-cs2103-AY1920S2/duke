@@ -17,11 +17,9 @@ public class Event extends Task {
             this.startTime = LocalTime.parse(timeArr[0]);
             this.endTime = LocalTime.parse(timeArr[1]);
             if (startTime.isAfter(endTime)) {
-                numOfTasks--;
                 throw new DukeException("Start time cannot be after end time.");
             }
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            numOfTasks--;
             throw new DukeException("Incorrect date or time format. Format required: yyyy-mm-dd hh:mm-hh:mm");
         }
     }

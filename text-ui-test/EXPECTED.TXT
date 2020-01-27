@@ -4,54 +4,54 @@
     | | | | | | | |/ / _ \
     | |_| | |_| |   <  __/
     |____/ \__,_|_|\_\___|
-    
+
     Hello! I'm Duke
     What can I do for you?
     ____________________________________________________________
-
+    
     ____________________________________________________________
-    Got it. I've added this task: 
+    Got it. I've added this task:
       [T][N] read book
     Now you have 1 tasks in the list.
     ____________________________________________________________
-
+    
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][N] read book
+    1.[T][N] read book
     ____________________________________________________________
-
+    
     ____________________________________________________________
-    Got it. I've added this task: 
+    Got it. I've added this task:
       [D][N] return book (by: 2 Feb 2020 18:00)
     Now you have 2 tasks in the list.
     ____________________________________________________________
-
+    
     ____________________________________________________________
-    Got it. I've added this task: 
+    Got it. I've added this task:
       [E][N] project meeting (at: 27 Jan 2020 14:00-16:00)
     Now you have 3 tasks in the list.
     ____________________________________________________________
-
+    
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][N] read book
-    2. [D][N] return book (by: 2 Feb 2020 18:00)
-    3. [E][N] project meeting (at: 27 Jan 2020 14:00-16:00)
+    1.[T][N] read book
+    2.[D][N] return book (by: 2 Feb 2020 18:00)
+    3.[E][N] project meeting (at: 27 Jan 2020 14:00-16:00)
     ____________________________________________________________
-
+    
     ____________________________________________________________
     Nice! I've marked this task as done: 
       [D][Y] return book (by: 2 Feb 2020 18:00)
     ____________________________________________________________
-
+    
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][N] read book
-    2. [D][Y] return book (by: 2 Feb 2020 18:00)
-    3. [E][N] project meeting (at: 27 Jan 2020 14:00-16:00)
+    1.[T][N] read book
+    2.[D][Y] return book (by: 2 Feb 2020 18:00)
+    3.[E][N] project meeting (at: 27 Jan 2020 14:00-16:00)
     ____________________________________________________________
-
+    
     ____________________________________________________________
     Bye. Hope to see you again soon!
     ____________________________________________________________
-
+    

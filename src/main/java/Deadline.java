@@ -13,8 +13,7 @@ public class Deadline extends Task {
             String[] dateTimeArr = by.split(" ");
             this.date = LocalDate.parse(dateTimeArr[0]);
             this.time = LocalTime.parse(dateTimeArr[1]);
-        } catch (DateTimeParseException e) {
-            numOfTasks--;
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Incorrect date or time format. Format required: yyyy-mm-dd hh:mm");
         }
     }
