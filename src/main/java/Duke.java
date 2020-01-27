@@ -1,36 +1,36 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
+
+
+import java.io.File;
+import java.io.FileWriter;
+import org.apache.commons.io.FileUtils;
+import java.io.IOException;
+
+import java.nio.charset.Charset;
 
 public class Duke {
 
+    static Scanner scanner;
     static ArrayList<Task> arrList;
+    static File file;
 
     public static void main(String[] args) {
 
-        // Introduction
+        printIntro();
+        initialise();
 
-        String intro =
-            "Hello! I'm Duke\n" +
-            "What can I do for you?";
-
-        System.out.println(stringWrapper((intro)));
-
-        // Initialisation
-
-        Scanner scanner = new Scanner(System.in);
-        arrList = new ArrayList<>(100);
-
-        // User Input
-
+        // Simulation
         while (true) {
 
-            String input = scanner.nextLine();
-            System.out.println(input);
-            String output = "";
-            String[] inputArr = input.split(" ");
-            String instruction = inputArr[0];
-
             try {
+
+                String input = scanner.nextLine();
+                System.out.println(input);
+                String output = "";
+                String[] inputArr = input.split(" ");
+                String instruction = inputArr[0];
 
                 if (instruction.equals("bye")) {
                     System.out.print(stringWrapper("Bye. Hope to see you again soon!"));
@@ -84,7 +84,6 @@ public class Duke {
                     }
                     int idx = input.indexOf(" ");
                     String taskInput = input.substring(idx + 1);
-                    System.out.println("here: " + taskInput);
                     String[] taskInputArr = taskInput.split("/");
                     String taskName = taskInputArr[0];
                     Task newTask = null;
@@ -97,6 +96,7 @@ public class Duke {
                         newTask = new Deadline(taskName, dateTime);
                     } else if (instruction.equals("event")) {
                         String dateTime = taskInputArr[1];
+                        System.out.println("here:" + dateTime);
                         idx = dateTime.indexOf(" ");
                         dateTime = dateTime.substring(idx + 1);
                         newTask = new Event(taskName, dateTime);
@@ -113,6 +113,10 @@ public class Duke {
                     throw new DukeException(message);
                 }
 
+                saveList();
+                output = stringWrapper(output);
+                System.out.println(output);
+
             } catch (DukeException e) {
                 System.err.println(e.toString());
                 continue;
@@ -121,13 +125,66 @@ public class Duke {
                 Exception e = new DukeException("Please enter a valid instruction!");
                 System.err.println(e.toString());
                 continue;
-            }
 
-            output = stringWrapper(output);
-            System.out.println(output);
+            } catch (IOException e) {
+                System.err.println(e.toString());
+                continue;
+            }
 
         }
 
+    }
+
+    private static void printIntro() {
+        String intro =
+                "Hello! I'm Duke\n" +
+                        "What can I do for you?";
+
+        System.out.println(stringWrapper((intro)));
+    }
+
+    private static void initialise() {
+        scanner = new Scanner(System.in);
+        arrList = new ArrayList<>(100);
+        file = new File("./data/duke.txt");
+        try {
+            if (!file.exists()) {
+                //the file does not exist yet
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                file = new File("./data/duke.txt");
+            }
+            List<String> data = FileUtils.readLines(file, Charset.defaultCharset());
+            for (int i = 0; i < data.size(); i++) {
+                String line = data.get(i);
+                // Parse saved data per line
+                String[] parsedLine = line.split("_");
+                switch (parsedLine[0]) {
+                    case "T":
+                        arrList.add(new ToDo(parsedLine[2], Boolean.parseBoolean(parsedLine[1])));
+                        break;
+                    case "D":
+                        arrList.add(new Deadline(parsedLine[2], Boolean.parseBoolean(parsedLine[1]), parsedLine[3]));
+                        break;
+                    case "E":
+                        arrList.add(new Event(parsedLine[2], Boolean.parseBoolean(parsedLine[1]), parsedLine[3]));
+                        break;
+                    default:
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(e.toString());
+        }
+    }
+
+    private static void saveList() throws IOException {
+        FileWriter fileWriter = new FileWriter(file);
+        for (int i = 0; i < arrList.size(); i++) {
+            Task item = arrList.get(i);
+            System.out.println(item.getSaveFormat());
+            fileWriter.write(item.getSaveFormat() + "\n");
+        }
+        fileWriter.flush();
     }
 
     private static String getCurrentList() {

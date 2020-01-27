@@ -1,10 +1,15 @@
 public class Deadline extends Task {
 
-    protected String dateTime;
-
+    // To create deadline
     public Deadline(String taskName, String dateTime) {
-        super(taskName.trim());
-        this.dateTime = dateTime.trim();
+        super(taskName.trim(), dateTime.trim());
+        this.taskType = "D";
+    }
+
+    // To initialise save data
+    public Deadline(String taskName, boolean isDone, String dateTime) {
+        super(taskName.trim(), isDone, dateTime.trim());
+        this.taskType = "D";
     }
 
     @Override

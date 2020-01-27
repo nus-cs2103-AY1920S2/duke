@@ -1,10 +1,14 @@
 public class Event extends Task {
 
-    protected String dateTime;
-
     public Event(String taskName, String dateTime) {
-        super(taskName.trim());
-        this.dateTime = dateTime.trim();
+        super(taskName.trim(), dateTime.trim());
+        this.taskType = "E";
+    }
+
+    // to initialise save data
+    public Event(String taskName, boolean isDone, String dateTime) {
+        super(taskName.trim(), isDone, dateTime.trim());
+        this.taskType = "E";
     }
 
     @Override
