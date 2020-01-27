@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected boolean check;
     protected String command;
 
@@ -8,12 +8,14 @@ public class Task {
     }
 
     public String getIcon() {
-        return (check ? "\u2713" : "\u2718");
+        return (check ? "Y" : "N");
     }
 
     public void setCheck() {
         this.check = true;
     }
+
+    public abstract String toStringTxt();
 
     @Override
     public String toString() {
