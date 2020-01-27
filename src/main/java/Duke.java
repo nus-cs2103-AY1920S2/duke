@@ -5,32 +5,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     public Duke(Path filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            print("can't load file.");
+            ui.print("can't load file.");
             tasks = new TaskList();
         }
     }
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-
-        greet();
+        ui.greet();
 
         //noinspection InfiniteLoopStatement
         while (true) {
-            String lineInput = sc.nextLine();
+            String lineInput = ui.readCommand();
             this.processInput(lineInput);
             try {
                 storage.save(tasks);
@@ -40,54 +39,6 @@ public class Duke {
         }
     }
 
-    private static void print(String s) {
-        List<String> temp = new ArrayList<>();
-        temp.add(s);
-        print(temp);
-    }
-
-    private static void print(List<String> stringList) {
-        final String HORIZONTAL_LINE = "------------------------------------------------------------";
-        final String OUTPUT_INDENTATION = "    ";
-        final String FORMAT_STRING_FOR_H_LINE = OUTPUT_INDENTATION +  "|%-" + HORIZONTAL_LINE.length() + "s|";
-        final String FORMAT_STRING_FOR_CONTENT = OUTPUT_INDENTATION +  "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
-
-        System.out.println(String.format(FORMAT_STRING_FOR_H_LINE, HORIZONTAL_LINE));
-        for (String s : stringList) {
-            System.out.println(String.format(FORMAT_STRING_FOR_CONTENT, s));
-        }
-        System.out.println(String.format(FORMAT_STRING_FOR_H_LINE, HORIZONTAL_LINE));
-    }
-
-    private static void greet() {
-        List<String> outputStreamBuffer = new ArrayList<>();
-        outputStreamBuffer.add("Hello! I'm Alfred!");
-        outputStreamBuffer.add("How may I help you today?");
-        print(outputStreamBuffer);
-    }
-
-    private static void bye() {
-        print("Bye. Hope to see you again soon!");
-        System.exit(0);
-    }
-
-    private void printList() {
-        if (tasks.isEmpty()) {
-            print("List is empty");
-            return;
-        }
-
-        List<String> outputStreamBuffer = new ArrayList<>();
-
-        for (int i = 0; i < tasks.size(); i++) {
-            String str = tasks.get(i).toString();
-            String newStr = String.format("%d.%s", i + 1, str);
-            outputStreamBuffer.add(newStr);
-        }
-
-        print(outputStreamBuffer);
-    }
-
     private void markTaskAsDone(int taskIndex) {
         Task selectedTask = this.tasks.get(taskIndex);
         selectedTask.markAsDone();
@@ -95,7 +46,7 @@ public class Duke {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Nice! I've marked this task as done: ");
         outputStreamBuffer.add("  " + selectedTask);
-        print(outputStreamBuffer);
+        ui.print(outputStreamBuffer);
     }
 
     private void deleteTask(int taskIndex) {
@@ -106,7 +57,7 @@ public class Duke {
         outputStreamBuffer.add("Noted. I've removed this task: ");
         outputStreamBuffer.add("  " + selectedTask);
         outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
-        print(outputStreamBuffer);
+        ui.print(outputStreamBuffer);
     }
 
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
@@ -158,7 +109,7 @@ public class Duke {
         outputStreamBuffer.add("Got it. I've added this task: ");
         outputStreamBuffer.add("  " + newTask);
         outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
-        print(outputStreamBuffer);
+        ui.print(outputStreamBuffer);
     }
 
     private void processInput(String lineInput) {
@@ -170,10 +121,10 @@ public class Duke {
         try {
             switch (DukeCommand.valueOf(commandString)) {
                 case bye:
-                    bye();
+                    ui.bye();
                     break;
                 case list:
-                    this.printList();
+                    ui.printList(tasks);
                     break;
                 case done:
                     selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
@@ -189,14 +140,14 @@ public class Duke {
                     try {
                         this.createAndAddTask(lineInput);
                     } catch (Exception e) {
-                        print(e.toString());
+                        ui.print(e.toString());
                     }
                     break;
                 default:
                     break;
             }
         } catch (IllegalArgumentException e) {
-            print("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ui.print("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
