@@ -8,7 +8,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String format() {
+        return "D " + super.getStatusInNumber() + " " + super.description + " /" + by;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + "(" + by + ")";
+        return "[D]" + super.toString() + " (" + by + ")";
     }
 }

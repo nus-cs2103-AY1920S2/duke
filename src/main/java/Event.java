@@ -8,7 +8,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String format() {
+        return "E " + super.getStatusInNumber() + " " + super.description + " /" + by;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + "(" + by + ")";
+        return "[E]" + super.toString() + " (" + by + ")";
     }
 }
