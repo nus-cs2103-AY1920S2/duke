@@ -1,5 +1,4 @@
 package storage;
-
 import task.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,13 +6,22 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Loads or save the storage file as requested. A <code>Storage</code> object corresponds to a file represented by the
+ * file path e.g., <code>"duke/src/java"</code>
+ */
 public class Storage {
     private String filePath;
     public Storage(String filePath){
         this.filePath = filePath;
     }
-
+    /**
+     * Loads the task list at the start of the program.
+     * If the storage file cannot be found, a new one is created and loads that one instead, and tells the user that a
+     * new storage file has been created.
+     * @return The task list.
+     * @throws IOException If the storage file cannot be found.
+     */
     public ArrayList<Task> load() throws IOException{
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath); // create a File for the given file path
@@ -54,6 +62,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the task list.
+     * If the storage file cannot be found, an error message is shown.
+     * @param taskList The task list to be saved to storage file.
+     * @throws IOException If storage file cannot be found.
+     */
     public void save(TaskList taskList) throws IOException{
         FileWriter fw = new FileWriter(filePath);
         fw.write(taskList.toStringDukeTasks());

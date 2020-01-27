@@ -42,17 +42,14 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            }
-            catch (IOException io) {
+            } catch (IOException io) {
                 ui.showSavingError();
-            }
-            finally{
+            } finally {
 
                 ui.showLine();
             }
         }
     }
-
     public static void main(String[] args) throws IOException {
         new Duke("data/duke.txt").run();
     }

@@ -3,8 +3,17 @@ import java.time.LocalDate;
 import command.*;
 import dukeException.*;
 import task.*;
-
+/**
+ * Makes sense of the command entered by the user.
+ */
 public class Parser {
+    /**
+     * Returns the command to be executed.
+     * If invalid command entered, a invalid command instruction is returned.
+     * @param fullCommand The command entered by the user.
+     * @return The command to be executed.
+     * @throws DukeException If the user enters an invalid command.
+     */
     public static Command parse(String fullCommand) throws DukeException{
         String[] commandSplit = fullCommand.split(" ");
         String firstWord = commandSplit[0];
@@ -20,7 +29,6 @@ public class Parser {
                     }
                     return new AddCommand(new Todo(description));
                 }
-
 
             case "deadline":
                 String deadlineTask = "";
