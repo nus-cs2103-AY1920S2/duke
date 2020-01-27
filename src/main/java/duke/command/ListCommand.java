@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * List tasks from the task list.
+ * Lists tasks from the task list.
  */
 public class ListCommand extends Command {
 
@@ -25,9 +25,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("     Here are the tasks in your list:");
-        for (int i = 0; i < tasks.getTasks().size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + tasks.getTasks().get(i));
-        }
+        tasks.listTasks();
     }
 }

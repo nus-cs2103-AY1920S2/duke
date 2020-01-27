@@ -51,6 +51,9 @@ public class Parser {
             break;
         case "todo":
             try {
+                if (partialCommand[1].equals("")) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                }
                 toReturn = new AddCommand(new Todo(partialCommands[1]));
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -74,6 +77,16 @@ public class Parser {
                 throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! Missing information regarding deadline.");
+            }
+            break;
+        case "find":
+            try {
+                if (command[1].equals("")) {
+                    throw new DukeException("OOPS!!! Please give me the keyword to look for!");
+                }
+                toReturn = new FindCommand(command[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! Please give me the keyword to look for!");
             }
             break;
         default:

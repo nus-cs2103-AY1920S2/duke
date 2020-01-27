@@ -65,4 +65,30 @@ public class TaskList {
             throw new DukeException("OOPS!!! Do you have this task number?");
         }
     }
+
+    /**
+     * Finds and lists all tasks that contains the keyword in the description.
+     *
+     * @param keyword the keyword to search for.
+     */
+    public void find(String keyword) {
+        System.out.println("     Here are the matching tasks in your list:");
+        int counter = 1;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                System.out.println("     " + counter + ". " + task);
+                counter++;
+            }
+        }
+    }
+
+    /**
+     * Lists all the tasks.
+     */
+    public void listTasks() {
+        System.out.println("     Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + ". " + tasks.get(i));
+        }
+    }
 }

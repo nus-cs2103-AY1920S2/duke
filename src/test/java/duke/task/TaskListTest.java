@@ -24,6 +24,7 @@ class TaskListTest {
     @Test
     void deleteTask() {
         try {
+            list.getTasks().clear();
             list.addTask(new Todo("Homework", false));
             list.deleteTask(1);
             assertEquals(0, list.getTasks().size());
@@ -32,8 +33,9 @@ class TaskListTest {
         }
 
         try {
+            list.getTasks().clear();
             list.addTask(new Todo("Homework", false));
-            list.deleteTask(1);
+            list.deleteTask(2);
             assertEquals(0, list.getTasks().size());
         } catch (Exception e) {
             assertEquals("OOPS!!! Do you have this task number?", e.getMessage());
