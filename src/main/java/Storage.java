@@ -1,4 +1,5 @@
 package main.java;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -34,33 +35,34 @@ public class Storage {
             Scanner s = new Scanner(file);
             while (s.hasNextLine()) {
                 String[] command = s.nextLine().split("/");
+
                 String taskType = command[0].trim();
                 boolean isDone = command[1].trim().equals("\u2713");
 
                 switch (taskType) {
-                    case "deadline":
-                        String description = command[2].trim();
-                        String by = command[3].trim();
-                        dukeList.add(new Deadline(description, by));
-                        if (isDone) {
-                            dukeList.get(dukeList.size() - 1).markAsDone();
-                        }
-                        break;
-                    case "event":
-                        description = command[2].trim();
-                        String at = command[3].trim();
-                        dukeList.add(new Event(description, at));
-                        if (isDone) {
-                            dukeList.get(dukeList.size() - 1).markAsDone();
-                        }
-                        break;
-                    case "todo":
-                        description = command[2].trim();
-                        dukeList.add(new ToDo(description));
-                        if (isDone) {
-                            dukeList.get(dukeList.size() - 1).markAsDone();
-                        }
-                        break;
+                case "deadline":
+                    String description = command[2].trim();
+                    String by = command[3].trim();
+                    dukeList.add(new Deadline(description, by));
+                    if (isDone) {
+                        dukeList.get(dukeList.size() - 1).markAsDone();
+                    }
+                    break;
+                case "event":
+                    description = command[2].trim();
+                    String at = command[3].trim();
+                    dukeList.add(new Event(description, at));
+                    if (isDone) {
+                        dukeList.get(dukeList.size() - 1).markAsDone();
+                    }
+                    break;
+                case "todo":
+                    description = command[2].trim();
+                    dukeList.add(new ToDo(description));
+                    if (isDone) {
+                        dukeList.get(dukeList.size() - 1).markAsDone();
+                    }
+                    break;
                 }
             }
         } catch (FileNotFoundException | ParseException e1) {
