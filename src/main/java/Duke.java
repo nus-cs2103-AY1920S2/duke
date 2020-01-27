@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static ArrayList<Task> list=new ArrayList<Task>(100);
@@ -75,12 +77,14 @@ public class Duke {
         int loc_of_slash=sentence.indexOf("/");
         String description=sentence.substring(loc_of_space+1,loc_of_slash-1);
         String time=sentence.substring(loc_of_slash+4);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(time, format);
         Task obj;
         if(type.equals("deadline")) {
-            obj = new Deadline(description, time);
+            obj = new Deadline(description, dateTime);
         }
         else{
-            obj=new Event(description,time);
+            obj=new Event(description,dateTime);
         }
         Add add_object=new Add();
         add_object.addToList(obj);
