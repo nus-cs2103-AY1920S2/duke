@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.DukeException;
+
 public class ExitCommand extends Command {
     public ExitCommand() {
         this.isExit = true;

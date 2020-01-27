@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,17 +32,17 @@ public class Storage {
                 String[] data = sc.nextLine().split(" \\| ");
                 Task task;
                 switch (data[0]) {
-                    case "T":
-                        task = new Todo(data[2], data[1].equals("1"));
-                        break;
-                    case "D":
-                        task = new Deadline(data[2], data[3], data[1].equals("1"));
-                        break;
-                    case "E":
-                        task = new Event(data[2], data[3], data[1].equals("1"));
-                        break;
-                    default:
-                        throw new DukeException("Could not load tasks.");
+                case "T":
+                    task = new Todo(data[2], data[1].equals("1"));
+                    break;
+                case "D":
+                    task = new Deadline(data[2], data[3], data[1].equals("1"));
+                    break;
+                case "E":
+                    task = new Event(data[2], data[3], data[1].equals("1"));
+                    break;
+                default:
+                    throw new DukeException("Could not load tasks.");
                 }
                 tasks.add(task);
             }
