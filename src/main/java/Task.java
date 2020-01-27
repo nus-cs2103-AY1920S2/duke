@@ -4,7 +4,6 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
     public void markAsDone(){
@@ -15,4 +14,7 @@ public class Task {
         return (isDone ? "✓" : "✕"); //return tick or X symbols
     }
 
+    public String fileString(){
+        return "D|" + getStatusIcon() + "|" + description;
+    }
 }

@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,10 +9,10 @@ import java.util.Scanner;
 public class Duke {
     private static String indent = "    ";
     private static String line = "    ____________________________________________________________";
+    private static List<Task> toDo = new ArrayList<Task>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Task> toDo = new ArrayList<Task>();
 
         String logo = indent + " ____        _        \n"
                 + indent + "|  _ \\ _   _| | _____ \n"
@@ -17,6 +21,7 @@ public class Duke {
                 + indent + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(line + "\n" + indent + "Hello! I'm Snow\n" + indent + "What can I do for you?\n" + logo + line);
 
+        readFromFile();
         String input = "";
         while (sc.hasNextLine()) {
             input = sc.nextLine();
@@ -167,7 +172,55 @@ public class Duke {
                     break;
             }
 
+            saveToFile();
+
         }
+    }
+    public static void readFromFile() {
+        try {
+            File f = new File("src/data/tasks.txt"); // create a File for the given file path
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            toDo.clear();
+            while (s.hasNextLine()) {
+                String taskString = s.nextLine();
+                String[] split = taskString.split("\\|");
+                String taskType = split[0];
+                boolean isDone = split[1].equals("✓");
+                String taskDescription = split[2];
+
+                switch(taskType){
+                    case "T":
+                        Task toDos = new ToDos(isDone, taskDescription);
+                        toDo.add(toDos);
+                        break;
+                    case "D":
+                        String deadlineDateTime = split[3];
+                        Task deadlines = new Deadlines(isDone, taskDescription, deadlineDateTime);
+                        toDo.add(deadlines);
+                        break;
+                    case "E":
+                        String eventDateTime = split[3];
+                        Task events = new Events(isDone, taskDescription, eventDateTime);
+                        toDo.add(events);
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+    }
+    public static void saveToFile() {
+        try {
+            FileWriter fw = new FileWriter("src/data/tasks.txt");
+            for (Task task : toDo){
+                fw.write(task.fileString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
     }
 
     public static void printError(String message){

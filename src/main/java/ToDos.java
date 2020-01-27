@@ -3,8 +3,18 @@ public class ToDos extends Task{
         super(description);
     }
 
+    public ToDos(boolean isDone, String description) {
+        super(description);
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString(){
         return "[T]" + "[" + getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    public String fileString(){
+        return "T|" + getStatusIcon() + "|" + this.description;
     }
 }
