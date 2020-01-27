@@ -7,4 +7,14 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String getType() {
+        return "T";
+    }
+
+    @Override
+    public String getTime() {
+        return null;
+    }
 }

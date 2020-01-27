@@ -11,4 +11,14 @@ public class Event extends Task {
         String formattedEventTime = " (at: " + this.eventTime + ")";
         return "[E]" + super.toString() + formattedEventTime;
     }
+
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getTime() {
+        return eventTime;
+    }
 }

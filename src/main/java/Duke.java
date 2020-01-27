@@ -1,42 +1,20 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     private static List<Task> tasks;
+    private static HardDisk hardDisk;
 
     public Duke(String path) throws IOException, InvalidTaskInputException {
-        File file = new File(path);
-
-        BufferedReader br = new BufferedReader(new FileReader(file));
         greet();
         tasks = new ArrayList<>();
-        addFileInputToTasks(br);
+        hardDisk = new HardDisk(path);
+        hardDisk.addFileInputToTasks();
     }
 
-    private void addFileInputToTasks(BufferedReader br) throws IOException, InvalidTaskInputException {
-        String inputLine;
-        while ((inputLine = br.readLine()) != null) {
-            String[] input = inputLine.split("\\|", 3);
-            String source = "file";
-            String type = input[0].trim();
-            String doneStatus = input[1].trim();
-            String desc = input[2].trim();
-            if (type.equalsIgnoreCase("T")) {
-                addTodo(desc, doneStatus, source);
-            } else if (type.equalsIgnoreCase("D")) {
-                addDeadline(desc, doneStatus, source);
-            } else if (type.equalsIgnoreCase("E")) {
-                addEvent(desc, doneStatus, source);
-            } else {
-                throw new InvalidTaskInputException();
-            }
-        }
-    }
-
-    private void runDuke() {
+    private static void runDuke() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
@@ -85,7 +63,7 @@ public class Duke {
                 } else {
                     throw new InvalidCommandException();
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.toString());
             }
         }
@@ -125,7 +103,7 @@ public class Duke {
         System.out.printf("Now you got %d %s in your list!\n", tasks.size(), taskWord);
     }
 
-    private static void addTodo(String desc, String doneStatus, String source) {
+    protected static void addTodo(String desc, String doneStatus, String source) throws IOException, InvalidTaskInputException {
         Task todo = new Todo(desc);
         if (doneStatus.equalsIgnoreCase("Y")) {
             todo.markAsDone();
@@ -133,13 +111,14 @@ public class Duke {
         tasks.add(todo);
 
         if (source.equals("user")) {
+            hardDisk.addToHardDisk(todo);
             printAddToList();
             System.out.println(todo.toString());
             printNumTask();
         }
     }
 
-    private static void addDeadline(String desc, String doneStatus, String source) throws InvalidTaskInputException {
+    protected static void addDeadline(String desc, String doneStatus, String source) throws InvalidTaskInputException, IOException {
         String[] descs = desc.split(" /by |\\|") ;
         if (descs.length == 1) { // invalid Deadline input format
             throw new InvalidTaskInputException();
@@ -155,13 +134,14 @@ public class Duke {
         tasks.add(deadline);
 
         if (source.equals("user")) {
+            hardDisk.addToHardDisk(deadline);
             printAddToList();
             System.out.println(deadline.toString());
             printNumTask();
         }
     }
 
-    private static void addEvent(String desc, String doneStatus, String source) throws InvalidTaskInputException {
+    protected static void addEvent(String desc, String doneStatus, String source) throws InvalidTaskInputException, IOException {
         String[] descs = desc.split(" /at |\\|");
         if (descs.length == 1) { // invalid Event input format
             throw new InvalidTaskInputException();
@@ -176,6 +156,7 @@ public class Duke {
         tasks.add(event);
 
         if (source.equals("user")) {
+            hardDisk.addToHardDisk(event);
             printAddToList();
             System.out.println(event.toString());
             printNumTask();
@@ -214,7 +195,7 @@ public class Duke {
 
     public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidCommandException {
         Duke duke;
-        duke = new Duke("data/duke.txt");
+        duke = new Duke("./data/duke.txt");
         duke.runDuke();
     }
 }
