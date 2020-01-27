@@ -14,19 +14,31 @@ public class Duke {
         System.out.println(Hello);
 
         int flag = 0;
+        ArrayList<String> mylist = new ArrayList<>();
 
         while(flag == 0) {
             String input = sc.nextLine();
-            String output;
+            String Line = "_________________________________________________________________";
+
+            System.out.println(Line);
 
             if (input.equals("bye")) {
-                output = "Bye. Hope to see you again soon!";
+                System.out.println("Bye. Hope to see you again soon!");
                 flag = 1;
+            } else if (input.equals("list")) {
+                printlist(mylist);
             } else {
-                output = input;
+                 mylist.add(input);
+                 System.out.println("added: " + input);
             }
 
-            System.out.println(output);
+            System.out.println(Line);
+        }
+    }
+
+    private static void printlist(ArrayList<String> ls) {
+        for (int i = 0; i < ls.size(); i++) {
+            System.out.println((i + 1) + ". " + ls.get(i));
         }
     }
 }
