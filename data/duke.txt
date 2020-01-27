@@ -1,0 +1,7 @@
+T/true/read book
+D/false/return book/June 6th
+T/true/join sports club
+T/false/borrow book
+D/false/return book/Sunday
+E/false/project meeting/Mon/2/4pm
+D/false/do homework/no idea :-p
