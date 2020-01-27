@@ -46,7 +46,9 @@ public class Duke {
                 } else if (command.equalsIgnoreCase("list")) {
                     printList();
                 } else if (command.equalsIgnoreCase("done")) {
-                    if (!isNumeric(inputs[1])) {
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    } else if (!isNumeric(inputs[1])) {
                         throw new InvalidTaskInputException();
                     }
                     int index = Integer.parseInt(inputs[1]);
@@ -55,6 +57,11 @@ public class Duke {
                     }
                     markTaskAsDone(index);
                 } else if (command.equalsIgnoreCase("delete")) {
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    } else if (!isNumeric(inputs[1])) {
+                        throw new InvalidTaskInputException();
+                    }
                     int index = Integer.parseInt(inputs[1]);
                     if (index < 1 || index > tasks.size()) {
                         throw new TaskIndexOutOfBoundsException();
@@ -174,9 +181,10 @@ public class Duke {
         }
     }
 
-    private static void markTaskAsDone(int index) {
+    private static void markTaskAsDone(int index) throws IOException {
         Task task = tasks.get(index - 1);
         task.markAsDone();
+        hardDisk.changeToHardDisk(index);
         System.out.println("Good job! One off your chest!");
         System.out.println(task.toString());
     }

@@ -2,22 +2,16 @@ import java.io.*;
 
 public class HardDisk {
     String path;
-    FileReader fr;
-    FileWriter fw;
-    BufferedReader br;
-    BufferedWriter bw;
 
     public HardDisk(String path) throws IOException {
         this.path = path;
-        File file = new File(path);
-        this.fr = new FileReader(file);
-        this.fw = new FileWriter(file, true);
-        this.br = new BufferedReader(fr);
-        this.bw = new BufferedWriter(fw);
     }
 
     protected void addFileInputToTasks() throws IOException, InvalidTaskInputException {
         String inputLine;
+        File file = new File(path);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
         while ((inputLine = br.readLine()) != null) {
             String[] input = inputLine.split("\\|", 3);
             String source = "file";
@@ -36,7 +30,10 @@ public class HardDisk {
         }
     }
 
-    protected void addToHardDisk(Task task) throws IOException, InvalidTaskInputException {
+    protected void addToHardDisk(Task task) throws IOException {
+        File file = new File(path);
+        FileWriter fw = new FileWriter(file, true);
+        BufferedWriter bw = new BufferedWriter(fw);
         String data = "";
         data += task.getType() + " | " + task.getStatusIcon() + " | " + task.getDescription();
         if (task instanceof Deadline || task instanceof Event) {
@@ -48,7 +45,29 @@ public class HardDisk {
         fw.close();
     }
 
-    protected void changeToHardDisk(int index) {
+    protected void changeToHardDisk(int index) throws IOException {
+        File file = new File(path);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
 
+        String data = "";
+        String line = null;
+        int counter = 1;
+        while ((line = br.readLine()) != null) {
+            if (counter == index) {
+                line = line.substring(0, 4) + "Y" + line.substring(5, line.length());
+            }
+
+            if (counter == 1) {
+                data += line;
+            } else {
+                data += "\n" + line;
+            }
+            counter++;
+        }
+
+        FileOutputStream fileOutputStr = new FileOutputStream(path);
+        fileOutputStr.write(data.getBytes());
+        fileOutputStr.close();
     }
 }

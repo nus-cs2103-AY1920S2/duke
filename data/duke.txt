@@ -1,7 +1,7 @@
-T | Y | read book
-D | N | return book | June 6th
+T | N | read book
+D | Y | return book | June 6th
 E | N | project meeting | Aug 6th 2-4pm
 T | Y | join sports club
-T | N | ksjnkdf
-D | N | ads | sdf
-E | N | sadfsf | sfd
+T | N | play netball
+D | Y | tut 1 | tmr
+E | N | competition | 16 feb
