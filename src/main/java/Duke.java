@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
+        loadTasks(taskList);
         printLogo();
         printGreeting();
 
@@ -39,14 +42,17 @@ public class Duke {
                         if (descriptionTokens.length < 2) {
                             throw new InsufficientArgumentAelitaException("done");
                         }
-
-                        int index = Integer.parseInt(descriptionTokens[1]) - 1;
-                        if (index >= taskList.size() || index < 0) {
-                            throw new InvalidListItemAelitaException();
+                        try {
+                            int index = Integer.parseInt(descriptionTokens[1]) - 1;
+                            if (index >= taskList.size() || index < 0) {
+                                throw new InvalidListItemAelitaException();
+                            }
+                            taskList.get(index).markAsDone();
+                            System.out.println("> Another task off the list. Good job!");
+                            System.out.println("  " + taskList.get(index));
+                        } catch (NumberFormatException e) {
+                            System.out.println("> The index is not a number.");
                         }
-                        taskList.get(index).markAsDone();
-                        System.out.println("> Another task off the list. Good job!");
-                        System.out.println("  " + taskList.get(index));
 
                     } else if (descriptionTokens[0].toLowerCase().equals("delete")) {
                         if (descriptionTokens.length < 2) {
@@ -62,7 +68,7 @@ public class Duke {
                         System.out.println("  " + taskList.get(index));
                         taskList.remove(index);
                         Task.setTotalTaskCount(Task.getTotalTaskCount() - 1);
-                        if(Task.getTotalTaskCount() == 0) {
+                        if (Task.getTotalTaskCount() == 0) {
                             System.out.println("  You have no more task today.");
                         } else {
                             System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
@@ -177,6 +183,11 @@ public class Duke {
             }
             printDivider();
         }
+        try {
+            saveTasks(taskList);
+        } catch (IOAelitaException e) {
+            System.out.println("> Opps. Something went wrong when saving your tasks.");
+        }
         System.out.println("> It's nice talking to you. See you soon! ;)");
     }
 
@@ -199,5 +210,61 @@ public class Duke {
                 + "/_/      \\_\\ \\___\\ |_| |_|   |_|    \\___/\\_\\";
         System.out.println(logo);
         System.out.println("============================================");
+    }
+
+    private static void loadTasks(ArrayList<Task> taskArrayList) {
+        java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        try {
+            File file = new File(path.toString());
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String[] task = sc.nextLine().split("/");
+                switch (task[0]) {
+                    case "T":
+                        taskArrayList.add(new Todo(task[2]));
+                        break;
+                    case "D":
+                        taskArrayList.add(new Deadline(task[2], task[3]));
+                        break;
+                    case "E":
+                        taskArrayList.add(new Event(task[2], task[3], task[4], task[5]));
+                        break;
+                }
+                if (task[1].equals("true")) {
+                    try {
+                        taskArrayList.get(taskArrayList.size() - 1).markAsDone();
+                    } catch (DuplicateMarkAelitaException e) {
+                        //Not possible. Do nothing
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            //Do nothing
+        }
+    }
+
+    private static void saveTasks(ArrayList<Task> taskArrayList) throws IOAelitaException {
+        java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        try {
+            if(!Files.exists(path)) {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            }
+            File file = new File(path.toString());
+            FileWriter writer = new FileWriter(file);
+            for (Task task : taskArrayList) {
+                if (task instanceof Todo) {
+                    writer.write("T/" + task.isDone + "/" + task.description + "\n");
+                } else if (task instanceof Deadline) {
+                    writer.write("D/" + task.isDone + "/" + task.description + "/" + ((Deadline) task).by +"\n");
+                } else if (task instanceof Event) {
+                    writer.write("E/" + task.isDone + "/" + task.description + "/" + ((Event) task).date + "/" + ((Event) task).startTime +
+                                    "/" + ((Event) task).endTime + "\n");
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new IOAelitaException();
+        }
     }
 }
