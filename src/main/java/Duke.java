@@ -133,37 +133,45 @@ public class Duke {
 
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
         String[] splitInput = lineInput.split(Pattern.quote(" "));
-        String command = splitInput[0];
+        String commandString = splitInput[0];
+        String taskDescription;
+        Task newTask = null;
 
         if (splitInput.length == 1) {
             throw new DukeEmptyDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
 
         String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);
-        Task newTask;
 
-        if (command.equals(DukeCommand.TODO_COMMAND.getCommand())) {
-            // empty string array would become empty string
-            String taskDescription = String.join(" ", inputWithoutCommand);
-            newTask = new Todo(taskDescription);
-        } else {
-            String keyword = command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ?
-                    DukeCommand.DEADLINE_BY.getCommand() :
-                    DukeCommand.EVENT_AT.getCommand();
-            int keywordIndex = Arrays.asList(splitInput).indexOf(keyword);
+        try {
+            switch (DukeCommand.valueOf(commandString)) {
+                case todo:
+                    // empty string array would become empty string
+                    taskDescription = String.join(" ", inputWithoutCommand);
+                    newTask = new Todo(taskDescription);
+                    break;
+                case deadline:
+                case event:
+                    String keyword = commandString.equals(DukeCommand.deadline.getCommand())
+                            ? DukeCommand.deadline_by.getCommand()
+                            : DukeCommand.event_at.getCommand();
+                    int keywordIndex = Arrays.asList(splitInput).indexOf(keyword);
+                    if (keywordIndex == -1) {
+                        throw new DukeNoKeywordException("OOPS!!! The description must contain a keyword.");
+                    }
 
-            if (keywordIndex == -1) {
-                throw new DukeNoKeywordException("OOPS!!! The description must contain a keyword.");
+                    taskDescription = String.join(" ",
+                            Arrays.copyOfRange(splitInput, 1, keywordIndex));
+                    String deadlineOrTime = String.join(" ",
+                            Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
+                    LocalDate date = LocalDate.parse(deadlineOrTime);
+
+                    newTask = commandString.equals(DukeCommand.deadline.getCommand())
+                            ? new Deadline(taskDescription, date)
+                            : new Event(taskDescription, date);
             }
-
-            String description = String.join(" ",
-                    Arrays.copyOfRange(splitInput, 1, keywordIndex));
-            String deadlineOrTime = String.join(" ",
-                    Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
-            LocalDate date = LocalDate.parse(deadlineOrTime);
-
-            newTask = command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ?
-                    new Deadline(description, date) : new Event(description, date);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
 
         this.list.add(newTask);
@@ -179,46 +187,27 @@ public class Duke {
         String[] splitInput = lineInput.split(Pattern.quote(" "));
         // empty line would output string array of size 1, where the element is empty string
         String commandString = splitInput[0];
-        DukeCommand command = null;
         int selectedTaskIndex;
 
-        if (commandString.equals(DukeCommand.END_COMMAND.getCommand())) {
-            command = DukeCommand.END_COMMAND;
-        } else if (commandString.equals(DukeCommand.LIST_COMMAND.getCommand())) {
-            command = DukeCommand.LIST_COMMAND;
-        } else if (commandString.equals(DukeCommand.DONE_COMMAND.getCommand())) {
-            command = DukeCommand.DONE_COMMAND;
-        } else if (commandString.equals(DukeCommand.DELETE_COMMAND.getCommand())) {
-            command = DukeCommand.DELETE_COMMAND;
-        } else if (commandString.equals(DukeCommand.TODO_COMMAND.getCommand())) {
-            command = DukeCommand.TODO_COMMAND;
-        } else if (commandString.equals(DukeCommand.DEADLINE_COMMAND.getCommand())) {
-            command = DukeCommand.DEADLINE_COMMAND;
-        } else if (commandString.equals(DukeCommand.EVENT_COMMAND.getCommand())) {
-            command = DukeCommand.EVENT_COMMAND;
-        } else {
-            print("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
-        if (command != null) {
-            switch (command) {
-                case END_COMMAND:
+        try {
+            switch (DukeCommand.valueOf(commandString)) {
+                case bye:
                     bye();
                     break;
-                case LIST_COMMAND:
+                case list:
                     this.printList();
                     break;
-                case DONE_COMMAND:
+                case done:
                     selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
                     this.markTaskAsDone(selectedTaskIndex);
                     break;
-                case DELETE_COMMAND:
+                case delete:
                     selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
                     this.deleteTask(selectedTaskIndex);
                     break;
-                case TODO_COMMAND:
-                case DEADLINE_COMMAND:
-                case EVENT_COMMAND:
+                case todo:
+                case deadline:
+                case event:
                     try {
                         this.createAndAddTask(lineInput);
                     } catch (Exception e) {
@@ -228,6 +217,8 @@ public class Duke {
                 default:
                     break;
             }
+        } catch (IllegalArgumentException e) {
+            print("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

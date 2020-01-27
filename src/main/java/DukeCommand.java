@@ -1,16 +1,16 @@
 enum DukeCommand {
 
-    END_COMMAND         ("bye"),
-    LIST_COMMAND        ("list"),
-    DONE_COMMAND        ("done"),
-    TODO_COMMAND        ("todo"),
-    DELETE_COMMAND      ("delete"),
+    bye         ("bye"),
+    list        ("list"),
+    done        ("done"),
+    todo        ("todo"),
+    delete      ("delete"),
 
-    DEADLINE_COMMAND    ("deadline"),
-    DEADLINE_BY         ("/by"),
+    deadline    ("deadline"),
+    deadline_by ("/by"),
 
-    EVENT_COMMAND       ("event"),
-    EVENT_AT            ("/at");
+    event       ("event"),
+    event_at    ("/at");
 
     private final String command;
 
