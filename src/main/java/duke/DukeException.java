@@ -23,6 +23,9 @@ public class DukeException extends Exception {
             case "date":
                 message = "OOPS!!! Your date needs to be in yyyy-mm-dd format!";
                 break;
+            case "file":
+                message = "OOPS!!! The save file cannot be found";
+                break;
         }
         return message;
     }

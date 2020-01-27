@@ -17,7 +17,7 @@ public class Duke {
         scanner = new Scanner(System.in);
     }
 
-    public static void start() throws IOException {
+    public static void start() {
         String line = "-----------------------------------";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,32 +28,46 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
         System.out.println(line);
-        loadData();
-        String input = scanner.nextLine();
-        while (!input.equals("bye")) {
-            checkCommand(input);
-            input = scanner.nextLine();
+        try {
+            loadData();
+            String input = scanner.nextLine();
+            while (!input.equals("bye")) {
+                checkCommand(input);
+                input = scanner.nextLine();
+            }
+            printWithFormat("", "bye");
+        } catch (DukeException d) {
+            printWithFormat(d.getMessage(), "");
         }
-        printWithFormat("", "bye");
     }
 
     // get the data aka from the list and overwrite it
-    public static void saveData() throws IOException {
-        PrintWriter writer = new PrintWriter("../../../data/duke.txt");
-        for (Task t : arr) {
-            writer.println(t.getFormatForSave());
+    public static void saveData() throws DukeException {
+        try {
+            PrintWriter writer = new PrintWriter("../../../data/duke.txt");
+            for (Task t : arr) {
+                writer.println(t.getFormatForSave());
+            }
+            writer.close();
+        } catch (IOException io) {
+            throw new DukeException("file", "");
         }
-        writer.close();
     }
 
     //read from duke.txt then do string manipulation
     //https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-    public static void loadData() throws FileNotFoundException {
+    public static void loadData() throws DukeException {
         File file = new File("../../../data/duke.txt");
-        Scanner fileScanner = new Scanner(file);
-        while (fileScanner.hasNextLine()) {
-            String inputLine = fileScanner.nextLine();
-            interpretLine(inputLine);
+        try {
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String inputLine = fileScanner.nextLine();
+                interpretLine(inputLine);
+            }
+        } catch (FileNotFoundException f) {
+            throw new DukeException("file", "");
+        } catch (DukeException d) {
+            printWithFormat(d.getMessage(), "");
         }
     }
 
@@ -61,12 +75,11 @@ public class Duke {
     //yes: can just construct directly from the input
     //no: more verbose when reading the duke.txt file, does not affect finding tho because u still looking thru the lsit
     //yes lets do it
-    public static void interpretLine(String inputLine) {
-        String[] strArr = inputLine.split(" "); // this is the problem
+    public static void interpretLine(String inputLine) throws DukeException{
+        String[] strArr = inputLine.split(" ");
         String doneStatus = strArr[0];
         String type = strArr[1];
         String input = inputLine.substring(2);
-//        System.out.println(input);
         switch (type) {
             case "deadline":
                 Deadline d = new Deadline(input);
@@ -93,7 +106,7 @@ public class Duke {
         }
     }
 
-    public static void checkCommand(String input) throws IOException {
+    public static void checkCommand(String input) {
         String line = "-----------------------------------";
         String[] strArr = input.split(" ");
         String command = strArr[0];
@@ -112,6 +125,7 @@ public class Duke {
                         Task taskToBeDone = arr.get(index);
                         taskToBeDone.setDone();
                         printWithFormat(taskToBeDone.toString(), "done");
+                        saveData();
                         break;
                     } else {
                         throw new DukeException("empty", command);
@@ -121,6 +135,7 @@ public class Duke {
                         Deadline d = new Deadline(input);
                         arr.add(d);
                         printWithFormat(d.toString(), "task");
+                        saveData();
                         break;
                     } else {
                         throw new DukeException("empty", command);
@@ -130,6 +145,7 @@ public class Duke {
                         Event e = new Event(input);
                         arr.add(e);
                         printWithFormat(e.toString(), "task");
+                        saveData();
                         break;
                     } else {
                         throw new DukeException("empty", command);
@@ -139,6 +155,7 @@ public class Duke {
                         Todo td = new Todo(input);
                         arr.add(td);
                         printWithFormat(td.toString(), "task");
+                        saveData();
                         break;
                     } else {
                         throw new DukeException("empty", command);
@@ -147,6 +164,7 @@ public class Duke {
                     int index = Integer.parseInt(strArr[1]) - 1;
                     Task taskToBeDeleted = arr.remove(index);
                     printWithFormat(taskToBeDeleted.toString(), "delete");
+                    saveData();
                     break;
                 default:
                     throw new DukeException("invalid", command);
@@ -156,7 +174,7 @@ public class Duke {
         }
     }
 
-    public static void printWithFormat(String input, String type) throws IOException {
+    public static void printWithFormat(String input, String type) {
         String line = "-----------------------------------";
         System.out.println(line);
         switch (type) {
@@ -174,7 +192,6 @@ public class Duke {
                 System.out.println(input);
                 int arrlength = arr.size();
                 System.out.println("Now you have "+ arrlength + " tasks in the list.");
-                saveData();
                 break;
             case "bye":
                 System.out.println("Bye. Hope to see you again soon!");
@@ -182,13 +199,11 @@ public class Duke {
             case "done":
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(input);
-                saveData();
                 break;
             case "delete":
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(input);
                 System.out.println("Now you have "+ arr.size() + " tasks in the list.");
-                saveData();
                 break;
             default:
                 System.out.println(input);
