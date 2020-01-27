@@ -16,11 +16,35 @@ public class Duke {
     private static final String DELETE_CMD = "delete";
     private static final String DONE_CMD = "done";
 
-    private static void printAddedTask(Task t, List<Task> tasks) {
+    private static void addAndPrintTask(Task t, List<Task> tasks) {
+        tasks.add(t);
+
         System.out.println("Got it! I've added this task:" + LF + "    " + t + LF
                 + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
 
     }
+
+    private static boolean canSplitStr(String str, String regex) {
+        String[] strArr = str.split(regex);
+
+        return (strArr.length == 2);
+    }
+
+    private static boolean validId(String strId, List<Task> tasks) {
+        int id;
+        try {
+            id = Integer.parseInt(strId);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        if ((id - 1) > tasks.size() - 1 || (id - 1) < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println(WELCOME_MSG);
 
@@ -28,7 +52,11 @@ public class Duke {
 
         List<Task> tasks = new ArrayList<>();
 
-        String[] str1, str2 = null;
+        String str1, str2;
+
+        String[] strArr;
+
+        Task t;
 
         while (true) {
             try {
@@ -40,115 +68,99 @@ public class Duke {
                     int len = tasks.size();
 
                     for (int i = 0; i < len; ++i) {
-                        Task t = tasks.get(i);
+                        t = tasks.get(i);
                         System.out.println("    " + (i + 1) + ". " + t);
                     }
 
                     System.out.println();
                 } else if (cmd.startsWith(DONE_CMD)) {
-                    str1 = cmd.split("\\s+");
-
-                    if (str1.length < 2) {
+                    if (!canSplitStr(cmd, "done\\s+")) {
                         throw new DukeException("The task to mark done cannot be empty");
                     }
 
-                    int id;
-                    try {
-                        id = Integer.parseInt(str1[1]);
-                    } catch (NumberFormatException e) {
+                    str1 = cmd.split("done\\s+")[1];
+
+                    if (!validId(str1, tasks)) {
                         throw new DukeException("The task to mark done is not in the list");
                     }
 
-                    if ((id - 1) > tasks.size() - 1 || (id - 1) < 0) {
-                        throw new DukeException("The task to mark done is not in the list");
-                    }
+                    int id = Integer.parseInt(str1);
 
-                    Task t = tasks.get(id - 1);
+                    t = tasks.get(id - 1);
 
                     t.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
 
                 } else if (cmd.startsWith(DELETE_CMD)) {
-                    str1 = cmd.split("\\s+");
-
-                    if (str1.length < 2) {
+                    if (canSplitStr(cmd, "delete\\s+")) {
+                        str1 = cmd.split("delete\\s+")[1];
+                    } else {
                         throw new DukeException("The task to delete cannot be empty");
                     }
 
-                    int id;
-                    try {
-                        id = Integer.parseInt(str1[1]);
-                    } catch (NumberFormatException e) {
-                        throw new DukeException("The task to delete is not in the list");
+
+                    if (!validId(str1, tasks)) {
+                        throw new DukeException("The task to mark delete is not in the list");
                     }
 
-                    if ((id - 1) > tasks.size() - 1 || (id - 1) < 0) {
-                        throw new DukeException("The task to delete is not in the list");
-                    }
+                    int id = Integer.parseInt(str1);
 
-                    Task t = tasks.get(id - 1);
+                    t = tasks.get(id - 1);
 
                     tasks.remove(id - 1);
 
                     System.out.println("Noted! I've removed this task:" + LF + "    " + t + LF
                             + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
                 } else if (cmd.startsWith(TODO_CMD)) {
-                    str1  = cmd.split("todo\\s+");
-
-                    if (str1.length < 2) {
+                    if (canSplitStr(cmd, "todo\\s+")) {
+                        str1  = cmd.split("todo\\s+")[1];
+                    } else {
                         throw new DukeException("The description of a todo cannot be empty");
                     }
-                    Task t = new Todo(str1[1]);
 
-                    tasks.add(t);
 
-                    printAddedTask(t, tasks);
+                    t = new Todo(str1);
+
+                    addAndPrintTask(t, tasks);
                 } else if (cmd.startsWith(DEADLINE_CMD)) {
-                    str1 = cmd.split("deadline\\s+");
-
-                    if (str1.length < 2) {
+                    if (canSplitStr(cmd, "deadline\\s+")) {
+                        str1 = cmd.split("deadline\\s+")[1];
+                    } else {
                         throw new DukeException("The description and timing of a deadline cannot be empty");
                     }
 
-                    String temp = str1[1];
-                    str2 = temp.split("\\s+/by\\s+");
+                    if (canSplitStr(str1, "\\s+/by\\s+")) {
+                        strArr = str1.split("\\s+/by\\s+");
 
-                    if (str2.length < 2) {
+                        String name = strArr[0];
+                        String by = strArr[1];
+
+                        t = new Deadline(name, by);
+
+                        addAndPrintTask(t, tasks);
+                    } else {
                         throw new DukeException("Both the description and timing of a deadline cannot be empty");
                     }
-
-                    String name = str2[0];
-                    String by = str2[1];
-
-                    Task t = new Deadline(name, by);
-
-                    tasks.add(t);
-
-                    printAddedTask(t, tasks);
                 } else if (cmd.startsWith(EVENT_CMD)) {
-                    str1 = cmd.split("event\\s+");
-
-                    if (str1.length < 2) {
+                    if (canSplitStr(cmd, "event\\s+")) {
+                        str1 = cmd.split("event\\s+")[1];
+                    } else {
                         throw new DukeException("The description and timing of an event cannot be empty");
                     }
 
-                    String temp = str1[1];
+                    if (canSplitStr(str1, "\\s+/at\\s+")) {
+                        strArr = str1.split("\\s+/at\\s+");
 
-                    str2 = temp.split("\\s+/at\\s+");
+                        String name = strArr[0];
+                        String at = strArr[1];
 
-                    if (str2.length < 2) {
+                        t = new Event(name, at);
+
+                        addAndPrintTask(t, tasks);
+                    } else {
                         throw new DukeException("Both the description and timing of an event cannot be empty");
                     }
-
-                    String name = str2[0];
-                    String by = str2[1];
-
-                    Task t = new Event(name, by);
-
-                    tasks.add(t);
-
-                    printAddedTask(t, tasks);
                 } else if (cmd.equals(BYE_CMD)) {
                     System.out.println(BYE_MSG);
                     break;
