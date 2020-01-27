@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,6 +36,16 @@ class UiTest {
                 Arguments.of(new DukeException("Invalid Task Number given!")),
                 Arguments.of(new DukeException("Invalid task number given for deletion...")),
                 Arguments.of(new DukeException(""))
+        );
+    }
+
+    static Stream<Arguments> generateOneTaskList() {
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new Todo("read book"));
+        tasks.add(new Event("Chinese New Year", "2020-01-25"));
+        tasks.add(new Deadline("Finish project", "2020-04-20"));
+        return Stream.of(
+                Arguments.of(new TaskList(tasks))
         );
     }
 
@@ -83,8 +95,22 @@ class UiTest {
     void commandNotFound() {
     }
 
-    @Test
-    void listTasks() {
+    @ParameterizedTest
+    @MethodSource("generateOneTaskList")
+    void listTasks(TaskList tasks) {
+        StringBuilder expected = new StringBuilder(HORIZONTAL_DIVIDER +
+                INDENTATION + "Here are the tasks in your list:" + NEWLINE);
+        int taskCount = 1;
+        for (Task task : tasks) {
+            expected.append(INDENTATION)
+                    .append(taskCount).append(".").append(task.toString())
+                    .append(NEWLINE);
+            taskCount++;
+        }
+        expected.append(HORIZONTAL_DIVIDER);
+        // Execute test function
+        ui.listTasks(tasks);
+        assertEquals(expected.toString(), output.toString());
     }
 
     @ParameterizedTest
