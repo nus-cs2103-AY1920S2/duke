@@ -14,6 +14,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public abstract String formatSavingName();
 
     public String getStatusIcon() {

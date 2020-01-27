@@ -94,6 +94,12 @@ class ParserTest {
             assertEquals("OOPS!!! Please give me the date in yyyy-mm-dd format!", e.getMessage());
         }
 
+        // testing exception of find
+        try {
+            Parser.parse("find ").execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please give me the keyword to look for!", e.getMessage());
+        }
 
     }
 }
