@@ -1,0 +1,3 @@
+T|✕|borrow book
+E|✕|project meeting|Mon 2-4pm
+T|✓|kill lin
