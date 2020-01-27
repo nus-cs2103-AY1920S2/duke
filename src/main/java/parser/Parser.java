@@ -1,7 +1,7 @@
 package parser;
 import java.time.LocalDate;
 import command.*;
-import dukeException.*;
+import dukeexception.*;
 import task.*;
 /**
  * Makes sense of the command entered by the user.

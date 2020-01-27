@@ -1,4 +1,4 @@
-package dukeException;
+package dukeexception;
 /**
  * Represents the error when the user inputs an invalid command. A <code>DukeException</code> object corresponds to a
  * an error caused by invalid command e.g., <code>"todo"</code>
