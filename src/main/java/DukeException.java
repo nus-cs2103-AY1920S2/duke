@@ -1,4 +1,4 @@
-public class DukeException {
+public class DukeException extends Throwable {
     protected String task;
 
     public String errorMsg(String task) {

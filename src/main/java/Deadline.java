@@ -7,6 +7,7 @@ public class Deadline extends Task {
     protected String date;
     protected String time;
     protected String dateLine;
+    protected String originalDate;
 
     public Deadline(String s) {
         super(s);
@@ -16,6 +17,7 @@ public class Deadline extends Task {
         dateLine = date.substring(date.indexOf(" ") + 1, date.length());
         date = dateLine.split(" ")[0];
         time = dateLine.split(" ")[1];
+        originalDate = date;
         date = changeDate();
         time = changeTime();
     }
@@ -29,7 +31,7 @@ public class Deadline extends Task {
     }
 
     public String getDate() {
-        return date;
+        return originalDate;
     }
 
     public String getTime() {
