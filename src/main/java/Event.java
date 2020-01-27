@@ -6,6 +6,17 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getDesc() {
+        return super.description;
+    }
+
+    public String getDate() {
+        return at;
+    }
+
+    public String getType() {
+        return "[E]";
+    }
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

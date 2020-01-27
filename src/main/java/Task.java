@@ -14,9 +14,15 @@ public class Task {
         return (isDone ? "Y" : "N"); //return Y (done) or N (not done) symbols
     }
 
+    public String getDesc() {return ""; }
+
+    public String getDate() {return ""; }
+
     public void taskIsDone() {
         this.isDone = true;
     }
+
+    public String getType() { return ""; }
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +31,57 @@ public class Duke {
         commandpairing.put("event", "/at");
         commandpairing.put("deadline", "/by");
         commandpairing.put("delete", "2");
+
+        try {
+            readFromFile();
+        } catch (IOException readIOEx) {
+            System.out.println(readIOEx.getMessage());
+        }
     }
 
+    public static void readFromFile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(
+                "C:\\Users\\SOHNB101\\Documents\\myduke\\duke\\data\\duke.txt"));
+
+        String currentline = reader.readLine();
+
+        while (currentline != null) {
+            String[] arr = currentline.split(" ", 3);
+
+            String expression = arr[0];
+
+            switch (expression) {
+                case "[E]" :
+                    listOfTask.add(new Event(arr[1], arr[2]));
+                    break;
+                case "[D]" :
+                    listOfTask.add(new Deadline(arr[1], arr[2]));
+                    break;
+                case "[T]" :
+                    listOfTask.add(new Todo(arr[1]));
+                    break;
+            }
+
+            currentline = reader.readLine();
+        }
+        reader.close();
+    }
+    public static void writeToFile() throws IOException {
+        String line = "";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(
+                "C:\\Users\\SOHNB101\\Documents\\myduke\\duke\\data\\duke.txt"));
+        for (Task task : listOfTask) {
+            if (task.getType().equals("[T]")) {
+                line = "[T] " + task.getDesc();
+            } else {
+                line = task.getType() + " " + task.getDesc() + " " + task.getDate();
+            }
+            writer.write(line);
+            writer.newLine();
+            line = "";
+        }
+        writer.close();
+    }
     public static void HorizontalLine() {
         System.out.println("____________________________________________________________");
     }
@@ -125,5 +179,10 @@ public class Duke {
 
         // Say 'bye' to the user
         exit();
+        try {
+            writeToFile();
+        } catch (IOException ioex) {
+            System.out.println(ioex.getMessage());
+        }
     }
 }
