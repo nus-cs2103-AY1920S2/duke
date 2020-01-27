@@ -1,9 +1,11 @@
 package duke;
 
 import java.lang.StringBuilder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    String timing;
+    LocalDate timing;
     String description;
 
     Event(String input) {
@@ -12,7 +14,7 @@ public class Event extends Task {
         this.description = getDescription(input);
     }
 
-    private String getTiming(String input) {
+    private LocalDate getTiming(String input) {
         String[] strArr = input.split(" ");
         int index = 0;
         for (int j = 0; j < strArr.length; j++) {
@@ -26,7 +28,8 @@ public class Event extends Task {
         for (int i = index+1; i <strArr.length ; i++ ) {
             str.append(" ").append(strArr[i]);
         }
-        return str.toString();
+        String date = str.toString().trim();
+        return LocalDate.parse(date);
     }
 
     //updates the description given the "/by" index
@@ -48,8 +51,8 @@ public class Event extends Task {
         str.append(this.getStatusIcon())
                 .append(" ")
                 .append(description)
-                .append("(at:")
-                .append(timing)
+                .append("(at: ")
+                .append(timing.format(DateTimeFormatter.ofPattern("MMM d yyyy")))
                 .append(")");
         return str.toString();
     }

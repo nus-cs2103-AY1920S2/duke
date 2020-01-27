@@ -1,9 +1,12 @@
 package duke;
 
 import java.lang.StringBuilder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 public class Deadline extends Task {
-    String timing;
+    LocalDate timing;
     String description;
 
     Deadline(String input) {
@@ -12,7 +15,7 @@ public class Deadline extends Task {
         this.description = getDescription(input);
     }
 
-    private String getTiming(String input) {
+    private LocalDate getTiming(String input) {
         String[] strArr = input.split(" ");
         int index = 0;
         for (int j = 0; j < strArr.length; j++) {
@@ -26,7 +29,8 @@ public class Deadline extends Task {
         for (int i = index+1; i <strArr.length ; i++ ) {
             str.append(" ").append(strArr[i]);
         }
-        return str.toString();
+        String date = str.toString().trim();
+        return LocalDate.parse(date);
     }
 
     //updates the description given the "/by" index
@@ -48,8 +52,8 @@ public class Deadline extends Task {
         str.append(this.getStatusIcon())
                 .append(" ")
                 .append(description)
-                .append("(by:")
-                .append(timing)
+                .append("(by: ")
+                .append(timing.format(DateTimeFormatter.ofPattern("MMM d yyyy")))
                 .append(")");
         return str.toString();
     }
