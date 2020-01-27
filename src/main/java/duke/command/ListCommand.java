@@ -9,10 +9,20 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
 
+    /**
+     * Constructor of ListCommand.
+     */
     public ListCommand() {
         super(false);
     }
 
+    /**
+     * Executes the ListCommand by listing all the tasks in the task list.
+     *
+     * @param tasks TaskList of Duke.
+     * @param ui The user interface.
+     * @param storage To load from and save to the disk.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.listTasks();
