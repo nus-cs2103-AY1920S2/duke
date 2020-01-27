@@ -26,8 +26,9 @@ public class Duke {
         // reply to input
         String input = ui.getCommand();
         Command command = parser.parse(input);
+        boolean isExit = false;
 
-        while (command != Command.BYE) {
+        while (!isExit) {
             String[] inputArr = input.split(" ");
             
             try {
@@ -68,9 +69,9 @@ public class Duke {
             // next input
             input = ui.getCommand();
             command = parser.parse(input);
+            isExit = command.isExit();
         }
 
-        ui.goodBye();
     }
     public static void main(String[] args) {
         new Duke(System.getProperty("user.dir")).run();       
