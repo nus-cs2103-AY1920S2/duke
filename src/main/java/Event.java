@@ -31,6 +31,15 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the schedule of the event instance.
+     * @return The date of the event.
+     */
+
+    public String getEventSchedule() {
+        return this.at_schedule;
+    }
+
+    /**
      * toString method overrides the Object's toString method
      * and it contains the mark, the description, as well as
      * the schedule of the event.

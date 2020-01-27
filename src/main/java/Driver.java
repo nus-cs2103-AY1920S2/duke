@@ -39,21 +39,25 @@ public class Driver {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Duke duke = new Duke();
+        try {
+            Duke duke = Duke.start();
 
-        System.out.println("------------------------");
-        System.out.println("Hello I'm Duke!");
-        System.out.println("Add your command here!\n");
-
-        String command = readCommand(scanner);
-        System.out.println("------------------------");
-        while (!command.equals("bye")) {
-            duke.processCommand(command);
             System.out.println("------------------------");
-            command = readCommand(scanner);
-        }
+            System.out.println("Hello I'm Duke!");
+            System.out.println("Add your command here!\n");
 
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("------------------------");
+            String command = readCommand(scanner);
+            System.out.println("------------------------");
+            while (!command.equals("bye")) {
+                duke.processCommand(command);
+                System.out.println("------------------------");
+                command = readCommand(scanner);
+            }
+
+            System.out.println("Bye. Hope to see you again soon!");
+            System.out.println("------------------------");
+        } catch (DukeInvalidTaskFormatException e) {
+            System.err.println(e);
+        }
     }
 }

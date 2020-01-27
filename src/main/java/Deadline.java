@@ -31,6 +31,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the due date of the deadline.
+     * @return the due date of the deadline.
+     */
+
+    public String getDueDate() {
+        return this.by_schedule;
+    }
+
+    /**
      * toString method overrides the Object's toString method
      * and it contains the mark, the description, as well as
      * the due date of the deadline.

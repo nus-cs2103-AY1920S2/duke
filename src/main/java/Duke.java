@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -26,12 +27,33 @@ public class Duke {
      * that the Duke instance can perform, stored in a HashMap.
      */
 
-    public Duke() {
-        this.tasks = new ArrayList<>();
+    private Duke(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
-     * isInRange method verifies whether the index
+     * Creates a Duke instance with a factory method fashion.
+     * A Duke instance with the list of tasks loaded will be created
+     * if the file is formatted properly.
+     * @return A Duke instance, loaded with the list of tasks.
+     * @throws DukeInvalidTaskFormatException If the file is not formatted properly.
+     */
+
+    public static Duke start() throws DukeInvalidTaskFormatException {
+        TaskReader reader = new TaskReader("./data/tasks.txt");
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            tasks = reader.loadTasks();
+        } catch (IOException e) {
+            System.err.println(e);
+        } catch (DukeInvalidTaskFormatException e) {
+            throw e;
+        }
+        return new Duke(tasks);
+    }
+
+    /**
+     * Verifies whether the index
      * provided is within the range or not.
      * @param index the index of the task
      * @return the boolean value of whether the index given is
@@ -43,7 +65,7 @@ public class Duke {
     }
 
     /**
-     * markDone method marks the task of a particular index
+     * Marks the task of a particular index
      * to be done, and inform the client later. This method is
      * being called when a done command is entered by a client.
      * @param index The index of a particular task in the task list.
@@ -57,13 +79,15 @@ public class Duke {
 
         Task task = getTask(index);
         task.markAsDone();
+        rewriteTasksToFile();
+
         System.out.println("Nice! I've marked this task as done: ");
         System.out.printf("   %s\n", task.toString());
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
     }
 
     /**
-     * getTask method gets the task of a given index
+     * Gets the task of a given index
      * from the list of tasks. The index value is normalized
      * by subtracting the value with 1 since the value starts
      * from 1.
@@ -76,7 +100,7 @@ public class Duke {
     }
 
     /**
-     * listTasks method prints all the tasks stored in the ArrayList
+     * Prints all the tasks stored in the ArrayList
      * of the Duke instance.
      */
 
@@ -90,7 +114,7 @@ public class Duke {
     }
 
     /**
-     * addTask method adds the task with the corresponding
+     * Adds the task with the corresponding
      * type, and the description provided by the client.
      * @param argument The argument of the add task.
      * @throws DukeInvalidArgumentFormatException If there is a format error in the command.
@@ -98,7 +122,8 @@ public class Duke {
 
     public void addTask(Argument argument) throws DukeInvalidArgumentFormatException {
         Command command = argument.getCommand();
-        Task new_task;
+        Task newTask;
+        TaskWriter writer = new TaskWriter("./data/tasks.txt");
 
         /*
          The switch block uses to provide the appropriate task
@@ -107,34 +132,39 @@ public class Duke {
          */
 
         switch (command) {
-            case TODO:
-                new_task = new Todo(argument.checkValidTodoArgument());
-                break;
+        case TODO:
+            newTask = new Todo(argument.checkValidTodoArgument());
+            break;
 
-            case DEADLINE:
-                Pair<String, String> description_schedule_pair = argument.checkValidDeadlineArgument();
-                String description = description_schedule_pair.getFirst();
-                String schedule = description_schedule_pair.getSecond();
-                new_task = new Deadline(description, schedule);
-                break;
+        case DEADLINE:
+            Pair<String, String> description_schedule_pair = argument.checkValidDeadlineArgument();
+            String description = description_schedule_pair.getFirst();
+            String schedule = description_schedule_pair.getSecond();
+            newTask = new Deadline(description, schedule);
+            break;
 
-            default:
-                Pair<String, String> description_date_pair = argument.checkValidEventArgument();
-                String desc = description_date_pair.getFirst();
-                String date = description_date_pair.getSecond();
-                new_task = new Event(desc, date);
-                break;
+        default:
+            Pair<String, String> description_date_pair = argument.checkValidEventArgument();
+            String desc = description_date_pair.getFirst();
+            String date = description_date_pair.getSecond();
+            newTask = new Event(desc, date);
+            break;
         }
 
-        tasks.add(new_task);
-        System.out.println("Got it. I've added this task: ");
-        System.out.printf("    %s\n", new_task);
-        System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
+        tasks.add(newTask);
+        try {
+            writer.writeTask(newTask, true);
+            System.out.println("Got it. I've added this task: ");
+            System.out.printf("    %s\n", newTask);
+            System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     /**
-     * deleteTask deletes the task of a particular index
-     * from the list.
+     * Deletes the task of a particular index
+     * from the list, then remove it from the file.
      * @param index The index of the task in the list to be deleted.
      * @throws DukeInvalidArgumentFormatException If the index given is not within the valid range.
      */
@@ -146,13 +176,14 @@ public class Duke {
 
         Task task = getTask(index);
         tasks.remove(index - 1);
+        rewriteTasksToFile();
         System.out.println("Noted. I've removed this task: ");
         System.out.printf("    %s\n", task);
         System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
     }
 
     /**
-     * processCommand method parses the input entered by the client.<br>
+     * Parses the input entered by the client.<br>
      *     The following are valid commands that Duke can process:
      *     <ul>
      *         <li><tt>list</tt> - lists all the tasks that Duke has stored.</li>
@@ -178,26 +209,43 @@ public class Duke {
              */
 
             switch (command) {
-                case LIST:
-                    argument.checkValidListArgument();
-                    listTasks();
-                    break;
+            case LIST:
+                argument.checkValidListArgument();
+                listTasks();
+                break;
 
-                case DONE:
-                    int index = argument.checkValidDoneArgument();
-                    markDone(index);
-                    break;
+            case DONE:
+                int index = argument.checkValidDoneArgument();
+                markDone(index);
+                break;
 
-                case DELETE:
-                    int value = argument.checkValidDeleteArgument();
-                    deleteTask(value);
-                    break;
-                default:
-                    addTask(argument);
-                    break;
+            case DELETE:
+                int value = argument.checkValidDeleteArgument();
+                deleteTask(value);
+                break;
+
+            default:
+                addTask(argument);
+                break;
             }
         } catch (DukeInvalidArgumentFormatException | DukeUnknownKeywordException exc) {
             System.err.println(exc);
+        }
+    }
+
+    /**
+     * Rewrites the list of tasks to the file. This method is being triggered
+     * by {@code markDone} and {@code deleteTask} method.
+     */
+
+    private void rewriteTasksToFile() {
+        try {
+            TaskWriter writer = new TaskWriter("./data/tasks.txt");
+            for (int i = 0; i < tasks.size(); i++) {
+                writer.writeTask(tasks.get(i), i != 0);
+            }
+        } catch (IOException e) {
+            System.err.println(e);
         }
     }
 }
