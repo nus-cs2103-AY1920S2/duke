@@ -22,11 +22,15 @@ class Storage {
         }
     }
 
-    void save(List<Task> tasks) throws IOException {
+    void save(TaskList tasks) throws IOException {
         if (!Files.exists(FILE_PATH)) {
             Files.createDirectories(FILE_PATH.getParent());
         }
-        List<String> lines = tasks.stream().map(Task::toStringForSaving).collect(Collectors.toList());
+        List<String> lines = tasks
+                .getTasks()
+                .stream()
+                .map(Task::toStringForSaving)
+                .collect(Collectors.toList());
         Files.write(FILE_PATH, lines, StandardOpenOption.CREATE);
     }
 }

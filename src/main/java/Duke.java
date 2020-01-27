@@ -1,29 +1,25 @@
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Duke {
 
     private Storage storage;
-    private List<Task> tasks;
+    private TaskList tasks;
 
     public Duke(Path filePath) {
         storage = new Storage(filePath);
         try {
-            List<String> lines = storage.load();
-            tasks = lines.stream().map(Duke::decode).collect(Collectors.toList());
+            tasks = new TaskList(storage.load());
         } catch (IOException e) {
             print("can't load file.");
-            tasks = new ArrayList<>();
+            tasks = new TaskList();
         }
     }
 
@@ -32,6 +28,7 @@ public class Duke {
 
         greet();
 
+        //noinspection InfiniteLoopStatement
         while (true) {
             String lineInput = sc.nextLine();
             this.processInput(lineInput);
@@ -110,38 +107,6 @@ public class Duke {
         outputStreamBuffer.add("  " + selectedTask);
         outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
         print(outputStreamBuffer);
-    }
-
-    private static Task decode(String str) {
-        String[] splitInput = str.split(Pattern.quote(Task.SEPERATOR));
-        String taskType = splitInput[0];
-        boolean isDone = splitInput[1].equals(Task.TRUE_SYMBOL);
-        String taskDescription = splitInput[2];
-        LocalDate date = null;
-        Task toReturn = null;
-
-        switch (taskType) {
-            case Todo.TYPE_SYMBOL:
-                toReturn = new Todo(taskDescription);
-                break;
-            case Deadline.TYPE_SYMBOL:
-                date = LocalDate.parse(splitInput[3]);
-                toReturn = new Deadline(taskDescription, date);
-                break;
-            case Event.TYPE_SYMBOL:
-                date = LocalDate.parse(splitInput[3]);
-                toReturn = new Event(taskDescription, date);
-                break;
-            default:
-                print("Failed to decode. Unknown task type.");
-                break;
-        }
-
-        if (isDone && toReturn != null) {
-            toReturn.markAsDone();
-        }
-
-        return toReturn;
     }
 
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
