@@ -12,9 +12,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * <h1>ParserTest Class</h1>
+ * Test for parser class.
+ *
+ * @author  Eng Xuan En
+ */
 public class ParserTest {
+
+    /**
+     * Test if invalid input to the parse method will throws DukeException or not.
+     */
     @Test
-    public void invalidOutput_ShouldThrowDukeException() {
+    public void invalidIntput_ShouldThrowDukeException() {
         Exception exception = assertThrows(DukeException.class, () -> {
             Parser.parse("Todo borrow book");
         });
@@ -25,6 +35,10 @@ public class ParserTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    /**
+     * Test if giving "list" to processUserInput method will give list command object or not.
+     * @throws DukeException occurs when invalid string input
+     */
     @Test
     public void inputList_ShouldReturnListCommandObject() throws DukeException {
         List<String> expected = new ArrayList<>();
@@ -32,6 +46,10 @@ public class ParserTest {
         Assertions.assertEquals(expected, Parser.processUserInput("list"));
     }
 
+    /**
+     * Test if giving "todo borrow book" to addTask method will give the ArrayList with the correct data or not.
+     * @throws DukeException occurs when invalid string input
+     */
     @Test
     public void todoBorrowBookInput_ShouldReturnArrayListSuccessfully() throws DukeException {
         List<String> expected = new ArrayList<>();

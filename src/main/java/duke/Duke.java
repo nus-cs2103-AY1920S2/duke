@@ -6,11 +6,21 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * <h1>Duke Class</h1>
+ * Main program of the Duke program.
+ *
+ * @author  Eng Xuan En
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Class constructor of Duke.
+     * @param filePath the location where the tasks being stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -21,6 +31,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the main part of Duke programme. Repeat read and process the user input till the user
+     * type bye.
+     */
     public void run() {
         ui.greet();
         boolean isExitLoop = false;
@@ -39,6 +53,10 @@ public class Duke {
         ui.closeScanner();
     }
 
+    /**
+     * The main programme runs here.
+     * @param args input from the console
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

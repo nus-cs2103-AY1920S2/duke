@@ -2,6 +2,12 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * <h1>TaskCommand Class</h1>
+ * This command records the description of the task and indicate whether the programme is done or not.
+ *
+ * @author  Eng Xuan En
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -9,7 +15,7 @@ public class Task {
     protected LocalDate period;
 
     /**
-     * Constructor of task.Task
+     * Class constructor of Task which takes in description in String format.
      * @param description description of the task
      */
     public Task(String description) {
@@ -18,7 +24,7 @@ public class Task {
     }
 
     /**
-     * Get period
+     * Get period with the pattern format of "MMM d yyyy".
      * @return date in "MMM d yyyy"
      */
     public String getPeriod() {
@@ -26,15 +32,15 @@ public class Task {
     }
 
     /**
-     * Get status icon
-     * @return status icon
+     * Get status icon either a tick or cross.
+     * @return status icon tick if is done, cross if it is not done
      */
     public String getStatusIcon() {
         return isDone? "\u2713" : "\u2718";
     }
 
     /**
-     * Get status of the task
+     * Get status of the task.
      * @return task status
      */
     public boolean getStatus() {
@@ -42,21 +48,21 @@ public class Task {
     }
 
     /**
-     * Set status to done
+     * Set done status to true.
      */
     public void setStatusDone() {
         this.isDone = true;
     }
 
     /**
-     * Set status to not done
+     * Set done status to false.
      */
     public void setStatusNotDone() {
         this.isDone = false;
     }
 
     /**
-     * Get the description of the task
+     * Get the description of the task.
      * @return description of the task
      */
     public String getDescription() {
@@ -64,7 +70,7 @@ public class Task {
     }
 
     /**
-     * Get the task type
+     * Get the task type.
      * @return type of the task
      */
     public String getType() {
@@ -72,8 +78,8 @@ public class Task {
     }
 
     /**
-     * Return status icon and description of the task
-     * @return status icon and description
+     * Return status icon and description of the task in string format.
+     * @return status icon and description in string format
      */
     @Override
     public String toString() {

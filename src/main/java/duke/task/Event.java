@@ -8,14 +8,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * <h1>Event Class</h1>
+ * A subclass of Task class. Record the description and duration of the event task.
+ *
+ * @author  Eng Xuan En
+ */
 public class Event extends Task {
     protected LocalDateTime duration;
     DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
     DateTimeFormatter storeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
-     * Constructor for duke.task.Event
-     * @param description description of duke.task.Event
+     * Class constructor Event.
+     * @param description description of Event
      */
     public Event(String description, String duration) throws DukeException{
         super(description);
@@ -33,7 +39,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get duration
+     * Get duration in "yyyy-mm-dd HHmm" format.
      * @return duration in "yyyy-mm-dd HHmm"
      */
     @Override
@@ -41,6 +47,10 @@ public class Event extends Task {
         return duration.format(storeFormatter);
     }
 
+    /**
+     * Get string in [E][tick or cross] {description of the task} (at: {duration of the task}) format.
+     * @return String in certain format
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + duration.format(outputFormatter) + ")";

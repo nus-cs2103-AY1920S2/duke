@@ -18,6 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <h1>Storage Class</h1>
+ * This class is used to save data into hard disk and retrieve data from the hard disk.
+ *
+ * @author  Eng Xuan En
+ */
 public class Storage {
     protected String home;
     protected FileWriter fw;
@@ -26,7 +32,7 @@ public class Storage {
     protected Scanner taskScanner;
 
     /**
-     * This is constructor of Storage
+     * Class constructor of Storage which take in filePath in String format.
      * @param filePath path that the data store to.
      */
     public Storage(String filePath) throws DukeException {
@@ -42,14 +48,14 @@ public class Storage {
     }
 
     /**
-     * Get Home Directory of the programme
+     * Get Home Directory of the programme.
      */
     public String getHomeDirectory() {
         return home;
     }
 
     /**
-     * Check file exist at that path
+     * Check file exist at that path.
      * @param path path the file located
      * @return true: File exists, false: File not exists
      */
@@ -58,8 +64,8 @@ public class Storage {
     }
 
     /**
-     * Retrieve the data from the taskFile
-     * @return List of tasks
+     * Retrieve the data from the taskFile.
+     * @return List of tasks which the tasks retrieve from the hard disk
      * @throws DukeException occurs when when wrong format of date and time found
      */
     public List<Task> getTaskListing() throws DukeException {
@@ -107,7 +113,7 @@ public class Storage {
     }
 
     /**
-     * Save tasks to hard disk
+     * Save tasks to hard disk.
      * @param taskList taskList to retrieve the tasks
      * @throws DukeException occurs when encounter IO Exception
      */
@@ -132,7 +138,7 @@ public class Storage {
     }
 
     /**
-     * Create file when no file exist at the path
+     * Create file when no file exist at the path.
      * @param path path the file located at
      * @throws DukeException occurs when IOException happens
      */
@@ -146,7 +152,7 @@ public class Storage {
     }
 
     /**
-     * Add task to the file in hard disk
+     * Add task to the file in hard disk.
      * @param task task to be added
      * @throws DukeException occurs when IO Exception occurs
      */
@@ -183,7 +189,7 @@ public class Storage {
     }
 
     /**
-     * Get path where the files stored at hard disk
+     * Get path where the files stored at hard disk.
      * @return path object
      */
     public Path getPath() {
@@ -191,7 +197,7 @@ public class Storage {
     }
 
     /**
-     * Write a sentence to the file in hard disk
+     * Write a line to the file in hard disk.
      * @param sentence sentence that write to the file
      * @param path path that the file located
      * @param appendMode true: append, false: overwrite the file

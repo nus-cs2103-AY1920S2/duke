@@ -6,13 +6,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * <h1>Deadline Class</h1>
+ * A subclass of Task class. Record the description and due date of the deadline task.
+ *
+ * @author  Eng Xuan En
+ */
 public class Deadline extends Task {
     DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
     DateTimeFormatter storeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
-     * Constructor for duke.task.Deadline
-     * @param description description of duke.task.Deadline
+     * Class constructor for Deadline.
+     * @param description description of Deadline
      */
     public Deadline(String description, String due) throws DukeException{
         super(description);
@@ -25,7 +31,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get period
+     * Get period in "yyyy-mm-dd" format.
      * @return date in "yyyy-mm-dd"
      */
     @Override
@@ -33,6 +39,10 @@ public class Deadline extends Task {
         return period.format(storeFormatter);
     }
 
+    /**
+     * Get string in [D][tick or cross] {description of the task} (by: {due date of the task}) format.
+     * @return String in certain format
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + period.format(outputFormatter) + ")";

@@ -8,8 +8,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+/**
+ * <h1>UiTest Class</h1>
+ * Test for the Ui class
+ *
+ * @author  Eng Xuan En
+ */
 public class UiTest {
     OutputStream os;
+
+    /**
+     * Initialise before every test. Set the output to os.
+     */
     @BeforeEach
     public void init() {
         os = new ByteArrayOutputStream();
@@ -17,13 +27,18 @@ public class UiTest {
         System.setOut(ps);
     }
 
+    /**
+     * Reset the output to System.out after every test.
+     */
     @AfterEach
     public void cleanUp(){
         PrintStream originalOut = System.out;
         System.setOut(originalOut);
     }
 
-
+    /**
+     * Test if the greet method print out the expected message or not.
+     */
     @Test
     public void greetMethod_ShouldProduceExpectedMessage() {
         Ui ui = new Ui();
@@ -40,8 +55,11 @@ public class UiTest {
         Assertions.assertEquals(expected, os.toString());
     }
 
+    /**
+     * Test if the method, replyDone, give the correct output to the user or not.
+     */
     @Test
-    public void deleteTask_ShouldGiveTheCorrectOutput() {
+    public void replyDone_ShouldGiveTheCorrectOutput() {
         Ui ui = new Ui();
         Task task = new Todo("borrow book");
         String expected = "    ____________________________________________________________\n"

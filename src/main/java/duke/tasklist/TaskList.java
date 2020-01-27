@@ -6,26 +6,32 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>TaskList Class</h1>
+ * Records the tasks input by user.
+ *
+ * @author  Eng Xuan En
+ */
 public class TaskList {
     protected List<Task> records;
 
     /**
-     * Constructor of TaskList
+     * Class constructor of TaskList.
      */
     public TaskList() {
         records = new ArrayList<>();
     }
 
     /**
-     * Constructor of TaskList
-     * @param tasks tasks to be added into records
+     * Constructor of TaskList which takes in List of Tasks.
+     * @param tasks tasks to be added into listing
      */
     public TaskList(List<Task> tasks) {
         records = tasks;
     }
 
     /**
-     * Add task into database
+     * Add task into listing.
      * @param task task to be added
      */
     public void addTask(Task task) {
@@ -33,8 +39,8 @@ public class TaskList {
     }
 
     /**
-     * Set the task as Done
-     * @param num index where the task at
+     * Set the task as Done.
+     * @param num index where the task located at
      * @throws DukeException when no task found in that index
      */
     public void markDone(int num) throws DukeException{
@@ -48,7 +54,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at the index
+     * Delete the task at the index.
      * @param num index where the task located at
      * @return task that being deleted
      * @throws DukeException when no task found in that index
@@ -65,15 +71,15 @@ public class TaskList {
     }
 
     /**
-     * Get the listing in database
-     * @return listing in database
+     * Get the listing in listing.
+     * @return listing in TaskList
      */
     public List<Task> getListing() {
         return records;
     }
 
     /**
-     * Get Task at specific index
+     * Get task at specific index.
      * @param num index the task locate at
      * @return Task at the index
      */
@@ -82,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Get the total amount of task in record
+     * Get the total amount of task in record.
      * @return the amount of task in record
      */
     public int getAmountOfTask() {

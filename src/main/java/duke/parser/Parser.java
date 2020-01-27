@@ -14,8 +14,21 @@ import duke.command.TodoCommand;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * <h1>Parser Class</h1>
+ * This class process the data in String format and give back a Command depending on the
+ * data processed.
+ *
+ * @author  Eng Xuan En
+ */
 public class Parser {
+
+    /**
+     * Process the data and return a command depending on the data processed.
+     * @param input String input to be processed
+     * @return Command to be executed
+     * @throws DukeException throws when the invalid input occurs
+     */
     public static Command parse(String input) throws DukeException {
         List<String> data = processUserInput(input);
         switch(CommandType.valueOf(data.get(0).toUpperCase())) {
@@ -38,6 +51,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Process the user input and store the relevant data into List of Strings and return it back.
+     * @param userInput String input to be processed
+     * @return List of Strings which relevant data required for the command
+     * @throws DukeException throws when invalid String input format
+     */
     public static List<String> processUserInput(String userInput) throws DukeException {
         List<String> result = new ArrayList<>();
         if (!userInput.equals(CommandType.BYE.getCommand())) {
@@ -59,6 +78,16 @@ public class Parser {
     }
 
 
+    /**
+     * Process the string input and store the data into their respective index.
+     *          Index           Info
+     *           0              Command type
+     *           1              Description of the task
+     *           2              Due date of deadline task / Duration of the event task
+     * @param data String input to be processed
+     * @return info which is store in List of Strings for the relevant task
+     * @throws DukeException throws when input is in invalid String format
+     */
     public static List<String> addTask(String data) throws DukeException {
         int indexForSeparator;
         List<String> result = new ArrayList<>();
