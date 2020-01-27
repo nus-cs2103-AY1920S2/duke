@@ -1,10 +1,27 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
+    protected LocalTime byTime;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException{
         super(description);
-        this.by = by;
+        try {
+            String[] temp = by.split(" ");
+            this.by = LocalDate.parse(temp[0]);
+            if (temp.length == 2) {
+                this.byTime = LocalTime.parse(temp[1]);
+            } else {
+                this.byTime = null;
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!!! Format is yyyy-mm-dd HH:mm. Time is optional.");
+        }
     }
 
     @Override
@@ -14,6 +31,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[MMM d yyyy][h:mma]");
+        return "[D]" + super.toString() + " (by: " +  by.format(formatter) +
+                (byTime != null ? " " + byTime.format(formatter) : "") + ")";
     }
 }
