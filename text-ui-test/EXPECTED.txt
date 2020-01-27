@@ -20,12 +20,12 @@ Hello from
     ----------------------------------------------------------
     ----------------------------------------------------------
      Got it. I've added this task:
-      [D][N] return book (by: June 6th)
+      [D][N] return book (by: Jun 6 2020)
      Now you have 2 tasks in the list.
     ----------------------------------------------------------
     ----------------------------------------------------------
      Got it. I've added this task:
-      [E][N] project meeting (at: Aug 7th 1-6pm)
+      [E][N] project meeting (at: Aug 7 2020 1:00PM)
      Now you have 3 tasks in the list.
     ----------------------------------------------------------
     ----------------------------------------------------------
@@ -45,25 +45,21 @@ Hello from
     ----------------------------------------------------------
      Here are the tasks in your list:
      1. [T][Y] read book
-     2. [D][N] return book (by: June 6th)
-     3. [E][N] project meeting (at: Aug 7th 1-6pm)
+     2. [D][N] return book (by: Jun 6 2020)
+     3. [E][N] project meeting (at: Aug 7 2020 1:00PM)
      4. [T][Y] join sports club
      5. [T][N] borrow book
     ----------------------------------------------------------
     ----------------------------------------------------------
+     OOPS!!! Format is yyyy-mm-dd HH:mm. Time is optional.
+    ----------------------------------------------------------
+    ----------------------------------------------------------
      Got it. I've added this task:
-      [D][N] return book (by: Monday)
+      [E][N] project meeting (at: Jan 28 2020 2:00PM)
      Now you have 6 tasks in the list.
     ----------------------------------------------------------
     ----------------------------------------------------------
-     Got it. I've added this task:
-      [E][N] project meeting (at: Tues 2-4pm)
-     Now you have 7 tasks in the list.
-    ----------------------------------------------------------
-    ----------------------------------------------------------
-     Got it. I've added this task:
-      [D][N] do homework (by: no idea :-p)
-     Now you have 8 tasks in the list.
+     OOPS!!! Index is out of bounds.
     ----------------------------------------------------------
     ----------------------------------------------------------
      Bye. Hope to see you again soon!
