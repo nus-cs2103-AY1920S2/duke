@@ -191,6 +191,11 @@ public class Ui {
         dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
     }
 
+    /**
+     * Formats and prints the string input.
+     *
+     * @param line  Line to print.
+     */
     private void dukeSays(String line) {
         if (this.sayFirst) {
             System.out.print("Duke: ");
