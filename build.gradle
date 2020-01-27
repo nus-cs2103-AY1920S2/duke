@@ -2,11 +2,19 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 checkstyle {
     project.ext.checkstyleVersion = '8.28'
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }
 
 dependencies {
