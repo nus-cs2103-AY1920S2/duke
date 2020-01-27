@@ -39,7 +39,12 @@ public class Duke {
         String s = "";
         FileWriter fw = new FileWriter("data\\duke.txt", true);
         for (int i = start; i < newList.size(); i++) {
-            s += System.lineSeparator() + newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription() + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate();
+            if ((newList.get(i).getType()).equals("T")) {
+                s += System.lineSeparator() + newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription() + newList.get(i).getWord() + " " + newList.get(i).getDate();
+            }
+            else {
+                s += System.lineSeparator() + newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription() + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate()+ " " +newList.get(i).getTime();
+            }
             if (i != newList.size()-1) {
                 s = s + System.lineSeparator();
             }
