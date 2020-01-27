@@ -59,4 +59,28 @@ class Ui {
     String readCommand() {
         return SC.nextLine();
     }
+
+    void printDoneMessage(TaskList tasks, Task selectedTask) {
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Nice! I've marked this task as done: ");
+        outputStreamBuffer.add("  " + selectedTask);
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+        print(outputStreamBuffer);
+    }
+
+    void printDeleteMessage(TaskList tasks, Task selectedTask) {
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Noted. I've removed this task: ");
+        outputStreamBuffer.add("  " + selectedTask);
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+        print(outputStreamBuffer);
+    }
+
+    void printAddMessage(TaskList tasks, Task newTask) {
+        List<String> outputStreamBuffer = new ArrayList<>();
+        outputStreamBuffer.add("Got it. I've added this task: ");
+        outputStreamBuffer.add("  " + newTask);
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+        print(outputStreamBuffer);
+    }
 }

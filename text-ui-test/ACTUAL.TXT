@@ -38,10 +38,12 @@
     |------------------------------------------------------------|
     |  Nice! I've marked this task as done:                      |
     |    [T][O] borrow book                                      |
+    |  Now you have 8 tasks in the list.                         |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  Nice! I've marked this task as done:                      |
     |    [E][O] project meeting (at: Feb 3 2001)                 |
+    |  Now you have 8 tasks in the list.                         |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  OOPS!!! I'm sorry, but I don't know what that means :-(   |
