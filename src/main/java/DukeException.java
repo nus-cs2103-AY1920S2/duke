@@ -1,8 +1,8 @@
 public class DukeException extends Exception {
 
     protected String description;
-    private static final String indent = "    ";
-    private static final String horLine = "___________________________" +
+    private static final String INDENT = "    ";
+    private static final String HOR_LINE = "___________________________" +
             "_________________________________";
 
     public DukeException(String e) {
@@ -33,8 +33,8 @@ public class DukeException extends Exception {
                 break;
         }
 
-        System.out.println(indent + horLine);
-        System.out.println(indent + reply);
-        System.out.println(indent + horLine);
+        System.out.println(INDENT + HOR_LINE);
+        System.out.println(INDENT + reply);
+        System.out.println(INDENT + HOR_LINE);
     }
 }
