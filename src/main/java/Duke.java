@@ -1,5 +1,7 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,14 +32,42 @@ public class Duke {
                         break;
 
                     } else if (descriptionTokens[0].toLowerCase().equals("list")) {
-                        if (taskList.size() == 0) {
-                            throw new EmptyListAelitaException();
+                        //List all task on the specified date
+                        if (descriptionTokens.length == 2) {
+                            //The command consist of 2 parts: the command and the date
+                            try {
+                                LocalDate date = LocalDate.parse(descriptionTokens[1]);
+                                boolean hasTask = false;
+                                for (int i = 0; i < taskList.size(); i++) {
+                                    if (taskList.get(i) instanceof Deadline && ((Deadline) taskList.get(i)).by.equals(date)) {
+                                        if (!hasTask) {
+                                            System.out.println("> Here's your list:");
+                                        }
+                                        System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                                        hasTask = true;
+                                    } else if (taskList.get(i) instanceof Event && ((Event) taskList.get(i)).date.equals(date)) {
+                                        if (!hasTask) {
+                                            System.out.println("> Here's your list:");
+                                        }
+                                        System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                                        hasTask = true;
+                                    }
+                                }
+                                if (!hasTask) {
+                                    System.out.println("> You have nothing to do on that day.");
+                                }
+                            } catch (DateTimeParseException e) {
+                                System.out.println("> Sorry. I only recognize date in the format YYYY-MM-DD");
+                            }
+                        } else {
+                            if (taskList.size() == 0) {
+                                throw new EmptyListAelitaException();
+                            }
+                            System.out.println("> Here's your list:");
+                            for (int i = 0; i < taskList.size(); i++) {
+                                System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                            }
                         }
-                        System.out.println("> Here's your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.println("  " + (i + 1) + "." + taskList.get(i));
-                        }
-
                     } else if (descriptionTokens[0].toLowerCase().equals("done")) {
                         if (descriptionTokens.length < 2) {
                             throw new InsufficientArgumentAelitaException("done");
@@ -115,35 +145,36 @@ public class Duke {
 
                     //Check what type of task
                     if (descriptionTokens[0].toLowerCase().equals("deadline")) {
-
-                        taskList.add(new Deadline(description.toString(), input[1].substring(3)));
-                        System.out.println("> I've got your back. Adding the new task:");
-                        System.out.println("  " + taskList.get(taskList.size() - 1).toString());
-                        System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                        try {
+                            LocalDate date = LocalDate.parse(input[1].substring(3));
+                            taskList.add(new Deadline(description.toString(), date));
+                            System.out.println("> I've got your back. Adding the new task:");
+                            System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                            System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                        } catch (DateTimeParseException e) {
+                            System.out.println("> Sorry. I only recognize date in the format YYYY-MM-DD");
+                        }
 
                     } else if (descriptionTokens[0].toLowerCase().equals("event")) {
 
-                        String[] endTokens = input[1].split("-");  //Get the end timing
-                        if (endTokens.length == 1) {
-                            throw new InsufficientArgumentAelitaException("end time");
-                        }
-                        String[] frontTokens = endTokens[0].split(" "); //Seperate start time from date
-                        if (frontTokens.length < 3) {
+                        String[] dateTime = input[1].split(" ");  //Get the end timing
+                        if (dateTime.length < 3) {
                             throw new InsufficientArgumentAelitaException("date-time");
                         }
-                        //Concat the date into one string
-                        StringBuilder date = new StringBuilder(frontTokens[1]);
-
-                        for (int i = 2; i < frontTokens.length - 1; i++) {
-                            date.append(" ");
-                            date.append(frontTokens[i]);
+                        String[] splitTime = dateTime[2].split("-"); //Seperate start time and end time
+                        if (splitTime.length < 2) {
+                            throw new InsufficientArgumentAelitaException("end time");
                         }
 
-                        taskList.add(new Event(description.toString(), date.toString(), frontTokens[frontTokens.length - 1],
-                                endTokens[1]));
-                        System.out.println("> I've got your back. Adding the new task:");
-                        System.out.println("  " + taskList.get(taskList.size() - 1).toString());
-                        System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                        try {
+                            LocalDate date = LocalDate.parse(dateTime[1]);
+                            taskList.add(new Event(description.toString(), date, splitTime[0], splitTime[1]));
+                            System.out.println("> I've got your back. Adding the new task:");
+                            System.out.println("  " + taskList.get(taskList.size() - 1).toString());
+                            System.out.println("  Now you've " + Task.getTotalTaskCount() + " task(s) in your list");
+                        } catch (DateTimeParseException e) {
+                            System.out.println("> Sorry. I only recognize date in the format YYYY-MM-DD");
+                        }
 
                     } else {
                         throw new InvalidCommandAelitaException();
