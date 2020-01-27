@@ -17,7 +17,7 @@ public class Akshay {
         System.out.println(line);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         say("Hello I am [AKSHAY]!\nHow may I help you?");
         ArrayList<Task> arr = new ArrayList<>(100);
         Scanner sc =  new Scanner(System.in);
@@ -83,7 +83,6 @@ public class Akshay {
         }
         say("Bye! Hope to see you again!");
     }
-}
 
     public static void save(ArrayList<Task> data) throws IOException {
         StringBuilder s = new StringBuilder();
