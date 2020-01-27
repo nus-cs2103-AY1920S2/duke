@@ -4,39 +4,57 @@ public class Task {
 
     protected String taskDescription;
     protected String date;
-    protected boolean isDone;
+    protected status isDone;
 
     public enum Types {
-        ToDo, Deadline, Event
+        ToDo, Deadline, Event;
     }
 
     public enum status {
-        Y, N
+        Y, N;
     }
 
     public Task(String date, String taskDescription) {
 
         this.taskDescription = taskDescription;
         this.date = date;
-        this.isDone = false;
+        this.isDone = status.N;
 
     }
 
-    public void changeStatus(boolean newStatus) {
+    public void changeStatus(status newStatus) {
+
         isDone = newStatus;
+
     }
 
     public String getDate() {
+
         return date;
+
+    }
+
+    public status getStatus() {
+
+        return isDone;
+
     }
 
     public String getTaskDescription() {
+
         return taskDescription;
+
+    }
+
+    public Task.Types getType() {
+        return this.getType();
     }
 
 
     @Override
     public String toString() {
+
         return this.toString();
+
     }
 }

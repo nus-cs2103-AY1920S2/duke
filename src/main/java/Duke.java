@@ -27,13 +27,15 @@ public class Duke {
             String[] taskDescriptionArr = null;
             String date = null;
             Parser parser = new Parser();
-            TaskManagement manager = new TaskManagement();
+            TaskManagement manager = new TaskManagement("../../../DataFile.txt");
             ErrorHandler handler = new ErrorHandler();
+
+            manager.loadFile();
 
             while (true) {
 
                 input = br.readLine();
-                taskDescriptionArr = parser.parseInput(input);
+                taskDescriptionArr = parser.parseUserInput(input);
 
                 if(taskDescriptionArr[1].equals("EmptyDescription") || taskDescriptionArr[1].equals("EmptyDate")
                         || taskDescriptionArr[0].equals("MissingTaskNumber")) {
@@ -93,6 +95,7 @@ public class Duke {
 
                     System.out.println(header);
                     System.out.println(manager.deleteTask(Integer.parseInt(taskDescriptionArr[1])));
+                    System.out.println(manager.reportTotal());
                     System.out.println(footer);
 
                 } else {
