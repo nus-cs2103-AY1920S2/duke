@@ -1,8 +1,10 @@
 import java.util.*;
+import java.io.*;
 
 public class Duke {
     ArrayList<Task> list;
     int latest_index = 0;
+    String fileName = "../../../duke_save.txt";
 
 
     public void printList() {
@@ -17,11 +19,97 @@ public class Duke {
     }
 
 
-    public void run() {
+
+    public void readFile() throws Exception {
+
+            try {
+                FileReader fr = new FileReader(fileName);
+            } catch (FileNotFoundException e) {
+                File file = new File(fileName);
+                file.createNewFile();
+            }
+            FileReader fr = new FileReader(fileName);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                processLines(line);
+            }
+
+    }
+
+    public void processLines(String line) {
+
+        int time_start_index = 0;
+        int desc_end_index = 0;
+        String desc;
+        String time;
+        String new_line = line.substring(7);
+
+        if (line.charAt(1) == 'E') {
+            boolean done = line.charAt(4) == 'N' ? false : true;
+            for (int i = 7; i < line.length() - 5; i++) {
+                if (line.substring(i, i + 5).equals("(at: ")) {
+
+                    time_start_index = i + 4;
+                    desc_end_index = i - 1;
+                    break;
+                }
+            }
+
+            desc = line.substring(7, desc_end_index);
+            time = line.substring(time_start_index);
+            time = time.substring(0, time.length() - 1);
+
+            Event event = new Event(desc, time);
+            event.isDone = done;
+            list.add(event);
+            latest_index++;
+
+        } else if (line.charAt(1) == 'D') {
+            boolean done = line.charAt(4) == 'N' ? false : true;
+
+            for (int i = 7; i < line.length() - 5; i++) {
+                if (line.substring(i, i + 5).equals("(by: ")) {
+
+                    time_start_index = i + 4;
+                    desc_end_index = i - 1;
+                    break;
+                }
+            }
+
+            desc = line.substring(7, desc_end_index);
+            time = line.substring(time_start_index);
+            time = time.substring(0, time.length() - 1);
+            Deadline deadline = new Deadline(desc, time);
+            deadline.isDone = done;
+            list.add(deadline);
+            latest_index++;
+
+
+        } else if (line.charAt(1) == 'T'){
+            boolean done = line.charAt(4) == 'N' ? false : true;
+            desc = new_line;
+
+            Todo todo = new Todo(desc);
+            list.add(todo);
+            todo.isDone = done;
+            latest_index++;
+
+        } else {
+            System.out.println("Weird thing found in text file...");
+        }
+    }
+
+
+    public void run() throws Exception {
 
         System.out.println("Hello ! I'm Ashley Bot\nOi What u want\n");
 
         list = new ArrayList<>();
+        readFile();
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
@@ -34,6 +122,10 @@ public class Duke {
             System.out.println("--------------------------------------------------------------");
             if (str.equals("bye")) {
                 System.out.println("Bye! Hope to see you again soon!");
+                for (Task t : list) {
+                    bw.write(t.toString() + "\n");
+                }
+                bw.close();
                 return;
 
             } else if (str.equals("list")) {
@@ -58,6 +150,10 @@ public class Duke {
                 System.out.println("OOPs Idk what that means :/\n Try 'todo', 'event' or 'deadline' commands instead!");
 
             }
+
+
+
+
             System.out.println("--------------------------------------------------------------\n\n");
         }
     }
