@@ -6,6 +6,8 @@ public class EmptyDescriptionError extends Exceptions {
 
     @Override
     public String errorMessage() {
-      return "\nOPPS! The description of a " + super.getType() + " cannot be empty";
+
+        return "\nOPPS! The description of a " + super.getType() + " cannot be empty";
+
     }
 }
