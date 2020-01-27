@@ -88,12 +88,6 @@ public class Duke {
         String type = splitInput[0];
         boolean isDone = splitInput[1].equals(Task.TRUE_SYMBOL);
         String taskDescription = splitInput[2];
-//        for (String s : splitInput) {
-//            print(""+s.length());
-//            print(s);
-//        }
-//        print(" ");
-//        print(taskDescription);
         Task toReturn = null;
 
         if (type.equals(Todo.TYPE_SYMBOL)) {
