@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Duke {
     public static ArrayList<Task> list=new ArrayList<Task>(100);
@@ -27,12 +30,14 @@ public class Duke {
         int loc_of_slash=sentence.indexOf("/");
         String description=sentence.substring(loc_of_space+1,loc_of_slash-1);
         String time=sentence.substring(loc_of_slash+4);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(time, format);
         Task obj;
         if(type.equals("deadline")) {
-            obj = new Deadline(done,description, time);
+            obj = new Deadline(description, dateTime,done);
         }
         else{
-            obj=new Event(done,description,time);
+            obj=new Event(done,description,dateTime);
         }
         Add add_object=new Add();
         add_object.addToList(saved,obj);

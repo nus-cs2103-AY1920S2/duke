@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Save {
@@ -77,15 +78,16 @@ public class Save {
            for(int i=0;i<Duke.list.size();i++){
 
                Task ob=Duke.list.get(i);
-               switch(ob.getType()){
+               DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+               switch(ob.getType()) {
                    case "deadline":
-                       s=s+"D|"+ob.getDone()+"|"+ob.getTaskName()+"|"+((Deadline)ob).getBy()+"\n";
+                       s=s+"D|"+ob.getDone()+"|"+ob.getTaskName()+"|"+((Deadline)ob).getBy().format(format)+"\n";
                        break;
                    case "todo":
                        s=s+"T|"+ob.getDone()+"|"+ob.getTaskName()+"\n";
                        break;
                    case "event":
-                       s=s+"E|"+ob.getDone()+"|"+ob.getTaskName()+"|"+((Event)ob).getAt()+"\n";
+                       s=s+"E|"+ob.getDone()+"|"+ob.getTaskName()+"|"+((Event)ob).getAt().format(format) +"\n";
                        break;
                    default:
                }

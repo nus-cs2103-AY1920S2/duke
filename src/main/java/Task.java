@@ -2,7 +2,12 @@ public class Task {
     private int done;
     private String task_name;
     private String type;
+
     Task() {
+    }
+
+    Task(String task_name) {
+
     }
 
     Task(String type, int done, String task_name)
