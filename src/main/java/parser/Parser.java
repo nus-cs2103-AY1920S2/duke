@@ -1,11 +1,12 @@
 package parser;
 import java.time.LocalDate;
 
-import command.Command;
 import command.AddCommand;
 import command.ByeCommand;
+import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
+import command.FindCommand;
 import command.ListCommand;
 
 import dukeexception.DukeException;
@@ -63,6 +64,9 @@ public class Parser {
         case "done":
             int doneTaskNum = Integer.parseInt(commandSplit[1]);
             return new DoneCommand(doneTaskNum);
+        case "find":
+            String keyword = commandSplit[1];
+            return new FindCommand(keyword);
         case "bye":
             return new ByeCommand();
         default:

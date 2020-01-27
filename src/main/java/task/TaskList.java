@@ -1,4 +1,5 @@
 package task;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 /**
  * Represents a task list. A <code>TaskList</code> object corresponds to a task list e.g., <code>ArrayList<Task>
@@ -38,6 +39,20 @@ public class TaskList {
      */
     public void delete(int taskNum){
         tasks.remove(taskNum);
+    }
+    /**
+     * Returns the task list that contains the provided keyword.
+     * @param keyword The keyword.
+     * @return The list of tasks that has the keyword.
+     */
+    public TaskList findTasks(String keyword){
+        ArrayList<Task> taskList = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.description.contains(keyword)){
+                taskList.add(task);
+            }
+        }
+        return new TaskList(taskList);
     }
     /**
      * Returns the task required.
