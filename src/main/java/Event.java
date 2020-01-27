@@ -10,4 +10,9 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (by: %s)", super.toString(), this.at);
     }
+
+    @Override
+    protected String getFileFormattedLine() {
+        return String.format("E|%s|%s|%s", super.isDone ? "1" : "0", this.description, this.at);
+    }
 }

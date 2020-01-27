@@ -1,10 +1,12 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String DATAFILE = "data/file.txt";
 
     public static void main(String[] args) {
-        printGreeting();
         runDuke();
     }
 
@@ -21,6 +23,15 @@ public class Duke {
     }
 
     public static void runDuke() {
+        try {
+            loadSavedTasksFromFile();
+        } catch (IOException e) {
+            System.out.println("Error: Unable to create or read saved tasks file.");
+            return;
+        }
+
+        printGreeting();
+        
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -40,16 +51,31 @@ public class Duke {
 
         System.out.println("\tHave a nice day!");
     }
-
+    
+    public static void loadSavedTasksFromFile() throws IOException {
+        File file = new File(DATAFILE);
+        
+        if (!file.createNewFile()) {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                Task.loadInTaskFromFileLine(line);
+            }
+            sc.close();
+        }
+    }
+    
     public static void processInstruction(String input) throws InvalidInstructionException {
         String command = extractCommand(input);
-        
-        if (command.equals("list")) {
+
+        switch (command) {
+        case "list":
             Task.printTasks();
-        } else if (command.equals("done")) {
+            break;
+        case "done":
             try {
                 int doneTaskNum = Integer.parseInt(extractFirstParam(input));
-                
+
                 if (doneTaskNum <= 0 || doneTaskNum > Task.getTotalNumOfTasks()) {
                     throw new InvalidInstructionException(
                             String.format("Task #%d does not exist", doneTaskNum));
@@ -59,24 +85,30 @@ public class Duke {
             } catch (NumberFormatException e) {
                 throw new InvalidInstructionException("Task number given is not an integer");
             }
-        } else if (command.equals("todo")) {
+            break;
+        case "todo": {
             String description = extractDescription(input);
             Task todo = new Todo(description);
-
             Task.addTask(todo);
-        } else if (command.equals("deadline")) {
+            break;
+        }
+        case "deadline": {
             String description = extractDescription(input);
             String by = extractTime(input);
 
             Task deadline = new Deadline(description, by);
             Task.addTask(deadline);
-        } else if (command.equals("event")) {
+            break;
+        }
+        case "event": {
             String description = extractDescription(input);
             String at = extractTime(input);
 
             Task event = new Event(description, at);
             Task.addTask(event);
-        } else if (command.equals("delete")) {
+            break;
+        }
+        case "delete":
             try {
                 int delTaskNum = Integer.parseInt(extractFirstParam(input));
 
@@ -89,7 +121,8 @@ public class Duke {
             } catch (NumberFormatException e) {
                 throw new InvalidInstructionException("Task number given is not an integer");
             }
-        } else {
+            break;
+        default:
             throw new InvalidInstructionException(
                     String.format("Command \"%s\" is not recognized", command));
         }
