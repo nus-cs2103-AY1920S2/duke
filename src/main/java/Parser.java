@@ -3,18 +3,37 @@ package main.java;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * Parser class that helps to make sense of the user commands.
+ * A parser contains a scanner that helps it read commands from the users,
+ * and understand the command that the user has input.
+ */
 public class Parser {
 
     protected Scanner sc;
 
+    /**
+     * Constructor for Parser class.
+     * @param sc Scanner to create an instance of the Parser class.
+     */
     public Parser(Scanner sc) {
         this.sc = sc;
     }
 
+    /**
+     * Read the next command that the user provides.
+     * @return The next command read.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Parse the command received to see what command type it belongs to.
+     * @param command String which is read from the user input.
+     * @return The key command word that determines the command type.
+     * @throws DukeException If the string does not contain any recognised command types.
+     */
     public String getCommandType(String command) throws DukeException {
         if (command.contains("list")) {
             return "list";
@@ -33,6 +52,13 @@ public class Parser {
         } else throw new DukeException("Invalid command. Please try again.");
     }
 
+    /**
+     * From a deadline command, return the Deadline task which would be created
+     * @param str Deadline command provided by the user.
+     * @return Deadline task that is created from the command.
+     * @throws DukeException If the deadline command does not specify the due date.
+     * @throws ParseException If the deadline date cannot be processed.
+     */
     public Deadline getDeadline(String str) throws DukeException, ParseException {
         String[] splitStr = str.split("/by ");
 
@@ -54,6 +80,13 @@ public class Parser {
 
     }
 
+    /**
+     * From an Event command, return the Event task which would be created
+     * @param str Event command provided by the user.
+     * @return Event task that is created from the command.
+     * @throws DukeException If the Event command does not specify the due date.
+     * @throws ParseException If the Event date cannot be processed.
+     */
     public Event getEvent(String str) throws DukeException, ParseException {
         String[] splitStr = str.split("/at ");
 
@@ -74,6 +107,12 @@ public class Parser {
         return new Event(description, timing);
     }
 
+    /**
+     * From a ToDo command, return the ToDo task which would be created.
+     * @param str ToDo command
+     * @return ToDo task that is created from the command.
+     * @throws DukeException If the ToDo command does not provide a description.
+     */
     public ToDo getToDo(String str) throws DukeException {
         String[] splitStr = str.split("todo ");
 
@@ -85,6 +124,11 @@ public class Parser {
         return new ToDo(description);
     }
 
+    /**
+     * Method to return the task number, based on array (zero-based) indexing.
+     * @param command User provided command.
+     * @return Index of task number based on zero-based indexing.
+     */
     public int getTaskNo(String command) {
         String[] str = command.split(" ");
         return (Integer.parseInt(str[1]) - 1);

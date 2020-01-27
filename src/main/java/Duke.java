@@ -6,19 +6,29 @@ import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Main class that drives the code to run the Duke bot.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke class constructor that creates a new instance of a Duke bot.
+     * @param filePath Path of file for instance of Storage class to be created.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.readFile());
     }
 
-    public void run() throws ParseException, DukeException, IOException {
+    /**
+     * Main method that drives the Duke bot.
+     */
+    public void run() {
         ui.printWelcome();
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(sc);
@@ -54,7 +64,7 @@ public class Duke {
                         tasks.addTask(deadline);
                         storage.saveFile(tasks.getTaskList());
                         ui.printAdd(deadline, tasks.getSize());
-                    } catch (DukeException e) {
+                    } catch (DukeException | ParseException e) {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
@@ -64,7 +74,7 @@ public class Duke {
                         tasks.addTask(event);
                         storage.saveFile(tasks.getTaskList());
                         ui.printAdd(event, tasks.getSize());
-                    } catch (DukeException e) {
+                    } catch (DukeException | ParseException e) {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
@@ -88,7 +98,7 @@ public class Duke {
         ui.printBye();
     }
 
-    public static void main(String[] args) throws ParseException, DukeException, IOException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
