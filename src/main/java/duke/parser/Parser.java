@@ -24,6 +24,8 @@ public class Parser {
             return new DoneCommand(command);
         case "delete":
             return new DeleteCommand(command);
+        case "find":
+            return new FindCommand(command);
         case "todo":
         case "deadline":
         case "event":
