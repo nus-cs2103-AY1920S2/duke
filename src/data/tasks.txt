@@ -1,4 +1,7 @@
-T|✕|sleep
-D|✕|hw|01 Dec. 2019 10:12am
+T|✓|sleep
+D|✓|hw|01 Dec. 2019 10:12am
 E|✓|firework|01 Dec. 2019 10:30am to 01 Dec. 2019 11:30am
 T|✕|do hw
+E|✕|prom|12 Dec. 2019 09:30am to 12 Dec. 2019 10:30am
+T|✕|sleep
+D|✕|finishcrying|20 Apr. 2019 12:00pm
