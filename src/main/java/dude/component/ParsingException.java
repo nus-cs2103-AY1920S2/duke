@@ -1,4 +1,4 @@
-package dude;
+package dude.component;
 
 public class ParsingException extends Exception {
     private String[] usageMsgs;

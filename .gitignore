@@ -1,6 +1,9 @@
 # Dude persistence file
 /data/dude.txt
 
+# Dude testing result file
+/text-ui-test/ACTUAL.TXT
+
 # IDEA files
 /.idea/
 /out/
