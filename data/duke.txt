@@ -8,4 +8,4 @@
 [E][N] lunch (at: 13 Feb 2pm)
 [D][N] revise for CS2103 (by: 30-01-2020 0000)
 [D][N] revise for CS3243 (by: 27-01-2020 0910)
-
+[D][N] test bugs (by: 27-01-2020 2000)
