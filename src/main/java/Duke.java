@@ -41,6 +41,9 @@ public class Duke {
                 } else if (command.equalsIgnoreCase("list")) {
                     printList();
                 } else if (command.equalsIgnoreCase("done")) {
+                    if (!isNumeric(inputs[1])) {
+                        throw new InvalidTaskInputException();
+                    }
                     int index = Integer.parseInt(inputs[1]);
                     if (index < 1 || index > tasks.size()) {
                         throw new TaskIndexOutOfBoundsException();
@@ -59,6 +62,18 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
+    }
+
+    private static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int intNum = Integer.parseInt(strNum);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     private static void greet() {
