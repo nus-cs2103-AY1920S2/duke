@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.exception.DukeInvalidDateFormatException;
+
 /*
  * Event
  *

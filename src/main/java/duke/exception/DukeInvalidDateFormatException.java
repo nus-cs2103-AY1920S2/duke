@@ -1,3 +1,5 @@
+package duke.exception;
+
 /*
  * DukeInvalidDateFormatException
  *
@@ -8,6 +10,8 @@
  * 27 Jan 2020
  *
  */
+
+import duke.exception.DukeException;
 
 /**
  * <p>DukeInvalidDateFormatException class extends the DukeException

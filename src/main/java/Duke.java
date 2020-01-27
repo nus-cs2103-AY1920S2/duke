@@ -1,4 +1,12 @@
-import java.io.IOException;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidDateFormatException;
+import duke.exception.DukeInvalidTaskFormatException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Task;
+import duke.util.TaskList;
+
 import java.util.ArrayList;
 
 /*
@@ -71,7 +79,6 @@ public class Duke {
 
     public String processCommand(String commands) {
         try {
-            System.out.println(commands);
             Command command = parser.parse(commands);
             return command.execute(taskList, storage);
         } catch (DukeException exc) {

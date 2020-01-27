@@ -1,3 +1,5 @@
+package duke.util;
+
 /*
  * Todo
  *
@@ -8,6 +10,8 @@
  * 21 Jan 2020
  *
  */
+
+import duke.util.Task;
 
 /**
  * The Todo class extends the Task class and it defines

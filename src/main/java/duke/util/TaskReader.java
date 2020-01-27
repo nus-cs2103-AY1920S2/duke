@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.exception.DukeInvalidDateFormatException;
+import duke.exception.DukeInvalidTaskFormatException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -85,7 +90,7 @@ public class TaskReader {
             Task task;
             String description;
 
-            switch (keyword) {
+            switch(keyword) {
             case TODO:
                 description = line_splitted[2];
                 task = new Todo(description);
