@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 public class DukeList {
     private ArrayList<Task> listOfTasks;
+    private DukeStorage storage;
     int numOfTasks;
 
 
     public DukeList() {
         listOfTasks = new ArrayList<>();
         numOfTasks = 0;
+        storage = new DukeStorage();
     }
 
     /**
@@ -21,6 +23,7 @@ public class DukeList {
         listOfTasks.add(S);
         numOfTasks++;
         System.out.printf("    Now you have %d tasks in the list.\n", numOfTasks);
+        storage.save(this);
     }
 
     public void markTaskAsDone(int taskIndex) throws EmptyListException, InvalidEntryException{
@@ -66,5 +69,9 @@ public class DukeList {
                 System.out.println("    There are " + numOfTasks + " tasks left.");
             }
         }
+    }
+
+    public ArrayList<Task> getListOfTasks() {
+        return this.listOfTasks;
     }
 }
