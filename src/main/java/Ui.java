@@ -1,31 +1,60 @@
+/**
+ * Handles user output.
+ */
 public class Ui {
     static String fill = "----------------------------------------";
     static String indent = "    ";
 
+    /**
+     * Prints output for adding a task into the TaskList
+     * @param task task to be added
+     * @param size current size of TaskList.
+     */
     public void showAddTask(Task task, int size) {
         System.out.println(dukeFormat("Sure I will add this task.\n    " + task + "\n    Now you have " + String.valueOf(size) + " tasks."));
     }
 
+    /**
+     * Prints output for setting a task to be done in the TaskList
+     * @param task task to be set to done
+     */
     public void showDoneTask(Task task) {
         System.out.println(dukeFormat("Sure I will mark this task as done.\n    " + task));
     }
 
+    /**
+     * Prints output for deleting a task from the TaskList
+     * @param task task to be deleted
+     * @param size current size of TaskList.
+     */
     public void showDeleteTask(Task task, int size) {
         System.out.println(dukeFormat("Sure I will delete this task.\n    " + task + "\n    Now you have " + String.valueOf(size) + " tasks."));
     }
 
+    /**
+     * Prints initial greeting.
+     */
     public void showGreeting() {
         System.out.println(dukeFormat("Hello I'm your mum. What can I do for you?"));
     }
 
+    /**
+     * Prints goodbye message.
+     */
     public void showBye() {
         System.out.println(dukeFormat("Bye, have a good day!"));
     }
 
+    /**
+     * Prints error for invalid input.
+     */
     public void showErrInvalidInput() {
         System.err.println(dukeFormat("Please try again, your input is invalid."));
     }
 
+    /**
+     * Prints TaskList.
+     */
     public void showList(TaskList lst) {
         System.out.println(dukeFormatList(lst));
     }
