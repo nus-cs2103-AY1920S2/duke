@@ -126,7 +126,11 @@ public class Duke {
         String[] descriptionSplit = eventArr[0].split(" ");
         String description = "";
         for (int i = 1; i < descriptionSplit.length; i++) {
-            description += " " + descriptionSplit[i];
+            if (i == descriptionSplit.length - 1) {
+                description += descriptionSplit[i];
+            } else {
+                description += descriptionSplit[i] + " ";
+            }
         }
 
         if (description.isEmpty()) {
@@ -148,7 +152,11 @@ public class Duke {
         String[] descriptionSplit = deadlineArr[0].split(" ");
         String description = "";
         for (int i = 1; i < descriptionSplit.length; i++) {
-            description += descriptionSplit[i] + " ";
+            if (i == descriptionSplit.length - 1) {
+                description += descriptionSplit[i];
+            } else {
+                description += descriptionSplit[i] + " ";
+            }
         }
 
         if (description.isEmpty()) {
@@ -234,12 +242,14 @@ public class Duke {
             if (task instanceof Event) {
                 Event e = (Event) task;
                 String doneStr = e.isDone ? "0" : "1";
-                String eventString = "event|" + doneStr + "|" + e.description + "|" + e.at + System.lineSeparator();
+                String eventString = "event|" + doneStr + "|" + e.description + "|" + e.atDate + "|" +
+                        e.time24Hr + System.lineSeparator();
                 stringList += eventString;
             } else if (task instanceof  Deadline) {
                 Deadline d = (Deadline) task;
                 String doneStr = d.isDone ? "0" : "1";
-                String deadlineString = "deadline|" + doneStr + "|" + d.description + "|" + d.by + System.lineSeparator();
+                String deadlineString = "deadline|" + doneStr + "|" + d.description + "|" + d.byDate + "|"
+                        + d.time24Hr + System.lineSeparator();
                 stringList += deadlineString;
             } else if (task instanceof Todo ){
                 Todo t = (Todo) task;
@@ -290,17 +300,19 @@ public class Duke {
                         ml.add(addTodo);
                         break;
                     case "deadline":
-                        String by = taskArr[3];
-                        Deadline addDeadline = new Deadline(description, by, isDone);
+                        String byDate = taskArr[3];
+                        String deadlineTime = taskArr[4];
+                        Deadline addDeadline = new Deadline(description, byDate, deadlineTime, isDone);
                         ml.add(addDeadline);
                         break;
                     case "event":
-                        String at = taskArr[3];
-                        Event addEvent = new Event(description, at, isDone);
+                        String atDate = taskArr[3];
+                        String eventTime = taskArr[4];
+                        Event addEvent = new Event(description, atDate, eventTime, isDone);
                         ml.add(addEvent);
                         break;
                     default:
-                        System.out.println(wrapLine(type + "| Format error! Honk!"));
+                        System.out.println(wrapLine(type + "Format error! Honk!"));
                 }
             }
             return ml;

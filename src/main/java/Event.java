@@ -12,19 +12,21 @@ public class Event extends Task {
         this.time24Hr = time;
     }
 
+    public Event(String description, String date, String time, boolean done) {
+        super(description, done);
+        this.atDate = LocalDate.parse(date);
+        this.time24Hr = time;
+    }
+
     public String formatTime12Hour(String timeString) {
         int time = Integer.parseInt(timeString);
         boolean isAM = time < 1200;
         if (!isAM && time >= 1300) {
             time = time - 1200;
         }
-        time = time / 100;
-        return time + (isAM ? "am" : "pm");
-    }
-
-    public Event(String description, String at, boolean done) {
-        super(description, done);
-        this.at = at;
+        int mins = time % 100;
+        int hour = time / 100;
+        return hour + "." + String.format("%02d", mins) + (isAM ? "am" : "pm");
     }
 
     @Override

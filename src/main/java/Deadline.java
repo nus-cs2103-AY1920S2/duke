@@ -12,20 +12,24 @@ public class Deadline extends Task {
         this.time24Hr = time;
     }
 
+    public Deadline(String description, String date, String time, boolean isDone) {
+        super(description);
+        this.byDate = LocalDate.parse(date);
+        this.time24Hr = time;
+        this.isDone = isDone;
+    }
+
     public String formatTime12Hour(String timeString) {
         int time = Integer.parseInt(timeString);
         boolean isAM = time < 1200;
         if (!isAM && time >= 1300) {
             time = time - 1200;
         }
-        time = time / 100;
-        return time + (isAM ? "am" : "pm");
+        int mins = time % 100;
+        int hour = time / 100;
+        return hour + "." + String.format("%02d", mins) + (isAM ? "am" : "pm");
     }
 
-    public Deadline(String description, String by, boolean done) {
-        super(description, done);
-        this.by = by;
-    }
 
     @Override
     public String toString() {
