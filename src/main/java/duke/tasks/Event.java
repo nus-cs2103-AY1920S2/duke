@@ -22,16 +22,16 @@ public class Event extends Task {
         this.date = Parser.dateParser(date);
     }
 
-    public Event(boolean done, String task, String date) throws BadDateException {
-        super(done, task);
+    public Event(boolean isDone, String task, String date) throws BadDateException {
+        super(isDone, task);
         this.date = Parser.dateParser(date);
     }
 
     @Override
     public String toString() {
-        if (done) return  "[E][✓] " + task + " (at: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
+        if (isDone) return  "[E][✓] " + task + " (at: " +
+                date.format(Parser.DATE_READ_FORMATTER) + ")";
         else return "[E][✗] " + task + " (at: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
+                date.format(Parser.DATE_READ_FORMATTER) + ")";
     }
 }

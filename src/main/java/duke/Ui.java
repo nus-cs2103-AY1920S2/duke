@@ -2,23 +2,23 @@ package duke;
 
 public class Ui {
     private String logo;
-    private String linebreak;
+    private String lineBreak;
 
-    public void introduction() {
-        System.out.println(linebreak);
+    public void getIntroduction() {
+        System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
                 + "\nWhat can I do for you?");
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
     }
 
     public void exit() {
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
     }
 
     public void lineBreak() {
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
     }
 
     public Ui() {
@@ -27,7 +27,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        linebreak = "_____________________________" +
+        lineBreak = "_____________________________" +
                 "_______________________________";
     }
 }

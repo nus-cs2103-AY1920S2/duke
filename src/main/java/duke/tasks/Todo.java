@@ -18,13 +18,13 @@ public class Todo extends Task {
         super(task);
     }
 
-    public Todo(boolean done, String task) {
-        super(done, task);
+    public Todo(boolean isDone, String task) {
+        super(isDone, task);
     }
 
     @Override
     public String toString() {
-        if (done) return  "[T][✓] " + task;
+        if (isDone) return  "[T][✓] " + task;
         else return "[T][✗] " + task;
     }
 }

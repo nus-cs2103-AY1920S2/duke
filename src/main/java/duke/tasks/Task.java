@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public abstract class Task {
     protected String task;
-    protected boolean done;
+    protected boolean isDone;
 
     public abstract TType getType();
 
@@ -16,20 +16,20 @@ public abstract class Task {
         return task;
     }
     public boolean getDone() {
-        return done;
+        return isDone;
     }
     public void setDone(boolean bool) {
-        done = bool;
+        isDone = bool;
     }
 
     public Task (String task) {
         this.task = task;
-        done = false;
+        isDone = false;
     }
 
-    public Task(boolean done, String task) {
+    public Task(boolean isDone, String task) {
         this(task);
-        this.done = done;
+        this.isDone = isDone;
     }
 
 }

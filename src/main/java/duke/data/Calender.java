@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Calender {
-    private HashMap<LocalDate, ArrayList<Task>> hm;
+    private HashMap<LocalDate, ArrayList<Task>> mapOfDates;
 
     public void addDate(Task task) {
-        if (hm.containsKey(task.getDate()))
-                hm.get(task.getDate()).add(task);
+        if (mapOfDates.containsKey(task.getDate()))
+                mapOfDates.get(task.getDate()).add(task);
         else {
-            ArrayList<Task> list = new ArrayList<>();
-            list.add(task);
-            hm.put(task.getDate(), list);
+            ArrayList<Task> tasks = new ArrayList<>();
+            tasks.add(task);
+            mapOfDates.put(task.getDate(), tasks);
         }
     }
 
     public void searchDate(LocalDate date) {
-        if (hm.containsKey(date)) {
-            ArrayList<Task> tasks = hm.get(date);
+        if (mapOfDates.containsKey(date)) {
+            ArrayList<Task> tasks = mapOfDates.get(date);
             for (Task task : tasks) {
                 System.out.println("  " + task);
             }
@@ -29,9 +29,9 @@ public class Calender {
     }
 
     public void removeTask(Task task, LocalDate date) {
-        if (hm.containsKey(date)) {
-            ArrayList<Task> list = hm.get(date);
-            list.remove(task);
+        if (mapOfDates.containsKey(date)) {
+            ArrayList<Task> tasks = mapOfDates.get(date);
+            tasks.remove(task);
         } else {
             System.out.println("Task: " + task
                     + " is not found in the calender");
@@ -39,6 +39,6 @@ public class Calender {
     }
 
     public Calender() {
-        hm = new HashMap<>();
+        mapOfDates = new HashMap<>();
     }
 }

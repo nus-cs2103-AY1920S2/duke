@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    public static DateTimeFormatter DATE_FORMATTER =
+    public static DateTimeFormatter DATE_READ_FORMATTER =
             DateTimeFormatter.ofPattern("dd MMM uuuu");
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MM uu");

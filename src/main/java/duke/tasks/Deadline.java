@@ -22,16 +22,16 @@ public class Deadline extends Task {
         this.date = Parser.dateParser(date);
     }
 
-    public Deadline(boolean done, String task, String date) throws BadDateException {
-        super(done, task);
+    public Deadline(boolean isDone, String task, String date) throws BadDateException {
+        super(isDone, task);
         this.date = Parser.dateParser(date);
     }
 
     @Override
     public String toString() {
-        if (done) return  "[D][✓] " + task + " (by: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
+        if (isDone) return  "[D][✓] " + task + " (by: " +
+                date.format(Parser.DATE_READ_FORMATTER) + ")";
         else return "[D][✗] " + task + " (by: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
+                date.format(Parser.DATE_READ_FORMATTER) + ")";
     }
 }
