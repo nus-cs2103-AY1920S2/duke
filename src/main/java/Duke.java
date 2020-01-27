@@ -1,20 +1,47 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Duke {
     private static List<Task> tasks;
 
-    public Duke() {
+    public Duke(String path) throws IOException, InvalidTaskInputException {
+        File file = new File(path);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
         greet();
         tasks = new ArrayList<>();
+        addFileInputToTasks(br);
     }
 
-    public void runDuke() {
+    private void addFileInputToTasks(BufferedReader br) throws IOException, InvalidTaskInputException {
+        String inputLine;
+        while ((inputLine = br.readLine()) != null) {
+            String[] input = inputLine.split("\\|", 3);
+            String source = "file";
+            String type = input[0].trim();
+            String doneStatus = input[1].trim();
+            String desc = input[2].trim();
+            if (type.equalsIgnoreCase("T")) {
+                addTodo(desc, doneStatus, source);
+            } else if (type.equalsIgnoreCase("D")) {
+                addDeadline(desc, doneStatus, source);
+            } else if (type.equalsIgnoreCase("E")) {
+                addEvent(desc, doneStatus, source);
+            } else {
+                throw new InvalidTaskInputException();
+            }
+        }
+    }
+
+    private void runDuke() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
+                String source = "user";
                 String[] inputs = input.split(" ", 2);
                 String command = inputs[0];
                 if (command.equalsIgnoreCase("bye")) {
@@ -25,19 +52,19 @@ public class Duke {
                         throw new EmptyDescriptionException();
                     }
                     String desc = inputs[1];
-                    addTodo(desc);
+                    addTodo(desc, "N", source);
                 } else if (command.equalsIgnoreCase("deadline")) {
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
                     String desc = inputs[1];
-                    addDeadline(desc);
+                    addDeadline(desc, "N", source);
                 } else if (command.equalsIgnoreCase("event")) {
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
                     String desc = inputs[1];
-                    addEvent(desc);
+                    addEvent(desc, "N", source);
                 } else if (command.equalsIgnoreCase("list")) {
                     printList();
                 } else if (command.equalsIgnoreCase("done")) {
@@ -98,40 +125,61 @@ public class Duke {
         System.out.printf("Now you got %d %s in your list!\n", tasks.size(), taskWord);
     }
 
-    private static void addTodo(String desc) {
+    private static void addTodo(String desc, String doneStatus, String source) {
         Task todo = new Todo(desc);
+        if (doneStatus.equalsIgnoreCase("Y")) {
+            todo.markAsDone();
+        }
         tasks.add(todo);
-        printAddToList();
-        System.out.println(todo.toString());
-        printNumTask();
+
+        if (source.equals("user")) {
+            printAddToList();
+            System.out.println(todo.toString());
+            printNumTask();
+        }
     }
 
-    private static void addDeadline(String desc) throws InvalidTaskInputException {
-        String[] descs = desc.split(" /by ");
+    private static void addDeadline(String desc, String doneStatus, String source) throws InvalidTaskInputException {
+        String[] descs = desc.split(" /by |\\|") ;
         if (descs.length == 1) { // invalid Deadline input format
             throw new InvalidTaskInputException();
         }
-        String deadlineDesc = descs[0];
-        String deadlineTime = descs[1];
+
+        String deadlineDesc = descs[0].trim();
+        String deadlineTime = descs[1].trim();
         Task deadline = new Deadline(deadlineDesc, deadlineTime);
+
+        if (doneStatus.equalsIgnoreCase("Y")) {
+            deadline.markAsDone();
+        }
         tasks.add(deadline);
-        printAddToList();
-        System.out.println(deadline.toString());
-        printNumTask();
+
+        if (source.equals("user")) {
+            printAddToList();
+            System.out.println(deadline.toString());
+            printNumTask();
+        }
     }
 
-    private static void addEvent(String desc) throws InvalidTaskInputException {
-        String[] descs = desc.split(" /at ");
+    private static void addEvent(String desc, String doneStatus, String source) throws InvalidTaskInputException {
+        String[] descs = desc.split(" /at |\\|");
         if (descs.length == 1) { // invalid Event input format
             throw new InvalidTaskInputException();
         }
-        String eventDesc = descs[0];
-        String eventTime = descs[1];
+        String eventDesc = descs[0].trim();
+        String eventTime = descs[1].trim();
         Task event = new Event(eventDesc, eventTime);
+
+        if (doneStatus.equalsIgnoreCase("Y")) {
+            event.markAsDone();
+        }
         tasks.add(event);
-        printAddToList();
-        System.out.println(event.toString());
-        printNumTask();
+
+        if (source.equals("user")) {
+            printAddToList();
+            System.out.println(event.toString());
+            printNumTask();
+        }
     }
 
     private static void printList() {
@@ -164,8 +212,9 @@ public class Duke {
         System.out.println("Okay, I have removed this task for you:");
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
+    public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidCommandException {
+        Duke duke;
+        duke = new Duke("data/duke.txt");
         duke.runDuke();
     }
 }
