@@ -9,6 +9,12 @@ public class Task {
         numOfTasks++;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+        numOfTasks++;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "Y" : "N");
 //        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -25,6 +31,10 @@ public class Task {
         return numOfTasks;
     }
 
+    public String formatToSave() {
+        return " | " + (isDone ? 1 : 0) + " | " + description;
+    }
+    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
