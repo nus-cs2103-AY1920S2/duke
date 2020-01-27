@@ -3,10 +3,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks;
 
-    public static void main(String[] args) {
+    public Duke() {
         greet();
+        tasks = new ArrayList<>();
+    }
+
+    public void runDuke() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
@@ -143,5 +147,10 @@ public class Duke {
 
     private static void printRemoveTask() {
         System.out.println("Okay, I have removed this task for you:");
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.runDuke();
     }
 }
