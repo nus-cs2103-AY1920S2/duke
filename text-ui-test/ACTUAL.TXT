@@ -3,27 +3,37 @@
     |  How may I help you today?                                 |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
+    |  1.[T][O] borrow book                                      |
+    |  2.[D][X] return book (by: Jan 2 2000)                     |
+    |  3.[E][O] project meeting (at: Feb 3 2001)                 |
+    |  4.[D][X] do homework (by: Mar 4 2002)                     |
+    |------------------------------------------------------------|
+    |------------------------------------------------------------|
     |  Got it. I've added this task:                             |
     |    [T][X] borrow book                                      |
-    |  Now you have 1 tasks in the list.                         |
+    |  Now you have 5 tasks in the list.                         |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
-    |  1.[T][X] borrow book                                      |
-    |------------------------------------------------------------|
-    |------------------------------------------------------------|
-    |  Got it. I've added this task:                             |
-    |    [D][X] return book (by: Sunday)                         |
-    |  Now you have 2 tasks in the list.                         |
-    |------------------------------------------------------------|
-    |------------------------------------------------------------|
-    |  Got it. I've added this task:                             |
-    |    [E][X] project meeting (at: Mon 2-4pm)                  |
-    |  Now you have 3 tasks in the list.                         |
+    |  1.[T][O] borrow book                                      |
+    |  2.[D][X] return book (by: Jan 2 2000)                     |
+    |  3.[E][O] project meeting (at: Feb 3 2001)                 |
+    |  4.[D][X] do homework (by: Mar 4 2002)                     |
+    |  5.[T][X] borrow book                                      |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  Got it. I've added this task:                             |
-    |    [D][X] do homework (by: no idea :-p)                    |
-    |  Now you have 4 tasks in the list.                         |
+    |    [D][X] return book (by: Jan 2 2000)                     |
+    |  Now you have 6 tasks in the list.                         |
+    |------------------------------------------------------------|
+    |------------------------------------------------------------|
+    |  Got it. I've added this task:                             |
+    |    [E][X] project meeting (at: Feb 3 2001)                 |
+    |  Now you have 7 tasks in the list.                         |
+    |------------------------------------------------------------|
+    |------------------------------------------------------------|
+    |  Got it. I've added this task:                             |
+    |    [D][X] do homework (by: Mar 4 2002)                     |
+    |  Now you have 8 tasks in the list.                         |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  Nice! I've marked this task as done:                      |
@@ -31,16 +41,20 @@
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  Nice! I've marked this task as done:                      |
-    |    [E][O] project meeting (at: Mon 2-4pm)                  |
+    |    [E][O] project meeting (at: Feb 3 2001)                 |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  OOPS!!! I'm sorry, but I don't know what that means :-(   |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  1.[T][O] borrow book                                      |
-    |  2.[D][X] return book (by: Sunday)                         |
-    |  3.[E][O] project meeting (at: Mon 2-4pm)                  |
-    |  4.[D][X] do homework (by: no idea :-p)                    |
+    |  2.[D][X] return book (by: Jan 2 2000)                     |
+    |  3.[E][O] project meeting (at: Feb 3 2001)                 |
+    |  4.[D][X] do homework (by: Mar 4 2002)                     |
+    |  5.[T][X] borrow book                                      |
+    |  6.[D][X] return book (by: Jan 2 2000)                     |
+    |  7.[E][X] project meeting (at: Feb 3 2001)                 |
+    |  8.[D][X] do homework (by: Mar 4 2002)                     |
     |------------------------------------------------------------|
     |------------------------------------------------------------|
     |  OOPS!!! The description of a task cannot be empty.        |
