@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * Returns the text to be saved into the storage file.
      * @return The text to be saved to storage file.
      */
-    public String toStringTaskstxt(){
+    public String toStringTasks(){
         return "D/" + getStatusIconInBin() + "/" + description + "/" + date.toString() + "\n";
     }
     /**

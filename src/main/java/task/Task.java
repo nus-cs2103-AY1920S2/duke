@@ -59,7 +59,7 @@ public abstract class Task {
      * Returns the text representation of the task.
      * @return The text representation of the task.
      */
-    public abstract String toStringTaskstxt();
+    public abstract String toStringTasks();
     /**
      * Returns the status and the description of the task.
      * @return The status and description of the task.

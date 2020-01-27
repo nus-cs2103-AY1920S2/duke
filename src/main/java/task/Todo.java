@@ -12,7 +12,7 @@ public class Todo extends Task {
      * @return The text representation of the todo task.
      */
     @Override
-    public String toStringTaskstxt(){
+    public String toStringTasks(){
         return "T/" + getStatusIconInBin() + "/" + description + "\n";
     }
     /**
