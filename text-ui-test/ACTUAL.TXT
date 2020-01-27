@@ -21,7 +21,7 @@ Hello from
     ____________________________________________________________
     ____________________________________________________________
     This task has been added successfully:
-      [E][?] project meeting (at: Aug 6th 2-4pm)
+      [E][?] project meeting at: Aug 6th 2-4pm)
     Now you have 3 tasks in the list
     ____________________________________________________________
     ____________________________________________________________
@@ -38,7 +38,7 @@ Hello from
     This is your list of tasks:
     1.[T][?] read book
     2.[D][?] return book (by: June 6th)
-    3.[E][?] project meeting (at: Aug 6th 2-4pm)
+    3.[E][?] project meeting at: Aug 6th 2-4pm)
     4.[T][?] join sports club
     5.[T][?] borrow book
     ____________________________________________________________
@@ -62,7 +62,7 @@ Hello from
     ____________________________________________________________
     ____________________________________________________________
     This task is marked as completed:
-      [E][?] project meeting (at: Aug 6th 2-4pm)
+      [E][?] project meeting at: Aug 6th 2-4pm)
     ____________________________________________________________
     ____________________________________________________________
     This task number does not exist.
