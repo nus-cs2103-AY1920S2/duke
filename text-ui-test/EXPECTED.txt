@@ -1,3 +1,10 @@
+Hello from
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
 
     ________________________________________________________
      Hello! I'm Duke
@@ -14,14 +21,14 @@
 
     ________________________________________________________
      Got it. I've added this task:
-       [D][N] return book (by: June 6th)
+       [D][N] return book (by: Jun 6 2020)
      Now you have 2 tasks in the list.
     ________________________________________________________
 
 
     ________________________________________________________
      Got it. I've added this task:
-       [E][N] project meeting (at: Aug 6th 2-4pm)
+       [E][N] project meeting (at: Aug 6 2020)
      Now you have 3 tasks in the list.
     ________________________________________________________
 
@@ -55,8 +62,8 @@
     ________________________________________________________
      Here are the tasks in your list:
      1. [T][Y] read book
-     2. [D][N] return book (by: June 6th)
-     3. [E][N] project meeting (at: Aug 6th 2-4pm)
+     2. [D][N] return book (by: Jun 6 2020)
+     3. [E][N] project meeting (at: Aug 6 2020)
      4. [T][Y] join sports club
      5. [T][N] borrow book
     ________________________________________________________
@@ -64,14 +71,14 @@
 
     ________________________________________________________
      Got it. I've added this task:
-       [D][N] return book (by: Sunday)
+       [D][N] return book (by: Jan 26 2020)
      Now you have 6 tasks in the list.
     ________________________________________________________
 
 
     ________________________________________________________
      Got it. I've added this task:
-       [E][N] project meeting (at: Mon 2-4pm)
+       [E][N] project meeting (at: Jan 27 2020)
      Now you have 7 tasks in the list.
     ________________________________________________________
 

@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(file);
@@ -48,17 +50,19 @@ public class Storage {
                     tasks.add(new Todo(task[1], Boolean.parseBoolean(task[2])));
                     break;
                 case "deadline":
-                    tasks.add(new Deadline(task[1], Boolean.parseBoolean(task[2]), task[3]));
+                    tasks.add(new Deadline(task[1], Boolean.parseBoolean(task[2]), LocalDate.parse(task[3])));
                     break;
                 case "event":
-                    tasks.add(new Event(task[1], Boolean.parseBoolean(task[2]), task[3]));
+                    tasks.add(new Event(task[1], Boolean.parseBoolean(task[2]), LocalDate.parse(task[3])));
                     break;
                 default:
                     break;
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new DukeException("Loading error");
+        } catch (DateTimeException e) {
+            throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
         }
         return tasks;
     }
