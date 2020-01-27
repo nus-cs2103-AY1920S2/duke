@@ -1,5 +1,7 @@
 package task;
 
+import core.DateTimeUtil;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task{
@@ -17,6 +19,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return super.toString()+" (at: "+time+")";
+        return super.toString()+" (at: "+ DateTimeUtil.standardFormat(time)+")";
     }
 }

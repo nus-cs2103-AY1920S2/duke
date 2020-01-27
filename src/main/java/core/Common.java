@@ -1,36 +1,24 @@
 package core;
 
 import dukexception.DukeException;
-import dukexception.SingletonException;
 import task.Task;
 
 import java.util.ArrayList;
 
 public class Common {
 
-    private static Common common=null;
-
     private Model model;
     private StateHolder stateHolder=null;
     private Storage storage;
 
-    private Common() throws SingletonException, DukeException {
-        storage=Storage.getInstance();
-        model = Model.getInstance();
+    public Common() throws DukeException {
+        storage=new Storage();
+        model = new Model();
         loadData();
     }
 
-    public static Common getInstance() throws SingletonException, DukeException {
-        if(common==null){
-            common=new Common();
-            return common;
-        }
-        throw new SingletonException(ErrorMessage.SINGLETON.ofType("common"));
-    }
-
-
     // todo duplicate updateState() on many method, any way to reduce duplication?
-    public String[] addTask(Task task) throws DukeException {
+    public String[] addTask(Task task) {
         model.addTask(task);
         updateState();
         ArrayList<String> s=new ArrayList<>();

@@ -7,21 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import dukexception.DukeException;
-import dukexception.SingletonException;
+
 
 public class Parser {
-
-    private static Parser parser=null;
-
-    private Parser(){}
-
-    public static Parser getInstance() throws SingletonException {
-        if(parser==null){
-            parser=new Parser();
-            return parser;
-        }
-        throw new SingletonException(ErrorMessage.SINGLETON.ofType("parser"));
-    }
 
     public Command parse(String userInput) throws DukeException {
 

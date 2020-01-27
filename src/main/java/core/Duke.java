@@ -2,9 +2,6 @@ package core;
 
 import command.Command;
 import dukexception.DukeException;
-import dukexception.SingletonException;
-
-//sdf
 
 public class Duke {
 
@@ -15,9 +12,9 @@ public class Duke {
     public Duke(){
         ui=new Ui();
         try {
-            parser = Parser.getInstance();
-            common = Common.getInstance();
-        }catch (SingletonException | DukeException e){
+            parser = new Parser();
+            common = new Common();
+        }catch (DukeException e){
             ui.errorLog(e.getMessage());
         }
     }

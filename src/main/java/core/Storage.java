@@ -1,27 +1,17 @@
 package core;
 
 import dukexception.DukeException;
-import dukexception.SingletonException;
 import dukexception.StorageException;
 
 import java.io.*;
 
 public class Storage {
 
-    private static Storage storage=null;
     private static final String fileName= "duke.txt";
     private File file;
 
-    private Storage(){
+    public Storage(){
         file=new File(fileName);
-    }
-
-    public static Storage getInstance() throws SingletonException{
-        if(storage==null){
-            storage=new Storage();
-            return storage;
-        }
-        throw new SingletonException(ErrorMessage.SINGLETON.ofType("storage"));
     }
 
     public void save(StateHolder stateHolder) throws DukeException {

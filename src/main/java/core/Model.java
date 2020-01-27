@@ -1,27 +1,16 @@
 package core;
 
 import dukexception.DukeException;
-import dukexception.SingletonException;
 import task.Task;
 
 import java.util.ArrayList;
 
 public class Model {
 
-    private static Model model=null;
-
     private ArrayList<Task> taskList;
 
-    private Model(){
+    public Model(){
         taskList =new ArrayList<>();
-    }
-
-    public static Model getInstance() throws SingletonException {
-        if(model==null){
-            model=new Model();
-            return model;
-        }
-        throw new SingletonException(ErrorMessage.SINGLETON.ofType("model"));
     }
 
     public void addTask(Task task){

@@ -21,16 +21,6 @@ public enum DateTimeUtil {
         return time.format(DateTimeFormatter.ofPattern(FORMAT_1.toString()));
     }
 
-    // for help
-    public static String possibleList(){
-        StringBuilder s= new StringBuilder();
-        DateTimeUtil[] types= DateTimeUtil.values();
-        for(DateTimeUtil type:types){
-            s.append(type.toString()).append(". ");
-        }
-        return s.toString();
-    }
-
     @Override
     public String toString() {
         return string;

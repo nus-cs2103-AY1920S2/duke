@@ -1,5 +1,7 @@
 package task;
 
+import core.DateTimeUtil;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task{
@@ -18,6 +20,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return super.toString()+" (by: "+time+")";
+        return super.toString()+" (by: "+ DateTimeUtil.standardFormat(time)+")";
     }
 }
