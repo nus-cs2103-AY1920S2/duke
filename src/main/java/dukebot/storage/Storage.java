@@ -38,7 +38,7 @@ public class Storage {
         try {
             FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-            Task[] taskArr = taskList.toArray(new Task[taskList.size()]);
+            Task[] taskArr = taskList.toArray(new Task[0]);
             writeStream.writeObject(taskArr);
             writeStream.flush();
             writeStream.close();
