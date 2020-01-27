@@ -1,39 +1,36 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task[] dukeList = new Task[100];
-        int counter = 0;
+        ArrayList<Task> dukeList = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        System.out.println("Greetings from\n" + logo);
+        System.out.println("Is that anything that I can do for you?");
 
-        String nxt;
-        nxt = sc.nextLine();
+        String nxt = sc.nextLine();
         String newString;
         String[] splitBySpace;
 
-        while (nxt.equals("bye") == false) {
+        while (!nxt.equals("bye")) {
             newString = "";
             splitBySpace = nxt.split(" ");
             try {
                 //If command is not list
-                if (nxt.equals("list") == false) {
-                    StringTokenizer st = new StringTokenizer(nxt);
-                    String first = st.nextToken();
+                if (!nxt.equals("list")) {
+                    String first = splitBySpace[0];
                     //Command: Set task as done
                     if (first.equals("done")) {
-                        int num = Integer.parseInt(st.nextToken());
-                        dukeList[num - 1].markAsDone();
+                        int num = Integer.parseInt(splitBySpace[1]);
+                        dukeList.get(num-1).markAsDone();
                         System.out.println("The following has been marked as done:");
-                        System.out.println("  " + dukeList[num - 1]);
+                        System.out.println("  " + dukeList.get(num - 1));
                         //Command: deadline
                     } else if (first.equals("deadline")) {
                         if (splitBySpace.length == 1) {
@@ -45,10 +42,9 @@ public class Duke {
                             newString = newString + splitBySpace[splitBySpace.length - 1];
                             String[] splitBySlash = newString.split("/");
                             Task t = new Deadline(splitBySlash[0], splitBySlash[1]);
-                            dukeList[counter] = t;
-                            counter++;
-                            System.out.println("I have added this task: \n  " + dukeList[counter - 1]);
-                            System.out.println("Now you have " + counter + " task(s) in the list.");
+                            dukeList.add(t);
+                            System.out.println("I have added this task: \n  " + dukeList.get(dukeList.size() - 1));
+                            System.out.println("Now you have " + dukeList.size() + " task(s) in the list.");
                         }
                         //Command: event
                     } else if (first.equals("event")) {
@@ -61,12 +57,11 @@ public class Duke {
                             newString = newString + splitBySpace[splitBySpace.length - 1];
                             String[] splitBySlash = newString.split("/");
                             Task t = new Event(splitBySlash[0], splitBySlash[1]);
-                            dukeList[counter] = t;
-                            counter++;
-                            System.out.println("I have added this task: \n  " + dukeList[counter - 1]);
-                            System.out.println("Now you have " + counter + " task(s) in the list.");
+                            dukeList.add(t);
+                            System.out.println("I have added this task: \n  " + dukeList.get(dukeList.size() - 1));
+                            System.out.println("Now you have " + dukeList.size() + " task(s) in the list.");
                         }
-                        //Command is to do task
+                        //Command: to do task
                     } else if (first.equals("todo")) {
                         if (splitBySpace.length == 1) {
                             throw new DukeException("todo");
@@ -76,21 +71,37 @@ public class Duke {
                             }
                             newString = newString + splitBySpace[splitBySpace.length - 1];
                             Task t = new ToDo(newString);
-                            dukeList[counter] = t;
-                            counter++;
-                            System.out.println("I have added this task: \n  " + dukeList[counter - 1]);
-                            System.out.println("Now you have " + counter + " task(s) in the list.");
+                            dukeList.add(t);
+                            System.out.println("I have added this task: \n  " + dukeList.get(dukeList.size() - 1));
+                            System.out.println("Now you have " + dukeList.size() + " task(s) in the list.");
+                        }
+                        //Command: delete
+                    } else if (first.equals("delete")) {
+                        if (splitBySpace.length == 1) {
+                            throw new DukeException("delete");
+                        } else if (splitBySpace.length != 2) {
+                            throw new DukeException("delete argument not found");
+                        } else {
+                            int numToRemove = Integer.parseInt(splitBySpace[1]) - 1;
+                            System.out.println("Noted. I have removed this task:");
+                            System.out.println("  " + dukeList.get(numToRemove));
+                            dukeList.remove(numToRemove);
+                            System.out.println("Now you have " + dukeList.size() + " task(s) in the list.");
                         }
                     } else {
                         throw new DukeException("don't understand");
                     }
                     //Print out the list
                 } else {
-                    for (int i = 0; i < counter; i++) {
-                        System.out.println((i + 1) + "." + dukeList[i]);
+                    if (dukeList.size() == 0) {
+                        System.out.println("The list is empty.");
+                    } else {
+                        for (int i = 0; i < dukeList.size(); i++) {
+                            System.out.println((i + 1) + "." + dukeList.get(i));
+                        }
                     }
                 }
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 System.out.println(e);
             }
 
@@ -98,6 +109,6 @@ public class Duke {
             nxt = sc.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/");
     }
 }
