@@ -7,6 +7,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String format() {
+        return "T " + super.getStatusInNumber() + " " + super.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

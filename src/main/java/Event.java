@@ -19,7 +19,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String format() {
+        return "E " + super.getStatusInNumber() + " " + super.description + " /" + by;
+    }
+
+    @Override
     public String toString() {
+<<<<<<< HEAD
         return "[E]" + super.toString() + "(" + statement + " " + d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+=======
+        return "[E]" + super.toString() + " (" + by + ")";
+>>>>>>> master
     }
 }

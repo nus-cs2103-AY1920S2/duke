@@ -1,15 +1,23 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+=======
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+>>>>>>> master
 
 public class Duke {
     public static ArrayList<Task> dukeList = new ArrayList<>();
+    public static File file = new File("data/duke.txt");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        loadData();
+
         Scanner sc = new Scanner(System.in);
-
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,6 +40,10 @@ public class Duke {
                     String first = splitBySpace[0];
                     //Command: Set task as done
                     if (first.equals("done")) {
+                        if (splitBySpace.length == 1) {
+                            throw new DukeException("done");
+                        }
+
                         int num = Integer.parseInt(splitBySpace[1]);
                         if (Integer.parseInt(splitBySpace[1]) == 0 || num > dukeList.size()) {
                             throw new DukeException("unable to mark done", Integer.parseInt(splitBySpace[1]));
@@ -76,9 +88,9 @@ public class Duke {
 
                             Task t;
                             if (first.equals("deadline")) {
-                                t = new Deadline(splitBySlash[0], splitBySlash[1]);
+                                t = new Deadline(splitBySlash[0].trim(), splitBySlash[1]);
                             } else if (first.equals("event")) {
-                                t = new Event(splitBySlash[0], splitBySlash[1]);
+                                t = new Event(splitBySlash[0].trim(), splitBySlash[1]);
                             } else {
                                 t = new ToDo(newString);
                             }
@@ -106,6 +118,7 @@ public class Duke {
             nxt = sc.nextLine();
         }
 
+        writeToFile();
         goodbye();
     }
 
@@ -117,5 +130,74 @@ public class Duke {
 
     public static void goodbye() {
         System.out.println("さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/");
+    }
+
+    public static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter(file);
+        String tmpTxt = "";
+
+        if (dukeList.size() > 0) {
+            for (int i = 0; i < dukeList.size() - 1; i++) {
+                tmpTxt = tmpTxt + dukeList.get(i).format() + "\n";
+            }
+            tmpTxt = tmpTxt + dukeList.get(dukeList.size() - 1).format();
+        }
+
+        fw.write(tmpTxt);
+        fw.close();
+
+    }
+
+    public static void loadData() throws IOException {
+        file.createNewFile(); //Creates new file if there is no file
+        Scanner sc = new Scanner(file);
+        Task t;
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            String[] splitBySpace = line.split(" ");
+            String[] splitBySlash;
+            if (splitBySpace[0].equals("D") || splitBySpace[0].equals("E")) {
+                splitBySlash = line.split("/");
+
+                //Splits second time
+                String[] splitBySpace2 = splitBySlash[0].split(" ");
+                String getDesc = "";
+                for (int i = 2; i < splitBySpace2.length; i++) {
+                    getDesc = getDesc + splitBySpace2[i] + " ";
+                }
+
+                if (splitBySpace[0].equals("D")) {
+                    t = new Deadline(getDesc.trim(), splitBySlash[1]);
+                    if (splitBySpace[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                    dukeList.add(t);
+
+                } else if (splitBySpace[0].equals("E")) {
+                    t = new Event(getDesc.trim(), splitBySlash[1]);
+                    if (splitBySpace[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                    dukeList.add(t);
+                }
+            } else {
+                String getDesc = "";
+                for (int i = 2; i < splitBySpace.length; i++) {
+                    if (i < splitBySpace.length - 1) {
+                        getDesc = getDesc + splitBySpace[i] + " ";
+                    } else {
+                        getDesc = getDesc + splitBySpace[i];
+                    }
+                }
+
+                t = new ToDo(getDesc);
+                if (splitBySpace[1].equals("1")) {
+                    t.markAsDone();
+                }
+                dukeList.add(t);
+            }
+
+
+        }
     }
 }
