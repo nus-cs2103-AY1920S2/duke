@@ -17,23 +17,63 @@ public class Duke {
 
         String nxt;
         nxt = sc.nextLine();
+        String newString;
+        String[] splitBySpace;
+
         while (nxt.equals("bye") == false) {
+            newString = "";
+            splitBySpace = nxt.split(" ");
+            //If it is not list
             if (nxt.equals("list") == false) {
                 StringTokenizer st = new StringTokenizer(nxt);
                 String first = st.nextToken();
-                if (first.equals("done") == false) {
-                    Task t = new Task(nxt);
-                    System.out.println("I have added: " + nxt + " to your list.");
+                //Command: Set task as done
+                if (first.equals("done")) {
+                    int num = Integer.parseInt(st.nextToken());
+                    dukeList[num - 1].markAsDone();
+                    System.out.println("The following has been marked as done:");
+                    System.out.println("  " + dukeList[num - 1]);
+                    nxt = sc.nextLine();
+                    //Command: deadline
+                } else if (first.equals("deadline")) {
+                    for (int i = 1; i < splitBySpace.length - 1; i++) {
+                        newString = newString + splitBySpace[i] + " ";
+                    }
+                    newString = newString + splitBySpace[splitBySpace.length - 1];
+                    String[] splitBySlash = newString.split("/");
+                    Task t = new Deadline(splitBySlash[0], splitBySlash[1]);
                     dukeList[counter] = t;
                     counter++;
+                    System.out.println("I have added this task: \n  " + dukeList[counter - 1]);
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
                     nxt = sc.nextLine();
+                    //Command: event
+                } else if (first.equals("event")) {
+                    for (int i = 1; i < splitBySpace.length - 1; i++) {
+                        newString = newString + splitBySpace[i] + " ";
+                    }
+                    newString = newString + splitBySpace[splitBySpace.length - 1];
+                    String[] splitBySlash = newString.split("/");
+                    Task t = new Event(splitBySlash[0], splitBySlash[1]);
+                    dukeList[counter] = t;
+                    counter++;
+                    System.out.println("I have added this task: \n  " + dukeList[counter - 1]);
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
+                    nxt = sc.nextLine();
+                    //Command is to do task
                 } else {
-                    int num = Integer.parseInt(st.nextToken());
-                    dukeList[num-1].markAsDone();
-                    System.out.println("The following has been marked as done:");
-                    System.out.println(dukeList[num-1]);
+                    for (int i = 1; i < splitBySpace.length - 1; i++) {
+                        newString = newString + splitBySpace[i] + " ";
+                    }
+                    newString = newString + splitBySpace[splitBySpace.length - 1];
+                    Task t = new ToDo(newString);
+                    dukeList[counter] = t;
+                    counter++;
+                    System.out.println("I have added this task: \n  " + dukeList[counter - 1]);
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
                     nxt = sc.nextLine();
                 }
+                //Print out the list
             } else {
                 for (int i = 0; i < counter; i++) {
                     System.out.println((i+1) + "." + dukeList[i]);
