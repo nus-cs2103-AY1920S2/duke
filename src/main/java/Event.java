@@ -36,8 +36,8 @@ public class Event extends Task {
      * @return The date of the event.
      */
 
-    public String getEventSchedule() {
-        return this.at_schedule;
+    public TaskSchedule getEventSchedule() {
+        return this.atSchedule;
     }
 
     /**

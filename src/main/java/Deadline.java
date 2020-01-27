@@ -37,8 +37,8 @@ public class Deadline extends Task {
      * @return the due date of the deadline.
      */
 
-    public String getDueDate() {
-        return this.by_schedule;
+    public TaskSchedule getDueDate() {
+        return this.bySchedule;
     }
 
     /**
