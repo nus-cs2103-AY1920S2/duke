@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private static final String indent = "    ";
@@ -101,6 +103,10 @@ public class Duke {
     }
 
     private static void run(String input) throws DukeException {
+        if (input.equals("list")) {
+            printTasks();
+            return;
+        }
         String[] inputArr = input.split(" ", 2);
         switch(inputArr[0]) {
             case "todo":
@@ -118,8 +124,8 @@ public class Duke {
             case "delete":
                 deleteTask(inputArr);
                 break;
-            case "list":
-                printTasks();
+            case "get":
+                getTasks(inputArr);
                 break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -220,6 +226,25 @@ public class Duke {
         }
     }
 
+    private static void getTasks(String[] inputArr) throws DukeException {
+        try {
+            if (inputArr[1].trim().equals("")) {
+                throw new DukeException("The date of tasks to retrieve cannot be empty.");
+            }
+            LocalDate date = LocalDate.parse(inputArr[1]);
+            List<Task> filteredTasks = new ArrayList<>();
+            for (Task task : tasks) {
+                if ((task instanceof Deadline && ((Deadline)task).getDate().equals(date)) ||
+                        (task instanceof Event && ((Event)task).getDate().equals(date))) {
+                    filteredTasks.add(task);
+                }
+            }
+            printTasks(filteredTasks, inputArr[1]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Incorrect date format. Format required: yyyy-mm-dd");
+        }
+    }
+
     private static void print(String text) {
         String[] lines = text.split("\n");
         System.out.println(indent + horizontal_line);
@@ -245,6 +270,19 @@ public class Duke {
             System.out.println(indent + "Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(indent + (i + 1) + ". " + tasks.get(i));
+            }
+        }
+        System.out.println(indent + horizontal_line + "\n");
+    }
+
+    private static void printTasks(List<Task> filteredTasks, String date) {
+        System.out.println(indent + horizontal_line);
+        if (filteredTasks.isEmpty()) {
+            System.out.println(indent + "There are no tasks on " + date + ".");
+        } else {
+            System.out.println(indent + "Here are the tasks on " + date + ":");
+            for (Task task : filteredTasks) {
+                System.out.println(indent + "  " + task);
             }
         }
         System.out.println(indent + horizontal_line + "\n");
