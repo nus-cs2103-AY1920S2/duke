@@ -26,6 +26,11 @@ public class DukeList {
         storage.save(this);
     }
 
+    public void loadAdd(Task S) {
+        this.listOfTasks.add(S);
+        numOfTasks++;
+    }
+
     public void markTaskAsDone(int taskIndex) throws EmptyListException, InvalidEntryException{
         if(numOfTasks == 0) {
             throw new EmptyListException("List is empty! Which task can you complete?!");
@@ -63,6 +68,7 @@ public class DukeList {
             numOfTasks--;
             System.out.println("    The task requested has been successfully removed:");
             System.out.println("      " + removedTask);
+            storage.save(this);
             if(numOfTasks == 1) {
                 System.out.println("    There is " + numOfTasks + " task left.");
             } else {
