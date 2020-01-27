@@ -1,5 +1,6 @@
 package akshay;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -45,13 +46,15 @@ public class Akshay {
                     break;
                 case ("deadline"):
                     String[] dl = c[1].split("/by",2);
-                    Task d = new Deadline(dl[0], dl[1]);
+                    LocalDate d1 = LocalDate.parse(dl[1].strip());
+                    Task d = new Deadline(dl[0], d1);
                     arr.add(d);
                     say("Added: " + d.toString());
                     break;
                 case ("event"):
                     String[] ev = c[1].split("/at",2);
-                    Task e = new Event(ev[0], ev[1]);
+                    LocalDate d2 = LocalDate.parse(ev[1].strip());
+                    Task e = new Event(ev[0], d2);
                     arr.add(e);
                     say("Added: " + e.toString());
                     break;
