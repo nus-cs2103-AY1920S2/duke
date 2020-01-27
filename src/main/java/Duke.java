@@ -4,6 +4,10 @@ import duke.pack.Event;
 import duke.pack.Todo;
 import duke.pack.DukeException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -24,54 +28,66 @@ public class Duke {
 
         // continue processing user's command, as long as command is not bye
         while (!command.equals("bye")) {
-            String[] c = command.split(" ");
+            String[] comm = command.split(" ");
 
             try {
                 if (command.equals("list")) {
                     // prints tasks in list if command is list
                     printList();
 
-                } else if (c[0].equals("done")) {
+                } else if (comm[0].equals("done")) {
                     // if task number is not given
-                    if (c.length == 1) {
+                    if (comm.length == 1) {
                         throw new DukeException("    Oh no! You have to specify which task is done!");
                     }
 
                     // mark the specified task as done
-                    int taskNum = Integer.parseInt(c[1]);
+                    int taskNum = Integer.parseInt(comm[1]);
                     arrList.get(taskNum - 1).markAsDone();
 
-                } else if (c[0].equals("delete")) {
+                } else if (comm[0].equals("delete")) {
                     // if task number is not given
-                    if (c.length == 1) {
+                    if (comm.length == 1) {
                         throw new DukeException("    Oh no! You have to specify which task to delete!");
                     }
 
                     // delete the specified task
-                    int taskNum = Integer.parseInt(c[1]);
+                    int taskNum = Integer.parseInt(comm[1]);
                     delete(taskNum);
 
-                } else if (c[0].equals("deadline")) {
+                } else if (comm[0].equals("deadline")) {
                     // if no description is given
-                    if (c.length == 1) {
+                    if (comm.length == 1) {
                         throw new DukeException("    Oh no! A deadline cannot be empty!");
                     }
 
                     String[] arr = command.split("/by");
                     // if no "by" is given
                     if (arr.length == 1) {
-                        throw new DukeException("    Oh no! You need to follow the format!");
+                        throw new DukeException("    Oh no! You need to include by when!");
                     }
 
                     String[] arr2 = arr[0].split("deadline");
+                    String[] dateTime = arr[1].trim().split(" ");
+                    String time = "";
+                    if (dateTime.length == 1) {
+                        throw new DukeException("    Oh no! Please include a time!");
+                    }
+                    time = dateTime[1].trim();
 
-                    // add to list
-                    Task d = new Deadline(arr2[1].trim(), arr[1].trim());
-                    add(d);
+                    try {
+                        LocalDate date = LocalDate.parse(dateTime[0].trim());
+                        // add to list
+                        Task d = new Deadline(arr2[1].trim(), time, date);
+                        add(d);
 
-                } else if (c[0].equals("event")) {
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("    Oh no! Please follow the date format! For example, 2020-01-27!");
+                    }
+
+                } else if (comm[0].equals("event")) {
                     // if no description is given
-                    if (c.length == 1) {
+                    if (comm.length == 1) {
                         throw new DukeException("    Oh no! An event cannot be empty!");
                     }
 
@@ -82,16 +98,28 @@ public class Duke {
                     }
 
                     String[] arr2 = arr[0].split("event");
+                    String[] dateTime = arr[1].trim().split(" ");
+                    String time = "";
+                    if (dateTime.length == 1) {
+                        throw new DukeException("    Oh no! Please include a time!");
+                    }
+                    time = dateTime[1].trim();
 
-                    // add to list
-                    Task e = new Event(arr2[1].trim(), arr[1].trim());
-                    add(e);
+                    try {
+                        LocalDate date = LocalDate.parse(dateTime[0].trim());
+                        // add to list
+                        Task ev = new Event(arr2[1].trim(), time, date);
+                        add(ev);
 
-                } else if (c[0].equals("todo")) {
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("    Oh no! Please follow the date format! For example, 2020-01-27!");
+                    }
+
+                } else if (comm[0].equals("todo")) {
                     String[] arr = command.split("todo");
 
                     // if no description is given
-                    if (c.length == 1) {
+                    if (comm.length == 1) {
                         throw new DukeException("    Oh no! A todo cannot be empty!");
                     }
 
