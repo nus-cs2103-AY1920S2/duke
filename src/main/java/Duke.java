@@ -29,14 +29,42 @@ public class Duke {
                         break;
 
                     } else if (descriptionTokens[0].toLowerCase().equals("list")) {
-                        if (taskList.size() == 0) {
-                            throw new EmptyListAelitaException();
+                        //List all task on the specified date
+                        if (descriptionTokens.length == 2) {
+                            //The command consist of 2 parts: the command and the date
+                            try {
+                                LocalDate date = LocalDate.parse(descriptionTokens[1]);
+                                boolean hasTask = false;
+                                for (int i = 0; i < taskList.size(); i++) {
+                                    if (taskList.get(i) instanceof Deadline && ((Deadline) taskList.get(i)).by.equals(date)) {
+                                        if (!hasTask) {
+                                            System.out.println("> Here's your list:");
+                                        }
+                                        System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                                        hasTask = true;
+                                    } else if (taskList.get(i) instanceof Event && ((Event) taskList.get(i)).date.equals(date)) {
+                                        if (!hasTask) {
+                                            System.out.println("> Here's your list:");
+                                        }
+                                        System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                                        hasTask = true;
+                                    }
+                                }
+                                if (!hasTask) {
+                                    System.out.println("> You have nothing to do on that day.");
+                                }
+                            } catch (DateTimeParseException e) {
+                                System.out.println("> Sorry. I only recognize date in the format YYYY-MM-DD");
+                            }
+                        } else {
+                            if (taskList.size() == 0) {
+                                throw new EmptyListAelitaException();
+                            }
+                            System.out.println("> Here's your list:");
+                            for (int i = 0; i < taskList.size(); i++) {
+                                System.out.println("  " + (i + 1) + "." + taskList.get(i));
+                            }
                         }
-                        System.out.println("> Here's your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.println("  " + (i + 1) + "." + taskList.get(i));
-                        }
-
                     } else if (descriptionTokens[0].toLowerCase().equals("done")) {
                         if (descriptionTokens.length < 2) {
                             throw new InsufficientArgumentAelitaException("done");
