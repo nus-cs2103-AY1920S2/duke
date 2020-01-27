@@ -23,6 +23,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -39,9 +43,5 @@ public class Duke {
                 ui.showBottomLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
