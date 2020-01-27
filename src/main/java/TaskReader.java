@@ -27,11 +27,11 @@ import java.util.HashMap;
 
 public class TaskReader {
     private String filename;
-    private final static HashMap<String, Command> KEYWORD = new HashMap<>() {
+    private final static HashMap<String, Keyword> KEYWORD = new HashMap<>() {
         {
-            put("D", Command.DEADLINE);
-            put("E", Command.EVENT);
-            put("T", Command.TODO);
+            put("D", Keyword.DEADLINE);
+            put("E", Keyword.EVENT);
+            put("T", Keyword.TODO);
         }
     };
 
@@ -80,12 +80,12 @@ public class TaskReader {
             DukeInvalidDateFormatException {
         String[] line_splitted = line.split(" \\| ");
         try {
-            Command command = getCommand(line_splitted[0], line, counter);
+            Keyword keyword = getKeyword(line_splitted[0], line, counter);
             boolean isDone = getStatus(line_splitted[1], line, counter);
             Task task;
             String description;
 
-            switch (command) {
+            switch (keyword) {
             case TODO:
                 description = line_splitted[2];
                 task = new Todo(description);
@@ -124,14 +124,14 @@ public class TaskReader {
      * @throws DukeInvalidTaskFormatException If the command cannot be found.
      */
 
-    private Command getCommand(String command_string, String line, int counter) throws DukeInvalidTaskFormatException {
-        Command command = TaskReader.KEYWORD.get(command_string);
+    private Keyword getKeyword(String command_string, String line, int counter) throws DukeInvalidTaskFormatException {
+        Keyword keyword = TaskReader.KEYWORD.get(command_string);
 
-        if (command == null) {
+        if (keyword == null) {
             throw new DukeInvalidTaskFormatException("OOPS! We cannot load " +
                     "the task since the command is unknown.", line, counter);
         }
-        return command;
+        return keyword;
     }
 
     /**

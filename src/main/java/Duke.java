@@ -129,7 +129,7 @@ public class Duke {
 
     public String addTask(Argument argument) throws DukeInvalidArgumentFormatException,
             DukeInvalidDateFormatException {
-        Command command = argument.getCommand();
+        Keyword command = argument.getCommand();
         Task newTask;
 
         /*
@@ -201,7 +201,7 @@ public class Duke {
     public String processCommand(String commands) {
         try {
             Argument argument = Argument.createArgument(commands);
-            Command command = argument.getCommand();
+            Keyword command = argument.getCommand();
 
             /*
              The switch block performs the corresponding command,
