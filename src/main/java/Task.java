@@ -76,7 +76,7 @@ public class Task {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.format("\t%d.%s%n", i + 1, tasks.get(i));
         }
-
+        
         System.out.println();
     }
 
