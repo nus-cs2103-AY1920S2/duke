@@ -17,36 +17,36 @@ public class Duke {
                 String input = sc.nextLine();
                 String[] inputs = input.split(" ", 2);
                 String command = inputs[0];
-                if (command.equals("bye")) {
+                if (command.equalsIgnoreCase("bye")) {
                     sayBye();
                     break;
-                } else if (command.equals("todo")) {
+                } else if (command.equalsIgnoreCase("todo")) {
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
                     String desc = inputs[1];
                     addTodo(desc);
-                } else if (command.equals("deadline")) {
+                } else if (command.equalsIgnoreCase("deadline")) {
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
                     String desc = inputs[1];
                     addDeadline(desc);
-                } else if (command.equals("event")) {
+                } else if (command.equalsIgnoreCase("event")) {
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
                     String desc = inputs[1];
                     addEvent(desc);
-                } else if (command.equals("list")) {
+                } else if (command.equalsIgnoreCase("list")) {
                     printList();
-                } else if (command.equals("done")) {
+                } else if (command.equalsIgnoreCase("done")) {
                     int index = Integer.parseInt(inputs[1]);
                     if (index < 1 || index > tasks.size()) {
                         throw new TaskIndexOutOfBoundsException();
                     }
                     markTaskAsDone(index);
-                } else if (command.equals("delete")) {
+                } else if (command.equalsIgnoreCase("delete")) {
                     int index = Integer.parseInt(inputs[1]);
                     if (index < 1 || index > tasks.size()) {
                         throw new TaskIndexOutOfBoundsException();
@@ -91,10 +91,10 @@ public class Duke {
         printNumTask();
     }
 
-    private static void addDeadline(String desc) throws NoTimeSpecifiedException {
+    private static void addDeadline(String desc) throws InvalidTaskInputException {
         String[] descs = desc.split(" /by ");
-        if (descs.length == 1) { // there is no specified deadline time indicated by " /by "
-            throw new NoTimeSpecifiedException();
+        if (descs.length == 1) { // invalid Deadline input format
+            throw new InvalidTaskInputException();
         }
         String deadlineDesc = descs[0];
         String deadlineTime = descs[1];
@@ -105,10 +105,10 @@ public class Duke {
         printNumTask();
     }
 
-    private static void addEvent(String desc) throws NoTimeSpecifiedException {
+    private static void addEvent(String desc) throws InvalidTaskInputException {
         String[] descs = desc.split(" /at ");
-        if (descs.length == 1) { // there is no specified event time indicated by " /at "
-            throw new NoTimeSpecifiedException();
+        if (descs.length == 1) { // invalid Event input format
+            throw new InvalidTaskInputException();
         }
         String eventDesc = descs[0];
         String eventTime = descs[1];
