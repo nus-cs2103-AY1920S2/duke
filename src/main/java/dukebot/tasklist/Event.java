@@ -7,7 +7,7 @@ public class Event extends Task {
     private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public Event(String description, LocalDateTime dateTime) {
-        super(description, TaskType.DEADLINE, dateTime);
+        super(description, TaskType.Event, dateTime);
     }
     //    public String getTime() {
     //        return (this.time);

@@ -13,11 +13,11 @@ class EventTest {
     void testEvent() {
         // Test if getters and setters are working properly
         LocalDateTime testTime = LocalDateTime.of(2020,1,2,3,4);
-        Task task = new Deadline("test", testTime);
+        Task task = new Event("test", testTime);
 
         assertEquals("Event", task.getType());
         // assertEquals("", task.dateTimeToString());
-        assertEquals("test" + "(at: " + task.dateTimeToString() + ")", task.toString());
+        assertEquals("test" + " (at: " + task.dateTimeToString() + ")", task.toString());
 
         assertFalse(task.getDone());
         task.setDone();
