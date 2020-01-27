@@ -32,7 +32,7 @@ public class Duke {
             LocalDateTime dateTime = null;
             Parser parser = new Parser();
             TaskManagement manager = new TaskManagement("../../DataFile.txt");
-            ErrorHandler handler = new ErrorHandler();
+
 
             manager.loadFile();
 
