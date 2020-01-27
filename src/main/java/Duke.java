@@ -1,7 +1,14 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Duke {
 
@@ -76,8 +83,49 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
+    private static Task decode(String str) {
+        String[] splitInput = str.split(Pattern.quote(Task.SEPERATOR));
+        String type = splitInput[0];
+        boolean isDone = splitInput[1].equals(Task.TRUE_SYMBOL);
+        String taskDescription = splitInput[2];
+        Task toReturn = null;
+
+        if (type.equals(Todo.TYPE_SYMBOL)) {
+            toReturn = new Todo(taskDescription);
+        } else if (type.equals(Deadline.TYPE_SYMBOL)) {
+            String time = splitInput[3];
+            toReturn = new Deadline(taskDescription, time);
+        } else if (type.equals(Event.TYPE_SYMBOL)) {
+            String time = splitInput[3];
+            toReturn = new Event(taskDescription, time);
+        } else {
+            print("Failed to decode. Unknown task type.");
+        }
+
+        if (isDone && toReturn != null) {
+            toReturn.markAsDone();
+        }
+
+        return toReturn;
+    }
+
+    private void loadSavedTaskList(Path path) throws IOException {
+        if (Files.exists(path)) {
+            List<String> lines = Files.readAllLines(path);
+            this.list = lines.stream().map(Duke::decode).collect(Collectors.toList());
+        }
+    }
+
+    private void saveTaskList(Path path) throws IOException {
+        if (!Files.exists(path)) {
+            Files.createDirectories(path.getParent());
+        }
+        List<String> lines = this.list.stream().map(Task::toStringForSaving).collect(Collectors.toList());
+        Files.write(path, lines, StandardOpenOption.CREATE);
+    }
+
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
-        String[] splitInput = lineInput.split(" ");
+        String[] splitInput = lineInput.split(Pattern.quote(" "));
         String command = splitInput[0];
 
         if (splitInput.length == 1) {
@@ -120,30 +168,58 @@ public class Duke {
     }
 
     private void processInput(String lineInput) {
-        String[] splitInput = lineInput.split(" ");
+        String[] splitInput = lineInput.split(Pattern.quote(" "));
         // empty line would output string array of size 1, where the element is empty string
-        String command = splitInput[0];
+        String commandString = splitInput[0];
+        DukeCommand command = null;
+        int selectedTaskIndex;
 
-        if (command.equals(DukeCommand.END_COMMAND.getCommand())) {
-            bye();
-        } else if (command.equals(DukeCommand.LIST_COMMAND.getCommand())) {
-            this.printList();
-        } else if (command.equals(DukeCommand.DONE_COMMAND.getCommand())) {
-            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
-            this.markTaskAsDone(taskIndex);
-        } else if (command.equals(DukeCommand.DELETE_COMMAND.getCommand())) {
-            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
-            this.deleteTask(taskIndex);
-        } else if (command.equals(DukeCommand.TODO_COMMAND.getCommand()) ||
-                command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ||
-                command.equals(DukeCommand.EVENT_COMMAND.getCommand())) {
-            try {
-                this.createAndAddTask(lineInput);
-            } catch (Exception e) {
-                print(e.toString());
-            }
+        if (commandString.equals(DukeCommand.END_COMMAND.getCommand())) {
+            command = DukeCommand.END_COMMAND;
+        } else if (commandString.equals(DukeCommand.LIST_COMMAND.getCommand())) {
+            command = DukeCommand.LIST_COMMAND;
+        } else if (commandString.equals(DukeCommand.DONE_COMMAND.getCommand())) {
+            command = DukeCommand.DONE_COMMAND;
+        } else if (commandString.equals(DukeCommand.DELETE_COMMAND.getCommand())) {
+            command = DukeCommand.DELETE_COMMAND;
+        } else if (commandString.equals(DukeCommand.TODO_COMMAND.getCommand())) {
+            command = DukeCommand.TODO_COMMAND;
+        } else if (commandString.equals(DukeCommand.DEADLINE_COMMAND.getCommand())) {
+            command = DukeCommand.DEADLINE_COMMAND;
+        } else if (commandString.equals(DukeCommand.EVENT_COMMAND.getCommand())) {
+            command = DukeCommand.EVENT_COMMAND;
         } else {
             print("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (command != null) {
+            switch (command) {
+                case END_COMMAND:
+                    bye();
+                    break;
+                case LIST_COMMAND:
+                    this.printList();
+                    break;
+                case DONE_COMMAND:
+                    selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
+                    this.markTaskAsDone(selectedTaskIndex);
+                    break;
+                case DELETE_COMMAND:
+                    selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
+                    this.deleteTask(selectedTaskIndex);
+                    break;
+                case TODO_COMMAND:
+                case DEADLINE_COMMAND:
+                case EVENT_COMMAND:
+                    try {
+                        this.createAndAddTask(lineInput);
+                    } catch (Exception e) {
+                        print(e.toString());
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -151,11 +227,24 @@ public class Duke {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
 
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "code", "duke", "data", "duke.txt");
+        try {
+            duke.loadSavedTaskList(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         greet();
 
         while (true) {
             String lineInput = sc.nextLine();
             duke.processInput(lineInput);
+            try {
+                duke.saveTaskList(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
