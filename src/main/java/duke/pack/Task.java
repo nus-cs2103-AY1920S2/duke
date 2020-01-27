@@ -29,6 +29,10 @@ public class Task {
         return description; //return task description
     }
 
+    public void setDone(Boolean b) {
+        isDone = b;
+    }
+
     /**
      * marks the task as done
      */
@@ -39,6 +43,10 @@ public class Task {
         System.out.println("    Fantastic job! I have marked this task as done:");
         System.out.println("      " +  this);
         System.out.println("    ------------------------------------------------------------");
+    }
+
+    public String formatForFile() {
+        return description;
     }
 
     @Override

@@ -6,15 +6,29 @@ import duke.pack.DukeException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     // ArrayList of tasks
     private static ArrayList<Task> arrList;
+    private static File file;
 
     public static void main(String[] args) throws DukeException {
-        // Scanner object
-        Scanner sc = new Scanner(System.in);
         arrList = new ArrayList<>();
+        file = new File("data/duke.txt");
+
+        // Scanner object for input
+        Scanner sc = new Scanner(System.in);
+
+        // loading tasks from hard disk
+        try {
+            loadFileContent();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
 
         // greeting
         greet();
@@ -39,6 +53,9 @@ public class Duke {
 
                     // mark the specified task as done
                     int taskNum = Integer.parseInt(c[1]);
+                    if (taskNum > arrList.size()) {
+                        throw new DukeException("    Oh no! That task does not exist!");
+                    }
                     arrList.get(taskNum - 1).markAsDone();
 
                 } else if (c[0].equals("delete")) {
@@ -102,18 +119,31 @@ public class Duke {
                 } else {
                     // if command does not exist
                     throw new DukeException("    Oh no! I'm sorry, I do not understand that, please try again!");
-
                 }
+
+                // save updated tasks in hard disk
+                updateFileContent();
+
             } catch (DukeException e) {
                 System.out.println(e);
+
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+
             } finally {
                 command = sc.nextLine().trim();
             }
 
         }
 
-        // exit
-        exit();
+        try {
+            updateFileContent();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        } finally {
+            // exit
+            exit();
+        }
     }
 
     /**
@@ -145,6 +175,49 @@ public class Duke {
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    " + comm);
         System.out.println("    ------------------------------------------------------------");
+    }
+
+    public static void loadFileContent() throws FileNotFoundException {
+        Scanner fileScanner = new Scanner(file);
+        while (fileScanner.hasNext()) {
+            String task = fileScanner.nextLine();
+            String[] taskArr = task.split("\\|");
+            String taskType = taskArr[0].trim();
+
+            if (taskType.equals("T")) {
+                Task todo = new Todo(taskArr[2].trim());
+                if (taskArr[1].trim().equals("1")) {
+                    todo.setDone(true);
+                }
+                arrList.add(todo);
+
+            } else if (taskType.equals("E")) {
+                Task event = new Event(taskArr[2].trim(), taskArr[3].trim());
+                if (taskArr[1].trim().equals("1")) {
+                    event.setDone(true);
+                }
+                arrList.add(event);
+
+            } else if (taskType.equals("D")) {
+                Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim());
+                if (taskArr[1].trim().equals("1")) {
+                    deadline.setDone(true);
+                }
+                arrList.add(deadline);
+            }
+        }
+    }
+
+    public static void updateFileContent() throws IOException {
+        FileWriter fw = new FileWriter(file);
+        String text = "";
+
+        for ( Task task: arrList) {
+            text = text + task.formatForFile();
+        }
+
+        fw.write(text);
+        fw.close();
     }
 
     /**
