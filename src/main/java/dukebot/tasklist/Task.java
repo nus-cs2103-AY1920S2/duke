@@ -36,6 +36,8 @@ public abstract class Task implements Serializable {
 
     /**
      * Get done status of task.
+     *
+     * @return  Done status of task
      */
     public boolean getDone() {
         return this.isDone;
@@ -43,6 +45,8 @@ public abstract class Task implements Serializable {
 
     /**
      * Get type of task.
+     *
+     * @return  String of taskType
      */
     public String getType() {
         return this.taskType.toString();
