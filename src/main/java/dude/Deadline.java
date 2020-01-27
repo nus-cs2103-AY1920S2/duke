@@ -33,7 +33,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    boolean occursOn(LocalDate date) {
+    public boolean occursOn(LocalDate date) {
         return date.isEqual(this.dueDate);
     }
 

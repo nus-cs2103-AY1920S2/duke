@@ -110,7 +110,7 @@ public class Dude {
         String[] args = msg.split("\\s+");
 
         if (args.length != 2) {
-            ui.respondError("I don't get you, dude!", CHECK_USAGE);
+            ui.respondParsingError("I don't get you, dude!", CHECK_USAGE);
             return;
         }
 
@@ -118,7 +118,7 @@ public class Dude {
             LocalDate date = LocalDate.parse(args[1]);
             showTasksOnDate(date);
         } catch (DateTimeParseException e) {
-            ui.respondError("What date do you want to check man?", CHECK_USAGE);
+            ui.respondParsingError("What date do you want to check man?", CHECK_USAGE);
         }
     }
 
@@ -141,7 +141,7 @@ public class Dude {
                     String.format("  %s", task),
                     String.format("Now you got %d tasks in your list", tasks.taskCount()));
         } catch (ParsingException e) {
-            ui.respondError("Sorry mate, I didn't quite getcha", e.getMessage());
+            ui.respondParsingError("Sorry mate, I didn't quite getcha", e.getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ public class Dude {
         String[] args = msg.split("\\s+");
 
         if (args.length != 2) {
-            ui.respondError("I don't get you, dude!", usage);
+            ui.respondParsingError("I don't get you, dude!", usage);
             return;          
         }
         
@@ -157,9 +157,9 @@ public class Dude {
             int index = Integer.parseInt(args[1]);
             tasksOp.accept(index);
         } catch (NumberFormatException e) {
-            ui.respondError("That's not a number, dude!", usage);
+            ui.respondParsingError("That's not a number, dude!", usage);
         } catch (IndexOutOfBoundsException e) {
-            ui.respondError("You don't have such a task, dude!", usage);
+            ui.respondParsingError("You don't have such a task, dude!", usage);
         }
     }
 

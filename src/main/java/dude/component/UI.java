@@ -26,7 +26,7 @@ public class UI implements IUserInterface {
         });
     }
 
-    public void respondError(String errorMsg, String[] usageMsgs) {
+    public void respondParsingError(String errorMsg, String ...usageMsgs) {
         respond(() -> {
            speak(errorMsg);
            speak("Just tell me what you want to do like this:" + System.lineSeparator());

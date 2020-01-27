@@ -9,5 +9,6 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute(TaskList tasks, IUserInterface ui, IStorage storage);
+    public abstract void execute(TaskList tasks, IUserInterface ui, IStorage storage)
+            throws CommandExecutionException;
 }

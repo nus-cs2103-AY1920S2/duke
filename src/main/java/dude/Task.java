@@ -19,7 +19,11 @@ public abstract class Task {
         return details;
     }
 
-    abstract boolean occursOn(LocalDate date);
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public abstract boolean occursOn(LocalDate date);
 
     @Override
     public String toString() {

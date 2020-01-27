@@ -39,7 +39,7 @@ public class Event extends Task {
     }
 
     @Override
-    boolean occursOn(LocalDate date) {
+    public boolean occursOn(LocalDate date) {
         return (date.isAfter(this.eventStart) || date.isEqual(this.eventStart))
                 && (date.isBefore(this.eventEnd) || date.isEqual(this.eventEnd));
     }

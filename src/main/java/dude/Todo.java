@@ -23,7 +23,7 @@ public class Todo extends Task {
     }
 
     @Override
-    boolean occursOn(LocalDate date) {
+    public boolean occursOn(LocalDate date) {
         return false;
     }
 
