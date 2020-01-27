@@ -1,12 +1,21 @@
+/**
+ * Represents the To-Do task.
+ */
 public class ToDo extends Task {
 
-    // public constructor
+    /**
+     * Constructor.
+     * @param taskname
+     */
     public ToDo(String taskname) {
         super(taskname, "T");
     }
 
     @Override
-    // Overide the method to return task name plus whether is it done or not
+    /**
+     * String representation of the task.
+     * @return String.
+     */
     public String toString() {
         String message = "";
         if (this.getDone()) {

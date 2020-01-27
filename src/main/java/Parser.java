@@ -1,6 +1,15 @@
 public class Parser {
 
     // method to make sense of command and then act on that command
+
+    /**
+     * Function that makes sense of the command.
+     * Also carries out the necessary actions for each command in the database.
+     * @param command command inputted by user.
+     * @param ui the UI class that handles all the aesthetics of the chatbot.
+     * @param list Tasklist class that keeps track of tasks in the list.
+     * @return boolean True when the user has not "closed" the chatbot else False.
+     */
     public boolean respondToUser(String command, UI ui, TaskList list) {
         // split the string
         String[] inputCommand = command.trim().split(" ");
@@ -111,11 +120,11 @@ public class Parser {
     }
 
     /**
-     * Function to split the input query and grab the task name, also returns the index where the at/by will be at
-     * @param taskname
-     * @param inputCommand
-     * @param delimiter
-     * @return index for the by/at depending on the type of task, not applicable for to-do tasks
+     * Function to split the input query and grab the task name, also returns the index where the at/by will be at.
+     * @param taskname name of the task.
+     * @param inputCommand command inputted by user (array).
+     * @param delimiter delimiter which is either /by or /at.
+     * @return index for the by/at depending on the type of task, not applicable for to-do tasks.
      */
     public int grabTaskName(StringBuilder taskname, String[] inputCommand, String delimiter)  throws DukeException {
         int index_found = 0; //find the index for the delimiter
@@ -139,10 +148,10 @@ public class Parser {
     }
 
     /**
-     * Function to grab and get the date time for the event/deadline
-     * @param index_found
-     * @param inputCommand
-     * @param DateTime
+     * Function to grab and get the date time for the event/deadline.
+     * @param index_found index where the /at or /by is found.
+     * @param inputCommand command inputted by user (array).
+     * @param DateTime object to hold the result.
      */
     public void grabDateTime(int index_found, String[] inputCommand, StringBuilder DateTime)  throws DukeException {
         if (index_found == inputCommand.length - 1) {

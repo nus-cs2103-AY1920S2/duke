@@ -1,3 +1,7 @@
+/**
+ * Represents the UI that interacts with user.
+ * Contains greetings, decorations.
+ */
 public class UI {
 
     // all the Strings to be printed for Chatbot
@@ -8,7 +12,9 @@ public class UI {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    // function to greet the user
+    /**
+     * Function to print out greeting messages and manual for user.
+     */
     public void greetUser() {
         System.out.println(this.greetings);
         System.out.println("Hello! I am Duke, and I am pleased to serve you!");
@@ -21,8 +27,8 @@ public class UI {
     }
 
     /**
-     * Function to print any message using some decorations
-     * @param message
+     * Function to print any message using some decorations.
+     * @param message message to be printed.
      */
     public void prettyPrinting(String message) {
         System.out.println(this.decoration);

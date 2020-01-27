@@ -4,7 +4,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File.*;
 
-
+/**
+ * Represents the ChatBot object that the user interacts with.
+ * corresponds to UI, Tasklist, Storage, Parser classes that aids in its functions.
+ */
 public class ChatBot {
    // class for the chat-bot for the Duke Project
 
@@ -18,8 +21,8 @@ public class ChatBot {
     // constructor for chat-bot to initialise the file that was saved, if does not exist, then create new one
 
     /**
-     * Function to run chat-bot and terminate when needed
-     * @param sc scanner object that gets the input
+     * Function to run chat-bot and terminate when needed.
+     * @param sc scanner object that gets the input.
      */
     public void runChatBot(Scanner sc) {
         String inputCommand;

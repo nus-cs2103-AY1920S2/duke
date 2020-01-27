@@ -4,22 +4,36 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.io.FileWriter;
 
+/**
+ * Storage class to represent the tasks being stored into hard drive.
+ * Contains file location of saved task and the file f representing the saved tasks.
+ */
 public class Storage {
 
     private String fileLocation = "./Data/Tasks.txt"; //hard-coded relative file location of stored tasks
     private File f;
 
     // initialization of Storage
+
+    /**
+     * Constructor for the storage class.
+     */
     public Storage() {
         this.f = new File(this.fileLocation);
     }
 
-    // return true or false if the file exists
+    /**
+     * Function to check if the file exists or not.
+     * @return true if it exists, else false.
+     */
     public boolean existFile() {
       return this.f.exists();
     }
 
-    // read file and output last-updated tasklist
+    /**
+     * Function to retrieve all tasks from the storage.
+     * @return ArrayList representing all the tasks from past interactions with Duke.
+     */
     public ArrayList<Task> getTaskFromStorage() {
         ArrayList<Task> result = new ArrayList<>();
         try {
@@ -37,7 +51,12 @@ public class Storage {
         return result;
     }
 
-    // method to translate task, to be ported to another class
+    /**
+     * Function to translate the individual lines in
+     * the text file to Tasks.
+     * @param line line in the text file.
+     * @return the Task associated with the line.
+     */
     public Task translateTask(String line) {
         String[] contents = line.split("\\|");
         String taskType = contents[0];
@@ -58,6 +77,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Function to write the leftover tasks into the text file to
+     * be used as a "database" of tasks.
+     * @param tasks ArrayList of tasks to be saved.
+     */
     public void writeToFile(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(this.f);
@@ -76,6 +100,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Function to convert each task into text line to be
+     * saved into the text file.
+     * @param t Task to be written to text file.
+     * @return String representation of the task.
+     */
     public String convertTaskToString(Task t) {
         String taskType = t.Tasktype;
         String result = "";
@@ -95,6 +125,12 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Function to check if the given task is done or not
+     * and return the correct string representation of it.
+     * @param t Task to be checked.
+     * @return Custom String representation of whether is it done or not.
+     */
     public String returnDone(Task t) {
         if (t.getDone()) {
             return "1";
