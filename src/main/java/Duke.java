@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private ArrayList<Task> tasks;
+    private Storage storage;
 
     /**
      * Constructs the Duke instance that has a list that
@@ -27,8 +28,9 @@ public class Duke {
      * that the Duke instance can perform, stored in a HashMap.
      */
 
-    private Duke(ArrayList<Task> tasks) {
+    private Duke(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
+        this.storage = storage;
     }
 
     /**
@@ -40,16 +42,14 @@ public class Duke {
      */
 
     public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {
-        TaskReader reader = new TaskReader("./data/tasks.txt");
+        Storage storage = new Storage("./data/tasks.txt");
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            tasks = reader.loadTasks();
-        } catch (IOException e) {
-            System.err.println(e);
+            tasks = storage.loadTasks();
         } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
             throw e;
         }
-        return new Duke(tasks);
+        return new Duke(tasks, storage);
     }
 
     /**
@@ -79,7 +79,7 @@ public class Duke {
 
         Task task = getTask(index);
         task.markAsDone();
-        rewriteTasksToFile();
+        this.storage.rewriteTasksToFile(tasks);
 
         return "Nice! I've marked this task as done: \n" +
                 String.format("   %s\n", task.toString()) +
@@ -131,7 +131,6 @@ public class Duke {
             DukeInvalidDateFormatException {
         Command command = argument.getCommand();
         Task newTask;
-        TaskWriter writer = new TaskWriter("./data/tasks.txt");
 
         /*
          The switch block uses to provide the appropriate task
@@ -160,14 +159,10 @@ public class Duke {
         }
 
         tasks.add(newTask);
-        try {
-            writer.writeTask(newTask, true);
-            return "Got it. I've added this task: \n" + String.format("    %s\n", newTask) +
-                    String.format("Now you have %d task(s) in the list.", tasks.size());
-        } catch (IOException e) {
-            System.err.println(e);
-        }
-        return "";
+        boolean isAppendMode = tasks.size() != 1;
+        this.storage.writeTask(newTask, isAppendMode);
+        return "Got it. I've added this task: \n" + String.format("    %s\n", newTask) +
+                String.format("Now you have %d task(s) in the list.", tasks.size());
     }
 
     /**
@@ -184,7 +179,7 @@ public class Duke {
 
         Task task = getTask(index);
         tasks.remove(index - 1);
-        rewriteTasksToFile();
+        this.storage.rewriteTasksToFile(tasks);
         return "Noted. I've removed this task: \n " + String.format("    %s\n", task) +
         String.format("Now you have %d task(s) in the list.", tasks.size());
     }
@@ -233,22 +228,6 @@ public class Duke {
             }
         } catch (DukeException exc) {
             return exc.getMessage();
-        }
-    }
-
-    /**
-     * Rewrites the list of tasks to the file. This method is being triggered
-     * by {@code markDone} and {@code deleteTask} method.
-     */
-
-    private void rewriteTasksToFile() {
-        try {
-            TaskWriter writer = new TaskWriter("./data/tasks.txt");
-            for (int i = 0; i < tasks.size(); i++) {
-                writer.writeTask(tasks.get(i), i != 0);
-            }
-        } catch (IOException e) {
-            System.err.println(e);
         }
     }
 }

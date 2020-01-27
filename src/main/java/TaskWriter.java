@@ -1,8 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 /*
  * TaskWriter
@@ -108,5 +104,21 @@ public class TaskWriter {
             details += " | " + ((Event) task).getEventSchedule();
         }
         return details;
+    }
+
+    /**
+     * Sets the file to blank.
+     */
+
+    public void setBlank() {
+        try {
+            FileOutputStream fos;
+            fos = new FileOutputStream(new File(filename));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+            writer.close();
+
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 }
