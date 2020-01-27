@@ -154,23 +154,14 @@ public class Duke {
             throw new InvalidInstructionException("No time flag (/by /at) given");
         }
         
-        String timePortion = inputArr[1];
-        String[] timePortionArr = timePortion.split(" ");
+        String datePortion = inputArr[1];
+        String[] datePortionArr = datePortion.split(" ");
         
-        if (timePortionArr.length <= 1) {
+        if (datePortionArr.length <= 1) {
             throw new InvalidInstructionException("No timing given");
         }
         
-        return convertStringToLocalDate(timePortionArr[1]);
-    }
-    
-    public static LocalDate convertStringToLocalDate(String date) {
-        String[] dateArr = date.split("-");
-        int year = Integer.parseInt(dateArr[0]);
-        int month = Integer.parseInt(dateArr[1]);
-        int day = Integer.parseInt(dateArr[2]);
-
-        return LocalDate.of(year, month, day);
+        return LocalDate.parse(datePortionArr[1]);
     }
 
     public static String extractFirstParam(String input) throws InvalidInstructionException {
