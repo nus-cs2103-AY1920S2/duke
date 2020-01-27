@@ -1,8 +1,8 @@
-package command;
+package Command;
 
-import core.Common;
-import core.Ui;
-import exception.DukeException;
+import Core.Common;
+import Core.Ui;
+import Exceptions.DukeException;
 
 
 public abstract class Command {

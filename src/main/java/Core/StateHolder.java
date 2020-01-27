@@ -1,7 +1,6 @@
-package core;
+package Core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class StateHolder implements Serializable {

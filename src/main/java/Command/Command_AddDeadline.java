@@ -1,11 +1,11 @@
-package command;
+package Command;
 
-import task.Deadline;
+import Task.Task_Deadline;
 
 public class Command_AddDeadline extends Command_AddTask{
 
     public Command_AddDeadline(String description, String time){
-        super(new Deadline(description,time));
+        super(new Task_Deadline(description,time));
     }
 
 }

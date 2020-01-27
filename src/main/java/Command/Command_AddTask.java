@@ -1,9 +1,9 @@
-package command;
+package Command;
 
-import core.Common;
-import core.Ui;
-import exception.DukeException;
-import task.Task;
+import Core.Common;
+import Core.Ui;
+import Exceptions.DukeException;
+import Task.Task;
 
 public abstract class Command_AddTask extends Command{
 

@@ -1,4 +1,4 @@
-package exception;
+package Exceptions;
 
 public class StorageException extends DukeException{
 

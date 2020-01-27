@@ -1,11 +1,11 @@
-package command;
+package Command;
 
-import task.ToDo;
+import Task.Task_ToDo;
 
 public class Command_AddToDo extends Command_AddTask{
 
     public Command_AddToDo(String description){
-        super(new ToDo(description));
+        super(new Task_ToDo(description));
     }
 
 }

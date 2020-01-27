@@ -1,9 +1,9 @@
-package command;
+package Command;
 
-import core.Common;
+import Core.Common;
 
-import core.Ui;
-import exception.DukeException;
+import Core.Ui;
+import Exceptions.DukeException;
 
 public class Command_Delete extends Command{
 

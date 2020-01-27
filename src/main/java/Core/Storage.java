@@ -1,8 +1,8 @@
-package core;
+package Core;
 
-import exception.DukeException;
-import exception.SingletonException;
-import exception.StorageException;
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
+import Exceptions.StorageException;
 
 import java.io.*;
 

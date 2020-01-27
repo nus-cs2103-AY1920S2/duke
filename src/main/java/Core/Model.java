@@ -1,8 +1,8 @@
-package core;
+package Core;
 
-import exception.DukeException;
-import exception.SingletonException;
-import task.Task;
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
+import Task.Task;
 
 import java.util.ArrayList;
 

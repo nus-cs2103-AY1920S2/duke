@@ -1,6 +1,6 @@
-package core;
+package Core;
 
-import task.Task;
+import Task.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package core;
+package Core;
 
-import command.Command;
-import exception.DukeException;
-import exception.SingletonException;
+import Command.Command;
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
 
 //sdf
 

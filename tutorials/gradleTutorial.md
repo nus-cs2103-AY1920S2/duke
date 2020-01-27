@@ -17,7 +17,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 * **Plugins** extend the functionality of Gradle. For example, the `java` plugin adds support for `Java` projects.
 
-* **Tasks** are reusable blocks of logic.  For example, the task `clean` simply deletes the project build directory. Tasks can be composed of other tasks or be dependent on another task. 
+* **Tasks** are reusable blocks of logic.  For example, the Task `clean` simply deletes the project build directory. Tasks can be composed of other tasks or be dependent on another Task. 
 
 * **Properties** change the behavior of tasks. For instance, `mainClassName` of the `application` plugin is a compulsory property which tells Gradle which class is the entrypoint to your application.
   As Gradle favors [_convention over configuration_](https://en.wikipedia.org/wiki/Convention_over_configuration), there is not much to you need to configure if you follow the recommended directory structure.
@@ -36,9 +36,9 @@ As a developer, you write a _build file_ that describes the project. A build fil
        mainClassName = "seedu.duke.Duke"
    }
    ```
-1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `gradlew run`. This should result in Gradle running the main method of your project.
+1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the Command `gradlew run`. This should result in Gradle running the main method of your project.
 
-:bulb: Simply run the command `gradlew {taskName}` in the terminal and Gradle will run the task! Here are some example commands:
+:bulb: Simply run the Command `gradlew {taskName}` in the terminal and Gradle will run the Task! Here are some example commands:
 * `gradlew tasks` (or `gradlew tasks --all`): shows a list of tasks available
 * `gradlew run`: runs the main class of your project
 
@@ -55,17 +55,17 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 After this, IntelliJ IDEA will identify your project as a Gradle project and you will gain access to the `Gradle Toolbar`. Through the toolbar, you run Gradle tasks and view your project's dependencies.
 
-You can click on the Gradle icon in the Gradle toolbar and create a new run configuration for running Gradle tasks without needing to type a `gradlew` command.
+You can click on the Gradle icon in the Gradle toolbar and create a new run configuration for running Gradle tasks without needing to type a `gradlew` Command.
 
 ![Gradle icon](assets/GradleIcon.png)
 
 ## Adding Plugins
 
-Gradle plugins are reusable units of build logic. Most common build tasks are provided as core plugins by Gradle. Given below are instructions on how to use some useful plugins:
+Gradle plugins are reusable units of build logic. Most common build tasks are provided as Core plugins by Gradle. Given below are instructions on how to use some useful plugins:
 
 ### CheckStyle
 
-To add support for _Checkstyle_ (a tool to check if your code complies with a set of style rules), which comes as a core plugin, simply add the line `id 'checkstyle'` into the `plugins` block.
+To add support for _Checkstyle_ (a tool to check if your code complies with a set of style rules), which comes as a Core plugin, simply add the line `id 'checkstyle'` into the `plugins` block.
 
 Your build file should look something like this now:
 ```groovy
@@ -85,7 +85,7 @@ checkstyle {
 Checkstyle expects configuration files for checkstyle to be in `./config/checkstyle/` by convention.
 A sample checkstyle rule configuration is provided in the branch.
 
-The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
+The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the Command will check your main code and test code against the style rules).
 
 **Resources**:
 * [Gradle documentation for CheckStyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
@@ -113,7 +113,7 @@ shadowJar {
 }
 ```
 
-Now you can run the command `gradlew shadowJar`.It publishes an executable jar to `./build/libs/`. You should be able to able to execute the created jar file by double-clicking it or using the command `java -jar {jarName}`?
+Now you can run the Command `gradlew shadowJar`.It publishes an executable jar to `./build/libs/`. You should be able to able to execute the created jar file by double-clicking it or using the Command `java -jar {jarName}`?
 
 **Resources**:
 * [Gradle documentation for Shadow plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)

@@ -1,8 +1,8 @@
-package core;
+package Core;
 
-import command.*;
-import exception.DukeException;
-import exception.SingletonException;
+import Command.*;
+import Exceptions.DukeException;
+import Exceptions.SingletonException;
 
 public class Parser {
 

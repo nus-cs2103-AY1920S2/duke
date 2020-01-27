@@ -1,8 +1,8 @@
-package task;
+package Task;
 
-public class ToDo extends Task{
+public class Task_ToDo extends Task{
 
-    public ToDo(String description){
+    public Task_ToDo(String description){
         super(description);
     }
 

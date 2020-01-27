@@ -1,20 +1,21 @@
-package task;
+package Task;
 
-public class Event extends Task{
+public class Task_Deadline extends Task{
+
     private String time;
 
-    public Event(String description, String time){
+    public Task_Deadline(String description, String time){
         super(description);
         this.time=time;
     }
 
     @Override
     public String getTypeIcon() {
-        return "E";
+        return "D";
     }
 
     @Override
     public String toString() {
-        return super.toString()+" (at: "+time+")";
+        return super.toString()+" (by: "+time+")";
     }
 }
