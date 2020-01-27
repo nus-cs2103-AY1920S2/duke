@@ -1,9 +1,9 @@
 package dude.component;
 
-import dude.Task;
-import dude.Todo;
-import dude.Deadline;
-import dude.Event;
+import dude.task.Task;
+import dude.task.Todo;
+import dude.task.Deadline;
+import dude.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;

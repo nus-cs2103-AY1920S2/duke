@@ -1,4 +1,4 @@
-package dude;
+package dude.task;
 
 import java.time.LocalDate;
 

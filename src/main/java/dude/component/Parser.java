@@ -1,8 +1,8 @@
 package dude.component;
 
-import dude.Deadline;
-import dude.Event;
-import dude.Todo;
+import dude.task.Deadline;
+import dude.task.Event;
+import dude.task.Todo;
 
 import dude.command.AddTaskCommand;
 import dude.command.ByeCommand;

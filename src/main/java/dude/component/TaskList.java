@@ -1,6 +1,6 @@
 package dude.component;
 
-import dude.Task;
+import dude.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;

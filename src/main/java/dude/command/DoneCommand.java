@@ -1,6 +1,7 @@
 package dude.command;
 
-import dude.Task;
+import dude.task.Task;
+
 import dude.component.IStorage;
 import dude.component.IUserInterface;
 import dude.component.TaskList;
