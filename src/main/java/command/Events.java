@@ -1,4 +1,6 @@
-public class Events extends Task{
+package command;
+
+public class Events extends Task {
     protected String datetime = "";
     public Events(String description, String datetime) {
         super(description);
