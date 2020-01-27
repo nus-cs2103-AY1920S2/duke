@@ -9,7 +9,7 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-    public Event(String desc, String duration, boolean isDone) {
+    public Event(String desc, LocalDate duration, boolean isDone) {
         super(desc);
         super.isDone = isDone;
         this.duration = duration;
@@ -18,7 +18,7 @@ public class Event extends Task {
 
     @Override
     public String generateSaveFileEntry() {
-        return String.format("E | %d | %s | %s\n", this.getStatusAsInt(), this.description, this.duration);
+        return String.format("E | %d | %s | %s\n", this.getStatusAsInt(), this.description, this.duration.toString());
     }
 
     @Override

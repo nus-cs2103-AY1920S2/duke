@@ -9,15 +9,15 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
-    public Deadline(String desc, String time, boolean isDone) {
+    public Deadline(String desc, LocalDate dueDate, boolean isDone) {
         super(desc);
         super.isDone = isDone;
-        this.time = time;
+        this.dueDate = dueDate;
     }
 
     @Override
     public String generateSaveFileEntry() {
-        return String.format("D | %d | %s | %s\n", this.getStatusAsInt(), this.description, this.time);
+        return String.format("D | %d | %s | %s\n", this.getStatusAsInt(), this.description, this.dueDate.toString());
     }
 
     @Override

@@ -90,10 +90,15 @@ public class Duke {
                             if (arguments.length < 2) {
                                 throw new InsufficientArgumentsException("☹ OOPS!!! Missing deadline parameters!");
                             } else {
-                                Task newTask = new Deadline(arguments[0], arguments[1]);
-                                tasks.add(newTask);
-                                printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
-                                        "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                try {
+                                    Task newTask = new Deadline(arguments[0], LocalDate.parse(arguments[1]));
+                                    tasks.add(newTask);
+                                    printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
+                                            "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                } catch (DateTimeParseException ex) {
+                                    printMessage("☹ OOPS!!! Please enter a valid date: YYYY-MM-DD");
+                                }
+
                                 saveTasksToFile(taskFile, tasks);
                             }
                         }
@@ -107,10 +112,15 @@ public class Duke {
                             if (arguments.length < 2) {
                                 throw new InsufficientArgumentsException("☹ OOPS!!! Missing event parameters!");
                             } else {
-                                Task newTask = new Event(arguments[0], arguments[1]);
-                                tasks.add(newTask);
-                                printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
-                                        "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                try {
+                                    Task newTask = new Event(arguments[0], LocalDate.parse(arguments[1]));
+                                    tasks.add(newTask);
+                                    printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
+                                            "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                } catch (DateTimeParseException ex) {
+                                    printMessage("☹ OOPS!!! Please enter a valid date: YYYY-MM-DD");
+                                }
+
                                 saveTasksToFile(taskFile, tasks);
                             }
                         }
@@ -182,9 +192,11 @@ public class Duke {
                     if (lineSplit[0].equals("T")) {
                         retrievedTasks.add(new Todo(lineSplit[2], parseTaskStatusFromFile(lineSplit[1])));
                     } else if (lineSplit[0].equals("D")) {
-                        retrievedTasks.add(new Deadline(lineSplit[2], lineSplit[3], parseTaskStatusFromFile(lineSplit[1])));
+                        retrievedTasks.add(new Deadline(lineSplit[2], LocalDate.parse(lineSplit[3]),
+                                parseTaskStatusFromFile(lineSplit[1])));
                     } else if (lineSplit[0].equals("E")) {
-                        retrievedTasks.add(new Event(lineSplit[2], lineSplit[3], parseTaskStatusFromFile(lineSplit[1])));
+                        retrievedTasks.add(new Event(lineSplit[2], LocalDate.parse(lineSplit[3]),
+                                parseTaskStatusFromFile(lineSplit[1])));
                     }
                 }
             }
