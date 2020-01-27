@@ -1,0 +1,4 @@
+T/true/ read book
+D/false/ return book /June 6th
+E/false/ project meeting /Aug 6th 2-4pm
+T/true/ join sports club
