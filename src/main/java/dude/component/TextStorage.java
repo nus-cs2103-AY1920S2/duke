@@ -14,12 +14,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class TextStorage implements IStorage {
-    private static final String fileLocation = "data/dude.txt";
+    private static final File storeFile = new File("data/dude.txt");
 
     public TaskList restoreSession(IUserInterface ui) {
         TaskList session = new TaskList();
-        File data = new File(fileLocation);
-        try (Scanner sc = new Scanner(data)) {
+        try (Scanner sc = new Scanner(storeFile)) {
             while (sc.hasNext()) {
                 String[] entry = sc.nextLine().split("\\|");
                 parseEntry(ui, session, entry);
@@ -31,7 +30,23 @@ public class TextStorage implements IStorage {
     }
 
     public void saveSession(IUserInterface ui, TaskList session) {
-        try (FileWriter fw = new FileWriter(fileLocation)) {
+        // Create "/data/" directory if it doesn't exist
+        if (!storeFile.getParentFile().exists()) {
+            try {
+                boolean isMkdirSuccessful = storeFile.getParentFile().mkdir();
+                if (!isMkdirSuccessful) {
+                    ui.respond("Warning: Could not create /data/ directory to save tasks",
+                            "I won't be able to save your tasks");
+                    return;
+                }
+            } catch (SecurityException e) {
+                ui.respond("Warning: A security violation occurred when trying to save your tasks",
+                        "I won't be able to save your tasks");
+                return;
+            }
+        }
+
+        try (FileWriter fw = new FileWriter(storeFile)) {
             for (Task task : session.getAllTasks()) {
                 fw.write(task.storeFormat() + System.lineSeparator());
             }
