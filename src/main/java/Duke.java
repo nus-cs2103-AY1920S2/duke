@@ -1,5 +1,14 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 public class Duke {
 
@@ -7,7 +16,11 @@ public class Duke {
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+//        ArrayList<Task> tasks = new ArrayList<>();
+
+        String projectRoot = System.getProperty("user.dir");
+        Path taskFile = Paths.get(projectRoot, "data/duke.txt");
+        ArrayList<Task> tasks = getTasksFromFile(taskFile);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -46,6 +59,7 @@ public class Duke {
                                 Task task = tasks.get(index);
                                 task.markAsDone();
                                 printMessage("Nice! I've marked this task as done:\n\t" + task.toString());
+                                saveTasksToFile(taskFile, tasks);
                             }
                         }
                         break;
@@ -61,6 +75,7 @@ public class Duke {
                                 tasks.remove(index);
                                 printMessage("Noted! I've removed this task:\n\t\t" + taskToDelete.toString() +
                                         "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                saveTasksToFile(taskFile, tasks);
                             }
                         }
                         break;
@@ -73,10 +88,11 @@ public class Duke {
                             if (arguments.length < 2) {
                                 throw new InsufficientArgumentsException("☹ OOPS!!! Missing deadline parameters!");
                             } else {
-                                tasks.add(new Deadline(arguments[0], arguments[1]));
-                                printMessage("Got it! I've added the task:\n\t\t" +
-                                        tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() +
-                                        " tasks in the list.");
+                                Task newTask = new Deadline(arguments[0], arguments[1]);
+                                tasks.add(newTask);
+                                printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
+                                        "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                saveTasksToFile(taskFile, tasks);
                             }
                         }
                         break;
@@ -89,8 +105,11 @@ public class Duke {
                             if (arguments.length < 2) {
                                 throw new InsufficientArgumentsException("☹ OOPS!!! Missing event parameters!");
                             } else {
-                                tasks.add(new Event(arguments[0], arguments[1]));
-                                printMessage("Got it! I've added the task:\n\t\t" + tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                Task newTask = new Event(arguments[0], arguments[1]);
+                                tasks.add(newTask);
+                                printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
+                                        "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                saveTasksToFile(taskFile, tasks);
                             }
                         }
                         break;
@@ -99,10 +118,11 @@ public class Duke {
                             throw new InsufficientArgumentsException("☹ OOPS!!! The description of a to-do cannot be " +
                                     "empty");
                         } else {
-                            tasks.add(new Todo(inputSplit[1]));
-                            printMessage("Got it! I've added the task:\n\t\t" +
-                                    tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " +
-                                    tasks.size() + " tasks in the list.");
+                            Task newTask = new Todo(inputSplit[1]);
+                            tasks.add(newTask);
+                            printMessage("Got it! I've added the task:\n\t\t" + newTask.toString() +
+                                    "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                            saveTasksToFile(taskFile, tasks);
                         }
                         break;
                     default:
@@ -136,5 +156,60 @@ public class Duke {
         }
 
         printMessage(result.toString());
+    }
+
+    public static ArrayList<Task> getTasksFromFile(Path file) {
+
+        ArrayList<Task> retrievedTasks = new ArrayList<>();
+        try {
+            if (!Files.exists(file)) {
+                Files.createDirectories(file.getParent());
+                Files.createFile(file);
+            } else {
+                List<String> lines = Files.readAllLines(file);
+
+           /*
+            T | 1 | read book
+            D | 0 | return book | June 6th
+            E | 0 | project meeting | Aug 6th 2-4pm
+            */
+
+                for (String line : lines) {
+                    String[] lineSplit = line.split(" \\| ");
+
+                    if (lineSplit[0].equals("T")) {
+                        retrievedTasks.add(new Todo(lineSplit[2], parseTaskStatusFromFile(lineSplit[1])));
+                    } else if (lineSplit[0].equals("D")) {
+                        retrievedTasks.add(new Deadline(lineSplit[2], lineSplit[3], parseTaskStatusFromFile(lineSplit[1])));
+                    } else if (lineSplit[0].equals("E")) {
+                        retrievedTasks.add(new Event(lineSplit[2], lineSplit[3], parseTaskStatusFromFile(lineSplit[1])));
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return retrievedTasks;
+    }
+
+    public static void saveTasksToFile(Path file, ArrayList<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        for (Task task : tasks) {
+            result.append(task.generateSaveFileEntry());
+        }
+
+        try {
+            Files.write(file, result.toString().getBytes());
+        } catch (FileNotFoundException ex) {
+            System.err.println("Task file not found.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static boolean parseTaskStatusFromFile(String status) {
+        return status.equals("1") ? true : false;
     }
 }
