@@ -9,8 +9,8 @@ public class Task {
     protected LocalDate period;
 
     /**
-     * Constructor of duke.task.Task
-     * @param description description of the duke.task
+     * Constructor of task.Task
+     * @param description description of the task
      */
     public Task(String description) {
         this.description = description;
@@ -34,8 +34,8 @@ public class Task {
     }
 
     /**
-     * Get status of the duke.task
-     * @return duke.task status
+     * Get status of the task
+     * @return task status
      */
     public boolean getStatus() {
         return isDone;
@@ -56,23 +56,23 @@ public class Task {
     }
 
     /**
-     * Get the description of the duke.task
-     * @return description of the duke.task
+     * Get the description of the task
+     * @return description of the task
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Get the duke.task type
-     * @return type of the duke.task
+     * Get the task type
+     * @return type of the task
      */
     public String getType() {
         return type;
     }
 
     /**
-     * Return status icon and description of the duke.task
+     * Return status icon and description of the task
      * @return status icon and description
      */
     @Override
