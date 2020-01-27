@@ -15,18 +15,21 @@ public class Duke {
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.loadFromSave());
         parser = new Parser();
+        try{
+            tasks = new TaskList(storage.loadFromSave());
+        } catch(UnableToLoadException e){
+            ui.showDukeError(e);
+            storage.retryLocation(ui.getInput());
+        }
     }
 
     public void run(){
         // initialise scanner
         ui.sayHi();
 
-        String input = "";
-
         // reply to input
-        input = ui.getCommand();
+        String input = ui.getCommand();
 
         while (!input.equals("bye")) {
             String reply = "";
@@ -39,8 +42,7 @@ public class Duke {
                     break;
                 case LIST:
                     reply = list(inputArr, tasks);
-                    throw new IOException();
-                    
+                    break;
                 case DONE:
                     int taskNo = Integer.parseInt(inputArr[1]) - 1;
                     tasks.checkDone(taskNo);
@@ -65,12 +67,15 @@ public class Duke {
                     break;
                 case CREATETODO:
                     reply = createNew(inputArr, tasks);
+                    storage.saveToSave(tasks);
                     break;
                 case CREATEEVENT:
                     reply = createNew(inputArr, tasks);
+                    storage.saveToSave(tasks);
                     break;
                 case CREATEDEADLINE:
                     reply = createNew(inputArr, tasks);
+                    storage.saveToSave(tasks);
                     break;
                 default:
                     throw new UnknownCommandException();
@@ -80,9 +85,9 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showDukeError(e);
             } catch (IOException e) {
-                ui.showIOError(e);
+                ui.showIOError();
             } catch (DateTimeParseException e) {
-                ui.showDateTimeError(e);
+                ui.showDateTimeError();
             }
             // next input
             input = ui.getCommand();
@@ -92,8 +97,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke(home).run();       
     }
-
-    
 
     private static String list(String[] arr, TaskList tasks) throws DateTimeParseException{ 
         String reply = "";

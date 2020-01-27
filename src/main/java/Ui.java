@@ -1,5 +1,3 @@
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Ui{
@@ -7,6 +5,10 @@ public class Ui{
     private static final String line = "   " + "<------------------------------------------------------------>";
     private static final String errorLine = "   " + "**************************************************************";
     private final Scanner s = new Scanner(System.in);
+
+    public String getInput() {
+        return s.nextLine();
+    }
 
     public String getCommand(){
         return s.nextLine();
@@ -16,12 +18,12 @@ public class Ui{
         System.err.println(e);
     }
 
-    public void showDateTimeError(DateTimeParseException e) {
+    public void showDateTimeError() {
         System.err.println(errorLine + "\n    ☹ DATE FORMAT is yyyy/mm/dd!\n" + space
             + "  TIME FORMAT is HHmm!\n" + errorLine);
     }
 
-    public void showIOError(IOException e){
+    public void showIOError(){
         System.err.println(errorLine + "\n    ☹ You have an IO Error!\n" + errorLine);
     }
 
