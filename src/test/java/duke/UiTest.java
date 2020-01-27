@@ -85,14 +85,29 @@ class UiTest {
 
     @Test
     void showLoadingError() {
+        String expected = HORIZONTAL_DIVIDER +
+                INDENTATION + "Unable to load storage data..." + NEWLINE +
+                HORIZONTAL_DIVIDER;
+        ui.showLoadingError();
+        assertEquals(expected, output.toString());
     }
 
     @Test
     void unableToReadUserInput() {
+        String expected = HORIZONTAL_DIVIDER +
+                INDENTATION + "Unable to read user input..." + NEWLINE +
+                HORIZONTAL_DIVIDER;
+        ui.unableToReadUserInput();
+        assertEquals(expected, output.toString());
     }
 
     @Test
     void commandNotFound() {
+        String expected = HORIZONTAL_DIVIDER +
+                INDENTATION + "404 Not Found... Are you there?" + NEWLINE +
+                HORIZONTAL_DIVIDER;
+        ui.commandNotFound();
+        assertEquals(expected, output.toString());
     }
 
     @ParameterizedTest
