@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Akshay {
         System.out.println(line);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         say("Hello I am [AKSHAY]!\nHow may I help you?");
         ArrayList<Task> arr = new ArrayList<>(100);
         Scanner sc =  new Scanner(System.in);
@@ -34,14 +35,9 @@ public class Akshay {
                     System.out.println(line);
                     break;
                 case ("done"):
-                    int num = Integer.parseInt(c[1]) - 1;
-                    if (num >= 0 && num < arr.size()) {
-                        Task curr = arr.get(Integer.parseInt(c[1]) - 1);
-                        curr.mark();
-                        say("Marked as done:\n" + curr.toString());
-                    } else {
-                        say("Item does not exist!");
-                    }
+                    Task curr = arr.get(Integer.parseInt(c[1]) - 1);
+                    curr.mark();
+                    say("Marked as done:\n" + curr.toString());
                     break;
                 case ("todo"):
                     try {
@@ -54,13 +50,15 @@ public class Akshay {
                     break;
                 case ("deadline"):
                     String[] dl = c[1].split("/by",2);
-                    Task d = new Deadline(dl[0], dl[1]);
+                    LocalDate d1 = LocalDate.parse(dl[1].strip());
+                    Task d = new Deadline(dl[0], d1);
                     arr.add(d);
                     say("Added: " + d.toString());
                     break;
                 case ("event"):
                     String[] ev = c[1].split("/at",2);
-                    Task e = new Event(ev[0], ev[1]);
+                    LocalDate d2 = LocalDate.parse(ev[1].strip());
+                    Task e = new Event(ev[0], d2);
                     arr.add(e);
                     say("Added: " + e.toString());
                     break;
@@ -85,6 +83,7 @@ public class Akshay {
         }
         say("Bye! Hope to see you again!");
     }
+}
 
     public static void save(ArrayList<Task> data) throws IOException {
         StringBuilder s = new StringBuilder();
