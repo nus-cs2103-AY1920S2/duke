@@ -1,3 +1,5 @@
-[T][✘] eat
-[D][✓] sleep (by 6pm)
-[E][✘] run (at 4pm)
+[D][✘] submit proposal (2020-12-12 08:30)
+[E][✘] wedding (2020-12-12 03:30)
+[T][[✓]] eat milk
+[T][[✓]] run[E][✘] conference 2020-12-12 09:30
+[D][✘] notes 2020-12-12 04:30
