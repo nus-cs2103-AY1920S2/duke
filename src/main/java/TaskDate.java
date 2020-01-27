@@ -4,12 +4,19 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+/**
+ * Custom date object to store different formats of date in String and LocalDate.
+ */
 public class TaskDate implements Serializable {
     protected String dateString;
     protected LocalDate localDate;
     protected String time;
     protected String date;
 
+    /**
+     * Constructor for TaskDate. Stores formats of LocalDate, and String date and time from dateString.
+     * @param dateString string to be parsed
+     */
     public TaskDate(String dateString) {
         this.dateString = dateString;
         this.localDate = getLocalDate();
