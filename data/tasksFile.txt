@@ -1,1 +1,3 @@
-T|0|cs2103 IP
+T:;:1:;:ST2131 Webcast
+D:;:0:;:CS2103 IP :;:midnight
+E:;:0:;:climb with huai :;:today

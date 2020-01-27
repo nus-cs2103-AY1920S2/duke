@@ -32,7 +32,7 @@ public class Cathulhu {
         while (sc.hasNextLine()) {
 
             String[] taskString = sc.nextLine().split(":;:");
-            System.out.println(Arrays.asList(taskString));
+//            System.out.println(Arrays.asList(taskString));
             switch(taskString[0]) {
                 case "T":
                     Task tdTask = new ToDo(taskString[2]);
