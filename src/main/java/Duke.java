@@ -53,7 +53,7 @@ public class Duke {
 
                     // mark the specified task as done
                     int taskNum = Integer.parseInt(c[1]);
-                    if (taskNum >= arrList.size()) {
+                    if (taskNum > arrList.size()) {
                         throw new DukeException("    Oh no! That task does not exist!");
                     }
                     arrList.get(taskNum - 1).markAsDone();
@@ -119,10 +119,17 @@ public class Duke {
                 } else {
                     // if command does not exist
                     throw new DukeException("    Oh no! I'm sorry, I do not understand that, please try again!");
-
                 }
+
+                // save updated tasks in hard disk
+                updateFileContent();
+
             } catch (DukeException e) {
                 System.out.println(e);
+
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+
             } finally {
                 command = sc.nextLine().trim();
             }
