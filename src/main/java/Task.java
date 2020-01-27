@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,9 +55,9 @@ public class Task {
         if (type.equals("T")) {
             task = new Todo(description);
         } else if (type.equals("D")) {
-            task = new Deadline(description, lineArr[3]);
+            task = new Deadline(description, convertStringToLocalDate(lineArr[3]));
         } else {
-            task = new Event(description, lineArr[3]);
+            task = new Event(description, convertStringToLocalDate(lineArr[3]));
         }
 
         if (doneStatus.equals("1")) {
@@ -169,5 +170,14 @@ public class Task {
         FileWriter fw = new FileWriter(DATAFILE, false);  // overwrite entire file
         fw.write(sb.toString());
         fw.close();
+    }
+
+    private static LocalDate convertStringToLocalDate(String date) {
+        String[] dateArr = date.split("-");
+        int year = Integer.parseInt(dateArr[0]);
+        int month = Integer.parseInt(dateArr[1]);
+        int day = Integer.parseInt(dateArr[2]);
+
+        return LocalDate.of(year, month, day);
     }
 }
