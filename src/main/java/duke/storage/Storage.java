@@ -1,12 +1,12 @@
-package duke.filemanager;
+package duke.storage;
 
 import duke.DukeException;
-import duke.Database;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,24 +14,31 @@ import java.io.File;
 import java.nio.file.Files;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
     protected String home;
     protected FileWriter fw;
-    protected Path taskPath;
-    protected Path path;
+    protected Path filePath;
     protected String absolutePath;
     protected Scanner taskScanner;
 
     /**
-     * Constructor of the filemanager.FileManager
+     * This is constructor of Storage
+     * @param filePath path that the data store to.
      */
-    public FileManager() {
-        home = System.getProperty("user.dir");
-        path = Paths.get(home, "src", "storage");
-        taskPath = Paths.get(home, "src", "storage", "tasks.txt");
-        absolutePath = taskPath.toAbsolutePath().toString();
+    public Storage(String filePath) throws DukeException {
+        String[] path = filePath.split("/");
+        this.home = System.getProperty("user.dir");
+        this.filePath = Paths.get(this.home, "src", path[0], path[1]);
+        this.absolutePath = this.filePath.toAbsolutePath().toString();
+        try {
+            this.taskScanner = new Scanner(this.filePath);
+        } catch(IOException e) {
+            createFile(this.absolutePath);
+        }
     }
 
     /**
@@ -39,19 +46,6 @@ public class FileManager {
      */
     public String getHomeDirectory() {
         return home;
-    }
-
-    /**
-     * Save data into the file in hardDisk
-     * @param data data to be saved
-     * @param path file located at
-     * @param append true: append mode, false: overwrite the file
-     * @throws DukeException occurs when IO Exception happens
-     */
-    public void saveDataToHardDisk(String data, Path path, boolean append) throws DukeException {
-        // Will create file if no file exists at the path
-        createFile(path.toAbsolutePath().toString());
-        writeToHardDisk(data, path.toString(), append);
     }
 
     /**
@@ -64,14 +58,15 @@ public class FileManager {
     }
 
     /**
-     * Get task listing and add to database
-     * @param database database to load the listing to
+     * Retrieve the data from the taskFile
+     * @return List of tasks
+     * @throws DukeException occurs when when wrong format of date and time found
      */
-    public void getTaskListing(Database database) throws DukeException {
+    public List<Task> getTaskListing() throws DukeException {
         String[] line;
+        List<Task> listing = new ArrayList<>();
         Task task;
         try {
-            taskScanner = new Scanner(taskPath);
             while (taskScanner.hasNext()) {
                 line = taskScanner.nextLine().split("\\s\\|\\s");
                 switch (line[0]) {
@@ -80,44 +75,49 @@ public class FileManager {
                         if (line[1].equals("1")) {
                             task.setStatusDone();
                         }
-                        database.addTask(task);
+                        listing.add(task);
                         break;
                     case "E":
                         task = new Event(line[2], line[3]);
                         if (line[1].equals("1")) {
                             task.setStatusDone();
                         }
-                        database.addTask(task);
+                        listing.add(task);
                         break;
                     case "D":
                         task = new Deadline(line[2], line[3]);
                         if (line[1].equals("1")) {
                             task.setStatusDone();
                         }
-                        database.addTask(task);
+                        listing.add(task);
                         break;
                 }
             }
-            taskScanner.close();
-        } catch(IOException e) {
-            // File not exists, hence create new file
-            createFile(taskPath.toAbsolutePath().toString());
+        } catch(NullPointerException e) {
+            return listing;
         }
+        return listing;
+    }
 
+    /**
+     * Close the scanner
+     */
+    public void closeScanner() {
+        taskScanner.close();
     }
 
     /**
      * Save tasks to hard disk
-     * @param database database to retrieve the tasks
+     * @param taskList taskList to retrieve the tasks
      * @throws DukeException occurs when encounter IO Exception
      */
-    public void saveTasks(Database database) throws DukeException {
-        int numOfTasks = database.getAmountOfTask();
+    public void saveTasks(TaskList taskList) throws DukeException {
+        int numOfTasks = taskList.getAmountOfTask();
         int num = 1;
         createFile(absolutePath);
         clearFile(absolutePath);
         while (numOfTasks != 0) {
-            addTask(database.getTask(num));
+            addTask(taskList.getTask(num));
             num++;
             numOfTasks--;
         }
@@ -187,7 +187,7 @@ public class FileManager {
      * @return path object
      */
     public Path getPath() {
-        return path;
+        return filePath;
     }
 
     /**

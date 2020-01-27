@@ -20,7 +20,7 @@ public class Deadline extends Task {
             period = LocalDate.parse(due);
             type = "deadline";
         } catch(DateTimeParseException e) {
-            throw new DukeException("Please give valid date in yyyy-mm-dd format.");
+            throw new DukeException("Please give valid date in deadline [description] /by [yyyy-mm-dd] format.");
         }
     }
 
