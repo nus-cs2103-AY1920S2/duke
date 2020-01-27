@@ -35,7 +35,30 @@ public class Duke {
 
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(mylist.get(tocheck - 1));
-            } else {
+            } else if (inarr[0].equals("todo")) {
+                ToDo temp = new ToDo(input.replaceFirst("todo ", ""));
+                System.out.println("Got it. I've added this task:");
+                System.out.println(temp);
+                System.out.println("Now you have " + (mylist.size() + 1) + " tasks in the list.");
+                mylist.add(temp);
+            } else  if (inarr[0].equals("deadline")) {
+                String wodl = input.replaceFirst("deadline ", "");
+                String[] myarr = wodl.split(" /by ");
+                DeadLine temp = new DeadLine(myarr[0], myarr[1]);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(temp);
+                System.out.println("Now you have " + (mylist.size() + 1) + " tasks in the list.");
+                mylist.add(temp);
+            } else if (inarr[0].equals("event")) {
+                String woe = input.replaceFirst("event ", "");
+                String[] myarr = woe.split(" /at ");
+                Event temp = new Event(myarr[0], myarr[1]);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(temp);
+                System.out.println("Now you have " + (mylist.size() + 1) + " tasks in the list.");
+                mylist.add(temp);
+            }
+            else {
                 task temp = new task(input);
                 mylist.add(temp);
                 System.out.println("added: " + temp);
