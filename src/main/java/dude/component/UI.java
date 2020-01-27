@@ -28,13 +28,13 @@ public class UI implements IUserInterface {
 
     public void respondParsingError(String errorMsg, String ...usageMsgs) {
         respond(() -> {
-           speak(errorMsg);
-           speak("Just tell me what you want to do like this:" + System.lineSeparator());
-           for (String usageMsg : usageMsgs) {
-               speak("  " + usageMsg);
-           }
-           speak("");
-           speak("Then we're chill");
+            speak(errorMsg);
+            speak("Just tell me what you want to do like this:" + System.lineSeparator());
+            for (String usageMsg : usageMsgs) {
+                speak("  " + usageMsg);
+            }
+            speak("");
+            speak("Then we're chill");
         });
     }
 
