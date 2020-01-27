@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -94,7 +95,7 @@ public class Duke {
         }
         case "deadline": {
             String description = extractDescription(input);
-            String by = extractTime(input);
+            LocalDate by = extractDate(input);
 
             Task deadline = new Deadline(description, by);
             Task.addTask(deadline);
@@ -102,7 +103,7 @@ public class Duke {
         }
         case "event": {
             String description = extractDescription(input);
-            String at = extractTime(input);
+            LocalDate at = extractDate(input);
 
             Task event = new Event(description, at);
             Task.addTask(event);
@@ -146,7 +147,7 @@ public class Duke {
         return String.join(" ", descArr);
     }
 
-    public static String extractTime(String input) throws InvalidInstructionException {
+    public static LocalDate extractDate(String input) throws InvalidInstructionException {
         String[] inputArr = input.split(" /");
         
         if (inputArr.length <= 1) {
@@ -160,9 +161,16 @@ public class Duke {
             throw new InvalidInstructionException("No timing given");
         }
         
-        String[] timeParamArr = Arrays.copyOfRange(timePortionArr, 1, timePortionArr.length);
+        return convertStringToLocalDate(timePortionArr[1]);
+    }
+    
+    public static LocalDate convertStringToLocalDate(String date) {
+        String[] dateArr = date.split("-");
+        int year = Integer.parseInt(dateArr[0]);
+        int month = Integer.parseInt(dateArr[1]);
+        int day = Integer.parseInt(dateArr[2]);
 
-        return String.join(" ", timeParamArr);
+        return LocalDate.of(year, month, day);
     }
 
     public static String extractFirstParam(String input) throws InvalidInstructionException {
