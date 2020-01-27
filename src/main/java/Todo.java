@@ -22,4 +22,16 @@ public class Todo extends Task {
     public String getDescription() {
         return description;
     }
+
+    public String changeDate() {
+        return "";
+    }
+
+    public String changeTime() {
+        return "";
+    }
+
+    public String getTime() {
+        return "";
+    }
 }

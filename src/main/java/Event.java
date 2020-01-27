@@ -26,6 +26,18 @@ public class Event extends Task {
         return word;
     }
 
+    public String changeDate() {
+        return "";
+    }
+
+    public String changeTime() {
+        return "";
+    }
+
+    public String getTime() {
+        return "";
+    }
+
     public String getDescription() {
         return description;
     }

@@ -25,7 +25,13 @@ public abstract class Task {
 
     public abstract String getDate();
 
+    public abstract String getTime();
+
     public abstract String getWord();
+
+    public abstract String changeDate();
+
+    public abstract String changeTime();
 
     public abstract String getDescription();
 
