@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class DoneCommand extends Command {
     protected int taskNumber;
@@ -15,8 +12,12 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = tasks.get(taskNumber - 1);
-        task.markAsDone();
-        ui.markTaskAsDone(task);
+        try {
+            Task task = tasks.get(taskNumber - 1);
+            task.markAsDone();
+            ui.markTaskAsDone(task);
+        } catch (IndexOutOfBoundsException e) {
+            ui.showExceptionMessage(new DukeException("Invalid Task Number given!"));
+        }
     }
 }

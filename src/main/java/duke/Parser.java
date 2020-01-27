@@ -39,7 +39,7 @@ public class Parser {
             try {
                 int taskNumber = Integer.parseInt(commandWords[1]);
                 outputCommand = new DoneCommand(taskNumber);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid Task Number given!");
             }
             break;
