@@ -10,33 +10,61 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         tasks = new ArrayList<>();
-        String input = sc.nextLine().strip();
+        String input = sc.nextLine();
         while (true) {
-            switch (input.split("\\s+")[0]) {
-            case "bye":
-                exit();
-                break;
-            case "list":
-                list();
-                break;
-            case "done":
-                int taskNumber = Integer.parseInt(input.split("\\s+")[1]);
-                completeTask(taskNumber);
-                break;
-            case "todo":
-                addTodo(input);
-                break;
-            case "deadline":
-                addDeadline(input);
-                break;
-            case "event":
-                addEvent(input);
-                break;
-            default:
-                System.out.println(style("Oops! I don't know what that means :("));
-                break;
+            try {
+                String[] parsedInput = input.strip().split("\\s+", 2);
+                switch (parsedInput[0]) {
+                case "bye":
+                    if (parsedInput.length > 1) {
+                        throw new InvalidCommandException();
+                    }
+                    exit();
+                    break;
+                case "list":
+                    if (parsedInput.length > 1) {
+                        throw new InvalidCommandException();
+                    }
+                    list();
+                    break;
+                case "done":
+                    try {
+                        int taskNumber = Integer.parseInt(parsedInput[1]);
+                        completeTask(taskNumber);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new MissingTaskNumberException();
+                    } catch (NumberFormatException e) {
+                        throw new InvalidTaskException();
+                    }
+                    break;
+                case "todo":
+                    try {
+                        addTodo(parsedInput[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new EmptyTodoException();
+                    }
+                    break;
+                case "deadline":
+                    try {
+                        addDeadline(parsedInput[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new EmptyDeadlineException();
+                    }
+                    break;
+                case "event":
+                    try {
+                        addEvent(parsedInput[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new EmptyEventException();
+                    }
+                    break;
+                default:
+                    throw new InvalidCommandException();
+                }
+            } catch (InvalidCommandException e) {
+                System.err.println(style(e.getMessage()));
             }
-            input = sc.nextLine().strip();
+            input = sc.nextLine();
         }
     }
 
@@ -57,25 +85,32 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void addTodo(String input) {
-        String description = input.split("\\s+", 2)[1];
+    private static void addTodo(String description) {
         Todo todo = new Todo(description);
         tasks.add(todo);
         printTask(todo);
     }
 
-    private static void addDeadline(String input) {
-        String[] info = input.split("\\s+", 2)[1].split("\\s*/by\\s*");
-        Deadline deadline = new Deadline(info[0], info[1]);
-        tasks.add(deadline);
-        printTask(deadline);
+    private static void addDeadline(String info) throws MissingDeadlineException {
+        try {
+            String[] parsedInfo = info.split("\\s*/by\\s*", 2);
+            Deadline deadline = new Deadline(parsedInfo[0], parsedInfo[1]);
+            tasks.add(deadline);
+            printTask(deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingDeadlineException();
+        }
     }
 
-    private static void addEvent(String input) {
-        String[] info = input.split("\\s+", 2)[1].split("\\s*/at\\s*");
-        Event event = new Event(info[0], info[1]);
-        tasks.add(event);
-        printTask(event);
+    private static void addEvent(String info) throws MissingTimeException {
+        try {
+            String[] parsedInfo = info.split("\\s*/at\\s*", 2);
+            Event event = new Event(parsedInfo[0], parsedInfo[1]);
+            tasks.add(event);
+            printTask(event);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingTimeException();
+        }
     }
 
     private static void printTask(Task task) {
@@ -89,28 +124,36 @@ public class Duke {
     }
 
     private static void list() {
-        StringBuilder list = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (i > 0) {
-                list.append("\n");
+        if (tasks.size() == 0) {
+            System.out.println(style("There are no tasks yet."));
+        } else {
+            StringBuilder list = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                if (i > 0) {
+                    list.append("\n");
+                }
+                list.append((i + 1) + ". " + tasks.get(i));
             }
-            list.append((i + 1) + ". " + tasks.get(i));
+            System.out.println(style(list.toString()));
         }
-        System.out.println(style(list.toString()));
     }
 
-    private static void completeTask(int taskNumber) {
-        int taskIndex = taskNumber - 1;
-        Task completedTask = tasks.get(taskIndex).complete();
-        tasks.set(taskIndex, completedTask);
-        System.out.println(style("Nice! I've marked this task as done:\n  " + completedTask));
+    private static void completeTask(int taskNumber) throws InvalidTaskNumberException {
+        try {
+            int taskIndex = taskNumber - 1;
+            Task completedTask = tasks.get(taskIndex).complete();
+            tasks.set(taskIndex, completedTask);
+            System.out.println(style("Nice! I've marked this task as done:\n  " + completedTask));
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskNumberException(taskNumber);
+        }
     }
 
     private static String style(String message) {
         String horizontalLine = new String(new char[76]).replace("\0", "-");
         message = horizontalLine + "\n" + message + "\n" + horizontalLine;
         return message.lines()
-            .map(x -> "    " + x)
-            .reduce("", (x, y) -> x + "\n" + y);
+            .map(x -> "    " + x + "\n")
+            .reduce("", (x, y) -> x + y);
     }
 }
