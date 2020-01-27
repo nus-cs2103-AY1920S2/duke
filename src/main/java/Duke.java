@@ -102,8 +102,10 @@ public class Duke {
                 throw new GooseIllegalFormatException("Honk! No event date specified.");
             }
 
-            String at = eventArr[1];
-            return new Event(description, at);
+            eventArr = eventArr[1].split(" ");
+            String date = parseDate(eventArr[0]);
+            String time = eventArr[1];
+            return new Event(description, date, time);
         }
     }
 
@@ -122,8 +124,10 @@ public class Duke {
                 throw new GooseIllegalFormatException("Honk! No deadline specified.");
             }
 
-            String by = deadlineArr[1];
-            return new Deadline(description, by);
+            deadlineArr = deadlineArr[1].split(" ");
+            String date = parseDate(deadlineArr[0]);
+            String time = deadlineArr[1];
+            return new Deadline(description, date, time);
         }
     }
 
@@ -193,6 +197,21 @@ public class Duke {
         }
 
         return formattedList;
+    }
+
+    public static String parseDate(String date) {
+        String[] dateArr = date.split("/");
+        String day = dateArr[0];
+        if (Integer.parseInt(day) < 10) {
+            day = "0" + day;
+        }
+        String month = dateArr[1];
+        if (Integer.parseInt(month) < 10) {
+            month = "0" + month;
+        }
+        String year = dateArr[2];
+
+        return year + "-" + month + "-" + day;
     }
 
     public static String wrapLine(String msg) {
