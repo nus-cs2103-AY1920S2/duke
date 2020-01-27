@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
     public static void main(String[] args) {
+        ArrayList<Task> arrList = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,13 +14,48 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
 
-        input();
+        try {
+            arrList = loadData();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        input(arrList);
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void input() {
-        Scanner sc;
+    private static ArrayList<Task> loadData() throws FileNotFoundException {
         ArrayList<Task> arrList = new ArrayList<>();
+        File f = new File("data\\duke.txt");
+        Scanner s = new Scanner(f);
+        Task t;
+        int done;
+        while (s.hasNext()) {
+            String c = s.next();
+            if (c.equals("T")) {
+                done = s.nextInt();
+                t = new Todo(s.nextLine());
+                arrList.add(t);
+            }
+            else if (c.equals("E")) {
+                done = s.nextInt();
+                t = new Event(s.nextLine());
+                arrList.add(t);
+            }
+            else {
+                done = s.nextInt();
+                t = new Deadline(s.nextLine());
+                arrList.add(t);
+            }
+            if (done == 1) {
+                t.markAsDone();
+            }
+        }
+
+        return arrList;
+    }
+
+    private static void input(ArrayList<Task> arrList) {
+        Scanner sc;
         String taskType, task, date, word, statement;
         Task t;
         String taskArray[] = new String[2];
@@ -30,7 +68,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i=1; i <= arrList.size(); i++) {
                     t = arrList.get(i-1);
-                    System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.description);
+                    System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
                 }
                 System.out.println();
             }
@@ -75,14 +113,10 @@ public class Duke {
                     taskType = taskArray[0];
                     statement = statement.substring(statement.indexOf(" "), statement.length());
                     if (!taskType.equals("todo")) {
-                        task = statement.split("/")[0];
-                        date = statement.split("/")[1];
-                        word = date.substring(0, date.indexOf(" "));
-                        date = date.substring(date.indexOf(" ") + 1, date.length());
-                        if (task.equals("event")) {
-                            t = new Event(task, word, date);
+                        if (taskType.equals("event")) {
+                            t = new Event(statement);
                         } else {
-                            t = new Deadline(task, word, date);
+                            t = new Deadline(statement);
                         }
                     } else {
                         t = new Todo(statement);
