@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -105,9 +106,10 @@ public class Duke {
                     Arrays.copyOfRange(splitInput, 1, keywordIndex));
             String deadlineOrTime = String.join(" ",
                     Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
+            LocalDate date = LocalDate.parse(deadlineOrTime);
 
             newTask = command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ?
-                    new Deadline(description, deadlineOrTime) : new Event(description, deadlineOrTime);
+                    new Deadline(description, date) : new Event(description, date);
         }
 
         this.list.add(newTask);
