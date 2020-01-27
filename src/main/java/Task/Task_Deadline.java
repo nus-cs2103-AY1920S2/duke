@@ -1,10 +1,13 @@
 package Task;
+import Core.DateTimeUtil;
+
+import java.time.LocalDateTime;
 
 public class Task_Deadline extends Task{
 
-    private String time;
+    private LocalDateTime time;
 
-    public Task_Deadline(String description, String time){
+    public Task_Deadline(String description, LocalDateTime time){
         super(description);
         this.time=time;
     }
@@ -16,6 +19,6 @@ public class Task_Deadline extends Task{
 
     @Override
     public String toString() {
-        return super.toString()+" (by: "+time+")";
+        return super.toString()+" (by: "+ DateTimeUtil.standardFormat(time)+")";
     }
 }

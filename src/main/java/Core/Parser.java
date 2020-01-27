@@ -1,9 +1,10 @@
 package Core;
-
+import Exceptions.*;
 import Command.*;
-import Exceptions.DukeException;
-import Exceptions.SingletonException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -97,7 +98,7 @@ public class Parser {
             throw new DukeException("The time of the deadline cannot be empty.");
         }
 
-        return new Command_AddDeadline(description,time);
+        return new Command_AddDeadline(description,parseDateTime(time));
     }
 
     private Command parseEvent(String information) throws DukeException {
@@ -115,7 +116,16 @@ public class Parser {
             throw new DukeException("The time of the event cannot be empty.");
         }
 
-        return new Command_AddEvent(description,time);
+        return new Command_AddEvent(description,parseDateTime(time));
+    }
+
+    private LocalDateTime parseDateTime(String dateTime) throws DukeException{
+        for(DateTimeUtil format: DateTimeUtil.values()){
+            try{
+                return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(format.toString()));
+            }catch (DateTimeParseException e){}
+        }
+        throw new DukeException("Unrecognised date time format.");
     }
 
 }
