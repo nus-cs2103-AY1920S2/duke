@@ -91,14 +91,12 @@ public class Duke {
                     t.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
-
                 } else if (cmd.startsWith(DELETE_CMD)) {
-                    if (canSplitStr(cmd, "delete\\s+")) {
-                        str1 = cmd.split("delete\\s+")[1];
-                    } else {
+                    if (!canSplitStr(cmd, "delete\\s+")) {
                         throw new DukeException("The task to delete cannot be empty");
                     }
 
+                    str1 = cmd.split("delete\\s+")[1];
 
                     if (!validId(str1, tasks)) {
                         throw new DukeException("The task to mark delete is not in the list");
@@ -113,54 +111,55 @@ public class Duke {
                     System.out.println("Noted! I've removed this task:" + LF + "    " + t + LF
                             + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
                 } else if (cmd.startsWith(TODO_CMD)) {
-                    if (canSplitStr(cmd, "todo\\s+")) {
-                        str1  = cmd.split("todo\\s+")[1];
-                    } else {
+                    if (!canSplitStr(cmd, "todo\\s+")) {
                         throw new DukeException("The description of a todo cannot be empty");
                     }
 
+                    str1  = cmd.split("todo\\s+")[1];
 
                     t = new Todo(str1);
 
                     addAndPrintTask(t, tasks);
                 } else if (cmd.startsWith(DEADLINE_CMD)) {
-                    if (canSplitStr(cmd, "deadline\\s+")) {
-                        str1 = cmd.split("deadline\\s+")[1];
-                    } else {
+                    if (!canSplitStr(cmd, "deadline\\s+")) {
                         throw new DukeException("The description and timing of a deadline cannot be empty");
                     }
 
-                    if (canSplitStr(str1, "\\s+/by\\s+")) {
-                        strArr = str1.split("\\s+/by\\s+");
+                    str1 = cmd.split("deadline\\s+")[1];
 
-                        String name = strArr[0];
-                        String by = strArr[1];
-
-                        t = new Deadline(name, by);
-
-                        addAndPrintTask(t, tasks);
-                    } else {
+                    if (!canSplitStr(str1, "\\s+/by\\s+")) {
                         throw new DukeException("Both the description and timing of a deadline cannot be empty");
                     }
+
+                    strArr = str1.split("\\s+/by\\s+");
+
+                    String name = strArr[0];
+                    String by = strArr[1];
+
+                    t = new Deadline(name, by);
+
+                    addAndPrintTask(t, tasks);
                 } else if (cmd.startsWith(EVENT_CMD)) {
-                    if (canSplitStr(cmd, "event\\s+")) {
-                        str1 = cmd.split("event\\s+")[1];
-                    } else {
+                    if (!canSplitStr(cmd, "event\\s+")) {
+                        System.out.println("went here");
                         throw new DukeException("The description and timing of an event cannot be empty");
                     }
 
-                    if (canSplitStr(str1, "\\s+/at\\s+")) {
-                        strArr = str1.split("\\s+/at\\s+");
+                    str1 = cmd.split("event\\s+")[1];
 
-                        String name = strArr[0];
-                        String at = strArr[1];
-
-                        t = new Event(name, at);
-
-                        addAndPrintTask(t, tasks);
-                    } else {
+                    if (!canSplitStr(str1, "\\s+/at\\s+")) {
+                        System.out.println("went here 2");
                         throw new DukeException("Both the description and timing of an event cannot be empty");
                     }
+
+                    strArr = str1.split("\\s+/at\\s+");
+
+                    String name = strArr[0];
+                    String at = strArr[1];
+
+                    t = new Event(name, at);
+
+                    addAndPrintTask(t, tasks);
                 } else if (cmd.equals(BYE_CMD)) {
                     System.out.println(BYE_MSG);
                     break;
