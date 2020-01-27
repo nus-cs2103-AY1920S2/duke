@@ -1,3 +1,4 @@
-T|✕|borrow book
-E|✕|project meeting|Mon 2-4pm
-T|✓|kill lin
+T|✕|sleep
+D|✕|hw|01 Dec. 2019 10:12am
+E|✓|firework|01 Dec. 2019 10:30am to 01 Dec. 2019 11:30am
+T|✕|do hw
