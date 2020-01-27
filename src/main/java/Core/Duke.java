@@ -4,6 +4,8 @@ import Command.Command;
 import Exceptions.DukeException;
 import Exceptions.SingletonException;
 
+//sdf
+
 public class Duke {
 
     private Ui ui;
@@ -13,9 +15,9 @@ public class Duke {
     public Duke(){
         ui=new Ui();
         try {
-            common = Common.getInstance();
             parser = Parser.getInstance();
-        }catch (SingletonException e){
+            common = Common.getInstance();
+        }catch (SingletonException | DukeException e){
             ui.errorLog(e.getMessage());
         }
     }

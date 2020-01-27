@@ -21,7 +21,7 @@ public class Model {
             model=new Model();
             return model;
         }
-        throw new SingletonException("There should only be one model.");
+        throw new SingletonException(ErrorMessage.SINGLETON.ofType("model"));
     }
 
     public void addTask(Task task){
@@ -30,6 +30,9 @@ public class Model {
 
     public ArrayList<String> formatList() throws DukeException {
         ArrayList<String> s=new ArrayList<>();
+        if(taskList.size()==0){
+            throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
+        }
         for (int i = 0; i < getSize(); i++) {
             s.add((i + 1) + ". " + taskList.get(i));
         }
@@ -41,23 +44,33 @@ public class Model {
         getTask(index).setDone();
     }
 
-    public void deleteTask(int index) throws DukeException {
+    public void deleteTask(int index) throws DukeException{
         taskList.remove(getTask(index));
     }
 
     public Task getTask(int index) throws DukeException {
-        getSize();
+        if(taskList.size()==0){
+            throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
+        }
         if(index<0 || index>=taskList.size()){
-            throw new DukeException("Index out of bound.");
+            throw new DukeException(ErrorMessage.INDEX_OUT_OF_BOUND.toString());
         }
         return taskList.get(index);
     }
 
-    public int getSize() throws DukeException {
-        if(taskList.size()==0){
-            throw new DukeException("Task.Task list is empty.");
-        }
+    public int getSize(){
         return taskList.size();
     }
 
+    public ArrayList<Task> getTaskList(){
+        return taskList;
+    }
+
+    public void load(ArrayList<Task> taskList){
+        this.taskList=taskList;
+    }
+
+    public void clearData(){
+        taskList.clear();
+    }
 }
