@@ -1,14 +1,8 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-=======
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
->>>>>>> master
 
 public class Duke {
     public static ArrayList<Task> dukeList = new ArrayList<>();
