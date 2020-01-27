@@ -37,7 +37,7 @@ public class Duke {
             try {
                 file.createNewFile();
             } catch (Exception e) {
-                System.out.println("File could not be created.");
+                System.out.println(e);
             }
         }
     }
