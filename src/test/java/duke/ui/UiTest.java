@@ -18,14 +18,14 @@ public class UiTest {
     }
 
     @AfterEach
-    public void cleanUp(){
+    public void cleanUp() {
         PrintStream originalOut = System.out;
         System.setOut(originalOut);
     }
 
 
     @Test
-    public void greetMethod_ShouldProduceExpectedMessage() {
+    public void greetMethod_shouldProduceExpectedMessage() {
         Ui ui = new Ui();
         String expected = "    ____________________________________________________________\n"
                 + "     Hello! I'm \n"
@@ -41,7 +41,7 @@ public class UiTest {
     }
 
     @Test
-    public void deleteTask_ShouldGiveTheCorrectOutput() {
+    public void deleteTask_shouldGiveTheCorrectOutput() {
         Ui ui = new Ui();
         Task task = new Todo("borrow book");
         String expected = "    ____________________________________________________________\n"

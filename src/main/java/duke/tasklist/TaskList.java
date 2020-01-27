@@ -37,7 +37,7 @@ public class TaskList {
      * @param num index where the task at
      * @throws DukeException when no task found in that index
      */
-    public void markDone(int num) throws DukeException{
+    public void markDone(int num) throws DukeException {
         try {
             Task task = records.get(num - 1);
             task.setStatusDone();
@@ -53,7 +53,7 @@ public class TaskList {
      * @return task that being deleted
      * @throws DukeException when no task found in that index
      */
-    public Task deleteTask(int num) throws DukeException{
+    public Task deleteTask(int num) throws DukeException {
         Task task;
         try {
             task = records.get(num - 1);

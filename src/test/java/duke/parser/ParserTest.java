@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
-    public void invalidOutput_ShouldThrowDukeException() {
+    public void invalidOutput_shouldThrowDukeException() {
         Exception exception = assertThrows(DukeException.class, () -> {
             Parser.parse("Todo borrow book");
         });
@@ -26,14 +26,14 @@ public class ParserTest {
     }
 
     @Test
-    public void inputList_ShouldReturnListCommandObject() throws DukeException {
+    public void inputList_shouldReturnListCommandObject() throws DukeException {
         List<String> expected = new ArrayList<>();
         expected.add(CommandType.LIST.getCommand());
         Assertions.assertEquals(expected, Parser.processUserInput("list"));
     }
 
     @Test
-    public void todoBorrowBookInput_ShouldReturnArrayListSuccessfully() throws DukeException {
+    public void todoBorrowBookInput_shouldReturnArrayListSuccessfully() throws DukeException {
         List<String> expected = new ArrayList<>();
         expected.add(CommandType.TODO.getCommand());
         expected.add("borrow book");

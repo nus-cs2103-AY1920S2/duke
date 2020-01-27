@@ -12,14 +12,14 @@ public class TaskTest {
     }
 
     @Test
-    public void setStatusDone_ShouldReturnTrueForStatus() {
+    public void setStatusDone_shouldReturnTrueForStatus() {
         Task task = new Task("Test");
         task.setStatusDone();
         Assertions.assertTrue(task.getStatus());
     }
 
     @Test
-    public void toString_ShouldReturnInCorrectFormat() {
+    public void toString_shouldReturnInCorrectFormat() {
         Task task = new Task("Test");
         String expected = "[\u2718] Test";
         Assertions.assertEquals(expected, task.toString());

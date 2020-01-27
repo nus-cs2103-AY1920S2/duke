@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Constructor for duke.task.Deadline
      * @param description description of duke.task.Deadline
      */
-    public Deadline(String description, String due) throws DukeException{
+    public Deadline(String description, String due) throws DukeException {
         super(description);
         try {
             period = LocalDate.parse(due);

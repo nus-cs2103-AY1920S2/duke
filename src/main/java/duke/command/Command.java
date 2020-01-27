@@ -28,7 +28,7 @@ public class Command {
         return type;
     }
 
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException{
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         throw new DukeException("To be implemented in child class");
     }
 

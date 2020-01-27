@@ -22,8 +22,8 @@ public class Event extends Task {
         try {
             String[] date = duration.split(" ");
             period = LocalDate.parse(date[0]);
-            this.duration = period.atTime(Integer.parseInt(date[1].substring(0, 2))
-                    , Integer.parseInt(date[1].substring(2, 4)));
+            this.duration = period.atTime(Integer.parseInt(date[1].substring(0, 2)),
+                    Integer.parseInt(date[1].substring(2, 4)));
             type = "event";
         } catch(DateTimeParseException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");

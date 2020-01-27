@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TaskListTest {
 
     @Test
-    public void addOneTask_ThenGetTask_ShouldReturnSameTask() {
+    public void addOneTask_thenGetTask_shouldReturnSameTask() {
         TaskList taskList = new TaskList();
         Task expected = new Task("Testing");
         taskList.addTask(expected);
@@ -20,7 +20,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTaskWithNoTask_ShouldThrowDukeException() {
+    public void deleteTaskWithNoTask_shouldThrowDukeException() {
         TaskList taskList = new TaskList();
         Exception exception = assertThrows(DukeException.class, () -> {
             taskList.deleteTask(1);
@@ -33,7 +33,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTaskWithTasks_ShouldReturnTheTaskAtTheIndex() {
+    public void deleteTaskWithTasks_shouldReturnTheTaskAtTheIndex() {
         TaskList taskList = new TaskList();
         Task expected = new Task("Testing");
         taskList.addTask(new Task("Wrong Task"));
@@ -44,7 +44,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void getAmountOfTask_ShouldReturnCorrectNumber() {
+    public void getAmountOfTask_shouldReturnCorrectNumber() {
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("Wrong Task"));
         taskList.addTask(new Task("Wrong Task"));

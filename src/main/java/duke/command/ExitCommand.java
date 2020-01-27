@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute (TaskList taskList, Storage storage, Ui ui) {
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
         ui.reply("Alright! See you next time!");
     }
 }

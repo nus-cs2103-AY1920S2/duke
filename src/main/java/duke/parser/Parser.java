@@ -40,13 +40,13 @@ public class Parser {
 
     public static List<String> processUserInput(String userInput) throws DukeException {
         List<String> result = new ArrayList<>();
-        if (!userInput.equals(CommandType.BYE.getCommand())) {
-            if (userInput.equals(CommandType.LIST.getCommand())) {
+        if(!userInput.equals(CommandType.BYE.getCommand())) {
+            if(userInput.equals(CommandType.LIST.getCommand())) {
                 result.add(CommandType.LIST.getCommand());
-            } else if (userInput.startsWith(CommandType.DELETE.getCommand())) {
+            } else if(userInput.startsWith(CommandType.DELETE.getCommand())) {
                 result.add(CommandType.DELETE.getCommand());
                 result.add(userInput.substring(7).strip());
-            } else if (userInput.startsWith(CommandType.DONE.getCommand())) {
+            } else if(userInput.startsWith(CommandType.DONE.getCommand())) {
                 result.add(CommandType.DONE.getCommand());
                 result.add(userInput.substring(5).strip());
             } else {
@@ -63,30 +63,30 @@ public class Parser {
         int indexForSeparator;
         List<String> result = new ArrayList<>();
 
-        if (data.startsWith(CommandType.TODO.getCommand())) {
+        if(data.startsWith(CommandType.TODO.getCommand())) {
             String info;
             try {
-                if (!(data.charAt(4) == ' ')) {
+                if(!(data.charAt(4) == ' ')) {
                     throw new DukeException("Please indicate in this format: todo [description]");
                 }
             } catch(StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please indicate in this format: todo [description]");
             }
             info = data.substring(5);
-            if (info.strip().equals("")) {
+            if(info.strip().equals("")) {
                 throw new DukeException("I cannot find the description of Todo!");
             }
             result.add(CommandType.TODO.getCommand());
             result.add(info);
-        } else if (data.startsWith(CommandType.DEADLINE.getCommand())) {
+        } else if(data.startsWith(CommandType.DEADLINE.getCommand())) {
             String due;
             if(data.contains(" /by ")) {
                 try {
                     indexForSeparator = data.indexOf('/');
-                    if (indexForSeparator <= 9) {
+                    if(indexForSeparator <= 9) {
                         throw new DukeException("Please indicate in this format: event [description] /at [duration].");
                     }
-                } catch (IndexOutOfBoundsException e) {
+                } catch(IndexOutOfBoundsException e) {
                     throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
                 }
             } else {
@@ -94,10 +94,10 @@ public class Parser {
             }
 
             String description = data.substring(8, indexForSeparator - 1);
-            if (!description.startsWith(" ")) {
+            if(!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: deadline [description] /by [due date].");
             }
-            if (description.strip().equals("")) {
+            if(description.strip().equals("")) {
                 throw new DukeException("I cannot find description of a deadline!");
             }
             try {
@@ -105,18 +105,18 @@ public class Parser {
             } catch(IndexOutOfBoundsException e) {
                 throw new DukeException("I cannot find the due date of deadline!");
             }
-            if (due.strip().equals("")) {
+            if(due.strip().equals("")) {
                 throw new DukeException("I cannot find the due date of deadline!");
             }
             result.add(CommandType.DEADLINE.getCommand());
             result.add(description.substring(1));
             result.add(due);
-        } else if (data.startsWith(CommandType.EVENT.getCommand())) {
+        } else if(data.startsWith(CommandType.EVENT.getCommand())) {
             String duration;
             if(data.contains(" /at ")) {
                 try {
                     indexForSeparator = data.indexOf('/');
-                    if (indexForSeparator <= 6) {
+                    if(indexForSeparator <= 6) {
                         throw new DukeException("Please indicate in this format: event [description] /at [duration].");
                     }
                 } catch(IndexOutOfBoundsException e) {
@@ -127,10 +127,10 @@ public class Parser {
             }
 
             String description = data.substring(5, indexForSeparator - 1);
-            if (!description.startsWith(" ")) {
+            if(!description.startsWith(" ")) {
                 throw new DukeException("Please indicate in this format: event [description] /at [duration].");
             }
-            if (description.strip().equals("")) {
+            if(description.strip().equals("")) {
                 throw new DukeException("I cannot find the description of the event!");
             }
             try {
@@ -138,7 +138,7 @@ public class Parser {
             } catch(IndexOutOfBoundsException e) {
                 throw new DukeException("I cannot find the duration of the event!");
             }
-            if (duration.strip().equals("")) {
+            if(duration.strip().equals("")) {
                 throw new DukeException("I cannot find the duration of the event!");
             }
             result.add(CommandType.EVENT.getCommand());
