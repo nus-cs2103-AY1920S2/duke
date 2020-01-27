@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 public class DateTimeParse {
+    private static LocalDateTime localDateTimeProvider = LocalDateTime.now();
     private static final DateTimeFormatter[] formats = {
             new DateTimeFormatterBuilder()
                     .appendPattern("yyyy/M/d")

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Task implements Serializable {
     private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private LocalDateTime localDateTimeProvider = LocalDateTime.now();
     protected final String description;
 
     private boolean isDone;
@@ -18,6 +19,26 @@ public abstract class Task implements Serializable {
         this.dateTime = dateTime;
         this.description = description;
         this.isDone = false;
+    }
+
+    public static Task getTask(TaskType taskType, String description, LocalDateTime dateTime){
+        switch (taskType) {
+        case TODO:
+            return new Todo(description);
+        case Event:
+            return new Event(description, dateTime);
+        case DEADLINE:
+            return new Deadline(description, dateTime);
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * For testing purposes.
+     */
+    public void setLocalDateTimeProvider(LocalDateTime localDateTimeProvider) {
+        this.localDateTimeProvider = localDateTimeProvider;
     }
 
     /**
@@ -44,9 +65,9 @@ public abstract class Task implements Serializable {
     public String dateTimeToString() {
         if (dateTime == null) {
             return "";
-        } else if (dateTime.toLocalDate().equals(LocalDate.now())) {
+        } else if (dateTime.toLocalDate().equals(localDateTimeProvider.now().toLocalDate())) {
             return "Today " + dateTime.toLocalTime().toString();
-        } else if (dateTime.compareTo(LocalDateTime.now()) < 0) {
+        } else if (dateTime.compareTo(localDateTimeProvider.now()) < 0) {
             return this.dateTime.format(DEFAULT_FORMAT) + " [Over]";
         } else {
             return this.dateTime.format(DEFAULT_FORMAT);
