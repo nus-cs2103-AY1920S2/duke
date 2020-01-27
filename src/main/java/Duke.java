@@ -31,6 +31,14 @@ public class Duke {
         } catch (FileNotFoundException exception) {
             ui.showLoadingError();
             tasks = new TaskList();
+
+            File file = new File(filePath);
+
+            try {
+                file.createNewFile();
+            } catch (Exception e) {
+                System.out.println("File could not be created.");
+            }
         }
     }
 
