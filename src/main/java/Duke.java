@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -73,10 +77,15 @@ public class Duke {
                             if (arguments.length < 2) {
                                 throw new InsufficientArgumentsException("☹ OOPS!!! Missing deadline parameters!");
                             } else {
-                                tasks.add(new Deadline(arguments[0], arguments[1]));
-                                printMessage("Got it! I've added the task:\n\t\t" +
-                                        tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() +
-                                        " tasks in the list.");
+                                try {
+                                    tasks.add(new Deadline(arguments[0], LocalDate.parse(arguments[1])));
+                                    printMessage("Got it! I've added the task:\n\t\t" +
+                                            tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() +
+                                            " tasks in the list.");
+                                } catch (DateTimeParseException ex) {
+                                    printMessage("☹ OOPS!!! Please enter a valid date: YYYY-MM-DD");
+                                }
+
                             }
                         }
                         break;
@@ -89,8 +98,14 @@ public class Duke {
                             if (arguments.length < 2) {
                                 throw new InsufficientArgumentsException("☹ OOPS!!! Missing event parameters!");
                             } else {
-                                tasks.add(new Event(arguments[0], arguments[1]));
-                                printMessage("Got it! I've added the task:\n\t\t" + tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                                try {
+                                    tasks.add(new Event(arguments[0], LocalDate.parse(arguments[1])));
+                                    printMessage("Got it! I've added the task:\n\t\t" +
+                                            tasks.get(tasks.size() - 1).toString() + "\n\tNow you have " +
+                                            tasks.size() + " tasks in the list.");
+                                } catch (DateTimeParseException ex) {
+                                    printMessage("☹ OOPS!!! Please enter a valid date: YYYY-MM-DD");
+                                }
                             }
                         }
                         break;
