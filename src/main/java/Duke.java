@@ -1,14 +1,30 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
 
-    public final static String NEWLINE =  System.lineSeparator();
+    public final static String NEWLINE = System.lineSeparator();
     public final static String INDENT = "    ";
     public final static String BORDER = INDENT + "____________________________________________________________";
     public final static String EXIT = "bye";
     public final static String GOODBYE_MESSAGE = INDENT + "  Goodbye and have a beautiful time!";
+
+    private static Storage storage;
+
+    public Duke(String filePath) {
+        // Do my constructor here
+        try {
+            storage = new Storage(filePath);
+        } catch (IOException io) {
+            System.out.println("Unable to create storage file/directory\n" +
+                    "Please create a data directory and Duke.txt in it");
+        }
+    }
 
     public static void main(String[] args) {
         String logo = INDENT + "  _____  __    __  _____" + NEWLINE
@@ -24,10 +40,13 @@ public class Duke {
         System.out.println(BORDER);
 
         Scanner scanner = new Scanner(System.in);
-        List<Task> listOfTask = new ArrayList<>();
 
         String userInput = scanner.nextLine();
         String replyMessage;
+
+        Duke duke = new Duke("data" + System.getProperty("file.separator") + "duke.txt");
+        ArrayList<Task> listOfTask = storage.load();
+
 
         while (!userInput.equals(EXIT)) {
             String[] inputArr = userInput.split(" ");
@@ -59,10 +78,11 @@ public class Duke {
                                 listOfTask.add(currentToDo);
                                 replyMessage = customiseMessage(currentToDo.toString(), listOfTask.size());
                                 System.out.println(addBorder(replyMessage));
+                                storage.save(listOfTask);
                             }
                         } catch (DukeException exception){
                             System.out.println(addBorder(exception.toString()));
-                        }finally {
+                        } finally {
                             break;
                         }
                     case EVENT:
@@ -79,6 +99,12 @@ public class Duke {
                                         throw new DukeException("Empty Event description",
                                                 DukeErrorType.EMPTY_DESCRIPTION,
                                                 command);
+                                    } else {
+                                        Event currentEvent = new Event(eventDescription, eventTime);
+                                        listOfTask.add(currentEvent);
+                                        replyMessage = customiseMessage(currentEvent.toString(), listOfTask.size());
+                                        System.out.println(addBorder(replyMessage));
+                                        storage.save(listOfTask);
                                     }
                                 } catch (DukeException exception) {
                                     System.out.println(addBorder(exception.toString()));
@@ -92,11 +118,6 @@ public class Duke {
                                     System.out.println(addBorder(exception.toString()));
                                 }
                             }
-                            Event currentEvent = new Event(eventDescription, eventTime);
-                            listOfTask.add(currentEvent);
-                            replyMessage = customiseMessage(currentEvent.toString(), listOfTask.size());
-                            System.out.println(addBorder(replyMessage));
-
                         } else {
                             // Do my own exception class here
                             try {
@@ -116,6 +137,7 @@ public class Duke {
                         listOfTask.add(currentDeadline);
                         replyMessage = customiseMessage((currentDeadline.toString()), listOfTask.size());
                         System.out.println(addBorder(replyMessage));
+                        storage.save(listOfTask);
                         break;
                     case DELETE:
                         int deleteTaskNumber = Integer.parseInt(inputArr[1]) - 1;
@@ -128,6 +150,7 @@ public class Duke {
                                     .append(String
                                             .format("      Now you have %d task(s) in the list.", listOfTask.size()));
                             System.out.println(addBorder(stringBuilder.toString()));
+                            storage.save(listOfTask);
                         } catch (IndexOutOfBoundsException ex) {
                             System.out.println(ex.getMessage());
                         }
@@ -139,6 +162,7 @@ public class Duke {
                             currentTask.markAsDone();
                             System.out.println(formatAddedTaskReply(currentTask.getStatusIcon(),
                                     currentTask.getTask()));
+                            storage.save(listOfTask);
                         } catch (IndexOutOfBoundsException exception) {
                             // do own class exception here
                             System.out.println(exception.getMessage());
@@ -152,7 +176,10 @@ public class Duke {
             } else {
                 System.out.println("Please give me something to exe :D");
             }
+
+
             userInput = scanner.nextLine();
+
         }
 
         System.out.println(addBorder(GOODBYE_MESSAGE));
@@ -162,8 +189,7 @@ public class Duke {
 
     // for bye and adding stuff into list
     public static String addBorder(String message) {
-        String reply = BORDER + "\n" + message + "\n" + BORDER;
-        return reply;
+        return BORDER + "\n" + message + "\n" + BORDER;
     }
 
     // for printing list
@@ -203,4 +229,5 @@ public class Duke {
         stringBuilder.append(BORDER);
         return stringBuilder.toString();
     }
+
 }

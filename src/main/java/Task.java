@@ -16,6 +16,14 @@ public class Task {
         return (isDone ? ":)" : ":(");
     }
 
+    public String getStatusNumber() {
+        if (isDone) {
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
