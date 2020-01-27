@@ -18,10 +18,20 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Get the date of the Deadline task
+     *
+     * @return the date of the Deadline task
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Get the time of the Deadline task
+     *
+     * @return the time of the Deadline task
+     */
     public LocalTime getTime() {
         return this.time;
     }

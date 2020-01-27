@@ -23,18 +23,38 @@ public class TaskList {
         }
     }
 
+    /**
+     * Get the size of the task list
+     *
+     * @return the size of the task list
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Get the task at a specific index in the task list
+     *
+     * @return the task at a specific index in the task list
+     */
     public Task get(int getIndex) {
         return tasks.get(getIndex);
     }
 
+    /**
+     * Delete the task at a specific index from the task list
+     *
+     * @return the deleted task
+     */
     public Task delete(int deleteIndex) {
         return tasks.remove(deleteIndex);
     }
 
+    /**
+     * Add the task to the task list
+     *
+     * @param   task the task to be added
+     */
     public void add(Task task) {
         tasks.add(task);
     }

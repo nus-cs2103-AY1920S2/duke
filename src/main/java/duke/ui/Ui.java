@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ui {
+    /**
+     * Show the welcome message, which consists of the logo, and greeting
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -87,6 +90,11 @@ public class Ui {
                 "     Now you have " + size + " " + taskWord + " in the list.");
     }
 
+    /**
+     * Read the command entered by the user
+     *
+     * @return  the command entered by the user
+     */
     public String readCommand() {
         BufferedReader bufferedReader = new BufferedReader (new InputStreamReader(System.in));
         try {
@@ -96,18 +104,23 @@ public class Ui {
         }
     }
 
+    /**
+     * Show on screen the top line, which is the line before the main message
+     */
     public void showStartLine() {
         System.out.println("    _____________________________DUKE___________________________");
     }
 
+    /**
+     * Show on screen the bottom line, which is the line after the main message
+     */
     public void showEndLine() {
         System.out.println("    _________★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜★_______\n");
     }
 
-    public void showError(String error) {
-        showLine(error);
-    }
-
+    /**
+     * Show on screen the loading error, when the list could not be loaded from disk
+     */
     public void showLoadingError() {
         prettyPrint("☹ OOPS!!! Failed to load list!");
     }
@@ -116,6 +129,11 @@ public class Ui {
         showLine("Aw goodbye for now! Hope to see you again soon :)");
     }
 
+    /**
+     * Format the line and show on screen to user
+     *
+     * @param   line   the line to be formatted
+     */
     public void showLine(String line) {
         System.out.println("     " + line);
     }

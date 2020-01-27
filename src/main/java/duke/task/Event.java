@@ -17,10 +17,20 @@ public class Event extends Task {
         this.fromTimeToTime = fromTimeToTime;
     }
 
+    /**
+     * Get the date of the Event task
+     *
+     * @return the date of the Event task
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Get the start and end times of the Event task
+     *
+     * @return the start and end times of the Event task
+     */
     public String getFromTimeToTime() {
         return this.fromTimeToTime;
     }

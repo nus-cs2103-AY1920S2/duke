@@ -11,6 +11,14 @@ public class DeleteCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Delete the task from list at a specific index if index is valid, save the task list
+     * and display to user
+     *
+     * @param  tasks   the task list
+     * @param   storage the storage object to save the list
+     * @param   ui  the ui object to interact with user
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = this.command.split(" ");

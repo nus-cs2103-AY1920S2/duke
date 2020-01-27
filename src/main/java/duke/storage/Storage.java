@@ -48,6 +48,7 @@ public class Storage {
      *
      * @param  listString   the list of tasks in string format
      * @return  list    the list of task objects
+     * @throws  DukeException   if the data cannot be parsed into a list of tasks
      */
     public List<Task> convertStringToList(String listString) throws DukeException {
         List<Task> list = new ArrayList<>();
@@ -121,6 +122,7 @@ public class Storage {
      * Get the list of tasks from file saved on disk
      *
      * @return  list   the list of tasks from file
+     * @throws  DukeException   if the list cannot be loaded from disk or data is corrupted
      */
     public List<Task> load() throws DukeException {
         File dataPath = new File(System.getProperty("user.dir"));

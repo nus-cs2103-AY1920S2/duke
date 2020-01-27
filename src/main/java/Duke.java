@@ -33,7 +33,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.showLine(e.getMessage());
             } finally {
                 ui.showEndLine();
             }

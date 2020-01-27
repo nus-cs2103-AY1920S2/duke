@@ -11,6 +11,13 @@ public class AddCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Add a Deadline/ Event/ To-do task to the task list, save the list to disk and display to user
+     *
+     * @param  tasks   the task list
+     * @param   storage the storage object to save the list
+     * @param   ui  the ui object to interact with user
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = command.split(" ");
@@ -22,12 +29,12 @@ public class AddCommand extends Command {
                 tasks.add(task);
                 break;
             case "deadline":
-                // Add a duke.task.Deadline task
+                // Add a Deadline task
                 task = tasks.makeNewDeadlineTask(command);
                 tasks.add(task);
                 break;
             case "event":
-                // Add an duke.task.Event task
+                // Add an Event task
                 task = tasks.makeNewEventTask(command);
                 tasks.add(task);
                 break;

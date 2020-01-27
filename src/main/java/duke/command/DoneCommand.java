@@ -11,6 +11,14 @@ public class DoneCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Mark a task in the task list as done if specified index is valid, save the task list
+     * and display to user
+     *
+     * @param  tasks   the task list
+     * @param   storage the storage object to save the list
+     * @param   ui  the ui object to interact with user
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = this.command.split(" ");
