@@ -4,19 +4,19 @@
  */
 public abstract class Task {
 
-    public String taskname; //name of the given task
+    public String taskName; //name of the given task
     public boolean done; //whether the task is done or not
-    public String Tasktype;
+    public String taskType;
 
     /**
      * Constructor.
-     * @param taskname name of task.
-     * @param Tasktype what type is it.
+     * @param taskName name of task.
+     * @param taskType what type is it.
      */
-    public Task(String taskname, String Tasktype) {
-        this.taskname = taskname;
+    public Task(String taskName, String taskType) {
+        this.taskName = taskName;
         this.done = false;
-        this.Tasktype = Tasktype;
+        this.taskType = taskType;
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class Task {
      * Function to get the task name.
      * @return String name of the task.
      */
-    public String getTaskname() {
-        return this.taskname;
+    public String getTaskName() {
+        return this.taskName;
     }
 }

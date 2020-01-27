@@ -107,19 +107,19 @@ public class Storage {
      * @return String representation of the task.
      */
     public String convertTaskToString(Task t) {
-        String taskType = t.Tasktype;
+        String taskType = t.taskType;
         String result = "";
         switch(taskType) {
             case "T":
-                result += "T|" + this.returnDone(t) + "|" + t.getTaskname();
+                result += "T|" + this.returnDone(t) + "|" + t.getTaskName();
                 break;
             case "E":
                 Event e = (Event) t;
-                result += "E|" + this.returnDone(t) + "|" + t.getTaskname() + "|" + e.DateTime;
+                result += "E|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + e.dateTime;
                 break;
             case "D":
                 Deadline d = (Deadline) t;
-                result += "D|" + this.returnDone(t) + "|" + t.getTaskname() + "|" + d.DateTime;
+                result += "D|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + d.dateTime;
                 break;
         }
         return result;

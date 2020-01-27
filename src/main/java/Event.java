@@ -6,16 +6,16 @@ import java.util.Date;
  */
 public class Event extends Task {
 
-    public String DateTime;
+    public String dateTime;
 
     /**
      * Constructor for the class.
-     * @param taskname description of the event.
-     * @param DateTime time and date of the event.
+     * @param taskName description of the event.
+     * @param dateTime time and date of the event.
      */
-    public Event(String taskname, String DateTime) {
-        super(taskname, "E");
-        this.DateTime = DateTime;
+    public Event(String taskName, String dateTime) {
+        super(taskName, "E");
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -26,9 +26,9 @@ public class Event extends Task {
     public String toString() {
         String message = "";
         if (this.done) {
-            message += "[" + this.Tasktype +"]" + "[" + "\u2713" + "] " + this.taskname + " (at: " + this.DateTime + ")";
+            message += "[" + this.taskType +"]" + "[" + "\u2713" + "] " + this.taskName + " (at: " + this.dateTime + ")";
         } else {
-            message += "[" + this.Tasktype +"]" + "[" + "\u2718" + "] " + this.taskname + " (at: " + this.DateTime + ")";
+            message += "[" + this.taskType +"]" + "[" + "\u2718" + "] " + this.taskName + " (at: " + this.dateTime + ")";
         }
         return message;
     }

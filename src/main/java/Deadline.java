@@ -9,18 +9,18 @@ import java.time.temporal.ChronoUnit;
  */
 public class Deadline extends Task {
 
-    public String DateTime;
+    public String dateTime;
     public LocalDateTime date;
 
     /**
      * Constructor for the Deadline task.
-     * @param taskname description of the deadline.
-     * @param DateTime date and time when the task is due.
+     * @param taskName description of the deadline.
+     * @param dateTime date and time when the task is due.
      */
-    public Deadline(String taskname, String DateTime) {
-        super(taskname, "D");
-        this.DateTime = DateTime;
-        this.constructDate(DateTime);
+    public Deadline(String taskName, String dateTime) {
+        super(taskName, "D");
+        this.dateTime = dateTime;
+        this.constructDate(dateTime);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     public void constructDate(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
-        this.date = LocalDateTime.parse(this.DateTime, formatter);
+        this.date = LocalDateTime.parse(this.dateTime, formatter);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class Deadline extends Task {
         String message = "";
         String dateToBePrinted = this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         if (this.done) {
-            message += "[" + this.Tasktype +"]" + "[" + "\u2713" + "] " + this.taskname + " (by: " + dateToBePrinted + ")";
+            message += "[" + this.taskType +"]" + "[" + "\u2713" + "] " + this.taskName + " (by: " + dateToBePrinted + ")";
         } else {
-            message +=  "[" + this.Tasktype +"]" + "[" + "\u2718" + "] " + this.taskname + " (by: " + dateToBePrinted + ")";
+            message +=  "[" + this.taskType +"]" + "[" + "\u2718" + "] " + this.taskName + " (by: " + dateToBePrinted + ")";
         }
         return message;
     }

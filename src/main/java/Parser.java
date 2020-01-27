@@ -13,8 +13,8 @@ public class Parser {
     public boolean respondToUser(String command, UI ui, TaskList list) {
         // split the string
         String[] inputCommand = command.trim().split(" ");
-        StringBuilder taskname = new StringBuilder();
-        StringBuilder DateTime = new StringBuilder();
+        StringBuilder taskName = new StringBuilder();
+        StringBuilder dateTime = new StringBuilder();
         int index_found = 0;
         switch (inputCommand[0]) {
             case "todo":
@@ -24,14 +24,14 @@ public class Parser {
                         throw new DukeException("OOPS! :( The description of to-do cannot be empty!");
                     }
                     for (int i = 1; i < inputCommand.length; i++) {
-                        taskname.append(inputCommand[i]);
+                        taskName.append(inputCommand[i]);
                         if (i != inputCommand.length - 1) {
-                            taskname.append(" ");
+                            taskName.append(" ");
                         }
                     }
-                    ToDo t = new ToDo(taskname.toString());
+                    ToDo t = new ToDo(taskName.toString());
                     list.addTask(t);
-                    ui.prettyPrinting(taskname.toString() + " added!");
+                    ui.prettyPrinting(taskName.toString() + " added!");
                 } catch (DukeException e) {
                     ui.prettyPrinting(e.toString());
                 }
@@ -47,11 +47,11 @@ public class Parser {
                     if (!command.contains("/at")) {
                         throw new DukeException("Event command must contain [/at] as stated!"); //all the exceptions as stated in the error msg
                     }
-                    index_found = this.grabTaskName(taskname, inputCommand, "/at");
-                    this.grabDateTime(index_found, inputCommand, DateTime);
-                    Event e = new Event(taskname.toString(), DateTime.toString());
+                    index_found = this.grabTaskName(taskName, inputCommand, "/at");
+                    this.grabDateTime(index_found, inputCommand, dateTime);
+                    Event e = new Event(taskName.toString(), dateTime.toString());
                     list.addTask(e);
-                    ui.prettyPrinting(taskname.toString() + " added!");
+                    ui.prettyPrinting(taskName.toString() + " added!");
                 } catch (DukeException e) {
                     ui.prettyPrinting(e.toString());
                 }
@@ -65,13 +65,13 @@ public class Parser {
                         //means incorrect input of the deadline command as stated, throw exception
                         throw new DukeException("Deadline command must contain [/by] as stated!");
                     }
-                    index_found = this.grabTaskName(taskname, inputCommand, "/by");
-                    this.grabDateTime(index_found, inputCommand, DateTime);
+                    index_found = this.grabTaskName(taskName, inputCommand, "/by");
+                    this.grabDateTime(index_found, inputCommand, dateTime);
                     // validate date inputted
-                    Deadline.validDate(DateTime.toString());
-                    Deadline d = new Deadline(taskname.toString(), DateTime.toString());
+                    Deadline.validDate(dateTime.toString());
+                    Deadline d = new Deadline(taskName.toString(), dateTime.toString());
                     list.addTask(d);
-                    ui.prettyPrinting(taskname.toString() + " added!");
+                    ui.prettyPrinting(taskName.toString() + " added!");
                 } catch (DukeException e) {
                     ui.prettyPrinting(e.toString());
                 } catch (Exception e) {
@@ -121,24 +121,24 @@ public class Parser {
 
     /**
      * Function to split the input query and grab the task name, also returns the index where the at/by will be at.
-     * @param taskname name of the task.
+     * @param taskName name of the task.
      * @param inputCommand command inputted by user (array).
      * @param delimiter delimiter which is either /by or /at.
      * @return index for the by/at depending on the type of task, not applicable for to-do tasks.
      */
-    public int grabTaskName(StringBuilder taskname, String[] inputCommand, String delimiter)  throws DukeException {
+    public int grabTaskName(StringBuilder taskName, String[] inputCommand, String delimiter)  throws DukeException {
         int index_found = 0; //find the index for the delimiter
         for (int i = 1; i <= inputCommand.length - 1; i++) {
             if (inputCommand[i].equals(delimiter)) {
                 index_found = i;
                 break;
             } else {
-                taskname.append(inputCommand[i]);
+                taskName.append(inputCommand[i]);
                 if (inputCommand[i + 1].equals(delimiter)) {
                     index_found = i + 1;
                     break;
                 } else {
-                    taskname.append(" ");
+                    taskName.append(" ");
                 }
             }
         }
@@ -151,17 +151,17 @@ public class Parser {
      * Function to grab and get the date time for the event/deadline.
      * @param index_found index where the /at or /by is found.
      * @param inputCommand command inputted by user (array).
-     * @param DateTime object to hold the result.
+     * @param dateTime object to hold the result.
      */
-    public void grabDateTime(int index_found, String[] inputCommand, StringBuilder DateTime)  throws DukeException {
+    public void grabDateTime(int index_found, String[] inputCommand, StringBuilder dateTime)  throws DukeException {
         if (index_found == inputCommand.length - 1) {
             // means that there is no description of date of task after the delimiter
             throw new DukeException("Date and time of the event/deadline cannot be empty!");
         }
         for (int i = index_found + 1; i < inputCommand.length; i++) {
-            DateTime.append(inputCommand[i]);
+            dateTime.append(inputCommand[i]);
             if (i != inputCommand.length - 1) {
-                DateTime.append(" ");
+                dateTime.append(" ");
             }
         }
     }

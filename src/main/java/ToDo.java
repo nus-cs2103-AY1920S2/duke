@@ -5,10 +5,10 @@ public class ToDo extends Task {
 
     /**
      * Constructor.
-     * @param taskname
+     * @param taskName
      */
-    public ToDo(String taskname) {
-        super(taskname, "T");
+    public ToDo(String taskName) {
+        super(taskName, "T");
     }
 
     @Override
@@ -19,9 +19,9 @@ public class ToDo extends Task {
     public String toString() {
         String message = "";
         if (this.getDone()) {
-            message += "[" + this.Tasktype + "]" + "[" + "\u2713" + "] " + this.taskname;
+            message += "[" + this.taskType + "]" + "[" + "\u2713" + "] " + this.taskName;
         } else {
-            message += "[" + this.Tasktype + "]" + "[" + "\u2718" + "] " + this.taskname;
+            message += "[" + this.taskType + "]" + "[" + "\u2718" + "] " + this.taskName;
         }
         return message;
     }
