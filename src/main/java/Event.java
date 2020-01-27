@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     public Event(String taskName, String dateTime) {
@@ -13,7 +15,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateTime.format(DateTimeFormatter.ofPattern("dd MM yyyy")) + ")";
     }
 
 }
