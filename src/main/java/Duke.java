@@ -1,7 +1,14 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Duke {
 
@@ -76,8 +83,55 @@ public class Duke {
         print(outputStreamBuffer);
     }
 
+    private static Task decode(String str) {
+        String[] splitInput = str.split(Pattern.quote(Task.SEPERATOR));
+        String type = splitInput[0];
+        boolean isDone = splitInput[1].equals(Task.TRUE_SYMBOL);
+        String taskDescription = splitInput[2];
+//        for (String s : splitInput) {
+//            print(""+s.length());
+//            print(s);
+//        }
+//        print(" ");
+//        print(taskDescription);
+        Task toReturn = null;
+
+        if (type.equals(Todo.TYPE_SYMBOL)) {
+            toReturn = new Todo(taskDescription);
+        } else if (type.equals(Deadline.TYPE_SYMBOL)) {
+            String time = splitInput[3];
+            toReturn = new Deadline(taskDescription, time);
+        } else if (type.equals(Event.TYPE_SYMBOL)) {
+            String time = splitInput[3];
+            toReturn = new Event(taskDescription, time);
+        } else {
+            print("Failed to decode. Unknown task type.");
+        }
+
+        if (isDone && toReturn != null) {
+            toReturn.markAsDone();
+        }
+
+        return toReturn;
+    }
+
+    private void loadSavedTaskList(Path path) throws IOException {
+        if (Files.exists(path)) {
+            List<String> lines = Files.readAllLines(path);
+            this.list = lines.stream().map(Duke::decode).collect(Collectors.toList());
+        }
+    }
+
+    private void saveTaskList(Path path) throws IOException {
+        if (!Files.exists(path)) {
+            Files.createDirectories(path.getParent());
+        }
+        List<String> lines = this.list.stream().map(Task::toStringForSaving).collect(Collectors.toList());
+        Files.write(path, lines, StandardOpenOption.CREATE);
+    }
+
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
-        String[] splitInput = lineInput.split(" ");
+        String[] splitInput = lineInput.split(Pattern.quote(" "));
         String command = splitInput[0];
 
         if (splitInput.length == 1) {
@@ -120,7 +174,7 @@ public class Duke {
     }
 
     private void processInput(String lineInput) {
-        String[] splitInput = lineInput.split(" ");
+        String[] splitInput = lineInput.split(Pattern.quote(" "));
         // empty line would output string array of size 1, where the element is empty string
         String commandString = splitInput[0];
         DukeCommand command = null;
@@ -179,11 +233,24 @@ public class Duke {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
 
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "code", "duke", "data", "duke.txt");
+        try {
+            duke.loadSavedTaskList(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         greet();
 
         while (true) {
             String lineInput = sc.nextLine();
             duke.processInput(lineInput);
+            try {
+                duke.saveTaskList(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

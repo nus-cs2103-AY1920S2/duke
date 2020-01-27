@@ -1,5 +1,9 @@
 abstract class Task {
 
+    protected static final String SEPERATOR = " | ";
+    protected static final String TRUE_SYMBOL = "O";
+    protected static final String FALSE_SYMBOL = "X";
+
     protected String taskDescription;
     protected boolean isDone;
 
@@ -12,12 +16,10 @@ abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String toStringForSaving();
+
     @Override
     public String toString() {
-        if (isDone) {
-            return "[O] " + taskDescription;
-        } else {
-            return "[X] " + taskDescription;
-        }
+        return String.format("[%s] %s", (isDone ? TRUE_SYMBOL : FALSE_SYMBOL), taskDescription);
     }
 }
