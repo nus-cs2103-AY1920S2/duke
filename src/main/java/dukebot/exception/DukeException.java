@@ -3,14 +3,7 @@ package dukebot.exception;
 import dukebot.ui.LineName;
 
 public class DukeException extends Throwable {
-    private LineName errorLineName = null;
-
-    /**
-     * Standard error message.
-     */
-    public DukeException(String message) {
-        super(message);
-    }
+    private LineName errorLineName;
 
     /**
      * Error with LineName.

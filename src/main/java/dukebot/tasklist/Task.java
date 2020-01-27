@@ -20,12 +20,12 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
-    /**
-     * For testing purposes.
-     */
-    public void setLocalDateTimeProvider(LocalDateTime localDateTimeProvider) {
-        this.localDateTimeProvider = localDateTimeProvider;
-    }
+    // /**
+    //  * For testing purposes.
+    //  */
+    // public void setLocalDateTimeProvider(LocalDateTime localDateTimeProvider) {
+    //     this.localDateTimeProvider = localDateTimeProvider;
+    // }
 
     /**
      * Sets task as done.
