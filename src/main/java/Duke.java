@@ -122,28 +122,56 @@ public class Duke {
     private void processInput(String lineInput) {
         String[] splitInput = lineInput.split(" ");
         // empty line would output string array of size 1, where the element is empty string
-        String command = splitInput[0];
+        String commandString = splitInput[0];
+        DukeCommand command = null;
+        int selectedTaskIndex;
 
-        if (command.equals(DukeCommand.END_COMMAND.getCommand())) {
-            bye();
-        } else if (command.equals(DukeCommand.LIST_COMMAND.getCommand())) {
-            this.printList();
-        } else if (command.equals(DukeCommand.DONE_COMMAND.getCommand())) {
-            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
-            this.markTaskAsDone(taskIndex);
-        } else if (command.equals(DukeCommand.DELETE_COMMAND.getCommand())) {
-            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
-            this.deleteTask(taskIndex);
-        } else if (command.equals(DukeCommand.TODO_COMMAND.getCommand()) ||
-                command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ||
-                command.equals(DukeCommand.EVENT_COMMAND.getCommand())) {
-            try {
-                this.createAndAddTask(lineInput);
-            } catch (Exception e) {
-                print(e.toString());
-            }
+        if (commandString.equals(DukeCommand.END_COMMAND.getCommand())) {
+            command = DukeCommand.END_COMMAND;
+        } else if (commandString.equals(DukeCommand.LIST_COMMAND.getCommand())) {
+            command = DukeCommand.LIST_COMMAND;
+        } else if (commandString.equals(DukeCommand.DONE_COMMAND.getCommand())) {
+            command = DukeCommand.DONE_COMMAND;
+        } else if (commandString.equals(DukeCommand.DELETE_COMMAND.getCommand())) {
+            command = DukeCommand.DELETE_COMMAND;
+        } else if (commandString.equals(DukeCommand.TODO_COMMAND.getCommand())) {
+            command = DukeCommand.TODO_COMMAND;
+        } else if (commandString.equals(DukeCommand.DEADLINE_COMMAND.getCommand())) {
+            command = DukeCommand.DEADLINE_COMMAND;
+        } else if (commandString.equals(DukeCommand.EVENT_COMMAND.getCommand())) {
+            command = DukeCommand.EVENT_COMMAND;
         } else {
             print("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (command != null) {
+            switch (command) {
+                case END_COMMAND:
+                    bye();
+                    break;
+                case LIST_COMMAND:
+                    this.printList();
+                    break;
+                case DONE_COMMAND:
+                    selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
+                    this.markTaskAsDone(selectedTaskIndex);
+                    break;
+                case DELETE_COMMAND:
+                    selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
+                    this.deleteTask(selectedTaskIndex);
+                    break;
+                case TODO_COMMAND:
+                case DEADLINE_COMMAND:
+                case EVENT_COMMAND:
+                    try {
+                        this.createAndAddTask(lineInput);
+                    } catch (Exception e) {
+                        print(e.toString());
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
