@@ -71,6 +71,7 @@ public class Ui {
         case LIST:
             dukeSays("Master already forgotten what Master wanted to do?!");
             dukeSays("Duke has no choice but to remind Master then!");
+            dukeSays("These are the tasks which Master forgot:");
             break;
         case LIST_EMPTY:
             dukeSays("Huh there are no tasks! Master is so forgetful...");
@@ -117,6 +118,15 @@ public class Ui {
         case EVENT_AT_MISSING:
             dukeSays("Master, use '/at' to indicate starting time, Duke wouldn't know otherwise...");
             break;
+        case FIND_EMPTY:
+            dukeSays("There's nothing for Duke to find...");
+            break;
+        case FIND_FAIL:
+            dukeSays("There isn't any tasks which matches Master's queries.");
+            break;
+        case FIND_SUCCESS:
+            dukeSays("Master! Duke found all these tasks!");
+            break;
         case INVALID_COMMAND:
             dukeSays("Duke doesn't understand Master...");
             break;
@@ -149,7 +159,6 @@ public class Ui {
      * @param tasks  The array of tasks to print.
      */
     public void sayTasks(ArrayList<Task> tasks) {
-        dukeSays("These are the tasks which Master forgot:");
         int i = 1;
         for (Task task : tasks) {
             System.out.println("      "
