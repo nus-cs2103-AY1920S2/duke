@@ -1,4 +1,6 @@
 import DukeExceptions.*;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 // Handles the functioning of Duke
@@ -35,13 +37,13 @@ public class DukeManager {
                     System.out.println(helpMessage());
                     break;
                 case EVENT:
-                    String eventAt = findDeadline(inputString);
+                    LocalDate eventAt = findDeadline(inputString);
                     String eventDes = findTaskDes(inputString);
                     Event newEvent = new Event(eventDes, eventAt);
                     dl.addTask(newEvent);
                     break;
                 case DEADLINE:
-                    String deadlineBy = findDeadline(inputString);
+                    LocalDate deadlineBy = findDeadline(inputString);
                     String deadlineDes = findTaskDes(inputString);
                     Deadline newDL = new Deadline(deadlineDes, deadlineBy);
                     dl.addTask(newDL);
@@ -77,26 +79,25 @@ public class DukeManager {
         System.out.println(line);
     }
 
-    public String findDeadline(String S) throws MissingTimingException{
+    public LocalDate findDeadline(String S) throws MissingTimingException{
         String[] curr = S.split("/");
         return findDeadlineHelper(curr[1]);
     }
 
-    private String findDeadlineHelper(String S) throws MissingTimingException {
+    private LocalDate parseDate(String dateString) {
+        return LocalDate.parse(dateString);
+    }
+
+    private LocalDate findDeadlineHelper(String S) throws MissingTimingException {
         String[] help = S.split(" ");
         int descriptionLength = help.length;
         if(descriptionLength == 1) {
             throw new MissingTimingException("Hey! Your deadline/event has no timing! Please re-enter with timing!");
         } else {
-            String output = help[1];
+            String dateString = help[1];
 
-            for(int x = 2; x < descriptionLength; x++) {
-                output +=  " " + help[x];
-            }
-
-            return output;
+            return parseDate(dateString);
         }
-
     }
 
     public String findTaskDes(String S) throws MissingDescriptionException{
@@ -151,8 +152,8 @@ public class DukeManager {
                 "    1. 'help' to see all available commands.\n" +
                 "    2. 'list' to see all listed tasks.\n" +
                 "    3. 'todo x' where x is an event description to note a To-Do event.\n" +
-                "    4. 'deadline x /by y' where is x is an event description and y is a time period.\n" +
-                "    5. 'event x /at y where x is an event description and y is a time period.\n" +
+                "    4. 'deadline x /by y' where is x is an event description and y is a date in YYYY-MM-DD format.\n" +
+                "    5. 'event x /at y where x is an event description and y is a date in YYYY-MM-DD format.\n" +
                 "    6. 'delete x where x in the task in the list you want to delete (1 -  indexed.)";
     }
 
