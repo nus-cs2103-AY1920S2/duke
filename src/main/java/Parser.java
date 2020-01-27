@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Parser {
 
     // method to make sense of command and then act on that command
@@ -112,6 +114,34 @@ public class Parser {
                     counter++;
                 }
                 ui.prettyPrinting(listings);
+                break;
+            case "find":
+                try {
+                    if (inputCommand.length == 1) {
+                        throw new DukeException("Find description cannot be empty!");
+                    }
+                    String keyWord = inputCommand[1].trim(); //trim all the unnecessary whitespaces.
+                    ArrayList<Task> matchingTasks = list.findTasks(keyWord);
+                    String result = "";
+                    if (matchingTasks.size() == 0) {
+                        // no matches
+                        result += "No results were found :(";
+                    } else {
+                        result+= "Here are the results your search!\n\t";
+                        int count = 1;
+                        for (Task t: matchingTasks) {
+                            result += count + "." + t.toString();
+                            if (count != matchingTasks.size()) {
+                                result += "\n\t";
+                            }
+                            count++;
+                        }
+
+                    }
+                    ui.prettyPrinting(result);
+                } catch (DukeException e) {
+                    ui.prettyPrinting(e.toString());
+                }
                 break;
             default:
                 ui.prettyPrinting("Invalid command! Please try again!"); // handle the case where the user input something not recognised

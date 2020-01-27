@@ -64,4 +64,19 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
+
+    /**
+     * Function to find tasks based on keyWord.
+     * @param keyWord word to be used for search.
+     * @return ArrayList of tasks that were found.
+     */
+    public ArrayList<Task> findTasks(String keyWord) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task t : this.tasks) {
+            if ((t.getTaskName().toLowerCase()).contains(keyWord.toLowerCase())) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
 }
