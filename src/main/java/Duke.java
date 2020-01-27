@@ -35,6 +35,11 @@ public class Duke {
                 } else if (command.equals("list")) {
                     ui.showList(lst);
 
+                } else if (command.equals("find")) {
+                    String toFind = sc.nextLine();
+                    TaskList tempLst = lst.findMatchingTasks(toFind);
+                    ui.showList(tempLst);
+
                 } else if (command.equals("add")) {
                     String line = sc.nextLine();
                     if (getInput.equals("todo")) {

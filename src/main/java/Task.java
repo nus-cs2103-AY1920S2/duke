@@ -13,6 +13,14 @@ public class Task implements Serializable {
         this.isDone = b;
     }
 
+    /**
+     * Gets task desc.
+     * @return desc of task
+     */
+    public String getDesc() {
+        return desc;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

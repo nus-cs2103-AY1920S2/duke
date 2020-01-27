@@ -57,4 +57,19 @@ public class TaskList implements Serializable {
         }
         return isDone;
     }
+
+    /**
+     * Determine and return Tasklist containing tasks with keywords specified.
+     * @param toFind keyword to find in tasks' descriptions
+     * @return TaskList with all tasks that contains toFind
+     */
+    public TaskList findMatchingTasks(String toFind) {
+        TaskList tempLst = new TaskList();
+        for (Task task : lst) {
+            if (task.getDesc().contains(toFind)) {
+                tempLst.addTask(task);
+            }
+        }
+        return tempLst;
+    }
 }
