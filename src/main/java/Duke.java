@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String indent = "    ";
-    private static final String horLine = "___________________________" +
+    private static final String INDENT = "    ";
+    private static final String HOR_LINE = "___________________________" +
             "_________________________________";
 
     public static void main(String[] args) throws DukeException {
@@ -16,10 +16,10 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println(indent + horLine);
-        System.out.println(indent + "Hello! I'm Duke!");
-        System.out.println(indent + "What can I do for you?");
-        System.out.println(indent + horLine);
+        System.out.println(INDENT + HOR_LINE);
+        System.out.println(INDENT + "Hello! I'm Duke!");
+        System.out.println(INDENT + "What can I do for you?");
+        System.out.println(INDENT + HOR_LINE);
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<Task>();
@@ -29,9 +29,9 @@ public class Duke {
 
             if (userInput.equals("bye")) {
                 // Exit Duke
-                System.out.println(indent + horLine);
-                System.out.println(indent + "Bye! Come back soon!");
-                System.out.println(indent + horLine);
+                System.out.println(INDENT + HOR_LINE);
+                System.out.println(INDENT + "Bye! Come back soon!");
+                System.out.println(INDENT + HOR_LINE);
                 break;
             } else if (userInput.equals("list")) {
                 // Print out list of all tasks
@@ -75,7 +75,7 @@ public class Duke {
             int slashIdx = taskDescription.indexOf("/");
             if (slashIdx == -1) throw new DukeException("wrong format");
 
-            String taskTitle = taskDescription.substring(0, slashIdx);
+            String taskTitle = taskDescription.substring(0, slashIdx - 1);
             String deadline = taskDescription.substring(slashIdx + 4);
             t = new Deadline(taskTitle, deadline);
         } else if (userInput.contains("event")) {
@@ -85,7 +85,7 @@ public class Duke {
             int slashIdx = taskDescription.indexOf("/");
             if (slashIdx == -1) throw new DukeException("wrong format");
 
-            String taskTitle = taskDescription.substring(0, slashIdx);
+            String taskTitle = taskDescription.substring(0, slashIdx - 1);
             String location = taskDescription.substring(slashIdx + 4);
             t = new Event(taskTitle, location);
         } else {
@@ -95,11 +95,11 @@ public class Duke {
 
         if (t != null) {
             list.add(t);
-            System.out.println(indent + horLine);
-            System.out.println(indent + "This task has been added successfully:");
-            System.out.println(indent + "  " + t);
-            System.out.println(indent + "Now you have " + list.size() + " tasks in the list");
-            System.out.println(indent + horLine);
+            System.out.println(INDENT + HOR_LINE);
+            System.out.println(INDENT + "This task has been added successfully:");
+            System.out.println(INDENT + "  " + t);
+            System.out.println(INDENT + "Now you have " + list.size() + " tasks in the list");
+            System.out.println(INDENT + HOR_LINE);
         }
     }
 
@@ -113,11 +113,11 @@ public class Duke {
         }
         Task t = list.get(taskNumber - 1);
         list.remove(taskNumber - 1);
-        System.out.println(indent + horLine);
-        System.out.println(indent + "This task has successfully been deleted:");
-        System.out.println(indent + "  " + t);
-        System.out.println(indent + "You have " + list.size() + " tasks remaining.");
-        System.out.println(indent + horLine);
+        System.out.println(INDENT + HOR_LINE);
+        System.out.println(INDENT + "This task has successfully been deleted:");
+        System.out.println(INDENT + "  " + t);
+        System.out.println(INDENT + "You have " + list.size() + " tasks remaining.");
+        System.out.println(INDENT + HOR_LINE);
     }
 
     private static void completeTask(ArrayList<Task> list, String userInput) throws DukeException {
@@ -130,23 +130,23 @@ public class Duke {
         }
         Task t = list.get(taskNumber - 1);
         t.markAsDone();
-        System.out.println(indent + horLine);
-        System.out.println(indent + "This task is marked as completed:");
-        System.out.println(indent + "  " + t);
-        System.out.println(indent + horLine);
+        System.out.println(INDENT + HOR_LINE);
+        System.out.println(INDENT + "This task is marked as completed:");
+        System.out.println(INDENT + "  " + t);
+        System.out.println(INDENT + HOR_LINE);
     }
 
     private static void printList(ArrayList<Task> list) {
-        System.out.println(indent + horLine);
-        System.out.println(indent + "This is your list of tasks:");
+        System.out.println(INDENT + HOR_LINE);
+        System.out.println(INDENT + "This is your list of tasks:");
 
         if (list.size() == 0) {
-            System.out.println(indent + "Your list is currently empty.");
+            System.out.println(INDENT + "Your list is currently empty.");
         }
         for (int i = 0; i < list.size(); i++) {
             Task t = list.get(i);
-            System.out.println(indent + (i+1) + "." + t);
+            System.out.println(INDENT + (i+1) + "." + t);
         }
-        System.out.println(indent + horLine);
+        System.out.println(INDENT + HOR_LINE);
     }
 }
