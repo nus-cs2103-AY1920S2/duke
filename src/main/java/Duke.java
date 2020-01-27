@@ -37,6 +37,16 @@ public class Duke {
                         throw new InvalidTaskException();
                     }
                     break;
+                case "delete":
+                    try {
+                        int taskNumber = Integer.parseInt(parsedInput[1]);
+                        deleteTask(taskNumber);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new MissingTaskNumberException();
+                    } catch (NumberFormatException e) {
+                        throw new InvalidTaskException();
+                    }
+                    break;
                 case "todo":
                     try {
                         addTodo(parsedInput[1]);
@@ -62,7 +72,7 @@ public class Duke {
                     throw new InvalidCommandException();
                 }
             } catch (InvalidCommandException e) {
-                System.err.println(style(e.getMessage()));
+                System.out.println(style(e.getMessage()));
             }
             input = sc.nextLine();
         }
@@ -125,7 +135,7 @@ public class Duke {
 
     private static void list() {
         if (tasks.size() == 0) {
-            System.out.println(style("There are no tasks yet."));
+            System.out.println(style("There are no tasks now."));
         } else {
             StringBuilder list = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
@@ -144,6 +154,16 @@ public class Duke {
             Task completedTask = tasks.get(taskIndex).complete();
             tasks.set(taskIndex, completedTask);
             System.out.println(style("Nice! I've marked this task as done:\n  " + completedTask));
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskNumberException(taskNumber);
+        }
+    }
+
+    private static void deleteTask(int taskNumber) throws InvalidTaskNumberException {
+        try {
+            int taskIndex = taskNumber - 1;
+            Task deletedTask = tasks.remove(taskIndex);
+            System.out.println(style("Noted. I've removed this task:\n  " + deletedTask));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException(taskNumber);
         }
