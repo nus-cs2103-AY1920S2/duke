@@ -1,8 +1,13 @@
 package duke.command.method;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.Duke;
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.DukeInvalidDateTimeException;
 import duke.exception.DukeInvalidNumberOfArgumentsException;
 import duke.exception.DukeNoArgumentsException;
 import duke.task.DeadlineTask;
@@ -20,7 +25,14 @@ public class DeadlineCommandMethod implements CommandMethod {
                     DeadlineCommandMethod.NAME,2, parts.length
             );
         }
-        DeadlineTask newTask = new DeadlineTask(parts[0], parts[1]);
-        return program.getTaskList().addTask(newTask);
+        String description = parts[0];
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            LocalDateTime by = LocalDateTime.parse(parts[1], format);
+            DeadlineTask newTask = new DeadlineTask(description, by);
+            return program.getTaskList().addTask(newTask);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDateTimeException(parts[1]);
+        }
     }
 }
