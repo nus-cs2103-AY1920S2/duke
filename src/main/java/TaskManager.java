@@ -1,12 +1,13 @@
-
 import java.io.*;
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class TaskManager implements java.io.Serializable{
 
@@ -21,15 +22,18 @@ public class TaskManager implements java.io.Serializable{
             FileInputStream fileIn = new FileInputStream("data/data.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             listOfTasks = (ArrayList<Task>) in.readObject();
+
+
+
             in.close();
             fileIn.close();
         }catch(IOException i) {
             i.printStackTrace();
-            return;
+
         }catch(ClassNotFoundException c) {
             System.out.println("List class not found");
             c.printStackTrace();
-            return;
+
         }
     }
 

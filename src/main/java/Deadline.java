@@ -1,12 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.io.*;
 
 public class Deadline extends Task implements java.io.Serializable{
-
-
-
-
 
     protected LocalDate by;
 
