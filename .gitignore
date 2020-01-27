@@ -17,3 +17,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Temp files
+data/duke.txt

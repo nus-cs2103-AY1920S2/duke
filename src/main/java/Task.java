@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
@@ -12,9 +12,15 @@ public class Task {
         return isDone ? "V" : "X";
     }
 
+    public int getStatusAsInt() {
+        return isDone ? 1 : 0;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String generateSaveFileEntry();
 
     @Override
     public String toString() {
