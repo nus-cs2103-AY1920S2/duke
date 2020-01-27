@@ -19,17 +19,10 @@ public class Duke {
         this.storage = new Storage();
         try {
             this.tasks = storage.loadTaskList();
-            ui.print(String.format(
-                    "Tasks loaded from %s",
-                    storage.getFilePath()
-            ));
+            ui.printLoadSuccess(storage.getFilePath());
         } catch (DukeException e) {
             this.tasks = new TaskList();
-            ui.printException(e);
-            ui.print(String.format(
-                    "Cannot load tasks from %s",
-                    storage.getFilePath()
-            ));
+            ui.printLoadFail(e, storage.getFilePath());
         }
     }
 
