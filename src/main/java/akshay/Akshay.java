@@ -1,5 +1,9 @@
 package akshay;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +16,7 @@ public class Akshay {
         System.out.println(line);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         say("Hello I am [AKSHAY]!\nHow may I help you?");
         ArrayList<Task> arr = new ArrayList<>(100);
         Scanner sc =  new Scanner(System.in);
@@ -30,9 +34,14 @@ public class Akshay {
                     System.out.println(line);
                     break;
                 case ("done"):
-                    Task curr = arr.get(Integer.parseInt(c[1]) - 1);
-                    curr.mark();
-                    say("Marked as done:\n" + curr.toString());
+                    int num = Integer.parseInt(c[1]) - 1;
+                    if (num >= 0 && num < arr.size()) {
+                        Task curr = arr.get(Integer.parseInt(c[1]) - 1);
+                        curr.mark();
+                        say("Marked as done:\n" + curr.toString());
+                    } else {
+                        say("Item does not exist!");
+                    }
                     break;
                 case ("todo"):
                     try {
@@ -71,8 +80,20 @@ public class Akshay {
                         say("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
             }
+            save(arr);
             input = sc.nextLine();
         }
         say("Bye! Hope to see you again!");
+    }
+
+    public static void save(ArrayList<Task> data) throws IOException {
+        StringBuilder s = new StringBuilder();
+        for (Task datum : data) {
+            s.append(datum.saveFormat()).append("\n");
+        }
+        FileWriter fileWriter = new FileWriter("./data/duke.txt");
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print(s);
+        printWriter.close();
     }
 }
