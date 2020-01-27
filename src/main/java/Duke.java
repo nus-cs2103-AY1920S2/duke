@@ -11,7 +11,6 @@ public class Duke {
 
         TaskList taskList = new TaskList();
         taskList.inputLoop();
-
     }
 
 }
