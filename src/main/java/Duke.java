@@ -18,6 +18,7 @@ public class Duke {
 
         while(flag == 0) {
             String input = sc.nextLine();
+            String[] inarr = input.split(" ");
             String Line = "_________________________________________________________________";
 
             System.out.println(Line);
@@ -27,8 +28,16 @@ public class Duke {
                 flag = 1;
             } else if (input.equals("list")) {
                 printlist(mylist);
+            } else if (inarr[0].equals("done")) {
+                int tocheck = Integer.parseInt(inarr[1]);
+                String temp = mylist.get(tocheck - 1);
+                temp = temp.replace('✗', '✓');
+                mylist.set(tocheck - 1, temp);
+
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(mylist.get(tocheck - 1));
             } else {
-                 mylist.add(input);
+                 mylist.add("[✗] " + input);
                  System.out.println("added: " + input);
             }
 
@@ -37,6 +46,8 @@ public class Duke {
     }
 
     private static void printlist(ArrayList<String> ls) {
+        System.out.println("Here are the tasks in your list:");
+
         for (int i = 0; i < ls.size(); i++) {
             System.out.println((i + 1) + ". " + ls.get(i));
         }
