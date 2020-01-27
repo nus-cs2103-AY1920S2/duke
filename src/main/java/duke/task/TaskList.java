@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -5,7 +7,7 @@ public class TaskList {
 
     private ArrayList<Task> taskList;
 
-    protected TaskList(List<String> data) {
+    public TaskList(List<String> data) {
         this.taskList = new ArrayList<>(100);
         for (int i = 0; i < data.size(); i++) {
             String line = data.get(i);
@@ -30,27 +32,27 @@ public class TaskList {
         }
     }
 
-    protected void addTask(Task task) {
+    public void addTask(Task task) {
         this.taskList.add(task);
     }
 
-    protected Task removeTask(int taskNumber) {
+    public Task removeTask(int taskNumber) {
         Task task = this.taskList.get(taskNumber - 1);
         this.taskList.remove(taskNumber - 1);
         return task;
     }
 
-    protected Task completeTask(int taskNumber) {
+    public Task completeTask(int taskNumber) {
         Task task = this.taskList.get(taskNumber - 1);
         task.completeTask();
         return task;
     }
 
-    protected int getSize() {
+    public int getSize() {
         return this.taskList.size();
     }
 
-    protected String getTaskList() {
+    public String getTaskList() {
         String list = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             String count = (i + 1) + "";
@@ -63,7 +65,7 @@ public class TaskList {
         return list;
     }
 
-    protected String getTaskListSaveFormat() {
+    public String getTaskListSaveFormat() {
         String data = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             Task item = this.taskList.get(i);

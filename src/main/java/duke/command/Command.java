@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 public abstract class Command {
 
     protected boolean isQuitCommand;

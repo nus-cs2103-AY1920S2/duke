@@ -1,6 +1,10 @@
+package duke.exception;
+
+import duke.ui.UI;
+
 public class DukeException extends Exception {
 
-    protected DukeException(String message) {
+    public DukeException(String message) {
         super(message);
     }
 

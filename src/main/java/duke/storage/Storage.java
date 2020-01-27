@@ -1,3 +1,7 @@
+package duke.storage;
+
+import duke.task.TaskList;
+
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -11,7 +15,7 @@ public class Storage {
     private String filepath;
     private File file;
 
-    protected Storage(String filepath) throws IOException {
+    public Storage(String filepath) throws IOException {
         this.filepath = filepath;
         file = new File(filepath);
         if (!file.exists()) {
@@ -21,12 +25,12 @@ public class Storage {
         }
     }
 
-   protected TaskList loadTaskList() throws IOException {
+   public TaskList loadTaskList() throws IOException {
        List<String> data = FileUtils.readLines(file, Charset.defaultCharset());
        return new TaskList(data);
    }
 
-   protected void saveTaskList(TaskList taskList) throws IOException {
+   public void saveTaskList(TaskList taskList) throws IOException {
        FileWriter fileWriter = new FileWriter(file);
        fileWriter.write(taskList.getTaskListSaveFormat());
        fileWriter.flush();

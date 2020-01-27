@@ -1,8 +1,15 @@
+package duke.parser;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.UI;
+
 import java.io.IOException;
 
 public class Parser {
 
-    protected static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
+    public static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
 
         String[] inputArr = input.split(" ");
         String instruction = inputArr[0];
@@ -10,26 +17,26 @@ public class Parser {
         switch (instruction) {
             case "done": {
                 if (inputArr.length <= 1) {
-                    throw new DukeException("☹ OOPS!!! Please specify a task number to mark as done!");
+                    throw new DukeException("☹ OOPS!!! Please specify a duke.task number to mark as done!");
                 }
                 int taskNumber = Integer.parseInt(inputArr[1]);
                 if (taskNumber > taskList.getSize()) {
-                    throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
+                    throw new DukeException("☹ OOPS!!! Please specify a valid duke.task number!");
                 }
                 Task task = taskList.completeTask(taskNumber);
-                UI.printMessage("Nice! I've marked this task as done: \n" + task.toString());
+                UI.printMessage("Nice! I've marked this duke.task as done: \n" + task.toString());
                 break;
             }
             case "delete": {
                 if (inputArr.length <= 1) {
-                    throw new DukeException("☹ OOPS!!! Please specify a task number to be deleted!");
+                    throw new DukeException("☹ OOPS!!! Please specify a duke.task number to be deleted!");
                 }
                 int taskNumber = Integer.parseInt(inputArr[1]);
                 if (taskNumber > taskList.getSize()) {
-                    throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
+                    throw new DukeException("☹ OOPS!!! Please specify a valid duke.task number!");
                 }
                 Task task = taskList.removeTask(taskNumber);
-                UI.printMessage("Noted! I've removed this task: \n"
+                UI.printMessage("Noted! I've removed this duke.task: \n"
                         + task.toString() + "\n"
                         + "Now you have " + taskList.getSize()
                         + " tasks in the list.");
@@ -45,7 +52,7 @@ public class Parser {
                 String taskName = taskInputArr[0];
                 Task newTask = new ToDo(taskName);
                 taskList.addTask(newTask);
-                UI.printMessage("Got it. I've added this task: \n"
+                UI.printMessage("Got it. I've added this duke.task: \n"
                         + newTask.toString() + "\n"
                         + "Now you have " + taskList.getSize()
                         + " tasks in the list.");
@@ -64,7 +71,7 @@ public class Parser {
                 dateTime = dateTime.substring(idx + 1);
                 Task newTask = new Deadline(taskName, dateTime);
                 taskList.addTask(newTask);
-                UI.printMessage("Got it. I've added this task: \n"
+                UI.printMessage("Got it. I've added this duke.task: \n"
                         + newTask.toString() + "\n"
                         + "Now you have " + taskList.getSize()
                         + " tasks in the list.");
@@ -84,7 +91,7 @@ public class Parser {
                 dateTime = dateTime.substring(idx + 1);
                 Task newTask = new Event(taskName, dateTime);
                 taskList.addTask(newTask);
-                UI.printMessage("Got it. I've added this task: \n"
+                UI.printMessage("Got it. I've added this duke.task: \n"
                         + newTask.toString() + "\n"
                         + "Now you have " + taskList.getSize()
                         + " tasks in the list.");

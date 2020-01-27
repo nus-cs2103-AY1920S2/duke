@@ -1,3 +1,4 @@
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,13 +22,13 @@ public abstract class Task {
         this.dateTime = LocalDate.parse(dateTime, formatter);
     }
 
-    // To initialise save data for ToDo
+    // To initialise save data for duke.task.ToDo
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
     }
 
-    // To initialise save data for Deadline and Event
+    // To initialise save data for duke.task.Deadline and duke.task.Event
     public Task(String taskName, boolean isDone, String dateTime) {
         this.taskName = taskName;
         this.isDone = isDone;
