@@ -5,21 +5,25 @@ public class TaskList {
 
     private ArrayList<Task> taskList;
 
-    public TaskList(List<String> data) {
+    protected TaskList(List<String> data) {
         this.taskList = new ArrayList<>(100);
         for (int i = 0; i < data.size(); i++) {
             String line = data.get(i);
-            // Parse saved data per line
             String[] parsedLine = line.split("_");
-            switch (parsedLine[0]) {
+            String taskType = parsedLine[0];
+            String taskName = parsedLine[2];
+            boolean isCompleted = Boolean.parseBoolean(parsedLine[1]);
+            switch (taskType) {
                 case "T":
-                    taskList.add(new ToDo(parsedLine[2], Boolean.parseBoolean(parsedLine[1])));
+                    taskList.add(new ToDo(taskName, isCompleted));
                     break;
                 case "D":
-                    taskList.add(new Deadline(parsedLine[2], Boolean.parseBoolean(parsedLine[1]), parsedLine[3]));
+                    String deadlineDateTime = parsedLine[3];
+                    taskList.add(new Deadline(taskName, isCompleted, deadlineDateTime));
                     break;
                 case "E":
-                    taskList.add(new Event(parsedLine[2], Boolean.parseBoolean(parsedLine[1]), parsedLine[3]));
+                    String eventDateTime = parsedLine[3];
+                    taskList.add(new Event(taskName, isCompleted, eventDateTime));
                     break;
                 default:
             }

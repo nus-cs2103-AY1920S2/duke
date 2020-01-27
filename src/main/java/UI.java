@@ -6,10 +6,14 @@ public class UI {
                 "Hello! I'm Duke\n" +
                         "What can I do for you?";
 
-        System.out.println(stringWrapper(intro));
+        System.out.println(wrapper(intro));
     }
 
-    protected static String stringWrapper(String string) {
+    protected static void printMessage(String message) {
+        System.out.println(wrapper(message));
+    }
+
+    protected static String wrapper(String string) {
         return "____________________________________________________________\n"
                 + string
                 + "\n"

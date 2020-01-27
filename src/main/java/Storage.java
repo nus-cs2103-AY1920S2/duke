@@ -11,7 +11,7 @@ public class Storage {
     private String filepath;
     private File file;
 
-    public Storage(String filepath) throws IOException {
+    protected Storage(String filepath) throws IOException {
         this.filepath = filepath;
         file = new File(filepath);
         if (!file.exists()) {
