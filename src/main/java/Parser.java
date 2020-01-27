@@ -1,7 +1,6 @@
 public class Parser{
     public Command parse(String input){
         String[] inputArr = input.split(" ");
-
         if (input.equals("bye")){    
             return Command.BYE;
         } else if (inputArr[0].equals("list")){
