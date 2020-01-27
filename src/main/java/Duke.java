@@ -13,7 +13,35 @@ import java.util.stream.Collectors;
 
 public class Duke {
 
-    private List<Task> list = new ArrayList<>();
+    private Storage storage;
+    private List<Task> tasks;
+
+    public Duke(Path filePath) {
+        storage = new Storage(filePath);
+        try {
+            List<String> lines = storage.load();
+            tasks = lines.stream().map(Duke::decode).collect(Collectors.toList());
+        } catch (IOException e) {
+            print("can't load file.");
+            tasks = new ArrayList<>();
+        }
+    }
+
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+
+        greet();
+
+        while (true) {
+            String lineInput = sc.nextLine();
+            this.processInput(lineInput);
+            try {
+                storage.save(tasks);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private static void print(String s) {
         List<String> temp = new ArrayList<>();
@@ -47,15 +75,15 @@ public class Duke {
     }
 
     private void printList() {
-        if (list.isEmpty()) {
+        if (tasks.isEmpty()) {
             print("List is empty");
             return;
         }
 
         List<String> outputStreamBuffer = new ArrayList<>();
 
-        for (int i = 0; i < list.size(); i++) {
-            String str = list.get(i).toString();
+        for (int i = 0; i < tasks.size(); i++) {
+            String str = tasks.get(i).toString();
             String newStr = String.format("%d.%s", i + 1, str);
             outputStreamBuffer.add(newStr);
         }
@@ -64,7 +92,7 @@ public class Duke {
     }
 
     private void markTaskAsDone(int taskIndex) {
-        Task selectedTask = this.list.get(taskIndex);
+        Task selectedTask = this.tasks.get(taskIndex);
         selectedTask.markAsDone();
 
         List<String> outputStreamBuffer = new ArrayList<>();
@@ -74,13 +102,13 @@ public class Duke {
     }
 
     private void deleteTask(int taskIndex) {
-        Task selectedTask = this.list.get(taskIndex);
-        this.list.remove(taskIndex);
+        Task selectedTask = this.tasks.get(taskIndex);
+        this.tasks.remove(taskIndex);
 
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Noted. I've removed this task: ");
         outputStreamBuffer.add("  " + selectedTask);
-        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", list.size()));
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
         print(outputStreamBuffer);
     }
 
@@ -116,20 +144,20 @@ public class Duke {
         return toReturn;
     }
 
-    private void loadSavedTaskList(Path path) throws IOException {
-        if (Files.exists(path)) {
-            List<String> lines = Files.readAllLines(path);
-            this.list = lines.stream().map(Duke::decode).collect(Collectors.toList());
-        }
-    }
+//    private void loadSavedTaskList(Path path) throws IOException {
+//        if (Files.exists(path)) {
+//            List<String> lines = Files.readAllLines(path);
+//            this.tasks = lines.stream().map(Duke::decode).collect(Collectors.toList());
+//        }
+//    }
 
-    private void saveTaskList(Path path) throws IOException {
-        if (!Files.exists(path)) {
-            Files.createDirectories(path.getParent());
-        }
-        List<String> lines = this.list.stream().map(Task::toStringForSaving).collect(Collectors.toList());
-        Files.write(path, lines, StandardOpenOption.CREATE);
-    }
+//    private void saveTaskList(Path path) throws IOException {
+//        if (!Files.exists(path)) {
+//            Files.createDirectories(path.getParent());
+//        }
+//        List<String> lines = this.tasks.stream().map(Task::toStringForSaving).collect(Collectors.toList());
+//        Files.write(path, lines, StandardOpenOption.CREATE);
+//    }
 
     private void createAndAddTask(String lineInput) throws DukeEmptyDescriptionException, DukeNoKeywordException {
         String[] splitInput = lineInput.split(Pattern.quote(" "));
@@ -174,12 +202,12 @@ public class Duke {
             e.printStackTrace();
         }
 
-        this.list.add(newTask);
+        this.tasks.add(newTask);
 
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Got it. I've added this task: ");
         outputStreamBuffer.add("  " + newTask);
-        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", list.size()));
+        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
         print(outputStreamBuffer);
     }
 
@@ -223,27 +251,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        Scanner sc = new Scanner(System.in);
-
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "code", "duke", "data", "duke.txt");
-        try {
-            duke.loadSavedTaskList(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        greet();
-
-        while (true) {
-            String lineInput = sc.nextLine();
-            duke.processInput(lineInput);
-            try {
-                duke.saveTaskList(path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        new Duke(path).run();
     }
 }
