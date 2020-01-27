@@ -3,4 +3,6 @@ D 0 return book /by June 6th
 E 0 project meeting /at Aug 6th 2-4pm
 T 1 join sports club
 T 1 do work
-E 0 seminar (at: May 2nd 1-3pm)
+E 0 seminar /at May 2nd 1-3pm
+D 0 assgn /by Mon 2pm
+E 0 bday party /at Jan 29 7-10pm

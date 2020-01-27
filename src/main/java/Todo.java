@@ -10,4 +10,16 @@ public class Todo extends Task {
     public String getTask() {
         return description;
     }
+
+    public String getDate() {
+        return "";
+    }
+
+    public String getWord() {
+        return "";
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

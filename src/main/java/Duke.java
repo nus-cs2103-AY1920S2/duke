@@ -25,8 +25,6 @@ public class Duke {
         ArrayList<Task> newList = input(arrList);
         //arrList - will be number of lines in the file
         //newList - updated list
-        System.out.println("Original= " +arrList.size());
-        System.out.println("New= " +newList.size());
         if (newList.size() > arrList.size()) {
             try {
                 appendToFile(newList, arrList.size());
@@ -41,7 +39,7 @@ public class Duke {
         String s = "";
         FileWriter fw = new FileWriter("data\\duke.txt", true);
         for (int i = start; i < newList.size(); i++) {
-            s += System.lineSeparator() + newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getTask();
+            s += System.lineSeparator() + newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription() + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate();
             if (i != newList.size()-1) {
                 s = s + System.lineSeparator();
             }
@@ -85,8 +83,8 @@ public class Duke {
         Scanner sc;
         String taskType, task, date, word, statement;
         Task t;
-        String taskArray[] = new String[2];
         ArrayList<Task> tempList = new ArrayList<Task>(arrList.size());
+        String taskArray[] = new String[2];
 
         int index = 0;
         for(Task tempTask : arrList) {
@@ -100,12 +98,7 @@ public class Duke {
         while (!statement.equals("bye")) {
             //just list out the items
             if (statement.equals("list") && tempList.size() != 0) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i=1; i <= tempList.size(); i++) {
-                    t = tempList.get(i-1);
-                    System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
-                }
-                System.out.println();
+                printList(statement, tempList);
             }
             //if empty throw error
             else if (statement.equals("list")) {
@@ -116,15 +109,15 @@ public class Duke {
             //any command that's not list
             else {
                 //task array is each line from input file
-                taskArray = statement.split(" ");
+                taskArray = getTaskArray(statement);
                 if (taskArray.length ==1) {
                     DukeException error = new DukeException();
                     System.out.println(error.errorMsg(taskArray[0]));
                     System.out.println("");
                 }
                 else if (taskArray[0].equals("delete") || taskArray[0].equals("done")) {
-                    int a = Integer.parseInt(taskArray[1]);
-                    Action action = new Action(a, tempList);
+                    int rank = Integer.parseInt(taskArray[1]);
+                    Action action = new Action(rank, tempList);
                     if (action.checkNum() == 0) {
                         DukeException error = new DukeException();
                         System.out.println(error.outOfBound());
@@ -132,18 +125,9 @@ public class Duke {
                     }
                     else {
                         if (taskArray[0].equals("delete")) {
-                            Delete delete = new Delete(a, tempList);
-                            String deleteAction = delete.printAction();
-                            System.out.println(delete.deleteTask());
-                            System.out.println(deleteAction);
-                            System.out.println("Now you have " + tempList.size() + " tasks in the list.");
-                            System.out.println("");
+                            deleteAction(rank, tempList);
                         } else {
-                            Done done = new Done(a, tempList);
-                            System.out.println(done.markDone());
-                            System.out.println(done.printAction());
-                            System.out.println("Now you have " + tempList.size() + " tasks in the list.");
-                            System.out.println("");
+                            doneAction(rank, tempList);
                         }
                     }
                 }
@@ -160,11 +144,7 @@ public class Duke {
                         t = new Todo(statement);
                     }
                     tempList.add(t);
-//                    arrList.add(t);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.getTask());
-                    System.out.println("Now you have " + tempList.size() + " tasks in the list.");
-                    System.out.println();
+                    printAdded(t, tempList); //print msg task added
                 }
             }
             statement = sc.nextLine();
@@ -172,7 +152,45 @@ public class Duke {
         return tempList;
     }
 
-    private static type(String statement) {
+    //prints task in the list
+    private static void printList(String statement, ArrayList<Task> tempList) {
+        Task t;
+        System.out.println("Here are the tasks in your list:");
+        for (int i=1; i <= tempList.size(); i++) {
+            t = tempList.get(i-1);
+            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
+        }
+        System.out.println();
+    }
 
+    private static String[] getTaskArray(String statement) {
+        String taskArray[] = new String[2];
+        taskArray = statement.split(" ");
+
+        return taskArray;
+    }
+
+    private static void deleteAction(int rank, ArrayList<Task> tempList) {
+        Delete delete = new Delete(rank, tempList);
+        String deleteAction = delete.printAction();
+        System.out.println(delete.deleteTask());
+        System.out.println(deleteAction);
+        System.out.println("Now you have " + tempList.size() + " tasks in the list.");
+        System.out.println("");
+    }
+
+    private static void doneAction(int rank, ArrayList<Task> tempList) {
+        Done done = new Done(rank, tempList);
+        System.out.println(done.markDone());
+        System.out.println(done.printAction());
+        System.out.println("Now you have " + tempList.size() + " tasks in the list.");
+        System.out.println("");
+    }
+
+    private static void printAdded(Task t, ArrayList<Task> tempList) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.getTask());
+        System.out.println("Now you have " + tempList.size() + " tasks in the list.");
+        System.out.println();
     }
 }

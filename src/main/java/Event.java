@@ -17,4 +17,16 @@ public class Event extends Task {
     public String getTask() {
         return description + "(" +word+ ": " +date+ ")";
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
