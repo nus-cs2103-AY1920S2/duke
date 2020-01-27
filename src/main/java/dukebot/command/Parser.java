@@ -26,6 +26,8 @@ public class Parser {
             return new UiOnlyCommand(LineName.HELP);
         case "list":
             return new ListCommand();
+        case "find":
+            return new FindCommand(inpArr);
         case "done":
             return new DoneCommand(inpArr);
         case "todo":

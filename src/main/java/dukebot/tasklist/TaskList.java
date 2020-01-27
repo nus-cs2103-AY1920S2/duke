@@ -61,4 +61,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds all Tasks whose names contain toFind.
+     *
+     * @param toFind  Task to find.
+     * @return ArrayList of tasks found.
+     */
+    public ArrayList<Task> findAll(String toFind) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(toFind)) {
+                tasksFound.add(task);
+            }
+        }
+        return tasksFound;
+    }
+
 }

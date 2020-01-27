@@ -44,6 +44,13 @@ public abstract class Task implements Serializable {
     }
 
     /**
+     * Gets name of task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Get type of task.
      *
      * @return  String of taskType
