@@ -15,3 +15,6 @@ bin/
 
 # VS Code files
 .vscode
+
+# Data files
+/data/

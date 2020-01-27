@@ -18,6 +18,8 @@ public class Ui {
             Ui.LOGO
     );
     public static final String GOODBYE_MESSAGE = "Goodbye!";
+    public static final String LOAD_SUCCESS_MESSAGE_TEMPLATE = "Tasks loaded from %s";
+    public static final String LOAD_FAIL_MESSAGE_TEMPLATE = "Cannot load tasks from %s";
 
     private Scanner sc;
 
@@ -42,15 +44,24 @@ public class Ui {
     }
 
     public void printWelcome() {
-        System.out.println(Ui.WELCOME_MESSAGE);
+        print(Ui.WELCOME_MESSAGE);
     }
 
     public void printException(Exception e) {
-        System.out.println(e);
+        print(e.toString());
+    }
+
+    public void printLoadSuccess(String filePath) {
+        print(String.format(Ui.LOAD_SUCCESS_MESSAGE_TEMPLATE, filePath));
+    }
+
+    public void printLoadFail(Exception e, String filePath) {
+        printException(e);
+        print(String.format(Ui.LOAD_FAIL_MESSAGE_TEMPLATE, filePath));
     }
 
     public void printGoodbye() {
-        System.out.println(Ui.GOODBYE_MESSAGE);
+        print(Ui.GOODBYE_MESSAGE);
     }
 
     public void close() {

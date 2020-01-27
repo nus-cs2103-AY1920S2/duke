@@ -1,5 +1,6 @@
 package duke.task;
 
+@SuppressWarnings("serial")
 public class TodoTask extends Task {
     public static final char ICON = 'T';
 

@@ -1,12 +1,14 @@
 package duke.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 import duke.task.Task;
 
-public class TaskList {
+@SuppressWarnings("serial")
+public class TaskList implements Serializable {
     private List<Task> tasks;
 
     public TaskList() {

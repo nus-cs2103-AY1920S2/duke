@@ -5,20 +5,33 @@ import duke.exception.DukeException;
 import duke.exception.DukeNoCommandException;
 import duke.exception.DukeNoSuchInputException;
 import duke.exception.DukeProgramTerminatedException;
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.utils.TaskList;
 
 public class Duke {
     private Ui ui;
+    private Storage storage;
     private TaskList tasks;
 
     public Duke() {
         this.ui = new Ui();
-        this.tasks = new TaskList();
+        this.storage = new Storage();
+        try {
+            this.tasks = storage.loadTaskList();
+            ui.printLoadSuccess(storage.getFilePath());
+        } catch (DukeException e) {
+            this.tasks = new TaskList();
+            ui.printLoadFail(e, storage.getFilePath());
+        }
     }
 
     public TaskList getTaskList() {
         return tasks;
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 
     private void run() {
