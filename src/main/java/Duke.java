@@ -43,16 +43,17 @@ public class Duke {
             if(textEntered.equals("list")){
                 manager.listAllTasks();
                 System.out.println(horizontalLine);
-                textEntered = fr.nextLine();
 
 
             }else if(textEntered.contains("done")){
-                String[] helper = textEntered.split(" ");
-                int indexOfTaskDone = Integer.parseInt(helper[1]);
-                manager.setTaskAsDone(indexOfTaskDone);
-                System.out.println(horizontalLine);
-                textEntered = fr.nextLine();
 
+                try {
+                    String[] helper = textEntered.split(" ");
+                    int indexOfTaskDone = Integer.parseInt(helper[1]);
+                    manager.setTaskAsDone(indexOfTaskDone);
+                }catch(IndexOutOfBoundsException ex){
+                    System.out.println(ex);
+                }
 
             }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
                     || textEntered.contains("event")) {//create a task
@@ -61,8 +62,6 @@ public class Duke {
                 }catch (DukeException ex){
                     System.out.println(ex);
                 }
-                System.out.println(horizontalLine);
-                textEntered = fr.nextLine();
 
             }else if (textEntered.contains("delete")) {
                 try {
@@ -74,30 +73,28 @@ public class Duke {
                 } catch (IndexOutOfBoundsException ex){
                     System.out.println(ex);
                 }
-                System.out.println(horizontalLine);
-                textEntered = fr.nextLine();
 
             }else{ //nonsense input
+                    try{
+                        manager.nonsenseInput();
 
-                try{
-                    manager.nonsenseInput();
-
-                }catch (DukeException ex){
-                    System.out.println(ex);
+                    }catch (DukeException ex){
+                        System.out.println(ex);
+                    }
                 }
-                System.out.println(horizontalLine);
-                textEntered = fr.nextLine();
 
-
-            }
+            System.out.println(horizontalLine);
+            textEntered = fr.nextLine();
 
         }
+
 
         //Must say bye to save data!
         manager.saveExistingData();
 
+
         System.out.println(horizontalLine);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!!");
         System.out.println(horizontalLine);
     }
 

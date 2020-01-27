@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 import java.io.*;
+=======
+import java.time.LocalDateTime;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class TaskManager implements java.io.Serializable{
 
@@ -69,12 +76,19 @@ public class TaskManager implements java.io.Serializable{
                 this.listOfTasks.add(newTask);
             }
         }else if(textEntered.contains("deadline")){//Deadline
-            if(textEntered.split(" ").length == 1){
+            if(textEntered.split(" ").length == 1){ //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
             }else {
                 textEntered = textEntered.substring(9);
-                String[] temp = (textEntered.split("/"));
-                newTask = new Deadline(temp[0], temp[1].substring(3));
+                String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
+                String tempDate = temp[1];
+
+                LocalDate date = LocalDate.parse(tempDate);
+                /* This is to get time if needed
+                LocalDateTime timing = date.atTime(18,00);
+                System.out.println(timing.format(DateTimeFormatter.ofPattern("HH:mm")));
+                */
+                newTask = new Deadline(temp[0], date);
                 this.listOfTasks.add(newTask);
             }
         }else{//Event
