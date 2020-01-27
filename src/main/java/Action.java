@@ -19,6 +19,6 @@ public class Action {
     }
 
     public String printAction() {
-        return "  [" +arrList.get(num-1).getType()+ "][" + arrList.get(num-1).getStatusIcon() + "]" + arrList.get(num-1).description;
+        return "  [" +arrList.get(num-1).getType()+ "][" + arrList.get(num-1).getStatusIcon() + "]" + arrList.get(num-1).getTask();
     }
 }

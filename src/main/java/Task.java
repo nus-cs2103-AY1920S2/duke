@@ -2,6 +2,10 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    public Task() {
+        //empty
+    }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -18,4 +22,19 @@ public abstract class Task {
     public abstract String getType();
 
     public abstract String getTask();
+
+    public abstract String getDate();
+
+    public abstract String getWord();
+
+    public abstract String getDescription();
+
+    public int getDone() {
+        if (isDone == true) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }

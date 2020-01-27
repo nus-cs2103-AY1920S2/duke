@@ -2,10 +2,12 @@ public class Event extends Task {
     protected String word;
     protected String date;
 
-    public Event(String description, String word, String date) {
-        super(description);
-        this.word = word;
-        this.date = date;
+    public Event(String s) {
+        super(s);
+        description = s.split("/")[0];
+        date = s.split("/")[1];
+        word = date.substring(0, date.indexOf(" "));
+        date = date.substring(date.indexOf(" ") + 1, date.length());
     }
 
     public String getType() {
@@ -14,5 +16,17 @@ public class Event extends Task {
 
     public String getTask() {
         return description + "(" +word+ ": " +date+ ")";
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
