@@ -72,8 +72,9 @@ public class Duke {
                 } else if (command.equals("delete")) {
                     String getNumberString = sc.next();
                     int getNumber = Integer.valueOf(getNumberString);
+
+                    Task task = lst.getTask(getNumber - 1);
                     if (lst.deleteTask(getNumber - 1)) {
-                        Task task = lst.getTask(getNumber - 1);
                         ui.showDeleteTask(task, lst.getSize());
                     }
                     storage.save(lst);
