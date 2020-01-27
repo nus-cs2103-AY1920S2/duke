@@ -3,7 +3,7 @@ public class ListCommand extends Command {
 
     }
 
-    public void execute() {
-
+    public String execute(TaskList taskList, Storage storage) {
+        return taskList.listTasks();
     }
 }

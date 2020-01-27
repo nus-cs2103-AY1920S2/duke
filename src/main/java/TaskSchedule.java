@@ -22,7 +22,7 @@ import java.time.format.DateTimeParseException;
 public class TaskSchedule {
     private LocalDateTime date;
     private static final String inputDateFormat = "dd-MM-yyyy HH:mm";
-    private static final String outputDateFormat = "dd-MMM-yyyy HH:mm";
+    private static final String outputDateFormat = "dd-MM-yyyy HH:mm";
 
     /**
      * Constructs a TaskSchedule instance.
