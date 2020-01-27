@@ -25,6 +25,14 @@ public class Task implements Serializable {
     }
 
     /**
+     * Gets task desc.
+     * @return desc of task
+     */
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
      * Returns tick or cross based on Task status
      * @return tick or cross
      */
