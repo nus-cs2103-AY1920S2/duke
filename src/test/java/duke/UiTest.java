@@ -29,6 +29,14 @@ class UiTest {
                 Arguments.of(new Deadline("Finish Coding Project", "2020-01-27"), 0));
     }
 
+    static Stream<Arguments> generateDukeExceptions() {
+        return Stream.of(
+                Arguments.of(new DukeException("Invalid Task Number given!")),
+                Arguments.of(new DukeException("Invalid task number given for deletion...")),
+                Arguments.of(new DukeException(""))
+        );
+    }
+
     @BeforeEach
     void setUp() {
         ui = new Ui();
@@ -79,17 +87,33 @@ class UiTest {
     void listTasks() {
     }
 
-    @Test
-    void showExceptionMessage() {
-    }
-
-    @Test
-    void printTaskAddition() {
+    @ParameterizedTest
+    @MethodSource("generateDukeExceptions")
+    void showExceptionMessage_dukeException(Exception exception) {
+        ui.showExceptionMessage(exception);
+        String expected = HORIZONTAL_DIVIDER +
+                INDENTATION + exception.getMessage() + NEWLINE +
+                HORIZONTAL_DIVIDER;
+        assertEquals(expected, output.toString());
     }
 
     @ParameterizedTest
     @MethodSource("generateAllTaskTypes")
-    void markTaskAsDone(Task task, int totalTasks) {
+    void printTaskAddition_allTaskTypes(Task task, int totalTasks) {
+        String taskInfo = task.toString();
+        String expected = HORIZONTAL_DIVIDER +
+                INDENTATION + "Got it. I've added this task:" + NEWLINE +
+                INDENTATION + "  " + taskInfo + NEWLINE +
+                INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE +
+                HORIZONTAL_DIVIDER;
+        // Execute function for testing
+        ui.printTaskAddition(task, totalTasks);
+        assertEquals(expected, output.toString());
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateAllTaskTypes")
+    void markTaskAsDone_allTaskTypes(Task task, int totalTasks) {
         // Check if task is initially marked as undone
         assertFalse(task.getTaskCompletionStatus());
         // Mark task as done
@@ -100,7 +124,7 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("generateAllTaskTypes")
-    void printTaskDeletion(Task task, int totalTasks) {
+    void printTaskDeletion_allTaskTypes(Task task, int totalTasks) {
         String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "Noted. I've removed this task:" + NEWLINE +
                 INDENTATION + "  " + task.toString() + NEWLINE +
