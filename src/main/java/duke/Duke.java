@@ -1,7 +1,14 @@
 package duke;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeReadFileException;
 import duke.exception.DukeNoCommandException;
 import duke.exception.DukeNoSuchInputException;
 import duke.exception.DukeProgramTerminatedException;
@@ -14,7 +21,18 @@ public class Duke {
 
     public Duke() {
         this.ui = new Ui();
-        this.tasks = new TaskList();
+        try {
+            FileInputStream fis = new FileInputStream("data/data");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            this.tasks = (TaskList) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException e) {
+            ui.printException(new DukeFileNotFoundException(e));
+            this.tasks = new TaskList();
+        } catch (IOException | ClassNotFoundException e) {
+            ui.printException(new DukeReadFileException(e));
+            this.tasks = new TaskList();
+        }
     }
 
     public TaskList getTaskList() {

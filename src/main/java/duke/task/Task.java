@@ -1,6 +1,9 @@
 package duke.task;
 
-public abstract class Task {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public abstract class Task implements Serializable {
     public static final char COMPLETED = 'X';
     public static final char PENDING = ' ';
 

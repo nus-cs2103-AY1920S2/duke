@@ -48,6 +48,9 @@ public class Command {
             case DeleteCommandMethod.NAME: {
                 return new Command(name, arguments, new DeleteCommandMethod());
             }
+            case SaveCommandMethod.NAME: {
+                return new Command(name, arguments, new SaveCommandMethod());
+            }
             case ByeCommandMethod.NAME: {
                 return new Command(name, arguments, new ByeCommandMethod());
             }
