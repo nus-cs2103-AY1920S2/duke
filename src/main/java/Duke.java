@@ -26,7 +26,7 @@ public class Duke {
             try {
                 String input = scanner.nextLine();
                 System.out.println(input);
-                boolean quit = Parser.parseCommand(input, this.storage, this.taskList);
+                boolean quit = Parser.parseUserInput(input, this.storage, this.taskList);
                 if (quit) break;
             } catch (DukeException e) {
                 System.err.println(e.toString());

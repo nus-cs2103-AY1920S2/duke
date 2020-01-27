@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class Parser {
 
-    protected static boolean parseCommand(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
+    protected static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
 
         String[] inputArr = input.split(" ");
         String instruction = inputArr[0];
