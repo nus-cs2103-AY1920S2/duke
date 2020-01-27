@@ -21,43 +21,30 @@ import java.util.Scanner;
 public class Driver {
 
     /**
-     * The readCommand method abstracts the input method
-     * done by the Scanner object. It reads the whole line
-     * of input entered by the client
-     * @param scanner The Scanner object to get the input from the client.
-     * @return The String object entered by the client.
-     */
-
-    public static String readCommand(Scanner scanner) {
-        return scanner.nextLine();
-    }
-
-    /**
      * The main method runs the program.
      * @param args The command line arguments entered into the program.
      */
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Ui userInterface = new Ui();
         try {
             Duke duke = Duke.start();
+            userInterface.start();
 
-            System.out.println("------------------------");
-            System.out.println("Hello I'm Duke!");
-            System.out.println("Add your command here!\n");
-
-            String command = readCommand(scanner);
-            System.out.println("------------------------");
+            String command = userInterface.readCommand();
+            userInterface.printLine();
             while (!command.equals("bye")) {
-                duke.processCommand(command);
-                System.out.println("------------------------");
-                command = readCommand(scanner);
+                String message = duke.processCommand(command);
+                userInterface.displayMessage(message);
+                userInterface.printLine();
+                command = userInterface.readCommand();
             }
 
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println("------------------------");
-        } catch (DukeInvalidTaskFormatException e) {
-            System.err.println(e);
+        } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
+            userInterface.displayErrorMessage(e);
+            userInterface.printLine();
+        } finally {
+            userInterface.close();
         }
     }
 }

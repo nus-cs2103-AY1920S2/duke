@@ -39,14 +39,14 @@ public class Duke {
      * @throws DukeInvalidTaskFormatException If the file is not formatted properly.
      */
 
-    public static Duke start() throws DukeInvalidTaskFormatException {
+    public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {
         TaskReader reader = new TaskReader("./data/tasks.txt");
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             tasks = reader.loadTasks();
         } catch (IOException e) {
             System.err.println(e);
-        } catch (DukeInvalidTaskFormatException e) {
+        } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
             throw e;
         }
         return new Duke(tasks);
@@ -72,7 +72,7 @@ public class Duke {
      * @throws DukeInvalidArgumentFormatException If the index given is out of bound.
      */
 
-    public void markDone(int index) throws DukeInvalidArgumentFormatException {
+    public String markDone(int index) throws DukeInvalidArgumentFormatException {
         if (isNotInRange(index)) {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
         }
@@ -81,9 +81,9 @@ public class Duke {
         task.markAsDone();
         rewriteTasksToFile();
 
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.printf("   %s\n", task.toString());
-        System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
+        return "Nice! I've marked this task as done: \n" +
+                String.format("   %s\n", task.toString()) +
+                String.format("Now you have %d task(s) in the list.", tasks.size());
     }
 
     /**
@@ -104,13 +104,20 @@ public class Duke {
      * of the Duke instance.
      */
 
-    public void listTasks() {
+    public String listTasks() {
         if (tasks.size() == 0) {
-            System.out.println("The list is currently empty. Fill me please!");
+            return "The list is currently empty. Fill me please!";
         }
+        String message = "";
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i, tasks.get(i - 1));
+            message += String.format("%d. %s", i, tasks.get(i - 1));
+
+            if (i != tasks.size()) {
+                message += "\n";
+            }
         }
+
+        return message;
     }
 
     /**
@@ -120,7 +127,8 @@ public class Duke {
      * @throws DukeInvalidArgumentFormatException If there is a format error in the command.
      */
 
-    public void addTask(Argument argument) throws DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
+    public String addTask(Argument argument) throws DukeInvalidArgumentFormatException,
+            DukeInvalidDateFormatException {
         Command command = argument.getCommand();
         Task newTask;
         TaskWriter writer = new TaskWriter("./data/tasks.txt");
@@ -154,12 +162,12 @@ public class Duke {
         tasks.add(newTask);
         try {
             writer.writeTask(newTask, true);
-            System.out.println("Got it. I've added this task: ");
-            System.out.printf("    %s\n", newTask);
-            System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
+            return "Got it. I've added this task: \n" + String.format("    %s\n", newTask) +
+                    String.format("Now you have %d task(s) in the list.", tasks.size());
         } catch (IOException e) {
             System.err.println(e);
         }
+        return "";
     }
 
     /**
@@ -169,7 +177,7 @@ public class Duke {
      * @throws DukeInvalidArgumentFormatException If the index given is not within the valid range.
      */
 
-    public void deleteTask(int index) throws DukeInvalidArgumentFormatException {
+    public String deleteTask(int index) throws DukeInvalidArgumentFormatException {
         if (isNotInRange(index)) {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
         }
@@ -177,9 +185,8 @@ public class Duke {
         Task task = getTask(index);
         tasks.remove(index - 1);
         rewriteTasksToFile();
-        System.out.println("Noted. I've removed this task: ");
-        System.out.printf("    %s\n", task);
-        System.out.printf("Now you have %d task(s) in the list.\n", tasks.size());
+        return "Noted. I've removed this task: \n " + String.format("    %s\n", task) +
+        String.format("Now you have %d task(s) in the list.", tasks.size());
     }
 
     /**
@@ -196,7 +203,7 @@ public class Duke {
      * @param commands The instruction provided by the client.
      */
 
-    public void processCommand(String commands) {
+    public String processCommand(String commands) {
         try {
             Argument argument = Argument.createArgument(commands);
             Command command = argument.getCommand();
@@ -211,25 +218,21 @@ public class Duke {
             switch (command) {
             case LIST:
                 argument.checkValidListArgument();
-                listTasks();
-                break;
+                return listTasks();
 
             case DONE:
                 int index = argument.checkValidDoneArgument();
-                markDone(index);
-                break;
+                return markDone(index);
 
             case DELETE:
                 int value = argument.checkValidDeleteArgument();
-                deleteTask(value);
-                break;
+                return deleteTask(value);
 
             default:
-                addTask(argument);
-                break;
+                return addTask(argument);
             }
         } catch (DukeException exc) {
-            System.err.println(exc);
+            return exc.getMessage();
         }
     }
 
