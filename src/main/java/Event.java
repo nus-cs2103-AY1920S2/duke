@@ -16,18 +16,19 @@
  */
 
 public class Event extends Task {
-    private String at_schedule;
+    private TaskSchedule atSchedule;
 
     /**
      * <p>Constructs an Event instance, given the description,
      * and the schedule when the event is happening.</p>
      * @param description The description of the event.
-     * @param at_schedule The date of the event.
+     * @param atSchedule The date of the event.
+     * @throws DukeInvalidDateFormatException If the date is not properly formatted.
      */
 
-    public Event(String description, String at_schedule) {
+    public Event(String description, String atSchedule) throws DukeInvalidDateFormatException {
         super(description);
-        this.at_schedule = at_schedule;
+        this.atSchedule = TaskSchedule.parseSchedule(atSchedule);
     }
 
     /**
@@ -39,6 +40,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E] [%s] %s (at: %s)", getStatusIcon(), this.description, this.at_schedule);
+        return String.format("[E] [%s] %s (at: %s)", getStatusIcon(), this.description, this.atSchedule);
     }
 }
