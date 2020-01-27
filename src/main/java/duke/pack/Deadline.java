@@ -14,6 +14,19 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String formatForFile() {
+        String type = "D";
+        String done;
+        if (isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+
+        return type + " | " + done + " | " + description + " | " + by + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

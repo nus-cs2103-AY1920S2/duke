@@ -1,14 +1,25 @@
 package duke.pack;
 
 public class Todo extends Task {
-    protected String by;
-
     /**
      * creates a to-do type of task
      * @param description task to be done
      */
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    public String formatForFile() {
+        String type = "T";
+        String done;
+        if (isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+
+        return type + " | " + done + " | " + description + "\n";
     }
 
     @Override

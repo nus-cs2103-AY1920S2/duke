@@ -45,6 +45,10 @@ public class Task {
         System.out.println("    ------------------------------------------------------------");
     }
 
+    public String formatForFile() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return ("[" + getStatusIcon() + "] " + description);

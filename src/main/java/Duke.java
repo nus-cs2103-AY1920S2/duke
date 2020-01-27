@@ -23,6 +23,7 @@ public class Duke {
         // Scanner object for input
         Scanner sc = new Scanner(System.in);
 
+        // loading tasks from hard disk
         try {
             loadFileContent();
         } catch (FileNotFoundException e) {
@@ -128,8 +129,14 @@ public class Duke {
 
         }
 
-        // exit
-        exit();
+        try {
+            updateFileContent();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        } finally {
+            // exit
+            exit();
+        }
     }
 
     /**
@@ -192,6 +199,18 @@ public class Duke {
                 arrList.add(deadline);
             }
         }
+    }
+
+    public static void updateFileContent() throws IOException {
+        FileWriter fw = new FileWriter(file);
+        String text = "";
+
+        for ( Task task: arrList) {
+            text = text + task.formatForFile();
+        }
+
+        fw.write(text);
+        fw.close();
     }
 
     /**

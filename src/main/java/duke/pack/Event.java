@@ -14,6 +14,19 @@ public class Event extends Task {
     }
 
     @Override
+    public String formatForFile() {
+        String type = "E";
+        String done;
+        if (isDone) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+
+        return type + " | " + done + " | " + description + " | " + at + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
