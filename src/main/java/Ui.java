@@ -5,6 +5,12 @@ import java.util.Scanner;
 class Ui {
 
     private static final Scanner SC = new Scanner(System.in);
+    private static final String HORIZONTAL_LINE = "------------------------------------------------------------";
+    private static final String OUTPUT_INDENTATION = "    ";
+    private static final String FORMAT_STRING_FOR_H_LINE =
+            OUTPUT_INDENTATION +  "|%-" + HORIZONTAL_LINE.length() + "s|";
+    private static final String FORMAT_STRING_FOR_CONTENT =
+            OUTPUT_INDENTATION +  "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
 
     void print(String s) {
         List<String> temp = new ArrayList<>();
@@ -13,10 +19,6 @@ class Ui {
     }
 
     void print(List<String> stringList) {
-        final String HORIZONTAL_LINE = "------------------------------------------------------------";
-        final String OUTPUT_INDENTATION = "    ";
-        final String FORMAT_STRING_FOR_H_LINE = OUTPUT_INDENTATION +  "|%-" + HORIZONTAL_LINE.length() + "s|";
-        final String FORMAT_STRING_FOR_CONTENT = OUTPUT_INDENTATION +  "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
 
         System.out.println(String.format(FORMAT_STRING_FOR_H_LINE, HORIZONTAL_LINE));
         for (String s : stringList) {
