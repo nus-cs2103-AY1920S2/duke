@@ -120,7 +120,7 @@ public class Ui {
      * Mark a given task as done and print out updated task information.
      * @param task to mark as done
      */
-    protected void markTaskAsDone(Task task) {
+    public void markTaskAsDone(Task task) {
         task.markAsDone();
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Nice! I've marked this task as done:");
