@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -126,11 +130,21 @@ public class Duke {
                         String description = input.replaceFirst("deadline ", "").split("/")[0].trim();
                         if (!input.contains("/by ")) {
                             printError("☹ OOPS!!! The /by of a deadline cannot be empty.");
-                        } else if (input.split(" ").length < 4) {
-                            printError("☹ OOPS!!! The task or /by of a deadline cannot be empty.");
+                        } else if (input.split(" ").length < 5) {
+                            printError("☹ OOPS!!! Follow the format: deadline [activity] /by [day]-[month]-[year] [hour]:[minute]");
                         } else {
                             String datetime = input.replaceFirst("deadline ", "").split("/")[1].replaceFirst("by ", "");
-                            Task newTask = new Deadlines(description, datetime);
+
+                            String[] datetimeSplit = datetime.split(" ");
+                            String date = datetimeSplit[0];
+                            String time = datetimeSplit[1];
+
+                            LocalDate dateParsed = LocalDate.parse(date);
+                            LocalTime timeParsed = LocalTime.parse(time);
+                            LocalDateTime datetimeParsed = timeParsed.atDate(dateParsed);
+
+                            String newDateTime = datetimeParsed.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mma"));
+                            Task newTask = new Deadlines(description, newDateTime);
                             toDo.add(newTask);
                             System.out.println(line);
                             System.out.println(indent + "Got it. I've added this task:");
@@ -146,12 +160,31 @@ public class Duke {
                     } else {
                         if (!input.contains("/at ")) {
                             printError("☹ OOPS!!! The /at of an event cannot be empty.");
-                        } else if (input.split(" ").length < 4) {
-                            printError("☹ OOPS!!! The task or /at of an event cannot be empty.");
+                        } else if (input.split(" ").length < 8) {
+                            printError("☹ OOPS!!! Follow the format: event [activity] /at [day]-[month]-[year] [hour]:[minute] to [day]-[month]-[year] [hour]:[minute]");
                         } else {
                             String description = input.replaceFirst("event ", "").split("/")[0].trim();
                             String datetime = input.replaceFirst("event ", "").split("/")[1].replaceFirst("at ", "");
-                            Task newTask = new Events(description, datetime);
+
+                            String[] datetimeSplit = datetime.split(" ");
+                            String date1 = datetimeSplit[0];
+                            String time1 = datetimeSplit[1];
+                            String date2 = datetimeSplit[3];
+                            String time2 = datetimeSplit[4];
+
+                            LocalDate dateParsed1 = LocalDate.parse(date1);
+                            LocalTime timeParsed1 = LocalTime.parse(time1);
+                            LocalDateTime datetimeParsed1 = timeParsed1.atDate(dateParsed1);
+                            LocalDate dateParsed2 = LocalDate.parse(date2);
+                            LocalTime timeParsed2 = LocalTime.parse(time2);
+                            LocalDateTime datetimeParsed2 = timeParsed2.atDate(dateParsed2);
+
+                            String newDateTime1 = datetimeParsed1.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mma"));
+                            String newDateTime2 = datetimeParsed2.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mma"));
+
+                            String newDateTime = newDateTime1 + " to " + newDateTime2;
+
+                            Task newTask = new Events(description, newDateTime);
                             toDo.add(newTask);
                             System.out.println(line);
                             System.out.println(indent + "Got it. I've added this task:");
