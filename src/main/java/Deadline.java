@@ -1,11 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 class Deadline extends Task {
 
     static final String TYPE_SYMBOL = "D";
-    private String deadline;
+    private LocalDate date;
 
-    Deadline(String taskDescription, String deadline) {
+    Deadline(String taskDescription, LocalDate date) {
         super(taskDescription);
-        this.deadline = deadline;
+        this.date = date;
     }
 
     @Override
@@ -13,11 +16,14 @@ class Deadline extends Task {
         return TYPE_SYMBOL + Task.SEPERATOR
                 + (isDone ? TRUE_SYMBOL : FALSE_SYMBOL) + Task.SEPERATOR
                 + taskDescription + Task.SEPERATOR
-                + deadline;
+                + date;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", TYPE_SYMBOL, super.toString(), deadline);
+        return String.format("[%s]%s (by: %s)",
+                TYPE_SYMBOL,
+                super.toString(),
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

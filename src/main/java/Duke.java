@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,21 +86,27 @@ public class Duke {
 
     private static Task decode(String str) {
         String[] splitInput = str.split(Pattern.quote(Task.SEPERATOR));
-        String type = splitInput[0];
+        String taskType = splitInput[0];
         boolean isDone = splitInput[1].equals(Task.TRUE_SYMBOL);
         String taskDescription = splitInput[2];
+        LocalDate date = null;
         Task toReturn = null;
 
-        if (type.equals(Todo.TYPE_SYMBOL)) {
-            toReturn = new Todo(taskDescription);
-        } else if (type.equals(Deadline.TYPE_SYMBOL)) {
-            String time = splitInput[3];
-            toReturn = new Deadline(taskDescription, time);
-        } else if (type.equals(Event.TYPE_SYMBOL)) {
-            String time = splitInput[3];
-            toReturn = new Event(taskDescription, time);
-        } else {
-            print("Failed to decode. Unknown task type.");
+        switch (taskType) {
+            case Todo.TYPE_SYMBOL:
+                toReturn = new Todo(taskDescription);
+                break;
+            case Deadline.TYPE_SYMBOL:
+                date = LocalDate.parse(splitInput[3]);
+                toReturn = new Deadline(taskDescription, date);
+                break;
+            case Event.TYPE_SYMBOL:
+                date = LocalDate.parse(splitInput[3]);
+                toReturn = new Event(taskDescription, date);
+                break;
+            default:
+                print("Failed to decode. Unknown task type.");
+                break;
         }
 
         if (isDone && toReturn != null) {
@@ -153,9 +160,10 @@ public class Duke {
                     Arrays.copyOfRange(splitInput, 1, keywordIndex));
             String deadlineOrTime = String.join(" ",
                     Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
+            LocalDate date = LocalDate.parse(deadlineOrTime);
 
             newTask = command.equals(DukeCommand.DEADLINE_COMMAND.getCommand()) ?
-                    new Deadline(description, deadlineOrTime) : new Event(description, deadlineOrTime);
+                    new Deadline(description, date) : new Event(description, date);
         }
 
         this.list.add(newTask);
