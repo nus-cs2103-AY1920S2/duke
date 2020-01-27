@@ -84,11 +84,12 @@ public class Ui {
     /**
      * Prints out all tasks present in given duke.task.TaskList.
      * @param tasks for printing task information
+     * @param header contains list information
      */
-    public void listTasks(TaskList tasks) {
+    public void listTasks(TaskList tasks, String header) {
         printTextWithIndentation(HORIZONTAL_BAR);
         int taskCount = 1;
-        printTextWithIndentation("Here are the tasks in your list:");
+        printTextWithIndentation(header);
         for (Task task : tasks) {
             printTextWithIndentation("" + taskCount + "." + task.toString());
             taskCount++;
