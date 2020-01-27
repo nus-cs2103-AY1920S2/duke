@@ -15,9 +15,11 @@ public abstract class Task {
     public String getTask() {
         return task;
     }
+
     public boolean getDone() {
         return isDone;
     }
+
     public void setDone(boolean bool) {
         isDone = bool;
     }

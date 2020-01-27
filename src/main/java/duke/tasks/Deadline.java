@@ -29,9 +29,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (isDone) return  "[D][✓] " + task + " (by: " +
-                date.format(Parser.DATE_READ_FORMATTER) + ")";
-        else return "[D][✗] " + task + " (by: " +
-                date.format(Parser.DATE_READ_FORMATTER) + ")";
+        if (isDone) {
+            return  "[D][✓] " + task + " (by: " +
+                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+        } else {
+            return "[D][✗] " + task + " (by: " +
+                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+        }
     }
 }

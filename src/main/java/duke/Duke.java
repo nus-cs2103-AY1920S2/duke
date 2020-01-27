@@ -81,7 +81,9 @@ public class Duke {
             break;
         case DEADLINE:
             String deadline = sc.nextLine();
-            if (deadline.isEmpty()) throw new DukeDescriptionException("Empty Description");
+            if (deadline.isEmpty()) {
+                throw new DukeDescriptionException("Empty Description");
+            }
             int dLineDate = deadline.indexOf("/");
             if (dLineDate == -1) {
                 throw new BadDescriptionException("Missing '/' in Description");
@@ -102,9 +104,9 @@ public class Duke {
                     throw new DukeDescriptionException("Empty Description");
                 }
                 int delete = Integer.parseInt(strDelete.substring(1)); //there must be a space between command and input
-                if (delete <= 0 || delete > taskList.getSize())
-                    throw new BadDescriptionException("Description for delete cannot be "
-                            + delete);
+                if (delete <= 0 || delete > taskList.getSize()) {
+                    throw new BadDescriptionException("Description for delete cannot be " + delete);
+                }
                 Task deletedTask = taskList.getTask(delete - 1);
                 taskList.removeTask(delete - 1);
                 calender.removeTask(deletedTask, deletedTask.getDate());
@@ -118,7 +120,9 @@ public class Duke {
             break;
         case SEARCH:
             String search = sc.nextLine();
-            if (search.isEmpty()) throw new DukeDescriptionException("Empty Description");
+            if (search.isEmpty()) {
+                throw new DukeDescriptionException("Empty Description");
+            }
             LocalDate date = Parser.dateParser(search.substring(1));
             System.out.println("Here are the events on " +
                     date.format(Parser.DATE_READ_FORMATTER) + ":");
@@ -133,7 +137,9 @@ public class Duke {
         ui.getIntroduction();
         while (sc.hasNext()) {
             String next = sc.next();
-            if (next.equals("bye")) break;
+            if (next.equals("bye")) {
+                break;
+            }
             else {
                 try {
                     ui.lineBreak();

@@ -10,9 +10,9 @@ public class Calender {
     private HashMap<LocalDate, ArrayList<Task>> mapOfDates;
 
     public void addDate(Task task) {
-        if (mapOfDates.containsKey(task.getDate()))
-                mapOfDates.get(task.getDate()).add(task);
-        else {
+        if (mapOfDates.containsKey(task.getDate())) {
+            mapOfDates.get(task.getDate()).add(task);
+        } else {
             ArrayList<Task> tasks = new ArrayList<>();
             tasks.add(task);
             mapOfDates.put(task.getDate(), tasks);

@@ -24,7 +24,10 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        if (isDone) return  "[T][✓] " + task;
-        else return "[T][✗] " + task;
+        if (isDone) {
+            return  "[T][✓] " + task;
+        } else {
+            return "[T][✗] " + task;
+        }
     }
 }
