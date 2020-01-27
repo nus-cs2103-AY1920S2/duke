@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Returns a String (Unicode Character) based on Task completion status.
+     * Returns a String (Unicode Character) based on duke.Task completion status.
      * @return String representing Unicode character for check mark or cross
      */
     @Override
@@ -61,7 +63,7 @@ public class Deadline implements Task {
 
     @Override
     public String toString() {
-        // Deadline in yyyy-mm-dd format (e.g. 2020-10-15)
+        // duke.Deadline in yyyy-mm-dd format (e.g. 2020-10-15)
         // Output in MMM d yyyy e.g. (Oct 15 2020)
         // e.g. format: [D][✗] return book (by: Oct 15 2020)
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(),
@@ -70,7 +72,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * To return a String representation of Deadline instance
+     * To return a String representation of duke.Deadline instance
      * @return String representing task in save file
      */
     @Override

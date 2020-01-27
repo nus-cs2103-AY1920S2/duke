@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -23,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Prints given text with indentation: specified in Duke class.
+     * Prints given text with indentation: specified in duke.Duke class.
      * @param text used for formatting and printing
      */
     protected void printTextWithIndentation(String text) {
@@ -77,7 +79,7 @@ public class Ui {
     }
 
     /**
-     * Prints out all tasks present in given TaskList.
+     * Prints out all tasks present in given duke.TaskList.
      * @param tasks for printing task information
      */
     public void listTasks(TaskList tasks) {
@@ -105,7 +107,7 @@ public class Ui {
      * Prints out newly added task information.
      * @param task used for printing information related to task
      */
-    protected void printTaskAddition(Task task, int totalTasks) {
+    public void printTaskAddition(Task task, int totalTasks) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Got it. I've added this task:");
         // Add more indentation for task description
@@ -130,7 +132,7 @@ public class Ui {
      * Deletes a given task and prints information about deleted task.
      * @param task to be deleted
      */
-    protected void printTaskDeletion(Task task, int totalTasks) {
+    public void printTaskDeletion(Task task, int totalTasks) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Noted. I've removed this task:");
         printTextWithIndentation("  " + task.toString());

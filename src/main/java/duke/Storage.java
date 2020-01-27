@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -83,7 +85,7 @@ public class Storage {
         return tasks;
     }
 
-    protected void updateSaveFile(TaskList tasks) {
+    public void updateSaveFile(TaskList tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(saveFilePath))) {
             // Write all tasks to file
             for (Task task : tasks) {

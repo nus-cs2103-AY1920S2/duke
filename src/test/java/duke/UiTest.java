@@ -1,3 +1,5 @@
+package duke;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,7 +45,7 @@ class UiTest {
     }
 
     @Test
-    @DisplayName("Ui: Test for Greeting message")
+    @DisplayName("duke.Ui: Test for Greeting message")
     void greet() {
         ui.greet();
         String expected = "  __  __        _____       _           _   " + NEWLINE +
@@ -102,7 +104,7 @@ class UiTest {
     }
 
     @Test
-    @DisplayName("Duke: Test for Goodbye message")
+    @DisplayName("duke.Duke: Test for Goodbye message")
     void goodbye() {
         ui.goodbye();
         String expected = HORIZONTAL_DIVIDER +

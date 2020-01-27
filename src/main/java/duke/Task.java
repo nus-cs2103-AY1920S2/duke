@@ -1,3 +1,5 @@
+package duke;
+
 public interface Task {
     String getStatusIcon();
     void markAsDone();

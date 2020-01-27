@@ -1,6 +1,6 @@
-C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\Deadline.java
-C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\Duke.java
-C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\Event.java
-C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\Task.java
-C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\CommandType.java
-C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\Todo.java
+C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\duke.Deadline.java
+C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\duke.Duke.java
+C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\duke.Event.java
+C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\duke.Task.java
+C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\duke.CommandType.java
+C:\Users\jerem\Desktop\NUS_CS\Y2_Sem2\CS2103T\duke\src\main\java\duke.Todo.java
