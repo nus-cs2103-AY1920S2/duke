@@ -197,6 +197,7 @@ public class Duke {
         string = string.trim();
 
 
+
         if (checkEmpty(string)) {
             return;
         }
