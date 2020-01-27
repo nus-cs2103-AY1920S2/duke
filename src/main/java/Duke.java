@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String[] dukeList = new String[100];
+        Task[] dukeList = new Task[100];
         int counter = 0;
 
         String logo = " ____        _        \n"
@@ -18,13 +19,24 @@ public class Duke {
         nxt = sc.nextLine();
         while (nxt.equals("bye") == false) {
             if (nxt.equals("list") == false) {
-                System.out.println("I have added: " + nxt + " to your list.");
-                dukeList[counter] = nxt;
-                counter++;
-                nxt = sc.nextLine();
+                StringTokenizer st = new StringTokenizer(nxt);
+                String first = st.nextToken();
+                if (first.equals("done") == false) {
+                    Task t = new Task(nxt);
+                    System.out.println("I have added: " + nxt + " to your list.");
+                    dukeList[counter] = t;
+                    counter++;
+                    nxt = sc.nextLine();
+                } else {
+                    int num = Integer.parseInt(st.nextToken());
+                    dukeList[num-1].markAsDone();
+                    System.out.println("The following has been marked as done:");
+                    System.out.println(dukeList[num-1]);
+                    nxt = sc.nextLine();
+                }
             } else {
                 for (int i = 0; i < counter; i++) {
-                    System.out.println((i+1) + ". " + dukeList[i]);
+                    System.out.println((i+1) + "." + dukeList[i]);
                 }
                 nxt = sc.nextLine();
             }
