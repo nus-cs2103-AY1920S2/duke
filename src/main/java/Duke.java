@@ -28,6 +28,7 @@ public class Duke {
         while (true) {
             try {
                 String command = parser.parse(getInput);
+
                 if (command.equals("bye")) {
                     ui.showBye();
                     break;
