@@ -52,6 +52,9 @@ public class Duke {
 
                     // mark the specified task as done
                     int taskNum = Integer.parseInt(c[1]);
+                    if (taskNum >= arrList.size()) {
+                        throw new DukeException("    Oh no! That task does not exist!");
+                    }
                     arrList.get(taskNum - 1).markAsDone();
 
                 } else if (c[0].equals("delete")) {
