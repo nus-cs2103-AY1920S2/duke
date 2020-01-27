@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * create a complete class
@@ -16,10 +17,10 @@ import java.io.IOException;
 
 public class TaskList{
     private ArrayList<Task> taskList;
+    private String path = "data/duke.txt";
     public TaskList(){
         this.taskList = new ArrayList<>();
     }
-    private String path = "data/duke.txt";
 
     private enum Command{
         TASK, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE;
