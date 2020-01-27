@@ -5,11 +5,22 @@ import java.io.*;
 public class Storage {
     private String path;
 
+    /**
+     * Constructor for the Storage class.
+     *
+     * @param path Path to where the data is loaded from and stored to.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
 
+    /**
+     * Saves the information into the filepath location.
+     *
+     * @param listOfTasks List of tasks.
+     * @throws IOException when file cannot be saved.
+     */
     public void saveData(TaskList listOfTasks) throws IOException{
         FileWriter wr = new FileWriter(path);
         wr.write("");
@@ -32,6 +43,12 @@ public class Storage {
 
     }
 
+    /**
+     * Loads the data from the filepath location.
+     *
+     * @return ArrayList of tasks.
+     * @throws FileNotFoundException when the data cannot be read from the filepath.
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         File dataBank = new File(path);
         Scanner reader = new Scanner(dataBank);

@@ -7,6 +7,11 @@ public class Parser {
     private String timing;
 
 
+    /**
+     * Constructor for Parser Class.
+     *
+     * @param input User input.
+     */
     public Parser(String input) {
         this.inputs = input.split(" ");
         this.command = inputs[0];
@@ -38,10 +43,21 @@ public class Parser {
 
     }
 
+    /**
+     * Returns the command provided to the Parser.
+     *
+     * @return command provided.
+     */
     public String getCommand() {
         return command;
     }
 
+    /**
+     * Returns the description provided to the Parser.
+     *
+     * @return description provided.
+     * @throws DukeException when no description is provided.
+     */
     public String getDescription() throws DukeException {
         if(description.equals("")) {
             throw new DukeException("It appears that no description was provided for this " + command + "!");
@@ -49,13 +65,25 @@ public class Parser {
         return description;
     }
 
+    /**
+     * Returns the timing provided to the Parser.
+     *
+     * @return timing provided in String format.
+     * @throws DukeException when no timing is provided.
+     */
     public String getTiming() throws DukeException{
         if(timing.equals("")) {
-            throw new DukeException("It appears that no due date was provided for this " + command + "!");
+            throw new DukeException("It appears that no timing was provided for this " + command + "!");
         }
         return timing;
     }
 
+    /**
+     * Returns the index number provided to the Parser.
+     *
+     * @return Index number.
+     * @throws DukeException when index number cannot be parsed as an integer.
+     */
     public int getIndex() throws DukeException {
         if(description.equals("")) {
             throw new DukeException("It appears that no index was provided for the command " + command + "!");

@@ -8,6 +8,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the Duke Class.
+     *
+     * @param filepath Path to file where the data for saved tasks are stored.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -23,6 +28,9 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Runs the code for the Duke Assistant.
+     */
     public void run() {
         ui.printStartUp();
         while(true) {
