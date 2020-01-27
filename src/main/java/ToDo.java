@@ -12,7 +12,7 @@ public class ToDo extends Task {
 
         return "[" + Types.ToDo + "]"
                 + "[" + super.getStatus() + "]"
-                + " " + taskDescription;
+                + " " + super.getTaskDescription();
     }
 
     @Override
