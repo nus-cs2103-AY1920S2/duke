@@ -1,85 +1,91 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
 
 
-import java.io.File;
-import java.io.FileWriter;
-import org.apache.commons.io.FileUtils;
 import java.io.IOException;
 
-import java.nio.charset.Charset;
+
 
 public class Duke {
 
-    static Scanner scanner;
-    static ArrayList<Task> arrList;
-    static File file;
+    private Scanner scanner;
+    private Storage storage;
+    private TaskList taskList;
 
     public static void main(String[] args) {
+        new Duke().run();
+    }
 
-        printIntro();
-        initialise();
+    public Duke() {
+        try {
+            this.scanner = new Scanner(System.in);
+            this.storage = new Storage("data/duke.txt");
+            this.taskList = this.storage.loadTaskList();
+        } catch (IOException e) {
+            System.err.println(e.toString());
+        }
+    }
+
+    public void run() {
+
+        UI.printIntro();
 
         // Simulation
         while (true) {
 
             try {
 
-                String input = scanner.nextLine();
+                String input = this.scanner.nextLine();
                 System.out.println(input);
                 String output = "";
                 String[] inputArr = input.split(" ");
                 String instruction = inputArr[0];
 
                 if (instruction.equals("bye")) {
-                    System.out.print(stringWrapper("Bye. Hope to see you again soon!"));
+                    System.out.print(UI.stringWrapper("Bye. Hope to see you again soon!"));
                     break;
 
                 } else if (instruction.equals("done")) {
                     if (inputArr.length <= 1) {
                         // EXCEPTION
-                        String message = stringWrapper("☹ OOPS!!! Please specify a task number to mark as done!");
+                        String message = UI.stringWrapper("☹ OOPS!!! Please specify a task number to mark as done!");
                         throw new DukeException(message);
                     }
                     int taskNumber = Integer.parseInt(inputArr[1]);
-                    if (taskNumber > arrList.size()) {
+                    if (taskNumber > this.taskList.getSize()) {
                         // EXCEPTION
-                        String message = stringWrapper("☹ OOPS!!! Please specify a valid task number!");
+                        String message = UI.stringWrapper("☹ OOPS!!! Please specify a valid task number!");
                         throw new DukeException(message);
                     }
-                    Task task = arrList.get(taskNumber - 1);
-                    task.completeTask();
+                    Task task = this.taskList.completeTask(taskNumber);
                     output = "Nice! I've marked this task as done: \n" + task.toString();
 
                 } else if (instruction.equals("delete")) {
                     if (inputArr.length <= 1) {
                         // EXCEPTION
-                        String message = stringWrapper("☹ OOPS!!! Please specify a task number to be deleted!");
+                        String message = UI.stringWrapper("☹ OOPS!!! Please specify a task number to be deleted!");
                         throw new DukeException(message);
                     }
                     int taskNumber = Integer.parseInt(inputArr[1]);
-                    if (taskNumber > arrList.size()) {
+                    if (taskNumber > this.taskList.getSize()) {
                         // EXCEPTION
-                        String message = stringWrapper("☹ OOPS!!! Please specify a valid task number!");
+                        String message = UI.stringWrapper("☹ OOPS!!! Please specify a valid task number!");
                         throw new DukeException(message);
                     }
-                    Task task = arrList.get(taskNumber - 1);
-                    arrList.remove(taskNumber - 1);
+                    Task task = this.taskList.removeTask(taskNumber);
                     output = "Noted! I've removed this task: \n"
                             + task.toString() + "\n"
-                            + "Now you have " + arrList.size()
+                            + "Now you have " + this.taskList.getSize()
                             + " tasks in the list.";;
 
                 } else if (instruction.equals("list")) {
-                    String currentList = getCurrentList();
-                    output = "Here are the tasks in your list: \n" + currentList;
+                    output = "Here are the tasks in your list: \n" + this.taskList.getTaskList();
 
                 } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")){
 
                     if (inputArr.length <= 1) {
                         // EXCEPTION
-                        String message = stringWrapper("☹ OOPS!!! Please enter the descriptions for your to-do list!");
+                        String message = UI.stringWrapper("☹ OOPS!!! Please enter the descriptions for your to-do list!");
                         throw new DukeException(message);
                     }
                     int idx = input.indexOf(" ");
@@ -101,20 +107,20 @@ public class Duke {
                         dateTime = dateTime.substring(idx + 1);
                         newTask = new Event(taskName, dateTime);
                     }
-                    arrList.add(newTask);
+                    this.taskList.addTask(newTask);
                     output = "Got it. I've added this task: \n"
                             + newTask.toString() + "\n"
-                            + "Now you have " + arrList.size()
+                            + "Now you have " + this.taskList.getSize()
                             + " tasks in the list.";
 
                 } else {
                     // EXCEPTION
-                    String message = stringWrapper("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    String message = UI.stringWrapper("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     throw new DukeException(message);
                 }
 
-                saveList();
-                output = stringWrapper(output);
+                storage.saveTaskList(this.taskList);
+                output = UI.stringWrapper(output);
                 System.out.println(output);
 
             } catch (DukeException e) {
@@ -133,78 +139,6 @@ public class Duke {
 
         }
 
-    }
-
-    private static void printIntro() {
-        String intro =
-                "Hello! I'm Duke\n" +
-                        "What can I do for you?";
-
-        System.out.println(stringWrapper((intro)));
-    }
-
-    private static void initialise() {
-        scanner = new Scanner(System.in);
-        arrList = new ArrayList<>(100);
-        file = new File("./data/duke.txt");
-        try {
-            if (!file.exists()) {
-                //the file does not exist yet
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-                file = new File("./data/duke.txt");
-            }
-            List<String> data = FileUtils.readLines(file, Charset.defaultCharset());
-            for (int i = 0; i < data.size(); i++) {
-                String line = data.get(i);
-                // Parse saved data per line
-                String[] parsedLine = line.split("_");
-                switch (parsedLine[0]) {
-                    case "T":
-                        arrList.add(new ToDo(parsedLine[2], Boolean.parseBoolean(parsedLine[1])));
-                        break;
-                    case "D":
-                        arrList.add(new Deadline(parsedLine[2], Boolean.parseBoolean(parsedLine[1]), parsedLine[3]));
-                        break;
-                    case "E":
-                        arrList.add(new Event(parsedLine[2], Boolean.parseBoolean(parsedLine[1]), parsedLine[3]));
-                        break;
-                    default:
-                }
-            }
-        } catch (IOException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    private static void saveList() throws IOException {
-        FileWriter fileWriter = new FileWriter(file);
-        for (int i = 0; i < arrList.size(); i++) {
-            Task item = arrList.get(i);
-            System.out.println(item.getSaveFormat());
-            fileWriter.write(item.getSaveFormat() + "\n");
-        }
-        fileWriter.flush();
-    }
-
-    private static String getCurrentList() {
-        String list = "";
-        for (int i = 0; i < arrList.size(); i++) {
-            String count = (i + 1) + "";
-            String task = arrList.get(i).toString();
-            list += count + ". " + task;
-            if (i != arrList.size() - 1) {
-                list += "\n";
-            }
-        }
-        return list;
-    }
-
-    private static String stringWrapper(String string) {
-        return "____________________________________________________________\n"
-                + string
-                + "\n"
-                + "____________________________________________________________\n";
     }
 
 }
