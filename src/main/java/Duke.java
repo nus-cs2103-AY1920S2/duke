@@ -1,14 +1,30 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class Duke {
     private static final String indent = "    ";
     private static final String horizontal_line = "____________________________________________________________";
 
-    private static List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks;
 
     public static void main(String[] args) {
+        try {
+            tasks = loadTasks();
+        } catch (FileNotFoundException e) {
+            createFile();
+            tasks = new ArrayList<>();
+        } catch (DukeException e) {
+            print("OOPS!!! " + e.getMessage());
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,8 +43,61 @@ public class Duke {
             }
             input = sc.nextLine();
         }
-        print("Bye. Hope to see you again soon!");
         sc.close();
+
+        try {
+            saveTasks();
+        } catch (IOException e) {
+            print("OOPS!!! Could not save tasks.");
+        }
+        print("Bye. Hope to see you again soon!");
+    }
+
+    private static void createFile() {
+        try {
+            Path path = Paths.get("data/duke.txt");
+            Path parentDir = path.getParent();
+            if (parentDir != null) {
+                Files.createDirectories(parentDir);
+            }
+            Files.createFile(path);
+        } catch (IOException e) {
+            print("OOPS!!! Could not create data file.");
+        }
+    }
+
+    private static List<Task> loadTasks() throws FileNotFoundException, DukeException {
+        File file = new File("data/duke.txt");
+        List<Task> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String[] data = sc.nextLine().split(" \\| ");
+            Task task;
+            switch (data[0]) {
+                case "T":
+                    task = new Todo(data[2], data[1].equals("1"));
+                    break;
+                case "D":
+                    task = new Deadline(data[2], data[3], data[1].equals("1"));
+                    break;
+                case "E":
+                    task = new Event(data[2], data[3], data[1].equals("1"));
+                    break;
+                default:
+                    throw new DukeException("Could not load tasks.");
+            }
+            tasks.add(task);
+        }
+        sc.close();
+        return tasks;
+    }
+
+    private static void saveTasks() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        for (Task task : tasks) {
+            fw.write(task.formatToSave() + System.lineSeparator());
+        }
+        fw.close();
     }
 
     private static void run(String input) throws DukeException {
