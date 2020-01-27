@@ -18,6 +18,8 @@ public class Parser {
     public String getCommandType(String command) throws DukeException {
         if (command.contains("list")) {
             return "list";
+        } else if (command.contains("find")) {
+            return "find";
         } else if (command.contains("bye")) {
             return "bye";
         } else if (command.contains("done")) {
@@ -90,5 +92,8 @@ public class Parser {
         return (Integer.parseInt(str[1]) - 1);
     }
 
-
+    public String getFind(String command) {
+        String[] str = command.split(" ");
+        return str[1];
+    }
 }

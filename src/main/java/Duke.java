@@ -27,10 +27,16 @@ public class Duke {
 
         try {
             while (!parser.getCommandType(command).equals("bye")) {
+
                 String commandType = parser.getCommandType(command);
 
                 if (commandType.equals("list")) {
                     tasks.printList();
+                    command = parser.readCommand();
+                } else if (commandType.equals("find")) {
+                    String findString = parser.getFind(command);
+                    ArrayList<Task> matchedTask = tasks.find(findString);
+                    ui.printFind(matchedTask);
                     command = parser.readCommand();
                 } else if (commandType.equals("done")) {
                     int taskNo = parser.getTaskNo(command);
