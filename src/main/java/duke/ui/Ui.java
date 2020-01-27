@@ -125,6 +125,9 @@ public class Ui {
         prettyPrint("☹ OOPS!!! Failed to load list!");
     }
 
+    /**
+     * Show on screen the goodbye message
+     */
     public void showGoodBye() {
         showLine("Aw goodbye for now! Hope to see you again soon :)");
     }
