@@ -32,6 +32,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
     /**
      * Runs the program until "bye" command is received.
      */
@@ -51,9 +55,5 @@ public class Duke {
                 ui.showBottomLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
