@@ -1,24 +1,34 @@
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
     private static ArrayList<Task> mainList;
     private static int maxLength;
+    private static String LIST_FILEPATH = "../data/duke.txt";
+    private static String ARRAY_FILEPATH = "../data/mainList.txt";
 
     public static void main(String[] args) {
-        mainList = new ArrayList<>();
-        maxLength = 60;
-        String logo = " _________                        \n" +
-                " __  ____/_______________________ \n" +
-                " _  / __ _  __ \\  __ \\_  ___/  _ \\  >(o )___\n" +
-                " / /_/ / / /_/ / /_/ /(__  )/  __/   ( ._> /\n" +
-                " \\____/  \\____/\\____//____/ \\___/     `---'";
+        try {
+            mainList = readMainList(); // retrieve saved data for main list
+            maxLength = 60;
+            String logo = " _________                        \n" +
+                    " __  ____/_______________________ \n" +
+                    " _  / __ _  __ \\  __ \\_  ___/  _ \\  >(o )___\n" +
+                    " / /_/ / / /_/ / /_/ /(__  )/  __/   ( ._> /\n" +
+                    " \\____/  \\____/\\____//____/ \\___/     `---'";
 
-        System.out.println("Hello it's\n" + logo);
+            System.out.println("Hello it's\n" + logo);
 
-        String greeting = "Honk, this Goose. Do you need help with something?";
-        System.out.println("\n" + wrapLine(greeting));
+            String greeting = "Honk, this Goose. Do you need help with something?";
+            System.out.println("\n" + wrapLine(greeting));
+        } catch (FileNotFoundException e) {
+            System.out.println(wrapLine("Honk! File not found..."));
+        }
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -30,20 +40,37 @@ public class Duke {
                 checkInput(inputArr);
 
                 if (inputArr[0].equals("list")) {
-                    // print list
-                    System.out.println(wrapLine("Honk! Here's your task list: \n" + printList()));
-                    input = scanner.nextLine();
+                    try {
+                        // print list
+                        System.out.println(wrapLine("Honk! Here's your task list: \n" + printList()));
+                        input = scanner.nextLine();
+                    } catch (FileNotFoundException e) {
+                        System.out.println(wrapLine("Honk! File not found..."));
+                    }
 
                 } else if (inputArr[0].equals("done")) {
                     // extract list number of task to be marked as done
                     int taskIndex = Integer.parseInt(inputArr[1]) - 1;
-
                     markDone(taskIndex);
+
+                    try {
+                        saveList();
+                    } catch (IOException e) {
+                        System.out.println(wrapLine("Honk! Something went wrong: " + e.getMessage()));
+                    }
+
                     input = scanner.nextLine();
                 } else if (inputArr[0].equals("delete")) {
                     // extract list number of task to delete
                     int taskIndex = Integer.parseInt(inputArr[1]) - 1;
                     deleteTask(taskIndex);
+
+                    try {
+                        saveList();
+                    } catch (IOException e) {
+                        System.out.println(wrapLine("Honk! Something went wrong: " + e.getMessage()));
+                    }
+
                     input = scanner.nextLine();
                 } else {
                     try {
@@ -67,6 +94,13 @@ public class Duke {
                         String count = mainList.size() == 1
                                 ? "\n\n          Now you have " + mainList.size() + " task in the list."
                                 : "\n\n          Now you have " + mainList.size() + " tasks in the list.";
+
+                        try {
+                            saveList();
+                        } catch (IOException e) {
+                            System.out.println(wrapLine("Honk! Something went wrong: " + e.getMessage()));
+                        }
+
                         System.out.println("\n" + wrapLine("Honk! Okay added the task:\n            " +
                                 inputTask +
                                 count));
@@ -112,7 +146,7 @@ public class Duke {
         String[] descriptionSplit = deadlineArr[0].split(" ");
         String description = "";
         for (int i = 1; i < descriptionSplit.length; i++) {
-            description += " " + descriptionSplit[i];
+            description += descriptionSplit[i] + " ";
         }
 
         if (description.isEmpty()) {
@@ -142,7 +176,7 @@ public class Duke {
 
     public static void deleteTask(int index) throws GooseTaskExistenceException {
         if (index >= mainList.size() || index < 0) {
-            throw new GooseTaskExistenceException("You trick Goose? This task doesn't exist. Honk...");
+            throw new GooseTaskExistenceException("You trick Goose? Task " + mainList.size() + " doesn't exist. Honk...");
         }
 
         Task selected = mainList.get(index);
@@ -174,25 +208,99 @@ public class Duke {
         }
     }
 
-    public static String printList() {
-        String formattedList = "";
-        if (mainList.size() == 0) {
-            formattedList = "           You haven't added any tasks. Honk...";
-        } else {
+    public static String printList() throws FileNotFoundException {
+        File f = new File(LIST_FILEPATH); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        if (f.length() == 0) { // if the file is empty or doesn't exist
+            return "           You haven't added any tasks. Honk...";
+        }
+        String printedList = "";
+        while (s.hasNextLine()) {
+            printedList += s.nextLine() + "\n";
+        }
+
+        return printedList;
+    }
+
+    private static void saveList() throws IOException { // saves to both duke.txt and array.txt
+        // save mainList array
+        FileWriter af = new FileWriter(ARRAY_FILEPATH);
+        String stringList = "";
+        for (Task task : mainList) {
+            if (task instanceof Event) {
+                Event e = (Event) task;
+                String doneStr = e.isDone ? "0" : "1";
+                String eventString = "event|" + doneStr + "|" + e.description + "|" + e.at + System.lineSeparator();
+                stringList += eventString;
+            } else if (task instanceof  Deadline) {
+                Deadline d = (Deadline) task;
+                String doneStr = d.isDone ? "0" : "1";
+                String deadlineString = "deadline|" + doneStr + "|" + d.description + "|" + d.by + System.lineSeparator();
+                stringList += deadlineString;
+            } else if (task instanceof Todo ){
+                Todo t = (Todo) task;
+                String doneStr = t.isDone ? "0" : "1";
+                String todoString = "todo|" + doneStr + "|" + t.description + System.lineSeparator();
+                stringList += todoString;
+            }
+        }
+        af.write(stringList);
+        af.close();
+
+        // save list
+        FileWriter fw = new FileWriter(LIST_FILEPATH);
+        String text = "";
+        if (mainList.size() != 0) {
             for (int i = 0; i < mainList.size(); i++) {
                 if (mainList.get(i) == null) {
                     break;
                 }
                 int indexNum = i + 1;
-                String item = "           " + indexNum + "." + mainList.get(i);
+                String item = "           " + indexNum + "." + mainList.get(i).toString();
                 if (i != mainList.size() - 1) {
                     item += "\n";
                 }
-                formattedList += item;
+                text += item;
             }
         }
+        fw.write(text);
+        fw.close();
+    }
 
-        return formattedList;
+    private static ArrayList<Task> readMainList() throws FileNotFoundException {
+        File f = new File(ARRAY_FILEPATH);
+        Scanner s = new Scanner(f);
+        if (f.length() == 0) {
+            return new ArrayList<>();
+        } else {
+            ArrayList<Task> ml = new ArrayList<>();
+            while (s.hasNextLine()) {
+                String[] taskArr = s.nextLine().split("|");
+                String type = taskArr[0];
+                boolean isDone = Integer.parseInt(taskArr[1]) != 0;
+                String description = taskArr[2];
+
+                switch (type) {
+                    case "todo":
+                        Todo addTodo = new Todo(description, isDone);
+                        ml.add(addTodo);
+                        break;
+                    case "deadline":
+                        String by = taskArr[3];
+                        Deadline addDeadline = new Deadline(description, by, isDone);
+                        ml.add(addDeadline);
+                        break;
+                    case "event":
+                        String at = taskArr[3];
+                        Event addEvent = new Event(description, at, isDone);
+                        ml.add(addEvent);
+                        break;
+                    default:
+                        System.out.println(wrapLine(type + "| Format error! Honk!"));
+                }
+            }
+            return ml;
+        }
     }
 
     public static String wrapLine(String msg) {

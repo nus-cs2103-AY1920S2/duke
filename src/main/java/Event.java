@@ -6,6 +6,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, String at, boolean done) {
+        super(description, done);
+        this.at = at;
+    }
+
     @Override
     public String toString() {
         String checkbox = "[" + super.getStatusIcon() + "]";
