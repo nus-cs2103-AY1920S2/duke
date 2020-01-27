@@ -2,7 +2,9 @@ package dukebot.command;
 
 import dukebot.exception.DukeException;
 import dukebot.storage.Storage;
-import dukebot.tasklist.*;
+import dukebot.tasklist.Deadline;
+import dukebot.tasklist.Task;
+import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
@@ -13,6 +15,11 @@ import java.util.Arrays;
 public class NewDeadlineCommand extends Command {
     private String[] inpArr;
 
+    /**
+     * Generates the command.
+     *
+     * @param inpArr  The input entered by user split by space
+     */
     public NewDeadlineCommand(String[] inpArr) {
         this.inpArr = inpArr;
     }

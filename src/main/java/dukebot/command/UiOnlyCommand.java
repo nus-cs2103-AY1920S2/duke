@@ -5,9 +5,14 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
-public class UiOnlyCommand extends Command{
+public class UiOnlyCommand extends Command {
     private LineName toSay;
 
+    /**
+     * Generates the command.
+     *
+     * @param toSay  The LineName to say.
+     */
     public UiOnlyCommand(LineName toSay) {
         this.toSay = toSay;
     }

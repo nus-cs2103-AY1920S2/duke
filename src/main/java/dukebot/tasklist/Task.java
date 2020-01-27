@@ -1,7 +1,6 @@
 package dukebot.tasklist;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,19 +18,6 @@ public abstract class Task implements Serializable {
         this.dateTime = dateTime;
         this.description = description;
         this.isDone = false;
-    }
-
-    public static Task getTask(TaskType taskType, String description, LocalDateTime dateTime){
-        switch (taskType) {
-        case TODO:
-            return new Todo(description);
-        case Event:
-            return new Event(description, dateTime);
-        case DEADLINE:
-            return new Deadline(description, dateTime);
-        default:
-            return null;
-        }
     }
 
     /**
@@ -62,6 +48,11 @@ public abstract class Task implements Serializable {
         return this.taskType.toString();
     }
 
+    /**
+     * Formats the internal datetime to display in list.
+     *
+     * @return DateTime string to be displayed.
+     */
     public String dateTimeToString() {
         if (dateTime == null) {
             return "";

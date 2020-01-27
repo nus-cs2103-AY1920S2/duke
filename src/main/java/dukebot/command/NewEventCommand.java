@@ -15,6 +15,11 @@ import java.util.Arrays;
 public class NewEventCommand extends Command {
     private String[] inpArr;
 
+    /**
+     * Generates the command.
+     *
+     * @param inpArr  The input entered by user split by space
+     */
     public NewEventCommand(String[] inpArr) {
         this.inpArr = inpArr;
     }

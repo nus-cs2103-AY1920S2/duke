@@ -17,16 +17,27 @@ public class Ui {
     private boolean sayFirst = true;
     private final Scanner sc;
 
+    /**
+     * Generates the Ui.
+     */
     public Ui() {
         sc  = new Scanner(System.in);
     }
 
+    /**
+     * Prints welcome message.
+     */
     public void showWelcome() {
         System.out.println("\nHi hi I'm \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
         dukeSays("What will Master do today?");
     }
 
+    /**
+     * Prompts and reads the input given.
+     *
+     * @return The read input.
+     */
     public String readCommand() {
         sayFirst = true;
         System.out.println("\nMaster: ");
@@ -35,10 +46,11 @@ public class Ui {
         return inp;
     }
 
-    //    public void setSayFirst() {
-    //        sayFirst = true;
-    //    }
-
+    /**
+     * Prints lines based on lineName.
+     *
+     * @param lineName Line to say.
+     */
     public void sayLine(LineName lineName) {
         switch (lineName) {
         case HELP:
@@ -131,6 +143,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints array of tasks.
+     *
+     * @param tasks  The array of tasks to print.
+     */
     public void sayTasks(ArrayList<Task> tasks) {
         dukeSays("These are the tasks which Master forgot:");
         int i = 1;
@@ -145,21 +162,36 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints done success message.
+     *
+     * @param task  Task to use.
+     */
     public void doneSuccess(Task task) {
         dukeSays("So Master finally completed " + task + "?");
         dukeSays("Duke's really proud of Master!");
     }
 
+    /**
+     * Prints new task successfully made message.
+     *
+     * @param task  Task to use.
+     */
     public void newTask(Task task) {
         dukeSays("So Master has " + task.getType() + ": " + task + "...");
     }
 
+    /**
+     * Prints task successfully deleted message.
+     *
+     * @param task  Task to use.
+     */
     public void deleteSuccess(Task task) {
         dukeSays("For Master, Duke can forget anything, even the:");
         dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
     }
 
-    public void dukeSays(String line) {
+    private void dukeSays(String line) {
         if (this.sayFirst) {
             System.out.print("Duke: ");
             this.sayFirst = false;

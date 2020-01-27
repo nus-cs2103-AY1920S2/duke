@@ -18,10 +18,21 @@ public class Storage {
     private boolean saveAlreadyFailed = false;
     private String storagePath;
 
+    /**
+     * Generates the Storage.
+     *
+     * @param storagePath  Path to save file.
+     */
     public Storage(String storagePath) {
         this.storagePath = storagePath;
     }
 
+    /**
+     * Saves data to drive.
+     *
+     * @param tasks The TaskList to save.
+     * @throws DukeException  If save fails for the first time.
+     */
     public void saveToFile(TaskList tasks) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         try {
@@ -41,7 +52,13 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadFromFile() throws DukeException{
+    /**
+     * Loads data from drive.
+     *
+     * @return The saved TaskList.
+     * @throws DukeException  If no data is found.
+     */
+    public ArrayList<Task> loadFromFile() throws DukeException {
         File file = new File(this.storagePath);
         if (file.isFile()) {
             try {

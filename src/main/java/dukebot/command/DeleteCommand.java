@@ -10,6 +10,11 @@ import dukebot.ui.Ui;
 public class DeleteCommand extends Command {
     private String[] inpArr;
 
+    /**
+     * Generates the command.
+     *
+     * @param inpArr  The input entered by user split by space
+     */
     public DeleteCommand(String[] inpArr) {
         this.inpArr = inpArr;
     }

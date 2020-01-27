@@ -8,7 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 public class DateTimeParse {
-    private static LocalDateTime localDateTimeProvider = LocalDateTime.now();
+    // private static LocalDateTime localDateTimeProvider = LocalDateTime.now();
+
     private static final DateTimeFormatter[] formats = {
             new DateTimeFormatterBuilder()
                     .appendPattern("yyyy/M/d")
@@ -43,6 +44,13 @@ public class DateTimeParse {
     //    private static final DateTimeFormatter format_ddMMyyyyHHmm = DateTimeFormatter.ofPattern("dd MM yyyy HHmm");
     //    private static final DateTimeFormatter format_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
 
+    /**
+     * Parse the input string as a LocalDateTime if possible.
+     *
+     * @param dateTime String to be parsed.
+     * @return The parsed string as a LocalDateTime.
+     * @throws DateTimeParseException if string unable to be parsed.
+     */
     public static LocalDateTime parseDate(String dateTime) throws DateTimeParseException {
         dateTime = dateTime.replaceAll("[\\\\/\\-]+", "/");
         for (DateTimeFormatter dateFormat: formats) {

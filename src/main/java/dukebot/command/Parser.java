@@ -3,6 +3,13 @@ package dukebot.command;
 import dukebot.ui.LineName;
 
 public class Parser {
+
+    /**
+     * Returns command object based on input string.
+     *
+     * @param input  Command to parse.
+     * @return Command to execute.
+     */
     public static Command parse(String input) {
         String[] inpArr = input.split(" ");
         switch (inpArr[0]) {

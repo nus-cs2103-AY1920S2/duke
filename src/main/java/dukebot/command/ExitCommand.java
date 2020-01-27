@@ -5,7 +5,7 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.sayLine(LineName.EXIT);
