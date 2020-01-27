@@ -1,9 +1,12 @@
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
 
     protected String taskName = "";
     protected boolean isDone;
-    protected String dateTime = "";
+    protected LocalDate dateTime;
     protected String taskType = "";
 
     public Task(String taskName) {
@@ -14,7 +17,8 @@ public abstract class Task {
     public Task(String taskName, String dateTime) {
         this.taskName = taskName;
         this.isDone = false;
-        this.dateTime = dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.dateTime = LocalDate.parse(dateTime, formatter);
     }
 
     // To initialise save data for ToDo
@@ -27,7 +31,8 @@ public abstract class Task {
     public Task(String taskName, boolean isDone, String dateTime) {
         this.taskName = taskName;
         this.isDone = isDone;
-        this.dateTime = dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.dateTime = LocalDate.parse(dateTime, formatter);
     }
 
     public void completeTask() {

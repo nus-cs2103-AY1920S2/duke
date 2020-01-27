@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
     // To create deadline
@@ -14,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dateTime + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateTime.format(DateTimeFormatter.ofPattern("dd MM yyyy")) + ")";
     }
 
 }
