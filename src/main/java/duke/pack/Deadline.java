@@ -1,16 +1,22 @@
 package duke.pack;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    protected String by;
+    protected String time;
+    protected LocalDate date;
 
     /**
      * creates a deadline type of task
-     * @param description task to be done
-     * @param by date and time the task is due
+     * @param description the task to be done
+     * @param time the time the task is due
+     * @param date the date the task is due
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String time, LocalDate date) {
         super(description);
-        this.by = by;
+        this.time = time;
+        this.date = date;
     }
 
     @Override
@@ -23,12 +29,14 @@ public class Deadline extends Task {
             done = "0";
         }
 
-        return type + " | " + done + " | " + description + " | " + by + "\n";
+        return type + " | " + done + " | " + description
+                + " | " + time + " | " + date.toString() + "\n";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +  ", " + time + ")";
     }
 
 }
