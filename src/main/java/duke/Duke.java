@@ -1,42 +1,44 @@
 package duke;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.exception.DukeFileNotFoundException;
-import duke.exception.DukeReadFileException;
 import duke.exception.DukeNoCommandException;
 import duke.exception.DukeNoSuchInputException;
 import duke.exception.DukeProgramTerminatedException;
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.utils.TaskList;
 
 public class Duke {
     private Ui ui;
+    private Storage storage;
     private TaskList tasks;
 
     public Duke() {
         this.ui = new Ui();
+        this.storage = new Storage();
         try {
-            FileInputStream fis = new FileInputStream("data/data");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            this.tasks = (TaskList) ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException e) {
-            ui.printException(new DukeFileNotFoundException(e));
+            this.tasks = storage.loadTaskList();
+            ui.print(String.format(
+                    "Tasks loaded from %s",
+                    storage.getFilePath()
+            ));
+        } catch (DukeException e) {
             this.tasks = new TaskList();
-        } catch (IOException | ClassNotFoundException e) {
-            ui.printException(new DukeReadFileException(e));
-            this.tasks = new TaskList();
+            ui.printException(e);
+            ui.print(String.format(
+                    "Cannot load tasks from %s",
+                    storage.getFilePath()
+            ));
         }
     }
 
     public TaskList getTaskList() {
         return tasks;
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 
     private void run() {
