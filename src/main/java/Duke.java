@@ -82,7 +82,8 @@ public class Duke {
                         add(d);
 
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("    Oh no! Please follow the date format! For example, 2020-01-27!");
+                        throw new DukeException("    Oh no! Please follow the date format! " +
+                                "Example: 2020-01-27!");
                     }
 
                 } else if (comm[0].equals("event")) {
@@ -94,7 +95,7 @@ public class Duke {
                     String[] arr = command.split("/at");
                     // if no "at" is given
                     if (arr.length == 1) {
-                        throw new DukeException("    Oh no! You need to follow the format!");
+                        throw new DukeException("    Oh no! Please include a by!");
                     }
 
                     String[] arr2 = arr[0].split("event");
@@ -112,7 +113,8 @@ public class Duke {
                         add(ev);
 
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("    Oh no! Please follow the date format! For example, 2020-01-27!");
+                        throw new DukeException("    Oh no! Please follow the date format! " +
+                                "Example: 2020-01-27!");
                     }
 
                 } else if (comm[0].equals("todo")) {
