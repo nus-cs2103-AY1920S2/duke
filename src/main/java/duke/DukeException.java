@@ -20,6 +20,9 @@ public class DukeException extends Exception {
             case "invalid":
                 message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
+            case "date":
+                message = "OOPS!!! Your date needs to be in yyyy-mm-dd format!";
+                break;
         }
         return message;
     }

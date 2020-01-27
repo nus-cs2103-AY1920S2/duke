@@ -1,32 +1,40 @@
 package duke;
 
 import java.lang.StringBuilder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    String timing;
+    LocalDate timing;
     String description;
 
-    Event(String input) {
+    Event(String input) throws DukeException {
         super(input);
         this.timing = getTiming(input);
         this.description = getDescription(input);
     }
 
-    private String getTiming(String input) {
-        String[] strArr = input.split(" ");
-        int index = 0;
-        for (int j = 0; j < strArr.length; j++) {
-            String stringItem = strArr[j];
-            if (stringItem.equals("/at")) {
-                index = j;
-                break;
+    private LocalDate getTiming(String input) throws DukeException {
+        try {
+            String[] strArr = input.split(" ");
+            int index = 0;
+            for (int j = 0; j < strArr.length; j++) {
+                String stringItem = strArr[j];
+                if (stringItem.equals("/at")) {
+                    index = j;
+                    break;
+                }
             }
+            StringBuilder str = new StringBuilder();
+            for (int i = index+1; i <strArr.length ; i++ ) {
+                str.append(" ").append(strArr[i]);
+            }
+            String date = str.toString().trim();
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException d) {
+            throw new DukeException("date", "");
         }
-        StringBuilder str = new StringBuilder();
-        for (int i = index+1; i <strArr.length ; i++ ) {
-            str.append(" ").append(strArr[i]);
-        }
-        return str.toString();
     }
 
     //updates the description given the "/by" index
@@ -48,8 +56,8 @@ public class Event extends Task {
         str.append(this.getStatusIcon())
                 .append(" ")
                 .append(description)
-                .append("(at:")
-                .append(timing)
+                .append("(at: ")
+                .append(timing.format(DateTimeFormatter.ofPattern("MMM d yyyy")))
                 .append(")");
         return str.toString();
     }
