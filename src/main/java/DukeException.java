@@ -1,4 +1,4 @@
-public class DukeException extends IllegalArgumentException {
+public class DukeException extends Exception {
 
     DukeException(String message) {
         super(message);
