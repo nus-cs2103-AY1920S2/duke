@@ -1,14 +1,21 @@
 public class Task {
     private int done;
     private String task_name;
+    private String type;
     Task() {
     }
 
-    Task(String task_name)
+    Task(String type, int done, String task_name)
     {
-        this.done=0;
+        this.type=type;
+        this.done=done;
         this.task_name=task_name;
     }
+
+    String getType(){
+        return type;
+    }
+
     void setDone(){
         done=1;
     }

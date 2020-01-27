@@ -2,9 +2,13 @@
     public class Event extends Task {
         protected String at;
 
-        public Event(String task_name, String at) {
-            super(task_name);
+        public Event(int done, String task_name, String at) {
+            super("event",done, task_name);
             this.at = at;
+        }
+
+        String getAt(){
+            return at;
         }
 
         @Override
