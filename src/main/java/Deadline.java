@@ -26,7 +26,8 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveName() {
-        return "D" + super.toSaveName() + " | " + this.by + "\n";
+        return "D" + super.toSaveName() + " | " + this.by +
+                (byTime != null ? " " + byTime : "") + "\n";
     }
 
     @Override

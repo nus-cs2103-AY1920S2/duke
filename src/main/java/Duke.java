@@ -19,12 +19,15 @@ public class Duke {
         output(new String[]{"Hello! I'm Duke\n     What can I do for you?"});
         Scanner sc = new Scanner(System.in);
 
-        ArrayList<Task> list;
+        ArrayList<Task> list = null;
         try {
             list = loadFileContents();
         } catch(FileNotFoundException e) {
             list = new ArrayList<>();
             createNewFile();
+        } catch(DukeException e) {
+            list = new ArrayList<>();
+            output(new String[]{e.getMessage()});
         }
         String op = sc.nextLine();
         while(!op.equals("bye")) {
@@ -75,7 +78,7 @@ public class Duke {
         }
     }
 
-    private static ArrayList<Task> loadFileContents() throws FileNotFoundException {
+    private static ArrayList<Task> loadFileContents() throws FileNotFoundException, DukeException {
         File f = new File("data/duke.txt");
         Scanner s = new Scanner(f);
         ArrayList<Task> list = new ArrayList<>();
