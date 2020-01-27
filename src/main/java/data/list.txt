@@ -1,0 +1,3 @@
+[T][✘] eat
+[D][✓] sleep (by 6pm)
+[E][✘] run (at 4pm)
