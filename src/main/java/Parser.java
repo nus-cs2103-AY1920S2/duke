@@ -8,6 +8,7 @@ public class Parser{
         } else if (inputArr[0].equals("done")){
             return Command.DONE;
         } else if (inputArr[0].equals("delete")){
+            //System.out.println("as");
             return Command.DELETE;
         } else if (inputArr[0].equals("todo")){
             return Command.CREATETODO;

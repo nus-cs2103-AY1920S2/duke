@@ -1,6 +1,4 @@
 todo 1
-list
-bye
-todo 1
+done 1
 list 
 bye

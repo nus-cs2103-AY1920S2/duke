@@ -1,12 +1,9 @@
 import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 
 public class Duke {
     private static final String space = "    ";
     private static final String home = System.getProperty("user.dir");
-    public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -41,29 +38,14 @@ public class Duke {
                     ui.goodBye();
                     break;
                 case LIST:
-                    reply = list(inputArr, tasks);
+                    reply = tasks.list(inputArr);
                     break;
                 case DONE:
-                    int taskNo = Integer.parseInt(inputArr[1]) - 1;
-                    tasks.checkDone(taskNo);
-                    reply += "Okcan, I mark this task as done:\n" + space + tasks.getTask(taskNo);
+                    reply += tasks.checkDone(inputArr);
                     storage.saveToSave(tasks);
                     break;
                 case DELETE:
-                    if (inputArr.length < 2) {
-                        throw new NoNumberDeleteException();
-                    } else {
-                        int taskToDelete = Integer.parseInt(inputArr[1]);
-                        if (taskToDelete > tasks.size()) {
-                            throw new NoSuchDeleteException();
-                        } else {
-                            String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
-                            tasks.removeTask(taskToDelete - 1);
-                            reply += "Okcan. I will remove this task:\n" + space + "  " + whichTaskDelete + "\n" + space
-                                    + "But you still have " + tasks.size() + " task(s) in the list.";
-                        }
-                        storage.saveToSave(tasks);
-                    }
+                    reply += tasks.removeTask(inputArr);
                     break;
                 case CREATETODO:
                     reply = createNew(inputArr, tasks);
@@ -96,34 +78,6 @@ public class Duke {
     }
     public static void main(String[] args) {
         new Duke(home).run();       
-    }
-
-    private static String list(String[] arr, TaskList tasks) throws DateTimeParseException{ 
-        String reply = "";
-        
-        if (arr.length == 1) {
-            for (int i = 0; i < tasks.size(); i++) {
-                int numbering = i + 1;
-                reply += (numbering + ".");
-                reply += (tasks.getTask(i) + "\n" + space);
-            }
-            reply += "\n" + space + "I told you save liao loh........";
-        } else {
-            String dateS = arr[1];
-            LocalDate date = LocalDate.parse(dateS, inputFormatter);
-            int numbering = 1;
-            for (int i = 0; i < tasks.size(); i++) {
-                Task currentTask = tasks.getTask(i);
-                if(currentTask instanceof Deadline || currentTask instanceof Event){
-                    if(currentTask.compareDate(date)){
-                        reply += (numbering++ + ".");
-                        reply += (currentTask + "\n" + space );
-                    }
-                } 
-            }
-            reply += ("\n" + space + "This are all the tasks with that date");
-        }
-        return reply;
     }
 
     private static String createNew(String[] inputArr, TaskList tasks) throws DukeException {
