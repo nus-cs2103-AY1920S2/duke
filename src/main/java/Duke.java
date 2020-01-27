@@ -120,7 +120,7 @@ public class Duke {
      * @throws DukeInvalidArgumentFormatException If there is a format error in the command.
      */
 
-    public void addTask(Argument argument) throws DukeInvalidArgumentFormatException {
+    public void addTask(Argument argument) throws DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         Command command = argument.getCommand();
         Task newTask;
         TaskWriter writer = new TaskWriter("./data/tasks.txt");
@@ -228,7 +228,7 @@ public class Duke {
                 addTask(argument);
                 break;
             }
-        } catch (DukeInvalidArgumentFormatException | DukeUnknownKeywordException exc) {
+        } catch (DukeException exc) {
             System.err.println(exc);
         }
     }

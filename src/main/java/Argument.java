@@ -13,10 +13,10 @@ import java.util.Optional;
  */
 
 /**
- * Argument class is used for representing the command
+ * <p>Argument class is used for representing the command
  * entered by the client. The Argument stores the command,
  * and the details of the command, such as the description,
- * and the date of the task, if applicable.
+ * and the date of the task, if applicable.</p>
  * @author Mario Lorenzo
  */
 

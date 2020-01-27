@@ -16,18 +16,20 @@
  */
 
 public class Deadline extends Task {
-    private String by_schedule;
+    private TaskSchedule bySchedule;
 
     /**
      * <p>Constructs a Deadline instance, given the description,
      * and the schedule when the deadline is due.</p>
      * @param description The description of the deadline.
-     * @param by_schedule The date when the deadline is due.
+     * @param bySchedule The date when the deadline is due.
+     * @throws DukeInvalidDateFormatException If the date is not properly formatted.
      */
 
-    public Deadline(String description, String by_schedule) {
+    public Deadline(String description, String bySchedule) throws DukeInvalidDateFormatException {
         super(description);
-        this.by_schedule = by_schedule;
+        this.bySchedule = TaskSchedule.parseSchedule(bySchedule);
+
     }
 
     /**
@@ -48,6 +50,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D] [%s] %s (by: %s)", getStatusIcon(), this.description, this.by_schedule);
+        return String.format("[D] [%s] %s (by: %s)", getStatusIcon(), this.description, this.bySchedule);
     }
 }
