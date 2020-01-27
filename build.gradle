@@ -19,6 +19,14 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
 run {
     standardInput = System.in
 }
