@@ -1,3 +1,9 @@
+package parser;
+
+import exception.InvalidFormatException;
+import exception.InvalidInstructionException;
+import tasks.TaskList;
+
 public class Parser {
     // deals with making sense of the user command
     public void handleTaskCommand(String text, TaskList tasks) {

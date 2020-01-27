@@ -1,3 +1,8 @@
+import parser.Parser;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -5,7 +10,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private  Parser parser;
+    private Parser parser;
 
     public Duke(String filePath) {
         this.ui = new Ui(new Scanner(System.in));

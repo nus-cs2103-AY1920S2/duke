@@ -1,6 +1,9 @@
-import java.awt.*;
+package storage;
+
+import tasks.Task;
+import tasks.TaskList;
+
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {

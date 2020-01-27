@@ -1,5 +1,7 @@
+package exception;
+
 public class InvalidFormatException extends RuntimeException {
-    InvalidFormatException(String message) {
+    public InvalidFormatException(String message) {
         super(message);
     }
 }

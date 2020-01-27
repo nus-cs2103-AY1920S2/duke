@@ -1,5 +1,7 @@
+package exception;
+
 public class InvalidInstructionException extends RuntimeException {
-    InvalidInstructionException(String message) {
+    public InvalidInstructionException(String message) {
         super((message));
     }
 }
