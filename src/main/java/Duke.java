@@ -10,6 +10,7 @@ public class Duke {
     private String FilePath;
 
     public Duke(String filePath) {
+        // Initialize the taskList from Storage class
         FilePath = filePath;
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +28,7 @@ public class Duke {
      * @param input The line input by the user
      */
     public static void execcommand(String input, TaskList tasks, Ui ui) {
+        // Split arguments to get the first index
         String[] arguments = input.split(" ");
 
         DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui);
