@@ -15,10 +15,10 @@ public class AddCommand extends Command {
     /**
      * Instantiates a new Add command.
      *
-     * @param user_input the user input
+     * @param userInput the user input
      */
-    public AddCommand(String user_input) {
-        super(user_input);
+    public AddCommand(String userInput) {
+        super(userInput);
     }
 
 
@@ -35,30 +35,30 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException, IOException {
-        if (user_input.contains("deadline")) {
-            Deadline new_deadLine = new Deadline(user_input);
-            new_deadLine.setDescription(user_input);
-            new_deadLine.setBy(new_deadLine.format_tasks(user_input));
-            new_deadLine.setD1();
-            taskList.add_to_list(new_deadLine);
-            storage.saveTask(new_deadLine);
-            //  deadline_event_hash.addToHashMap(new_deadLine.d1.toLocalDate().toString(), new_deadLine);
-            ui.printTasks(new_deadLine, taskList.getList());
-        } else if (user_input.contains("todo")) {
-            Task new_todo_task = new Todo(user_input);
-            new_todo_task.setDescription(new_todo_task.format_tasks("todo"));
-            taskList.add_to_list(new_todo_task);
-            storage.saveTask(new_todo_task);
-            ui.printTasks(new_todo_task, taskList.getList());
-        } else if (user_input.contains("event")) {
-            Event new_event = new Event(user_input);
-            new_event.setDescription(user_input);
-            new_event.setAt(new_event.format_tasks(user_input));
-            new_event.setD1();
-            taskList.add_to_list(new_event);
-            //deadline_event_hash.addToHashMap(new_event.d1.toLocalDate().toString(), new_event);
-            storage.saveTask(new_event);
-            ui.printTasks(new_event, taskList.getList());
+        if (userInput.contains("deadline")) {
+            Deadline newDeadLine = new Deadline(userInput);
+            newDeadLine.setDescription(userInput);
+            newDeadLine.setBy(newDeadLine.formatTasks(userInput));
+            newDeadLine.setD1();
+            taskList.addToList(newDeadLine);
+            storage.saveTask(newDeadLine);
+            //  deadline_event_hash.addToHashMap(newDeadLine.d1.toLocalDate().toString(), newDeadLine);
+            ui.printTasks(newDeadLine, taskList.getList());
+        } else if (userInput.contains("todo")) {
+            Task newTodoTask = new Todo(userInput);
+            newTodoTask.setDescription(newTodoTask.formatTasks("todo"));
+            taskList.addToList(newTodoTask);
+            storage.saveTask(newTodoTask);
+            ui.printTasks(newTodoTask, taskList.getList());
+        } else if (userInput.contains("event")) {
+            Event newEvent = new Event(userInput);
+            newEvent.setDescription(userInput);
+            newEvent.setAt(newEvent.formatTasks(userInput));
+            newEvent.setD1();
+            taskList.addToList(newEvent);
+            //deadline_event_hash.addToHashMap(newEvent.d1.toLocalDate().toString(), newEvent);
+            storage.saveTask(newEvent);
+            ui.printTasks(newEvent, taskList.getList());
         }
     }
 

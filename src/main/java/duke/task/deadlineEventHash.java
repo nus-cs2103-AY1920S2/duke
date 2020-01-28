@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * The type Deadline event hash.
  */
-public class Deadline_event_hash {
+public class deadlineEventHash {
 
     /**
      * The Hash map.
@@ -20,7 +20,7 @@ public class Deadline_event_hash {
     /**
      * Instantiates a new Deadline event hash.
      */
-    public Deadline_event_hash() {
+    public deadlineEventHash() {
     }
 
     /**

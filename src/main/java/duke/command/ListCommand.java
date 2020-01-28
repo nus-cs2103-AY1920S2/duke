@@ -16,10 +16,10 @@ public class ListCommand extends Command {
     /**
      * Instantiates a new List command.
      *
-     * @param user_input the user input
+     * @param userInput the user input
      */
-    public ListCommand(String user_input) {
-        super(user_input);
+    public ListCommand(String userInput) {
+        super(userInput);
     }
 
     /**

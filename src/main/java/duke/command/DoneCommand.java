@@ -4,8 +4,6 @@ import duke.*;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
 /**
  * The type Done command which makes the task done.
  */
@@ -13,10 +11,10 @@ public class DoneCommand extends Command {
     /**
      * Instantiates a new Done command.
      *
-     * @param user_input the user input
+     * @param userInput the user input
      */
-    public DoneCommand(String user_input) {
-        super(user_input);
+    public DoneCommand(String userInput) {
+        super(userInput);
     }
 
 
@@ -33,22 +31,21 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        Task finished_task = taskList.getList().get(split_done_string(" ", user_input, taskList, ui));
-        finished_task.setDone(true);
-        ui.printDone(finished_task);
+        Task finishedTask = taskList.getList().get(splitDoneString(" ", userInput, taskList, ui));
+        finishedTask.setDone(true);
+        ui.printDone(finishedTask);
     }
 
     // To split the string coming in from done
     // Returns the index of the string after the word
-    private int split_done_string(String regrex_wanted, String user_input, TaskList taskList, Ui ui) throws DukeException {
-        String[] splitted_string = user_input.split(regrex_wanted);
-        Integer array_index = Integer.valueOf(splitted_string[1]);
+    private int splitDoneString(String regrexWanted, String userInput, TaskList taskList, Ui ui) throws DukeException {
+        String[] splittedString = userInput.split(regrexWanted);
+        Integer arrayIndex = Integer.valueOf(splittedString[1]);
 
-        if(array_index > taskList.size_of_list()) {
-            ui.invalid_number_exception();
+        if(arrayIndex > taskList.sizeOfList()) {
+            ui.invalidNumberException();
         }
 
-        System.out.println(array_index-1);
-        return array_index-1;
+        return arrayIndex-1;
     }
 }

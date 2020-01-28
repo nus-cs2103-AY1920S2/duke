@@ -11,12 +11,12 @@ public class DukeException extends Exception {
      * Instantiates a new Duke exception.
      *
      * @param errorMessage the error message
-     * @param task_type    the task type
+     * @param taskType    the task type
      */
 // Exception when task type is empty. Eg: when deadline is typed
     // But there is no task at hand.
-    DukeException(String errorMessage, String task_type) {
-        super("OOPS!! The description of a " + Task.Task_Type.valueOf(task_type) + " cannot be empty" + errorMessage);
+    DukeException(String errorMessage, String taskType) {
+        super("OOPS!! The description of a " + Task.taskType.valueOf(taskType) + " cannot be empty" + errorMessage);
     }
 
     /**

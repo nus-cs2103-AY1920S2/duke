@@ -66,7 +66,7 @@ public class Deadline extends Task {
 
     //Get the task from the given input.
     @Override
-    public String format_tasks(String s) throws DukeException {
+    public String formatTasks(String s) throws DukeException {
         String[] splited_string = s.split("deadline ");
         if(splited_string.length <1) {
             throw new DukeException("You cannot leave the description empty");

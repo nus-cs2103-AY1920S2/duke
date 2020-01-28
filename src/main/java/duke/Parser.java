@@ -13,21 +13,21 @@ public class Parser  {
      * Parse command form the user and pass it to the various command classes.
      *
      * @param fullCommand the full command
-     * @param user_input  the user input
+     * @param userInput  the user input
      * @return the associated command
      * @throws DukeException the duke exception
      */
-    static Command parse(String fullCommand, String user_input) throws DukeException{
+    static Command parse(String fullCommand, String userInput) throws DukeException{
          if(fullCommand.contains("Add")) {
-            return new AddCommand(user_input);
+            return new AddCommand(userInput);
          } else if (fullCommand.contains("Bye")) {
-             return new ByeCommand(user_input);
+             return new ByeCommand(userInput);
          } else if (fullCommand.contains("Delete")) {
-             return new DeleteCommand(user_input);
+             return new DeleteCommand(userInput);
          } else if (fullCommand.contains("List")) {
-             return new ListCommand(user_input);
+             return new ListCommand(userInput);
          } else if (fullCommand.contains("Done")) {
-           return new DoneCommand(user_input);
+           return new DoneCommand(userInput);
          } else {
              throw new DukeException("Please input a correct command");
          }

@@ -65,7 +65,7 @@ public class Event extends Task {
      */
 
     @Override
-    public String format_tasks(String s) throws DukeException {
+    public String formatTasks(String s) throws DukeException {
 
         String[] splited_string = getDescription().split("event");
 
