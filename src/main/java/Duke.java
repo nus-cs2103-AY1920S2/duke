@@ -46,12 +46,12 @@ public class Duke  {
                         this.taskStorage.add(new Task(description));
                         break;
                     case "deadline":
-                        String[] tokens = userInput[1].split("/by");
+                        String[] tokens = userInput[1].split("/by ");
                         System.out.println("Got it. I've added this task:");
                         this.taskStorage.add(new Deadlines(tokens[0], tokens[1]));
                         break;
                     case "event":
-                        tokens = userInput[1].split("/at");
+                        tokens = userInput[1].split("/at ");
                         System.out.println("Got it. I've added this task:");
                         this.taskStorage.add(new Events(tokens[0], tokens[1]));
                         break;
