@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 import dukeapp.action.Action;
 import java.util.ArrayList;
 

@@ -1,5 +1,5 @@
-package dukeapp.action;
-import dukeapp.files.*;
+package dukeApp.action;
+import dukeApp.files.*;
 import java.util.ArrayList;
 
 public class Action {

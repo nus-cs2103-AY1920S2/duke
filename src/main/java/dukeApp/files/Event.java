@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 
 public class Event extends Task {
     protected String word;

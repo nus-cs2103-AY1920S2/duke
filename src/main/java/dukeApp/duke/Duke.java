@@ -1,5 +1,5 @@
-package dukeapp.duke;
-import dukeapp.files.*;
+package dukeApp.duke;
+import dukeApp.files.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -22,7 +22,10 @@ public class Duke {
 
     /**
      * Run the app by reading user commands and writing to file to save changes
+<<<<<<< HEAD
      * 
+=======
+>>>>>>> branch-A-CodingStandard
      */
     public void run() {
         ui.input(tasks);
