@@ -93,7 +93,7 @@ public class Duke {
 
     public static void addToList(Task task, ArrayList<Task> list) {
         list.add(task);
-        System.out.println("Okay. I added the task:");
+        System.out.println("Okay! I added the task:");
         System.out.println(task);
         System.out.println("You now have " + list.size() + " tasks in the list.");
     }
