@@ -23,6 +23,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.0'
+}
+
 application {
     // Change this to your main class.
     mainClassName = "duke.main.Duke"
