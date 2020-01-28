@@ -1,8 +1,8 @@
-package dukeapp.action;
+package dukeApp.action;
 
 import org.junit.jupiter.api.Test;
-import dukeapp.files.Task;
-import dukeapp.files.Todo;
+import dukeApp.files.Task;
+import dukeApp.files.Todo;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

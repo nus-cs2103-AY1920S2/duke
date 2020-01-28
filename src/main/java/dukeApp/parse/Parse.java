@@ -38,6 +38,9 @@ public class Parse {
                     System.out.println(error.errorMsg(taskArray[0]));
                     System.out.println();
                 }
+                else if  (taskArray[0].equals("find")) {
+                    tasks.find(taskArray[1]);
+                }
                 else if (taskArray[0].equals("delete") || taskArray[0].equals("done")) {
                     int rank = Integer.parseInt(taskArray[1]); //rank of task to be deleted or marked as done
                     tasks.deleteDone(rank, taskArray[0]);
