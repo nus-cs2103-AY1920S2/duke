@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class Duke {
     static String input;
     static String[] tokens;
     static ArrayList<Task> list;
+    static String path = "./data/duke.txt";
 
 
     public static void main(String[] args) {
@@ -21,6 +23,7 @@ public class Duke {
         Command command;
         int index;
         Task t;
+        loadFile();
         while (true) {
             try {
                 input = scanner.nextLine();
@@ -114,6 +117,81 @@ public class Duke {
         list.add(t);
         System.out.println("Got it. I've added this task:\n" + t);
         System.out.println("Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
+        saveFile();
+    }
+
+    private static void loadFile() {
+        FileInputStream fi = null;
+        ObjectInputStream oi = null;
+        File file = null;
+        try {
+            file = new File(path);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            fi = new FileInputStream(file);
+            oi = new ObjectInputStream(fi);
+            while (true) {
+                Task t = (Task) oi.readObject();
+                list.add(t);
+            }
+        } catch (EOFException e) {
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oi != null) {
+                    oi.close();
+                }
+                if (fi != null) {
+                    fi.close();
+                }
+            } catch (IOException ex) {
+
+            }
+        }
+    }
+
+    private static void saveFile() {
+        FileOutputStream fi = null;
+        ObjectOutputStream oi = null;
+        File file = null;
+        try {
+            file = new File(path);
+            if (file.exists()) {
+                file.delete();
+            }
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            fi = new FileOutputStream(file);
+            oi = new ObjectOutputStream(fi);
+            for (Task t : list) {
+                oi.writeObject(t);
+            }
+        } catch (EOFException e) {
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream: " + e.getMessage());
+            try {
+                if (oi != null) {
+                    oi.close();
+                }
+                if (fi != null) {
+                    fi.close();
+                }
+            } catch (IOException ex) {
+
+            }
+        }
     }
 
 }
