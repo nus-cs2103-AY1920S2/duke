@@ -13,15 +13,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
     private TaskList taskList;
 
+    /**
+     *
+     * @param filePath Where the file tasks.txt is located
+     * @param taskList ArrayList of String containing the tasks of the user
+     */
     public Storage(String filePath, TaskList taskList){
         this.filePath = filePath;
         this.taskList = taskList;
     }
 
+    /**
+     * Reads from tasks.txt and stores the tasks into taskList
+     */
     public void readFromFile() {
         try {
             File f = new File(filePath); // create a File for the given file path
@@ -56,6 +67,10 @@ public class Storage {
         }
 
     }
+
+    /**
+     * Saves the current tasks in taskList to tasks.txt
+     */
     public void saveToFile() {
         try {
             FileWriter fw = new FileWriter(filePath);

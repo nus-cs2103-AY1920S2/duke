@@ -4,9 +4,18 @@ import tool.*;
 
 import java.util.Scanner;
 
+/**
+ * Main engine
+ */
 public class Duke {
     public Duke(){ }
 
+    /**
+     * Runs The engine
+     * @param inputString User input string used in testing
+     * @param isTest True in testing
+     * @return The output showin in the UI
+     */
     public String run(String inputString, boolean isTest){
         UI.UIString = "";
         TaskList taskList = new TaskList();

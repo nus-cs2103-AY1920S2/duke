@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"tool","l":"Command"},{"p":"command","l":"Deadlines"},{"p":"duke","l":"Duke"},{"p":"duke","l":"DukeTest"},{"p":"command","l":"Events"},{"p":"tool","l":"Parser"},{"p":"tool","l":"Storage"},{"p":"command","l":"Task"},{"p":"tool","l":"TaskList"},{"p":"command","l":"ToDos"},{"p":"tool","l":"UI"}]

@@ -2,6 +2,9 @@ package tool;
 
 import java.util.Scanner;
 
+/**
+ * deals with interactions with the user
+ */
 public class UI {
     public static String UIString = "";
     private static String indent = "    ";
@@ -12,6 +15,12 @@ public class UI {
         this.storage = storage;
     }
 
+    /**
+     * Receives user command
+     * @param stringScanner Used to scan input string in testing
+     * @param isTest True in testing
+     * @return The command String of the user
+     */
     public String readCommand(Scanner stringScanner, boolean isTest){
         if (stringScanner.hasNextLine()){
             return stringScanner.nextLine();

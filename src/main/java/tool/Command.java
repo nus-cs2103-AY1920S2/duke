@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Contains the full command string of the user
+ */
 public class Command {
     private String command;
     private String arguments;
@@ -23,6 +26,12 @@ public class Command {
         this.arguments = arguments;
     }
 
+    /**
+     *Executes commands such as: bye, list, done, find, delete, todo, deadline, event
+     * @param taskList ArrayList of String storing the user tasks
+     * @param ui UI deals with interactions with the user
+     * @return Boolean describing if a bye command was executed
+     */
     public boolean execute(TaskList taskList, UI ui) {
         switch (command) {
             case "bye":
