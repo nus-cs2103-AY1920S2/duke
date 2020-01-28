@@ -9,36 +9,46 @@ Hello from
     Hello! I'm Duke!
     What can I do for you?
     ____________________________________________________________
+Write error
     ____________________________________________________________
     This task has been added successfully:
       [T][?] read book
     Now you have 1 tasks in the list
     ____________________________________________________________
+Write failed
+Write error
     ____________________________________________________________
     This task has been added successfully:
       [D][?] return book (by: June 6th)
     Now you have 2 tasks in the list
     ____________________________________________________________
+Write failed
+Write error
     ____________________________________________________________
     This task has been added successfully:
-      [E][?] project meeting at: Aug 6th 2-4pm)
+      [E][?] project meeting (at: Aug 6th 2-4pm)
     Now you have 3 tasks in the list
     ____________________________________________________________
+Write failed
+Write error
     ____________________________________________________________
     This task has been added successfully:
       [T][?] join sports club
     Now you have 4 tasks in the list
     ____________________________________________________________
+Write failed
+Write error
     ____________________________________________________________
     This task has been added successfully:
       [T][?] borrow book
     Now you have 5 tasks in the list
     ____________________________________________________________
+Write failed
     ____________________________________________________________
     This is your list of tasks:
     1.[T][?] read book
     2.[D][?] return book (by: June 6th)
-    3.[E][?] project meeting at: Aug 6th 2-4pm)
+    3.[E][?] project meeting (at: Aug 6th 2-4pm)
     4.[T][?] join sports club
     5.[T][?] borrow book
     ____________________________________________________________
@@ -62,8 +72,9 @@ Hello from
     ____________________________________________________________
     ____________________________________________________________
     This task is marked as completed:
-      [E][?] project meeting at: Aug 6th 2-4pm)
+      [E][?] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
+Write failed
     ____________________________________________________________
     This task number does not exist.
     ____________________________________________________________
