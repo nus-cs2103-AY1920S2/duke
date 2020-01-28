@@ -9,6 +9,10 @@ public class TaskManager {
         listOfTasks = new ArrayList<>();
     }
 
+
+    /**
+     * loads existing data from data.txt
+     */
     public void loadExistingData(){
 
         Storage store = new Storage();
@@ -16,12 +20,19 @@ public class TaskManager {
 
     }
 
+    /**
+     * saves current data into data.txt
+     */
     public void saveExistingData(){
         Storage store = new Storage();
         store.saveExistingData(listOfTasks);
 
     }
 
+    /**
+     * Used for Level-9. find keyword that appears in each Task in listOfTasks
+     * @param keyword keyword to search
+     */
     public void findTask(String keyword){
         System.out.println("Here are the matching tasks in your list:");
         for(int i = 0 ; i < listOfTasks.size() ; i ++){
@@ -31,6 +42,9 @@ public class TaskManager {
         }
     }
 
+    /**
+     * lists down all tasks
+     */
     public void listAllTasks(){
 
         System.out.println("Here are your tasks in your list: ");
@@ -40,6 +54,10 @@ public class TaskManager {
 
     }
 
+    /**
+     * change the boolean isDone? of a Task
+     * @param index index of Task to be set as Done (isDone = True)
+     */
     public void setTaskAsDone(int index){
 
         listOfTasks.get(index-1).markAsDone();
@@ -48,6 +66,11 @@ public class TaskManager {
 
     }
 
+    /**
+     * Adds a new task
+     * @param textEntered includes the type of task, description, and /by or /at
+     * @throws DukeException Must have deadline and date for Deadline and Events
+     */
     public void addTask(String textEntered) throws DukeException{
 
         Task newTask;
@@ -102,6 +125,12 @@ public class TaskManager {
 
     }
 
+    /**
+     * Deletes task from listOfTasks
+     * @param indexOfTaskToDelete index of task to delete
+     * @throws DukeException Cannot delete nothing
+     * @throws IndexOutOfBoundsException Incase if user inputs something that is out of array bound
+     */
     public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException{
 
         if(listOfTasks.size() == 0){
@@ -118,6 +147,10 @@ public class TaskManager {
         }
     }
 
+    /**
+     * used for Level 1 and 2. Redundant now
+     * @param textEntered
+     */
     public void echo(String textEntered){
 
         System.out.println(textEntered);

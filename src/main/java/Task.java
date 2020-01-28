@@ -8,9 +8,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * returns a string
+     * @return returns a string containing the details
+     */
     @Override
     public String toString(){
-
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
@@ -19,8 +22,10 @@ public class Task {
         return isDone? "\u2713" : "\u2718";
     }
 
+    /**
+     * Used to change the isDone boolean of a Task
+     */
     public void markAsDone(){
-
         this.isDone = true;
     }
 }

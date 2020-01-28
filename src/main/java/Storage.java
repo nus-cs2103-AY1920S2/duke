@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Storage {
     ArrayList<Task> listOfTasks = new ArrayList<>();
-    public Storage(){
 
+    public Storage(){
     }
 
     /**
-     *
+     * helps with loading data when starting up program again. Data is stored in data.txt
      * @return returns an array List with the data filled in from data.txt
      */
     public ArrayList<Task> loadExistingData() {
@@ -73,7 +73,7 @@ public class Storage {
 
 
     /**
-     *
+     * saves data in data.txt before program exits
      * @param list list contains the ArrayList filled with all the data up till now.
      *             It will be saved in data.txt
      */

@@ -5,6 +5,10 @@ public class ToDo extends Task {
         super(desciption);
     }
 
+    /**
+     * returns a String contaning description of object
+     * @return returns a String containing the description of the object, used to print out
+     */
     @Override
     public String toString(){
 
@@ -12,8 +16,8 @@ public class ToDo extends Task {
     }
 
     /**
-     *
-     * @return String containing the dynamic data of the task
+     * returns the dynamic state of the ToDo
+     * @return the state of ToDo, to be saved in data.txt
      */
     public String saveData(){
         String temp = this.isDone? "1" : "0";
