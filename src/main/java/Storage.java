@@ -22,10 +22,11 @@ public class Storage {
         this.filePath = filePath;
 
         file = new File(filePath);
+
         try {
             file.getParentFile().mkdir();
             file.createNewFile();
-        }  catch(IOException e) {
+        } catch(IOException e) {
             System.out.println("Error creating file");
         }
     }
@@ -125,7 +126,6 @@ public class Storage {
             } else {
                 textToAdd = textToAdd + "\n";
             }
-
         }
 
         FileWriter fw = new FileWriter(filePath);

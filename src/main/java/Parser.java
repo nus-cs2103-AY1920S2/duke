@@ -23,7 +23,7 @@ public class Parser {
 
         if(arr.length > 1) {
             //get task description
-            for (int i = 1; i < arr.length - 1; i++) {
+            for(int i = 1; i < arr.length - 1; i++) {
                 description = description + arr[i] + " ";
             }
             description = description + arr[arr.length - 1];

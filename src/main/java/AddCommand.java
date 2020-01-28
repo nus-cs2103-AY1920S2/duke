@@ -22,7 +22,7 @@ public class AddCommand extends Command {
      * @throws DukeException throws a DukeException if description is not added
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(command.equals("todo")) {
             if(description.equals("")) {
                 throw new DukeException("todo");
