@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class DoneCommand implements Command {
     private int doneIndex;  //doneIndex is 0-indexed
 
@@ -8,11 +6,9 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         //doneIndex is 0-indexed
-        tasks.get(doneIndex).markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(tasks.get(doneIndex));
+        tasks.done(doneIndex);
     }
 
     @Override

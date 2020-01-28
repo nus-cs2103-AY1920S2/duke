@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-
 public class ExitCommand implements Command {
     @Override
-    public void execute(ArrayList<Task> tasks) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         // do nothing
     }
 

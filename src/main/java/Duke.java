@@ -7,6 +7,54 @@ import java.io.File;
 
 
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found exception when loading database");
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand); //throws DukeException
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getErrorMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+
+        // saving tasks
+        try {
+            ui.showSavingTasks();
+            ui.showLine();
+            storage.save(tasks);
+        } catch (IOException e) {
+            System.out.println("error saving tasks");
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt").run();
+    }
+
     private static void hLine() {
         System.out.println("____________________________________________________________");
     }
@@ -70,40 +118,40 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        printWelcomeMessage();
-
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        // load data upon startup
-        try {
-            loadData("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt", tasks);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            System.err.println("error loading saved data from file");
-            e.printStackTrace();
-        }
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = scanner.nextLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks);
-                isExit = c.isExit();
-                // save data
-                saveData("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt", tasks);
-            } catch (DukeException e) {
-                System.out.println(e.getErrorMessage());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                // do nothing
-            }
-        }
-
-        printWithHLine("Bye. Hope to see you again soon!");
-    }
+//    public static void main(String[] args) {
+//        printWelcomeMessage();
+//
+//        Scanner scanner = new Scanner(System.in);
+//        ArrayList<Task> tasks = new ArrayList<>();
+//
+//        // load data upon startup
+//        try {
+//            loadData("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt", tasks);
+//        } catch (FileNotFoundException e) {
+//            System.out.println(e.getMessage());
+//            System.err.println("error loading saved data from file");
+//            e.printStackTrace();
+//        }
+//
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = scanner.nextLine();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks);
+//                isExit = c.isExit();
+//                // save data
+//                saveData("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt", tasks);
+//            } catch (DukeException e) {
+//                System.out.println(e.getErrorMessage());
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            } finally {
+//                // do nothing
+//            }
+//        }
+//
+//        printWithHLine("Bye. Hope to see you again soon!");
+//    }
 
 }

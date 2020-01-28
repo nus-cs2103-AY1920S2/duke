@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class AddCommand implements Command {
     private Task toAdd;
 
@@ -8,11 +6,8 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(toAdd);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(toAdd);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     @Override

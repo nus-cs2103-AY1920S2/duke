@@ -1,21 +1,21 @@
 public class Parser {
-    public static Command parse(String fullcommand) throws DukeException {
-        int spaceIndex = fullcommand.indexOf(" ");
+    public static Command parse(String fullCommand) throws DukeException {
+        int spaceIndex = fullCommand.indexOf(" ");
 
         if (spaceIndex == -1) {
             // full command is only 1 word
-            if (fullcommand.equals("list")) {
+            if (fullCommand.equals("list")) {
                 return new ListCommand();
-            } else if (fullcommand.equals("bye")) {
+            } else if (fullCommand.equals("bye")) {
                 return new ExitCommand();
-            } else if (fullcommand.equals("todo")) {
+            } else if (fullCommand.equals("todo")) {
                 throw new EmptyToDoException();
             } else {
                 throw new UndefinedCommandException();
             }
         } else {
-            String firstArg = fullcommand.substring(0, spaceIndex);
-            String otherArgs = fullcommand.substring(spaceIndex + 1);
+            String firstArg = fullCommand.substring(0, spaceIndex);
+            String otherArgs = fullCommand.substring(spaceIndex + 1);
 
             if (firstArg.equals("todo")) {
                 return new AddCommand(new Todo(otherArgs));

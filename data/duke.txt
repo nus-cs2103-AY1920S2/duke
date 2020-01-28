@@ -1,4 +1,6 @@
 D|1|assignment|2020-01-28
-D|1|hw|2020-02-01
-E|0|be social|location
+E|1|be social|location
 T|0|indiv project
+T|1|more work
+D|0|he|2018-12-12
+T|0|it's never ending!
