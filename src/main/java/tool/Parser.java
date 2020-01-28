@@ -8,6 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Deals with making sense of the user command
+ */
 public class Parser {
     private UI ui;
     private TaskList taskList;
@@ -17,6 +20,11 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Parses the input string into a Command object
+     * @param input Input String command of the user
+     * @return A Command object based on the specific command by the user
+     */
     public Command parse(String input){
         try{
             if (input.equals("bye")){
