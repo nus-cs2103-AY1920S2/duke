@@ -3,18 +3,20 @@ import java.lang.Integer;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo = " _     ___________ ___________ _______   __ ____________ ________  ___ _____\n"
+                + "| |   |_   _| ___ \\  ___| ___ \\_   _\\ \\ / / | ___ \\ ___ \\_   _|  \\/  ||  ___|\n"
+                + "| |     | | | |_/ / |__ | |_/ / | |  \\ V /  | |_/ / |_/ / | | | .  . || |__  \n"
+                + "| |     | | | ___ \\  __||    /  | |   \\ /   |  __/|    /  | | | |\\/| ||  __|\n"
+                + "| |_____| |_| |_/ / |___| |\\ \\  | |   | |   | |   | |\\ \\ _| |_| |  | || |___\n"
+                + "\\_____/\\___/\\____/\\____/\\_| \\_| \\_/   \\_/   \\_|   \\_| \\_|\\___/\\_|  |_/\\____/\n";
+        System.out.println(logo);
+        System.out.println("LIBERTY PRIME IS ONLINE");
         System.out.println("What can i do for you?");
 
         Scanner input = new Scanner(System.in);
 
         boolean isListening = true;
-        String filePath = "C:\\NUS\\Semester 4\\CS2103\\duke\\data\\duke.txt";
+        String filePath = "data\\duke.txt";
         UserText tasks = new UserText(filePath);
 
         while(isListening) {
@@ -26,7 +28,7 @@ public class Duke {
             try {
 
                 if (action.equalsIgnoreCase("bye")) {
-                    System.out.println("Bye. Hope to see you again!");
+                    System.out.println("DEATH IS A PREFERABLE ALTERNATIVE TO COMMUNISM");
                     tasks.saveTasks();
                     isListening = false;
 
@@ -46,7 +48,7 @@ public class Duke {
                 } else if (action.equalsIgnoreCase(("deadline"))) {
                     System.out.println("Got it, I've added this task");
                     String context = command_broken[1];
-                    String[] context_broken = context.split("/by", 2);
+                    String[] context_broken = context.split(" /by ", 2);
                     tasks.addInput(new Deadlines(context_broken[0], false ,context_broken[1]));
 
                 } else if (action.equalsIgnoreCase(("todo"))) {
@@ -59,7 +61,7 @@ public class Duke {
                 } else if (action.equalsIgnoreCase(("event"))) {
                     System.out.println("Got it, I've added this task");
                     String context = command_broken[1];
-                    String[] context_broken = context.split("/at", 2);
+                    String[] context_broken = context.split(" /at ", 2);
                     tasks.addInput(new Events(context_broken[0], false,context_broken[1]));
 
                 } else {
