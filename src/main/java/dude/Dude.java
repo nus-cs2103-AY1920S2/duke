@@ -25,8 +25,8 @@ public class Dude {
     private IUserInterface ui;
 
     /** 
-     * Initializes dude.Dude chatbot
-     * Greets the user
+     * Initializes dude.Dude chatbot.
+     * Greets the user.
      */
     public Dude() {
         this.ui = new UI();
@@ -36,7 +36,7 @@ public class Dude {
 
     /**
      * Repeatedly takes user input and responds to commands appropriately
-     * until "bye" is given as input
+     * until "bye" is given as input.
      */
     public void serve() {
         boolean isExit = false;

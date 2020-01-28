@@ -7,7 +7,7 @@ public class ParsingException extends Exception {
         super();
     }
 
-    public ParsingException(String errorMsg, String ...usageMsgs) {
+    public ParsingException(String errorMsg, String... usageMsgs) {
         super(errorMsg);
         this.usageMsgs = usageMsgs;
     }
