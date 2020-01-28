@@ -48,7 +48,7 @@ public class Command {
                     } else {
                         taskList.get(num - 1).markAsDone();
                         ui.printLine();
-                        ui.print("Nice! I've marked this task as done: ");
+                        ui.print("Nice! I've marked this task as done:");
                         ui.print(taskList.get(num - 1).toString());
                         ui.printLine();
                     }
