@@ -171,6 +171,23 @@ public class Parser {
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
                 saveTasks(store, filepath);
                 break;
+            case "find":
+                System.out.println("Here are the matching tasks in your list:");
+                String toFind = "";
+                for(int i = 1; i < check.length; i++) {
+                    toFind += check[i];
+                    toFind += " ";
+                }
+                toFind = toFind.trim();
+                int counter = 1;
+                for(int i = 0; i < store.size(); i++) {
+                    Task tempTask = store.get(i);
+                    if (tempTask.description.contains(toFind)) {
+                        System.out.println("" + counter + ". " + tempTask);
+                        counter++;
+                    }
+                }
+                break;
             default:
                 throw new DukeException("OOPS! I'm sorry but I don't know what that means :-(");
         }
