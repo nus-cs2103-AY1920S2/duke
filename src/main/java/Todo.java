@@ -1,5 +1,3 @@
-package task;
-
 public class Todo extends Task {
 
     public Todo(String command) {
@@ -8,7 +6,7 @@ public class Todo extends Task {
 
     @Override
     public String toStringTxt() {
-        return "T/" + super.getIcon() + "/" + command;
+        return "T/" + super.getIcon() + "/" + command + "\n";
     }
 
     @Override

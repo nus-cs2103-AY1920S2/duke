@@ -1,8 +1,3 @@
-package parser;
-import task.*;
-import command.*;
-import dukeexception.*;
-
 public class Parser {
     public static Command parseCommand(String userInput) throws DukeException{
         String[] split = userInput.split(" ", 2);

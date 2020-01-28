@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 E/N/meeting /2020-02-02
 
 T/N/swim
+=======
+T/N/borrow book
+
+E/N/IHG /2020-02-02
+>>>>>>> parent of c4815cf... Added packages
 
