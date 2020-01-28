@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -106,32 +110,57 @@ public class Duke {
         printNumTask();
     }
 
-    private static void addDeadline(String desc) throws InvalidTaskInputException {
+    private static void addDeadline(String desc) throws InvalidTaskInputException, InvalidDateException {
         String[] descs = desc.split(" /by ");
         if (descs.length == 1) { // invalid Deadline input format
             throw new InvalidTaskInputException();
         }
         String deadlineDesc = descs[0];
         String deadlineTime = descs[1];
-        Task deadline = new Deadline(deadlineDesc, deadlineTime);
+        LocalDate formattedDeadlineTime = null;
+        if (isValidDate(deadlineTime)) {
+            formattedDeadlineTime = LocalDate.parse(deadlineTime);
+        } else {
+            throw new InvalidDateException();
+        }
+
+        Task deadline = new Deadline(deadlineDesc, formattedDeadlineTime);
         tasks.add(deadline);
         printAddToList();
         System.out.println(deadline.toString());
         printNumTask();
     }
 
-    private static void addEvent(String desc) throws InvalidTaskInputException {
+    private static void addEvent(String desc) throws InvalidTaskInputException, InvalidDateException {
         String[] descs = desc.split(" /at ");
         if (descs.length == 1) { // invalid Event input format
             throw new InvalidTaskInputException();
         }
         String eventDesc = descs[0];
         String eventTime = descs[1];
-        Task event = new Event(eventDesc, eventTime);
+        LocalDate formattedEventTime = null;
+        if (isValidDate(eventTime)) {
+            formattedEventTime = LocalDate.parse(eventTime);
+        } else {
+            throw new InvalidDateException();
+        }
+
+        Task event = new Event(eventDesc, formattedEventTime);
         tasks.add(event);
         printAddToList();
         System.out.println(event.toString());
         printNumTask();
+    }
+
+    public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
     }
 
     private static void printList() {
