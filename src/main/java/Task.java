@@ -1,5 +1,5 @@
 public class Task {
-    private int done;
+    private int done; //done variable
     private String taskName;
     private String type;
 
