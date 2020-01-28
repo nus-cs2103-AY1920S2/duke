@@ -8,7 +8,7 @@ import task.Task;
 /**
  * Generic command to add a new task.
  */
-public abstract class Command_AddTask extends Command{
+public abstract class AddTaskCommand extends Command{
 
     private Task task;
 
@@ -16,12 +16,12 @@ public abstract class Command_AddTask extends Command{
      * Constructor to create a new task.
      * @param task to be added to the storage.
      */
-    public Command_AddTask(Task task){
+    public AddTaskCommand(Task task){
         this.task=task;
     }
 
     /**
-     * Execute to add the new task to the storage.
+     * Executes to add the new task to the storage.
      * @param common to add task to the data storage.
      * @param ui to display the response text of adding task.
      * @throws DukeException when adding of the new task is unsuccessful.

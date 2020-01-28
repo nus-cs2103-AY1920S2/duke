@@ -7,10 +7,10 @@ import dukexception.DukeException;
 /**
  * Specific command to exit the programme.
  */
-public class Command_Exit extends Command{
+public class ExitCommand extends Command{
 
     /**
-     * Execute to exit the programme.
+     * Executes to exit the programme.
      * @param common to save the data before exiting programme.
      * @param ui to display the exit response text.
      * @throws DukeException when the saving of data is unsuccessful.

@@ -20,7 +20,7 @@ public class StateHolder implements Serializable {
     }
 
     /**
-     * Clear all undo states before adding new state.
+     * Clears all undo states before adding new state.
      * @param state new state to be added.
      */
     public void addNewState(State state){
@@ -29,7 +29,7 @@ public class StateHolder implements Serializable {
     }
 
     /**
-     * Obtain current state.
+     * Obtains the current state.
      * @return current state.
      */
     public State getCurrentState(){
@@ -38,7 +38,7 @@ public class StateHolder implements Serializable {
     }
 
     /**
-     * Obtain previous state.
+     * Obtains the previous state.
      * @return previous state.
      */
     //undo
@@ -49,7 +49,7 @@ public class StateHolder implements Serializable {
     }
 
     /**
-     * Revert undo and obtain state before undo.
+     * Reverts undo and obtain state before undo.
      * @return state before undo.
      */
     //redo

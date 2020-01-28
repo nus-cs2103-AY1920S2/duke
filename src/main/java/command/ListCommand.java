@@ -7,10 +7,10 @@ import dukexception.DukeException;
 /**
  * Specific command that display the list of task.
  */
-public class Command_List extends Command{
+public class ListCommand extends Command{
 
     /**
-     * Execute to display the list of task in the storage.
+     * Executes to display the list of task in the storage.
      * @param common to retrieve the data from storage.
      * @param ui to display the list of task.
      * @throws DukeException when the list is empty.

@@ -17,7 +17,7 @@ public class Ui {
     }
 
     /**
-     * Get the user input.
+     * Gets the user input.
      * @return the user input in string.
      */
     public String getInput(){
@@ -25,21 +25,21 @@ public class Ui {
     }
 
     /**
-     * Display the welcome message to the user.
+     * Displays the welcome message to the user.
      */
     public void preLog(){
         display(UiMessage.GREETING.getMsg());
     }
 
     /**
-     * Display the exiting message to the user.
+     * Displays the exiting message to the user.
      */
     public void endLog(){
         display(UiMessage.FAREWELL.getMsg());
     }
 
     /**
-     * Display the error message to the user.
+     * Displays the error message to the user.
      * @param error is the error message.
      */
     public void errorLog(String error){
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Display text to the user under the standard format.
+     * Displays text to the user under the standard format.
      * @param msg is the text to be displayed.
      */
     public void display(String... msg){

@@ -25,7 +25,7 @@ public class Common {
     }
 
     /**
-     * Add new task to the model, update the state.
+     * Adds new task to the model, update the state.
      * @param task new task.
      * @return the response text to the ui.
      */
@@ -40,7 +40,7 @@ public class Common {
     }
 
     /**
-     * Print the list of task.
+     * Prints the list of task.
      * @return list of task in string array.
      * @throws DukeException when task list is empty.
      */
@@ -52,7 +52,7 @@ public class Common {
     }
 
     /**
-     * Mark the specific task as done, update the state.
+     * Marks the specific task as done, update the state.
      * @param index indicates the specific task.
      * @return the response text of marking the task.
      * @throws DukeException when the index is invalid.
@@ -67,7 +67,7 @@ public class Common {
     }
 
     /**
-     * Delete the task.
+     * Deletes the task.
      * @param index indicates the specific task.
      * @return the response text of deleting the task.
      * @throws DukeException when the index is invalid.
@@ -94,14 +94,14 @@ public class Common {
 
 
     /**
-     * Update the state holder of the current state.
+     * Updates the state holder of the current state.
      */
     private void updateState(){
         stateHolder.addNewState(new State(model.getTaskList()));
     }
 
     /**
-     * Save the current state holder to external file.
+     * Saves the current state holder to external file.
      * @throws DukeException when saving data is unsuccessful.
      */
     public void saveData() throws DukeException {
@@ -109,7 +109,7 @@ public class Common {
     }
 
     /**
-     * Load the saved state to the system.
+     * Loads the saved state to the system.
      * @throws DukeException when loading is unsuccessful.
      */
     private void loadData() throws DukeException{
@@ -122,7 +122,7 @@ public class Common {
     }
 
     /**
-     * Reset the current data and the external data.
+     * Resets the current data and the external data.
      * @throws DukeException clear data is unsuccessful.
      */
     public void reset() throws DukeException {

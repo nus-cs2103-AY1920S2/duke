@@ -14,7 +14,7 @@ public class ToDo extends Task{
     }
 
     /**
-     * Get the specific type of the task.
+     * Gets the specific type of the task.
      * @return the type of the task.
      */
     @Override

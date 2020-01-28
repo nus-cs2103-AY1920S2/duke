@@ -17,7 +17,7 @@ public enum UiMessage {
     }
 
     /**
-     * get the message of the operation.
+     * Gets the message of the operation.
      * @return the message of the operation in string array.
      */
     public String[] getMsg() {

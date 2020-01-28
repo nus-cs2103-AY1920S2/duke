@@ -17,7 +17,7 @@ public class Model {
     }
 
     /**
-     * Add new task to the model.
+     * Adds new task to the model.
      * @param task new task.
      */
     public void addTask(Task task){
@@ -25,7 +25,7 @@ public class Model {
     }
 
     /**
-     * get the list of task in standard form.
+     * Gets the list of task in standard form.
      * @return list of task in standard form.
      * @throws DukeException when the list is empty.
      */
@@ -42,7 +42,7 @@ public class Model {
 
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      * @param index indicate the specific task.
      * @throws DukeException when index is invalid.
      */
@@ -51,7 +51,7 @@ public class Model {
     }
 
     /**
-     * Delete the task.
+     * Deletes the task.
      * @param index indicate the specific task.
      * @throws DukeException when index is invalid.
      */
@@ -59,13 +59,19 @@ public class Model {
         taskList.remove(getTask(index));
     }
 
-
+    /**
+     * Finds the task that contains the specified keyword.
+     * @param keyword to be matched by the description of the task.
+     * @return the list of matching tasks.
+     * @throws DukeException when the task list is empty
+     * or there is no matching task.
+     */
     public ArrayList<String> findTask(String keyword) throws DukeException{
         if(getSize()==0){
             throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
         }
         ArrayList<String> matchingTask=new ArrayList<>();
-        taskList.stream().filter(t->t.containKeyword(keyword)).forEach(x->matchingTask.add(x.toString()));
+        taskList.stream().filter(t->t.hasKeyword(keyword)).forEach(x->matchingTask.add(x.toString()));
         if(matchingTask.isEmpty()){
             throw new DukeException("The matching list is empty.");
         }
@@ -74,7 +80,7 @@ public class Model {
 
 
     /**
-     * Obtain the task.
+     * Obtains the task.
      * @param index indicate the specific task.
      * @return the specific task.
      * @throws DukeException when task list is empty or index is invalid.
@@ -90,7 +96,7 @@ public class Model {
     }
 
     /**
-     * Obtain the size of the task list.
+     * Obtains the size of the task list.
      * @return size of task list.
      */
     public int getSize(){
@@ -107,7 +113,7 @@ public class Model {
     }
 
     /**
-     * clear all the task in the list.
+     * Clears all the task in the list.
      */
     public void clearData(){
         taskList.clear();

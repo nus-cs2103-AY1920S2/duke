@@ -23,7 +23,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Get the status of the task.
+     * Gets the status of the task.
      * @return status of the task in string.
      */
     public String getStatusIcon() {
@@ -37,20 +37,20 @@ public abstract class Task implements Serializable {
     public abstract String getTypeIcon();
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void setDone(){
         isDone=true;
     }
 
     /**
-     * To determine whether the description of the task
+     * Determines whether the description of the task
      * contain a certain keyword.
      * @param keyword given keyword to be checked.
      * @return the boolean that indicate whether the
      * description of the task contain a certain keyword.
      */
-    public boolean containKeyword(String keyword){
+    public boolean hasKeyword(String keyword){
         if(description.contains(keyword)){
             return true;
         }
@@ -58,7 +58,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Get the detail of the task which includes the type of task,
+     * Gets the detail of the task which includes the type of task,
      * the status of the task and the description of the task.
      * @return string contains the standard format of the task.
      */

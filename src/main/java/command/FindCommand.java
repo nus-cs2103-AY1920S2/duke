@@ -7,16 +7,16 @@ import dukexception.DukeException;
 /**
  * Specific command to find task that has the keyword
  */
-public class Command_Find extends Command{
+public class FindCommand extends Command{
 
     private String keyword;
 
-    public Command_Find(String keyword){
+    public FindCommand(String keyword){
         this.keyword=keyword;
     }
 
     /**
-     * Display the list of task that has the keyword
+     * Displays the list of task that has the keyword
      * @param common to check the task in the task list.
      * @param ui to display the response text of the matching tasks.
      * @throws DukeException when the task list is empty or

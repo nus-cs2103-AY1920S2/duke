@@ -15,7 +15,7 @@ import dukexception.DukeException;
 public class Parser {
 
     /**
-     * Parse the user input to recognisable command.
+     * Parses the user input to recognisable command.
      * @param userInput input from user.
      * @return command to be executed.
      * @throws DukeException user input is incomplete or invalid.
@@ -27,29 +27,29 @@ public class Parser {
             String information=userInput.substring(userInput.indexOf(" ")+1);
 
             switch (keyword){
-                case "done":
-                    return parseDone(information);
-                case "delete":
-                    return parseDelete(information);
-                case "todo":
-                    return parseTodo(information);
-                case "deadline":
-                    return parseDeadline(information);
-                case "event":
-                    return parseEvent(information);
-                case "find":
-                    return parseFind(information);
+            case "done":
+                return parseDone(information);
+            case "delete":
+                return parseDelete(information);
+            case "todo":
+                return parseTodo(information);
+            case "deadline":
+                return parseDeadline(information);
+            case "event":
+                return parseEvent(information);
+            case "find":
+                return parseFind(information);
             }
         }else{
             switch (userInput){
-                case "list":
-                    return parseList();
-                case "bye":
-                    return parseBye();
-                case "reset":
-                    return parseReset();
-                case "done": case "delete": case "find":
-                case "todo": case "deadline": case "event":
+            case "list":
+                return parseList();
+            case "bye":
+                return parseBye();
+            case "reset":
+                return parseReset();
+            case "done": case "delete": case "find":
+            case "todo": case "deadline": case "event":
                     throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
             }
         }
@@ -58,21 +58,21 @@ public class Parser {
 
 
     private Command parseBye(){
-        return new Command_Exit();
+        return new ExitCommand();
     }
 
     private Command parseList(){
-        return new Command_List();
+        return new ListCommand();
     }
 
     private Command parseReset(){
-        return new Command_Reset();
+        return new ResetCommand();
     }
 
     private Command parseDone(String information) throws DukeException {
         try {
             int index = Integer.parseInt(information) - 1;
-            return new Command_Done(index);
+            return new DoneCommand(index);
         }catch (NumberFormatException e){
             throw new DukeException(ErrorMessage.LACK_NUMBER.toString());
         }
@@ -81,7 +81,7 @@ public class Parser {
     private Command parseDelete(String information) throws DukeException {
         try {
             int index = Integer.parseInt(information) - 1;
-            return new Command_Delete(index);
+            return new DeleteCommand(index);
         }catch (NumberFormatException e){
             throw new DukeException(ErrorMessage.LACK_NUMBER.toString());
         }
@@ -91,14 +91,14 @@ public class Parser {
         if(information.trim().length()==0) {
             throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
         }
-        return new Command_Find(information);
+        return new FindCommand(information);
     }
 
     private Command parseTodo(String information) throws DukeException {
         if(information.trim().length()==0) {
             throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
         }
-        return new Command_AddToDo(information);
+        return new AddToDoCommand(information);
     }
 
     private Command parseDeadline(String information) throws DukeException {
@@ -117,7 +117,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.LACK_TIME.toString());
         }
 
-        return new Command_AddDeadline(description,parseDateTime(time));
+        return new AddDeadlineCommand(description,parseDateTime(time));
     }
 
     private Command parseEvent(String information) throws DukeException {
@@ -135,7 +135,7 @@ public class Parser {
         if(time.trim().length()==0) {
             throw new DukeException(ErrorMessage.LACK_TIME.toString());
         }
-        return new Command_AddEvent(description,parseDateTime(time));
+        return new AddEventCommand(description,parseDateTime(time));
     }
 
     private LocalDateTime parseDateTime(String dateTime) throws DukeException{

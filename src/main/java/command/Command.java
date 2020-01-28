@@ -11,7 +11,7 @@ import dukexception.DukeException;
 public abstract class Command {
 
     /**
-     * Execute the specific command to modify the system and
+     * Executes the specific command to modify the system and
      * output the response to the user.
      * @param common to modify the data storage.
      * @param ui to display the response text of the command.

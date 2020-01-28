@@ -21,7 +21,7 @@ public class Storage {
     }
 
     /**
-     * Save the states of the system to external file.
+     * Saves the states of the system to external file.
      * @param stateHolder is the states of the system.
      * @throws DukeException when writing to file is unsuccessful.
      */
@@ -30,7 +30,7 @@ public class Storage {
     }
 
     /**
-     * Load the states from the external file to the system.
+     * Loads the states from the external file to the system.
      * @return the states of the system.
      * @throws DukeException when reading from the file is unsuccessful.
      */
@@ -39,7 +39,7 @@ public class Storage {
     }
 
     /**
-     * Clear all the data in the external file.
+     * Clears all the data in the external file.
      * @throws DukeException when reading from the file is unsuccessful.
      */
     public void clearData() throws DukeException{
@@ -53,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * Obtain the data from the external file.
+     * Obtains the data from the external file.
      * @param thisFile indicates the file to be read from.
      * @return the states of the system.
      * @throws DukeException when reading the file is unsuccessful.
@@ -79,7 +79,7 @@ public class Storage {
     }
 
     /**
-     * Save the date to the external file.
+     * Saves the date to the external file.
      * @param thisFile indicates the file to be written to.
      * @param stateHolder the states of the system to be save.
      * @throws DukeException when the writing to the file is unsuccessful.

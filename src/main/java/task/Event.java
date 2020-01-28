@@ -24,7 +24,7 @@ public class Event extends Task{
 
 
     /**
-     * Get the specific type of the task.
+     * Gets the specific type of the task.
      * @return the type of the task.
      */
     @Override
@@ -33,7 +33,7 @@ public class Event extends Task{
     }
 
     /**
-     * Get the detail of the standard task and the duration of the task.
+     * Gets the detail of the standard task and the duration of the task.
      * @return string contains the standard format of the event.
      */
     @Override

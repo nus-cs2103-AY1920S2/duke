@@ -26,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * run the program.
+     * runs the program.
      */
     public void run(){
         ui.preLog();
