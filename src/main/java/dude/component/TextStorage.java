@@ -22,6 +22,15 @@ import java.time.format.DateTimeParseException;
 public class TextStorage implements IStorage {
     private static final File storeFile = new File("data/dude.txt");
 
+    /**
+     * Loads the TaskList from the previous Dude session from memory.
+     * If data from the previous session cannot be found, returns an empty TaskList.
+     *
+     * @param ui User Interface which Dude chatbot uses to report errors when loading data.
+     * @return TaskList with all tasks from previous session if successful, else shows an error message
+     *         and returns TaskList with tasks that were successfully parsed from data/dude.txt.
+     */
+    @Override
     public TaskList restoreSession(IUserInterface ui) {
         TaskList session = new TaskList();
         try (Scanner sc = new Scanner(storeFile)) {
@@ -35,6 +44,14 @@ public class TextStorage implements IStorage {
         return session;
     }
 
+    /**
+     * Saves the TaskList from the current session into some form of persistent memory.
+     * If an error occurs in writing the data, reports the error and warns users that data may be lost.
+     *
+     * @param ui User Interface which Dude chatbot uses to report errors when saving data.
+     * @param session TaskList containing Tasks to save to data/dude.txt.
+     */
+    @Override
     public void saveSession(IUserInterface ui, TaskList session) {
         // Create "/data/" directory if it doesn't exist
         if (!storeFile.getParentFile().exists()) {

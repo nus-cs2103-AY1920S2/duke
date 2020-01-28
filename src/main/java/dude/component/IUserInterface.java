@@ -31,7 +31,7 @@ public interface IUserInterface {
      * Tells the user what was wrong and gives the proper usage of the command.
      *
      * @param errorMsg A message describing the problem with the user's input.
-     * @param usageMsgs possibly more than one string describing the correct format of input.
+     * @param usageMsgs variable number of strings describing the correct format of input.
      */
     void respondParsingError(String errorMsg, String... usageMsgs);
 

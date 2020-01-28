@@ -6,6 +6,7 @@ import dude.component.TaskList;
 
 public class ByeCommand extends Command {
     /**
+     * Overrides default implementation of returning true as ByeCommand is supposed to cause Dude.serve() to exit.
      *
      * @return true since ByeCommand causes Dude to exit.
      */
@@ -23,7 +24,7 @@ public class ByeCommand extends Command {
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
      * @param storage the IStorage from which the current session was loaded and to which the session will
-     *  be saved to on an exiting command.
+     *                be saved to on an exiting command.
      */
     @Override
     public void execute(TaskList tasks, IUserInterface ui, IStorage storage) {

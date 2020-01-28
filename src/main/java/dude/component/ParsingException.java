@@ -24,8 +24,9 @@ public class ParsingException extends Exception {
     }
 
     /**
+     * Returns all proper usages of the command that lead to this ParsingException.
      *
-     * @return proper usages of the command that lead to this ParsingException.
+     * @return an array of Strings of proper usage messages.
      */
     public String[] getUsageMsgs() {
         return usageMsgs;

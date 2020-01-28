@@ -4,7 +4,7 @@ import dude.task.Task;
 import dude.task.Todo;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskListTest {
     private Task task1 = new Todo("dude", false);

@@ -8,6 +8,7 @@ package dude.command;
 public class CommandExecutionException extends Exception {
 
     /**
+     * Initializes a CommandExecutionException with the given error message which can be accessed via getMessage().
      *
      * @param message Error message describing how the command given was invalid.
      */

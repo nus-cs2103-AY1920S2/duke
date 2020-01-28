@@ -7,6 +7,8 @@ public abstract class Task {
     private boolean isDone;
 
     /**
+     * Initializes a Task object with given details and completion status indicated by isDone.
+     *
      * @param details description of the task.
      * @param isDone completion status of the task.
      */
@@ -23,6 +25,8 @@ public abstract class Task {
     }
 
     /**
+     * Returns the task details supplied by user.
+     *
      * @return description of the task.
      */
     public String getDetails() {
@@ -30,6 +34,8 @@ public abstract class Task {
     }
 
     /**
+     * Indicates whether the task is completed.
+     *
      * @return isDone which is true if Task is complete, false otherwise.
      */
     public boolean isDone() {

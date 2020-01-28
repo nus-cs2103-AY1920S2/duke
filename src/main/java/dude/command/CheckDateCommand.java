@@ -10,6 +10,7 @@ public class CheckDateCommand extends Command {
     private final LocalDate date;
 
     /**
+     * Initializes a new CheckDateCommand object which tells users what tasks occur on the given date upon executing.
      *
      * @param date the date to check current tasks to see if any of them occur on date.
      */
@@ -24,7 +25,7 @@ public class CheckDateCommand extends Command {
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
      * @param storage the IStorage from which the current session was loaded and to which the session will
-     *  be saved to on an exiting command.
+     *                be saved to on an exiting command.
      */
     @Override
     public void execute(TaskList tasks, IUserInterface ui, IStorage storage) {

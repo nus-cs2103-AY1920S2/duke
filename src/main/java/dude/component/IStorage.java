@@ -7,7 +7,7 @@ public interface IStorage {
      *
      * @param ui User Interface which Dude chatbot uses to report errors when loading data.
      * @return TaskList with all tasks from previous session if successful, else shows an error message,
-     *  and returns TaskList with tasks that were successfully parsed from memory.
+     *         and returns TaskList with tasks that were successfully parsed from memory.
      */
     TaskList restoreSession(IUserInterface ui);
 

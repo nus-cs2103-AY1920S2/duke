@@ -10,6 +10,7 @@ public class DeleteCommand extends Command {
     private final int index;
 
     /**
+     * Initializes a new DeleteCommand object which removes the task at given index in Dude's TaskList upon executing.
      *
      * @param index the index of the task to delete.
      */
@@ -23,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
      * @param storage the IStorage from which the current session was loaded and to which the session will
-     *  be saved to on an exiting command.
+     *                be saved to on an exiting command.
      * @throws CommandExecutionException If no task exists at that index (index &lt; 1 or index &gt; tasks.taskCount()).
      */
     @Override

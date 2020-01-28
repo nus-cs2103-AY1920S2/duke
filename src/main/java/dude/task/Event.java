@@ -8,6 +8,7 @@ public class Event extends Task {
     private LocalDate eventEnd;
 
     /**
+     * Initializes a Event task with given details, start date, end date and completion status indicated by isDone.
      *
      * @param details description of the event.
      * @param eventStart Date which the event starts.
@@ -21,6 +22,7 @@ public class Event extends Task {
     }
 
     /**
+     * Indicates if this Task occurs on the given date.
      *
      * @param date date of interest as to whether the Task occurs on that date.
      * @return true if date is within the range from eventStart to eventEnd, false otherwise.
@@ -32,9 +34,10 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a string representation of the Task, meant to be understood by users.
      *
      * @return String displaying Task type, isDone status, Task description, eventStart and eventEnd,
-     *  in the format: [E][isDone] description (eventStart to eventEnd).
+     *         in the format: [E][isDone] description (eventStart to eventEnd).
      */
     @Override
     public String toString() {
@@ -44,6 +47,7 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a string representation of the Task, meant to be written to a plain text file and easily parsed.
      *
      * @return formatted string in the format: E|isDone|description|eventStart|eventEnd.
      */

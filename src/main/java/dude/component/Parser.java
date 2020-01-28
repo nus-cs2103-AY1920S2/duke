@@ -18,7 +18,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 public class Parser {
-    /** Mappings from commands to their usage messages */
+    /** Mappings from commands to their usage messages. */
     private static final Map<String, String> USAGES =
             Map.of(
                     "bye", "bye",
@@ -32,7 +32,7 @@ public class Parser {
                     "event", "event description /from yyyy-mm-dd /to yyyy-mm-dd"
             );
 
-    /** Regex for whitespace, for greater clarity */
+    /** Regex for whitespace, for greater clarity. */
     private static final String WHITESPACE = "\\s+";
 
     /**

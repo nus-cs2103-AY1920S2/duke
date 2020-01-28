@@ -7,6 +7,7 @@ public class Deadline extends Task {
     private LocalDate dueDate;
 
     /**
+     * Initializes a Deadline task with given details, due date and completion status indicated by isDone.
      *
      * @param details description of the deadline.
      * @param dueDate due date of the deadline.
@@ -18,6 +19,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Indicates if this Task occurs on the given date.
      *
      * @param date date of interest as to whether the Task occurs on that date.
      * @return true if date is exactly the dueDate of this Deadline, false otherwise.
@@ -28,9 +30,10 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a string representation of the Task, meant to be understood by users.
      *
      * @return String displaying Task type, isDone status, Task description and dueDate,
-     *  in the format: [D][isDone] description (by: dueDate)
+     *         in the format: [D][isDone] description (by: dueDate)
      */
     @Override
     public String toString() {
@@ -39,6 +42,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a string representation of the Task, meant to be written to a plain text file and easily parsed.
      *
      * @return formatted string in the format: D|isDone|description|dueDate.
      */
