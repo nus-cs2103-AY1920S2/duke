@@ -1,16 +1,27 @@
 package duke;
 
-import java.util.ArrayList;
-
+/**
+ * This class takes care of the user interface
+ * especially printing outputs to the user
+ **/
 public class Ui {
 
+    /**
+     * Constructor of the UI object
+     **/
     Ui(){
     }
 
+    /**
+     * Printing an error of loading a file to the user
+     **/
     void showLoadingError(DukeException e) {
         System.out.println(e);
     }
 
+    /**
+     * Printing an greeting message to the user
+     **/
     void greetUser() {
         String line = "   ____________________________________________________________";
         System.out.println(line);
@@ -19,6 +30,9 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Printing the task lists of the user
+     **/
     static void printList(TaskList tasks) {
         String line = "   ____________________________________________________________";
         System.out.println(line);
@@ -31,6 +45,9 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Printing confirmation of task adding to the user
+     **/
     static void printTask(Task newTask, int size) {
         String line = "   ____________________________________________________________";
         System.out.println(line);
@@ -40,6 +57,10 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Printing confirmation of changing task done status to done
+     * to the user
+     **/
     static void printDone(Task updatedTask) {
         String line = "   ____________________________________________________________";
         System.out.println(line);
@@ -48,6 +69,9 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Printing a farewell message to the user
+     **/
     static void printBye() {
         String line = "   ____________________________________________________________";
         System.out.println(line);
@@ -55,6 +79,10 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Printing confirmation of removing task from the list
+     * to the user
+     **/
     static void printRemove(Task removedTask, int size) {
         String line = "   ____________________________________________________________";
         System.out.println(line);
@@ -64,6 +92,9 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Printing an exception message to the user
+     **/
     static void printException(DukeException e) {
         String line = "   ____________________________________________________________";
         System.out.println(line);
