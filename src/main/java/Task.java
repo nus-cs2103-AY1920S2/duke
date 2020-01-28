@@ -19,6 +19,10 @@ public class Task {
         return this.taskName;
     }
 
+    public boolean getDoneStatus() {
+        return this.doneStatus;
+    }
+
     @Override
     public String toString() {
         String symbol;
