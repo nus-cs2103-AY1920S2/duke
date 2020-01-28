@@ -37,7 +37,7 @@ public class TodoCommand extends Command {
      * @throws DukeException throws when problem saving task to hard disk
      */
     @Override
-    public void execute (TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task task = new Todo(details.get(1));
         taskList.addTask(task);
         storage.saveTasks(taskList);

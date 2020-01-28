@@ -51,7 +51,7 @@ public class ReplyFormat {
      */
     public void addParagraph(String paragraph, int numOfIndent) {
         String[] sentences = paragraph.split("\n");
-        for (String sentence : sentences) {
+        for(String sentence : sentences) {
             addSentence(sentence, numOfIndent);
         }
     }
@@ -69,7 +69,7 @@ public class ReplyFormat {
      */
     public void addList(List<Task> listing) {
         int count = 1;
-        for (Task task : listing) {
+        for(Task task : listing) {
             addSentence(count + "." + task.toString(), 1);
             count += 1;
         }
@@ -82,7 +82,7 @@ public class ReplyFormat {
      */
     public String setAdditionalIndent(int numOfIndent) {
         String indent = "";
-        for (int i = 0; i < numOfIndent; i++) {
+        for(int i = 0; i < numOfIndent; i++) {
             indent = indent.concat(" ");
         }
         return indent;
@@ -95,7 +95,7 @@ public class ReplyFormat {
     public void setIndentationInFront(int numOfIndent) {
         numOfIndentInFront = numOfIndent;
         indentationInFront = "";
-        for (int i = 0; i < numOfIndentInFront; i++) {
+        for(int i = 0; i < numOfIndentInFront; i++) {
             indentationInFront = indentationInFront.concat(" ");
         }
     }

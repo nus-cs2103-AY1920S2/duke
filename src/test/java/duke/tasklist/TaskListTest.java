@@ -21,7 +21,7 @@ public class TaskListTest {
      * Test whether methods, addTask and getTask, work correctly.
      */
     @Test
-    public void addOneTask_ThenGetTask_ShouldReturnSameTask() {
+    public void addOneTask_thenGetTask_shouldReturnSameTask() {
         TaskList taskList = new TaskList();
         Task expected = new Task("Testing");
         taskList.addTask(expected);
@@ -32,7 +32,7 @@ public class TaskListTest {
      * Test if delete task without any task in taskList will throw Duke Exception or not.
      */
     @Test
-    public void deleteTaskWithNoTask_ShouldThrowDukeException() {
+    public void deleteTaskWithNoTask_shouldThrowDukeException() {
         TaskList taskList = new TaskList();
         Exception exception = assertThrows(DukeException.class, () -> {
             taskList.deleteTask(1);
@@ -48,7 +48,7 @@ public class TaskListTest {
      * Test if getTask method return the correct task at the index.
      */
     @Test
-    public void runGetTask_ShouldReturnTheTaskAtTheIndex() {
+    public void deleteTaskWithTasks_shouldReturnTheTaskAtTheIndex() {
         TaskList taskList = new TaskList();
         Task expected = new Task("Testing");
         taskList.addTask(new Task("Wrong Task"));
@@ -62,7 +62,7 @@ public class TaskListTest {
      * Test if the method, getAmountOfTask, will return correct number.
      */
     @Test
-    public void getAmountOfTask_ShouldReturnCorrectNumber() {
+    public void getAmountOfTask_shouldReturnCorrectNumber() {
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("Wrong Task"));
         taskList.addTask(new Task("Wrong Task"));

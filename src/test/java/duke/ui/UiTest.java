@@ -31,7 +31,7 @@ public class UiTest {
      * Reset the output to System.out after every test.
      */
     @AfterEach
-    public void cleanUp(){
+    public void cleanUp() {
         PrintStream originalOut = System.out;
         System.setOut(originalOut);
     }
@@ -40,7 +40,7 @@ public class UiTest {
      * Test if the greet method print out the expected message or not.
      */
     @Test
-    public void greetMethod_ShouldProduceExpectedMessage() {
+    public void greetMethod_shouldProduceExpectedMessage() {
         Ui ui = new Ui();
         String expected = "    ____________________________________________________________\n"
                 + "     Hello! I'm \n"
@@ -59,7 +59,7 @@ public class UiTest {
      * Test if the method, replyDone, give the correct output to the user or not.
      */
     @Test
-    public void replyDone_ShouldGiveTheCorrectOutput() {
+    public void deleteTask_shouldGiveTheCorrectOutput() {
         Ui ui = new Ui();
         Task task = new Todo("borrow book");
         String expected = "    ____________________________________________________________\n"

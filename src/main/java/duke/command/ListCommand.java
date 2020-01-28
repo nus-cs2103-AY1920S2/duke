@@ -28,7 +28,7 @@ public class ListCommand extends Command {
      * @param ui Print the message out to console
      */
     @Override
-    public void execute (TaskList taskList, Storage storage, Ui ui) {
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
         ui.replyListing(taskList.getListing());
     }
 }

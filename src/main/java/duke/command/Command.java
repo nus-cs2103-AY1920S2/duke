@@ -63,7 +63,7 @@ public class Command {
      * @param ui Print the message out to console
      * @throws DukeException occurs when the method is called as parent class
      */
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException{
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         throw new DukeException("To be implemented in child class");
     }
 

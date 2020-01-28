@@ -24,7 +24,7 @@ public class TaskTest {
      * Test if the method, getStatus, will return true after running setStatusDone method.
      */
     @Test
-    public void setStatusDone_ShouldReturnTrueForStatus() {
+    public void setStatusDone_shouldReturnTrueForStatus() {
         Task task = new Task("Test");
         task.setStatusDone();
         Assertions.assertTrue(task.getStatus());
@@ -34,7 +34,7 @@ public class TaskTest {
      * Test if toString method give correct String format.
      */
     @Test
-    public void toString_ShouldReturnInCorrectFormat() {
+    public void toString_shouldReturnInCorrectFormat() {
         Task task = new Task("Test");
         String expected = "[\u2718] Test";
         Assertions.assertEquals(expected, task.toString());

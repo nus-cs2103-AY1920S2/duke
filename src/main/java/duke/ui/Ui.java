@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
     protected int numOfIndentation = 4;
     protected ReplyFormat message;
-    static Scanner userInput;
+    protected static Scanner userInput;
 
     public Ui() {
         message = new ReplyFormat();
@@ -21,8 +21,8 @@ public class Ui {
      * @return the sentence user inputs
      */
     public String getUserInput() {
-        while (true) {
-            if (userInput.hasNext()) {
+        while(true) {
+            if(userInput.hasNext()) {
                 return userInput.nextLine();
             }
         }
@@ -76,7 +76,7 @@ public class Ui {
      */
     public void replyListing(List<Task> tasks) {
         message.clearMessage();
-        if (tasks.isEmpty()) {
+        if(tasks.isEmpty()) {
             message.addSentence("Horray! You do not have any task now!", 1);
         } else {
             message.addSentence("Here are the tasks in your list:", 1);
@@ -94,7 +94,7 @@ public class Ui {
         message.clearMessage();
         message.addSentence("Got it. I've added this task:", 1);
         message.addSentence(task.toString(), 3);
-        if (AmtOfTask > 1) {
+        if(AmtOfTask > 1) {
             message.addSentence("Now you have "+ AmtOfTask +" tasks in the list.", 1);
         } else {
             message.addSentence("Now you have 1 task in the list.", 1);

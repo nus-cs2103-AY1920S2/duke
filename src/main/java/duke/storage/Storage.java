@@ -73,26 +73,26 @@ public class Storage {
         List<Task> listing = new ArrayList<>();
         Task task;
         try {
-            while (taskScanner.hasNext()) {
+            while(taskScanner.hasNext()) {
                 line = taskScanner.nextLine().split("\\s\\|\\s");
-                switch (line[0]) {
+                switch(line[0]) {
                     case "T":
                         task = new Todo(line[2]);
-                        if (line[1].equals("1")) {
+                        if(line[1].equals("1")) {
                             task.setStatusDone();
                         }
                         listing.add(task);
                         break;
                     case "E":
                         task = new Event(line[2], line[3]);
-                        if (line[1].equals("1")) {
+                        if(line[1].equals("1")) {
                             task.setStatusDone();
                         }
                         listing.add(task);
                         break;
                     case "D":
                         task = new Deadline(line[2], line[3]);
-                        if (line[1].equals("1")) {
+                        if(line[1].equals("1")) {
                             task.setStatusDone();
                         }
                         listing.add(task);
@@ -122,7 +122,7 @@ public class Storage {
         int num = 1;
         createFile(absolutePath);
         clearFile(absolutePath);
-        while (numOfTasks != 0) {
+        while(numOfTasks != 0) {
             addTask(taskList.getTask(num));
             num++;
             numOfTasks--;
@@ -161,7 +161,7 @@ public class Storage {
         int status;
         String period;
         String taskDescription;
-        switch (task.getType()) {
+        switch(task.getType()) {
             case "todo":
                 taskType = "T";
                 status = task.getStatus()? 1: 0;

@@ -37,7 +37,7 @@ public class EventCommand extends Command {
      * @throws DukeException throws when problem saving task to hard disk and invalid date/time format
      */
     @Override
-    public void execute (TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task task = new Event(details.get(1), details.get(2));
         taskList.addTask(task);
         storage.saveTasks(taskList);

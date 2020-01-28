@@ -24,7 +24,7 @@ public class ParserTest {
      * Test if invalid input to the parse method will throws DukeException or not.
      */
     @Test
-    public void invalidIntput_ShouldThrowDukeException() {
+    public void invalidOutput_shouldThrowDukeException() {
         Exception exception = assertThrows(DukeException.class, () -> {
             Parser.parse("Todo borrow book");
         });
@@ -40,7 +40,7 @@ public class ParserTest {
      * @throws DukeException occurs when invalid string input
      */
     @Test
-    public void inputList_ShouldReturnListCommandObject() throws DukeException {
+    public void inputList_shouldReturnListCommandObject() throws DukeException {
         List<String> expected = new ArrayList<>();
         expected.add(CommandType.LIST.getCommand());
         Assertions.assertEquals(expected, Parser.processUserInput("list"));
@@ -51,7 +51,7 @@ public class ParserTest {
      * @throws DukeException occurs when invalid string input
      */
     @Test
-    public void todoBorrowBookInput_ShouldReturnArrayListSuccessfully() throws DukeException {
+    public void todoBorrowBookInput_shouldReturnArrayListSuccessfully() throws DukeException {
         List<String> expected = new ArrayList<>();
         expected.add(CommandType.TODO.getCommand());
         expected.add("borrow book");

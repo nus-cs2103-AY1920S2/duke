@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
     protected String description;
-    protected boolean isDone;
     protected String type;
+    protected boolean isDone;
     protected LocalDate period;
 
     /**

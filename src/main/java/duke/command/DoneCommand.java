@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
      * @throws DukeException throws when problem saving task to hard disk and invalid index where the task located
      */
     @Override
-    public void execute (TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         try {
             int num = Integer.parseInt(details.get(1));
             taskList.markDone(num);
