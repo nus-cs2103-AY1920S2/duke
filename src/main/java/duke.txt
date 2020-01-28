@@ -1,14 +1,38 @@
 T | Y | read book
-T | Y | join sports club
-T | Y | borrow book
-D | N | return book | Sunday
-E | N | project meeting | Mon 2-4pm
-D | N | do homework | no idea :-p
-T | N | read book
-D | N | return book  | June 6th
-E | N | project meeting  | Aug 6th 2-4pm
+D | Y | do homework | Feb 21 2020 4PM
+T | Y | read book
+D | N | return book | Feb 21 2020 4PM
+E | N | project meeting | Apr 13 2020 6PM
 T | N | join sports club
 T | N | borrow book
-D | N | return book  | Sunday
-E | N | project meeting  | Mon 2-4pm
-D | N | do homework  | no idea :-p
+D | N | return book | Jun 5 2020 2PM
+E | N | project meeting | Aug 17 2020 10AM
+D | N | do homework | Oct 29 2020 12PM
+T | N | read book
+D | N | return book | Feb 21 2020 4PM
+E | N | project meeting | Apr 13 2020 6PM
+T | N | join sports club
+T | N | borrow book
+E | N | project meeting | Aug 17 2020 10AM
+T | N | read book
+E | N | project meeting | Apr 13 2020 6PM
+T | N | borrow book
+D | Y | return book | Jun 5 2020 2PM
+E | N | project meeting | Aug 17 2020 10AM
+D | N | do homework | Oct 29 2020 12PM
+T | N | read book
+D | N | return book | Feb 21 2020 4PM
+E | N | project meeting | Apr 13 2020 6PM
+T | N | join sports club
+T | N | borrow book
+D | N | return book | Jun 5 2020 2PM
+E | N | project meeting | Aug 17 2020 10AM
+D | N | do homework | Oct 29 2020 12PM
+T | N | read book
+D | N | return book  | Feb 21 2020 4PM
+E | N | project meeting  | Apr 13 2020 6PM
+T | N | join sports club
+T | N | borrow book
+D | N | return book  | Jun 5 2020 2PM
+E | N | project meeting  | Aug 17 2020 10AM
+D | N | do homework  | Oct 29 2020 12PM

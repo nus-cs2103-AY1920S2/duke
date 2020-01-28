@@ -1,6 +1,11 @@
+import javax.xml.stream.events.DTD;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    public static DateTimeFormatter parser = DateTimeFormatter.ofPattern("d-M-yyyy HHmm");
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy ha");
 
     public Task(String description) {
         this.description = description;
@@ -17,9 +22,7 @@ public abstract class Task {
     }
 
     @Override
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
-    }
+    public String toString() { return "[" + getStatusIcon() + "] " + this.description; }
 
     public abstract String fileString();
 }
