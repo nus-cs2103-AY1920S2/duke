@@ -25,7 +25,7 @@ public class TaskList {
         return this.tasks;
     }
 
-    private int getTaskCount() {
+    public int getTaskCount() {
         return this.tasks.size();
     }
 
@@ -83,12 +83,12 @@ public class TaskList {
                 throw new InvalidFormatException("Make sure you entered valid date: yyyy-MM-dd HH:mm");
             }
         } else if (instArr[0].equals("event")) {
-            int seperator = instList.indexOf("/at");
-            if (seperator == -1) {
+            int separator = instList.indexOf("/at");
+            if (separator == -1) {
                 throw new InvalidFormatException("correct format: event task /at place");
             }
-            String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, seperator));
-            String at = String.join(" ", Arrays.copyOfRange(instArr, seperator + 1, instArr.length));
+            String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, separator));
+            String at = String.join(" ", Arrays.copyOfRange(instArr, separator + 1, instArr.length));
             Task newTask = new Event(description, at);
             AddTaskHelper(newTask);
         }

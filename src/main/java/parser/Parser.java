@@ -21,7 +21,7 @@ public class Parser {
                     || instruction.equals("event"))) {
                 tasks.addNewTask(textArray);
             } else {
-                throw new InvalidInstructionException("You have entered invalid input ☹.");
+                throw new InvalidInstructionException("You have entered invalid input.");
             }
         } catch (InvalidInstructionException e) {
             System.out.println(e.getMessage());
