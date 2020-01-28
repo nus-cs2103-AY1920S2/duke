@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Serializable;
+
 public abstract class Task implements Serializable {
     /** Details about the task. */
     protected final String description;

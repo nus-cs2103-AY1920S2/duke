@@ -1,3 +1,5 @@
+package duke;
+
 public interface Serializable {
     /**
      * Returns a text representation of this object for storage purposes.

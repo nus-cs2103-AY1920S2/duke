@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     /** The id number of the task to delete from a task list. */
     private int taskId;

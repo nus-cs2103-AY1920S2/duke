@@ -1,3 +1,5 @@
+package duke.exception;
+
 // TODO: Will expand exception hierarchy in future
 
 public class DukeException extends Exception {

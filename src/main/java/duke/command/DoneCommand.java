@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+
 public class DoneCommand extends Command {
     /** The id number of the task to mark as done in a list. */
     private int taskId;
