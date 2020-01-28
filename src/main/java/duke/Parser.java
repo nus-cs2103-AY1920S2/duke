@@ -28,7 +28,10 @@ public class Parser  {
              return new ListCommand(userInput);
          } else if (fullCommand.contains("Done")) {
            return new DoneCommand(userInput);
-         } else {
+         } else if (fullCommand.contains("Find")) {
+             return new FindCommand(userInput);
+         }
+         else {
              throw new DukeException("Please input a correct command");
          }
     }

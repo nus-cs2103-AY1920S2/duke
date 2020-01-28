@@ -172,6 +172,8 @@ public class Ui {
             return "duke.command.ListCommand";
         } else if (command.contains("done")) {
             return "duke.command.DoneCommand";
+        } else if (command.contains("find")) {
+            return "duke.command.FindCommand";
         }
 
         else {
