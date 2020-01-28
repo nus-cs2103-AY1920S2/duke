@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * InvalidTaskNumberException is thrown when user inputs a task number
+ * Throws InvalidTaskNumberException when user inputs a task number
  * out of range.
  *
  * @author ChesterSim

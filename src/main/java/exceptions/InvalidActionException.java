@@ -1,8 +1,8 @@
 package exceptions;
 
 /**
- * InvalidActionException is when the user specifies
- * an invalid action
+ * Throws InvalidActionException when the user specifies
+ * an invalid action.
  *
  * @author ChesterSim
  */

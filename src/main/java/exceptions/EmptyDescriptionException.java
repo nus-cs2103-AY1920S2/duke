@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * EmptyDescriptionException is thrown when user does
+ * Throws EmptyDescriptionException when user does
  * not specify a description after an action.
  *
  * @author ChesterSim

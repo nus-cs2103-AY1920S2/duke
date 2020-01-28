@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * EmptyTimeException is thrown when user does
+ * Throws EmptyTimeException when user does
  * not specify a time/date after a task action.
  *
  * @author ChesterSim

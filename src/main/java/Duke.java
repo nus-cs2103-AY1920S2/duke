@@ -11,8 +11,6 @@ import tasks.Task;
 import tasks.Todo;
 
 public class Duke {
-    private static String bar = "    **************************************************************\n";
-
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -34,86 +32,86 @@ public class Duke {
             String action = input.split(" ")[0];
             try {
                 switch (action) {
-                    case "list":
-                        printList(list, numberOfTasks);
-                        break;
-                    case "done":
-                        int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                        if (taskNumber < 1 || taskNumber > numberOfTasks) {
-                            throw new InvalidTaskNumberException(numberOfTasks);
+                case "list":
+                    printList(list, numberOfTasks);
+                    break;
+                case "done":
+                    int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    if (taskNumber < 1 || taskNumber > numberOfTasks) {
+                        throw new InvalidTaskNumberException(numberOfTasks);
+                    }
+                    list.get(taskNumber - 1).markAsDone();
+                    printDone(list.get(taskNumber - 1));
+                    break;
+                case "delete":
+                    taskNumber = Integer.parseInt(input.split(" ")[1]);
+                    if (taskNumber < 1 || taskNumber > numberOfTasks) {
+                        throw new InvalidTaskNumberException(numberOfTasks);
+                    }
+                    Task deleteTask = list.get(taskNumber - 1);
+                    list.remove(taskNumber - 1);
+                    numberOfTasks--;
+                    printDelete(deleteTask, numberOfTasks);
+                    break;
+                case "todo":
+                    try {
+                        String[] fields = input.split("todo ");
+                        if(fields.length < 2) {
+                            throw new EmptyDescriptionException("todo");
                         }
-                        list.get(taskNumber - 1).markAsDone();
-                        printDone(list.get(taskNumber - 1));
-                        break;
-                    case "delete":
-                        taskNumber = Integer.parseInt(input.split(" ")[1]);
-                        if (taskNumber < 1 || taskNumber > numberOfTasks) {
-                            throw new InvalidTaskNumberException(numberOfTasks);
+                        Task newTodo =  new Todo(fields[1]);
+                        list.add(newTodo);
+                        numberOfTasks++;
+                        printNewTask(newTodo, numberOfTasks);
+                    } catch (EmptyDescriptionException ex) {
+                        printFormattedOutput(ex.toString());
+                    }
+                    break;
+                case "event":
+                case "deadline":
+                    try {
+                        String[] fields = input.split(action + " ");
+                        if (fields.length < 2) {
+                            throw new EmptyDescriptionException(action);
                         }
-                        Task deleteTask = list.get(taskNumber - 1);
-                        list.remove(taskNumber - 1);
-                        numberOfTasks--;
-                        printDelete(deleteTask, numberOfTasks);
-                        break;
-                    case "todo":
-                        try {
-                            String[] fields = input.split("todo ");
-                            if(fields.length < 2) {
-                                throw new EmptyDescriptionException("todo");
-                            }
-                            Task newTodo =  new Todo(fields[1]);
-                            list.add(newTodo);
-                            numberOfTasks++;
-                            printNewTask(newTodo, numberOfTasks);
-                        } catch (EmptyDescriptionException ex) {
-                            printFormattedOutput(ex.toString());
-                        }
-                        break;
-                    case "event":
-                    case "deadline":
-                        try {
-                            String[] fields = input.split(action + " ");
-                            if (fields.length < 2) {
-                                throw new EmptyDescriptionException(action);
-                            }
 
-                            fields = action.equals("event")
-                                    ? fields[1].split(" /at ")
-                                    : fields[1].split(" /by ");
-                            if (fields.length < 2) {
-                                throw new EmptyTimeException(action, fields);
-                            }
+                        fields = action.equals("event")
+                                ? fields[1].split(" /at ")
+                                : fields[1].split(" /by ");
+                        if (fields.length < 2) {
+                            throw new EmptyTimeException(action, fields);
+                        }
 
+                        Task newTask =  action.equals("event")
+                                ? new Event(fields[0], fields[1])
+                                : new Deadline(fields[0], fields[1]);
+
+                        list.add(newTask);
+                        numberOfTasks++;
+                        printNewTask(newTask, numberOfTasks);
+                    } catch (EmptyDescriptionException ex) {
+                        printFormattedOutput(ex.toString());
+                    } catch (EmptyTimeException ex) {
+                        String message = ex.toString()
+                                + "\n    Type in the time/date or press enter to stop creating task";
+                        printFormattedOutput(message);
+                        System.out.print(ex.stringifyFields());
+                        input = sc.nextLine();
+                        if (!input.equals("")){
+                            String[] fields = ex.getFields();
                             Task newTask =  action.equals("event")
-                                    ? new Event(fields[0], fields[1])
-                                    : new Deadline(fields[0], fields[1]);
-
+                                    ? new Event(fields[0], input)
+                                    : new Deadline(fields[0], input);
                             list.add(newTask);
                             numberOfTasks++;
                             printNewTask(newTask, numberOfTasks);
-                        } catch (EmptyDescriptionException ex) {
-                            printFormattedOutput(ex.toString());
-                        } catch (EmptyTimeException ex) {
-                            String message = ex.toString()
-                                    + "\n    Type in the time/date or press enter to stop creating task";
-                            printFormattedOutput(message);
-                            System.out.print(ex.stringifyFields());
-                            input = sc.nextLine();
-                            if (!input.equals("")){
-                                String[] fields = ex.getFields();
-                                Task newTask =  action.equals("event")
-                                        ? new Event(fields[0], input)
-                                        : new Deadline(fields[0], input);
-                                list.add(newTask);
-                                numberOfTasks++;
-                                printNewTask(newTask, numberOfTasks);
-                            } else {
-                                printFormattedOutput("Stopped creating task.");
-                            }
+                        } else {
+                            printFormattedOutput("Stopped creating task.");
                         }
-                        break;
-                    default:
-                        throw new InvalidActionException();
+                    }
+                    break;
+                default:
+                    throw new InvalidActionException();
                 }
             } catch (InvalidActionException ex) {
                 printFormattedOutput(ex.toString());
@@ -129,6 +127,8 @@ public class Duke {
     }
 
     // Print formatters
+
+    private static String bar = "    **************************************************************\n";
 
     public static void printFormattedOutput(String output) {
         System.out.println(bar + "    " + output + "\n" + bar);
