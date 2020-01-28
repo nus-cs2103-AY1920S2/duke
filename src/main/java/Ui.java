@@ -36,6 +36,18 @@ public class Ui {
         }
     }
 
+    public void displayFoundTasks(List<Task> tasks) throws DukeInvalidTaskException {
+        if (tasks.size() != 0) {
+            print("Here are the matching tasks in your list:");
+            for (int i = 1; i <= tasks.size(); i++) {
+                print(i + "." + tasks.get(i - 1));
+            }
+            printLine();
+        } else {
+            throw new DukeInvalidTaskException("There are no matching tasks in your list");
+        }
+    }
+
     public static void printError(Exception e) {
         System.err.println(e);
         print("Try again later.");
