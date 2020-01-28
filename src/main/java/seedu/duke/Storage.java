@@ -6,7 +6,6 @@ import seedu.duke.task.Task;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +49,7 @@ public class Storage {
                     .stream()
                     .map(Task::toStringForSaving)
                     .collect(Collectors.toList());
-            Files.write(filePath, lines, StandardOpenOption.CREATE);
+            Files.write(filePath, lines);
         } catch (IOException e) {
             throw new DukeIoException(e.getMessage());
         }
