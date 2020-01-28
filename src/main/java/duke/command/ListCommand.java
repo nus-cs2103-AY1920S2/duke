@@ -6,7 +6,7 @@ import duke.Ui;
 
 public class ListCommand extends Command {
 
-    public ListCommand(){}
+    public ListCommand() {}
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){

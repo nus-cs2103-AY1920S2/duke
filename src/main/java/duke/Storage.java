@@ -32,17 +32,17 @@ public class Storage {
                 String[] task = s.nextLine().split(" \\| ");
                 Task temp = null;
                 switch (task[0]) {
-                    case "T":
-                        temp = new ToDo(task[2]);
-                        break;
-                    case "D":
-                        temp = new Deadline(task[2], task[3]);
-                        break;
-                    case "E":
-                        temp = new Event(task[2], task[3]);
-                        break;
-                    default:
-                        break;
+                case "T":
+                    temp = new ToDo(task[2]);
+                    break;
+                case "D":
+                    temp = new Deadline(task[2], task[3]);
+                    break;
+                case "E":
+                    temp = new Event(task[2], task[3]);
+                    break;
+                default:
+                    break;
                 }
                 if (task[1].equals("1")) {
                     temp.markAsDone();
@@ -56,7 +56,7 @@ public class Storage {
         return list;
     }
 
-    private void createNewFile() throws DukeException{
+    private void createNewFile() throws DukeException {
         try {
             Path path = Paths.get(filePath);
             Path parent = path.getParent();
@@ -70,7 +70,7 @@ public class Storage {
     public void saveTasksToStorage(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
-            for (Task task: tasks.getTasks()) {
+            for (Task task : tasks.getTasks()) {
                 fw.write(task.toSaveName());
             }
             fw.close();

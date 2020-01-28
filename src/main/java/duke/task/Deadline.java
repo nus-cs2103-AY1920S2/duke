@@ -29,14 +29,14 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveName() {
-        return "D" + super.toSaveName() + " | " + this.by +
-                (byTime != null ? " " + byTime : "") + "\n";
+        return "D" + super.toSaveName() + " | " + this.by
+                + (byTime != null ? " " + byTime : "") + "\n";
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[MMM d yyyy][h:mma]");
-        return "[D]" + super.toString() + " (by: " +  by.format(formatter) +
-                (byTime != null ? " " + byTime.format(formatter) : "") + ")";
+        return "[D]" + super.toString() + " (by: " +  by.format(formatter)
+                + (byTime != null ? " " + byTime.format(formatter) : "") + ")";
     }
 }

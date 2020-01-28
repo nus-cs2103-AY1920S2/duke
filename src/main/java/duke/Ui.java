@@ -49,7 +49,7 @@ public class Ui {
     }
 
     public void showMessages(String[] messages) {
-        for (String s: messages) {
+        for (String s : messages) {
             System.out.println("     " + s);
         }
     }

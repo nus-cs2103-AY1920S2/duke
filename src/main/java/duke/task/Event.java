@@ -29,8 +29,8 @@ public class Event extends Task {
 
     @Override
     public String toSaveName() {
-        return "E" + super.toSaveName() + " | " + this.at +
-                (atTime != null? " " + atTime : "") + "\n";
+        return "E" + super.toSaveName() + " | " + this.at
+                + (atTime != null ? " " + atTime : "") + "\n";
     }
 
 
