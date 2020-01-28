@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     private Command command;
     private String description;
-    private String by;
-    private String at;
     private boolean isDone;
     private int taskIndex;
+    private LocalDate date;
 
     public void parseUserInput(String userInput) throws DukeException {
         String[] userInputSplit = userInput.split(" ", 2);
@@ -22,7 +24,11 @@ public class Parser {
                 throw new DukeException("Sorry! Please provide a due date.");
             }
             this.description = instructionSplit[0].trim();
-            this.by = instructionSplit[1].trim();
+            try {
+                this.date = LocalDate.parse(instructionSplit[1].trim());
+            } catch (DateTimeParseException ex) {
+                throw new DukeException("Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)");
+            }
         } else if (this.command == Command.ADD_EVENT) {
             if (userInputSplit.length == 1) {
                 throw new DukeException("Sorry! Please provide the description and due date.");
@@ -36,7 +42,11 @@ public class Parser {
                 throw new DukeException("Sorry! Please provide a date range.");
             }
             this.description = instructionSplit[0].trim();
-            this.at = instructionSplit[1].trim();
+            try {
+                this.date = LocalDate.parse(instructionSplit[1].trim());
+            } catch (DateTimeParseException ex) {
+                throw new DukeException("Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)");
+            }
         } else if (this.command == Command.ADD_TODO) {
             if (userInputSplit.length == 1) {
                 throw new DukeException("Sorry! Description of a Todo must not be empty.");
@@ -63,9 +73,9 @@ public class Parser {
         this.description = dataSplit[2];
         this.isDone = dataSplit[1].equals("1") ? true : false;
         if (this.command == Command.ADD_DEADLINE) {
-            this.by = dataSplit[3];
+            this.date = LocalDate.parse(dataSplit[3].trim());
         } else if (this.command == Command.ADD_EVENT) {
-            this.at = dataSplit[3];
+            this.date = LocalDate.parse(dataSplit[3].trim());
         }
     }
 
@@ -96,19 +106,15 @@ public class Parser {
         return this.description;
     }
 
-    public String getBy() {
-        return this.by;
-    }
-
-    public String getAt() {
-        return this.at;
-    }
-
     public int getTaskIndex() {
         return this.taskIndex;
     }
 
     public boolean getIsDone() {
         return this.isDone;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 }
