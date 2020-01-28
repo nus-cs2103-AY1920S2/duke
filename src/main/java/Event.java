@@ -3,10 +3,19 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
+        super.type = Type.E;
         this.at = at;
     }
 
+    public String getDate() {
+        return at;
+    }
+
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        return "[" + super.getType() + "]" + super.toString() + "(at: " + at + ")";
+    }
+
+    public String saveString() {
+        return getType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDate();
     }
 }
