@@ -42,7 +42,8 @@ public class Parser {
                 this::doneCommand,
                 this::eventCommand,
                 this::listCommand,
-                this::todoCommand)
+                this::todoCommand,
+                this::findCommand)
             .map(DukeOptionalCommand::get)
             .filter(Optional::isPresent)
             .map(Optional::get)
@@ -169,6 +170,21 @@ public class Parser {
                 throw new DukeException("Event time cannot be empty");
             } else {
                 return Optional.of(new EventCommand(taskDescription, parseDate(eventTime)));
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+    
+    private Optional<Command> findCommand() throws DukeException {
+        Pattern donePattern = Pattern.compile("^find( (.*))?");
+        Matcher doneMatcher = donePattern.matcher(command);
+        if (doneMatcher.find()) {
+            String searchString = doneMatcher.group(2);
+            if (searchString == null || searchString.isEmpty()) {
+                throw new DukeException("Search string cannot be empty");
+            } else {
+                return Optional.of(new FindCommand(searchString));
             }
         } else {
             return Optional.empty();

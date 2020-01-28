@@ -31,6 +31,14 @@ public abstract class Task implements Serializable {
     }
     
     /**
+     * Returns the description of the task
+     * @return Task description
+     */
+    public String description() {
+        return description;
+    }
+    
+    /**
      * Returns whether this task is marked as completed.
      * @return whether task is marked as completed
      */
