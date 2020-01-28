@@ -1,15 +1,22 @@
 import DukeExceptions.*;
 
 import java.time.LocalDate;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Handles the functioning of Duke
 public class DukeManager {
     private static String line = "    ____________________________________________________________";
     private DukeList dl;
+    DukeStorage ds = new DukeStorage();
+
 
     public DukeManager() {
-        dl = new DukeList();
+        try {
+            dl = ds.load();
+        } catch(IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
     }
 
     public void run() {
