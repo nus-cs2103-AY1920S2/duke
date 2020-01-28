@@ -1,8 +1,10 @@
+import java.util.*;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static Task[] taskList = new Task[100];
     protected static int taskCounter = 0;
+    protected static ArrayList<Task> taskArrList = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -22,7 +24,7 @@ public class Task {
     }
 
     public static void addTask(Task t) {
-        taskList[taskCounter] = t;
+        taskArrList.add(t);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t.toString());
         taskCounter++;
@@ -33,23 +35,19 @@ public class Task {
         }
     }
 
-    public static String showTasks(){
-        String output = "";
+    public static void showTasks(){
         if (taskCounter == 1) {
-            output += "Here is the task in your list: \n";
+            System.out.println("Here is the task in your list: ");
         } else if (taskCounter == 0) {
-            output += "You have no tasks in your list :(";
+            System.out.println("You have no tasks in your list :(");
         } else {
-            output += "Here are the tasks in your list: \n";
+            System.out.println("Here are the tasks in your list: ");
         }
-        for (int i = 0; i < taskCounter; i++) {
-            if (i < taskCounter - 1) {
-                output += (i + 1) + "." + taskList[i].toString() + "\n";
-            } else {
-                output += (i + 1) + "." + taskList[i].toString();
-            }
+        int i = 1;
+        for (Task t : taskArrList) {
+            System.out.println((i) + "." + taskArrList.get(i-1).toString());
+            i += 1;
         }
-        return output;
     }
 
     public static void taskDone(String input) {
@@ -60,8 +58,23 @@ public class Task {
         }
         int taskInt = Integer.parseInt(taskNum);
         taskInt -= 1;
-        taskList[taskInt].isDone = true;
+        taskArrList.get(taskInt).isDone = true;
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [" + taskList[taskInt].getStatusIcon() + "] " + taskList[taskInt].getDescription());
+        System.out.println("  [" + taskArrList.get(taskInt).getStatusIcon() + "] " + taskArrList.get(taskInt).getDescription());
+    }
+
+    public static void deleteTask(String input) {
+        int taskInt = Integer.parseInt(input);
+        taskInt -= 1;
+        Task task = taskArrList.get(taskInt);
+        taskCounter--;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  [" + taskArrList.get(taskInt).getStatusIcon() + "] " + taskArrList.get(taskInt).getDescription());
+        if (taskCounter == 1) {
+            System.out.println("Now you have " + taskCounter + " task in the list.");
+        } else {
+            System.out.println("Now you have " + taskCounter + " tasks in the list.");
+        }
+        taskArrList.remove(taskInt);
     }
 }

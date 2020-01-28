@@ -44,11 +44,14 @@ public class Duke {
                     Deadline task = Deadline.createDeadline(desc, by);
                     Task.addTask(task);
                 } else if (command.equals("list")) { //list command
-                    System.out.println(Task.showTasks());
+                    Task.showTasks();
                 } else if (command.equals("done")){ //done command
                     Task.taskDone(input);
                 } else if (command.equals("bye")) { //bye command
                     System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if(command.equals("delete")) {
+                    Task.deleteTask(inputs[1]);
                 } else {
                     throw new InvalidCommandException();
                 }
