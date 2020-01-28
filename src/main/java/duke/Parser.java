@@ -43,6 +43,13 @@ public class Parser {
         case "list":
             outputCommand = new ListCommand();
             break;
+        case "find":
+            if (numberOfCommandArguments == 0) {
+                throw new DukeException(DukeException.exceptionIcon +
+                        " The description of a find cannot be empty...");
+            }
+            outputCommand = new FindCommand(Parser.getDescription(fullCommand, commandWords));
+            break;
         case "done":
             try {
                 int taskNumber = Integer.parseInt(commandWords[1]);
@@ -194,7 +201,7 @@ public class Parser {
         if (commandWords.length == 1) {
             throw new DukeException(
                     String.format("The description of a %s cannot be empty!", commandType));
-        } else if (commandType.equals("todo")) {
+        } else if (commandType.equals("todo") || commandType.equals("find")) {
             description = command.substring(commandType.length() + 1);
         } else if (commandType.equals("deadline") || commandType.equals("event")) {
             // Check if required delimiter exists
@@ -238,5 +245,6 @@ public class Parser {
         validCommands.put("bye", CommandType.BYE);
         validCommands.put("done", CommandType.DONE);
         validCommands.put("delete", CommandType.DELETE);
+        validCommands.put("find", CommandType.FIND);
     }
 }

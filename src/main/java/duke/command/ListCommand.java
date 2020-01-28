@@ -20,6 +20,6 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         // Print out all tasks
-        ui.listTasks(tasks);
+        ui.listTasks(tasks, "Here are the tasks in your list:");
     }
 }

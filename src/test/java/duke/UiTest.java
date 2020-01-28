@@ -114,8 +114,9 @@ class UiTest {
     @ParameterizedTest
     @MethodSource("generateOneTaskList")
     void listTasks(TaskList tasks) {
+        String listHeaderInformation = "Here are the tasks in your list:";
         StringBuilder expected = new StringBuilder(HORIZONTAL_DIVIDER +
-                INDENTATION + "Here are the tasks in your list:" + NEWLINE);
+                INDENTATION + listHeaderInformation + NEWLINE);
         int taskCount = 1;
         for (Task task : tasks) {
             expected.append(INDENTATION)
@@ -125,7 +126,7 @@ class UiTest {
         }
         expected.append(HORIZONTAL_DIVIDER);
         // Execute test function
-        ui.listTasks(tasks);
+        ui.listTasks(tasks, listHeaderInformation);
         assertEquals(expected.toString(), output.toString());
     }
 
