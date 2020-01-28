@@ -65,6 +65,10 @@ public class TaskList {
         ui.printList(this.list);
     }
 
+    public Task getTask(int index) {
+        return this.list.get(index);
+    }
+
     @Override
     public String toString() {
         String s = "";
