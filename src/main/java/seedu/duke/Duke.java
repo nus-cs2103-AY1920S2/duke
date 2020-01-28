@@ -1,3 +1,9 @@
+package seedu.duke;
+
+import seedu.duke.command.Command;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeIOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 

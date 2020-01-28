@@ -1,7 +1,17 @@
-import java.io.IOException;
+package seedu.duke.command;
+
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.exception.DukeIOException;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
+
 import java.time.LocalDate;
 
-class AddCommand extends Command {
+public class AddCommand extends Command {
 
     private final Command.Type type;
     private final String taskDescription;
@@ -18,7 +28,7 @@ class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException {
         Task newTask = null;
 
         switch (type) {

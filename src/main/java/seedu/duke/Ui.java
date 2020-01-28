@@ -1,16 +1,20 @@
+package seedu.duke;
+
+import seedu.duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
 
     private static final Scanner SC = new Scanner(System.in);
     private static final String HORIZONTAL_LINE = "------------------------------------------------------------";
     private static final String OUTPUT_INDENTATION = "    ";
     private static final String FORMAT_STRING_FOR_H_LINE =
-            OUTPUT_INDENTATION +  "|%-" + HORIZONTAL_LINE.length() + "s|";
+            OUTPUT_INDENTATION + "|%-" + HORIZONTAL_LINE.length() + "s|";
     private static final String FORMAT_STRING_FOR_CONTENT =
-            OUTPUT_INDENTATION +  "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
+            OUTPUT_INDENTATION + "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
 
     void print(String s) {
         List<String> temp = new ArrayList<>();
@@ -34,12 +38,12 @@ class Ui {
         print(outputStreamBuffer);
     }
 
-    void bye() {
+    public void bye() {
         print("Bye. Hope to see you again soon!");
         System.exit(0);
     }
 
-    void printList(TaskList tasks) {
+    public void printList(TaskList tasks) {
         if (tasks.isEmpty()) {
             print("List is empty");
             return;
@@ -60,7 +64,7 @@ class Ui {
         return SC.nextLine();
     }
 
-    void printDoneMessage(TaskList tasks, Task selectedTask) {
+    public void printDoneMessage(TaskList tasks, Task selectedTask) {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Nice! I've marked this task as done: ");
         outputStreamBuffer.add("  " + selectedTask);
@@ -68,7 +72,7 @@ class Ui {
         print(outputStreamBuffer);
     }
 
-    void printDeleteMessage(TaskList tasks, Task selectedTask) {
+    public void printDeleteMessage(TaskList tasks, Task selectedTask) {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Noted. I've removed this task: ");
         outputStreamBuffer.add("  " + selectedTask);
@@ -76,7 +80,7 @@ class Ui {
         print(outputStreamBuffer);
     }
 
-    void printAddMessage(TaskList tasks, Task newTask) {
+    public void printAddMessage(TaskList tasks, Task newTask) {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Got it. I've added this task: ");
         outputStreamBuffer.add("  " + newTask);

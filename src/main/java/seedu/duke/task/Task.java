@@ -1,7 +1,9 @@
-abstract class Task {
+package seedu.duke.task;
 
-    protected static final String SEPERATOR = " | ";
-    protected static final String TRUE_SYMBOL = "O";
+public abstract class Task {
+
+    public static final String SEPERATOR = " | ";
+    public static final String TRUE_SYMBOL = "O";
     protected static final String FALSE_SYMBOL = "X";
 
     protected String taskDescription;
@@ -12,7 +14,7 @@ abstract class Task {
         this.isDone = false;
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 

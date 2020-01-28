@@ -1,8 +1,10 @@
-class Todo extends Task {
+package seedu.duke.task;
 
-    static final String TYPE_SYMBOL = "T";
+public class Todo extends Task {
 
-    Todo(String taskDescription) {
+    public static final String TYPE_SYMBOL = "T";
+
+    public Todo(String taskDescription) {
         super(taskDescription);
     }
 

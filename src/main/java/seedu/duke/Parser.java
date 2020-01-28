@@ -1,3 +1,11 @@
+package seedu.duke;
+
+import seedu.duke.command.*;
+import seedu.duke.exception.DukeEmptyDescriptionException;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeNoKeywordException;
+import seedu.duke.exception.DukeWrongCommandException;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.regex.Pattern;

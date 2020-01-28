@@ -1,3 +1,8 @@
+package seedu.duke;
+
+import seedu.duke.exception.DukeIOException;
+import seedu.duke.task.Task;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -5,7 +10,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Storage {
+public class Storage {
 
     private final Path FILE_PATH;
 
@@ -25,17 +30,17 @@ class Storage {
         }
     }
 
-    void save(TaskList tasks) throws DukeIOException {
+    public void save(TaskList tasks) throws DukeIOException {
         try {
             if (!Files.exists(FILE_PATH)) {
                 Files.createDirectories(FILE_PATH.getParent());
             }
 
             List<String> lines = tasks
-                .getTasks()
-                .stream()
-                .map(Task::toStringForSaving)
-                .collect(Collectors.toList());
+                    .getTasks()
+                    .stream()
+                    .map(Task::toStringForSaving)
+                    .collect(Collectors.toList());
             Files.write(FILE_PATH, lines, StandardOpenOption.CREATE);
         } catch (IOException e) {
             throw new DukeIOException(e.getMessage());

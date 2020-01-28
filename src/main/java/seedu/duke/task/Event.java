@@ -1,12 +1,14 @@
+package seedu.duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class Deadline extends Task {
+public class Event extends Task {
 
-    static final String TYPE_SYMBOL = "D";
+    public static final String TYPE_SYMBOL = "E";
     private LocalDate date;
 
-    Deadline(String taskDescription, LocalDate date) {
+    public Event(String taskDescription, LocalDate date) {
         super(taskDescription);
         this.date = date;
     }
@@ -21,7 +23,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)",
+        return String.format("[%s]%s (at: %s)",
                 TYPE_SYMBOL,
                 super.toString(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));

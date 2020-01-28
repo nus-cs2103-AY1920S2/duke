@@ -1,10 +1,17 @@
+package seedu.duke;
+
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-class TaskList {
+public class TaskList {
 
     private List<Task> tasks;
 
@@ -60,15 +67,15 @@ class TaskList {
         return tasks.size();
     }
 
-    Task get(int taskIndex) {
+    public Task get(int taskIndex) {
         return tasks.get(taskIndex);
     }
 
-    void add(Task newTask) {
+    public void add(Task newTask) {
         tasks.add(newTask);
     }
 
-    void remove(int taskIndex) {
+    public void remove(int taskIndex) {
         tasks.remove(taskIndex);
     }
 }
