@@ -1,14 +1,19 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    protected String deadline;
+    protected Date date;
 
-    public Deadline(String taskTitle, String deadline) {
+    public Deadline(String taskTitle, Date date) {
         super(taskTitle);
-        this.deadline = deadline;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        String datePattern = "MMM d yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+        return "[D]" + super.toString() + " (by: " + simpleDateFormat.format(date) + ")";
     }
 }

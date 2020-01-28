@@ -1,5 +1,12 @@
 import javax.print.DocFlavor;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -66,7 +73,7 @@ public class Duke {
         if (userInput.contains("todo")) {
             // add Todo task
             if (userInput.equals("todo")) throw new DukeException("insufficient details");
-            String taskDescription = userInput.substring(5); // removes todo word
+            String taskDescription = userInput.substring(5).trim(); // removes todo word
             t = new Todo(taskDescription);
         } else if (userInput.contains("deadline")) {
             // add Deadline task
@@ -75,9 +82,15 @@ public class Duke {
             int slashIdx = taskDescription.indexOf("/");
             if (slashIdx == -1) throw new DukeException("wrong format");
 
-            String taskTitle = taskDescription.substring(0, slashIdx - 1);
-            String deadline = taskDescription.substring(slashIdx + 4);
-            t = new Deadline(taskTitle, deadline);
+            String taskTitle = taskDescription.substring(0, slashIdx).trim();
+            String deadline = taskDescription.substring(slashIdx + 4).trim();
+
+            try {
+                t = new Deadline(taskTitle, parseDate(deadline));
+            } catch (ParseException e) {
+                t = null;
+                System.out.println(INDENT + "Please enter deadline in the following format: YYYY-MM-DD");
+            }
         } else if (userInput.contains("event")) {
             // add Event task
             if (userInput.equals("event")) throw new DukeException("insufficient details");
@@ -85,9 +98,15 @@ public class Duke {
             int slashIdx = taskDescription.indexOf("/");
             if (slashIdx == -1) throw new DukeException("wrong format");
 
-            String taskTitle = taskDescription.substring(0, slashIdx - 1);
-            String location = taskDescription.substring(slashIdx + 4);
-            t = new Event(taskTitle, location);
+            String taskTitle = taskDescription.substring(0, slashIdx).trim();
+            String dateTime = taskDescription.substring(slashIdx + 4).trim();
+
+            try {
+                t = new Event(taskTitle, parseDateTime(dateTime));
+            } catch (DateTimeParseException e) {
+                t = null;
+                System.out.println(INDENT + "Please enter deadline in the following format: YYYY-MM-DD HHMM");
+            }
         } else {
             t = null;
             throw new DukeException("Unrecognized");
@@ -148,5 +167,18 @@ public class Duke {
             System.out.println(INDENT + (i+1) + "." + t);
         }
         System.out.println(INDENT + HOR_LINE);
+    }
+
+    private static Date parseDate(String date) throws ParseException {
+        String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+        return simpleDateFormat.parse(date);
+    }
+
+    private static LocalDateTime parseDateTime(String dateTime) throws DateTimeParseException {
+        String dateTimePattern = "yyyy-MM-dd HHmm";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimePattern);
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
+        return localDateTime;
     }
 }
