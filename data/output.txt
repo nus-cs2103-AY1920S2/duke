@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-   [E][✓] at (at: at)
-   [T][✓] try out
-   [D][✗] by (by: s)
-   [T][✗] list list
-   [D][✓] have (by: hh)
-   [D][✗] have (by: hh hh)
-   [E][✓] e (at: som som)
-=======
    [T][✓] have fun
    [E][✓] sth (at: 2020-08-20)
    [E][✓] sth (at: 2020-11-02)
    [D][✓] sth (by: 2020-01-29)
    [E][✓] sth (at: 2020-10-01)
    [T][✓] s
->>>>>>> 2de8869436177ff5920973b07f499d4da26cf8a7
+   [D][✓] sth (by: 2020-10-01)
+   [E][✓] stt (at: 2020-01-10)
