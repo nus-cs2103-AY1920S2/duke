@@ -3,9 +3,10 @@ public class Parser {
     private String description;
     private String by;
     private String at;
+    private boolean isDone;
     private int taskIndex;
 
-    public Parser(String userInput) throws DukeException {
+    public void parseUserInput(String userInput) throws DukeException {
         String[] userInputSplit = userInput.split(" ", 2);
         this.command = this.parseCommand(userInputSplit[0]);
         if (this.command == Command.ADD_DEADLINE) {
@@ -54,7 +55,19 @@ public class Parser {
         } else if (this.command == Command.NOT_FOUND) {
             throw new DukeException("Sorry! I don't know what you mean!");
         }
-    } 
+    }
+
+    public void parseDiskData(String data) {
+        String[] dataSplit = data.split("\\|");
+        this.command = this.parseCommand(dataSplit[0]);
+        this.description = dataSplit[2];
+        this.isDone = dataSplit[1].equals("1") ? true : false;
+        if (this.command == Command.ADD_DEADLINE) {
+            this.by = dataSplit[3];
+        } else if (this.command == Command.ADD_EVENT) {
+            this.at = dataSplit[3];
+        }
+    }
 
     private Command parseCommand(String command) {
         if (command.equals("bye")) {
@@ -63,11 +76,11 @@ public class Parser {
             return Command.LIST_TASKS;
         } else if (command.equals("done")) {
             return Command.MARK_TASK_AS_DONE;
-        } else if (command.equals("todo")) {
+        } else if (command.equals("todo") || command.equals("T")) {
             return Command.ADD_TODO;
-        } else if (command.equals("deadline")) {
+        } else if (command.equals("deadline") || command.equals("D")) {
             return Command.ADD_DEADLINE;
-        } else if (command.equals("event")) {
+        } else if (command.equals("event") || command.equals("E")) {
             return Command.ADD_EVENT;
         } else if (command.equals("delete")) {
             return Command.DELETE_TASK;
@@ -93,5 +106,9 @@ public class Parser {
 
     public int getTaskIndex() {
         return this.taskIndex;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 }

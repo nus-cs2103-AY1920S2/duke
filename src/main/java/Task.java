@@ -2,9 +2,9 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getDescription() {
@@ -13,6 +13,10 @@ public abstract class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     public void markAsDone() {
