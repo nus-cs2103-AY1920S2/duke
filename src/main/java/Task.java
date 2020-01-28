@@ -15,6 +15,10 @@ public class Task {
         return null;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     @Override
     public String toString() {
         String symbol;
