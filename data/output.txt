@@ -1,0 +1,7 @@
+   [E][✓] at (at: at)
+   [T][✓] try out
+   [D][✗] by (by: s)
+   [T][✗] list list
+   [D][✗] have (by: hh)
+   [D][✗] have (by: hh hh)
+   [E][✓] e (at: som som)
