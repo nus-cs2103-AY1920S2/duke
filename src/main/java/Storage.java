@@ -17,9 +17,13 @@ public class Storage {
     public Storage() {
     }
 
-    public List<Task> loadFile() throws FileNotFoundException {
+    public List<Task> loadFile() throws IOException {
         tasks = new ArrayList<>();
         Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        if (!Files.exists(path)) {
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
+        }
         File file = new File(path.toString());
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
