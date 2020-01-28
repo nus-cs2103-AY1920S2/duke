@@ -94,7 +94,6 @@ public class Duke {
             }
 
             tasks.add(newTask);
-            System.out.println(tasks);
             numTasks += 1;
             System.out.println(delimiter());
             System.out.println("Alrighty, you added:");
@@ -117,7 +116,7 @@ public class Duke {
     }
 
     public static String getDescription(String input) throws DukeException {
-        String description = input.split("/")[0];
+        String description = input.split(" /")[0];
         String[] descArr = description.split(" ");
         if (descArr.length == 1) {
             throw new DukeException("☹ Why did you not provide any description?");
@@ -127,7 +126,7 @@ public class Duke {
     }
 
     public static String getTime(String input) throws DukeException {
-        String[] tryGetTime = input.split("/");
+        String[] tryGetTime = input.split(" /");
         if (tryGetTime.length == 1) {
             throw new DukeException("☹ Why did you not provide the time?");
         }

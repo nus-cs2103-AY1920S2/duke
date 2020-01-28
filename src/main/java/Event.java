@@ -1,14 +1,17 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    protected String by;
+    protected LocalDate by;
 
     public Event(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = convertToLocalDate(by);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + by + ")";
+        String newBy = String.format("%d %s %d", this.by.getDayOfMonth(), this.by.getMonth(), this.by.getYear());
+        return "[D]" + super.toString() + " (at: " + newBy + ")";
     }
 
     @Override

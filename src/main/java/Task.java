@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -36,5 +39,10 @@ public class Task {
 
     public String toFileFormat() {
         return String.format("%s | %d | %s", "T", this.isDone ? 1 : 0, this.description);
+    }
+    
+    public static LocalDate convertToLocalDate(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        return LocalDate.parse(input, formatter);
     }
 }
