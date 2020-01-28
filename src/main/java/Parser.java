@@ -5,7 +5,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Class representation of Parser
+ */
 public class Parser {
+    /**
+     * Parser's startParsing method. which consists of a while-loop
+     * that takes in user input as commands
+     * @param tasks
+     * @param filepath
+     */
     public void startParsing(ArrayList<Task> tasks, String filepath) {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
@@ -24,6 +33,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parser's commandHandler method, which handles every single command
+     * from user.
+     * @param command
+     * @param store
+     * @param filepath
+     * @throws DukeException
+     */
     public void commandHandler (String command, ArrayList<Task> store, String filepath) throws DukeException{
         String[] check = command.split(" ");
         switch (check[0].toLowerCase()) {
@@ -158,6 +175,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parser's saveTasks method, which saves any update in list to
+     * harddrive, in a txt.file
+     * @param store
+     * @param filepath
+     */
     public static void saveTasks(ArrayList<Task> store, String filepath){
         BufferedWriter writer;
         try {

@@ -1,4 +1,13 @@
+/**
+ * Class representation of Ui
+ */
 public class Ui {
+    /**
+     * Ui's on start method, which prints the Introduction header and
+     * creates a Parser object, running its startParsing function
+     * @param tasks
+     * @param filepath
+     */
     public void onStart(TaskList tasks, String filepath) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,6 +22,9 @@ public class Ui {
         parser.startParsing(tasks.tasks, filepath);
     }
 
+    /**
+     * Ui's showLoadingError method, which will be colled when filepath of txt.file is invalid
+     */
     public void showLoadingError() {
         System.out.println("ERROR. Previous data cannot be found. A new, empty task list is created.");
     }

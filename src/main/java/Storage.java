@@ -4,13 +4,25 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Class representation of Storage
+ */
 public class Storage {
     protected String filepath;
 
+    /**
+     * Storage Constructor
+     * @param filepath
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Storage's load method, which loads all data from txt.file into an ArrayList of Tasks
+     * @return ArrayList<Task> which will be stored as an attribute of a TaskList object
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException{
         ArrayList<Task> store = new ArrayList<>();
         //Read from File

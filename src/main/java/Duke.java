@@ -1,8 +1,15 @@
+/**
+ * Class representation of Duke
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke Constructor
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -14,6 +21,10 @@ public class Duke {
         }
     }
 
+    /**
+     *  Duke's run method
+     *  Calls its Ui attribute, and activates the onStart function
+     */
     public void run() {
         ui.onStart(tasks, storage.filepath);
     }
