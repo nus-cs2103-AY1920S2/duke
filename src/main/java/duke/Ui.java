@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Ui {
     private Scanner sc;
@@ -80,17 +79,33 @@ public class Ui {
                 "Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    public void showGetTasks(TaskList filteredTasks, LocalDate date) {
-        if (filteredTasks.isEmpty()) {
-            showToUser("There are no tasks on " + date + ".");
+    /**
+     * Prints the specified message and the tasks in the specified TaskList.
+     * @param tasks The TaskList that contains the tasks to be printed.
+     */
+    public void showMatchingTasks(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            showToUser("There are no matching tasks in your list.");
         } else {
             showLine();
-            print("Here are the tasks on " + date + ":");
-            for (Task task : filteredTasks.getTasks()) {
+            print("Here are the matching tasks in your list:");
+            for (Task task : tasks.getTasks()) {
                 print("  " + task);
             }
             showLine();
             print("");
         }
+    }
+
+    public void showGetTasks(TaskList filteredTasks) {
+        showMatchingTasks(filteredTasks);
+    }
+
+    /**
+     * Prints the tasks with the specified keyword.
+     * @param filteredTasks The TaskList that contains tasks with the specified keyword.
+     */
+    public void showFindTasks(TaskList filteredTasks) {
+        showMatchingTasks(filteredTasks);
     }
 }
