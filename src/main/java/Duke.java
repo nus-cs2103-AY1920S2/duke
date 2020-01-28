@@ -22,43 +22,14 @@ public class Duke {
     public void run(){
         // initialise scanner
         ui.sayHi();
-
-        // reply to input
-        String input = ui.getCommand();
-        Command command = parser.parse(input);
         boolean isExit = false;
 
         while (!isExit) {
-            String[] inputArr = input.split(" ");
-            
             try {
-                switch (command) {
-                case LIST:
-                    ui.reply(tasks.list(inputArr));
-                    break;
-                case DONE:
-                    ui.reply(tasks.checkDone(inputArr));
-                    storage.saveToSave(tasks);
-                    break;
-                case DELETE:
-                    ui.reply(tasks.removeTask(inputArr));
-                    storage.saveToSave(tasks);
-                    break;
-                case CREATETODO:
-                    ui.reply(tasks.addTodo(inputArr));
-                    storage.saveToSave(tasks);
-                    break;
-                case CREATEEVENT:
-                    ui.reply(tasks.addEvent(inputArr));
-                    storage.saveToSave(tasks);
-                    break;
-                case CREATEDEADLINE:
-                    ui.reply(tasks.addDeadline(inputArr));
-                    storage.saveToSave(tasks);
-                    break;
-                default:
-                    throw new UnknownCommandException();
-                }
+                String input = ui.getCommand();
+                Command command = parser.parse(input);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showDukeError(e);
             } catch (IOException e) {
@@ -66,10 +37,6 @@ public class Duke {
             } catch (DateTimeParseException e) {
                 ui.showDateTimeError();
             }
-            // next input
-            input = ui.getCommand();
-            command = parser.parse(input);
-            isExit = command.isExit();
         }
 
     }

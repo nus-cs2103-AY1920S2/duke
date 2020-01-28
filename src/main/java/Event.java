@@ -1,20 +1,17 @@
 import java.time.LocalDateTime;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     public final LocalDateTime dateTime;
-    public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
-    public static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
 
     public Event(String name, String dateTime) {
         super(name);
-        this.dateTime = LocalDateTime.parse(dateTime, inputFormatter);
+        this.dateTime = LocalDateTime.parse(dateTime, Constant.FORMATTER_INPUT_DATE_TIME);
     }
 
     public Event(String name, boolean completed, String dateTime) {
         super(name, completed);
-        this.dateTime = LocalDateTime.parse(dateTime, inputFormatter);
+        this.dateTime = LocalDateTime.parse(dateTime, Constant.FORMATTER_INPUT_DATE_TIME);
     }
     
     public Event(String name, boolean completed,LocalDateTime dateTime) {
@@ -29,7 +26,7 @@ public class Event extends Task {
 
     @Override
     public String storeFormat() {
-        return "E| |" + completed + "| |" + name + "| |" + dateTime.format(inputFormatter);
+        return "E| |" + completed + "| |" + name + "| |" + dateTime.format(Constant.FORMATTER_INPUT_DATE_TIME);
     }   
 
     public boolean compareDate(LocalDate inputDate) {
@@ -42,9 +39,9 @@ public class Event extends Task {
         String notDoneCheck = "[✗] ";
 
         if (completed) {
-            return "[E]" + doneCheck + this.name + " (at: " + dateTime.format(outputFormatter) + ")";
+            return "[E]" + doneCheck + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME) + ")";
         } else {
-            return "[E]" + notDoneCheck + this.name + " (at: " + dateTime.format(outputFormatter) + ")";
+            return "[E]" + notDoneCheck + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME) + ")";
         }
     }
 }

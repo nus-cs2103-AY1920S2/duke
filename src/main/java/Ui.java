@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
 public class Ui{
-    private static final String SPACE = "    ";
-    private static final String LINE = "   " + "<------------------------------------------------------------>";
-    private static final String ERROR_LINE = "   " + "**************************************************************";
     private final Scanner s = new Scanner(System.in);
 
     public String getInput() {
@@ -19,24 +16,24 @@ public class Ui{
     }
 
     public void showDateTimeError() {
-        System.err.println(ERROR_LINE + "\n    ☹ DATE FORMAT is yyyy/mm/dd!\n" + SPACE
-            + "  TIME FORMAT is HHmm!\n" + ERROR_LINE);
+        System.err.println(Constant.ERROR_LINE + "\n    ☹ DATE FORMAT is yyyy/mm/dd!\n" + Constant.SPACE
+            + "  TIME FORMAT is HHmm!\n" + Constant.ERROR_LINE);
     }
 
     public void showIOError(){
-        System.err.println(ERROR_LINE + "\n    ☹ You have an IO Error!\n" + ERROR_LINE);
+        System.err.println(Constant.ERROR_LINE+ "\n    ☹ You have an IO Error!\n" + Constant.ERROR_LINE);
     }
 
     public void reply(String reply){
-        System.out.println(LINE);
-        System.out.println(SPACE + reply);
-        System.out.println(LINE);
+        System.out.println(Constant.LINE);
+        System.out.println(Constant.SPACE + reply);
+        System.out.println(Constant.LINE);
     }
 
     public void goodBye() {
-        System.out.println(LINE);
-        System.out.println(SPACE + "Yes. FINALLY. Hope never to see you again!");
-        System.out.println(LINE);
+        System.out.println(Constant.LINE);
+        System.out.println(Constant.SPACE + "Yes. FINALLY. Hope never to see you again!");
+        System.out.println(Constant.LINE);
     }
 
     public void sayHi() {
@@ -73,8 +70,8 @@ public class Ui{
             + "             ¶¶¶¶¶¶¶¶¶¶1111¶¶¶¶¶¶¶¶¶¶ \n" 
             + "                 ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n";
         System.out.println(logo);
-        System.out.println(LINE);
-        System.out.println(SPACE + "Arghhhh... It's you again.");
-        System.out.println(LINE);
+        System.out.println(Constant.LINE);
+        System.out.println(Constant.SPACE + "Arghhhh... It's you again.");
+        System.out.println(Constant.LINE);
     }
 }  

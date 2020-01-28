@@ -1,9 +1,8 @@
 public class NoNumberDeleteException extends DukeException {
-    private static final String errorLine = "   " + "**************************************************************";
 
     @Override
     public String toString() {
-        return errorLine + "\n    ☹ OI. Specify which task to delete! >:(\n"
-                + errorLine;
+        return Constant.ERROR_LINE + "\n    ☹ OI. Specify which task to delete! >:(\n"
+                + Constant.ERROR_LINE;
     }
 }

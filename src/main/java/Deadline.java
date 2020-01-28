@@ -1,19 +1,16 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     public final LocalDate date;
-    public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    public static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     public Deadline(String name, String date) {
         super(name);
-        this.date = LocalDate.parse(date, inputFormatter);
+        this.date = LocalDate.parse(date, Constant.FORMATTER_INPUT_DATE);
     }
 
     public Deadline(String name, boolean completed, String date) {
         super(name, completed); 
-        this.date = LocalDate.parse(date, inputFormatter);
+        this.date = LocalDate.parse(date, Constant.FORMATTER_INPUT_DATE);
     }
 
     public Deadline(String name, boolean completed, LocalDate date) {
@@ -33,7 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String storeFormat() {
-        return "D| |" + completed + "| |" + name + "| |" + date.format(inputFormatter);
+        return "D| |" + completed + "| |" + name + "| |" + date.format(Constant.FORMATTER_INPUT_DATE);
     }
 
     @Override
@@ -42,9 +39,9 @@ public class Deadline extends Task {
         String notDoneCheck = "[✗] ";
 
         if (completed) {
-            return "[D]" + doneCheck + this.name + " (by: " + date.format(outputFormatter) + ")";
+            return "[D]" + doneCheck + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
         } else {
-            return "[D]" + notDoneCheck + this.name + " (by: " + date.format(outputFormatter) + ")";
+            return "[D]" + notDoneCheck + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
         }
     }
 }

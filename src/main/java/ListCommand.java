@@ -1,11 +1,9 @@
-import java.util.List;
-import java.util.ArrayList;
-import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import Constants;
 
 public class ListCommand extends Command {
+    public ListCommand(String[] inputArr){
+        this.inputArr = inputArr;
+    }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -15,23 +13,23 @@ public class ListCommand extends Command {
             for (int i = 0; i < tasks.size(); i++) {
                 int numbering = i + 1;
                 reply += (numbering + ".");
-                reply += (tasks.getTask(i) + "\n" + SPACE);
+                reply += (tasks.getTask(i) + "\n" + Constant.SPACE);
             }
-            reply += "\n" + SPACE + "I told you save liao loh........";
+            reply += "\n" + Constant.SPACE + "I told you save liao loh........";
         } else {
             String dateS = inputArr[1];
-            LocalDate date = LocalDate.parse(dateS, inputFormatter);
+            LocalDate date = LocalDate.parse(dateS, Constant.FORMATTER_INPUT_DATE);
             int numbering = 1;
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.getTask(i);
                 if (currentTask instanceof Deadline || currentTask instanceof Event) {
                     if (currentTask.compareDate(date)) {
                         reply += (numbering++ + ".");
-                        reply += (currentTask + "\n" + SPACE);
+                        reply += (currentTask + "\n" + Constant.SPACE);
                     }
                 }
             }
-            reply += ("\n" + SPACE + "This are all the tasks with that date");
+            reply += ("\n" + Constant.SPACE + "This are all the tasks with that date");
         }
         ui.reply(reply);
     }

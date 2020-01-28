@@ -2,23 +2,22 @@ public class Parser{
     public Command parse(String input){
         String[] inputArr = input.split(" ");
         if (input.equals("bye")){    
-            return Command.BYE;
+            return new ByeCommand();
         } else if (inputArr[0].equals("list")){
-            return Command.LIST;
+            return new ListCommand(inputArr);
         } else if (inputArr[0].equals("done")){
-            return Command.DONE;
+            return new DoneCommand(inputArr);
         } else if (inputArr[0].equals("delete")){
-            //System.out.println("as");
-            return Command.DELETE;
+            return new DeleteCommand(inputArr);
         } else if (inputArr[0].equals("todo")){
-            return Command.CREATETODO;
+            return new CreateTodoCommand(inputArr);            
         } else if (inputArr[0].equals("event")){
-            return Command.CREATEEVENT;
+            System.out.println("heree");
+            return new CreateEventCommand(inputArr);         
         } else if (inputArr[0].equals("deadline")){
-            return Command.CREATEDEADLINE;
+            return new CreateDeadlineCommand(inputArr);
         } else {
-            return Command.INVALID;
+            return new InvalidCommand();
         }
-    }
-           
+    } 
 }
