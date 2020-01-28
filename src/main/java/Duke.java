@@ -43,57 +43,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
-/*
-    private static void deleteTask(ArrayList<Task> tasks, String userInput) throws DukeException, IOException {
-        if (userInput.equals("delete")) {
-            throw new DukeException(userInput);
-        }
-        int taskNumber = Character.getNumericValue(userInput.charAt(7));
-        if (taskNumber > tasks.size()) {
-            throw new DukeException("List size");
-        }
-        Task t = tasks.get(taskNumber - 1);
-        tasks.remove(taskNumber - 1);
-        System.out.println(INDENT + HOR_LINE);
-        System.out.println(INDENT + "This task has successfully been deleted:");
-        System.out.println(INDENT + "  " + t);
-        System.out.println(INDENT + "You have " + tasks.size() + " tasks remaining.");
-        System.out.println(INDENT + HOR_LINE);
-        //saveTasks(tasks);
-    }
-
-    private static void completeTask(ArrayList<Task> tasks, String userInput) throws DukeException, IOException {
-        if (userInput.equals("done")) {
-            throw new DukeException(userInput);
-        }
-        int taskNumber = Character.getNumericValue(userInput.charAt(5));
-        if (taskNumber > tasks.size()) {
-            throw new DukeException("List size");
-        }
-        Task t = tasks.get(taskNumber - 1);
-        t.markAsDone();
-        System.out.println(INDENT + HOR_LINE);
-        System.out.println(INDENT + "This task is marked as completed:");
-        System.out.println(INDENT + "  " + t);
-        System.out.println(INDENT + HOR_LINE);
-        //saveTasks(tasks);
-    }
-
-    private static void printList(ArrayList<Task> tasks) {
-        System.out.println(INDENT + HOR_LINE);
-        System.out.println(INDENT + "This is your list of tasks:");
-
-        if (tasks.size() == 0) {
-            System.out.println(INDENT + "Your list is currently empty.");
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            System.out.println(INDENT + (i+1) + "." + t);
-        }
-        System.out.println(INDENT + HOR_LINE);
-    }
-
-     */
 
     private static Date parseDate(String date) throws ParseException {
         String datePattern = "yyyy-MM-dd";
