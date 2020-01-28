@@ -6,9 +6,10 @@ public class Duke {
     //private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Parser parser = new Parser();
         Ui.greet();
 
-        Parser.parse();
+        parser.parse();
 
         Ui.sayBye();
 
