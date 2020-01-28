@@ -82,7 +82,7 @@ public class Ui {
      * @param messages The array of messages to be formatted and printed.
      */
     public void showMessages(String[] messages) {
-        for (String s: messages) {
+        for (String s : messages) {
             System.out.println("     " + s);
         }
     }

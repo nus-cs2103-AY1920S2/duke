@@ -21,7 +21,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toSaveName() {
-        return "T" + super.toSaveName() +"\n";
+        return "T" + super.toSaveName() + "\n";
     }
 
     /**

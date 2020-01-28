@@ -7,6 +7,7 @@ import duke.command.Command;
  * The Duke will run the program that interact with user.
  */
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

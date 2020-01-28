@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     /**
      * Constructs a ListCommand.
      */
-    public ListCommand(){}
+    public ListCommand() {}
 
     /**
      * Print the list of tasks.

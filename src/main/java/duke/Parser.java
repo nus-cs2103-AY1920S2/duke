@@ -25,23 +25,23 @@ public class Parser {
             String cmd = temp[0];
             Command command = null;
             switch (cmd) {
-                case "delete":
-                    command = createDeleteCommand(temp);
-                    break;
-                case "done":
-                    command = createDoneCommand(temp);
-                    break;
-                case "todo":
-                    command = createAddCommand(temp);
-                    break;
-                case "deadline":
-                    command = createAddCommand(temp);
-                    break;
-                case "event":
-                    command = createAddCommand(temp);
-                    break;
-                default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            case "delete":
+                command = createDeleteCommand(temp);
+                break;
+            case "done":
+                command = createDoneCommand(temp);
+                break;
+            case "todo":
+                command = createAddCommand(temp);
+                break;
+            case "deadline":
+                command = createAddCommand(temp);
+                break;
+            case "event":
+                command = createAddCommand(temp);
+                break;
+            default:
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         return command;
         }
@@ -76,7 +76,7 @@ public class Parser {
      * @return The Command object of DoneCommand type.
      * @throws DukeException If the command has missing information or in wrong format.
      */
-    private static Command createDoneCommand(String[] temp) throws DukeException{
+    private static Command createDoneCommand(String[] temp) throws DukeException {
         try {
             if (temp[1].trim().equals("")) {
                 throw new DukeException("OOPS!!! The description of done cannot be empty.");
