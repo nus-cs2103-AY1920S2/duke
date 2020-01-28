@@ -18,9 +18,4 @@ public class Todo extends Item {
         String temp = "   [T][✗] " + super.getName() + "\n";
         return temp;
     }
-
-    @Override
-    public String getType() {
-        return "[T]";
-    }
 }

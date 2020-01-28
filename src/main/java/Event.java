@@ -1,28 +1,25 @@
+import java.time.LocalDate;
 public class Event extends Item {
-    String time;
+    LocalDate date;
     boolean done;
-    Event(String name, String time) {
+    Event(String name, LocalDate date) {
         super(name);
-        this.time = time;
+        this.date = date;
         this.done = false;
     }
 
-    Event(String name, String time, boolean done) {
+    Event(String name, LocalDate date, boolean done) {
         super(name, done);
-        this.time = time;
+        this.date = date;
     }
 
     public String toString() {
-        String temp = "   [E]" + super.toString() + " (at: "+ time + ")\n";
+        String temp = "   [E]" + super.toString() + " (at: "+ date + ")\n";
         return temp;
     }
 
     public String replace() {
-        String temp = "   [E][✗] " + super.getName() + " (at: "+ time + ")\n";
+        String temp = "   [E][✗] " + super.getName() + " (at: "+ date + ")\n";
         return temp;
-    }
-    @Override
-    public String getType() {
-        return "[E]";
     }
 }

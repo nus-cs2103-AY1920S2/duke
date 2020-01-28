@@ -1,27 +1,25 @@
+import java.time.LocalDate;
+
 public class Deadline extends Item {
-    String time;
+    LocalDate date;
     boolean done;
-    Deadline(String name, String time) {
+    Deadline(String name, LocalDate date) {
         super(name);
-        this.time = time;
+        this.date = date;
         this.done = false;
     }
 
-    Deadline(String name, String time, boolean done) {
+    Deadline(String name, LocalDate date, boolean done) {
         super(name, done);
-        this.time = time;
+        this.date = date;
     }
 
     public String toString() {
-        String temp = "   [D]" + super.toString() + " (by: "+ time + ")\n";
+        String temp = "   [D]" + super.toString() + " (by: "+ date + ")\n";
         return temp;
     }
     public String replace() {
-        String temp = "   [D][✗] " + super.getName() + " (by: "+ time + ")\n";
+        String temp = "   [D][✗] " + super.getName() + " (by: "+ date + ")\n";
         return temp;
-    }
-    @Override
-    public String getType() {
-        return "[D]";
     }
 }
