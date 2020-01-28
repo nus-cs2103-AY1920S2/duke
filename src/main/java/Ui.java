@@ -75,40 +75,35 @@ public class Ui {
     }
 
     /**
-     * Displays count of current tasks in task list.
-     *
-     * @param taskList Current task list as an ArrayList
-     * @return String containing formatted message regarding task count of task list.
-     */
-=======
-     *
      * Displays list of found tasks when a user uses the 'find' command
-            int indexNum = i + 1;
-        // print list of found tasks
-
-                ? "Goose didn't find anything, honk..."
-    public void showFoundTasks(ArrayList<Task> foundTasks) {
+     *
      * @param foundTasks ArrayList of tasks which match the search
      */
+    public void showFoundTasks(ArrayList<Task> foundTasks) {
         String foundHeader = foundTasks.isEmpty()
+                ? "Goose didn't find anything, honk..."
                 : "Honk! Here are the matching tasks in your list:\n";
-     */
-     * @return String containing formatted message regarding task count of task list.
-     * @param taskList Current task list as an ArrayList
-     *
-     * Displays count of current tasks in task list.
-    /**
-    }
 
-        System.out.println(wrapLine(foundHeader + foundList));
+        // print list of found tasks
+        String foundList = "";
+        for (int i = 0; i < foundTasks.size(); i++) {
+            int indexNum = i + 1;
+            String item = " " + indexNum + "." + foundTasks.get(i).toString();
+            if (i != foundTasks.size() - 1) {
+                item += "\n";
+            }
+            foundList += item;
         }
 
-            foundList += item;
-            }
-                item += "\n";
-            if (i != foundTasks.size() - 1) {
-            String item = " " + indexNum + "." + foundTasks.get(i).toString();
->>>>>>> Stashed changes
+        System.out.println(wrapLine(foundHeader + foundList));
+    }
+
+    /**
+     * Displays count of current tasks in task list.
+     *
+     * @param taskList Current task list as an ArrayList
+     * @return String containing formatted message regarding task count of task list.
+     */
     private String showCount(ArrayList<Task> taskList) {
         String count = taskList.size() == 1
                 ? "\n\n Now you have " + taskList.size() + " task in the list."
