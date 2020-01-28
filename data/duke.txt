@@ -1,0 +1,4 @@
+T , ✓ , read book
+D , ✗ , return book , 2019-10-15
+E , ✗ , project meeting , 2019-08-06
+T , ✓ , join sports club
