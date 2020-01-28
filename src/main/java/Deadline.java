@@ -11,4 +11,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String generateWriteFormat() {
+        int k = this.isDone ? 1 : 0;
+        return "D|"+ k + "|" + description + "|" + by;
+    }
 }
