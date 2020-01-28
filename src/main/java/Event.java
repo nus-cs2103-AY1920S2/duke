@@ -12,12 +12,7 @@ public class Event extends Task{
 
     @Override
     public String toStringTxt() {
-        return "E/" + super.getIcon() + "/" + command + "/" + dates + "\n";
-    }
-
-    @Override
-    public String toStringTxt() {
-        return "E/" + super.getIcon() + "/" + command + "/" + dates + "\n";
+        return "E/" + super.getIcon() + "/" + command + "/" + date + "\n";
     }
 
     @Override

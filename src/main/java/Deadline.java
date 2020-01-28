@@ -8,17 +8,10 @@ public class Deadline extends Task{
         super(command);
         this.date = LocalDate.parse(date);
     }
-
     // e.g. D/Y/return book/June 5th
     @Override
     public String toStringTxt() {
-        return "D/" + super.getIcon() + "/" + command + "/" + byDate + "\n";
-    }
-
-    // e.g. D/Y/return book/June 5th
-    @Override
-    public String toStringTxt() {
-        return "D/" + super.getIcon() + "/" + command + "/" + byDate + "\n";
+        return "D/" + super.getIcon() + "/" + command + "/" + date + "\n";
     }
 
     @Override
