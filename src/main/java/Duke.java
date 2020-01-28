@@ -10,6 +10,7 @@ public class Duke {
     private static void writeFile(String filePath, Chatbot bot) throws IOException {
         String textToAdd = "";
 
+        //Create string of text to add to file
         for(int i = 0; i < bot.getRecord().size(); i++) {
             Task current = bot.getRecord().get(i);
 
