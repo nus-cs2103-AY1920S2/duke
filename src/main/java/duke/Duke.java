@@ -10,7 +10,7 @@ public class Duke {
     public String run(String inputString, boolean isTest){
         UI.UIString = "";
         TaskList taskList = new TaskList();
-        Storage storage = new Storage("src/data/tasks.txt", taskList);
+        Storage storage = new Storage("tasks.txt", taskList);
         UI ui = new UI(storage);
 
         if (!isTest){

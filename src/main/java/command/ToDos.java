@@ -19,4 +19,9 @@ public class ToDos extends Task {
     public String fileString(){
         return "T|" + getStatusIcon() + "|" + this.description;
     }
+
+    @Override
+    public boolean containsString(String keyword){
+        return this.toString().contains(keyword);
+    }
 }

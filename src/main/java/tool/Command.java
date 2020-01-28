@@ -34,6 +34,16 @@ public class Command {
                     ui.print(String.valueOf(i + 1) + "." + taskList.get(i));
                 }
                 return false;
+            case "find":
+                ui.print("Here are the matching tasks in your list:");
+                int count = 0;
+                for (int i = 0; i < taskList.size(); i++) {
+                    if (taskList.get(i).containsString(arguments)){
+                        count++;
+                        ui.print(String.valueOf(count) + "." + taskList.get(i));
+                    }
+                }
+                return false;
             case "done":
                 try {
                     int num = Integer.parseInt(arguments);
