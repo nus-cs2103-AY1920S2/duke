@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class Ui {
-//    private Scanner input;
+    private Scanner input;
     
     public Ui() {
-//        this.input = new Scanner(System.in);
+        this.input = new Scanner(System.in);
     }
     
     public void showLoadingError() {
@@ -25,10 +25,8 @@ public class Ui {
     }
     
     public String getInput() {
-        ////
-        Scanner sc = new Scanner(System.in);
         System.out.print("> ");
-        return sc.nextLine();
+        return this.input.nextLine();
     }
     
     public void showFarewell() {
