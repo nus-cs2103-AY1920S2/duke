@@ -5,9 +5,7 @@ import task.Task;
 
 import java.util.ArrayList;
 
-/**
- * To handle operation on current task list.
- */
+
 public class Model {
 
     private ArrayList<Task> taskList;
@@ -16,10 +14,7 @@ public class Model {
         taskList =new ArrayList<>();
     }
 
-    /**
-     * Add new task to the model.
-     * @param task new task.
-     */
+
     public void addTask(Task task){
         taskList.add(task);
     }

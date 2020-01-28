@@ -5,7 +5,6 @@ import core.Common;
 import core.Ui;
 import dukexception.DukeException;
 
-
 public class Command_Delete extends Command{
 
     private int index;
@@ -14,6 +13,7 @@ public class Command_Delete extends Command{
     public Command_Delete(int index){
         this.index=index;
     }
+
 
     @Override
     public void execute(Common common, Ui ui) throws DukeException {

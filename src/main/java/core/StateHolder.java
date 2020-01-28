@@ -21,7 +21,6 @@ public class StateHolder implements Serializable {
         states.add(state);
     }
 
-
     public State getCurrentState(){
         assert !states.isEmpty();
         return states.peek();
