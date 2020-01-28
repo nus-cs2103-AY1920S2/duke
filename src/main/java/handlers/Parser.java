@@ -6,6 +6,7 @@ import commands.ByeCommand;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.EmptyCommand;
+import commands.FindCommand;
 import commands.ListCommand;
 
 import exceptions.DoneException;

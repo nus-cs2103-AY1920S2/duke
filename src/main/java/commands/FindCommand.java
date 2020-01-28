@@ -1,4 +1,12 @@
+package commands;
+
 import java.util.ArrayList;
+
+import handlers.Ui;
+import handlers.Storage;
+
+import tasks.Task;
+import tasks.TaskList;
 
 public class FindCommand extends Command {
     ArrayList<Task> helper = new ArrayList<>();

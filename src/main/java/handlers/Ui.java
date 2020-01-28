@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import tasks.Task;
+import tasks.TaskList;
 
 /**
  * Represents the Ui of Duke,
@@ -70,10 +71,10 @@ public class Ui {
     }
 
     public void showFindTasks(TaskList matching) {
-        System.out.println(space + "Here are the matching tasks in your list:");
+        System.out.println(SPACE + "Here are the matching tasks in your list:");
         for (int j = 1; j <= matching.numOfTasks(); j++) {
             Task t = matching.get(j - 1);
-            System.out.println(space + j + "." + t);
+            System.out.println(SPACE + j + "." + t);
         }
     }
 
