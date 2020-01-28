@@ -13,6 +13,10 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Retrieves the next line of user command via Scanner's nextLine() method
+     * @return String containing the user command
+     */
     public String getUserCmd() {
         return sc.nextLine();
     }
@@ -71,10 +75,16 @@ public class Ui {
         System.out.println(catLeaves);
     }
 
+    /**
+     * Prints a line before each user command response
+     */
     public void printLine1() {
         System.out.println("\t-------------C-A-T-H-U-L-H-U-------------");
     }
 
+    /**
+     * Prints a line after each user command response
+     */
     public void printLine2() {
         System.out.println("\t----------------M-E-O-W-S----------------\n");
     }
