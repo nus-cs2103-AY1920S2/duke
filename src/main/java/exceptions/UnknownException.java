@@ -1,13 +1,15 @@
+package exceptions;
+
 /**
  * Handles the exception if the user
  * gives an inappropriate command.
  */
 
 public class UnknownException extends Exception{
-    public static final String space = "     ";
+    private static final String SPACE = "     ";
     public UnknownException() {};
 
     public String toString() {
-        return space + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return SPACE + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

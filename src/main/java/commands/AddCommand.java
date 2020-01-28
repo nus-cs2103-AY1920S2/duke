@@ -1,7 +1,16 @@
+package commands;
+
+import tasks.Task;
+import tasks.TaskList;
+
+import handlers.Storage;
+import handlers.Ui;
+
 /**
  *  Handles the command when a user adds a new task.
  *  For the execute method, it is to add the task to the tasklist.
  */
+
 public class AddCommand extends Command {
     protected Task taskToAdd;
 

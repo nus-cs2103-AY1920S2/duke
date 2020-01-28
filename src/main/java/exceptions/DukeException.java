@@ -1,3 +1,5 @@
+package exceptions;
+
 /**
  * Handles the exception when running the Duke class.
  */

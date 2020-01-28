@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * Represents a task that needs to be completed.
  * It contains a description of the task,
@@ -7,7 +9,6 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-
 
     public Task(String description) {
         this.description = description;

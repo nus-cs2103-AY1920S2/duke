@@ -1,3 +1,21 @@
+package handlers;
+
+import commands.Command;
+import commands.AddCommand;
+import commands.ByeCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.EmptyCommand;
+import commands.ListCommand;
+
+import exceptions.DoneException;
+import exceptions.EmptyException;
+import exceptions.UnknownException;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
+
 /**
  * Represents the class which parses each command given by the user.
  * It see which command is given, and returns the corresponding command.
@@ -6,7 +24,7 @@
 public class Parser {
     public Parser() {}
 
-    public static Command parse(String command) throws DukeException {
+    public static Command parse(String command) {
         String[] str = command.split(" ");
         if (command.equals("list")) {
             ListCommand listCommand = new ListCommand(command);

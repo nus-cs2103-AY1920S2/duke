@@ -1,36 +1,38 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents the event task. It contains a description of the task, and a
- * 'at' date and time that represents when the event is taking place.
+ * Represents the deadline task. It contains a description and a
+ * 'by' date and time that the task has to be completed by.
  */
 
-public class Event extends Task {
-    protected String at;
+public class Deadline extends Task{
+    protected String by;
     protected LocalDate date;
     protected LocalTime time;
-    public String taskType = "E";
+    private String taskType = "D";
 
-    public Event(String description, String at) {
+    public Deadline(String description, String by) {
         super(description);
-        this.at = at;
+        this.by = by;
     }
 
-    public Event(String status, String description, String at) {
+    public Deadline(String status, String description, String by) {
         super(description);
         this.setStatus(status);
-        this.at = at;
+        this.by = by;
     }
 
     public void setDateTime() {
-        String[] b = this.at.split(" ");
+        String[] b = this.by.split(" ");
         if (b.length > 1) {
             this.date = LocalDate.parse(b[0]);
             this.time = LocalTime.parse(b[1]);
         } else {
-            this.date = LocalDate.parse(this.at);
+            this.date = LocalDate.parse(this.by);
             this.time = null;
         }
     }
@@ -52,23 +54,23 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        //return "[E]" + super.toString() + "(at: " + at + ")";
-        String[] b = this.at.split(" ");
+        //return "[D]" + super.toString() + "(by: " + by + ")";
+        String[] b = this.by.split(" ");
         if (b.length > 1) {
-            return "[E]" + super.toString() + "(at: " + dateToString() + " " + timeToString()+ ")";
+            return "[D]" + super.toString() + "(by: " + dateToString() + " " + timeToString()+ ")";
         } else {
-            return "[E]" + super.toString() + "(at: " + dateToString() + ")";
+            return "[D]" + super.toString() + "(by: " + dateToString() + ")";
         }
     }
 
     @Override
     public String saveString() {
-        //return "E | " + super.saveString() + "| " + at;
-        String[] b = this.at.split(" ");
+        //return "D | " + super.saveString() + "| " + by;
+        String[] b = this.by.split(" ");
         if (b.length > 1) {
-            return "E | " + super.saveString() + "| " + dateToString() + " " + timeToString();
+            return "D | " + super.saveString() + "| " + dateToString() + " " + timeToString();
         } else {
-            return "E | " + super.saveString() + "| " + dateToString();
+            return "D | " + super.saveString() + "| " + dateToString();
         }
     }
 }

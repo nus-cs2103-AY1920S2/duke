@@ -1,3 +1,5 @@
+package handlers;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -6,6 +8,13 @@ import java.util.ArrayList;
  * and handles the methods which writes to an external text file,
  * and retrieves the tasks from an external text file.
  */
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
+import exceptions.DukeException;
 
 public class Storage {
     protected String filePath;

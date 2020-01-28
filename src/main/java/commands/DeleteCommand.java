@@ -1,3 +1,11 @@
+package commands;
+
+import tasks.Task;
+import tasks.TaskList;
+
+import handlers.Storage;
+import handlers.Ui;
+
 /**
  * Handles the command when the user wants a task deleted.
  * For the execute method, it removes the task from the tasklist.

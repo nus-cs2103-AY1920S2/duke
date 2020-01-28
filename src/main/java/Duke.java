@@ -1,3 +1,13 @@
+import commands.Command;
+
+import exceptions.DukeException;
+
+import tasks.TaskList;
+
+import handlers.Parser;
+import handlers.Storage;
+import handlers.Ui;
+
 /**
  * The main class that runs the whole Task manager
  */
