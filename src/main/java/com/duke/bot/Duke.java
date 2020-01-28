@@ -1,5 +1,6 @@
 package com.duke.bot;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -124,10 +125,11 @@ public class Duke {
     }
 
     private void handleEventInput(String input) throws DukeException {
-        Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/at\\s+(.+)$");
+        Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/at\\s+(\\d{4}-\\d{2}-\\d{2})$");
         Matcher eventMatcher = eventPattern.matcher(input);
         if (eventMatcher.matches()) {
-            Event newEvent = new Event(eventMatcher.group(1), eventMatcher.group(2));
+            LocalDate dateAt = LocalDate.parse(eventMatcher.group(2));
+            Event newEvent = new Event(eventMatcher.group(1), dateAt);
             tasks.add(newEvent);
             reportNewTask(newEvent);
         } else {
@@ -136,10 +138,11 @@ public class Duke {
     }
 
     private void handleDeadlineInput(String input) throws DukeException {
-        Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
+        Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(\\d{4}-\\d{2}-\\d{2})$");
         Matcher deadlineMatcher = deadlinePattern.matcher(input);
         if (deadlineMatcher.matches()) {
-            Deadline newDeadline = new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2));
+            LocalDate dateBy = LocalDate.parse(deadlineMatcher.group(2));
+            Deadline newDeadline = new Deadline(deadlineMatcher.group(1), dateBy);
             tasks.add(newDeadline);
             reportNewTask(newDeadline);
         } else {

@@ -1,9 +1,12 @@
 package com.duke.bot;
 
-public class Deadline extends Task {
-    private String dateBy;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String title, String dateBy) {
+public class Deadline extends Task {
+    private LocalDate dateBy;
+
+    public Deadline(String title, LocalDate dateBy) {
         super(title);
         this.dateBy = dateBy;
     }
@@ -14,7 +17,7 @@ public class Deadline extends Task {
                 "[D][%s] %s (by: %s)",
                 isDone() ? "\u2713" : "\u2717",
                 getTitle(),
-                dateBy
+                dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
 }

@@ -1,9 +1,12 @@
 package com.duke.bot;
 
-public class Event extends Task {
-    private String dateAt;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String title, String dateAt) {
+public class Event extends Task {
+    private LocalDate dateAt;
+
+    public Event(String title, LocalDate dateAt) {
         super(title);
         this.dateAt = dateAt;
     }
@@ -14,7 +17,7 @@ public class Event extends Task {
                 "[E][%s] %s (at: %s)",
                 isDone() ? "\u2713" : "\u2717",
                 getTitle(),
-                dateAt
+                dateAt.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
 }
