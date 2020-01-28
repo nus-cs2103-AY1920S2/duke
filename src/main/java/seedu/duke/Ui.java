@@ -72,6 +72,24 @@ public class Ui {
         print(outputStreamBuffer);
     }
 
+    public void printMatchedTaskList(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            print("No tasks found.");
+            return;
+        }
+
+        List<String> outputStreamBuffer = new ArrayList<>();
+
+        outputStreamBuffer.add("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String str = tasks.get(i).toString();
+            String newStr = String.format("%d.%s", i + 1, str);
+            outputStreamBuffer.add(newStr);
+        }
+
+        print(outputStreamBuffer);
+    }
+
     String readCommand() {
         return SC.nextLine();
     }

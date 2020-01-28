@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.DoneCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.FindCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exception.DukeEmptyDescriptionException;
 import seedu.duke.exception.DukeException;
@@ -40,8 +41,9 @@ class Parser {
                 selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
                 toReturn = new DeleteCommand(selectedTaskIndex);
                 break;
+            case find:
             case todo:
-                toReturn = createTodoCommand(splitInput);
+                toReturn = createFindOrTodoCommand(splitInput, commandString);
                 break;
             case deadline:
             case event:
@@ -63,13 +65,17 @@ class Parser {
         }
     }
 
-    private static Command createTodoCommand(String[] splitInput) throws DukeEmptyDescriptionException {
+    private static Command createFindOrTodoCommand(String[] splitInput, String commandString)
+            throws DukeEmptyDescriptionException {
         isSplitInputLengthLargerThanOne(splitInput);
 
         String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         // empty string array would become empty string
         String taskDescription = String.join(" ", inputWithoutCommand);
-        return new AddCommand(Command.Type.todo, taskDescription);
+
+        return commandString.equals(Command.Type.find.getCommand())
+                ? new FindCommand(taskDescription)
+                : new AddCommand(Command.Type.todo, taskDescription);
     }
 
     private static Command createDeadLineOrEventCommand(String[] splitInput, String commandString)

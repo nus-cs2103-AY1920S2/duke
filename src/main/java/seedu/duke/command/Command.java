@@ -15,6 +15,7 @@ public abstract class Command {
         done("done"),
         todo("todo"),
         delete("delete"),
+        find("find"),
 
         deadline("deadline"),
         deadline_by("/by"),
