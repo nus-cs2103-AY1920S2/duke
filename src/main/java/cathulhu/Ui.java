@@ -1,3 +1,5 @@
+package cathulhu;
+
 import java.util.Scanner;
 
 public class Ui {

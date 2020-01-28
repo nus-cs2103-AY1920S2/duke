@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package cathulhu;
+
+import cathulhu.tasks.*;
 
 public class Parser {
 

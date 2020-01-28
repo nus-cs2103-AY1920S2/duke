@@ -1,3 +1,5 @@
+package cathulhu.tasks;
+
 public class Task {
 
     protected String description;

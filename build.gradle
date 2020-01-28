@@ -13,7 +13,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Cathulhu"
+    mainClassName = "cathulhu.Cathulhu"
 }
 
 run {

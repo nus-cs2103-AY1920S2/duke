@@ -1,3 +1,7 @@
+package cathulhu;
+
+import cathulhu.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {

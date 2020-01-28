@@ -1,3 +1,5 @@
+package cathulhu;
+
 public class CathulhuException extends Exception{
 
     /**

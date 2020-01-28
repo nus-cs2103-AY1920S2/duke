@@ -1,7 +1,11 @@
+package cathulhu.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+
+import cathulhu.CathulhuException;
 
 public class Deadline extends Task {
 

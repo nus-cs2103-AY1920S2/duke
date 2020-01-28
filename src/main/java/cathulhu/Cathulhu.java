@@ -1,5 +1,9 @@
+package cathulhu;
+
 import java.io.File;
 import java.io.IOException;
+
+import cathulhu.tasks.Task;
 
 public class Cathulhu {
 
