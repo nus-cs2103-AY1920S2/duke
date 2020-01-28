@@ -4,3 +4,4 @@ D | 0 | return book | Sunday
 E | 1 | project meeting | Mon 2-4pm
 T | 0 | yo
 T | 0 | hi
+D | 0 | kill | 02-02-2020 1600
