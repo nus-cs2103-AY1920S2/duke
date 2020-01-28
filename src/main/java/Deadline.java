@@ -3,13 +3,22 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-
+/**
+ * Represents a deadline task. A <code>Deadline/code> object
+ * corresponds to a command represented by the command and a description e.g.,
+ * <code>"read", "2019-05-10 1800"</code>
+ */
 public class Deadline extends Task {
 
     String by;
     LocalDate date;
     LocalTime time;
 
+    /**
+     * A constructor for a Deadline object.
+     * @param description description of task
+     * @param by date and time of task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;

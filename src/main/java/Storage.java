@@ -5,14 +5,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage object that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     public String filePath;
+    public File file;
 
+    /**
+     * Constructor for storage object.
+     * @param filePath path of file
+     */
     public Storage(String filePath) {
+
         this.filePath = filePath;
+
+        file = new File(filePath);
+        try {
+            file.getParentFile().mkdir();
+            file.createNewFile();
+        }  catch(IOException e) {
+            System.out.println("Error creating file");
+        }
     }
 
+    /**
+     * Method to load data from file.
+     * @return An array list of tasks in the file
+     * @throws FileNotFoundException throws exception if file is not found
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -58,6 +80,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Method to write list back to file.
+     * @param tasks Updated array list of tasks
+     * @throws IOException throws exception if error occurs when writing to file
+     */
     public void write(TaskList tasks) throws IOException {
         String textToAdd = "";
 

@@ -1,9 +1,21 @@
+/**
+ * Represents a Parser that deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Constructor for parser object.
+     */
     public Parser() {
 
     }
 
+    /**
+     * Method for making sense of the user command.
+     * @param fullCommand user input
+     * @return Command object of the user input
+     * @throws DukeException throws an exception if command is undefined
+     */
     public static Command parse(String fullCommand) throws DukeException{
         String[] arr = fullCommand.split(" ");
         String command = arr[0];
