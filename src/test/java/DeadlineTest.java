@@ -8,8 +8,13 @@ import duke.exception.DukeException;
 
 public class DeadlineTest {
     @Test
-    public void testGetTaskStatus() throws DukeException {
+    public void testGetStatusIcon() throws DukeException {
         Deadline deadlineTest = new Deadline("test", "2020-12-01");
         assertEquals("\u2718", deadlineTest.getStatusIcon());
+    }
+    @Test
+    public void testGetSaveFormat() throws DukeException {
+        Deadline deadlineTest = new Deadline("test", "2020-12-01");
+        assertEquals("D_false_test_2020-12-01", deadlineTest.getSaveFormat());
     }
 }
