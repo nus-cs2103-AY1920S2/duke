@@ -17,7 +17,16 @@ public class Task {
         return (isDone ? "✓" : "✕"); //return tick or X symbols
     }
 
+    @Override
+    public String toString(){
+        return "[T]" + "[" + getStatusIcon() + "] " + this.description;
+    }
+
     public String fileString(){
         return "D|" + getStatusIcon() + "|" + description;
+    }
+
+    public boolean containsString(String keyword){
+        return this.toString().contains(keyword);
     }
 }

@@ -23,4 +23,9 @@ public class Deadlines extends Task {
     public String fileString(){
         return "D|" + getStatusIcon() + "|" + this.description + "|" + this.datetime;
     }
+
+    @Override
+    public boolean containsString(String keyword){
+        return this.toString().contains(keyword) || datetime.contains(keyword);
+    }
 }

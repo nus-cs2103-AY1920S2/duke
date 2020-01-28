@@ -52,7 +52,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            //System.out.println("File not found");
         }
 
     }
@@ -64,7 +64,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            //System.out.println("Something went wrong: " + e.getMessage());
         }
 
     }
