@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 
+/**
+ * Storage class handles loading and saving of tasks into an external file.
+ */
 public class Storage {
     String filePath;
     File file;
@@ -20,6 +23,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks data from file.
+     *
+     * @return Array list of Task.
+     * @throws FileNotFoundException If file fails to load.
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         ArrayList<Task> dukeList = new ArrayList<>();
         Scanner sc = new Scanner(file);
@@ -73,6 +82,12 @@ public class Storage {
         return dukeList;
     }
 
+    /**
+     * Write list of tasks into file.
+     *
+     * @param tasks Contains list of tasks.
+     * @throws IOException If unable to write file.
+     */
     public void writeData(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(file);
         String tmpTxt = "";

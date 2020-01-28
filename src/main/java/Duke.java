@@ -1,5 +1,8 @@
 import java.io.*;
 
+/**
+ * Duke is the main class of the Duke chatbot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

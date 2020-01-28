@@ -1,3 +1,6 @@
+/**
+ * DukeException class handles the exception specific to Duke chatbot.
+ */
 public class DukeException extends Exception {
     public String tmp = "";
     public int num = 0;
@@ -22,6 +25,10 @@ public class DukeException extends Exception {
         this.tmp3 = tmp3;
     }
 
+    /**
+     * Prints out the exception.
+     * @return String of the exception.
+     */
     @Override
     public String toString() {
         //Argument of delete is not 1 (total of 2)

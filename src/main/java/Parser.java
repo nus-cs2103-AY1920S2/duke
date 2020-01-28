@@ -1,10 +1,19 @@
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class takes care of the parsing of full commands that the user typed.
+ */
 public class Parser {
     public Parser() {
 
     }
 
+    /**
+     * This function handles the parsing of command recognised by the bot.
+     * @param fullCommand Command that the user typed.
+     * @return Command from enum.
+     * @throws DukeException Exception is thrown when the user typed other commands that the bot do not understand.
+     */
     public Command parseCommand(String fullCommand) throws DukeException {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
@@ -39,7 +48,11 @@ public class Parser {
         return null;
     }
 
-    //For todo
+    /**
+     * This function will parse the description of todo command.
+     * @param fullCommand Command that the user typed.
+     * @return The description of todo command.
+     */
     public String parseDescription(String fullCommand) {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
@@ -63,6 +76,11 @@ public class Parser {
         return null;
     }
 
+    /**
+     * This function will parse the description of event and deadline command.
+     * @param fullCommand Command that the user typed.
+     * @return Description of event and deadline command.
+     */
     public String parseDescOfEventDeadline(String fullCommand) {
         String[] splitBySpace;
         String[] splitBySlash;
@@ -91,6 +109,12 @@ public class Parser {
         return null;
     }
 
+    /**
+     * This function will parse the "deadline" typed by the user. Function will only be called if the command is
+     * event or deadline.
+     * @param fullCommand Command that the user typed.
+     * @return The description of what the user typed to be deadline.
+     */
     public String parseBy(String fullCommand) {
         String[] splitBySpace;
         String[] splitBySlash;
@@ -112,6 +136,14 @@ public class Parser {
         return null;
     }
 
+    /**
+     * This function will parse the number in the command. Function is for delete and done command.
+     * @param fullCommand Command that the user typed.
+     * @param tasks List of tasks.
+     * @return The parsed number.
+     * @throws DukeException Exception is thrown if the criteria does not fit what delete or done command
+     * is looking for.
+     */
     public int parseNum(String fullCommand, TaskList tasks) throws DukeException {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
