@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * UI class that deals with interactions with the user.
+ * Supports reading in user command and outputting response.
+ */
 public class Ui {
 
     private static final Scanner SC = new Scanner(System.in);
@@ -38,11 +42,19 @@ public class Ui {
         print(outputStreamBuffer);
     }
 
+    /**
+     * Prints goodbye message.
+     */
     public void bye() {
         print("Bye. Hope to see you again soon!");
         System.exit(0);
     }
 
+    /**
+     * Prints the list of task given a TaskList object.
+     *
+     * @param tasks TaskList object to be printed.
+     */
     public void printList(TaskList tasks) {
         if (tasks.isEmpty()) {
             print("List is empty");
@@ -64,6 +76,12 @@ public class Ui {
         return SC.nextLine();
     }
 
+    /**
+     * Prints response message after marking a task as done.
+     *
+     * @param tasks TaskList object that contains the selected task.
+     * @param selectedTask Task to be marked as done.
+     */
     public void printDoneMessage(TaskList tasks, Task selectedTask) {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Nice! I've marked this task as done: ");
@@ -72,6 +90,12 @@ public class Ui {
         print(outputStreamBuffer);
     }
 
+    /**
+     * Prints response message after deleting a task.
+     *
+     * @param tasks TaskList object that contains the selected task.
+     * @param selectedTask Task to be deleted.
+     */
     public void printDeleteMessage(TaskList tasks, Task selectedTask) {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Noted. I've removed this task: ");
@@ -80,6 +104,12 @@ public class Ui {
         print(outputStreamBuffer);
     }
 
+    /**
+     * Prints response message after adding given task to task list.
+     *
+     * @param tasks TaskList object to which given Task object will be added.
+     * @param newTask Task object to be added.
+     */
     public void printAddMessage(TaskList tasks, Task newTask) {
         List<String> outputStreamBuffer = new ArrayList<>();
         outputStreamBuffer.add("Got it. I've added this task: ");
