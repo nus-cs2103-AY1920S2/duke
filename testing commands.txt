@@ -1,6 +1,5 @@
-todo eat food
-todo buy food
-todo sleep
-deadline hw /by june 20
-event social /at may 19
+deadline assignment /by 2020-01-28
+deadline hw /by 2020-02-01
+event be social /at location
+todo indiv project
 list
