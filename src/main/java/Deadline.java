@@ -11,6 +11,7 @@ public class Deadline extends Task {
         super(description);
         try {
             this.date = LocalDate.parse(by);
+            System.out.println("Parsed date successfully");
         } catch(DateTimeParseException de) {
             this.by = by;
         }
@@ -24,7 +25,12 @@ public class Deadline extends Task {
 
     @Override
     public String store() {
-        return "D|" + (isDone?"1":"0") + "|" + this.description + "|" + this.by;
+        String dateType = this.by;
+        if (dateType.isEmpty()) {
+            dateType = this.date.format(DateTimeFormatter
+                    .ofLocalizedDate(FormatStyle.LONG));
+        }
+        return "D|" + (isDone?"1":"0") + "|" + this.description + "|" + dateType;
     }
 
     @Override

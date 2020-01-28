@@ -25,7 +25,12 @@ public class Event extends Task {
 
     @Override
     public String store() {
-        return "E|" + (isDone?"1":"0") + "|" + this.description + "|" + this.at;
+        String dateType = this.at;
+        if (dateType.isEmpty()) {
+            dateType = this.date.format(DateTimeFormatter
+                    .ofLocalizedDate(FormatStyle.LONG));
+        }
+        return "E|" + (isDone?"1":"0") + "|" + this.description + "|" + dateType;
     }
 
     @Override
