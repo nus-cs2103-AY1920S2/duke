@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 /**
  * Represents main body for Duke to run
@@ -60,15 +59,6 @@ public class Duke {
                         tasks.deleteTask(taskIndex);
                         ui.showDeleteTask(selected, tasks.getTaskList());
                         storage.save(tasks.getTaskList());
-
-                    } else if (command.equals("find")) {
-                        String search = "";
-                        for (int i = 1; i < inputArr.length; i++) {
-                            search += inputArr[i];
-                            search += (i == inputArr.length - 1) ? "" : " ";
-                        }
-                        ArrayList<Task> foundTasks = tasks.findTask(search);
-                        ui.showFoundTasks(foundTasks);
 
                     } else {
                         if (command.equals("todo")) {
