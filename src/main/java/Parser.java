@@ -41,6 +41,8 @@ public class Parser {
             return new ListCommand(command, description);
         } else if(command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             return new AddCommand(command, description);
+        } else if(command.equals("find")) {
+            return new FindCommand(command, description);
         } else {
             throw new DukeException("");
         }
