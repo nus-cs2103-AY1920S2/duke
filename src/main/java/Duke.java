@@ -1,10 +1,114 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class Duke {
+    private static void writeFile(String filePath, Chatbot bot) throws IOException {
+        String textToAdd = "";
+
+        for(int i = 0; i < bot.getRecord().size(); i++) {
+            Task current = bot.getRecord().get(i);
+
+            //Add type
+            if(current instanceof ToDo) {
+                textToAdd = textToAdd + "T | ";
+            } else if(current instanceof Deadline) {
+                textToAdd = textToAdd + "D | ";
+            } else {
+                textToAdd = textToAdd + "E | ";
+            }
+
+            //Add boolean
+            if(current.getIsDone()) {
+                textToAdd = textToAdd + "1 ";
+            } else {
+                textToAdd = textToAdd + "0 ";
+            }
+
+            //Add description
+            if(current instanceof ToDo) {
+                textToAdd = textToAdd + "| " + current.getDescription();
+            } else if(current instanceof Deadline) {
+                textToAdd = textToAdd + "| " + current.getDescription();
+            } else {
+                textToAdd = textToAdd + "| " + current.getDescription();
+            }
+
+            //Add at and by for events and deadlines
+            if(current instanceof Deadline) {
+                textToAdd = textToAdd + "| " + ((Deadline) current).by + "\n";
+            } else if(current instanceof Event) {
+                textToAdd = textToAdd + "| " + ((Event) current).at + "\n";
+            } else {
+                textToAdd = textToAdd + "\n";
+            }
+
+        }
+
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void readFile(String filePath, Chatbot bot) throws FileNotFoundException{
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+
+        //add data in file into the arraylist in bot
+        while(s.hasNext()) {
+            String str = s.nextLine();
+            String[] arr = str.split("\\|");
+
+            //trim whitespaces
+            for(int i = 0; i < arr.length; i++) {
+                arr[i] = arr[i].trim();
+            }
+
+            if(arr[0].equals("T")) {
+                Task task = new ToDo(arr[2]);
+
+                if(arr[1].equals("1")) {
+                    task.setIsDone();
+                }
+
+                bot.addTask(task);
+
+            } else if(arr[0].equals("D")) {
+                Task task = new Deadline(arr[2], arr[3]);
+
+                if(arr[1].equals("1")) {
+                    task.setIsDone();
+                }
+
+                bot.addTask(task);
+            } else {
+                Task task = new Event(arr[2], arr[3]);
+
+                if(arr[1].equals("1")) {
+                    task.setIsDone();
+                }
+
+                bot.addTask(task);
+            }
+        }
+    }
+
     public static void main(String[] args) {
             //Intialise chatbot and scanner objects
             Chatbot bot = new Chatbot("bot");
             Scanner sc = new Scanner(System.in);
+            Path path = Paths.get("Data/duke.txt");
+
+            //Read data from file
+            try {
+                readFile(path.toString(), bot);
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found");
+            }
 
             //Set greeting and greet
             String intro = "--------------------------------------------------\n" +
@@ -91,6 +195,12 @@ public class Duke {
                     arr = input.split(" ");
                     command = arr[0];
                     description = "";
+            }
+
+            try {
+                writeFile(path.toString(), bot);
+            } catch(IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             }
 
             //exit

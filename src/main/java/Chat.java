@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public interface Chat {
 
         String getName();
@@ -9,6 +11,8 @@ public interface Chat {
         void setGoodbye(String goodbye);
         void goodbye();
         void echo(String command);
+        void addTask(Task task);
+        ArrayList<Task> getRecord();
         void addToDo(String record);
         void addDeadline(String record, String by);
         void addEvent(String record, String at);

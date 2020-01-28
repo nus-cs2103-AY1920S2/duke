@@ -15,6 +15,10 @@ public class Task {
         this.description = description;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public void setIsDone() {
         isDone = true;
     }

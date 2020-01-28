@@ -31,6 +31,10 @@ public class Chatbot implements Chat {
         System.out.println(this.greeting);
     }
 
+    public ArrayList<Task> getRecord() {
+        return record;
+    }
+
     public void echo(String command) {
         String str = "--------------------------------------------------\n" +
                 command + "\n" +
@@ -48,6 +52,10 @@ public class Chatbot implements Chat {
 
     public void goodbye() {
         System.out.println(this.goodbye);
+    }
+
+    public void addTask(Task task) {
+        this.record.add(task);
     }
 
     public void addToDo(String record) {

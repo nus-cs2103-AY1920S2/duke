@@ -1,0 +1,3 @@
+T | 1 | read book
+D | 0 | return book| June 6th
+T | 0 | read again
