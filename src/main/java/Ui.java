@@ -62,4 +62,8 @@ public class Ui {
     public void showUnknownCommandMessage(String command) {
         PrintUtil.indentedPrintf("Error: Unknown command: %s\n", command);
     }
+    
+    public void showMatchingTasksMessage() {
+        PrintUtil.indentedPrintln("Here are the matching tasks in your list:");
+    }
 }

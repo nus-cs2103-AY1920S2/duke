@@ -16,6 +16,10 @@ public abstract class Task implements Serializable {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
     
+    public String description() {
+        return description;
+    }
+    
     public boolean isDone() {
         return isDone;
     }
