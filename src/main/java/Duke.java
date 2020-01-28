@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     private final Scanner sc = new Scanner(System.in);
     private final TaskList taskList = new TaskList();
+    private final Storage storage = new Storage();
 
     private void greet() {
         String greeting = "Hello, I am Duke " + new String(Character.toChars(0x1F481)) +", your personal assistant.";
@@ -11,6 +12,10 @@ public class Duke {
 
     private void print(String string) {
         System.out.println("    ------------------\n    " + string + "\n    ------------------");
+    }
+
+    private void initialise() {
+        this.storage.readFromDisk();
     }
 
     private void getCommands() {
@@ -57,6 +62,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
+
+        duke.initialise();
 
         duke.greet();
 
