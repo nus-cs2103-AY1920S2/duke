@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Represents a Parser which handles commands inputted by the user
+ */
+
 public class Parser {
     private Ui ui;
     private TaskList tasklist;

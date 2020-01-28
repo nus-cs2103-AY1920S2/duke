@@ -1,3 +1,7 @@
+/**
+ * The user interface which contains outputs to be returned to the user.
+ */
+
 public class Ui {
 
     public String emptyList() {
