@@ -1,8 +1,3 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 enum Command {
@@ -16,106 +11,29 @@ enum Command {
 }
 
 public class Duke {
-    public static void addTaskReport(Task task, int numOfTasks) {
-        System.out.println("\t Got it. I've added this task: \n" +
-                "\t\t" + task + "\n" +
-                "\t Now you have " + numOfTasks + " tasks in the list.");
-    }
 
-    public static void persist(ArrayList<Task> tasks) {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        final String FILE_PATH = "./data/duke.txt";
-        StringBuilder buffer = new StringBuilder();
-        for (Task task : tasks) {
-            buffer.append(task.format()).append("\n");
-        }
-
-        BufferedWriter writer = null;
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            writer = new BufferedWriter(new FileWriter(FILE_PATH));
-            writer.write(buffer.toString());
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            tasks = storage.load();
+        } catch (DukeException e) {
+            ui.printLoadingError();
+            tasks = new TaskList();
         }
-    }
-
-    private static ArrayList<Task> load() {
-        final String FILE_PATH = "./data/duke.txt";
-
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(
-                    FILE_PATH));
-            String line = reader.readLine();
-            Task t;
-            while (line != null) {
-                String[] tokens = line.split("\\|");
-                for (int i = 0; i < tokens.length; i++) {
-                    tokens[i] = tokens[i].trim();
-                }
-
-                try {
-                    switch (tokens[0]) {
-                        case "T":
-                            t = new TodoTask(tokens[2]);
-                            break;
-                        case "D":
-                            t = new DeadlineTask(tokens[2], tokens[3]);
-                            break;
-                        case "E":
-                            t = new EventTask(tokens[2], tokens[3]);
-                            break;
-                        default:
-                            throw new InvalidDukeFormatException("Unknown Command.");
-                    }
-                    if (tokens[1].equals("1")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
-                } catch (InvalidDukeFormatException e) {
-                    System.out.println("unable to add this item");
-                    System.out.println(e.getMessage());
-                    System.out.println(line);
-                }
-
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return tasks;
     }
 
     public static void main(String[] args) {
+        new Duke("./data/tasks.txt").run();
+    }
 
-        ArrayList<Task> tasks = new ArrayList<>();
+    public void run() {
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
-        System.out.println("\t____________________________________________________________");
-
-        Path filePath = Paths.get("./data/duke.txt");
-        if (Files.exists(filePath)) {
-            tasks = Duke.load();
-        } else {
-            try {
-                Files.createDirectories(filePath.getParent());
-                Files.createFile(filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        ui.printHeader();
 
         Scanner scanner = new Scanner(System.in);
         String desc = "";
@@ -123,7 +41,6 @@ public class Duke {
 
         main:
         while (scanner.hasNextLine()) {
-            System.out.println("\t____________________________________________________________");
             String line = scanner.nextLine().trim();
             String[] separateLine = line.split(" ", 2);
             String commandStr = separateLine[0];
@@ -165,13 +82,10 @@ public class Duke {
                 }
                 switch (command) {
                     case EXIT_COMMAND:
-                        System.out.println("\t Bye. Hope to see you again soon!");
-                        System.out.println("\t____________________________________________________________");
+                        ui.print("Bye. Hope to see you again soon!");
                         break main;
                     case LIST_COMMAND:
-                        for (int i = 1; i <= tasks.size(); i++) {
-                            System.out.println("\t " + i + ". " + tasks.get(i - 1));
-                        }
+                        ui.printTasks(tasks);
                         break;
                     case DONE_COMMAND:
                         splitted = line.split(" ");
@@ -184,12 +98,9 @@ public class Duke {
                         }
 
                         task = tasks.get(taskId - 1);
-
-
                         task.markAsDone();
-                        System.out.println("\t Nice! I've marked this task as done: ");
-                        System.out.println("\t\t" + task);
-                        Duke.persist(tasks);
+                        ui.printDoneTask(task);
+                        storage.save(tasks);
                         break;
                     case DELETE_COMMAND: {
                         splitted = line.split(" ");
@@ -201,19 +112,15 @@ public class Duke {
                             throw new InvalidDukeFormatException("Invalid task index provided!");
                         }
                     }
-
-                    task = tasks.remove(taskId - 1);
-
-                    System.out.println("\t Noted. I've removed this task: ");
-                    System.out.println("\t\t" + task);
-                    Duke.persist(tasks);
+                    ui.printRemoveTask(tasks.remove(taskId - 1));
+                    storage.save(tasks);
                     break;
 
                     case TODO_COMMAND:
                         task = new TodoTask(parameters);
                         tasks.add(task);
-                        addTaskReport(task, tasks.size());
-                        Duke.persist(tasks);
+                        ui.printNewTask(task, tasks.size());
+                        storage.save(tasks);
                         break;
                     case DEADLINE_COMMAND:
                         taskInfo = parameters.split("/by");
@@ -229,8 +136,8 @@ public class Duke {
                         task = new DeadlineTask(desc, timestamp);
 
                         tasks.add(task);
-                        addTaskReport(task, tasks.size());
-                        Duke.persist(tasks);
+                        ui.printNewTask(task, tasks.size());
+                        storage.save(tasks);
                         break;
 
                     case EVENT_COMMAND:
@@ -246,14 +153,12 @@ public class Duke {
                         task = new EventTask(desc, timestamp);
 
                         tasks.add(task);
-                        addTaskReport(task, tasks.size());
-                        Duke.persist(tasks);
+                        ui.printNewTask(task, tasks.size());
+                        storage.save(tasks);
                         break;
                 }
-                System.out.println("\t____________________________________________________________");
             } catch (DukeException e) {
-                System.out.println("\t " + e);
-                System.out.println("\t____________________________________________________________");
+                ui.printError(e.toString());
             }
         }
 

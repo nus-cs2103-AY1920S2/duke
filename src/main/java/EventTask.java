@@ -19,7 +19,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d YYYY");
-        return "[E] " + super.toString() + " (by: " + formatter.format(this.at) + ")";
+        return "[E]" + super.toString() + " (by: " + formatter.format(this.at) + ")";
     }
 
     @Override
