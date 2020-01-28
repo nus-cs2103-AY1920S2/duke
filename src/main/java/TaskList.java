@@ -1,61 +1,20 @@
 import java.util.ArrayList;
 
-public class Chatbot implements Chat {
-    private String name;
-    private String greeting;
-    private String goodbye;
+public class TaskList {
+
     private ArrayList<Task> record;
 
-    public Chatbot(String name) {
-        this.name = name;
-        this.record = new ArrayList<>();
+    public TaskList() {
+        ArrayList<Task> list = new ArrayList<>();
+        this.record = list;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGreeting() {
-        return greeting;
-    }
-
-    public void setGreeting(String greeting) {
-        this.greeting = greeting;
-    }
-
-    public void greet() {
-        System.out.println(this.greeting);
+    public TaskList(ArrayList<Task> record) {
+        this.record = record;
     }
 
     public ArrayList<Task> getRecord() {
         return record;
-    }
-
-    public void echo(String command) {
-        String str = "--------------------------------------------------\n" +
-                command + "\n" +
-                "--------------------------------------------------\n";
-        System.out.println(str);
-    }
-
-    public String getGoodbye() {
-        return goodbye;
-    }
-
-    public void setGoodbye(String goodbye) {
-        this.goodbye = goodbye;
-    }
-
-    public void goodbye() {
-        System.out.println(this.goodbye);
-    }
-
-    public void addTask(Task task) {
-        this.record.add(task);
     }
 
     public void addToDo(String record) {
@@ -103,6 +62,16 @@ public class Chatbot implements Chat {
         System.out.println("--------------------------------------------------\n");
     }
 
+    public void delete(int num) {
+        Task task = record.remove(num - 1);
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("Destroyed: ");
+        System.out.println(" " + task);
+        System.out.println("You has " + this.record.size() + " tasks in the list");
+        System.out.println("--------------------------------------------------\n");
+    }
+
     public void setDone(int num) {
         Task task = record.get(num - 1);
 
@@ -111,16 +80,6 @@ public class Chatbot implements Chat {
         System.out.println("--------------------------------------------------");
         System.out.println("Next time do yourself la! No paper meh?");
         System.out.println(task);
-        System.out.println("--------------------------------------------------\n");
-    }
-
-    public void delete(int num) {
-        Task task = record.remove(num - 1);
-
-        System.out.println("--------------------------------------------------");
-        System.out.println("Destroyed: ");
-        System.out.println(" " + task);
-        System.out.println("You has " + this.record.size() + " tasks in the list");
         System.out.println("--------------------------------------------------\n");
     }
 }
