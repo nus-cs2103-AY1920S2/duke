@@ -11,6 +11,10 @@ public class Task {
         this.doneStatus = !this.doneStatus;
     }
 
+    public String save() {
+        return null;
+    }
+
     @Override
     public String toString() {
         String symbol;

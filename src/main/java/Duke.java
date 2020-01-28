@@ -1,21 +1,18 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.PrintStream;
 
 public class Duke {
+    static Scanner sc = new Scanner(System.in);
+    static ArrayList<Task> list = new ArrayList<>();
+    static File file;
+    static BufferedReader br;
+    static FileWriter fw;
+
     public static void main(String[] args) {
         //Greeting message
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Hello, I'm Duke \n"
-                + "How can I help you today?");
-
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
+        printIntro();
+        findFile();
 
         while (true) {
             String input = sc.nextLine();
@@ -49,7 +46,7 @@ public class Duke {
                         if (index == -1) {
                             throw new DukeException("Sorry! Please enter a deadline.");
                         } else {
-                            String by = input.substring(index + 1);
+                            String by = input.substring(index + 4);
                             String name = input.substring(9, index);
                             Task deadline = new Deadline(name, by);
                             addToList(deadline, list);
@@ -63,7 +60,7 @@ public class Duke {
                         if (index == -1) {
                             throw new DukeException("Sorry! Please enter a date and time.");
                         } else {
-                            String by = input.substring(index + 1);
+                            String by = input.substring(index + 4);
                             String name = input.substring(6, index);
                             Task event = new Event(name, by);
                             addToList(event, list);
@@ -84,12 +81,72 @@ public class Duke {
                 } else {
                     throw new DukeException("Sorry! I dont know what that means.");
                 }
-            } catch (DukeException e){
+
+                //Write the list into output
+                writeList();
+
+            } catch (DukeException e) {
+                System.out.println(e);
+            } catch (IOException e) {
                 System.out.println(e);
             }
         }
     }
 
+    static void printIntro() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println(logo);
+        System.out.println("Hello, I'm Duke \n"
+                + "How can I help you today?");
+    }
+
+    static void findFile() {
+        file = new File("./data/duke.txt");
+        try {
+            if (file.exists()) { //file exists
+                br = new BufferedReader(new FileReader(file));
+                String st;
+                while ((st = br.readLine()) != null) {
+                    String[] split = st.split(",");
+                    for (int i = 0; i < split.length; i++) {
+                        String currString = split[i];
+                        split[i] = currString.trim();
+                    }
+                    switch (split[0]) {
+                        case "E":
+                            list.add(new Event(split[2], split[3], split[1]));
+                            break;
+                        case "D":
+                            list.add(new Deadline(split[2], split[3], split[1]));
+                            break;
+                        case "T":
+                            list.add(new ToDos(split[2], split[3]));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            } else { //file doesn't exist
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                file = new File("./data/duke.txt");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    static void writeList() throws IOException {
+        fw = new FileWriter(file);
+        for (Task t : list) {
+            fw.write(t.save() + "\n");
+        }
+        fw.flush();
+    }
 
     public static void addToList(Task task, ArrayList<Task> list) {
         list.add(task);
