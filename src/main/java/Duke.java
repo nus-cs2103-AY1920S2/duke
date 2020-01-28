@@ -36,6 +36,8 @@ public class Duke {
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 uI.displayTasks(tasks);
+            } else if (command.contains("find")) {
+                uI.displayFoundTasks(taskList.findTask(parser.trimCommand(command)));
             } else {
                 switch (parser.checkCommand(command)) {
                     case "done":

@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -30,6 +31,19 @@ public class TaskList {
             return tasks;
         }
     }
+
+    public List<Task> findTask(String keyword) throws DukeInvalidTaskException {
+        List<Task> temp = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.description.contains(keyword)){
+                temp.add(task);
+            }
+        }
+        if(temp.size() == 0) {
+            throw new DukeInvalidTaskException("There are no matching tasks in your list");
+        }
+        return temp;
+        }
 
     public List<Task> addTask(String command) throws DateTimeParseException {
         Task task = null;

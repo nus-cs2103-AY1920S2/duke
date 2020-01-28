@@ -22,6 +22,10 @@ public class Parser {
         return sc.nextLine();
     }
 
+    public String trimCommand(String command) {
+        return command.replace("find", "").trim();
+    }
+
 }
 
 
