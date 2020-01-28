@@ -19,6 +19,9 @@ public class TaskList {
             throw new DukeException("Sorry! Task does not exist!");
         }
         Task task = taskList.get(index);
+        if (task.getIsDone()) {
+            throw new DukeException("Sorry! Task is already marked as done.");
+        }
         task.markAsDone();
         return task;
     }
