@@ -1,9 +1,4 @@
-package akshay;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
 
 public class UI {
     public static String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";

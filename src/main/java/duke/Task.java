@@ -1,4 +1,4 @@
-package akshay;
+package duke;
 
 public class Task {
     protected String description;

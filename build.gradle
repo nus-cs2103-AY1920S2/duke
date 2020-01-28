@@ -18,7 +18,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "akshay.Akshay"
+    mainClassName = "duke.Akshay"
 }
 
 run {
@@ -26,7 +26,7 @@ run {
 }
 
 shadowJar {
-    archiveBaseName = "akshay"
+    archiveBaseName = "duke"
     archiveVersion = "0.1.3"
     archiveClassifier = null
     archiveAppendix = null
