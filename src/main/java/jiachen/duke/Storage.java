@@ -43,8 +43,7 @@ public class Storage {
 
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader(
-                    pathname));
+            reader = new BufferedReader(new FileReader(pathname));
             String line = reader.readLine();
             Task t;
             while (line != null) {
@@ -104,6 +103,5 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

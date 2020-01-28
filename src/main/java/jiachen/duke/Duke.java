@@ -70,9 +70,7 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }
 
-    /**
-     * the Main entry point into the Duke program
-     */
+    /** the Main entry point into the Duke program */
     public void run() {
 
         ui.printHeader();
@@ -200,11 +198,8 @@ public class Duke {
                         break;
                 }
             } catch (DukeException e) {
-                ui.printError(e.toString());
-            }
-        }
-
+        ui.printError(e.toString());
+      }
     }
-
-
+  }
 }
