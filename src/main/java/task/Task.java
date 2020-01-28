@@ -52,6 +52,10 @@ public class Task {
         }
     }
 
+    public boolean contains(String s) {
+        return this.description.contains(s);
+    }
+
     public String format() {
         return "TASK" + " | " + (this.isDone?"1":"0") + " | " + description;
     }

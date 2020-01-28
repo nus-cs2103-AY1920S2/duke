@@ -29,8 +29,8 @@ public class Parser {
             case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
 
-//            case FindCommand.COMMAND_WORD:
-//                return prepareFind(arguments);
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(arguments);
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
@@ -91,6 +91,10 @@ public class Parser {
     private static Command prepareDelete(String arguments) {
         final int targetIndex = Integer.parseInt(arguments);
         return new DeleteCommand(targetIndex);
+    }
+
+    private static Command prepareFind(String arguments) {
+        return new FindCommand(arguments);
     }
 
     /**
