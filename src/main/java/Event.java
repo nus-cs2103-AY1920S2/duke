@@ -1,18 +1,23 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String location;
+    private static String dateTimePattern = "MMM d yyyy HH:mm";
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimePattern);
+    protected LocalDateTime dateTime;
 
-    public Event(String taskTitle, String location) {
+    public Event(String taskTitle, LocalDateTime dateTime) {
         super(taskTitle);
-        this.location = location;
+        this.dateTime = dateTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + location + ")";
+        return "[E]" + super.toString() + " (at: " + dateTimeFormatter.format(dateTime) + ")";
     }
 
-    public String getLocation() {
-        return location;
+    public String getDateTime() {
+        return dateTimeFormatter.format(dateTime);
     }
 }
