@@ -80,13 +80,15 @@ public class Duke {
         FileWriter writer = new FileWriter(file);
         for (Task task : tasks) {
             if (task instanceof Todo) {
-                writer.write("T/" + task.isDone + "/" + task.description + "\n");
+                writer.write("T/" + task.isDone + "/ " + task.description + "\n");
             } else if (task instanceof Deadline) {
-                writer.write("D/" + task.isDone + "/" + task.description + "/" + ((Deadline) task).date + ((Deadline) task).time + "\n");
+                writer.write("D/" + task.isDone + "/ " + task.description + " /by " + ((Deadline) task).date + " " + ((Deadline) task).time + "\n");
             } else if (task instanceof Event) {
-                writer.write("E/" + task.isDone + "/" + task.description + "/" + ((Event) task).date + ((Event) task).time + "\n");
+                writer.write("E/" + task.isDone + "/ " + task.description + " /at " + ((Event) task).date + " " + ((Event) task).time + "\n");
             }
         }
+
+
         writer.close();
     }
 
