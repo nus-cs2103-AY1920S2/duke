@@ -17,7 +17,7 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
 
-        while(!input.hasNext("bye")) {
+        while (!input.hasNext("bye")) {
             String next = input.nextLine();
             System.out.println(line + "     " + next + "\n" + line);
         }
