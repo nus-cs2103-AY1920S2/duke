@@ -35,71 +35,71 @@ public class Parser {
         if (commandList.contains(command[0])) {
             switch (command[0]) {
 
-                case "todo":
-                    if (command.length > 1) {
-                        return tasklist.newTodo('T', false, command[1]);
-                    } else {
-                        return taskNeedsName;
-                    }
+            case "todo":
+                if (command.length > 1) {
+                    return tasklist.newTodo('T', false, command[1]);
+                } else {
+                    return taskNeedsName;
+                }
 
-                case "event":
-                    if (command.length > 2) {
-                        try {
-                            return tasklist.newEvent('E', false, command[1], command[2]);
-                        } catch (DateTimeParseException e) {
-                            return wrongDateTimeFormat;
-                        }
-
-                    } else if (command.length == 2) {
-                        return taskNeedsDateTime;
-                    } else {
-                        return taskNeedsName;
-                    }
-
-                case "deadline":
-                    if (command.length > 2) {
-                        try {
-                            return tasklist.newDeadline('D', false, command[1], command[2]);
-                        } catch (DateTimeParseException e) {
-                            return wrongDateTimeFormat;
-                        }
-                    } else if (command.length == 2) {
-                        return taskNeedsDateTime;
-                    } else {
-                        return taskNeedsName;
-                    }
-
-                case "list":
-                    if (tasklist.getSize() == 0) {
-                        return noTaskInList;
-                    } else {
-                        return displayTaskList + "\n" + tasklist;
-                    }
-
-                case "done":
+            case "event":
+                if (command.length > 2) {
                     try {
-                        int taskID = Integer.parseInt(command[1]);
-                        return tasklist.markDone(taskID);
-                    } catch (IndexOutOfBoundsException e) {
-                        return noTaskFound;
+                        return tasklist.newEvent('E', false, command[1], command[2]);
+                    } catch (DateTimeParseException e) {
+                        return wrongDateTimeFormat;
                     }
 
-                case "delete":
+                } else if (command.length == 2) {
+                    return taskNeedsDateTime;
+                } else {
+                    return taskNeedsName;
+                }
+
+            case "deadline":
+                if (command.length > 2) {
                     try {
-                        int taskID = Integer.parseInt(command[1]);
-                        return tasklist.deleteTask(taskID);
-                    } catch (IndexOutOfBoundsException e) {
-                        return noTaskFound;
+                        return tasklist.newDeadline('D', false, command[1], command[2]);
+                    } catch (DateTimeParseException e) {
+                        return wrongDateTimeFormat;
                     }
+                } else if (command.length == 2) {
+                    return taskNeedsDateTime;
+                } else {
+                    return taskNeedsName;
+                }
 
-                case "save":
-                    Storage.save(tasklist);
-                    return changesSaved;
+            case "list":
+                if (tasklist.getSize() == 0) {
+                    return noTaskInList;
+                } else {
+                    return displayTaskList + "\n" + tasklist;
+                }
 
-                case "exit":
-                    return command[0];
-                default:
-                    return commandNotFound;
+            case "done":
+                try {
+                    int taskID = Integer.parseInt(command[1]);
+                    return tasklist.markDone(taskID);
+                } catch (IndexOutOfBoundsException e) {
+                    return noTaskFound;
+                }
+
+            case "delete":
+                try {
+                    int taskID = Integer.parseInt(command[1]);
+                    return tasklist.deleteTask(taskID);
+                } catch (IndexOutOfBoundsException e) {
+                    return noTaskFound;
+                }
+
+            case "save":
+                Storage.save(tasklist);
+                return changesSaved;
+
+            case "exit":
+                return command[0];
+            default:
+                return commandNotFound;
             }
         } else {
             return commandNotFound;
