@@ -2,22 +2,54 @@ package jiachen.duke;
 
 import java.util.Scanner;
 
+/**
+ * The enum Command.
+ */
 enum Command {
+    /**
+     * Exit command command.
+     */
     EXIT_COMMAND,
+    /**
+     * List command command.
+     */
     LIST_COMMAND,
+    /**
+     * Done command command.
+     */
     DONE_COMMAND,
+    /**
+     * Delete command command.
+     */
     DELETE_COMMAND,
+    /**
+     * Todo command command.
+     */
     TODO_COMMAND,
+    /**
+     * Deadline command command.
+     */
     DEADLINE_COMMAND,
+    /**
+     * Event command command.
+     */
     EVENT_COMMAND
 }
 
+/**
+ * The type Duke.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param filePath the file path
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,10 +61,18 @@ public class Duke {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
 
+    /**
+     * the Main entry point into the Duke program
+     */
     public void run() {
 
         ui.printHeader();

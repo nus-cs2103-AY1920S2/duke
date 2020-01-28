@@ -4,10 +4,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline task represents sa task that has a due date
+ */
 public class DeadlineTask extends Task {
 
     private LocalDateTime by;
 
+    /**
+     * Instantiates a new Deadline task.
+     *
+     * @param description the description
+     * @param deadline    the deadline
+     * @throws InvalidDukeFormatException the invalid duke format exception
+     * @throws DateTimeParseException     the date time parse exception
+     */
     public DeadlineTask(String description, String deadline) throws InvalidDukeFormatException, DateTimeParseException {
         super(description);
 
