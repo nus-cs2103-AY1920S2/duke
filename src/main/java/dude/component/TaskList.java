@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList is a thin wrapper over an ArrayList<Task> to hide implementation details.
+ * TaskList is a thin wrapper over an ArrayList&lt;Task&gt; to hide implementation details.
  * Notably, it provides 1-based indexing to mirror user input.
  */
 public class TaskList {
@@ -43,7 +43,7 @@ public class TaskList {
      *
      * @param index Index of task to be retrieved.
      * @return Task at given index.
-     * @throws IndexOutOfBoundsException If index < 1 or index > taskCount().
+     * @throws IndexOutOfBoundsException If index &lt; 1 or index &gt; taskCount().
      */
     public Task getTask(int index) {
         return this.taskList.get(index - 1);
@@ -55,7 +55,7 @@ public class TaskList {
      *
      * @param index Index of task to be removed.
      * @return the removed task.
-     * @throws IndexOutOfBoundsException If index < 1 or index > taskCount().
+     * @throws IndexOutOfBoundsException If index &lt; 1 or index &gt; taskCount().
      */
     public Task removeTask(int index) {
         return this.taskList.remove(index - 1);
@@ -68,9 +68,9 @@ public class TaskList {
      * methods.
      *
      * @return an array of formatted strings which display each tasks' index and details.
-     * @see dude.task.Todo#toString().
-     * @see dude.task.Deadline#toString().
-     * @see dude.task.Event#toString().
+     * @see dude.task.Todo#toString()
+     * @see dude.task.Deadline#toString()
+     * @see dude.task.Event#toString()
      */
     public String[] showAllTasks() {
         String[] result = new String[taskCount()];

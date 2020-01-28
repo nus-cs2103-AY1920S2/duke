@@ -7,7 +7,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * @param details Description of the task.
+     * @param details description of the task.
      * @param isDone completion status of the task.
      */
     public Task(String details, boolean isDone) {
@@ -39,7 +39,7 @@ public abstract class Task {
     /**
      * Indicates if this Task occurs on the given date.
      *
-     * @param date Date of interest as to whether the Task occurs on that date.
+     * @param date date of interest as to whether the Task occurs on that date.
      * @return true if this Task occurs on the given date, false otherwise.
      */
     public abstract boolean occursOn(LocalDate date);

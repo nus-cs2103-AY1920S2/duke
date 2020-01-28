@@ -9,7 +9,7 @@ public class Event extends Task {
 
     /**
      *
-     * @param details Description of the event.
+     * @param details description of the event.
      * @param eventStart Date which the event starts.
      * @param eventEnd Date which the event ends.
      * @param isDone completion status of the event.
@@ -22,7 +22,7 @@ public class Event extends Task {
 
     /**
      *
-     * @param date Date of interest as to whether the Task occurs on that date.
+     * @param date date of interest as to whether the Task occurs on that date.
      * @return true if date is within the range from eventStart to eventEnd, false otherwise.
      */
     @Override

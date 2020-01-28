@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     /**
      *
-     * @param details Description of the deadline.
+     * @param details description of the deadline.
      * @param dueDate due date of the deadline.
      * @param isDone completion status of the deadline.
      */
@@ -19,7 +19,7 @@ public class Deadline extends Task {
 
     /**
      *
-     * @param date Date of interest as to whether the Task occurs on that date.
+     * @param date date of interest as to whether the Task occurs on that date.
      * @return true if date is exactly the dueDate of this Deadline, false otherwise.
      */
     @Override

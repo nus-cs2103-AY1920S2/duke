@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param ui the IUserInterface to report results of successful commands.
      * @param storage the IStorage from which the current session was loaded and to which the session will
      *  be saved to on an exiting command.
-     * @throws CommandExecutionException If no task exists at that index (index < 1 or index > tasks.taskCount()).
+     * @throws CommandExecutionException If no task exists at that index (index &lt; 1 or index &gt; tasks.taskCount()).
      */
     @Override
     public void execute(TaskList tasks, IUserInterface ui, IStorage storage) throws CommandExecutionException {
