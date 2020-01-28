@@ -101,4 +101,48 @@ public class DukeTest {
             + "    ____________________________________________________________\n";
     assertEquals(expected, actual);
   }
+
+    @Test
+    public void testFind() {
+        Duke duke = new Duke();
+        String actual =
+                duke.run(
+                        "todo study 24 hours\ndeadline get six packs /by 2020-08-01 09:00\nevent holidaysss /at 2020-05-01 20:00 to 2020-08-01 20:00\ndone 1\nlist\nfind 01 Aug. 2020",
+                        true);
+        String expected =
+                "    ____________________________________________________________\n"
+                        + "    Got it. I've added this task:\n"
+                        + "    [T][✕] study 24 hours\n"
+                        + "    Now you have 1 tasks in the list.\n"
+                        + "    ____________________________________________________________\n"
+                        + "    ____________________________________________________________\n"
+                        + "    Got it. I've added this task:\n"
+                        + "    [D][✕] get six packs (by: 01 Aug. 2020 09:00am)\n"
+                        + "    Now you have 2 tasks in the list.\n"
+                        + "    ____________________________________________________________\n"
+                        + "    ____________________________________________________________\n"
+                        + "    Got it. I've added this task:\n"
+                        + "    [E][✕] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2020 20:00pm)\n"
+                        + "    Now you have 3 tasks in the list.\n"
+                        + "    ____________________________________________________________\n"
+                        + "    ____________________________________________________________\n"
+                        + "    Nice! I've marked this task as done:\n"
+                        + "    [T][✓] study 24 hours\n"
+                        + "    ____________________________________________________________\n"
+                        + "    ____________________________________________________________\n"
+                        + "    Here are the tasks in your list:\n"
+                        + "    1.[T][✓] study 24 hours\n"
+                        + "    2.[D][✕] get six packs (by: 01 Aug. 2020 09:00am)\n"
+                        + "    3.[E][✕] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2020 20:00pm)\n"
+                        + "    ____________________________________________________________\n"
+                        + "    ____________________________________________________________\n"
+                        + "    Here are the matching tasks in your list:\n"
+                        + "    1.[D][✕] get six packs (by: 01 Aug. 2020 09:00am)\n"
+                        + "    2.[E][✕] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2020 20:00pm)\n"
+                        + "    ____________________________________________________________\n"
+                        + "    ____________________________________________________________\n"
+                        + "    Bye. Hope to see you again soon!\n"
+                        + "    ____________________________________________________________\n";
+        assertEquals(expected, actual);
+    }
 }
