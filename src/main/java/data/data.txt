@@ -1,3 +1,4 @@
-D | ✓ | task1 | 2019-01-28T12:00
-D | ✓ | task2 | 2019-01-28T13:00
-T | ✘ | task3
+T | ✓ | task1
+D | ✘ | task3 | 2019-01-28T14:00
+T | ✘ | task2
+E | ✘ | task4 | My House
