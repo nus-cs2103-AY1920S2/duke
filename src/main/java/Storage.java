@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Handles saving and loading of task list data into hard drive.
- */
 public class Storage {
     private String listPath;
     private String arrayPath;
@@ -19,12 +16,6 @@ public class Storage {
         this.ui = new Ui();
     }
 
-    /**
-     * Writes to respective list and array files to store the updated data in the hard disk.
-     *
-     * @param taskList Updated task list based on user commands
-     * @throws IOException If error is encountered in FileWriter
-     */
     public void save(ArrayList<Task> taskList) throws IOException { // saves to both duke.txt and array.txt
         // save mainList array
         FileWriter af = new FileWriter(arrayPath);
@@ -72,11 +63,6 @@ public class Storage {
         fw.close();
     }
 
-    /**
-     * Loads task list as an ArrayList
-     * @return ArrayList of Tasks based on stored data
-     * @throws FileNotFoundException If array file not found on hard disk
-     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(arrayPath);
         Scanner s = new Scanner(f);
@@ -115,11 +101,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Loads task list as a String
-     * @return String representing indexed task list
-     * @throws FileNotFoundException If list file not found in hard disk
-     */
     public String loadList() throws FileNotFoundException {
         File f = new File(listPath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source

@@ -1,2 +1,0 @@
-deadline|1|return book|2020-01-29|1200
-event|0|party|2020-01-28|2300

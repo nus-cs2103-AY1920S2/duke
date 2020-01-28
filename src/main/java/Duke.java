@@ -1,23 +1,13 @@
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
-/**
- * Represents main body for Duke to run
- */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * Constructor for Duke
-     *
-     * @param listPath Relative file path for where the task list is stored
-     * @param arrayPath Relative file path for where the task array is stored
-     */
     public Duke(String listPath, String arrayPath) {
         ui = new Ui();
         storage = new Storage(listPath, arrayPath);
@@ -29,9 +19,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Sets up and runs Duke to begin accepting user commands. Send 'bye' to close the program.
-     */
     public void run() {
         ui.showWelcome();
         Scanner scanner = new Scanner(System.in);
@@ -60,15 +47,6 @@ public class Duke {
                         tasks.deleteTask(taskIndex);
                         ui.showDeleteTask(selected, tasks.getTaskList());
                         storage.save(tasks.getTaskList());
-
-                    } else if (command.equals("find")) {
-                        String search = "";
-                        for (int i = 1; i < inputArr.length; i++) {
-                            search += inputArr[i];
-                            search += (i == inputArr.length - 1) ? "" : " ";
-                        }
-                        ArrayList<Task> foundTasks = tasks.findTask(search);
-                        ui.showFoundTasks(foundTasks);
 
                     } else {
                         if (command.equals("todo")) {

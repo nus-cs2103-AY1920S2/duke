@@ -2,10 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-/**
- * Represents a <code>Deadline</code>, which is a subclass of a <code>Task</code>. A <code>Deadline</code> includes
- * a byDate which represents the due date of the respective <code>Deadline</code>.
- */
 public class Deadline extends Task {
     LocalDate byDate;
     String time24Hr;
@@ -23,12 +19,6 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
-    /**
-     * Returns a string representing time in 12-hour format eg. 11.59pm
-     *
-     * @param timeString String representing time in 24-hour format eg. 2359
-     * @return Time in 12-hour format
-     */
     public String formatTime12Hour(String timeString) {
         int time = Integer.parseInt(timeString);
         boolean isAM = time < 1200;
@@ -45,7 +35,6 @@ public class Deadline extends Task {
     public String toString() {
         String checkbox = "[" + super.getStatusIcon() + "]";
         String dateFormat =  byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + checkbox + " " + super.toString()
-                + " (by: " + dateFormat + ", " + formatTime12Hour(time24Hr) + ")";
+        return "[D]" + checkbox + " " + super.toString() + " (by: " + dateFormat + ", " + formatTime12Hour(time24Hr) + ")";
     }
 }
