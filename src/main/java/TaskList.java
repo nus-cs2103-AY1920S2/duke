@@ -88,4 +88,19 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return listOfTasks;
     }
+
+    public TaskList getMatches(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            String descSplit[] = listOfTasks.get(i).getDescription().split(" ");
+            for (int j = 0; j < descSplit.length; j++) {
+                if (descSplit[j].equals(keyword)) {
+                    matchingTasks.add(listOfTasks.get(i));
+                    break;
+                }
+            }
+        }
+        TaskList tasks = new TaskList(matchingTasks);
+        return tasks;
+    }
 }

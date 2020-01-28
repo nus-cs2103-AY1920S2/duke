@@ -102,4 +102,13 @@ public class Ui {
             System.out.printf("Now you have %d tasks in the list.\n", listOfTasks.getNumOfTasks());
         }
     }
+
+    public void printOutFound(TaskList listOfTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int i = 1;
+        for(Task task : listOfTasks.getTaskList()) {
+            System.out.printf("%d.%s\n", i, task);
+            i++;
+        }
+    }
 }
