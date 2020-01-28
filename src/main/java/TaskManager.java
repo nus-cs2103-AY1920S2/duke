@@ -118,7 +118,7 @@ public class TaskManager {
     public void listAllTasks(){
         System.out.println("Here are your tasks in your list: ");
         for(int j = 0 ; j < this.listOfTasks.size() ; j++){
-            System.out.println(j+1 +  ". " + this.listOfTasks.get(j).toString());
+            System.out.println("  " + (j + 1) +  ". " + this.listOfTasks.get(j).toString());
         }
     }
 
