@@ -15,7 +15,9 @@ public class TaskList {
         return aList.size();
     }
 
-    //prints task in the list
+    /**
+     * Prints task in the list
+     */
     public void printList() {
         Task t;
         System.out.println("Here are the tasks in your list:");
@@ -26,7 +28,11 @@ public class TaskList {
         System.out.println();
     }
 
-    //for delete and done task
+    /**
+     * Actions to be done for delete & done tasks
+     * @param rank task number in the list
+     * @param dd string indicating delete or done action
+     */
     public void deleteDone(int rank, String dd) {
         Action action = new Action(rank, aList);
 
@@ -44,7 +50,11 @@ public class TaskList {
         }
     }
 
-    //call to actions for different task type
+    /**
+     * Call to action for the different task type
+     * @param taskType string indicating task type
+     * @param statement task description
+     */
     public void add(String taskType, String statement) {
         Task t;
         statement = statement.substring(statement.indexOf(" "));
@@ -61,6 +71,11 @@ public class TaskList {
         printAdded(t, aList); //print msg task added
     }
 
+    /**
+     * Actions to be executed if delete is called
+     * @param rank task nummber in the list
+     * @param tempList task list
+     */
     public void deleteAction(int rank, ArrayList<Task> tempList) {
         Delete delete = new Delete(rank, tempList);
         String deleteAction = delete.printAction();
@@ -70,6 +85,11 @@ public class TaskList {
         System.out.println("");
     }
 
+    /**
+     * Actions to be executed if done is called
+     * @param rank task nummber in the list
+     * @param tempList task list
+     */
     public void doneAction(int rank, ArrayList<Task> tempList) {
         Done done = new Done(rank, tempList);
         System.out.println(done.markDone());
@@ -78,6 +98,11 @@ public class TaskList {
         System.out.println("");
     }
 
+    /**
+     * Print statements when a new task is added
+     * @param t the specific task in the list
+     * @param tempList task list
+     */
     public void printAdded(Task t, ArrayList<Task> tempList) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.getTask());

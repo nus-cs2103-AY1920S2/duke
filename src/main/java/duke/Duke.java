@@ -20,6 +20,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the app by reading user commands and writing to file to save changes
+     * 
+     */
     public void run() {
         ui.input(tasks);
         try {

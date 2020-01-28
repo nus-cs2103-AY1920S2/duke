@@ -11,6 +11,11 @@ public class Action {
         this.arrList = arrList;
     }
 
+    /**
+     * To check if the task number exist in the list.
+     *
+     * @return 0 if it does not exist, and 1 otherwise.
+     */
     public int checkNum() {
         if (num > arrList.size() || num == 0) {
             return 0;
@@ -20,6 +25,11 @@ public class Action {
         }
     }
 
+    /**
+     * Prints the task statement in the list
+     *
+     * @return task statement
+     */
     public String printAction() {
         return "  [" +arrList.get(num-1).getType()+ "][" + arrList.get(num-1).getStatusIcon() + "]" + arrList.get(num-1).getTask();
     }
