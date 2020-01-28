@@ -3,6 +3,10 @@ package duke.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @version 1.0
+ * @since 2020-01-28
+ */
 public class Deadline extends Task {
 
     public Deadline(LocalDateTime dateTime, String taskDescription) {
@@ -11,6 +15,10 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Constructs a string representation of task
+     * @return string representation of task
+     */
     @Override
     public String toString() {
 
@@ -24,6 +32,10 @@ public class Deadline extends Task {
                 + "(by:" + date + ")";
     }
 
+    /**
+     * Gets the type of the task
+     * @return type of task
+     */
     @Override
     public Types getType() {
 

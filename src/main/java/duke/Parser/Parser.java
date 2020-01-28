@@ -5,6 +5,10 @@ import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @version 1.0
+ * @since 2020-01-28
+ */
 public class Parser {
 
     String[] commandArr;
@@ -15,6 +19,12 @@ public class Parser {
 
     }
 
+    /**
+     * Parses user input
+     * @param input
+     * @return string array consisting of the parsed input
+     * @throws Exception
+     */
     public String[] parseUserInput(String input) throws Exception{
 
         String[] outputArr = new String[3];
@@ -95,6 +105,12 @@ public class Parser {
         return outputArr;
     }
 
+    /**
+     * Parses date and time of the task
+     * @param dateTime
+     * @return parsed date and time in form of LocalDateTime object
+     * @throws InvalidDateError
+     */
     public LocalDateTime parseDateTime(String dateTime) throws InvalidDateError {
 
           try {

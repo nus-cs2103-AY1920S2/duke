@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * @ version 1.0
+ * @ since 2020-01-28
+ */
 public class TaskList {
 
     ArrayList<Task> taskList;
@@ -17,13 +21,19 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds file storage to TaskList
+     * @param storage
+     */
     public void addStorage(Storage storage) {
 
         this.storage = storage;
 
     }
 
-
+    /**
+     * Prints all the tasks in taskList
+     */
     public void list() {
 
         String start = "\nHere are the tasks in your list:";
@@ -35,6 +45,14 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds task into taskList and calls method to update file storage
+     * @param taskDescription
+     * @param date
+     * @param type
+     * @return Task added to taskList and Storage
+     * @throws IOException
+     */
     public Task addTask(String taskDescription, LocalDateTime date, Task.Types type) throws IOException {
 
         System.out.println("Got it. I've added this task:");
@@ -64,7 +82,15 @@ public class TaskList {
         return task;
     }
 
-
+    /**
+     * Adds tasks from file storage to taskList
+     * @param taskDescription
+     * @param date
+     * @param type
+     * @param status
+     * @return Task added to taskList
+     * @throws IOException
+     */
     public Task addTask(String taskDescription, LocalDateTime date, Task.Types type, Task.status status) throws IOException {
 
         Task task = null;
@@ -97,6 +123,12 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Deletes task from taskList and calls method to update file storage
+     * @param index
+     * @return Task deleted from taskList and Storage
+     * @throws IOException
+     */
     public Task deleteTask(int index) throws IOException {
 
         Task task = taskList.remove(index - 1);
@@ -106,24 +138,43 @@ public class TaskList {
 
     }
 
+    /**
+     * Prints out total number of tasks in taskList
+     * @return String
+     */
     public String reportTotal() {
 
         return "Now you have " + taskList.size() + " tasks in the list";
 
     }
 
+    /**
+     * Gets tasks from taskList specified at index
+     * @param index
+     * @return Task at index
+     */
     public Task getTask(int index) {
 
         return taskList.get(index - 1);
 
     }
 
+    /**
+     * Gets taskList
+     * @return taskList
+     */
     public ArrayList getList() {
 
         return taskList;
 
     }
 
+    /**
+     * Marks a task as done and calls method to update file storage
+     * @param task
+     * @return Task that is marked done
+     * @throws IOException
+     */
     public Task markDone(Task task) throws IOException {
 
         task.changeStatus(Task.status.Y);
@@ -133,9 +184,6 @@ public class TaskList {
         return task;
 
     }
-
-
-
 
 }
 

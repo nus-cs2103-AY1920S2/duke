@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * @version 1.0
+ * @since 2020-01-28
+ */
 public class Storage {
 
     String path;
@@ -21,12 +25,19 @@ public class Storage {
 
     }
 
+    /**
+     * Adds TaskList to file storage
+     * @param manager
+     */
     public void addManager(TaskList manager) {
 
         this.manager = manager;
 
     }
 
+    /**
+     * Interprets content of file and calls method to add it into taskList
+     */
     public void loadFile() {
 
         try {
@@ -95,7 +106,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Updates file with respect to the operations performed to taskList
+     * @param operation
+     * @throws IOException
+     */
     public void updateFile(String operation) throws IOException {
 
         ArrayList<Task> taskList = manager.getList();
@@ -113,6 +128,11 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Generates the input to file for each Task
+     * @param task
+     * @return input generated for file
+     */
     public String generateInput(Task task) {
 
         String type = task.getType().toString();

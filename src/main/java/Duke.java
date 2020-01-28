@@ -1,17 +1,17 @@
 import duke.Storage.Storage;
 import duke.TaskList.TaskList;
 import duke.Ui.Ui;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
+/**
+ * @version 1.0
+ * @since 2020-01-28
+ */
 public class Duke {
 
+    /**
+     * Main class
+     * @param args
+     */
     public static void main(String[] args) {
 
         TaskList manager = new TaskList();
@@ -22,7 +22,6 @@ public class Duke {
         storage.loadFile();
         Ui ui = new Ui(manager);
         ui.frontDesk();
-
 
     }
 
