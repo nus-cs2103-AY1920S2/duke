@@ -11,11 +11,9 @@ public class Add extends Command {
         tasks.list.add(ob);
         String k = ob.toString();
         if (saved == 0) {
-            ui.showLine();
             ui.printString("Got it. I've added this task:\n  "
                             + k + "\nNow you have " + tasks.list.size()
                             + " tasks in the list.");
-            ui.showLine();
         }
     }
 

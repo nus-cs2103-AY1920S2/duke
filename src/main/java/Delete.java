@@ -14,12 +14,10 @@ public class Delete extends Command {
      * @param storage Object of type Storage.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
         int num = Integer.valueOf(str);
         ui.printString("Noted. I've removed this task:");
         ui.printTask(num,tasks);
         ui.printString("Now you have " + (tasks.getList().size() - 1) + " tasks in the list.");
-        ui.showLine();
         tasks.list.remove(num - 1);
     }
 

@@ -50,6 +50,8 @@ public class Parser {
             return new ListCommand();
         case "bye":
             return new Exit();
+        case "find":
+            return new Find(sentence.substring(locOfSpace + 1));
         case "deadline":
             if (sentence.equals("deadline")) {
                 DukeException ex = new DukeException(":( OOPS!!! "

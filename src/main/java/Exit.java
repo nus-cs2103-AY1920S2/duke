@@ -14,9 +14,7 @@ public class Exit extends Command {
      * @throws IOException Throws IOException.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        ui.showLine();
         ui.printString("Bye. Hope to see you again soon!");
-        ui.showLine();
         storage.save(tasks);
     }
 
