@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class Parser {
-    private static HashMap<String, Keyword> validKeywords = new HashMap<>() {
+    private static HashMap<String, Keyword> VALID_KEYWORDS = new HashMap<>() {
         {
             put("list", Keyword.LIST);
             put("done", Keyword.DONE);
@@ -85,7 +85,7 @@ public class Parser {
      */
 
     private static Optional<Keyword> getOptionalKeyword(String commandString) {
-        return Optional.ofNullable(validKeywords.get(commandString));
+        return Optional.ofNullable(VALID_KEYWORDS.get(commandString));
     }
 
     /**
@@ -182,18 +182,18 @@ public class Parser {
     private AddCommand checkValidDeadlineArgument(String details) throws DukeInvalidArgumentFormatException,
             DukeInvalidDateFormatException {
         String caption;
-        String by_schedule;
+        String bySchedule;
         String[] detailsWithSchedule = details.split(" /by ");
         try {
             caption = detailsWithSchedule[0];
-            by_schedule = detailsWithSchedule[1];
+            bySchedule = detailsWithSchedule[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
                     "The argument for 'deadline' " +
                     "command requires a description and a due date.");
         }
 
-        return new AddCommand(new Deadline(caption, by_schedule));
+        return new AddCommand(new Deadline(caption, bySchedule));
     }
 
     /**
@@ -208,17 +208,17 @@ public class Parser {
     private AddCommand checkValidEventArgument(String details) throws DukeInvalidArgumentFormatException,
             DukeInvalidDateFormatException {
         String caption;
-        String bySchedule;
+        String atSchedule;
         String[] detailsWithSchedule = details.split(" /at ");
         try {
             caption = detailsWithSchedule[0];
-            bySchedule = detailsWithSchedule[1];
+            atSchedule = detailsWithSchedule[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
                     "The argument for 'event' " +
                     "command requires a description and an event date.");
         }
 
-        return new AddCommand(new Event(caption, bySchedule));
+        return new AddCommand(new Event(caption, atSchedule));
     }
 }

@@ -25,8 +25,8 @@ import java.time.format.DateTimeParseException;
 
 public class TaskSchedule {
     private LocalDateTime date;
-    private static final String inputDateFormat = "dd-MM-yyyy HH:mm";
-    private static final String outputDateFormat = "dd-MM-yyyy HH:mm";
+    private static final String INPUT_DATE_FORMAT = "dd-MM-yyyy HH:mm";
+    private static final String OUTPUT_DATE_FORMAT = "dd-MM-yyyy HH:mm";
 
     /**
      * Constructs a TaskSchedule instance.
@@ -47,7 +47,7 @@ public class TaskSchedule {
 
     public static TaskSchedule parseSchedule(String scheduleString) throws DukeInvalidDateFormatException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(inputDateFormat);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
             LocalDateTime date = LocalDateTime.parse(scheduleString, formatter);
             return new TaskSchedule(date);
         } catch (DateTimeParseException e) {
@@ -67,12 +67,12 @@ public class TaskSchedule {
 
     /**
      * Overrides the toString method to print
-     * the formatted date using DateTimeformatter instance.
+     * the formatted date using DateTimeFormatter instance.
      * @return The formatted String representing the date
      */
 
     @Override
     public String toString() {
-        return this.date.format(DateTimeFormatter.ofPattern(outputDateFormat));
+        return this.date.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT));
     }
 }
