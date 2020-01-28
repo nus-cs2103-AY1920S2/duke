@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
   String by;
-  String i;
+  String strDoneStatus;
   LocalDate date;
 
   /**
@@ -27,11 +27,11 @@ public class Event extends Task {
    * @param by Date of the event.
    * @param i Defines the done status of the event. Reads either 1 (complete) or 0 (incomplete).
    */
-  public Event(String event, String by, String i) {
+  public Event(String event, String by, String strDoneStatus) {
     super(event);
-    this.i = i;
+    this.strDoneStatus = strDoneStatus;
     this.by = by;
-    if (i.equals("1")) {
+    if (strDoneStatus.equals("1")) {
       this.doneStatus = true;
     } else {
       this.doneStatus = false;

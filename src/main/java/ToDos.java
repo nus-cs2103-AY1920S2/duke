@@ -1,6 +1,6 @@
 /** ToDos is a subclass of Task. Represents tasks that have to be done. */
 public class ToDos extends Task {
-  String i;
+  String strDoneStatus;
 
   /**
    * Constructor that takes in 1 param.
@@ -17,9 +17,9 @@ public class ToDos extends Task {
    * @param todo Name of the task.
    * @param i Defines the done status of the task. Reads either 1 (complete) or 0 (incomplete).
    */
-  public ToDos(String todo, String i) {
+  public ToDos(String todo, String strDoneStatus) {
     super(todo);
-    if (i.equals("1")) {
+    if (strDoneStatus.equals("1")) {
       this.doneStatus = true;
     } else {
       this.doneStatus = false;
