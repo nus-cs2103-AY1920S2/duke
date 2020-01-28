@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
     /** The main method is where the chat-bot is created and executed. */
@@ -6,7 +8,8 @@ public class Duke {
         displayLogo();
         greet();
 
-        Storage storage = new Storage("src/main/java/save.txt");
+        Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "java", "save.txt");
+        Storage storage = new Storage(path.toString());
         boolean fileOpen = false;
 
         TaskList taskList;
