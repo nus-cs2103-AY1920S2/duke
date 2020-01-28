@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Hello
+
 public class Duke {
     public static void main(String[] args) throws IOException {
         File database = new File("./src/main/java/database.txt");
