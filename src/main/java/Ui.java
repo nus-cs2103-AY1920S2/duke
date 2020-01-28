@@ -114,4 +114,22 @@ public class Ui {
         System.out.format("\tYou now have %d %s in the list.%n%n",
                 taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks");
     }
+
+    /**
+     * Shows all tasks from specified tasks list as found task matching some search term.
+     * 
+     * @param tasks List of tasks containing tasks matching some search term.
+     */
+    public void showFound(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println("\tNo matching tasks found.");
+        } else {
+            System.out.println("\tThese are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.format("\t%d.%s%n", i + 1, tasks.get(i));
+            }
+        }
+
+        System.out.println();
+    }
 }

@@ -91,4 +91,22 @@ public class TaskList {
 
         this.tasks.remove(taskNum - 1);
     }
+
+    /**
+     * Finds tasks in the tasks list whose description contain the specified search term. 
+     * 
+     * @param searchTerm Keyword to be searched for.
+     * @return List of tasks whose description contain the specified search term.
+     */
+    public ArrayList<Task> findTasks(String searchTerm) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        
+        for (Task task : this.tasks) {
+            if (task.getDescription().contains(searchTerm)) {
+                matchedTasks.add(task);
+            }
+        }
+        
+        return matchedTasks;
+    }
 }

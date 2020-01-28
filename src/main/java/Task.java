@@ -25,6 +25,15 @@ public class Task {
     }
 
     /**
+     * Gets the description of the task.
+     * 
+     * @return Task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+    
+    /**
      * Marks the task as being done.
      */
     public void markAsDone() {

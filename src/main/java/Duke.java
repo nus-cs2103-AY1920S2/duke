@@ -71,6 +71,10 @@ public class Duke {
                 case DELETE:
                     deleteTaskAndShow(tasks, ui, Integer.parseInt(instruction.getParameters()));
                     break;
+                case FIND:
+                    ui.showFound(tasks.findTasks(instruction.getParameters()));
+                default:
+                    ;
                 }
             } catch (InvalidInstructionException e) {
                 System.out.format("\tError: %s. Please try again.%n%n", e.getMessage());

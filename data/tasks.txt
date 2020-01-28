@@ -1,4 +1,5 @@
-T|1|sldfj
-D|0|sldfj ljksdf|2020-03-04
-T|0|sldfj lasdjf
-E|1|asdf|2020-03-04
+T|0|sldjf
+E|0|book store|2019-02-03
+D|0|book|2019-03-04
+T|0|book
+E|0|flsdjf|2039-04-03

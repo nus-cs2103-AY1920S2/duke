@@ -30,6 +30,8 @@ public class Parser {
         } else if (this.command == Command.DEADLINE || this.command == Command.EVENT) {
             this.parameters = extractDescription(instruction);
             this.date = extractDate(instruction);
+        } else if (this.command == Command.FIND) {
+            this.parameters = extractFirstParam(instruction);
         }
     }
 
@@ -43,7 +45,7 @@ public class Parser {
     }
 
     /**
-     * Gets the parameters from the instruction [after command, before time flag (if any)] 
+     * Gets the parameters from the instruction [after command, before time flag (if any)].
      * 
      * @return Instruction parameters.
      */
@@ -77,6 +79,8 @@ public class Parser {
             return Command.LIST;
         case "delete":
             return Command.DELETE;
+        case "find":
+            return Command.FIND;
         default:
             throw new InvalidInstructionException(
                     String.format("Command \"%s\" is not recognized", command));
