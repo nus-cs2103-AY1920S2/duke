@@ -1,6 +1,7 @@
-
 import java.io.*;
 import java.util.Scanner;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -10,18 +11,16 @@ public class Duke {
     public static void main(String[] args) {
 
         try {
-            loadFile(); // populate with existing tasks first
-            // the storing convention is: there will be a 2nd slash followed immediately by a letter
-            // eg. deadline borrow book /by sunday/y
-            // the letter indicates whether or not the task is done!
-            //n stands for not done! y stands for yes, done
+            loadFile(); // load the file first
         }
         catch (FileNotFoundException exception) {
             System.out.println("File not found!");
         }
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        processRequests();
+
+        processRequests(); // process all user requests
+
         updateFile(); //then need to write back the new list to the file
 
         System.out.println("Bye. Hope to see you again soon!");
@@ -44,30 +43,30 @@ public class Duke {
             }
             else {
                 String[] time_split = user_input.split("/"); // the 2nd half contains the deadline
-                if (splitstr[0].toLowerCase().equals("todo")) {
+                if (splitstr[0].toLowerCase().equals("todo")) { // TODO =================================
                     try {
-                        addTodo(user_input, time_split, splitstr);
+                        if (splitstr.length == 1) { // let me catch the exception in addTodo()
+                            addTodo("");
+                        }
+                        else {
+                            String description = user_input.substring(5); // something something
+                            addTodo(description);
+                        }
                     }
                     catch (DukeException exception) {
                         System.out.println(exception);
                     }
-                }
-                else if (splitstr[0].toLowerCase().equals("deadline")) {
-                    try {
-                        addDeadline(user_input, time_split, splitstr);
-                    }
-                    catch (DukeException exception) {
-                        System.out.println(exception);
-                    }
-                }
-                else if (splitstr[0].toLowerCase().equals("event")) {
-                    try {
-                        addEvent(user_input, time_split, splitstr);
-                    }
-                    catch (DukeException exception) {
-                        System.out.println(exception);
-                    }
-                }
+                } // END OF TODO ========================================================================
+                else if (splitstr[0].toLowerCase().equals("deadline")) { // DEADLINE ====================
+                    String description = user_input.substring(9, user_input.indexOf("/"));
+                    String deadline = user_input.split("by ")[1];
+                    addDeadline(description, deadline);
+                } // END OF DEADLINE ====================================================================
+                else if (splitstr[0].toLowerCase().equals("event")) { // EVENT ==========================
+                    String description = user_input.substring(6, user_input.indexOf("/"));
+                    String deadline = user_input.split("at ")[1];
+                    addEvent(description, deadline);
+                } // END OF EVENT =======================================================================
                 else {
                     System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -78,51 +77,46 @@ public class Duke {
     }
 
     // takes in a Task[] array and loads the array with stuff
-    // in this method, remember to update the counter
+    // cleaned up the loadfile method
     public static void loadFile() throws FileNotFoundException {
         File file = new File("./src/main/java/duke.txt"); // not sure if the pathname is correct
         Scanner sc = new Scanner(file);
 
-        int task_number = 0; // this will be the counter
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
 
-            String task_type = task.split(" ")[0]; // todo, deadline, or event
-            //String deadline = task.split("/")[1]; // the 2nd half contains the deadline
-            if (task_type.toLowerCase().equals("todo")) {
+            // we extract out the class type, completion status, task description and deadline
+            String task_type = task.substring(0, 3); // this prints out [D], [T], or [E]
+            String completion_status = task.substring(3, 6); // this prints out [✓] or [✘]
 
-                //addTodo(task, task.split("/"), task.split(" "));
-                String task_description = task.replace(task_type, "");
-                String raw_task_input = task.replace("/" + task.split("/")[1], "");
-
-                tasks[counter] = new Todo(task_description.split("/")[0], "[T]", raw_task_input); // no deadline for todo
-                if (task.split("/")[1].equals("y")) {
+            if (task_type.equals("[T]")) { // it's a todo
+                String description = task.substring(8, task.length());
+                tasks[counter] = new Todo(description, "[T]");
+                if (completion_status.equals("[\u2713]")) {
                     tasks[counter].updateisDone(true);
                 }
                 counter++;
             }
-            else if (task_type.toLowerCase().equals("deadline")) {
-                String[] time_split = task.split("/"); // the 2nd half contains the deadline
+            else if (task_type.equals("[D]")) { // it's a deadline
+                String task_description = task.substring(8, task.indexOf("("));
 
-                String task_description = time_split[0].replace(task_type, "");
-                String deadline = time_split[1].replace("by ","");
-                String raw_task_input = task.replace("/" + task.split("/")[2], "");
+                String[] split_str = task.split("by:");
+                String deadline = split_str[1].replace(")", ""); // this is the deadline which you should be doing date recognition
 
-                tasks[counter] = new Deadline(task_description, "[D]", deadline, raw_task_input);
-                if (task.split("/")[2].equals("y")) {
+                tasks[counter] = new Deadline(task_description, "[D]", deadline);
+                if (completion_status.equals("[\u2713]")) {
                     tasks[counter].updateisDone(true);
                 }
                 counter++;
             }
-            else {
-                String[] time_split = task.split("/"); // the 2nd half contains the deadline
+            else { // it's an event already
+                String task_description = task.substring(8, task.indexOf("("));
 
-                String task_description = time_split[0].replace(task_type, "");
-                String deadline = time_split[1].replace("at ","");
-                String raw_task_input = task.replace("/" + task.split("/")[2], "");
+                String[] split_str = task.split("at:");
+                String deadline = split_str[1].replace(")", ""); // this is the deadline which you should be doing date recognition
 
-                tasks[counter] = new Event(task_description, "[E]", deadline, raw_task_input);
-                if (task.split("/")[2].equals("y")) {
+                tasks[counter] = new Event(task_description, "[E]", deadline);
+                if (completion_status.equals("[\u2713]")) {
                     tasks[counter].updateisDone(true);
                 }
                 counter++;
@@ -130,74 +124,145 @@ public class Duke {
         }
     }
 
-    public static void addTodo(String user_input, String[] time_split, String[] splitstr) throws DukeException {
-        if (splitstr.length == 1) {
+    public static void addTodo(String description) throws DukeException {
+        if (description.equals("")) {
             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
         }
-        String task_description = user_input.replace(splitstr[0], "");
-
-        tasks[counter] = new Todo(task_description, "[T]", user_input); // no deadline
-        Task current_task = tasks[counter]; // we just use this for reference
+        tasks[counter] = new Todo(description, "[T]");
+        Task current_task = tasks[counter];
         counter++;
+
         System.out.println("Got it. I've added this task:");
         System.out.println(current_task.getTaskType() + current_task.getCompletionStatus()
                 + current_task.getDescription());
         System.out.println("Now you have " + Integer.toString(counter) + " tasks in the list.");
     }
 
-    public static void addDeadline(String user_input, String[] time_split, String[] splitstr) throws DukeException {
-        if (splitstr.length == 1) {
-            throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
-        }
-        if (time_split.length == 1) {
-            throw new DukeException("\u2639 OOPS!!! The by: field of a deadline cannot be empty.");
-        }
-        String task_description = time_split[0].replace(splitstr[0], "");
-        String deadline = time_split[1].replace("by ","");
+    public static void addDeadline(String description, String deadline) {
 
-        tasks[counter] = new Deadline(task_description, "[D]", deadline, user_input);
+        tasks[counter] = new Deadline(description, "[D]", deadline);
         Task current_task = tasks[counter];
         counter++;
         System.out.println("Got it. I've added this task:");
-        System.out.println(current_task.getTaskType() + current_task.getCompletionStatus()
-                + current_task.getDescription() + " (by: " + deadline + ")");
-        //print something else here
+
+        String[] deadline_split = deadline.split("-");
+        if (deadline_split.length == 3) {
+            //LocalDate date = resolveDeadline(deadline);
+            System.out.print(current_task.getTaskType() + current_task.getCompletionStatus()
+                    + " " + current_task.getDescription() + " (by: ");
+            printDeadline(deadline);
+        }
+        else {
+            System.out.println(current_task.getTaskType() + current_task.getCompletionStatus()
+                    + current_task.getDescription() + " (by: " + deadline + ")");
+        }
+
         System.out.println("Now you have " + Integer.toString(counter) + " tasks in the list.");
     }
 
-    public static void addEvent(String user_input, String[] time_split, String[] splitstr) throws DukeException {
-        if (splitstr.length == 1) {
-            throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
-        }
-        if (time_split.length == 1) {
-            throw new DukeException("\u2639 OOPS!!! The at: field of an event cannot be empty.");
-        }
-        String task_description = time_split[0].replace(splitstr[0], "");
-        String deadline = time_split[1].replace("at ","");
+    public static void addEvent(String description, String deadline) {
 
-        tasks[counter] = new Event(task_description, "[E]", deadline, user_input);
+        tasks[counter] = new Event(description, "[E]", deadline);
         Task current_task = tasks[counter];
         counter++;
         System.out.println("Got it. I've added this task:");
-        System.out.println(current_task.getTaskType() + current_task.getCompletionStatus()
-                + current_task.getDescription() + " (at: " + deadline + ")");
+
+        String[] deadline_split = deadline.split("-");
+        if (deadline_split.length == 3) {
+            //LocalDate date = resolveDeadline(deadline);
+            System.out.print(current_task.getTaskType() + current_task.getCompletionStatus()
+                    + " " + current_task.getDescription() + " (at: ");
+            printDeadline(deadline);
+        }
+        else {
+            System.out.println(current_task.getTaskType() + current_task.getCompletionStatus()
+                    + current_task.getDescription() + " (at: " + deadline + ")");
+        }
         // print something else here
         System.out.println("Now you have " + Integer.toString(counter) + " tasks in the list.");
+    }
+
+    // this method takes in a deadline and resolves it to a LocalDate object
+    // After which it converts the local date object back to a date
+    public static void printDeadline(String deadline) {
+        // we only accept yyyy-mm-dd formats (which is the minimal)
+        // other than this, we don't accept already
+        LocalDate date = LocalDate.parse(deadline);
+        System.out.println(date.format(DateTimeFormatter.ofPattern("MMM d yyyy)")));
     }
 
     public static void list(int counter) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < counter; i++) {
             String status = tasks[i].checkIfComplete();
-            System.out.println(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + "[" + status +
-                    "] " + tasks[i].getDescription() + tasks[i].getDeadline());
+            if (tasks[i].getTaskType().equals("[T]")) {
+                System.out.println(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + "[" + status +
+                        "] " + tasks[i].getDescription() + tasks[i].getDeadline());
+            }
+            else if (tasks[i].getTaskType().equals("[D]")) {
+                String deadline = tasks[i].getDeadline();
+                String[] deadline_split = deadline.split("-");
+                if (deadline_split.length == 3) {
+                    System.out.print(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + "[" + status +
+                            "] " + tasks[i].getDescription() + " (by: ");
+                    printDeadline(tasks[i].getDeadline());
+                }
+                else {
+                    System.out.println(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + "[" + status +
+                            "] " + tasks[i].getDescription() + " (by: " + deadline + ")");
+                }
+
+            }
+            else {
+
+                String deadline = tasks[i].getDeadline();
+                String[] deadline_split = deadline.split("-");
+                if (deadline_split.length == 3) {
+                    System.out.print(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + "[" + status +
+                            "] " + tasks[i].getDescription() + " (at: ");
+                    printDeadline(tasks[i].getDeadline());
+                }
+                else {
+                    System.out.println(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + "[" + status +
+                            "] " + tasks[i].getDescription() + " (at: " + deadline + ")");
+                }
+            }
         }
+    }
+
+    public static boolean qualifiesForPrint(String deadline) {
+        String[] deadline_split = deadline.split("-");
+        if (deadline_split.length == 3) {
+            return true; //qualifies
+        }
+        return false;
     }
 
     public static void markCompleted(int taskNum) {
         System.out.println("Nice! I've marked this task as done:");
         tasks[taskNum].updateisDone(true);
-        System.out.println("[" + tasks[taskNum].checkIfComplete() + "] " + tasks[taskNum].getDescription() + tasks[taskNum].getDeadline());
+        String deadline = tasks[taskNum].getDeadline();
+
+        if (tasks[taskNum].getTaskType().equals("[T]")) {
+            System.out.print("[T][" + tasks[taskNum].checkIfComplete() + "]" + tasks[taskNum].getDescription());
+        }
+        else if (tasks[taskNum].getTaskType().equals("[D]")) {
+            if (qualifiesForPrint(deadline)) {
+                System.out.print("[D][" + tasks[taskNum].checkIfComplete() + "]" + tasks[taskNum].getDescription() + " (by: ");
+                printDeadline(deadline);
+            } else {
+                System.out.print("[D][" + tasks[taskNum].checkIfComplete() + "]" + tasks[taskNum].getDescription() + " ( by: " + deadline + ")");
+            }
+        }
+        else {
+            if (qualifiesForPrint(deadline)) {
+                System.out.print("[E][" + tasks[taskNum].checkIfComplete() + "]" + tasks[taskNum].getDescription() + " (at: ");
+                printDeadline(deadline);
+            } else {
+                System.out.print("[E][" + tasks[taskNum].checkIfComplete() + "]" + tasks[taskNum].getDescription() + " ( by: " + deadline + ")");
+            }
+        }
+
     }
 
     public static void deleteTask(int taskNum) {
@@ -223,6 +288,7 @@ public class Duke {
         System.out.println("Now you have " + Integer.toString(counter) + " tasks in the list.");
     }
 
+    // this one need to change
     public static void updateFile() {
 
         // delete everything in the file first
@@ -238,13 +304,7 @@ public class Duke {
             FileWriter writer = new FileWriter(file);
             for (int i = 0 ; i < counter; i++) {
                 // for everything in the counter.
-                String line = tasks[i].getRawInput();
-                String completion = tasks[i].getCompletionStatus();
-                if (completion.equals("[\u2713]")) {
-                    line = line + "/y";
-                }
-                else { line = line + "/n"; }
-
+                String line = tasks[i].getTaskType() + tasks[i].getCompletionStatus() + " " + tasks[i].getDescription() + tasks[i].getDeadline();
                 writer.write(line + "\n");
                 // then now you need to write.
             }

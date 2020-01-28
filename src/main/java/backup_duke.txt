@@ -1,4 +1,7 @@
-todo borrow book /y
-deadline return book /by June 6th /n
-event project meeting /at Aug 6 2-4pm /y
-todo join sports club /n
+[T][✓]  borrow book
+[D][✘]  return book  (by: June 6th )
+[E][✓]  project meeting  (at: Aug 6 2-4pm )
+[T][✘]  join sports club
+[E][✘]  dance party  (at: library)
+[D][✓]  do cs3244  (by: sunday)
+[T][✘]  homework
