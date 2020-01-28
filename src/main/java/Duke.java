@@ -1,10 +1,3 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
-
 public class Duke {
 
     private Storage storage;
@@ -42,18 +35,5 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
-    }
-
-    private static Date parseDate(String date) throws ParseException {
-        String datePattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
-        return simpleDateFormat.parse(date);
-    }
-
-    private static LocalDateTime parseDateTime(String dateTime) throws DateTimeParseException {
-        String dateTimePattern = "yyyy-MM-dd HHmm";
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimePattern);
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
-        return localDateTime;
     }
 }
