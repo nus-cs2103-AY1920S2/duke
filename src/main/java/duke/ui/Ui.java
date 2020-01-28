@@ -86,6 +86,21 @@ public class Ui {
     }
 
     /**
+     * List out the tasks that found with the keyword to user
+     * @param tasks List of tasks with keyword
+     */
+    public void replyTaskFound(List<Task> tasks) {
+        message.clearMessage();
+        if (tasks.isEmpty()) {
+            message.addSentence("No task with the keyword! Find another keyword?", 1);
+        } else {
+            message.addSentence("Here are the tasks found with the keyword:", 1);
+            message.addList(tasks);
+        }
+        System.out.print(message.replyMessage());
+    }
+
+    /**
      * Reply the user that respective task has been added to the list
      * @param AmtOfTask amount of tasks in records
      * @param task task that being added

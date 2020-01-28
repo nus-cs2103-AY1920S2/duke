@@ -10,6 +10,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.FindCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,8 @@ public class Parser {
                 return new DeadlineCommand(CommandType.DEADLINE, data);
             case BYE:
                 return new ExitCommand(CommandType.BYE);
+            case FIND:
+                return new FindCommand(CommandType.FIND, data);
             default:
                 throw new DukeException("Are you sure you are giving the correct command?");
         }
@@ -66,8 +69,31 @@ public class Parser {
                 result.add(CommandType.DELETE.getCommand());
                 result.add(userInput.substring(7).strip());
             } else if(userInput.startsWith(CommandType.DONE.getCommand())) {
-                result.add(CommandType.DONE.getCommand());
-                result.add(userInput.substring(5).strip());
+                try {
+                    if(userInput.charAt(4) == ' ') {
+                        result.add(CommandType.DONE.getCommand());
+                        result.add(userInput.substring(5));
+                    } else {
+                        throw new DukeException("Please input in this format: done [number]");
+                    }
+                } catch(StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please input in this format: done [number]");
+                }
+            } else if(userInput.startsWith(CommandType.FIND.getCommand())) {
+                try {
+                    if(userInput.charAt(4) == ' ') {
+                        String keyword = userInput.substring(5).stripLeading();
+                        if(keyword.equals("")) {
+                            throw new DukeException("I cannot find the task without any keyword!");
+                        }
+                        result.add(CommandType.FIND.getCommand());
+                        result.add(keyword);
+                    } else {
+                        throw new DukeException("Please input in this format: find [keyword]");
+                    }
+                } catch(StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please input in this format: find [keyword]");
+                }
             } else {
                 result = addTask(userInput);
             }
