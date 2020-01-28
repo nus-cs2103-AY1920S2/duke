@@ -1,3 +1,5 @@
+package jiachen.duke;
+
 import java.util.Scanner;
 
 enum Command {

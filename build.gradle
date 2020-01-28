@@ -24,7 +24,7 @@ test {
     useJUnitPlatform()
 }
 
-group 'seedu.duke'
+group 'jiachen.duke'
 version '0.1.0'
 
 repositories {
@@ -32,7 +32,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "jiachen.duke.Duke"
 }
 
 run {

@@ -1,3 +1,5 @@
+package jiachen.duke;
+
 public class Ui {
     public void printHeader() {
         String logo = " ____        _        \n"
