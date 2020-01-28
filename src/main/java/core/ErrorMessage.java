@@ -1,5 +1,6 @@
 package core;
 
+
 public enum ErrorMessage {
 
     INDEX_OUT_OF_BOUND("Index out of bound"),

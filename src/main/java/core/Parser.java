@@ -9,7 +9,9 @@ import java.time.format.DateTimeParseException;
 import dukexception.DukeException;
 
 
+
 public class Parser {
+
 
     public Command parse(String userInput) throws DukeException {
 
@@ -28,6 +30,8 @@ public class Parser {
                     return parseDeadline(information);
                 case "event":
                     return parseEvent(information);
+                case "find":
+                    return parseFind(information);
             }
         }else{
             switch (userInput){
@@ -37,7 +41,7 @@ public class Parser {
                     return parseBye();
                 case "reset":
                     return parseReset();
-                case "done": case "delete":
+                case "done": case "delete": case "find":
                 case "todo": case "deadline": case "event":
                     throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
             }
@@ -74,6 +78,13 @@ public class Parser {
         }catch (NumberFormatException e){
             throw new DukeException(ErrorMessage.LACK_NUMBER.toString());
         }
+    }
+
+    private Command parseFind(String information) throws DukeException{
+        if(information.trim().length()==0) {
+            throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
+        }
+        return new Command_Find(information);
     }
 
     private Command parseTodo(String information) throws DukeException {
