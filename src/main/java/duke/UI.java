@@ -13,7 +13,7 @@ public class UI {
         System.out.println(line);
     }
 
-    static void list(TaskList arr){
+    static void list(TaskList arr) {
         println();
         System.out.println("Here are the items in your list:");
         for (var i = 0; i < arr.size(); i++) {
@@ -23,7 +23,7 @@ public class UI {
         System.out.println(UI.line);
     }
 
-    static void done(Task curr){
+    static void done(Task curr) {
         say("Marked as done:\n" + curr.toString());
     }
 

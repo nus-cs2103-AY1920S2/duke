@@ -13,12 +13,12 @@ public class Storage {
 
     private boolean convertToBoolean(String value) {
         boolean returnValue = false;
-        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) ||
-                "true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value))
+        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value)
+                || "on".equalsIgnoreCase(value)) {
             returnValue = true;
+        }
         return returnValue;
     }
-
 
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> arr = new ArrayList<>();
@@ -32,7 +32,7 @@ public class Storage {
                     Task todo = new Todo(s[2].trim(), convertToBoolean(s[1].trim()));
                     arr.add(todo);
                     break;
-                case("E"):
+                case ("E"):
                     Task ev = new Event(s[2].trim(), s[3].trim(), convertToBoolean(s[1].trim()));
                     arr.add(ev);
                     break;
@@ -41,7 +41,7 @@ public class Storage {
                     arr.add(dl);
                     break;
                 default:
-                   throw new DukeException();
+                    throw new DukeException();
             }
         }
         return arr;

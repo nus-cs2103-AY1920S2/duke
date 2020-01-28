@@ -27,7 +27,7 @@ public class Akshay {
     public void run() throws IOException {
         TaskList arr = tasks;
         UI.say("Hello I am [AKSHAY]!\nHow may I help you?");
-        Scanner sc =  new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             String[] c = input.split(" ", 2);
@@ -50,18 +50,18 @@ public class Akshay {
                     }
                     break;
                 case ("deadline"):
-                    String[] dl = c[1].split("/by",2);
+                    String[] dl = c[1].split("/by", 2);
                     Task d = new Deadline(dl[0], dl[1].trim());
                     arr.add(d);
                     UI.added(d);
                     break;
                 case ("event"):
-                    String[] ev = c[1].split("/at",2);
+                    String[] ev = c[1].split("/at", 2);
                     Task e = new Event(ev[0], ev[1].trim());
                     arr.add(e);
                     UI.added(e);
                     break;
-                case ("delete") :
+                case ("delete"):
                     try {
                         Task del = arr.get(Integer.parseInt(c[1]) - 1);
                         arr.remove(Integer.parseInt(c[1]) - 1);

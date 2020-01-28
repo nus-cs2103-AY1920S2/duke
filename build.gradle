@@ -9,8 +9,8 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-group 'seedu.duke'
-version '0.1.0'
+group 'duke'
+version '0.1'
 
 repositories {
     mavenCentral()
@@ -27,7 +27,7 @@ run {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveVersion = "0.1"
     archiveClassifier = null
     archiveAppendix = null
 }

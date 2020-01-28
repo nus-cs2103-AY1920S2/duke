@@ -6,7 +6,7 @@ public class TaskList {
     private ArrayList<Task> lst;
 
     public TaskList() {
-       lst = new ArrayList<>();
+        lst = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> lst) {
@@ -16,9 +16,11 @@ public class TaskList {
     public Task get(int index) {
         return lst.get(index);
     }
+
     public void add(Task e) {
         lst.add(e);
     }
+
     public void remove(int e) {
         lst.remove(e);
     }
