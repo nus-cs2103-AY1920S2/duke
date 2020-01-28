@@ -10,9 +10,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Encapsulates and parses the information of a single command string.
+ */
 public class Parser {
     private String command;
     
+    /**
+     * Constructs a new `Parser` instance from a command string
+     * @param command Command string
+     */
     public Parser(String command) {
         this.command = command;
     }
@@ -21,6 +28,12 @@ public class Parser {
         public Optional<Command> get() throws DukeException;
     }
     
+    /**
+     * Parses the command string and returns the corresponding command object.
+     * If the command string does not correspond to any known command, returns an empty Optional.
+     * @return `Optional` of a `Command` object
+     * @throws DukeException if the command string is invalid
+     */
     public Optional<Command> parse() throws DukeException {
         Optional<Command> res = Stream.<DukeOptionalCommand>of(
                 this::byeCommand,
