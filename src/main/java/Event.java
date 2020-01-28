@@ -1,10 +1,9 @@
 public class Event extends Item {
     String time;
-    boolean done;
+
     Event(String name, String time) {
-        super(name);
+        super(name, false);
         this.time = time;
-        this.done = false;
     }
 
     Event(String name, String time, boolean done) {

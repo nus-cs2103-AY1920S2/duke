@@ -1,13 +1,10 @@
 public abstract class Item {
     private String name;
     private boolean done;
-    Item(String name) {
-        this.name = name;
-        this.done = false;
-    }
+
     Item(String name, Boolean done) {
         this.name = name;
-        this.done = false;
+        this.done = done;
     }
     public String toString() {
         String temp = "[";

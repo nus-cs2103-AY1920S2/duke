@@ -1,9 +1,6 @@
 public class Todo extends Item {
-    String name;
-    boolean done;
     Todo (String name) {
-        super(name);
-        this.done = false;
+        super(name, false);
     }
     Todo (String name, boolean done) {
         super(name, done);

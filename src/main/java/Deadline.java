@@ -2,9 +2,8 @@ public class Deadline extends Item {
     String time;
     boolean done;
     Deadline(String name, String time) {
-        super(name);
+        super(name, false);
         this.time = time;
-        this.done = false;
     }
 
     Deadline(String name, String time, boolean done) {
