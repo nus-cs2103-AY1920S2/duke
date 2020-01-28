@@ -1,22 +1,31 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String msg;
     protected String status;
     protected String type;
-    protected String time;
+    protected LocalDate time;
 
     public Task (String msg) {
         this.msg = msg;
         this.type = "";
-        this.time = "";
-        status = "[✗]";
+        status = "✗";
     }
 
     public void markDone() {
-        status = "[✓]";
+        status = "✓";
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String writeToFile() {
+        return type + " , " + status + " ," + msg;
     }
 
     @Override
     public String toString() {
-        return type + status + msg + " " + time;
+        return "[" + type + "][" + status + "]" + msg;
     }
 }
