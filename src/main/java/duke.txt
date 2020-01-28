@@ -1,0 +1,7 @@
+todo borrow book /y
+deadline return book /by June 6th /n
+event project meeting /at Aug 6 2-4pm /y
+todo join sports club /n
+event dance party /at library/n
+deadline do cs3244 /by sunday/y
+todo homework/n
