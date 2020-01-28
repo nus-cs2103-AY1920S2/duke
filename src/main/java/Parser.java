@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 class Parser {
 
-    static Command parse(String fullCommand) throws IllegalArgumentException, DukeEmptyDescriptionException, DukeNoKeywordException {
+    static Command parse(String fullCommand) throws DukeException {
         String[] splitInput = fullCommand.split(Pattern.quote(" "));
         // empty line would output string array of size 1, where the element is empty string
         String commandString = splitInput[0];
@@ -67,10 +67,8 @@ class Parser {
                 default:
                     break;
             }
-        } catch (DukeEmptyDescriptionException | DukeNoKeywordException e) {
-            throw e;
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeWrongCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         return toReturn;

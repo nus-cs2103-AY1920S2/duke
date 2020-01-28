@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -13,7 +12,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (DukeIOException e) {
             ui.print("can't load file.");
             tasks = new TaskList();
         }
@@ -28,14 +27,8 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
-            } catch (DukeEmptyDescriptionException e) {
+            } catch (DukeException e) {
                 ui.print(e.getMessage());
-            } catch (DukeNoKeywordException e) {
-                ui.print(e.getMessage());
-            } catch (IllegalArgumentException e) {
-                ui.print(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

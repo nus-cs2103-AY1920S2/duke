@@ -9,7 +9,7 @@ class DoneCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException {
         Task selectedTask = tasks.get(selectedTaskIndex);
         selectedTask.markAsDone();
         storage.save(tasks);

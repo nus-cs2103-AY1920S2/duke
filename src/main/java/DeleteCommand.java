@@ -9,7 +9,7 @@ class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException {
         Task selectedTask = tasks.get(selectedTaskIndex);
         tasks.remove(selectedTaskIndex);
         storage.save(tasks);

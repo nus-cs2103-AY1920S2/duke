@@ -1,10 +1,6 @@
-class DukeEmptyDescriptionException extends Exception {
+class DukeEmptyDescriptionException extends DukeException {
+    
     DukeEmptyDescriptionException(String message) {
         super(message);
-    }
-
-    @Override
-    public String toString() {
-        return super.getMessage();
     }
 }

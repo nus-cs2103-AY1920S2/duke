@@ -18,7 +18,7 @@ class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException {
         Task newTask = null;
 
         switch (type) {
