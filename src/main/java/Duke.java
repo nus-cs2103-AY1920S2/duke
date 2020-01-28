@@ -1,9 +1,11 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 
 public class Duke {
     static String space = "     ";
@@ -21,7 +23,7 @@ public class Duke {
         processlist(sc);
     }
 
-    private static void processlist(Scanner sc) throws IllegalInstructionException, NumberFormatException, IOException {
+    private static void processlist(Scanner sc) throws IllegalInstructionException, NumberFormatException, DateTimeParseException {
         List list = new List();
         loadTxt(list);
         while (!sc.hasNext("bye")) {
@@ -48,9 +50,9 @@ public class Duke {
                     int index = Integer.parseInt(tmp[1]);
                     if (tmp[0].equals("done")) {
                         list.items.get(index - 1).markDone();
-                        updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).toString());
+                        updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).now());
                     } else {
-                        updateTxt(list.items.get(index - 1).toString(), "");
+                        updateTxt(list.items.get(index - 1).now(), "");
                         list.delete(index - 1);
                     }
                 } else if (tmp[0].equals("todo")) {
@@ -60,7 +62,7 @@ public class Duke {
                     }
                     Todo todo = new Todo(task);
                     list.addItem(todo);
-                    addTxt(todo.toString());
+                    addTxt(todo.now());
                 } else if (tmp[0].equals("event")) {
                     if (task.equals("")) {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The description of a event cannot be empty.\n"
@@ -71,9 +73,9 @@ public class Duke {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The time of a event cannot be empty.\n"
                                 + line);
                     }
-                    Event event = new Event(e[0], e[1]);
+                    Event event = new Event(e[0], LocalDate.parse(e[1]));
                     list.addItem(event);
-                    addTxt(event.toString());
+                    addTxt(event.now());
                 } else if (tmp[0].equals("deadline")) {
                     if (task.equals("")) {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The description of a deadline cannot be empty.\n"
@@ -84,9 +86,9 @@ public class Duke {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The time of a deadline cannot be empty.\n"
                                 + line);
                     }
-                    Deadline ddl = new Deadline(d[0], d[1]);
+                    Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                     list.addItem(ddl);
-                    addTxt(ddl.toString());
+                    addTxt(ddl.now());
                 }  else {
                     throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                             + line);
@@ -94,10 +96,11 @@ public class Duke {
             } catch (IllegalInstructionException e) {
                 System.err.println(e.getMessage());
             } catch (NumberFormatException e) {
-                System.err.println(line + "\n" + space + "☹ OOPS!!! The format of index is wrong.\n"
-                        + line);
+                System.err.println(space + "☹ OOPS!!! The format of index is wrong.");
             } catch (IOException e) {
-                System.err.println("Incorrect IO format");
+                System.err.println(space+"Incorrect IO format.");
+            } catch (DateTimeParseException e) {
+                System.err.println(space+"Incorrect date format (yyyy-MM-dd).");
             }
         }
         String bye = line + "\n" + space + " Bye. Hope to see you again soon!\n" + line;
@@ -121,7 +124,7 @@ public class Duke {
             fileOut.write(inputStr.getBytes());
             fileOut.close();
         } catch (IOException e) {
-            System.err.println(space + "Incorrect IO format");
+            System.err.println(space + "Incorrect IO format.");
         }
     }
 
@@ -132,11 +135,11 @@ public class Duke {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            System.err.println(space + "Incorrect IO format");
+            System.err.println(space + "Incorrect IO format.");
         }
     }
 
-    public static void loadTxt(List list) throws IOException {
+    public static void loadTxt(List list) throws DateTimeParseException {
         try {
             BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
             String line;
@@ -147,6 +150,7 @@ public class Duke {
                 String[] tmp;
                 splitted = line.split(" ", 2);
                 tmp = splitted[1].split(" ", 2);
+
                 if (line.charAt(4) == '✓') {
                     done = true;
                 } else {
@@ -155,18 +159,26 @@ public class Duke {
                 if (line.charAt(1) == 'E') {
                     tmp[1] = tmp[1].replaceAll("\\(at: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
+<<<<<<< HEAD
                     list.addItem(new Event(tmp[0], tmp[1], done));
                 } else if (line.charAt(1) == 'D') {
                     tmp[1] = tmp[1].replaceAll("\\(by: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
                     list.addItem(new Deadline(tmp[0], tmp[1], done));
+=======
+                    list.addItem(new Event(tmp[0], LocalDate.parse(tmp[1]), done));
+                } else if (line.charAt(1) == 'D') {
+                    tmp[1] = tmp[1].replaceAll("\\(by: ","");
+                    tmp[1] = tmp[1].replaceAll("\\)","");
+                    list.addItem(new Deadline(tmp[0], LocalDate.parse(tmp[1]), done));
+>>>>>>> 2de8869436177ff5920973b07f499d4da26cf8a7
                 } else {
                     list.addItem(new Todo(splitted[1], done));
                 }
             }
             file.close();
-        } catch (IOException e) {
-            System.err.println(space + "Incorrect IO format.");
+        } catch (DateTimeParseException e) {
+            System.err.println(space + "Incorrect date format.");
         } catch (Exception e) {
             System.err.println(space + "Unable to load past data.");
         }
