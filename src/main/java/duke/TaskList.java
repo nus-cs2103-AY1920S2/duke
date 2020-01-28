@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.List;
 
 /**
  * This class wraps around the class ArrayList from Java
@@ -72,5 +74,10 @@ public class TaskList {
      **/
     public ArrayList<Task> getTasks() {
         return this.taskList;
+    }
+
+    public TaskList filter(String s) {
+        ArrayList<Task> al = new ArrayList<>(this.taskList.stream().filter(x -> x.getName().contains(s)).collect(Collectors.toList()));
+        return new TaskList(al);
     }
 }

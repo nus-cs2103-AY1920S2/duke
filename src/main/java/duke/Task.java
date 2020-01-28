@@ -47,6 +47,10 @@ public abstract class Task {
      * Abstract method to return a new task with specified done status.
      * @return A new task object.
      */
+    public String getName() {
+        return name;
+    }
+
     public abstract Task setDone();
 
     /**

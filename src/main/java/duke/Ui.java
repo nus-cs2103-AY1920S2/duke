@@ -101,4 +101,16 @@ public class Ui {
         System.out.println(e);
         System.out.println(line);
     }
+
+    static void printFindings(TaskList foundTasks) {
+        String line = "   ____________________________________________________________";
+        System.out.println(line);
+        System.out.println("\tHere are the matching tasks in your list:");
+        int i = 1;
+        for (Task s : foundTasks.getTasks()) {
+            System.out.println("\t" + i + "." + s.toString());
+            i++;
+        }
+        System.out.println(line);
+    }
 }
