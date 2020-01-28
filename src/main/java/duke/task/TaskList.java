@@ -29,7 +29,7 @@ public class TaskList{
      * @param task the task
      */
 // Add the task to the list
-    public void add_to_list(Task task) {
+    public void addToList(Task task) {
         list.add(task);
     }
 
@@ -39,7 +39,7 @@ public class TaskList{
      * @return the int
      */
 // Print out the size of the list
-    public int size_of_list() {
+    public int sizeOfList() {
         return list.size();
     }
 
@@ -50,7 +50,7 @@ public class TaskList{
      * @throws DukeException the duke exception
      */
 // Delete the task from the list
-    public void remove_from_list(Task task) throws DukeException {
+    public void removeFromList(Task task) throws DukeException {
         try {
             list.remove(task);
         } catch (NoSuchElementException e) {

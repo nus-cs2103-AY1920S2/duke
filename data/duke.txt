@@ -52,3 +52,5 @@ T |  ✘ | run
  [D] [?] haha (by: Feb 3 2020 00:00)
  [T] [?] run
  [T] [?] sleep
+ [T] [✘] run
+ [T] [✘] sleep

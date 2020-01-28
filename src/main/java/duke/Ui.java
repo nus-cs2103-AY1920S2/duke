@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.Deadline_event_hash;
+import duke.task.deadlineEventHash;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Ui {
 
     //private duke.task.TaskList taskList = new duke.task.TaskList();
-    private Deadline_event_hash deadline_event_hash = new Deadline_event_hash();
+    private deadlineEventHash deadlineEventHash = new deadlineEventHash();
     /**
      * The Lines.
      */
@@ -85,21 +85,21 @@ public class Ui {
      * @throws DukeException the duke exception
      */
 // When the user enters a number which is larger than the taskList
-    public void invalid_number_exception() throws DukeException {
+    public void invalidNumberException() throws DukeException {
         throw new DukeException("You have entered an invalid number!");
     }
 
     /**
      * Print done.
      *
-     * @param finished_task the finished task
+     * @param finishedTask the finished task
      */
 // Tells the user that the task is done.
-    public void printDone(Task finished_task) {
+    public void printDone(Task finishedTask) {
         System.out.println(lines);
         System.out.println(space + "Nice! I've marked this task as done");
-        System.out.println(space + " [" + finished_task.getStatusIcon() + "]"
-                + " " + finished_task.getDescription());
+        System.out.println(space + " [" + finishedTask.getStatusIcon() + "]"
+                + " " + finishedTask.getDescription());
         System.out.println(lines);
     }
 
@@ -120,14 +120,14 @@ public class Ui {
     /**
      * Print delete.
      *
-     * @param deleted_task the deleted task
+     * @param deletedTask the deleted task
      * @param taskList     the task list
      */
-    public void printDelete(Task deleted_task, TaskList taskList) {
+    public void printDelete(Task deletedTask, TaskList taskList) {
         System.out.println(lines);
         System.out.println(space + "Noted. I've removed this task:");
-        System.out.println(space + deleted_task);
-        System.out.println(space + "Now you have " + taskList.size_of_list() + " tasks in the list.");
+        System.out.println(space + deletedTask);
+        System.out.println(space + "Now you have " + taskList.sizeOfList() + " tasks in the list.");
         System.out.println(lines);
     }
 
@@ -148,7 +148,7 @@ public class Ui {
      * @throws DukeException the duke exception
      */
 // Handles any other forms of exceptions. Eg in deadline etc.
-    void duke_exceptions(String s) throws DukeException{
+    void dukeExceptions(String s) throws DukeException{
         throw new DukeException(s);
     }
 

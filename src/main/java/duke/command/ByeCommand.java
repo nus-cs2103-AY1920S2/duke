@@ -3,8 +3,6 @@ package duke.command;
 import duke.*;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
 /**
  * Class which consists a command to terminate the program
  * When the user types "bye"
@@ -14,10 +12,10 @@ public class ByeCommand extends Command {
     /**
      * Instantiates a new Bye command.
      *
-     * @param user_input the user input
+     * @param userInput the user input
      */
-    public ByeCommand(String user_input) {
-        super(user_input);
+    public ByeCommand(String userInput) {
+        super(userInput);
     }
 
 
@@ -37,7 +35,7 @@ public class ByeCommand extends Command {
         try {
             ui.printBye();
             taskList.getList().clear();
-            Duke.break_checker = true;
+            Duke.breakChecker = true;
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

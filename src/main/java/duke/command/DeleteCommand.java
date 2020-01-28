@@ -14,10 +14,10 @@ public class DeleteCommand extends Command {
     /**
      * Instantiates a new Delete command.
      *
-     * @param user_input the user input
+     * @param userInput the user input
      */
-    public DeleteCommand(String user_input) {
-        super(user_input);
+    public DeleteCommand(String userInput) {
+        super(userInput);
     }
 
 
@@ -35,23 +35,23 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws IOException, DukeException {
-        if(user_input.contains("delete")) {
-            Task deleted_task = taskList.getList().get(split_done_string(" ", user_input,taskList,ui));
-            System.out.println("The deleted task is " + deleted_task);
-            taskList.remove_from_list(deleted_task);
-            ui.printDelete(deleted_task, taskList);
+        if(userInput.contains("delete")) {
+            Task deletedTask = taskList.getList().get(splitDoneString(" ", userInput,taskList,ui));
+            System.out.println("The deleted task is " + deletedTask);
+            taskList.removeFromList(deletedTask);
+            ui.printDelete(deletedTask, taskList);
         }
     }
 
-    private int split_done_string(String regrex_wanted, String user_input, TaskList taskList
+    private int splitDoneString(String regrexWanted, String userInput, TaskList taskList
     , Ui ui) throws DukeException {
-        String[] splitted_string = user_input.split(regrex_wanted);
-        Integer array_index = Integer.valueOf(splitted_string[1]);
+        String[] splittedString = userInput.split(regrexWanted);
+        Integer arrayIndex = Integer.valueOf(splittedString[1]);
 
-        if(array_index > taskList.size_of_list()) {
-            ui.invalid_number_exception();
+        if(arrayIndex > taskList.sizeOfList()) {
+            ui.invalidNumberException();
         }
 
-        return array_index-1;
+        return arrayIndex-1;
     }
 }

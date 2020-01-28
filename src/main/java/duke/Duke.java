@@ -16,9 +16,9 @@ public class Duke {
     private TaskList taskList = new TaskList();
 
     /**
-     * The constant break_checker.
+     * The constant breakChecker.
      */
-    public static boolean break_checker = false;
+    public static boolean breakChecker = false;
 
     /**
      * The entry point of application.
@@ -53,7 +53,7 @@ public class Duke {
             Command c = Parser.parse(fullCommand,input);
             c.execute(storage, ui,taskList);
             //parser.understand_user_input(input);
-            if(break_checker) {
+            if(breakChecker) {
                 break;
             }
         }

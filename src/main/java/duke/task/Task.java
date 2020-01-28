@@ -24,7 +24,7 @@ public class Task {
     private boolean isDay;
     // To check if there is time inclusive in the command a not
     private boolean hasTime;
-    private Deadline_event_hash deadline_event_hash;
+    private deadlineEventHash deadlineEventHash;
 
 
     /**
@@ -46,7 +46,7 @@ public class Task {
      * @return the string
      * @throws DukeException the duke exception
      */
-    public String format_tasks(String s) throws DukeException {
+    public String formatTasks(String s) throws DukeException {
         return getDescription().substring(getDescription().indexOf(s)).
                 replaceAll(s + " ", "");
     }
@@ -251,7 +251,7 @@ public class Task {
     /**
      * The enum Task type.
      */
-    public enum Task_Type {
+    public enum taskType {
         /**
          * Todo task type.
          */

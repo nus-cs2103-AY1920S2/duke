@@ -16,15 +16,15 @@ public abstract class Command {
     /**
      * The User input.
      */
-    String user_input;
+    String userInput;
 
     /**
      * Instantiates a new Command.
      *
-     * @param user_input the user input
+     * @param userInput the user input
      */
-    public Command(String user_input) {
-        this.user_input = user_input;
+    public Command(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
