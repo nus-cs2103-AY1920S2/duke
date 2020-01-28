@@ -1,4 +1,6 @@
-package duke.exception;/*
+package duke.exception;
+
+/*
  * DukeException
  *
  * CS2103 AY19/20 Semester 2

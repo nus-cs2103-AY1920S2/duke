@@ -60,7 +60,7 @@ public class Duke {
             throw e;
         }
         TaskList taskList = new TaskList(tasks);
-        return new Duke(taskList, storage, new Parser(taskList));
+        return new Duke(taskList, storage, new Parser());
     }
 
     /**
@@ -79,7 +79,7 @@ public class Duke {
 
     public String processCommand(String commands) {
         try {
-            Command command = parser.parse(commands);
+            Command command = parser.parse(commands, taskList);
             return command.execute(taskList, storage);
         } catch (DukeException exc) {
             return exc.getMessage();

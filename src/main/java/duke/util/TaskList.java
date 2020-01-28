@@ -2,7 +2,7 @@ package duke.util;
 
 import java.util.ArrayList;
 
-public class TaskList {
+public class TaskList implements TaskListInterface {
     ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {

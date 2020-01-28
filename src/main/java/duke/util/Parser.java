@@ -5,11 +5,11 @@ import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
 public class Parser {
-    private TaskList taskList;
     private static HashMap<String, Keyword> validKeywords = new HashMap<>() {
         {
             put("list", Keyword.LIST);
@@ -21,8 +21,8 @@ public class Parser {
         }
     };
 
-    public Parser(TaskList taskList) {
-        this.taskList = taskList;
+    public Parser() {
+
     }
 
     /**
@@ -34,8 +34,8 @@ public class Parser {
      * @throws DukeUnknownKeywordException If the command keyword (the first word) is invalid.
      */
 
-    public Command parse(String commandString) throws DukeUnknownKeywordException, DukeInvalidArgumentFormatException,
-            DukeInvalidDateFormatException {
+    public Command parse(String commandString, TaskListInterface taskList) throws DukeUnknownKeywordException,
+            DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         String[] splitted_commands = commandString.split(" ");
         String command_string = splitted_commands[0];
         /*
@@ -57,10 +57,10 @@ public class Parser {
             command = checkValidListArgument(details);
             break;
         case DONE:
-            command = checkValidDoneArgument(details);
+            command = checkValidDoneArgument(details, taskList);
             break;
         case DELETE:
-            command = checkValidDeleteArgument(details);
+            command = checkValidDeleteArgument(details, taskList);
             break;
         case TODO:
             command = checkValidTodoArgument(details);
@@ -112,7 +112,8 @@ public class Parser {
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
 
-    private DoneCommand checkValidDoneArgument(String details) throws DukeInvalidArgumentFormatException {
+    private DoneCommand checkValidDoneArgument(String details, TaskListInterface taskList) throws
+            DukeInvalidArgumentFormatException {
         int index = -1;
         try {
             index = Integer.parseInt(details);
@@ -136,7 +137,8 @@ public class Parser {
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
 
-    private DeleteCommand checkValidDeleteArgument(String details) throws DukeInvalidArgumentFormatException {
+    private DeleteCommand checkValidDeleteArgument(String details, TaskListInterface taskList) throws
+            DukeInvalidArgumentFormatException {
         int index = -1;
         try {
             index = Integer.parseInt(details);
