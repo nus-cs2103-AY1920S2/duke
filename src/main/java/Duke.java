@@ -19,17 +19,28 @@ public class Duke {
 
          */
 
-        Ui ui = new Ui();
-        ui.introduction();
+
 
 
         FastReader fr = new FastReader();
 
 
         TaskManager manager = new TaskManager();
+        Ui ui = new Ui(manager);
+        ui.introduction();
 
         manager.loadExistingData();
         String textEntered = fr.nextLine();
+
+        while(ui.hasEnded == false){
+            ui.handleInputs(textEntered);
+            if (textEntered.equals("bye")){
+                break;
+            }
+            textEntered = fr.nextLine();
+        }
+        /*
+
 
         while(!textEntered.equals("bye")){
 
@@ -85,13 +96,15 @@ public class Duke {
 
         }
 
+         */
+
 
         //Must say bye to save data!
-        manager.saveExistingData();
+        //manager.saveExistingData();
 
 
-        System.out.println(horizontalLine);
-        System.out.println("Bye. Hope to see you again soon!");
+        //System.out.println(horizontalLine);
+        System.out.println("Data has been saved! Goodbye Mr.Stark!");
         System.out.println(horizontalLine);
     }
 
