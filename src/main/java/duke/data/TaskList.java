@@ -33,6 +33,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> find(String str) {
+        ArrayList<Task> outputList = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getTask().contains(str)) {
+                outputList.add(task);
+            }
+        }
+        return outputList;
+    }
+
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
