@@ -1,6 +1,4 @@
-E | 1 | r | 3
-T | 1 | 1
-D | 1 | x | 6
-T | 1 | i
-D | 1 | b | 7
-T | 0 | x
+D | 1 | eat pie | 2020-03-14
+T | 1 | r
+T | 1 | y
+E | 1 | go back to school | 2020-01-28

@@ -1,10 +1,13 @@
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +33,17 @@ public class Duke {
         System.out.println("My name is Jarvis!\nHow may I provide my services on this fine day?\n" + divider);
 
         ArrayList<Task> tasks = new ArrayList<>();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //System.out.println(LocalDateTime.parse("2020-12-13 1300", dtf).format(DateTimeFormatter.ofPattern("yyyy")));
+
         int i = 0;
         // Load data from file
         try {
             List<String> loadedTasks = Files.readAllLines(path);
-            i = Math.max(loadedTasks.size(), 0);
+            if(loadedTasks.size() > 1){
+                i = i = Math.max(loadedTasks.size(), 0);
+            }
             for (String s : loadedTasks) {
                 if(!s.equals("")) {
                     tasks.add(Task.load(s));
@@ -115,10 +124,12 @@ public class Duke {
                 tasks.add(new Todo(substrings[1]));
             } else if (nextLine.contains("event")) { // event creation
                 String[] substrings = nextLine.split(" ",2);
-                tasks.add(new Event(substrings[1].split(" /at")[0], substrings[1].split("/at ")[1]));
+                tasks.add(new Event(substrings[1].split(" /at")[0],
+                        LocalDate.parse(substrings[1].split("/at ")[1], dtf)));
             } else if (nextLine.contains("deadline")) {            // deadline creation
                 String[] substrings = nextLine.split(" ",2);
-                tasks.add(new Deadline(substrings[1].split(" /by")[0], substrings[1].split("/by ")[1]));
+                tasks.add(new Deadline(substrings[1].split(" /by")[0],
+                        LocalDate.parse(substrings[1].split("/by ")[1], dtf)));
             }
             System.out.println("Successfully added:\n" + tasks.get(i).toString());
             // If the number of tasks differs in the loop, needa update the Hard disk file

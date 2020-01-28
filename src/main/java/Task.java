@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,7 +21,7 @@ public class Task {
         String actionLetter = info[0];
         String isDone = info[1];
         String taskDesc = info[2];
-        String additional = "";
+        LocalDate additional;
         Task t;
 
         switch (actionLetter) {
@@ -31,14 +32,14 @@ public class Task {
                 }
                 return todo;
             case "E":
-                additional = info[3];
+                additional = LocalDate.parse(info[3]);
                 Event event = new Event(taskDesc, additional);
                 if(isDone.equals("1")){
                     event.taskDone();
                 }
                 return event;
             case "D":
-                additional = info[3];
+                additional = LocalDate.parse(info[3]);
                 Deadline deadline = new Deadline(taskDesc, additional);
                 if(isDone.equals("1")){
                     deadline.taskDone();
