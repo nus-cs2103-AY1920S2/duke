@@ -5,28 +5,16 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileUtils {
+public class Storage {
     private static String FILE_PATH = "data/duke.txt";
 
-    public static void readFile(ArrayList<Task> tasks) throws FileNotFoundException {
+    public static void readFile(TaskList tasks) throws FileNotFoundException {
         File f = new File(FILE_PATH);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String line = s.nextLine();
-            String[] split = line.strip().split(" ", 3);
-
-            String isDone = split[0];
-            String type = split[1];
-            String typeRemoved = split[2];
-
-            Task task = type.equals("todo")
-                    ? new ToDo(typeRemoved)
-                    : type.equals("deadline")
-                    ? new Deadline(typeRemoved)
-                    : new Event(typeRemoved);
-            if (isDone.equals("1")) {
-                task.doTask();
-            }
+            Parser parse = new Parser(line, true);
+            Task task = parse.createTask();
             tasks.add(task);
         }
     }
@@ -46,11 +34,10 @@ public class FileUtils {
             lines.add(s.nextLine());
         }
         lines.remove(index);
-        FileWriter fw = new FileWriter(FILE_PATH);
-        fw.write("");
-        fw.close();
 
-        fw = new FileWriter(FILE_PATH, true);
+        deleteContent();
+
+        FileWriter fw = new FileWriter(FILE_PATH, true);
 
         for (String line : lines) {
             fw.write(line + "\n");
@@ -67,15 +54,20 @@ public class FileUtils {
             lines.add(s.nextLine());
         }
         lines.set(index, "1" + lines.get(index).substring(1));
-        FileWriter fw = new FileWriter(FILE_PATH);
-        fw.write("");
-        fw.close();
 
-        fw = new FileWriter(FILE_PATH, true);
+        deleteContent();
+
+        FileWriter fw = new FileWriter(FILE_PATH, true);
 
         for (String line : lines) {
             fw.write(line + "\n");
         }
+        fw.close();
+    }
+
+    private static void deleteContent() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        fw.write("");
         fw.close();
     }
 }

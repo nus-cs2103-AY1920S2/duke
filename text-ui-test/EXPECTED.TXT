@@ -10,7 +10,7 @@
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
-      [D][✗] return book (by: June 6th)
+      [D][✗] return book (by: Oct 15 2019)
      Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -39,14 +39,14 @@
     ____________________________________________________________
      Here are the tasks in your list: 
      1.[T][✓] read book
-     2.[D][✗] return book (by: June 6th)
+     2.[D][✗] return book (by: Oct 15 2019)
      3.[E][✗] project meeting (at: Aug 6th 2-4pm)
      4.[T][✓] join sports club
      5.[T][✗] borrow book
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
-      [D][✗] return book (by: Sunday)
+      [D][✗] return book (by: Oct 15 2019)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -57,11 +57,11 @@
     ____________________________________________________________
      Here are the tasks in your list: 
      1.[T][✓] read book
-     2.[D][✗] return book (by: June 6th)
+     2.[D][✗] return book (by: Oct 15 2019)
      3.[E][✗] project meeting (at: Aug 6th 2-4pm)
      4.[T][✓] join sports club
      5.[T][✗] borrow book
-     6.[D][✗] return book (by: Sunday)
+     6.[D][✗] return book (by: Oct 15 2019)
      7.[E][✗] project meeting (at: Mon 2-4pm)
     ____________________________________________________________
     ____________________________________________________________
@@ -86,10 +86,10 @@
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list: 
-     1.[D][✗] return book (by: June 6th)
+     1.[D][✗] return book (by: Oct 15 2019)
      2.[T][✓] join sports club
      3.[T][✗] borrow book
-     4.[D][✗] return book (by: Sunday)
+     4.[D][✗] return book (by: Oct 15 2019)
      5.[E][✗] project meeting (at: Mon 2-4pm)
     ____________________________________________________________
     ____________________________________________________________
