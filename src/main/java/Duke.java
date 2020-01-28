@@ -39,6 +39,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("Data/duke.txt").run();
+        Path path = Paths.get("Data/duke.txt");
+        new Duke(path.toString()).run();
     }
 }
