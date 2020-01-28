@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
         int taskNo = Integer.parseInt(inputArr[1]) - 1;
         tasks.setDone(taskNo);
         storage.saveToSave(tasks);
-        ui.reply("Okcan, I mark this task as done:\n" + Constant.SPACE + tasks.getTask(taskNo));
+        ui.reply("Okcan, I mark this task as done:\n  " + Constant.SPACE + tasks.getTask(taskNo));
     }
 
     @Override

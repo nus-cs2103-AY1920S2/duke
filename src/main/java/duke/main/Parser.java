@@ -11,12 +11,13 @@ public class Parser{
             return new ListCommand(inputArr);
         } else if (inputArr[0].equals("done")){
             return new DoneCommand(inputArr);
+        } else if (inputArr[0].equals("find")) {
+            return new FindCommand(inputArr);
         } else if (inputArr[0].equals("delete")){
             return new DeleteCommand(inputArr);
         } else if (inputArr[0].equals("todo")){
             return new CreateTodoCommand(inputArr);            
         } else if (inputArr[0].equals("event")){
-            System.out.println("heree");
             return new CreateEventCommand(inputArr);         
         } else if (inputArr[0].equals("deadline")){
             return new CreateDeadlineCommand(inputArr);

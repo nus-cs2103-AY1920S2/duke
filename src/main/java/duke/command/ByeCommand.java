@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.main.*;
-import duke.exception.*;
 
 public class ByeCommand extends Command{
     @Override

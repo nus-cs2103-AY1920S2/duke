@@ -14,13 +14,14 @@ public class ListCommand extends Command {
         String reply = "";
 
         if (inputArr.length == 1) {
+            reply += "I told you save liao loh........";
             for (int i = 0; i < tasks.size(); i++) {
                 int numbering = i + 1;
-                reply += (numbering + ".");
-                reply += (tasks.getTask(i) + "\n" + Constant.SPACE);
+                reply += ("\n  " + Constant.SPACE + numbering + ".");
+                reply += (tasks.getTask(i));
             }
-            reply += "\n" + Constant.SPACE + "I told you save liao loh........";
         } else {
+            reply += ("This are all the tasks with that date" + Constant.SPACE);
             String dateS = inputArr[1];
             LocalDate date = LocalDate.parse(dateS, Constant.FORMATTER_INPUT_DATE);
             int numbering = 1;
@@ -28,12 +29,11 @@ public class ListCommand extends Command {
                 Task currentTask = tasks.getTask(i);
                 if (currentTask instanceof Deadline || currentTask instanceof Event) {
                     if (currentTask.compareDate(date)) {
-                        reply += (numbering++ + ".");
-                        reply += (currentTask + "\n" + Constant.SPACE);
+                        reply += ("\n  " + Constant.SPACE + numbering++ + ".");
+                        reply += (currentTask);
                     }
                 }
             }
-            reply += ("\n" + Constant.SPACE + "This are all the tasks with that date");
         }
         ui.reply(reply);
     }

@@ -13,11 +13,11 @@ public class Storage {
     private Path path;
 
     public Storage(String location){
-        this.path = Paths.get(location, "..", "..", "..", "data", "duke.txt");
+        this.path = Paths.get(location, "..", "data", "duke.txt");
     }
 
     public void retryLocation(String location){
-        this.path = Paths.get(location, "..", "..", "..", "data", "duke.txt");
+        this.path = Paths.get(location, "..", "data", "duke.txt");
     }
 
     public List<Task> loadFromSave() throws UnableToLoadException{

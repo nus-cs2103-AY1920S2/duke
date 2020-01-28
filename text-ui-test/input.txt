@@ -10,6 +10,7 @@ deadline
 list 2013/12/23
 check 1
 done 1
+find 1
 delete 2
 list
 bye
