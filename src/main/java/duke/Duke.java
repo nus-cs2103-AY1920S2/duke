@@ -144,6 +144,15 @@ public class Duke {
                     date.format(Parser.DATE_READ_FORMATTER) + ":");
             calender.searchDate(date);
             break;
+        case FIND:
+            String find = sc.nextLine();
+            if (find.isEmpty()) {
+                throw new DukeDescriptionException("Empty Description");
+            }
+            TaskList outputList = new TaskList(taskList.find(find.substring(1)));
+            System.out.println("Here are the matching tasks in your list:");
+            outputList.printTask();
+            break;
         default:
             break;
         }
