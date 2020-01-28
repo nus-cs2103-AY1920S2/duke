@@ -1,6 +1,8 @@
 import DukeExceptions.*;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 // Handles the functioning of Duke
@@ -66,8 +68,8 @@ public class DukeManager {
                     throw new UnknownCommandException("Sorry! I don't understand that command.");
             }
         } catch (UnknownCommandException e) {
-                System.out.println("    " + e.getMessage());
-            } catch (MissingDescriptionException e) {
+            System.out.println("    " + e.getMessage());
+        } catch (MissingDescriptionException e) {
                 System.out.println("    " + e.getMessage());
             } catch (MissingTimingException e) {
                 System.out.println("    " + e.getMessage());
@@ -75,20 +77,18 @@ public class DukeManager {
                 System.out.println("    " + e.getMessage());
             } catch (InvalidEntryException e) {
                 System.out.println("    " + e.getMessage());
-            }
+            } catch (InvalidFormatException ife) {
+            System.out.println("    " + ife.getMessage());
+        }
         System.out.println(line);
     }
 
-    public LocalDate findDeadline(String S) throws MissingTimingException{
+    public LocalDate findDeadline(String S) throws MissingTimingException, InvalidFormatException{
         String[] curr = S.split("/");
         return findDeadlineHelper(curr[1]);
     }
 
-    private LocalDate parseDate(String dateString) {
-        return LocalDate.parse(dateString);
-    }
-
-    private LocalDate findDeadlineHelper(String S) throws MissingTimingException {
+    private LocalDate findDeadlineHelper(String S) throws MissingTimingException, InvalidFormatException {
         String[] help = S.split(" ");
         int descriptionLength = help.length;
         if(descriptionLength == 1) {
@@ -97,6 +97,15 @@ public class DukeManager {
             String dateString = help[1];
 
             return parseDate(dateString);
+        }
+    }
+
+    private LocalDate parseDate(String dateString) throws InvalidFormatException {
+        try {
+            LocalDate result = LocalDate.parse(dateString);
+            return result;
+        } catch(DateTimeException dte){
+            throw new InvalidFormatException(dte.getMessage());
         }
     }
 
