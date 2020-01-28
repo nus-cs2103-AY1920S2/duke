@@ -59,7 +59,8 @@ public class Duke {
                 }
 
             } else if (command.contains("deadline")) {
-                String by = command.split("/")[1].substring(3);
+                String by = command.split("/")[1].substring(3); // returns date
+                by += "/" +command.split("/")[2] + "/" + command.split("/")[3];
                 String description = command.split("/")[0].substring(9);
                 Task deadline = new Deadline(description, by);
                 store.add(deadline);
@@ -69,6 +70,7 @@ public class Duke {
                 command = scan.nextLine();
             } else if (command.contains("event")) {
                 String at = command.split("/")[1].substring(3);
+                at += "/" +command.split("/")[2] + "/" + command.split("/")[3];
                 String description = command.split("/")[0].substring(6);
                 Task event = new Events(description, at);
                 store.add(event);
