@@ -11,9 +11,14 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
+        DataManager data = new DataManager();
         Tracker tracker = new Tracker();
         Scanner scanner = new Scanner(System.in);
         Input command;
+
+        if (data.hasPreviousData()) {
+            data.loadData(tracker);
+        }
 
         while (true) {
             try {
