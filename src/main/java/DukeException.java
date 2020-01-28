@@ -1,7 +1,16 @@
+/**
+ * Represents a duke exception for undefined user behaviour. A <code>DukeException</code> object
+ * corresponds to an exception represented by the detail e.g.,
+ * <code>"deadline"</code>
+ */
 public class DukeException extends Exception {
 
     public String detail;
 
+    /**
+     * Constructor for a duke exception.
+     * @param detail detail of the exception
+     */
     public DukeException(String detail) {
         super(detail);
 
