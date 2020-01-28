@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 /**
- * Class to handle stored items
- * within the bot, and mark them
- * as done
+ * Class to handle stored items within the bot,
+ * and mark them as done. Class Storage also
+ * handles file writing and reading
  */
 public class Storage {
     private final ArrayList<Task> storage = new ArrayList<Task>();

@@ -1,6 +1,10 @@
 import java.text.NumberFormat;
 import java.util.Scanner;
 
+/**
+ * Main driver class for 4LC3N-BOT, containing the
+ * primary loop that awaits input from the user
+ */
 public class Duke {
     public static void main(String[] args) {
         String version = "4LC3N v0.0.1";
