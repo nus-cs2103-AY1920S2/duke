@@ -7,9 +7,9 @@ import java.time.temporal.ChronoUnit;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 
-public class TaskManager implements java.io.Serializable{
+
+public class TaskManager {
 
     ArrayList<Task> listOfTasks;
 
