@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -18,6 +20,21 @@ public class Duke {
         return "    ____________________________________________________________\n"
                 + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                 + "    ____________________________________________________________";
+    }
+
+    public static String saveList(List<Task> list) {
+        String toSave = "";
+        for (int i = 0; i < list.size(); i++) {
+            toSave += list.get(i).toPrint();
+            toSave += "\n";
+        }
+        return toSave;
+    }
+
+    public static void writeToFile(String filePath, String textToAdd) throws IOException  {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
     }
 
     public static void main(String[] args) throws DukeException {
@@ -56,12 +73,16 @@ public class Duke {
                 } else if (split[0].equals("done")) { // mark task as complete
                     int num = Integer.parseInt(split[1]) - 1;
                     list.get(num).markDone();
+                    writeToFile("data/duke.txt", saveList(list));
+
                     printLine();
                     System.out.println("     Nice! I've marked this task as done:");
                     System.out.println("       " + list.get(num));
                     printLine();
                 } else if (split[0].equals("delete")) {
                     int num = Integer.parseInt(split[1]) - 1;
+                    writeToFile("data/duke.txt", saveList(list));
+
                     printLine();
                     System.out.println("     Noted. I've removed this task:");
                     System.out.println("       " + list.get(num));
@@ -100,6 +121,9 @@ public class Duke {
                         task = new Event(split[1]);
                         list.add(new Event(split[1]));
                     }
+
+                    writeToFile("data/duke.txt", saveList(list));
+
                     printLine();
                     System.out.println("     Got it. I've added this task:");
                     System.out.println("       " + task);
@@ -110,6 +134,8 @@ public class Duke {
         }
         catch (DukeException ex) {
             System.out.println(ex.getMessage());
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 }

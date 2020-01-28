@@ -8,6 +8,14 @@ public class Event extends Task {
         this.date = arr[1];
     }
 
+    public String toPrint() {
+        if (this.isDone) {
+            return "E | " + 1 + " | " + this.description + " | " + this.date;
+        } else {
+            return "E | " + 0 + " | " + this.description + " | " + this.date;
+        }
+    }
+
     public String toString() {
         if (this.isDone) {
             return "[E][✓] " + this.description + " (at: " + this.date + ")";
