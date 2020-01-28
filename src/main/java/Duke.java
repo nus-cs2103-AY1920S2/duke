@@ -1,10 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
+
+        try {
+            FileUtils.readFile(tasks);
+        } catch (FileNotFoundException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
 
         printHorizontalLine();
         printIndented("Hello! I'm Duke");
@@ -22,28 +31,43 @@ public class Duke {
                     printIndented(String.format("%d.%s", i + 1, tasks.get(i)));
                 }
                 printHorizontalLine();
-            } else if (input.contains("done")) {
+            } else if (getCommand(input, 4).equals("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 tasks.get(index).doTask();
 
                 printHorizontalLine();
                 printIndented("Nice! I've marked this task as done: ");
                 printIndented(" " + tasks.get(index));
+                try {
+                    FileUtils.doTask(index);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
+
                 printHorizontalLine();
-            } else if (input.contains("delete")) {
+            } else if (getCommand(input, 6).equals("delete")) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
 
                 printHorizontalLine();
                 printIndented("Noted. I've removed this task: ");
                 printIndented(" " + tasks.remove(index));
+                try {
+                    FileUtils.deleteTask(index);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
+
                 printHorizontalLine();
-            } else if (input.contains("todo") || input.contains("deadline") || input.contains(("event"))) {
+            } else if (getCommand(input, 4).equals("todo") ||
+                    getCommand(input, 8).equals("deadline") ||
+                    getCommand(input, 5).equals("event")) {
                 try {
                     String typeRemoved = input.strip().split(" ", 2)[1];
+                    String type = input.strip().split(" ", 2)[0];
 
-                    Task task = input.contains("todo")
+                    Task task = type.equals("todo")
                             ? new ToDo(typeRemoved)
-                            : input.contains("deadline")
+                            : type.equals("deadline")
                             ? new Deadline(typeRemoved)
                             : new Event(typeRemoved);
                     tasks.add(task);
@@ -52,12 +76,17 @@ public class Duke {
                     printIndented("Got it. I've added this task: ");
                     printIndented(" " + task);
                     printIndented(String.format("Now you have %d tasks in the list.", tasks.size()));
+
+                    FileUtils.addTask(input);
+
                     printHorizontalLine();
                 } catch (IndexOutOfBoundsException e) {
                     printHorizontalLine();
                     printIndented("☹ OOPS!!! The description of a " +
                             input.split(" ")[0] + " cannot be empty.");
                     printHorizontalLine();
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
             } else {
                 printHorizontalLine();
@@ -79,5 +108,9 @@ public class Duke {
 
     public static void printHorizontalLine() {
         System.out.println("    ____________________________________________________________");
+    }
+
+    public static String getCommand(String input, int indexLast) {
+        return input.substring(0, Math.min(indexLast, input.length()));
     }
 }
