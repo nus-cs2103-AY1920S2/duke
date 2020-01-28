@@ -1,3 +1,6 @@
+/**
+ * Handles the loading, storing and saving list of tasks
+ */
 package duke.storage;
 
 import java.io.File;
@@ -23,6 +26,12 @@ public class Storage {
         this.f = new File(filePath);
     }
 
+    /**
+     * Looks for a file of existing list of tasks to be loaded into an ArrayList.
+     * Creates a new file if file is not found
+     * @return ArrayList of tasks
+     * @throws DukeException If file cannot be found
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -83,6 +92,10 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Appends the current task to existing list of tasks
+     * @param t Task to be added to list
+     */
     public void saveTask(Task t) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
@@ -95,6 +108,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates existing task list when there is a completion or deletion
+     * @param taskList Existing task list
+     */
     public void updateTasks(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(filePath, false);

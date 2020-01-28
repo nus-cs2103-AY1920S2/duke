@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception in thrown when user input is not recognized or of a wrong format
+ */
 public class DukeException extends Exception {
 
     protected String description;

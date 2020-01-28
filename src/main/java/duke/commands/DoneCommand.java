@@ -14,6 +14,13 @@ public class DoneCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Marks a particular task as done
+     * @param tasks List of current tasks
+     * @param ui User interface used to reply user
+     * @param storage For storing of tasks into file
+     * @throws DukeException If input format is wrong
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showLine();

@@ -12,3 +12,4 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+src/main/java/META-INF/MANIFEST.MF

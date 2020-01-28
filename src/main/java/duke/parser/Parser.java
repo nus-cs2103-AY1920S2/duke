@@ -1,9 +1,17 @@
+/**
+ * Filters user input to determine type of command to be used
+ */
 package duke.parser;
 
 import duke.commands.*;
 
 public class Parser {
 
+    /**
+     * Returns the command corresponding to user input
+     * @param fullCommand Input received from user
+     * @return Command requested by user
+     */
     public static Command parse(String fullCommand) {
 
         String cmdType = fullCommand.split(" ")[0];

@@ -11,6 +11,13 @@ public class DeleteCommand extends Command {
         super(command);
     }
 
+    /**
+     * Deletes a task from list of current tasks
+     * @param tasks List of current tasks
+     * @param ui User interface used to reply user
+     * @param storage For storing of tasks into file
+     * @throws DukeException If input format is wrong
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showLine();

@@ -1,3 +1,11 @@
+/**
+ * Main class to run Duke program
+ * <p>This program acts as a scheduler that can add tasks to be done, tasks with a deadline and
+ * upcoming events </p>
+ *
+ * @param filePath - File path where schedule is saved. File path is relative to src folder
+ */
+
 package duke;
 
 import duke.storage.Storage;

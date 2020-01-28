@@ -16,6 +16,13 @@ public class AddCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Adds task to TaskList
+     * @param tasks List of current tasks
+     * @param ui User interface used to reply user
+     * @param storage For storing of tasks into file
+     * @throws DukeException If input format is wrong
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = null;
@@ -41,7 +48,13 @@ public class AddCommand extends Command {
         }
     }
 
-    private Task createEvent(String command) throws DukeException {
+    /**
+     * Creates an Event task to be added to list
+     * @param command Details about the event
+     * @return Event task
+     * @throws DukeException If input format is wrong
+     */
+    public Task createEvent(String command) throws DukeException {
         if (command.equals("event")) {
             throw new DukeException("Please enter more details.");
         }
@@ -60,7 +73,13 @@ public class AddCommand extends Command {
         }
     }
 
-    private Task createDeadline(String command) throws DukeException {
+    /**
+     * Creates a Deadline task to be added to list
+     * @param command Details about the deadline
+     * @return Deadline task
+     * @throws DukeException If input format is wrong
+     */
+    public Task createDeadline(String command) throws DukeException {
         if (command.equals("deadline")) {
             throw new DukeException("Please enter more details.");
         }
@@ -80,7 +99,13 @@ public class AddCommand extends Command {
         }
     }
 
-    private Task createTodo(String command) throws DukeException {
+    /**
+     * Creates a Todo task to be added to list
+     * @param command Details about task to be done
+     * @return Todo task
+     * @throws DukeException If input format is wrong
+     */
+    public Task createTodo(String command) throws DukeException {
         if (command.equals("todo")) {
             throw new DukeException("Please enter something to do.");
         }
