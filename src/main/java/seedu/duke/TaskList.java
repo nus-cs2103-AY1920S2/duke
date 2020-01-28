@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class TaskList {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
@@ -77,5 +77,15 @@ public class TaskList {
 
     public void remove(int taskIndex) {
         tasks.remove(taskIndex);
+    }
+
+    public TaskList find(String keyword) {
+        TaskList viewToReturn = new TaskList();
+        for (Task task : tasks) {
+            if (task.getTaskDescription().contains(keyword)) {
+                viewToReturn.add(task);
+            }
+        }
+        return viewToReturn;
     }
 }

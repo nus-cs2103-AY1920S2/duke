@@ -35,6 +35,11 @@ class Parser {
                     selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
                     toReturn = new DeleteCommand(selectedTaskIndex);
                     break;
+                case find:
+                    // TODO check split input length
+                    toReturn = new FindCommand(
+                            String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length)));
+                    break;
                 case todo:
                 case deadline:
                 case event:
