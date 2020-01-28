@@ -4,4 +4,3 @@ T | 0 | read again
 E | 1 | readnnnn| school
 T | 0 | readddd
 E | 0 | readddddddd| school
-
