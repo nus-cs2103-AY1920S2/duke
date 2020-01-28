@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +55,7 @@ public class Duke {
             else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
                 try {
                     int slashIndex = getSlash(input);
-                    added.add(new Deadline(input.substring(9, slashIndex - 1), false, input.substring(slashIndex + 4)));
+                    added.add(new Deadline(input.substring(9, slashIndex - 1), false, LocalDate.parse(input.substring(slashIndex + 4))));
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + added.get(added.size() - 1).toString());
                     System.out.println("Now you have " + added.size() + "tasks in the list.");
@@ -211,7 +212,7 @@ public class Duke {
                 byAt = str.substring(lastIndex + 3);
 
                 if (type == 'D') {
-                    list.add(new Deadline(description, done, byAt));
+                    list.add(new Deadline(description, done, LocalDate.parse(byAt)));
                 }
 
                 else if (type == 'E') {
@@ -290,9 +291,9 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
         this.by = by;
     }
