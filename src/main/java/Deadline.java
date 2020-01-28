@@ -3,16 +3,20 @@ public class Deadline extends Task {
 
     public Deadline(String name, String date) {
         super(name);
-        this.date = date.substring(date.indexOf(" "));
+        this.date = date.substring(date.indexOf(" ")).trim();
     }
 
-    private Deadline(String name, String date, boolean isDone) {
+    public Deadline(String name, String date, boolean isDone) {
         super(name, isDone);
         this.date = date;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + date + ")";
+        return "[D]" + super.toString() + " (by: " + date + ")";
+    }
+
+    public String writeDrive() {
+        return "D|" + (super.isDone()? "1|" : "0|") + this.name +"|" + this.date;
     }
 
     public Deadline setDone() {

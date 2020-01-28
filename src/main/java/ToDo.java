@@ -4,12 +4,16 @@ public class ToDo extends Task {
         super(name);
     }
 
-    private ToDo(String name, boolean isDone) {
+    public ToDo(String name, boolean isDone) {
         super(name, isDone);
     }
 
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    public String writeDrive() {
+        return "T|" + (super.isDone()? "1|" : "0|") + this.name;
     }
 
     public ToDo setDone() {

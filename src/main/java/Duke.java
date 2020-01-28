@@ -1,5 +1,13 @@
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,10 +26,79 @@ public class Duke {
         processInput();
     }
 
+    static void readPrevious(ArrayList<Task> tasks) {
+        File file = new File ("./data/duke.txt");
+        try {
+            Scanner s = new Scanner(file);
+            while (s.hasNextLine()) {
+                String curr = s.nextLine();
+                String type = curr.substring(0, 1);
+                String isDone = curr.substring(2,3);
+                Task add;
+                if (type.equals("T")) {
+                    add = new ToDo(curr.substring(4), isDone.equals("0")? false : true);
+                } else {
+                    String name = curr.substring(4, curr.indexOf('|', 4));
+                    String date = curr.substring(curr.indexOf('|', 4) + 1);
+                    if (type.equals("D")) {
+                        add = new Deadline(name, date, isDone.equals("0")? false : true);
+                    } else {
+                        add = new Event(name, date, isDone.equals("0")? false : true);
+                    }
+                }
+                tasks.add(add);
+            }
+        } catch (FileNotFoundException e) {
+            //System.out.println("The previous list cannot be found");
+        }
+    }
+
+    static void updateDrive(Task updatedTask) {
+        File file = new File ("./data/duke.txt");
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(file, true));
+            writer.append(updatedTask.writeDrive());
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            //System.out.println("Cannot find file");
+        }
+    }
+
+    static void deleteDrive(int size) {
+        ArrayList<String> tasks = new ArrayList<>();
+        try {
+            File file = new File("./data/duke.txt");
+            FileReader fr = new FileReader(file);
+            Scanner s = new Scanner(fr);
+            int i = 1;
+            while (s.hasNextLine()){
+                if (i == size) {
+                    i++;
+                    String line = s.nextLine();
+                    continue;
+                }
+                else {
+                    String line = s.nextLine();
+                    tasks.add(line);
+                    i++;
+                }
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
+            for (String st : tasks) {
+                writer.append(st);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (Exception e) {}
+    }
+
     static void processInput() {
         String line = "   ____________________________________________________________";
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
+        readPrevious(tasks);
         String next = sc.nextLine();
         while (!next.trim().equals("bye")) {
             System.out.println(line);
@@ -33,6 +110,7 @@ public class Duke {
                         Integer taskNumber = Integer.valueOf((next.split(" ")[1]));
                         Task updatedTask = tasks.get(taskNumber - 1).setDone();
                         tasks.set(taskNumber - 1, updatedTask);
+                        updateDrive(updatedTask);
                         printDone(updatedTask);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
@@ -42,6 +120,7 @@ public class Duke {
                         Integer taskNumber = Integer.valueOf((next.split(" ")[1]));
                         Task removedTask = tasks.get(taskNumber - 1);
                         tasks.remove(removedTask);
+                        deleteDrive(taskNumber);
                         printRemove(removedTask, tasks.size());
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException(" ☹ OOPS!!! The description of a delete cannot be empty.");
@@ -55,26 +134,29 @@ public class Duke {
                             taskName = next.trim().substring(5);
                             newTask = new ToDo(taskName);
                             tasks.add(newTask);
+                            updateDrive(newTask);
                             printTask(newTask, tasks.size());
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                     } else if (next.trim().split(" ")[0].equals("deadline")) {
                         try {
-                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
-                            String taskDate = next.substring(next.indexOf("/") + 1);
+                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/")).trim();
+                            String taskDate = next.substring(next.indexOf("/") + 1).trim();
                             newTask = new Deadline(taskName, taskDate);
                             tasks.add(newTask);
+                            updateDrive(newTask);
                             printTask(newTask, tasks.size());
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
                     } else if (next.trim().split(" ")[0].equals("event")) {
                         try {
-                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
-                            String taskDate = next.substring(next.indexOf("/") + 1);
+                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/")).trim();
+                            String taskDate = next.substring(next.indexOf("/") + 1).trim();
                             newTask = new Event(taskName, taskDate);
                             tasks.add(newTask);
+                            updateDrive(newTask);
                             printTask(newTask, tasks.size());
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");

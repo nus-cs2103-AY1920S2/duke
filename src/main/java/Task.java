@@ -17,5 +17,11 @@ public abstract class Task {
         return "[" + done + "] " + name;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public abstract Task setDone();
+
+    public abstract String writeDrive();
 }
