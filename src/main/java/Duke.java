@@ -1,9 +1,6 @@
-// name: Sarah Chua
-// this is the version after the force push
 
 import java.io.*;
 import java.util.Scanner;
-import java.lang.*;
 
 public class Duke {
 
@@ -22,7 +19,6 @@ public class Duke {
         catch (FileNotFoundException exception) {
             System.out.println("File not found!");
         }
-        
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         processRequests();
