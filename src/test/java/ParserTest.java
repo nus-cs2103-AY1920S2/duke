@@ -14,7 +14,7 @@ public class ParserTest {
                 "--------------------------------------------------\n";
 
         String actual = exception.toString();
-        
+
         assertEquals(expected, actual);
     }
 }

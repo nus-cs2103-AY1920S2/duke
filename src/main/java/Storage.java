@@ -8,9 +8,19 @@ import java.util.Scanner;
 public class Storage {
 
     public String filePath;
+    public File file;
 
     public Storage(String filePath) {
+
         this.filePath = filePath;
+
+        file = new File(filePath);
+        try {
+            file.getParentFile().mkdir();
+            file.createNewFile();
+        }  catch(IOException e) {
+            System.out.println("Error creating file");
+        }
     }
 
     public ArrayList<Task> load() throws FileNotFoundException {
