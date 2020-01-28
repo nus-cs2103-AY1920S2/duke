@@ -26,7 +26,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch(FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -38,13 +38,13 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while (!isExit) {
+        while(!isExit) {
             try {
                 String fullCommand = ui.readInput();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit;
-            } catch (DukeException e) {
+            } catch(DukeException e) {
                 ui.showError(e);
             }
         }
