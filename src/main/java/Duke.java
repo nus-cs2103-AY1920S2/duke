@@ -1,16 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
 
@@ -29,11 +20,9 @@ public class Duke {
             run();
             storage.saveFile(tasks);
         } catch (IOException | DukeException e) {
-            System.err.println(e);
-            uI.printTryAgain();
+            uI.printError(e);
         } catch (DateTimeParseException d) {
-            System.err.println("Please enter the date as yyyy-mm-dd followed by the time.");
-            uI.printTryAgain();
+            uI.printInvalidDateFormatError();
         } finally {
             uI.printTerminated();
         }
@@ -43,8 +32,7 @@ public class Duke {
 
     private static void run() throws DukeException, DateTimeParseException {
         taskList = new TaskList(tasks);
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String command = parser.getCommand();
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 uI.displayTasks(tasks);
@@ -61,9 +49,8 @@ public class Duke {
                         break;
                 }
             }
-            command = sc.nextLine();
+            command = parser.getCommand();
         }
-        sc.close();
         uI.printBye();
     }
 

@@ -8,13 +8,13 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    private static List<Task> tasks;
+    private List<Task> tasks;
 
-    private static void print(String s) {
+    private void print(String s) {
         System.out.println(s);
     }
 
-    private static void printLine() {
+    private void printLine() {
         print("____________________________________________________________");
     }
 

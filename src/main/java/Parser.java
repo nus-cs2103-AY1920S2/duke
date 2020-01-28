@@ -1,6 +1,10 @@
+import java.util.Scanner;
+
 public class Parser {
     public Parser() {
     }
+
+    private Scanner sc = new Scanner(System.in);
 
     public String checkCommand(String command) throws DukeInvalidCommandException {
         if (command.split(" ").length == 1) {
@@ -14,6 +18,9 @@ public class Parser {
         return command.split(" ")[0];
     }
 
+    public String getCommand() {
+        return sc.nextLine();
+    }
 
 }
 

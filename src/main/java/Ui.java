@@ -4,11 +4,11 @@ public class Ui {
     public Ui() {
     }
 
-    public static void print(String s) {
+    private static void print(String s) {
         System.out.println(s);
     }
 
-    public static void printLine() {
+    private void printLine() {
         print("____________________________________________________________");
     }
 
@@ -36,9 +36,16 @@ public class Ui {
         }
     }
 
-    public void printTryAgain() {
+    public static void printError(Exception e) {
+        System.err.println(e);
         print("Try again later.");
     }
+
+    public static void printInvalidDateFormatError() {
+        System.err.println("Please enter the date as yyyy-mm-dd followed by the time.");
+        print("Try again later.");
+    }
+
 
     public void printBye() {
         print("Bye. Hope to see you again soon!");
