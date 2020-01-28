@@ -1,5 +1,10 @@
 import java.io.IOException;
 
+/**
+ * Duke is a task management assistant. It accepts user commands with the appropriate parameters and time
+ * information (if any). It can add/delete tasks, mark tasks as done, and list all tasks. Upon exit, the
+ * tasks will be saved to a data file. 
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -9,6 +14,12 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Constructs a Duke object. An attempt will be made to load in tasks from the file specified. If the file
+     * does not exist or cannot be accessed, an empty task list will be loaded.
+     * 
+     * @param filePath Path of file containing saved tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         
@@ -21,7 +32,11 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * Starts the Duke task management assistant. The user will input commands and the appropriate actions
+     * will be performed. Enter "bye" to exit the program.
+     */
     public void run() {
         ui.showGreeting();
 
@@ -51,7 +66,7 @@ public class Duke {
                             new Event(instruction.getParameters(), instruction.getDate()));
                     break;
                 case LIST:
-                    tasks.showTasks();
+                    ui.showTasks(tasks);
                     break;
                 case DELETE:
                     deleteTaskAndShow(tasks, ui, Integer.parseInt(instruction.getParameters()));

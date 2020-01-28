@@ -1,11 +1,21 @@
 import java.time.LocalDate;
 import java.util.Arrays;
 
+/**
+ * Parser decodes user given instruction to determine the appropriate action to be taken by Duke.
+ */
 public class Parser {
     private Command command;
     private String parameters;
     private LocalDate date;
-    
+
+    /**
+     * Constructs a Parser object. Attempts to extract the different sections of the specified instruction
+     * into the command, parameters, and date (if any).
+     * 
+     * @param instruction Input from user as instructions to Duke.
+     * @throws InvalidInstructionException If specified instruction is invalid.
+     */
     public Parser(String instruction) throws InvalidInstructionException {
         this.command = extractCommand(instruction);
 
@@ -22,15 +32,30 @@ public class Parser {
             this.date = extractDate(instruction);
         }
     }
-    
+
+    /**
+     * Gets the command from the instruction.
+     * 
+     * @return Instruction command.
+     */
     public Command getCommand() {
         return this.command;
     }
-    
+
+    /**
+     * Gets the parameters from the instruction [after command, before time flag (if any)] 
+     * 
+     * @return Instruction parameters.
+     */
     public String getParameters() {
         return this.parameters;
     }
-    
+
+    /**
+     * Gets the date from the instruction. 
+     * 
+     * @return Instruction date.
+     */
     public LocalDate getDate() {
         return this.date;
     }
