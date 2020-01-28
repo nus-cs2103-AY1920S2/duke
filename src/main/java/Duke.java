@@ -1,21 +1,95 @@
+import java.io.*;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final ArrayList<Task> taskList = new ArrayList<>();
+
 
     public static void main(String[] args) {
+        Path path = Paths.get("data/duke.txt");
+        File noteFile = new File(path.toString());
+        if(Files.notExists(path)) {
+            noteFile = new File("data/duke.txt");
+        } else {
+            try {
+                fileToArray(noteFile.toString());
+
+            } catch (FileNotFoundException ex) {
+                System.out.print("File not found");
+            }
+        }
+
         String greeting = "Hey there! I'm DingDing!\n"
                 + "    What's up today? ;D";
 
         printWithBorder(greeting);
         output();
+
+        String filePathStr = noteFile.getAbsolutePath();
+        try {
+            writeToFile(filePathStr, arrayToFile(taskList));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static String arrayToFile(ArrayList<Task> taskList) {
+        String outputToFile = "";
+        for(Task task : taskList) {
+            String taskType = task.getClass().getSimpleName();
+            String taskDesc = task.getDescription();
+            boolean taskIsDone = task.isDone;
+
+            if(taskType.equals("Todo")) {
+                outputToFile += "T/" + taskIsDone + "/" + taskDesc + "\n";
+            } else if (taskType.equals("Event")) {
+                outputToFile += "E/" + taskIsDone + "/" + taskDesc + "/" + ((Event)task).getAt() + "\n";
+            } else {
+                outputToFile += "D/" + taskIsDone + "/" + taskDesc + "/" + ((Deadline)task).getBy() + "\n";
+            }
+        }
+        return outputToFile;
+    }
+
+    private static void fileToArray(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner sc = new Scanner(f);
+        while(sc.hasNext()) {
+            String note = sc.nextLine();
+            String[] noteArr = note.split("/");
+            String noteType = noteArr[0];
+            boolean taskIsDone = (noteArr[1]).equals("true")  ? true : false;
+            String taskDesc = noteArr[2];
+            String dateTime = "";
+            if(!noteType.equals("T")) {
+                dateTime = noteArr[3];
+            }
+
+            if(noteType.equals("T")) {
+                taskList.add(new Todo(taskDesc, taskIsDone));
+            } else if(noteType.equals("E")) {
+                taskList.add(new Event(taskDesc, dateTime ,taskIsDone));
+            } else {
+                taskList.add(new Deadline(taskDesc, dateTime, taskIsDone));
+            }
+        }
+    }
+
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(textToAdd);
+        bw.close();
     }
 
     public static void output() throws DukeException {
         String reply = SCANNER.nextLine();
-        ArrayList<Task> taskList = new ArrayList<>();
         while (!reply.equals("bye")) {
             try {
                 String[] replyArr = reply.split(" ");
@@ -103,7 +177,7 @@ public class Duke {
                 task += " " + taskInstrArr[i];
             }
             String timeDate = taskReplyArr[1];
-            Deadline deadLine = new Deadline(task, timeDate);
+            Deadline deadLine = new Deadline(task, timeDate, false);
             taskList.add(deadLine);
             taskAdded(deadLine, taskList);
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -125,7 +199,7 @@ public class Duke {
                 task += " " + taskInstrArr[i];
             }
             String timeDate = taskReplyArr[1];
-            Event event = new Event(task, timeDate);
+            Event event = new Event(task, timeDate, false);
             taskList.add(event);
             taskAdded(event, taskList);
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -141,7 +215,7 @@ public class Duke {
             for (int i = 2; i < taskReplyArr.length; i++) {
                 task += " " + taskReplyArr[i];
             }
-            Todo toDo = new Todo(task);
+            Todo toDo = new Todo(task, false);
             taskList.add(toDo);
             taskAdded(toDo, taskList);
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -150,15 +224,6 @@ public class Duke {
         }
     }
 
-//    public static void taskVariants(String instruction, String reply, ArrayList<Task> taskList, String[] replyArr) {
-//        if (instruction.equals("deadline")) {
-//            handleDeadline(reply, taskList);
-//        } else if (instruction.equals("event")) {
-//            handleEvent(reply, taskList);
-//        } else if (instruction.equals("todo")) {
-//            handleTodo(reply, taskList);
-//        }
-//    }
 
     public static void otherInstructions(String instruction) throws DukeException {
         throw new DukeException("Sorry! I don't understand what is " + instruction);
