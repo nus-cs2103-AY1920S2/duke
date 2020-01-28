@@ -67,6 +67,10 @@ public class Ui {
         }else if(textEntered.contains("bye")) {
             manager.saveExistingData();
             this.hasEnded = true;
+        }else if(textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
+            String[] temp = textEntered.split(" ");
+            manager.findTask(temp[1]);
+
         }else{ //nonsense input
             try{
                 manager.nonsenseInput();
