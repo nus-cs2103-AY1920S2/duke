@@ -28,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * Runs the code for the Duke Assistant.
+     * Runs the code for the Duke program.
      */
     public void run() {
         ui.printStartUp();
