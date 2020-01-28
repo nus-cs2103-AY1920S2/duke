@@ -1,0 +1,5 @@
+T | 1 | read book
+D | 0 | return book | Jun 6 2020
+E | 1 | project meeting | Aug 6 2020 14:00
+T | 0 | join sports club
+T | 0 | borrow book
