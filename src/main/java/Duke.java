@@ -29,11 +29,11 @@ public class Duke {
                     this.taskList.addTask(todo);
                     this.print("Added: " + todo.getFullDescription() + "\n    " + this.taskList.printNumTasks());
                 } else if (command == Command.ADD_DEADLINE) {
-                    Deadline deadline = new Deadline(parser.getDescription(), parser.getBy());
+                    Deadline deadline = new Deadline(parser.getDescription(), parser.getDate());
                     this.taskList.addTask(deadline);
                     this.print("Added: " + deadline.getFullDescription() + "\n    " + this.taskList.printNumTasks());
                 } else if (command == Command.ADD_EVENT) {
-                    Event event = new Event(parser.getDescription(), parser.getAt());
+                    Event event = new Event(parser.getDescription(), parser.getAt(), parser.getDate());
                     this.taskList.addTask(event);
                     this.print("Added: " + event.getFullDescription() + "\n    " + this.taskList.printNumTasks());
                 } else if (command == Command.MARK_TASK_AS_DONE) {
