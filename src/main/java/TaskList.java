@@ -10,7 +10,7 @@ public class TaskList {
         this(new ArrayList<>());
     }
 
-    private TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 
@@ -31,6 +31,15 @@ public class TaskList {
      */
     public int getNumTasks() {
         return taskList.size();
+    }
+
+    /**
+     * Returns the list of tasks.
+     *
+     * @return the list of tasks.
+     */
+    public List<Task> getList() {
+        return new ArrayList<>(taskList);
     }
 
     /**

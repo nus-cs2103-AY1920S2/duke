@@ -31,7 +31,7 @@ public class Storage {
      * Returns a list of tasks generated from a save file.
      *
      * @return a list of tasks generated from a save file.
-     * @throws DukeException
+     * @throws DukeException if file could not be found or opened.
      */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
@@ -60,7 +60,7 @@ public class Storage {
             return tasks;
 
         } catch (IOException e) {
-            throw new DukeException("Could not read to file: " + filePath);
+            throw new DukeException("Could not read from file: " + filePath);
         }
     }
 
@@ -96,20 +96,20 @@ public class Storage {
             // First argument is the character ID of the task type.
             // Exceptions will be thrown if the task could not be read properly
             switch (args[0]) {
-                case "T":
-                    // To-do
-                    task = readTodo(args);
-                    break;
-                case "D":
-                    // Deadline
-                    task = readDeadline(args);
-                    break;
-                case "E":
-                    // Event
-                    task = readEvent(args);
-                    break;
-                default:
-                    throw new DukeException("Unknown task type: " + args[0]);
+            case "T":
+                // To-do
+                task = readTodo(args);
+                break;
+            case "D":
+                // Deadline
+                task = readDeadline(args);
+                break;
+            case "E":
+                // Event
+                task = readEvent(args);
+                break;
+            default:
+                throw new DukeException("Unknown task type: " + args[0]);
             }
 
             // Second argument indicates whether the task has been completed

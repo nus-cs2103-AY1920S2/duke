@@ -1,3 +1,5 @@
+// TODO: Will expand exception hierarchy in future
+
 public class DukeException extends Exception {
     /**
      * Constructs a new custom exception.

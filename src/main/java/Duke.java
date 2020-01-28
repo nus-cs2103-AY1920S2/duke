@@ -6,10 +6,22 @@ public class Duke {
         displayLogo();
         greet();
 
-        Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        Storage storage = new Storage("src/main/java/save.txt");
+        boolean fileOpen = false;
 
-        inputCommands(sc, taskList);
+        TaskList taskList;
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            taskList = new TaskList(storage.load());
+            fileOpen = true;
+        } catch (DukeException e) {
+            echo(e.getMessage());
+            taskList = new TaskList();
+        }
+
+        inputCommands(sc, taskList, storage);
 
         exit();
     }
@@ -21,13 +33,16 @@ public class Duke {
     }
 
     /**
-     * The main loop for handling user commands. Stops looping when the given
-     * exit command is the next input.
+     * Returns a modified task list after looping through user commands.
+     * Will only return when the exit command is the next input.
+     * Will update the save file after every command.
      *
      * @param sc the scanner accepting user input
      * @param taskList the list of tasks.
+     * @param storage the save/loading mechanism.
+     * @return a task list modified by user commands.
      */
-    public static void inputCommands(Scanner sc, TaskList taskList) {
+    public static TaskList inputCommands(Scanner sc, TaskList taskList, Storage storage) {
         // Terminates the chat-bot if true
         boolean exit = false;
 
@@ -68,7 +83,20 @@ public class Duke {
             } catch (DukeException e) {
                 // Output exception message
                 echo(e.getMessage());
+            } finally {
+                save(storage, taskList);
             }
+        }
+
+        return taskList;
+    }
+
+    /** Updates the save file. */
+    private static void save(Storage storage,TaskList taskList) {
+        try {
+            storage.save(taskList.getList());
+        } catch (DukeException e) {
+            echo(e.getMessage());
         }
     }
 
