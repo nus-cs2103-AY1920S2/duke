@@ -17,7 +17,8 @@ public class Storage {
     }
     
     @SuppressWarnings("unchecked")
-    private ArrayList<Task> loadTaskState() throws IOException, ClassNotFoundException, ClassCastException {
+    private ArrayList<Task> loadTaskState()
+        throws IOException, ClassNotFoundException, ClassCastException {
         FileInputStream f = new FileInputStream(savePath);
         ObjectInputStream o = new ObjectInputStream(f);
         
