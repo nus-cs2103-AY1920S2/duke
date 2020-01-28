@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
@@ -9,13 +10,18 @@ public class Deadline extends Task {
     LocalDate d;
     String statement = "";
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
         this.by = by;
         String[] tmp = this.by.split(" ");
         statement = tmp[0];
         dateAsString = dateAsString + tmp[1];
-        d = LocalDate.parse(dateAsString);
+
+        try {
+            d = LocalDate.parse(dateAsString);
+        } catch (DateTimeParseException e) {
+
+        }
     }
 
     @Override
@@ -24,7 +30,13 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(" + statement + " " + d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    public String toString() throws NullPointerException {
+        String str = "[D]" + super.toString() + " (" + statement + " ";
+        try {
+            str = str + d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        } catch (NullPointerException e) {
+            str = "[D]" + super.toString() + " (" + by + ")";
+        }
+        return str;
     }
 }
