@@ -10,43 +10,33 @@ public enum DukeCommand {
      */
     LIST {
         @Override
-        public void execute(String s1) {
-            Duke.HorizontalLine();
-            // Print all the tasks added
-
-            int counter = 1;
-            for (Task currtask : Duke.listOfTask) {
-                System.out.println(counter++ + "." + currtask);
-            }
-
-            Duke.HorizontalLine();
+        public void execute(String s1, TaskList list, Ui ui) {
+            ui.listAllTasks(list);
         }
     },
     DONE {
         @Override
-        public void execute(String s1) {
+        public void execute(String s1, TaskList list, Ui ui) {
             // Split the string to get the
             // index of the task to be done
             String[] arr = s1.split("\\s+");
             int pos = Integer.parseInt(arr[1]) - 1;
 
-            Duke.HorizontalLine();
-            System.out.println("Nice! I've marked this as done:");
-            (Duke.listOfTask).get(pos).taskIsDone(); // Mark this task as done
-            System.out.println((Duke.listOfTask).get(pos));
-            Duke.HorizontalLine();
+            Task taskToBeCompleted = list.getListOfTask().get(pos);
+            taskToBeCompleted.taskIsDone(); // Mark this task as done
+            ui.doneMessage(taskToBeCompleted);
         }
     },
     TODO {
         @Override
-        public void execute(String s1) {
+        public void execute(String s1, TaskList list, Ui ui) {
             String[] arr = s1.split("\\s+", 2);
-            Duke.add(new Todo(arr[1]));
+            list.add(new Todo(arr[1]));
         }
     },
     DEADLINE {
         @Override
-        public void execute(String s1) {
+        public void execute(String s1, TaskList list, Ui ui) {
             // Manipulating the String by separating the actual command
             // and the word '/by' to get the description and date/time
             int limit = s1.lastIndexOf("/by") - 1;
@@ -56,10 +46,14 @@ public enum DukeCommand {
             String[] strarr = substr.split("\\s+", 2);
 
             DateTimeFormatter formatdate = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-            // Translating input date to the form of "MM d yyyy"
-            String[] inputdate = (strarr[1]).split("\\s+", 2);
 
             try {
+                if (strarr[1].equals("")) {
+                    throw new Exception("Please enter Date and Time!");
+                }
+                // Translating input date to the form of "MM d yyyy"
+                String[] inputdate = (strarr[1]).split("\\s+", 2);
+
                 LocalDate date = LocalDate.parse(inputdate[0],
                         formatdate.withResolverStyle(ResolverStyle.STRICT));
 
@@ -73,11 +67,13 @@ public enum DukeCommand {
                     throw new Exception("Please enter time in the form of 24 hour format!");
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
+                // Check if the minute is valid
                 if ((timeTest > 60 || timeTest < 0) || (dateInt > 2359 || dateInt < 0))
                     throw new Exception("Invalid time!");
 
                 String time = "";
 
+                // Time validation
                 if (dateInt < 1300){
                     time = timeTest < 10 ? time + "0" : time;
 
@@ -95,19 +91,21 @@ public enum DukeCommand {
                 inputdate[1] = time;
 
                 String newstr = String.join(" ", inputdate);
-                Duke.add(new Deadline(s1.substring(9, limit), newstr));
+                list.add(new Deadline(s1.substring(9, limit), newstr));
+
             } catch (DateTimeParseException exception){
-                System.out.println(exception.getMessage());
-                System.out.println("Print date in the form of yyy-mm-dd");
+                ui.showErrorMessage(exception.getMessage());
+                ui.showErrorMessage("Input date in the form of yyy-mm-dd and " +
+                        "remember to add time in 24-hour format");
                 return;
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                ui.showErrorMessage(ex.getMessage());
             }
 
         }
     },
     EVENT {
-        public void execute(String s1){
+        public void execute(String s1, TaskList list, Ui ui){
             // Manipulating the String by separating the actual command
             // and the word '/at' to get the description and date/time
             int limit = s1.lastIndexOf("/at") - 1;
@@ -117,10 +115,15 @@ public enum DukeCommand {
             String[] strarr = substr.split("\\s+", 2);
 
             DateTimeFormatter formatdate = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-            // Translating input date to the form of "MM d yyyy"
-            String[] inputdate = (strarr[1]).split("\\s+", 2);
 
             try {
+                if (strarr[1].equals("")) {
+                    throw new Exception("Please enter date and time!");
+                }
+
+                // Translating input date to the form of "MM d yyyy"
+                String[] inputdate = (strarr[1]).split("\\s+", 2);
+
                 LocalDate date = LocalDate.parse(inputdate[0],
                         formatdate.withResolverStyle(ResolverStyle.STRICT));
 
@@ -134,11 +137,12 @@ public enum DukeCommand {
                     throw new Exception("Please enter time in the form of 24 hour format!");
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
+                // Check if the minute is valid
                 if ((timeTest > 60 || timeTest < 0) || (dateInt > 2359 || dateInt < 0))
                     throw new Exception("Invalid time!");
 
                 String time = "";
-
+                // Time validation
                 if (dateInt < 1300){
                     time = timeTest < 10 ? time + "0" : time;
 
@@ -155,34 +159,30 @@ public enum DukeCommand {
                 inputdate[1] = time;
 
                 String newstr = String.join(" ", inputdate);
-                Duke.add(new Event(s1.substring(6, limit), newstr));
+                list.add(new Event(s1.substring(6, limit), newstr));
+
             } catch (DateTimeParseException exception){
-                System.out.println(exception.getMessage());
-                System.out.println("Print date in the form of yyy-mm-dd");
+                ui.showErrorMessage(exception.getMessage());
+                ui.showErrorMessage("Input date in the form of yyy-mm-dd and " +
+                        "remember to add time in 24-hour format");
                 return;
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                ui.showErrorMessage(ex.getMessage());
             }
 
         }
     },
     DELETE {
         @Override
-        public void execute(String s1) {
+        public void execute(String s1, TaskList list, Ui ui) {
             // Split the string to get the
             // index of the task to be deleted
             String[] arrdel = s1.split("\\s+");
             int pos = Integer.parseInt(arrdel[1]) - 1;
 
-            Duke.HorizontalLine();
-            System.out.println("Noted. I've removed this task:");
-            System.out.println((Duke.listOfTask).get(pos));
-            (Duke.listOfTask).remove(pos); // Mark this task as done
-
-            System.out.println("Now you have " + Duke.listOfTask.size() + " tasks in the list.");
-            Duke.HorizontalLine();
+            list.delete(pos);
         }
     };
 
-    public abstract void execute(String s1);
+    public abstract void execute(String s1, TaskList list, Ui ui);
 }
