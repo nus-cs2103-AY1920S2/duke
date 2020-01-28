@@ -67,6 +67,12 @@ public class Duke {
                 catch (IOException e) {
                     System.out.println("An error occurred while saving, please try again!");
                 }
+            } else if(parser.getCommand().equals("find")) {
+                try {
+                    ui.printOutFound(tasks.getMatches(parser.getDescription()));
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
             }
 
             else {
