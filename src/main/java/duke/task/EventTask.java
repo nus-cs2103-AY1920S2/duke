@@ -3,9 +3,12 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@SuppressWarnings("serial")
 public class EventTask extends Task {
     public static final char ICON = 'E';
+    public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT
+            = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT
+            = DateTimeFormatter.ofPattern("EE, dd MMM yyyy, HH:mm");
 
     private LocalDateTime at;
 
@@ -14,17 +17,37 @@ public class EventTask extends Task {
         this.at = at;
     }
 
+    public EventTask(String description, LocalDateTime at,
+            boolean isCompleted) {
+        super(description, isCompleted);
+        this.at = at;
+    }
+
     public LocalDateTime getDateTime() {
         return at;
+    }
+
+    @Override
+    public char getTaskIcon() {
+        return EventTask.ICON;
+    }
+
+    @Override
+    public String toStringDelimited() {
+        return String.format(
+                "%c %c %s %c %s",
+                getTaskIcon(), Task.DELIMITER, super.toStringDelimited(),
+                Task.DELIMITER,
+                getDateTime().format(DeadlineTask.DATE_TIME_OUTPUT_FORMAT)
+        );
     }
     
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter
-                                    .ofPattern("EE, dd MMM yyyy, HH:mm");
         return String.format(
                 "[%c]%s (at: %s)",
-                EventTask.ICON, super.toString(), getDateTime().format(format)
+                getTaskIcon(), super.toString(),
+                getDateTime().format(EventTask.DATE_TIME_OUTPUT_FORMAT)
         );
     }
 }

@@ -1,7 +1,6 @@
 package duke.command.method;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.Duke;
@@ -26,9 +25,9 @@ public class DeadlineCommandMethod implements CommandMethod {
             );
         }
         String description = parts[0];
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
-            LocalDateTime by = LocalDateTime.parse(parts[1], format);
+            LocalDateTime by = LocalDateTime.parse(parts[1],
+                    DeadlineTask.DATE_TIME_INPUT_FORMAT);
             DeadlineTask newTask = new DeadlineTask(description, by);
             return program.getTaskList().addTask(newTask);
         } catch (DateTimeParseException e) {

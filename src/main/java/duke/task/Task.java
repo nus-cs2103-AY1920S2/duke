@@ -1,18 +1,20 @@
 package duke.task;
 
-import java.io.Serializable;
-
-@SuppressWarnings("serial")
-public abstract class Task implements Serializable {
+public abstract class Task {
     public static final char COMPLETED = 'X';
     public static final char PENDING = ' ';
+    public static final char DELIMITER = '|';
 
     protected String description;
     protected boolean isCompleted;
 
     public Task(String description) {
+        this(description, false);
+    }
+
+    public Task(String description, boolean isCompleted) {
         this.description = description;
-        this.isCompleted = false;
+        this.isCompleted = isCompleted;
     }
 
     public String markAsCompleted() {
@@ -27,12 +29,21 @@ public abstract class Task implements Serializable {
         }
     }
 
+    public abstract char getTaskIcon();
+
     public String getDescription() {
         return description;
     }
 
     public char getStatusIcon() {
         return isCompleted ? Task.COMPLETED : Task.PENDING;
+    }
+
+    public String toStringDelimited() {
+        return String.format(
+                "%c %c %s",
+                getStatusIcon(), Task.DELIMITER, getDescription()
+        );
     }
 
     @Override
