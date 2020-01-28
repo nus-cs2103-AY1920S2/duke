@@ -1,0 +1,4 @@
+T|1|sldfj
+D|0|sldfj ljksdf|2020-03-04
+T|0|sldfj lasdjf
+E|1|asdf|2020-03-04
