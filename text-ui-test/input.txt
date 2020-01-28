@@ -1,0 +1,9 @@
+todo wash dishes
+todo clean up room
+list
+done 1
+list
+delete 1
+list
+wrong command
+bye
