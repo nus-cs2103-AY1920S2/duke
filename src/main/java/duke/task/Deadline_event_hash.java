@@ -1,24 +1,44 @@
-// Class to include all the Deadlines and events in a HashMap<>
+package duke.task;// Class to include all the Deadlines and events in a HashMap<>
 // Map the LocalDateTime to the event itself.
 // Then sort all the events according to
 
-import java.time.LocalDateTime;
+import duke.task.Task;
+
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 
+/**
+ * The type Deadline event hash.
+ */
 public class Deadline_event_hash {
 
+    /**
+     * The Hash map.
+     */
     HashMap<String, ArrayList<Task>> hashMap = new HashMap<>();
 
+    /**
+     * Instantiates a new Deadline event hash.
+     */
     public Deadline_event_hash() {
     }
 
+    /**
+     * Gets hash map.
+     *
+     * @return the hash map
+     */
     public HashMap<String, ArrayList<Task>> getHashMap() {
         return hashMap;
     }
 
-    // Add elements in the hashmap
+    /**
+     * Add to hash map.
+     *
+     * @param l the l
+     * @param k the k
+     */
+// Add elements in the hashmap
     public void addToHashMap(String l, Task k) {
 
         // If there is already another element with the same date,
@@ -34,7 +54,13 @@ public class Deadline_event_hash {
         al.sort((x,y)-> x.d1.getHour()-y.d1.getHour());
     }
 
-    // Get Elements in the ArrayList
+    /**
+     * Gets elements in array list.
+     *
+     * @param l the l
+     * @return the elements in array list
+     */
+// Get Elements in the ArrayList
     public ArrayList<Task> getElementsInArrayList(String l) {
         // If there is no elements,
         if(hashMap.get(l).isEmpty()) {

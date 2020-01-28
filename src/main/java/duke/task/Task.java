@@ -1,12 +1,24 @@
+package duke.task;
+
+import duke.DaysOfWeek;
+import duke.DukeException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-class Task {
+/**
+ * The type Task which handles all forms of Tasks
+ *
+ */
+public class Task {
 
+    /**
+     * @param d1 Formatted date and time which is being passed by the user
+     */
+    LocalDateTime d1;
     private String description;
     private boolean isDone;
-    LocalDateTime d1;
     private DaysOfWeek dm = new DaysOfWeek();
     private String[] days;
     private boolean isDay;
@@ -15,36 +27,76 @@ class Task {
     private Deadline_event_hash deadline_event_hash;
 
 
+    /**
+     * Instantiates a new Task.
+     *
+     * @param description the description
+     */
     Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
 
-    String format_tasks(String s) throws DukeException {
+    /**
+     * From the input given by the user, filter out the commands (TO-DO/Deadline/Event)
+     * And returns the description of the string.
+     *
+     * @param s the s
+     * @return the string
+     * @throws DukeException the duke exception
+     */
+    public String format_tasks(String s) throws DukeException {
         return getDescription().substring(getDescription().indexOf(s)).
                 replaceAll(s + " ", "");
     }
 
-    String getStatusIcon() {
+    /**
+     * Gets status icon. Either the tick or the cross icons.
+     *
+     * @return the status icon
+     */
+    public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    // Get the description
-    String getDescription() {
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
         return description;
     }
 
-    // Set the task as complete
-    void setDone(boolean done) {
+    /**
+     * Sets the task as complete
+     *
+     * @param done the done
+     */
+    public void setDone(boolean done) {
         isDone = done;
     }
 
-    void setDescription(String s) throws DukeException {
+    /**
+     * Sets the description
+     *
+     * @param s the s
+     * @throws DukeException the duke exception
+     */
+    public void setDescription(String s) throws DukeException {
         this.description = s;
     }
 
-    // Main method to set the At and By for deadline and Event classes
+    /**
+     * Sets the at or by fields for deadline and event class respectively.
+     * Mainly for the date and time of the task (Deadline/event) being held.
+     * Returns the String of the date and time which is then processed by LocalDateTime
+     *
+     * @param s the s
+     * @return the by at
+     */
+// Main method to set the At and By for deadline and duke.task.Event classes
     // After the "../at and ../by methods for deadline and event classes
     String set_by_at(String s) {
         StringBuilder returned = new StringBuilder();
@@ -97,7 +149,13 @@ class Task {
         return returned.toString();
     }
 
-    // Formats the Date and time of the task. Into the datetimeformat
+    /**
+     * Sets the string passed by set_by_at into a LocalDateTime format.
+     *
+     * @param at the at
+     * @throws DukeException the duke exception
+     */
+// Formats the Date and time of the task. Into the datetimeformat
     void setD1(String at) throws DukeException {
         if (!isDay) {
             // Means the string is entered as "2/12/2019",
@@ -171,13 +229,41 @@ class Task {
         return " [" + this.getStatusIcon() + "] " + getDescription();
     }
 
-    // For whether its To-do(T), Deadline (D), Event (E)
+    /**
+     * The enum Task codes.
+     */
+// For whether its To-do(T), duke.task.Deadline (D), duke.task.Event (E)
     public enum Task_Codes {
-        T, D, E
+        /**
+         * T task codes.
+         */
+        T,
+        /**
+         * D task codes.
+         */
+        D,
+        /**
+         * E task codes.
+         */
+        E
     }
 
+    /**
+     * The enum Task type.
+     */
     public enum Task_Type {
-        Todo, Deadline, Event
+        /**
+         * Todo task type.
+         */
+        Todo,
+        /**
+         * Deadline task type.
+         */
+        Deadline,
+        /**
+         * Event task type.
+         */
+        Event
     }
 
 

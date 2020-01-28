@@ -1,6 +1,14 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Event which extends from Task.
+ * Handles all inputs which has "event..."
+ */
 public class Event extends Task {
 
     // for the date and time option
@@ -11,7 +19,12 @@ public class Event extends Task {
     // Days array to determine if its a day or a yyyy-mm-dd format
     //String[] days;
 
-    Event(String description) {
+    /**
+     * Instantiates a new Event.
+     *
+     * @param description the description
+     */
+    public Event(String description) {
 
         super(description);
     }
@@ -20,28 +33,43 @@ public class Event extends Task {
         return at;
     }
 
-    void setAt(String s) {
+    /**
+     *  Sets the date and time of the event task.
+     *
+     * @param s the s
+     */
+    public void setAt(String s) {
         this.at = super.set_by_at(s);
     }
 
-    LocalDateTime getD1(){
-        return super.d1;
-    }
-
-    void setD1() throws DukeException {
+    /**
+     * Sets d1, the LocalDateTime for the Task.
+     *
+     * @throws DukeException the duke exception
+     */
+    public void setD1() throws DukeException {
         super.setD1(getAt());
     }
 
     // Covers exceptions caused by empty descriptions
     // Incorrect use of identifiers "../at" (More stringent check of formatting)
     // No deadline descriptors. Eg: "deadline /by Monday"
-    // Same for TO-DO, Deadline and Event classes!
+    // Same for TO-DO, duke.task.Deadline and duke.task.Event classes!
+    /**
+     * From the input given by the user, filter out the commands (Event)
+     * And returns the description of the string.
+     * @param s the s
+     * @return String without "event"
+     * @throws DukeException when the user enters an empty description or use the wrong event format.
+     * Eg: use ../by instead of ../at
+     */
+
     @Override
-    String format_tasks(String s) throws DukeException {
+    public String format_tasks(String s) throws DukeException {
 
-        String[] splited_string = getDescription().split("event ");
+        String[] splited_string = getDescription().split("event");
 
-        if(splited_string[0].length() <1) {
+        if(splited_string.length <1) {
             throw new DukeException("You cannot leave the description empty");
         } else {
             try{
@@ -53,10 +81,13 @@ public class Event extends Task {
         }
     }
 
-    // Ensures the user uses the correct format for an event
-    // Eg: Just typing "event".
+    /**
+     * Gets description of the task. WWithout the date and time .
+     *
+     * @return the deadline task description
+     */
     @Override
-    void setDescription(String s) throws DukeException {
+    public void setDescription(String s) throws DukeException {
 
         try {
             String event_task = s.substring(s.indexOf("event"), s.indexOf("/"));
@@ -67,6 +98,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets task codes.
+     *
+     * @return the task codes
+     */
     Task_Codes getTaskCodes() {
         return Task_Codes.E;
     }
