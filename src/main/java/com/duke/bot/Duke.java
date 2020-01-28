@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -138,10 +140,11 @@ public class Duke {
     }
 
     private void handleEventInput(String input) throws DukeException {
-        Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/at\\s+(.+)$");
+        Pattern eventPattern = Pattern.compile("^event\\s+(.+)\\s+/at\\s+(\\d{4}-\\d{2}-\\d{2})$");
         Matcher eventMatcher = eventPattern.matcher(input);
         if (eventMatcher.matches()) {
-            Event newEvent = new Event(eventMatcher.group(1), eventMatcher.group(2));
+            LocalDate dateAt = LocalDate.parse(eventMatcher.group(2));
+            Event newEvent = new Event(eventMatcher.group(1), dateAt);
             tasks.add(newEvent);
             reportNewTask(newEvent);
             saveTasks();
@@ -151,10 +154,11 @@ public class Duke {
     }
 
     private void handleDeadlineInput(String input) throws DukeException {
-        Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$");
+        Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(\\d{4}-\\d{2}-\\d{2})$");
         Matcher deadlineMatcher = deadlinePattern.matcher(input);
         if (deadlineMatcher.matches()) {
-            Deadline newDeadline = new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2));
+            LocalDate dateBy = LocalDate.parse(deadlineMatcher.group(2));
+            Deadline newDeadline = new Deadline(deadlineMatcher.group(1), dateBy);
             tasks.add(newDeadline);
             reportNewTask(newDeadline);
             saveTasks();
@@ -181,10 +185,20 @@ public class Duke {
             return String.format("T,%s,%b", todo.getTitle(), todo.isDone());
         } else if (task instanceof Event) {
             Event event = (Event) task;
-            return String.format("E,%s,%b,%s", event.getTitle(), event.isDone(), event.getDateAt());
+            return String.format(
+                    "E,%s,%b,%s",
+                    event.getTitle(),
+                    event.isDone(),
+                    event.getDateAt().format(DateTimeFormatter.ISO_DATE)
+            );
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            return String.format("D,%s,%b,%s", deadline.getTitle(), deadline.isDone(), deadline.getDateBy());
+            return String.format(
+                    "D,%s,%b,%s",
+                    deadline.getTitle(),
+                    deadline.isDone(),
+                    deadline.getDateBy().format(DateTimeFormatter.ISO_DATE)
+            );
         } else {
             throw new RuntimeException("Unknown task type");
         }
@@ -207,9 +221,11 @@ public class Duke {
         if (tokens[0].equals("T")) {
             return new Todo(tokens[1], isDone);
         } else if (tokens[0].equals("E")) {
-            return new Event(tokens[1], isDone, tokens[3]);
+            LocalDate dateAt = LocalDate.parse(tokens[3]);
+            return new Event(tokens[1], isDone, dateAt);
         } else if (tokens[0].equals("D")) {
-            return new Deadline(tokens[1], isDone, tokens[3]);
+            LocalDate dateBy = LocalDate.parse(tokens[3]);
+            return new Deadline(tokens[1], isDone, dateBy);
         } else {
             throw new RuntimeException("Unknown serialized task type");
         }
