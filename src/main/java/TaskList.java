@@ -20,6 +20,11 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Adds task to tasklist.
+     * @param taskType Type of task to be added.
+     * @param taskDescription Description of task to be added.
+     */
     public void add(String taskType, String taskDescription) {
         Task temp = new Task("random");
         if (taskType.equals("deadline")) {
@@ -47,6 +52,9 @@ public class TaskList {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Prints list of tasks.
+     */
     public void list() {
         int size = tasks.size();
         System.out.println("\tHere are the tasks in your list:");
@@ -55,6 +63,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks task as done.
+     *
+     * @param n Task to be marked as done.
+     */
     public void done(int n) {
         if (n > tasks.size()) {
             System.out.println("\tThere is no such task");
@@ -65,13 +78,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Task to be deleted.
+     * @param n Task to be deleted.
+     */
     public void delete(int n) {
         if (n > tasks.size()) {
             System.out.println("\tThere is no such task");
         } else {
             System.out.println("\tNoted. I have removed this task:");
             System.out.println("\t" + tasks.get(n - 1));
-            tasks.remove(n-1);
+            tasks.remove(n - 1);
             System.out.println("\tYou now have " + tasks.size() + " tasks in the list.");
         }
     }
