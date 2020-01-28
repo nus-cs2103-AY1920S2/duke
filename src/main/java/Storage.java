@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * Represents a Storage which stores tasks. Should the application close, tasks in the list will be saved
+ * until the next running of the application.
+ */
 public class Storage {
 
     private final String fileName = "../../../duke_save.txt";
@@ -26,6 +30,17 @@ public class Storage {
         return list;
     }
 
+/*
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param x  X coordinate of position.
+     * @param y Y coordinate of position.
+     * @param zone Zone of position.
+     * @return Lateral location.
+     * @throws IllegalArgumentException  If zone is <= 0.
+     */
     public ArrayList<Task> processLines(String line, ArrayList<Task> list) {
 
         int time_start_index = 0;
@@ -90,8 +105,17 @@ public class Storage {
         return list;
     }
 
-
-
+    /*
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param x  X coordinate of position.
+     * @param y Y coordinate of position.
+     * @param zone Zone of position.
+     * @return Lateral location.
+     * @throws IllegalArgumentException  If zone is <= 0.
+     */
     public void writeFile(ArrayList<Task> temp_list) throws Exception {
         bw = new BufferedWriter(new FileWriter(fileName));
         for (Task t : temp_list) {

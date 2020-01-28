@@ -3,6 +3,9 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
+/**
+ * Represents an Event object which extends from Task. Requires a timing and description for the event to take place.
+ */
 public class Event extends Task {
 
     protected String type = "E";
@@ -20,6 +23,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Sets the pattern of the required input date and time.
+     *
+     */
     public void format_Date() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withLocale(Locale.ENGLISH);

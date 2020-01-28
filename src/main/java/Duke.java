@@ -7,6 +7,10 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Run function which runs the Duke application
+     * @throws Exception should any issue occur with any function
+     */
     public void run() throws Exception {
 
         this.storage = new Storage();

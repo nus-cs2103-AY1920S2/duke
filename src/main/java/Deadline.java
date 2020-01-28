@@ -2,6 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Represents a Deadline object which extends from Task. Requires a timing and description for the event to take place.
+ */
+
 public class Deadline extends Task {
 
     protected String type = "D";
@@ -25,10 +29,14 @@ public class Deadline extends Task {
         return date;
     }
 
+    /**
+     * Sets the pattern of the required input date and time.
+     *
+     */
     public void format_Date() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withLocale(Locale.ENGLISH);
         date = LocalDate.parse(time,formatter);
-        System.out.println(date);
+        //System.out.println(date);
     }
 
 
