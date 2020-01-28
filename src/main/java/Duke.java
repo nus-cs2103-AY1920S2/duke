@@ -1,8 +1,14 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.File;
 
 public class Duke {
+    public static String filePath = "../../../data/duke.txt";
     public static void main(String[] args) {
         String logo = " ____        _        \n\t"
                 + "|  _ \\ _   _| | _____ \n\t"
@@ -16,8 +22,15 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________");
 
+        ArrayList<Task> tasks;
+
         Scanner in = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>(100);
+
+        try {
+            tasks = getTasksFromFile(filePath);
+        } catch(FileNotFoundException e) {
+            tasks = new ArrayList<>(100);
+        }
 
         //accepting input
         String input = in.nextLine();
@@ -101,7 +114,60 @@ public class Duke {
         //Exit
         System.out.println("\t____________________________________________________________");
         System.out.println("\tBye. Hope to see you again soon!");
+        try {
+            addTasksToFile(tasks);
+        } catch(IOException e) {
+            System.out.println("Error in saving to file");
+        }
         System.out.println("\t____________________________________________________________");
 
+    }
+
+    public static ArrayList<Task> getTasksFromFile(String path) throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<Task>(100);
+        File file = new File(path);
+        Scanner in = new Scanner(file);
+        while(in.hasNextLine()) {
+            String line = in.nextLine();
+            String taskComponents[] = line.split(" \\| ");
+            Task t;
+            switch(taskComponents[0]) {
+                case "T":
+                    t = new ToDo(taskComponents[2], stringToBoolean(taskComponents[1]));
+                    tasks.add(t);
+                    break;
+                case "D":
+                    t = new Deadline(taskComponents[2], taskComponents[3], stringToBoolean(taskComponents[1]));
+                    tasks.add(t);
+                    break;
+                case "E":
+                    t = new Event(taskComponents[2], taskComponents[3], stringToBoolean(taskComponents[1]));
+                    tasks.add(t);
+                    break;
+            }
+        }
+        return tasks;
+    }
+
+    public static void addTasksToFile(ArrayList<Task> tasks) throws IOException{
+        File file = new File(filePath);
+        FileWriter fw = new FileWriter(file);
+        int size = tasks.size();
+        String str = "";
+        Task t;
+        for(int i = 0; i < size; ++i) {
+            t = tasks.get(i);
+            str = str + t.addToFile() + "\n";
+        }
+        fw.write(str);
+        fw.close();
+    }
+
+    public static boolean stringToBoolean(String str) {
+        if(str.equals("0")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
