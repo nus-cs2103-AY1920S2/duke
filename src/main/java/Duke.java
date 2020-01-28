@@ -13,7 +13,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> added = new ArrayList<Task>();
 
-
         while (true) {
             String input = sc.nextLine();
 
@@ -249,4 +248,14 @@ class DukeException extends Exception {
     DukeException() {
         super();
     }
+}
+
+enum Op {
+    TODO,
+    DEADLINE,
+    EVENT,
+    LIST,
+    DONE,
+    DELETE,
+    BYE
 }
