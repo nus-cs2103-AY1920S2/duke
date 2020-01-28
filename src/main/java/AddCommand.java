@@ -1,21 +1,19 @@
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 class AddCommand extends Command {
 
-    private final DukeCommand type;
+    private final Command.Type type;
     private final String taskDescription;
     private final LocalDate date;
 
-    public AddCommand(DukeCommand type, String taskDescription, LocalDate date) {
+    public AddCommand(Command.Type type, String taskDescription, LocalDate date) {
         this.type = type;
         this.taskDescription = taskDescription;
         this.date = date;
     }
 
-    public AddCommand(DukeCommand type, String taskDescription) {
+    public AddCommand(Command.Type type, String taskDescription) {
         this(type, taskDescription, null);
     }
 
@@ -38,6 +36,7 @@ class AddCommand extends Command {
         }
 
         tasks.add(newTask);
+        storage.save(tasks);
         ui.printAddMessage(tasks, newTask);
     }
 }

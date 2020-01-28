@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 class DeleteCommand extends Command {
 
@@ -14,7 +12,7 @@ class DeleteCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Task selectedTask = tasks.get(selectedTaskIndex);
         tasks.remove(selectedTaskIndex);
-        ui.printDeleteMessage(tasks, selectedTask);
         storage.save(tasks);
+        ui.printDeleteMessage(tasks, selectedTask);
     }
 }
