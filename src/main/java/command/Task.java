@@ -1,23 +1,23 @@
 package command;
 
-
 public class Task {
-    protected String description;
-    protected boolean isDone;
+  protected String description;
+  protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-    }
+  public Task(String description) {
 
-    public void markAsDone(){
-        isDone = true;
-    }
+    this.description = description;
+  }
 
-    public String getStatusIcon() {
-        return (isDone ? "✓" : "✕"); //return tick or X symbols
-    }
+  public void markAsDone() {
+    isDone = true;
+  }
 
-    public String fileString(){
-        return "D|" + getStatusIcon() + "|" + description;
-    }
+  public String getStatusIcon() {
+    return (isDone ? "✓" : "✕"); // return tick or X symbols
+  }
+
+  public String fileString() {
+    return "D|" + getStatusIcon() + "|" + description;
+  }
 }
