@@ -24,7 +24,13 @@ public class DukeException extends Exception {
                 message = "OOPS!!! Your date needs to be in yyyy-mm-dd format!";
                 break;
             case "file":
-                message = "OOPS!!! The save file cannot be found";
+                message = "OOPS!!! The save file cannot be found!";
+                break;
+            case "read":
+                message = "OOPS!!! The save file cannot be read. A new task list will be created!";
+                break;
+            case "emptyLoad":
+                message = "OOPS!!! The save file is empty. A new task list will be created!";
                 break;
         }
         return message;

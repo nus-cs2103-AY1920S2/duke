@@ -14,7 +14,7 @@ public abstract class Task {
     public void setDone() {
         this.isDone = true;
     }
-
+//
 //    public String getStatusIcon() {
 //        return (isDone ? "[done]" : "[undone]" ); //return tick or X symbols
 //    }
