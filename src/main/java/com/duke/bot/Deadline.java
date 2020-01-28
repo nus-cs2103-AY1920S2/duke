@@ -3,9 +3,18 @@ package com.duke.bot;
 public class Deadline extends Task {
     private String dateBy;
 
+    public Deadline(String title, boolean isDone, String dateBy) {
+        super(title, isDone);
+        this.dateBy = dateBy;
+    }
+
     public Deadline(String title, String dateBy) {
         super(title);
         this.dateBy = dateBy;
+    }
+
+    public String getDateBy() {
+        return dateBy;
     }
 
     @Override

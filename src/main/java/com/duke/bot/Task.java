@@ -4,9 +4,13 @@ public class Task {
     private String title;
     private boolean isDone;
 
-    public Task(String title) {
+    public Task(String title, boolean isDone) {
         this.title = title;
-        isDone = false;
+        this.isDone = isDone;
+    }
+
+    public Task(String title) {
+        this(title, false);
     }
 
     public String getTitle() {
