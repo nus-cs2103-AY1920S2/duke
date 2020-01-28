@@ -1,5 +1,6 @@
 package tasks;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,10 @@ public class Deadline extends DateTask {
     public Deadline(String description, String finishBy) {
         super(description);
         String[] fields = finishBy.split(" ");
+        if (fields.length != 2) {
+            throw new DateTimeException("Insufficient parameters for date/time");
+        }
+
         this.finishByTime = fields[0].equals("-")
                 ? null
                 : LocalTime.parse(fields[0]);

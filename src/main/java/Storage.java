@@ -1,16 +1,14 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+// packages import
+import tasks.*;
+import ui.Ui;
 
+// java imports
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Storage {
@@ -19,20 +17,16 @@ public class Storage {
     public Storage() {
     }
 
-    public void save(ArrayList<Task> list) throws IOException {
+    public void save(TaskList list) throws IOException {
         FileWriter file = new FileWriter(SAVE_FILE, false);
         BufferedWriter writer = new BufferedWriter(file);
 
-        String text = "";
-        for (Task t : list) {
-            text += t.toSaveFormat() + "\n";
-        }
-
+        String text = list.toSaveFormat();
         writer.write(text);
         writer.close();
     }
 
-    public void readSaveFile(List<Task> list) throws FileNotFoundException {
+    public void readSaveFile(TaskList list) throws FileNotFoundException {
         FileReader file = new FileReader(SAVE_FILE);
         BufferedReader reader = new BufferedReader(file);
         Ui ui = new Ui();
@@ -58,9 +52,10 @@ public class Storage {
                     newTask.markAsDone();
                 }
 
-                list.add(newTask);
+                list.save(newTask);
                 text = reader.readLine();
             }
+            reader.close();
         } catch (IOException ex) {
             ui.printFormattedOutput("Corrupted Task");
         }

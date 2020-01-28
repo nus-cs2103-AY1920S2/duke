@@ -13,6 +13,10 @@ public class Event extends DateTask {
         super(description);
 
         String[] fields = startAt.split(" ");
+        if (fields.length != 2) {
+            throw new DateTimeException("Insufficient parameters for date/time");
+        }
+
         this.startAtTime = fields[0].equals("-")
                 ? null
                 : LocalTime.parse(fields[0]);
