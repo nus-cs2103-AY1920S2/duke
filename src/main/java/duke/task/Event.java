@@ -7,11 +7,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an Event.
+ */
 public class Event extends Task {
     protected LocalDate date;
     protected LocalTime startTime;
     protected LocalTime endTime;
 
+    /**
+     * Constructs an Event with the specified description and date and time.
+     * @param description The description of the event.
+     * @param at The date and time of the event in yyyy-mm-dd hh:mm-hh:mm format.
+     * @throws DukeException If the date or time is in the incorrect format.
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
@@ -28,6 +37,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Constructs an Event with the specified description, date and time and status.
+     * @param description The description of the event.
+     * @param at The date and time of the event in yyyy-mm-dd hh:mm-hh:mm format.
+     * @param isDone Whether the event is done.
+     */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         String[] dateTimeArr = at.split(" ");
@@ -37,15 +52,27 @@ public class Event extends Task {
         this.endTime = LocalTime.parse(timeArr[1]);
     }
 
+    /**
+     * Returns the date of the event.
+     * @return The date of the event.
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Returns a string representation of the event for saving to the disk.
+     * @return String representation of the event for saving to the disk.
+     */
     @Override
     public String formatToSave() {
         return "E" + super.formatToSave() + " | " + date + " " + startTime + "-" + endTime;
     }
 
+    /**
+     * Returns a string representation of the event for printing.
+     * @return String representation of the event for printing.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " +

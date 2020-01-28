@@ -9,14 +9,29 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Adds a task to the TaskList.
+ */
 public class AddCommand extends Command {
     String type, details;
 
+    /**
+     * Constructs an AddCommand with the specified type and details.
+     * @param type The type of task for the command.
+     * @param details The details of the command.
+     */
     public AddCommand(String type, String details) {
         this.type = type;
         this.details = details;
     }
-    
+
+    /**
+     * Adds the task to the TaskList and prints an acknowledgement message.
+     * @param tasks The TaskList where the task is to be added.
+     * @param ui The Ui that interacts with the user.
+     * @param storage The Storage to load and save tasks into the data file.
+     * @throws DukeException If the details is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;

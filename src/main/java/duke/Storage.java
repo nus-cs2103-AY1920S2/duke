@@ -16,13 +16,25 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
+/**
+ * Loads tasks from the data file and saves tasks in the data file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage with the specified file path.
+     * @param filePath The file path where the tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks from the data file.
+     * @return A list of tasks from the data file.
+     * @throws DukeException If the data in the data file is not in the correct format.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -53,6 +65,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Creates the data file.
+     * @throws DukeException If the data file cannot be created.
+     */
     private void createFile() throws DukeException {
         try {
             Path path = Paths.get(filePath);
@@ -66,6 +82,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks into the data file.
+     * @param tasks The tasks to be saved.
+     * @throws DukeException If the tasks cannot be saved.
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

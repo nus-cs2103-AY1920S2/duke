@@ -11,7 +11,16 @@ import duke.command.ExitCommand;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Makes sense of the user command.
+ */
 public class Parser {
+    /**
+     * Parses the specified command and returns the corresponding Command object.
+     * @param command The command to be parsed.
+     * @return The corresponding Command object.
+     * @throws DukeException If the command is not supported.
+     */
     public static Command parse(String command) throws DukeException {
         Command cmd;
         String[] commandArr = command.split(" ", 2);
