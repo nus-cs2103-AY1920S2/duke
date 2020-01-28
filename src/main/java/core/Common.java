@@ -12,6 +12,7 @@ public class Common {
     private StateHolder stateHolder=null;
     private Storage storage;
 
+
     public Common() throws DukeException {
         storage=new Storage();
         model = new Model();

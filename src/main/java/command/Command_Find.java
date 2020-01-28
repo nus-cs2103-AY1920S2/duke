@@ -1,22 +1,19 @@
 package command;
 
 import core.Common;
-
 import core.Ui;
 import dukexception.DukeException;
 
-public class Command_Delete extends Command{
+public class Command_Find extends Command{
 
-    private int index;
+    private String keyword;
 
-
-    public Command_Delete(int index){
-        this.index=index;
+    public Command_Find(String keyword){
+        this.keyword=keyword;
     }
-
 
     @Override
     public void execute(Common common, Ui ui) throws DukeException {
-        ui.display(common.deleteTask(index));
+        ui.display(common.findTask(keyword));
     }
 }
