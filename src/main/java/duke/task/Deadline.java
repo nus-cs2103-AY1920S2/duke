@@ -1,15 +1,18 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class Deadline extends Task {
 
     protected LocalDate by;
     protected LocalTime byTime;
 
-    public Deadline(String description, String by) throws DukeException{
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
             String[] temp = by.split(" ");

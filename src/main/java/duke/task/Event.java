@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +12,7 @@ public class Event extends Task {
     protected LocalDate at;
     protected LocalTime atTime;
 
-    public Event(String description, String at) throws DukeException{
+    public Event(String description, String at) throws DukeException {
         super(description);
         try {
             String[] temp = at.split(" ");
