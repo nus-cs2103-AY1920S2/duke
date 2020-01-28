@@ -65,6 +65,7 @@ public class TaskList {
 
     /**
      * Retrieve task list in numbered order.
+     * @return The task list appropriate string format.
      */
     public String getTaskList() {
         String list = "";
@@ -81,6 +82,7 @@ public class TaskList {
 
     /**
      * Format task list to be saved into text file.
+     * @return The task list in appropriate string format for saving.
      */
     public String getTaskListSaveFormat() {
         String data = "";

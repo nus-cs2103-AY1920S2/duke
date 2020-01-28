@@ -82,6 +82,7 @@ public abstract class Task {
 
     /**
      * Icon to display completion status of the task.
+     * @return The icon status.
      */
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
@@ -89,6 +90,7 @@ public abstract class Task {
 
     /**
      * To convert the task into a format for saving to text file.
+     * @return The task in the appropriate string format for saving.
      */
     public String getSaveFormat() {
         return this.taskType + "_" + this.isDone + "_" + this.taskName + "_" + this.dateTime;

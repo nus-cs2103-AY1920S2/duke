@@ -30,6 +30,7 @@ public class Storage {
      * Creates a new text file for data storage if there isn't an existing one.
      *
      * @param filepath The destination for the saved text file.
+     * @throws IOException Throws exception if there is an error in creating the specified filepath for saving.
      */
     public Storage(String filepath) throws IOException {
         this.filepath = filepath;
@@ -43,6 +44,7 @@ public class Storage {
 
     /**
      * To load the task list from saved text file (if any).
+     * @throws IOException Throws exception if there is an error in reading task list data from saved text file.
      */
    public TaskList loadTaskList() throws IOException {
        List<String> data = FileUtils.readLines(file, Charset.defaultCharset());
@@ -51,6 +53,7 @@ public class Storage {
 
     /**
      * To save the task list to the filepath specified.
+     * @throws IOException Throws exception if there is an error saving task list data to the specified filepath.
      */
    public void saveTaskList(TaskList taskList) throws IOException {
        FileWriter fileWriter = new FileWriter(file);
