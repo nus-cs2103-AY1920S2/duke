@@ -15,7 +15,26 @@ public class Task {
         this.isDone = true;
     }
 
+    public static Task getTaskFromMemory(String line) throws DukeException {
+        String[] splitted = line.split(" \\| ");
+
+        switch(splitted[0]) {
+            case "T":
+                return new ToDo(splitted[1]);
+            case "D":
+                return new Deadline(splitted[1], splitted[2]);
+            case "E":
+                return new Event(splitted[1], splitted[2]);
+            default:
+                throw new DukeException("Invalid file. File may have been corrupted.");
+        }
+    }
+
     public String toString() {
         return "[" + this.getStatusIcon() + "]" + " " + this.description;
+    }
+
+    public String toFileFormat() {
+        return String.format("%s | %d | %s", "T", this.isDone ? 1 : 0, this.description);
     }
 }

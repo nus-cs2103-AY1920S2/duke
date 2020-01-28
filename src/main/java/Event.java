@@ -10,4 +10,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + by + ")";
     }
+
+    @Override
+    public String toFileFormat() {
+        return String.format("%s | %d | %s | %s", "D", this.isDone ? 1 : 0, this.description, this.by);
+    }
 }

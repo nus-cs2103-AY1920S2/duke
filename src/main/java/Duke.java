@@ -1,3 +1,6 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.List;
@@ -5,7 +8,10 @@ import java.util.ArrayList;
 
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Path filePath = Paths.get("data", "duke.txt");
+    private static Store store = new Store(filePath);
+
+    private static ArrayList<Task> tasks;
     private static int numTasks = 0;
 
     public static void main(String[] args) {
@@ -24,6 +30,8 @@ public class Duke {
     }
 
     public static void runDuke() {
+        tasks = store.getStoredTasks();
+        numTasks = tasks.size();
         greeting();
 
         Scanner sc = new Scanner(System.in);
@@ -34,6 +42,7 @@ public class Duke {
             try {
                 String command = getCommand(input);
                 if (command.equals("bye")) {
+                    store.update(tasks);
                     break;
                 }
                 doInstructions(input);
