@@ -5,12 +5,18 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 
-
+/**
+ * Duke provides a todo list functionality.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke
+     * @param filePath provide a hardcoded directory path to the text file to be used as a database
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the todo list.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -51,6 +60,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point for the JVM
+     * @param args default main method signature
+     */
     public static void main(String[] args) {
         new Duke("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt").run();
     }
