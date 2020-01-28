@@ -24,6 +24,6 @@ public class EventTask extends Task {
 
     @Override
     public String format() {
-        return "E | " + super.format() + " | " + this.at;
+        return "E | " + super.format() + " | " + DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").format(this.at);
     }
 }

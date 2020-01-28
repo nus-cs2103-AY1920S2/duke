@@ -18,6 +18,6 @@ public class DeadlineTask extends Task {
 
     @Override
     public String format() {
-        return "D | " + super.format() + " | " + this.by;
+        return "D | " + super.format() + " | " + DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").format(this.by);
     }
 }

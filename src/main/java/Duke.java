@@ -1,6 +1,7 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Duke {
 
     public static void persist(ArrayList<Task> tasks) {
 
-        final String FILE_PATH = "./TASKS";
+        final String FILE_PATH = "./data/duke.txt";
         StringBuilder buffer = new StringBuilder();
         for (Task task : tasks) {
             buffer.append(task.format()).append("\n");
@@ -37,6 +38,56 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static ArrayList<Task> load() {
+        final String FILE_PATH = "./data/duke.txt";
+
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(
+                    FILE_PATH));
+            String line = reader.readLine();
+            Task t;
+            while (line != null) {
+                String[] tokens = line.split("\\|");
+                for (int i = 0; i < tokens.length; i++) {
+                    tokens[i] = tokens[i].trim();
+                }
+
+                try {
+                    switch (tokens[0]) {
+                        case "T":
+                            t = new TodoTask(tokens[2]);
+                            break;
+                        case "D":
+                            t = new DeadlineTask(tokens[2], tokens[3]);
+                            break;
+                        case "E":
+                            t = new EventTask(tokens[2], tokens[3]);
+                            break;
+                        default:
+                            throw new InvalidDukeFormatException("Unknown Command.");
+                    }
+                    if (tokens[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                } catch (InvalidDukeFormatException e) {
+                    System.out.println("unable to add this item");
+                    System.out.println(e.getMessage());
+                    System.out.println(line);
+                }
+
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tasks;
     }
 
     public static void main(String[] args) {
@@ -54,6 +105,17 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________");
 
+        Path filePath = Paths.get("./data/duke.txt");
+        if (Files.exists(filePath)) {
+            tasks = Duke.load();
+        } else {
+            try {
+                Files.createDirectories(filePath.getParent());
+                Files.createFile(filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         Scanner scanner = new Scanner(System.in);
         String desc = "";
@@ -196,4 +258,6 @@ public class Duke {
         }
 
     }
+
+
 }
