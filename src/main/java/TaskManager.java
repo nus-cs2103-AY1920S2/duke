@@ -23,6 +23,14 @@ public class TaskManager {
 
     }
 
+    public void findTask(String keyword){
+        System.out.println("Here are the matching tasks in your list:");
+        for(int i = 0 ; i < listOfTasks.size() ; i ++){
+            if(listOfTasks.get(i).description.contains(keyword)){
+                System.out.println("  " + (i + 1) +  ". " + this.listOfTasks.get(i).toString());
+            }
+        }
+    }
 
     public void listAllTasks(){
 
