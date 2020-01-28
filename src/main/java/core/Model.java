@@ -40,7 +40,6 @@ public class Model {
         return s;
     }
 
-
     /**
      * Mark the task as done.
      * @param index indicate the specific task.
@@ -57,6 +56,26 @@ public class Model {
      */
     public void deleteTask(int index) throws DukeException{
         taskList.remove(getTask(index));
+    }
+
+    /**
+     * Find the task with the specified keyword.
+     * @param keyword given keyword to be matched or
+     *                partially matched.
+     * @return list of matched task in string.
+     * @throws DukeException when task list is empty or
+     * there is no matching task with specified keyword.
+     */
+    public ArrayList<String> findTask(String keyword) throws DukeException{
+        if(getSize()==0){
+            throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
+        }
+        ArrayList<String> matchingTask=new ArrayList<>();
+        taskList.stream().filter(t->t.containKeyword(keyword)).forEach(x->matchingTask.add(x.toString()));
+        if(matchingTask.isEmpty()){
+            throw new DukeException("The matching list is empty.");
+        }
+        return matchingTask;
     }
 
     /**
@@ -82,7 +101,6 @@ public class Model {
     public int getSize(){
         return taskList.size();
     }
-
 
     public ArrayList<Task> getTaskList(){
         return taskList;

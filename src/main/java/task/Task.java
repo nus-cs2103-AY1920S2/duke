@@ -43,6 +43,19 @@ public abstract class Task implements Serializable {
         isDone=true;
     }
 
+    /**
+     * To determine whether the description of the task
+     * contain a certain keyword.
+     * @param keyword given keyword to be checked.
+     * @return the boolean that indicate whether the
+     * description of the task contain a certain keyword.
+     */
+    public boolean containKeyword(String keyword){
+        if(description.contains(keyword)){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Get the detail of the task which includes the type of task,

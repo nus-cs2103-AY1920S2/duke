@@ -84,6 +84,22 @@ public class Common {
     }
 
     /**
+     * Find all the tasks with the specified keyword.
+     * @param keyword given keyword to be matched or
+     *                partially matched.
+     * @return list of matched task to be displayed.
+     * @throws DukeException when task list is empty or
+     * there is no matching task with specified keyword.
+     */
+    public String[] findTask(String keyword) throws DukeException{
+        updateState();
+        ArrayList<String> s=new ArrayList<>();
+        s.add("Here are the matching tasks in your list:");
+        s.addAll(model.findTask(keyword));
+        return s.toArray(new String[0]);
+    }
+
+    /**
      * Update the state holder of the current state.
      */
     private void updateState(){
