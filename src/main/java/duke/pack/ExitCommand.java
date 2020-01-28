@@ -8,11 +8,11 @@ public class ExitCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.save(tasks);
+        ui.exit();
     }
 
 
     public Boolean isExit() {
-        System.out.println("    See you later! :)");
         return true;
     }
 

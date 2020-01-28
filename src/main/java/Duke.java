@@ -1,23 +1,9 @@
-import duke.pack.Task;
-import duke.pack.Deadline;
-import duke.pack.Event;
-import duke.pack.Todo;
 import duke.pack.DukeException;
 import duke.pack.Ui;
 import duke.pack.Storage;
 import duke.pack.Parser;
 import duke.pack.TaskList;
 import duke.pack.Command;
-
-import java.time.LocalDate;
-
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 public class Duke {
     private Storage storage;
@@ -33,7 +19,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError(e);
+            ui.showError(e);
             tasks = new TaskList();
         }
     }

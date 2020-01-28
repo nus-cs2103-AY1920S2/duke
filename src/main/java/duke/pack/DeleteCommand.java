@@ -8,8 +8,10 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.deleteTask(taskNum);
+        Task task = tasks.deleteTask(taskNum);
         storage.save(tasks);
+        ui.showDelete(task);
+        ui.showCount(tasks);
     }
 
     public Boolean isExit() {

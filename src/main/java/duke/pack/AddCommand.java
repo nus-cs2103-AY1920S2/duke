@@ -10,6 +10,8 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks);
+        ui.showAdd(task);
+        ui.showCount(tasks);
     }
 
     public Boolean isExit() {

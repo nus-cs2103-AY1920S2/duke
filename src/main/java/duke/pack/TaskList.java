@@ -17,8 +17,8 @@ public class TaskList {
         list.add(task);
     }
 
-    public void deleteTask(int taskNum) {
-        list.remove(taskNum - 1);
+    public Task deleteTask(int taskNum) {
+        return list.remove(taskNum - 1);
     }
 
     public int getSize() {
@@ -29,8 +29,9 @@ public class TaskList {
         return list;
     }
 
-    public void markAsDone(int taskNum) {
+    public Task markAsDone(int taskNum) {
         list.get(taskNum - 1).markAsDone();
+        return list.get(taskNum - 1);
     }
 
     public void printList() {

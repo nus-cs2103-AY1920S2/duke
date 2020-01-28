@@ -8,10 +8,6 @@ public class Ui {
 
     }
 
-    public void showLoadingError(DukeException e) {
-        System.out.println(e);
-    }
-
     public void showError(DukeException e) {
         System.out.println(e);
     }
@@ -40,21 +36,36 @@ public class Ui {
         System.out.println(logo);
         System.out.println("    Hello, I'm Mbot Jr!\n" +
                 "    How may I help you?");
-        System.out.println("    ------------------------------------------------------------");
+        System.out.println("    ------------------------------------------------------------------");
     }
 
     public void showLine() {
         System.out.println("    ------------------------------------------------------------------");
     }
 
+    public void showAdd(Task t) {
+        System.out.println("    Alright! I have added: \n    " + t);
+    }
+
+    public void showDone(Task t) {
+        System.out.println("    Fantastic job! I have marked this task as done: \n    " + t);
+    }
+
+    public void showDelete(Task t) {
+        System.out.println("    Yeet! I have tossed the task: \n    " + t);
+    }
+
+    public void showCount(TaskList tasks) {
+        System.out.println("    You now have " + tasks.getSize() + " tasks in your list!");
+    }
+
 
     /**
      * exits
      */
-    public static void exit() {
-        System.out.println("    ------------------------------------------------------------");
-        System.out.println("    See you later!");
-        System.out.println("    ------------------------------------------------------------");
+    public void exit() {
+        System.out.println("    See you later! :)");
+
     }
 
 

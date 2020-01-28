@@ -12,8 +12,10 @@ public class DoneCommand extends Command {
             throw new DukeException("    Oh no! That task does not exist!");
         }
 
-        tasks.markAsDone(taskNum);
+        Task task = tasks.markAsDone(taskNum);
         storage.save(tasks);
+        ui.showDone(task);
+
     }
 
     public Boolean isExit() {
