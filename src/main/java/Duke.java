@@ -12,6 +12,11 @@ import java.util.regex.Pattern;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 public class Duke {
     private static void greet() {
         String logo = " ____        _        \n"
@@ -108,6 +113,15 @@ public class Duke {
         PrintUtil.indentedPrintf("Now you have %d task(s).\n", tasks.size());
     }
     
+    private static LocalDate parseDate(String dateString) throws DukeException {
+        try {
+            //return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("uuuu-mm-dd"));
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date must be a valid date in the yyyy-mm-dd format");
+        }
+    }
+    
     private static boolean todoCommand(String command) throws DukeException {
         Pattern donePattern = Pattern.compile("^todo( (.*))?");
         Matcher doneMatcher = donePattern.matcher(command);
@@ -135,7 +149,7 @@ public class Duke {
             } else if (deadline == null || deadline.isEmpty()) {
                 throw new DukeException("Deadline cannot be empty");
             } else {
-                addTask(new Deadline(taskDescription, deadline));
+                addTask(new Deadline(taskDescription, parseDate(deadline)));
             }
             return true;
         } else {
@@ -154,7 +168,7 @@ public class Duke {
             } else if (eventTime == null || eventTime.isEmpty()) {
                 throw new DukeException("Event time cannot be empty");
             } else {
-                addTask(new Event(taskDescription, eventTime));
+                addTask(new Event(taskDescription, parseDate(eventTime)));
             }
             return true;
         } else {
