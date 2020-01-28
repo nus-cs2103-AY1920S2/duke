@@ -1,9 +1,10 @@
 public class Duke {
 
-
     public static void main(String[] args) {
 
+
         String horizontalLine = "*******************************************";
+        /*
         System.out.println(horizontalLine);
         //To run using gradle go and search in Help > Delegate Run > build tools > gradle
         String logo3 = " _____    |   _"
@@ -15,6 +16,11 @@ public class Duke {
         System.out.println("Hello!!!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
                 + "What can I do for you?");
         System.out.println(horizontalLine);
+
+         */
+
+        Ui ui = new Ui();
+        ui.introduction();
 
 
         FastReader fr = new FastReader();
