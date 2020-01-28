@@ -6,7 +6,6 @@ public class Task {
     public Task(String name) {
 
         this.name = name;
-        done = false;
     }
 
     public void setDone() {
