@@ -5,36 +5,35 @@ import command.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Contains the task list e.g., it has operations to add/delete tasks in the list
- */
+/** Contains the task list e.g., it has operations to add/delete tasks in the list */
 public class TaskList {
-    private List<Task> toDo;
-    public TaskList(){
-        this.toDo = new ArrayList<>();
-    }
+  private List<Task> toDo;
 
-    public void add(Task task){
-        this.toDo.add(task);
-    }
+  public TaskList() {
+    this.toDo = new ArrayList<>();
+  }
 
-    public Task remove(int index){
-        return this.toDo.remove(index);
-    }
+  public void add(Task task) {
+    this.toDo.add(task);
+  }
 
-    public Task get(int index){
-        return this.toDo.get(index);
-    }
+  public Task remove(int index) {
+    return this.toDo.remove(index);
+  }
 
-    public int size(){
-        return this.toDo.size();
-    }
+  public Task get(int index) {
+    return this.toDo.get(index);
+  }
 
-    public void clear(){
-        this.toDo.clear();
-    }
+  public int size() {
+    return this.toDo.size();
+  }
 
-    public List<Task> getToDo(){
-        return this.toDo;
-    }
+  public void clear() {
+    this.toDo.clear();
+  }
+
+  public List<Task> getToDo() {
+    return this.toDo;
+  }
 }
