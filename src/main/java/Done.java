@@ -1,12 +1,21 @@
 public class Done extends Command {
-    public void markAsDone(String num){
-        System.out.println("____________________________________________________________");
+    String num;
+
+    Done(String num){
+
+        this.num=num;
+    }
+    public void execute(TaskList tasks, Ui ui, Storage storage){
+        ui.showLine();
         int number=Integer.valueOf(num);
-        Task ob= Duke.list.get(number-1);
+        Task ob = tasks.getList().get(number-1);
         ob.setDone();
-        System.out.println("Nice! I've marked this task as done:");
-        Print print_obj=new Print();
-        System.out.println(print_obj.printTask(number));
-        System.out.println("____________________________________________________________");
+        ui.printString("Nice! I've marked this task as done:");
+        ui.printTask(number,tasks);
+        ui.showLine();
+    }
+
+    boolean isExit(){
+        return false;
     }
 }

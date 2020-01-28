@@ -1,5 +1,9 @@
-public abstract class Command {
-    public static String list[]=new String[100];
-    int pos_in_list=0;
+import java.io.IOException;
 
+public abstract class Command {
+    Command(){
+    }
+
+    abstract void execute(TaskList task, Ui ui, Storage storage) throws IOException;
+    abstract boolean isExit();
 }

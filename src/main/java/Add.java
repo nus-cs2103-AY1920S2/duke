@@ -1,12 +1,24 @@
 public class Add extends Command{
+    Task ob;
+    int saved;
 
-    void addToList(int saved,Task ob){
-        Duke.list.add(ob);
-        Duke.pos_in_list++;
+    Add(Task ob, int saved){
+        this.ob=ob;
+        this.saved=saved;
+
+    }
+    void execute(TaskList tasks, Ui ui, Storage storage){
+        tasks.list.add(ob);
         String k=ob.toString();
         if(saved==0) {
-            System.out.println("____________________________________________________________\nGot it. I've added this task:\n  " + k + "\nNow you have " + Duke.pos_in_list + " tasks in the list.\n____________________________________________________________");
+            ui.showLine();
+            ui.printString("Got it. I've added this task:\n  " + k + "\nNow you have " + tasks.list.size() + " tasks in the list.");
+            ui.showLine();
         }
+        }
+
+        boolean isExit(){
+        return false;
         }
 
 }

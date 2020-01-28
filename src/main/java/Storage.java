@@ -3,22 +3,33 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.ArrayList;
 
-public class Save {
+public class Storage {
+
     String path;
-    void load() throws IOException, FileNotFoundException {
-        String filePath = new File("").getAbsolutePath();
-        int ind = filePath.lastIndexOf("/");
-        path = filePath.substring(0, ind + 1);
-        path = path.concat("duke.txt");
 
-        try (FileReader fr = new FileReader(path)) {
+    Storage(String filePath){
+
+        this.path=filePath;
+    }
+
+    //if duke.txt is empty-> raise exception, else create list and return it
+    ArrayList<Task> load() throws DukeException  {
+     ArrayList<Task> list=new ArrayList<Task>();
+        try(FileReader fr = new FileReader(path)) {
             Scanner sc = new Scanner(fr);
+            if(!sc.hasNext()) {
+                throw new DukeException("List is currently empty");
+            }
+
             while (sc.hasNext()) {
                 String line = sc.nextLine();
-                parser(line);
+                Task ob=eval(line);
+                list.add(ob);
             }
 
         } catch (FileNotFoundException e) {
@@ -26,9 +37,11 @@ public class Save {
         } catch (IOException e) {
 
         }
+        return list;
     }
 
-    void parser(String line)throws IOException{
+    //evaluate the line that is read-> accept Command objects from the parser
+     Task eval(String line)throws IOException{
         int i=line.indexOf("|");
         String type=line.substring(0,i);
         switch(type){
@@ -54,30 +67,34 @@ public class Save {
         j=line.indexOf("|",i+1);
         task=line.substring(i+1,j);
         String time="";
-
-
-             time=line.substring(j+1);
+        time=line.substring(j+1);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(time, format);
              if(type.equals(("deadline"))) {
-                 sentence = type + " " + task + " /by " + time;
+                 return new Deadline(task,dateTime,d);
              }
              else {
                  sentence = type + " " + task + " /at " + time;
+                 return new Event(d, task, dateTime);
              }
         }
         else{
             task=line.substring(j+1);
             sentence=type+" "+task;
+            return new Todo(d,task);
         }
-        Duke.sort(1,sentence,d);
+
+
 
     }
-    void save()throws IOException{
+    void save(TaskList tasks)throws IOException{
 
         try(FileWriter fw=new FileWriter(path,false)){
             String s="";
-           for(int i=0;i<Duke.list.size();i++){
 
-               Task ob=Duke.list.get(i);
+           for(int i=0;i<tasks.list.size();i++){
+
+               Task ob=tasks.list.get(i);
                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                switch(ob.getType()) {
                    case "deadline":
