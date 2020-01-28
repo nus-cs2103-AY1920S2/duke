@@ -89,6 +89,8 @@ public class Duke {
         System.out.println("    " + closingMessage);
     }
 
+    // Todo: abstract away the following logic from main via new interface for command handlers
+
     private static void handleCommandList() {
         System.out.println("    Here are the tasks in your list:");
         int counter = 1;
