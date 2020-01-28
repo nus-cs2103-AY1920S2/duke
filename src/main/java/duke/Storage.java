@@ -15,14 +15,29 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage that deals with loading tasks from the file.
+ * It also deals with saving tasks in the file.
+ */
 public class Storage {
 
-    String filePath;
+    private String filePath;
 
+    /**
+     * Constructs a Storage with the specified file path.
+     *
+     * @param filePath The file path to store data of tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks from the file and returns the list of tasks.
+     *
+     * @return The list of tasks loaded from the file.
+     * @throws DukeException If an error occur in creating a file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -56,6 +71,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Creates a file to store the data of tasks.
+     *
+     * @throws DukeException If an error occur in creating the file.
+     */
     private void createNewFile() throws DukeException{
         try {
             Path path = Paths.get(filePath);
@@ -67,6 +87,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks in the file.
+     *
+     * @param tasks The TaskList which contains tasks to be saved in the file.
+     * @throws DukeException If fail to save tasks in the file.
+     */
     public void saveTasksToStorage(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");

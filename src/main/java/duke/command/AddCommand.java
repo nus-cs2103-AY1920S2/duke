@@ -9,22 +9,39 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Represents a add command.
+ * The command deals with adding tasks to the list of tasks.
+ */
 public class AddCommand extends Command {
 
-    protected String op;
+    protected String type;
     protected String description;
 
-    public AddCommand(String op, String description) {
-        this.op = op;
+    /**
+     * Constructs an AddCommand with specified type of task and its description.
+     *
+     * @param type The type of task.
+     * @param description The description of the task.
+     */
+    public AddCommand(String type, String description) {
+        this.type = type;
         this.description = description;
     }
 
-
+    /**
+     * Adds the task to the list of tasks and print the relevant messages.
+     *
+     * @param tasks The TaskList that contains list of tasks.
+     * @param ui The Ui that deals with interactions with user.
+     * @param storage The Storage deals with loading and saving tasks in file.
+     * @throws DukeException If description of the task is missing or in wrong format.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         String[] task_date;
-        switch (op) {
+        switch (type) {
             case "todo":
                 task = new ToDo(description);
                 tasks.addTask(task);

@@ -2,8 +2,19 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Represents a Parser in Duke application.
+ * The Parser makes sense of user commands.
+ */
 public class Parser {
 
+    /**
+     * Parses the user command and returns the appropriate Command object.
+     *
+     * @param fullCommand The user command.
+     * @return The appropriate Command object.
+     * @throws DukeException If the command is invalid or in wrong format.
+     */
     public static Command parse(String fullCommand) throws DukeException{
         if (fullCommand.equals("list")) {
             return new ListCommand();
@@ -37,6 +48,13 @@ public class Parser {
 
     }
 
+    /**
+     * Returns the Command object of DeleteCommand type.
+     *
+     * @param temp The array containing command and description of the command.
+     * @return The Command object of DeleteCommand type.
+     * @throws DukeException If the command has missing information or in wrong format.
+     */
     private static Command createDeleteCommand(String[] temp) throws DukeException {
         try {
             if (temp[1].trim().equals("")) {
@@ -51,6 +69,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the Command object of DoneCommand type.
+     *
+     * @param temp The array containing command and description of the command.
+     * @return The Command object of DoneCommand type.
+     * @throws DukeException If the command has missing information or in wrong format.
+     */
     private static Command createDoneCommand(String[] temp) throws DukeException{
         try {
             if (temp[1].trim().equals("")) {
@@ -65,6 +90,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the Command object of AddCommand type.
+     *
+     * @param temp The array containing command and description of the command.
+     * @return The Command object of AddCommand type.
+     * @throws DukeException If the command has missing information or in wrong format.
+     */
     private static Command createAddCommand(String[] temp) throws DukeException {
         try {
             String body = temp[1];

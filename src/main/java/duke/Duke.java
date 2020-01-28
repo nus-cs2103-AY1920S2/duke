@@ -2,11 +2,20 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Represents the Duke for the application.
+ * The Duke will run the program that interact with user.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke with Storage, TaskList and Ui being initialised.
+     *
+     * @param filePath The file path to store data of tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the program running.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
