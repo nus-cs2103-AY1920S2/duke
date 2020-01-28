@@ -1,14 +1,17 @@
-package duke.Ui;
+package duke.ui;
 
-import duke.Exception.Exceptions;
-import duke.Parser.Parser;
-import duke.Task.Task;
-import duke.TaskList.TaskList;
+import duke.exceptions.Exceptions;
+import duke.parser.Parser;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 
 /**
+ * The Ui program gets user input, interprets it and calls relevant methods.
+ *
  * @version 1.0
  * @since 2020-01-28
  */
@@ -16,6 +19,10 @@ public class Ui {
 
     TaskList manager;
 
+    /**
+     * Constructor.
+     * @param manager refers to TaskList object required to manage the taskList.
+     */
     public Ui(TaskList manager) {
 
         this.manager = manager;
@@ -23,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Takes in user input and calls relevant method
+     * Takes in user input and calls relevant method.
      */
     public void frontDesk() {
 

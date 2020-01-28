@@ -1,6 +1,8 @@
-package duke.Exception;
+package duke.exceptions;
 
 /**
+ * The InvalidInputError program is an error thrown when user inputs an invalid input.
+ *
  * @version 1.0
  * @since 2020-01-28
  */
@@ -11,9 +13,9 @@ public class InvalidInputError extends Exceptions {
     }
 
     /**
-     * Constructs error message with respect the error
+     * Constructs error message with respect the error.
      *
-     * @return error message of the error
+     * @return error message of the error.
      */
     @Override
     public String errorMessage() {
