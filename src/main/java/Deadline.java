@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
     protected final String deadlineLogo = "D";
-    private String by;
+    private LocalDate by;
 
-    public Deadline(String taskName, String by) {
+    public Deadline(String taskName, LocalDate by) {
         super(taskName);
         this.by = by;
     }
@@ -31,6 +34,8 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", deadlineLogo, super.toString(), this.by);
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String formattedDate = by.format((outputFormat));
+        return String.format("[%s]%s (by: %s)", deadlineLogo, super.toString(), formattedDate);
     }
 }
