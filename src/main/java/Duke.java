@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,19 +11,34 @@ public class Duke {
     private static String userArgs = "";
     private static int taskNo = 0;
     private static ArrayList<Task> items = new ArrayList<Task>();
+    private static String path = System.getProperty("user.dir");
 
     /**
      * Main method. Entry point for the Duke program.
      * @param args Command-line arguments. Unused.
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args) { 
         final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__._|_|\\_\\___|\n";
+        + "| |_| | |_| |   <  __/\n" + "|____/ \\__._|_|\\_\\___|\n";
         final String logoDivider = "++++++++++++++++++++++\n";
 
         System.out.println(logoDivider + logo + "\n" + logoDivider);
 
         dukePrompt(new String[]{"Hey boss! Duke here, at your service.", "What do you need me to do?"});
+        System.out.println();
+
+        // Attempt to read from file on load
+        try {
+            Scanner readFile = new Scanner(new File(path + "/data/duke.txt"));
+            while (readFile.hasNextLine()) {
+                loadTasks(readFile.nextLine());
+            }
+            readFile.close();
+            dukePrompt("Boss, I've got my notebook ready with " + items.size() + " tasks in it");
+        } catch (IOException e) {
+            dukePrompt("Boss, I can't find my notebook... Sorry but I can't find duke.txt");
+        }
+
         while (dukeActive) {
             try {
                 userInput = readUserInput();
@@ -62,7 +80,7 @@ public class Duke {
                             dukePrompt(new String[]{"Aaaaand deleted! Don't kill me if it's the wrong one, boss",
                                 deletedTask.toString(),
                                 getTasksTotal()});
-                        } 
+                        }
                         break;
                     case "deadline":
                         items.add(new Deadline(userArgs));
@@ -86,7 +104,10 @@ public class Duke {
                     default:
                         throw new DukeException(0);
                     };
+                    saveChanges();
                 }
+            } catch (IOException e) {
+                dukePrompt(e.getMessage());
             } catch (DukeException e) {
                 dukePrompt(e.getMessage());
                 //TODO: Implement "help" command
@@ -136,5 +157,44 @@ public class Duke {
 
     private static String getTasksTotal() {
         return "Now you have " + items.size() + " tasks in the list";
+    }
+
+    private static void saveChanges() throws IOException {
+            FileWriter writer = new FileWriter(path + "/data/duke.txt");
+            items.forEach((item) -> {
+				try {
+                    writer.write(item.toFileString() + "\n");
+				} catch (IOException e) {
+                    // TODO: Handle this error better
+                    dukePrompt("Ah no... Tiny problem boss: " + e.getMessage());
+				}
+			});
+            writer.close();
+    }
+
+    private static void loadTasks(String taskString) {
+        String[] splitString = taskString.split(" \\| ");
+        try {
+            switch(splitString[0]) {
+            case "T":
+                items.add(new ToDo(splitString[2]));
+                break;
+            case "D":
+                String deadlineArgs = splitString[2] + " /by " + splitString[3];
+                items.add(new Deadline(deadlineArgs));
+                break;
+            case "E":
+                String eventArgs = splitString[2] +" /at " + splitString[3];
+                items.add(new Event(eventArgs));
+                break;
+            default:
+                // TODO: Implement a better exception
+                throw new DukeException(0);
+            }
+            if (splitString[1].equals("true"))
+                    items.get(items.size() - 1).setTaskDone();
+        } catch (DukeException e) {
+            dukePrompt(e.getMessage());
+        }
     }
 }

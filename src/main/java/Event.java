@@ -27,4 +27,9 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: "
             + this.eventDate + ")";
     }
+
+    @Override
+    public String toFileString() {
+        return "E" + super.toFileString() + " | " + eventDate;
+    }
 }

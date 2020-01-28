@@ -31,4 +31,9 @@ public class Task {
                 : Character.toString(0x2717))
             + "] " + getTaskName();
     }
+
+    public String toFileString() {
+        return " | " + getTaskDone() +
+               " | " + getTaskName();
+    }
 }
