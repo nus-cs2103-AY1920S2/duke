@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Event extends DateTask {
     private LocalTime startAtTime;
     private LocalDate startAtDate;
 
@@ -32,6 +32,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 
+    @Override
     public LocalDate getDate() {
         return this.startAtDate;
     }
@@ -39,6 +40,9 @@ public class Event extends Task {
     @Override
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
-        return "E | " + d + " | " + super.getDescription() + " | " + this.startAt;
+        String time = this.startAtTime != null ? this.startAtTime.toString() : "-";
+
+        return "E | " + d + " | " + super.getDescription() + " | " + this.startAtTime
+                + " " + this.startAtDate;
     }
 }

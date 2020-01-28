@@ -16,10 +16,7 @@ import exceptions.EmptyDescriptionException;
 import exceptions.EmptyTimeException;
 import exceptions.InvalidActionException;
 import exceptions.InvalidTaskNumberException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import tasks.*;
 
 public class Duke {
     private static String SAVE_FILE = "save_file.txt";
@@ -209,12 +206,8 @@ public class Duke {
     public static void searchDateTask(ArrayList<Task> list, LocalDate date) {
         ArrayList<Task> dateTasks = new ArrayList<>();
         for (Task t : list) {
-            if (t instanceof Event) {
-                if (date.equals(((Event) t).getDate())) {
-                    dateTasks.add(t);
-                }
-            } else if (t instanceof Deadline) {
-                if (date.equals(((Deadline) t).getDate())) {
+            if (t instanceof Event || t instanceof Deadline) {
+                if (date.equals(((DateTask) t).getDate())) {
                     dateTasks.add(t);
                 }
             }

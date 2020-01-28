@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Deadline extends DateTask {
     private LocalTime finishByTime;
     private LocalDate finishByDate;
 
@@ -29,6 +29,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dateTime + ")";
     }
 
+    @Override
     public LocalDate getDate() {
         return this.finishByDate;
     }
@@ -36,6 +37,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
-        return "D | " + d + " | " + super.getDescription() + " | " + this.finishBy;
+        String time = this.finishByTime != null ? this.finishByTime.toString() : "-";
+        return "D | " + d + " | " + super.getDescription() + " | " + time
+                + " " + this.finishByDate;
     }
 }

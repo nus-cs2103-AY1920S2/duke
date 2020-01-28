@@ -15,6 +15,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public abstract String toSaveFormat();
+
     @Override
     public String toString() {
         String checkbox = this.isDone ? "O" : "X";
@@ -33,6 +35,4 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
-
-    public abstract String toSaveFormat();
 }
