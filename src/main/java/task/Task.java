@@ -67,6 +67,16 @@ public class Task {
 	}
 
 	/**
+	 * Checks if the substring s exists in the current description.
+	 *
+	 * @param s Substring to be checked.
+	 * @return boolean whether or not the substring exists.
+	 */
+	public boolean contains(String s) {
+		return this.description.contains(s);
+	}
+
+	/**
 	 * This method formats the Task object based on its representation into a format suitable for
 	 * writing to a file. It is not actually used in principle.
 	 *
