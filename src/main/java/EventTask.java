@@ -1,19 +1,25 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class EventTask extends Task {
 
-    private String at;
+    private LocalDateTime at;
 
-    public EventTask(String description, String at) throws InvalidDukeFormatException {
+    public EventTask(String description, String at) throws InvalidDukeFormatException, DateTimeParseException {
         super(description);
-        this.at = at;
 
         if (at.isEmpty()) {
             throw new InvalidDukeFormatException("Missing /at clause or missing at when!");
         }
+
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + this.at + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d YYYY");
+        return "[E] " + super.toString() + " (by: " + formatter.format(this.at) + ")";
     }
 
     @Override
