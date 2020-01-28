@@ -19,8 +19,6 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //System.out.println(LocalDateTime.parse("2020-12-13 1300", dtf).format(DateTimeFormatter.ofPattern("yyyy")));
-//        Task[] tasks = new Task[100];
-        //String[] tasks = new String[100];
         int i = 0;
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext() /*!nextLine.equals("bye")*/) {
