@@ -1,8 +1,12 @@
+import java.io.Serializable;
 //Adapted from https://nus-cs2103-ay1920s2.github.io/website/schedule/week2/project.html
-public abstract class Task {
+public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
-
+    
+    private Task() {
+    }
+    
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -14,10 +18,5 @@ public abstract class Task {
     
     public void markAsDone() {
         isDone = true;
-    }
-    
-    @Override
-    public String toString() {
-        return String.format("%s %s", getStatusIcon(), description);
     }
 }

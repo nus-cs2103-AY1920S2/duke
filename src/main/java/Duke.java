@@ -1,8 +1,16 @@
 import java.util.Scanner;
 import java.io.PrintStream;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
     private static void greet() {
@@ -15,6 +23,27 @@ public class Duke {
     }
     
     private static ArrayList<Task> tasks = new ArrayList<>();
+
+    private static final String savePath = "data/duke.txt";
+
+    @SuppressWarnings("unchecked")
+    private static void loadTaskState() throws IOException, ClassNotFoundException, ClassCastException {
+        FileInputStream f = new FileInputStream(savePath);
+        ObjectInputStream o = new ObjectInputStream(f);
+        tasks = (ArrayList<Task>)o.readObject();
+        o.close();
+    }
+
+    private static void saveTaskState() throws IOException {
+        //recursively create directories to save path if they don't exist
+        Files.createDirectories(Paths.get(savePath).getParent());
+        
+        //save to file
+        FileOutputStream f = new FileOutputStream(savePath);
+        ObjectOutputStream o = new ObjectOutputStream(f);
+        o.writeObject(tasks);
+        o.close();
+    }
     
     private static boolean doneCommand(String command) throws DukeException {
         Pattern donePattern = Pattern.compile("^done( (.*))?");
@@ -158,7 +187,19 @@ public class Duke {
         return true;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        try {
+            loadTaskState();
+        } catch (FileNotFoundException e) {
+            PrintUtil.printHeaderLine();
+            PrintUtil.indentedPrintln("Error: Failed to load task list");
+            PrintUtil.indentedPrintf("       Duke will create a new task list file at %s\n", savePath);
+            PrintUtil.printHeaderLine();
+        } catch(ClassNotFoundException e) {
+            PrintUtil.printHeaderLine();
+            PrintUtil.indentedPrintln("Error: Malformed task list file");
+            PrintUtil.printHeaderLine();
+        }
         PrintUtil.printHeaderLine();
         greet();
         PrintUtil.printHeaderLine();
@@ -170,6 +211,13 @@ public class Duke {
             
             PrintUtil.printHeaderLine();
             running = runCommand(command);
+            PrintUtil.printHeaderLine();
+        }
+        try {
+            saveTaskState();
+        } catch (FileNotFoundException e) {
+            PrintUtil.printHeaderLine();
+            PrintUtil.indentedPrintln("Error: Failed to save task list.");
             PrintUtil.printHeaderLine();
         }
     }
