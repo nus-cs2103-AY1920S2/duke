@@ -6,6 +6,10 @@ public class Events extends Task {
         this.at = at;
     }
 
+    String getAt() {
+        return this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

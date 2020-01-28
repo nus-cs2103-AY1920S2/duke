@@ -1,4 +1,5 @@
-import jdk.jfr.Event;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.util.Scanner;
 import java.util.List;
@@ -94,6 +95,36 @@ public class Duke {
 
         System.out.println(bye);
 
+        String fileName = "duke.txt";
+        try {
+            String tasks = "";
+            for (int i=0 ;i< store.size(); i++) {
 
+                Task t = store.get(i);
+                if (t instanceof Todo) {
+                    tasks += "T | " + t.getIsTaskDone() + " | " +  t.getDescription() + System.lineSeparator();
+                }
+
+                if (t instanceof  Deadline) {
+                    Deadline d = (Deadline) t;
+                    tasks += "D | " + t.getIsTaskDone() + " | " + t.getDescription() + " | " + d.getBy() + System.lineSeparator();
+                }
+
+                if (t instanceof Events) {
+                    Events e = (Events) t;
+                    tasks += "E | " + t.getIsTaskDone() + " | " + t.getDescription() + " | " + e.getAt() + System.lineSeparator();
+                }
+            }
+            writeToFile("duke.txt", tasks);
+        } catch (IOException e) {
+            System.out.println(" Something went wrong: " + e.getMessage());
+        }
+
+    }
+
+    static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
     }
 }
