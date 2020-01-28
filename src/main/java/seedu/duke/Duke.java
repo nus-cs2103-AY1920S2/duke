@@ -7,12 +7,20 @@ import seedu.duke.exception.DukeIOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * A Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Construct a chatbot instance with saved data specified by the file path argument.
+     *
+     * @param filePath Path of type Path that specify location of saved data.
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Read in user command until exit command is fed.
+     */
     public void run() {
         ui.greet();
 
@@ -39,6 +50,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method that instantiate an instance and invoke run method.
+     *
+     * @param args CLI arguments
+     */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "code", "duke", "data", "duke.txt");
