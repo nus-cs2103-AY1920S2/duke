@@ -1,4 +1,3 @@
-
 public class Task {
 
     protected String description;
@@ -12,14 +11,17 @@ public class Task {
 
     @Override
     public String toString(){
+
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     public String getStatusIcon(){
+
         return isDone? "\u2713" : "\u2718";
     }
 
     public void markAsDone(){
+
         this.isDone = true;
     }
 }

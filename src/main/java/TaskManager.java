@@ -22,13 +22,11 @@ public class TaskManager {
         String line = null;
 
         try {
-
             // FileReader reads text files in the default encoding.
             FileReader fileReader = new FileReader(fileName);
 
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-
 
             while((line = bufferedReader.readLine()) != null) {
 
@@ -42,18 +40,19 @@ public class TaskManager {
                     listOfTasks.add(t);
                 }else if(temporary[0].contains("Deadline")){
 
-
                     Task t = new Deadline(temporary[2],LocalDate.parse(temporary[3]));
                     if (temporary[1].contains("1")){
                         t.markAsDone();
                     }
                     listOfTasks.add(t);
+
                 }else if(temporary[0].contains("Event")){
                     Task t = new Event(temporary[2],temporary[3]);
                     if (temporary[1].contains("1")){
                         t.markAsDone();
                     }
                     listOfTasks.add(t);
+
                 }else{
 
                     if(listOfTasks.size() == 0) {
