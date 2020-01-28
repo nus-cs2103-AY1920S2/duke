@@ -23,6 +23,10 @@ public abstract class Task {
         return this.isDone;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public abstract Task setDone();
 
     public abstract String writeDrive();

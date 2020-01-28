@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Duke {
 
@@ -48,6 +49,10 @@ public class Duke {
         while (!curr.getTaskType().equals("bye")) {
             if (curr.getTaskType().equals("list")) {
                 ui.printList(tasks);
+            } else if (curr.getTaskType().equals("find")) {
+                String finding = curr.getSecond();
+                TaskList filtered = tasks.filter(finding);
+                ui.printFindings(filtered);
             } else if (curr.getTaskType().equals("done")) {
                 try {
                     Integer taskNumber = Integer.valueOf(curr.getSecond());
