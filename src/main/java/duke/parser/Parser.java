@@ -26,7 +26,9 @@ public class Parser {
             return new DoneCommand(fullCommand.toLowerCase().trim());
         } else if (cmdType.equalsIgnoreCase("delete")) {
             return new DeleteCommand(fullCommand.toLowerCase().trim());
-        } if (cmdType.equalsIgnoreCase("bye")) {
+        } else if (cmdType.equalsIgnoreCase("find")) {
+            return new FindCommand(fullCommand.toLowerCase().trim());
+        } else if (cmdType.equalsIgnoreCase("bye")) {
             return new ExitCommand("bye");
         } else {
             return new Command("Unrecognized");

@@ -95,4 +95,20 @@ public class TaskList {
         ui.print(t.toString());
         storage.updateTasks(taskList);
     }
+
+    /**
+     * Returns a taskList object with descriptions containing the keyword
+     * @param ui User interface to reply user
+     * @param keyword To be searched against existing task list
+     */
+    public TaskList findKeyWord(Ui ui, String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            String description = task.getDescription();
+            if (description.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return new TaskList(matchingTasks);
+    }
 }
