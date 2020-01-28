@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +14,7 @@ public class Event extends Task{
 
     @Override
     public String toStringTxt() {
-        return "E/" + super.getIcon() + "/" + command + "/" + date + "\n";
+        return "E/" + super.getIcon() + "/" + command + "/" + date;
     }
 
     @Override

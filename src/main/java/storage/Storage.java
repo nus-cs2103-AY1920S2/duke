@@ -1,3 +1,6 @@
+package storage;
+
+import task.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +23,7 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String nextLine = s.nextLine();
-            String[] split = nextLine.split("|");
+            String[] split = nextLine.split("/");
             String indicator = split[0];
             switch (indicator) {
                 case "D":
