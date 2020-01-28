@@ -4,13 +4,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Duke program.
+ */
 public class Akshay {
     private Storage storage;
     private TaskList tasks;
-    private UI ui;
 
+    /**
+     * Constructor.
+     * @param filePath path to file
+     */
     public Akshay(String filePath) {
-        ui = new UI();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -24,6 +29,10 @@ public class Akshay {
         new Akshay("./data/duke.txt").run();
     }
 
+    /**
+     * The run method.
+     * @throws IOException exception
+     */
     public void run() throws IOException {
         TaskList arr = tasks;
         UI.say("Hello I am [AKSHAY]!\nHow may I help you?");

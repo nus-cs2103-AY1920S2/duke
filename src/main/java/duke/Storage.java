@@ -1,16 +1,32 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class file to handle reading and writing of data to external files.
+ */
 public class Storage {
     private String fp;
 
+    /**
+     * Constructor requiring a file path for reading and writing of data.
+     * @param path path to file
+     */
     public Storage(String path) {
         fp = path;
     }
 
+    /**
+     * Helper function to convert string of "1" or "0" to boolean true and false.
+     * @param value "1" or "0"
+     * @return true or false
+     */
     private boolean convertToBoolean(String value) {
         boolean returnValue = false;
         if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value)
@@ -20,6 +36,12 @@ public class Storage {
         return returnValue;
     }
 
+    /**
+     * Loads data to be passed to a tasklist.
+     * @return ArrayList of Tasks
+     * @throws FileNotFoundException e
+     * @throws DukeException e
+     */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> arr = new ArrayList<>();
         File file = new File(this.fp);
@@ -47,6 +69,11 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Saves data to file.
+     * @param data data
+     * @throws IOException exception
+     */
     public void save(ArrayList<Task> data) throws IOException {
         StringBuilder s = new StringBuilder();
         for (Task datum : data) {
