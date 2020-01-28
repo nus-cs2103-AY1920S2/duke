@@ -4,6 +4,9 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
+    public Todo(String description, boolean mark) {
+        super(description, mark);
+    }
 
     @Override
     public String toString() {
@@ -12,6 +15,6 @@ public class Todo extends Task {
 
     @Override
     public String saveFormat() {
-        return "T" + " | " + (super.isDone ? "1" : "0") + " | " + super.description;
+        return "T" + " , " + (super.isDone ? "1" : "0") + " , " + super.description;
     }
 }

@@ -6,9 +6,14 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
-    public Event(String description, LocalDate at) {
+    public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = LocalDate.parse(at);
+    }
+
+    public Event(String description, String at, boolean mark) {
+        super(description, mark);
+        this.at = LocalDate.parse(at);
     }
 
     @Override
@@ -18,6 +23,6 @@ public class Event extends Task {
 
     @Override
     public String saveFormat() {
-        return "E" + " | " + (super.isDone ? "1" : "0") + " | " + super.description + " | " + this.at;
+        return "E" + " , " + (super.isDone ? "1" : "0") + " , " + super.description + " , " + this.at;
     }
 }

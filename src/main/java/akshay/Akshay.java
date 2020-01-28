@@ -1,97 +1,85 @@
 package akshay;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Akshay {
-    private static String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private Storage storage;
+    private TaskList tasks;
+    private UI ui;
 
-    private static void say(String s) {
-        System.out.println(line);
-        System.out.println(s);
-        System.out.println(line);
+    public Akshay(String filePath) {
+        ui = new UI();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException | FileNotFoundException e) {
+            UI.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public static void main(String[] args) throws IOException {
-        say("Hello I am [AKSHAY]!\nHow may I help you?");
-        ArrayList<Task> arr = new ArrayList<>(100);
+        new Akshay("./data/duke.txt").run();
+    }
+
+    public void run() throws IOException {
+        TaskList arr = tasks;
+        UI.say("Hello I am [AKSHAY]!\nHow may I help you?");
         Scanner sc =  new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             String[] c = input.split(" ", 2);
             switch (c[0]) {
                 case ("list"):
-                    System.out.println(line);
-                    System.out.println("Here are the items in your list:");
-                    for (var i = 0; i < arr.size(); i++) {
-                        Task t = arr.get(i);
-                        System.out.println(i + 1 + ": " + t.toString());
-                    }
-                    System.out.println(line);
+                    UI.list(arr);
                     break;
                 case ("done"):
                     Task curr = arr.get(Integer.parseInt(c[1]) - 1);
                     curr.mark();
-                    say("Marked as done:\n" + curr.toString());
+                    UI.done(curr);
                     break;
                 case ("todo"):
                     try {
                         Task todo = new Todo(c[1]);
                         arr.add(todo);
-                        say("Added: " + todo.toString());
+                        UI.added(todo);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        say("OOPS!!! The description of a todo cannot be empty.");
+                        UI.say("OOPS!!! The description of a todo cannot be empty.");
                     }
                     break;
                 case ("deadline"):
                     String[] dl = c[1].split("/by",2);
-                    LocalDate d1 = LocalDate.parse(dl[1].strip());
-                    Task d = new Deadline(dl[0], d1);
+                    Task d = new Deadline(dl[0], dl[1].trim());
                     arr.add(d);
-                    say("Added: " + d.toString());
+                    UI.added(d);
                     break;
                 case ("event"):
                     String[] ev = c[1].split("/at",2);
-                    LocalDate d2 = LocalDate.parse(ev[1].strip());
-                    Task e = new Event(ev[0], d2);
+                    Task e = new Event(ev[0], ev[1].trim());
                     arr.add(e);
-                    say("Added: " + e.toString());
+                    UI.added(e);
                     break;
                 case ("delete") :
                     try {
                         Task del = arr.get(Integer.parseInt(c[1]) - 1);
                         arr.remove(Integer.parseInt(c[1]) - 1);
-                        say("Deleted item:\n" + del.toString());
+                        UI.delete(del);
                     } catch (Exception i) {
-                        say("Failed to delete item!!!");
+                        UI.say("Failed to delete item!!!");
                     }
                     break;
                 default:
                     try {
                         throw new DukeException();
                     } catch (DukeException de) {
-                        say("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        UI.say("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
             }
-            save(arr);
+            storage.save(arr.toArr());
             input = sc.nextLine();
         }
-        say("Bye! Hope to see you again!");
-    }
-
-    public static void save(ArrayList<Task> data) throws IOException {
-        StringBuilder s = new StringBuilder();
-        for (Task datum : data) {
-            s.append(datum.saveFormat()).append("\n");
-        }
-        FileWriter fileWriter = new FileWriter("./data/duke.txt");
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(s);
-        printWriter.close();
+        UI.goodbye();
     }
 }

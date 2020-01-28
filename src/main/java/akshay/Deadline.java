@@ -6,9 +6,14 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, String a) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(a);
+    }
+
+    public Deadline(String description, String a, boolean mark) {
+        super(description, mark);
+        this.by = LocalDate.parse(a);
     }
 
     @Override
@@ -18,6 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String saveFormat() {
-        return "D" + " | " + (super.isDone ? "1" : "0") + " | " + super.description + " | " + this.by;
+        return "D" + " , " + (super.isDone ? "1" : "0") + " , " + super.description + " , " + this.by;
     }
 }
