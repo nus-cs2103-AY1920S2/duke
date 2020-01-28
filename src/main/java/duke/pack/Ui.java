@@ -12,6 +12,10 @@ public class Ui {
         System.out.println(e);
     }
 
+    public void showError(DukeException e) {
+        System.out.println(e);
+    }
+
     public String receiveInput() {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine().trim();
@@ -22,7 +26,7 @@ public class Ui {
      * prints greeting to user
      */
     public void greet() {
-        System.out.println("    ------------------------------------------------------------");
+        System.out.println("    ------------------------------------------------------------------");
 
         // logo obtained using https://www.kammerl.de/ascii/AsciiSignature.php
         String logo = "     __  __ _           _          _      \n" +
@@ -39,18 +43,10 @@ public class Ui {
         System.out.println("    ------------------------------------------------------------");
     }
 
-    /**
-     * prints list of tasks user has added
-     */
-    public static void printList() {
-        System.out.println("    ------------------------------------------------------------");
-        System.out.println("    Here are your tasks:");
-
-        for (int i = 1; i <= arrList.size(); i++) {
-            System.out.println("    " + i + ". " + arrList.get(i - 1));
-        }
-        System.out.println("    ------------------------------------------------------------");
+    public void showLine() {
+        System.out.println("    ------------------------------------------------------------------");
     }
+
 
     /**
      * exits

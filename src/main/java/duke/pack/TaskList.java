@@ -21,5 +21,25 @@ public class TaskList {
         list.remove(taskNum - 1);
     }
 
+    public int getSize() {
+        return list.size();
+    }
+
+    public ArrayList<Task> getList() {
+        return list;
+    }
+
+    public void markAsDone(int taskNum) {
+        list.get(taskNum - 1).markAsDone();
+    }
+
+    public void printList() {
+        System.out.println("    Here are your tasks:");
+
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println("    " + i + ". " + list.get(i - 1));
+        }
+    }
+
 
 }

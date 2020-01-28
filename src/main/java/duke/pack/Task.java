@@ -39,10 +39,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
 
-        System.out.println("    ------------------------------------------------------------");
         System.out.println("    Fantastic job! I have marked this task as done:");
         System.out.println("      " +  this);
-        System.out.println("    ------------------------------------------------------------");
     }
 
     public String formatForFile() {

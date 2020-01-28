@@ -13,8 +13,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return ("    ------------------------------------------------------------\n"
-                + s + "\n"
-                + "    ------------------------------------------------------------\n");
+        return s;
     }
 }

@@ -57,6 +57,22 @@ public class Storage {
         }
 
         return arrList;
+    }
 
+    public void save(TaskList tasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(file);
+            String text = "";
+
+            for ( Task task: tasks.getList()) {
+                text = text + task.formatForFile();
+            }
+
+            fw.write(text);
+            fw.close();
+
+        } catch (IOException e) {
+            throw new DukeException("Oh no, error in saving tasks to hard disk!");
+        }
     }
 }
