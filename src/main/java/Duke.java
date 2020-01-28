@@ -1,5 +1,12 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,6 +17,7 @@ public class Duke {
                 + "     |____/ \\__,_|_|\\_\\___|\n";
 
         String borderDesign = "    ____________________________________________________________\n";
+
         String greet = borderDesign + logo
                 + "\n     Hello! I'm Duke\n     What can I do for you?\n"
                 + borderDesign;
@@ -19,9 +27,43 @@ public class Duke {
                 + "     Bye. Hope to see you again soon!\n"
                 + borderDesign;
 
+        // Instantiate variables
+        ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> lst = new ArrayList<Task>();
-        boolean first = true;
+
+        // Read the data\duke.txt file
+        String homeDir = System.getProperty("user.home");
+        String fileName = "duke.txt";
+        Path path = Paths.get(homeDir, "duke", "data", fileName);
+
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (int i = 0; i < lines.size(); i++) {
+                String curLine = lines.get(i);
+                String[] components = curLine.split(" , ");
+
+                if (components.length < 3) {
+                    continue;
+                }
+                if (components[0].equals("T")) {
+                    Task tTask = new ToDo(" " + components[2]);
+                    tTask.setStatus(components[1]);
+                    tasks.add(tTask);
+                } else if (components[0].equals("D")) {
+                    Task dTask = new Deadline(" " + components[2], components[3]);
+                    dTask.setStatus(components[1]);
+                    tasks.add(dTask);
+                } else if (components[0].equals("E")) {
+                    Task eTask = new Event(" " + components[2], components[3]);
+                    eTask.setStatus(components[1]);
+                    tasks.add(eTask);
+                } else {
+                    System.err.print("Wrong File Structure");
+                }
+            }
+        } catch (IOException e) {
+            System.err.print("IOException occured.");
+        }
 
         while (sc.hasNextLine()) {
             try {
@@ -29,12 +71,28 @@ public class Duke {
 
                 if (line.equals("bye")) {
                     System.out.print(exit);
+
+                    // Write current tasks to data\duke.txt
+                    String output = "";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task t = tasks.get(i);
+                        output += t.writeToFile() + "\n";
+                    }
+
+                    try {
+                        BufferedWriter writer = Files.newBufferedWriter(path);
+                        writer.write(output);
+                        writer.flush();
+                    } catch (IOException e) {
+                        System.err.print("IOException occured.");
+                    }
                     System.exit(0);
+
 
                 } else if (line.equals("list")) {
                     System.out.println(borderDesign + "     Here are the tasks in your list:");
-                    for (int i = 1; i <= lst.size(); i++) {
-                        String item = "     " + i + "." + lst.get(i - 1);
+                    for (int i = 1; i <= tasks.size(); i++) {
+                        String item = "     " + i + "." + tasks.get(i - 1);
                         System.out.println(item);
                     }
                     System.out.println(borderDesign);
@@ -48,14 +106,14 @@ public class Duke {
                         }
 
                         int index = Integer.parseInt(comArs[1]) - 1;
-                        if (index > lst.size() - 1) {
+                        if (index > tasks.size() - 1) {
                             throw new DEIndex("done");
                         }
 
-                        lst.get(index).markDone();
+                        tasks.get(index).markDone();
                         String done = borderDesign
                                 + "     Nice! I've marked this task as done: \n"
-                                + "       " + lst.get(index) + "\n"
+                                + "       " + tasks.get(index) + "\n"
                                 + borderDesign;
                         System.out.println(done);
 
@@ -65,16 +123,16 @@ public class Duke {
                         }
 
                         int index = Integer.parseInt(comArs[1]) - 1;
-                        if (index > lst.size() - 1) {
+                        if (index > tasks.size() - 1) {
                             throw new DEIndex("delete");
                         }
 
-                        Task t = lst.get(index);
-                        lst.remove(index);
+                        Task t = tasks.get(index);
+                        tasks.remove(index);
                         String del = borderDesign
                                 + "     Noted. I've removed this task: \n"
                                 + "       " + t + "\n"
-                                + "     Now you have " + lst.size() + " tasks in the list.\n"
+                                + "     Now you have " + tasks.size() + " tasks in the list.\n"
                                 + borderDesign;
                         System.out.println(del);
 
@@ -97,7 +155,6 @@ public class Duke {
                             if (msgDate.length == 1) {
                                 throw new DEDate("event");
                             }
-
                             t = new Event(msgDate[0], msgDate[1]);
 
                         } else if (comArs[0].equals("deadline")){
@@ -117,12 +174,12 @@ public class Duke {
                             throw err;
                         }
 
-                        lst.add(t);
+                        tasks.add(t);
 
                         String tnew = borderDesign
                                 + "     Got it. I've added this task:\n"
                                 + "       " + t + "\n"
-                                + "     Now you have " + lst.size() + " tasks in the list.\n"
+                                + "     Now you have " + tasks.size() + " tasks in the list.\n"
                                 + borderDesign;
                         System.out.println(tnew);
                     }
