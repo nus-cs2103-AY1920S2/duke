@@ -27,6 +27,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String serialize() {
+        return serialize("E", at, timeSlot);
+    }
+
+    @Override
     public String toString() {
         return String.format("[E]%s (at: %s %s)", super.toString(), at, timeSlot);
     }
