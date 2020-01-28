@@ -22,7 +22,7 @@ checkstyle {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "dude"
     archiveVersion = "0.1"
     archiveClassifier = null
     archiveAppendix = null

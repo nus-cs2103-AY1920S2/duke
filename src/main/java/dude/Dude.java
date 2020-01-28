@@ -25,8 +25,10 @@ public class Dude {
     private IUserInterface ui;
 
     /** 
-     * Initializes dude.Dude chatbot
-     * Greets the user
+     * Initializes dude.Dude chatbot's main components.
+     * UI - greets user, initializes resources to obtain user input.
+     * TextStorage - contains file object to read previous data from.
+     * TaskList - Is initialized with tasks from saved session from storage.
      */
     public Dude() {
         this.ui = new UI();
@@ -35,8 +37,8 @@ public class Dude {
     }
 
     /**
-     * Repeatedly takes user input and responds to commands appropriately
-     * until "bye" is given as input
+     * Repeatedly takes user input and responds to commands appropriately.
+     * Stops when "bye" is given as input.
      */
     public void serve() {
         boolean isExit = false;

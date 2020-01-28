@@ -18,6 +18,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 public class Parser {
+    /** Mappings from commands to their usage messages */
     private static Map<String, String> usages =
             Map.of(
                     "bye"     , "bye",
@@ -31,9 +32,18 @@ public class Parser {
                     "event"   , "event description /from yyyy-mm-dd /to yyyy-mm-dd"
             );
 
-    // Regex for whitespace, for greater clarity
+    /** Regex for whitespace, for greater clarity */
     private final static String whitespace = "\\s+";
 
+    /**
+     * Takes raw user input and attempts to parse it to dispatch to the relevant Command with the correct arguments.
+     * Throws the custom checked exception ParsingException if user input is malformed.
+     * The only valid messages are those that follow the usage messages in usages exactly.
+     *
+     * @param msg raw user input.
+     * @return Command that the user intends to execute.
+     * @throws ParsingException if message is syntactically incorrect.
+     */
     public static Command parse(String msg) throws ParsingException {
         msg = msg.strip();
 

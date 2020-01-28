@@ -9,10 +9,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Hard-coded plaintext file-based implementation of IStorage interface.
+ * Session TaskList data is saved to data/dude.txt relative to where the CLI is run from.
+ * Requires the app to have file and directory reading and writing permissions.
+ */
 public class TextStorage implements IStorage {
     private static final File storeFile = new File("data/dude.txt");
 

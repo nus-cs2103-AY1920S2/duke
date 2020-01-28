@@ -9,10 +9,23 @@ import dude.component.TaskList;
 public class AddTaskCommand extends Command {
     private final Task task;
 
+    /**
+     *
+     * @param task the Task to be added (Todo, Deadline, Event).
+     */
     public AddTaskCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Adds task to current session's tasks.
+     * Never throws CommandExecutionException.
+     *
+     * @param tasks the current TaskList before the command is executed. Can be modified by execute.
+     * @param ui the IUserInterface to report results of successful commands.
+     * @param storage the IStorage from which the current session was loaded and to which the session will
+     *  be saved to on an exiting command.
+     */
     @Override
     public void execute(TaskList tasks, IUserInterface ui, IStorage storage) {
         tasks.addTask(this.task);
