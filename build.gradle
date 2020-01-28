@@ -12,6 +12,11 @@ repositories {
 
 dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 application {
