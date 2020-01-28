@@ -21,14 +21,13 @@ public class Duke {
                 break;
             }
 
-            //else if (input.equals("list")) {
-            //    list(added);
-            //}
+            else if (input.equals("list")) {
+                list(added);
+            }
 
             else {
-                System.out.println(input);
-                //added.add(input);
-                //System.out.println("added: " + input);
+                added.add(input);
+                System.out.println("added: " + input);
             }
         }
 
