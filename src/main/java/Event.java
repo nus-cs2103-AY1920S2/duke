@@ -1,11 +1,14 @@
-public class Event extends Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    private String time;
+public class Event extends Task{
+
     protected final String eventLogo = "E";
+    private LocalDate time;
 
-    public Event(String taskName, String time) {
+    public Event(String taskName, LocalDate by) {
         super(taskName);
-        this.time = time;
+        this.time = by;
     }
 
     /**
@@ -31,6 +34,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (at: %s)", eventLogo, super.toString(), this.time);
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String formattedDate = time .format((outputFormat));
+        return String.format("[%s]%s (by: %s)", eventLogo, super.toString(), formattedDate);
     }
 }
