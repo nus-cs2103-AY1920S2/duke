@@ -1,15 +1,38 @@
 package tasks;
 
-public class Event extends Task {
-    private String startAt;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String startAt) {
+public class Event extends Task {
+    private LocalTime startAtTime;
+    private LocalDate startAtDate;
+
+    public Event(String description, String startAt) throws DateTimeException {
         super(description);
-        this.startAt = startAt;
+
+        String[] fields = startAt.split(" ");
+        this.startAtTime = fields[0].equals("-")
+                ? null
+                : LocalTime.parse(fields[0]);
+
+        this.startAtDate = fields[1].equals("-")
+                ? LocalDate.now()
+                : LocalDate.parse(fields[1]);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.startAt + ")";
+        String date = this.startAtDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String dateTime = this.startAtTime != null
+                ? this.startAtTime + ", " + date
+                : date;
+
+        return "[E]" + super.toString() + " (at: " + dateTime + ")";
+    }
+
+    public LocalDate getDate() {
+        return this.startAtDate;
     }
 }

@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -33,7 +36,7 @@ public class Duke {
             try {
                 switch (action) {
                 case "list":
-                    printList(list, numberOfTasks);
+                    printList(list);
                     break;
                 case "done":
                     int taskNumber = Integer.parseInt(input.split(" ")[1]);
@@ -97,7 +100,7 @@ public class Duke {
                         printFormattedOutput(message);
                         System.out.print(ex.stringifyFields());
                         input = sc.nextLine();
-                        if (!input.equals("")){
+                        if (!input.equals("")) {
                             String[] fields = ex.getFields();
                             Task newTask =  action.equals("event")
                                     ? new Event(fields[0], input)
@@ -110,6 +113,18 @@ public class Duke {
                         }
                     }
                     break;
+                case "date":
+                    String[] fields = input.split(" ");
+                    try {
+                        LocalDate date = LocalDate.parse(fields[1]);
+                        searchDateTask(list, date);
+                    } catch (DateTimeException ex) {
+                        printFormattedOutput("Sorry, I don't recognize this date format. " +
+                                "Try to follow this format: 2020-12-31");
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        printFormattedOutput("Please input a date!");
+                    }
+                    break;
                 default:
                     throw new InvalidActionException();
                 }
@@ -117,6 +132,10 @@ public class Duke {
                 printFormattedOutput(ex.toString());
             } catch (InvalidTaskNumberException ex) {
                 printFormattedOutput(ex.toString());
+            } catch (DateTimeException ex) {
+                printFormattedOutput("You have entered an invalid time/date format.\n    " +
+                        "Please follow the following format: 23:59 2020-12-31\n    " +
+                        "You may input '-' to omit either the time or date");
             }
 
             input = sc.nextLine();
@@ -124,6 +143,22 @@ public class Duke {
 
         printFormattedOutput("Bye. Hope to see you again soon!");
 
+    }
+
+    public static void searchDateTask(ArrayList<Task> list, LocalDate date) {
+        ArrayList<Task> dateTasks = new ArrayList<>();
+        for (Task t : list) {
+            if (t instanceof Event) {
+                if (date.equals(((Event) t).getDate())) {
+                    dateTasks.add(t);
+                }
+            } else if (t instanceof Deadline) {
+                if (date.equals(((Deadline) t).getDate())) {
+                    dateTasks.add(t);
+                }
+            }
+        }
+        printList(dateTasks);
     }
 
     // Print formatters
@@ -134,10 +169,10 @@ public class Duke {
         System.out.println(bar + "    " + output + "\n" + bar);
     }
 
-    public static void printList(ArrayList<Task> list, int size) {
+    public static void printList(ArrayList<Task> list) {
         System.out.print(bar);
         System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println("    " + (i + 1) + ". " + list.get(i));
         }
         System.out.println(bar);
@@ -165,4 +200,10 @@ public class Duke {
         System.out.println("    Now you have " + sizeOfList + " tasks on the list.");
         System.out.println(bar);
     }
+
+//    public static void printDateTask(ArrayList<Task> list) {
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println(i + ".  " + list.get(i));
+//        }
+//    }
 }
