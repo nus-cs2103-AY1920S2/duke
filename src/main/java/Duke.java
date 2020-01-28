@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-
     private static String horizontalLine = "__________________________________________";
     private static Storage storage;
 

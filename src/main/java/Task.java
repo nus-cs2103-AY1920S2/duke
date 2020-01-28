@@ -24,7 +24,7 @@ public class Task {
     }
 
     public String getTaskName() {
-        return taskName;
+        return taskName.trim();
     }
 
     public int getTaskNumber() {
@@ -33,6 +33,6 @@ public class Task {
 
     @Override
     public String toString() {
-            return getStatusIcon() + " " + getTaskName();
+            return getStatusIcon() + " " + getTaskName() + " ";
     }
 }
