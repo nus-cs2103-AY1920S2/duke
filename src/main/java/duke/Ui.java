@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 
 import java.util.Scanner;
-import java.time.LocalDate;
 
 /**
  * Interacts with the user.
@@ -131,21 +130,36 @@ public class Ui {
     }
 
     /**
-     * Prints the tasks on the specified date.
-     * @param filteredTasks The TaskList that contains tasks on the specified date.
-     * @param date The date to be filtered.
+     * Prints the tasks in the specified TaskList.
+     * @param tasks The TaskList that contains the tasks to be printed.
      */
-    public void showGetTasks(TaskList filteredTasks, LocalDate date) {
-        if (filteredTasks.isEmpty()) {
-            showToUser("There are no tasks on " + date + ".");
+    public void showMatchingTasks(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            showToUser("There are no matching tasks in your list.");
         } else {
             showLine();
-            print("Here are the tasks on " + date + ":");
-            for (Task task : filteredTasks.getTasks()) {
+            print("Here are the matching tasks in your list:");
+            for (Task task : tasks.getTasks()) {
                 print("  " + task);
             }
             showLine();
             print("");
         }
+    }
+
+    /**
+     * Prints the tasks on the specified date.
+     * @param filteredTasks The TaskList that contains tasks on the specified date.
+     */
+    public void showGetTasks(TaskList filteredTasks) {
+        showMatchingTasks(filteredTasks);
+    }
+
+    /**
+     * Prints the tasks with the specified keyword.
+     * @param filteredTasks The TaskList that contains tasks with the specified keyword.
+     */
+    public void showFindTasks(TaskList filteredTasks) {
+        showMatchingTasks(filteredTasks);
     }
 }

@@ -71,10 +71,22 @@ class ParserTest {
             assertEquals("The ID of the task to delete should be a number.", e.getMessage());
         }
         try {
+            Parser.parse("get");
+            fail();
+        } catch (DukeException e) {
+            assertEquals("The date of tasks to retrieve cannot be empty.", e.getMessage());
+        }
+        try {
             Parser.parse("get 02-02-2020");
             fail();
         } catch (DukeException e) {
             assertEquals("Incorrect date format. Format required: yyyy-mm-dd", e.getMessage());
+        }
+        try {
+            Parser.parse("find");
+            fail();
+        } catch (DukeException e) {
+            assertEquals("The keyword to search cannot be empty.", e.getMessage());
         }
     }
 

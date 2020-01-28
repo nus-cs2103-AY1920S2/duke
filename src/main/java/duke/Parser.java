@@ -5,6 +5,7 @@ import duke.command.AddCommand;
 import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.GetCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ExitCommand;
 
@@ -76,8 +77,20 @@ public class Parser {
                     throw new DukeException("The date of tasks to retrieve cannot be empty.");
                 }
                 cmd = new GetCommand(LocalDate.parse(commandArr[1].trim()));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("The date of tasks to retrieve cannot be empty.");
             } catch (DateTimeParseException e) {
                 throw new DukeException("Incorrect date format. Format required: yyyy-mm-dd");
+            }
+            break;
+        case "find":
+            try {
+                if (commandArr[1].trim().equals("")) {
+                    throw new DukeException("The keyword to search cannot be empty.");
+                }
+                cmd = new FindCommand(commandArr[1].trim());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("The keyword to search cannot be empty.");
             }
             break;
         case "list":
