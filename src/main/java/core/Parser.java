@@ -9,8 +9,17 @@ import java.time.format.DateTimeParseException;
 import dukexception.DukeException;
 
 
+/**
+ * Parser the input from user to Command that can execute.
+ */
 public class Parser {
 
+    /**
+     * Parse the user input to recognisable command.
+     * @param userInput input from user.
+     * @return command to be executed.
+     * @throws DukeException user input is incomplete or invalid.
+     */
     public Command parse(String userInput) throws DukeException {
 
         if(userInput.contains(" ")){

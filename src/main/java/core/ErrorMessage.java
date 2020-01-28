@@ -1,5 +1,8 @@
 package core;
 
+/**
+ * Stores all the essential error text to be display by Ui.
+ */
 public enum ErrorMessage {
 
     INDEX_OUT_OF_BOUND("Index out of bound"),
