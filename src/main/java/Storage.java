@@ -2,7 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Paths;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,6 +40,7 @@ public class Storage {
     }
 
     public ArrayList<Task> load() {
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(pathFile);
@@ -51,14 +57,14 @@ public class Storage {
                         tasks.add(storeTask);
                         break;
                     case EVENT:
-                        Event storeEvent = new Event(taskArr[2], taskArr[3]);
+                        Event storeEvent = new Event(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
                         if (taskArr[1].equals(DONE)) {
                             storeEvent.markAsDone();
                         }
                         tasks.add(storeEvent);
                         break;
                     case DEADLINE:
-                        Deadline storeDeadline = new Deadline(taskArr[2], taskArr[3]);
+                        Deadline storeDeadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
                         if (taskArr[1].equals(DONE)) {
                             storeDeadline.markAsDone();
                         }
@@ -95,9 +101,9 @@ public class Storage {
                         toBeWritten += "D | " + eachTask.getStatusNumber() + " | " + eachTask.getTask() + " | "
                                 + ((Deadline) eachTask).getBy() + Duke.NEWLINE;
                     }
-//                    else {
-//                        throw new IOException("Problem ecnountered while saving/writing to data file");
-//                    }
+                    else {
+                        throw new IOException("Problem encountered while saving/writing to data file");
+                    }
                 }
                 fileWriter.write(toBeWritten);
                 fileWriter.close();
