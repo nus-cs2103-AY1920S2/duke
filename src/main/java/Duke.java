@@ -70,6 +70,9 @@ public class Duke {
             else if (splitstr[0].toLowerCase().equals("delete")) { // delete
                 deleteTask(Integer.parseInt(splitstr[1])-1); // whichever task you want to delete
             }
+            else if (splitstr[0].toLowerCase().equals("find")) { // find
+                findTask(splitstr[1]);
+            }
             else {
                 String[] time_split = user_input.split("/"); // the 2nd half contains the deadline
                 if (splitstr[0].toLowerCase().equals("todo")) { // TODO =================================
@@ -149,6 +152,22 @@ public class Duke {
                     tasks[counter].updateisDone(true);
                 }
                 counter++;
+            }
+        }
+    }
+
+    public static void findTask(String keyword) {
+        //Task[] potential_tasks = new Task[100];
+        int potential_task_counter = 0;
+        for (int i = 0; i < counter; i++) {
+            if (tasks[i].getDescription().contains(keyword)) {
+                potential_task_counter++;
+            }
+        }
+        System.out.println("Here are the matching tasks in your list: ");
+        for (int i = 0; i < counter; i++) {
+            if (tasks[i].getDescription().contains(keyword)) {
+                System.out.println(Integer.toString(i+1) + ". " + tasks[i].getTaskType() + tasks[i].getCompletionStatus() + tasks[i].getDescription() + tasks[i].getDeadline());
             }
         }
     }
