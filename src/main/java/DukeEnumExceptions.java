@@ -1,3 +1,8 @@
+/**
+ * The enum class for checking for any errors of the input command
+ *
+ * @author Amos Cheong
+ */
 public enum DukeEnumExceptions {
     LIST {
         public void checkerror(String s1, String s2, TaskList list) throws DukeException {
@@ -61,6 +66,17 @@ public enum DukeEnumExceptions {
             } else if (Integer.parseInt(allargs[1]) > list.getsize() ||
                     Integer.parseInt(allargs[1]) < 0) {
                 throw new DukeException("Task index is not found!");
+            }
+        }
+    },
+    FIND {
+        @Override
+        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+            int numOfArgs = Integer.parseInt(s2);
+            String[] commandarr = s1.split("\\s+", 2);
+
+            if (commandarr.length != numOfArgs) {
+                throw new DukeException("'find' command should have 2 arguments (find [keyword to find])");
             }
         }
     };

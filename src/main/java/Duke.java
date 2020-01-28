@@ -1,6 +1,12 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ *  Duke Class.
+ *  The main class to run the whole code.
+ *
+ * @author Amos Cheong
+ */
 public class Duke {
 
     private Storage storage;
@@ -24,17 +30,25 @@ public class Duke {
 
     /**
      * Find out the type of command and execute it.
-     * @param input The line input by the user
+     * @param input The line input by the user.
      */
     public static void execcommand(String input, TaskList tasks, Ui ui) {
-        String[] arguments = input.split(" ");
+        String[] arguments = input.split(" ", 2);
 
         DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui);
     }
 
+    /**
+     * A method to get the file path from the Duke object.
+     * @return String The path of the file or the file location.
+     */
     public String getFilePath() {
         return this.FilePath;
     }
+
+    /**
+     * Runs the whole code.
+     */
     public void run() {
         // Greet the user
         ui.greetUser();
@@ -61,7 +75,6 @@ public class Duke {
 
         try {
             storage.store(tasks);
-            //writeToFile();
         } catch (IOException ioex) {
             ui.showErrorMessage(ioex.getMessage());
         }
@@ -71,7 +84,8 @@ public class Duke {
     }
     /**
      * The main method of the class Duke.
-     * @param args Unused
+     * @param args Unused.
+     * @return Nothing.
      **/
     public static void main(String[] args) {
         new Duke("C:\\Users\\SOHNB101\\Documents\\myduke\\duke\\data\\duke.txt").run();

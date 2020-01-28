@@ -4,6 +4,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
+/**
+ * The enum class for all Duke commands. User will input the command and
+ * this class will make sense of the input.
+ *
+ * @author Amos Cheong
+ */
 public enum DukeCommand {
     /**
      * Enum Class for all Duke Commands.
@@ -11,6 +17,7 @@ public enum DukeCommand {
     LIST {
         @Override
         public void execute(String s1, TaskList list, Ui ui) {
+            ui.HorizontalLine();
             ui.listAllTasks(list);
         }
     },
@@ -182,6 +189,15 @@ public enum DukeCommand {
 
             list.delete(pos);
         }
+    },
+    FIND {
+      @Override
+      public void execute(String s1, TaskList list, Ui ui) {
+          String[] commandarray = s1.split("\\s+", 2);
+          String keyword = commandarray[1];
+
+          list.find(keyword);
+      }
     };
 
     public abstract void execute(String s1, TaskList list, Ui ui);
