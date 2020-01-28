@@ -1,12 +1,6 @@
 public class DukeException extends Exception{
 
-
-
-
-                DukeException(String message){
-                    super(message);
-                }
-
-
-
+    DukeException(String message) {
+        super(message);
+    }
 }

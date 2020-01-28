@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 public class Exit extends Command {
-    Exit(){
+    Exit() {
         super();
     }
 
@@ -11,8 +11,8 @@ public class Exit extends Command {
         ui.showLine();
         storage.save(tasks);
     }
-    boolean isExit(){
 
+    boolean isExit() {
         return true;
     }
 }

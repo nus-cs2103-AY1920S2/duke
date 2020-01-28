@@ -1,14 +1,14 @@
 public class Delete extends Command {
     String s;
 
-    Delete(String s){
+    Delete(String s) {
         super();
-        this.s=s;
+        this.s = s;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine();
-        int num=Integer.valueOf(s);
+        int num = Integer.valueOf(s);
         ui.printString("Noted. I've removed this task:");
         ui.printTask(num,tasks);
         ui.printString("Now you have "+ (tasks.getList().size() - 1) + " tasks in the list.");
@@ -16,7 +16,7 @@ public class Delete extends Command {
         tasks.list.remove(num-1);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return false;
     }
 }

@@ -4,13 +4,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
         protected LocalDateTime at;
 
-
-        public Event(int done, String task_name, LocalDateTime at) {
-            super("event",done, task_name);
+        public Event(int done, String taskName, LocalDateTime at) {
+            super("event",done, taskName);
             this.at = at;
         }
 
-        LocalDateTime getAt(){
+        LocalDateTime getAt() {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             String formatDateTime = at.format(format);
             return at;
@@ -22,4 +21,4 @@ public class Event extends Task {
             String formatDateTime = at.format(format);
             return "[E]" + super.toString() + " (at: " + formatDateTime + ")";
         }
-    }
+}

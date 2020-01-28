@@ -1,13 +1,11 @@
+public class Todo extends Task {
 
-    public class Todo extends Task {
-
-        Todo(int done, String task_name){
-
-            super("todo",done, task_name);
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
+    Todo(int done, String taskName) {
+        super("todo", done, taskName);
     }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
