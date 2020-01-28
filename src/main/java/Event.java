@@ -1,5 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
     private String eventDate;
+    private LocalDate parsedDate;
 
     /**
      * Event constructor.
@@ -11,6 +16,9 @@ public class Event extends Task {
         super(eventArgs.split(" /at ")[0]);
         try {
             this.eventDate = eventArgs.split(" /at ")[1];
+            this.parsedDate = LocalDate.parse(eventDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(5);
         } catch (Exception e) {
             throw new DukeException(2);
         }
@@ -25,7 +33,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-            + this.eventDate + ")";
+            + this.parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override

@@ -1,5 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
     private String deadlineDate;
+    private LocalDate parsedDate;
 
     /**
      * Deadline constructor.
@@ -11,6 +16,9 @@ public class Deadline extends Task {
         super(deadlineArgs.split(" /by ")[0]);
         try {
             this.deadlineDate = deadlineArgs.split(" /by ")[1];
+            this.parsedDate = LocalDate.parse(deadlineDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(5);
         } catch (Exception e) {
             throw new DukeException(3);
         }
@@ -25,7 +33,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-            + this.deadlineDate + ")";
+            + this.parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override

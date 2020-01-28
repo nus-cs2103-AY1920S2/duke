@@ -5,6 +5,7 @@ public class DukeException extends Exception {
     // 2 - Incomplete event
     // 3 - Incomplete deadline
     // 4 - Done argument out of range
+    // 5 - Invalid date format
     // Default - Some unknown error
 
     public DukeException(int errorType) {
@@ -30,6 +31,9 @@ public class DukeException extends Exception {
             break;
         case 4:
             message = "Boss, you do know there's not that many tasks right?";
+            break;
+        case 5:
+            message = "I don't understand the date, boss. Type the date like this YYYY-MM-DD";
             break;
         default:
             message = "Uh-oh boss, I don't feel so good...";
