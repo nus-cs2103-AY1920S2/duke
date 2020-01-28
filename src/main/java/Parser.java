@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,7 +16,6 @@ public class Parser {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-//            System.out.println("OK");
             try {
                 commandHandler(command, tasks, filepath);
             } catch (DukeException e) {
@@ -162,7 +163,6 @@ public class Parser {
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(filepath));
-            //
             String saveAll = "";
             for(Task t : store) {
                 String letter;
@@ -184,7 +184,6 @@ public class Parser {
                 } else {}
             }
             writer.write(saveAll);
-            //
             writer.close();
 
         } catch(IOException e) {
