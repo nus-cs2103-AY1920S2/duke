@@ -3,10 +3,21 @@ package duke.task;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Task list to manage tasks created by users.
+ */
 public class TaskList {
 
+    /**
+     * ArrayList as the underlying implementation to store tasks.
+     */
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructor for task list.
+     *
+     * @param data List of tasks loaded from saved text file.
+     */
     public TaskList(List<String> data) {
         this.taskList = new ArrayList<>(100);
         for (int i = 0; i < data.size(); i++) {
@@ -52,6 +63,9 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Retrieve task list in numbered order.
+     */
     public String getTaskList() {
         String list = "";
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -65,6 +79,9 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Format task list to be saved into text file.
+     */
     public String getTaskListSaveFormat() {
         String data = "";
         for (int i = 0; i < this.taskList.size(); i++) {

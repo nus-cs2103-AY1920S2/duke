@@ -2,14 +2,29 @@ package duke.task;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * An event task.
+ */
 public class Event extends Task {
 
+    /**
+     * Constructor for an event task.
+     *
+     * @param taskName Name of the task.
+     * @param dateTime The date and time of the task (if any).
+     */
     public Event(String taskName, String dateTime) {
         super(taskName.trim(), dateTime.trim());
         this.taskType = "E";
     }
 
-    // to initialise save data
+    /**
+     * Overloaded constructor for an event task.
+     *
+     * @param taskName Name of the task.
+     * @param isDone Indicates if the task is completed already.
+     * @param dateTime The date and time of the task (if any).
+     */
     public Event(String taskName, boolean isDone, String dateTime) {
         super(taskName.trim(), isDone, dateTime.trim());
         this.taskType = "E";

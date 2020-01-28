@@ -7,8 +7,18 @@ import duke.ui.UI;
 
 import java.io.IOException;
 
+/**
+ * Parser to interpret commands.
+ */
 public class Parser {
 
+    /**
+     * Parser to interpret user input.
+     *
+     * @param input User input during runtime.
+     * @param storage Storage object to save the task list that is updated in this method.
+     * @param taskList Task list object to store the tasks that are created from user command in this method.
+     */
     public static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
 
         String[] inputArr = input.split(" ");

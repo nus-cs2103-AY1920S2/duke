@@ -7,15 +7,34 @@ import duke.ui.UI;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Duke Task Manager.
+ */
 public class Duke {
 
+    /**
+     * Storage object to load and save tasks to text file.
+     */
     private Storage storage;
+
+    /**
+     * Task list object to store tasks.
+     */
     private TaskList taskList;
 
+    /**
+     * Main method to start the Duke program.
+     * Invokes the run() method to start simulation.
+     *
+     * @param args Main method arguments for when program runs.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Constructor for Duke object.
+     */
     private Duke() {
         try {
             this.storage = new Storage("data/duke.txt");
@@ -25,6 +44,9 @@ public class Duke {
         }
     }
 
+    /**
+     * To start simulation.
+     */
     private void run() {
         UI.printIntro();
         Scanner scanner = new Scanner(System.in);
