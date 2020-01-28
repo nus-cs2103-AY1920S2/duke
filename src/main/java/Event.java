@@ -43,6 +43,7 @@ public class Event extends Task {
     public String toString() {
         String checkbox = "[" + super.getStatusIcon() + "]";
         String dateFormat = atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[E]" + checkbox + " " + super.toString() + " (at: " + dateFormat + ", " + formatTime12Hour(time24Hr) + ")";
+        return "[E]" + checkbox + " " + super.toString()
+                + " (at: " + dateFormat + ", " + formatTime12Hour(time24Hr) + ")";
     }
 }

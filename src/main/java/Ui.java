@@ -75,6 +75,30 @@ public class Ui {
     }
 
     /**
+     * Displays list of found tasks when a user uses the 'find' command
+     *
+     * @param foundTasks ArrayList of tasks which match the search
+     */
+    public void showFoundTasks(ArrayList<Task> foundTasks) {
+        String foundHeader = foundTasks.isEmpty()
+                ? "Goose didn't find anything, honk..."
+                : "Honk! Here are the matching tasks in your list:\n";
+
+        // print list of found tasks
+        String foundList = "";
+        for (int i = 0; i < foundTasks.size(); i++) {
+            int indexNum = i + 1;
+            String item = " " + indexNum + "." + foundTasks.get(i).toString();
+            if (i != foundTasks.size() - 1) {
+                item += "\n";
+            }
+            foundList += item;
+        }
+
+        System.out.println(wrapLine(foundHeader + foundList));
+    }
+
+    /**
      * Displays count of current tasks in task list.
      *
      * @param taskList Current task list as an ArrayList
