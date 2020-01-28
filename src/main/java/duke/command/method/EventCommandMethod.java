@@ -9,6 +9,7 @@ import duke.exception.DukeException;
 import duke.exception.DukeInvalidDateTimeException;
 import duke.exception.DukeInvalidNumberOfArgumentsException;
 import duke.exception.DukeNoArgumentsException;
+import duke.storage.Storage;
 import duke.task.EventTask;
 
 public class EventCommandMethod implements CommandMethod {
@@ -31,7 +32,8 @@ public class EventCommandMethod implements CommandMethod {
             EventTask newTask = new EventTask(description, at);
             String message = program.getTaskList().addTask(newTask);
             program.getUi().print(message);
-            new SaveCommandMethod().execute(program, command);
+            Storage storage = program.getStorage();
+            storage.saveTaskList(program.getTaskList());
         } catch (DateTimeParseException e) {
             throw new DukeInvalidDateTimeException(parts[1]);
         }

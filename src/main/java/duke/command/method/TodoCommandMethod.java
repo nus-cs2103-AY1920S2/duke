@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeNoArgumentsException;
+import duke.storage.Storage;
 import duke.task.TodoTask;
 
 public class TodoCommandMethod implements CommandMethod {
@@ -16,6 +17,7 @@ public class TodoCommandMethod implements CommandMethod {
         TodoTask newTask = new TodoTask(command.getArgumentString());
         String message = program.getTaskList().addTask(newTask);
         program.getUi().print(message);
-        new SaveCommandMethod().execute(program, command);
+        Storage storage = program.getStorage();
+        storage.saveTaskList(program.getTaskList());
     }
 }

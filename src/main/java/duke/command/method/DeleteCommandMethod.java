@@ -6,6 +6,7 @@ import duke.exception.DukeEmptyTaskListException;
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidTaskException;
 import duke.exception.DukeNoArgumentsException;
+import duke.storage.Storage;
 import duke.utils.TaskList;
 
 public class DeleteCommandMethod implements CommandMethod {
@@ -24,7 +25,8 @@ public class DeleteCommandMethod implements CommandMethod {
             int taskIndex = Integer.parseInt(firstArgument) - 1;
             String message = tasks.removeTask(taskIndex);
             program.getUi().print(message);
-            new SaveCommandMethod().execute(program, command);
+            Storage storage = program.getStorage();
+            storage.saveTaskList(program.getTaskList());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeInvalidTaskException(firstArgument);
         }
