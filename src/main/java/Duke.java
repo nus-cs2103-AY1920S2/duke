@@ -73,6 +73,13 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! You're missing some descriptions for your event.", e);
                     }
+                } else if (inarr[0].equals("delete")) {
+                    try {
+                        int toremove = Integer.parseInt(inarr[1]);
+                        removetask(mylist, toremove);
+                    } catch(IndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! That task doesn't exist or you failed to include a number.", e);
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -90,5 +97,12 @@ public class Duke {
         for (int i = 0; i < ls.size(); i++) {
             System.out.println((i + 1) + "." + ls.get(i));
         }
+    }
+
+    private static void removetask(ArrayList<task> ls, int ind) {
+        task temp = ls.remove(ind - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(temp);
+        System.out.println("Now you have " + ls.size() + " tasks on the list.");
     }
 }
