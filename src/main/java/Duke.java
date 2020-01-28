@@ -3,6 +3,7 @@
 
 import java.io.*;
 import java.util.Scanner;
+import java.lang.*;
 
 public class Duke {
 
