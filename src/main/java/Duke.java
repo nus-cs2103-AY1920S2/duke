@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,82 +12,49 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("    Hello! I'm Duke\n" + "  What can I do for you?");
-        String input = sc.nextLine();
-        int listCounter = 0;
-        while(!input.equals("bye")) {
-            if (!input.equals("list") && !input.contains("done")) {
+        while (sc.hasNext()) {
+            try {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" ",2);
+                String command = inputs[0];
                 char[] inputArr = input.toCharArray();
-                if(input.contains("todo")) {
-                    String todoInput = "";
-                    for(int i = 5; i < inputArr.length; i++) {
-                        todoInput += inputArr[i];
-                    }
-                    Todo task = new Todo(todoInput);
-                    arr[listCounter] = task;
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + task.toString());
-                } else if (input.contains("event")) {
-                    int marker = 0;
-                    String date = "";
-                    String desc = "";
-                    for(int i = inputArr.length - 1; (inputArr[i] != '/'); i--) {
-                        marker = i;
-                    }
-                    for(int i = marker + 3; i < inputArr.length; i++) {
-                        date += inputArr[i];
-                    }
-                    System.out.println(date);
-                    for (int i = 6; i < marker - 2; i++) {
-                        desc += inputArr[i];
-                    }
-                    System.out.println(desc);
-                    Event task = new Event(desc, date);
-                    arr[listCounter] = task;
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + task.toString());
-                } else if (input.contains("deadline")) {
-                    int marker = 0;
-                    String by = "";
-                    String desc = "";
-                    for(int i = inputArr.length - 1; (inputArr[i] != '/'); i--) {
-                        marker = i;
-                    }
-                    for(int i = marker + 3; i < inputArr.length; i++) {
-                        by += inputArr[i];
-                    }
-                    System.out.println(by);
-                    for (int i = 9; i < marker - 2; i++) {
-                        desc += inputArr[i];
-                    }
-                    System.out.println(desc);
-                    Deadline task = new Deadline(desc, by);
-                    arr[listCounter] = task;
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + task.toString());
+                if (command.equals("todo")) { //create todo
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    };
+                    String info = Todo.generateTodoDesc(inputArr);
+                    Todo task = Todo.createTodo(info);
+                    Task.addTask(task);
+                } else if (command.equals("event")) { //create event
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    };
+                    String date, desc;
+                    date = Event.getEventDate(inputArr);
+                    desc = Event.getEventDesc(inputArr);
+                    Event task = Event.createEvent(desc, date);
+                    Task.addTask(task);
+                } else if (command.equals("deadline")) { //create deadline
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    };
+                    String by, desc;
+                    by = Deadline.getBy(inputArr);
+                    desc = Deadline.getDesc(inputArr);
+                    Deadline task = Deadline.createDeadline(desc, by);
+                    Task.addTask(task);
+                } else if (command.equals("list")) { //list command
+                    System.out.println(Task.showTasks());
+                } else if (command.equals("done")){ //done command
+                    Task.taskDone(input);
+                } else if (command.equals("bye")) { //bye command
+                    System.out.println("Bye. Hope to see you again soon!");
+                } else {
+                    throw new InvalidCommandException();
                 }
-                listCounter++;
-                System.out.println("Now you have " + listCounter + " tasks in the list.");
-                input = sc.nextLine();
-            } else if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < listCounter; i++) {
-                    System.out.println(i + 1 + "." + arr[i].toString());
-                }
-                input = sc.nextLine();
-            } else {
-                char charArr[] = input.toCharArray();
-                String taskNum = "";
-                for (int i = 5; i < charArr.length; i++) {
-                    taskNum += charArr[i];
-                }
-                int taskInt = Integer.parseInt(taskNum);
-                taskInt -= 1;
-                arr[taskInt].isDone = true;
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  [" + arr[taskInt].getStatusIcon() + "] " + arr[taskInt].getDescription());
-                input = sc.nextLine();
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
     }
 }
