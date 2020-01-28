@@ -8,6 +8,9 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.io.InputStream;
 
+/**
+ * The class that deals with interactions with the user. It will give responses to the user.
+ */
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private static final String LINE_PREFIX = "|| ";
@@ -24,12 +27,23 @@ public class Ui {
         this.out = out;
     }
 
+    /**
+     * This is the main command that will read what the user's input is for processing by the Parser.
+     *
+     * @return The user's input.
+     */
     public String readCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }
 
+    /**
+     * This shows the basic welcome message of the program and any tasks that was previously saved into
+     * the data file.
+     *
+     * @param tasks Tasks that were saved into the data file during the previous execution.
+     */
     public void showWelcomeMessage(TaskList tasks) {
         System.out.println("My name is Jarvis!\nHow may I provide my services on this fine day?\n" + DIVIDER);
         if (!tasks.getList().isEmpty()) {

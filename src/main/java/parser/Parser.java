@@ -4,8 +4,19 @@ import commands.*;
 
 import java.time.LocalDate;
 
+/**
+ * The class that handles making sense of the user commands, and acts accordingly if the user commands
+ * are invalid.
+ */
 public class Parser {
 
+    /**
+     * The main command that handles making sense of user commands. Will return custom exception messages upon
+     * encounter.
+     *
+     * @param userInput the user's input into the program, i.e. their various commands.
+     * @return a Command based on the input by the user.
+     */
     public static Command parse(String userInput) {
         String[] substrings = userInput.split(" ",2);
         String commandWord = substrings[0];
@@ -51,6 +62,12 @@ public class Parser {
             return new TodoCommand(arguments);
     }
 
+    /**
+     * Handles the LocalDate objects first before sending it into Event object.
+     *
+     * @param arguments the desc and date objects.
+     * @return the EventCommand with the relevant Event object.
+     */
     private static Command prepareEvent(String arguments) {
         //event x /at 2020-01-13
         String[] items = arguments.split(" /at ");
@@ -67,6 +84,12 @@ public class Parser {
         return new EventCommand(desc, date);
     }
 
+    /**
+     * Handles the LocalDate objects first before sending it into Deadline object.
+     *
+     * @param arguments the desc and date objects.
+     * @return the DeadlineCommand with the relevant Deadline object.
+     */
     private static Command prepareDeadline(String arguments) {
         //event x /at 2020-01-13
         String[] items = arguments.split(" /by ");
