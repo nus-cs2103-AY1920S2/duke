@@ -3,7 +3,7 @@ public class Event extends Task {
 
     public Event(String name, String date) {
         super(name);
-        this.date = date.substring(date.indexOf(" "));
+        this.date = date;
     }
 
     private Event(String name, String date, boolean isDone) {
@@ -12,7 +12,7 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + date + ")";
+        return "[E]" + super.toString() + "(at: " + date + ")";
     }
 
     public Event setDone() {

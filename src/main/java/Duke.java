@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,6 +20,25 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         System.out.println(line);
         processInput();
+    }
+
+    static LocalDateTime getDate(String next) {
+        StringBuilder forTime = new StringBuilder(next.substring(next.indexOf(" ", next.indexOf(" ") +1) + 1));
+        forTime.insert(2, ':');
+        String time = forTime.toString();
+        //System.out.println(time);
+        String[] reverse = next.substring(next.indexOf(" ") + 1, next.indexOf(" ", next.indexOf(" ") +1))
+            .split("/");
+        String[] reversed = reverse;
+        String temp = String.format("%2s",reverse[0]).replace(" ", "0");
+        reversed[0] = String.format("%4s",reverse[2]).replace(" ", "0");
+        reversed[2] = temp;
+        reversed[1] = String.format("%2s", reverse[1]).replace(" ", "0");
+        String date = String.join("-", reversed);
+        LocalDateTime taskDate = LocalDate.parse(date)
+                .atTime(LocalTime.parse(time))
+                ;
+        return taskDate;
     }
 
     static void processInput() {
@@ -62,7 +85,8 @@ public class Duke {
                     } else if (next.trim().split(" ")[0].equals("deadline")) {
                         try {
                             taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
-                            String taskDate = next.substring(next.indexOf("/") + 1);
+                            LocalDateTime time = getDate(next.substring(next.indexOf("/") + 1));
+                            String taskDate = time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a"));
                             newTask = new Deadline(taskName, taskDate);
                             tasks.add(newTask);
                             printTask(newTask, tasks.size());
@@ -72,7 +96,8 @@ public class Duke {
                     } else if (next.trim().split(" ")[0].equals("event")) {
                         try {
                             taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
-                            String taskDate = next.substring(next.indexOf("/") + 1);
+                            LocalDateTime time = getDate(next.substring(next.indexOf("/") + 1));
+                            String taskDate = time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a"));
                             newTask = new Event(taskName, taskDate);
                             tasks.add(newTask);
                             printTask(newTask, tasks.size());

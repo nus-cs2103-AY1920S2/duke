@@ -3,7 +3,7 @@ public class Deadline extends Task {
 
     public Deadline(String name, String date) {
         super(name);
-        this.date = date.substring(date.indexOf(" "));
+        this.date = date;
     }
 
     private Deadline(String name, String date, boolean isDone) {
@@ -12,7 +12,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + date + ")";
+        return "[D]" + super.toString() + "(by: " + date + ")";
     }
 
     public Deadline setDone() {
