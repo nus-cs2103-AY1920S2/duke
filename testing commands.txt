@@ -1,4 +1,6 @@
-eat food
-buy food
-sleep
+todo eat food
+todo buy food
+todo sleep
+deadline hw /by june 20
+event social /at may 19
 list
