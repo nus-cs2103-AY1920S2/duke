@@ -54,3 +54,18 @@ T |  ✘ | run
  [T] [?] sleep
  [T] [✘] run
  [T] [✘] sleep
+ [T] [✘] sleep
+ [T] [✘] fun
+ [T] [✘] sleepy
+ [T] [✘] run
+ [T] [✘] runny
+ [T] [✘] sleep
+ [D] [✘] fighty (by: Feb 3 2020 00:00)
+ [D] [✘] run (by: Feb 4 2020 00:00)
+ [T] [✘] book
+ [T] [✘] books
+ [T] [✘] return book
+ [T] [✘] read book
+ [D] [✘] return book (by: Feb 3 2020 18:00)
+ [T] [✘] sleep
+ [T] [✘] run

@@ -39,7 +39,6 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        //parser = new duke.Parser(storage);
     }
 
     private void run() throws DukeException, IOException {
