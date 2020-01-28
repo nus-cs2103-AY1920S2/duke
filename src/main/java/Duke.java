@@ -1,10 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     enum Command {
-        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, DEFAULT
+        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, DEFAULT, CALENDAR
     }
     static Scanner scanner = new Scanner(System.in);
     static String buffer;
@@ -101,6 +105,9 @@ public class Duke {
                         System.out.println(t);
                         System.out.println("Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
                         break;
+                    case CALENDAR:
+                        showCalendar(param);
+                        break;
                     default:
                         throw new UnknownCommandException();
                 }
@@ -112,6 +119,33 @@ public class Duke {
         }
 
     }
+
+    static void showCalendar(String calendarDateString) {
+        LocalDate calendarDate = LocalDate.parse(calendarDateString, DateTimeFormatter.ofPattern("d/M/yyyy"));
+        List<String> calendarList = new ArrayList<>();
+        for (Task task : list) {
+            if (task.getClass().equals(Deadline.class)) {
+                LocalDate taskDate = ((Deadline) task).by.toLocalDate();
+                if (taskDate.equals(calendarDate)) {
+                    calendarList.add(task.toString());
+                }
+            } else if (task.getClass().equals(Event.class)) {
+                LocalDate taskDate = ((Event) task).at.toLocalDate();
+                if (taskDate.equals(calendarDate)) {
+                    calendarList.add(task.toString());
+                }
+            }
+        }
+        if (calendarList.size() == 0) {
+            System.out.println("No matching events/deadlines found.");
+        } else {
+            System.out.println("Here are the events/deadlines) in your list on " + calendarDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ":");
+            for (String task : calendarList) {
+                System.out.println(task);
+            }
+        }
+    }
+
 
     private static void addTask(Task t) {
         list.add(t);

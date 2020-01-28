@@ -7,55 +7,59 @@ Now you have 1 task in the list.
 Here are the tasks in your list:
 1.[T][✘] Homework
 Got it. I've added this task:
-[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+[E][✘] Exam (at: 2 December 2019, 6:00 PM)
 Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1.[T][✘] Homework
-2.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+2.[E][✘] Exam (at: 2 December 2019, 6:00 PM)
 Got it. I've added this task:
-[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+[D][✘] Assignment 1 (by: 2 December 2019, 4:00 PM)
 Now you have 3 tasks in the list.
 Here are the tasks in your list:
 1.[T][✘] Homework
-2.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
-3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
+2.[E][✘] Exam (at: 2 December 2019, 6:00 PM)
+3.[D][✘] Assignment 1 (by: 2 December 2019, 4:00 PM)
 Got it. I've added this task:
-[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 Now you have 4 tasks in the list.
 Here are the tasks in your list:
 1.[T][✘] Homework
-2.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
-3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
-4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+2.[E][✘] Exam (at: 2 December 2019, 6:00 PM)
+3.[D][✘] Assignment 1 (by: 2 December 2019, 4:00 PM)
+4.[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 Nice! I've marked this task as done:
-[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+[E][✓] Exam (at: 2 December 2019, 6:00 PM)
 Here are the tasks in your list:
 1.[T][✘] Homework
-2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
-3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
-4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+2.[E][✓] Exam (at: 2 December 2019, 6:00 PM)
+3.[D][✘] Assignment 1 (by: 2 December 2019, 4:00 PM)
+4.[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 Nice! I've marked this task as done:
 [T][✓] Homework
 Here are the tasks in your list:
 1.[T][✓] Homework
-2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
-3.[D][✘] Assignment 1 (by: 27 Jan 2020, 3 PM)
-4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+2.[E][✓] Exam (at: 2 December 2019, 6:00 PM)
+3.[D][✘] Assignment 1 (by: 2 December 2019, 4:00 PM)
+4.[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 Nice! I've marked this task as done:
-[D][✓] Assignment 1 (by: 27 Jan 2020, 3 PM)
+[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
 Here are the tasks in your list:
 1.[T][✓] Homework
-2.[E][✓] Exam (at: 26 Jan 2020, 5 PM)
-3.[D][✓] Assignment 1 (by: 27 Jan 2020, 3 PM)
-4.[E][✘] Exam (at: 26 Jan 2020, 5 PM)
+2.[E][✓] Exam (at: 2 December 2019, 6:00 PM)
+3.[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
+4.[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 ☹ OOPS!!! The description cannot be empty.
 ☹ OOPS!!! The description cannot be empty.
 ☹ OOPS!!! The description cannot be empty.
 Noted. I've removed this task:
-[E][✓] Exam (at: 26 Jan 2020, 5 PM)
+[E][✓] Exam (at: 2 December 2019, 6:00 PM)
 Now you have 3 tasks in the list.
 Noted. I've removed this task:
 [T][✓] Homework
 Now you have 2 tasks in the list.
 ☹ OOPS!!! That's an invalid argument. Please check your inputs and try again!
+No matching events/deadlines found.
+Here are the events/deadlines) in your list on 2 December 2019:
+[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
+[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 Bye. Hope to see you again soon!

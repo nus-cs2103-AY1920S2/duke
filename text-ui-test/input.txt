@@ -1,11 +1,11 @@
 list
 todo Homework
 list
-event Exam /at 26 Jan 2020, 5 PM
+event Exam /at 2/12/2019 1800
 list
-deadline Assignment 1 /by 27 Jan 2020, 3 PM
+deadline Assignment 1 /by 2/12/2019 1600
 list
-event Exam /at 26 Jan 2020, 5 PM
+event Exam /at 2/12/2019 2000
 list
 done 2
 list
@@ -19,4 +19,6 @@ deadline
 delete 2
 delete 1
 delete 10
+calendar 3/12/2019
+calendar 2/12/2019
 bye
