@@ -21,3 +21,6 @@ bin/
 
 # Text UI Testing
 /text-ui-test/ACTUAL.txt
+
+# File as persistent storage
+data.txt
