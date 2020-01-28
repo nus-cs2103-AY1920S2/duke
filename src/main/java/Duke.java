@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Main Duke class.
+ */
 public class Duke {
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Task> list = new ArrayList<>();
@@ -14,6 +17,11 @@ public class Duke {
     private TaskList taskList;
     private Parser parser = new Parser();
 
+    /**
+     * Constructor.
+     * Initialises the UI, Storage and TaskList classes.
+     * @param filePath Path of the file to be read / written to.
+     */
     public Duke(String filePath) {
         try {
             ui = new UI();
@@ -24,6 +32,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Method runs the scan method of the parser, which reads input from user.
+     * Subsequently writes output into text file when command "bye" is entered.
+     */
     public void run() {
         UI.printIntro();
         try {
@@ -38,6 +50,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
-
-
 }

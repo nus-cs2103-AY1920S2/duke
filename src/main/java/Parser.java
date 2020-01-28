@@ -1,16 +1,25 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Parser class. This class manages the input of the user.
+ */
 public class Parser {
     Scanner sc;
 
-
+    /**
+     * Constructor.
+     * Initialises the Scanner class.
+     */
     Parser() {
         this.sc = new Scanner(System.in);
     }
 
-    public void scan() throws DukeException {
+    /**
+     * This method reads the input of the users and subsequently does the appropriate actions
+     * via the methods in the TaskList class.
+     */
+    public void scan() {
         while (true) {
             String input = sc.nextLine();
             ArrayList<Task> list = TaskList.getTaskList();
@@ -48,8 +57,6 @@ public class Parser {
                         } else {
                             String by = actionArr[1];
                             String name = actionArr[0];
-//                            System.out.println(by);
-//                            System.out.println(name);
                             Task deadline = new Deadline(name, by);
                             TaskList.addToList(deadline);
                         }
