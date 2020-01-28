@@ -1,5 +1,5 @@
-package duke;
-import tojava.test.*;
+package dukeapp.duke;
+import dukeapp.files.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

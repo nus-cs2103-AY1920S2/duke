@@ -1,10 +1,7 @@
-package tojava.parse;
+package dukeapp.parse;
 
 import org.junit.jupiter.api.Test;
-import tojava.parse.Parse;
-import tojava.test.Task;
-import tojava.test.TaskList;
-import tojava.test.Todo;
+import dukeapp.files.*;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,5 @@
-package tojava.action;
-import tojava.test.*;
+package dukeapp.action;
+import dukeapp.files.*;
 import java.util.ArrayList;
 
 public class Action {
@@ -21,6 +21,7 @@ public class Action {
     }
 
     public String printAction() {
-        return "  [" +arrList.get(num-1).getType()+ "][" + arrList.get(num-1).getStatusIcon() + "]" + arrList.get(num-1).getTask();
+        return "  [" +arrList.get(num-1).getType()+ "][" + arrList.get(num-1).getStatusIcon()
+                + "]" + arrList.get(num-1).getTask();
     }
 }

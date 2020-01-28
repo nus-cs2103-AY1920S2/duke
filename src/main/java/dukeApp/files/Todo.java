@@ -1,4 +1,4 @@
-package tojava.test;
+package dukeapp.files;
 
 public class Todo extends Task {
     public Todo(String description) {

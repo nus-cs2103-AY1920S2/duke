@@ -1,5 +1,5 @@
-package tojava.test;
-import tojava.action.Action;
+package dukeapp.files;
+import dukeapp.action.Action;
 import java.util.ArrayList;
 
 public class Delete extends Action {

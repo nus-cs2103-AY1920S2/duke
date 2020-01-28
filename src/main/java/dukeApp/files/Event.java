@@ -1,4 +1,4 @@
-package tojava.test;
+package dukeapp.files;
 
 public class Event extends Task {
     protected String word;

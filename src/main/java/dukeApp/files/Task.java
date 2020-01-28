@@ -1,4 +1,4 @@
-package tojava.test;
+package dukeapp.files;
 
 public abstract class Task {
     protected String description;

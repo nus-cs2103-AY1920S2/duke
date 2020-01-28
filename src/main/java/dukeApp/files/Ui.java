@@ -1,5 +1,5 @@
-package tojava.test;
-import tojava.parse.Parse;
+package dukeapp.files;
+import dukeapp.parse.Parse;
 import java.util.Scanner;
 
 public class Ui {

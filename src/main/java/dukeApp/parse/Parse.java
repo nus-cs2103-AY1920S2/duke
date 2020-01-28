@@ -1,5 +1,5 @@
-package tojava.parse;
-import tojava.test.*;
+package dukeapp.parse;
+import dukeapp.files.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
