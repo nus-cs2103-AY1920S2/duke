@@ -33,7 +33,7 @@ public class Duke {
                     isListening = false;
 
                 } else if (action.equalsIgnoreCase("list")) {
-                    tasks.printInputs();
+                    tasks.printTasks();
 
                 } else if (action.equalsIgnoreCase("done")) {
                     String context = command_broken[1];
@@ -59,10 +59,20 @@ public class Duke {
                     tasks.addInput(new ToDos(command_broken[1], false));
 
                 } else if (action.equalsIgnoreCase(("event"))) {
-                    System.out.println("Got it, I've added this task");
+                    System.out.println("UNDERSTOOD. CHANCE OF FAILURE: 0%");
                     String context = command_broken[1];
                     String[] context_broken = context.split(" /at ", 2);
-                    tasks.addInput(new Events(context_broken[0], false,context_broken[1]));
+                    tasks.addInput(new Events(context_broken[0], false, context_broken[1]));
+
+                } else if (action.equalsIgnoreCase("find")) {
+                    System.out.println("OPERATION SUCCESSFULL");
+                    int count = 1;
+                    for (Task t: tasks.getAllTasks()) {
+                        if (t.containsSubstring(command_broken[1])) {
+                            System.out.println(count + "." + t);
+                            count++;
+                        }
+                    }
 
                 } else {
                     throw new DukeException("Ooops! I'm sorry, i don't know what it means");

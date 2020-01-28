@@ -46,10 +46,7 @@ public class UserText {
             String s;
             while ((s = bufferedreader.readLine()) != null) {
                 String[] taskParams = s.split("/divide");
-                /*for (String ss : taskParams) {
-                    System.out.println(ss);
-                }*/
-                Task task = Task.taskList(taskParams);
+                Task task = Task.createStartingTask(taskParams);
                 allTasks.add(task);
             }
         } catch (IOException ioException) {
@@ -57,7 +54,7 @@ public class UserText {
         }
     }
 
-    public void printInputs() {
+    public void printTasks() {
         int count = 1;
         System.out.println("Here is your list");
         for (Task s : allTasks) {
@@ -68,6 +65,10 @@ public class UserText {
 
     public Task getTask(int n) {
         return this.allTasks.get(n-1);
+    }
+
+    public List<Task> getAllTasks() {
+        return this.allTasks;
     }
 
     public void markDone(int taskNo) {

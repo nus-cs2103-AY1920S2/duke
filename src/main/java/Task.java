@@ -7,7 +7,7 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public static Task taskList(String[] taskParams) {
+    public static Task createStartingTask(String[] taskParams) {
         String type = taskParams[0];
         boolean isDone = taskParams[1].equals("true");
         String description = taskParams[2];
@@ -25,6 +25,10 @@ public class Task {
         } else {
             return null;
         }
+    }
+
+    public boolean containsSubstring(String search) {
+        return description.contains(search);
     }
 
     public boolean isDone() {
