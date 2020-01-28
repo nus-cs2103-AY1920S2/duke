@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,6 +12,8 @@ public class Duke {
     public final static String BORDER = INDENT + "____________________________________________________________";
     public final static String EXIT = "bye";
     public final static String GOODBYE_MESSAGE = INDENT + "  Goodbye and have a beautiful time!";
+    public final static DateTimeFormatter USER_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     public static void main(String[] args) {
         String logo = INDENT + "  _____  __    __  _____" + NEWLINE
@@ -79,9 +84,18 @@ public class Duke {
                                         throw new DukeException("Empty Event description",
                                                 DukeErrorType.EMPTY_DESCRIPTION,
                                                 command);
+                                    } else {
+                                        Event currentEvent = new Event(eventDescription,
+                                                LocalDate.parse(eventTime, USER_FORMAT));
+                                        listOfTask.add(currentEvent);
+                                        replyMessage = customiseMessage(currentEvent.toString(), listOfTask.size());
+                                        System.out.println(addBorder(replyMessage));
                                     }
                                 } catch (DukeException exception) {
                                     System.out.println(addBorder(exception.toString()));
+                                } catch (DateTimeException dateEx) {
+                                    System.out.println(addBorder(INDENT + "Please type date in this format yyyy-MM-dd,"
+                                            + " including dashes"));
                                 }
                             } else {
                                 // throw own class exception here also
@@ -92,10 +106,7 @@ public class Duke {
                                     System.out.println(addBorder(exception.toString()));
                                 }
                             }
-                            Event currentEvent = new Event(eventDescription, eventTime);
-                            listOfTask.add(currentEvent);
-                            replyMessage = customiseMessage(currentEvent.toString(), listOfTask.size());
-                            System.out.println(addBorder(replyMessage));
+
 
                         } else {
                             // Do my own exception class here
@@ -112,10 +123,16 @@ public class Duke {
                         String deadlineDescription = "";
                         String[] descriptionArr = deadlineDetails[0].split("deadline");
                         deadlineDescription = descriptionArr[1].trim();
-                        Deadline currentDeadline = new Deadline(deadlineDescription, deadlineTime);
-                        listOfTask.add(currentDeadline);
-                        replyMessage = customiseMessage((currentDeadline.toString()), listOfTask.size());
-                        System.out.println(addBorder(replyMessage));
+                        try {
+                            Deadline currentDeadline = new Deadline(deadlineDescription,
+                                    LocalDate.parse(deadlineTime, USER_FORMAT));
+                            listOfTask.add(currentDeadline);
+                            replyMessage = customiseMessage((currentDeadline.toString()), listOfTask.size());
+                            System.out.println(addBorder(replyMessage));
+                        } catch (DateTimeException dateEx) {
+                            System.out.println(addBorder(INDENT + "Please type date in this format yyyy-MM-dd,"
+                                    + " including dashes"));
+                        }
                         break;
                     case DELETE:
                         int deleteTaskNumber = Integer.parseInt(inputArr[1]) - 1;
