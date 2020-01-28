@@ -1,7 +1,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.io.*;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,16 +16,17 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("---------------------------------------");
 
         ArrayList<Task> store = new ArrayList<>();
 
         //Read from File
         try {
             BufferedReader br = new BufferedReader(new FileReader("./data/data.txt"));
-            System.out.println("Here are the current list of Tasks: ");
+//            System.out.println("Here are the current list of Tasks: ");
             String currLine = br.readLine();
             while(currLine != null) {
-                System.out.println(currLine);
+//                System.out.println(currLine);
                 String[] parts = currLine.split("\\|");
                 String[] newParts = new String[parts.length];
                 for(int i = 0; i < parts.length; i++) {
@@ -35,7 +39,8 @@ public class Duke {
                     }
                     store.add(temp);
                 } else if(newParts[0].equals("D")) {
-                    Deadline temp = new Deadline(newParts[2], newParts[3]);
+                    LocalDateTime d1 = LocalDateTime.parse(newParts[3]);
+                    Deadline temp = new Deadline(newParts[2],d1);
                     if(newParts[1].equals("\u2713")) {
                         temp.isDone = true;
                     }
@@ -142,8 +147,12 @@ public class Duke {
                     dL += " ";
                 }
                 dL = dL.trim();
+                if(!dL.matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")) {
+                    throw new DukeException("OOPS! Please enter deadline in the format yyyy-MM-dd HHmm. Thank you.");
+                }
+                LocalDateTime d1 = LocalDateTime.parse(dL ,DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
-                Deadline deadline = new Deadline(taskingD, dL);
+                Deadline deadline = new Deadline(taskingD, d1);
                 store.add(deadline);
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + deadline);
