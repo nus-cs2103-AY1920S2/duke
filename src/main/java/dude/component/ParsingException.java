@@ -18,7 +18,7 @@ public class ParsingException extends Exception {
      * @param errorMsg message explaining what went wrong in parsing.
      * @param usageMsgs message(s) showing possible commands.
      */
-    public ParsingException(String errorMsg, String ...usageMsgs) {
+    public ParsingException(String errorMsg, String... usageMsgs) {
         super(errorMsg);
         this.usageMsgs = usageMsgs;
     }

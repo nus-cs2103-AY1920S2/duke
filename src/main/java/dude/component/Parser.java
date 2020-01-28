@@ -19,21 +19,21 @@ import java.util.Map;
 
 public class Parser {
     /** Mappings from commands to their usage messages */
-    private static Map<String, String> usages =
+    private static final Map<String, String> USAGES =
             Map.of(
-                    "bye"     , "bye",
-                    "list"    , "list",
-                    "today"   , "today",
-                    "done"    , "done index_of_task",
-                    "delete"  , "delete index_of_task",
-                    "check"   , "check yyyy-mm-dd",
-                    "todo"    , "todo description",
+                    "bye", "bye",
+                    "list", "list",
+                    "today", "today",
+                    "done", "done index_of_task",
+                    "delete", "delete index_of_task",
+                    "check", "check yyyy-mm-dd",
+                    "todo", "todo description",
                     "deadline", "deadline description /by yyyy-mm-dd",
-                    "event"   , "event description /from yyyy-mm-dd /to yyyy-mm-dd"
+                    "event", "event description /from yyyy-mm-dd /to yyyy-mm-dd"
             );
 
     /** Regex for whitespace, for greater clarity */
-    private final static String whitespace = "\\s+";
+    private static final String WHITESPACE = "\\s+";
 
     /**
      * Takes raw user input and attempts to parse it to dispatch to the relevant Command with the correct arguments.
@@ -57,9 +57,12 @@ public class Parser {
 
         case "today":
             return new CheckDateCommand(LocalDate.now());
+
+        default:
+            break;
         }
 
-        String[] cmdAndBody = msg.split(whitespace, 2);
+        String[] cmdAndBody = msg.split(WHITESPACE, 2);
 
         // Else command is complex, then first match command name then parse arguments
         try {
@@ -80,25 +83,25 @@ public class Parser {
                 return new AddTaskCommand(new Todo(cmdAndBody[1], false));
 
             case "deadline":
-                String[] deadlineArgs = cmdAndBody[1].split(whitespace + "/by" + whitespace, 2);
+                String[] deadlineArgs = cmdAndBody[1].split(WHITESPACE + "/by" + WHITESPACE, 2);
                 LocalDate by = parseDate(deadlineArgs[1], "deadline");
                 return new AddTaskCommand(new Deadline(deadlineArgs[0], by, false));
 
             case "event":
-                String[] eventArgs = cmdAndBody[1].split(whitespace + "/from" + whitespace, 2);
-                String[] eventDateStrings = eventArgs[1].split(whitespace + "/to" + whitespace, 2);
+                String[] eventArgs = cmdAndBody[1].split(WHITESPACE + "/from" + WHITESPACE, 2);
+                String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
                 LocalDate from = parseDate(eventDateStrings[0], "event");
                 LocalDate to = parseDate(eventDateStrings[1], "event");
                 return new AddTaskCommand(new Event(eventArgs[0], from, to, false));
 
             default:
                 throw new ParsingException("Sorry mate, I didn't catch your drift",
-                        usages.values().toArray(new String[usages.size()]));
+                        USAGES.values().toArray(new String[USAGES.size()]));
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParsingException("Look's like your command is incomplete, mate",
-                    usages.get(cmdAndBody[0]));
+                    USAGES.get(cmdAndBody[0]));
         }
 
     }
@@ -107,7 +110,7 @@ public class Parser {
         try {
             return Integer.parseInt(arg);
         } catch (NumberFormatException e) {
-            throw new ParsingException("That's not a number, dude!", usages.get(command));
+            throw new ParsingException("That's not a number, dude!", USAGES.get(command));
         }
     }
 
@@ -115,7 +118,7 @@ public class Parser {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new ParsingException("I don't understand this date: " + dateString, usages.get(command));
+            throw new ParsingException("I don't understand this date: " + dateString, USAGES.get(command));
         }
     }
 

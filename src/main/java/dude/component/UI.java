@@ -33,7 +33,14 @@ public class UI implements IUserInterface {
         return this.input.nextLine();
     }
 
-    public void respond(String ...responses) {
+    public void respond(Runnable r) {
+        String line = "    ____________________________________________________________";
+        System.out.println(line);
+        r.run();
+        System.out.println(line);
+    }
+
+    public void respond(String... responses) {
         respond(() -> {
             for (String response : responses) {
                 speak(response);
@@ -41,7 +48,7 @@ public class UI implements IUserInterface {
         });
     }
 
-    public void respondParsingError(String errorMsg, String ...usageMsgs) {
+    public void respondParsingError(String errorMsg, String... usageMsgs) {
         respond(() -> {
             speak(errorMsg);
             speak("Just tell me what you want to do like this:" + System.lineSeparator());
@@ -51,13 +58,6 @@ public class UI implements IUserInterface {
             speak("");
             speak("Then we're chill");
         });
-    }
-
-    public void respond(Runnable r) {
-        String line = "    ____________________________________________________________";
-        System.out.println(line);
-        r.run();
-        System.out.println(line);
     }
 
     public void speak(String str) {

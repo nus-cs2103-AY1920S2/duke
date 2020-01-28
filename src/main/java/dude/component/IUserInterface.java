@@ -24,7 +24,7 @@ public interface IUserInterface {
      *
      * @param responses a variable number of sentences for Dude to tell the user.
      */
-    void respond(String ...responses);
+    void respond(String... responses);
 
     /**
      * Displays an error message to the user when an incorrect command is given.
@@ -33,7 +33,7 @@ public interface IUserInterface {
      * @param errorMsg A message describing the problem with the user's input.
      * @param usageMsgs possibly more than one string describing the correct format of input.
      */
-    void respondParsingError(String errorMsg, String ...usageMsgs);
+    void respondParsingError(String errorMsg, String... usageMsgs);
 
     /**
      * Speaks a single sentence to the user.

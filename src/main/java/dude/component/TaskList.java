@@ -75,7 +75,7 @@ public class TaskList {
     public String[] showAllTasks() {
         String[] result = new String[taskCount()];
         for (int i = 1; i <= taskCount(); i++) {
-            result[i-1] = String.format("%d.%s", i, getTask(i));
+            result[i - 1] = String.format("%d.%s", i, getTask(i));
         }
         return result;
     }
