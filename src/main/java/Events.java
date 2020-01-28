@@ -1,14 +1,18 @@
 public class Events extends Task{
-    protected String by;
+    protected String at;
 
-    public Events(String description, String by) {
-        super(description);
-        this.by = by;
+    public Events(String description, Boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
         System.out.println(this);
+    }
+
+    public String getVenue() {
+        return this.at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + by + ")";
+        return "[E]" + super.toString() + "(at:" + at + ")";
     }
 }

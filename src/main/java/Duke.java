@@ -14,7 +14,8 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         boolean isListening = true;
-        UserText tasks = new UserText();
+        String filePath = "C:\\NUS\\Semester 4\\CS2103\\duke\\data\\duke.txt";
+        UserText tasks = new UserText(filePath);
 
         while(isListening) {
             String command = input.nextLine();
@@ -26,6 +27,7 @@ public class Duke {
 
                 if (action.equalsIgnoreCase("bye")) {
                     System.out.println("Bye. Hope to see you again!");
+                    tasks.saveTasks();
                     isListening = false;
 
                 } else if (action.equalsIgnoreCase("list")) {
@@ -42,20 +44,23 @@ public class Duke {
                     tasks.removeTask(taskNo);
 
                 } else if (action.equalsIgnoreCase(("deadline"))) {
+                    System.out.println("Got it, I've added this task");
                     String context = command_broken[1];
                     String[] context_broken = context.split("/by", 2);
-                    tasks.addInput(new Deadlines(context_broken[0], context_broken[1]));
+                    tasks.addInput(new Deadlines(context_broken[0], false ,context_broken[1]));
 
                 } else if (action.equalsIgnoreCase(("todo"))) {
+                    System.out.println("Got it, I've added this task");
                     if (command_broken.length == 1) {
                         throw new DukeException("Ooops! The description of a ToDo cannot be empty.");
                     }
-                    tasks.addInput(new ToDos(command_broken[1]));
+                    tasks.addInput(new ToDos(command_broken[1], false));
 
                 } else if (action.equalsIgnoreCase(("event"))) {
+                    System.out.println("Got it, I've added this task");
                     String context = command_broken[1];
                     String[] context_broken = context.split("/at", 2);
-                    tasks.addInput(new Events(context_broken[0], context_broken[1]));
+                    tasks.addInput(new Events(context_broken[0], false,context_broken[1]));
 
                 } else {
                     throw new DukeException("Ooops! I'm sorry, i don't know what it means");
