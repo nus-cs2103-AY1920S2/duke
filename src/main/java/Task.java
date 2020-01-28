@@ -18,6 +18,9 @@ public class Task {
     }
 
     public LocalDateTime parseDate(String taskTime) throws DateTimeParseException {
+        if (taskType == 'D' && !taskTime.contains(" ")) {
+            taskTime = taskTime + " 2359";
+        }
         return LocalDateTime.parse(taskTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 

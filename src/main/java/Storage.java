@@ -3,7 +3,6 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.io.File;
 
 public class Storage {
@@ -13,9 +12,13 @@ public class Storage {
         TaskList tasklist = new TaskList();
 
         try {
+            if (savedData.createNewFile()) {
+                System.out.println("No save file found. Creating new file at " + savedData.toString() + " ...");
+            }
             FileReader fr = new FileReader(savedData);
             BufferedReader br = new BufferedReader(fr);
             System.out.println("Loading file at " + savedData.toString());
+
             while (true) {
                 try {
                     String line = br.readLine();
@@ -36,27 +39,19 @@ public class Storage {
 
                         } else if (taskContent[0].equals("E")) {
                             tasklist.newEvent(taskContent[0].charAt(0), isDone, taskContent[2], taskContent[3]);
-                        } else {}
+                        }
                     }
                 } catch (IOException e) {
-                    System.out.println("Oops! Unable to create save file due to " + e + "!");
+                    System.out.println("Oops! Unable to read save file due to " + e + "!");
                     break;
                 }
 
             }
 
-
-        } catch (FileNotFoundException e) {
-            System.out.println("No save file found. Creating new file at " + savedData.toString() + " ...");
-
-            try {
-                savedData.createNewFile();
-                System.out.println("Created file at " + savedData.toString());
-                load();
-            } catch (Exception ex) {
-                System.out.println("Oops! Unable to create save file due to " + ex + "!");
-            }
+        } catch (Exception e) {
+            System.out.println("Oops! Unable to create or load save file due to " + e + "!");
         }
+
         return tasklist;
     }
 
@@ -78,8 +73,6 @@ public class Storage {
             System.out.println("Oops! Unable to write to file due to " + e + "!");
         }
 
-
     }
-
 
 }

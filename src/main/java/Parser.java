@@ -34,76 +34,120 @@ public class Parser {
     public static String processCommand(String[] command, TaskList tasklist) {
         if (commandList.contains(command[0])) {
             switch (command[0]) {
+            case "todo":
+                return todoCommand(command, tasklist);
 
-                case "todo":
-                    if (command.length > 1) {
-                        return tasklist.newTodo('T', false, command[1]);
-                    } else {
-                        return taskNeedsName;
-                    }
+            case "event":
+                return eventCommand(command, tasklist);
 
-                case "event":
-                    if (command.length > 2) {
-                        try {
-                            return tasklist.newEvent('E', false, command[1], command[2]);
-                        } catch (DateTimeParseException e) {
-                            return wrongDateTimeFormat;
-                        }
+            case "deadline":
+                return deadlineCommand(command, tasklist);
 
-                    } else if (command.length == 2) {
-                        return taskNeedsDateTime;
-                    } else {
-                        return taskNeedsName;
-                    }
+            case "list":
+                return listCommand(tasklist);
 
-                case "deadline":
-                    if (command.length > 2) {
-                        try {
-                            return tasklist.newDeadline('D', false, command[1], command[2]);
-                        } catch (DateTimeParseException e) {
-                            return wrongDateTimeFormat;
-                        }
-                    } else if (command.length == 2) {
-                        return taskNeedsDateTime;
-                    } else {
-                        return taskNeedsName;
-                    }
+            case "done":
+                return doneCommand(command, tasklist);
 
-                case "list":
-                    if (tasklist.getSize() == 0) {
-                        return noTaskInList;
-                    } else {
-                        return displayTaskList + "\n" + tasklist;
-                    }
+            case "delete":
+                return deleteCommand(command, tasklist);
 
-                case "done":
-                    try {
-                        int taskID = Integer.parseInt(command[1]);
-                        return tasklist.markDone(taskID);
-                    } catch (IndexOutOfBoundsException e) {
-                        return noTaskFound;
-                    }
+            case "find":
+                return findCommand(command, tasklist);
 
-                case "delete":
-                    try {
-                        int taskID = Integer.parseInt(command[1]);
-                        return tasklist.deleteTask(taskID);
-                    } catch (IndexOutOfBoundsException e) {
-                        return noTaskFound;
-                    }
+            case "save":
+                return saveCommand(tasklist);
 
-                case "save":
-                    Storage.save(tasklist);
-                    return changesSaved;
-
-                case "exit":
-                    return command[0];
-                default:
-                    return commandNotFound;
+            case "exit":
+                return command[0];
+            default:
+                return commandNotFound;
             }
         } else {
             return commandNotFound;
         }
+    }
+
+    public static String todoCommand(String[] command, TaskList tasklist) {
+        if (command.length > 1) {
+            return tasklist.newTodo('T', false, command[1]);
+        } else {
+            return taskNeedsName;
+        }
+    }
+
+    public static String eventCommand(String[] command, TaskList tasklist) {
+        if (command.length > 2) {
+            try {
+                return tasklist.newEvent('E', false, command[1], command[2]);
+            } catch (DateTimeParseException e) {
+                return wrongDateTimeFormat;
+            }
+
+        } else if (command.length == 2) {
+            return taskNeedsDateTime;
+        } else {
+            return taskNeedsName;
+        }
+    }
+
+    public static String deadlineCommand(String[] command, TaskList tasklist) {
+        if (command.length > 2) {
+            try {
+                return tasklist.newDeadline('D', false, command[1], command[2]);
+            } catch (DateTimeParseException e) {
+                return wrongDateTimeFormat;
+            }
+        } else if (command.length == 2) {
+            return taskNeedsDateTime;
+        } else {
+            return taskNeedsName;
+        }
+    }
+
+    public static String listCommand(TaskList tasklist) {
+        if (tasklist.getSize() == 0) {
+            return noTaskInList;
+        } else {
+            return displayTaskList + "\n" + tasklist;
+        }
+    }
+
+    public static String doneCommand(String[] command, TaskList tasklist) {
+        try {
+            int taskID = Integer.parseInt(command[1]);
+            return tasklist.markDone(taskID);
+        } catch (IndexOutOfBoundsException e) {
+            return noTaskFound;
+        }
+    }
+
+    public static String deleteCommand(String[] command, TaskList tasklist) {
+        try {
+            int taskID = Integer.parseInt(command[1]);
+            return tasklist.deleteTask(taskID);
+        } catch (IndexOutOfBoundsException e) {
+            return noTaskFound;
+        }
+    }
+
+    public static String findCommand(String[] command, TaskList tasklist) {
+        TaskList query = new TaskList();
+        for (Task thisTask : tasklist.list) {
+            if (thisTask.getTaskName().toLowerCase().contains(command[1].toLowerCase())) {
+                query.add(thisTask);
+            }
+        }
+        if (query.list.isEmpty()) {
+            return noTaskFound;
+        } else {
+            return displayMatchingTaskList + "\n" + query;
+        }
+    }
+
+    public static String saveCommand(TaskList tasklist) {
+        Storage.save(tasklist);
+        return changesSaved;
     }
 
 }
