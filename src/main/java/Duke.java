@@ -107,7 +107,7 @@ public class Duke {
 
     private static void updateTxt(String prev, String now) throws IOException {
         try {
-            BufferedReader file = new BufferedReader(new FileReader("output.txt"));
+            BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
             StringBuffer inputBuffer = new StringBuffer();
             String line;
             while ((line = file.readLine()) != null) {
@@ -117,28 +117,28 @@ public class Duke {
             file.close();
             String inputStr = inputBuffer.toString();
             inputStr = inputStr.replace(prev, now);
-            FileOutputStream fileOut = new FileOutputStream("output.txt");
+            FileOutputStream fileOut = new FileOutputStream("data/output.txt");
             fileOut.write(inputStr.getBytes());
             fileOut.close();
         } catch (IOException e) {
-            System.err.println("Incorrect IO format");
+            System.err.println(space + "Incorrect IO format");
         }
     }
 
     public static void addTxt(String s) throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter("output.txt", true);
+            FileWriter fileWriter = new FileWriter("data/output.txt", true);
             fileWriter.append(s);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            System.err.println("Incorrect IO format");
+            System.err.println(space + "Incorrect IO format");
         }
     }
 
     public static void loadTxt(List list) throws IOException {
         try {
-            BufferedReader file = new BufferedReader(new FileReader("output.txt"));
+            BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
             String line;
             while ((line = file.readLine()) != null) {
                 line = line.trim();
@@ -166,7 +166,9 @@ public class Duke {
             }
             file.close();
         } catch (IOException e) {
-            System.err.println("Incorrect IO format.");
+            System.err.println(space + "Incorrect IO format.");
+        } catch (Exception e) {
+            System.err.println(space + "Unable to load past data.");
         }
     }
 }
