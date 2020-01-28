@@ -153,24 +153,10 @@ public class TaskList {
         return this.taskList;
     }
 
-    /**
-     * Finds and returns an ArrayList of tasks from the task list which contain the search keyword.
-     * @param search Search keyword
-     * @return ArrayList of Tasks from the task list which contain the search keyword
-     */
-    public ArrayList<Task> findTask(String search) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task selected = taskList.get(i);
-            if (selected.description.contains(search)) {
-                foundTasks.add(selected);
-            }
-        }
-
-        return foundTasks;
-    }
-
     private static String parseDate(String date) {
+=======
+    /**
+>>>>>>> Stashed changes
         String[] dateArr = date.split("/");
         String day = dateArr[0];
         if (Integer.parseInt(day) < 10) {
