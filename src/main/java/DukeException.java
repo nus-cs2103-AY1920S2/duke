@@ -11,7 +11,7 @@ public class DukeException extends Exception {
     public String toString() {
         if (!msg.equals("others")) {
             return "____________________________________________________________\n" +
-                    msg + " does not tell me anything! What exactly do you want? \n" +
+                    msg + " does not tell me anything! BE SPECIFIC! \n" +
                     "____________________________________________________________\n";
         } else {
             return "____________________________________________________________\n" +
