@@ -15,12 +15,20 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class is the main driving chatbot
+ **/
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor which takes in a file path
+     * to obtain information from the file
+     * @param filePath The file path to the file to be modified
+     **/
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -32,15 +40,24 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method to run the chatbot
+     **/
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
 
+    /**
+     * This run method
+     **/
     public void run() {
         ui.greetUser();
         processInput();
     }
 
+    /**
+     * Method to process the input from user
+     **/
     public void processInput() {
         Scanner sc = new Scanner(System.in);
         String next = sc.nextLine();
@@ -107,6 +124,9 @@ public class Duke {
         ui.printBye();
     }
 
+    /**
+     * Method to add a task to the list
+     **/
     void addTask(Task newTask) {
         tasks.add(newTask);
         storage.updateDrive(newTask);

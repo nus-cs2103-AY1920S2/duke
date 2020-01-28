@@ -4,13 +4,23 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class takes care storage and retrieval of information
+ * from the drive of computer
+ **/
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor which takes in a file path to the file to be modified
+     **/
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loading of information from the file specified for this Storage
+     **/
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File (filePath);
@@ -40,6 +50,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Update information to the file specified for this Storage
+     * by adding on a new task object
+     * @param updatedTask Task to be updated
+     **/
     static void updateDrive(Task updatedTask) {
         File file = new File ("./data/duke.txt");
         BufferedWriter writer;
@@ -53,6 +68,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Update information to the file specified for this Storage
+     * by removing on a new task object
+     * @param size The order of the task that are to be removed
+     **/
     static void deleteDrive(int size) {
         ArrayList<String> tasks = new ArrayList<>();
         try {
