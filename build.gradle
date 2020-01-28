@@ -32,3 +32,10 @@ test {
     useJUnit()
     maxHeapSize = '1G'
 }
+
+apply plugin: 'java'
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+}
