@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString(){
+
         return "[T]" + super.toString();
     }
 
@@ -17,7 +18,6 @@ public class ToDo extends Task {
     public String saveData(){
         String temp = this.isDone? "1" : "0";
         //1 is done, 0 is not done
-
         return "ToDo" + "|" + temp + "|" + this.description;
     }
 }

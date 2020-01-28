@@ -1,13 +1,5 @@
-import java.io.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 
 public class TaskManager {
 
@@ -18,26 +10,30 @@ public class TaskManager {
     }
 
     public void loadExistingData(){
+
         Storage store = new Storage();
         listOfTasks = store.loadExistingData();
+
     }
 
     public void saveExistingData(){
         Storage store = new Storage();
         store.saveExistingData(listOfTasks);
+
     }
 
 
-
-
     public void listAllTasks(){
+
         System.out.println("Here are your tasks in your list: ");
         for(int j = 0 ; j < this.listOfTasks.size() ; j++){
             System.out.println("  " + (j + 1) +  ". " + this.listOfTasks.get(j).toString());
         }
+
     }
 
     public void setTaskAsDone(int index){
+
         listOfTasks.get(index-1).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + listOfTasks.get(index-1).toString());
@@ -56,7 +52,9 @@ public class TaskManager {
                 newTask = new ToDo(textEntered.substring(5));
                 this.listOfTasks.add(newTask);
             }
+
         }else if(textEntered.contains("deadline")){//Deadline
+
             if(textEntered.split(" ").length == 1){ //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
             }else {
@@ -72,6 +70,7 @@ public class TaskManager {
                 newTask = new Deadline(temp[0], date);
                 this.listOfTasks.add(newTask);
             }
+
         }else{//Event
 
             if(textEntered.split(" ").length == 1){
@@ -82,6 +81,7 @@ public class TaskManager {
                 newTask = new Event(temp[0], temp[1].substring(3));
                 this.listOfTasks.add(newTask);
             }
+
         }
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask.toString());
@@ -89,7 +89,9 @@ public class TaskManager {
     }
 
     public void nonsenseInput() throws DukeException{
+
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
+
     }
 
     public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException{
@@ -97,7 +99,6 @@ public class TaskManager {
         if(listOfTasks.size() == 0){
             throw new DukeException("Nothing to delete because list is empty.");
         }
-
         indexOfTaskToDelete = indexOfTaskToDelete - 1;
         if(listOfTasks.get(indexOfTaskToDelete) == null){
             throw new DukeException("Cannot delete because the task do not exist.");
@@ -105,12 +106,12 @@ public class TaskManager {
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + listOfTasks.get(indexOfTaskToDelete).toString());
             System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
-
             listOfTasks.remove(indexOfTaskToDelete);
         }
     }
 
     public void echo(String textEntered){
+
         System.out.println(textEntered);
     }
 }
