@@ -36,6 +36,10 @@ public class Duke {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Storage storage;
 
+    /**
+     * Constructor
+     * @param String filepath
+     */
     public Duke(String filepath) {
         this.FILEPATH = filepath;
         this.FILE = new File(filepath);
@@ -49,7 +53,10 @@ public class Duke {
         d.run();
     }
 
-    /**Run program */
+    /**
+     * Run program
+     * @throws DukeException
+     */
     public void run() throws DukeException {
         /** Welcome Message */
         DukeGreeting dg = new DukeGreeting();
@@ -153,10 +160,18 @@ public class Duke {
                     LocalDateTime ldt = LocalDateTime.parse(date, formatter);
                     String sldt = ldt.format(formatter);
                     System.out.println("Here are the tasks in your list for this date:");
-                    storage.getTask(sldt, FILEPATH);
+                    System.out.println(storage.getTask(sldt, FILEPATH));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+         } else if(command.equals("find")) {
+            try {
+                String rest = ui.getDescription();
+                System.out.println("Here are the tasks in your list that matches:" + rest);
+                System.out.println(storage.getTask(rest, FILEPATH));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
          } else {
                 throw new DukeException("Oops I'm sorry, what is this?");
             }
@@ -164,10 +179,3 @@ public class Duke {
     }
 
 }
-
-/**things to fix:
- * 1. append to text file instead of overwrite
- * 2. try to do listifystring
- * 3. update instructions
- * 4. print out tasks from date
- */

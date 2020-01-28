@@ -4,8 +4,11 @@ package main.java;
 /**Class to customize greetings/user outputs */
 public class DukeGreeting {
     
+/** Constructor
+ *  */    
 public DukeGreeting(){}
 
+    /** Method to show welcome message */
     public void showWelcomeMessage() {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
@@ -14,6 +17,7 @@ public DukeGreeting(){}
         System.out.println();
     }
 
+    /**Methods to show Instructions on user inputs */
     public void showInstructions() {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Instructions: Type in Commands");
@@ -25,6 +29,7 @@ public DukeGreeting(){}
         System.out.println();
     }
 
+    /**Method to show goodbye message */
     public void showGoodbyeMessage() {
         System.out.println("-------------------------------------------------------------");
                 System.out.println("Bye. Hope to see you again soon!");
