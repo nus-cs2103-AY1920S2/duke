@@ -1,6 +1,12 @@
-public class Event extends Task{
+public class Event extends Task {
     protected String timing;
 
+    /**
+     * Constructor for the Event Class.
+     *
+     * @param description Event description.
+     * @param timing Timing at which the Event occurs.
+     */
     public Event(String description, String timing) {
         super(description);
         this.timing = timing;

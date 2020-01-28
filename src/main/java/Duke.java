@@ -1,13 +1,17 @@
-import java.util.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.time.*;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the Duke Class.
+     *
+     * @param filepath Path to file where the data for saved tasks are stored.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -23,66 +27,58 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Runs the code for the Duke Assistant.
+     */
     public void run() {
         ui.printStartUp();
-        while(true) {
+        while (true) {
             String in = ui.newInput();
             Parser parser = new Parser(in);
-            if(parser.getCommand().equals("bye")) {
+            if (parser.getCommand().equals("bye")) {
                 ui.terminateUi();
                 break;
-            }
-
-            else if(parser.getCommand().equals("list")) {
+            } else if (parser.getCommand().equals("list")) {
                 ui.printOutTasks(tasks);
-            }
-
-            else if(parser.getCommand().equals("delete")) {
+            } else if (parser.getCommand().equals("delete")) {
                 try {
                     ui.printOutDeleted(tasks, parser.getIndex() - 1);
                     tasks.removeTask(parser.getIndex() - 1);
-                }
-                catch (DukeException e) {
+                } catch (DukeException e) {
                     System.out.println(e);
                 }
                 try {
                     storage.saveData(tasks);
-                }
-                catch (IOException e){
+                } catch (IOException e) {
                     System.out.println("An error occurred while saving, please try again!");
                 }
-            }
-
-            else if(parser.getCommand().equals("done")) {
+            } else if (parser.getCommand().equals("done")) {
                 try {
                     tasks.getTask(parser.getIndex() - 1).doTask();
                     ui.printOutDoneTask(tasks, parser.getIndex() - 1);
-                }
-                catch (DukeException e) {
+                } catch (DukeException e) {
                     System.out.println(e);
                 }
                 try {
                     storage.saveData(tasks);
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     System.out.println("An error occurred while saving, please try again!");
                 }
-            }
-
-            else {
+            } else {
                 try {
-                    if(!((parser.getCommand().equals("todo"))||parser.getCommand().equals("deadline")|| parser.getCommand().equals("event"))) {
+                    if (!((parser.getCommand().equals("todo")) || parser.getCommand().equals("deadline")
+                            || parser.getCommand().equals("event"))) {
                         throw new DukeException("I'm sorry, but I do not know what that means :-(");
                     }
                     if (parser.getCommand().equals("event")) {
                         tasks.newEvent(parser.getDescription(), parser.getTiming());
                     } else if (parser.getCommand().equals("deadline")) {
-                       try{
-                           tasks.newDeadline(parser.getDescription(), parser.getTiming());
-                       }
-                       catch (DateTimeParseException e) {
-                           throw new DukeException("Invalid date format for deadline used! Please re-try using the date format 'yyyy-mm-dd HHMM'");
-                       }
+                        try {
+                            tasks.newDeadline(parser.getDescription(), parser.getTiming());
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Invalid date format for deadline used! " +
+                                    "Please re-try using the date format 'yyyy-mm-dd HHMM'");
+                        }
                     } else if (parser.getCommand().equals("todo")) {
                         tasks.newToDo(parser.getDescription());
                     }
@@ -90,12 +86,10 @@ public class Duke {
                     ui.printOutAdded(tasks);
                     try {
                         storage.saveData(tasks);
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         System.out.println("An error occurred while saving, please try again!");
                     }
-                }
-                catch (DukeException e) {
+                } catch (DukeException e) {
                     System.out.println(e);
                 }
             }

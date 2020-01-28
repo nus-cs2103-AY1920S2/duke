@@ -1,6 +1,10 @@
-public class ToDo extends Task{
-    //protected String by;
+public class ToDo extends Task {
 
+    /**
+     * Constructor for the todo class.
+     *
+     * @param description description of the todo task.
+     */
     public ToDo(String description) {
         super(description);
     }
