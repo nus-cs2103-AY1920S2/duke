@@ -112,9 +112,10 @@ public class TaskList {
         System.out.println(task.toString());
     }
 
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws IOException {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
+        storage.deleteInStorage(index);
         printRemoveTask();
         System.out.println(task.toString());
         printNumTask();

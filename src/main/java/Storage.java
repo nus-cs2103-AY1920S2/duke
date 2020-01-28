@@ -143,4 +143,28 @@ public class Storage {
         fileOutputStr.write(data.getBytes());
         fileOutputStr.close();
     }
+
+    protected void deleteInStorage(int index) throws IOException {
+        File file = new File(path);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+
+        String data = "";
+        String line = null;
+        int counter = 1;
+        while ((line = br.readLine()) != null) {
+            if (counter != index) {
+                if (counter == 1 || counter == index + 1) {
+                    data += line;
+                } else {
+                    data += "\n" + line;
+                }
+            }
+            counter++;
+        }
+
+        FileOutputStream fileOutputStr = new FileOutputStream(path);
+        fileOutputStr.write(data.getBytes());
+        fileOutputStr.close();
+    }
 }
