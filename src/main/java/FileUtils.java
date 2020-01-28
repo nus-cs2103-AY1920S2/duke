@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileUtils {
-    private static String FILE_PATH = "../../../data/duke.txt";
+    private static String FILE_PATH = "data/duke.txt";
 
     public static void readFile(ArrayList<Task> tasks) throws FileNotFoundException {
         File f = new File(FILE_PATH);
