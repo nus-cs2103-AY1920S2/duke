@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 
 public abstract class Task {
     protected String description;

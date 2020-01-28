@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -50,15 +50,19 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < newList.size(); i++) {
             if ((newList.get(i).getType()).equals("T")) {
+                s += newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getWord()
+                        + newList.get(i).getDescription();
+            }
+            else if ((newList.get(i).getType()).equals("E")) {
                 s += newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription()
-                        + newList.get(i).getWord() + " " + newList.get(i).getDate();
+                        + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate();
             }
             else {
                 s += newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription()
                         + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate()+ " " +newList.get(i).getTime();
             }
             if (i != newList.size()-1) {
-                s = s + System.lineSeparator();
+                s += System.lineSeparator();
             }
         }
         fw.write(s);

@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 
 public class DukeException extends Throwable {
     protected String task;

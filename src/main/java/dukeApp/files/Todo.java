@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 
 public class Todo extends Task {
     public Todo(String description) {

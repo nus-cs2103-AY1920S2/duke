@@ -1,5 +1,5 @@
-package dukeapp.duke;
-import dukeapp.files.*;
+package dukeApp.duke;
+import dukeApp.files.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

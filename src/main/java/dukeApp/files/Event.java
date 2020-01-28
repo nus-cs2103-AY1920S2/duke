@@ -1,4 +1,4 @@
-package dukeapp.files;
+package dukeApp.files;
 
 public class Event extends Task {
     protected String word;
@@ -9,7 +9,7 @@ public class Event extends Task {
         description = s.split("/")[0];
         date = s.split("/")[1];
         word = date.substring(0, date.indexOf(" "));
-        date = date.substring(date.indexOf(" ") + 1, date.length());
+        date = date.substring(date.indexOf(" ") + 1);
     }
 
     public String getType() {

@@ -1,5 +1,5 @@
-package dukeapp.files;
-import dukeapp.action.Action;
+package dukeApp.files;
+import dukeApp.action.Action;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -44,6 +44,18 @@ public class TaskList {
         }
     }
 
+    public void find(String statement) {
+        Find f = new Find(statement, aList);
+        ArrayList<Task> matchTask = f.match();
+        Task t;
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i=1; i <= matchTask.size(); i++) {
+            t = matchTask.get(i-1);
+            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
+        }
+        System.out.println();
+    }
+
     //call to actions for different task type
     public void add(String taskType, String statement) {
         Task t;
@@ -54,7 +66,8 @@ public class TaskList {
             } else {
                 t = new Deadline(statement);
             }
-        } else {
+        }
+        else {
             t = new Todo(statement);
         }
         aList.add(t);

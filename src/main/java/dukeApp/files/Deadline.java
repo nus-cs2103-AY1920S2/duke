@@ -1,7 +1,4 @@
-package dukeapp.files;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+package dukeApp.files;
 
 public class Deadline extends Task {
     protected String word;
