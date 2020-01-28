@@ -2,8 +2,30 @@ package duke.util;
 
 import java.util.ArrayList;
 
+/*
+ * TaskList
+ *
+ * CS2103 AY19/20 Semester 2
+ * Individual Project
+ * Duke Project
+ *
+ * 28 Jan 2020
+ *
+ */
+
+/**
+ * TaskList class defines the behavior of task
+ * management.
+ * @author Mario Lorenzo
+ */
+
 public class TaskList implements TaskListInterface {
     ArrayList<Task> tasks;
+
+    /**
+     * Constructs a TaskList instance.
+     * @param tasks The ArrayList of tasks.
+     */
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -99,6 +121,11 @@ public class TaskList implements TaskListInterface {
         return "Noted. I've removed this task: \n " + String.format("    %s\n", task) +
                 String.format("Now you have %d task(s) in the list.", tasks.size());
     }
+
+    /**
+     * Returns the size of the list.
+     * @return The size of the list.
+     */
 
     public int size() {
         return this.tasks.size();

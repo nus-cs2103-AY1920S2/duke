@@ -6,14 +6,43 @@ import duke.exception.DukeInvalidTaskFormatException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/*
+ * Storage
+ *
+ * CS2103 AY19/20 Semester 2
+ * Individual Project
+ * Duke Project
+ *
+ * 23 Jan 2020
+ *
+ */
+
+/**
+ * Storage class abstracts the I/O method
+ * of reading and writing tasks from a file.
+ * @author Mario Lorenzo
+ */
+
 public class Storage {
     private TaskReader reader;
     private TaskWriter writer;
+
+    /**
+     * Constructs a Storage instance.
+     * @param filePath
+     */
 
     public Storage(String filePath) {
         this.reader = new TaskReader(filePath);
         this.writer = new TaskWriter(filePath);
     }
+
+    /**
+     * Loads the tasks from the file.
+     * @return The ArrayList of all the tasks loaded from the file.
+     * @throws DukeInvalidDateFormatException If there is a not properly formatted date.
+     * @throws DukeInvalidTaskFormatException If there is a task there is not properly formatted.
+     */
 
     public ArrayList<Task> loadTasks() throws DukeInvalidDateFormatException, DukeInvalidTaskFormatException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -27,6 +56,12 @@ public class Storage {
         }
         return tasks;
     }
+
+    /**
+     * Writes the task to the file.
+     * @param task The task that wants to be added to the file.
+     * @param isApppendMode Whether the file wants to be appended or resetted to blank.
+     */
 
     public void writeTask(Task task, boolean isApppendMode) {
         try {

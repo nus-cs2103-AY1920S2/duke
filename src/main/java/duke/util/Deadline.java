@@ -46,7 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * toString method overrides the Object's toString method
+     * Overrides the Object's toString method
      * and it contains the mark, the description, as well as
      * the due date of the deadline.
      * @return The String that represents the deadline's details.

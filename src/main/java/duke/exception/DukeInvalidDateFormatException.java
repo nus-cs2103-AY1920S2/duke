@@ -11,8 +11,6 @@ package duke.exception;
  *
  */
 
-import duke.exception.DukeException;
-
 /**
  * <p>DukeInvalidDateFormatException class extends the DukeException
  * and it handles the invalid format of the date of event and deadline</p>
@@ -35,6 +33,7 @@ public class DukeInvalidDateFormatException extends DukeException {
      * Overrides the toString method.
      * @return The error message.
      */
+
     @Override
     public String toString() {
         return getMessage();
