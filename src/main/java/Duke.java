@@ -33,14 +33,17 @@ public class Duke {
                     Todo todo = new Todo(parser.getDescription());
                     this.taskList.addTask(todo);
                     this.print("Added: " + todo.getFullDescription() + "\n    " + this.taskList.printNumTasks());
+                    this.storage.writeToDisk("T|0|" + parser.getDescription());
                 } else if (command == Command.ADD_DEADLINE) {
                     Deadline deadline = new Deadline(parser.getDescription(), parser.getBy());
                     this.taskList.addTask(deadline);
                     this.print("Added: " + deadline.getFullDescription() + "\n    " + this.taskList.printNumTasks());
+                    this.storage.writeToDisk("D|0|" + parser.getDescription() + "|" + parser.getBy());
                 } else if (command == Command.ADD_EVENT) {
                     Event event = new Event(parser.getDescription(), parser.getAt());
                     this.taskList.addTask(event);
                     this.print("Added: " + event.getFullDescription() + "\n    " + this.taskList.printNumTasks());
+                    this.storage.writeToDisk("E|0|" + parser.getDescription() + "|" + parser.getAt());
                 } else if (command == Command.MARK_TASK_AS_DONE) {
                     Task task = this.taskList.markAsDone(parser.getTaskIndex());
                     this.print("Marked as done: " + task.getFullDescription() + "\n    " + this.taskList.printNumTasks());

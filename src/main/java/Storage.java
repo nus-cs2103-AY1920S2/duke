@@ -24,9 +24,10 @@ public class Storage {
 
     public void writeToDisk(String data) {
         try {
-            FileWriter fileWriter = new FileWriter(this.filePath);
+            FileWriter fileWriter = new FileWriter(this.filePath, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(data);
+            bufferedWriter.newLine();
             bufferedWriter.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -40,7 +41,8 @@ public class Storage {
             String line = null;
             while((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
-            }   
+            }
+            bufferedReader.close();
         } catch (FileNotFoundException ex) {
             // file not found yet, create the file
             this.createNewFile();
