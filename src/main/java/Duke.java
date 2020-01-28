@@ -35,14 +35,16 @@ public class Duke {
                         System.out.println(itemNo + "." + task);
                     }
                 } else if (command.isDone()) {
-                    int itemNo = scanner.nextInt() - 1;
+                    int index = scanner.nextInt() - 1;
                     System.out.println("Nice! I've marked this task as done");
-                    tracker.markDone(itemNo);
+                    tracker.markDone(index);
+                    System.out.println("  " + tracker.showList().get(index));
                     data.saveData(tracker.showList());
                 } else if (command.isDelete()) {
-                    int itemNo = scanner.nextInt() - 1;
+                    int index = scanner.nextInt() - 1;
                     System.out.println("Noted. I've removed this task:");
-                    tracker.delete(itemNo);
+                    System.out.println("  " + tracker.showList().get(index));
+                    tracker.delete(index);
                     data.saveData(tracker.showList());
                 } else {
                     Input content;

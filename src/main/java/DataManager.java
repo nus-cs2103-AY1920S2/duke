@@ -1,6 +1,4 @@
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.LinkedList;
 import java.nio.file.Paths;
@@ -48,7 +46,42 @@ public class DataManager {
     }
 
     public void loadData(Tracker tracker) {
+        try (InputStream in = Files.newInputStream(this.path);
+             BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(in))) {
+            String line = null;
+            int index = 0;
 
+            while ((line = reader.readLine()) != null) {
+                String taskType = line.substring(1,2);
+                String state = line.substring(4,5);
+                String content = line.substring(7);
+
+                switch (taskType) {
+                case "T":
+                    tracker.add(new ToDo(content));
+                    break;
+                case "E":
+                    String[] eventArray = content.split(" \\(at: ");
+                    int eContentLength = eventArray[1].length();
+                    tracker.add(new Event(eventArray[0], eventArray[1].substring(0, eContentLength - 1)));
+                    break;
+                case "D":
+                    String[] deadlineArray = content.split(" \\(by: ");
+                    int dContentLength = deadlineArray[1].length();
+                    tracker.add(new Deadline(deadlineArray[0], deadlineArray[1].substring(0, dContentLength - 1)));
+                    break;
+                }
+
+                if (state.equals("\u2713")) {
+                    tracker.markDone(index);
+                }
+
+                index++;
+            }
+        } catch (IOException x) {
+            System.err.println(x);
+        }
     }
 
     public boolean hasPreviousData() {
