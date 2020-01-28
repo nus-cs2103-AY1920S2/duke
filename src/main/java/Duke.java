@@ -1,8 +1,16 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        File database = new File("./src/main/java/database.txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(database));
+        ArrayList<Task> added = new ArrayList<Task>();
+
+        load(added, br);
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,7 +19,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> added = new ArrayList<Task>();
 
         while (true) {
             String input = sc.nextLine();
@@ -34,40 +41,46 @@ public class Duke {
 
             // To Do
             else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
-                added.add(new ToDo(input.substring(5)));
+                added.add(new ToDo(input.substring(5), false));
                 System.out.println("Got it. I've added this task:");
                 System.out.println("\t" + added.get(added.size() - 1).toString());
                 System.out.println("Now you have " + added.size() + "tasks in the list.");
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter(database));
+                save(added, bw);
             }
 
             // Deadline
             else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
                 try {
                     int slashIndex = getSlash(input);
-                    added.add(new Deadline(input.substring(9, slashIndex - 1), input.substring(slashIndex + 4)));
+                    added.add(new Deadline(input.substring(9, slashIndex - 1), false, input.substring(slashIndex + 4)));
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + added.get(added.size() - 1).toString());
                     System.out.println("Now you have " + added.size() + "tasks in the list.");
+
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(database));
+                    save(added, bw);
                 }
                 catch (DukeException e) {
                     System.out.println("Error: incorrect format.");
-                    continue;
                 }
-
             }
 
             // Event
             else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
                 try {
                     int slashIndex = getSlash(input);
-                    added.add(new Event(input.substring(6, slashIndex - 1), input.substring(slashIndex + 4)));
+                    added.add(new Event(input.substring(6, slashIndex - 1), false, input.substring(slashIndex + 4)));
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + added.get(added.size() - 1).toString());
                     System.out.println("Now you have " + added.size() + "tasks in the list.");
+
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(database));
+                    save(added, bw);
                 }
                 catch (DukeException e) {
                     System.out.println("Error: incorrect format.");
-                    continue;
                 }
             }
 
@@ -92,7 +105,6 @@ public class Duke {
                 }
                 catch (IndexOutOfBoundsException e) {
                     System.out.println("Error: index out of bounds.");
-                    continue;
                 }
             }
 
@@ -180,15 +192,67 @@ public class Duke {
             return firstWord;
         }
     }
+
+    public static void load(ArrayList<Task> list, BufferedReader br) throws IOException{
+        String str;
+        while ((str = br.readLine()) != null) {
+            char type = str.charAt(0);
+            boolean done = Boolean.parseBoolean(str.substring(4, 5));
+            String description;
+            String byAt;
+
+            if (type == 'T') {
+                description = str.substring(8);
+                list.add(new ToDo(description, done));
+            }
+            else {
+                int lastIndex = findThirdStrike(str) - 1;
+                description = str.substring(8, lastIndex);
+                byAt = str.substring(lastIndex + 3);
+
+                if (type == 'D') {
+                    list.add(new Deadline(description, done, byAt));
+                }
+
+                else if (type == 'E') {
+                    list.add(new Event(description, done, byAt));
+                }
+            }
+        }
+    }
+
+    public static void save(ArrayList<Task> list, BufferedWriter bw) throws IOException {
+        for (int i = 0; i < list.size(); i++) {
+            bw.write(list.get(i).convert() + "\n");
+        }
+
+        bw.flush();
+    }
+
+    public static int findThirdStrike(String str) {
+        int count = 3;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '|') {
+                count--;
+            }
+
+            if (count == 0) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
 
 class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -203,24 +267,33 @@ class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public String convert() {
+        int done = isDone ? 1 : 0;
+        return " | " + done + " | " + description;
+    }
 }
 
 class ToDo extends Task {
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public String convert() {
+        return "T" + super.convert();
+    }
 }
 
 class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
         this.by = by;
     }
 
@@ -228,19 +301,27 @@ class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    public String convert() {
+        return "D" + super.convert() + " | " + by;
+    }
 }
 
 class Event extends Task {
     protected String at;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
         this.at = at;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    public String convert() {
+        return "E" + super.convert() + " | " + at;
     }
 }
 
