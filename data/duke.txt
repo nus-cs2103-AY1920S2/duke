@@ -1,0 +1,5 @@
+T|1|eat food
+T|1|buy food
+T|1|sleep
+D|0|hw|june 20
+E|0|social|may 19
