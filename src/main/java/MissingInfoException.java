@@ -17,4 +17,10 @@ public class MissingInfoException extends DukeException {
     public String getTaskType() {
         return this.taskType;
     }
+
+    @Override
+    public String getMessage() {
+        String message = "The " + this.getMissingInfoName() + " of a " + this.getTaskType() + " cannot be empty.";
+        return message;
+    }
 }

@@ -1,6 +1,8 @@
+import java.time.LocalDate;
+
 public class Event extends DateTimeTask {
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description, at);
     }
 

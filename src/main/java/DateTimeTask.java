@@ -4,9 +4,9 @@ import java.time.format.DateTimeFormatter;
 abstract class DateTimeTask extends Task {
     protected LocalDate dateTime;
 
-    public DateTimeTask(String description, String dateTime) {
+    public DateTimeTask(String description, LocalDate dateTime) {
         super(description);
-        this.dateTime = LocalDate.parse(dateTime);
+        this.dateTime = dateTime;
     }
 
     public String getDateTime() {

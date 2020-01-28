@@ -1,5 +1,7 @@
+import java.time.LocalDate;
+
 public class Deadline extends DateTimeTask {
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description, by);
     }
 

@@ -1,0 +1,5 @@
+T | 1 | meet pao
+D | 0 | submit assignment | Jan 28 2020
+T | 1 | homework
+T | 0 | say hi
+E | 0 | go cycling | Nov 10 2020
