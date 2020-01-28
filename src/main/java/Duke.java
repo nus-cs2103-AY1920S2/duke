@@ -43,20 +43,58 @@ public class Duke {
 
             // Deadline
             else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
-                int slashIndex = getSlash(input);
-                added.add(new Deadline(input.substring(9, slashIndex - 1), input.substring(slashIndex + 4)));
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + added.get(added.size() - 1).toString());
-                System.out.println("Now you have " + added.size() + "tasks in the list.");
+                try {
+                    int slashIndex = getSlash(input);
+                    added.add(new Deadline(input.substring(9, slashIndex - 1), input.substring(slashIndex + 4)));
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + added.get(added.size() - 1).toString());
+                    System.out.println("Now you have " + added.size() + "tasks in the list.");
+                }
+                catch (DukeException e) {
+                    System.out.println("Error: incorrect format.");
+                    continue;
+                }
+
             }
 
             // Event
             else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
-                int slashIndex = getSlash(input);
-                added.add(new Event(input.substring(6, slashIndex - 1), input.substring(slashIndex + 4)));
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + added.get(added.size() - 1).toString());
-                System.out.println("Now you have " + added.size() + "tasks in the list.");
+                try {
+                    int slashIndex = getSlash(input);
+                    added.add(new Event(input.substring(6, slashIndex - 1), input.substring(slashIndex + 4)));
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + added.get(added.size() - 1).toString());
+                    System.out.println("Now you have " + added.size() + "tasks in the list.");
+                }
+                catch (DukeException e) {
+                    System.out.println("Error: incorrect format.");
+                    continue;
+                }
+            }
+
+            // Delete
+            else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
+                String num = input.substring(7);
+                int index;
+
+                try {
+                    index = Integer.parseInt(num) - 1;
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Error: must input a number after 'done'.");
+                    continue;
+                }
+
+                try {
+                    Task rm = added.remove(index);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("\t" + rm.toString());
+                    System.out.println("Now you have " + added.size() + " tasks in the list.");
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println("Error: index out of bounds.");
+                    continue;
+                }
             }
 
             // Done
@@ -73,7 +111,7 @@ public class Duke {
                 }
 
                 try {
-                    added.get(index).markAsDone();  // there will be error when index out of bounds, need handle
+                    added.get(index).markAsDone();
                 }
                 catch (IndexOutOfBoundsException e) {
                     System.out.println("Error: index out of bounds.");
@@ -100,13 +138,14 @@ public class Duke {
         }
     }
 
-    public static int getSlash(String input) {
+    public static int getSlash(String input) throws DukeException{
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '/') {
                 return i;
             }
         }
-        return -1;
+
+        throw new DukeException();
     }
 
     // trying custom DukeException
@@ -134,6 +173,7 @@ public class Duke {
                 !firstWord.equals("event") &&
                 !firstWord.equals("list") &&
                 !firstWord.equals("done") &&
+                !firstWord.equals("delete") &&
                 !firstWord.equals("bye")) {
             throw new DukeException();
         }
