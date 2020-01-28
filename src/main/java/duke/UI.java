@@ -30,14 +30,18 @@ public class UI {
      * Lists items in arr one by one.
      * @param arr arr
      */
-    static void list(TaskList arr) {
-        println();
-        System.out.println("Here are the items in your list:");
+    static void listHelper(TaskList arr) {
         for (var i = 0; i < arr.size(); i++) {
             Task t = arr.get(i);
             System.out.println(i + 1 + ": " + t.toString());
         }
-        System.out.println(UI.line);
+    }
+
+    static void list(TaskList arr) {
+        println();
+        System.out.println("Here are the items in your list:");
+        UI.listHelper(arr);
+        println();
     }
 
     /**
@@ -80,5 +84,12 @@ public class UI {
 
     static void showLoadingError() {
         UI.say("Failed to load from file. Are you sure the path is correct?");
+    }
+
+    static void results(TaskList tl) {
+        println();
+        System.out.println("Here are your search results:");
+        UI.listHelper(tl);
+        println();
     }
 }
