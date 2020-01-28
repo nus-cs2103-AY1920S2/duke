@@ -1,5 +1,4 @@
-T|1|eat food
-T|1|buy food
-T|1|sleep
-D|0|hw|june 20
-E|0|social|may 19
+D|1|assignment|2020-01-28
+D|1|hw|2020-02-01
+E|0|be social|location
+T|0|indiv project

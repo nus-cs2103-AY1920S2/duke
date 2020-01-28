@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -40,8 +39,6 @@ public class Duke {
 
     private static Task databaseStringToTask(String s) {
         String[] split = s.split("\\|");
-        System.out.println(s);
-        System.out.println(Arrays.toString(split));
         Task newTask = new Todo("error in decoding database string");
 
         switch (split[0]) {
