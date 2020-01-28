@@ -18,7 +18,7 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         while(!input.hasNext("bye")) {
-            String next = input.next();
+            String next = input.nextLine();
             System.out.println(line + "     " + next + "\n" + line);
         }
         System.out.println(line + "     Bye. Hope to see you again soon!\n" + line);
