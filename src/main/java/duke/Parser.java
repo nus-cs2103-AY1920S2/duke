@@ -40,6 +40,9 @@ public class Parser {
             case "event":
                 command = createAddCommand(temp);
                 break;
+            case "find":
+                command = createFindCommand(temp);
+                break;
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -106,6 +109,25 @@ public class Parser {
             return new AddCommand(temp[0], temp[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+        }
+    }
+
+    /**
+     * Returns the Command object of FindCommand type.
+     *
+     * @param temp The array containing command and description of the command
+     * @return The Command object of FindCommand type.
+     * @throws DukeException If the command has missing information or in wrong format.
+     */
+    private static Command createFindCommand(String[] temp) throws DukeException {
+        try {
+            String body = temp[1];
+            if (body.trim().equals("")) {
+                throw new DukeException("OOPS!!! The description of find cannot be empty.");
+            }
+            return new FindCommand(body);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of find cannot be empty.");
         }
     }
 }

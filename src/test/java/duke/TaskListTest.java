@@ -64,4 +64,16 @@ public class TaskListTest {
         }
 
     }
+
+    @Test
+    public void testFind() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(new ToDo("read book"));
+        tasks.add(new ToDo("join CCA"));
+        tasks.add(new ToDo("borrow book"));
+        TaskList tasklist = new TaskList(tasks);
+        assertEquals(2, tasklist.find("book").size());
+        assertEquals(1, tasklist.find("join").size());
+        assertEquals(0, tasklist.find("sports").size());
+    }
 }

@@ -19,6 +19,15 @@ public class Task {
     }
 
     /**
+     * Returns the description of the task.
+     *
+     * @return The description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Returns the status icon that determine if a task is done (Y or N).
      *
      * @return Y if the task is done or N if the task is not done.
