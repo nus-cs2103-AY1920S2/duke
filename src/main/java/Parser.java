@@ -10,6 +10,8 @@ public class Parser {
         this.fullcommand = fullcommand;
         this.ui = ui;
 
+        // Add all valid commands into HashMap
+        // HashMap is used for validation
         commandpairing.put("list", "1");
         commandpairing.put("done", "2");
         commandpairing.put("todo", "2");
