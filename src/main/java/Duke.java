@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -48,14 +49,18 @@ public class Duke {
                     tasks.add(toDo);
                     break;
                 case "D":
-                    Task deadLine = new Deadline(task[2], task[3]);
+                    Task deadLine = new Deadline(task[2],
+                            LocalDate.parse(task[3].substring(3, 13)),
+                            task[3].substring(14));
                     if (task[1].equals("true")) {
                         deadLine.markAsDone();
                     }
                     tasks.add(deadLine);
                     break;
                 case "E":
-                    Task event = new Event(task[2], task[3]);
+                    Task event = new Event(task[2],
+                            LocalDate.parse(task[3].substring(3, 13)),
+                            task[3].substring(14));
                     if (task[1].equals("true")) {
                         event.markAsDone();
                     }
@@ -77,9 +82,9 @@ public class Duke {
             if (task instanceof Todo) {
                 writer.write("T/" + task.isDone + "/" + task.description + "\n");
             } else if (task instanceof Deadline) {
-                writer.write("D/" + task.isDone + "/" + task.description + "/" + ((Deadline) task).by + "\n");
+                writer.write("D/" + task.isDone + "/" + task.description + "/" + ((Deadline) task).date + ((Deadline) task).time + "\n");
             } else if (task instanceof Event) {
-                writer.write("E/" + task.isDone + "/" + task.description + "/" + ((Event) task).at + "\n");
+                writer.write("E/" + task.isDone + "/" + task.description + "/" + ((Event) task).date + ((Event) task).time + "\n");
             }
         }
         writer.close();
