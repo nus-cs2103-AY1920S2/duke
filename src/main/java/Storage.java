@@ -31,9 +31,9 @@ public class Storage {
         try {
             return loadTaskState();
         } catch (IOException e) {
-            throw new DukeException("Error: Failed to load task list");
+            throw new DukeException("Failed to load task list");
         } catch (ClassNotFoundException e) {
-            throw new DukeException("Error: Malformed task list file");
+            throw new DukeException("Malformed task list file");
         }
     }
 
