@@ -13,7 +13,7 @@ public class DukeExceptionTest {
     /**
      * A test to make sure that the Exception generated is not a null.
      */
-    public void runTest(){
+    public void runTest() {
         assertNotNull(new DukeException("read"));
     }
 }

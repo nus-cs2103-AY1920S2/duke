@@ -5,20 +5,20 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
- * This class takes care to interpret information fro, user's input
+ * This class takes care to interpret information from user's input.
  **/
 public class Parser {
     private String command;
 
     /**
-     * Constructor which takes in a string by the user to be interpreted
+     * Constructor which takes in a string by the user to be interpreted.
      **/
     Parser(String next) {
         this.command = next;
     }
 
     /**
-     * Retrieves the task type of the command
+     * Retrieves the task type of the command.
      * @return String of the task type of the command
      **/
     public String getTaskType() {
@@ -30,7 +30,7 @@ public class Parser {
     }
 
     /**
-     * Retrieves the second argument of the command
+     * Retrieves the second argument of the command.
      * @return String of the second argument of the command
      **/
     public String getSecond() {
@@ -38,7 +38,7 @@ public class Parser {
     }
 
     /**
-     * Retrieves the third argument of the command
+     * Retrieves the third argument of the command.
      * @return String of the third argument of the command
      **/
     public String getThird() {
@@ -51,7 +51,7 @@ public class Parser {
     }
 
     /**
-     * Retrieves the date format of the command
+     * Retrieves the date format of the command.
      * @return Date format of the of the command of the task
      **/
     public LocalDateTime getDate() {
@@ -59,7 +59,7 @@ public class Parser {
     }
 
     /**
-     * Converts a date in the form of a string to a Date form
+     * Converts a date in the form of a string to a Date form.
      * @return Date format of the of the string format of the date
      **/
     static LocalDateTime extractDate(String next) {

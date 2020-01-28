@@ -11,20 +11,20 @@ import java.io.FileNotFoundException;
 
 /**
  * This class takes care storage and retrieval of information
- * from the drive of computer
+ * from the drive of computer.
  **/
 public class Storage {
     private String filePath;
 
     /**
-     * Constructor which takes in a file path to the file to be modified
+     * Constructor which takes in a file path to the file to be modified.
      **/
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Loading of information from the file specified for this Storage
+     * Loading of information from the file specified for this Storage.
      **/
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Storage {
 
     /**
      * Update information to the file specified for this Storage
-     * by adding on a new task object
+     * by adding on a new task object.
      * @param updatedTask Task to be updated
      **/
     static void updateDrive(Task updatedTask) {
@@ -77,7 +77,7 @@ public class Storage {
 
     /**
      * Update information to the file specified for this Storage
-     * by removing on a new task object
+     * by removing on a new task object.
      * @param size The order of the task that are to be removed
      **/
     static void deleteDrive(int size) {

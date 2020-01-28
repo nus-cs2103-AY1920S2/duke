@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * This class is the main driving chatbot
+ * This class is the main driving chatbot.
  **/
 public class Duke {
 
@@ -20,7 +20,7 @@ public class Duke {
 
     /**
      * Constructor which takes in a file path
-     * to obtain information from the file
+     * to obtain information from the file.
      * @param filePath The file path to the file to be modified
      **/
     public Duke(String filePath) {
@@ -35,14 +35,14 @@ public class Duke {
     }
 
     /**
-     * The main method to run the chatbot
+     * The main method to run the chatbot.
      **/
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
 
     /**
-     * This run method
+     * This run method.
      **/
     public void run() {
         ui.greetUser();
@@ -50,7 +50,7 @@ public class Duke {
     }
 
     /**
-     * Method to process the input from user
+     * Method to process the input from user.
      **/
     public void processInput() {
         Scanner sc = new Scanner(System.in);
@@ -129,7 +129,7 @@ public class Duke {
     }
 
     /**
-     * Method to add a task to the list
+     * Method to add a task to the list.
      **/
     void addTask(Task newTask) {
         tasks.add(newTask);

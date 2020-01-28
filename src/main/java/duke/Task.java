@@ -11,7 +11,7 @@ public abstract class Task {
      * Constructor for an abstract task, which is not done.
      * @param name The name of event task
      */
-    public Task (String name) {
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
@@ -44,13 +44,17 @@ public abstract class Task {
     }
 
     /**
-     * Abstract method to return a new task with specified done status.
-     * @return A new task object.
+     * Method to return a the name of the task.
+     * @return A string of the name of the task.
      */
     public String getName() {
         return name;
     }
 
+    /**
+     * Abstract method to return a new task with specified done status.
+     * @return A new task object.
+     */
     public abstract Task setDone();
 
     /**

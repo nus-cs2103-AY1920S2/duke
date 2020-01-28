@@ -76,8 +76,14 @@ public class TaskList {
         return this.taskList;
     }
 
+    /**
+     * Filter the list of task to the one that contains a certain string.
+     * @return A TaskList that has been filtered
+     **/
     public TaskList filter(String s) {
-        ArrayList<Task> al = new ArrayList<>(this.taskList.stream().filter(x -> x.getName().contains(s)).collect(Collectors.toList()));
+        ArrayList<Task> al = new ArrayList<>(
+                this.taskList.stream()
+                        .filter(x -> x.getName().contains(s)).collect(Collectors.toList()));
         return new TaskList(al);
     }
 }
