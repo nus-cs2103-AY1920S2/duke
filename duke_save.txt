@@ -1,0 +1,11 @@
+[D][N] hw  (by: 1/10/1997 2359)
+[E][Y] sunday  (at: 12/30/2020 1900)
+[E][N] sunday  (at: 12/30/2020 1900)
+[E][N] sunday  (at: 12/10/2020 1900)
+[T][N] hello
+[T][N] sassasasa
+[T][N] sasaaasa
+[T][N] sasaaas
+[T][N] sasaaa
+[T][N] sasasa
+[T][Y] sasasa

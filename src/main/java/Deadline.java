@@ -6,6 +6,7 @@ public class Deadline extends Task {
 
     protected String type = "D";
     protected String time;
+    protected LocalDate date;
 
     public Deadline(String description, String time) {
         super(description);
@@ -19,10 +20,14 @@ public class Deadline extends Task {
         }
     }
 
+    public LocalDate get_Date() {
+        return date;
+    }
 
     public void format_Date() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withLocale(Locale.ENGLISH);
-        LocalDate date = LocalDate.parse(time,formatter);
+        date = LocalDate.parse(time,formatter);
+        System.out.println(date);
     }
 
 
