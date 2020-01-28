@@ -3,14 +3,11 @@ public abstract class Item {
     static String line = space + "____________________________________________________________";
     private String name;
     private boolean done;
-    Item(String name) {
+    Item(String name, boolean done) {
         this.name = name;
-        this.done = false;
+        this.done = done;
     }
-    Item(String name, Boolean done) {
-        this.name = name;
-        this.done = false;
-    }
+
     public String toString() {
         String temp = "[";
         if (this.done) {
@@ -33,4 +30,5 @@ public abstract class Item {
     }
 
     public abstract String replace();
+    public abstract String now();
 }

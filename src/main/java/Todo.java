@@ -2,8 +2,7 @@ public class Todo extends Item {
     String name;
     boolean done;
     Todo (String name) {
-        super(name);
-        this.done = false;
+        super(name, false);
     }
     Todo (String name, boolean done) {
         super(name, done);
@@ -17,5 +16,8 @@ public class Todo extends Item {
     public String replace() {
         String temp = "   [T][✗] " + super.getName() + "\n";
         return temp;
+    }
+    public String now() {
+        return this.toString();
     }
 }

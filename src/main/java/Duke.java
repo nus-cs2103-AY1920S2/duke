@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Duke {
     static String space = "     ";
@@ -51,9 +50,9 @@ public class Duke {
                     int index = Integer.parseInt(tmp[1]);
                     if (tmp[0].equals("done")) {
                         list.items.get(index - 1).markDone();
-                        updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).toString());
+                        updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).now());
                     } else {
-                        updateTxt(list.items.get(index - 1).toString(), "");
+                        updateTxt(list.items.get(index - 1).now(), "");
                         list.delete(index - 1);
                     }
                 } else if (tmp[0].equals("todo")) {
@@ -63,7 +62,7 @@ public class Duke {
                     }
                     Todo todo = new Todo(task);
                     list.addItem(todo);
-                    addTxt(todo.toString());
+                    addTxt(todo.now());
                 } else if (tmp[0].equals("event")) {
                     if (task.equals("")) {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The description of a event cannot be empty.\n"
@@ -76,7 +75,7 @@ public class Duke {
                     }
                     Event event = new Event(e[0], LocalDate.parse(e[1]));
                     list.addItem(event);
-                    addTxt(event.toString());
+                    addTxt(event.now());
                 } else if (tmp[0].equals("deadline")) {
                     if (task.equals("")) {
                         throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! The description of a deadline cannot be empty.\n"
@@ -89,7 +88,7 @@ public class Duke {
                     }
                     Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                     list.addItem(ddl);
-                    addTxt(ddl.toString());
+                    addTxt(ddl.now());
                 }  else {
                     throw new IllegalInstructionException(line + "\n" + space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                             + line);
@@ -151,6 +150,7 @@ public class Duke {
                 String[] tmp;
                 splitted = line.split(" ", 2);
                 tmp = splitted[1].split(" ", 2);
+
                 if (line.charAt(4) == '✓') {
                     done = true;
                 } else {
