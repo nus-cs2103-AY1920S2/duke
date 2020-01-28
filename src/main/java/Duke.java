@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,6 +16,48 @@ public class Duke {
 
         ArrayList<Task> store = new ArrayList<>();
 
+        //Read from File
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("./data/data.txt"));
+            System.out.println("Here are the current list of Tasks: ");
+            String currLine = br.readLine();
+            while(currLine != null) {
+                System.out.println(currLine);
+                String[] parts = currLine.split("\\|");
+                String[] newParts = new String[parts.length];
+                for(int i = 0; i < parts.length; i++) {
+                    newParts[i] = parts[i].trim();
+                }
+                if(newParts[0].equals("T")) {
+                    ToDo temp = new ToDo(newParts[2]);
+                    if(newParts[1].equals("\u2713")) {
+                        temp.isDone = true;
+                    }
+                    store.add(temp);
+                } else if(newParts[0].equals("D")) {
+                    Deadline temp = new Deadline(newParts[2], newParts[3]);
+                    if(newParts[1].equals("\u2713")) {
+                        temp.isDone = true;
+                    }
+                    store.add(temp);
+                } else if(newParts[0].equals("E")) {
+                    Event temp = new Event(newParts[2], newParts[3]);
+                    if(newParts[1].equals("\u2713")) {
+                        temp.isDone = true;
+                    }
+                    store.add(temp);
+                } else {}
+                currLine = br.readLine();
+            }
+        } catch(IOException e) {
+            System.out.println("Please ensure data.txt is present.");
+            return;
+        }
+
+
+        //This block contains while loop
+        System.out.println("Please enter your commands");
+
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
             if(command.trim().toLowerCase().equals("bye")) {
@@ -28,10 +71,11 @@ public class Duke {
             }
 
         }
+        //End of block
 
     }
 
-    public static void commandHandler (String command, ArrayList<Task> store) throws DukeException {
+    public static void commandHandler (String command, ArrayList<Task> store) throws DukeException{
         String[] check = command.split(" ");
 
         switch (check[0].toLowerCase()) {
@@ -57,6 +101,7 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 store.get(Integer.parseInt(check[1]) - 1).markAsDone();
                 System.out.println(store.get(Integer.parseInt(check[1]) - 1));
+                saveTasks(store);
                 break;
             case "todo":
                 if(check.length == 1) {
@@ -73,6 +118,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + todo);
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
+                saveTasks(store);
                 break;
             case "deadline":
                 if(check.length == 1) {
@@ -102,6 +148,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + deadline);
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
+                saveTasks(store);
                 break;
             case "event":
                 if(check.length == 1) {
@@ -131,6 +178,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + event);
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
+                saveTasks(store);
                 break;
             case "delete":
                 if(check.length == 1) {
@@ -151,9 +199,44 @@ public class Duke {
                 System.out.println("Noted. I've removed this task:");
                 System.out.println("  " + temp);
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
+                saveTasks(store);
                 break;
             default:
                 throw new DukeException("OOPS! I'm sorry but I don't know what that means :-(");
+        }
+    }
+
+    public static void saveTasks(ArrayList<Task> store){
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter("./data/data.txt"));
+            //
+            String saveAll = "";
+            for(Task t : store) {
+                String letter;
+                if(t instanceof Deadline) {
+                    Deadline temp = (Deadline) t;
+                    letter = "D";
+                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.description + " | " + temp.dL;
+                    saveAll += "\n";
+                } else if(t instanceof Event) {
+                    Event temp = (Event) t;
+                    letter = "E";
+                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.description + " | " + temp.time;
+                    saveAll += "\n";
+                } else if(t instanceof ToDo) {
+                    ToDo temp = (ToDo) t;
+                    letter = "T";
+                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.description;
+                    saveAll += "\n";
+                } else {}
+            }
+            writer.write(saveAll);
+            //
+            writer.close();
+
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
