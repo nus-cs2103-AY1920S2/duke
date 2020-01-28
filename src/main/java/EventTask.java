@@ -13,6 +13,11 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.at + ")";
+        return "[E]" + super.toString() + " (by: " + this.at + ")";
+    }
+
+    @Override
+    public String format() {
+        return "E | " + super.format() + " | " + this.at;
     }
 }

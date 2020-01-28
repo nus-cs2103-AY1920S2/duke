@@ -13,3 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 text-ui-test/ACTUAL.TXT
+text-ui-test/TASKS
+TASKS

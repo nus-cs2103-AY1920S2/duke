@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +19,24 @@ public class Duke {
         System.out.println("\t Got it. I've added this task: \n" +
                 "\t\t" + task + "\n" +
                 "\t Now you have " + numOfTasks + " tasks in the list.");
+    }
+
+    public static void persist(ArrayList<Task> tasks) {
+
+        final String FILE_PATH = "./TASKS";
+        StringBuilder buffer = new StringBuilder();
+        for (Task task : tasks) {
+            buffer.append(task.format()).append("\n");
+        }
+
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(FILE_PATH));
+            writer.write(buffer.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -106,6 +127,7 @@ public class Duke {
                         task.markAsDone();
                         System.out.println("\t Nice! I've marked this task as done: ");
                         System.out.println("\t\t" + task);
+                        Duke.persist(tasks);
                         break;
                     case DELETE_COMMAND: {
                         splitted = line.split(" ");
@@ -122,12 +144,14 @@ public class Duke {
 
                     System.out.println("\t Noted. I've removed this task: ");
                     System.out.println("\t\t" + task);
+                    Duke.persist(tasks);
                     break;
 
                     case TODO_COMMAND:
                         task = new TodoTask(parameters);
                         tasks.add(task);
                         addTaskReport(task, tasks.size());
+                        Duke.persist(tasks);
                         break;
                     case DEADLINE_COMMAND:
                         taskInfo = parameters.split("/by");
@@ -144,6 +168,7 @@ public class Duke {
 
                         tasks.add(task);
                         addTaskReport(task, tasks.size());
+                        Duke.persist(tasks);
                         break;
 
                     case EVENT_COMMAND:
@@ -160,6 +185,7 @@ public class Duke {
 
                         tasks.add(task);
                         addTaskReport(task, tasks.size());
+                        Duke.persist(tasks);
                         break;
                 }
                 System.out.println("\t____________________________________________________________");
