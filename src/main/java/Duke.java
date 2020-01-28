@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.File;
 
 public class Duke {
-    public static String filePath = "../../../data/duke.txt";
+    public static String filePath = "data/duke.txt";
     public static void main(String[] args) {
         String logo = " ____        _        \n\t"
                 + "|  _ \\ _   _| | _____ \n\t"
@@ -150,8 +150,13 @@ public class Duke {
     }
 
     public static void addTasksToFile(ArrayList<Task> tasks) throws IOException{
-        File file = new File(filePath);
-        FileWriter fw = new FileWriter(file);
+        //File file = new File(filePath);
+        File directory = new File("data");
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
+
+        FileWriter fw = new FileWriter(filePath);
         int size = tasks.size();
         String str = "";
         Task t;
