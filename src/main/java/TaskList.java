@@ -30,14 +30,15 @@ public class TaskList {
         return "Number of tasks: " + taskList.size();
     }
 
-    public String listTasks() {
+    public ArrayList<String> listTasks() {
+        ArrayList<String> lines = new ArrayList<>();
         if (taskList.isEmpty()) {
-            return "Nothing in the list, good job! " + new String(Character.toChars(0x1F60A));
+            lines.add("Nothing in the list, good job! " + new String(Character.toChars(0x1F60A)));
+        } else {
+            for (int i = 0; i < this.taskList.size(); i++) {
+                lines.add((i + 1) + ". " + this.taskList.get(i).getFullDescription());
+            }
         }
-        String formattedString = "";
-        for (int i = 0; i < this.taskList.size(); i++) {
-            formattedString += (i + 1) + ". " + this.taskList.get(i).getFullDescription() + "\n    ";
-        }
-        return formattedString.trim();
+        return lines;
     }
 }
