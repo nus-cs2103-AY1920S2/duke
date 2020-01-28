@@ -8,14 +8,19 @@ import duke.task.Todo;
 import java.time.DateTimeException;
 import java.util.HashMap;
 
-/**
- * Deals with making sense of user commands.
- */
+/** Deals with making sense of user commands */
 public class Parser {
     protected static HashMap<String, CommandType> validCommands;
     protected static HashMap<String, String> commandDelimiter;
     protected static HashMap<String, String> commandTypeFormatInfo;
 
+    /**
+     * Creates a new command based on given input string.
+     *
+     * @param fullCommand represents a user input command
+     * @return Command based on action to be performed
+     * @throws DukeException when given input is not a valid command
+     */
     public static Command parse(String fullCommand) throws DukeException {
         setupValidCommands();
         setupCommandDelimiter();
@@ -100,6 +105,7 @@ public class Parser {
 
     /**
      * Throws duke.DukeException if event command has invalid parameters.
+     *
      * @throws DukeException for invalid event command
      */
     public static void verifyEventInput(String command, String[] commandWords) throws DukeException {
@@ -130,6 +136,7 @@ public class Parser {
 
     /**
      * Throws duke.DukeException if deadline command has any invalid parameters.
+     *
      * @throws DukeException for invalid deadline command
      */
     public static void verifyDeadlineInput(String command, String[] commandWords) throws DukeException {
@@ -155,6 +162,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the due date information associated with the given command parameter.
+     *
+     * @param command string representing user input
+     * @param commandWords list of words that make up command
+     * @return String representing the due date component of command
+     */
     public static String getDueDate(String command, String[] commandWords) {
         String commandType = commandWords[0];
         String delimiter = commandDelimiter.get(commandType);
@@ -166,6 +180,14 @@ public class Parser {
         return command.substring(delimiterStartIndex);
     }
 
+    /**
+     * Returns a String representing the description component of a given command parameter.
+     *
+     * @param command string representing user input
+     * @param commandWords list of words that make up command
+     * @return String representing the description component of command
+     * @throws DukeException command is not in a valid format
+     */
     public static String getDescription(String command, String[] commandWords) throws DukeException {
         String commandType = commandWords[0];
         String description = null;
