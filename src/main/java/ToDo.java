@@ -1,5 +1,4 @@
-public class ToDo extends Task{
-    //protected String by;
+public class ToDo extends Task {
 
     /**
      * Constructor for the todo class.

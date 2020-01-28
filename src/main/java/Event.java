@@ -1,4 +1,4 @@
-public class Event extends Task{
+public class Event extends Task {
     protected String timing;
 
     /**

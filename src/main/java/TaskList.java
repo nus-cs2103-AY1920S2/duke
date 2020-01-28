@@ -1,9 +1,7 @@
-import java.time.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class TaskList {
     public ArrayList<Task> listOfTasks;
-
 
     /**
      * Constructor for TaskList class used for starting from an empty TaskList.
@@ -37,8 +35,8 @@ public class TaskList {
      * @return task at index.
      * @throws DukeException when index is out of bounds.
      */
-    public Task getTask(int index) throws DukeException{
-        if(index >= listOfTasks.size() || index < 0) {
+    public Task getTask(int index) throws DukeException {
+        if (index >= listOfTasks.size() || index < 0) {
             throw new DukeException("Index out of bounds!");
         }
         return listOfTasks.get(index);
