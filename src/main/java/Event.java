@@ -12,11 +12,7 @@ public class Event extends Task{
 
     @Override
     public String toStringTxt() {
-<<<<<<< HEAD:src/main/java/task/Event.java
-        return "E2/" + super.getIcon() + "/" + command + "/" + date + "hello";
-=======
-        return "E/" + super.getIcon() + "/" + command + "/" + date + "\n";
->>>>>>> parent of c4815cf... Added packages:src/main/java/Event.java
+        return "E/" + super.getIcon() + "/" + command + "/" + date;
     }
 
     @Override

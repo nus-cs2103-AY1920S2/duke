@@ -11,7 +11,7 @@ public class Deadline extends Task{
     // e.g. D/Y/return book/June 5th
     @Override
     public String toStringTxt() {
-        return "D/" + super.getIcon() + "/" + command + "/" + date + "\n";
+        return "D/" + super.getIcon() + "/" + command + "/" + date;
     }
 
     @Override
