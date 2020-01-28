@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,7 +38,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException{
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -51,7 +50,7 @@ public class Storage {
                 switch (taskAbbreviation) {
                     case TODO:
                         ToDo storeTask = new ToDo(taskArr[2]);
-                        if (taskArr[1].equals(DONE)) {
+                            if (taskArr[1].equals(DONE)) {
                             storeTask.markAsDone();
                         }
                         tasks.add(storeTask);
@@ -72,7 +71,7 @@ public class Storage {
                         break;
                     default:
                         // may add own DukeException to throw invalid abbreviation
-                        break;
+                        throw new DukeException("Invalid abbreviation!", DukeErrorType.INVALID_ABBREVIATION);
                 }
             }
         } catch (FileNotFoundException fileException) {
@@ -86,19 +85,19 @@ public class Storage {
         return tasks;
     }
 
-    public void save(List<Task> updatedList) {
+    public void save(TaskList updatedList) {
         if (pathFile.canWrite()) {
             try {
                 FileWriter fileWriter = new FileWriter(absoluteStorageFilePath);
                 String toBeWritten = "";
-                for (Task eachTask : updatedList) {
+                for (Task eachTask : updatedList.getListOfTask()) {
                     if (eachTask instanceof ToDo) {
-                        toBeWritten += "T | " + eachTask.getStatusNumber() + " | " + eachTask.getTask() + Duke.NEWLINE;
+                        toBeWritten += "T | " + eachTask.getStatusNumber() + " | " + eachTask.getDescription() + Duke.NEWLINE;
                     } else if (eachTask instanceof Event) {
-                        toBeWritten += "E | " + eachTask.getStatusNumber() + " | " + eachTask.getTask() + " | "
+                        toBeWritten += "E | " + eachTask.getStatusNumber() + " | " + eachTask.getDescription() + " | "
                                 + ((Event) eachTask).getTime() + Duke.NEWLINE;
                     } else if (eachTask instanceof Deadline) {
-                        toBeWritten += "D | " + eachTask.getStatusNumber() + " | " + eachTask.getTask() + " | "
+                        toBeWritten += "D | " + eachTask.getStatusNumber() + " | " + eachTask.getDescription() + " | "
                                 + ((Deadline) eachTask).getBy() + Duke.NEWLINE;
                     }
                     else {

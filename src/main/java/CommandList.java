@@ -7,7 +7,8 @@ public enum CommandList {
     DONE(""),
     EVENT("E"),
     LIST(""),
-    TODO("T");
+    TODO("T"),
+    BYE("");
 
     private String abbreviation;
     private static final Map<String, CommandList> lookup = new HashMap<>();

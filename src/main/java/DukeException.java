@@ -43,6 +43,11 @@ public class DukeException extends Exception {
                 stringBuilder.append("      Date and time?\n" + "      " +commandName
                         + " time is empty!\n      Set it for your smol brain please :)");
                 break;
+            case INVALID_ABBREVIATION:
+                stringBuilder.append("      Invalid abbreviation in data document, please check!\n" +
+                        "      Only T/D/E abbreviation is allowed.");
+            case EMPTY_COMMAND:
+                stringBuilder.append("      Please give me something to exe :D");
         }
         return stringBuilder.toString();
     }

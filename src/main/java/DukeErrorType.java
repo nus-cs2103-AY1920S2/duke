@@ -1,5 +1,7 @@
 public enum DukeErrorType {
     INVALID_COMMAND,
+    INVALID_ABBREVIATION,
     EMPTY_DESCRIPTION,
-    EMPTY_TIME;
+    EMPTY_TIME,
+    EMPTY_COMMAND;
 }

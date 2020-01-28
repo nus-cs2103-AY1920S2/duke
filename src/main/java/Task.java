@@ -1,14 +1,17 @@
 public class Task {
-    private String task;
+    private String description;
+    private String time;
     private boolean isDone;
 
-    public Task(String taskName) {
-        this.task = taskName;
+
+    public Task(String description) {
+        this.time = "";
+        this.description = description;
         this.isDone = false;
     }
 
     public Task() {
-        task = "";
+        description = "";
     }
 
     public String getStatusIcon() {
@@ -28,9 +31,11 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getTask() {
-        return task;
+    public String getDescription() {
+        return description;
     }
+
+    public String getTime() { return time; }
 
     /**
      * Returns a string representation of the object. In general, the
@@ -55,6 +60,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.task);
+        return String.format("[%s] %s", getStatusIcon(), this.description);
     }
 }
