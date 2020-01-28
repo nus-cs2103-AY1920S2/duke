@@ -25,32 +25,34 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    list(newList);
+                    list();
 
                 } else if (command.startsWith("done")) {
-                    checkCommand(command, "done");
-                    done(newList, Integer.valueOf(command.split(" ")[1]) - 1);
+                    DukeException.checkCommand(command, "done", newList.size());
+                    done(Integer.valueOf(command.split(" ")[1]) - 1);
 
                 } else if (command.startsWith("delete")) {
-                    checkCommand(command, "delete");
-                    delete(newList, Integer.valueOf(command.split(" ")[1]) - 1);
+                    DukeException.checkCommand(command, "delete", newList.size());
+                    delete(Integer.valueOf(command.split(" ")[1]) - 1);
                 } else {
                     String[] arr = command.split("/");
                     String[] description = (arr[0].split(" ", 2));
 
                     if (command.startsWith("todo")) {
-                        checkDescription(description, "todo");
+                        DukeException.checkDescription(description, "todo");
                         newList.add(new ToDo(description[1]));
 
                     } else if (command.startsWith("deadline")) {
-                        checkDescription(description, "deadline");
-                        checkTime(arr, "deadline");
-                        newList.add(new Deadline(description[1], arr[1].split(" ", 2)[1]));
+                        DukeException.checkDescription(description, "deadline");
+                        DukeException.checkTime(arr, "deadline");
+                        newList.add(new Deadline(description[1],
+                                arr[1].split(" ", 2)[1], Task.parser));
 
                     } else if (command.startsWith("event")) {
-                        checkDescription(description, "event");
-                        checkTime(arr, "event");
-                        newList.add(new Event(description[1], arr[1].split(" ", 2)[1]));
+                        DukeException.checkDescription(description, "event");
+                        DukeException.checkTime(arr, "event");
+                        newList.add(new Event(description[1],
+                                arr[1].split(" ", 2)[1], Task.parser));
 
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -82,7 +84,7 @@ public class Duke {
         System.out.print(horizontalLines());
     }
 
-    public static void list(ArrayList<Task> newList) {
+    public static void list() {
         if (newList.size() == 0) {
             dukePrint("You currently have no tasks in your list\n");
         } else {
@@ -94,43 +96,16 @@ public class Duke {
         }
     }
 
-    public static void done(ArrayList<Task> newList, int i) {
+    public static void done(int i) {
         newList.get(i).markAsDone();
-        dukePrint("Nice! I've marked this task as done: \n"+
-                newList.get(i).toString()+"\n");
+        dukePrint("Nice! I've marked this task as done: \n"+ newList.get(i).toString()+"\n");
     }
 
-    public static void delete(ArrayList<Task> newList, int i) {
+    public static void delete(int i) {
         Task task = newList.get(i);
         newList.remove(i);
         dukePrint("Noted. I've removed this task:\n"+task.toString()+"\n" +
-                "Now you have "+newList.size()+" tasks in the list.\n");
-    }
-
-    public static void checkCommand(String command, String insert) throws DukeException {
-        String[] arr = command.split(" ");
-        if (arr.length < 2) {
-            throw new DukeException("The task to be marked as " + insert + " must be specified");
-        }
-        if (Integer.valueOf(arr[1]) - 1 >= newList.size()) {
-            throw new DukeException("Task " + arr[1] + " does not exist");
-        }
-    }
-
-    public static void checkDescription (String[] description, String insert) throws DukeException {
-        if (description.length < 2) {
-            throw new DukeException("The description of a " + insert + " cannot be empty.");
-        }
-    }
-
-    public static void checkTime (String[] arr, String insert) throws DukeException {
-        if (arr.length < 2) {
-            throw new DukeException("The time of a " + insert + " cannot be empty.");
-        }
-        String[] time = (arr[1].split(" ", 2));
-        if (time.length < 2) {
-            throw new DukeException("The time of a " + insert + " cannot be empty.");
-        }
+                "Now you have " + newList.size() + " tasks in the list.\n");
     }
 
     public static void retrieveInfo() {
@@ -143,9 +118,9 @@ public class Duke {
                 if  (arr[0].trim().equals("T")) {
                     newTask = new ToDo(arr[2].trim());
                 } else if (arr[0].trim().equals("D")) {
-                    newTask = new Deadline(arr[2].trim(), arr[3].trim());
+                    newTask = new Deadline(arr[2].trim(), arr[3].trim(), Task.formatter);
                 } else if (arr[0].trim().equals("E")) {
-                    newTask = new Event(arr[2].trim(), arr[3].trim());
+                    newTask = new Event(arr[2].trim(), arr[3].trim(), Task.formatter);
                 }
 
                 if (arr[1].trim().equals("Y")) {

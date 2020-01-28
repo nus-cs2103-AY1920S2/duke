@@ -1,0 +1,30 @@
+list
+todo read book
+deadline return book /by 21-2-2020 1600
+event project meeting /at 13-4-2020 1800
+todo join sports club
+list
+done 1
+done 4
+todo borrow book
+list
+deadline return book /by 5-6-2020 1400
+event project meeting /at 17-8-2020 1000
+deadline do homework /by 29-10-2020 1200
+blah
+todo
+deadline
+event
+deadline test /by
+deadline test /
+deadline test
+event test /at
+event test /
+event test
+delete
+delete 20
+delete 2
+done
+done 20
+done 2
+bye
