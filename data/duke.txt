@@ -1,3 +1,4 @@
 T | 1 | r
 T | 1 | y
 E | 1 | go back to school | 2020-01-28
+T | 0 | r

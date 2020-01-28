@@ -13,7 +13,7 @@ Successfully added:
 [D]? CS2103T Project deliverables (by: 2359 Thursday)
 You now have 3 number of tasks in the list
 ____________________________________________________________
-DukeException: This is not a valid action you may take sir.
+exceptions.DukeException: This is not a valid action you may take sir.
 Please try again!
 ____________________________________________________________
 Here are the current tasks in your list:
@@ -21,10 +21,10 @@ Here are the current tasks in your list:
 2. [E]? return book (at: 3pm Tuesday)
 3. [D]? CS2103T Project deliverables (by: 2359 Thursday)
 ____________________________________________________________
-DukeException: Your description may not be empty
+exceptions.DukeException: Your description may not be empty
 Please try again!
 ____________________________________________________________
-DukeException: Your description may not be empty
+exceptions.DukeException: Your description may not be empty
 Please try again!
 ____________________________________________________________
 Alright! You have successfully completed:
