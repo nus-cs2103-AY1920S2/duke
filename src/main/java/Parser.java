@@ -20,15 +20,15 @@ public class Parser {
       ArrayList<Task> list = TaskList.getTaskList();
       try {
         if (input.equals("bye")) {
-            UI.printBye();
-            break;
+          UI.printBye();
+          break;
         } else if (input.contains("find")) {
-            if (input.split(" ").length == 1) {
-                throw new DukeException("Sorry! Please input a task to find");
-            } else {
-                String keyword = input.substring(5);
-                TaskList.findTasks(keyword);
-            }
+          if (input.split(" ").length == 1) {
+            throw new DukeException("Sorry! Please input a task to find");
+          } else {
+            String keyword = input.substring(5);
+            TaskList.findTasks(keyword);
+          }
         } else if (input.equals("list")) {
           UI.printList();
         } else if (input.contains("done")) {

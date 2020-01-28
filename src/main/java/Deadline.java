@@ -25,7 +25,8 @@ public class Deadline extends Task {
    *
    * @param deadline Name of the task.
    * @param by Deadline for the task.
-   * @param doneStatus Defines the done status of the task. Reads either 1 (complete) or 0 (incomplete).
+   * @param doneStatus Defines the done status of the task. Reads either 1 (complete) or 0
+   *     (incomplete).
    */
   public Deadline(String deadline, String by, String strDoneStatus) {
     super(deadline);

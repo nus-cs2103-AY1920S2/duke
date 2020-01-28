@@ -101,17 +101,19 @@ public class TaskList {
             + " tasks left");
   }
 
-    /**
-     * This method is used to find tasks with the matching keyword and subsequently passed to UI to print it out.
-     * @param keyword Finding the task via the keyword provided.
-     */
+  /**
+   * This method is used to find tasks with the matching keyword and subsequently passed to UI to
+   * print it out.
+   *
+   * @param keyword Finding the task via the keyword provided.
+   */
   public static void findTasks(String keyword) {
-      ArrayList<Task> foundTasks = new ArrayList<>();
-      for (Task t : taskList) {
-          if (t.getTaskName().contains(keyword)) {
-              foundTasks.add(t);
-          }
+    ArrayList<Task> foundTasks = new ArrayList<>();
+    for (Task t : taskList) {
+      if (t.getTaskName().contains(keyword)) {
+        foundTasks.add(t);
       }
-      UI.printFoundTasks(foundTasks);
+    }
+    UI.printFoundTasks(foundTasks);
   }
 }

@@ -57,16 +57,16 @@ public class UI {
   }
 
   public static void printFoundTasks(ArrayList<Task> list) {
-      System.out.println(horizontalLine);
-      if (list.isEmpty()) {
-          System.out.println("There were no tasks found");
-      } else {
-          System.out.println("Here are the matching tasks in your list:");
-          for (Task s : list) {
-              int listNo = list.indexOf(s) + 1;
-              System.out.println(listNo + "." + s);
-          }
+    System.out.println(horizontalLine);
+    if (list.isEmpty()) {
+      System.out.println("There were no tasks found");
+    } else {
+      System.out.println("Here are the matching tasks in your list:");
+      for (Task s : list) {
+        int listNo = list.indexOf(s) + 1;
+        System.out.println(listNo + "." + s);
       }
-      System.out.println(horizontalLine);
+    }
+    System.out.println(horizontalLine);
   }
 }
