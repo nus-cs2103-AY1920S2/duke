@@ -1,8 +1,10 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String msg;
     protected String status;
     protected String type;
-    protected String time;
+    protected LocalDate time;
 
     public Task (String msg) {
         this.msg = msg;

@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -50,11 +51,11 @@ public class Duke {
                     tTask.setStatus(components[1]);
                     tasks.add(tTask);
                 } else if (components[0].equals("D")) {
-                    Task dTask = new Deadline(" " + components[2], components[3]);
+                    Task dTask = new Deadline(" " + components[2], LocalDate.parse(components[3]));
                     dTask.setStatus(components[1]);
                     tasks.add(dTask);
                 } else if (components[0].equals("E")) {
-                    Task eTask = new Event(" " + components[2], components[3]);
+                    Task eTask = new Event(" " + components[2], LocalDate.parse(components[3]));
                     eTask.setStatus(components[1]);
                     tasks.add(eTask);
                 } else {
@@ -155,7 +156,9 @@ public class Duke {
                             if (msgDate.length == 1) {
                                 throw new DEDate("event");
                             }
-                            t = new Event(msgDate[0], msgDate[1]);
+
+                            LocalDate date = LocalDate.parse(msgDate[1]);
+                            t = new Event(msgDate[0], date);
 
                         } else if (comArs[0].equals("deadline")){
                             String details = line.substring(8, line.length());
@@ -167,7 +170,8 @@ public class Duke {
                             if (msgDate.length == 1) {
                                 throw new DEDate("deadline");
                             }
-                            t = new Deadline(msgDate[0], msgDate[1]);
+                            LocalDate date = LocalDate.parse(msgDate[1]);
+                            t = new Deadline(msgDate[0], date);
 
                         } else { // invalid command
                             DukeException err = new DECommand();
