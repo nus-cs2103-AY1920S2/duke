@@ -1,3 +1,7 @@
+package Tasks;
+
+import Tasks.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveString() {
-        return super.getSaveString() + "|" + this.by.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+        return super.getSaveString() + "|" + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
 }

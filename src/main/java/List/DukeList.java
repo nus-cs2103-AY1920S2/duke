@@ -1,37 +1,40 @@
+package List;
+
 import DukeExceptions.EmptyListException;
 import DukeExceptions.InvalidEntryException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import Tasks.*;
+
 
 public class DukeList {
     private ArrayList<Task> listOfTasks;
-    private DukeStorage storage;
     int numOfTasks;
 
 
     public DukeList() {
         listOfTasks = new ArrayList<>();
         numOfTasks = 0;
-        storage = new DukeStorage();
     }
 
     /**
      * @param S Takes in a Task and adds it into the list of Tasks
      */
     public void addTask(Task S) {
-        System.out.println("    Got it I've added this task:\n      " + S);
         listOfTasks.add(S);
         numOfTasks++;
-        System.out.printf("    Now you have %d tasks in the list.\n", numOfTasks);
-        storage.save(this);
     }
 
+    public int getNumOfTasks() {
+        return this.numOfTasks;
+    }
     public void loadAdd(Task S) {
         this.listOfTasks.add(S);
         numOfTasks++;
     }
 
-    public void markTaskAsDone(int taskIndex) throws EmptyListException, InvalidEntryException{
+    public Task markTaskAsDone(int taskIndex) throws EmptyListException, InvalidEntryException{
         if(numOfTasks == 0) {
             throw new EmptyListException("List is empty! Which task can you complete?!");
         } else if(taskIndex > numOfTasks) {
@@ -40,22 +43,24 @@ public class DukeList {
         } else if(taskIndex < 1) {
             throw new InvalidEntryException("Can only complete positive indexes!");
         } else {
-            Task curr = listOfTasks.get(taskIndex - 1);
-            curr.done();
-            System.out.println("    Nice! I've marked this task as done:");
-            System.out.println("    " + curr);
+            Task completedTask = listOfTasks.get(taskIndex - 1);
+            completedTask.done();
+            return completedTask;
         }
     }
 
-    public void view_task() {
-        System.out.println("    Here are the tasks in your list:");
+    public ArrayList<String> getListForUI() {
+        ArrayList<String> toBePrint = new ArrayList<>();
+
         for (int x = 0; x < numOfTasks; x++) {
             String output = String.format("    %d.%s", x + 1, listOfTasks.get(x).toString());
-            System.out.println(output);
+            toBePrint.add(output);
         }
+
+        return toBePrint;
     }
 
-    public void delete_task(int index) throws InvalidEntryException, EmptyListException {
+    public Task deleteTask(int index) throws InvalidEntryException, EmptyListException {
         if(numOfTasks == 0) {
             throw new EmptyListException("List is empty! How to delete?!");
         } else if(index > numOfTasks) {
@@ -66,14 +71,7 @@ public class DukeList {
         } else{
             Task removedTask = listOfTasks.remove(index - 1);
             numOfTasks--;
-            System.out.println("    The task requested has been successfully removed:");
-            System.out.println("      " + removedTask);
-            storage.save(this);
-            if(numOfTasks == 1) {
-                System.out.println("    There is " + numOfTasks + " task left.");
-            } else {
-                System.out.println("    There are " + numOfTasks + " tasks left.");
-            }
+            return removedTask;
         }
     }
 

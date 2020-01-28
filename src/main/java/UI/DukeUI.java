@@ -1,5 +1,7 @@
 package UI;
 
+import DukeExceptions.DukeException;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -41,5 +43,10 @@ public class DukeUI {
 
     public String readCommandString() {
         return in.nextLine();
+    }
+
+    public void showErrorMessage(DukeException e) {
+        System.out.println("    " + e.getMessage());
+        printLine();
     }
 }
