@@ -155,11 +155,11 @@ public class Duke {
                 if (line.charAt(1) == 'E') {
                     tmp[1] = tmp[1].replaceAll("\\(at: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
-                    list.addItem(new Event(tmp[0], tmp[1]));
+                    list.addItem(new Event(tmp[0], tmp[1], done));
                 } else if (line.charAt(1) == 'D') {
                     tmp[1] = tmp[1].replaceAll("\\(by: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
-                    list.addItem(new Deadline(tmp[0], tmp[1]));
+                    list.addItem(new Deadline(tmp[0], tmp[1], done));
                 } else {
                     list.addItem(new Todo(splitted[1], done));
                 }
