@@ -12,4 +12,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.startAt + ")";
     }
+
+    @Override
+    public String toSaveFormat() {
+        char d = super.getIsDone() ? '1' : '0';
+        return "E | " + d + " | " + super.getDescription() + " | " + this.startAt;
+    }
 }

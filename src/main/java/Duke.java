@@ -1,6 +1,15 @@
+// java imports
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
 
+// packages imports
 import exceptions.EmptyDescriptionException;
 import exceptions.EmptyTimeException;
 import exceptions.InvalidActionException;
@@ -11,23 +20,26 @@ import tasks.Task;
 import tasks.Todo;
 
 public class Duke {
-    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String SAVE_FILE = "save_file.txt";
 
-//        System.out.println("Hello from\n" + logo);
+    public static void main(String[] args) {
 
         printFormattedOutput("Hello! I'm Duke\n    What can I do for you?");
 
-        // Chat logic
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        ArrayList<Task> list = new ArrayList<Task>();
-        int numberOfTasks = 0;
+        ArrayList<Task> list = new ArrayList<>();
 
+        // Convert from save file
+        try {
+            readSaveFile(list);
+        } catch (FileNotFoundException ex) {
+            printFormattedOutput("No save file found. Creating a new one...");
+        }
+
+        int numberOfTasks = list.size();
+
+        // Input logic
+        String input = sc.nextLine();
         while (!input.equals("bye")) {
             String action = input.split(" ")[0];
             try {
@@ -113,9 +125,12 @@ public class Duke {
                 default:
                     throw new InvalidActionException();
                 }
+                save(list);
             } catch (InvalidActionException ex) {
                 printFormattedOutput(ex.toString());
             } catch (InvalidTaskNumberException ex) {
+                printFormattedOutput(ex.toString());
+            } catch (IOException ex) {
                 printFormattedOutput(ex.toString());
             }
 
@@ -123,7 +138,54 @@ public class Duke {
         }
 
         printFormattedOutput("Bye. Hope to see you again soon!");
+    }
 
+    // Reading from and writing to save file
+
+    public static void save(ArrayList<Task> list) throws IOException {
+        FileWriter file = new FileWriter(SAVE_FILE, false);
+        BufferedWriter writer = new BufferedWriter(file);
+
+        String text = "";
+        for(Task t : list) {
+            text += t.toSaveFormat() + "\n";
+        }
+
+        writer.write(text);
+        writer.close();
+    }
+
+    public static void readSaveFile(List<Task> list) throws FileNotFoundException {
+        FileReader file = new FileReader(SAVE_FILE);
+        BufferedReader reader = new BufferedReader(file);
+
+        try {
+            String text = reader.readLine();
+
+            while(text != null) {
+                String[] fields = text.split(" \\| ");
+                Task newTask;
+
+                // Create corresponding specific task
+                if (fields[0].equals("T")) {
+                    newTask = new Todo(fields[2]);
+                } else if (fields[0].equals("E")) {
+                    newTask = new Event(fields[2], fields[3]);
+                } else {
+                    newTask = new Deadline(fields[2], fields[3]);
+                }
+
+                // Set isDone status
+                if (newTask != null && Integer.parseInt(fields[1]) == 1) {
+                    newTask.markAsDone();
+                }
+
+                list.add(newTask);
+                text = reader.readLine();
+            }
+        } catch (IOException ex) {
+            printFormattedOutput("Corrupted Task");
+        }
     }
 
     // Print formatters
@@ -138,7 +200,7 @@ public class Duke {
         System.out.print(bar);
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < size; i++) {
-            System.out.println("    " + (i + 1) + ". " + list.get(i));
+            System.out.println("    " + (i + 1) + ".  " + list.get(i));
         }
         System.out.println(bar);
     }

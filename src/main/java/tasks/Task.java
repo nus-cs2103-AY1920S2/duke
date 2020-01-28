@@ -6,7 +6,7 @@ package tasks;
  *
  * @author ChesterSim
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -25,4 +25,14 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public abstract String toSaveFormat();
 }

@@ -12,4 +12,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.finishBy + ")";
     }
+
+    @Override
+    public String toSaveFormat() {
+        char d = super.getIsDone() ? '1' : '0';
+        return "D | " + d + " | " + super.getDescription() + " | " + this.finishBy;
+    }
 }
