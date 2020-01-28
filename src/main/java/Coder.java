@@ -4,7 +4,7 @@ public class Coder {
     }
 
     public Task decode (String code) {
-        String[] keys = code.split(" | ");
+        String[] keys = code.split(" \\| ");
 
         String type = keys[0];
         Task t = null;

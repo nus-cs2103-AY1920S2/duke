@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -13,6 +11,7 @@ public class Duke {
 
     public Duke() {
         tasks = new ArrayList<>();
+        loadList();
     }
 
     public static void main(String[] args) {
@@ -133,6 +132,22 @@ public class Duke {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void loadList() {
+        try {
+            File f = new File(Paths.get("data", "duke.txt").toString());
+            FileReader fr = new FileReader(f);
+            Scanner sc = new Scanner(fr);
+            Coder c = new Coder();
+
+            while (sc.hasNextLine()) {
+                String code = sc.nextLine();
+                tasks.add(c.decode(code));
+            }
+        } catch (FileNotFoundException e) {
+            return;
         }
     }
 
