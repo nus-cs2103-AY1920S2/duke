@@ -1,12 +1,10 @@
 package Duke.List;
 
-import Duke.Tasks.Task;
+import Duke.Tasks.*;
 import Duke.DukeExceptions.EmptyListException;
 import Duke.DukeExceptions.InvalidEntryException;
 
 import java.util.ArrayList;
-import Tasks.*;
-
 
 public class DukeList {
     private ArrayList<Task> listOfTasks;
@@ -29,6 +27,7 @@ public class DukeList {
     public int getNumOfTasks() {
         return this.numOfTasks;
     }
+
     public void loadAdd(Task S) {
         this.listOfTasks.add(S);
         numOfTasks++;

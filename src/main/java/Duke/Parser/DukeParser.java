@@ -1,6 +1,5 @@
 package Duke.Parser;
 
-import Command.*;
 import Duke.Command.*;
 import Duke.DukeExceptions.DukeException;
 import Duke.DukeExceptions.InvalidFormatException;
@@ -9,10 +8,8 @@ import Duke.DukeExceptions.MissingTimingException;
 import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
 import Duke.Tasks.Todo;
-import DukeExceptions.*;
 import Duke.List.DukeList;
 import Duke.Storage.DukeStorage;
-import Tasks.*;
 import Duke.UI.DukeUI;
 
 import java.time.DateTimeException;
