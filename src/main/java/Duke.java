@@ -1,6 +1,9 @@
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -96,8 +99,12 @@ public class Duke {
                     dL += " ";
                 }
                 dL = dL.trim();
+                if(!dL.matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")) {
+                    throw new DukeException("OOPS! Please enter deadline in the format yyyy-MM-dd HHmm. Thank you.");
+                }
+                LocalDateTime d1 = LocalDateTime.parse(dL ,DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
-                Deadline deadline = new Deadline(taskingD, dL);
+                Deadline deadline = new Deadline(taskingD, d1);
                 store.add(deadline);
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + deadline);
