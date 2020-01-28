@@ -40,13 +40,13 @@ public class Event extends Task {
 
     /**
      * Constructs an event with user defined isDone.
-     * @param done Whether the event is done.
+     * @param isDone Whether the event is done.
      * @param task Description of event.
      * @param date Date of event, in String form.
      * @throws BadDateException If date format is wrong.
      */
-    public Event(boolean done, String task, String date) throws BadDateException {
-        super(done, task);
+    public Event(boolean isDone, String task, String date) throws BadDateException {
+        super(isDone, task);
         this.date = Parser.dateParser(date);
     }
 
@@ -55,9 +55,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (done) return  "[E][✓] " + task + " (at: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
-        else return "[E][✗] " + task + " (at: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
+        if (isDone) {
+            return  "[E][✓] " + task + " (at: " +
+                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+        } else {
+            return "[E][✗] " + task + " (at: " +
+                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+        }
     }
 }

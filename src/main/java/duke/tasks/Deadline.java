@@ -40,13 +40,13 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with user defined isDone.
-     * @param done Whether the task is done.
+     * @param isDone Whether the task is done.
      * @param task Description of task.
      * @param date Date to be done by, in String form.
      * @throws BadDateException If date format is wrong.
      */
-    public Deadline(boolean done, String task, String date) throws BadDateException {
-        super(done, task);
+    public Deadline(boolean isDone, String task, String date) throws BadDateException {
+        super(isDone, task);
         this.date = Parser.dateParser(date);
     }
 
@@ -55,9 +55,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (done) return  "[D][✓] " + task + " (by: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
-        else return "[D][✗] " + task + " (by: " +
-                date.format(Parser.DATE_FORMATTER) + ")";
+        if (isDone) {
+            return  "[D][✓] " + task + " (by: " +
+                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+        } else {
+            return "[D][✗] " + task + " (by: " +
+                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+        }
     }
 }

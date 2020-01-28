@@ -5,32 +5,32 @@ package duke;
  */
 public class Ui {
     private String logo;
-    private String linebreak;
+    private String lineBreak;
 
     /**
      * Prints out the introductory message for DukeProject.
      */
-    public void introduction() {
-        System.out.println(linebreak);
+    public void getIntroduction() {
+        System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
                 + "\nWhat can I do for you?");
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
     }
 
     /**
      * Prints out the exit message for DukeProject.
      */
     public void exit() {
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
     }
 
     /**
      * Prints out a lineBreak.
      */
     public void lineBreak() {
-        System.out.println(linebreak);
+        System.out.println(lineBreak);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        linebreak = "_____________________________" +
+        lineBreak = "_____________________________" +
                 "_______________________________";
     }
 }

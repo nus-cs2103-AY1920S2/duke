@@ -18,7 +18,7 @@ import java.util.Scanner;
  * Represents the storage file for DukeProject.
  */
 public class Storage {
-    private File f;
+    private File file;
 
     /**
      * Prints the file in storage into an ArrayList.
@@ -28,7 +28,7 @@ public class Storage {
      */
     public ArrayList<Task> printFileIntoList(Calender calender) {
         try {
-            Scanner sc = new Scanner(f);
+            Scanner sc = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNext()) {
                 String str = sc.nextLine();
@@ -63,25 +63,25 @@ public class Storage {
      */
     public void writeListIntoFile(ArrayList<Task> tasks) {
         try {
-            FileWriter fw = new FileWriter(f);
+            FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
                 switch (task.getType()) {
-                    case TODO:
-                        fw.write("T|" + task.getDone() + "|" + task.getTask()
-                                + System.lineSeparator());
-                        break;
-                    case EVENT:
-                        fw.write("E|" + task.getDone() + "|" + task.getTask() + "|" +
-                                task.getDate().format(Parser.DATE_WRITE_FORMATTER)
-                                + System.lineSeparator());
-                        break;
-                    case DEADLINE:
-                        fw.write("D|" + task.getDone() + "|" + task.getTask() + "|" +
-                                task.getDate().format(Parser.DATE_WRITE_FORMATTER)
-                                + System.lineSeparator());
-                        break;
-                    default:
-                        break;
+                case TODO:
+                    fw.write("T|" + task.getDone() + "|" + task.getTask()
+                            + System.lineSeparator());
+                    break;
+                case EVENT:
+                    fw.write("E|" + task.getDone() + "|" + task.getTask() + "|" +
+                            task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                            + System.lineSeparator());
+                    break;
+                case DEADLINE:
+                    fw.write("D|" + task.getDone() + "|" + task.getTask() + "|" +
+                            task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                            + System.lineSeparator());
+                    break;
+                default:
+                    break;
                 }
             }
             fw.close();
@@ -96,10 +96,10 @@ public class Storage {
      * @param filepath filepath to be assigned to the storage.
      */
     public Storage (String filepath) {
-        f = new File(filepath);
+        file = new File(filepath);
         try {
-            f.getParentFile().mkdir(); //makes data directory if does not exists
-            f.createNewFile();
+            file.getParentFile().mkdir(); //makes data directory if does not exists
+            file.createNewFile();
         } catch (IOException e) {
             System.err.println("Unable to create file");
         }

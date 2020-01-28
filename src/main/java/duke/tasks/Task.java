@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public abstract class Task {
     /** The description of the task. */
     protected String task;
-    protected boolean done;
+    protected boolean isDone;
 
     public abstract TType getType();
 
@@ -27,14 +27,14 @@ public abstract class Task {
      * @return boolean representing whether the task is done.
      */
     public boolean getDone() {
-        return done;
+        return isDone;
     }
 
     /**
      * @param bool boolean to set isDone to.
      */
     public void setDone(boolean bool) {
-        done = bool;
+        isDone = bool;
     }
 
     /**
@@ -43,17 +43,17 @@ public abstract class Task {
      */
     public Task (String task) {
         this.task = task;
-        done = false;
+        isDone = false;
     }
 
     /**
      * Overloaded constructor that additionally modifies boolean isDone.
-     * @param done boolean to set isDone to.
+     * @param isDone boolean to set isDone to.
      * @param task description of task.
      */
-    public Task(boolean done, String task) {
+    public Task(boolean isDone, String task) {
         this(task);
-        this.done = done;
+        this.isDone = isDone;
     }
 
 }

@@ -32,11 +32,11 @@ public class Todo extends Task {
 
     /**
      * Constructs a todo task with user defined isDone.
-     * @param done Whether the task is done.
+     * @param isDone Whether the task is done.
      * @param task Description of task.
      */
-    public Todo(boolean done, String task) {
-        super(done, task);
+    public Todo(boolean isDone, String task) {
+        super(isDone, task);
     }
 
     /**
@@ -44,7 +44,10 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        if (done) return  "[T][✓] " + task;
-        else return "[T][✗] " + task;
+        if (isDone) {
+            return  "[T][✓] " + task;
+        } else {
+            return "[T][✗] " + task;
+        }
     }
 }

@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     /** Date formatter when reading (to print from Duke) the date. */
-    public static DateTimeFormatter DATE_FORMATTER =
+    public static DateTimeFormatter DATE_READ_FORMATTER =
             DateTimeFormatter.ofPattern("dd MMM uuuu");
     /** Date formatter when writing (to write into Duke) the date.*/
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
