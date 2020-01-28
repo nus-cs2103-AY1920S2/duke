@@ -1,6 +1,7 @@
 package duke;
 
 public class UI {
+
     public static String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
     static void println() {
