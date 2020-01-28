@@ -73,6 +73,7 @@ public class Duke {
      *         <li><tt>todo [description]</tt> - adds the Todo task to the list.</li>
      *         <li><tt>deadline [description] /by [date]</tt> - adds the Deadline task to the list.</li>
      *         <li><tt>event [description] /at [date]</tt> - adds the Event task to the list.</li>
+     *         <li><tt>find [keyword]</tt> - finds tasks using a keyword.</li>
      *     </ul>
      * @param commands The instruction provided by the client.
      */

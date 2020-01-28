@@ -18,6 +18,7 @@ public class Parser {
             put("deadline", Keyword.DEADLINE);
             put("event", Keyword.EVENT);
             put("delete", Keyword.DELETE);
+            put("find", Keyword.FIND);
         }
     };
 
@@ -53,24 +54,27 @@ public class Parser {
 
         Command command;
         switch (keyword) {
-        case LIST:
-            command = checkValidListArgument(details);
-            break;
-        case DONE:
-            command = checkValidDoneArgument(details, taskList);
-            break;
-        case DELETE:
-            command = checkValidDeleteArgument(details, taskList);
-            break;
-        case TODO:
-            command = checkValidTodoArgument(details);
-            break;
-        case DEADLINE:
-            command = checkValidDeadlineArgument(details);
-            break;
-        default:
-            command = checkValidEventArgument(details);
-            break;
+            case LIST:
+                command = checkValidListArgument(details);
+                break;
+            case DONE:
+                command = checkValidDoneArgument(details, taskList);
+                break;
+            case DELETE:
+                command = checkValidDeleteArgument(details, taskList);
+                break;
+            case FIND:
+                command = checkValidFindArgument(details);
+                break;
+            case TODO:
+                command = checkValidTodoArgument(details);
+                break;
+            case DEADLINE:
+                command = checkValidDeadlineArgument(details);
+                break;
+            default:
+                command = checkValidEventArgument(details);
+                break;
         }
         return command;
     }
@@ -220,5 +224,16 @@ public class Parser {
         }
 
         return new AddCommand(new Event(caption, bySchedule));
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * find command.
+     * @param details The keyword that the client enters
+     * @return The FindCommand instance of the corresponding input.
+     */
+
+    private FindCommand checkValidFindArgument(String details) {
+        return new FindCommand(details);
     }
 }
