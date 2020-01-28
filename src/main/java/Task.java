@@ -1,6 +1,11 @@
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mm a");
 
     public Task(String description) {
         this.description = description;
