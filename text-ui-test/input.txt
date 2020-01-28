@@ -10,6 +10,8 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 todo
+deadline
+event
 blah
 delete 1
 delete 2
