@@ -1,5 +1,6 @@
 Hello! I'm Duke
 What can I do for you?
+All tasks have been cleared
 You have no tasks in your list.
 Got it. I've added this task:
 [T][✘] Homework
@@ -52,14 +53,14 @@ Here are the tasks in your list:
 ☹ OOPS!!! The description cannot be empty.
 ☹ OOPS!!! The description cannot be empty.
 Noted. I've removed this task:
-[E][✓] Exam (at: 2 December 2019, 6:00 PM)
+[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
 Now you have 3 tasks in the list.
 Noted. I've removed this task:
-[T][✓] Homework
+[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
 Now you have 2 tasks in the list.
 ☹ OOPS!!! That's an invalid argument. Please check your inputs and try again!
 No matching events/deadlines found.
-Here are the events/deadlines) in your list on 2 December 2019:
-[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
-[E][✘] Exam (at: 2 December 2019, 8:00 PM)
+Here are the events/deadlines in your list on 2 December 2019:
+1.[D][✓] Assignment 1 (by: 2 December 2019, 4:00 PM)
+2.[E][✘] Exam (at: 2 December 2019, 8:00 PM)
 Bye. Hope to see you again soon!

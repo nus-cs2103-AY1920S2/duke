@@ -1,3 +1,4 @@
+clear
 list
 todo Homework
 list
