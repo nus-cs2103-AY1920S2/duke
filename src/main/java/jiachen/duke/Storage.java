@@ -6,13 +6,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Storage handle persistance to and from the local file system
+ */
 public class Storage {
     private String pathname;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filePath the file path of the file to read and write to
+     */
     public Storage(String filePath) {
         this.pathname = filePath;
     }
 
+    /**
+     * Loads and returns task list if valid
+     *
+     * @return the task list
+     * @throws DukeException the duke exception
+     */
     public TaskList load() throws DukeException {
         Path filePath = Paths.get(this.pathname);
         if (Files.notExists(filePath)) {
@@ -22,7 +36,7 @@ public class Storage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            throw new InvalidTaskFileExecption();
+            throw new InvalidTaskFileException();
         }
 
         ArrayList<Task> tasks = new ArrayList<>();
@@ -71,6 +85,11 @@ public class Storage {
         return new TaskList(tasks);
     }
 
+    /**
+     * Save changes from the tasklist to the file
+     *
+     * @param tasks the tasks
+     */
     public void save(TaskList tasks) {
         StringBuilder buffer = new StringBuilder();
         for (Task task : tasks.getList()) {
