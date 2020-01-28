@@ -55,9 +55,11 @@ public class Duke {
             } catch (EmptyTaskException empty) {
                 System.out.println("\t" + empty.toString());
                 System.out.println("\t____________________________________________________________");
+                input = ui.getInput();
             } catch (InvalidRequestException invalid) {
                 System.out.println("\t" + invalid.toString());
                 System.out.println("\t____________________________________________________________");
+                input = ui.getInput();
             }
         }
         System.out.println("\t____________________________________________________________");

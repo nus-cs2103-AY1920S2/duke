@@ -25,12 +25,16 @@ public class Deadline extends Task {
         due = dueDate;
     }
 
+    public String getDescription() {
+        return super.description;
+    }
+
     @Override
     public String toString() {
         return "[D] " + super.toString() + "(by: " + this.parsedDue + ")";
     }
 
     public String addToFile() {
-        return "D | " + super.addToFile() + " | " + due;
+        return "D | " + super.addToFile() + " | " + this.parsedDue;
     }
 }

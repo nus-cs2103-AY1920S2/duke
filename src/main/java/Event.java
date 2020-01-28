@@ -30,6 +30,6 @@ public class Event extends Task{
 
     @Override
     public String addToFile() {
-        return "E | " + super.addToFile() + " | " + at;
+        return "E | " + super.addToFile() + " | " + parsedAt;
     }
 }
