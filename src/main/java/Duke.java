@@ -8,7 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -24,6 +25,9 @@ public class Duke {
             System.err.println(f);
         } catch (IOException i) {
             System.err.println(i);
+        } catch (DateTimeParseException d) {
+            System.err.println("Please enter the date as yyyy-mm-dd followed by the time.");
+            print("Try again later.");
         } finally {
             print("Program terminated.");
         }
@@ -147,7 +151,7 @@ public class Duke {
         }
     }
 
-    private static void addTask(String command) {
+    private static void addTask(String command) throws DateTimeParseException {
         Task task = null;
         String taskType = command.split(" ")[0];
         command = command.substring(command.indexOf(" "));
@@ -156,10 +160,14 @@ public class Duke {
                 task = new Todo(command);
                 break;
             case "event":
-                task = new Event(command.split("/")[0], command.split("/")[1]);
+                task = new Event(command.split("/at ")[0],
+                        LocalDate.parse(command.split("/at ")[1].split(" ")[0]),
+                        command.split("/at ")[1].split(" ")[1]);
                 break;
             case "deadline":
-                task = new Deadline(command.split("/")[0], command.split("/")[1]);
+                task = new Deadline(command.split("/by ")[0],
+                        LocalDate.parse(command.split("/by ")[1].split(" ")[0]),
+                        command.split("/by ")[1].split(" ")[1]);
                 break;
         }
         tasks.add(task);
@@ -169,7 +177,7 @@ public class Duke {
         print(line);
     }
 
-    private static void run() throws DukeException {
+    private static void run() throws DukeException, DateTimeParseException {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         while (!command.equals("bye")) {
@@ -193,6 +201,7 @@ public class Duke {
             }
             command = sc.nextLine();
         }
+        sc.close();
         print("Bye. Hope to see you again soon!");
         print(line);
     }
