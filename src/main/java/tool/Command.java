@@ -33,7 +33,6 @@ public class Command {
                 for (int i = 0; i < taskList.size(); i++) {
                     ui.print(String.valueOf(i + 1) + "." + taskList.get(i));
                 }
-                ui.printLine();
                 return false;
             case "done":
                 try {
@@ -47,10 +46,8 @@ public class Command {
                                 "you have.");
                     } else {
                         taskList.get(num - 1).markAsDone();
-                        ui.printLine();
                         ui.print("Nice! I've marked this task as done:");
                         ui.print(taskList.get(num - 1).toString());
-                        ui.printLine();
                     }
                 } catch (NumberFormatException ex) {
                     //handle exception here
@@ -69,11 +66,9 @@ public class Command {
                                 "you have.");
                     } else {
                         Task removedTask = taskList.remove(num - 1);
-                        ui.printLine();
                         ui.print("Noted. I've removed this task: ");
                         ui.print(removedTask.toString());
                         ui.print("Now you have " + String.valueOf(taskList.size()) + " tasks in the list.");
-                        ui.printLine();
                     }
                 } catch (NumberFormatException ex) {
                     //handle exception here
@@ -83,11 +78,9 @@ public class Command {
             case "todo":
                 Task newToDo = new ToDos(arguments);
                 taskList.add(newToDo);
-                ui.printLine();
                 ui.print("Got it. I've added this task:");
                 ui.print(newToDo.toString());
                 ui.print("Now you have " + String.valueOf(taskList.size()) + " tasks in the list.");
-                ui.printLine();
                 return false;
             case "deadline":
                 if (!arguments.contains("/by ")) {
@@ -109,11 +102,9 @@ public class Command {
                     String newDateTime = datetimeParsed.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mma"));
                     Task newDeadline = new Deadlines(description, newDateTime);
                     taskList.add(newDeadline);
-                    ui.printLine();
                     ui.print("Got it. I've added this task:");
                     ui.print(newDeadline.toString());
                     ui.print("Now you have " + String.valueOf(taskList.size()) + " tasks in the list.");
-                    ui.printLine();
                 }
                 return false;
             case "event":
@@ -145,11 +136,9 @@ public class Command {
 
                     Task newTask = new Events(description, newDateTime);
                     taskList.add(newTask);
-                    ui.printLine();
                     ui.print("Got it. I've added this task:");
                     ui.print(newTask.toString());
                     ui.print("Now you have " + String.valueOf(taskList.size()) + " tasks in the list.");
-                    ui.printLine();
                 }
                 return false;
             default:

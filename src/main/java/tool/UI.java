@@ -3,16 +3,25 @@ package tool;
 import java.util.Scanner;
 
 public class UI {
+    public static String UIString = "";
     private static String indent = "    ";
     private static String line = "    ____________________________________________________________";
     private Storage storage;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner userScanner = new Scanner(System.in);
     public UI(Storage storage){
         this.storage = storage;
     }
 
-    public String readCommand(){
-        return sc.nextLine();
+    public String readCommand(Scanner stringScanner, boolean isTest){
+        if (stringScanner.hasNextLine()){
+            return stringScanner.nextLine();
+        } else {
+            if (!isTest){
+                return userScanner.nextLine();
+            } else {
+                return "bye";
+            }
+        }
     }
 
 
@@ -28,16 +37,19 @@ public class UI {
 
     public void printLine(){
         System.out.println(line);
+        UIString += line + "\n";
     }
 
     public void print(String message){
         System.out.println(indent + message);
+        UIString += indent + message+ "\n";
     }
 
     public void printError(String message){
         System.out.println(line);
         System.out.println(indent + message);
         System.out.println(line);
+        UIString += line + "\n" + indent + message + "\n" + line;
     }
 
 }

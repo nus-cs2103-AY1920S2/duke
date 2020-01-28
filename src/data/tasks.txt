@@ -7,3 +7,4 @@ T|✕|todo
 D|✕|finishpower|22 Oct. 2019 19:00pm
 D|✕|finish cool yay|02 Oct. 2019 19:00pm
 E|✕|watch fireworks with lin|01 Dec. 2019 19:00pm to 10 Dec. 2019 19:00pm
+T|✕|sleep
