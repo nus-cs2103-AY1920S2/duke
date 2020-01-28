@@ -6,6 +6,42 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
+    String filePath = "/Users/Simon/Documents/duke/src/main/java/saved.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.displayLoadError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.displayIntro();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readInput();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parseCommand(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.displayError(e.getMessage());
+            } catch (IOException e) {
+                ui.displaySaveError();
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
     static ArrayList<Task> list = new ArrayList<>();
 
     private static void printFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException {
@@ -46,7 +82,12 @@ public class Duke {
         }
     }
 
-    private static void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
+    public static void main(String[] args) {
+        new Duke("/Users/Simon/Documents/duke/src/main/java/duke.txt").run();
+    }
+
+
+    /*private static void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : list) {
             fw.write(t.toStringTxt() + System.lineSeparator());
@@ -62,8 +103,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String intro = "Hello! I'm Duke\n" + "What can I do for you?";
-        System.out.println(intro);
         String filePath = "/Users/Simon/Documents/duke/src/main/java/duke.txt";
         try {
             printFileContents(filePath, list);
@@ -142,5 +181,9 @@ public class Duke {
                 System.out.println("File not found");
             }
         }
-    }
+    } */
+
 }
+
+
+
