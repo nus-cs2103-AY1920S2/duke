@@ -1,7 +1,0 @@
-------------------------
-Hello I'm Duke!
-Add your command here!
-
-------------------------
-Bye. Hope to see you again soon!
-------------------------
