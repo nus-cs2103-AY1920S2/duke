@@ -3,6 +3,12 @@ import duke.pack.Deadline;
 import duke.pack.Event;
 import duke.pack.Todo;
 import duke.pack.DukeException;
+import duke.pack.Ui;
+import duke.pack.Storage;
+import duke.pack.Parser;
+import duke.pack.TaskList;
+import duke.pack.Command;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +25,32 @@ public class Duke {
     // ArrayList of tasks
     private static ArrayList<Task> arrList;
     private static File file;
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        parser = new Parser();
+
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError(e);
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.greet();
+        String command = ui.receiveInput();
+        Command comm = parser.parseCommand(command);
+
+    }
+
 
     public static void main(String[] args) throws DukeException {
         arrList = new ArrayList<>();
