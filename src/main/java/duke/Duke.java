@@ -16,13 +16,29 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;
 
+/**
+ * Represents the main working class of DukeProject.
+ */
 public class Duke {
+    /** Primary data structure to store the tasks. */
     private TaskList tasklist;
+    /** Storage to read/write task list from/into files. */
     private Storage storage;
+    /** Data structure to store tasks aligned by dates.*/
     private Calender calender;
+    /** Object that handles user interface and communicating with user. */
     private Ui ui;
+    /** Primary I/O object used. */
     private Scanner sc;
 
+    /**
+     * Execute commands to manipulate task list and calender. The method will create/delete task objects as required
+     * and store/remove them from all data structures as needed.
+     * @param command Command to be executed.
+     * @throws DukeDescriptionException If command requires a description and it not given.
+     * @throws BadDescriptionException If description provided does not match the format required by command.
+     * @throws BadDateException If date provided does not match format required by command.
+     */
     public void readCommand(Command command) throws DukeDescriptionException,
             BadDescriptionException, BadDateException {
         switch (command) {
@@ -129,6 +145,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates DukeProject. This method will run the main interface of the DukeProject.
+     * It will read commands given by the system using a scanner and store results in a task list before writing it
+     * into storage.
+     */
     public void run() {
         ui.introduction();
         while (sc.hasNext()) {
@@ -157,6 +178,10 @@ public class Duke {
         ui.exit();
     }
 
+    /**
+     * Constructs a Duke object with a filepath to store the task list.
+     * @param filepath Filepath of the Duke storage.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         calender = new Calender();
