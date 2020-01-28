@@ -32,6 +32,13 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Formats this object as a String to be written into the data file
+     * @return String in the format isDone:;:description
+     */
+    public String toDataString() {
+        return (isDone ? "1" : "0") + ":;:" + this.description;
+    }
 
     /**
      * Formats this object as a String to be printed out

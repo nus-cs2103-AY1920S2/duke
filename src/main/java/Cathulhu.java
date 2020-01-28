@@ -1,12 +1,82 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Cathulhu {
 
+    private static final File TASKS_FILE = new File("./data/tasksFile.txt");
+    private ArrayList<Task> tasks;
+
+    public Cathulhu() {
+        try{
+            this.tasks = loadTasksFile();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    private ArrayList<Task> loadTasksFile() throws IOException {
+
+        boolean isCreated = TASKS_FILE.createNewFile();
+
+        if (isCreated) {
+            return new ArrayList<>();
+        }
+
+        Scanner sc = new Scanner(TASKS_FILE);
+        ArrayList<Task> taskData = new ArrayList<>();
+
+        while (sc.hasNextLine()) {
+
+            String[] taskString = sc.nextLine().split(":;:");
+//            System.out.println(Arrays.asList(taskString));
+            switch(taskString[0]) {
+                case "T":
+                    Task tdTask = new ToDo(taskString[2]);
+                    if (taskString[1].equals("1")) {
+                        tdTask.markAsDone();
+                    }
+                    taskData.add(tdTask);
+                    break;
+
+                case "D":
+                    Task dlTask = new Deadline(taskString[2], taskString[3]);
+                    if (taskString[1].equals("1")) {
+                        dlTask.markAsDone();
+                    }
+                    taskData.add(dlTask);
+                    break;
+
+                case "E":
+                    Task evTask = new Event(taskString[2], taskString[3]);
+                    if (taskString[1].equals("1")) {
+                        evTask.markAsDone();
+                    }
+                    taskData.add(evTask);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        return taskData;
+    }
+
+    private void writeTasksFile() throws IOException {
+        FileWriter fw = new FileWriter(TASKS_FILE);
+        for (Task task : this.tasks) {
+            fw.write(task.toDataString() + "\n");
+        }
+        fw.close();
+    }
+
     private void interact() {
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+
         boolean byebye = false;
 
         while (!byebye) {
@@ -18,9 +88,13 @@ public class Cathulhu {
             System.out.println("\t-------------C-A-T-H-U-L-H-U-------------");
 
             try {
-                byebye = parse(tasks, cmdString);
+                byebye = parse(this.tasks, cmdString);
+                writeTasksFile();
             } catch (CathulhuException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.err.println(e);
+                break;
             }
 
             System.out.println("\t----------------M-E-O-W-S----------------\n\n");

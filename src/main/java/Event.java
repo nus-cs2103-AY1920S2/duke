@@ -14,6 +14,16 @@ public class Event extends Task {
 
 
     /**
+     * Formats this object as a String to be written into the data file
+     * @return String in the format E:;:isDone:;:description:;:at
+     */
+    @Override
+    public String toDataString() {
+        return "E:;:" + super.toDataString() + ":;:" + this.at;
+    }
+
+
+    /**
      * Formats this object as a String to be printed out
      * @return String
      */

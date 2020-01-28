@@ -13,6 +13,17 @@ public class Deadline extends Task {
     }
 
 
+
+    /**
+     * Formats this object as a String to be written into the data file
+     * @return String in the format D:;:isDone:;:description:;:by
+     */
+    @Override
+    public String toDataString() {
+        return "D:;:" + super.toDataString() + ":;:" + this.by;
+    }
+
+
     /**
      * Formats this object as a String to be printed out
      * @return String
