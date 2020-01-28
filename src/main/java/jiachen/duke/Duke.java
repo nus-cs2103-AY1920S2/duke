@@ -30,7 +30,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 
     public void run() {
