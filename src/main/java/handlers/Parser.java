@@ -98,6 +98,17 @@ public class Parser {
             } catch (EmptyException emErr) {
                 System.out.println(emErr);
             }
+        } else if (str[0].equals("find")) {
+            try {
+                if (command.length() <= 4) {
+                    throw new EmptyException();
+                } else {
+                    FindCommand findCommand = new FindCommand(command, str[1]);
+                    return findCommand;
+                }
+            } catch (EmptyException emErr){
+                System.out.println(emErr);
+            }
         } else {
             try {
                 throw new UnknownException();

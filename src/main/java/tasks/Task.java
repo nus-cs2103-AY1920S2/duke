@@ -28,6 +28,14 @@ public class Task {
         return "";
     }
 
+    public boolean contains(String keyword) {
+        if (this.description.contains(keyword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void setStatus(String status) {
         this.isDone = (status.equals("0") ? false : true);
     }

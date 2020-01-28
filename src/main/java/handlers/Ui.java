@@ -69,6 +69,14 @@ public class Ui {
         System.out.println(SPACE + "  " + taskDone.toString());
     }
 
+    public void showFindTasks(TaskList matching) {
+        System.out.println(space + "Here are the matching tasks in your list:");
+        for (int j = 1; j <= matching.numOfTasks(); j++) {
+            Task t = matching.get(j - 1);
+            System.out.println(space + j + "." + t);
+        }
+    }
+
     public void showError(String error) {
         System.out.println(error);
     }
