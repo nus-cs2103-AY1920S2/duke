@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -73,13 +77,12 @@ public class Duke {
             FileReader fr = new FileReader(file);
             Scanner s = new Scanner(fr);
             int i = 1;
-            while (s.hasNextLine()){
+            while (s.hasNextLine()) {
                 if (i == size) {
                     i++;
                     String line = s.nextLine();
                     continue;
-                }
-                else {
+                } else {
                     String line = s.nextLine();
                     tasks.add(line);
                     i++;
@@ -91,7 +94,27 @@ public class Duke {
                 writer.newLine();
             }
             writer.close();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
+    }
+
+    static LocalDateTime getDate(String next) {
+        StringBuilder forTime = new StringBuilder(next.substring(next.indexOf(" ", next.indexOf(" ") +1) + 1));
+        forTime.insert(2, ':');
+        String time = forTime.toString();
+        //System.out.println(time);
+        String[] reverse = next.substring(next.indexOf(" ") + 1, next.indexOf(" ", next.indexOf(" ") +1))
+            .split("/");
+        String[] reversed = reverse;
+        String temp = String.format("%2s",reverse[0]).replace(" ", "0");
+        reversed[0] = String.format("%4s",reverse[2]).replace(" ", "0");
+        reversed[2] = temp;
+        reversed[1] = String.format("%2s", reverse[1]).replace(" ", "0");
+        String date = String.join("-", reversed);
+        LocalDateTime taskDate = LocalDate.parse(date)
+                .atTime(LocalTime.parse(time))
+                ;
+        return taskDate;
     }
 
     static void processInput() {
@@ -141,8 +164,9 @@ public class Duke {
                         }
                     } else if (next.trim().split(" ")[0].equals("deadline")) {
                         try {
-                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/")).trim();
-                            String taskDate = next.substring(next.indexOf("/") + 1).trim();
+                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
+                            LocalDateTime time = getDate(next.substring(next.indexOf("/") + 1));
+                            String taskDate = time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a"));
                             newTask = new Deadline(taskName, taskDate);
                             tasks.add(newTask);
                             updateDrive(newTask);
@@ -152,8 +176,9 @@ public class Duke {
                         }
                     } else if (next.trim().split(" ")[0].equals("event")) {
                         try {
-                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/")).trim();
-                            String taskDate = next.substring(next.indexOf("/") + 1).trim();
+                            taskName = next.substring(next.indexOf(" ") + 1, next.indexOf("/"));
+                            LocalDateTime time = getDate(next.substring(next.indexOf("/") + 1));
+                            String taskDate = time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a"));
                             newTask = new Event(taskName, taskDate);
                             tasks.add(newTask);
                             updateDrive(newTask);
