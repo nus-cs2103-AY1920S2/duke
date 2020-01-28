@@ -1,11 +1,18 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task {
 
-    private static String datePattern = "MMM d yyyy";
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+    public static String datePattern = "MMM d yyyy";
+    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Deadline.datePattern);
     protected Date date;
+
+    public static Date parseDate(String inputDate) throws ParseException {
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat(pattern);
+        return inputDateFormat.parse(inputDate);
+    }
 
     public Deadline(String taskTitle, Date date) {
         super(taskTitle);

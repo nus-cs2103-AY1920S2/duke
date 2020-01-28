@@ -14,14 +14,16 @@ Hello from
       [T][?] read book
     Now you have 1 tasks in the list
     ____________________________________________________________
+    Please enter deadline in the following format: YYYY-MM-DD
     ____________________________________________________________
     This task has been added successfully:
-      [D][?] return book (by: June 6th)
+      [D][?] return book (by: Jun 6 2020)
     Now you have 2 tasks in the list
     ____________________________________________________________
+    Please enter deadline in the following format: YYYY-MM-DD HHMM
     ____________________________________________________________
     This task has been added successfully:
-      [E][?] project meeting (at: Aug 6th 2-4pm)
+      [E][?] project meeting (at: Aug 6 2020 14:00)
     Now you have 3 tasks in the list
     ____________________________________________________________
     ____________________________________________________________
@@ -36,9 +38,9 @@ Hello from
     ____________________________________________________________
     ____________________________________________________________
     This is your list of tasks:
-    1.[T][?] read book
-    2.[D][?] return book (by: June 6th)
-    3.[E][?] project meeting (at: Aug 6th 2-4pm)
+    1.[T][?] readbook
+    2.[D][?] return book (by: Jun 6 2020)
+    3.[E][?] project meeting (at: Aug 6 2020 14:00)
     4.[T][?] join sports club
     5.[T][?] borrow book
     ____________________________________________________________
@@ -62,7 +64,7 @@ Hello from
     ____________________________________________________________
     ____________________________________________________________
     This task is marked as completed:
-      [E][?] project meeting (at: Aug 6th 2-4pm)
+      [E][?] project meeting (at: Aug 6 2020 14:00)
     ____________________________________________________________
     ____________________________________________________________
     This task number does not exist.
