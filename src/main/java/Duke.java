@@ -104,7 +104,7 @@ public class Duke {
 
 
         //System.out.println(horizontalLine);
-        System.out.println("Data has been saved! Goodbye Mr.Stark!");
+        System.out.println("Data has been saved! Goodbye Mr.Stark!!");
         System.out.println(horizontalLine);
     }
 
