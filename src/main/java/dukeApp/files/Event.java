@@ -12,18 +12,38 @@ public class Event extends Task {
         date = date.substring(date.indexOf(" ") + 1, date.length());
     }
 
+    /**
+     * Returns the type of task
+     *
+     * @return the letter indicating the task type
+     */
     public String getType() {
         return "E";
     }
 
+    /**
+     * Returns the task date description
+     *
+     * @return task date description
+     */
     public String getTask() {
         return description + "(" +word+ ": " +date+ ")";
     }
 
+    /**
+     * Returns the date of task.
+     *
+     * @return date of task
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Returns at/by
+     *
+     * @return the word for the task date
+     */
     public String getWord() {
         return word;
     }
@@ -40,6 +60,10 @@ public class Event extends Task {
         return "";
     }
 
+    /**
+     * Returns only the task description without the date
+     * @return task description
+     */
     public String getDescription() {
         return description;
     }

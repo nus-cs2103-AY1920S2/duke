@@ -14,6 +14,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load date from file and store in an ArrayList
+     * @return task list
+     * @throws FileNotFoundException if the file does not exist
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -45,6 +50,11 @@ public class Storage {
         return arrList;
     }
 
+    /**
+     * Write to file the new task list
+     * @param newList new task list created
+     * @throws IOException if there is an error with the inputs from newList or output when writing to file
+     */
     public void appendToFile(ArrayList<Task> newList) throws IOException {
         String s = "";
         FileWriter fw = new FileWriter(filePath);
