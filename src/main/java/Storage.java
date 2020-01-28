@@ -32,13 +32,13 @@ public class Storage {
                     }
 
                     if (taskContent[0].equals("T")) {
-                        tasklist.newTodo(taskContent[0].charAt(0), isDone, taskContent[2]);
+                        tasklist.newTodo(isDone, taskContent[2]);
                     } else {
                         if (taskContent[0].equals("D")) {
-                            tasklist.newDeadline(taskContent[0].charAt(0), isDone, taskContent[2], taskContent[3]);
+                            tasklist.newDeadline(isDone, taskContent[2], taskContent[3]);
 
                         } else if (taskContent[0].equals("E")) {
-                            tasklist.newEvent(taskContent[0].charAt(0), isDone, taskContent[2], taskContent[3]);
+                            tasklist.newEvent(isDone, taskContent[2], taskContent[3]);
                         }
                     }
                 } catch (IOException e) {
@@ -60,7 +60,7 @@ public class Storage {
             FileWriter fw = new FileWriter(savedData);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (Task thisTask : tasklist.list) {
+            for (Task thisTask : tasklist.getList()) {
                 String taskStr = thisTask.getTaskType() + " ~ "
                         + (thisTask.getStatus() ? "1" : "0") + " ~ "
                         + thisTask.getTaskName() + " ~ "

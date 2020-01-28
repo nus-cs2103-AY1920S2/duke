@@ -17,7 +17,7 @@ public class Duke {
             log.add(thisResult);
 
             if (thisResult.equals("exit")) {
-                if (log.isEmpty() || tasklist.list.isEmpty()) {
+                if (log.isEmpty() || tasklist.getList().isEmpty()) {
                     hasNotExited = false;
                 } else {
                     hasNotExited = Ui.askBeforeQuitting(scanner, tasklist);

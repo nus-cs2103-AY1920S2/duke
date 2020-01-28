@@ -98,7 +98,7 @@ public class Task {
     }
 
     /**
-     * An overriden toString() function to display a custom format when this Task is called as a String.
+     * An overridden toString() function to display a custom format when this Task is called as a String.
      * @return a String representing this Task.
      */
     @Override

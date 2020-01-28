@@ -70,7 +70,7 @@ public class Parser {
 
     public static String todoCommand(String[] command, TaskList tasklist) {
         if (command.length > 1) {
-            return tasklist.newTodo('T', false, command[1]);
+            return tasklist.newTodo(false, command[1]);
         } else {
             return taskNeedsName;
         }
@@ -79,7 +79,7 @@ public class Parser {
     public static String eventCommand(String[] command, TaskList tasklist) {
         if (command.length > 2) {
             try {
-                return tasklist.newEvent('E', false, command[1], command[2]);
+                return tasklist.newEvent(false, command[1], command[2]);
             } catch (DateTimeParseException e) {
                 return wrongDateTimeFormat;
             }
@@ -94,7 +94,7 @@ public class Parser {
     public static String deadlineCommand(String[] command, TaskList tasklist) {
         if (command.length > 2) {
             try {
-                return tasklist.newDeadline('D', false, command[1], command[2]);
+                return tasklist.newDeadline(false, command[1], command[2]);
             } catch (DateTimeParseException e) {
                 return wrongDateTimeFormat;
             }
@@ -133,12 +133,12 @@ public class Parser {
 
     public static String findCommand(String[] command, TaskList tasklist) {
         TaskList query = new TaskList();
-        for (Task thisTask : tasklist.list) {
+        for (Task thisTask : tasklist.getList()) {
             if (thisTask.getTaskName().toLowerCase().contains(command[1].toLowerCase())) {
                 query.add(thisTask);
             }
         }
-        if (query.list.isEmpty()) {
+        if (query.getList().isEmpty()) {
             return noTaskFound;
         } else {
             return displayMatchingTaskList + "\n" + query;

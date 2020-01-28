@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     /**
      * The constructor for a new TaskList object.
@@ -27,39 +27,36 @@ public class TaskList {
 
     /**
      * Adds a new Task of type Todo to this TaskList.
-     * @param taskType the type of this Task.
      * @param isDone if this Task is done.
      * @param taskName the name of this Task.
      * @return a function call to the add() function.
      */
-    public String newTodo(char taskType, boolean isDone, String taskName) {
-        Task task = new Todo(taskType, isDone, taskName);
+    public String newTodo(boolean isDone, String taskName) {
+        Task task = new Todo(isDone, taskName);
         return add(task);
     }
 
     /**
      * Adds a new Task of type Event to this TaskList.
-     * @param taskType the type of this Task.
      * @param isDone if this Task is done.
      * @param taskName the name of this Task.
      * @param taskTime the end time of this Task.
      * @return a function call to the add() function.
      */
-    public String newEvent(char taskType, boolean isDone, String taskName, String taskTime) {
-        Task task = new Event(taskType, isDone, taskName, taskTime);
+    public String newEvent(boolean isDone, String taskName, String taskTime) {
+        Task task = new Event(isDone, taskName, taskTime);
         return add(task);
     }
 
     /**
      * Adds a new Task of type Deadline to this TaskList.
-     * @param taskType the type of this Task.
      * @param isDone if this Task is done.
      * @param taskName the name of this Task.
      * @param taskTime the end time of this Task.
      * @return a function call to the add() function.
      */
-    public String newDeadline(char taskType, boolean isDone, String taskName, String taskTime) {
-        Task task = new Deadline(taskType, isDone, taskName, taskTime);
+    public String newDeadline(boolean isDone, String taskName, String taskTime) {
+        Task task = new Deadline(isDone, taskName, taskTime);
         return add(task);
     }
 
