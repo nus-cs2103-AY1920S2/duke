@@ -106,6 +106,12 @@ public class TaskList {
         tasks.remove(taskIndex);
     }
 
+    /**
+     * Returns a TaskList object, which contains the tasks that matches with the given keyword.
+     *
+     * @param keyword Keyword to match.
+     * @return Immutable TaskList object.
+     */
     public TaskList find(String keyword) {
         TaskList viewToReturn = new TaskList();
         for (Task task : tasks) {

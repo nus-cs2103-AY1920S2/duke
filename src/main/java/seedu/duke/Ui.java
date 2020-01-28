@@ -72,6 +72,11 @@ public class Ui {
         print(outputStreamBuffer);
     }
 
+    /**
+     * Given a TaskList, print the list of tasks with matched message.
+     *
+     * @param tasks TaskList object to be printed.
+     */
     public void printMatchedTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
             print("No tasks found.");
