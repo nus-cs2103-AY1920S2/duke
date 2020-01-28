@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
 import duke.exception.*;
 import duke.main.*;
 
@@ -9,8 +8,21 @@ public class DeleteCommand extends Command {
         this.inputArr = inputArr;
     }
 
+    /**
+     * This method deletes the task specified in inputArr and saves changes into
+     * storage. Ui sends a reply to the user, stating delete is successful.
+     * 
+     * @param tasks   Existing Tasklist
+     * @param ui      Ui for user interaction
+     * @param storage Storage to save tasks in local storage
+     * @return nothing
+     * @throws NoNumberDeleteException If task number to be deleted is not
+     *                                 specified.
+     * @throws UnableToSaveException             If unable to save to storage.
+     * @throws NoSuchDeleteException   If task to be deleted does not exist.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoNumberDeleteException, NoSuchDeleteException, IOException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoNumberDeleteException, NoSuchDeleteException, UnableToSaveException{
         if (inputArr.length < 2) {
             throw new NoNumberDeleteException();
         } else {

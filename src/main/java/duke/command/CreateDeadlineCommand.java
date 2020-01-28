@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
 import duke.exception.*;
 import duke.main.*;
 import duke.task.Deadline;
@@ -11,8 +10,21 @@ public class CreateDeadlineCommand extends Command {
         this.inputArr = inputArr;
     }
 
+    /**
+     * This method creates a Deadline and adds it to the tasklist specified in the
+     * params. Ui sends a reply to the user, stating adding of new Deadline is
+     * successful.
+     * 
+     * @param tasks   Existing Tasklist
+     * @param ui      Ui for user interaction
+     * @param storage Storage to save tasks in local storage
+     * @return nothing
+     * @throws NoDescriptionException If no name for deadline is specified.
+     * @throws UnableToSaveException  If unable to save to storage.
+     * @throws NoDateException        If no date is specified.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, IOException, NoDateException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException, NoDateException{
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         int pointer = findIndex("/by", inputArr);

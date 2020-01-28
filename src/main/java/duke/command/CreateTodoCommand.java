@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
 import duke.exception.*;
 import duke.task.Todo;
 import duke.task.Task;
@@ -11,8 +10,20 @@ public class CreateTodoCommand extends Command {
         this.inputArr = inputArr;
     }
 
+    /**
+     * This method creates a Todo and adds it to the tasklist specified in the
+     * params. Ui sends a reply to the user, stating adding of new Todo is
+     * successful.
+     * 
+     * @param tasks   Existing Tasklist
+     * @param ui      Ui for user interaction
+     * @param storage Storage to save tasks in local storage
+     * @return nothing
+     * @throws NoDescriptionException If no name for deadline is specified.
+     * @throws UnableToSaveException  If unable to save to storage.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, IOException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException{
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         String nameOfEvent = combineString(inputArr, 1, arrLength);

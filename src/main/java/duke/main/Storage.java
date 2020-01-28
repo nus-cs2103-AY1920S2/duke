@@ -20,6 +20,14 @@ public class Storage {
         this.path = Paths.get(location, "..", "data", "duke.txt");
     }
 
+    /**
+     * Returns a list<Task>, generated from the information stored in local storage.
+     * Done at start of the program in order to retrieve the state from the previous
+     * session.
+     * 
+     * @return List of tasks found in local storage
+     * @throws UnableToLoadException If cannot access specified directory.
+     */
     public List<Task> loadFromSave() throws UnableToLoadException{
         List<Task> tasks = new ArrayList<>();
         try {
@@ -63,12 +71,24 @@ public class Storage {
         return tasks;
     }
 
-    public void saveToSave(TaskList tasks) throws IOException {
+    /**
+     * This method saves current tasks in taskslist into local storage.
+     * The saved tasks can be retrieved when program starts again.
+     * 
+     * @param tasks List of tasks to be saved
+     * @return nothing
+     * @throws UnableToLoadException If cannot save into specified directory.
+     */
+    public void saveToSave(TaskList tasks) throws UnableToSaveException {
         String content = "";
         for (int i = 0; i < tasks.size(); i++) {
             content += (tasks.getTask(i).storeFormat() + "\n");
         }
-        Files.writeString(path, content);
+        try{
+            Files.writeString(path, content);
+        } catch (IOException e){
+            throw new UnableToSaveException();
+        }
     }
     
 }

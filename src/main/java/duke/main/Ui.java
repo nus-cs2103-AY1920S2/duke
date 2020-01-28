@@ -23,10 +23,6 @@ public class Ui{
             + "  TIME FORMAT is HHmm!\n" + Constant.ERROR_LINE);
     }
 
-    public void showIOError(){
-        System.err.println(Constant.ERROR_LINE+ "\n    ☹ You have an IO Error!\n" + Constant.ERROR_LINE);
-    }
-
     public void reply(String reply){
         System.out.println(Constant.LINE);
         System.out.println(Constant.SPACE + reply);

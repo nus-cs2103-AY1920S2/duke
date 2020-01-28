@@ -1,7 +1,6 @@
 package duke.main;
 
 import java.time.format.DateTimeParseException;
-import java.io.IOException;
 import duke.command.*;
 import duke.exception.*;
 
@@ -36,8 +35,6 @@ public class Duke {
                 isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showDukeError(e);
-            } catch (IOException e) {
-                ui.showIOError();
             } catch (DateTimeParseException e) {
                 ui.showDateTimeError();
             }

@@ -9,6 +9,16 @@ public class ListCommand extends Command {
         this.inputArr = inputArr;
     }
 
+    /**
+     * This method uses Ui to print tasks, depending on inputArr.
+     * Case 1: No date specified, prints all tasks in tasklist
+     * Case 2: Date specified, prints tasks with the specified date in tasklist.
+     * 
+     * @param tasks   Existing Tasklist
+     * @param ui      Ui for user interaction
+     * @param storage Storage to save tasks in local storage
+     * @return nothing
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String reply = "";

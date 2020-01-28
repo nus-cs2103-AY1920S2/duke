@@ -7,6 +7,15 @@ public class FindCommand extends Command {
         this.inputArr = inputArr;
     }
 
+    /**
+     * This method uses Ui to print all the tasks with the specified
+     * the keyword.
+     * 
+     * @param tasks   Existing Tasklist
+     * @param ui      Ui for user interaction
+     * @param storage Storage to save tasks in local storage
+     * @return nothing
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String toFind = inputArr[1];

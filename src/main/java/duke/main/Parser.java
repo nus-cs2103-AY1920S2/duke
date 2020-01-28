@@ -3,6 +3,14 @@ package duke.main;
 import duke.command.*;
 
 public class Parser{
+
+    /**
+     * Returns a different Command according to input by user.
+     * Different commands get executed differently.
+     * 
+     * @param input   Input from user to be parsed as a Command
+     * @return User Command
+     */
     public Command parse(String input){
         String[] inputArr = input.split(" ");
         if (input.equals("bye")){    
