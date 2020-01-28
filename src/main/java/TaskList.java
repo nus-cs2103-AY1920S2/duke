@@ -63,6 +63,24 @@ public class TaskList {
         }
     }
 
+
+    /**
+     * Finds tasks containing given string.
+     *
+     * @param str Substring to be found.
+     */
+    public void find(String str) {
+        int size = tasks.size();
+        int cnt = 0;
+        System.out.println("Here are the matching tasks in your list:");
+        for(int i = 0; i < size; ++i) {
+            Task temp = tasks.get(i);
+            if(temp.description.contains(str)) {
+                System.out.println("\t" + ++cnt + ". " + temp);
+            }
+        }
+    }
+
     /**
      * Marks task as done.
      *
