@@ -3,11 +3,13 @@ package core;
 import command.Command;
 import dukexception.DukeException;
 
+
 public class Duke {
 
     private Ui ui;
     private Common common;
     private Parser parser;
+
 
     public Duke(){
         ui=new Ui();

@@ -5,6 +5,7 @@ import task.Task;
 
 import java.util.ArrayList;
 
+
 public class Common {
 
     private Model model;
@@ -17,7 +18,7 @@ public class Common {
         loadData();
     }
 
-    // todo duplicate updateState() on many method, any way to reduce duplication?
+
     public String[] addTask(Task task) {
         model.addTask(task);
         updateState();
@@ -28,12 +29,14 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
+
     public String[] printList() throws DukeException {
         ArrayList<String> s=model.formatList();
         updateState();
         s.add(0,"Here are the tasks in your list:");
         return s.toArray(new String[0]);
     }
+
 
     public String[] markAsDone(int index) throws DukeException {
         model.markDone(index);
@@ -43,6 +46,7 @@ public class Common {
         s.add(""+model.getTask(index));
         return s.toArray(new String[0]);
     }
+
 
     public String[] deleteTask(int index) throws DukeException {
         Task task=model.getTask(index);
@@ -55,13 +59,25 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
+
+    public String[] findTask(String keyword) throws DukeException{
+        updateState();
+        ArrayList<String> s=new ArrayList<>();
+        s.add("Here are the matching tasks in your list:");
+        s.addAll(model.findTask(keyword));
+        return s.toArray(new String[0]);
+    }
+
+
     private void updateState(){
         stateHolder.addNewState(new State(model.getTaskList()));
     }
 
+
     public void saveData() throws DukeException {
         storage.save(stateHolder);
     }
+
 
     private void loadData() throws DukeException{
         stateHolder=storage.load();
@@ -71,6 +87,7 @@ public class Common {
             model.load(stateHolder.getCurrentState().getTaskList());
         }
     }
+
 
     public void reset() throws DukeException {
         model.clearData();

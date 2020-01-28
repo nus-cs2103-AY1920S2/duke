@@ -5,24 +5,35 @@ import dukexception.StorageException;
 
 import java.io.*;
 
+
 public class Storage {
 
     private static final String fileName= "duke.txt";
     private File file;
 
+
     public Storage(){
         file=new File(fileName);
     }
+
 
     public void save(StateHolder stateHolder) throws DukeException {
         writeTo(file,stateHolder);
     }
 
+    /**
+     * Load the states from the external file to the system.
+     * @return the states of the system.
+     * @throws DukeException when reading from the file is unsuccessful.
+     */
     public StateHolder load() throws DukeException{
         return readFrom(file);
     }
 
-
+    /**
+     * Clear all the data in the external file.
+     * @throws DukeException when reading from the file is unsuccessful.
+     */
     public void clearData() throws DukeException{
         try(FileOutputStream fo=new FileOutputStream(file)){
             ObjectOutputStream oo=new ObjectOutputStream(fo);
@@ -30,8 +41,15 @@ public class Storage {
         }catch(IOException ex){
             throw new DukeException("Encounter error in resetting data");
         }
+
     }
 
+    /**
+     * Obtain the data from the external file.
+     * @param thisFile indicates the file to be read from.
+     * @return the states of the system.
+     * @throws DukeException when reading the file is unsuccessful.
+     */
     private StateHolder readFrom(File thisFile) throws DukeException{
         StateHolder stateHolder;
         try(FileInputStream fi=new FileInputStream(thisFile)) {
@@ -52,7 +70,12 @@ public class Storage {
         return stateHolder;
     }
 
-
+    /**
+     * Save the date to the external file.
+     * @param thisFile indicates the file to be written to.
+     * @param stateHolder the states of the system to be save.
+     * @throws DukeException when the writing to the file is unsuccessful.
+     */
     private void writeTo(File thisFile,StateHolder stateHolder) throws DukeException{
         try(FileOutputStream fo=new FileOutputStream(thisFile)){
             ObjectOutputStream oo=new ObjectOutputStream(fo);

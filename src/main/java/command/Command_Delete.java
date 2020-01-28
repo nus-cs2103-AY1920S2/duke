@@ -5,9 +5,11 @@ import core.Common;
 import core.Ui;
 import dukexception.DukeException;
 
+
 public class Command_Delete extends Command{
 
     private int index;
+
 
     public Command_Delete(int index){
         this.index=index;
