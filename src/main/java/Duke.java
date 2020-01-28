@@ -8,6 +8,34 @@ public class Duke {
     public static int counter = 0; // this has to be a global variable
     public static Task[] tasks = new Task[100]; // another global variable
 
+    /*
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        }
+        catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.greetingMessage();
+        String input = ui.scanInput();
+
+    }
+
+    public static void main(String[] args) {
+        new Duke("").run();
+    }
+
+    */
     public static void main(String[] args) {
 
         try {
@@ -25,6 +53,7 @@ public class Duke {
 
         System.out.println("Bye. Hope to see you again soon!");
     }
+
 
     public static void processRequests() {
         Scanner sc = new Scanner(System.in);
@@ -312,5 +341,6 @@ public class Duke {
         }
         catch (IOException exception) { System.out.println("File not found, cannot be written to!"); }
     }
+
 
 }
