@@ -34,7 +34,7 @@ public class Storage{
     }
 
     /**
-     * 
+     * retrieve task from storage
      * @param lineContent
      * @param filepath
      * @return String task

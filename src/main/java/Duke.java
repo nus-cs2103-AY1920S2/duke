@@ -46,6 +46,11 @@ public class Duke {
         this.storage = new Storage(filepath);
     }
 
+    /**
+     * Main method
+     * @param args
+     * @throws DukeException
+     */
     public static void main(String[] args) throws DukeException {
         
         Duke d = new Duke("data/list.txt");

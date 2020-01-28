@@ -4,8 +4,7 @@ package main.java;
 /**Class to customize greetings/user outputs */
 public class DukeGreeting {
     
-/** Constructor
- *  */    
+/** Constructor */    
 public DukeGreeting(){}
 
     /** Method to show welcome message */
