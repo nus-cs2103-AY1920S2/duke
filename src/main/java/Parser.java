@@ -36,8 +36,9 @@ public class Parser {
                     throw new DukeException("Empty Event time", DukeErrorType.EMPTY_TIME, command);
                 } else if (descriptionArr.length == 0 || eventDescription.length() == 0) {
                     throw new DukeException("Empty Event description", DukeErrorType.EMPTY_DESCRIPTION, command);
+                } else {
+                    return new Add(new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
                 }
-                return new Add(new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
             case DEADLINE:
                 String[] deadlineDetails = fullCommand.split("/by");
                 String deadlineTime = deadlineDetails[1].trim();
