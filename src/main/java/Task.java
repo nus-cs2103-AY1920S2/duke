@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getIcon() {
-        return (check ? "\u2713" : "\u2718");
+        return (check ? "Y" : "N");
     }
 
     public void setCheck() {

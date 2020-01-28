@@ -1,11 +1,11 @@
 Hello! I'm Duke
 What can I do for you?
 Got it. I've added this task:
-[T][?] borrow book
+[T][N] borrow book
 Now you have 1 tasks in the list.
 Got it. I've added this task:
-[D][?] return book  (by: Sunday)
+[D][N] return book  (by: Jan 1 2020)
 Now you have 2 tasks in the list.
 Got it. I've added this task:
-[E][?] project meeting  (at: Mon 2-4pm)
+[E][N] project meeting  (at: Jan 2 2020)
 Now you have 3 tasks in the list.
