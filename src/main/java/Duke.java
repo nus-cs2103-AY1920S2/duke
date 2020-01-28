@@ -2,14 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke  {
     private ArrayList<Task> taskStorage;
+    public static final String path = "/Users/weicheng/Dropbox/Duke.txt";
 
     private Duke(ArrayList<Task> newtaskStorage){
         this.taskStorage = newtaskStorage;
     }
-    public static void main(String[] args) {
-        Duke chatbot = new Duke(new ArrayList<>());
-        chatbot.initiateGreetings();
-        chatbot.initiateChat();
+    public static Duke initiateBot() {
+        Archive archive = new Archive(Duke.path);
+        return new Duke(archive.loadFromFile());
     }
     public void initiateGreetings() {
         System.out.println("Hello! I'm Duke\n" +
@@ -19,6 +19,7 @@ public class Duke  {
         Scanner sc = new Scanner(System.in);
         String[] userInput = sc.nextLine().split(" ",2);
         String action = userInput[0];
+        Archive archive = new Archive(Duke.path);
         while (!action.equals("bye")) {
             try {
                 ExceptionGenerator.checkInputLength(userInput);
@@ -46,14 +47,17 @@ public class Duke  {
                         this.taskStorage.add(new Task(description));
                         break;
                     case "deadline":
-                        String[] tokens = userInput[1].split("/by ");
+                        String[] tokens = userInput[1].split(" /by ");
                         System.out.println("Got it. I've added this task:");
                         this.taskStorage.add(new Deadlines(tokens[0], tokens[1]));
+                        Deadlines d =  new Deadlines(tokens[0], tokens[1]);
+                        System.out.println((d.getDate()).toString());
                         break;
                     case "event":
-                        tokens = userInput[1].split("/at ");
+                        tokens = userInput[1].split(" /at ");
                         System.out.println("Got it. I've added this task:");
                         this.taskStorage.add(new Events(tokens[0], tokens[1]));
+
                         break;
                 }
                 int numbOfTask = this.taskStorage.size();
@@ -66,7 +70,9 @@ public class Duke  {
             }
             userInput = sc.nextLine().split(" ", 2);
             action = userInput[0];
+            archive.saveToDisk(this.taskStorage);
         }
+
         System.out.println("Bye. Hope to see you again soon!");
 
     }
