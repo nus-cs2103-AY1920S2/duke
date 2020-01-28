@@ -23,19 +23,22 @@ public class Task {
     void setDone() {
         done = 1;
     }
+
     void setTaskName(String s) {
         taskName = s;
     }
+
     int getDone() {
         return done;
     }
+
     String getTaskName() {
         return taskName;
     }
 
     @Override
     public String toString() {
-        String yes_or_no = (this.done == 0) ? "[N]" : "[Y]";
-        return yes_or_no + " " + this.taskName;
+        String yesOrNo = (this.done == 0) ? "[N]" : "[Y]";
+        return yesOrNo + " " + this.taskName;
     }
 }

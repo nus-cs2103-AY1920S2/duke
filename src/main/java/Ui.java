@@ -3,16 +3,18 @@ import java.util.Scanner;
 public class Ui {
 
     void showLoadingError() {
-       System.out.println("Loading error");
+        System.out.println("Loading error");
     }
 
     void showWelcome() {
-        System.out.println("____________________________________________________________\n Hello! I'm Duke\n What can I do for you?\n____________________________________________________________");
+        System.out.println("____________________________________________________________\n "
+                + "Hello! I'm Duke\n What can I do for you?\n"
+                + "____________________________________________________________");
     }
 
     String readCommand() {
-      Scanner sc = new Scanner(System.in);
-      return sc.nextLine();
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 
     void printString(String s) {
@@ -26,6 +28,7 @@ public class Ui {
     void showError(String s) {
         System.out.println(s);
     }
+
     void printTask(int number, TaskList tasks) {
         Task ob = tasks.getList().get(number - 1);
         System.out.println(ob.toString());

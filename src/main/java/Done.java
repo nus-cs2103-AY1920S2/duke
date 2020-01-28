@@ -4,6 +4,14 @@ public class Done extends Command {
     Done(String num) {
         this.num = num;
     }
+
+    /**
+     * Executes the done command.
+     *
+     * @param tasks Task object.
+     * @param ui UI object.
+     * @param storage Storage object.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine();
         int number = Integer.valueOf(num);

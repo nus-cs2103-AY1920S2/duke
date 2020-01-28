@@ -6,6 +6,7 @@ public class TaskList {
     TaskList() {
         this.list = new ArrayList<Task>();
     }
+
     TaskList(ArrayList<Task> list) {
         this.list = list;
     }

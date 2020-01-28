@@ -7,6 +7,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath Path of the file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +24,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the code.
+     *
+     * @throws IOException Throws IOException.
+     */
     public void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
@@ -37,6 +47,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function.
+     *
+     * @param args String array.
+     * @throws IOException Throws IOException.
+     */
     public static void main(String[] args) throws IOException {
         String filePath = new File("").getAbsolutePath();
         int ind = filePath.lastIndexOf("/");

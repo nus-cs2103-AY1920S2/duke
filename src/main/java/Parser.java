@@ -4,77 +4,78 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
-    public static Task formatter(String sentence, int loc_of_space, String type, int done) {
-        int loc_of_slash = sentence.indexOf("/");
-        String description = sentence.substring(loc_of_space + 1, loc_of_slash - 1);
-        String time = sentence.substring(loc_of_slash + 4);
+    /**
+     * Formats the sentence.
+     *
+     * @param sentence Input line.
+     * @param locOfSpace Location of space.
+     * @param type Type of entry.
+     * @param done Done status.
+     * @return Task.
+     */
+    public static Task formatter(String sentence, int locOfSpace, String type, int done) {
+        int locOfSlash = sentence.indexOf("/");
+        String description = sentence.substring(locOfSpace + 1, locOfSlash - 1);
+        String time = sentence.substring(locOfSlash + 4);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(time, format);
         Task obj;
-        if(type.equals("deadline")) {
+        if (type.equals("deadline")) {
             obj = new Deadline(description, dateTime,done);
-        }
-        else {
+        } else {
             obj = new Event(done,description,dateTime);
         }
         return obj;
     }
 
+    /**
+     * Parses the sentence.
+     *
+     * @param saved Saved status.
+     * @param sentence Input line.
+     * @param done Done status.
+     * @return Command.
+     * @throws IOException Throws IOException.
+     * @throws DukeException Throws DukeException.
+     */
     static Command parse(int saved, String sentence, int done) throws IOException, DukeException {
-        int loc_of_space = sentence.indexOf(" ");
-        String first_word = (loc_of_space == -1) ? sentence : sentence.substring(0, loc_of_space);
-        switch (first_word) {
-            case "delete":
-                Delete del_obj = new Delete(sentence.substring(loc_of_space + 1));
-                return del_obj;
-
-            case "done":
-                Done done_object = new Done(sentence.substring(loc_of_space + 1));
-                return done_object;
-
-            case "list":
-                ListCommand list_obj = new ListCommand();
-                return list_obj;
-
-            case "bye":
-                Exit exit_obj = new Exit();
-                return exit_obj;
-
-            case "deadline":
-                if(sentence.equals("deadline")) {
-                    DukeException ex = new DukeException(":( OOPS!!! The description of a deadline cannot be empty."); //change
-                    throw ex;
-                }
-                else {
-                    Add add_obj = new Add(formatter( sentence, loc_of_space, "deadline",done),saved);
-                    return add_obj;
-                }
-
-            case "todo":
-                if(sentence.equals("todo")) {
-                    DukeException ex = new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
-                    throw ex;
-                }
-                else {
-                    Todo todo_obj = new Todo(done,sentence.substring(loc_of_space + 1));
-                    Add add_objec = new Add(todo_obj,saved);
-                    return add_objec;
-                }
-
-            case "event":
-                if(sentence.equals("event")) {
-                    DukeException ex = new DukeException(":( OOPS!!! The description of an event cannot be empty.");
-                    throw ex;
-                }
-                else {
-                    Add add = new Add(formatter(sentence, loc_of_space, "event",done),saved);
-                    return add;
-                }
-
-
-            default:
-                DukeException ex = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+        int locOfSpace = sentence.indexOf(" ");
+        String firstWord = (locOfSpace == -1) ? sentence : sentence.substring(0, locOfSpace);
+        switch (firstWord) {
+        case "delete":
+            return new Delete(sentence.substring(locOfSpace + 1));
+        case "done":
+            return new Done(sentence.substring(locOfSpace + 1));
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new Exit();
+        case "deadline":
+            if (sentence.equals("deadline")) {
+                DukeException ex = new DukeException(":( OOPS!!! "
+                        + "The description of a deadline cannot be empty."); //change
                 throw ex;
+            } else {
+                return new Add(formatter(sentence, locOfSpace, "deadline",done),saved);
+            }
+        case "todo":
+            if (sentence.equals("todo")) {
+                DukeException ex = new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
+                throw ex;
+            } else {
+                Todo todoObj = new Todo(done,sentence.substring(locOfSpace + 1));
+                return new Add(todoObj,saved);
+            }
+        case "event":
+            if (sentence.equals("event")) {
+                DukeException ex = new DukeException(":( OOPS!!! The description of an event cannot be empty.");
+                throw ex;
+            } else {
+                return new Add(formatter(sentence, locOfSpace, "event",done),saved);
+            }
+        default:
+            DukeException ex = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw ex;
         }
 
     }
