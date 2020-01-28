@@ -3,11 +3,20 @@ package com.duke.bot;
 public class Event extends Task {
     private String dateAt;
 
+    public Event(String title, boolean isDone, String dateAt) {
+        super(title, isDone);
+        this.dateAt = dateAt;
+    }
+
     public Event(String title, String dateAt) {
         super(title);
         this.dateAt = dateAt;
     }
-    
+
+    public String getDateAt() {
+        return dateAt;
+    }
+
     @Override
     public String toString() {
         return String.format(

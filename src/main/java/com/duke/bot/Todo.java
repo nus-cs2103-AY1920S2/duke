@@ -1,6 +1,10 @@
 package com.duke.bot;
 
 public class Todo extends Task {
+    public Todo(String title, boolean isDone) {
+        super(title, isDone);
+    }
+
     public Todo(String title) {
         super(title);
     }
