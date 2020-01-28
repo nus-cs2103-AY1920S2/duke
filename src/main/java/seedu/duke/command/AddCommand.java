@@ -3,7 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
-import seedu.duke.exception.DukeIOException;
+import seedu.duke.exception.DukeIoException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -28,21 +28,21 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIoException {
         Task newTask = null;
 
         switch (type) {
-            case todo:
-                newTask = new Todo(taskDescription);
-                break;
-            case deadline:
-                newTask = new Deadline(taskDescription, date);
-                break;
-            case event:
-                newTask = new Event(taskDescription, date);
-                break;
-            default:
-                break;
+        case todo:
+            newTask = new Todo(taskDescription);
+            break;
+        case deadline:
+            newTask = new Deadline(taskDescription, date);
+            break;
+        case event:
+            newTask = new Event(taskDescription, date);
+            break;
+        default:
+            break;
         }
 
         tasks.add(newTask);

@@ -43,20 +43,20 @@ public class TaskList {
         Task toReturn = null;
 
         switch (taskType) {
-            case Todo.TYPE_SYMBOL:
-                toReturn = new Todo(taskDescription);
-                break;
-            case Deadline.TYPE_SYMBOL:
-                date = LocalDate.parse(splitInput[3]);
-                toReturn = new Deadline(taskDescription, date);
-                break;
-            case Event.TYPE_SYMBOL:
-                date = LocalDate.parse(splitInput[3]);
-                toReturn = new Event(taskDescription, date);
-                break;
-            default:
-                System.out.println("Failed to decode. Unknown task type.");
-                break;
+        case Todo.TYPE_SYMBOL:
+            toReturn = new Todo(taskDescription);
+            break;
+        case Deadline.TYPE_SYMBOL:
+            date = LocalDate.parse(splitInput[3]);
+            toReturn = new Deadline(taskDescription, date);
+            break;
+        case Event.TYPE_SYMBOL:
+            date = LocalDate.parse(splitInput[3]);
+            toReturn = new Event(taskDescription, date);
+            break;
+        default:
+            System.out.println("Failed to decode. Unknown task type.");
+            break;
         }
 
         if (isDone && toReturn != null) {

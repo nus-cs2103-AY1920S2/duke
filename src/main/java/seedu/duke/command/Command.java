@@ -3,11 +3,11 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.duke.Ui;
-import seedu.duke.exception.DukeIOException;
+import seedu.duke.exception.DukeIoException;
 
 public abstract class Command {
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIOException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIoException;
 
     public enum Type {
         bye("bye"),
