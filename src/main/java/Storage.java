@@ -63,7 +63,8 @@ public class Storage {
     public void store(TaskList alltasks) throws IOException {
         String line = "";
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
-        // Iterate through the list and keep the tasks in the .txt file.
+
+        // Iterate through the list and put data in .txt file
         for (Task task : alltasks.getListOfTask()) {
             if (task.getType().equals("[T]")) {
                 // Todo objects
