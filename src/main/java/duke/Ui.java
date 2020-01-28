@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //contains interaction with the user
@@ -63,11 +64,21 @@ public class Ui {
                 System.out.println(input);
                 System.out.println("Now you have "+ tasks.getLength() + " tasks in the list.");
                 break;
+            case "find":
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 1; i <= tasks.getLength(); i++) {
+                    StringBuilder str = new StringBuilder();
+                    Task task = tasks.get(i-1);
+                    String output = str.append(i).append(". ").append(task.toString()).toString();
+                    System.out.println(output);
+                }
+                break;
             default:
                 System.out.println(input);
                 break;
         }
     }
+
 
     public String readCommand() {
         return scanner.nextLine();

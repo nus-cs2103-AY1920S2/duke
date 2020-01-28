@@ -9,7 +9,6 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    //for the loading
     TaskList(ArrayList<Task> existingList) {
         this.list = existingList;
     }
@@ -28,4 +27,20 @@ public class TaskList {
     public int getLength() {
         return list.size();
     }
+
+    @Override
+    public String toString() {
+        return list.toString();
+    }
+
+    public TaskList find(String keyword) {
+        ArrayList<Task> matchingList = new ArrayList<>();
+        for (Task t : list) {
+            if (t.input.contains(keyword)) {
+                matchingList.add(t);
+            }
+        }
+        return new TaskList(matchingList);
+    }
+
 }

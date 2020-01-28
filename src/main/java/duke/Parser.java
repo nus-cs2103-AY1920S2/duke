@@ -34,6 +34,12 @@ public class Parser {
                 } else {
                     throw new DukeException("empty", command);
                 }
+            case "find":
+                if (length > 1) {
+                    return new FindCommand(fullCommand);
+                } else {
+                    throw new DukeException("empty", command);
+                }
             default:
                 throw new DukeException("invalid", command);
         }
