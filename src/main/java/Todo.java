@@ -1,7 +1,3 @@
-
-/**
- * Represents a <code>Todo</code>, which is a subclass of a <code>Task</code>. A Todo only contains a description.
- */
 public class Todo extends Task {
 
     public Todo(String description) {
