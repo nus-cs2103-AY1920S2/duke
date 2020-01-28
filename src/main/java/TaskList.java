@@ -55,6 +55,18 @@ public class TaskList {
         }
     }
 
+    public void find(String str) {
+        int size = tasks.size();
+        int cnt = 0;
+        System.out.println("Here are the matching tasks in your list:");
+        for(int i = 0; i < size; ++i) {
+            Task temp = tasks.get(i);
+            if(temp.description.contains(str)) {
+                System.out.println("\t" + ++cnt + ". " + temp);
+            }
+        }
+    }
+
     public void done(int n) {
         if (n > tasks.size()) {
             System.out.println("\tThere is no such task");
