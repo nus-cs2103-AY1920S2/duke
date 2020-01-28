@@ -1,9 +1,6 @@
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.io.*;
-public class ToDo extends Task implements java.io.Serializable{
+
+public class ToDo extends Task {
+
 
     protected ToDo(String desciption){
         super(desciption);
@@ -12,5 +9,12 @@ public class ToDo extends Task implements java.io.Serializable{
     @Override
     public String toString(){
         return "[T]" + super.toString();
+    }
+
+    public String saveData(){
+        String temp = this.isDone? "1" : "0";
+        //1 is done, 0 is not done
+
+        return "ToDo" + "|" + temp + "|" + this.description;
     }
 }

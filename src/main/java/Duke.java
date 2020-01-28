@@ -1,4 +1,3 @@
-
 public class Duke {
 
 
@@ -26,11 +25,12 @@ public class Duke {
 
 
         FastReader fr = new FastReader();
-        String textEntered = fr.nextLine();
+
 
         TaskManager manager = new TaskManager();
 
         manager.loadExistingData();
+        String textEntered = fr.nextLine();
 
         while(!textEntered.equals("bye")){
 
@@ -40,15 +40,16 @@ public class Duke {
                 manager.listAllTasks();
                 System.out.println(horizontalLine);
 
-
             }else if(textEntered.contains("done")){
 
+                String[] helper = textEntered.split(" ");
+                int indexOfTaskDone;
                 try {
-                    String[] helper = textEntered.split(" ");
-                    int indexOfTaskDone = Integer.parseInt(helper[1]);
+                    indexOfTaskDone = Integer.parseInt(helper[1]);
                     manager.setTaskAsDone(indexOfTaskDone);
-                }catch(IndexOutOfBoundsException ex){
-                    System.out.println(ex);
+                    System.out.println(horizontalLine);
+                } catch( ArrayIndexOutOfBoundsException ex){
+                    System.out.println("Done must be followed by a number");
                 }
 
             }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))

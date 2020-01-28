@@ -1,9 +1,12 @@
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.io.*;
 
-public class Deadline extends Task implements java.io.Serializable{
+
+public class Deadline extends Task {
+
 
     protected LocalDate by;
 
@@ -16,5 +19,14 @@ public class Deadline extends Task implements java.io.Serializable{
     public String toString(){
         return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
                 " " + by.getDayOfWeek().toString()  + ")";
+    }
+
+
+    public String saveData(){
+        String temp = this.isDone? "1" : "0";
+        //1 is done, 0 is not done
+
+        return "Deadline" + "|" + temp + "|" + this.description + "|" + this.by;
+
     }
 }
