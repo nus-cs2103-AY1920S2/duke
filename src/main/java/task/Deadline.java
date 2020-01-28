@@ -20,6 +20,7 @@ public class Deadline extends Task {
     public String format() {
         return "D" + " | " + (this.isDone ? "1" : "0") + " | " + description + " | " + date;
     }
+
     public Deadline(String description, LocalDate date) {
         super(description);
 //        this.dateTime = dateTime;
