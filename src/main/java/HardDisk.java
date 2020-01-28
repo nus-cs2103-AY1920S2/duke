@@ -7,7 +7,7 @@ public class HardDisk {
         this.path = path;
     }
 
-    protected void addFileInputToTasks() throws IOException, InvalidTaskInputException {
+    protected void addFileInputToTasks() throws IOException, InvalidTaskInputException, InvalidDateException {
         String inputLine;
         File file = new File(path);
         FileReader fr = new FileReader(file);

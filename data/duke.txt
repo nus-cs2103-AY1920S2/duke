@@ -1,7 +1,7 @@
-T | N | read book
-D | Y | return book | June 6th
-E | N | project meeting | Aug 6th 2-4pm
+T | Y | read book
+D | Y | return book | 2020-01-01
+E | Y | project meeting | 2020-02-16
 T | Y | join sports club
 T | N | play netball
-D | Y | tut 1 | tmr
-E | N | competition | 16 feb
+D | Y | tut 1 | 2020-09-09
+E | N | competition | 2020-10-10

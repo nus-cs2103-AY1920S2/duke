@@ -1,4 +1,7 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +10,7 @@ public class Duke {
     private static List<Task> tasks;
     private static HardDisk hardDisk;
 
-    public Duke(String path) throws IOException, InvalidTaskInputException {
+    public Duke(String path) throws IOException, InvalidTaskInputException, InvalidDateException {
         greet();
         tasks = new ArrayList<>();
         hardDisk = new HardDisk(path);
@@ -125,7 +128,8 @@ public class Duke {
         }
     }
 
-    protected static void addDeadline(String desc, String doneStatus, String source) throws InvalidTaskInputException, IOException {
+    protected static void addDeadline(String desc, String doneStatus, String source)
+            throws InvalidTaskInputException, IOException, InvalidDateException {
         String[] descs = desc.split(" /by |\\|") ;
         if (descs.length == 1) { // invalid Deadline input format
             throw new InvalidTaskInputException();
@@ -133,7 +137,13 @@ public class Duke {
 
         String deadlineDesc = descs[0].trim();
         String deadlineTime = descs[1].trim();
-        Task deadline = new Deadline(deadlineDesc, deadlineTime);
+        LocalDate formattedDeadlineTime = null;
+        if (isValidDate(deadlineTime)) {
+            formattedDeadlineTime = LocalDate.parse(deadlineTime);
+        } else {
+            throw new InvalidDateException();
+        }
+        Task deadline = new Deadline(deadlineDesc, formattedDeadlineTime);
 
         if (doneStatus.equalsIgnoreCase("Y")) {
             deadline.markAsDone();
@@ -148,18 +158,26 @@ public class Duke {
         }
     }
 
-    protected static void addEvent(String desc, String doneStatus, String source) throws InvalidTaskInputException, IOException {
+    protected static void addEvent(String desc, String doneStatus, String source)
+            throws InvalidTaskInputException, IOException, InvalidDateException {
         String[] descs = desc.split(" /at |\\|");
         if (descs.length == 1) { // invalid Event input format
             throw new InvalidTaskInputException();
         }
         String eventDesc = descs[0].trim();
         String eventTime = descs[1].trim();
-        Task event = new Event(eventDesc, eventTime);
+        LocalDate formattedEventTime = null;
+        if (isValidDate(eventTime)) {
+            formattedEventTime = LocalDate.parse(eventTime);
+        } else {
+            throw new InvalidDateException();
+        }
+        Task event = new Event(eventDesc, formattedEventTime);
 
         if (doneStatus.equalsIgnoreCase("Y")) {
             event.markAsDone();
         }
+
         tasks.add(event);
 
         if (source.equals("user")) {
@@ -168,6 +186,17 @@ public class Duke {
             System.out.println(event.toString());
             printNumTask();
         }
+    }
+
+    public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
     }
 
     private static void printList() {
@@ -201,7 +230,7 @@ public class Duke {
         System.out.println("Okay, I have removed this task for you:");
     }
 
-    public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidCommandException {
+    public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidDateException {
         Duke duke;
         duke = new Duke("./data/duke.txt");
         duke.runDuke();

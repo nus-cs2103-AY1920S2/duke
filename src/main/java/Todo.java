@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -14,7 +16,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getTime() {
+    public LocalDate getTime() {
         return null;
     }
 }
