@@ -27,7 +27,7 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return serialize("D", by);
+        return serialize("D", by.format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
     @Override

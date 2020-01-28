@@ -4,6 +4,9 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +145,12 @@ public class Storage {
 
     private Deadline readDeadline(String[] args) throws DukeException {
         if (args.length == 4) {
-            return new Deadline(args[2], args[3]);
+            try {
+                LocalDate date = LocalDate.parse(args[3], DateTimeFormatter.ISO_LOCAL_DATE);
+                return new Deadline(args[2], date);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Date does not follow the format: yyyy-mm-dd.");
+            }
         } else {
             throw new DukeException("Invalid number of arguments to create a Deadline.");
         }
