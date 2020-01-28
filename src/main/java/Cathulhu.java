@@ -43,11 +43,17 @@ public class Cathulhu {
                     break;
 
                 case "D":
-                    Task dlTask = new Deadline(taskString[2], taskString[3]);
-                    if (taskString[1].equals("1")) {
-                        dlTask.markAsDone();
+                    try {
+                        Task dlTask = new Deadline(taskString[2], taskString[3]);
+                        if (taskString[1].equals("1")) {
+                            dlTask.markAsDone();
+                        }
+                        taskData.add(dlTask);
+                    } catch (CathulhuException e) {
+                        System.out.println("Error loading data from TASKS_FILE. Skipping the following line:");
+                        System.out.println(Arrays.asList(taskString));
                     }
-                    taskData.add(dlTask);
+
                     break;
 
                 case "E":

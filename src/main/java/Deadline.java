@@ -6,6 +6,7 @@ import java.time.temporal.ChronoField;
 public class Deadline extends Task {
 
     protected LocalDateTime by;
+    protected String byString;
 
     /**
      * Constructor for the Deadline object, a subclass of Task
@@ -14,6 +15,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws CathulhuException{
         super(description);
+        this.byString = by;
         DateTimeFormatter patternWithOptional = new DateTimeFormatterBuilder()
                 .appendPattern("yyyy-MM-dd[ HH:mm]")
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -34,7 +36,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toDataString() {
-        return "D:;:" + super.toDataString() + ":;:" + this.by;
+        return "D:;:" + super.toDataString() + ":;:" + this.byString;
     }
 
 

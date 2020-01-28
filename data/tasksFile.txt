@@ -1,3 +1,2 @@
-T:;:1:;:ST2131 Webcast
-D:;:0:;:CS2103 IP :;:midnight
-E:;:0:;:climb with huai :;:today
+E:;:1:;:climb with huai :;:today
+D:;:0:;:CS2103 IP :;:2020-01-28 23:59
