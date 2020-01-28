@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
-import seedu.duke.exception.DukeIOException;
+import seedu.duke.exception.DukeIoException;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +18,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             ui.print("can't load file.");
             tasks = new TaskList();
         }
