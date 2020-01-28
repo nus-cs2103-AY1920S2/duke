@@ -12,13 +12,17 @@ import java.io.IOException;
 
 
 public class Storage {
-    private final String SAVE_FILE = "save_file.txt";
+    private String saveFile = "save_file.txt";
 
     public Storage() {
     }
 
+    public Storage(String path) {
+        this.saveFile = path;
+    }
+
     public void save(TaskList list) throws IOException {
-        FileWriter file = new FileWriter(SAVE_FILE, false);
+        FileWriter file = new FileWriter(saveFile, false);
         BufferedWriter writer = new BufferedWriter(file);
 
         String text = list.toSaveFormat();
@@ -27,7 +31,7 @@ public class Storage {
     }
 
     public void readSaveFile(TaskList list) throws FileNotFoundException {
-        FileReader file = new FileReader(SAVE_FILE);
+        FileReader file = new FileReader(saveFile);
         BufferedReader reader = new BufferedReader(file);
         Ui ui = new Ui();
 
@@ -55,6 +59,7 @@ public class Storage {
                 list.save(newTask);
                 text = reader.readLine();
             }
+
             reader.close();
         } catch (IOException ex) {
             ui.printFormattedOutput("Corrupted Task");

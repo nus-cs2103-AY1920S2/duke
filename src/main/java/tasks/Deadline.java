@@ -23,8 +23,6 @@ public class Deadline extends DateTask {
         this.finishByDate = fields[1].equals("-")
                 ? LocalDate.now()
                 : LocalDate.parse(fields[1]);
-
-        System.out.println(this.finishByTime);
     }
 
     @Override

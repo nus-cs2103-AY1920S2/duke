@@ -64,4 +64,13 @@ public class TaskList {
     public void print() {
         ui.printList(this.list);
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (Task t : this.list) {
+            s += t.toString() + "\n";
+        }
+        return s;
+    }
 }

@@ -24,7 +24,6 @@ public class Event extends DateTask {
         this.startAtDate = fields[1].equals("-")
                 ? LocalDate.now()
                 : LocalDate.parse(fields[1]);
-        System.out.println(this.startAtTime);
     }
 
     @Override
