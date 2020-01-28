@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ToDoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-01-28T06:55:12" hostname="xps-MacBook-Air.local" time="0.034">
+  <properties/>
+  <testcase name="test()" classname="ToDoTest" time="0.034"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

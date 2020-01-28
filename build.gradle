@@ -21,6 +21,8 @@ checkstyle {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    implementation 'junit:junit:4.12'
+
 }
 
 test {
