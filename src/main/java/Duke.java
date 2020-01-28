@@ -19,6 +19,7 @@ public class Duke {
         catch (FileNotFoundException exception) {
             System.out.println("File not found!");
         }
+        System.out.println("Testing message for level 7 merging");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         processRequests();
