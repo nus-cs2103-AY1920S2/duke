@@ -21,7 +21,7 @@ class TaskList {
         String taskType = splitInput[0];
         boolean isDone = splitInput[1].equals(Task.TRUE_SYMBOL);
         String taskDescription = splitInput[2];
-        LocalDate date = null;
+        LocalDate date;
         Task toReturn = null;
 
         switch (taskType) {

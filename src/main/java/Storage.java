@@ -15,8 +15,7 @@ class Storage {
 
     List<String> load() throws IOException {
         if (Files.exists(FILE_PATH)) {
-            List<String> lines = Files.readAllLines(FILE_PATH);
-            return lines;
+            return Files.readAllLines(FILE_PATH);
         } else {
             throw new IOException();
         }
