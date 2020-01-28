@@ -26,6 +26,10 @@ public class Duke {
         }
     }
 
+    public Ui getUi() {
+        return ui;
+    }
+
     public TaskList getTaskList() {
         return tasks;
     }
@@ -40,9 +44,9 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 Command command = Command.createCommand(input);
-                String message = command.execute(this);
-                ui.print(message);
-            } catch (DukeNoSuchInputException | DukeProgramTerminatedException e) {
+                command.execute(this);
+            } catch (DukeNoSuchInputException
+                    | DukeProgramTerminatedException e) {
                 break;
             } catch (DukeNoCommandException e) {
                 continue;

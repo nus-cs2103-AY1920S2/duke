@@ -79,8 +79,8 @@ public class Command {
         return String.join(" ", arguments);
     }
 
-    public String execute(Duke program) throws DukeException {
-        return method.execute(program, this);
+    public void execute(Duke program) throws DukeException {
+        method.execute(program, this);
     }
 
     @Override

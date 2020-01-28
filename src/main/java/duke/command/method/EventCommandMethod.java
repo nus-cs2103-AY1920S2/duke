@@ -14,7 +14,7 @@ import duke.task.EventTask;
 public class EventCommandMethod implements CommandMethod {
     public static final String NAME = "event";
 
-    public String execute(Duke program, Command command) throws DukeException { 
+    public void execute(Duke program, Command command) throws DukeException {
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(EventCommandMethod.NAME);
         }
@@ -29,7 +29,9 @@ public class EventCommandMethod implements CommandMethod {
             LocalDateTime at = LocalDateTime.parse(parts[1],
                     EventTask.DATE_TIME_INPUT_FORMAT);
             EventTask newTask = new EventTask(description, at);
-            return program.getTaskList().addTask(newTask);
+            String message = program.getTaskList().addTask(newTask);
+            program.getUi().print(message);
+            new SaveCommandMethod().execute(program, command);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidDateTimeException(parts[1]);
         }

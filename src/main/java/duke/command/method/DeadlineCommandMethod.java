@@ -14,7 +14,7 @@ import duke.task.DeadlineTask;
 public class DeadlineCommandMethod implements CommandMethod {
     public static final String NAME = "deadline";
 
-    public String execute(Duke program, Command command) throws DukeException { 
+    public void execute(Duke program, Command command) throws DukeException {
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(DeadlineCommandMethod.NAME);
         }
@@ -29,7 +29,9 @@ public class DeadlineCommandMethod implements CommandMethod {
             LocalDateTime by = LocalDateTime.parse(parts[1],
                     DeadlineTask.DATE_TIME_INPUT_FORMAT);
             DeadlineTask newTask = new DeadlineTask(description, by);
-            return program.getTaskList().addTask(newTask);
+            String message = program.getTaskList().addTask(newTask);
+            program.getUi().print(message);
+            new SaveCommandMethod().execute(program, command);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidDateTimeException(parts[1]);
         }

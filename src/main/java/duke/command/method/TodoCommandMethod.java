@@ -9,11 +9,13 @@ import duke.task.TodoTask;
 public class TodoCommandMethod implements CommandMethod {
     public static final String NAME = "todo";
 
-    public String execute(Duke program, Command command) throws DukeException { 
+    public void execute(Duke program, Command command) throws DukeException {
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(TodoCommandMethod.NAME);
         }
         TodoTask newTask = new TodoTask(command.getArgumentString());
-        return program.getTaskList().addTask(newTask);
+        String message = program.getTaskList().addTask(newTask);
+        program.getUi().print(message);
+        new SaveCommandMethod().execute(program, command);
     }
 }

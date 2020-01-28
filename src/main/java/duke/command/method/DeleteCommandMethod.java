@@ -11,7 +11,7 @@ import duke.utils.TaskList;
 public class DeleteCommandMethod implements CommandMethod {
     public static final String NAME = "delete";
 
-    public String execute(Duke program, Command command) throws DukeException { 
+    public void execute(Duke program, Command command) throws DukeException {
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(command.getCommandName());
@@ -22,7 +22,9 @@ public class DeleteCommandMethod implements CommandMethod {
         String firstArgument = command.getArgumentList()[0];
         try {
             int taskIndex = Integer.parseInt(firstArgument) - 1;
-            return tasks.removeTask(taskIndex);
+            String message = tasks.removeTask(taskIndex);
+            program.getUi().print(message);
+            new SaveCommandMethod().execute(program, command);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeInvalidTaskException(firstArgument);
         }
