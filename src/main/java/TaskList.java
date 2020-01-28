@@ -17,9 +17,24 @@ public class TaskList {
         return latest_index;
     }
 
+    public void updateIndex() {
+        int count = 1;
+        for (Task task : list) {
+            task.set_Index(count++);
+        }
+    }
+
     public void delete(String string) {
         string = string.replace("delete","");
         string = string.trim();
+
+        if (string.equals("all")) {
+            list.clear();
+            latest_index = 0;
+            System.out.println(ui.deleteAll());
+            return;
+        }
+
         try {
             int i = Integer.parseInt(string) - 1;
 
@@ -30,6 +45,7 @@ public class TaskList {
             }
 
             list.remove(i);
+            updateIndex();
             latest_index--;
 
             System.out.println("\nNow you have a total of " + latest_index + " Tasks in your list");
@@ -60,9 +76,9 @@ public class TaskList {
         if (checkEmpty(string)) {
             return;
         }
-        Todo todo = new Todo(string);
+        Todo todo = new Todo(string, ++latest_index);
         list.add(todo);
-        latest_index++;
+
 
         System.out.println("Got it. I have added this task:\n" + todo.toString() +
                 "\nNow you have a total of " + latest_index + " Tasks in your list");
@@ -112,9 +128,9 @@ public class TaskList {
                 return;
             }
 
-            Deadline deadline = new Deadline(strings[0], strings[1]);
+            Deadline deadline = new Deadline(strings[0], strings[1],++latest_index);
             list.add(deadline);
-            latest_index++;
+
 
             System.out.println("Got it. I have added this task:\n" + deadline.toString() +
                     "\nNow you have a total of " + latest_index + " Tasks in your list");
@@ -124,6 +140,29 @@ public class TaskList {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    public void find(String desc) {
+        desc = desc.replace("find","");
+        desc = desc.trim();
+        boolean at_least_one = false;
+        int count = 1;
+        StringBuilder sb = new StringBuilder();
+
+        for (Task task : list) {
+            if (task.description.contains(desc)) {
+                at_least_one = true;
+                sb.append(task.get_Index() + ". " + task.toString());
+                sb.append("\n");
+            }
+        }
+
+        if (!at_least_one) {
+            System.out.println(ui.noMatchingTasks());
+        } else {
+            System.out.println(ui.MatchingTasks());
+            System.out.println(sb.toString());
         }
     }
 
@@ -147,9 +186,9 @@ public class TaskList {
                 return;
             }
 
-            Event event = new Event(strings[0],strings[1]);
+            Event event = new Event(strings[0],strings[1],++latest_index);
             list.add(event);
-            latest_index++;
+
 
             System.out.println("Got it. I have added this task:\n" + event.toString() +
                     "\nNow you have a total of " + latest_index + " Tasks in your list");
@@ -161,6 +200,7 @@ public class TaskList {
             System.out.println(e);
         }
     }
+
 
     public int checkRepeats(String string, String repeat) {
 
@@ -196,8 +236,8 @@ public class TaskList {
             System.out.println(ui.emptyList());
         }
 
-        for (int i = 1; i < latest_index + 1; i++) {
-            System.out.println(i + ". " + list.get(i-1).toString());
+        for (Task task : list) {
+            System.out.println(task.get_Index() + ". " + task.toString());
         }
     }
 }
