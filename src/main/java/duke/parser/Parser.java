@@ -66,8 +66,12 @@ public class Parser {
             if(userInput.equals(CommandType.LIST.getCommand())) {
                 result.add(CommandType.LIST.getCommand());
             } else if(userInput.startsWith(CommandType.DELETE.getCommand())) {
-                result.add(CommandType.DELETE.getCommand());
-                result.add(userInput.substring(7).strip());
+                try {
+                    result.add(CommandType.DELETE.getCommand());
+                    result.add(userInput.substring(7).strip());
+                } catch(StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please input the index of the task to delete!");
+                }
             } else if(userInput.startsWith(CommandType.DONE.getCommand())) {
                 try {
                     if(userInput.charAt(4) == ' ') {
