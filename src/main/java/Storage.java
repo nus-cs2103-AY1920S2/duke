@@ -56,6 +56,25 @@ public class Storage {
         }
     }
 
+    public void removeTask(int lineIdx) {
+        try {
+            ArrayList<String> lines = this.readFromDisk();
+            FileWriter fileWriter = new FileWriter(this.filePath, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            int currIdx = 0;
+            for (String line : lines) {
+                if (currIdx != lineIdx) {
+                    bufferedWriter.write(line);
+                    bufferedWriter.newLine();
+                }
+                currIdx++;
+            }
+            bufferedWriter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public ArrayList<String> readFromDisk() {
         ArrayList<String> lines = new ArrayList<>(); 
         try {

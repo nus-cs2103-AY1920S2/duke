@@ -69,6 +69,7 @@ public class Duke {
                 } else if (command == Command.DELETE_TASK) {
                     Task task = this.taskList.removeTask(parser.getTaskIndex());
                     this.print("Deleted: " + task.getFullDescription() + "\n    " + this.taskList.printNumTasks());
+                    this.storage.removeTask(parser.getTaskIndex());
                 }
             } catch (DukeException e) {
                 this.print(e.getMessage());
