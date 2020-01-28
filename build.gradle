@@ -18,3 +18,7 @@ application {
 run {
     standardInput = System.in
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
