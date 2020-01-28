@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Representation of a event with a time.
  */
 public class Event extends Task {
+
     protected LocalDate at;
 
     /**
@@ -36,7 +37,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + at
+                .format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -45,6 +47,7 @@ public class Event extends Task {
      */
     @Override
     public String saveFormat() {
-        return "E" + " , " + (super.isDone ? "1" : "0") + " , " + super.description + " , " + this.at;
+        return "E" + " , " + (super.isDone ? "1" : "0") + " , " + super.description + " , "
+                + this.at;
     }
 }

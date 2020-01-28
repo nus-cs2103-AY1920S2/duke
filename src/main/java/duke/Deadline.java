@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Representation of a deadline with a time.
  */
 public class Deadline extends Task {
+
     protected LocalDate by;
 
     /**
@@ -36,7 +37,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + by
+                .format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -45,6 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFormat() {
-        return "D" + " , " + (super.isDone ? "1" : "0") + " , " + super.description + " , " + this.by;
+        return "D" + " , " + (super.isDone ? "1" : "0") + " , " + super.description + " , "
+                + this.by;
     }
 }

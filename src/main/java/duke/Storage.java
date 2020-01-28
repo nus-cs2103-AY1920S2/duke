@@ -12,6 +12,7 @@ import java.util.Scanner;
  * Class file to handle reading and writing of data to external files.
  */
 public class Storage {
+
     private String fp;
 
     /**
@@ -29,7 +30,8 @@ public class Storage {
      */
     private boolean convertToBoolean(String value) {
         boolean returnValue = false;
-        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value)
+        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) || "true"
+                .equalsIgnoreCase(value)
                 || "on".equalsIgnoreCase(value)) {
             returnValue = true;
         }

@@ -4,6 +4,7 @@ package duke;
  * Task class representing task type.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
