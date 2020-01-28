@@ -8,6 +8,12 @@ public class DeadlineTask extends Task {
     private Optional<Date> deadline;
     private String inputDeadline;
 
+    /**
+     * Returns a task of type deadline which is a task with a due date
+     * @param taskDescription the name of task or some description of the task to be done
+     * @param deadline should be of the form "by yyyy-MM-dd" else it will throw IvalidInputException
+     * @throws InvalidInputException
+     */
     public DeadlineTask(String taskDescription, String deadline) throws InvalidInputException  {
         this.taskDescription = taskDescription;
         Scanner sc = new Scanner(deadline);
@@ -17,10 +23,14 @@ public class DeadlineTask extends Task {
         this.inputDeadline = sc.nextLine();
         this.deadline = TimeHandler.dateFromString(this.inputDeadline);
         if(this.deadline.isEmpty()) {
-            throw new InvalidInputException("Wrong date format");
+            throw new InvalidInputException("Wrong date format. Should be yyyy-MM-dd");
         }
     }
 
+    /**
+     * Used for saving the Task into a text file
+     * @return a String of the form "deadline NAME / by yyyy-MM-dd / NUMBER indicating whether the task is done
+     */
     public String formatToStore() {
         String format = "deadline " + taskDescription + " / by " + inputDeadline + " /";
         if(isDone) {

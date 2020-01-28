@@ -1,6 +1,13 @@
 public class TaskHandler {
     private enum  possibleTasks { todo, deadline, event }
 
+    /**
+     * Returns a Task whose type is determined by taskType and the description of which is given by TaskDescription
+     * @param taskType should be a permitted taskType
+     * @param taskDescription depends on the task but should generally be "TASKDESCRIPTION / TIMING
+     * @return a Task if the format is valid
+     * @throws InvalidInputException
+     */
     public static Task taskHandler(String taskType, String taskDescription) throws InvalidInputException{
         boolean isAllowedTask = false;
         for(possibleTasks task : possibleTasks.values()) {
@@ -29,6 +36,13 @@ public class TaskHandler {
         throw new InvalidInputException();
     }
 
+    /**
+     * Takes two Strings from the file and then interprets them to return a task following a specific format
+     * @param taskType should be a keyword describing the tasktype
+     * @param taskDescription should contain taskdescription / timing(if applicable) / isDone
+     * @return a Task if the file to load from has a valid storage format
+     * @throws InvalidInputException
+     */
     public static Task parseFromFile(String taskType, String taskDescription) throws InvalidInputException {
         String[] inputs = taskDescription.split("/");
         Task myTask;

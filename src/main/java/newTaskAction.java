@@ -5,6 +5,10 @@ public class newTaskAction implements Action {
         this.command = command;
     }
 
+    /**
+     * Attempts to create a new Task if possible and add it to the taskList if there is one
+     * @param tasks taskList to add Task to
+     */
     public void doSomething(TaskList tasks) {
         try {
             String taskDescription = GlobalScanner.sc.nextLine();

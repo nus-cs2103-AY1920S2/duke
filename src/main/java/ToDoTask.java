@@ -5,6 +5,11 @@ public class ToDoTask extends Task {
         this.task = task;
     }
 
+    /**
+     * Produces a String of an appropriate format to store into the txt file when saving later on
+     * @return a String of the form "todo TASKDESCRIPTION / isDONE"
+     *
+     */
     public String formatToStore() {
         String format = "todo " + task + " /";
         if(isDone) {
