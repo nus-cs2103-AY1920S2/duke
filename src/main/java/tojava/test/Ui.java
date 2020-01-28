@@ -1,3 +1,5 @@
+package tojava.test;
+import tojava.parse.Parse;
 import java.util.Scanner;
 
 public class Ui {

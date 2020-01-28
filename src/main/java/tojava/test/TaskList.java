@@ -1,7 +1,9 @@
+package tojava.test;
+import tojava.action.Action;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> aList;
+    public ArrayList<Task> aList;
 
     public TaskList(ArrayList<Task> aList) {
         this.aList = aList;
@@ -27,6 +29,7 @@ public class TaskList {
     //for delete and done task
     public void deleteDone(int rank, String dd) {
         Action action = new Action(rank, aList);
+
         if (action.checkNum() == 0) {
             DukeException error = new DukeException();
             System.out.println(error.outOfBound());

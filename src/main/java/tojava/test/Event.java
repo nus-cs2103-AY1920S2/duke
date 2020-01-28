@@ -1,3 +1,5 @@
+package tojava.test;
+
 public class Event extends Task {
     protected String word;
     protected String date;

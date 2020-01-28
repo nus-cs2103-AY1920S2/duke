@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
+import tojava.test.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

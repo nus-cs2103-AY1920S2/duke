@@ -1,3 +1,5 @@
+package tojava.test;
+
 public class DukeException extends Throwable {
     protected String task;
 
