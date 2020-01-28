@@ -9,9 +9,7 @@ public abstract class Task {
    * The Description.
    */
   protected String description;
-  /**
-   * Is task completed?
-   */
+  /** Is task completed? */
   protected boolean isDone;
 
   /**
@@ -33,9 +31,7 @@ public abstract class Task {
     return isDone ? "\u2713" : "\u2718";
   }
 
-  /**
-   * Mark as done.
-   */
+  /** Mark as done. */
   public void markAsDone() {
     this.isDone = true;
   }

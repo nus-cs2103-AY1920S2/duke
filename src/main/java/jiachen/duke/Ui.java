@@ -4,9 +4,7 @@ package jiachen.duke;
  * The Ui class handles the view and presentation layer of the app
  */
 public class Ui {
-  /**
-   * Print header.
-   */
+  /** Print header. */
   public void printHeader() {
     String logo =
             " ____        _        \n"
@@ -81,7 +79,7 @@ public class Ui {
   /**
    * Print notification after adding new task
    *
-   * @param task       the task
+   * @param task the task
    * @param numOfTasks the num of tasks
    */
   public void printNewTask(Task task, int numOfTasks) {
@@ -97,14 +95,21 @@ public class Ui {
     printSeparator();
   }
 
-  /**
-   * Print loading error.
-   */
+  /** Print loading error. */
   public void printLoadingError() {
     System.out.println("\tERR: unable to load file from disk!\n");
   }
 
   private void printSeparator() {
     System.out.println("\t____________________________________________________________");
+  }
+
+  public void printFilteredTasks(TaskList tasks) {
+    printSeparator();
+    System.out.println("\tHere are the matching tasks in your list:");
+    for (int i = 1; i <= tasks.getList().size(); i++) {
+      System.out.println("\t " + i + ". " + tasks.get(i - 1));
+    }
+    printSeparator();
   }
 }

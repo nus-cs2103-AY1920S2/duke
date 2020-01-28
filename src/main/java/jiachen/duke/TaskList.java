@@ -8,9 +8,7 @@ import java.util.ArrayList;
 public class TaskList {
   private ArrayList<Task> tasks;
 
-  /**
-   * Instantiates a new Task list.
-   */
+  /** Instantiates a new Task list. */
   public TaskList() {
     tasks = new ArrayList<>();
   }

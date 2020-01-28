@@ -15,5 +15,7 @@ list
 delete
 delete 1000
 delete 1
+todo add clean my bed
+find clean
 list
 bye
