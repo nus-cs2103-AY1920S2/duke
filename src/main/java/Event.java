@@ -1,7 +1,4 @@
-
-
 public class Event extends Task {
-
 
     protected String at;
 
@@ -15,6 +12,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + "(at: " + at + ")";
     }
 
+    /**
+     *
+     * @return a string containing the updated data of the Event
+     */
     public String saveData(){
         String temp = this.isDone? "1" : "0";
         //1 is done, 0 is not done

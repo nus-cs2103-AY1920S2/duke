@@ -9,6 +9,9 @@ public class Ui {
         this.manager = manager;
     }
 
+    /**
+     * Prints out the introduction text
+     */
     public void introduction(){
 
         System.out.println(horizontalLine);
@@ -24,6 +27,10 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
+    /**
+     * Handles all the different kinds of inputs the user can have
+     * @param textEntered textEntered represents whatever the user types
+     */
     public void handleInputs(String textEntered){
         System.out.println(horizontalLine);
 

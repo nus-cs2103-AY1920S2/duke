@@ -8,6 +8,10 @@ public class Storage {
 
     }
 
+    /**
+     *
+     * @return returns an array List with the data filled in from data.txt
+     */
     public ArrayList<Task> loadExistingData() {
         String fileName = "data/data.txt";
         String line = null;
@@ -67,6 +71,12 @@ public class Storage {
         return listOfTasks;
     }
 
+
+    /**
+     *
+     * @param list list contains the ArrayList filled with all the data up till now.
+     *             It will be saved in data.txt
+     */
 
     public void saveExistingData(ArrayList<Task> list){
         String fileName = "data/data.txt";
