@@ -1,2 +1,2 @@
-T | 0 | play
-D | 0 | reject people | 2020-01-30
+D | 1 | reject people | 2020-01-30
+T | 0 | y

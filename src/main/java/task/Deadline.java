@@ -11,40 +11,40 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected String by;
-    protected LocalDate date;
-    protected LocalTime time;
-    protected LocalDateTime dateTime;
+	protected String by;
+	protected LocalDate date;
+	protected LocalTime time;
+	protected LocalDateTime dateTime;
 
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
+	public Deadline(String description, String by) {
+		super(description);
+		this.by = by;
+	}
 
-    /**
-     * This method formats the Deadline object based on its representation into a format suitable for
-     * writing to a file.
-     *
-     * @return A String object that can be easily written and retrieved from the data file.
-     */
-    public String format() {
-        return "D" + " | " + (this.isDone ? "1" : "0") + " | " + description + " | " + date;
-    }
+	/**
+	 * This method formats the Deadline object based on its representation into a format suitable for
+	 * writing to a file.
+	 *
+	 * @return A String object that can be easily written and retrieved from the data file.
+	 */
+	public String format() {
+		return "D" + " | " + (this.isDone ? "1" : "0") + " | " + description + " | " + date;
+	}
 
-    public Deadline(String description, LocalDate date) {
-        super(description);
+	public Deadline(String description, LocalDate date) {
+		super(description);
 //        this.dateTime = dateTime;
-        this.date = date;
-    }
+		this.date = date;
+	}
 
-    /**
-     * A specialised toString() method based on implementations of the object.
-     *
-     * @return A specialised String representation of the Deadline object.
-     */
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
+	/**
+	 * A specialised toString() method based on implementations of the object.
+	 *
+	 * @return A specialised String representation of the Deadline object.
+	 */
+	@Override
+	public String toString() {
+		return "[D]" + super.toString() + " (by: " +
+				date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+	}
 }
