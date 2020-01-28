@@ -53,6 +53,9 @@ public class Parser {
         } else if (str.contains("delete")) {
             tasklist.delete(str);
 
+        } else if (str.contains("find")) {
+            tasklist.find(str);
+
         } else {
             System.out.println(ui.unknownCommand());
         }

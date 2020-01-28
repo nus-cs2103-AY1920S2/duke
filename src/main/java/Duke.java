@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
 
 public class Duke {
     private ArrayList<Task> list;
@@ -17,7 +16,7 @@ public class Duke {
         this.list = storage.readFile();
         this.latest_index = storage.returnInitialIndex();
 
-        TaskList tasklist = new TaskList(list,latest_index,storage);
+        TaskList tasklist = new TaskList(list, latest_index, storage);
         Parser parser = new Parser(tasklist);
         parser.parse();
     }

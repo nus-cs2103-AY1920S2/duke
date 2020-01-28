@@ -52,10 +52,15 @@ public class Ui {
         return "Please do not give an empty command :(";
     }
 
+    public String noMatchingTasks() {
+        return "There are no matching tasks :/";
+    }
 
+    public String matchingTasks() {
+        return "Here are the matching tasks in your list:";
+    }
 
-
-
-
-
+    public String deleteAll() {
+        return "Your whole list has been cleared!";
+    }
 }

@@ -1,4 +1,3 @@
-import java.text.*;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
@@ -8,8 +7,8 @@ public class Event extends Task {
     protected String type = "E";
     protected String time;
 
-    public Event(String description, String time) {
-        super(description);
+    public Event(String description, String time, int index) {
+        super(description, index);
         time = time.trim();
         this.time = time;
 

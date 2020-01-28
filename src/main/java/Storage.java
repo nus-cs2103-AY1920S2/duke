@@ -49,10 +49,10 @@ public class Storage {
             time = line.substring(time_start_index);
             time = time.substring(0, time.length() - 1);
 
-            Event event = new Event(desc, time);
+            Event event = new Event(desc, time, ++latest_index);
             event.isDone = done;
             list.add(event);
-            latest_index++;
+
 
         } else if (line.charAt(1) == 'D') {
             boolean done = line.charAt(4) == 'N' ? false : true;
@@ -69,20 +69,20 @@ public class Storage {
             desc = line.substring(7, desc_end_index);
             time = line.substring(time_start_index);
             time = time.substring(0, time.length() - 1);
-            Deadline deadline = new Deadline(desc, time);
+            Deadline deadline = new Deadline(desc, time, ++latest_index);
             deadline.isDone = done;
             list.add(deadline);
-            latest_index++;
+
 
 
         } else if (line.charAt(1) == 'T'){
             boolean done = line.charAt(4) == 'N' ? false : true;
             desc = new_line;
 
-            Todo todo = new Todo(desc);
+            Todo todo = new Todo(desc, ++latest_index);
             list.add(todo);
             todo.isDone = done;
-            latest_index++;
+
 
         } else {
             System.out.println("Weird thing found in text file...");

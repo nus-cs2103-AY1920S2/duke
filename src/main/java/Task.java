@@ -3,10 +3,20 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String type = "-";
+    protected int index;
 
-    public Task(String description) {
+    public Task(String description, int index) {
         this.description = description;
         this.isDone = false;
+        this.index = index;
+    }
+
+    public void set_Index(int new_index) {
+        index = new_index;
+    }
+
+    public int get_Index() {
+        return index;
     }
 
     public String getStatusIcon() {

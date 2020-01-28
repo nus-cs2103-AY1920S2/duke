@@ -7,9 +7,10 @@ public class Deadline extends Task {
     protected String type = "D";
     protected String time;
     protected LocalDate date;
+    protected int index;
 
-    public Deadline(String description, String time) {
-        super(description);
+    public Deadline(String description, String time, int index) {
+        super(description, index);
         time = time.trim();
         this.time = time;
 
