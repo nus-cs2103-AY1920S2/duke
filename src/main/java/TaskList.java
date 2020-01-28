@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -38,7 +37,7 @@ public class TaskList {
         command = command.substring(command.indexOf(" "));
         switch (taskType) {
             case "todo":
-                task = new Todo(command);
+                task = new ToDo(command);
                 break;
             case "event":
                 task = new Event(command.split("/at ")[0],

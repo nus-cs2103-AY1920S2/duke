@@ -26,7 +26,7 @@ public class Storage {
             String[] task = sc.nextLine().split("/");
             switch (task[0]) {
                 case "T":
-                    Task toDo = new Todo(task[2]);
+                    Task toDo = new ToDo(task[2]);
                     if (task[1].equals("true")) {
                         toDo.markAsDone();
                     }
@@ -64,7 +64,7 @@ public class Storage {
         File file = new File(path.toString());
         FileWriter writer = new FileWriter(file);
         for (Task task : tasks) {
-            if (task instanceof Todo) {
+            if (task instanceof ToDo) {
                 writer.write("T/" + task.isDone + "/ " + task.description.trim() + "\n");
             } else if (task instanceof Deadline) {
                 writer.write("D/" + task.isDone + "/ " + task.description.trim() + " /by " + ((Deadline) task).date
