@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Duke;
 import duke.DukeException;
 
 import java.time.DateTimeException;
@@ -28,6 +29,8 @@ public class Event extends Task {
         } catch(DateTimeParseException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
         } catch(DateTimeException e) {
+            throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
+        } catch(ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
         }
     }

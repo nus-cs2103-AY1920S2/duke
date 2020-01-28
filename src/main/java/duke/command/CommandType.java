@@ -7,7 +7,8 @@ public enum CommandType {
     LIST("list"),
     TODO("todo"),
     EVENT("event"),
-    DEADLINE("deadline");
+    DEADLINE("deadline"),
+    FIND("find");
 
     private final String command;
 
