@@ -45,7 +45,6 @@ public class Deadline extends Task {
     public String toString() {
         String checkbox = "[" + super.getStatusIcon() + "]";
         String dateFormat =  byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + checkbox + " " + super.toString()
-                + " (by: " + dateFormat + ", " + formatTime12Hour(time24Hr) + ")";
+        return "[D]" + checkbox + " " + super.toString() + " (by: " + dateFormat + ", " + formatTime12Hour(time24Hr) + ")";
     }
 }
