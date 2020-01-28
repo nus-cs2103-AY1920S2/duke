@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -23,4 +25,10 @@ public class Task {
     public String generateWriteFormat() {
         return null;
     }
+
+    public static LocalDate generateTime(String input) {
+        return LocalDate.parse(input);
+
+    }
+
 }
