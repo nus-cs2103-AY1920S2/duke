@@ -56,7 +56,7 @@ public class Ui {
         return "There are no matching tasks :/";
     }
 
-    public String MatchingTasks() {
+    public String matchingTasks() {
         return "Here are the matching tasks in your list:";
     }
 

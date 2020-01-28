@@ -161,7 +161,7 @@ public class TaskList {
         if (!at_least_one) {
             System.out.println(ui.noMatchingTasks());
         } else {
-            System.out.println(ui.MatchingTasks());
+            System.out.println(ui.matchingTasks());
             System.out.println(sb.toString());
         }
     }
