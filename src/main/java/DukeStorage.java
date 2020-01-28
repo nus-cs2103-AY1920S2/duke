@@ -2,7 +2,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -53,18 +55,17 @@ public class DukeStorage {
 
     private DukeList loadDecoder(List<String> savedList, DukeList dl) {
         for(String currSaveEntry : savedList) {
-            String[] input = currSaveEntry.split("-");
+            String[] input = currSaveEntry.split("\\|");
             String command = input[0];
             String isDoneString = input[1];
             String taskDesc = input[2];
-
             if(command.equals("T")) {
                 dl.loadAdd(new Todo(taskDesc, isDoneString));
             } else if(command.equals("E")) {
-                String by = input[3];
+                LocalDate by = LocalDate.parse(input[3]);
                 dl.loadAdd((new Event(taskDesc, by, isDoneString)));
             } else {
-                String by = input[3];
+                LocalDate by = LocalDate.parse(input[3]);
                 dl.loadAdd((new Deadline(taskDesc, by, isDoneString)));
             }
         }

@@ -10,7 +10,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(String desc, String by, String iDS) {
+    public Deadline(String desc, LocalDate by, String iDS) {
         this(desc, by);
         if(iDS.equals("O")) {
             this.done();
@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveString() {
-        return super.getSaveString() + "-" + this.by;
+        return super.getSaveString() + "|" + this.by.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
     }
 
 }

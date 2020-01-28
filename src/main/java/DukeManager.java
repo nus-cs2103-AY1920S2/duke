@@ -1,4 +1,5 @@
 import DukeExceptions.*;
+import UI.DukeUI;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -7,26 +8,27 @@ import java.util.Scanner;
 
 // Handles the functioning of Duke
 public class DukeManager {
-    private static String line = "    ____________________________________________________________";
     private DukeList dl;
     DukeStorage ds = new DukeStorage();
+    DukeUI ui;
 
 
     public DukeManager() {
         try {
             dl = ds.load();
+            ui = new DukeUI();
         } catch(IOException ioe) {
             System.out.println(ioe.getMessage());
         }
     }
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        ui.showWelcomeMessage();
+        String command;
 
         while(true) {
+            command = ui.readCommandString();
             handleCommand(command);
-            command = sc.nextLine();
         }
     }
 
@@ -35,7 +37,7 @@ public class DukeManager {
         String command = splitS[0];
         DukeCommandEnums DukeCommand = getEnum(command);
 
-        System.out.println(line);
+        ui.printLine();
         try{
             switch(DukeCommand) {
                 case DELETE:
@@ -86,7 +88,7 @@ public class DukeManager {
             } catch (InvalidFormatException ife) {
             System.out.println("    " + ife.getMessage());
         }
-        System.out.println(line);
+        ui.printLine();
     }
 
     public LocalDate findDeadline(String S) throws MissingTimingException, InvalidFormatException{

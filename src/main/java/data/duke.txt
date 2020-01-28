@@ -1,3 +1,5 @@
-T-X-feed cat
-T-X-feed dog
-T-X-eat cat
+T|X|feed dog
+T|X|meet friend
+T|X|kiss cat
+T|X|feed cat
+D|X|tutorial|2020-12-30

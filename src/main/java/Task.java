@@ -23,9 +23,10 @@ public class Task {
     public String getTaskCode() {return taskCode;}
 
     public String getSaveString() {
-        String currEntry = String.format("%s-%s-%s", this.taskCode, this.getIsDoneString(), this.getTaskName());
+        String currEntry = String.format("%s|%s|%s", this.taskCode, this.getIsDoneString(), this.getTaskName());
         return currEntry;
     }
+
     public String toString() {
         String output = String.format("[%s] %s", isDoneString, taskName);
 
