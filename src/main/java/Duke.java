@@ -43,6 +43,7 @@ public class Duke {
                     System.out.println(doneTask + "\n" + horizontalLine);
 
                 } else if (command.startsWith("deadline")) {
+                    String commandWithoutEvent = command.substring(9);
                     String[] commands = command.split("/by");
                     Deadline deadline = new Deadline(commands[0], commands[1]);
                     list.add(deadline);
