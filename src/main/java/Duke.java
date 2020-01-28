@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -146,6 +149,7 @@ public class Duke {
      * @return a new Deadline from user input.
      * @throws DukeException if user input is blank.
      * @throws DukeException if user input has incorrect format.
+     * @throws DukeException if date is not of the format: yyyy-mm-dd.
      */
     public static Deadline inputDeadline(Scanner sc) throws DukeException {
         String delimiter = " /by ";
@@ -158,13 +162,22 @@ public class Duke {
 
             // Check input format
             if (delimiterIndex >= 0) {
-                String description = input.substring(0, delimiterIndex)
-                        .strip();
+                try {
+                    String description = input.substring(0, delimiterIndex)
+                            .strip();
 
-                String by = input.substring(delimiterIndex + delimiter.length())
-                        .strip();
+                    String by = input.substring(delimiterIndex + delimiter.length())
+                            .strip();
 
-                return new Deadline(description, by);
+                    LocalDate date = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
+
+                    return new Deadline(description, date);
+
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("☹ OOPS!!!"
+                            + " Please enter the date of the deadline\n"
+                            + " in the following format: yyyy-mm-dd.");
+                }
 
             } else {
                 // Throw exception for incorrect inputs
