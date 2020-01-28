@@ -16,6 +16,9 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String format() {
+        return "E" + " | " + (this.isDone?"1":"0") + " | " + description + " | " + date;
+    }
     public Event(String description, LocalDate date) {
         super(description);
 //        this.dateTime = dateTime;

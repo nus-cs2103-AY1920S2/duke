@@ -15,6 +15,9 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String format() {
+        return "D" + " | " + (this.isDone ? "1" : "0") + " | " + description + " | " + date;
+    }
     public Deadline(String description, LocalDate date) {
         super(description);
 //        this.dateTime = dateTime;

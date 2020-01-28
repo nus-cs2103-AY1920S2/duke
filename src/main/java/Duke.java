@@ -1,9 +1,16 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,15 +20,45 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
+
+        // get file ready to save to file.
+        String home = System.getProperty("user.dir");
+        // inserts correct file path separator on *nix and Windows
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "data", "duke.txt");
+//        System.out.println(path);
+//        System.out.println(java.nio.file.Files.exists(path));
+
+
         String divider = "____________________________________________________________";
         System.out.println("My name is Jarvis!\nHow may I provide my services on this fine day?\n" + divider);
 
         ArrayList<Task> tasks = new ArrayList<>();
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //System.out.println(LocalDateTime.parse("2020-12-13 1300", dtf).format(DateTimeFormatter.ofPattern("yyyy")));
-//        Task[] tasks = new Task[100];
-        //String[] tasks = new String[100];
+
         int i = 0;
+        // Load data from file
+        try {
+            List<String> loadedTasks = Files.readAllLines(path);
+            if(loadedTasks.size() > 1){
+                i = i = Math.max(loadedTasks.size(), 0);
+            }
+            for (String s : loadedTasks) {
+                if(!s.equals("")) {
+                    tasks.add(Task.load(s));
+                }
+            }
+            if (!tasks.isEmpty()){
+                System.out.println("Welcome back, you have the following tasks on hand:");
+                for(Task t:tasks){
+                    System.out.println(t);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext() /*!nextLine.equals("bye")*/) {
             String nextLine = sc.nextLine();
@@ -43,6 +80,11 @@ public class Duke {
                 i--;
                 System.out.println("You have " + i + " tasks in your list currently.");
                 System.out.println(divider);
+                String s = "";
+                for (Task t: tasks) {
+                    s = s + t.format() + "\n";
+                }
+                write(s, path);
                 continue;
             }
 
@@ -68,6 +110,11 @@ public class Duke {
                 System.out.println("Alright! You have successfully completed:");
                 System.out.println(tasks.get(taskNum - 1));
                 System.out.println(divider);
+                String s = "";
+                for (Task t: tasks) {
+                    s = s + t.format() + "\n";
+                }
+                write(s, path);
                 continue;
             }
 
@@ -85,9 +132,18 @@ public class Duke {
                         LocalDate.parse(substrings[1].split("/by ")[1], dtf)));
             }
             System.out.println("Successfully added:\n" + tasks.get(i).toString());
+            // If the number of tasks differs in the loop, needa update the Hard disk file
+            String s = "";
+            for (Task t: tasks) {
+                s = s + t.format() + "\n";
+            }
+            write(s, path);
+
             i++;
             System.out.println("You now have " + i + " number of tasks in the list");
             System.out.println(divider);
+
+
         }
         System.out.println("Hope my service has been of great help! See you again!");
     }
@@ -101,6 +157,23 @@ public class Duke {
         } else if ((s.contains("todo") || s.contains("event") || s.contains("deadline")
                 || s.contains("done") || s.contains("delete")) && s.split(" ").length == 1) {
             throw new DukeException("Your description may not be empty");
+        }
+    }
+
+    public static void write(String s, Path path) {
+        if(!Files.exists(path)) {
+            try {
+                Files.createDirectory(path);
+            } catch (FileAlreadyExistsException e) {
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try (BufferedWriter writer = Files.newBufferedWriter(path)){
+            writer.write(s);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }
