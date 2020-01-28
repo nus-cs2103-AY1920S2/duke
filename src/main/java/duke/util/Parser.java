@@ -18,6 +18,7 @@ public class Parser {
             put("deadline", Keyword.DEADLINE);
             put("event", Keyword.EVENT);
             put("delete", Keyword.DELETE);
+            put("find", Keyword.FIND);
         }
     };
 
@@ -61,6 +62,9 @@ public class Parser {
             break;
         case DELETE:
             command = checkValidDeleteArgument(details, taskList);
+            break;
+        case FIND:
+            command = checkValidFindArgument(details);
             break;
         case TODO:
             command = checkValidTodoArgument(details);
@@ -220,5 +224,16 @@ public class Parser {
         }
 
         return new AddCommand(new Event(caption, bySchedule));
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * find command.
+     * @param details The keyword that the client enters
+     * @return The FindCommand instance of the corresponding input.
+     */
+
+    private FindCommand checkValidFindArgument(String details) {
+        return new FindCommand(details);
     }
 }

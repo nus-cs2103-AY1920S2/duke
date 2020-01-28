@@ -1,6 +1,9 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TaskList implements TaskListInterface {
     ArrayList<Task> tasks;
@@ -98,6 +101,29 @@ public class TaskList implements TaskListInterface {
         storage.rewriteTasksToFile(tasks);
         return "Noted. I've removed this task: \n " + String.format("    %s\n", task) +
                 String.format("Now you have %d task(s) in the list.", tasks.size());
+    }
+
+    /**
+     * Finds the task that contains a particular keyword.
+     * @param key The keyword.
+     * @return The message to be displayed.
+     */
+
+    public String findTask(String key) {
+        ArrayList<Task> filteredTasks = this.tasks.stream()
+                .filter(x -> x.getDescription().contains(key))
+                .collect(Collectors.toCollection(ArrayList::new));
+        String message = "Here are the matching tasks in your list:";
+
+        if (filteredTasks.size() == 0) {
+            return "OOPS! There is no matching task in your list.";
+        }
+
+        for (int i = 1; i <= filteredTasks.size(); i++) {
+            message += String.format("\n%d. %s", i, filteredTasks.get(i - 1));
+        }
+
+        return message;
     }
 
     public int size() {
