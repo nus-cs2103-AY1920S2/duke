@@ -24,6 +24,7 @@ public class Event extends DateTask {
         this.startAtDate = fields[1].equals("-")
                 ? LocalDate.now()
                 : LocalDate.parse(fields[1]);
+        System.out.println(this.startAtTime);
     }
 
     @Override
@@ -44,9 +45,11 @@ public class Event extends DateTask {
     @Override
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
-        String time = this.startAtTime != null ? this.startAtTime.toString() : "-";
 
-        return "E | " + d + " | " + super.getDescription() + " | " + this.startAtTime
+
+        String time = this.startAtTime == null ? "-" : this.startAtTime.toString();
+
+        return "E | " + d + " | " + super.getDescription() + " | " + time
                 + " " + this.startAtDate;
     }
 }

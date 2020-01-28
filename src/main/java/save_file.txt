@@ -2,4 +2,6 @@ T | 0 | hello
 E | 0 | meeting | 14:30 2020-01-28
 T | 1 | return book
 D | 1 | presentation | 12:00 2020-01-29
-E | 0 | meeting | null 2020-04-12
+D | 0 | meeting | - 2020-03-18
+D | 0 | meeting | - 2020-03-18
+E | 0 | meeting | - 2020-12-03

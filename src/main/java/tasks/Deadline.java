@@ -11,6 +11,7 @@ public class Deadline extends DateTask {
 
     public Deadline(String description, String finishBy) {
         super(description);
+
         String[] fields = finishBy.split(" ");
         if (fields.length != 2) {
             throw new DateTimeException("Insufficient parameters for date/time");
@@ -22,6 +23,8 @@ public class Deadline extends DateTask {
         this.finishByDate = fields[1].equals("-")
                 ? LocalDate.now()
                 : LocalDate.parse(fields[1]);
+
+        System.out.println(this.finishByTime);
     }
 
     @Override
@@ -42,7 +45,8 @@ public class Deadline extends DateTask {
     @Override
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
-        String time = this.finishByTime != null ? this.finishByTime.toString() : "-";
+
+        String time = this.finishByTime == null ? "-" : this.finishByTime.toString();
         return "D | " + d + " | " + super.getDescription() + " | " + time
                 + " " + this.finishByDate;
     }
