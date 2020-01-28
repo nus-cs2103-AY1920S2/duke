@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -50,6 +55,7 @@ public class Duke {
                 } else {
                     say("Your todo is as empty as your brain. Try again properly.");
                 }
+                saveList();
                 break;
             case "deadline":
                 String entry = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
@@ -60,6 +66,7 @@ public class Duke {
                 say("Another task? Oh well, here's the task:\n"
                         + "\t" + getTask(getTaskCount()) + "\n"
                         + "Now you have " + getTaskCount() + " tasks in the list.");
+                saveList();
                 break;
             case "event":
                 String input = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
@@ -70,6 +77,7 @@ public class Duke {
                 say("Another task? Oh well, here's the task:\n"
                         + "\t" + getTask(getTaskCount()) + "\n"
                         + "Now you have " + getTaskCount() + " tasks in the list.");
+                saveList();
                 break;
             case "list":
                 say("Here are your procrastinated tasks:\n"
@@ -111,8 +119,21 @@ public class Duke {
         System.out.println(result);
     }
 
-    private void addTask(String task) {
-        tasks.add(new Task(task));
+    private void saveList() {
+        try {
+            File f = new File(Paths.get("data", "duke.txt").toString());
+            f.getParentFile().mkdirs();
+
+            FileWriter fw = new FileWriter(f);
+            Coder c = new Coder();
+            for (Task t : tasks) {
+                fw.append(c.encode(t) + "\n");
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addTodo(String todo) {
