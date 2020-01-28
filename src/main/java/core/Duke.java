@@ -3,18 +3,12 @@ package core;
 import command.Command;
 import dukexception.DukeException;
 
-/**
- * The main driver of the program.
- */
 public class Duke {
 
     private Ui ui;
     private Common common;
     private Parser parser;
 
-    /**
-     * Constructor to initialize essential components of the program.
-     */
     public Duke(){
         ui=new Ui();
         try {
@@ -25,9 +19,7 @@ public class Duke {
         }
     }
 
-    /**
-     * run the program.
-     */
+
     public void run(){
         ui.preLog();
 

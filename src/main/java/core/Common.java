@@ -5,30 +5,19 @@ import task.Task;
 
 import java.util.ArrayList;
 
-/**
- * Interact with model and storage to execute the command.
- */
 public class Common {
 
     private Model model;
     private StateHolder stateHolder=null;
     private Storage storage;
 
-    /**
-     * Constructor to initialize the storage and external storage, load the external data if there is.
-     * @throws DukeException
-     */
     public Common() throws DukeException {
         storage=new Storage();
         model = new Model();
         loadData();
     }
 
-    /**
-     * Add new task to the model, update the state.
-     * @param task new task.
-     * @return the response text to the ui.
-     */
+    // todo duplicate updateState() on many method, any way to reduce duplication?
     public String[] addTask(Task task) {
         model.addTask(task);
         updateState();
@@ -39,11 +28,6 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
-    /**
-     * Print the list of task.
-     * @return list of task in string array.
-     * @throws DukeException when task list is empty.
-     */
     public String[] printList() throws DukeException {
         ArrayList<String> s=model.formatList();
         updateState();
@@ -51,12 +35,6 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
-    /**
-     * Mark the specific task as done, update the state.
-     * @param index indicates the specific task.
-     * @return the response text of marking the task.
-     * @throws DukeException when the index is invalid.
-     */
     public String[] markAsDone(int index) throws DukeException {
         model.markDone(index);
         updateState();
@@ -66,12 +44,6 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
-    /**
-     * Delete the task.
-     * @param index indicates the specific task.
-     * @return the response text of deleting the task.
-     * @throws DukeException when the index is invalid.
-     */
     public String[] deleteTask(int index) throws DukeException {
         Task task=model.getTask(index);
         model.deleteTask(index);
@@ -83,41 +55,14 @@ public class Common {
         return s.toArray(new String[0]);
     }
 
-    /**
-     * Find all the tasks with the specified keyword.
-     * @param keyword given keyword to be matched or
-     *                partially matched.
-     * @return list of matched task to be displayed.
-     * @throws DukeException when task list is empty or
-     * there is no matching task with specified keyword.
-     */
-    public String[] findTask(String keyword) throws DukeException{
-        updateState();
-        ArrayList<String> s=new ArrayList<>();
-        s.add("Here are the matching tasks in your list:");
-        s.addAll(model.findTask(keyword));
-        return s.toArray(new String[0]);
-    }
-
-    /**
-     * Update the state holder of the current state.
-     */
     private void updateState(){
         stateHolder.addNewState(new State(model.getTaskList()));
     }
 
-    /**
-     * Save the current state holder to external file.
-     * @throws DukeException when saving data is unsuccessful.
-     */
     public void saveData() throws DukeException {
         storage.save(stateHolder);
     }
 
-    /**
-     * Load the saved state to the system.
-     * @throws DukeException when loading is unsuccessful.
-     */
     private void loadData() throws DukeException{
         stateHolder=storage.load();
         if(stateHolder==null) {
@@ -127,10 +72,6 @@ public class Common {
         }
     }
 
-    /**
-     * Reset the current data and the external data.
-     * @throws DukeException clear data is unsuccessful.
-     */
     public void reset() throws DukeException {
         model.clearData();
         storage.clearData();
