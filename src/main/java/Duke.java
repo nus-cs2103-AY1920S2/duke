@@ -7,7 +7,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private String FilePath;
+
     public Duke(String filePath) {
+        FilePath = filePath;
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -29,6 +32,9 @@ public class Duke {
         DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui);
     }
 
+    public String getFilePath() {
+        return this.FilePath;
+    }
     public void run() {
         // Greet the user
         ui.greetUser();
