@@ -10,6 +10,7 @@ public class Parser {
     Parser(String next) {
         this.command = next;
     }
+
     public String getTaskType() {
         if (this.command.trim().contains(" ")) {
             return this.command.trim().split(" ")[0];
@@ -24,9 +25,9 @@ public class Parser {
 
     public String getThird() {
         if (this.command.contains("/")) {
-            return this.command.substring(this.command.indexOf(" ") + 1, this.command.indexOf("/") - 1);
-        }
-        else {
+            return this.command.substring(this.command.indexOf(" ") + 1,
+                    this.command.indexOf("/") - 1);
+        } else {
             return this.command.trim().substring(5);
         }
     }

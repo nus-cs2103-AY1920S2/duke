@@ -1,8 +1,13 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Storage {
     private String filePath;
@@ -13,7 +18,7 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File (filePath);
+        File file = new File(filePath);
         try {
             Scanner s = new Scanner(file);
             while (s.hasNextLine()) {
@@ -22,14 +27,16 @@ public class Storage {
                 String isDone = curr.substring(2,3);
                 Task add;
                 if (type.equals("T")) {
-                    add = new ToDo(curr.substring(4), isDone.equals("0")? false : true);
+                    add = new ToDo(curr.substring(4), isDone.equals("0") ? false : true);
                 } else {
                     String name = curr.substring(4, curr.indexOf('|', 4));
                     String date = curr.substring(curr.indexOf('|', 4) + 1);
                     if (type.equals("D")) {
-                        add = new Deadline(name, Parser.extractDate(date), isDone.equals("0")? false : true);
+                        add = new Deadline(name, Parser.extractDate(date),
+                                isDone.equals("0") ? false : true);
                     } else {
-                        add = new Event(name, Parser.extractDate(date), isDone.equals("0")? false : true);
+                        add = new Event(name, Parser.extractDate(date),
+                                isDone.equals("0") ? false : true);
                     }
                 }
                 tasks.add(add);
@@ -41,7 +48,7 @@ public class Storage {
     }
 
     static void updateDrive(Task updatedTask) {
-        File file = new File ("./data/duke.txt");
+        File file = new File("./data/duke.txt");
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(file, true));
@@ -77,8 +84,8 @@ public class Storage {
                 writer.newLine();
             }
             writer.close();
-        } catch (Exception e) {
-        }
+        } catch (FileNotFoundException e) {
+        } catch (IOException ie) { }
     }
 
 }

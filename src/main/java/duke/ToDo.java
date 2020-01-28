@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     public String writeDrive() {
-        return "T|" + (super.isDone()? "1|" : "0|") + this.name;
+        return "T|" + (super.isDone() ? "1|" : "0|") + this.name;
     }
 
     public ToDo setDone() {

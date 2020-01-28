@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class DukeExceptionTest {
     @Test
-    public void runTest(){
+    public void runTest() {
         assertNotNull(new DukeException("read"));
     }
 }

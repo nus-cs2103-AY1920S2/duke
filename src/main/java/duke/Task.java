@@ -4,7 +4,7 @@ public abstract class Task {
     protected String name;
     private boolean isDone;
 
-    public Task (String name) {
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
@@ -15,7 +15,7 @@ public abstract class Task {
     }
 
     public String toString() {
-        String done = isDone? "\u2713" : "\u2718";
+        String done = isDone ? "\u2713" : "\u2718";
         return "[" + done + "] " + name;
     }
 

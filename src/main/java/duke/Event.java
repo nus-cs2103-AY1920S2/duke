@@ -17,12 +17,15 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
+        return "[E]" + super.toString() + "(at: " +
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
     }
 
     public String writeDrive() {
-        return "E|" + (super.isDone()? "1|" : "0|") + this.name + "|" + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
+        return "E|" + (super.isDone() ? "1|" : "0|") + this.name + "|" +
+                date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
     }
+
     public Event setDone() {
         return new Event(this.name, this.date, true);
     }

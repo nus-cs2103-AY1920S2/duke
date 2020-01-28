@@ -4,13 +4,6 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -56,7 +49,8 @@ public class Duke {
                     storage.updateDrive(updatedTask);
                     ui.printDone(updatedTask);
                 } catch (IndexOutOfBoundsException e) {
-                    ui.printException(new DukeException(" ☹ OOPS!!! The description of a done cannot be empty."));
+                    ui.printException(new DukeException(
+                            " ☹ OOPS!!! The description of a done cannot be empty."));
                 }
             } else if (curr.getTaskType().equals("delete")) {
                 try {
@@ -66,7 +60,8 @@ public class Duke {
                     storage.deleteDrive(taskNumber);
                     ui.printRemove(removedTask, tasks.size());
                 } catch (IndexOutOfBoundsException e) {
-                    ui.printException(new DukeException(" ☹ OOPS!!! The description of a delete cannot be empty."));
+                    ui.printException(new DukeException(
+                            " ☹ OOPS!!! The description of a delete cannot be empty."));
                 }
             } else {
                 Task newTask;
@@ -77,7 +72,8 @@ public class Duke {
                         newTask = new ToDo(taskName);
                         addTask(newTask);
                     } catch (IndexOutOfBoundsException e) {
-                        ui.printException(new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty."));
+                        ui.printException(new DukeException(
+                                " ☹ OOPS!!! The description of a todo cannot be empty."));
                     }
                 } else if (curr.getTaskType().equals("deadline")) {
                     try {
@@ -86,7 +82,8 @@ public class Duke {
                         newTask = new Deadline(taskName, time);
                         addTask(newTask);
                     } catch (IndexOutOfBoundsException e) {
-                        ui.printException(new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty."));
+                        ui.printException(new DukeException(
+                                " ☹ OOPS!!! The description of a deadline cannot be empty."));
                     }
                 } else if (next.trim().split(" ")[0].equals("event")) {
                     try {
@@ -95,10 +92,12 @@ public class Duke {
                         newTask = new Event(taskName, time);
                         addTask(newTask);
                     } catch (IndexOutOfBoundsException e) {
-                        ui.printException(new DukeException(" ☹ OOPS!!! The description of an event cannot be empty."));
+                        ui.printException(new DukeException(
+                                " ☹ OOPS!!! The description of an event cannot be empty."));
                     }
                 } else {
-                    ui.printException(new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+                    ui.printException(new DukeException(
+                            " ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
                 }
             }
             next = sc.nextLine();
