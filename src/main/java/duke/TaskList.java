@@ -32,4 +32,17 @@ public class TaskList {
     public ArrayList<Task> toArr() {
         return lst;
     }
+
+    public TaskList search(String s) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task t: lst) {
+            String[] arr = t.description.split(" ");
+            for (String part: arr) {
+                if (part.equals(s) && !res.contains(t)) {
+                    res.add(t);
+                }
+            }
+        }
+        return new TaskList(res);
+    }
 }

@@ -70,6 +70,9 @@ public class Akshay {
                         UI.say("Failed to delete item!!!");
                     }
                     break;
+                case ("find"):
+                    UI.results(tasks.search(c[1]));
+                    break;
                 default:
                     try {
                         throw new DukeException();
