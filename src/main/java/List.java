@@ -25,7 +25,7 @@ public class List {
 
     public List delete(int index) {
         count--;
-        String response = line + "\n" + "Noted. I've removed this task:\n" + this.items.get(index) + "Now you have " + count + " task";
+        String response = line + "\n" + space + "Noted. I've removed this task:\n" + space + this.items.get(index) + space + "Now you have " + count + " task";
         if (this.count > 1) {
             response += "s";
         }

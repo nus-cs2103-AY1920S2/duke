@@ -1,5 +1,4 @@
 public class Deadline extends Item {
-    String name;
     String time;
     boolean done;
     Deadline(String name, String time) {
@@ -8,8 +7,21 @@ public class Deadline extends Item {
         this.done = false;
     }
 
+    Deadline(String name, String time, boolean done) {
+        super(name, done);
+        this.time = time;
+    }
+
     public String toString() {
         String temp = "   [D]" + super.toString() + " (by: "+ time + ")\n";
         return temp;
+    }
+    public String replace() {
+        String temp = "   [D][✗] " + super.getName() + " (by: "+ time + ")\n";
+        return temp;
+    }
+    @Override
+    public String getType() {
+        return "[D]";
     }
 }
