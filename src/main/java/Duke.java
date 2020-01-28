@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Runs the code better.
+     * Runs the code.
      *
      * @throws IOException Throws IOException.
      */
