@@ -30,11 +30,12 @@ public class Duke {
 
 
         FastReader fr = new FastReader();
-        String textEntered = fr.nextLine();
+
 
         TaskManager manager = new TaskManager();
 
         manager.loadExistingData();
+        String textEntered = fr.nextLine();
 
         while(!textEntered.equals("bye")){
 
@@ -48,9 +49,16 @@ public class Duke {
 
             }else if(textEntered.contains("done")){
                 String[] helper = textEntered.split(" ");
-                int indexOfTaskDone = Integer.parseInt(helper[1]);
-                manager.setTaskAsDone(indexOfTaskDone);
-                System.out.println(horizontalLine);
+                int indexOfTaskDone;
+                try {
+                    indexOfTaskDone = Integer.parseInt(helper[1]);
+                    manager.setTaskAsDone(indexOfTaskDone);
+                    System.out.println(horizontalLine);
+                }catch( ArrayIndexOutOfBoundsException ex){
+                    System.out.println("Done must be followed by a number");
+                }
+
+
                 textEntered = fr.nextLine();
 
 

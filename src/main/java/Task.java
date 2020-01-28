@@ -1,4 +1,4 @@
-public class Task implements java.io.Serializable{
+public class Task {
 
     protected String description;
     protected boolean isDone;

@@ -1,4 +1,4 @@
-public class Deadline extends Task implements java.io.Serializable{
+public class Deadline extends Task {
 
     protected String by;
 
@@ -10,5 +10,14 @@ public class Deadline extends Task implements java.io.Serializable{
     @Override
     public String toString(){
         return "[D]" + super.toString() + "(by: " + by + ")";
+    }
+
+
+    public String saveData(){
+        String temp = this.isDone? "1" : "0";
+        //1 is done, 0 is not done
+
+        return "Deadline" + "|" + temp + "|" + this.description + "|" + this.by;
+
     }
 }

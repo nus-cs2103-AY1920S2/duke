@@ -1,4 +1,4 @@
-public class Event extends Task implements java.io.Serializable{
+public class Event extends Task {
 
     protected String at;
 
@@ -9,6 +9,13 @@ public class Event extends Task implements java.io.Serializable{
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + "(at: " + at + ")";
+    }
+
+    public String saveData(){
+        String temp = this.isDone? "1" : "0";
+        //1 is done, 0 is not done
+
+        return "Event" + "|" + temp + "|" + this.description + "|" + this.at;
     }
 }

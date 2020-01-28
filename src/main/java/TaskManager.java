@@ -10,30 +10,88 @@ public class TaskManager implements java.io.Serializable{
     }
 
     public void loadExistingData(){
+        String fileName = "data/data.txt";
+        String line = null;
+
         try {
-            FileInputStream fileIn = new FileInputStream("data/data.txt");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            listOfTasks = (ArrayList<Task>) in.readObject();
-            in.close();
-            fileIn.close();
-        }catch(IOException i) {
-            i.printStackTrace();
-            return;
-        }catch(ClassNotFoundException c) {
-            System.out.println("List class not found");
-            c.printStackTrace();
-            return;
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+
+                String[] temporary = line.split("\\|");
+
+                if(temporary[0].contains("ToDo")){
+                    Task t = new ToDo(temporary[2]);
+                    if(temporary[1].contains("1")){
+                        t.markAsDone();
+                    }
+                    listOfTasks.add(t);
+                }else if(temporary[0].contains("Deadline")){
+                    Task t = new Deadline(temporary[2],temporary[3]);
+                    if (temporary[1].contains("1")){
+                        t.markAsDone();
+                    }
+                    listOfTasks.add(t);
+                }else if(temporary[0].contains("Event")){
+                    Task t = new Event(temporary[2],temporary[3]);
+                    if (temporary[1].contains("1")){
+                        t.markAsDone();
+                    }
+                    listOfTasks.add(t);
+                }else{
+                    System.out.println("File is empty, no data to load.");
+                }
+            }
+
+            // Always close files.
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            fileName + "'");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+            // Or we could just do this:
+            // ex.printStackTrace();
         }
     }
 
     public void saveExistingData(){
+        String fileName = "data/data.txt";
         try {
-            FileOutputStream fileOut = new FileOutputStream("data/data.txt");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(listOfTasks);
-            out.close();
-            fileOut.close();
-            System.out.println("Serialized data is saved in data/data.txt");
+            // Assume default encoding.
+            FileWriter fileWriter = new FileWriter(fileName);
+
+            // Always wrap FileWriter in BufferedWriter.
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Note that write() does not automatically
+            // append a newline character.
+
+            for(int i = 0 ; i < listOfTasks.size() ; i++){
+                Task t = listOfTasks.get(i);
+                if(t instanceof ToDo){
+                    bufferedWriter.write(((ToDo) t).saveData());
+                    bufferedWriter.newLine();
+                }else if(t instanceof Deadline){
+                    bufferedWriter.write(((Deadline) t).saveData());
+                    bufferedWriter.newLine();
+                }else{
+                    bufferedWriter.write(((Event) t).saveData());
+                    bufferedWriter.newLine();
+                }
+            }
+
+            // Always close files.
+            bufferedWriter.close();
         }catch(IOException i) {
             i.printStackTrace();
         }
