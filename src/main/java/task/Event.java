@@ -7,28 +7,29 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected String at;
-    protected LocalDate date;
-    protected LocalTime time;
-    protected LocalDateTime dateTime;
+	protected String at;
+	protected LocalDate date;
+	protected LocalTime time;
+	protected LocalDateTime dateTime;
 
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
-    }
+	public Event(String description, String at) {
+		super(description);
+		this.at = at;
+	}
 
-    public String format() {
-        return "E" + " | " + (this.isDone?"1":"0") + " | " + description + " | " + date;
-    }
-    public Event(String description, LocalDate date) {
-        super(description);
+	public String format() {
+		return "E" + " | " + (this.isDone ? "1" : "0") + " | " + description + " | " + date;
+	}
+
+	public Event(String description, LocalDate date) {
+		super(description);
 //        this.dateTime = dateTime;
-        this.date = date;
-    }
+		this.date = date;
+	}
 
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
+	@Override
+	public String toString() {
+		return "[E]" + super.toString() + " (at: " +
+				date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+	}
 }

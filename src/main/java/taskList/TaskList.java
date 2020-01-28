@@ -8,45 +8,45 @@ import task.Todo;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> tasks;
+	protected ArrayList<Task> tasks;
 
-    public TaskList() {
-        this.tasks = new ArrayList<>();
-    }
+	public TaskList() {
+		this.tasks = new ArrayList<>();
+	}
 
-    public void add(Task t) {
-        this.tasks.add(t);
-    }
+	public void add(Task t) {
+		this.tasks.add(t);
+	}
 
-    public ArrayList<Task> getList() {
-        return this.tasks;
-    }
+	public ArrayList<Task> getList() {
+		return this.tasks;
+	}
 
-    public void addTodo(Todo td) {
+	public void addTodo(Todo td) {
 
-    }
+	}
 
-    public void addEvent(Event e) {
+	public void addEvent(Event e) {
 
-    }
+	}
 
-    public void addDeadline(Deadline d) {
+	public void addDeadline(Deadline d) {
 
-    }
+	}
 
-    public void delete(int i) {
+	public void delete(int i) {
 
-    }
+	}
 
-    public void done(int i){
+	public void done(int i) {
 
-    }
+	}
 
-    public String list() {
-        return "";
-    }
+	public String list() {
+		return "";
+	}
 
-    public void remove(int index) {
-        tasks.remove(index);
-    }
+	public void remove(int index) {
+		tasks.remove(index);
+	}
 }
