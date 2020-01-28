@@ -17,6 +17,14 @@ public class Duke {
         while (true) {
             String input = sc.nextLine();
 
+            try {
+                String firstWord = getFirstWord(input);
+            }
+            catch (DukeException e) {
+                System.out.println("Oops!! I'm sorry, but I don't know what that means :(");
+                continue;
+            }
+
             if (input.equals("bye")) {
                 break;
             }
@@ -54,15 +62,30 @@ public class Duke {
             // Done
             else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
                 String num = input.substring(5);
-                int index = Integer.parseInt(num) - 1;
+                int index;
 
-                added.get(index).markAsDone();  // there will be error when index out of bounds, need handle
+                try {
+                    index = Integer.parseInt(num) - 1;
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Error: must input a number after 'done'.");
+                    continue;
+                }
+
+                try {
+                    added.get(index).markAsDone();  // there will be error when index out of bounds, need handle
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println("Error: index out of bounds.");
+                    continue;
+                }
+
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println("\t" + added.get(index).toString());
             }
 
             else {
-                System.out.println("Error");
+                System.out.println("Oops!! I'm sorry, but I don't know what that means :(");
             }
         }
 
@@ -84,6 +107,39 @@ public class Duke {
             }
         }
         return -1;
+    }
+
+    // trying custom DukeException
+    public static String getFirstWord(String input) throws DukeException{
+        int firstSpaceIndex = -1;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ' ') {
+                firstSpaceIndex = i;
+                break;
+            }
+        }
+
+        String firstWord;
+        if (firstSpaceIndex == -1) {
+            firstWord = input;
+        }
+        else {
+            firstWord = input.substring(0, firstSpaceIndex);
+        }
+
+
+        if (!firstWord.equals("todo") &&
+                !firstWord.equals("deadline") &&
+                !firstWord.equals("event") &&
+                !firstWord.equals("list") &&
+                !firstWord.equals("done") &&
+                !firstWord.equals("bye")) {
+            throw new DukeException();
+        }
+        else {
+            return firstWord;
+        }
     }
 }
 
@@ -146,5 +202,11 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+}
+
+class DukeException extends Exception {
+    DukeException() {
+        super();
     }
 }
