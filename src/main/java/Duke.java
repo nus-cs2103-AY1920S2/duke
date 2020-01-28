@@ -7,6 +7,59 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+
+public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit;
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        new Duke("../duke/data/duke.txt").run();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 public class Duke {
     static String space = "     ";
     static String line = space + "_____________________________________________";
@@ -169,46 +222,5 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static ArrayList<Task> loadTask() throws FileNotFoundException {
-        File f = new File("../duke/data/duke.txt");
-        Scanner s = new Scanner(f);
-        if (!s.hasNext()) {
-            return new ArrayList<>();
-        } else {
-            ArrayList<Task> out = new ArrayList<>();
-            while (s.hasNext()) {
-                StringTokenizer st = new StringTokenizer(s.nextLine(),"|");
-                String type = st.nextToken();
-                int status = Integer.parseInt(st.nextToken());
-                Task tba;
-                if (type.equals("T")) {
-                    tba = new Todo(st.nextToken());
-                } else if (type.equals("D")) {
-                    tba = new Deadline(st.nextToken(), st.nextToken());
-                } else {
-                    tba = new Event(st.nextToken(), st.nextToken());
-                }
-                if (status == 1) {
-                    tba.isDone = true;
-                }
-                out.add(tba);
-            }
-            return out;
-        }
-    }
-
-    public static void saveTask() throws FileNotFoundException, IOException {
-        FileWriter fw = new FileWriter("../duke/data/duke.txt");
-        if (count == 0) {
-            fw.write("");
-        } else {
-            for (int i = 0; i < count - 1; i++) {
-                fw.write(tasks.get(i).generateWriteFormat());
-                fw.write('\n');
-            }
-            fw.write(tasks.get(count - 1).generateWriteFormat());
-
-            fw.close();
-        }
-    }
 }
+*/

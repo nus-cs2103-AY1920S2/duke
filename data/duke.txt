@@ -1,2 +1,5 @@
-D|1|join sports club
-D|1|almsdfandhfi
+D|1|eat|2008-11-20
+D|0|drink|2009-12-20
+D|0|die
+D|0|maldfa
+D|0|lallala|2020-01-02

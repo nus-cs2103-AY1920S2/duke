@@ -5,9 +5,4 @@ public class DukeException extends Exception {
         super(message);
     }
 
-    @Override
-    public String getMessage() {
-        String out = Duke.line + "\n" + Duke.space + super.getMessage() + "\n" + Duke.line;
-        return out;
-    }
 }
