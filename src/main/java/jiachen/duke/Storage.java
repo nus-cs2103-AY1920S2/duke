@@ -7,14 +7,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
-    private String filePathname;
+    private String pathname;
 
     public Storage(String filePath) {
-        this.filePathname = filePath;
+        this.pathname = filePath;
     }
 
     public TaskList load() throws DukeException {
-        Path filePath = Paths.get(this.filePathname);
+        Path filePath = Paths.get(this.pathname);
         if (Files.notExists(filePath)) {
             try {
                 Files.createDirectories(filePath.getParent());
@@ -30,7 +30,7 @@ public class Storage {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(
-                    filePathname));
+                    pathname));
             String line = reader.readLine();
             Task t;
             while (line != null) {
@@ -72,8 +72,6 @@ public class Storage {
     }
 
     public void save(TaskList tasks) {
-
-        final String FILE_PATH = "./data/duke.txt";
         StringBuilder buffer = new StringBuilder();
         for (Task task : tasks.getList()) {
             buffer.append(task.format()).append("\n");
@@ -81,7 +79,7 @@ public class Storage {
 
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(FILE_PATH));
+            writer = new BufferedWriter(new FileWriter(pathname));
             writer.write(buffer.toString());
             writer.close();
         } catch (IOException e) {

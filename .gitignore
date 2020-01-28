@@ -13,5 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 text-ui-test/ACTUAL.TXT
-text-ui-test/data/duke.txt
-data/duke.txt
+text-ui-test/data/*.txt
+data/*.txt
