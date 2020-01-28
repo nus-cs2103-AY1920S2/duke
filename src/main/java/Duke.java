@@ -28,8 +28,7 @@ public class Duke {
             System.out.println("");
         }
 
-        Ui.exitMessage();
-
+        Ui.showExitMessage();
         scanner.close();
     }
 }

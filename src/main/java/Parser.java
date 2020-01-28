@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.HashSet;
 
 public class Parser {
-    public static HashSet<String> commandList = new HashSet<String>(
+    static HashSet<String> commandList = new HashSet<String>(
             List.of("todo", "event", "deadline", "list", "done", "delete", "find", "save", "exit"));
 
     static String commandNotFound = "Oops! Command not found!";
@@ -90,19 +90,6 @@ public class Parser {
                         return tasklist.deleteTask(taskID);
                     } catch (IndexOutOfBoundsException e) {
                         return noTaskFound;
-                    }
-
-                case "find":
-                    TaskList query = new TaskList();
-                    for (Task thisTask : tasklist.list) {
-                        if (thisTask.getTaskName().contains(command[1])) {
-                            query.add(thisTask);
-                        }
-                    }
-                    if (query.list.isEmpty()) {
-                        return noTaskFound;
-                    } else {
-                        return displayMatchingTaskList + "\n" + query;
                     }
 
                 case "save":

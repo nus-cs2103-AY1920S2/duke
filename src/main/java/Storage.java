@@ -5,18 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Storage {
-    public static File init() {
-        Path thisPath = Paths.get(System.getProperty("user.dir"));
-        Path projectRootDir = thisPath.getParent().getParent().getParent();
-        return new File(projectRootDir.toString() + "/data/duke.txt");
-    }
+    static File savedData = new File("data/duke.txt");
 
     public static TaskList load() {
-        File savedData = init();
         TaskList tasklist = new TaskList();
 
         try {
@@ -68,7 +61,6 @@ public class Storage {
     }
 
     public static void save(TaskList tasklist) {
-        File savedData = init();
         try {
             FileWriter fw = new FileWriter(savedData);
             BufferedWriter bw = new BufferedWriter(fw);

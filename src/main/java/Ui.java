@@ -31,19 +31,16 @@ public class Ui {
         } else {
             return true;
         }
-
-
     }
 
     public static String getNextCommand(Scanner scanner, TaskList tasklist) {
         System.out.print("> ");
         String input = scanner.nextLine().strip();
         String[] command = Parser.parseInput(input);
-
         return Parser.processCommand(command, tasklist);
     }
 
-    public static void exitMessage() {
+    public static void showExitMessage() {
         System.out.println("Thank you for using Duke.\nHave a nice day!\n");
     }
 
