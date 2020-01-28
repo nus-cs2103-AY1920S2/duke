@@ -1,3 +1,0 @@
-T | 0 | Potato
-E | 1 | Carrot | Papa New | Guinea
-D | 0 | Banana | 2020-01-20

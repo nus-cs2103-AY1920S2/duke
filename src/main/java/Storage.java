@@ -4,15 +4,12 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
     /** Separates a line of text for file IO processing. */
-    private static final String DELIMITER = " \\| ";
+    private static final String DELIMITER = " \\s*\\|\\s*";
     /** ID for a completed task. */
     private static final String TASK_COMPLETE = "1";
     /** ID for a task that has not been completed. */
@@ -37,12 +34,12 @@ public class Storage {
      * @throws DukeException if file could not be found or opened.
      */
     public List<Task> load() throws DukeException {
-        List<Task> tasks = new ArrayList<>();
-
         // Setup file input resources with auto-closing
         try (FileInputStream fileStream = new FileInputStream(filePath);
              InputStreamReader fileReader = new InputStreamReader(fileStream);
              BufferedReader reader = new BufferedReader(fileReader)) {
+
+            List<Task> tasks = new ArrayList<>();
 
             // Read next line in file
             String line = reader.readLine();
@@ -54,6 +51,7 @@ public class Storage {
                     tasks.add(task);
                 } catch (DukeException e) {
                     // TODO: In future will implement logging of error lines
+                    // Currently skips invalid lines
                 } finally {
                     // Read next line in file
                     line = reader.readLine();
@@ -73,14 +71,16 @@ public class Storage {
      * @param tasks the list of tasks to write to a save file.
      * @throws DukeException if file could not be found or opened.
      */
-    public void save(List<Task> tasks) throws DukeException {
+    public void save(TaskList tasks) throws DukeException {
         // Setup file output resources with auto-closing
         try (FileOutputStream fileStream = new FileOutputStream(filePath);
              PrintWriter writer = new PrintWriter(fileStream)) {
 
-            for (int i = 0; i < tasks.size(); i++) {
+            List<Task> taskList = tasks.getList();
+
+            for (int i = 0; i < taskList.size(); i++) {
                 // Each task has their own save file format
-                writer.println(tasks.get(i).serialize());
+                writer.println(taskList.get(i).serialize());
             }
 
         } catch (IOException e) {
@@ -88,6 +88,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Selects the appropriate method to read a task from a file.
+     *
+     * @param line a line from a file input.
+     * @throws DukeException if task type is unknown.
+     * @throws DukeException if arguments cannot make any valid task.
+     */
     private Task readTask(String line) throws DukeException {
         // Tokenize the string
         String[] args = line.split(DELIMITER);
@@ -132,35 +139,21 @@ public class Storage {
         // and the second argument is either a "0" or "1"
         return args.length >= 3
                 && (args[1].equals(TASK_COMPLETE)
-                || args[1].equals(TASK_INCOMPLETE));
+                    || args[1].equals(TASK_INCOMPLETE));
     }
 
     private Todo readTodo(String[] args) throws DukeException {
-        if (args.length == 3) {
-            return new Todo(args[2]);
-        } else {
-            throw new DukeException("Invalid number of arguments to create a To-do.");
-        }
+        Parser.checkArgumentCount(args, 3);
+        return new Todo(args[2]);
     }
 
     private Deadline readDeadline(String[] args) throws DukeException {
-        if (args.length == 4) {
-            try {
-                LocalDate date = LocalDate.parse(args[3], DateTimeFormatter.ISO_LOCAL_DATE);
-                return new Deadline(args[2], date);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Date does not follow the format: yyyy-mm-dd.");
-            }
-        } else {
-            throw new DukeException("Invalid number of arguments to create a Deadline.");
-        }
+        Parser.checkArgumentCount(args, 4);
+        return new Deadline(args[2], Parser.parseDate(args[3]));
     }
 
     private Event readEvent(String[] args) throws DukeException {
-        if (args.length == 5) {
-            return new Event(args[2], args[3], args[4]);
-        } else {
-            throw new DukeException("Invalid number of arguments to create an Event.");
-        }
+        Parser.checkArgumentCount(args, 5);
+        return new Event(args[2], args[3], args[4]);
     }
 }

@@ -27,11 +27,13 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
+        // Date format is yyyy-mm-dd
         return serialize("D", by.format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
     @Override
     public String toString() {
+        // Date format is MMM d yyyy
         String formatDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format("[D]%s (by: %s)", super.toString(), formatDate);
     }
