@@ -1,8 +1,8 @@
 public class Ui {
 
-    boolean hasEnded;
-    TaskManager manager;
-    String horizontalLine = "*******************************************";
+    protected boolean hasEnded;
+    protected TaskManager manager;
+    protected String horizontalLine = "*******************************************";
 
     public Ui(TaskManager manager){
         this.hasEnded = false;
@@ -22,36 +22,31 @@ public class Ui {
         System.out.println("Hello!!!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
                 + "What can I do for you?");
         System.out.println(horizontalLine);
+
     }
 
     public void handleInputs(String textEntered){
+
         System.out.println(horizontalLine);
 
         if(textEntered.equals("list")){
             manager.listAllTasks();
-
-
         }else if(textEntered.contains("done")){
-
             String[] helper = textEntered.split(" ");
             int indexOfTaskDone;
             try {
                 indexOfTaskDone = Integer.parseInt(helper[1]);
                 manager.setTaskAsDone(indexOfTaskDone);
-
             } catch( ArrayIndexOutOfBoundsException ex){
                 System.out.println("Done must be followed by a number");
             }
-
         }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
                 || textEntered.contains("event")) {//create a task
             try {
                 manager.addTask(textEntered);
-
             }catch (DukeException ex){
                 System.out.println(ex);
             }
-
         }else if (textEntered.contains("delete")) {
             try {
                 String[] helper = textEntered.split(" ");
@@ -62,24 +57,20 @@ public class Ui {
             } catch (IndexOutOfBoundsException ex){
                 System.out.println(ex);
             }
-
         }else if(textEntered.contains("bye")) {
             manager.saveExistingData();
             this.hasEnded = true;
-
-
         }else{ //nonsense input
             try{
                 manager.nonsenseInput();
-
             }catch (DukeException ex){
                 System.out.println(ex);
             }
         }
-        if (textEntered.contains("bye")){
 
+        if(textEntered.contains("bye")){
         }
-        else {
+        else{
             System.out.println(horizontalLine);
         }
     }
