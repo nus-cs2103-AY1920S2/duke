@@ -4,12 +4,6 @@ public class Duke {
     public static void main(String[] args) {
 
         String horizontalLine = "*******************************************";
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(horizontalLine);
         //To run using gradle go and search in Help > Delegate Run > build tools > gradle
         String logo3 = " _____    |   _"
@@ -21,7 +15,6 @@ public class Duke {
         System.out.println("Hello!!!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
                 + "What can I do for you?");
         System.out.println(horizontalLine);
-
 
 
         FastReader fr = new FastReader();
@@ -38,7 +31,7 @@ public class Duke {
 
             if(textEntered.equals("list")){
                 manager.listAllTasks();
-                System.out.println(horizontalLine);
+
 
             }else if(textEntered.contains("done")){
 
@@ -47,7 +40,7 @@ public class Duke {
                 try {
                     indexOfTaskDone = Integer.parseInt(helper[1]);
                     manager.setTaskAsDone(indexOfTaskDone);
-                    System.out.println(horizontalLine);
+
                 } catch( ArrayIndexOutOfBoundsException ex){
                     System.out.println("Done must be followed by a number");
                 }
@@ -56,6 +49,7 @@ public class Duke {
                     || textEntered.contains("event")) {//create a task
                 try {
                     manager.addTask(textEntered);
+
                 }catch (DukeException ex){
                     System.out.println(ex);
                 }

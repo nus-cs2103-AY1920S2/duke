@@ -18,6 +18,10 @@ public class TaskManager {
     }
 
     public void loadExistingData(){
+        Storage store = new Storage();
+        listOfTasks = store.loadExistingData();
+
+        /*
         String fileName = "data/data.txt";
         String line = null;
 
@@ -77,9 +81,15 @@ public class TaskManager {
             // ex.printStackTrace();
 
         }
+
+         */
     }
 
     public void saveExistingData(){
+
+        Storage store = new Storage();
+        store.saveExistingData(listOfTasks);
+        /*
         String fileName = "data/data.txt";
         try {
             // Assume default encoding.
@@ -110,6 +120,8 @@ public class TaskManager {
         }catch(IOException i) {
             i.printStackTrace();
         }
+        */
+
     }
 
 
