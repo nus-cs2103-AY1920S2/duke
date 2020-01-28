@@ -1,20 +1,28 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
+/**
+ * The type Deadline which extends from Task.
+ * Handles all inputs which has "deadline..."
+ */
 public class Deadline extends Task {
 
     // by is completion date.
     // d1 is the date that is being parsed
     // Time is the deadline completion time (IF THERE IS!)
     private String by;
-    private Ui ui;
 
-    Deadline(String description) {
+
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param description the description
+     */
+    public Deadline(String description) {
         super(description);
     }
 
@@ -23,31 +31,44 @@ public class Deadline extends Task {
     // Is more character elements after the year.
     // If there is, then it means that there is time inclusive
 
-    // Then for the date wise right, can just check if there is only one element
+    /**
+     * Sets the date and time of the deadline task.
+     *
+     * @param by the by
+     */
+// Then for the date wise right, can just check if there is only one element
     // Or two elements.
-    void setBy(String by) {
+    public void setBy(String by) {
         this.by = super.set_by_at(by);
     }
+
     private String getBy() {
         return by;
     }
 
-    // Get the date as a localdate event
-    LocalDateTime getD1() {
-        return d1;
-    }
-
-    void setD1() throws DukeException {
+    /**
+     * Sets d1, the LocalDateTime for the Task.
+     *
+     * @throws DukeException the duke exception
+     */
+    public void setD1() throws DukeException {
         super.setD1(getBy());
     }
 
+    /**
+     * From the input given by the user, filter out the commands (Deadline)
+     * And returns the description of the string.
+     * @param s the s
+     * @return String without "deadline"
+     * @throws DukeException when the user enters an empty description or use the wrong deadline format.
+     * Eg: use ../at instead of ../by
+     */
 
     //Get the task from the given input.
     @Override
-    String format_tasks(String s) throws DukeException {
-
-        String[] splited_string = getDescription().split("deadline ");
-        if(splited_string[0].length() <1) {
+    public String format_tasks(String s) throws DukeException {
+        String[] splited_string = s.split("deadline ");
+        if(splited_string.length <1) {
             throw new DukeException("You cannot leave the description empty");
         } else {
             try{
@@ -60,9 +81,13 @@ public class Deadline extends Task {
 
     }
 
-    // Removes the "deadline" from the given input.
+    /**
+     * Gets description of the task. WWithout the date and time .
+     *
+     * @return the deadline task description
+     */
     @Override
-    void setDescription(String s) throws DukeException {
+    public void setDescription(String s) throws DukeException {
         try {
             String deadline_task = s.substring(s.indexOf("deadline"), s.indexOf("/"));
             String deadline_task2 = deadline_task.replaceAll("deadline", "").trim();
