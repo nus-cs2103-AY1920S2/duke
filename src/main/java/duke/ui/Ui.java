@@ -1,17 +1,17 @@
 package duke.ui;
 
-public class UI {
+public class Ui {
 
     public static void printIntro() {
         String intro = "Hello! I'm Duke\n" + "What can I do for you?";
-        System.out.println(wrapper(intro));
+        System.out.println(wrap(intro));
     }
 
     public static void printMessage(String message) {
-        System.out.println(wrapper(message));
+        System.out.println(wrap(message));
     }
 
-    public static String wrapper(String string) {
+    public static String wrap(String string) {
         return "____________________________________________________________\n"
                 + string
                 + "\n"
