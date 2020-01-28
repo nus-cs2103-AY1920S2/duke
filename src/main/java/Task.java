@@ -1,22 +1,19 @@
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class Task {
     protected String description;
     protected boolean isDone;
-<<<<<<< HEAD
     protected Type type;
-    protected String date;
-=======
+    protected LocalDateTime date;
     protected DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     protected DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mm a");
->>>>>>> branch-Level-8
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.type = Type.X;
-        this.date = "";
+        this.date = LocalDateTime.now();
     }
 
     public String getStatusIcon() {
@@ -28,7 +25,7 @@ public class Task {
     }
 
     public String getDate() {
-        return date;
+        return date.format(inFormatter);
     }
 
     public Type getType() {
@@ -48,6 +45,6 @@ public class Task {
     }
 
     public String saveString() {
-        return type + " | " + (isDone ? "1" : "0") + " | " + description + " | " + date;
+        return type + " | " + (isDone ? "1" : "0") + " | " + description + " | " + date.format(outFormatter);
     }
 }

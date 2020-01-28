@@ -5,27 +5,19 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-<<<<<<< HEAD
         super.type = Type.D;
-        this.by = by;
-=======
         this.by = LocalDateTime.parse(by, inFormatter);
->>>>>>> branch-Level-8
     }
 
     public String getDate() {
-        return by;
+        return by.format(inFormatter);
     }
 
     public String toString() {
-<<<<<<< HEAD
-        return "[" + super.getType() + "]" + super.toString() + "(by: " + by + ")";
+        return "[" + super.getType() + "]" + super.toString() + "(by: " + by.format(outFormatter) + ")";
     }
 
     public String saveString() {
         return getType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDate();
-=======
-        return "[D]" + super.toString() + "(by: " + by.format(outFormatter) + ")";
->>>>>>> branch-Level-8
     }
 }

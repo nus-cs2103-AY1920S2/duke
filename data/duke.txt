@@ -1,2 +1,3 @@
-E | 0 | malaysia  | 2pm
-E | 0 | gg  | 5pm
+T | 1 | testing
+E | 1 | tmr meeting  | 03/02/2020 1800
+D | 0 | tmr tutorial  | 04/05/2020 1900
