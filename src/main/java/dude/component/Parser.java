@@ -1,16 +1,17 @@
 package dude.component;
 
-import dude.task.Deadline;
-import dude.task.Event;
-import dude.task.Todo;
-
 import dude.command.AddTaskCommand;
 import dude.command.ByeCommand;
 import dude.command.CheckDateCommand;
 import dude.command.Command;
 import dude.command.DeleteCommand;
 import dude.command.DoneCommand;
+import dude.command.FindCommand;
 import dude.command.ListCommand;
+
+import dude.task.Deadline;
+import dude.task.Event;
+import dude.task.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -28,7 +29,8 @@ public class Parser {
                     "check"   , "check yyyy-mm-dd",
                     "todo"    , "todo description",
                     "deadline", "deadline description /by yyyy-mm-dd",
-                    "event"   , "event description /from yyyy-mm-dd /to yyyy-mm-dd"
+                    "event"   , "event description /from yyyy-mm-dd /to yyyy-mm-dd",
+                    "find"    , "find word"
             );
 
     // Regex for whitespace, for greater clarity
@@ -80,6 +82,9 @@ public class Parser {
                 LocalDate from = parseDate(eventDateStrings[0], "event");
                 LocalDate to = parseDate(eventDateStrings[1], "event");
                 return new AddTaskCommand(new Event(eventArgs[0], from, to, false));
+
+            case "find":
+                return new FindCommand(cmdAndBody[1]);
 
             default:
                 throw new ParsingException("Sorry mate, I didn't catch your drift",
