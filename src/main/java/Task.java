@@ -1,3 +1,6 @@
+/**
+ * Represents a Task to be completed, created by user.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -12,10 +15,18 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Retrieves status icon based on whether task has been marked as done according to isDone.
+     *
+     * @return "Y" if task has been done, or "N" if it has not.
+     */
     public String getStatusIcon() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
     }
 
+    /**
+     * Mark isDone as true.
+     */
     public void markAsDone() {
         this.isDone = true;
     }

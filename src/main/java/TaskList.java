@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Represents task list in Duke.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -13,10 +16,23 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Returns task list as an ArrayList
+     *
+     * @return Task list as an ArrayList of Tasks
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Creates a new Event based on user input and adds it to the task list.
+     *
+     * @param input Valid user command in the form "event event_description /at DD/MM/YYYY HHMM"
+     * @return Event that was created
+     * @throws GooseEmptyDescriptionException If no description provided
+     * @throws GooseIllegalFormatException If format is not valid
+     */
     public Event createEvent(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {
         String[] eventArr = input.split(" /at ");
         String[] descriptionSplit = eventArr[0].split(" ");
@@ -44,6 +60,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new Deadline based on user input and adds it to the task list.
+     *
+     * @param input Valid user command in the form "deadline deadline_description /by DD/MM/YYYY HHMM"
+     * @return Deadline that was created
+     * @throws GooseEmptyDescriptionException If no description provided
+     * @throws GooseIllegalFormatException If format is not valid
+     */
     public Deadline createDeadline(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {
         String[] deadlineArr = input.split(" /by ");
         String[] descriptionSplit = deadlineArr[0].split(" ");
@@ -71,6 +95,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new Todo based on user input and adds it to the task list.
+     *
+     * @param inputArr String array of split user input string
+     * @return Todo that was created
+     * @throws GooseEmptyDescriptionException If no description provided
+     */
     public Todo createTodo(String[] inputArr) throws GooseEmptyDescriptionException {
         String description = "";
         for (int i = 1; i < inputArr.length; i++) {
@@ -89,7 +120,13 @@ public class TaskList {
         }
     }
 
-    // returns the updated tasklist, ui handles msg
+    /**
+     * Deletes task from task list array based on the index provided
+     *
+     * @param index Index of task to be deleted from task list
+     * @return Updated task list as an ArrayList
+     * @throws GooseTaskExistenceException If index is out of bounds
+     */
     public ArrayList<Task> deleteTask(int index) throws GooseTaskExistenceException {
         if (index >= taskList.size() || index < 0) {
             throw new GooseTaskExistenceException("You trick Goose? Task " + taskList.size() + " doesn't exist. Honk...");
@@ -97,15 +134,15 @@ public class TaskList {
 
         taskList.remove(index);
         return this.taskList;
-
-//        String count = taskList.size() == 1
-//                ? "\n\n  Now you have " + taskList.size() + " task in the list."
-//                : "\n\n  Now you have " + taskList.size() + " tasks in the list.";
-//        System.out.println(wrapLine("Honk! Removed this task from the list:\n" + "           " +
-//                selected + count));
     }
 
-    // returns the updated tasklist, ui handles msg
+    /**
+     * Marks task as done from task list array based on the index provided
+     *
+     * @param index Index of task to be marked as done from task list
+     * @return Updated task list as an ArrayList
+     * @throws GooseTaskExistenceException If index is out of bounds
+     */
     public ArrayList<Task> markDone(int index) throws GooseTaskExistenceException {
         if (index >= taskList.size() || index < 0) {
             throw new GooseTaskExistenceException("You trick Goose? This task doesn't exist. Honk...");
@@ -114,11 +151,9 @@ public class TaskList {
         Task selected = taskList.get(index);
         selected.markAsDone();
         return this.taskList;
-//        String reply = "Good job! I've honked it as done:\n";
-//        System.out.println(wrapLine(reply + " " + selected));
     }
 
-    public static String parseDate(String date) {
+    private static String parseDate(String date) {
         String[] dateArr = date.split("/");
         String day = dateArr[0];
         if (Integer.parseInt(day) < 10) {

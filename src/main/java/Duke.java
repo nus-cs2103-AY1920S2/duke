@@ -2,12 +2,21 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+/**
+ * Represents main body for Duke to run
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke
+     *
+     * @param listPath Relative file path for where the task list is stored
+     * @param arrayPath Relative file path for where the task array is stored
+     */
     public Duke(String listPath, String arrayPath) {
         ui = new Ui();
         storage = new Storage(listPath, arrayPath);
@@ -19,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Sets up and runs Duke to begin accepting user commands. Send 'bye' to close the program.
+     */
     public void run() {
         ui.showWelcome();
         Scanner scanner = new Scanner(System.in);

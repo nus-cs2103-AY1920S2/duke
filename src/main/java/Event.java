@@ -2,6 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents an <code>Event</code>, which is a subclass of a <code>Task</code>. An <code>Event</code> includes
+ *  * an atDate which represents the date of the respective <code>Event</code> occurring.
+ */
 public class Event extends Task {
     LocalDate atDate;
     String time24Hr;
@@ -18,6 +22,12 @@ public class Event extends Task {
         this.time24Hr = time;
     }
 
+    /**
+     * Returns a string representing time in 12-hour format eg. 11.59pm
+     *
+     * @param timeString String representing time in 24-hour format eg. 2359
+     * @return Time in 12-hour format
+     */
     public String formatTime12Hour(String timeString) {
         int time = Integer.parseInt(timeString);
         boolean isAM = time < 1200;
