@@ -26,10 +26,10 @@ public class Task {
     }
 
     public String addToFile() {
-        return booleanToInt() + " | " + description ;
+        return booleanToInt() + " | " + description;
     }
 
     public int booleanToInt() {
-        return isDone? 1:0;
+        return isDone ? 1 : 0;
     }
 }

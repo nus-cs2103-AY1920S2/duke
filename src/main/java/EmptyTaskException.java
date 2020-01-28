@@ -1,6 +1,7 @@
-public class EmptyTaskException extends Exception{
+public class EmptyTaskException extends Exception {
 
     String taskType;
+
     public EmptyTaskException(String task) {
         super("Oops!");
         taskType = task;

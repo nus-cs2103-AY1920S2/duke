@@ -7,12 +7,20 @@ public class Deadline extends Task {
     String due;
     String parsedDue;
 
+    /**
+     * Creates deadline type.
+     *
+     * @param description Describes the task.
+     */
     public Deadline(String[] description) {
         super(description[0]);
         due = (description[1].split(" ", 2))[1];
         modifyDateFormat();
     }
 
+    /**
+     * Changes format of date.
+     */
     public void modifyDateFormat() {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         LocalDateTime parsedDate = LocalDateTime.parse(this.due, inputFormatter);
@@ -20,6 +28,13 @@ public class Deadline extends Task {
         this.parsedDue = parsedDate.format(outputFormatter);
     }
 
+    /**
+     * Creates a deadline.
+     *
+     * @param description Describes the task.
+     * @param dueDate DueDate of task.
+     * @param isDone Informs whether task is done.
+     */
     public Deadline(String description, String dueDate, boolean isDone) {
         super(description, isDone);
         due = dueDate;
