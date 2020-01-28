@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -75,6 +76,8 @@ public class Duke {
                     itemToAdd = new Deadline(temp[0], temp[1]);
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("OOPS!!! Wrong input format for deadline");
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
                 }
 
 
@@ -85,8 +88,9 @@ public class Duke {
                     itemToAdd = new Event(temp[0], temp[1]);
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("OOPS!!! Wrong input format for event");
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
                 }
-
             } else if (first_token.equals("todo")) {
                 try {
                     next = next.substring(5);
