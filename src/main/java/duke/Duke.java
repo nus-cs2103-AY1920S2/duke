@@ -1,23 +1,5 @@
 package duke;
 
-import command.Command;
-import command.Deadlines;
-import command.Events;
-import command.ToDos;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import command.*;
 import tool.*;
 
 public class Duke {
@@ -27,13 +9,21 @@ public class Duke {
         TaskList taskList = new TaskList();
         Storage storage = new Storage("src/data/tasks.txt", taskList);
         UI ui = new UI(storage);
-        ui.printWelcomeMessage();;
 
         storage.readFromFile();
 
         Parser parser = new Parser(ui, taskList);
-        ui.setParser(parser);
-        ui.getInput();
+
+        ui.printWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            ui.printLine(); // show the divider line ("_______")
+            Command c = parser.parse(fullCommand);
+            isExit = c.execute(taskList, ui);
+            ui.printLine();
+            storage.saveToFile();
+        }
     }
 
     public static void main(String[] args) {
