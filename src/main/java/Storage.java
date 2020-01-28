@@ -2,6 +2,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,13 +35,14 @@ public class Storage {
         }
     }
 
-    public void readFromDisk() {
+    public ArrayList<String> readFromDisk() {
+        ArrayList<String> lines = new ArrayList<>(); 
         try {
             FileReader fileReader = new FileReader(this.filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             while((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                lines.add(line);
             }
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
@@ -49,5 +51,6 @@ public class Storage {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        return lines;
     }
 }

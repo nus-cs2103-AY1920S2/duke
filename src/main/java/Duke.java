@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,14 +16,31 @@ public class Duke {
     }
 
     private void initialise() {
-        this.storage.readFromDisk();
+        ArrayList<String> lines = this.storage.readFromDisk();
+        for (String line : lines) {
+            Parser parser = new Parser();
+            parser.parseDiskData(line);
+            Command command = parser.getCommand();
+
+            if (command == Command.ADD_TODO) {
+                Todo todo = new Todo(parser.getDescription());
+                this.taskList.addTask(todo);
+            } else if (command == Command.ADD_DEADLINE) {
+                Deadline deadline = new Deadline(parser.getDescription(), parser.getBy());
+                this.taskList.addTask(deadline);
+            } else if (command == Command.ADD_EVENT) {
+                Event event = new Event(parser.getDescription(), parser.getAt());
+                this.taskList.addTask(event);
+            }
+        }
     }
 
     private void getCommands() {
         while (true) {
             String userInput = this.sc.nextLine().trim();
             try {
-                Parser parser = new Parser(userInput);
+                Parser parser = new Parser();
+                parser.parseUserInput(userInput);
                 Command command = parser.getCommand();
 
                 if (command == Command.EXIT_DUKE) {
