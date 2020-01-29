@@ -1,12 +1,16 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 
 public class DukeManager {
 
     public static final String LINE = "____________________________________________________________\n";
     public static final String FILE_PATH = "/Users/jadetay/duke/data/tasks.txt";
     public static ArrayList<Task> tasks = new ArrayList<>();
-    public int totalTasks = 0;
+    public static int totalTasks = 0;
 
     public DukeManager() {
         System.out.println(hello());
@@ -17,7 +21,10 @@ public class DukeManager {
             File file = new File(FILE_PATH);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
+            DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter inputTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
             String line;
+
             while ((line = br.readLine()) != null) {
                 totalTasks++;
                 String[] temp = line.split(" \\| ");
@@ -31,13 +38,18 @@ public class DukeManager {
                         t.markAsDone();
                     }
                 } else if (task.equals("D")) {
-                    Task d = new Deadline(description, temp[3]);
+                    String[] dt = temp[3].split(" ");
+                    LocalDate ld = LocalDate.parse(temp[3].substring(0, 10), inputDateFormat);
+                    LocalTime lt = LocalTime.parse(temp[3].substring(12), inputTimeFormat);
+                    Task d = new Deadline(description, ld, lt);
                     tasks.add(d);
                     if (isDone == 1) {
                         d.markAsDone();
                     }
                 } else {
-                    Task e = new Event(description, temp[3]);
+                    LocalDate ld = LocalDate.parse(temp[3].substring(0, 10), inputDateFormat);
+                    LocalTime lt = LocalTime.parse(temp[3].substring(12), inputTimeFormat);
+                    Task e = new Event(description, ld, lt);
                     tasks.add(e);
                     if (isDone == 1) {
                         e.markAsDone();
@@ -89,19 +101,28 @@ public class DukeManager {
     public void runTask(String input, String[] temp, String command) {
         try {
             String task = LINE + "Got it! I've added this task!:" + "\n";
+            DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter inputTimeFormat = DateTimeFormatter.ofPattern("HHmm");
             if (temp.length <= 1 || (command.equals("deadline") && !input.contains("/by"))
                     || (command.equals("event") && !input.contains("/at"))) {
                 throw new DukeException(input);
+
             } else if (command.equals("deadline")) {
                 String[] arr = input.split(" /by ");
-                Task d = new Deadline(arr[0].substring(9), arr[1]);
+                LocalDate ld = LocalDate.parse(arr[1].substring(0, 10), inputDateFormat);
+                LocalTime lt = LocalTime.parse(arr[1].substring(11), inputTimeFormat);
+                Task d = new Deadline(arr[0].substring(9), ld, lt);
                 tasks.add(d);
                 saveTasks(tasks);
+
             } else if (command.equals("event")) {
                 String[] arr = input.split(" /at ");
-                Task e = new Event(arr[0].substring(6), arr[1]);
+                LocalDate ld = LocalDate.parse(arr[1].substring(0, 10), inputDateFormat);
+                LocalTime lt = LocalTime.parse(arr[1].substring(11), inputTimeFormat);
+                Task e = new Event(arr[0].substring(6), ld, lt);
                 tasks.add(e);
                 saveTasks(tasks);
+
             } else {
                 Task t = new Todo(input.substring(5));
                 tasks.add(t);
@@ -156,5 +177,23 @@ public class DukeManager {
         tasks.remove(index);
         saveTasks(tasks);
         System.out.println(delete);
+    }
+
+    public void taskSearch(LocalDate date) {
+        String tasksByDateTime = LINE;
+        for(Task t : tasks) {
+            if (t instanceof Deadline) {
+                if (((Deadline) t).getDate().isEqual(date)) {
+                    tasksByDateTime += t + "\n";
+                }
+            }
+            else if (t instanceof Event) {
+                if (((Event) t).getDate().isEqual(date)) {
+                    tasksByDateTime += t + "\n";
+                }
+            }
+        }
+        System.out.println(tasksByDateTime + LINE);
+
     }
 }
