@@ -49,14 +49,29 @@ public class Storage {
                 boolean isCompleted;
                 if (typeAndDone.startsWith(Deadline.TYPE)) {
                     currentTask = new Deadline(io.nextLine(), io.nextLine());
-                    isCompleted = typeAndDone.charAt(Deadline.TYPE.length()) == 1;
+                    isCompleted = Integer.parseInt(
+                        Character.toString(
+                            typeAndDone.charAt(
+                                Deadline.TYPE.length())
+                        )
+                    ) == 1;
                 } else if (typeAndDone.startsWith(Event.TYPE)) {
                     currentTask = new Event(io.nextLine(), io.nextLine());
-                    isCompleted = typeAndDone.charAt(Event.TYPE.length()) == 1;
+                    isCompleted = Integer.parseInt(
+                        Character.toString(
+                            typeAndDone.charAt(
+                                 Event.TYPE.length())
+                        )
+                    ) == 1;
                 } else if (typeAndDone.startsWith(Todo.TYPE)) {
                     currentTask = Todo.makeTodoRaw(io.nextLine());
                     io.nextLine();
-                    isCompleted = typeAndDone.charAt(Todo.TYPE.length()) == 1;
+                    isCompleted = Integer.parseInt(
+                        Character.toString(
+                            typeAndDone.charAt(
+                                Todo.TYPE.length())
+                        )
+                    ) == 1;
                 } else {
                     // unknown task
                     System.out.println("Unknown task found!");
