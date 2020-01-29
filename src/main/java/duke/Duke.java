@@ -15,7 +15,6 @@ public class Duke {
     public static ArrayList<Task> commandList = new ArrayList<>();
 
     public static void main(String[] args) {
-
         Storage storage = new Storage();
         storage.startReading();
         Ui ui = new Ui();
