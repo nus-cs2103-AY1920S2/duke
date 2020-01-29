@@ -2,13 +2,14 @@ package duke.ui;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
     private String divider = "    ____________________________________________________________";
     private String welcomeMessage = "";
     private String exitMessage = "";
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     public Ui(String welcomeMessage, String exitMessage) {
         this.welcomeMessage = welcomeMessage;

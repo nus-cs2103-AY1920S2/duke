@@ -4,7 +4,7 @@ public class Task {
     private String description = "";
     private boolean isDone = false;
     
-    public Task (String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -25,7 +25,8 @@ public class Task {
         return isDone + description;
     }
 
+    @Override
     public String toString() {
-        return String.format("[%s] %s", (isDone ? "\u2713" : "\u2718"), description);
+        return String.format("[%s] %s", (isDone ? "Y" : "N"), description);
     }
 }

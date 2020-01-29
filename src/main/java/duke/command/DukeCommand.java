@@ -5,7 +5,7 @@ import duke.exception.InvalidCommandException;
 public enum DukeCommand {
     BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT;
 
-    public static DukeCommand getCommand (String command) throws InvalidCommandException {
+    public static DukeCommand getCommand(String command) throws InvalidCommandException {
         if (command.equals("bye")) {
             return DukeCommand.BYE;
         } else if (command.equals("list")) {

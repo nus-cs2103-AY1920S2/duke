@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Todo extends Task{
+public class Todo extends Task {
     public Todo(String description) {
         super(description, false);
     }
@@ -16,6 +16,6 @@ public class Todo extends Task{
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", "T", (getIsDone() ? "\u2713" : "\u2718"), getDescription());
+        return String.format("[%s][%s] %s", "T", (getIsDone() ? "Y" : "N"), getDescription());
     }
 }
