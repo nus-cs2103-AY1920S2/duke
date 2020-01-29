@@ -10,6 +10,13 @@ public class Deadline extends Task {
     protected static final String DATE_OUTPUT_PATTERN = "MMM dd, yyyy";
     protected LocalDate by;
 
+    /**
+     * Constructor of a Deadline.
+     *
+     * @param description Description of the Deadline.
+     * @param by A string representing the date of the Deadline.
+     * @throws DukeException If input date string is not of the ISO-LOCAL-DATE format (yyyy-mm-dd).
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
 
@@ -21,6 +28,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Overloaded constructor of a Deadline.
+     * The LocalDate is passed in directly in this version of the constructor.
+     *
+     * @param description The description of the Deadline.
+     * @param by The LocalDate of the Deadline.
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
