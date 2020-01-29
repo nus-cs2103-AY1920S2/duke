@@ -9,7 +9,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String[] date = by.split(" ", 2);
-        return "[D]" + super.toString() + " (" + date[0] + ": " + date[1] + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }
