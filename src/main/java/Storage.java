@@ -53,7 +53,10 @@ public class Storage {
                 Task currentTask;
                 boolean isCompleted;
                 if (typeAndDone.startsWith(Deadline.TYPE)) {
-                    currentTask = new Deadline(io.nextLine(), io.nextLine());
+                    currentTask = new Deadline(
+                            io.nextLine(),
+                            new PrettyTime(io.nextLine())
+                    );
                     isCompleted = Integer.parseInt(
                         Character.toString(
                             typeAndDone.charAt(
@@ -61,7 +64,10 @@ public class Storage {
                         )
                     ) == 1;
                 } else if (typeAndDone.startsWith(Event.TYPE)) {
-                    currentTask = new Event(io.nextLine(), io.nextLine());
+                    currentTask = new Event(
+                            io.nextLine(),
+                            new PrettyTime(io.nextLine())
+                    );
                     isCompleted = Integer.parseInt(
                         Character.toString(
                             typeAndDone.charAt(
@@ -124,17 +130,17 @@ public class Storage {
         // parse the String
         PrettyTime pt = new PrettyTime(date);
         ArrayList<Integer> indexes = new ArrayList<Integer>();
-        int size = this.storage.size();
+        int size = this.storedTasks.size();
 
         if (pt.hasTime()) {
             for (int i = 0; i < size; i++) {
-                if (this.storage.get(i).getPrettyTime().equals(pt)) {
+                if (this.storedTasks.get(i).getPrettyTime().equals(pt)) {
                     indexes.add(i + 1);
                 }
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (this.storage.get(i).getPrettyTime().matchDate(pt)) {
+                if (this.storedTasks.get(i).getPrettyTime().matchDate(pt)) {
                     indexes.add(i + 1);
                 }
             }
@@ -205,7 +211,7 @@ public class Storage {
                     .append("\n")
                     .append(task.getTaskDetails())
                     .append("\n")
-                    .append(task.getTaskTime())
+                    .append(task.getPrettyTime().toRaw())
                     .append("\n");
         }
 

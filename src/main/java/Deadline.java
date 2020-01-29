@@ -28,7 +28,7 @@ public class Deadline extends Task {
      * @param taskDesc Description of the Deadline
      * @param taskTime Time of the actual Deadline
      */
-    public Deadline(String taskDesc, String taskTime) {
+    public Deadline(String taskDesc, PrettyTime taskTime) {
         super(taskDesc, taskTime);
     }
 

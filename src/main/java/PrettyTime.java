@@ -108,6 +108,25 @@ public class PrettyTime implements Comparable<PrettyTime> {
         return this.time.isPresent();
     }
 
+    /**
+     * Generates a String representing this
+     * PrettyTime in the same format in which
+     * it was entered (DD-MM-YYYY-tttt, if
+     * the LocalDate representation exists)
+     *
+     * @return String representing date and time
+     * in DD-MM-YYYY-tttt format, if possible
+     */
+    public String toRaw() {
+        return this.date.map(
+                date -> date.format(DateTimeFormatter.ofPattern("dd-MM-y"))
+                        + this.time.map(t -> "-" + String.format("%04d", t))
+                        .orElse("")
+        ).orElseGet(
+                () -> this.rawText.orElse("")
+        );
+    }
+
     @Override
     public int compareTo(PrettyTime pt) {
         if (this.hasLocalDate() && pt.hasLocalDate()) {

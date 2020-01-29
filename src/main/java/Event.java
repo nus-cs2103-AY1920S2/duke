@@ -26,7 +26,7 @@ public class Event extends Task {
      * @param taskDesc Description of the Event
      * @param taskTime Time of the Event
      */
-    public Event(String taskDesc, String taskTime) {
+    public Event(String taskDesc, PrettyTime taskTime) {
         super(taskDesc, taskTime);
     }
 

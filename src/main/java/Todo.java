@@ -6,11 +6,12 @@ public class Todo extends Task {
     public static String TYPE = "T";
 
     /**
-     * Constructor for a To-do task
+     * Constructor for a To-do Task
      *
      * @param td String representing raw command with
      *           instruction
-     * @throws InadequateArgumentsException
+     * @throws InadequateArgumentsException If no description
+     * is found for this To-do Task
      */
     public Todo(String td) throws InadequateArgumentsException {
         super(Todo.nonEmptyCheck(
@@ -26,7 +27,7 @@ public class Todo extends Task {
      *              type signature from public constructor
      */
     private Todo(String rt, boolean isRaw) {
-        super(rt, "");
+        super(rt, new PrettyTime(""));
     }
 
     /**
