@@ -1,6 +1,6 @@
 package exceptions;
 
-public class WrongUsageException extends Exception {
+public class WrongUsageException extends BaseException {
     public WrongUsageException(String message) {
         super(message);
     }

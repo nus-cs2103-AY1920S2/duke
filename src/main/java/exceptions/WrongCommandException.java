@@ -1,6 +1,6 @@
 package exceptions;
 
-public class WrongCommandException extends Exception {
+public class WrongCommandException extends BaseException {
     public WrongCommandException(String message) {
         super(message);
     }

@@ -1,6 +1,6 @@
 import java.util.Scanner;
+import exceptions.BaseException;
 import exceptions.WrongCommandException;
-import exceptions.WrongUsageException;
 
 public class Duke {
     public static final int MAX_STRING_LENGTH = 60;
@@ -27,7 +27,7 @@ public class Duke {
                 else if (command.equals("event"))               print(taskManager.addEventTask(nextArgs));
                 else if (command.equals("delete"))              print(taskManager.deleteTask(nextArgs));
                 else                                            throw new WrongCommandException(String.format("The command '%s' is not supported", command));
-            } catch (WrongCommandException | WrongUsageException e) {
+            } catch (BaseException e) {
                 print(e.getMessage());
             } catch (Exception e) {
                 print("Caught some other exception! Notify developer!");
