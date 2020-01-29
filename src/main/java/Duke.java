@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -56,7 +59,8 @@ public class Duke {
                     System.out.println("\tOOPS! Please input /at Date Time (e.g. /at Mon 2-4pm)");
                     this.waitInput();
                 } else {
-                    Task newTask = new Event(info[0].trim(), info[1].trim());
+                    String timeEvent = convertDateAndTime(info[1].trim());
+                    Task newTask = new Event(info[0].trim(), timeEvent);
                     this.addTask(newTask);
                 }
             }
@@ -71,7 +75,8 @@ public class Duke {
                     System.out.println("\tOOPS! Please input /by Date (e.g. /by Feb 3rd)");
                     this.waitInput();
                 } else {
-                    Task newTask = new Deadline(info[0].trim(), info[1].trim());
+                    String timeDeadline = convertDateAndTime(info[1].trim());
+                    Task newTask = new Deadline(info[0].trim(), timeDeadline);
                     this.addTask(newTask);
                 }
             }
@@ -127,6 +132,100 @@ public class Duke {
             System.out.println("\tYou have total of " + this.tasks.size() + " tasks in the list.");
         }
         this.waitInput();
+    }
+
+    private String convertDateAndTime(String time) {
+        String[] arr = time.split("\\s");
+        String day = "";
+        if (arr.length == 2) {
+            String[] dateArray = arr[0].split("/");
+            if (dateArray.length == 3) {
+                if (dateArray[0].equals("1") || dateArray[0].equals("21") || dateArray[0].equals("31")) {
+                    day = dateArray[0] + "st";
+                } else if ((dateArray[0].equals("2") || dateArray[0].equals("22"))) {
+                    day = dateArray[0] + "nd";
+                } else if ((dateArray[0].equals("3") || dateArray[0].equals("23"))) {
+                    day = dateArray[0] + "rd";
+                } else {
+                    day = dateArray[0] + "th";
+                }
+                switch (dateArray[1]) {
+                case "1":
+                    day += " of January";
+                    break;
+                case "2":
+                    day += " of February ";
+                    break;
+                case "3":
+                    day += " of March ";
+                    break;
+                case "4":
+                    day += " of April ";
+                    break;
+                case "5":
+                    day += " of May ";
+                    break;
+                case "6":
+                    day +=" of June ";
+                    break;
+                case "7":
+                    day += " of July ";
+                    break;
+                case "8":
+                    day += " of August ";
+                    break;
+                case "9":
+                    day += " of September ";
+                    break;
+                case "10":
+                    day += " of October ";
+                    break;
+                case "11":
+                    day += " of November ";
+                    break;
+                case "12":
+                    day += " of December ";
+                    break;
+                }
+                day += dateArray[2] + ", ";
+                try {
+                    String t = arr[1];
+                    String[] timeArr = t.split("-");
+                    if (timeArr.length == 1) {
+                        SimpleDateFormat input = new SimpleDateFormat("HHmm");
+                        SimpleDateFormat output = new SimpleDateFormat("hh:mmaa");
+                        Date date = input.parse(t);
+                        String outputStr = output.format(date);
+                        if (outputStr.charAt(0) == '0') {
+                            day += outputStr.substring(1).toLowerCase();
+                        } else {
+                            day += outputStr.toLowerCase();
+                        }
+                    } else if (timeArr.length == 2) {
+                        SimpleDateFormat input = new SimpleDateFormat("HHmm");
+                        SimpleDateFormat output = new SimpleDateFormat("hh:mmaa");
+                        Date start = input.parse(timeArr[0]);
+                        Date end = input.parse(timeArr[1]);
+                        String startTime = output.format(start).toLowerCase();
+                        String endTime = output.format(end).toLowerCase();
+                        if (startTime.charAt(0) == '0') {
+                            startTime = startTime.substring(1);
+                        }
+                        if (endTime.charAt(0) == '0') {
+                            endTime = endTime.substring(1);
+                        }
+                        day += startTime + " to " + endTime;
+                    }
+                } catch (ParseException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                return time;
+            }
+        } else {
+            return time;
+        }
+        return day;
     }
 
     public void run() {
