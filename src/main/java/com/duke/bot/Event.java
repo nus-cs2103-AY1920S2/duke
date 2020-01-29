@@ -12,12 +12,16 @@ public class Event extends Task {
     }
 
     public Event(String title, LocalDate dateAt) {
-        super(title);
-        this.dateAt = dateAt;
+        this(title, false, dateAt);
     }
 
     public LocalDate getDateAt() {
         return dateAt;
+    }
+
+    @Override
+    public Event setDone(boolean isDone) {
+        return new Event(getTitle(), isDone, dateAt);
     }
 
     @Override

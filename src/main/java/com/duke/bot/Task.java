@@ -1,16 +1,12 @@
 package com.duke.bot;
 
-public class Task {
+public abstract class Task {
     private String title;
     private boolean isDone;
 
     public Task(String title, boolean isDone) {
         this.title = title;
         this.isDone = isDone;
-    }
-
-    public Task(String title) {
-        this(title, false);
     }
 
     public String getTitle() {
@@ -21,7 +17,5 @@ public class Task {
         return isDone;
     }
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
-    }
+    public abstract Task setDone(boolean isDone);
 }

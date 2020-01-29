@@ -12,12 +12,16 @@ public class Deadline extends Task {
     }
 
     public Deadline(String title, LocalDate dateBy) {
-        super(title);
-        this.dateBy = dateBy;
+        this(title, false, dateBy);
     }
 
     public LocalDate getDateBy() {
         return dateBy;
+    }
+
+    @Override
+    public Deadline setDone(boolean isDone) {
+        return new Deadline(getTitle(), isDone, dateBy);
     }
 
     @Override

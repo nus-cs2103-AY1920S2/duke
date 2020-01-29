@@ -6,7 +6,12 @@ public class Todo extends Task {
     }
 
     public Todo(String title) {
-        super(title);
+        this(title, false);
+    }
+
+    @Override
+    public Task setDone(boolean isDone) {
+        return new Todo(getTitle(), isDone);
     }
 
     @Override
