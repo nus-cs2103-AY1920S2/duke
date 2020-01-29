@@ -71,7 +71,7 @@ public class Duke {
                     DE.DeadlineMissingDate();
                 } else {
                     String NewInput = input.substring(9);
-                    String[] ActionTime = NewInput.split("/");
+                    String[] ActionTime = NewInput.split("/", 2);
                     lib.deadline(ActionTime);
                 }
             } else if (input.contains("event")) {
@@ -82,7 +82,7 @@ public class Duke {
                     DE.EventMissingDate();
                 }else {
                     String NewInput = input.substring(6);
-                    String[] ActionTime = NewInput.split("/");
+                    String[] ActionTime = NewInput.split("/",2);
                     lib.event(ActionTime);
                 }
             } else {

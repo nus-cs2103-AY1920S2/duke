@@ -4,7 +4,10 @@ public class Deadline extends Task {
 
     public Deadline (String description, String time){
         super(description);
-        this.time = time.strip().substring(3).strip();
+//        String[] input = time.split("by");
+//        this.time = input[1];
+//        this.time = time.substring(3).strip();
+        this.time = time;
     }
 
     @Override
@@ -15,5 +18,8 @@ public class Deadline extends Task {
         System.out.println(super.line);
         System.out.println("Got it. I've added this task: ");
         System.out.println(" [D]" + super.toString() + "| by: " + time );
+    }
+    public String getTime(){
+        return time;
     }
 }

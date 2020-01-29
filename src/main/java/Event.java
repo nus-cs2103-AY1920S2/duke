@@ -4,16 +4,20 @@ public class Event extends Task {
 
     public Event (String description, String time){
         super(description);
-        this.time = time.strip().substring(3).strip();
+//        this.time = time.substring(3).strip();
+        this.time = time;
     }
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + "| at: " + time;
+        return "[E]" + super.toString() + "| at: " + time ;
     }
     public void Output(){
         System.out.println(super.line);
         System.out.println("Got it. I've added this task: ");
-        System.out.println(" [E]" + super.toString() + "| at: " + time);
+        System.out.println(" [E]" + super.toString() + "| at: " + time );
+    }
+    public String getTime(){
+        return time;
     }
 }
