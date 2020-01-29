@@ -21,9 +21,9 @@ public class Parser {
         String command = arr[0];
         String description = "";
 
-        if(arr.length > 1) {
+        if (arr.length > 1) {
             //get task description
-            for(int i = 1; i < arr.length - 1; i++) {
+            for (int i = 1; i < arr.length - 1; i++) {
                 description = description + arr[i] + " ";
             }
             description = description + arr[arr.length - 1];
@@ -31,17 +31,17 @@ public class Parser {
 
         System.out.println(description);
 
-        if(command.equals("bye")) {
+        if (command.equals("bye")) {
             return new ExitCommand(command, description);
-        } else if(command.equals("delete")) {
+        } else if (command.equals("delete")) {
             return new DeleteCommand(command, description);
-        } else if(command.equals("done")) {
+        } else if (command.equals("done")) {
             return new DoneCommand(command, description);
-        } else if(command.equals("list")) {
+        } else if (command.equals("list")) {
             return new ListCommand(command, description);
-        } else if(command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             return new AddCommand(command, description);
-        } else if(command.equals("find")) {
+        } else if (command.equals("find")) {
             return new FindCommand(command, description);
         } else {
             throw new DukeException("");

@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
         try {
             storage.write(tasks);
-        } catch(IOException e) {
+        } catch (IOException e) {
             ui.showError(e);
         }
     }

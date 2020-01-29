@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
 
         try {
             storage.write(tasks);
-        } catch(IOException e) {
+        } catch (IOException e) {
             ui.showError(e);
         }
 
