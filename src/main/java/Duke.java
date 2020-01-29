@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static ArrayList<Task> newList;
+    public static Storage storage = new Storage("duke.txt");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -21,7 +22,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         newList = new ArrayList<Task>();
-        retrieveInfo();
+        storage.retrieveInfo();
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
@@ -71,7 +72,7 @@ public class Duke {
             }
         }
 
-        updateInfo();
+        storage.updateInfo();
         dukePrint("Bye. Hope to see you again soon!\n");
         sc.close();
     }
@@ -108,47 +109,5 @@ public class Duke {
         newList.remove(i);
         dukePrint("Noted. I've removed this task:\n"+task.toString()+"\n" +
                 "Now you have " + newList.size() + " tasks in the list.\n");
-    }
-
-    public static void retrieveInfo() {
-        try {
-            Scanner scanner = new Scanner(new File("duke.txt"));
-            while (scanner.hasNextLine()) {
-                String[] arr  = scanner.nextLine().split("[|]");
-                Task newTask = null;
-
-                if  (arr[0].trim().equals("T")) {
-                    newTask = new ToDo(arr[2].trim());
-                } else if (arr[0].trim().equals("D")) {
-                    newTask = new Deadline(arr[2].trim(), arr[3].trim(), Task.formatter);
-                } else if (arr[0].trim().equals("E")) {
-                    newTask = new Event(arr[2].trim(), arr[3].trim(), Task.formatter);
-                }
-
-                if (arr[1].trim().equals("Y")) {
-                    newTask.markAsDone();
-                }
-                newList.add(newTask);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-            return;
-        }
-    }
-
-    public static  void  updateInfo() {
-        String  fileString = "";
-        for (int i = 0; i < newList.size(); i += 1) {
-            fileString += newList.get(i).fileString() + "\n";
-        }
-
-        try {
-            new File("duke.txt").createNewFile();
-            FileWriter fw = new FileWriter("duke.txt");
-            fw.write(fileString);
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
     }
 }
