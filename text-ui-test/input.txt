@@ -1,7 +1,6 @@
 delete 1
 delete 1
 delete 1
-delete 1
 event read book no time
 deadline dead line no time
 done 1
@@ -13,7 +12,9 @@ event
 todo
 deadline
 deadline return book /by Sunday
+deadline return book /by 2020-03-15 1530
 event project meeting /at Mon 2-4pm
+event project meeting /at 2020-07-07 0707
 list
 done 2
 deadline do homework /by no idea :-p

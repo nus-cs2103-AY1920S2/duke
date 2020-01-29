@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -54,10 +57,12 @@ public class Duke {
             throw new UnknownCommandException(keywords[0]);
         }
       } catch (EmptyDescriptionException
-          | MissingTimeException
-          | UnknownCommandException
-          | InvalidIndexException e) {
+              | MissingTimeException
+              | UnknownCommandException
+              | InvalidIndexException e) {
         System.out.println("    " + e);
+      } catch (DateTimeParseException e) {
+        System.out.println("    " + "Please enter date in the format yyyy-MM-dd HHmm");
       } catch (Exception e) {
         System.out.printf("    I don't know this error homie, take a look:\n    %s\n", e);
       }
@@ -73,11 +78,11 @@ public class Duke {
 
   public static void saveBaby() throws IOException {
     BufferedWriter taskWriter = new BufferedWriter(new FileWriter(".//saved-tasks.txt"));
-    String tasks = "";
+    StringBuilder tasks = new StringBuilder();
     for (Task task: Task.tasks) {
-      tasks += task.toSaveString() + "\n";
+      tasks.append(task.toSaveString()).append("\n");
     }
-    taskWriter.write(tasks);
+    taskWriter.write(tasks.toString());
     taskWriter.close();
   }
 
@@ -91,6 +96,8 @@ public class Duke {
   public static void handleLoad() throws IOException {
     BufferedReader taskLoader = new BufferedReader(new FileReader(".//saved-tasks.txt"));
     String longCommand = taskLoader.readLine();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    LocalDateTime myDateObj;
     while (longCommand != null) {
       String[] keywords = longCommand.split(" \\|\\| ");
       Task cur = null;
@@ -99,16 +106,19 @@ public class Duke {
           cur = new Todo(keywords[2]);
           break;
         case "deadline":
-          cur = new Deadline(keywords[2], keywords[3]);
+          myDateObj = LocalDateTime.parse(keywords[3], formatter);
+          cur = new Deadline(keywords[2], myDateObj);
           break;
         case "event":
-          cur = new Event(keywords[2], keywords[3]);
+          myDateObj = LocalDateTime.parse(keywords[3], formatter);
+          cur = new Event(keywords[2], myDateObj);
           break;
         default:
           System.out.println("error");
           break;
       }
       if (keywords[0].equals("1")) {
+        assert cur != null;
         cur.done();
       }
       longCommand = taskLoader.readLine();
@@ -117,7 +127,7 @@ public class Duke {
   }
 
   public static void handleDone(String keyword) throws InvalidIndexException {
-    int index = 0;
+    int index;
     try {
       index = Integer.parseInt(keyword) - 1;
       Task.tasks.get(index).done();
@@ -129,8 +139,8 @@ public class Duke {
   }
 
   public static void handleDelete(String keyword) throws InvalidIndexException {
-    int index = 0;
-    Task delete = null;
+    int index;
+    Task delete;
     try {
       index = Integer.parseInt(keyword) - 1;
       delete = Task.tasks.get(index);
@@ -148,7 +158,9 @@ public class Duke {
     if (strArr.length == 1) throw new MissingTimeException("Event");
     String todo = strArr[0];
     String time = strArr[1];
-    Event task = new Event(todo, time);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    LocalDateTime myDateObj = LocalDateTime.parse(time, formatter);
+    Event task = new Event(todo, myDateObj);
     System.out.println("    Got it. I've added this task:");
     System.out.printf("    %s\n", task);
     System.out.printf("    Now you have %d tasks in the list.\n", Task.tasks.size());
@@ -166,7 +178,9 @@ public class Duke {
     if (strArr.length == 1) throw new MissingTimeException("Deadline");
     String todo = strArr[0];
     String time = strArr[1];
-    Deadline task = new Deadline(todo, time);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    LocalDateTime myDateObj = LocalDateTime.parse(time, formatter);
+    Deadline task = new Deadline(todo, myDateObj);
     System.out.println("    Got it. I've added this task:");
     System.out.printf("    %s\n", task);
     System.out.printf("    Now you have %d tasks in the list.\n", Task.tasks.size());

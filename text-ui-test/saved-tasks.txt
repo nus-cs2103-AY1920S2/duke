@@ -1,4 +1,3 @@
-1 || deadline || return book || Sunday
-0 || event || project meeting || Mon 2-4pm
-1 || deadline || do homework || no idea :-p
+1 || deadline || return book || 2020-03-15 1530
+0 || event || project meeting || 2020-07-07 0707
 0 || todo || your butt
