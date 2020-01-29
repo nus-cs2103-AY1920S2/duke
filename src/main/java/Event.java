@@ -9,7 +9,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String[] date = on.split(" ", 2);
-        return "[E]" + super.toString() + " (" + date[0] + ": " + date[1] + ")";
+        return "[E]" + super.toString() + " (on: " + on + ")";
     }
 }
