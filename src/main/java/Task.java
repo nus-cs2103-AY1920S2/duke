@@ -15,7 +15,7 @@ public class Task {
      * @return Tick or X symbol.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
     }
 
     /**
@@ -31,7 +31,7 @@ public class Task {
      * @return 1 if done, or 0 if not done.
      */
     public String getStatusInNumber() {
-        return isDone? "1" : "0";
+        return isDone ? "1" : "0";
     }
 
     /**
