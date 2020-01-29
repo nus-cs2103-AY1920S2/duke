@@ -104,43 +104,44 @@ public class Parser {
 
         } else {
 
-         int indexAt = input.indexOf("/at ");
+            int indexAt = input.indexOf("/at ");
 
-         if(input.startsWith("deadline")) {
+            if (input.startsWith("deadline")) {
 
-             int indexBy = input.indexOf("/by ");
+                int indexBy = input.indexOf("/by ");
 
-             outputArr[0] = input.substring(0, whiteSpaceIndex);
-             if(indexBy == -1) {
+                outputArr[0] = input.substring(0, whiteSpaceIndex);
 
-                 outputArr[1] = "EmptyDate";
-                 outputArr[2] = "";
+                if (indexBy == -1) {
+                    outputArr[1] = "EmptyDate";
+                    outputArr[2] = "";
 
-                 throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
+                    throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
 
-             } else {
+                } else {
 
-                 outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
-                 outputArr[2] = input.substring(index + 4);
+                    outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
+                    outputArr[2] = input.substring(index + 4);
 
-             }
+                }
 
-         } else {
+            } else {
 
-             outputArr[0] = input.substring(0, whiteSpaceIndex);
-             if(indexAt == -1) {
+                outputArr[0] = input.substring(0, whiteSpaceIndex);
 
-                 outputArr[1] = "EmptyDate";
-                 outputArr[2] = "";
+                if (indexAt == -1) {
 
-                 throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
-             } else {
+                    outputArr[1] = "EmptyDate";
+                    outputArr[2] = "";
 
-                 outputArr[0] = input.substring(0, whiteSpaceIndex);
-                 outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
-                 outputArr[2] = input.substring(index + 4);
-             }
-         }
+                    throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
+                } else {
+
+                    outputArr[0] = input.substring(0, whiteSpaceIndex);
+                    outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
+                    outputArr[2] = input.substring(index + 4);
+                }
+            }
 
         }
 
@@ -163,18 +164,18 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
             LocalDateTime[] parsed = new LocalDateTime[2];
 
-            if(type.equals("todo")) {
+            if (type.equals("todo")) {
 
                 parsed[0] = LocalDateTime.parse("12/12/1212 12:12", formatter);
                 parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
 
-            } else if(type.equals("event")) {
+            } else if (type.equals("event")) {
 
                 split = dateTime.split(" to ");
                 parsed[0] = LocalDateTime.parse(split[0], formatter);
                 parsed[1] = LocalDateTime.parse(split[1], formatter);
 
-            } else if(type.equals("deadline")) {
+            } else if (type.equals("deadline")) {
 
                 parsed[0] = LocalDateTime.parse(dateTime, formatter);
                 parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);

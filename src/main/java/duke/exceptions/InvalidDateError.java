@@ -20,7 +20,7 @@ public class InvalidDateError extends Exceptions {
     @Override
     public String errorMessage() {
 
-        if(type.equals("deadline")) {
+        if (type.equals("deadline")) {
 
             return "Date should be in d/MM/yyyy HH:mm format";
 
