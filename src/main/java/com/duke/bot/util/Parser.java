@@ -31,7 +31,7 @@ public class Parser {
         } else if (input.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         } else {
-            throw new DukeException(String.format("☹ OOPS!!! '%s' is an invalid input.", input));
+            throw new DukeException(String.format("Oops, '%s' is an invalid input", input));
         }
     }
 
