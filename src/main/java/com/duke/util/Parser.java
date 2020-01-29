@@ -9,7 +9,18 @@ import com.duke.task.Todo;
 import java.time.format.DateTimeParseException;
 import java.util.StringTokenizer;
 
+/**
+ * Represents a handler of the user input command which converts <code>String</code>
+ * commands into actual <code>Command</code> objects to be executed.
+ */
 public class Parser {
+    /**
+     * Takes in a <code>String</code> form of command and converts it into <code>Command</code>
+     * object to be executed.
+     * @param cmd String representation of user input
+     * @return Command representation of the user input
+     * @throws DukeException when the user input is invalid.
+     */
     public static Command parse(String cmd) throws DukeException {
         StringTokenizer st = new StringTokenizer(cmd);
         String first_token = st.nextToken();

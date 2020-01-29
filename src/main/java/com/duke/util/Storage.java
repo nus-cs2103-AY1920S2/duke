@@ -11,12 +11,27 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * Represents a handler that interacts with the storage file in the hard-drive
+ * through both loading and saving data into and from the current Duke session.
+ */
 public class Storage {
     private String filePath;
+
+    /**
+     * Contructs a <code>Storage</code> object with the given filePath.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the data associated to the task list from the hard-drive into the Duke session.
+     * @return An <code>ArrayList</code> object that contains the all the tasks on the list
+     * and their relevant status.
+     * @throws FileNotFoundException If the file path provided is invalid.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -46,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task data in the current Duke session into the hard-drive.
+     * @param tl The task list that contains the updated task data.
+     * @throws IOException When the file path provided is invalid.
+     */
     public void save(TaskList tl) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         List<Task> ts = tl.tasks;

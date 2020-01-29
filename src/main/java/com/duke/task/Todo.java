@@ -1,6 +1,13 @@
 package com.duke.task;
 
+/**
+ * Represents a Todo task.
+ */
 public class Todo extends Task {
+    /**
+     * Creates a Todo task with the description given.
+     * @param d description of the Todo task.
+     */
     public Todo(String d){
         super(d);
     }

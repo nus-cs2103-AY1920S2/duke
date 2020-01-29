@@ -10,12 +10,20 @@ import com.duke.util.Ui;
 
 import java.io.*;
 
-
+/**
+ * Driver class of the Duke program. To start a new session,
+ * instantiate a new <code>Duke</code> object with the data file path and call run();
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiate a new <code>Duke</code> object with the data file path
+     * that stores the task information.
+     * @param filePath the file path of the file that stores the task information.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts a Duke session.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -47,7 +58,6 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Todo a = new Todo("test!");
         new Duke("../duke/data/duke.txt").run();
 
     }

@@ -4,10 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Deadline Task.
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;
 
+    /**
+     * Creates a Deadline Task with the given description and deadline time.
+     * @param description The description of the deadline event.
+     * @param by The time by which the deadline event terminates.
+     * @throws DateTimeParseException
+     */
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
         this.by = Task.generateTime(by);

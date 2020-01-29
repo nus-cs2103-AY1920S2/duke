@@ -8,8 +8,16 @@ import com.duke.util.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a command that adds a task to the task list.
+ */
 public class TaskCommand extends Command {
     private Task task;
+
+    /**
+     * Creates a Task command that adds a task specified to the task list.
+     * @param item The Task to be added.
+     */
     public TaskCommand(Task item) {
         task = item;
     }
