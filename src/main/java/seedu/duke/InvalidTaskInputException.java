@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class InvalidTaskInputException extends DukeException {
     @Override
     public String toString() {

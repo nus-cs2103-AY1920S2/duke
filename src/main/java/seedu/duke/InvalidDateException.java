@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class InvalidDateException extends DukeException {
     @Override
     public String toString() {

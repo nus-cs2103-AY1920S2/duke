@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.time.LocalDate;
 
 public class Todo extends Task {

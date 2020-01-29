@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
