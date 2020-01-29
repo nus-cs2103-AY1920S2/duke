@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class MissingEventParamException extends DukeException {
     @Override
     public String toString() {

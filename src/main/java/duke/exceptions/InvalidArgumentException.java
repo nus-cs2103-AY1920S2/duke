@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class InvalidArgumentException extends DukeException {
     @Override
     public String toString() {

@@ -1,3 +1,8 @@
+package duke.main;
+
+import duke.exceptions.DukeException;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -6,13 +11,13 @@ import java.util.Scanner;
 public class Ui {
     static Scanner scanner = new Scanner(System.in);
     public static void showLoadingError() {
-        System.out.println("Error loading Storage module. Your tasks may not be loaded or saved.");
+        System.out.println("Error loading duke.main.Storage module. Your tasks may not be loaded or saved.");
     }
     public static void showDukeError(DukeException e) {
         System.out.println(e);
     }
     public static void start() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm duke.main.Duke\nWhat can I do for you?");
 
     }
     public static void end() {

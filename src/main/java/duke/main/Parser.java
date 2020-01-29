@@ -1,3 +1,9 @@
+package duke.main;
+
+import duke.command.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.UnknownCommandException;
+
 public class Parser {
     static boolean parseCommand(String input, TaskList taskList) {
         try {

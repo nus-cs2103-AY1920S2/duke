@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class MissingDeadlineParamException extends DukeException {
     @Override
     public String toString() {

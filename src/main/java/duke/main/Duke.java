@@ -1,3 +1,5 @@
+package duke.main;
+
 public class Duke {
     enum Command {
         BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, CALENDAR, CLEAR

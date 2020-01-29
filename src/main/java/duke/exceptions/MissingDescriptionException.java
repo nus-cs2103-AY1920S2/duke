@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class MissingDescriptionException extends DukeException {
     @Override
     public String toString() {
