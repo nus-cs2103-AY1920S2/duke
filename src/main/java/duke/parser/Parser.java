@@ -4,12 +4,12 @@ import duke.exceptions.EmptyDateError;
 import duke.exceptions.EmptyDescriptionError;
 import duke.exceptions.InvalidDateError;
 import duke.exceptions.InvalidInputError;
+import duke.exceptions.MissingKeywordError;
 import duke.exceptions.MissingTaskNumberError;
 
 import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 /**
  * The Parser program passes user input, date and time related to a task.
@@ -64,6 +64,22 @@ public class Parser {
 
             }
 
+        } else if (input.startsWith("find")) {
+
+            String[] splitInput = input.split(" ");
+            if (splitInput.length < 2) {
+
+                outputArr[0] = "MissingKeyWord";
+                outputArr[1] = "";
+                outputArr[2] = "";
+
+                throw new MissingKeywordError();
+
+            } else {
+
+                return splitInput;
+
+            }
         }
 
         int index = input.indexOf("/");

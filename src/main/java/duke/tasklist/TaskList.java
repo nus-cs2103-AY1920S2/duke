@@ -158,11 +158,35 @@ public class TaskList {
 
     }
 
+
+    /**
+     * Prints out tasks in taskList with words corresponding to keyword.
+     * @param keyword corresponds to the tasks with same word.
+     */
+    public void findTask(String keyword) {
+
+        System.out.println("Here are the matching tasks in your list:");
+
+        String taskString = null;
+        int numOfMatchingTask = 0;
+
+        for (int i = 0; i < taskList.size(); i++) {
+
+            taskString = taskList.get(i).toString();
+
+            if (taskString.contains(keyword)) {
+                numOfMatchingTask++;
+                System.out.println(numOfMatchingTask + "." + taskString);
+            }
+        }
+
+    }
+
     /**
      * Prints out total number of tasks in taskList.
      *
      * @return total number of tasks in taskList.
-     */
+     **/
     public String reportTotal() {
 
         return "Now you have " + taskList.size() + " tasks in the list";

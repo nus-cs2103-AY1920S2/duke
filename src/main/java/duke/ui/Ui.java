@@ -84,6 +84,12 @@ public class Ui {
                         System.out.println(manager.reportTotal());
                         System.out.println(footer);
 
+                    } else if (taskDescriptionArr[0].equals("find")) {
+
+                        System.out.println(header);
+                        manager.findTask(taskDescriptionArr[1]);
+                        System.out.println(footer);
+
                     } else {
 
                         dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
