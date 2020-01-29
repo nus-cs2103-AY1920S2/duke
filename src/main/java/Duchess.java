@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -99,6 +103,8 @@ class Duchess {
     }
 
     private void createTask(String type, String description) throws DuchessException {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         switch (type) {
         case "todo":
             Task newTask = new ToDo(description.trim());
@@ -119,7 +125,18 @@ class Duchess {
                 throw new DuchessException(
                         "I don't know when is your deadline! Please use /by [deadline here].");
             }
-            newTask = new Deadline(details.get(0).trim(), details.get(1).trim());
+            LocalDateTime deadline;
+            try {
+                deadline = LocalDateTime.parse(details.get(1).trim(), dateTimeFormatter);
+            } catch (DateTimeParseException e1) {
+                try {
+                    deadline = LocalDate.parse(details.get(1).trim(), dateFormatter).atStartOfDay();
+                } catch (DateTimeParseException e2) {
+                    throw new DuchessException("Please use the following format for the datetime instead:\n" +
+                            "\td/M/yyyy HHmm OR d/M/yyyy");
+                }
+            }
+            newTask = new Deadline(details.get(0).trim(), deadline);
             this.addToTasks(newTask);
             break;
         default:
