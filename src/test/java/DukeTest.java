@@ -1,7 +1,6 @@
 import duke.interaction.Parser;
 import duke.command.*;
 
-import duke.interaction.Ui;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.util.DateTimeUtil;
@@ -38,17 +37,17 @@ public class DukeTest {
     public void TaskTest() {
         LocalDateTime dt = DateTimeUtil.stringAsDateTime("2020-02-25 22:30");
         Deadline testDeadline = new Deadline("Homework", dt);
-        testDeadline.MarkAsDone();
+        testDeadline.markAsDone();
         assertEquals(testDeadline.toSaveString(), "D1Homework@2020-02-25T22:30");
     }
 
     @Test
     public void TaskListTest() {
         TaskList tl = new TaskList();
-        tl.AddSaveStringAsTask("E0flight@2020-02-25T00:00");
-        assertEquals(true, tl.DoneTask(0));
-        assertEquals(false, tl.DoneTask(2));
-        assertEquals(true, tl.DeleteTask(0));
-        assertEquals(false, tl.DeleteTask(0));
+        tl.addSaveStringAsTask("E0flight@2020-02-25T00:00");
+        assertEquals(true, tl.doneTask(0));
+        assertEquals(false, tl.doneTask(2));
+        assertEquals(true, tl.deleteTask(0));
+        assertEquals(false, tl.deleteTask(0));
     }
 }
