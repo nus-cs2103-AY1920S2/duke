@@ -1,27 +1,27 @@
 import java.io.IOException;
-
 import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-
+/**
+ * The Duke program implements a Personal Assistant Chatbot
+ * named EXE that helps a person to keep track of various things.
+ *
+ * @author Kenny Ho
+ * @since 2020-01-20
+ */
 public class Duke {
-
-    public final static String NEWLINE = System.lineSeparator();
-    public final static String INDENT = "    ";
-    public final static String BORDER = INDENT + "____________________________________________________________";
-    public final static String EXIT = "bye";
-    public final static String GOODBYE_MESSAGE = INDENT + "  Goodbye and have a beautiful time!";
-
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-
+    /**
+     * A constructor to initialise Storage, TaskList and Ui class
+     * which is responsible for loading and saving tasks, containing
+     * the task list with additional operations and
+     * interaction with the user respectively.
+     *
+     * @param filePath Relative path of the storage text file used.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -35,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Execute the start-up, message shown, and main functions of the chatbot
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -53,6 +56,12 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Create a Duke object which is used to invoke start-up of Chatbot.
+     *
+     * @param args Unused.
+     */
 
     public static void main(String[] args) {
         new Duke("data" + System.getProperty("file.separator") + "duke.txt").run();
