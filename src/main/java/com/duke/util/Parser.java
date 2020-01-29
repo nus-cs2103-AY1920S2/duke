@@ -1,5 +1,6 @@
 package com.duke.util;
 
+import com.duke.Duke;
 import com.duke.command.*;
 import com.duke.task.Deadline;
 import com.duke.task.Event;
@@ -45,6 +46,16 @@ public class Parser {
                 throw new DukeException("OOPS! done should follow by a number");
             }
 
+        } else if (first_token.equals("find")) {
+            try {
+                cmd = cmd.substring(5);
+                if (cmd.equals("")) {
+                    throw new DukeException("OOPS! Please specify keyword to find");
+                }
+                output = new FindCommand(cmd);
+            } catch (Exception e) {
+                throw new DukeException("OOPS! Please specify keyword to find");
+            }
         } else {
             Task itemToAdd = null;
 
@@ -80,7 +91,6 @@ public class Parser {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
             }
-
             if (itemToAdd == null) {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

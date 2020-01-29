@@ -3,6 +3,8 @@ package com.duke.util;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -115,6 +117,16 @@ public class Ui {
         String out = space + "Got it. I've added this task: " + "\n" + space
                 + "  " + t + "\n" + space + "Now you have " + count +
                 " tasks in your list.";
+        System.out.println(out);
+    }
+
+    public void showFind(ArrayList<Task> tasks) {
+        String out = space + "Here are the matching tasks in your list: ";
+        int index = 1;
+        for (Task t: tasks) {
+            out += "\n" + space + index + ". " + t;
+            index++;
+        }
         System.out.println(out);
     }
 }
