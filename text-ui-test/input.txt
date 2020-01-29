@@ -1,6 +1,4 @@
 hello
 hello world
-deadline CS2103T duke /by 2020-04-11
-todo CS2103T duke
-event CS2101 CA component 1 /at Thursday 08:00
+list
 bye
