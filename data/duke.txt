@@ -1,3 +1,2 @@
-T | 1 | run
 E | 1 | project meeting | May 20 2020
 D | 1 | 2103T | May 05 2020

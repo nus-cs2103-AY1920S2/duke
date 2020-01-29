@@ -1,6 +1,10 @@
 public class ToDo extends Task{
     protected final String toDoLogo = "T";
 
+    /**
+     *
+     * @param taskName
+     */
     public ToDo(String taskName) {
         super(taskName);
     }
