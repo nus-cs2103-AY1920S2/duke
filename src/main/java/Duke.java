@@ -1,7 +1,9 @@
-import java.lang.reflect.Array;
+import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,7 +19,43 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> arr = new ArrayList<>();
 
+        try {
+            Scanner s = new Scanner(new File("./out.txt"));
+            while (s.hasNext()) {
+                String fileInput = s.nextLine();
+                String[] fileStringArr = fileInput.split("\\[");
+//                System.out.println(Arrays.toString(fileStringArr));
 
+                if (fileStringArr[1].equalsIgnoreCase("T]")) {
+                    String[] todoSplit = fileStringArr[2].split(" ");
+                    Todo readTodo = new Todo(todoSplit[1]);
+//                    System.out.println(Arrays.toString(todoSplit));
+                    readTodo.isDone(todoSplit[0]);
+                    arr.add(readTodo);
+                } else if (fileStringArr[1].equalsIgnoreCase("D]")) {
+                    String[] deadlineSplit = fileStringArr[2].split("\\(");
+                    String checkIsDone = deadlineSplit[0].substring(0, 2);
+                    String deadlineDescription = deadlineSplit[0].substring(3).strip();
+                    String deadlineDate = deadlineSplit[1].substring(4, deadlineSplit[1].length() - 1);
+                    Deadline readDeadline = new Deadline(deadlineDescription, deadlineDate);
+                    readDeadline.isDone(checkIsDone);
+                    arr.add(readDeadline);
+                } else if (fileStringArr[1].equalsIgnoreCase("E]")) {
+                    String[] eventSplit = fileStringArr[2].split("\\(");
+                    String checkIsDone = eventSplit[0].substring(0, 2);
+                    String eventDescription = eventSplit[0].substring(3).strip();
+                    String eventDate = eventSplit[1].substring(4, eventSplit[1].length() - 1);
+                    Event readEvent = new Event(eventDescription, eventDate);
+                    readEvent.isDone(checkIsDone);
+                    arr.add(readEvent);
+                }
+
+            }
+            s.close();
+        } catch (FileNotFoundException | DukeException ex) {
+            ex.printStackTrace();
+        }
+        SaveToFile saveToFile = new SaveToFile();
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
             String[] arrString = userInput.split(" ", 2);
@@ -31,9 +69,12 @@ public class Duke {
                         System.out.println("You currently do not have anything in your list");
                         System.out.println(botReplyLine);
                     } else {
+                        StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < arr.size(); i++) {
                             System.out.println(i + 1 + ". " + arr.get(i).toString());
+                            sb.append(arr.get(i).toString() + "\n");
                         }
+                        saveToFile.usingFileWriter(sb.toString());
                         System.out.println(botReplyLine);
                     }
                 } else if (arrString[0].equalsIgnoreCase("done")) {
@@ -89,7 +130,7 @@ public class Duke {
                 } else if (arrString[0].equalsIgnoreCase("event")) {
                     try {
                         String[] eventString = arrString[1].split("/");
-                        Event event = new Event(eventString[0], eventString[1].substring(2).strip());
+                        Event event = new Event(eventString[0].strip(), eventString[1].substring(2).strip());
                         arr.add(event);
                         System.out.println(botReplyLine + "\n Duke: added your command. \n");
                         System.out.println(event.toString());
@@ -101,7 +142,7 @@ public class Duke {
                 } else if (arrString[0].equalsIgnoreCase("deadline")) {
                     try {
                         String[] deadlineString = arrString[1].split("/");
-                        Deadline deadline = new Deadline(deadlineString[0], deadlineString[1].substring(2).strip());
+                        Deadline deadline = new Deadline(deadlineString[0].strip(), deadlineString[1].substring(2).strip());
                         arr.add(deadline);
                         System.out.println(botReplyLine + "\n Duke: added your command. \n");
                         System.out.println(deadline.toString());
@@ -113,6 +154,7 @@ public class Duke {
                 } else {
                     throw new DukeException(botReplyLine + " \n Sorry I do not understand. \n" + botReplyLine);
                 }
+
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());

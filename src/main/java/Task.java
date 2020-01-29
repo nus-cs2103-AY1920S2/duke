@@ -16,12 +16,21 @@ public class Task {
                 : "\u2718"); //return tick or X symbols
     }
 
-    public void doneTask(){
+    public void isDone(String doneStatus) {
+        if (doneStatus.equalsIgnoreCase("\u2713]")) {
+            this.isDone = true;
+        }
+        else{
+            this.isDone = false;
+        }
+    }
+
+    public void doneTask() {
         this.isDone = true;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
