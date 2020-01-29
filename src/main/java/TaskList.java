@@ -1,3 +1,8 @@
+package duke;
+
+import duke.tasks.Task;
+import duke.exception.DukeException;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -52,7 +57,10 @@ public class TaskList {
         System.out.println("       " + list.get(index));
     }
 
-    public void delete(int index, Storage storage) throws IOException {
+    public void delete(int index, Storage storage) throws IOException, DukeException {
+        if (size() <= index) {
+            throw new DukeException("There is no task " + (index + 1) + ".");
+        }
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + list.get(index));
         list.remove(index);

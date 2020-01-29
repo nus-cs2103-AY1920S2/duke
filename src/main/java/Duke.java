@@ -1,3 +1,8 @@
+package duke;
+
+import duke.commands.Command;
+import duke.exception.DukeException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;

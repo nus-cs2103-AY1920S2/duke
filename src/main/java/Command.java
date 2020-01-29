@@ -1,10 +1,17 @@
+package duke.commands;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.exception.DukeException;
+
 import java.io.IOException;
 
-abstract class Command {
+public abstract class Command {
 
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 
-    abstract boolean isExit();
+    public abstract boolean isExit();
 
 }
 
