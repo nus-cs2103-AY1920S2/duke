@@ -16,7 +16,7 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    public void toggleIsDone() {
+    public void markAsDone() {
         this.isDone = !this.isDone;
     }
 }
