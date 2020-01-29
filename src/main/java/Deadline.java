@@ -62,7 +62,8 @@ public class Deadline extends Task {
     @Override
     public String saveToHardDiskFormat() {
 
-        return String.format("D | %d | %s | %s", this.completedCode, this.getDescription(), this.deadline.replace("by: ", ""));
+        return String.format("D | %d | %s | %s",
+                this.completedCode, this.getDescription(), this.deadline.replace("by: ", ""));
     }
 
     /**

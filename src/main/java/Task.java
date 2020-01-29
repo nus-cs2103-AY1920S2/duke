@@ -54,9 +54,9 @@ public class Task {
     public String toString() {
 
         if (this.completed) {
-            return ("[\u2713] " + this.description);
+            return ("[✔] " + this.description);
         } else {
-            return ("[\u2718] " + this.description);
+            return ("[✘] " + this.description);
         }
 
     }

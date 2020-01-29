@@ -22,7 +22,7 @@ public class Parser {
 
         if (messageType.equals("delete"))  {
 
-            int numberToDelete = Integer.parseInt(response.replace("delete" , "").trim());
+            int numberToDelete = Integer.parseInt(response.replace("delete", "").trim());
 
             return new DeleteCommand(response, numberToDelete);
 

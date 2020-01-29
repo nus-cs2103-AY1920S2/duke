@@ -26,7 +26,7 @@ public class Duke {
 
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readLine();
                 ui.printFormatting();

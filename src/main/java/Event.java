@@ -13,7 +13,7 @@ public class Event extends Task {
     public Event(String description, String timing) {
         super(description);
         int newTimingFormat = timing.indexOf(" ");
-        this.timing = timing.substring(0, newTimingFormat) + ":"+ timing.substring(newTimingFormat);
+        this.timing = timing.substring(0, newTimingFormat) + ":" + timing.substring(newTimingFormat);
 
     }
 
@@ -24,7 +24,8 @@ public class Event extends Task {
     @Override
     public String saveToHardDiskFormat() {
 
-        return String.format("E | %d | %s | %s", this.completedCode, this.getDescription(), this.timing.replace("at: ", ""));
+        return String.format("E | %d | %s | %s",
+                this.completedCode, this.getDescription(), this.timing.replace("at: ", ""));
     }
 
 

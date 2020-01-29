@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage to store and retrieve all data that is stored in the hard diskl
+ * Storage to store and retrieve all data that is stored in the hard disk.
  */
 public class Storage {
 
@@ -77,7 +77,7 @@ public class Storage {
      * @param list task list that is to be stored.
      * @throws IOException if file is not found in the file path.
      */
-    private void writeToHardDisk (ArrayList<Task> list) throws IOException {
+    private void writeToHardDisk(ArrayList<Task> list) throws IOException {
         File f = this.path.toFile();
         FileWriter writer = new FileWriter(f);
 
