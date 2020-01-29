@@ -25,7 +25,6 @@ public class Duke {
             System.out.println("NONEEE");
             tasks = new TaskList();
             ui = new Ui(tasks);
-
         }
 
     }
@@ -44,22 +43,14 @@ public class Duke {
             input = sc.nextLine();
         }
 
-
-
-
         ui.printGoodbye();
 
     }
 
 
     public static void main(String[] args) throws IOException {
-
         new Duke().run();
-
-
     }
-
-
 
 }
 
@@ -96,8 +87,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 

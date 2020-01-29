@@ -10,7 +10,6 @@ public class TaskList {
     }
 
     public TaskList() {
-
     }
 
     public void addTask(Task task) {

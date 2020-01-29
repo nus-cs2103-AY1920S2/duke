@@ -1,11 +1,5 @@
 public class Parser {
 
-
-    public Parser() {
-
-    }
-
-
     public void parse(String input, Ui ui, TaskList tasks) {
         if (input.equals("list")) {
             ui.printList();
@@ -62,11 +56,6 @@ public class Parser {
                 break;
             }
         }
-
-
-
-
-
 
     }
 
