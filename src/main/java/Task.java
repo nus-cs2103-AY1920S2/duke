@@ -7,6 +7,11 @@ public class Task {
         this.isCompleted = false;
     }
 
+    Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted = isCompleted;
+    }
+
     private String getStatusIcon() {
         return (this.isCompleted ? "\u2713" : "\u2718");
     }
