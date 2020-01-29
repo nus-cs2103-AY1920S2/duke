@@ -3,7 +3,7 @@ public class WelcomeGoodbye {
     /**
      * Utilised in printing
      */
-    private final String horizontalLine = "____________________________________________________________";
+    private final String FORMAT_LINE = "____________________________________________________________";
 
     /**
      * Welcomes the user with a message
@@ -29,7 +29,7 @@ public class WelcomeGoodbye {
      * Prints a horizontal formatting line
      */
     private void printLine() {
-        print(horizontalLine);
+        print(FORMAT_LINE);
     }
 
     /**
