@@ -1,5 +1,0 @@
-T/true/read book
-D/false/return book/2020-06-06
-E/false/project meeting/2020-08-06/2/4pm
-T/true/join sports club
-T/false/borrow book
