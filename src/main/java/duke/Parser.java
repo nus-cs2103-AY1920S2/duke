@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
@@ -78,11 +79,26 @@ public class Parser {
                         }
 
 
-
                         storage.writeList();
                     } else {
                         ui.printErrorNoTime();
                     }
+                } else if (words[0].equalsIgnoreCase("find")) {
+                    ArrayList<Task> taskFound = new ArrayList<>();
+                    for (Task task : Duke.commandList) {
+                        if (task.name.contains(words[1])) {
+                            taskFound.add(task);
+                        }
+                    }
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int i = 0; i < taskFound.size(); i++) {
+                        int a = i + 1;
+                        System.out.print(a + ". " + taskFound.get(i));
+                    }
+
+
+
+
                 } else{
                     ui.printErrorUnderstanding();
                 }
