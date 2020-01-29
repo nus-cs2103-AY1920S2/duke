@@ -43,9 +43,17 @@ public class Storage {
         ArrayList<Integer> indexes = new ArrayList<Integer>();
         int size = this.storage.size();
 
-        for (int i = 0; i < size; i++) {
-            if (this.storage.get(i).getPrettyTime().equals(pt)) {
-                indexes.add(i + 1);
+        if (pt.hasTime()) {
+            for (int i = 0; i < size; i++) {
+                if (this.storage.get(i).getPrettyTime().equals(pt)) {
+                    indexes.add(i + 1);
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (this.storage.get(i).getPrettyTime().matchDate(pt)) {
+                    indexes.add(i + 1);
+                }
             }
         }
 
