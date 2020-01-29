@@ -4,10 +4,22 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Duke {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final ArrayList<Task> taskList = new ArrayList<>();
+
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/M/d");
+    private static final DateValidator DATE_VALIDATOR = new DateValidator(DATE_FORMATTER);
+
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateValidator TIME_VALIDATOR = new DateValidator(TIME_FORMATTER);
+
 
 
     public static void main(String[] args) {
@@ -45,12 +57,22 @@ public class Duke {
             String taskDesc = task.getDescription();
             boolean taskIsDone = task.isDone;
 
-            if(taskType.equals("Todo")) {
-                outputToFile += "T/" + taskIsDone + "/" + taskDesc + "\n";
+            if (taskType.equals("Todo")) {
+                outputToFile += "T>" + taskIsDone + ">" + taskDesc + "\n";
             } else if (taskType.equals("Event")) {
-                outputToFile += "E/" + taskIsDone + "/" + taskDesc + "/" + ((Event)task).getAt() + "\n";
+                if (((Event) task).isTime) {
+                    outputToFile += "E>" + taskIsDone + ">" + taskDesc + ">" + ((Event) task).getDate() + ">"
+                            + ((Event) task).getTime() + "\n";
+                } else {
+                    outputToFile += "E>" + taskIsDone + ">" + taskDesc + ">" + ((Event) task).getDate() + "\n";
+                }
             } else {
-                outputToFile += "D/" + taskIsDone + "/" + taskDesc + "/" + ((Deadline)task).getBy() + "\n";
+                if (((Deadline) task).isTime) {
+                    outputToFile += "D>" + taskIsDone + ">" + taskDesc + ">" + ((Deadline) task).getDate() + ">"
+                            + ((Deadline) task).getTime() + "\n";
+                } else {
+                    outputToFile += "D>" + taskIsDone + ">" + taskDesc + ">" + ((Deadline) task).getDate() + "\n";
+                }
             }
         }
         return outputToFile;
@@ -61,7 +83,7 @@ public class Duke {
         Scanner sc = new Scanner(f);
         while(sc.hasNext()) {
             String note = sc.nextLine();
-            String[] noteArr = note.split("/");
+            String[] noteArr = note.split(">");
             String noteType = noteArr[0];
             boolean taskIsDone = (noteArr[1]).equals("true")  ? true : false;
             String taskDesc = noteArr[2];
@@ -73,9 +95,19 @@ public class Duke {
             if(noteType.equals("T")) {
                 taskList.add(new Todo(taskDesc, taskIsDone));
             } else if(noteType.equals("E")) {
-                taskList.add(new Event(taskDesc, dateTime ,taskIsDone));
+                if(noteArr.length == 5) {
+                    taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
+                            taskIsDone));
+                } else if(noteArr.length == 4) {
+                    taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), taskIsDone));
+                }
             } else {
-                taskList.add(new Deadline(taskDesc, dateTime, taskIsDone));
+                if(noteArr.length == 5) {
+                taskList.add(new Deadline(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
+                        taskIsDone));
+                } else if(noteArr.length == 4){
+                    taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), taskIsDone));
+                }
             }
         }
     }
@@ -112,6 +144,9 @@ public class Duke {
                 } else if (instruction.equals("delete")) {
                     deleteInstruction(replyArr, taskList);
                     reply = SCANNER.nextLine();
+                } else if (instruction.equals("date")) {
+                    dateInstruction(replyArr, taskList);
+                    reply = SCANNER.nextLine();
                 } else {
                     otherInstructions(instruction);
                     reply = SCANNER.nextLine();
@@ -124,6 +159,25 @@ public class Duke {
         printWithBorder("Bye! See ya later, alligator!");
     }
 
+    public static void dateInstruction(String[] replyArr, ArrayList<Task> taskList) throws DukeException {
+        if(DATE_VALIDATOR.isValidDate(replyArr[1])) {
+            LocalDate date = LocalDate.parse(replyArr[1], DATE_FORMATTER);
+            String taskOnDate = "";
+            for(Task task : taskList) {
+                if(task instanceof TaskDate) {
+                    if(((TaskDate) task).getDate().equals(date)) {
+                        taskOnDate += "\n      " + task.toString();
+                    }
+                }
+            }
+            String tasksToday = "The task(s) you have on " + replyArr[1] + ":" + taskOnDate;
+            printWithBorder(tasksToday);
+        } else {
+            throw new DukeException("Please enter a valid date in <YYYY/M/D> format\n" +
+                                    "    i.e. 2020/10/28");
+        }
+
+    }
 
     public static void doneInstruction(String[] replyArr, ArrayList<Task> taskList) throws DukeException {
         int taskNum = Integer.parseInt(replyArr[1]) - 1;
@@ -165,10 +219,10 @@ public class Duke {
     }
 
     public static void handleDeadline(String reply, ArrayList<Task> taskList) throws DukeException {
-        String[] taskReplyArr = reply.split("/by");
+        String[] taskReplyArr = reply.split("/by ");
         if (taskReplyArr.length < 2) {
-            throw new DukeException("Specify deadline with: /by \n" +
-                    "    i.e. deadline Submit assignment /by 6th Jan, 6pm ");
+            throw new DukeException("Specify deadline with data and/or time with: /by <YYYY/MM/DD> <HH:MM> \n" +
+                    "    i.e. deadline Submit assignment /by 2020/01/28 18:00");
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
         try {
@@ -176,21 +230,51 @@ public class Duke {
             for (int i = 2; i < taskInstrArr.length; i++) {
                 task += " " + taskInstrArr[i];
             }
+
             String timeDate = taskReplyArr[1];
-            Deadline deadLine = new Deadline(task, timeDate, false);
-            taskList.add(deadLine);
-            taskAdded(deadLine, taskList);
+            String[] timeDateArr = timeDate.split(" ");
+            if(timeDateArr.length == 2) {
+                if (DATE_VALIDATOR.isValidDate(timeDateArr[0]) && TIME_VALIDATOR.isValidTime(timeDateArr[1])) {
+                    LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
+                    LocalTime formattedTime = LocalTime.parse(timeDateArr[1], TIME_FORMATTER);
+
+                    Deadline deadLine = new Deadline(task, formattedDate, formattedTime, false);
+                    taskList.add(deadLine);
+                    taskAdded(deadLine, taskList);
+                } else {
+                    throw new DukeException("Invalid date and/or time format! \n" +
+                            "    Specify deadline with data and/or time with: /by <YYYY/MM/DD> <HH:MM> \n" +
+                            "    i.e. deadline Submit assignment /by 2020/01/28 18:00");
+                }
+            } else if (timeDateArr.length == 1) {
+                if (DATE_VALIDATOR.isValidDate(timeDateArr[0])) {
+                    LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
+                    Deadline deadLine = new Deadline(task, formattedDate, false);
+                    taskList.add(deadLine);
+                    taskAdded(deadLine, taskList);
+                } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
+                    LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
+                    Deadline deadLine = new Deadline(task, LocalDate.now(), formattedTime, false);
+                    taskList.add(deadLine);
+                    taskAdded(deadLine, taskList);
+                } else {
+                    throw new DukeException("Invalid date and/or time format! \n" +
+                            "    Specify deadline with data and/or time with: /by <YYYY/MM/DD> <HH:MM> \n" +
+                            "    i.e. deadline Submit assignment /by 2020/01/28 18:00");
+                }
+
+            }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new DukeException("Specify deadline with: /by \n" +
-                    "    i.e. deadline Submit assignment /by 6th Jan, 6pm ");
+            throw new DukeException("Specify deadline with data and/or time with: /by <YYYY/MM/DD> <HH:MM> \n" +
+                    "    i.e. deadline Submit assignment /by 2020/01/28 18:00");
         }
     }
 
     public static void handleEvent(String reply, ArrayList<Task> taskList) throws DukeException {
-        String[] taskReplyArr = reply.split("/at");
+        String[] taskReplyArr = reply.split("/at ");
         if (taskReplyArr.length < 2) {
-            throw new DukeException("Specify event with: /at \n" +
-                    "    i.e. event Project Meeting /at 6th Jan, 6pm ");
+            throw new DukeException("Specify event with: /at <YYYY/MM/DD> <HH:MM>\n" +
+                    "    i.e. event Project Meeting /at 2020/01/28 18:00");
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
         try {
@@ -199,12 +283,41 @@ public class Duke {
                 task += " " + taskInstrArr[i];
             }
             String timeDate = taskReplyArr[1];
-            Event event = new Event(task, timeDate, false);
-            taskList.add(event);
-            taskAdded(event, taskList);
+
+            String[] timeDateArr = timeDate.split(" ");
+            if(timeDateArr.length == 2) {
+                if (DATE_VALIDATOR.isValidDate(timeDateArr[0]) && TIME_VALIDATOR.isValidTime(timeDateArr[1])) {
+                    LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
+                    LocalTime formattedTime = LocalTime.parse(timeDateArr[1], TIME_FORMATTER);
+
+                    Event event = new Event(task, formattedDate, formattedTime, false);
+                    taskList.add(event);
+                    taskAdded(event, taskList);
+                } else {
+                    throw new DukeException("Invalid date and/or time format! \n" +
+                            "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n" +
+                            "    i.e. event Project Meeting /at 2020/01/28 18:00");
+                }
+            } else if (timeDateArr.length == 1) {
+                if (DATE_VALIDATOR.isValidDate(timeDateArr[0])) {
+                    LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
+                    Event event = new Event(task, formattedDate, false);
+                    taskList.add(event);
+                    taskAdded(event, taskList);
+                } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
+                    LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
+                    Event event = new Event(task, LocalDate.now(), formattedTime, false);
+                    taskList.add(event);
+                    taskAdded(event, taskList);
+                } else {
+                    throw new DukeException("Invalid date and/or time format! \n" +
+                            "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n" +
+                            "    i.e. event Project Meeting /at 2020/01/28 18:00");
+                }
+            }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new DukeException("Specify event with: /at \n" +
-                    "    i.e. event Project Meeting /at 6th Jan, 6pm ");
+            throw new DukeException("Specify event with: /at <YYYY/MM/DD> <HH:MM>\n" +
+                    "    i.e. event Project Meeting /at 2020/01/28 18:00");
         }
     }
 
@@ -230,8 +343,8 @@ public class Duke {
     }
 
     public static void printWithBorder(String message) {
-        System.out.println("    ###############################################\n"
+        System.out.println("    ###################################################\n"
                 + "    " + message + "\n"
-                + "    ###############################################\n");
+                + "    ###################################################\n");
     }
 }
