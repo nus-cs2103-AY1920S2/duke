@@ -9,7 +9,7 @@ public class Parser {
     private LocalDate date;
 
     public void parseUserInput(String userInput) throws DukeException {
-        String[] userInputSplit = userInput.split(" ", 2);
+        String[] userInputSplit = userInput.trim().split("\\s+", 2);
         this.command = this.parseCommand(userInputSplit[0]);
         if (this.command == Command.ADD_DEADLINE) {
             if (userInputSplit.length == 1) {
