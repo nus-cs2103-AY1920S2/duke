@@ -1,5 +1,12 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import static java.lang.System.exit;
 
 public class Duke {
     public static final String botName = "Duke";
@@ -14,6 +21,74 @@ public class Duke {
     public Duke() {
         // Place-holder constructor, may need to extend later
         storedItems = new ArrayList<>();
+        getDataFile();
+    }
+
+    private void getDataFile() {
+        String home = System.getProperty("user.home");
+
+        Path dirPath = Paths.get(home, "Documents", "Duke");
+        Path filePath = Paths.get(home, "Documents", "Duke", "dukeData.txt");
+        if (Files.exists(dirPath)) {
+            if (Files.notExists(filePath))
+                try {
+                    Files.createFile(filePath);
+                } catch (IOException e) {
+                    System.out.println(e);
+                    exit(1);
+                }
+
+            readDataFile(filePath);
+        } else {
+            try {
+                Files.createDirectories(dirPath);
+            } catch (IOException e) {
+                System.out.println(e);
+                exit(1);
+            } finally {
+                getDataFile();
+            }
+        }
+    }
+
+    private void writeData() {
+        String home = System.getProperty("user.home");
+        Path filePath = Paths.get(home, "Documents", "Duke", "dukeData.txt");
+
+        StringBuilder data = new StringBuilder();
+        for (Task item : storedItems) {
+            data.append(item.encoder());
+        }
+
+        try {
+            Files.writeString(filePath, data.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+            exit(1);
+        }
+    }
+
+    private void readDataFile(Path filePath) {
+        List<String> lines = new ArrayList<>();
+        try {
+            lines = Files.readAllLines(filePath);
+        } catch (IOException e) {
+            System.out.println(e);
+            exit(1);
+        } finally {
+            if (lines.isEmpty())
+                return;
+
+            for (String line : lines) {
+                String[] lineParts = line.split(":");
+                if (lineParts[0].equals("T"))
+                    storedItems.add(new Task(lineParts[1], Integer.parseInt(lineParts[2]) == 1));
+                else if (lineParts[0].equals("D"))
+                    storedItems.add(new Deadline(lineParts[1], Integer.parseInt(lineParts[2]) == 1, lineParts[3]));
+                else if (lineParts[0].equals("E"))
+                    storedItems.add(new Event(lineParts[1], Integer.parseInt(lineParts[2]) == 1, lineParts[3]));
+            }
+        }
     }
 
     public void greet() {
@@ -37,13 +112,17 @@ public class Duke {
             try {
                 markItemAsDone(markPos);
             } catch (OutOfBoundMarkingRequestException e) {
-                System.out.println(String.format("markPos error\n%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
+                System.out.println(
+                        String.format("markPos error\n%s%s\n%s%s\n%s%s",
+                                padding,uselessLine,padding,e,padding,uselessLine));
             }
         } else if (delPos != -2) {
             try {
                 deleteItem(delPos);
             } catch (OutOfBoundMarkingRequestException e) {
-                System.out.println(String.format("delPos error\n%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
+                System.out.println(
+                        String.format("delPos error\n%s%s\n%s%s\n%s%s",
+                                padding,uselessLine,padding,e,padding,uselessLine));
             }
         } else {
             try {
@@ -67,8 +146,8 @@ public class Duke {
             } catch (TaskErrorException e) {
                 System.out.println(String.format("%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
             }
-
         }
+        writeData();
     }
 
 
@@ -224,6 +303,7 @@ public class Duke {
     }
 
     public void byeBye() {
+        writeData();
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Bye-bye. It was nice talking to you. See ya soon!\n" +
                 padding + uselessLine);

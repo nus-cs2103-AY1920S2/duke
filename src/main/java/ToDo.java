@@ -8,6 +8,14 @@ public class ToDo extends Task {
         type = TaskType.toDo;
     }
 
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
+    public String encoder() {
+        return String.format("T:%s:%d\n", name, (isDone ? 1 : 0));
+    }
+
     @Override
     public String toString() {
         if (super.isDone)

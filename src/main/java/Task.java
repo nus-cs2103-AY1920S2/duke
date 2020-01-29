@@ -17,6 +17,15 @@ public class Task {
         isDone = false;
     }
 
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
+    }
+
+    public String encoder() {
+        return "";
+    }
+
     public void markDone() {
         isDone = true;
     }
