@@ -80,4 +80,24 @@ public class TaskList implements Serializable {
         }
         return names;
     }
+
+    public List<String> findTasks(String searchQuery) {
+
+        String[] args = searchQuery.split(" ");
+        String regexTemplate = "(?=.*\\b%s\\b)";
+        String regex = ".*";
+
+        for (String arg : args) {
+            regex = String.format(regexTemplate, arg) + regex;
+        }
+
+        List<String> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); ++i) {
+            if (taskList.get(i).description.matches(regex)) {
+                matchingTasks.add(taskList.get(i).description);
+            }
+        }
+
+        return matchingTasks;
+    }
 }
