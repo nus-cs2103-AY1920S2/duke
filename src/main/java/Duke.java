@@ -1,5 +1,9 @@
+
+import test.Task;
+import test.Events;
+import test.Deadlines;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 public class Duke  {
     private Storage storage;
     private TaskList tasks;

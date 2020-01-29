@@ -1,6 +1,6 @@
 public class Ui {
     public static void main(String[] args) {
-        Duke chatbot = new Duke("/Users/weicheng/Dropbox/Duke.txt");
+        Duke chatbot = new Duke("Data/Duke.txt");
         Ui.loadingCompleted();
         Ui.initiateGreetings();
         chatbot.run();

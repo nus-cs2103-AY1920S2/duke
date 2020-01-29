@@ -1,15 +1,16 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+package test;
 
-public class Deadlines extends Task{
+import java.time.LocalDate;
+
+
+public class Events extends test.Task{
     private LocalDate date;
 
-    public Deadlines(String newDescripton, String newTime){
+    public Events(String newDescripton, String newTime){
         super(newDescripton);
         this.date = LocalDate.parse(newTime);
     }
-    public Deadlines(String newDescripton, String newTime, String status){
+    public Events(String newDescripton, String newTime, String status){
         super(newDescripton, status);
         this.date = LocalDate.parse(newTime);
     }
@@ -18,16 +19,16 @@ public class Deadlines extends Task{
                 + this.date.getMonth().toString() + " "
                 + Integer.valueOf(this.date.getYear()).toString() ;
     }
-
     public LocalDate getDate() {
+
         return date;
     }
 
     @Override
     public String toString(){
-        return " [D][" + super.getStatusIcon() + "]" + super.description + " "
-                + Integer.valueOf(this.date.getDayOfMonth()).toString() + "-"
-                    + this.date.getMonth().toString() + "-"
-                        + Integer.valueOf(this.date.getYear()).toString() ;
+        return " [E][" + super.getStatusIcon() + "]" + super.description + " "
+               + Integer.valueOf(this.date.getDayOfMonth()).toString() + " "
+                 + this.date.getMonth().toString() + " "
+                    + Integer.valueOf(this.date.getYear()).toString() ;
     }
 }
