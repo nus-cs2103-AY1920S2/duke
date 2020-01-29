@@ -1,9 +1,11 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
     public void echo(TaskList tasks, Storage storage) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello I am Duke.\n" + "What can I do for you?");
+        System.out.println("Hello I am duke.Duke.\n" + "What can I do for you?");
 
         Lister lister = new Lister(tasks, storage);
 

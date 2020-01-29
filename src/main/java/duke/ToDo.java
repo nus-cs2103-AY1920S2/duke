@@ -1,3 +1,5 @@
+package duke;
+
 public class ToDo extends Task{
     //tasks without any date/time attached to it
     // e.g., visit new theme park
