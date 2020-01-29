@@ -24,10 +24,10 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String list = "";
 
-        for(int i = 0; i < tasks.getRecord().size(); i++) {
+        for (int i = 0; i < tasks.getRecord().size(); i++) {
             Task current = tasks.getRecord().get(i);
 
-            if(current.getDescription().contains(description)) {
+            if (current.getDescription().contains(description)) {
                 list = list + (i + 1) + "." + current.toString() + "\n";
             } else {
                 //do nothing
