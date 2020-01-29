@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param dateTime refers to the date and time of the task.
      * @param taskDescription refers to the contents of the task.
      */
-    public Event(LocalDateTime dateTime, String taskDescription) {
+    public Event(LocalDateTime[] dateTime, String taskDescription) {
 
         super(dateTime, taskDescription);
 
@@ -32,12 +32,13 @@ public class Event extends Task {
     public String toString() {
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String date = super.getDateTime().format(format);
+        String dateStart = super.getDateTime()[0].format(format);
+        String dateEnd = super.getDateTime()[1].format(format);
 
         return "[" + Types.Event + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
-                + "(at:" + date + ")";
+                + "(at:" + dateStart + " to " + dateEnd + ")";
     }
 
     /**

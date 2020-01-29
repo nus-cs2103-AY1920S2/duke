@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * @param dateTime refers to the date and time of the task.
      * @param taskDescription refers to the contents of the task.
      */
-    public Deadline(LocalDateTime dateTime, String taskDescription) {
+    public Deadline(LocalDateTime[] dateTime, String taskDescription) {
 
         super(dateTime, taskDescription);
 
@@ -32,8 +32,7 @@ public class Deadline extends Task {
     public String toString() {
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime dateTime = super.getDateTime();
-        String date = super.getDateTime().format(format);
+        String date = super.getDateTime()[0].format(format);
 
         return "[" + Types.Deadline + "]"
                 + "[" + super.getStatus() + "]"

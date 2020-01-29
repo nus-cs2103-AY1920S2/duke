@@ -48,7 +48,7 @@ public class Ui {
             BufferedReader br = new BufferedReader(rd);
             String input = null;
             String[] taskDescriptionArr = null;
-            LocalDateTime dateTime = null;
+            LocalDateTime[] dateTime = null;
             Parser parser = new Parser();
 
             while (true) {
@@ -86,11 +86,7 @@ public class Ui {
 
                     } else {
 
-                        if (taskDescriptionArr[2] != "") {
-
-                            dateTime = parser.parseDateTime(taskDescriptionArr[2]);
-
-                        }
+                        dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
 
                         if (taskDescriptionArr[0].equals("todo")) {
 

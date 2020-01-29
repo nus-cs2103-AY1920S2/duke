@@ -16,7 +16,7 @@ public class ToDo extends Task {
      * @param dateTime refers to the date and time of the task.
      * @param taskDescription refers to the contents of the task.
      */
-    public ToDo(LocalDateTime dateTime, String taskDescription) {
+    public ToDo(LocalDateTime[] dateTime, String taskDescription) {
 
         super(dateTime, taskDescription);
 

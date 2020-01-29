@@ -72,11 +72,13 @@ public class Storage {
 
                     if (status.equals("Y")) {
 
-                        manager.addTask(contentArr[2], null, Task.Types.ToDo, Task.Status.Y);
+                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                                LocalDateTime.parse(contentArr[4]),Task.Types.ToDo, Task.Status.Y);
 
                     } else {
 
-                        manager.addTask(contentArr[2], null, Task.Types.ToDo, Task.Status.N);
+                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                                LocalDateTime.parse(contentArr[4]),Task.Types.ToDo, Task.Status.N);
 
                     }
                     break;
@@ -86,12 +88,12 @@ public class Storage {
                     if (status.equals("Y")) {
 
                         manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                Task.Types.Deadline, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.Deadline, Task.Status.Y);
 
                     } else {
 
                         manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                Task.Types.Deadline, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.Deadline, Task.Status.N);
 
                     }
                     break;
@@ -101,13 +103,13 @@ public class Storage {
                     if (status.equals("Y")) {
 
                         manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                Task.Types.Event, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.Event, Task.Status.Y);
 
 
                     } else {
 
                         manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                Task.Types.Event, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.Event, Task.Status.N);
 
                     }
                     break;
@@ -141,7 +143,7 @@ public class Storage {
 
         for (int i = 0; i < taskList.size(); i++) {
 
-            input = generateInput((Task) taskList.get(i));
+            input = generateInput((Task)taskList.get(i));
             writer.write(input);
             writer.flush();
 
@@ -160,9 +162,9 @@ public class Storage {
         String type = task.getType().toString();
         String status = task.getStatus().toString();
         String taskDescription = task.getTaskDescription();
-        LocalDateTime dateTime = task.getDateTime();
+        LocalDateTime[] dateTime = task.getDateTime();
 
-        return type + "//" + status + "//" + taskDescription + "//" + dateTime + "\n";
+        return type + "//" + status + "//" + taskDescription + "//" + dateTime[0] + "//" + dateTime[1] + "\n";
 
     }
 

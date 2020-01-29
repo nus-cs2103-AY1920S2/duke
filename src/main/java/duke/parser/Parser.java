@@ -9,6 +9,7 @@ import duke.exceptions.MissingTaskNumberError;
 import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 /**
  * The Parser program passes user input, date and time related to a task.
@@ -103,12 +104,45 @@ public class Parser {
 
         } else {
 
-            outputArr[0] = input.substring(0, whiteSpaceIndex);
-            outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
-            outputArr[2] = input.substring(index + 4);
+         int indexAt = input.indexOf("/at ");
+
+         if(input.startsWith("deadline")) {
+
+             int indexBy = input.indexOf("/by ");
+
+             outputArr[0] = input.substring(0, whiteSpaceIndex);
+             if(indexBy == -1) {
+
+                 outputArr[1] = "EmptyDate";
+                 outputArr[2] = "";
+
+                 throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
+
+             } else {
+
+                 outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
+                 outputArr[2] = input.substring(index + 4);
+
+             }
+
+         } else {
+
+             outputArr[0] = input.substring(0, whiteSpaceIndex);
+             if(indexAt == -1) {
+
+                 outputArr[1] = "EmptyDate";
+                 outputArr[2] = "";
+
+                 throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
+             } else {
+
+                 outputArr[0] = input.substring(0, whiteSpaceIndex);
+                 outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
+                 outputArr[2] = input.substring(index + 4);
+             }
+         }
 
         }
-
 
         return outputArr;
     }
@@ -120,18 +154,36 @@ public class Parser {
      * @return parsed date and time in form of LocalDateTime object.
      * @throws InvalidDateError is an error thrown when date has incorrect format.
      */
-    public LocalDateTime parseDateTime(String dateTime) throws InvalidDateError {
+    public LocalDateTime[] parseDateTime(String dateTime, String type) throws InvalidDateError {
 
         try {
 
+            String[] split =  null;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
-            LocalDateTime parsed = LocalDateTime.parse(dateTime, formatter);
+            LocalDateTime[] parsed = new LocalDateTime[2];
 
+            if(type.equals("todo")) {
+
+                parsed[0] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+                parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+
+            } else if(type.equals("event")) {
+
+                split = dateTime.split(" to ");
+                parsed[0] = LocalDateTime.parse(split[0], formatter);
+                parsed[1] = LocalDateTime.parse(split[1], formatter);
+
+            } else if(type.equals("deadline")) {
+
+                parsed[0] = LocalDateTime.parse(dateTime, formatter);
+                parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+
+            }
             return parsed;
 
         } catch (Exception e) {
 
-            throw new InvalidDateError();
+            throw new InvalidDateError(type);
 
         }
 

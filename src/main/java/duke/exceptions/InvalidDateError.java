@@ -8,8 +8,8 @@ package duke.exceptions;
  */
 public class InvalidDateError extends Exceptions {
 
-    public InvalidDateError() {
-        super(null);
+    public InvalidDateError(String type) {
+        super(type);
     }
 
     /**
@@ -20,7 +20,14 @@ public class InvalidDateError extends Exceptions {
     @Override
     public String errorMessage() {
 
-        return "Date should be in d/MM/yyyy HH:mm format";
+        if(type.equals("deadline")) {
 
+            return "Date should be in d/MM/yyyy HH:mm format";
+
+        } else {
+
+            return "Date should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
+
+        }
     }
 }

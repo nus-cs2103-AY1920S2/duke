@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Task {
 
     protected String taskDescription;
-    protected LocalDateTime dateTime;
+    protected LocalDateTime[] dateTime;
     protected Status isDone;
 
     public enum Types {
@@ -27,7 +27,7 @@ public class Task {
      * @param dateTime refers to the date and time of the task.
      * @param taskDescription refers to the contents of the task.
      */
-    public Task(LocalDateTime dateTime, String taskDescription) {
+    public Task(LocalDateTime[] dateTime, String taskDescription) {
 
         this.taskDescription = taskDescription;
         this.dateTime = dateTime;
@@ -51,7 +51,7 @@ public class Task {
      *
      * @return date and time of task.
      */
-    public LocalDateTime getDateTime() {
+    public LocalDateTime[] getDateTime() {
 
         return dateTime;
 
