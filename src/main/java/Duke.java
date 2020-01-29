@@ -3,6 +3,7 @@ import test.Task;
 import test.Events;
 import test.Deadlines;
 import java.util.Scanner;
+import java.util.ArrayList;
 /**
  * CS2103 Individual Project
  * author Wei Cheng
@@ -74,9 +75,28 @@ public class Duke  {
                         tokens = parser.getDescription().split(" /at ");
                         ui.transmitMessage("Got it. I've added this task:");
                         this.tasks.add(new Events(tokens[0], tokens[1]));
-
+                        break;
+                    case "find":
+                        String keyWord = parser.getDescription();
+                        ArrayList<Task>  matchingTasks = new ArrayList<>();
+                        for(int i = 0 ; i < tasks.taskStorage.size() ; i++) {
+                            Task task = tasks.taskStorage.get(i);
+                            if((task.getDescription()).contains(keyWord)){
+                                matchingTasks.add(task);
+                            }
+                        }
+                        if(matchingTasks.size() == 0){
+                            ui.transmitMessage("There is no matching task in your list");
+                        }
+                        else {
+                            System.out.println("Here are the matching tasks in your list:");
+                            for (Task task : matchingTasks){
+                                System.out.println(task.toString());
+                            }
+                        }
                         break;
                 }
+
                 int numbOfTask = this.tasks.taskStorage.size();
                 if(numbOfTask > 0 && !command.equals("list") && !command.equals("delete") && !command.equals("done")) {
                     ui.transmitMessage(this.tasks.getTask(numbOfTask - 1).toString());

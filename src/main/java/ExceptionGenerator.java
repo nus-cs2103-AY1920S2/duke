@@ -30,7 +30,7 @@ public class ExceptionGenerator {
     public static void checkInputAction(String[] input) throws DukeException {
         if(!input[0].equals("todo") && !input[0].equals("list")
                 && !input[0].equals("delete") && !input[0].equals("event")
-                    && !input[0].equals("deadline") && !input[0].equals("done")){
+                    && !input[0].equals("deadline") && !input[0].equals("done") && !input[0].equals("find")){
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
