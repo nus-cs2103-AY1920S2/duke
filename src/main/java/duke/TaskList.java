@@ -29,8 +29,8 @@ public class TaskList {
 
     public static void addTask(Task task) {
         Duke.commandList.add(task);
-        System.out.println("Got it. I've added this task: ");
+        System.out.print("Got it. I've added this task: \n");
         System.out.print(task);
-        System.out.println("Now you have " + Duke.commandList.size() + " tasks in the list.");
+        System.out.print("Now you have " + Duke.commandList.size() + " tasks in the list.\n");
     }
 }

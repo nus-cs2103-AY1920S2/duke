@@ -38,4 +38,12 @@ public class Ui {
     public void printErrorNotFound() {
         System.out.println("☹ OOPS!!! I'm sorry, I can't find that task");
     }
+
+    public void printErrorWrongDateFormat() {
+        System.out.println("☹ OOPS!!! I'm sorry, wrong date format");
+    }
+
+    public void printErrorNoTaskName() {
+        System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+    }
 }

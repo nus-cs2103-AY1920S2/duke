@@ -37,7 +37,7 @@ public class Parser {
                         TaskList.deleteTask(Duke.commandList.get(deleteTarget - 1));
                         storage.writeList();
                     } else {
-                        System.out.println("☹ OOPS!!! I'm sorry, I can't find that task");
+                        ui.printErrorNotFound();
                     }
 
                 }
@@ -48,7 +48,7 @@ public class Parser {
                         TaskList.addTask(task);
                         storage.writeList();
                     } else {
-                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        ui.printErrorNoTaskName();
                     }
                 }
 
@@ -61,7 +61,7 @@ public class Parser {
                             Deadline task = new Deadline(deadlineSplit[0], date);
                             TaskList.addTask(task);
                         } catch (DateTimeParseException e) {
-                            System.out.println("☹ OOPS!!! I'm sorry, wrong date format");
+                            ui.printErrorWrongDateFormat();
                         }
                         storage.writeList();
                     }
@@ -81,7 +81,7 @@ public class Parser {
                             Event task = new Event(eventSplit[0], date);
                             TaskList.addTask(task);
                         } catch (DateTimeParseException e) {
-                            System.out.println("☹ OOPS!!! I'm sorry, wrong date format");
+                            ui.printErrorWrongDateFormat();
                         }
 
 
