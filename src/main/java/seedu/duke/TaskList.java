@@ -13,11 +13,24 @@ public class TaskList {
     static List<Task> tasks;
     protected Storage storage;
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param tasks the list of tasks
+     * @param storage the hard disk for storage of data
+     */
     public TaskList(List<Task> tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
     }
 
+    /**
+     * Adds the user input of todo task into the task list.
+     *
+     * @param desc the details of the todo task
+     * @param doneStatus an indicator which shows whether a todo task has been completed or not
+     * @throws IOException if an input or output exception occurred
+     */
     protected void addTodo(String desc, String doneStatus) throws IOException {
         Task todo = new Todo(desc);
         if (doneStatus.equalsIgnoreCase("Y")) {
@@ -30,6 +43,15 @@ public class TaskList {
         printNumTask();
     }
 
+    /**
+     * Adds the user input of deadline task into the task list.
+     *
+     * @param desc the details of the deadline task
+     * @param doneStatus an indicator which shows whether a deadline task has been completed or not
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws IOException if an input or output exception occurred
+     * @throws InvalidDateException if a date is input in a wrong format
+     */
     protected void addDeadline(String desc, String doneStatus)
             throws InvalidTaskInputException, IOException, InvalidDateException {
         String[] descs = desc.split(" /by |\\|");
@@ -57,6 +79,15 @@ public class TaskList {
         printNumTask();
     }
 
+    /**
+     * Adds the user input of event task into the task list.
+     *
+     * @param desc the details of the event task
+     * @param doneStatus an indicator which shows whether an event task has been completed or not
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws IOException if an input or output exception occurred
+     * @throws InvalidDateException if a date is input in a wrong format
+     */
     protected void addEvent(String desc, String doneStatus)
             throws InvalidTaskInputException, IOException, InvalidDateException {
         String[] descs = desc.split(" /at |\\|");

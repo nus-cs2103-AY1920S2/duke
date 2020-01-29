@@ -13,15 +13,32 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Creates a hard disk that allows user to add, delete, or modify the content of the file.
+ */
 public class Storage {
     String path;
     List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Creates a hard disk to store and load the user's task list.
+     *
+     * @param path relative path to the file that is being opened
+     * @throws IOException if an input or output exception occurred
+     */
     public Storage(String path) throws IOException {
         this.path = path;
     }
 
-    protected List<Task> load() throws IOException, InvalidTaskInputException, InvalidDateException {
+    /**
+     * Loads the content of the hard disk into a list of tasks that user can see.
+     *
+     * @return a task list with content from the hard disk
+     * @throws IOException if an input or output exception occurred
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws InvalidDateException if a date is input in a wrong format
+     */
+    public List<Task> load() throws IOException, InvalidTaskInputException, InvalidDateException {
         String inputLine;
         File file = new File(path);
         FileReader fr = new FileReader(file);
@@ -44,7 +61,14 @@ public class Storage {
         return tasks;
     }
 
-    protected void addTodo(String desc, String doneStatus) throws IOException {
+    /**
+     * Loads a todo task into the task list.
+     *
+     * @param desc the details of the todo task
+     * @param doneStatus an indicator which shows whether a todo task has been completed or not
+     * @throws IOException if an input or output exception occurred
+     */
+    public void addTodo(String desc, String doneStatus) throws IOException {
         Task todo = new Todo(desc);
         if (doneStatus.equalsIgnoreCase("Y")) {
             todo.markAsDone();
@@ -52,7 +76,15 @@ public class Storage {
         tasks.add(todo);
     }
 
-    protected void addDeadline(String desc, String doneStatus)
+    /**
+     * Loads a deadline task into the task list.
+     *
+     * @param desc the details of the deadline task
+     * @param doneStatus an indicator which shows whether a deadline task has been completed or not
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws InvalidDateException if a date is input in a wrong format
+     */
+    public void addDeadline(String desc, String doneStatus)
             throws InvalidTaskInputException, InvalidDateException {
         String[] descs = desc.split(" /by |\\|");
         if (descs.length == 1) { // invalid Deadline input format
@@ -77,7 +109,15 @@ public class Storage {
         tasks.add(deadline);
     }
 
-    protected void addEvent(String desc, String doneStatus)
+    /**
+     * Loads an event task into the task list.
+     *
+     * @param desc the details of the event task
+     * @param doneStatus an indicator which shows whether an event task has been completed or not
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws InvalidDateException if a date is input in a wrong format
+     */
+    public void addEvent(String desc, String doneStatus)
             throws InvalidTaskInputException, InvalidDateException {
         String[] descs = desc.split(" /at |\\|");
         if (descs.length == 1) { // invalid Event input format
@@ -117,7 +157,13 @@ public class Storage {
         return true;
     }
 
-    protected void addToStorage(Task task) throws IOException {
+    /**
+     * Saves the task that the user inputs into the hard disk.
+     *
+     * @param task the task that user inputs which needs to be saved into the hard disk
+     * @throws IOException if an input or output exception occurred
+     */
+    public void addToStorage(Task task) throws IOException {
         File file = new File(path);
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -132,7 +178,13 @@ public class Storage {
         fw.close();
     }
 
-    protected void changeToStorage(int index) throws IOException {
+    /**
+     * Modifies the done status of a task inside the hard disk according to the index number given by the user.
+     *
+     * @param index the index number ot the task that is being modified
+     * @throws IOException if an input or output exception occurred
+     */
+    public void changeToStorage(int index) throws IOException {
         File file = new File(path);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -158,7 +210,13 @@ public class Storage {
         fileOutputStr.close();
     }
 
-    protected void deleteInStorage(int index) throws IOException {
+    /**
+     * Deletes the task in the hard disk according to the index number given by the user.
+     *
+     * @param index the index number ot the task that is being modified
+     * @throws IOException if an input or output exception occurred
+     */
+    public void deleteInStorage(int index) throws IOException {
         File file = new File(path);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);

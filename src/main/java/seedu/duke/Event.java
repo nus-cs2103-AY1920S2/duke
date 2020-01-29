@@ -3,9 +3,18 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Subclass of Task to represent an event.
+ */
 public class Event extends Task {
     protected LocalDate eventTime;
 
+    /**
+     * Subclass of Task to represent an event.
+     *
+     * @param description the details of the event
+     * @param eventTime the date or time of the event
+     */
     public Event(String description, LocalDate eventTime) {
         super(description);
         this.eventTime = eventTime;

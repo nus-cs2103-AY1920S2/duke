@@ -6,7 +6,6 @@ import java.io.IOException;
  * Deals with interactions with the user.
  *
  * <p>Contains methods to greet, show file loading error, and handle user commands.
- *
  */
 public class Ui {
     Parser parser;

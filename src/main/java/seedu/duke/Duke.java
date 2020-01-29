@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -26,6 +25,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads the user command and passes it to Ui to be processed accordingly.
+     *
+     * @throws InvalidDateException if a date is input in a wrong format
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws InvalidCommandException if the command inputted is not todo, deadline, event, list, delete, or done
+     * @throws IOException if an input or output exception occurred
+     * @throws EmptyDescriptionException if the description of a task is empty
+     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
+     */
     private void runDuke() throws InvalidDateException, InvalidTaskInputException, InvalidCommandException,
             IOException, EmptyDescriptionException, TaskIndexOutOfBoundsException {
         ui.greet();
@@ -61,10 +70,8 @@ public class Duke {
     public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidDateException,
             EmptyDescriptionException, TaskIndexOutOfBoundsException, InvalidCommandException {
         Duke duke;
-        String path = "/data/duke.txt";
-        String base = "/data";
-        String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
-        duke = new Duke(relative);
+        String path = "data/duke.txt";
+        duke = new Duke(path);
         duke.runDuke();
     }
 }

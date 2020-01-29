@@ -63,6 +63,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a string can be converted to an integer.
+     * @param strNum the string to be checked
+     * @return true if the string can be converted to an integer
+     */
     private boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
