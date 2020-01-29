@@ -1,11 +1,9 @@
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void listAndAddAndSizeTest() {
+    public void addAndSizeTest() {
         TaskList taskList = new TaskList();
         taskList.add(new ToDo("borrow book"));
         taskList.add(new ToDo("return book"));
