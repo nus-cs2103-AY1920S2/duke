@@ -1,4 +1,4 @@
-package io;
+package duke.io;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -29,7 +29,7 @@ public class Ui {
         stylizedPrint("Bye. Hope to never see you again!");
     }
 
-    public void printError(String ...error) {
+    public void printError(String... error) {
         System.out.println(OUTPUT_HORIZONTAL_LINE);
         for (int i = 0; i < error.length; ++i) {
             System.out.println(getIndentation(1) + error[i]);

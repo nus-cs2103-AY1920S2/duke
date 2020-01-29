@@ -1,9 +1,11 @@
-import command.Command;
-import exception.DukeException;
-import io.Parser;
-import io.Serializer;
-import io.Ui;
-import task.TaskList;
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.io.Parser;
+import duke.io.Serializer;
+import duke.io.Ui;
+import duke.task.TaskList;
 
 public class Duke {
 

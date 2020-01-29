@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import io.Ui;
-import task.Task;
-import task.TaskList;
+import duke.exception.DukeException;
+import duke.io.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
 
@@ -18,8 +18,8 @@ public class DeleteCommand extends Command {
         DukeException.throwIf(!taskList.isIndexValid(indexToDelete), "The input index is out of bounds!");
         Task deletedTask = taskList.removeAtIndex(indexToDelete);
         ui.stylizedPrint(
-                "You have removed the following task:\n",
+                "You have removed the following duke.task:\n",
                 "\t" + deletedTask.toString(),
-                String.format("You now have %d task(s) in the list.", taskList.size()));
+                String.format("You now have %d duke.task(s) in the list.", taskList.size()));
     }
 }

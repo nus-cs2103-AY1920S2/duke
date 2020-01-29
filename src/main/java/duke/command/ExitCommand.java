@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import io.Serializer;
-import io.Ui;
-import task.TaskList;
+import duke.exception.DukeException;
+import duke.io.Serializer;
+import duke.io.Ui;
+import duke.task.TaskList;
 
 public class ExitCommand extends Command {
 

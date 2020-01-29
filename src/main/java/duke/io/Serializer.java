@@ -1,6 +1,6 @@
-package io;
+package duke.io;
 
-import task.TaskList;
+import duke.task.TaskList;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * A serializer for saving and loading of Duke data from disk.
+ * A serializer for saving and loading of duke.Duke data from disk.
  */
 public class Serializer {
     public static final String FILENAME = "tasks.data";
@@ -39,7 +39,7 @@ public class Serializer {
             taskList = (TaskList) ois.readObject();
             ois.close();
         } catch (IOException e) {
-            // task.TaskList cannot be loaded
+            // duke.task.TaskList cannot be loaded
             return null;
         } catch (ClassNotFoundException e) {
             // File is corrupted

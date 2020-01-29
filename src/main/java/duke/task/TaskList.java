@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class TaskList implements Serializable {
      * element in the taskList. This function returns all the names of tasks (from their respective
      * toString() functions) as an array.
      *
-     * @return An array containing the names of every task in the taskList.
+     * @return An array containing the names of every duke.task in the taskList.
      */
     public String[] getNames() {
         String[] names = new String[taskList.size()];
