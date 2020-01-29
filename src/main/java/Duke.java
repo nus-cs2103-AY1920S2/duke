@@ -3,12 +3,20 @@ import test.Task;
 import test.Events;
 import test.Deadlines;
 import java.util.Scanner;
-import java.util.ArrayList;
-
+/**
+ * CS2103 Individual Project
+ * author Wei Cheng
+ * The class for the ChatBot
+ */
 public class Duke  {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Constructor to create an instance of Duke.
+     * @param filePath the String representation of the file location
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -20,6 +28,10 @@ public class Duke  {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * To run the conversation with the user.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         String[] userInput = sc.nextLine().split(" ",2);
@@ -62,29 +74,11 @@ public class Duke  {
                         tokens = parser.getDescription().split(" /at ");
                         ui.transmitMessage("Got it. I've added this task:");
                         this.tasks.add(new Events(tokens[0], tokens[1]));
-                        break;
-                    case "find":
-                        String keyWord = parser.getDescription();
-                        ArrayList<Task>  matchingTasks = new ArrayList<>();
-                        for(int i = 0 ; i < tasks.taskStorage.size() ; i++) {
-                            Task task = tasks.taskStorage.get(i);
-                            if((task.getDescription()).contains(keyWord)){
-                                matchingTasks.add(task);
-                            }
-                        }
-                        if(matchingTasks.size() == 0){
-                            ui.transmitMessage("There is no matching task in your list");
-                        }
-                        else {
-                            System.out.println("Here are the matching tasks in your list:");
-                            for (Task task : matchingTasks){
-                                System.out.println(task.toString());
-                            }
-                        }
+
                         break;
                 }
                 int numbOfTask = this.tasks.taskStorage.size();
-                if(numbOfTask > 0 && !command.equals("list") && !command.equals("delete") && !command.equals("done") && !command.equals("find")) {
+                if(numbOfTask > 0 && !command.equals("list") && !command.equals("delete") && !command.equals("done")) {
                     ui.transmitMessage(this.tasks.getTask(numbOfTask - 1).toString());
                 }
                     ui.transmitMessage("Now you have " + numbOfTask + " tasks in the list.");
@@ -98,6 +92,11 @@ public class Duke  {
         }
         ui.initiateFareWell();
     }
+
+    /**
+     * To print out all the task in the
+     * TaskStorage
+     */
     public void printText() {
         int counter = 1;
         for(Task task : this.tasks.taskStorage){
