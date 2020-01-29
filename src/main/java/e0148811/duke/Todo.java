@@ -5,8 +5,17 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(boolean isDone, String description) {
+        super(isDone, description);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String toSimplerString() {
+        return "T//" + super.toSimplerString();
     }
 }

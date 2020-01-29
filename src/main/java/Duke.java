@@ -4,6 +4,11 @@ import e0148811.duke.Event;
 import e0148811.duke.Task;
 import e0148811.duke.Todo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,20 +19,36 @@ class Duke {
     static final String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
             + "The correct format should be ";
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("Hello, this is Duke. "
-                + "Please give me an instruction followed by relevant description.");
-
         Scanner sc = new Scanner(System.in);
         List<Task> list = new ArrayList<>();
         String instruction;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("data/duke.txt"));
+            boolean isEmptyFile = true;
+            String line;
+            while ((line = br.readLine()) != null) {
+                isEmptyFile = false;
+                addEventToList(list, line);
+            }
+            if (isEmptyFile) {
+                System.out.println("File found but empty. Start with an empty task list.");
+            } else {
+                System.out.println("File found. Load saved task list.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found. Start with an empty task list.");
+        }
+
+        System.out.println("Hello, this is Duke. "
+                + "Please give me an instruction followed by relevant description.");
 
         while (!(instruction = sc.nextLine()).equals("bye")) {
             try {
@@ -48,14 +69,17 @@ class Duke {
                     }
                     Task t = createATodoTask(instructionByWord, lengthOfArray);
                     addTaskToList(list, t);
+                    writeToHardDisk(list);
                     break;
                 case "deadline":
                     t = createADeadlineTask(instructionByWord, lengthOfArray);
                     addTaskToList(list, t);
+                    writeToHardDisk(list);
                     break;
                 case "event":
                     t = createAnEventTask(instructionByWord, lengthOfArray);
                     addTaskToList(list, t);
+                    writeToHardDisk(list);
                     break;
                 case "done":
                     if (instructionByWord.length != 2) {
@@ -70,6 +94,7 @@ class Duke {
                         } else {
                             markATaskDone(list.get(index));
                         }
+                        writeToHardDisk(list);
                         break;
                     } catch (NumberFormatException e) {
                         throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
@@ -87,6 +112,7 @@ class Duke {
                         } else {
                             deleteATask(list, index);
                         }
+                        writeToHardDisk(list);
                         break;
                     } catch (NumberFormatException e) {
                         throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
@@ -99,12 +125,44 @@ class Duke {
                     throw new DukeException("I don't understand this instruction.\n"
                             + "The valid instructions include: todo, deadline, event, list, done, bye.");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.err.println(e.getMessage());
             }
         }
-        
+
         System.out.println("Goodbye. See you next time!");
+    }
+
+    private static void addEventToList(List<Task> list, String line) {
+        String[] lineByWord = line.split("//");
+        boolean isDone;
+        if (lineByWord[1].equals("T")) {
+            isDone = true;
+        } else {
+            isDone = false;
+        }
+        switch (lineByWord[0]) {
+        case "T":
+            list.add(new Todo(isDone, lineByWord[2]));
+            break;
+        case "D":
+            list.add(new Deadline(isDone, lineByWord[2], lineByWord[3]));
+            break;
+        case "E":
+            list.add(new Event(isDone, lineByWord[2], lineByWord[3]));
+        }
+    }
+
+    private static void writeToHardDisk(List<Task> list) throws IOException {
+        FileWriter writer = new FileWriter("data/duke.txt");
+        for (Task t : list) {
+            writer.write(t.toSimplerString() + "\n");
+        }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static Task createAnEventTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
