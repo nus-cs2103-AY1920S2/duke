@@ -25,49 +25,6 @@ public class Duke {
         }
     }
 
-    protected static void printWelcomeMessage() {
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-        System.out.println(OUTPUT_INDENTATION + "Hello");
-        System.out.println(OUTPUT_INDENTATION + "What can I do for you?");
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-    }
-
-    protected static void printGoodbyeMessage() {
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-        System.out.println(OUTPUT_INDENTATION + "Bye. Hope to never see you again!");
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-    }
-
-    protected static void addNewTask(Task newTask) {
-        tasks.add(newTask);
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-        System.out.println(OUTPUT_INDENTATION + "New task added: ");
-        System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + newTask.toString());
-        System.out.println(OUTPUT_INDENTATION + String.format("You now have %d task(s) in the list.", tasks.size()));
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-    }
-
-    protected static void removeTaskAtIndex(int index) {
-        Task task = tasks.remove(index);
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-        System.out.println(OUTPUT_INDENTATION + "You have removed the following task: ");
-        System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + task.toString());
-        System.out.println(String.format(OUTPUT_INDENTATION + "You now have %d task(s) in the list.", tasks.size()));
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-    }
-
-    protected static void printAllTasks() {
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-        if (tasks.size() <= 0) {
-            System.out.println(OUTPUT_INDENTATION + "There are currently no tasks.");
-        }
-        for (int i = 0; i < tasks.size(); ++i) {
-            Task t = tasks.get(i);
-            System.out.println(OUTPUT_INDENTATION + (i + 1) + "." + t);
-        }
-        System.out.println(OUTPUT_HORIZONTAL_LINE);
-    }
-
     protected static void processInputs(Scanner sc) throws DukeException {
         String[] inputs = sc.nextLine().split(" ", 2);
         String command = inputs[0];
@@ -134,4 +91,48 @@ public class Duke {
                     "\nYou are advised to stop trying to break the system.");
         }
     }
+
+    protected static void printWelcomeMessage() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "Hello");
+        System.out.println(OUTPUT_INDENTATION + "What can I do for you?");
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
+    protected static void printGoodbyeMessage() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "Bye. Hope to never see you again!");
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
+    protected static void addNewTask(Task newTask) {
+        tasks.add(newTask);
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "New task added: ");
+        System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + newTask.toString());
+        System.out.println(OUTPUT_INDENTATION + String.format("You now have %d task(s) in the list.", tasks.size()));
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
+    protected static void removeTaskAtIndex(int index) {
+        Task task = tasks.remove(index);
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "You have removed the following task: ");
+        System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + task.toString());
+        System.out.println(String.format(OUTPUT_INDENTATION + "You now have %d task(s) in the list.", tasks.size()));
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
+    protected static void printAllTasks() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        if (tasks.size() <= 0) {
+            System.out.println(OUTPUT_INDENTATION + "There are currently no tasks.");
+        }
+        for (int i = 0; i < tasks.size(); ++i) {
+            Task t = tasks.get(i);
+            System.out.println(OUTPUT_INDENTATION + (i + 1) + "." + t);
+        }
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
 }
