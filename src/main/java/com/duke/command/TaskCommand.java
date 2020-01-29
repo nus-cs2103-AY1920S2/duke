@@ -1,3 +1,11 @@
+package com.duke.command;
+
+import com.duke.task.Task;
+import com.duke.task.TaskList;
+import com.duke.util.DukeException;
+import com.duke.util.Storage;
+import com.duke.util.Ui;
+
 import java.io.IOException;
 
 public class TaskCommand extends Command {

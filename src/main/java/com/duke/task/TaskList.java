@@ -1,7 +1,9 @@
+package com.duke.task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    public ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();

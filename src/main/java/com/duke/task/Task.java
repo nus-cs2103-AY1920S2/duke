@@ -1,8 +1,10 @@
+package com.duke.task;
+
 import java.time.LocalDate;
 
 public class Task {
     protected String description;
-    protected boolean isDone;
+    public boolean isDone;
 
     public Task(String d) {
         this.description = d;

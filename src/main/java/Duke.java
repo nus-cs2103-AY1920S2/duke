@@ -1,11 +1,11 @@
+import com.duke.command.Command;
+import com.duke.task.TaskList;
+import com.duke.util.DukeException;
+import com.duke.util.Parser;
+import com.duke.util.Storage;
+import com.duke.util.Ui;
+
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 
 public class Duke {
@@ -63,7 +63,7 @@ public class Duke {
 public class Duke {
     static String space = "     ";
     static String line = space + "_____________________________________________";
-    static List<Task> tasks;
+    static List<com.duke.task.Task> tasks;
     static int count = 0;
 
     public static void main(String[] args) {
@@ -93,7 +93,7 @@ public class Duke {
                 try {
                     process(next);
                     saveTask();
-                } catch (DukeException dd) {
+                } catch (com.duke.util.DukeException dd) {
                     System.out.println(dd.getMessage());
                 } catch (FileNotFoundException e) {
                     System.out.println("File Saving failed");
@@ -107,7 +107,7 @@ public class Duke {
 
 
 
-    public static void process(String next) throws DukeException {
+    public static void process(String next) throws com.duke.util.DukeException {
         StringTokenizer st = new StringTokenizer(next);
         String first_token = st.nextToken();
 
@@ -118,34 +118,34 @@ public class Duke {
             try {
                 int index = Integer.parseInt(next.substring(7)) - 1;
                 markRemove(index);
-            } catch (DukeException d) {
+            } catch (com.duke.util.DukeException d) {
                 throw d;
             } catch (Exception e) {
-                throw new DukeException("OOPS! delete should follow by a number");
+                throw new com.duke.util.DukeException("OOPS! delete should follow by a number");
             }
         }
 
         else if (first_token.equals("done")) {
             try {
                 int index = Integer.parseInt(next.substring(5)) - 1;
-                Task temp = tasks.get(index);
+                com.duke.task.Task temp = tasks.get(index);
                 markDone(temp);
             } catch (Exception e) {
-                throw new DukeException("OOPS! done should follow by a number");
+                throw new com.duke.util.DukeException("OOPS! done should follow by a number");
             }
 
         } else {
-            Task itemToAdd = null;
+            com.duke.task.Task itemToAdd = null;
 
             if (first_token.equals("deadline")) {
                 try {
                     next = next.substring(9);
                     String[] temp = next.split(" /by ");
-                    itemToAdd = new Deadline(temp[0], temp[1]);
+                    itemToAdd = new com.duke.task.Deadline(temp[0], temp[1]);
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("OOPS!!! Wrong input format for deadline");
+                    throw new com.duke.util.DukeException("OOPS!!! Wrong input format for deadline");
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
+                    throw new com.duke.util.DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
                 }
 
 
@@ -153,21 +153,21 @@ public class Duke {
                 try {
                     next = next.substring(6);
                     String[] temp = next.split(" /at ");
-                    itemToAdd = new Event(temp[0], temp[1]);
+                    itemToAdd = new com.duke.task.Event(temp[0], temp[1]);
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("OOPS!!! Wrong input format for event");
+                    throw new com.duke.util.DukeException("OOPS!!! Wrong input format for event");
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
+                    throw new com.duke.util.DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
                 }
             } else if (first_token.equals("todo")) {
                 try {
                     next = next.substring(5);
-                    itemToAdd = new Todo(next);
+                    itemToAdd = new com.duke.task.Todo(next);
                     if (next.equals("")) {
                         throw new Exception("empty todo");
                     }
                 } catch (Exception e) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    throw new com.duke.util.DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
             }
 
@@ -179,7 +179,7 @@ public class Duke {
                 System.out.println(out);
                 count++;
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new com.duke.util.DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -203,18 +203,18 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static void markDone(Task t) {
+    public static void markDone(com.duke.task.Task t) {
         t.markAsDone();
         String output = line + "\n" + space + "Nice! I've marked this task as done: "
                 + "\n" + space + t + "\n" + line;
         System.out.println(output);
     }
 
-    public static void markRemove(int index) throws DukeException {
+    public static void markRemove(int index) throws com.duke.util.DukeException {
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("OOPS!!! Invalid task index to delete");
+            throw new com.duke.util.DukeException("OOPS!!! Invalid task index to delete");
         }
-        Task i = tasks.remove(index);
+        com.duke.task.Task i = tasks.remove(index);
         count--;
         String output = line + "\n" + space + "Noted. I've removed this task: "
                 + "\n" + space + "  " + i + "\n" + space + "Now you have " + count +

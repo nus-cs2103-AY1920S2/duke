@@ -1,3 +1,8 @@
+package com.duke.util;
+
+import com.duke.task.Task;
+import com.duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
