@@ -1,0 +1,5 @@
+T , âœ— , read book
+E , âœ— , daydream , 2020-01-30
+D , âœ“ , pop quiz , 2020-02-05
+T , âœ— , send email
+D , âœ“ , return book , 2020-06-06

@@ -37,6 +37,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method.
+     * @param args Main method.
+     */
     public static void main(String[] args) {
         String homeDir = System.getProperty("user.home");
         String fileName = "duke.txt";

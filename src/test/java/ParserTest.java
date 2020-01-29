@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void testCommandDetected(){
+    public void testCommandDetected() {
         assertEquals(Commands.LIST_TASKS, new Parser("list", 0).getCommand());
         assertEquals(Commands.BYE, new Parser("bye", 0).getCommand());
         assertEquals(Commands.DONE, new Parser("done 1", 1).getCommand());
@@ -16,7 +16,7 @@ public class ParserTest {
     public void newDeadlineTask_noDetails_DukeExceptionThrown() {
         try {
             assertEquals(0, new Parser("deadline", 0));
-        } catch (DukeException e){
+        } catch (DukeException e) {
             assertEquals("    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! The description of a deadline cannot be empty.\n"
                     + "    ____________________________________________________________\n", e.toString());

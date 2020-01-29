@@ -1,4 +1,6 @@
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Parses user input.
@@ -8,6 +10,7 @@ public class Parser {
     private Commands com;
     private int indexOfTaskAffected = -1;
     private Task newTask;
+    private String keyword;
 
     /**
      * Decodes user input and generates a Parser object that is easier to understand.
@@ -70,9 +73,13 @@ public class Parser {
                         throw new DukeExceptionDate("event");
                     }
 
-                    LocalDate date = LocalDate.parse(msgDate[1]);
-                    com = Commands.NEW_TASK;
-                    newTask = new Event(msgDate[0], date);
+                    try {
+                        LocalDate date = LocalDate.parse(msgDate[1]);
+                        com = Commands.NEW_TASK;
+                        newTask = new Event(msgDate[0], date);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeExceptionDateFormat();
+                    }
 
                 } else if (comArs[0].equals("deadline")) {
                     String details = line.substring(8, line.length());
@@ -84,9 +91,17 @@ public class Parser {
                         throw new DukeExceptionDate("deadline");
                     }
 
-                    LocalDate date = LocalDate.parse(msgDate[1]);
-                    com = Commands.NEW_TASK;
-                    newTask = new Deadline(msgDate[0], date);
+                    try {
+                        LocalDate date = LocalDate.parse(msgDate[1]);
+                        com = Commands.NEW_TASK;
+                        newTask = new Deadline(msgDate[0], date);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeExceptionDateFormat();
+                    }
+
+                } else if (comArs[0].equals("find")) {
+                    com = Commands.FIND;
+                    keyword = line.substring(4, line.length());
 
                 } else {
                     throw new DukeExceptionCommand();
@@ -97,6 +112,10 @@ public class Parser {
 
     public Task getTask() {
         return newTask;
+    }
+
+    public String getKeyWord() {
+        return keyword;
     }
 
     public Commands getCommand() {

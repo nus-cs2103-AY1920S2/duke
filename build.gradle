@@ -12,6 +12,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
 application {
     // Change this to your main class.
     mainClassName = "Duke" //seedu.duke.Duke"
@@ -30,4 +34,8 @@ shadowJar {
     archiveVersion = "0.1"
     archiveClassifier = null
     archiveAppendix = null
+}
+
+test {
+    useJUnitPlatform()
 }

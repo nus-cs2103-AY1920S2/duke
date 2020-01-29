@@ -22,7 +22,9 @@ public enum UiDesign {
     LIST_TOP_PART("    ____________________________________________________________\n"
             + "     Here are the tasks in your list: \n"),
     ADD_TOP_PART("    ____________________________________________________________\n"
-            + "     Got it. I've added this task: \n")
+            + "     Got it. I've added this task: \n"),
+    FIND_TOP_PART("    ____________________________________________________________\n"
+            + "     Here are the matching tasks in your list:\n")
     ;
 
     private final String text;
