@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,6 +62,11 @@ public class Duke {
             break;
 
         case "delete":
+            if (args.equals("all")) {
+                removeAllTasks();
+                break;
+            }
+
             int deletionIndex;
             try {
                 deletionIndex = Integer.parseInt(args) - 1;
@@ -120,6 +126,13 @@ public class Duke {
         System.out.println(OUTPUT_INDENTATION + "You have removed the following task: ");
         System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + task.toString());
         System.out.println(String.format(OUTPUT_INDENTATION + "You now have %d task(s) in the list.", tasks.size()));
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
+    protected static void removeAllTasks() {
+        tasks.clear();
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "All tasks have been deleted.");
         System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
