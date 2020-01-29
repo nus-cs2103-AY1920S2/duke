@@ -4,13 +4,20 @@ import exception.InvalidFormatException;
 import exception.InvalidInstructionException;
 import tasks.TaskList;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
-    // deals with making sense of the user command
+    /**
+     * Parse commands and decide on how to handle them accordingly.
+     * @param text String of text describing our command.
+     * @param tasks The existing list of tasks.
+     */
     public void handleTaskCommand(String text, TaskList tasks) {
         String[] textArray = text.split(" ");
         String instruction = textArray[0];
         try {
-             if (instruction.equals("list")) {
+            if (instruction.equals("list")) {
                 tasks.printTaskList();
             } else if (instruction.equals("done")) {
                 tasks.setDone(textArray[1]);

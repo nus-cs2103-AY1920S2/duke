@@ -2,6 +2,9 @@ package ui;
 
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
 
     private static final String LOGO = " ____        _        \n"
@@ -15,25 +18,41 @@ public class Ui {
     private static final String INPUT_PROMPT = "Enter your command: ";
     private final Scanner in;
 
+    /**
+     * Constructor for our UI component.
+     * @param in Method of input.
+     */
     public Ui(Scanner in) {
         this.in = in;
     }
 
-    // deals with interactions with the user
+    /**
+     * Prints a huge Duke logo and greets user.
+     */
     public void showWelcome() {
         System.out.println(LOGO);
         System.out.println(WELCOME_MESSAGE);
         showLine();
     }
 
+    /**
+     * Prints a divider to for better visuals.
+     */
     public void showLine() {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Bids user farewell.
+     */
     public void showExit() {
         System.out.println(EXIT_MESSAGE);
     }
 
+    /**
+     * Gets a command from user.
+     * @return String representation of user command.
+     */
     public String getUserCommand() {
         System.out.println(INPUT_PROMPT);
         return in.nextLine().toLowerCase();
