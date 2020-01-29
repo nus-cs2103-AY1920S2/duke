@@ -72,6 +72,8 @@ public class Duke {
                     Task task = this.taskList.removeTask(parser.getTaskIndex());
                     this.ui.output("Deleted: " + task.getFullDescription() + "\n    " + this.taskList.printNumTasks());
                     this.storage.removeTask(parser.getTaskIndex());
+                } else if (command == Command.FIND_TASKS) {
+                    this.ui.output(this.taskList.findTasks(parser.getDescription()));
                 }
             } catch (DukeException e) {
                 this.ui.output(e.getMessage());

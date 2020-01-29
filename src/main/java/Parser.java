@@ -76,6 +76,11 @@ public class Parser {
             this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
         } else if (this.command == Command.NOT_FOUND) {
             throw new DukeException("Sorry! I don't know what you mean!");
+        } else if (this.command == Command.FIND_TASKS) {
+            if (userInputSplit.length == 1) {
+                throw new DukeException("Sorry! Please provide something to find.");
+            }
+            this.description = userInputSplit[1];
         }
     }
 
@@ -114,6 +119,8 @@ public class Parser {
             return Command.ADD_EVENT;
         } else if (command.equals("delete")) {
             return Command.DELETE_TASK;
+        } else if (command.equals("find")) {
+            return Command.FIND_TASKS;
         }
         return Command.NOT_FOUND;
     }
