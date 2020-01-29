@@ -27,6 +27,9 @@ public class Storage {
      */
     public void save(ArrayList<Task> taskList) throws IOException { // saves to both duke.txt and array.txt
         // save mainList array
+        File arrayFile = new File(arrayPath);
+        arrayFile.createNewFile();
+
         FileWriter af = new FileWriter(arrayPath);
         String stringList = "";
         for (Task task : taskList) {
@@ -53,6 +56,9 @@ public class Storage {
         af.close();
 
         // save list
+        File listFile = new File(listPath);
+        listFile.createNewFile();
+
         FileWriter fw = new FileWriter(listPath);
         String text = "";
         if (taskList.size() != 0) {
@@ -75,10 +81,14 @@ public class Storage {
     /**
      * Loads task list as an ArrayList
      * @return ArrayList of Tasks based on stored data
-     * @throws FileNotFoundException If array file not found on hard disk
+     * @throws IOException If array file not found on hard disk
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws IOException {
         File f = new File(arrayPath);
+        f.createNewFile();
+        File lf = new File(listPath);
+        lf.createNewFile();
+
         Scanner s = new Scanner(f);
         if (f.length() == 0) {
             return new ArrayList<>();

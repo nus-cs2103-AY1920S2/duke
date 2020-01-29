@@ -23,7 +23,7 @@ public class Duke {
         storage = new Storage(listPath, arrayPath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -100,6 +100,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../data/duke.txt", "../data/mainList.txt").run();
+        new Duke("duke.txt", "mainList.txt").run();
     }
 }
