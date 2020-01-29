@@ -1,6 +1,7 @@
 package com.duke.bot.command;
 
 import java.util.List;
+import com.duke.bot.DukeException;
 import com.duke.bot.Task;
 
 public abstract class Command {
@@ -22,5 +23,5 @@ public abstract class Command {
         }
     }
 
-    public abstract ExecuteResult execute(List<Task> tasks); 
+    public abstract ExecuteResult execute(List<Task> tasks) throws DukeException; 
 }
