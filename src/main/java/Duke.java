@@ -58,7 +58,7 @@ public class Duke {
             storage.writeToFile("T | 0 | " + desc);
 
         } else if (command.equals("deadline")) {
-            String[] arr = input.split("/by");
+            String[] arr = input.split(" /by ");
             String desc = arr[0].substring(9);
             String time = arr[1];
             Task t = new DeadlineTask(desc, LocalDate.parse(time));
@@ -67,10 +67,10 @@ public class Duke {
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
                     + numOfTask + " task(s) in the list.");
 
-            storage.writeToFile("D | 0 | " + desc + "|" + time);
+            storage.writeToFile("D | 0 | " + desc + " | " + time);
 
         } else if (command.equals("event")) {
-            String[] arr = input.split("/at");
+            String[] arr = input.split(" /at ");
             String desc = arr[0].substring(6);
             String time = arr[1];
             Task t = new EventTask(desc, LocalDate.parse(time));
@@ -79,7 +79,7 @@ public class Duke {
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
                     + numOfTask + " task(s) in the list.");
         
-            storage.writeToFile("E | 0 | " + desc + "|" + time);
+            storage.writeToFile("E | 0 | " + desc + " | " + time);
         
         } else {
             throw new DukeException("\u2639 OOPS!!!"
