@@ -4,12 +4,8 @@ import parser.*;
 import storage.*;
 import task.*;
 import ui.*;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
 
 public class Duke {
     String filePath = "/Users/Simon/Desktop/Y2S2/CS2103T/duke/src/main/java/duke.txt";
