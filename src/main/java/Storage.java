@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,20 +36,21 @@ import java.util.Scanner;
                         }
                     } else if ("D".equals(arrOfCommands[0])) {
                         if (arrOfCommands[1].equals("[Y]")) {
-                            Deadline deadline = new Deadline(arrOfCommands[2], arrOfCommands[3]);
+                            Deadline deadline = new Deadline(arrOfCommands[2], LocalDate.parse(arrOfCommands[3].trim()));
                             deadline.markAsDone();
                             savedList.add(deadline);
                         } else if ("[N]".equals(arrOfCommands[1])) {
-                            Deadline deadline = new Deadline(arrOfCommands[2], arrOfCommands[3]);
+                            Deadline deadline = new Deadline(arrOfCommands[2], LocalDate.parse(arrOfCommands[3].trim()));
                             savedList.add(deadline);
                         }
                     } else if ("E".equals(arrOfCommands[0])) {
                         if (arrOfCommands[1].equals("[Y]")) {
-                            Event event = new Event((arrOfCommands[2].split(" "))[0], arrOfCommands[3]);
+                            Event event = new Event(arrOfCommands[2],
+                                    LocalDate.parse(arrOfCommands[3].trim()));
                             event.markAsDone();
                             savedList.add(event);
                         } else if ("[N]".equals(arrOfCommands[1])) {
-                            Event event = new Event(arrOfCommands[2], arrOfCommands[3]);
+                            Event event = new Event(arrOfCommands[2], LocalDate.parse(arrOfCommands[3].trim()));
                             savedList.add(event);
                         }
                     }
@@ -64,10 +66,10 @@ import java.util.Scanner;
                         out.write("T | " + task.getStatusIcon() + " | " + task.getTaskName() + NEWLINE);
                     } else if (task instanceof Event) {
                         out.write("E | " + task.getStatusIcon() + " | "
-                                + task.getTaskName() + " | " + ((Event) task).getAt() + NEWLINE);
+                                + task.getTaskName() + " | " + ((Event) task).getDateAt() + NEWLINE);
                     } else if (task instanceof Deadline) {
                         out.write("D | " + task.getStatusIcon() + " | "
-                                + task.getTaskName() + " | " + ((Deadline) task).getBy() + NEWLINE);
+                                + task.getTaskName() + " | " + ((Deadline) task).getDateBy() + NEWLINE);
                     }
                 }
                 out.close();
