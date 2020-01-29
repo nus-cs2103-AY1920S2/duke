@@ -1,0 +1,4 @@
+1 || deadline || return book || Sunday
+0 || event || project meeting || Mon 2-4pm
+1 || deadline || do homework || no idea :-p
+0 || todo || your butt

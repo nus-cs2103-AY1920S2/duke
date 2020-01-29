@@ -9,4 +9,9 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), time);
     }
+
+    @Override
+    public java.lang.String toSaveString() {
+        return String.format("%s || event || %s || %s", super.toSaveString(), this.task, this.time);
+    }
 }

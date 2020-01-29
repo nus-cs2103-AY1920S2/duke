@@ -96,5 +96,10 @@ What tasks do you have dude?
     InvalidIndexException: 4 is an invalid index!
     -----
     -----
+    Got it. I've added this task:
+    [T][✗] your butt
+    Now you have 4 tasks in the list.
+    -----
+    -----
     Bye bye friend!
     -----

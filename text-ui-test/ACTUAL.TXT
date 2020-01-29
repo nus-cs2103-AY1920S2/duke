@@ -1,7 +1,36 @@
+----------------------------
 Hello I'm your task manager!
+----------------------------
 
+    Here are the tasks in your list:
+    1. [D][✓] return book (by: Sunday)
+    2. [E][✗] project meeting (at: Mon 2-4pm)
+    3. [D][✓] do homework (by: no idea :-p)
+    4. [T][✗] your butt
+
+----------------------------
 What tasks do you have dude?
-
+----------------------------
+    -----
+    Nice! I've deleted this task:
+    [D][✓] return book (by: Sunday)
+    Now you have 3 tasks in the list.
+    -----
+    -----
+    Nice! I've deleted this task:
+    [E][✗] project meeting (at: Mon 2-4pm)
+    Now you have 2 tasks in the list.
+    -----
+    -----
+    Nice! I've deleted this task:
+    [D][✓] do homework (by: no idea :-p)
+    Now you have 1 tasks in the list.
+    -----
+    -----
+    Nice! I've deleted this task:
+    [T][✗] your butt
+    Now you have 0 tasks in the list.
+    -----
     -----
     MissingTimeException: Event is missing time!
     -----
@@ -94,6 +123,11 @@ What tasks do you have dude?
     -----
     -----
     InvalidIndexException: 4 is an invalid index!
+    -----
+    -----
+    Got it. I've added this task:
+    [T][✗] your butt
+    Now you have 4 tasks in the list.
     -----
     -----
     Bye bye friend!
