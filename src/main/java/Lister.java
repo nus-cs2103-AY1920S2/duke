@@ -1,16 +1,92 @@
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Lister {
     private ArrayList<Task> store;
+    private PrintWriter writer;
 
-    public Lister() {
+    public Lister() { }
+
+    private void loadData() {
         store = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader( new FileReader("../../../data/duke.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                int x = line.indexOf('|');
+                String command = line.substring(0, x-1);
+                switch (command) {
+                case "T":
+                    ToDo task = new ToDo(line.substring(8), "");
+                    if (line.substring(4, 5).equals("1")) {
+                        task.markAsDone() ;
+                    }
+                    this.store.add(task);
+                    break;
+                case "E":
+                    String details = line.substring(8);
+                    int y = details.indexOf('|');
+                    System.out.println(details);
+                    Event event = new Event(details.substring(0, y-1), details.substring(y+2));
+                    if (line.substring(4, 5).equals("1")) {
+                        event.markAsDone() ;
+                    }
+                    this.store.add(event);
+                    break;
+                case "D":
+                    String detail = line.substring(8);
+                    int z = detail.indexOf('|');
+                    System.out.println(detail);
+                    Deadline deadline = new Deadline(detail.substring(0, z-1), detail.substring(z+2));
+                    if (line.substring(4, 5).equals("1")) {
+                        deadline.markAsDone() ;
+                    }
+                    this.store.add(deadline);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void storeData() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < store.size(); i++) {
+            Task curr = store.get(i);
+            switch (curr.getType()) {
+            case TODO:
+                sb.append("T | " + (curr.isDone ? 1 : 0) + " | " + curr.description + "\n");
+                break;
+            case EVENT:
+                sb.append("E | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
+                System.out.println("curr time " + curr.time);
+                System.out.println("curr description " + curr.description);
+                break;
+            case DEADLINE:
+                sb.append("D | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
+                break;
+            }
+        }
+
+        try {
+            writer = new PrintWriter("../../../data/duke.txt");
+            writer.write(sb.toString());
+            writer.flush();
+        } catch (FileNotFoundException fnfe) {
+            System.out.println(fnfe);
+        }
+
     }
 
     public void record(String command) {
+        loadData();
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list:");
-            for (int i=0; i<store.size(); i++) {
+            for (int i = 0; i < store.size(); i++) {
                 System.out.println((i + 1) + "." + store.get(i).toString());
             }
         } else {
@@ -41,7 +117,7 @@ public class Lister {
                         printTask(newEvent);
                         break;
                     case "todo":
-                        Task newToDo = new ToDo(command.substring(x + 1));
+                        Task newToDo = new ToDo(command.substring(x + 1), "");
                         store.add(newToDo);
                         printTask(newToDo);
                         break;
@@ -49,11 +125,11 @@ public class Lister {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-
+            storeData();
         }
     }
 
-    public int getIndex(String command) throws DukeException {
+    private int getIndex(String command) throws DukeException {
         int x = 0;
         try {
             x = command.indexOf(' ');
@@ -71,7 +147,7 @@ public class Lister {
         return x > 0 ? x : 0;
     }
 
-    public void printTask(Task task) {
+    private void printTask(Task task) {
         System.out.println("Got it. I've added this task:\n" + task.toString());
         System.out.println("Now you have " + store.size() + " tasks in the list.");
     }

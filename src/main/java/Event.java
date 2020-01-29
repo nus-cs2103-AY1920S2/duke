@@ -6,12 +6,17 @@ public class Event extends Task{
     // e.g., team project meeting on 2/10/2019 2-4pm
     protected String time;
     protected LocalDateTime ldt;
+    private TaskType type = TaskType.EVENT;
 
     public Event(String description, String time) {
-        super(description);
+        super(description, time);
         this.time = time;
         TimeParser tp = new TimeParser(time);
         ldt = tp.getTime();
+    }
+
+    public TaskType getType() {
+        return type;
     }
 
     @Override
