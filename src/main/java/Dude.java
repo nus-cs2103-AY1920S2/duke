@@ -2,9 +2,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Dude {
-    protected List<Task> userInputList;
+    protected ArrayList<Task> userInputList;
     protected String logo = "  ____\n" + " (.__.)\n" + "<|>\n" + " /\\" + "\n_  _";
     protected boolean isActivated = false;
+    protected Storage storage;
 
     Dude() {
         userInputList = new ArrayList<>();
@@ -15,6 +16,10 @@ public class Dude {
         isActivated = true;
         System.out.println(logo);
         System.out.println("☛ dude, what do you want? \n☛ give me a command!");
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
     }
 
     public void end() {
@@ -35,12 +40,15 @@ public class Dude {
         }
         else if (input.startsWith("done")) {
             doneTask(input);
+            //storage.update(userInputList);
         }
         else if (input.startsWith("delete")) {
             deleteTask(input);
+            //storage.update(userInputList);
         }
         else {
             createTask(input);
+            //storage.update(userInputList);
         }
     }
 
@@ -61,7 +69,7 @@ public class Dude {
             System.out.println("\t" + userInputList.get(taskNumber));
         }
         catch(IndexOutOfBoundsException e) { // catch exception - trying to access number higher than number of tasks
-            System.out.println(new DukeException("done"));
+            System.out.println(new DukeException(DukeError.NUMBER));
         }
     }
 
@@ -74,7 +82,7 @@ public class Dude {
             userInputList.remove(t);
         }
         catch(IndexOutOfBoundsException e) { // catch exception - trying to access number higher than number of tasks
-            System.out.println(new DukeException("delete"));
+            System.out.println(new DukeException(DukeError.COMMAND));
         }
 
     }
@@ -85,7 +93,7 @@ public class Dude {
             String[] split = userInput.split(" ", 2);
             String taskType = split[0];
             if (split.length <= 1) {
-                throw new DukeException("task", taskType); // throw an exception if user passes only one command
+                throw new DukeException(DukeError.INSUFFICIENT); // throw an exception if user passes only one command
             }
             String taskLine = split[1];
             if (taskType.equals("todo")) { // to add todos (tasks with no date/time attached)
@@ -96,7 +104,7 @@ public class Dude {
                 task = new Event(taskLine);
             }
             else {
-                throw new DukeException("task", taskType); // throw an exception if user tries to create a task with type that is nonexistent
+                throw new DukeException(DukeError.NUMBER); // throw an exception if user tries to create a task with type that is nonexistent
             }
             userInputList.add(task);
             System.out.println("☛ fine, I will take note of: " + task);
@@ -108,5 +116,3 @@ public class Dude {
     }
 
 }
-
-
