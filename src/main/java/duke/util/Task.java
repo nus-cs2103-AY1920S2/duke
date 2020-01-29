@@ -34,7 +34,7 @@ public abstract class Task {
     }
 
     /**
-     * markAsDone method marks the task to be done by
+     * Marks the task to be done by
      * setting the isDone property of a task to be true.
      */
 
@@ -43,7 +43,7 @@ public abstract class Task {
     }
 
     /**
-     * getStatusIcon method gets the appropriate icon
+     * Gets the appropriate icon
      * of the task based on whether the task is done or not.
      * @return The appropriate icon. A tick if the task is done, a cross, otherwise.
      */
@@ -52,9 +52,18 @@ public abstract class Task {
         return (this.isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Gets the status of the task.
+     * @return The boolean whether the task is done or not.
+     */
     public boolean getStatus() {
         return this.isDone;
     }
+
+    /**
+     * Gets the description of the task.
+     * @return The desription of the task.
+     */
 
     public String getDescription() {
         return this.description;

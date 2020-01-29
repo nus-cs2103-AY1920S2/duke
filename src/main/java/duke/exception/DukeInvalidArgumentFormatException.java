@@ -18,6 +18,7 @@ package duke.exception;
  */
 
 public class DukeInvalidArgumentFormatException extends DukeException {
+
     /**
      * Constructs a DukeInvalidArgumentFormatException class with the error
      * message.

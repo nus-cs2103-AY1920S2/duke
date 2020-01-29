@@ -49,6 +49,7 @@ public class Duke {
      * if the file is formatted properly.
      * @return A Duke instance, loaded with the list of tasks.
      * @throws DukeInvalidTaskFormatException If the file is not formatted properly.
+     * @throws DukeInvalidDateFormatException If the date of the deadline or event is not formatted properly.
      */
 
     public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {

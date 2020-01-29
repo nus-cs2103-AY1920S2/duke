@@ -5,9 +5,25 @@ import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+
+/*
+ * Parser
+ *
+ * CS2103 AY19/20 Semester 2
+ * Individual Project
+ * Duke Project
+ *
+ * 28 Jan 2020
+ *
+ */
+
+/**
+ * <p>Parser class describes the behaviour of a
+ * parser that parses commands entered by the client.</p>
+ * @author Mario Lorenzo
+ */
 
 public class Parser {
     private static HashMap<String, Keyword> validKeywords = new HashMap<>() {
@@ -21,6 +37,10 @@ public class Parser {
             put("find", Keyword.FIND);
         }
     };
+
+    /**
+     * Constructs a Parser instance.
+     */
 
     public Parser() {
 
@@ -93,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * checkValidListArgument verifies whether the Argument instance
+     * Verifies whether the Argument instance
      * is a valid "list" argument. It will throw an exception if
      * the argument is not valid.
      * @throws DukeInvalidArgumentFormatException If the argument is not a valid argument.
@@ -108,7 +128,7 @@ public class Parser {
     }
 
     /**
-     * checkValidDoneArgument verifies whether the Argument instance
+     * Verifies whether the Argument instance
      * is a valid "done" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument is empty or
      * not a number).
@@ -133,7 +153,7 @@ public class Parser {
     }
 
     /**
-     * checkValidDeleteArgument verifies whether the Argument instance
+     * Verifies whether the Argument instance
      * is a valid "delete" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument is empty or
      * not a number).
@@ -158,7 +178,7 @@ public class Parser {
     }
 
     /**
-     * checkValidTodoArgument verifies whether the Argument instance
+     * Verifies whether the Argument instance
      * is a valid "todo" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument has no
      * description).
@@ -175,7 +195,7 @@ public class Parser {
     }
 
     /**
-     * checkValidDeadlineArgument verifies whether the Argument instance
+     * Verifies whether the Argument instance
      * is a valid "deadline" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument has no description,
      * or the due date, or the format of the command is not proper).
@@ -201,7 +221,7 @@ public class Parser {
     }
 
     /**
-     * checkValidEventArgument verifies whether the Argument instance
+     * Verifies whether the Argument instance
      * is a valid "event" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument has no description,
      * or the event date, or the format of the command is not proper).

@@ -27,9 +27,15 @@ public class DukeException extends Exception {
      * about the error.
      * @return the String about the error message
      */
+
     public DukeException(String message) {
         super(message);
     }
+
+    /**
+     * Overrides the toString method to show the error message.
+     * @return The error message.
+     */
 
     @Override
     public String toString() {

@@ -45,7 +45,7 @@ public class Event extends Task {
     }
 
     /**
-     * toString method overrides the Object's toString method
+     * Overrides the Object's toString method
      * and it contains the mark, the description, as well as
      * the schedule of the event.
      * @return The String that represents the event's details.

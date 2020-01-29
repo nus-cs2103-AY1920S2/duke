@@ -11,8 +11,6 @@ package duke.util;
  *
  */
 
-import duke.util.Task;
-
 /**
  * The Todo class extends the Task class and it defines
  * the properties that a todo task has.
