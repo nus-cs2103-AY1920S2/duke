@@ -1,9 +1,14 @@
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class TaskHandler {
 
@@ -15,12 +20,15 @@ public class TaskHandler {
     /**
      * Utilised in printing
      */
-    private final String horizontalLine = "____________________________________________________________";
+    private final String FORMAT_LINE = "____________________________________________________________";
 
     /**
      * Serves the user to do the bulk of the work in process individual commands
      */
     public void serveUser() {
+
+        // Read from lastSavedTasks.txt file if any
+        readFromLastSavedFile();
 
         // Scanner object to take in user input
         Scanner io = new Scanner(System.in);
@@ -34,21 +42,22 @@ public class TaskHandler {
 
                 switch (commandWords[0]) {
 
-                    case "bye":
-                        return;
+                case "bye":
+                    return;
 
-                    case "list":
-                        printAllTasks();
-                        break;
+                case "list":
+                    printAllTasks();
+                    break;
 
-                    case "delete":
-                        deleteTask(command);
-                        break;
+                case "delete":
+                    deleteTask(command);
+                    break;
 
-                    case "done":
-                        // user inputs will be "done _____"
-                        // Take only the very next token which must be an integer
-                        if (commandWords.length > 1) {
+                case "done":
+                    // user inputs will be "done _____"
+                    // Take only the very next token which must be an integer
+                    if (commandWords.length > 1) {
+                        try {
                             // this is a valid command
                             if (Integer.valueOf(commandWords[1]) <= allTasks.size()) {
                                 // this valid command has a valid number
@@ -57,25 +66,28 @@ public class TaskHandler {
                             } else {
                                 throw new InputUnclearException("");
                             }
-                        } else {
-                            throw new AlreadyDoneException("");
+                        } catch (Exception e) {
+                            throw new InputUnclearException("");
                         }
-                        break;
+                    } else {
+                        throw new AlreadyDoneException("");
+                    }
+                    break;
 
-                    case "todo":
-                        addNewToDo(command);
-                        break;
+                case "todo":
+                    addNewToDo(command);
+                    break;
 
-                    case "deadline":
-                        addNewDeadline(command);
-                        break;
+                case "deadline":
+                    addNewDeadline(command);
+                    break;
 
-                    case "event":
-                        addNewEvent(command);
-                        break;
+                case "event":
+                    addNewEvent(command);
+                    break;
 
-                    default:
-                        throw new InputUnclearException("");
+                default:
+                    throw new InputUnclearException("");
 
                 }
             } catch (InputUnclearException iue) {
@@ -97,6 +109,84 @@ public class TaskHandler {
         }
     }
 
+    private void readFromLastSavedFile() {
+
+        try {
+            // Read in from lastSavedTasks.txt file, if it exists, and load Tasks into allTasks ArrayList
+            File f = new File("lastSavedTasks.txt");
+            Scanner fileScanner = new Scanner(f);
+
+            while (fileScanner.hasNext()) {
+
+                String line = fileScanner.nextLine();
+
+                int indexOfFirstSquareBracket = line.indexOf("[");
+                String doneStatus = String.valueOf(line.charAt(indexOfFirstSquareBracket + 1));
+                String taskType = String.valueOf(line.charAt(indexOfFirstSquareBracket + 5));
+                String details = line.substring(indexOfFirstSquareBracket + 8);
+
+                switch (taskType) {
+
+                    case "T":
+                        // This is a To-Do item
+                        Task currentToDo = new ToDo(details);
+                        if (doneStatus.equals("V")) {
+                            currentToDo.doTask();
+                        }
+                        allTasks.add(currentToDo);
+                        break;
+
+                    case "D":
+                        // This is a Deadline item
+                        int indexOfByKeyword = details.indexOf("(by: ");
+                        String deadlineCommand = details.substring(0, indexOfByKeyword - 1);
+                        String deadlineLimit = details.substring(indexOfByKeyword + 5,
+                                details.lastIndexOf(")"));
+                        Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
+                        if (doneStatus.equals("V")) {
+                            currentDeadline.doTask();
+                        }
+                        allTasks.add(currentDeadline);
+                        break;
+
+                    case "E":
+                        // This is an Event item
+                        int indexOfAtKeyword = details.indexOf("(at: ");
+                        String eventCommand = details.substring(0, indexOfAtKeyword - 1);
+                        String eventLimit = details.substring(indexOfAtKeyword + 5,
+                                details.lastIndexOf(")"));
+                        Task currentEvent = new Deadline(eventCommand, eventLimit);
+                        if (doneStatus.equals("V")) {
+                            currentEvent.doTask();
+                        }
+                        allTasks.add(currentEvent);
+                        break;
+
+                    default:
+                        break;
+
+                }
+
+            }
+        } catch (FileNotFoundException fnfe) {
+            printFileNotFound();
+        }
+    }
+
+    private void saveChanges() {
+        try {
+            FileWriter fw = new FileWriter("lastSavedTasks.txt");
+            for (int i = 0; i < allTasks.size(); i++) {
+                String tickOrCross = allTasks.get(i).obtainStatusIcon();
+                String currentLine = String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.get(i);
+                fw.write(currentLine + "\n");
+            }
+            fw.close();
+        } catch (IOException ioe) {
+            printUnsure();
+        }
+    }
+
     /**
      * Deletes the given Task based on the command's keyword (a number representing index in ArrayList)
      *
@@ -108,6 +198,7 @@ public class TaskHandler {
             int indexToRemove = Integer.valueOf(command.substring("delete ".length())) - 1; // item i is stored at index (i-1)
             Task removedTask = allTasks.remove(indexToRemove);
             printTaskRemoval(indexToRemove, removedTask);
+            saveChanges();
         } catch (Exception e) {
             throw new DeleteException("");
         }
@@ -125,6 +216,7 @@ public class TaskHandler {
         }
         String toDoCommand = command.substring("todo".length() + 1);
         addTaskToStored(new ToDo(toDoCommand));
+        saveChanges();
     }
 
     /**
@@ -143,6 +235,7 @@ public class TaskHandler {
             String deadlineCommand = getCommand("deadline", "/by", command);
 
             addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
+            saveChanges();
         } catch (Exception e) {
             throw new DeadlineException("");
         }
@@ -164,6 +257,7 @@ public class TaskHandler {
             String eventCommand = getCommand("event", "/at", command);
 
             addTaskToStored(new Event(eventCommand, eventTime));
+            saveChanges();
         } catch (Exception e) {
             throw new EventException("");
         }
@@ -230,6 +324,7 @@ public class TaskHandler {
     private void doTask(Task t) {
         printTaskComplete(t);
         t.doTask(); // task marked as complete
+        saveChanges();
     }
 
     /**
@@ -240,6 +335,15 @@ public class TaskHandler {
     private void addTaskToStored(Task t) {
         allTasks.add(t);
         t.taskAddedMessage();
+    }
+
+    /**
+     * Prompts user that file is not found.
+     */
+    private void printFileNotFound() {
+        printLine();
+        print("File is not found!");
+        printLine();
     }
 
     /**
@@ -363,10 +467,19 @@ public class TaskHandler {
     }
 
     /**
+     * Prompts user that there is a problem saving to the file recording the Task List.
+     */
+    private void printSaveIssue() {
+        printLine();
+        print("Hi, it seems there is a problem saving. Kindly exit and restart the program.");
+        printLine();
+    }
+
+    /**
      * Prints a horizontal formatting line
      */
     private void printLine() {
-        print(horizontalLine);
+        print(FORMAT_LINE);
     }
 
     /**

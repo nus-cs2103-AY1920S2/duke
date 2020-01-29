@@ -13,7 +13,7 @@ public abstract class Task {
     /**
      * Utilised in printing
      */
-    protected final String horizontalLine = "____________________________________________________________";
+    protected final String FORMAT_LINE = "____________________________________________________________";
 
     /**
      * Constructor for Task Class
@@ -58,7 +58,7 @@ public abstract class Task {
      * Prints a horizontal formatting line
      */
     protected final void printLine() {
-        print(horizontalLine);
+        print(FORMAT_LINE);
     }
 
     /**
