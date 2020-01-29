@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +14,11 @@ public class Duke {
         Scanner reader = new Scanner(System.in);
         /** Task list of all tasks */
         ArrayList<Task> tasks = new ArrayList<>();
+
+        // Create data file to store task list.
+        String dir = System.getProperty("user.dir");
+        String path = dir + File.separator + "data" + File.separator + "duke.txt";
+        File f = new File(path);
 
         printLogo();
         printGreet();
@@ -25,6 +34,7 @@ public class Duke {
                     case "done":
                         try {
                             markDone(tasks.get(Integer.valueOf(words[1]) - 1));
+                            updateData(tasks, path);
                         } catch (IndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The number of tasks you have is only " + tasks.size());
@@ -34,6 +44,7 @@ public class Duke {
                     case "delete":
                         try {
                             delete(tasks.get(Integer.valueOf(words[1]) - 1), tasks);
+                            updateData(tasks, path);
                         } catch (IndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The number of tasks you have is only " + tasks.size());
@@ -43,6 +54,7 @@ public class Duke {
                     case "todo":
                         try {
                             add(new Todo(input.substring(5)), tasks);
+                            updateData(tasks, path);
                         } catch (IndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOPS!!! The description of a todo cannot be empty.");
@@ -54,6 +66,7 @@ public class Duke {
                                 " /by ");
                         try {
                             add(new Deadline(ddlDetails[0], ddlDetails[1]), tasks);
+                            updateData(tasks, path);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The Deadline time is incorrect.");
@@ -65,6 +78,7 @@ public class Duke {
                                 " /at ");
                         try {
                             add(new Event(eventDetails[0], eventDetails[1]), tasks);
+                            updateData(tasks, path);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The event time is incorrect.");
@@ -202,5 +216,23 @@ public class Duke {
         tasks.remove(currTask);
         System.out.println("    sNow you have " + tasks.size() + " tasks in the list.");
         printBreak();
+    }
+
+    private static void updateData(ArrayList<Task> tasks, String path) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(fw);
+            // Record task data.
+            for (int i = 0 ; i < tasks.size(); i++) {
+                bw.write(tasks.get(i).getData());
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("    Cannot store data!");
+            System.out.println("    " + e.fillInStackTrace());
+            printBreak();
+        }
     }
 }
