@@ -5,7 +5,7 @@ public class DukeException extends Exception {
         super(message);
     }
 
-    public static void throwIfPredicateFails(boolean condition, String message) throws DukeException {
+    public static void throwIf(boolean condition, String message) throws DukeException {
         if (!condition) {
             throw new DukeException(message);
         }

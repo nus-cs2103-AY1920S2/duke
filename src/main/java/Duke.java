@@ -1,12 +1,9 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
     protected static Scanner scanner;
-    protected static List<Task> tasks;
+    protected static TaskList tasks;
 
     protected static final String OUTPUT_INDENTATION = "\t";
     protected static final String OUTPUT_HORIZONTAL_LINE = "\t________________________________________________________";
@@ -16,12 +13,7 @@ public class Duke {
         scanner = new Scanner(System.in);
 
         // Try to read tasks from disk
-        tasks = Serializer.deserialize();
-
-        // Save does not exist
-        if (tasks == null) {
-            tasks = new ArrayList<Task>();
-        }
+        tasks = new TaskList(Serializer.deserialize());
 
         while (true) {
             try {
@@ -56,21 +48,21 @@ public class Duke {
             break;
 
         case "todo":
-            DukeException.throwIfPredicateFails(!args.equals(""), "The description of a todo cannot be empty");
+            DukeException.throwIf(!args.equals(""), "The description of a todo cannot be empty");
             addNewTask(new Todo(args));
             break;
 
         case "deadline":
             String[] splitByInputTime = args.split(" /by ");
-            DukeException.throwIfPredicateFails(!args.equals(""), "The description of a deadline cannot be empty");
-            DukeException.throwIfPredicateFails(splitByInputTime.length >= 2, "Input is missing a '/by' argument!");
+            DukeException.throwIf(!args.equals(""), "The description of a deadline cannot be empty");
+            DukeException.throwIf(splitByInputTime.length >= 2, "Input is missing a '/by' argument!");
             addNewTask(new Deadline(splitByInputTime[0], splitByInputTime[1]));
             break;
 
         case "event":
             String[] splitByEventTime = args.split(" /at ");
-            DukeException.throwIfPredicateFails(!args.equals(""), "The description of a event cannot be empty");
-            DukeException.throwIfPredicateFails(splitByEventTime.length >= 2, "Input is missing a '/at' argument!");
+            DukeException.throwIf(!args.equals(""), "The description of a event cannot be empty");
+            DukeException.throwIf(splitByEventTime.length >= 2, "Input is missing a '/at' argument!");
             addNewTask(new Event(splitByEventTime[0], splitByEventTime[1]));
             break;
 
@@ -86,8 +78,8 @@ public class Duke {
             } catch (NumberFormatException e) {
                 throw new DukeException("The input index is missing or is not a number!");
             }
-            DukeException.throwIfPredicateFails(deletionIndex < tasks.size(), "The input index is out of bounds!");
-            DukeException.throwIfPredicateFails(deletionIndex >= 0, "The input index is out of bounds!");
+            DukeException.throwIf(deletionIndex < tasks.size(), "The input index is out of bounds!");
+            DukeException.throwIf(deletionIndex >= 0, "The input index is out of bounds!");
             removeTaskAtIndex(deletionIndex);
             break;
 
@@ -99,8 +91,8 @@ public class Duke {
                 throw new DukeException("The input index is missing or is not a number!");
             }
 
-            DukeException.throwIfPredicateFails(targetIndex < tasks.size(), "The input task number is out of bounds!");
-            DukeException.throwIfPredicateFails(targetIndex >= 0, "The input task number is out of bounds!");
+            DukeException.throwIf(targetIndex < tasks.size(), "The input task number is out of bounds!");
+            DukeException.throwIf(targetIndex >= 0, "The input task number is out of bounds!");
             tasks.get(targetIndex).setIsDone(true);
             printAllTasks();
             break;
@@ -125,7 +117,7 @@ public class Duke {
     }
 
     protected static void addNewTask(Task newTask) {
-        tasks.add(newTask);
+        tasks.addTask(newTask);
         System.out.println(OUTPUT_HORIZONTAL_LINE);
         System.out.println(OUTPUT_INDENTATION + "New task added: ");
         System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + newTask.toString());
@@ -134,7 +126,7 @@ public class Duke {
     }
 
     protected static void removeTaskAtIndex(int index) {
-        Task task = tasks.remove(index);
+        Task task = tasks.removeAtIndex(index);
         System.out.println(OUTPUT_HORIZONTAL_LINE);
         System.out.println(OUTPUT_INDENTATION + "You have removed the following task: ");
         System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + task.toString());
@@ -143,7 +135,7 @@ public class Duke {
     }
 
     protected static void removeAllTasks() {
-        tasks.clear();
+        tasks.removeAllTask();
         System.out.println(OUTPUT_HORIZONTAL_LINE);
         System.out.println(OUTPUT_INDENTATION + "All tasks have been deleted.");
         System.out.println(OUTPUT_HORIZONTAL_LINE);
