@@ -10,6 +10,15 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String taskDescription, String deadline) throws InvalidInputException  {
         this.taskDescription = taskDescription;
+
+        //breaks down the taskDescription and adds all words individually to the Hashset
+        Scanner taskDesc = new Scanner(taskDescription);
+        while(taskDesc.hasNext()) {
+            String keyword = taskDesc.next();
+            wordsInDescription.add(keyword);
+        }
+
+        //checks if deadline is of the form "by yyyy-MM-dd"
         Scanner sc = new Scanner(deadline);
         if(!sc.next().equals("by")) {
             throw new InvalidInputException("The deadline should start with [by]");

@@ -10,6 +10,14 @@ public class EventTask extends Task {
 
     public EventTask(String taskDescription, String timing) throws InvalidInputException{
         this.taskDescription = taskDescription;
+
+        //breaks down the taskDescription and adds all words individually to the Hashset
+        Scanner taskDesc = new Scanner(taskDescription);
+        while(taskDesc.hasNext()) {
+            String keyword = taskDesc.next();
+            wordsInDescription.add(keyword);
+        }
+
         Scanner sc = new Scanner(timing);
         if(!sc.next().equals("at")) {
             throw new InvalidInputException("The timing should start with keyword [at]");

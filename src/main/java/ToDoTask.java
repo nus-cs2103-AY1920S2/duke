@@ -1,8 +1,16 @@
+import java.util.Scanner;
+
 public class ToDoTask extends Task {
     private String task;
 
     public ToDoTask(String task) {
         this.task = task;
+        //breaks down the taskDescription and adds all words individually to the Hashset
+        Scanner taskDesc = new Scanner(task);
+        while(taskDesc.hasNext()) {
+            String keyword = taskDesc.next();
+            wordsInDescription.add(keyword);
+        }
     }
 
     public String formatToStore() {
