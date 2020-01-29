@@ -2,6 +2,6 @@ T | 1 | read book
 D | 1 | return book | 2pm | 2020-02-01
 D | 0 | submit code | 5pm | 2020-01-30
 E | 0 | meeting | 8am | 2020-01-30
-T | 0 |  nap
+T | 0 | nap
 E | 0 | meeting | 1pm | 2020-02-01
 D | 0 | tutorial | 2pm | 2020-02-02

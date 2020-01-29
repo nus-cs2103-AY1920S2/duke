@@ -12,9 +12,18 @@ public class Storage {
     protected String filePath;
     protected File file;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
+
+        // file creation following code from
+        // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java/6143076#6143076
         file = new File(filePath);
+        try {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("    Oh no, file could not be created!\n");
+        }
     }
 
     public ArrayList<Task> load() throws DukeException {

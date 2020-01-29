@@ -15,10 +15,10 @@ public class Duke {
         // following code from module website
 
         ui = new Ui();
-        storage = new Storage(filePath);
         parser = new Parser();
 
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showError(e);
@@ -28,7 +28,7 @@ public class Duke {
 
     public void run() {
         // following code from module website
-        
+
         ui.greet();
 
         boolean isExit = false;
