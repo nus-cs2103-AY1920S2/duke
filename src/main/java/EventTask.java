@@ -1,7 +1,7 @@
 public class EventTask extends Task {
-    private String when;
+    private Date when;
 
-    public EventTask(String description, String when) {
+    public EventTask(String description, Date when) {
         super(description);
         this.when = when;
     }
@@ -13,6 +13,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.when);
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.when.toString());
     }
 }

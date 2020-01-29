@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+
+import exceptions.WrongDateTimeFormatException;
 import exceptions.WrongUsageException;
 
 public class TaskManager{
@@ -16,18 +18,20 @@ public class TaskManager{
         return this.add(new Task(args));
     }
 
-    public String addDeadlineTask(String args) throws WrongUsageException {
+    public String addDeadlineTask(String args) throws WrongUsageException, WrongDateTimeFormatException {
         String[] splitArgs = args.split("/by");
         if (splitArgs.length != 2) throw new WrongUsageException("Usage: deadline <description> /by <deadline>");
 
-        return this.add(new DeadlineTask(splitArgs[0].trim(), splitArgs[1].trim()));
+        Date date = new Date(splitArgs[1].trim());
+        return this.add(new DeadlineTask(splitArgs[0].trim(), date));
     }
 
-    public String addEventTask(String args) throws WrongUsageException {
+    public String addEventTask(String args) throws WrongUsageException, WrongDateTimeFormatException {
         String[] splitArgs = args.split("/at");
         if (splitArgs.length != 2) throw new WrongUsageException("Usage: event <description> /at <when>");
 
-        return this.add(new EventTask(splitArgs[0].trim(), splitArgs[1].trim()));
+        Date date = new Date(splitArgs[1].trim());
+        return this.add(new EventTask(splitArgs[0].trim(), date));
     }
 
     public String setTaskDone(String args) throws WrongUsageException {
