@@ -35,6 +35,15 @@ public class Task {
     }
 
     /**
+     * The purpose of getDescription function is for the usage of finding keywords within
+     * each task's description for level 9 features.
+     * @return The description of the task, eg. read book.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * The purpose of format function is to set the format for saving task into a file.
      * @return The description of the format, eg. T 0 read.
      */

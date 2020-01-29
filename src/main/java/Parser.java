@@ -36,6 +36,8 @@ public class Parser {
                     return Command.EVENT;
                 case "deadline":
                     return Command.DEADLINE;
+                case "find":
+                    return Command.FIND;
                 default:
                     throw new DukeException("Don't understand");
             }

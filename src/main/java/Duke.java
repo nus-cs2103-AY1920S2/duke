@@ -100,6 +100,21 @@ public class Duke {
                             }
 
                             break;
+                        case FIND:
+                            String find = parser.parseDescription(fullCommand);
+                            String taskL = "";
+
+                            for (int i = 0; i < tasks.getSize(); i++) {
+                                Task cur = tasks.getDukeList().get(i);
+
+                                if (cur.getDescription().contains(find)) {
+                                    taskL = taskL + (i+1) + "." + tasks.getDukeList().get(i) + "\n";
+                                }
+                            }
+
+                            ui.printMatchingTask(taskL.trim(), find);
+
+                            break;
                         default:
                             break;
                     }

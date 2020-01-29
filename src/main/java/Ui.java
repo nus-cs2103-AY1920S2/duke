@@ -69,6 +69,20 @@ public class Ui {
     }
 
     /**
+     * Prints the task according to the keyword.
+     * @param list List of matching tasks.
+     * @param keyword Keyword entered by the user.
+     */
+    public void printMatchingTask(String list, String keyword) {
+        if (list.equals("")) {
+            System.out.println("We have found nothing related to your search.");
+        } else {
+            System.out.println("Here are some matching tasks in your list: 「" + keyword + "」");
+            System.out.println(list);
+        }
+    }
+
+    /**
      * Prints goodbye message to the user.
      */
     public void goodbye() {
