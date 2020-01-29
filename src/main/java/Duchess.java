@@ -1,228 +1,36 @@
-import java.io.IOException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
 class Duchess {
-    private ArrayList<Task> tasks;
-    private Scanner scanner;
+    private TaskList taskList;
+    private Ui ui;
     private Storage storage;
 
-    Duchess() {
-        this.scanner = new Scanner(System.in);
-        this.storage = new Storage("data/tasks.json");
-        this.tasks = this.storage.load();
-    }
-
-    private void awaitInput() {
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String input = scanner.nextLine();
-                ArrayList<String> commands = new ArrayList<>(Arrays.asList(input.split("\\s", 2)));
-                switch (this.getCommandType(commands.get(0))) {
-                case TODO:
-                case EVENT:
-                case DEADLINE:
-                    if (commands.size() < 2) {
-                        throw new DuchessException(
-                                "Your " + commands.get(0).trim() + " description cannot be empty!");
-                    }
-                    this.createTask(commands.get(0), commands.get(1));
-                    this.storage.save(this.tasks);
-                    break;
-                case DONE:
-                    this.completeTask(commands.get(1));
-                    this.storage.save(this.tasks);
-                    break;
-                case DELETE:
-                    this.deleteTask(commands.get(1));
-                    this.storage.save(this.tasks);
-                    break;
-                case LIST:
-                    this.printTasks();
-                    break;
-                case BYE:
-                    this.sayGoodbye();
-                    isRunning = false;
-                    break;
-                default:
-                    // never reached, but here as good practice
-                    echo(input);
-                    break;
-                }
-            } catch (DuchessException e) {
-                System.out.println(e.getMessage());
-            } catch (IOException e) {
-                System.out.println("Failed to save... hang on");
-            }
-        }
-    }
-
-    private void introduce() {
-        String logo = "\t _____             _\n"
-                + "\t|  __ \\           | |\n"
-                + "\t| |  | |_   _  ___| |__   ___  ___ ___\n"
-                + "\t| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
-                + "\t| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
-                + "\t|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
-        System.out.println("\tHello from\n" + logo);
-        System.out.println("\tMy name is Duchess, as you can see above.");
-        System.out.println("\tHow may I help you?");
-    }
-
-    private void echo(String input) {
-        System.out.println("\tOh? You said \"" + input + "\"? How interesting.");
-        System.out.println("\tBut I don't see what I can do with that.");
-    }
-
-    private void printTasks() {
-        if (this.tasks.size() > 0) {
-            System.out.println("\tSighs... you never remember what you say, don't you.");
-            System.out.println("\tYou said these:");
-            for (int i = 0; i < this.tasks.size(); i++) {
-                System.out.println("\t\t" + (i + 1) + ".\t" + this.tasks.get(i));
-            }
-        } else {
-            System.out.println("\tIs this a trick question? You have not told me anything about 'tasks'.");
-        }
-    }
-
-    private void sayGoodbye() {
-        System.out.println("\tBye, is it? Shoo shoo then.");
-    }
-
-    private CommandType getCommandType(String input) throws DuchessException {
+    Duchess(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            return CommandType.valueOf(input.toUpperCase());
-        } catch (IllegalArgumentException error) {
-            throw new DuchessException(
-                    "I don't see what I can do with what you just told me.");
+            this.taskList = new TaskList(this.storage.load());
+        } catch (DuchessException e) {
+            this.ui.printError(e.getMessage());
+            this.taskList = new TaskList();
         }
     }
 
     void run() {
-        this.introduce();
-        this.awaitInput();
-    }
-
-    private void createTask(String type, String description) throws DuchessException {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        switch (type) {
-        case "todo":
-            Task newTask = new ToDo(description.trim());
-            this.addToTasks(newTask);
-            break;
-        case "event":
-            ArrayList<String> details = new ArrayList<>(Arrays.asList(description.split("/at")));
-            if (details.size() < 2) {
-                throw new DuchessException(
-                        "I don't know when is your event! Please use /at [time here].");
-            }
-            newTask = new Event(details.get(0).trim(), details.get(1).trim());
-            this.addToTasks(newTask);
-            break;
-        case "deadline":
-            details = new ArrayList<>(Arrays.asList(description.split("/by")));
-            if (details.size() < 2) {
-                throw new DuchessException(
-                        "I don't know when is your deadline! Please use /by [deadline here].");
-            }
-            LocalDateTime deadline;
-            String timeDetails = details.get(1).trim().toLowerCase();
-            switch (timeDetails) {
-            case "today":
-                deadline = LocalDate.now().atTime(17, 0);
-                break;
-            case "tonight":
-                deadline = LocalDate.now().atTime(21, 0);
-                break;
-            case "tomorrow":
-                deadline = LocalDate.now().plusDays(1).atTime(17, 0);
-                break;
-            case "monday":
-                // Fallthrough
-            case "tuesday":
-                // Fallthrough
-            case "wednesday":
-                // Fallthrough
-            case "thursday":
-                // Fallthrough
-            case "friday":
-                // Fallthrough
-            case "saturday":
-                // Fallthrough
-            case "sunday":
-                deadline = LocalDate.now()
-                        .with(TemporalAdjusters.next(DayOfWeek.valueOf(timeDetails.toUpperCase())))
-                        .atTime(17, 0);
-                break;
-            default:
-                try {
-                    deadline = LocalDateTime.parse(timeDetails, dateTimeFormatter);
-                } catch (DateTimeParseException e1) {
-                    try {
-                        deadline = LocalDate.parse(timeDetails, dateFormatter).atStartOfDay();
-                    } catch (DateTimeParseException e2) {
-                        throw new DuchessException(
-                                "Please use the following format for the datetime instead:\n"
-                                        + "\td/M/yyyy HHmm OR d/M/yyyy\n"
-                                        + "\tOR today/tonight/tomorrow\n"
-                                        + "\tOR day of the week (e.g. Monday, Tuesday)");
-                    }
+        this.ui.printWelcome();
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.printLine();
+                Command command = Parser.parse(fullCommand);
+                command.execute.apply(fullCommand, this.taskList, this.ui, this.storage);
+                if (command == Command.BYE) {
+                    isRunning = false;
                 }
+            } catch (DuchessException e) {
+                ui.printError(e.getMessage());
+            } finally {
+                ui.printLine();
             }
-            newTask = new Deadline(details.get(0).trim(), deadline);
-            this.addToTasks(newTask);
-            break;
-        default:
-            break;
-        }
-    }
-
-    private void addToTasks(Task task) {
-        System.out.println("\tAs always, needing someone to keep track of things for you...");
-        this.tasks.add(task);
-        System.out.println("\t\t" + task);
-        int size = this.tasks.size();
-        System.out.println(
-                "\tI've already tracked " + size + " " + (size == 1 ? "task" : "tasks") + " for you.");
-    }
-
-    private void deleteTask(String index) throws DuchessException {
-        int indexAsInt = Integer.parseInt(index.trim());
-        if (indexAsInt < 0 || indexAsInt > this.tasks.size()) {
-            throw new DuchessException("You're referring to a task that does not exist!");
-        } else {
-            Task taskToComplete = this.tasks.get(indexAsInt - 1);
-            System.out.println("\tGreat! One less thing for me to track for you.");
-            System.out.println("\t\t" + taskToComplete);
-            this.tasks.remove(indexAsInt - 1);
-            int size = this.tasks.size();
-            System.out.println(
-                    "\tNow I'm tracking " + size + " " + (size == 1 ? "task" : "tasks") + " for you.");
-        }
-    }
-
-    private void completeTask(String index) throws DuchessException {
-        int indexAsInt = Integer.parseInt(index.trim());
-        if (indexAsInt < 0 || indexAsInt > this.tasks.size()) {
-            throw new DuchessException("You're referring to a task that does not exist!");
-        } else {
-            Task taskToComplete = this.tasks.get(indexAsInt - 1);
-            if (taskToComplete.isCompleted()) {
-                throw new DuchessException("You have already completed this task!");
-            }
-            taskToComplete.toggleIsCompleted();
-            System.out.println("\tOh? You actually completed something? Impressive...");
-            System.out.println("\t\t" + taskToComplete);
         }
     }
 }
