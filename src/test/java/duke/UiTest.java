@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
+import duke.task.DeadlineStub;
 import duke.task.EventStub;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -42,8 +42,10 @@ class UiTest {
                         "event,0,Birthday Party,2020-01-01", doneStatusIcon,
                         incompleteStatusIcon,
                         "[E][" + incompleteStatusIcon + "] Birthday Party " + "(at: Jan 1 2020)")),
-                Arguments.of(new Deadline("Finish Coding Project", "2020-01-27",
-                        false)));
+                Arguments.of(new DeadlineStub("Finish Coding Project", "2020-01-27",
+                        false, "deadline,0,2020-01-27", doneStatusIcon,
+                        incompleteStatusIcon,
+                        "[D][" + incompleteStatusIcon + "] Finish Coding Project (by: 2020-01-27)")));
     }
 
     static Stream<Arguments> generateAllTaskTypesWithZeroTotalTasks() {
@@ -57,7 +59,11 @@ class UiTest {
                         "event,0,Birthday Party,2020-01-01", doneStatusIcon,
                         incompleteStatusIcon,
                         "[E][" + incompleteStatusIcon + "] Birthday Party " + "(at: Jan 1 2020)"), 0),
-                Arguments.of(new Deadline("Finish Coding Project", "2020-01-27"), 0));
+                Arguments.of(new DeadlineStub("Finish Coding Project", "2020-01-27",
+                        false, "deadline,0,Finish Coding Project,2020-01-27",
+                        doneStatusIcon, incompleteStatusIcon,
+                        "[D][" + incompleteStatusIcon + "] Finish Coding Project (by: Jan 27 2020)"),
+                        0));
     }
 
     static Stream<Arguments> generateDukeExceptions() {
@@ -77,7 +83,9 @@ class UiTest {
                         "event,0,Chinese New Year,2020-01-25", doneStatusIcon,
                         incompleteStatusIcon,
                         "[E][" + incompleteStatusIcon + "] Birthday Party " + "(at: Jan 25 2020)"));
-        tasks.add(new Deadline("Finish project", "2020-04-20"));
+        tasks.add(new DeadlineStub("Finish project", "2020-04-20", false,
+                "deadline,0,Finish project,2020-04-20", doneStatusIcon, incompleteStatusIcon,
+                "[D][" + incompleteStatusIcon + "] Finish project (by: Apr 20 2020)"));
         return Stream.of(
                 Arguments.of(new TaskList(tasks))
         );

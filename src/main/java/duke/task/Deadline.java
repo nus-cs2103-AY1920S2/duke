@@ -77,7 +77,7 @@ public class Deadline implements Task {
      */
     @Override
     public String stringToSaveToDisk() {
-        // e.g. format: deadline,0,return book,June 6th
+        // e.g. format: deadline,0,return book,2020-06-03
         return String.format("deadline,%s,%s,%s", isDone ? 1 : 0, description,
                 deadline);
     }
