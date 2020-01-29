@@ -7,11 +7,16 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
     }
 
-    public void markDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
