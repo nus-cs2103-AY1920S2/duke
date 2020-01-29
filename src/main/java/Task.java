@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
 
     public String description;
@@ -35,7 +37,7 @@ public class Task {
         return "Weirdly, this is just a normal task.";
     }
 
-    public String getBy() {
-        return "This doesn't have a getBy date";
+    public LocalDate getBy() {
+        return LocalDate.parse("0000-00-00");
     }
 }

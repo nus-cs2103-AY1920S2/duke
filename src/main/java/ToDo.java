@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class ToDo extends Task {
 
     public String type;
@@ -8,10 +10,11 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String getBy() {
+    public LocalDate getBy() {
 
-        return "This doesn't have a by date";
+        return LocalDate.parse("0000-00-00");
     }
+
     @Override
     public String getType() {
         return type;
