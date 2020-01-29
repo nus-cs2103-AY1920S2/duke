@@ -1,4 +1,9 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class Store {
 
@@ -7,6 +12,8 @@ public class Store {
     private Integer counter;
     private ArrayList<Task> Storage;
     private DukeException DE;
+    private LocalDate LD;
+    private LocalTime LT;
 
     public Store(){
         this.counter = 1;
@@ -57,8 +64,20 @@ public class Store {
         counter = counter + 1;
     }
     public void deadline(String[] ActionTime){
+        String Timing;
         this.cmd = ActionTime[0];
-        Task T = new Deadline(cmd, ActionTime[1]);
+        String details = ActionTime[1].substring(3).strip();
+        String[] DateTime = details.split(" ");
+        this.LD = LocalDate.parse(DateTime[0]);
+        String Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if(DateTime.length == 2){
+            this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
+            String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            Timing = Date + " " + Time;
+        } else {
+            Timing = Date;
+        }
+        Task T = new Deadline(cmd, Timing);
         T.Output();
         System.out.println(String.format("Now you have %d tasks in the list.", counter));
         System.out.println(line);
@@ -66,8 +85,20 @@ public class Store {
         counter = counter + 1;
     }
     public void event(String[] ActionTime){
+        String Timing;
         this.cmd = ActionTime[0];
-        Task T = new Event(cmd, ActionTime[1]);
+        String details = ActionTime[1].substring(3).strip();
+        String[] DateTime = details.split(" ");
+        this.LD = LocalDate.parse(DateTime[0]);
+        String Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if(DateTime.length == 2){
+            this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
+            String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            Timing = Date + " " + Time;
+        } else {
+            Timing = Date;
+        }
+        Task T = new Event(cmd, Timing);
         T.Output();
         System.out.println(String.format("Now you have %d tasks in the list.", counter));
         System.out.println(line);
