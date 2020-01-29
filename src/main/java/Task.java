@@ -18,4 +18,8 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
 }
