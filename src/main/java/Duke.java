@@ -11,7 +11,7 @@ public class Duke {
     private final Ui ui = new Ui();
 
     private void greet() {
-        String greeting = "Hello, I am Duke " + new String(Character.toChars(0x1F481)) +", your personal assistant.";
+        String greeting = "Hello, I am Duke " + new String(Character.toChars(0x1F481)) + ", your personal assistant.";
         ui.output(greeting);
     }
 
@@ -55,7 +55,8 @@ public class Duke {
                 } else if (command == Command.ADD_DEADLINE) {
                     Deadline deadline = new Deadline(parser.getDescription(), parser.getIsDone(), parser.getDate());
                     this.taskList.addTask(deadline);
-                    this.ui.output("Added: " + deadline.getFullDescription() + "\n    " + this.taskList.printNumTasks());
+                    this.ui.output(
+                            "Added: " + deadline.getFullDescription() + "\n    " + this.taskList.printNumTasks());
                     this.storage.writeToDisk("D|0|" + parser.getDescription() + "|" + parser.getDate().toString());
                 } else if (command == Command.ADD_EVENT) {
                     Event event = new Event(parser.getDescription(), parser.getIsDone(), parser.getDate());
@@ -64,7 +65,8 @@ public class Duke {
                     this.storage.writeToDisk("E|0|" + parser.getDescription() + "|" + parser.getDate().toString());
                 } else if (command == Command.MARK_TASK_AS_DONE) {
                     Task task = this.taskList.markAsDone(parser.getTaskIndex());
-                    this.ui.output("Marked as done: " + task.getFullDescription() + "\n    " + this.taskList.printNumTasks());
+                    this.ui.output(
+                            "Marked as done: " + task.getFullDescription() + "\n    " + this.taskList.printNumTasks());
                     this.storage.markAsDone(parser.getTaskIndex());
                 } else if (command == Command.DELETE_TASK) {
                     Task task = this.taskList.removeTask(parser.getTaskIndex());
