@@ -7,14 +7,18 @@ import java.util.List;
 public class TaskList implements Serializable {
     private List<Task> taskList;
 
+    /**
+     * Default constructor for TaskList.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> list) {
-        this.taskList = new ArrayList<>(list);
-    }
-
+    /**
+     * Copy constructor for TaskList.
+     *
+     * @param other The TaskList to copy from.
+     */
     public TaskList(TaskList other) {
         if (other == null) {
             this.taskList = new ArrayList<>();
@@ -23,34 +27,75 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Adds a new task to the TaskList.
+     *
+     * @param task The new task to be added.
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Removes a task from the TaskList.
+     *
+     * @param task A reference to the task to be removed.
+     */
     public void removeTask(Task task) {
         removeAtIndex(taskList.indexOf(task));
     }
 
+    /**
+     * Removes all tasks from the TaskList.
+     */
     public void removeAllTask() {
         taskList.clear();
     }
 
+    /**
+     * Removes a task from the TaskList by index.
+     *
+     * @param index The index of the task to be removed.
+     * @return A reference to the removed task.
+     */
     public Task removeAtIndex(int index) {
         return taskList.remove(index);
     }
 
+    /**
+     * Mark the task at a index as done.
+     *
+     * @param index The index of the task to be marked as done.
+     */
     public void markAsDone(int index) {
         taskList.get(index).setIsDone(true);
     }
 
+    /**
+     * Returns the task at a index.
+     *
+     * @param index The index of the task to be returned.
+     * @return The task at the given index.
+     */
     public Task get(int index) {
         return taskList.get(index);
     }
 
+    /**
+     * Returns the number of elements in the TaskList.
+     *
+     * @return The number of elements in the TaskList.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Checks if a given index is within the bounds of the taskList collection.
+     *
+     * @param index The index to be checked.
+     * @return true if the input index is valid; false otherwise.
+     */
     public boolean isIndexValid(int index) {
         return index >= 0 && index < taskList.size();
     }
