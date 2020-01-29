@@ -1,9 +1,16 @@
 package packagedirectory.test;
 
 public class ToDos extends Tasks {
-    private String logo = "[T]";
+    //private String logo = "[T]";
     public ToDos(Message msg) {
         super(msg);
+        super.logo = "[T]";
+    }
+
+    public ToDos(Message message, String status) {
+        super(message);
+        super.status = status;
+        super.logo = "[T]";
     }
 
     @Override

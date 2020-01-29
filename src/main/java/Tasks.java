@@ -5,10 +5,12 @@ public class Tasks {
     protected Message msg;
     protected String status;
     public static int count;
+    protected String logo;
 
     public Tasks(Message msg) {
         this.msg = msg;
         this.status = "[x]";
+        this.logo = "";
         count++;
     }
 

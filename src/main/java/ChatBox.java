@@ -1,16 +1,39 @@
 package packagedirectory.test;
 
 import packagedirectory.test.DukeException;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import java.util.Scanner;
 
 public class ChatBox {
     private Folder folder;
     private boolean toClose;
+    private String location;
 
-    public ChatBox() {
+    public ChatBox(String location) {
         this.folder = new Folder();
         this.toClose = true;
+        this.location = location;
+    }
+
+    public void load() throws FileNotFoundException {
+        File f = new File(location);
+        Scanner s = new Scanner(f);
+        while (s.hasNextLine()) {
+            String[] msg = s.nextLine().split("|");
+
+
+        }
+    }
+
+
+    public void save() throws IOException {
+        FileWriter fw = new FileWriter(location);
+        fw.write(folder.getText());
+        fw.close();
     }
 
     public void reply(Message input) {
@@ -28,10 +51,12 @@ public class ChatBox {
                 case "done":
                     int i = Integer.parseInt(msg[1]);
                     folder.finishTasks(i);
+                    save();
                     break;
                 case "delete":
                     int b = Integer.parseInt(msg[1]);
                     folder.deleteTasks(b);
+                    save();
                     break;
                 default:
                     Tasks tasks;
@@ -53,6 +78,7 @@ public class ChatBox {
                     }
                     folder.add(tasks);
                     tasks.added();
+                    save();
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -60,6 +86,9 @@ public class ChatBox {
             System.out.println(new DukeException(er));
         } catch (IllegalArgumentException e) {
             String er = "OOPS!!! Dont understand what you are saying...";
+            System.out.println(new DukeException(er));
+        } catch (IOException e) {
+            String er = "OOPS!!! No such directory to save the file...";
             System.out.println(new DukeException(er));
         }
     }

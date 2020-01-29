@@ -1,9 +1,16 @@
 package packagedirectory.test;
 
 public class Deadlines extends Tasks {
-    private String logo = "[D]";
+    //private String logo = "[D]";
     Deadlines(Message msg) {
         super(msg);
+        super.logo = "[D]";
+    }
+
+    public Deadlines(Message message, String status) {
+        super(message);
+        super.status = status;
+        super.logo = "[D]";
     }
 
     @Override

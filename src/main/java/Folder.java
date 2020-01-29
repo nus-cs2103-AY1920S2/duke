@@ -21,6 +21,16 @@ public class Folder {
         listTasks.remove(i-1).removed();
     }
 
+    public String getText() {
+        int i = 1;
+        String output = "";
+        for(Tasks x: listTasks) {
+            output = output + x.logo + "|" + x.status + "|" + x.msg.getMsg() + "\n";
+            i++;
+        }
+        return output;
+    }
+
     public void show() {
         int i = 1;
         String output = Message.lines + "Here are the tasks in your list:\n";
