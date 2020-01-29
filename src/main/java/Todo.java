@@ -5,10 +5,37 @@
 public class Todo extends Task {
     public static String TYPE = "T";
 
+    /**
+     * Constructor for a To-do task
+     *
+     * @param td String representing raw command with
+     *           instruction
+     * @throws InadequateArgumentsException
+     */
     public Todo(String td) throws InadequateArgumentsException {
         super(Todo.nonEmptyCheck(
             td.substring(Command.TODO.word.length()).stripLeading()),
          "");
+    }
+
+    /**
+     * Constructor for a To-do task
+     *
+     * @param rt The raw description of the To-do
+     * @param isRaw Redundant boolean to ensure different
+     *              type signature from public constructor
+     */
+    private Todo(String rt, boolean isRaw) {
+        super(rt, "");
+    }
+
+    /**
+     * Initialiser for a To-do Task
+     *
+     * @param rawText The raw description of the To-do task
+     */
+    public static Todo makeTodoRaw(String rawText) {
+        return new Todo(rawText, true);
     }
 
     @Override

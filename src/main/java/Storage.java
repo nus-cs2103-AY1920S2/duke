@@ -54,12 +54,7 @@ public class Storage {
                     currentTask = new Event(io.nextLine(), io.nextLine());
                     isCompleted = typeAndDone.charAt(Event.TYPE.length()) == 1;
                 } else if (typeAndDone.startsWith(Todo.TYPE)) {
-                    try {
-                        currentTask = new Todo(io.nextLine());
-                    } catch (InadequateArgumentsException e) {
-                        System.err.println("Error loading Todo: empty Todo task");
-                    }
-
+                    currentTask = Todo.makeTodoRaw(io.nextLine());
                     io.nextLine();
                     isCompleted = typeAndDone.charAt(Todo.TYPE.length()) == 1;
                 } else {
@@ -161,7 +156,8 @@ public class Storage {
             try {
                 saveLocation.createNewFile();
             } catch (IOException e) {
-                System.out.println("IOException1");
+                // error in creating new file
+                System.err.println("IOException1");
                 System.err.println(e.getMessage());
             }
         }
@@ -173,7 +169,8 @@ public class Storage {
             writer.write(toBeSaved);
             writer.close();
         } catch (IOException e) {
-            System.out.println("IOException2");
+            // error in writing to file
+            System.err.println("IOException2");
             System.err.println(e.getMessage());
         }
     }
