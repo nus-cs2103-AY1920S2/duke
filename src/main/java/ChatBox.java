@@ -23,10 +23,19 @@ public class ChatBox {
         File f = new File(location);
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
-            String[] msg = s.nextLine().split("|");
-
-
+            String[] msg = s.nextLine().split("=");
+            String key = msg[0];
+            String status = msg[1];
+            Message message = new Message(msg[2]);
+            if(key.equals("[T]")) {
+                folder.add(new ToDos(message, status));
+            } else if (key.equals("[E]")) {
+                folder.add(new Events(message, status));
+            } else if (key.equals("[D]")) {
+                folder.add(new Deadlines(message, status));
+            }
         }
+        s.close();
     }
 
 
@@ -94,14 +103,20 @@ public class ChatBox {
     }
 
     public void initialise() {
-        Message.welcome();
-        Scanner scan = new Scanner(System.in);
-        while(toClose && scan.hasNextLine()) {
-            Message input = new Message();
-            String msg = scan.nextLine();
-            input.add(msg);
-            reply(input);
+        try {
+            Message.welcome();
+            load();
+            Scanner scan = new Scanner(System.in);
+            while (toClose && scan.hasNextLine()) {
+                Message input = new Message();
+                String msg = scan.nextLine();
+                input.add(msg);
+                reply(input);
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
+            String er = "OOPS!! History is not loaded correctly, check the file location...";
+            System.out.println(new DukeException(er));
         }
-        scan.close();
     }
 }

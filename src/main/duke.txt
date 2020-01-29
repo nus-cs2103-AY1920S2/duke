@@ -1,1 +1,2 @@
-[T]|[x]|read book
+[T]=[o]=read book
+[D]=[x]=read book (by:  june)
