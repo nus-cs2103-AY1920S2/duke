@@ -1,0 +1,6 @@
+E | 0 | birthday | 12 feb
+D | 0 | project | sunday
+T | 0 | buy bread
+E | 0 | house cup | wednesday 2367
+T | 1 | eat dinner
+T | 1 | drink bbt

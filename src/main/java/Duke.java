@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -6,7 +7,10 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        File file = new File("/Users/jadetay/duke/data/tasks.txt");
+
         DukeManager manager = new DukeManager();
+        manager.loadTasks();
 
         while (sc.hasNext()) {
             try {
