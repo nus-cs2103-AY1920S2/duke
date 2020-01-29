@@ -11,7 +11,13 @@ public class Task {
         task = description;
     }
 
+    public Task(boolean isDone, String description) {
+        this.isDone = isDone;
+        task = description;
+    }
+
     public String getTask() {
+
         return task;
     }
 
@@ -26,5 +32,15 @@ public class Task {
         } else {
             return "[" + Task.CROSS + "] " + task;
         }
+    }
+
+    public String toSimplerString() {
+        String isDone;
+        if (this.isDone) {
+            isDone = "T";
+        } else {
+            isDone = "F";
+        }
+        return isDone + "//" + getTask();
     }
 }
