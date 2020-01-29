@@ -12,6 +12,8 @@ public class Duke {
     private Parser parser;
 
     public Duke(String filePath) {
+        // following code from module website
+
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
@@ -25,6 +27,8 @@ public class Duke {
     }
 
     public void run() {
+        // following code from module website
+        
         ui.greet();
 
         boolean isExit = false;

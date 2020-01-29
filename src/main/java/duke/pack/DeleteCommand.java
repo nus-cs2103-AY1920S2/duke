@@ -8,6 +8,10 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (taskNum > tasks.getSize()) {
+            throw new DukeException("    Oh no! That task does not exist!");
+        }
+
         Task task = tasks.deleteTask(taskNum);
         storage.save(tasks);
         ui.showDelete(task);

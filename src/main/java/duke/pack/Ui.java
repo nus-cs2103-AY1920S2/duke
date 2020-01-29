@@ -59,14 +59,11 @@ public class Ui {
         System.out.println("    You now have " + tasks.getSize() + " tasks in your list!");
     }
 
-
     /**
      * exits
      */
     public void exit() {
         System.out.println("    See you later! :)");
-
     }
-
 
 }
