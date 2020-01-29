@@ -192,10 +192,8 @@ public class TaskList {
      * Provides the date in a presentable, "Month (in English) Day Year" format.
      */
     private String getPresentableDate(String dateDetails) {
-        // format of date e.g., 2019-10-15
         String punctuation = String.valueOf(dateDetails.charAt(4)); // due to "/at " or "/by "
         String[] date = dateDetails.split(punctuation); // 0: Year, 1: Month, 2: Day
-        // 0: Year, 1: Month, 2: Day
         LocalDate ld = LocalDate.of(Integer.parseInt(date[0]),
                 Integer.parseInt(date[1]),
                 Integer.parseInt(date[2]));
