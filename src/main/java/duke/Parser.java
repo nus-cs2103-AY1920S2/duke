@@ -96,9 +96,6 @@ public class Parser {
                         System.out.print(a + ". " + taskFound.get(i));
                     }
 
-
-
-
                 } else{
                     ui.printErrorUnderstanding();
                 }
