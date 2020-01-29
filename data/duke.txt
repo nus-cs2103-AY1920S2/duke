@@ -1,6 +1,0 @@
-D , ✗ , return book , 2019-10-15
-E , ✓ , project meeting , 2019-08-06
-T , ✗ , say hi
-T , ✗ , say bye
-D , ✗ , send email , 2019-10-15
-E , ✓ , project , 2019-09-19
