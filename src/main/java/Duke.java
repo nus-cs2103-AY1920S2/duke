@@ -8,24 +8,31 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Loads the tasks from Path.
+     * @param filePath Path containing the text file to be read from.
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
             tasks = storage.load();
 
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("File loading error");
             tasks = new TaskList();
         }
     }
 
+    /**
+     * Starts the program.
+     */
     public void run() {
         tasks = ui.takeInput(tasks);
         try {
             storage.save(tasks);
 
-        } catch (IOException e ) {
+        } catch (IOException e) {
             System.out.println("File saving error");
         }
     }

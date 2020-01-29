@@ -48,6 +48,9 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Prints the tasks in the task list.
+     */
     public void printTaskList() {
         for (int i = 1; i <= size; i++) {
             String item = "     " + i + "." + tasks.get(i - 1);

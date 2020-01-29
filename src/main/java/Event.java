@@ -4,7 +4,14 @@ import java.time.format.DateTimeFormatter;
 /**
  * Creates an Event Task with date.
  */
-public class Event extends Task{
+
+public class Event extends Task {
+
+    /**
+     * Creates an Event Task with LocalDate.
+     * @param msg Details of the Event Task.
+     * @param date Date that the Event will be done at.
+     */
     public Event(String msg, LocalDate date) {
         super(msg);
         super.type = "E";

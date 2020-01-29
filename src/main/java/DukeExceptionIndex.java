@@ -1,8 +1,12 @@
 /**
  * Generates an error message for the situation where the given index for Remove or Done command is not suitable.
  */
-public class DEIndex extends DukeException {
-    public DEIndex(String task) {
+public class DukeExceptionIndex extends DukeException {
+    /**
+     * Generates the appropriate error message.
+     * @param task Task that the Exception was made at.
+     */
+    public DukeExceptionIndex(String task) {
         String msg;
         if (task.equals("delete")) {
             msg = "☹ OOPS!!! I'm sorry, but a suitable index is required to delete a task.";

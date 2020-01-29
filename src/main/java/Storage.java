@@ -33,17 +33,17 @@ public class Storage {
                 continue;
             }
             if (components[0].equals("T")) {
-                Task tTask = new ToDo(" " + components[2]);
-                tTask.setStatus(components[1]);
-                tasks.addTask(tTask);
+                Task t = new ToDo(" " + components[2]);
+                t.setStatus(components[1]);
+                tasks.addTask(t);
             } else if (components[0].equals("D")) {
-                Task dTask = new Deadline(" " + components[2], LocalDate.parse(components[3]));
-                dTask.setStatus(components[1]);
-                tasks.addTask(dTask);
+                Task t = new Deadline(" " + components[2], LocalDate.parse(components[3]));
+                t.setStatus(components[1]);
+                tasks.addTask(t);
             } else if (components[0].equals("E")) {
-                Task eTask = new Event(" " + components[2], LocalDate.parse(components[3]));
-                eTask.setStatus(components[1]);
-                tasks.addTask(eTask);
+                Task t = new Event(" " + components[2], LocalDate.parse(components[3]));
+                t.setStatus(components[1]);
+                tasks.addTask(t);
             } else {
                 System.err.print("Wrong File Structure");
             }

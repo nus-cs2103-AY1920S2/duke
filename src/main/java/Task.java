@@ -6,7 +6,12 @@ public class Task {
     protected String type;
     protected LocalDate time;
 
-    public Task (String msg) {
+    /**
+     * Creates a Task with the details of the task kept in msg.
+     * Status of the Task is instantiated to X.
+     * @param msg Details of the Task.
+     */
+    public Task(String msg) {
         this.msg = msg;
         this.type = "";
         status = "✗";
