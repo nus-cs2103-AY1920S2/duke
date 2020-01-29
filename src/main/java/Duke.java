@@ -1,6 +1,10 @@
-
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.io.File;
 
 /**
  * For level-1 Greet, Echo, Exit.
@@ -14,11 +18,20 @@ public class Duke {
      */
     public static void main(String[] args) {
 
+
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> mylist = new ArrayList<>();
+        String home = System.getProperty("user.home");
 
         System.out.println("Hello! I'm Duke\n"
                 + "     What can I do for you?");
+
+        Path path = Paths.get(home, "Desktop", "NUS Y2S2", "CS2103T", "project", "duke", "data", "duke.txt");
+        try {
+            readFile(path, mylist);
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
 
         while (true) {
             String response = sc.nextLine();
@@ -40,10 +53,96 @@ public class Duke {
 
         }
 
+        try {
+            writeToHardDisk(path, mylist);
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+
+    }
+
+    /**
+     * Read the text file stored in the filepath, and create a list that is already stored in the hard-drive
+     * @param filepath the file path of the txt file
+     * @param mylist arraylist to store the Tasks
+     * @throws IOException if no file is found
+     */
+    private static void readFile(Path filepath, ArrayList<Task> mylist) throws IOException {
+        File f = filepath.toFile();
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String tasks = s.nextLine();
+            createStartUpList(tasks, mylist);
+        }
+
+    }
+
+    /**
+     * Create list from start-up from hard-drive information
+     */
+    private static void createStartUpList(String tasks, ArrayList<Task> mylist) {
+
+        String[] tasksArr = tasks.split("\\|");
+        String taskType = tasksArr[0].trim();
+        String taskCompleted = tasksArr[1].trim();
+        String taskAction = tasksArr[2].trim() + " ";
+
+        if (taskType.equals("T")) {
+
+            Task newTask = new Todo(taskAction);
+            if (taskCompleted.equals("1")) {
+                newTask.completedTask();
+            }
+            mylist.add(newTask);
+
+        } else if (taskType.equals("D")) {
+
+            String deadline = tasksArr[3];
+            Task newTask = new Deadline(taskAction, "by" + deadline);
+
+            if (taskCompleted.equals("1")) {
+                newTask.completedTask();
+            }
+
+            mylist.add(newTask);
+
+        } else if (taskType.equals("E")) {
+
+            String eventTiming = tasksArr[3];
+            Task newTask = new Event(taskAction, "at"+ eventTiming);
+
+            if (taskCompleted.equals("1")) {
+                newTask.completedTask();
+            }
+
+            mylist.add(newTask);
+
+
+        }
+
+
+    }
+
+    /**
+     * Store the current items that is in the list back into the hard disk
+     * @param filepath filepath of the txt file
+     * @param mylist task arraylist that stores all the tasks
+     * @throws IOException
+     */
+    private static void writeToHardDisk (Path filepath, ArrayList<Task> mylist) throws IOException {
+        File f = filepath.toFile();
+        FileWriter writer = new FileWriter(f);
+
+        for (Task tasks : mylist) {
+            writer.write(tasks.saveToHardDiskFormat() + System.lineSeparator());
+        }
+        writer.close();
+
+
     }
 
 
-    public static String checkMessageType(String response) throws DukeException {
+    private static String checkMessageType(String response) throws DukeException {
         if (response.contains("bye")) {
             return "bye";
         }
@@ -77,7 +176,7 @@ public class Duke {
     }
 
 
-    public static void printAction(String messageType, ArrayList<Task> mylist, String response) throws DukeException {
+    private static void printAction(String messageType, ArrayList<Task> mylist, String response) throws DukeException {
         if (messageType.equals("list")) {
 
             printFormatting();
@@ -117,11 +216,11 @@ public class Duke {
 
     }
 
-    public static void printFormatting() {
+    private static void printFormatting() {
         System.out.println("     ____________________________________________________________");
     }
 
-    public static void createTodo(String response, ArrayList<Task> mylist) throws DukeException {
+    private static void createTodo(String response, ArrayList<Task> mylist) throws DukeException {
 
         String description = response.replace("todo", "").trim();
 
@@ -141,7 +240,7 @@ public class Duke {
         }
     }
 
-    public static void createDeadline(String response, ArrayList<Task> mylist) throws DukeException {
+    private static void createDeadline(String response, ArrayList<Task> mylist) throws DukeException {
 
         try {
 
@@ -166,7 +265,7 @@ public class Duke {
 
     }
 
-    public static void createEvent(String response, ArrayList<Task> mylist) throws DukeException {
+    private static void createEvent(String response, ArrayList<Task> mylist) throws DukeException {
 
         try {
 
@@ -191,7 +290,7 @@ public class Duke {
 
     }
 
-    public static void delete(String response, ArrayList<Task> mylist) throws DukeException {
+    private static void delete(String response, ArrayList<Task> mylist) throws DukeException {
 
         int numberToDelete = Integer.parseInt(response.replace("delete" , "").trim());
 

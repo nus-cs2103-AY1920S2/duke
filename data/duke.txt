@@ -1,0 +1,6 @@
+T | 1 | read book 
+D | 1 | return book  | June 6th
+E | 1 | project meeting  | Aug 6th 2-4pm
+T | 1 | join sports club 
+T | 1 | Study 
+E | 1 | dance Event  | 3-4pm city Hall

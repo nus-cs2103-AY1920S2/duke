@@ -6,6 +6,12 @@ public class Todo extends Task {
 
 
     @Override
+    public String saveToHardDiskFormat() {
+
+        return String.format("T | %d | %s", this.completedCode, this.getDescription());
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
