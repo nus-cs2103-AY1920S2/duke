@@ -11,18 +11,16 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public boolean addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
-        return true;
     }
 
-    public boolean setAsDone(int index) throws InvalidCommandException {
+    public void setAsDone(int index) throws InvalidCommandException {
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException("     ☹ OOPS!!! I cannot set a "
                     + "non-existent task to be done.");
         }
         tasks.get(index - 1).markDone();
-        return true;
     }
 
     public Task deleteTask(int index) throws InvalidCommandException {
@@ -36,6 +34,22 @@ public class TaskList {
 
     public Task getTask(int index) {
         return tasks.get(index - 1);
+    }
+
+    /**
+     * Finds the list of tasks that contains the search phrase.
+     *
+     * @param searchPhrase the desired search phrase to search the list.
+     * @return the string representation of the filtered list.
+     */
+    public String findTasksBySearchPhrase(String searchPhrase) {
+        String relevantTasksRepresentation = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(searchPhrase)) {
+                relevantTasksRepresentation += String.format("     %d. %s\n", (i + 1), tasks.get(i));
+            }
+        }
+        return relevantTasksRepresentation;
     }
 
     public List<Task> getList() {

@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.InvalidCommandException;
 
 public enum DukeCommand {
-    BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT;
+    BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND;
 
     public static DukeCommand getCommand (String command) throws InvalidCommandException {
         if (command.equals("bye")) {
@@ -20,6 +20,8 @@ public enum DukeCommand {
             return DukeCommand.DEADLINE;
         } else if (command.equals("event")) {
             return DukeCommand.EVENT;
+        } else if (command.equals("find")) {
+            return DukeCommand.FIND;
         } else {
             throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
