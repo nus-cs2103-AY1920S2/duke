@@ -120,6 +120,13 @@ class Duke {
                     } catch (NumberFormatException e) {
                         throw new DukeException(FORMAT_CORRECTION + "\"done a_positive_integer\"");
                     }
+                case "find":
+                    if (instructionByWord.length != 2) {
+                        throw new DukeException(FORMAT_CORRECTION
+                                + "\"find a_single_word_without_empty_space\"");
+                    }
+                    String keyword = instructionByWord[1];
+
                 case "":
                     throw new DukeException("Empty line input. "
                             + "Please specify an instruction followed by relevant description.\n"

@@ -17,7 +17,6 @@ public class Task {
     }
 
     public String getTask() {
-
         return task;
     }
 

@@ -10,7 +10,7 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public Event(boolean isDone, String description, String time) {
+    public Event(boolean isDone, String description, LocalDate time) {
         super(isDone, description);
         this.time = time;
     }
