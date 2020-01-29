@@ -31,4 +31,14 @@ public class TaskList {
         tasks.add(t);
         return t;
     }
+
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> out = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t.description.contains(keyword)) {
+                out.add(t);
+            }
+        }
+        return out;
+    }
 }
