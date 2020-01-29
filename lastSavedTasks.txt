@@ -2,3 +2,5 @@
 2. [V] [E] FoodFest (at: May 7 2019)
 3. [X] [E] Homework Completion (at: Jun 7 2019)
 4. [V] [D] Good Fun Times (by: Jun 7 2019)
+5. [X] [E] foodFiesta (at: May 5 2019)
+6. [V] [D] finishMy food (by: Jan 29 2019)
