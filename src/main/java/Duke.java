@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 class Duke {
     // a common error (invalid format) handling message prefix
-    static String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
+    static final String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
             + "The correct format should be ";
 
     public static void main(String[] args) {
