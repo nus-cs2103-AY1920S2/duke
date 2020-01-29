@@ -5,6 +5,9 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Loads and Stores the TaskList to Path.
+ */
 public class Storage {
 
     private Path path;
@@ -13,6 +16,11 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Loads the tasks from Path into TaskList.
+     * @return Updated TaskList.
+     * @throws IOException If Path is not accessible.
+     */
     public TaskList load() throws IOException {
         List<String> lines = Files.readAllLines(path);
         TaskList tasks = new TaskList();
@@ -43,12 +51,16 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current TaskList into Path.
+     * @param tasks Current TaskList.
+     * @throws IOException If Path is not accessible.
+     */
     public void save(TaskList tasks) throws IOException {
         String savedString = tasks.tasksToString();
         BufferedWriter writer = Files.newBufferedWriter(path);
         writer.write(savedString);
         writer.flush();
     }
-
 
 }

@@ -1,11 +1,23 @@
 import java.time.LocalDate;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
     private Commands com;
     private int indexOfTaskAffected = -1;
     private Task newTask;
 
+    /**
+     * Decodes user input and generates a Parser object that is easier to understand.
+     * com saves the type of Command that the user input.
+     * indexOfTaskAffected saves the index for commands that require indexes.
+     * newTask saves a Task for commands that create a new task.
+     * @param line String to be decoded.
+     * @param size Current number of tasks.
+     * @throws DukeException If there was an invalid user input.
+     */
     public Parser(String line, int size) throws DukeException {
         if (line.equals("bye")) {
             com = Commands.BYE;

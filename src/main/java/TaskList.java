@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Stores and maintains the list of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -8,6 +11,19 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<Task>();
         size = 0;
+    }
+
+    /**
+     * Formats the current tasks into a String to be saved into a txt file.
+     * @return A String of all the current tasks
+     */
+    public String tasksToString() {
+        String output = "";
+        for (int i = 0; i < size; i++) {
+            Task t = tasks.get(i);
+            output += t.writeToFile() + "\n";
+        }
+        return output;
     }
 
     public void addTask(Task t) {
@@ -30,15 +46,6 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return tasks;
-    }
-
-    public String tasksToString() {
-        String output = "";
-        for (int i = 0; i < size; i++) {
-            Task t = tasks.get(i);
-            output += t.writeToFile() + "\n";
-        }
-        return output;
     }
 
     public void printTaskList() {

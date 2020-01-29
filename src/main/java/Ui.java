@@ -1,8 +1,15 @@
-import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
 
+    /**
+     * Takes in user input and Prints responses to the system.
+     * @param tasks Current TaskList.
+     * @return Updated TaskList to Duke, to be saved.
+     */
     public TaskList takeInput(TaskList tasks) {
         System.out.println(UiDesign.GREET.getString());
 

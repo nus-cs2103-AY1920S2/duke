@@ -1,3 +1,6 @@
+/**
+ * Generates an error message for the situation where the given index for Remove or Done command is not suitable.
+ */
 public class DEIndex extends DukeException {
     public DEIndex(String task) {
         String msg;
