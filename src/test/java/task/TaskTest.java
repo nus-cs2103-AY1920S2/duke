@@ -1,9 +1,9 @@
 package task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
 
 import exception.DukeException;
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
@@ -15,7 +15,7 @@ public class TaskTest {
             assertEquals("[D][N] return book (by: 19 Dec 2019 16:00)", deadline.toString());
             Task event = Task.newTask("event project meeting /at 02/11/2020 2359");
             assertEquals("[E][N] project meeting (at: 02 Nov 2020 23:59)", event.toString());
-        } catch (DukeException err ) {
+        } catch (DukeException err) {
         }
     }
 
@@ -26,7 +26,7 @@ public class TaskTest {
             assertEquals(false, event.isDone());
             event.setDone();
             assertEquals(true, event.isDone());
-        }catch (DukeException err ) {
+        } catch (DukeException err) {
         }
     }
 }

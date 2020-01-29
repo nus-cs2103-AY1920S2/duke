@@ -1,11 +1,9 @@
 package parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
 
 import exception.DukeException;
-
-
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -15,16 +13,18 @@ public class ParserTest {
             assertEquals("deadline", deadlineType);
             String deadlineContent = Parser.getContent("return book /by 19-12-2019 4pm");
             assertEquals("return book", deadlineContent);
-            String deadlineDateTime = Parser.getDateTime("deadline return book /by 19-12-2019 4pm", "/by");
+            String deadlineDateTime =
+                    Parser.getDateTime("deadline return book /by 19-12-2019 4pm", "/by");
             assertEquals("19-12-2019 4pm", deadlineDateTime);
 
             String eventType = Parser.getType("event project meeting /at 02/11/2020 2359");
             assertEquals("event", eventType);
             String eventContent = Parser.getContent("project meeting /at 02/11/2020 2359");
             assertEquals("project meeting", eventContent);
-            String eventDateTime = Parser.getDateTime("event project meeting /at 02/11/2020 2359", "/at");
+            String eventDateTime =
+                    Parser.getDateTime("event project meeting /at 02/11/2020 2359", "/at");
             assertEquals("02/11/2020 2359", eventDateTime);
-        } catch (DukeException err ) {
+        } catch (DukeException err) {
         }
     }
 }
