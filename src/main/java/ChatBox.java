@@ -79,7 +79,7 @@ public class ChatBox {
                         String s1 = input.getMsg().split("event ")[1];
                         String s2 = s1.split("/at")[0];
                         String s3 = s1.split("/at")[1];
-                        tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
+                        tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
                     } else {
                         throw new IllegalArgumentException("wrong liao");
                     }
