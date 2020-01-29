@@ -8,13 +8,30 @@ import duke.task.Event;
 import duke.exception.InvalidCommandException;
 import java.io.IOException;
 
+/**
+ * Represents a EventCommand.
+ * Used to execute the event command.
+ */
 public class EventCommand extends Command {
+    /** String array for the command arguments. */
     private String[] args = null;
 
+    /**
+     * Constructs a new EventCommand.
+     *
+     * @param args arguments for the event command.
+     */
     public EventCommand(String[] args) {
         this.args = args;
     }
 
+    /**
+     * Executes the event command.
+     *
+     * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
+     * @param storage storage object for the retrieval/saving of tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

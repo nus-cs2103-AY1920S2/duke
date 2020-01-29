@@ -2,7 +2,18 @@ package duke.command;
 
 import duke.exception.InvalidCommandException;
 
+/**
+ * Represents a Parser.
+ * Used to to parse user input into commands.
+ */
 public class Parser {
+    /**
+     * Parse the user input into the respective command.
+     *
+     * @param input the command input.
+     * @return The respective command if given a valid command input.
+     * @throws InvalidCommandException If command input is invalid.
+     */
     public static Command parseCommand(String input) throws InvalidCommandException {
         String[] commandLine = input.split(" ", 2);
         DukeCommand command = DukeCommand.getCommand(commandLine[0]);

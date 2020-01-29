@@ -7,14 +7,31 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Storage.
+ * Handles the disk storage of the application.
+ */
 public class Storage {
+    /** The working directory of the application. */
     String workingDir = System.getProperty("user.dir");
+    /** The path of the save file. */
     Path savePath = Paths.get(workingDir, "data", "duke.txt");
 
+    /**
+     * Constructs a new Storage object.
+     *
+     * @param savePath the path where the save file will be.
+     */
     public Storage(Path savePath) {
         this.savePath = savePath;
     }
 
+    /**
+     * Saves the list of tasks to the save file.
+     *
+     * @param tasks the list of tasks to be saved.
+     * @throws IOException if there is issues accessing the file.
+     */
     public void saveTasks(List<Task> tasks) throws IOException {
         String saveString = "";
         for (Task task : tasks) {
@@ -23,6 +40,12 @@ public class Storage {
         Files.write(savePath, saveString.getBytes());
     }
 
+    /**
+     * Loads the list of task from the save file.
+     *
+     * @return list of task from save file.
+     * @throws IOException if there is issues accessing the file.
+     */
     public List<Task> loadTasks() throws IOException {
         List<Task> tasks = new ArrayList<>();
         Files.createDirectories(savePath.getParent());

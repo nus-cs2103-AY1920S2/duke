@@ -8,13 +8,30 @@ import duke.task.Deadline;
 import duke.exception.InvalidCommandException;
 import java.io.IOException;
 
+/**
+ * Represents a DeadlineCommand.
+ * Used to execute the deadline command.
+ */
 public class DeadlineCommand extends Command {
+    /** String array for the command arguments. */
     private String[] args = null;
 
+    /**
+     * Constructs a new DeadlineCommand.
+     *
+     * @param args arguments for the deadline command.
+     */
     public DeadlineCommand(String[] args) {
         this.args = args;
     }
 
+    /**
+     * Executes the deadline command.
+     *
+     * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
+     * @param storage storage object for the retrieval/saving of tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
