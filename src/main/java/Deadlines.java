@@ -1,9 +1,19 @@
 package packagedirectory.test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Deadlines extends Tasks {
     private String logo = "[D]";
+    private LocalDate date;
     Deadlines(Message msg) {
         super(msg);
+        String[] d = super.msg.getMsg().split("by: ");
+        String dates = d[1].substring(1,11);
+        date = LocalDate.parse(dates);
+        String newMsg = d[0] + "by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        super.msg = new Message(newMsg);
     }
 
     @Override
