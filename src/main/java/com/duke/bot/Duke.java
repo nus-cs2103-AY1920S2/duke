@@ -1,11 +1,8 @@
 package com.duke.bot;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,16 +14,19 @@ import java.util.stream.Stream;
 
 public class Duke {
     private final Scanner scanner;
-    private final Path savePath;
+    private final PersistentStorage persistentStorage;
     private List<Task> tasks;
 
     public Duke() {
         scanner = new Scanner(System.in);
-        savePath = Path.of(System.getProperty("user.dir"), "data.txt"); 
+        persistentStorage = new PersistentStorage(
+                Path.of(System.getProperty("user.dir"), "data.txt")
+        );
 
-        tasks = new ArrayList<>();
-        if (Files.exists(savePath)) {
-            loadTasks();
+        try {
+            tasks = persistentStorage.load();
+        } catch (IOException exception) {
+            tasks = new ArrayList<>();
         }
 
         print(List.of("Hello! I'm Duke", "What can I do for you?"));
@@ -95,7 +95,11 @@ public class Duke {
                         "Nice! I've marked this task as done:",
                         "  " + doneTask
                 ));
-                saveTasks();
+                try {
+                    persistentStorage.save(tasks);
+                } catch (IOException exception) {
+                    throw new DukeException("☹ OOPS!!! Failed to save tasks.");
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! Invalid done index.");
             }
@@ -117,7 +121,11 @@ public class Duke {
                         "  " + deleteTask,
                         String.format("Now you have %d tasks in the list", tasks.size())
                 ));
-                saveTasks();
+                try {
+                    persistentStorage.save(tasks);
+                } catch (IOException exception) {
+                    throw new DukeException("☹ OOPS!!! Failed to save tasks.");
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! Invalid delete index.");
             }
@@ -133,7 +141,11 @@ public class Duke {
             Todo newTodo = new Todo(todoMatcher.group(1));
             tasks.add(newTodo);
             reportNewTask(newTodo);
-            saveTasks();
+            try {
+                persistentStorage.save(tasks);
+            } catch (IOException exception) {
+                throw new DukeException("☹ OOPS!!! Failed to save tasks.");
+            }
         } else {
             throw new DukeException("☹ OOPS!!! Invalid todo.");
         }
@@ -147,7 +159,11 @@ public class Duke {
             Event newEvent = new Event(eventMatcher.group(1), dateAt);
             tasks.add(newEvent);
             reportNewTask(newEvent);
-            saveTasks();
+            try {
+                persistentStorage.save(tasks);
+            } catch (IOException exception) {
+                throw new DukeException("☹ OOPS!!! Failed to save tasks.");
+            }
         } else {
             throw new DukeException("☹ OOPS!!! Invalid event.");
         }
@@ -161,73 +177,13 @@ public class Duke {
             Deadline newDeadline = new Deadline(deadlineMatcher.group(1), dateBy);
             tasks.add(newDeadline);
             reportNewTask(newDeadline);
-            saveTasks();
+            try {
+                persistentStorage.save(tasks);
+            } catch (IOException exception) {
+                throw new DukeException("☹ OOPS!!! Failed to save tasks.");
+            }
         } else {
             throw new DukeException("☹ OOPS!!! Invalid deadline.");
-        }
-    }
-
-    private void saveTasks() {
-        try {
-            Files.write(
-                    savePath,
-                    tasks.stream().map(this::serializeTask).collect(Collectors.toList()),
-                    StandardCharsets.UTF_8
-            );
-        } catch (IOException exception) {
-            print(List.of("Failed to write to disk."));
-        }
-    }
-
-    private String serializeTask(Task task) {
-        if (task instanceof Todo) {
-            Todo todo = (Todo) task;
-            return String.format("T,%s,%b", todo.getTitle(), todo.isDone());
-        } else if (task instanceof Event) {
-            Event event = (Event) task;
-            return String.format(
-                    "E,%s,%b,%s",
-                    event.getTitle(),
-                    event.isDone(),
-                    event.getDateAt().format(DateTimeFormatter.ISO_DATE)
-            );
-        } else if (task instanceof Deadline) {
-            Deadline deadline = (Deadline) task;
-            return String.format(
-                    "D,%s,%b,%s",
-                    deadline.getTitle(),
-                    deadline.isDone(),
-                    deadline.getDateBy().format(DateTimeFormatter.ISO_DATE)
-            );
-        } else {
-            throw new RuntimeException("Unknown task type");
-        }
-    }
-
-    private void loadTasks() {
-        try {
-            List<String> serializedTasks = Files.readAllLines(savePath);
-            tasks = serializedTasks.stream()
-                    .map(this::deserializeTask)
-                    .collect(Collectors.toList());
-        } catch (IOException exception) {
-            print(List.of("Failed to read from disk"));
-        }
-    }
-
-    private Task deserializeTask(String serialized) {
-        String[] tokens = serialized.split(",");
-        boolean isDone = Boolean.parseBoolean(tokens[2]);
-        if (tokens[0].equals("T")) {
-            return new Todo(tokens[1], isDone);
-        } else if (tokens[0].equals("E")) {
-            LocalDate dateAt = LocalDate.parse(tokens[3]);
-            return new Event(tokens[1], isDone, dateAt);
-        } else if (tokens[0].equals("D")) {
-            LocalDate dateBy = LocalDate.parse(tokens[3]);
-            return new Deadline(tokens[1], isDone, dateBy);
-        } else {
-            throw new RuntimeException("Unknown serialized task type");
         }
     }
 
