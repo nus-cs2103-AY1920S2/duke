@@ -4,9 +4,11 @@ import exceptions.WrongUsageException;
 
 public class TaskManager{
     private List<Task> tasks;
+    private TaskStorageManager storageManager;
 
     public TaskManager(int maxTasks) {
-        this.tasks = new ArrayList<>(maxTasks);
+        this.storageManager = new TaskStorageManager();
+        this.tasks = this.storageManager.load();
     }
 
     public String addTodoTask(String args) throws WrongUsageException {
@@ -33,6 +35,7 @@ public class TaskManager{
             int index = Integer.parseInt(args);
             Task task = this.tasks.get(index - 1);
             task.setDone();
+            this.storageManager.save(this.tasks);
 
             return String.format(
                 "Nice! I've marked this task as done: \n%s", task
@@ -48,6 +51,7 @@ public class TaskManager{
         try {
             int index = Integer.parseInt(args);
             Task task = this.tasks.remove(index - 1);
+            this.storageManager.save(this.tasks);
 
             return String.format(
                 "Noted. I've removed this task: \n" +
@@ -65,6 +69,7 @@ public class TaskManager{
     // Helper Methods
     private String add(Task task) {
         this.tasks.add(task);
+        this.storageManager.save(this.tasks);
         return String.format(
             "Got it. I've added this task:\n" +
             "  %s\n" +

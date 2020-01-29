@@ -17,4 +17,7 @@ bin/
 .project
 
 *.class
-**/actual.txt
+*.txt
+
+!./tests/**/expected.txt
+!./tests/**/input.txt
