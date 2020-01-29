@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
@@ -25,6 +28,12 @@ public class Duke {
                     case ("deadline") :
                     case ("event") :
                         manager.runTask(input, temp, command);
+                        break;
+                    case ("search") :
+                        String dt = input.substring(7);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        LocalDate ld = LocalDate.parse(dt, formatter);
+                        manager.taskSearch(ld);
                         break;
                     case ("bye") :
                         manager.run(input, command);
