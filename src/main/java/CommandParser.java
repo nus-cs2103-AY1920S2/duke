@@ -30,6 +30,8 @@ public class CommandParser {
             return Instruction.STORE_EVENT;
         } else if (firstWord.equals(Command.TODO.word)) {
             return Instruction.STORE_TODO;
+        } else if (firstWord.equals(Command.SEARCH.word)) {
+            return Instruction.SEARCH_STORAGE;
         } else {
             throw new UnknownInstructionException(command);
         }

@@ -9,7 +9,8 @@ public enum Command {
     LIST("list"),
     DEADLINE("deadline"),
     EVENT("event"),
-    TODO("todo");
+    TODO("todo"),
+    SEARCH("search");
 
     public final String word;
 
