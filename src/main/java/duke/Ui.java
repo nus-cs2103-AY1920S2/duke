@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -128,6 +129,18 @@ public class Ui {
         showLine();
         echo(message);
         showLine();
+    }
+
+    /** Displays a loading error message in the console. */
+    public void showFind(TaskList tasks, List<Integer> taskIds) {
+        String title = "Here are the matching tasks in your list:\n";
+        StringBuilder foundTasks = new StringBuilder();
+
+        for (int i = 0; i < taskIds.size(); i++) {
+            int taskId = taskIds.get(i);
+            foundTasks.append(tasks.getFormattedTask(taskId)).append("\n");
+        }
+        echo(title + foundTasks.toString());
     }
 
     /**

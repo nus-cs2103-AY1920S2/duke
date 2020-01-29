@@ -88,12 +88,22 @@ public class TaskList {
         return new TaskList(newList);
     }
 
+    /**
+     * Returns a task in the list as a formatted text.
+     *
+     * @param taskId the id of the task in the list.
+     * @return a task in the list as a formatted text.
+     */
+    public String getFormattedTask(int taskId) {
+        return String.format("%2d.%s", taskId, taskList.get(taskId - 1));
+    }
+
     @Override
     public String toString() {
         StringBuilder tasks = new StringBuilder();
 
-        for (int i = 0; i < taskList.size(); i++) {
-            tasks.append(String.format("%2d.%s\n", i + 1, taskList.get(i)));
+        for (int i = 1; i <= taskList.size(); i++) {
+            tasks.append(getFormattedTask(i)).append("\n");
         }
 
         if (tasks.length() > 0) {
