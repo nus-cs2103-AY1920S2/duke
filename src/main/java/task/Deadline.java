@@ -15,6 +15,7 @@ public class Deadline extends TimeTask {
         super(Constant.DEADLINE.getType(), fromMemory);
     }
 
+    /** @return String */
     @Override
     public String toString() {
         return String.format(

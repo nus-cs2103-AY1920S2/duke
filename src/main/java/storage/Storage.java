@@ -22,6 +22,7 @@ public class Storage {
         this.file = new File(this.filePath.toString());
     }
 
+    /** @param tasks all existing tasks */
     public void update(ArrayList<Task> tasks) {
         FileWriter fr = null;
         try {
@@ -44,6 +45,7 @@ public class Storage {
         }
     }
 
+    /** @return ArrayList<Task> returns ArrayList of Task based on txt storage */
     public ArrayList<Task> getTasksFromStorage() {
         ArrayList<Task> tempTasks = new ArrayList<>();
         try {

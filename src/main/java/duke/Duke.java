@@ -22,6 +22,10 @@ public class Duke {
         bot.start();
     }
 
+    /**
+     * Keeps scanning for user input until bye command is input Also handles all DukeExceptions and
+     * outputs it
+     */
     public void start() {
         while (!UI.isExit()) {
             String input = UI.getInput();
@@ -36,6 +40,13 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main logic for handling user input , it dispatches actions based on the input and
+     * uses the Parser to handle more complex commands
+     *
+     * @param input trimmed user input
+     * @throws DukeException Exceptions arising from incorrect user input
+     */
     private void dispatch(String input) throws DukeException {
         switch (input) {
             case "list":

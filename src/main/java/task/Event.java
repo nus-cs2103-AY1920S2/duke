@@ -15,6 +15,7 @@ public class Event extends TimeTask {
         super(Constant.EVENT.getType(), fromMemory);
     }
 
+    /** @return String */
     @Override
     public String toString() {
         return String.format(
