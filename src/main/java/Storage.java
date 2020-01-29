@@ -7,6 +7,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * This class handles all disk related functions, including writing to and
+ * reading from disk.
+ */
 public class Storage {
     private final String fileDir = "./appData";
     private final String fileName = "duke.txt";
@@ -23,6 +27,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends the String {@code data} provided with a new line to the file
+     * {@code filePath}.
+     * 
+     * @param data String to be appended
+     */
     public void writeToDisk(String data) {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, true);
@@ -35,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Changes line {@code lineIdx} in file {@code filePath} from {@code 0} to
+     * {@code 1} to indicate that the task has been marked as done.
+     * 
+     * @param lineIdx the line number to change (zero-indexed)
+     */
     public void markAsDone(int lineIdx) {
         try {
             ArrayList<String> lines = this.readFromDisk();
@@ -56,6 +72,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Removes line {@code lineIdx} in file {@code filePath}.
+     * 
+     * @param lineIdx the line number to remove (zero-indexed)
+     */
     public void removeTask(int lineIdx) {
         try {
             ArrayList<String> lines = this.readFromDisk();
@@ -75,13 +96,23 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file {@code filePath} and returns an {@code ArrayList<String>} of
+     * each individual line read.
+     * 
+     * If the file does not exist yet, {@code createNewFile} will be called to
+     * create an empty file {@code filePath} to allow for subsequent writes to the
+     * file.
+     * 
+     * @return an {@code ArrayList<String>} of each individual line read
+     */
     public ArrayList<String> readFromDisk() {
-        ArrayList<String> lines = new ArrayList<>(); 
+        ArrayList<String> lines = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(this.filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
             bufferedReader.close();

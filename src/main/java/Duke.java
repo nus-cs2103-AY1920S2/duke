@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is the main point of entry for this project.
+ */
 public class Duke {
     private final Scanner sc = new Scanner(System.in);
     private final TaskList taskList = new TaskList();
