@@ -1,12 +1,20 @@
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static List<Task> list = new ArrayList<>();
     private static String horizontalLine = "__________________________________________";
+    private static Storage storage;
 
-    public static void main(String[] args) throws DukeException {
+    Duke(String filePath) throws FileNotFoundException {
+        storage = new Storage(filePath);
+    }
+
+    public static void main(String[] args) throws IOException, FileNotFoundException{
+        new Duke("data/duke.txt");
+        List<Task> list = storage.load();
         Scanner scan = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -22,6 +30,7 @@ public class Duke {
                 Task task = new Task(command);
 
                 if (command.equals("bye")) {
+                    storage.save(list);
                     System.out.println(horizontalLine
                             + "\n"
                             + "Bye-bye! See you again, my friend!"
@@ -38,15 +47,17 @@ public class Duke {
                 } else if (arrOfCommands[0].equals("done")) {
                     int num = Integer.parseInt(arrOfCommands[1]);
                     Task doneTask = list.get(num - 1);
+                    storage.save(list);
                     System.out.println(horizontalLine + "\n" + "Fantastic! This task is a done-deal!" + "\n");
                     doneTask.markAsDone();
                     System.out.println(doneTask + "\n" + horizontalLine);
 
                 } else if (command.startsWith("deadline")) {
-                    String commandWithoutEvent = command.substring(9);
-                    String[] commands = command.split("/by");
+                    String commandWithoutDeadline = command.substring(9);
+                    String[] commands = commandWithoutDeadline.split("/by");
                     Deadline deadline = new Deadline(commands[0], commands[1]);
                     list.add(deadline);
+                    storage.save(list);
                     System.out.println(horizontalLine + "\n" + "Alright, I've added this task:" + "\n");
                     System.out.println(deadline + "\n");
                     System.out.println("You currently have " + list.size() + " task(s) in the list.");
@@ -58,6 +69,7 @@ public class Duke {
                         if (commands.length >= 2) {
                             ToDo toDo = new ToDo(commands[1]);
                             list.add(toDo);
+                            storage.save(list);
                             System.out.println(horizontalLine + "\n" + "Alright, I've added this task:" + "\n");
                             System.out.println(toDo + "\n");
                             System.out.println("You currently have " + list.size() + " task(s) in the list.");
@@ -75,6 +87,7 @@ public class Duke {
                     String[] commands = commandWithoutEvent.split("/at");
                     Event event = new Event(commands[0], commands[1]);
                     list.add(event);
+                    storage.save(list);
                     System.out.println(horizontalLine + "\n" + "Alright, I've added this task:" + "\n");
                     System.out.println(event + "\n");
                     System.out.println("You currently have " + list.size() + " task(s) in the list.");
@@ -83,13 +96,14 @@ public class Duke {
                     String[] commands = command.split(" ");
                     Task toBeRemoved = list.get(Integer.parseInt(commands[1])-1);
                     list.remove(Integer.parseInt(commands[1])-1);
+                    storage.save(list);
                     System.out.println(horizontalLine + "\n" + "Alright, I've removed this task:" + "\n");
                     System.out.println(toBeRemoved + "\n");
                     System.out.println("You currently have " + list.size() + " task(s) in the list.");
                     System.out.println(horizontalLine);
                 } else { throw new DukeException("");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.err.println(horizontalLine);
                 System.err.println("That was not a valid input. Please try again.");
                 System.err.println(horizontalLine);
