@@ -1,6 +1,7 @@
 package duke;
 import java.io.File;
 import java.io.IOException;
+import java.time.DateTimeException;
 
 import duke.command.Command;
 
@@ -51,8 +52,10 @@ public class Duke {
                 ui.showError(e.getMessage());
             } catch (IOException io) {
                 ui.showSavingError();
-            } finally {
-
+            } catch (DateTimeException dt){
+                System.out.println("      Please enter date in this format: YYYY-MM-DD");
+            }
+            finally {
                 ui.showLine();
             }
         }

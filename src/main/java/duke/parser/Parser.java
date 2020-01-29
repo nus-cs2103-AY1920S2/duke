@@ -1,4 +1,5 @@
 package duke.parser;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import duke.command.AddCommand;
@@ -25,7 +26,7 @@ public class Parser {
      * @return The command to be executed.
      * @throws DukeException If the user enters an invalid command.
      */
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException, DateTimeException {
         String[] commandSplit = fullCommand.split(" ");
         String firstWord = commandSplit[0];
         switch(firstWord){
@@ -47,7 +48,8 @@ public class Parser {
             }
             String deadlineDecription = deadlineTask.split("/by ")[0];
             String deadlineDate = deadlineTask.split("/by ")[1];
-            return new AddCommand(new Deadline(deadlineDecription, LocalDate.parse(deadlineDate.substring(0, deadlineDate.length() - 1))));
+            return new AddCommand(new Deadline(deadlineDecription,
+                    LocalDate.parse(deadlineDate.substring(0, deadlineDate.length() - 1))));
         case "event":
             String eventTask = "";
             for(int i = 1; i < commandSplit.length; i++){
@@ -55,7 +57,8 @@ public class Parser {
             }
             String eventDescription = eventTask.split("/at ")[0];
             String eventDate = eventTask.split("/at ")[1];
-            return new AddCommand(new Event(eventDescription, LocalDate.parse(eventDate.substring(0, eventDate.length() - 1))));
+            return new AddCommand(new Event(eventDescription,
+                    LocalDate.parse(eventDate.substring(0, eventDate.length() - 1))));
         case "list":
             return new ListCommand();
         case "delete":
