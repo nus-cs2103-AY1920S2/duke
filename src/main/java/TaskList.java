@@ -27,6 +27,15 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    public Task completeTask(int index) throws DuchessException {
+        Task taskToComplete = this.getTask(index);
+        if (taskToComplete.isCompleted()) {
+            throw new DuchessException("You have already completed this task!");
+        }
+        taskToComplete.toggleIsCompleted();
+        return taskToComplete;
+    }
+
     ArrayList<Task> getTaskArray() {
         return this.tasks;
     }
