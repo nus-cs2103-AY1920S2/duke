@@ -1,25 +1,26 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke  {
-    private ArrayList<Task> taskStorage;
-    public static final String path = "/Users/weicheng/Dropbox/Duke.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    /*private ArrayList<Task> tasks;
+    public static final String path = "C:\\Users\\ASUS\\Dropbox\\Duke.txt";*/
 
-    private Duke(ArrayList<Task> newtaskStorage){
-        this.taskStorage = newtaskStorage;
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError(e);
+            tasks = new TaskList();
+        }
     }
-    public static Duke initiateBot() {
-        Archive archive = new Archive(Duke.path);
-        return new Duke(archive.loadFromFile());
-    }
-    public void initiateGreetings() {
-        System.out.println("Hello! I'm Duke\n" +
-                "     What can I do for you?");
-    }
-    public void initiateChat() {
+    public void run() {
         Scanner sc = new Scanner(System.in);
         String[] userInput = sc.nextLine().split(" ",2);
-        String action = userInput[0];
-        Archive archive = new Archive(Duke.path);
+        String action = userInput[0]; // change later
         while (!action.equals("bye")) {
             try {
                 ExceptionGenerator.checkInputLength(userInput);
@@ -27,15 +28,15 @@ public class Duke  {
                 switch (action) {
                     case "done":
                         int taskNo = Integer.parseInt(userInput[1]);
-                        this.taskStorage.get(taskNo - 1).markAsDone();
-                        System.out.println("Nice! I've marked this task as done:\n "
-                                + this.taskStorage.get(taskNo - 1).toString());
+                        this.tasks.getTask(taskNo - 1).markAsDone();
+                        ui.transmitMessage("Nice! I've marked this task as done:\n "
+                                + this.tasks.getTask(taskNo - 1).toString());
                         break;
                     case "delete":
                         taskNo = Integer.parseInt(userInput[1]) - 1;
-                        Task removedTask = this.taskStorage.get(taskNo);
-                        this.taskStorage.remove(taskNo);
-                        System.out.println("Noted. I've removed this task:\n"
+                        Task removedTask = this.tasks.getTask(taskNo);
+                        this.tasks.removeTask(taskNo);
+                        ui.transmitMessage("Noted. I've removed this task:\n"
                                 + removedTask.toString());
                         break;
                     case "list":
@@ -43,53 +44,41 @@ public class Duke  {
                         break;
                     case "todo":
                         String description = userInput[1];
-                        System.out.println("Got it. I've added this task:");
-                        this.taskStorage.add(new Task(description));
+                        ui.transmitMessage("Got it. I've added this task:");
+                        this.tasks.add(new Task(description));
                         break;
                     case "deadline":
                         String[] tokens = userInput[1].split(" /by ");
-                        System.out.println("Got it. I've added this task:");
-                        this.taskStorage.add(new Deadlines(tokens[0], tokens[1]));
+                        ui.transmitMessage("Got it. I've added this task:");
+                        this.tasks.add(new Deadlines(tokens[0], tokens[1]));
                         Deadlines d =  new Deadlines(tokens[0], tokens[1]);
-                        System.out.println((d.getDate()).toString());
+                        ui.transmitMessage((d.getDate()).toString());
                         break;
                     case "event":
                         tokens = userInput[1].split(" /at ");
-                        System.out.println("Got it. I've added this task:");
-                        this.taskStorage.add(new Events(tokens[0], tokens[1]));
+                        ui.transmitMessage("Got it. I've added this task:");
+                        this.tasks.add(new Events(tokens[0], tokens[1]));
 
                         break;
                 }
-                int numbOfTask = this.taskStorage.size();
+                int numbOfTask = this.tasks.taskStorage.size();
                 if(numbOfTask > 0 && !action.equals("list") && !action.equals("delete") && !action.equals("done")) {
-                    System.out.println(this.taskStorage.get(numbOfTask - 1).toString());
+                    ui.transmitMessage(this.tasks.getTask(numbOfTask - 1).toString());
                 }
-                    System.out.println("Now you have " + numbOfTask + " tasks in the list.");
+                    ui.transmitMessage("Now you have " + numbOfTask + " tasks in the list.");
             } catch (DukeException ex){
                 ex.printStackTrace();
             }
             userInput = sc.nextLine().split(" ", 2);
             action = userInput[0];
-            archive.saveToDisk(this.taskStorage);
+            storage.saveToDisk(this.tasks.taskStorage);
         }
-
-        System.out.println("Bye. Hope to see you again soon!");
-
+        ui.initiateFareWell();
     }
-        public static String arrayToString(String[] source){
-            StringBuilder sb = new StringBuilder();
-            for(int i = 1; i < source.length-1; i++){
-                sb.append(source[i]);
-                sb.append(" ");
-            }
-            sb.append(source[source.length - 1]);
-            return sb.toString();
-    }
-
     public void printText() {
         int counter = 1;
-        for(Task task : this.taskStorage){
-            System.out.println(counter + "." + task.toString());
+        for(Task task : this.tasks.taskStorage){
+            ui.transmitMessage(Integer.valueOf(counter).toString() + "." + task.toString());
             counter++;
         }
     }

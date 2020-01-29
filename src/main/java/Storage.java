@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 
-public class Archive {
+public class Storage {
     private String path;
 
-    public Archive(String archiveLocation) {
-        this.path = archiveLocation;
+    public Storage(String StorageLocation) {
+        this.path = StorageLocation;
     }
 
     public void saveToDisk(ArrayList<Task> taskStorage) {
@@ -42,7 +42,7 @@ public class Archive {
             e.printStackTrace();
         }
     }
-    public ArrayList<Task> loadFromFile()  {
+    public ArrayList<Task> load()  {
         ArrayList<Task> destination = new ArrayList<>();
 
         try{
@@ -64,7 +64,6 @@ public class Archive {
                 }
                 line = br.readLine();
             }
-            System.out.println("FINISH loading data");
             br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
