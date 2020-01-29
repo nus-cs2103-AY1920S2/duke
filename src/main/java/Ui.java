@@ -3,6 +3,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Ui {
+    /**
+     * Starts the user interface.
+     * @throws IOException Thrown when I/O error occurs
+     */
     public static void run() throws IOException {
         TaskList tasks = new TaskList();
 
@@ -52,6 +56,25 @@ public class Ui {
 
 
                 printHorizontalLine();
+                break;
+            case FIND:
+                try {
+                    String searchTerm = parse.getSearchTerm();
+                    printHorizontalLine();
+                    printIndented("Here are the matching tasks in your list:");
+                    int number = 1;
+                    for (int i = 0; i < tasks.size(); i++) {
+                        if (tasks.get(i).toString().contains(searchTerm)) {
+                            printIndented(String.format("%d.%s", number++, tasks.get(i)));
+                        }
+                    }
+                    printHorizontalLine();
+                } catch (IndexOutOfBoundsException e) {
+                    printHorizontalLine();
+                    printIndented("☹ OOPS!!! The search term of a "
+                            + parse.getCommandString() + " cannot be empty.");
+                    printHorizontalLine();
+                }
                 break;
             case TODO:
             case DEADLINE:
