@@ -41,6 +41,16 @@ public class TaskList {
         return this;
     }
 
+    public void search(String task) {
+        System.out.println(ui.searchTask());
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).toString().toLowerCase().contains(task.toLowerCase())) {
+                System.out.print(ui.space + items.get(i));
+            }
+        }
+        System.out.println(ui.line);
+    }
+
     @Override
     public String toString() {
         String temp = ui.space + " Here are the tasks in your list:\n";

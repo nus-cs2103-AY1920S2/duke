@@ -72,7 +72,9 @@ public class Parser {
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                 list.addItem(ddl);
                 storage.addTxt(ddl.now(), ui);
-            }  else {
+            }  else if (tmp[0].equals("find")) {
+                list.search(task);
+            } else {
                 ui.throwErr("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalInstructionException e) {

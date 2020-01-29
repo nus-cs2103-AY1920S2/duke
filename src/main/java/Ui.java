@@ -32,6 +32,9 @@ public class Ui {
     public String removeTask(TaskList list, int index, int count) {
         return (line + "\n" + space + "Noted. I've removed this task:\n" + space + list.items.get(index) + space + "Now you have " + count + " task");
     }
+    public String searchTask() {
+        return (line + "\n" + space + "Here are the matching tasks in your list:\n");
+    }
     public String addTask(TaskList list, int count) {
         return (line + "\n" + space + " Got it. I've added this task:\n" + space + list.items.get(list.items.size()-1)
                 + space + " Now you have " + count + " task");
