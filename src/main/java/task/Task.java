@@ -63,6 +63,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public Boolean isDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("%s[%s] %s", this.type, this.getStatusIcon(), description);
