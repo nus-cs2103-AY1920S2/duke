@@ -34,7 +34,6 @@ public class Duke {
                     case "done":
                         try {
                             markDone(tasks.get(Integer.valueOf(words[1]) - 1));
-                            updateData(tasks, path);
                         } catch (IndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The number of tasks you have is only " + tasks.size());
@@ -44,7 +43,6 @@ public class Duke {
                     case "delete":
                         try {
                             delete(tasks.get(Integer.valueOf(words[1]) - 1), tasks);
-                            updateData(tasks, path);
                         } catch (IndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The number of tasks you have is only " + tasks.size());
@@ -54,7 +52,6 @@ public class Duke {
                     case "todo":
                         try {
                             add(new Todo(input.substring(5)), tasks);
-                            updateData(tasks, path);
                         } catch (IndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOPS!!! The description of a todo cannot be empty.");
@@ -66,7 +63,6 @@ public class Duke {
                                 " /by ");
                         try {
                             add(new Deadline(ddlDetails[0], ddlDetails[1]), tasks);
-                            updateData(tasks, path);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The Deadline time is incorrect.");
@@ -78,7 +74,6 @@ public class Duke {
                                 " /at ");
                         try {
                             add(new Event(eventDetails[0], eventDetails[1]), tasks);
-                            updateData(tasks, path);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The event time is incorrect.");
@@ -90,6 +85,7 @@ public class Duke {
                         System.out.println("    OOPS!!! I'm sorry, but I don't know what that meas :-(");
                         printBreak();
                 }
+                updateData(tasks, path);
             }
             input = reader.nextLine();
         }
