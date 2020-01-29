@@ -1,5 +1,6 @@
 import exceptions.EmptyDescriptionException;
 import exceptions.EmptyTimeException;
+import exceptions.EmptySearchException;
 import exceptions.InvalidActionException;
 import exceptions.InvalidTaskNumberException;
 import tasks.*;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Makes sense of user inputs.
@@ -123,6 +125,15 @@ public class Parser {
                         ui.printFormattedOutput("Please input a date!");
                     }
                 break;
+            case "find":
+                fields = input.split(" ");
+                if(fields.length < 2) {
+                    throw new EmptySearchException();
+                }
+                String searchWord = fields[1];
+                ArrayList<Task> searchList = taskList.search(searchWord);
+                ui.printList(searchList);
+                break;
             default:
                 throw new InvalidActionException();
             }
@@ -137,6 +148,8 @@ public class Parser {
             ui.printFormattedOutput("You have entered an invalid time/date format.\n    " +
                     "Please follow the following format: 23:59 2020-12-31\n    " +
                     "You may input '-' to omit either the time or date");
+        } catch (EmptySearchException ex) {
+            ui.printFormattedOutput(ex.toString());
         }
     }
 }

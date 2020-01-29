@@ -117,6 +117,22 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    /**
+     * Searches the list for tasks with description containing the search word.
+     *
+     * @param searchWord Word to search for.
+     * @return List of tasks with description containing the word.
+     */
+    public ArrayList<Task> search(String searchWord) {
+        ArrayList<Task> searchList = new ArrayList<>();
+        for (Task t : this.list) {
+            if (t.getDescription().contains(searchWord)) {
+               searchList.add(t);
+            }
+        }
+        return searchList;
+    }
+
     @Override
     public String toString() {
         String s = "";

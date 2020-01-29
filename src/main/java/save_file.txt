@@ -1,2 +1,4 @@
 D | 1 | presentation | 12:00 2020-01-29
 E | 1 | meeting | - 2020-12-03
+T | 0 | read book
+T | 0 | return book
