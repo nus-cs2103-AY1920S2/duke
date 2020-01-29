@@ -5,6 +5,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Parser {
+
+    /***
+     * Process user input and call classes to handle them accordingly
+     */
     public void parse() {
         Scanner input = new Scanner(System.in);
         String word = input.nextLine();

@@ -9,7 +9,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
-    public void startReading() {
+
+    /***
+     * Start reading the data when first launch
+     */
+    protected void startReading() {
         try {
             printFileContents("data/duke.txt");
         } catch (FileNotFoundException e) {
@@ -17,6 +21,11 @@ public class Storage {
         }
     }
 
+    /***
+     * Read file data and process its content
+     * @param filePath
+     * @throws FileNotFoundException
+     */
     private static void printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -59,6 +68,9 @@ public class Storage {
         fw.close();
     }
 
+    /***
+     * Update the content of the list in to the txt file
+     */
     protected static void writeList() {
         String file2 = "data/duke.txt";
         String towrite = "";

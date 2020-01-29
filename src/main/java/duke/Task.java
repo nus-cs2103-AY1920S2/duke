@@ -1,16 +1,22 @@
 package duke;
 
 public class Task {
-    public String name;
-    public boolean done;
-    public static int count = 0;
+    protected String name;
+    protected boolean done;
 
+    /***
+     * Task constructor
+     * @param name
+     */
     public Task(String name) {
 
         this.name = name;
     }
 
-    public void setDone() {
+    /***
+     * Set a task as done
+     */
+    protected void setDone() {
         done = true;
     }
 

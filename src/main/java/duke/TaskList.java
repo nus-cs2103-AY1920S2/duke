@@ -1,7 +1,9 @@
 package duke;
 
 public class TaskList {
-
+    /***
+     * print the list of current tasks
+     */
     public static void printList() {
         if (Duke.commandList.size() > 0) {
             System.out.println("Here are the tasks in your list:");
@@ -14,11 +16,20 @@ public class TaskList {
         }
     }
 
+    /***
+     * Mark a task as done
+     * @param task
+     */
     public static void doneTask(Task task) {
         task.setDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task);
+        System.out.print(task);
     }
+
+    /***
+     * Remove a task from the current list
+     * @param task
+     */
 
     public static void deleteTask(Task task) {
         Duke.commandList.remove(task);
@@ -26,6 +37,11 @@ public class TaskList {
         System.out.print(task);
         System.out.println("Now you have "+ Duke.commandList.size() + " tasks in the list.");
     }
+
+    /***
+     * Add a task into the list
+     * @param task
+     */
 
     public static void addTask(Task task) {
         Duke.commandList.add(task);
