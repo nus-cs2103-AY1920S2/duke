@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
-    public void echo() {
+    public void echo(TaskList tasks, Storage storage) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello I am Duke.\n" + "What can I do for you?");
 
-        Lister lister = new Lister();
+        Lister lister = new Lister(tasks, storage);
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -16,6 +16,10 @@ public class Duke {
                 lister.record(command);
             }
         }
+    }
+
+    public void showLoadingError() {
+        System.out.println("The text file is empty...");
     }
 
 }

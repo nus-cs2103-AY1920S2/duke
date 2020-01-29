@@ -7,21 +7,21 @@ public class Deadline extends Task {
 
     protected String time;
     protected LocalDateTime ldt;
-    private TaskType type = TaskType.DEADLINE;
+    private static TaskType type = TaskType.DEADLINE;
 
     public Deadline(String description, String time) {
-        super(description);
+        super(description, time);
         this.time = time;
-        TimeParser tp = new TimeParser(by);
+        TimeParser tp = new TimeParser(time);
         ldt = tp.getTime();
-    
-    public TaskType getType() {
-        return type;
+    }
 
+    public TaskType getType () {
+        return type;
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return "[D]" + super.toString() + " (by: " + ldt.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
 
     }
