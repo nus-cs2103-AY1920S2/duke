@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'seedu.duke'
@@ -11,17 +12,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
+    //implementation 'org.junit.jupiter:junit-jupiter'
 }
 
 application {
@@ -32,4 +33,11 @@ application {
 
 run {
     standardInput = System.in
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1"
+    archiveClassifier = null
+    archiveAppendix = null
 }

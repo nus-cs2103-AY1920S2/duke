@@ -1,5 +1,4 @@
-Deadline|1|break |2020-04-11
-ToDo|1|breakkkkkkkkk
 Event|1|gglo |Sunday
 ToDo|1|breakkkkkkkk 
-ToDo|0|breakla
+Deadline|1|break |2020-04-11
+ToDo|0|deadline /by 2020-04-11

@@ -1,12 +1,34 @@
 import java.io.*;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Storage {
     ArrayList<Task> listOfTasks = new ArrayList<>();
+    String fileName = "data/data.txt";
+    String dataDirPath = "data/";
 
     public Storage(){
     }
+
+
+    public void checkDir() throws IOException { //check if data folder exists, if not create it
+        File dataDirectory = new File(Paths.get(dataDirPath).toUri());
+        //If data does not exists then create a folder for it
+        if (!dataDirectory.exists()) {
+            boolean success = dataDirectory.mkdir();
+            //If cannot create successfuly, need to inform user
+            if (!success) {
+                throw new IOException("Failed to create directory ");
+            }
+        }
+    }
+
+
+
+
+
+
 
     /**
      * helps with loading data when starting up program again. Data is stored in data.txt
@@ -33,8 +55,8 @@ public class Storage {
                         t.markAsDone();
                     }
                     listOfTasks.add(t);
-                } else if (temporary[0].contains("Deadline")) {
 
+                } else if (temporary[0].contains("Deadline")) {
                     Task t = new Deadline(temporary[2], LocalDate.parse(temporary[3]));
                     if (temporary[1].contains("1")) {
                         t.markAsDone();

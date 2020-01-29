@@ -10,6 +10,17 @@ public class Duke {
 
         ui.introduction();
         manager.loadExistingData();
+
+        /*
+        try {
+            Storage store = new Storage();
+            store.checkDir();
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+        */
+
+
         String textEntered = fr.nextLine();
 
         while(!ui.hasEnded){

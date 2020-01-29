@@ -52,7 +52,7 @@ public class Ui {
             try {
                 manager.addTask(textEntered);
             }catch (DukeException ex){
-                System.out.println(ex);
+                System.out.println(ex.getMessage());
             }
         }else if (textEntered.contains("delete")) {
             try {
