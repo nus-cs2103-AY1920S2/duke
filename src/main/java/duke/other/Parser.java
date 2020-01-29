@@ -1,3 +1,6 @@
+package duke.other;
+
+import duke.command.*;
 public class Parser {
     public Parser() {
     }

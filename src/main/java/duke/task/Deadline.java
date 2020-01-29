@@ -1,21 +1,23 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends TaskDate {
+public class Deadline extends TaskDate {
 
     protected LocalDate date;
+    public boolean isTime;
     protected LocalTime time;
-    protected boolean isTime;
-    protected boolean isDone;
+    public boolean isDone;
 
-    public Event(String description, LocalDate date, boolean isDone) {
+    public Deadline(String description, LocalDate date, boolean isDone) {
         super(description, isDone);
         this.date = date;
         isTime = false;
     }
 
-    public Event(String description, LocalDate date, LocalTime time, boolean isDone) {
+    public Deadline(String description, LocalDate date, LocalTime time, boolean isDone) {
         super(description, isDone);
         this.date = date;
         this.time = time;
@@ -30,14 +32,15 @@ public class Event extends TaskDate {
         return this.time;
     }
 
+
     @Override
     public String toString() {
         String formattedDate = (this.date).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         if (isTime) {
             String formattedTime = (this.time).format(DateTimeFormatter.ofPattern("h:mma"));
-            return "[E]" + super.toString() + " (at:" + formattedDate + " " + formattedTime + ")";
+            return "[D]" + super.toString() + " (by:" + formattedDate + " " + formattedTime + ")";
         } else {
-            return "[E]" + super.toString() + " (at:" + formattedDate + ")";
+            return "[D]" + super.toString() + " (by:" + formattedDate + ")";
         }
     }
 }

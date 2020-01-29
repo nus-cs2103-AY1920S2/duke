@@ -1,3 +1,7 @@
+
+import duke.task.*;
+import duke.command.*;
+import duke.other.*;
 import java.io.FileNotFoundException;
 
 public class Duke {

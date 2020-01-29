@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.other.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ public class TaskList {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/M/d");
     private static final DateValidator DATE_VALIDATOR = new DateValidator(DATE_FORMATTER);
 
-    protected ArrayList<Task> taskList;
+    public ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();

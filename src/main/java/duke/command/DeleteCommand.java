@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.other.*;
+import duke.task.TaskList;
+
 
 public class DeleteCommand extends Command{
     private String instruction;

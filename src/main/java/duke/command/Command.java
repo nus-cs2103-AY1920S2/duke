@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.*;
+import duke.other.*;
+
 public abstract class Command {
     public boolean isExit;
     public Command() {

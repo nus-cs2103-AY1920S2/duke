@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.*;
+import duke.other.*;
+
 public class ShowCommand extends Command{
     private String instruction;
     private String[] replyArr;

@@ -1,6 +1,11 @@
+package duke.task;
+
+import duke.*;
+
+
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
     public Task(String description, boolean isDone) {
         this.description = description;
