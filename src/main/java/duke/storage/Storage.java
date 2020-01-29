@@ -18,13 +18,10 @@ public interface Storage {
      */
     void save(List<Task> tasks) throws IOException, DukeException;
 
-<<<<<<< HEAD
     /**
      * Loads data from the previous session (if any).
      *
      * @return List of Tasks from previous session.
      */
-=======
->>>>>>> branch-A-CodingStandard
     List<Task> load() throws FileNotFoundException, DukeException;
 }

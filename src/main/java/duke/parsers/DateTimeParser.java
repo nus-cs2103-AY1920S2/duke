@@ -23,7 +23,6 @@ public class DateTimeParser {
         dtFormatters.add(DateTimeFormatter.ofPattern("dd MM yyyy[ HH][:][mm][:ss]"));
     }
 
-<<<<<<< HEAD
     /**
      * Returns a <code>LocalDateTime</code> parsed from user-entered string.
      * If no time is specified, it is automatically set to start of day.
@@ -32,8 +31,6 @@ public class DateTimeParser {
      * @throws DukeException If unable to parse string.
      * @return <code>LocalDateTime</code> parsed from user input.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public LocalDateTime parse(String str) throws DukeException {
         for (DateTimeFormatter dtf : dtFormatters) {
             try {
