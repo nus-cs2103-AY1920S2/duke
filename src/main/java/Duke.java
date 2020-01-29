@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Duke {
@@ -47,16 +48,16 @@ public class Duke {
                     + numOfTask + " task(s) in the list.");
 
         } else if (command.equals("deadline")) {
-            String[] arr = input.split("/by");
-            Task t = new DeadlineTask(arr[0].substring(9), arr[1]);
+            String[] arr = input.split(" /by ");
+            Task t = new DeadlineTask(arr[0].substring(9), LocalDate.parse(arr[1]));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
                     + numOfTask + " task(s) in the list.");
 
         } else if (command.equals("event")) {
-            String[] arr = input.split("/at");
-            Task t = new EventTask(arr[0].substring(6), arr[1]);
+            String[] arr = input.split(" /at ");
+            Task t = new EventTask(arr[0].substring(6), LocalDate.parse(arr[1]));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
