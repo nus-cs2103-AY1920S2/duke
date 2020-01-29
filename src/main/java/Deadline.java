@@ -8,6 +8,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String saveFile() {
+        if (this.status.equals("Done")) {
+            return  "D|1||" + this.description + "|||" + this.by;
+        } else {
+            return  "D|0||" + this.description + "|||" + this.by;
+        }
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.by + ")";
     }

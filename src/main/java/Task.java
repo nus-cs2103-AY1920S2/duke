@@ -16,6 +16,14 @@ public class Task {
         return this.status;
     }
 
+    public String saveFile() {
+        if (this.status == "Done") {
+            return  "1|" + this.description;
+        } else {
+            return  "0|" + this.description;
+        }
+    }
+
     @Override
     public String toString() {
         return "[" + this.status + "] " + this.description;
