@@ -1,56 +1,69 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        TasksList tasksList = new TasksList();
 
-        System.out.println("____________________________________________________________\n"
-                + "Hello! I'm Duke\nWhat can I do for you?\n"
-                + "____________________________________________________________");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
 
-        String userInput = sc.nextLine();
-        String[] inputs = userInput.split(" ", 2);
-
-        while (!userInput.equals("bye")) {
-            try {
-                switch(inputs[0]) {
-                    case "list":
-                        tasksList.list();
-                        break;
-                    case "todo":
-                        tasksList.addTodo(userInput);
-                        break;
-                    case "deadline":
-                        tasksList.addDeadline(userInput);
-                        break;
-                    case "event":
-                        tasksList.addEvent(userInput);
-                        break;
-                    case "done":
-                        tasksList.markDone(userInput);
-                        break;
-                    case "delete":
-                        tasksList.delete(userInput);
-                        break;
-                    default:
-                        throw new DukeUnknownInputException();
-                }
-            } catch (DukeMissingDescriptionException mE) {
-                System.out.println("____________________________________________________________");
-                System.out.println("OOPS!!! The description cannot be empty.");
-                System.out.println("____________________________________________________________");
-            } catch (DukeUnknownInputException uE) {
-                System.out.println("____________________________________________________________");
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :<");
-                System.out.println("____________________________________________________________");
-            }
-            userInput = sc.nextLine();
-            inputs = userInput.split(" ", 2);
+    public Duke(String filePath) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showError(e);
+            tasks = new TaskList();
         }
+    }
 
-        System.out.print("____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
-                + "____________________________________________________________");
+    public void run() {
+        ui.showHello();
+        while (true) {
+            String command = ui.readCommand();
+            if (command.equals("bye")) {
+                ui.showBye();
+                break;
+            }
+            String commandType = parser.getCommandType(command);
+            try {
+                switch (commandType) {
+                case "list":
+                    ui.showList(tasks);
+                    break;
+                case "todo":
+                    String description = parser.todoDescription();
+                    ui.showAdded(tasks.addTodo(description), tasks.getLength());
+                    break;
+                case "deadline":
+                    String[] descByWhen = parser.deadlineParams();
+                    ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
+                    break;
+                case "event":
+                    String[] descAtWhen = parser.eventParams();
+                    ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
+                    break;
+                case "done":
+                    int doneNum = parser.markDoneNum();
+                    ui.showMarkedDone(tasks.markDone(doneNum));
+                    break;
+                case "delete":
+                    int deleteNum = parser.markDoneNum();
+                    ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
+                    break;
+                default:
+                    throw new DukeUnknownInputException("Sorry but I do not recognise your command.");
+                }
+                storage.updateFile(tasks, tasks.getLength());
+            } catch (DukeException e) {
+                ui.showError(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("C:/Users/Min Suk/IdeaProjects/duke/data/tasks.txt").run();
     }
 }

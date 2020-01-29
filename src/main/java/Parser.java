@@ -23,9 +23,9 @@ public class Parser {
         }
     }
 
-    public String toDoDescription() {
+    public String todoDescription() {
         if (command.length() <= 5) {
-            throw new DukeMissingDescriptionException("To Do description missing.");
+            throw new DukeMissingDescriptionException("Todo description missing.");
         }
         return command.substring(5);
     }
