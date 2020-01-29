@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,7 +11,7 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
-    public static void main(String[] args) throws IOException, FileNotFoundException{
+    public static void main(String[] args) throws DukeException, IOException, FileNotFoundException{
         new Duke("data/duke.txt");
         List<Task> list = storage.load();
         Scanner scan = new Scanner(System.in);
