@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -12,6 +13,11 @@ import duke.task.Task;
 public class Parser {
 
     public Command parse(String input) throws DukeException {
+        if (input.equals("")) {
+            // Assume is rogue enter input
+            return null;
+        }
+
         String[] inputs = input.split(" ", 2);
         String command = inputs[0];
         String args = inputs.length > 1 ? inputs[1] : "";
@@ -43,6 +49,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "find":
+            return new FindCommand(args);
         case "todo":
             return new AddCommand(Task.TaskType.TASK_TYPE_TODO, args);
         case "deadline":

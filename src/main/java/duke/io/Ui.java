@@ -37,6 +37,10 @@ public class Ui {
         System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
+    public void printHorizontalBar() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
     public void stylizedPrint(String... lines) {
         stylizedPrint(1, lines);
     }
