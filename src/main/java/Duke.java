@@ -5,16 +5,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.File;
-import java.io.PrintWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Duke {
 
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
+
         ArrayList<Task> lst = new ArrayList<>();
         int pendingTask = 0;
+
         //load saved files
         String filePath = "data/duke.txt";
         FileReader in = new FileReader (filePath);
@@ -38,9 +41,9 @@ public class Duke {
                 case("E"):
                     int timeIndex = loadTask.indexOf("|||");
                     String loadedDescript = loadTask.substring(descriptIndex + 2, timeIndex);
-                    String loadedTime = loadTask.substring(timeIndex + 3);
                     if (type.equals("D")) {
-                        Deadline loadedD = new Deadline (loadedDescript, loadedTime);
+                        LocalDate loadedDDate = LocalDate.parse(loadTask.substring(timeIndex + 3));
+                        Deadline loadedD = new Deadline (loadedDescript, loadedDDate);
                         if (loadTask.substring (2,3).equals ("1")) {
                             loadedD.markAsDone();
                             pendingTask--;
@@ -48,7 +51,10 @@ public class Duke {
                         lst.add(loadedD);
                         pendingTask++;
                     } else {
-                        Event loadedE = new Event (loadedDescript, loadedTime);
+                        LocalDate loadedEDate = LocalDate.parse(loadTask.substring(timeIndex + 3, timeIndex + 13));
+                        LocalTime loadedStart = LocalTime.parse(loadTask.substring(timeIndex + 14, timeIndex + 19));
+                        LocalTime loadedEnd   = LocalTime.parse(loadTask.substring(timeIndex + 20));
+                        Event loadedE = new Event (loadedDescript, loadedEDate, loadedStart, loadedEnd);
                         if (loadTask.substring (2,3).equals ("1")) {
                             loadedE.markAsDone();
                             pendingTask--;
@@ -75,12 +81,13 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         String line = "__________________________";
-//        ArrayList <Task> lst = new ArrayList <>();
         System.out.println(line + "\nWhat can i do for you?\n" + line);
 
         while (true) {
             String input = sc.nextLine();
+
             if (input.equals("bye")) {
+                //End programme, save file in hard disk
                 for (int i = 0; i < lst.size(); i++) {
                     Task savedTask = lst.get(i);
                     bw.write(savedTask.saveFile() + "\n");
@@ -90,6 +97,7 @@ public class Duke {
                 System.out.println("Cya next time!");
                 break;
             } else if (input.equals("list")) {
+                //List out task
                 int num = lst.size();
                 for (int i = 0; i < num; i++) {
                     System.out.println((i + 1) + ". " + lst.get(i));
@@ -118,6 +126,7 @@ public class Duke {
                     System.out.println ("Sorry, I dont understand you request!");
                 }
             } else if (input.contains ("delete")) {
+                //Delete task
                 try {
                     int taskNum = Integer.parseInt(input.substring(7));
                     if (taskNum <= lst.size()) {
@@ -155,12 +164,12 @@ public class Duke {
                         System.out.println ("Huh? I do not understand this todo request:/");
                     }
                 } else if (input.contains ("deadline")) {
-                    //deadline request format: deadline<space><task></<when>"
+                    //deadline request format: deadline<space><task></<yyyy-mm-dd>"
                     try {
                         int taskIndex = input.indexOf("/");
                         int byIndex = taskIndex + 1;
-                        Deadline deadline = new Deadline(input.substring(9, taskIndex),
-                                input.substring(byIndex));
+                        LocalDate date = LocalDate.parse(input.substring(byIndex));
+                        Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
                         lst.add(deadline);
                         pendingTask++;
                         System.out.println("Got it. I've added the following task:\n" +
@@ -169,12 +178,15 @@ public class Duke {
                         System.out.println ("Huh? This deadline request does not make sense");
                     }
                 } else if (input.contains ("event")) {
-                    //event request format: event<space><task></><when>
+                    //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
                     try {
-                        int taskIndex = input.indexOf("/");
-                        int atIndex = taskIndex + 1;
-                        Event event = new Event(input.substring(6, taskIndex),
-                                input.substring(atIndex));
+                        int taskIndex   = input.indexOf("/");
+                        int atIndex     = taskIndex + 1;
+                        int timeIndex   = atIndex + 11;
+                        LocalDate date  = LocalDate.parse(input.substring(atIndex,timeIndex - 1));
+                        LocalTime start = LocalTime.parse(input.substring(timeIndex, timeIndex + 5));
+                        LocalTime end   = LocalTime.parse(input.substring(timeIndex + 6));
+                        Event event = new Event(input.substring(6, taskIndex), date, start, end);
                         lst.add(event);
                         pendingTask++;
                         System.out.println("Got it. I've added the following task:\n" +
