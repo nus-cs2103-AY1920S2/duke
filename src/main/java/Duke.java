@@ -1,8 +1,14 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     static ArrayList<Task> taskList = new ArrayList<>();
+    static String FILEPATH = "../../../data/duke.txt";
 
     // Simply adds a separator above and below an intended output.
     public static void replyUser(String output) {
@@ -18,7 +24,7 @@ public class Duke {
         if (type.equals("T")) {
             Todo todo = new Todo(input);
             taskList.add(todo);
-            replyUser("The following ToDo has been added:\n    " + todo.toString() + str + taskList.size());
+            replyUser("The following to-do has been added:\n    " + todo.toString() + str + taskList.size());
 
         } else if (type.equals("D")) {
             String[] arr = input.split("/", 2);
@@ -27,7 +33,7 @@ public class Duke {
                 String by = arr[1].split(" ", 2)[1];
                 Deadline deadline = new Deadline(description, by);
                 taskList.add(deadline);
-                replyUser("The following task has been added:\n    " + deadline.toString() + str + taskList.size());
+                replyUser("The following deadline has been added:\n    " + deadline.toString() + str + taskList.size());
             } else {
                 throw new DukeTaskException("\'/by\' field is missing.");
             }
@@ -39,11 +45,13 @@ public class Duke {
                 String at = arr[1].split(" ", 2)[1];
                 Event event = new Event(description, at);
                 taskList.add(event);
-                replyUser("The following task has been added:\n    " + event.toString() + str + taskList.size());
+                replyUser("The following event has been added:\n    " + event.toString() + str + taskList.size());
             } else {
                 throw new DukeTaskException("\'/at\' field is missing.");
             }
         }
+        // Overwrite stored file
+        writeTaskToMemory(FILEPATH);
     }
 
     // Prints the user's task list.
@@ -74,6 +82,8 @@ public class Duke {
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
+        // Overwrite stored file
+        writeTaskToMemory(FILEPATH);
     }
 
     // Delete the specified task from the list.
@@ -88,6 +98,62 @@ public class Duke {
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
+        // Overwrite stored file
+        writeTaskToMemory(FILEPATH);
+    }
+
+    // Read and get Tasks from file.
+    public static void getTaskFromMemory(String filepath) throws FileNotFoundException {
+        File f = new File(filepath);
+        Scanner fs = new Scanner(f);
+        while (fs.hasNextLine()) {
+            String currentLine = fs.nextLine();
+            String[] input = currentLine.split(" ", 2);
+            char command = input[0].charAt(1);
+            boolean isDone = input[0].substring(4, 7).equals("✓");
+
+            if (command == 'T') {
+                Task t = new Todo(input[1]);
+                if (isDone) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            } else if (command == 'D') {
+                int byStart = input[1].indexOf(" (by:");
+                String description = input[1].substring(0, byStart);
+                String by = input[1].substring(byStart + 6, input[1].length() - 1);
+                Task t = new Deadline(description, by);
+                if (isDone) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            } else if (command == 'E') {
+                int atStart = input[1].indexOf(" (at:");
+                String description = input[1].substring(0, atStart);
+                String at = input[1].substring(atStart + 6, input[1].length() - 1);
+                Task t = new Event(description, at);
+                if (isDone) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            }
+        }
+    }
+
+    // Write the current taskList to file.
+    public static void writeTaskToMemory(String filepath) {
+        try {
+            FileWriter fw = new FileWriter(filepath);
+            StringBuilder sb = new StringBuilder("");
+            for (int i = 0; i < taskList.size(); i++) {
+                Task current = taskList.get(i);
+                sb.append(current.toString() + "\n");
+            }
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -100,6 +166,12 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Booting up...\n" + logo);
         System.out.println("How can I serve you?\n");
+
+        try {
+            getTaskFromMemory(FILEPATH);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         while (true) {
             try {

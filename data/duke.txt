@@ -1,0 +1,3 @@
+[T][✓] this
+[D][✗] that (by: today)
+[E][✓] those (at: tomorrow)
