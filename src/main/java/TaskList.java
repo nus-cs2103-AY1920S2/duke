@@ -41,4 +41,23 @@ public class TaskList {
         }
         return lines;
     }
+
+    public ArrayList<String> findTasks(String description) {
+        ArrayList<String> lines = new ArrayList<>();
+        if (taskList.isEmpty()) {
+            lines.add("Sorry, you have no tasks.");
+        } else {
+            int index = 1;
+            for (Task task : this.taskList) {
+                if (task.getDescription().contains(description)) {
+                    lines.add((index) + ". " + task.getFullDescription());
+                    index++;
+                }
+            }
+            if (lines.isEmpty()) {
+                lines.add("Sorry, nothing found.");
+            }
+        }
+        return lines;
+    }
 }
