@@ -20,14 +20,18 @@ public class Storage {
         this.gson = new Gson();
     }
 
-    public void save(ArrayList<Task> tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(this.filePath);
-        Task[] taskArray = tasks.toArray(new Task[tasks.size()]);
-        fileWriter.write(gson.toJson(taskArray, Task[].class));
-        fileWriter.close();
+    public void save(TaskList tasks) throws DuchessException {
+        try {
+            FileWriter fileWriter = new FileWriter(this.filePath);
+            Task[] taskArray = tasks.getTaskArray().toArray(new Task[tasks.size()]);
+            fileWriter.write(gson.toJson(taskArray, Task[].class));
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DuchessException("Facing difficulties saving your tasks right now.");
+        }
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DuchessException {
         try {
             String fileContent = Files.readString(Path.of(this.filePath));
             JsonArray array = JsonParser.parseString(fileContent).getAsJsonArray();
@@ -49,7 +53,7 @@ public class Storage {
             }
             return result;
         } catch (IOException e) {
-            return new ArrayList<>();
+            throw new DuchessException("Failed to load file!");
         }
     }
 }
