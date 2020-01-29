@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class TasksList {
@@ -24,6 +27,7 @@ public class TasksList {
         System.out.println("____________________________________________________________");
         System.out.println("Nice! I've marked this task as done:\n" + tasks.get(index));
         System.out.println("____________________________________________________________");
+        saveTask();
     }
 
     public void addTodo(String todo) {
@@ -36,6 +40,7 @@ public class TasksList {
         System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
                 + "\nNow you have " + taskNum + " tasks in the list.");
         System.out.println("____________________________________________________________");
+        saveTask();
     }
 
     public void addDeadline(String deadline) {
@@ -52,6 +57,7 @@ public class TasksList {
         System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
                 + "\nNow you have " + taskNum + " tasks in the list.");
         System.out.println("____________________________________________________________");
+        saveTask();
     }
 
     public void addEvent(String event) {
@@ -68,6 +74,7 @@ public class TasksList {
         System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
                 + "\nNow you have " + taskNum + " tasks in the list.");
         System.out.println("____________________________________________________________");
+        saveTask();
     }
 
     public void list() {
@@ -95,5 +102,19 @@ public class TasksList {
                 +  "\nNow you have " + (tasks.size()-1) + " tasks in the list.");
         System.out.println("____________________________________________________________");
         tasks.remove(index);
+        saveTask();
+    }
+
+    public void saveTask() {
+        Path file = java.nio.file.Paths.get("/Users/Min Suk/IdeaProjects/duke/data/duke.txt");
+        ArrayList<String> tasksForFile = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksForFile.add(tasks.get(i) + "\n");
+        }
+        try {
+            Files.write(file, tasksForFile);
+        } catch (IOException e) {
+            System.out.println("duke.txt file doesn't exist, please create one in /duke/data");
+        }
     }
 }
