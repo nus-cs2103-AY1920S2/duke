@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,10 +12,12 @@ import java.util.Scanner;
 class Duchess {
     private ArrayList<Task> tasks;
     private Scanner scanner;
+    private Storage storage;
 
     Duchess() {
-        this.tasks = new ArrayList<>(100);
         this.scanner = new Scanner(System.in);
+        this.storage = new Storage("data/tasks.json");
+        this.tasks = this.storage.load();
     }
 
     private void awaitInput() {
@@ -32,12 +35,15 @@ class Duchess {
                                 "Your " + commands.get(0).trim() + " description cannot be empty!");
                     }
                     this.createTask(commands.get(0), commands.get(1));
+                    this.storage.save(this.tasks);
                     break;
                 case DONE:
                     this.completeTask(commands.get(1));
+                    this.storage.save(this.tasks);
                     break;
                 case DELETE:
                     this.deleteTask(commands.get(1));
+                    this.storage.save(this.tasks);
                     break;
                 case LIST:
                     this.printTasks();
@@ -53,6 +59,8 @@ class Duchess {
                 }
             } catch (DuchessException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Failed to save... hang on");
             }
         }
     }
@@ -131,13 +139,13 @@ class Duchess {
             String timeDetails = details.get(1).trim().toLowerCase();
             switch (timeDetails) {
             case "today":
-                deadline = LocalDate.now().atTime(17, 00);
+                deadline = LocalDate.now().atTime(17, 0);
                 break;
             case "tonight":
-                deadline = LocalDate.now().atTime(21, 00);
+                deadline = LocalDate.now().atTime(21, 0);
                 break;
             case "tomorrow":
-                deadline = LocalDate.now().plusDays(1).atTime(17, 00);
+                deadline = LocalDate.now().plusDays(1).atTime(17, 0);
                 break;
             case "monday":
                 // Fallthrough
@@ -154,7 +162,7 @@ class Duchess {
             case "sunday":
                 deadline = LocalDate.now()
                         .with(TemporalAdjusters.next(DayOfWeek.valueOf(timeDetails.toUpperCase())))
-                        .atTime(17, 00);
+                        .atTime(17, 0);
                 break;
             default:
                 try {
@@ -209,6 +217,9 @@ class Duchess {
             throw new DuchessException("You're referring to a task that does not exist!");
         } else {
             Task taskToComplete = this.tasks.get(indexAsInt - 1);
+            if (taskToComplete.isCompleted()) {
+                throw new DuchessException("You have already completed this task!");
+            }
             taskToComplete.toggleIsCompleted();
             System.out.println("\tOh? You actually completed something? Impressive...");
             System.out.println("\t\t" + taskToComplete);
