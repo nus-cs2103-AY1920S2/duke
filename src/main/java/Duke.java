@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +11,7 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
         String logo = "DUKE!\n";
         System.out.println("Hello from " + logo);
+        Task.loadTask();
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
         while (!in.equals("bye")){
