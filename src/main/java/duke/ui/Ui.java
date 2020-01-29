@@ -23,6 +23,7 @@ public class Ui {
     private static final String DONE_TASK = "Nice! I've marked this task as done: ";
     private static final String EXIT_TASK = "Bye!!! See you again :)";
     private static final String INVALID_TASK = "Invalid command format!";
+    private static final String FIND_TASK = "Here are the matching tasks in your list:";
     private Scanner scanner;
 
     public Ui() {
@@ -77,6 +78,10 @@ public class Ui {
 
     public void showAllTask(TaskList tasks) {
         showToUser(getAllTaskForView(tasks));
+    }
+
+    public void showFindTask(TaskList tasks) {
+        showToUser(FIND_TASK, getAllTaskForView(tasks));
     }
 
     private String getAllTaskForView(TaskList tasks) {

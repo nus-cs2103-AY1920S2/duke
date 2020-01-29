@@ -35,11 +35,23 @@ public class Parser {
         case "event":
             return prepareEvent(command);
 
+        case "find":
+            return prepareFind(command);
+
         case "bye":
             return prepareExit(command);
 
         default:
             return new InvalidCommand(UNKNOWN_ERROR);
+        }
+    }
+
+    private static Command prepareFind(String[] command) {
+        try {
+            String keyword = command[1];
+            return new FindCommand(keyword);
+        } catch (IndexOutOfBoundsException ex) {
+            return new InvalidCommand(INCOMPLETE_ERROR);
         }
     }
 
