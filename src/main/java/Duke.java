@@ -31,6 +31,7 @@ public class Duke {
                 print(e.getMessage());
             } catch (Exception e) {
                 print("Caught some other exception! Notify developer!");
+                print(e.getMessage());
             }
         }
 

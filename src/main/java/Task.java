@@ -1,3 +1,5 @@
+import exceptions.WrongDateTimeFormatException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,23 +18,29 @@ public class Task {
     }
     
     public static Task fromStorage(String data) {
-        String[] parsedArgs = data.split(",");
-        String type = parsedArgs[0];
+        try {
+            String[] parsedArgs = data.split(",");
+            String type = parsedArgs[0];
 
-        Task output;
-        if (type.equals("D")) {
-            output = new DeadlineTask(parsedArgs[1], parsedArgs[3]);
-        } else if (type.equals("E")) {
-            output = new EventTask(parsedArgs[1], parsedArgs[3]);
-        } else {
-            output = new Task(parsedArgs[1]);
+            Task output;
+            if (type.equals("D")) {
+                Date date = new Date(parsedArgs[3]);
+                output = new DeadlineTask(parsedArgs[1], date);
+            } else if (type.equals("E")) {
+                Date date = new Date(parsedArgs[3]);
+                output = new EventTask(parsedArgs[1], date);
+            } else {
+                output = new Task(parsedArgs[1]);
+            }
+
+            if (Boolean.parseBoolean(parsedArgs[2])) {
+                output.setDone();
+            }
+            
+            return output;
+        } catch (WrongDateTimeFormatException e) {
+            return null;
         }
-
-        if (Boolean.parseBoolean(parsedArgs[2])) {
-            output.setDone();
-        }
-
-        return output;
     }
     
     public String toStorage() {

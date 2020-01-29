@@ -7,7 +7,7 @@ public class Date {
     private LocalDateTime date;
     private String outputFormat = "MMM d yyyy hh:mma";
     
-    final String INPUT_FORMAT = "yyyy-MM-dd HHmm";
+    public static final String INPUT_FORMAT = "yyyy-MM-dd HHmm";
 
     public Date(String dateStr) throws WrongDateTimeFormatException {
         try {
@@ -24,7 +24,7 @@ public class Date {
     }
 
     public Date withFormat(String outputFormat) {
-        return new Date(this.date, this.outputFormat);
+        return new Date(this.date, outputFormat);
     }
 
     @Override

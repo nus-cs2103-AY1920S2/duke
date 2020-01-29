@@ -8,7 +8,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toStorage() {
-        return String.format("D,%s,%b,%s", this.description, this.isDone, this.deadline);
+        return String.format("D,%s,%b,%s", this.description, this.isDone, this.deadline.withFormat(Date.INPUT_FORMAT));
     }
 
     @Override
