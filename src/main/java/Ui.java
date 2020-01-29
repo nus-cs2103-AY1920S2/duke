@@ -4,10 +4,18 @@ public class Ui {
 
     private TaskList tasks;
 
+    /**
+     * Constructor for Ui class to run UI events
+      * @param tasks is the tasks that this current instance of Duke has
+     */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
 
+
+    /**
+     * Prints all the tasks in the current list
+     */
     public void printList() {
         if (!tasks.isEmpty()) {
             System.out.println("Here are the tasks in your list");
@@ -19,19 +27,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the basic intro message when user opens up program
+     */
     public void printIntro() {
         System.out.println("Hello I am from North Korea\n" + "What can I do for you?");
         System.out.println("____________________________________\n");
     }
 
+    /**
+     * Prints the basic goodbye message when user has no more input
+     */
     public void printGoodbye() {
         System.out.println("GOODBYE!! MUAHAHHAHAHAHHAAHAHHAHAHA");
     }
 
-    public void printUpdateMessage(Task task) {
-        System.out.println("Got it, I've added the following task:\n" + "  " + task + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.");
-    }
 
 
 

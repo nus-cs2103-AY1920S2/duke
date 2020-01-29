@@ -7,12 +7,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Duke {
 
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructor for Duke to start the initialise the necessary variables
+     */
     public Duke() {
         storage = new Storage();
 
@@ -30,6 +35,11 @@ public class Duke {
 
     }
 
+
+    /**
+     * Starts the whole program and get user input
+     * @throws IOException if I/O error happens
+     */
     public void run() throws IOException {
         ui.printIntro();
         Scanner sc = new Scanner(System.in);
@@ -45,24 +55,27 @@ public class Duke {
         }
 
 
-
-
         ui.printGoodbye();
 
     }
 
 
+    /**
+     * Main method for the class
+     * @param args no commmand line arguments are used explicitly
+     * @throws IOException is thrown when there is I/O error
+     */
     public static void main(String[] args) throws IOException {
-
         new Duke().run();
-
-
     }
 
 
 
 }
 
+/**
+ * Task class to store task information
+ */
 class Task {
     private String description;
     private boolean isDone;
@@ -86,6 +99,10 @@ class Task {
     }
 }
 
+
+/**
+ * Deadline class which is a Task but more specific
+ */
 class Deadline extends Task {
     private LocalDate by;
 
@@ -101,6 +118,9 @@ class Deadline extends Task {
     }
 }
 
+/**
+ * Todo class which is a Task but more specific
+ */
 class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -112,6 +132,9 @@ class Todo extends Task {
     }
 }
 
+/**
+ * Event class which is a Task but more specific
+ */
 class Event extends Task {
     private String at;
 
