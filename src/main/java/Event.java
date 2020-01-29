@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Creates an Event Task with date.
+ */
 public class Event extends Task{
     public Event(String msg, LocalDate date) {
         super(msg);

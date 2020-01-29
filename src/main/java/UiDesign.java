@@ -1,3 +1,6 @@
+/**
+ * Consists of designs that will be used to respond to user input.
+ */
 public enum UiDesign {
     BORDER("    ____________________________________________________________\n"),
     LOGO("      ____        _        \n"

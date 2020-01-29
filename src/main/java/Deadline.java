@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Creates a Deadline Task with date.
+ */
 public class Deadline extends Task {
     public Deadline(String msg, LocalDate date) {
         super(msg);
