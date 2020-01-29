@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
                     List.of(
                             "Noted. I've removed this task:",
                             "  " + deleteTask,
-                            String.format("Now you have %d tasks in the list", tasks.size())
+                            String.format("Now you have %d tasks in the list", newTasks.size())
                     ),
                     true
             );

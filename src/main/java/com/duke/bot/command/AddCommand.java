@@ -20,7 +20,7 @@ public class AddCommand extends Command {
                 List.of(
                         "Got it. I've added this task:",
                         "  " + addTask,
-                        String.format("Now you have %d tasks in the list.", tasks.size())
+                        String.format("Now you have %d tasks in the list.", newTasks.size())
                 ),
                 true
         );

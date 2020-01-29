@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
             List<Task> newTasks = new ArrayList<>(tasks);
             newTasks.set(doneIndex, doneTask);
             return new ExecuteResult(
-                    tasks,
+                    newTasks,
                     List.of(
                             "Nice! I've marked this task as done:",
                             "  " + doneTask
