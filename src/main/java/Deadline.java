@@ -31,8 +31,18 @@ public class Deadline extends Task{
     }
 
     public static Deadline createDeadline(String desc, String by) {
-        Deadline task = new Deadline(desc, by);
-        return task;
+        return new Deadline(desc, by);
+    }
+
+    @Override
+    public String saveToText() {
+        String output;
+        if(this.isDone) {
+            output = "D - 1 - " + this.getDescription() + " - " + this.by;
+        } else {
+            output = "D - 0 - " + this.getDescription() + " - " + this.by;
+        }
+        return output;
     }
 
     @Override

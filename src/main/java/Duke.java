@@ -1,8 +1,8 @@
+import java.io.*;
 import java.util.*;
-import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Task[] arr = new Task[100];
         String logo = " ____        _        \n"
@@ -12,6 +12,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("    Hello! I'm Duke\n" + "  What can I do for you?");
+        Task.loadSavedData(); //check if there is previous list avail and load if avail
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
@@ -49,8 +50,9 @@ public class Duke {
                     Task.taskDone(input);
                 } else if (command.equals("bye")) { //bye command
                     System.out.println("Bye. Hope to see you again soon!");
+                    Task.saveToFile();
                     break;
-                } else if(command.equals("delete")) {
+                } else if(command.equals("delete")) { //delete command
                     Task.deleteTask(inputs[1]);
                 } else {
                     throw new InvalidCommandException();

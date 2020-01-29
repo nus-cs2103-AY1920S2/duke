@@ -1,6 +1,16 @@
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.io.Serializable;
+import java.io.IOException;
+import java.io.File;
+import java.util.ArrayList;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.util.Scanner;
 
-public class Task {
+
+public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
     protected static int taskCounter = 0;
@@ -76,5 +86,63 @@ public class Task {
             System.out.println("Now you have " + taskCounter + " tasks in the list.");
         }
         taskArrList.remove(taskInt);
+    }
+
+    public static void saveToFile() throws FileNotFoundException {
+        StringBuilder sb = new StringBuilder();
+        for(Task t : taskArrList) {
+            sb.append(t.saveToText() + "\n");
+        }
+        try (PrintStream out = new PrintStream(new FileOutputStream("data/saved.txt"))) {
+            out.print(sb.toString());
+            System.out.println("Your tasks have been saved to the hard disk");
+        } catch (IOException e){
+            System.out.println(e);
+        }
+    }
+
+    public static void loadSavedData() throws IOException {
+        File tmpDir = new File("data/saved.txt");
+        String absolutePath;
+        if(tmpDir.exists()) {
+            absolutePath = tmpDir.getAbsolutePath();
+            System.out.println("Using previously saved list from: " + absolutePath);
+            Scanner sc = new Scanner(tmpDir);
+            while(sc.hasNext()) {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" - ");
+                String command = inputs[0];
+                String status = inputs[1];
+                if (command.equals("D")) {
+                    Task t = Deadline.createDeadline(inputs[2], inputs[3]);
+                    taskArrList.add(t);
+                    taskCounter++;
+                    if (status.equals("1")) {
+                        t.isDone = true;
+                    }
+                } else if (command.equals("E")) {
+                    Task t = Event.createEvent(inputs[2], inputs[3]);
+                    taskArrList.add(t);
+                    taskCounter++;
+                    if (status.equals("1")) {
+                        t.isDone = true;
+                    }
+                } else if (command.equals("T")) {
+                    Task t = Todo.createTodo(inputs[2]);
+                    taskArrList.add(t);
+                    taskCounter++;
+                    if (status.equals("1")) {
+                        t.isDone = true;
+                    }
+                }
+            }
+        } else {
+            System.out.println("Starting fresh list.");
+        }
+    }
+
+    public String saveToText() {
+        String output = "";
+        return output;
     }
 }

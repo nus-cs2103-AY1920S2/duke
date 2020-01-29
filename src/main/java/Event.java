@@ -33,8 +33,18 @@ public class Event extends Task{
     }
 
     public static Event createEvent(String desc, String date) {
-        Event task = new Event(desc, date);
-        return task;
+        return new Event(desc, date);
+    }
+
+    @Override
+    public String saveToText() {
+        String output;
+        if(this.isDone) {
+            output = "E - 1 -" + this.getDescription() + " - " + this.date;
+        } else {
+            output = "E - 0 - " + this.getDescription() + " - " + this.date;
+        }
+        return output;
     }
 
     @Override
