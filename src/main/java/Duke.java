@@ -1,7 +1,9 @@
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -36,13 +38,13 @@ public class Duke {
                         }
                         tasks.add(todo);
                     } else if (taskType.equals("D")) {
-                        Task deadline = new Deadline(task[2].trim(), task[3].trim());
+                        Task deadline = new Deadline(task[2].trim(), LocalDate.parse(task[3].trim(), DateTimeFormatter.ofPattern("MMM d yyyy")));
                         if (isDone) {
                             deadline.markAsDone();
                         }
                         tasks.add(deadline);
                     } else {
-                        Task event = new Event(task[2].trim(), task[3].trim());
+                        Task event = new Event(task[2].trim(), LocalDate.parse(task[3].trim(), DateTimeFormatter.ofPattern("MMM d yyyy")));
                         if (isDone) {
                             event.markAsDone();
                         }
@@ -110,15 +112,16 @@ public class Duke {
                         try {
                             String[] taskDetails = inputs[1].split("/by ");
                             try {
-                                Task deadline = new Deadline(taskDetails[0].trim(), taskDetails[1]);
+                                LocalDate date = LocalDate.parse(taskDetails[1]);
+                                Task deadline = new Deadline(taskDetails[0].trim(), date);
                                 tasks.add(deadline);
-                                data = "D | 0 | " + taskDetails[0].trim() + " | " + taskDetails[1] + "\n";
+                                data = "D | 0 | " + taskDetails[0].trim() + " | " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
                                 fw.write(data);
                                 fw.flush();
                                 System.out.println("Got it. I've added this task:\n    " +
                                         deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
-                            } catch (IndexOutOfBoundsException e) {
-                                throw new DukeException("☹ OOPS!!! Please provide a date using '/by '.");
+                            } catch (Exception e) {
+                                throw new DukeException("☹ OOPS!!! Please provide a date using '/by ' with the format yyyy-mm-dd.");
                             }
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -127,15 +130,16 @@ public class Duke {
                         try {
                             String[] taskDetails = inputs[1].split("/on ");
                             try {
-                                Task event = new Event(taskDetails[0].trim(), taskDetails[1]);
+                                LocalDate date = LocalDate.parse(taskDetails[1]);
+                                Task event = new Event(taskDetails[0].trim(), date);
                                 tasks.add(event);
-                                data = "E | 0 | " + taskDetails[0].trim() + " | " + taskDetails[1] + "\n";
+                                data = "E | 0 | " + taskDetails[0].trim() + " | " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
                                 fw.write(data);
                                 fw.flush();
                                 System.out.println("Got it. I've added this task:\n    " +
                                         event + "\nNow you have " + tasks.size() + " tasks in the list.");
-                            } catch (IndexOutOfBoundsException e) {
-                                throw new DukeException("☹ OOPS!!! Please provide a date using '/on '.");
+                            } catch (Exception e) {
+                                throw new DukeException("☹ OOPS!!! Please provide a date using '/on ' with the format yyyy-mm-dd..");
                             }
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
