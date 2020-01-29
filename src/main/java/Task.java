@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "[\u2713]" : "[\u2718]");
+        return (isDone ? "[O]" : "[X]");
     }
 
     public void markAsDone() {

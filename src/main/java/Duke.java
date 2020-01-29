@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     static ArrayList<Task> taskList = new ArrayList<>();
@@ -25,9 +27,14 @@ public class Duke {
             if (arr.length > 1) {
                 String description = arr[0];
                 String by = arr[1].split(" ", 2)[1];
-                Deadline deadline = new Deadline(description, by);
-                taskList.add(deadline);
-                replyUser("The following task has been added:\n    " + deadline.toString() + str + taskList.size());
+                if (isLocalDate(by)) {
+                    LocalDate deadlineDate = LocalDate.parse(by);
+                    Deadline deadline = new Deadline(description, deadlineDate);
+                    taskList.add(deadline);
+                    replyUser("The following task has been added:\n    " + deadline.toString() + str + taskList.size());
+                } else {
+                    throw new DukeTaskException("Invalid date format detected. Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
+                }
             } else {
                 throw new DukeTaskException("\'/by\' field is missing.");
             }
@@ -37,13 +44,27 @@ public class Duke {
             if (arr.length > 1) {
                 String description = arr[0];
                 String at = arr[1].split(" ", 2)[1];
-                Event event = new Event(description, at);
-                taskList.add(event);
-                replyUser("The following task has been added:\n    " + event.toString() + str + taskList.size());
+                if (isLocalDate(at)) {
+                    LocalDate eventDate = LocalDate.parse(at);
+                    Event event = new Event(description, eventDate);
+                    taskList.add(event);
+                    replyUser("The following task has been added:\n    " + event.toString() + str + taskList.size());
+                } else {
+                    throw new DukeTaskException("Invalid date format detected. Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
+                }
             } else {
                 throw new DukeTaskException("\'/at\' field is missing.");
             }
         }
+    }
+
+    public static boolean isLocalDate(String input) {
+        try {
+            LocalDate.parse(input);
+        } catch (DateTimeParseException err) {
+            return false;
+        }
+        return true;
     }
 
     // Prints the user's task list.
