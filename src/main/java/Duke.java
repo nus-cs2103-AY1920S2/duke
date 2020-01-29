@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class Duke {
 
     /**
-     * Main class.
+     * Main method.
      *
      * @param args unused.
      */

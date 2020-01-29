@@ -196,7 +196,7 @@ public class TaskList {
      * Marks a task as done and calls method to update file storage.
      *
      * @param task refers to the task to be marked as done.
-     * @return Task to be marked done.
+     * @return Task that is marked done.
      * @throws IOException as a result of exception in updateFile method.
      */
     public Task markDone(Task task) throws IOException {

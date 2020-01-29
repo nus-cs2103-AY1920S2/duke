@@ -148,7 +148,8 @@ public class Parser {
     }
 
     /**
-     * Parses date and time of the task.
+     * Parses date and time of the task. If task do not have date, a dummy date
+     * is used.
      *
      * @param dateTime the date and time of the task.
      * @return parsed date and time in form of LocalDateTime object.
