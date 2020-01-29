@@ -1,6 +1,12 @@
 package seedu.duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -48,7 +54,7 @@ public class Storage {
 
     protected void addDeadline(String desc, String doneStatus)
             throws InvalidTaskInputException, InvalidDateException {
-        String[] descs = desc.split(" /by |\\|") ;
+        String[] descs = desc.split(" /by |\\|");
         if (descs.length == 1) { // invalid Deadline input format
             throw new InvalidTaskInputException();
         }
@@ -94,6 +100,12 @@ public class Storage {
         tasks.add(event);
     }
 
+    /**
+     * Checks if an input date is written in a valid date format.
+     *
+     * @param inDate the input date
+     * @return true if the input date is written in a valid date format
+     */
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateFormat.setLenient(false);

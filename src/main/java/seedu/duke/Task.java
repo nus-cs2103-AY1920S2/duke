@@ -29,5 +29,6 @@ public abstract class Task {
     }
 
     public abstract String getType();
+
     public abstract LocalDate getTime();
 }

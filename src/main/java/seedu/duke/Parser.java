@@ -5,6 +5,17 @@ public class Parser {
 
     }
 
+    /**
+     * Deals with making sense of the user commands.
+     *
+     * @param command user's command input
+     * @param inputs user's full line input converted into String array
+     * @return the processed command
+     * @throws EmptyDescriptionException if the description of a task is empty
+     * @throws InvalidCommandException if the command input is not todo, deadline, event, list, delete, or done
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
+     */
     public String processCommand(String command, String[] inputs)
             throws EmptyDescriptionException, InvalidCommandException, InvalidTaskInputException,
             TaskIndexOutOfBoundsException {

@@ -3,7 +3,10 @@ package seedu.duke;
 import java.io.IOException;
 
 /**
- * Deals with interactions with the user
+ * Deals with interactions with the user.
+ *
+ * <p>Contains methods to greet, show file loading error, and handle user commands.
+ *
  */
 public class Ui {
     Parser parser;
@@ -26,8 +29,21 @@ public class Ui {
         System.out.println("Loading error. Try again!");
     }
 
+    /**
+     * Adds, changes, and deletes the content of the list according to the user's command input.
+     *
+     * @param inputs the user's line input converted into a String array
+     * @param taskList the taskList object that will be modified
+     * @throws EmptyDescriptionException if the description of a task is empty
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws InvalidCommandException if the command inputted is not todo, deadline, event, list, delete, or done
+     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
+     * @throws IOException if an input or output exception occurred
+     * @throws InvalidDateException if a date is input in a wrong format
+     */
     public void handleCommands(String[] inputs, TaskList taskList) throws EmptyDescriptionException,
-            InvalidTaskInputException, InvalidCommandException, TaskIndexOutOfBoundsException, IOException, InvalidDateException {
+            InvalidTaskInputException, InvalidCommandException, TaskIndexOutOfBoundsException,
+            IOException, InvalidDateException {
         String command = parser.processCommand(inputs[0].trim(), inputs);
         if (command.equals(TODO)) {
             String desc = inputs[1];

@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,7 +8,13 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
-    public Duke(String filePath) throws IOException, InvalidTaskInputException, InvalidDateException {
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath path of the file being opened
+     * @throws IOException if an input or output exception occurred
+     */
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -40,6 +46,17 @@ public class Duke {
         System.out.println("Stop procrastinating. See you!");
     }
 
+    /**
+     * Main method to run Duke.
+     *
+     * @param args args
+     * @throws IOException if an input or output exception occurred
+     * @throws InvalidTaskInputException if an invalid task command is input
+     * @throws InvalidDateException if a date is input in a wrong format
+     * @throws EmptyDescriptionException if the description of a task is empty
+     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
+     * @throws InvalidCommandException if the command input is not todo, deadline, event, list, delete, or done
+     */
     public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidDateException,
             EmptyDescriptionException, TaskIndexOutOfBoundsException, InvalidCommandException {
         Duke duke;

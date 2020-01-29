@@ -1,4 +1,4 @@
-D | N | return book | 2020-01-01
+D | Y | return book | 2020-01-01
 E | N | project meeting | 2020-02-16
 T | N | join sports club
 T | Y | play netball

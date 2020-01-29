@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Contains the task list
+ * Contains the task list and operations to add, delete, and change the list.
  */
 public class TaskList {
     static List<Task> tasks;
@@ -32,7 +32,7 @@ public class TaskList {
 
     protected void addDeadline(String desc, String doneStatus)
             throws InvalidTaskInputException, IOException, InvalidDateException {
-        String[] descs = desc.split(" /by |\\|") ;
+        String[] descs = desc.split(" /by |\\|");
         if (descs.length == 1) { // invalid Deadline input format
             throw new InvalidTaskInputException();
         }
@@ -84,6 +84,12 @@ public class TaskList {
         printNumTask();
     }
 
+    /**
+     * Checks if an input date is written in a valid date format.
+     *
+     * @param inDate the input date
+     * @return true if the input date is written in a valid date format
+     */
     public boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateFormat.setLenient(false);
@@ -95,6 +101,9 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Prints the list of tasks the user has.
+     */
     public void printList() {
         if (tasks.size() == 0) {
             System.out.println("You currently don't have any task. Start listing now!");
@@ -106,6 +115,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task as done by changing the done status from "N" to "Y".
+     * It also updates the done status in the hard disk storage list accordingly.
+     *
+     * @param index the index number of the task that is marked as done
+     * @throws IOException if an input or output exception occurred
+     */
     public void markTaskAsDone(int index) throws IOException {
         Task task = tasks.get(index - 1);
         task.markAsDone();
@@ -114,13 +130,19 @@ public class TaskList {
         System.out.println(task.toString());
     }
 
+    /**
+     * Deletes the task from the task list and the hard disk storage list accordingly.
+     *
+     * @param index the index number of the task that is being deleted
+     * @throws IOException if an input or output exception occurred
+     */
     public void deleteTask(int index) throws IOException {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
-        storage.deleteInStorage(index);
         printRemoveTask();
         System.out.println(task.toString());
         printNumTask();
+        storage.deleteInStorage(index);
     }
 
     private static void printRemoveTask() {
