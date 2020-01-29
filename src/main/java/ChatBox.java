@@ -23,10 +23,10 @@ public class ChatBox {
         File f = new File(location);
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
-            String[] msg = s.nextLine().split("=");
-            String key = msg[0];
-            String status = msg[1];
-            Message message = new Message(msg[2]);
+            String[] ms = s.nextLine().split("=");
+            String key = ms[0];
+            String status = ms[1];
+            Message message = new Message(ms[2]);
             if(key.equals("[T]")) {
                 folder.add(new ToDos(message, status));
             } else if (key.equals("[E]")) {
@@ -35,9 +35,7 @@ public class ChatBox {
                 folder.add(new Deadlines(message, status));
             }
         }
-        s.close();
     }
-
 
     public void save() throws IOException {
         FileWriter fw = new FileWriter(location);
@@ -81,7 +79,7 @@ public class ChatBox {
                         String s1 = input.getMsg().split("event ")[1];
                         String s2 = s1.split("/at")[0];
                         String s3 = s1.split("/at")[1];
-                        tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
+                        tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
                     } else {
                         throw new IllegalArgumentException("wrong liao");
                     }
