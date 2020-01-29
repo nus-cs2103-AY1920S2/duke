@@ -2,3 +2,5 @@ T | 0 | testing
 T | 1 | hello
 T | 1 | help
 E | 0 | shalf | 20/02/2020 1900
+D | 0 | new stuff | 20/03/2020 1900
+D | 0 | testing | 20/02/2020 1900

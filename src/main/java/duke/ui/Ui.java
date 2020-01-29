@@ -16,7 +16,7 @@ public class Ui {
     private static final String LINE_PREFIX = "  ";
     private static final String LS = System.lineSeparator();
     private static final String DIVIDER = "_________________________________________________________________________";
-    private static final String LOADING_ERROR = "☹ OOPS!!! There have some problem loading the existing duke.tasks.";
+    private static final String LOADING_ERROR = "OOPS!!! There have some problem loading the existing duke.tasks.";
     private static final String NUM_OF_TASKS = "Now you have %d tasks in the list.";
     private static final String ADD_TASK = "Got it. I've added this task: ";
     private static final String DELETE_TASK = "Noted. I've removed this task: ";

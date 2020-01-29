@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    private final static String UNKNOWN_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private final static String UNKNOWN_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private final static String EXTRA_ERROR = "The command contains extra information!";
     private final static String INCOMPLETE_ERROR = "The command is too short and incomplete!";
     private final static String NUMBER_ERROR = "Please give the number of task!";
