@@ -7,6 +7,9 @@ public class Duke {
     protected static Scanner scanner;
     protected static List<Task> tasks;
 
+    protected static final String OUTPUT_INDENTATION = "\t";
+    protected static final String OUTPUT_HORIZONTAL_LINE = "\t________________________________________________________";
+
     public static void main(String[] args) {
         printWelcomeMessage();
 
@@ -15,58 +18,61 @@ public class Duke {
 
         while (true) {
             try {
-                processInput(scanner);
+                processInputs(scanner);
             } catch (DukeException e) {
-                echo(e.getMessage());
+                System.err.println(e.getMessage());
             }
         }
     }
 
-    public static void printWelcomeMessage() {
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.printWithIndentation("Hello! I'm Duck");
-        ProgramOutputHandler.printWithIndentation("What can I do for you?");
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.nextLine();
+    protected static void printWelcomeMessage() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "Hello");
+        System.out.println(OUTPUT_INDENTATION + "What can I do for you?");
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
-    public static void printGoodbyeMessage() {
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.printWithIndentation("Bye. Hope to see you again soon!");
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.nextLine();
+    protected static void printGoodbyeMessage() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "Bye. Hope to never see you again!");
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
-    public static void echo(String input) {
-        echo(new String[]{input});
+    protected static void addNewTask(Task newTask) {
+        tasks.add(newTask);
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "New task added: ");
+        System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + newTask.toString());
+        System.out.println(OUTPUT_INDENTATION + String.format("You now have %d task(s) in the list.", tasks.size()));
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
-    public static void echo(String[] inputs) {
-        ProgramOutputHandler.printLineSeperator();
-        for (int i = 0; i < inputs.length; ++i) {
-            ProgramOutputHandler.printWithIndentation(inputs[i]);
+    protected static void removeTaskAtIndex(int index) {
+        Task task = tasks.remove(index);
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        System.out.println(OUTPUT_INDENTATION + "You have removed the following task: ");
+        System.out.println(OUTPUT_INDENTATION + OUTPUT_INDENTATION + task.toString());
+        System.out.println(String.format(OUTPUT_INDENTATION + "You now have %d task(s) in the list.", tasks.size()));
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+    }
+
+    protected static void printAllTasks() {
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
+        if (tasks.size() <= 0) {
+            System.out.println(OUTPUT_INDENTATION + "There are currently no tasks.");
         }
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.nextLine();
-
-    }
-
-    private static void listTasks() {
-        ProgramOutputHandler.printLineSeperator();
-
         for (int i = 0; i < tasks.size(); ++i) {
             Task t = tasks.get(i);
-            ProgramOutputHandler.printWithIndentation((i + 1) + "." + t);
+            System.out.println(OUTPUT_INDENTATION + (i + 1) + "." + t);
         }
-
-        ProgramOutputHandler.printLineSeperator();
-        ProgramOutputHandler.nextLine();
+        System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
-    public static void processInput(Scanner sc) throws DukeException {
+    protected static void processInputs(Scanner sc) throws DukeException {
         String[] inputs = sc.nextLine().split(" ", 2);
         String command = inputs[0];
         String args = inputs.length > 1 ? inputs[1] : "";
+        Task newTask = null;
 
         switch (command) {
         case "bye":
@@ -75,71 +81,57 @@ public class Duke {
             break;
 
         case "list":
-            listTasks();
+            printAllTasks();
             break;
 
         case "todo":
-            if (args.equals(""))
-                throw new DukeException("The description of a todo cannot be empty");
-
-            // Add new todo
-            Task newTodo = new Todo(args);
-            tasks.add(newTodo);
-            echo(new String[]{"New todo added:", "\t" + newTodo.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            DukeException.throwIfPredicateFails(!args.equals(""), "The description of a todo cannot be empty");
+            addNewTask(new Todo(args));
             break;
 
         case "deadline":
-            if (args.equals(""))
-                throw new DukeException("The description of a deadline cannot be empty");
-
-            // Add new deadline
             String[] splitByInputTime = args.split(" /by ");
-            Task newDeadline = new Deadline(splitByInputTime[0], splitByInputTime[1]);
-            tasks.add(newDeadline);
-            echo(new String[]{"New deadline added:", "\t" + newDeadline.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            DukeException.throwIfPredicateFails(!args.equals(""), "The description of a deadline cannot be empty");
+            DukeException.throwIfPredicateFails(splitByInputTime.length >= 2, "Input is missing a '/by' argument!");
+            addNewTask(new Deadline(splitByInputTime[0], splitByInputTime[1]));
             break;
 
         case "event":
-            if (args.equals(""))
-                throw new DukeException("The description of a deadline cannot be empty");
-
-            // Add new deadline
             String[] splitByEventTime = args.split(" /at ");
-            Task newEvent = new Event(splitByEventTime[0], splitByEventTime[1]);
-            tasks.add(newEvent);
-            echo(new String[]{"New event added:", "\t" + newEvent.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            DukeException.throwIfPredicateFails(!args.equals(""), "The description of a event cannot be empty");
+            DukeException.throwIfPredicateFails(splitByEventTime.length >= 2, "Input is missing a '/at' argument!");
+            addNewTask(new Event(splitByEventTime[0], splitByEventTime[1]));
             break;
 
         case "delete":
-            if (args.equals(""))
-                throw new DukeException("Missing task number for the command 'delete'.");
-
-            int index = Integer.parseInt(args) - 1;
-
-            if (index < 0 || index >= tasks.size()) {
-                throw new DukeException("The input task number is invalid.");
+            int deletionIndex;
+            try {
+                deletionIndex = Integer.parseInt(args) - 1;
+            } catch (NumberFormatException e) {
+                throw new DukeException("The input index is missing or is not a number!");
             }
-
-            Task task = tasks.remove(index);
-            echo(new String[]{"You have removed the following task:", "\t" + task.toString(), "You now have " + tasks.size() + " tasks in the list"});
+            DukeException.throwIfPredicateFails(deletionIndex < tasks.size(), "The input index is out of bounds!");
+            DukeException.throwIfPredicateFails(deletionIndex >= 0, "The input index is out of bounds!");
+            removeTaskAtIndex(deletionIndex);
             break;
 
         case "done":
-            if (args.equals(""))
-                throw new DukeException("Missing task number for the command 'done'.");
-
-            int deleteIndex = Integer.parseInt(args) - 1;
-
-            if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
-                throw new DukeException("The input task number is invalid.");
+            int targetIndex;
+            try {
+                targetIndex = Integer.parseInt(args) - 1;
+            } catch (NumberFormatException e) {
+                throw new DukeException("The input index is missing or is not a number!");
             }
 
-            tasks.get(deleteIndex).setIsDone(true);
-            listTasks();
+            DukeException.throwIfPredicateFails(targetIndex < tasks.size(), "The input task number is out of bounds!");
+            DukeException.throwIfPredicateFails(targetIndex >= 0, "The input task number is out of bounds!");
+            tasks.get(targetIndex).setIsDone(true);
+            printAllTasks();
             break;
 
         default:
-            throw new DukeException(command + " is not a recognized command. Please try again.");
+            throw new DukeException(command + " is not a recognized command." +
+                    "\nYou are advised to stop trying to break the system.");
         }
     }
 }
