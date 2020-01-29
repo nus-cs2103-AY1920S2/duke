@@ -15,10 +15,8 @@ public class DoneCommand extends Command {
 
         Task doneTask = taskList.getTask(this.numDone - 1);
         doneTask.completedTask();
-        printFormatting();
         System.out.println("      Nice! I've marked this task as done: ");
         System.out.println("        " + doneTask);
-        printFormatting();
 
     }
 

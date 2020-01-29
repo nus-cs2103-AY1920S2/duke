@@ -26,13 +26,14 @@ public class Ui {
 
     }
 
-    private void printFormatting() {
+    public void printFormatting() {
         System.out.println("     ____________________________________________________________");
     }
 
     public void showError(DukeException ex) {
 
         System.out.println(ex.getMessage());
+
 
     }
 

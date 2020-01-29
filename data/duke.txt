@@ -6,5 +6,4 @@ D | 1 | essay  | Dec 15 2020  04:00 PM
 D | 0 | Assignment  | Oct 11 2020  01:00 PM
 T | 0 | run 
 T | 0 | eat dinner 
-D | 0 | essay  | Feb 15 2020  06:00 PM
-E | 1 | hosting  | sembawang
+D | 1 | essay  | Feb 15 2020  06:00 PM

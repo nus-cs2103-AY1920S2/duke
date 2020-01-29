@@ -14,9 +14,6 @@ public abstract class Command {
 
     public abstract void execute(Storage tasksStorage, TaskList taskList, Ui ui) throws DukeException;
 
-    public void printFormatting() {
-        System.out.println("     ____________________________________________________________");
-    }
 
     public boolean isExit() {
         return isExit;

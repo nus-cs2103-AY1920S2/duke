@@ -28,9 +28,7 @@ public class AddCommand extends Command {
 
         } else {
 
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "    ____________________________________________________________\n");
+            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }
@@ -41,18 +39,15 @@ public class AddCommand extends Command {
         String description = response.replace("todo", "").trim();
 
         if (!description.equals("")) {
+
             Task newTask = new Todo(description);
             mylist.add(newTask);
-            printFormatting();
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
-            printFormatting();
+
         } else {
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                    "    ____________________________________________________________\n" +
-                    "\n");
+            throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
@@ -64,24 +59,17 @@ public class AddCommand extends Command {
             String description = response.split("/")[0].replace("deadline ", "");
             Task newTask = new Deadline(description, deadline);
             mylist.add(newTask);
-            printFormatting();
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
-            printFormatting();
 
         } catch (DateTimeException ex) {
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! Please format your date and time correctly.\n" +
-                    "    ____________________________________________________________\n" +
-                    "\n");
+
+            throw new DukeException("     ☹ OOPS!!! Please format your date and time correctly.");
 
         } catch (Exception ex) {
 
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! The description or deadline of a deadline cannot be empty.\n" +
-                    "    ____________________________________________________________\n" +
-                    "\n");
+            throw new DukeException("     ☹ OOPS!!! The description or deadline of a deadline cannot be empty.");
 
         }
 
@@ -95,18 +83,13 @@ public class AddCommand extends Command {
             String description = response.split("/")[0].replace("event ", "");
             Task newTask = new Event(description, eventTiming);
             mylist.add(newTask);
-            printFormatting();
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.printf("      Now you have %d tasks in the list.\n", mylist.size());
-            printFormatting();
 
         } catch (Exception ex) {
 
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! The description or event timing of a event cannot be empty.\n" +
-                    "    ____________________________________________________________\n" +
-                    "\n");
+            throw new DukeException("     ☹ OOPS!!! The description or event timing of a event cannot be empty.");
 
         }
 

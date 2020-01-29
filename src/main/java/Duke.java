@@ -21,11 +21,18 @@ public class Duke {
         while(!isExit) {
             try {
                 String fullCommand = ui.readLine();
+                ui.printFormatting();
                 Command c = parser.parse(fullCommand);
                 c.execute(taskStorage, tasks, ui);
                 isExit = c.isExit();
-            } catch( DukeException ex) {
+
+            } catch (DukeException ex) {
+
                 ui.showError(ex);
+
+            } finally {
+                ui.printFormatting();
+
             }
         }
 
