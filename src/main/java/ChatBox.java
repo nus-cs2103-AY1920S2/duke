@@ -29,7 +29,6 @@ public class ChatBox {
         }
     }
 
-
     public void save() throws IOException {
         FileWriter fw = new FileWriter(location);
         fw.write(folder.getText());
