@@ -58,4 +58,6 @@ public class Ui {
     public void displayBye() {
         System.out.println("Bye nerd. Hope to see you again soon!");
     }
+
+
 }

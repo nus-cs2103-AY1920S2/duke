@@ -53,6 +53,10 @@ public class Parser {
                     return new AddCommand(new Todo(split[1]));
                 }
 
+            case "find":
+                String keyword = split[1];
+                return new FindCommand(keyword);
+
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

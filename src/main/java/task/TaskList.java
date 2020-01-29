@@ -29,4 +29,14 @@ public class TaskList {
         tasks.remove(id);
     }
 
+    public TaskList find(String keyword) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.command.contains(keyword)) {
+                newList.add(t);
+            }
+        }
+        return new TaskList(newList);
+    }
+
 }
