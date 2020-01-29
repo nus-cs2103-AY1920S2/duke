@@ -1,16 +1,15 @@
-public class Event extends Task {
-    protected String at;
-    Event(String taskName, String at) {
-        super(taskName);
-        this.at = at;
-    }
+import java.time.LocalDate;
 
-    String getAt() {
-        return at.trim();
+public class Event extends Task {
+    protected LocalDate dateAt;
+
+    Event(String taskName, LocalDate dateAt) {
+        super(taskName);
+        this.dateAt = dateAt;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + getAt() + ")";
+        return "[E]" + super.toString() + "(at:" + dateAt.toString() + ")";
     }
 }
