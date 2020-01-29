@@ -6,7 +6,7 @@ public class Task {
     protected String type;
     protected LocalDate time;
 
-    public Task (String msg) {
+    public Task(String msg) {
         this.msg = msg;
         this.type = "";
         status = "✗";

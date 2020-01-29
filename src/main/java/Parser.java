@@ -17,11 +17,11 @@ public class Parser {
             String[] comArs = line.split("\\s", 2);
             if (comArs[0].equals("done")) {
                 if (comArs.length == 1) {
-                    throw new DEIndex("done");
+                    throw new DukeExceptionIndex("done");
                 }
                 int index = Integer.parseInt(comArs[1]) - 1;
                 if (index > size - 1) {
-                    throw new DEIndex("done");
+                    throw new DukeExceptionIndex("done");
                 }
 
                 com = Commands.DONE;
@@ -29,11 +29,11 @@ public class Parser {
 
             } else if (comArs[0].equals("delete")) {
                 if (comArs.length == 1) {
-                    throw new DEIndex("delete");
+                    throw new DukeExceptionIndex("delete");
                 }
                 int index = Integer.parseInt(comArs[1]) - 1;
                 if (index > size - 1) {
-                    throw new DEIndex("delete");
+                    throw new DukeExceptionIndex("delete");
                 }
 
                 com = Commands.DEL_TASK;
@@ -43,7 +43,7 @@ public class Parser {
                 if (comArs[0].equals("todo")) {
                     String details = line.substring(4, line.length());
                     if (details.isBlank()) {
-                        throw new DEDescription("todo");
+                        throw new DukeExceptionDescription("todo");
                     }
                     com = Commands.NEW_TASK;
                     newTask = new ToDo(details);
@@ -51,11 +51,11 @@ public class Parser {
                 } else if (comArs[0].equals("event")) {
                     String details = line.substring(5, line.length());
                     if (details.isBlank()) {
-                        throw new DEDescription("event");
+                        throw new DukeExceptionDescription("event");
                     }
                     String[] msgDate = details.split(" /at ", 2);
                     if (msgDate.length == 1) {
-                        throw new DEDate("event");
+                        throw new DukeExceptionDate("event");
                     }
 
                     LocalDate date = LocalDate.parse(msgDate[1]);
@@ -65,11 +65,11 @@ public class Parser {
                 } else if (comArs[0].equals("deadline")) {
                     String details = line.substring(8, line.length());
                     if (details.isBlank()) {
-                        throw new DEDescription("deadline");
+                        throw new DukeExceptionDescription("deadline");
                     }
                     String[] msgDate = details.split(" /by ", 2);
                     if (msgDate.length == 1) {
-                        throw new DEDate("deadline");
+                        throw new DukeExceptionDate("deadline");
                     }
 
                     LocalDate date = LocalDate.parse(msgDate[1]);
@@ -77,7 +77,7 @@ public class Parser {
                     newTask = new Deadline(msgDate[0], date);
 
                 } else {
-                    throw new DECommand();
+                    throw new DukeExceptionCommand();
                 }
             }
         }

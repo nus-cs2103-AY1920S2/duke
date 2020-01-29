@@ -14,7 +14,7 @@ public class Duke {
             storage = new Storage(filePath);
             tasks = storage.load();
 
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("File loading error");
             tasks = new TaskList();
         }
@@ -25,7 +25,7 @@ public class Duke {
         try {
             storage.save(tasks);
 
-        } catch (IOException e ) {
+        } catch (IOException e) {
             System.out.println("File saving error");
         }
     }
