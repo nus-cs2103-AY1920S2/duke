@@ -24,4 +24,8 @@ run {
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+    }
 }

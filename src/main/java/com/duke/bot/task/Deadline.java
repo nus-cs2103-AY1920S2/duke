@@ -33,4 +33,13 @@ public class Deadline extends Task {
                 dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+        Deadline other = (Deadline) obj;
+        return dateBy.equals(other.getDateBy()) && super.equals(obj);
+    }
 }

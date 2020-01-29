@@ -1,5 +1,6 @@
 package com.duke.bot;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -17,7 +18,7 @@ public class Duke {
         scanner = new Scanner(System.in);
         view = new View();
         persistentStorage = new PersistentStorage(
-                Path.of(System.getProperty("user.dir"), "data.txt")
+                Path.of(new File("").getAbsolutePath(), "data.txt")
         );
 
         try {

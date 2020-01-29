@@ -10,16 +10,20 @@ public class Todo extends Task {
     }
 
     @Override
-    public Task setDone(boolean isDone) {
+    public Todo setDone(boolean isDone) {
         return new Todo(getTitle(), isDone);
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "[T][%s] %s",
-                isDone() ? "\u2713" : "\u2717",
-                getTitle()
-        );
+        return String.format("[T][%s] %s", isDone() ? "\u2713" : "\u2717", getTitle());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Todo)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 }

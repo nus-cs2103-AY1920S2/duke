@@ -33,4 +33,13 @@ public class Event extends Task {
                 dateAt.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+        Event other = (Event) obj;
+        return dateAt.equals(other.getDateAt()) && super.equals(obj);
+    }
 }
