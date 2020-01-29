@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 import java.io.IOException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import task.TaskList;
+import duke.task.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 /**
  * Represents the command of marking a task at the index as done. A <code>DoneCommand</code> object corresponds to the
  * command of marking the task at the index as done e.g., <code>2</code>

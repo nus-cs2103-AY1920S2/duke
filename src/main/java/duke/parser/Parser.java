@@ -1,19 +1,19 @@
-package parser;
+package duke.parser;
 import java.time.LocalDate;
 
-import command.AddCommand;
-import command.ByeCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.FindCommand;
-import command.ListCommand;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 
-import dukeexception.DukeException;
+import duke.dukeexception.DukeException;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 /**
  * Makes sense of the command entered by the user.
  */

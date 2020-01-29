@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 /**
  * Represents a todo task. A <code>Todo</code> object corresponds to a todo task e.g.,
  * <code>"project meeting"</code>

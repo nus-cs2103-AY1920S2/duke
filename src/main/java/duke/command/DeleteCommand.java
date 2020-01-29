@@ -1,12 +1,12 @@
-package command;
+package duke.command;
 import java.io.IOException;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import task.Task;
-import task.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 /**
  * Represents the command of deleting a task using the index of the task. A <code>DeleteCommand</code> object
  * corresponds to the command of deleting a task using the index e.g., <code>2</code>

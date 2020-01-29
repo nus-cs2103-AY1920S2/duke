@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 import java.util.ArrayList;
 /**
  * Represents a task. A <code>Task</code> object corresponds to a task e.g.,

@@ -1,4 +1,4 @@
-package storage;
+package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 /**
  * Loads or save the storage file as requested. A <code>Storage</code> object corresponds to a file represented by the
  * file path e.g., <code>"duke/src/java"</code>
