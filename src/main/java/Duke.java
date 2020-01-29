@@ -1,4 +1,7 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -90,10 +93,10 @@ public class Duke {
 
         if (task instanceof Event) {
             toSave[0] = "E";
-            toSave[3] = ((Event) task).getScheduledTime();
+            toSave[3] = ((Event) task).getScheduledTime().toString();
         } else if (task instanceof Deadline) {
             toSave[0] = "D";
-            toSave[3] = ((Deadline) task).getDueDate();
+            toSave[3] = ((Deadline) task).getDueDate().toString();
         } else {
             toSave[0] = "T";
         }
@@ -119,10 +122,10 @@ public class Duke {
                 getFromDisk = new Todo(details);
                 break;
             case "D":
-                getFromDisk = new Deadline(details, arr[3]);
+                getFromDisk = new Deadline(details, LocalDate.parse(arr[3]));
                 break;
             default:
-                getFromDisk = new Event(details, arr[3]);
+                getFromDisk = new Event(details, LocalDate.parse(arr[3]));
                 break;
             }
 
@@ -198,7 +201,7 @@ public class Duke {
     }
 
     private static void addDeadlineOrEvt(StringBuilder sb, String[] splitInput, String id)
-            throws NoDescriptionException, NoDateProvidedException, IOException {
+            throws NoDescriptionException, NoDateProvidedException, IOException, InvalidDateException {
         if (splitInput.length < 2) {
             throw new NoDescriptionException();
         } else {
@@ -207,20 +210,33 @@ public class Duke {
                 if (temp.length < 2) {
                     throw new NoDateProvidedException(id.trim().replace("/", ""));
                 }
-                if (id.equals(" /by ")) {
-                    Task toSave = new Deadline(temp[0].trim().toString(), temp[1]);
-                    saveTask(toSave, true);
-                    tasks.add(toSave);
-                } else {
-                    Task toSave = new Event(temp[0].trim().toString(), temp[1]);
-                    saveTask(toSave, true);
-                    tasks.add(toSave);
+                if (dateIsValid(temp[1])) {
+                    if (id.equals(" /by ")) {
+                        Task toSave = new Deadline(temp[0].trim().toString(), LocalDate.parse(temp[1]));
+                        saveTask(toSave, true);
+                        tasks.add(toSave);
+                    } else {
+                        Task toSave = new Event(temp[0].trim().toString(), LocalDate.parse(temp[1]));
+                        saveTask(toSave, true);
+                        tasks.add(toSave);
+                    }
+                    actionConfirmation(sb, tasks.size() > 1 ? " tasks" : " task");
                 }
-                actionConfirmation(sb, tasks.size() > 1 ? " tasks" : " task");
             } else {
                 throw new NoDateProvidedException(id.trim().replace("/", ""));
             }
         }
+    }
+
+    private static boolean dateIsValid(String source) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(source);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
     }
 
     private static void actionConfirmation(StringBuilder sb, String grammar) {

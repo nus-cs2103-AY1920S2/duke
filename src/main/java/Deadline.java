@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+>>>>>>> branch-Level-8
 /**
  * Deadline
  *
@@ -10,19 +16,19 @@
  * @author Jel
  */
 public class Deadline extends Task {
-    String due;
+    private LocalDate due;
 
-    Deadline(String description, String due) {
+    Deadline(String description, LocalDate due) {
         super(description);
         this.due = due;
     }
 
-    protected String getDueDate() {
+    protected LocalDate getDueDate() {
         return this.due;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)\n", super.toString(), this.due);
+        return String.format("[D]%s (by: %s)\n", super.toString(), this.due.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+>>>>>>> branch-Level-8
 /**
  * Event
  *
@@ -10,19 +16,19 @@
  * @author Jel
  */
 public class Event extends Task {
-    String at;
+    private LocalDate at;
 
-    Event(String description, String at) {
+    Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
-    protected String getScheduledTime() {
+    protected LocalDate getScheduledTime() {
         return this.at;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)\n", super.toString(), this.at);
+        return String.format("[E]%s (at: %s)\n", super.toString(), this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
