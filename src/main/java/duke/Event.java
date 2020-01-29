@@ -11,7 +11,6 @@ public class Event extends Task {
         done = false;
         this.time = time;
         count++;
-
     }
 
     public Event(String name, LocalDate time, boolean done) {
@@ -19,13 +18,11 @@ public class Event extends Task {
         this.done = done;
         this.time = time;
         count++;
-
     }
     public String toString() {
         if (done) {
             return ("[E][✓] " + name + " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
         }
-
         return ("[E][✗] " + name+ " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
     }
 }
