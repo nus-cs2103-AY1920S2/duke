@@ -6,6 +6,7 @@ list
 deadline
 deadline return book
 deadline return book /by tmr
+deadline return book /by 2020-01-30
 list
 event
 event project meeting

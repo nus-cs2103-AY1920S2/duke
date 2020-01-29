@@ -3,6 +3,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private static List<Task> tasks;
 
@@ -101,14 +104,16 @@ public class Duke {
         printTask(todo);
     }
 
-    private static void addDeadline(String info) throws MissingDeadlineException {
+    private static void addDeadline(String info) throws MissingDeadlineException, InvalidDeadlineException {
         try {
             String[] parsedInfo = info.split("\\s*/by\\s*", 2);
-            Deadline deadline = new Deadline(parsedInfo[0], parsedInfo[1]);
+            Deadline deadline = new Deadline(parsedInfo[0], LocalDate.parse(parsedInfo[1]));
             tasks.add(deadline);
             printTask(deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MissingDeadlineException();
+        } catch (DateTimeParseException e) {
+            throw new InvalidDeadlineException();
         }
     }
 
