@@ -1,3 +1,7 @@
+package bot.task;
+
+import bot.util.PrettyTime;
+
 /**
  * A class that represents Tasks within
  * the bot, to be stored in Storage

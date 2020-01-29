@@ -1,3 +1,5 @@
+package bot.command;
+
 /**
  * An enum containing constants, to be returned
  * to the bot from CommandParser

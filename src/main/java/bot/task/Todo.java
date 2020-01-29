@@ -1,3 +1,9 @@
+package bot.task;
+
+import bot.command.Command;
+import bot.command.exception.InadequateArgumentsException;
+import bot.util.PrettyTime;
+
 /**
  * Class that represents
  * "To-do" type Tasks

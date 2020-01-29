@@ -1,3 +1,5 @@
+package bot;
+
 /**
  * Class that represents the UI of 4LC3N-BOT
  */

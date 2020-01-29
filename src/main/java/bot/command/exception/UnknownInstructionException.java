@@ -1,3 +1,5 @@
+package bot.command.exception;
+
 /**
  * An Exception to be generated when the input
  * to 4LC3N-BOT is not a recognisable instruction

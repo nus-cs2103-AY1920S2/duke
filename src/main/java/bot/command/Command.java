@@ -1,3 +1,5 @@
+package bot.command;
+
 /**
  * Enum to store the various Commands
  * that may be used in the bot

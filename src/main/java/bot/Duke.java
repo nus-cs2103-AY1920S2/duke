@@ -1,7 +1,21 @@
+package bot;
+
+import bot.loadsave.DummyLoader;
+import bot.loadsave.LoadAndSave;
+import bot.loadsave.TasksToDisk;
+import bot.task.Task;
+import bot.task.Deadline;
+import bot.task.Event;
+import bot.task.Todo;
+import bot.command.Command;
+import bot.command.CommandParser;
+import bot.command.Instruction;
+import bot.command.exception.InadequateArgumentsException;
+import bot.command.exception.TooManyArgumentsException;
+import bot.command.exception.UnknownInstructionException;
+
+
 import java.io.FileNotFoundException;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 /**

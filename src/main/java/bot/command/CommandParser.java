@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package bot.command;
+
+import bot.command.exception.UnknownInstructionException;
 
 /**
  * Class to contain logic for commands

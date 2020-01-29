@@ -1,3 +1,5 @@
+package bot.loadsave;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

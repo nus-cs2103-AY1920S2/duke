@@ -1,3 +1,5 @@
+package bot.command.exception;
+
 /**
  * An Exception to be generated that signifies
  * too little instructions given to 4LC3N-BOT
