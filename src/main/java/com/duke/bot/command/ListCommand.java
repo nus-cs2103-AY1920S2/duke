@@ -16,7 +16,8 @@ public class ListCommand extends Command {
                         IntStream.range(0, tasks.size())
                                 .boxed()
                                 .map(index -> String.format("%d.%s", index + 1, tasks.get(index)))
-                ).collect(Collectors.toList())
+                ).collect(Collectors.toList()),
+                true
         );
     }
 }

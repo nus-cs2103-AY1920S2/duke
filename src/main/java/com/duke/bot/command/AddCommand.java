@@ -15,10 +15,14 @@ public class AddCommand extends Command {
     public ExecuteResult execute(List<Task> tasks) {
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.add(addTask);
-        return new ExecuteResult(newTasks, List.of(
-                "Got it. I've added this task:",
-                "  " + addTask,
-                String.format("Now you have %d tasks in the list.", tasks.size())
-        ));
+        return new ExecuteResult(
+                newTasks,
+                List.of(
+                        "Got it. I've added this task:",
+                        "  " + addTask,
+                        String.format("Now you have %d tasks in the list.", tasks.size())
+                ),
+                true
+        );
     }
 }

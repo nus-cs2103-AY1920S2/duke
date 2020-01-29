@@ -8,10 +8,12 @@ public abstract class Command {
     public static class ExecuteResult {
         private final List<Task> tasks;
         private final List<String> messages;
+        private final boolean hasNextCommand;
 
-        public ExecuteResult(List<Task> tasks, List<String> messages) {
+        public ExecuteResult(List<Task> tasks, List<String> messages, boolean hasNextCommand) {
             this.tasks = tasks;
             this.messages = messages;
+            this.hasNextCommand = hasNextCommand;
         }
 
         public List<Task> getTasks() {
@@ -20,6 +22,10 @@ public abstract class Command {
 
         public List<String> getMessages() {
             return messages;
+        }
+
+        public boolean hasNextCommand() {
+            return hasNextCommand;
         }
     }
 

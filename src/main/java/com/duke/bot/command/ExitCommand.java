@@ -6,6 +6,6 @@ import com.duke.bot.Task;
 public class ExitCommand extends Command {
     @Override
     public ExecuteResult execute(List<Task> tasks) {
-        return new ExecuteResult(tasks, List.of("Bye. Hope to see you again soon!"));
+        return new ExecuteResult(tasks, List.of("Bye. Hope to see you again soon!"), false);
     }
 }

@@ -18,10 +18,14 @@ public class DoneCommand extends Command {
             Task doneTask = tasks.get(doneIndex).setDone(true);
             List<Task> newTasks = new ArrayList<>(tasks);
             newTasks.set(doneIndex, doneTask);
-            return new ExecuteResult(tasks, List.of(
-                    "Nice! I've marked this task as done:",
-                    "  " + doneTask
-            ));
+            return new ExecuteResult(
+                    tasks,
+                    List.of(
+                            "Nice! I've marked this task as done:",
+                            "  " + doneTask
+                    ),
+                    true
+            );
         } else {
             throw new DukeException("Oops, done index is out of bounds");
         }
