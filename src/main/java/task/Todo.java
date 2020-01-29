@@ -1,3 +1,5 @@
+package task;
+
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -7,5 +9,10 @@ public class Todo extends Task {
     @Override
     protected String getTypeIcon() {
         return "[T]";
+    }
+
+    @Override
+    protected TaskType getTaskType() {
+        return TaskType.TASK_TYPE_TODO;
     }
 }

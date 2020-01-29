@@ -1,4 +1,4 @@
-import java.util.function.Predicate;
+package exception;
 
 public class DukeException extends Exception {
     public DukeException(String message) {
@@ -6,7 +6,7 @@ public class DukeException extends Exception {
     }
 
     public static void throwIf(boolean condition, String message) throws DukeException {
-        if (!condition) {
+        if (condition) {
             throw new DukeException(message);
         }
     }

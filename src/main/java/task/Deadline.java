@@ -1,3 +1,7 @@
+package task;
+
+import exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,7 +17,7 @@ public class Deadline extends Task {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeException("The input '/by' argument is invalid.\n" +
-                    "Expected ISO-LOCAL-DATE format (e.g.: yyyy-mm-dd, or 2020-08-25)");
+                    "\tExpected ISO-LOCAL-DATE format (e.g.: yyyy-mm-dd, or 2020-08-25)");
         }
     }
 
@@ -25,6 +29,11 @@ public class Deadline extends Task {
     @Override
     protected String getTypeIcon() {
         return "[D]";
+    }
+
+    @Override
+    protected TaskType getTaskType() {
+        return TaskType.TASK_TYPE_DEADLINE;
     }
 
     @Override

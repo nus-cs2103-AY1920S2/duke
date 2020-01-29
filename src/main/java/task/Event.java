@@ -1,3 +1,5 @@
+package task;
+
 public class Event extends Task {
 
     // TODO: Implement start/end time
@@ -11,6 +13,11 @@ public class Event extends Task {
     @Override
     protected String getTypeIcon() {
         return "[E]";
+    }
+
+    @Override
+    protected TaskType getTaskType() {
+        return TaskType.TASK_TYPE_EVENT;
     }
 
     @Override
