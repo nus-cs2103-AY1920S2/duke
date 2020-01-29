@@ -76,12 +76,12 @@ public class Storage {
     }
 
     public ArrayList<String> readFromDisk() {
-        ArrayList<String> lines = new ArrayList<>(); 
+        ArrayList<String> lines = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(this.filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
             bufferedReader.close();

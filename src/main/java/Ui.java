@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Ui {
-    private static final String outputBorder = "==="; 
+    private static final String outputBorder = "===";
 
     public void output(String line) {
         System.out.println("    " + outputBorder);
