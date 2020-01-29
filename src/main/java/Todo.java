@@ -4,6 +4,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, int done) {
+        super(description, done);
+    }
+
     public String toPrint() {
         if (this.isDone) {
             return "T | " + 1 + " | " + this.description;

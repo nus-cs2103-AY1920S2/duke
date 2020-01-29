@@ -7,6 +7,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, int done) {
+        this.description = description;
+        if (done == 1) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
+    }
+
     public String toPrint() {
         if (this.isDone) {
             return "T | " + 1 + " | " + this.description;
