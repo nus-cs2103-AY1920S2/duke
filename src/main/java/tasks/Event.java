@@ -71,7 +71,6 @@ public class Event extends DateTask {
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
 
-
         String time = this.startAtTime == null ? "-" : this.startAtTime.toString();
 
         return "E | " + d + " | " + super.getDescription() + " | " + time

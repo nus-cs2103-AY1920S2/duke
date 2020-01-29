@@ -6,11 +6,20 @@ import java.io.FileNotFoundException;
 import ui.Ui;
 import tasks.*;
 
+/**
+ * Main class of the chat bot program.
+ */
 public class Duke {
+    /** User interface class with formatted outputs */
     private Ui ui;
+    /** Allows for persistent data */
     private Storage storage;
+    /** List to store all tasks */
     private TaskList taskList;
 
+    /** Creates a bot with personalize user interface, storage, and task list.
+     * Will create a new save file is there is no existing one.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -22,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function that abstracts the chat bot's functionalities.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(taskList, storage, ui, sc);
@@ -38,6 +50,10 @@ public class Duke {
         ui.printFormattedOutput("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Entry point of the program.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

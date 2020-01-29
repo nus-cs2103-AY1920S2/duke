@@ -10,17 +10,36 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Provides an interface between Duke chat bot and the save file.
+ * Allows for saving to and retrieval from a save file.
+ */
 public class Storage {
+
+    /** File name of save file */
     private String saveFile = "save_file.txt";
 
+    /**
+     * Saves into saveFile.
+     */
     public Storage() {
     }
 
+    /**
+     * Saves into file provided by path.
+     *
+     * @param path Relative path of save file.
+     */
     public Storage(String path) {
         this.saveFile = path;
     }
 
+    /**
+     * Converts the task list into a convertible format and saves it into the save file.
+     *
+     * @param list Task list to be saved.
+     * @throws IOException  When issues with input/output occurs.
+     */
     public void save(TaskList list) throws IOException {
         FileWriter file = new FileWriter(saveFile, false);
         BufferedWriter writer = new BufferedWriter(file);
@@ -30,6 +49,12 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Converts text from save file back to respective tasks and adds them into task list.
+     *
+     * @param list Task list for adding tasks into.
+     * @throws FileNotFoundException When file is not found.
+     */
     public void readSaveFile(TaskList list) throws FileNotFoundException {
         FileReader file = new FileReader(saveFile);
         BufferedReader reader = new BufferedReader(file);
