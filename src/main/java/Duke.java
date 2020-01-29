@@ -3,13 +3,20 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
+
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
 public class Duke {
     private static List<Task> tasks;
 
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
-        tasks = new ArrayList<>();
+        tasks = loadTasks();
         String input = sc.nextLine();
         while (true) {
             try {
@@ -74,6 +81,7 @@ public class Duke {
             } catch (InvalidCommandException e) {
                 System.out.println(style(e.getMessage()));
             }
+            saveTasks();
             input = sc.nextLine();
         }
     }
@@ -166,6 +174,59 @@ public class Duke {
             System.out.println(style("Noted. I've removed this task:\n  " + deletedTask));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException(taskNumber);
+        }
+    }
+
+    private static List<Task> loadTasks() {
+        try {
+            return Files.readAllLines(Paths.get("../data/duke.txt"))
+                    .stream()
+                    .flatMap(x -> {
+                            try {
+                                Task task;
+                                char taskType = x.charAt(1);
+                                boolean isDone = (x.charAt(4) == '\u2713');
+                                x = x.substring(7);
+                                String[] info;
+                                switch(taskType) {
+                                case 'T':
+                                    task = new Todo(x);
+                                    break;
+                                case 'D':
+                                    x = x.substring(0, x.length() - 1);
+                                    info = x.split(" \\(by: ");
+                                    task = new Deadline(info[0], info[1]);
+                                    break;
+                                case 'E':
+                                    x = x.substring(0, x.length() - 1);
+                                    info = x.split(" \\(at: ");
+                                    task = new Event(info[0], info[1]);
+                                    break;
+                                default:
+                                    return Stream.empty();
+                                }
+                                if (isDone) {
+                                    task = task.complete();
+                                }
+                                return Stream.of(task);
+                            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                                return Stream.empty();
+                            }
+                        })
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    private static void saveTasks() {
+        try {
+            if (Files.notExists(Paths.get("../data"))) {
+                Files.createDirectory(Paths.get("../data"));
+            }
+            Files.write(Paths.get("../data/duke.txt"), tasks.stream().map(x -> x.toString()).collect(Collectors.toList()));
+        } catch (IOException e) {
+            System.out.println(style("Unable to save tasks."));
         }
     }
 

@@ -20,6 +20,6 @@ delete
 delete -1
 delete 1
 list
+delete 2
 delete 1
-list
 bye
