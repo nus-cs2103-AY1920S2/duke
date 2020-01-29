@@ -7,11 +7,21 @@ public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor of the Task.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Sets the isDone flag of the task.
+     *
+     * @param isDone Whether the task should be marked as done or not done.
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }

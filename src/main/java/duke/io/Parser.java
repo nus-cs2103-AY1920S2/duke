@@ -12,6 +12,13 @@ import duke.task.Task;
 
 public class Parser {
 
+    /**
+     * Parse a user's input into one or more supported Commands.
+     *
+     * @param input The input command.
+     * @return A command created using the parsed inputs.
+     * @throws DukeException If the command is not recognized.
+     */
     public Command parse(String input) throws DukeException {
         if (input.equals("")) {
             // Assume is rogue enter input

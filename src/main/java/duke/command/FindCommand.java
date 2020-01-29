@@ -10,10 +10,23 @@ public class FindCommand extends Command {
 
     protected String searchQuery;
 
+    /**
+     * Constructor for a Find Command.
+     *
+     * @param searchQuery The search query to use to find Tasks.
+     */
     public FindCommand(String searchQuery) {
         this.searchQuery = searchQuery;
     }
 
+    /**
+     * Searches the input taskList for entries that match the input search query.
+     * All matching tasks will be printed.
+     *
+     * @param taskList The TaskList to search.
+     * @param ui The Ui used to print results.
+     * @throws DukeException If the search query is empty.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         DukeException.throwIf(searchQuery.equals(""), "The search term cannot be empty!");
