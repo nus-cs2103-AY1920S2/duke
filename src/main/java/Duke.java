@@ -1,10 +1,19 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
-    // Attributes
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    // attributes
+    public TaskStorage taskStorage;
+
+    public Duke(String filePath) {
+        try {
+            this.taskStorage = new TaskStorage(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println(filePath);
+            System.out.println("File not found");
+        }
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -14,27 +23,28 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
 
+        Duke duke = new Duke("./data/Storage.txt");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
-        Duke.runDuke();
+        duke.runDuke();
     }
 
     // Carry out Add, List, Done commands if entered by user
     // Terminates when user gives exit signal
-    private static void runDuke() {
+    private void runDuke() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String nextInput = scanner.nextLine();
             // Validation check
             if (nextInput.equals("bye")) {
-                Duke.stopDuke();
+                stopDuke();
                 break;
             }
             // Handle List command if any
             if (nextInput.equals("list")) {
                 // fflush
                 //System.out.println("");
-                Duke.handleCommandList();
+                handleCommandList();
                 continue;
             }
 
@@ -57,20 +67,7 @@ public class Duke {
             // Handle Add Command
             Task t = null;
             try {
-                switch (commandArgs[0]) {
-                    case "event":
-                        t = Event.createTask(commandArgs);
-                        break;
-                    case "todo":
-                        t = Todo.createTask(commandArgs);
-                        break;
-                    case "deadline":
-                        t = Deadline.createTask(commandArgs);
-                        break;
-                    default:
-                        // Unrecognised command
-                        throw new IllegalCommandException();
-                }
+                t = TaskDispatch.dispatchTask(commandArgs);
             } catch (IllegalArgumentException e1){
                 System.out.println("    " + e1.getMessage());
                 continue;
@@ -79,7 +76,7 @@ public class Duke {
                 continue;
             }
 
-            Duke.handleCommandAdd(t);
+            handleCommandAdd(t, nextInput);
         }
     }
 
@@ -91,32 +88,32 @@ public class Duke {
 
     // Todo: abstract away the following logic from main via new interface for command handlers
 
-    private static void handleCommandList() {
+    private void handleCommandList() {
         System.out.println("    Here are the tasks in your list:");
         int counter = 1;
-        for (Task s : Duke.taskList) {
+        for (Task s : this.taskStorage.getTaskList()) {
             System.out.println("    " + counter + ". " + s);
             counter++;
         }
     }
 
-    private static void handleCommandAdd(Task newTask) {
-        Duke.taskList.add(newTask);
+    private void handleCommandAdd(Task newTask, String nextInput) {
+        this.taskStorage.addToTaskList(newTask, nextInput);
         System.out.println("    Got it. I've added this task:\n"
                 + "      " + newTask);
-        System.out.println("    Now you have " + Duke.taskList.size() + " tasks in the list.");
+        System.out.println("    Now you have " + this.taskStorage.getTaskList().size() + " tasks in the list.");
     }
 
-    private static void handleCommandDone(int TaskNumber) {
-        Duke.taskList.get(TaskNumber - 1).markAsDone();
+    private void handleCommandDone(int taskNumber) {
+        this.taskStorage.getTaskList().get(taskNumber - 1).markAsDone();
         System.out.println("Nice! I've marked this task as done:\n"
-                + "    " + Duke.taskList.get(TaskNumber - 1));
+                + "    " + this.taskStorage.getTaskList().get(taskNumber - 1));
     }
 
-    private static void handleCommandDelete(int TaskNumber) {
+    private void handleCommandDelete(int taskNumber) {
         System.out.println("    Noted. I've removed this task:\n"
-                + "    " + Duke.taskList.get(TaskNumber - 1));
-        Duke.taskList.remove(TaskNumber - 1);
-        System.out.println("    Now you have " + Duke.taskList.size() + " tasks in the list.");
+                + "    " + this.taskStorage.getTaskList().get(taskNumber - 1));
+        this.taskStorage.deleteFromTaskList(taskNumber);
+        System.out.println("    Now you have " + this.taskStorage.getTaskList().size() + " tasks in the list.");
     }
 }
