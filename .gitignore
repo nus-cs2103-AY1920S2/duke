@@ -13,5 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# java compiled files
 *.class
-/data/
+
+# Storage file used by Duke
+duke.txt

@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Storage {
-    private final String fileDir = "../../../data";
+    private final String fileDir = "./appData";
     private final String fileName = "duke.txt";
     private final String filePath = fileDir + "/" + fileName;
 
