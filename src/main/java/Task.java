@@ -16,6 +16,10 @@ public class Task {
         status = "✓";
     }
 
+    public String getDetails() {
+        return msg;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }

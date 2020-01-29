@@ -47,8 +47,12 @@ public class Ui {
                             + "       " + newTask + "\n"
                             + "     Now you have " + numTasks + " tasks in the list.\n"
                             + UiDesign.BORDER.getString());
+
                 } else {    // com == FIND
                     String keyword = decoded.getKeyWord();
+                    System.out.print(UiDesign.FIND_TOP_PART.getString());
+                    tasks.printTasksContaining(keyword);
+                    System.out.println(UiDesign.BORDER.getString());
 
                 }
             } catch (DukeException e) {

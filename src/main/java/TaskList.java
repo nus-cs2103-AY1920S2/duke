@@ -10,6 +10,16 @@ public class TaskList {
         size = 0;
     }
 
+    public void printTasksContaining(String sequence) {
+        for (int i = 1; i <= size; i++) {
+            Task task = tasks.get(i - 1);
+            if (task.getDetails().contains(sequence)) {
+                System.out.println("     " + i + "." + task);
+            }
+        }
+        //tasks.forEach(task -> task.getDetails().contains(sequence) ? );
+    }
+
     public void addTask(Task t) {
         tasks.add(t);
         size++;

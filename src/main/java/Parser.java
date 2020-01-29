@@ -1,4 +1,6 @@
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -59,9 +61,13 @@ public class Parser {
                         throw new DEDate("event");
                     }
 
-                    LocalDate date = LocalDate.parse(msgDate[1]);
-                    com = Commands.NEW_TASK;
-                    newTask = new Event(msgDate[0], date);
+                    try {
+                        LocalDate date = LocalDate.parse(msgDate[1]);
+                        com = Commands.NEW_TASK;
+                        newTask = new Event(msgDate[0], date);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeExceptionDate();
+                    }
 
                 } else if (comArs[0].equals("deadline")) {
                     String details = line.substring(8, line.length());
@@ -73,14 +79,17 @@ public class Parser {
                         throw new DEDate("deadline");
                     }
 
-                    LocalDate date = LocalDate.parse(msgDate[1]);
-                    com = Commands.NEW_TASK;
-                    newTask = new Deadline(msgDate[0], date);
+                    try {
+                        LocalDate date = LocalDate.parse(msgDate[1]);
+                        com = Commands.NEW_TASK;
+                        newTask = new Deadline(msgDate[0], date);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeExceptionDate();
+                    }
 
                 } else if (comArs[0].equals("find")) {
                     com = Commands.FIND;
                     keyword = line.substring(4, line.length());
-                    // add an error for empty field
 
                 } else {
                     throw new DECommand();
