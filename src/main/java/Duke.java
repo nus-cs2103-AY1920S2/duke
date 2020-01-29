@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Duke {
@@ -60,7 +61,7 @@ public class Duke {
             String[] arr = input.split("/by");
             String desc = arr[0].substring(9);
             String time = arr[1];
-            Task t = new DeadlineTask(desc, time);
+            Task t = new DeadlineTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
@@ -72,7 +73,7 @@ public class Duke {
             String[] arr = input.split("/at");
             String desc = arr[0].substring(6);
             String time = arr[1];
-            Task t = new EventTask(desc, time);
+            Task t = new EventTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
             print("Got it. I've added this task: \n" + t + "\nNow you have " 
