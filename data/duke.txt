@@ -1,3 +1,1 @@
-[T][✘] this this
-[D][✘] return book (by: Sunday)
-[E][✘] project meeting (at: Mon 2-4pm)
+[T][✘] this[D][✘] for this (by: Feb 3 2010)

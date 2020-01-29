@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,9 +16,11 @@ public class Storage {
 //        File f = new File("data/duke.txt");
 //    }
 
-    public static void getSavedData(ArrayList<Task> tasks) throws FileNotFoundException {
+    public TaskList load() throws FileNotFoundException {
+        System.out.println("HERE");
         File f = new File(dataPath);
         Scanner s = new Scanner(f);
+        TaskList tasks = new TaskList(new ArrayList<Task>());
         while(s.hasNext()) {
             // convert string back to task
             String taskString = s.nextLine();
@@ -32,6 +36,8 @@ public class Storage {
             } else if (type.equals("[D]")) {
                 desc = taskString.substring(taskString.indexOf(" ") + 1, taskString.indexOf(" (by"));
                 by = taskString.substring(taskString.indexOf("(by:") + 5, taskString.length() - 1);
+                LocalDate d = LocalDate.parse(by);
+                d.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
                 Deadline deadline = new Deadline(desc, by);
                 tasks.add(deadline);
             } else if (type.equals("[E]")) {
@@ -42,14 +48,13 @@ public class Storage {
             }
 
         }
-
-
+        return tasks;
     }
 
-    public static void updateData(ArrayList<Task> tasks) throws IOException {
+    public void updateData(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(dataPath); // to always append to file
-        for (Task task : tasks) {
-            fw.write(task.toString() + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            fw.write(tasks.get(i).toString());
         }
         fw.close();
     }
