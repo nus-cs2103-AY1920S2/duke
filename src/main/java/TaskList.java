@@ -79,4 +79,26 @@ public class TaskList {
     }
 
 
+    public void addTaskToList(Task newTask) {
+        tasks.add(newTask);
+    }
+
+    public Task removeTaskFromList(int indexToRemove) {
+
+        Task removed = tasks.remove(indexToRemove);
+        return removed;
+
+    }
+
+    public int getSize() {
+
+        return tasks.size();
+
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index);
+    }
+
+
 }
