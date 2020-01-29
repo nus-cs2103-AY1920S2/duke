@@ -110,7 +110,7 @@ public class Duke {
             String currentLine = fs.nextLine();
             String[] input = currentLine.split(" ", 2);
             char command = input[0].charAt(1);
-            boolean isDone = input[0].substring(4, 7).equals("✓");
+            boolean isDone = (input[0].charAt(4) == 'O');
 
             if (command == 'T') {
                 Task t = new Todo(input[1]);

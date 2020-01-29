@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "[✓]" : "[✗]");
+        return (isDone ? "[O]" : "[X]");
     }
 
     public void markAsDone() {
