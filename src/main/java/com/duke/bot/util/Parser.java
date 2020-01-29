@@ -15,6 +15,14 @@ import com.duke.bot.task.Event;
 import com.duke.bot.task.Todo;
 
 public class Parser {
+    /**
+     * Parses a string input and return the command
+     * (one of the subclasses of {@link com.duke.bot.command.Command}) the input represents.
+     * 
+     * @param input String input to be parsed
+     * @return A command the string input represents
+     * @throws DukeException Throws if invalid input string is received
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equalsIgnoreCase("list")) {
             return new ListCommand();

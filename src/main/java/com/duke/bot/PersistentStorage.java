@@ -19,6 +19,12 @@ public class PersistentStorage {
         this.storagePath = storagePath;
     }
 
+    /**
+     * Saves the tasks provided to the disk as a flat file.
+     * 
+     * @param tasks Tasks to be saved to the disk
+     * @throws IOException Throws when there is any problem with the writing process
+     */
     public void save(TaskList tasks) throws IOException {
         Files.write(
             storagePath,
@@ -52,6 +58,12 @@ public class PersistentStorage {
         }
     }
 
+    /**
+     * Loads tasks from the disk (from a flat-file database).
+     * 
+     * @return Tasks loaded from the disk
+     * @throws IOException Throws when there is any problem with the reading process
+     */
     public TaskList load() throws IOException {
         return new TaskList(Files.readAllLines(storagePath).stream()
                 .map(this::deserializeTask)

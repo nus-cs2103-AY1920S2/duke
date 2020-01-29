@@ -30,7 +30,7 @@ public class DoneCommandTest {
         final TaskList EXPECTED_TASK_LIST = new TaskList(List.of(TODO.setDone(true)));
         final List<String> EXPECTED_MESSAGES = List.of(
                 "Nice! I've marked this task as done:",
-                "  [T][\u2713] " + TODO_TITLE
+                "  [T][\u2713] " + TODO_TITLE // \u2713 = tick
         );
 
         DoneCommand doneCommand = new DoneCommand(DONE_INDEX);
