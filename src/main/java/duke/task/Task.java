@@ -29,11 +29,20 @@ public abstract class Task implements Serializable {
     }
 
     /**
+     * Returns the description of this task.
+     *
+     * @return the description of this task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns a tick or X symbol depending if the task has been completed.
      *
      * @return a tick (if task is completed) or an X (if not complete).
      */
-    protected String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "✓" : "✘");
         //return (isDone ? "\u2713" : "\u2718");
     }

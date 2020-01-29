@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -47,6 +48,9 @@ public class Parser {
 
         case "event":
             return parseEvent(input);
+
+        case "find":
+            return parseFind(input);
 
         case "list":
             return parseList(input);
@@ -117,6 +121,11 @@ public class Parser {
     private static ListCommand parseList(String[] input) throws DukeException {
         checkArgumentCount(input, 1);
         return new ListCommand();
+    }
+
+    private static FindCommand parseFind(String[] input) throws DukeException {
+        checkArgumentCount(input, 2);
+        return new FindCommand(input[1]);
     }
 
     /**
