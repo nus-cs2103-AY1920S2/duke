@@ -12,6 +12,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String saveToHardDiskFormat() {
+
+        return String.format("E | %d | %s | %s", this.completedCode, this.getDescription(), this.timing.replace("at: ", ""));
+    }
+
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + "(" + this.timing + ")";
 
