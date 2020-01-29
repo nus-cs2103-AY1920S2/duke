@@ -5,7 +5,7 @@ import duke.task.TaskList;
 
 public abstract class Command {
 
-    protected boolean isQuitCommand;
+    private boolean isQuitCommand;
 
     public Command() {
         this.isQuitCommand = false;

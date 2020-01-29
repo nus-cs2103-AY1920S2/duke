@@ -2,7 +2,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 import java.util.Scanner;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class Duke {
      * To start simulation.
      */
     private void run() {
-        UI.printIntro();
+        Ui.printIntro();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {

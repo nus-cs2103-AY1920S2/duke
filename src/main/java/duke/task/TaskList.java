@@ -27,18 +27,18 @@ public class TaskList {
             String taskName = parsedLine[2];
             boolean isCompleted = Boolean.parseBoolean(parsedLine[1]);
             switch (taskType) {
-                case "T":
-                    taskList.add(new ToDo(taskName, isCompleted));
-                    break;
-                case "D":
-                    String deadlineDateTime = parsedLine[3];
-                    taskList.add(new Deadline(taskName, isCompleted, deadlineDateTime));
-                    break;
-                case "E":
-                    String eventDateTime = parsedLine[3];
-                    taskList.add(new Event(taskName, isCompleted, eventDateTime));
-                    break;
-                default:
+            case "T":
+                taskList.add(new ToDo(taskName, isCompleted));
+                break;
+            case "D":
+                String deadlineDateTime = parsedLine[3];
+                taskList.add(new Deadline(taskName, isCompleted, deadlineDateTime));
+                break;
+            case "E":
+                String eventDateTime = parsedLine[3];
+                taskList.add(new Event(taskName, isCompleted, eventDateTime));
+                break;
+            default:
             }
         }
     }

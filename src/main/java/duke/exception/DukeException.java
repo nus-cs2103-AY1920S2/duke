@@ -1,6 +1,6 @@
 package duke.exception;
 
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Duke exception class to handle exceptions in the Duke program.
@@ -16,7 +16,7 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return UI.wrapper(String.format("%s", getMessage()));
+        return Ui.wrap(String.format("%s", getMessage()));
     }
 
 }
