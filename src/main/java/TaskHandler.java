@@ -1,10 +1,14 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-
 
 public class TaskHandler {
 
@@ -224,8 +228,12 @@ public class TaskHandler {
     private void addNewDeadline(String command) throws DeadlineException {
         try {
             // need to identify deadline limit
-            String deadlineLimit = getRestriction("/by", command);
+            String dateDetails = getRestriction("/by", command);
+            String deadlineLimit = getPresentableDate(dateDetails);
+
+            // filter to obtain command
             String deadlineCommand = getCommand("deadline", "/by", command);
+
             addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
             saveChanges();
         } catch (Exception e) {
@@ -242,8 +250,12 @@ public class TaskHandler {
     private void addNewEvent(String command) throws EventException {
         try {
             // need to identify event time
-            String eventTime = getRestriction("/at", command);
+            String dateDetails = getRestriction("/at", command);
+            String eventTime = getPresentableDate(dateDetails);
+
+            // filter to obtain command
             String eventCommand = getCommand("event", "/at", command);
+
             addTaskToStored(new Event(eventCommand, eventTime));
             saveChanges();
         } catch (Exception e) {
@@ -252,7 +264,23 @@ public class TaskHandler {
     }
 
     /**
-     * Gets Deadline limit or Event time based on keyword (which includes "/")
+     * Provides the date in a presentable, "Month (in English) Day Year" format
+     */
+    private String getPresentableDate(String dateDetails) {
+        // format of date e.g., 2019-10-15
+        String punctuation = String.valueOf(dateDetails.charAt(4)); // due to "/at " or "/by "
+        String[] date = dateDetails.split(punctuation); // 0: Year, 1: Month, 2: Day
+        // 0: Year, 1: Month, 2: Day
+        LocalDate ld = LocalDate.of(Integer.parseInt(date[0]),
+                Integer.parseInt(date[1]),
+                Integer.parseInt(date[2]));
+        return ld.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+    }
+
+    /**
+     * Gets Deadline limit or Event time based on keyword (which includes "/").
+     * The result is simply the time/date in a String.
      *
      * @param keyword a String beginning with "/" and a keyword which separates the Task and Restriction of Time
      * @param command basic raw information entered to create the Task
@@ -260,7 +288,7 @@ public class TaskHandler {
      */
     private String getRestriction(String keyword, String command) {
         int indexOfKeyword = indexSearchInString(keyword, command);
-        return command.substring(indexOfKeyword + keyword.length() + 1);
+        return command.substring(indexOfKeyword + keyword.length() + 1); // +1 due to whitespace
     }
 
     /**
@@ -351,7 +379,9 @@ public class TaskHandler {
      */
     private void printEventExceptionMessage() {
         printLine();
-        print("Event tasks should be named/specified with time duration, Blur! XD\nPlease try again!");
+        print("Event tasks should be named/specified with time duration, Blur! XD\n"
+                + "The format for the time/date should be 'YYYY-MM-DD' or 'YYYY/MM/DD'\n"
+                + "Please try again!");
         printLine();
     }
 
@@ -360,7 +390,9 @@ public class TaskHandler {
      */
     private void printDeadlineExceptionMessage() {
         printLine();
-        print("Deadline tasks should be named/specified with the deadline, Funny! XD\nPlease try again!");
+        print("Deadline tasks should be named/specified with the deadline, Funny! XD\n"
+                + "The format for the time/date should be 'YYYY-MM-DD' or 'YYYY/MM/DD'\n"
+                + "Please try again!");
         printLine();
     }
 
