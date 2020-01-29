@@ -1,3 +1,14 @@
+/**
+ * Task
+ *
+ * CS2103T AY19/20 Semester 2
+ * Individual project
+ * Duke project
+ *
+ * 29 Jan 2020
+ *
+ * @author Jel
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -5,6 +16,10 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    protected String getDescription() {
+        return this.description;
     }
 
     public String getStatusIcon() {

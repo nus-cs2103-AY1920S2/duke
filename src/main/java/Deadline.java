@@ -1,13 +1,28 @@
+/**
+ * Deadline
+ *
+ * CS2103T AY19/20 Semester 2
+ * Individual project
+ * Duke project
+ *
+ * 29 Jan 2020
+ *
+ * @author Jel
+ */
 public class Deadline extends Task {
-    String end;
+    String due;
 
-    Deadline(String description, String end) {
+    Deadline(String description, String due) {
         super(description);
-        this.end = end;
+        this.due = due;
+    }
+
+    protected String getDueDate() {
+        return this.due;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)\n", super.toString(), this.end);
+        return String.format("[D]%s (by: %s)\n", super.toString(), this.due);
     }
 }

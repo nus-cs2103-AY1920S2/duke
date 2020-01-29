@@ -1,18 +1,31 @@
-import java.util.ArrayList;
+import java.io.*;
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
+/**
+ * Duke
+ *
+ * CS2103T AY19/20 Semester 2
+ * Individual project
+ * Duke project
+ *
+ * 29 Jan 2020
+ *
+ * @author Jel
+ */
 public class Duke {
     static String separator = "____________________________________________________________";
     static List<Task> tasks = new ArrayList<>();
 
     /**
-     * The main method is where Duke introduces itself
-     * 
-     * @param args not used
+     * The main method is where Duke introduces itself.
+     *
+     * @param args not used.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(separator + "\nHello! I'm Duke\nWhat can I do for you?\n" + separator);
+        loadTasks();
         handleInput();
     }
 
@@ -26,7 +39,7 @@ public class Duke {
         while (!input.equals("bye")) {
             StringBuilder sb = new StringBuilder(separator + "\n");
             String grammar = tasks.size() > 1 ? " tasks" : " task";
-            String[] splitInput = input.split(" ", 2);
+            String[] splitInput = input.trim().split("\\s+", 2);
             String cmd = splitInput[0];
 
             try {
@@ -40,21 +53,23 @@ public class Duke {
                     if (splitInput.length < 2) {
                         throw new NoDescriptionException();
                     } else {
-                        tasks.add(new Todo(splitInput[1]));
+                        Task toSave = new Todo(splitInput[1]);
+                        saveTask(toSave, true);
+                        tasks.add(toSave);
                         actionConfirmation(sb, grammar);
                     }
                 } else {
                     if (cmd.equals("deadline")) {
-                        generateDeadlineEvent(sb, splitInput, " /by ");
+                        addDeadlineOrEvt(sb, splitInput, " /by ");
                     } else if (cmd.equals("event")) {
-                        generateDeadlineEvent(sb, splitInput, " /at ");
+                        addDeadlineOrEvt(sb, splitInput, " /at ");
                     } else {
                         throw new InvalidCommandException();
                     }
                 }
                 sb.append(separator);
                 System.out.println(sb);
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.err.println(separator + "\n" + e.toString() + separator);
             } finally {
                 input = sc.nextLine();
@@ -63,6 +78,75 @@ public class Duke {
 
         if (input.equals("bye")) {
             bye();
+        }
+    }
+
+    private static void saveTask(Task task, boolean isAppendMode) throws IOException {
+        FileOutputStream ops = new FileOutputStream(new File("../data/duke.txt"), isAppendMode);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
+        String[] toSave = new String[4];
+        toSave[1] = task.isDone ? "1" : "0";
+        toSave[2] = task.getDescription();
+
+        if (task instanceof Event) {
+            toSave[0] = "E";
+            toSave[3] = ((Event) task).getScheduledTime();
+        } else if (task instanceof Deadline) {
+            toSave[0] = "D";
+            toSave[3] = ((Deadline) task).getDueDate();
+        } else {
+            toSave[0] = "T";
+        }
+
+        if (isAppendMode) {
+            bw.newLine();
+        }
+        bw.write(String.join(" | ", toSave));
+        bw.close();
+    }
+
+    private static void loadTasks() throws IOException {
+        FileInputStream ips = new FileInputStream(new File("../data/duke.txt"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(ips));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] arr = line.split(" \\| ");
+            String details = arr[2];
+            Task getFromDisk;
+
+            switch(arr[0]) {
+            case "T":
+                getFromDisk = new Todo(details);
+                break;
+            case "D":
+                getFromDisk = new Deadline(details, arr[3]);
+                break;
+            default:
+                getFromDisk = new Event(details, arr[3]);
+                break;
+            }
+
+            if (arr[1].equals("1")) {
+                getFromDisk.markAsDone();
+            }
+            tasks.add(getFromDisk);
+        }
+        br.close();
+    }
+
+    private static void clearAllData() throws IOException {
+        FileOutputStream ops = new FileOutputStream(new File("../data/duke.txt"));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
+        bw.close();
+    }
+
+    private static void updateData() throws IOException {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i != 0) {
+                saveTask(tasks.get(i), true);
+            } else {
+                saveTask(tasks.get(i), false);
+            }
         }
     }
 
@@ -76,7 +160,7 @@ public class Duke {
     }
 
     private static void deleteTask(StringBuilder sb, String grammar, String[] splitInput)
-            throws NoTaskNumberException, InvalidIndexException {
+            throws NoTaskNumberException, InvalidIndexException, IOException {
         int size = tasks.size();
         if (splitInput.length > 1) {
             int n = Integer.parseInt(splitInput[1]);
@@ -85,15 +169,17 @@ public class Duke {
             } else {
                 sb.append("Noted. I've removed this task:\n\t" + tasks.get(n - 1));
                 tasks.remove(n - 1);
-                sb.append("Now you have " + tasks.size() + grammar + " in the list.\n");
+                sb.append("You now have " + tasks.size() + grammar + " in the list.\n");
             }
         } else {
             throw new NoTaskNumberException();
         }
+        clearAllData();
+        updateData();
     }
 
     private static void markTaskAsDone(StringBuilder sb, String[] splitInput)
-            throws NoTaskNumberException, InvalidIndexException {
+            throws NoTaskNumberException, InvalidIndexException, IOException {
         int size = tasks.size();
         if (splitInput.length > 1) {
             int taskNum = Integer.parseInt(splitInput[1]);
@@ -107,10 +193,12 @@ public class Duke {
         } else {
             throw new NoTaskNumberException();
         }
+        clearAllData();
+        updateData();
     }
 
-    private static void generateDeadlineEvent(StringBuilder sb, String[] splitInput, String id)
-            throws NoDescriptionException, NoDateProvidedException {
+    private static void addDeadlineOrEvt(StringBuilder sb, String[] splitInput, String id)
+            throws NoDescriptionException, NoDateProvidedException, IOException {
         if (splitInput.length < 2) {
             throw new NoDescriptionException();
         } else {
@@ -120,9 +208,13 @@ public class Duke {
                     throw new NoDateProvidedException(id.trim().replace("/", ""));
                 }
                 if (id.equals(" /by ")) {
-                    tasks.add(new Deadline(temp[0].trim().toString(), temp[1]));
+                    Task toSave = new Deadline(temp[0].trim().toString(), temp[1]);
+                    saveTask(toSave, true);
+                    tasks.add(toSave);
                 } else {
-                    tasks.add(new Event(temp[0].trim().toString(), temp[1]));
+                    Task toSave = new Event(temp[0].trim().toString(), temp[1]);
+                    saveTask(toSave, true);
+                    tasks.add(toSave);
                 }
                 actionConfirmation(sb, tasks.size() > 1 ? " tasks" : " task");
             } else {
@@ -134,7 +226,7 @@ public class Duke {
     private static void actionConfirmation(StringBuilder sb, String grammar) {
         int size = tasks.size();
         sb.append("Got it. I've added this task:\n\t" + tasks.get(size - 1));
-        sb.append("Now you have " + size + grammar + " in the list.\n");
+        sb.append("You now have " + size + grammar + " in the list.\n");
     }
 
     private static void bye() {
