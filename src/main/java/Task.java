@@ -12,10 +12,10 @@ public interface Task{
             if (taskType.equals("todo")) {
                 newTask = new ToDo(taskDesc);
             } else if (taskType.equals("deadline")) {
-                String[] in = taskDesc.split("/");
+                String[] in = taskDesc.split("/",2);
                 newTask = new Deadline(in[0], in[1]);
             } else {
-                String[] in = taskDesc.split("/");
+                String[] in = taskDesc.split("/", 2);
                 newTask = new Event(in[0], in[1]);
             }
             taskList.add(newTask);
