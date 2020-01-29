@@ -1,9 +1,14 @@
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+/**
+ * This class parses user's input to a command.
+ */
 public class Parser {
     public Parser() {}
+    /**
+     * This method returns the appended string without the first word in the input.
+     */
     public String append(String[] tmp) {
         String task = "";
         for (int i = 1; i < tmp.length; i++) {
@@ -14,6 +19,10 @@ public class Parser {
         }
         return task;
     }
+
+    /**
+     * This method parses user input and executes the required instruction.
+     */
     public void parse(Ui ui, TaskList list, Storage storage, String temp) {
         try {
             String[] tmp = temp.split(" ");

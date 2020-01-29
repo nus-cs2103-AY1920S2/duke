@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
 public class Duke {
     static Ui ui = new Ui();
     static Parser parser = new Parser();
@@ -11,6 +10,9 @@ public class Duke {
         processlist(sc);
     }
 
+    /**
+     * This method reads user input and process it.
+     */
     private static void processlist(Scanner sc) throws IllegalInstructionException, NumberFormatException, DateTimeParseException {
         ui.greeting();
         TaskList list = new TaskList();

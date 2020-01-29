@@ -1,3 +1,6 @@
+/**
+ * This class deals with a todo item.
+ */
 public class Todo extends Item {
     Todo (String name) {
         super(name, false);
@@ -11,10 +14,17 @@ public class Todo extends Item {
         return temp;
     }
 
+    /**
+     * This method returns the string before it is marked done, used for string substitution in the txt file when it is marked done.
+     */
     public String replace() {
         String temp = "   [T][✗] " + super.getName() + "\n";
         return temp;
     }
+
+    /**
+     * This method returns the string corresponds to the current item.
+     */
     public String now() {
         return this.toString();
     }

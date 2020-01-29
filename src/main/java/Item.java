@@ -1,3 +1,6 @@
+/**
+ * This class is parent class of other three classes, mark to be done and delete functions are enabled.
+ */
 public abstract class Item {
     Ui ui = new Ui();
     private String name;

@@ -1,9 +1,15 @@
+/**
+ * This class contains Duke's response to user's input, including error messages.
+ */
 public class Ui {
     String space = "     ";
     String line = space + "____________________________________________________________";
 
     public Ui() {}
 
+    /**
+     * This method prints the greeting string at the start of the program.
+     */
     public void greeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,6 +21,9 @@ public class Ui {
         System.out.print(greeting);
     }
 
+    /**
+     * This method prints the string at the end of the program.
+     */
     public void bye() {
         String bye = line + "\n" + space + " Bye. Hope to see you again soon!\n" + line;
         System.out.print(bye);

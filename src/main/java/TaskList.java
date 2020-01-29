@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+/**
+ * This class contains a list of todo items.
+ */
 public class TaskList {
     ArrayList<Item> items = new ArrayList<Item>();
     Ui ui = new Ui();
@@ -7,7 +10,9 @@ public class TaskList {
         this.items = items;
         this.count = count;
     }
-
+    /**
+     * This method add a new item to the list.
+     */
     public void addItem(Item item) {
         this.items.add(item);
         this.count ++;
@@ -20,6 +25,9 @@ public class TaskList {
         System.out.println(response);
     }
 
+    /**
+     * This method delete an item from the list based on its index.
+     */
     public TaskList delete(int index) {
         count--;
         String response = ui.removeTask(this, index, count);

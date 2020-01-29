@@ -1,9 +1,14 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+/**
+ * This class loads, stores and updates user's todo-list in a local txt file.
+ */
 public class Storage {
     public Storage() {}
+    /**
+     * This method add a new item to the txt file.
+     */
     public void addTxt(String s, Ui ui) throws IOException {
         try {
             FileWriter fileWriter = new FileWriter("data/output.txt", true);
@@ -15,6 +20,9 @@ public class Storage {
         }
     }
 
+    /**
+     * This method add items to tasklist based based on the txt file.
+     */
     public void loadTxt(TaskList list, Ui ui) throws DateTimeParseException {
         try {
             BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
@@ -52,6 +60,9 @@ public class Storage {
             ui.printIOErr();
         }
     }
+    /**
+     * This method updates items from the txt file based on user input.
+     */
     public void updateTxt(String prev, String now, Ui ui) throws IOException {
         try {
             BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
