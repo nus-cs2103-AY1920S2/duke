@@ -1,11 +1,12 @@
 public class Parser {
 
 
-    public Parser() {
-
-    }
-
-
+    /**
+     * Method that parses user input into instructions to be followed.
+     * @param input the user input
+     * @param ui current instance of ui so that ui can interact with user
+     * @param tasks the tasks available in current Duke program
+     */
     public void parse(String input, Ui ui, TaskList tasks) {
         if (input.equals("list")) {
             ui.printList();
@@ -70,6 +71,13 @@ public class Parser {
 
     }
 
+
+    /**
+     * Gets the command out from user input
+     * @param input is the user input
+     * @return a String that is only the command
+     * @throws DukeException is thrown when there is an invalid command by user
+     */
     public String getCommand(String input) throws DukeException {
         if (!input.contains(" ")) {
             // check if the command is correct
@@ -97,6 +105,10 @@ public class Parser {
         }
     }
 
+
+    /**
+     * A class for user-specific exceptions
+     */
     class DukeException extends Exception {
         DukeException(String s) {
             super(s);
