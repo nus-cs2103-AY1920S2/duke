@@ -114,7 +114,7 @@ public class TasksList {
         try {
             Files.write(file, tasksForFile);
         } catch (IOException e) {
-            System.out.println("File doesn't exist");
+            System.out.println("duke.txt file doesn't exist, please create one in /duke/data");
         }
     }
 }
