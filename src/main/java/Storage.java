@@ -33,8 +33,6 @@ public class Storage {
         Scanner myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            //System.out.println("data is: " + data);
-            //System.out.println(data);
 
             /*
             T | 1 | read book
@@ -58,7 +56,6 @@ public class Storage {
                     task.isDone = true;
                 }
                 storingList.add(task);
-                //System.out.println(task);
 
             } else if (dataSplited.length == 4) {
                 //is a event or deadline
@@ -69,7 +66,6 @@ public class Storage {
                         task.isDone = true;
                     }
                     storingList.add(task);
-                    //System.out.println(task);
 
                 } else {
                     //deadline

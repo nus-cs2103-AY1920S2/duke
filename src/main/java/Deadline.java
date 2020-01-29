@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Constructor to create Deadline object.
      *
      * @param description The description for deadline.
-     * @param time The time for the deadline task.
+     * @param time        The time for the deadline task.
      * @throws GrapieExceptions Throws error for incorrect formatting.
      */
     public Deadline(String description, String time) throws GrapieExceptions {
@@ -34,7 +34,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + localDate.format(DateTimeFormatter.ofPattern("MMM d " +
+                "yyyy")) + ")";
     }
 }
 

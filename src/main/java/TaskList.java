@@ -92,7 +92,7 @@ public class TaskList {
                     printAddingTask(event);
 
                     //store into hard disk
-                    storage.convertToHardDiskFormatAndStore(event, "T", event.time);
+                    storage.convertToHardDiskFormatAndStore(event, "E", eventAndTime[1]);
                 }
             } else {
                 throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
@@ -111,7 +111,7 @@ public class TaskList {
                     printAddingTask(deadline);
 
                     //store into hard disk
-                    storage.convertToHardDiskFormatAndStore(deadline, "T", deadline.time);
+                    storage.convertToHardDiskFormatAndStore(deadline, "D", eventAndTime[1]);
                 } else {
                     //"OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT"
                     throw new GrapieExceptions(ErrorMsg.deadlineFormatError);
@@ -198,32 +198,36 @@ public class TaskList {
         if (inputStr.length() <= 7) {
             throw new GrapieExceptions(ErrorMsg.invalidNumberError);
         } else {
-            String strNumberDeleted = inputStr.substring(7, inputStr.length());
-            strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
-
-            boolean isANumber = isNumber(strNumberDeleted);
-
-            if (isANumber) {
-                int numToDelete = Integer.parseInt(strNumberDeleted);
-
-                if (storingList.size() >= numToDelete) {
-
-                    int newSize = storingList.size() - 1;
-                    String toPrint = " Alrighty. I've removed this task: \n"
-                            + storingList.get(numToDelete - 1)
-                            + "\n Now you have " + newSize + " tasks in the list.";
-
-                    storingList.remove(numToDelete - 1);
-
-                    formattingDivider(toPrint);
-                    //delete from hard disk
-                    storage.deleteLineFromHardDisk(numToDelete);
-
-                } else {
-                    throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
-                }
+            if (!inputStr.substring(6,7).equals(" ")) {
+                throw new GrapieExceptions(ErrorMsg.noSpaceError);
             } else {
-                throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                String strNumberDeleted = inputStr.substring(7, inputStr.length());
+                strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
+
+                boolean isANumber = isNumber(strNumberDeleted);
+
+                if (isANumber) {
+                    int numToDelete = Integer.parseInt(strNumberDeleted);
+
+                    if (storingList.size() >= numToDelete) {
+
+                        int newSize = storingList.size() - 1;
+                        String toPrint = " Alrighty. I've removed this task: \n"
+                                + storingList.get(numToDelete - 1)
+                                + "\n Now you have " + newSize + " tasks in the list.";
+
+                        storingList.remove(numToDelete - 1);
+
+                        formattingDivider(toPrint);
+                        //delete from hard disk
+                        storage.deleteLineFromHardDisk(numToDelete);
+
+                    } else {
+                        throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
+                    }
+                } else {
+                    throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                }
             }
         }
     }
