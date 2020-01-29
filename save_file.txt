@@ -1,1 +1,2 @@
-T | 0 | buy groceries
+T | 0 | eat dinner
+T | 0 | eat supper

@@ -1,17 +1,9 @@
 // java imports
-import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 // packages imports
 import ui.Ui;
-import exceptions.EmptyDescriptionException;
-import exceptions.EmptyTimeException;
-import exceptions.InvalidActionException;
-import exceptions.InvalidTaskNumberException;
 import tasks.*;
 
 public class Duke {

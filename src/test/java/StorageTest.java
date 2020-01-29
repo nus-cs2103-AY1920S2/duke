@@ -2,8 +2,11 @@ import org.junit.jupiter.api.Test;
 import tasks.TaskList;
 import tasks.Todo;
 
-import java.io.*;
-import java.nio.Buffer;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,10 +15,10 @@ class StorageTest {
     @Test
     void readSaveFileTest() {
        try {
-           String absolute = "/Users/ChesterSim/Desktop/NUS Computer Science/CS2103T/duke/save_file.txt";
-           Storage storage = new Storage(absolute);
+           String relative = "../../../save_file.txt";
+           Storage storage = new Storage(relative);
            TaskList taskList = new TaskList();
-           BufferedWriter writer = new BufferedWriter(new FileWriter(absolute, false));
+           BufferedWriter writer = new BufferedWriter(new FileWriter(relative, false));
            writer.write("D | 1 | presentation | 12:00 2020-01-29\n" +
                    "E | 0 | meeting | - 2020-12-03");
            writer.close();
