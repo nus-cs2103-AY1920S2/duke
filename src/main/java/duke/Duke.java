@@ -1,6 +1,4 @@
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+package duke;
 
 public class Duke {
 
@@ -24,7 +22,7 @@ public class Duke {
         // Welcomes the user
         Ui.welcome();
 
-        // Initialise Duke program
+        // Initialise duke.Duke program
         Duke duke = new Duke();
         duke.initialise();
 
@@ -45,7 +43,7 @@ public class Duke {
     }
 
     /**
-     * Constructs new Duke, and uses past user data if any
+     * Constructs new duke.Duke, and uses past user data if any
      */
     private void initialise() {
         // Loads previous Tasks if any

@@ -1,8 +1,8 @@
-# JavaFX Tutorial Part 2 - Creating a GUI for Driver.Duke
+# JavaFX Tutorial Part 2 - Creating a GUI for Driver.duke.Duke
 
-In this tutorial, we will be creating a GUI for Driver.Duke from scratch based on the following mockup.
+In this tutorial, we will be creating a GUI for Driver.duke.Duke from scratch based on the following mockup.
 
-![Mockup for Driver.Duke](assets/DukeMockup.png)
+![Mockup for Driver.duke.Duke](assets/DukeMockup.png)
 
 ## JavaFX controls
 
@@ -34,7 +34,7 @@ But how do we get the exact layout we want in the UI? JavaFX provides that funct
 
 One way to obtain the layout in the mockup is as follows. 
 
-![Driver.Duke's layout](assets/DukeSceneGraph.png) 
+![Driver.duke.Duke's layout](assets/DukeSceneGraph.png) 
 
 To get that layout, we create a new `AnchorPane` and add our controls to it. Similarly, we create a new `VBox` to hold the contents of the `ScrollPane`. The code should look something like this:
 
@@ -49,7 +49,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class Driver.Duke extends Application {
+public class Driver.duke.Duke extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -88,7 +88,7 @@ public class Driver.Duke extends Application {
 
 Run the application and you should see something like this:
 
-![Driver.Duke's raw layout](assets/RawLayout.png)
+![Driver.duke.Duke's raw layout](assets/RawLayout.png)
  
 That is not what we were expecting, what did we forget to do?
 
@@ -106,7 +106,7 @@ Add the following code to the bottom of the `start` method. You'll have to add `
         //...
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Driver.Duke");
+        stage.setTitle("Driver.duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -141,7 +141,7 @@ Add the following code to the bottom of the `start` method. You'll have to add `
 
 Run the application again. It should now look like this:
 
-![Driver.Duke's Final layout](assets/FinalLayout.png)
+![Driver.duke.Duke's Final layout](assets/FinalLayout.png)
 
 ## Exercises
 

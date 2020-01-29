@@ -16,7 +16,7 @@ public class Storage {
     /**
      * Reflects all Tasks in allTasks list to be saved in a lastSavedTasks.txt file.
      *
-     * @param allTasks List of Tasks for Duke.
+     * @param allTasks List of Tasks for duke.Duke.
      */
     public static void saveChanges(TaskList allTasks) {
         // Note: The whole list will be iterated everytime an update is needed for the file.
@@ -34,9 +34,9 @@ public class Storage {
     }
 
     /**
-     * Reads in from the lastSavedTasks.txt file if it exists, and updates Duke allTasks list of Tasks.
+     * Reads in from the lastSavedTasks.txt file if it exists, and updates duke.Duke allTasks list of Tasks.
      *
-     * @param allTasks List of Tasks for Duke.
+     * @param allTasks List of Tasks for duke.Duke.
      */
     public void readFromLastSavedFile(TaskList allTasks) {
 

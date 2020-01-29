@@ -7,7 +7,7 @@ public class Ui {
      */
     public static void welcome() {
         printLine();
-        print("Hello, Duke here! :D \n"
+        print("Hello, duke.Duke here! :D \n"
                 + "I'm feeling good and ready to go! "
                 + "What can I do for you?");
         printLine();
