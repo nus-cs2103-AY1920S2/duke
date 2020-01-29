@@ -36,7 +36,7 @@ public class Parser {
             return new ListCommand(response);
 
         } else {
-            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
 
@@ -72,6 +72,6 @@ public class Parser {
             return "delete";
         }
 
-        throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
