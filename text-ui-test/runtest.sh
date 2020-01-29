@@ -12,6 +12,12 @@
      rm ACTUAL.TXT
  fi
 
+ # delete saved tasks from previous run
+ if [ -e "../user/data/tasks.botstore" ]
+ then
+     rm ../user/data/tasks.botstore
+ fi
+
  # compile the code into the bin folder, terminates if error occurred
  if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
  then

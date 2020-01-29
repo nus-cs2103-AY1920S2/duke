@@ -7,58 +7,23 @@ import java.util.Scanner;
  */
 public class Duke {
     public static void main(String[] args) {
-        String version = "4LC3N v0.0.1";
-        System.out.println(version);
+        //initialise UI
+        Ui botUi = new Ui();
+        botUi.version();
+        botUi.greetings();
+        botUi.load();
 
-        String load = "=======================================================\n" +
-                "                  LOADING ... ... ...\n" +
-                "=======================================================";
-        String greetings = "      _.-'''''-._\n" +
-                "    /=_.-~-~-~-._=\\      .-.  _\n" +
-                "   :    _     _    :     | | / )\n" +
-                "  /    (o)   (o)    \\    | |/ /\n" +
-                "  |   _ _ _ _ _ _   |   _|__ /_\n" +
-                "  |  \\           /  |  / __)-' )\n" +
-                "   \\  '.       .'  /   \\  `(.-')\n" +
-                "    '.  `'---'`  .'     > ._>-'\n" +
-                "      '-._____.-'      / \\/";
-        String initialMessage = "4LC3N-BOT initialised.\nGreetings, humans!";
-        String awaitingMessage = "\n> ENTER your input:";
-        String doneMessage = "You have completed: ";
-        String errorMessage = "      _.-'''''-._  \n" +
-                "    /=_.-~-~-~-._=\\\n" +
-                "   :               :\n" +
-                "  /    (X)   (X)    \\\n" +
-                "  |                 |\n" +
-                "  |     .-----.     |\n" +
-                "   \\    '_ _ _'    /\n" +
-                "    '.           .'\n" +
-                "      '-._____.-'";
-        String deletedMessage = "Garbage cleared successfully." +
-                "\n\n      _.-'''''-._  \n" +
-                "    /=_.-~-~-~-._=\\\n" +
-                "   :    _     _    :\n" +
-                "  /    (o)   (o)    \\\n" +
-                "  |                 |\n" +
-                "  |  \\           /  |\n" +
-                "   \\  '.       .'  /\n" +
-                "    '.  `'---'`  .'\n" +
-                "      '-._____.-'\n\n" +
-                "Take one last look at what I deleted:";
-        String failedToFindMessage = "Sorry, could not find anything matching that!";
-        String foundTaskMessage = "I have found these tasks!\n";
-        String fileDirectory = "../user/data";
-        String fileName = "tasks.botstore";
-
-        System.out.println(greetings);
-        System.out.println(load);
-
+        // initialise CommandParser
         Scanner input = new Scanner(System.in);
         CommandParser parser = new CommandParser();
+
+        // initialise Storage
+        String fileDirectory = "../user/data";
+        String fileName = "tasks.botstore";
         Storage store = new Storage(fileDirectory, fileName);
 
-        System.out.println(initialMessage);
-        System.out.println(awaitingMessage);
+        botUi.initial();
+        botUi.awaiting();
 
         // main bot system loop
         while(input.hasNext()) {
@@ -68,8 +33,7 @@ public class Duke {
             try {
                 next = parser.parse(command);
             } catch (UnknownInstructionException e) {
-                System.err.println(e.getMessage());
-                System.err.println(errorMessage);
+                botUi.error(e);
                 continue;
             }
 
@@ -80,12 +44,11 @@ public class Duke {
                 } catch (InadequateArgumentsException |
                         NumberFormatException | TooManyArgumentsException e
                 ) {
-                    System.err.println(e.getMessage());
-                    System.err.println(errorMessage);
+                    botUi.error(e);
                     continue;
                 }
                 store.markAsDone(index);
-                System.out.println(doneMessage);
+                botUi.done();
                 System.out.println(store.retrieve(index));
 
                 store.saveToDisk();
@@ -96,13 +59,12 @@ public class Duke {
                 } catch (InadequateArgumentsException |
                         NumberFormatException | TooManyArgumentsException e
                 ) {
-                    System.err.println(e.getMessage());
-                    System.err.println(errorMessage);
+                    botUi.error(e);
                     continue;
                 }
                 String toBeDeleted = store.retrieve(index);
                 store.delete(index);
-                System.out.println(deletedMessage);
+                botUi.deleted();
                 System.out.println(toBeDeleted);
 
                 store.saveToDisk();
@@ -113,27 +75,25 @@ public class Duke {
                 try {
                     searchTerm = getSecondTerm(command, Command.SEARCH);
                 } catch (InadequateArgumentsException | TooManyArgumentsException e) {
-                    System.err.println(e.getMessage());
-                    System.err.println(errorMessage);
+                    botUi.error(e);
                     continue;
                 }
                 store.searchStorage(searchTerm)
                         .ifPresentOrElse(
                                 taskIds -> {
-                                    System.out.println(foundTaskMessage);
+                                    botUi.foundTask();
                                     for (Integer id : taskIds) {
                                         System.out.println(store.retrieve(id));
                                     }
                                 },
-                                () -> System.out.println(failedToFindMessage)
+                                () -> botUi.failedToFind()
                         );
             } else if (next == Instruction.STORE_DDL) {
                 Deadline ddl;
                 try {
                     ddl = new Deadline(command);
                 } catch (InadequateArgumentsException e) {
-                    System.err.println(e.getMessage());
-                    System.err.println(errorMessage);
+                    botUi.error(e);
                     continue;
                 }
                 store.store(ddl);
@@ -145,8 +105,7 @@ public class Duke {
                 try {
                     evn = new Event(command);
                 } catch (InadequateArgumentsException e) {
-                    System.err.println(e.getMessage());
-                    System.err.println(errorMessage);
+                    botUi.error(e);
                     continue;
                 }
                 store.store(evn);
@@ -158,8 +117,7 @@ public class Duke {
                 try {
                     tdo = new Todo(command);
                 } catch (InadequateArgumentsException e) {
-                    System.err.println(e.getMessage());
-                    System.err.println(errorMessage);
+                    botUi.error(e);
                     continue;
                 }
                 store.store(tdo);
@@ -173,21 +131,10 @@ public class Duke {
                 // next == Instruction.AWAIT
                 parser.echo(command);
             }
-            System.out.println(awaitingMessage);
+            botUi.awaiting();
         }
         input.close();
-        String goodbye = "\nGoodbye! You will be missed" +
-                "\n      _.-'''''-._  \n" +
-                "    /=_.-~-~-~-._=\\\n" +
-                "   :    _     _    :\n" +
-                "  /    (o)   (o)    \\\n" +
-                "  |           `     |\n" +
-                "  |     .-----.     |\n" +
-                "   \\   :       :   /\n" +
-                "    '.           .'\n" +
-                "      '-._____.-'";
-        System.out.println(goodbye);
-
+        botUi.goodbye();
     }
 
     /**

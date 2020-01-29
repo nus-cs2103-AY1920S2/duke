@@ -11,6 +11,7 @@
 =======================================================
                   LOADING ... ... ...
 =======================================================
+Could not find local storage
 4LC3N-BOT initialised.
 Greetings, humans!
 
