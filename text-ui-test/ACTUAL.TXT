@@ -36,61 +36,61 @@ What tasks do you have dude?
     EmptyDescriptionException: The description of Deadline cannot be empty.
     -----
     -----
+    Please enter date in the format yyyy-MM-dd HHmm
+    -----
+    -----
     Got it. I've added this task:
-    [D][✗] return book (by: Sunday)
+    [D][✗] return book (by: 15:30, Mar 15 2020)
     Now you have 2 tasks in the list.
     -----
     -----
+    Please enter date in the format yyyy-MM-dd HHmm
+    -----
+    -----
     Got it. I've added this task:
-    [E][✗] project meeting (at: Mon 2-4pm)
+    [E][✗] project meeting (at: 07:07, Jul 7 2020)
     Now you have 3 tasks in the list.
     -----
     -----
     Here are the tasks in your list:
     1. [T][✗] borrow book
-    2. [D][✗] return book (by: Sunday)
-    3. [E][✗] project meeting (at: Mon 2-4pm)
+    2. [D][✗] return book (by: 15:30, Mar 15 2020)
+    3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     -----
     -----
     Nice! I've marked this task as done:
-    [D][✓] return book (by: Sunday)
+    [D][✓] return book (by: 15:30, Mar 15 2020)
     -----
     -----
-    Got it. I've added this task:
-    [D][✗] do homework (by: no idea :-p)
-    Now you have 4 tasks in the list.
+    Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Here are the tasks in your list:
     1. [T][✗] borrow book
-    2. [D][✓] return book (by: Sunday)
-    3. [E][✗] project meeting (at: Mon 2-4pm)
-    4. [D][✗] do homework (by: no idea :-p)
+    2. [D][✓] return book (by: 15:30, Mar 15 2020)
+    3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     -----
     -----
     InvalidIndexException: a is an invalid index!
     -----
     -----
-    Nice! I've marked this task as done:
-    [D][✓] do homework (by: no idea :-p)
+    InvalidIndexException: 4 is an invalid index!
     -----
     -----
     Here are the tasks in your list:
     1. [T][✗] borrow book
-    2. [D][✓] return book (by: Sunday)
-    3. [E][✗] project meeting (at: Mon 2-4pm)
-    4. [D][✓] do homework (by: no idea :-p)
+    2. [D][✓] return book (by: 15:30, Mar 15 2020)
+    3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     -----
     -----
     Nice! I've deleted this task:
     [T][✗] borrow book
-    Now you have 3 tasks in the list.
+    Now you have 2 tasks in the list.
     -----
     -----
     Here are the tasks in your list:
-    1. [D][✓] return book (by: Sunday)
-    2. [E][✗] project meeting (at: Mon 2-4pm)
-    3. [D][✓] do homework (by: no idea :-p)
+    1. [D][✓] return book (by: 15:30, Mar 15 2020)
+    2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     -----
     -----
     InvalidIndexException: 4 is an invalid index!

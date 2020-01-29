@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,7 +22,7 @@ public class Duke {
             handleDone(keywords[1]);
             break;
 
-          case "delete" :
+          case "delete":
             handleDelete(keywords[1]);
             break;
           case "todo":
@@ -43,10 +44,12 @@ public class Duke {
             throw new UnknownCommandException(keywords[0]);
         }
       } catch (EmptyDescriptionException
-          | MissingTimeException
-          | UnknownCommandException
-          | InvalidIndexException e) {
+              | MissingTimeException
+              | UnknownCommandException
+              | InvalidIndexException e) {
         System.out.println("    " + e);
+      } catch (DateTimeParseException e) {
+        System.out.println("    " + "Please enter date in the format yyyy-MM-dd HHmm");
       } catch (Exception e) {
         System.out.printf("    I don't know this error homie, take a look:\n    %s\n", e);
       }
