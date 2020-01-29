@@ -1,5 +1,5 @@
 public class DukeUnknownInputException extends DukeException {
-    public DukeUnknownInputException() {
-        super();
+    public DukeUnknownInputException(String message) {
+        super(message);
     }
 }

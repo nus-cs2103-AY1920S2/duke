@@ -1,5 +1,5 @@
 public class DukeMissingDescriptionException extends DukeException {
-    public DukeMissingDescriptionException(){
-        super();
+    public DukeMissingDescriptionException(String message){
+        super(message);
     }
 }
