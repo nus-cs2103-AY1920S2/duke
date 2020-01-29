@@ -1,0 +1,4 @@
+Deadlines Yes gohome 1997-01-30
+Todo homework No
+Todo homework No
+Deadlines No homework 1997-01-30
