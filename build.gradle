@@ -11,9 +11,17 @@ repositories {
 }
 
 application {
-    mainClassName = "com.duke.bot.Duke"
+    mainClassName = 'com.duke.bot.Duke'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
 run {
     standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
 }
