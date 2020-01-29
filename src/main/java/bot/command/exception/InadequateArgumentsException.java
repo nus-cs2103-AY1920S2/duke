@@ -6,6 +6,13 @@ package bot.command.exception;
  * in a single line
  */
 public class InadequateArgumentsException extends Exception {
+    /**
+     * Constructor for an InadequateArgumentsException
+     *
+     * @param command The word that represents the
+     *                original command that led to the
+     *                generation of the Exception
+     */
     public InadequateArgumentsException(String command) {
         super("Beep beep beep! I expect more" +
             " information for " + command + "!");

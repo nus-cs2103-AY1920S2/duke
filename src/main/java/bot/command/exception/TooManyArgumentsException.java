@@ -6,6 +6,13 @@ package bot.command.exception;
  * in a single line
  */
 public class TooManyArgumentsException extends Exception {
+    /**
+     * Constructor for a TooManyArgumentsException
+     *
+     * @param command The word that represents the
+     *                original command that led to the
+     *                generation of the Exception
+     */
     public TooManyArgumentsException(String command) {
         super("Beep boop boop! " +
             command + " does not need" +

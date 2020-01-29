@@ -23,6 +23,12 @@ import java.util.Scanner;
  * primary loop that awaits input from the user
  */
 public class Duke {
+    /**
+     * Main program of 4LC3N-BOT
+     *
+     * @param args Command line arguments, can be
+     *             safely ignored
+     */
     public static void main(String[] args) {
         //initialise UI
         Ui botUi = new Ui();
