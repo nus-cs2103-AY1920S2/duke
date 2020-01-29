@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Ui {
     public static void run() throws IOException {
-        Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
 
         Storage.readFile(tasks);
@@ -15,6 +14,7 @@ public class Ui {
         printHorizontalLine();
         System.out.println();
 
+        Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Parser parse = new Parser(input, false);
 
@@ -70,8 +70,8 @@ public class Ui {
                     printHorizontalLine();
                 } catch (IndexOutOfBoundsException e) {
                     printHorizontalLine();
-                    printIndented("☹ OOPS!!! The description of a " +
-                            parse.getCommandString() + " cannot be empty.");
+                    printIndented("☹ OOPS!!! The description of a "
+                            + parse.getCommandString() + " cannot be empty.");
                     printHorizontalLine();
                 }
                 break;
