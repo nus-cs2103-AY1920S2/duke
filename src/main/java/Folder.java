@@ -31,6 +31,19 @@ public class Folder {
         return output;
     }
 
+    public void find(String word) {
+        int i = 1;
+        String output = Message.lines + "Here are the tasks in your list:\n";
+        for(Tasks x: listTasks) {
+            if(x.getMsg().getMsg().contains(word)) {
+                output = output + i + ": " + x;
+                i++;
+            }
+        }
+        output += Message.lines;
+        System.out.println(output);
+    }
+
     public void show() {
         int i = 1;
         String output = Message.lines + "Here are the tasks in your list:\n";

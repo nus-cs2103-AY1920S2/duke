@@ -14,6 +14,10 @@ public class Tasks {
         count++;
     }
 
+    public Message getMsg() {
+        return msg;
+    }
+
     public void added() {
         String output = Message.lines + "added: " + msg.getMsg() + "\n" + Message.lines;
         System.out.println(output);

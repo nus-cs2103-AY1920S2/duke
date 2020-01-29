@@ -65,6 +65,9 @@ public class ChatBox {
                     folder.deleteTasks(b);
                     save();
                     break;
+                case "find":
+                    folder.find(msg[1]);
+                    break;
                 default:
                     Tasks tasks;
                     if (key.equals("todo")) {
