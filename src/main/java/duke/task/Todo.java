@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.*;
 
 public class Todo extends Task {
 

@@ -57,7 +57,7 @@ public class Storage {
         return taskList;
     }
 
-    private static String arrayToFile(TaskList tasks) {
+    public static String arrayToFile(TaskList tasks) {
         ArrayList<Task> taskList = tasks.taskList;
         String outputToFile = "";
         for(Task task : taskList) {

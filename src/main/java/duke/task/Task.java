@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.*;
-
-
 public class Task {
     public String description;
     public boolean isDone;
