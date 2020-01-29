@@ -38,7 +38,6 @@ public class ChatBox {
         s.close();
     }
 
-
     public void save() throws IOException {
         FileWriter fw = new FileWriter(location);
         fw.write(folder.getText());

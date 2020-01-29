@@ -22,11 +22,11 @@ public class Folder {
     }
 
     public String getText() {
-        int i = 1;
+        int j = 1;
         String output = "";
         for(Tasks x: listTasks) {
             output = output + x.logo + "=" + x.status + "=" + x.msg.getMsg() + "\n";
-            i++;
+            j++;
         }
         return output;
     }
