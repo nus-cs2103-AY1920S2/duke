@@ -10,14 +10,27 @@ public class Ui {
 
     protected Scanner scanner;
 
+    /**
+     * Constructor of the Ui.
+     *
+     * @param ioStream An input stream for the Ui object to read inputs from.
+     */
     public Ui(InputStream ioStream) {
         scanner = new Scanner(ioStream);
     }
 
+    /**
+     * Reads the input stream for a new command.
+     *
+     * @return A string that contains the input command and its arguments.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Prints the Duke welcome message.
+     */
     public void printWelcomeMessage() {
         stylizedPrint(
                 "Hello",
@@ -25,10 +38,18 @@ public class Ui {
         );
     }
 
+    /**
+     * Prints the Duke goodbye message.
+     */
     public void printGoodbyeMessage() {
         stylizedPrint("Bye. Hope to never see you again!");
     }
 
+    /**
+     * Prints one or more lines of error messages.
+     *
+     * @param error A variable number of strings, each would print a line of error.
+     */
     public void printError(String... error) {
         System.out.println(OUTPUT_HORIZONTAL_LINE);
         for (int i = 0; i < error.length; ++i) {
@@ -37,10 +58,21 @@ public class Ui {
         System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
+    /**
+     * Prints one or more lines of text with ASCII accents.
+     *
+     * @param lines A variable number of strings, each would print a line of text.
+     */
     public void stylizedPrint(String... lines) {
         stylizedPrint(1, lines);
     }
 
+    /**
+     * Prints one or more lines of text with ASCII accents.
+     *
+     * @param numTabs The number of tab indentations for the output text.
+     * @param lines A variable number of strings, each would print a line of text.
+     */
     public void stylizedPrint(int numTabs, String... lines) {
         numTabs = Math.max(0, numTabs);
         System.out.println(OUTPUT_HORIZONTAL_LINE);

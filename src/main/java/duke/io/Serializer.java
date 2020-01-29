@@ -15,6 +15,12 @@ import java.io.ObjectOutputStream;
 public class Serializer {
     public static final String FILENAME = "tasks.data";
 
+    /**
+     * Serializes the input TaskList to file.
+     * Writes the entire TaskList to Serializer.FILENAME using a File/Object Output Stream.
+     *
+     * @param taskList The TaskList to serialize to file.
+     */
     public static void serialize(TaskList taskList) {
         FileOutputStream fos;
         ObjectOutputStream oos;
@@ -29,6 +35,13 @@ public class Serializer {
         }
     }
 
+    /**
+     * De-serializes the input TaskList to file.
+     * Reads the entire TaskList from Serializer.FILENAME using a File/Object Input Stream.
+     * If the file is not found, corrupted, or unable to be read, this function will return null.
+     *
+     * @return A fully populated TaskList that had previously been serialized
+     */
     public static TaskList deserialize() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
