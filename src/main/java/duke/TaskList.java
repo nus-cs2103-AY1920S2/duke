@@ -100,6 +100,10 @@ public class TaskList {
                     addNewEvent(command);
                     break;
 
+                case "find":
+                    findTask(command);
+                    break;
+
                 default:
                     throw new InputUnclearException("");
 
@@ -110,6 +114,32 @@ public class TaskList {
             }
 
         }
+    }
+
+    /**
+     * Finds the tasks which contain the keyword.
+     *
+     * @param command the full command entered by the user.
+     */
+    private void findTask(String command) throws EmptyTaskListException {
+
+        // Find the keyword for search
+        String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
+        String keyword = commandWords[1].toLowerCase();
+
+        // For temporary storage and printing
+        TaskList result = new TaskList();
+
+        // Search
+        for (Task t : allTasks) {
+            if (t.getCommand().toLowerCase().contains(keyword)) {
+                result.addSavedTaskToStored(t);
+            }
+        }
+
+        // Print all options
+        result.printAllTasks();
+
     }
 
     /**
@@ -263,6 +293,7 @@ public class TaskList {
 
     /**
      * Adds the Task (previously saved) without printing the added message.
+     * Can also be used to simply to add without announcing, from one TaskList to another such as a temporary one.
      *
      * @param t Task to be stored.
      */
