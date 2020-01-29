@@ -51,4 +51,8 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public String getData() {
+        return "|" + (this.isDone ? 1 : 0) + "|" + this.description;
+    }
 }
