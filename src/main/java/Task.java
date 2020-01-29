@@ -29,7 +29,10 @@ public class Task {
         isDone = true;
     }
 
-    public static void setTotalTaskCount(int totalTaskCount) {
+    public static void setTotalTaskCount(int totalTaskCount) throws InvalidArgumentAelitaException {
+        if (totalTaskCount < 0) {
+            throw new InvalidArgumentAelitaException();
+        }
         Task.totalTaskCount = totalTaskCount;
     }
 
