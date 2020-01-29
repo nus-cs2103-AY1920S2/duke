@@ -1,15 +1,17 @@
 package e0148811.duke;
 
-public class Event extends Task {
-    private String time;
+import java.time.LocalDate;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    private LocalDate time;
+
+    public Event(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + time + ", " + time.getDayOfWeek() + ")";
     }
 }

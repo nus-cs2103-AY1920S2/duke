@@ -24,3 +24,4 @@ src/main/java/e0148811/duke/DukeException.class
 test/DukeTest.java
 text-ui-test/ACTUAL.TXT
 text-ui-test/sources.txt
+data/duke.txt

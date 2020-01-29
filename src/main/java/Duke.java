@@ -4,6 +4,9 @@ import e0148811.duke.Event;
 import e0148811.duke.Task;
 import e0148811.duke.Todo;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -103,45 +106,59 @@ class Duke {
                 System.err.println(e.getMessage());
             }
         }
-        
+
         System.out.println("Goodbye. See you next time!");
     }
 
     static Task createAnEventTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
-        int indexOfAt = -1;
-        for (int i = 1; i < lengthOfArray; i++) {
-            if (instructionByWord[i].equals("/at")) {
-                indexOfAt = i;
+        try {
+            int indexOfAt = -1;
+            for (int i = 1; i < lengthOfArray; i++) {
+                if (instructionByWord[i].equals("/at")) {
+                    indexOfAt = i;
+                }
             }
+            if (indexOfAt == -1 || indexOfAt == 1 || indexOfAt == lengthOfArray) {
+                throw new DukeException(FORMAT_CORRECTION
+                        + "\"event a_string_describing_the_task /at YYYY-MM-DD\"");
+            }
+            String description = String.join(" ",
+                    Arrays.copyOfRange(instructionByWord, 1, indexOfAt));
+            String time = String.join(" ",
+                    Arrays.copyOfRange(instructionByWord, indexOfAt + 1, lengthOfArray));
+            return new Event(description, LocalDate.parse(time));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Incorrect format of date.\n"
+                    + "The correct format should be YYYY-MM-DD.");
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid value for year/month/date");
         }
-        if (indexOfAt == -1 || indexOfAt == 1 || indexOfAt == lengthOfArray) {
-            throw new DukeException(FORMAT_CORRECTION
-                    + "\"event a_string_describing_the_task /at a_string_describing_the_time\"");
-        }
-        String description = String.join(" ",
-                Arrays.copyOfRange(instructionByWord, 1, indexOfAt));
-        String time = String.join(" ",
-                Arrays.copyOfRange(instructionByWord, indexOfAt + 1, lengthOfArray));
-        return new Event(description, time);
     }
 
     static Task createADeadlineTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
-        int indexOfBy = -1;
-        for (int i = 1; i < lengthOfArray; i++) {
-            if (instructionByWord[i].equals("/by")) {
-                indexOfBy = i;
-                break;
+        try {
+            int indexOfBy = -1;
+            for (int i = 1; i < lengthOfArray; i++) {
+                if (instructionByWord[i].equals("/by")) {
+                    indexOfBy = i;
+                    break;
+                }
             }
+            if (indexOfBy == -1 || indexOfBy == 1 || indexOfBy == (lengthOfArray - 1)) {
+                throw new DukeException(FORMAT_CORRECTION
+                        + "\"deadline a_string_describing_the_task /by YYYY-MM-DD\"");
+            }
+            String description = String.join(" ",
+                    Arrays.copyOfRange(instructionByWord, 1, indexOfBy));
+            String deadline = String.join(" ",
+                    Arrays.copyOfRange(instructionByWord, indexOfBy + 1, lengthOfArray));
+            return new Deadline(description, LocalDate.parse(deadline));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Incorrect format of date.\n"
+                    + "The correct format should be YYYY-MM-DD.");
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid value for year/month/date");
         }
-        if (indexOfBy == -1 || indexOfBy == 1 || indexOfBy == (lengthOfArray - 1)) {
-            throw new DukeException(FORMAT_CORRECTION
-                    + "\"deadline a_string_describing_the_task /by a_string_describing_the_deadline_time\"");
-        }
-        String description = String.join(" ",
-                Arrays.copyOfRange(instructionByWord, 1, indexOfBy));
-        String deadline = String.join(" ",
-                Arrays.copyOfRange(instructionByWord, indexOfBy + 1, lengthOfArray));
-        return new Deadline(description, deadline);
     }
 
     static Task createATodoTask(String[] instructionByWord, int lengthOfArray) {
