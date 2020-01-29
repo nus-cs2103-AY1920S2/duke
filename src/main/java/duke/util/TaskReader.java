@@ -129,7 +129,8 @@ public class TaskReader {
      * @throws DukeInvalidTaskFormatException If the command cannot be found.
      */
 
-    private Keyword getKeyword(String command_string, String line, int counter) throws DukeInvalidTaskFormatException {
+    private Keyword getKeyword(String command_string, String line, int counter) throws
+            DukeInvalidTaskFormatException {
         Keyword keyword = TaskReader.KEYWORD.get(command_string);
 
         if (keyword == null) {
