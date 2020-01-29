@@ -41,7 +41,7 @@ public class Ui {
 
     /** Displays a welcome message in the console. */
     public void showWelcome() {
-        String header = indent("Hello from\n" + LOGO, 4);
+        String header = indent("\nHello from\n" + LOGO, 4);
         System.out.println(header);
     }
 
@@ -124,7 +124,10 @@ public class Ui {
     public void showLoadingError() {
         String message = "Sorry... the task list could not be loaded from a save file.\n"
                 + "Here's a new task list for you to use.";
+
+        showLine();
         echo(message);
+        showLine();
     }
 
     /**
