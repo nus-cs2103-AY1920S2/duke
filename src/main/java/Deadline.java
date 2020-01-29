@@ -26,7 +26,7 @@ public class Deadline extends Task {
         String[] arr = by.split(" ");
         this.date = LocalDate.parse(arr[0]);
 
-        if(arr.length > 1) {
+        if (arr.length > 1) {
             char[] charArr = arr[1].toCharArray();
             String hour = "" + charArr[0] + charArr[1];
             String mins = "" + charArr[2] + charArr[3];
