@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Storage {
@@ -35,7 +36,7 @@ public class Storage {
                 JsonObject taskToCheck = (JsonObject) array.get(i);
                 if (taskToCheck.has("deadline")) {
                     result.add(new Deadline(gson.fromJson(taskToCheck.get("description"), String.class),
-                            gson.fromJson(taskToCheck.get("deadline"), String.class),
+                            gson.fromJson(taskToCheck.get("deadline"), LocalDateTime.class),
                             gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
                 } else if (taskToCheck.has("timeframe")) {
                     result.add(new Event(gson.fromJson(taskToCheck.get("description"), String.class),

@@ -1,4 +1,10 @@
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -107,6 +113,8 @@ class Duchess {
     }
 
     private void createTask(String type, String description) throws DuchessException {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         switch (type) {
         case "todo":
             Task newTask = new ToDo(description.trim());
@@ -127,7 +135,51 @@ class Duchess {
                 throw new DuchessException(
                         "I don't know when is your deadline! Please use /by [deadline here].");
             }
-            newTask = new Deadline(details.get(0).trim(), details.get(1).trim());
+            LocalDateTime deadline;
+            String timeDetails = details.get(1).trim().toLowerCase();
+            switch (timeDetails) {
+            case "today":
+                deadline = LocalDate.now().atTime(17, 0);
+                break;
+            case "tonight":
+                deadline = LocalDate.now().atTime(21, 0);
+                break;
+            case "tomorrow":
+                deadline = LocalDate.now().plusDays(1).atTime(17, 0);
+                break;
+            case "monday":
+                // Fallthrough
+            case "tuesday":
+                // Fallthrough
+            case "wednesday":
+                // Fallthrough
+            case "thursday":
+                // Fallthrough
+            case "friday":
+                // Fallthrough
+            case "saturday":
+                // Fallthrough
+            case "sunday":
+                deadline = LocalDate.now()
+                        .with(TemporalAdjusters.next(DayOfWeek.valueOf(timeDetails.toUpperCase())))
+                        .atTime(17, 0);
+                break;
+            default:
+                try {
+                    deadline = LocalDateTime.parse(timeDetails, dateTimeFormatter);
+                } catch (DateTimeParseException e1) {
+                    try {
+                        deadline = LocalDate.parse(timeDetails, dateFormatter).atStartOfDay();
+                    } catch (DateTimeParseException e2) {
+                        throw new DuchessException(
+                                "Please use the following format for the datetime instead:\n"
+                                        + "\td/M/yyyy HHmm OR d/M/yyyy\n"
+                                        + "\tOR today/tonight/tomorrow\n"
+                                        + "\tOR day of the week (e.g. Monday, Tuesday)");
+                    }
+                }
+            }
+            newTask = new Deadline(details.get(0).trim(), deadline);
             this.addToTasks(newTask);
             break;
         default:
