@@ -16,6 +16,7 @@ import java.io.IOException;
 public class Storage {
     private final ArrayList<Task> storedTasks;
     private final String fileDirectory;
+    private final String fileName;
 
     /**
      * Constructs a new Storage, loading saved items
@@ -24,14 +25,17 @@ public class Storage {
      *
      * @param fd String representing file directory to
      *           load from and store to
+     * @param fn String representing file name to be used
+     *           in the file directory specified
      */
-    public Storage(String fd) {
+    public Storage(String fd, String fn) {
         this.fileDirectory = fd;
+        this.fileName = fn;
         this.storedTasks = new ArrayList<Task>();
         FileReader toLoadFrom;
         boolean hasReadFile = false;
         try {
-            toLoadFrom = new FileReader(this.fileDirectory);
+            toLoadFrom = new FileReader(Storage.getFullFileAddress(fd, fn));
             hasReadFile = true;
         } catch (FileNotFoundException e) {
             // could not find file in location specified
@@ -45,7 +49,7 @@ public class Storage {
             while (io.hasNext()) {
                 // main loop to load each saved task
                 String typeAndDone = io.nextLine();
-                Task currentTask = null;
+                Task currentTask;
                 boolean isCompleted;
                 if (typeAndDone.startsWith(Deadline.TYPE)) {
                     currentTask = new Deadline(io.nextLine(), io.nextLine());
@@ -157,18 +161,25 @@ public class Storage {
      * to a file on the local system
      */
     public void saveToDisk() {
-        String toBeSaved = "";
+        StringBuilder toBeSaved = new StringBuilder();
         for (Task task : storedTasks) {
             // use line breaks to separate the tasks
-            toBeSaved = toBeSaved + task.type()
-                    + (task.isDone() ? "1" : "0")
-                    +"\n" + task.getTaskDetails() + "\n"
-                    + task.getTaskTime() + "\n";
+            toBeSaved.append(task.type())
+                    .append(task.isDone() ? "1" : "0")
+                    .append("\n")
+                    .append(task.getTaskDetails())
+                    .append("\n")
+                    .append(task.getTaskTime())
+                    .append("\n");
         }
 
-        File saveLocation = new File(this.fileDirectory);
+        File saveDirectory = new File(this.fileDirectory);
+        File saveLocation = new File(
+                Storage.getFullFileAddress(this.fileDirectory, this.fileName)
+        );
         if (!saveLocation.exists()) {
             try {
+                saveDirectory.mkdirs();
                 saveLocation.createNewFile();
             } catch (IOException e) {
                 // error in creating new file
@@ -179,14 +190,26 @@ public class Storage {
 
         try {
             BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(this.fileDirectory)
+                    new FileWriter(saveLocation)
             );
-            writer.write(toBeSaved);
+            writer.write(toBeSaved.toString());
             writer.close();
         } catch (IOException e) {
             // error in writing to file
             System.err.println("IOException2");
             System.err.println(e.getMessage());
         }
+    }
+
+    /**
+     * Gets the full file address relative to the
+     * current location
+     *
+     * @param directory String representing file directory
+     * @param name String representing file name
+     * @return String representing full file address
+     */
+    private static String getFullFileAddress(String directory, String name) {
+        return directory + "/" + name;
     }
 }

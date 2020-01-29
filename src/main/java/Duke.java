@@ -44,14 +44,15 @@ public class Duke {
                 "    '.  `'---'`  .'\n" +
                 "      '-._____.-'\n\n" +
                 "Take one last look at what I deleted:";
-        String fileDirectory = "../tasks.botstore";
+        String fileDirectory = "../user/data";
+        String fileName = "tasks.botstore";
 
         System.out.println(greetings);
         System.out.println(load);
 
         Scanner input = new Scanner(System.in);
         CommandParser parser = new CommandParser();
-        Storage store = new Storage(fileDirectory);
+        Storage store = new Storage(fileDirectory, fileName);
 
         System.out.println(initialMessage);
         System.out.println(awaitingMessage);
