@@ -23,21 +23,21 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(command.equals("todo")) {
-            if(description.equals("")) {
+        if (command.equals("todo")) {
+            if (description.equals("")) {
                 throw new DukeException("todo");
             } else {
                 tasks.addToDo(description);
             }
         } else if (command.equals("deadline")) {
-            if(description.equals("")) {
+            if (description.equals("")) {
                 throw new DukeException("deadline");
             } else {
                 String[] array = description.split(" /by ");
                 tasks.addDeadline(array[0], array[1]);
             }
         } else {
-            if(description.equals("")) {
+            if (description.equals("")) {
                 throw new DukeException("event");
             } else {
                 String[] array = description.split(" /at ");

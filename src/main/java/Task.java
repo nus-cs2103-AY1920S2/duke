@@ -52,7 +52,7 @@ public class Task {
      * @return icon in string
      */
     public String getStatusIcon() {
-        if(isDone) {
+        if (isDone) {
             return "\u2713";
         } else {
             return "\u2718";

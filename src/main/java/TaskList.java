@@ -84,7 +84,7 @@ public class TaskList {
     public void listRecord() {
         System.out.println("--------------------------------------------------");
 
-        for(int i = 0; i < record.size(); i++) {
+        for (int i = 0; i < record.size(); i++) {
             int j = i + 1;
             Task current = record.get(i);
             System.out.print(j + "." + current + "\n");

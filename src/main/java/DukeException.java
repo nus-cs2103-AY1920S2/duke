@@ -19,7 +19,7 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        if(!detail.equals("")) {
+        if (!detail.equals("")) {
             return "--------------------------------------------------\n" +
                     "Why you so dumb? The description of " + detail + " cannot be empty! SMH \n" +
                     "--------------------------------------------------\n";
