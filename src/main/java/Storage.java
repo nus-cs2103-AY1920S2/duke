@@ -15,7 +15,6 @@ import java.util.Scanner;
             String path = Paths.get(ROOT_PATH + System.getProperty("file.separator") + filePath).toString();
             File file = new File(path);
             this.file_path = file;
-            System.out.println("THIS IS THE FILE PATH " + file_path);
             this.absolutePath = path;
         }
 

@@ -1,0 +1,2 @@
+D | [N] | return book | Sunday
+E | [N] | project meeting | Mon 2-4pm
