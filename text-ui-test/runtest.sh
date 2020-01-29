@@ -12,8 +12,14 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete data from previous run
+if [ -e "./data.txt" ]
+then
+    rm data.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -Xlint:none -d ../bin ../src/main/java/com/duke/bot/*.java
+if ! javac -Xlint:none -d ../bin $(find ../src/main/java/com/duke/bot -name *.java)
 then
     echo "********** BUILD FAILURE **********"
     exit 1
