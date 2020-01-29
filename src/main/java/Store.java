@@ -1,10 +1,9 @@
+import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.io.*;
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Store {
 
@@ -69,51 +68,78 @@ public class Store {
         System.out.println(String.format("Now you have %d tasks in the list.", Storage.size()));
         System.out.println(line);
         WritetoFile();
-//        counter = counter + 1;
     }
     public void deadline(String[] ActionTime){
         String Timing;
+        String details;
         this.cmd = ActionTime[0];
-        String details = ActionTime[1].substring(3).strip();
-        String[] DateTime = details.split(" ");
-        this.LD = LocalDate.parse(DateTime[0]);
-        String Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        if(DateTime.length == 2){
-            this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
-            String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
-            Timing = Date + " " + Time;
+        if(ActionTime[1].length() <=1){
+            DE.DeadlineMissingDate();
         } else {
-            Timing = Date;
+            details = ActionTime[1].substring(3).strip();
+            String[] DateTime = details.split(" ");
+            try {
+                this.LD = LocalDate.parse(DateTime[0]);
+                String Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                if (DateTime.length == 2) {
+                    try {
+                        this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
+                        String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
+                        Timing = Date + " " + Time;
+                    } catch (DateTimeException d){
+                        DE.InvalidTimeFormat();
+                        return;
+                    }
+                } else {
+                    Timing = Date;
+                }
+                Task T = new Deadline(cmd, Timing);
+                Storage.add(T);
+                T.Output();
+                System.out.println(String.format("Now you have %d tasks in the list.", counter));
+                System.out.println(line);
+                WritetoFile();
+            } catch (DateTimeException d){
+                DE.InvalidDateFormat();
+            }
+
         }
-        Task T = new Deadline(cmd, Timing);
-        Storage.add(T);
-        T.Output();
-        System.out.println(String.format("Now you have %d tasks in the list.", counter));
-        System.out.println(line);
-        WritetoFile();
-//        counter = counter + 1;
     }
     public void event(String[] ActionTime){
         String Timing;
+        String details;
+        String Date;
         this.cmd = ActionTime[0];
-        String details = ActionTime[1].substring(3).strip();
-        String[] DateTime = details.split(" ");
-        this.LD = LocalDate.parse(DateTime[0]);
-        String Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        if(DateTime.length == 2){
-            this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
-            String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
-            Timing = Date + " " + Time;
+        if(ActionTime[1].length() <=1){
+            DE.EventMissingDate();
         } else {
-            Timing = Date;
+            details = ActionTime[1].substring(3).strip();
+            String[] DateTime = details.split(" ");
+            try {
+                this.LD = LocalDate.parse(DateTime[0]);
+                Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                if (DateTime.length == 2) {
+                    try {
+                        this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
+                        String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
+                        Timing = Date + " " + Time;
+                    } catch (DateTimeException d) {
+                        DE.InvalidTimeFormat();
+                        return;
+                    }
+                } else {
+                    Timing = Date;
+                }
+                Task T = new Event(cmd, Timing);
+                Storage.add(T);
+                T.Output();
+                System.out.println(String.format("Now you have %d tasks in the list.", counter));
+                System.out.println(line);
+                WritetoFile();
+            } catch (DateTimeException d) {
+                DE.InvalidDateFormat();
+            }
         }
-        Task T = new Event(cmd, Timing);
-        Storage.add(T);
-        T.Output();
-        System.out.println(String.format("Now you have %d tasks in the list.", counter));
-        System.out.println(line);
-        WritetoFile();
-//        counter = counter + 1;
     }
     public void delete(int index){
         if(index > Storage.size() || index <= 0){
@@ -142,7 +168,6 @@ public class Store {
             e.printStackTrace();
         }
     }
-
     public void load(String S){
         boolean R = CheckIfDone(S);
         if(S.contains("[T]")){
@@ -154,14 +179,16 @@ public class Store {
         } else if (S.contains("[D]")){
             String NewInput = S.substring(9);
             String[] AT = NewInput.split("\\|");
-            Task T = new Deadline(AT[0], AT[1]);
+            String time = AT[1].strip().substring(3).strip();
+            Task T = new Deadline(AT[0], time);
             T.isDone = R;
             Storage.add(T);
             WritetoFile();
         } else if (S.contains("[E]")){
             String result = S.substring(9);
             String[] AT = result.split("\\|");
-            Task T = new Event(AT[0], AT[1]);
+            String time = AT[1].strip().substring(3).strip();
+            Task T = new Event(AT[0], time);
             T.isDone = R;
             Storage.add(T);
             WritetoFile();

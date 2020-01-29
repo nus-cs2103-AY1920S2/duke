@@ -2,45 +2,37 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sn = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String line = "____________________________________________________________";
-        String[] CheckInput;
-        System.out.println("Hello from\n" + logo);
-        System.out.println(line);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println(line);
 
-        File file = new File("D:/duke/data/duke.txt");
-        Store lib = new Store(file);
-        DukeException DE = new DukeException();
+    private Store lib;
+    private Ui ui;
+    private Scanner sn = new Scanner(System.in);
+    private DukeException DE;
+    String[] CheckInput;
+
+    public Duke(String filepath){
+        ui = new Ui();
+        DE = new DukeException();
+        File file = new File(filepath);
+        lib = new Store(file);
         try {
             boolean result = file.exists();
             if(!result){
                 boolean ans = file.createNewFile();
             } else {
-                try {
                     Scanner newSN = new Scanner(file);
                     while(newSN.hasNextLine()){
                         String nxtLine = newSN.nextLine();
                         lib.load(nxtLine);
                     } //end while- for reading existing file
-                    System.out.println(line);
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+                    ui.line();
             }
         } catch (IOException e){
             e.printStackTrace();
         }
+    } //end Duke
 
-
-
+    public void run(){
+        ui.showWelcome();
         while(sn.hasNext()){
             String input = sn.nextLine();
             if(input.equals("bye")) {
@@ -90,7 +82,10 @@ public class Duke {
             }
 
         }
+    }
 
+    public static void main(String[] args) {
+        new Duke("D:/duke/data/duke.txt").run();
     }
 
 

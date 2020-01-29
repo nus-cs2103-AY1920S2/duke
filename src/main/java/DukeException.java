@@ -1,4 +1,4 @@
-public class DukeException {
+public class DukeException{
     String line = "____________________________________________________________";
     public DukeException(){
     }
@@ -37,5 +37,16 @@ public class DukeException {
         System.out.println("☹ Invalid Number. Please Enter a valid number.");
         System.out.println(line);
     }
+    public void InvalidDateFormat(){
+        System.out.println(line);
+        System.out.println("☹ Invalid Date Format! Enter in /by yyyy-mm-dd");
+        System.out.println(line);
+    }
+    public void InvalidTimeFormat(){
+        System.out.println(line);
+        System.out.println("☹ Invalid Date Format! Enter in hh:mm");
+        System.out.println(line);
+    }
+
 
 }

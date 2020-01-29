@@ -4,9 +4,6 @@ public class Deadline extends Task {
 
     public Deadline (String description, String time){
         super(description);
-//        String[] input = time.split("by");
-//        this.time = input[1];
-//        this.time = time.substring(3).strip();
         this.time = time;
     }
 

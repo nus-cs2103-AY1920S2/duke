@@ -4,7 +4,6 @@ public class Event extends Task {
 
     public Event (String description, String time){
         super(description);
-//        this.time = time.substring(3).strip();
         this.time = time;
     }
 
