@@ -4,7 +4,7 @@
  */
 public abstract class Task {
     private String taskDetails;
-    private String taskTime;
+    private PrettyTime taskTime;
     private boolean doneStatus;
 
     /**
@@ -13,10 +13,10 @@ public abstract class Task {
      * @param td String that represents what
      *           was entered to create the Task
      *
-     * @param tt String that represents a time
+     * @param tt PrettyTime that represents a time
      *           associated with the Task
      */
-    public Task(String td, String tt) {
+    public Task(String td, PrettyTime tt) {
         this.taskDetails = td;
         this.taskTime = tt;
         this.doneStatus = false;
@@ -61,10 +61,32 @@ public abstract class Task {
      */
     public abstract String type();
 
+    /**
+     * Gives an appropriate verb to use before
+     * the time of the Task is displayed
+     *
+     * @param rawTime The original String
+     *                representing Task time
+     * @return String representing time with
+     * the appropriate formatting for the
+     * type of Task
+     */
+    public abstract String timeVerb(String rawTime);
+
+    /**
+     * Gives the time of the current Task
+     *
+     * @return PrettyTime representing time
+     * of the Task
+     */
+    public PrettyTime getPrettyTime() {
+        return this.taskTime;
+    }
+
     @Override
     public String toString() {
-        return "[" + this.type() + "]" +
-            this.doneGet() + " " + this.taskDetails +
-            " " + this.taskTime;
+        return "[" + this.type() + "]"
+            + this.doneGet() + " " + this.taskDetails + " "
+            + this.timeVerb(this.taskTime.toString());
     }
 }

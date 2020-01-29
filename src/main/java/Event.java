@@ -15,6 +15,11 @@ public class Event extends Task {
         return "E";
     }
 
+    @Override
+    public String timeVerb(String rawTime) {
+        return "(at: " + rawTime + ")";
+    }
+
     /**
      * Method to format the input String
      * properly for an Event's description
@@ -41,10 +46,10 @@ public class Event extends Task {
      *
      * @return The formatted String time
      */
-    private static String timeMaker(String t) {
+    private static PrettyTime timeMaker(String t) {
         int indexLast = t.lastIndexOf(Event.AT);
-        return "(at: " + t.substring(
+        return new PrettyTime(t.substring(
             indexLast + Event.AT.length()
-        ).stripLeading() + ")";
+        ).stripLeading());
     }
 }

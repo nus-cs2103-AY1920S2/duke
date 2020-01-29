@@ -5,13 +5,18 @@
 public class Todo extends Task {
     public Todo(String td) throws InadequateArgumentsException {
         super(Todo.nonEmptyCheck(
-            td.substring(Command.TODO.word.length()).stripLeading()),
-         "");
+                td.substring(Command.TODO.word.length()).stripLeading()),
+                new PrettyTime(""));
     }
 
     @Override
     public String type() {
         return "T";
+    }
+
+    @Override
+    public String timeVerb(String rawTime) {
+        return "";
     }
 
     /**

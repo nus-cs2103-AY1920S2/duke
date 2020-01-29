@@ -17,6 +17,11 @@ public class Deadline extends Task {
         return "D";
     }
 
+    @Override
+    public String timeVerb(String rawTime) {
+        return "(by: " + rawTime + ")";
+    }
+
     /**
      * Method to format the input String
      * properly for a Deadline's description
@@ -41,12 +46,12 @@ public class Deadline extends Task {
      * @param t The input String without
      *          the "deadline" word
      *
-     * @return The formatted String time
+     * @return The formatted PrettyTime
      */
-    private static String timeMaker(String t) {
+    private static PrettyTime timeMaker(String t) {
         int indexLast = t.lastIndexOf(Deadline.BY);
-        return "(by: " + t.substring(
+        return new PrettyTime(t.substring(
             indexLast + Deadline.BY.length()
-        ).stripLeading() + ")";
+        ).stripLeading());
     }
 }
