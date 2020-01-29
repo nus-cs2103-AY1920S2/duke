@@ -1,10 +1,12 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Hello I am from North Korea\n" +
                 "What can I do for you?");
         System.out.println("____________________________________\n");
@@ -12,10 +14,8 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         String input = sc.nextLine();
-        while (!input.isEmpty()) {
-            if (input.equals("bye")) {
-                break;
-            }
+        Storage.getSavedData(tasks);
+        while (!input.equals("bye")) {
 
             if (input.equals("list")) {
                 if (!tasks.isEmpty()) {
@@ -38,7 +38,8 @@ public class Duke {
             }
 
             if (command.equals("todo")) {
-                String task = input.substring(input.indexOf(' '), input.length());
+                String task = input.substring(input.indexOf(' ') + 1);
+
                 Todo todo = new Todo(task);
                 tasks.add(todo);
                 System.out.println("Got it, I've added the following task:\n" + "  " + todo + "\n"
@@ -57,15 +58,19 @@ public class Duke {
                 tasks.add(event);
                 System.out.println("Got it, I've added the following task:\n" + "  " + event + "\n"
                         + "Now you have " + tasks.size() + " tasks in the list.");
+                Storage.updateData(tasks);
             } else if (command.equals("delete")) {
                 int toDelete = Integer.parseInt(input.substring(input.indexOf(' ') + 1, input.length())) - 1;
                 Task task = tasks.get(toDelete);
                 tasks.remove(toDelete);
                 System.out.println("Noted, I've removed the following task:\n" + "  " + task + "\n"
                         + "Now you have " + tasks.size() + " tasks in the list.");
-
+            } else if (command.equals("done")) {
+                int toEdit = Integer.parseInt(input.substring(input.indexOf(' ') + 1, input.length())) - 1;
+                Task task = tasks.get(toEdit);
+                task.markAsDone();
             }
-
+            Storage.updateData(tasks);
             input = sc.nextLine();
         }
 
@@ -81,7 +86,8 @@ public class Duke {
                     !input.equals("deadline") &&
                     !input.equals("event") &&
                     !input.equals("list") &&
-                    !input.equals("delete")) {
+                    !input.equals("delete") &&
+                    !input.equals("done")) {
                 throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
             } else {
                 // command is not valid
@@ -92,7 +98,8 @@ public class Duke {
                     !input.substring(0, input.indexOf(' ')).equals("deadline") &&
                     !input.substring(0, input.indexOf(' ')).equals("event") &&
                     !input.substring(0, input.indexOf(' ')).equals("list") &&
-                    !input.substring(0, input.indexOf(' ')).equals("delete")) {
+                    !input.substring(0, input.indexOf(' ')).equals("delete") &&
+                    !input.substring(0, input.indexOf(' ')).equals("done")) {
                 throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
             } else {
                 return input.substring(0, input.indexOf(' '));
