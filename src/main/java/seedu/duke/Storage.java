@@ -224,10 +224,12 @@ public class Storage {
         String data = "";
         String line = null;
         int counter = 1;
+        boolean isFirstUndeletedLine = true;
         while ((line = br.readLine()) != null) {
             if (counter != index) {
-                if (counter == 1 || counter == index + 1) {
+                if (isFirstUndeletedLine) {
                     data += line;
+                    isFirstUndeletedLine = false;
                 } else {
                     data += "\n" + line;
                 }

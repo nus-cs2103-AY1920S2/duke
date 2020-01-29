@@ -27,16 +27,8 @@ public class Duke {
 
     /**
      * Reads the user command and passes it to Ui to be processed accordingly.
-     *
-     * @throws InvalidDateException if a date is input in a wrong format
-     * @throws InvalidTaskInputException if an invalid task command is input
-     * @throws InvalidCommandException if the command inputted is not todo, deadline, event, list, delete, or done
-     * @throws IOException if an input or output exception occurred
-     * @throws EmptyDescriptionException if the description of a task is empty
-     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
      */
-    private void runDuke() throws InvalidDateException, InvalidTaskInputException, InvalidCommandException,
-            IOException, EmptyDescriptionException, TaskIndexOutOfBoundsException {
+    private void runDuke() {
         ui.greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -58,17 +50,8 @@ public class Duke {
 
     /**
      * Main method to run Duke.
-     *
-     * @param args args
-     * @throws IOException if an input or output exception occurred
-     * @throws InvalidTaskInputException if an invalid task command is input
-     * @throws InvalidDateException if a date is input in a wrong format
-     * @throws EmptyDescriptionException if the description of a task is empty
-     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
-     * @throws InvalidCommandException if the command input is not todo, deadline, event, list, delete, or done
      */
-    public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidDateException,
-            EmptyDescriptionException, TaskIndexOutOfBoundsException, InvalidCommandException {
+    public static void main(String[] args) throws IOException {
         Duke duke;
         String path = "data/duke.txt";
         duke = new Duke(path);

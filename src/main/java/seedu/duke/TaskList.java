@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -135,15 +136,19 @@ public class TaskList {
     /**
      * Prints the list of tasks the user has.
      */
-    public void printList() {
-        if (tasks.size() == 0) {
+    public void printList(List<Task> currTasks) {
+        if (currTasks.size() == 0) {
             System.out.println("You currently don't have any task. Start listing now!");
         } else {
             System.out.println("Stop procrastinating. Do it now!");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
+            for (int i = 0; i < currTasks.size(); i++) {
+                System.out.printf("%d. %s\n", i + 1, currTasks.get(i).toString());
             }
         }
+    }
+
+    public void printList() {
+        printList(tasks);
     }
 
     /**
@@ -174,6 +179,30 @@ public class TaskList {
         System.out.println(task.toString());
         printNumTask();
         storage.deleteInStorage(index);
+    }
+
+    public void findTask(String desc) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(desc)) {
+                foundTasks.add(task);
+            }
+        }
+
+        if (foundTasks.size() == 0) {
+            printNoFoundTask();
+        } else {
+            printFoundTask();
+            printList(foundTasks);
+        }
+    }
+
+    public void printFoundTask() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void printNoFoundTask() {
+        System.out.println("Sorry I can't find what you are looking for....");
     }
 
     private static void printRemoveTask() {

@@ -1,7 +1,3 @@
-D | Y | return book | 2020-01-01
-E | N | project meeting | 2020-02-16
-T | N | join sports clubD | N | tut 1 | 2020-09-09
-E | N | competition | 2020-10-10
-T | N | hahaha
-E | N | meet teacher | 2020-02-02
-T | N | tut
+E | Y | read book | 2020-04-04
+D | N | tutorial 1 | 2020-01-01
+T | Y | study java

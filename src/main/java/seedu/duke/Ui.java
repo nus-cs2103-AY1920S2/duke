@@ -15,6 +15,7 @@ public class Ui {
     public static final String EVENT = "event";
     public static final String DELETE = "delete";
     public static final String DONE = "done";
+    public static final String FIND = "find";
 
     public Ui() {
         parser = new Parser();
@@ -30,40 +31,78 @@ public class Ui {
 
     /**
      * Adds, changes, and deletes the content of the list according to the user's command input.
-     *
-     * @param inputs the user's line input converted into a String array
-     * @param taskList the taskList object that will be modified
-     * @throws EmptyDescriptionException if the description of a task is empty
-     * @throws InvalidTaskInputException if an invalid task command is input
-     * @throws InvalidCommandException if the command inputted is not todo, deadline, event, list, delete, or done
-     * @throws TaskIndexOutOfBoundsException if the index of a task being marked as done or being deleted is invalid
-     * @throws IOException if an input or output exception occurred
-     * @throws InvalidDateException if a date is input in a wrong format
      */
-    public void handleCommands(String[] inputs, TaskList taskList) throws EmptyDescriptionException,
-            InvalidTaskInputException, InvalidCommandException, TaskIndexOutOfBoundsException,
-            IOException, InvalidDateException {
-        String command = parser.processCommand(inputs[0].trim(), inputs);
-        if (command.equals(TODO)) {
-            String desc = inputs[1];
-            taskList.addTodo(desc, "N");
-        } else if (command.equals(DEADLINE)) {
-            String desc = inputs[1];
-            taskList.addDeadline(desc, "N");
-        } else if (command.equals(EVENT)) {
-            String desc = inputs[1];
-            taskList.addEvent(desc, "N");
-        } else if (command.equals(LIST)) {
-            taskList.printList();
-        } else if (command.equals(DONE)) {
-            int index = Integer.parseInt(inputs[1]);
-            taskList.markTaskAsDone(index);
-        } else if (command.equals(DELETE)) {
-            int index = Integer.parseInt(inputs[1]);
-            taskList.deleteTask(index);
-        } else {
-            throw new InvalidCommandException();
+    public void handleCommands(String[] inputs, TaskList taskList) {
+        String command = parser.processCommand(inputs[0].trim());
+        try {
+            if (command.equals(TODO)) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addTodo(desc, "N");
+            } else if (command.equals(DEADLINE)) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addDeadline(desc, "N");
+            } else if (command.equals(EVENT)) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addEvent(desc, "N");
+            } else if (command.equals(LIST)) {
+                taskList.printList();
+            } else if (command.equals(DONE)) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                } else if (!isNumeric(inputs[1])) {
+                    throw new InvalidTaskInputException();
+                }
+                int index = Integer.parseInt(inputs[1]);
+                if (index < 1 || index > TaskList.tasks.size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
+                taskList.markTaskAsDone(index);
+            } else if (command.equals(DELETE)) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                } else if (!isNumeric(inputs[1])) {
+                    throw new InvalidTaskInputException();
+                }
+                int index = Integer.parseInt(inputs[1]);
+                if (index < 1 || index > TaskList.tasks.size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
+                taskList.deleteTask(index);
+            } else if (command.equals(FIND)) {
+                String desc = inputs[1];
+                taskList.findTask(desc);
+            } else {
+                throw new InvalidCommandException();
+            }
+        } catch (DukeException | IOException e) {
+            System.out.println(e.toString());
         }
+    }
+
+    /**
+     * Checks if a string can be converted to an integer.
+     * @param strNum the string to be checked
+     * @return true if the string can be converted to an integer
+     */
+    private boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int intNum = Integer.parseInt(strNum);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
 }
