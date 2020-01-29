@@ -4,15 +4,35 @@
  */
 public class Event extends Task {
     public static final String AT = "/at ";
+    public static final String TYPE = "E";
 
+    /**
+     * Constructor for a Event Task
+     *
+     * @param td String representing the lines after
+     *           the event instruction
+     *
+     * @throws InadequateArgumentsException When String
+     * td is supplied without the word "/at"
+     */
     public Event(String td) throws InadequateArgumentsException {
         super(Event.descMaker(td.substring(Command.EVENT.word.length())),
                 Event.timeMaker(td.substring(Command.EVENT.word.length())));
     }
 
+    /**
+     * Constructor for a Event Task
+     *
+     * @param taskDesc Description of the Event
+     * @param taskTime Time of the Event
+     */
+    public Event(String taskDesc, String taskTime) {
+        super(taskDesc, taskTime);
+    }
+
     @Override
     public String type() {
-        return "E";
+        return Event.TYPE;
     }
 
     /**

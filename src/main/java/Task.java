@@ -40,6 +40,26 @@ public abstract class Task {
     }
 
     /**
+     * Gets the details of the Task, usually a
+     * short description
+     *
+     * @return String containing the details
+     */
+    public String getTaskDetails() {
+        return this.taskDetails;
+    }
+
+    /**
+     * Gets a time associated with the Task,
+     * in String format
+     *
+     * @return String representing the time
+     */
+    public String getTaskTime() {
+        return this.taskTime;
+    }
+
+    /**
      * Checks the status of this Task
      *
      * @return A String with a tick character

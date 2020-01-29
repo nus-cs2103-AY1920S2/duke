@@ -1,4 +1,3 @@
-import java.text.NumberFormat;
 import java.util.Scanner;
 
 /**
@@ -45,13 +44,14 @@ public class Duke {
                 "    '.  `'---'`  .'\n" +
                 "      '-._____.-'\n\n" +
                 "Take one last look at what I deleted:";
+        String fileDirectory = "../tasks.botstore";
 
         System.out.println(greetings);
         System.out.println(load);
 
         Scanner input = new Scanner(System.in);
         CommandParser parser = new CommandParser();
-        Storage store = new Storage();
+        Storage store = new Storage(fileDirectory);
 
         System.out.println(initialMessage);
         System.out.println(awaitingMessage);
@@ -83,6 +83,8 @@ public class Duke {
                 store.markAsDone(index);
                 System.out.println(doneMessage);
                 System.out.println(store.retrieve(index));
+
+                store.saveToDisk();
             } else if (next == Instruction.DELETE) {
                 int index;
                 try {
@@ -98,8 +100,10 @@ public class Duke {
                 store.delete(index);
                 System.out.println(deletedMessage);
                 System.out.println(toBeDeleted);
+
+                store.saveToDisk();
             } else if (next == Instruction.READ_STORAGE) {
-                store.readStorage();
+                store.printStorage();
             } else if (next == Instruction.STORE_DDL) {
                 Deadline ddl;
                 try {
@@ -111,6 +115,8 @@ public class Duke {
                 }
                 store.store(ddl);
                 Duke.printTaskStoreMessage(store.getNumTasks());
+
+                store.saveToDisk();
             } else if (next == Instruction.STORE_EVENT) {
                 Event evn;
                 try {
@@ -122,6 +128,8 @@ public class Duke {
                 }
                 store.store(evn);
                 Duke.printTaskStoreMessage(store.getNumTasks());
+
+                store.saveToDisk();
             } else if (next == Instruction.STORE_TODO) {
                 Todo tdo;
                 try {
@@ -133,6 +141,8 @@ public class Duke {
                 }
                 store.store(tdo);
                 Duke.printTaskStoreMessage(store.getNumTasks());
+
+                store.saveToDisk();
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;

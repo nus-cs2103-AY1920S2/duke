@@ -4,15 +4,35 @@
  */
 public class Deadline extends Task {
     public static final String BY = "/by ";
+    public static final String TYPE = "D";
 
+    /**
+     * Constructor for a Deadline Task
+     *
+     * @param td String representing the lines after
+     *           the deadline instruction
+     *
+     * @throws InadequateArgumentsException When String
+     * td is supplied without the word "/by"
+     */
     public Deadline(String td) throws InadequateArgumentsException {
         super(Deadline.descMaker(td.substring(Command.DEADLINE.word.length())),
             Deadline.timeMaker(td.substring(Command.DEADLINE.word.length())));
     }
 
+    /**
+     * Constructor for a Deadline Task
+     *
+     * @param taskDesc Description of the Deadline
+     * @param taskTime Time of the actual Deadline
+     */
+    public Deadline(String taskDesc, String taskTime) {
+        super(taskDesc, taskTime);
+    }
+
     @Override
     public String type() {
-        return "D";
+        return Deadline.TYPE;
     }
 
     /**

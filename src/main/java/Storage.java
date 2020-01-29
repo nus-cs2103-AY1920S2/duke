@@ -1,6 +1,12 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.FileReader;
-import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Class to handle stored items within the bot,
@@ -9,14 +15,66 @@ import java.io.FileOutputStream;
  */
 public class Storage {
     private final ArrayList<Task> storedTasks;
+    private final String fileDirectory;
 
     /**
      * Constructs a new Storage, loading saved items
      * from the local file system if possible. If not,
      * an empty Storage is created.
+     *
+     * @param fd String representing file directory to
+     *           load from and store to
      */
-    public Storage() {
+    public Storage(String fd) {
+        this.fileDirectory = fd;
         this.storedTasks = new ArrayList<Task>();
+        FileReader toLoadFrom;
+        boolean hasReadFile = false;
+        try {
+            toLoadFrom = new FileReader(this.fileDirectory);
+            hasReadFile = true;
+        } catch (FileNotFoundException e) {
+            // could not find file in location specified
+            // create new empty store
+            System.out.println("Could not find local storage");
+            toLoadFrom = null;
+        }
+
+        if (hasReadFile) {
+            Scanner io = new Scanner(toLoadFrom);
+            while (io.hasNext()) {
+                // main loop to load each saved task
+                String typeAndDone = io.nextLine();
+                Task currentTask = null;
+                boolean isCompleted;
+                if (typeAndDone.startsWith(Deadline.TYPE)) {
+                    currentTask = new Deadline(io.nextLine(), io.nextLine());
+                    isCompleted = typeAndDone.charAt(Deadline.TYPE.length()) == 1;
+                } else if (typeAndDone.startsWith(Event.TYPE)) {
+                    currentTask = new Event(io.nextLine(), io.nextLine());
+                    isCompleted = typeAndDone.charAt(Event.TYPE.length()) == 1;
+                } else if (typeAndDone.startsWith(Todo.TYPE)) {
+                    try {
+                        currentTask = new Todo(io.nextLine());
+                    } catch (InadequateArgumentsException e) {
+                        System.err.println("Error loading Todo: empty Todo task");
+                    }
+
+                    io.nextLine();
+                    isCompleted = typeAndDone.charAt(Todo.TYPE.length()) == 1;
+                } else {
+                    // unknown task
+                    System.out.println("Unknown task found!");
+                    continue;
+                }
+
+                if (isCompleted) {
+                    currentTask.markAsDone();
+                }
+
+                this.storedTasks.add(currentTask);
+            }
+        }
     }
 
     /**
@@ -32,7 +90,7 @@ public class Storage {
      * Prints out all the stored items,
      * in order which they were stored
      */
-    public void readStorage() {
+    public void printStorage() {
         int length = this.storedTasks.size();
         for (int i = 0; i < length; i++) {
             System.out.println(retrieve(i + 1));
@@ -92,6 +150,31 @@ public class Storage {
         String toBeSaved = "";
         for (Task task : storedTasks) {
             // use line breaks to separate the tasks
+            toBeSaved = toBeSaved + task.type()
+                    + (task.isDone() ? "1" : "0")
+                    +"\n" + task.getTaskDetails() + "\n"
+                    + task.getTaskTime() + "\n";
+        }
+
+        File saveLocation = new File(this.fileDirectory);
+        if (!saveLocation.exists()) {
+            try {
+                saveLocation.createNewFile();
+            } catch (IOException e) {
+                System.out.println("IOException1");
+                System.err.println(e.getMessage());
+            }
+        }
+
+        try {
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(this.fileDirectory)
+            );
+            writer.write(toBeSaved);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("IOException2");
+            System.err.println(e.getMessage());
         }
     }
 }

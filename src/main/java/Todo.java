@@ -3,6 +3,8 @@
  * "To-do" type Tasks
  */
 public class Todo extends Task {
+    public static String TYPE = "T";
+
     public Todo(String td) throws InadequateArgumentsException {
         super(Todo.nonEmptyCheck(
             td.substring(Command.TODO.word.length()).stripLeading()),
@@ -11,7 +13,7 @@ public class Todo extends Task {
 
     @Override
     public String type() {
-        return "T";
+        return Todo.TYPE;
     }
 
     /**
