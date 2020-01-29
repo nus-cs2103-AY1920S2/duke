@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -60,7 +61,10 @@ public class Duke {
     public static void main(String[] args) throws IOException, InvalidTaskInputException, InvalidDateException,
             EmptyDescriptionException, TaskIndexOutOfBoundsException, InvalidCommandException {
         Duke duke;
-        duke = new Duke("data/duke.txt");
+        String path = "/data/duke.txt";
+        String base = "/data";
+        String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
+        duke = new Duke(relative);
         duke.runDuke();
     }
 }
