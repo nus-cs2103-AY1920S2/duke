@@ -7,6 +7,10 @@ import java.util.List;
 public class TaskList implements Serializable {
     private List<Task> taskList;
 
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
     public TaskList(List<Task> list) {
         this.taskList = new ArrayList<>(list);
     }
