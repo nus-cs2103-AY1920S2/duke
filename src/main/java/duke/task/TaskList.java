@@ -102,7 +102,6 @@ public class TaskList implements Serializable {
 
     /**
      * Returns an array of all the names of tasks in the taskList.
-     * <p>
      * Certain procedures (e.g., Printing of all tasks) requires access to the names of each
      * element in the taskList. This function returns all the names of tasks (from their respective
      * toString() functions) as an array.
