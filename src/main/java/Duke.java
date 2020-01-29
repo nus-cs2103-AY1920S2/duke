@@ -1,245 +1,91 @@
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.LocalDate;
 
 /**
  * This is a simulation of a chat bot called Duke.
  */
 public class Duke {
-    public static void main(String[] args) {
-        /** Scanner of user input */
-        Scanner reader = new Scanner(System.in);
-        /** Task list of all tasks */
-        ArrayList<Task> tasks = new ArrayList<>();
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
 
-        // Create data file to store task list.
-        String dir = System.getProperty("user.dir");
-        String path = dir + File.separator + "data" + File.separator + "duke.txt";
-        File f = new File(path);
+    public Duke(String path) {
+        this.ui = new Ui();
+        this.storage = new Storage(path);
+        this.tasks = new TaskList(storage.load());
+    }
 
-        printLogo();
-        printGreet();
+    public void run() {
+        ui.printLogo();
+        ui.printGreet();
 
-        String input = reader.nextLine();
+        String input = null;
+        while (true) {
+            input = ui.getInput();
 
-        while (!input.equals("bye")) {
+            if (input.equals("bye")) {
+                ui.printExit();
+                break;
+            }
+
             if (input.equals("list")) {
-                list(tasks);
+                ui.list(tasks);
             } else {
                 String[] words = input.split(" ");
                 switch (words[0]) {
                     case "done":
                         try {
-                            markDone(tasks.get(Integer.valueOf(words[1]) - 1));
+                            ui.markDone(tasks.getTask(Integer.valueOf(words[1]) - 1));
                         } catch (IndexOutOfBoundsException e) {
-                            printBreak();
-                            System.out.println("    OOP!!! The number of tasks you have is only " + tasks.size());
-                            printBreak();
+                            ui.printException("    OOP!!! The number of tasks you have is only " +
+                                    tasks.getTaskNumber());
                         }
                         break;
                     case "delete":
                         try {
-                            delete(tasks.get(Integer.valueOf(words[1]) - 1), tasks);
+                            ui.delete(tasks.getTask(Integer.valueOf(words[1]) - 1), tasks);
                         } catch (IndexOutOfBoundsException e) {
-                            printBreak();
-                            System.out.println("    OOP!!! The number of tasks you have is only " + tasks.size());
-                            printBreak();
+                            ui.printException("    OOP!!! The number of tasks you have is only " +
+                                    tasks.getTaskNumber());
                         }
                         break;
                     case "todo":
                         try {
-                            add(new Todo(input.substring(5)), tasks);
+                            ui.add(new Todo(input.substring(5)), tasks);
                         } catch (IndexOutOfBoundsException e) {
-                            printBreak();
-                            System.out.println("    OOPS!!! The description of a todo cannot be empty.");
-                            printBreak();
+                            ui.printException("    OOPS!!! The description of a todo cannot be empty.");
                         }
                         break;
                     case "deadline":
-                        String[] ddlDetails = getTaskDetails(input.substring(9),
-                                " /by ");
+                        String[] ddlDetails = input.substring(9).split(" /by ");
                         try {
-                            add(new Deadline(ddlDetails[0], LocalDate.parse(ddlDetails[1])), tasks);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            printBreak();
-                            System.out.println("    OOP!!! The Deadline time is incorrect.");
-                            System.out.println("    Input time as \" /by yyyy-mm-dd\"");
-                            printBreak();
+                            ui.add(new Deadline(ddlDetails[0], LocalDate.parse(ddlDetails[1])), tasks);
                         } catch (Exception e) {
-                            printBreak();
-                            System.out.println("    Input time should be \" /by yyyy-mm-dd\"");
-                            printBreak();
+                            ui.printException("    Input time should be \" /by yyyy-mm-dd\"");
                         }
                         break;
                     case "event":
-                        String[] eventDetails = getTaskDetails(input.substring(6),
-                                " /at ");
+                        String[] eventDetails = input.substring(6).split(" /at ");
                         try {
-                            add(new Event(eventDetails[0], LocalDate.parse(eventDetails[1])), tasks);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            printBreak();
-                            System.out.println("    OOP!!! The event time is incorrect.");
-                            System.out.println("    Input time as \" /at yyyy-mm-dd\"");
-                            printBreak();
+                            ui.add(new Event(eventDetails[0], LocalDate.parse(eventDetails[1])), tasks);
                         } catch (Exception e) {
-                            printBreak();
-                            System.out.println("    Input time should be \" /at yyyy-mm-dd\"");
-                            printBreak();
+                            ui.printException("    Input time should be \" /at yyyy-mm-dd\"");
                         }
                         break;
                     default:
-                        printBreak();
-                        System.out.println("    OOPS!!! I'm sorry, but I don't know what that meas :-(");
-                        printBreak();
+                        ui.printException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                updateData(tasks, path);
+
+                storage.save(tasks);
             }
-            input = reader.nextLine();
         }
-
-        exit();
     }
 
-    /**
-     * Print logo of Duke.
-     */
-    private static void printLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printBreak();
-    }
 
-    /**
-     * Print break line.
-     */
-    private static void printBreak() {
-        System.out.println("    ____________________________________________________");
-    }
+    public static void main(String[] args) {
+        String dir = System.getProperty("user.dir");
+        String path = dir + File.separator + "data" + File.separator + "duke.txt";
 
-    /**
-     * Print greeting sentences.
-     */
-    private static void printGreet() {
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        printBreak();
-    }
-
-    /**
-     * Echo what user input and print it out.
-     *
-     * @param input User input.
-     */
-    private static void echo(String input) {
-        printBreak();
-        System.out.println("    " + input);
-        printBreak();
-    }
-
-    /**
-     * Print ending sentences.
-     */
-    private static void exit() {
-        printBreak();
-        System.out.println("    Bye. Hope to see you again soon!");
-        printBreak();
-    }
-
-    /**
-     * List out all tasks with number, type and description.
-     *
-     * @param tasks All tasks.
-     */
-    private static void list(ArrayList<Task> tasks) {
-        printBreak();
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); i++) {
-            Task currTask = tasks.get(i - 1);
-            System.out.println("    " + i + "." + currTask);
-        }
-        printBreak();
-    }
-
-    /**
-     * Add new task into task list and print its type and description.
-     * Print current number of total tasks after addition.
-     *
-     * @param t New task.
-     * @param tasks All task.
-     */
-    private static void add(Task t, ArrayList<Task> tasks) {
-        printBreak();
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + t);
-        tasks.add(t);
-        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
-        printBreak();
-    }
-
-    /**
-     * Mark one task's status as done.
-     *
-     * @param currTask Current task that needs to be marked.
-     */
-    private static void markDone(Task currTask) {
-        printBreak();
-        System.out.println("    Nice! I've marked this task as done:");
-        currTask.markAsDone();
-        System.out.println("      " + currTask);
-        printBreak();
-    }
-
-    /**
-     * Returns one task's description and time separately.
-     *
-     * @param str String contains all task details.
-     * @param splitter Splitter of description part and time part.
-     * @return 2-elements String array, which contains description and time.
-     */
-    private static String[] getTaskDetails(String str, String splitter) {
-        String[] details = str.split(splitter);
-        return details;
-    }
-
-    /**
-     * Delete certain task from task list.
-     * Print current number of tasks after deletion.
-     *
-     * @param currTask the task that needs deletion.
-     * @param tasks All tasks.
-     */
-    private static void delete(Task currTask, ArrayList<Task> tasks) {
-        printBreak();
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("      " + currTask);
-        tasks.remove(currTask);
-        System.out.println("    sNow you have " + tasks.size() + " tasks in the list.");
-        printBreak();
-    }
-
-    private static void updateData(ArrayList<Task> tasks, String path) {
-        try {
-            FileWriter fw = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(fw);
-            // Record task data.
-            for (int i = 0 ; i < tasks.size(); i++) {
-                bw.write(tasks.get(i).getData());
-                bw.newLine();
-            }
-            bw.flush();
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("    Cannot store data!");
-            System.out.println("    " + e.fillInStackTrace());
-            printBreak();
-        }
+        new Duke(path).run();
     }
 }
