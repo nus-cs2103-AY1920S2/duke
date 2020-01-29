@@ -1,5 +1,5 @@
 T , 0 , test
 E , 0 , read book , 2020-01-01
-D , 0 , join club , 2020-01-01
 T , 0 , drink water
 E , 0 , buy phone , 2020-01-05
+T , 0 , buy wallet

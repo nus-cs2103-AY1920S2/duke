@@ -93,7 +93,7 @@ public class TaskList {
     Task currTask = taskList.get(num);
     taskList.remove(num);
     UI.wrapper(
-        "I have removed"
+        "I have removed "
             + currTask.getTaskName()
             + "\n"
             + "You now have "

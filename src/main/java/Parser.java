@@ -88,7 +88,7 @@ public class Parser {
             if (num > list.size()) {
               throw new DukeException("Sorry! That is an invalid task number.");
             } else {
-              TaskList.removeAction(num);
+              TaskList.removeAction(num - 1);
             }
           }
         } else {
