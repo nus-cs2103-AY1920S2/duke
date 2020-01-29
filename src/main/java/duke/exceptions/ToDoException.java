@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Exception for To-Do issues.
+ * Exception when to do command has issue.
  */
 public class ToDoException extends DukeException {
 

@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Exception when there are issues with Events.
+ * Exception when event command has an issue.
  */
 public class EventException extends DukeException {
 

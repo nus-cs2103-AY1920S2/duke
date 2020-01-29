@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Exception when inputs of user are unclear.
+ * Exception when inputs of user are unclear, prompting for clearer input.
  */
 public class InputUnclearException extends DukeException {
 
