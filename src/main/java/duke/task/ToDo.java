@@ -1,5 +1,12 @@
 package duke.task;
 
+/**
+ * Represents the To-do type class extending from the
+ * abstract <code>Task</code> class, which simply has a name.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class ToDo extends Task {
 
     /**

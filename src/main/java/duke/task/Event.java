@@ -5,6 +5,13 @@ import duke.util.DateTimeUtil;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Event type class extending from the
+ * abstract <code>Task</code> class, which has a name and a <code>LocalDateTime</code> for the date and time.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class Event extends Task {
     private LocalDateTime datetime;
 

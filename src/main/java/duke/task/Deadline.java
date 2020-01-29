@@ -5,6 +5,13 @@ import duke.util.DateTimeUtil;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Deadline type class extending from the
+ * abstract <code>Task</code> class, which has a name and a <code>LocalDateTime</code> for the due date and time.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 

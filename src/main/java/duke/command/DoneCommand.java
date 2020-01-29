@@ -3,6 +3,13 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.Storage;
 
+/**
+ * Represents the Command for the "done" input by the user.
+ * It sets the input task index "isDone" status to true.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class DoneCommand extends Command {
 
     int doneIndex;

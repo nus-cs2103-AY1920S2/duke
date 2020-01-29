@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * Represents the a generic Task that will be extended from.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public abstract class Task {
     protected String name;
     protected boolean isDone;

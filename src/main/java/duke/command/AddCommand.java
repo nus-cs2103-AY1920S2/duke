@@ -4,6 +4,13 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 
+/**
+ * Represents the Command for the "add" input by the user.
+ * It adds a new task to the task list.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class AddCommand extends Command {
 
     private String toAdd;

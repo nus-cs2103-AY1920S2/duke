@@ -6,6 +6,13 @@ import duke.task.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Contains mainly static methods for all interactions
+ * with the user, including printing and reading input.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class Ui {
     private static String indentation = "    ";
     private static String hori_line = "______________________________________";

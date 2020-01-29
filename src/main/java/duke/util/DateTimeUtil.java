@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 
+/**
+ * Contains Date-Time related method(s).
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class DateTimeUtil {
     private static DateTimeFormatter formatter = null;
 

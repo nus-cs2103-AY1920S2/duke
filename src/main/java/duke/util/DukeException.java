@@ -1,5 +1,11 @@
 package duke.util;
 
+/**
+ * Contains all of Duke's user-defined exceptions.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class DukeException {
 
     public static class InvalidCommand extends Exception {

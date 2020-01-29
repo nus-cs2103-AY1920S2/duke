@@ -13,6 +13,13 @@ import duke.util.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Handles the applications parsing behaviour,
+ * deciding what action to take depending on the user input/command.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class Parser {
 
     /**

@@ -6,6 +6,13 @@ import duke.util.DukeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Handles the data structure where the tasks are stored.
+ * Contains various methods to add, delete and "done" a task.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class TaskList {
 
     private ArrayList<Task> task_list;

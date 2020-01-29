@@ -3,6 +3,13 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.Storage;
 
+/**
+ * Represents the Command for the "delete" input by the user.
+ * It deletes the task at the input task index from the task list.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class DeleteCommand extends Command {
 
     int indexToDelete;

@@ -11,6 +11,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the Command for the "date" input by the user.
+ * It displays all task items that fall on an input date.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class DateCommand extends Command {
 
     private String dateStr;

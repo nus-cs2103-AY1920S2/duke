@@ -3,6 +3,14 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.Storage;
 
+/**
+ * Represents the a generic Command that will be extended from.
+ * The method <code>execute</code> should be implemented and
+ * called to run any command's behaviours.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public abstract class Command {
 
     /**

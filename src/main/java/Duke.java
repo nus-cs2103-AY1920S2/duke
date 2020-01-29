@@ -4,6 +4,14 @@ import duke.util.Storage;
 import duke.interaction.Ui;
 import duke.interaction.Parser;
 
+/**
+ * The Duke program implements an application that manipulates a collection of tasks.
+ * This class contains overall behaviour functions like <code>loop</code> and <code>exit</code>.
+ * This class contains the <code>main</code> function, as well.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class Duke {
 
     private TaskList taskList;

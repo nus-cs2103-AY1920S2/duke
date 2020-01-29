@@ -10,6 +10,12 @@ import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Responsible for all File IO related behaviours. It includes save and load functionality.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class Storage {
     private File saveFile;
 

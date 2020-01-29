@@ -5,6 +5,13 @@ import duke.task.TaskList;
 import duke.task.Task;
 import duke.util.Storage;
 
+/**
+ * Represents the Command for the "find" input by the user.
+ * It shows all task items that contain the subsequent keyword from the user.
+ *
+ * @author  Hardy Shein
+ * @version 0.1
+ */
 public class FindCommand extends Command {
 
     private String keyword;
