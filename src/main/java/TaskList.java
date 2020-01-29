@@ -1,6 +1,7 @@
 
 import test.Task;
 import java.util.ArrayList;
+
 public class TaskList {
     public ArrayList<Task> taskStorage;
     public TaskList(ArrayList<Task> ts){

@@ -1,3 +1,4 @@
+
 public class ExceptionGenerator {
     public static void checkInputLength(String[] input) throws DukeException{
         if(input.length == 1 && input[0].equals("todo")) {
