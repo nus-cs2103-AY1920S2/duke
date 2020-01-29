@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an Event task.
  */
-public class Event extends Task{
+public class Event extends Task {
     /** Date that the event is happening. */
     private LocalDate atDate = null;
     /** Time of the day the event is happening. */
@@ -22,6 +22,8 @@ public class Event extends Task{
      */
     public Event(String description, String atDateTime) {
         super(description, false);
+
+        //translate the date and time to the correct format
         String[] rawDateTime = atDateTime.split(" ");
         String[] date = rawDateTime[0].split("/");
         if (date[0].length() < 2) {
@@ -35,6 +37,8 @@ public class Event extends Task{
         String formattedTime = "" + rawDateTime[1].charAt(0)
                 + rawDateTime[1].charAt(1) + ":" + rawDateTime[1].charAt(2)
                 + rawDateTime[1].charAt(3) + ":00";
+
+        //parse the reformatted date and time
         this.atDate = LocalDate.parse(formattedDate);
         this.atTime = LocalTime.parse(formattedTime);
     }
@@ -48,6 +52,8 @@ public class Event extends Task{
      */
     public Event(String description, boolean isDone, String atDateTime) {
         super(description, isDone);
+
+        //translate the date and time to the correct format
         String[] rawDateTime = atDateTime.split(" ");
         String[] date = rawDateTime[0].split("/");
         if (date[0].length() < 2) {
@@ -61,6 +67,8 @@ public class Event extends Task{
         String formattedTime = "" + rawDateTime[1].charAt(0)
                 + rawDateTime[1].charAt(1) + ":" + rawDateTime[1].charAt(2)
                 + rawDateTime[1].charAt(3) + ":00";
+
+        //parse the reformatted date and time
         this.atDate = LocalDate.parse(formattedDate);
         this.atTime = LocalTime.parse(formattedTime);
     }
@@ -84,8 +92,8 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s, %s)", "E", (getIsDone() ? "\u2713" : "\u2718"), getDescription()
-                , atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                , atTime.format(DateTimeFormatter.ofPattern("h:mma")));
+        return String.format("[%s][%s] %s (at: %s, %s)", "E", (getIsDone() ? "Y" : "N"), getDescription(),
+                atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                atTime.format(DateTimeFormatter.ofPattern("h:mma")));
     }
 }

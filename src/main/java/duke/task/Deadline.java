@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Deadline task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     /** Date the deadline task is due. */
     private LocalDate byDate = null;
     /** Time of the day the deadline task is due. */
@@ -22,6 +22,8 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String byDateTime) {
         super(description, false);
+
+        //translate the date and time to the correct format
         String[] rawDateTime = byDateTime.split(" ");
         String[] date = rawDateTime[0].split("/");
         if (date[0].length() < 2) {
@@ -35,6 +37,8 @@ public class Deadline extends Task{
         String formattedTime = "" + rawDateTime[1].charAt(0)
                 + rawDateTime[1].charAt(1) + ":" + rawDateTime[1].charAt(2)
                 + rawDateTime[1].charAt(3) + ":00";
+
+        //parse the reformatted date and time
         this.byDate = LocalDate.parse(formattedDate);
         this.byTime = LocalTime.parse(formattedTime);
     }
@@ -48,6 +52,8 @@ public class Deadline extends Task{
      */
     public Deadline(String description, boolean isDone, String byDateTime) {
         super(description, isDone);
+
+        //translate the date and time to the correct format
         String[] rawDateTime = byDateTime.split(" ");
         String[] date = rawDateTime[0].split("/");
         if (date[0].length() < 2) {
@@ -61,6 +67,8 @@ public class Deadline extends Task{
         String formattedTime = "" + rawDateTime[1].charAt(0)
                 + rawDateTime[1].charAt(1) + ":" + rawDateTime[1].charAt(2)
                 + rawDateTime[1].charAt(3) + ":00";
+
+        //parse the reformatted date and time
         this.byDate = LocalDate.parse(formattedDate);
         this.byTime = LocalTime.parse(formattedTime);
     }
@@ -84,8 +92,8 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s, %s)", "D", (getIsDone() ? "\u2713" : "\u2718"), getDescription()
-                , byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                , byTime.format(DateTimeFormatter.ofPattern("h:mma")));
+        return String.format("[%s][%s] %s (by: %s, %s)", "D", (getIsDone() ? "Y" : "N"), getDescription(),
+                byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                byTime.format(DateTimeFormatter.ofPattern("h:mma")));
     }
 }

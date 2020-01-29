@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents an Todo task.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructs a new Todo task with description.
      *
@@ -40,6 +40,6 @@ public class Todo extends Task{
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", "T", (getIsDone() ? "\u2713" : "\u2718"), getDescription());
+        return String.format("[%s][%s] %s", "T", (getIsDone() ? "Y" : "N"), getDescription());
     }
 }

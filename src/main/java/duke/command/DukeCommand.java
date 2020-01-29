@@ -15,7 +15,7 @@ public enum DukeCommand {
      * @return the Enum corresponding to the command if it is valid.
      * @throws InvalidCommandException if command given is not a valid command.
      */
-    public static DukeCommand getCommand (String command) throws InvalidCommandException {
+    public static DukeCommand getCommand(String command) throws InvalidCommandException {
         if (command.equals("bye")) {
             return DukeCommand.BYE;
         } else if (command.equals("list")) {

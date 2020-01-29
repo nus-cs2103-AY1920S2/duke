@@ -1,9 +1,9 @@
 package duke.task;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class Storage {
     /** The working directory of the application. */
-    String workingDir = System.getProperty("user.dir");
+    private String workingDir = System.getProperty("user.dir");
     /** The path of the save file. */
-    Path savePath = Paths.get(workingDir, "data", "duke.txt");
+    private Path savePath = Paths.get(workingDir, "data", "duke.txt");
 
     /**
      * Constructs a new Storage object.
@@ -47,7 +47,10 @@ public class Storage {
      * @throws IOException if there is issues accessing the file.
      */
     public List<Task> loadTasks() throws IOException {
+        //new task array list to store the loaded tasks
         List<Task> tasks = new ArrayList<>();
+
+        //get the tasks from the save file and add to list
         Files.createDirectories(savePath.getParent());
         if (Files.exists(savePath)) {
             List<String> savedList = Files.readAllLines(savePath);
@@ -62,13 +65,14 @@ public class Storage {
                 } else if (type.equals("E")) {
                     tasks.add(new Event(taskBuilder[2], isDone, taskBuilder[3]));
                 } else {
-
+                    continue;
                 }
             }
         } else {
             Files.createFile(savePath);
         }
 
+        //return the task list
         return tasks;
     }
 }

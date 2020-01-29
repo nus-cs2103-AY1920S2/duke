@@ -15,7 +15,7 @@ public class Task {
      * @param description description of the task.
      * @param isDone is the task done.
      */
-    public Task (String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -59,7 +59,8 @@ public class Task {
      *
      * @return the string representation of the task.
      */
+    @Override
     public String toString() {
-        return String.format("[%s] %s", (isDone ? "\u2713" : "\u2718"), description);
+        return String.format("[%s] %s", (isDone ? "Y" : "N"), description);
     }
 }

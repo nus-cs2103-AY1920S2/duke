@@ -1,8 +1,9 @@
 package duke.task;
 
 import duke.exception.InvalidCommandException;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for the task list.
@@ -41,6 +42,8 @@ public class TaskList {
             throw new InvalidCommandException("     ☹ OOPS!!! I cannot set a "
                     + "non-existent task to be done.");
         }
+
+        //mark selected task to be done
         tasks.get(index - 1).markDone();
     }
 
@@ -52,10 +55,13 @@ public class TaskList {
      * @throws InvalidCommandException if the index given is out of bounds.
      */
     public Task deleteTask(int index) throws InvalidCommandException {
+        //check if index is valid
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException("     ☹ OOPS!!! I cannot delete a "
                     + "non-existent task.");
         }
+
+        //delete the task from the list and return it
         Task taskToDelete = tasks.remove(index - 1);
         return taskToDelete;
     }
@@ -93,6 +99,7 @@ public class TaskList {
      *
      * @return the string representation of the task list.
      */
+    @Override
     public String toString() {
         String listRepresentation = "";
         for (int i = 0; i < tasks.size(); i++) {

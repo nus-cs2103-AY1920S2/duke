@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class Ui {
     /** The exit message. */
     private String exitMessage = "";
     /** The scanner to get input from the user. */
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Construct a new Ui object with desired welcome and exit messages.
