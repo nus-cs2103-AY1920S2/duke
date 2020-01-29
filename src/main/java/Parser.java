@@ -1,6 +1,5 @@
 public class Parser {
 
-<<<<<<< HEAD
 
     /**
      * Method that parses user input into instructions to be followed.
@@ -8,8 +7,6 @@ public class Parser {
      * @param ui current instance of ui so that ui can interact with user
      * @param tasks the tasks available in current Duke program
      */
-=======
->>>>>>> A-CodingStandard
     public void parse(String input, Ui ui, TaskList tasks) {
         if (input.equals("list")) {
             ui.printList();
