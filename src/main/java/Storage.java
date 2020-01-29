@@ -54,7 +54,7 @@ public class Storage {
     public void updateData(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(dataPath); // to always append to file
         for (int i = 0; i < tasks.size(); i++) {
-            fw.write(tasks.get(i).toString());
+            fw.write(tasks.get(i).toString() + "\n");
         }
         fw.close();
     }

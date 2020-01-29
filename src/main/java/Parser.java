@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Parser {
 
 
@@ -61,6 +63,14 @@ public class Parser {
                 task.markAsDone();
                 break;
             }
+            case "find": {
+                String keyword = input.substring(input.indexOf(' ') + 1);
+                ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
+                System.out.println("Here are the matching tasks in your list: ");
+                for (int i = 0; i < matchingTasks.size(); i++) {
+                    System.out.println(i+1 + "." + matchingTasks.get(i));
+                }
+            }
         }
 
 
@@ -77,7 +87,8 @@ public class Parser {
                     !input.equals("deadline") &&
                     !input.equals("event") &&
                     !input.equals("delete") &&
-                    !input.equals("done")) {
+                    !input.equals("done") &&
+                    !input.equals("find")) {
                 throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
             } else {
                 // command is not valid
@@ -89,7 +100,8 @@ public class Parser {
                     !input.substring(0, input.indexOf(' ')).equals("event") &&
                     !input.substring(0, input.indexOf(' ')).equals("list") &&
                     !input.substring(0, input.indexOf(' ')).equals("delete") &&
-                    !input.substring(0, input.indexOf(' ')).equals("done")) {
+                    !input.substring(0, input.indexOf(' ')).equals("done") &&
+                    !input.substring(0, input.indexOf(' ')).equals("find")) {
                 throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
             } else {
                 return input.substring(0, input.indexOf(' '));
