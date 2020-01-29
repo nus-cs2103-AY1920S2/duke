@@ -7,7 +7,7 @@ import java.util.Optional;
  * Custom class that represents time of a Deadline
  * Task or Event Task
  */
-public class PrettyTime {
+public class PrettyTime implements Comparable<PrettyTime> {
     private final Optional<String> rawText;
     private final Optional<LocalDate> date;
 
@@ -61,6 +61,36 @@ public class PrettyTime {
      */
     public boolean hasLocalDate() {
         return this.date.isPresent();
+    }
+
+    @Override
+    public int compareTo(PrettyTime pt) {
+        if (this.hasLocalDate() && pt.hasLocalDate()) {
+            return this.date.get().compareTo(pt.date.get());
+        } else if (!this.hasLocalDate() && !pt.hasLocalDate()) {
+            return this.rawText.get().compareTo(pt.rawText.get());
+        } else if (this.hasLocalDate() && !pt.hasLocalDate()) {
+            return -1;
+        } else {
+            // !this.hasLocalDate() && pt.hasLocalDate()
+            return 1;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof PrettyTime) {
+            PrettyTime pt = (PrettyTime) o;
+            if (this.hasLocalDate() && pt.hasLocalDate()) {
+                return this.date.get().equals(pt.date.get());
+            } else if (!this.hasLocalDate() && !pt.hasLocalDate()) {
+                return this.rawText.get().equals(pt.rawText.get());
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override
