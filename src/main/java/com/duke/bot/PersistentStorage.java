@@ -28,7 +28,9 @@ public class PersistentStorage {
     public void save(TaskList tasks) throws IOException {
         Files.write(
             storagePath,
-            tasks.getUnderlyingList().stream().map(this::serializeTask).collect(Collectors.toList()),
+            tasks.getUnderlyingList().stream()
+                    .map(this::serializeTask)
+                    .collect(Collectors.toUnmodifiableList()),
             StandardCharsets.UTF_8
         );
     }

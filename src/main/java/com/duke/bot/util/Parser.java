@@ -9,6 +9,7 @@ import com.duke.bot.command.Command;
 import com.duke.bot.command.DeleteCommand;
 import com.duke.bot.command.DoneCommand;
 import com.duke.bot.command.ExitCommand;
+import com.duke.bot.command.FindCommand;
 import com.duke.bot.command.ListCommand;
 import com.duke.bot.task.Deadline;
 import com.duke.bot.task.Event;
@@ -30,6 +31,8 @@ public class Parser {
             return parseDoneInput(input);
         } else if (input.startsWith("delete")) {
             return parseDeleteInput(input);
+        } else if (input.startsWith("find")) {
+            return parseFindInput(input);
         } else if (input.startsWith("todo")) {
             return parseTodoInput(input);
         } else if (input.startsWith("event")) {
@@ -64,6 +67,16 @@ public class Parser {
             throw new DukeException("Oops, invalid delete command");
         }
     } 
+
+    private static Command parseFindInput(String input) throws DukeException {
+        Pattern findPattern = Pattern.compile("^find\\s+(.+)$");
+        Matcher findMatcher = findPattern.matcher(input);
+        if (findMatcher.matches()) {
+            return new FindCommand(findMatcher.group(1));
+        } else {
+            throw new DukeException("Oops, invalid find command");
+        }
+    }
 
     private static Command parseTodoInput(String input) throws DukeException {
         Pattern todoPattern = Pattern.compile("^todo\\s+(.+)$");
