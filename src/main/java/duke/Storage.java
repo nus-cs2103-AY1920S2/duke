@@ -1,8 +1,18 @@
 package duke;
 
-import duke.task.*;
 
-import java.io.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -64,7 +74,7 @@ public class Storage {
                 String[] taskWords = line.split(",");
                 boolean isDone = taskWords[1].equals("1");
                 String description = taskWords[2];
-                switch(taskWords[0].toLowerCase()) {
+                switch (taskWords[0].toLowerCase()) {
                 case "todo":
                     tasks.add(new Todo(taskWords[2], isDone));
                     break;
