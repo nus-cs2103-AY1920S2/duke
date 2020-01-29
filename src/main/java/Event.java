@@ -1,3 +1,7 @@
+/**
+ * Event class is a child class of Task that has a at variable which tells the user
+ * where is the event at
+ */
 public class Event extends Task {
 
     protected String at;
@@ -21,7 +25,7 @@ public class Event extends Task {
      * @return the state of Event, to be saved in data.txt
      */
     public String saveData(){
-        String temp = this.isDone? "1" : "0"; //1 is done, 0 is not done
-        return "Event" + "|" + temp + "|" + this.description + "|" + this.at;
+        String isItDone = this.isDone? "1" : "0"; //1 is done, 0 is not done
+        return "Event" + "|" + isItDone + "|" + this.description + "|" + this.at;
     }
 }

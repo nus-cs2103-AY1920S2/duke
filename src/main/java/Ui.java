@@ -1,8 +1,11 @@
+/**
+ * Handles all the user inputs
+ */
 public class Ui {
 
     protected boolean hasEnded;
     protected TaskManager manager;
-    protected String horizontalLine = "*******************************************";
+    protected String horizontalLine = "**************************************************************";
 
     public Ui(TaskManager manager){
         this.hasEnded = false;
@@ -16,13 +19,23 @@ public class Ui {
 
         System.out.println(horizontalLine);
         //To run using gradle go and search in Help > Delegate Run > build tools > gradle
-        String logo3 = " _____    |   _"
-                +                     "    _| |_   |\n"
+        String logo = " _____        .      _     |\n"
+                +     "|         |  | |"
+                +                     "   _| |_   |\n"
                 +      "|_____   _|  | |  |_   _|  |__\n"
                 +      "|_____  |_|  |_|    |_|    |  |";
 
-        System.out.println("" + logo3);
-        System.out.println("Hello!!!!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
+        System.out.println("" + logo);
+
+        try {
+            Storage store = new Storage();
+            store.checkFileDir();
+            store.checkFile();
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+
+        System.out.println("Hello!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
                 + "What can I do for you?");
         System.out.println(horizontalLine);
 
@@ -44,8 +57,10 @@ public class Ui {
             try {
                 indexOfTaskDone = Integer.parseInt(helper[1]);
                 manager.setTaskAsDone(indexOfTaskDone);
-            } catch( ArrayIndexOutOfBoundsException ex){
+            } catch(ArrayIndexOutOfBoundsException ex){
                 System.out.println("Done must be followed by a number");
+            } catch (IndexOutOfBoundsException ex){
+                System.out.println("There is no task with that index! ");
             }
         }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
                 || textEntered.contains("event")) {//create a task
@@ -69,8 +84,14 @@ public class Ui {
             this.hasEnded = true;
         }else if(textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
             String[] temp = textEntered.split(" ");
-            manager.findTask(temp[1]);
-
+            try{
+                 if (temp.length == 1) {
+                    throw new DukeException("Find must be followed by a keyword and cannot be empty.");
+                 }
+                 manager.findTask(temp[1]);
+            } catch (DukeException ex){
+                System.out.println(ex);
+            }
         }else{ //nonsense input
             try{
                 manager.nonsenseInput();
@@ -79,10 +100,16 @@ public class Ui {
             }
         }
 
-        if(textEntered.contains("bye")){
-        }
-        else{
+        if(!textEntered.contains("bye")){
             System.out.println(horizontalLine);
         }
+    }
+
+    /**
+     * Prints the goodbye message for the user
+     */
+    public void printGoodbyeMessage(){
+        System.out.println("Data has been saved! Goodbye Mr.Stark!!!!");
+        System.out.println(horizontalLine);
     }
 }

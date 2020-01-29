@@ -1,32 +1,31 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+/**
+ * Handles all the issues related to Tasks!
+ */
 public class TaskManager {
 
-    ArrayList<Task> listOfTasks;
+    protected ArrayList<Task> listOfTasks;
+    protected Storage storage;
 
     public TaskManager(){
         listOfTasks = new ArrayList<>();
+        storage = new Storage();
     }
-
-
 
     /**
      * loads existing data from data.txt
      */
     public void loadExistingData(){
-
-        Storage store = new Storage();
-        listOfTasks = store.loadExistingData();
-
+        listOfTasks = storage.loadExistingData();
     }
 
     /**
      * saves current data into data.txt
      */
     public void saveExistingData(){
-        Storage store = new Storage();
-        store.saveExistingData(listOfTasks);
+        storage.saveExistingData(listOfTasks);
 
     }
 
@@ -47,12 +46,10 @@ public class TaskManager {
      * lists down all tasks
      */
     public void listAllTasks(){
-
         System.out.println("Here are your tasks in your list: ");
         for(int j = 0 ; j < this.listOfTasks.size() ; j++){
             System.out.println("  " + (j + 1) +  ". " + this.listOfTasks.get(j).toString());
         }
-
     }
 
     /**
@@ -60,15 +57,14 @@ public class TaskManager {
      * @param index index of Task to be set as Done (isDone = True)
      */
     public void setTaskAsDone(int index){
-
         listOfTasks.get(index-1).markAsDone();
+        storage.saveExistingData(listOfTasks);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + listOfTasks.get(index-1).toString());
-
     }
 
     /**
-     * Adds a new task
+     * Adds a new task and saves it in data
      * @param textEntered includes the type of task, description, and /by or /at
      * @throws DukeException Must have deadline and date for Deadline and Events
      */
@@ -76,7 +72,7 @@ public class TaskManager {
 
         Task newTask;
 
-        if(textEntered.contains("todo")){
+        if(textEntered.contains("todo")){ //Handles Task that are ToDo
 
             if(textEntered.split(" ").length == 1){
                 throw new DukeException("The description of a todo cannot be empty");
@@ -85,7 +81,7 @@ public class TaskManager {
                 this.listOfTasks.add(newTask);
             }
 
-        }else if(textEntered.contains("deadline")){//Deadline
+        }else if(textEntered.contains("deadline")){ //Handles Task that are Deadline
 
             if(textEntered.split(" ").length == 1){ //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
@@ -103,7 +99,7 @@ public class TaskManager {
                 this.listOfTasks.add(newTask);
             }
 
-        }else{//Event
+        }else{ //Handles task that is Event
 
             if(textEntered.split(" ").length == 1){
                 throw new DukeException("The description of an event cannot be empty");
@@ -113,21 +109,24 @@ public class TaskManager {
                 newTask = new Event(temp[0], temp[1].substring(3));
                 this.listOfTasks.add(newTask);
             }
-
         }
+        storage.saveExistingData(listOfTasks);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask.toString());
         System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Handles it when user types in nonsense inputs.
+     * @throws DukeException Telling user that there is no such exception
+     */
     public void nonsenseInput() throws DukeException{
-
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
 
     }
 
     /**
-     * Deletes task from listOfTasks
+     * Deletes task from listOfTasks and saves the data
      * @param indexOfTaskToDelete index of task to delete
      * @throws DukeException Cannot delete nothing
      * @throws IndexOutOfBoundsException Incase if user inputs something that is out of array bound
@@ -145,15 +144,15 @@ public class TaskManager {
             System.out.println("  " + listOfTasks.get(indexOfTaskToDelete).toString());
             System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
             listOfTasks.remove(indexOfTaskToDelete);
+            storage.saveExistingData(listOfTasks);
         }
     }
 
     /**
      * used for Level 1 and 2. Redundant now
-     * @param textEntered
+     * @param textEntered the user's input
      */
     public void echo(String textEntered){
-
         System.out.println(textEntered);
     }
 }

@@ -1,25 +1,18 @@
+/**
+ * Contains a product name Duke, a personal assistant chat bot that keeps track of various tasks that needs
+ * to be done. It classifies tasks into deadline, todo and event.
+ * It can add, delete, list all the tasks, find task with a keyword and mark them as done
+ */
 public class Duke {
 
     public static void main(String[] args) {
 
-        String horizontalLine = "*******************************************";
-
-        FastReader fr = new FastReader();
+        FastReader fr = new FastReader();//Handles input by the user
         TaskManager manager = new TaskManager();
         Ui ui = new Ui(manager);
 
         ui.introduction();
         manager.loadExistingData();
-
-        /*
-        try {
-            Storage store = new Storage();
-            store.checkDir();
-        } catch (Exception ex){
-            System.out.println(ex);
-        }
-        */
-
 
         String textEntered = fr.nextLine();
 
@@ -30,8 +23,9 @@ public class Duke {
             }
             textEntered = fr.nextLine();
         }
-        System.out.println("Data has been saved! Goodbye Mr.Stark!!!!");
-        System.out.println(horizontalLine);
+
+        ui.printGoodbyeMessage();
+
     }
 }
 

@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class is a child class of Task that has a by variable which tells the user
+ * when the deadline is
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;
@@ -25,7 +29,7 @@ public class Deadline extends Task {
      * @return the state of Deadline, to be saved in data.txt
      */
     public String saveData(){
-        String temp = this.isDone? "1" : "0"; //1 is done, 0 is not done
-        return "Deadline" + "|" + temp + "|" + this.description + "|" + this.by;
+        String isItDone = this.isDone? "1" : "0"; //1 is done, 0 is not done
+        return "Deadline" + "|" + isItDone + "|" + this.description + "|" + this.by;
     }
 }

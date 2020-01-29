@@ -1,7 +1,9 @@
+/**
+ * Todo class is a child class of Task
+ */
 public class ToDo extends Task {
 
     protected ToDo(String desciption){
-
         super(desciption);
     }
 
@@ -11,7 +13,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString(){
-
         return "[T]" + super.toString();
     }
 
@@ -20,8 +21,8 @@ public class ToDo extends Task {
      * @return the state of ToDo, to be saved in data.txt
      */
     public String saveData(){
-        String temp = this.isDone? "1" : "0";
+        String isItDone = this.isDone? "1" : "0";
         //1 is done, 0 is not done
-        return "ToDo" + "|" + temp + "|" + this.description;
+        return "ToDo" + "|" + isItDone + "|" + this.description;
     }
 }
