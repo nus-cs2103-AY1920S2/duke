@@ -77,6 +77,22 @@ public class TaskList {
     }
 
     /**
+     * Finds the list of tasks that contains the search phrase.
+     *
+     * @param searchPhrase the desired search phrase to search the list.
+     * @return the string representation of the filtered list.
+     */
+    public String findTasksBySearchPhrase(String searchPhrase) {
+        String relevantTasksRepresentation = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(searchPhrase)) {
+                relevantTasksRepresentation += String.format("     %d. %s\n", (i + 1), tasks.get(i));
+            }
+        }
+        return relevantTasksRepresentation;
+    }
+
+    /**
      * Gets the list of all the tasks.
      *
      * @return the list of tasks.

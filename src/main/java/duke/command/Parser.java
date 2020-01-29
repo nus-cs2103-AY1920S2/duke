@@ -52,6 +52,12 @@ public class Parser {
                 String[] eventDescriptionDate = commandLine[1].split(" /at ");
                 return new EventCommand(eventDescriptionDate);
             }
+        case FIND:
+            if (commandLine.length < 2) {
+                throw new InvalidCommandException("     ☹ OOPS!!! Please state what you want to find.");
+            } else {
+                return new FindCommand(commandLine[1]);
+            }
         default:
             throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
