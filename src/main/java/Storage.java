@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Optional;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -108,6 +109,41 @@ public class Storage {
         int length = this.storedTasks.size();
         for (int i = 0; i < length; i++) {
             System.out.println(retrieve(i + 1));
+        }
+    }
+
+    /**
+     * Searches the Storage for a Task with a
+     * particular date
+     *
+     * @param date String representing date
+     *
+     * @return An Optional containing the Task, if found
+     */
+    public Optional<ArrayList<Integer>> searchStorage(String date) {
+        // parse the String
+        PrettyTime pt = new PrettyTime(date);
+        ArrayList<Integer> indexes = new ArrayList<Integer>();
+        int size = this.storage.size();
+
+        if (pt.hasTime()) {
+            for (int i = 0; i < size; i++) {
+                if (this.storage.get(i).getPrettyTime().equals(pt)) {
+                    indexes.add(i + 1);
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (this.storage.get(i).getPrettyTime().matchDate(pt)) {
+                    indexes.add(i + 1);
+                }
+            }
+        }
+
+        if (indexes.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(indexes);
         }
     }
 

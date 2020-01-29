@@ -1,3 +1,4 @@
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 /**
@@ -44,6 +45,8 @@ public class Duke {
                 "    '.  `'---'`  .'\n" +
                 "      '-._____.-'\n\n" +
                 "Take one last look at what I deleted:";
+        String failedToFindMessage = "Sorry, could not find anything matching that!";
+        String foundTaskMessage = "I have found these tasks!\n";
         String fileDirectory = "../user/data";
         String fileName = "tasks.botstore";
 
@@ -105,6 +108,25 @@ public class Duke {
                 store.saveToDisk();
             } else if (next == Instruction.READ_STORAGE) {
                 store.printStorage();
+            } else if (next == Instruction.SEARCH_STORAGE) {
+                String searchTerm;
+                try {
+                    searchTerm = getSecondTerm(command, Command.SEARCH);
+                } catch (InadequateArgumentsException | TooManyArgumentsException e) {
+                    System.err.println(e.getMessage());
+                    System.err.println(errorMessage);
+                    continue;
+                }
+                store.searchStorage(searchTerm)
+                        .ifPresentOrElse(
+                                taskIds -> {
+                                    System.out.println(foundTaskMessage);
+                                    for (Integer id : taskIds) {
+                                        System.out.println(store.retrieve(id));
+                                    }
+                                },
+                                () -> System.out.println(failedToFindMessage)
+                        );
             } else if (next == Instruction.STORE_DDL) {
                 Deadline ddl;
                 try {
@@ -187,7 +209,7 @@ public class Duke {
      * Such a command is composed of one word and one number,
      * separated by a space
      *
-     * @param doneCommand The original command input
+     * @param rawCommand The original command input
      * @param com The Command action to be executed
      *
      * @return An integer representing the index in the
@@ -195,13 +217,28 @@ public class Duke {
      * @throws InadequateArgumentsException
      *         When no numbers found after the command word
      */
-    private static int getListIndex(String doneCommand, Command com)
+    private static int getListIndex(String rawCommand, Command com)
         throws InadequateArgumentsException, NumberFormatException,
             TooManyArgumentsException
     {
-        String[] words = doneCommand.split("\\s+");
+        return Integer.parseInt(getSecondTerm(rawCommand, com));
+    }
+
+    /**
+     * Given a command of two terms, returns
+     * only the second term used
+     *
+     * @param rawCommand The original command input
+     * @param com The Command action to be executed
+     *
+     * @return String representing the second term
+     */
+    private static String getSecondTerm(String rawCommand, Command com)
+            throws InadequateArgumentsException, TooManyArgumentsException
+    {
+        String[] words = rawCommand.split("\\s+");
         if (words.length == 2) {
-            return Integer.parseInt(words[1]);
+            return words[1];
         } else if (words.length < 2) {
             throw new InadequateArgumentsException(com.word);
         } else {
