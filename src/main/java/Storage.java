@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -7,12 +6,17 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Storage to store and retrieve all data that is stored in the hard diskl
+ */
 public class Storage {
 
     String home;
     Path path;
 
+    /**
+     * Creates an instance of Storage object with the path to the file.
+     */
     public Storage() {
         this.home = System.getProperty("user.home");
         this.path = Paths.get(home, "Desktop", "NUS Y2S2", "CS2103T", "project", "duke", "data", "duke.txt");
@@ -20,7 +24,8 @@ public class Storage {
     }
 
     /**
-     * method invoked to store all task from storage in hard disk to program
+     * Method invoked to retrieve all information from storage to the program.
+     * @return an ArrayList of tasks that was stored in the hard disk.
      */
     public ArrayList<String> startupStorage() {
 
@@ -34,7 +39,8 @@ public class Storage {
     }
 
     /**
-     * method invoked to store all task from program to storage in hard disk
+     * Stores the tasks in the program to the hard disk.
+     * @param list the list that stores all the tasks.
      */
     public void storeToStorage(ArrayList<Task> list) {
 
@@ -47,10 +53,10 @@ public class Storage {
 
 
     /**
-     * Reads the item from the file and store in and arraylist
-     * @param filepath file path of where the data is stored
-     * @return the arraylist containing the tasks
-     * @throws IOException
+     * Read the file line by line to retrieve data from the hard disk.
+     * @param filepath the path where the file is stored.
+     * @return an ArrayList of tasks that is retrieved from the hard disk.
+     * @throws IOException if file is not found in the file path.
      */
     private ArrayList<String> readFile(Path filepath) throws IOException {
         File f = filepath.toFile();
@@ -66,11 +72,10 @@ public class Storage {
     }
 
 
-
     /**
-     * Writes the items in the list to the hard disk
-     * @param mylist list which stores all the task
-     * @throws IOException Exception thrown if no file is found
+     * Writes the information from the program into the hard disk file.
+     * @param list task list that is to be stored.
+     * @throws IOException if file is not found in the file path.
      */
     private void writeToHardDisk (ArrayList<Task> list) throws IOException {
         File f = this.path.toFile();

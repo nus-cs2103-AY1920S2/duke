@@ -1,13 +1,21 @@
-
-
-
+/**
+ * Parser class allows the program to parse the instruction and act accordingly to the instruction.
+ */
 public class Parser {
 
-
+    /**
+     * creates a Parser class.
+     */
     public Parser() {
 
     }
 
+    /**
+     * Parse the instruction input.
+     * @param response full instruction that is given.
+     * @return a Command object that is associated with the instruction.
+     * @throws DukeException if the instruction does not match any of the programmed one.
+     */
     public Command parse(String response) throws DukeException {
 
         String messageType = checkMessageType(response);
@@ -42,7 +50,12 @@ public class Parser {
 
     }
 
-
+    /**
+     * Checks the message type.
+     * @param response full instruction that is given.
+     * @return the type of instruction that the user inputted.
+     * @throws DukeException if the instruction does not match any of the pre-assigned ones.
+     */
     public String checkMessageType(String response) throws DukeException {
 
         if (response.contains("bye")) {

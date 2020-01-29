@@ -1,14 +1,20 @@
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * A List that stores all Task created.
+ */
 public class TaskList {
 
     ArrayList<Task> tasks;
     Storage taskStorage;
 
+    /**
+     * To instantiate the task list from storage, loading all tasks that are currently in the data.txt.
+     * @param taskStorage storage where the copy of the task file is stored.
+     */
     public TaskList(Storage taskStorage) {
 
         this.tasks = new ArrayList<Task>();
@@ -19,6 +25,10 @@ public class TaskList {
     }
 
 
+    /**
+     * Method invoked to create the initial start-up list.
+     * @param tasklist list that is loaded with the tasks from data.txt from the file.
+     */
     private void createStartUpList(ArrayList<String> tasklist) {
 
         for (String task : tasklist) {
@@ -74,15 +84,19 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns the task list.
+     * @return the task list.
+     */
     public ArrayList<Task> getList() {
         return this.tasks;
     }
 
-
-    public void addTaskToList(Task newTask) {
-        tasks.add(newTask);
-    }
-
+    /**
+     * Remove a particular task from the task list
+     * @param indexToRemove the index of which the task is to be removed.
+     * @return the removed task.
+     */
     public Task removeTaskFromList(int indexToRemove) {
 
         Task removed = tasks.remove(indexToRemove);
@@ -90,12 +104,21 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns the total number of task in the list.
+     * @return the total number of task in the list.
+     */
     public int getSize() {
 
         return tasks.size();
 
     }
 
+    /**
+     * Returns the list at the index specified.
+     * @param index index of the task in the list.
+     * @return the specified task.
+     */
     public Task getTask(int index) {
         return tasks.get(index);
     }

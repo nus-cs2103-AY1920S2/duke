@@ -1,4 +1,6 @@
-
+/**
+ * Main driver for the code.
+ */
 public class Duke {
 
     private Ui ui;
@@ -6,6 +8,9 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
+    /**
+     * To instantiate the chat bot/ calender.
+     */
     public Duke() {
 
         this.taskStorage = new Storage();
@@ -14,6 +19,9 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * to run the chat bot.
+     */
     public void run() {
 
         ui.showWelcome();

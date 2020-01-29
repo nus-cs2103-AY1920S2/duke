@@ -1,10 +1,18 @@
 import java.time.DateTimeException;
 import java.util.ArrayList;
 
+/**
+ * AddCommand allows instructions to be added to the task list.
+ */
 public class AddCommand extends Command {
 
     private String type;
 
+    /**
+     * Constructs an AddCommand class.
+     * @param response instruction to be executed.
+     * @param type the type of instruction consisting one of the following: todo, deadline or event.
+     */
     public AddCommand(String response, String type) {
 
         super(response);
@@ -12,6 +20,13 @@ public class AddCommand extends Command {
 
     }
 
+    /**
+     * Execute the command that is given, based on it being a todo task, a deadline task or an event task.
+     * @param tasksStorage storage for the task, deals with storing data to hard disk and retrieving data from hard disk.
+     * @param taskList the list where all the tasks is being stored.
+     * @param ui ui that is responsible for interaction with the user.
+     * @throws DukeException if it is not a valid instruction.
+     */
     public void execute(Storage tasksStorage, TaskList taskList, Ui ui) throws DukeException {
 
         if (this.type.equals("todo")) {
@@ -34,6 +49,12 @@ public class AddCommand extends Command {
     }
 
 
+    /**
+     * Creates a todo task.
+     * @param response the instruction that was given by the user to be carried out.
+     * @param mylist the list where the todo task is to be stored.
+     * @throws DukeException if the description is empty.
+     */
     private void createTodo(String response, ArrayList<Task> mylist) throws DukeException {
 
         String description = response.replace("todo", "").trim();
@@ -51,6 +72,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Creates a deadline task.
+     * @param response the instruction that was given by the user to be carried out.
+     * @param mylist the list where the deadline task is to be stored.
+     * @throws DukeException if there is any error in the date and time or the description is empty.
+     */
     private void createDeadline(String response, ArrayList<Task> mylist) throws DukeException {
 
         try {
@@ -75,6 +102,12 @@ public class AddCommand extends Command {
 
     }
 
+    /**
+     * Creates an event task.
+     * @param response the instruction that was given by the user to be carried out.
+     * @param mylist the list where the event task is to be stored.
+     * @throws DukeException if the description is empty.
+     */
     private void createEvent(String response, ArrayList<Task> mylist) throws DukeException {
 
         try {
