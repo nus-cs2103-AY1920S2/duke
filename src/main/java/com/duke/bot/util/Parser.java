@@ -3,16 +3,16 @@ package com.duke.bot.util;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.duke.bot.Deadline;
 import com.duke.bot.DukeException;
-import com.duke.bot.Event;
-import com.duke.bot.Todo;
 import com.duke.bot.command.AddCommand;
 import com.duke.bot.command.Command;
 import com.duke.bot.command.DeleteCommand;
 import com.duke.bot.command.DoneCommand;
 import com.duke.bot.command.ExitCommand;
 import com.duke.bot.command.ListCommand;
+import com.duke.bot.task.Deadline;
+import com.duke.bot.task.Event;
+import com.duke.bot.task.Todo;
 
 public class Parser {
     public static Command parse(String input) throws DukeException {

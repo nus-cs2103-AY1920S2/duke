@@ -2,7 +2,7 @@ package com.duke.bot.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.duke.bot.Task;
+import com.duke.bot.task.Task;
 
 public class AddCommand extends Command {
     private final Task addTask;

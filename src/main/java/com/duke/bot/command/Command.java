@@ -2,7 +2,7 @@ package com.duke.bot.command;
 
 import java.util.List;
 import com.duke.bot.DukeException;
-import com.duke.bot.Task;
+import com.duke.bot.task.Task;
 
 public abstract class Command {
     public static class ExecuteResult {

@@ -1,4 +1,4 @@
-package com.duke.bot;
+package com.duke.bot.task;
 
 public abstract class Task {
     private String title;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import com.duke.bot.command.Command;
+import com.duke.bot.task.Task;
 import com.duke.bot.util.Parser;
 
 public class Duke {
@@ -37,7 +38,7 @@ public class Duke {
                 Command command = Parser.parse(input);
                 Command.ExecuteResult result = command.execute(tasks);
                 tasks = result.getTasks();
-                hasNext =result.hasNextCommand();
+                hasNext = result.hasNextCommand();
                 print(result.getMessages());
 
                 persistentStorage.save(tasks);

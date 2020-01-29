@@ -3,7 +3,7 @@ package com.duke.bot.command;
 import java.util.ArrayList;
 import java.util.List;
 import com.duke.bot.DukeException;
-import com.duke.bot.Task;
+import com.duke.bot.task.Task;
 
 public class DeleteCommand extends Command {
     private final int deleteIndex;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import com.duke.bot.Task;
+import com.duke.bot.task.Task;
 
 public class ListCommand extends Command {
     @Override
