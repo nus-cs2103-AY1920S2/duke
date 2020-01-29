@@ -2,17 +2,15 @@ package com.duke.bot;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import com.duke.bot.command.Command;
-import com.duke.bot.task.Task;
 import com.duke.bot.util.Parser;
 
 public class Duke {
     private final Scanner scanner;
     private final PersistentStorage persistentStorage;
-    private List<Task> tasks;
+    private TaskList tasks;
 
     public Duke() {
         scanner = new Scanner(System.in);
@@ -23,7 +21,7 @@ public class Duke {
         try {
             tasks = persistentStorage.load();
         } catch (IOException exception) {
-            tasks = new ArrayList<>();
+            tasks = new TaskList();
         }
 
         print(List.of("Hello! I'm Duke", "What can I do for you?"));

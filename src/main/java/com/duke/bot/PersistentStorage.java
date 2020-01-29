@@ -6,8 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import com.duke.bot.task.Deadline;
 import com.duke.bot.task.Event;
@@ -21,10 +19,10 @@ public class PersistentStorage {
         this.storagePath = storagePath;
     }
 
-    public void save(List<Task> tasks) throws IOException {
+    public void save(TaskList tasks) throws IOException {
         Files.write(
             storagePath,
-            tasks.stream().map(this::serializeTask).collect(Collectors.toList()),
+            tasks.getUnderlyingList().stream().map(this::serializeTask).collect(Collectors.toList()),
             StandardCharsets.UTF_8
         );
     }
@@ -54,10 +52,10 @@ public class PersistentStorage {
         }
     }
 
-    public List<Task> load() throws IOException {
-        return Files.readAllLines(storagePath).stream()
+    public TaskList load() throws IOException {
+        return new TaskList(Files.readAllLines(storagePath).stream()
                 .map(this::deserializeTask)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toUnmodifiableList()));
     } 
 
     private Task deserializeTask(String serialized) {

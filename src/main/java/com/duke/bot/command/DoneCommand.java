@@ -1,8 +1,8 @@
 package com.duke.bot.command;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.duke.bot.DukeException;
+import com.duke.bot.TaskList;
 import com.duke.bot.task.Task;
 
 public class DoneCommand extends Command {
@@ -13,13 +13,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public ExecuteResult execute(List<Task> tasks) throws DukeException {
+    public ExecuteResult execute(TaskList tasks) throws DukeException {
         if (doneIndex >= 0 && doneIndex < tasks.size()) {
             Task doneTask = tasks.get(doneIndex).setDone(true);
-            List<Task> newTasks = new ArrayList<>(tasks);
-            newTasks.set(doneIndex, doneTask);
             return new ExecuteResult(
-                    newTasks,
+                    tasks.set(doneIndex, doneTask),
                     List.of(
                             "Nice! I've marked this task as done:",
                             "  " + doneTask

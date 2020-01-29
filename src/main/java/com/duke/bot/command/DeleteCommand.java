@@ -1,9 +1,8 @@
 package com.duke.bot.command;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.duke.bot.DukeException;
-import com.duke.bot.task.Task;
+import com.duke.bot.TaskList;
 
 public class DeleteCommand extends Command {
     private final int deleteIndex;
@@ -13,17 +12,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public ExecuteResult execute(List<Task> tasks) throws DukeException {
+    public ExecuteResult execute(TaskList tasks) throws DukeException {
         if (deleteIndex >= 0 && deleteIndex < tasks.size()) {
-            Task deleteTask = tasks.get(deleteIndex);
-            List<Task> newTasks = new ArrayList<>(tasks);
-            newTasks.remove(deleteIndex);
             return new ExecuteResult(
-                    newTasks,
+                    tasks.remove(deleteIndex),
                     List.of(
                             "Noted. I've removed this task:",
-                            "  " + deleteTask,
-                            String.format("Now you have %d tasks in the list", newTasks.size())
+                            "  " + tasks.get(deleteIndex),
+                            String.format("Now you have %d tasks in the list", tasks.size() - 1)
                     ),
                     true
             );

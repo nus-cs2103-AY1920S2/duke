@@ -1,7 +1,7 @@
 package com.duke.bot.command;
 
-import java.util.ArrayList;
 import java.util.List;
+import com.duke.bot.TaskList;
 import com.duke.bot.task.Task;
 
 public class AddCommand extends Command {
@@ -12,15 +12,13 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public ExecuteResult execute(List<Task> tasks) {
-        List<Task> newTasks = new ArrayList<>(tasks);
-        newTasks.add(addTask);
+    public ExecuteResult execute(TaskList tasks) {
         return new ExecuteResult(
-                newTasks,
+                tasks.add(addTask),
                 List.of(
                         "Got it. I've added this task:",
                         "  " + addTask,
-                        String.format("Now you have %d tasks in the list.", newTasks.size())
+                        String.format("Now you have %d tasks in the list.", tasks.size() + 1)
                 ),
                 true
         );

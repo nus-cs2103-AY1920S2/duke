@@ -1,14 +1,13 @@
 package com.duke.bot.command;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import com.duke.bot.task.Task;
+import com.duke.bot.TaskList;
 
 public class ListCommand extends Command {
     @Override
-    public ExecuteResult execute(List<Task> tasks) {
+    public ExecuteResult execute(TaskList tasks) {
         return new ExecuteResult(
                 tasks,
                 Stream.concat(

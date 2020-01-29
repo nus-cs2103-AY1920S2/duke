@@ -2,21 +2,21 @@ package com.duke.bot.command;
 
 import java.util.List;
 import com.duke.bot.DukeException;
-import com.duke.bot.task.Task;
+import com.duke.bot.TaskList;
 
 public abstract class Command {
     public static class ExecuteResult {
-        private final List<Task> tasks;
+        private final TaskList tasks;
         private final List<String> messages;
         private final boolean hasNextCommand;
 
-        public ExecuteResult(List<Task> tasks, List<String> messages, boolean hasNextCommand) {
+        public ExecuteResult(TaskList tasks, List<String> messages, boolean hasNextCommand) {
             this.tasks = tasks;
             this.messages = messages;
             this.hasNextCommand = hasNextCommand;
         }
 
-        public List<Task> getTasks() {
+        public TaskList getTasks() {
             return tasks;
         }
 
@@ -29,5 +29,5 @@ public abstract class Command {
         }
     }
 
-    public abstract ExecuteResult execute(List<Task> tasks) throws DukeException; 
+    public abstract ExecuteResult execute(TaskList tasks) throws DukeException; 
 }
