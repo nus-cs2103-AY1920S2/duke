@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -97,8 +98,13 @@ public class Duke {
                         if (datetime.length() == 0) {
                             throw new DukeException("The deadline datetime cannot be empty.");
                         }
-                        Deadline dl = new Deadline(name, datetime);
-                        addTask(dl);
+                        try {
+                            Deadline dl = new Deadline(name, LocalDate.parse(datetime));
+                            addTask(dl);
+                        } catch (Exception e){
+                            Deadline dl = new Deadline(name, (datetime));
+                            addTask(dl);
+                        }
                         break;
                     case "event":
                         rest = input.substring(command.length()).trim();
@@ -114,8 +120,13 @@ public class Duke {
                         if (datetime.length() == 0) {
                             throw new DukeException("The event datetime cannot be empty.");
                         }
-                        Event e = new Event(name, datetime);
-                        addTask(e);
+                        try {
+                            Event dl = new Event(name, LocalDate.parse(datetime));
+                            addTask(dl);
+                        } catch (Exception e){
+                            Event dl = new Event(name, (datetime));
+                            addTask(dl);
+                        }
                         break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
