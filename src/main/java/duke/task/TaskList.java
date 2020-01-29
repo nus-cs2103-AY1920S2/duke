@@ -52,6 +52,21 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public String searchTaskList(String keyword) {
+        String list = "";
+        for (int i = 0; i < this.taskList.size(); i++) {
+            String count = (i + 1) + "";
+            String taskString = this.taskList.get(i).toString();
+            if (taskString.contains(keyword)) {
+                list += count + ". " + taskString;
+                if (i != this.taskList.size() - 1) {
+                    list += "\n";
+                }
+            }
+        }
+        return list;
+    }
+
     public String getTaskList() {
         String list = "";
         for (int i = 0; i < this.taskList.size(); i++) {
