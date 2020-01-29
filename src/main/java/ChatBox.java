@@ -101,14 +101,20 @@ public class ChatBox {
     }
 
     public void initialise() {
-        Message.welcome();
-        Scanner scan = new Scanner(System.in);
-        while(toClose && scan.hasNextLine()) {
-            Message input = new Message();
-            String msg = scan.nextLine();
-            input.add(msg);
-            reply(input);
+        try {
+            Message.welcome();
+            load();
+            Scanner scan = new Scanner(System.in);
+            while (toClose && scan.hasNextLine()) {
+                Message input = new Message();
+                String msg = scan.nextLine();
+                input.add(msg);
+                reply(input);
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
+            String er = "OOPS!! History is not loaded correctly, check the file location...";
+            System.out.println(new DukeException(er));
         }
-        scan.close();
     }
 }

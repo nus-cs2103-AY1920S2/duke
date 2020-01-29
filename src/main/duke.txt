@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-[T]=[x]=read book
 [D]=[x]=hello (by:  2019-06-01)
 [D]=[x]=hello (by:  2019-06-01)
 [T]=[x]=helloworld
-=======
->>>>>>> c38eb217338e23d7428820031e87d6bba3f08333
