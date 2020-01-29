@@ -6,6 +6,16 @@ public class Todo extends Task {
         super(task);
     }
 
+    public String toLine() {
+        int num;
+        if (super.done) {
+            num = 1;
+        } else {
+            num = 0;
+        }
+        return "T/" + num + "/" + super.task;
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
