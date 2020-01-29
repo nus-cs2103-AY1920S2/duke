@@ -3,7 +3,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Item {
     LocalDate date;
-    boolean done;
     Event(String name, LocalDate date) {
         super(name, false);
         this.date = date;

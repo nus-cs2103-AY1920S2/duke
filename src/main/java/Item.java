@@ -1,6 +1,5 @@
 public abstract class Item {
-    static String space = "     ";
-    static String line = space + "____________________________________________________________";
+    Ui ui = new Ui();
     private String name;
     private boolean done;
     Item(String name, boolean done) {
@@ -21,7 +20,7 @@ public abstract class Item {
 
     public Item markDone() {
         this.done = true;
-        System.out.println(line + "\n" + space + "Nice! I've marked this task as done:\n" + space + this + "\n" + line);
+        ui.markDone(this);
         return this;
     }
 
