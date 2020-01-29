@@ -2,7 +2,7 @@ public class Ui {
     String space = "     ";
     String line = space + "____________________________________________________________";
 
-    Ui() {}
+    public Ui() {}
 
     public void greeting() {
         String logo = " ____        _        \n"

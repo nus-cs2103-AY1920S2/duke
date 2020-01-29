@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-
 public class TaskList {
     ArrayList<Item> items = new ArrayList<Item>();
     Ui ui = new Ui();
     int count = 0;
-    TaskList() {
+    public TaskList() {
         this.items = items;
         this.count = count;
     }

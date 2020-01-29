@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    Parser() {}
+    public Parser() {}
     public String append(String[] tmp) {
         String task = "";
         for (int i = 1; i < tmp.length; i++) {

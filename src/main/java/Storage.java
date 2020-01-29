@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Storage {
-    Storage() {}
+    public Storage() {}
     public void addTxt(String s, Ui ui) throws IOException {
         try {
             FileWriter fileWriter = new FileWriter("data/output.txt", true);

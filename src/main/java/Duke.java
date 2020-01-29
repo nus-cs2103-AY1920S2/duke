@@ -1,11 +1,6 @@
-import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.FileOutputStream;
-import java.time.LocalDate;
 
 public class Duke {
     static Ui ui = new Ui();
