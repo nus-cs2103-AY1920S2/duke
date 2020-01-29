@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,16 +37,26 @@ public class Duke {
                     if (tasks.size() == 100) { throw new TooManyTasksException(); };
                     addEvent(inputs[1]);
                 } else if (command.equals("todo")) {
-                    if (inputs.length == 1) { throw new EmptyDescriptionException(); };
-                    if (tasks.size() == 100) { throw new TooManyTasksException(); };
+                    if (inputs.length == 1) {
+                        throw new EmptyDescriptionException();
+                    }
+                    if (tasks.size() == 100) {
+                        throw new TooManyTasksException();
+                    }
                     addTodo(inputs[1]);
                 } else {
                     throw new UnknownCommandException();
                 }
+
+                // Rewrites the entire file for every update you make here
+                // Probably O(n^2) time where n is the number of tasks but this is the simplest change we can make
+                Storage.writeTasks(tasks);
             } catch (DukeException e) {
                 printLine();
                 indent(e.toString());
                 printLine();
+            } catch (IOException e) {
+                System.out.println(e.toString());
             }
         }
     }
@@ -124,8 +135,9 @@ public class Duke {
 
     private static void addDeadline(String args) {
         String[] descAndBy = args.split(" /by ");
-        Task deadline = new Deadline(descAndBy[0], descAndBy[1]);
+        Deadline deadline = new Deadline(descAndBy[0], descAndBy[1]);
         tasks.add(deadline);
+
         printLine();
         indent("Acknowledged. I have added: ");
         indent(space + deadline.toString());
@@ -135,8 +147,9 @@ public class Duke {
 
     private static void addEvent(String args) {
         String[] descAndAt = args.split(" /at ");
-        Task event = new Event(descAndAt[0], descAndAt[1]);
+        Event event = new Event(descAndAt[0], descAndAt[1]);
         tasks.add(event);
+
         printLine();
         indent("Acknowledged. I have added: ");
         indent(space + event.toString());
@@ -145,7 +158,7 @@ public class Duke {
     }
 
     private static void addTodo(String args) {
-        Task todo = new Todo(args);
+        Todo todo = new Todo(args);
         tasks.add(todo);
         printLine();
         indent("Acknowledged. I have added: ");
