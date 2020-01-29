@@ -19,6 +19,6 @@ public class Event extends Task{
     @Override
     public String generateWriteFormat() {
         int k = this.isDone ? 1 : 0;
-        return "D|"+ k + "|" + description + "|" + at;
+        return "E|"+ k + "|" + description + "|" + at;
     }
 }

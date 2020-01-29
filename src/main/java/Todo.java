@@ -11,6 +11,6 @@ public class Todo extends Task {
     @Override
     public String generateWriteFormat() {
         int k = this.isDone ? 1 : 0;
-        return "D|"+ k + "|" + description;
+        return "T|"+ k + "|" + description;
     }
 }
