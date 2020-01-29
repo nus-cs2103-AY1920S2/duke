@@ -7,6 +7,11 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String toStorage() {
+        return String.format("E,%s,%b,%s", this.description, this.isDone, this.when);
+    }
+
+    @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.when);
     }
