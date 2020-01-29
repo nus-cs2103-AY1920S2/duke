@@ -1,7 +1,7 @@
-T | 1 | read book 
 E | 1 | project meeting  | Aug 6th 2-4pm
-T | 1 | join sports club 
 T | 1 | Study 
 E | 1 | dance Event  | 3-4pm city Hall
 D | 0 | return book  | Jun 6 2020  06:00 PM
-D | 0 | essay  | Dec 15 2020  04:00 PM
+D | 1 | essay  | Dec 15 2020  04:00 PM
+D | 0 | Assignment  | Oct 11 2020  01:00 PM
+T | 0 | run
