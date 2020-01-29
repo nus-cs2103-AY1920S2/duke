@@ -25,10 +25,10 @@ public class Event extends Task {
      */
     public String toString() {
         String message = "";
-        if (this.done) {
-            message += "[" + this.taskType +"]" + "[" + "\u2713" + "] " + this.taskName + " (at: " + this.dateTime + ")";
+        if (this.getDone()) {
+            message += "[" + this.getTaskType() +"]" + "[" + "\u2713" + "] " + this.getTaskName() + " (at: " + this.dateTime + ")";
         } else {
-            message += "[" + this.taskType +"]" + "[" + "\u2718" + "] " + this.taskName + " (at: " + this.dateTime + ")";
+            message += "[" + this.getTaskType() +"]" + "[" + "\u2718" + "] " + this.getTaskName() + " (at: " + this.dateTime + ")";
         }
         return message;
     }

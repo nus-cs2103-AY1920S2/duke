@@ -4,9 +4,9 @@
  */
 public abstract class Task {
 
-    public String taskName; //name of the given task
-    public boolean done; //whether the task is done or not
-    public String taskType;
+    private String taskName; //name of the given task
+    private boolean isDone; //whether the task is done or not
+    private String taskType;
 
     /**
      * Constructor.
@@ -15,7 +15,7 @@ public abstract class Task {
      */
     public Task(String taskName, String taskType) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
         this.taskType = taskType;
     }
 
@@ -23,7 +23,7 @@ public abstract class Task {
      * Function to set the task to done.
      */
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
 
@@ -32,7 +32,7 @@ public abstract class Task {
      * @return boolean to state whether is it done or not (true means done).
      */
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
 
@@ -42,5 +42,13 @@ public abstract class Task {
      */
     public String getTaskName() {
         return this.taskName;
+    }
+
+    /**
+     * Function to get the task type.
+     * @return String type of task.
+     */
+    public String getTaskType() {
+        return this.taskType;
     }
 }

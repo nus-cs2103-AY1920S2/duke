@@ -17,7 +17,7 @@ public class Parser {
         String[] inputCommand = command.trim().split(" ");
         StringBuilder taskName = new StringBuilder();
         StringBuilder dateTime = new StringBuilder();
-        int index_found = 0;
+        int indexFound = 0;
         switch (inputCommand[0]) {
             case "todo":
                 try {
@@ -31,8 +31,8 @@ public class Parser {
                             taskName.append(" ");
                         }
                     }
-                    ToDo t = new ToDo(taskName.toString());
-                    list.addTask(t);
+                    ToDo newToDo = new ToDo(taskName.toString());
+                    list.addTask(newToDo);
                     ui.prettyPrinting(taskName.toString() + " added!");
                 } catch (DukeException e) {
                     ui.prettyPrinting(e.toString());
@@ -49,10 +49,10 @@ public class Parser {
                     if (!command.contains("/at")) {
                         throw new DukeException("Event command must contain [/at] as stated!"); //all the exceptions as stated in the error msg
                     }
-                    index_found = this.grabTaskName(taskName, inputCommand, "/at");
-                    this.grabDateTime(index_found, inputCommand, dateTime);
-                    Event e = new Event(taskName.toString(), dateTime.toString());
-                    list.addTask(e);
+                    indexFound = this.grabTaskName(taskName, inputCommand, "/at");
+                    this.grabDateTime(indexFound, inputCommand, dateTime);
+                    Event event = new Event(taskName.toString(), dateTime.toString());
+                    list.addTask(event);
                     ui.prettyPrinting(taskName.toString() + " added!");
                 } catch (DukeException e) {
                     ui.prettyPrinting(e.toString());
@@ -67,12 +67,12 @@ public class Parser {
                         //means incorrect input of the deadline command as stated, throw exception
                         throw new DukeException("Deadline command must contain [/by] as stated!");
                     }
-                    index_found = this.grabTaskName(taskName, inputCommand, "/by");
-                    this.grabDateTime(index_found, inputCommand, dateTime);
+                    indexFound = this.grabTaskName(taskName, inputCommand, "/by");
+                    this.grabDateTime(indexFound, inputCommand, dateTime);
                     // validate date inputted
                     Deadline.validDate(dateTime.toString());
-                    Deadline d = new Deadline(taskName.toString(), dateTime.toString());
-                    list.addTask(d);
+                    Deadline deadline = new Deadline(taskName.toString(), dateTime.toString());
+                    list.addTask(deadline);
                     ui.prettyPrinting(taskName.toString() + " added!");
                 } catch (DukeException e) {
                     ui.prettyPrinting(e.toString());
@@ -157,15 +157,15 @@ public class Parser {
      * @return index for the by/at depending on the type of task, not applicable for to-do tasks.
      */
     public int grabTaskName(StringBuilder taskName, String[] inputCommand, String delimiter)  throws DukeException {
-        int index_found = 0; //find the index for the delimiter
+        int indexFound = 0; //find the index for the delimiter
         for (int i = 1; i <= inputCommand.length - 1; i++) {
             if (inputCommand[i].equals(delimiter)) {
-                index_found = i;
+                indexFound = i;
                 break;
             } else {
                 taskName.append(inputCommand[i]);
                 if (inputCommand[i + 1].equals(delimiter)) {
-                    index_found = i + 1;
+                    indexFound = i + 1;
                     break;
                 } else {
                     taskName.append(" ");
@@ -173,22 +173,22 @@ public class Parser {
             }
         }
         // if the inputCommand array index 1 == delimiter, means no description was given, throw exception
-        if (index_found == 1) throw new DukeException("Description of deadline/event cannot be empty!");
-        return index_found;
+        if (indexFound == 1) throw new DukeException("Description of deadline/event cannot be empty!");
+        return indexFound;
     }
 
     /**
      * Function to grab and get the date time for the event/deadline.
-     * @param index_found index where the /at or /by is found.
+     * @param indexFound index where the /at or /by is found.
      * @param inputCommand command inputted by user (array).
      * @param dateTime object to hold the result.
      */
-    public void grabDateTime(int index_found, String[] inputCommand, StringBuilder dateTime)  throws DukeException {
-        if (index_found == inputCommand.length - 1) {
+    public void grabDateTime(int indexFound, String[] inputCommand, StringBuilder dateTime)  throws DukeException {
+        if (indexFound == inputCommand.length - 1) {
             // means that there is no description of date of task after the delimiter
             throw new DukeException("Date and time of the event/deadline cannot be empty!");
         }
-        for (int i = index_found + 1; i < inputCommand.length; i++) {
+        for (int i = indexFound + 1; i < inputCommand.length; i++) {
             dateTime.append(inputCommand[i]);
             if (i != inputCommand.length - 1) {
                 dateTime.append(" ");

@@ -19,9 +19,9 @@ public class ToDo extends Task {
     public String toString() {
         String message = "";
         if (this.getDone()) {
-            message += "[" + this.taskType + "]" + "[" + "\u2713" + "] " + this.taskName;
+            message += "[" + this.getTaskType() + "]" + "[" + "\u2713" + "] " + this.getTaskName();
         } else {
-            message += "[" + this.taskType + "]" + "[" + "\u2718" + "] " + this.taskName;
+            message += "[" + this.getTaskType() + "]" + "[" + "\u2718" + "] " + this.getTaskName();
         }
         return message;
     }

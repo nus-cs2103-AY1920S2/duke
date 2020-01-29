@@ -11,7 +11,7 @@ import java.io.FileWriter;
 public class Storage {
 
     private String fileLocation = "./Data/Tasks.txt"; //hard-coded relative file location of stored tasks
-    private File f;
+    private File file;
 
     // initialization of Storage
 
@@ -19,7 +19,7 @@ public class Storage {
      * Constructor for the storage class.
      */
     public Storage() {
-        this.f = new File(this.fileLocation);
+        this.file = new File(this.fileLocation);
     }
 
     /**
@@ -27,7 +27,7 @@ public class Storage {
      * @return true if it exists, else false.
      */
     public boolean existFile() {
-      return this.f.exists();
+      return this.file.exists();
     }
 
     /**
@@ -37,7 +37,7 @@ public class Storage {
     public ArrayList<Task> getTaskFromStorage() {
         ArrayList<Task> result = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.f));
+            BufferedReader reader = new BufferedReader(new FileReader(this.file));
             String line;
             while ((line = (reader.readLine())) != null) {
                 line = line.trim();
@@ -84,7 +84,7 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> tasks) {
         try {
-            FileWriter fw = new FileWriter(this.f);
+            FileWriter fw = new FileWriter(this.file);
             int counter = 0;
             String result = "";
             for (Task t : tasks) {
@@ -107,7 +107,7 @@ public class Storage {
      * @return String representation of the task.
      */
     public String convertTaskToString(Task t) {
-        String taskType = t.taskType;
+        String taskType = t.getTaskType();
         String result = "";
         switch(taskType) {
             case "T":
