@@ -7,6 +7,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public void doTask(int idx) {
         Task task = this.tasks.get(idx);
         task.setIsDone(true);
