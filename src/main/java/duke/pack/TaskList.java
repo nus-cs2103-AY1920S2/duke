@@ -2,6 +2,9 @@ package duke.pack;
 
 import java.util.ArrayList;
 
+/**
+ * represents list of all the tasks
+ */
 public class TaskList {
     protected ArrayList<Task> list;
 
@@ -13,10 +16,19 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * adds given task to the list
+     * @param task the task to be added
+     */
     public void addTask(Task task) {
         list.add(task);
     }
 
+    /**
+     * deletes given task from list
+     * @param taskNum integer value of the task to be deleted
+     * @return the deleted task
+     */
     public Task deleteTask(int taskNum) {
         return list.remove(taskNum - 1);
     }
@@ -34,6 +46,9 @@ public class TaskList {
         return list.get(taskNum - 1);
     }
 
+    /**
+     * prints all the tasks in the list
+     */
     public void printList() {
         System.out.println("    Here are your tasks:");
 

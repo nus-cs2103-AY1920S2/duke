@@ -5,6 +5,9 @@ import duke.pack.Parser;
 import duke.pack.TaskList;
 import duke.pack.Command;
 
+/**
+ * Represents the chatbot
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -26,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts to run the bot
+     */
     public void run() {
         // following code from module website
 

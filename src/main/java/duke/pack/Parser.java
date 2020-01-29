@@ -3,10 +3,19 @@ package duke.pack;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * represents a parser to interpret the user's commands
+ */
 public class Parser {
     public Parser() {
     }
 
+    /**
+     * Interprets the user's command
+     * @param command input of the user
+     * @return a Command that indicates what the user wants
+     * @throws DukeException if command is not correctly inputted
+     */
     public Command parseCommand(String command) throws DukeException {
         String[] comm = command.split(" ");
 

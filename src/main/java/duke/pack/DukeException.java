@@ -1,5 +1,8 @@
 package duke.pack;
 
+/**
+ * represents an exception for Duke
+ */
 public class DukeException extends Exception {
     String s;
 

@@ -1,5 +1,8 @@
 package duke.pack;
 
+/**
+ * represents a task of the user
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -29,6 +32,10 @@ public class Task {
         return description; //return task description
     }
 
+    /**
+     * sets the task to done or not done
+     * @param b boolean that indicates whether the task is done
+     */
     public void setDone(Boolean b) {
         isDone = b;
     }

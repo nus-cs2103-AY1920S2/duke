@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+/**
+ * Handles the loading and updating of tasks to hard disk
+ */
 public class Storage {
     protected String filePath;
     protected File file;
@@ -26,6 +29,11 @@ public class Storage {
         }
     }
 
+    /**
+     * loads tasks from the hard disk
+     * @return an ArrayList of the tasks
+     * @throws DukeException if tasks cannot be loaded from hard disk
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> arrList = new ArrayList<>();
 
@@ -68,6 +76,11 @@ public class Storage {
         return arrList;
     }
 
+    /**
+     * saves tasks to the hard disk
+     * @param tasks TaskList of all the tasks
+     * @throws DukeException if tasks cannot be saved to hard disk
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);

@@ -9,6 +9,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Formats the task to be saved in hard disk
+     * @return a string of the formatted task
+     */
     @Override
     public String formatForFile() {
         String type = "T";
