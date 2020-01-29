@@ -39,7 +39,7 @@ public class Ui {
                             + UiDesign.BORDER.getString());
                     tasks.remTask(index);
 
-                } else { // com == NEW_TASK
+                } else if (com == Commands.NEW_TASK) {
                     Task newTask = decoded.getTask();
                     tasks.addTask(newTask);
                     numTasks++;
@@ -47,6 +47,9 @@ public class Ui {
                             + "       " + newTask + "\n"
                             + "     Now you have " + numTasks + " tasks in the list.\n"
                             + UiDesign.BORDER.getString());
+                } else {    // com == FIND
+                    String keyword = decoded.getKeyWord();
+
                 }
             } catch (DukeException e) {
                 System.out.println(e);

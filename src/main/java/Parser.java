@@ -5,6 +5,7 @@ public class Parser {
     private Commands com;
     private int indexOfTaskAffected = -1;
     private Task newTask;
+    private String keyword;
 
     public Parser(String line, int size) throws DukeException {
         if (line.equals("bye")) {
@@ -76,6 +77,11 @@ public class Parser {
                     com = Commands.NEW_TASK;
                     newTask = new Deadline(msgDate[0], date);
 
+                } else if (comArs[0].equals("find")) {
+                    com = Commands.FIND;
+                    keyword = line.substring(4, line.length());
+                    // add an error for empty field
+
                 } else {
                     throw new DECommand();
                 }
@@ -85,6 +91,10 @@ public class Parser {
 
     public Task getTask() {
         return newTask;
+    }
+
+    public String getKeyWord() {
+        return keyword;
     }
 
     public Commands getCommand() {
