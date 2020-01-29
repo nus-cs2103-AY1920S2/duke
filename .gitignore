@@ -18,3 +18,7 @@ bin/
 
 # Storage file used by Duke
 duke.txt
+
+.classpath
+.project
+/.settings/
