@@ -1,16 +1,15 @@
 package duke.storage;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
-
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.nio.charset.Charset;
-
+import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Storage for tasks stored in task list.
@@ -48,8 +47,12 @@ public class Storage {
      * To load the task list from saved text file (if any).
      * @throws IOException Throws exception if there is an error in reading task list data from saved text file.
      */
-   public TaskList loadTaskList() throws IOException {
-       List<String> data = FileUtils.readLines(file, Charset.defaultCharset());
+   public TaskList loadTaskList() throws DukeException, IOException {
+       Scanner scanner = new Scanner(this.file);
+       ArrayList<String> data = new ArrayList<>();
+       while (scanner.hasNext()) {
+           data.add(scanner.nextLine());
+       }
        return new TaskList(data);
    }
 

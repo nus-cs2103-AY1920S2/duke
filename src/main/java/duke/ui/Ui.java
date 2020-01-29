@@ -3,10 +3,10 @@ package duke.ui;
 /**
  * User Interface Manager.
  */
-public class UI {
+public class Ui {
 
     public static void printIntro() {
-        String intro = "Hello! I'm Duke\n" + "What can I do for you?";
+        String intro = "Hello! I'm Duke" + System.lineSeparator() + "What can I do for you?";
         System.out.println(wrap(intro));
     }
 
@@ -15,10 +15,12 @@ public class UI {
     }
 
     public static String wrap(String string) {
-        return "____________________________________________________________\n"
+        return "____________________________________________________________"
+                + System.lineSeparator()
                 + string
-                + "\n"
-                + "____________________________________________________________\n";
+                + System.lineSeparator()
+                + "____________________________________________________________"
+                + System.lineSeparator();
     }
 
 }

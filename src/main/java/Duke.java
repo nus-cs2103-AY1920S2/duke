@@ -39,6 +39,8 @@ public class Duke {
         try {
             this.storage = new Storage("data/duke.txt");
             this.taskList = this.storage.loadTaskList();
+        } catch (DukeException e) {
+            System.err.println(e.toString());
         } catch (IOException e) {
             System.err.println(e.toString());
         }

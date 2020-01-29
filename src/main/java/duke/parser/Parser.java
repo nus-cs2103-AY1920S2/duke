@@ -15,12 +15,12 @@ public class Parser {
     /**
      * Parser to interpret user input and execute the appropriate command.
      *
-     * @param input User input during runtime.
-     * @param storage Storage object to save the task list that is updated in this method.
+     * @param input    User input during runtime.
+     * @param storage  Storage object to save the task list that is updated in this method.
      * @param taskList Task list object to store the tasks that are created from user command in this method.
      * @return A boolean value to indicate whether to exit the program.
      * @throws DukeException Throws exception if there is an error in parsing user input
-     * @throws IOException Throws exception if there is an error in saving task list.
+     * @throws IOException   Throws exception if there is an error in saving task list.
      */
     public static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
 
@@ -32,18 +32,18 @@ public class Parser {
         case "done": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please specify a duke.task number to mark as done!");
+                throw new DukeException("☹ OOPS!!! Please specify a task number to mark as done!");
             }
 
             int taskNumber = Integer.parseInt(inputArr[1]);
 
             if (taskNumber > taskList.getSize()) {
-                throw new DukeException("☹ OOPS!!! Please specify a valid duke.task number!");
+                throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
             }
 
             Task task = taskList.completeTask(taskNumber);
 
-            Ui.printMessage("Nice! I've marked this duke.task as done: \n" + task.toString());
+            Ui.printMessage("Nice! I've marked this task as done: " + System.lineSeparator() + task.toString());
 
             break;
         }
@@ -51,19 +51,21 @@ public class Parser {
         case "delete": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please specify a duke.task number to be deleted!");
+                throw new DukeException("☹ OOPS!!! Please specify a task number to be deleted!");
             }
 
             int taskNumber = Integer.parseInt(inputArr[1]);
 
             if (taskNumber > taskList.getSize()) {
-                throw new DukeException("☹ OOPS!!! Please specify a valid duke.task number!");
+                throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
             }
 
             Task task = taskList.removeTask(taskNumber);
 
-            Ui.printMessage("Noted! I've removed this duke.task: \n"
-                    + task.toString() + "\n"
+            Ui.printMessage("Noted! I've removed this task: "
+                    + System.lineSeparator()
+                    + task.toString()
+                    + System.lineSeparator()
                     + "Now you have " + taskList.getSize()
                     + " tasks in the list.");
 
@@ -84,8 +86,10 @@ public class Parser {
             Task newTask = new ToDo(taskName);
             taskList.addTask(newTask);
 
-            Ui.printMessage("Got it. I've added this duke.task: \n"
-                    + newTask.toString() + "\n"
+            Ui.printMessage("Got it. I've added this task: "
+                    + System.lineSeparator()
+                    + newTask.toString()
+                    + System.lineSeparator()
                     + "Now you have " + taskList.getSize()
                     + " tasks in the list.");
 
@@ -109,8 +113,10 @@ public class Parser {
             Task newTask = new Deadline(taskName, dateTime);
             taskList.addTask(newTask);
 
-            Ui.printMessage("Got it. I've added this duke.task: \n"
-                    + newTask.toString() + "\n"
+            Ui.printMessage("Got it. I've added this task: "
+                    + System.lineSeparator()
+                    + newTask.toString()
+                    + System.lineSeparator()
                     + "Now you have " + taskList.getSize()
                     + " tasks in the list.");
 
@@ -134,8 +140,10 @@ public class Parser {
             Task newTask = new Event(taskName, dateTime);
             taskList.addTask(newTask);
 
-            Ui.printMessage("Got it. I've added this duke.task: \n"
-                    + newTask.toString() + "\n"
+            Ui.printMessage("Got it. I've added this task: "
+                    + System.lineSeparator()
+                    + newTask.toString()
+                    + System.lineSeparator()
                     + "Now you have " + taskList.getSize()
                     + " tasks in the list.");
 
@@ -151,13 +159,13 @@ public class Parser {
             int idx = input.indexOf(" ");
             String keyword = input.substring(idx + 1);
 
-            UI.printMessage("Here are the matching tasks in your list: \n" + taskList.searchTaskList(keyword));
+            Ui.printMessage("Here are the matching tasks in your list: " + System.lineSeparator() + taskList.searchTaskList(keyword));
 
             break;
         }
 
         case "list": {
-            Ui.printMessage("Here are the tasks in your list: \n" + taskList.getTaskList());
+            Ui.printMessage("Here are the tasks in your list: " + System.lineSeparator() + taskList.getTaskList());
             break;
         }
 
@@ -170,11 +178,11 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
+        }
+
         storage.saveTaskList(taskList);
 
         return false;
-
     }
-
 
 }

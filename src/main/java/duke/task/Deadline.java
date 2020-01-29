@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -13,7 +15,7 @@ public class Deadline extends Task {
      * @param taskName Name of the task.
      * @param dateTime The date and time of the task (if any).
      */
-    public Deadline(String taskName, String dateTime) {
+    public Deadline(String taskName, String dateTime) throws DukeException {
         super(taskName.trim(), dateTime.trim());
         this.taskType = "D";
     }
@@ -25,7 +27,7 @@ public class Deadline extends Task {
      * @param isDone Indicates if the task is completed already.
      * @param dateTime The date and time of the task (if any).
      */
-    public Deadline(String taskName, boolean isDone, String dateTime) {
+    public Deadline(String taskName, boolean isDone, String dateTime) throws DukeException {
         super(taskName.trim(), isDone, dateTime.trim());
         this.taskType = "D";
     }

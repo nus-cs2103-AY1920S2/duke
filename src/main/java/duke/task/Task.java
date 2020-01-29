@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -44,11 +46,16 @@ public abstract class Task {
      * @param taskName Describes the nature of the task.
      * @param dateTime The date and time of the task (if any).
      */
-    public Task(String taskName, String dateTime) {
+    public Task(String taskName, String dateTime) throws DukeException {
         this.taskName = taskName;
         this.isDone = false;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.dateTime = LocalDate.parse(dateTime, formatter);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            this.dateTime = LocalDate.parse(dateTime, formatter);
+        } catch (Exception e) {
+            throw new DukeException("Please give the appropriate date format in yyyy-MM-dd " +
+                    "(if date is not applicable, please enter 2100-01-01)");
+        }
     }
 
     /**
@@ -69,11 +76,16 @@ public abstract class Task {
      * @param isDone Indicates if the task is completed already.
      * @param dateTime The date and time of the task (if any).
      */
-    public Task(String taskName, boolean isDone, String dateTime) {
+    public Task(String taskName, boolean isDone, String dateTime) throws DukeException {
         this.taskName = taskName;
         this.isDone = isDone;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.dateTime = LocalDate.parse(dateTime, formatter);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            this.dateTime = LocalDate.parse(dateTime, formatter);
+        } catch (Exception e) {
+            throw new DukeException("Please give the appropriate date format in yyyy-MM-dd " +
+                    "(if date is not applicable, please enter 2100-01-01)");
+        }
     }
 
     public void completeTask() {

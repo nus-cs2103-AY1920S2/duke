@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class TaskList {
      *
      * @param data List of tasks loaded from saved text file.
      */
-    public TaskList(List<String> data) {
+    public TaskList(List<String> data) throws DukeException {
         this.taskList = new ArrayList<>(100);
         for (int i = 0; i < data.size(); i++) {
             String line = data.get(i);
@@ -75,7 +77,7 @@ public class TaskList {
             if (taskString.contains(keyword)) {
                 list += count + ". " + taskString;
                 if (i != this.taskList.size() - 1) {
-                    list += "\n";
+                    list += System.lineSeparator();
                 }
             }
         }
@@ -93,7 +95,7 @@ public class TaskList {
             String task = this.taskList.get(i).toString();
             list += count + ". " + task;
             if (i != this.taskList.size() - 1) {
-                list += "\n";
+                list += System.lineSeparator();
             }
         }
         return list;
@@ -107,7 +109,7 @@ public class TaskList {
         String data = "";
         for (int i = 0; i < this.taskList.size(); i++) {
             Task item = this.taskList.get(i);
-            data += item.getSaveFormat() + "\n";
+            data += item.getSaveFormat() + System.lineSeparator();
         }
         return data;
     }
