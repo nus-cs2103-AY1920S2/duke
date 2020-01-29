@@ -1,3 +1,5 @@
+package com.duke;
+
 import com.duke.command.Command;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
@@ -60,7 +62,7 @@ public class Duke {
 /*
 
 
-public class Duke {
+public class com.duke.Duke {
     static String space = "     ";
     static String line = space + "_____________________________________________";
     static List<com.duke.task.Task> tasks;
@@ -190,7 +192,7 @@ public class Duke {
     }
 
     public static void introduce() {
-        String intro_message = "Hello! I'm Duke" + "\n" + space + "What can I do for you?";
+        String intro_message = "Hello! I'm com.duke.Duke" + "\n" + space + "What can I do for you?";
         respond(intro_message);
     }
     public static void print_list() {
