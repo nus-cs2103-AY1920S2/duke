@@ -63,7 +63,7 @@ public class Parser {
         }
     }
 
-    private static boolean isNumeric(String strNum) {
+    private boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
