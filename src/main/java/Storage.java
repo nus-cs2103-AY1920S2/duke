@@ -66,7 +66,7 @@ public class Storage {
             for (String line : lines) {
                 String[] lineParts = line.split(":");
                 if (lineParts[0].equals("T"))
-                    storedItems.add(new Task(lineParts[1], Integer.parseInt(lineParts[2]) == 1));
+                    storedItems.add(new ToDo(lineParts[1], Integer.parseInt(lineParts[2]) == 1));
                 else if (lineParts[0].equals("D"))
                     storedItems.add(new Deadline(lineParts[1], Integer.parseInt(lineParts[2]) == 1, lineParts[3]));
                 else if (lineParts[0].equals("E"))

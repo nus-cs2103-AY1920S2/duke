@@ -25,6 +25,7 @@ public class Deadline extends Task {
         super(name, isDone);
         this.byTime = byTime;
         type = TaskType.deadline;
+        convertDateTime(byTime);
     }
 
     public String encoder() {

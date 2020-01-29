@@ -50,7 +50,7 @@ public class Duke {
             }
         } else if (delPos != -2) {
             try {
-                TaskList.deleteItem(delPos);
+                TaskList.deleteItem(delPos, storedItems);
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("delPos error\n%s%s\n%s%s\n%s%s",

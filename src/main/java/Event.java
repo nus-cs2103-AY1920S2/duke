@@ -25,6 +25,7 @@ public class Event extends Task {
         super(name, isDone);
         this.atTime = byTime;
         type = TaskType.deadline;
+        convertDateTime(atTime);
     }
 
     public String encoder() {
