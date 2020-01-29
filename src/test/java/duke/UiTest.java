@@ -1,6 +1,10 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TodoStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,11 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UiTest {
     Ui ui;
     ByteArrayOutputStream output;
+    static final String doneStatusIcon = "\u2713";
+    static final String incompleteStatusIcon = "\u2718";
     final String INDENTATION = Ui.INDENTATION;
     final String HORIZONTAL_BAR = Ui.HORIZONTAL_BAR;
     final String NEWLINE = Ui.NEWLINE;
@@ -27,7 +35,20 @@ class UiTest {
 
     static Stream<Arguments> generateAllTaskTypes() {
         return Stream.of(
-                Arguments.of(new Todo("Read book"), 0),
+                Arguments.of(new TodoStub("Read book", false,
+                        "todo,0,Read book", doneStatusIcon,
+                        incompleteStatusIcon, "[T][" + incompleteStatusIcon + "] Read book")),
+                Arguments.of(new Event("Birthday Party", "2020-01-01", false)),
+                Arguments.of(new Deadline("Finish Coding Project", "2020-01-27", false)));
+    }
+
+    static Stream<Arguments> generateAllTaskTypesWithZeroTotalTasks() {
+        // Generates a stream of [Task] [task count]
+        // [task count] is 0
+        return Stream.of(
+                Arguments.of(new TodoStub("Read book", false,
+                        "todo,0,Read book", doneStatusIcon,
+                        incompleteStatusIcon, "[T][" + incompleteStatusIcon + "] Read book"), 0),
                 Arguments.of(new Event("Birthday Party", "2020-01-01"), 0),
                 Arguments.of(new Deadline("Finish Coding Project", "2020-01-27"), 0));
     }
@@ -42,7 +63,9 @@ class UiTest {
 
     static Stream<Arguments> generateOneTaskList() {
         List<Task> tasks = new ArrayList<>();
-        tasks.add(new Todo("read book"));
+        tasks.add(new TodoStub("Read book", false,
+                "todo,0,Read book", doneStatusIcon,
+                incompleteStatusIcon, "[T][" + incompleteStatusIcon + "] Read book"));
         tasks.add(new Event("Chinese New Year", "2020-01-25"));
         tasks.add(new Deadline("Finish project", "2020-04-20"));
         return Stream.of(
@@ -141,7 +164,7 @@ class UiTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateAllTaskTypes")
+    @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void printTaskAddition_allTaskTypes(Task task, int totalTasks) {
         String taskInfo = task.toString();
         String expected = HORIZONTAL_DIVIDER +
@@ -155,7 +178,7 @@ class UiTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateAllTaskTypes")
+    @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void markTaskAsDone_allTaskTypes(Task task, int totalTasks) {
         // Check if task is initially marked as undone
         assertFalse(task.getTaskCompletionStatus());
@@ -167,6 +190,14 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("generateAllTaskTypes")
+    void markTaskAsDone(Task task) {
+        assertFalse(task.getTaskCompletionStatus());
+        task.markAsDone();
+        assertTrue(task.getTaskCompletionStatus());
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void printTaskDeletion_allTaskTypes(Task task, int totalTasks) {
         String expected = HORIZONTAL_DIVIDER +
                 INDENTATION + "Noted. I've removed this task:" + NEWLINE +
