@@ -15,10 +15,12 @@ public class Event extends Task {
         return dateTime.format(IN_FORMATTER);
     }
 
+    @Override
     public String toString() {
         return "[" + super.getTaskType() + "]" + super.toString() + " (at: " + dateTime.format(OUT_FORMATTER) + ")";
     }
 
+    @Override
     public String saveString() {
         return getTaskType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDateTime();
     }
