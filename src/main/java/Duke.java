@@ -12,9 +12,15 @@ public class Duke {
 
     public static void main(String[] args) {
         printWelcomeMessage();
-
         scanner = new Scanner(System.in);
-        tasks = new ArrayList<Task>();
+
+        // Try to read tasks from disk
+        tasks = Serializer.deserialize();
+
+        // Save does not exist
+        if (tasks == null) {
+            tasks = new ArrayList<Task>();
+        }
 
         while (true) {
             try {
@@ -33,8 +39,15 @@ public class Duke {
 
         switch (command) {
         case "bye":
-            printGoodbyeMessage();
-            System.exit(0);
+            // Fallthrough
+        case "quit":
+            // Fallthrough
+        case "exit":
+            // Fallthrough
+        case "drop_module":
+            // Fallthrough
+        case "withdraw_from_uni":
+            quit();
             break;
 
         case "list":
@@ -135,4 +148,9 @@ public class Duke {
         System.out.println(OUTPUT_HORIZONTAL_LINE);
     }
 
+    protected static void quit() {
+        Serializer.serialize(tasks);
+        printGoodbyeMessage();
+        System.exit(0);
+    }
 }
