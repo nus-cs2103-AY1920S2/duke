@@ -165,6 +165,9 @@ class Duchess {
             throw new DuchessException("You're referring to a task that does not exist!");
         } else {
             Task taskToComplete = this.tasks.get(indexAsInt - 1);
+            if (taskToComplete.isCompleted()) {
+                throw new DuchessException("You have already completed this task!");
+            }
             taskToComplete.toggleIsCompleted();
             System.out.println("\tOh? You actually completed something? Impressive...");
             System.out.println("\t\t" + taskToComplete);
