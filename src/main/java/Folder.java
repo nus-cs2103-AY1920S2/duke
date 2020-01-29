@@ -25,7 +25,7 @@ public class Folder {
         int i = 1;
         String output = "";
         for(Tasks x: listTasks) {
-            output = output + x.logo + "=" + x.status + "=" + x.msg.getMsg() + "\n";
+            output = output + x.logo + "|" + x.status + "|" + x.msg.getMsg() + "\n";
             i++;
         }
         return output;
