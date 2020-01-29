@@ -16,12 +16,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString() {
-        return "[" + super.getTaskType() + "]" + super.toString() + " (by: " + by.format(OUT_FORMATTER) + ")";
+    public String saveString() {
+        return getTaskType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDateTime();
     }
 
     @Override
-    public String saveString() {
-        return getTaskType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDateTime();
+    public String toString() {
+        return "[" + super.getTaskType() + "]" + super.toString() + " (by: " + by.format(OUT_FORMATTER) + ")";
     }
 }

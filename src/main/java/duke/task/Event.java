@@ -16,12 +16,12 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString() {
-        return "[" + super.getTaskType() + "]" + super.toString() + " (at: " + dateTime.format(OUT_FORMATTER) + ")";
+    public String saveString() {
+        return getTaskType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDateTime();
     }
 
     @Override
-    public String saveString() {
-        return getTaskType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDateTime();
+    public String toString() {
+        return "[" + super.getTaskType() + "]" + super.toString() + " (at: " + dateTime.format(OUT_FORMATTER) + ")";
     }
 }

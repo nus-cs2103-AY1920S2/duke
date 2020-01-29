@@ -35,11 +35,12 @@ public class Task {
         this.isDone = true;
     }
 
+    public String saveString() {
+        return taskType + " | " + (isDone ? "1" : "0") + " | " + description + " | ";
+    }
+
     public String toString() {
         return getStatusIcon() + " " + getDescription();
     }
 
-    public String saveString() {
-        return taskType + " | " + (isDone ? "1" : "0") + " | " + description + " | ";
-    }
 }
