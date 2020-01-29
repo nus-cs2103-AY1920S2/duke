@@ -1,3 +1,3 @@
-T | 1 | testing
-E | 1 | tmr meeting  | 03/02/2020 1800
-D | 0 | tmr tutorial  | 04/05/2020 1900
+T | 0 | testing
+T | 0 | hello
+D | 0 | hshshs | 20/03/2020 2000

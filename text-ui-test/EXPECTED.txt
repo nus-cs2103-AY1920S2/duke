@@ -10,7 +10,7 @@ What can I do for you? :)
 ________________________________________________
 Got it. I've added this task:
 [T][?] borrow book
-Now you have 1 tasks in the list.
+Now you have 1 duke.tasks in the list.
 ________________________________________________
 ________________________________________________
 1. [T][?] borrow book
@@ -18,17 +18,17 @@ ________________________________________________
 ________________________________________________
 Got it. I've added this task:
 [D][?] return book (by: Sunday)
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 ________________________________________________
 ________________________________________________
 Got it. I've added this task:
 [E][?] project meeting (at: Mon 2-4pm)
-Now you have 3 tasks in the list.
+Now you have 3 duke.tasks in the list.
 ________________________________________________
 ________________________________________________
 Got it. I've added this task:
 [D][?] do homework (by: no idea :-p)
-Now you have 4 tasks in the list.
+Now you have 4 duke.tasks in the list.
 ________________________________________________
 ________________________________________________
 1. [T][?] borrow book

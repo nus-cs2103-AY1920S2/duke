@@ -1,19 +1,19 @@
+package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected Type type;
-    protected LocalDateTime date;
-    protected DateTimeFormatter inFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    protected DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mm a");
+    protected TaskType taskType;
+    protected final static DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected final static DateTimeFormatter OUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mm a");
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.type = Type.X;
-        this.date = LocalDateTime.now();
+        this.taskType = TaskType.X;
     }
 
     public String getStatusIcon() {
@@ -24,12 +24,8 @@ public class Task {
         return isDone;
     }
 
-    public String getDate() {
-        return date.format(inFormatter);
-    }
-
-    public Type getType() {
-        return this.type;
+    public TaskType getTaskType() {
+        return this.taskType;
     }
 
     public String getDescription() {
@@ -45,6 +41,6 @@ public class Task {
     }
 
     public String saveString() {
-        return type + " | " + (isDone ? "1" : "0") + " | " + description + " | " + date.format(outFormatter);
+        return taskType + " | " + (isDone ? "1" : "0") + " | " + description + " | ";
     }
 }

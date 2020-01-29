@@ -8,7 +8,7 @@ Rather than to do everything in one try, let’s iterate and build up towards ou
 
 JavaFX has an _event-driven architecture style_. As such, we programmatically define _handler_ methods to execute as a response to certain _events_. When an event is detected, JavaFX will call the respective handlers.
 
-For Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
+For duke.Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
 
 For now, let’s have the application add a new `Label` with the text from the `TextField`. Update the `Main` class as follows. You'll need to add an `import javafx.scene.control.Label;` too.
 ```java
@@ -66,7 +66,7 @@ Verify that the `ScrollPane` scrolls as intended.
 
 ## Iteration 2 – Adding Dialog Boxes
 
-In the mockup of the UI, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
+In the mockup of the duke.ui.Ui, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
 
 Let’s create our custom control `DialogBox`:
 ```java
@@ -103,7 +103,7 @@ import javafx.scene.image.ImageView;
 ```
 
 Next, add two images to the `main/resources/images` folder.
-For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively but you can use any image you want.
+For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and duke.Duke's avatar respectively but you can use any image you want.
 
 Image|Filename
 ---|---
@@ -112,7 +112,7 @@ Image|Filename
 
 
 ```java
-public class Duke extends Application {
+public class duke.Duke extends Application {
     // ...
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -124,7 +124,7 @@ Add a new method to handle user input:
 ```java
 /**
  * Iteration 2:
- * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+ * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
  * the dialog container. Clears the user input after processing.
  */
 private void handleUserInput() {
@@ -142,7 +142,7 @@ private void handleUserInput() {
  * Replace this stub with your completed method.
  */
 private String getResponse(String input) {
-    return "Duke heard: " + input;
+    return "duke.Duke heard: " + input;
 }
 ```
 
@@ -170,7 +170,7 @@ Run the program and see how it works.
 
 ## Iteration 3 – Adding custom behavior to DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and duke.Duke’s output.
 
 ```java
 /**
@@ -224,11 +224,11 @@ Run the application and play around with it.
 ![DialogBoxes Iteration 3](assets/DialogBoxesIteration3.png)
 
 Congratulations! 
-You have successfully implemented a fully functional GUI for Duke!  
+You have successfully implemented a fully functional GUI for duke.Duke!  
 
 ## Exercises
 
-1. While the GUI looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these tasks:
+1. While the GUI looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these duke.tasks:
    * Add padding between each DialogBox
    * Add padding between each ImageView and its Label
    * Clip the ImageView into a circle
