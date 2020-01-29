@@ -8,8 +8,9 @@ import java.util.Scanner;
 //oops i messed up and forgot to commit in a branch
 
 public class Duke {
-    public static Storage storage = new Storage("duke.txt");
+    public static Ui ui = new Ui();
     public static TaskList taskList = new TaskList();
+    public static Storage storage = new Storage("duke.txt");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,7 +19,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
+        ui.dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
 
         Scanner sc = new Scanner(System.in);
         storage.retrieveInfo();
@@ -62,24 +63,14 @@ public class Duke {
 
                 }
             } catch (DukeException e) {
-                dukePrint("☹ OOPS!!! " + e.getMessage()+ "\n");
+                ui.dukePrint("☹ OOPS!!! " + e.getMessage()+ "\n");
             } finally {
                 command = sc.nextLine();
             }
         }
 
         storage.updateInfo();
-        dukePrint("Bye. Hope to see you again soon!\n");
+        ui.dukePrint("Bye. Hope to see you again soon!\n");
         sc.close();
-    }
-
-    public static String horizontalLines() {
-        return "__________________________________________________________________________________________________________\n";
-    }
-
-    public static void dukePrint (String input) {
-        System.out.print(horizontalLines());
-        System.out.print(input);
-        System.out.print(horizontalLines());
     }
 }
