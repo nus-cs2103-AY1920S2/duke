@@ -1,0 +1,3 @@
+[T][✘] this this
+[D][✘] return book (by: Sunday)
+[E][✘] project meeting (at: Mon 2-4pm)
