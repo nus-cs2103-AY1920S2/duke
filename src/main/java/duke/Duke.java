@@ -1,10 +1,10 @@
 package duke;
 
-import duke.commands.Command;
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.tasks.*;
+import duke.task.*;
 import duke.ui.Ui;
 
 public class Duke {

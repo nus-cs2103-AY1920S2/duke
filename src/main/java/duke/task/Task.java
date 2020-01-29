@@ -1,6 +1,5 @@
-package duke.tasks;
+package duke.task;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {

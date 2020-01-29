@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.tasks.*;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,19 +87,19 @@ public class Storage{
 
                 case "T":
                     Task todo = new Todo(temp[2]);
-                    checkMarkDone(todo);
+                    checkMarkDone(todo, temp[1]);
                     tasks.add(todo);
                     break;
 
                 case "E":
                     Task event = new Event(temp[2], LocalDateTime.parse(temp[3], IN_FORMATTER));
-                    checkMarkDone(event);
+                    checkMarkDone(event, temp[1]);
                     tasks.add(event);
                     break;
 
                 case "D":
                     Task deadline = new Deadline(temp[2], LocalDateTime.parse(temp[3], IN_FORMATTER));
-                    checkMarkDone(deadline);
+                    checkMarkDone(deadline, temp[1]);
                     tasks.add(deadline);
                     break;
                 }
@@ -110,8 +110,8 @@ public class Storage{
         return tasks;
     }
 
-    private void checkMarkDone(Task task) {
-        if (task.getStatus()) {
+    private void checkMarkDone(Task task, String status) {
+        if (status.equals("1")) {
             task.markDone();
         }
     }

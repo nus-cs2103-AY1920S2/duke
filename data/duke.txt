@@ -1,3 +1,4 @@
 T | 0 | testing
-T | 0 | hello
-D | 0 | hshshs | 20/03/2020 2000
+T | 1 | hello
+T | 1 | help
+E | 0 | shalf | 20/02/2020 1900

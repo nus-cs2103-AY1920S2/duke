@@ -1,8 +1,8 @@
 package duke.ui;
 
 import duke.exception.DukeException;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.Scanner;
 

@@ -20,7 +20,7 @@
    )
    REM no error here, errorlevel == 0
    
-   REM run the program, feed duke.commands from input.txt file and redirect the output to the ACTUAL.TXT
+   REM run the program, feed duke.command from input.txt file and redirect the output to the ACTUAL.TXT
    java -classpath ..\bin duke.Duke < input.txt > ACTUAL.TXT
    
    REM compare the output to the expected output
@@ -50,7 +50,7 @@
        exit 1
    fi
    
-   # run the program, feed duke.commands from input.txt file and redirect the output to the ACTUAL.TXT
+   # run the program, feed duke.command from input.txt file and redirect the output to the ACTUAL.TXT
    java -classpath ../bin duke.Duke < input.txt > ACTUAL.TXT
    
    # compare the output to the expected output
@@ -64,9 +64,9 @@
        exit 1
    fi
    ```
-1. Update the `javac` and `java` duke.commands in the script to match the name/location of your main class.
+1. Update the `javac` and `java` duke.command in the script to match the name/location of your main class.
 1. Add an `EXPECTED.txt` to the same folder, containing the expected output.
-1. Add an `input.txt` containing the input duke.commands.
+1. Add an `input.txt` containing the input duke.command.
 1. Run the `.bat`/`.sh` file to execute the test.
 
 --------------------------------------------------------------------------------

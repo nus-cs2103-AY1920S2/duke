@@ -1,22 +1,23 @@
-package duke.commands;
+package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
     private int index;
 
-    public DeleteCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task tempTask = tasks.deleteTaskByIndex(index);
+        Task tempTask = tasks.getByIndex(index);
+        tempTask.markDone();
         storage.saveAll(tasks);
-        ui.showDeleteTask(tempTask, tasks.getSize());
+        ui.showDone(tempTask);
     }
 }
