@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,10 +54,11 @@ public class Duke {
                         String[] ddlDetails = getTaskDetails(input.substring(9),
                                 " /by ");
                         try {
-                            add(new Deadline(ddlDetails[0], ddlDetails[1]), tasks);
-                        } catch (ArrayIndexOutOfBoundsException e) {
+                            add(new Deadline(ddlDetails[0], LocalDate.parse(ddlDetails[1])), tasks);
+                        } catch (Exception e) {
                             printBreak();
                             System.out.println("    OOP!!! The Deadline time is incorrect.");
+                            System.out.println("    Input time as \" /by yyyy-mm-dd\"");
                             printBreak();
                         }
                         break;
@@ -64,10 +66,11 @@ public class Duke {
                         String[] eventDetails = getTaskDetails(input.substring(6),
                                 " /at ");
                         try {
-                            add(new Event(eventDetails[0], eventDetails[1]), tasks);
-                        } catch (ArrayIndexOutOfBoundsException e) {
+                            add(new Event(eventDetails[0], LocalDate.parse(eventDetails[1])), tasks);
+                        } catch (Exception e) {
                             printBreak();
                             System.out.println("    OOP!!! The event time is incorrect.");
+                            System.out.println("    Input time as \" /at yyyy-mm-dd\"");
                             printBreak();
                         }
                         break;
