@@ -126,7 +126,24 @@ class Duke {
                                 + "\"find a_single_word_without_empty_space\"");
                     }
                     String keyword = instructionByWord[1];
-
+                    List<Task> selectedList = new ArrayList<>();
+                    int count = 0;
+                    for (Task task : list) {
+                        String taskDescription = task.getTask();
+                        String[] descriptionByWord = taskDescription.split(" ");
+                        for (int i = 0; i < descriptionByWord.length; i++) {
+                            if (descriptionByWord[i].equals(keyword)) {
+                                selectedList.add(task);
+                                count++;
+                                break;
+                            }
+                        }
+                    }
+                    System.out.println(count + " task(s) were found containing keyword " + keyword + " :");
+                    for (Task task : selectedList) {
+                        System.out.println(task);
+                    }
+                    break;
                 case "":
                     throw new DukeException("Empty line input. "
                             + "Please specify an instruction followed by relevant description.\n"
@@ -152,10 +169,11 @@ class Duke {
             list.add(new Todo(isDone, lineByWord[2]));
             break;
         case "D":
-            list.add(new Deadline(isDone, lineByWord[2], lineByWord[3]));
+            list.add(new Deadline(isDone, lineByWord[2], LocalDate.parse(lineByWord[3])));
             break;
         case "E":
-            list.add(new Event(isDone, lineByWord[2], lineByWord[3]));
+            list.add(new Event(isDone, lineByWord[2], LocalDate.parse(lineByWord[3])));
+            break;
         }
     }
 
