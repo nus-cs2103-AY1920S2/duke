@@ -1,32 +1,48 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+    private static TaskList tasks;
+    private static Storage storage;
     public static void main(String[] args) {
         printIntro();
-        Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        Scanner inputScanner = new Scanner(System.in);
+        String fileName = "../data/tasks.txt";
+        File file = new File(fileName);
 
-        while (sc.hasNextLine()) {
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            printLines("File creation failed.");
+        }
+        
+        storage = new Storage(fileName);
+        tasks = new TaskList(storage.loadTasks());
+
+        while (inputScanner.hasNextLine()) {
             try {
-                String input = sc.nextLine();
+                String input = inputScanner.nextLine();
                 String[] split = input.split(" ");
                 String command = split[0];
 
                 if (input.compareTo("list") == 0) {
-                    System.out.println(taskList.toString());
+                    System.out.println(tasks.toString());
                 } else if (input.compareTo("bye") == 0) {
                     printGoodbye();
                     break;
                 } else if (command.compareTo("delete") == 0) {
-                    taskList.deleteTask(Integer.parseInt(split[1]) - 1);
+                    tasks.deleteTask(Integer.parseInt(split[1]) - 1);
                 } else if (command.compareTo("done") == 0) {
-                    taskList.doTask(Integer.parseInt(split[1]) - 1);
+                    tasks.doTask(Integer.parseInt(split[1]) - 1);
+                    storage.doTask(Integer.parseInt(split[1]));
                 } else if (command.compareTo("todo") == 0) {
-                    manageTodo(taskList, input);
+                    manageTodo(tasks, input, fileName);
                 } else if (command.compareTo("event") == 0) {
-                    manageEvent(taskList, input);
+                    manageEvent(tasks, input, fileName);
                 } else if (command.compareTo("deadline") == 0) {
-                    manageDeadline(taskList, input);
+                    manageDeadline(tasks, input, fileName);
                 } else {
                     throw new InvalidCommandException();
                 }
@@ -37,14 +53,14 @@ public class Duke {
             }
         }
 
-        sc.close();
+        inputScanner.close();
     }
 
-    public static void printIntro() {
+    private static void printIntro() {
         printLines("Hello! :) I'm Duke.\n" + "     How can I help you today?");
     }
 
-    public static void printGoodbye() {
+    private static void printGoodbye() {
         printLines("Goodbye. See you again soon!");
     }
 
@@ -54,7 +70,18 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void manageTodo(TaskList tasks, String input) {
+    private static void writeToFile(String fileName, String data) {
+        try {
+            FileWriter fw = new FileWriter(fileName, true);
+            fw.write(data);
+            fw.write("\n");
+            fw.close();
+        } catch (IOException e) {
+            printLines("Sorry, the file input is invalid.");
+        }
+    }
+
+    private static void manageTodo(TaskList tasks, String input, String fileName) {
         try {
             if (input.split(" ").length == 1) {
                 throw new EmptyDescriptionException("todo");
@@ -62,25 +89,30 @@ public class Duke {
                 String description = input.substring(input.indexOf(" ") + 1);
                 Todo todo = new Todo(description, false);
                 tasks.addTask(todo);
+                String result = "T~0~" + description;
+                writeToFile(fileName, result);
             }
         } catch (EmptyDescriptionException e) {
             printLines("Oops! The description of a " + e.getMessage() + " cannot be empty.");
         }
     }
 
-    public static void manageEvent(TaskList tasks, String input) {
+    private static void manageEvent(TaskList tasks, String input, String fileName) {
         try {
             if (input.split(" ").length == 1) {
                 throw new EmptyDescriptionException("event");
             } else {
-                String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+                String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
 
                 String remaining = input.substring(input.indexOf("/") + 1);
                 String[] split = remaining.split(" ");
+
                 if (split[0].compareTo("at") == 0) {
-                    String time = input.substring(input.indexOf("/") + 4);
+                    String time = Parser.parseTime(input.substring(input.indexOf("/") + 4));
                     Event event = new Event(description, false, time);
                     tasks.addTask(event);
+                    String result = "E~0~" + description + "~" + time;
+                    writeToFile(fileName, result);
                 } else {
                     throw new InvalidTimeFormatException();
                 }
@@ -88,25 +120,28 @@ public class Duke {
         } catch (EmptyDescriptionException e) {
             printLines("Oops! The description of an " + e.getMessage() + " cannot be empty.");
         } catch (InvalidTimeFormatException e) {
-            printLines("Your time format is incorrect. Try: /at [time]");
+            printLines("Your time format is incorrect. Try: /at yyyy-mm-dd 2300");
         } catch (Exception e) {
             printLines("Sorry, invalid syntax or command. Please try again!");
         }
     }
 
-    public static void manageDeadline(TaskList tasks, String input) {
+    private static void manageDeadline(TaskList tasks, String input, String fileName) {
         try {
             if (input.split(" ").length == 1) {
                 throw new EmptyDescriptionException("deadline");
             } else {
-                String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+                String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
                 
                 String remaining = input.substring(input.indexOf("/") + 1);
                 String[] split = remaining.split(" ");
+
                 if (split[0].compareTo("by") == 0) {
-                    String time = input.substring(input.indexOf("/") + 4);
+                    String time = Parser.parseTime(input.substring(input.indexOf("/") + 4));
                     Deadline deadline = new Deadline(description, false, time);
                     tasks.addTask(deadline);
+                    String result = "D~0~" + description + "~" + time;
+                    writeToFile(fileName, result);
                 } else {
                     throw new InvalidTimeFormatException();
                 }
