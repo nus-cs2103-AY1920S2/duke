@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -126,22 +127,31 @@ class Duke {
                                 + "\"find a_single_word_without_empty_space\"");
                     }
                     String keyword = instructionByWord[1];
-                    List<Task> selectedList = new ArrayList<>();
+                    HashMap<Integer, Task> selectedList = new HashMap<>();
                     int count = 0;
-                    for (Task task : list) {
+                    for (int j = 0; j < list.size(); j++) {
+                        Task task = list.get(j);
                         String taskDescription = task.getTask();
                         String[] descriptionByWord = taskDescription.split(" ");
-                        for (int i = 0; i < descriptionByWord.length; i++) {
-                            if (descriptionByWord[i].equals(keyword)) {
-                                selectedList.add(task);
+                        for (String s : descriptionByWord) {
+                            if (s.equals(keyword)) {
+                                selectedList.put(j + 1, task);
                                 count++;
                                 break;
                             }
                         }
                     }
                     System.out.println(count + " task(s) were found containing keyword " + keyword + " :");
-                    for (Task task : selectedList) {
-                        System.out.println(task);
+                    for (Integer index : selectedList.keySet()) {
+                        System.out.println(index + ". " + selectedList.get(index));
+                    }
+                    break;
+                case "clear":
+                    if (instructionByWord.length != 2
+                            || !((instructionByWord[1].equals("all")) || (instructionByWord[1].equals("done")))) {
+                        throw new DukeException(FORMAT_CORRECTION + "\"clear all/done\"");
+                    } else {
+                        clearTheList(instructionByWord[1], list, sc);
                     }
                     break;
                 case "":
@@ -158,6 +168,39 @@ class Duke {
         }
 
         System.out.println("Goodbye. See you next time!");
+    }
+
+    private static void clearTheList(String word, List<Task> list, Scanner sc) throws IOException {
+        if (word.equals("all")) {
+            System.out.println("Are sure you want to clear all the tasks in the list?");
+        } else {
+            System.out.println("Are sure you want to clear all completed tasks in the list?");
+        }
+        System.out.println("Type \"yes\" or \"y\" to proceed. Type any other input to cancel.");
+        String input = sc.nextLine();
+        if (input.equals("yes") || input.equals("y")) {
+            if (word.equals("all")) {
+                list.clear();
+                System.out.println("List is now empty.");
+            } else {
+                List<Task> newList = new ArrayList<>();
+                for (Task t : list) {
+                    if (!t.isDone()) {
+                        newList.add(t);
+                    }
+                }
+                list = newList;
+                System.out.println("List cleared.");
+                printList(list);
+            }
+            FileWriter writer = new FileWriter("data/duke.txt");
+            for (Task t : list) {
+                writer.write(t.toSimplerString() + "\n");
+            }
+            writer.close();
+        } else {
+            System.out.println("Canceled.");
+        }
     }
 
     private static void addEventToList(List<Task> list, String line) {
@@ -182,11 +225,7 @@ class Duke {
         for (Task t : list) {
             writer.write(t.toSimplerString() + "\n");
         }
-        try {
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writer.close();
     }
 
     static Task createAnEventTask(String[] instructionByWord, int lengthOfArray) throws DukeException {

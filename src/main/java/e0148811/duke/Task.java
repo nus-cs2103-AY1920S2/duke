@@ -20,6 +20,10 @@ public class Task {
         return task;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public void setDone() {
         isDone = true;
     }
