@@ -1,8 +1,12 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class Duke{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         String mesInput = "";
         Task [] tasks = new Task[100];
@@ -10,6 +14,7 @@ public class Duke{
         int index = 0; // to store inside array
 
         while(!mesInput.equalsIgnoreCase("bye")){
+
             System.out.println("  -----------");
             mesInput = sc.nextLine();
             String [] s = new String[2];
@@ -22,6 +27,7 @@ public class Duke{
                 System.out.println("   "+arrTask.get(index).toString());
                 index = index + 1;
                 System.out.println("     Now you have "+index+" tasks in the list");
+                createFile("todo",s[1]);
             }else if(mesInput.contains("list")) {
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < index; i++) {
@@ -37,6 +43,7 @@ public class Duke{
                 System.out.println("     "+arrTask.get(index).toString());
                 index = index + 1;
                 System.out.println("     Now you have "+index+" tasks in the list.");
+                createFile("deadline",taskName+date);
             }else if (mesInput.contains("event") && !mesInput.equalsIgnoreCase("event")) {
                 s = mesInput.split("event ");
                 String[] temp = s[1].split("/");
@@ -47,6 +54,7 @@ public class Duke{
                 System.out.println("     " + arrTask.get(index).toString());
                 index = index + 1;
                 System.out.println("     Now you have " + index + " tasks in the list");
+                createFile("event",taskName+date);
             }else if (mesInput.contains("done") && !mesInput.equalsIgnoreCase("done")){
                 String [] temp = mesInput.split(" ");
                 int arrPos = Integer.parseInt(temp[1]);
@@ -90,10 +98,33 @@ public class Duke{
                 }
             }
         }
+
         System.out.println("  --------------");
         System.out.println("     Bye. Hope to see you again");
         System.out.println("  --------------");
     }
+
+    public static void createFile(String command,String task) throws IOException{
+        String filePath = "duke.txt";
+        File f = new File(filePath);
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(command+" || "+task);
+        fw.close();
+        try {
+            boolean result = f.createNewFile();
+            Scanner s = new Scanner(f);
+            System.out.println("Load data from file ++++ ");
+            while(s.hasNext()){
+                System.out.println(s.nextLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public static void printFileContents(String filePath) throws FileNotFoundException {
+//
+//    }
 }
 
 
