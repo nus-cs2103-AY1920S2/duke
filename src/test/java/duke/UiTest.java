@@ -110,19 +110,20 @@ class UiTest {
     @DisplayName("duke.Ui: Test for Greeting message")
     void greet() {
         ui.greet();
-        String expected = "  __  __        _____       _           _   " + NEWLINE +
-                " |  \\/  |      |  __ \\     | |         | |  " + NEWLINE +
-                " | \\  / |_ __  | |__) |___ | |__   ___ | |_ " + NEWLINE +
-                " | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|" + NEWLINE +
-                " | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ " + NEWLINE +
-                " |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|" + NEWLINE;
-        expected += HORIZONTAL_DIVIDER;
-        expected += INDENTATION + "Hello friend. Hello friend?" + NEWLINE;
-        expected += INDENTATION + "That's lame. Maybe I should give you a name." + NEWLINE;
-        expected += INDENTATION + "But that's a slippery slope, you're only in my head," + NEWLINE;
-        expected += INDENTATION + "we have to remember that." + NEWLINE;
-        expected += HORIZONTAL_DIVIDER;
-        assertEquals(expected, output.toString(), "Should display greeting message");
+        StringBuilder expected = new StringBuilder();
+        expected.append("  __  __        _____       _           _   ").append(NEWLINE);
+        expected.append(" |  \\/  |      |  __ \\     | |         | |  ").append(NEWLINE);
+        expected.append(" | \\  / |_ __  | |__) |___ | |__   ___ | |_ ").append(NEWLINE);
+        expected.append(" | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|").append(NEWLINE);
+        expected.append(" | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ ").append(NEWLINE);
+        expected.append(" |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|").append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(INDENTATION).append("Hello friend. Hello friend?").append(NEWLINE);
+        expected.append(INDENTATION).append("That's lame. Maybe I should give you a name.").append(NEWLINE);
+        expected.append(INDENTATION).append("But that's a slippery slope, you're only in my head,").append(NEWLINE);
+        expected.append(INDENTATION).append("we have to remember that.").append(NEWLINE);
+        expected.append(HORIZONTAL_DIVIDER);
+        assertEquals(expected.toString(), output.toString(), "Should display greeting message");
     }
 
     @Test
