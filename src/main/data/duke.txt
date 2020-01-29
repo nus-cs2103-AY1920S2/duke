@@ -1,0 +1,3 @@
+T | 1 | hahah | null
+D | 0 | ip | thursday 1159pm
+E | 0 | meeting | as6
