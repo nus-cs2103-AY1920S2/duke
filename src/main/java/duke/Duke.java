@@ -36,6 +36,7 @@ public class Duke {
         boolean isExit = false;
         TaskList taskList = tasks;
 
+        // Keep receiving user input until the exit command is entered
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
