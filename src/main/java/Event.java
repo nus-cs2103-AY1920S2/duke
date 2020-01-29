@@ -14,6 +14,10 @@ public class Event extends Task {
     public LocalDate getDate() {
         return this.date;
     }
+    
+    public String getFormattedDate() {
+        return this.formattedDate;
+    }
 
     @Override
     public String getFullDescription() {

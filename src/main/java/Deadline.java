@@ -15,6 +15,10 @@ public class Deadline extends Task {
         return this.date;
     }
 
+    public String getFormattedDate() {
+        return this.formattedDate;
+    }
+
     public String getFullDescription() {
         return "[D]" + super.getDescriptionWithIsDone() + " (by: " + this.formattedDate + ")";
     }
