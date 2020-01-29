@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private static List<Task> tasks;
 
@@ -109,14 +113,16 @@ public class Duke {
         printTask(todo);
     }
 
-    private static void addDeadline(String info) throws MissingDeadlineException {
+    private static void addDeadline(String info) throws MissingDeadlineException, InvalidDeadlineException {
         try {
             String[] parsedInfo = info.split("\\s*/by\\s*", 2);
-            Deadline deadline = new Deadline(parsedInfo[0], parsedInfo[1]);
+            Deadline deadline = new Deadline(parsedInfo[0], LocalDate.parse(parsedInfo[1]));
             tasks.add(deadline);
             printTask(deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MissingDeadlineException();
+        } catch (DateTimeParseException e) {
+            throw new InvalidDeadlineException();
         }
     }
 
@@ -195,7 +201,8 @@ public class Duke {
                                 case 'D':
                                     x = x.substring(0, x.length() - 1);
                                     info = x.split(" \\(by: ");
-                                    task = new Deadline(info[0], info[1]);
+                                    task = new Deadline(info[0],
+                                            LocalDate.parse(info[1], DateTimeFormatter.ofPattern("d MMM yyyy")));
                                     break;
                                 case 'E':
                                     x = x.substring(0, x.length() - 1);
