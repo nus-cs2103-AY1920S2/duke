@@ -16,7 +16,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + DateTimeStringFormatter.formatDateTime(this.deadline)
+                + DateTimeStringFormatter.formatDateTime(this.deadline, this.isCompleted())
                 + ")";
     }
 }

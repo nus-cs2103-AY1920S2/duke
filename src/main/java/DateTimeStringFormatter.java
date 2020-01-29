@@ -4,20 +4,26 @@ import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DateTimeStringFormatter {
-    static String formatDateTime(LocalDateTime dateTime) {
+    static String formatDateTime(LocalDateTime dateTime, boolean isCompleted) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         long differenceInDays = DAYS.between(dateTime.toLocalDate(), currentDateTime.toLocalDate());
         if (dateTime.isBefore(currentDateTime)) {
             if (differenceInDays == 0) {
-                return "Today " + dateTime.format(DateTimeFormatter.ofPattern("h:mm a")) + " [OVERDUE]";
+                return "Today "
+                        + dateTime.format(DateTimeFormatter.ofPattern("h:mm a"))
+                        + (isCompleted ? "" : " [OVERDUE]");
             } else {
                 if (differenceInDays == 1) {
-                    return "Yesterday " + dateTime.format(DateTimeFormatter.ofPattern("h:mm a")) + " [OVERDUE]";
+                    return "Yesterday "
+                            + dateTime.format(DateTimeFormatter.ofPattern("h:mm a"))
+                            + (isCompleted ? "" : " [OVERDUE]");
                 }
                 if (dateTime.getYear() != currentDateTime.getYear()) {
-                    return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a")) + " [OVERDUE]";
+                    return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"))
+                            + (isCompleted ? "" : " [OVERDUE]");
                 }
-                return dateTime.format(DateTimeFormatter.ofPattern("MMM d h:mm a")) + " [OVERDUE]";
+                return dateTime.format(DateTimeFormatter.ofPattern("MMM d h:mm a"))
+                        + (isCompleted ? "" : " [OVERDUE]");
             }
         } else {
             if (differenceInDays == 0) {
