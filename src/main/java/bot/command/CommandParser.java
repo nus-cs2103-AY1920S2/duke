@@ -18,7 +18,9 @@ public class CommandParser {
      */
     public Instruction parse(String command) throws UnknownInstructionException {
         String firstWord = command.split("\\s+", 2)[0];
-        if (firstWord.equals(Command.BYE.word)) {
+        if (firstWord.equals(Command.BYE.word) ||
+                firstWord.equals(Command.EXIT.word)
+        ) {
             return Instruction.TERMINATE;
         } else if (firstWord.equals(Command.DELETE.word)) {
             return Instruction.DELETE;
@@ -34,6 +36,8 @@ public class CommandParser {
             return Instruction.STORE_TODO;
         } else if (firstWord.equals(Command.SEARCH.word)) {
             return Instruction.SEARCH_STORAGE;
+        } else if (firstWord.equals(Command.FIND.word)) {
+            return Instruction.FIND_KEYWORD;
         } else {
             throw new UnknownInstructionException(command);
         }

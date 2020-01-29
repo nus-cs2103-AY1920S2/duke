@@ -8,6 +8,8 @@ public enum Command {
     BYE("bye"),
     DELETE("delete"),
     DONE("done"),
+    EXIT("exit"),
+    FIND("find"),
     LIST("list"),
     DEADLINE("deadline"),
     EVENT("event"),

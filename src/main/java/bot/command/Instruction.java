@@ -5,7 +5,7 @@ package bot.command;
  * to the bot from CommandParser
  */
 public enum Instruction {
-    AWAIT, DELETE, MARK_DONE, READ_STORAGE,
+    AWAIT, DELETE, FIND_KEYWORD, MARK_DONE, READ_STORAGE,
     SEARCH_STORAGE, STORE_DDL, STORE_EVENT, STORE_TODO,
     TERMINATE
 }
