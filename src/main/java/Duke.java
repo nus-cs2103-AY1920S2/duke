@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,8 +16,31 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(line);
 
-        Store lib = new Store();
+        File file = new File("D:/duke/data/duke.txt");
+        Store lib = new Store(file);
         DukeException DE = new DukeException();
+        try {
+            boolean result = file.exists();
+            if(!result){
+                boolean ans = file.createNewFile();
+            } else {
+                try {
+                    Scanner newSN = new Scanner(file);
+                    while(newSN.hasNextLine()){
+                        String nxtLine = newSN.nextLine();
+                        lib.load(nxtLine);
+                    } //end while- for reading existing file
+                    System.out.println(line);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
         while(sn.hasNext()){
             String input = sn.nextLine();
             if(input.equals("bye")) {
@@ -68,4 +92,6 @@ public class Duke {
         }
 
     }
+
+
 }
