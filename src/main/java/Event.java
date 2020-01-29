@@ -1,12 +1,15 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    protected String at;
-    Event(String taskName, String at) {
+    protected LocalDate dateAt;
+
+    Event(String taskName, LocalDate dateAt) {
         super(taskName);
-        this.at = at;
+        this.dateAt = dateAt;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + at + ")";
+            return "[E]" + super.toString() + "(at:" + dateAt.toString() + ")";
     }
 }

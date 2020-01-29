@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,7 +9,7 @@ public class Duke {
     static List<Task> list = new ArrayList<>();
     private static String horizontalLine = "__________________________________________";
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, DateTimeException, DateTimeParseException {
         Scanner scan = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -14,7 +17,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello! I am \n" + logo + "\n" + "What can I do for you?");
-
         while (scan.hasNextLine()) {
             try {
                 String command = scan.nextLine();
@@ -44,7 +46,8 @@ public class Duke {
 
                 } else if (command.startsWith("deadline")) {
                     String[] commands = command.split("/by");
-                    Deadline deadline = new Deadline(commands[0], commands[1]);
+                    LocalDate localDate = LocalDate.parse(commands[1].trim());
+                    Deadline deadline = new Deadline(commands[0], localDate);
                     list.add(deadline);
                     System.out.println(horizontalLine + "\n" + "Alright, I've added this task:" + "\n");
                     System.out.println(deadline + "\n");
@@ -72,7 +75,9 @@ public class Duke {
                 } else if (command.startsWith("event")) {
                     String commandWithoutEvent = command.substring(6);
                     String[] commands = commandWithoutEvent.split("/at");
-                    Event event = new Event(commands[0], commands[1]);
+                    LocalDate localDate = LocalDate.parse(commands[1].trim());
+                    Event event = new Event(commands[0], localDate);
+
                     list.add(event);
                     System.out.println(horizontalLine + "\n" + "Alright, I've added this task:" + "\n");
                     System.out.println(event + "\n");
@@ -91,6 +96,11 @@ public class Duke {
             } catch (DukeException e) {
                 System.err.println(horizontalLine);
                 System.err.println("That was not a valid input. Please try again.");
+                System.err.println(horizontalLine);
+            } catch (DateTimeParseException e) {
+                System.err.println(horizontalLine);
+                System.err.println("Your date input format was invalid. " +
+                        "It should be in the format of 'YYYY-MM-DD'. Please try again.");
                 System.err.println(horizontalLine);
             }
         }
