@@ -64,8 +64,27 @@ public class TaskList {
     }
 
     /**
+     * Retrieve tasks that contain user keyword and format them into string in numbered order.
+     * @return The filtered task list in appropriate string format.
+     */
+    public String searchTaskList(String keyword) {
+        String list = "";
+        for (int i = 0; i < this.taskList.size(); i++) {
+            String count = (i + 1) + "";
+            String taskString = this.taskList.get(i).toString();
+            if (taskString.contains(keyword)) {
+                list += count + ". " + taskString;
+                if (i != this.taskList.size() - 1) {
+                    list += "\n";
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
      * Retrieve task list in numbered order.
-     * @return The task list appropriate string format.
+     * @return The task list in appropriate string format.
      */
     public String getTaskList() {
         String list = "";

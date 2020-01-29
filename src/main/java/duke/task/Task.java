@@ -80,6 +80,11 @@ public abstract class Task {
         this.isDone = true;
     }
 
+
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     /**
      * Icon to display completion status of the task.
      * @return The icon status.

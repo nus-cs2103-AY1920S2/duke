@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Parser {
 
     /**
-     * Parser to interpret user input.
+     * Parser to interpret user input and execute the appropriate command.
      *
      * @param input User input during runtime.
      * @param storage Storage object to save the task list that is updated in this method.
@@ -142,6 +142,20 @@ public class Parser {
             break;
         }
 
+        case "find": {
+
+            if (inputArr.length <= 1) {
+                throw new DukeException("☹ OOPS!!! Please enter a keyword so that we can retrieve the appropriate task(s)!");
+            }
+
+            int idx = input.indexOf(" ");
+            String keyword = input.substring(idx + 1);
+
+            UI.printMessage("Here are the matching tasks in your list: \n" + taskList.searchTaskList(keyword));
+
+            break;
+        }
+
         case "list": {
             Ui.printMessage("Here are the tasks in your list: \n" + taskList.getTaskList());
             break;
@@ -154,8 +168,6 @@ public class Parser {
 
         default: {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
         }
 
         storage.saveTaskList(taskList);
