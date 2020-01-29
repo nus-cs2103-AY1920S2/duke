@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -45,28 +46,28 @@ public class Duke {
                     }
                 } else if (inputs[0].equals("deadline")) {
                     try {
-                        String[] taskDetails = inputs[1].split("/");
+                        String[] taskDetails = inputs[1].split("/by ");
                         try {
-                            Task deadline = new Deadline(taskDetails[0].trim(), taskDetails[1]);
+                            Task deadline = new Deadline(taskDetails[0].trim(), LocalDate.parse(taskDetails[1]));
                             tasks.add(deadline);
                             System.out.println("Got it. I've added this task:\n    " +
                                     deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("☹ OOPS!!! Please provide a date using '/by '.");
+                        } catch (Exception e) {
+                            throw new DukeException("☹ OOPS!!! Please provide a date using '/by ' with the format yyyy-mm-dd.");
                         }
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                 } else if (inputs[0].equals("event")) {
                     try {
-                        String[] taskDetails = inputs[1].split("/");
+                        String[] taskDetails = inputs[1].split("/on ");
                         try {
-                            Task event = new Event(taskDetails[0].trim(), taskDetails[1]);
+                            Task event = new Event(taskDetails[0].trim(), LocalDate.parse(taskDetails[1]));
                             tasks.add(event);
                             System.out.println("Got it. I've added this task:\n    " +
                                     event + "\nNow you have " + tasks.size() + " tasks in the list.");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("☹ OOPS!!! Please provide a date using '/on '.");
+                        } catch (Exception e) {
+                            throw new DukeException("☹ OOPS!!! Please provide a date using '/on ' with the format yyyy-mm-dd..");
                         }
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
