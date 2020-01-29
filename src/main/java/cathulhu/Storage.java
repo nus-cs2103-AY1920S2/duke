@@ -18,6 +18,7 @@ public class Storage {
      */
     public TaskList loadTasksFile(File TASKS_FILE) throws IOException {
 
+        TASKS_FILE.mkdir();
         boolean isCreated = TASKS_FILE.createNewFile();
 
         if (isCreated) {
