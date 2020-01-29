@@ -14,3 +14,4 @@ src/main/resources/docs/
 bin/
 text-ui-test/EXPECTED.txt
 text-ui-test/input.txt
+src/main/java/data/duke.txt
