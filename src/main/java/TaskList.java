@@ -7,8 +7,13 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+<<<<<<< HEAD
     public TaskList(ArrayList<Task> lst) {
         this.tasks = lst;
+=======
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+>>>>>>> branch-Level-8
     }
 
     public void doTask(int idx) {

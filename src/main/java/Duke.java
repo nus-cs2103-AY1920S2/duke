@@ -108,7 +108,7 @@ public class Duke {
                 String[] split = remaining.split(" ");
 
                 if (split[0].compareTo("at") == 0) {
-                    String time = input.substring(input.indexOf("/") + 4);
+                    String time = Parser.parseTime(input.substring(input.indexOf("/") + 4));
                     Event event = new Event(description, false, time);
                     tasks.addTask(event);
                     String result = "E~0~" + description + "~" + time;
@@ -137,7 +137,7 @@ public class Duke {
                 String[] split = remaining.split(" ");
 
                 if (split[0].compareTo("by") == 0) {
-                    String time = input.substring(input.indexOf("/") + 4);
+                    String time = Parser.parseTime(input.substring(input.indexOf("/") + 4));
                     Deadline deadline = new Deadline(description, false, time);
                     tasks.addTask(deadline);
                     String result = "D~0~" + description + "~" + time;
