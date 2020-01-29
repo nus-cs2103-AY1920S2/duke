@@ -37,7 +37,6 @@ public class Event extends Task {
         if (done) {
             return ("[E][✓] " + name + " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
         }
-
         return ("[E][✗] " + name+ " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
     }
 }

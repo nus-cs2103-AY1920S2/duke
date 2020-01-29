@@ -18,10 +18,7 @@ public class Parser {
             ui.printLine();
             if (word.equalsIgnoreCase("list")) {
                 TaskList.printList();
-            }
-
-
-            else {
+            } else {
                 String[] words = word.split(" ");
 
                 if (words[0].equalsIgnoreCase("done") && words[1].matches("\\d+")) {
@@ -33,9 +30,7 @@ public class Parser {
                     } else {
                         ui.printErrorNotFound();
                     }
-                }
-
-                else if (words[0].equalsIgnoreCase("delete") && words[1].matches("\\d+")) {
+                } else if (words[0].equalsIgnoreCase("delete") && words[1].matches("\\d+")) {
                     int deleteTarget = Integer.parseInt(words[1]);
                     if (deleteTarget > 0 && deleteTarget <= Duke.commandList.size()) {
                         TaskList.deleteTask(Duke.commandList.get(deleteTarget - 1));
@@ -44,8 +39,7 @@ public class Parser {
                         ui.printErrorNotFound();
                     }
 
-                }
-                else if (words[0].equalsIgnoreCase("todo")){
+                } else if (words[0].equalsIgnoreCase("todo")){
                     if (word.contains("todo ") && !word.substring(5).isEmpty()) {
                         String substr = word.substring(5);
                         ToDo task = new ToDo(substr);
@@ -54,9 +48,7 @@ public class Parser {
                     } else {
                         ui.printErrorNoTaskName();
                     }
-                }
-
-                else if (words[0].equalsIgnoreCase("deadline")){
+                } else if (words[0].equalsIgnoreCase("deadline")){
                     String substr = word.substring(9);
                     if (substr.contains(" /")) {
                         String[] deadlineSplit = substr.split(" /");
@@ -68,14 +60,11 @@ public class Parser {
                             ui.printErrorWrongDateFormat();
                         }
                         storage.writeList();
-                    }
-                    else {
+                    } else {
                         ui.printErrorNoTime();
                     }
 
-                }
-
-                else if (words[0].equalsIgnoreCase("event")){
+                } else if (words[0].equalsIgnoreCase("event")){
                     String substr = word.substring(6);
                     if (substr.contains(" /")) {
                         String[] eventSplit = substr.split(" /");
@@ -91,15 +80,12 @@ public class Parser {
 
 
                         storage.writeList();
-                    }
-                    else {
+                    } else {
                         ui.printErrorNoTime();
                     }
-                }
-                else{
+                } else{
                     ui.printErrorUnderstanding();
                 }
-
 
             }
             ui.printLine();
