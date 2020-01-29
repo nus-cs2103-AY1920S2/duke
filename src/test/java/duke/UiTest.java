@@ -1,7 +1,7 @@
 package duke;
 
 import duke.task.Deadline;
-import duke.task.Event;
+import duke.task.EventStub;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TodoStub;
@@ -38,8 +38,12 @@ class UiTest {
                 Arguments.of(new TodoStub("Read book", false,
                         "todo,0,Read book", doneStatusIcon,
                         incompleteStatusIcon, "[T][" + incompleteStatusIcon + "] Read book")),
-                Arguments.of(new Event("Birthday Party", "2020-01-01", false)),
-                Arguments.of(new Deadline("Finish Coding Project", "2020-01-27", false)));
+                Arguments.of(new EventStub("Birthday Party", "2020-01-01", false,
+                        "event,0,Birthday Party,2020-01-01", doneStatusIcon,
+                        incompleteStatusIcon,
+                        "[E][" + incompleteStatusIcon + "] Birthday Party " + "(at: Jan 1 2020)")),
+                Arguments.of(new Deadline("Finish Coding Project", "2020-01-27",
+                        false)));
     }
 
     static Stream<Arguments> generateAllTaskTypesWithZeroTotalTasks() {
@@ -49,7 +53,10 @@ class UiTest {
                 Arguments.of(new TodoStub("Read book", false,
                         "todo,0,Read book", doneStatusIcon,
                         incompleteStatusIcon, "[T][" + incompleteStatusIcon + "] Read book"), 0),
-                Arguments.of(new Event("Birthday Party", "2020-01-01"), 0),
+                Arguments.of(new EventStub("Birthday Party", "2020-01-01", false,
+                        "event,0,Birthday Party,2020-01-01", doneStatusIcon,
+                        incompleteStatusIcon,
+                        "[E][" + incompleteStatusIcon + "] Birthday Party " + "(at: Jan 1 2020)"), 0),
                 Arguments.of(new Deadline("Finish Coding Project", "2020-01-27"), 0));
     }
 
@@ -66,7 +73,10 @@ class UiTest {
         tasks.add(new TodoStub("Read book", false,
                 "todo,0,Read book", doneStatusIcon,
                 incompleteStatusIcon, "[T][" + incompleteStatusIcon + "] Read book"));
-        tasks.add(new Event("Chinese New Year", "2020-01-25"));
+        tasks.add(new EventStub("Chinese New Year", "2020-01-25", false,
+                        "event,0,Chinese New Year,2020-01-25", doneStatusIcon,
+                        incompleteStatusIcon,
+                        "[E][" + incompleteStatusIcon + "] Birthday Party " + "(at: Jan 25 2020)"));
         tasks.add(new Deadline("Finish project", "2020-04-20"));
         return Stream.of(
                 Arguments.of(new TaskList(tasks))

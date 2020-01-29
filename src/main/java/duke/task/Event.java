@@ -76,7 +76,7 @@ public class Event implements Task {
      */
     @Override
     public String stringToSaveToDisk() {
-        // e.g. format: event,0,project meeting,Aug 6th 2-4pm
+        // e.g. format: event,0,project meeting,2020-03-12
         return String.format("event,%s,%s,%s", isDone ? 1 : 0, description,
                 eventTime);
     }
