@@ -1,3 +1,5 @@
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +25,34 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().start();
     }
+    private void writeToFile() throws IOException {
+        FileOutputStream fileOutputStream
+                = new FileOutputStream("yourfile.txt");
+        ObjectOutputStream objectOutputStream
+                = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(tasks);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+    private void readFromFile() throws FileNotFoundException, EOFException, IOException, ClassNotFoundException {
+        FileInputStream fileInputStream
+                = new FileInputStream("yourfile.txt");
+        ObjectInputStream objectInputStream
+                = new ObjectInputStream(fileInputStream);
+        tasks = (ArrayList<Task>) objectInputStream.readObject();
+        objectInputStream.close();
+
+    }
     private void start(){
+        try {
+            readFromFile();
+        } catch (EOFException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -123,6 +152,11 @@ public class Duke {
             } catch (DukeException e){
                 response("☹ OOPS!!! " + e.getMessage());
             }
+        }
+        try {
+            writeToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
