@@ -17,7 +17,7 @@ public class Deadline extends Task {
         this.deadlineTime = parseTime(actualDate);
         String formattedDate = this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String formattedTime = this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        this.deadline = deadline.substring(0, newDeadlineFormat) + ": " + formattedDate + " " + formattedTime;
+        this.deadline = deadline.substring(0, newDeadlineFormat) + ": " + formattedDate + "  " + formattedTime;
 
 
     }

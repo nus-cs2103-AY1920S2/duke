@@ -1,15 +1,15 @@
-<<<<<<< HEAD
-import java.nio.file.Path;
-=======
 
+import java.nio.file.Path;
 import java.time.DateTimeException;
->>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 
 /**
  * For level-1 Greet, Echo, Exit.
@@ -103,7 +103,16 @@ public class Duke {
         } else if (taskType.equals("D")) {
 
             String deadline = tasksArr[3];
-            Task newTask = new Deadline(taskAction, "by" + deadline);
+            String date = deadline.split("  ")[0].trim();
+            String time = deadline.split("  ")[1].trim();
+            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("MMM d yyyy");
+            DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("hh:mm a");
+            LocalDate standardDateFormat = LocalDate.parse(date, formatterDate);
+            LocalTime standardTimeFormat = LocalTime.parse(time, formatterTime);
+            String dateAndTime = standardDateFormat + " " + standardTimeFormat;
+
+            Task newTask = new Deadline(taskAction, "by " + dateAndTime.replace(":", ""));
+
 
             if (taskCompleted.equals("1")) {
                 newTask.completedTask();
