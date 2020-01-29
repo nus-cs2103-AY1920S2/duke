@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class AutoResponder {
     private final List<Task> taskList;
     private final StringBuilder toPrint;
+    private final Ui ui;
     static Pattern pDeadline = Pattern.compile("deadline (.+) /by (.+)");
     static Pattern pEvent = Pattern.compile("event (.+) /at (.+)");
     static Pattern pTodo = Pattern.compile("todo (.+)");
@@ -28,19 +29,21 @@ public class AutoResponder {
     private AutoResponder() {
         this.taskList = new ArrayList<>();
         this.toPrint = new StringBuilder();
+        this.ui = new Ui();
     }
 
     private AutoResponder(List<Task> taskList, StringBuilder toPrint) {
         this.taskList = taskList;
         this.toPrint = toPrint;
+        this.ui = new Ui();
     }
 
     public AutoResponder printToConsole() {
-        System.out.print(toPrint);
+        ui.printToConsole(toPrint.toString());
         return new AutoResponder(taskList, new StringBuilder());
     }
 
-    public AutoResponder readInput(String input) throws IOException {
+    public AutoResponder readInput(String input) {
         String lowerInput = input.toLowerCase();
         if (pList.matcher(lowerInput).find()) {
             return this.processList();
@@ -86,7 +89,7 @@ public class AutoResponder {
         return new AutoResponder(taskList, sb).printToConsole();
     }
 
-    private AutoResponder saveList() throws IOException {
+    private AutoResponder saveList() {
         StringBuilder writeContents = new StringBuilder();
         for (Task v : taskList) {
             writeContents.append(v.writeFormat());
@@ -100,10 +103,14 @@ public class AutoResponder {
         }
         File f = new File("./data/duke.txt");
         String path = f.getAbsolutePath();
-        FileWriter fw = new FileWriter(path);
-        fw.write(writeContents.toString());
-        fw.close();
-        toPrint.append("Tasks saved successfully.\n");
+        try {
+            FileWriter fw = new FileWriter(path);
+            fw.write(writeContents.toString());
+            fw.close();
+            toPrint.append("Tasks saved successfully.\n");
+        } catch (IOException e) {
+            toPrint.append("Tasks not loaded");
+        }
         return this.printToConsole();
     }
 
@@ -191,7 +198,31 @@ public class AutoResponder {
 
     public static AutoResponder initialise() {
         AutoResponder ar = new AutoResponder();
-        return ar.loadList();
+        ar.ui.printLandingPage();
+        ar = ar.loadList();
+        return ar.run();
+    }
+
+    public AutoResponder run() {
+        AutoResponder ar = this;
+        while (ui.hasCommand()) {
+            String input = ui.receiveCommand();
+            if (input.matches("bye\\s*")) {
+                return ar.shutdown();
+            }
+            
+            try {
+                ar = ar.readInput(input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return ar.run();
+    }
+
+    public AutoResponder shutdown() {
+        ui.printGoodbye();
+        return this;
     }
 
     public static LocalDateTime parseDateTime(String s) {
