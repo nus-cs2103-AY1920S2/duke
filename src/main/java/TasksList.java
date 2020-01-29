@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+=======
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TasksList {
     protected ArrayList<Task> tasks = new ArrayList<>();
@@ -51,7 +57,15 @@ public class TasksList {
         if (splitted.length < 2) {
             throw new DukeUnknownInputException();
         }
-        tasks.add(new Deadline(splitted[0], splitted[1]));
+        // Check if date is parsable
+        String byWhen;
+        try {
+            LocalDate date = LocalDate.parse(splitted[1]);
+            byWhen = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            byWhen = splitted[1];
+        }
+        tasks.add(new Deadline(splitted[0], byWhen));
         int taskNum = tasks.size();
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:\n" + tasks.get(taskNum-1)
