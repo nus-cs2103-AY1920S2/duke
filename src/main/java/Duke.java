@@ -3,11 +3,20 @@ import test.Task;
 import test.Events;
 import test.Deadlines;
 import java.util.Scanner;
-
+/**
+ * CS2103 Individual Project
+ * author Wei Cheng
+ * The class for the ChatBot
+ */
 public class Duke  {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Constructor to create an instance of Duke.
+     * @param filePath the String representation of the file location
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -19,6 +28,10 @@ public class Duke  {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * To run the conversation with the user.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         String[] userInput = sc.nextLine().split(" ",2);
@@ -79,6 +92,11 @@ public class Duke  {
         }
         ui.initiateFareWell();
     }
+
+    /**
+     * To print out all the task in the
+     * TaskStorage
+     */
     public void printText() {
         int counter = 1;
         for(Task task : this.tasks.taskStorage){

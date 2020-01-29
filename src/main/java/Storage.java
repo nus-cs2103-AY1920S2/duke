@@ -10,14 +10,28 @@ import test.Task;
 import test.Events;
 import test.Deadlines;
 
+/**
+ * CS2103 Individual Project
+ * @author Wei Cheng
+ * Storage is used to store and load the file from the database.
+ */
 public class Storage {
     private String path;
+
+    /**
+     * Constructor for Storage
+     * @param StorageLocation the String representation of the location of the text file.
+     */
 
     public Storage(String StorageLocation) {
 
         this.path = StorageLocation;
     }
 
+    /**
+     * Save the changes made to the current list of tasks
+     * @param taskStorage current list of task
+     */
     public void saveToDisk(ArrayList<Task> taskStorage) {
         String name = this.path;
         try{
@@ -50,6 +64,11 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
+    /**
+     * load all the existing task from the txt file
+     * @return ArrayList of Task
+     */
     public ArrayList<Task> load()  {
         ArrayList<Task> destination = new ArrayList<>();
 
