@@ -3,7 +3,7 @@ package duchess.command;
 import duchess.storage.Storage;
 import duchess.task.TaskList;
 import duchess.ui.Ui;
-import duchess.utils.QuadFunction;
+import duchess.util.QuadFunction;
 
 public enum Command {
     TODO(CommandHandler::handleTodoCommand),

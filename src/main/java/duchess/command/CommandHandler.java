@@ -4,7 +4,7 @@ import duchess.exception.DuchessException;
 import duchess.storage.Storage;
 import duchess.task.*;
 import duchess.ui.Ui;
-import duchess.utils.DateTimeParser;
+import duchess.util.DateTimeParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;

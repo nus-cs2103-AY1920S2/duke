@@ -1,4 +1,4 @@
-package duchess.utils;
+package duchess.util;
 
 import duchess.exception.DuchessException;
 

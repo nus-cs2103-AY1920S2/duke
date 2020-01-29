@@ -1,6 +1,6 @@
 package duchess.task;
 
-import duchess.utils.DateTimeStringFormatter;
+import duchess.util.DateTimeStringFormatter;
 
 import java.time.LocalDateTime;
 
