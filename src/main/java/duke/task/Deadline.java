@@ -4,16 +4,15 @@ import duke.exception.DukeException;
 
 import java.time.format.DateTimeFormatter;
 
-/**
- * A deadline task.
- */
+/** A deadline task. */
 public class Deadline extends Task {
 
     /**
-     * Constructor for a deadline task.
+     * Constructs a deadline task.
      *
      * @param taskName Name of the task.
      * @param dateTime The date and time of the task (if any).
+     * @throws DukeException If date format is incorrect.
      */
     public Deadline(String taskName, String dateTime) throws DukeException {
         super(taskName.trim(), dateTime.trim());
@@ -21,11 +20,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overloaded constructor for a deadline task.
+     * Constructs a deadline task with additional details.
      *
      * @param taskName Name of the task.
      * @param isDone Indicates if the task is completed already.
      * @param dateTime The date and time of the task (if any).
+     * @throws DukeException If date format is incorrect.
      */
     public Deadline(String taskName, boolean isDone, String dateTime) throws DukeException {
         super(taskName.trim(), isDone, dateTime.trim());

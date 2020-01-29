@@ -5,20 +5,17 @@ import duke.exception.DukeException;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Task list to manage tasks created by users.
- */
+/** Task list to manage tasks created by users. */
 public class TaskList {
 
-    /**
-     * ArrayList as the underlying implementation to store tasks.
-     */
+    /** ArrayList as the underlying implementation to store tasks. */
     private ArrayList<Task> taskList;
 
     /**
-     * Constructor for task list.
+     * Constructs the task list.
      *
      * @param data List of tasks loaded from saved text file.
+     * @throws DukeException Exceptions that arise from creating/adding tasks.
      */
     public TaskList(List<String> data) throws DukeException {
         this.taskList = new ArrayList<>(100);
@@ -66,8 +63,10 @@ public class TaskList {
     }
 
     /**
-     * Retrieve tasks that contain user keyword and format them into string in numbered order.
-     * @return The filtered task list in appropriate string format.
+     * Retrieves tasks that contain user keyword and format them into string in numbered order.
+     *
+     * @param keyword User-given keyword for Duke to lookup.
+     * @return Filtered task list in appropriate string format.
      */
     public String searchTaskList(String keyword) {
         String list = "";
@@ -85,8 +84,9 @@ public class TaskList {
     }
 
     /**
-     * Retrieve task list in numbered order.
-     * @return The task list in appropriate string format.
+     * Retrieves task list in numbered order.
+     *
+     * @return Task list in appropriate string format.
      */
     public String getTaskList() {
         String list = "";
@@ -102,8 +102,9 @@ public class TaskList {
     }
 
     /**
-     * Format task list to be saved into text file.
-     * @return The task list in appropriate string format for saving.
+     * Formats task list to be saved into text file.
+     *
+     * @return Task list in appropriate string format for saving.
      */
     public String getTaskListSaveFormat() {
         String data = "";

@@ -1,8 +1,6 @@
 package duke.ui;
 
-/**
- * User Interface Manager.
- */
+/** User Interface Manager. */
 public class Ui {
 
     public static void printIntro() {

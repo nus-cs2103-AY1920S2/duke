@@ -5,33 +5,23 @@ import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * An abstract task class to be extended for specific tasks.
- */
+/** An abstract task class to be extended for specific tasks. */
 public abstract class Task {
 
-    /**
-     * Task name that describes the nature of the task.
-     */
+    /** Task name that describes the nature of the task */
     protected String taskName = "";
 
-    /**
-     * Indicates whether the task is completed.
-     */
+    /** Whether the task is completed. */
     protected boolean isDone;
 
-    /**
-     * Indicates the date and time of the task (if any).
-     */
+    /** Date and time of the task (if any). */
     protected LocalDate dateTime;
 
-    /**
-     * Indicates the type of the task.
-     */
+    /** Type of task. */
     protected String taskType = "";
 
     /**
-     * Constructor for the task.
+     * Constructs a task.
      *
      * @param taskName Describes the nature of the task.
      */
@@ -41,10 +31,11 @@ public abstract class Task {
     }
 
     /**
-     * Overloaded constructor for the task.
+     * Constructs a task with additional details.
      *
      * @param taskName Describes the nature of the task.
      * @param dateTime The date and time of the task (if any).
+     * @throws DukeException If date format is incorrect.
      */
     public Task(String taskName, String dateTime) throws DukeException {
         this.taskName = taskName;
@@ -59,7 +50,7 @@ public abstract class Task {
     }
 
     /**
-     * Overloaded constructor for the task (for ToDo tasks).
+     * Constructs a task with additional details (for ToDo tasks).
      *
      * @param taskName Describes the nature of the task.
      * @param isDone Indicates if the task is completed already.
@@ -70,11 +61,12 @@ public abstract class Task {
     }
 
     /**
-     * Overloaded constructor for the task (for Event or Deadline tasks).
+     * Constructs a task with additional details (for Event or Deadline tasks).
      *
      * @param taskName Describes the nature of the task.
      * @param isDone Indicates if the task is completed already.
      * @param dateTime The date and time of the task (if any).
+     * @throws DukeException If date format is incorrect.
      */
     public Task(String taskName, boolean isDone, String dateTime) throws DukeException {
         this.taskName = taskName;
@@ -98,16 +90,18 @@ public abstract class Task {
     }
 
     /**
-     * Icon to display completion status of the task.
-     * @return The icon status.
+     * Returns icon to display completion status of the task.
+     *
+     * @return Icon status.
      */
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
     }
 
     /**
-     * To convert the task into a format for saving to text file.
-     * @return The task in the appropriate string format for saving.
+     * Converts the task into a format for saving to text file.
+     *
+     * @return Task in the appropriate string format for saving.
      */
     public String getSaveFormat() {
         return this.taskType + "_" + this.isDone + "_" + this.taskName + "_" + this.dateTime;

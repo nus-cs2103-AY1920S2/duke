@@ -7,20 +7,18 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-/**
- * Parser to interpret commands.
- */
+/** Parser to interpret and execute commands. */
 public class Parser {
 
     /**
-     * Parser to interpret user input and execute the appropriate command.
+     * Interprets user input and executes the appropriate command.
      *
      * @param input    User input during runtime.
      * @param storage  Storage object to save the task list that is updated in this method.
      * @param taskList Task list object to store the tasks that are created from user command in this method.
      * @return A boolean value to indicate whether to exit the program.
-     * @throws DukeException Throws exception if there is an error in parsing user input
-     * @throws IOException   Throws exception if there is an error in saving task list.
+     * @throws DukeException If there is an error in parsing user input
+     * @throws IOException   If there is an error in saving task list.
      */
     public static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
 

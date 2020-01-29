@@ -7,23 +7,17 @@ import duke.ui.Ui;
 import java.util.Scanner;
 import java.io.IOException;
 
-/**
- * Duke Task Manager.
- */
+/** Duke Task Manager */
 public class Duke {
 
-    /**
-     * Storage object to load and save tasks to text file.
-     */
+    /** Storage object to load and save tasks to text file. */
     private Storage storage;
 
-    /**
-     * Task list object to store tasks.
-     */
+    /** Task list object to store tasks. */
     private TaskList taskList;
 
     /**
-     * Main method to start the Duke program.
+     * Starts the Duke program.
      * Invokes the run() method to start simulation.
      *
      * @param args Main method arguments for when program runs.
@@ -33,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Constructor for Duke object.
+     * Constructs the Duke program.
      */
     private Duke() {
         try {
@@ -47,7 +41,7 @@ public class Duke {
     }
 
     /**
-     * To start simulation.
+     * Starts simulation.
      */
     private void run() {
         Ui.printIntro();
