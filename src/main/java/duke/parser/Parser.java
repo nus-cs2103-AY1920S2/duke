@@ -44,11 +44,29 @@ public class Parser {
         case "event":
             return prepareEvent(command);
 
+        case "find":
+            return prepareFind(command);
+
         case "bye":
             return prepareExit(command);
 
         default:
             return new InvalidCommand(UNKNOWN_ERROR);
+        }
+    }
+
+    /**
+     * Parses user command in the context of the find command.
+     *
+     * @param command full user command array
+     * @return the find command
+     */
+    private static Command prepareFind(String[] command) {
+        try {
+            String keyword = command[1];
+            return new FindCommand(keyword);
+        } catch (IndexOutOfBoundsException ex) {
+            return new InvalidCommand(INCOMPLETE_ERROR);
         }
     }
 
