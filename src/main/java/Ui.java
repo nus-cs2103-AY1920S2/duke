@@ -40,6 +40,15 @@ public class Ui {
         System.out.println("You currently have " + (t.getSize()-1) + " task(s) in your list.");
     }
 
+    public void printMatchingTask(String list, String keyword) {
+        if (list.equals("")) {
+            System.out.println("We have found nothing related to your search.");
+        } else {
+            System.out.println("Here are some matching tasks in your list: 「" + keyword + "」");
+            System.out.println(list);
+        }
+    }
+
     public void goodbye() {
         System.out.println("さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/");
     }

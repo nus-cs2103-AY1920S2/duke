@@ -19,6 +19,10 @@ public class Task {
         return isDone? "1" : "0";
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String format() {
         return description;
     }
