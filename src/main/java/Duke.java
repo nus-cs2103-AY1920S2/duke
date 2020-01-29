@@ -17,100 +17,32 @@ public class Duke {
     private String uselessLine = "-------------------------------------------------------------------------------------";
     private String addedPhrase = "added: ";
     private ArrayList<Task> storedItems;
+    private Storage storage;
+    private Parser parser;
 
     public Duke() {
         // Place-holder constructor, may need to extend later
         storedItems = new ArrayList<>();
-        getDataFile();
-    }
-
-    private void getDataFile() {
-        String home = System.getProperty("user.home");
-
-        Path dirPath = Paths.get(home, "Documents", "Duke");
-        Path filePath = Paths.get(home, "Documents", "Duke", "dukeData.txt");
-        if (Files.exists(dirPath)) {
-            if (Files.notExists(filePath))
-                try {
-                    Files.createFile(filePath);
-                } catch (IOException e) {
-                    System.out.println(e);
-                    exit(1);
-                }
-
-            readDataFile(filePath);
-        } else {
-            try {
-                Files.createDirectories(dirPath);
-            } catch (IOException e) {
-                System.out.println(e);
-                exit(1);
-            } finally {
-                getDataFile();
-            }
-        }
-    }
-
-    private void writeData() {
-        String home = System.getProperty("user.home");
-        Path filePath = Paths.get(home, "Documents", "Duke", "dukeData.txt");
-
-        StringBuilder data = new StringBuilder();
-        for (Task item : storedItems) {
-            data.append(item.encoder());
-        }
-
-        try {
-            Files.writeString(filePath, data.toString());
-        } catch (IOException e) {
-            System.out.println(e);
-            exit(1);
-        }
-    }
-
-    private void readDataFile(Path filePath) {
-        List<String> lines = new ArrayList<>();
-        try {
-            lines = Files.readAllLines(filePath);
-        } catch (IOException e) {
-            System.out.println(e);
-            exit(1);
-        } finally {
-            if (lines.isEmpty())
-                return;
-
-            for (String line : lines) {
-                String[] lineParts = line.split(":");
-                if (lineParts[0].equals("T"))
-                    storedItems.add(new Task(lineParts[1], Integer.parseInt(lineParts[2]) == 1));
-                else if (lineParts[0].equals("D"))
-                    storedItems.add(new Deadline(lineParts[1], Integer.parseInt(lineParts[2]) == 1, lineParts[3]));
-                else if (lineParts[0].equals("E"))
-                    storedItems.add(new Event(lineParts[1], Integer.parseInt(lineParts[2]) == 1, lineParts[3]));
-            }
-        }
+        storage = new Storage();
+        storage.getDataFile(storedItems);
+        parser = new Parser();
     }
 
     public void greet() {
-        System.out.println(padding + uselessLine + "\n" +
-                padding + "Greetings! This is " + botName + ", and I am your friend!\n" +
-                padding + "You don't have to be formal. Relax and tell me how I can help you\n" +
-                padding + uselessLine);
+        Ui.greet();
     }
 
     public void processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException, TaskErrorException {
         if (str.equals("")) {
-            System.out.println(padding + uselessLine + "\n" +
-                    padding + "Please type something. Don't leave it blank, plsss!\n" +
-                    padding + uselessLine);
+            Ui.blankInput();
             return;
         }
 
-        int markPos = isMarkingTaskRequest(str);
-        int delPos = isDeleteTaskRequest(str);
+        int markPos = parser.isMarkingTaskRequest(str);
+        int delPos = parser.isDeleteTaskRequest(str);
         if (markPos != -2) {
             try {
-                markItemAsDone(markPos);
+                TaskList.markItemAsDone(markPos, storedItems);
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("markPos error\n%s%s\n%s%s\n%s%s",
@@ -118,7 +50,7 @@ public class Duke {
             }
         } else if (delPos != -2) {
             try {
-                deleteItem(delPos);
+                TaskList.deleteItem(delPos);
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("delPos error\n%s%s\n%s%s\n%s%s",
@@ -126,7 +58,7 @@ public class Duke {
             }
         } else {
             try {
-                Task.TaskType type = commandType(str);
+                Task.TaskType type = parser.commandType(str);
                 switch (type) {
                     case toDo:
                         handleToDo(str);
@@ -147,27 +79,7 @@ public class Duke {
                 System.out.println(String.format("%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
             }
         }
-        writeData();
-    }
-
-
-    private Task.TaskType commandType(String str) {
-        Task.TaskType ret = Task.TaskType.unknown;
-        Scanner sc = new Scanner(str);
-
-        while (sc.hasNext()) {
-            String ss = sc.next();
-            if (ss.equals(Task.toDoCommand))
-                ret = Task.TaskType.toDo;
-            else if (ss.equals(Task.deadlineCommand))
-                ret = Task.TaskType.deadline;
-            else if (ss.equals(Task.eventCommand))
-                ret = Task.TaskType.event;
-            break;
-        }
-
-        sc.close();
-        return ret;
+        storage.writeData(storedItems);
     }
 
     // Not very optimal handling these 3 methods are...
@@ -213,99 +125,17 @@ public class Duke {
         sc.close();
     }
 
-    private void deleteItem(int pos) throws OutOfBoundMarkingRequestException {
-        if (pos >= storedItems.size() || pos < 0)
-            throw new OutOfBoundMarkingRequestException(pos+1);
-        Task t = storedItems.remove(pos);
-        System.out.println(String.format("%s%s\n%sI've removed this task for you\n%s   %s\n%sYou have %d tasks left\n%s%s",
-                padding, uselessLine, padding, padding, t.toString(),padding, storedItems.size(), padding, uselessLine));
-    }
-
-    private void markItemAsDone(int pos) throws OutOfBoundMarkingRequestException {
-        if (pos >= storedItems.size() || pos < 0)
-            throw new OutOfBoundMarkingRequestException(pos+1);
-        storedItems.get(pos).markDone();
-        System.out.println(padding + uselessLine + "\n" +
-                padding + "Nice nice. I've marked the task as done for you.\n" +
-                padding + "   " + storedItems.get(pos) + "\n" +
-                padding + uselessLine);
-    }
-
-    private int isDeleteTaskRequest(String str) {
-        int ret = -2;
-        String ss = "";
-        Scanner sc = new Scanner(str);
-
-        while (sc.hasNext()) {
-            ss = sc.next();
-            if (!ss.equals("delete"))
-                break;
-            if (!sc.hasNextInt())
-                break;
-            ret = sc.nextInt() - 1;
-            if (sc.hasNext())
-                ret = -2;
-            break;
-        }
-
-        sc.close();
-        return ret;
-    }
-
-    private int isMarkingTaskRequest(String str) {
-        int ret = -2;
-        String ss = "";
-        Scanner sc = new Scanner(str);
-
-        while (sc.hasNext()) {
-            ss = sc.next();
-            if (!ss.equals("done"))
-                break;
-            if (!sc.hasNextInt())
-                break;
-            ret = sc.nextInt() - 1;
-            if (sc.hasNext())
-                ret = -2;
-            break;
-        }
-
-        sc.close();
-        return ret;
-    }
-
     private void storeUserInput(Task task) {
         storedItems.add(task);
-        System.out.println(padding + uselessLine + "\n" +
-                padding + addedPhrase + task + "\n" +
-                padding + "Now you have " + storedItems.size() + " tasks\n" +
-                padding + uselessLine);
+        Ui.storeUserInput(task, storedItems);
     }
 
     public void listStoredItems() {
-        System.out.println(padding + uselessLine);
-        if (storedItems.isEmpty()) {
-            System.out.println(padding + "Your list is empty!");
-        } else {
-            System.out.println(padding + "Here is your list:");
-            int i = 1;
-            for (Task task : storedItems) {
-                System.out.println(padding + i + ". " + task);
-                i++;
-            }
-        }
-        System.out.println(padding + uselessLine);
-    }
-
-    private void echo(String str) {
-        System.out.println(padding + uselessLine + "\n" +
-                padding + str + "\n" +
-                padding + uselessLine);
+        Ui.listStoredItems(storedItems);
     }
 
     public void byeBye() {
-        writeData();
-        System.out.println(padding + uselessLine + "\n" +
-                padding + "Bye-bye. It was nice talking to you. See ya soon!\n" +
-                padding + uselessLine);
+        storage.writeData(storedItems);
+        Ui.byeBye();
     }
 }
