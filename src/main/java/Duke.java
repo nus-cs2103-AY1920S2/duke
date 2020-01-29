@@ -1,4 +1,4 @@
-import exceptions.*;
+package duke;
 
 public class Duke {
 
