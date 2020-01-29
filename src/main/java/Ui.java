@@ -1,6 +1,6 @@
 public class Ui {
     public static void main(String[] args) {
-        Duke chatbot = new Duke("C:\\Users\\ASUS\\Dropbox\\Duke.txt");
+        Duke chatbot = new Duke("/Users/weicheng/Dropbox/Duke.txt");
         Ui.loadingCompleted();
         Ui.initiateGreetings();
         chatbot.run();
@@ -18,6 +18,7 @@ public class Ui {
         System.out.println(message);
     }
     public void showLoadingError(DukeException err){
+
         err.printStackTrace();
     }
     public void initiateFareWell(){
