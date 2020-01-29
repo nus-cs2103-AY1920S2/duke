@@ -11,11 +11,22 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Main class for duke.
+ * Hold Storage, TaskList and Ui object for application
+ * Runs the application until the exit command is called.
+ */
 public class Duke {
+    /** Storage object to deal with the save file. */
     private Storage storage;
+    /** TaskList object to store the task list. */
     private TaskList tasks;
+    /** Ui object to interact with the user. */
     private Ui ui;
 
+    /**
+     * Constructs Duke with the default save directory, as well as welcome and exit messages.
+     */
     public Duke() {
         String workingDir = System.getProperty("user.dir");
         Path savePath = Paths.get(workingDir, "data", "duke.txt");
@@ -24,6 +35,10 @@ public class Duke {
                 , "     Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Main program loop.
+     * Runs the program until the exit command is called.
+     */
     public void runUntilExit() {
         TaskList tasks = null;
         boolean isRunning = true;
@@ -46,6 +61,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method that runs the program.
+     *
+     * @param args takes in a string array of argument for the program.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.runUntilExit();

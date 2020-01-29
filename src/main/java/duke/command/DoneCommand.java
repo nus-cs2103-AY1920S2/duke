@@ -6,13 +6,30 @@ import duke.task.TaskList;
 import duke.exception.InvalidCommandException;
 import java.io.IOException;
 
+/**
+ * Represents a DoneCommand.
+ * Used to execute the done command.
+ */
 public class DoneCommand extends Command {
+    /** Index of the task to be set as done. */
     private int index = 0;
 
+    /**
+     * Constructs a new DoneCommand.
+     *
+     * @param index index of the task to set as done.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the done command.
+     *
+     * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
+     * @param storage storage object for the retrieval/saving of tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

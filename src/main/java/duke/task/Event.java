@@ -4,10 +4,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task.
+ */
 public class Event extends Task{
+    /** Date that the event is happening. */
     private LocalDate atDate = null;
+    /** Time of the day the event is happening. */
     private LocalTime atTime = null;
 
+    /**
+     * Constructs a new Event task with description and date.
+     * Task is set to not done by default.
+     *
+     * @param description description of the task.
+     * @param atDateTime date and time the event task is happening.
+     */
     public Event(String description, String atDateTime) {
         super(description, false);
         String[] rawDateTime = atDateTime.split(" ");
@@ -27,6 +39,13 @@ public class Event extends Task{
         this.atTime = LocalTime.parse(formattedTime);
     }
 
+    /**
+     * Constructs a new Event task with description, date and done status.
+     *
+     * @param description description of the task.
+     * @param isDone done status of the task.
+     * @param atDateTime date and time the event task is happening.
+     */
     public Event(String description, boolean isDone, String atDateTime) {
         super(description, isDone);
         String[] rawDateTime = atDateTime.split(" ");
@@ -45,14 +64,24 @@ public class Event extends Task{
         this.atDate = LocalDate.parse(formattedDate);
         this.atTime = LocalTime.parse(formattedTime);
     }
-    
+
+    /**
+     * Gets the string representation of the event task used for saving.
+     *
+     * @return the string representation of the event task to be used for saving.
+     */
     @Override
     public String getSaveRepresentation() {
         return "E|||" + getIsDone() + "|||" + getDescription() + "|||"
                 + atDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy "))
                 + atTime.format(DateTimeFormatter.ofPattern("kmm")) + "\n";
     }
-    
+
+    /**
+     * Gets the string representation of the event task.
+     *
+     * @return the string representation of the event task.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (at: %s, %s)", "E", (getIsDone() ? "\u2713" : "\u2718"), getDescription()

@@ -4,27 +4,53 @@ import duke.exception.InvalidCommandException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Class for the task list.
+ * Contains operations for the task list.
+ */
 public class TaskList {
+    /** List of tasks. */
     private List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructs a new task list given a list of tasks.
+     *
+     * @param tasks a list of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public boolean addTask(Task task) {
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task the task to be added to the list.
+     */
+    public void addTask(Task task) {
         tasks.add(task);
-        return true;
     }
 
-    public boolean setAsDone(int index) throws InvalidCommandException {
+    /**
+     * Sets a task in the list to be done based on the index.
+     *
+     * @param index the index of the task based on the list's string representation to be set as done.
+     * @throws InvalidCommandException if the index given is out of bounds
+     */
+    public void setAsDone(int index) throws InvalidCommandException {
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException("     ☹ OOPS!!! I cannot set a "
                     + "non-existent task to be done.");
         }
         tasks.get(index - 1).markDone();
-        return true;
     }
 
+    /**
+     * Deletes a task from the list based on the index and returns the task deleted.
+     *
+     * @param index the index of the task based on the list's string representation to be deleted.
+     * @return the deleted task.
+     * @throws InvalidCommandException if the index given is out of bounds.
+     */
     public Task deleteTask(int index) throws InvalidCommandException {
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException("     ☹ OOPS!!! I cannot delete a "
@@ -34,18 +60,39 @@ public class TaskList {
         return taskToDelete;
     }
 
+    /**
+     * Gets the task from the list based on the index.
+     *
+     * @param index the index of the task based on the list's string representation to be retrieved.
+     * @return the task of the respective index.
+     */
     public Task getTask(int index) {
         return tasks.get(index - 1);
     }
 
+    /**
+     * Gets the list of all the tasks.
+     *
+     * @return the list of tasks.
+     */
     public List<Task> getList() {
         return tasks;
     }
 
+    /**
+     * Gets the number of task in the list.
+     *
+     * @return the number of task currently in the list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Gets the string representation of the task list.
+     *
+     * @return the string representation of the task list.
+     */
     public String toString() {
         String listRepresentation = "";
         for (int i = 0; i < tasks.size(); i++) {

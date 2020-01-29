@@ -7,13 +7,30 @@ import duke.task.Task;
 import duke.exception.InvalidCommandException;
 import java.io.IOException;
 
+/**
+ * Represents a DeleteCommand.
+ * Used to execute the delete command.
+ */
 public class DeleteCommand extends Command {
+    /** Index of the task to be deleted. */
     private int index = 0;
 
+    /**
+     * Constructs a new DeleteCommand.
+     *
+     * @param index index of the task in the task list to delete.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the delete command.
+     *
+     * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
+     * @param storage storage object for the retrieval/saving of tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
