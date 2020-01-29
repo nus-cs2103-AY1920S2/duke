@@ -1,10 +1,12 @@
+package duchess.utils;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DateTimeStringFormatter {
-    static String formatDateTime(LocalDateTime dateTime, boolean isCompleted) {
+    public static String formatDateTime(LocalDateTime dateTime, boolean isCompleted) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         long differenceInDays = DAYS.between(dateTime.toLocalDate(), currentDateTime.toLocalDate());
         if (dateTime.isBefore(currentDateTime)) {

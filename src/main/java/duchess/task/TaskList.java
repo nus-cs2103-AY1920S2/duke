@@ -1,3 +1,7 @@
+package duchess.task;
+
+import duchess.exception.DuchessException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -36,7 +40,7 @@ public class TaskList {
         return taskToComplete;
     }
 
-    ArrayList<Task> getTaskArray() {
+    public ArrayList<Task> getTaskArray() {
         return this.tasks;
     }
 }

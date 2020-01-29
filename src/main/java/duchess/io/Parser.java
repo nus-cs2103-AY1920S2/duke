@@ -1,3 +1,8 @@
+package duchess.io;
+
+import duchess.command.Command;
+import duchess.exception.DuchessException;
+
 public class Parser {
     public static Command parse(String command) throws DuchessException {
         try {

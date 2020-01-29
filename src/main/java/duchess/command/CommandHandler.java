@@ -1,3 +1,11 @@
+package duchess.command;
+
+import duchess.exception.DuchessException;
+import duchess.storage.Storage;
+import duchess.task.*;
+import duchess.ui.Ui;
+import duchess.utils.DateTimeParser;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -78,7 +86,7 @@ public class CommandHandler {
     }
 
     static Void handleByeCommand(String command, TaskList taskList, Ui ui, Storage storage) {
-        ui.print("Bye, is it? Shoo shoo then.");
+        ui.printGoodbye();
         return null;
     }
 }

@@ -1,20 +1,29 @@
-class Duchess {
+package duchess;
+
+import duchess.command.Command;
+import duchess.exception.DuchessException;
+import duchess.io.Parser;
+import duchess.storage.Storage;
+import duchess.task.TaskList;
+import duchess.ui.Ui;
+
+public class Duchess {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
-    Duchess(String filePath) {
+    public Duchess(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DuchessException e) {
-            this.ui.printError(e.getMessage());
+            this.ui.printLoadingError();
             this.taskList = new TaskList();
         }
     }
 
-    void run() {
+    public void run() {
         this.ui.printWelcome();
         boolean isRunning = true;
         while (isRunning) {

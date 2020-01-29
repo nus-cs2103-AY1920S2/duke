@@ -1,14 +1,18 @@
+package duchess.task;
+
+import duchess.utils.DateTimeStringFormatter;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
-    Deadline(String description, LocalDateTime deadline) {
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
-    Deadline(String description, LocalDateTime deadline, boolean isCompleted) {
+    public Deadline(String description, LocalDateTime deadline, boolean isCompleted) {
         super(description, isCompleted);
         this.deadline = deadline;
     }

@@ -1,9 +1,11 @@
+package duchess.task;
+
 public class ToDo extends Task {
-    ToDo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
-    ToDo(String description, boolean isCompleted) {
+    public ToDo(String description, boolean isCompleted) {
         super(description, isCompleted);
     }
 

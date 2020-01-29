@@ -1,3 +1,7 @@
+package duchess.utils;
+
+import duchess.exception.DuchessException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

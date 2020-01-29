@@ -1,7 +1,11 @@
+package duchess.storage;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import duchess.exception.DuchessException;
+import duchess.task.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,9 +46,9 @@ public class Storage {
                     result.add(new Deadline(gson.fromJson(taskToCheck.get("description"), String.class),
                             gson.fromJson(taskToCheck.get("deadline"), LocalDateTime.class),
                             gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
-                } else if (taskToCheck.has("timeframe")) {
+                } else if (taskToCheck.has("timeFrame")) {
                     result.add(new Event(gson.fromJson(taskToCheck.get("description"), String.class),
-                            gson.fromJson(taskToCheck.get("timeframe"), String.class),
+                            gson.fromJson(taskToCheck.get("timeFrame"), String.class),
                             gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
                 } else {
                     result.add(new ToDo(gson.fromJson(taskToCheck.get("description"), String.class),

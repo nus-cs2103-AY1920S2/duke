@@ -1,3 +1,10 @@
+package duchess.command;
+
+import duchess.storage.Storage;
+import duchess.task.TaskList;
+import duchess.ui.Ui;
+import duchess.utils.QuadFunction;
+
 public enum Command {
     TODO(CommandHandler::handleTodoCommand),
     EVENT(CommandHandler::handleEventCommand),
@@ -9,7 +16,7 @@ public enum Command {
 
     public final QuadFunction<String, TaskList, Ui, Storage, Void> execute;
 
-    private Command(QuadFunction<String, TaskList, Ui, Storage, Void> execute) {
+    Command(QuadFunction<String, TaskList, Ui, Storage, Void> execute) {
         this.execute = execute;
     }
 }

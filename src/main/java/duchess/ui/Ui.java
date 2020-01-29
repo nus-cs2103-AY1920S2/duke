@@ -1,3 +1,8 @@
+package duchess.ui;
+
+import duchess.task.Task;
+import duchess.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -26,6 +31,7 @@ public class Ui {
 
     public void printGoodbye() {
         this.print("Bye, is it? Shoo shoo then.");
+        this.print("Don't need to worry, I'll remember what you told me today.");
     }
 
     public void printLine() {
