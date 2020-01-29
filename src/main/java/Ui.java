@@ -57,6 +57,9 @@ public class Ui {
             "    '.           .'\n" +
             "      '-._____.-'";
 
+    public static final String LOAD_FROM_DISK_FAIL_MESSAGE =
+            "Could not find local storage";
+
     /**
      * Displays a greeting message
      */
@@ -133,6 +136,14 @@ public class Ui {
      */
     public void foundTask() {
         System.out.println(Ui.FOUND_TASK_MESSAGE);
+    }
+
+    /**
+     * Displays the load from disk fail message
+     * (Could not find local storage)
+     */
+    public void diskLoadFail() {
+        System.err.println(Ui.LOAD_FROM_DISK_FAIL_MESSAGE);
     }
 
     /**

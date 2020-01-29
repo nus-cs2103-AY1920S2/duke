@@ -1,4 +1,7 @@
+import java.io.FileNotFoundException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 /**
@@ -20,7 +23,17 @@ public class Duke {
         // initialise Storage
         String fileDirectory = "../user/data";
         String fileName = "tasks.botstore";
-        Storage store = new Storage(fileDirectory, fileName);
+        Storage store = new Storage();
+
+        LoadAndSave<Task> botStore;
+        try {
+            botStore = new TasksToDisk(fileDirectory, fileName);
+        } catch (FileNotFoundException e) {
+            botUi.error(e);
+            botStore = new DummyLoader<Task>();
+        }
+
+        store.importTasks(botStore.loadStored());
 
         botUi.initial();
         botUi.awaiting();
@@ -51,7 +64,7 @@ public class Duke {
                 botUi.done();
                 System.out.println(store.retrieve(index));
 
-                store.saveToDisk();
+                store.saveToDisk(botStore);
             } else if (next == Instruction.DELETE) {
                 int index;
                 try {
@@ -67,7 +80,7 @@ public class Duke {
                 botUi.deleted();
                 System.out.println(toBeDeleted);
 
-                store.saveToDisk();
+                store.saveToDisk(botStore);
             } else if (next == Instruction.READ_STORAGE) {
                 store.printStorage();
             } else if (next == Instruction.SEARCH_STORAGE) {
@@ -99,7 +112,7 @@ public class Duke {
                 store.store(ddl);
                 Duke.printTaskStoreMessage(store.getNumTasks());
 
-                store.saveToDisk();
+                store.saveToDisk(botStore);
             } else if (next == Instruction.STORE_EVENT) {
                 Event evn;
                 try {
@@ -111,7 +124,7 @@ public class Duke {
                 store.store(evn);
                 Duke.printTaskStoreMessage(store.getNumTasks());
 
-                store.saveToDisk();
+                store.saveToDisk(botStore);
             } else if (next == Instruction.STORE_TODO) {
                 Todo tdo;
                 try {
@@ -123,7 +136,7 @@ public class Duke {
                 store.store(tdo);
                 Duke.printTaskStoreMessage(store.getNumTasks());
 
-                store.saveToDisk();
+                store.saveToDisk(botStore);
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;

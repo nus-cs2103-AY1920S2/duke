@@ -1,101 +1,21 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Collection;
 import java.util.Optional;
-
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * Class to handle stored items within the bot,
- * and mark them as done. Class Storage also
- * handles file writing and reading
+ * and mark them as done
  */
 public class Storage {
-    private final ArrayList<Task> storedTasks;
-    private final String fileDirectory;
-    private final String fileName;
+    private final ArrayList<Task> storedTasks = new ArrayList<Task>();
 
     /**
-     * Constructs a new Storage, loading saved items
-     * from the local file system if possible. If not,
-     * an empty Storage is created.
+     * Adds tasks from a Collection into this Storage
      *
-     * @param fd String representing file directory to
-     *           load from and store to
-     * @param fn String representing file name to be used
-     *           in the file directory specified
+     * @param tasks The Collection to add from
      */
-    public Storage(String fd, String fn) {
-        this.fileDirectory = fd;
-        this.fileName = fn;
-        this.storedTasks = new ArrayList<Task>();
-        FileReader toLoadFrom;
-        boolean hasReadFile = false;
-        try {
-            toLoadFrom = new FileReader(Storage.getFullFileAddress(fd, fn));
-            hasReadFile = true;
-        } catch (FileNotFoundException e) {
-            // could not find file in location specified
-            // create new empty store
-            System.out.println("Could not find local storage");
-            toLoadFrom = null;
-        }
-
-        if (hasReadFile) {
-            Scanner io = new Scanner(toLoadFrom);
-            while (io.hasNext()) {
-                // main loop to load each saved task
-                String typeAndDone = io.nextLine();
-                Task currentTask;
-                boolean isCompleted;
-                if (typeAndDone.startsWith(Deadline.TYPE)) {
-                    currentTask = new Deadline(
-                            io.nextLine(),
-                            new PrettyTime(io.nextLine())
-                    );
-                    isCompleted = Integer.parseInt(
-                        Character.toString(
-                            typeAndDone.charAt(
-                                Deadline.TYPE.length())
-                        )
-                    ) == 1;
-                } else if (typeAndDone.startsWith(Event.TYPE)) {
-                    currentTask = new Event(
-                            io.nextLine(),
-                            new PrettyTime(io.nextLine())
-                    );
-                    isCompleted = Integer.parseInt(
-                        Character.toString(
-                            typeAndDone.charAt(
-                                 Event.TYPE.length())
-                        )
-                    ) == 1;
-                } else if (typeAndDone.startsWith(Todo.TYPE)) {
-                    currentTask = Todo.makeTodoRaw(io.nextLine());
-                    io.nextLine();
-                    isCompleted = Integer.parseInt(
-                        Character.toString(
-                            typeAndDone.charAt(
-                                Todo.TYPE.length())
-                        )
-                    ) == 1;
-                } else {
-                    // unknown task
-                    System.out.println("Unknown task found!");
-                    continue;
-                }
-
-                if (isCompleted) {
-                    currentTask.markAsDone();
-                }
-
-                this.storedTasks.add(currentTask);
-            }
-        }
+    public void importTasks(Collection<Task> tasks) {
+        storedTasks.addAll(tasks);
     }
 
     /**
@@ -201,57 +121,12 @@ public class Storage {
     /**
      * Attempts to save the stored items
      * to a file on the local system
-     */
-    public void saveToDisk() {
-        StringBuilder toBeSaved = new StringBuilder();
-        for (Task task : storedTasks) {
-            // use line breaks to separate the tasks
-            toBeSaved.append(task.type())
-                    .append(task.isDone() ? "1" : "0")
-                    .append("\n")
-                    .append(task.getTaskDetails())
-                    .append("\n")
-                    .append(task.getPrettyTime().toRaw())
-                    .append("\n");
-        }
-
-        File saveDirectory = new File(this.fileDirectory);
-        File saveLocation = new File(
-                Storage.getFullFileAddress(this.fileDirectory, this.fileName)
-        );
-        if (!saveLocation.exists()) {
-            try {
-                saveDirectory.mkdirs();
-                saveLocation.createNewFile();
-            } catch (IOException e) {
-                // error in creating new file
-                System.err.println("IOException1");
-                System.err.println(e.getMessage());
-            }
-        }
-
-        try {
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(saveLocation)
-            );
-            writer.write(toBeSaved.toString());
-            writer.close();
-        } catch (IOException e) {
-            // error in writing to file
-            System.err.println("IOException2");
-            System.err.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Gets the full file address relative to the
-     * current location
      *
-     * @param directory String representing file directory
-     * @param name String representing file name
-     * @return String representing full file address
+     * @param ttd The LoadAndSave containing the
+     *            correct file directory and name
+     *            to save Tasks to
      */
-    private static String getFullFileAddress(String directory, String name) {
-        return directory + "/" + name;
+    public void saveToDisk(LoadAndSave<Task> ttd) {
+        ttd.saveToDisk(this.storedTasks);
     }
 }
