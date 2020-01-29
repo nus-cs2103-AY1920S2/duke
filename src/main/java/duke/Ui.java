@@ -1,4 +1,4 @@
-import exceptions.DukeException;
+package duke;
 
 public class Ui {
 
