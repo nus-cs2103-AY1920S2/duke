@@ -28,7 +28,7 @@ public class Deadline extends Task {
     public String toString() {
         return String.format(
                 "[D][%s] %s (by: %s)",
-                isDone() ? "\u2713" : "\u2717",
+                isDone() ? "\u2713" : "\u2717", // \u2713 = tick, \u2717 = cross
                 getTitle(),
                 dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );

@@ -10,6 +10,14 @@ public abstract class Command {
         private final List<String> messages;
         private final boolean hasNextCommand;
 
+        /**
+         * Instantiates an data structure containing the results of calling
+         * the {@link #execute(TaskList, List, boolean) execute} method.
+         * 
+         * @param tasks Updated tasks after executing the command
+         * @param messages Lines of messages given as a response to executing the command
+         * @param hasNextCommand Whether or not the current command is terminal
+         */
         public ExecuteResult(TaskList tasks, List<String> messages, boolean hasNextCommand) {
             this.tasks = tasks;
             this.messages = messages;

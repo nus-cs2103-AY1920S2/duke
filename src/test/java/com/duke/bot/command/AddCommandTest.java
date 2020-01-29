@@ -17,7 +17,7 @@ public class AddCommandTest {
         final TaskList EXPECTED_TASK_LIST = new TaskList(List.of(TODO));
         final List<String> EXPECTED_MESSAGES = List.of(
                 "Got it. I've added this task:",
-                "  [T][\u2717] " + TODO_TITLE,
+                "  [T][\u2717] " + TODO_TITLE, // \u2717 = cross
                 "Now you have 1 tasks in the list."
         );
 

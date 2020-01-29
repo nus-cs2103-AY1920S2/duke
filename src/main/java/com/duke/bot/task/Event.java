@@ -28,7 +28,7 @@ public class Event extends Task {
     public String toString() {
         return String.format(
                 "[E][%s] %s (at: %s)",
-                isDone() ? "\u2713" : "\u2717",
+                isDone() ? "\u2713" : "\u2717", // \u2713 = tick, \u2717 = cross
                 getTitle(),
                 dateAt.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
         );

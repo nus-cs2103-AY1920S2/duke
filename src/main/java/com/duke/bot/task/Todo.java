@@ -16,7 +16,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", isDone() ? "\u2713" : "\u2717", getTitle());
+        return String.format(
+                "[T][%s] %s",
+                isDone() ? "\u2713" : "\u2717", // \u2713 = tick, \u2717 = cross
+                getTitle()
+        );
     }
 
     @Override
