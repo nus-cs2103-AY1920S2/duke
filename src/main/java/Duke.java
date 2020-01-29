@@ -244,7 +244,7 @@ public class Duke {
     }
 
     private static void loadTasks(ArrayList<Task> taskArrayList) {
-        java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "data", "duke.txt");
         try {
             File file = new File(path.toString());
             Scanner sc = new Scanner(file);
@@ -275,7 +275,7 @@ public class Duke {
     }
 
     private static void saveTasks(ArrayList<Task> taskArrayList) throws IOAelitaException {
-        java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "data", "duke.txt");
         try {
             if(!Files.exists(path)) {
                 Files.createDirectories(path.getParent());
