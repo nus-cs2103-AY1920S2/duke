@@ -3,10 +3,13 @@ import java.io.IOException;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 
 
 public class Duke{
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException,Exception {
         Scanner sc = new Scanner(System.in);
         String mesInput = "";
         Task [] tasks = new Task[100];
@@ -26,7 +29,7 @@ public class Duke{
                 System.out.println("   Got it. I've added this task:");
                 System.out.println("   "+arrTask.get(index).toString());
                 index = index + 1;
-                System.out.println("     Now you have "+index+" tasks in the list");
+                System.out.println("   Now you have "+index+" tasks in the list");
                 createFile("todo",s[1]);
             }else if(mesInput.contains("list")) {
                 System.out.println(" Here are the tasks in your list:");
@@ -37,23 +40,24 @@ public class Duke{
                 s = mesInput.split("deadline ");
                 String [] temp = s[1].split("/");
                 String taskName = temp[0];
-                String date = temp[1];
+                String date = formatDate(temp[1].substring(3,temp[1].length()));
                 System.out.println("   Got it. I've added this task:");
                 arrTask.add(new Deadline(taskName,date));
                 System.out.println("     "+arrTask.get(index).toString());
                 index = index + 1;
-                System.out.println("     Now you have "+index+" tasks in the list.");
+                System.out.println("    Now you have "+index+" tasks in the list.");
                 createFile("deadline",taskName+date);
             }else if (mesInput.contains("event") && !mesInput.equalsIgnoreCase("event")) {
                 s = mesInput.split("event ");
                 String[] temp = s[1].split("/");
                 String taskName = temp[0];
-                String date = temp[1];
+//                String date = temp[1];
+                String date = formatDate(temp[1].substring(3,temp[1].length()));
                 System.out.println("   Got it. I've added this task:");
                 arrTask.add(new Event(taskName, date));
                 System.out.println("     " + arrTask.get(index).toString());
                 index = index + 1;
-                System.out.println("     Now you have " + index + " tasks in the list");
+                System.out.println("   Now you have " + index + " tasks in the list");
                 createFile("event",taskName+date);
             }else if (mesInput.contains("done") && !mesInput.equalsIgnoreCase("done")){
                 String [] temp = mesInput.split(" ");
@@ -98,6 +102,7 @@ public class Duke{
                 }
             }
         }
+        
 
         System.out.println("  --------------");
         System.out.println("     Bye. Hope to see you again");
@@ -113,13 +118,20 @@ public class Duke{
         try {
             boolean result = f.createNewFile();
             Scanner s = new Scanner(f);
-            System.out.println("Load data from file ++++ ");
+            System.out.println("Load data from duke text file ");
             while(s.hasNext()){
-                System.out.println(s.nextLine());
+                System.out.println("     "+s.nextLine());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String formatDate(String date) throws Exception{
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1=formatter.parse(date);
+        formatter = new SimpleDateFormat("E, MMM d yyyy");
+        return (formatter.format(date1));
     }
 
 //    public static void printFileContents(String filePath) throws FileNotFoundException {
@@ -128,15 +140,18 @@ public class Duke{
 }
 
 
-class Deadline extends Task {
+class Deadline extends Task{
     private String by ;
     public Deadline(String description, String by){
         super(description);
+
         this.by= by;
     }
+
     @Override
     public String toString(){
-        return "[D][" +super.getStatusIcon()+ "] "+ super.getDescription() + "(" + by.substring(0,2) + ": " + by.substring(3,by.length())+")" ;
+
+        return "[D][" +super.getStatusIcon()+ "] "+ super.getDescription() + "(" + by +")" ;
     }
 }
 
@@ -148,6 +163,6 @@ class Event extends Task {
     }
     @Override
     public String toString(){
-        return "[E][" + super.getStatusIcon()+ "] "+ super.getDescription() + "(" + at.substring(0,2) + ": " + at.substring(3,at.length())+ ")";
+        return "[E][" + super.getStatusIcon()+ "] "+ super.getDescription() + "(" + at +  ")";
     }
 }
