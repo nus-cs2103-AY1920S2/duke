@@ -1,3 +1,4 @@
+
 /**
  * CS2103 Individual Project
  * @author Wei Cheng
@@ -5,6 +6,7 @@
  * The main driver for the program
  * and handles all the interaction with the user
  */
+
 public class Ui {
     public static void main(String[] args) {
         Duke chatbot = new Duke("Data/Duke.txt");
@@ -12,7 +14,6 @@ public class Ui {
         Ui.initiateGreetings();
         chatbot.run();
     }
-
     /**
      * Greet the user
      */
