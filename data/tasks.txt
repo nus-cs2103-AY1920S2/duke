@@ -1,5 +1,0 @@
-T|0|sldjf
-E|0|book store|2019-02-03
-D|0|book|2019-03-04
-T|0|book
-E|0|flsdjf|2039-04-03
