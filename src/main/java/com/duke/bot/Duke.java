@@ -9,11 +9,13 @@ import com.duke.bot.util.Parser;
 
 public class Duke {
     private final Scanner scanner;
+    private final View view;
     private final PersistentStorage persistentStorage;
     private TaskList tasks;
 
     public Duke() {
         scanner = new Scanner(System.in);
+        view = new View();
         persistentStorage = new PersistentStorage(
                 Path.of(System.getProperty("user.dir"), "data.txt")
         );
@@ -24,7 +26,7 @@ public class Duke {
             tasks = new TaskList();
         }
 
-        print(List.of("Hello! I'm Duke", "What can I do for you?"));
+        view.print(List.of("Hello! I'm Duke", "What can I do for you?"));
     }
 
     public void run() {
@@ -37,21 +39,15 @@ public class Duke {
                 Command.ExecuteResult result = command.execute(tasks);
                 tasks = result.getTasks();
                 hasNext = result.hasNextCommand();
-                print(result.getMessages());
+                view.print(result.getMessages());
 
                 persistentStorage.save(tasks);
             } catch(DukeException exception) {
-                print(List.of(exception.getMessage() + "!"));
+                view.print(List.of(exception.getMessage() + "!"));
             } catch(IOException exception) {
-                print(List.of("Failed to persist data!"));
+                view.print(List.of("Failed to persist data!"));
             }
         } while (hasNext);
-    }
-
-    private void print(List<String> lines) {
-        System.out.println("    ____________________________________________________________");
-        lines.forEach(line -> System.out.println("     " + line));
-        System.out.println("    ____________________________________________________________");
     }
 
     public static void main(String[] args) {
