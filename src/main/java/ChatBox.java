@@ -23,9 +23,17 @@ public class ChatBox {
         File f = new File(location);
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
-            String[] msg = s.nextLine().split("|");
-
-
+            String[] ms = s.nextLine().split("=");
+            String key = ms[0];
+            String status = ms[1];
+            Message message = new Message(ms[2]);
+            if(key.equals("[T]")) {
+                folder.add(new ToDos(message, status));
+            } else if (key.equals("[E]")) {
+                folder.add(new Events(message, status));
+            } else if (key.equals("[D]")) {
+                folder.add(new Deadlines(message, status));
+            }
         }
     }
 
