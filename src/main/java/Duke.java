@@ -55,10 +55,14 @@ public class Duke {
                                 " /by ");
                         try {
                             add(new Deadline(ddlDetails[0], LocalDate.parse(ddlDetails[1])), tasks);
-                        } catch (Exception e) {
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The Deadline time is incorrect.");
                             System.out.println("    Input time as \" /by yyyy-mm-dd\"");
+                            printBreak();
+                        } catch (Exception e) {
+                            printBreak();
+                            System.out.println("    Input time should be \" /by yyyy-mm-dd\"");
                             printBreak();
                         }
                         break;
@@ -67,10 +71,14 @@ public class Duke {
                                 " /at ");
                         try {
                             add(new Event(eventDetails[0], LocalDate.parse(eventDetails[1])), tasks);
-                        } catch (Exception e) {
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             printBreak();
                             System.out.println("    OOP!!! The event time is incorrect.");
                             System.out.println("    Input time as \" /at yyyy-mm-dd\"");
+                            printBreak();
+                        } catch (Exception e) {
+                            printBreak();
+                            System.out.println("    Input time should be \" /at yyyy-mm-dd\"");
                             printBreak();
                         }
                         break;
