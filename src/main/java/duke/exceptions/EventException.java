@@ -1,16 +1,25 @@
 package duke.exceptions;
 
+/**
+ * Exception when there are issues with Events.
+ */
 public class EventException extends DukeException {
 
     /**
-     * Constructor for EventException
+     * Constructor for EventException.
      *
-     * @param message any message to convey
+     * @param message any message to convey.
      */
     public EventException(String message) {
         super(message);
     }
 
+    /**
+     * Provides a custom String representation of the current Exception, which includes formatting lines.
+     *
+     * @return the presentable String representation.
+     */
+    @Override
     public String toString() {
         return ExceptionsConstant.FORMAT_LINE
                 + "\nEvent tasks should be named/specified with time duration, Blur! XD\n"

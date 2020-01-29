@@ -1,17 +1,20 @@
 package duke.tasks;
 
+/**
+ * Event class for tasks that have a specific time of happening.
+ */
 public class Event extends Task {
 
     /**
-     * Provides the time of the event's happening
+     * Provides the time of the event's happening.
      */
     private final String time;
 
     /**
-     * Constructor for the Event Task
+     * Constructor for the Event Task.
      *
-     * @param command full raw text entered to create the Event Task
-     * @param time time during which the Event occurs
+     * @param command full raw text entered to create the Event Task.
+     * @param time time during which the Event occurs.
      */
     public Event(String command, String time) {
         super(command);
@@ -19,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Prints a message indicating the Event Task has been added
+     * Prints a message indicating the Event Task has been added.
      */
     @Override
     public void taskAddedMessage() {
@@ -29,9 +32,9 @@ public class Event extends Task {
     }
 
     /**
-     * Provides a String representation of the Event Task object with tag [E] and its time of happening
+     * Provides a String representation of the Event Task object with tag [E] and its time of happening.
      *
-     * @return String representation of the Event Task with time and tag
+     * @return String representation of the Event Task with time and tag.
      */
     @Override
     public String toString() {

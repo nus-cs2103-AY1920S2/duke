@@ -1,18 +1,21 @@
 package duke.tasks;
 
+/**
+ * Standard task to be done without time limit or specific time of happening.
+ */
 public class ToDo extends Task {
 
     /**
-     * Constructor for this particular type of Task
+     * Constructor for this particular type of Task.
      *
-     * @param command full raw text entered to create this particular Task
+     * @param command full raw text entered to create this particular Task.
      */
     public ToDo(String command) {
         super(command);
     }
 
     /**
-     * Prints a message indicating that the Task has been added
+     * Prints a message indicating that the Task has been added.
      */
     @Override
     public void taskAddedMessage() {
@@ -22,9 +25,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Provides a String representation of the Task object with tag [T]
+     * Provides a String representation of the Task object with tag [T].
      *
-     * @return String representation of the Task
+     * @return String representation of the Task.
      */
     @Override
     public String toString() {

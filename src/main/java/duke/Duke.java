@@ -1,11 +1,28 @@
 package duke;
 
+/**
+ * Main class for the entire program, Duke is the chatbot and this is the driver class.
+ */
 public class Duke {
 
+    /**
+     * TaskList to store all the Tasks for Duke.
+     */
     private TaskList allTasks;
+
+    /**
+     * Storage file for reading when initialising or writing to when there are changes to the TaskList.
+     */
     private Storage file;
+
+    /**
+     * Handles the User Interactions/Formalities.
+     */
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         this.allTasks = new TaskList();
         this.ui = new Ui();
@@ -13,9 +30,9 @@ public class Duke {
     }
 
     /**
-     * Main driver method
+     * Main driver method.
      *
-     * @param args standard argument
+     * @param args standard argument.
      */
     public static void main(String[] args) {
 
@@ -35,7 +52,7 @@ public class Duke {
     }
 
     /**
-     * Runs TaskList to serve the user
+     * Runs TaskList to serve the user.
      */
     private void run() {
         // Begins accepting input commands
@@ -43,7 +60,7 @@ public class Duke {
     }
 
     /**
-     * Constructs new duke.Duke, and uses past user data if any
+     * Constructs new duke.Duke, and uses past user data if any.
      */
     private void initialise() {
         // Loads previous Tasks if any
@@ -60,9 +77,9 @@ public class Duke {
     }
 
     /**
-     * Prints a given String
+     * Prints a given String.
      *
-     * @param s String to be printed
+     * @param s String to be printed.
      */
     private void print(String s) {
         System.out.println(s);

@@ -1,4 +1,4 @@
 1. [V] [T] good
 2. [V] [E] FoodFest (at: May 7 2019)
 3. [X] [E] Homework Completion (at: Jun 7 2019)
-4. [X] [D] Good Fun Times (by: Jun 7 2019)
+4. [V] [D] Good Fun Times (by: Jun 7 2019)

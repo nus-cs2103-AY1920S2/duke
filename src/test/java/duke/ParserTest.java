@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class ParserTest {
 
     @Test
-    public void satisfiesMinimumDoneCommandLength_validInput_trueReturned(){
+    public void satisfiesMinimumDoneCommandLength_validInput_trueReturned() {
         String[] commandWords = new String[] {"todo", "good"};
         assertTrue(new Parser().satisfiesMinimumDoneCommandLength(commandWords));
     }
 
     @Test
-    public void satisfiesMinimumDoneCommandLength_invalidInput_falseReturned(){
+    public void satisfiesMinimumDoneCommandLength_invalidInput_falseReturned() {
         String[] commandWords = new String[] {"todo"};
         assertFalse(new Parser().satisfiesMinimumDoneCommandLength(commandWords));
     }

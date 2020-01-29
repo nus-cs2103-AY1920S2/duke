@@ -11,6 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage class for handling file input and output, saving past user data.
+ */
 public class Storage {
 
     /**
@@ -58,47 +61,47 @@ public class Storage {
 
                 switch (taskType) {
 
-                    case "T":
-                        // This is a To-Do item
-                        Task currentToDo = new ToDo(details);
-                        if (logic.isDone(doneStatus)) {
-                            currentToDo.doTask();
-                        }
-                        allTasks.addSavedTaskToStored(currentToDo);
-                        break;
+                case "T":
+                    // This is a To-Do item
+                    Task currentToDo = new ToDo(details);
+                    if (logic.isDone(doneStatus)) {
+                        currentToDo.doTask();
+                    }
+                    allTasks.addSavedTaskToStored(currentToDo);
+                    break;
 
-                    case "D":
-                        // This is a Deadline item
-                        String deadlineCommand = getDeadlineCommand(details);
-                        String deadlineLimit = getDeadlineLimit(details);
-                        Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
+                case "D":
+                    // This is a Deadline item
+                    String deadlineCommand = getDeadlineCommand(details);
+                    String deadlineLimit = getDeadlineLimit(details);
+                    Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
 
-                        // Check if done
-                        if (logic.isDone(doneStatus)) {
-                            currentDeadline.doTask();
-                        }
+                    // Check if done
+                    if (logic.isDone(doneStatus)) {
+                        currentDeadline.doTask();
+                    }
 
-                        // Finally, add the correct Task
-                        allTasks.addSavedTaskToStored(currentDeadline);
-                        break;
+                    // Finally, add the correct Task
+                    allTasks.addSavedTaskToStored(currentDeadline);
+                    break;
 
-                    case "E":
-                        // This is an Event item
-                        String eventCommand = getEventCommand(details);
-                        String eventLimit = getEventTime(details);
-                        Task currentEvent = new Event(eventCommand, eventLimit);
+                case "E":
+                    // This is an Event item
+                    String eventCommand = getEventCommand(details);
+                    String eventLimit = getEventTime(details);
+                    Task currentEvent = new Event(eventCommand, eventLimit);
 
-                        // Check if done
-                        if (logic.isDone(doneStatus)) {
-                            currentEvent.doTask();
-                        }
+                    // Check if done
+                    if (logic.isDone(doneStatus)) {
+                        currentEvent.doTask();
+                    }
 
-                        // Finally, add the correct Task
-                        allTasks.addSavedTaskToStored(currentEvent);
-                        break;
+                    // Finally, add the correct Task
+                    allTasks.addSavedTaskToStored(currentEvent);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
 
                 }
 
@@ -108,12 +111,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets the Event's command based on the details upon removing task status and type.
+     *
+     * @param details the line read in, after removing unnecessary information on task status and type.
+     * @return the Event's command.
+     */
     private String getEventCommand(String details) {
         int indexOfAtKeyword = details.indexOf("(at: ");
         String eventCommand = details.substring(0, indexOfAtKeyword - 1);
         return eventCommand;
     }
 
+    /**
+     * Gets the Event's time based on the details upon removing task status and type.
+     *
+     * @param details the line read in, after removing unnecessary information on task status and type.
+     * @return the Event's time of happening.
+     */
     private String getEventTime(String details) {
         int indexOfByKeyword = details.indexOf("(at: ");
         String eventTime = details.substring(indexOfByKeyword + 5,
@@ -121,12 +136,24 @@ public class Storage {
         return eventTime;
     }
 
+    /**
+     * Gets the Deadline's command based on the details upon removing task status and type.
+     *
+     * @param details the line read in, after removing unnecessary information on task status and type.
+     * @return the Deadline's command.
+     */
     private String getDeadlineCommand(String details) {
         int indexOfAtKeyword = details.indexOf("(by: ");
         String deadlineCommand = details.substring(0, indexOfAtKeyword - 1);
         return deadlineCommand;
     }
 
+    /**
+     * Gets the Deadline's time limit based on the details upon removing task status and type.
+     *
+     * @param details the line read in, after removing unnecessary information on task status and type.
+     * @return the Deadline's time limit to which it should be completed.
+     */
     private String getDeadlineLimit(String details) {
         int indexOfByKeyword = details.indexOf("(by: ");
         String deadlineLimit = details.substring(indexOfByKeyword + 5,
@@ -135,9 +162,9 @@ public class Storage {
     }
 
     /**
-     * Prints a given String
+     * Prints a given String.
      *
-     * @param s String to be printed
+     * @param s String to be printed.
      */
     private static void print(String s) {
         System.out.println(s);

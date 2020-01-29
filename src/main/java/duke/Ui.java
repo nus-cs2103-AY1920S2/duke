@@ -1,9 +1,12 @@
 package duke;
 
+/**
+ * User Interface class which is centred about a strong user experience and its associated methods.
+ */
 public class Ui {
 
     /**
-     * Welcomes the user with a message
+     * Welcomes the user with a message.
      */
     public static void welcome() {
         printLine();
@@ -14,7 +17,7 @@ public class Ui {
     }
 
     /**
-     * Says goodbye to the user
+     * Says goodbye to the user.
      */
     public static void goodbye() {
         printLine();
@@ -23,10 +26,9 @@ public class Ui {
     }
 
     /**
-     * Prints a given String
+     * Prints a given String.
      *
-     * @param s String to be printed
-     * @param e
+     * @param e String to be printed.
      */
     public static void printExceptionMessage(String e) {
         printLine();
@@ -35,16 +37,16 @@ public class Ui {
     }
 
     /**
-     * Prints a horizontal formatting line
+     * Prints a horizontal formatting line.
      */
     private static void printLine() {
         print(Constant.FORMAT_LINE);
     }
 
     /**
-     * Prints a given String
+     * Prints a given String.
      *
-     * @param s String to be printed
+     * @param s String to be printed.
      */
     private static void print(String s) {
         System.out.println(s);
