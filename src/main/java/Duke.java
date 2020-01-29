@@ -1,6 +1,6 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 /**
  * This is a simulation of a chat bot called Duke.
