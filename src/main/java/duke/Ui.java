@@ -1,14 +1,11 @@
-public class WelcomeGoodbye {
+import exceptions.DukeException;
 
-    /**
-     * Utilised in printing
-     */
-    private final String FORMAT_LINE = "____________________________________________________________";
+public class Ui {
 
     /**
      * Welcomes the user with a message
      */
-    public void welcome() {
+    public static void welcome() {
         printLine();
         print("Hello, Duke here! :D \n"
                 + "I'm feeling good and ready to go! "
@@ -19,17 +16,29 @@ public class WelcomeGoodbye {
     /**
      * Says goodbye to the user
      */
-    public void goodbye() {
+    public static void goodbye() {
         printLine();
         print("====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D");
         printLine();
     }
 
     /**
+     * Prints a given String
+     *
+     * @param s String to be printed
+     * @param e
+     */
+    public static void printExceptionMessage(String e) {
+        printLine();
+        print(e);
+        printLine();
+    }
+
+    /**
      * Prints a horizontal formatting line
      */
-    private void printLine() {
-        print(FORMAT_LINE);
+    private static void printLine() {
+        print(Constant.FORMAT_LINE);
     }
 
     /**
@@ -37,7 +46,7 @@ public class WelcomeGoodbye {
      *
      * @param s String to be printed
      */
-    private void print(String s) {
+    private static void print(String s) {
         System.out.println(s);
     }
 
