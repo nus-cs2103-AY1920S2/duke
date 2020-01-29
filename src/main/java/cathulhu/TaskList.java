@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     /**
-     * Getter for the TaskList class
+     * Gets Task objects from the TaskList class instance
      * @param index int. The index of the task to be returned
      * @return Task object at the specified index in the TaskList
      */

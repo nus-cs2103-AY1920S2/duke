@@ -16,7 +16,7 @@ public class Task {
 
 
     /**
-     * Getter for the status icons, depending on whether the task has been completed:
+     * Gets the status icons, depending on whether the task has been completed:
      * "Y" is returned if the task is completed
      * "N" is returned if the task is incomplete
      * @return String for the status icons
