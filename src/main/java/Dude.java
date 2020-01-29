@@ -20,6 +20,7 @@ public class Dude {
 
     public void setStorage(Storage storage) {
         this.storage = storage;
+        userInputList = storage.load();
     }
 
     public void end() {
@@ -40,15 +41,15 @@ public class Dude {
         }
         else if (input.startsWith("done")) {
             doneTask(input);
-            //storage.update(userInputList);
+            storage.update(userInputList);
         }
         else if (input.startsWith("delete")) {
             deleteTask(input);
-            //storage.update(userInputList);
+            storage.update(userInputList);
         }
         else {
             createTask(input);
-            //storage.update(userInputList);
+            storage.update(userInputList);
         }
     }
 
@@ -87,7 +88,7 @@ public class Dude {
 
     }
 
-    public void createTask(String userInput) {
+    public void createTask(String userInput) { // TODO found new error: when passing deadline blah/event blah
         try {
             Task task;
             String[] split = userInput.split(" ", 2);
