@@ -1,13 +1,10 @@
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-=======
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> branch-Level-8
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -82,14 +79,14 @@ public class Duke {
                     System.out.println("\tOOPS! Please input /at Date Time (e.g. /at Mon 2-4pm)");
                     this.waitInput();
                 } else {
-<<<<<<< HEAD
-                    Task newTask = new Event(info[0].trim(), info[1].trim());
+                    String timeEvent = convertDateAndTime(info[1].trim());
+                    Task newTask = new Event(info[0].trim(), timeEvent);
                     try {
                         FileWriter append = new FileWriter("data/duke.txt", true);
                         if (tasks.size() == 0) {
-                            append.write("E | 0 | " + info[0].trim() + " | " + info[1].trim());
+                            append.write("E | 0 | " + info[0].trim() + " | " + timeEvent);
                         } else {
-                            append.write("\nE | 0 | " + info[0].trim() + " | " + info[1].trim());
+                            append.write("\nE | 0 | " + info[0].trim() + " | " + timeEvent);
                         }
                         append.close();
                         this.addTask(newTask);
@@ -98,11 +95,7 @@ public class Duke {
                     } catch (IOException e) {
                         System.out.println(e.getMessage());
                     }
-=======
-                    String timeEvent = convertDateAndTime(info[1].trim());
-                    Task newTask = new Event(info[0].trim(), timeEvent);
                     this.addTask(newTask);
->>>>>>> branch-Level-8
                 }
             }
             break;
@@ -116,14 +109,14 @@ public class Duke {
                     System.out.println("\tOOPS! Please input /by Date (e.g. /by Feb 3rd)");
                     this.waitInput();
                 } else {
-<<<<<<< HEAD
-                    Task newTask = new Deadline(info[0].trim(), info[1].trim());
+                    String timeDeadline = convertDateAndTime(info[1].trim());
+                    Task newTask = new Deadline(info[0].trim(), timeDeadline);
                     try {
                         FileWriter append = new FileWriter("data/duke.txt", true);
                         if (tasks.size() == 0) {
-                            append.write("D | 0 | " + info[0].trim() + " | " + info[1].trim());
+                            append.write("D | 0 | " + info[0].trim() + " | " + timeDeadline);
                         } else {
-                            append.write("\nD | 0 | " + info[0].trim() + " | " + info[1].trim());
+                            append.write("\nD | 0 | " + info[0].trim() + " | " + timeDeadline);
                         }
                         append.close();
                         this.addTask(newTask);
@@ -132,11 +125,7 @@ public class Duke {
                     } catch (IOException e) {
                         System.out.println(e.getMessage());
                     }
-=======
-                    String timeDeadline = convertDateAndTime(info[1].trim());
-                    Task newTask = new Deadline(info[0].trim(), timeDeadline);
                     this.addTask(newTask);
->>>>>>> branch-Level-8
                 }
             }
             break;
@@ -255,7 +244,6 @@ public class Duke {
         this.waitInput();
     }
 
-<<<<<<< HEAD
     private void loadFromFile(File f) {
         try {
             Scanner scanFile = new Scanner(f);
@@ -295,7 +283,8 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("\tFile not found!");
         }
-=======
+    }
+
     private String convertDateAndTime(String time) {
         String[] arr = time.split("\\s");
         String day = "";
@@ -388,7 +377,6 @@ public class Duke {
             return time;
         }
         return day;
->>>>>>> branch-Level-8
     }
 
     public void run() {
