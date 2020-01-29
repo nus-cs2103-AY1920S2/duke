@@ -1,7 +1,9 @@
 package task;
 
 public enum Constant {
-    TODO("[T]"), EVENT("[E]", "/at"), DEADLINE("[D]", "/by");
+    TODO("[T]"),
+    EVENT("[E]", "/at"),
+    DEADLINE("[D]", "/by");
 
     private final String type;
     private final String timeDelimiter;

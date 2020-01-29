@@ -1,15 +1,13 @@
 package parser;
 
 import exception.DukeException;
-
-import java.util.Arrays;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.LocalTime;
-import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
     private static String[] taskTypes = {"todo", "event", "deadline"};
@@ -47,8 +45,11 @@ public class Parser {
     public static String getType(String words) throws DukeException {
         String lowerCaseWords = words.toLowerCase();
         String acceptedTypes = String.format("(%s)", String.join("|", Parser.taskTypes));
-        if (Pattern.matches(String.format("^%s\\s+.*|.*\\s+%s$|.*\\s+%s\\s+.*", acceptedTypes,
-                acceptedTypes, acceptedTypes), lowerCaseWords)) {
+        if (Pattern.matches(
+                String.format(
+                        "^%s\\s+.*|.*\\s+%s$|.*\\s+%s\\s+.*",
+                        acceptedTypes, acceptedTypes, acceptedTypes),
+                lowerCaseWords)) {
             if (Pattern.matches(String.format("^%s\\s+.*", acceptedTypes), lowerCaseWords)) {
                 return words.split(" ")[0].toLowerCase();
             } else {
@@ -65,8 +66,7 @@ public class Parser {
             return description.trim();
         }
         String content = description.substring(0, index).trim();
-        if (content.length() > 0)
-            return content;
+        if (content.length() > 0) return content;
         throw new DukeException("Content cannot be empty!");
     }
 
@@ -78,8 +78,7 @@ public class Parser {
         }
         String dateTime = description.substring(index + regex.length()).trim();
 
-        if (dateTime.length() == 0)
-            throw new DukeException("Please provide a time");
+        if (dateTime.length() == 0) throw new DukeException("Please provide a time");
 
         return dateTime;
     }
@@ -88,14 +87,19 @@ public class Parser {
         String time;
         try {
             String[] split = getDateTime(dateTime, regex).split(" ");
-            time = String.join(" ", Arrays.copyOfRange(split, 1, split.length)).trim()
-                    .toUpperCase();
+            time =
+                    String.join(" ", Arrays.copyOfRange(split, 1, split.length))
+                            .trim()
+                            .toUpperCase();
         } catch (Exception e) {
-            throw new DukeException(String.format(
-                    "Missing time/date information %n please provide date then time separated by a space"));
+            throw new DukeException(
+                    String.format(
+                            "Missing time/date information %n please provide date then time separated by a space"));
         }
-        String[] timeRegex = {"H:m", "Hmm", "H.m", "h.m a", "h.m a", "h:m a", "h:m a", "hmm a",
-                "hmma", "h a", "ha", "H"};
+        String[] timeRegex = {
+            "H:m", "Hmm", "H.m", "h.m a", "h.m a", "h:m a", "h:m a", "hmm a", "hmma", "h a", "ha",
+            "H"
+        };
 
         for (String pattern : timeRegex) {
             try {
@@ -109,8 +113,9 @@ public class Parser {
 
     public static LocalDate getDate(String dateTime, String regex) throws DukeException {
         String date = getDateTime(dateTime, regex).split(" ")[0].trim();
-        String[] dateRegex =
-                {"ddMMyyyy", "yyyyMMdd", "d-M-yyyy", "d/M/yyyy", "yyyy-M-d", "yyyy/M/d"};
+        String[] dateRegex = {
+            "ddMMyyyy", "yyyyMMdd", "d-M-yyyy", "d/M/yyyy", "yyyy-M-d", "yyyy/M/d"
+        };
         for (String pattern : dateRegex) {
             try {
                 return LocalDate.parse(date, DateTimeFormatter.ofPattern(pattern));

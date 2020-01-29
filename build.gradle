@@ -4,12 +4,13 @@ plugins {
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'com.github.sherter.google-java-format' version '0.8'
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
+// javafx {
+//     version = "11.0.2"
+//     modules = [ 'javafx.controls', 'javafx.fxml' ]
+// }
 
 shadowJar {
     archiveBaseName = "duke"
@@ -24,6 +25,21 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+ googleJavaFormat {
+    source 'src/main'
+    source 'src/test'
+    include '**/*.java'
+    options style: 'AOSP'
+}
+
+import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
+
+task format(type: GoogleJavaFormat) {
+  source 'src/main'
+  source 'src/test'
+  include '**/*.java'
 }
 
 checkstyle {

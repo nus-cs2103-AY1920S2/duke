@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.ArrayList;
 import exception.DukeException;
+import java.util.ArrayList;
 import task.Task;
 
 public class TaskList {

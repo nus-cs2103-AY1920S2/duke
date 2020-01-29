@@ -1,13 +1,12 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     private final ByteArrayInputStream in = new ByteArrayInputStream(("Hello").getBytes());
@@ -31,7 +30,5 @@ public class DukeTest {
         // assertEquals("Hello\n2\nuwu\nBye. Hope to see you again soon!\n",
         // outContent.toString());
         assertEquals("Hello\n", outContent.toString());
-
     }
-
 }

@@ -1,13 +1,10 @@
 package duke;
 
-import task.Task;
-import storage.Storage;
 import exception.DukeException;
-import parser.Parser;
-
-import java.util.ArrayList;
-
 import java.nio.file.Paths;
+import parser.Parser;
+import storage.Storage;
+import task.Task;
 
 public class Duke {
     private UserInterface UI;
@@ -57,9 +54,10 @@ public class Duke {
                     String[] splitInput = input.split(" ");
                     int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
                     if (taskIndex >= this.taskList.size()) {
-                        throw new DukeException(String.format(
-                                "Please choose an index that is between 1 and %d (inclusive)",
-                                this.taskList.size()));
+                        throw new DukeException(
+                                String.format(
+                                        "Please choose an index that is between 1 and %d (inclusive)",
+                                        this.taskList.size()));
                     }
                     if (input.contains("done")) {
                         this.taskList.markDone(taskIndex);
@@ -69,8 +67,10 @@ public class Duke {
                         Task removedTask = this.taskList.popTask(taskIndex);
                         UI.out2("Noted. I've removed this task:");
                         UI.out3(removedTask.toString());
-                        UI.out2(String.format("Now you have %d tasks in the list.",
-                                this.taskList.size()));
+                        UI.out2(
+                                String.format(
+                                        "Now you have %d tasks in the list.",
+                                        this.taskList.size()));
                     }
                 } else if (Parser.isFind(input)) {
                     if (this.taskList.isEmpty()) {
@@ -82,8 +82,11 @@ public class Duke {
                     Task newTask = this.taskList.addTask(input);
                     UI.out2("Got it. I've added this task: ");
                     UI.out3(newTask.toString());
-                    UI.out2(String.format("Now you have %d %s in the list.", this.taskList.size(),
-                            this.taskList.size() > 1 ? "tasks" : "task"));
+                    UI.out2(
+                            String.format(
+                                    "Now you have %d %s in the list.",
+                                    this.taskList.size(),
+                                    this.taskList.size() > 1 ? "tasks" : "task"));
                 }
                 Duke.storage.update(this.taskList.getAllTask());
         }

@@ -1,9 +1,8 @@
 package task;
 
+import exception.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import exception.DukeException;
 import parser.Parser;
 
 public class TimeTask extends Task {
