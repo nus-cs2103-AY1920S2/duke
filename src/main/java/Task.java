@@ -1,3 +1,7 @@
+/**
+ * This class is the base class for the {@code Todo}, {@code Deadline}, and
+ * {@code Event} classes.
+ */
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -12,7 +16,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     public boolean getIsDone() {

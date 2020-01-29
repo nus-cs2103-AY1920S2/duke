@@ -1,6 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class serves as a wrapper to parse and tokenize either user inputs or
+ * the data stored on the user's hard disks. The tokens are then stored as
+ * members of this class.
+ */
 public class Parser {
     private Command command;
     private String description;
@@ -8,6 +13,13 @@ public class Parser {
     private int taskIndex;
     private LocalDate date;
 
+    /**
+     * Parses and tokenizes a String from the user.
+     * 
+     * @param userInput the raw String given by the user
+     * @throws DukeException if the command does not exist, or if the syntax of the
+     *                       command is incorrect and/or missing essential details
+     */
     public void parseUserInput(String userInput) throws DukeException {
         String[] userInputSplit = userInput.trim().split("\\s+", 2);
         this.command = this.parseCommand(userInputSplit[0]);
@@ -67,6 +79,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses and tokenizes a String from the local hard disk.
+     * 
+     * Unlike the {@code parseUserInput} method, this method does not throw any
+     * {@code DukeException} as the data stored on disk is guaranteed to be correct.
+     * 
+     * @param data the raw String data from the local hard disk
+     */
     public void parseDiskData(String data) {
         String[] dataSplit = data.split("\\|");
         this.command = this.parseCommand(dataSplit[0]);
