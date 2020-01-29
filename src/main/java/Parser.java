@@ -35,7 +35,13 @@ public class Parser {
 
             return new ListCommand(response);
 
+        } else if (messageType.equals("find")) {
+
+            String keyword = response.replace("find ", "");
+            return new FindCommand(response, keyword);
+
         } else {
+
             throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
@@ -70,6 +76,10 @@ public class Parser {
 
         if (response.contains("delete")) {
             return "delete";
+        }
+
+        if (response.contains("find")) {
+            return "find";
         }
 
         throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
