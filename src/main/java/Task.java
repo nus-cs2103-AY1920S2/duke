@@ -9,8 +9,8 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    public String getStatus() {
+        return (isDone ? "Done" : "Not done");
     }
 
     public void markAsDone() {
@@ -21,11 +21,11 @@ public class Task {
     public String toString() {
         String toReturn = "";
         if (this instanceof Todo) {
-            toReturn = "[T][" + getStatusIcon() + "] " + description;
+            toReturn = "[T][" + getStatus() + "] " + description;
         } else if (this instanceof Event) {
-            toReturn = "[E][" + getStatusIcon() + "] " + description + " (at: " + ((Event) this).getDayTime() + ")";
+            toReturn = "[E][" + getStatus() + "] " + description + " (at: " + ((Event) this).getDayTime() + ")";
         } else if (this instanceof Deadline) {
-            toReturn = "[D][" + getStatusIcon() + "] " + description + " (by: " + ((Deadline) this).getDay() + ")";
+            toReturn = "[D][" + getStatus() + "] " + description + " (by: " + ((Deadline) this).getDay() + ")";
         }
         return toReturn;
     }

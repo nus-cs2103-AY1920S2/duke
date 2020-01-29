@@ -15,7 +15,7 @@ public class Duke {
 
         taskList = new ArrayList<>();
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke the dude.\nHow can I serve you?");
         Scanner sc = new Scanner(System.in);
         String input;
         while (true) {
@@ -73,14 +73,14 @@ public class Duke {
             }
         }
         taskList.add(toAdd);
-        System.out.println("Got it. I've added this task:\n"
+        System.out.println("Gotcha! Added this task:\n"
                 + "  " + toAdd + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void delete(int i) {
         Task t = taskList.remove(i-1);
-        System.out.println("Noted. I've removed this task: \n"
+        System.out.println("Poof! This task is gone:\n"
                 +  "  " + t + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
     }
@@ -101,6 +101,6 @@ public class Duke {
     }
 
     public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to serve you again soon!");
     }
 }
