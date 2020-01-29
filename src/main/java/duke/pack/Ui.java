@@ -49,6 +49,9 @@ public class Ui {
         System.out.println("    ------------------------------------------------------------------");
     }
 
+    /**
+     * prints formatting line
+     */
     public void showLine() {
         System.out.println("    ------------------------------------------------------------------");
     }
