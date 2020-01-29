@@ -7,9 +7,11 @@ import java.util.Scanner;
 public class Storage {
     //deals with loading tasks from the file and saving tasks in the file
     String filePath;
+    public static TaskList taskList;
 
     public Storage (String filePath) {
         this.filePath = filePath;
+        this.taskList = Duke.taskList;
     }
 
     public void retrieveInfo() {
@@ -30,7 +32,7 @@ public class Storage {
                 if (arr[1].trim().equals("Y")) {
                     newTask.markAsDone();
                 }
-                Duke.newList.add(newTask);
+                taskList.add(newTask);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Something went wrong: " + e.getMessage());
@@ -40,8 +42,8 @@ public class Storage {
 
     public  void  updateInfo() {
         String  fileString = "";
-        for (int i = 0; i < Duke.newList.size(); i += 1) {
-            fileString += Duke.newList.get(i).fileString() + "\n";
+        for (int i = 0; i < taskList.size(); i += 1) {
+            fileString += taskList.get(i).fileString() + "\n";
         }
 
         try {
