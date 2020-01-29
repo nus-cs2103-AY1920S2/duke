@@ -14,4 +14,4 @@ src/main/resources/docs/
 bin/
 
 text-ui-test/ACTUAL.TXT
-data/Task.txt
+data/tasks.txt
