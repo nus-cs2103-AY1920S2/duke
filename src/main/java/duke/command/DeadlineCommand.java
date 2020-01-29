@@ -9,10 +9,17 @@ import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a deadline command. Upon execution, updates data/duke.txt and produces some feedback to the user.
+ */
 public class DeadlineCommand extends Command {
     private String description;
     private LocalDateTime dateTime;
 
+    /**
+     * @param description Description of the deadline task
+     * @param dateTime Date and time of the deadline task
+     */
     public DeadlineCommand(String description, LocalDateTime dateTime) {
         this.description = description;
         this.dateTime = dateTime;

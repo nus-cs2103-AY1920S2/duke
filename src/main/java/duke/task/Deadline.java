@@ -2,22 +2,34 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
-    private LocalDateTime by;
+    private LocalDateTime dateTime;
 
-    public Deadline(String description, LocalDateTime by) {
+    /**
+     * @param description description of task
+     * @param dateTime date and time of task
+     */
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
         super.taskType = TaskType.D;
-        this.by = by;
+        this.dateTime = dateTime;
     }
 
+    /**
+     * Get the date and time in the format which match in data file.
+     *
+     * @return string represent the date and time
+     */
     public String getDateTime() {
-        return by.format(IN_FORMATTER);
+        return dateTime.format(IN_FORMATTER);
     }
 
     @Override
     public String toString() {
-        return "[" + super.getTaskType() + "]" + super.toString() + " (by: " + by.format(OUT_FORMATTER) + ")";
+        return "[" + super.getTaskType() + "]" + super.toString() + " (by: " + dateTime.format(OUT_FORMATTER) + ")";
     }
 
     @Override

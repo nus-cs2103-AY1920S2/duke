@@ -7,9 +7,15 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * Represents a todo command. Upon execution, updates data/duke.txt and produces some feedback to the user.
+ */
 public class TodoCommand extends Command {
     private String description;
 
+    /**
+     * @param description Description of the todo task
+     */
     public TodoCommand(String description) {
         this.description = description;
     }

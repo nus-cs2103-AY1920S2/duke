@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     private final static String UNKNOWN_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private final static String EXTRA_ERROR = "The command contains extra information!";
@@ -13,6 +16,12 @@ public class Parser {
     private final static String DATETIME_ERROR = "Please follow this format \"31/01/2020 2300\" for date and time!";
     private final static DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Parse user input into command for execution.
+     *
+     * @param fullCommand full user input string
+     * @return the command based on the user input
+     */
     public static Command parse(String fullCommand) {
         String[] command = fullCommand.split(" ", 2);
         switch (command[0]) {
@@ -43,6 +52,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user command in the context of the exit command.
+     *
+     * @param command full user command array
+     * @return the exit command
+     */
     private static Command prepareExit(String[] command) {
         if (command.length > 1) {
             return new InvalidCommand(EXTRA_ERROR);
@@ -50,6 +65,12 @@ public class Parser {
         return new ExitCommand();
     }
 
+    /**
+     * Parses user command in the context of the event command.
+     *
+     * @param command full user command array
+     * @return the event command
+     */
     private static Command prepareEvent(String[] command) {
         try {
             String[] commandSplit = command[1].split(" /at ", 2);
@@ -63,6 +84,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user command in the context of the deadline command.
+     *
+     * @param command full user command array
+     * @return the deadline command command
+     */
     private static Command prepareDeadline(String[] command) {
         try {
             String[] commandSplit = command[1].split(" /by ", 2);
@@ -76,6 +103,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user command in the context of the todo command.
+     *
+     * @param command full user command array
+     * @return the todo command command
+     */
     private static Command prepareTodo(String[] command) {
         try {
             String desc = command[1];
@@ -85,6 +118,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user command in the context of the delete command.
+     *
+     * @param command full user command array
+     * @return the delete command command
+     */
     private static Command prepareDelete(String[] command) {
         try {
             int index = Integer.parseInt(command[1]);
@@ -99,6 +138,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user command in the context of the done command.
+     *
+     * @param command full user command array
+     * @return the done command command
+     */
     private static Command prepareDone(String[] command) {
         try {
             int index = Integer.parseInt(command[1]);
@@ -113,6 +158,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user command in the context of the list command.
+     *
+     * @param command full user command array
+     * @return the list command command
+     */
     private static Command prepareList(String[] command) {
         if (command.length > 1) {
             return new InvalidCommand(EXTRA_ERROR);
