@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void run() {
         //Duke Setup
         boolean dukeRunning = true;
         List<Task> taskList = new ArrayList<>();
@@ -29,5 +29,9 @@ public class Duke {
             String input = sc.nextLine();
             dukeRunning = Parser.parseCommand(input, taskList);
         }
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }

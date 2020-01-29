@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Parser {
     //Custom parseCommand to parse CommandTypes (if valid, and to perform the logic)
-    static boolean parseCommand(String input, List<Task> taskList) {
+    public static boolean parseCommand(String input, List<Task> taskList) {
         String[] inputBreakdown = input.split(" ", 2);
         CommandType commandType;
         String commandSuffix = null;
