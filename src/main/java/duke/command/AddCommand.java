@@ -13,11 +13,25 @@ public class AddCommand extends Command {
     protected Task.TaskType taskType;
     protected String inputArgs;
 
+    /**
+     * Constructor for the Add Command.
+     *
+     * @param type The type of task to be added.
+     * @param args The arguments required by the construction of the task to be added.
+     */
     public AddCommand(Task.TaskType type, String args) {
         this.taskType = type;
         this.inputArgs = args;
     }
 
+    /**
+     * Executes the Add Command.
+     * Adds a new task to the taskList, and output a notification through the ui.
+     *
+     * @param taskList The TaskList to add the new Task into.
+     * @param ui The Ui used to print any notifications.
+     * @throws DukeException If an unsupported task type is found.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         DukeException.throwIf(inputArgs.equals(""), String.format("The description of a duke.task cannot be empty!"));
