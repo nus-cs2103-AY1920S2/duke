@@ -2,6 +2,7 @@ package com.duke;
 
 import com.duke.command.Command;
 import com.duke.task.TaskList;
+import com.duke.task.Todo;
 import com.duke.util.DukeException;
 import com.duke.util.Parser;
 import com.duke.util.Storage;
@@ -46,7 +47,9 @@ public class Duke {
 
 
     public static void main(String[] args) {
+        Todo a = new Todo("test!");
         new Duke("../duke/data/duke.txt").run();
+
     }
 }
 
