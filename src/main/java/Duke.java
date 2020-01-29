@@ -1,4 +1,5 @@
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -154,6 +155,12 @@ public class Duke {
             System.out.println("       " + newTask);
             System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
             printFormatting();
+
+        } catch (DateTimeException ex) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! Please format your date and time correctly.\n" +
+                    "    ____________________________________________________________\n" +
+                    "\n");
 
         } catch (Exception ex) {
 
