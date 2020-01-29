@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
->>>>>>> branch-Level-8
 /**
  * Event
  *
