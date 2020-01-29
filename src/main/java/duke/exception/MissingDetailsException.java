@@ -1,4 +1,6 @@
-class MissingDetailsException extends DukeException {
+package duke.exception;
+
+public class MissingDetailsException extends DukeException {
 
     @Override
     public String toString() {

@@ -1,4 +1,6 @@
-class Event extends Task {
+package duke.task;
+
+public class Event extends Task {
     String atEvent;
 
     public Event(boolean taskCompleted, int taskNo, String taskName, String atEvent) {

@@ -1,4 +1,6 @@
-class UnknownTaskException extends DukeException {
+package duke.exception;
+
+public class UnknownTaskException extends DukeException {
 
     @Override
     public String toString() {

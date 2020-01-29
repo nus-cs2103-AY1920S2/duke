@@ -1,4 +1,6 @@
-class MissingAtEventException extends DukeException {
+package duke.exception;
+
+public class MissingAtEventException extends DukeException {
 
     @Override
     public String toString() {

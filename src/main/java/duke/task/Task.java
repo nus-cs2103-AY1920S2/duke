@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.io.Serializable;
 
-class Task implements Serializable {
+public class Task implements Serializable {
     boolean taskCompleted;
     int taskNo;
     String taskName;

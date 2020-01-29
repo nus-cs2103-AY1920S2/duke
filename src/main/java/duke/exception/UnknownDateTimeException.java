@@ -1,4 +1,6 @@
-class UnknownDateTimeException extends DukeException {
+package duke.exception;
+
+public class UnknownDateTimeException extends DukeException {
 
     @Override
     public String toString() {

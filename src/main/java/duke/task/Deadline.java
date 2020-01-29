@@ -1,5 +1,7 @@
-class Deadline extends Task {
-    String byDeadline;
+package duke.task;
+
+public class Deadline extends Task {
+    public String byDeadline;
 
     public Deadline(boolean taskCompleted, int taskNo, String taskName, String byDeadline) {
         super(taskCompleted, taskNo, taskName);

@@ -1,4 +1,6 @@
-class CannotSaveFileException extends DukeException {
+package duke.exception;
+
+public class CannotSaveFileException extends DukeException {
 
     @Override
     public String toString() {

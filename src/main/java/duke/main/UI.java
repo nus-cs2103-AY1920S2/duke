@@ -1,3 +1,5 @@
+package duke.main;
+
 public class UI {
     //Custom welcome Method to print a welcome message
     static void welcome() {
@@ -5,7 +7,7 @@ public class UI {
     }
 
     //Custom print Method to print simple inputs
-    static void print(String output) {
+    public static void print(String output) {
         System.out.println("____________________________________________________________");
         System.out.println(output);
         System.out.println("____________________________________________________________\n");

@@ -1,4 +1,6 @@
-class CannotReadFileException extends DukeException {
+package duke.exception;
+
+public class CannotReadFileException extends DukeException {
 
     @Override
     public String toString() {

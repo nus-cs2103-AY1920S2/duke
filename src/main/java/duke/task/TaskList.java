@@ -1,8 +1,13 @@
+package duke.task;
+
+import duke.main.UI;
+import duke.exception.UnknownTaskException;
+
 import java.util.List;
 
 public class TaskList {
     //Custom deleteCommand Method to delete Tasks
-    static void deleteTask(List<Task> taskList, String commandSuffix) throws UnknownTaskException {
+    public static void deleteTask(List<Task> taskList, String commandSuffix) throws UnknownTaskException {
         try {
             int deleteTaskNo = Integer.parseInt(commandSuffix) - 1;
             Task deletedShadowTask = taskList.get(deleteTaskNo);
@@ -20,7 +25,7 @@ public class TaskList {
     }
 
     //Custom doneCommand Method to mark Tasks as done
-    static void doneTask(List<Task> taskList, String commandSuffix) throws UnknownTaskException {
+    public static void doneTask(List<Task> taskList, String commandSuffix) throws UnknownTaskException {
         try {
             int doneTaskNo = Integer.parseInt(commandSuffix) - 1;
             taskList.get(doneTaskNo).taskCompleted = true;

@@ -1,3 +1,13 @@
+package duke.main;
+
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.exception.DukeException;
+import duke.exception.MissingDetailsException;
+import duke.exception.UnknownCommandException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.List;
 
 public class Parser {
