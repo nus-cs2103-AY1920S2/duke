@@ -2,12 +2,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+ * Deadlines: tasks that need to be done before a specific date/time
+ * e.g., submit report by 11/10/2019 5pm.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by = null;
+    private LocalDateTime by = null;
 
     /**
+     * creates a new Deadline.
      * @param description the description of the deadline
      * @param by the time of the deadline
      * @param format the format to be used to parse this
@@ -18,20 +20,21 @@ public class Deadline extends Task {
     }
 
     /**
+     * returns output string.
      * @return String to be output to the user
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(FORMATTER) + ")";
     }
 
     /**
+     * returns file data string.
      * @return String for the file format
      */
     @Override
     public String fileString() {
-        return "D | " + this.getStatusIcon() + " | " + description + " | " +
-                by.format(formatter);
+        return "D | " + this.getStatusIcon() + " | " + getDescription() + " | "
+                + by.format(FORMATTER);
     }
 }

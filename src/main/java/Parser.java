@@ -1,19 +1,20 @@
 import java.util.Scanner;
 
 /**
- * deals with making sense of the user command
+ * deals with making sense of the user command.
  */
 public class Parser {
-    public Scanner sc = new Scanner(System.in);
-    public static Ui ui = new Ui();
-    public static TaskList taskList;
+    private Scanner sc = new Scanner(System.in);
+    private Ui ui = new Ui();
+    private TaskList taskList;
 
     public Parser() {
         this.taskList = Duke.taskList;
     }
 
     /**
-     * scans user input until a bye command is reached. parses each line entered in by the user
+     * scans user input until a bye command is reached. parses each line
+     * entered in by the user
      */
     public void parse() {
         String command = sc.nextLine();
@@ -23,42 +24,43 @@ public class Parser {
                     taskList.list();
 
                 } else if (command.startsWith("done")) {
-                    DukeException.checkCommand(command, "done", taskList.size());
+                    ui.checkCommand(command, "done", taskList.size());
                     taskList.done(Integer.valueOf(command.split(" ")[1]) - 1);
 
                 } else if (command.startsWith("delete")) {
-                    DukeException.checkCommand(command, "delete", taskList.size());
+                    ui.checkCommand(command, "delete", taskList.size());
                     taskList.delete(Integer.valueOf(command.split(" ")[1]) - 1);
                 } else {
                     String[] arr = command.split("/");
                     String[] description = (arr[0].split(" ", 2));
 
                     if (command.startsWith("todo")) {
-                        DukeException.checkDescription(description, "todo");
+                        ui.checkDescription(description, "todo");
                         taskList.add(new ToDo(description[1]), "print");
 
                     } else if (command.startsWith("deadline")) {
-                        DukeException.checkDescription(description, "deadline");
-                        DukeException.checkTime(arr, "deadline");
+                        ui.checkDescription(description, "deadline");
+                        ui.checkTime(arr, "deadline");
                         taskList.add(new Deadline(description[1],
-                                arr[1].split(" ", 2)[1], Task.parser), "print");
+                                arr[1].split(" ", 2)[1], Task.PARSER), "print");
 
                     } else if (command.startsWith("event")) {
-                        DukeException.checkDescription(description, "event");
-                        DukeException.checkTime(arr, "event");
+                        ui.checkDescription(description, "event");
+                        ui.checkTime(arr, "event");
                         taskList.add(new Event(description[1],
-                                arr[1].split(" ", 2)[1], Task.parser), "print");
+                                arr[1].split(" ", 2)[1], Task.PARSER), "print");
 
                     } else if (command.startsWith("find")) {
                         taskList.find(description[1]);
 
                     } else {
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("I'm sorry, but I don't know "
+                                + "what that means :-(");
                     }
 
                 }
             } catch (DukeException e) {
-                ui.dukePrint("☹ OOPS!!! " + e.getMessage()+ "\n");
+                ui.dukePrint("☹ OOPS!!! " + e.getMessage() + "\n");
             } finally {
                 command = sc.nextLine();
             }

@@ -1,33 +1,88 @@
 /**
- *  deals with interactions with the user
+ *  deals with interactions with the user.
  */
 public class Ui {
 
-    public String logo = " ____        _        \n"
+    private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private final String HORIZONTAL_LINES = "__________________________________"
+            + "____________________________________________________________\n";
+
     /**
-     * Says hi to the user and includes the logo
+     * Says hi to the user and includes the logo.
      */
     public void start() {
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
     public String horizontalLines() {
-        return "__________________________________________________________________________________________________________\n";
+        return this.HORIZONTAL_LINES;
     }
 
     /**
-     * prints output in a more user friendly format
+     * prints output in a more user friendly format.
      * @param input the string to be outputted
      */
-    public void dukePrint (String input) {
+    public void dukePrint(String input) {
         System.out.print(horizontalLines());
         System.out.print(input);
         System.out.print(horizontalLines());
+    }
+
+    /**
+     * checks whether done/delete command entered by used is valid.
+     * @param command the line input by the user
+     * @param insert the name of the command (either done or delete)
+     * @param listSize the current size of Tasklist
+     * @throws DukeException throws an exception is the command is invalid
+     */
+    public void checkCommand(String command, String insert,
+                             int listSize) throws DukeException {
+        String[] arr = command.split(" ");
+        if (arr.length < 2) {
+            throw new DukeException("The task to be marked as " + insert
+                    + " must be specified");
+        }
+        if (Integer.valueOf(arr[1]) - 1 >= listSize) {
+            throw new DukeException("Task " + arr[1] + " does not exist");
+        }
+    }
+
+    /**
+     * checks if the description for the task entered by the user is valid.
+     * @param description the input
+     * @param insert the type of task (either todo, deadline or event)
+     * @throws DukeException throws an exception is the command is invalid
+     */
+    public void checkDescription(String[] description, String insert)
+            throws DukeException {
+        if (description.length < 2) {
+            throw new DukeException("The description of a " + insert
+                    + " cannot be empty.");
+        }
+    }
+
+    /**
+     * checks if the time for the task entered by the user is valid.
+     * @param arr the input
+     * @param insert the type of task (either deadline or event)
+     * @throws DukeException throws an exception is the command is invalid
+     */
+    public void checkTime(String[] arr, String insert)
+            throws DukeException {
+        if (arr.length < 2) {
+            throw new DukeException("The time of a " + insert
+                    + " cannot be empty.");
+        }
+        String[] time = (arr[1].split(" ", 2));
+        if (time.length < 2) {
+            throw new DukeException("The time of a " + insert
+                    + " cannot be empty.");
+        }
     }
 }

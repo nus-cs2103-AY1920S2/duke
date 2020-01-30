@@ -1,9 +1,10 @@
 /**
- * ToDos: tasks without any date/time attached to it e.g., visit new theme park
+ * ToDos: tasks without any date/time attached to it e.g., visit new theme park.
  */
 public class ToDo extends Task {
 
     /**
+     * creates a new ToDo.
      * @param description the description of the todo
      */
     public ToDo(String description) {
@@ -11,6 +12,7 @@ public class ToDo extends Task {
     }
 
     /**
+     * returns the output string.
      * @return String to be output to the user
      */
     @Override
@@ -19,10 +21,11 @@ public class ToDo extends Task {
     }
 
     /**
+     * returns the file data string.
      * @return String for the file format
      */
     @Override
     public String fileString() {
-        return "T | " + this.getStatusIcon() + " | " + description;
+        return "T | " + this.getStatusIcon() + " | " + this.getDescription();
     }
 }
