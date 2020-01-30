@@ -1,6 +1,11 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.enums.ErrorCodes;
+import duke.exceptions.DukeException;
 
 public class Deadline extends Task {
     private String deadlineDate;
@@ -18,9 +23,9 @@ public class Deadline extends Task {
             this.deadlineDate = deadlineArgs.split(" /by ")[1];
             this.parsedDate = LocalDate.parse(deadlineDate);
         } catch (DateTimeParseException e) {
-            throw new DukeException(5);
+            throw new DukeException(ErrorCodes.INVALID_DATE_FORMAT);
         } catch (Exception e) {
-            throw new DukeException(3);
+            throw new DukeException(ErrorCodes.MISSING_DEADLINE_DATE);
         }
     }
 

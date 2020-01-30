@@ -1,6 +1,11 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.enums.ErrorCodes;
+import duke.exceptions.DukeException;
 
 public class Event extends Task {
     private String eventDate;
@@ -18,9 +23,9 @@ public class Event extends Task {
             this.eventDate = eventArgs.split(" /at ")[1];
             this.parsedDate = LocalDate.parse(eventDate);
         } catch (DateTimeParseException e) {
-            throw new DukeException(5);
+            throw new DukeException(ErrorCodes.INVALID_DATE_FORMAT);
         } catch (Exception e) {
-            throw new DukeException(2);
+            throw new DukeException(ErrorCodes.MISSING_EVENT_DATE);
         }
     }
 
