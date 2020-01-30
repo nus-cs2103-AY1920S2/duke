@@ -10,6 +10,7 @@ public enum Instruction {
     FIND_KEYWORD,
     HELP,
     MARK_DONE,
+    MARK_NOT_DONE,
     READ_STORAGE,
     SEARCH_STORAGE,
     STORE_DDL,

@@ -21,14 +21,18 @@ public class CommandParser {
      */
     public Instruction parse(String command) throws UnknownInstructionException {
         String firstWord = command.split("\\s+", 2)[0];
-        if (firstWord.equals(Command.BYE.word) ||
-                firstWord.equals(Command.EXIT.word)
+        if (firstWord.equals(Command.BYE.word)
+                || firstWord.equals(Command.EXIT.word)
+                || firstWord.equals(Command.EXI.word)
+                || firstWord.equals(Command.EX.word)
         ) {
             return Instruction.TERMINATE;
         } else if (firstWord.equals(Command.DELETE.word)) {
             return Instruction.DELETE;
         } else if (firstWord.equals(Command.DONE.word)) {
             return Instruction.MARK_DONE;
+        } else if (firstWord.equals(Command.NOT_DONE.word)) {
+            return Instruction.MARK_NOT_DONE;
         } else if (firstWord.equals(Command.LIST.word)) {
             return Instruction.READ_STORAGE;
         } else if (firstWord.equals(Command.DEADLINE.word)) {

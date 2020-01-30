@@ -93,6 +93,17 @@ public class Storage {
     }
 
     /**
+     * Resets a specific item on the list
+     * to "not done"
+     *
+     * @param index The index of the item,
+     *              as it appears in the list
+     */
+    public void markNotDone(int index) {
+        this.storedTasks.get(index - 1).markNotDone();
+    }
+
+    /**
      * Retrieves an entry from the stored
      * items (at index i)
      *

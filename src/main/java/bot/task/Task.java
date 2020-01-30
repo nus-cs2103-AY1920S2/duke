@@ -34,6 +34,13 @@ public abstract class Task {
     }
 
     /**
+     * Mark this task as NOT done
+     */
+    public void markNotDone() {
+        this.doneStatus = false;
+    }
+
+    /**
      * Checks if this Task is completed
      *
      * @return True if Task was previously marked as

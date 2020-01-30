@@ -88,6 +88,21 @@ public class Duke {
                 System.out.println(store.retrieve(index));
 
                 store.saveToDisk(botStore);
+            } else if (next == Instruction.MARK_NOT_DONE) {
+                int index;
+                try {
+                    index = getListIndex(command, Command.NOT_DONE);
+                } catch (InadequateArgumentsException |
+                        NumberFormatException | TooManyArgumentsException e
+                ) {
+                    botUi.showError(e);
+                    continue;
+                }
+                store.markNotDone(index);
+                botUi.showNotDone();
+                System.out.println(store.retrieve(index));
+
+                store.saveToDisk(botStore);
             } else if (next == Instruction.DELETE) {
                 int index;
                 try {

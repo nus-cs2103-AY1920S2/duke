@@ -22,6 +22,8 @@ public class Ui {
             "4LC3N-BOT initialised.\nGreetings, humans!";
     private static final String AWAITING_MESSAGE = "\n> ENTER your input:";
     private static final String DONE_MESSAGE = "You have completed: ";
+    private static final String NOT_DONE_MESSAGE =
+            "Status of task has been set to not done:";
     private static final String ERROR_MESSAGE = "      _.-'''''-._  \n"
             + "    /=_.-~-~-~-._=\\\n"
             + "   :               :\n"
@@ -98,7 +100,7 @@ public class Ui {
             + "                           |\n"
             + "                           | or this format: DD-MM-YYYY\n"
             + "\n"
-            + "exit                       | Terminates the bot\n"
+            + "ex/exi/exit                | Terminates the bot\n"
             + "\n"
             + "find <word>                | Finds tasks with that word\n"
             + "                           | in the description\n"
@@ -106,6 +108,8 @@ public class Ui {
             + "help                       | Shows this help message\n"
             + "\n"
             + "list                       | Shows the list of tasks\n"
+            + "\n"
+            + "notdone <number>           | Marks a task as NOT done\n"
             + "\n"
             + "todo <text>                | Creates a new to-do with\n"
             + "                           | description <text>\n"
@@ -164,6 +168,15 @@ public class Ui {
     public void showDone() {
         System.out.println(Ui.DONE_MESSAGE);
     }
+
+    /**
+     * Displays the not done message
+     * (task set to "not done")
+     */
+    public void showNotDone() {
+        System.out.println(Ui.NOT_DONE_MESSAGE);
+    }
+
 
     /**
      * Displays an error message
