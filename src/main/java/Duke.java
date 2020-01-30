@@ -9,12 +9,21 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructs a new Duke with the given data storage path.
+     *
+     * @param path The file path of Duke data file.
+     */
     public Duke(String path) {
         this.ui = new Ui();
         this.storage = new Storage(path);
         this.tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Runs Duke to take in user input and display reply until termination.
+     * Task data is stored when running.
+     */
     public void run() {
         ui.printLogo();
         ui.printGreet();

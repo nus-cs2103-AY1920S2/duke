@@ -46,12 +46,17 @@ public abstract class Task {
     }
 
     /**
-     * Mark this task status as done.
+     * Marks this task status as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Gets String representation of the task when storing in data file.
+     *
+     * @return String representation of the task data
+     */
     public String getData() {
         return "|" + (this.isDone ? 1 : 0) + "|" + this.description;
     }
