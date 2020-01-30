@@ -1,17 +1,33 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represent a task which is a user's Event task given by user.
+ *
+ * @author Kenny Ho
+ */
 public class Event extends Task{
 
     protected final String eventLogo = "E";
     private LocalDate time;
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Constructor for Event class.
+     *
+     * @param taskName Description of the event.
+     * @param by LocalDate object of when event is happening.
+     */
     public Event(String taskName, LocalDate by) {
         super(taskName);
         this.time = by;
     }
 
+    /**
+     * Return a String object of when the event is happening.
+     *
+     * @return Date of when the event is happening in the format of MMM-dd-YYYY.
+     */
     public String getTime() {
         return time.format(outputFormat);
     }

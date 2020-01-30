@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * The Ui class implements the interaction between the User and
+ * Represents the interaction between the User and
  * the Personal Assistant Chatbot EXE.
  *
  * @author Kenny Ho

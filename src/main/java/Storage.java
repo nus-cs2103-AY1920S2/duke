@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The Storage class implements the functionality of loading
+ * Represents a storage with the functionality of loading
  * tasks and saving tasks from and into a text file located
  * in the relative file path given.
  *

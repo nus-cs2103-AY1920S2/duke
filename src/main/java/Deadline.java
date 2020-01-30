@@ -1,17 +1,33 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task which is a user's Deadline task given by user.
+ *
+ * @author Kenny Ho
+ */
 public class Deadline extends Task{
 
     protected final String deadlineLogo = "D";
     private LocalDate by;
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Deadline(String taskName, LocalDate by) {
-        super(taskName);
+    /**
+     * Constructor of DeadLine class.
+     *
+     * @param description Description describing the Deadline task.
+     * @param by LocalDate object of when the deadline is.
+     */
+    public Deadline(String description, LocalDate by) {
+        super(description);
         this.by = by;
     }
 
+    /**
+     * Return a String object of the task deadline.
+     *
+     * @return Date of task deadline in the format of MMM-dd-YYYY.
+     */
     public String getBy() {
         return by.format(outputFormat);
     }

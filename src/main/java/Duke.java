@@ -2,8 +2,8 @@ import java.io.IOException;
 import java.time.DateTimeException;
 
 /**
- * The Duke program implements a Personal Assistant Chatbot
- * named EXE that helps a person to keep track of various things.
+ * Represents a Personal Assistant Chatbot named EXE that
+ * helps a person to keep track of various things.
  *
  * @author Kenny Ho
  * @since 2020-01-20

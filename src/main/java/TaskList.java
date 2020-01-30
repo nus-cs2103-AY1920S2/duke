@@ -2,10 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The TaskList class implements the functionality of adding new tasks,
- * deleting existing tasks, and basic getters to allow retrieval of
- * information on list of users task such as size of list, the list
- * itself and specific task.
+ * Represents the existing list of tasks user have stored including
+ * the functionality of adding new tasks, deleting existing tasks
+ * and basic getters to allow retrieval of information on list
+ * of users task such as size of list, the list itself and specific
+ * task.
  *
  * @author Kenny Ho
  */

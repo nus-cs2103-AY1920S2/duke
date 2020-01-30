@@ -1,14 +1,35 @@
+/**
+ * Represents most of the exception generated when user give
+ * wrong input format or invalid command.
+ *
+ * @author Kenny Ho
+ */
 public class DukeException extends Exception {
 
     protected DukeErrorType errorType;
     protected String commandName;
 
+    /**
+     * Constructor for DukeException class. Used if error message should include command
+     * name to be printed.
+     *
+     * @param message String object which represents the message user want to display without using toString method.
+     * @param errorType An Enum class categorising which error type encountered.
+     * @param commandName Command name of the command given by user.
+     */
     public DukeException(String message, DukeErrorType errorType, String commandName) {
         super(message);
         this.errorType = errorType;
         this.commandName = commandName;
     }
 
+    /**
+     * Another constructor for DukeException class. Used if error message do not require
+     * command name to be printed
+     *
+     * @param message String object which represents the message user want to display without using toString method.
+     * @param errorType An Enum class categorising which error type encountered.
+     */
     public DukeException(String message, DukeErrorType errorType) {
         super(message);
         this.errorType = errorType;

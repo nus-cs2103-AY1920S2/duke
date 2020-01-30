@@ -1,6 +1,6 @@
 /**
- * The Command abstract class sets a certain outline for other
- * command class to follow.
+ * Represents as an outline what a command carried about by
+ * Chatbot should be able to do.
  * Any class that extends this class must implement method
  * execute and isExit.
  * Only inherits from this class according to what Chatbot can

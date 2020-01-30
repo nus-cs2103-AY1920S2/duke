@@ -1,14 +1,25 @@
+/**
+ * Represents a task which is a user todo task with description of it
+ * tagged.
+ *
+ * @author Kenny Ho
+ */
+
 public class ToDo extends Task{
     protected final String toDoLogo = "T";
 
     /**
+     * Constructor that stores the description of todo task.
      *
-     * @param taskName
+     * @param description description of task.
      */
-    public ToDo(String taskName) {
-        super(taskName);
+    public ToDo(String description) {
+        super(description);
     }
 
+    /**
+     * An empty constructor.
+     */
     public ToDo() {
         super("");
     }
