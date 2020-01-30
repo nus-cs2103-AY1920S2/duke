@@ -8,7 +8,7 @@ public class EventTask extends Task {
 
     @Override
     public String toStorage() {
-        return String.format("E,%s,%b,%s", this.description, this.isDone, this.when.withFormat(Date.INPUT_FORMAT));
+        return String.format("E,%s,%b,%s", this.description, this.isDone, this.when.toStorage());
     }
 
     @Override

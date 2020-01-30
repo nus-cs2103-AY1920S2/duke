@@ -24,10 +24,10 @@ public class Task {
 
             Task output;
             if (type.equals("D")) {
-                Date date = new Date(parsedArgs[3]);
+                Date date = Date.fromStorage(parsedArgs[3]);
                 output = new DeadlineTask(parsedArgs[1], date);
             } else if (type.equals("E")) {
-                Date date = new Date(parsedArgs[3]);
+                Date date = Date.fromStorage(parsedArgs[3]);
                 output = new EventTask(parsedArgs[1], date);
             } else {
                 output = new Task(parsedArgs[1]);
