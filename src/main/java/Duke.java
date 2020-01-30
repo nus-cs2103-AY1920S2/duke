@@ -3,15 +3,19 @@ import task.Todo;
 import task.Deadline;
 import task.Event;
 
+import java.io.EOFException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    public static final String FILEPATH = "data\\duke.txt";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Task> taskList = ListStateSaver.loadSavedList(FILEPATH);
         System.out.println("Hello there! I am Duke, your personal assistant. May I know your name?");
         String name = scanner.nextLine();
-        ArrayList<Task> taskList = new ArrayList<>();
+
         boolean isActiveMode = true;
 
         while (isActiveMode) {
@@ -119,6 +123,7 @@ public class Duke {
 
                 case "bye":
                     isActiveMode = false;
+                    ListStateSaver.saveListState(FILEPATH, taskList);
                     System.out.println("\t" + "Adios. It was my pleasure assisting you. Keep smiling " + name + ".");
                     break;
 

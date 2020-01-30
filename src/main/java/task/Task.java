@@ -1,6 +1,8 @@
 package task;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     protected String identifier;
     protected boolean isCompleted;
 
