@@ -1,7 +1,16 @@
 package duke.command;
 
 import duke.Duke;
-import duke.command.method.*;
+// import duke.command.method.*;
+import duke.command.method.ByeCommandMethod;
+import duke.command.method.CommandMethod;
+import duke.command.method.DeadlineCommandMethod;
+import duke.command.method.DeleteCommandMethod;
+import duke.command.method.DoneCommandMethod;
+import duke.command.method.EventCommandMethod;
+import duke.command.method.FindCommandMethod;
+import duke.command.method.ListCommandMethod;
+import duke.command.method.TodoCommandMethod;
 import duke.exception.DukeException;
 import duke.exception.DukeNoCommandException;
 import duke.exception.DukeUnrecognisedCommandException;
@@ -27,37 +36,37 @@ public class Command {
             arguments = new String[0];
         }
         switch (name) {
-            case "": {
-                throw new DukeNoCommandException();
-            }
-            case TodoCommandMethod.NAME: {
-                return new Command(name, arguments, new TodoCommandMethod());
-            }
-            case EventCommandMethod.NAME: {
-                return new Command(name, arguments, new EventCommandMethod());
-            }
-            case DeadlineCommandMethod.NAME: {
-                return new Command(name, arguments,
-                        new DeadlineCommandMethod());
-            }
-            case ListCommandMethod.NAME: {
-                return new Command(name, arguments, new ListCommandMethod());
-            }
-            case DoneCommandMethod.NAME: {
-                return new Command(name, arguments, new DoneCommandMethod());
-            }
-            case DeleteCommandMethod.NAME: {
-                return new Command(name, arguments, new DeleteCommandMethod());
-            }
-            case FindCommandMethod.NAME: {
-                return new Command(name, arguments, new FindCommandMethod());
-            }
-            case ByeCommandMethod.NAME: {
-                return new Command(name, arguments, new ByeCommandMethod());
-            }
-            default: {
-                break;
-            }
+        case "": {
+            throw new DukeNoCommandException();
+        }
+        case TodoCommandMethod.NAME: {
+            return new Command(name, arguments, new TodoCommandMethod());
+        }
+        case EventCommandMethod.NAME: {
+            return new Command(name, arguments, new EventCommandMethod());
+        }
+        case DeadlineCommandMethod.NAME: {
+            return new Command(name, arguments,
+                    new DeadlineCommandMethod());
+        }
+        case ListCommandMethod.NAME: {
+            return new Command(name, arguments, new ListCommandMethod());
+        }
+        case DoneCommandMethod.NAME: {
+            return new Command(name, arguments, new DoneCommandMethod());
+        }
+        case DeleteCommandMethod.NAME: {
+            return new Command(name, arguments, new DeleteCommandMethod());
+        }
+        case FindCommandMethod.NAME: {
+            return new Command(name, arguments, new FindCommandMethod());
+        }
+        case ByeCommandMethod.NAME: {
+            return new Command(name, arguments, new ByeCommandMethod());
+        }
+        default: {
+            break;
+        }
         }
         throw new DukeUnrecognisedCommandException(name);
     }
