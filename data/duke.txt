@@ -1,0 +1,5 @@
+1.[T][N] go home
+2.[D][N] duke project (by: 2020-01-31)
+3.[E][N] no sleep (at: 2020-01-30)
+4.[T][N] head home
+5.[T][N] home home
