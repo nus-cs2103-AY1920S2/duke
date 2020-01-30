@@ -179,6 +179,7 @@ public class Ui {
         this.print("event [desc.] /at [time] \t\tCreate Event.");
         this.print("deadline [desc.] /by [time] \tCreate Deadline.");
         this.print("done [index] \t\t\t\t\tComplete task at index.");
+        this.print("find [word(s)] \t\t\t\t\tFind tasks with said word(s).");
         this.print("delete [index] \t\t\t\t\tDelete task at index.");
         this.print("bye \t\t\t\t\t\t\tBid farewell (sounds great!).");
         this.print("help \t\t\t\t\t\t\tSee this message again.");
