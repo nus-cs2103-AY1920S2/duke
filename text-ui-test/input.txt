@@ -1,9 +1,7 @@
-abc
-list
-todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+todo read book
 done 1
-done 4
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
 list
+done 3
+todo join sports club
