@@ -10,10 +10,31 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
+/**
+ * The {@code DateTimeParser} is a helper class with static
+ * methods to parse user provided inputs into {@code LocalDateTime}
+ * objects.
+ */
 public class DateTimeParser {
-    public static DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    public static DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("d/M/yyyy");
+    /**
+     * {@code DateTimeFormatter} that recognises the pattern "d/M/yy HHmm".
+     */
+    public static DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("d/M/yy HHmm");
+    /**
+     * {@code DateTimeFormatter} that recognises the pattern "d/M/yy".
+     */
+    public static DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("d/M/yy");
 
+    /**
+     * Returns a {@code LocalDateTime} object based on the given {@code dateTimeString}.
+     * <p>
+     * Allowed formats for {@code dateTimeString} are days of the week e.g. "Monday";
+     * relative timings e.g. "Today", "Tonight"; of datetime format "d/M/yy" or "d/M/yy HHmm".
+     *
+     * @param dateTimeString User provided input in {@code String} format.
+     * @return {@code LocalDateTime} object based on given {@code dateTimeString}.
+     * @throws DuchessException If {@code dateTimeString} is not of the correct format.
+     */
     public static LocalDateTime parseDateTime(String dateTimeString) throws DuchessException {
         return getDateTimeFromWords(dateTimeString)
                 .or(() -> getDateTimeUsingDateTimePattern(dateTimeString)
