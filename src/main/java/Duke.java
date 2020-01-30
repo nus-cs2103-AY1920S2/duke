@@ -12,16 +12,16 @@ import java.time.LocalDate;
 public class Duke {
 
     protected Ui ui;
-    //protected Storage storage;
+    protected Storage storage;
     protected Tasklist tasklist;
 
     public Duke(String file) {
         this.ui = new Ui();
-        //this.storage = new Storage(file);
-        this.tasklist = new Tasklist();
+        this.storage = new Storage(file);
+        this.tasklist = new Tasklist(storage.readFile());
     }
 
-    public void run() throws DukeException {
+    public void run() {
         this.ui.printIntro();
         Scanner myScanner = new Scanner(System.in);
 
@@ -31,7 +31,7 @@ public class Duke {
                 String[] parsed = TextParser.myFirstParser(word);
                 String keyword = parsed[0];
                 if (keyword.equals("bye")) {
-                    // writeFile("./list.txt", list);
+                    this.storage.writeFile(this.tasklist.mylist);
                     this.ui.printMessage("Bye. Hope to see you again soon!");
                     break;
                 } else if (keyword.equals("list")) {
@@ -77,64 +77,8 @@ public class Duke {
         }
     }
 
-
-
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke("./list.txt").run();
     }
 
-    public static void readFile(String file, ArrayList<Task> taskList) {
-        try {
-
-            File f = new File(file);
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String current = s.nextLine();
-                String[] arrSplit = current.split("/");
-                Task currentTask = null;
-
-                switch (arrSplit[0]) {
-                    case "T":
-                        currentTask = new Todo(arrSplit[2]);
-                        break;
-                    case "D":
-                        currentTask = new Deadline(arrSplit[2], LocalDate.parse(arrSplit[3]));
-                        break;
-                    case "E":
-                        currentTask = new Event(arrSplit[2], LocalDate.parse(arrSplit[3]));
-                        break;
-                }
-
-                if (arrSplit[1].equals("1")) { // 1 meaning done
-                    currentTask.markAsDone();
-                }
-                taskList.add(currentTask);
-            }
-            s.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void writeFile(String file, ArrayList<Task> taskList) {
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(file);
-            for (Task current : taskList) {
-                if (current instanceof Todo) {
-                    writer.write("T" + "/" + current.checkDone() + "/" + current.getTask() +
-                            System.lineSeparator());
-                } else if (current instanceof Deadline) {
-                    writer.write("D" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
-                            ((Deadline) current).getDate() + System.lineSeparator());
-                } else if (current instanceof Event){
-                    writer.write("E" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
-                            ((Event) current).getDate() + System.lineSeparator());
-                }
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -11,4 +11,9 @@ public class TextParser {
         String[] arrSplit = line.split("/", 2);
         return arrSplit;
     }
+
+    public static String[] myThirdParser(String line) {
+        String[] arrSplit = line.split("/");
+        return arrSplit;
+    }
 }

@@ -4,8 +4,8 @@ public class Tasklist {
 
     protected ArrayList<Task> mylist;
 
-    public Tasklist() {
-        mylist = new ArrayList<>();
+    public Tasklist(ArrayList<Task> list) {
+        this.mylist = list;
     }
 
     public void addTask(Task task) {
@@ -27,6 +27,10 @@ public class Tasklist {
 
     public int getSize() {
         return mylist.size();
+    }
+
+    public ArrayList<Task> getList() {
+        return mylist;
     }
 
     public void printList() {
