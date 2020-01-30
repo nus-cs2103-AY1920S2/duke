@@ -9,7 +9,7 @@ then
 fi
 
 # Compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/Duke.java
+if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/Main.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
@@ -26,7 +26,7 @@ do
     fi
 
     # Run the program, feed commands from input.txt file and redirect the output to the actual.TXT
-    java -cp ../bin Duke < "$dir/input.txt" > "$dir/actual.txt"
+    java -cp ../bin Main < "$dir/input.txt" > "$dir/actual.txt"
 
     # Compare the output to the expected output
     diff "$dir/actual.txt" "$dir/expected.txt"
