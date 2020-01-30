@@ -52,13 +52,13 @@ What tasks do you have dude?
     1. [T][✗] borrow book
     -----
     -----
-    duke.exception.EmptyDescriptionException: The description of Event cannot be empty.
+    duke.exception.MissingParameterException: Missing parameters for Event
     -----
     -----
-    duke.exception.EmptyDescriptionException: The description of Todo cannot be empty.
+    duke.exception.MissingParameterException: Missing parameters for Todo
     -----
     -----
-    duke.exception.EmptyDescriptionException: The description of Deadline cannot be empty.
+    duke.exception.MissingParameterException: Missing parameters for Deadline
     -----
     -----
     duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm

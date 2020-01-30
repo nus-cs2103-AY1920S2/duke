@@ -59,9 +59,9 @@ public class Ui {
    * Prints the task list
    * @param tasks the task list
    */
-  public void showList(ArrayList<Task> tasks) {
+  public void showList(ArrayList<Task> tasks, String str) {
     printSmallLine();
-    System.out.println("    Here are the tasks in your list:");
+    System.out.println("    " + str);
     for (int i = 1; i <= tasks.size(); i++) {
       System.out.println("    " + i + ". " + tasks.get(i - 1));
     }

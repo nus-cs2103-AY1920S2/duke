@@ -26,4 +26,7 @@ delete 1
 list
 delete 4
 todo your butt
+search book
+search
+search
 bye

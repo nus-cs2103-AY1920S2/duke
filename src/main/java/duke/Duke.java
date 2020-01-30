@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exception.*;
 
 /** Class Duke, the driver class of the program. */
@@ -33,7 +35,7 @@ public class Duke {
   public void run() throws IOException {
     storage.loadBaby(taskList, parser);
     ui.greeting();
-    ui.showList(taskList.getTaskList());
+    ui.showList(taskList.getTaskList(), "Tasks loaded from disk:");
     ui.initPrompt();
 
     boolean exit = false;
@@ -47,24 +49,30 @@ public class Duke {
             exit = true;
             break;
           case "list":
-            ui.showList(taskList.getTaskList());
+            ui.showList(taskList.getTaskList(), "Here are the tasks in your list:");
+            break;
+          case "search":
+            if (keywords.length == 1) throw new MissingParameterException("Search");
+            handleSearch(keywords[1]);
             break;
           case "done":
+            if (keywords.length == 1) throw new MissingParameterException("Done");
             handleDone(keywords[1]);
             break;
           case "delete":
+            if (keywords.length == 1) throw new MissingParameterException("Delete");
             handleDelete(keywords[1]);
             break;
           case "todo":
-            if (keywords.length == 1) throw new EmptyDescriptionException("Todo");
+            if (keywords.length == 1) throw new MissingParameterException("Todo");
             handleTodo(keywords[1]);
             break;
           case "event":
-            if (keywords.length == 1) throw new EmptyDescriptionException("Event");
+            if (keywords.length == 1) throw new MissingParameterException("Event");
             handleEvent(keywords[1]);
             break;
           case "deadline":
-            if (keywords.length == 1) throw new EmptyDescriptionException("Deadline");
+            if (keywords.length == 1) throw new MissingParameterException("Deadline");
             handleDeadline(keywords[1]);
             break;
           default:
@@ -73,7 +81,7 @@ public class Duke {
 
         storage.saveBaby(taskList.getTaskList());
 
-      } catch (EmptyDescriptionException
+      } catch (MissingParameterException
           | MissingTimeException
           | UnknownCommandException
           | TimeFormatException
@@ -84,6 +92,20 @@ public class Duke {
       }
     }
     ui.bye();
+  }
+
+  /**
+   * Handles the searching for key in the task list
+   * @param key String that we want to look for in the task.
+   */
+  public void handleSearch(String key) {
+    ArrayList<Task> tasksWithKey = new ArrayList<>();
+    for (Task t: taskList.getTaskList()) {
+      if (t.toString().contains(key)) {
+        tasksWithKey.add(t);
+      }
+    }
+    ui.showList(tasksWithKey, "Here are the tasks that contains '" + key + "' in your list:");
   }
 
   /**
