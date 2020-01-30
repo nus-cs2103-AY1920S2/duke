@@ -3,8 +3,19 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents the entire Duke program, basically an interactive To-do List.
+ */
 public class Duke {
-
+    /**
+     * Main logic of Duke, handles all possible commands and certain input errors.
+     * 
+     * @param sc       Scanner object to scan for user input
+     * @param taskList TaskList of Task objects
+     * @param tasks    String object of tasks, read from disk memory
+     * @throws DukeException Handles invalid input
+     * @throws IOException   Handles file reading and writing errors
+     */
     public static void run(Scanner sc, TaskList taskList, String tasks) throws DukeException, IOException {
 
         String input = sc.nextLine();
@@ -20,7 +31,7 @@ public class Duke {
 
         } else if (command.equals("list")) {
             ui.print(taskList.toString());
-        
+
         } else if (command.equals("done")) {
             int index = Integer.parseInt(split[1]) - 1;
             Task done = taskList.list.get(index);
@@ -34,24 +45,22 @@ public class Duke {
             int index = Integer.parseInt(split[1]) - 1;
             Task remove = taskList.list.remove(index);
             numOfTask = taskList.list.size();
-            ui.print("Noted. I've removed this task: \n" + remove 
-                + "\nNow you have " + numOfTask + " task(s) in the list");
+            ui.print("Noted. I've removed this task: \n" + remove + "\nNow you have " + numOfTask
+                    + " task(s) in the list");
 
             tasks = storage.readFromFile();
             storage.removeLine(tasks, index);
-        
+
         } else if (command.equals("todo")) {
             if (split.length == 1) {
-                throw new DukeException("\u2639 OOPS!!!"
-                    + " The description of a todo cannot be empty. \n");
+                throw new DukeException("\u2639 OOPS!!!" + " The description of a todo cannot be empty. \n");
             }
             String desc = input.substring(5);
             Task t = new ToDoTask(desc);
             taskList.list.add(t);
             numOfTask = taskList.list.size();
-            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " 
-                    + numOfTask + " task(s) in the list.");
-            
+            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " + numOfTask + " task(s) in the list.");
+
             storage.writeToFile("T | 0 | " + desc);
 
         } else if (command.equals("deadline")) {
@@ -61,8 +70,7 @@ public class Duke {
             Task t = new DeadlineTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
-            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " 
-                    + numOfTask + " task(s) in the list.");
+            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " + numOfTask + " task(s) in the list.");
 
             storage.writeToFile("D | 0 | " + desc + " | " + time);
 
@@ -73,16 +81,21 @@ public class Duke {
             Task t = new EventTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
-            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " 
-                    + numOfTask + " task(s) in the list.");
-        
+            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " + numOfTask + " task(s) in the list.");
+
             storage.writeToFile("E | 0 | " + desc + " | " + time);
-        
+
         } else {
-            throw new DukeException("\u2639 OOPS!!!"
-                    + " I'm sorry, but I don't know what that means :-( \n");
-        }        
+            throw new DukeException("\u2639 OOPS!!!" + " I'm sorry, but I don't know what that means :-( \n");
+        }
     }
+
+    /**
+     * Main driver of Duke program.
+     * 
+     * @param args Arguments for main method
+     * @throws IOException Handles file reading and writing errors
+     */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Ui ui = new Ui();

@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 
+/**
+ * This represents a list of Tasks
+ */
 public class TaskList {
     ArrayList<Task> list;
-    public TaskList (ArrayList<Task> list) {
+
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
