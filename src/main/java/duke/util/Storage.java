@@ -19,6 +19,7 @@ public class Storage {
 
         Path dirPath = Paths.get(home, "Documents", "Duke");
         Path filePath = Paths.get(home, "Documents", "Duke", "dukeData.txt");
+
         if (Files.exists(dirPath)) {
             if (Files.notExists(filePath))
                 try {

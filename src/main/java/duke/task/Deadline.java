@@ -40,11 +40,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (super.isDone)
-            return bulletin + " [" + doneSymbol + "] " + name + "by "
-                    + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        else
-            return bulletin + " [" + notDoneYetSymbol + "] " + name + "by "
-                    + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("%s [%s] %sby %s",
+                bulletin, (super.isDone ? doneSymbol : notDoneYetSymbol), name,
+                localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

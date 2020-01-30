@@ -24,9 +24,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        if (super.isDone)
-            return bulletin + " [" + doneSymbol + "] " + name;
-        else
-            return bulletin + " [" + notDoneYetSymbol + "] " + name;
+        return String.format("[%s] %s",
+                (super.isDone ? doneSymbol : notDoneYetSymbol), name);
     }
 }

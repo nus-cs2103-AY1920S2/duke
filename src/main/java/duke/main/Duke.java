@@ -47,13 +47,14 @@ public class Duke {
 
         int markPos = parser.isMarkingTaskRequest(str);
         int delPos = parser.isDeleteTaskRequest(str);
+
         if (markPos != -2) {
             try {
                 TaskList.markItemAsDone(markPos, storedItems);
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("markPos error\n%s%s\n%s%s\n%s%s",
-                                padding,uselessLine,padding,e,padding,uselessLine));
+                                padding, uselessLine, padding, e, padding, uselessLine));
             }
         } else if (delPos != -2) {
             try {
@@ -61,7 +62,7 @@ public class Duke {
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("delPos error\n%s%s\n%s%s\n%s%s",
-                                padding,uselessLine,padding,e,padding,uselessLine));
+                                padding, uselessLine, padding, e, padding, uselessLine));
             }
         } else {
             try {
@@ -81,11 +82,13 @@ public class Duke {
                 }
             } catch (InvalidCommandException e) {
                 System.out.println(String.format("%s%s\n%s%s\n%sPlease type something legit\n%s%s",
-                        padding,uselessLine,padding,e,padding,padding,uselessLine));
+                        padding, uselessLine, padding, e, padding, padding, uselessLine));
             } catch (TaskErrorException e) {
-                System.out.println(String.format("%s%s\n%s%s\n%s%s",padding,uselessLine,padding,e,padding,uselessLine));
+                System.out.println(String.format("%s%s\n%s%s\n%s%s",
+                        padding, uselessLine, padding, e, padding, uselessLine));
             }
         }
+
         storage.writeData(storedItems);
     }
 
@@ -106,12 +109,14 @@ public class Duke {
         Scanner sc = new Scanner(str);
         sc.next();
         String[] parts = sc.nextLine().trim().split("/");
+
         if (parts.length == 1 || parts[1].length() == 0 || !parts[1].contains("by") || parts[1].equals("by"))
             throw new TaskErrorException("Missing Deadline 'By' time");
         if (!parts[1].substring(0, 2).equals("by"))
             throw new InvalidCommandException(str);
         if (parts[0].equals(""))
             throw new TaskErrorException("Missing Deadline description");
+
         Task deadline = new Deadline(parts[0], parts[1]);
         storeUserInput(deadline);
         sc.close();
@@ -121,12 +126,14 @@ public class Duke {
         Scanner sc = new Scanner(str);
         sc.next();
         String[] parts = sc.nextLine().trim().split("/");
+
         if (parts.length == 1 || parts[1].length() == 0 || parts[1].equals("at"))
             throw new TaskErrorException("Missing Event 'At' time");
         if (!parts[1].substring(0,2).equals("at"))
             throw new InvalidCommandException(str);
         if (parts[0].equals(""))
             throw new TaskErrorException("Missing Event description");
+
         Task event = new Event(parts[0], parts[1]);
         storeUserInput(event);
         sc.close();
