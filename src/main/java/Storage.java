@@ -8,14 +8,27 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * A module to store and load tasks to and from a file given a path name.
+ */
 public class Storage {
 
     private Path path;
 
+    /**
+     * Constructs a new instance of Storage.
+     *
+     * @param path the file path string.
+     */
     public Storage(Path path) {
         this.path = path;
     }
 
+    /**
+     * Load tasks from the associated file and populate the supplied TaskList.
+     *
+     * @param taskList the task list.
+     */
     public void loadTasks(TaskList taskList) {
 
         try {
@@ -24,15 +37,15 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split("/");
                 switch (task[0]) {
-                    case "T":
-                        taskList.add(new Todo(task[2]));
-                        break;
-                    case "D":
-                        taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
-                        break;
-                    case "E":
-                        taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
-                        break;
+                case "T":
+                    taskList.add(new Todo(task[2]));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
+                    break;
+                case "E":
+                    taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
+                    break;
                 }
                 if (task[1].equals("true")) {
                     try {
@@ -49,6 +62,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save tasks on the supplied TaskList into the associated file.
+     *
+     * @param taskList the supplied TaskList.
+     * @throws IOAelitaException if FileWriter cannot be created.
+     */
     public void saveTasks(TaskList taskList) throws IOAelitaException {
         try {
             if (!Files.exists(path)) {
