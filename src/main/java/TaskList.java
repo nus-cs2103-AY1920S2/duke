@@ -2,40 +2,40 @@ import duke.task.*;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     public boolean isEmpty() {
-        return taskList.isEmpty();
+        return tasks.isEmpty();
     }
 
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     public void add(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     public void remove(int index) {
-        taskList.remove(index);
+        tasks.remove(index);
     }
 
     public String showList() {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "Your task list is empty.";
         } else {
             StringBuilder sb = new StringBuilder("");
             sb.append("Here is your list of tasks: ");
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
                 int index = i + 1;
                 sb.append("\n" + index + "." + task.toString());
             }
