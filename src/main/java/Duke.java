@@ -1,79 +1,23 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    public static int pendingTask = 0;
     public static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
-
-        ArrayList<Task> lst = new ArrayList<>();
-        int pendingTask = 0;
-
-        //load saved files
-        String filePath = "data/duke.txt";
-        FileReader in = new FileReader (filePath);
-        BufferedReader br = new BufferedReader (in);
-        String loadTask = br.readLine();
-        while(loadTask != null) {
-            String type = loadTask.substring(0,1);
-            int descriptIndex = loadTask.indexOf("||");
-            switch(type) {
-                case("T"):
-                    String loadedTDescript = loadTask.substring(descriptIndex + 2);
-                    Todo loadedT = new Todo(loadedTDescript);
-                    if (loadTask.substring (2,3).equals ("1")) {
-                        loadedT.markAsDone();
-                        pendingTask--;
-                    }
-                    lst.add(loadedT);
-                    pendingTask++;
-                    break;
-                case("D"):
-                case("E"):
-                    int timeIndex = loadTask.indexOf("|||");
-                    String loadedDescript = loadTask.substring(descriptIndex + 2, timeIndex);
-                    if (type.equals("D")) {
-                        LocalDate loadedDDate = LocalDate.parse(loadTask.substring(timeIndex + 3));
-                        Deadline loadedD = new Deadline (loadedDescript, loadedDDate);
-                        if (loadTask.substring (2,3).equals ("1")) {
-                            loadedD.markAsDone();
-                            pendingTask--;
-                        }
-                        lst.add(loadedD);
-                        pendingTask++;
-                    } else {
-                        LocalDate loadedEDate = LocalDate.parse(loadTask.substring(timeIndex + 3, timeIndex + 13));
-                        LocalTime loadedStart = LocalTime.parse(loadTask.substring(timeIndex + 14, timeIndex + 19));
-                        LocalTime loadedEnd   = LocalTime.parse(loadTask.substring(timeIndex + 20));
-                        Event loadedE = new Event (loadedDescript, loadedEDate, loadedStart, loadedEnd);
-                        if (loadTask.substring (2,3).equals ("1")) {
-                            loadedE.markAsDone();
-                            pendingTask--;
-                        }
-                        lst.add(loadedE);
-                        pendingTask++;
-                    }
-                    break;
-                default:
-            }
-            loadTask = br.readLine();
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            System.out.println("error somewhere");
         }
-        br.close();
+    }
 
-        //prepare to store new files
-        File file         = new File(filePath);
-        FileWriter fr     = new FileWriter (file, false);
-        BufferedWriter bw = new BufferedWriter (fr);
-
+    public void run() throws IOException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -87,125 +31,41 @@ public class Duke {
             String input = sc.nextLine();
 
             if (input.equals("bye")) {
-                //End programme, save file in hard disk
-                for (int i = 0; i < lst.size(); i++) {
-                    Task savedTask = lst.get(i);
-                    bw.write(savedTask.saveFile() + "\n");
-                }
-                bw.close();
-                fr.close();
-                System.out.println("Cya next time!");
+                storage.save(tasks);
                 break;
             } else if (input.equals("list")) {
-                //List out task
-                int num = lst.size();
-                for (int i = 0; i < num; i++) {
-                    System.out.println((i + 1) + ". " + lst.get(i));
-                }
-                if (num == 0) {
-                    System.out.println ("You have no task!");
-                }
-            } else if (input.contains ("done")) {
-                //Mark task as done with keyword "done" followed by task number
+                tasks.list();
+            } else if (input.contains("done")) {
                 try {
                     int taskNum = Integer.parseInt(input.substring(5));
-                    if (taskNum <= lst.size()) {
-                        Task completedTask = lst.get(taskNum - 1);
-                        if (completedTask.getStatus().equals("Done")) {
-                            System.out.println ("You have already completed this task!");
-                        } else {
-                            for (int i = 0; i < lst.size(); i++) {
-                                Task savedTask = lst.get(i);
-                                bw.write(savedTask.saveFile() + "\n");
-                            }
-                            completedTask.markAsDone();
-                            pendingTask--;
-                        }
-                        if (pendingTask == 0) {
-                            System.out.println ("Yay! You have no more task remaining!");
-                        } else {
-                            System.out.println ("You have " + pendingTask + " tasks remaining!");
-                        }
-                    } else {
-                        System.out.println ("Sorry, there is no such task!");
-                    }
-                } catch (Exception e){
-                    System.out.println ("Sorry, I dont understand you request!");
-                }
-            } else if (input.contains ("delete")) {
-                //Delete task
-                try {
-                    int taskNum = Integer.parseInt(input.substring(7));
-                    if (taskNum <= lst.size()) {
-                        Task deletedTask = lst.get(taskNum - 1);
-                        String status = deletedTask.getStatus();
-                        if (status.equals ("Not Done")) {
-                            //Pending task count drops only if deleted task not completed
-                            pendingTask--;
-                        }
-                        System.out.println ("Noted. I've removed this task:\n" + deletedTask
-                                + "\nNow you have " + pendingTask + " tasks in the list.");
-                        lst.remove (taskNum -1);
-                    } else {
-                        System.out.println ("Sorry, there is no such task!");
-                    }
+                    tasks.done(taskNum);
                 } catch (Exception e) {
-                    System.out.println ("Sorry, there is no such task!");
+                    System.out.println ("Please state a task number:)");
                 }
+            } else if (input.contains("delete")) {
+                //Delete task
+                int taskNum = Integer.parseInt(input.substring(7));
+                tasks.delete(taskNum);
             } else {
                 //Create task using key words: "todo", "deadline", "event"
-                if (input.contains ("todo")) {
+                if (input.contains("todo")) {
                     //todo request format: todo<space><task>
-                    try {
-                        String task1 = input.substring(5);
-                        if (task1.isEmpty()) {
-                            System.out.println ("OOOPS!! Cannot have empty todo request!!!");
-                        } else {
-                            Todo todo = new Todo(task1);
-                            lst.add(todo);
-                            pendingTask++;
-                            System.out.println("Got it. I've added the following task:\n" +
-                                    todo + "\nYou now have " + pendingTask + " task in the list");
-                        }
-                    } catch (Exception e) {
-                        System.out.println ("Huh? I do not understand this todo request:/");
-                    }
-                } else if (input.contains ("deadline")) {
-                    //deadline request format: deadline<space><task></<yyyy-mm-dd>"
-                    try {
-                        int taskIndex = input.indexOf("/");
-                        int byIndex = taskIndex + 1;
-                        LocalDate date = LocalDate.parse(input.substring(byIndex));
-                        Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
-                        lst.add(deadline);
-                        pendingTask++;
-                        System.out.println("Got it. I've added the following task:\n" +
-                                deadline + "\nYou now have " + pendingTask + " task in the list");
-                    } catch (Exception e) {
-                        System.out.println ("Huh? This deadline request does not make sense");
-                    }
-                } else if (input.contains ("event")) {
+                    tasks.addTask("T", input);
+                } else if (input.contains("deadline")) {
+                    //deadline request format: deadline<space><task></><yyyy-mm-dd>
+                    tasks.addTask ("D", input);
+                } else if (input.contains("event")) {
                     //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
-                    try {
-                        int taskIndex   = input.indexOf("/");
-                        int atIndex     = taskIndex + 1;
-                        int timeIndex   = atIndex + 11;
-                        LocalDate date  = LocalDate.parse(input.substring(atIndex,timeIndex - 1));
-                        LocalTime start = LocalTime.parse(input.substring(timeIndex, timeIndex + 5));
-                        LocalTime end   = LocalTime.parse(input.substring(timeIndex + 6));
-                        Event event = new Event(input.substring(6, taskIndex), date, start, end);
-                        lst.add(event);
-                        pendingTask++;
-                        System.out.println("Got it. I've added the following task:\n" +
-                                event + "\nYou now have " + pendingTask + " task in the list");
-                    } catch (Exception e) {
-                        System.out.println ("What? What event is this??");
-                    }
+                    tasks.addTask ("E", input);
                 } else {
                     //must have todo/deadline/event request format
-                    System.out.println ("Im sorry, but I do not understand what this means:-(");
+                    System.out.println("Im sorry, but I do not understand what this means:-(");
                 }
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke("data/duke.txt").run();
     }
 }
