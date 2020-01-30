@@ -1,9 +1,10 @@
 package duke;
 
+/**
+ * Parser class has parses the input and returns the appropiate command.
+ */
 public class Parser {
-    //maybe have the parse everything into an ArrayList so you can process later
-    //problem is things won't be immediate
-    //or maybe just use it as a regular scanner then return the output
+
     public static Command parse(String fullCommand) throws DukeException {
         String line = "-----------------------------------";
         String[] strArr = fullCommand.split(" ");

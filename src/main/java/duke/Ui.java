@@ -2,8 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
-//contains interaction with the user
-//this could mean the print methods after that it'll throw into Parser to checkCommand do the logic
+/**
+ * Contains interaction with user, meaning printing and reading through the scanner.
+ */
 public class Ui {
     Scanner scanner;
 

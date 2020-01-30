@@ -1,12 +1,21 @@
 package duke;
 
+/**
+ * AddCommand extends command and adds to the taskList based on the input
+ */
 public class AddCommand extends Command {
 
     AddCommand(String input){
         super(input);
     }
 
-    //throw the length <= 1 error in the parser
+    /**
+     * Executes the add command based on the task type. Adds accordingly.
+     * @param tasks from Tasklist initialised from duke.
+     * @param ui from UI initialised from duke.
+     * @param storage from storage initialised from duke.
+     * @throws DukeException might throw DukeException from saveData.
+     */
     protected void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] strArr = input.split(" ");
         String type = strArr[0];

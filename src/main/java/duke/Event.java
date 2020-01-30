@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event that inherits from task, parses out the timing and description from input.
+ */
 public class Event extends Task {
     LocalDate timing;
     String description;
@@ -15,6 +18,12 @@ public class Event extends Task {
         this.description = getDescription(input);
     }
 
+    /**
+     * Gets timing from the input parsed in the LocalDate format.
+     * @param input from the string input user keys in.
+     * @return timing as LocalData object.
+     * @throws DukeException if date is the wrong format.
+     */
     private LocalDate getTiming(String input) throws DukeException {
         try {
             String[] strArr = input.split(" ");
@@ -37,7 +46,11 @@ public class Event extends Task {
         }
     }
 
-    //updates the description given the "/by" index
+    /**
+     * Gets description based on the input parsed.
+     * @param input from the string input user keys in.
+     * @return description as a String.
+     */
     private String getDescription(String input) {
         StringBuilder str = new StringBuilder();
         String[] strArr = input.split(" ");
