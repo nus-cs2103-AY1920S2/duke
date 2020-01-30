@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 class Deadline extends Task {
-    private String deadline;
+    private LocalDate deadline;
 
     public Deadline(String task) {
         // Split the input task string by the delimiter \by
@@ -7,11 +10,11 @@ class Deadline extends Task {
         // Pass the description as the argument to the constructor
         super(task.split("/by")[0]);
         String[] arr = task.split("/by");
-        this.deadline = arr[1];
+        this.deadline = LocalDate.parse(arr[1].trim());
     }
 
     public String getDeadline(){
-        return this.deadline;
+        return this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
