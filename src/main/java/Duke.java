@@ -12,6 +12,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println("NOTE: For all date/time input, please use the DD-MM-YYYY HH:MM format.");
 
         taskList = new ArrayList<>();
 
