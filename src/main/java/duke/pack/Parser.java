@@ -59,7 +59,7 @@ public class Parser {
             }
 
             String[] arr = command.split("todo");
-            Task t = new Todo(arr[1], comm[1]);
+            Task t = new Todo(arr[1].trim(), arr[1]);
 
             Command c = new AddCommand(t);
             return c;
