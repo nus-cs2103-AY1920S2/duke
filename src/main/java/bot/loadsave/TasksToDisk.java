@@ -56,32 +56,17 @@ public class TasksToDisk extends LoadAndSave<Task> {
                         io.nextLine(),
                         new PrettyTime(io.nextLine())
                 );
-                isCompleted = Integer.parseInt(
-                        Character.toString(
-                                typeAndDone.charAt(
-                                        Deadline.TYPE.length())
-                        )
-                ) == 1;
+                isCompleted = getCompletionStatus(typeAndDone, Deadline.TYPE);
             } else if (typeAndDone.startsWith(Event.TYPE)) {
                 currentTask = new Event(
                         io.nextLine(),
                         new PrettyTime(io.nextLine())
                 );
-                isCompleted = Integer.parseInt(
-                        Character.toString(
-                                typeAndDone.charAt(
-                                        Event.TYPE.length())
-                        )
-                ) == 1;
+                isCompleted = getCompletionStatus(typeAndDone, Event.TYPE);
             } else if (typeAndDone.startsWith(Todo.TYPE)) {
                 currentTask = Todo.makeTodoRaw(io.nextLine());
                 io.nextLine();
-                isCompleted = Integer.parseInt(
-                        Character.toString(
-                                typeAndDone.charAt(
-                                        Todo.TYPE.length())
-                        )
-                ) == 1;
+                isCompleted = getCompletionStatus(typeAndDone, Todo.TYPE);
             } else {
                 // unknown task
                 // System.out.println("Unknown task found!");
@@ -130,5 +115,22 @@ public class TasksToDisk extends LoadAndSave<Task> {
             System.err.println("IOException2");
             System.err.println(e.getMessage());
         }
+    }
+
+    /**
+     * A method to get the completion status for a Task, given
+     * the raw String containing the line taken from the save file
+     * that contains said completion status, along with the
+     * Task type
+     *
+     * @param typeAndDone Raw line from the save file containing
+     *                    Task type and completion status
+     * @param type String representation of Task type
+     * @return Returns true, if the task is done
+     */
+    private static boolean getCompletionStatus(String typeAndDone, String type) {
+        return Integer.parseInt(
+                Character.toString(typeAndDone.charAt(type.length()))
+                ) == 1;
     }
 }

@@ -174,8 +174,8 @@ public class Duke {
      *                  the Storage
      */
     private static void printTaskStoreMessage(int storeSize) {
-        String storeMessage = "I have stored this task in my memory. Use" +
-                " \"list\" to retrieve it!\nTotal of ";
+        String storeMessage = "I have stored this task in my memory. Use"
+                + " \"list\" to retrieve it!\nTotal of ";
         String tasks = " tasks stored";
         System.out.println(storeMessage + storeSize + tasks);
     }

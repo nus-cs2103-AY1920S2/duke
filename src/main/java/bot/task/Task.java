@@ -100,7 +100,7 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + this.type() + "]"
-            + this.doneGet() + " " + this.taskDetails + " "
-            + this.timeVerb(this.taskTime.toString());
+                + this.doneGet() + " " + this.taskDetails + " "
+                + this.timeVerb(this.taskTime.toString());
     }
 }

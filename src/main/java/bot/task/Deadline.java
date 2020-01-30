@@ -24,7 +24,7 @@ public class Deadline extends Task {
      */
     public Deadline(String td) throws InadequateArgumentsException {
         super(Deadline.descMaker(td.substring(Command.DEADLINE.word.length())),
-            Deadline.timeMaker(td.substring(Command.DEADLINE.word.length())));
+                Deadline.timeMaker(td.substring(Command.DEADLINE.word.length())));
     }
 
     /**
@@ -75,8 +75,7 @@ public class Deadline extends Task {
      */
     private static PrettyTime timeMaker(String t) {
         int indexLast = t.lastIndexOf(Deadline.BY);
-        return new PrettyTime(t.substring(
-            indexLast + Deadline.BY.length()
-        ).stripLeading());
+        return new PrettyTime(t.substring(indexLast + Deadline.BY.length())
+                .stripLeading());
     }
 }

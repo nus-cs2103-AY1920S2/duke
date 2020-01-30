@@ -75,8 +75,7 @@ public class Event extends Task {
      */
     private static PrettyTime timeMaker(String t) {
         int indexLast = t.lastIndexOf(Event.AT);
-        return new PrettyTime(t.substring(
-            indexLast + Event.AT.length()
-        ).stripLeading());
+        return new PrettyTime(t.substring(indexLast + Event.AT.length())
+                .stripLeading());
     }
 }
