@@ -1,4 +1,7 @@
+package duke;
+
 import java.io.IOException;
+import duke.exception.*;
 
 public class Duke {
   private Ui ui;

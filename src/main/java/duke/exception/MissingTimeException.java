@@ -1,5 +1,6 @@
+package duke.exception;
 public class MissingTimeException extends RuntimeException {
-  MissingTimeException(String type) {
+  public MissingTimeException(String type) {
     super(type + " is missing time!");
   }
 }
