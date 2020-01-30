@@ -45,6 +45,16 @@ public class Ui {
         printLine();
     }
 
+    public static void displayList(TaskList taskList, String comment) {
+        printLine();
+        // TODO: Set up the tasks
+        indent(comment);
+        for (int i = 0; i < taskList.size(); i++) {
+            indent((i + 1) + ". " + taskList.get(i).toString());
+        }
+        printLine();
+    }
+
     public static void printTaskCount(TaskList taskList) {
         int len = taskList.size();
         if (len == 0 || len == 1) {

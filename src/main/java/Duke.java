@@ -61,6 +61,10 @@ public class Duke {
                         throw new TooManyTasksException();
                     }
                     tasks.addTodo(Parser.getArgs(input));
+                } else if (Parser.commandEquals("find", input)) {
+                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
+
+                    tasks.find(Parser.getArgs(input));
                 } else {
                     throw new UnknownCommandException();
                 }
