@@ -8,6 +8,6 @@ public class Deadline extends Task {
     }
 
     public String toString(){
-        return "[D][" + getStatusIcon() + "] " + getDescription() + "(by:" + this.date + ")";
+        return "[D][" + getStatusIcon() + "] " + getDescription() + "(by: " + this.date + ")";
     }
 }
