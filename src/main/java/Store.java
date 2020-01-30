@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Store {
 
-    private String line = "____________________________________________________________";
     private String cmd;
     private Integer counter;
     private ArrayList<Task> Storage;
@@ -15,63 +14,75 @@ public class Store {
     private LocalDate LD;
     private LocalTime LT;
     File file;
-    private int Status;
     private Ui ui = new Ui();
 
+    /**
+     * This method updates the existing variables.
+     * @param file This is the absolute file for storing the Task onto the hard disk.
+     */
     public Store(File file){
         this.counter = 1;
         this.Storage = new ArrayList<>();
         this.DE = new DukeException();
         this.file = file;
     }
-    public void AddNewAction(String S) {
-        this.cmd = S;
-        System.out.println(line);
-        System.out.println("added: " + cmd);
-        System.out.println(line);
-        Task T = new Task(cmd);
-        Storage.add(T);
-        counter = counter + 1;
-    }
+
+    /**
+     * This method prints out message for "bye" action.
+     */
     public void bye() {
         WritetoFile();
-        System.out.println(line);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(line);
+        System.out.print(ui.byeMessgae());
         System.exit(1);
     }
+
+    /**
+     * This method prints the elements in the ArrayList<Task>.
+     */
     public void list() {
-        System.out.println(line);
+        System.out.println(ui.line());
         for(int i = 0; i < Storage.size(); i++) {
             String data = String.format("%d.",i+1) + Storage.get(i).toString();
             System.out.println(data);
         }
-        System.out.println(line);
+        System.out.print(ui.line());
     }
+
+    /**
+     * This method updates the Task at the index to complete.
+     * @param index Indicates which item on the ArrayList Storage.
+     */
     public void done(int index){
         if(index > Storage.size() || index <= 0){
             DE.ExceedList();
         } else {
             Task UpdateCurrAction = Storage.get(index - 1);
             UpdateCurrAction.isDone = true;
-            System.out.println(line);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(UpdateCurrAction.toString());
-            System.out.println(line);
+            String CurrAction = UpdateCurrAction.toString();
+            System.out.print(ui.DoneMessgae(CurrAction));
         }
         WritetoFile();
     }
+
+    /**
+     * This method add a new Task to the ArrayList<Task>.
+     * @param S The action to be done.
+     * @return String This returns the number of task currently.
+     */
     public String todo(String S){
         this.cmd = S;
         Task T = new Todo(cmd);
         T.Output();
         Storage.add(T);
         String s = String.format("Now you have %d tasks in the list.\n", Storage.size());
-//        System.out.println(line);
         WritetoFile();
-//        String Output = s + ui.line();
         return s + ui.line();
     }
+
+    /**
+     * This method add a new Deadline Task to the ArrayList<Task>
+     * @param ActionTime Contains the Action and the Date and/or Time.
+     */
     public void deadline(String[] ActionTime){
         String Timing;
         String details;
@@ -100,13 +111,18 @@ public class Store {
                 Storage.add(T);
                 T.Output();
                 System.out.println(String.format("Now you have %d tasks in the list.", counter));
-                System.out.println(line);
+                System.out.print(ui.line());
                 WritetoFile();
             } catch (DateTimeException d){
                 DE.InvalidDateFormat();
             }
         }
     }
+
+    /**
+     * This method add a new Event Task to the ArrayList<Task>
+     * @param ActionTime Contains the Action and Date and/or Time.
+     */
     public void event(String[] ActionTime){
         String Timing;
         String details;
@@ -136,27 +152,34 @@ public class Store {
                 Storage.add(T);
                 T.Output();
                 System.out.println(String.format("Now you have %d tasks in the list.", counter));
-                System.out.println(line);
+                System.out.print(ui.line());
                 WritetoFile();
             } catch (DateTimeException d) {
                 DE.InvalidDateFormat();
             }
         }
     }
+
+    /**
+     * This method remove the Task at the index from the ArrayList.
+     * @param index Indicates which item on the ArrayList<Task> Storage.
+     */
     public void delete(int index){
         if(index > Storage.size() || index <= 0){
             DE.ExceedList();
         } else {
             Task UpdateCurrAction = Storage.get(index - 1);
-            System.out.println(line);
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(UpdateCurrAction.toString());
+            String CurrAction = UpdateCurrAction.toString();
+            int amt = Storage.size() - 1;
             Storage.remove(index - 1);
-            System.out.println(String.format("Now you have %d tasks in the list", Storage.size()));
-            System.out.println(line);
+            System.out.print(ui.DeleteMessage(CurrAction, amt));
         }
         WritetoFile();
     }
+
+    /**
+     * This method writes the ArrayList<Task> to the file on the hard disk.
+     */
     public void WritetoFile() {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -170,6 +193,11 @@ public class Store {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This method load existing file onto the ArrayList<Task> Storage.
+     * @param S This is the Task from the file to be loaded from.
+     */
     public void load(String S){
         boolean R = CheckIfDone(S);
         if(S.contains("[T]")){
@@ -196,6 +224,12 @@ public class Store {
             WritetoFile();
         }
     }
+
+    /**
+     * This method checks if Tasks in the loaded file is completed.
+     * @param S This is the Task.
+     * @return boolean This return true if the task has been completed.
+     */
     public boolean CheckIfDone(String S){
         return S.contains("✓");
     }

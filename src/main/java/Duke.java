@@ -9,11 +9,16 @@ public class Duke {
     private DukeException DE;
     String[] CheckInput;
 
+    /**
+     * This method uses filepath to locate the file.
+     * If file exist, load the file. Otherwise create new file.
+     * @param filepath the absolute location of the .txt file.
+     */
     public Duke(String filepath){
         ui = new Ui();
         DE = new DukeException();
         File file = new File(filepath);
-        lib = new Store(file);
+        this.lib = new Store(file);
         try {
             boolean result = file.exists();
             if(!result){
@@ -23,14 +28,17 @@ public class Duke {
                     while(newSN.hasNextLine()){
                         String nxtLine = newSN.nextLine();
                         lib.load(nxtLine);
-                    } //end while- for reading existing file
-                    System.out.println(ui.line());
+                    } //end while: for reading existing file
+                    System.out.print(ui.line());
             }
         } catch (IOException e){
             e.printStackTrace();
         }
     } //end Duke
 
+    /**
+     * This method takes input from scanner and redirect it to the respective action.
+     */
     public void run(){
         ui.showWelcome();
         while(sn.hasNext()){
@@ -53,7 +61,7 @@ public class Duke {
                     DE.IncorrectInputTodo();
                 } else {
                     String NewInput = input.substring(5);
-                    System.out.println(lib.todo(NewInput));
+                    System.out.print(lib.todo(NewInput));
                 }
             } else if (input.contains("deadline")){
                 CheckInput = input.split(" ");
@@ -80,10 +88,13 @@ public class Duke {
             } else {
                 DE.InvalidInput();
             }
-
-        }
+        } // end sn.hasNext()
     }
 
+    /**
+     * This is the main method that uses DUke method.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke("D:/duke/data/duke.txt").run();
     }
