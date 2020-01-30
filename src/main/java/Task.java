@@ -24,6 +24,8 @@ public abstract class Task {
         return isDone;
     }
 
+    public abstract String getMnemonic();
+
     @Override
     public String toString() {
         return ("[" + (isDone ? "\u2713" : "\u2718") + "] " + name);

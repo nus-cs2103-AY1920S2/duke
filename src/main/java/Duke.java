@@ -1,10 +1,15 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     private static final String LF = "\n";
+    private static final String PIPE = "|";
     private static final String WELCOME_MSG = "Hello! I'm Duke" + LF + "What can I do for you?" + LF;
     private static final String BYE_MSG = "Bye, hope to see you again soon!" + LF;
     private static final String BYE_CMD = "bye";
@@ -14,6 +19,8 @@ public class Duke {
     private static final String LIST_CMD = "list";
     private static final String DELETE_CMD = "delete";
     private static final String DONE_CMD = "done";
+    private static final String DUKE_TXT_FILE_PATH = "data/duke.txt";
+
 
     private static void addAndPrintTask(Task t, List<Task> tasks) {
         tasks.add(t);
@@ -21,6 +28,37 @@ public class Duke {
         System.out.println("Got it! I've added this task:" + LF + "    " + t + LF
                 + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
 
+    }
+
+    private static void saveTasksToFile(List<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(DUKE_TXT_FILE_PATH);
+
+        StringBuilder sb = new StringBuilder();
+
+        int len = tasks.size();
+
+        for (int i = 0; i < len; ++i) {
+            Task t = tasks.get(i);
+
+            String name = t.getName();
+            String doneStatus = t.getDone() ? "1" : "0";
+            String mnemonic = t.getMnemonic();
+
+            if (t instanceof Todo) {
+                sb.append(mnemonic + PIPE + doneStatus + PIPE + name);
+            } else if (t instanceof Event) {
+                sb.append(mnemonic + PIPE + doneStatus + PIPE + name + PIPE + ((Event) t).getAt());
+            } else if (t instanceof Deadline) {
+                sb.append(mnemonic + PIPE + doneStatus + PIPE + name + PIPE + ((Deadline) t).getBy());
+            }
+
+            if (i < (len - 1)) {
+                sb.append(LF);
+            }
+        }
+
+        fw.write(sb.toString());
+        fw.close();
     }
 
     private static boolean canSplitStr(String str, String regex) {
@@ -58,7 +96,7 @@ public class Duke {
         Task t;
 
         try {
-            File f = new File("data/duke.txt");
+            File f = new File(DUKE_TXT_FILE_PATH);
 
             if (!f.exists()) {
                 // Create file if it does not already exists
@@ -74,7 +112,6 @@ public class Duke {
                     String type = strArr[0];
                     boolean isDone = strArr[1].equals("1");
                     String name = strArr[2];
-
                     t = null;
 
                     if (type.equals("T")) {
@@ -128,6 +165,7 @@ public class Duke {
                     t.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:" + LF + "    " + t + LF);
+                    saveTasksToFile(tasks);
                 } else if (cmd.startsWith(DELETE_CMD)) {
                     if (!canSplitStr(cmd, "delete\\s+")) {
                         throw new DukeException("The task to delete cannot be empty");
@@ -147,6 +185,8 @@ public class Duke {
 
                     System.out.println("Noted! I've removed this task:" + LF + "    " + t + LF
                             + "Now, you have " + tasks.size() + " item(s) in your list." + LF);
+
+                    saveTasksToFile(tasks);
                 } else if (cmd.startsWith(TODO_CMD)) {
                     if (!canSplitStr(cmd, "todo\\s+")) {
                         throw new DukeException("The description of a todo cannot be empty");
@@ -157,6 +197,7 @@ public class Duke {
                     t = new Todo(str1);
 
                     addAndPrintTask(t, tasks);
+                    saveTasksToFile(tasks);
                 } else if (cmd.startsWith(DEADLINE_CMD)) {
                     if (!canSplitStr(cmd, "deadline\\s+")) {
                         throw new DukeException("The description and timing of a deadline cannot be empty");
@@ -176,6 +217,7 @@ public class Duke {
                     t = new Deadline(name, by);
 
                     addAndPrintTask(t, tasks);
+                    saveTasksToFile(tasks);
                 } else if (cmd.startsWith(EVENT_CMD)) {
                     if (!canSplitStr(cmd, "event\\s+")) {
                         System.out.println("went here");
@@ -197,6 +239,7 @@ public class Duke {
                     t = new Event(name, at);
 
                     addAndPrintTask(t, tasks);
+                    saveTasksToFile(tasks);
                 } else if (cmd.equals(BYE_CMD)) {
                     System.out.println(BYE_MSG);
                     break;
