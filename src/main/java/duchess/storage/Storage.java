@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import duchess.exception.DuchessException;
 import duchess.task.*;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -78,7 +79,18 @@ public class Storage {
             }
             return result;
         } catch (IOException e) {
-            throw new DuchessException("Failed to load file!");
+            File folder = new File(this.filePath.split("/", 2)[0].trim());
+            if (folder.exists()) {
+                throw new DuchessException("Failed to load save file!");
+            } else {
+                boolean isDirectoryCreated = folder.mkdir();
+                if (isDirectoryCreated) {
+                    throw new DuchessException("Failed to load save file!");
+                } else {
+                    throw new DuchessException("Failed to load save file! " +
+                            "You will also not be able to save.");
+                }
+            }
         }
     }
 }

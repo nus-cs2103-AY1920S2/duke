@@ -163,8 +163,9 @@ public class Ui {
     /**
      * Prints the default error message for failing to load storage.
      */
-    public void printLoadingError() {
-        System.out.println("Failed to load saved tasks. I'll just start anew.");
+    public void printLoadingError(String errorMessage) {
+        System.out.println("\t" + errorMessage);
+        this.print(new String(new char[65]).replace("\0", "-"));
     }
 
     /**

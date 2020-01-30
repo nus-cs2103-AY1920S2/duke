@@ -37,7 +37,7 @@ public class Duchess {
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DuchessException e) {
-            this.ui.printLoadingError();
+            this.ui.printLoadingError(e.getMessage());
             this.taskList = new TaskList();
         }
     }
