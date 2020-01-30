@@ -1,9 +1,16 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Main UI method
+ */
 public class Duke {
+    /**
+     * Main functional object Duke
+     */
     static DukeMain mainObj = new DukeMain();
     static Responder r = new Responder();
+
     private static class Responder {
         String stupidLogo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -12,6 +19,7 @@ public class Duke {
         static String greetings = "Hello! I'm Duke\n" + "What can I do for you?";
         static String taskDoneNote = "Nice! I've marked this task as done:";
         static String bye = "Bye. Hope to see you again soon!";
+        static String dunno = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         private boolean isOpen = false;
 
         void start(String... initials) {
@@ -71,25 +79,37 @@ public class Duke {
         }
     }
 
-    static void addTask(String first, Scanner terms) {
-        Task t;
-        switch (first) {
-        case "todo":
-            mainObj.add(t = new ToDoTask(terms.nextLine()));
-            break;
-        case "deadline":
-            mainObj.add(
-                    t = new DeadlineTask(terms.useDelimiter("/").next(), terms.useDelimiter(" ").next(), terms.nextLine()));
-            break;
-        case "event":
-            mainObj.add(
-                    t = new EventTask(terms.useDelimiter("/").next(), terms.useDelimiter(" ").next(), terms.nextLine()));
-            break;
-        default:
-            mainObj.add(t = new ToDoTask(terms.nextLine()));
+    static boolean isAddTaskCmd(String cmd) {
+        return cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event");
+    }
+
+    static boolean addTask(String first, Scanner terms) {
+        Task t = null;
+        try {
+            switch (first) {
+            case "todo":
+                mainObj.add(t = new ToDoTask(terms.nextLine()));
+                break;
+            case "deadline":
+                mainObj.add(t = new DeadlineTask(terms.useDelimiter("/").next(), terms.useDelimiter(" ").next(),
+                        terms.nextLine()));
+                break;
+            case "event":
+                mainObj.add(t = new EventTask(terms.useDelimiter("/").next(), terms.useDelimiter(" ").next(),
+                        terms.nextLine()));
+                break;
+            default:
+            }
+        } catch (Exception e) {
+            r.respond("☹ OOPS!!! The description of a" + first + " cannot be empty.");
         }
-        r.respond("Got it. I've added this task:", "  " + t.toString(),
-                "Now you have " + mainObj.count() + " tasks in the list.");
+        if (t != null) {
+            r.respond("Got it. I've added this task:", "  " + t.toString(),
+                    "Now you have " + mainObj.count() + " tasks in the list.");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     static void listTask() {
@@ -113,19 +133,22 @@ public class Duke {
     static void execCommand(String cmd) {
         Scanner terms = new Scanner(cmd);
         String first = terms.next();
-        switch (first) {
-        case "exit":
-            r.respond(Responder.bye);
-            System.exit(0);
-            break;
-        case "list":
-            listTask();
-            break;
-        case "done":
-            markAsDone(Integer.parseInt(terms.next()));
-            break;
-        default:
-            addTask(first, terms);
+
+        if (!addTask(first, terms)) {
+            switch (first) {
+            case "exit":
+                r.respond(Responder.bye);
+                System.exit(0);
+                break;
+            case "list":
+                listTask();
+                break;
+            case "done":
+                markAsDone(Integer.parseInt(terms.next()));
+                break;
+            default:
+                r.respond(Responder.dunno);
+            }
         }
     }
 
