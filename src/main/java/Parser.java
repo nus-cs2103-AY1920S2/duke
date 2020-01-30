@@ -1,5 +1,5 @@
 public class Parser {
-    public Command parse(String command) {
+    public static Command parse(String command) {
         String firstWord = command.split(" ")[0];
         String details = command.split(firstWord)[0].trim();
 
@@ -23,7 +23,7 @@ public class Parser {
         }
     }
 
-    private Command parseDeadline(String details) {
+    private static Command parseDeadline(String details) {
         try {
             String description = details.split(" /by ")[0];
             String deadline = details.split(" /by ")[1];
@@ -34,7 +34,7 @@ public class Parser {
         }
     }
 
-    private Command parseEvent(String details) {
+    private static Command parseEvent(String details) {
         try {
             String description = details.split(" /by ")[0];
             String time = details.split(" /at ")[1];
@@ -45,7 +45,7 @@ public class Parser {
         }
     }
 
-    private Command parseTodo(String details) {
+    private static Command parseTodo(String details) {
         String description = details;
         if (!description.isEmpty()) {
             return new AddTodoCommand(description);
@@ -54,7 +54,7 @@ public class Parser {
         }
     }
 
-    private Command parseDeleteTask(String details) {
+    private static Command parseDeleteTask(String details) {
         try {
             int index = Integer.parseInt(details);
             return new DeleteCommand(index);
@@ -63,7 +63,7 @@ public class Parser {
         }
     }
 
-    private Command parseCompleteTask(String details) {
+    private static Command parseCompleteTask(String details) {
         try {
             int index = Integer.parseInt(details);
             return new CompleteTaskCommand(index);
