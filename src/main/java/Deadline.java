@@ -11,6 +11,10 @@ public class Deadline extends Task {
         return "D";
     }
 
+    public String getTime() {
+        return this.time;
+    }
+
     @Override
     public String toString() {
         String myword = "";

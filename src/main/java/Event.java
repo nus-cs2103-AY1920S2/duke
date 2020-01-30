@@ -11,6 +11,10 @@ public class Event extends Task {
         return "E";
     }
 
+    public String getTime() {
+        return this.time;
+    }
+
     @Override
     public String toString() {
         String myword = "";
