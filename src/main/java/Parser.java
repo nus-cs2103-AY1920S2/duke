@@ -23,6 +23,12 @@ public class Parser {
                 } else {
                     throw new DukeArgumentException("Please specify which task to be deleted.");
                 }
+            } else if (commandArray[0].toLowerCase().equals("find")){
+                if (commandArray.length >= 2) {
+                    findTask(taskList, commandArray[1]);
+                } else {
+                    throw new DukeArgumentException("Please specify the keyword(s) that you want to search.");
+                }
             } else if (commandArray[0].toLowerCase().equals("todo")) {
                 if (commandArray.length >= 2) {
                     addTask(taskList, commandArray[1], "T");
@@ -128,6 +134,26 @@ public class Parser {
             Ui.printWithBorder("As per requested, the following task has been deleted:\n" + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
+        }
+    }
+
+    /**
+     * Displays a search result of Tasks that matches the keyword specified by user.
+     * @param taskList User's TaskList.
+     * @param keyword Keyword used to search the TaskList.
+     */
+    public void findTask(TaskList taskList, String keyword) {
+        TaskList searchResult = taskList.findTask(keyword);
+        if (searchResult.isEmpty()) {
+            Ui.printWithBorder("Apologies, I could not find any matching task.");
+        } else {
+            StringBuilder sb = new StringBuilder("After much deliberation, I found these matching tasks:");
+            for (int i = 0; i < searchResult.size(); i++) {
+                Task t = searchResult.get(i);
+                sb.append("\n    ");
+                sb.append(t.toString());
+            }
+            Ui.printWithBorder(sb.toString());
         }
     }
 }
