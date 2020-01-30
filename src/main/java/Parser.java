@@ -14,36 +14,36 @@ public class Parser {
             String firstWord = command.split(" ")[0];
 
             switch (firstWord) {
-                case "bye":
-                    return new ExitCommand();
-                case "deadline":
-                    return parseDeadline(getDetails(command, firstWord));
-                case "delete":
-                    return parseDeleteTask(getDetails(command, firstWord));
-                case "done":
-                    return parseCompleteTask(getDetails(command, firstWord));
-                case "event":
-                    return parseEvent(getDetails(command, firstWord));
-                case "list":
-                    return new ShowTasksCommand();
-                case "todo":
-                    return parseTodo(getDetails(command, firstWord));
-                default:
-                    return new InvalidCommand();
+            case "bye":
+                return new ExitCommand();
+            case "deadline":
+                return parseDeadline(getDetails(command, firstWord));
+            case "delete":
+                return parseDeleteTask(getDetails(command, firstWord));
+            case "done":
+                return parseCompleteTask(getDetails(command, firstWord));
+            case "event":
+                return parseEvent(getDetails(command, firstWord));
+            case "list":
+                return new ShowTasksCommand();
+            case "todo":
+                return parseTodo(getDetails(command, firstWord));
+            default:
+                return new InvalidCommand();
             }
         } catch (IndexOutOfBoundsException e) {
             return new InvalidFormatCommand();
         }
     }
 
-    private static Command parseDeadline(String details) throws IndexOutOfBoundsException{
+    private static Command parseDeadline(String details) throws IndexOutOfBoundsException {
         String description = details.split(" /by ")[0];
         String deadline = details.split(" /by ")[1];
 
         return new AddDeadlineCommand(description, deadline);
     }
 
-    private static Command parseEvent(String details) throws IndexOutOfBoundsException{
+    private static Command parseEvent(String details) throws IndexOutOfBoundsException {
         String description = details.split(" /at ")[0];
         String time = details.split(" /at ")[1];
 

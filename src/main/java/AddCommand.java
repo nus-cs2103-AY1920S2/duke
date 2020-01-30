@@ -12,9 +12,9 @@ public abstract class AddCommand extends Command {
      * Adds the task to task list specified, stores the new list and
      * calls the UI to notify the user.
      *
-     * @param tasks The
-     * @param ui
-     * @param storage
+     * @param tasks the task list to operate on
+     * @param ui the user interface
+     * @param storage the storage for the task list
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
-    public void RequestListToParserTest() {
+    public void requestListToParserTest() {
         assertTrue(Parser.parse("list") instanceof ShowTasksCommand);
     }
 }

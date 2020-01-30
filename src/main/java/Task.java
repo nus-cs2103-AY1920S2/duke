@@ -38,7 +38,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String encode(){
+    public String encode() {
         return "";
     }
 }
