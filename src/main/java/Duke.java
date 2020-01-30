@@ -38,28 +38,19 @@ public class Duke {
                     int taskNo = Parser.getTaskNo(input);
                     tasks.deleteTask(taskNo);
                 } else if (Parser.commandEquals("deadline", input)) {
-                    if (Parser.hasNoArgs(input)) {
-                        throw new EmptyDescriptionException();
-                    }
-                    if (tasks.isFull()) {
-                        throw new TooManyTasksException();
-                    }
+                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
+                    if (tasks.isFull()) throw new TooManyTasksException();
+
                     tasks.addDeadline(Parser.getArgs(input));
                 } else if (Parser.commandEquals("event", input)) {
-                    if (Parser.hasNoArgs(input)) {
-                        throw new EmptyDescriptionException();
-                    }
-                    if (tasks.isFull()) {
-                        throw new TooManyTasksException();
-                    }
+                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
+                    if (tasks.isFull()) throw new TooManyTasksException();
+
                     tasks.addEvent(Parser.getArgs(input));
                 } else if (Parser.commandEquals("todo", input)) {
-                    if (Parser.hasNoArgs(input)) {
-                        throw new EmptyDescriptionException();
-                    }
-                    if (tasks.isFull()) {
-                        throw new TooManyTasksException();
-                    }
+                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
+                    if (tasks.isFull()) throw new TooManyTasksException();
+
                     tasks.addTodo(Parser.getArgs(input));
                 } else {
                     throw new UnknownCommandException();
