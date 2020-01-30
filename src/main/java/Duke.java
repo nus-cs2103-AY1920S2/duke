@@ -129,7 +129,7 @@ public class Duke {
     }
 
     static void remove(int num) {
-        r.respond("Got it. I've added this task:", "  " + mainObj.remove(num - 1).toString(),
+        r.respond("Got it. I've removed this task:", "  " + mainObj.remove(num - 1).toString(),
                     "Now you have " + mainObj.count() + " tasks in the list.");
     }
 

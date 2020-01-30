@@ -108,6 +108,11 @@ class DeadlineTask extends Task {
         this.prepos = prepos;
         this.dateLine = time;
         this.done = done;
+        try {
+            this.ld = LocalDate.parse(time, defaultDateF);
+        } catch (DateTimeParseException dtpe) {
+            this.ld = null;
+        }
     }
 
     @Override
@@ -150,6 +155,11 @@ class EventTask extends Task {
         this.prepos = prepos;
         this.time = time;
         this.done = done;
+        try {
+            this.ld = LocalDate.parse(time, defaultDateF);
+        } catch (DateTimeParseException dtpe) {
+            this.ld = null;
+        }
     }
 
     @Override
