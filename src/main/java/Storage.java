@@ -43,6 +43,7 @@ public class Storage {
         List<List<String>> tasks = new ArrayList<>();
         File f = new File(storagePath);
         Scanner sc = new Scanner(f);
+        System.out.println("Am I called");
         while (sc.hasNext()) {
             String line = sc.nextLine();
             // It's formatted with the pipe

@@ -32,4 +32,8 @@ public class Parser {
         String[] inputs = input.split(" ", 2);
         return inputs.length == 1;
     }
+
+    public static int getTaskNo(String input) {
+        return Integer.parseInt(getArgs(input));
+    }
 }

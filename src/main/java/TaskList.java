@@ -75,4 +75,36 @@ public class TaskList {
     public Task get(int idx) {
         return tasks.get(idx);
     }
+
+    public void markTaskAsDone(int taskNo) throws InvalidIndexException {
+        if (taskNo < 1 || taskNo > tasks.size()) {
+            throw new InvalidIndexException();
+        }
+        Task task = tasks.get(taskNo - 1); // The user starts counting from 1
+        task.markAsDone();
+
+        Ui.printLine();
+        Ui.indent("Excellent! You have completed this task: ");
+        Ui.doubleIndent(task.toString());
+        Ui.printLine();
+    }
+
+    public void deleteTask(int taskNo) throws InvalidIndexException {
+        if (taskNo < 1 || taskNo > tasks.size()) {
+            throw new InvalidIndexException();
+        }
+        Task task = tasks.get(taskNo - 1); // The user starts counting from 1
+        tasks.remove(taskNo - 1);
+
+        Ui.printLine();
+        Ui.indent("Understood. I have now removed this task: ");
+        Ui.doubleIndent(task.toString());
+        Ui.printTaskCount(this);
+        Ui.printLine();
+    }
+
+    public boolean isFull() {
+        return tasks.size() == 100;
+    }
+
 }
