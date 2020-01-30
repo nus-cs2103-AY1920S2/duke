@@ -12,6 +12,6 @@ public class Event extends DateTimeTask {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getDateTime() + ")";
+        return super.toString() + " (at: " + this.getDateTime() + ")";
     }
 }

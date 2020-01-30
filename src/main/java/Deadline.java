@@ -11,6 +11,6 @@ public class Deadline extends DateTimeTask {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getDateTime() + ")";
+        return super.toString() + " (by: " + this.getDateTime() + ")";
     }
 }
