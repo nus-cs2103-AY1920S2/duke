@@ -81,7 +81,6 @@ public class Storage {
         }
         bw.close();
         fr.close();
-        System.out.println("Cya next time!");
     }
 
 }
