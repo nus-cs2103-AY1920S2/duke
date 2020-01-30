@@ -1,14 +1,17 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     static ArrayList<Task> taskList = new ArrayList<>();
     static String FILEPATH = "../../../data/duke.txt";
+    static DateTimeFormatter DATEFORMAT = DateTimeFormatter.ofPattern("d MMM yyyy");
 
     // Simply adds a separator above and below an intended output.
     public static void replyUser(String output) {
@@ -31,9 +34,14 @@ public class Duke {
             if (arr.length > 1) {
                 String description = arr[0];
                 String by = arr[1].split(" ", 2)[1];
-                Deadline deadline = new Deadline(description, by);
-                taskList.add(deadline);
-                replyUser("The following deadline has been added:\n    " + deadline.toString() + str + taskList.size());
+                if (isLocalDate(by)) {
+                    LocalDate deadlineDate = LocalDate.parse(by);
+                    Deadline deadline = new Deadline(description, deadlineDate);
+                    taskList.add(deadline);
+                    replyUser("The following task has been added:\n    " + deadline.toString() + str + taskList.size());
+                } else {
+                    throw new DukeTaskException("Invalid date format detected. Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
+                }
             } else {
                 throw new DukeTaskException("\'/by\' field is missing.");
             }
@@ -43,15 +51,29 @@ public class Duke {
             if (arr.length > 1) {
                 String description = arr[0];
                 String at = arr[1].split(" ", 2)[1];
-                Event event = new Event(description, at);
-                taskList.add(event);
-                replyUser("The following event has been added:\n    " + event.toString() + str + taskList.size());
+                if (isLocalDate(at)) {
+                    LocalDate eventDate = LocalDate.parse(at);
+                    Event event = new Event(description, eventDate);
+                    taskList.add(event);
+                    replyUser("The following task has been added:\n    " + event.toString() + str + taskList.size());
+                } else {
+                    throw new DukeTaskException("Invalid date format detected. Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
+                }
             } else {
                 throw new DukeTaskException("\'/at\' field is missing.");
             }
         }
         // Overwrite stored file
         writeTaskToMemory(FILEPATH);
+    }
+
+    public static boolean isLocalDate(String input) {
+        try {
+            LocalDate.parse(input);
+        } catch (DateTimeParseException err) {
+            return false;
+        }
+        return true;
     }
 
     // Prints the user's task list.
@@ -122,7 +144,8 @@ public class Duke {
                 int byStart = input[1].indexOf(" (by:");
                 String description = input[1].substring(0, byStart);
                 String by = input[1].substring(byStart + 6, input[1].length() - 1);
-                Task t = new Deadline(description, by);
+                LocalDate byDate = LocalDate.parse(by, DATEFORMAT);
+                Task t = new Deadline(description, byDate);
                 if (isDone) {
                     t.markAsDone();
                 }
@@ -131,7 +154,8 @@ public class Duke {
                 int atStart = input[1].indexOf(" (at:");
                 String description = input[1].substring(0, atStart);
                 String at = input[1].substring(atStart + 6, input[1].length() - 1);
-                Task t = new Event(description, at);
+                LocalDate atDate = LocalDate.parse(at, DATEFORMAT);
+                Task t = new Event(description, atDate);
                 if (isDone) {
                     t.markAsDone();
                 }
