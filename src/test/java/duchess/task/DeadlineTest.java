@@ -9,7 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * JUnit test class for {@code Deadline}.
+ */
 public class DeadlineTest {
+    /**
+     * Tests the inheritance of {@code Deadline} from its superclass {@code Task}.
+     */
     @Test
     public void testInheritance() {
         Deadline testDeadline = new Deadline("Event pizza!", LocalDateTime.now());
@@ -20,6 +26,9 @@ public class DeadlineTest {
         assertTrue(new Deadline("Already completed", LocalDateTime.now(), true).isCompleted());
     }
 
+    /**
+     * Tests the overridden {@code toString()} method.
+     */
     @Test
     public void testToString() {
         assertEquals("[D][\u2718] Deadline!! (by: Dec 30 1900 6:00 pm [OVERDUE])",
