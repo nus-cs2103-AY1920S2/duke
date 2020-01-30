@@ -10,9 +10,11 @@ public class Storage {
         File file = new File("./myfile.txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         writer.write(s);
         writer.newLine();
-
         writer.close();
     }
 
@@ -20,8 +22,10 @@ public class Storage {
         File file = new File("./myfile.txt");
         StringBuilder content = new StringBuilder();
         String line;
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        
         while ((line = reader.readLine()) != null) {
             content.append(line);
             content.append(System.lineSeparator());

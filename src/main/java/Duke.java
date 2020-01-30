@@ -43,7 +43,7 @@ public class Duke {
         } else if (command.equals("todo")) {
             if (split.length == 1) {
                 throw new DukeException("\u2639 OOPS!!!"
-                    + " The description of a todo cannot be empty. \n" );
+                    + " The description of a todo cannot be empty. \n");
             }
             String desc = input.substring(5);
             Task t = new ToDoTask(desc);
@@ -80,7 +80,7 @@ public class Duke {
         
         } else {
             throw new DukeException("\u2639 OOPS!!!"
-                    + " I'm sorry, but I don't know what that means :-( \n" );
+                    + " I'm sorry, but I don't know what that means :-( \n");
         }        
     }
     public static void main(String[] args) throws IOException {
