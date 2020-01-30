@@ -1,18 +1,28 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String time;
+    protected LocalDate date;
 
-    public Event(String description, String time) {
+    public Event(String description, LocalDate date) {
         super(description);
-        this.time = time;
+        this.date = date;
     }
 
     public String getTaskType() {
         return "E";
     }
 
+<<<<<<< HEAD
     public String getTime() {
         return this.time;
+=======
+    public String formatDate() {
+        DateTimeFormatter myformat = DateTimeFormatter.ofPattern("d MMM uuuu");
+        String converted = this.date.format(myformat);
+        return converted;
+>>>>>>> branch-Level-8
     }
 
     @Override
@@ -20,7 +30,7 @@ public class Event extends Task {
         String myword = "";
         myword = myword + "[" + this.getTaskType() + "]"
                 + " [" + super.getStatusIcon() + "] " + super.description +
-                " (" + this.time + ")";
+                " (" + this.formatDate() + ")";
 
         return myword;
     }
