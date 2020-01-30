@@ -42,14 +42,14 @@ public class Duke {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     } else {
                         int index = input.indexOf("/");
-                        addList(new Deadline(input.substring(9, index), input.substring(index + 1)), taskList);
+                        addList(new Deadline(input.substring(9, index), input.substring(index + 4)), taskList);
                     }
                 } else if (input.contains("event")) {
                     if (input.split(" ").length == 1) {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                     } else {
                         int index = input.indexOf("/");
-                        addList(new Event(input.substring(6, index), input.substring(index + 1)), taskList);
+                        addList(new Event(input.substring(6, index), input.substring(index + 4)), taskList);
                     }
                 } else if (input.contains("delete")) {
                     if (input.split(" ").length == 1) {
