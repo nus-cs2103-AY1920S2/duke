@@ -15,7 +15,7 @@ public class Event extends Item {
         this.time = time;
     }
 
-    public Event(String name, String time, boolean done) {
+    public Event(String name, LocalDateTime time, boolean done) {
         super(name, done);
         this.time = time;
     }

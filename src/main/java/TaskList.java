@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,10 +41,10 @@ public class TaskList {
                     tasks.add(new Todo(description, isDone));
                     break;
                 case "D":
-                    tasks.add(new Deadline(description, details[3], isDone));
+                    tasks.add(new Deadline(description, LocalDateTime.parse(details[3]), isDone));
                     break;
                 case "E":
-                    tasks.add(new Event(description, details[3], isDone));
+                    tasks.add(new Event(description, LocalDateTime.parse(details[3]), isDone));
                     break;
                 default:
                     continue;

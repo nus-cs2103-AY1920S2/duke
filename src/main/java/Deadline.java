@@ -15,7 +15,7 @@ public class Deadline extends Item {
         this.deadline = deadline;
     }
 
-    public Deadline(String name, String deadline, boolean done) {
+    public Deadline(String name, LocalDateTime deadline, boolean done) {
         super(name, done);
         this.deadline = deadline;
     }
