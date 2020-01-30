@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,12 +20,12 @@ public class Duke {
      * Main chat logic.
      */
     static void chat() {
-        intro();
-
-        Chatbot duke = new Chatbot("Duke");
+        String path = "data" + File.separator + "duke.txt";
+        Chatbot duke = new Chatbot("Duke", TaskList.load(path), path);
         Scanner in = new Scanner(System.in);
         String message = "";
 
+        intro();
         duke.say(duke.greet());
 
         do {

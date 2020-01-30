@@ -4,10 +4,18 @@ public class Chatbot {
 
     private String name;
     private TaskList tasks;
+    private String savePath;
 
-    public Chatbot(String name) {
+    /**
+     * Constructs a Chatbot object.
+     * @param name The name of the chatbot.
+     * @param tasks The tasks present.
+     * @param savePath The path where the tasks will be saved to.
+     */
+    public Chatbot(String name, TaskList tasks, String savePath) {
         this.name = name;
-        this.tasks = new TaskList();
+        this.tasks = tasks;
+        this.savePath = savePath;
     }
 
     String greet() {
@@ -27,6 +35,7 @@ public class Chatbot {
 
         Item item = new Todo(String.join(" ", tokens));
         tasks.add(item);
+        tasks.save(savePath);
         return "Added the task.\n"
                 + "----------\n  "
                 + item + "\n"
@@ -70,6 +79,7 @@ public class Chatbot {
 
         Item item = new Deadline(description, deadline);
         tasks.add(item);
+        tasks.save(savePath);
         return "Added the task.\n"
                 + "----------\n  "
                 + item + "\n"
@@ -113,6 +123,7 @@ public class Chatbot {
 
         Item item = new Event(description, time);
         tasks.add(item);
+        tasks.save(savePath);
         return "Added the task.\n"
                 + "----------\n  "
                 + item + "\n"
@@ -146,6 +157,7 @@ public class Chatbot {
         }
 
         tasks.markDone(index);
+        tasks.save(savePath);
         return "Tsk! I've marked this as done, you owe me.\n"
                 + "----------\n"
                 + "  " + tasks.getItem(index) + "\n"
@@ -179,6 +191,7 @@ public class Chatbot {
 
         Item item = tasks.getItem(index);
         tasks.deleteItem(index);
+        tasks.save(savePath);
         return "Removed and never to be seen again.\n"
                 + "----------\n"
                 + "  " + item + "\n"
