@@ -84,6 +84,13 @@ public class Duke {
             ui.print("Got it. I've added this task: \n" + t + "\nNow you have " + numOfTask + " task(s) in the list.");
 
             storage.writeToFile("E | 0 | " + desc + " | " + time);
+        
+        } else if (command.equals("find")) {
+            String keyword = split[1];
+            tasks = storage.readFromFile();
+            String found = storage.findTask(tasks, keyword);
+            TaskList foundList = Parser.storageToTaskList(found);
+            ui.print("Here are the matching tasks in your list: \n" + foundList.toString());
 
         } else {
             throw new DukeException("\u2639 OOPS!!!" + " I'm sorry, but I don't know what that means :-( \n");

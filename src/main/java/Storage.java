@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Handles the writing and reading to file on disk, also handles deletion of
@@ -98,5 +99,16 @@ public class Storage {
         }
         writer.close();
 
+    }
+
+    public String findTask(String tasks, String keyword) {
+        String found = "";
+        String[] lines = tasks.split("\\r?\\n");
+        for (String line : lines) {
+            if (line.contains(keyword)) {
+                found += "\n" + line;
+            }
+        }
+        return found;
     }
 }
