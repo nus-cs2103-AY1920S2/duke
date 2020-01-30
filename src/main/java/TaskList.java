@@ -154,6 +154,26 @@ public class TaskList {
     }
 
     /**
+     * Prints out all task that contain a particular keyword
+     *
+     * @param keyWord keyword in task that you are looking for
+     */
+    public void find (String keyWord) {
+        System.out.println("Here are the matching tasks in your list:\n");
+        int j = 0;
+        for (int i = 0; i < this.taskList.size(); i++) {
+            String description = this.taskList.get(i).toString();
+            if (description.contains (keyWord)) {
+                System.out.println((i + 1) + "." + description);
+                j++;
+            }
+        }
+        if (j == 0) {
+            System.out.println ("No task with such keyword:(");
+        }
+    }
+
+    /**
      * Gives the arraylist storing all the task
      *
      * @return An arraylist of Task

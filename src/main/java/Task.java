@@ -50,6 +50,10 @@ public class Task {
         }
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Converts the task object into a string that describes the task
      *
