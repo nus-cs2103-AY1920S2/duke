@@ -50,7 +50,7 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "Driver"
+    mainClassName = "Launcher"
 }
 
 run {

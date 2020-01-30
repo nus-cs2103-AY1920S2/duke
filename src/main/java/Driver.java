@@ -2,6 +2,11 @@ import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeInvalidTaskFormatException;
 import duke.util.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /*
  * Driver
  *
@@ -20,7 +25,7 @@ import duke.util.Ui;
  * @author Mario Lorenzo
  */
 
-public class Driver {
+public class Driver extends Application {
 
     /**
      * The main method runs the program.
@@ -48,5 +53,14 @@ public class Driver {
         } finally {
             userInterface.close();
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
