@@ -100,6 +100,10 @@ public class Ui {
         say(message);
     }
 
+    /**
+     * Displays the list of tasks containing the given keyword.
+     * @param tasks the task containing the given keyword
+     */
     public void showFoundTasks(TaskList tasks) {
         String message = "Here are your oh so hard to find tasks:\n"
                 + tasks;

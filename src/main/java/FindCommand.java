@@ -9,7 +9,7 @@ public class FindCommand extends Command {
      * Constructor for FindCommand that takes in a search keyword.
      * @param keyword the search keyword
      */
-    public FindCommand (String keyword) {
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
