@@ -87,4 +87,13 @@ public class TaskList {
             System.out.println(e.getMessage());
         }
     }
+
+    public void findTask(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i).task.contains(keyword)) {
+                System.out.println(arr.get(i));
+            }
+        }
+    }
 }

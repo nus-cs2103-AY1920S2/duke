@@ -39,6 +39,8 @@ public class Duke {
                 int option = Integer.parseInt(inputArr[1]);
                 tasks.deleteTask(option);
                 storage.writeFile(tasks);
+            } else if (inputArr[0].equals("find")) {
+                tasks.findTask(inputArr[1]);
             } else {
                 tasks.addAndWriteTask(inputArr, storage);
             }
