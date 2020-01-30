@@ -2,10 +2,12 @@
 Hello I'm your task manager!
 ----------------------------
 
+    -----
     Here are the tasks in your list:
     1. [D][✓] return book (by: 15:30, Mar 15 2020)
     2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     3. [T][✗] your butt
+    -----
 
 ----------------------------
 What tasks do you have dude?
@@ -59,7 +61,7 @@ What tasks do you have dude?
     EmptyDescriptionException: The description of Deadline cannot be empty.
     -----
     -----
-    Please enter date in the format yyyy-MM-dd HHmm
+    TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Got it. I've added this task:
@@ -67,7 +69,7 @@ What tasks do you have dude?
     Now you have 2 tasks in the list.
     -----
     -----
-    Please enter date in the format yyyy-MM-dd HHmm
+    TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Got it. I've added this task:
@@ -85,7 +87,7 @@ What tasks do you have dude?
     [D][✓] return book (by: 15:30, Mar 15 2020)
     -----
     -----
-    Please enter date in the format yyyy-MM-dd HHmm
+    TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Here are the tasks in your list:
