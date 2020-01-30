@@ -82,4 +82,22 @@ public class Ui {
     public void printLoadingError() {
         System.out.println("Failed to load saved tasks. I'll just start anew.");
     }
+
+    public void printHelpMessage() {
+        this.print("Is this the first time I'm talking with you?");
+        this.print("I can't do everything for you, you know? Here's what I do:");
+        this.print(new String(new char[65]).replace("\0", "-"));
+        this.print("list \t\t\t\t\t\t\tView current tasks.");
+        this.print("todo [desc.] \t\t\t\t\tCreate ToDo.");
+        this.print("event [desc.] /at [time] \t\tCreate Event.");
+        this.print("deadline [desc.] /by [time] \tCreate Deadline.");
+        this.print("done [index] \t\t\t\t\tComplete task at index.");
+        this.print("delete [index] \t\t\t\t\tDelete task at index.");
+        this.print("bye \t\t\t\t\t\t\tBid farewell (sounds great!).");
+        this.print("help \t\t\t\t\t\t\tSee this message again.");
+        this.print(new String(new char[65]).replace("\0", "-"));
+        this.print("Accepted time formats are:");
+        this.print("d/m/YY \t\t\t\t\t\t\td/m/YY HHmm");
+        this.print("Today/Tonight/Tomorrow \t\t\tMonday/Tuesday etc.");
+    }
 }
