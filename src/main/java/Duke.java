@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private int drunkCounter = 0;
-    private ArrayList<Task> storage = new ArrayList<>();
+    private ArrayList<Task> storage;
 
     private void greet() {
         System.out.println("Greeting, traveler. My name is Andrew. What can I do for you?");
@@ -14,22 +14,30 @@ public class Duke {
     }
 
     private void outputList() {
+        storage = Storage.generateTaskList();
         for (int i = 0; i < storage.size(); i++) {
             System.out.printf("%d -%s\n", i + 1, storage.get(i));
         }
     }
 
     private void deleteTask(int i) {
-        System.out.printf("Your burden has been lifted, removed: \n\t %s\n", storage.get(i));
-        storage.remove(i);
-        System.out.printf("You now have %d tasks in your list\n", storage.size());
+        try {
+            storage = Storage.generateTaskList();
+            System.out.printf("Your burden has been lifted, removed: \n\t %s\n", storage.get(i));
+            storage.remove(i);
+            Storage.writeTask(storage);
+            System.out.printf("You now have %d tasks in your list\n", storage.size());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
     private void completeTask(int i) {
         try {
+            storage = Storage.generateTaskList();
             storage.get(i).setDone();
             System.out.printf("Task successfully completed: \n\t %s\n", storage.get(i));
             System.out.printf("You now have %d tasks in your list\n", storage.size());
+            Storage.writeTask(storage);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -60,10 +68,12 @@ public class Duke {
                     break;
                 default:
                     try {
+                        storage = Storage.generateTaskList();
                         storage.add(Task.generateTask(input));
                         int storageSize = storage.size();
                         System.out.printf("Added: %s\n", storage.get(storageSize - 1));
                         System.out.printf("You now have %d tasks in your list\n", storageSize);
+                        Storage.writeTask(storage);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -76,6 +86,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke bot = new Duke();
+        Storage.generateTaskList();
         bot.greet();
         bot.run();
     }

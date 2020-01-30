@@ -5,6 +5,7 @@ public abstract class Task {
     static int size = 0;
     protected String description;
     private boolean isDone = false;
+    protected String type = "task";
     private static final String TO_DO = "todo";
     private static final String EVENT = "event";
     private static final String DEADLINE = "deadline";
@@ -12,6 +13,18 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("%s%s", this.isDone ? "[completed]" : "[uncompleted]", this.description);
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getStatus() {
+        return this.isDone ? "T" : "F";
     }
 
     protected void setDone() throws Exception {
@@ -25,7 +38,7 @@ public abstract class Task {
         return size;
     }
 
-    protected static Task generateTask(String input) throws Exception {
+    public static Task generateTask(String input) throws Exception {
         String[] inputAsArray = input.split("\\s");
         String type = inputAsArray[0];
         switch (type.toLowerCase()) {
@@ -45,7 +58,9 @@ public abstract class Task {
 }
 
 class TodoTask extends Task {
+
     public TodoTask(String[] inputArr) throws Exception {
+        this.type = "todo";
         if (inputArr.length < 2) {
             throw new Exception("Todo tasks must have a non-empty description!");
         }
@@ -67,6 +82,7 @@ class TodoTask extends Task {
 
 class EventTask extends Task {
     public EventTask(String[] inputArr) {
+        this.type = "event";
         size++;
         this.description = Arrays.stream(inputArr)
                 .map(str -> str.toLowerCase().equals("event") ? "" : str)
@@ -82,6 +98,7 @@ class EventTask extends Task {
 
 class DeadlineTask extends Task {
     public DeadlineTask(String[] inputArr) throws Exception {
+        this.type = "deadline";
         if (inputArr.length < 2) {
             throw new Exception("Deadline tasks must have a non-empty description!");
         }
@@ -89,7 +106,7 @@ class DeadlineTask extends Task {
                 .map(str -> str.toLowerCase().equals("deadline") ? "" : str.equals("/by") ? "by" : str)
                 .collect(Collectors.joining(" "));
         if (!this.description.contains("by")) {
-            throw new Exception("Ain't no lie by by by missing");
+            throw new Exception("Missing by!");
         }
         size++;
     }
