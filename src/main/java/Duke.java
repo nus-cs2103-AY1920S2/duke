@@ -22,6 +22,10 @@ public class Duke {
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Constructs a Duke instance.
+     * @param filePath The file path for the file to be opened and its data to be read or for new data to be written.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
@@ -35,15 +39,17 @@ public class Duke {
         }
     }
 
-    private static void run() throws IOException {
+    /**
+     * The method that calls the driver method run in Ui.
+     */
+    private static void run()  {
         ui.run();
         parser.parseInput(ui.getInput());
     }
 
     /**
-     * The main method is where Duke introduces itself.
-     *
-     * @param args not used.
+     * The method that creates and instance of Duke.
+     * @param args The arguments from the command line.
      */
     public static void main(String[] args) {
         new Duke("./data/duke.txt");

@@ -23,11 +23,20 @@ public class Parser {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Parser instance.
+     * @param tasks List where tasks are to be stored.
+     * @param ui User interface of the program.
+     */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
     }
 
+    /**
+     * Parses user input.
+     * @param line The line of input to be parsed.
+     */
     public void parseInput(String line) {
         String trimmed = line.trim();
         String cmd = getCommand(trimmed);
@@ -71,10 +80,23 @@ public class Parser {
 
     }
 
+    /**
+     * Extracts user's command from line of input.
+     * @param line The user's line of input.
+     * @return The user's command.
+     */
     private String getCommand(String line) {
         return line.split(" ", 2)[0].trim();
     }
 
+    /**
+     * Extracts the description and date of the task.
+     * @param cmd The user's command.
+     * @param line The user's line of input.
+     * @return A joined string of the description and date of the task.
+     * @throws NoDescriptionException No description for the task was provided.
+     * @throws NoDateProvidedException No description for the deadline or event was provided.
+     */
     private String getDescAndDate(String cmd, String line) throws NoDescriptionException, NoDateProvidedException {
         String[] arr = line.split(" ", 2);
         if (arr.length < 2) {

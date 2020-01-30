@@ -25,15 +25,25 @@ public class TaskList {
     protected Storage storage;
     protected List<Task> tasks;
 
+    /**
+     * Constructs a TaskList instance.
+     * @param storage The storage instance that will the program will extract data from and store all data to.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = storage.tasks;
     }
 
+    /**
+     * Prints a horizontal bar to separate commands.
+     */
     protected void printSeparator() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Lists all tasks in the current list of tasks.
+     */
     protected void listTasks() {
         StringBuilder sb = new StringBuilder();
         sb.append("Below is your task list:\n");
@@ -49,6 +59,13 @@ public class TaskList {
         printSeparator();
     }
 
+    /**
+     * Deletes the specified task from the list and data file. 
+     * @param line The input from user containing the task number to be deleted.
+     * @throws NoTaskNumberException No task number is provided.
+     * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
+     * @throws IOException Error opening file where data is to be deleted.
+     */
     protected void deleteTask(String line)
             throws NoTaskNumberException, InvalidIndexException, IOException {
         int size = tasks.size();
@@ -72,6 +89,13 @@ public class TaskList {
         storage.updateData();
     }
 
+    /**
+     * Marks the specified task as done in the list and data file.
+     * @param line The input from user containing the task number to be marked as done.
+     * @throws NoTaskNumberException No task number is provided.
+     * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
+     * @throws IOException Error opening file where data is to be marked as done.
+     */
     protected void markTaskAsDone(String line)
             throws NoTaskNumberException, InvalidIndexException, IOException {
         int size = tasks.size();
@@ -95,6 +119,11 @@ public class TaskList {
         storage.updateData();
     }
 
+    /**
+     * Checks if the date provided has a valid format and is a valid date.
+     * @param source The date to be checked.
+     * @return The boolean representing whether the date provided is valid.
+     */
     private static boolean dateIsValid(String source) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
@@ -106,13 +135,25 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Adds a new todo to the task list and the data file.
+     * @param desc The description of details of the todo.
+     * @throws IOException Error opening file where data is to be added.
+     */
     protected void addTodo(String desc) throws IOException {
         Task toSave = new Todo(desc);
         tasks.add(toSave);
         storage.saveTask(toSave, true);
-        actionConfirmation();
+        additionConfirmation();
     }
 
+    /**
+     * Adds a new deadline or event to the task list and data file. 
+     * @param id The unique id identifying the type of task to be added.
+     * @param descAndDate The description or details of the deadline or event.
+     * @throws IOException Error opening file where data is to be added.
+     * @throws InvalidDateException Date provided is of the wrong format or invalid.
+     */
     protected void addDeadlineOrEvt(String id, String descAndDate) throws IOException, InvalidDateException {
         String[] temp = descAndDate.split(" \\| ");
         if (dateIsValid(temp[1])) {
@@ -125,13 +166,16 @@ public class TaskList {
                 storage.saveTask(toSave, true);
                 tasks.add(toSave);
             }
-            actionConfirmation();
+            additionConfirmation();
         } else {
             throw new InvalidDateException();
         }
     }
 
-    protected void actionConfirmation() {
+    /**
+     * Prints out confirmation of addition of new task to list and data file.
+     */
+    protected void additionConfirmation() {
         int size = this.tasks.size();
         System.out.println("Got it. I've added this task:");
         System.out.print("\t" + this.tasks.get(size - 1));

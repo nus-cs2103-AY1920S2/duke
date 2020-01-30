@@ -14,10 +14,19 @@ package duke.exception;
 public class NoDateProvidedException extends DukeException {
     String type;
 
+    /**
+     * Constructs a NoDateProvidedException.
+     * @param type The type of task that has no date.
+     */
     public NoDateProvidedException(String type) {
         this.type = type;
     }
 
+    /**
+     * Overrides the Object's toString method
+     * and contains details of the error.
+     * @return The String that containing reason for the error.
+     */
     @Override
     public String toString() {
         String taskType;
