@@ -36,15 +36,11 @@ public class TaskListTest {
     }
 
     @Test
-    public void getTask_nonEmptyTaskList_success() {
-        try {
-            TaskList testTaskList = new TaskList();
-            Task testTask = new ToDo("Placeholder");
-            testTaskList.addTask(testTask);
-            assertEquals(testTask, testTaskList.getTask(0));
-        } catch (DuchessException e) {
-            fail();
-        }
+    public void getTask_nonEmptyTaskList_success() throws DuchessException {
+        TaskList testTaskList = new TaskList();
+        Task testTask = new ToDo("Placeholder");
+        testTaskList.addTask(testTask);
+        assertEquals(testTask, testTaskList.getTask(0));
     }
 
     @Test
@@ -59,18 +55,14 @@ public class TaskListTest {
     }
 
     @Test
-    public void removeTask_nonEmptyTaskList_success() {
-        try {
-            TaskList testTaskList = new TaskList();
-            Task testTask = new ToDo("Placeholder");
-            assertEquals(0, testTaskList.size());
-            testTaskList.addTask(testTask);
-            assertEquals(1, testTaskList.size());
-            testTaskList.removeTask(0);
-            assertEquals(0, testTaskList.size());
-        } catch (DuchessException e) {
-            fail();
-        }
+    public void removeTask_nonEmptyTaskList_success() throws DuchessException {
+        TaskList testTaskList = new TaskList();
+        Task testTask = new ToDo("Placeholder");
+        assertEquals(0, testTaskList.size());
+        testTaskList.addTask(testTask);
+        assertEquals(1, testTaskList.size());
+        testTaskList.removeTask(0);
+        assertEquals(0, testTaskList.size());
     }
 
     @Test
@@ -85,17 +77,13 @@ public class TaskListTest {
     }
 
     @Test
-    public void completeTask_taskNotCompleted_success() {
-        try {
-            TaskList testTaskList = new TaskList();
-            Task testTask = new ToDo("Testing using this!");
-            testTaskList.addTask(testTask);
-            assertFalse(testTask.isCompleted());
-            testTaskList.completeTask(0);
-            assertTrue(testTask.isCompleted());
-        } catch (DuchessException e) {
-            fail();
-        }
+    public void completeTask_taskNotCompleted_success() throws DuchessException {
+        TaskList testTaskList = new TaskList();
+        Task testTask = new ToDo("Testing using this!");
+        testTaskList.addTask(testTask);
+        assertFalse(testTask.isCompleted());
+        testTaskList.completeTask(0);
+        assertTrue(testTask.isCompleted());
     }
 
     @Test
