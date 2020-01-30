@@ -1,43 +1,36 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
     public static String machine = "Dude: ";
     public static String user = "dude: ";
+    public static String[] commandArray = new String[] {"list", "done", "delete", "todo", "event", "deadline"};
     public static ArrayList<String> commandList = new ArrayList<>();
     public static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
-        commandList.add("list");
-        commandList.add("done");
-        commandList.add("delete");
-        commandList.add("todo");
-        commandList.add("event");
-        commandList.add("deadline");
+        Collections.addAll(commandList, commandArray);
         greeting();
-        String command = sc.next();
+        String commandLine = sc.nextLine();
+        String[] commands = commandLine.split(" ", 2);
 
-        while (!command.equals("bye")) {
+        while (!commands[0].equals("bye")) {
             try{
-                checkCommand(command);
-                if (command.equals("list")) {
-                    list();
-                } else {
-                    String details = sc.nextLine();
-                    try {
-                        checkDetails(command, details);
-                    } catch (EmptyDescriptionException ex){
-                        System.out.println(ex.getMessage());
-                    }
+                checkCommand(commands);
+                try {
+                    checkDetails(commands);
+                } catch (EmptyDescriptionException ex){
+                    System.out.println(ex.getMessage());
                 }
             }
             catch (InvalidCommandException ex) {
                 System.out.println(ex.getMessage());
             }
             System.out.print(user);
-            command = sc.next();
+            commandLine = sc.nextLine();
+            commands = commandLine.split(" ", 2);
         }
         System.out.println(machine + "Okay see ya dude!");
     }
@@ -59,7 +52,7 @@ public class Duke {
     }
 
     public static void markAsDone(String details) {
-        int i = Integer.parseInt(details.substring(1));
+        int i = Integer.parseInt(details);
         Task task = list.get(i-1);
         task.markAsDone();
         System.out.println(machine + "Alright dude this task is marked as done:");
@@ -67,7 +60,7 @@ public class Duke {
     }
 
     public static void deleteTask(String details) {
-        int i = Integer.parseInt(details.substring(1));
+        int i = Integer.parseInt(details);
         Task task = list.get(i-1);
         list.remove(task);
         System.out.println(machine + "And woop it's gone:");
@@ -75,59 +68,66 @@ public class Duke {
         System.out.println("      Now you have " + list.size() + " tasks in the list.");
     }
 
-    public static void checkCommand(String command) throws InvalidCommandException {
-        if (!commandList.contains(command)) {
+    public static void checkCommand(String[] commands) throws InvalidCommandException {
+        if (!commandList.contains(commands[0])) {
             throw new InvalidCommandException("      Sorry dude but that won't command me!");
         }
     }
 
-    public static void checkDetails(String command, String details) throws EmptyDescriptionException{
-        if (details.equals("")) {
+    public static void checkDetails(String[] commands) throws EmptyDescriptionException{
+        if (!commands[0].equals("list") && commands.length < 2) {
             throw new EmptyDescriptionException("      Wait dude your task is...?");
         }
-        String[] arr = new String[2];
-        switch (command) {
+        String[] arr;
+        Task task;
+        switch (commands[0]) {
+            case "list":
+                list();
+                break;
             case "done":
-                markAsDone(details);
+                markAsDone(commands[1]);
                 break;
             case "delete":
-                deleteTask(details);
+                deleteTask(commands[1]);
                 break;
             case "todo":
-                addTodo(details);
+                task = addTodo(false, commands[1]);
+                printConfirmAddMessage(task);
                 break;
             case "event":
-                arr = details.split("/at");
-                addEvent(arr[0], arr[1]);
+                arr = commands[1].split(" /at ");
+                task = addEvent(false, arr[0], arr[1]);
+                printConfirmAddMessage(task);
                 break;
             case "deadline":
-                arr = details.split("/by");
-                addDeadline(arr[0], arr[1]);
+                arr = commands[1].split(" /by ");
+                task = addDeadline(false, arr[0], arr[1]);
+                printConfirmAddMessage(task);
                 break;
         }
     }
 
-    public static void addTodo(String details) {
-        Task task = new Todo(details);
+    public static Task addTodo(boolean isDone, String details) {
+        Task task = new Todo(isDone, details);
         list.add(task);
-        System.out.println(machine + "Dude now you have even more things to do:");
-        System.out.println("      " + task);
-        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+        return task;
     }
 
-    public static void addDeadline(String description, String by) {
-        Task task = new Deadline(description, by);
+    public static Task addDeadline(boolean isDone, String description, String by) {
+        Task task = new Deadline(isDone, description, by);
         list.add(task);
-        System.out.println(machine + "That's strange dude your pile of deadlines suddenly grew:");
-        System.out.println("      " + task);
-        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+        return task;
     }
 
-    public static void addEvent(String description, String at) {
-        Task task = new Event(description, at);
+    public static Task addEvent(boolean isDone, String description, String at) {
+        Task task = new Event(isDone, description, at);
         list.add(task);
-        System.out.println(machine + "Woohoo what an eventful life:");
+        return task;
+    }
+
+    public static void printConfirmAddMessage(Task task) {
+        System.out.println(machine + "Got it dude! I've added this task:");
         System.out.println("      " + task);
-        System.out.println("      Now you have " + list.size() + " tasks in the list.");
+        System.out.println("      Now you have " + list.size() + " task(s) in the list.");
     }
 }
