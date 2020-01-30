@@ -1,4 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskList {
 
@@ -6,6 +12,76 @@ public class TaskList {
 
     public TaskList() {
         this.items = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Item> items) {
+        this.items = items;
+    }
+
+    /**
+     * Loads the tasks given a path to the save file.
+     * @param path The path of the save file.
+     * @return The Tasklist object with tasks loaded.
+     */
+    static TaskList load(String path) {
+        File file = new File(path);
+        TaskList tasks = new TaskList();
+
+        try {
+            Scanner scanner = new Scanner(file);
+            
+            while (scanner.hasNextLine()) {
+                String[] details = scanner.nextLine().split(" \\| ");
+                boolean isDone = !details[1].equals("0");
+                String description = details[2];
+
+                switch (details[0]) {
+                case "T":
+                    tasks.add(new Todo(description, isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(description, details[3], isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(description, details[3], isDone));
+                    break;
+                default:
+                    continue;
+                }
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            // do nothing
+        }
+
+        return tasks;
+    }
+
+    /**
+     * Saves the tasks to the given file path.
+     * @param path The path of the save file.
+     */
+    public void save(String path) {
+        File file = new File(path);
+
+        // remove existing file
+        if (file.exists()) {
+            file.delete();
+        }
+
+        // create directory parent directory of file if it does not exist
+        new File(file.getParent()).mkdirs();
+
+        try {
+            file.createNewFile();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(toSaveFormat());
+            writer.close();
+        } catch (IOException e) {
+            // unable to create file
+        }
     }
 
     /**
@@ -47,6 +123,18 @@ public class TaskList {
      */
     public void deleteItem(int index) {
         items.remove(index - 1);
+    }
+
+    /**
+     * Formats the task list to be saved.
+     * @return The tasks in save format.
+     */
+    public String toSaveFormat() {
+        String output = "";
+        for (Item item : items) {
+            output += item.toSaveFormat() + "\n";
+        }
+        return output;
     }
 
     @Override
