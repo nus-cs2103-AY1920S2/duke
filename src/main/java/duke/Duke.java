@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import duke.exception.*;
 
+/** Class Duke, the driver class of the program. */
 public class Duke {
   private Ui ui;
   private Parser parser;
@@ -13,6 +14,7 @@ public class Duke {
     new Duke().run();
   }
 
+  /** Duke object creation, initiate Ui, Parser, TaskList, and Storage. */
   public Duke() {
     ui = new Ui();
     parser = new Parser();
@@ -20,6 +22,14 @@ public class Duke {
     storage = new Storage(".//saved-tasks.txt");
   }
 
+  /**
+   * Driver function of the whole program.
+   *
+   * <p>Initiates greeting. Enter a while loop waiting for commands and call respective handlers.
+   * Exit when a "bye" command is given.
+   *
+   * @throws IOException If Exception is raised during loading and saving.
+   */
   public void run() throws IOException {
     storage.loadBaby(taskList, parser);
     ui.greeting();
@@ -76,6 +86,11 @@ public class Duke {
     ui.bye();
   }
 
+  /**
+   * Marks task as done and call Ui to display task.
+   *
+   * @param indexStr A string representing the index of the task from list we want to mark as done.
+   */
   public void handleDone(String indexStr) {
     try {
       int index = Integer.parseInt(indexStr) - 1;
@@ -87,40 +102,60 @@ public class Duke {
     }
   }
 
-  public void handleDelete(String keyword) {
+  /**
+   * Deletes tasks from task list and call Ui to display deleted task.
+   *
+   * @param indexStr A string representing the index of the task from list we want to delete.
+   */
+  public void handleDelete(String indexStr) {
     try {
-      int index = Integer.parseInt(keyword) - 1;
+      int index = Integer.parseInt(indexStr) - 1;
       Task task = taskList.getTaskList().get(index);
       taskList.getTaskList().remove(task);
       ui.showDelete(task, taskList.getTaskList());
     } catch (Exception e) {
-      throw new InvalidIndexException(keyword);
+      throw new InvalidIndexException(indexStr);
     }
   }
 
+  /**
+   * Handle the event command
+   *
+   * @param desc String containing both the name and time of the task.
+   */
   public void handleEvent(String desc) {
     String[] strArr = desc.split(" /at ", 2);
     if (strArr.length == 1) throw new MissingTimeException("Event");
     String todo = strArr[0];
     String time = strArr[1];
     Event task = new Event(todo, parser.stringToTime(time));
-    taskList.getTaskList().add(task);
+    taskList.addTask(task);
     ui.showAdd(task, taskList.getTaskList());
   }
 
+  /**
+   * Handle the todo command
+   *
+   * @param desc String containing the task name.
+   */
   public void handleTodo(String desc) {
     Todo task = new Todo(desc);
-    taskList.getTaskList().add(task);
+    taskList.addTask(task);
     ui.showAdd(task, taskList.getTaskList());
   }
 
+  /**
+   * Handle the deadline command
+   *
+   * @param desc String containing both the name and time of the task.
+   */
   public void handleDeadline(String desc) {
     String[] strArr = desc.split(" /by ", 2);
     if (strArr.length == 1) throw new MissingTimeException("Deadline");
     String todo = strArr[0];
     String time = strArr[1];
     Deadline task = new Deadline(todo, parser.stringToTime(time));
-    taskList.getTaskList().add(task);
+    taskList.addTask(task);
     ui.showAdd(task, taskList.getTaskList());
   }
 }

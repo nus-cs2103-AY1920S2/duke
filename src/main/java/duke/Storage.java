@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -20,6 +21,8 @@ public class Storage {
   }
 
   public void loadBaby(TaskList taskList, Parser parser) throws IOException {
+    File file = new File(path);
+    if (file.createNewFile()) return;
     BufferedReader taskLoader = new BufferedReader(new FileReader(path));
     String longCommand = taskLoader.readLine();
     while (longCommand != null) {

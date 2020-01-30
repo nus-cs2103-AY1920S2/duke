@@ -28,13 +28,13 @@ What tasks do you have dude?
     Now you have 0 tasks in the list.
     -----
     -----
-    MissingTimeException: Event is missing time!
+    duke.exception.MissingTimeException: Event is missing time!
     -----
     -----
-    MissingTimeException: Deadline is missing time!
+    duke.exception.MissingTimeException: Deadline is missing time!
     -----
     -----
-    InvalidIndexException: 1 is an invalid index!
+    duke.exception.InvalidIndexException: '1' is an invalid index!
     -----
     -----
     Got it. I've added this task:
@@ -42,26 +42,26 @@ What tasks do you have dude?
     Now you have 1 tasks in the list.
     -----
     -----
-    UnknownCommandException: Sorry my guy, I don't know the command: 'blah'
+    duke.exception.UnknownCommandException: Sorry my guy, I don't know the command: 'blah'
     -----
     -----
-    UnknownCommandException: Sorry my guy, I don't know the command: ''
+    duke.exception.UnknownCommandException: Sorry my guy, I don't know the command: ''
     -----
     -----
     Here are the tasks in your list:
     1. [T][✗] borrow book
     -----
     -----
-    EmptyDescriptionException: The description of Event cannot be empty.
+    duke.exception.EmptyDescriptionException: The description of Event cannot be empty.
     -----
     -----
-    EmptyDescriptionException: The description of Todo cannot be empty.
+    duke.exception.EmptyDescriptionException: The description of Todo cannot be empty.
     -----
     -----
-    EmptyDescriptionException: The description of Deadline cannot be empty.
+    duke.exception.EmptyDescriptionException: The description of Deadline cannot be empty.
     -----
     -----
-    TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
+    duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Got it. I've added this task:
@@ -69,7 +69,7 @@ What tasks do you have dude?
     Now you have 2 tasks in the list.
     -----
     -----
-    TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
+    duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Got it. I've added this task:
@@ -87,7 +87,7 @@ What tasks do you have dude?
     [D][✓] return book (by: 15:30, Mar 15 2020)
     -----
     -----
-    TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
+    duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
     -----
     -----
     Here are the tasks in your list:
@@ -96,10 +96,10 @@ What tasks do you have dude?
     3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     -----
     -----
-    InvalidIndexException: a is an invalid index!
+    duke.exception.InvalidIndexException: 'a' is an invalid index!
     -----
     -----
-    InvalidIndexException: 4 is an invalid index!
+    duke.exception.InvalidIndexException: '4' is an invalid index!
     -----
     -----
     Here are the tasks in your list:
@@ -118,7 +118,7 @@ What tasks do you have dude?
     2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     -----
     -----
-    InvalidIndexException: 4 is an invalid index!
+    duke.exception.InvalidIndexException: '4' is an invalid index!
     -----
     -----
     Got it. I've added this task:
