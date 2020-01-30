@@ -2,7 +2,11 @@ package duchess.command;
 
 import duchess.exception.DuchessException;
 import duchess.storage.Storage;
-import duchess.task.*;
+import duchess.task.Deadline;
+import duchess.task.Event;
+import duchess.task.Task;
+import duchess.task.TaskList;
+import duchess.task.ToDo;
 import duchess.ui.Ui;
 import duchess.util.DateTimeParser;
 import duchess.util.Pair;
@@ -97,7 +101,8 @@ public class CommandHandler {
      * @param storage  Storage instance.
      * @return null.
      */
-    static Void handleListCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+    static Void handleListCommand(String command, TaskList taskList,
+                                  Ui ui, Storage storage) throws DuchessException {
         ui.printTaskList(taskList);
         return null;
     }
