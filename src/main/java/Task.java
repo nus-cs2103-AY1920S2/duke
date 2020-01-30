@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected String description;
     protected String type;
@@ -23,6 +26,15 @@ public abstract class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public LocalDate parseDate(String stringDate) {
+        return LocalDate.parse(stringDate);
+    }
+
+    public String formatDate(LocalDate date) {
+        return date.format(
+                DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
 }
