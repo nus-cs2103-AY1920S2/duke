@@ -7,7 +7,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * JUnit test class for {@code Parser}.
+ */
 public class ParserTest {
+    /**
+     * Tests the {@code parse} method of the {@code Parser} class when
+     * valid input is given.
+     *
+     * @throws DuchessException If command is not recognized.
+     */
     @Test
     public void parse_validCommand_success() throws DuchessException {
         assertEquals(Command.TODO, Parser.parse("todo go for a run"));
@@ -21,6 +30,10 @@ public class ParserTest {
         assertEquals(Command.HELP, Parser.parse("help"));
     }
 
+    /**
+     * Tests the {@code parse} method of the {@code Parser} class when
+     * invalid input is given.
+     */
     @Test
     public void parse_invalidCommand_exceptionThrown() {
         try {
