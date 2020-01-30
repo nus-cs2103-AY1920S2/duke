@@ -15,7 +15,7 @@ public class TaskList {
         return tasks.remove(index);
     }
 
-    public Task completeTask(int index) { 
+    public Task completeTask(int index) {
         Task task = tasks.get(index);
         task.tick();
         return task;
