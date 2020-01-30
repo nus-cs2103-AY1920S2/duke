@@ -36,34 +36,27 @@ public class Duke {
           case "bye":
             exit = true;
             break;
-
           case "list":
             ui.showList(taskList.getTaskList());
             break;
-
           case "done":
             handleDone(keywords[1]);
             break;
-
           case "delete":
             handleDelete(keywords[1]);
             break;
-
           case "todo":
             if (keywords.length == 1) throw new EmptyDescriptionException("Todo");
             handleTodo(keywords[1]);
             break;
-
           case "event":
             if (keywords.length == 1) throw new EmptyDescriptionException("Event");
             handleEvent(keywords[1]);
             break;
-
           case "deadline":
             if (keywords.length == 1) throw new EmptyDescriptionException("Deadline");
             handleDeadline(keywords[1]);
             break;
-
           default:
             throw new UnknownCommandException(keywords[0]);
         }
@@ -83,7 +76,7 @@ public class Duke {
     ui.bye();
   }
 
-  public void handleDone(String indexStr) throws InvalidIndexException {
+  public void handleDone(String indexStr) {
     try {
       int index = Integer.parseInt(indexStr) - 1;
       Task task = taskList.getTaskList().get(index);
@@ -94,7 +87,7 @@ public class Duke {
     }
   }
 
-  public void handleDelete(String keyword) throws InvalidIndexException {
+  public void handleDelete(String keyword) {
     try {
       int index = Integer.parseInt(keyword) - 1;
       Task task = taskList.getTaskList().get(index);
@@ -105,7 +98,7 @@ public class Duke {
     }
   }
 
-  public void handleEvent(String desc) throws MissingTimeException {
+  public void handleEvent(String desc) {
     String[] strArr = desc.split(" /at ", 2);
     if (strArr.length == 1) throw new MissingTimeException("Event");
     String todo = strArr[0];
@@ -121,7 +114,7 @@ public class Duke {
     ui.showAdd(task, taskList.getTaskList());
   }
 
-  public void handleDeadline(String desc) throws MissingTimeException {
+  public void handleDeadline(String desc) {
     String[] strArr = desc.split(" /by ", 2);
     if (strArr.length == 1) throw new MissingTimeException("Deadline");
     String todo = strArr[0];
