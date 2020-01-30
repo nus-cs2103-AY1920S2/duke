@@ -1,14 +1,22 @@
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task{
-    private String time;
+    Date time;
 
     public Deadline(String description, String time) {
         super(description);
 
-        this.time = time;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+
+        this.time = format.parse(time, new ParsePosition(0));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy HH:mm");
+
+        return "[D]" + super.toString() + " (by: " + format.format(time) + ")";
     }
 }
