@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.interaction.Ui;
 import duke.util.DukeException;
+import duke.util.Storage;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -69,9 +69,10 @@ public class TaskList {
      * Adds to the task collection a new task object.
      * @param newTask name of the new task to add.
      * @param taskType for the type of task to add.
-     * @return a reference to the new task object.
+     * @param storage for saving the new task to file.
+     * @return a String representing the task that was added, else an error message.
      */
-    public Task addTask(String newTask, Task.TaskType taskType) {
+    public String addTask(String newTask, Task.TaskType taskType, Storage storage) throws Exception{
         String[] strArr;
         String taskName;
         try {
@@ -125,14 +126,14 @@ public class TaskList {
             default:
                 break;
             }
-            Ui.showTaskAdded(taskList.get(taskList.size() - 1), taskList.size());
-            return taskList.get(taskList.size() - 1);
+            Task t = taskList.get(taskList.size() - 1);
+            storage.saveTaskToFile(t);
+            return t.toString();
         } catch (DukeException.EmptyToDo | DukeException.EmptyDeadlineName
                 | DukeException.NoDeadlineTime | DukeException.EmptyEvent
                 | DukeException.NoEventDatetime e) {
             // currently all exceptions are handled just by relaying a message. Nothing special, yet.
-            Ui.showError(e);
-            return null;
+            throw e;
         }
     }
 
@@ -144,11 +145,9 @@ public class TaskList {
     public boolean doneTask(int taskIndex) {
         if (taskIndex < taskList.size() && taskIndex >= 0) {
             taskList.get(taskIndex).markAsDone();
-            Ui.showTaskDone(taskList.get(taskIndex));
             return true;
         } else {
             // Task does not exist
-            Ui.showTaskNotFound();
             return false;
         }
     }
@@ -156,18 +155,16 @@ public class TaskList {
     /**
      * Deletes a task object from collection.
      * @param taskIndex of the task (in collection) to be deleted.
-     * @return a boolean representing if task was found (then deleted), else false
+     * @return a String representing the task that was deleted, else null.
      */
-    public boolean deleteTask(int taskIndex) {
+    public String deleteTask(int taskIndex) {
         if (taskIndex < taskList.size() && taskIndex >= 0) {
-            String tasktoRemove = taskList.get(taskIndex).toString();
+            String taskToRemove = taskList.get(taskIndex).toString();
             taskList.remove(taskIndex);
-            Ui.showTaskDelete(tasktoRemove, taskList.size());
-            return true;
+            return taskToRemove;
         } else {
             // Task does not exist
-            Ui.showTaskNotFound();
-            return false;
+            return null;
         }
     }
 }

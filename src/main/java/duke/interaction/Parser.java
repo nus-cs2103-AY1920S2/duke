@@ -28,7 +28,7 @@ public class Parser {
      * @param fullCommand read from user input.
      * @return Command object parsed from a full command string
      */
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws DukeException.InvalidCommand {
         Scanner in = new Scanner(fullCommand);
         String input = in.next();
         try {
@@ -59,7 +59,7 @@ public class Parser {
             }
         } catch (DukeException.InvalidCommand e) {
             Ui.showError(e);
-            return null;
+            throw e;
         }
     }
 }

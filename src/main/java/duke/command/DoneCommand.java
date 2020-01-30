@@ -1,7 +1,11 @@
 package duke.command;
 
+import duke.interaction.Ui;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
+
+import java.util.ArrayList;
 
 /**
  * Represents the Command for the "done" input by the user.
@@ -30,7 +34,31 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Storage storage) {
         if (taskList.doneTask(doneIndex)) {
             storage.saveTaskListToFile(taskList);
+            Ui.showTaskDone(taskList.getList().get(doneIndex));
+        } else {
+            Ui.showTaskNotFound();
         }
+    }
+
+    /**
+     * Executes Done behaviour of setting given task to Done
+     * and returns the result as a String
+     * @param taskList to access collection of tasks.
+     * @param storage to access save-load functionality.
+     * @return a String representing the output.
+     */
+    public String executeWithBotResponse(TaskList taskList, Storage storage) {
+        String output = "";
+
+        if (taskList.doneTask(doneIndex)) {
+            storage.saveTaskListToFile(taskList);
+            output = "Nice! I've marked this task as done:\n"
+                    + taskList.getList().get(doneIndex).toString();
+        } else {
+            output = "Sorry, mate! No such task.";
+        }
+
+        return output;
     }
 
     /**

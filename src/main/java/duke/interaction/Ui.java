@@ -37,7 +37,7 @@ public class Ui {
      */
     public static void greet() {
         showLine();
-        printWithIndent("Hello! I'm Duke");
+        printWithIndent("Hello! I'm Duke.");
         printWithIndent("What can I do for you?");
         showLine();
     }
@@ -67,10 +67,10 @@ public class Ui {
      * @param added task to be print.
      * @param total new count of tasks.
      */
-    public static void showTaskAdded(Task added, int total) {
+    public static void showTaskAdded(String added, int total) {
         showLine();
         printWithIndent("Got it. I've added this task:");
-        printWithIndent(added.toString());
+        printWithIndent(added);
         printWithIndent("Now you have " + total + " task"
                 + (total != 1 ? "s" : "") + " in the list.");
         showLine();

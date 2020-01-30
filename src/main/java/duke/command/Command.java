@@ -21,6 +21,14 @@ public abstract class Command {
     public abstract void execute(TaskList taskList, Storage storage);
 
     /**
+     * Abstract execute method for all Command subclasses to be used by the GUI
+     * @param taskList to access collection of tasks.
+     * @param storage to access save-load functionality.
+     * @return a String representing the output.
+     */
+    public abstract String executeWithBotResponse(TaskList taskList, Storage storage);
+
+    /**
      * Abstract method for all Command subclasses.
      * @return boolean indicating if command is an exit command.
      */

@@ -1,5 +1,8 @@
+package duke.program;
+
 import duke.command.Command;
 import duke.task.TaskList;
+import duke.util.DukeException;
 import duke.util.Storage;
 import duke.interaction.Ui;
 import duke.interaction.Parser;
@@ -34,7 +37,7 @@ public class Duke {
      * Duke's constructor initializes Storage and TaskList
      * and loads user data into the new task list.
      */
-    Duke() {
+    public Duke() {
         storage = new Storage();
         taskList = new TaskList();
         storage.load(taskList);
@@ -43,7 +46,6 @@ public class Duke {
     /**
      * Duke's exit behaviour involves UI output
      * and final storage saving.
-     * @return void
      */
     private void exit() {
         Ui.sayBye();
@@ -52,20 +54,46 @@ public class Duke {
 
     /**
      * Duke's behaviour loop after set-up to before exit.
-     * @return void
      */
     private void loop() {
         boolean isExiting = false;
         Command c;
         do {
             String fullCommand = Ui.readCommand();
-            c = Parser.parse(fullCommand);
-            if (c != null) {
+            try {
+                c = Parser.parse(fullCommand);
                 c.execute(taskList, storage);
                 isExiting = c.isExit();
+            } catch (DukeException.InvalidCommand invalidCommand) {
+
             }
         } while (!isExiting);
 
         exit();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        Command c;
+        String output = "";
+        boolean isExiting = false;
+
+        try {
+            c = Parser.parse(input);
+            output = c.executeWithBotResponse(taskList, storage);
+            isExiting = c.isExit();
+
+            if (isExiting) {
+                // TODO: Find a more graceful way to exit?
+                System.exit(0);
+            }
+        } catch (DukeException.InvalidCommand invalidCommand) {
+            output = invalidCommand.getMessage();
+        }
+
+        return output;
     }
 }

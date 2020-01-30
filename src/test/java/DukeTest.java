@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.util.DateTimeUtil;
+import duke.util.DukeException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,11 @@ public class DukeTest {
     @Test
     public void parserTest() {
         System.out.println("TEST: ParserTest");
-        Command c = Parser.parse("bye");
+        Command c = null;
+        try {
+            c = Parser.parse("bye");
+        } catch (DukeException.InvalidCommand invalidCommand) {
+        }
         assertEquals(true, c.isExit());
     }
 
@@ -52,7 +57,7 @@ public class DukeTest {
         tl.addSaveStringAsTask("E0flight@2020-02-25T00:00");
         assertEquals(true, tl.doneTask(0));
         assertEquals(false, tl.doneTask(2));
-        assertEquals(true, tl.deleteTask(0));
-        assertEquals(false, tl.deleteTask(0));
+        tl.deleteTask(0);
+        assertEquals(null, tl.deleteTask(0));
     }
 }

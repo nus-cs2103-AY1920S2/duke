@@ -66,6 +66,43 @@ public class DateCommand extends Command {
     }
 
     /**
+     * Executes Date behaviour of finding all tasks on a given date
+     * and returns the result as a String
+     * @param taskList to access collection of tasks.
+     * @param storage to access save-load functionality.
+     * @return a String representing the output.
+     */
+    public String executeWithBotResponse(TaskList taskList, Storage storage) {
+        String output = "";
+
+        try {
+            LocalDate date =  LocalDate.parse(dateStr);
+            int count = 0;
+            for (Task t: taskList.getList()) {
+                if (t instanceof Deadline) {
+                    Deadline d = (Deadline)t;
+                    if (d.getDeadline().toLocalDate().isEqual(date)) {
+                        count++;
+                        output += count + "." + d.toString() + "\n";
+                    }
+                } else if (t instanceof Event) {
+                    Event e = (Event)t;
+                    if (e.getDatetime().toLocalDate().isEqual(date)) {
+                        count++;
+                        output += count + "." + e.toString() + "\n";
+                    }
+                }
+            }
+            output += "You have " + count + " thing" + (count != 1 ? "s" : "")
+                    + " happening on: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            output = "Please input a valid date. E.g. 2020-12-26";
+        }
+
+        return output;
+    }
+
+    /**
      * Inform if command is an exit command.
      * @return boolean indicating if command is an exit command.
      */
