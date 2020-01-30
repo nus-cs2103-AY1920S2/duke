@@ -94,6 +94,8 @@ public class Ui {
      * Prints out the given {@code TaskList} task by task.
      *
      * @param taskList The taskList to print.
+     * @throws DuchessException If the task changes size during printing, resulting
+     *                          in index out of bounds.
      */
     public void printTaskList(TaskList taskList) throws DuchessException {
         if (taskList.size() > 0) {
@@ -162,7 +164,9 @@ public class Ui {
     }
 
     /**
-     * Prints the default error message for failing to load storage.
+     * Prints the error message for failing to load storage.
+     *
+     * @param errorMessage Error message to be printed for failing to load storage.
      */
     public void printLoadingError(String errorMessage) {
         System.out.println("\t" + errorMessage);
