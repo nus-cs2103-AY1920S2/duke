@@ -13,9 +13,13 @@ public abstract class Command {
 
     private Task task;
 
-    public Command(Task task) { this.task = task; }
+    public Command(Task task) {
+        this.task = task;
+    }
 
-    public Command() {this.task = null; }
+    public Command() {
+        this.task = null;
+    }
 
     /**
      * Getter method to retrieve Task object if command

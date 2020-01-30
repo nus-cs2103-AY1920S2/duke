@@ -15,12 +15,12 @@ public class Event extends Task{
     /**
      * Constructor for Event class.
      *
-     * @param taskName Description of the event.
-     * @param by LocalDate object of when event is happening.
+     * @param description Description of the event.
+     * @param at LocalDate object of when event is happening.
      */
-    public Event(String taskName, LocalDate by) {
-        super(taskName);
-        this.time = by;
+    public Event(String description, LocalDate at) {
+        super(description);
+        this.time = at;
     }
 
     /**

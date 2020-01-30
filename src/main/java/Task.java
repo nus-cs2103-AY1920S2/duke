@@ -35,7 +35,9 @@ public class Task {
         return description;
     }
 
-    public String getTime() { return time; }
+    public String getTime() {
+        return time;
+    }
 
     /**
      * Returns a string representation of the object. In general, the
