@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Duke {
     ArrayList<Task> tasks;
@@ -61,8 +60,8 @@ public class Duke {
                 break;
             case "deadline":
                 String entry = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
-                String description = entry.split("/")[0].strip();
-                String time = entry.split("/")[1];
+                String description = entry.split(" /by ")[0].strip();
+                String time = entry.split(" /by ")[1];
 
                 addDeadline(description, time);
                 say("Another task? Oh well, here's the task:\n"
@@ -72,8 +71,8 @@ public class Duke {
                 break;
             case "event":
                 String input = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
-                String event = input.split("/")[0].strip();
-                String timeRange = input.split("/")[1];
+                String event = input.split(" /at ")[0].strip();
+                String timeRange = input.split(" /at ")[1];
 
                 addEvent(event, timeRange);
                 say("Another task? Oh well, here's the task:\n"
