@@ -16,6 +16,7 @@ public enum Command {
     LIST(CommandHandler::handleListCommand),
     DONE(CommandHandler::handleDoneCommand),
     DELETE(CommandHandler::handleDeleteCommand),
+    HELP(CommandHandler::handleHelpCommand),
     BYE(CommandHandler::handleByeCommand);
 
     /**

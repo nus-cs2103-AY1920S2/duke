@@ -156,6 +156,11 @@ public class CommandHandler {
         return null;
     }
 
+    static Void handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+        ui.printHelpMessage();
+        return null;
+    }
+
     /**
      * Prints the goodbye message with the given {@code Ui} instance.
      *
