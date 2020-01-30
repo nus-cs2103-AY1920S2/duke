@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Storage {
     public Storage() {}
+
     /**
      * This method add a new item to the txt file.
      */
@@ -60,6 +61,7 @@ public class Storage {
             ui.printIOErr();
         }
     }
+
     /**
      * This method updates items from the txt file based on user input.
      */

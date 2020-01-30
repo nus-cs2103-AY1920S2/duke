@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * This class deals with task with deadlines.
  */
+
 public class Deadline extends Item {
     LocalDate date;
     boolean done;
