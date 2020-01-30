@@ -9,6 +9,6 @@ public class CompleteTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task completedTask = tasks.completeTask(index);
         ui.showDonetask(completedTask);
-        storage.save(tasks.getAllTasks());
+        storage.save(tasks);
     }
 }

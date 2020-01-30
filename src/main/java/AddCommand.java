@@ -4,7 +4,7 @@ public abstract class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        storage.save(tasks.getAllTasks());
+        storage.save(tasks);
         ui.showAddedTask(task, tasks.getCount());
     }
 }
