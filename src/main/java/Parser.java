@@ -5,7 +5,6 @@ public class Parser {
     public String parse(Task task) { // parses task for into string to load into storage
         String parsed;
         TaskType taskType = task.getTaskType();
-
         switch (taskType) {
             case TODO:
                 parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription();
