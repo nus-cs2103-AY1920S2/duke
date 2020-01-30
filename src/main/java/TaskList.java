@@ -19,6 +19,10 @@ public class TaskList {
         return tasks;
     }
 
+    public int getCount() {
+        return tasks.size();
+    }
+
     @Override
     public String toString() {
         String result = "";
