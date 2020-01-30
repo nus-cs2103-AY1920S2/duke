@@ -178,6 +178,8 @@ public class Duke {
                                 },
                                 () -> botUi.showFailedToFind()
                         );
+            } else if (next == Instruction.HELP) {
+                botUi.showHelpMessage();
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;

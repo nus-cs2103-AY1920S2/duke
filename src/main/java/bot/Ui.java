@@ -64,6 +64,8 @@ public class Ui {
 
     public static final String LOAD_FROM_DISK_FAIL_MESSAGE =
             "Could not find local storage";
+    public static final String HELP_MESSAGE =
+            "Here is a list of words that I understand:";
 
     /**
      * Displays a greeting message
@@ -160,6 +162,13 @@ public class Ui {
     public void showTaskStoreMessage(int storeSize) {
         System.out.println(Ui.STORE_MESSAGE_ONE + storeSize
                 + Ui.STORE_MESSAGE_TWO);
+    }
+
+    /**
+     * Prints the help message to the interface
+     */
+    public void showHelpMessage() {
+        System.out.println(Ui.HELP_MESSAGE);
     }
 
     /**

@@ -5,6 +5,9 @@ import bot.command.exception.UnknownInstructionException;
 /**
  * Class to contain logic for commands
  * given to bot
+ *
+ * Todo: Move all parsing logic here
+ * Todo: Use new class ParsedInstruction for parsed commands
  */
 public class CommandParser {
     /**
@@ -38,6 +41,8 @@ public class CommandParser {
             return Instruction.SEARCH_STORAGE;
         } else if (firstWord.equals(Command.FIND.word)) {
             return Instruction.FIND_KEYWORD;
+        } else if (firstWord.equals(Command.HELP.word)) {
+            return Instruction.HELP;
         } else {
             throw new UnknownInstructionException(command);
         }

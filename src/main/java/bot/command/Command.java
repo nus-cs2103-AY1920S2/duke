@@ -10,6 +10,7 @@ public enum Command {
     DONE("done"),
     EXIT("exit"),
     FIND("find"),
+    HELP("help"),
     LIST("list"),
     DEADLINE("deadline"),
     EVENT("event"),
