@@ -1,18 +1,16 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.main.Parser;
-import duke.task.Task;
+import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
-    public void parseCommand_unknownCommand() {
-        List<Task> dummyTaskList = new ArrayList<>();
+    public void parseCommand_unknownCommand() throws DukeException {
+        TaskList dummyTaskList = new TaskList();
         assertTrue(Parser.parseCommand("hello", dummyTaskList));
     }
 }

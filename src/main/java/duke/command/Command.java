@@ -1,12 +1,8 @@
 package duke.command;
 
 import duke.exception.*;
-import duke.main.Storage;
-import duke.main.UI;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.main.Ui;
+import duke.task.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,14 +13,13 @@ import java.util.List;
 
 public class Command {
     //Custom byeCommand Method to exit Duke
-    public static boolean byeCommand(List<Task> taskList) throws CannotSaveFileException {
-        Storage.dataSave(taskList);
-        UI.print("Bye. Hope to see you again soon!");
+    public static boolean byeCommand(TaskList taskList) throws CannotSaveFileException {
+        Ui.print("Bye. Hope to see you again soon!");
         return false;
     }
 
     //Custom calendarCommand Method to run Calendar Command
-    public static void calendarCommand(List<Task> taskList, String commandSuffix) throws UnknownDateTimeException {
+    public static void calendarCommand(TaskList taskList, String commandSuffix) throws UnknownDateTimeException {
         try {
             DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate calendarDate = LocalDate.parse(commandSuffix, DTF);
@@ -35,11 +30,11 @@ public class Command {
     }
 
     //Custom calendarFind Method to find and print the list with the horizontal borders + running index
-    static void calendarFind(List<Task> tasksList, LocalDate calendarDate) {
+    static void calendarFind(TaskList taskList, LocalDate calendarDate) {
         StringBuilder sb = new StringBuilder();
         List<String> calendarList = new ArrayList<>();
 
-        for (Task task : tasksList) {
+        for (Task task : taskList.getTasks()) {
             if (task.getClass().equals(Deadline.class)) {
                 try {
                     DateTimeFormatter DTF = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma)");
@@ -67,11 +62,11 @@ public class Command {
             sb.setLength(sb.length() - 1);
         }
 
-        UI.print(sb.toString());
+        Ui.print(sb.toString());
     }
 
     //Custom deadlineCommand to create Deadline Tasks
-    public static void deadlineCommand(List<Task> taskList, String commandSuffix) throws DukeException {
+    public static void deadlineCommand(TaskList taskList, String commandSuffix) throws DukeException {
         try {
             String[] byDeadline = commandSuffix.split(" /by ");
 
@@ -97,14 +92,14 @@ public class Command {
                 taskList.add(new Deadline(false, taskList.size(), byDeadline[0], byDeadline[1]));
 
                 String deadlineOutput = ("Got it. I've added this task:\n\t[D][✗] "
-                        + byDeadline[0] + " (by: " + byDeadline[1] + ")" +
-                        "\nNow you have " + taskList.size() + " task(s) in the list.");
+                    + byDeadline[0] + " (by: " + byDeadline[1] + ")" +
+                    "\nNow you have " + taskList.size() + " task(s) in the list.");
 
                 if (unknownDate) {
                     deadlineOutput = deadlineOutput + "\nPS: " + proTip;
                 }
 
-                UI.print(deadlineOutput);
+                Ui.print(deadlineOutput);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new MissingByDeadlineException();
             }
@@ -114,15 +109,15 @@ public class Command {
     }
 
     //Custom eventCommand Method to create Event Tasks
-    public static void eventCommand(List<Task> taskList, String commandSuffix) throws DukeException {
+    public static void eventCommand(TaskList taskList, String commandSuffix) throws DukeException {
         try {
             String[] atEvent = commandSuffix.split(" /at ");
 
             try {
                 taskList.add(new Event(false, taskList.size(), atEvent[0], atEvent[1]));
-                UI.print("Got it. I've added this task:\n\t[E][✗] "
-                        + atEvent[0] + " (at: " + atEvent[1] + ")" +
-                        "\nNow you have " + taskList.size() + " task(s) in the list.");
+                Ui.print("Got it. I've added this task:\n\t[E][✗] "
+                    + atEvent[0] + " (at: " + atEvent[1] + ")" +
+                    "\nNow you have " + taskList.size() + " task(s) in the list.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new MissingAtEventException();
             }
@@ -132,7 +127,7 @@ public class Command {
     }
 
     //Custom listCommand Method to print the list with the horizontal borders + running index
-    public static void listCommand(List<Task> tasksList) {
+    public static void listCommand(TaskList tasksList) {
         StringBuilder sb = new StringBuilder();
 
         if (tasksList.size() == 0) {
@@ -140,21 +135,21 @@ public class Command {
         } else {
             sb.append("Here are the task(s) in your list:\n");
 
-            for (Task task : tasksList) {
+            for (Task task : tasksList.getTasks()) {
                 sb.append(task).append("\n");
             }
         }
 
         sb.setLength(sb.length() - 1);
-        UI.print(sb.toString());
+        Ui.print(sb.toString());
     }
 
     //Custom todoCommand to create Todo Tasks
-    public static void todoCommand(List<Task> taskList, String commandSuffix) throws MissingDetailsException {
+    public static void todoCommand(TaskList taskList, String commandSuffix) throws MissingDetailsException {
         try {
             taskList.add(new Todo(false, taskList.size(), commandSuffix));
-            UI.print("Got it. I've added this task:\n\t[T][✗] "
-                    + commandSuffix + "\nNow you have " + taskList.size() + " task(s) in the list.");
+            Ui.print("Got it. I've added this task:\n\t[T][✗] "
+                + commandSuffix + "\nNow you have " + taskList.size() + " task(s) in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MissingDetailsException();
         }

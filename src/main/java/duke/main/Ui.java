@@ -1,6 +1,11 @@
 package duke.main;
 
-public class UI {
+import java.util.Scanner;
+
+public class Ui {
+
+    static Scanner scanner = new Scanner(System.in);
+
     //Custom welcome Method to print a welcome message
     static void welcome() {
         print("Hello! I'm Duke\nWhat can I do for you?");
@@ -11,5 +16,13 @@ public class UI {
         System.out.println("____________________________________________________________");
         System.out.println(output);
         System.out.println("____________________________________________________________\n");
+    }
+
+    public static String getInput() {
+        return scanner.nextLine();
+    }
+
+    public static void showLoadingError() {
+        print("An error occurred while loading existing tasks.");
     }
 }

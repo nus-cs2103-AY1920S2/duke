@@ -2,25 +2,38 @@ package duke.main;
 
 import duke.exception.CannotReadFileException;
 import duke.exception.CannotSaveFileException;
-import duke.task.Task;
+import duke.task.TaskList;
 
-import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+//Suppressing warnings here as file consistency is already being caught and checked
+@SuppressWarnings("unchecked")
 
 public class Storage {
+
+    private String filepath;
+
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+
     //Custom dataRead Method to read from file
-    static List<Task> dataRead() throws CannotReadFileException {
+    public TaskList load() throws CannotReadFileException {
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
-            FileInputStream dataFile = new FileInputStream(String.valueOf(path));
+            File file = new File(filepath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileInputStream dataFile = new FileInputStream(filepath);
             ObjectInputStream in = new ObjectInputStream(dataFile);
-            ArrayList<Task> taskList = (ArrayList<Task>) in.readObject();
+            TaskList taskList = (TaskList) in.readObject();
             in.close();
             dataFile.close();
-
             return taskList;
         } catch (IOException | ClassNotFoundException ignored) {
             throw new CannotReadFileException();
@@ -28,10 +41,14 @@ public class Storage {
     }
 
     //Custom dataSave Method to save to file
-    public static void dataSave(List<Task> taskList) throws CannotSaveFileException {
+    public void save(TaskList taskList) throws CannotSaveFileException {
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
-            FileOutputStream dataFile = new FileOutputStream(String.valueOf(path));
+            File file = new File(filepath);
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            FileOutputStream dataFile = new FileOutputStream(filepath);
             ObjectOutputStream out = new ObjectOutputStream(dataFile);
             out.writeObject(taskList);
             out.close();
