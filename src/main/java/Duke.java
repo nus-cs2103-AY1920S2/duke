@@ -7,13 +7,13 @@ public class Duke {
     static Storage storage = new Storage();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        processlist(sc);
+        processList(sc);
     }
 
     /**
      * This method reads user input and process it.
      */
-    private static void processlist(Scanner sc) throws IllegalInstructionException, NumberFormatException, DateTimeParseException {
+    private static void processList(Scanner sc) throws IllegalInstructionException, NumberFormatException, DateTimeParseException {
         ui.greeting();
         TaskList list = new TaskList();
         storage.loadTxt(list, ui);

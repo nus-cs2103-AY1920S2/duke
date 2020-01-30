@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     public Parser() {}
+
     /**
      * This method returns the appended string without the first word in the input.
      */

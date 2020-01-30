@@ -32,6 +32,7 @@ public class Ui {
     public String removeTask(TaskList list, int index, int count) {
         return (line + "\n" + space + "Noted. I've removed this task:\n" + space + list.items.get(index) + space + "Now you have " + count + " task");
     }
+
     public String addTask(TaskList list, int count) {
         return (line + "\n" + space + " Got it. I've added this task:\n" + space + list.items.get(list.items.size()-1)
                 + space + " Now you have " + count + " task");
@@ -52,15 +53,19 @@ public class Ui {
     public void throwTimeErr() {
         throw new IllegalInstructionException(space+"☹ OOPS!!! The time/description of a task cannot be empty.");
     }
+
     public void printIOErr() {
         System.err.println(space+"☹ OOPS!!! The format of IO is wrong.");
     }
+
     public void printDateErr() {
         System.err.println(space+"☹ OOPS!!! The format of date is wrong (yyyy-MM-dd).");
     }
+
     public void printLoad() {
         System.out.println(space+"Past data successfully loaded.");
     }
+    
     public void printIndexErr() {
         System.err.println(space + "☹ OOPS!!! The format of index is wrong.");
     }

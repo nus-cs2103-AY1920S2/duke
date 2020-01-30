@@ -6,10 +6,12 @@ public class TaskList {
     ArrayList<Item> items = new ArrayList<Item>();
     Ui ui = new Ui();
     int count = 0;
+
     public TaskList() {
         this.items = items;
         this.count = count;
     }
+
     /**
      * This method add a new item to the list.
      */

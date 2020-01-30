@@ -32,5 +32,6 @@ public abstract class Item {
     }
 
     public abstract String replace();
+
     public abstract String now();
 }
