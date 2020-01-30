@@ -234,6 +234,10 @@ public class Store {
         return S.contains("✓");
     }
 
+    /**
+     * This method finds Task that contains the Action.
+     * @param Action This is the Action to be located in the ArrayList<Task> Storage.
+     */
     public void find(String Action){
         ArrayList<String> Match = new ArrayList<>();
         System.out.print(ui.line());
