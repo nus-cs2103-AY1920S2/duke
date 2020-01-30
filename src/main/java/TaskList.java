@@ -15,6 +15,10 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    public List<Task> getAllTasks() {
+        return tasks;
+    }
+
     @Override
     public String toString() {
         String result = "";
