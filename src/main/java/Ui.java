@@ -1,4 +1,8 @@
+import java.util.Scanner;
+
 public class Ui {
+    Scanner scanner = new Scanner(System.in);
+
     public void showLoadingError() {
         String message = "Cannot find save file.\n"
                 + "Creating a new one, even if it's a bother";
@@ -33,8 +37,8 @@ public class Ui {
         say(message);
     }
 
-    public void showInvalidTaskMessage() {
-        String message = "Your task is not even properly written. Try again properly.";
+    public void showInvalidFormatMessage() {
+        String message = "Your command is not even properly written. Try again properly.";
 
         say(message);
     }
@@ -56,6 +60,10 @@ public class Ui {
         String message = "Bye. Please don't come back again or I'll call the cops.";
 
         say(message);
+    }
+
+    public String getCommand() {
+        return scanner.nextLine();
     }
 
     private void say(String speech) {
