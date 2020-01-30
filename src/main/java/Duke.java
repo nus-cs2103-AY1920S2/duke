@@ -94,6 +94,8 @@ public class Duke {
 
                 say("Giving up already? Removed this:\n\t"
                         + popTask(number));
+
+                saveList();
                 break;
             default:
                 say("Unknown command. Program it yourself or get a dictionary.");
