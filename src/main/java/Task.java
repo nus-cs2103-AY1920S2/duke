@@ -19,7 +19,9 @@ abstract class Task {
         return this.isDone;
     }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 
     abstract public String getType();
 

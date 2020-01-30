@@ -1,6 +1,6 @@
 public class MissingInfoException extends DukeException {
-    String taskType;
-    boolean hasDescription;
+    private String taskType;
+    private boolean hasDescription;
 
     MissingInfoException(String taskType, boolean hasDescription) {
         this.taskType = taskType;
@@ -8,10 +8,11 @@ public class MissingInfoException extends DukeException {
     }
 
     public String getMissingInfoName() {
-        if (!this.hasDescription)
+        if (!this.hasDescription) {
             return "description";
-        else
+        } else {
             return "date/time";
+        }
     }
 
     public String getTaskType() {

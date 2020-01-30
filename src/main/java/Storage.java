@@ -10,28 +10,33 @@ import java.util.ArrayList;
 public class Storage {
     private String filePath;
 
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    private Task getNextTask(String taskElements[]) {
+    private Task getNextTask(String[] taskElements) {
         Task t = null;
         switch (taskElements[0]) {
-            case "T":
-                t = new ToDo(taskElements[2]);
-                if (taskElements[1].equals("1"))
-                    t.setDone();
-                break;
-            case "D":
-                t = new Deadline(taskElements[2], LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern("MMM d yyyy")));
-                if (taskElements[1].equals("1"))
-                    t.setDone();
-                break;
-            case "E":
-                t = new Event(taskElements[2], LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern("MMM d yyyy")));
-                if (taskElements[1].equals("1"))
-                    t.setDone();
-                break;
+        case "T":
+            t = new ToDo(taskElements[2]);
+            if (taskElements[1].equals("1")) {
+                t.setDone();
+            }
+            break;
+        case "D":
+            t = new Deadline(taskElements[2],
+                    LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern("MMM d yyyy")));
+            if (taskElements[1].equals("1")) {
+                t.setDone();
+            }
+            break;
+        case "E":
+            t = new Event(taskElements[2],
+                    LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern("MMM d yyyy")));
+            if (taskElements[1].equals("1")) {
+                t.setDone();
+            }
+            break;
         }
         return t;
     }
@@ -47,15 +52,15 @@ public class Storage {
         }
         while (s.hasNextLine()) {
             String currLine = s.nextLine();
-            String taskElements[] = currLine.split(" \\| ");
+            String[] taskElements = currLine.split(" \\| ");
             tasks.add(this.getNextTask(taskElements));
         }
         return tasks;
     }
 
-    public void save(ArrayList<Task> arrTasks) throws SavingException {
+    public void save(ArrayList<Task> tasks) throws SavingException {
         try {
-            this.writeToFile(this.filePath, this.parseTasks(arrTasks));
+            this.writeToFile(this.filePath, this.parseTasks(tasks));
         } catch (IOException e) {
             throw new SavingException();
         }
@@ -69,20 +74,22 @@ public class Storage {
 
     private String parseTask(Task t) {
         String taskString = t.getType() + " | ";
-        if (t.isDone())
+        if (t.isDone()) {
             taskString += "1 | ";
-        else
+        } else {
             taskString += "0 | ";
+        }
         taskString += t.getDescription();
-        if (t instanceof DateTimeTask)
+        if (t instanceof DateTimeTask) {
             taskString += " | " + ((DateTimeTask) t).getDateTime();
+        }
         taskString += "\n";
         return taskString;
     }
 
-    private String parseTasks(ArrayList<Task> arrTasks) {
+    private String parseTasks(ArrayList<Task> tasks) {
         String allTasks = "";
-        for (Task t: arrTasks) {
+        for (Task t : tasks) {
             allTasks += parseTask(t);
         }
         return allTasks;

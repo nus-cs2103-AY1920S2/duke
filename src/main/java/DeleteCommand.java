@@ -1,5 +1,6 @@
 public class DeleteCommand extends Command {
     private int idx;
+
     public DeleteCommand(int idx) {
         this.idx = idx;
     }
