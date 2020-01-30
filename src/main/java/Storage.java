@@ -1,4 +1,7 @@
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +19,11 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    // Read and get Tasks from file.
+    /**
+     * Reads file specified in filepath and converts file content into a TaskList.
+     * @return TaskList.
+     * @throws FileNotFoundException
+     */
     public TaskList getTaskFromMemory() throws FileNotFoundException {
         TaskList taskList = new TaskList();
         File f = new File(filepath);
@@ -58,7 +65,10 @@ public class Storage {
         return taskList;
     }
 
-    // Write the current taskList to file.
+    /**
+     * Overwrite target file specified in filepath with content of TaskList provided.
+     * @param taskList User's TaskList.
+     */
     public void writeTaskToMemory(TaskList taskList) {
         try {
             StringBuilder sb = new StringBuilder("");

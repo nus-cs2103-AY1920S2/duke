@@ -16,6 +16,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main running function of the Duke class.
+     * Integrates Storage, TaskList, Ui and Parser to perform the main intended function.
+     */
     public void run() {
         Ui.hello();
         if (newUser) {

@@ -1,11 +1,23 @@
-import duke.task.*;
-import duke.exception.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.exception.DukeException;
+import duke.exception.DukeTaskException;
+import duke.exception.DukeUnknownException;
+import duke.exception.DukeArgumentException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Make sense of the user's command and execute their desired function(s).
+     * @param command Input from the user.
+     * @param taskList User's TaskList.
+     * @param storage Storage class that reads from/write to a specified file.
+     */
     public void parseAndExecute(String command, TaskList taskList, Storage storage) {
         String[] commandArray = command.split(" ", 2);
         try {
@@ -49,7 +61,13 @@ public class Parser {
         }
     }
 
-    // Add Task to list with specified type (i.e. "T", "D", "E").
+    /**
+     * Adds Task to TaskList based on its type (i.e. Todo, Deadline or Event).
+     * @param taskList User's TaskList.
+     * @param input Input provided by the user.
+     * @param type Type of Task ("T" for Todo, "D" for Deadline, "E" for Event).
+     * @throws DukeTaskException
+     */
     public static void addTask(TaskList taskList, String input, String type) throws DukeTaskException {
         String str = "\nCurrent number of task(s): ";
 
@@ -94,6 +112,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if input provided can be parsed into a LocalDate object.
+     * @param input Input from user.
+     * @return True if input can be parsed, false otherwise.
+     */
     public static boolean isLocalDate(String input) {
         try {
             LocalDate.parse(input);
@@ -103,7 +126,12 @@ public class Parser {
         return true;
     }
 
-    // Mark the specified task as done.
+    /**
+     * Marks the specified task as done.
+     * @param taskList User's TaskList.
+     * @param userIndex Index of Task to be marked as done.
+     * @throws DukeArgumentException
+     */
     public void markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
         if (taskList.isEmpty()) {
@@ -117,7 +145,12 @@ public class Parser {
         }
     }
 
-    // Delete the specified task from the list.
+    /**
+     * Deletes the specified task.
+     * @param taskList User's TaskList.
+     * @param userIndex Index of Task to be deleted.
+     * @throws DukeArgumentException
+     */
     public void deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
         if (taskList.isEmpty()) {
