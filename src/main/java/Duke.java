@@ -13,6 +13,8 @@ public class Duke{
 //        TaskList tList = new TaskList(arrTask);
         Ui uiDisplay = new Ui();
         Storage  fileStorage = new Storage();
+        String filePath = "duke.txt";
+        File f = new File(filePath);
         while(!mesInput.equalsIgnoreCase("bye")){
             mesInput = sc.nextLine();
             String [] s = new String[2];
@@ -24,14 +26,14 @@ public class Duke{
             }
 
             if(userCommand.getCommandType(mesInput).equals("todo") && !mesInput.equalsIgnoreCase("todo")){
-                    userCommand.todoTaskCommand(mesInput,arrTask,uiDisplay);
+                    userCommand.todoTaskCommand(mesInput,arrTask,uiDisplay,f);
             }else if(userCommand.getCommandType(mesInput).equalsIgnoreCase("list")) {
                 TaskList tList = new TaskList(arrTask);
                 tList.printTaskList();
             }else if (userCommand.getCommandType(mesInput).equalsIgnoreCase("deadline") && !mesInput.equalsIgnoreCase("deadline")) {
-                    userCommand.deadlineCommand(mesInput,arrTask,uiDisplay);
+                    userCommand.deadlineCommand(mesInput,arrTask,uiDisplay,f);
             }else if (userCommand.getCommandType(mesInput).equalsIgnoreCase("event" ) && !mesInput.equalsIgnoreCase("event")) {
-                    userCommand.eventCommand(mesInput,arrTask,uiDisplay);
+                    userCommand.eventCommand(mesInput,arrTask,uiDisplay,f);
             }else if (userCommand.getCommandType(mesInput).equalsIgnoreCase("done") && !mesInput.equalsIgnoreCase("done")){
                     userCommand.doneCommand(mesInput,arrTask,uiDisplay);
             }else if(mesInput.contains("delete") && !mesInput.equalsIgnoreCase("delete")){
@@ -63,6 +65,9 @@ public class Duke{
             }
         }
         uiDisplay.exitsMessage();
+
+
+
 
     }
 }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.io.File;
 
 public class Parser {
     private String command;
@@ -21,15 +22,15 @@ public class Parser {
         return s[0];
     }
 
-    public void todoTaskCommand(String command, ArrayList<Task> tasks,Ui uiDisplay)throws Exception{
+    public void todoTaskCommand(String command, ArrayList<Task> tasks,Ui uiDisplay,File f)throws Exception{
         String [] s = command.split("todo ");
         tasks.add(new Task(s[1]));
         uiDisplay.topTwoLine();
         System.out.println("   "+tasks.get(tasks.size()-1).toString());
         uiDisplay.bottomTwoLine(tasks);
-        fileStorage.createFile("todo",s[1]);
+        fileStorage.writeFile("todo",s[1],f);
     }
-    public void eventCommand(String command,ArrayList<Task> tasks,Ui uiDisplay) throws Exception{
+    public void eventCommand(String command,ArrayList<Task> tasks,Ui uiDisplay,File f) throws Exception{
         String [] s = command.split("event ");
         String [] temp = s[1].split("/");
         String taskName = temp[0];
@@ -38,10 +39,10 @@ public class Parser {
         tasks.add(new Deadline(taskName,date));
         System.out.println("     "+tasks.get(tasks.size()-1).toString());
         uiDisplay.bottomTwoLine(tasks);
-        fileStorage.createFile("deadline",taskName+date);
+        fileStorage.writeFile("deadline",taskName+date,f);
     }
 
-    public void deadlineCommand(String command,ArrayList<Task> tasks,Ui uiDisplay) throws Exception{
+    public void deadlineCommand(String command,ArrayList<Task> tasks,Ui uiDisplay,File f) throws Exception{
         String [] s = command.split("deadline ");
         String[] temp = s[1].split("/");
         String taskName = temp[0];
@@ -50,7 +51,7 @@ public class Parser {
         tasks.add(new Event(taskName, date));
         System.out.println("     " + tasks.get(tasks.size()-1).toString());
         uiDisplay.bottomTwoLine(tasks);
-        fileStorage.createFile("deadline",taskName+date);
+        fileStorage.writeFile("deadline",taskName+date,f);
     }
 
     public void doneCommand(String command,ArrayList<Task> tasks,Ui uiDisplay){
