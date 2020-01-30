@@ -1,8 +1,6 @@
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.util.List;
 
 public class Storage {
     String filePath;
@@ -12,14 +10,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws FileNotFoundException {
+    public TaskList load() throws FileNotFoundException {
         BufferedReader br = new BufferedReader(new FileReader(getFile()));
 
-        return jsonParser.fromJson(br,
-                TypeToken.getParameterized(List.class, Task.class).getType());
+        return jsonParser.fromJson(br, TaskList.class);
     }
 
-    public void save(List<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(getFile());
             fw.append(jsonParser.toJson(tasks));
