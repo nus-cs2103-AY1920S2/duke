@@ -51,6 +51,7 @@ public class TaskList {
      * Removes a {@code Task} from the {@code TaskList}.
      *
      * @param index Index of {@code Task} to be removed.
+     * @throws DuchessException If the index is out of bounds.
      */
     public void removeTask(int index) throws DuchessException {
         try {
@@ -64,6 +65,8 @@ public class TaskList {
      * Returns a {@code Task} from the {@code TaskList} based on its {@code index}.
      *
      * @param index Index of {@code Task} to be retrieved.
+     * @return {@code Task} at index given.
+     * @throws DuchessException If the index is out of bounds.
      */
     public Task getTask(int index) throws DuchessException {
         try {
@@ -109,7 +112,7 @@ public class TaskList {
      */
     public ArrayList<Pair<Task, Integer>> find(String searchWords) {
         return IntStream.range(0, this.tasks.size())
-                .mapToObj(i -> new Pair<Task, Integer>(this.tasks.get(i), i))
+                .mapToObj(i -> new Pair<>(this.tasks.get(i), i))
                 .filter(p -> p.getFirst().getDescription().toLowerCase().contains(searchWords.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
