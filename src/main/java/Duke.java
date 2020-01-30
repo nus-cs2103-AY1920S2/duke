@@ -53,7 +53,9 @@ public class Duke {
                         }
                         command = cmdArr[0];
                         String deadline = cmdArr[1].split(" ", 2)[1];
-                        Deadline newTask = new Deadline(command, deadline);
+                        String deadlineDate = deadline.split(" ", 2)[0];
+                        String deadlineTime = deadline.split(" ",2)[1];
+                        Deadline newTask = new Deadline(command, deadlineDate, deadlineTime);
                         arr.add(newTask);
                         System.out.println("Okay! I have taken note of the following:");
                         System.out.println(newTask);
