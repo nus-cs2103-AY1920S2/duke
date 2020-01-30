@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -58,7 +60,7 @@ public abstract class Task {
 }
 
 class TodoTask extends Task {
-
+    protected LocalDateTime time;
     public TodoTask(String[] inputArr) throws Exception {
         this.type = "todo";
         if (inputArr.length < 2) {
@@ -70,6 +72,16 @@ class TodoTask extends Task {
 
         if (!this.description.contains("at")) {
             throw new Exception("Missing @t");
+        }
+        int lastAt = description.lastIndexOf(" at ");
+        if (lastAt == -1) {
+            throw new Exception("Keyword \"at\" missing");
+        } else {
+            String sub = this.description.substring(lastAt + 4);
+            this.time = LocalDateTime.parse(sub, DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
+            this.description = this.description.substring(0, lastAt + 3) + ' '
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma "));
+
         }
         size++;
     }
@@ -97,6 +109,8 @@ class EventTask extends Task {
 }
 
 class DeadlineTask extends Task {
+    protected LocalDateTime time;
+
     public DeadlineTask(String[] inputArr) throws Exception {
         this.type = "deadline";
         if (inputArr.length < 2) {
@@ -105,8 +119,14 @@ class DeadlineTask extends Task {
         this.description = Arrays.stream(inputArr)
                 .map(str -> str.toLowerCase().equals("deadline") ? "" : str.equals("/by") ? "by" : str)
                 .collect(Collectors.joining(" "));
-        if (!this.description.contains("by")) {
-            throw new Exception("Missing by!");
+        int lastBy = description.lastIndexOf(" by ");
+        if (lastBy == -1) {
+            throw new Exception("Keyword \"by\" missing");
+        } else {
+            String sub = this.description.substring(lastBy + 4);
+            this.time = LocalDateTime.parse(sub, DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
+            this.description = this.description.substring(0, lastBy + 3) + ' '
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma "));
         }
         size++;
     }
