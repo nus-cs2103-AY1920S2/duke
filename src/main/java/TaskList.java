@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class TaskList {
     ArrayList<Task> list;
-    public TaskList (ArrayList<Task> list) {
+
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 

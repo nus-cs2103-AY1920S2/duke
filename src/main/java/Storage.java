@@ -42,7 +42,7 @@ public class Storage {
 
         for (int i = 0; i < lines.length; i++) {
             if (i == index) {
-                //do nth
+                // do nth
             } else {
                 writer.write(lines[i]);
                 writer.newLine();
