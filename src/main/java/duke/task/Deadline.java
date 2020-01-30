@@ -34,6 +34,10 @@ public class Deadline extends Task {
         return String.format("D:%s:%d:%s\n", super.name, (super.isDone ? 1 : 0), byTime);
     }
 
+    public TaskType getTaskType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         if (super.isDone)

@@ -24,15 +24,19 @@ public class Event extends Task {
         localDate = LocalDate.parse(atTime.split(" ")[1]);
     }
 
-    public Event(String name, boolean isDone, String byTime) {
+    public Event(String name, boolean isDone, String atTime) {
         super(name, isDone);
-        this.atTime = byTime;
-        type = TaskType.deadline;
+        this.atTime = atTime;
+        type = TaskType.event;
         convertDateTime(atTime);
     }
 
     public String encoder() {
         return String.format("E:%s:%d:%s\n", super.name, (super.isDone ? 1 : 0), atTime);
+    }
+
+    public TaskType getTaskType() {
+        return type;
     }
 
     @Override

@@ -18,6 +18,10 @@ public class ToDo extends Task {
         return String.format("T:%s:%d\n", name, (isDone ? 1 : 0));
     }
 
+    public TaskType getTaskType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         if (super.isDone)
