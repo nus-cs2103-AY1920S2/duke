@@ -22,6 +22,7 @@ public class TaskList {
     /**
      * Instantiates a <code>TaskList</code> object with task list represnted by
      * the <code>ArrayList</code> object.
+     *
      * @param t the list of tasks.
      */
     public TaskList(ArrayList<Task> t) {
@@ -30,6 +31,7 @@ public class TaskList {
 
     /**
      * Marks a Task with the given index as done.
+     *
      * @param tindex The index of the Task in the list to be marked as done.
      * @return The Task to be marked as done.
      */
@@ -41,6 +43,7 @@ public class TaskList {
 
     /**
      * Deletes a Task with the given index as done.
+     *
      * @param tindex The index of the Task in the list to be deleted.
      * @return The Task to be deleted.
      */
@@ -49,7 +52,8 @@ public class TaskList {
     }
 
     /**
-     * adds a Task to the list.
+     * Adds a Task to the list.
+     *
      * @return The Task to be added.
      */
     public Task addTask(Task t) {
@@ -57,9 +61,16 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Finds the tasks that in the task list whose description contains
+     * the keyword specified.
+     *
+     * @param keyword The keyword to be used to search through the task list.
+     * @return A list of tasks that contains the given keyword in their description.
+     */
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> out = new ArrayList<>();
-        for (Task t: tasks) {
+        for (Task t : tasks) {
             if (t.description.contains(keyword)) {
                 out.add(t);
             }

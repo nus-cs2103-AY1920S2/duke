@@ -7,17 +7,18 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents an Event Task.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate at;
 
     /**
      * Creates a event task with the given description and date information.
-     * @param Description description of the event.
-     * @param a the date information of the event.
+     *
+     * @param description description of the event.
+     * @param a           the date information of the event.
      * @throws DateTimeParseException when the date information is in invalid format.
      */
-    public Event(String Description, String a) throws DateTimeParseException {
-        super(Description);
+    public Event(String description, String a) throws DateTimeParseException {
+        super(description);
         this.at = Task.generateTime(a);
     }
 
@@ -29,6 +30,6 @@ public class Event extends Task{
     @Override
     public String generateWriteFormat() {
         int k = this.isDone ? 1 : 0;
-        return "E|"+ k + "|" + description + "|" + at;
+        return "E|" + k + "|" + description + "|" + at;
     }
 }

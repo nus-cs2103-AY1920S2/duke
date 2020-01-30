@@ -6,9 +6,10 @@ package com.duke.task;
 public class Todo extends Task {
     /**
      * Creates a Todo task with the description given.
+     *
      * @param d description of the Todo task.
      */
-    public Todo(String d){
+    public Todo(String d) {
         super(d);
     }
 
@@ -20,6 +21,6 @@ public class Todo extends Task {
     @Override
     public String generateWriteFormat() {
         int k = this.isDone ? 1 : 0;
-        return "T|"+ k + "|" + description;
+        return "T|" + k + "|" + description;
     }
 }

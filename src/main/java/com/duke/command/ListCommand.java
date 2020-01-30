@@ -6,11 +6,11 @@ import com.duke.util.Storage;
 import com.duke.util.Ui;
 
 /**
- * Represents a command that queries the list of tasks
+ * Represents a command that queries the list of tasks.
  */
 public class ListCommand extends Command {
     /**
-     * Creates a command that queries the list of tasks
+     * Creates a command that queries the list of tasks.
      */
     public ListCommand() {
     }

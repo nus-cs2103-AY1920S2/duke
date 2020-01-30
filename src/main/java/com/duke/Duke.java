@@ -2,13 +2,12 @@ package com.duke;
 
 import com.duke.command.Command;
 import com.duke.task.TaskList;
-import com.duke.task.Todo;
 import com.duke.util.DukeException;
 import com.duke.util.Parser;
 import com.duke.util.Storage;
 import com.duke.util.Ui;
 
-import java.io.*;
+import java.io.FileNotFoundException;
 
 /**
  * Driver class of the Duke program. To start a new session,
@@ -22,6 +21,7 @@ public class Duke {
     /**
      * Instantiate a new <code>Duke</code> object with the data file path
      * that stores the task information.
+     *
      * @param filePath the file path of the file that stores the task information.
      */
     public Duke(String filePath) {

@@ -47,6 +47,7 @@ public class Ui {
     /**
      * Prints the error message associated with a <code>DukeException</code>DukeException object.
      * Invoked when a DukeException is caught.
+     *
      * @param msg the error message associated with a <code>DukeException</code>DukeException object.
      */
     public void showError(String msg) {
@@ -55,6 +56,7 @@ public class Ui {
 
     /**
      * Invokes the user to input the next command and converts it to a <code>String</code> object.
+     *
      * @return The user input of the next command as a String.
      */
     public String readCommand() {
@@ -71,6 +73,7 @@ public class Ui {
     /**
      * Prints the list of tasks on the current task list. Invoked when
      * the command input is "list".
+     *
      * @param tasks the <code>TaskList</code> object that stores the list of
      *              tasks in the current session.
      */
@@ -78,7 +81,7 @@ public class Ui {
         String output = space + "Here are the tasks in your list: ";
         int noOfTasks = tasks.tasks.size();
         for (int i = 0; i < noOfTasks; i++) {
-            int index = i+1;
+            int index = i + 1;
             output += "\n" + space + index + ". " + tasks.tasks.get(i);
         }
         System.out.println(output);
@@ -86,6 +89,7 @@ public class Ui {
 
     /**
      * Prints the message that the <code>Task</code> t is successfully marked as done.
+     *
      * @param t the <code>Task</code> to be marked as done.
      */
     public void showDone(Task t) {
@@ -95,35 +99,42 @@ public class Ui {
     }
 
     /**
-     * Print the message that a task t is deleted from the task list, and
+     * Prints the message that a task t is deleted from the task list, and
      * indicate the number of task left on the list.
-     * @param t the task of be removed from the list.
+     *
+     * @param t     the task of be removed from the list.
      * @param count the number of task left on the task list.
      */
     public void showDelete(Task t, int count) {
         String output = space + "Noted. I've removed this task: "
-                + "\n" + space + "  " + t + "\n" + space + "Now you have " + count +
-                " tasks in your list.";
+                + "\n" + space + "  " + t + "\n" + space + "Now you have " + count
+                + " tasks in your list.";
         System.out.println(output);
     }
 
     /**
-     * Print the message that a task t is added to the task list, and
+     * Prints the message that a task t is added to the task list, and
      * indicate the number of task on the list.
-     * @param t the task of be added to the list.
+     *
+     * @param t     the task of be added to the list.
      * @param count the number of task on the task list.
      */
     public void showAdd(Task t, int count) {
         String out = space + "Got it. I've added this task: " + "\n" + space
-                + "  " + t + "\n" + space + "Now you have " + count +
-                " tasks in your list.";
+                + "  " + t + "\n" + space + "Now you have " + count
+                + " tasks in your list.";
         System.out.println(out);
     }
 
+    /**
+     * Prints the list of tasks found in the storage that contains the
+     * keyword specified in a Find command.
+     * @param tasks The list of tasks that contain the keyword.
+     */
     public void showFind(ArrayList<Task> tasks) {
         String out = space + "Here are the matching tasks in your list: ";
         int index = 1;
-        for (Task t: tasks) {
+        for (Task t : tasks) {
             out += "\n" + space + index + ". " + t;
             index++;
         }

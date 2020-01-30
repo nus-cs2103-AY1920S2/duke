@@ -1,7 +1,13 @@
 package com.duke.util;
 
-import com.duke.Duke;
-import com.duke.command.*;
+
+import com.duke.command.Command;
+import com.duke.command.DeleteCommand;
+import com.duke.command.DoneCommand;
+import com.duke.command.ExitCommand;
+import com.duke.command.FindCommand;
+import com.duke.command.ListCommand;
+import com.duke.command.TaskCommand;
 import com.duke.task.Deadline;
 import com.duke.task.Event;
 import com.duke.task.Task;
@@ -18,27 +24,28 @@ public class Parser {
     /**
      * Takes in a <code>String</code> form of command and converts it into <code>Command</code>
      * object to be executed.
+     *
      * @param cmd String representation of user input
      * @return Command representation of the user input
      * @throws DukeException when the user input is invalid.
      */
     public static Command parse(String cmd) throws DukeException {
         StringTokenizer st = new StringTokenizer(cmd);
-        String first_token = st.nextToken();
+        String firstToken = st.nextToken();
         Command output;
 
         if (cmd.equals("bye")) {
             output = new ExitCommand();
-        } else if (cmd.equals("list")){
+        } else if (cmd.equals("list")) {
             output = new ListCommand();
-        } else if (first_token.equals("delete")) {
+        } else if (firstToken.equals("delete")) {
             try {
                 int index = Integer.parseInt(cmd.substring(7)) - 1;
                 output = new DeleteCommand(index);
             } catch (Exception e) {
                 throw new DukeException("OOPS! delete should follow by a number");
             }
-        } else if (first_token.equals("done")) {
+        } else if (firstToken.equals("done")) {
             try {
                 int index = Integer.parseInt(cmd.substring(5)) - 1;
                 output = new DoneCommand(index);
@@ -46,7 +53,7 @@ public class Parser {
                 throw new DukeException("OOPS! done should follow by a number");
             }
 
-        } else if (first_token.equals("find")) {
+        } else if (firstToken.equals("find")) {
             try {
                 cmd = cmd.substring(5);
                 if (cmd.equals("")) {
@@ -59,7 +66,7 @@ public class Parser {
         } else {
             Task itemToAdd = null;
 
-            if (first_token.equals("deadline")) {
+            if (firstToken.equals("deadline")) {
                 try {
                     cmd = cmd.substring(9);
                     String[] temp = cmd.split(" /by ");
@@ -70,7 +77,7 @@ public class Parser {
                     throw new DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
                 }
 
-            } else if (first_token.equals("event")) {
+            } else if (firstToken.equals("event")) {
                 try {
                     cmd = cmd.substring(6);
                     String[] temp = cmd.split(" /at ");
@@ -80,7 +87,7 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     throw new DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
                 }
-            } else if (first_token.equals("todo")) {
+            } else if (firstToken.equals("todo")) {
                 try {
                     cmd = cmd.substring(5);
                     itemToAdd = new Todo(cmd);

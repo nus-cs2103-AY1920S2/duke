@@ -16,6 +16,7 @@ public class Task {
 
     /**
      * Generates the icon representation of the status of the task.
+     *
      * @return the icon representation of the status of the task.
      */
     public String getStatusIcon() {

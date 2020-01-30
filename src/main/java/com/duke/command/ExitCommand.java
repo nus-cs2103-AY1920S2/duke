@@ -10,7 +10,7 @@ import com.duke.util.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Creates a command that ends the Duke session
+     * Creates a command that ends the Duke session.
      */
     public ExitCommand() {
         isExit = true;

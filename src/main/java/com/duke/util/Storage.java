@@ -1,6 +1,10 @@
 package com.duke.util;
 
-import com.duke.task.*;
+import com.duke.task.Deadline;
+import com.duke.task.Task;
+import com.duke.task.TaskList;
+import com.duke.task.Todo;
+import com.duke.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +24,8 @@ public class Storage {
 
     /**
      * Contructs a <code>Storage</code> object with the given filePath.
-     * @param filePath
+     *
+     * @param filePath the file path to store into and extract data from.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -28,8 +33,9 @@ public class Storage {
 
     /**
      * Loads the data associated to the task list from the hard-drive into the Duke session.
+     *
      * @return An <code>ArrayList</code> object that contains the all the tasks on the list
-     * and their relevant status.
+     *         and their relevant status.
      * @throws FileNotFoundException If the file path provided is invalid.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
@@ -41,7 +47,7 @@ public class Storage {
         } else {
             ArrayList<Task> out = new ArrayList<>();
             while (s.hasNext()) {
-                StringTokenizer st = new StringTokenizer(s.nextLine(),"|");
+                StringTokenizer st = new StringTokenizer(s.nextLine(), "|");
                 String type = st.nextToken();
                 int status = Integer.parseInt(st.nextToken());
                 Task tba;
@@ -63,13 +69,14 @@ public class Storage {
 
     /**
      * Saves the task data in the current Duke session into the hard-drive.
+     *
      * @param tl The task list that contains the updated task data.
      * @throws IOException When the file path provided is invalid.
      */
     public void save(TaskList tl) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         List<Task> ts = tl.tasks;
-        int count= ts.size();
+        int count = ts.size();
         if (count == 0) {
             fw.write("");
         } else {

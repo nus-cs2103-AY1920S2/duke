@@ -16,12 +16,20 @@ public class TaskCommand extends Command {
 
     /**
      * Creates a Task command that adds a task specified to the task list.
+     *
      * @param item The Task to be added.
      */
     public TaskCommand(Task item) {
         task = item;
     }
 
+    /**
+     * Executes the command that adds a task to the list.
+     * @param tasks   the TaskList of the current Duke session.
+     * @param ui      the User Interface of the current Duke session.
+     * @param storage the storage file of the current Duke session.
+     * @throws DukeException when the saving of the file fails.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.addTask(task);
