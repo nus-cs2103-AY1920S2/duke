@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -125,11 +128,10 @@ public class Duke {
             File f = new File(Paths.get("data", "duke.txt").toString());
             f.getParentFile().mkdirs();
 
+            Gson gson = new Gson();
+
             FileWriter fw = new FileWriter(f);
-            Coder c = new Coder();
-            for (Task t : tasks) {
-                fw.append(c.encode(t) + "\n");
-            }
+            fw.append(gson.toJson(tasks));
 
             fw.close();
         } catch (IOException e) {
@@ -141,13 +143,10 @@ public class Duke {
         try {
             File f = new File(Paths.get("data", "duke.txt").toString());
             FileReader fr = new FileReader(f);
-            Scanner sc = new Scanner(fr);
-            Coder c = new Coder();
+            BufferedReader br = new BufferedReader(fr);
+            Gson gson = new Gson();
 
-            while (sc.hasNextLine()) {
-                String code = sc.nextLine();
-                tasks.add(c.decode(code));
-            }
+            tasks = gson.fromJson(br, TypeToken.getParameterized(tasks.getClass(), Task.class).getType());
         } catch (FileNotFoundException e) {
             return;
         }

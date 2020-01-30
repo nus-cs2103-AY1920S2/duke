@@ -1,4 +1,4 @@
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -20,5 +20,7 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public abstract String encode();
+    public String encode(){
+        return "";
+    }
 }
