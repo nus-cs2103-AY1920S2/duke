@@ -20,7 +20,7 @@ class Deadline extends Task {
         String status = super.getStatusIcon();
         String deadline = this.getDeadline();
 
-        return "[D]" + "[" + status + "] " + description + " (by:" + deadline + ")";
+        return "[D]" + "[" + status + "] " + description + " - " + deadline;
 
     }
 }

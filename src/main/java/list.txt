@@ -1,0 +1,1 @@
+[T][✘] eat[T][✓] bathe[D][✘] meet ppl  -  2pm[T][✘] sleep
