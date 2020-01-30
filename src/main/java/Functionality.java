@@ -15,7 +15,7 @@ public class Functionality {
             done(Integer.parseInt(s.substring(5)));
         } else if (s.length() > 6 && s.substring(0,6).equals("delete")) {
             delete(Integer.parseInt(s.substring(7)));
-        } else if (s.length() < 5 || !s.contains(" ")) {
+        } else if (s.length() < 5 || !s.contains(" ") || s.stripTrailing().length() < 9) {
             error(s);
         } else {
             add(s);
@@ -74,17 +74,20 @@ public class Functionality {
     }
 
     public void error(String s) {
-        if (s.length() < 4 && !s.contains(" ")) {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else if (s.length() >= 4){
-            if (s.equals("todo")) {
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-            } else if (s.equals("deadline")) {
-                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-            } else {
-                System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+        System.out.println(linedivider);
+        if (s.length() >= 4 && (s.stripTrailing().equals("todo")
+                || s.stripTrailing().equals("deadline") || s.stripTrailing().equals("event"))) {
+            if (s.stripTrailing().equals("todo")) {
+                System.out.println(":( OOPS!!! The description of a todo cannot be empty.");
+            } else if (s.stripTrailing().equals("deadline")) {
+                System.out.println(":( OOPS!!! The description of a deadline cannot be empty.");
+            } else if (s.stripTrailing().equals("event")) {
+                System.out.println(":( OOPS!!! The description of an event cannot be empty.");
             }
+        } else {
+            System.out.println(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        System.out.println(linedivider);
     }
 
 }
