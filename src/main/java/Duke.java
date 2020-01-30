@@ -54,7 +54,7 @@ public class Duke {
             Date dateObj = sdf.parse(s.split(" ")[1]);
             return d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + new SimpleDateFormat("HH:mm aa").format(dateObj);
         } catch (Exception e) {
-            System.out.println("Please give a correct format (ie. MMM d yyyy hh:mm)");
+            System.out.println("Please give a correct format (ie. yyyy-mm-dd hh:mm)");
             throw new DukeException(s);
         }
     }
@@ -85,6 +85,8 @@ public class Duke {
                 tasks.addTask(task);
                 storage.saveFile(taskToParse(tasks));
                 printReply(task);
+            } else if (input.split(" ")[0].equals("find")){
+                tasks.search(input.split(" ", 2)[1]);
             } else {
                 throw new DukeException(input);
             }

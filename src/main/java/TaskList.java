@@ -90,4 +90,20 @@ public class TaskList {
             }
         }
     }
+
+
+    public void search(String searchString){
+        ArrayList<Task> searchList = new ArrayList<>();
+        for (Task t: tasks){
+            if(t.getDescription().contains(searchString)){
+                searchList.add(t);
+            }
+        }
+        System.out.print("____________________________________________________________\n" +
+                "Here are the matching tasks in your list:\n");
+        for (int i = 0; i < searchList.size(); i++) {
+            System.out.println(Integer.toString(i + 1) + ". " + tasks.get(i).toString());
+        }
+        System.out.print("____________________________________________________________\n");
+    }
 }
