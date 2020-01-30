@@ -23,7 +23,7 @@ public enum Command {
     /**
      * Executes the command. Use {@code execute.apply} to run the function.
      */
-    public final QuadFunction<String, TaskList, Ui, Storage, Void> execute;
+    public final QuadFunction<String, TaskList, Ui, Storage> execute;
 
     /**
      * Initialises the Command enum type with the appropriate {@code execute}
@@ -31,7 +31,7 @@ public enum Command {
      *
      * @param execute The {@code QuadFunction} for the Command type.
      */
-    Command(QuadFunction<String, TaskList, Ui, Storage, Void> execute) {
+    Command(QuadFunction<String, TaskList, Ui, Storage> execute) {
         this.execute = execute;
     }
 }

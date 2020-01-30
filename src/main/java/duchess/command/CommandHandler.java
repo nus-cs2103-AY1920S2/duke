@@ -27,17 +27,15 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      * @throws DuchessException If the list fails to be saved.
      */
-    static Void handleTodoCommand(String command, TaskList taskList,
+    static void handleTodoCommand(String command, TaskList taskList,
                                   Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         Task newTask = new ToDo(commands.get(1).trim());
         taskList.addTask(newTask);
         ui.printTaskAdded(newTask, taskList.size());
         storage.save(taskList);
-        return null;
     }
 
     /**
@@ -48,10 +46,9 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      * @throws DuchessException If the list fails to be saved or /at [details] is missing.
      */
-    static Void handleEventCommand(String command, TaskList taskList,
+    static void handleEventCommand(String command, TaskList taskList,
                                    Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split("/at")));
@@ -62,7 +59,6 @@ public class CommandHandler {
         taskList.addTask(newTask);
         storage.save(taskList);
         ui.printTaskAdded(newTask, taskList.size());
-        return null;
     }
 
     /**
@@ -73,11 +69,10 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      * @throws DuchessException If the list fails to be saved or /by is missing
      *                          or the deadline is of an unrecognizable format.
      */
-    static Void handleDeadlineCommand(String command, TaskList taskList,
+    static void handleDeadlineCommand(String command, TaskList taskList,
                                       Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split("/by")));
@@ -89,7 +84,6 @@ public class CommandHandler {
         taskList.addTask(newTask);
         storage.save(taskList);
         ui.printTaskAdded(newTask, taskList.size());
-        return null;
     }
 
     /**
@@ -99,12 +93,10 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      */
-    static Void handleListCommand(String command, TaskList taskList,
+    static void handleListCommand(String command, TaskList taskList,
                                   Ui ui, Storage storage) throws DuchessException {
         ui.printTaskList(taskList);
-        return null;
     }
 
     /**
@@ -115,11 +107,10 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      * @throws DuchessException If the list fails to be saved or the index is out
      *                          of bounds or the task is already completed.
      */
-    static Void handleDoneCommand(String command, TaskList taskList,
+    static void handleDoneCommand(String command, TaskList taskList,
                                   Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
@@ -131,7 +122,6 @@ public class CommandHandler {
             storage.save(taskList);
             ui.printTask(taskCompleted);
         }
-        return null;
     }
 
     /**
@@ -143,13 +133,11 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      */
-    static Void handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+    static void handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         ArrayList<Pair<Task, Integer>> filteredTaskList = taskList.find(commands.get(1).trim());
         ui.printFilteredTaskList(filteredTaskList);
-        return null;
     }
 
     /**
@@ -160,11 +148,10 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      * @throws DuchessException If the list fails to be saved or the index is out
      *                          of bounds.
      */
-    static Void handleDeleteCommand(String command, TaskList taskList,
+    static void handleDeleteCommand(String command, TaskList taskList,
                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
@@ -177,7 +164,6 @@ public class CommandHandler {
             storage.save(taskList);
             ui.printTaskDeleted(taskToComplete, size);
         }
-        return null;
     }
 
     /**
@@ -187,11 +173,9 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      */
-    static Void handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+    static void handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ui.printHelpMessage();
-        return null;
     }
 
     /**
@@ -201,10 +185,8 @@ public class CommandHandler {
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
-     * @return null.
      */
-    static Void handleByeCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+    static void handleByeCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ui.printGoodbye();
-        return null;
     }
 }
