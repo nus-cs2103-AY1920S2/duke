@@ -21,7 +21,7 @@ public class Todo extends Task {
      * is found for this To-do Task
      */
     public Todo(String td) throws InadequateArgumentsException {
-        super(Todo.nonEmptyCheck(
+        super(Todo.checkForNonEmpty(
                 td.substring(Command.TODO.word.length()).stripLeading()),
                 new PrettyTime(""));
     }
@@ -47,12 +47,12 @@ public class Todo extends Task {
     }
 
     @Override
-    public String type() {
+    public String getType() {
         return Todo.TYPE;
     }
 
     @Override
-    public String timeVerb(String rawTime) {
+    public String getTimeVerb(String rawTime) {
         // no timeVerb as To-do Tasks are
         // not associated with a time
         return "";
@@ -68,7 +68,7 @@ public class Todo extends Task {
      * @throws InadequateArgumentsException When the String
      *         is an empty String
      */
-    private static String nonEmptyCheck(String todoCommand) throws InadequateArgumentsException {
+    private static String checkForNonEmpty(String todoCommand) throws InadequateArgumentsException {
         if (todoCommand.isBlank()) {
             throw new InadequateArgumentsException("todo");
         } else {

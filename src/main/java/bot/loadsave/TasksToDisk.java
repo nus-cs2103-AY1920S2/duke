@@ -43,7 +43,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
      * @return ArrayList containing the stored tasks
      */
     @Override
-    public ArrayList<Task> loadStored() {
+    public ArrayList<Task> loadFromDisk() {
         ArrayList<Task> storedTasks = new ArrayList<Task>();
         Scanner io = new Scanner(super.getToLoadFrom());
         while (io.hasNext()) {
@@ -94,7 +94,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
         StringBuilder toBeSaved = new StringBuilder();
         for (Task task : tasksList) {
             // use line breaks to separate the tasks
-            toBeSaved.append(task.type())
+            toBeSaved.append(task.getType())
                     .append(task.isDone() ? "1" : "0")
                     .append("\n")
                     .append(task.getTaskDetails())

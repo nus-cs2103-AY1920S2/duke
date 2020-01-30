@@ -23,8 +23,8 @@ public class Event extends Task {
      * td is supplied without the word "/at"
      */
     public Event(String td) throws InadequateArgumentsException {
-        super(Event.descMaker(td.substring(Command.EVENT.word.length())),
-                Event.timeMaker(td.substring(Command.EVENT.word.length())));
+        super(Event.makeDesc(td.substring(Command.EVENT.word.length())),
+                Event.makeTime(td.substring(Command.EVENT.word.length())));
     }
 
     /**
@@ -38,12 +38,12 @@ public class Event extends Task {
     }
 
     @Override
-    public String type() {
+    public String getType() {
         return Event.TYPE;
     }
 
     @Override
-    public String timeVerb(String rawTime) {
+    public String getTimeVerb(String rawTime) {
         return "(at: " + rawTime + ")";
     }
 
@@ -56,7 +56,7 @@ public class Event extends Task {
      *
      * @return The formatted String description
      */
-    private static String descMaker(String t) throws InadequateArgumentsException {
+    private static String makeDesc(String t) throws InadequateArgumentsException {
         int indexFirst = t.indexOf(Event.AT);
         if (indexFirst == -1) {
             throw new InadequateArgumentsException(Command.EVENT.word);
@@ -73,7 +73,7 @@ public class Event extends Task {
      *
      * @return The formatted String time
      */
-    private static PrettyTime timeMaker(String t) {
+    private static PrettyTime makeTime(String t) {
         int indexLast = t.lastIndexOf(Event.AT);
         return new PrettyTime(t.substring(indexLast + Event.AT.length())
                 .stripLeading());

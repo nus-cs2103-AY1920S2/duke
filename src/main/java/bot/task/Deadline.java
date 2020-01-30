@@ -23,8 +23,8 @@ public class Deadline extends Task {
      * td is supplied without the word "/by"
      */
     public Deadline(String td) throws InadequateArgumentsException {
-        super(Deadline.descMaker(td.substring(Command.DEADLINE.word.length())),
-                Deadline.timeMaker(td.substring(Command.DEADLINE.word.length())));
+        super(Deadline.makeDesc(td.substring(Command.DEADLINE.word.length())),
+                Deadline.makeTime(td.substring(Command.DEADLINE.word.length())));
     }
 
     /**
@@ -38,12 +38,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String type() {
+    public String getType() {
         return Deadline.TYPE;
     }
 
     @Override
-    public String timeVerb(String rawTime) {
+    public String getTimeVerb(String rawTime) {
         return "(by: " + rawTime + ")";
     }
 
@@ -56,7 +56,7 @@ public class Deadline extends Task {
      *
      * @return The formatted String description
      */
-    private static String descMaker(String t) throws InadequateArgumentsException {
+    private static String makeDesc(String t) throws InadequateArgumentsException {
         int indexFirst = t.indexOf(Deadline.BY);
         if (indexFirst == -1) {
             throw new InadequateArgumentsException(Command.DEADLINE.word);
@@ -73,7 +73,7 @@ public class Deadline extends Task {
      *
      * @return The formatted PrettyTime
      */
-    private static PrettyTime timeMaker(String t) {
+    private static PrettyTime makeTime(String t) {
         int indexLast = t.lastIndexOf(Deadline.BY);
         return new PrettyTime(t.substring(indexLast + Deadline.BY.length())
                 .stripLeading());

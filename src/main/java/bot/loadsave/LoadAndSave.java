@@ -78,7 +78,7 @@ public abstract class LoadAndSave<T> {
      *
      * @return ArrayList containing the stored items
      */
-    public abstract ArrayList<T> loadStored();
+    public abstract ArrayList<T> loadFromDisk();
 
     /**
      * Saves a given Collection of items to the

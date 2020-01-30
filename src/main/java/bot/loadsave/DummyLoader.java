@@ -22,7 +22,7 @@ public class DummyLoader<T> extends LoadAndSave<T> {
      * @return An empty ArrayList
      */
     @Override
-    public ArrayList<T> loadStored() {
+    public ArrayList<T> loadFromDisk() {
         return new ArrayList<T>();
     }
 

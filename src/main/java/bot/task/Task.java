@@ -59,7 +59,7 @@ public abstract class Task {
      * @return A String with a tick character
      *         or a cross character
      */
-    private String doneGet() {
+    private String getDoneString() {
         if (this.isDone()) {
             return "[✓]";
         } else {
@@ -73,7 +73,7 @@ public abstract class Task {
      *
      * @return Type of the Task as a String
      */
-    public abstract String type();
+    public abstract String getType();
 
     /**
      * Gives an appropriate verb to use before
@@ -85,7 +85,7 @@ public abstract class Task {
      * the appropriate formatting for the
      * type of Task
      */
-    public abstract String timeVerb(String rawTime);
+    public abstract String getTimeVerb(String rawTime);
 
     /**
      * Gives the time of the current Task
@@ -99,8 +99,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.type() + "]"
-                + this.doneGet() + " " + this.taskDetails + " "
-                + this.timeVerb(this.taskTime.toString());
+        return "[" + this.getType() + "]"
+                + this.getDoneString() + " " + this.taskDetails + " "
+                + this.getTimeVerb(this.taskTime.toString());
     }
 }
