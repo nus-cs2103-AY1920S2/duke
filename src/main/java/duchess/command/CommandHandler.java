@@ -5,6 +5,7 @@ import duchess.storage.Storage;
 import duchess.task.*;
 import duchess.ui.Ui;
 import duchess.util.DateTimeParser;
+import duchess.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,6 +126,13 @@ public class CommandHandler {
             storage.save(taskList);
             ui.printTask(taskCompleted);
         }
+        return null;
+    }
+
+    static Void handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        ArrayList<Pair<Task, Integer>> filteredTaskList = taskList.find(commands.get(1).trim());
+        ui.printFilteredTaskList(filteredTaskList);
         return null;
     }
 

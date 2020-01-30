@@ -1,8 +1,11 @@
 package duchess.task;
 
 import duchess.exception.DuchessException;
+import duchess.util.Pair;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * The {@code TaskList} object helps to store and manage {@code Task}s.
@@ -85,5 +88,12 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskArray() {
         return this.tasks;
+    }
+
+    public ArrayList<Pair<Task, Integer>> find(String searchWords) {
+        return IntStream.range(0, this.tasks.size())
+                .mapToObj(i -> new Pair<Task, Integer>(this.tasks.get(i), i))
+                .filter(p -> p.getFirst().getDescription().toLowerCase().contains(searchWords.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
