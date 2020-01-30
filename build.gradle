@@ -11,6 +11,7 @@ checkstyle {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
 shadowJar {
@@ -30,6 +31,10 @@ repositories {
 application {
     // Change this to your main class.
     mainClassName = "Duke"
+}
+
+test {
+    useJUnitPlatform()
 }
 
 run {
