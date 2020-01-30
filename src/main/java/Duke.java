@@ -12,9 +12,7 @@ public class Duke {
     static Responder r = new Responder();
 
     private static class Responder {
-        /**
-         * Common responds
-         */
+        // common responds
         String stupidLogo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         static String resSpace = "    ";
@@ -91,22 +89,24 @@ public class Duke {
         try {
             switch (first) {
             case "todo":
-                mainObj.add(t = new ToDoTask(terms.nextLine().trim()));
+                t = new ToDoTask(terms.nextLine().trim());
                 break;
             case "deadline":
-                mainObj.add(t = new DeadlineTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next(),
-                        terms.nextLine()));
+                t = new DeadlineTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next().substring(1),
+                        terms.nextLine());
                 break;
             case "event":
-                mainObj.add(t = new EventTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next(),
-                        terms.nextLine()));
+                t = new EventTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next().substring(1),
+                        terms.nextLine());
                 break;
             default:
             }
         } catch (Exception e) {
-            r.respond("☹ OOPS!!! The description of a" + first + " cannot be empty.");
+            r.respond("☹ OOPS!!! The description of a " + first + " cannot be empty.");
+            return true;
         }
         if (t != null) {
+            mainObj.add(t);
             r.respond("Got it. I've added this task:", "  " + t.toString(),
                     "Now you have " + mainObj.count() + " tasks in the list.");
             return true;
@@ -118,9 +118,7 @@ public class Duke {
     static void listTask() {
         List<Task> lst = mainObj.getTaskList();
         r.start("Here are the tasks in your list:");
-        r.respondLine(lst.stream().map(x -> {
-            return "" + (lst.indexOf(x) + 1) + "." + x;
-        }).collect(Collectors.toList()));
+        r.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
         r.over();
     }
 

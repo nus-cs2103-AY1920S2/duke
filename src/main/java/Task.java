@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.*;
+
 class Task {
     private String name;
     private boolean done = false;
@@ -39,6 +42,8 @@ class ToDoTask extends Task {
 }
 
 class DeadlineTask extends Task {
+    private static final DateTimeFormatter defaultDateF = DateTimeFormatter.ofPattern("d'/M/L'/y");
+    LocalDate ld;
     String prepos;
     String dateLine;
 
@@ -46,10 +51,20 @@ class DeadlineTask extends Task {
         super(name);
         this.prepos = prepos;
         this.dateLine = time;
+        try {
+            this.ld = LocalDate.parse(time, defaultDateF);
+        } catch (DateTimeParseException dtpe) {
+            this.ld = null;
+        }
     }
 
     private String timeRemStr() {
-        return this.prepos + ":" + this.dateLine;
+        try {
+            return this.prepos + ":" + (this.ld == null ? this.dateLine
+                    : ld.format(DateTimeFormatter.ofPattern("E, d-M/L-y")));
+        } catch (DateTimeParseException dtpe) {
+            return this.prepos + ":" + this.dateLine;
+        }
     }
 
     @Override
@@ -59,6 +74,8 @@ class DeadlineTask extends Task {
 }
 
 class EventTask extends Task {
+    private static final DateTimeFormatter defaultDateF = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+    LocalDate ld;
     String prepos;
     String time;
 
@@ -66,10 +83,20 @@ class EventTask extends Task {
         super(name);
         this.prepos = prepos;
         this.time = time;
+        try {
+            this.ld = LocalDate.parse(time, defaultDateF);
+        } catch (DateTimeParseException dtpe) {
+            this.ld = null;
+        }
     }
 
     private String timeRemStr() {
-        return this.prepos + ": " + this.time;
+        try {
+            return this.prepos + ": " + (this.ld == null ? this.time
+                    : ld.format(DateTimeFormatter.ofPattern("E, d-M/L-y")));
+        } catch (DateTimeParseException dtpe) {
+            return this.prepos + ": " + this.time;
+        }
     }
 
     @Override
