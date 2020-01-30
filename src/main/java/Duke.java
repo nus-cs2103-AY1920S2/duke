@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -45,6 +46,11 @@ public class Duke {
             } catch (DukeException e) {
                 printLine();
                 indent(e.toString());
+                printLine();
+            } catch (DateTimeParseException e) {
+                printLine();
+                indent("It seems that you have entered a format we don't understand. ");
+                indent("Please use the YYYY-MM-DD format.");
                 printLine();
             }
         }
