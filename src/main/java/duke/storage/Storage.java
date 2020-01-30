@@ -62,8 +62,8 @@ public class Storage {
         }
     }
 
-    private Task parseTask(String line) throws DukeUnrecognisedTaskTypeException,
-            DateTimeParseException {
+    private Task parseTask(String line)
+            throws DukeUnrecognisedTaskTypeException, DateTimeParseException {
         String[] parts = line.split(Pattern.quote(" " + Task.DELIMITER + " "));
         char taskTypeIcon = parts[0].charAt(0);
         boolean isCompleted = parts[1].charAt(0) == Task.COMPLETED;
@@ -76,15 +76,13 @@ public class Storage {
             }
             case DeadlineTask.ICON: {
                 LocalDateTime by = LocalDateTime.parse(parts[3],
-                        DeadlineTask.DATE_TIME_OUTPUT_FORMAT
-                );
+                        DeadlineTask.DATE_TIME_OUTPUT_FORMAT);
                 newTask = new DeadlineTask(description, by, isCompleted);
                 break;
             }
             case EventTask.ICON: {
                 LocalDateTime at = LocalDateTime.parse(parts[3],
-                        EventTask.DATE_TIME_OUTPUT_FORMAT
-                );
+                        EventTask.DATE_TIME_OUTPUT_FORMAT);
                 newTask = new EventTask(description, at, isCompleted);
                 break;
             }

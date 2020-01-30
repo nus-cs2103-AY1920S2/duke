@@ -34,20 +34,15 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toStringDelimited() {
-        return String.format(
-                "%c %c %s %c %s",
-                getTaskIcon(), Task.DELIMITER, super.toStringDelimited(),
-                Task.DELIMITER,
-                getDateTime().format(DeadlineTask.DATE_TIME_OUTPUT_FORMAT)
-        );
+        return String.format("%c %c %s %c %s", getTaskIcon(), Task.DELIMITER,
+                super.toStringDelimited(), Task.DELIMITER,
+                getDateTime().format(DeadlineTask.DATE_TIME_OUTPUT_FORMAT));
     }
     
     @Override
     public String toString() {
-        return String.format(
-                "[%c]%s (by: %s)",
-                getTaskIcon(), super.toString(),
-                getDateTime().format(DeadlineTask.DATE_TIME_OUTPUT_FORMAT)
-        );
+        return String.format("[%c]%s (by: %s)", getTaskIcon(),
+                super.toString(),
+                getDateTime().format(DeadlineTask.DATE_TIME_OUTPUT_FORMAT));
     }
 }

@@ -7,7 +7,8 @@ import duke.exception.DukeProgramTerminatedException;
 public class ByeCommandMethod implements CommandMethod {
     public static final String NAME = "bye";
 
-    public void execute(Duke program, Command command) throws DukeProgramTerminatedException {
+    public void execute(Duke program, Command command)
+            throws DukeProgramTerminatedException {
         throw new DukeProgramTerminatedException();
     }
 }

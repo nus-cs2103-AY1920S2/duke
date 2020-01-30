@@ -18,10 +18,8 @@ public class TodoTask extends Task {
 
     @Override
     public String toStringDelimited() {
-        return String.format(
-                "%c %c %s",
-                getTaskIcon(), Task.DELIMITER, super.toStringDelimited()
-        );
+        return String.format("%c %c %s", getTaskIcon(), Task.DELIMITER,
+                super.toStringDelimited());
     }
 
     @Override

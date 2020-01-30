@@ -37,7 +37,8 @@ public class Command {
                 return new Command(name, arguments, new EventCommandMethod());
             }
             case DeadlineCommandMethod.NAME: {
-                return new Command(name, arguments, new DeadlineCommandMethod());
+                return new Command(name, arguments,
+                        new DeadlineCommandMethod());
             }
             case ListCommandMethod.NAME: {
                 return new Command(name, arguments, new ListCommandMethod());

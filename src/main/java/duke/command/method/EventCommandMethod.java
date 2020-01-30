@@ -22,8 +22,7 @@ public class EventCommandMethod implements CommandMethod {
         String[] parts = command.getArgumentString().split(" /at ", 2);
         if (parts.length != 2) {
             throw new DukeInvalidNumberOfArgumentsException(
-                    EventCommandMethod.NAME, 2, parts.length
-            );
+                    EventCommandMethod.NAME, 2, parts.length);
         }
         String description = parts[0];
         try {

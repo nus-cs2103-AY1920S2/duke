@@ -14,12 +14,12 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String INDENTATION = "    ";
     public static final String WELCOME_MESSAGE = String.format(
-            "Hello from \n%s",
-            Ui.LOGO
-    );
+            "Hello from \n%s", Ui.LOGO);
     public static final String GOODBYE_MESSAGE = "Goodbye!";
-    public static final String LOAD_SUCCESS_MESSAGE_TEMPLATE = "Tasks loaded from %s";
-    public static final String LOAD_FAIL_MESSAGE_TEMPLATE = "Cannot load tasks from %s";
+    public static final String LOAD_SUCCESS_MESSAGE_TEMPLATE
+            = "Tasks loaded from %s";
+    public static final String LOAD_FAIL_MESSAGE_TEMPLATE
+            = "Cannot load tasks from %s";
 
     private Scanner sc;
 

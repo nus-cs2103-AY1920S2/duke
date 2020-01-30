@@ -22,8 +22,7 @@ public class DeadlineCommandMethod implements CommandMethod {
         String[] parts = command.getArgumentString().split(" /by ", 2);
         if (parts.length != 2) {
             throw new DukeInvalidNumberOfArgumentsException(
-                    DeadlineCommandMethod.NAME,2, parts.length
-            );
+                    DeadlineCommandMethod.NAME,2, parts.length);
         }
         String description = parts[0];
         try {

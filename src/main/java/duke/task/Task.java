@@ -19,10 +19,8 @@ public abstract class Task {
 
     public String markAsCompleted() {
         if (isCompleted) {
-            return String.format(
-                    "'%s' has already been done",
-                    getDescription()
-            );
+            return String.format("'%s' has already been done",
+                    getDescription());
         } else {
             isCompleted = true;
             return String.format("Marked '%s' as done", getDescription());
@@ -40,17 +38,12 @@ public abstract class Task {
     }
 
     public String toStringDelimited() {
-        return String.format(
-                "%c %c %s",
-                getStatusIcon(), Task.DELIMITER, getDescription()
-        );
+        return String.format("%c %c %s", getStatusIcon(), Task.DELIMITER,
+                getDescription());
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "[%c] %s",
-                getStatusIcon(), getDescription()
-        );
+        return String.format("[%c] %s", getStatusIcon(), getDescription());
     }
 }
