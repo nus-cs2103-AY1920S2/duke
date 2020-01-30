@@ -11,13 +11,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * JUnit test class for {@code TaskList}.
+ */
 public class TaskListTest {
+    /**
+     * Tests the default empty constructor of {@code TaskList}.
+     */
     @Test
     public void testEmptyConstructor() {
         TaskList testTaskList = new TaskList();
         assertEquals(0, testTaskList.size());
     }
 
+    /**
+     * Tests the non-empty constructor of {@code TaskList}.
+     */
     @Test
     public void testNonEmptyConstructor() {
         ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -27,6 +36,9 @@ public class TaskListTest {
         assertEquals(2, testTaskList.size());
     }
 
+    /**
+     * Tests the {@code addTask} method of {@code TaskList}.
+     */
     @Test
     public void testAddTask() {
         TaskList testTaskList = new TaskList();
@@ -35,6 +47,12 @@ public class TaskListTest {
         assertEquals(1, testTaskList.size());
     }
 
+    /**
+     * Tests the {@code getTask} method of {@code TaskList} when the list
+     * is not empty.
+     *
+     * @throws DuchessException If index is out of bounds.
+     */
     @Test
     public void getTask_nonEmptyTaskList_success() throws DuchessException {
         TaskList testTaskList = new TaskList();
@@ -43,6 +61,10 @@ public class TaskListTest {
         assertEquals(testTask, testTaskList.getTask(0));
     }
 
+    /**
+     * Tests the {@code getTask} method of {@code TaskList} when the list
+     * is empty.
+     */
     @Test
     public void getTask_emptyTaskList_exceptionThrown() {
         try {
@@ -54,6 +76,12 @@ public class TaskListTest {
         }
     }
 
+    /**
+     * Tests the {@code removeTask} method of {@code TaskList} when the list
+     * is not empty.
+     *
+     * @throws DuchessException If the index is out of bounds.
+     */
     @Test
     public void removeTask_nonEmptyTaskList_success() throws DuchessException {
         TaskList testTaskList = new TaskList();
@@ -65,6 +93,10 @@ public class TaskListTest {
         assertEquals(0, testTaskList.size());
     }
 
+    /**
+     * Tests the {@code removeTask} method of {@code TaskList} when the list
+     * is empty.
+     */
     @Test
     public void removeTask_emptyTaskList_exceptionThrown() {
         try {
@@ -76,6 +108,12 @@ public class TaskListTest {
         }
     }
 
+    /**
+     * Tests the {@code completeTask} method of {@code TaskList} when the
+     * {@code Task} in question is incomplete.
+     *
+     * @throws DuchessException If the index is out of bounds.
+     */
     @Test
     public void completeTask_taskNotCompleted_success() throws DuchessException {
         TaskList testTaskList = new TaskList();
@@ -86,6 +124,10 @@ public class TaskListTest {
         assertTrue(testTask.isCompleted());
     }
 
+    /**
+     * Tests the {@code completeTask} method of {@code TaskList} when the
+     * {@code Task} in question is already complete.
+     */
     @Test
     public void completeTask_taskAlreadyCompleted_exceptionThrown() {
         try {
@@ -100,6 +142,9 @@ public class TaskListTest {
         }
     }
 
+    /**
+     * Tests the {@code getTaskArray()} method of {@code TaskList}.
+     */
     @Test
     public void testGetTaskArray() {
         ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -108,6 +153,9 @@ public class TaskListTest {
         assertEquals(taskArrayList, testTaskList.getTaskArray());
     }
 
+    /**
+     * Tests the {@code find} method of {@code TaskList}.
+     */
     @Test
     public void testFindSearchWords() {
         TaskList testTaskList = new TaskList();
