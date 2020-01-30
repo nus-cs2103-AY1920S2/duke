@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Ui {
     private Scanner reader;
 
-    public Ui(){
+    public Ui() {
         this.reader = new Scanner(System.in);
     }
 

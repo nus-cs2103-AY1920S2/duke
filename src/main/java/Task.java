@@ -2,9 +2,9 @@
  * This is a simulation of tasks.
  */
 public abstract class Task {
-    /** Description of this task */
+    /** Description of this task. */
     protected String description;
-    /** Status of this task, whether it has been marked as done */
+    /** Status of this task, whether it has been marked as done. */
     protected boolean isDone;
 
     /**

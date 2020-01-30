@@ -1,7 +1,7 @@
 /**
  * This is a subclass of task which simulates todo tasks.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Class constructor inherits Task constructor.

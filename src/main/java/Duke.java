@@ -37,16 +37,16 @@ public class Duke {
                         try {
                             ui.markDone(tasks.getTask(Integer.valueOf(words[1]) - 1));
                         } catch (IndexOutOfBoundsException e) {
-                            ui.printException("    OOP!!! The number of tasks you have is only " +
-                                    tasks.getTaskNumber());
+                            ui.printException("    OOP!!! The number of tasks you have is only "
+                                    + tasks.getTaskNumber());
                         }
                         break;
                     case "delete":
                         try {
                             ui.delete(tasks.getTask(Integer.valueOf(words[1]) - 1), tasks);
                         } catch (IndexOutOfBoundsException e) {
-                            ui.printException("    OOP!!! The number of tasks you have is only " +
-                                    tasks.getTaskNumber());
+                            ui.printException("    OOP!!! The number of tasks you have is only "
+                                    + tasks.getTaskNumber());
                         }
                         break;
                     case "todo":
