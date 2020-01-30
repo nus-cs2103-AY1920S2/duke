@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected String description;
     protected String type;
-    protected String date;
+    protected LocalDate date;
     protected boolean isDone;
 
     public String getStatusIcon() {
@@ -21,12 +24,21 @@ public abstract class Task {
         return this.description;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public LocalDate parseDate(String stringDate) {
+        return LocalDate.parse(stringDate);
+    }
+
+    public String formatDate(LocalDate date) {
+        return date.format(
+                DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
 }
