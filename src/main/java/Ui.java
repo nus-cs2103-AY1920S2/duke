@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Prints a line to separate command prompts
      */
-    public void commandBreak() {
+    public void printBreak() {
         String line = "____________________________________";
         System.out.println (line + "\n");
     }
@@ -28,7 +28,7 @@ public class Ui {
     /**
      * Prints a closing message to the user
      */
-    public void closingScreen() {
+    public void closeScreen() {
         String wave = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         System.out.println (wave +"\nCya soon:)\n" + wave);
     }

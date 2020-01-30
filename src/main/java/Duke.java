@@ -5,6 +5,16 @@ import java.io.IOException;
  * Represents Duke, the task tracking smart bot
  * @author Goh Boon Hee SHaun
  * @version 0.1
+ *
+ * Command input formats:
+ * list
+ * done</space></taskNumber>
+ * delete</space></taskNumber>
+ * find</space></taskNumber>
+ * todo</space></name of task>
+ * deadline</space></name of task></backslash></Date in yyyy-mm-dd format>
+ * event</space></name of task></backslash></Date in yyyy-mm-dd format><T></Time in mm:ss-mm:ss format>
+ * bye
  */
 public class Duke {
 
@@ -28,7 +38,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadFiles());
         } catch (Exception e) {
             System.out.println("error somewhere");
         }
@@ -44,15 +54,15 @@ public class Duke {
         Parser parser = new Parser(tasks);
         String input = "";
         while ( ! (input = sc.nextLine()).equals ("bye")) {
-            ui.commandBreak();
-            parser.parse(input);
-            ui.commandBreak();
+            ui.printBreak();
+            parser.parse (input);
+            ui.printBreak();
         }
-        storage.save(tasks);
-        ui.closingScreen();
+        storage.saveFiles (tasks);
+        ui.closeScreen();
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        new Duke ("data/duke.txt").run();
     }
 }

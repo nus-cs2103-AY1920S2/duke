@@ -20,7 +20,7 @@ public class Parser {
      *
      * @param input A command prompt by the user to Duke
      */
-    public void parse(String input) {
+    public void parse (String input) {
         if (input.equals ("list")) {
             taskList.list();
         } else if (input.contains ("done")) {
@@ -30,10 +30,10 @@ public class Parser {
             } catch (Exception e) {
                 System.out.println ("Please state a task number:)");
             }
-        } else if (input.contains("delete")) {
+        } else if (input.contains ("delete")) {
             //Delete task
             int taskNum = Integer.parseInt (input.substring (7));
-            taskList.delete(taskNum);
+            taskList.delete (taskNum);
         } else if (input.contains ("find")) {
             try {
                 String keyWord = input.substring(5);
@@ -54,10 +54,8 @@ public class Parser {
                 taskList.addTask ("E", input);
             } else {
                 //must have todo/deadline/event request format
-                System.out.println("Im sorry, but I do not understand what this means:-(");
+                System.out.println ("Im sorry, but I do not understand what this means:-(");
             }
         }
     }
-
-
 }

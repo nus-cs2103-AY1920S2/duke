@@ -36,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String saveFile() {
-        if (this.status.equals("Done")) {
+        if (this.status.equals ("Done")) {
             return  "E|1||" + this.description + "|||" + this.date + " "
                     + this.start + "-" + this.end;
         } else {
@@ -54,8 +54,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy, "))
-                + this.start.format(DateTimeFormatter.ofPattern ("hh:mm a")) + " - "
+                + this.date.format (DateTimeFormatter.ofPattern ("MMM d yyyy, "))
+                + this.start.format (DateTimeFormatter.ofPattern ("hh:mm a")) + " - "
                 + this.end.format (DateTimeFormatter.ofPattern ("hh:mm a")) + ")";
     }
 }

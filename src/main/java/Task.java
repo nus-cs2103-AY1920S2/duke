@@ -43,7 +43,7 @@ public class Task {
      * @return a formatted string representing the task object
      */
     public String saveFile() {
-        if (this.status.equals("Done")) {
+        if (this.status.equals ("Done")) {
             return  "1|" + this.description;
         } else {
             return  "0|" + this.description;

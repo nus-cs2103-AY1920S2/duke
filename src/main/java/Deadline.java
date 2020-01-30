@@ -24,7 +24,7 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFile() {
-        if (this.status.equals("Done")) {
+        if (this.status.equals ("Done")) {
             return  "D|1||" + this.description + "|||" + this.date;
         } else {
             return  "D|0||" + this.description + "|||" + this.date;
@@ -38,6 +38,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + this.date.format(DateTimeFormatter.ofPattern ("MMM d yyyy")) + ")";
     }
 }

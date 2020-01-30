@@ -33,18 +33,20 @@ public class Storage {
      * @return An Arraylist of task that contains saved files
      * @throws IOException when reader takes in NULL input
      */
-    public ArrayList<Task> load () throws IOException {
+    public ArrayList<Task> loadFiles() throws IOException {
         ArrayList<Task> lst = new ArrayList<>();
+
         FileReader in = new FileReader (filePath);
         BufferedReader br = new BufferedReader (in);
+
         String loadTask = br.readLine();
-        while(loadTask != null) {
-            String type = loadTask.substring(0,1);
-            int descriptIndex = loadTask.indexOf("||");
-            switch(type) {
-                case("T"):
-                    String loadedTDescript = loadTask.substring(descriptIndex + 2);
-                    Todo loadedT = new Todo(loadedTDescript);
+        while (loadTask != null) {
+            String type = loadTask.substring (0,1);
+            int indexOfDescription = loadTask.indexOf ("||");
+            switch (type) {
+                case "T":
+                    String descriptionOfLoadedTask = loadTask.substring (indexOfDescription + 2);
+                    Todo loadedT = new Todo (descriptionOfLoadedTask);
                     if (loadTask.substring (2,3).equals ("1")) {
                         loadedT.markAsDone();
                         Duke.pendingTask--;
@@ -52,13 +54,13 @@ public class Storage {
                     lst.add(loadedT);
                     Duke.pendingTask++;
                     break;
-                case("D"):
-                case("E"):
-                    int timeIndex = loadTask.indexOf("|||");
-                    String loadedDescript = loadTask.substring(descriptIndex + 2, timeIndex);
-                    if (type.equals("D")) {
-                        LocalDate loadedDDate = LocalDate.parse(loadTask.substring(timeIndex + 3));
-                        Deadline loadedD = new Deadline (loadedDescript, loadedDDate);
+                case "D":
+                case "E":
+                    int timeIndex = loadTask.indexOf ("|||");
+                    String loadedDescription = loadTask.substring(indexOfDescription + 2, timeIndex);
+                    if (type.equals ("D")) {
+                        LocalDate loadedDDate = LocalDate.parse (loadTask.substring (timeIndex + 3));
+                        Deadline loadedD = new Deadline (loadedDescription, loadedDDate);
                         if (loadTask.substring (2,3).equals ("1")) {
                             loadedD.markAsDone();
                             Duke.pendingTask--;
@@ -66,19 +68,20 @@ public class Storage {
                         lst.add(loadedD);
                         Duke.pendingTask++;
                     } else {
-                        LocalDate loadedEDate = LocalDate.parse(loadTask.substring(timeIndex + 3, timeIndex + 13));
-                        LocalTime loadedStart = LocalTime.parse(loadTask.substring(timeIndex + 14, timeIndex + 19));
-                        LocalTime loadedEnd   = LocalTime.parse(loadTask.substring(timeIndex + 20));
-                        Event loadedE = new Event (loadedDescript, loadedEDate, loadedStart, loadedEnd);
+                        LocalDate loadedEDate = LocalDate.parse (loadTask.substring (timeIndex + 3, timeIndex + 13));
+                        LocalTime loadedStart = LocalTime.parse (loadTask.substring (timeIndex + 14, timeIndex + 19));
+                        LocalTime loadedEnd   = LocalTime.parse (loadTask.substring (timeIndex + 20));
+                        Event loadedE = new Event (loadedDescription, loadedEDate, loadedStart, loadedEnd);
                         if (loadTask.substring (2,3).equals ("1")) {
                             loadedE.markAsDone();
                             Duke.pendingTask--;
                         }
-                        lst.add(loadedE);
+                        lst.add (loadedE);
                         Duke.pendingTask++;
                     }
                     break;
                 default:
+                    break;
             }
             loadTask = br.readLine();
         }
@@ -92,14 +95,14 @@ public class Storage {
      * @param taskList List of task to be saved
      * @throws IOException when reader reads NULL input
      */
-    public void save (TaskList taskList) throws IOException {
+    public void saveFiles (TaskList taskList) throws IOException {
         ArrayList<Task> lst = taskList.getList();
-        File file         = new File(filePath);
+        File file         = new File (filePath);
         FileWriter fr     = new FileWriter (file, false);
         BufferedWriter bw = new BufferedWriter (fr);
         for (int i = 0; i < lst.size(); i++) {
             Task savedTask = lst.get(i);
-            bw.write(savedTask.saveFile() + "\n");
+            bw.write (savedTask.saveFile() + "\n");
         }
         bw.close();
         fr.close();
