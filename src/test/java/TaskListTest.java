@@ -24,7 +24,7 @@ public class TaskListTest {
         t.add(new ToDo("Test5"));
         TaskList list = new TaskList(t);
         Task deleted = list.deleteTask(3);
-        assertEquals("Test3", deleted.getTaskname());
+        assertEquals("Test3", deleted.getTaskName());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class TaskListTest {
         t.add(new ToDo("Test5"));
         TaskList list = new TaskList(t);
         Task retrieved = list.getTask(4);
-        assertEquals("Test4", retrieved.getTaskname());
+        assertEquals("Test4", retrieved.getTaskName());
     }
 
 }
