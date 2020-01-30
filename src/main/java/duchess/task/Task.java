@@ -2,6 +2,8 @@ package duchess.task;
 
 public class Task {
     private boolean isCompleted;
+
+
     private String description;
 
     Task(String description) {
@@ -29,5 +31,9 @@ public class Task {
 
     public boolean isCompleted() {
         return isCompleted;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

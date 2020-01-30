@@ -2,7 +2,9 @@ package duchess.ui;
 
 import duchess.task.Task;
 import duchess.task.TaskList;
+import duchess.util.Pair;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -59,6 +61,20 @@ public class Ui {
             }
         } else {
             this.print("Is this a trick question? You have not told me anything about 'tasks'.");
+        }
+    }
+
+    public void printFilteredTaskList(ArrayList<Pair<Task, Integer>> filteredTaskList) {
+        if (filteredTaskList.size() == 0) {
+            this.print("Couldn't find anything that matches what you want.");
+            this.print("I sure hope you're not testing me!");
+        } else {
+            this.print("Not bad, I found the following:");
+            for (int i = 0; i < filteredTaskList.size(); i++) {
+                Pair<Task, Integer> pair = filteredTaskList.get(i);
+                this.printTask((i + 1) + ".\t" + pair.getFirst()
+                        + "\n\t\t\t[REF INDEX FOR DELETE/DONE: " + (pair.getSecond() + 1) + "]");
+            }
         }
     }
 
