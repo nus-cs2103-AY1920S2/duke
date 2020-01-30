@@ -35,18 +35,23 @@ public class TaskList {
         return String.format("Removed: '%s'", task.getDescription());
     }
 
+    public ListIterator<Task> listIterator() {
+        return tasks.listIterator();
+    }
+
     @Override
     public String toString() {
         if (tasks.isEmpty()) {
-            return "No tasks so far";
+            return "{  * No tasks *  }";
         }
-        StringBuilder output = new StringBuilder("Tasks so far:");
-        ListIterator<Task> iterator = tasks.listIterator();
+        StringBuilder output = new StringBuilder("{");
+        ListIterator<Task> iterator = listIterator();
         while (iterator.hasNext()) {
             int index = iterator.nextIndex();
             Task task = iterator.next();
-            output.append(String.format("\n%d.%s", (index + 1), task));
+            output.append(String.format("\n  %d. %s", (index + 1), task));
         }
+        output.append("\n}");
         return output.toString();
     }
 }

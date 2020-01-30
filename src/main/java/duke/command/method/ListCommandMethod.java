@@ -7,7 +7,7 @@ public class ListCommandMethod implements CommandMethod {
     public static final String NAME = "list";
 
     public void execute(Duke program, Command command) {
-        String message = program.getTaskList().toString();
-        program.getUi().print(message);
+        program.getUi().print("Tasks so far:");
+        program.getUi().print(program.getTaskList().toString());
     }
 }
