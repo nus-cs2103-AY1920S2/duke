@@ -3,9 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -122,17 +119,17 @@ public class AutoResponder {
             while (sc.hasNextLine()) {
                 s = sc.nextLine();
                 switch (s.charAt(0)) {
-                    case 'T':
-                        taskList.add(Todo.readFormat(s));
-                        break;
-                    case 'D':
-                        taskList.add(Deadline.readFormat(s));
-                        break;
-                    case 'E':
-                        taskList.add(Event.readFormat(s));
-                        break;
-                    default:
-                        throw new IllegalArgumentException("No corresponding command found");
+                case 'T':
+                    taskList.add(Todo.readFormat(s));
+                    break;
+                case 'D':
+                    taskList.add(Deadline.readFormat(s));
+                    break;
+                case 'E':
+                    taskList.add(Event.readFormat(s));
+                    break;
+                default:
+                    throw new IllegalArgumentException("No corresponding command found");
                 }
             }
             toPrint.append("Task file loaded successfully!\n");
@@ -172,13 +169,13 @@ public class AutoResponder {
 
     private AutoResponder addDeadline(String name, String date) {
         List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Deadline(name, AutoResponder.parseDateTime(date)));
+        tl.add(new Deadline(name, Parser.parseDateTime(date)));
         return new AutoResponder(tl, toPrint).taskAdded();
     }
 
     private AutoResponder addEvent(String name, String date) {
         List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Event(name, AutoResponder.parseDateTime(date)));
+        tl.add(new Event(name, Parser.parseDateTime(date)));
         return new AutoResponder(tl, toPrint).taskAdded();
     }
 
@@ -210,7 +207,7 @@ public class AutoResponder {
             if (input.matches("bye\\s*")) {
                 return ar.shutdown();
             }
-            
+
             try {
                 ar = ar.readInput(input);
             } catch (Exception e) {
@@ -223,20 +220,6 @@ public class AutoResponder {
     public AutoResponder shutdown() {
         ui.printGoodbye();
         return this;
-    }
-
-    public static LocalDateTime parseDateTime(String s) {
-        Pattern patternDateTime = Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s+\\d{4}");
-        Pattern patternDate = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-
-        if (patternDateTime.matcher(s).find()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            return LocalDateTime.parse(s, formatter);
-        } else if (patternDate.matcher(s).find()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-            return LocalDate.parse(s, formatter).atStartOfDay();
-        }
-        throw new UnsupportedOperationException("Supplied string is not of proper format.");
     }
 
 }
