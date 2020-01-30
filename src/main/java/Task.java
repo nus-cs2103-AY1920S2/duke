@@ -8,6 +8,10 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     //Type should only be T(odo), D(eadline), or E(vent).
     public String getType() {
         return this.type;
