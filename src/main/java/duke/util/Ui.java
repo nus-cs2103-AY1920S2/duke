@@ -14,7 +14,6 @@ import java.util.Scanner;
  * @author Jel
  */
 public class Ui {
-    private static String separator = "____________________________________________________________";
     private Scanner sc;
 
     /**
@@ -28,7 +27,7 @@ public class Ui {
      * Prints a horizontal bar to separate commands.
      */
     private void printSeparator() {
-        System.out.println(separator);
+        System.out.println("____________________________________________________________");
     }
 
     /**

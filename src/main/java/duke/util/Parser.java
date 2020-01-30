@@ -19,7 +19,6 @@ import java.io.IOException;
  * @author Jel
  */
 public class Parser {
-    private static String separator = "____________________________________________________________";
     private TaskList tasks;
     private Ui ui;
 
@@ -72,9 +71,9 @@ public class Parser {
                 throw new InvalidCommandException();
             }
         } catch (IOException | DukeException e) {
-            System.out.println(separator);
+            System.out.println("____________________________________________________________");
             System.err.println(e);
-            System.out.println(separator);
+            System.out.println("____________________________________________________________");
         }
         parseInput(ui.getInput());
 
