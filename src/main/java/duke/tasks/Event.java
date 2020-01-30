@@ -9,6 +9,7 @@ public class Event extends Task {
     protected String at = "";
     protected LocalDate date;
 
+
     public Event(String description, String at) {
         super(description);
         try {
@@ -19,6 +20,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Creates an Event class.
+     * @param strArr Array of String containing input for the Event class.
+     * @return Created Event class.
+     */
     public static Event create(String[] strArr) {
         Event t = new Event(strArr[2], strArr[3]);
         if(strArr[1].equals("1")) {t.setDone();}

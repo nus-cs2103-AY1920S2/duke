@@ -19,6 +19,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a Deadline class.
+     * @param strArr Array of String containing input for the Deadline class.
+     * @return Created Deadline class.
+     */
     public static Deadline create(String[] strArr) {
         Deadline t = new Deadline(strArr[2], strArr[3]);
         if(strArr[1].equals("1")) {t.setDone();}

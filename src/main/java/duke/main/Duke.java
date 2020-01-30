@@ -16,15 +16,18 @@ import duke.tasks.Todo;
 import duke.ui.Parser;
 import duke.ui.Ui;
 
-
+/**
+ * Represents a Duke program that stores user-inputted tasks.
+ */
 public class Duke {
-    /**
-     * main method for Duke.
-     */
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke class.
+     * @param filePath Filepath of the storage file tasks.txt
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -37,6 +40,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the main function of Duke.
+     */
     public void run() {
         ui.welcomeUser();
         boolean isExit = false;

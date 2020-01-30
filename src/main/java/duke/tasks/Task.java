@@ -21,6 +21,11 @@ public class Task {
         return "Task|" + (isDone?"1":"0") + "|" + this.description;
     }
 
+    /**
+     * Creates a Task class.
+     * @param strArr Array of String containing input for the Task class.
+     * @return Created Task class.
+     */
     public static Task create(String[] strArr) {
         Task t = new Task(strArr[2]);
         if(strArr[1].equals("1")) {t.setDone();}

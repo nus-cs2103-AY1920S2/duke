@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import duke.tasks.*;
 import duke.exception.DukeException;
 
+/**
+ * Provides functionality for reading and writing from storage file.
+ */
 public class Storage {
     private File data;
 
@@ -20,6 +23,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Builds a TaskList class from storage Filepath.
+     * @return Returns a TaskList class built according to storage Filepath. Returns an empty TaskList class
+     * if there is no storage file.
+     * @throws DukeException Filepath not found.
+     */
     public TaskList buildTaskList() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -49,6 +58,10 @@ public class Storage {
         }           
     }
 
+    /**
+     * Saves given TaskList to the storage file.
+     * @param taskList The TaskList to be stored.
+     */
     public void updateStorage(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(data);
