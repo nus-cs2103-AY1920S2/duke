@@ -4,12 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline task that extends the TaskDate class. A Deadline object is represented by a String description,
+ * boolean isDone, LocalDate date and LocalTime time, if a time is specified.
+ */
 public class Deadline extends TaskDate {
 
     protected LocalDate date;
     public boolean isTime;
     protected LocalTime time;
-    public boolean isDone;
 
     public Deadline(String description, LocalDate date, boolean isDone) {
         super(description, isDone);
@@ -24,10 +27,18 @@ public class Deadline extends TaskDate {
         isTime = true;
     }
 
+    /**
+     * Returns the LocalDate of the Deadline task.
+     * @return LocalDate of Deadline task
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Returns the LocalTime of the Deadline task.
+     * @return LocalTime of Deadline task
+     */
     public LocalTime getTime() {
         return this.time;
     }

@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Represented a TaskList of all the Tasks. A TaskList object corresponds with a list of all the tasks loaded from the
+ * data file or a new list to store all the tasks if the data file is non-existent.
+ */
 public class TaskList {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/M/d");
     private static final DateValidator DATE_VALIDATOR = new DateValidator(DATE_FORMATTER);
@@ -19,15 +23,25 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Adds new task to the TaskList.
+     * @param task Task to be added
+     */
     public void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Returns the size of the current TaskList.
+     * @return Size of TaskList
+     */
     public int getSize() {
         return taskList.size();
     }
 
-
+    /**
+     * Prints out all the Tasks in the current TaskList.
+     */
     public void listInstruction() {
         String completeList = "    Task(s) in your list:";
         for (Task task : taskList) {
@@ -36,6 +50,11 @@ public class TaskList {
         System.out.println(completeList);
     }
 
+    /**
+     * Prints out all the Tasks in the current TaskList that corresponds to the date.
+     * @param replyArr Array of the command + details of the command after splitting it by " "
+     * @throws DukeException If the input date is invalid (i.e. incorrect format)
+     */
     public void dateInstruction(String[] replyArr) throws DukeException {
         if(DATE_VALIDATOR.isValidDate(replyArr[1])) {
             LocalDate date = LocalDate.parse(replyArr[1], DATE_FORMATTER);
@@ -55,6 +74,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Marks the specified task as done.
+     * @param replyArr Array of the done command & task number of the element of the done command
+     * @throws DukeException If task number specified does not exist in the TaskList (e.g. done 5 when there is only 4
+     * tasks)
+     */
     public void doneInstruction(String[] replyArr) throws DukeException {
         int taskNum = Integer.parseInt(replyArr[1]) - 1;
         if (taskNum > taskList.size() - 1) {
@@ -67,6 +92,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the specified task from the TaskList.
+     * @param replyArr Array of the delete command & task number of the element of the delete command
+     * @throws DukeException If task number specified does not exist in the TaskList (e.g. delete 5 when there is only 4
+     * tasks)
+     */
     public void deleteInstruction(String[] replyArr) throws DukeException {
         try {
             int taskNum = Integer.parseInt(replyArr[1]) - 1;

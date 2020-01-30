@@ -6,7 +6,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Represents a command that adds on to the TaskList(i.e.Todo, Event, Deadline) that extends the Command class. An
+ * AddCommand object corresponds to a command type represented by a String followed by the necessary details of the
+ * command(e.g. Event Submit Assignment /at 2020/01/30 12:00).
+ */
 public class AddCommand extends Command {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/M/d");
     private static final DateValidator DATE_VALIDATOR = new DateValidator(DATE_FORMATTER);
@@ -21,6 +25,12 @@ public class AddCommand extends Command {
         this.details = details;
     }
 
+    /**
+     * Reads the command type ("instruction") and executes the respective methods to handle the command.
+     * @param taskList Overall TaskList of all the Tasks
+     * @param ui Overall Ui handling the ui of Duke
+     * @param storage Storage handling the storage of the Tasks in TaskList
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         switch (instruction) {
             case "todo":
@@ -35,7 +45,17 @@ public class AddCommand extends Command {
         }
     }
 
-
+    /**
+     * Handles the Deadline command and its details. It checks if the details are valid and how many of the date and/or
+     * time is/are specified. If only the Date is specified, the Deadline task will only have a date. If only the Time
+     * is specified, the Deadline Task will be set to today's Date and the specified Time. If both the Date and Time are
+     * specified, the Deadline task will be set to the specified Date and Time. Then the Deadline task will
+     * be added into the TaskList.
+     * @param reply Details of Deadline command
+     * @param taskList Overall TaskList of all the Tasks
+     * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments, argument in incorrect
+     * format)
+     */
     public static void handleDeadline(String reply, TaskList taskList) throws DukeException {
         String[] taskReplyArr = reply.split("/by ");
         if (taskReplyArr.length < 2) {
@@ -47,7 +67,6 @@ public class AddCommand extends Command {
             for (int i = 2; i < taskInstrArr.length; i++) {
                 task += " " + taskInstrArr[i];
             }
-
             String timeDate = taskReplyArr[1];
             String[] timeDateArr = timeDate.split(" ");
             if(timeDateArr.length == 2) {
@@ -82,6 +101,17 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Handles the Event command and its details. It checks if the details are valid and how many of the date and/or
+     * time is/are specified. If only the Date is specified, the Event task will only have a date. If only the Time
+     * is specified, the Event Task will be set to today's Date and the specified Time. If both the Date and Time are
+     * specified, the Event task will be set to the specified Date and Time. Then the Event task will
+     * be added into the TaskList.
+     * @param reply Details of Event command
+     * @param taskList Overall TaskList of all the Tasks
+     * @throws DukeException If details of Event is invalid(i.e. insufficient arguments, argument in incorrect
+     * format)
+     */
     public static void handleEvent(String reply, TaskList taskList) throws DukeException {
         String[] taskReplyArr = reply.split("/at ");
         if (taskReplyArr.length < 2) {
@@ -128,6 +158,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Handles the Todo command and its details. Then the Deadline task will be added into the TaskList.
+     * @param reply Details of Todo command
+     * @param taskList Overall TaskList of all the Tasks
+     * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments)
+     */
     public static void handleTodo(String reply, TaskList taskList) throws DukeException {
             if(!reply.equals("")) {
                 Todo toDo = new Todo(reply, false);

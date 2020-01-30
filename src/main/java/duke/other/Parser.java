@@ -1,10 +1,21 @@
 package duke.other;
 
 import duke.command.*;
+
+/**
+ * Represents a Parser that extracts out the command type and its details from a full String command input by the user.
+ */
 public class Parser {
     public Parser() {
     }
 
+    /**
+     * Returns a Command object corresponding to the command type extracted.
+     * @param fullCommand Full String input by the user
+     * @return Command object corresponding to the command type (i.e. AddCommand if the command type is Todo, Event or
+     * Deadline)
+     * @throws DukeException If the command type is invalid(i.e. hi, why)
+     */
     public static Command parse(String fullCommand) throws DukeException {
             String[] replyArr = fullCommand.split(" ");
             String instruction = replyArr[0];
@@ -29,6 +40,11 @@ public class Parser {
             }
     }
 
+    /**
+     * Returns the details of the command without the command type in a String.
+     * @param replyArr Array of String of the full command input by the user, split by " "
+     * @return Returns a String of the details of the command
+     */
     public static String details(String[] replyArr) {
         String details = "";
         for(int i = 1; i < replyArr.length; i++) {

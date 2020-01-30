@@ -4,6 +4,9 @@ import duke.command.*;
 import duke.other.*;
 import java.io.FileNotFoundException;
 
+/**
+ * Represents Duke, the chat bot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -20,6 +23,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke, the chat bot.
+     */
     public void run() {
         ui.welcome();
         boolean isExit = false;

@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task that extends the TaskDate class. An Event object is represented by a String description,
+ * boolean isDone, LocalDate date and LocalTime time, if a time is specified.
+ */
 public class Event extends TaskDate {
 
     protected LocalDate date;
@@ -24,10 +28,18 @@ public class Event extends TaskDate {
         isTime = true;
     }
 
+    /**
+     * Returns the LocalDate of the Event task.
+     * @return LocalDate of Event task
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Returns the LocalTime of the Event task.
+     * @return LocalTime of Event task
+     */
     public LocalTime getTime() {
         return this.time;
     }

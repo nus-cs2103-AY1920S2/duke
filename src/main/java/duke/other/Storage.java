@@ -10,12 +10,20 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage of the Tasks. A Storage object corresponds to an file via a file path.
+ */
 public class Storage {
     protected String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an ArrayList of Tasks loaded from the file specified by the file path.
+     * @return An ArrayList of Tasks
+     * @throws FileNotFoundException If the file is not found in the file path
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         Path path = Paths.get(filePath);
         File noteFile = new File(path.toString());
@@ -25,6 +33,13 @@ public class Storage {
         return fileToArray(noteFile.toString());
     }
 
+    /**
+     * Returns an ArrayList of Tasks, after converting the Tasks in the file into the corresponding Tasks objects and
+     * adding them into an ArrayList.
+     * @param filePath file path of the input file of Tasks
+     * @return ArrayList of Tasks containing all the Tasks from the input file
+     * @throws FileNotFoundException If the file is not found in the file path
+     */
     private static ArrayList<Task> fileToArray(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
@@ -57,6 +72,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Returns a String to be stored in the file specified by the file path, after converting the Tasks objects into
+     * Strings
+     * @param tasks TaskList of all the Tasks
+     * @return String of all Tasks, in the format for storage
+     */
     public static String arrayToFile(TaskList tasks) {
         ArrayList<Task> taskList = tasks.taskList;
         String outputToFile = "";
@@ -87,6 +108,12 @@ public class Storage {
     }
 
 
+    /**
+     * Writes the String of all the Tasks in storage format to the file of the specified file path.
+     * @param filePath file path of the file
+     * @param textToAdd String of all the Tasks in storage format
+     * @throws IOException If the file path is invalid
+     */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -94,7 +121,10 @@ public class Storage {
         bw.close();
     }
 
-
+    /**
+     * Runs the writeToFile method.
+     * @param taskList TaskList of all the tasks
+     */
     public void saveFile(TaskList taskList){
         try {
             writeToFile(filePath, arrayToFile(taskList));
