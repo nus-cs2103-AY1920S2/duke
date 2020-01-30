@@ -103,7 +103,6 @@ public class Model {
         return taskList.size();
     }
 
-
     public ArrayList<Task> getTaskList(){
         return taskList;
     }

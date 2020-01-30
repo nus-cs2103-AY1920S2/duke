@@ -2,6 +2,7 @@ package task;
 
 import core.DateTimeUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -10,25 +11,16 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task{
 
-    private LocalDateTime time;
+    private LocalDate deadline;
 
     /**
      * Constructor for the deadline task
      * @param description is the detail of the task.
-     * @param time is the deadline of the task.
+     * @param deadline is the deadline of the task.
      */
-    public Deadline(String description, LocalDateTime time){
-        super(description);
-        this.time=time;
-    }
-
-    /**
-     * Gets the specific type of the task.
-     * @return the type of the task.
-     */
-    @Override
-    public String getTypeIcon() {
-        return "D";
+    public Deadline(String description, LocalDate deadline){
+        super(description,"D");
+        this.deadline =deadline;
     }
 
     /**
@@ -37,6 +29,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return super.toString()+" (by: "+ DateTimeUtil.standardFormat(time)+")";
+        return super.toString()+" (by: "+ DateTimeUtil.standardFormat(deadline)+")";
     }
 }

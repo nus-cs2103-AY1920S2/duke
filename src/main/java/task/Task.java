@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
 
+    private String typeIcon;
     private String description;
     private boolean isDone;
 
@@ -17,9 +18,10 @@ public abstract class Task implements Serializable {
      * Constructor for task.
      * @param description specifies the detail of the task.
      */
-    public Task(String description) {
+    public Task(String description,String typeIcon) {
         this.description = description;
         this.isDone = false;
+        this.typeIcon=typeIcon;
     }
 
     /**
@@ -34,7 +36,9 @@ public abstract class Task implements Serializable {
      * Abstract method to get the specific type of the task.
      * @return the specific type of the task in string.
      */
-    public abstract String getTypeIcon();
+    public String getTypeIcon(){
+        return this.typeIcon;
+    };
 
     /**
      * Marks the task as done.

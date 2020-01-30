@@ -1,32 +1,33 @@
 package core;
 
+import com.google.gson.Gson;
 import dukexception.DukeException;
 import dukexception.StorageException;
+import task.Task;
 
 import java.io.*;
+import java.util.ArrayList;
 
-/**
- * Platform to connect to external data storage.
- */
 public class Storage {
-
     private static final String fileName= "duke.txt";
     private File file;
+    private DataParser dataParser;
 
     /**
      * Constructor to initialize the path of the external storage.
      */
     public Storage(){
         file=new File(fileName);
+        dataParser=new DataParser();
     }
 
     /**
      * Saves the states of the system to external file.
-     * @param stateHolder is the states of the system.
+     * @param tasks is the states of the system.
      * @throws DukeException when writing to file is unsuccessful.
      */
-    public void save(StateHolder stateHolder) throws DukeException {
-        writeTo(file,stateHolder);
+    public void save(ArrayList<Task> tasks) throws DukeException {
+        writeTo(file,tasks);
     }
 
     /**
@@ -34,7 +35,7 @@ public class Storage {
      * @return the states of the system.
      * @throws DukeException when reading from the file is unsuccessful.
      */
-    public StateHolder load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException{
         return readFrom(file);
     }
 
@@ -53,17 +54,21 @@ public class Storage {
     }
 
     /**
-     * Obtains the data from the external file.
+     * Obtains the task lsit from the external file.
      * @param thisFile indicates the file to be read from.
-     * @return the states of the system.
-     * @throws DukeException when reading the file is unsuccessful.
+     * @return the task list.
+     * @throws DukeException when reading from the file is unsuccessful.
      */
-    private StateHolder readFrom(File thisFile) throws DukeException{
-        StateHolder stateHolder;
-        try(FileInputStream fi=new FileInputStream(thisFile)) {
-            ObjectInputStream oi = new ObjectInputStream(fi);
-            stateHolder=(StateHolder)oi.readObject();
-            oi.close();
+    private ArrayList<Task> readFrom(File thisFile) throws DukeException{
+        ArrayList<Task> tasks=new ArrayList<>();
+        try(FileReader fr=new FileReader(thisFile)) {
+            BufferedReader br=new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                Task task=dataParser.parseToTask(line);
+                tasks.add(task);
+            }
+            br.close();
         } catch (FileNotFoundException e) {
             throw new StorageException("The stated file is not found.");
         }catch(EOFException e){
@@ -72,27 +77,26 @@ public class Storage {
         }catch (IOException e) {
             e.printStackTrace();
             throw new StorageException("Encountered error in reading from the file.");
-        } catch (ClassNotFoundException e) {
-            throw new StorageException("The class stated in the file is not found.");
         }
-        return stateHolder;
+        return tasks;
     }
 
     /**
-     * Saves the date to the external file.
+     * Saves the readable tasks to the external file.
      * @param thisFile indicates the file to be written to.
-     * @param stateHolder the states of the system to be save.
+     * @param tasks the tasks to be written to the file.
      * @throws DukeException when the writing to the file is unsuccessful.
      */
-    private void writeTo(File thisFile,StateHolder stateHolder) throws DukeException{
-        try(FileOutputStream fo=new FileOutputStream(thisFile)){
-            ObjectOutputStream oo=new ObjectOutputStream(fo);
-            oo.writeObject(stateHolder);
-            oo.close();
+    private void writeTo(File thisFile,ArrayList<Task> tasks) throws DukeException{
+        try(FileWriter fw=new FileWriter(thisFile)){
+            BufferedWriter bw=new BufferedWriter(fw);
+            for(Task task:tasks){
+                String formattedTask=dataParser.parseToString(task);
+                bw.write(formattedTask+"\n");
+            }
+            bw.close();
         }catch(IOException ex){
             throw new DukeException("Encountered error in writing into the file");
         }
     }
-
-
 }

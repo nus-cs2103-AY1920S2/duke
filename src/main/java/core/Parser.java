@@ -2,7 +2,7 @@ package core;
 
 import command.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -117,7 +117,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.LACK_TIME.toString());
         }
 
-        return new AddDeadlineCommand(description,parseDateTime(time));
+        return new AddDeadlineCommand(description, parseDate(time));
     }
 
     private Command parseEvent(String information) throws DukeException {
@@ -135,13 +135,13 @@ public class Parser {
         if(time.trim().length()==0) {
             throw new DukeException(ErrorMessage.LACK_TIME.toString());
         }
-        return new AddEventCommand(description,parseDateTime(time));
+        return new AddEventCommand(description, parseDate(time));
     }
 
-    private LocalDateTime parseDateTime(String dateTime) throws DukeException{
+    private LocalDate parseDate(String date) throws DukeException{
         for(DateTimeUtil format: DateTimeUtil.values()){
             try{
-                return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(format.toString()));
+                return LocalDate.parse(date, DateTimeFormatter.ofPattern(format.toString()));
             }catch (DateTimeParseException ignored){}
         }
         throw new DukeException(ErrorMessage.UNRECOGNISE_TIME.toString());

@@ -10,16 +10,8 @@ public class ToDo extends Task{
      * @param description is the detail of the task.
      */
     public ToDo(String description){
-        super(description);
+        super(description,"T");
     }
 
-    /**
-     * Gets the specific type of the task.
-     * @return the type of the task.
-     */
-    @Override
-    public String getTypeIcon() {
-        return "T";
-    }
 
 }

@@ -2,6 +2,7 @@ package task;
 
 import core.DateTimeUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -10,27 +11,19 @@ import java.time.LocalDateTime;
  */
 
 public class Event extends Task{
-    private LocalDateTime time;
+
+    private LocalDate eventTime;
 
     /**
      * Constructor for the event task
      * @param description is the detail of the task.
-     * @param time is the event time of the task.
+     * @param eventTime is the event time of the task.
      */
-    public Event(String description, LocalDateTime time){
-        super(description);
-        this.time=time;
+    public Event(String description, LocalDate eventTime){
+        super(description,"E");
+        this.eventTime=eventTime;
     }
 
-
-    /**
-     * Gets the specific type of the task.
-     * @return the type of the task.
-     */
-    @Override
-    public String getTypeIcon() {
-        return "E";
-    }
 
     /**
      * Gets the detail of the standard task and the duration of the task.
@@ -38,6 +31,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return super.toString()+" (at: "+ DateTimeUtil.standardFormat(time)+")";
+        return super.toString()+" (at: "+ DateTimeUtil.standardFormat(eventTime)+")";
     }
 }
