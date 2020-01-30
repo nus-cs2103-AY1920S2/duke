@@ -159,18 +159,18 @@ public class Duke {
                 try {
                     searchTerm = getSecondTerm(command, Command.FIND);
                 } catch (InadequateArgumentsException | TooManyArgumentsException e) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 store.findInDesc(searchTerm)
                         .ifPresentOrElse(
                                 taskIds -> {
-                                    botUi.foundTask();
+                                    botUi.showFoundTask();
                                     for (Integer id : taskIds) {
                                         System.out.println(store.retrieve(id));
                                     }
                                 },
-                                () -> botUi.failedToFind()
+                                () -> botUi.showFailedToFind()
                         );
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
