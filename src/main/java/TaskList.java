@@ -1,8 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 class TaskList {
     // List of tasks; assume no more than 100 tasks.
     private ArrayList<Task> lTasks = new ArrayList<>();
+
+    // TODO: make static date and time formatters
+    // Stretch goal: add a command to print deadlines/events occurring on a specific date.
 
     public String[] addTodo(String... ss) throws IncorrectArgumentException {
         if (ss[0].equals("")) {
@@ -17,22 +23,42 @@ class TaskList {
         if (ss[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, by.." : "Task Description"));
         } else if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: by..");
+            throw new IncorrectArgumentException("Oops! Missing required arguments: /by..");
         } else if (ss.length > 2) {
             throw new IncorrectArgumentException("Too many arguments!");
         }
-        return add(new Deadline(ss[0], ss[1]));
+
+        LocalDate date = null;
+        LocalTime time = null;
+        try {
+            String[] textDateTime = ss[1].split(" ");
+            date = Task.toDate(textDateTime[0]);
+            time = Task.toTime(textDateTime[1]);
+        } catch (DateTimeParseException e) {
+            throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
+        }
+        return add(new Deadline(ss[0], date, time));
     }
     
     public String[] addEvent(String... ss) throws IncorrectArgumentException {
         if (ss[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, at.." : "Task Description"));
         } else if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: at..");
+            throw new IncorrectArgumentException("Oops! Missing required arguments: /at..");
         } else if (ss.length > 2) {
             throw new IncorrectArgumentException("Too many arguments!");
         }
-        return add(new Event(ss[0], ss[1]));
+
+        LocalDate date = null;
+        LocalTime time = null;
+        try {
+            String[] textDateTime = ss[1].split(" ");
+            date = Task.toDate(textDateTime[0]);
+            time = Task.toTime(textDateTime[1]);
+        } catch (DateTimeParseException e) {
+            throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
+        }
+        return add(new Event(ss[0], date, time));
     }
 
     private String[] add(Task s) {
