@@ -1,7 +1,17 @@
 public class Task {
     private String name;
+    private boolean done = false;
+
     Task(String name) {
         this.name = name;
+    }
+
+    boolean isDone() {
+        return this.done;
+    }
+
+    boolean setToDone() {
+        return this.done = true;
     }
 
     String getName() {
@@ -10,6 +20,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.name;
+        return "[" + (isDone() ? "✓" : "✗") + "] " + getName();
     }
 }
