@@ -2,13 +2,13 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor class. Creates an empty ArrayList of Tasks.
      */
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
@@ -16,7 +16,7 @@ public class TaskList {
      * @return True if TaskList is empty, false otherwise.
      */
     public boolean isEmpty() {
-        return taskList.isEmpty();
+        return tasks.isEmpty();
     }
 
     /**
@@ -24,7 +24,7 @@ public class TaskList {
      * @return Size of TaskList.
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList {
      * @return Specified Task object.
      */
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param task Task object to be appended.
      */
     public void add(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -49,7 +49,7 @@ public class TaskList {
      * @param index Index of Task to be removed.
      */
     public void remove(int index) {
-        taskList.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -57,13 +57,13 @@ public class TaskList {
      * @return String object of each Task separated by a new line.
      */
     public String showList() {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "Your task list is empty.";
         } else {
             StringBuilder sb = new StringBuilder("");
             sb.append("Here is your list of tasks: ");
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
                 int index = i + 1;
                 sb.append("\n" + index + "." + task.toString());
             }

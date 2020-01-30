@@ -74,7 +74,8 @@ public class Parser {
         if (type.equals("T")) {
             Task todo = new Todo(input);
             taskList.add(todo);
-            Ui.printWithBorder("The following to-do has been added:\n    " + todo.toString() + str + taskList.size());
+            Ui.printWithBorder("The following to-do has been added:\n    "
+                    + todo.toString() + str + taskList.size());
 
         } else if (type.equals("D")) {
             String[] arr = input.split("/", 2);
@@ -85,9 +86,11 @@ public class Parser {
                     LocalDate deadlineDate = LocalDate.parse(by);
                     Deadline deadline = new Deadline(description, deadlineDate);
                     taskList.add(deadline);
-                    Ui.printWithBorder("The following task has been added:\n    " + deadline.toString() + str + taskList.size());
+                    Ui.printWithBorder("The following task has been added:\n" +
+                            "    " + deadline.toString() + str + taskList.size());
                 } else {
-                    throw new DukeTaskException("Invalid date format detected. Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
+                    throw new DukeTaskException("Invalid date format detected. " +
+                            "Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
                 }
             } else {
                 throw new DukeTaskException("\'/by\' field is missing.");
@@ -102,9 +105,11 @@ public class Parser {
                     LocalDate eventDate = LocalDate.parse(at);
                     Event event = new Event(description, eventDate);
                     taskList.add(event);
-                    Ui.printWithBorder("The following task has been added:\n    " + event.toString() + str + taskList.size());
+                    Ui.printWithBorder("The following task has been added:\n" +
+                            "    " + event.toString() + str + taskList.size());
                 } else {
-                    throw new DukeTaskException("Invalid date format detected. Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
+                    throw new DukeTaskException("Invalid date format detected. " +
+                            "Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
                 }
             } else {
                 throw new DukeTaskException("\'/at\' field is missing.");
@@ -139,7 +144,8 @@ public class Parser {
         } else if (index < taskList.size()) {
             Task t = taskList.get(index);
             t.markAsDone();
-            Ui.printWithBorder("As per requested, the following task has been marked as done:\n" + "    " + t.toString());
+            Ui.printWithBorder("As per requested, the following task has been marked as done:\n"
+                    + "    " + t.toString());
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
@@ -158,7 +164,8 @@ public class Parser {
         } else if (index < taskList.size()) {
             Task t = taskList.get(index);
             taskList.remove(index);
-            Ui.printWithBorder("As per requested, the following task has been deleted:\n" + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
+            Ui.printWithBorder("As per requested, the following task has been deleted:\n"
+                    + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
