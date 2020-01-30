@@ -55,6 +55,11 @@ public class Task {
         return isCompleted;
     }
 
+    /**
+     * Returns a description of the task.
+     *
+     * @return Description of the task.
+     */
     public String getDescription() {
         return description;
     }
