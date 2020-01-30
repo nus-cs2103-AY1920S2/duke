@@ -2,6 +2,7 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
+import java.io.*;
 
 public class Duke {
 
@@ -105,12 +106,12 @@ public class Duke {
                 saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else if (input.split(" ")[0].equals("deadline")) {
-                Task task = new Deadline(input.split("/by ", 2)[0].split(" ", 2)[1], stringToTime(input.split("/by ", 2)[1]);
+                Task task = new Deadline(input.split("/by ", 2)[0].split(" ", 2)[1], stringToTime(input.split("/by ", 2)[1]));
                 tasks.add(task);
                 saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else if (input.split(" ")[0].equals("event")) {
-                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], stringToTime(input.split("/at ", 2)[1]);
+                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], stringToTime(input.split("/at ", 2)[1]));
                 tasks.add(task);
                 saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
