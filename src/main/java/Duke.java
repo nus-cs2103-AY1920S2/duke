@@ -5,6 +5,7 @@ import java.util.Scanner;
  */
 public class Duke {
     public static void main(String[] args) {
+        // add a new chatbot for users
         ChatBot duke = new ChatBot();
         Scanner sc = new Scanner(System.in);
         // run the chat-bot
