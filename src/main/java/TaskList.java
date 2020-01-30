@@ -75,4 +75,27 @@ public class TaskList {
     public Task get(int index) {
         return newList.get(index);
     }
+
+    public void find(String pattern) {
+        if (newList.size() == 0) {
+            ui.dukePrint("You currently have no tasks in your list\n");
+        } else {
+            String output = "";
+            int count = 0;
+            for (int i = 0; i < newList.size(); i += 1) {
+                if (newList.get(i).toString().contains(pattern) ||
+                        newList.get(i).fileString().contains(pattern)) {
+                    output += ((i + 1)+". "+ newList.get(i).toString()+"\n");
+                    count += 1;
+                }
+            }
+            if (count == 0) {
+                ui.dukePrint("There are no matching tasks in your list\n");
+            } else {
+                System.out.print(ui.horizontalLines() + "Here are the matching tasks in your list:\n");
+                System.out.println(output);
+                System.out.print(ui.horizontalLines());
+            }
+        }
+    }
 }

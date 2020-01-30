@@ -49,6 +49,9 @@ public class Parser {
                         taskList.add(new Event(description[1],
                                 arr[1].split(" ", 2)[1], Task.parser), "print");
 
+                    } else if (command.startsWith("find")) {
+                        taskList.find(description[1]);
+
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
