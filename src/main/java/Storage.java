@@ -8,15 +8,31 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Saves and loads files when Duke starts and closes
+ */
 public class Storage {
 
+    /**
+     * Location of saved files
+     */
     private String filePath;
 
-
+    /**
+     * Creates a Storage object that can save and load tasks
+     *
+     * @param filePath Location of saved files
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads previously saved files into Duke when Duke starts up
+     *
+     * @return An Arraylist of task that contains saved files
+     * @throws IOException when reader takes in NULL input
+     */
     public ArrayList<Task> load () throws IOException {
         ArrayList<Task> lst = new ArrayList<>();
         FileReader in = new FileReader (filePath);
@@ -70,6 +86,12 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Saves current task in Duke when Duke closes
+     *
+     * @param taskList List of task to be saved
+     * @throws IOException when reader reads NULL input
+     */
     public void save (TaskList taskList) throws IOException {
         ArrayList<Task> lst = taskList.getList();
         File file         = new File(filePath);

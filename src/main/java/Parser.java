@@ -1,14 +1,26 @@
-import java.io.IOException;
-
+/**
+ * Processes user input
+ */
 public class Parser {
 
+    /** A list of Task objects to keep track of task changes*/
     private TaskList taskList;
 
+    /**
+     * Creates a Parser object that is able to process user input
+     *
+     * @param taskList A list of task objects to keep track of task changes
+     */
     public Parser (TaskList taskList) {
         this.taskList = taskList;
     }
 
-    public void parse(String input) throws IOException {
+    /**
+     * Recognises command prompts and does the appropriate task handling
+     *
+     * @param input A command prompt by the user to Duke
+     */
+    public void parse(String input) {
         if (input.equals("list")) {
             taskList.list();
         } else if (input.contains("done")) {

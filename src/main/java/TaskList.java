@@ -2,11 +2,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Task object
+ */
 public class TaskList {
 
+    /** An list to store the task*/
     private ArrayList<Task> taskList;
+    /** Number of task in the list*/
     private int size = 0;
 
+    /**
+     * Creates a TaskList object
+     *
+     * @param taskList List of task
+     */
     public TaskList (ArrayList <Task> taskList) {
         this.taskList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -15,6 +25,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out all task in the list
+     */
     public void list () {
         //List out task
         int num = this.taskList.size();
@@ -26,6 +39,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task that has been completed
+     *
+     * @param taskNum The task that has been done
+     */
     public void done (int taskNum) {
         try {
 //            int taskNum = Integer.parseInt(input.substring(5));
@@ -54,6 +72,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes task from the list
+     *
+     * @param taskNum Task to be removed
+     */
     public void delete (int taskNum) {
         try {
             if (taskNum <= this.taskList.size()) {
@@ -74,6 +97,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a new task into the list
+     *
+     * @param type Whether it is a todo,event of deadline task
+     * @param input Describes the task to be added to the list
+     */
     public void addTask (String type, String input) {
         if (type.equals ("T")) {
             try {
@@ -124,6 +153,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gives the arraylist storing all the task
+     *
+     * @return An arraylist of Task
+     */
     public ArrayList<Task> getList() {
         return this.taskList;
     }
