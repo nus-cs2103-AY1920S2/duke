@@ -9,13 +9,13 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public Event(String name, String at, boolean isDone) {
+    public Event(String name, LocalDate at, boolean isDone) {
         super(name, isDone);
         this.at = at;
     }
 
     public String getAt() {
-        return at;
+        return at.toString();
     }
 
     @Override

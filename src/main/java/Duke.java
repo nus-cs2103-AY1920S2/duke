@@ -118,9 +118,9 @@ public class Duke {
                     if (type.equals("T")) {
                         t = new Todo(name, isDone);
                     } else if (type.equals("E")) {
-                        t = new Event(name, strArr[3], isDone);
+                        t = new Event(name, LocalDate.parse(strArr[3]), isDone);
                     } else if (type.equals("D")) {
-                        t = new Deadline(name, strArr[3], isDone);
+                        t = new Deadline(name, LocalDate.parse(strArr[3]), isDone);
                     }
 
                     // Add task t to ArrayList
