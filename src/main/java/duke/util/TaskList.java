@@ -35,6 +35,12 @@ public class TaskList {
         Ui.deleteItem(t, storedItems);
     }
 
+    /**
+     * Search for tasks whose names contain the given sequence
+     * Print them to the screen by calling Ui method
+     * @param str
+     * @param storedItems
+     */
     public static void findItem(String str, ArrayList<Task> storedItems) {
         ArrayList<Task> foundList = new ArrayList<>();
 

@@ -110,6 +110,10 @@ public class Ui {
         System.out.println(String.format("%s%s", padding, uselessLine));
     }
 
+    /**
+     * Print the resulting foundList of a find request
+     * @param foundList
+     */
     public static void printFoundList(ArrayList<Task> foundList) {
         System.out.println(String.format("%s%s", padding, uselessLine));
         System.out.println(String.format("%sHere are the matching tasks in your list:", padding));

@@ -41,6 +41,10 @@ public class Task {
         return "";
     }
 
+    /**
+     * Gets the name of the Task
+     * @return String name
+     */
     public String getName() {
         return name;
     }
