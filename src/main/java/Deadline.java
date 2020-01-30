@@ -1,9 +1,15 @@
 public class Deadline extends Task{
     String time;
 
-    public Deadline(String deadline, String time) {
-        super(deadline);
+    public Deadline(String name, String time) {
+        super(name);
         this.time = time;
+    }
+
+    @Override
+    public String toFile() {
+        int doneInt = done ? 1 : 0;
+        return "D , " + doneInt + " , " + name + " , " + time;
     }
 
     @Override
