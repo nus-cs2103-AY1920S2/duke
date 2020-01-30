@@ -13,11 +13,19 @@ public class Task {
         done = TRUE;
     }
 
+    protected boolean getDone() {
+        return done;
+    }
+
     protected String getDoneSymbol() {
         return done ? "✓" : "✗" ;
     }
 
     protected String getCommand() {
         return command;
+    }
+
+    public String updateFile() {
+        return "task";
     }
 }
