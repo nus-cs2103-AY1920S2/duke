@@ -18,7 +18,7 @@ public class Storage {
     public Storage(String s) {
         try {
             this.data = new File(s);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println("Error retrieving file!");
         }
     }
@@ -33,10 +33,10 @@ public class Storage {
         List<Task> taskList = new ArrayList<>();
         try {
             Scanner scan = new Scanner(data);
-            while(scan.hasNext()) {
+            while (scan.hasNext()) {
                 String elementLine = scan.nextLine();
                 String[] elements = elementLine.split("\\|");
-                switch(elements[0]) {
+                switch (elements[0]) {
                 case "T":
                     taskList.add(Todo.create(elements));
                     break;
@@ -53,9 +53,9 @@ public class Storage {
             }
             scan.close();
             return new TaskList(taskList);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException("Error building task list from file path. Creating new task.txt");
-        }           
+        }
     }
 
     /**
@@ -65,11 +65,11 @@ public class Storage {
     public void updateStorage(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(data);
-            for (Task t: taskList.getTaskList()) {
+            for (Task t : taskList.getTaskList()) {
                 writer.write(t.store() + "\n");
             }
             writer.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println("Error writing to save file, message: " + e.toString());
         }
         return;

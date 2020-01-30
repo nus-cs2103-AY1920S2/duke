@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     @Override
     public String store() {
-        return "T|" + (isDone?"1":"0") + "|" + description;
+        return "T|" + (isDone ? "1" : "0") + "|" + description;
     }
 
     /**
@@ -17,7 +17,9 @@ public class Todo extends Task {
      */
     public static Todo create(String[] strArr) {
         Todo t = new Todo(strArr[2]);
-        if(strArr[1].equals("1")) {t.setDone();}
+        if (strArr[1].equals("1")) {
+            t.setDone();
+        }
         return t;
     }
 

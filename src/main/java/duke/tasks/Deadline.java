@@ -14,7 +14,7 @@ public class Deadline extends Task {
         try {
             this.date = LocalDate.parse(by);
             System.out.println("Parsed date successfully");
-        } catch(DateTimeParseException de) {
+        } catch (DateTimeParseException de) {
             this.by = by;
         }
     }
@@ -26,7 +26,9 @@ public class Deadline extends Task {
      */
     public static Deadline create(String[] strArr) {
         Deadline t = new Deadline(strArr[2], strArr[3]);
-        if(strArr[1].equals("1")) {t.setDone();}
+        if (strArr[1].equals("1")) {
+            t.setDone();
+        }
         return t;
     }
 
@@ -34,16 +36,14 @@ public class Deadline extends Task {
     public String store() {
         String dateType = this.by;
         if (dateType.isEmpty()) {
-            dateType = this.date.format(DateTimeFormatter
-                    .ofLocalizedDate(FormatStyle.LONG));
+            dateType = this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         }
-        return "D|" + (isDone?"1":"0") + "|" + this.description + "|" + dateType;
+        return "D|" + (isDone ? "1" : "0") + "|" + this.description + "|" + dateType;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + (by.isEmpty()?date.format(DateTimeFormatter
-                .ofLocalizedDate(FormatStyle.LONG)):this.by) + ")";
+                + (by.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.by) + ")";
     }
 }
