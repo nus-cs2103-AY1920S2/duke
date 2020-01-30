@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then

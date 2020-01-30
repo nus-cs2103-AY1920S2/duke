@@ -32,7 +32,7 @@ public class Storage {
                 if (arr[1].trim().equals("Y")) {
                     newTask.markAsDone();
                 }
-                taskList.add(newTask);
+                taskList.add(newTask, "");
             }
         } catch (FileNotFoundException e) {
             System.out.println("Something went wrong: " + e.getMessage());

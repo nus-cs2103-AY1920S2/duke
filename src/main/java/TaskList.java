@@ -34,11 +34,13 @@ public class TaskList {
                 "Now you have " + newList.size() + " tasks in the list.\n");
     }
 
-    public void add (Task newTask) {
+    public void add (Task newTask, String command) {
         newList.add(newTask);
-        ui.dukePrint("Got it. I've added this task:\n"+
-                newList.get(newList.size() - 1).toString()+"\n" +
-                "Now you have "+ newList.size() +" tasks in the list.\n");
+        if (command.equals("print")) {
+            ui.dukePrint("Got it. I've added this task:\n" +
+                    newList.get(newList.size() - 1).toString() + "\n" +
+                    "Now you have " + newList.size() + " tasks in the list.\n");
+        }
     }
 
     public int size() {

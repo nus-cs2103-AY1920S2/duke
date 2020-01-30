@@ -31,19 +31,19 @@ public class Parser {
 
                     if (command.startsWith("todo")) {
                         DukeException.checkDescription(description, "todo");
-                        taskList.add(new ToDo(description[1]));
+                        taskList.add(new ToDo(description[1]), "print");
 
                     } else if (command.startsWith("deadline")) {
                         DukeException.checkDescription(description, "deadline");
                         DukeException.checkTime(arr, "deadline");
                         taskList.add(new Deadline(description[1],
-                                arr[1].split(" ", 2)[1], Task.parser));
+                                arr[1].split(" ", 2)[1], Task.parser), "print");
 
                     } else if (command.startsWith("event")) {
                         DukeException.checkDescription(description, "event");
                         DukeException.checkTime(arr, "event");
                         taskList.add(new Event(description[1],
-                                arr[1].split(" ", 2)[1], Task.parser));
+                                arr[1].split(" ", 2)[1], Task.parser), "print");
 
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
