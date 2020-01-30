@@ -32,6 +32,15 @@ public class Event extends Task {
         this.timeFrame = timeFrame;
     }
 
+    /**
+     * Returns the timeFrame of the {@code Event}.
+     *
+     * @return TimeFrame of the {@code Event}.
+     */
+    public String getTimeFrame() {
+        return timeFrame;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.timeFrame + ")";
