@@ -68,6 +68,13 @@ public class Ui {
         say(message);
     }
 
+    public void showFoundTasks(TaskList tasks) {
+        String message = "Here are your oh so hard to find tasks:\n"
+                + tasks;
+
+        say(message);
+    }
+
     /**
      * Retrieves the user command from the interface.
      * @return the user command
