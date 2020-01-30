@@ -9,7 +9,11 @@ public class DukeMain {
 
     Task get(int idx) {
         return this.lst.get(idx);
-    } 
+    }
+
+    int count() {
+        return this.lst.size();
+    }
 
     List<Task> getTaskList() {
         return this.lst;
