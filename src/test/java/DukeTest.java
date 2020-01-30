@@ -14,12 +14,14 @@ public class DukeTest {
 
     @Test
     public void ParserTest() {
+        System.out.println("TEST: ParserTest");
         Command c = Parser.parse("bye");
         assertEquals(true, c.isExit());
     }
 
     @Test
     public void DateTimeTest() {
+        System.out.println("TEST: DateTimeTest");
         LocalDateTime dt = DateTimeUtil.stringAsDateTime("2020-02-25");
         LocalDateTime expected = LocalDateTime.parse("2020-02-25T00:00");
         assertEquals(expected, dt);
@@ -35,6 +37,7 @@ public class DukeTest {
 
     @Test
     public void TaskTest() {
+        System.out.println("TEST: TaskTest");
         LocalDateTime dt = DateTimeUtil.stringAsDateTime("2020-02-25 22:30");
         Deadline testDeadline = new Deadline("Homework", dt);
         testDeadline.markAsDone();
@@ -43,6 +46,7 @@ public class DukeTest {
 
     @Test
     public void TaskListTest() {
+        System.out.println("TEST: TaskListTest");
         TaskList tl = new TaskList();
         tl.addSaveStringAsTask("E0flight@2020-02-25T00:00");
         assertEquals(true, tl.doneTask(0));

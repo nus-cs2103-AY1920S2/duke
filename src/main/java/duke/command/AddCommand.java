@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     /**
      * AddCommand constructor.
      * @param toAdd string name of new task.
-     * @oaram taskType of the new task.
+     * @param taskType of the new task.
      */
     public AddCommand(String toAdd, Task.TaskType taskType) {
         this.toAdd = toAdd;

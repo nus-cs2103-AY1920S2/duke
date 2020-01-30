@@ -51,8 +51,7 @@ public class Storage {
     /**
      * Writes the information of a single task to the
      * save file (For single task additions by user).
-     * @param task a reference to a Task object to save
-     * @return void
+     * @param task a reference to a Task object to save.
      */
     public void saveTaskToFile(Task task) {
         FileWriter writer;
@@ -69,8 +68,7 @@ public class Storage {
     /**
      * Traverses whole list of tasks from TaskList object and
      * writes out to the save file.
-     * @param taskList a reference to the TaskList object to read tasks from
-     * @return void
+     * @param taskList a reference to the TaskList object to read tasks from.
      */
     public void saveTaskListToFile(TaskList taskList) {
         FileWriter writer;
@@ -97,8 +95,7 @@ public class Storage {
     /**
      * Reads through the save file and adds in any existing tasks into
      * a task list object.
-     * @param taskList a reference to the TaskList object to add tasks to
-     * @return void
+     * @param taskList a reference to the TaskList object to add tasks to.
      */
     public void load(TaskList taskList) {
         try {
