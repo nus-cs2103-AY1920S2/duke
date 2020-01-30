@@ -16,6 +16,7 @@ public class Store {
     private LocalTime LT;
     File file;
     private int Status;
+    private Ui ui = new Ui();
 
     public Store(File file){
         this.counter = 1;
@@ -60,14 +61,16 @@ public class Store {
         }
         WritetoFile();
     }
-    public void todo(String S){
+    public String todo(String S){
         this.cmd = S;
         Task T = new Todo(cmd);
         T.Output();
         Storage.add(T);
-        System.out.println(String.format("Now you have %d tasks in the list.", Storage.size()));
-        System.out.println(line);
+        String s = String.format("Now you have %d tasks in the list.\n", Storage.size());
+//        System.out.println(line);
         WritetoFile();
+//        String Output = s + ui.line();
+        return s + ui.line();
     }
     public void deadline(String[] ActionTime){
         String Timing;
@@ -102,7 +105,6 @@ public class Store {
             } catch (DateTimeException d){
                 DE.InvalidDateFormat();
             }
-
         }
     }
     public void event(String[] ActionTime){

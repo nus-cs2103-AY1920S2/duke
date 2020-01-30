@@ -24,7 +24,7 @@ public class Duke {
                         String nxtLine = newSN.nextLine();
                         lib.load(nxtLine);
                     } //end while- for reading existing file
-                    ui.line();
+                    System.out.println(ui.line());
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -53,7 +53,7 @@ public class Duke {
                     DE.IncorrectInputTodo();
                 } else {
                     String NewInput = input.substring(5);
-                    lib.todo(NewInput);
+                    System.out.println(lib.todo(NewInput));
                 }
             } else if (input.contains("deadline")){
                 CheckInput = input.split(" ");
