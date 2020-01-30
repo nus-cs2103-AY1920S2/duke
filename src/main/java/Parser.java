@@ -21,28 +21,35 @@ public class Parser {
      * @param input A command prompt by the user to Duke
      */
     public void parse(String input) {
-        if (input.equals("list")) {
+        if (input.equals ("list")) {
             taskList.list();
-        } else if (input.contains("done")) {
+        } else if (input.contains ("done")) {
             try {
-                int taskNum = Integer.parseInt(input.substring(5));
+                int taskNum = Integer.parseInt (input.substring(5));
                 taskList.done(taskNum);
             } catch (Exception e) {
                 System.out.println ("Please state a task number:)");
             }
         } else if (input.contains("delete")) {
             //Delete task
-            int taskNum = Integer.parseInt(input.substring(7));
+            int taskNum = Integer.parseInt (input.substring (7));
             taskList.delete(taskNum);
+        } else if (input.contains ("find")) {
+            try {
+                String keyWord = input.substring(5);
+                taskList.find (keyWord);
+            } catch (Exception e) {
+                System.out.println ("Where is your keyword:(");
+            }
         } else {
             //Create task using key words: "todo", "deadline", "event"
-            if (input.contains("todo")) {
+            if (input.contains ("todo")) {
                 //todo request format: todo<space><task>
-                taskList.addTask("T", input);
-            } else if (input.contains("deadline")) {
+                taskList.addTask ("T", input);
+            } else if (input.contains ("deadline")) {
                 //deadline request format: deadline<space><task></><yyyy-mm-dd>
                 taskList.addTask ("D", input);
-            } else if (input.contains("event")) {
+            } else if (input.contains ("event")) {
                 //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
                 taskList.addTask ("E", input);
             } else {
