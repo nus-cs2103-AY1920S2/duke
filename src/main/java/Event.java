@@ -14,7 +14,7 @@ public class Event extends Task {
     }
 
     public String toString(){
-        return "[E][" + getStatusIcon() + "] " + getDescription() + "(at:" + this.date + ")";
+        return "[E][" + getStatusIcon() + "] " + getDescription() + "(at: " + this.date + ")";
     }
 
     public String toParser(){

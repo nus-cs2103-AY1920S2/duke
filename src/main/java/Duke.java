@@ -1,6 +1,7 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 
 public class Duke {
 
@@ -74,6 +75,19 @@ public class Duke {
 
     }
 
+    static String stringToTime(String s) throws DukeException{
+        try{
+            // Convert DATE to expected format
+            LocalDate d = LocalDate.parse(s.split(" ")[0]);
+            SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
+            Date dateObj = sdf.parse(s.split(" ")[1]);
+            return d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + new SimpleDateFormat("HH:mm aa").format(dateObj);
+        } catch (Exception e){
+            System.out.println("Please give a correct format (ie. MMM d yyyy hh:mm)");
+            throw new DukeException(s);
+        }
+    }
+
     static void addTask(String input) throws DukeException, TodoException{
         try {
             if (input.toLowerCase().equals("list")) {
@@ -91,12 +105,12 @@ public class Duke {
                 saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else if (input.split(" ")[0].equals("deadline")) {
-                Task task = new Deadline(input.split("/by", 2)[0].split(" ", 2)[1], input.split("/by", 2)[1]);
+                Task task = new Deadline(input.split("/by ", 2)[0].split(" ", 2)[1], stringToTime(input.split("/by ", 2)[1]);
                 tasks.add(task);
                 saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else if (input.split(" ")[0].equals("event")) {
-                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], input.split("/at", 2)[1]);
+                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], stringToTime(input.split("/at ", 2)[1]);
                 tasks.add(task);
                 saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
@@ -107,7 +121,7 @@ public class Duke {
         catch (TodoException e){
             System.out.println(e.toString());
         }
-        catch(DukeException e){
+        catch (DukeException e){
             System.out.println(e.toString());
         }
     }
