@@ -32,7 +32,7 @@ public class InvalidIndexException extends DukeException {
      */
     @Override
     public String toString() {
-        String back = "You currently have " + size + (size < 2 ? " task." : " tasks.") + "\nPlease enter a number in the range 1 to " + size + "\n";
+        String back = "You currently have " + size + (size < 2 ? " task." : " tasks.") + "\nPlease enter a number in the range 1 to " + size;
         if (num < 1) {
             return "Index supplied is too small. " + back;
         }

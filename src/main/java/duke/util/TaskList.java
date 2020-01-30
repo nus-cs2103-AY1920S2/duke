@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
+import duke.exception.NoKeywordProvidedException;
 import duke.exception.NoTaskNumberException;
 
 import java.io.IOException;
@@ -50,12 +51,11 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t");
             sb.append(i + 1);
-            sb.append("" + tasks.get(i));
-            if (i != tasks.size() - 1) {
-                sb.append("\n");
-            }
+            sb.append(".");
+            sb.append(tasks.get(i));
+            sb.append("\n");
         }
-        System.out.println(sb);
+        System.out.print(sb);
         printSeparator();
     }
 
@@ -180,6 +180,27 @@ public class TaskList {
         System.out.println("Got it. I've added this task:");
         System.out.print("\t" + this.tasks.get(size - 1));
         System.out.printf("\nYou now have %d %s in the list.\n", size, tasks.size() > 1 ? "tasks" : "task");
+        printSeparator();
+    }
+
+    /**
+     * Finds tasks whose details match the keyword provided.
+     * @param line The user's line of input.
+     * @throws NoKeywordProvidedException No keyword was provided with the find command.
+     */
+    protected void findTask(String line) throws NoKeywordProvidedException {
+        String[] temp = line.split(" ", 2);
+        if (temp.length < 2) {
+            throw new NoKeywordProvidedException();
+        }
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(temp[1])) {
+                sb.append(tasks.get(i));
+                sb.append("\n\t");
+            }
+        }
+        System.out.println(sb.toString().trim());
         printSeparator();
     }
 }

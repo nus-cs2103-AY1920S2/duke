@@ -35,7 +35,7 @@ public class NoDateProvidedException extends DukeException {
         } else {
             taskType = "deadline";
         }
-        return String.format("The task type %s requires a '%s' date of the format /%s {date} e.g. /%s Monday 2pm.\n",
+        return String.format("The task type %s requires a '%s' date of the format /%s {date} e.g. /%s Monday 2pm.",
                 taskType, this.type, this.type, this.type);
     }
 }
