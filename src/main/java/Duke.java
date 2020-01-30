@@ -33,33 +33,33 @@ public class Duke {
 
     public void run(){
         ui.showWelcome();
-        while(sn.hasNext()){
+        while(sn.hasNext()) {
             String input = sn.nextLine();
-            if(input.equals("bye")) {
+            if (input.equals("bye")) {
                 lib.bye();
             } else if (input.equals("list")) {
                 lib.list();
-            } else if(input.contains("done")) {
+            } else if (input.contains("done")) {
                 String[] splited = input.split(" ");
                 int index = Integer.parseInt(splited[1]);
                 lib.done(index);
-            } else if(input.contains("delete")) {
+            } else if (input.contains("delete")) {
                 String[] splited = input.split(" ");
                 int index = Integer.parseInt(splited[1]);
                 lib.delete(index);
-            }else if(input.contains("todo")) {
+            } else if (input.contains("todo")) {
                 CheckInput = input.split(" ");
-                if (CheckInput.length <2 ){
+                if (CheckInput.length < 2) {
                     DE.IncorrectInputTodo();
                 } else {
                     String NewInput = input.substring(5);
                     System.out.println(lib.todo(NewInput));
                 }
-            } else if (input.contains("deadline")){
+            } else if (input.contains("deadline")) {
                 CheckInput = input.split(" ");
-                if (CheckInput.length <2 ){
+                if (CheckInput.length < 2) {
                     DE.IncorrectInputDeadline();
-                } else if (!input.contains("/")){
+                } else if (!input.contains("/")) {
                     DE.DeadlineMissingDate();
                 } else {
                     String NewInput = input.substring(9);
@@ -68,16 +68,24 @@ public class Duke {
                 }
             } else if (input.contains("event")) {
                 CheckInput = input.split(" ");
-                if (CheckInput.length <2 ){
+                if (CheckInput.length < 2) {
                     DE.IncorrectInputEvent();
                 } else if (!input.contains("/")) {
                     DE.EventMissingDate();
-                }else {
+                } else {
                     String NewInput = input.substring(6);
-                    String[] ActionTime = NewInput.split("/",2);
+                    String[] ActionTime = NewInput.split("/", 2);
                     lib.event(ActionTime);
                 }
-            } else {
+            } else if (input.contains("find")){
+                CheckInput = input.split(" ");
+                if (CheckInput.length < 2) {
+                    DE.InvalidInput();
+                } else {
+                    String NewInput = input.substring(4).strip();
+                    lib.find(NewInput);
+                }
+            }else {
                 DE.InvalidInput();
             }
 
