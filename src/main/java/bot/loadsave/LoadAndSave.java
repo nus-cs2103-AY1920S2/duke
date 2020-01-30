@@ -1,14 +1,12 @@
 package bot.loadsave;
 
-import bot.Ui;
-
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Class LoadAndSave handles loading and
@@ -40,10 +38,11 @@ public abstract class LoadAndSave<T> {
         try {
             fileLocation = new FileReader(fullAddress);
         } catch (FileNotFoundException e) {
+            // try to create required directories and file name
             File desiredDirectory = new File(fd);
             File desiredLocation = new File(fullAddress);
             if (!desiredLocation.exists()) {
-                System.out.println(Ui.LOAD_FROM_DISK_FAIL_MESSAGE);
+                System.out.println(bot.Ui.LOAD_FROM_DISK_FAIL_MESSAGE);
                 try {
                     desiredDirectory.mkdirs();
                     desiredLocation.createNewFile();
@@ -79,7 +78,7 @@ public abstract class LoadAndSave<T> {
      *
      * @return ArrayList containing the stored items
      */
-    public abstract ArrayList<T> loadStored();
+    public abstract ArrayList<T> loadFromDisk();
 
     /**
      * Saves a given Collection of items to the

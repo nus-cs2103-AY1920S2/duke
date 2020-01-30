@@ -1,6 +1,6 @@
 import bot.command.CommandParser;
-import bot.command.Instruction;
 import bot.command.exception.UnknownInstructionException;
+import bot.command.Instruction;
 
 import org.junit.Test;
 

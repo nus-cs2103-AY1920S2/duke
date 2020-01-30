@@ -3,19 +3,22 @@ package bot;
 import bot.loadsave.DummyLoader;
 import bot.loadsave.LoadAndSave;
 import bot.loadsave.TasksToDisk;
-import bot.task.Task;
+
 import bot.task.Deadline;
 import bot.task.Event;
+import bot.task.Task;
 import bot.task.Todo;
+
 import bot.command.Command;
 import bot.command.CommandParser;
-import bot.command.Instruction;
 import bot.command.exception.InadequateArgumentsException;
 import bot.command.exception.TooManyArgumentsException;
 import bot.command.exception.UnknownInstructionException;
+import bot.command.Instruction;
 
 
 import java.io.FileNotFoundException;
+
 import java.util.Scanner;
 
 /**
@@ -26,9 +29,9 @@ public class Duke {
     public static void main(String[] args) {
         //initialise UI
         Ui botUi = new Ui();
-        botUi.version();
-        botUi.greetings();
-        botUi.load();
+        botUi.showVersion();
+        botUi.showGreetings();
+        botUi.showLoading();
 
         // initialise CommandParser
         Scanner input = new Scanner(System.in);
@@ -43,14 +46,14 @@ public class Duke {
         try {
             botStore = new TasksToDisk(fileDirectory, fileName);
         } catch (FileNotFoundException e) {
-            botUi.error(e);
+            botUi.showError(e);
             botStore = new DummyLoader<Task>();
         }
 
-        store.importTasks(botStore.loadStored());
+        store.importTasks(botStore.loadFromDisk());
 
-        botUi.initial();
-        botUi.awaiting();
+        botUi.showInitial();
+        botUi.showAwaiting();
 
         // main bot system loop
         while(input.hasNext()) {
@@ -60,7 +63,7 @@ public class Duke {
             try {
                 next = parser.parse(command);
             } catch (UnknownInstructionException e) {
-                botUi.error(e);
+                botUi.showError(e);
                 continue;
             }
 
@@ -71,11 +74,11 @@ public class Duke {
                 } catch (InadequateArgumentsException |
                         NumberFormatException | TooManyArgumentsException e
                 ) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 store.markAsDone(index);
-                botUi.done();
+                botUi.showDone();
                 System.out.println(store.retrieve(index));
 
                 store.saveToDisk(botStore);
@@ -86,12 +89,12 @@ public class Duke {
                 } catch (InadequateArgumentsException |
                         NumberFormatException | TooManyArgumentsException e
                 ) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 String toBeDeleted = store.retrieve(index);
                 store.delete(index);
-                botUi.deleted();
+                botUi.showDeleted();
                 System.out.println(toBeDeleted);
 
                 store.saveToDisk(botStore);
@@ -102,29 +105,29 @@ public class Duke {
                 try {
                     searchTerm = getSecondTerm(command, Command.SEARCH);
                 } catch (InadequateArgumentsException | TooManyArgumentsException e) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 store.searchStorage(searchTerm)
                         .ifPresentOrElse(
                                 taskIds -> {
-                                    botUi.foundTask();
+                                    botUi.showFoundTask();
                                     for (Integer id : taskIds) {
                                         System.out.println(store.retrieve(id));
                                     }
                                 },
-                                () -> botUi.failedToFind()
+                                () -> botUi.showFailedToFind()
                         );
             } else if (next == Instruction.STORE_DDL) {
                 Deadline ddl;
                 try {
                     ddl = new Deadline(command);
                 } catch (InadequateArgumentsException e) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 store.store(ddl);
-                Duke.printTaskStoreMessage(store.getNumTasks());
+                botUi.showTaskStoreMessage(store.getNumTasks());
 
                 store.saveToDisk(botStore);
             } else if (next == Instruction.STORE_EVENT) {
@@ -132,11 +135,11 @@ public class Duke {
                 try {
                     evn = new Event(command);
                 } catch (InadequateArgumentsException e) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 store.store(evn);
-                Duke.printTaskStoreMessage(store.getNumTasks());
+                botUi.showTaskStoreMessage(store.getNumTasks());
 
                 store.saveToDisk(botStore);
             } else if (next == Instruction.STORE_TODO) {
@@ -144,11 +147,11 @@ public class Duke {
                 try {
                     tdo = new Todo(command);
                 } catch (InadequateArgumentsException e) {
-                    botUi.error(e);
+                    botUi.showError(e);
                     continue;
                 }
                 store.store(tdo);
-                Duke.printTaskStoreMessage(store.getNumTasks());
+                botUi.showTaskStoreMessage(store.getNumTasks());
 
                 store.saveToDisk(botStore);
             } else if (next == Instruction.FIND_KEYWORD) {
@@ -176,23 +179,10 @@ public class Duke {
                 // next == Instruction.AWAIT
                 parser.echo(command);
             }
-            botUi.awaiting();
+            botUi.showAwaiting();
         }
         input.close();
-        botUi.goodbye();
-    }
-
-    /**
-     * Prints a default message for storing a Task
-     *
-     * @param storeSize Number of Tasks already in
-     *                  the Storage
-     */
-    private static void printTaskStoreMessage(int storeSize) {
-        String storeMessage = "I have stored this task in my memory. Use" +
-                " \"list\" to retrieve it!\nTotal of ";
-        String tasks = " tasks stored";
-        System.out.println(storeMessage + storeSize + tasks);
+        botUi.showGoodbye();
     }
 
     /**

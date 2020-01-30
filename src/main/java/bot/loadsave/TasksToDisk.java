@@ -1,20 +1,21 @@
 package bot.loadsave;
 
-import bot.task.Task;
 import bot.task.Deadline;
 import bot.task.Event;
+import bot.task.Task;
 import bot.task.Todo;
-import bot.util.PrettyTime;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
+import bot.util.PrettyTime;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Scanner;
 
 /**
  * A class that handles saving and
@@ -42,7 +43,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
      * @return ArrayList containing the stored tasks
      */
     @Override
-    public ArrayList<Task> loadStored() {
+    public ArrayList<Task> loadFromDisk() {
         ArrayList<Task> storedTasks = new ArrayList<Task>();
         Scanner io = new Scanner(super.getToLoadFrom());
         while (io.hasNext()) {
@@ -55,32 +56,17 @@ public class TasksToDisk extends LoadAndSave<Task> {
                         io.nextLine(),
                         new PrettyTime(io.nextLine())
                 );
-                isCompleted = Integer.parseInt(
-                        Character.toString(
-                                typeAndDone.charAt(
-                                        Deadline.TYPE.length())
-                        )
-                ) == 1;
+                isCompleted = getCompletionStatus(typeAndDone, Deadline.TYPE);
             } else if (typeAndDone.startsWith(Event.TYPE)) {
                 currentTask = new Event(
                         io.nextLine(),
                         new PrettyTime(io.nextLine())
                 );
-                isCompleted = Integer.parseInt(
-                        Character.toString(
-                                typeAndDone.charAt(
-                                        Event.TYPE.length())
-                        )
-                ) == 1;
+                isCompleted = getCompletionStatus(typeAndDone, Event.TYPE);
             } else if (typeAndDone.startsWith(Todo.TYPE)) {
                 currentTask = Todo.makeTodoRaw(io.nextLine());
                 io.nextLine();
-                isCompleted = Integer.parseInt(
-                        Character.toString(
-                                typeAndDone.charAt(
-                                        Todo.TYPE.length())
-                        )
-                ) == 1;
+                isCompleted = getCompletionStatus(typeAndDone, Todo.TYPE);
             } else {
                 // unknown task
                 // System.out.println("Unknown task found!");
@@ -108,7 +94,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
         StringBuilder toBeSaved = new StringBuilder();
         for (Task task : tasksList) {
             // use line breaks to separate the tasks
-            toBeSaved.append(task.type())
+            toBeSaved.append(task.getType())
                     .append(task.isDone() ? "1" : "0")
                     .append("\n")
                     .append(task.getTaskDetails())
@@ -129,5 +115,22 @@ public class TasksToDisk extends LoadAndSave<Task> {
             System.err.println("IOException2");
             System.err.println(e.getMessage());
         }
+    }
+
+    /**
+     * A method to get the completion status for a Task, given
+     * the raw String containing the line taken from the save file
+     * that contains said completion status, along with the
+     * Task type
+     *
+     * @param typeAndDone Raw line from the save file containing
+     *                    Task type and completion status
+     * @param type String representation of Task type
+     * @return Returns true, if the task is done
+     */
+    private static boolean getCompletionStatus(String typeAndDone, String type) {
+        return Integer.parseInt(
+                Character.toString(typeAndDone.charAt(type.length()))
+                ) == 1;
     }
 }

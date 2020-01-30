@@ -5,7 +5,9 @@ import java.util.Collection;
 
 /**
  * A class that provides a concrete implementation
- * of a LoadAndSave, but does nothing
+ * of a LoadAndSave, but does nothing. Used when
+ * there are problems in accessing the
+ * file directory or file name
  *
  * @param <T> Type of objects to load and save
  */
@@ -20,7 +22,7 @@ public class DummyLoader<T> extends LoadAndSave<T> {
      * @return An empty ArrayList
      */
     @Override
-    public ArrayList<T> loadStored() {
+    public ArrayList<T> loadFromDisk() {
         return new ArrayList<T>();
     }
 
@@ -32,5 +34,7 @@ public class DummyLoader<T> extends LoadAndSave<T> {
      */
     @Override
     public void saveToDisk(Collection<T> items) {
+        // this is a dummy implementation and
+        // hence saveToDisk does nothing
     }
 }
