@@ -1,7 +1,16 @@
 package duke.other;
 
-import duke.task.*;
-import java.io.*;
+import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.Task;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,12 +24,14 @@ import java.util.Scanner;
  */
 public class Storage {
     protected String filePath;
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Returns an ArrayList of Tasks loaded from the file specified by the file path.
+     *
      * @return An ArrayList of Tasks
      * @throws FileNotFoundException If the file is not found in the file path
      */
@@ -36,6 +47,7 @@ public class Storage {
     /**
      * Returns an ArrayList of Tasks, after converting the Tasks in the file into the corresponding Tasks objects and
      * adding them into an ArrayList.
+     *
      * @param filePath file path of the input file of Tasks
      * @return ArrayList of Tasks containing all the Tasks from the input file
      * @throws FileNotFoundException If the file is not found in the file path
@@ -44,27 +56,27 @@ public class Storage {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
         ArrayList<Task> taskList = new ArrayList<>();
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             String note = sc.nextLine();
             String[] noteArr = note.split(">");
             String noteType = noteArr[0];
-            boolean taskIsDone = (noteArr[1]).equals("true")  ? true : false;
+            boolean taskIsDone = (noteArr[1]).equals("true") ? true : false;
             String taskDesc = noteArr[2];
 
-            if(noteType.equals("T")) {
+            if (noteType.equals("T")) {
                 taskList.add(new Todo(taskDesc, taskIsDone));
-            } else if(noteType.equals("E")) {
-                if(noteArr.length == 5) {
+            } else if (noteType.equals("E")) {
+                if (noteArr.length == 5) {
                     taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
                             taskIsDone));
-                } else if(noteArr.length == 4) {
+                } else if (noteArr.length == 4) {
                     taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), taskIsDone));
                 }
             } else {
-                if(noteArr.length == 5) {
+                if (noteArr.length == 5) {
                     taskList.add(new Deadline(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
                             taskIsDone));
-                } else if(noteArr.length == 4){
+                } else if (noteArr.length == 4) {
                     taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), taskIsDone));
                 }
             }
@@ -74,14 +86,15 @@ public class Storage {
 
     /**
      * Returns a String to be stored in the file specified by the file path, after converting the Tasks objects into
-     * Strings
+     * Strings.
+     *
      * @param tasks TaskList of all the Tasks
      * @return String of all Tasks, in the format for storage
      */
-    public static String arrayToFile(TaskList tasks) {
+    public static String stringifyArray(TaskList tasks) {
         ArrayList<Task> taskList = tasks.taskList;
         String outputToFile = "";
-        for(Task task : taskList) {
+        for (Task task : taskList) {
             String taskType = task.getClass().getSimpleName();
             String taskDesc = task.getDescription();
             boolean taskIsDone = task.isDone;
@@ -110,7 +123,8 @@ public class Storage {
 
     /**
      * Writes the String of all the Tasks in storage format to the file of the specified file path.
-     * @param filePath file path of the file
+     *
+     * @param filePath  file path of the file
      * @param textToAdd String of all the Tasks in storage format
      * @throws IOException If the file path is invalid
      */
@@ -123,17 +137,16 @@ public class Storage {
 
     /**
      * Runs the writeToFile method.
+     *
      * @param taskList TaskList of all the tasks
      */
-    public void saveFile(TaskList taskList){
+    public void saveFile(TaskList taskList) {
         try {
-            writeToFile(filePath, arrayToFile(taskList));
+            writeToFile(filePath, stringifyArray(taskList));
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-
-
 
 
 }

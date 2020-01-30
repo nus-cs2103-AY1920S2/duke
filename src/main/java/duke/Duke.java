@@ -1,7 +1,12 @@
+import duke.task.TaskList;
 
-import duke.task.*;
-import duke.command.*;
-import duke.other.*;
+import duke.other.Storage;
+import duke.other.Ui;
+import duke.other.DukeException;
+import duke.other.Parser;
+
+import duke.command.Command;
+
 import java.io.FileNotFoundException;
 
 /**
@@ -12,6 +17,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke object.
+     * @param filePath File path to the file that stores the Tasks data
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,7 +36,7 @@ public class Duke {
      * Runs Duke, the chat bot.
      */
     public void run() {
-        ui.welcome();
+        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {

@@ -13,14 +13,28 @@ public class Event extends TaskDate {
     protected LocalDate date;
     protected LocalTime time;
     public boolean isTime;
-    public boolean isDone;
 
+    /**
+     * Constructs an Event object with a description, date and isDone boolean.
+     *
+     * @param description description of event
+     * @param date        date of event
+     * @param isDone      boolean of whether this event task is done
+     */
     public Event(String description, LocalDate date, boolean isDone) {
         super(description, isDone);
         this.date = date;
         isTime = false;
     }
 
+    /**
+     * Constructs an Event object with a description, date, time and isDone boolean.
+     *
+     * @param description description of event
+     * @param date        date of event
+     * @param time        time of event
+     * @param isDone      boolean of whether this event task is done
+     */
     public Event(String description, LocalDate date, LocalTime time, boolean isDone) {
         super(description, isDone);
         this.date = date;
@@ -30,6 +44,7 @@ public class Event extends TaskDate {
 
     /**
      * Returns the LocalDate of the Event task.
+     *
      * @return LocalDate of Event task
      */
     public LocalDate getDate() {
@@ -38,6 +53,7 @@ public class Event extends TaskDate {
 
     /**
      * Returns the LocalTime of the Event task.
+     *
      * @return LocalTime of Event task
      */
     public LocalTime getTime() {

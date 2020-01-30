@@ -19,6 +19,7 @@ public class DateValidator {
 
     /**
      * Returns a boolean if the format of the date inserted corresponds to the Date Formatter.
+     *
      * @param dateStr String of the date to be validated
      * @return boolean of whether the format of the date corresponds to the Date Formatter
      */
@@ -33,6 +34,7 @@ public class DateValidator {
 
     /**
      * Returns a boolean if the format of the time inserted corresponds to the Time Formatter.
+     *
      * @param timeStr String of the time to be validated
      * @return boolean of whether the format of the time corresponds to the Time Formatter
      */

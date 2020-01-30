@@ -1,7 +1,15 @@
 package duke.command;
 
-import duke.task.*;
-import duke.other.*;
+import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
+import duke.other.DateValidator;
+import duke.other.Storage;
+import duke.other.Ui;
+import duke.other.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +28,12 @@ public class AddCommand extends Command {
     private String instruction;
     private String details;
 
+    /**
+     * Constructs an AddCommand object.
+     *
+     * @param instruction Command type
+     * @param details     Details of command
+     */
     public AddCommand(String instruction, String details) {
         this.instruction = instruction;
         this.details = details;
@@ -27,21 +41,24 @@ public class AddCommand extends Command {
 
     /**
      * Reads the command type ("instruction") and executes the respective methods to handle the command.
+     *
      * @param taskList Overall TaskList of all the Tasks
-     * @param ui Overall Ui handling the ui of Duke
-     * @param storage Storage handling the storage of the Tasks in TaskList
+     * @param ui       Overall Ui handling the ui of Duke
+     * @param storage  Storage handling the storage of the Tasks in TaskList
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         switch (instruction) {
-            case "todo":
-                handleTodo(details, taskList);
-                break;
-            case "deadline":
-                handleDeadline(details, taskList);
-                break;
-            case "event":
-                handleEvent(details, taskList);
-                break;
+        case "todo":
+            handleTodo(details, taskList);
+            break;
+        case "deadline":
+            handleDeadline(details, taskList);
+            break;
+        case "event":
+            handleEvent(details, taskList);
+            break;
+        default:
+            break;
         }
     }
 
@@ -51,15 +68,16 @@ public class AddCommand extends Command {
      * is specified, the Deadline Task will be set to today's Date and the specified Time. If both the Date and Time are
      * specified, the Deadline task will be set to the specified Date and Time. Then the Deadline task will
      * be added into the TaskList.
-     * @param reply Details of Deadline command
+     *
+     * @param reply    Details of Deadline command
      * @param taskList Overall TaskList of all the Tasks
      * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments, argument in incorrect
-     * format)
+     *                       format)
      */
     public static void handleDeadline(String reply, TaskList taskList) throws DukeException {
         String[] taskReplyArr = reply.split("/by ");
         if (taskReplyArr.length < 2) {
-            Ui.deadlineInputError();
+            Ui.throwDeadlineInputError();
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
         try {
@@ -69,35 +87,35 @@ public class AddCommand extends Command {
             }
             String timeDate = taskReplyArr[1];
             String[] timeDateArr = timeDate.split(" ");
-            if(timeDateArr.length == 2) {
+            if (timeDateArr.length == 2) {
                 if (DATE_VALIDATOR.isValidDate(timeDateArr[0]) && TIME_VALIDATOR.isValidTime(timeDateArr[1])) {
                     LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[1], TIME_FORMATTER);
 
                     Deadline deadLine = new Deadline(task, formattedDate, formattedTime, false);
-                    taskList.add(deadLine);
-                    Ui.taskAdded(deadLine, taskList);
+                    taskList.addTask(deadLine);
+                    Ui.showTaskAdded(deadLine, taskList);
                 } else {
-                    Ui.deadlineInputError();
+                    Ui.throwDeadlineInputError();
                 }
             } else if (timeDateArr.length == 1) {
                 if (DATE_VALIDATOR.isValidDate(timeDateArr[0])) {
                     LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
                     Deadline deadLine = new Deadline(task, formattedDate, false);
-                    taskList.add(deadLine);
-                    Ui.taskAdded(deadLine, taskList);
+                    taskList.addTask(deadLine);
+                    Ui.showTaskAdded(deadLine, taskList);
                 } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
                     Deadline deadLine = new Deadline(task, LocalDate.now(), formattedTime, false);
-                    taskList.add(deadLine);
-                    Ui.taskAdded(deadLine, taskList);
+                    taskList.addTask(deadLine);
+                    Ui.showTaskAdded(deadLine, taskList);
                 } else {
-                    Ui.deadlineInputError();
+                    Ui.throwDeadlineInputError();
                 }
 
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            Ui.deadlineInputError();
+            Ui.throwDeadlineInputError();
         }
     }
 
@@ -107,15 +125,16 @@ public class AddCommand extends Command {
      * is specified, the Event Task will be set to today's Date and the specified Time. If both the Date and Time are
      * specified, the Event task will be set to the specified Date and Time. Then the Event task will
      * be added into the TaskList.
-     * @param reply Details of Event command
+     *
+     * @param reply    Details of Event command
      * @param taskList Overall TaskList of all the Tasks
      * @throws DukeException If details of Event is invalid(i.e. insufficient arguments, argument in incorrect
-     * format)
+     *                       format)
      */
     public static void handleEvent(String reply, TaskList taskList) throws DukeException {
         String[] taskReplyArr = reply.split("/at ");
         if (taskReplyArr.length < 2) {
-            Ui.eventInputError();
+            Ui.throwEventInputError();
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
         try {
@@ -126,56 +145,54 @@ public class AddCommand extends Command {
             String timeDate = taskReplyArr[1];
 
             String[] timeDateArr = timeDate.split(" ");
-            if(timeDateArr.length == 2) {
+            if (timeDateArr.length == 2) {
                 if (DATE_VALIDATOR.isValidDate(timeDateArr[0]) && TIME_VALIDATOR.isValidTime(timeDateArr[1])) {
                     LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[1], TIME_FORMATTER);
 
                     Event event = new Event(task, formattedDate, formattedTime, false);
-                    taskList.add(event);
-                    Ui.taskAdded(event, taskList);
+                    taskList.addTask(event);
+                    Ui.showTaskAdded(event, taskList);
                 } else {
-                    Ui.eventInputError();
+                    Ui.throwEventInputError();
                 }
             } else if (timeDateArr.length == 1) {
                 if (DATE_VALIDATOR.isValidDate(timeDateArr[0])) {
                     LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
                     Event event = new Event(task, formattedDate, false);
-                    taskList.add(event);
-                    Ui.taskAdded(event, taskList);
+                    taskList.addTask(event);
+                    Ui.showTaskAdded(event, taskList);
                 } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
                     Event event = new Event(task, LocalDate.now(), formattedTime, false);
-                    taskList.add(event);
-                    Ui.taskAdded(event, taskList);
+                    taskList.addTask(event);
+                    Ui.showTaskAdded(event, taskList);
                 } else {
-                    Ui.eventInputError();
+                    Ui.throwEventInputError();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            Ui.eventInputError();
+            Ui.throwEventInputError();
 
         }
     }
 
     /**
      * Handles the Todo command and its details. Then the Deadline task will be added into the TaskList.
-     * @param reply Details of Todo command
+     *
+     * @param reply    Details of Todo command
      * @param taskList Overall TaskList of all the Tasks
      * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments)
      */
     public static void handleTodo(String reply, TaskList taskList) throws DukeException {
-            if(!reply.equals("")) {
-                Todo toDo = new Todo(reply, false);
-                taskList.add(toDo);
-                Ui.taskAdded(toDo, taskList);
-            } else {
-                Ui.todoInputError();
+        if (!reply.equals("")) {
+            Todo toDo = new Todo(reply, false);
+            taskList.addTask(toDo);
+            Ui.showTaskAdded(toDo, taskList);
+        } else {
+            Ui.throwTodoInputError();
         }
     }
-
-
-
 
 
 }

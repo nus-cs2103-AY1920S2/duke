@@ -16,6 +16,7 @@ public class Task {
 
     /**
      * Returns a String corresponding to the Task's status represented by the boolean isDone.
+     *
      * @return "Y" if isDone is true and "X" if isDone is false
      */
     public String getStatusIcon() {
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * Returns the description of the Task.
+     *
      * @return Description of Task
      */
     public String getDescription() {
@@ -32,6 +34,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "["+ getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 }

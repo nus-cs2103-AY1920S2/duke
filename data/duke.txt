@@ -1,4 +1,5 @@
 T>true> submit assignment
-D>false>Do tutorial 2>2020-01-29>23:59
-E>false>CNY event>2020-01-29>19:00
-E>false>lab>2020-01-30>09:00
+D>true>Do tutorial 2>2020-01-29>23:59
+E>true>CNY event>2020-01-29>19:00
+E>true>lab>2020-01-30>09:00
+T>false> Do laundry
