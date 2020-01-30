@@ -31,6 +31,10 @@ public class Event extends Task {
         convertDateTime(atTime);
     }
 
+    /**
+     * Puts important details into a String that is suitable for storing in files
+     * @return a String in the save-file format
+     */
     public String encoder() {
         return String.format("E:%s:%d:%s\n", super.name, (super.isDone ? 1 : 0), atTime);
     }
@@ -39,6 +43,10 @@ public class Event extends Task {
         return type;
     }
 
+    /**
+     * Stringify the object
+     * @return a String representing the Object
+     */
     @Override
     public String toString() {
         if (super.isDone)

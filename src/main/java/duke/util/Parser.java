@@ -4,6 +4,12 @@ import java.util.Scanner;
 import duke.task.Task;
 
 public class Parser {
+
+    /**
+     * Checks if input String is a marking task request
+     * @param str
+     * @return true if str is "done %d" and false otherwise
+     */
     public int isMarkingTaskRequest(String str) {
         int ret = -2;
         String ss = "";
@@ -25,6 +31,11 @@ public class Parser {
         return ret;
     }
 
+    /**
+     * Checks if input String is a deleting task request
+     * @param str
+     * @return true if str is "delete %d" and false otherwise
+     */
     public int isDeleteTaskRequest(String str) {
         int ret = -2;
         String ss = "";
@@ -46,6 +57,11 @@ public class Parser {
         return ret;
     }
 
+    /**
+     * Determines the type of the command
+     * @param str
+     * @return TaskType toDo, deadline, event, or unknown
+     */
     public Task.TaskType commandType(String str) {
         Task.TaskType ret = Task.TaskType.unknown;
         Scanner sc = new Scanner(str);

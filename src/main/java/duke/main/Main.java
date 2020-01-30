@@ -9,6 +9,13 @@ public class Main {
     static final Scanner scanner = new Scanner(System.in);
     static final Duke bot = new Duke();
 
+    /**
+     * The main driver for the program
+     * @param args
+     * @throws OutOfBoundMarkingRequestException
+     * @throws InvalidCommandException
+     * @throws TaskErrorException
+     */
     public static void main(String[] args) throws OutOfBoundMarkingRequestException, InvalidCommandException, TaskErrorException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

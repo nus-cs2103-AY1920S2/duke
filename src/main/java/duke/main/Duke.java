@@ -27,6 +27,9 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Constructor
+     */
     public Duke() {
         // Place-holder constructor, may need to extend later
         storedItems = new ArrayList<>();
@@ -35,10 +38,20 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Let the bot greet, calls to Ui method
+     */
     public void greet() {
         Ui.greet();
     }
 
+    /**
+     * Takes in the user input, run the Parser to determine what it means and acts accordingly
+     * @param str
+     * @throws InvalidCommandException
+     * @throws OutOfBoundMarkingRequestException
+     * @throws TaskErrorException
+     */
     public void processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException, TaskErrorException {
         if (str.equals("")) {
             Ui.blankInput();
@@ -137,10 +150,16 @@ public class Duke {
         Ui.storeUserInput(task, storedItems);
     }
 
+    /**
+     * Calls Ui method to list tasks saved
+     */
     public void listStoredItems() {
         Ui.listStoredItems(storedItems);
     }
 
+    /**
+     * Bot says goodbye, also calls Ui method
+     */
     public void byeBye() {
         storage.writeData(storedItems);
         Ui.byeBye();

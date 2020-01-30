@@ -14,28 +14,51 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
+    /**
+     * Constructor with a name
+     * @param name
+     */
     public Task(String name) {
         this.name = name;
         isDone = false;
     }
 
+    /**
+     * Constructor with a name and a boolean
+     * @param name
+     * @param isDone
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
 
+    /**
+     * Place-holder encoder method
+     * @return an empty String
+     */
     public String encoder() {
         return "";
     }
 
+    /**
+     * Mark the task as Done
+     */
     public void markDone() {
         isDone = true;
     }
 
+    /**
+     * Mark the task as Not Done
+     */
     public void markNotDone() {
         isDone = false;
     }
 
+    /**
+     * Stringify the object
+     * @return a String representing the Object
+     */
     @Override
     public String toString() {
         if (isDone)
