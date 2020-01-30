@@ -20,7 +20,7 @@ public class Storage {
         }
     }
 
-    public TaskList buildTaskList() throws DukeException{
+    public TaskList buildTaskList() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
             Scanner scan = new Scanner(data);
