@@ -75,16 +75,17 @@ public class Ui {
                 + (total != 1 ? "s" : "") + " in the list.");
         showLine();
     }
+
     /**
      * Prints the information of all the tasks in the TaskList object.
      * @param taskList for access to the collection of Task objects.
      */
     public static void showAllTasks(TaskList taskList) {
         showLine();
-        ArrayList<Task> task_list = taskList.getList();
-        if (!task_list.isEmpty()) {
-            for (int i = 1; i <= task_list.size(); i++) {
-                printWithIndent(i + "." + task_list.get(i - 1).toString());
+        ArrayList<Task> listToShow = taskList.getList();
+        if (!listToShow.isEmpty()) {
+            for (int i = 1; i <= listToShow.size(); i++) {
+                printWithIndent(i + "." + listToShow.get(i - 1).toString());
             }
         } else {
             printWithIndent("Empty List. You are currently free! Upz lah!");

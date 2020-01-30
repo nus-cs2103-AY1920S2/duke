@@ -1,5 +1,5 @@
 import duke.interaction.Parser;
-import duke.command.*;
+import duke.command.Command;
 
 import duke.task.Deadline;
 import duke.task.TaskList;
@@ -8,19 +8,20 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class DukeTest {
 
     @Test
-    public void ParserTest() {
+    public void parserTest() {
         System.out.println("TEST: ParserTest");
         Command c = Parser.parse("bye");
         assertEquals(true, c.isExit());
     }
 
     @Test
-    public void DateTimeTest() {
+    public void dateTimeTest() {
         System.out.println("TEST: DateTimeTest");
         LocalDateTime dt = DateTimeUtil.stringAsDateTime("2020-02-25");
         LocalDateTime expected = LocalDateTime.parse("2020-02-25T00:00");
@@ -36,7 +37,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TaskTest() {
+    public void taskTest() {
         System.out.println("TEST: TaskTest");
         LocalDateTime dt = DateTimeUtil.stringAsDateTime("2020-02-25 22:30");
         Deadline testDeadline = new Deadline("Homework", dt);
@@ -45,7 +46,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TaskListTest() {
+    public void taskListTest() {
         System.out.println("TEST: TaskListTest");
         TaskList tl = new TaskList();
         tl.addSaveStringAsTask("E0flight@2020-02-25T00:00");

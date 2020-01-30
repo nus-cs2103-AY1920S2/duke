@@ -26,7 +26,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Deadline constructor with String for date,
+     * Deadline constructor with String for date.
      * @param name of the deadline task.
      * @param deadline of the task.
      */
@@ -55,7 +55,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy h.mma")) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy h.mma")) + ")";
     }
 }

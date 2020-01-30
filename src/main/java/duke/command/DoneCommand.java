@@ -23,13 +23,14 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes Done behaviour of setting given task to Done
+     * Executes Done behaviour of setting given task to Done.
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
     public void execute(TaskList taskList, Storage storage) {
-        if (taskList.doneTask(doneIndex))
+        if (taskList.doneTask(doneIndex)) {
             storage.saveTaskListToFile(taskList);
+        }
     }
 
     /**

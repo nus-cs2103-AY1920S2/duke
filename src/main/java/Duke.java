@@ -17,6 +17,10 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Application's <code>main</code> method initializes a Duke object,
+     * greets the user via the UI and calls the behavioural <code>loop</code> method.
+     */
     public static void main(String[] args) {
         // Init Duke
         Duke d = new Duke();
@@ -51,16 +55,16 @@ public class Duke {
      * @return void
      */
     private void loop() {
-        boolean is_exiting = false;
+        boolean isExiting = false;
         Command c;
         do {
             String fullCommand = Ui.readCommand();
             c = Parser.parse(fullCommand);
             if (c != null) {
                 c.execute(taskList, storage);
-                is_exiting = c.isExit();
+                isExiting = c.isExit();
             }
-        } while (!is_exiting);
+        } while (!isExiting);
 
         exit();
     }

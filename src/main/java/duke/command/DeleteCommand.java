@@ -23,13 +23,14 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes Delete behaviour of deleted task at given index
+     * Executes Delete behaviour of deleted task at given index.
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
     public void execute(TaskList taskList, Storage storage) {
-        if (taskList.deleteTask(indexToDelete))
+        if (taskList.deleteTask(indexToDelete)) {
             storage.saveTaskListToFile(taskList);
+        }
     }
 
     /**

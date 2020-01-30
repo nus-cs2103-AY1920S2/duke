@@ -16,17 +16,17 @@ public class DateTimeUtil {
 
     /**
      * A conversion tool from String to LocalDateTime.
-     * @param dt_string to be converted to LocalDateTime object
+     * @param dateTimeString to be converted to LocalDateTime object
      * @return the LocalDateTime representation of the input string
      */
-    public static LocalDateTime stringAsDateTime(String dt_string) {
+    public static LocalDateTime stringAsDateTime(String dateTimeString) {
         if (formatter == null) {
             formatter = DateTimeFormatter
                     .ofPattern("yyyy-MM-dd[ HH:mm]");
         }
-        TemporalAccessor tA = formatter.parseBest(dt_string, LocalDateTime::from, LocalDate::from);
-        return (tA instanceof LocalDateTime ) ?
-                (LocalDateTime)tA :
-                ((LocalDate)tA).atStartOfDay(); // Assume time is 00:00 where no time is given
+        TemporalAccessor temporalAccessor = formatter.parseBest(dateTimeString, LocalDateTime::from, LocalDate::from);
+        return (temporalAccessor instanceof LocalDateTime)
+                ? (LocalDateTime)temporalAccessor :
+                ((LocalDate)temporalAccessor).atStartOfDay(); // Assume time is 00:00 where no time is given
     }
 }

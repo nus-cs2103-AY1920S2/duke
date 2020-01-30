@@ -21,7 +21,9 @@ public abstract class Task {
         isDone = false;
     }
 
-    public String getName() { return this.name; }
+    public String getName() {
+        return this.name;
+    }
 
     /**
      * Sets task's status to done.
@@ -38,6 +40,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "\u2713" : "\u2718") + "] " + name;
+        return "[" + (isDone ? "✓" : "✘") + "] " + name;
     }
 }

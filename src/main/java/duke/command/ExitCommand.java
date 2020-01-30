@@ -13,7 +13,9 @@ import duke.util.Storage;
  */
 public class ExitCommand extends Command {
 
-    public void execute(TaskList taskList, Storage storage) { }
+    public void execute(TaskList taskList, Storage storage) {
+
+    }
 
     /**
      * Inform if command is an exit command.

@@ -51,5 +51,7 @@ public class FindCommand extends Command {
      * Inform if command is an exit command.
      * @return boolean indicating if command is an exit command.
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 }
