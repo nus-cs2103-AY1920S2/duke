@@ -10,6 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Main driver class of AutoResponder chat.
+ */
 public class AutoResponder {
     private final List<Task> taskList;
     private final StringBuilder toPrint;
@@ -37,11 +40,16 @@ public class AutoResponder {
         this.ui = new Ui();
     }
 
-    public AutoResponder printToConsole() {
+    private AutoResponder printToConsole() {
         ui.printToConsole(toPrint.toString());
         return new AutoResponder(taskList, new StringBuilder());
     }
 
+    /**
+     * Reads input from UI, and processes commands accordingly.
+     * @param input String to be processed from System.in
+     * @return new AutoResponder object with corresponding command to be processed
+     */
     public AutoResponder readInput(String input) {
         String lowerInput = input.toLowerCase();
         if (pList.matcher(lowerInput).find()) {
@@ -213,6 +221,11 @@ public class AutoResponder {
         return new AutoResponder(taskList, sb).printToConsole();
     }
 
+    /**
+     * Initialises a new AutoResponder to be created, printing its landing page and loading a list
+     * from the usual location (./data/duke.txt).
+     * @return AutoResponder object being run
+     */
     public static AutoResponder initialise() {
         AutoResponder ar = new AutoResponder();
         ar.ui.printLandingPage();
@@ -220,6 +233,11 @@ public class AutoResponder {
         return ar.run();
     }
 
+    /**
+     * Starts the AutoResponder from accepting input via UI and processing commands.
+     * @return the state of each AutoResponder after each run, or shutdown if the bye
+     *     command is passed into it.
+     */
     public AutoResponder run() {
         AutoResponder ar = this;
         while (ui.hasCommand()) {
@@ -237,6 +255,10 @@ public class AutoResponder {
         return ar.run();
     }
 
+    /**
+     * Shuts AutoResponder down and prints goodbye screen.
+     * @return AutoResponder in shut down mode
+     */
     public AutoResponder shutdown() {
         ui.printGoodbye();
         return this;
