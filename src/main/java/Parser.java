@@ -1,48 +1,43 @@
 public class Parser {
     public static Command parse(String command) {
-        String firstWord = command.split(" ")[0];
-        String details = command.split(firstWord)[0].trim();
-
-        switch (firstWord) {
-            case "bye":
-                return new ExitCommand();
-            case "deadline":
-                return parseDeadline(details);
-            case "delete":
-                return parseDeleteTask(details);
-            case "done":
-                return parseCompleteTask(details);
-            case "event":
-                return parseEvent(details);
-            case "list":
-                return new ShowTasksCommand();
-            case "todo":
-                return parseTodo(details);
-            default:
-                return new InvalidCommand();
-        }
-    }
-
-    private static Command parseDeadline(String details) {
         try {
-            String description = details.split(" /by ")[0];
-            String deadline = details.split(" /by ")[1];
+            String firstWord = command.split(" ")[0];
 
-            return new AddDeadlineCommand(description, deadline);
+            switch (firstWord) {
+                case "bye":
+                    return new ExitCommand();
+                case "deadline":
+                    return parseDeadline(getDetails(command, firstWord));
+                case "delete":
+                    return parseDeleteTask(getDetails(command, firstWord));
+                case "done":
+                    return parseCompleteTask(getDetails(command, firstWord));
+                case "event":
+                    return parseEvent(getDetails(command, firstWord));
+                case "list":
+                    return new ShowTasksCommand();
+                case "todo":
+                    return parseTodo(getDetails(command, firstWord));
+                default:
+                    return new InvalidCommand();
+            }
         } catch (IndexOutOfBoundsException e) {
             return new InvalidFormatCommand();
         }
     }
 
-    private static Command parseEvent(String details) {
-        try {
-            String description = details.split(" /by ")[0];
-            String time = details.split(" /at ")[1];
+    private static Command parseDeadline(String details) throws IndexOutOfBoundsException{
+        String description = details.split(" /by ")[0];
+        String deadline = details.split(" /by ")[1];
 
-            return new AddEventCommand(description, time);
-        } catch (IndexOutOfBoundsException e) {
-            return new InvalidFormatCommand();
-        }
+        return new AddDeadlineCommand(description, deadline);
+    }
+
+    private static Command parseEvent(String details) throws IndexOutOfBoundsException{
+        String description = details.split(" /at ")[0];
+        String time = details.split(" /at ")[1];
+
+        return new AddEventCommand(description, time);
     }
 
     private static Command parseTodo(String details) {
@@ -56,7 +51,7 @@ public class Parser {
 
     private static Command parseDeleteTask(String details) {
         try {
-            int index = Integer.parseInt(details);
+            int index = Integer.parseInt(details) - 1;
             return new DeleteCommand(index);
         } catch (NumberFormatException e) {
             return new InvalidFormatCommand();
@@ -65,10 +60,14 @@ public class Parser {
 
     private static Command parseCompleteTask(String details) {
         try {
-            int index = Integer.parseInt(details);
+            int index = Integer.parseInt(details) - 1;
             return new CompleteTaskCommand(index);
         } catch (NumberFormatException e) {
             return new InvalidFormatCommand();
         }
+    }
+
+    private static String getDetails(String command, String firstWord) throws IndexOutOfBoundsException {
+        return command.split(firstWord)[1].trim();
     }
 }
