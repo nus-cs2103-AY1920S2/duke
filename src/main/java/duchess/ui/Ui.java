@@ -1,5 +1,6 @@
 package duchess.ui;
 
+import duchess.exception.DuchessException;
 import duchess.task.Task;
 import duchess.task.TaskList;
 import duchess.util.Pair;
@@ -94,7 +95,7 @@ public class Ui {
      *
      * @param taskList The taskList to print.
      */
-    public void printTaskList(TaskList taskList) {
+    public void printTaskList(TaskList taskList) throws DuchessException {
         if (taskList.size() > 0) {
             this.print("Sighs... you never remember what you say, don't you.");
             this.print("You said these:");
