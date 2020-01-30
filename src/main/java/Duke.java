@@ -52,6 +52,6 @@ public class Duke {
      * @param args The arguments from the command line.
      */
     public static void main(String[] args) {
-        new Duke("./data/duke.txt");
+        new Duke("../../../data/duke.txt");
     }
 }

@@ -67,6 +67,9 @@ public class Parser {
             case "delete":
                 tasks.deleteTask(trimmed);
                 break;
+            case "find":
+                tasks.findTask(trimmed);
+                break;
             default:
                 throw new InvalidCommandException();
             }
