@@ -1,3 +1,8 @@
+package duke.main;
+import duke.exception.InvalidCommandException;
+import duke.exception.OutOfBoundMarkingRequestException;
+import duke.exception.TaskErrorException;
+
 import java.util.Scanner;
 
 public class Main {

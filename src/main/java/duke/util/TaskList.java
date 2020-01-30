@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.exception.OutOfBoundMarkingRequestException;
+import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {

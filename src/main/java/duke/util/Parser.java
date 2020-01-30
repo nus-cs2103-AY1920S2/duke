@@ -1,4 +1,7 @@
+package duke.util;
+
 import java.util.Scanner;
+import duke.task.Task;
 
 public class Parser {
     public int isMarkingTaskRequest(String str) {

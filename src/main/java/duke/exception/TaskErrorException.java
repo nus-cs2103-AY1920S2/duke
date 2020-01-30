@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class TaskErrorException extends Exception {
     enum TaskErrorType {
         DeadlineByMissing, EventAtMissing, TaskDescMissing;

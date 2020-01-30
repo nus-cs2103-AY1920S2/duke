@@ -1,12 +1,19 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+package duke.main;
 
-import static java.lang.System.exit;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.exception.InvalidCommandException;
+import duke.exception.OutOfBoundMarkingRequestException;
+import duke.exception.TaskErrorException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     public static final String botName = "Duke";

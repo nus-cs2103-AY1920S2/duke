@@ -1,6 +1,9 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import duke.task.Task;
 
 public class Event extends Task {
     private final String bulletin = "[E]";
