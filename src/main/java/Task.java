@@ -41,8 +41,7 @@ public abstract class Task {
         return size;
     }
 
-    public static Task generateTask(String input) throws Exception {
-        String[] inputAsArray = input.split("\\s");
+    public static Task generateTask(String[] inputAsArray) throws Exception {
         String type = inputAsArray[0];
         switch (type.toLowerCase()) {
         case TO_DO: {
@@ -82,21 +81,17 @@ class TodoTask extends Task {
             try {
                 this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
                         DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
-
             } catch (DateTimeParseException e) {
                 try {
                     this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
                             DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
                 } catch (DateTimeParseException e2) {
-                    System.out.println("Error: unable to decipher date & time input.");
-                    e.printStackTrace();
+                    throw new Exception("Error: unable to decipher date & time input.");
                 }
             }
-            if (time != null) {
-                this.description = this.description.substring(0, lastAt + 3) + ' '
-                        + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
-                size++;
-            }
+            this.description = this.description.substring(0, lastAt + 3) + ' '
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+
         }
     }
 
@@ -146,15 +141,11 @@ class DeadlineTask extends Task {
                     this.time = LocalDateTime.parse(this.description.substring(lastBy + 4),
                             DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
                 } catch (DateTimeParseException e2) {
-                    System.out.println("Error: unable to decipher date & time input.");
-                    e.printStackTrace();
+                    throw new Exception("Error: unable to decipher date & time input.");
                 }
             }
-            if (time != null) {
-                this.description = this.description.substring(0, lastBy + 3) + ' '
-                        + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
-                size++;
-            }
+            this.description = this.description.substring(0, lastBy + 3) + ' '
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
         }
     }
     @Override

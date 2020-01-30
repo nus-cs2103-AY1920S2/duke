@@ -7,13 +7,21 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Storage {
-    public static ArrayList<Task> generateTaskList() {
+    private String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public ArrayList<Task> generateTaskList() {
         ArrayList<Task> lst = new ArrayList<>();
-        try (Scanner scan = new Scanner(new File("src/main/data/data.csv"))) {
+        try (Scanner scan = new Scanner(new File(filePath))) {
             while (scan.hasNextLine()) {
                 String[] line = scan.nextLine().split(",");
-                Task task = Task.generateTask(String.join(" ", line[0], line[1]));
-                if (line[2].equals("T")) {
+                boolean isDone = line[2].equals("T");
+                String[] line2 = new String[]{line[0], line[1]};
+                Task task = Task.generateTask(line2);
+                if (isDone) {
                     task.setDone();
                 }
                 lst.add(task);
@@ -26,8 +34,8 @@ public class Storage {
         return lst;
     }
 
-    public static void writeTask(ArrayList<Task> lst) {
-        try (FileWriter writer = new FileWriter("src/main/data/data.csv")) {
+    public void writeTask(ArrayList<Task> lst) {
+        try (FileWriter writer = new FileWriter(filePath)) {
             String str = lst.stream()
                     .map(task ->
                             String.join(",", task.getType(),
