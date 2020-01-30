@@ -1,6 +1,6 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    protected String description; //action to be taken
+    protected boolean isDone; //status of the action
     private Ui ui = new Ui();
     protected String line = ui.line();
 

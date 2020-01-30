@@ -13,6 +13,7 @@ public class Event extends Task {
     }
 
     @Override
+    /*Override the toString method for Event*/
     public String toString(){
         return "[E]" + super.toString() + "| at: " + time ;
     }

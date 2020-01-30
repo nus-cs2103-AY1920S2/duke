@@ -8,6 +8,7 @@ public class Todo extends Task {
     }
 
     @Override
+    /*Override the toString method for To do*/
     public String toString(){
         return "[T]" + super.toString();
     }

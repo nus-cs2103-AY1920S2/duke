@@ -33,7 +33,7 @@ public class Store {
     public void bye() {
         WritetoFile();
         System.out.print(ui.byeMessgae());
-        System.exit(1);
+        System.exit(1); //exits program
     }
 
     /**

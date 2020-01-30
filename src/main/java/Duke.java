@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
 
     private Store lib;
-    private Ui ui;
+    private Ui ui = new Ui();
     private Scanner sn = new Scanner(System.in);
     private DukeException DE;
     String[] CheckInput;
@@ -15,10 +15,9 @@ public class Duke {
      * @param filepath the absolute location of the .txt file.
      */
     public Duke(String filepath){
-        ui = new Ui();
         DE = new DukeException();
-        File file = new File(filepath);
-        this.lib = new Store(file);
+        File file = new File(filepath); //create a file obj with the given filepath.
+        this.lib = new Store(file); //create store from absolute filepath
         try {
             boolean result = file.exists();
             if(!result){
