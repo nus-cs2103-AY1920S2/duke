@@ -3,13 +3,17 @@ import exceptions.BaseException;
 import exceptions.WrongCommandException;
 
 public class Duke {
-    public static final int MAX_STRING_LENGTH = 60;
     public static final int MAX_TASKS = 100;
     public static final String WELCOME_MESSAGE = "Wussup Dawggg! I'm Dukeee\nWhat you want me do?";
     public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
+
+    private UserInterface userInterface;
+    public Duke() {
+        this.userInterface = new UserInterface();
+    }
     
-    public static void main(String[] args) {
-        print(WELCOME_MESSAGE);
+    public void start() {
+        this.userInterface.show(WELCOME_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager(MAX_TASKS);
@@ -20,41 +24,22 @@ public class Duke {
                 String nextArgs = scanner.nextLine().trim();
 
                 if      (command.equals("bye"))                 break;
-                else if (command.equals("list"))                print(taskManager.toString());                
-                else if (command.equals("done"))                print(taskManager.setTaskDone(nextArgs));
-                else if (command.equals("todo"))                print(taskManager.addTodoTask(nextArgs));
-                else if (command.equals("deadline"))            print(taskManager.addDeadlineTask(nextArgs));
-                else if (command.equals("event"))               print(taskManager.addEventTask(nextArgs));
-                else if (command.equals("delete"))              print(taskManager.deleteTask(nextArgs));
+                else if (command.equals("list"))                this.userInterface.show(taskManager.toString());                
+                else if (command.equals("done"))                this.userInterface.show(taskManager.setTaskDone(nextArgs));
+                else if (command.equals("todo"))                this.userInterface.show(taskManager.addTodoTask(nextArgs));
+                else if (command.equals("deadline"))            this.userInterface.show(taskManager.addDeadlineTask(nextArgs));
+                else if (command.equals("event"))               this.userInterface.show(taskManager.addEventTask(nextArgs));
+                else if (command.equals("delete"))              this.userInterface.show(taskManager.deleteTask(nextArgs));
                 else                                            throw new WrongCommandException(String.format("The command '%s' is not supported", command));
             } catch (BaseException e) {
-                print(e.getMessage());
+                this.userInterface.show(e.getMessage());
             } catch (Exception e) {
-                print("Caught some other exception! Notify developer!");
-                print(e.getMessage());
+                this.userInterface.show("Caught some other exception! Notify developer!");
+                this.userInterface.show(e.getMessage());
             }
         }
 
         scanner.close();
-        print(GOODBYE_MESSAGE);
-    }
-
-    // -----------------------------------------------------------------------------------------
-    // Helper Methods
-    private static void print(String message) {
-        System.out.println("    ____________________________________________________________");
-
-        for (String str : message.split("\n")) {
-            int index = 0;
-            while (index < str.length()) {
-                String indentation = "      ";
-                int print_length = Math.min(str.length() - index, MAX_STRING_LENGTH - 2);
-
-                System.out.println(indentation + str.substring(index, index + print_length));
-                index += print_length;
-            }
-        }
-        
-        System.out.println("    ____________________________________________________________");
+        this.userInterface.show(GOODBYE_MESSAGE);
     }
 }
