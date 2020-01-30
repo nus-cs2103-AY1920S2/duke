@@ -20,7 +20,7 @@ public class Storage {
     protected String filePath;
     protected List<Task> tasks;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.tasks = new ArrayList<>();
         this.filePath = filePath;
     }
@@ -49,7 +49,7 @@ public class Storage {
         bw.close();
     }
 
-    protected void loadTasks() throws IOException {
+    public void loadTasks() throws IOException {
         FileInputStream ips = new FileInputStream(new File(this.filePath));
         BufferedReader br = new BufferedReader(new InputStreamReader(ips));
         String line;

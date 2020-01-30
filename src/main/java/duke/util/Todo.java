@@ -12,7 +12,7 @@ package duke.util;
  * @author Jel
  */
 public class Todo extends Task {
-    Todo(String description) {
+    public Todo(String description) {
         super(description);
     }
 

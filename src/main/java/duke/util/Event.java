@@ -17,12 +17,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate at;
 
-    Event(String description, LocalDate at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
-    protected LocalDate getScheduledTime() {
+    public LocalDate getScheduledTime() {
         return this.at;
     }
 

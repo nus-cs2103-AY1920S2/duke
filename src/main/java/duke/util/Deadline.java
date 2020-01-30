@@ -17,12 +17,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate due;
 
-    Deadline(String description, LocalDate due) {
+    public Deadline(String description, LocalDate due) {
         super(description);
         this.due = due;
     }
 
-    protected LocalDate getDueDate() {
+    public LocalDate getDueDate() {
         return this.due;
     }
 

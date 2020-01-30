@@ -18,7 +18,7 @@ public class Ui {
     private static String separator = "____________________________________________________________";
     private Scanner sc;
 
-    Ui() {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
@@ -26,7 +26,7 @@ public class Ui {
         System.out.println(separator);
     }
 
-    protected void run() {
+    public void run() {
         printSeparator();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         printSeparator();
@@ -35,7 +35,7 @@ public class Ui {
     /**
      * Get input from user.
      */
-    protected String getInput() {
+    public String getInput() {
         return this.sc.nextLine();
     }
 

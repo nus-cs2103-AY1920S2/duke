@@ -46,6 +46,6 @@ public class Duke {
      * @param args not used.
      */
     public static void main(String[] args) {
-        new Duke("../data/duke.txt");
+        new Duke("./data/duke.txt");
     }
 }

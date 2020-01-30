@@ -13,14 +13,14 @@ package duke.util;
  */
 public class Task {
     protected String description;
-    protected boolean isDone;
+    public boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 

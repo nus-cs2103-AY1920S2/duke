@@ -25,7 +25,7 @@ public class TaskList {
     protected Storage storage;
     protected List<Task> tasks;
 
-    TaskList(Storage storage) {
+    public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = storage.tasks;
     }

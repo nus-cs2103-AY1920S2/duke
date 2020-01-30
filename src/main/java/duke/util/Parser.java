@@ -23,12 +23,12 @@ public class Parser {
     private TaskList tasks;
     private Ui ui;
 
-    Parser(TaskList tasks, Ui ui) {
+    public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
     }
 
-    protected void parseInput(String line) {
+    public void parseInput(String line) {
         String trimmed = line.trim();
         String cmd = getCommand(trimmed);
         String descAndDate;
