@@ -15,6 +15,12 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    public Task completeTask(int index) { 
+        Task task = tasks.get(index);
+        task.tick();
+        return task;
+    }
+
     public List<Task> getAllTasks() {
         return tasks;
     }
