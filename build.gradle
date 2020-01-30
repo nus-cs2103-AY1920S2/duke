@@ -1,6 +1,9 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    //Shadow is a plugin that packages an application into an executable jar file
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'seedu.duke'
@@ -12,9 +15,20 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }
 
 run {
     standardInput = System.in
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }
