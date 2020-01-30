@@ -1,9 +1,8 @@
 package task;
 
-import core.DateTimeUtil;
+import core.DateUtil;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Specific type of task that contains description and
@@ -31,6 +30,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return super.toString()+" (at: "+ DateTimeUtil.standardFormat(eventTime)+")";
+        return super.toString()+" (at: "+ DateUtil.standardFormat(eventTime)+")";
     }
 }

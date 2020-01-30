@@ -13,7 +13,8 @@ public enum ErrorMessage {
     LACK_NUMBER("The input must contain a number"),
     UNKNOWN_INPUT("I'm sorry, but I don't know what that means :-("),
     EMPTY_LIST("Task list is empty."),
-    UNRECOGNISE_TIME("Unrecognised date time format.");
+    UNRECOGNISED_DATE_FORMAT("Unrecognised date format."),
+    DONE_TASK("The task is already done.");
 
     String msg;
     ErrorMessage(String msg){

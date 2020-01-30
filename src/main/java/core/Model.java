@@ -25,23 +25,6 @@ public class Model {
     }
 
     /**
-     * Gets the list of task in standard form.
-     * @return list of task in standard form.
-     * @throws DukeException when the list is empty.
-     */
-    public ArrayList<String> formatList() throws DukeException {
-        ArrayList<String> s=new ArrayList<>();
-        if(taskList.size()==0){
-            throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
-        }
-        for (int i = 0; i < getSize(); i++) {
-            s.add((i + 1) + ". " + taskList.get(i));
-        }
-        return s;
-    }
-
-
-    /**
      * Marks the task as done.
      * @param index indicate the specific task.
      * @throws DukeException when index is invalid.
@@ -66,16 +49,16 @@ public class Model {
      * @throws DukeException when the task list is empty
      * or there is no matching task.
      */
-    public ArrayList<String> findTask(String keyword) throws DukeException{
-        if(getSize()==0){
+    public ArrayList<Task> findTask(String keyword) throws DukeException{
+        if(taskList.isEmpty()){
             throw new DukeException(ErrorMessage.EMPTY_LIST.toString());
         }
-        ArrayList<String> matchingTask=new ArrayList<>();
-        taskList.stream().filter(t->t.hasKeyword(keyword)).forEach(x->matchingTask.add(x.toString()));
-        if(matchingTask.isEmpty()){
+        ArrayList<Task> matchingTasks=new ArrayList<>();
+        taskList.stream().filter(t->t.hasKeyword(keyword)).forEach(x->matchingTasks.add(x));
+        if(matchingTasks.isEmpty()){
             throw new DukeException("The matching list is empty.");
         }
-        return matchingTask;
+        return matchingTasks;
     }
 
 

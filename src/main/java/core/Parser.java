@@ -139,11 +139,11 @@ public class Parser {
     }
 
     private LocalDate parseDate(String date) throws DukeException{
-        for(DateTimeUtil format: DateTimeUtil.values()){
+        for(DateUtil format: DateUtil.values()){
             try{
                 return LocalDate.parse(date, DateTimeFormatter.ofPattern(format.toString()));
             }catch (DateTimeParseException ignored){}
         }
-        throw new DukeException(ErrorMessage.UNRECOGNISE_TIME.toString());
+        throw new DukeException(ErrorMessage.UNRECOGNISED_DATE_FORMAT.toString());
     }
 }

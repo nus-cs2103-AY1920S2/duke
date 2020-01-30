@@ -44,13 +44,12 @@ public class Storage {
      * @throws DukeException when reading from the file is unsuccessful.
      */
     public void clearData() throws DukeException{
-        try(FileOutputStream fo=new FileOutputStream(file)){
-            ObjectOutputStream oo=new ObjectOutputStream(fo);
-            oo.close();
+        try(FileWriter fw=new FileWriter(file)){
+            BufferedWriter bw=new BufferedWriter(fw);
+            bw.close();
         }catch(IOException ex){
             throw new DukeException("Encounter error in resetting data");
         }
-
     }
 
     /**

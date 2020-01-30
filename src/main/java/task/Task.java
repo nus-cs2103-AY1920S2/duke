@@ -1,5 +1,8 @@
 package task;
 
+import core.ErrorMessage;
+import dukexception.DukeException;
+
 import java.io.Serializable;
 
 /**
@@ -10,8 +13,8 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
 
-    private String typeIcon;
     private String description;
+    private String typeIcon;
     private boolean isDone;
 
     /**
@@ -43,7 +46,10 @@ public abstract class Task implements Serializable {
     /**
      * Marks the task as done.
      */
-    public void setDone(){
+    public void setDone() throws DukeException {
+        if(isDone){
+            throw new DukeException(ErrorMessage.DONE_TASK.toString());
+        }
         isDone=true;
     }
 

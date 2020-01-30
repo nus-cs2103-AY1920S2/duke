@@ -1,9 +1,8 @@
 package task;
 
-import core.DateTimeUtil;
+import core.DateUtil;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Specific type of task that contains description and
@@ -29,6 +28,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return super.toString()+" (by: "+ DateTimeUtil.standardFormat(deadline)+")";
+        return super.toString()+" (by: "+ DateUtil.standardFormat(deadline)+")";
     }
 }
