@@ -1,6 +1,11 @@
+package app;
+
 import java.util.Scanner;
-import exceptions.BaseException;
-import exceptions.WrongCommandException;
+
+import app.exceptions.BaseException;
+import app.exceptions.WrongCommandException;
+import app.core.UserInterface;
+import app.core.TaskManager;
 
 public class Duke {
     public static final int MAX_TASKS = 100;

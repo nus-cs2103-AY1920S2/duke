@@ -1,3 +1,5 @@
+package app.core;
+
 public class UserInterface {
     public static final int MAX_STRING_LENGTH = 60;
 

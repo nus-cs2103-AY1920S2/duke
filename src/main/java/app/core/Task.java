@@ -1,4 +1,7 @@
-import exceptions.WrongDateTimeFormatException;
+package app.core;
+
+import app.util.Date;
+import app.exceptions.WrongDateTimeFormatException;
 
 public class Task {
     protected String description;

@@ -1,7 +1,10 @@
+package app.core;
+
 import java.util.List;
 
-import exceptions.WrongDateTimeFormatException;
-import exceptions.WrongUsageException;
+import app.util.Date;
+import app.exceptions.WrongDateTimeFormatException;
+import app.exceptions.WrongUsageException;
 
 public class TaskManager{
     private List<Task> tasks;

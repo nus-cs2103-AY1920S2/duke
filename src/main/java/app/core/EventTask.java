@@ -1,3 +1,7 @@
+package app.core;
+
+import app.util.Date;
+
 public class EventTask extends Task {
     private Date when;
 

@@ -1,7 +1,10 @@
+package app.util;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import exceptions.WrongDateTimeFormatException;
+
+import app.exceptions.WrongDateTimeFormatException;
 
 public class Date {
     private LocalDateTime date;

@@ -1,3 +1,7 @@
+package app.core;
+
+import app.util.Date;
+
 public class DeadlineTask extends Task {
     private Date deadline;
 
