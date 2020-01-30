@@ -1,13 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Item {
 
-    private String deadline;
+    private LocalDateTime deadline;
 
     /**
      * Contsructor of the deadline object.
      * @param name The task name.
      * @param deadline  The deadline date/time.
      */
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, LocalDateTime deadline) {
         super(name);
         this.deadline = deadline;
     }
@@ -23,6 +26,7 @@ public class Deadline extends Item {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        return String.format("[D]%s (by: %s)", super.toString(),
+                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")));
     }
 }
