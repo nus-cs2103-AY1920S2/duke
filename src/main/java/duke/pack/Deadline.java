@@ -6,15 +6,17 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected String time;
     protected LocalDate date;
+    protected String fullDesc;
 
     /**
      * creates a deadline type of task
      * @param description the task to be done
      * @param time the time the task is due
      * @param date the date the task is due
+     * @param fullDesc the full description of task
      */
-    public Deadline(String description, String time, LocalDate date) {
-        super(description);
+    public Deadline(String description, String time, LocalDate date, String fullDesc) {
+        super(description, fullDesc);
         this.time = time;
         this.date = date;
     }
