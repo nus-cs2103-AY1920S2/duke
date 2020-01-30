@@ -48,7 +48,7 @@ public class Storage {
                 String taskType = taskArr[0].trim();
 
                 if (taskType.equals("T")) {
-                    Task todo = new Todo(taskArr[2].trim());
+                    Task todo = new Todo(taskArr[2].trim(), taskArr[2].trim());
                     if (taskArr[1].trim().equals("1")) {
                         todo.setDone(true);
                     }
@@ -56,7 +56,9 @@ public class Storage {
 
                 } else if (taskType.equals("E")) {
                     LocalDate date = LocalDate.parse(taskArr[4].trim());
-                    Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date);
+                    String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
+
+                    Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc);
                     if (taskArr[1].trim().equals("1")) {
                         event.setDone(true);
                     }
@@ -64,7 +66,10 @@ public class Storage {
 
                 } else if (taskType.equals("D")) {
                     LocalDate date = LocalDate.parse(taskArr[4].trim());
-                    Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date);
+
+                    String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
+
+                    Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc);
                     if (taskArr[1].trim().equals("1")) {
                         deadline.setDone(true);
                     }

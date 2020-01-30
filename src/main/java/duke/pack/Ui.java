@@ -88,6 +88,10 @@ public class Ui {
         System.out.println("    You now have " + tasks.getSize() + " tasks in your list!");
     }
 
+    public void showFind() {
+        System.out.println("    I have found these matching tasks!");
+    }
+
     /**
      * exits
      */

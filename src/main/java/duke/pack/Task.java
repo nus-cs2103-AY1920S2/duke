@@ -5,14 +5,17 @@ package duke.pack;
  */
 public class Task {
     protected String description;
+    protected String fullDesc;
     protected boolean isDone;
 
     /**
      * creates a task with the specified description
      * @param description the task description
+     * @param fullDesc the full description of the task
      */
-    public Task(String description) {
+    public Task(String description, String fullDesc) {
         this.description = description;
+        this.fullDesc = fullDesc;
         this.isDone = false;
     }
 
@@ -28,8 +31,8 @@ public class Task {
      * gets description of task
      * @return a string that is the task's description
      */
-    public String getDescription() {
-        return description; //return task description
+    public String getFullDesc() {
+        return fullDesc; //return task description
     }
 
     /**

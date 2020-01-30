@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    protected String fullDesc;
     protected String time;
     protected LocalDate date;
 
@@ -12,9 +13,10 @@ public class Event extends Task {
      * @param description task to be done
      * @param time time of event
      * @param date date of event
+     * @param fullDesc the full description of the task
      */
-    public Event(String description, String time, LocalDate date) {
-        super(description);
+    public Event(String description, String time, LocalDate date, String fullDesc) {
+        super(description, fullDesc);
         this.time = time;
         this.date = date;
     }

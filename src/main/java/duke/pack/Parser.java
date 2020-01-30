@@ -24,6 +24,15 @@ public class Parser {
             Command c = new ListCommand();
             return c;
 
+        } else if (comm[0].equals("find")) {
+            // find
+            if (comm.length == 1) {
+                throw new DukeException("    Oh no! You have to specify what you want to find!");
+            }
+
+            Command c = new FindCommand(comm[1]);
+            return c;
+
         } else if (comm[0].equals("done")) {
             // done
             if (comm.length == 1) {
@@ -50,7 +59,7 @@ public class Parser {
             }
 
             String[] arr = command.split("todo");
-            Task t = new Todo(arr[1]);
+            Task t = new Todo(arr[1].trim(), arr[1]);
 
             Command c = new AddCommand(t);
             return c;
@@ -79,7 +88,7 @@ public class Parser {
 
             try {
                 LocalDate date = LocalDate.parse(dateTime[0].trim());
-                Task t = new Event(arr2[1].trim(), time, date);
+                Task t = new Event(arr2[1].trim(), time, date, comm[1]);
                 Command c = new AddCommand(t);
                 return c;
 
@@ -114,7 +123,7 @@ public class Parser {
             try {
                 LocalDate date = LocalDate.parse(dateTime[0].trim());
                 // add to list
-                Task t = new Deadline(arr2[1].trim(), time, date);
+                Task t = new Deadline(arr2[1].trim(), time, date, comm[1]);
                 Command c = new AddCommand(t);
                 return c;
 
