@@ -24,22 +24,22 @@ public class Parser {
             }
 
             switch (splitBySpace[0]) {
-                case "list":
-                    return Command.LIST;
-                case "done":
-                    return Command.DONE;
-                case "delete":
-                    return Command.DELETE;
-                case "todo":
-                    return Command.TODO;
-                case "event":
-                    return Command.EVENT;
-                case "deadline":
-                    return Command.DEADLINE;
-                case "find":
-                    return Command.FIND;
-                default:
-                    throw new DukeException("Don't understand");
+            case "list":
+                return Command.LIST;
+            case "done":
+                return Command.DONE;
+            case "delete":
+                return Command.DELETE;
+            case "todo":
+                return Command.TODO;
+            case "event":
+                return Command.EVENT;
+            case "deadline":
+                return Command.DEADLINE;
+            case "find":
+                return Command.FIND;
+            default:
+                throw new DukeException("Don't understand");
             }
         } catch (DukeException e) {
             System.out.println(e);

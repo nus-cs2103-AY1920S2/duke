@@ -1,3 +1,2 @@
-T 1 this shit
 D 1 do prj /by tmr
 D 0 prjjj /by 2020-01-28

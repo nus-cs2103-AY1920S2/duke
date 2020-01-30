@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.IOException;
 
 /**
  * Duke is the main class of the Duke chatbot.
@@ -45,78 +45,78 @@ public class Duke {
 
                 if (cmd != null) {
                     switch (cmd) {
-                        case LIST:
-                            if (tasks.getSize() == 0) {
-                                System.out.println("The list is empty.");
-                            } else {
-                                for (int i = 0; i < tasks.getDukeList().size(); i++) {
-                                    System.out.println((i + 1) + "." + tasks.getDukeList().get(i));
-                                }
+                    case LIST:
+                        if (tasks.getSize() == 0) {
+                            System.out.println("The list is empty.");
+                        } else {
+                            for (int i = 0; i < tasks.getDukeList().size(); i++) {
+                                System.out.println((i + 1) + "." + tasks.getDukeList().get(i));
                             }
-                            break;
-                        case DONE:
-                            num = parser.parseNum(fullCommand, tasks);
+                        }
+                        break;
+                    case DONE:
+                        num = parser.parseNum(fullCommand, tasks);
 
-                            if (num != -1) {
-                                tasks.markDone(num);
-                                ui.printMarkDone(tasks, num);
-                            }
-                            break;
-                        case DELETE:
-                            num = parser.parseNum(fullCommand, tasks);
+                        if (num != -1) {
+                            tasks.markDone(num);
+                            ui.printMarkDone(tasks, num);
+                        }
+                        break;
+                    case DELETE:
+                        num = parser.parseNum(fullCommand, tasks);
 
-                            if (num != -1) {
-                                ui.printTaskRemoved(tasks, num);
-                                tasks.removeTask(num);
-                            }
+                        if (num != -1) {
+                            ui.printTaskRemoved(tasks, num);
+                            tasks.removeTask(num);
+                        }
 
-                            break;
-                        case TODO:
-                            String tmp = parser.parseDescription(fullCommand);
-                            t = new ToDo(tmp);
+                        break;
+                    case TODO:
+                        String tmp = parser.parseDescription(fullCommand);
+                        t = new ToDo(tmp);
+                        tasks.addTask(t);
+                        ui.printTaskAdded(tasks, t);
+
+                        break;
+                    case EVENT:
+                        desc = parser.parseDescOfEventDeadline(fullCommand);
+                        by = parser.parseBy(fullCommand);
+
+                        if (desc != null && by != null) {
+                            t = new Event(desc, by);
                             tasks.addTask(t);
                             ui.printTaskAdded(tasks, t);
+                        }
 
-                            break;
-                        case EVENT:
-                            desc = parser.parseDescOfEventDeadline(fullCommand);
-                            by = parser.parseBy(fullCommand);
+                        break;
+                    case DEADLINE:
+                        desc = parser.parseDescOfEventDeadline(fullCommand);
+                        by = parser.parseBy(fullCommand);
 
-                            if (desc != null && by != null) {
-                                t = new Event(desc, by);
-                                tasks.addTask(t);
-                                ui.printTaskAdded(tasks, t);
+                        if (desc != null && by != null) {
+                            t = new Deadline(desc, by);
+                            tasks.addTask(t);
+                            ui.printTaskAdded(tasks, t);
+                        }
+
+                        break;
+                    case FIND:
+                        String find = parser.parseDescription(fullCommand);
+                        String taskL = "";
+
+                        for (int i = 0; i < tasks.getSize(); i++) {
+                            Task cur = tasks.getDukeList().get(i);
+
+                            if (cur.getDescription().contains(find)) {
+                                taskL = taskL + (i+1) + "." + tasks.getDukeList().get(i) + "\n";
                             }
+                        }
 
-                            break;
-                        case DEADLINE:
-                            desc = parser.parseDescOfEventDeadline(fullCommand);
-                            by = parser.parseBy(fullCommand);
+                        ui.printMatchingTask(taskL.trim(), find);
 
-                            if (desc != null && by != null) {
-                                t = new Deadline(desc, by);
-                                tasks.addTask(t);
-                                ui.printTaskAdded(tasks, t);
-                            }
-
-                            break;
-                        case FIND:
-                            String find = parser.parseDescription(fullCommand);
-                            String taskL = "";
-
-                            for (int i = 0; i < tasks.getSize(); i++) {
-                                Task cur = tasks.getDukeList().get(i);
-
-                                if (cur.getDescription().contains(find)) {
-                                    taskL = taskL + (i+1) + "." + tasks.getDukeList().get(i) + "\n";
-                                }
-                            }
-
-                            ui.printMatchingTask(taskL.trim(), find);
-
-                            break;
-                        default:
-                            break;
+                        break;
+                    default:
+                        break;
                     }
                 }
             } catch (DukeException e) {
