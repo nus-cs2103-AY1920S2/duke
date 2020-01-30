@@ -1,7 +1,6 @@
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
@@ -52,11 +51,49 @@ public class Duke {
 
         List<Task> tasks = new ArrayList<>();
 
-        String str1, str2;
+        String str1;
 
         String[] strArr;
 
         Task t;
+
+        try {
+            File f = new File("data/duke.txt");
+
+            if (!f.exists()) {
+                // Create file if it does not already exists
+                f.createNewFile();
+            } else {
+                // Populate task list with tasks from file
+                Scanner s = new Scanner(f);
+
+                while (s.hasNext()) {
+                    String line = s.nextLine();
+                    strArr = line.split("\\|");
+
+                    String type = strArr[0];
+                    boolean isDone = strArr[1].equals("1");
+                    String name = strArr[2];
+
+                    t = null;
+
+                    if (type.equals("T")) {
+                        t = new Todo(name, isDone);
+                    } else if (type.equals("E")) {
+                        t = new Event(name, strArr[3], isDone);
+                    } else if (type.equals("D")) {
+                        t = new Deadline(name, strArr[3], isDone);
+                    }
+
+                    // Add task t to ArrayList
+                    tasks.add(t);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Sorry, an error has occurred:");
+            e.printStackTrace();
+            return;
+        }
 
         while (true) {
             try {
