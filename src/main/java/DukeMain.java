@@ -6,4 +6,8 @@ public class DukeMain {
     boolean add(Task t) {
         return this.lst.add(t);
     }
+
+    List<Task> getTaskList() {
+        return this.lst;
+    }
 }
