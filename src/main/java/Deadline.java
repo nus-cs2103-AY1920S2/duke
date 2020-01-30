@@ -14,15 +14,14 @@ public class Deadline extends Task {
         return "D";
     }
 
-<<<<<<< HEAD
-    public String getTime() {
-        return this.time;
-=======
+    public String getDate() {
+        return this.date.toString();
+    }
+
     public String formatDate() {
         DateTimeFormatter myformat = DateTimeFormatter.ofPattern("d MMM uuuu");
         String converted = this.date.format(myformat);
         return converted;
->>>>>>> branch-Level-8
     }
 
     @Override

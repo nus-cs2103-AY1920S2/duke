@@ -3,11 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-<<<<<<< HEAD
 import java.io.FileWriter;
-=======
 import java.time.LocalDate;
->>>>>>> branch-Level-8
+
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -74,12 +72,7 @@ public class Duke {
                         } else if (keyword.equals("deadline")) {
                             list.add(new Deadline(arrSplit2[0], LocalDate.parse(arrSplit2[1])));
                         } else if (keyword.equals("event")) {
-<<<<<<< HEAD
-                            list.add(new Event(arrSplit2[0], arrSplit2[1]));
-
-=======
                             list.add(new Event(arrSplit2[0], LocalDate.parse(arrSplit2[1])));
->>>>>>> branch-Level-8
                         }
 
                         System.out.println("Got it. I 've added this task:");
@@ -115,10 +108,10 @@ public class Duke {
                         currentTask = new Todo(arrSplit[2]);
                         break;
                     case "D":
-                        currentTask = new Deadline(arrSplit[2], arrSplit[3]);
+                        currentTask = new Deadline(arrSplit[2], LocalDate.parse(arrSplit[3]));
                         break;
                     case "E":
-                        currentTask = new Event(arrSplit[2], arrSplit[3]);
+                        currentTask = new Event(arrSplit[2], LocalDate.parse(arrSplit[3]));
                         break;
                 }
 
@@ -143,10 +136,10 @@ public class Duke {
                             System.lineSeparator());
                 } else if (current instanceof Deadline) {
                     writer.write("D" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
-                            ((Deadline) current).getTime() + System.lineSeparator());
+                            ((Deadline) current).getDate() + System.lineSeparator());
                 } else if (current instanceof Event){
                     writer.write("E" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
-                            ((Event) current).getTime() + System.lineSeparator());
+                            ((Event) current).getDate() + System.lineSeparator());
                 }
             }
             writer.close();
