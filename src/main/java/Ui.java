@@ -55,13 +55,10 @@ public class Ui {
         System.out.println("Number of items in the list: " + listSize);
     }
 
-<<<<<<< HEAD
     /**
      * Method to print a farewell message before closing the Duke bot.
      */
-=======
->>>>>>> Level-9
-    public void printBye() {
+public void printBye() {
         System.out.println("It was my pleasure to help you.\n");
     }
 

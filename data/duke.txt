@@ -1,3 +1,2 @@
 event/✘/qq/2019-07-07
 deadline /✓ /deadline/ 2019-02-02
-deadline /✘ /dragon / 2019-03-03
