@@ -1,3 +1,0 @@
-[T][O] this
-[D][O] that (by: today)
-[E][O] those (at: tomorrow)
