@@ -1,3 +1,6 @@
+import duke.task.*;
+import duke.exception.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -51,7 +54,7 @@ public class Parser {
         String str = "\nCurrent number of task(s): ";
 
         if (type.equals("T")) {
-            Todo todo = new Todo(input);
+            Task todo = new Todo(input);
             taskList.add(todo);
             Ui.printWithBorder("The following to-do has been added:\n    " + todo.toString() + str + taskList.size());
 
