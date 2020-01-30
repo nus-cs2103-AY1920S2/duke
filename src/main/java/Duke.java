@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Duke {
+    static DukeMain mainObj = new DukeMain();
     String stupidLogo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -26,6 +27,10 @@ public class Duke {
         System.out.println();
     }
 
+    static void addTask(String taskname) {
+        mainObj.add(new Task(taskname));
+    }
+
     static boolean isCommand(String cmd) {
         return true;
     }
@@ -33,13 +38,15 @@ public class Duke {
     static void execCommand(String cmd) {
         switch(cmd) {
             case "exit":
-            respond("Bye. Hope to see you again soon!");
-            System.exit(0);
-            break;
+                respond("Bye. Hope to see you again soon!");
+                System.exit(0);
+                break;
             default:
-                respond(cmd);
+                addTask(cmd);
+                respond("added: " + cmd);
         }
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         respond(greetings);
