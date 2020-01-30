@@ -70,4 +70,20 @@ public class TaskList {
             return sb.toString();
         }
     }
+
+    /**
+     * Finds Tasks containing description that matches the keyword.
+     * @param keyword Keyword to be matched.
+     * @return A TaskList of matching Tasks.
+     */
+    public TaskList findTask(String keyword) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            if (t.getDescription().contains(keyword)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
 }
