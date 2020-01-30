@@ -20,11 +20,21 @@ public class Storage {
     protected String filePath;
     protected List<Task> tasks;
 
+    /**
+     * Constructs a Storage instance given the file path of the file to be used.
+     * @param filePath The file path of the file to be used.
+     */
     public Storage(String filePath) {
         this.tasks = new ArrayList<>();
         this.filePath = filePath;
     }
 
+    /**
+     * Saves task to data file.
+     * @param task The task to be saved.
+     * @param isAppendMode The boolean checking if the file is to be opened in append mode.
+     * @throws IOException Error opening file.
+     */
     protected void saveTask(Task task, boolean isAppendMode) throws IOException {
         FileOutputStream ops = new FileOutputStream(new File(this.filePath), isAppendMode);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
@@ -47,8 +57,13 @@ public class Storage {
         }
         bw.write(String.join(" | ", toSave));
         bw.close();
+        ops.close();
     }
 
+    /**
+     * Loads tasks from data file to Duke.
+     * @throws IOException Error opening file.
+     */
     public void loadTasks() throws IOException {
         FileInputStream ips = new FileInputStream(new File(this.filePath));
         BufferedReader br = new BufferedReader(new InputStreamReader(ips));
@@ -76,14 +91,24 @@ public class Storage {
             this.tasks.add(getFromDisk);
         }
         br.close();
+        ips.close();
     }
 
+    /**
+     * Clears all data on file.
+     * @throws IOException Error opening file.
+     */
     protected void clearAllData() throws IOException {
         FileOutputStream ops = new FileOutputStream(new File(this.filePath));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
         bw.close();
+        ops.close();
     }
 
+    /**
+     * Updates data in data file.
+     * @throws IOException Error opening file.
+     */
     protected void updateData() throws IOException {
         for (int i = 0; i < this.tasks.size(); i++) {
             if (i != 0) {

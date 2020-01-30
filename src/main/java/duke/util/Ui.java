@@ -1,6 +1,5 @@
 package duke.util;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -18,14 +17,23 @@ public class Ui {
     private static String separator = "____________________________________________________________";
     private Scanner sc;
 
+    /**
+     * Constructs a Ui instance and instantiates a Scanner instance.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints a horizontal bar to separate commands.
+     */
     private void printSeparator() {
         System.out.println(separator);
     }
 
+    /**
+     * Driver method that introduces Duke.
+     */
     public void run() {
         printSeparator();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -33,12 +41,16 @@ public class Ui {
     }
 
     /**
-     * Get input from user.
+     * Gets input from user.
+     * @return The next line of user input from the Scanner instance.
      */
     public String getInput() {
         return this.sc.nextLine();
     }
 
+    /**
+     * Handles user input of bye that signals exiting from program.
+     */
     protected void bye() {
         printSeparator();
         System.out.println("Bye! Come back again soon!");

@@ -12,10 +12,19 @@ package duke.util;
  * @author Jel
  */
 public class Todo extends Task {
+    /**
+     * Constructs a Todo instance.
+     * @param description The description or details of the todo.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Overrides the Object's toString method
+     * and contains the status icon and description of the todo.
+     * @return The String that containing the Todo's details.
+     */
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
