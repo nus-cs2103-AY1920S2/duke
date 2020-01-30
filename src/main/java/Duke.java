@@ -119,7 +119,7 @@ public class Duke {
         printGoodbye();
     }
 
-    public Duke(String filePath){
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
