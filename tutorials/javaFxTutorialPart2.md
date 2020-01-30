@@ -49,7 +49,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class dukeClasses.Duke extends Application {
+public class Duke extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -100,13 +100,13 @@ Add the following code to the bottom of the `start` method. You'll have to add `
 
 ```java
     @Override
-    public void start(Stage stage) {
+   public void start(Stage stage) {
         //Step 1. Formatting the window to look as expected.
          
         //...
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("dukeClasses.Duke");
+        stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

@@ -59,7 +59,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class dukeClasses.Duke extends Application {
+public class Duke extends Application {
     
     // ...
 
