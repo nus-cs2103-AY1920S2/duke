@@ -12,6 +12,9 @@ public class Duke {
     static Responder r = new Responder();
 
     private static class Responder {
+        /**
+         * Common responds
+         */
         String stupidLogo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         static String resSpace = "    ";
