@@ -33,9 +33,9 @@ public class TaskHandler {
         String[] inputs = taskDescription.split("/");
         Task myTask;
         if(inputs.length == 2) {
-            myTask = taskHandler(taskType , inputs[0]);
+            myTask = taskHandler(taskType , inputs[0].strip());
         } else if(inputs.length == 3) {
-            myTask = taskHandler(taskType, inputs[0] + "/ " + inputs[1]);
+            myTask = taskHandler(taskType, inputs[0].strip() + "/ " + inputs[1].strip());
         } else {
             throw new InvalidInputException();
         }
