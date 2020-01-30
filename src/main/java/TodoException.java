@@ -1,7 +1,18 @@
+/**
+ * This class handles an exception within the Todo class.
+ * It is thrown when unexpected input occurs during the
+ * use of the Todo class. It is a child of the DukeException class.
+ */
+
 public class TodoException extends DukeException {
 
+    /**
+     * Constructor for the customer class.
+     * @param input is the error message if any.
+     * */
+
     private String input;
-    public TodoException(String input){
+    public TodoException(String input) {
         super(input);
     };
 
