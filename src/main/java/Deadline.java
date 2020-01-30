@@ -24,17 +24,21 @@ public class Deadline extends Task {
         }
     }
 
+    public String assembleDeadlineDateAndTime() {
+        return deadlineDate + " " + deadlineTime;
+    }
+
     public int getDoneInt() {
         return getDone() ? 1 : 0;
     }
 
     @Override
     public String updateFile() {
-        return "D - " + getDoneInt() + " - " + getCommand() + "- " + deadline;
+        return "D - " + getDoneInt() + " - " + getCommand() + " - " + assembleDeadlineDateAndTime();
     }
 
     @Override
     public String toString() {
-        return "[D][" + getDoneSymbol() + "] " + getCommand() + "(by: " + deadline + ")";
+        return "[D][" + getDoneSymbol() + "] " + getCommand() + " (by: " + deadline + ")";
     }
 }

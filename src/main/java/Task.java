@@ -25,7 +25,7 @@ public class Task {
         return command;
     }
 
-    public String updateFile() {
+    protected String updateFile() {
         return "task";
     }
 }

@@ -12,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String updateFile() {
-        return "E - " + getDoneInt() + " - " + getCommand() + "- " + timing;
+        return "E - " + getDoneInt() + " - " + getCommand() + " - " + timing;
     }
 
     @Override

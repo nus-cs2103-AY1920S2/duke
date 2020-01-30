@@ -28,7 +28,8 @@ public class Duke {
                             break;
                         }
                         case "D": {
-                            Deadline newTask = new Deadline(strArr[2], strArr[3]);
+                            String[] deadlineArr = strArr[3].split(" ", 2);
+                            Deadline newTask = new Deadline(strArr[2], deadlineArr[0], deadlineArr[1]);
                             arr.add(newTask);
                             if (strArr[1].equals("1")) {
                                 newTask.setDone();
@@ -93,7 +94,8 @@ public class Duke {
                             }
                             command = cmdArr[0];
                             String deadline = cmdArr[1].split(" ", 2)[1];
-                            Deadline newTask = new Deadline(command, deadline);
+                            String[] deadlineArr = deadline.split(" ", 2);
+                            Deadline newTask = new Deadline(command, deadlineArr[0], deadlineArr[1]);
                             arr.add(newTask);
                             System.out.println("Okay! I have taken note of the following:");
                             System.out.println(newTask);
