@@ -6,8 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * JUnit test class for {@code Event}.
+ */
 public class EventTest {
+    /**
+     * Tests the inheritance of {@code Event} from its superclass {@code Task}.
+     */
     @Test
     public void testInheritance() {
         Event testEvent = new Event("Event pizza!", "3-5pm");
@@ -18,6 +23,9 @@ public class EventTest {
         assertTrue(new Event("Already completed", "Random time", true).isCompleted());
     }
 
+    /**
+     * Tests the overridden {@code toString()} method.
+     */
     @Test
     public void testToString() {
         assertEquals("[E][\u2718] New Event (at: Home)", new Event("New Event", "Home").toString());
