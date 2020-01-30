@@ -129,6 +129,17 @@ public class CommandHandler {
         return null;
     }
 
+    /**
+     * Finds a list of {@code Task}s based on the command and given the
+     * entire command and the supporting instances. The list of {@code Task}s
+     * are then printed out with the given {@code Ui} instance.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     */
     static Void handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         ArrayList<Pair<Task, Integer>> filteredTaskList = taskList.find(commands.get(1).trim());
@@ -164,6 +175,15 @@ public class CommandHandler {
         return null;
     }
 
+    /**
+     * Prints the help message with the given {@code Ui} instance.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     */
     static Void handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ui.printHelpMessage();
         return null;
