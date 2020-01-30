@@ -18,6 +18,13 @@ public enum Command {
 
     public final String word;
 
+    /**
+     * Constructor for a custom
+     * Command
+     *
+     * @param w A String consisting of one word
+     *          that represents this Command
+     */
     Command(String w) {
         this.word = w;
     }
