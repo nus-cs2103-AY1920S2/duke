@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Contains the task list, as well as operations to amend existing tasks in thelist such as add/delete.
+ */
 public class TaskList {
     public ArrayList<Task> arr;
 
@@ -7,17 +10,31 @@ public class TaskList {
         this.arr = arr;
     }
 
+    /**
+     * marks the task to be done.
+     * @param option Specific index of task in the list.
+     */
     public void markAsDone(int option) {
         arr.get(option - 1).setDone();
         System.out.println("Nice! I've marked this task as done:\n  " + arr.get(option - 1));
     }
 
+    /**
+     * removes the task from the list.
+     * @param option Specific index of task in the list.
+     */
     public void deleteTask(int option) {
         System.out.println("Noted. I've removed this task: \n  " + arr.get(option - 1));
         arr.remove(option - 1);
         System.out.println("Now you have " + arr.size() + " tasks in the list.");
     }
 
+    /**
+     * add tasks to the list and write the updated tasks in file.
+     * @param inputArr InputArr breakdown of the specific task.
+     * @param storage Storage object linked.
+     * @throws DukeException If wrong inputs or missing chunks of inputs are given.
+     */
     public void addAndWriteTask(String[] inputArr, Storage storage) {
         try {
             switch (inputArr[0]) {

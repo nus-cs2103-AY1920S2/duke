@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * Main class representing the chat bot, Duke.
+ */
 public class Duke {
 
     private Storage storage;

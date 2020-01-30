@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * Specific form of a todo task that is input by the user to Duke.
+ */
 public class Todo extends Task {
 
     public Todo(String task) {

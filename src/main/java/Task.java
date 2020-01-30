@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * Represents a task that is input by the user to Duke.
+ */
 public abstract class Task {
     protected String task;
     protected boolean done; //✘

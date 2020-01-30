@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Handles the interactions with the user as they input to Duke.
+ */
 public class Ui {
     Scanner sc;
 

@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     public String filePath;
 
@@ -8,6 +11,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Appends a new task to the back of the file.
+     * @param task New task specified to be added.
+     */
     public void appendFile(Task task) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
@@ -19,6 +26,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrites the updated list of tasks to the file.
+     * @param list Updated Tasklist of tasks.
+     */
     public void writeFile(TaskList list) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
@@ -32,6 +43,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads existing tasks from the file to a list.
+     * @return ArrayList representation of the list of tasks.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> data = new ArrayList<>();
         try {

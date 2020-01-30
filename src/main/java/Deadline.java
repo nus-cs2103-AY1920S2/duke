@@ -2,6 +2,9 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Specific form of a deadline task that is input by the user to Duke.
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate date;

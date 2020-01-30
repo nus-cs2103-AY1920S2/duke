@@ -2,6 +2,9 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Specific form of an event task that is input by the user to Duke.
+ */
 public class Event extends Task {
     protected String at;
     protected LocalDate date;
