@@ -12,8 +12,14 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete contents of the local storage
+if [ -e "../yourfile.txt" ]
+then
+    rm "../yourfile.txt"
+fi
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/ip/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1

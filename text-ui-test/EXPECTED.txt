@@ -6,33 +6,86 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 	__________________________________________________________
+		1: [E][✓] dinner (at: 7pm today)
+		2: [D][✗] project (by: next Monday)
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	The description of a todo cannot be empty.
+	__________________________________________________________
+	__________________________________________________________
 	Got it, I've added this task:
 	[T][✗] read book
-	Now you have 1 task(s) in the list.
+	Now you have 3 task(s) in the list.
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	Please include the event datetime after the "/at" keyword
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	The description of a event cannot be empty.
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	The event datetime cannot be empty.
 	__________________________________________________________
 	__________________________________________________________
 	Got it, I've added this task:
 	[E][✗] dinner (at: 7pm today)
-	Now you have 2 task(s) in the list.
+	Now you have 4 task(s) in the list.
+	__________________________________________________________
+	__________________________________________________________
+		1: [E][✓] dinner (at: 7pm today)
+		2: [D][✗] project (by: next Monday)
+		3: [T][✗] read book
+		4: [E][✗] dinner (at: 7pm today)
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	Please include the deadline datetime after the "/by" keyword
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	The description of a deadline cannot be empty.
+	__________________________________________________________
+	__________________________________________________________
+	☹ OOPS!!! 
+	The deadline datetime cannot be empty.
 	__________________________________________________________
 	__________________________________________________________
 	Got it, I've added this task:
 	[D][✗] project (by: next Monday)
-	Now you have 3 task(s) in the list.
+	Now you have 5 task(s) in the list.
 	__________________________________________________________
 	__________________________________________________________
-	1: [T][✗] read book
-	2: [E][✗] dinner (at: 7pm today)
-	3: [D][✗] project (by: next Monday)
+		1: [E][✓] dinner (at: 7pm today)
+		2: [D][✗] project (by: next Monday)
+		3: [T][✗] read book
+		4: [E][✗] dinner (at: 7pm today)
+		5: [D][✗] project (by: next Monday)
 	__________________________________________________________
 	__________________________________________________________
-	Awesome! I've marked this task as done:
+	Awesome! I've marked this task as done: 
+	[D][✓] project (by: next Monday)
+	__________________________________________________________
+	__________________________________________________________
+		1: [E][✓] dinner (at: 7pm today)
+		2: [D][✓] project (by: next Monday)
+		3: [T][✗] read book
+		4: [E][✗] dinner (at: 7pm today)
+		5: [D][✗] project (by: next Monday)
+	__________________________________________________________
+	__________________________________________________________
+	Noted, I've removed this task: 
 	[E][✓] dinner (at: 7pm today)
+	Now you have 4 task(s) in the list.
 	__________________________________________________________
 	__________________________________________________________
-	1: [T][✗] read book
-	2: [E][✓] dinner (at: 7pm today)
-	3: [D][✗] project (by: next Monday)
+		1: [D][✓] project (by: next Monday)
+		2: [T][✗] read book
+		3: [E][✗] dinner (at: 7pm today)
+		4: [D][✗] project (by: next Monday)
 	__________________________________________________________
 	__________________________________________________________
 	Goodbye! Hope to hear from you soon :)
