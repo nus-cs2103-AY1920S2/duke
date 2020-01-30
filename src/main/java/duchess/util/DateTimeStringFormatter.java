@@ -10,7 +10,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * static methods to format {@code LocalDateTime} objects into
  * meaningful {@code String} formats. This is designed to be used
  * with deadlines, as the "[OVERDUE]" label is returned as well
- * should the given {@Code LocalDateTime} object be before the
+ * should the given {@code LocalDateTime} object be before the
  * current datetime.
  * <p>
  * An example would be "Today" if the given {@code LocalDateTime}
