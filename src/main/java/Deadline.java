@@ -2,21 +2,35 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a task with a description and a deadline.
+ */
 public class Deadline extends Task{
-    Date time;
 
-    public Deadline(String description, String time) {
+    /**
+     * The deadline of the task.
+     */
+    Date deadline;
+
+    /**
+     * Constructor for Deadline that takes in a description of the task and
+     * the deadline for the task.
+     *
+     * @param description
+     * @param deadline
+     */
+    public Deadline(String description, String deadline) {
         super(description);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
 
-        this.time = format.parse(time, new ParsePosition(0));
+        this.deadline = format.parse(deadline, new ParsePosition(0));
     }
 
     @Override
     public String toString() {
         SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy HH:mm");
 
-        return "[D]" + super.toString() + " (by: " + format.format(time) + ")";
+        return "[D]" + super.toString() + " (by: " + format.format(deadline) + ")";
     }
 }

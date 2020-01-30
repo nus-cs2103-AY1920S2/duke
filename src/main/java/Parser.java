@@ -1,4 +1,14 @@
+/**
+ * Represents a parser that takes in user-typed commands and
+ * returns the equivalent Command object.
+ */
 public class Parser {
+    /**
+     * Returns a Command object based on the interpretation of the user-typed command.
+     *
+     * @param command the user-typed command
+     * @return
+     */
     public static Command parse(String command) {
         try {
             String firstWord = command.split(" ")[0];

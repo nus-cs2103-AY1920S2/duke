@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
+/**
+ * Represents the user interface that interacts with the user and acts as a view.
+ */
 public class Ui {
+    /**
+     * The input channel.
+     */
     Scanner scanner = new Scanner(System.in);
 
     public void showLoadingError() {
@@ -62,6 +68,10 @@ public class Ui {
         say(message);
     }
 
+    /**
+     * Retrieves the user command from the interface.
+     * @return the user command
+     */
     public String getCommand() {
         return scanner.nextLine();
     }
