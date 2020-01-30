@@ -4,10 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void print(String toPrint) {
-        String line = "\n______________________________________ \n";
-        System.out.println(line + toPrint + line);
-    }
 
     public static void run(Scanner sc, TaskList taskList, String tasks) throws DukeException, IOException {
 
@@ -16,19 +12,20 @@ public class Duke {
         String command = split[0];
         int numOfTask;
         Storage storage = new Storage();
+        Ui ui = new Ui();
 
         if (command.equals("bye")) {
-            print("Bye. Hope to see you again soon!");
+            ui.print("Bye. Hope to see you again soon!");
             System.exit(0);
 
         } else if (command.equals("list")) {
-            print(taskList.toString());
+            ui.print(taskList.toString());
         
         } else if (command.equals("done")) {
             int index = Integer.parseInt(split[1]) - 1;
             Task done = taskList.list.get(index);
             done.markAsDone();
-            print("Nice! I've marked this task as done: \n" + done);
+            ui.print("Nice! I've marked this task as done: \n" + done);
 
             tasks = storage.readFromFile();
             storage.changeToDone(tasks, index);
@@ -37,7 +34,7 @@ public class Duke {
             int index = Integer.parseInt(split[1]) - 1;
             Task remove = taskList.list.remove(index);
             numOfTask = taskList.list.size();
-            print("Noted. I've removed this task: \n" + remove 
+            ui.print("Noted. I've removed this task: \n" + remove 
                 + "\nNow you have " + numOfTask + " task(s) in the list");
 
             tasks = storage.readFromFile();
@@ -52,7 +49,7 @@ public class Duke {
             Task t = new ToDoTask(desc);
             taskList.list.add(t);
             numOfTask = taskList.list.size();
-            print("Got it. I've added this task: \n" + t + "\nNow you have " 
+            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " 
                     + numOfTask + " task(s) in the list.");
             
             storage.writeToFile("T | 0 | " + desc);
@@ -64,7 +61,7 @@ public class Duke {
             Task t = new DeadlineTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
-            print("Got it. I've added this task: \n" + t + "\nNow you have " 
+            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " 
                     + numOfTask + " task(s) in the list.");
 
             storage.writeToFile("D | 0 | " + desc + " | " + time);
@@ -76,7 +73,7 @@ public class Duke {
             Task t = new EventTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
             numOfTask = taskList.list.size();
-            print("Got it. I've added this task: \n" + t + "\nNow you have " 
+            ui.print("Got it. I've added this task: \n" + t + "\nNow you have " 
                     + numOfTask + " task(s) in the list.");
         
             storage.writeToFile("E | 0 | " + desc + " | " + time);
@@ -88,9 +85,10 @@ public class Duke {
     }
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+        Ui ui = new Ui();
         TaskList taskList = new TaskList(new ArrayList<Task>());
 
-        print("Hello! I'm Duke \nWhat can I do for you?");
+        ui.print("Hello! I'm Duke \nWhat can I do for you?");
         Storage storage = new Storage();
         String tasks = storage.readFromFile();
         taskList = Parser.storageToTaskList(tasks);
@@ -99,9 +97,9 @@ public class Duke {
             try {
                 run(sc, taskList, tasks);
             } catch (DukeException ex) {
-                print(ex.getMessage());
+                ui.print(ex.getMessage());
             } catch (IOException e) {
-                print(e.getMessage());
+                ui.print(e.getMessage());
             }
         }
         sc.close();
