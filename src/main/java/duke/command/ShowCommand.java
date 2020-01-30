@@ -38,6 +38,9 @@ public class ShowCommand extends Command {
         case "done":
             taskList.markTaskAsDone(replyArr);
             break;
+        case "find":
+            taskList.findTaskByKeyword(replyArr);
+            break;
         default:
             System.out.println("    Sorry! I don't understand what is " + instruction);
         }

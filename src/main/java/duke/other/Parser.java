@@ -37,6 +37,7 @@ public class Parser {
         case "list":
         case "date":
         case "done":
+        case "find":
             return new ShowCommand(instruction, replyArr);
         default:
             return new ShowCommand(instruction, replyArr);

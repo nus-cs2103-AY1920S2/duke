@@ -119,4 +119,15 @@ public class TaskList {
         }
     }
 
+    public void findTaskByKeyword(String[] replyArr) {
+        String keyword = replyArr[1];
+        String taskWithKeyword = "";
+        for(Task task: taskList) {
+            if(task.getDescription().contains(keyword)) {
+                taskWithKeyword += "    " + task.toString() + "\n";
+            }
+        }
+        System.out.println("    Task(s) with keyword " + replyArr[1] + ":\n" + taskWithKeyword);
+    }
+
 }
