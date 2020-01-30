@@ -7,13 +7,26 @@ import java.io.BufferedWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Loads and saves Duke data file.
+ */
 public class Storage {
     private final String path;
 
+    /**
+     * Construct a Storage with given file path.
+     *
+     * @param path
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Loads original data from the data file.
+     *
+     * @return A list of old tasks record.
+     */
     public ArrayList<Task> load() {
         FileReader fr = null;
         try {
@@ -61,6 +74,11 @@ public class Storage {
         return currTask;
     }
 
+    /**
+     * Saves new Task list data into the data file.
+     *
+     * @param tasks New task list.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(path);
