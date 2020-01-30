@@ -23,6 +23,8 @@ public class Parser {
                 tasks.setDone(textArray[1]);
             } else if (instruction.equals("delete")) {
                 tasks.deleteTask(textArray[1]);
+            } else if (instruction.equals("find")) {
+                tasks.getListOfMatch(textArray[1]).printTaskList();
             } else if ((instruction.equals("todo")
                     || instruction.equals("deadline")
                     || instruction.equals("event"))) {

@@ -15,6 +15,16 @@ import java.util.List;
 public class TaskList {
     // contains the task list e.g., it has operations to add/delete tasks in the list
     private List<Task> tasks = new ArrayList<>(100);
+    private boolean isLoadedList;
+
+    /**
+     * Constructor to create TaskList if we have a set of tasks for it.
+     * @param tasks List of Task objects.
+     */
+    public TaskList(List<Task> tasks, boolean isLoadedList) {
+        this.tasks = tasks;
+        this.isLoadedList = isLoadedList;
+    }
 
     /**
      * Set our task to what was loaded from our file.
@@ -72,10 +82,14 @@ public class TaskList {
 
     /**
      * Prints all our existing tasks, and their details.
+     * Behavior when tasks is empty depends on whether the list was created from loading file.
      */
     public void printTaskList() {
         if (this.tasks.isEmpty()) {
-            System.out.println("Nothing at the moment, you're all good.");
+            System.out.println(
+                    isLoadedList
+                    ? "Nothing at the moment, you're all good."
+                    : "No existing tasks has description that fits the keyword.");
         } else {
             for (int i = 0; i < this.tasks.size(); i++) {
                 System.out.format("%s." + this.tasks.get(i) + '\n', String.valueOf(i + 1));
@@ -125,5 +139,20 @@ public class TaskList {
         System.out.print("Added: ");
         System.out.println(addedTask);
         System.out.format("You now have %d tasks in the list\n", getTaskCount());
+    }
+
+    /**
+     * Returns a TaskList, tasks with description that contains keyword are included.
+     * @param keyword String which we want to compare description against.
+     * @return TaskList containing tasks that match.
+     */
+    public TaskList getListOfMatch(String keyword) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.getDescription().contains(keyword)) {
+                tasks.add(task);
+            }
+        }
+        return new TaskList(tasks, false);
     }
 }

@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class Storage {
      * @return TaskList which is an abstraction of our task list.
      */
     public TaskList load() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<Task>(), true);
         try {
             File file = new File(this.filePath);
             if (!file.exists()) {
@@ -42,7 +43,7 @@ public class Storage {
             } else {
                 FileInputStream fi = new FileInputStream(file);
                 ObjectInputStream oi = new ObjectInputStream(fi);
-                tasks.importTasks((List<Task>) oi.readObject());
+                tasks = new TaskList((List<Task>) oi.readObject(), true);
                 oi.close();
                 fi.close();
             }

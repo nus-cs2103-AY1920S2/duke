@@ -3,13 +3,15 @@ package tasks;
 import org.junit.jupiter.api.Test;
 import tasks.TaskList;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
     @Test
     public void getTaskCount_newTaskList_success() {
-        assertEquals(0, new TaskList().getTaskCount());
+        assertEquals(0, new TaskList(new ArrayList<Task>(), true).getTaskCount());
     }
 
     @Test
@@ -17,7 +19,7 @@ public class TaskListTest {
         try {
             String text = "deadline test /by 1986-12-35 12:00";
             String[] textArray = text.split(" ");
-            new TaskList().addNewTask(textArray);
+            new TaskList(new ArrayList<Task>(), true).addNewTask(textArray);
             fail();
         } catch (Exception e) {
             assertEquals("Make sure you entered valid date: yyyy-MM-dd HH:mm", e.getMessage());

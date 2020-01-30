@@ -23,6 +23,14 @@ public class Task implements Serializable {
     }
 
     /**
+     * Getter for description of the task.
+     * @return Description of task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns an string icon that suggests if a task is completed.
      * @return String that is either a tick or cross.
      */
