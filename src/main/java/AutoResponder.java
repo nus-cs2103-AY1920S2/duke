@@ -8,19 +8,21 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class AutoResponder {
     private final List<Task> taskList;
     private final StringBuilder toPrint;
     private final Ui ui;
-    static Pattern pDeadline = Pattern.compile("deadline (.+) /by (.+)");
-    static Pattern pEvent = Pattern.compile("event (.+) /at (.+)");
-    static Pattern pTodo = Pattern.compile("todo (.+)");
-    static Pattern pDone = Pattern.compile("done (\\d+)");
-    static Pattern pDelete = Pattern.compile("delete (\\d+)");
-    static Pattern pEmptyCommand = Pattern.compile("(todo|event|deadline)\\s*$");
-    static Pattern pList = Pattern.compile("list\\s*$");
-    static Pattern pSave = Pattern.compile("save\\s*$");
+    static Pattern pDeadline = Pattern.compile("^deadline (.+) /by (.+)");
+    static Pattern pEvent = Pattern.compile("^event (.+) /at (.+)");
+    static Pattern pTodo = Pattern.compile("^todo (.+)");
+    static Pattern pDone = Pattern.compile("^done (\\d+)");
+    static Pattern pDelete = Pattern.compile("^delete (\\d+)");
+    static Pattern pEmptyCommand = Pattern.compile("^(todo|event|deadline|find|done|delete)\\s*$");
+    static Pattern pList = Pattern.compile("^list\\s*$");
+    static Pattern pSave = Pattern.compile("^save\\s*$");
+    static Pattern pFind = Pattern.compile("^find (.+)");
 
 
     private AutoResponder() {
@@ -61,6 +63,10 @@ public class AutoResponder {
             m.find();
             throw new IllegalArgumentException("☹ OOPS!!! The description of a "
                     + m.group(1) + " cannot be empty.");
+        } else if (pFind.matcher(input).find()) {
+            Matcher m = pFind.matcher(input);
+            m.find();
+            return this.findTask(m.group(1));
         } else if (pDeadline.matcher(input).find()) {
             Matcher m = pDeadline.matcher(input);
             m.find();
@@ -165,6 +171,20 @@ public class AutoResponder {
             tl.remove(index);
         }
         return new AutoResponder(tl, sb).printToConsole();
+    }
+
+    private AutoResponder findTask(String description) {
+        String s = taskList.stream().map(Object::toString)
+                .filter(string -> string.contains(description))
+                .collect(Collectors.joining());
+        if (s.length() > 0) {
+            toPrint.append("Here are the matching tasks in your list:\n");
+            toPrint.append(s);
+            toPrint.append("\n");
+        } else {
+            toPrint.append("There are no matching tasks in your list.\n");
+        }
+        return this.printToConsole();
     }
 
     private AutoResponder addDeadline(String name, String date) {
