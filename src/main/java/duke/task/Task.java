@@ -61,9 +61,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (isDone)
-            return '[' + doneSymbol + "] " + name;
-        else
-            return '[' + notDoneYetSymbol + "] " + name;
+        return String.format("[%s] %s",
+                (isDone ? doneSymbol : notDoneYetSymbol), name);
     }
 }
