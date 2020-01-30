@@ -19,7 +19,7 @@ public class Storage {
         try {
             fr = new FileReader(path);
         } catch (FileNotFoundException e) {
-            System.out.println("    Cannot open data file!");
+            System.out.println("    Cannot open data file in path: " + path);
         }
         BufferedReader br = new BufferedReader(fr);
 
