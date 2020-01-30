@@ -1,5 +1,5 @@
 public abstract class Command {
-    private boolean isExit = false;
+    protected boolean isExit = false;
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
