@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.main.*;
 
 public class CreateEventCommand extends Command {
-    public CreateEventCommand(String[] inputArr){
+    public CreateEventCommand(String[] inputArr) {
         this.inputArr = inputArr;
     }
 
@@ -24,13 +24,14 @@ public class CreateEventCommand extends Command {
      * @throws NoDateTimeException    If no date and time is specified.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException, NoDateTimeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws NoDescriptionException, UnableToSaveException, NoDateTimeException {
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         int pointer = findIndex("/at", inputArr);
-        if (pointer == -1 || pointer == arrLength - 1) {      
+        if (pointer == -1 || pointer == arrLength - 1) {
             throw new NoDateTimeException();
-        } 
+        }
         String nameOfEvent = combineString(inputArr, 1, pointer);
         if (nameOfEvent.equals("")) {
             throw new NoDescriptionException();

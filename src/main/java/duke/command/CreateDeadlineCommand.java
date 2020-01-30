@@ -6,7 +6,7 @@ import duke.task.Deadline;
 import duke.task.Task;
 
 public class CreateDeadlineCommand extends Command {
-    public CreateDeadlineCommand(String[] inputArr){
+    public CreateDeadlineCommand(String[] inputArr) {
         this.inputArr = inputArr;
     }
 
@@ -24,7 +24,8 @@ public class CreateDeadlineCommand extends Command {
      * @throws NoDateException        If no date is specified.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException, NoDateException{
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws NoDescriptionException, UnableToSaveException, NoDateException {
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         int pointer = findIndex("/by", inputArr);

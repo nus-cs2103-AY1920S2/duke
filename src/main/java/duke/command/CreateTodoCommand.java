@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.main.*;
 
 public class CreateTodoCommand extends Command {
-    public CreateTodoCommand(String[] inputArr){
+    public CreateTodoCommand(String[] inputArr) {
         this.inputArr = inputArr;
     }
 
@@ -23,11 +23,11 @@ public class CreateTodoCommand extends Command {
      * @throws UnableToSaveException  If unable to save to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException {
         int arrLength = inputArr.length;
         String saveReply = "Saving now....:\n     ";
         String nameOfEvent = combineString(inputArr, 1, arrLength);
-        if(nameOfEvent.equals("")){
+        if (nameOfEvent.equals("")) {
             throw new NoDescriptionException();
         }
         Task newT = new Todo(nameOfEvent);

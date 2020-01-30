@@ -3,11 +3,12 @@ package duke.command;
 import duke.exception.*;
 import duke.main.*;
 
-public abstract class Command{
+public abstract class Command {
     // INVALID, delete
     public String[] inputArr;
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
     public abstract boolean isExit();
 
     /**

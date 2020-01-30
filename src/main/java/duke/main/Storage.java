@@ -13,11 +13,11 @@ public class Storage {
     private Path path;
 
     public Storage(String location){
-        this.path = Paths.get(location, "..", "data", "duke.txt");
+        this.path = Paths.get(location, "data", "duke.txt");
     }
 
     public void retryLocation(String location){
-        this.path = Paths.get(location, "..", "data", "duke.txt");
+        this.path = Paths.get(location, "data", "duke.txt");
     }
 
     /**
@@ -63,6 +63,7 @@ public class Storage {
                     }
                 }
             }else{
+                Files.createDirectory(Paths.get("data"));
                 Files.createFile(path);
             } 
         }catch (IOException e) {

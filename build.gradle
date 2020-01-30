@@ -1,13 +1,27 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
+
 
 group 'seedu.duke'
 version '0.1.0'
 
 repositories {
     mavenCentral()
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 application {
