@@ -48,7 +48,6 @@ public abstract class Task {
 
 class TodoTask extends Task {
     protected LocalDateTime time;
-
     public TodoTask(String[] inputArr) throws Exception {
         if (inputArr.length < 2) {
             throw new Exception("Todo tasks must have a non-empty description!");
