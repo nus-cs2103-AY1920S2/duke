@@ -71,7 +71,6 @@ class TodoTask extends Task {
 
         }
         size++;
-
     }
 
     @Override
