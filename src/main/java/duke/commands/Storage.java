@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.Duke;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,6 +16,7 @@ import java.util.Scanner;
  * deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
+
     private String filePath;
     private TaskList taskList;
 

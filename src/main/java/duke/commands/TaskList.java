@@ -1,9 +1,14 @@
+package duke.commands;
+
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 /**
  *  contains the task list.
  */
 public class TaskList {
+
     private ArrayList<Task> newList;
     private Ui ui = new Ui();
 

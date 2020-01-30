@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -6,7 +8,8 @@ import java.time.format.DateTimeFormatter;
  * e.g., submit report by 11/10/2019 5pm.
  */
 public class Deadline extends Task {
-    private LocalDateTime by = null;
+
+    private LocalDateTime by;
 
     /**
      * creates a new Deadline.

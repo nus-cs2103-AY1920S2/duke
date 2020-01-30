@@ -1,9 +1,19 @@
+package duke.commands;
+
+import duke.Duke;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.util.Scanner;
 
 /**
  * deals with making sense of the user command.
  */
 public class Parser {
+
     private Scanner sc = new Scanner(System.in);
     private Ui ui = new Ui();
     private TaskList taskList;

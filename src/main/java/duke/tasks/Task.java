@@ -1,11 +1,15 @@
+package duke.tasks;
+
 import java.time.format.DateTimeFormatter;
 
 /**
  * The class that all the tasks inherit from.
  */
 public abstract class Task {
+
     private String description;
     private boolean isDone;
+    
     public static final DateTimeFormatter PARSER = DateTimeFormatter
             .ofPattern("d-M-yyyy HHmm");
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
