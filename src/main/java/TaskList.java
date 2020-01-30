@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private static List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskList(List<List<String>> savedTasks) {
         tasks = new ArrayList<>();
