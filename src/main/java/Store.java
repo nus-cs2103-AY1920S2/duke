@@ -233,5 +233,27 @@ public class Store {
     public boolean CheckIfDone(String S){
         return S.contains("✓");
     }
+
+    public void find(String Action){
+        ArrayList<String> Match = new ArrayList<>();
+        System.out.print(ui.line());
+        int counter = 1;
+        for (Task task : Storage) {
+            String data = task.toString();
+            if (data.contains(Action)) {
+             Match.add(String.format("%d.", counter) + data);
+                counter++;
+            }
+        }
+        if(Match.isEmpty()){
+            System.out.println("☹ What you are looking for does not exist.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (String s : Match){
+                System.out.println(s);
+            }
+        }
+        System.out.print(ui.line());
+    }
 }
 
