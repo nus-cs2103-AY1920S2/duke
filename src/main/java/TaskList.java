@@ -7,6 +7,10 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
+    private TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -49,6 +53,24 @@ public class TaskList {
      */
     public int getCount() {
         return tasks.size();
+    }
+
+    /**
+     * Returns a new list containing the tasks with the keyword in description.
+     *
+     * @param keyword the keyword to search for
+     * @return a new TaskList of matching tasks
+     */
+    public TaskList getRelevantTasks(String keyword) {
+        List<Task> relevantTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                relevantTasks.add(task);
+            }
+        }
+
+        return new TaskList(relevantTasks);
     }
 
     @Override
