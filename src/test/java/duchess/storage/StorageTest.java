@@ -25,12 +25,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * JUnit test class for {@code Storage}.
+ */
 public class StorageTest {
+    /**
+     * Tests the {@code load} method when the directory of the save
+     * file does not exist.
+     */
     @Test
     public void load_folderDoesNotExist_exceptionThrown() {
         try {
             Storage storageOne = new Storage("storageTestOne/data.json");
-            ArrayList<Task> taskArray = storageOne.load();
+            storageOne.load();
             fail();
         } catch (DuchessException e) {
             assertEquals("Failed to load save file! Creating new save file.", e.getMessage());
@@ -39,26 +46,43 @@ public class StorageTest {
         }
     }
 
+    /**
+     * Tests the {@code load} method when the save file itself
+     * does not exist.
+     */
     @Test
     public void load_saveFileDoesNotExist_exceptionThrown() {
         try {
             File testFolder = new File("storageTestTwo");
             if (!testFolder.exists()) {
-                testFolder.mkdir();
+                boolean isDirectoryCreated = testFolder.mkdir();
+                if (!isDirectoryCreated) {
+                    throw new DuchessException("Folder failed to be created!");
+                }
             }
             Storage storageTwo = new Storage("storageTestTwo/data.json");
-            ArrayList<Task> taskArrayList = storageTwo.load();
+            storageTwo.load();
             fail();
         } catch (DuchessException e) {
             assertEquals("Failed to load save file! Creating new save file.", e.getMessage());
         }
     }
 
+    /**
+     * Tests the {@code load} method when the save file exists.
+     *
+     * @throws IOException      If an error is encountered when writing to the test
+     *                          data.json.
+     * @throws DuchessException If the storage fails to load the file.
+     */
     @Test
     public void load_saveFileExists_success() throws IOException, DuchessException {
         File testFolder = new File("storageTestThree");
         if (!testFolder.exists()) {
-            testFolder.mkdir();
+            boolean isDirectoryCreated = testFolder.mkdir();
+            if (!isDirectoryCreated) {
+                throw new DuchessException("Folder failed to be created!");
+            }
         }
         FileWriter fileWriter = new FileWriter("storageTestThree/data.json");
         Gson gson = new Gson();
@@ -81,6 +105,12 @@ public class StorageTest {
         assertEquals(((Deadline) taskArray[2]).getDeadline(), ((Deadline) taskArrayList.get(2)).getDeadline());
     }
 
+    /**
+     * Tests the {@code load} and {@code save} methods for storage initialised with
+     * nested directories as the file path.
+     *
+     * @throws DuchessException If the storage fails to load or save the file.
+     */
     @Test
     public void loadAndSave_longFilePathWithoutFolder_exceptionThrown() throws DuchessException {
         TaskList taskList = new TaskList();
@@ -99,6 +129,9 @@ public class StorageTest {
         }
     }
 
+    /**
+     * Tests the {@code save} methods when an invalid file path is given.
+     */
     @Test
     public void save_invalidFilePath_exceptionThrown() {
         try {
@@ -111,11 +144,19 @@ public class StorageTest {
         }
     }
 
+    /**
+     * Tests the {@code save} method when a valid file path is given.
+     *
+     * @throws DuchessException If the storage fails to save.
+     */
     @Test
     public void save_validFilePath_success() throws DuchessException {
         File folder = new File("storageTestSix");
         if (!folder.exists()) {
-            folder.mkdir();
+            boolean isDirectoryCreated = folder.mkdir();
+            if (!isDirectoryCreated) {
+                throw new DuchessException("Folder failed to be created!");
+            }
         }
         Storage storageSix = new Storage("storageTestSix/data.json");
         TaskList taskList = new TaskList();
@@ -137,6 +178,11 @@ public class StorageTest {
                 ((Deadline) loadedTaskList.getTask(2)).getDeadline());
     }
 
+    /**
+     * Cleans up folders created when testing Storage.
+     *
+     * @throws DuchessException If directory fails to be deleted.
+     */
     @AfterAll
     public static void cleanUp() throws DuchessException {
         String[] folders = {"storageTestOne", "storageTestTwo", "storageTestThree", "storageTestFour",
