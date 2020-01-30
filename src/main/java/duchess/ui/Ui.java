@@ -106,6 +106,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out the given {@code filteredTaskList} task by task. Will print
+     * out an appropriate message if the array is empty.
+     *
+     * @param filteredTaskList The filteredTaskList to print.
+     */
     public void printFilteredTaskList(ArrayList<Pair<Task, Integer>> filteredTaskList) {
         if (filteredTaskList.size() == 0) {
             this.print("Couldn't find anything that matches what you want.");
@@ -161,6 +167,9 @@ public class Ui {
         System.out.println("Failed to load saved tasks. I'll just start anew.");
     }
 
+    /**
+     * Prints the default help message with information on commands and datetime formats.
+     */
     public void printHelpMessage() {
         this.print("Is this the first time I'm talking with you?");
         this.print("I can't do everything for you, you know? Here's what I do:");
