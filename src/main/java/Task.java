@@ -15,8 +15,17 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String getStatusInteger() {
+        return isDone ? "1" : "0";
+    }
+
     public String getDesc() {
         return this.desc;
+    }
+
+    public String toStorageString() {
+        // empty, specified by each subclasses
+        return "";
     }
 
     @Override
