@@ -36,17 +36,17 @@ public class Ui {
         printLine();
     }
 
-    public static void displayList() {
+    public static void displayList(TaskList taskList) {
         printLine();
         // TODO: Set up the tasks
-        for (int i = 0; i < tasks.size(); i++) {
-            indent((i + 1) + ". " + tasks.get(i).toString());
+        for (int i = 0; i < taskList.size(); i++) {
+            indent((i + 1) + ". " + taskList.get(i).toString());
         }
         printLine();
     }
 
-    public static void printTaskCount() {
-        int len = tasks.size();
+    public static void printTaskCount(TaskList taskList) {
+        int len = taskList.size();
         if (len == 0 || len == 1) {
             indent("As of now, you have " + len + " task in the list.");
         } else {

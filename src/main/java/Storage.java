@@ -8,14 +8,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String storagePath = "data/duke.txt";
-    public static void appendToFile(String textToAdd) throws IOException {
+    // private static final String storagePath = "data/duke.txt";
+    private final String storagePath;
+
+    public Storage(String filePath) {
+        this.storagePath = filePath;
+    }
+    public void appendToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(storagePath, true);
         fw.write(textToAdd);
         fw.close();
     }
 
-    public static void writeToFile(String textToAdd) {
+    public void writeToFile(String textToAdd) {
         try {
             FileWriter fw = new FileWriter(storagePath);
             fw.write(textToAdd);
@@ -25,7 +30,8 @@ public class Storage {
         }
     }
 
-    public static void writeTasks(List<Task> tasks) {
+    public void writeTasks(TaskList taskList) {
+        List<Task> tasks = taskList.getTasks();
         StringBuilder sb = new StringBuilder();
         for (Task task: tasks) {
             sb.append(task.toStorageString());
@@ -33,7 +39,7 @@ public class Storage {
         writeToFile(sb.toString());
     }
 
-    public static List<List<String>> loadTasksFromSaveFile() throws FileNotFoundException {
+    public List<List<String>> loadTasksFromSaveFile() throws FileNotFoundException {
         List<List<String>> tasks = new ArrayList<>();
         File f = new File(storagePath);
         Scanner sc = new Scanner(f);

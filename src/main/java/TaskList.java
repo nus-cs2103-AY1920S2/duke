@@ -30,7 +30,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public static void addDeadline(String args) {
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void addDeadline(String args) {
         String[] descAndBy = args.split(" /by ");
         Deadline deadline = new Deadline(descAndBy[0], descAndBy[1]);
         tasks.add(deadline);
@@ -38,11 +42,11 @@ public class TaskList {
         Ui.printLine();
         Ui.indent("Acknowledged. I have added: ");
         Ui.doubleIndent( deadline.toString());
-        Ui.printTaskCount();
+        Ui.printTaskCount(this);
         Ui.printLine();
     }
 
-    public static void addEvent(String args) {
+    public void addEvent(String args) {
         String[] descAndAt = args.split(" /at ");
         Event event = new Event(descAndAt[0], descAndAt[1]);
         tasks.add(event);
@@ -50,17 +54,25 @@ public class TaskList {
         Ui.printLine();
         Ui.indent("Acknowledged. I have added: ");
         Ui.doubleIndent(event.toString());
-        Ui.printTaskCount();
+        Ui.printTaskCount(this);
         Ui.printLine();
     }
 
-    public static void addTodo(String args) {
+    public void addTodo(String args) {
         Todo todo = new Todo(args);
         tasks.add(todo);
         Ui.printLine();
         Ui.indent("Acknowledged. I have added: ");
         Ui.doubleIndent(todo.toString());
-        Ui.printTaskCount();
+        Ui.printTaskCount(this);
         Ui.printLine();
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    public Task get(int idx) {
+        return tasks.get(idx);
     }
 }
