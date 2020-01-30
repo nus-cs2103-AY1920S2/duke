@@ -38,10 +38,21 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found. Try again!");
+            Ui.printLines("File not found. Try again!");
         }
 
         return tasks;
+    }
+
+    public void writeToFile(String fileName, String data) {
+        try {
+            FileWriter fw = new FileWriter(fileName, true);
+            fw.write(data);
+            fw.write("\n");
+            fw.close();
+        } catch (IOException e) {
+            Ui.printLines("Sorry, the file input is invalid.");
+        }
     }
 
     public void doTask(int idx) {
@@ -70,9 +81,38 @@ public class Storage {
       
             tempFile.renameTo(originalFile);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found. Try again!");
+            Ui.printLines("File not found. Try again!");
         } catch (IOException e) {
-            System.out.println("IOException");
+            Ui.printLines("IOException");
+        }
+    }
+
+    public void deleteTask(int idx) {
+        File originalFile = new File(this.fileName);
+        File tempFile = new File("../data/temp.txt");
+
+        try {
+            FileWriter fw = new FileWriter("../data/temp.txt", false);
+            Scanner sc = new Scanner(originalFile);
+            int i = 1;
+
+            while (sc.hasNext()) {
+                String task = sc.nextLine();
+                if (i != idx) {
+                    fw.write(task + "\n");
+                }
+                i++;
+            }
+            sc.close();
+            fw.close();
+
+            originalFile.delete();
+      
+            tempFile.renameTo(originalFile);
+        } catch (FileNotFoundException e) {
+            Ui.printLines("File not found. Try again!");
+        } catch (IOException e) {
+            Ui.printLines("IOException");
         }
     }
 }

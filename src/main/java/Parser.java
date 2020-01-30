@@ -6,6 +6,14 @@ public class Parser {
 
     }
 
+    public boolean parseCommand(String input, String command) {
+        if (input.compareTo(command) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static String parseTime(String time) {
         String result = "";
         String dateRegex = "\\d{4}-\\d{2}-\\d{2}";
