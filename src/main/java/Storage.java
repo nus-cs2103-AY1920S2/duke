@@ -4,19 +4,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
-    //deals with loading tasks from the file and saving tasks in the file
     String filePath;
     public static TaskList taskList;
 
+    /**
+     * @param filePath the path to the duke.txt file where previous user input has been stored
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
         this.taskList = Duke.taskList;
     }
 
+    /**
+     * retrieves all the tasks entered previously by the user from duke.txt and adds them to the TaskList
+     */
     public void retrieveInfo() {
         try {
-            Scanner scanner = new Scanner(new File("duke.txt"));
+            Scanner scanner = new Scanner(new File(filePath));
             while (scanner.hasNextLine()) {
                 String[] arr  = scanner.nextLine().split("[|]");
                 Task newTask = null;
@@ -40,6 +48,9 @@ public class Storage {
         }
     }
 
+    /**
+     * stores all the tasks the user has entered into the Tasklist in duke.txt
+     */
     public  void  updateInfo() {
         String  fileString = "";
         for (int i = 0; i < taskList.size(); i += 1) {
@@ -47,8 +58,8 @@ public class Storage {
         }
 
         try {
-            new File("duke.txt").createNewFile();
-            FileWriter fw = new FileWriter("duke.txt");
+            new File(filePath).createNewFile();
+            FileWriter fw = new FileWriter(filePath);
             fw.write(fileString);
             fw.close();
         } catch (IOException e) {

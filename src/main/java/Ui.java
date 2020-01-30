@@ -1,5 +1,7 @@
+/**
+ *  deals with interactions with the user
+ */
 public class Ui {
-    //deals with interactions with the user
 
     public String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -7,6 +9,9 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * Says hi to the user and includes the logo
+     */
     public void start() {
         System.out.println("Hello from\n" + logo);
         dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
@@ -16,6 +21,10 @@ public class Ui {
         return "__________________________________________________________________________________________________________\n";
     }
 
+    /**
+     * prints output in a more user friendly format
+     * @param input the string to be outputted
+     */
     public void dukePrint (String input) {
         System.out.print(horizontalLines());
         System.out.print(input);

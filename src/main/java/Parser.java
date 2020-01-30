@@ -1,16 +1,20 @@
 import java.util.Scanner;
 
+/**
+ * deals with making sense of the user command
+ */
 public class Parser {
-    //deals with making sense of the user command
     public Scanner sc = new Scanner(System.in);
-    public static Ui ui;
+    public static Ui ui = new Ui();
     public static TaskList taskList;
 
     public Parser() {
-        this.ui = Duke.ui;
         this.taskList = Duke.taskList;
     }
 
+    /**
+     * scans user input until a bye command is reached. parses each line entered in by the user
+     */
     public void parse() {
         String command = sc.nextLine();
         while (!command.equals("bye")) {

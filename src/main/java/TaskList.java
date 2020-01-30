@@ -1,15 +1,19 @@
 import java.util.ArrayList;
 
+/**
+ *  contains the task list
+ */
 public class TaskList {
-    //contains the task list
     public static ArrayList<Task> newList;
-    public static Ui ui;
+    public static Ui ui = new Ui();
 
     public TaskList() {
         this.newList = new ArrayList<>();
-        this.ui = Duke.ui;
     }
 
+    /**
+     * lists out all the tasks currently available in the Tasklist
+     */
     public void list() {
         if (newList.size() == 0) {
             ui.dukePrint("You currently have no tasks in your list\n");
@@ -22,11 +26,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * marks the specified task as done
+     * @param i the index of the task
+     */
     public void done(int i) {
         newList.get(i).markAsDone();
         ui.dukePrint("Nice! I've marked this task as done: \n"+ newList.get(i).toString()+"\n");
     }
 
+    /**
+     * deletes the specified task
+     * @param i the index of the task
+     */
     public void delete(int i) {
         Task task = newList.get(i);
         newList.remove(i);
@@ -34,6 +46,11 @@ public class TaskList {
                 "Now you have " + newList.size() + " tasks in the list.\n");
     }
 
+    /**
+     * add a new task to the Tasklist
+     * @param newTask the new task to be added
+     * @param command whether to notify the user that the task has been added or not
+     */
     public void add (Task newTask, String command) {
         newList.add(newTask);
         if (command.equals("print")) {
@@ -43,10 +60,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * @return the current number of tasks in the Tasklist
+     */
     public int size() {
         return newList.size();
     }
 
+    /**
+     * retrieve a specific Task from the Tasklist
+     * @param index the index of the Task
+     * @return the Task that was specified
+     */
     public Task get(int index) {
         return newList.get(index);
     }
