@@ -14,16 +14,31 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * The {@code Storage} class helps to save and load @{code ArrayList}s of
+ * {@code Task}s from a given File Path.
+ */
 public class Storage {
     private String filePath;
     private Gson gson;
 
-
+    /**
+     * Initialises a {@code Storage} instance that works with the given
+     * {@code filePath}.
+     *
+     * @param filePath The file path to save to and if possible, load from.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.gson = new Gson();
     }
 
+    /**
+     * Saves a given list of tasks to the file path.
+     *
+     * @param tasks List of tasks to be saved.
+     * @throws DuchessException If it fails to save to the file path.
+     */
     public void save(TaskList tasks) throws DuchessException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
@@ -35,6 +50,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads and returns a list of tasks from the file path.
+     *
+     * @return Loaded list of tasks from given file path.
+     * @throws DuchessException If it fails to load from the file path.
+     */
     public ArrayList<Task> load() throws DuchessException {
         try {
             String fileContent = Files.readString(Path.of(this.filePath));
