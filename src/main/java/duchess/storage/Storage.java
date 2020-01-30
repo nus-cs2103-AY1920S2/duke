@@ -48,7 +48,7 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             Task[] taskArray = tasks.getTaskArray().toArray(new Task[tasks.size()]);
-            fileWriter.write(gson.toJson(taskArray, Task[].class));
+            fileWriter.write(this.gson.toJson(taskArray, Task[].class));
             fileWriter.close();
         } catch (IOException e) {
             throw new DuchessException("Facing difficulties saving your tasks right now.");
@@ -69,32 +69,34 @@ public class Storage {
             for (int i = 0; i < array.size(); i++) {
                 JsonObject taskToCheck = (JsonObject) array.get(i);
                 if (taskToCheck.has("deadline")) {
-                    result.add(new Deadline(gson.fromJson(taskToCheck.get("description"), String.class),
-                            gson.fromJson(taskToCheck.get("deadline"), LocalDateTime.class),
-                            gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
+                    result.add(new Deadline(this.gson.fromJson(taskToCheck.get("description"), String.class),
+                            this.gson.fromJson(taskToCheck.get("deadline"), LocalDateTime.class),
+                            this.gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
                 } else if (taskToCheck.has("timeFrame")) {
-                    result.add(new Event(gson.fromJson(taskToCheck.get("description"), String.class),
-                            gson.fromJson(taskToCheck.get("timeFrame"), String.class),
-                            gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
+                    result.add(new Event(this.gson.fromJson(taskToCheck.get("description"), String.class),
+                            this.gson.fromJson(taskToCheck.get("timeFrame"), String.class),
+                            this.gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
                 } else {
-                    result.add(new ToDo(gson.fromJson(taskToCheck.get("description"), String.class),
-                            gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
+                    result.add(new ToDo(this.gson.fromJson(taskToCheck.get("description"), String.class),
+                            this.gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
                 }
             }
             return result;
         } catch (IOException e) {
-            File folder = new File(this.filePath.split("/", 2)[0].trim());
-            if (folder.exists()) {
-                throw new DuchessException("Failed to load save file!");
-            } else {
-                boolean isDirectoryCreated = folder.mkdir();
-                if (isDirectoryCreated) {
-                    throw new DuchessException("Failed to load save file!");
-                } else {
-                    throw new DuchessException("Failed to load save file! " +
-                            "You will also not be able to save.");
+            String[] paths = this.filePath.split("/");
+            for (int i = 0; i < paths.length - 1; i++) {
+                File folder = new File(paths[i].trim());
+                if (!folder.exists() || !folder.isDirectory()) {
+                    boolean isDirectoryCreated = folder.mkdir();
+                    if (isDirectoryCreated) {
+                        paths[i + 1] = paths[i] + "/" + paths[i + 1];
+                    } else {
+                        throw new DuchessException("Failed to load save file! " +
+                                "You will also not be able to save.");
+                    }
                 }
             }
+            throw new DuchessException("Failed to load save file! Creating new save file.");
         }
     }
 }
