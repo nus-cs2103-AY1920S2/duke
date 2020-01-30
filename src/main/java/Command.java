@@ -7,7 +7,7 @@ public class Command {
         this.params = params;
     }
 
-    public CommandType  getCommandType() {
+    public CommandType getCommandType() {
         return commandType;
     }
 
