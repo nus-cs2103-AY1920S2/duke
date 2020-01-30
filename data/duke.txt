@@ -1,7 +1,9 @@
-T | 1 | read book
 D | 1 | return book | 2pm | 2020-02-01
-D | 0 | submit code | 5pm | 2020-01-30
-E | 0 | meeting | 8am | 2020-01-30
-T | 0 | nap
+D | 1 | submit code | 5pm | 2020-01-30
+E | 1 | meeting | 8am | 2020-01-30
 E | 0 | meeting | 1pm | 2020-02-01
 D | 0 | tutorial | 2pm | 2020-02-02
+T | 1 | read book
+E | 0 | meeting | 1pm | 2020-02-01
+D | 0 | submit report | 1pm | 2020-02-05
+T | 0 | borrow second book
