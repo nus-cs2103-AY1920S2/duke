@@ -61,7 +61,7 @@ public class TaskHandler {
     }
 
     public void exit() throws IOException {
-        this.saver.fullSaver(this.taskList);
+        Saver.fullSaver(this.taskList);
         String farewell = "Guess that's enough for now. I've got your back, so you keep me close.";
         print(farewell);
     }
@@ -70,7 +70,9 @@ public class TaskHandler {
         System.out.println(toPrint);
     }
 
-    public void handle() {
+    public void handle() throws IOException {
+        Saver.loader(taskList);
+
         Scanner scanner = new Scanner(System.in);
         ExceptionHandler exceptionHandler = new ExceptionHandler();
         boolean loop = true;
@@ -109,7 +111,7 @@ public class TaskHandler {
                         loop = false;
                         break;
                     default:
-                        this.print("Uhh... You're gonna have to say that again, Red.");
+                        print("Uhh... You're gonna have to say that again, Red.");
                         break;
                 }
             } catch(DukeException | IOException ex) {
