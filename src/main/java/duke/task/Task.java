@@ -41,6 +41,10 @@ public class Task {
         return "";
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Mark the task as Done
      */
