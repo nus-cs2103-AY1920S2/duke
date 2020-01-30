@@ -1,12 +1,11 @@
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;  // Import the Scanner class
 
 public class Duke{
     public static void main(String[] args) throws IOException,Exception {
@@ -112,11 +111,14 @@ public class Duke{
     public static void createFile(String command,String task) throws IOException{
         String filePath = "duke.txt";
         File f = new File(filePath);
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(command+" || "+task);
+        FileWriter fw = new FileWriter(filePath,true);
+        BufferedWriter br = new BufferedWriter(fw);
+        br.write(command+" || "+task);
+        br.newLine();
+        br.close();
+//        fw.write(command+" || "+task);
         fw.close();
         try {
-            boolean result = f.createNewFile();
             Scanner s = new Scanner(f);
             System.out.println("Load data from duke text file ");
             while(s.hasNext()){
