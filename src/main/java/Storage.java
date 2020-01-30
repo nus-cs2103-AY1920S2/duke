@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 
 public class Storage {
     String path;
@@ -27,8 +25,7 @@ public class Storage {
             String line;
 
             while ((line = br.readLine()) != null) {
-              // System.out.println("Storage loaded: " + line);
-                line = line.replaceAll("[^\\x00-\\x7F]", ""); // I HAVE NO IDEA HOW I GOT A WEIRD 2 CHARACTER ERROR HERE IS A QUICK FIX TO REMOVE NON ASCII
+                line = line.replaceAll("[^\\x00-\\x7F]", "");
                 lst.add(parser.parse(line));
             }
 
@@ -53,8 +50,6 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(outputStreamWriter);
 
             for (Task task : lst) {
-//                String parsed = parser.parse(task);
-//                System.out.println("parser parsed: " + parsed);
                 bw.write(parser.parse(task));
                 bw.newLine();
                 bw.flush();
