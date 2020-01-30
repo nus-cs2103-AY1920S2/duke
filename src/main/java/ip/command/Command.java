@@ -1,4 +1,7 @@
-package ip;
+package ip.command;
+
+import ip.Ui;
+import ip.task.TaskList;
 
 public abstract class Command {
     boolean isExit = false;

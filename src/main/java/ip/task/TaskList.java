@@ -1,4 +1,4 @@
-package ip;
+package ip.task;
 
 import java.io.Serializable;
 import java.util.ArrayList;

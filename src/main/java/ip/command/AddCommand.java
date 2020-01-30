@@ -1,4 +1,8 @@
-package ip;
+package ip.command;
+
+import ip.Ui;
+import ip.task.Task;
+import ip.task.TaskList;
 
 public class AddCommand extends Command {
     private Task task;

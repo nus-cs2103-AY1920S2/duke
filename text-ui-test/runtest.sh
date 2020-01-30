@@ -13,20 +13,20 @@ then
 fi
 
 # delete contents of the local storage
-if [ -e "../yourfile.txt" ]
+if [ -e "./yourfile.txt" ]
 then
-    rm "../yourfile.txt"
+    rm ./yourfile.txt
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/ip/*.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/ip/*.java ../src/main/java/ip/task/*.java ../src/main/java/ip/command/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin ip.Duke < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED.TXT

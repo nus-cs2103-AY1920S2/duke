@@ -1,6 +1,8 @@
 package ip;
 
 import java.util.Scanner;
+import ip.task.Task;
+import ip.task.TaskList;
 
 public class Ui {
     private Scanner sc = new Scanner(System.in);
