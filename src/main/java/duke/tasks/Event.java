@@ -14,14 +14,16 @@ public class Event extends Task {
         try {
             date = LocalDate.parse(at);
             System.out.println("Parsed date successfully");
-        } catch(DateTimeParseException de) {
+        } catch (DateTimeParseException de) {
             this.at = at;
         }
     }
 
     public static Event create(String[] strArr) {
         Event t = new Event(strArr[2], strArr[3]);
-        if(strArr[1].equals("1")) {t.setDone();}
+        if (strArr[1].equals("1")) {
+            t.setDone();
+        }
         return t;
     }
 
@@ -29,16 +31,14 @@ public class Event extends Task {
     public String store() {
         String dateType = this.at;
         if (dateType.isEmpty()) {
-            dateType = this.date.format(DateTimeFormatter
-                    .ofLocalizedDate(FormatStyle.LONG));
+            dateType = this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         }
-        return "E|" + (isDone?"1":"0") + "|" + this.description + "|" + dateType;
+        return "E|" + (isDone ? "1" : "0") + "|" + this.description + "|" + dateType;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + (at.isEmpty()?date.format(DateTimeFormatter
-                    .ofLocalizedDate(FormatStyle.LONG)):this.at) + ")";
+                + (at.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.at) + ")";
     }
 }

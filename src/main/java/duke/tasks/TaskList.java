@@ -27,7 +27,7 @@ public class TaskList {
         taskList.getTaskList().remove(i - 1);
         return taskList;
     }
-    
+
     public static TaskList addTask(Task t, TaskList taskList) {
         taskList.getTaskList().add(t);
         return taskList;

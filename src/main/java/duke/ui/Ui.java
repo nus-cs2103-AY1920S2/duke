@@ -10,7 +10,7 @@ public class Ui {
 
     public void welcomeUser() {
         System.out.println("Hello, I am \n" + dukeLogo + "your personal buddy. What's up?\n"
-        + "____________________________________________________________\n");
+                + "____________________________________________________________\n");
     }
 
     public void farewellUser() {
@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public void divider(String s) {
-        if(s.length() == 0) {
+        if (s.length() == 0) {
             System.out.println("____________________________________________________________\n");
         } else {
             System.out.println("____________________________________________________________\n" + s + "\n"
@@ -40,6 +40,5 @@ public class Ui {
     public void showError(DukeException e) {
         System.out.println(e.toString());
     }
-
 
 }

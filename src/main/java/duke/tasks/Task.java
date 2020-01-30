@@ -18,12 +18,14 @@ public class Task {
     }
 
     public String store() {
-        return "Task|" + (isDone?"1":"0") + "|" + this.description;
+        return "Task|" + (isDone ? "1" : "0") + "|" + this.description;
     }
 
     public static Task create(String[] strArr) {
         Task t = new Task(strArr[2]);
-        if(strArr[1].equals("1")) {t.setDone();}
+        if (strArr[1].equals("1")) {
+            t.setDone();
+        }
         return t;
     }
 
