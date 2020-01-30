@@ -2,7 +2,7 @@ public class Event extends Task{
     public Event(String description, String date) {
         this.description = description;
         this.type = "E";
-        this.date = date;
+        this.date = parseDate(date);
         this.isDone = false;
     }
 
@@ -13,6 +13,6 @@ public class Event extends Task{
                 this.getType(),
                 this.getStatusIcon(),
                 this.getDescription(),
-                this.getDate());
+                this.formatDate(getDate()));
     }
 }
