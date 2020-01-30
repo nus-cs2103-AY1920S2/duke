@@ -1,3 +1,0 @@
-T | 1 | abc
-E | 1 | do homework  | 1998-10-03T18:00
-D | 1 | do homework morererere | 2342-12-08T22:00
