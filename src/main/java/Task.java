@@ -1,4 +1,3 @@
-// Task class and it's children classes
 class Task {
     protected String description;
     protected boolean isDone;
@@ -14,8 +13,10 @@ class Task {
 
     public String getStatusIcon() {
         if (isDone) {
+            // return a tick
             return "\u2713";
         } else {
+            // return a cross
             return "\u2718";
         }
     }
@@ -27,6 +28,7 @@ class Task {
     @Override
     public String toString() {
         String status = this.getStatusIcon();
-        return "[" + status + "] " + this.getDescription();
+        String description = this.getDescription();
+        return "[" + status + "] " + description;
     }
 }

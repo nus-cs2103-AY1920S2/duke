@@ -1,17 +1,30 @@
+import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static File listFile;
+    static ArrayList<Task> taskList;
     public static void main(String[] args) {
         sayHello();
-        // Create list
-        ArrayList<Task> taskList = new ArrayList<>();
 
+        // Load the file
+
+        String currDir = System.getProperty("user.dir");
+        Path filePath =  Paths.get(currDir, "list.txt");
+        String fileString = loadFileString(filePath);
+        String[] lines = fileString.split("\\r?\\n");
+        //taskList = populateTaskList(lines);
         boolean endInput = false;
 
-        // Create Scanner object
+        // Create Scanner object to read for user input
         Scanner sc = new Scanner(System.in);
 
+        // Only read and write to the file whenever there is a modification to the task
         while (sc.hasNextLine()) {
 
             // Read user input
@@ -33,7 +46,7 @@ public class Duke {
                 case "done":
                     // Read the task number as the next element of splitInput
                     int taskNumber = Integer.parseInt(splitInput[1]);
-                    markTaskAsDone(taskList, taskNumber);
+                    markTaskAsDone(taskList, taskNumber, listFile);
                     break;
                 case "delete":
                     int taskNumberDelete = Integer.parseInt(splitInput[1]);
@@ -63,6 +76,17 @@ public class Duke {
         sc.close();
 
     }
+
+    public static String loadFileString(Path filePath) {
+        String text = "";
+        try  {
+            text = new String(Files.readAllBytes(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text;
+    }
+
 
     public static void sayHello() {
         // Print welcome message
@@ -98,16 +122,33 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
-    public static void markTaskAsDone(ArrayList<Task> taskList, int taskNumber) {
+    public static void markTaskAsDone(ArrayList<Task> taskList, int taskNumber, File listFile) {
         // Get the task from the list
         Task requestedTask = taskList.get(taskNumber - 1);
-
+        String taskBeforeDone = requestedTask.toString();
         // Mark the task as done
         requestedTask.setDone();
         System.out.println("\t____________________________________________________________");
         System.out.println("\t Nice! I've marked this task as done:");
         System.out.println("\t" + requestedTask);
         System.out.println("\t____________________________________________________________");
+
+        // Update the file
+        try {
+            FileReader fr = new FileReader(listFile);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            int count = 0;
+            while ((line = br.readLine()) != null) {
+                if (count == (taskNumber - 1)) {
+                    //replace the cross with a tick
+                    line.replace("\u2718", "\u2713");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void deleteTask(ArrayList<Task> taskList, int taskNumber) {
@@ -119,6 +160,10 @@ public class Duke {
         System.out.println("\t  " + taskToDelete);
         System.out.println("\t Now you have " + taskList.size() + " tasks in the list.");
         System.out.println("\t____________________________________________________________");
+        //update file
+        try {
+            FileOutputStream fo = new FileOutputStream(listFile);
+        }
     }
     public static void addTaskToList(ArrayList<Task> taskList, String[] splitInput) throws DukeException {
         // Now, we must check what kind of task is added, it will be the first element of splitInput
