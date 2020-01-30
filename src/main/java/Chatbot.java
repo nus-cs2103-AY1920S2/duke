@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 public class Chatbot {
@@ -12,6 +16,14 @@ public class Chatbot {
 
     String greet() {
         return "I'm busy. What do you want?";
+    }
+
+    LocalDateTime parseDate(String date) throws DukeException {
+        try {
+            return LocalDateTime.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date should be in the format of yyyy-MM-dd HH:mm");
+        }
     }
 
     /**
@@ -62,13 +74,13 @@ public class Chatbot {
             throw new DukeException("DEADLINE description cannot be empty.");
         }
 
-        String deadline = String.join(" ",
+        String deadline = String.join("T",
                 Arrays.copyOfRange(tokens, keyPosition + 1, tokens.length));
         if (deadline.strip().length() < 1) {
             throw new DukeException("DEADLINE deadline cannot be empty.");
         }
 
-        Item item = new Deadline(description, deadline);
+        Item item = new Deadline(description, parseDate(deadline));
         tasks.add(item);
         return "Added the task.\n"
                 + "----------\n  "
@@ -105,13 +117,13 @@ public class Chatbot {
             throw new DukeException("EVENT description cannot be empty.");
         }
 
-        String time = String.join(" ",
+        String time = String.join("T",
                 Arrays.copyOfRange(tokens, keyPosition + 1, tokens.length));
         if (time.strip().length() < 1) {
             throw new DukeException("EVENT date/time cannot be empty.");
         }
 
-        Item item = new Event(description, time);
+        Item item = new Event(description, parseDate(time));
         tasks.add(item);
         return "Added the task.\n"
                 + "----------\n  "
