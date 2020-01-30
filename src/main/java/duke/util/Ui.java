@@ -12,6 +12,10 @@ public class Ui {
     private static String uselessLine = "-------------------------------------------------------------------------------------";
     private static String addedPhrase = "added: ";
 
+    /**
+     * Print the greeting lines to the screen.
+     * The first thing the user will see.
+     */
     public static void greet() {
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Greetings! This is " + botName + ", and I am your friend!\n" +
@@ -19,18 +23,30 @@ public class Ui {
                 padding + uselessLine);
     }
 
+    /**
+     * Repeat whatever the input is, print it to the screen.
+     * @param str
+     */
     private void echo(String str) {
         System.out.println(padding + uselessLine + "\n" +
                 padding + str + "\n" +
                 padding + uselessLine);
     }
 
+    /**
+     * Print the bye-bye line to the screen.
+     * Last thing the user will see before the application shuts off.
+     */
     public static void byeBye() {
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Bye-bye. It was nice talking to you. See ya soon!\n" +
                 padding + uselessLine);
     }
 
+    /**
+     * Print all the tasks in storedItems to the screen.
+     * @param storedItems
+     */
     public static void listStoredItems(ArrayList<Task> storedItems) {
         System.out.println(padding + uselessLine);
         if (storedItems.isEmpty()) {
@@ -46,6 +62,11 @@ public class Ui {
         System.out.println(padding + uselessLine);
     }
 
+    /**
+     * Print the status after successfully storing a task
+     * @param task
+     * @param storedItems
+     */
     public static void storeUserInput(Task task, ArrayList<Task> storedItems) {
         System.out.println(padding + uselessLine + "\n" +
                 padding + addedPhrase + task + "\n" +
@@ -53,6 +74,11 @@ public class Ui {
                 padding + uselessLine);
     }
 
+    /**
+     * Print the status after successfully marking a task as Done
+     * @param pos
+     * @param storedItems
+     */
     public static void markItemAsDone(int pos, ArrayList<Task> storedItems) {
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Nice nice. I've marked the task as done for you.\n" +
@@ -60,11 +86,19 @@ public class Ui {
                 padding + uselessLine);
     }
 
+    /**
+     * Print the status after successfully deleting a task
+     * @param t
+     * @param storedItems
+     */
     public static void deleteItem(Task t, ArrayList<Task> storedItems) {
         System.out.println(String.format("%s%s\n%sI've removed this task for you\n%s   %s\n%sYou have %d tasks left\n%s%s",
                 padding, uselessLine, padding, padding, t.toString(),padding, storedItems.size(), padding, uselessLine));
     }
 
+    /**
+     * React to a blank user input
+     */
     public static void blankInput() {
         System.out.println(padding + uselessLine + "\n" +
                 padding + "Please type something. Don't leave it blank, plsss!\n" +

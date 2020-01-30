@@ -14,6 +14,12 @@ import java.util.List;
 import static java.lang.System.exit;
 
 public class Storage {
+
+    /**
+     * Checks if it's possible to get the file stored at Documents/Duke/dukeData.txt
+     * Create the file if necessary and possible
+     * @param storedItems
+     */
     public void getDataFile(ArrayList<Task> storedItems) {
         String home = System.getProperty("user.home");
 
@@ -41,6 +47,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Write all the task details from storedItems to local file
+     * @param storedItems
+     */
     public void writeData(ArrayList<Task> storedItems) {
         String home = System.getProperty("user.home");
         Path filePath = Paths.get(home, "Documents", "Duke", "dukeData.txt");
@@ -58,6 +68,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Read all data in filePath and turn them into tasks in storedItems
+     * @param filePath
+     * @param storedItems
+     */
     private void readDataFile(Path filePath, ArrayList<Task> storedItems) {
         List<String> lines = new ArrayList<>();
         try {
