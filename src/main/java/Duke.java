@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
+<<<<<<< HEAD
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -8,29 +9,46 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+=======
+>>>>>>> branch-Level-8
 
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
     public static String machine = "Dude: ";
     public static String user = "dude: ";
+<<<<<<< HEAD
     public static String dataFileName = "./data/duke.txt";
+=======
+>>>>>>> branch-Level-8
     public static String[] commandArray = new String[] {"list", "done", "delete", "todo", "event", "deadline"};
     public static ArrayList<String> commandList = new ArrayList<>();
     public static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         loadData();
         Collections.addAll(commandList, commandArray);
         greeting();
 
         String commandLine = sc.nextLine();
         String[] commands = commandLine.split(" ", 2);
+=======
+        Collections.addAll(commandList, commandArray);
+        greeting();
+        String commandLine = sc.nextLine();
+        String[] commands = commandLine.split(" ", 2);
+
+>>>>>>> branch-Level-8
         while (!commands[0].equals("bye")) {
             try{
                 checkCommand(commands);
                 try {
                     checkDetails(commands);
+<<<<<<< HEAD
                 } catch (EmptyDescriptionException ex) {
+=======
+                } catch (EmptyDescriptionException ex){
+>>>>>>> branch-Level-8
                     System.out.println(ex.getMessage());
                 }
             } catch (InvalidCommandException ex) {
@@ -155,6 +173,7 @@ public class Duke {
         String[] arr;
         Task task;
         switch (commands[0]) {
+<<<<<<< HEAD
         case "list":
             list();
             break;
@@ -178,6 +197,31 @@ public class Duke {
             task = addDeadline(false, arr[0], arr[1]);
             printConfirmAddMessage(task);
             break;
+=======
+            case "list":
+                list();
+                break;
+            case "done":
+                markAsDone(commands[1]);
+                break;
+            case "delete":
+                deleteTask(commands[1]);
+                break;
+            case "todo":
+                task = addTodo(false, commands[1]);
+                printConfirmAddMessage(task);
+                break;
+            case "event":
+                arr = commands[1].split(" /at ");
+                task = addEvent(false, arr[0], arr[1]);
+                printConfirmAddMessage(task);
+                break;
+            case "deadline":
+                arr = commands[1].split(" /by ");
+                task = addDeadline(false, arr[0], arr[1]);
+                printConfirmAddMessage(task);
+                break;
+>>>>>>> branch-Level-8
         }
         updateData();
     }
