@@ -23,8 +23,9 @@ public class Duke {
             Ui.printLines("File creation failed.");
         }
     }
+    
     public static void main(String[] args) {
-        new Duke("../data/tasks.txt").run();
+        new Duke("src/main/data/tasks.txt").run();
     }
 
     private void run() {

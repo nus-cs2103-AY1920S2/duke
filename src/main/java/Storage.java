@@ -57,10 +57,10 @@ public class Storage {
 
     public void doTask(int idx) {
         File originalFile = new File(this.fileName);
-        File tempFile = new File("../data/temp.txt");
+        File tempFile = new File("src/main/data/temp.txt");
 
         try {
-            FileWriter fw = new FileWriter("../data/temp.txt", false);
+            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
             Scanner sc = new Scanner(originalFile);
             int i = 1;
 
@@ -89,10 +89,10 @@ public class Storage {
 
     public void deleteTask(int idx) {
         File originalFile = new File(this.fileName);
-        File tempFile = new File("../data/temp.txt");
+        File tempFile = new File("src/main/data/temp.txt");
 
         try {
-            FileWriter fw = new FileWriter("../data/temp.txt", false);
+            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
             Scanner sc = new Scanner(originalFile);
             int i = 1;
 
