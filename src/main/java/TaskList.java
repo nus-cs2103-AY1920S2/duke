@@ -78,8 +78,8 @@ public class TaskList {
      */
     public TaskList findTask(String keyword) {
         TaskList result = new TaskList();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task t = taskList.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
             if (t.getDescription().contains(keyword)) {
                 result.add(t);
             }
