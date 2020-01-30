@@ -67,6 +67,23 @@ public class Duke {
                         ui.printTask(taskList.remove(index));
                         ui.printResponse(Response.TASK_COUNT);
 
+                    } else if (descriptionTokens[0].toLowerCase().equals("find")) {
+                        boolean hasTask = false;
+                        for (int i = 0; i < taskList.getSize(); i++) {
+                            String[] words = Parser.parse(taskList.get(i).getDescription(), " ");
+                            for (String word : words) {
+                                if (word.toLowerCase().equals(descriptionTokens[1].toLowerCase())) {
+                                    if (!hasTask) {
+                                        ui.printResponse(Response.TASK_FOUND);
+                                    }
+                                    ui.printTask(taskList.get(i), i + 1);
+                                    hasTask = true;
+                                }
+                            }
+                        }
+                        if (!hasTask) {
+                            ui.printResponse(Response.TASK_NOT_FOUND);
+                        }
                     } else if (descriptionTokens[0].toLowerCase().equals("todo")) {
                         if (descriptionTokens.length == 1) {
                             throw new InsufficientArgumentAelitaException("description");
@@ -131,24 +148,24 @@ public class Duke {
                 ui.printResponse(Response.COMMAND_NOT_RECOGNIZED);
             } catch (InsufficientArgumentAelitaException e) {
                 switch (e.getMessage()) {
-                    case "date":
-                        ui.printResponse(Response.MISSING_DATE);
-                        break;
-                    case "date-time":
-                        ui.printResponse(Response.MISSING_DATE_TIME);
-                        break;
-                    case "delete":
-                        ui.printResponse(Response.MISSING_DELETE_INDEX);
-                        break;
-                    case "description":
-                        ui.printResponse(Response.MISSING_DESCRIPTION);
-                        break;
-                    case "done":
-                        ui.printResponse(Response.MISSING_DONE_INDEX);
-                        break;
-                    case "end time":
-                        ui.printResponse(Response.MISSING_END_TIME);
-                        break;
+                case "date":
+                    ui.printResponse(Response.MISSING_DATE);
+                    break;
+                case "date-time":
+                    ui.printResponse(Response.MISSING_DATE_TIME);
+                    break;
+                case "delete":
+                    ui.printResponse(Response.MISSING_DELETE_INDEX);
+                    break;
+                case "description":
+                    ui.printResponse(Response.MISSING_DESCRIPTION);
+                    break;
+                case "done":
+                    ui.printResponse(Response.MISSING_DONE_INDEX);
+                    break;
+                case "end time":
+                    ui.printResponse(Response.MISSING_END_TIME);
+                    break;
                 }
             } catch (EmptyListAelitaException e) {
                 ui.printResponse(Response.NO_TASK);

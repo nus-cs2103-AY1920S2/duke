@@ -21,5 +21,7 @@ public enum Response {
     NO_TASK,
     NO_TASK_ON_DATE,
     TASK_COMPLETED,
-    TASK_COUNT
+    TASK_COUNT,
+    TASK_FOUND,
+    TASK_NOT_FOUND
 }
