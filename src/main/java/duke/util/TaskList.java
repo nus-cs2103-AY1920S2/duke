@@ -1,3 +1,9 @@
+package duke.util;
+
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidIndexException;
+import duke.exception.NoTaskNumberException;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +40,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t");
             sb.append(i + 1);
-            sb.append("." + tasks.get(i));
+            sb.append("" + tasks.get(i));
             if (i != tasks.size() - 1) {
                 sb.append("\n");
             }

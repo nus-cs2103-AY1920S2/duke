@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.NoDateProvidedException;
+import duke.exception.NoDescriptionException;
+
 import java.io.IOException;
 
 /**

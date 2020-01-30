@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * NoDateProvidedException
  *
@@ -12,7 +14,7 @@
 public class NoDateProvidedException extends DukeException {
     String type;
 
-    NoDateProvidedException(String type) {
+    public NoDateProvidedException(String type) {
         this.type = type;
     }
 
