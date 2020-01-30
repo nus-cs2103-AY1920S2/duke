@@ -2,6 +2,9 @@ package duke;
 
 import java.lang.StringBuilder;
 
+/**
+ * Todo inherits from task. Only has a description.
+ */
 public class Todo extends Task {
     String description;
 

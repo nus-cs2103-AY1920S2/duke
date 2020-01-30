@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class stores and loads the task information in Duke.txt.
+ */
 public class Storage {
     String filePath;
     File file;
@@ -46,6 +49,12 @@ public class Storage {
         return loadedList;
     }
 
+    /**
+     * Interprets each line in Duke.txt and returns the appropiate task.
+     * @param inputLine each line of Duke.txt file.
+     * @return Task parsed from the line.
+     * @throws DukeException if the line is not any of the task types.
+     */
     public static Task interpretLine(String inputLine) throws DukeException{
         String[] strArr = inputLine.split(" ");
         String doneStatus = strArr[0];

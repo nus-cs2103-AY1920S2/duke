@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Lists all the available tasks.
+ */
 public class ListCommand extends Command{
     ListCommand(String input){
         super(input);

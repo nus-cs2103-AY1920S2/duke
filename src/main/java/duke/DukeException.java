@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exception that returns the error message according to errorType given.
+ */
 public class DukeException extends Exception {
     String errorType;
     String inputType;

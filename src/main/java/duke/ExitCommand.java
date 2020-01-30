@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exits when bye is detected. isExit() is true this time.
+ */
 public class ExitCommand extends Command {
     ExitCommand(String input){
         super(input);

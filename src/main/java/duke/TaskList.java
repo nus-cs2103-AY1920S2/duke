@@ -1,7 +1,9 @@
 package duke;
 import java.util.ArrayList;
 
-
+/**
+ * TaskList utitlises an ArrayList to hold it's tasks.
+ */
 public class TaskList {
     ArrayList<Task> list;
 
@@ -9,6 +11,10 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Second constructor for loading from an existing list.
+     * @param existingList from the list returned from loadData in storage method.
+     */
     TaskList(ArrayList<Task> existingList) {
         this.list = existingList;
     }

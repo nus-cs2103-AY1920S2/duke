@@ -1,13 +1,8 @@
 package duke;
 
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-//import java.util.Scanner;
-//import java.util.ArrayList;
-//import java.lang.StringBuilder;
-//import java.io.PrintWriter;
-//import java.io.File;
-
+/**
+ * Duke has run method that runs the duke prgramme and is initalised by the filePath.
+ */
 public class Duke {
 
     private Storage storage;
