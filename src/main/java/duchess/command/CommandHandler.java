@@ -10,7 +10,22 @@ import duchess.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The {@code CommandHandler} class contains all static methods to handle
+ * commands given the same arguments of command, taskList, ui and storage.
+ */
 public class CommandHandler {
+    /**
+     * Creates a {@code ToDo} based on the command and given the
+     * entire command and the supporting instances.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     * @throws DuchessException If the list fails to be saved.
+     */
     static Void handleTodoCommand(String command, TaskList taskList,
                                   Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
@@ -21,6 +36,17 @@ public class CommandHandler {
         return null;
     }
 
+    /**
+     * Creates a {@code Event} based on the command and given the
+     * entire command and the supporting instances.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     * @throws DuchessException If the list fails to be saved or /at [details] is missing.
+     */
     static Void handleEventCommand(String command, TaskList taskList,
                                    Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
@@ -35,6 +61,18 @@ public class CommandHandler {
         return null;
     }
 
+    /**
+     * Creates a {@code Deadline} based on the command and given the
+     * entire command and the supporting instances.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     * @throws DuchessException If the list fails to be saved or /by is missing
+     *                          or the deadline is of an unrecognizable format.
+     */
     static Void handleDeadlineCommand(String command, TaskList taskList,
                                       Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
@@ -50,11 +88,32 @@ public class CommandHandler {
         return null;
     }
 
+    /**
+     * Prints out the given {@code TaskList} with the given {@code Ui} instance.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     */
     static Void handleListCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ui.printTaskList(taskList);
         return null;
     }
 
+    /**
+     * Completes a {@code Task} based on the command and given the
+     * entire command and the supporting instances.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     * @throws DuchessException If the list fails to be saved or the index is out
+     *                          of bounds or the task is already completed.
+     */
     static Void handleDoneCommand(String command, TaskList taskList,
                                   Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
@@ -77,6 +136,18 @@ public class CommandHandler {
         return null;
     }
 
+    /**
+     * Deletes a {@code Task} based on the command and given the
+     * entire command and the supporting instances.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     * @throws DuchessException If the list fails to be saved or the index is out
+     *                          of bounds.
+     */
     static Void handleDeleteCommand(String command, TaskList taskList,
                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
@@ -93,6 +164,20 @@ public class CommandHandler {
         return null;
     }
 
+    static Void handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+        ui.printHelpMessage();
+        return null;
+    }
+
+    /**
+     * Prints the goodbye message with the given {@code Ui} instance.
+     *
+     * @param command  Full user command string.
+     * @param taskList List of tasks.
+     * @param ui       Ui instance.
+     * @param storage  Storage instance.
+     * @return null.
+     */
     static Void handleByeCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ui.printGoodbye();
         return null;
