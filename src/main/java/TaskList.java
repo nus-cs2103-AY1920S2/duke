@@ -88,6 +88,10 @@ public class TaskList {
         Ui.printLine();
     }
 
+    private void add(Task task) {
+        tasks.add(task);
+    }
+
     /**
      * The number of tasks in the TaskList
      * @return The number of tasks in the TaskList
@@ -148,6 +152,21 @@ public class TaskList {
      */
     public boolean isFull() {
         return tasks.size() == 100;
+    }
+
+    public void find(String args) {
+        TaskList matches = new TaskList();
+        for (Task task: tasks) {
+            if (task.toString().contains(args)) matches.add(task);
+        }
+
+        if (matches.size() == 0)  {
+           Ui.printLine();
+           Ui.indent("No match found.");
+           Ui.printLine();
+        } else {
+            Ui.displayList(matches, "We have found the following matches:");
+        }
     }
 
 }
