@@ -41,7 +41,9 @@ public class Storage {
         String line = null;
         while (true) {
             try {
-                if ((line = br.readLine()) == null) break;
+                if ((line = br.readLine()) == null) {
+                    break;
+                }
             } catch (IOException e) {
                 System.out.println("    Cannot read data!");
             }
@@ -84,7 +86,7 @@ public class Storage {
             FileWriter fw = new FileWriter(path);
             BufferedWriter bw = new BufferedWriter(fw);
             // Record task data.
-            for (int i = 0 ; i < tasks.getTaskNumber(); i++) {
+            for (int i = 0; i < tasks.getTaskNumber(); i++) {
                 bw.write(tasks.getTask(i).getData());
                 bw.newLine();
             }

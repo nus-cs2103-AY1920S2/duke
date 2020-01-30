@@ -4,9 +4,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is a subclass of task which simulates tasks with deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
-    /** Deadline time of this task */
+    /** Deadline time of this task. */
     protected LocalDate by;
 
     /**
@@ -27,8 +27,8 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
