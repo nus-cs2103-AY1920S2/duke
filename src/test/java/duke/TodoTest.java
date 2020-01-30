@@ -11,6 +11,7 @@ public class TodoTest {
         ToDo todo = new ToDo("Test ToDo Item");
         assertEquals("[T][✘] Test ToDo Item", todo.toString());
     }
+
     @Test
     public void addDoneTodoTest() {
         ToDo todo = new ToDo("Test ToDo Item");

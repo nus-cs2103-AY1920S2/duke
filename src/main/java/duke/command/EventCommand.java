@@ -8,7 +8,8 @@ import duke.task.Event;
 import duke.task.Task;
 
 public class EventCommand extends TaskCommand {
-    public static boolean run(TaskList taskList, String param) throws MissingDescriptionException, MissingDeadlineParamException {
+    public static boolean run(TaskList taskList, String param) throws MissingDescriptionException
+            , MissingDeadlineParamException {
         if (param.equals("")) {
             throw new MissingDescriptionException();
         } else if (!param.contains(" /at ")) {

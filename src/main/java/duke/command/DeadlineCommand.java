@@ -9,7 +9,8 @@ import duke.task.Deadline;
 import duke.task.Task;
 
 public class DeadlineCommand extends TaskCommand {
-    public static boolean run(TaskList taskList, String param) throws MissingDescriptionException, MissingDeadlineParamException, InvalidArgumentException {
+    public static boolean run(TaskList taskList, String param) throws MissingDescriptionException,
+            MissingDeadlineParamException, InvalidArgumentException {
         if (param.equals("")) {
             throw new MissingDescriptionException();
         } else if (!param.contains(" /by ")) {

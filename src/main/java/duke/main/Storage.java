@@ -2,7 +2,14 @@ package duke.main;
 
 import duke.task.Task;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +20,17 @@ public class Storage {
     public Storage() {
         taskList = new ArrayList<>();
     }
+
     public Storage(String filepath) {
         this();
         this.filepath = filepath;
     }
+
     public Storage load() {
         loadFile();
         return this;
     }
+
     public List<Task> getTasks() {
         return this.taskList;
     }
@@ -59,7 +69,7 @@ public class Storage {
                     fi.close();
                 }
             } catch (IOException ex) {
-
+                System.err.println(ex);
             }
         }
         return taskList;
@@ -82,7 +92,7 @@ public class Storage {
                 oi.writeObject(t);
             }
         } catch (EOFException e) {
-
+            e = e;
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {
@@ -95,7 +105,7 @@ public class Storage {
                     fi.close();
                 }
             } catch (IOException ex) {
-
+                System.err.println(ex);
             }
         }
     }

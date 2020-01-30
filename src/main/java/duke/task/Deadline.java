@@ -13,10 +13,11 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws InvalidArgumentException {
         super(description);
         try {
-            DateTimeFormatter inputDTF = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-            LocalDateTime outputDT = LocalDateTime.parse(by, inputDTF);
-            DateTimeFormatter outputDTF = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
-            this.by = LocalDateTime.parse(outputDT.format(outputDTF), DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
+            DateTimeFormatter inputDtf = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime outputDt = LocalDateTime.parse(by, inputDtf);
+            DateTimeFormatter outputDtF = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
+            this.by = LocalDateTime.parse(outputDt.format(outputDtF),
+                    DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
         } catch (DateTimeException ex) {
             throw new InvalidArgumentException();
         }
@@ -24,6 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a")) + ")";
     }
 }
