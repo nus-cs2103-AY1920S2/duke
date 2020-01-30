@@ -1,4 +1,7 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -60,11 +63,13 @@ public class Duke {
                 tasks.add(task);
                 printReply(task);
             } else if (input.split(" ")[0].equals("deadline")) {
-                Task task = new Deadline(input.split("/by", 2)[0].split(" ", 2)[1], input.split("/by", 2)[1]);
+                LocalDate date = LocalDate.parse(input.split("/by", 2)[1]);
+                Task task = new Deadline(input.split("/by", 2)[0].split(" ", 2)[1], date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                 tasks.add(task);
                 printReply(task);
             } else if (input.split(" ")[0].equals("event")) {
-                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], input.split("/at", 2)[1]);
+                LocalDate date = LocalDate.parse(input.split("/by", 2)[1]);
+                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                 tasks.add(task);
                 printReply(task);
             } else {
