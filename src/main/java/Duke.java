@@ -11,6 +11,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         String line = "     -----------------------------------------------------------------\n";
         String tab = "      ";
         String greet = line
