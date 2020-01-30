@@ -102,6 +102,9 @@ public class Duke {
                 for (int i = 0; i < num; i++) {
                     System.out.println((i + 1) + ". " + lst.get(i));
                 }
+                if (num == 0) {
+                    System.out.println ("You have no task!");
+                }
             } else if (input.contains ("done")) {
                 //Mark task as done with keyword "done" followed by task number
                 try {
@@ -111,6 +114,10 @@ public class Duke {
                         if (completedTask.getStatus().equals("Done")) {
                             System.out.println ("You have already completed this task!");
                         } else {
+                            for (int i = 0; i < lst.size(); i++) {
+                                Task savedTask = lst.get(i);
+                                bw.write(savedTask.saveFile() + "\n");
+                            }
                             completedTask.markAsDone();
                             pendingTask--;
                         }
