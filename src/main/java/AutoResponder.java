@@ -17,14 +17,14 @@ public class AutoResponder {
     private final List<Task> taskList;
     private final StringBuilder toPrint;
     private final Ui ui;
-    static Pattern pDeadline = Pattern.compile("^deadline (.+) /by (.+)");
-    static Pattern pEvent = Pattern.compile("^event (.+) /at (.+)");
-    static Pattern pTodo = Pattern.compile("^todo (.+)");
-    static Pattern pDone = Pattern.compile("^done (\\d+)");
-    static Pattern pDelete = Pattern.compile("^delete (\\d+)");
-    static Pattern pEmptyCommand = Pattern.compile("^(todo|event|deadline|find|done|delete)\\s*$");
-    static Pattern pList = Pattern.compile("^list\\s*$");
-    static Pattern pSave = Pattern.compile("^save\\s*$");
+    static Pattern PATTERN_DEADLINE = Pattern.compile("^deadline (.+) /by (.+)");
+    static Pattern PATTERN_EVENT = Pattern.compile("^event (.+) /at (.+)");
+    static Pattern PATTERN_TODO = Pattern.compile("^todo (.+)");
+    static Pattern PATTERN_DONE = Pattern.compile("^done (\\d+)");
+    static Pattern PATTERN_DELETE = Pattern.compile("^delete (\\d+)");
+    static Pattern PATTERN_EMPTY_COMMAND = Pattern.compile("^(todo|event|deadline|find|done|delete)\\s*$");
+    static Pattern PATTERN_LIST = Pattern.compile("^list\\s*$");
+    static Pattern PATTERN_FIND = Pattern.compile("^save\\s*$");
     static Pattern pFind = Pattern.compile("^find (.+)");
 
 
@@ -52,22 +52,22 @@ public class AutoResponder {
      */
     public AutoResponder readInput(String input) {
         String lowerInput = input.toLowerCase();
-        if (pList.matcher(lowerInput).find()) {
+        if (PATTERN_LIST.matcher(lowerInput).find()) {
             return this.processList();
-        } else if (pDone.matcher(lowerInput).find()) {
-            Matcher m = pDone.matcher(lowerInput);
+        } else if (PATTERN_DONE.matcher(lowerInput).find()) {
+            Matcher m = PATTERN_DONE.matcher(lowerInput);
             m.find();
             int index = Integer.parseInt(m.group(1)) - 1;
             return this.markTaskDone(index);
-        } else if (pDelete.matcher(lowerInput).find()) {
-            Matcher m = pDelete.matcher(lowerInput);
+        } else if (PATTERN_DELETE.matcher(lowerInput).find()) {
+            Matcher m = PATTERN_DELETE.matcher(lowerInput);
             m.find();
             int index = Integer.parseInt(m.group(1)) - 1;
             return this.deleteTask(index);
-        } else if (pSave.matcher(lowerInput).find()) {
+        } else if (PATTERN_FIND.matcher(lowerInput).find()) {
             return this.saveList();
-        } else if (pEmptyCommand.matcher(lowerInput).find()) {
-            Matcher m = pEmptyCommand.matcher(lowerInput);
+        } else if (PATTERN_EMPTY_COMMAND.matcher(lowerInput).find()) {
+            Matcher m = PATTERN_EMPTY_COMMAND.matcher(lowerInput);
             m.find();
             throw new IllegalArgumentException("☹ OOPS!!! The description of a "
                     + m.group(1) + " cannot be empty.");
@@ -75,16 +75,16 @@ public class AutoResponder {
             Matcher m = pFind.matcher(input);
             m.find();
             return this.findTask(m.group(1));
-        } else if (pDeadline.matcher(input).find()) {
-            Matcher m = pDeadline.matcher(input);
+        } else if (PATTERN_DEADLINE.matcher(input).find()) {
+            Matcher m = PATTERN_DEADLINE.matcher(input);
             m.find();
             return this.addDeadline(m.group(1), m.group(2));
-        } else if (pEvent.matcher(input).find()) {
-            Matcher m = pEvent.matcher(input);
+        } else if (PATTERN_EVENT.matcher(input).find()) {
+            Matcher m = PATTERN_EVENT.matcher(input);
             m.find();
             return this.addEvent(m.group(1), m.group(2));
-        } else if (pTodo.matcher(input).find()) {
-            Matcher m = pTodo.matcher(input);
+        } else if (PATTERN_TODO.matcher(input).find()) {
+            Matcher m = PATTERN_TODO.matcher(input);
             m.find();
             return this.addTodo(m.group(1));
         } else {
