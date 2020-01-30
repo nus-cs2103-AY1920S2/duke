@@ -1,15 +1,16 @@
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
-        Dude dude = new Dude();
-        dude.start();
+        Squirtle squirtle = new Squirtle();
+        Storage storage = new Storage("../data/tasks.txt");
+        squirtle.start();
+        squirtle.setStorage(storage);
         Scanner sc = new Scanner(System.in);
-        while (dude.isRunning()) {
+        while (squirtle.isRunning()) {
             String userInput = sc.nextLine();
-            dude.passInput(userInput);
+            squirtle.passInput(userInput);
 
         }
         sc.close();
     }
 }
-

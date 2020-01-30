@@ -1,21 +1,40 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
-public class Dude {
+/**
+ * The UI class for Duke
+ **/
+public class Squirtle {
     protected ArrayList<Task> userInputList;
-    protected String logo = "  ____\n" + " (.__.)\n" + "<|>\n" + " /\\" + "\n_  _";
+    protected String logoPath = "logo.txt";
+    protected String lineBreak = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    protected String waterDroplets = "\uD83D\uDCA6";
     protected boolean isActivated = false;
     protected Storage storage;
 
-    Dude() {
-        userInputList = new ArrayList<>();
 
+    Squirtle() {
+        userInputList = new ArrayList<>();
     }
 
     public void start() {
         isActivated = true;
-        System.out.println(logo);
-        System.out.println("☛ dude, what do you want? \n☛ give me a command!");
+        try (BufferedReader br = new BufferedReader(new FileReader(logoPath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line); // print logo
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        this.printSquirtleCall();
+        this.printPrompt();
+
     }
 
     public void setStorage(Storage storage) {
@@ -25,7 +44,7 @@ public class Dude {
 
     public void end() {
         isActivated = false;
-        System.out.println("☛ dude, stop wasting my time! shoo!");
+        this.printSquirtleCall("Squirtle says bye bye!!!");
     }
 
     public boolean isRunning() {
@@ -51,12 +70,14 @@ public class Dude {
             createTask(input);
             storage.update(userInputList);
         }
+        this.printLineBreak();
+        this.printPrompt();
     }
 
 
 
     public void listTasks() {
-        System.out.println("☛ you asked to:");
+        this.printSquirtleCall("your tasks!! ");
         for (int i = 0; i < userInputList.size(); i++) {
             System.out.println("\t" + (i + 1) + ". " + userInputList.get(i));
         }
@@ -66,7 +87,7 @@ public class Dude {
         try {
             int taskNumber = Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
             userInputList.get(taskNumber).markAsDone();
-            System.out.println("☛ dude, nicely! you're done with:");
+            this.printSquirtleCall("Squirtle finished!!");
             System.out.println("\t" + userInputList.get(taskNumber));
         }
         catch(IndexOutOfBoundsException e) { // catch exception - trying to access number higher than number of tasks
@@ -77,15 +98,31 @@ public class Dude {
     public void deleteTask(String userInput) {
         try {
             int taskNumber = Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
-            Task t = userInputList.get(taskNumber);
-            System.out.println("☛ dude. deleting:");
-            System.out.println("\t" + userInputList.get(taskNumber));
-            userInputList.remove(t);
+            Task task = userInputList.get(taskNumber);
+            this.printSquirtleCall("Squirtle is deleting~ \n\t" + task.toString());
+            userInputList.remove(task);
         }
         catch(IndexOutOfBoundsException e) { // catch exception - trying to access number higher than number of tasks
             System.out.println(new DukeException(DukeError.COMMAND));
         }
 
+    }
+
+    public void printLineBreak() {
+        System.out.println(lineBreak);
+    }
+
+    public void printPrompt() {
+        System.out.print("What should Squirtle do?? ☛ ");
+    }
+
+    public void printSquirtleCall() {
+        System.out.println(waterDroplets + " SQUIRTLE!! I'M HERE TO HELP!! SQUIRTLE!!");
+    }
+
+    public void printSquirtleCall(String message) {
+        System.out.println(waterDroplets + " SQUIRTLE!!");
+        System.out.println("\t" + message);
     }
 
     public void createTask(String userInput) { // TODO found new error: when passing deadline blah/event blah
@@ -108,8 +145,8 @@ public class Dude {
                 throw new DukeException(DukeError.NUMBER); // throw an exception if user tries to create a task with type that is nonexistent
             }
             userInputList.add(task);
-            System.out.println("☛ fine, I will take note of: " + task);
-            System.out.println("☛ you made me remember " + userInputList.size() + " task(s)");
+            this.printSquirtleCall(task.toString());
+            this.printSquirtleCall("Squirtle now knows " + userInputList.size() + " task(s)!");
         }
         catch(DukeException e) {
             System.out.println(e);
