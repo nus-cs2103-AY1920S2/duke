@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public abstract class Command {
     protected String command;
     protected TaskList tasks;
@@ -8,10 +10,10 @@ public abstract class Command {
         if (this instanceof ExitCommand) {
             return true;
         }
-            return false;
+        return false;
     }
 
 
-    abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
 }

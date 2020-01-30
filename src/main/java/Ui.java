@@ -1,11 +1,6 @@
 import java.util.Scanner;
 
 public class Ui {
-    private static String LINE = "__________________________________________";
-
-    Ui() {
-
-    }
 
     void showWelcome() {
         String logo = " ____        _        \n"
@@ -17,13 +12,17 @@ public class Ui {
     }
 
     void showLine() {
-        System.out.println(LINE);
+        System.out.println(Duke.LINE);
     }
 
     String readCommand() {
         Scanner scan = new Scanner(System.in);
         String command = scan.nextLine();
         return command;
+    }
+
+    void showError(String message) {
+        System.out.println(message);
     }
 
     void showLoadingError() {

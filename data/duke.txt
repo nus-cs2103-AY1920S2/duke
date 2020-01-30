@@ -1,2 +1,4 @@
+T | [N] | read book
 D | [N] | return book | 2020-12-12
-E | [N] | project meeting | 2020-12-12
+D | [N] | run 5km | 2020-12-31
+D | [N] | return book | 2020-12-12

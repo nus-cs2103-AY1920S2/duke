@@ -15,4 +15,12 @@ public class TaskList {
     public List<Task> getTaskList() {
         return this.taskList;
     }
+
+    void delete(int taskNum) {
+        taskList.remove(taskNum);
+    }
+
+    public Task deleteTask(int i) {
+        return taskList.remove(i);
+    }
 }
