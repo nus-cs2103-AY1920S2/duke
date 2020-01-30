@@ -22,9 +22,9 @@ public class Duke {
         loadData();
         Collections.addAll(commandList, commandArray);
         greeting();
-
         String commandLine = sc.nextLine();
         String[] commands = commandLine.split(" ", 2);
+
         while (!commands[0].equals("bye")) {
             try{
                 checkCommand(commands);
