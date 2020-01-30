@@ -3,12 +3,19 @@ import java.util.Scanner;
 public class Ui {
     static Scanner sc = new Scanner(System.in);
 
-    public void printToConsole(String s) {
+    /**
+     * Prints output string into console.
+     * @param output string to be printed
+     */
+    public void printToConsole(String output) {
         System.out.println("--------------------------------------------");
-        System.out.print(s);
+        System.out.print(output);
         System.out.println("--------------------------------------------");
     }
 
+    /**
+     * Prints landing page with name of program.
+     */
     public void printLandingPage() {
         String logo = "                _        _____                                 _           \n"
                 + "     /\\        | |      |  __ \\                               | |          \n"
@@ -30,6 +37,9 @@ public class Ui {
         return sc.hasNextLine();
     }
 
+    /**
+     * Prints goodbye lines before shutting down program.
+     */
     public void printGoodbye() {
         System.out.println("--------------------------------------------");
         System.out.println("Farewell. Thank you for using AutoResponder.");

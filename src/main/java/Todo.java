@@ -38,9 +38,14 @@ public class Todo implements Task {
         return "T|" + name + "|" + (completed ? "1" : "0");
     }
 
-    public static Todo readFormat(String s) {
+    /**
+     * Reads string formatted to store info regarding todotask.
+     * @param input input string to be parsed
+     * @return todotask object parsed from string information
+     */
+    public static Todo readFormat(String input) {
         // assert here such that first token is T
-        List<String> list = Collections.list(new StringTokenizer(s, "|")).stream()
+        List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
         return new Todo(list.get(1), Boolean.parseBoolean(list.get(2)));
