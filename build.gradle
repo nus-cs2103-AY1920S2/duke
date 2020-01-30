@@ -9,6 +9,10 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1.3"
