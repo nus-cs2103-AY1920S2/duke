@@ -11,6 +11,12 @@ public class Ui {
         System.out.println(toIndent);
     }
 
+    public static void doubleIndent(String toIndent) {
+        System.out.printf(space);
+        System.out.printf(space);
+        System.out.println(toIndent);
+    }
+
     public static void greet() {
         printLine();
         String logo = space
