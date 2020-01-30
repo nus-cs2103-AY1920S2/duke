@@ -61,11 +61,11 @@ public class Duke {
                     tasks.saveToFile(getSaveDirectory());
                     break;
                 default:
-                    out("invalid command:", echo(next), "please try again");
+                    out("invalid command:", "  " + echo(next), "please try again");
                     break;
                 }
             } catch(IncorrectArgumentException e) {
-                System.out.println(e.getMessage());
+                out(e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
