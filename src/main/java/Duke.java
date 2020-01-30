@@ -58,6 +58,9 @@ public class Duke {
                                     + tasks.getTaskNumber());
                         }
                         break;
+                    case "find":
+                        ui.find(input.substring(5), tasks);
+                        break;
                     case "todo":
                         try {
                             ui.add(new Todo(input.substring(5)), tasks);
