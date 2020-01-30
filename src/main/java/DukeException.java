@@ -9,4 +9,8 @@ public class DukeException extends Exception{
                 "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                 "____________________________________________________________\n";
     }
+
+    public String fileErrorMessage(){
+        return "The file is not found";
+    }
 }
