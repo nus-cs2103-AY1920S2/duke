@@ -52,8 +52,12 @@ public class TaskList {
      *
      * @param index Index of {@code Task} to be removed.
      */
-    public void removeTask(int index) {
-        this.tasks.remove(index);
+    public void removeTask(int index) throws DuchessException {
+        try {
+            this.tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DuchessException("You're referring to a task which does not exist!");
+        }
     }
 
     /**
@@ -61,8 +65,12 @@ public class TaskList {
      *
      * @param index Index of {@code Task} to be retrieved.
      */
-    public Task getTask(int index) {
-        return this.tasks.get(index);
+    public Task getTask(int index) throws DuchessException {
+        try {
+            return this.tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DuchessException("You're referring to a task which does not exist!");
+        }
     }
 
     /**
