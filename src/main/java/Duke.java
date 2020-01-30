@@ -1,9 +1,38 @@
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
     static ArrayList<Task> tasks = new ArrayList<Task>();
     static Scanner sc = new Scanner(System.in);
+    static final String FILEPATH = "../../data/duke.txt";
+
+    // TODO: Implement write method
+    static void saveFile(String path, String text){
+
+        try {
+            File f = new File(path);
+
+            FileWriter fw = new FileWriter(f.getAbsoluteFile());
+            fw.write(text);
+            fw.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    static String taskToParse(ArrayList<Task> tasks) {
+
+        StringBuilder s = new StringBuilder("");
+
+        for (int i = 0; i < tasks.size(); i++){
+            s.append(tasks.get(i).toParser() + "\n");
+        }
+
+        return s.toString();
+    }
 
     static void printIntro() {
         System.out.print(
@@ -52,20 +81,24 @@ public class Duke {
             } else if (input.split(" ")[0].equals("done")) {
                 int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
                 markTaskDone(tasks.get(taskNumber));
+                saveFile(FILEPATH,taskToParse(tasks));
             } else if (input.split(" ")[0].equals("todo")) {
                 if (input.split(" ").length == 1){
                     throw new TodoException(input);
                 }
                 Task task = new Todo(input.split(" ", 2)[1]);
                 tasks.add(task);
+                saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else if (input.split(" ")[0].equals("deadline")) {
                 Task task = new Deadline(input.split("/by", 2)[0].split(" ", 2)[1], input.split("/by", 2)[1]);
                 tasks.add(task);
+                saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else if (input.split(" ")[0].equals("event")) {
                 Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], input.split("/at", 2)[1]);
                 tasks.add(task);
+                saveFile(FILEPATH,taskToParse(tasks));
                 printReply(task);
             } else {
                 throw new DukeException(input);
@@ -84,16 +117,66 @@ public class Duke {
         Task task = tasks.remove(pos-1);
         System.out.println("____________________________________________________________\n"
                 + " Noted. I've removed this task: \n  "
-                + task.toString() + "\n Now you have 4 tasks in the list."
+                + task.toString() + "\n Now you have " + tasks.size() + " tasks in the list.\n"
                 + "____________________________________________________________");
+    }
+
+    static void readFile() throws FileNotFoundException {
+        // Read every line in the list
+        File f = new File(FILEPATH);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String input = s.nextLine();
+            char c = input.charAt(0);
+            if (c == 'T') {
+                String description = input.split("/")[2];
+                boolean isDone;
+                if (input.split("/")[1].equals(" O ")){
+                    isDone = true;
+                } else {
+                    isDone = false;
+                }
+                Task t = new Todo(description, isDone);
+                tasks.add(t);
+            } else if (c == 'D') {
+                String description = input.split("/")[2];
+                boolean isDone;
+                if (input.split("/")[1].equals(" O ")){
+                    isDone = true;
+                } else {
+                    isDone = false;
+                }
+                String deadline = input.split("/")[3];
+                Task t = new Deadline(description, isDone, deadline);
+                tasks.add(t);
+            } else if (c == 'E') {
+                String description = input.split("/")[2];
+                boolean isDone;
+                if (input.split("/")[1].equals(" O ")){
+                    isDone = true;
+                } else {
+                    isDone = false;
+                }
+                String deadline = input.split("/")[3];
+                Task t = new Event(description, isDone, deadline);
+                tasks.add(t);
+            }
+        }
     }
 
     public static void main(String[] args) throws DukeException {
         printIntro();
+        //TODO: Read from file and save to arraylist
+        try{
+            readFile();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
         String input = sc.nextLine();
             while (!input.toLowerCase().equals("bye")) {
                 if (input.split(" ")[0].toLowerCase().equals("delete")) {
                     deleteTask(input);
+                    saveFile(FILEPATH,taskToParse(tasks));
                 }
                 else {
                     addTask(input);
