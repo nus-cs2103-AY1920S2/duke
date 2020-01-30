@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -214,7 +215,7 @@ public class Duke {
                     String name = strArr[0];
                     String by = strArr[1];
 
-                    t = new Deadline(name, by);
+                    t = new Deadline(name, LocalDate.parse(by));
 
                     addAndPrintTask(t, tasks);
                     saveTasksToFile(tasks);
@@ -236,7 +237,7 @@ public class Duke {
                     String name = strArr[0];
                     String at = strArr[1];
 
-                    t = new Event(name, at);
+                    t = new Event(name, LocalDate.parse(at));
 
                     addAndPrintTask(t, tasks);
                     saveTasksToFile(tasks);
