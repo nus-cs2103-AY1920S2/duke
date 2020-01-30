@@ -90,6 +90,15 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Returns a list of pairs of {@code Task}s and their index in the original
+     * list. This allows the user to see the list with new indices while being
+     * able to delete or complete tasks using the original indices.
+     *
+     * @param searchWords Word(s) to search for in the tasks' descriptions.
+     * @return An array of pairs of {@code Task}s and {@code Integer}s. Returns
+     * an empty array if no tasks meet the requirement.
+     */
     public ArrayList<Pair<Task, Integer>> find(String searchWords) {
         return IntStream.range(0, this.tasks.size())
                 .mapToObj(i -> new Pair<Task, Integer>(this.tasks.get(i), i))
