@@ -1,20 +1,21 @@
 package bot.loadsave;
 
-import bot.task.Task;
 import bot.task.Deadline;
 import bot.task.Event;
+import bot.task.Task;
 import bot.task.Todo;
-import bot.util.PrettyTime;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
+import bot.util.PrettyTime;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Scanner;
 
 /**
  * A class that handles saving and
