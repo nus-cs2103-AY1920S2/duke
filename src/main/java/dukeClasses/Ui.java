@@ -1,3 +1,9 @@
+package dukeClasses;
+
+import dukeClasses.DukeException;
+import dukeClasses.Storage;
+import dukeClasses.TaskManager;
+
 /**
  * Handles all the user inputs
  */

@@ -1,8 +1,10 @@
+package dukeClasses;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline class is a child class of Task that has a by variable which tells the user
+ * dukeClasses.Deadline class is a child class of dukeClasses.Task that has a by variable which tells the user
  * when the deadline is
  */
 public class Deadline extends Task {
@@ -25,11 +27,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns the dynamic state of the Deadline
-     * @return the state of Deadline, to be saved in data.txt
+     * returns the dynamic state of the dukeClasses.Deadline
+     * @return the state of dukeClasses.Deadline, to be saved in data.txt
      */
     public String saveData(){
         String isItDone = this.isDone? "1" : "0"; //1 is done, 0 is not done
-        return "Deadline" + "|" + isItDone + "|" + this.description + "|" + this.by;
+        return "dukeClasses.Deadline" + "|" + isItDone + "|" + this.description + "|" + this.by;
     }
 }

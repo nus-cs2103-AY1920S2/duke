@@ -1,5 +1,9 @@
+package dukeClasses;
+
+import dukeClasses.Task;
+
 /**
- * Event class is a child class of Task that has a at variable which tells the user
+ * dukeClasses.Event class is a child class of dukeClasses.Task that has a at variable which tells the user
  * where is the event at
  */
 public class Event extends Task {
@@ -21,11 +25,11 @@ public class Event extends Task {
     }
 
     /**
-     * returns the dynamic state of the Event
-     * @return the state of Event, to be saved in data.txt
+     * returns the dynamic state of the dukeClasses.Event
+     * @return the state of dukeClasses.Event, to be saved in data.txt
      */
     public String saveData(){
         String isItDone = this.isDone? "1" : "0"; //1 is done, 0 is not done
-        return "Event" + "|" + isItDone + "|" + this.description + "|" + this.at;
+        return "dukeClasses.Event" + "|" + isItDone + "|" + this.description + "|" + this.at;
     }
 }

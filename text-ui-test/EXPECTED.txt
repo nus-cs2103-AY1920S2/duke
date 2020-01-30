@@ -9,10 +9,10 @@ Hello!! My name is Edith. Tony Stark's Personal Assistant
 What can I do for you?
 **************************************************************
 **************************************************************
-DukeException: I'm sorry, but I don't know what that means :-(
+dukeClasses.DukeException: I'm sorry, but I don't know what that means :-(
 **************************************************************
 **************************************************************
-DukeException: I'm sorry, but I don't know what that means :-(
+dukeClasses.DukeException: I'm sorry, but I don't know what that means :-(
 **************************************************************
 **************************************************************
 Here are your tasks in your list: 

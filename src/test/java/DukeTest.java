@@ -1,4 +1,5 @@
-import org.junit.jupiter.api.Disabled;
+import dukeClasses.Deadline;
+import dukeClasses.Task;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -11,14 +12,14 @@ public class DukeTest {
     @Order(1)
     public void testTaskName() {
         Deadline deadlineTest = new Deadline("test", LocalDate.parse("2020-01-01"));
-        assertEquals("test", deadlineTest.description);
+        assertEquals("test", deadlineTest.getDescription());
     }
 
     @Test
     @Order(2)
     public void testDoneStatus() {
         Deadline deadlineTest = new Deadline("test", LocalDate.parse("2020-01-01"));
-        assertEquals(false, deadlineTest.isDone);
+        assertEquals(false, deadlineTest.getDescription());
     }
 
 

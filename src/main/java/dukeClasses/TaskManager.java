@@ -1,3 +1,7 @@
+package dukeClasses;
+
+import dukeClasses.*;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 
@@ -30,7 +34,7 @@ public class TaskManager {
     }
 
     /**
-     * Used for Level-9. find keyword that appears in each Task in listOfTasks
+     * Used for Level-9. find keyword that appears in each dukeClasses.Task in listOfTasks
      * @param keyword keyword to search
      */
     public void findTask(String keyword){
@@ -53,8 +57,8 @@ public class TaskManager {
     }
 
     /**
-     * change the boolean isDone? of a Task
-     * @param index index of Task to be set as Done (isDone = True)
+     * change the boolean isDone? of a dukeClasses.Task
+     * @param index index of dukeClasses.Task to be set as Done (isDone = True)
      */
     public void setTaskAsDone(int index){
         listOfTasks.get(index-1).markAsDone();
@@ -66,13 +70,13 @@ public class TaskManager {
     /**
      * Adds a new task and saves it in data
      * @param textEntered includes the type of task, description, and /by or /at
-     * @throws DukeException Must have deadline and date for Deadline and Events
+     * @throws DukeException Must have deadline and date for dukeClasses.Deadline and Events
      */
     public void addTask(String textEntered) throws DukeException{
 
         Task newTask;
 
-        if(textEntered.contains("todo")){ //Handles Task that are ToDo
+        if(textEntered.contains("todo")){ //Handles dukeClasses.Task that are dukeClasses.ToDo
 
             if(textEntered.split(" ").length == 1){
                 throw new DukeException("The description of a todo cannot be empty");
@@ -81,7 +85,7 @@ public class TaskManager {
                 this.listOfTasks.add(newTask);
             }
 
-        }else if(textEntered.contains("deadline")){ //Handles Task that are Deadline
+        }else if(textEntered.contains("deadline")){ //Handles dukeClasses.Task that are dukeClasses.Deadline
 
             if(textEntered.split(" ").length == 1){ //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
@@ -99,7 +103,7 @@ public class TaskManager {
                 this.listOfTasks.add(newTask);
             }
 
-        }else{ //Handles task that is Event
+        }else{ //Handles task that is dukeClasses.Event
 
             if(textEntered.split(" ").length == 1){
                 throw new DukeException("The description of an event cannot be empty");

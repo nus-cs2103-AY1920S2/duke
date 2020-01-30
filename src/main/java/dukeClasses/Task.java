@@ -1,3 +1,5 @@
+package dukeClasses;
+
 public class Task {
 
     protected String description;
@@ -23,9 +25,17 @@ public class Task {
     }
 
     /**
-     * Used to change the isDone boolean of a Task
+     * Used to change the isDone boolean of a dukeClasses.Task
      */
     public void markAsDone(){
         this.isDone = true;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    public boolean getIsDone(){
+        return this.isDone;
     }
 }

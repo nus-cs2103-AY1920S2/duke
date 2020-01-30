@@ -1,3 +1,9 @@
+package dukeClasses;
+
+import dukeClasses.Deadline;
+import dukeClasses.Event;
+import dukeClasses.Task;
+
 import java.io.*;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -65,19 +71,19 @@ public class Storage {
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] temporary = line.split("\\|");
-                if (temporary[0].contains("ToDo")) {
+                if (temporary[0].contains("dukeClasses.ToDo")) {
                     Task t = new ToDo(temporary[2]);
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
                     }
                     listOfTasks.add(t);
-                } else if (temporary[0].contains("Deadline")) {
+                } else if (temporary[0].contains("dukeClasses.Deadline")) {
                     Task t = new Deadline(temporary[2], LocalDate.parse(temporary[3]));
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
                     }
                     listOfTasks.add(t);
-                } else if (temporary[0].contains("Event")) {
+                } else if (temporary[0].contains("dukeClasses.Event")) {
                     Task t = new Event(temporary[2], temporary[3]);
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
