@@ -2,18 +2,36 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The main class of the project.
+ */
 public class Duke {
 
-    Ui ui;
-    Storage storage;
-    TaskList taskList;
+    /**
+     * The Ui object for printing the console UI.
+     */
+    protected Ui ui;
+    /**
+     * The Storage object for loading saved tasks and saving the existing tasks in tasklist.
+     */
+    protected Storage storage;
+    /**
+     * The list of task.
+     */
+    protected TaskList taskList;
 
+    /**
+     * Constructs a new instance of Duke.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(Paths.get(System.getProperty("user.home"), "data", "duke.txt"));
         taskList = new TaskList();
     }
 
+    /**
+     * Starts the chatbot.
+     */
     public void run() {
         storage.loadTasks(taskList);
         ui.printLogo();
@@ -187,6 +205,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Extract the date and time from a string comprising of the date and time.
+     *
+     * @param dateTime The string containing the date and time.
+     * @return An array of size 3 containing the date, start time and end time respectively.
+     * @throws InsufficientArgumentAelitaException if the date or time is missing or incomplete.
+     */
     private String[] extractDateTime(String dateTime) throws InsufficientArgumentAelitaException {
 
         //A local placeholder for date and time of Event {date, start time, end time}
@@ -212,6 +237,12 @@ public class Duke {
         return tmp;
     }
 
+    /**
+     * Reconstructs the description into a string from an array of words.
+     *
+     * @param descriptionTokens An array of words of the description.
+     * @return The string form of the description.
+     */
     private String reconstructDescription(String[] descriptionTokens) {
         StringBuilder builder = new StringBuilder(descriptionTokens[1]);
         for (int i = 2; i < descriptionTokens.length; i++) {
@@ -221,6 +252,11 @@ public class Duke {
         return builder.toString();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments.
+     */
     public static void main(String[] args) {
 
         Duke duke = new Duke();

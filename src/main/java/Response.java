@@ -1,4 +1,8 @@
+/**
+ * An enumeration of possible responses.
+ */
 public enum Response {
+
     ADD_TASK,
     COMMAND_NOT_RECOGNIZED,
     DATE_NOT_RECOGNIZED,

@@ -1,27 +1,50 @@
 import java.util.Scanner;
 
+/**
+ * The UI of the program. It is responsible for interacting with the user.
+ */
 public class Ui {
 
+    /**
+     * The scanner object to get user input.
+     */
     protected Scanner sc;
 
+    /**
+     * Constructs a new instance of the UI.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Gets the user input command from the console using Scanner class.
+     *
+     * @return the user input command.
+     */
     public String getCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints a divider line.
+     */
     public void printDivider() {
         System.out.println("--------------------------------------------------------");
     }
 
+    /**
+     * Prints the greeting message.
+     */
     public void printGreeting() {
         System.out.println("> Hi! I'm Aelita, guardian of Lyoko.");
         System.out.println("  How can I help you?");
         printDivider();
     }
 
+    /**
+     * Prints the logo.
+     */
     public void printLogo() {
         final String logo = "     __             _   _     _\n"
                 + "    /  \\           | | / \\   | |\n"
@@ -33,6 +56,11 @@ public class Ui {
         System.out.println("============================================");
     }
 
+    /**
+     * Prints the relevant response.
+     *
+     * @param response the response.
+     */
     public void printResponse(Response response) {
         String message = "> ";
         switch (response) {
@@ -119,10 +147,22 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void printTask(Task task, int index) {
+    /**
+     * Prints the specified task together with it's index in the TaskList.
+     * Used only by TaskList to list out all tasks within the list.
+     *
+     * @param task  the specified task.
+     * @param index the respective index.
+     */
+    protected void printTask(Task task, int index) {
         System.out.println("  " + index + "." + task);
     }
 
+    /**
+     * Prints the specified task on the user interface.
+     *
+     * @param task the specified task.
+     */
     public void printTask(Task task) {
         System.out.println("  " + task);
     }
