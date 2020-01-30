@@ -11,14 +11,6 @@ public class Task {
         this.done = true;
     }
 
-    public boolean getStatus() {
-        return this.done;
-    }
-
-    public String getTask() {
-        return this.task;
-    }
-
     @Override
     public String toString() {
         if (done) {
@@ -26,9 +18,5 @@ public class Task {
         } else {
             return String.format("[x] %s", this.task);
         }
-    }
-
-    public String toFormatString() {
-        return "";
     }
 }

@@ -1,10 +1,8 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -19,12 +17,6 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        try {
-            load(tasks);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
-
 
         while (sc.hasNext()) {
             try {
@@ -44,33 +36,33 @@ public class Duke {
                     int idx = Integer.parseInt(input[1]) - 1;
 
                     done(idx);
-                    save(tasks);
                 } else if (userCommand.equals("todo")) {
                     if (input.length == 1) {
-                        throw new EmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
+                        throw new EmptyDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     String task = t.substring(5);
 
                     toDo(task);
-                    save(tasks);
                 } else if (userCommand.equals("deadline")) {
                     if (input.length == 1) {
-                        throw new EmptyDescriptionException("OOPS!!! The description of a deadline cannot be empty.");
+                        throw new EmptyDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
-                    String deadline = t.split(" /by")[1].substring(1);
+                    String deadline = t.split("/by")[1].substring(1);
                     String task = t.split(" /by")[0].split(" ", 2)[1];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    LocalDateTime deadlineDate = LocalDateTime.parse(deadline, formatter);
 
-                    deadLine(task, deadline);
-                    save(tasks);
+                    deadLine(task, deadlineDate);
                 } else if (userCommand.equals("event")) {
                     if (input.length == 1) {
-                        throw new EmptyDescriptionException("OOPS!!! The description of an event cannot be empty.");
+                        throw new EmptyDescriptionException("☹ OOPS!!! The description of an event cannot be empty.");
                     }
-                    String event = t.split(" /at")[1].substring(1);
+                    String event = t.split("/at")[1].substring(1);
                     String task = t.split(" /at")[0].split(" ", 2)[1];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    LocalDateTime eventDate = LocalDateTime.parse(event, formatter);
 
-                    event(task, event);
-                    save(tasks);
+                    event(task, eventDate);
                 } else if (userCommand.equals("delete")) {
                     int idx = Integer.parseInt(input[1]) - 1;
                     if (tasks.size() <= idx || idx < 0) {
@@ -78,12 +70,14 @@ public class Duke {
                     }
 
                     delete(idx);
-                    save(tasks);
                 }   else {
                     throw new CommandNotFoundException("Sorry I don't recognize this command SIA!");
                 }
-            } catch (DukeException | IOException ex) {
+            } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
+                continue;
+            } catch (DateTimeParseException ex) {
+                System.out.println("Remember the format is dd/MM/yyyy HHmm. Try again!");
                 continue;
             }
         }
@@ -113,7 +107,7 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
     }
 
-    public static void deadLine(String task, String deadline) {
+    public static void deadLine(String task, LocalDateTime deadline) {
         System.out.println("Got it. I've added this task:");
         Deadline newDeadline = new Deadline(task, deadline);
         System.out.println("   " + newDeadline);
@@ -121,7 +115,7 @@ public class Duke {
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
     }
 
-    public static void event(String task, String event) {
+    public static void event(String task, LocalDateTime event) {
         System.out.println("Got it. I've added this task:");
         Event newEvent = new Event(task, event);
         System.out.println("   " + newEvent);
@@ -134,39 +128,5 @@ public class Duke {
         System.out.println(tasks.get(idx));
         tasks.remove(tasks.get(idx));
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
-    }
-
-    public static void save(ArrayList<Task> tasks) throws IOException {
-        String filePath = "data/duke.txt";
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task: tasks) {
-            fw.write(task.toFormatString() + "\n");
-        }
-        fw.close();
-    }
-
-    public static void load(ArrayList<Task> tasks) throws FileNotFoundException {
-        String filePath = "data/duke.txt";
-        File file = new File(filePath);
-        Scanner sc = new Scanner(file);
-
-        while (sc.hasNext()) {
-            String line = sc.nextLine();
-            char taskType = line.charAt(0);
-            char taskCondition = line.charAt(4);
-            String taskContent = line.substring(8);
-            String[] taskAndTime = taskContent.split("\\|");
-            if (taskType == 'T') {
-                tasks.add(new Todo(taskContent));
-            } else if (taskType == 'D') {
-                tasks.add(new Deadline(taskAndTime[0], taskAndTime[1]));
-            } else if (taskType == 'E') {
-                tasks.add(new Event(taskAndTime[0], taskAndTime[1]));
-            }
-
-            if (taskCondition == '1') {
-                tasks.get(tasks.size() - 1).finishTask();
-            }
-        }
     }
 }
