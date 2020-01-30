@@ -24,6 +24,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String encoder() {
         return "";
     }

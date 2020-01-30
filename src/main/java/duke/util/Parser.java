@@ -64,4 +64,11 @@ public class Parser {
         sc.close();
         return ret;
     }
+
+    public boolean isFindRequest(String str) {
+        Scanner sc = new Scanner(str);
+        boolean ret = sc.hasNext() && sc.next().equals("find");
+        sc.close();
+        return ret;
+    }
 }

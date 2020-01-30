@@ -45,6 +45,11 @@ public class Duke {
             return;
         }
 
+        if (parser.isFindRequest(str)) {
+            TaskList.findItem(str, storedItems);
+            return;
+        }
+
         int markPos = parser.isMarkingTaskRequest(str);
         int delPos = parser.isDeleteTaskRequest(str);
         if (markPos != -2) {

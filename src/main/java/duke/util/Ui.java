@@ -70,4 +70,17 @@ public class Ui {
                 padding + "Please type something. Don't leave it blank, plsss!\n" +
                 padding + uselessLine);
     }
+
+    public static void printFoundList(ArrayList<Task> foundList) {
+        System.out.println(String.format("%s%s", padding, uselessLine));
+        System.out.println(String.format("%sHere are the matching tasks in your list:", padding));
+        if (foundList.isEmpty()) {
+            System.out.println(String.format("%s~~~~~Oops! There are no matching tasks!", padding));
+        } else {
+            int i = 1;
+            for (Task task : foundList)
+                System.out.println(String.format("%s%d. %s", padding, i++, task));
+        }
+        System.out.println(String.format("%s%s", padding, uselessLine));
+    }
 }
