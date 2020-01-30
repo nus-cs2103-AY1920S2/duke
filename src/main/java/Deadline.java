@@ -1,24 +1,27 @@
-public class Deadline extends Task {
-    protected String deadline;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Deadline extends Task implements TimeParser {
+    protected LocalDate deadline;
 
     Deadline(String unparsed) {
         String[] split = unparsed.split("/by");
         this.description = split[0].trim();
-        this.deadline = split[1].trim();
+        this.deadline = TimeParser.parseDate(split[1].trim());
         super.TYPE = TaskType.DEADLINE;
     }
 
     Deadline(String status, String description, String deadline) {
         super(status, description);
         super.TYPE = TaskType.DEADLINE;
-        this.deadline = deadline;
+        this.deadline = TimeParser.parseDate(deadline);
     }
 
-    public String getTaskTime() {
-        return deadline;
+    public LocalDate getTaskTime() {
+        return this.deadline;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }
