@@ -6,6 +6,12 @@ public class ToDo  extends Task{
     }
 
     @Override
+    public String toFile() {
+        int doneInt = done ? 1 : 0;
+        return "T , " + doneInt + " , " + name;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

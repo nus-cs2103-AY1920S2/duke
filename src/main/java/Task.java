@@ -11,6 +11,11 @@ public class Task {
         this.done = !this.done;
     }
 
+    public String toFile() {
+        int doneInt = done ? 1 : 0;
+        return "Q , " + doneInt + " , " + name;
+    }
+
     @Override
     public String toString() {
         String symbol;
