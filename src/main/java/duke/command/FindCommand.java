@@ -6,7 +6,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 
 import duke.ui.Ui;
-
+/**
+ * Represents the command of finding a task in the task list. A <code>FindCommand</code> object corresponds to the
+ * command of displaying the current task list e.g., <code>"book"</code>
+ */
 public class FindCommand extends Command{
     String keyword;
     public FindCommand(String keyword){
