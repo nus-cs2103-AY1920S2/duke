@@ -1,4 +1,4 @@
-4LC3N v0.0.1
+4LC3N v0.1.0
       _.-'''''-._
     /=_.-~-~-~-._=\      .-.  _
    :    _     _    :     | | / )
@@ -92,6 +92,14 @@ You have completed:
 5. [T][✗] borrow book 
 6. [D][✓] return book (by: Sunday)
 7. [E][✗] project meeting (at: Mon 2-4pm)
+
+> ENTER your input:
+I have found these tasks!
+
+1. [T][✓] read book 
+2. [D][✓] return book (by: June 6th)
+5. [T][✗] borrow book 
+6. [D][✓] return book (by: Sunday)
 
 > ENTER your input:
 
