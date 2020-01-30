@@ -64,8 +64,7 @@ public class Duke {
     public static void main(String[] args) {
         BufferedReader br = null;
 
-        Task[] taskArray = new Task[200];
-        Integer totalTask = 0;
+        ArrayList<Task> taskList = new ArrayList<Task>();
         int nextInsertPin = 0;
 
         try {
@@ -88,28 +87,26 @@ public class Duke {
                 }
                 else if (viewListKey.equals(input)) {
                     String listOverView = line + viewListGreeting;
-                    for (int i = 0; i < taskArray.length; i++) {
-                        if (taskArray[i] == null) {
+                    for (int i = 0; i < taskList.size(); i++) {
+                        if (taskList.get(i) == null) {
                             continue;
                         }
                         listOverView = listOverView + Integer.toString(i + 1) + "."
-                                + taskArray[i].toString() + "\n";
+                                + taskList.get(i).toString() + "\n";
                     }
                     listOverView = listOverView + line;
                     System.out.println(listOverView);
                 }
                 else if (deleteMatcher.find()) {
                     int deletedTaskIndex = Integer.parseInt(deleteMatcher.group(3)) - 1;
-                    Task deletedTask = taskArray[deletedTaskIndex];
-                    taskArray[deletedTaskIndex] = null;
-
-                    totalTask --;
+                    Task deletedTask = taskList.get(deletedTaskIndex);
+                    taskList.remove(deletedTaskIndex);
                     System.out.println(line + deleteTaskStart + " " + deletedTask.toString() + "\n" +
-                            "Now you have " + Integer.toString(totalTask) + " tasks in the list.\n" + line);
+                            "Now you have " + Integer.toString(taskList.size()) + " tasks in the list.\n" + line);
                 }
                 else if (finishMatcher.find()) {
                     int finishedTaskIndex = Integer.parseInt(finishMatcher.group(3)) - 1;
-                    Task finishedTask = taskArray[finishedTaskIndex];
+                    Task finishedTask = taskList.get(finishedTaskIndex);
                     finishedTask.markAsDone();
 
                     System.out.println(line + taskCompleteCongrats + " " + finishedTask.toString() + "\n" + line);
@@ -120,10 +117,9 @@ public class Duke {
                         System.out.println(line + "OOPS!!! The description of a todo cannot be empty.\n" + line);
                     } else {
                         ToDoTask currentTask = new ToDoTask(description);
-                        totalTask ++;
-                        String addTaskEndStr = addTaskEnd.insert(13, totalTask).toString();
-                        taskArray[nextInsertPin] = currentTask;
-                        nextInsertPin ++;
+                        taskList.add(currentTask);
+
+                        String addTaskEndStr = addTaskEnd.insert(13, taskList.size()).toString();
                         System.out.println(line + addTaskStart + currentTask.toString() + "\n" +
                                 addTaskEndStr + line);
                     }
@@ -131,26 +127,23 @@ public class Duke {
                 else if (deadlineMatcher.find()){
                     String description = deadlineMatcher.group(2).trim();
                     String by = deadlineMatcher.group(4).trim();
-                    totalTask ++;
-                    String addTaskEndStr = addTaskEnd.insert(13, totalTask).toString();
                     DeadLineTask currentTask = new DeadLineTask(description, by);
+                    taskList.add(currentTask);
 
-                    taskArray[nextInsertPin] = currentTask;
-                    nextInsertPin ++;
+                    String addTaskEndStr = addTaskEnd.insert(13, taskList.size()).toString();
                     System.out.println(line + addTaskStart + currentTask.toString() + "\n" +
                             addTaskEndStr + line);
                 }
                 else if (eventMatcher.find()){
                     String description = eventMatcher.group(2).trim();
                     String at = eventMatcher.group(4).trim();
-                    totalTask ++;
-                    String addTaskEndStr = addTaskEnd.insert(13, totalTask).toString();
                     EventTask currentTask = new EventTask(description, at);
+                    taskList.add(currentTask);
 
-                    taskArray[nextInsertPin] = currentTask;
-                    nextInsertPin ++;
+                    String addTaskEndStr = addTaskEnd.insert(13, taskList.size()).toString();
                     System.out.println(line + addTaskStart + currentTask.toString() + "\n" +
                             addTaskEndStr + line);
+
                 }
                 else {
                     System.out.println(line + "OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
