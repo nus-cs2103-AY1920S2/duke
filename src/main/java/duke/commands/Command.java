@@ -55,7 +55,7 @@ public class Command {
                     String output = "";
                     for (Task t : taskList.getTaskList()) {
                         output = index + ". " + t.toString();
-                        System.out.println(output);
+                        ui.showMessage(output);
                         index++;
                     }
                 }
@@ -132,6 +132,29 @@ public class Command {
                 Task event = new Event(eventDescription, at);
                 TaskList.addTask(event, taskList);
                 ui.showMessage("I've added the event to the list!");
+                break;
+            }
+
+            case "find": {
+                try {
+                    String findElement = this.fullInput.substring(5);
+                    boolean hasAtLeastOne = false;
+                    int index = 1;
+                    String output = "";
+                    for (Task t : taskList.getTaskList()) {
+                        if (t.toString().contains(findElement)) {
+                            hasAtLeastOne = true;
+                            output = index + ". " + t.toString();
+                            ui.showMessage(output);
+                        }
+                        index++;
+                    }
+                    if (!hasAtLeastOne) {
+                        ui.showMessage("Couldn't find any related tasks! Sorry.");
+                    }
+                } catch (Exception e) {
+                    throw new DukeException("Need more arguments boi");
+                }
                 break;
             }
 
