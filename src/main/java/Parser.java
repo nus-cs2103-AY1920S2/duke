@@ -28,6 +28,8 @@ public class Parser {
                     return new ShowTasksCommand();
                 case "todo":
                     return parseTodo(getDetails(command, firstWord));
+                case "find":
+                    return parseFind(getDetails(command, firstWord));
                 default:
                     return new InvalidCommand();
             }
@@ -75,6 +77,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new InvalidFormatCommand();
         }
+    }
+
+    private static Command parseFind(String details) {
+        return new FindCommand(details);
     }
 
     private static String getDetails(String command, String firstWord) throws IndexOutOfBoundsException {
