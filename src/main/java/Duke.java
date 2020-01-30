@@ -9,7 +9,7 @@ public class Duke {
 
         Ui.showLogo();
         TaskList tasklist = Storage.load();
-        Ui.showWelcomeMessage();
+        System.out.println(Ui.welcomeMessage);
 
         boolean hasNotExited = true;
         while (hasNotExited) {
@@ -28,7 +28,7 @@ public class Duke {
             System.out.println("");
         }
 
-        Ui.showExitMessage();
+        System.out.println(Ui.exitMessage);
         scanner.close();
     }
 }

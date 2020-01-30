@@ -91,10 +91,10 @@ public class Task {
      */
     public String markDone() {
         if (this.isDone) {
-            return "Oops! This task was already marked as done!";
+            return Ui.taskAlreadyDone;
         }
         this.isDone = true;
-        return "Marked this task as done:\n    " + this;
+        return Ui.markedTaskDone + this;
     }
 
     /**

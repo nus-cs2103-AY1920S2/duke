@@ -1,5 +1,5 @@
 /**
- * The TaskList class is a class that encapsulates a list containing various tasks, and handles operations relating
+ * The TaskList class is a class that encapsulates a list containing various tasks, and handles methods relating
  * to creating and deleting tasks.
  */
 import java.util.ArrayList;
@@ -21,8 +21,7 @@ public class TaskList {
      */
     public String add(Task task) {
         this.list.add(task);
-        return "New task has been added:\n    " + task
-                + "\nNow you have "+ this.list.size() + (this.list.size() == 1 ? " task" : " tasks") + " in the list.";
+        return Ui.newTaskMessage + task + Ui.taskCountMessage(this.list.size());
     }
 
     /**
@@ -33,7 +32,7 @@ public class TaskList {
      */
     public String newTodo(boolean isDone, String taskName) {
         Task task = new Todo(isDone, taskName);
-        return add(task);
+        return this.add(task);
     }
 
     /**
@@ -45,7 +44,7 @@ public class TaskList {
      */
     public String newEvent(boolean isDone, String taskName, String taskTime) {
         Task task = new Event(isDone, taskName, taskTime);
-        return add(task);
+        return this.add(task);
     }
 
     /**
@@ -57,7 +56,7 @@ public class TaskList {
      */
     public String newDeadline(boolean isDone, String taskName, String taskTime) {
         Task task = new Deadline(isDone, taskName, taskTime);
-        return add(task);
+        return this.add(task);
     }
 
     /**
@@ -75,10 +74,9 @@ public class TaskList {
      * @return a String message indicating if the deletion is successful.
      */
     public String deleteTask(int taskID) {
-        String output = "Removed this task:\n    " + this.list.get(taskID - 1);
+        String output = Ui.deleteTaskMessage + this.list.get(taskID - 1);
         this.list.remove(taskID - 1);
-        output = output + "\nNow you have "+ this.list.size()
-                + (this.list.size() == 1 ? " task" : " tasks") + " in the list.";
+        output = output + Ui.taskCountMessage(this.list.size());
         return output;
     }
 
