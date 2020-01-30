@@ -51,8 +51,8 @@ public class TaskSchedule {
             LocalDateTime date = LocalDateTime.parse(scheduleString, formatter);
             return new TaskSchedule(date);
         } catch (DateTimeParseException e) {
-            throw new DukeInvalidDateFormatException("OOPS! It seems that your date " +
-                    "is not properly formatted. The date should be in form of 'dd-MM-yyyy HH:mm'");
+            throw new DukeInvalidDateFormatException("OOPS! It seems that your date "
+                    + "is not properly formatted. The date should be in form of 'dd-MM-yyyy HH:mm'");
         }
     }
 

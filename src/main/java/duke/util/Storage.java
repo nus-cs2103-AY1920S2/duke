@@ -29,7 +29,7 @@ public class Storage {
 
     /**
      * Constructs a Storage instance.
-     * @param filePath
+     * @param filePath The file path where the file is located.
      */
 
     public Storage(String filePath) {
