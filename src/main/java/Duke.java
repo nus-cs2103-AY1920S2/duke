@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -62,9 +63,9 @@ public class Duke {
                         if (keyword.equals("todo")) {
                             list.add(new Todo(arrSplit2[0]));
                         } else if (keyword.equals("deadline")) {
-                            list.add(new Deadline(arrSplit2[0], arrSplit2[1]));
+                            list.add(new Deadline(arrSplit2[0], LocalDate.parse(arrSplit2[1])));
                         } else if (keyword.equals("event")) {
-                            list.add(new Event(arrSplit2[0], arrSplit2[1]));
+                            list.add(new Event(arrSplit2[0], LocalDate.parse(arrSplit2[1])));
                         }
 
                         System.out.println("Got it. I 've added this task:");
