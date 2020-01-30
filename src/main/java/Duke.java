@@ -41,6 +41,7 @@ public class Duke {
                 case "todo":
                 case "deadline":
                 case "event":
+                    //hi
                     addTaskToList(taskList, splitInput);
                     break;
                 default:
