@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks in the list
+     * Returns the number of tasks in the list.
      * @return the number of tasks in the list
      */
     public int getCount() {

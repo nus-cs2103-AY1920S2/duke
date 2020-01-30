@@ -21,7 +21,7 @@ public class Event extends Task {
         super(description);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
-        String times[] = timeRange.split(" to ");
+        String[] times = timeRange.split(" to ");
 
         startTime = format.parse(times[0], new ParsePosition(0));
         endTime = format.parse(times[1], new ParsePosition(0));

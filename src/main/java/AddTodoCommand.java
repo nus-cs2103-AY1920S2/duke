@@ -4,7 +4,7 @@
  */
 public class AddTodoCommand extends AddCommand {
     /**
-     * Creates an AddEventCommand based on the description of the task
+     * Creates an AddEventCommand based on the description of the task.
      *
      * @param description the description of the event
      */

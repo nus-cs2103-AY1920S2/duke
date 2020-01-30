@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Represents a task with a description and a deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /**
      * The deadline of the task.
@@ -16,8 +16,8 @@ public class Deadline extends Task{
      * Constructor for Deadline that takes in a description of the task and
      * the deadline for the task.
      *
-     * @param description
-     * @param deadline
+     * @param description the description of the task
+     * @param deadline the deadline of the task
      */
     public Deadline(String description, String deadline) {
         super(description);

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskListTest {
     @Test
-    public void AddTaskToTaskListTest(){
+    public void addTaskToTaskListTest() {
         TaskList tasks = new TaskList();
         Task task = new Task("Dummy");
 
@@ -15,7 +15,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void getTaskCounterTest(){
+    public void getTaskCounterTest() {
         TaskList tasks = new TaskList();
         Task task = new Task("Dummy");
 
