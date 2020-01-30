@@ -2,28 +2,50 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static String horizontalLine = "__________________________________________";
+    public final static String LINE = "__________________________________________";
     private static Storage storage;
+    private Ui ui;
+    private TaskList tasks;
 
-    Duke(String filePath) throws FileNotFoundException {
+    Duke(String filePath) throws DukeException {
+        ui = new Ui();
         storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            // shown when current saved task list in the txt file is empty
+            tasks = new TaskList();
+            // therefore, there is a need to make a new task list.
+        }
     }
 
-    public static void main(String[] args) throws DateTimeParseException, FileNotFoundException {
-        new Duke("data/duke.txt");
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws DateTimeParseException, FileNotFoundException, DukeException {
+        new Duke("data/duke.txt").run();
         List<Task> list = storage.load();
         Scanner scan = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I am \n" + logo + "\n" + "What can I do for you?");
         while (scan.hasNextLine()) {
             try {
                 String command = scan.nextLine();

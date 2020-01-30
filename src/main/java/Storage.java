@@ -58,10 +58,10 @@ import java.util.Scanner;
                 return savedList;
         }
 
-        public void save(List<Task> list) throws IOException {
+        public void save(TaskList taskList) throws IOException {
             File file = new File("data/duke.txt");
                 PrintWriter out = new PrintWriter(file);
-                for (Task task : list) {
+                for (Task task : taskList.getTaskList()) {
                     if (task instanceof ToDo) {
                         out.write("T | " + task.getStatusIcon() + " | " + task.getTaskName() + NEWLINE);
                     } else if (task instanceof Event) {
