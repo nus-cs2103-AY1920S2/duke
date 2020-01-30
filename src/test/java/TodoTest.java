@@ -1,8 +1,6 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 class TodoTest {
-    @Test
-    public void test() {
+    public static void main(String[] args) {
         Todo todo = new Todo("return book");
         assertEquals(todo.toString().trim(),"[T][✗] return book");
         assertEquals(todo.replace().trim(),"[T][✗] return book");

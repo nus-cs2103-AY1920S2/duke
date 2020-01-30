@@ -21,4 +21,6 @@ src/main/java/Event.class
 src/main/java/Todo.class
 src/main/java/Deadline.class
 src/main/java/IllegalInstructionException.class
+src/main/java/checkstyle-8.29-all.jar
+src/main/java/google_checks.xml
 
