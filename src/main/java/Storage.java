@@ -24,15 +24,15 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split("/");
                 switch (task[0]) {
-                    case "T":
-                        taskList.add(new Todo(task[2]));
-                        break;
-                    case "D":
-                        taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
-                        break;
-                    case "E":
-                        taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
-                        break;
+                case "T":
+                    taskList.add(new Todo(task[2]));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
+                    break;
+                case "E":
+                    taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
+                    break;
                 }
                 if (task[1].equals("true")) {
                     try {
