@@ -79,4 +79,27 @@ public class Ui {
         printBreak();
     }
 
+    /**
+     * Shows all Tasks that matches the key word.
+     *
+     * @param keyWord String of key word.
+     * @param tasks Task list.
+     */
+    public void find(String keyWord, TaskList tasks) {
+        printBreak();
+        System.out.println("    Here are the matching tasks in your list:");
+        boolean isfailed = true;
+        for(int i = 1; i <= tasks.getTaskNumber(); i++) {
+            Task currTask = tasks.getTask(i - 1);
+            if (currTask.getDescription().contains(keyWord)) {
+                System.out.println("    " + i + "." + currTask);
+                isfailed = false;
+            }
+        }
+        if (isfailed) {
+            System.out.println("    None.");
+        }
+        printBreak();
+    }
+
 }
