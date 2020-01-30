@@ -1,4 +1,2 @@
-T/1/read book
-D/1/return book/June 6th
-D/1/project meeting/Aug 6th 2-4pm
-T/0/join sports club
+T/1/dance
+D/0/homework/2020-02-02

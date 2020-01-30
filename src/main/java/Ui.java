@@ -7,7 +7,7 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public String showWelcome() {
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,13 +17,12 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    public String showLoadingError() {
-        System.out.println("OOPS! An error occurred while loading from given file.")
+    public void showLoadingError() {
+        System.out.println("OOPS! An error occurred while loading from given file.");
     }
 
     public void endDuke() {
         System.out.println("Bye. Hope to see you again soon!");
-        break;
     }
 
     public String readInput() {
