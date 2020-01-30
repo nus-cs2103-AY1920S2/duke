@@ -21,12 +21,4 @@ public class Event extends Task {
         SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy HH:mm");
         return "[E]" + super.toString() + " (at: " + format.format(startTime) + " to " + format.format(endTime) + ")";
     }
-
-    @Override
-    public String encode() {
-        return "E | " +
-                (isDone ? 1 : 0) +
-                " | " + description +
-                " | " + timeRange;
-    }
 }

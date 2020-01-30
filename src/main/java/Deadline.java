@@ -19,12 +19,4 @@ public class Deadline extends Task{
 
         return "[D]" + super.toString() + " (by: " + format.format(time) + ")";
     }
-
-    @Override
-    public String encode() {
-        return "D | " +
-                (isDone ? 1 : 0) +
-                " | " + description +
-                " | " + time;
-    }
 }
