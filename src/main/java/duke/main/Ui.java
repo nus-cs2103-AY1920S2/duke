@@ -72,7 +72,7 @@ public class Ui {
 
     public static void calendarDisplayItems(LocalDate calendarDate, List<String> lines) {
         print("Here are the events/deadlines in your list on " +
-                calendarDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ":");
+            calendarDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ":");
         print(lines);
     }
 

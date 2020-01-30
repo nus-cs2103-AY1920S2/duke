@@ -9,7 +9,7 @@ import duke.task.Task;
 
 public class EventCommand extends TaskCommand {
     public static boolean run(TaskList taskList, String param) throws MissingDescriptionException
-            , MissingDeadlineParamException {
+        , MissingDeadlineParamException {
         if (param.equals("")) {
             throw new MissingDescriptionException();
         } else if (!param.contains(" /at ")) {

@@ -17,7 +17,7 @@ public class Deadline extends Task {
             LocalDateTime outputDt = LocalDateTime.parse(by, inputDtf);
             DateTimeFormatter outputDtF = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
             this.by = LocalDateTime.parse(outputDt.format(outputDtF),
-                    DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
+                DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
         } catch (DateTimeException ex) {
             throw new InvalidArgumentException();
         }
@@ -26,6 +26,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a")) + ")";
+            + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a")) + ")";
     }
 }
