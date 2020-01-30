@@ -8,7 +8,7 @@ public class Duke {
     /**
      * Main functional object Duke
      */
-    static DukeMain mainObj = new DukeMain();
+    static DukeFile mainObj = new DukeFile();
     static Responder r = new Responder();
 
     private static class Responder {
@@ -109,6 +109,7 @@ public class Duke {
         if (t != null) {
             r.respond("Got it. I've added this task:", "  " + t.toString(),
                     "Now you have " + mainObj.count() + " tasks in the list.");
+            mainObj.save();
             return true;
         } else {
             return false;
@@ -154,9 +155,11 @@ public class Duke {
                     break;
                 case "done":
                     markAsDone(Integer.parseInt(terms.next()));
+                    mainObj.save();
                     break;
                 case "delete":
                     remove(Integer.parseInt(terms.next()));
+                    mainObj.save();
                     break;
                 default:
                     r.respond(Responder.dunno);
