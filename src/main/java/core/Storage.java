@@ -1,6 +1,5 @@
 package core;
 
-import com.google.gson.Gson;
 import dukexception.DukeException;
 import dukexception.StorageException;
 import task.Task;
