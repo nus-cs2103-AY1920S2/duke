@@ -91,14 +91,14 @@ public class Duke {
         try {
             switch (first) {
             case "todo":
-                mainObj.add(t = new ToDoTask(terms.nextLine()));
+                mainObj.add(t = new ToDoTask(terms.nextLine().trim()));
                 break;
             case "deadline":
-                mainObj.add(t = new DeadlineTask(terms.useDelimiter("/").next(), terms.useDelimiter(" ").next(),
+                mainObj.add(t = new DeadlineTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next(),
                         terms.nextLine()));
                 break;
             case "event":
-                mainObj.add(t = new EventTask(terms.useDelimiter("/").next(), terms.useDelimiter(" ").next(),
+                mainObj.add(t = new EventTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next(),
                         terms.nextLine()));
                 break;
             default:
@@ -129,6 +129,11 @@ public class Duke {
         r.respond(Responder.taskDoneNote, mainObj.get(num - 1).toString());
     }
 
+    static void remove(int num) {
+        r.respond("Got it. I've added this task:", "  " + mainObj.remove(num - 1).toString(),
+                    "Now you have " + mainObj.count() + " tasks in the list.");
+    }
+
     static boolean isCommand(String cmd) {
         return cmd.length() > 0;
     }
@@ -137,21 +142,28 @@ public class Duke {
         Scanner terms = new Scanner(cmd);
         String first = terms.next();
 
-        if (!addTask(first, terms)) {
-            switch (first) {
-            case "exit":
-                r.respond(Responder.bye);
-                System.exit(0);
-                break;
-            case "list":
-                listTask();
-                break;
-            case "done":
-                markAsDone(Integer.parseInt(terms.next()));
-                break;
-            default:
-                r.respond(Responder.dunno);
+        try {
+            if (!addTask(first, terms)) {
+                switch (first) {
+                case "exit":
+                    r.respond(Responder.bye);
+                    System.exit(0);
+                    break;
+                case "list":
+                    listTask();
+                    break;
+                case "done":
+                    markAsDone(Integer.parseInt(terms.next()));
+                    break;
+                case "delete":
+                    remove(Integer.parseInt(terms.next()));
+                    break;
+                default:
+                    r.respond(Responder.dunno);
+                }
             }
+        } catch (Exception e) {
+            r.respond(Responder.dunno);
         }
     }
 

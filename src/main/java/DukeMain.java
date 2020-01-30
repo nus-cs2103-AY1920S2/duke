@@ -11,6 +11,10 @@ public class DukeMain {
         return this.lst.get(idx);
     }
 
+    Task remove(int idx) {
+        return this.lst.remove(idx);
+    }
+
     int count() {
         return this.lst.size();
     }
