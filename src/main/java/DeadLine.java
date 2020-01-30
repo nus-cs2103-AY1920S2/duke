@@ -11,4 +11,7 @@ public class DeadLine extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+    public String toFileString() {
+        return "D " + super.toFileString() + " | " + this.by;
+    }
 }

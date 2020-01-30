@@ -8,22 +8,22 @@ public class DukeException extends Exception {
         String str = "";
         switch (msg) {
             case "todo":
-                str = "Gomenanasai~ Da description of a todo cannot be empty desu!! >:(";
+                str = "Sorry~ The description of a todo cannot be empty desu!! >:(";
                 break;
             case "deadline" :
-                str = "Gomenanasai~ Da description of a deadline cannot be empty desu!! >:(";
+                str = "Sorry~ The description of a deadline cannot be empty desu!! >:(";
                 break;
             case "event"   :
-                str = "Gomenanasai~ Da description of a event cannot be empty desu!! >:(";
+                str = "Sorry~ The description of a event cannot be empty desu!! >:(";
                 break;
             case "done" :
-                str = "Gomenanasai~ Da task number is invalid!! >:(";
+                str = "Sorry~ The task number is invalid!! >:(";
                 break;
             case "invalid" :
-                str = "Gomenanasai~ Boku dont know what this means desu >.<";
+                str = "Sorry~ I don't know what this means >.<";
                 break;
             case "delete" :
-                str = "Gomenanasai~ Da task number is invalid!! >:(";
+                str = "Sorry~ The task number is invalid!! >:(";
                 break;
         }
         return str;
