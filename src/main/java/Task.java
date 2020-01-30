@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -61,6 +62,7 @@ public abstract class Task {
 
 class TodoTask extends Task {
     protected LocalDateTime time;
+
     public TodoTask(String[] inputArr) throws Exception {
         this.type = "todo";
         if (inputArr.length < 2) {
@@ -75,15 +77,27 @@ class TodoTask extends Task {
         }
         int lastAt = description.lastIndexOf(" at ");
         if (lastAt == -1) {
-            throw new Exception("Keyword \"at\" missing");
+            throw new Exception("Keyword \"by\" missing");
         } else {
-            String sub = this.description.substring(lastAt + 4);
-            this.time = LocalDateTime.parse(sub, DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
-            this.description = this.description.substring(0, lastAt + 3) + ' '
-                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma "));
+            try {
+                this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
+                        DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
 
+            } catch (DateTimeParseException e) {
+                try {
+                    this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
+                            DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+                } catch (DateTimeParseException e2) {
+                    System.out.println("Error: unable to decipher date & time input.");
+                    e.printStackTrace();
+                }
+            }
+            if (time != null) {
+                this.description = this.description.substring(0, lastAt + 3) + ' '
+                        + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+                size++;
+            }
         }
-        size++;
     }
 
     @Override
@@ -123,14 +137,26 @@ class DeadlineTask extends Task {
         if (lastBy == -1) {
             throw new Exception("Keyword \"by\" missing");
         } else {
-            String sub = this.description.substring(lastBy + 4);
-            this.time = LocalDateTime.parse(sub, DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
-            this.description = this.description.substring(0, lastBy + 3) + ' '
-                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma "));
-        }
-        size++;
-    }
+            try {
+                this.time = LocalDateTime.parse(this.description.substring(lastBy + 4),
+                        DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
 
+            } catch (DateTimeParseException e) {
+                try {
+                    this.time = LocalDateTime.parse(this.description.substring(lastBy + 4),
+                            DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+                } catch (DateTimeParseException e2) {
+                    System.out.println("Error: unable to decipher date & time input.");
+                    e.printStackTrace();
+                }
+            }
+            if (time != null) {
+                this.description = this.description.substring(0, lastBy + 3) + ' '
+                        + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+                size++;
+            }
+        }
+    }
     @Override
     public String toString() {
         return " DEADLINE" + super.toString();
