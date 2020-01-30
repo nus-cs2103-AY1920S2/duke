@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,89 +10,77 @@ import java.time.LocalDate;
 
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I 'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("________________________________________");
+    protected Ui ui;
+    //protected Storage storage;
+    protected Tasklist tasklist;
 
+    public Duke(String file) {
+        this.ui = new Ui();
+        //this.storage = new Storage(file);
+        this.tasklist = new Tasklist();
+    }
+
+    public void run() throws DukeException {
+        this.ui.printIntro();
         Scanner myScanner = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
-
-        readFile("./list.txt", list);
 
         while (true) {
-
             String word = myScanner.nextLine();
-            String[] arrSplit = word.split(" " , 2);
-            String keyword = arrSplit[0];
-
             try {
-
+                String[] parsed = TextParser.myFirstParser(word);
+                String keyword = parsed[0];
                 if (keyword.equals("bye")) {
-                    writeFile("./list.txt", list);
-                    System.out.println("Bye. Hope to see you again soon!");
+                    // writeFile("./list.txt", list);
+                    this.ui.printMessage("Bye. Hope to see you again soon!");
                     break;
                 } else if (keyword.equals("list")) {
-                    System.out.println("Here are the task in your list");
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.println(i + 1 + ". " + list.get(i));
-                    }
-
+                    this.ui.printMessage("Here are the task in your list");
+                    this.tasklist.printList();
                 } else if (keyword.equals("done")) {
-                    int taskNumber = Integer.valueOf(arrSplit[1]);
-                    list.get(taskNumber - 1).markAsDone();
-
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(list.get(taskNumber - 1).getStatusIcon() +
-                            " " + list.get(taskNumber - 1).getTask());
-
+                    int taskNumber = Integer.valueOf(parsed[1]);
+                    this.tasklist.markDone(taskNumber);
+                    this.ui.printMessage("Nice! I've marked this task as done:");
+                    this.ui.printMessage("" + taskNumber + ". " + this.tasklist.getTask(taskNumber));
                 } else if (keyword.equals("delete")) {
-                    int taskNumber = Integer.valueOf(arrSplit[1]);
-                    System.out.println("Noted. I've removed this task");
-                    System.out.println(list.get(taskNumber - 1));
-                    list.remove(taskNumber - 1);
-                    System.out.println("Now you have " + list.size() + " in the list.");
-
+                    int taskNumber = Integer.valueOf(parsed[1]);
+                    this.ui.printMessage("Noted. I've removed this task");
+                    this.ui.printMessage("" + this.tasklist.getTask(taskNumber));
+                    this.tasklist.removeTask(taskNumber);
+                    this.ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
                 } else if (keyword.equals("todo") || keyword.equals("deadline") || keyword.equals("event")) {
-
-                    if (arrSplit.length <= 1) {
+                    if (parsed.length <= 1) {
                         throw new DukeException("I think u need more arguments");
                     } else {
-
-                        String therest = arrSplit[1];
-                        String[] arrSplit2 = therest.split("/", 2);
-
+                        String word2 = parsed[1];
+                        String[] parsed2 = TextParser.mySecondParser(word2);
                         if (keyword.equals("todo")) {
-                            list.add(new Todo(arrSplit2[0]));
+                            this.tasklist.addTask(new Todo(parsed2[0]));
                         } else if (keyword.equals("deadline")) {
-                            list.add(new Deadline(arrSplit2[0], LocalDate.parse(arrSplit2[1])));
+                            this.tasklist.addTask(new Deadline(parsed2[0], LocalDate.parse(parsed2[1])));
                         } else if (keyword.equals("event")) {
-                            list.add(new Event(arrSplit2[0], LocalDate.parse(arrSplit2[1])));
+                            this.tasklist.addTask(new Event(parsed2[0], LocalDate.parse(parsed2[1])));
                         }
 
-                        System.out.println("Got it. I 've added this task:");
-                        System.out.println(list.get(list.size() - 1));
-                        System.out.println("Now you have " + list.size() + " in the list.");
+                        this.ui.printMessage("Got it. I 've added this task:");
+                        this.ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
+                        this.ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
                     }
                 } else {
                     throw new DukeException("I DK how to process this -> " + word);
                 }
-            }
-            catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-
-            finally {
-                System.out.println("________________________________________");
+            } catch (DukeException e) {
+                ui.printMessage(e.getMessage());
+            } finally {
+                this.ui.printLine();
             }
         }
+    }
+
+
+
+    public static void main(String[] args) throws DukeException {
+        new Duke("./list.txt").run();
     }
 
     public static void readFile(String file, ArrayList<Task> taskList) {
