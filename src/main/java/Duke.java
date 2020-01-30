@@ -4,27 +4,34 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class Duke {
-  public static void main(String[] args) throws IOException {
-    handleLoad();
-    System.out.println("----------------------------");
-    System.out.println("Hello I'm your task manager!");
-    System.out.println("----------------------------\n");
-    handleList();
-    System.out.println("\n----------------------------");
-    System.out.println("What tasks do you have dude?");
-    System.out.println("----------------------------");
-    Scanner io = new Scanner(System.in);
+  private Ui ui;
+  private Parser parser;
 
-    String longCommand = io.nextLine();
-    String[] keywords = longCommand.split(" ", 2);
+  public static void main(String[] args) throws IOException {
+    new Duke().run();
+  }
+
+  public Duke() {
+    ui = new Ui();
+    parser = new Parser();
+  }
+
+  public void run() throws IOException {
+    ui = new Ui();
+    handleLoad();
+    ui.greeting();
+    handleList();
+    ui.initPrompt();
+
+    String longCommand = ui.getCommand();
+    String[] keywords = parser.parseCommand(longCommand);
 
     while (!keywords[0].equals("bye")) {
-      System.out.println("    -----");
+      ui.printSmallLine();
       try {
         switch (keywords[0]) {
           case "list":
@@ -57,29 +64,28 @@ public class Duke {
             throw new UnknownCommandException(keywords[0]);
         }
       } catch (EmptyDescriptionException
-              | MissingTimeException
-              | UnknownCommandException
-              | InvalidIndexException e) {
+          | MissingTimeException
+          | UnknownCommandException
+          | InvalidIndexException e) {
         System.out.println("    " + e);
       } catch (DateTimeParseException e) {
         System.out.println("    " + "Please enter date in the format yyyy-MM-dd HHmm");
       } catch (Exception e) {
         System.out.printf("    I don't know this error homie, take a look:\n    %s\n", e);
+      } finally {
+        ui.printSmallLine();
+        longCommand = ui.getCommand();
+        keywords = parser.parseCommand(longCommand);
       }
-      System.out.println("    -----");
-      longCommand = io.nextLine();
-      keywords = longCommand.split(" ", 2);
     }
     saveBaby();
-    System.out.println("    -----");
-    System.out.println("    Bye bye friend!");
-    System.out.println("    -----");
+    ui.bye();
   }
 
   public static void saveBaby() throws IOException {
     BufferedWriter taskWriter = new BufferedWriter(new FileWriter(".//saved-tasks.txt"));
     StringBuilder tasks = new StringBuilder();
-    for (Task task: Task.tasks) {
+    for (Task task : Task.tasks) {
       tasks.append(task.toSaveString()).append("\n");
     }
     taskWriter.write(tasks.toString());
@@ -93,10 +99,9 @@ public class Duke {
     }
   }
 
-  public static void handleLoad() throws IOException {
+  public void handleLoad() throws IOException {
     BufferedReader taskLoader = new BufferedReader(new FileReader(".//saved-tasks.txt"));
     String longCommand = taskLoader.readLine();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     LocalDateTime myDateObj;
     while (longCommand != null) {
       String[] keywords = longCommand.split(" \\|\\| ");
@@ -106,12 +111,10 @@ public class Duke {
           cur = new Todo(keywords[2]);
           break;
         case "deadline":
-          myDateObj = LocalDateTime.parse(keywords[3], formatter);
-          cur = new Deadline(keywords[2], myDateObj);
+          cur = new Deadline(keywords[2], parser.stringToTime(keywords[3]));
           break;
         case "event":
-          myDateObj = LocalDateTime.parse(keywords[3], formatter);
-          cur = new Event(keywords[2], myDateObj);
+          cur = new Event(keywords[2], parser.stringToTime(keywords[3]));
           break;
         default:
           System.out.println("error");
