@@ -135,4 +135,29 @@ public class Storage {
     public void saveToDisk(LoadAndSave<Task> ttd) {
         ttd.saveToDisk(this.storedTasks);
     }
+
+    /**
+     * Searches the Storage for a Task with a
+     * particular word in its description
+     *
+     * @param searchTerm String representing keyword
+     *                   to find
+     *
+     * @return An Optional containing the Task(s), if found
+     */
+    public Optional<ArrayList<Integer>> findInDesc(String searchTerm) {
+        ArrayList<Integer> indexes = new ArrayList<Integer>();
+        int size = this.storedTasks.size();
+        for (int i = 0; i < size; i++) {
+            if (this.storedTasks.get(i).getTaskDetails().contains(searchTerm)) {
+                indexes.add(i + 1);
+            }
+        }
+
+        if (indexes.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(indexes);
+        }
+    }
 }

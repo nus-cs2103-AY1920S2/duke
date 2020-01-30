@@ -151,6 +151,24 @@ public class Duke {
                 Duke.printTaskStoreMessage(store.getNumTasks());
 
                 store.saveToDisk(botStore);
+            } else if (next == Instruction.FIND_KEYWORD) {
+                String searchTerm;
+                try {
+                    searchTerm = getSecondTerm(command, Command.FIND);
+                } catch (InadequateArgumentsException | TooManyArgumentsException e) {
+                    botUi.error(e);
+                    continue;
+                }
+                store.findInDesc(searchTerm)
+                        .ifPresentOrElse(
+                                taskIds -> {
+                                    botUi.foundTask();
+                                    for (Integer id : taskIds) {
+                                        System.out.println(store.retrieve(id));
+                                    }
+                                },
+                                () -> botUi.failedToFind()
+                        );
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;
