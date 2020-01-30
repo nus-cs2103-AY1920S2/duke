@@ -4,27 +4,26 @@ import java.util.Scanner;
 public class Duke {
 
     private Store lib;
-    private Ui ui;
+    private Ui ui = new Ui();
     private Scanner sn = new Scanner(System.in);
     private DukeException DE;
     String[] CheckInput;
 
     public Duke(String filepath){
-        ui = new Ui();
         DE = new DukeException();
-        File file = new File(filepath);
-        lib = new Store(file);
+        File file = new File(filepath); //create a file obj with the given filepath.
+        lib = new Store(file); //create store from absolute filepath
         try {
             boolean result = file.exists();
             if(!result){
                 boolean ans = file.createNewFile();
             } else {
-                    Scanner newSN = new Scanner(file);
-                    while(newSN.hasNextLine()){
-                        String nxtLine = newSN.nextLine();
-                        lib.load(nxtLine);
-                    } //end while- for reading existing file
-                    System.out.println(ui.line());
+                Scanner newSN = new Scanner(file);
+                while(newSN.hasNextLine()){
+                    String nxtLine = newSN.nextLine();
+                    lib.load(nxtLine);
+                } //end while- for reading existing file
+                System.out.println(ui.line());
             }
         } catch (IOException e){
             e.printStackTrace();

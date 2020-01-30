@@ -1,6 +1,6 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    protected String description; //action to be taken
+    protected boolean isDone; //status of the action
     protected String line = "____________________________________________________________";
     public void Output(){}
 

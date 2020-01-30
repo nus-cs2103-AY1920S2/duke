@@ -15,7 +15,6 @@ public class Store {
     private LocalDate LD;
     private LocalTime LT;
     File file;
-    private int Status;
     private Ui ui = new Ui();
 
     public Store(File file){
@@ -24,21 +23,12 @@ public class Store {
         this.DE = new DukeException();
         this.file = file;
     }
-    public void AddNewAction(String S) {
-        this.cmd = S;
-        System.out.println(line);
-        System.out.println("added: " + cmd);
-        System.out.println(line);
-        Task T = new Task(cmd);
-        Storage.add(T);
-        counter = counter + 1;
-    }
     public void bye() {
         WritetoFile();
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
-        System.exit(1);
+        System.exit(1); // exits program.
     }
     public void list() {
         System.out.println(line);
