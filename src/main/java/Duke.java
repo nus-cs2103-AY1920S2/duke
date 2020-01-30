@@ -57,7 +57,6 @@ public class Duke {
                     } else {
                         int index = input.indexOf("/");
                         addList(new Deadline(input.substring(9, index), input.substring(index + 4)), taskList);
-                        updateFile(filePath, taskList);
                     }
                 } else if (input.contains("event")) {
                     if (input.split(" ").length == 1) {
@@ -65,7 +64,6 @@ public class Duke {
                     } else {
                         int index = input.indexOf("/");
                         addList(new Event(input.substring(6, index), input.substring(index + 4)), taskList);
-                        updateFile(filePath, taskList);
                     }
                 } else if (input.contains("delete")) {
                     if (input.split(" ").length == 1) {

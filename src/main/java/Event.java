@@ -1,19 +1,21 @@
-public class Event extends Task {
-    String time;
+import java.time.LocalDate;
 
-    public Event(String name, String time) {
+public class Event extends Task {
+    String dateString;
+
+    public Event(String name, String dateString) {
         super(name);
-        this.time = time;
+        this.dateString = dateString;
     }
 
     @Override
     public String toFile() {
         int doneInt = done ? 1 : 0;
-        return "E , " + doneInt + " , " + name + " , " + time;
+        return "E , " + doneInt + " , " + name + " , " + dateString;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + time + ")";
+        return "[E] " + super.toString() + "(at: " + dateString + ")";
     }
 }
