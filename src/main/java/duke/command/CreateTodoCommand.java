@@ -1,9 +1,13 @@
 package duke.command;
 
-import duke.exception.*;
 import duke.task.Todo;
 import duke.task.Task;
-import duke.main.*;
+import duke.exception.NoDescriptionException;
+import duke.exception.UnableToSaveException;
+import duke.main.Constant;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 
 public class CreateTodoCommand extends Command {
     public CreateTodoCommand(String[] inputArr) {
@@ -18,7 +22,6 @@ public class CreateTodoCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
-     * @return nothing
      * @throws NoDescriptionException If no name for deadline is specified.
      * @throws UnableToSaveException  If unable to save to storage.
      */

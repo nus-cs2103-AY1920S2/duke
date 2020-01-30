@@ -1,7 +1,9 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.main.*;
+import duke.exception.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 
 public abstract class Command {
     // INVALID, delete

@@ -19,7 +19,7 @@ public class TaskList {
         return tasks.get(num);
     }
 
-    public void add(Task t){
+    public void add(Task t) {
         tasks.add(t);
     }
 

@@ -12,7 +12,7 @@ public class Deadline extends Task {
     }
 
     public Deadline(String name, boolean completed, String date) {
-        super(name, completed); 
+        super(name, completed);
         this.date = LocalDate.parse(date, Constant.FORMATTER_INPUT_DATE);
     }
 

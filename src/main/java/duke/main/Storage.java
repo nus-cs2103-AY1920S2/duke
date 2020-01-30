@@ -6,32 +6,34 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
-import duke.exception.*;
+
+import duke.exception.UnableToLoadException;
+import duke.exception.UnableToSaveException;
 import duke.task.*;
 
 public class Storage {
     private Path path;
 
-    public Storage(String location){
+    public Storage(String location) {
         this.path = Paths.get(location, "data", "duke.txt");
     }
 
-    public void retryLocation(String location){
+    public void retryLocation(String location) {
         this.path = Paths.get(location, "data", "duke.txt");
     }
 
     /**
-     * Returns a list<Task>, generated from the information stored in local storage.
+     * Returns tasklist generated from the information stored in local storage.
      * Done at start of the program in order to retrieve the state from the previous
      * session.
      * 
      * @return List of tasks found in local storage
      * @throws UnableToLoadException If cannot access specified directory.
      */
-    public List<Task> loadFromSave() throws UnableToLoadException{
+    public List<Task> loadFromSave() throws UnableToLoadException {
         List<Task> tasks = new ArrayList<>();
         try {
-            if(Files.exists(path)){
+            if (Files.exists(path)) {
                 List<String> lines = Files.readAllLines(path);
                 String outputLine;
                 String[] arr;
@@ -62,22 +64,21 @@ public class Storage {
                     default:
                     }
                 }
-            }else{
+            } else {
                 Files.createDirectory(Paths.get("data"));
                 Files.createFile(path);
-            } 
-        }catch (IOException e) {
+            }
+        } catch (IOException e) {
             throw new UnableToLoadException();
         }
         return tasks;
     }
 
     /**
-     * This method saves current tasks in taskslist into local storage.
-     * The saved tasks can be retrieved when program starts again.
+     * This method saves current tasks in taskslist into local storage. The saved
+     * tasks can be retrieved when program starts again.
      * 
      * @param tasks List of tasks to be saved
-     * @return nothing
      * @throws UnableToLoadException If cannot save into specified directory.
      */
     public void saveToSave(TaskList tasks) throws UnableToSaveException {
@@ -85,11 +86,11 @@ public class Storage {
         for (int i = 0; i < tasks.size(); i++) {
             content += (tasks.getTask(i).storeFormat() + "\n");
         }
-        try{
+        try {
             Files.writeString(path, content);
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new UnableToSaveException();
         }
     }
-    
+
 }

@@ -1,23 +1,27 @@
 package duke.command;
 
 import java.time.LocalDate;
-import duke.task.*;
-import duke.main.*;
+import duke.main.Constant;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 public class ListCommand extends Command {
-    public ListCommand(String[] inputArr){
+    public ListCommand(String[] inputArr) {
         this.inputArr = inputArr;
     }
 
     /**
-     * This method uses Ui to print tasks, depending on inputArr.
-     * Case 1: No date specified, prints all tasks in tasklist
-     * Case 2: Date specified, prints tasks with the specified date in tasklist.
+     * This method uses Ui to print tasks, depending on inputArr. Case 1: No date
+     * specified, prints all tasks in tasklist Case 2: Date specified, prints tasks
+     * with the specified date in tasklist.
      * 
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
-     * @return nothing
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

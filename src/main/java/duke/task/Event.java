@@ -16,8 +16,8 @@ public class Event extends Task {
         super(name, completed);
         this.dateTime = LocalDateTime.parse(dateTime, Constant.FORMATTER_INPUT_DATE_TIME);
     }
-    
-    public Event(String name, boolean completed,LocalDateTime dateTime) {
+
+    public Event(String name, boolean completed, LocalDateTime dateTime) {
         super(name, completed);
         this.dateTime = dateTime;
     }
@@ -30,7 +30,7 @@ public class Event extends Task {
     @Override
     public String storeFormat() {
         return "E| |" + completed + "| |" + name + "| |" + dateTime.format(Constant.FORMATTER_INPUT_DATE_TIME);
-    }   
+    }
 
     public boolean compareDate(LocalDate inputDate) {
         return this.dateTime.toLocalDate().equals(inputDate);
@@ -42,9 +42,11 @@ public class Event extends Task {
         String notDoneCheck = "[✗] ";
 
         if (completed) {
-            return "[E]" + doneCheck + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME) + ")";
+            return "[E]" + doneCheck + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME)
+                    + ")";
         } else {
-            return "[E]" + notDoneCheck + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME) + ")";
+            return "[E]" + notDoneCheck + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME)
+                    + ")";
         }
     }
 }
