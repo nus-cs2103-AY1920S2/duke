@@ -131,24 +131,24 @@ public class Duke {
                 ui.printResponse(Response.COMMAND_NOT_RECOGNIZED);
             } catch (InsufficientArgumentAelitaException e) {
                 switch (e.getMessage()) {
-                    case "date":
-                        ui.printResponse(Response.MISSING_DATE);
-                        break;
-                    case "date-time":
-                        ui.printResponse(Response.MISSING_DATE_TIME);
-                        break;
-                    case "delete":
-                        ui.printResponse(Response.MISSING_DELETE_INDEX);
-                        break;
-                    case "description":
-                        ui.printResponse(Response.MISSING_DESCRIPTION);
-                        break;
-                    case "done":
-                        ui.printResponse(Response.MISSING_DONE_INDEX);
-                        break;
-                    case "end time":
-                        ui.printResponse(Response.MISSING_END_TIME);
-                        break;
+                case "date":
+                    ui.printResponse(Response.MISSING_DATE);
+                    break;
+                case "date-time":
+                    ui.printResponse(Response.MISSING_DATE_TIME);
+                    break;
+                case "delete":
+                    ui.printResponse(Response.MISSING_DELETE_INDEX);
+                    break;
+                case "description":
+                    ui.printResponse(Response.MISSING_DESCRIPTION);
+                    break;
+                case "done":
+                    ui.printResponse(Response.MISSING_DONE_INDEX);
+                    break;
+                case "end time":
+                    ui.printResponse(Response.MISSING_END_TIME);
+                    break;
                 }
             } catch (EmptyListAelitaException e) {
                 ui.printResponse(Response.NO_TASK);
