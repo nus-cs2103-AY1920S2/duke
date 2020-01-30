@@ -1,3 +1,6 @@
+/**
+ * A command that Duke does not understand.
+ */
 public class UnknownCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

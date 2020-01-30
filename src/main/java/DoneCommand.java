@@ -1,3 +1,6 @@
+/**
+ * A command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     private int idx;
     public DoneCommand(int idx) {
