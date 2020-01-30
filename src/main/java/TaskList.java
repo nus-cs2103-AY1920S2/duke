@@ -78,4 +78,19 @@ public class TaskList {
         return userTasksList.remove(taskNumber);
     }
 
+    /**
+     *
+     * @param keyword
+     * @return
+     */
+    public List<Task> findTask(String keyword) {
+        ArrayList<Task> listOfTasksFound = new ArrayList<>();
+        for (Task task : userTasksList) {
+            if (task.getDescription().contains(keyword)) {
+                listOfTasksFound.add(task);
+            }
+        }
+        return listOfTasksFound;
+    }
+
 }
