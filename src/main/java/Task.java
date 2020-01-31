@@ -1,7 +1,8 @@
 import java.time.LocalDate;
-import java.time.format.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-class Task {
+class Task implements CSVParsable {
     private String name;
     protected boolean done = false;
 
@@ -33,15 +34,14 @@ class Task {
         return new CSV(new CSV("T"), new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
-    public static Task parseFromCSV(String csvStr) {
-        CSV csv = CSV.parseCSV(csvStr);
+    public static Task parseFromCSV(CSV csv) {
         switch (csv.getStr(0)) {
-        case ToDoTask.typeStr:
-            return ToDoTask.parseFromCSV(csvStr);
-        case DeadlineTask.typeStr:
-            return DeadlineTask.parseFromCSV(csvStr);
-        case EventTask.typeStr:
-            return EventTask.parseFromCSV(csvStr);
+        case ToDoTask.TYPE_STR:
+            return ToDoTask.parseFromCSV(csv);
+        case DeadlineTask.TYPE_STR:
+            return DeadlineTask.parseFromCSV(csv);
+        case EventTask.TYPE_STR:
+            return EventTask.parseFromCSV(csv);
         default:
             return new Task(csv.getStr(csv.size()));
         }
@@ -49,7 +49,7 @@ class Task {
 }
 
 class ToDoTask extends Task {
-    protected static final String typeStr = "T";
+    protected static final String TYPE_STR = "T";
 
     ToDoTask(String name) {
         super(name);
@@ -62,22 +62,21 @@ class ToDoTask extends Task {
 
     @Override
     public CSV toCSV() {
-        return new CSV(new CSV(ToDoTask.typeStr), new CSV(Boolean.toString(isDone())), new CSV(getName()));
+        return new CSV(new CSV(ToDoTask.TYPE_STR), new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
-    public static ToDoTask parseFromCSV(String csvStr) {
-        CSV csv = CSV.parseCSV(csvStr);
+    public static ToDoTask parseFromCSV(CSV csv) {
         return new ToDoTask(csv.getStr(2), Boolean.parseBoolean(csv.getStr(1)));
     }
 
     @Override
     public String toString() {
-        return sqB(ToDoTask.typeStr) + sqB(gou()) + " " + getName();
+        return sqB(ToDoTask.TYPE_STR) + sqB(gou()) + " " + getName();
     }
 }
 
 class DeadlineTask extends Task {
-    protected static final String typeStr = "D";
+    protected static final String TYPE_STR = "D";
     private static final DateTimeFormatter defaultDateF = DateTimeFormatter.ofPattern("d'/M/L'/y");
     LocalDate ld;
     String prepos;
@@ -117,23 +116,22 @@ class DeadlineTask extends Task {
 
     @Override
     public CSV toCSV() {
-        return new CSV(new CSV(DeadlineTask.typeStr), new CSV(this.prepos), new CSV(this.dateLine),
+        return new CSV(new CSV(DeadlineTask.TYPE_STR), new CSV(this.prepos), new CSV(this.dateLine),
                 new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
-    public static DeadlineTask parseFromCSV(String csvStr) {
-        CSV csv = CSV.parseCSV(csvStr);
+    public static DeadlineTask parseFromCSV(CSV csv) {
         return new DeadlineTask(csv.getStr(4), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)));
     }
 
     @Override
     public String toString() {
-        return sqB(DeadlineTask.typeStr) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
+        return sqB(DeadlineTask.TYPE_STR) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
     }
 }
 
 class EventTask extends Task {
-    protected static final String typeStr = "E";
+    protected static final String TYPE_STR = "E";
     private static final DateTimeFormatter defaultDateF = DateTimeFormatter.ofPattern("yyyy-mm-dd");
     LocalDate ld;
     String prepos;
@@ -164,12 +162,11 @@ class EventTask extends Task {
 
     @Override
     public CSV toCSV() {
-        return new CSV(new CSV(EventTask.typeStr), new CSV(this.prepos), new CSV(this.time),
+        return new CSV(new CSV(EventTask.TYPE_STR), new CSV(this.prepos), new CSV(this.time),
                 new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
-    public static EventTask parseFromCSV(String csvStr) {
-        CSV csv = CSV.parseCSV(csvStr);
+    public static EventTask parseFromCSV(CSV csv) {
         return new EventTask(csv.getStr(4), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)));
     }
 
@@ -184,6 +181,6 @@ class EventTask extends Task {
 
     @Override
     public String toString() {
-        return sqB(EventTask.typeStr) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
+        return sqB(EventTask.TYPE_STR) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
     }
 }

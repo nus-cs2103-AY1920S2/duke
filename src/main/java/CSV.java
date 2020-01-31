@@ -1,4 +1,9 @@
-import java.util.*;
+import java.util.Scanner;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import java.util.stream.Collectors;
 
 public class CSV implements Comparable<CSV> {
@@ -314,4 +319,8 @@ public class CSV implements Comparable<CSV> {
 			return "";
 		}
 	}
+}
+
+interface CSVParsable {
+	public CSV toCSV();
 }
