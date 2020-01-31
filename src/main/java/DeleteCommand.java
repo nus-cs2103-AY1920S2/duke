@@ -13,7 +13,8 @@ public class DeleteCommand extends Command {
         Task toBeRemoved = tasks.getTaskList().get(Integer.parseInt(commands[1])-1);
         tasks.taskList.remove(Integer.parseInt(commands[1])-1);
         storage.save(tasks);
-        System.out.println(Duke.LINE + "\n" + "Alright, I've removed this task:" + "\n");
+        ui.showLine();
+        System.out.println("\n" + "Alright, I've removed this task:" + "\n");
         System.out.println(toBeRemoved + "\n");
         System.out.println("You currently have " + tasks.getTaskList().size() + " task(s) in the list.");
     }

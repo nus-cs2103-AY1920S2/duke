@@ -36,9 +36,9 @@ public class AddCommand extends Command {
                         throw new DukeException("");
                     }
                 } catch (DukeException e) {
-                    System.err.println(Duke.LINE);
+                    ui.showLine();
                     System.err.println("There is no valid input after to do. Please try again.");
-                    System.err.println(Duke.LINE);
+                    ui.showLine();
                 }
             } else if (this.command.startsWith("event")) {
                 String commandWithoutEvent = command.substring(6);

@@ -21,6 +21,14 @@ public class Ui {
         return command;
     }
 
+    void showByeMessage() {
+        System.out.println("Bye-bye! See you again, my friend!");
+    }
+
+    void showDoneMessage() {
+        System.out.println("\n" + "Fantastic! This task is a done-deal!" + "\n");
+    }
+
     void showError(String message) {
         System.out.println(message);
     }
