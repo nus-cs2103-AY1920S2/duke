@@ -8,6 +8,7 @@ public enum Instruction {
     AWAIT,
     DELETE,
     FIND_KEYWORD,
+    HELLO,
     HELP,
     MARK_DONE,
     MARK_NOT_DONE,

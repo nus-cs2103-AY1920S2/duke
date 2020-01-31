@@ -18,6 +18,8 @@ public class Ui {
             + "   \\  '.       .'  /   \\  `(.-')\n"
             + "    '.  `'---'`  .'     > ._>-'\n"
             + "      '-._____.-'      / \\/";
+    private static final String GREETINGS_MESSAGE =
+            "Hello! I love you! <3";
     private static final String INITIAL_MESSAGE =
             "4LC3N-BOT initialised.\nGreetings, humans!";
     private static final String AWAITING_MESSAGE = "\n> ENTER your input:";
@@ -104,6 +106,8 @@ public class Ui {
             + "\n"
             + "find <word>                | Finds tasks with that word\n"
             + "                           | in the description\n"
+            + "\n"
+            + "hello                      | Hello!\n"
             + "\n"
             + "help                       | Shows this help message\n"
             + "\n"
@@ -237,6 +241,14 @@ public class Ui {
      */
     public void showHelpMessage() {
         System.out.println(Ui.HELP_MESSAGE);
+    }
+
+    /**
+     * Prints a hello message to the interface
+     */
+    public void showHelloMessage() {
+        System.out.println(Ui.GREETINGS);
+        System.out.println(Ui.GREETINGS_MESSAGE);
     }
 
     /**

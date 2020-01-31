@@ -195,6 +195,8 @@ public class Duke {
                         );
             } else if (next == Instruction.HELP) {
                 botUi.showHelpMessage();
+            } else if (next == Instruction.HELLO) {
+                botUi.showHelloMessage();
             } else if (next == Instruction.TERMINATE) {
                 // terminate the bot program
                 break;

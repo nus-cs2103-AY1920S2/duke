@@ -12,6 +12,7 @@ public enum Command {
     EXI("exi"),
     EXIT("exit"),
     FIND("find"),
+    HELLO("hello"),
     HELP("help"),
     LIST("list"),
     NOT_DONE("notdone"),

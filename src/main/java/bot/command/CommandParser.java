@@ -47,6 +47,8 @@ public class CommandParser {
             return Instruction.FIND_KEYWORD;
         } else if (firstWord.equals(Command.HELP.word)) {
             return Instruction.HELP;
+        } else if (firstWord.equals(Command.HELLO.word)) {
+            return Instruction.HELLO;
         } else {
             throw new UnknownInstructionException(command);
         }
