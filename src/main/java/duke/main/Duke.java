@@ -8,6 +8,12 @@ public class Duke {
     Storage storage;
     TaskList taskList;
 
+    /**
+     * Duke Object that forms the backbone of the program, and more!
+     *
+     * @param filepath  is the User's working directory for file reading/saving
+     * @throws DukeException    when multiple exceptions are caught (e.g. unfilled secondary input)
+     */
     public Duke(String filepath) throws DukeException {
         //Try to read form saved data file and restore index, if not create a list to save later
         try {
