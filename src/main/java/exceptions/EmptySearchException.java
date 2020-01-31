@@ -6,7 +6,7 @@ package exceptions;
  *
  * @author ChesterSim
  */
-public class EmptySearchException extends Exception{
+public class EmptySearchException extends Exception {
 
     public EmptySearchException() {
         super();

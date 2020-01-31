@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * Stores all the tasks input by the user.
  */
 public class TaskList {
-    /** List to store tasks */
+    /** List to store tasks. */
     private ArrayList<Task> list;
-    /** Class of formatted user interactions */
+    /** Class of formatted user interactions. */
     private Ui ui;
 
     public TaskList() {
@@ -110,7 +110,7 @@ public class TaskList {
     /**
      * Returns indexed task.
      *
-     * @param index
+     * @param index Index of task.
      * @return Task with corresponding index.
      */
     public Task getTask(int index) {
@@ -127,7 +127,7 @@ public class TaskList {
         ArrayList<Task> searchList = new ArrayList<>();
         for (Task t : this.list) {
             if (t.getDescription().contains(searchWord)) {
-               searchList.add(t);
+                searchList.add(t);
             }
         }
         return searchList;

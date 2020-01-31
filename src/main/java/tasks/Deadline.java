@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
  * Sets a deadline together with the task on hand.
  */
 public class Deadline extends DateTask {
-    /** 24-hr time of deadline*/
+    /** 24-hr time of deadline. */
     private LocalTime finishByTime;
-    /** Date of deadline*/
+    /** Date of deadline. */
     private LocalDate finishByDate;
 
     /**

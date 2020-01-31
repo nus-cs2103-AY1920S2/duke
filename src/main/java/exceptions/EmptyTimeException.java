@@ -10,6 +10,12 @@ public class EmptyTimeException extends Exception {
     private String taskType;
     private String[] fields;
 
+    /**
+     * Returns a partially completed output for greater user experience.
+     *
+     * @param taskType Type of the task.
+     * @param fields User input fields.
+     */
     public EmptyTimeException(String taskType, String[] fields) {
         super();
         this.taskType = taskType;

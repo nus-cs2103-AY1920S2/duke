@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Ui {
     private String bar = "    **************************************************************\n";
 
-    public Ui (){
+    public Ui() {
     }
 
     /**

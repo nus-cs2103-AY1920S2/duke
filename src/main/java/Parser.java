@@ -3,7 +3,11 @@ import exceptions.EmptyTimeException;
 import exceptions.EmptySearchException;
 import exceptions.InvalidActionException;
 import exceptions.InvalidTaskNumberException;
-import tasks.*;
+import tasks.TaskList;
+import tasks.Task;
+import tasks.Deadline;
+import tasks.Todo;
+import tasks.Event;
 import ui.Ui;
 
 import java.io.IOException;
@@ -21,6 +25,14 @@ public class Parser {
     private Ui ui;
     private Scanner sc;
 
+    /**
+     * Parses command line inputs into valid actions of the chat bot.
+     *
+     * @param taskList List to store all tasks.
+     * @param storage Allows persistence of data.
+     * @param ui UI of the chat bot.
+     * @param sc Reads user inputs.
+     */
     public Parser(TaskList taskList, Storage storage, Ui ui, Scanner sc) {
         this.taskList = taskList;
         this.storage = storage;
@@ -114,20 +126,20 @@ public class Parser {
                 }
                 break;
             case "date":
+                try {
                     String[] fields = input.split(" ");
-                    try {
-                        LocalDate date = LocalDate.parse(fields[1]);
-                        taskList.searchDateTask(date);
-                    } catch (DateTimeException ex) {
-                        ui.printFormattedOutput("Sorry, I don't recognize this date format. " +
-                                "Try to follow this format: 2020-12-31");
-                    } catch (ArrayIndexOutOfBoundsException ex) {
-                        ui.printFormattedOutput("Please input a date!");
-                    }
+                    LocalDate date = LocalDate.parse(fields[1]);
+                    taskList.searchDateTask(date);
+                } catch (DateTimeException ex) {
+                    ui.printFormattedOutput("Sorry, I don't recognize this date format. "
+                            + "Try to follow this format: 2020-12-31");
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    ui.printFormattedOutput("Please input a date!");
+                }
                 break;
             case "find":
-                fields = input.split(" ");
-                if(fields.length < 2) {
+                String[] fields = input.split(" ");
+                if (fields.length < 2) {
                     throw new EmptySearchException();
                 }
                 String searchWord = fields[1];
@@ -145,9 +157,9 @@ public class Parser {
         } catch (IOException ex) {
             ui.printFormattedOutput(ex.toString());
         } catch (DateTimeException ex) {
-            ui.printFormattedOutput("You have entered an invalid time/date format.\n    " +
-                    "Please follow the following format: 23:59 2020-12-31\n    " +
-                    "You may input '-' to omit either the time or date");
+            ui.printFormattedOutput("You have entered an invalid time/date format.\n    "
+                    + "Please follow the following format: 23:59 2020-12-31\n    "
+                    + "You may input '-' to omit either the time or date");
         } catch (EmptySearchException ex) {
             ui.printFormattedOutput(ex.toString());
         }

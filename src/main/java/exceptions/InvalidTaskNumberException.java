@@ -6,7 +6,7 @@ package exceptions;
  *
  * @author ChesterSim
  */
-public class InvalidTaskNumberException extends Exception{
+public class InvalidTaskNumberException extends Exception {
     private int numberOfTasks;
 
     public InvalidTaskNumberException(int numberOfTasks) {

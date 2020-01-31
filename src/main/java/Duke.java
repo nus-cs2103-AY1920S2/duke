@@ -3,18 +3,18 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 // packages imports
+import tasks.TaskList;
 import ui.Ui;
-import tasks.*;
 
 /**
  * Main class of the chat bot program.
  */
 public class Duke {
-    /** User interface class with formatted outputs */
+    /** User interface class with formatted outputs. */
     private Ui ui;
-    /** Allows for persistent data */
+    /** Allows for persistent data. */
     private Storage storage;
-    /** List to store all tasks */
+    /** List to store all tasks. */
     private TaskList taskList;
 
     /** Creates a bot with personalize user interface, storage, and task list.

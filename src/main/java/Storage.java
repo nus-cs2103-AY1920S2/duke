@@ -1,5 +1,9 @@
 // packages import
-import tasks.*;
+import tasks.TaskList;
+import tasks.Task;
+import tasks.Todo;
+import tasks.Event;
+import tasks.Deadline;
 import ui.Ui;
 
 // java imports
@@ -16,7 +20,7 @@ import java.io.IOException;
  */
 public class Storage {
 
-    /** File name of save file */
+    /** File name of save file. */
     private String saveFile = "save_file.txt";
 
     /**

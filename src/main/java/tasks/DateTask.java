@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Enables retrieval of general time of task.
  * Includes Event and Deadline.
  */
-public abstract class DateTask extends Task{
+public abstract class DateTask extends Task {
     public DateTask(String description) {
         super(description);
     }

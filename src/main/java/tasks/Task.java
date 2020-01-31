@@ -30,7 +30,6 @@ public abstract class Task {
     @Override
     public String toString() {
         String checkbox = this.isDone ? "O" : "X";
-//        String checkbox = this.isDone ? "\u2713" : "\u2718";
         return String.format("[%s] %s", checkbox, this.description);
     }
 
