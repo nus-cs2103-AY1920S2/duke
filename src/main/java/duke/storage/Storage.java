@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
-class Storage {
+public class Storage {
     public static final String DEFAULT_PATH = "./data/duke.txt";
     File originFl;
 
@@ -40,7 +42,7 @@ class Storage {
         return lst;
     }
 
-    void save(List<? extends CSVParsable> lst) {
+    public void save(List<? extends CSVParsable> lst) {
         try (PrintWriter pw = new PrintWriter(this.originFl)) {
             for (CSVParsable q : lst) {
                 pw.println(q.toCSV().printString());

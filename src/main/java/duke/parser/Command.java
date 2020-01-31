@@ -1,19 +1,20 @@
+package duke.parser;
+
+import duke.task.TaskList;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 import java.util.Scanner;
 
 import java.util.List;
 
 import java.util.stream.Collectors;
 
-class Parser {
-    private Parser() {
-    }
-
-    public static Command parse(String cmdLine) {
-        return new Command(new Scanner(cmdLine));
-    }
-}
-
-class Command {
+public class Command {
     Scanner terms;
 
     Command(Scanner sc) {

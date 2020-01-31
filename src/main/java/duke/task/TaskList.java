@@ -1,9 +1,12 @@
+package duke.task;
+import duke.storage.CSV;
+
 import java.util.List;
 import java.util.ArrayList;
 
 import java.util.stream.Collectors;
 
-class TaskList {
+public class TaskList {
 
 	private List<Task> lst;
 
@@ -15,23 +18,23 @@ class TaskList {
         this.lst = lst;
     }
 
-    boolean add(Task t) {
+    public boolean add(Task t) {
         return this.lst.add(t);
     }
 
-    Task get(int idx) {
+    public Task get(int idx) {
         return this.lst.get(idx);
     }
 
-    Task remove(int idx) {
+    public Task remove(int idx) {
         return this.lst.remove(idx);
     }
 
-    int count() {
+    public int count() {
         return this.lst.size();
     }
 
-    List<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.lst;
     }
 

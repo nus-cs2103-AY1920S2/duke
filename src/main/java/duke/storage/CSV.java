@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.util.Scanner;
 
 import java.util.List;
@@ -319,8 +321,4 @@ public class CSV implements Comparable<CSV> {
 			return "";
 		}
 	}
-}
-
-interface CSVParsable {
-	public CSV toCSV();
 }

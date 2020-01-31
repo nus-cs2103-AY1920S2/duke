@@ -1,3 +1,9 @@
+package duke;
+import duke.parser.*;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.*;
+
 import java.util.Scanner;
 
 /**

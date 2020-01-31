@@ -1,17 +1,19 @@
+package duke.ui;
+
 import java.util.Scanner;
 
 import java.util.Arrays;
 import java.util.List;
 
-class Ui {
+public class Ui {
         static String stupidLogo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         static String resSpace = "    ";
         static String line = "____________________________________________________________";
-        static String greetings = "Hello! I'm Duke\n" + "What can I do for you?";
-        static String taskDoneNote = "Nice! I've marked this task as done:";
-        static String bye = "Bye. Hope to see you again soon!";
-        static String dunno = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        public static String greetings = "Hello! I'm Duke\n" + "What can I do for you?";
+        public static String taskDoneNote = "Nice! I've marked this task as done:";
+        public static String bye = "Bye. Hope to see you again soon!";
+        public static String dunno = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 		public static String loadingErrorMsg = "File not exist";
         private boolean isOpen = false;
         private Scanner sc;
@@ -20,7 +22,7 @@ class Ui {
             this.sc = inputSc;
         }
 
-        void start(String... initials) {
+        public void start(String... initials) {
             assert !this.isOpen : "illegal usage of responder";
             System.out.print(resSpace);
             System.out.println(line);
@@ -39,7 +41,7 @@ class Ui {
             respondLine(Arrays.asList(respondStr));
         }
 
-        void respondLine(List<String> respondStr) {
+        public void respondLine(List<String> respondStr) {
             assert this.isOpen : "illegal usage of responder";
             Scanner sc2;
             for (String str : respondStr) {
@@ -51,7 +53,7 @@ class Ui {
             }
         }
 
-        void over(String... remarks) {
+        public void over(String... remarks) {
             Scanner sc2;
             for (String str : remarks) {
                 sc2 = new Scanner(str);
@@ -66,21 +68,21 @@ class Ui {
             this.isOpen = false;
         }
 
-        void respond(String... respondStr) {
+        public void respond(String... respondStr) {
             respond(Arrays.asList(respondStr));
         }
 
-        void respond(List<String> respondStr) {
+        public void respond(List<String> respondStr) {
             start();
             respondLine(respondStr);
             over();
         }
 
-        boolean hasNextLine() {
+        public boolean hasNextLine() {
             return this.sc.hasNextLine();
         }
 
-        String nextLine() {
+        public String nextLine() {
             return this.sc.nextLine();
         }
 }
