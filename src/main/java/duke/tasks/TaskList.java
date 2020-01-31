@@ -43,6 +43,12 @@ public class TaskList {
         return taskList.add(task);
     }
 
+    /**
+     * Filter the tasks that contain the keyword as a substring.
+     *
+     * @param keyword String to find in the task names.
+     * @return An ArrayList containing tasks that contain the keyword as a substring.
+     */
     public ArrayList<Task> filterTasks(String keyword) {
         ArrayList<Task> filteredTasks = this.taskList;
         filteredTasks.removeIf((task) -> !task.getTaskName().toLowerCase().contains(keyword.toLowerCase()));

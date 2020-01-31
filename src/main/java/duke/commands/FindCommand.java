@@ -16,8 +16,8 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
-	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         filteredTasks = tasks.filterTasks(keyword);
         String[] temp;
         if (filteredTasks.size() == 0) {
@@ -30,11 +30,11 @@ public class FindCommand extends Command {
             }
         }
         ui.dukePrompt(temp);
-	}
+    }
 
-	@Override
-	public boolean isExit() {
-		return false;
-	}
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 
 }

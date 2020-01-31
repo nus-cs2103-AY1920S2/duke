@@ -60,7 +60,7 @@ public class Ui {
     /**
      * Prints the error message in the correct formatting with Duke's label.
      *
-     * @param errorMessage
+     * @param errorMessage The error message string.
      */
     public void showError(String errorMessage) {
         dukePrompt(errorMessage);
