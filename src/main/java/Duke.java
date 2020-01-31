@@ -40,15 +40,15 @@ public class Duke {
                 uI.displayFoundTasks(taskList.findTask(parser.trimCommand(command)));
             } else {
                 switch (parser.checkCommand(command)) {
-                    case "done":
-                        tasks = taskList.markAsDone(command);
-                        break;
-                    case "delete":
-                        tasks = taskList.deleteTask(command);
-                        break;
-                    default:
-                        tasks = taskList.addTask(command);
-                        break;
+                case "done":
+                    tasks = taskList.markAsDone(command);
+                    break;
+                case "delete":
+                    tasks = taskList.deleteTask(command);
+                    break;
+                default:
+                    tasks = taskList.addTask(command);
+                    break;
                 }
             }
             command = parser.getCommand();

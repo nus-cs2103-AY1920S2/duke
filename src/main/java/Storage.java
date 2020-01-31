@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,31 +28,31 @@ public class Storage {
         while (sc.hasNextLine()) {
             String[] task = sc.nextLine().split("/");
             switch (task[0]) {
-                case "T":
-                    Task toDo = new ToDo(task[2]);
-                    if (task[1].equals("true")) {
-                        toDo.markAsDone();
-                    }
-                    tasks.add(toDo);
-                    break;
-                case "D":
-                    Task deadLine = new Deadline(task[2],
-                            LocalDate.parse(task[3].substring(3, 13)),
-                            task[3].substring(14));
-                    if (task[1].equals("true")) {
-                        deadLine.markAsDone();
-                    }
-                    tasks.add(deadLine);
-                    break;
-                case "E":
-                    Task event = new Event(task[2],
-                            LocalDate.parse(task[3].substring(3, 13)),
-                            task[3].substring(14));
-                    if (task[1].equals("true")) {
-                        event.markAsDone();
-                    }
-                    tasks.add(event);
-                    break;
+            case "T":
+                Task toDo = new ToDo(task[2]);
+                if (task[1].equals("true")) {
+                    toDo.markAsDone();
+                }
+                tasks.add(toDo);
+                break;
+            case "D":
+                Task deadLine = new Deadline(task[2],
+                        LocalDate.parse(task[3].substring(3, 13)),
+                        task[3].substring(14));
+                if (task[1].equals("true")) {
+                    deadLine.markAsDone();
+                }
+                tasks.add(deadLine);
+                break;
+            case "E":
+                Task event = new Event(task[2],
+                        LocalDate.parse(task[3].substring(3, 13)),
+                        task[3].substring(14));
+                if (task[1].equals("true")) {
+                    event.markAsDone();
+                }
+                tasks.add(event);
+                break;
             }
         }
         return tasks;

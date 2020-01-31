@@ -34,35 +34,35 @@ public class TaskList {
 
     public List<Task> findTask(String keyword) throws DukeInvalidTaskException {
         List<Task> temp = new ArrayList<>();
-        for(Task task : tasks){
-            if(task.description.contains(keyword)){
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
                 temp.add(task);
             }
         }
-        if(temp.size() == 0) {
+        if (temp.size() == 0) {
             throw new DukeInvalidTaskException("There are no matching tasks in your list");
         }
         return temp;
-        }
+    }
 
     public List<Task> addTask(String command) throws DateTimeParseException {
         Task task = null;
         String taskType = command.split(" ")[0];
         command = command.substring(command.indexOf(" "));
         switch (taskType) {
-            case "todo":
-                task = new ToDo(command);
-                break;
-            case "event":
-                task = new Event(command.split("/at ")[0],
-                        LocalDate.parse(command.split("/at ")[1].split(" ")[0]),
-                        command.split("/at ")[1].split(" ")[1]);
-                break;
-            case "deadline":
-                task = new Deadline(command.split("/by ")[0],
-                        LocalDate.parse(command.split("/by ")[1].split(" ")[0]),
-                        command.split("/by ")[1].split(" ")[1]);
-                break;
+        case "todo":
+            task = new ToDo(command);
+            break;
+        case "event":
+            task = new Event(command.split("/at ")[0],
+                    LocalDate.parse(command.split("/at ")[1].split(" ")[0]),
+                    command.split("/at ")[1].split(" ")[1]);
+            break;
+        case "deadline":
+            task = new Deadline(command.split("/by ")[0],
+                    LocalDate.parse(command.split("/by ")[1].split(" ")[0]),
+                    command.split("/by ")[1].split(" ")[1]);
+            break;
         }
         tasks.add(task);
         print("Got it. I've added this task:");
