@@ -36,11 +36,11 @@ public class Storage {
             fw.write(s);
             fw.close();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid task number.");
+            System.out.println("\tInvalid task number.");
         } catch (FileNotFoundException e) {
-            System.out.println("File does not exist");
+            System.out.println("\tFile does not exist");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\t" + e.getMessage());
         }
     }
 
@@ -82,18 +82,18 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File does not exist");
+            System.out.println("\tFile does not exist");
         }
         return tasks;
     }
 
-    public void addTodo(String taskname) {
+    public void addTodo(String taskName) {
         try {
             FileWriter append = new FileWriter("data/duke.txt", true);
             if (TaskList.size() == 0) {
-                append.write("T | 0 | " + taskname);
+                append.write("T | 0 | " + taskName);
             } else {
-                append.write("\n" + "T | 0 | " + taskname);
+                append.write("\n" + "T | 0 | " + taskName);
             }
             append.close();
         } catch (IOException e) {
@@ -108,9 +108,9 @@ public class Storage {
             Task t = new Deadline(arrDeadline[0].trim(), timeDeadline);
             FileWriter append = new FileWriter("data/duke.txt", true);
             if (TaskList.size() == 0) {
-                append.write("D | 0 | " + arrDeadline[0].trim() + " | " + arrDeadline[1].trim());
+                append.write("D | 0 | " + arrDeadline[0].trim() + " | " + timeDeadline);
             } else {
-                append.write("\n" + "D | 0 | " + arrDeadline[0].trim() + " | " + arrDeadline[1].trim());
+                append.write("\n" + "D | 0 | " + arrDeadline[0].trim() + " | " + timeDeadline);
             }
             append.close();
         } catch (IOException e) {
@@ -125,9 +125,9 @@ public class Storage {
             Task task = new Event(arrEvent[0].trim(), time);
             FileWriter append = new FileWriter("data/duke.txt", true);
             if (TaskList.size() == 0) {
-                append.write("E | 0 | " + arrEvent[0].trim() + " | " + arrEvent[1].trim());
+                append.write("E | 0 | " + arrEvent[0].trim() + " | " + time);
             } else {
-                append.write("\n" + "E | 0 | " + arrEvent[0].trim() + " | " + arrEvent[1].trim());
+                append.write("\n" + "E | 0 | " + arrEvent[0].trim() + " | " + time);
             }
             append.close();
         } catch (IOException e) {
@@ -154,11 +154,11 @@ public class Storage {
             fw.write(s);
             fw.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File does not exist.");
+            System.out.println("\tFile does not exist.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Task does not exist.");
+            System.out.println("\tTask does not exist.");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\t" + e.getMessage());
         }
     }
 }

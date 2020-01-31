@@ -1,9 +1,6 @@
-todo play game
-event Go for CS2103 lecture /at Friday 2-4pm
-deadline Finish Week 2 IP /by Thursday 11:59pm
-list
+event bainian /at 2/1/2020 1700-2200
 done 1
 list
-todo take a break
+delete 1
 list
 bye

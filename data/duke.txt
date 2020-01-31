@@ -2,4 +2,4 @@ D | 1 | return book | June 6th
 E | 1 | project meeting | Aug 6th 2-4pm
 T | 0 | join sports club
 D | 0 | ST2334 tutorial 2 | 8th Feb 2359
-E | 0 | go bainian | 1st of February 2020, 1:00pm
+E | 0 | bainian hahahah | 1st of February 2020, 4:00pm to 10:00pm
