@@ -9,22 +9,8 @@ public class Ui {
         return in.hasNext();
     }
 
-    public String getCommand() {
-        String[] command = in.nextLine().split(" ", 2);
-        if (command.length > 1) {
-            arguments = command[1];
-        }
-        return command[0];
-    }
-
-    public String getArguments() {
-        if (arguments == null) {
-            return "";
-        } else {
-            String arg = arguments;
-            arguments = null;
-            return arg;
-        }
+    public String getLine() {
+        return in.nextLine();
     }
 
     public void out(String... ss) {
