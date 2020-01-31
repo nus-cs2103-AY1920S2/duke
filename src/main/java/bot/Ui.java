@@ -65,6 +65,15 @@ public class Ui {
             + "   \\   :       :   /\n"
             + "    '.           .'\n"
             + "      '-._____.-'";
+    private static final String WAVE = "      _.-'''''-._  \n"
+            + "    /=_.-~-~-~-._=\\        _.-._\n"
+            + "   :    _     _    :    ._/ / / )\n"
+            + "  /    (o)   (o)    \\  /`/ / / / )\n"
+            + "  |  _ _ _ _ _ _ _  | / /     ` /\n"
+            + "  |  \\           /  | |         /\n"
+            + "   \\  '.       .'  /   \\       /\n"
+            + "    '.  `'---'`  .'     )    .'\n"
+            + "      '-._____.-'      /    /";
 
     public static final String LOAD_FROM_DISK_FAIL_MESSAGE =
             "Could not find local storage";
@@ -247,7 +256,7 @@ public class Ui {
      * Prints a hello message to the interface
      */
     public void showHelloMessage() {
-        System.out.println(Ui.GREETINGS);
+        System.out.println(Ui.WAVE);
         System.out.println(Ui.GREETINGS_MESSAGE);
     }
 
