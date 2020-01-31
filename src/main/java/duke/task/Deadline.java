@@ -12,6 +12,9 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Create a deadline task from description, date and time provided.
+     */
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
@@ -19,7 +22,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the date of the Deadline task
+     * Get the date of the Deadline task.
      *
      * @return the date of the Deadline task
      */
@@ -28,7 +31,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the time of the Deadline task
+     * Get the time of the Deadline task.
      *
      * @return the time of the Deadline task
      */
@@ -38,9 +41,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                " " + time.format(DateTimeFormatter.ofPattern("HHmm")) +
-                ")";
+        return "[D]" + super.toString()
+                + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " "
+                + time.format(DateTimeFormatter.ofPattern("HHmm"))
+                + ")";
     }
 }

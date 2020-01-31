@@ -12,7 +12,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add a Deadline/ Event/ To-do task to the task list, save the list to disk and display to user
+     * Add a Deadline/ Event/ To-do task to the task list, save the list to disk and display to user.
      *
      * @param  tasks   the task list
      * @param   storage the storage object to save the list
@@ -21,29 +21,31 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = command.split(" ");
-        Task task = null;
+        Task task;
         switch (inputTokens[0]) {
-            case "todo":
-                // Add a To-do task
-                task = tasks.makeNewTodoTask(command);
-                tasks.add(task);
-                break;
-            case "deadline":
-                // Add a Deadline task
-                task = tasks.makeNewDeadlineTask(command);
-                tasks.add(task);
-                break;
-            case "event":
-                // Add an Event task
-                task = tasks.makeNewEventTask(command);
-                tasks.add(task);
-                break;
+        case "todo":
+            // Add a To-do task
+            task = tasks.makeNewTodoTask(command);
+            tasks.add(task);
+            break;
+        case "deadline":
+            // Add a Deadline task
+            task = tasks.makeNewDeadlineTask(command);
+            tasks.add(task);
+            break;
+        case "event":
+            // Add an Event task
+            task = tasks.makeNewEventTask(command);
+            tasks.add(task);
+            break;
+        default:
+            throw new DukeException("OOPS!!! No such task type!");
         }
         if (task == null) {
-            throw new DukeException("☹ OOPS!!! duke.task.Task could not be added!");
+            throw new DukeException("OOPS!!! duke.task.Task could not be added!");
         }
         if (!storage.save(tasks)) {
-            throw new DukeException("☹ OOPS!!! Failed to save list!");
+            throw new DukeException("OOPS!!! Failed to save list!");
         }
         ui.showAddTask(task, tasks.size());
     }

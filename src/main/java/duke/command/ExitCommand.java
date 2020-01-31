@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Display good bye message to user
+     * Display good bye message to user.
      *
      * @param  tasks   the task list
      * @param   storage the storage object to save the list

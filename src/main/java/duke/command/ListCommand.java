@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * List all the tasks in the task list that was saved on the disk, and display to user
+     * List all the tasks in the task list that was saved on the disk, and display to user.
      *
      * @param  tasks   the task list
      * @param   storage the storage object to save the list
@@ -30,7 +30,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Get a list of tasks that occurs at/ needs to be fulfilled by a certain date
+     * Get a list of tasks that occurs at/ needs to be fulfilled by a certain date.
      *
      * @param  tasks   the list of tasks to be filtered
      * @param  dateString    the date criteria in string format

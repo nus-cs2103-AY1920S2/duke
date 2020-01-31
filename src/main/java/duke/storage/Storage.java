@@ -1,9 +1,17 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.TaskList;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,12 +20,17 @@ import java.util.List;
 public class Storage {
     String filePath;
 
+    /**
+     * Create a storage object with given file path.
+     *
+     * @param  filePath   the file path to saved task list
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Get the string format of a list of task objects
+     * Get the string format of a list of task objects.
      *
      * @param  tasks   the list of task objects
      * @return  listString    the list of tasks in string format
@@ -28,13 +41,28 @@ public class Storage {
             Task task = tasks.get(i);
             int isDone = (task.getIsDone()) ? 1 : 0;
             if (task instanceof Deadline) {
-                tasksString += "D | " + isDone + " | " + task.getDescription() + " | " +
-                        ((Deadline) task).getDate() + " " + ((Deadline) task).getTime();
+                tasksString += "D | "
+                        + isDone
+                        + " | "
+                        + task.getDescription()
+                        + " | "
+                        + ((Deadline) task).getDate()
+                        + " "
+                        + ((Deadline) task).getTime();
             } else if (task instanceof Event) {
-                tasksString += "E | " + isDone + " | " + task.getDescription() + " | " +
-                        ((Event) task).getDate() + " " + ((Event) task).getFromTimeToTime();
+                tasksString += "E | "
+                        + isDone
+                        + " | "
+                        + task.getDescription()
+                        + " | "
+                        + ((Event) task).getDate()
+                        + " "
+                        + ((Event) task).getFromTimeToTime();
             } else if (task instanceof Todo) {
-                tasksString += "T | " + isDone + " | " + task.getDescription();
+                tasksString += "T | "
+                        + isDone
+                        + " | "
+                        + task.getDescription();
             }
             if (i != tasks.size() - 1) {
                 tasksString += "\n";
@@ -44,7 +72,7 @@ public class Storage {
     }
 
     /**
-     * Get a list of tasks from the string format of list
+     * Get a list of tasks from the string format of list.
      *
      * @param  tasksString   the list of tasks in string format
      * @return  list    the list of task objects
@@ -61,28 +89,30 @@ public class Storage {
                 String[] dateOrTimeTokens;
 
                 switch (taskItems[0]) {
-                    case "T":
-                        task = new Todo(taskItems[2]);
+                case "T":
+                    task = new Todo(taskItems[2]);
+                    break;
+                case "D":
+                    dateOrTimeTokens = taskItems[3].split(" ");
+                    try {
+                        LocalDate deadlineDate = LocalDate.parse(dateOrTimeTokens[0]);
+                        LocalTime time = LocalTime.parse(dateOrTimeTokens[1]);
+                        task = new Deadline(taskItems[2], deadlineDate, time);
+                    } catch (Exception e) {
                         break;
-                    case "D":
-                        dateOrTimeTokens = taskItems[3].split(" ");
-                        try {
-                            LocalDate deadlineDate = LocalDate.parse(dateOrTimeTokens[0]);
-                            LocalTime time = LocalTime.parse(dateOrTimeTokens[1]);
-                            task = new Deadline(taskItems[2], deadlineDate, time);
-                        } catch (Exception e) {
-                            break;
-                        }
+                    }
+                    break;
+                case "E":
+                    dateOrTimeTokens = taskItems[3].split(" ");
+                    try {
+                        LocalDate eventDate = LocalDate.parse(dateOrTimeTokens[0]);
+                        task = new Event(taskItems[2], eventDate, dateOrTimeTokens[1]);
+                    } catch (Exception e) {
                         break;
-                    case "E":
-                        dateOrTimeTokens = taskItems[3].split(" ");
-                        try {
-                            LocalDate eventDate = LocalDate.parse(dateOrTimeTokens[0]);
-                            task = new Event(taskItems[2], eventDate, dateOrTimeTokens[1]);
-                        } catch (Exception e) {
-                            break;
-                        }
-                        break;
+                    }
+                    break;
+                default:
+                    break;
                 }
                 if (task != null) {
                     task.markAsDone(isDone);
@@ -96,7 +126,7 @@ public class Storage {
     }
 
     /**
-     * Save the list of tasks to file on the disk
+     * Save the list of tasks to file on the disk.
      *
      * @param   tasks    the list of tasks to be saved
      * @return  isSuccessful   whether save to file is successful
@@ -119,7 +149,7 @@ public class Storage {
     }
 
     /**
-     * Get the list of tasks from file saved on disk
+     * Get the list of tasks from file saved on disk.
      *
      * @return  list   the list of tasks from file
      * @throws  DukeException   if the list cannot be loaded from disk or data is corrupted

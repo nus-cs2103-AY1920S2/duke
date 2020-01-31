@@ -12,8 +12,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark a task in the task list as done if specified index is valid, save the task list
-     * and display to user
+     * Mark a task in the task list as done if specified index is valid, save the task list and display to user.
      *
      * @param  tasks   the task list
      * @param   storage the storage object to save the list
@@ -28,18 +27,18 @@ public class DoneCommand extends Command {
         try {
             doneIndex = Integer.parseInt(inputTokens[1]) - 1;
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! No such task index!");
+            throw new DukeException("OOPS!!! No such task index!");
         }
         if (doneIndex < tasks.size()) {
             Task task = tasks.get(doneIndex);
             task.markAsDone(true);
             if (!storage.save(tasks)) {
-                throw new DukeException("☹ OOPS!!! Failed to save list!");
+                throw new DukeException("OOPS!!! Failed to save list!");
             }
-            ui.showLine("Nice! I've marked this task as done: \n" +
-                    "       " + task);
+            ui.showLine("Nice! I've marked this task as done: \n"
+                    + "       " + task);
         } else {
-            throw new DukeException("☹ OOPS!!! No such task index!");
+            throw new DukeException("OOPS!!! No such task index!");
         }
     }
 }

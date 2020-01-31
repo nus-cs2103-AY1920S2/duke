@@ -4,13 +4,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The duke.task.Event class represents a task that start at a specific time
- * and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+ * The duke.task.Event class represents a task that start at a specific time and ends at a specific time e.g.,
+ * team project meeting on 2/10/2019 2-4pm.
  */
 public class Event extends Task {
     protected String fromTimeToTime;
     protected LocalDate date;
 
+    /**
+     * Create an event task from description, date and time provided.
+     */
     public Event(String description, LocalDate date, String fromTimeToTime) {
         super(description);
         this.date = date;
@@ -18,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get the date of the Event task
+     * Get the date of the Event task.
      *
      * @return the date of the Event task
      */
@@ -27,7 +30,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get the start and end times of the Event task
+     * Get the start and end times of the Event task.
      *
      * @return the start and end times of the Event task
      */
@@ -37,9 +40,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                " " + fromTimeToTime +
-                ")";
+        return "[E]" + super.toString()
+                + " (at: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " "
+                + fromTimeToTime
+                + ")";
     }
 }

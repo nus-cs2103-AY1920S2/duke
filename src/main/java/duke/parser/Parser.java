@@ -1,13 +1,18 @@
 package duke.parser;
 
-import duke.command.*;
 import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
 import duke.exception.DukeException;
 
 public class Parser {
 
     /**
-     * Parse the command entered by user into a Command object if command exists
+     * Parse the command entered by user into a Command object if command exists.
      *
      * @param  command  the input by the user
      * @return  the parsed command
@@ -31,7 +36,7 @@ public class Parser {
         case "event":
             return new AddCommand(command);
         default:
-            throw new DukeException("☹ OOPS!!! Cannot parse command!");
+            throw new DukeException("OOPS!!! Cannot parse command!");
         }
     }
 }

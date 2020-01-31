@@ -12,8 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task from list at a specific index if index is valid, save the task list
-     * and display to user
+     * Delete the task from list at a specific index if index is valid, save the task list and display to user.
      *
      * @param  tasks   the task list
      * @param   storage the storage object to save the list
@@ -29,10 +28,10 @@ public class DeleteCommand extends Command {
             Task deleteTask = tasks.delete(deleteIndex);
             ui.showDeleteTask(deleteTask, tasks.size());
             if (!storage.save(tasks)) {
-                throw new DukeException("☹ OOPS!!! Failed to save list!");
+                throw new DukeException("OOPS!!! Failed to save list!");
             }
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! No such task index!");
+            throw new DukeException("OOPS!!! No such task index!");
         }
     }
 }

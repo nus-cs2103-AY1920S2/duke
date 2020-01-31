@@ -16,6 +16,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Create a list of tasks.
+     *
+     * @param tasks the task list
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>();
         for (Task task: tasks) {
@@ -24,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Get the size of the task list
+     * Get the size of the task list.
      *
      * @return the size of the task list
      */
@@ -33,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Get the task at a specific index in the task list
+     * Get the task at a specific index in the task list.
      *
      * @return the task at a specific index in the task list
      */
@@ -42,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at a specific index from the task list
+     * Delete the task at a specific index from the task list.
      *
      * @return the deleted task
      */
@@ -51,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Add the task to the task list
+     * Add the task to the task list.
      *
      * @param   task the task to be added
      */
@@ -60,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Try to make a new to-do task from the input
+     * Try to make a new to-do task from the input.
      *
      * @param  taskString   the input which contains the to-do task information
      * @return  task    the new to-do task
@@ -77,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Try to make a new event task from the input
+     * Try to make a new event task from the input.
      *
      * @param  taskString   the input which contains the event task information
      * @return  task    the new event task
@@ -104,11 +109,12 @@ public class TaskList {
             }
         }
 
-        throw new DukeException("☹ OOPS!!! duke.task.Event tasks require a description, and a specific time and date (e.g. 2019-12-12 2-4pm).");
+        throw new DukeException("☹ OOPS!!! duke.task.Event tasks require a description, "
+                + "and a specific time and date (e.g. 2019-12-12 2-4pm).");
     }
 
     /**
-     * Try to make a new deadline task from the input
+     * Try to make a new deadline task from the input.
      *
      * @param  taskString   the input which contains the deadline task information
      * @return  task    the new deadline task
@@ -136,6 +142,7 @@ public class TaskList {
             }
         }
 
-        throw new DukeException("☹ OOPS!!! duke.task.Deadline tasks require a description, and a specific time and date (e.g. 2019-12-12 1800).");
+        throw new DukeException("☹ OOPS!!! duke.task.Deadline tasks require a description, "
+                + "and a specific time and date (e.g. 2019-12-12 1800).");
     }
 }
