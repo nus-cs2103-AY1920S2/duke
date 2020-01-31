@@ -3,19 +3,34 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Represents a <code>Deadline</code>, which is a subclass of a <code>Task</code>. A <code>Deadline</code> includes
- * a byDate which represents the due date of the respective <code>Deadline</code>.
+ * Represents a Deadline, which is a subclass of a Task. A Deadline includes
+ * a byDate which represents the due date of the respective Deadline.
  */
 public class Deadline extends Task {
     LocalDate byDate;
     String time24Hr;
 
+    /**
+     * Constructor for Deadline. Default isDone boolean value is false.
+     *
+     * @param description Description of deadline
+     * @param date Date of the deadline
+     * @param time Time of the deadline
+     */
     public Deadline(String description, String date, String time) {
         super(description);
         this.byDate = LocalDate.parse(date);
         this.time24Hr = time;
     }
 
+    /**
+     * Another constructor for Deadline which allows explicit assigning of isDone.
+     *
+     * @param description Description of deadline
+     * @param date Date of the deadline
+     * @param time Time of the deadline
+     * @param isDone True if deadline has been completed, false if not.
+     */
     public Deadline(String description, String date, String time, boolean isDone) {
         super(description);
         this.byDate = LocalDate.parse(date);

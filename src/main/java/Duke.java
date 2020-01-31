@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
- * Represents main body for Duke to run
+ * Represents main body for Duke to run.
  */
 public class Duke {
 
@@ -13,7 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for Duke
+     * Constructor for Duke.
      *
      * @param listPath Relative file path for where the task list is stored
      * @param arrayPath Relative file path for where the task array is stored

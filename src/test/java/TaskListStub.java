@@ -1,5 +1,13 @@
 public class TaskListStub {
 
+    /**
+     * Creates event based on user input.
+     *
+     * @param input User input
+     * @return Event which was created
+     * @throws GooseEmptyDescriptionException if description of event is empty
+     * @throws GooseIllegalFormatException if the format is not valid
+     */
     public static Event createEvent(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {
         String[] eventArr = input.split(" /at ");
         String[] descriptionSplit = eventArr[0].split(" ");
@@ -26,7 +34,7 @@ public class TaskListStub {
         }
     }
 
-    public static String parseDate(String date) {
+    private static String parseDate(String date) {
         String[] dateArr = date.split("/");
         String day = dateArr[0];
         if (Integer.parseInt(day) < 10) {

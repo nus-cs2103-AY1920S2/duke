@@ -13,6 +13,12 @@ public class Storage {
     private String arrayPath;
     private Ui ui;
 
+    /**
+     * Constructor for storage class to handle saving and loading to and from hard disk.
+     *
+     * @param listPath Relative file path for storing the list
+     * @param arrayPath Relative file path for storing the array
+     */
     public Storage(String listPath, String arrayPath) {
         this.listPath = listPath;
         this.arrayPath = arrayPath;
@@ -36,8 +42,8 @@ public class Storage {
             if (task instanceof Event) {
                 Event e = (Event) task;
                 String doneStr = e.isDone ? "1" : "0";
-                String eventString = "event|" + doneStr + "|" + e.description + "|" + e.atDate + "|" +
-                        e.time24Hr + System.lineSeparator();
+                String eventString = "event|" + doneStr + "|" + e.description + "|" + e.atDate + "|"
+                        + e.time24Hr + System.lineSeparator();
                 stringList += eventString;
             } else if (task instanceof  Deadline) {
                 Deadline d = (Deadline) task;
@@ -45,7 +51,7 @@ public class Storage {
                 String deadlineString = "deadline|" + doneStr + "|" + d.description + "|" + d.byDate + "|"
                         + d.time24Hr + System.lineSeparator();
                 stringList += deadlineString;
-            } else if (task instanceof Todo ){
+            } else if (task instanceof Todo) {
                 Todo t = (Todo) task;
                 String doneStr = t.isDone ? "1" : "0";
                 String todoString = "todo|" + doneStr + "|" + t.description + System.lineSeparator();
@@ -79,7 +85,8 @@ public class Storage {
     }
 
     /**
-     * Loads task list as an ArrayList
+     * Loads task list as an ArrayList.
+     *
      * @return ArrayList of Tasks based on stored data
      * @throws IOException If array file not found on hard disk
      */
@@ -101,24 +108,24 @@ public class Storage {
                 String description = taskArr[2];
 
                 switch (type) {
-                    case "todo":
-                        Todo addTodo = new Todo(description, isDone);
-                        ml.add(addTodo);
-                        break;
-                    case "deadline":
-                        String byDate = taskArr[3];
-                        String deadlineTime = taskArr[4];
-                        Deadline addDeadline = new Deadline(description, byDate, deadlineTime, isDone);
-                        ml.add(addDeadline);
-                        break;
-                    case "event":
-                        String atDate = taskArr[3];
-                        String eventTime = taskArr[4];
-                        Event addEvent = new Event(description, atDate, eventTime, isDone);
-                        ml.add(addEvent);
-                        break;
-                    default:
-                        ui.showError("Format error! Honk!");
+                case "todo":
+                    Todo addTodo = new Todo(description, isDone);
+                    ml.add(addTodo);
+                    break;
+                case "deadline":
+                    String byDate = taskArr[3];
+                    String deadlineTime = taskArr[4];
+                    Deadline addDeadline = new Deadline(description, byDate, deadlineTime, isDone);
+                    ml.add(addDeadline);
+                    break;
+                case "event":
+                    String atDate = taskArr[3];
+                    String eventTime = taskArr[4];
+                    Event addEvent = new Event(description, atDate, eventTime, isDone);
+                    ml.add(addEvent);
+                    break;
+                default:
+                    ui.showError("Format error! Honk!");
                 }
             }
             return ml;
@@ -126,7 +133,8 @@ public class Storage {
     }
 
     /**
-     * Loads task list as a String
+     * Loads task list as a String.
+     *
      * @return String representing indexed task list
      * @throws FileNotFoundException If list file not found in hard disk
      */

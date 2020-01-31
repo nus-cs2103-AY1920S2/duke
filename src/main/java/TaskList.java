@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     /**
-     * Returns task list as an ArrayList
+     * Returns task list as an ArrayList.
      *
      * @return Task list as an ArrayList of Tasks
      */
@@ -121,7 +121,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from task list array based on the index provided
+     * Deletes task from task list array based on the index provided.
      *
      * @param index Index of task to be deleted from task list
      * @return Updated task list as an ArrayList
@@ -129,7 +129,8 @@ public class TaskList {
      */
     public ArrayList<Task> deleteTask(int index) throws GooseTaskExistenceException {
         if (index >= taskList.size() || index < 0) {
-            throw new GooseTaskExistenceException("You trick Goose? Task " + taskList.size() + " doesn't exist. Honk...");
+            throw new GooseTaskExistenceException("You trick Goose? Task " + taskList.size()
+                    + " doesn't exist. Honk...");
         }
 
         taskList.remove(index);
@@ -137,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * Marks task as done from task list array based on the index provided
+     * Marks task as done from task list array based on the index provided.
      *
      * @param index Index of task to be marked as done from task list
      * @return Updated task list as an ArrayList

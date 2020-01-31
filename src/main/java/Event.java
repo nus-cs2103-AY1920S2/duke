@@ -10,14 +10,29 @@ public class Event extends Task {
     LocalDate atDate;
     String time24Hr;
 
+    /**
+     * Constructor for Event. Default isDone boolean value is false.
+     *
+     * @param description Description of event
+     * @param date Date of the event
+     * @param time Time of the event
+     */
     public Event(String description, String date, String time) {
         super(description);
         this.atDate = LocalDate.parse(date);
         this.time24Hr = time;
     }
 
-    public Event(String description, String date, String time, boolean done) {
-        super(description, done);
+    /**
+     * Another constructor for Deadline which allows explicit assigning of isDone.
+     *
+     * @param description Description of event
+     * @param date Date of the event
+     * @param time Time of the event
+     * @param isDone True if event has been completed, false if not.
+     */
+    public Event(String description, String date, String time, boolean isDone) {
+        super(description, isDone);
         this.atDate = LocalDate.parse(date);
         this.time24Hr = time;
     }

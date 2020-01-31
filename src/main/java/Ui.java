@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Contains methods which handle interactions with the user
+ * Contains methods which handle interactions with the user.
  */
 public class Ui {
     private int maxLength;
@@ -11,14 +11,14 @@ public class Ui {
     }
 
     /**
-     * Display welcome message
+     * Display welcome message.
      */
     public void showWelcome() {
-        String logo = " _________                        \n" +
-                " __  ____/_______________________ \n" +
-                " _  / __ _  __ \\  __ \\_  ___/  _ \\  >(o )___\n" +
-                " / /_/ / / /_/ / /_/ /(__  )/  __/   ( ._> /\n" +
-                " \\____/  \\____/\\____//____/ \\___/     `---'";
+        String logo = " _________                        \n"
+                + " __  ____/_______________________ \n"
+                + " _  / __ _  __ \\  __ \\_  ___/  _ \\  >(o )___\n"
+                + " / /_/ / / /_/ / /_/ /(__  )/  __/   ( ._> /\n"
+                + " \\____/  \\____/\\____//____/ \\___/     `---'";
 
         System.out.println("Hello it's\n" + logo);
 
@@ -27,14 +27,14 @@ public class Ui {
     }
 
     /**
-     * Display goodbye message
+     * Display goodbye message.
      */
     public void showBye() {
         System.out.println(wrapLine("Honk honk!"));
     }
 
     /**
-     * Display task list
+     * Display task list.
      *
      * @param taskList Task list as a String (ideally loaded from Storage)
      */
@@ -43,7 +43,7 @@ public class Ui {
     }
 
     /**
-     * Message to be displayed after task has been added
+     * Message to be displayed after task has been added.
      *
      * @param addedTask Task that was added
      * @param taskList Updated task list
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Displays list of found tasks when a user uses the 'find' command
+     * Displays list of found tasks when a user uses the 'find' command.
      *
      * @param foundTasks ArrayList of tasks which match the search
      */
@@ -114,14 +114,14 @@ public class Ui {
     // Exceptions
 
     /**
-     * Displays loading error message
+     * Displays loading error message.
      */
     public void showLoadingError() {
         System.out.println(wrapLine("Honk! Loading error!"));
     }
 
     /**
-     * Displays formatted error message
+     * Displays formatted error message.
      *
      * @param msg Error message to be displayed
      */
@@ -135,7 +135,7 @@ public class Ui {
      * Wraps message in appropriate format to be displayed.
      *
      * @param msg Message to be wrapped
-     * @return String containing formatted messsage
+     * @return String containing formatted message
      */
     public String wrapLine(String msg) {
         String top = "";
