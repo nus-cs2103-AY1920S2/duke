@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
-/**
- * Main class.
- */
+/** Main class. */
 public class Duke {
 
     private Storage storage;
@@ -13,7 +11,8 @@ public class Duke {
     /**
      * Constructor for Duke class. Ui handles user interaction. Storage stores and loads Tasklist from persistent storage.
      * TaskList stores tasks and provide functions to maintain these tasks. Parser parses input.
-     * @param filepath path where TaskList is stored
+     *
+     * @param filepath path where TaskList is stored.
      */
     public Duke(String filepath) {
         this.ui = new Ui();

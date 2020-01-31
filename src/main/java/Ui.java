@@ -1,13 +1,12 @@
-/**
- * Handles user output.
- */
+/** Handles user output. */
 public class Ui {
     protected static String fill = "----------------------------------------";
     protected static String indent = "    ";
 
     /**
-     * Prints output for adding a task into the TaskList
-     * @param task task to be added
+     * Prints output for adding a task into the TaskList.
+     *
+     * @param task task to be added.
      * @param size current size of TaskList.
      */
     public void showAddTask(Task task, int size) {
@@ -16,16 +15,18 @@ public class Ui {
     }
 
     /**
-     * Prints output for setting a task to be done in the TaskList
-     * @param task task to be set to done
+     * Prints output for setting a task to be done in the TaskList.
+     *
+     * @param task task to be set to done.
      */
     public void showDoneTask(Task task) {
         System.out.println(dukeFormat("Sure I will mark this task as done.\n    " + task));
     }
 
     /**
-     * Prints output for deleting a task from the TaskList
-     * @param task task to be deleted
+     * Prints output for deleting a task from the TaskList.
+     *
+     * @param task task to be deleted.
      * @param size current size of TaskList.
      */
     public void showDeleteTask(Task task, int size) {
