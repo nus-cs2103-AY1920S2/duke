@@ -23,17 +23,19 @@ public class ChatBot {
      */
     public void runChatBot(Scanner sc) {
         String inputCommand;
-        boolean continueRunning = true;
         this.ui.greetUser();
         ArrayList<Task> tasks = this.storage.getTaskFromStorage();
         this.taskLists = new TaskList(tasks);
         while (sc.hasNextLine()) {
             inputCommand = sc.nextLine();
-            continueRunning = parser.respondToUser(inputCommand, this.ui, this.taskLists);
-            if (!continueRunning) {
-                // update file with updated tasklist
-                storage.writeToFile(this.taskLists.getTaskList());
-                break;
+            Command command = parser.respondToUser(inputCommand, this.ui, this.taskLists);
+            try {
+                command.execute(this.ui, this.taskLists, this.storage);
+                if (command.getExitStatus()) {
+                    return; //exit from chat-bot
+                }
+            } catch (DukeException e) {
+                this.ui.prettyPrinting(e.toString());
             }
         }
     }
