@@ -1,6 +1,14 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }
 
 group 'seedu.duke'
@@ -22,6 +30,15 @@ application {
     // Change this to your main class.
     mainClassName = "Duke"
 }
+
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Duke'
+    }
+}
+
 
 run {
     standardInput = System.in
