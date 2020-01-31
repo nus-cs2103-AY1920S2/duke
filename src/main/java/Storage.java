@@ -18,10 +18,9 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                  String line = sc.nextLine();
-                 String[] args = line.split("[\\[\\]]");
-                 String code = args[0];
-                 boolean isDone = args[1].equals("Y");
-                 String[] taskArgs = Arrays.copyOfRange(args, 2, args.length);
+                 String code = line.substring(1, 2);
+                 boolean isDone = line.substring(4, 5).equals("Y");
+                 String taskArgs = line.substring(7);
                  Task task = buildTask(code, taskArgs, isDone);
                  listOfTasks.add(task);
             }
@@ -43,20 +42,24 @@ public class Storage {
         }
     }
 
-    public Task buildTask(String code, String[] args, boolean isDone) {
+    public Task buildTask(String code, String args, boolean isDone) {
         if (code.equals("T")) {
-            // args like {"borrow, "book}
-            Todo todo = new Todo(String.join(" ", args), isDone);
+            // args lik "borrow book"
+            Todo todo = new Todo(args, isDone);
             return todo;
         } else if (code.equals("D")) {
-            // deadlineArgs like {"homework", "2/12/2019 1800"}
-            String[] deadlineArgs = String.join(" ", args).split(" /by ");
-            Deadline deadline = new Deadline(deadlineArgs[0].strip(), deadlineArgs[1].strip(), isDone);
+            // deadlineArgs like "homework (by: 22/12/2019 1800)"
+            String[] deadlineArgs = args.split("[ ][//(][b][y][//:][ ]");
+            String description = deadlineArgs[0];
+            String byWhen = deadlineArgs[1].substring(0, deadlineArgs[1].length());
+            Deadline deadline = new Deadline(description, byWhen, isDone);
             return deadline;
         } else if (code.equals("E")) {
             // eventArgs like {"attend festival", "2pm-4pm"}
-            String[] eventArgs = String.join(" ", args).split(" /at ");
-            Event event = new Event(eventArgs[0].strip(), eventArgs[1].strip(), isDone);
+            String[] eventArgs = args.split("[ ][//(][a][t][//:][ ]");
+            String description = eventArgs[0];
+            String atWhen = eventArgs[1].substring(0, eventArgs[1].length());
+            Event event = new Event(description, atWhen, isDone);
             return event;
         } else {
             throw new DukeIOException("Cannot understand the type of task.");

@@ -1,4 +1,8 @@
 [T][N] borrow book
-[D][N] return book (by: 2019-10-15)
-[E][Y] project meeting (at: Mon 2-4pm)
-[E][N] cry in bed (at: Anytime)
+
+[D][N] return book (by: 2019-10-15))
+
+[E][Y] project meeting (at: Mon 2-4pm))
+
+[E][N] cry in bed (at: Anytime))
+
