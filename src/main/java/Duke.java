@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.lang.String;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,13 +6,16 @@ import java.util.List;
 
 public class Duke {
     private List<Task> tasks;
+    private Storage storage;
 
     private Duke() {
         this.tasks = new ArrayList<>();
+        storage = Storage.createSrorageFile();
     }
 
     private static void greet() {
         System.out.println("Hello! I'm Duke");
+        System.out.println("By default, your list of tasks will be saved to \"tasks.txt\".");
         System.out.println("What can I do for you?");
         System.out.println();
     }
@@ -22,9 +26,10 @@ public class Duke {
         try {
             switch (userCommand) {
                 case "list":
-                    this.printList();
+                    System.out.println(this.printList());
                     System.out.println();
                     sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                    storage.saveToFile(printList());
                     echo(sc);
                     break;
 
@@ -104,12 +109,14 @@ public class Duke {
         }
     }
 
-    private void printList() {
-        System.out.println("Here is your list of tasks:");
+    private String printList() {
+        String output = "";
+        output += ("Here is your list of tasks:\n");
         for (int i = 0; i < tasks.size(); ++i) {
             Task task = tasks.get(i);
-            System.out.printf("%d. %s\n", i + 1, task.toString());
+            output += String.format("%d. %s\n", i + 1, task.toString());
         }
+        return output;
     }
 
     private static void printByeMsg() {
