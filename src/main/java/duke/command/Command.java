@@ -149,6 +149,12 @@ public class Command {
         }
     }
 
+    /**
+     * findCommand Method finds Tasks which has matching keywords in its description.
+     *
+     * @param taskList      is the list of Tasks are saved and manipulated
+     * @param commandSuffix is the additional String that accompanies two-step commands
+     */
     public static void findCommand(TaskList taskList, String commandSuffix) {
         StringBuilder sb = new StringBuilder();
         List<String> keywordList = new ArrayList<>();
