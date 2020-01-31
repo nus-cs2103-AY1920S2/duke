@@ -1,3 +1,6 @@
+/**
+ * A command to add a task to Duke.
+ */
 public class AddCommand extends Command {
     private Task task;
     public AddCommand(Task t) {

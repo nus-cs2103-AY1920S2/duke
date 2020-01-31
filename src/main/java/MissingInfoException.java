@@ -1,3 +1,6 @@
+/**
+ * An exception thrown when there is missing information.
+ */
 public class MissingInfoException extends DukeException {
     String taskType;
     boolean hasDescription;
@@ -7,6 +10,10 @@ public class MissingInfoException extends DukeException {
         this.hasDescription = hasDescription;
     }
 
+    /**
+     * Returns a description of the item that is missing.
+     * @return Name of missing item.
+     */
     public String getMissingInfoName() {
         if (!this.hasDescription)
             return "description";
@@ -14,6 +21,10 @@ public class MissingInfoException extends DukeException {
             return "date/time";
     }
 
+    /**
+     * Returns the task type.
+     * @return Task type.
+     */
     public String getTaskType() {
         return this.taskType;
     }

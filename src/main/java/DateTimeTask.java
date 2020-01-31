@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A task that comes with a date.
+ */
 abstract class DateTimeTask extends Task {
     protected LocalDate dateTime;
 
@@ -9,6 +12,10 @@ abstract class DateTimeTask extends Task {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns the date attached to the task.
+     * @return Date in task.
+     */
     public String getDateTime() {
         return this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

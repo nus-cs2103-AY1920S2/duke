@@ -1,14 +1,30 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user inputs.
+ */
 public class Parser {
 
+    /**
+     * Throws an error if the given array only has 1 element.
+     * @param task Type of task.
+     * @param hasDescription Whether the task has a description.
+     * @param arr Array to check.
+     * @throws DukeException
+     */
     private static void checkArr(String task, boolean hasDescription, String arr[]) throws DukeException {
         if (arr.length == 1) {
             throw new MissingInfoException(task, hasDescription);
         }
     }
 
+    /**
+     * Parses the given user input and maps it to a command.
+     * @param fullCommand User input.
+     * @return Command.
+     * @throws DukeException If any error occurs during parsing of the user input.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         Command c;
         String cmdInstructionArr[] = fullCommand.split(" ", 2);

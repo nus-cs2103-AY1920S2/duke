@@ -1,3 +1,7 @@
+/**
+ * Duke is a friendly chatbot who will keep track of your tasks
+ * and whether they have been completed.
+ */
 public class Duke {
 
     private Storage storage;
@@ -15,6 +19,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes Duke and waits for user input before executing it.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -33,6 +40,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialises Duke with known filepath.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("../../../data/tasks.txt").run();
     }

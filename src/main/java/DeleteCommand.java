@@ -1,3 +1,6 @@
+/**
+ * A command to delete a task from Duke.
+ */
 public class DeleteCommand extends Command {
     private int idx;
     public DeleteCommand(int idx) {

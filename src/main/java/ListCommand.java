@@ -1,3 +1,6 @@
+/**
+ * A command to list out the tasks stored in Duke.
+ */
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

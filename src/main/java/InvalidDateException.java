@@ -1,3 +1,6 @@
+/**
+ * An exception thrown when an invalid date is entered.
+ */
 public class InvalidDateException extends DukeException {
     @Override
     public String getMessage() {
