@@ -86,6 +86,10 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> tasks) {
         try {
+            if (!this.file.getParentFile().exists()) {
+                // add new directory for them
+                this.file.getParentFile().mkdir();
+            }
             FileWriter fw = new FileWriter(this.file);
             int counter = 0;
             String result = "";
