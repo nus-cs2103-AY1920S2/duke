@@ -8,7 +8,7 @@ import duchess.task.TaskList;
 import duchess.ui.Ui;
 
 /**
- * The {@code Duchess} class is the heart of the Duchess program.
+ * The {@code Duke} class is the heart of the Duchess program.
  * Upon initialising an instance of this class, calling run() on it
  * will begin the program.
  *
@@ -19,7 +19,7 @@ import duchess.ui.Ui;
  *
  * @author Zhu Hanming
  */
-public class Duchess {
+public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -31,7 +31,7 @@ public class Duchess {
      * @param filePath A {@code String} denoting the location of the JSON
      *                 save file.
      */
-    public Duchess(String filePath) {
+    public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -64,5 +64,15 @@ public class Duchess {
                 ui.printLine();
             }
         }
+    }
+
+    /**
+     * Starts up the Duchess program.
+     *
+     * @param args Not used.
+     */
+    public static void main(String[] args) {
+        Duke duchess = new Duke("data/tasks.json");
+        duchess.run();
     }
 }
