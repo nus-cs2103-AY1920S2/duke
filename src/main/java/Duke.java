@@ -1,3 +1,17 @@
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,80 +29,83 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private GuiUi ui;
 
     /**
      * Class constructor.
      *
-     * @param filePath Path to file where tasks are saved on hard disk.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        ui = new GuiUi();
+        storage = new Storage("data/duke.txt");
+    }
+
+    public String prepareList() {
+        String response = "";
 
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException exception) {
-            ui.showLoadingError();
             tasks = new TaskList();
 
-            File file = new File(filePath);
+            File file = new File("data/duke.txt");
 
             try {
                 file.createNewFile();
+                response.concat("File created\n");
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
+        return response;
     }
 
     /**
      * Runner of Duke.
      * Triggered upon start-up.
      */
-    public void run() {
-        ui.printGreeting();
-        String input = ui.readTask();
+    public String run(String input) {
 
-        while (!input.equals("bye")) {
+        if (!input.equals("bye")) {
             Parser parser = new Parser(input);
+            String response = "";
 
             switch (parser.getIdentifier()) {
 
             case "list":
-                ui.printList(tasks);
+                response = ui.getList(tasks);
                 break;
             case "done":
                 int completedTask = parser.getTaskIndex();
                 tasks.getTask(completedTask - 1).setDone();
 
-                ui.printDoneSuccess(tasks, completedTask - 1);
+                response = ui.getDoneSuccess(tasks, completedTask - 1);
 
                 try {
                     storage.updateFile(tasks);
                 } catch (IOException exception) {
-                    ui.printUpdateError(exception);
+                    response = ui.getUpdateError(exception);
                 }
                 break;
             case "delete":
                 int removeTask = parser.getTaskIndex();
 
-                ui.printDeleteSuccess(tasks, removeTask - 1);
+                response = ui.getDeleteSuccess(tasks, removeTask - 1);
 
                 tasks.deleteTask(removeTask - 1);
-                ui.printStatusUpdate(tasks);
+                response = response.concat(ui.getStatusUpdate(tasks));
 
                 try {
                     storage.updateFile(tasks);
                 } catch (IOException exception) {
-                    ui.printUpdateError(exception);
+                    response = ui.getUpdateError(exception);
                 }
                 break;
             case "find":
                 try {
-                    this.findTarget(parser);
+                    response = this.findTarget(parser);
                 } catch (DukeException exception) {
-                    ui.printException(exception);
+                    response = ui.getExceptionMessage(exception);
                 }
 
                 break;
@@ -96,24 +113,24 @@ public class Duke {
                 try {
                     this.addTask(parser);
 
-                    ui.printAddSuccess(tasks);
-                    ui.printStatusUpdate(tasks);
+                    response = ui.getAddSuccess(tasks);
+                    response = response.concat(ui.getStatusUpdate(tasks));
 
                     try {
                         storage.updateFile(tasks);
                     } catch (IOException exception) {
-                        ui.printUpdateError(exception);
+                        response = ui.getUpdateError(exception);
                     }
                 } catch (DukeException exception) {
-                    ui.printException(exception);
+                    response = ui.getExceptionMessage(exception);
                 }
                 break;
             }
 
-            input = ui.readTask();
+            return response;
         }
 
-        ui.printExit();
+        return ui.getExitGreeting();
     }
 
     /**
@@ -149,15 +166,19 @@ public class Duke {
      * @param parser Parser to interpret user input command.
      * @throws DukeException Thrown when description and hence keyword is empty.
      */
-    public void findTarget(Parser parser) throws DukeException {
+    public String findTarget(Parser parser) throws DukeException {
         String keyword = parser.getDescription();
 
         ArrayList<String> targets = tasks.findTargets(keyword);
 
-        ui.printTargets(targets);
+        return ui.getTargets(targets);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return this.run(input);
     }
 }
