@@ -107,8 +107,8 @@ public class TaskList {
      * able to delete or complete tasks using the original indices.
      *
      * @param searchWords Word(s) to search for in the tasks' descriptions.
-     * @return An array of pairs of {@code Task}s and {@code Integer}s. Returns
-     * an empty array if no tasks meet the requirement.
+     * @return An array of pairs of {@code Task}s and {@code Integer}s. Returns an
+     *         empty array if no tasks meet the requirement.
      */
     public ArrayList<Pair<Task, Integer>> find(String searchWords) {
         return IntStream.range(0, this.tasks.size())
