@@ -1,3 +1,5 @@
+package Exception;
+
 public class DukeException extends RuntimeException {
     protected String message;
 
