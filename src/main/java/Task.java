@@ -4,9 +4,9 @@ public class Task {
     // type = todo, event, or deadline
     // done = done or not done
 
-    private String task;
-    private String type;
-    private boolean done = false;
+    String task;
+    String type;
+    boolean isDone = false;
 
     // Tasks represented by their initials
     private final static String TODO = "T";
@@ -27,14 +27,14 @@ public class Task {
     }
 
     public void taskDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public String print_Format() throws DukeException {
         try {
             String checkmark = "N";
 
-            if (this.done == true) {
+            if (this.isDone == true) {
                 checkmark = "Y";
             }
 

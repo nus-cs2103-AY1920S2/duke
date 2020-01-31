@@ -66,11 +66,22 @@ public class Duke {
                         // Test string to see if exception should be thrown
                         String test = command[1];
 
-                        Task new_Task = new Task(type, input);
-                        tasks.add(new_Task);
+                        if(command[0].equals("todo)")) {
+                            Task new_Task = new Todo(type, input);
+                            tasks.add(new_Task);
+                        } else if(command[0].equals("deadline")) {
+                            Task new_Task = new Deadline(type, input);
+                            tasks.add(new_Task);
+                        } else {
+                            Task new_Task = new Event(type, input);
+                            tasks.add(new_Task);
+                        }
+
 
                         // Putting the output string together
-                        String output = line + "\n" + task_Add_Message + "\n" + "       " + new_Task + "\n";
+                        String output = line + "\n" +
+                                task_Add_Message + "\n" +
+                                "       " + tasks.get(tasks.size() - 1) + "\n";
                         output += "     Now you have " + tasks.size() + " task(s) in the list." + "\n" + line;
                         System.out.println(output);
 
