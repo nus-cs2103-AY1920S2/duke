@@ -1,9 +1,8 @@
 import java.io.File;
+import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Scanner;
 
 public class Storage {
     private File file;
