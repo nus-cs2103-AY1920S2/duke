@@ -5,11 +5,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     public Duke() {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage();
+        parser = new Parser();
     }
 
     public static void main(String[] args) throws DukeException, IOException {
@@ -37,13 +39,13 @@ public class Duke {
         storage.saveData();
         ui.reply("    Bye. Hope to see you again soon!");
     }
-    public void handle(String string) throws DukeException{
-        if (string.equals("list")) {
+    public void handle(String command) throws DukeException{
+        if (command.equals("list")) {
             ui.printList();
         } else {
-            String type = string.split(" ")[0];
+            String type = parser.getType(command);
             if (type.equals("done") || type.equals("delete")) {
-                int taskNo = Integer.parseInt(string.split(" ")[1]);
+                int taskNo = parser.getTaskNum(command);
                 if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
                     throw new DukeException("☹ OOPS!! Not a valid number");
                 } else {
@@ -58,7 +60,7 @@ public class Duke {
                 }
             } else {
                 // create new task -> add to tasks -> reply
-                Task task = tasks.createAndAddTask(type, string);
+                Task task = tasks.createAndAddTask(type, command);
                 ui.addMessage(task);
             }
         }
