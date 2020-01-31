@@ -12,7 +12,7 @@ public class Duke {
 
     private static Ui ui = new Ui();
     public static TaskList taskList = new TaskList();
-    private static Storage storage = new Storage("data/duke.txt");
+    private static Storage storage = new Storage("duke.txt");
     private static Parser parser = new Parser();
 
     /**
