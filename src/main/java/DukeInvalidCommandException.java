@@ -5,8 +5,8 @@ public class DukeInvalidCommandException extends DukeException {
     }
 
     @Override
-        public String toString() {
-            return getMessage();
-        }
+    public String toString() {
+        return getMessage();
+    }
 
 }
