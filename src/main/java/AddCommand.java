@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The AddCommand class is used to update the current TaskList with the newly added task
+ * and prints the added task to the user.
+ */
 public class AddCommand extends Command {
     protected String command;
 
@@ -9,6 +13,16 @@ public class AddCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * The execute method of the AddCommand is used to add the task in the command given into
+     * the TaskList and updates the stored TaskList in duke.txt.
+     *
+     * @param tasks This is the current TaskList in duke.txt.
+     * @param ui The current Ui created.
+     * @param storage This is used for saving of the new TaskList into duke.txt.
+     * @throws IOException On the input error.
+     * @see IOException
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
