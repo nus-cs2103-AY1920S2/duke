@@ -28,7 +28,7 @@ public abstract class Command {
      * @param tasks This is the saved TaskList in duke.txt.
      * @param ui This is the created Ui in Duke.
      * @param storage This is responsible for loading and saving the updated TaskList.
-     * @throws IOException On input error.
+     * @throws IOException if file cannot be written to or closed.
      * @see IOException
      */
     abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;

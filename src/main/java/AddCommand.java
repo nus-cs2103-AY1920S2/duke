@@ -20,8 +20,7 @@ public class AddCommand extends Command {
      * @param tasks This is the current TaskList in duke.txt.
      * @param ui The current Ui created.
      * @param storage This is used for saving of the new TaskList into duke.txt.
-     * @throws IOException On the input error.
-     * @see IOException
+     * @throws IOException if file input cannot be written to or closed.
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
