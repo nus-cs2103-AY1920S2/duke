@@ -15,6 +15,15 @@ public class Event extends DateTimeTask {
     }
 
     @Override
+    public Task getCopy() {
+        Event e = new Event(this.description, this.dateTime);
+        if (this.isDone()) {
+            e.setDone();
+        }
+        return e;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (at: " + this.getDateTime() + ")";
     }
