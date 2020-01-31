@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+#memory files
+src/main/java/memory/TaskList.txt
