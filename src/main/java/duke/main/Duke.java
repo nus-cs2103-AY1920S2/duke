@@ -9,7 +9,7 @@ public class Duke {
     TaskList taskList;
 
     /**
-     * Duke Object that forms the backbone of the program.
+     * Duke Object that forms the backbone of the program, and more!
      *
      * @param filepath  is the User's working directory for file reading/saving
      * @throws DukeException    when multiple exceptions are caught (e.g. unfilled secondary input)
