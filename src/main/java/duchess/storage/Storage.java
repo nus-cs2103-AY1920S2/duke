@@ -91,8 +91,8 @@ public class Storage {
                     if (isDirectoryCreated) {
                         paths[i + 1] = paths[i] + "/" + paths[i + 1];
                     } else {
-                        throw new DuchessException("Failed to load save file! " +
-                                "You will also not be able to save.");
+                        throw new DuchessException("Failed to load save file! "
+                                + "You will also not be able to save.");
                     }
                 }
             }
