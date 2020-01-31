@@ -15,14 +15,28 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Makeshift database that stores all task list in a file.
+ */
 public class Storage {
 
     public static String filePath;
 
+    /**
+     * Creates a makeshift database in file at specified filepath.
+     *
+     * @param filePath path to file that stores the task list.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads list of tasks from the database.
+     *
+     * @return list of tasks.
+     * @throws FileNotFoundException if file annot be found.
+     */
     public List<Task> load() throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -43,6 +57,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Converts string indicating month to its corresponding integer as a string.
+     *
+     * @param month string of month.
+     * @return integer of month formatted as a string.
+     */
     public String convertMonthToInt(String month) {
         if (month.equals("Jan")) {
             return "01";
@@ -71,6 +91,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts format of date that can be parsed by java.time.LocalDateTime.
+     *
+     * @param date string of date.
+     * @return formatted string that can be parsed by java.time.LocalDateTime.
+     */
     public String convertDateFormat(String date) {
         String[] parts = date.split(" ");
         String year = parts[2];
@@ -79,12 +105,26 @@ public class Storage {
         return year + "-" + month + "-" + day;
     }
 
+    /**
+     * Writes string to file.
+     *
+     * @param textToAdd test to be written to file.
+     * @throws IOException named file exists but is a directory rather than a regular file,
+     * does not exist but cannot be created, or cannot be open for any other reason.
+     */
     public void writeToFile(String textToAdd) throws IOException  {
         FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Formats and write task list to file.
+     *
+     * @param list list of tasks.
+     * @throws IOException named file exists but is a directory rather than a regular file,
+     * does not exist but cannot be created, or cannot be open for any other reason.
+     */
     public void rewriteFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < list.size(); i++) {
@@ -94,6 +134,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Appends string to the back of file.
+     *
+     * @param textToAppend string to be added to back of file.
+     * @throws IOException named file exists but is a directory rather than a regular file,
+     * does not exist but cannot be created, or cannot be open for any other reason.
+     */
     public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend + "\n");

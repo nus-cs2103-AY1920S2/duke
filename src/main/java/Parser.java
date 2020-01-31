@@ -10,11 +10,19 @@ import duke.exception.DukeException;
 
 import java.util.Arrays;
 
+/**
+ * Parser class takes in and parses user input to return commands.
+ */
 public class Parser {
     public static String[] tasksCommandList = {"todo", "deadline", "event"};
 
-    public Parser() { }
-
+    /**
+     * Parses user imput to return a command.
+     *
+     * @param command user's input to specify command.
+     * @return Command.
+     * @throws DukeException if user input does not follow input format.
+     */
     public static Command parse(String command) throws DukeException {
         String[] split = command.split(" ", 2);
         String commandType = split[0];

@@ -11,6 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+/**
+ * Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
 
     private Storage storage;
@@ -18,6 +21,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Creates a Duke chatbot that helps a person to keep track of various things.
+     *
+     * @param filePath Path to file that stores a list of user's tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -33,6 +41,9 @@ public class Duke {
 //        }
     }
 
+    /**
+     * Runs Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
