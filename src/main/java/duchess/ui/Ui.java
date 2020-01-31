@@ -60,7 +60,7 @@ public class Ui {
      * the U-2501 unicode character.
      */
     public void printLine() {
-        System.out.println("\t" + new String(new char[65]).replace("\0", "\u2501"));
+        System.out.println("\t" + new String(new char[65]).replace("\0", "\u2501")); // border character
     }
 
     /**

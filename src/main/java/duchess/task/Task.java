@@ -31,7 +31,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (this.isCompleted ? "\u2713" : "\u2718");
+        return (this.isCompleted ? "\u2713" : "\u2718"); // tick or cross depending on isCompleted
     }
 
     @Override

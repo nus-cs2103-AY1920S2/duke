@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
@@ -84,12 +85,12 @@ public class StorageTest {
                 throw new DuchessException("Folder failed to be created!");
             }
         }
-        FileWriter fileWriter = new FileWriter("storageTestThree/data.json");
-        Gson gson = new Gson();
         Task[] taskArray = new Task[3];
         taskArray[0] = new ToDo("Task number 1");
         taskArray[1] = new Event("Task number 2", "2-4pm", true);
         taskArray[2] = new Deadline("Task number 3", LocalDateTime.now());
+        FileWriter fileWriter = new FileWriter("storageTestThree/data.json");
+        Gson gson = new Gson();
         fileWriter.write(gson.toJson(taskArray, Task[].class));
         fileWriter.close();
         Storage storageThree = new Storage("storageTestThree/data.json");
@@ -158,11 +159,11 @@ public class StorageTest {
                 throw new DuchessException("Folder failed to be created!");
             }
         }
-        Storage storageSix = new Storage("storageTestSix/data.json");
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Go for a run"));
         taskList.addTask(new Event("Movie", "5-7pm"));
         taskList.addTask(new Deadline("Exercise", LocalDateTime.now(), true));
+        Storage storageSix = new Storage("storageTestSix/data.json");
         storageSix.save(taskList);
         TaskList loadedTaskList = new TaskList(storageSix.load());
         assertEquals(3, loadedTaskList.size());
@@ -185,8 +186,8 @@ public class StorageTest {
      */
     @AfterAll
     public static void cleanUp() throws DuchessException {
-        String[] folders = {"storageTestOne", "storageTestTwo", "storageTestThree", "storageTestFour",
-                "storageTestSix"};
+        ArrayList<String> folders = new ArrayList<>(Arrays.asList("storageTestOne", "storageTestTwo",
+                "storageTestThree", "storageTestFour", "storageTestSix"));
         deleteDirectory("storageTestFour/oneMoreFolder");
         for (String folder : folders) {
             deleteDirectory(folder);

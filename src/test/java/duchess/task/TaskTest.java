@@ -47,9 +47,9 @@ public class TaskTest {
     @Test
     public void testToString() {
         Task testTask = new Task("What's up world!");
-        assertEquals("[\u2718] What's up world!", testTask.toString());
+        assertEquals("[\u2718] What's up world!", testTask.toString()); // cross mark
         testTask.toggleIsCompleted();
-        assertEquals("[\u2713] What's up world!", testTask.toString());
+        assertEquals("[\u2713] What's up world!", testTask.toString()); // tick mark
 
     }
 
