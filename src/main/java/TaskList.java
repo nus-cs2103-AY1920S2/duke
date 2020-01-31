@@ -52,6 +52,8 @@ public class TaskList {
                     System.out.println ("You have already completed this task!");
                 } else {
                     completedTask.markAsDone();
+                    System.out.println ("Nice! I've marked this task as done:\n"
+                            + "[" + completedTask.getStatus() + "] " + completedTask.getDescription());
                     Duke.pendingTask--;
                 }
                 if (Duke.pendingTask == 0) {

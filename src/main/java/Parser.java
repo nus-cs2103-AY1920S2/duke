@@ -32,8 +32,12 @@ public class Parser {
             }
         } else if (input.contains ("delete")) {
             //Delete task
-            int taskNum = Integer.parseInt (input.substring (7));
-            taskList.delete (taskNum);
+            try {
+                int taskNum = Integer.parseInt(input.substring(7));
+                taskList.delete(taskNum);
+            } catch (Exception e) {
+                System.out.println ("Please state a proper delete command:(");
+            }
         } else if (input.contains ("find")) {
             try {
                 String keyWord = input.substring(5);
