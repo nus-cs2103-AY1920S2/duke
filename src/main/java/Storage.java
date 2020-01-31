@@ -109,6 +109,7 @@ public class Storage {
                     throw new DukeException("Invalid abbreviation!", DukeErrorType.INVALID_ABBREVIATION);
                 }
             }
+            scanner.close();
         } catch (FileNotFoundException fileException) {
             try {
                 createDataPath(ABSOLUTE_PATH);
