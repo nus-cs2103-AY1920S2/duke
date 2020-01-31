@@ -1,11 +1,4 @@
 public class Parser {
-    private static final String BYE_CMD = "bye";
-    private static final String TODO_CMD = "todo";
-    private static final String EVENT_CMD = "event";
-    private static final String DEADLINE_CMD = "deadline";
-    private static final String LIST_CMD = "list";
-    private static final String DELETE_CMD = "delete";
-    private static final String DONE_CMD = "done";
 
     public Parser() {
     }
@@ -35,9 +28,9 @@ public class Parser {
         String[] strArr;
         String str1;
         Task t;
-        if (cmd.equals(LIST_CMD)) {
+        if (cmd.equals(CommandType.LIST_CMD.toString())) {
             return new Command(CommandType.LIST_CMD, null);
-        } else if (cmd.startsWith(DONE_CMD)) {
+        } else if (cmd.startsWith(CommandType.DONE_CMD.toString())) {
             if (!canSplitStr(cmd, "done\\s+")) {
                 throw new DukeException("The task to mark done cannot be empty");
             }
@@ -49,7 +42,7 @@ public class Parser {
             }
 
             return new Command(CommandType.DONE_CMD, new String[] { str1 });
-        } else if (cmd.startsWith(DELETE_CMD)) {
+        } else if (cmd.startsWith(CommandType.DELETE_CMD.toString())) {
             if (!canSplitStr(cmd, "delete\\s+")) {
                 throw new DukeException("The task to delete cannot be empty");
             }
@@ -61,7 +54,7 @@ public class Parser {
             }
 
             return new Command(CommandType.DELETE_CMD, new String[] { str1 });
-        } else if (cmd.startsWith(TODO_CMD)) {
+        } else if (cmd.startsWith(CommandType.TODO_CMD.toString())) {
             if (!canSplitStr(cmd, "todo\\s+")) {
                 throw new DukeException("The description of a todo cannot be empty");
             }
@@ -69,7 +62,7 @@ public class Parser {
             str1  = cmd.split("todo\\s+")[1];
 
             return new Command(CommandType.TODO_CMD, new String[] { str1 });
-        } else if (cmd.startsWith(DEADLINE_CMD)) {
+        } else if (cmd.startsWith(CommandType.DEADLINE_CMD.toString())) {
             if (!canSplitStr(cmd, "deadline\\s+")) {
                 throw new DukeException("The description and timing of a deadline cannot be empty");
             }
@@ -86,7 +79,7 @@ public class Parser {
             String by = strArr[1];
 
             return new Command(CommandType.DEADLINE_CMD, new String[] { name, by });
-        } else if (cmd.startsWith(EVENT_CMD)) {
+        } else if (cmd.startsWith(CommandType.EVENT_CMD.toString())) {
             if (!canSplitStr(cmd, "event\\s+")) {
                 System.out.println("went here");
                 throw new DukeException("The description and timing of an event cannot be empty");
@@ -105,7 +98,7 @@ public class Parser {
             String at = strArr[1];
 
             return new Command(CommandType.DEADLINE_CMD, new String[] { name, at });
-        } else if (cmd.equals(BYE_CMD)) {
+        } else if (cmd.equals(CommandType.BYE_CMD.toString())) {
             return new Command(CommandType.BYE_CMD, null);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
