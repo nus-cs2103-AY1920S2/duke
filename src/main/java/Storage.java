@@ -7,10 +7,10 @@ import java.nio.file.Files;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
-public class DataManager {
+public class Storage {
     Path path;
 
-    public DataManager() {
+    public Storage() {
         String currentDirectory = System.getProperty("user.dir");
         Path dataDirectory = java.nio.file.Paths.get(currentDirectory, "data");
         this.path = java.nio.file.Paths.get(currentDirectory, "data", "duke.txt");
@@ -33,7 +33,7 @@ public class DataManager {
 
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            String taskString = task.toString() + "\n";
+            String taskString = task.toStore() + "\n";
             byte data[] = taskString.getBytes();
 
             try (OutputStream out = new BufferedOutputStream(

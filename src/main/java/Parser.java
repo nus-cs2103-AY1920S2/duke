@@ -1,9 +1,9 @@
-public class Input {
+public class Parser {
     private int type;
     private String cmd;
     private Task task;
 
-    public Input(String command) throws DukeException {
+    public Parser(String command) throws DukeException {
         if (command.equals("bye")|command.equals("list")|command.equals("done")|command.equals("todo")
                 |command.equals("deadline")|command.equals("event")|command.equals("delete")) {
             this.cmd = command.toLowerCase();
@@ -12,7 +12,7 @@ public class Input {
         }
     }
 
-    public Input(String content, Input command) throws DukeException {
+    public Parser(String content, Parser command) throws DukeException {
         if (content.equals(new String())) {
             throw new DukeException("☹ OOPS!!! The description of a "
                     + command.getCommand() + " cannot be empty.");

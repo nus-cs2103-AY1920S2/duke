@@ -11,10 +11,10 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        DataManager data = new DataManager();
+        Storage data = new Storage();
         Tracker tracker = new Tracker();
         Scanner scanner = new Scanner(System.in);
-        Input command;
+        Parser command;
 
         if (data.hasPreviousData()) {
             data.loadData(tracker);
@@ -22,7 +22,7 @@ public class Duke {
 
         while (true) {
             try {
-                command = new Input(scanner.next());
+                command = new Parser(scanner.next());
 
                 if (command.isBye()) {
                     System.out.println("Bye. Hope to see you again soon!");
@@ -47,10 +47,10 @@ public class Duke {
                     tracker.delete(index);
                     data.saveData(tracker.showList());
                 } else {
-                    Input content;
+                    Parser content;
 
                     try {
-                        content = new Input(scanner.nextLine(), command);
+                        content = new Parser(scanner.nextLine(), command);
                         tracker.add(content.getTask());
                         data.saveData(tracker.showList());
 

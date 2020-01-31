@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     private String content;
     private boolean isDone;
@@ -9,6 +11,14 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public String toStore() {
+        if (isDone) {
+            return "[\u2713] " + content;
+        } else {
+            return "[\u2718] " + content;
+        }
     }
 
     @Override
