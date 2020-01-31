@@ -89,7 +89,7 @@ public class TaskManager {
 
             if(textEntered.split(" ").length == 1){ //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
-            }else {
+            }else{
                 textEntered = textEntered.substring(9);
                 String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
                 String tempDate = temp[1];

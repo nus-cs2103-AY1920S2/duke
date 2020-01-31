@@ -58,10 +58,9 @@ public class Ui {
         if(textEntered.equals("list")){
             manager.listAllTasks();
         }else if(textEntered.contains("done")){
-            String[] helper = textEntered.split(" ");
-            int indexOfTaskDone;
+            Parser parser = new Parser();
+            int indexOfTaskDone = parser.handleDoneCommands(textEntered);
             try {
-                indexOfTaskDone = Integer.parseInt(helper[1]);
                 manager.setTaskAsDone(indexOfTaskDone);
             } catch(ArrayIndexOutOfBoundsException ex){
                 System.out.println("Done must be followed by a number");
@@ -76,9 +75,10 @@ public class Ui {
                 System.out.println(ex.getMessage());
             }
         }else if (textEntered.contains("delete")) {
+
             try {
-                String[] helper = textEntered.split(" ");
-                int indexOfTaskDeleted = Integer.parseInt(helper[1]);
+                Parser parse = new Parser();
+                int indexOfTaskDeleted = parse.handleDeleteCommands(textEntered);
                 manager.deleteTask(indexOfTaskDeleted);
             }catch (DukeException ex){
                 System.out.println(ex);
@@ -89,7 +89,8 @@ public class Ui {
             manager.saveExistingData();
             this.hasEnded = true;
         }else if(textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
-            String[] temp = textEntered.split(" ");
+            Parser parse = new Parser();
+            String[] temp = parse.handleFindCommands(textEntered);
             try{
                  if (temp.length == 1) {
                     throw new DukeException("Find must be followed by a keyword and cannot be empty.");
