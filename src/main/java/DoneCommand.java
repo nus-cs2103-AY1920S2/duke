@@ -3,6 +3,7 @@
  */
 public class DoneCommand extends Command {
     private int idx;
+
     public DoneCommand(int idx) {
         this.idx = idx;
     }

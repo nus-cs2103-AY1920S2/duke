@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
-    TaskList tasks;
-    Task todo, deadline, event;
-    Task t;
+    private TaskList tasks;
+    private Task todo, deadline, event;
+    private Task t;
 
     public TaskListTest() {
         this.tasks = new TaskList();
@@ -16,7 +16,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testAddTask() {
+    public void addTask() {
         this.tasks.addTask(this.todo);
         this.tasks.addTask(this.deadline);
         this.tasks.addTask(this.event);
@@ -27,7 +27,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testMarkTaskAsDone() {
+    public void markTaskAsDone() {
         this.tasks.addTask(this.todo);
         this.tasks.addTask(this.deadline);
         this.tasks.addTask(this.event);
@@ -46,7 +46,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testRemoveTask() {
+    public void removeTask() {
         this.tasks.addTask(this.todo);
         this.tasks.addTask(this.deadline);
         this.tasks.addTask(this.event);

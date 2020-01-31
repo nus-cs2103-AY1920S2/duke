@@ -4,13 +4,14 @@ import java.util.ArrayList;
  * Manages all the tasks in Duke.
  */
 public class TaskList {
-    private ArrayList<Task> arrTasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.arrTasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
-    public TaskList(ArrayList<Task> arrTasks) {
-        this.arrTasks = arrTasks;
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -18,7 +19,7 @@ public class TaskList {
      * @return Array of tasks in Duke.
      */
     public ArrayList<Task> getTasks() {
-        return this.arrTasks;
+        return this.tasks;
     }
 
     /**
@@ -26,7 +27,7 @@ public class TaskList {
      * @return Number of tasks in Duke.
      */
     public int getNumTasks() {
-        return this.arrTasks.size();
+        return this.tasks.size();
     }
 
     /**
@@ -34,7 +35,7 @@ public class TaskList {
      * @param t Task to be added.
      */
     public void addTask(Task t) {
-        this.arrTasks.add(t);
+        this.tasks.add(t);
     }
 
     /**
@@ -43,8 +44,8 @@ public class TaskList {
      * @return Task that was removed.
      */
     public Task removeTask(int i) {
-        Task t = this.arrTasks.get(i);
-        this.arrTasks.remove(i);
+        Task t = this.tasks.get(i);
+        this.tasks.remove(i);
         return t;
     }
 
@@ -54,7 +55,7 @@ public class TaskList {
      * @return Task that was marked as done.
      */
     public Task markTaskAsDone(int i) {
-        Task t = this.arrTasks.get(i);
+        Task t = this.tasks.get(i);
         t.setDone();
         return t;
     }

@@ -3,6 +3,7 @@
  */
 public class AddCommand extends Command {
     private Task task;
+
     public AddCommand(Task t) {
         this.task = t;
     }

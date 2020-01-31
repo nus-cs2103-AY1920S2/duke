@@ -6,7 +6,7 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String response = "Here are the tasks in your list:\n";
         int counter = 1;
-        for (Task t: tasks.getTasks()) {
+        for (Task t : tasks.getTasks()) {
             response += (counter + "."); // Index of task
             response += (" " + t + '\n'); // Description of task and whether it is done
             counter++;
