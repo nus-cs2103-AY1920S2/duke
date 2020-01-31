@@ -18,10 +18,21 @@ public class Storage {
     private String filePath;
     private ArrayList<Task> taskList;
 
+    /**
+     * Storage constructor.
+     *
+     * @param filePath String path of the duke.txt file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the list of tasks from the file specified.
+     *
+     * @return An ArrayList containing the loaded tasks.
+     * @throws DukeException DukeException thrown if file is not found or any line not being parsed succesfully.
+     */
     public ArrayList<Task> load() throws DukeException {
         taskList = new ArrayList<Task>();
         try {
@@ -38,6 +49,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the individual lines from the input file.
+     *
+     * @param taskString A string of the current line to be loaded from storage.
+     * @param lineNo The current index of the line in the file.
+     * @throws DukeException DukeException thrown if any line cannot be loaded.
+     */
     private void loadTask(String taskString, int lineNo) throws DukeException {
         String[] splitString = taskString.split(" \\| ");
         switch(splitString[0]) {
@@ -59,6 +77,12 @@ public class Storage {
                 taskList.get(taskList.size() - 1).setTaskDone();
     }
 
+    /**
+     * Overwrite the entire target file with the updated list of tasks and saves it.
+     *
+     * @param taskList The current list of tasks in the program.
+     * @throws DukeException DukeException thrown if any task cannot be written into the buffer before saving the file.
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(filePath);

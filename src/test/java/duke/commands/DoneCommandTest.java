@@ -21,6 +21,11 @@ public class DoneCommandTest {
     private static Ui ui = new Ui();
     private static Storage storage = new Storage("data/duke.txt");
 
+    /**
+     * Initialise the test environment with seed data.
+     *
+     * @throws DukeException DukeException thrown when adding tasks to TaskList fails.
+     */
     @BeforeAll
     public static void initAll() throws DukeException {
         tasks.addTask(new ToDo("Todo 1"));
@@ -28,6 +33,9 @@ public class DoneCommandTest {
         tasks.addTask(new Event("Event 1 /at 2020-05-01"));
     }
 
+    /**
+     * Assertion test when index of task to be marked as done, is out of bounds.
+     */
     @Test
     public void testDoneOutOfBounds() {
         Command testDone = new DoneCommand(10);
@@ -36,6 +44,9 @@ public class DoneCommandTest {
         assertEquals("Boss, you do know there's not that many tasks right?", e.getMessage());
     }
 
+    /**
+     * Assertion test when index of task to be marked as done, is within bounds (i.e. exists in the list).
+     */
     @Test
     public void testDoneAssertion() {
         Command testDone = new DoneCommand(1);

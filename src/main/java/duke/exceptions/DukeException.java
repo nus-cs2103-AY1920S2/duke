@@ -6,11 +6,22 @@ public class DukeException extends Exception {
     private ErrorCodes errorCode;
     private String errorInfo;
 
+    /**
+     * DukeException constructor.
+     *
+     * @param errorCode An ErrorCode enum representing the error type.
+     */
     public DukeException(ErrorCodes errorCode) {
         super();
         this.errorCode = errorCode;
     }
 
+    /**
+     * DukeException constructor with additional error information.
+     *
+     * @param errorCode An ErrorCode enum representing the error type.
+     * @param errorInfo A string containing any additional information.
+     */
     public DukeException(ErrorCodes errorCode, String errorInfo) {
         super();
         this.errorCode = errorCode;

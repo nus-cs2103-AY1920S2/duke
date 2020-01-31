@@ -13,6 +13,13 @@ public class Duke {
     private Ui ui;
     private boolean isLoadedFromStorage = false;
 
+    /**
+     * Duke constructor.
+     * Attempts to load tasks from duke.txt specified in filePath into a TaskList instance.
+     * Creates an empty TaskList instance if the file cannot be found.
+     *
+     * @param filePath Path to the duke.txt containing the saved tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to run the Duke program sequence.
+     */
     public void run() {
         ui.showWelcome();
         if (this.isLoadedFromStorage) {
@@ -46,6 +56,7 @@ public class Duke {
 
     /**
      * Main method. Entry point for the Duke program.
+     *
      * @param args Command-line arguments. Unused.
      */
     public static void main(final String[] args) {

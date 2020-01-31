@@ -19,6 +19,11 @@ public class StorageTest {
     private static Ui ui = new Ui();
     private static TaskList tasks = new TaskList();
 
+    /**
+     * Initialise the test environment with seed data.
+     *
+     * @throws DukeException DukeException thrown when adding tasks to TaskList fails.
+     */
     @BeforeAll
     public static void initAll() throws DukeException {
         // Load duke.txt with correct seed data
@@ -27,6 +32,12 @@ public class StorageTest {
         tasks.addTask(new Event("Event 1 /at 2020-05-01"));
     }
 
+    /**
+     * Assertion test if loading the tasks from the storage is successfully, without exceptions.
+     * Should not throw any exceptions.
+     *
+     * @throws DukeException DukeException thrown when loading the tasks from input file.
+     */
     @Test
     public void testLoadFromFile() throws DukeException {
         assertDoesNotThrow(() -> storage.load());
