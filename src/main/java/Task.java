@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * A basic Task class that contains a description and a boolean flag
  * to determine if the task is done.
@@ -22,7 +20,7 @@ public class Task {
      * @return A tick if the task is completed or a cross if the task is not.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "1" : "0"); //return 1 or 0
     }
 
     /**
@@ -31,6 +29,14 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Method to return if task is done.
+     * @return 1 if task is done, 0 if not done.
+     */
+    public int getDone() {
+        return (isDone ? 1 : 0);
     }
 
     /**

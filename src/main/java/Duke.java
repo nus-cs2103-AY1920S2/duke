@@ -1,10 +1,6 @@
-import main.java.*;
-
-import java.io.IOException;
-import java.lang.StringBuilder;
 import java.text.ParseException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Main class that drives the code to run the Duke bot.

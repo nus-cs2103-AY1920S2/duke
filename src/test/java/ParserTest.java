@@ -1,10 +1,6 @@
-package test.java;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import main.java.DukeException;
-import main.java.Parser;
 import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 

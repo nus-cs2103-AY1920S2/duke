@@ -1,5 +1,3 @@
-package main.java;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -37,7 +35,12 @@ public class Storage {
                 String[] command = s.nextLine().split("/");
 
                 String taskType = command[0].trim();
-                boolean isDone = command[1].trim().equals("\u2713");
+                boolean isDone;
+                if (command[1].trim().equals("1")) {
+                    isDone = true;
+                } else {
+                    isDone = false;
+                }
 
                 switch (taskType) {
                 case "deadline":
@@ -63,6 +66,7 @@ public class Storage {
                         dukeList.get(dukeList.size() - 1).markAsDone();
                     }
                     break;
+                default:
                 }
             }
         } catch (FileNotFoundException | ParseException e1) {
@@ -76,19 +80,19 @@ public class Storage {
      * TaskList and write all the tasks into a file.
      * @param taskList ArrayList of tasks that contains all tasks to be saved.
      */
-    public void saveFile (ArrayList<Task> taskList) {
+    public void saveFile(ArrayList<Task> taskList) {
         try {
             FileWriter writer = new FileWriter(file);
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
-                    String str = "todo" + "/" + task.getStatusIcon() + "/" + task.getDescription() + "\n";
+                    String str = "todo" + "/" + task.getDone() + "/" + task.getDescription() + "\n";
                     writer.write(str);
                 } else if (task instanceof Event) {
-                    String str = "event" + "/" + task.getStatusIcon() + "/"
+                    String str = "event" + "/" + task.getDone() + "/"
                             + task.getDescription() + "/" + ((Event) (task)).getAt() + "\n";
                     writer.write(str);
                 } else {
-                    String str = "deadline" + " /" + task.getStatusIcon() + " /"
+                    String str = "deadline" + " /" + task.getDone() + " /"
                             + task.getDescription() + "/ " + ((Deadline) (task)).getBy() + "\n";
                     writer.write(str);
                 }

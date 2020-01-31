@@ -1,14 +1,9 @@
-package test.java;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import main.java.TaskList;
-import main.java.ToDo;
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
-    public void sizeTest(){
+    public void sizeTest() {
         TaskList tasks = new TaskList();
         assertEquals(0, tasks.getSize());
         tasks.addTask(new ToDo("test"));

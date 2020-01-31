@@ -1,4 +1,3 @@
-package main.java;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +36,7 @@ public class Deadline extends Task {
     /**
      * Print the deadline task description, status icon and deadline date.
      * @return A string that indicates the task is a deadline, deadline description,
-     * status icon and deadline date.
+     *     status icon and deadline date.
      */
     @Override
     public String toString() {

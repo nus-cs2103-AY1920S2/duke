@@ -1,4 +1,3 @@
-package main.java;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -39,7 +38,7 @@ public class Event extends Task {
     /**
      * Print the event task description, status icon and event date.
      * @return A string that indicates the task is a event, event description,
-     * status icon and event date.
+     *     status icon and event date.
      */
     @Override
     public String toString() {

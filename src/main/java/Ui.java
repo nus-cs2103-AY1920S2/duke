@@ -1,4 +1,3 @@
-package main.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +9,9 @@ public class Ui {
     /**
      * Ui class constructor.
      */
-    public Ui () {}
+    public Ui() {
+
+    }
 
     /**
      * Method to print Duke's name and a welcome message to the user.
@@ -58,10 +59,14 @@ public class Ui {
     /**
      * Method to print a farewell message before closing the Duke bot.
      */
-public void printBye() {
+    public void printBye() {
         System.out.println("It was my pleasure to help you.\n");
     }
 
+    /**
+     * Method to print all the matched tasks.
+     * @param matchedTasks ArrayList of all matched tasks.
+     */
     public void printFind(ArrayList<Task> matchedTasks) {
         System.out.println("These are the tasks that matched what you were looking for.");
         for (Task tasks : matchedTasks) {

@@ -1,5 +1,3 @@
-package main.java;
-
 import java.util.ArrayList;
 
 /**
@@ -37,7 +35,7 @@ public class TaskList {
      * Method that adds a task to the task list.
      * @param task Task to be added.
      */
-    public void addTask (Task task) {
+    public void addTask(Task task) {
         taskList.add(task);
     }
 
@@ -45,7 +43,7 @@ public class TaskList {
      * Method that removes a task at that index from the task list.
      * @param index Index which task to be removed from.
      */
-    public void deleteTask (int index) {
+    public void deleteTask(int index) {
         taskList.remove(index);
     }
 
@@ -54,7 +52,7 @@ public class TaskList {
      * @param index Index of task to be marked as done.
      * @throws IndexOutOfBoundsException If the index is larger than the size of the ArrayList.
      */
-    public void setDone (int index) throws IndexOutOfBoundsException {
+    public void setDone(int index) throws IndexOutOfBoundsException {
         taskList.get(index).markAsDone();
     }
 
@@ -63,7 +61,7 @@ public class TaskList {
      * @param index Index of task to be returned.
      * @return Task to be returned.
      */
-    public Task getTask (int index) {
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 
@@ -72,7 +70,7 @@ public class TaskList {
      */
     public void printList() {
         System.out.println("These items are in your list: ");
-        for (int i = 0; i < taskList.size(); i++){
+        for (int i = 0; i < taskList.size(); i++) {
             System.out.println(i + 1 + ". " + taskList.get(i));
         }
     }
@@ -85,9 +83,14 @@ public class TaskList {
         return this.taskList;
     }
 
+    /**
+     * Method to find all matching tasks in the task list.
+     * @param str Keyword to find for all tasks.
+     * @return
+     */
     public ArrayList<Task> find(String str) {
         ArrayList<Task> matchedTasks = new ArrayList<Task>();
-        for (int i = 0; i < taskList.size(); i ++) {
+        for (int i = 0; i < taskList.size(); i++) {
             String description = taskList.get(i).getDescription();
             if (description.contains(str)) {
                 matchedTasks.add(taskList.get(i));

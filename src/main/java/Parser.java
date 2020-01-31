@@ -1,5 +1,3 @@
-package main.java;
-
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -51,11 +49,13 @@ public class Parser {
             return "event";
         } else if (command.contains("todo")) {
             return "todo";
-        } else throw new DukeException("Invalid command. Please try again.");
+        } else {
+            throw new DukeException("Invalid command. Please try again.");
+        }
     }
 
     /**
-     * From a deadline command, return the Deadline task which would be created
+     * From a deadline command, return the Deadline task which would be created.
      * @param str Deadline command provided by the user.
      * @return Deadline task that is created from the command.
      * @throws DukeException If the deadline command does not specify the due date.
@@ -73,7 +73,7 @@ public class Parser {
         String[] splitCommand = description.split(" ");
 
         StringBuilder builder = new StringBuilder();
-        for (int i = 1; i < splitCommand.length; i ++) {
+        for (int i = 1; i < splitCommand.length; i++) {
             builder.append(splitCommand[i]);
             builder.append(" ");
             description = builder.toString();
@@ -83,7 +83,7 @@ public class Parser {
     }
 
     /**
-     * From an Event command, return the Event task which would be created
+     * From an Event command, return the Event task which would be created.
      * @param str Event command provided by the user.
      * @return Event task that is created from the command.
      * @throws DukeException If the Event command does not specify the due date.
@@ -101,7 +101,7 @@ public class Parser {
         String[] splitCommand = description.split(" ");
 
         StringBuilder builder = new StringBuilder();
-        for(int i = 1; i < splitCommand.length; i ++) {
+        for (int i = 1; i < splitCommand.length; i++) {
             builder.append(splitCommand[i]);
             builder.append(" ");
             description = builder.toString();

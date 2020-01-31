@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * A ToDo task that extends from the Task class.
  */
