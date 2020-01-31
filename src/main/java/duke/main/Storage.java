@@ -12,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 //Suppressing warnings here as file consistency is already being caught and checked
-@SuppressWarnings("unchecked")
+@SuppressWarnings("all")
 
 public class Storage {
 
@@ -22,7 +22,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    //Custom dataRead Method to read from file
+    /**
+     * dataRead Method attemps to read saved data from file.
+     *
+     * @return  the populated TaskList (if there is any readable data), if not null
+     * @throws CannotReadFileException  when the file cannot be found or the data within is unreadable
+     */
     public TaskList load() throws CannotReadFileException {
         try {
             File file = new File(filepath);
@@ -40,7 +45,12 @@ public class Storage {
         }
     }
 
-    //Custom dataSave Method to save to file
+    /**
+     * dataSave Method attempts to save data to file.
+     *
+     * @param taskList  the populated TaskList (if there is any readable data), if not null
+     * @throws CannotSaveFileException  when the file cannot be saved or the data cannot be written
+     */
     public void save(TaskList taskList) throws CannotSaveFileException {
         try {
             File file = new File(filepath);
