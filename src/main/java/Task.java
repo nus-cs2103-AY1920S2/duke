@@ -11,6 +11,7 @@ public abstract class Task {
 
     public abstract String getType();
     public abstract void taskSummary();
+    public abstract String saveString();
 
     public void markAsDone() {
         isDone = true;

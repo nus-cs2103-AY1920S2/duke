@@ -13,5 +13,9 @@ public class ToDo extends Task{
         System.out.println(getType() + getStatusIcon() + " " + description);
     }
 
+    public String saveString() {
+        return "T|" + (isDone? "1|" : "0|") + description;
+    }
+
 
 }

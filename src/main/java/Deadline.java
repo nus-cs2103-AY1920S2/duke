@@ -12,6 +12,10 @@ public class Deadline extends Task{
 
     @Override
     public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description+ "(by: " + by + ")");
+        System.out.println(getType() + getStatusIcon() + " " + description+ " (by: " + by + ")");
+    }
+
+    public String saveString() {
+        return "D|" + (isDone? "1|" : "0|") + description + "|" + by;
     }
 }

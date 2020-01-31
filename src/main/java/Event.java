@@ -13,6 +13,10 @@ public class Event extends Task{
 
     @Override
     public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description + "(at: " + at + ")");
+        System.out.println(getType() + getStatusIcon() + " " + description + " (at: " + at + ")");
+    }
+
+    public String saveString() {
+        return "E|" + (isDone? "1|" : "0|") + description + "|" + at;
     }
 }

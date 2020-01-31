@@ -1,9 +1,40 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
-    public static void main(String[] args) throws DukeException{
-        String logo = " ____        _        \n"
+    public static void main(String[] args) throws DukeException, IOException {
+
+        // load data from ./data/duke.txt
+        File file = new File("./data/duke.txt");
+        file.createNewFile();
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String str;
+
+        while ((str = br.readLine()) != null) {
+            Task task;
+            String[] data = str.split("\\|");
+            if (data[0].equals("T")) {
+                System.out.println(data[0]);
+                System.out.println(data[1]);
+                System.out.println(data[2]);
+                task = createAndAddTask("todo", "todo " + data[2]);
+            } else if (data[0].equals("E")){
+                task = createAndAddTask("event", "event " + data[2] + " /at " + data[3]);
+            } else {
+                task = createAndAddTask("deadline", "deadline " + data[2] + " /by " + data[3]);
+            }
+
+            if (data[1].equals("1")) {
+                task.markAsDone();
+            }
+        }
+
+
+            String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
@@ -22,6 +53,21 @@ public class Duke {
             }
 
         }
+
+        // save data into ./data/duke.txt
+        if (tasks.isEmpty()) {
+            Files.write(Paths.get("./data/duke.txt"), ("").getBytes());
+
+        } else {
+            FileOutputStream fos = new FileOutputStream(file);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+            for (int i = 0; i < Task.totalTasks; i++) {
+                bw.write(tasks.get(i).saveString());
+                bw.newLine();
+            }
+            bw.close();
+        }
+
         reply("    Bye. Hope to see you again soon!");
     }
 
@@ -110,13 +156,13 @@ public class Duke {
             task = new ToDo(desc);
 
         } else if (type.equals("event")) {
-            String desc = whole.substring(6).split("/at ")[0];
-            String at = whole.substring(6).split("/at ")[1];
+            String desc = whole.substring(6).split(" /at ")[0];
+            String at = whole.substring(6).split(" /at ")[1];
             task = new Event(desc, at);
 
         } else if (type.equals("deadline")) {
-            String desc = whole.substring(9).split("/by ")[0];
-            String by = whole.substring(9).split("/by ")[1];
+            String desc = whole.substring(9).split(" /by ")[0];
+            String by = whole.substring(9).split(" /by ")[1];
             task = new Deadline(desc, by);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
