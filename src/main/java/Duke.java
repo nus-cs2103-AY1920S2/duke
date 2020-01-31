@@ -40,6 +40,7 @@ public class Duke {
                     System.out.printf("%d. %s\n", targetIdx + 1, tasks.get(targetIdx).toString());
                     System.out.println();
                     sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                    storage.saveToFile(printList());
                     echo(sc);
                     break;
 
@@ -57,6 +58,7 @@ public class Duke {
                     System.out.println();
                     //echo(new Scanner(System.in);
                     sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                    storage.saveToFile(printList());
                     echo(sc);
                     break;
                 case "deadline":
@@ -69,6 +71,7 @@ public class Duke {
                     System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                     System.out.println();
                     sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                    storage.saveToFile(printList());
                     echo(sc);
                     break;
                 case "event":
@@ -81,6 +84,7 @@ public class Duke {
                     System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                     System.out.println();
                     sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                    storage.saveToFile(printList());
                     echo(sc);
                     break;
 
@@ -95,6 +99,7 @@ public class Duke {
                     Task delTask = tasks.get(delIdx);
                     tasks.remove(delIdx);
                     System.out.printf("Deleted: %s\n\n", delTask.toString());
+                    storage.saveToFile(printList());
                     echo(sc);
                     break;
 
