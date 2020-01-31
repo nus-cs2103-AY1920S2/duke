@@ -12,7 +12,8 @@ public class Parser {
      */
     public static Command parse(String input) {
         String[] inpArr = input.split(" ");
-        switch (inpArr[0]) {
+        String command = inpArr[0].toLowerCase();
+        switch (command) {
         case "":
             return new UiOnlyCommand(LineName.NO_INPUT);
         case "Duke":

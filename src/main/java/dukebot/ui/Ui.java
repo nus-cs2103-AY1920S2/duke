@@ -16,11 +16,22 @@ public class Ui {
             + "///////    ///////  //   // //////// \n";
     private boolean sayFirst = true;
     private final Scanner sc;
+    private final boolean withGui;
+    private StringBuilder guiOutput = new StringBuilder();
+
+    /**
+     * Generates the Ui with GUI.
+     */
+    public Ui(boolean withGui) {
+        this.withGui = withGui;
+        sc  = new Scanner(System.in);
+    }
 
     /**
      * Generates the Ui.
      */
     public Ui() {
+        withGui = false;
         sc  = new Scanner(System.in);
     }
 
@@ -30,7 +41,16 @@ public class Ui {
     public void showWelcome() {
         System.out.println("\nYahallo! Duke's name is \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
-        dukeSays("W-what Master do to Duke today?");
+        dukeSays("What will Master do to Duke today?");
+    }
+
+    /**
+     * Prints welcome message for GUI.
+     */
+    public void showWelcomeGui() {
+        dukeSays("\nYahallo! Duke's name is \n" + LOGO);
+        dukeSays("Master! Duke's so glad Master used Duke!");
+        dukeSays("What will Master do to Duke today?");
     }
 
     /**
@@ -167,8 +187,7 @@ public class Ui {
     public void sayTasks(ArrayList<Task> tasks) {
         int i = 1;
         for (Task task : tasks) {
-            System.out.println("      "
-                    + i + ". "
+            dukeSays(+ i + ". "
                     + "[" + task.getType() + "] "
                     + task
                     + (task.getDone() ? " [Done!]" : "")
@@ -212,12 +231,31 @@ public class Ui {
      * @param line  Line to print.
      */
     private void dukeSays(String line) {
-        if (this.sayFirst) {
-            System.out.print("Duke: ");
-            this.sayFirst = false;
+        if (withGui) {
+            guiOutput.append(line);
+            guiOutput.append("\n");
         } else {
-            System.out.print("      ");
+            if (this.sayFirst) {
+                System.out.print("Duke: ");
+                this.sayFirst = false;
+            } else {
+                System.out.print("      ");
+            }
+            System.out.println(line);
         }
-        System.out.println(line);
+    }
+
+    public void resetGuiOutput() {
+        if (withGui) {
+            guiOutput = new StringBuilder();
+        }
+    }
+
+    public String getGuiOutput() {
+        if (withGui) {
+            return guiOutput.toString();
+        } else {
+            return "";
+        }
     }
 }
