@@ -1,4 +1,4 @@
-package cathulhu;
+package duke;
 
 public class CathulhuException extends Exception{
 
