@@ -13,8 +13,8 @@ class FindTasks implements Command {
         List<Task> matchingTasks = tasks.search(arg.strip());
         if (matchingTasks.isEmpty()) {
             ui.showReply("No matching tasks found!");
+            return;
         }
-        
         int counter = 1;
         sb.append("Here are the matching tasks in your list:\n");
         for (Task task : matchingTasks) {
