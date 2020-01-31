@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.enums.ErrorCodes;
 import duke.enums.TaskTypes;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
@@ -19,24 +20,26 @@ public class AddCommand extends Command {
         this.inputArgs = inputArgs;
     }
 
-	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = null;
         String taskPrompt = "";
 
         switch (taskType) {
-            case DEADLINE:
-                newTask = new Deadline(inputArgs);
-                taskPrompt = "Oooh, important deadline eh, boss? Don't worry, I got it";
-                break;
-            case TODO:
-                newTask = new ToDo(inputArgs);
-                taskPrompt = "Got it, boss. I'll write this one down";
-                break;
-            case EVENT:
-                newTask = new Event(inputArgs);
-                taskPrompt = "A special event I see. Don't worry boss, I'll remind you";
-                break;
+        case DEADLINE:
+            newTask = new Deadline(inputArgs);
+            taskPrompt = "Oooh, important deadline eh, boss? Don't worry, I got it";
+            break;
+        case TODO:
+            newTask = new ToDo(inputArgs);
+            taskPrompt = "Got it, boss. I'll write this one down";
+            break;
+        case EVENT:
+            newTask = new Event(inputArgs);
+            taskPrompt = "A special event I see. Don't worry boss, I'll remind you";
+            break;
+        default:
+            throw new DukeException(ErrorCodes.UNKNOWN_COMMAND);
         }
         tasks.addTask(newTask);
         ui.dukePrompt(new String[]{taskPrompt,
@@ -45,10 +48,10 @@ public class AddCommand extends Command {
             "\n",
             tasks.printTasksTotal()});
         storage.save(tasks);
-	}
+    }
 
-	@Override
-	public boolean isExit() {
-		return false;
-	}
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

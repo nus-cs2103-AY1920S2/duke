@@ -35,7 +35,7 @@ public class Task {
     }
 
     public String toFileString() {
-        return " | " + getTaskDone() +
-               " | " + getTaskName();
+        return " | " + getTaskDone()
+            + " | " + getTaskName();
     }
 }

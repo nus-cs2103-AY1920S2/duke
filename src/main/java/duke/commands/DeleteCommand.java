@@ -14,9 +14,9 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-		if (index < 0 || index >= tasks.getSize()) {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException(ErrorCodes.INVALID_TASK_INDEX);
         } else {
             Task deletedTask = tasks.deleteTask(index);
@@ -27,10 +27,10 @@ public class DeleteCommand extends Command {
                 tasks.printTasksTotal()});
             storage.save(tasks);
         }
-	}
+    }
 
-	@Override
-	public boolean isExit() {
-		return false;
-	}
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
