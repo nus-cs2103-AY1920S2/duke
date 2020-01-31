@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Saver {
@@ -41,7 +42,7 @@ public class Saver {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] lineSplit = line.split("|");
+                String[] lineSplit = line.split("\\|");
                 Task task;
 
                 switch (lineSplit[0]) {
