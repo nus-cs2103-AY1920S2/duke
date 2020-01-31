@@ -6,7 +6,12 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-group 'seedu.duke'
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    implementation 'org.testng:testng:6.9.6'
+}
+
+group 'duke'
 version '0.1.0'
 
 repositories {
@@ -15,11 +20,15 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
 }
 
 run {
     standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
 }
 
 checkstyle {
