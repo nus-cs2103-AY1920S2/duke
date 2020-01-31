@@ -1,15 +1,12 @@
-import java.io.*;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File.*;
 
 /**
  * Represents the ChatBot object that the user interacts with.
  * corresponds to UI, Tasklist, Storage, Parser classes that aids in its functions.
  */
 public class ChatBot {
-   // class for the chat-bot for the Duke Project
+    // class for the chat-bot for the Duke Project
 
 
     private UI ui = new UI();

@@ -5,7 +5,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor.
-     * @param taskName
+     * @param taskName name of the given task.
      */
     public ToDo(String taskName) {
         super(taskName, "T");
@@ -19,9 +19,9 @@ public class ToDo extends Task {
     public String toString() {
         String message = "";
         if (this.getDone()) {
-            message += "[" + this.getTaskType() + "]" + "[" + "\u2713" + "] " + this.getTaskName();
+            message += "[" + this.getTaskType() + "]" + "[" + "✓" + "] " + this.getTaskName();
         } else {
-            message += "[" + this.getTaskType() + "]" + "[" + "\u2718" + "] " + this.getTaskName();
+            message += "[" + this.getTaskType() + "]" + "[" + "✗" + "] " + this.getTaskName();
         }
         return message;
     }

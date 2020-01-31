@@ -42,9 +42,11 @@ public class Deadline extends Task {
         String message = "";
         String dateToBePrinted = this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         if (this.getDone()) {
-            message += "[" + this.getTaskType() +"]" + "[" + "\u2713" + "] " + this.getTaskName() + " (by: " + dateToBePrinted + ")";
+            message += "[" + this.getTaskType() + "]" + "[" + "✓" + "] "
+                    + this.getTaskName() + " (by: " + dateToBePrinted + ")";
         } else {
-            message +=  "[" + this.getTaskType() +"]" + "[" + "\u2718" + "] " + this.getTaskName() + " (by: " + dateToBePrinted + ")";
+            message +=  "[" + this.getTaskType() + "]" + "[" + "✗" + "] "
+                    + this.getTaskName() + " (by: " + dateToBePrinted + ")";
         }
         return message;
     }

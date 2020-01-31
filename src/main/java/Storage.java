@@ -1,8 +1,10 @@
-import java.io.*;
-import java.io.File;
 import java.io.BufferedReader;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Storage class to represent the tasks being stored into hard drive.
@@ -27,7 +29,7 @@ public class Storage {
      * @return true if it exists, else false.
      */
     public boolean existFile() {
-      return this.file.exists();
+        return this.file.exists();
     }
 
     /**
@@ -62,14 +64,14 @@ public class Storage {
         String taskType = contents[0];
         Task result;
         switch (taskType) {
-            case "T":
-                result = new ToDo(contents[2]); //as the file is hardcoded, the contents[1] should be the description
-                break;
-            case "E":
-                result = new Event(contents[2], contents[3]);
-                break;
-            default:
-                result = new Deadline(contents[2], contents[3]); // means deadline
+        case "T":
+            result = new ToDo(contents[2]); //as the file is hardcoded, the contents[1] should be the description
+            break;
+        case "E":
+            result = new Event(contents[2], contents[3]);
+            break;
+        default:
+            result = new Deadline(contents[2], contents[3]); // means deadline
         }
         if (contents[1].equals("1")) {
             result.setDone();
@@ -95,7 +97,7 @@ public class Storage {
             }
             fw.write(result);
             fw.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Error occurred saving tasks!");
         }
     }
@@ -109,18 +111,20 @@ public class Storage {
     public String convertTaskToString(Task t) {
         String taskType = t.getTaskType();
         String result = "";
-        switch(taskType) {
-            case "T":
-                result += "T|" + this.returnDone(t) + "|" + t.getTaskName();
-                break;
-            case "E":
-                Event e = (Event) t;
-                result += "E|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + e.dateTime;
-                break;
-            case "D":
-                Deadline d = (Deadline) t;
-                result += "D|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + d.dateTime;
-                break;
+        switch (taskType) {
+        case "T":
+            result += "T|" + this.returnDone(t) + "|" + t.getTaskName();
+            break;
+        case "E":
+            Event e = (Event) t;
+            result += "E|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + e.dateTime;
+            break;
+        case "D":
+            Deadline d = (Deadline) t;
+            result += "D|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + d.dateTime;
+            break;
+        default:
+            break;
         }
         return result;
     }

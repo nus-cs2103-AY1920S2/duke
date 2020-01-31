@@ -11,7 +11,7 @@ public class ParserTest {
         String test = "event Swimming at USC /at 12-02-2020 22:00 - 00:00";
         String[] testCommand = test.split(" ");
         try {
-            int index_found = parser.grabTaskName(taskname, testCommand, "/at");
+            int indexFound = parser.grabTaskName(taskname, testCommand, "/at");
             assertEquals("Swimming at USC", taskname.toString());
         } catch (DukeException e) {
             fail();
