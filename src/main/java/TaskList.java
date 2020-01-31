@@ -56,4 +56,15 @@ public class TaskList {
             System.out.println(e);
         }
     }
+
+    public List<Task> find(String keyword){
+        List<Task> foundTasks = new ArrayList<>();
+        for(Task task : usrInputs) {
+            if(task.contains(keyword)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
+
+    }
 }

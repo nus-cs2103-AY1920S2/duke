@@ -28,7 +28,7 @@ public class Storage {
             String taskDes = s1.nextLine();
             Scanner s2 = new Scanner(taskDes);
             String taskType = s2.next();
-            String taskDescription = s2.nextLine();
+            String taskDescription = s2.nextLine().strip();
             try {
                 Task currentTask = TaskHandler.parseFromFile(taskType, taskDescription);
                 tasks.add(currentTask);

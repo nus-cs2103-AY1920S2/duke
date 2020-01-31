@@ -14,6 +14,9 @@ public class ActionHandler {
             case "delete":
                 myAction = new deleteAction();
                 break;
+            case "find":
+                myAction = new findAction();
+                break;
         }
         return myAction;
     }
