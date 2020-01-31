@@ -9,6 +9,7 @@ import processor.Ui;
 public class CommandInvalid implements Command {
     /**
      * Apologises for not being able to process their command.
+     *
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
      */

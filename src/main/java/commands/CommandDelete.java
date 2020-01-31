@@ -13,15 +13,18 @@ public class CommandDelete implements Command {
 
     /**
      * Deletes the task from the list and updates the list thereafter.
+     *
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
-     * @throws DukeException
+     * @throws DukeException Throws an exception if the input format is incorrect, or if the task at the index is not
+     *      found
      */
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
-        if(argsArray.length < 2) {
+        if (argsArray.length < 2) {
             throw new DukeException("Your 'delete' command is incorrect! Use the following format: delete <number>");
-        } else if(Integer.parseInt(argsArray[1]) > processor.getTaskList().size() - 1 || Integer.parseInt(argsArray[1]) < 0) {
+        } else if (Integer.parseInt(argsArray[1]) > processor.getTaskList().size() - 1 || Integer.parseInt(argsArray[1])
+                < 0) {
             throw new DukeException("You've selected a non-existent task to delete! Please try again!");
         }
 
@@ -35,7 +38,7 @@ public class CommandDelete implements Command {
 
         try {
             Storage.saveTasks(processor);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

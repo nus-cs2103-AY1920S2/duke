@@ -7,6 +7,7 @@ public class Ui {
 
     /**
      * Prints output to the UI.
+     *
      * @param output Output to be printed to the UI.
      */
     public static void print(String output) {

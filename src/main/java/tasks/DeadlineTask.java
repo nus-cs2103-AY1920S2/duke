@@ -15,8 +15,9 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructor of a deadline task.
+     *
      * @param description Description of the task.
-     * @param deadline When the task has to be done by. Follows the format "dd/mm/yyyy HHmm".
+     * @param deadline    When the task has to be done by. Follows the format "dd/mm/yyyy HHmm".
      * @throws DukeException For parseDeadline method.
      */
     public DeadlineTask(String description, String deadline) throws DukeException {
@@ -27,20 +28,22 @@ public class DeadlineTask extends Task {
 
     /**
      * Processes the String entered for a deadline into a LocalDate object, and saves it.
+     *
      * @param deadline Deadline in String form.
      * @throws DukeException Throws an exception when the deadline format is not followed correctly.
      */
-    public void parseDeadline(String deadline) throws DukeException{
+    public void parseDeadline(String deadline) throws DukeException {
         try {
             this.parsedDeadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-        } catch(Exception e) {
-            throw new DukeException("You've entered the deadline date incorrectly! Please use \"dd/mm/yyyy HHmm\" for" +
-                    " your dates, e.g. 05/12/2020 1800");
+        } catch (Exception e) {
+            throw new DukeException("You've entered the deadline date incorrectly! Please use \"dd/mm/yyyy HHmm\" for"
+                    + " your dates, e.g. 05/12/2020 1800");
         }
     }
 
     /**
      * Returns a parsed deadline.
+     *
      * @return Object containing the parsed deadline.
      */
     public LocalDateTime getParsedDeadline() {
@@ -49,6 +52,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns the String of the deadline.
+     *
      * @return Deadline String.
      */
     public String getDeadline() {
@@ -57,6 +61,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns a String of the task with the type of task and date.
+     *
      * @return Formatted String of a deadline task.
      */
     @Override

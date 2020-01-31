@@ -1,6 +1,8 @@
 package processor;
 
-import commands.*;
+import commands.Command;
+import commands.CommandType;
+import commands.Commander;
 import exceptions.DukeException;
 import tasks.TaskList;
 
@@ -28,13 +30,14 @@ public class DukeProcessor {
     /**
      * Processes the input entered by the user. Input is sent to be parsed by Parser class, then the Command returned
      * by Commander class is executed.
+     *
      * @param input User input.
      */
     public void processInput(String input) {
         Command command = Parser.parseInput(input);
         try {
             command.execute(this, input);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             Ui.print(e.toString());
         }
     }
@@ -46,13 +49,14 @@ public class DukeProcessor {
         Command sayHello = Commander.createCommand(CommandType.HI);
         try {
             sayHello.execute(this, "");
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Returns the TaskList of the processor.
+     *
      * @return TaskList instantiated by DukeProcessor.
      */
     public TaskList getTaskList() {
@@ -68,6 +72,7 @@ public class DukeProcessor {
 
     /**
      * Checks if Duke is still active.
+     *
      * @return Boolean that indicates true if Duke is active.
      */
     public boolean isActive() {

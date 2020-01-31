@@ -25,7 +25,7 @@ public class Storage {
     public static void init() {
         try {
             File taskFile = new File("data/tasks.txt");
-            if(!taskFile.exists()) {
+            if (!taskFile.exists()) {
                 taskFile.getParentFile().mkdirs();
                 taskFile.createNewFile();
             }
@@ -36,18 +36,19 @@ public class Storage {
 
     /**
      * Attempts to save tasks to the created .txt file on the local computer. Tasks are first packaged before storage.
+     *
      * @param processor Duke's processor.
-     * @throws IOException
+     * @throws IOException Throws an exception for errors pertaining to saving the tasks in the external text file.
      */
     public static void saveTasks(DukeProcessor processor) throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt");
         fw.write("");
-        for(int i = 0; i < processor.getTaskList().size(); i ++) {
+        for (int i = 0; i < processor.getTaskList().size(); i++) {
             Task task = processor.getTaskList().get(i);
             String taskStorageString = packageTask(task);
             fw.append(taskStorageString);
 
-            if(i != processor.getTaskList().size() - 1) {
+            if (i != processor.getTaskList().size() - 1) {
                 fw.append(System.getProperty("line.separator"));
             }
         }
@@ -58,15 +59,16 @@ public class Storage {
     /**
      * Attempts to load tasks from the .txt file on the local computer, and processes packaged tasks from the file
      * before returning the list of saved tasks.
+     *
      * @param processor Duke's processor.
      * @return The list of tasks saved previously by Duke.
-     * @throws IOException
-     * @throws DukeException
+     * @throws IOException Throws an exception for errors pertaining to loading the tasks in the external text file.
+     * @throws DukeException Throws an exception if the method processPackagedTask fails.
      */
     public static List<Task> loadTasks(DukeProcessor processor) throws IOException, DukeException {
         File taskFile = new File("data/tasks.txt");
 
-        if(!taskFile.exists()) {
+        if (!taskFile.exists()) {
             throw new IOException("File not found");
         }
 
@@ -74,13 +76,13 @@ public class Storage {
 
         List<Task> outputTaskList = new ArrayList<Task>();
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
             Task task = processPackagedTask(line);
             outputTaskList.add(task);
         }
 
-        if(outputTaskList.size() != 0) {
+        if (outputTaskList.size() != 0) {
             Ui.print(String.format("Looks like you've saved some tasks before! You have %d tasks in your list.",
                     outputTaskList.size()));
         }
@@ -90,6 +92,7 @@ public class Storage {
 
     /**
      * Packages the tasks into a format that can be stored and re-processed when loaded in the future.
+     *
      * @param task Task to be packaged.
      * @return Task object in the form of a packaged String, ready to be stored.
      */
@@ -97,16 +100,16 @@ public class Storage {
         String output = "";
         int doneIndicator = 0;
 
-        if(task.isDone()) {
+        if (task.isDone()) {
             doneIndicator = 1;
         }
 
-        if(task instanceof TodoTask) {
-            output = String.format("%s^_^%d^_^%s", "TODO", doneIndicator,  task.getDescription());
-        } else if(task instanceof DeadlineTask) {
+        if (task instanceof TodoTask) {
+            output = String.format("%s^_^%d^_^%s", "TODO", doneIndicator, task.getDescription());
+        } else if (task instanceof DeadlineTask) {
             output = String.format("%s^_^%d^_^%s^_^%s", "DEADLINE", doneIndicator, task.getDescription(),
                     ((DeadlineTask) task).getDeadline());
-        } else if(task instanceof EventTask) {
+        } else if (task instanceof EventTask) {
             output = String.format("%s^_^%d^_^%s^_^%s", "EVENT", doneIndicator, task.getDescription(),
                     ((EventTask) task).getEventTime());
         }
@@ -116,23 +119,24 @@ public class Storage {
 
     /**
      * Attempts to process and create a Task object from the String read from the .txt file.
+     *
      * @param taskString String from .txt file to be processed.
      * @return Task object that was defined from the taskString.
-     * @throws DukeException
+     * @throws DukeException Throws an exception if unable to create a Task object.
      */
     private static Task processPackagedTask(String taskString) throws DukeException {
         Task outputTask;
         String[] taskArray = taskString.split("\\^_\\^", 4);
 
-        if(taskArray[0].equals("TODO")) {
+        if (taskArray[0].equals("TODO")) {
             outputTask = new TodoTask(taskArray[2]);
-        } else if(taskArray[0].equals("DEADLINE")) {
+        } else if (taskArray[0].equals("DEADLINE")) {
             outputTask = new DeadlineTask(taskArray[2], taskArray[3]);
         } else {
             outputTask = new EventTask(taskArray[2], taskArray[3]);
         }
 
-        if(Integer.parseInt(taskArray[1]) == 1) {
+        if (Integer.parseInt(taskArray[1]) == 1) {
             outputTask.complete();
         }
 

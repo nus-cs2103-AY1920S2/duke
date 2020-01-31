@@ -16,15 +16,16 @@ public class CommandDeadline extends CommandTask {
 
     /**
      * Attempts to create a "deadline" task, and add it to the processor's TaskList.
+     *
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
-     * @throws DukeException
+     * @throws DukeException Throws an exception if the input format is incorrect.
      */
     public void execute(DukeProcessor processor, String args) throws DukeException {
         String[] inputArgs = args.split(" ", 2)[1].split(" /by ");
-        if(!args.contains(" /by ") || inputArgs.length < 2) {
-            throw new DukeException("Your deadline command is incorrect! Please follow the format: deadline <item> " +
-                    "/by <time>");
+        if (!args.contains(" /by ") || inputArgs.length < 2) {
+            throw new DukeException("Your deadline command is incorrect! Please follow the format: deadline <item> "
+                    + "/by <time>");
         }
 
         DeadlineTask task = new DeadlineTask(inputArgs[0], inputArgs[1]);

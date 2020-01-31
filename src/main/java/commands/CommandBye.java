@@ -10,6 +10,7 @@ public class CommandBye implements Command {
 
     /**
      * Prints a goodbye message to the UI, and also disables the bot to stop the loop.
+     *
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
      */

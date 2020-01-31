@@ -6,6 +6,7 @@ package tasks;
 public class TodoTask extends Task {
     /**
      * Constructor of a todo task.
+     *
      * @param description Description of the todo task.
      */
     public TodoTask(String description) {
@@ -14,6 +15,7 @@ public class TodoTask extends Task {
 
     /**
      * Returns the Todo task formatted with the task type and whether it is done or not.
+     *
      * @return Todo task in String form.
      */
     @Override

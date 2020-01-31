@@ -14,14 +14,14 @@ public class CommandTask implements Command {
      * Prints the task count to the UI and attempts to save the current list of instructions.
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
-     * @throws DukeException
+     * @throws DukeException Throws an exception when there is an error in adding a task.
      */
     public void execute(DukeProcessor processor, String args) throws DukeException {
         Ui.print("You've now got " + processor.getTaskList().size() + " tasks in your list.");
 
         try {
             Storage.saveTasks(processor);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

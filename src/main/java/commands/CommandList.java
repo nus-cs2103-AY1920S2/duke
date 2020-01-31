@@ -9,6 +9,7 @@ public class CommandList implements Command {
 
     /**
      * Prints the list of tasks.
+     *
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
      */

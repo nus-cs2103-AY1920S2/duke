@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Constructor of the task. Takes in a description, and sets the task as "not done".
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -26,6 +27,7 @@ public class Task {
 
     /**
      * Checks if the task has been completed.
+     *
      * @return Boolean that is true if the task is completed.
      */
     public boolean isDone() {
@@ -34,6 +36,7 @@ public class Task {
 
     /**
      * Gets the description of the task.
+     *
      * @return Description of the task.
      */
     public String getDescription() {
@@ -42,12 +45,13 @@ public class Task {
 
     /**
      * Formats the task to contain a tick or a cross depending on whether it is done or not respectively.
+     *
      * @return Task in String form.
      */
     @Override
     public String toString() {
         String marker = "";
-        if(isDone) {
+        if (isDone) {
             marker = "✓";
         } else {
             marker = "✗";
