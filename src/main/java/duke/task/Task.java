@@ -13,6 +13,10 @@ public class Task implements Serializable {
         this.taskName = taskName;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     @Override
     public String toString() {
         if (taskCompleted) {

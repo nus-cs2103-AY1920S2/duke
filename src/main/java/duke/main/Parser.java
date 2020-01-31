@@ -55,6 +55,10 @@ public class Parser {
                 Command.eventCommand(taskList, commandSuffix);
                 break;
 
+            case FIND:
+                Command.findCommand(taskList, commandSuffix);
+                break;
+
             case LIST:
                 Command.listCommand(taskList);
                 break;

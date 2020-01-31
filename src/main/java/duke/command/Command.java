@@ -126,6 +126,33 @@ public class Command {
         }
     }
 
+    public static void findCommand(TaskList taskList, String commandSuffix) {
+        StringBuilder sb = new StringBuilder();
+        List<String> keywordList = new ArrayList<>();
+
+        if (!commandSuffix.equals("") && !commandSuffix.isEmpty()) {
+            for (Task task : taskList.getTasks()) {
+                if (task.getTaskName().contains(commandSuffix)) {
+                    keywordList.add(task.toString());
+                }
+            }
+        }
+
+        if (keywordList.size() == 0) {
+            sb.append("No matching tasks with that keyword found.");
+        } else {
+            sb.append("Here are the matching task(s) in your list:\n");
+
+            for (String task : keywordList) {
+                sb.append(task).append("\n");
+            }
+
+            sb.setLength(sb.length() - 1);
+        }
+
+        Ui.print(sb.toString());
+    }
+
     //Custom listCommand Method to print the list with the horizontal borders + running index
     public static void listCommand(TaskList tasksList) {
         StringBuilder sb = new StringBuilder();
