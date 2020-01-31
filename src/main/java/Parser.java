@@ -41,6 +41,9 @@ public class Parser {
                 Parser.checkArr(command, false, cmdInstructionArr);
                 int i = Integer.parseInt(cmdInstructionArr[1]);
                 c = new DoneCommand(i - 1);
+            } else if (command.equals("find")) {
+                Parser.checkArr(command, false, cmdInstructionArr);
+                c = new FindCommand(cmdInstructionArr[1]);
             } else {
                 c = new UnknownCommand();
             }

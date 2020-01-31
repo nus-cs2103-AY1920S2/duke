@@ -23,6 +23,8 @@ abstract class Task {
 
     abstract public String getType();
 
+    abstract public Task getCopy();
+
     @Override
     public String toString() {
         return '[' + this.getType() + "][" + this.getStatusIcon() + "] " + this.getDescription();

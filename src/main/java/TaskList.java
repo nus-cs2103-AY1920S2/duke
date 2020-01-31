@@ -44,4 +44,14 @@ public class TaskList {
         t.setDone();
         return t;
     }
+
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (Task t: this.arrTasks) {
+            if (t.getDescription().contains(keyword)) {
+                tasks.add(t.getCopy());
+            }
+        }
+        return tasks;
+    }
 }
