@@ -11,6 +11,13 @@ import duke.enums.TaskTypes;
 import duke.exceptions.DukeException;
 
 public class Parser {
+    /**
+     * Parses the full command input from the user and returns the appropriate command to be execute by caller.
+     *
+     * @param fullCommand String of the full command input by the user.
+     * @return A Command object based on the type of command parsed.
+     * @throws DukeException DukeException thrown if missing task information or unknown commands.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         Command command = null;
         switch (fullCommand) {
