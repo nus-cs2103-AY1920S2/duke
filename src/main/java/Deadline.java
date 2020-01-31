@@ -4,14 +4,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task implements TimeParser {
     protected LocalDate deadline;
 
-    Deadline(String unparsed) {
-        String[] split = unparsed.split("/by");
-        this.description = split[0].trim();
-        this.deadline = TimeParser.parseDate(split[1].trim());
+    Deadline(String description, String deadline) { // constructor for creating new deadline
+        super(description);
+        this.deadline = TimeParser.parseDate(deadline);
         super.TYPE = TaskType.DEADLINE;
     }
 
-    Deadline(String status, String description, String deadline) {
+    Deadline(String status, String description, String deadline) { // constructor when parsing tasks from hard disk
         super(status, description);
         super.TYPE = TaskType.DEADLINE;
         this.deadline = TimeParser.parseDate(deadline);
@@ -22,6 +21,6 @@ public class Deadline extends Task implements TimeParser {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + TimeParser.printDate(this.deadline) + ")";
     }
 }

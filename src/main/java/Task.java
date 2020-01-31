@@ -7,12 +7,12 @@ public class Task {
 
     }
 
-    public Task(String description) { // constructor for Dude class TODO need to change
+    public Task(String description) { // constructor for Task when creating new Task
         this.description = description.trim();
         this.isDone = false;
     }
 
-    public Task(String status, String description) {
+    public Task(String status, String description) { // constructor for Task, if need to specify status (when parsing tasks from hard disk)
         this.isDone = status.equals("1");
         this.description = description;
     }

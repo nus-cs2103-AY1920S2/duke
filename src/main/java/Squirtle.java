@@ -126,24 +126,6 @@ public class Squirtle {
     }
 
     public void createTask(String userInput) { // TODO found new error: when passing deadline blah/event blah
-        try {
-            Task task;
-            String[] split = userInput.split(" ", 2);
-            String taskType = split[0];
-            if (split.length <= 1) {
-                throw new DukeException(DukeError.INSUFFICIENT); // throw an exception if user passes only one command
-            }
-            String taskLine = split[1];
-            if (taskType.equals("todo")) { // to add todos (tasks with no date/time attached)
-                task = new ToDo(taskLine);
-            } else if (userInput.startsWith("deadline")) { // to add deadlines (tasks that must be done by specific date/time)
-                task = new Deadline(taskLine);
-            } else if (userInput.startsWith("event")) { // to add event (tasks that start at a specific time and ends at a specific time)
-                task = new Event(taskLine);
-            }
-            else {
-                throw new DukeException(DukeError.NUMBER); // throw an exception if user tries to create a task with type that is nonexistent
-            }
             userInputList.add(task);
             this.printSquirtleCall(task.toString());
             this.printSquirtleCall("Squirtle now knows " + userInputList.size() + " task(s)!");

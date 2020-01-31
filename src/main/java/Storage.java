@@ -26,7 +26,7 @@ public class Storage {
 
             while ((line = br.readLine()) != null) {
                 line = line.replaceAll("[^\\x00-\\x7F]", "");
-                lst.add(parser.parse(line));
+                lst.add(parser.parseFile(line));
             }
 
 
@@ -50,7 +50,7 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(outputStreamWriter);
 
             for (Task task : lst) {
-                bw.write(parser.parse(task));
+                bw.write(parser.parseTask(task));
                 bw.newLine();
                 bw.flush();
             }

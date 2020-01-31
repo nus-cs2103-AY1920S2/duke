@@ -1,17 +1,15 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task implements TimeParser {
     protected LocalDate eventTime;
 
-    Event(String unparsed) {
-        String[] split = unparsed.split("/at");
-        this.description = split[0].trim();
-        this.eventTime = TimeParser.parseDate(split[1].trim());
+    Event(String description, String eventTime) { // constructor for creating new event
+        super(description);
+        this.eventTime = TimeParser.parseDate(eventTime);
         super.TYPE = TaskType.EVENT;
     }
 
-    Event(String status, String description, String eventTime) {
+    Event(String status, String description, String eventTime) { // constructor for parsing tasks from hard disk
         super(status, description);
         super.TYPE = TaskType.EVENT;
         this.eventTime = TimeParser.parseDate(eventTime);
@@ -22,6 +20,6 @@ public class Event extends Task implements TimeParser {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.eventTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + TimeParser.printDate(this.eventTime)  + ")";
     }
 }
