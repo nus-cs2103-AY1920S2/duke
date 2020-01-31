@@ -13,6 +13,8 @@ public class Storage {
     private static final String PIPE = "|";
     private static final String LF = "\n";
 
+    public static final String DUKE_TXT_FILE_PATH = "data/duke.txt";
+
     public Storage(String filePath) throws IOException {
         file = new File(filePath);
 

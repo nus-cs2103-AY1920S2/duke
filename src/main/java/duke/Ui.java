@@ -34,4 +34,31 @@ public class Ui {
     public void printLine() {
         System.out.println();
     }
+
+    public void printAddedTask(Task t, TaskList taskList) {
+        this.printLine("Got it! I've added this task:" + Ui.LF + "    " + t + Ui.LF
+                + "Now, you have " + taskList.getNumTasks() + " item(s) in your list." + Ui.LF);
+    }
+
+    public void printTaskList(TaskList taskList) {
+        this.printLine("Here are your task(s):");
+
+        int len = taskList.getNumTasks();
+
+        for (int i = 0; i < len; ++i) {
+            Task t = taskList.getTask(i);
+            this.printLine("    " + (i + 1) + ". " + t);
+        }
+
+        this.printLine();
+    }
+
+    public void printTaskMarkedDone(Task t) {
+        this.printLine("Nice! I've marked this task as done:" + Ui.LF + "    " + t + Ui.LF);
+    }
+
+    public void printTaskDeleted(Task t, TaskList taskList) {
+        this.printLine("Noted! I've removed this task:" + Ui.LF + "    " + t + Ui.LF
+                + "Now, you have " + taskList.getNumTasks() + " item(s) in your list." + Ui.LF);
+    }
 }
