@@ -7,12 +7,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/** Driver for duke project. */
 public class Duke {
     private Storage storage;
     protected TaskList tasks;
     private Ui ui;
     protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+    /**
+     * Return a new instance of Duke class.
+     *
+     * @param saveFile File name used for saving user data
+     */
     public Duke(String saveFile) {
         ui = new Ui();
         storage = new Storage(saveFile);
@@ -31,6 +37,7 @@ public class Duke {
 
     /**
      * Process input given by user and execute relevant actions.
+     *
      * @param reader used for user input
      */
     public void run(BufferedReader reader) {
