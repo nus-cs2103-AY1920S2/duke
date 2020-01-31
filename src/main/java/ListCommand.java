@@ -13,7 +13,7 @@ class ListCommand extends Command {
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("list" + "\n");
+        System.out.println("list");
         ui.showLine();
         System.out.println("\n" + "Here are your tasks!");
         for (int i = 0; i < tasks.getTaskList().size(); i++) {

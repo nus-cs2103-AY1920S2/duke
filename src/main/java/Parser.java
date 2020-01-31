@@ -27,6 +27,8 @@ class Parser {
             return new AddCommand(command);
         } else if (command.startsWith("delete")) {
             return new DeleteCommand(command);
+        } else if (command.startsWith("find")) {
+            return new FindCommand(command);
         }
         return null;
     }
