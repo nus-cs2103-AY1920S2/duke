@@ -36,9 +36,9 @@ public class Deadline extends Task {
      */
     public String toString() {
         if (done) {
-            return ("[D][✓] " + name + " | by: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n");
+            return ("[D][v] " + name + " | by: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n");
         }
 
-        return ("[D][✗] " + name+ " | by: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
+        return ("[D][x] " + name+ " | by: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
     }
 }

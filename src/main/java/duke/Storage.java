@@ -33,7 +33,7 @@ public class Storage {
             String sentence = s.nextLine();
             String type = sentence.substring(4, 5);
             boolean done = true;
-            if (sentence.substring(7, 8).equals("✗")) {
+            if (sentence.substring(7, 8).equals("x")) {
                 done = false;
             }
             if (type.equals("T")) {

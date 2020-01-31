@@ -28,10 +28,10 @@ public class ToDo extends Task {
      */
     public String toString() {
         if (done) {
-            return ("[T][✓] " + name+"\n");
+            return ("[T][v] " + name+"\n");
         }
 
-        return ("[T][✗] " + name+"\n");
+        return ("[T][x] " + name+"\n");
     }
 
 
