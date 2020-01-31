@@ -78,7 +78,7 @@ public class TaskManager {
 
         Task newTask;
 
-        if(textEntered.contains("todo")){ //Handles dukeClasses.Task that are dukeClasses.ToDo
+        if(textEntered.contains("todo")){ //Handles dukeClasses.Task that are dukeClasses.ToDos
 
             if(textEntered.split(" ").length == 1){
                 throw new DukeException("The description of a todo cannot be empty");

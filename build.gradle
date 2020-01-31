@@ -2,6 +2,11 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }
 
 group 'seedu.duke'
@@ -12,6 +17,7 @@ repositories {
 }
 
 dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     //implementation 'org.junit.jupiter:junit-jupiter'
     //implementation 'org.junit.jupiter:junit-jupiter'
     //implementation 'org.junit.jupiter:junit-jupiter'
@@ -27,7 +33,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "dukeClasses.Duke"
 
 }
 
