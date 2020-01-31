@@ -128,27 +128,27 @@ class UiTest {
 
     @Test
     void showLoadingError() {
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Unable to load storage data..." + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + "Unable to load storage data..." + NEWLINE
+                + HORIZONTAL_DIVIDER;
         ui.showLoadingError();
         assertEquals(expected, output.toString());
     }
 
     @Test
     void unableToReadUserInput() {
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Unable to read user input..." + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + "Unable to read user input..." + NEWLINE
+                + HORIZONTAL_DIVIDER;
         ui.unableToReadUserInput();
         assertEquals(expected, output.toString());
     }
 
     @Test
     void commandNotFound() {
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "404 Not Found... Are you there?" + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + "404 Not Found... Are you there?" + NEWLINE
+                + HORIZONTAL_DIVIDER;
         ui.commandNotFound();
         assertEquals(expected, output.toString());
     }
@@ -157,8 +157,8 @@ class UiTest {
     @MethodSource("generateOneTaskList")
     void listTasks(TaskList tasks) {
         String listHeaderInformation = "Here are the tasks in your list:";
-        StringBuilder expected = new StringBuilder(HORIZONTAL_DIVIDER +
-                INDENTATION + listHeaderInformation + NEWLINE);
+        StringBuilder expected = new StringBuilder(HORIZONTAL_DIVIDER
+                + INDENTATION + listHeaderInformation + NEWLINE);
         int taskCount = 1;
         for (Task task : tasks) {
             expected.append(INDENTATION)
@@ -176,9 +176,9 @@ class UiTest {
     @MethodSource("generateDukeExceptions")
     void showExceptionMessage_dukeException(Exception exception) {
         ui.showExceptionMessage(exception);
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + exception.getMessage() + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + exception.getMessage() + NEWLINE
+                + HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString());
     }
 
@@ -186,11 +186,11 @@ class UiTest {
     @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void printTaskAddition_allTaskTypes(Task task, int totalTasks) {
         String taskInfo = task.toString();
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Got it. I've added this task:" + NEWLINE +
-                INDENTATION + "  " + taskInfo + NEWLINE +
-                INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + "Got it. I've added this task:" + NEWLINE
+                + INDENTATION + "  " + taskInfo + NEWLINE
+                + INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE
+                + HORIZONTAL_DIVIDER;
         // Execute function for testing
         ui.printTaskAddition(task, totalTasks);
         assertEquals(expected, output.toString());
@@ -218,11 +218,11 @@ class UiTest {
     @ParameterizedTest
     @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void printTaskDeletion_allTaskTypes(Task task, int totalTasks) {
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Noted. I've removed this task:" + NEWLINE +
-                INDENTATION + "  " + task.toString() + NEWLINE +
-                INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + "Noted. I've removed this task:" + NEWLINE
+                + INDENTATION + "  " + task.toString() + NEWLINE
+                + INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE
+                + HORIZONTAL_DIVIDER;
         ui.printTaskDeletion(task, totalTasks);
         assertEquals(expected, output.toString());
     }
@@ -231,9 +231,9 @@ class UiTest {
     @DisplayName("duke.Duke: Test for Goodbye message")
     void goodbye() {
         ui.goodbye();
-        String expected = HORIZONTAL_DIVIDER +
-                INDENTATION + "Goodbye friend." + NEWLINE +
-                HORIZONTAL_DIVIDER;
+        String expected = HORIZONTAL_DIVIDER
+                + INDENTATION + "Goodbye friend." + NEWLINE
+                + HORIZONTAL_DIVIDER;
         assertEquals(expected, output.toString(), "Should print goodbye message");
     }
 }
