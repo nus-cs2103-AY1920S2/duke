@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.tasks.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -18,9 +20,25 @@ public class Deadline extends Task {
     public Deadline(String description, int done) {
         super(description, done);
         String[] arr = description.split(" /by ");
+
+        System.out.println(description);
+
+        System.out.println("TESTING 123");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+
         this.description = arr[0];
         this.date = arr[1];
         this.localDate = LocalDate.parse(arr[1]);
+    }
+
+    public Deadline(String description, int done, String date) {
+        super(description, done);
+
+        this.description = description;
+        this.date = date;
+        this.localDate = LocalDate.parse(date);
     }
 
     public String toPrint() {

@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import duke.tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +22,14 @@ public class Event extends Task {
         this.description = arr[0];
         this.date = arr[1];
         this.localDate = LocalDate.parse(arr[1]);
+    }
+
+    public Event(String description, int done, String date) {
+        super(description, done);
+
+        this.description = description;
+        this.date = date;
+        this.localDate = LocalDate.parse(date);
     }
 
     public String toPrint() {
