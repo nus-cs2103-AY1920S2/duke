@@ -15,8 +15,8 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
-	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException(ErrorCodes.INVALID_TASK_INDEX);
         } else {
@@ -28,10 +28,10 @@ public class DoneCommand extends Command {
                 tasks.printTasksTotal()});
             storage.save(tasks);
         }
-	}
+    }
 
-	@Override
-	public boolean isExit() {
-		return false;
-	}
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

@@ -58,7 +58,7 @@ public class Storage {
      */
     private void loadTask(String taskString, int lineNo) throws DukeException {
         String[] splitString = taskString.split(" \\| ");
-        switch(splitString[0]) {
+        switch (splitString[0]) {
         case "T":
             taskList.add(new ToDo(splitString[2]));
             break;
@@ -67,14 +67,15 @@ public class Storage {
             taskList.add(new Deadline(deadlineArgs));
             break;
         case "E":
-            String eventArgs = splitString[2] +" /at " + splitString[3];
+            String eventArgs = splitString[2] + " /at " + splitString[3];
             taskList.add(new Event(eventArgs));
             break;
         default:
             throw new DukeException(ErrorCodes.LOADING_ERROR, String.valueOf(lineNo));
         }
-        if (splitString[1].equals("true"))
-                taskList.get(taskList.size() - 1).setTaskDone();
+        if (splitString[1].equals("true")) {
+            taskList.get(taskList.size() - 1).setTaskDone();
+        }
     }
 
     /**
