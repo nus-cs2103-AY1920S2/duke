@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 /** deals with interactions with the user */

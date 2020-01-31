@@ -1,7 +1,11 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import duke.exceptions.IncorrectArgumentException;
+import duke.exceptions.InvalidCommandException;
 
 public class Duke {
     private Storage storage;

@@ -1,7 +1,12 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.IncorrectArgumentException;
+import duke.exceptions.InvalidCommandException;
 
 /** deals with making sense of the user command. 
  * Deconstructs a line into a String[] of arguments, with the first item being the cmd and the rest the arg. */
