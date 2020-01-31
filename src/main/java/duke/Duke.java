@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /** Starts Duke */
-    public void run() {       
+    private void run() {       
         ui.out("Hello! I'm Duke", "What can I do for you?");
         boolean isShutdown = false;
         while (!isShutdown) {

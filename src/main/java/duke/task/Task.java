@@ -22,6 +22,7 @@ public abstract class Task implements Serializable {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    @Override
     public String toString() {
         return String.format("[%s] %s", status(), description);
     }

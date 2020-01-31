@@ -40,7 +40,7 @@ class Storage {
                 if(objIn != null) {
                     objIn.close();
                 }
-                if (tasks != null && tasks.load(savedTasks)) {
+                if (tasks != null && savedTasks != null && tasks.load(savedTasks)) {
                     loadSuccessful = true;
                     System.out.println("    Tasklist loaded!");
                 }
