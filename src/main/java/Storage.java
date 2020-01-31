@@ -3,16 +3,24 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * The Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     TaskList taskList = new TaskList();
     private static File file;
 
+    /**
+     * Constructor for Storage class.
+     */
     public Storage() {
         file = new File("./data/duke.txt");
     }
 
+    /**
+     * Loads tasks stored in duke.txt in the hard disk. Creates and add the tasks into the ArrayList of tasks.
+     * @throws IOException Throws IOException.
+     * @throws DukeException Throws DukeException.
+     */
     public void loadData() throws IOException, DukeException {
         // load data from ./data/duke.txt
         file.createNewFile();
@@ -37,6 +45,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in duke.txt in the hard disk.
+     * @throws IOException Throws IOException.
+     */
     public void saveData() throws IOException {
         // save data into ./data/duke.txt
         if (taskList.isListEmpty()) {

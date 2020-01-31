@@ -1,12 +1,18 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The Duke class contains the main method.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * The constructor for the Duke class.
+     */
     public Duke() {
         ui = new Ui();
         tasks = new TaskList();
@@ -14,11 +20,22 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * The main method for Duke.
+     * @param args For the main method.
+     * @throws DukeException Throws DukeException.
+     * @throws IOException Throws IOException.
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke().run();
     }
 
 
+    /**
+     * To run the duke program.
+     * @throws DukeException Throws DukeException.
+     * @throws IOException Throws IOException.
+     */
     public void run() throws DukeException, IOException {
         storage.loadData();
         ui.welcomeMessage();
@@ -39,6 +56,12 @@ public class Duke {
         storage.saveData();
         ui.reply("    Bye. Hope to see you again soon!");
     }
+
+    /**
+     * Handles the command provided by the user.
+     * @param command The user command.
+     * @throws DukeException Throws DukeException.
+     */
     public void handle(String command) throws DukeException{
         if (command.equals("list")) {
             ui.printList();

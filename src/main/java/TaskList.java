@@ -8,6 +8,13 @@ public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
     Parser parser = new Parser();
 
+    /**
+     * Creates the task and adds it to the ArrayList of tasks.
+     * @param type The type of task.
+     * @param whole The command.
+     * @return The newly created task.
+     * @throws DukeException The command provided does not fit the required format.
+     */
     public Task createAndAddTask(String type, String whole) throws DukeException {
         Task task;
         if (parser.numOfParts(whole) == 1) {
@@ -38,18 +45,35 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Check if the ArrayList of tasks is empty.
+     * @return A boolean which states if the list is empty.
+     */
     public boolean isListEmpty() {
         return tasks.isEmpty();
     }
 
+    /**
+     * Gets a task from the ArrayList based on the index.
+     * @param index The index related to the ArrayList.
+     * @return The task that is found.
+     */
     public Task getTask(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Checks the number of tasks in the ArrayList.
+     * @return The number of tasks.
+     */
     public int numOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * Removes the task from the ArrayList.
+     * @param index The index related to the ArrayList.
+     */
     public void removeTask(int index) {
         tasks.remove(index);
     }
