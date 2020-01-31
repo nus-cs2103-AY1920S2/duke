@@ -125,14 +125,18 @@ public class TaskList {
 
         // Find the keyword for search
         String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
-        String keyword = commandWords[1].toLowerCase();
+        String keywords = commandWords[1];
+        for (int i = 2; i < commandWords.length; i++) {
+            keywords = " " + commandWords[i];
+        }
+        keywords = keywords.toLowerCase();
 
         // For temporary storage and printing
         TaskList result = new TaskList();
 
         // Search
         for (Task t : allTasks) {
-            if (t.getCommand().toLowerCase().contains(keyword)) {
+            if (t.getCommand().toLowerCase().contains(keywords)) {
                 result.addSavedTaskToStored(t);
             }
         }
