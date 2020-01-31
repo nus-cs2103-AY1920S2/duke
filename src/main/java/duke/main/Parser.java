@@ -8,7 +8,13 @@ import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
 
 public class Parser {
-    //Custom parseCommand to parse CommandTypes (if valid, and to perform the logic)
+    /**
+     * parseCommand Method parses CommandTypes (if valid, and to perform the logic).
+     *
+     * @param input     is the input passed in for parsing
+     * @param taskList  is the list of Tasks are saved and manipulated
+     * @return          value true only CommandType.BYE is registered to exit the program
+     */
     public static boolean parseCommand(String input, TaskList taskList) {
         String[] inputBreakdown = input.split(" ", 2);
         CommandType commandType;
@@ -33,7 +39,7 @@ public class Parser {
 
             switch (commandType) {
             case BYE:
-                return Command.byeCommand(taskList);
+                return Command.byeCommand();
 
             case CALENDAR:
                 Command.calendarCommand(taskList, commandSuffix);
