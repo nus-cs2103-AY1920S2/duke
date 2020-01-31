@@ -3,7 +3,7 @@ import java.io.IOException;
 /**
  * The DeleteCommand inherits from Command and is used to delete tasks in the saved TaskList.
  */
-public class DeleteCommand extends Command {
+class DeleteCommand extends Command {
     protected String command;
 
     /**
@@ -15,7 +15,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * The execute method of DeleteCommand is used to
+     * The execute method of DeleteCommand is used to delete the specified task from
+     * the list of tasks.
+     *
      * @param tasks This is the saved TaskList in duke.txt.
      * @param ui This is the created Ui in Duke.
      * @param storage This is responsible for loading and saving the updated TaskList.
@@ -27,9 +29,12 @@ public class DeleteCommand extends Command {
         Task toBeRemoved = tasks.getTaskList().get(Integer.parseInt(commands[1])-1);
         tasks.taskList.remove(Integer.parseInt(commands[1])-1);
         storage.save(tasks);
+
         ui.showLine();
         System.out.println("\n" + "Alright, I've removed this task:" + "\n");
         System.out.println(toBeRemoved + "\n");
-        System.out.println("You currently have " + tasks.getTaskList().size() + " task(s) in the list.");
+        System.out.println("You currently have "
+                + tasks.getTaskList().size()
+                + " task(s) in the list.");
     }
 }

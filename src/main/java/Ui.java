@@ -4,8 +4,7 @@ import java.util.Scanner;
  * The Ui class is mainly responsible for reading user inputs and printing different output
  * to the user based on his or her input.
  */
-public class Ui {
-
+class Ui {
     /**
      * Shows the Duke logo when the Duke program is started.
      */
@@ -27,6 +26,7 @@ public class Ui {
 
     /**
      * This method reads the input of the user.
+     *
      * @return A String identical to the user's input.
      */
     String readCommand() {
@@ -46,6 +46,7 @@ public class Ui {
 
     /**
      * Used to print error messages to the user.
+     *
      * @param message The error message to be shown.
      */
     void showError(String message) {

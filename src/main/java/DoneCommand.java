@@ -5,13 +5,14 @@ import java.io.IOException;
  * from Task is called. This updates the status of the specified task in the TaskList
  * and saves it.
  */
-public class DoneCommand extends Command {
+class DoneCommand extends Command {
 
     private int taskNum;
 
     /**
      * The constructor for a DoneCommand takes in a task number specified by the user
      * to update the status of the specific task in the TaskList.
+     *
      * @param taskNum
      */
     DoneCommand(int taskNum) {

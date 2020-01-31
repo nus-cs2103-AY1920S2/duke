@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
  * The Duke class contains the main method to update the TaskList and
  * execute the user's commands and input.
  */
-public class Duke {
+class Duke {
     public final static String LINE = "__________________________________________";
     private static Storage storage;
     private Ui ui;
@@ -15,6 +15,7 @@ public class Duke {
     /**
      * The constructor for Duke takes in a String that contains the file path of the txt file
      * to update the TaskList in the txt file.
+     *
      * @param filePath The path which contains the txt file to be updated with the new list of tasks.
      */
     Duke(String filePath) {

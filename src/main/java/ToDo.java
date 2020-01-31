@@ -1,7 +1,7 @@
 /**
- * This class extends from Task and is created when users input starts with "todo".
+ * This class extends from Task and is created when users input starts with 'todo'.
  */
-public class ToDo extends Task {
+class ToDo extends Task {
     /**
      * Constructor for a ToDo object takes in a String with the name of the task.
      * @param taskName

@@ -4,11 +4,12 @@ import java.util.List;
 /**
  * The TaskList keeps track of the different tasks created by the user's input.
  */
-public class TaskList {
+class TaskList {
     protected List<Task> taskList;
 
     /**
      * The constructor for TaskList. TaskList is a wrapper class for a List containing different Tasks.
+     *
      * @param taskList A List of Tasks.
      */
     TaskList(List<Task> taskList) {
@@ -24,6 +25,7 @@ public class TaskList {
 
     /**
      * Returns the current TaskList.
+     *
      * @return A List of Tasks.
      */
     public List<Task> getTaskList() {
@@ -32,6 +34,7 @@ public class TaskList {
 
     /**
      * This method is used to delete a specific task from the TaskList.
+     *
      * @param taskNum The task number of the task to be deleted.
      */
     void delete(int taskNum) {
@@ -40,6 +43,7 @@ public class TaskList {
 
     /**
      * This method is used to delete a specific task from the TaskList but is not a void method.
+     *
      * @param i The task number of the task to be deleted.
      * @return The Task that was deleted.
      */

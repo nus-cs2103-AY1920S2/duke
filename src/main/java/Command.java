@@ -4,7 +4,7 @@ import java.io.IOException;
  * The abstract Command class is used for extension to the different commands for different interaction
  * with the saved TaskList and output printed to the user.
  */
-public abstract class Command {
+abstract class Command {
     protected String command;
     protected TaskList tasks;
     protected Ui ui;
@@ -23,8 +23,9 @@ public abstract class Command {
     }
 
     /**
-     * This abstract method is inherited by all child classes of the Command class for different interaction with
-     * the saved TaskList and updating the duke.txt file.
+     * This abstract method is inherited by all child classes of the Command class
+     * for different interaction with the saved TaskList and updating
+     * the duke.txt file.
      * @param tasks This is the saved TaskList in duke.txt.
      * @param ui This is the created Ui in Duke.
      * @param storage This is responsible for loading and saving the updated TaskList.

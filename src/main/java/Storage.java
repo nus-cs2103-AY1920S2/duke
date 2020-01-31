@@ -9,7 +9,7 @@ import java.util.Scanner;
  * The Storage class is reponsible for saving the updated list of tasks into the .txt file and
  * loading the saved list of tasks to be updated further by user inputs.
  */
-public class Storage {
+class Storage {
     static List<Task> savedList = new ArrayList<>();
     private final static String ROOT_PATH = Paths.get("").toAbsolutePath().toString();
     private final static String NEWLINE = System.lineSeparator();
@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Constructor for a Storage object takes in a String file path.
+     *
      * @param filePath The file path containing the .txt file to be updated.
      */
     public Storage(String filePath) {
@@ -29,6 +30,7 @@ public class Storage {
 
     /**
      * This method is used to load the saved list of tasks from the .txt file.
+     *
      * @return The saved list of tasks.
      * @throws FileNotFoundException if the file path is invalid
      */
@@ -72,7 +74,9 @@ public class Storage {
     }
 
     /**
-     * The save method takes in the old list of tasks and saves the updated list of tasks into the .txt file.
+     * The save method takes in the old list of tasks and saves the
+     * updated list of tasks into the .txt file.
+     *
      * @param taskList The old list of tasks from the .txt file.
      * @throws IOException if file path of the .txt file is invalid.
      */
@@ -81,13 +85,16 @@ public class Storage {
         PrintWriter out = new PrintWriter(file);
         for (Task task : taskList.getTaskList()) {
             if (task instanceof ToDo) {
-                out.write("T | " + task.getStatusIcon() + " | " + task.getTaskName() + NEWLINE);
+                out.write("T | " + task.getStatusIcon() + " | "
+                        + task.getTaskName() + NEWLINE);
             } else if (task instanceof Event) {
                 out.write("E | " + task.getStatusIcon() + " | "
-                        + task.getTaskName() + " | " + ((Event) task).getDateAt() + NEWLINE);
+                        + task.getTaskName() + " | "
+                        + ((Event) task).getDateAt() + NEWLINE);
             } else if (task instanceof Deadline) {
                 out.write("D | " + task.getStatusIcon() + " | "
-                        + task.getTaskName() + " | " + ((Deadline) task).getDateBy() + NEWLINE);
+                        + task.getTaskName() + " | "
+                        + ((Deadline) task).getDateBy() + NEWLINE);
             }
         }
         out.close();
