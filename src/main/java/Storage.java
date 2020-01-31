@@ -3,6 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import DukeException.DukeException;
 import DukeException.DukeIOException;
 
 public class Storage {
@@ -18,6 +20,9 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                  String line = sc.nextLine();
+                 if (line.equals("")) {
+                     continue;
+                 }
                  String code = line.substring(1, 2);
                  boolean isDone = line.substring(4, 5).equals("Y");
                  String taskArgs = line.substring(7);
@@ -27,6 +32,8 @@ public class Storage {
             return listOfTasks;
         } catch (IOException e) {
             throw new DukeIOException("File does not exist in file path, load from file failed.");
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Do not understand task(s) in file, load from file failed");
         }
     }
 
@@ -51,18 +58,18 @@ public class Storage {
             // deadlineArgs like "homework (by: 22/12/2019 1800)"
             String[] deadlineArgs = args.split("[ ][//(][b][y][//:][ ]");
             String description = deadlineArgs[0];
-            String byWhen = deadlineArgs[1].substring(0, deadlineArgs[1].length());
+            String byWhen = deadlineArgs[1].substring(0, deadlineArgs[1].length() - 1);
             Deadline deadline = new Deadline(description, byWhen, isDone);
             return deadline;
         } else if (code.equals("E")) {
             // eventArgs like {"attend festival", "2pm-4pm"}
             String[] eventArgs = args.split("[ ][//(][a][t][//:][ ]");
             String description = eventArgs[0];
-            String atWhen = eventArgs[1].substring(0, eventArgs[1].length());
+            String atWhen = eventArgs[1].substring(0, eventArgs[1].length() - 1);
             Event event = new Event(description, atWhen, isDone);
             return event;
         } else {
-            throw new DukeIOException("Cannot understand the type of task.");
+            throw new DukeIOException("Do not understand task(s) in file, load from file failed");
         }
     }
 }
