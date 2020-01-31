@@ -1,10 +1,10 @@
 package duke;
 
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 import java.io.FileNotFoundException;
 
 import duke.ui.Ui;
-import duke.ui.Gui;
 import duke.ui.TextUi;
 import duke.tasks.TaskList;
 import duke.storage.Storage;
@@ -13,9 +13,10 @@ import duke.commands.CommandHandler;
 import duke.exceptions.DukeException;
 
 public class Duke {
-    
-    public static void main(String[] args) {
-        Ui ui = new TextUi();
+    private Semaphore inputLock;
+    private Ui ui = new TextUi();
+
+    public void run() {
         String filePath = "data/tasks.txt";
         Storage storage = new TextStorage(filePath);
         TaskList tasks = new TaskList();
@@ -30,6 +31,11 @@ public class Duke {
         }
         CommandHandler handler = new CommandHandler(tasks, ui);
         while (handler.isActive()) {
+            try {
+                inputLock.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             handler.executeCmd(ui.getInput());
         }
         try {
@@ -42,11 +48,11 @@ public class Duke {
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public void addSemaphore(Semaphore sem) {
+        inputLock = sem;
+    }
+
+    public void useUi(Ui ui) {
+        this.ui = ui;
     }
 }

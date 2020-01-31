@@ -24,7 +24,9 @@ public interface Ui {
     void showError(String error);
 
     /**
-     * Gets user input
+     * Gets user input.
+     * 
+     * @return User input.
      */
     String getInput();
 }
