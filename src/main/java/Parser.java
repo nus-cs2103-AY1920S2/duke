@@ -1,12 +1,12 @@
 public class Parser {
 
     static Command parse(String command) {
-        String[] arrOfCommands = command.split(" ");
         if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
-        } else if (arrOfCommands[0].equals("done")) {
+        } else if (command.startsWith("done")) {
+            String[] arrOfCommands = command.split(" ");
             int num = Integer.parseInt(arrOfCommands[1]);
             return new DoneCommand(num);
         } else if (command.startsWith("deadline")) {

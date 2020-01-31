@@ -13,7 +13,5 @@ public abstract class Command {
         return false;
     }
 
-
     abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
-
 }
