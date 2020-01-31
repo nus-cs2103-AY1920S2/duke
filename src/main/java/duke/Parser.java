@@ -15,7 +15,7 @@ import duke.task.Todo;
 import java.time.DateTimeException;
 import java.util.HashMap;
 
-/** Deals with making sense of user commands */
+/** Deals with making sense of user commands. */
 public class Parser {
     protected static HashMap<String, CommandType> validCommands;
     protected static HashMap<String, String> commandDelimiter;
@@ -52,8 +52,8 @@ public class Parser {
             break;
         case "find":
             if (numberOfCommandArguments == 0) {
-                throw new DukeException(DukeException.exceptionIcon +
-                        " The description of a find cannot be empty...");
+                throw new DukeException(DukeException.exceptionIcon
+                        + " The description of a find cannot be empty...");
             }
             outputCommand = new FindCommand(Parser.getDescription(fullCommand, commandWords));
             break;
@@ -68,8 +68,8 @@ public class Parser {
         case "todo":
             // Check if valid command is given
             if (numberOfCommandArguments == 0) {
-                throw new DukeException(DukeException.exceptionIcon +
-                        " The description of a todo cannot be empty...");
+                throw new DukeException(DukeException.exceptionIcon
+                        + " The description of a todo cannot be empty...");
             }
             String todoDescription = Parser.getDescription(fullCommand, commandWords);
             outputCommand = new AddTaskCommand(new Todo(todoDescription));
@@ -83,8 +83,8 @@ public class Parser {
                 outputCommand = new AddTaskCommand(new Deadline(deadlineDescription, deadline));
             } catch (DateTimeException e) {
                 // Given deadline string was not in correct format
-                throw new DukeException("Given deadline task due date was not in correct format" +
-                        ": [yyyy-mm-dd]");
+                throw new DukeException("Given deadline task due date was not in correct format"
+                        + ": [yyyy-mm-dd]");
             }
             break;
         case "event":
@@ -96,8 +96,8 @@ public class Parser {
                 outputCommand = new AddTaskCommand(new Event(eventDescription, eventTime));
             } catch (DateTimeException e) {
                 // Given event time could not be converted a valid date
-                throw new DukeException("Given event task due date was not in correct format" +
-                        ": [yyyy-mm-dd]");
+                throw new DukeException("Given event task due date was not in correct format"
+                        + ": [yyyy-mm-dd]");
             }
             break;
         case "delete":
@@ -111,8 +111,8 @@ public class Parser {
         default:
             // Invalid command type given
             // First word of command does not match list of valid commands
-            throw new DukeException(DukeException.exceptionIcon +
-                    " OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return outputCommand;
     }
@@ -130,21 +130,21 @@ public class Parser {
 
         if (commandLength == "event".length()) {
             // Empty event command given (e.g. "event")
-            throw new DukeException(DukeException.exceptionIcon +
-                    " Wrong input format for adding an event... " +
-                    "Format: event [description] /at [event time]");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " Wrong input format for adding an event... "
+                    + "Format: event [description] /at [event time]");
         }
         if (!command.contains(eventDelimiter)) {
             // No delimiter present (e.g. "event project meeting Mon 2-4pm")
-            throw new DukeException(DukeException.exceptionIcon +
-                    " Wrong input format for adding an event... " +
-                    "Format: event [description] /at [event time]");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " Wrong input format for adding an event... "
+                    + "Format: event [description] /at [event time]");
         }
         if (eventDelimiterIndex + eventDelimiterLength == commandLength) {
             // Delimiter is at the end of command (e.g. "event /at")
-            throw new DukeException(DukeException.exceptionIcon +
-                    " Wrong input format for adding an event... " +
-                    "Format: event [description] /at [event time]");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " Wrong input format for adding an event... "
+                    + "Format: event [description] /at [event time]");
         }
     }
 
@@ -161,18 +161,18 @@ public class Parser {
 
         if (commandLength == "deadline".length()) {
             // Empty deadline command given (e.g. "deadline")
-            throw new DukeException(DukeException.exceptionIcon +
-                    " The description of a deadline cannot be empty...");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " The description of a deadline cannot be empty...");
         }
         if (!command.contains(deadlineDelimiter)) {
             // No due date given (e.g. "deadline read book")
-            throw new DukeException(DukeException.exceptionIcon +
-                    " No deadline given... Format: deadline [description] /by [due by]");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " No deadline given... Format: deadline [description] /by [due by]");
         }
         if (deadlineDelimiterIndex + deadlineDelimiterLength == commandLength) {
             // Delimiter is at the end of command (e.g. "deadline /by")
-            throw new DukeException(DukeException.exceptionIcon +
-                    " No deadline given... Format: deadline [description] /by [due by]");
+            throw new DukeException(DukeException.exceptionIcon
+                    + " No deadline given... Format: deadline [description] /by [due by]");
         }
     }
 
@@ -228,13 +228,13 @@ public class Parser {
 
     private static void setupCommandTypeFormatInfo() {
         commandTypeFormatInfo = new HashMap<>();
-        commandTypeFormatInfo.put("event", "Incorrect event format given... Correct format: event " +
-                "[description] /at [event time in yyyy-mm-dd]");
-        commandTypeFormatInfo.put("deadline", "Incorrect deadline task format given... Correct " +
-                "format: duke.task.Deadline task format: deadline [description] /by " +
-                "[due date in yyyy-mm-dd]");
-        commandTypeFormatInfo.put("todo", "Incorrect todo task format given... Correct format: todo " +
-                "[description]");
+        commandTypeFormatInfo.put("event", "Incorrect event format given... Correct format: event "
+                + "[description] /at [event time in yyyy-mm-dd]");
+        commandTypeFormatInfo.put("deadline", "Incorrect deadline task format given... Correct "
+                + "format: duke.task.Deadline task format: deadline [description] /by "
+                + "[due date in yyyy-mm-dd]");
+        commandTypeFormatInfo.put("todo", "Incorrect todo task format given... Correct format: todo "
+                + "[description]");
     }
 
     private static void setupCommandDelimiter() {
