@@ -85,7 +85,7 @@ public class TaskList implements TaskListInterface {
         if (tasks.size() == 0) {
             return "The list is currently empty. Fill me please!";
         }
-        String message = "";
+        String message = "Here's your current tasks:\n";
         for (int i = 1; i <= tasks.size(); i++) {
             message += String.format("%d. %s", i, tasks.get(i - 1));
 
