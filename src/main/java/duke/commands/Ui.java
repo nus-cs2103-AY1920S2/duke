@@ -7,12 +7,18 @@ import duke.exceptions.DukeException;
  */
 public class Ui {
 
-    private final String LOGO = " ____        _        \n"
+    /**
+     * the DUKE logo.
+     */
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String HORIZONTAL_LINES = "__________________________________"
+    /**
+     * lines to separate user input and programme output.
+     */
+    private static final String HORIZONTAL_LINES = "__________________________________"
             + "____________________________________________________________\n";
 
     /**
@@ -23,6 +29,10 @@ public class Ui {
         dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
+    /**
+     * used to print out horizontal lines.
+     * @return outputs horizontal lines
+     */
     public String horizontalLines() {
         return this.HORIZONTAL_LINES;
     }

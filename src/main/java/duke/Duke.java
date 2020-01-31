@@ -15,6 +15,10 @@ public class Duke {
     private static Storage storage = new Storage("data/duke.txt");
     private static Parser parser = new Parser();
 
+    /**
+     * runs the programme.
+     * @param args arguments
+     */
     public static void main(String[] args) {
         ui.start();
         storage.retrieveInfo();

@@ -12,12 +12,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static duke.commands.Parser.FORMATTER;
+
 /**
  * deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
+    /**
+     * the path where duke.txt is located.
+     */
     private String filePath;
+    /**
+     * the TaskList.
+     */
     private TaskList taskList;
 
     /**
@@ -45,10 +53,10 @@ public class Storage {
                     newTask = new ToDo(arr[2].trim());
                 } else if (arr[0].trim().equals("D")) {
                     newTask = new Deadline(arr[2].trim(), arr[3].trim(),
-                            Task.FORMATTER);
+                            FORMATTER);
                 } else if (arr[0].trim().equals("E")) {
                     newTask = new Event(arr[2].trim(), arr[3].trim(),
-                            Task.FORMATTER);
+                            FORMATTER);
                 }
 
                 if (arr[1].trim().equals("Y")) {

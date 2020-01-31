@@ -4,9 +4,9 @@ import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.Task;
 import duke.tasks.ToDo;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -14,10 +14,34 @@ import java.util.Scanner;
  */
 public class Parser {
 
+    /**
+     * the formatter used to parse user input.
+     */
+    public static final DateTimeFormatter PARSER = DateTimeFormatter
+            .ofPattern("d-M-yyyy HHmm");
+    /**
+     * the formatter used for the file data format.
+     */
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
+            .ofPattern("MMM d yyyy ha");
+
+
+    /**
+     * scans user input.
+     */
     private Scanner sc = new Scanner(System.in);
+    /**
+     * creates a new Ui object to access functions.
+     */
     private Ui ui = new Ui();
+    /**
+     * the Tasklist.
+     */
     private TaskList taskList;
 
+    /**
+     * creates a new Parser object and gets Tasklist from DUke.
+     */
     public Parser() {
         this.taskList = Duke.taskList;
     }
@@ -52,13 +76,13 @@ public class Parser {
                         ui.checkDescription(description, "deadline");
                         ui.checkTime(arr, "deadline");
                         taskList.add(new Deadline(description[1],
-                                arr[1].split(" ", 2)[1], Task.PARSER), "print");
+                                arr[1].split(" ", 2)[1], PARSER), "print");
 
                     } else if (command.startsWith("event")) {
                         ui.checkDescription(description, "event");
                         ui.checkTime(arr, "event");
                         taskList.add(new Event(description[1],
-                                arr[1].split(" ", 2)[1], Task.PARSER), "print");
+                                arr[1].split(" ", 2)[1], PARSER), "print");
 
                     } else if (command.startsWith("find")) {
                         taskList.find(description[1]);

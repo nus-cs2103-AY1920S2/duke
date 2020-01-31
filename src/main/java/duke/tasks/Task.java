@@ -1,19 +1,18 @@
 package duke.tasks;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * The class that all the tasks inherit from.
  */
 public abstract class Task {
 
+    /**
+     * the description for this task.
+     */
     private String description;
+    /**
+     * whether the task has been completed or not.
+     */
     private boolean isDone;
-    
-    public static final DateTimeFormatter PARSER = DateTimeFormatter
-            .ofPattern("d-M-yyyy HHmm");
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern("MMM d yyyy ha");
 
     /**
      * creates a new Task.

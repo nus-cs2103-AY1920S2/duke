@@ -1,7 +1,8 @@
+import duke.tasks.ToDo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ToDoTest{
+public class ToDoTest {
     @Test
     public void toStringTest() {
         ToDo todo = new ToDo("test");

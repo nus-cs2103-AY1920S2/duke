@@ -9,9 +9,18 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
+    /**
+     * the list containing all the tasks.
+     */
     private ArrayList<Task> newList;
+    /**
+     * creates a new Ui object to access functions.
+     */
     private Ui ui = new Ui();
 
+    /**
+     * creates a new TaskList object.
+     */
     public TaskList() {
         this.newList = new ArrayList<>();
     }

@@ -3,12 +3,17 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static duke.commands.Parser.FORMATTER;
+
 /**
  * Events: tasks that start at a specific time and ends at a specific time
  * e.g., team project meeting on 2/10/2019 2-4pm.
  */
 public class Event extends Task {
 
+    /**
+     * the time for this event.
+     */
     private LocalDateTime at;
 
     /**
