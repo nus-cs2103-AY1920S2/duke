@@ -56,7 +56,9 @@ public class Duke {
                 } else if (p.getCommand().equals("delete")) {
                     ui.acknowledgeDelete(tasks, p.getIndex(tasks));
                     storage.save(tasks);
-                } else {
+                } else if (p.getCommand().equals("find")) {
+                    ui.acknowledgeFound(tasks, p.getTask());
+                }   else {
                     ui.printUnknownCommand();
                 }
             } catch (DukeException ex) {

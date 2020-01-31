@@ -82,4 +82,15 @@ public class Ui {
         tasks.remove(targetedTask);
         System.out.println("Now you have " + tasks.getSize() + " tasks in the list");
     }
+
+    public void acknowledgeFound(TaskList tasks, String task) {
+        System.out.println("Here are the matching tasks in your list:");
+        int index = 1;
+        for (Task t: tasks.getTasks()) {
+            if (t.toString().contains(task)) {
+                System.out.printf("%d.%s\n", index, t.toString());
+                index++;
+            }
+        }
+    }
 }
