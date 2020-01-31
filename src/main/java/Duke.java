@@ -1,7 +1,9 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -156,14 +158,16 @@ public class Duke {
             task = new ToDo(desc);
 
         } else if (type.equals("event")) {
-            String desc = whole.substring(6).split(" /at ")[0];
-            String at = whole.substring(6).split(" /at ")[1];
-            task = new Event(desc, at);
+            String desc = whole.substring(6).split("/at ")[0];
+            String dateAndTime = whole.substring(6).split("/at ")[1];
+            LocalDate date = LocalDate.parse(dateAndTime.split(" ")[0]);
+            task = new Event(desc, date);
 
         } else if (type.equals("deadline")) {
-            String desc = whole.substring(9).split(" /by ")[0];
-            String by = whole.substring(9).split(" /by ")[1];
-            task = new Deadline(desc, by);
+            String desc = whole.substring(9).split("/by ")[0];
+            String dateAndTime = whole.substring(9).split("/by ")[1];
+            LocalDate date = LocalDate.parse(dateAndTime.split(" ")[0]);
+            task = new Deadline(desc, date);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
