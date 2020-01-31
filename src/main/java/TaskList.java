@@ -1,11 +1,3 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -15,38 +7,18 @@ class TaskList {
     /** List of tasks; assume no more than 100 tasks. */
     private ArrayList<Task> lTasks = new ArrayList<>();
 
-    @SuppressWarnings("unchecked")
-    public boolean loadFromFile(Path path) throws FileNotFoundException, IOException, ClassNotFoundException {
-        FileInputStream fileIn = null;
-        ObjectInputStream objIn = null;
-        ArrayList<Task> tasks = null;
-        boolean loadSuccessful = false;
-        try {
-            fileIn = new FileInputStream(new File(path.toString())); // read serialized object from file as a String
-		    objIn = new ObjectInputStream(fileIn);
-            tasks = (ArrayList<Task>) objIn.readObject(); // supressed uncheck cast warning: no way to verify type of generic at runtime
-        } finally {
-            if(fileIn != null) {
-                fileIn.close();
-            }
-            if(objIn != null) {
-                objIn.close();
-            }
-            if (tasks != null) {
-                lTasks = tasks;
-                loadSuccessful = true;
-            }
+    public boolean load(ArrayList<Task> tasks) {
+        if (lTasks.isEmpty()) {
+            lTasks.addAll(tasks);
+            return true;
+        } else {
+            return false;
         }
-        return loadSuccessful;
     }
 
-    public boolean saveToFile(Path path) throws IOException{
-        FileOutputStream  fileOut = new FileOutputStream(new File(path.toString())); // read serialized object from file as a String
-        ObjectOutputStream  objOut = new ObjectOutputStream(fileOut);
-        objOut.writeObject(lTasks);
-        fileOut.close();
-        objOut.close();
-        return true;
+    @SuppressWarnings("unchecked")
+    public ArrayList<Task> save() {
+        return ((ArrayList<Task>) lTasks.clone());
     }
 
     // todo: make static date and time formatters
