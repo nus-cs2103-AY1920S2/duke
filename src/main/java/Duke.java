@@ -1,5 +1,10 @@
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     /**
