@@ -28,9 +28,9 @@ public class Ui {
      * Prints welcome message.
      */
     public void showWelcome() {
-        System.out.println("\nHi hi I'm \n" + LOGO);
+        System.out.println("\nYahallo! Duke's name is \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
-        dukeSays("What will Master do today?");
+        dukeSays("W-what Master do to Duke today?");
     }
 
     /**
@@ -54,16 +54,21 @@ public class Ui {
     public void sayLine(LineName lineName) {
         switch (lineName) {
         case HELP:
+            dukeSays("Master wants to know more about Duke?");
+            dukeSays("Exposing myself to master... Duke's so embarrassed...");
+            dukeSays("But if it's for Master... Duke'll do it!");
+            dukeSays("Duke's precious secrets:");
             dukeSays("todo <name> -- Adds a todo to your task list.");
             dukeSays("deadline <name> /by <time> -- Adds a dead line to your task list.");
             dukeSays("event <name> /at <time> -- Adds a event to your task list.");
             dukeSays("list -- Displays your task list.");
+            dukeSays("find <query> -- Finds a task which has <query> as a substring of the task's name.");
             dukeSays("done <task index> -- Marks the task as done.");
             dukeSays("delete <task index> -- Deletes the task.");
             dukeSays("bye -- Exits this application");
             break;
         case NO_INPUT:
-            dukeSays("Duke can't hear anything Master... Is Master all right?");
+            dukeSays("Duke can't hear anything... Is Master all right?");
             break;
         case SAY_DUKE:
             dukeSays("Master!");
@@ -148,6 +153,7 @@ public class Ui {
             // Purely for testing, should never be called in deployment
             // Fallthrough
         default:
+            // Purely for testing, should never be called in deployment
             dukeSays("There is an unexpected error :(");
             break;
         }
