@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
     String at;
+    LocalDate date;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate date) {
         super(description);
-        this.at = at;
+        this.date = date;
         totalTasks++;
     }
 
@@ -13,6 +17,6 @@ public class Event extends Task{
 
     @Override
     public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description + "(at: " + at + ")");
+        System.out.println(getType() + getStatusIcon() + " " + description + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 }

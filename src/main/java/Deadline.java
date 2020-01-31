@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
     String by;
-    public Deadline(String description, String by) {
+    LocalDate date;
+
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = by;
+        this.date = date;
         totalTasks++;
     }
 
@@ -12,6 +17,6 @@ public class Deadline extends Task{
 
     @Override
     public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description+ "(by: " + by + ")");
+        System.out.println(getType() + getStatusIcon() + " " + description+ "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 }
