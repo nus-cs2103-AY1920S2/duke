@@ -28,6 +28,11 @@ public class DukeParser {
             @Override
             public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
             }
+
+            @Override
+            public boolean getIsExit() {
+                return false;
+            }
         };
         try {
             switch (dukeCommand) {
