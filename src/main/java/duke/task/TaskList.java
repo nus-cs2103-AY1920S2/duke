@@ -1,14 +1,17 @@
 package duke.task;
+
 import duke.storage.CSV;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TaskList {
 
-	private List<Task> lst;
+    private List<Task> lst;
 
     public TaskList() {
         this.lst = new ArrayList<>();
@@ -36,6 +39,14 @@ public class TaskList {
 
     public List<Task> getTaskList() {
         return this.lst;
+    }
+
+    public List<Task> find(String... searchStr) {
+        Stream<Task> ans = new ArrayList<>(this.lst).stream();
+        for (String str : searchStr) {
+            ans = ans.filter(x -> x.getName().contains(str));
+        }
+        return ans.collect(Collectors.toList());
     }
 
     public static TaskList fromCSVList(List<CSV> lst) {
