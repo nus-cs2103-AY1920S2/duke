@@ -12,7 +12,7 @@ import java.util.List;
 public class TaskList implements Serializable {
     List<Task> taskList = new ArrayList<>();
 
-    public TaskList() {
+    public TaskList() throws DukeException {
     }
 
     public TaskList(Storage storage) throws DukeException {
@@ -20,12 +20,7 @@ public class TaskList implements Serializable {
         taskList = storage.load().getTasks();
     }
 
-    /**
-     * deleteCommand Method deletes Tasks from the TaskList.
-     *
-     * @param commandSuffix     is the additional String that accompanies two-step commands
-     * @throws UnknownTaskException when an unknown/unformatted task number is passed in
-     */
+    //Custom deleteCommand Method to delete Tasks
     public void deleteTask(String commandSuffix) throws UnknownTaskException {
         try {
             int deleteTaskNo = Integer.parseInt(commandSuffix) - 1;
@@ -43,12 +38,7 @@ public class TaskList implements Serializable {
         }
     }
 
-    /**
-     * doneCommand Method marks Tasks as done.
-     *
-     * @param commandSuffix     is the additional String that accompanies two-step commands
-     * @throws UnknownTaskException when an unknown/unformatted task number is passed in
-     */
+    //Custom doneCommand Method to mark Tasks as done
     public void doneTask(String commandSuffix) throws UnknownTaskException {
         try {
             int doneTaskNo = Integer.parseInt(commandSuffix) - 1;
