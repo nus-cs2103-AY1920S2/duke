@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Constructor of FindCommand.
+     * Constructs a FindCommand object.
      *
      * @param keyword the keyword to search for.
      */
@@ -23,8 +23,9 @@ public class FindCommand extends Command {
 
     /**
      * Executes FindCommand by searching tasks and list tasks that contains the keyword in the description.
-     * @param tasks TaskList of Duke.
-     * @param ui The user interface.
+     *
+     * @param tasks   TaskList of Duke.
+     * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      */
     @Override

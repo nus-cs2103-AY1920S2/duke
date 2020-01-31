@@ -17,7 +17,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor of Duke, initialise the Ui, storage and task list.
+     * Constructs Duke, initialise the Ui, storage and task list.
      *
      * @param filePath to store the list of tasks in the disk.
      */

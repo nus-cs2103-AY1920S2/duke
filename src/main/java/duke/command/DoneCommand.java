@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     private int taskNo;
 
     /**
-     * Constructor for DoneCommand.
+     * Constructs a DoneCommand object.
      *
      * @param taskNo the index of the task that is completed.
      */
@@ -25,8 +25,8 @@ public class DoneCommand extends Command {
     /**
      * Executes DoneCommand by marking the task as done.
      *
-     * @param tasks TaskList of Duke.
-     * @param ui The user interface.
+     * @param tasks   TaskList of Duke.
+     * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      * @throws DukeException if the given task number is out of bound of the task list.
      */

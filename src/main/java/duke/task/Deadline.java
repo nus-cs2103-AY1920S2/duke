@@ -11,7 +11,7 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Constructor of Deadline object.
+     * Constructs a Deadline object.
      *
      * @param description the title of the task.
      * @param by the deadline of the task in yyyy-MM-dd format.
@@ -22,7 +22,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * For loading from disk used in Storage class.
+     * Constructs a Deadline object when loading from disk.
      *
      * @param description the title of the task.
      * @param isDone whether the task has been completed
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * For printing of the Deadline object.
+     * Returns the string representation of the Deadline object.
      *
      * @return the string representation of Deadline.
      */

@@ -14,8 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents the file used to store the task list.
@@ -25,7 +25,7 @@ public class Storage {
     private File file;
 
     /**
-     * Creates an file object, and creating the necessary file or directory if file does not exist.
+     * Creates a file object, and creating the necessary file or directory if file does not exist.
      *
      * @param filePath the file path of the file that stores the task list.
      */
@@ -44,7 +44,7 @@ public class Storage {
     }
 
     /**
-     * Saves the list of tasks to the storage file
+     * Saves the list of tasks to the storage file.
      *
      * @param tasks the list of tasks to save.
      */
@@ -61,7 +61,7 @@ public class Storage {
     }
 
     /**
-     * Loads the task list from the storage file
+     * Loads the task list from the storage file.
      *
      * @return an empty ArrayList if file does not exist.
      * @throws DukeException if there are errors loading from file and/or converting data from file.

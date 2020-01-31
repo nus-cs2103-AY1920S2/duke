@@ -53,14 +53,14 @@ public class Ui {
     }
 
     /**
-     * Show the loading error when there is error loading from disk.
+     * Shows the loading error when there is error loading from disk.
      */
     public void showLoadingError() {
         System.out.println("OOPS!!! I couldn't load your tasks from the disk! :-(");
     }
 
     /**
-     * Show the message of DukeException
+     * Shows the message of DukeException.
      *
      * @param message the error message.
      */
@@ -69,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Read command from user input.
+     * Reads command from user input.
      *
      * @return the line of command input by user.
      */

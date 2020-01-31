@@ -8,7 +8,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor of a Task
+     * Constructs a Task object.
      *
      * @param description the title of the task.
      */
@@ -18,10 +18,10 @@ public abstract class Task {
     }
 
     /**
-     * For loading from disk used in Storage class.
+     * Constructs a Task object when loading from disk.
      *
      * @param description the title of the task.
-     * @param isDone whether the task has been completed.
+     * @param isDone      whether the task has been completed.
      */
     public Task(String description, boolean isDone) {
         this.description = description;

@@ -6,7 +6,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Constructor of Todo Task.
+     * Constructs a Todo Task.
      *
      * @param description the description of what has to be done.
      */
@@ -15,10 +15,10 @@ public class Todo extends Task {
     }
 
     /**
-     * For loading from disk used in Storage class.
+     * Constructs a Todo Task when loading from disk.
      *
      * @param description the description of what has to be done.
-     * @param isDone whether or not the task has been done.
+     * @param isDone      whether or not the task has been done.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
@@ -35,7 +35,7 @@ public class Todo extends Task {
     }
 
     /**
-     * For printing of the Todo object.
+     * Returns the string representation of the Todo object.
      *
      * @return the string representation of Todo.
      */

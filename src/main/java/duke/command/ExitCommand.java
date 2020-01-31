@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Constructor for ExitCommand.
+     * Constructs an ExitCommand object.
      */
     public ExitCommand() {
         super(true);
@@ -19,8 +19,8 @@ public class ExitCommand extends Command {
     /**
      * Executes the ExitCommand by saving the current task list into disk, then print the exit message.
      *
-     * @param tasks TaskList of Duke.
-     * @param ui The user interface.
+     * @param tasks   TaskList of Duke.
+     * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      */
     @Override

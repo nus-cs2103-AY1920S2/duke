@@ -13,7 +13,7 @@ public abstract class Command {
     protected boolean isExit;
 
     /**
-     * Constructor for a command.
+     * Constructs a Command object.
      *
      * @param isExit To indicate an exit command.
      */
@@ -24,7 +24,8 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * Returns a boolean on whether the command is an exit command
+     * Returns a boolean on whether the command is an exit command.
+     *
      * @return true if the command is an exit command.
      */
     public boolean isExit() {

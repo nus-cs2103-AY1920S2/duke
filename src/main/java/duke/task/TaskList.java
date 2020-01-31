@@ -12,14 +12,14 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor of an empty TaskList.
+     * Constructs an empty TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * For loading from disk used in Storage class.
+     * Constructs a TaskList when loading from disk.
      *
      * @param tasks the ArrayList of tasks from the disk.
      */
@@ -28,7 +28,7 @@ public class TaskList {
     }
 
     /**
-     * Get the list of tasks from TaskList.
+     * Gets the list of tasks from TaskList.
      *
      * @return the ArrayList of Tasks.
      */
@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to the task list.
+     * Adds task to the task list.
      *
      * @param task the task to add.
      */
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task from the task list.
+     * Deletes task from the task list.
      *
      * @param taskNo the index to delete from the ArrayList of tasks.
      * @throws DukeException if the given index is out of bound of the ArrayList.

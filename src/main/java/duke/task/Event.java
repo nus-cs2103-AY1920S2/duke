@@ -11,7 +11,7 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Constructor of Event object.
+     * Constructs an Event object.
      *
      * @param description the title of the event.
      * @param at the date of the event in yyyy-MM-dd format.
@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * For loading from disk used in Storage class.
+     * Constructs an Event object when loading from disk.
      *
      * @param description the title of the event.
      * @param isDone whether the event is over.
@@ -44,7 +44,7 @@ public class Event extends Task {
     }
 
     /**
-     * For printing of the Event object.
+     * Returns the string representation of the Event object.
      *
      * @return the string representation of Event.
      */
