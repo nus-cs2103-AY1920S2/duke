@@ -24,7 +24,7 @@ public class TaskList {
      */
     public static void formattingDivider(String contentStr) {
         System.out.println("    #__________________________________________________________#");
-        String lines[] = contentStr.split("\\r?\\n");
+        String[] lines = contentStr.split("\\r?\\n");
 
         for (int i = 0; i < lines.length; i++) {
             System.out.println("      " + lines[i]);
@@ -54,7 +54,7 @@ public class TaskList {
      *
      * @param inputStr the user input.
      * @throws GrapieExceptions Errors thrown.
-     * @throws IOException
+     * @throws IOException Throws away the exception.
      */
     public void addToList(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.contains("todo")) {
@@ -146,7 +146,7 @@ public class TaskList {
      *
      * @param doneTaskStr Task the user wants to be marked as complete.
      * @throws GrapieExceptions Invalid task number, or already completed task thrown as error.
-     * @throws IOException
+     * @throws IOException Throws away the exception.
      */
     public void completeTask(String doneTaskStr) throws GrapieExceptions, IOException {
         if (doneTaskStr.length() <= 5) {
@@ -192,7 +192,7 @@ public class TaskList {
      *
      * @param inputStr User's input, delete command and task to be deleted.
      * @throws GrapieExceptions Error if the task number to be deleted do not exist.
-     * @throws IOException
+     * @throws IOException Throws away the exception.
      */
     public void deleteTask(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.length() <= 7) {
@@ -232,6 +232,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list of tasks having the user input.
+     *
+     * @param command The user input.
+     * @throws GrapieExceptions Throws grapieExceptions.
+     */
     public void findFromList(String command) throws GrapieExceptions {
         if (command.length() <= 5) {
             throw new GrapieExceptions(ErrorMsg.emptyKeywordError);

@@ -12,7 +12,7 @@ public class Event extends Task {
      * @param time The time and date for the event.
      * @throws GrapieExceptions Throws error for incorrect formatting.
      */
-    public Event(String description, String time) throws GrapieExceptions {//String time) {
+    public Event(String description, String time) throws GrapieExceptions {
         super(description);
 
         time = time.trim();

@@ -8,7 +8,6 @@ public class Parser {
 
     /**
      * Returns the corresponding command for the user's input.
-     *
      * Aims to sort user command into List, Delete, Done and Add.
      * Add consist of everything else, including illegal commands, which will be handled in the TaskList class.
      *

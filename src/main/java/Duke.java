@@ -1,22 +1,22 @@
-//import javafx.application.Application;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Label;
-//import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke { //extends Application {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Main constructor for Duke
+     * Main constructor for Duke.
      *
-     * @param filePath
-     * @throws IOException
-     * @throws GrapieExceptions
+     * @param filePath The filePath for the hard disk text file.
+     * @throws IOException Throws away the exception.
+     * @throws GrapieExceptions Throws GrapieExceptions.
      */
     public Duke(String filePath) throws IOException, GrapieExceptions {
         storage = new Storage(filePath);
@@ -25,9 +25,9 @@ public class Duke { //extends Application {
     }
 
     /**
-     * Main method for Duke, to run the program
+     * Main method for Duke, to run the program.
      *
-     * @throws IOException
+     * @throws IOException Throws away exception.
      */
     public void runDuke() throws IOException {
         ui.greetings();
@@ -43,9 +43,14 @@ public class Duke { //extends Application {
         }
 
         ui.sayonara();
-
     }
 
+    /**
+     * The main method.
+     *
+     * @param args The main method.
+     * @throws IOException Throws away exception.
+     */
     public static void main(String[] args) throws IOException {
         Duke duke = null;
         try {
@@ -58,12 +63,12 @@ public class Duke { //extends Application {
         duke.runDuke();
     }
 
-//    @Override
-//    public void start(Stage stage) {
-//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-//
-//        stage.setScene(scene); // Setting the stage to show our screen
-//        stage.show(); // Render the stage.
-//    }
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 }

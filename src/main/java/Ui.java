@@ -12,7 +12,7 @@ public class Ui {
 
 
     /**
-     * Constructor for Ui
+     * Constructor for Ui.
      */
     public Ui() {
         //deals with interactions with the user
@@ -22,7 +22,7 @@ public class Ui {
     }
 
     /**
-     * Greet the user
+     * Greet the user.
      */
     public void greetings() {
         String intro = "Hello! I'm Grapie! \n"
@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Says goodbye to the user
+     * Returns goodbye to the user.
      */
     public void sayonara() {
         TaskList.formattingDivider("Okie!! Goodbye!");
@@ -53,7 +53,7 @@ public class Ui {
      *
      * @param command User's input.
      * @param tasks TaskList class created in Duke.
-     * @throws IOException
+     * @throws IOException Throws away the exception.
      */
     public void readCommand(String command, TaskList tasks) throws IOException {
         String commandArr = parser.makeSenseOfUserCommand(command);

@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,10 +11,10 @@ public class Storage {
     String filePath;
 
     /**
-     * Constructor for Storage class
+     * Constructor for Storage class.
      *
      * @param filePath The filepath to get the Hard Disk data from.
-     * @throws IOException
+     * @throws IOException Throws exception.
      */
     public Storage(String filePath) throws IOException {
         // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
@@ -23,8 +27,8 @@ public class Storage {
      * Load hard disk information into an ArrayList for TaskList class to use.
      *
      * @return Returns an ArrayList of Task, loaded from the Hard Disk.
-     * @throws FileNotFoundException
-     * @throws GrapieExceptions
+     * @throws FileNotFoundException Throws exception.
+     * @throws GrapieExceptions Throws exception.
      */
     public List<Task> load() throws FileNotFoundException, GrapieExceptions {
         List<Task> storingList = new ArrayList<>();
@@ -87,22 +91,9 @@ public class Storage {
      * @param task The task to be converted into the new format.
      * @param type Todo, Event or Deadline.
      * @param time The date and time for the Tasks.
-     * @throws IOException
+     * @throws IOException Throws exception.
      */
     public void convertToHardDiskFormatAndStore(Task task, String type, String time) throws IOException {
-            /*
-            T | 1 | read book
-            D | 0 | return book | June 6th
-            E | 0 | project meeting | Aug 6th 2-4pm
-            T | 1 | join sports club
-            */
-
-            /*
-            [T][O] read book
-            [D][X] return book (by: June 6th)
-            [E][X] project meeting (at: Aug 6th 2-4pm)
-            [T][O] join sports club
-             */
 
         String doneOrNotDone = "";
         if (task.isDone) {
@@ -140,7 +131,7 @@ public class Storage {
      * Change not done (X) into done (O)
      *
      * @param lineNumber The line number to be deleted from hard disk.
-     * @throws IOException
+     * @throws IOException Throws exception.
      */
     public void replaceLineFromHardDisk(int lineNumber) throws IOException {
         File myObj = new File(filePath);
@@ -165,7 +156,6 @@ public class Storage {
             counter++;
         }
 
-//        System.out.println(newData);
         FileOutputStream fileOut = new FileOutputStream(filePath);
         fileOut.write(newData.getBytes());
         fileOut.close();
@@ -175,7 +165,7 @@ public class Storage {
      * Delete the corresponding line from dukeStorage.txt file according to the task deleted.
      *
      * @param lineNumber The line number to be deleted from hard disk.
-     * @throws IOException
+     * @throws IOException Throws exception.
      */
     public void deleteLineFromHardDisk(int lineNumber) throws IOException {
         File myObj = new File(filePath);
@@ -202,7 +192,6 @@ public class Storage {
             }
         }
 
-//        System.out.println(newData);
 
         FileOutputStream fileOut = new FileOutputStream(filePath);
         fileOut.write(newData.getBytes());
