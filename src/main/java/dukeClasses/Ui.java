@@ -4,6 +4,8 @@ import dukeClasses.DukeException;
 import dukeClasses.Storage;
 import dukeClasses.TaskManager;
 
+import java.time.DateTimeException;
+
 /**
  * Handles all the user inputs
  */
@@ -73,6 +75,8 @@ public class Ui {
                 manager.addTask(textEntered);
             }catch (DukeException ex){
                 System.out.println(ex.getMessage());
+            } catch (DateTimeException ex){
+                System.out.println("Please enter dates in this format YYYY-MM_DD");
             }
         }else if (textEntered.contains("delete")) {
 

@@ -2,8 +2,10 @@ package dukeClasses;
 
 import dukeClasses.*;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Handles all the issues related to Tasks!
@@ -93,14 +95,16 @@ public class TaskManager {
                 textEntered = textEntered.substring(9);
                 String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
                 String tempDate = temp[1];
+                LocalDate date;
+                try {
+                    date = LocalDate.parse(tempDate);
+                    newTask = new Deadline(temp[0], date);
+                    this.listOfTasks.add(newTask);
+                } catch (DateTimeException ex){
 
-                LocalDate date = LocalDate.parse(tempDate);
-                /* This is to get time if needed
-                LocalDateTime timing = date.atTime(18,00);
-                System.out.println(timing.format(DateTimeFormatter.ofPattern("HH:mm")));
-                */
-                newTask = new Deadline(temp[0], date);
-                this.listOfTasks.add(newTask);
+                    throw new DateTimeException(ex.getMessage());
+                }
+
             }
 
         }else{ //Handles task that is dukeClasses.Event
