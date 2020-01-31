@@ -1,20 +1,54 @@
 package duke.ui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
-public class Gui extends Application implements Ui {
+import duke.Duke;
+/**
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
+public class Gui extends AnchorPane implements Ui {
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox dialogContainer;
+    @FXML
+    private TextField userInput;
+    @FXML
+    private Button sendButton;
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
+    private Duke duke;
 
-        stage.setScene(scene);
-        stage.show();
-        Application.launch(Gui.class, new String['a']);
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    public void setDuke(Duke d) {
+        duke = d;
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    @FXML
+    private void handleUserInput() {
+        String input = userInput.getText();
+        String response = duke.getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
     }
 
     private String lineBreak = "===========================================================\n";
@@ -37,6 +71,12 @@ public class Gui extends Application implements Ui {
         System.out.print(sb.toString());
     }
 
+    public String getInput() {
+        String input = userInput.getText();
+        userInput.clear();
+        return input;
+    }
+
     private String formatReply(String str) {
         String[] lines = str.split("\\r?\\n");
         StringBuilder sb = new StringBuilder();
@@ -48,6 +88,4 @@ public class Gui extends Application implements Ui {
         sb.append(lineBreak);
         return sb.toString();
     }
-
-    
 }

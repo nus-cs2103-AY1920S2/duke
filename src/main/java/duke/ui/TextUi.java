@@ -1,10 +1,17 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 /**
  * Displays output to the user in text (CLI).
  */
 public class TextUi implements Ui {
-    private String lineBreak = "===========================================================\n";
+    private String lineBreak;
+    private Scanner sc;
+    public TextUi() {
+        lineBreak = "===========================================================\n";
+        sc = new Scanner(System.in);
+    }
 
     public void showReply(String reply) {
         System.out.print(formatReply(reply));
@@ -22,6 +29,10 @@ public class TextUi implements Ui {
         sb.append("\n");
         sb.append(formatReply("Hello! I'm Duke\nGive me a moment while I locate your save file..."));
         System.out.print(sb.toString());
+    }
+
+    public String getInput() {
+        return sc.nextLine();
     }
 
     private String formatReply(String str) {
