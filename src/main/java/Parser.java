@@ -21,14 +21,14 @@ public class Parser {
 
     public String getTask() {
         switch (command) {
-            case "todo":
-                return inputs[1];
-            case "deadline":
-                return input.split(" /by")[0].split(" ", 2)[1];
-            case "event":
-                return input.split(" /at")[0].split(" ", 2)[1];
-            default:
-                return "";
+        case "todo":
+            return inputs[1];
+        case "deadline":
+            return input.split(" /by")[0].split(" ", 2)[1];
+        case "event":
+            return input.split(" /at")[0].split(" ", 2)[1];
+        default:
+            return "";
         }
     }
 
