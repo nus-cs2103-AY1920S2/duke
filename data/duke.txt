@@ -2,4 +2,5 @@ T , 1 , read book
 D , 0 , return book , 2019-06-06
 E , 0 , project meeting , Aug 6th 2-4pm
 T , 1 , join sports club
-E , 1 , project meeting  , Mon 2-4pm
+E , 1 , project meeting , Mon 2-4pm
+T , 0 , borrow book
