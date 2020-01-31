@@ -11,8 +11,8 @@ import duchess.ui.Ui;
  * The {@code Duchess} class is the heart of the Duchess program.
  * Upon initialising an instance of this class, calling run() on it
  * will begin the program.
- * <p>
- * To initialise the {@code Duchess} instance, a {@code String filePath}
+ *
+ * <p>To initialise the {@code Duchess} instance, a {@code String filePath}
  * ending with {@code .json} needs to be passed into the constructor.
  * If no file is found at the provided file path, a brand new JSON file will
  * be created.

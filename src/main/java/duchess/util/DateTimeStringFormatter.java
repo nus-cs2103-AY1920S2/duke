@@ -12,8 +12,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * with deadlines, as the "[OVERDUE]" label is returned as well
  * should the given {@code LocalDateTime} object be before the
  * current datetime.
- * <p>
- * An example would be "Today" if the given {@code LocalDateTime}
+ *
+ * <p>An example would be "Today" if the given {@code LocalDateTime}
  * object is dated today.
  */
 public class DateTimeStringFormatter {

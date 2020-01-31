@@ -27,8 +27,8 @@ public class DateTimeParser {
 
     /**
      * Returns a {@code LocalDateTime} object based on the given {@code dateTimeString}.
-     * <p>
-     * Allowed formats for {@code dateTimeString} are days of the week e.g. "Monday";
+     *
+     * <p>Allowed formats for {@code dateTimeString} are days of the week e.g. "Monday";
      * relative timings e.g. "Today", "Tonight"; of datetime format "d/M/yy" or "d/M/yy HHmm".
      *
      * @param dateTimeString User provided input in {@code String} format.
