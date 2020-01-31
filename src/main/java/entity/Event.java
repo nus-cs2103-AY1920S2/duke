@@ -20,4 +20,8 @@ public class Event extends Task {
     public String printTask() {
         return "[E][" +  (super.isDone() ? "\u2713" : "\u2718" ) + "] "+ super.getTaskName() + "(at: " + heldAt + ")";
     }
+
+    public String toStringForm() {
+        return "E|" +  (super.isDone() ? "1" : "0" ) + "|"+ super.getTaskName() + "|" + heldAt;
+    }
 }

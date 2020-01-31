@@ -1,6 +1,6 @@
 package entity;
 
-public class Task {
+public abstract class Task {
 
     private boolean isDone;
     private String taskName;
@@ -40,7 +40,14 @@ public class Task {
         this.addedInfo = addedInfo;
     }
 
-    public String printTask() {
-        return "[" +  (isDone ? "\u2713" : "\u2718" ) + "] " + taskName;
+    public void addTaskToMemory() {
+
     }
+
+    public void deleteTaskFromMemory() {
+
+    }
+
+    public abstract String printTask();
+    public abstract String toStringForm();
 }
