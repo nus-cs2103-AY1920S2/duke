@@ -1,0 +1,4 @@
+T|1|eat shit
+T|0|sfsadf
+D|0|fsdfsd|2020-12-12
+T|0|sdfsf
