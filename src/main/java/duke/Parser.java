@@ -5,7 +5,7 @@ package duke;// To understand the user's command.
 import duke.command.*;
 
 /**
- * The type Parser.
+ * The type Parser .
  */
 public class Parser  {
 
