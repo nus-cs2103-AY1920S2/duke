@@ -1,6 +1,8 @@
 package entity;
 
-public class Task {
+import java.util.Date;
+
+public abstract class Task {
 
     private boolean isDone;
     private String taskName;
@@ -40,7 +42,7 @@ public class Task {
         this.addedInfo = addedInfo;
     }
 
-    public String printTask() {
-        return "[" +  (isDone ? "\u2713" : "\u2718" ) + "] " + taskName;
-    }
+    public abstract String printTask();
+
+    public abstract boolean isDue(Date date);
 }
