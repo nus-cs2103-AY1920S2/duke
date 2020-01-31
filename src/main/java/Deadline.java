@@ -31,7 +31,8 @@ public class Deadline extends Task{
      */
     @Override
     public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description+ "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+        System.out.println(getType() + getStatusIcon() + " " + description
+                + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 
     /**
