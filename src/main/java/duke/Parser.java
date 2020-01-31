@@ -10,7 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 /**
- * The type Parser.
+ * The type Parser .
  */
 public class Parser {
 
