@@ -5,6 +5,7 @@ import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.enums.ErrorCodes;
 import duke.enums.TaskTypes;
@@ -30,6 +31,9 @@ public class Parser {
                 int taskNo = -1;
 
                 switch (userCommand) {
+                case "find":
+                    command = new FindCommand(userArgs);
+                    break;
                 case "done":
                     taskNo = Integer.parseInt(userArgs) - 1;
                     command = new DoneCommand(taskNo);

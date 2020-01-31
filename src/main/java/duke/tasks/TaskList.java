@@ -42,4 +42,10 @@ public class TaskList {
         // TODO: To handle this add() == false?
         return taskList.add(task);
     }
+
+    public ArrayList<Task> filterTasks(String keyword) {
+        ArrayList<Task> filteredTasks = this.taskList;
+        filteredTasks.removeIf((task) -> !task.getTaskName().toLowerCase().contains(keyword.toLowerCase()));
+        return filteredTasks;
+    }
 }
