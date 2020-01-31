@@ -1,10 +1,4 @@
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
     /**
@@ -18,16 +12,16 @@ public class Duke {
 
     public static void main(String[] args) {
         boolean isRunning = true;
-        System.out.println(Output.START);
-        printOutput(Output.HELLO);
+        System.out.println(UI.START);
+        printOutput(UI.HELLO);
         Scanner sc = new Scanner(System.in);
-        FileSaver.readFromFile();
+        Storage.readFromFile();
 
         while (isRunning) {
             try {
                 String input = sc.nextLine();
                 String output = Controller.readInput(input);
-                if (output.equals(Output.BYE)) {
+                if (output.equals(UI.BYE)) {
                     isRunning = false;
                 }
                 printOutput(output);
@@ -35,7 +29,7 @@ public class Duke {
                 System.err.println(e);
             }
         }
-        FileSaver.saveFile();
+        Storage.saveFile();
     }
 }
 

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class TaskManager {
+public class TaskList {
     public static ArrayList<Task> list;
 
     public static void initializeArray(ArrayList<Task> currentList) {

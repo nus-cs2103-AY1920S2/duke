@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-public class FileSaver {
+public class Storage {
     static Gson gson = new GsonBuilder()
             .enableComplexMapKeySerialization()
             .setPrettyPrinting()
@@ -20,17 +20,17 @@ public class FileSaver {
     public static void readFromFile() {
         try {
             FileReader fileReader = new FileReader(userDirectory + "/data.json");
-            TaskManager.initializeArray(gson.fromJson(fileReader, new TypeToken<List<Task>>() {
+            TaskList.initializeArray(gson.fromJson(fileReader, new TypeToken<List<Task>>() {
             }.getType()));
         } catch (FileNotFoundException e) {
-            TaskManager.initializeArray(new ArrayList<Task>());
+            TaskList.initializeArray(new ArrayList<Task>());
         }
     }
 
     public static void saveFile() {
         try {
             FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");
-            gson.toJson(TaskManager.getList(), fileWriter);
+            gson.toJson(TaskList.getList(), fileWriter);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException io) {
