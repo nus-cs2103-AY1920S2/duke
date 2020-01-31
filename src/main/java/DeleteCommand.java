@@ -1,12 +1,26 @@
 import java.io.IOException;
 
+/**
+ * The DeleteCommand inherits from Command and is used to delete tasks in the saved TaskList.
+ */
 public class DeleteCommand extends Command {
     protected String command;
 
+    /**
+     * The constructor for DeleteCommand which takes in a String command that starts with "delete".
+     * @param command
+     */
     DeleteCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * The execute method of DeleteCommand is used to
+     * @param tasks This is the saved TaskList in duke.txt.
+     * @param ui This is the created Ui in Duke.
+     * @param storage This is responsible for loading and saving the updated TaskList.
+     * @throws IOException if file cannot be written to or closed.
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] commands = command.split(" ");
