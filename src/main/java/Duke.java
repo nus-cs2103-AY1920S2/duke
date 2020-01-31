@@ -7,9 +7,8 @@ import java.nio.file.Paths;
 public class Duke {
     public static void main(String[] args) {
         
-        Scanner in = new Scanner(System.in);
-        
         // Initialize Duke from file
+        Ui ui = new Ui();
         TaskList tasks = new TaskList();
         Path saveDir = getSaveDirectory();
         boolean directoryExists = java.nio.file.Files.exists(saveDir);
@@ -30,10 +29,10 @@ public class Duke {
         }
 
         out("Hello! I'm Duke", "What can I do for you?");
-        input: while (in.hasNext()) {
-            String next = in.next();
+        input: while (ui.hasNext()) {
+            String command = ui.getCommand();
             try {
-                switch (next.toLowerCase()) {
+                switch (command.toLowerCase()) {
                 case "bye":
                     out("Bye. Hope to see you again soon!");
                     break input;
@@ -41,27 +40,27 @@ public class Duke {
                     out(tasks.list());
                     break;
                 case "done":
-                    out(tasks.done(in.nextInt()));
+                    out(tasks.done(Integer.parseInt(ui.getArguments())));
                     tasks.saveToFile(getSaveDirectory());
                     break;
                 case "todo":
-                    out(tasks.addTodo(in.nextLine().split("/")));
+                    out(tasks.addTodo(ui.getArguments().split("/")));
                     tasks.saveToFile(getSaveDirectory());
                     break;
                 case "deadline":
-                    out(tasks.addDeadline(in.nextLine().split(" /by ")));
+                    out(tasks.addDeadline(ui.getArguments().split(" /by ")));
                     tasks.saveToFile(getSaveDirectory());
                     break;
                 case "event":
-                    out(tasks.addEvent(in.nextLine().split(" /at ")));
+                    out(tasks.addEvent(ui.getArguments().split(" /at ")));
                     tasks.saveToFile(getSaveDirectory());
                     break;
                 case "delete":
-                    out(tasks.delete(in.nextInt()));
+                    out(tasks.delete(Integer.parseInt(ui.getArguments())));
                     tasks.saveToFile(getSaveDirectory());
                     break;
                 default:
-                    out("invalid command:", "  " + echo(next), "please try again");
+                    out("invalid command:", "  " + command + " " + ui.getArguments() +  "please try again");
                     break;
                 }
             } catch(IncorrectArgumentException e) {
@@ -70,7 +69,6 @@ public class Duke {
                 e.printStackTrace();
             }
         }
-        in.close();
     }
 
     private static void out(String... ss) {
@@ -86,9 +84,5 @@ public class Duke {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "data.duke");
         return path;
-    }
-
-    private static String echo(String s) {
-        return s;
     }
 }
