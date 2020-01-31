@@ -57,6 +57,10 @@ public class Driver extends Application {
         }
     }
 
+    /**
+     * Starts the app's GUI by loading the resources from MainWindow.fxml.
+     * @param stage The stage of the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {
