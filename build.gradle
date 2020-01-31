@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 checkstyle {
@@ -15,20 +16,36 @@ repositories {
     mavenCentral()
 }
 
-test {
-    useJUnitPlatform()
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'duke.Duke'
+        )
+    }
 }
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
+}
+
+test {
+    useJUnitPlatform()
 }
 
 run {
     standardInput = System.in
 }
 
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
+

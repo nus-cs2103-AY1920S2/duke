@@ -6,3 +6,6 @@ Git Notes taken from: https://www.atlassian.com/git/tutorials/inspecting-a-repos
 # Tagging Old Commits
 `git tag [tag] [commit-ref]' to tag a old commit
 can then push as above
+
+# Exporting Jar
+`./gradlew shadowjar` in CLT, version numbers managed in build.gradle, output files in /build/libs

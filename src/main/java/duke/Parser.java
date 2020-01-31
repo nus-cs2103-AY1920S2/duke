@@ -48,7 +48,7 @@ class Parser {
             isBye = delete(Integer.parseInt(cmd[1]));
             break;
         default:
-            throw new InvalidCommandException("invalid command:\n  " + line + "\nplease try again");
+            throw new InvalidCommandException("invalid command:\n      " + line + "\n    please try again");
         }
         storage.saveToFile(tasks);
         return isBye;
