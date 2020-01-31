@@ -20,9 +20,6 @@ public class Duke {
             Task task;
             String[] data = str.split("\\|");
             if (data[0].equals("T")) {
-                System.out.println(data[0]);
-                System.out.println(data[1]);
-                System.out.println(data[2]);
                 task = createAndAddTask("todo", "todo " + data[2]);
             } else if (data[0].equals("E")){
                 task = createAndAddTask("event", "event " + data[2] + " /at " + data[3]);
@@ -158,13 +155,13 @@ public class Duke {
             task = new ToDo(desc);
 
         } else if (type.equals("event")) {
-            String desc = whole.substring(6).split("/at ")[0];
+            String desc = whole.substring(6).split(" /at ")[0];
             String dateAndTime = whole.substring(6).split("/at ")[1];
             LocalDate date = LocalDate.parse(dateAndTime.split(" ")[0]);
             task = new Event(desc, date);
 
         } else if (type.equals("deadline")) {
-            String desc = whole.substring(9).split("/by ")[0];
+            String desc = whole.substring(9).split(" /by ")[0];
             String dateAndTime = whole.substring(9).split("/by ")[1];
             LocalDate date = LocalDate.parse(dateAndTime.split(" ")[0]);
             task = new Deadline(desc, date);

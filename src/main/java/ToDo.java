@@ -16,6 +16,4 @@ public class ToDo extends Task{
     public String saveString() {
         return "T|" + (isDone? "1|" : "0|") + description;
     }
-
-
 }
