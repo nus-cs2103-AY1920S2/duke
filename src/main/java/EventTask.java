@@ -8,6 +8,12 @@ public class EventTask extends Task {
     private Optional<Date> timing;
     private String inputTiming;
 
+    /**
+     * Returns an event task that is a task with a specified timing
+     * @param taskDescription the name of the task or some basic description
+     * @param timing the time when a task should be done at. Should be of the form "at yyyy-MM-dd"
+     * @throws InvalidInputException
+     */
     public EventTask(String taskDescription, String timing) throws InvalidInputException{
         this.taskDescription = taskDescription;
 
@@ -29,6 +35,10 @@ public class EventTask extends Task {
         }
     }
 
+    /**
+     * Returns a string to be stored in a text file to be loaded later on
+     * @return a String in the form "event TASKDESCRIPTIN / at yyyy-MM-dd / NUMBERtoINDICATEDONE
+     */
     public String formatToStore() {
         String format = "event " + taskDescription + " / at " + this.inputTiming + " /";
         if(isDone) {

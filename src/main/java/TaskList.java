@@ -6,14 +6,15 @@ import java.util.List;
 public class TaskList {
     private List<Task> usrInputs = new ArrayList<>();
 
-    public TaskList() {
-        try{
-            usrInputs = Storage.readFromFile();
-        } catch(FileNotFoundException e) {
 
-        }
+    public TaskList() {
+        usrInputs = Storage.readFromFile();
+
     }
 
+    /**
+     * Lists all the tasks in the list of tasks
+     */
     public void list() {
         int count = 1;
         for (Task usrTask : usrInputs) {
@@ -22,6 +23,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sets the file at the specified index to done
+     * @param index
+     * @throws InvalidIndexException
+     */
     public void done(int index) throws InvalidIndexException{
         if(index > usrInputs.size()) {
             throw new InvalidIndexException();
@@ -33,22 +39,34 @@ public class TaskList {
 
     }
 
-    public void delete(int indice) throws InvalidIndexException{
-        if(indice > usrInputs.size()) {
+    /**
+     * Deletes the file at the specified index
+     * @param index
+     * @throws InvalidIndexException
+     */
+    public void delete(int index) throws InvalidIndexException{
+        if(index > usrInputs.size()) {
             throw new InvalidIndexException();
         }
 
-        Task removedTask = usrInputs.remove(indice - 1);
+        Task removedTask = usrInputs.remove(index - 1);
         System.out.println("I have removed the following task\n" + removedTask);
 
     }
 
+    /**
+     * Adds the task to the list of tasks
+     * @param task
+     */
     public void add(Task task){
         usrInputs.add(task);
         System.out.println("Got it! I've added the following task \n" + task +
                 "\nNow you have " + usrInputs.size() + " tasks");
     }
 
+    /**
+     * Saves the task list to the disk by calling on Storage classes storeIntoFile method
+     */
     public void saveToDisk() {
         try {
             Storage.storeIntoFile(usrInputs);

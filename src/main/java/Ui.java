@@ -1,4 +1,7 @@
 public class Ui {
+    /**
+     * Prints a greeting
+     */
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
