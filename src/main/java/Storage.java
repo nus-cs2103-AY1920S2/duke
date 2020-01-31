@@ -6,13 +6,13 @@ import java.util.Scanner;
 import DukeException.DukeIOException;
 
 public class Storage {
-    Path file;
+    static Path file;
 
     public Storage(String filePath) {
         file = java.nio.file.Paths.get(filePath);
     }
 
-    public ArrayList<Task> load() {
+    public static ArrayList<Task> load() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -30,7 +30,7 @@ public class Storage {
         }
     }
 
-    public void updateFile(TaskList tasks, int numOfTasks) {
+    public static void updateFile(TaskList tasks, int numOfTasks) {
         ArrayList<String> tasksForFile = new ArrayList<>();
         for (int i = 0; i < numOfTasks; i++) {
             tasksForFile.add(tasks.getTask(i) + "\n");
@@ -42,7 +42,7 @@ public class Storage {
         }
     }
 
-    public Task buildTask(String code, String args, boolean isDone) {
+    public static Task buildTask(String code, String args, boolean isDone) {
         if (code.equals("T")) {
             // args lik "borrow book"
             Todo todo = new Todo(args, isDone);
