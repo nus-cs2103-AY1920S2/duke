@@ -11,7 +11,7 @@ public class Parser {
     private String command;
 
     /**
-     * Constructor which takes in a string by the user to be interpreted.
+     * Constructs a Parser which takes in a string by the user to be interpreted.
      **/
     Parser(String next) {
         this.command = next;
@@ -65,7 +65,6 @@ public class Parser {
     static LocalDateTime extractDate(String next) {
         StringBuilder forTime = new StringBuilder(next.substring(next.indexOf(" ") + 1));
         forTime.insert(2, ':');
-        String time = forTime.toString();
         String[] reverse = next.substring(0, next.indexOf(" "))
                 .split("/");
         String[] reversed = reverse;
@@ -75,7 +74,7 @@ public class Parser {
         reversed[1] = String.format("%2s", reverse[1]).replace(" ", "0");
         String date = String.join("-", reversed);
         LocalDateTime taskDate = LocalDate.parse(date)
-                .atTime(LocalTime.parse(time))
+                .atTime(LocalTime.parse(forTime.toString()))
                 ;
         return taskDate;
     }

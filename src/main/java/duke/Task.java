@@ -8,7 +8,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor for an abstract task, which is not done.
+     * Constructs an abstract task, which is not done.
      * @param name The name of event task
      */
     public Task(String name) {
@@ -17,7 +17,7 @@ public abstract class Task {
     }
 
     /**
-     * Protected constructor for a task, in which the done status can be specified.
+     * Constructs a task with a protected constructor, in which the done status can be specified.
      * @param name The name of event task
      * @param isDone The done status of event task
      */
@@ -27,7 +27,7 @@ public abstract class Task {
     }
 
     /**
-     * String which states the name and done status of a task.
+     * States the name and done status of a task.
      * @return The string of the task.
      */
     public String toString() {
@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Boolean of done status of the task.
+     * Returns boolean of done status of the task.
      * @return Boolean of the done status of the task.
      */
     public boolean isDone() {
@@ -44,7 +44,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to return a the name of the task.
+     * Returns the name of the task.
      * @return A string of the name of the task.
      */
     public String getName() {
@@ -52,13 +52,13 @@ public abstract class Task {
     }
 
     /**
-     * Abstract method to return a new task with specified done status.
+     * Returns a new task with specified done status.
      * @return A new task object.
      */
     public abstract Task setDone();
 
     /**
-     * Abstract method to return a string of the task object to be written to a file.
+     * Returns a string of the task object to be written to a file.
      * @return A string of the task to be written to a file.
      */
     public abstract String writeDrive();

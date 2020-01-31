@@ -5,9 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
+
+import java.nio.file.Path;
 
 /**
  * This class takes care storage and retrieval of information
@@ -17,66 +20,88 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructor which takes in a file path to the file to be modified.
+     * Constructs a Storage object, it takes in a file path to the file to be modified.
      **/
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Loading of information from the file specified for this Storage.
+     * Loads information from the file specified for this Storage.
      **/
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File(filePath);
-        try {
-            Scanner s = new Scanner(file);
-            while (s.hasNextLine()) {
-                String curr = s.nextLine();
-                String type = curr.substring(0, 1);
-                String isDone = curr.substring(2,3);
-                Task add;
-                if (type.equals("T")) {
-                    add = new ToDo(curr.substring(4), isDone.equals("0") ? false : true);
-                } else {
-                    String name = curr.substring(4, curr.indexOf('|', 4));
-                    String date = curr.substring(curr.indexOf('|', 4) + 1);
-                    if (type.equals("D")) {
-                        add = new Deadline(name, Parser.extractDate(date),
-                                isDone.equals("0") ? false : true);
+        String home = System.getProperty("user.home");
+        Path path = java.nio.file.Paths.get(home, "duke", "data");
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        if (directoryExists) {
+            try {
+                File file = new File(filePath);
+                Scanner s = new Scanner(file);
+                while (s.hasNextLine()) {
+                    String curr = s.nextLine();
+                    String type = curr.substring(0, 1);
+                    String isDone = curr.substring(2, 3);
+                    Task add;
+                    if (type.equals("T")) {
+                        add = new ToDo(curr.substring(4), isDone.equals("0") ? false : true);
                     } else {
-                        add = new Event(name, Parser.extractDate(date),
-                                isDone.equals("0") ? false : true);
+                        String name = curr.substring(4, curr.indexOf('|', 4));
+                        String date = curr.substring(curr.indexOf('|', 4) + 1);
+                        if (type.equals("D")) {
+                            add = new Deadline(name, Parser.extractDate(date),
+                                    isDone.equals("0") ? false : true);
+                        } else {
+                            add = new Event(name, Parser.extractDate(date),
+                                    isDone.equals("0") ? false : true);
+                        }
                     }
+                    tasks.add(add);
                 }
-                tasks.add(add);
+            } catch (FileNotFoundException e) {
+                Path pathCreateFile = java.nio.file.Paths.get(System.getProperty("user.dir"), "data");
+                File file = new File(pathCreateFile.toString());
+                file.mkdir();
+                File duke = new File(pathCreateFile.toString(), "duke.txt");
+                duke.createNewFile();
             }
-        } catch (FileNotFoundException e) {
-            throw new DukeException("File for loading not found");
+        } else {
+            Path pathCreateDirectory = java.nio.file.Paths.get(System.getProperty("user.dir"), "duke");
+            File file = new File(pathCreateDirectory.toString());
+            file.mkdir();
+            File duke = new File(pathCreateDirectory.toString(), "duke.txt");
+            duke.createNewFile();
         }
         return tasks;
     }
 
     /**
-     * Update information to the file specified for this Storage
+     * Updates information to the file specified for this Storage
      * by adding on a new task object.
      * @param updatedTask Task to be updated
      **/
     static void updateDrive(Task updatedTask) {
-        File file = new File("./data/duke.txt");
-        BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(file, true));
-            writer.append(updatedTask.writeDrive());
-            writer.newLine();
-            writer.close();
-        } catch (IOException e) {
-            //System.out.println("Cannot find file");
+        String home = System.getProperty("user.home");
+        Path path = java.nio.file.Paths.get(home, "duke", "data");
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        if (directoryExists) {
+            try {
+                File file = new File("./data/duke.txt");
+                BufferedWriter writer;
+                writer = new BufferedWriter(new FileWriter(file, true));
+                writer.append(updatedTask.writeDrive());
+                writer.newLine();
+                writer.close();
+            } catch (IOException e) {
+                System.out.println("File duke.txt to be updated cannot be found");
+            }
+        } else {
+            System.out.println("File duke.txt to be updated cannot be found");
         }
     }
 
     /**
-     * Update information to the file specified for this Storage
+     * Updates information to the file specified for this Storage
      * by removing on a new task object.
      * @param size The order of the task that are to be removed
      **/
@@ -105,7 +130,10 @@ public class Storage {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-        } catch (IOException ie) { }
+            System.out.println("File duke.txt to be updated cannot be found");
+        } catch (IOException ie) {
+            System.out.println("File duke.txt to be updated cannot be found");
+        }
     }
 
 }

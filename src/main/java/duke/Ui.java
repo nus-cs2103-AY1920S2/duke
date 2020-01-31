@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * This class takes care of the user interface
  * especially printing outputs to the user.
@@ -7,20 +9,20 @@ package duke;
 public class Ui {
 
     /**
-     * Constructor of the UI object.
+     * Constructs the UI object.
      **/
     Ui(){
     }
 
     /**
-     * Printing an error of loading a file to the user.
+     * Prints an error message of loading a file to the user.
      **/
-    void showLoadingError(DukeException e) {
+    void showLoadingError(IOException e) {
         System.out.println(e);
     }
 
     /**
-     * Printing an greeting message to the user.
+     * Prints a greeting message to the user.
      **/
     void greetUser() {
         String line = "   ____________________________________________________________";
@@ -31,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Printing the task lists of the user.
+     * Prints the task lists of the user.
      **/
     static void printList(TaskList tasks) {
         String line = "   ____________________________________________________________";
@@ -46,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * Printing confirmation of task adding to the user.
+     * Prints confirmation of task adding to the user.
      **/
     static void printTask(Task newTask, int size) {
         String line = "   ____________________________________________________________";
@@ -58,7 +60,7 @@ public class Ui {
     }
 
     /**
-     * Printing confirmation of changing task done status to done.
+     * Prints confirmation of changing task done status to done.
      * to the user
      **/
     static void printDone(Task updatedTask) {
@@ -70,7 +72,7 @@ public class Ui {
     }
 
     /**
-     * Printing a farewell message to the user.
+     * Prints a farewell message to the user.
      **/
     static void printBye() {
         String line = "   ____________________________________________________________";
@@ -80,7 +82,7 @@ public class Ui {
     }
 
     /**
-     * Printing confirmation of removing task from the list.
+     * Prints confirmation of removing task from the list.
      * to the user
      **/
     static void printRemove(Task removedTask, int size) {
@@ -93,7 +95,7 @@ public class Ui {
     }
 
     /**
-     * Printing an exception message to the user.
+     * Prints an exception message to the user.
      **/
     static void printException(DukeException e) {
         String line = "   ____________________________________________________________";
@@ -103,7 +105,7 @@ public class Ui {
     }
 
     /**
-     * Printing the tasks that has related keywords.
+     * Prints the tasks that has related keywords.
      **/
     static void printFindings(TaskList foundTasks) {
         String line = "   ____________________________________________________________";
