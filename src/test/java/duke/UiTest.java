@@ -23,10 +23,9 @@ class UiTest {
         PrintStream ps = new PrintStream(os);
         System.setOut(ps);
         ui.printBye();
-        assertEquals(lines + System.lineSeparator() +"        Bye. Hope to see you again soon"
-                 + System.lineSeparator() + lines + System.lineSeparator(), os.toString());
+        assertEquals(lines + System.lineSeparator() + "        Bye. Hope to see you again soon"
+                + System.lineSeparator() + lines + System.lineSeparator(), os.toString());
     }
-
 
 
 }
