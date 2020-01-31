@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 class TaskList {
@@ -21,68 +20,43 @@ class TaskList {
         return ((ArrayList<Task>) lTasks.clone());
     }
 
-    // todo: make static date and time formatters
+    // todo: make static date and time formatters to task
     // Stretch goal: add a command to print deadlines/events occurring on a specific date.
 
-    public String[] addTodo(String... ss) throws IncorrectArgumentException {
-        if (ss[0].equals("")) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: Task Description");
-        } else if (ss.length > 1) {
-            throw new IncorrectArgumentException("Too many arguments!");
-        }
-        return add(new Todo(ss[0]));
+    /**
+     * Adds a Todo task to the Task List.
+     * @param desc description of the Todo Task.
+     * @return A string describing the Task that was added.
+     * @throws IncorrectArgumentException
+     */
+    public String[] addTodo(String desc) {
+        return add(new Todo(desc));
     }
     
-    public String[] addDeadline (String... ss) throws IncorrectArgumentException {
-        if (ss[0].equals("")) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, by.." : "Task Description"));
-        } else if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: /by..");
-        } else if (ss.length > 2) {
-            throw new IncorrectArgumentException("Too many arguments!");
-        }
-
-        LocalDate date = null;
-        LocalTime time = null;
-        try {
-            String[] textDateTime = ss[1].split(" ");
-            date = Task.toDate(textDateTime[0]);
-            time = Task.toTime(textDateTime[1]);
-        } catch (DateTimeParseException e) {
-            throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
-        }
-        return add(new Deadline(ss[0], date, time));
+    public String[] addDeadline (String desc, LocalDate date, LocalTime time) 
+        throws IncorrectArgumentException {
+        return add(new Deadline(desc, date, time));
     }
     
-    public String[] addEvent (String... ss) throws IncorrectArgumentException {
-        if (ss[0].equals("")) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: ".concat(ss.length == 1 ? "Task Description, at.." : "Task Description"));
-        } else if (ss.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: /at..");
-        } else if (ss.length > 2) {
-            throw new IncorrectArgumentException("Too many arguments!");
-        }
-
-        LocalDate date = null;
-        LocalTime time = null;
-        try {
-            String[] textDateTime = ss[1].split(" ");
-            date = Task.toDate(textDateTime[0]);
-            time = Task.toTime(textDateTime[1]);
-        } catch (DateTimeParseException e) {
-            throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
-        }
-        return add(new Event(ss[0], date, time));
+    public String[] addEvent (String desc, LocalDate date, LocalTime time) 
+    throws IncorrectArgumentException {
+        return add(new Event(desc, date, time));
     }
 
     private String[] add(Task s) {
         lTasks.add(s);
-        return new String[]{"Got it. I've added this task:", "  " + s.toString(), String.format("Now you have %d tasks in the list.", lTasks.size()) };
+        return new String[]{
+                "Got it. I've added this task:", 
+                "  " + s.toString(),
+                String.format("Now you have %d tasks in the list.", lTasks.size())
+            };
     }
 
     public String[] list() {
         String[] tasks = new String[lTasks.size() + 1];
-        tasks[0] = lTasks.size() == 0 ? "You have no tasks in your list." : "Here are the tasks in your list:";
+        tasks[0] = lTasks.size() == 0 
+            ? "You have no tasks in your list." 
+            : "Here are the tasks in your list:";
         for (int i = 1; i <= lTasks.size(); i++) {
             tasks[i] = String.format("%d.%s", i, lTasks.get(i - 1).toString());
         }
@@ -95,6 +69,10 @@ class TaskList {
 
     public String[] delete(int i) {
         Task rem = lTasks.remove(i - 1);
-        return new String[]{ "Noted. I've removed this task:", rem.toString(), String.format("Now you have %d tasks in the list.", lTasks.size()) };
+        return new String[]{
+                "Noted. I've removed this task:", 
+                rem.toString(),
+                String.format("Now you have %d tasks in the list.", lTasks.size())
+            };
     }
 }

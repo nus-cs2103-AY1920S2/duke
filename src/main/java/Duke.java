@@ -44,7 +44,7 @@ public class Duke {
                 storage.saveToFile(tasks);
             } catch(InvalidCommandException | IncorrectArgumentException e) {
                 ui.out(e.getMessage());
-            } catch (IOException e) {
+            } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
             }
         }
