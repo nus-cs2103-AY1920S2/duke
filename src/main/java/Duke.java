@@ -1,55 +1,39 @@
-import java.util.Scanner;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
-        File file = new File("/Users/jadetay/duke/data/tasks.txt");
-
-        DukeManager manager = new DukeManager();
-        manager.loadTasks();
-
-        while (sc.hasNext()) {
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String input = sc.nextLine();
-                String[] temp = input.split(" ");
-                String command = temp[0];
-                switch (command) {
-                    case ("list") :
-                    case ("done") :
-                        manager.run(input, command);
-                        break;
-                    case ("delete") :
-                        manager.delete(input);
-                        break;
-                    case ("todo") :
-                    case ("deadline") :
-                    case ("event") :
-                        manager.runTask(input, temp, command);
-                        break;
-                    case ("search") :
-                        String dt = input.substring(7);
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        LocalDate ld = LocalDate.parse(dt, formatter);
-                        manager.taskSearch(ld);
-                        break;
-                    case ("bye") :
-                        manager.run(input, command);
-                        return;
-                    default:
-                        throw new DukeException("others");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
+    }
 
-        sc.close();
-
+    public static void main(String[] args) {
+        new Duke("/Users/jadetay/duke/data/tasks.txt").run();
     }
 }
