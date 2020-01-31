@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    String by;
     LocalDate date;
 
     public Deadline(String description, LocalDate date) {
@@ -21,6 +20,6 @@ public class Deadline extends Task{
     }
 
     public String saveString() {
-        return "D|" + (isDone? "1|" : "0|") + description + "|" + by;
+        return "D|" + (isDone? "1|" : "0|") + description + "|" + date;
     }
 }
