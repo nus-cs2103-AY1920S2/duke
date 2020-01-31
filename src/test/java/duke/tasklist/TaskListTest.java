@@ -1,7 +1,6 @@
 package duke.tasklist;
 
 import duke.DukeException;
-import duke.parser.Parser;
 import duke.task.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <h1>TaskListTest Class</h1>
  * Test for the TaskList class
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class TaskListTest {
 

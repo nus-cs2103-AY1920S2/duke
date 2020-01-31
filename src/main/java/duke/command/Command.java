@@ -14,7 +14,7 @@ import java.util.List;
  * for individual command, which is save in two variable, type and details respectively. Different type
  * of command will execute differently by run the same method, execute.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class Command {
     protected CommandType type;
@@ -24,6 +24,7 @@ public class Command {
     /**
      * Constructor of Command class which requires the command type and set the variable
      * isExit to false.
+     *
      * @param type type of the command
      */
     public Command(CommandType type) {
@@ -35,11 +36,12 @@ public class Command {
      * Constructor of Command class which requires both command type and a list of Strings
      * which store the relevant data required for certain command. Following is how the List of Strings
      * organized:
-     *          index               data
-     *            0                 command type
-     *            1                 description of the task
-     *            2                 due date of the "Deadline" task / duration of the "Event" task
-     * @param type type of the command
+     * index               data
+     * 0                 command type
+     * 1                 description of the task
+     * 2                 due date of the "Deadline" task / duration of the "Event" task
+     *
+     * @param type    type of the command
      * @param details data required for certain command
      */
     public Command(CommandType type, List<String> details) {
@@ -50,6 +52,7 @@ public class Command {
 
     /**
      * Get the command type.
+     *
      * @return type of the command
      */
     public CommandType getCommandType() {
@@ -58,9 +61,10 @@ public class Command {
 
     /**
      * Execute the command based on the type of the command.
+     *
      * @param taskList Stored the tasks when the program runs
-     * @param storage Stored the tasks when task listing being edit
-     * @param ui Print the message out to console
+     * @param storage  Stored the tasks when task listing being edit
+     * @param ui       Print the message out to console
      * @throws DukeException occurs when the method is called as parent class
      */
     public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {

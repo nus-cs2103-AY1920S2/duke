@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * <h1>CommandTest Class</h1>
  * Test for the command class
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class CommandTest {
 

@@ -5,7 +5,7 @@ package duke.command;
  * This enum stores different commands that Duke can understand.
  * It able to give the command type in String format.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public enum CommandType {
     DELETE("delete"),
@@ -21,6 +21,7 @@ public enum CommandType {
 
     /**
      * Constructor of the enum CommandType which pair the string to its respective enum constant.
+     *
      * @param command value to pair with the CommandType
      */
     CommandType(String command) {
@@ -29,6 +30,7 @@ public enum CommandType {
 
     /**
      * Get the command type in String format.
+     *
      * @return the string value of the command
      */
     public String getCommand() {

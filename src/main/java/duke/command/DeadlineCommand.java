@@ -15,13 +15,14 @@ import java.util.List;
  * hard disk by calling storage.saveTask(taskList). Trigger ui to reply to the user
  * that the task has been added.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class DeadlineCommand extends Command {
 
     /**
      * Class constructor for DeadlineCommand which using command type and List of Strings.
-     * @param type type of the command
+     *
+     * @param type    type of the command
      * @param details data required for the deadline task
      */
     public DeadlineCommand(CommandType type, List<String> details) {
@@ -31,9 +32,10 @@ public class DeadlineCommand extends Command {
     /**
      * Add new Deadline into taskList and update the hard disk. Furthermore, trigger ui
      * to reply to the user that the task has been added.
+     *
      * @param taskList Stored the tasks when the program runs
-     * @param storage Stored the tasks when task listing being edit
-     * @param ui Print the message out to console
+     * @param storage  Stored the tasks when task listing being edit
+     * @param ui       Print the message out to console
      * @throws DukeException throws when problem saving task to hard disk and invalid date format
      */
     @Override

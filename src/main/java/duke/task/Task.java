@@ -1,4 +1,5 @@
 package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -6,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * <h1>TaskCommand Class</h1>
  * This command records the description of the task and indicate whether the programme is done or not.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class Task {
     protected String description;
@@ -16,6 +17,7 @@ public class Task {
 
     /**
      * Class constructor of Task which takes in description in String format.
+     *
      * @param description description of the task
      */
     public Task(String description) {
@@ -25,6 +27,7 @@ public class Task {
 
     /**
      * Get period with the pattern format of "MMM d yyyy".
+     *
      * @return date in "MMM d yyyy"
      */
     public String getPeriod() {
@@ -33,14 +36,16 @@ public class Task {
 
     /**
      * Get status icon either a tick or cross.
+     *
      * @return status icon tick if is done, cross if it is not done
      */
     public String getStatusIcon() {
-        return isDone? "\u2713" : "\u2718";
+        return isDone ? "\u2713" : "\u2718";
     }
 
     /**
      * Get status of the task.
+     *
      * @return task status
      */
     public boolean getStatus() {
@@ -63,6 +68,7 @@ public class Task {
 
     /**
      * Get the description of the task.
+     *
      * @return description of the task
      */
     public String getDescription() {
@@ -71,6 +77,7 @@ public class Task {
 
     /**
      * Get the task type.
+     *
      * @return type of the task
      */
     public String getType() {
@@ -79,6 +86,7 @@ public class Task {
 
     /**
      * Return status icon and description of the task in string format.
+     *
      * @return status icon and description in string format
      */
     @Override

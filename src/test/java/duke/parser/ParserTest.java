@@ -2,7 +2,6 @@ package duke.parser;
 
 import duke.DukeException;
 import duke.command.CommandType;
-import duke.command.ListCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <h1>ParserTest Class</h1>
  * Test for parser class.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class ParserTest {
 
@@ -37,6 +36,7 @@ public class ParserTest {
 
     /**
      * Test if giving "list" to processUserInput method will give list command object or not.
+     *
      * @throws DukeException occurs when invalid string input
      */
     @Test
@@ -48,6 +48,7 @@ public class ParserTest {
 
     /**
      * Test if giving "todo borrow book" to addTask method will give the ArrayList with the correct data or not.
+     *
      * @throws DukeException occurs when invalid string input
      */
     @Test

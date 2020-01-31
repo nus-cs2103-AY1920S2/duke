@@ -4,11 +4,12 @@ package duke.task;
  * <h1>Todo Class</h1>
  * A subclass of Task class. Record the description of the todo task.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class Todo extends Task {
     /**
      * Class constructor for Todo which takes in the description of the task in String format.
+     *
      * @param description description of Todo
      */
     public Todo(String description) {
@@ -18,6 +19,7 @@ public class Todo extends Task {
 
     /**
      * Return the task details in [T][tick or cross] {description of the task} format.
+     *
      * @return task details in String format
      */
     @Override

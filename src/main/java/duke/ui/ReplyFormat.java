@@ -21,7 +21,8 @@ public class ReplyFormat {
 
     /**
      * Adding one sentence to the reply
-     * @param sentence message required to add
+     *
+     * @param sentence    message required to add
      * @param numOfIndent number of additional indent required to add
      */
     public void addSentence(String sentence, int numOfIndent) {
@@ -30,6 +31,7 @@ public class ReplyFormat {
 
     /**
      * Change both outlines at top and bottom
+     *
      * @param outline the outline where wrap the message.
      */
     public void changeOutline(String outline) {
@@ -38,6 +40,7 @@ public class ReplyFormat {
 
     /**
      * Adding outline with indentation
+     *
      * @return the outline with indentation
      */
     public String addOutlineWithIndentation() {
@@ -46,12 +49,13 @@ public class ReplyFormat {
 
     /**
      * Adding paragraph to the reply
-     * @param paragraph paragraph to add
+     *
+     * @param paragraph   paragraph to add
      * @param numOfIndent number of additional spaces required in front
      */
     public void addParagraph(String paragraph, int numOfIndent) {
         String[] sentences = paragraph.split("\n");
-        for(String sentence : sentences) {
+        for (String sentence : sentences) {
             addSentence(sentence, numOfIndent);
         }
     }
@@ -65,11 +69,12 @@ public class ReplyFormat {
 
     /**
      * Adding list of data to the reply
+     *
      * @param listing listing to display
      */
     public void addList(List<Task> listing) {
         int count = 1;
-        for(Task task : listing) {
+        for (Task task : listing) {
             addSentence(count + "." + task.toString(), 1);
             count += 1;
         }
@@ -77,12 +82,13 @@ public class ReplyFormat {
 
     /**
      * Add additional indent required
+     *
      * @param numOfIndent number of indent required to add
      * @return the amount of spaces
      */
     public String setAdditionalIndent(int numOfIndent) {
         String indent = "";
-        for(int i = 0; i < numOfIndent; i++) {
+        for (int i = 0; i < numOfIndent; i++) {
             indent = indent.concat(" ");
         }
         return indent;
@@ -90,12 +96,13 @@ public class ReplyFormat {
 
     /**
      * Set the amount of indentation in front of message
+     *
      * @param numOfIndent number of indentation required
      */
     public void setIndentationInFront(int numOfIndent) {
         numOfIndentInFront = numOfIndent;
         indentationInFront = "";
-        for(int i = 0; i < numOfIndentInFront; i++) {
+        for (int i = 0; i < numOfIndentInFront; i++) {
             indentationInFront = indentationInFront.concat(" ");
         }
     }
@@ -109,6 +116,7 @@ public class ReplyFormat {
 
     /**
      * Reply message
+     *
      * @return return outline with message
      */
     public String replyMessage() {

@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
             taskList.markDone(num);
             storage.saveTasks(taskList);
             ui.replyDone(taskList.getTask(num));
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("Please input in this format: done [number]");
         }
     }

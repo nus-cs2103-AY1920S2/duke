@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  * <h1>Event Class</h1>
  * A subclass of Task class. Record the description and duration of the event task.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class Event extends Task {
     protected LocalDateTime duration;
@@ -22,9 +22,10 @@ public class Event extends Task {
 
     /**
      * Class constructor Event.
+     *
      * @param description description of Event
      */
-    public Event(String description, String duration) throws DukeException{
+    public Event(String description, String duration) throws DukeException {
         super(description);
         try {
             String[] date = duration.split(" ");
@@ -32,17 +33,18 @@ public class Event extends Task {
             this.duration = period.atTime(Integer.parseInt(date[1].substring(0, 2)),
                     Integer.parseInt(date[1].substring(2, 4)));
             type = "event";
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
-        } catch(DateTimeException e) {
+        } catch (DateTimeException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
-        } catch(ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
         }
     }
 
     /**
      * Get duration in "yyyy-mm-dd HHmm" format.
+     *
      * @return duration in "yyyy-mm-dd HHmm"
      */
     @Override
@@ -52,6 +54,7 @@ public class Event extends Task {
 
     /**
      * Get string in [E][tick or cross] {description of the task} (at: {duration of the task}) format.
+     *
      * @return String in certain format
      */
     @Override

@@ -22,7 +22,7 @@ import java.util.Scanner;
  * <h1>Storage Class</h1>
  * This class is used to save data into hard disk and retrieve data from the hard disk.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class Storage {
     protected String home;
@@ -33,6 +33,7 @@ public class Storage {
 
     /**
      * Class constructor of Storage which take in filePath in String format.
+     *
      * @param filePath path that the data store to.
      */
     public Storage(String filePath) throws DukeException {
@@ -42,7 +43,7 @@ public class Storage {
         this.absolutePath = this.filePath.toAbsolutePath().toString();
         try {
             this.taskScanner = new Scanner(this.filePath);
-        } catch(IOException e) {
+        } catch (IOException e) {
             createFile(this.absolutePath);
         }
     }
@@ -56,6 +57,7 @@ public class Storage {
 
     /**
      * Check file exist at that path.
+     *
      * @param path path the file located
      * @return true: File exists, false: File not exists
      */
@@ -65,6 +67,7 @@ public class Storage {
 
     /**
      * Retrieve the data from the taskFile.
+     *
      * @return List of tasks which the tasks retrieve from the hard disk
      * @throws DukeException occurs when when wrong format of date and time found
      */
@@ -73,33 +76,33 @@ public class Storage {
         List<Task> listing = new ArrayList<>();
         Task task;
         try {
-            while(taskScanner.hasNext()) {
+            while (taskScanner.hasNext()) {
                 line = taskScanner.nextLine().split("\\s\\|\\s");
-                switch(line[0]) {
-                    case "T":
-                        task = new Todo(line[2]);
-                        if(line[1].equals("1")) {
-                            task.setStatusDone();
-                        }
-                        listing.add(task);
-                        break;
-                    case "E":
-                        task = new Event(line[2], line[3]);
-                        if(line[1].equals("1")) {
-                            task.setStatusDone();
-                        }
-                        listing.add(task);
-                        break;
-                    case "D":
-                        task = new Deadline(line[2], line[3]);
-                        if(line[1].equals("1")) {
-                            task.setStatusDone();
-                        }
-                        listing.add(task);
-                        break;
+                switch (line[0]) {
+                case "T":
+                    task = new Todo(line[2]);
+                    if (line[1].equals("1")) {
+                        task.setStatusDone();
+                    }
+                    listing.add(task);
+                    break;
+                case "E":
+                    task = new Event(line[2], line[3]);
+                    if (line[1].equals("1")) {
+                        task.setStatusDone();
+                    }
+                    listing.add(task);
+                    break;
+                case "D":
+                    task = new Deadline(line[2], line[3]);
+                    if (line[1].equals("1")) {
+                        task.setStatusDone();
+                    }
+                    listing.add(task);
+                    break;
                 }
             }
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             return listing;
         }
         return listing;
@@ -114,6 +117,7 @@ public class Storage {
 
     /**
      * Save tasks to hard disk.
+     *
      * @param taskList taskList to retrieve the tasks
      * @throws DukeException occurs when encounter IO Exception
      */
@@ -122,7 +126,7 @@ public class Storage {
         int num = 1;
         createFile(absolutePath);
         clearFile(absolutePath);
-        while(numOfTasks != 0) {
+        while (numOfTasks != 0) {
             addTask(taskList.getTask(num));
             num++;
             numOfTasks--;
@@ -131,6 +135,7 @@ public class Storage {
 
     /**
      * Clear all contents inside the file at the path
+     *
      * @param path file located at
      */
     public void clearFile(String path) throws DukeException {
@@ -139,6 +144,7 @@ public class Storage {
 
     /**
      * Create file when no file exist at the path.
+     *
      * @param path path the file located at
      * @throws DukeException occurs when IOException happens
      */
@@ -146,13 +152,14 @@ public class Storage {
         try {
             File file = new File(path);
             file.createNewFile();
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Sorry! I am unable to create new file at the path!");
         }
     }
 
     /**
      * Add task to the file in hard disk.
+     *
      * @param task task to be added
      * @throws DukeException occurs when IO Exception occurs
      */
@@ -161,35 +168,36 @@ public class Storage {
         int status;
         String period;
         String taskDescription;
-        switch(task.getType()) {
-            case "todo":
-                taskType = "T";
-                status = task.getStatus()? 1: 0;
-                taskDescription = task.getDescription();
-                writeToHardDisk(taskType + " | " + status + " | " + taskDescription + "\n",
-                        absolutePath, true);
-                break;
-            case "event":
-                taskType = "E";
-                status = task.getStatus()? 1: 0;
-                taskDescription = task.getDescription();
-                period = task.getPeriod();
-                writeToHardDisk(taskType + " | " + status + " | " + taskDescription + " | " + period + "\n",
-                        absolutePath, true);
-                break;
-            case "deadline":
-                taskType = "D";
-                status = task.getStatus()? 1: 0;
-                taskDescription = task.getDescription();
-                period = task.getPeriod();
-                writeToHardDisk(taskType + " | " + status + " | " + taskDescription + " | " + period + "\n",
-                        absolutePath, true);
-                break;
+        switch (task.getType()) {
+        case "todo":
+            taskType = "T";
+            status = task.getStatus() ? 1 : 0;
+            taskDescription = task.getDescription();
+            writeToHardDisk(taskType + " | " + status + " | " + taskDescription + "\n",
+                    absolutePath, true);
+            break;
+        case "event":
+            taskType = "E";
+            status = task.getStatus() ? 1 : 0;
+            taskDescription = task.getDescription();
+            period = task.getPeriod();
+            writeToHardDisk(taskType + " | " + status + " | " + taskDescription + " | " + period + "\n",
+                    absolutePath, true);
+            break;
+        case "deadline":
+            taskType = "D";
+            status = task.getStatus() ? 1 : 0;
+            taskDescription = task.getDescription();
+            period = task.getPeriod();
+            writeToHardDisk(taskType + " | " + status + " | " + taskDescription + " | " + period + "\n",
+                    absolutePath, true);
+            break;
         }
     }
 
     /**
      * Get path where the files stored at hard disk.
+     *
      * @return path object
      */
     public Path getPath() {
@@ -198,8 +206,9 @@ public class Storage {
 
     /**
      * Write a line to the file in hard disk.
-     * @param sentence sentence that write to the file
-     * @param path path that the file located
+     *
+     * @param sentence   sentence that write to the file
+     * @param path       path that the file located
      * @param appendMode true: append, false: overwrite the file
      * @throws DukeException occurs when IO Exception occurs
      */
@@ -208,7 +217,7 @@ public class Storage {
             fw = new FileWriter(path, appendMode);
             fw.write(sentence);
             fw.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Oops! There are error occurs: " + e.getMessage());
         }
 

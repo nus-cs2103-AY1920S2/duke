@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * <h1>Deadline Class</h1>
  * A subclass of Task class. Record the description and due date of the deadline task.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class Deadline extends Task {
     DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
@@ -18,6 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Class constructor for Deadline.
+     *
      * @param description description of Deadline
      */
     public Deadline(String description, String due) throws DukeException {
@@ -25,13 +26,14 @@ public class Deadline extends Task {
         try {
             period = LocalDate.parse(due);
             type = "deadline";
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("Please give valid date in deadline [description] /by [yyyy-mm-dd] format.");
         }
     }
 
     /**
      * Get period in "yyyy-mm-dd" format.
+     *
      * @return date in "yyyy-mm-dd"
      */
     @Override
@@ -41,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * Get string in [D][tick or cross] {description of the task} (by: {due date of the task}) format.
+     *
      * @return String in certain format
      */
     @Override
