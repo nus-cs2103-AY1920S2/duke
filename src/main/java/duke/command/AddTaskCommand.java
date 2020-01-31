@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-/** Adds given task as a command */
+/** Adds given task as a command. */
 public class AddTaskCommand extends Command {
     protected Task task;
 

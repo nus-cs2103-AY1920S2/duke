@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-/** Represents a delete action for a given task number in list */
+/** Represents a delete action for a given task number in list. */
 public class DeleteCommand extends Command {
     protected int taskNumber;
 
