@@ -16,14 +16,14 @@ public enum DukeCommand {
      */
     LIST {
         @Override
-        public void execute(String s1, TaskList list, Ui ui) {
+        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
             ui.HorizontalLine();
             ui.listAllTasks(list);
         }
     },
     DONE {
         @Override
-        public void execute(String s1, TaskList list, Ui ui) {
+        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
             // Split the string to get the
             // index of the task to be done
             String[] arr = s1.split("\\s+");
@@ -36,14 +36,14 @@ public enum DukeCommand {
     },
     TODO {
         @Override
-        public void execute(String s1, TaskList list, Ui ui) {
+        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
             String[] arr = s1.split("\\s+", 2);
             list.add(new Todo(arr[1]));
         }
     },
     DEADLINE {
         @Override
-        public void execute(String s1, TaskList list, Ui ui) {
+        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
             // Manipulating the String by separating the actual command
             // and the word '/by' to get the description and date/time
             int limit = s1.lastIndexOf("/by") - 1;
@@ -112,7 +112,7 @@ public enum DukeCommand {
         }
     },
     EVENT {
-        public void execute(String s1, TaskList list, Ui ui){
+        public void execute(String s1, TaskList list, Ui ui, Storage storage){
             // Manipulating the String by separating the actual command
             // and the word '/at' to get the description and date/time
             int limit = s1.lastIndexOf("/at") - 1;
@@ -181,24 +181,24 @@ public enum DukeCommand {
     },
     DELETE {
         @Override
-        public void execute(String s1, TaskList list, Ui ui) {
+        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
             // Split the string to get the
             // index of the task to be deleted
             String[] arrdel = s1.split("\\s+");
             int pos = Integer.parseInt(arrdel[1]) - 1;
 
-            list.delete(pos);
+            list.delete(pos, storage);
         }
     },
     FIND {
       @Override
-      public void execute(String s1, TaskList list, Ui ui) {
+      public void execute(String s1, TaskList list, Ui ui, Storage storage) {
           String[] commandarray = s1.split("\\s+", 2);
           String keyword = commandarray[1];
 
-          list.find(keyword);
+          list.find(keyword, storage);
       }
     };
 
-    public abstract void execute(String s1, TaskList list, Ui ui);
+    public abstract void execute(String s1, TaskList list, Ui ui, Storage storage);
 }

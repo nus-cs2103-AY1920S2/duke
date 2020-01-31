@@ -11,12 +11,14 @@ public class TaskList {
 
     private List<Task> listOfTask;
     private Ui ui;
+    private Storage storage;
 
     public TaskList() {};
 
-    public TaskList(List<Task> listOfTask, Ui ui) {
+    public TaskList(List<Task> listOfTask, Ui ui, Storage storage) {
         this.listOfTask = listOfTask;
         this.ui = ui;
+        this.storage = storage;
     }
 
     /**
@@ -26,18 +28,21 @@ public class TaskList {
     public void add(Task mytask) {
         listOfTask.add(mytask);
         ui.addMessage((this.listOfTask).size(), mytask);
+        storage.store(this, ui);
     }
 
     /**
      * Deletes the task at the particular index of the list.
      * @param index index of the object in the list to be deleted.
+     * @param storage Storage object to be used to store a task.
      */
-    public void delete(int index) {
+    public void delete(int index, Storage storage) {
         // Split the string to get the
         // index of the task to be deleted
         ui.deletedTaskMessage(getsize() - 1, listOfTask.get(index));
         listOfTask.remove(index); // Deletes from task list
 
+        storage.store(this, ui);
     }
 
     /**
@@ -45,8 +50,8 @@ public class TaskList {
      * that is passed in as argument.
      * @param word keyword to find in the list.
      */
-    public void find(String word) {
-        TaskList filteredlist= new TaskList(new ArrayList<Task>(), ui);
+    public void find(String word, Storage storage) {
+        TaskList filteredlist= new TaskList(new ArrayList<Task>(), ui, storage);
         for (Task task : this.listOfTask) {
             String description = ((task.getDesc()).toLowerCase());
 

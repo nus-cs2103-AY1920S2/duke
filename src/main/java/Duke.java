@@ -21,7 +21,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load(), ui);
+            tasks = new TaskList(storage.load(), ui, storage);
         } catch (IOException e) {
             ui.showErrorMessage(e.getMessage());
             tasks = new TaskList();
@@ -32,12 +32,14 @@ public class Duke {
     /**
      * Find out the type of command and execute it.
      * @param input The line input by the user.
+     * @param tasks TaskList object to acces to list of tasks.
+     * @param storage Storage object.
      */
-    public static void execcommand(String input, TaskList tasks, Ui ui) {
+    public static void execcommand(String input, TaskList tasks, Ui ui, Storage storage) {
         // Split arguments to get the first index
         String[] arguments = input.split(" ");
 
-        DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui);
+        DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui, storage);
     }
 
     /**
@@ -70,20 +72,16 @@ public class Duke {
                 // "read book" into the list, the user has to type
                 // "todo read book" instead of just typing "read book"
                 // as typing "read book" will cause the code to throw an exception
-                execcommand(line, tasks, ui);
+                execcommand(line, tasks, ui, storage);
             // Wait for command
             line = sc.nextLine();
         }
 
-        try {
-            storage.store(tasks);
-        } catch (IOException ioex) {
-            ui.showErrorMessage(ioex.getMessage());
-        }
-
+        storage.store(tasks, ui);
         // Say 'bye' to the user
         ui.exit();
     }
+
     /**
      * The main method of the class Duke.
      * @param args Unused.

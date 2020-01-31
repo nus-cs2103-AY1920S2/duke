@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,7 @@ public class Storage {
 
     /**
      * When the user starts the program, it will load the previous tasks into the current list.
+     *
      * @return List<Task> List of Tasks.
      * @throws IOException Error opening the file.
      */
@@ -37,15 +42,15 @@ public class Storage {
             // figure out the type of object and add it into
             // the list.
             switch (expression) {
-                case "[E]" :
-                    Tasklist.add(new Event(arr[1], arr[2]));
-                    break;
-                case "[D]" :
-                    Tasklist.add(new Deadline(arr[1], arr[2]));
-                    break;
-                case "[T]" :
-                    Tasklist.add(new Todo(arr[1]));
-                    break;
+            case "[E]":
+                Tasklist.add(new Event(arr[1], arr[2]));
+                break;
+            case "[D]":
+                Tasklist.add(new Deadline(arr[1], arr[2]));
+                break;
+            case "[T]":
+                Tasklist.add(new Todo(arr[1]));
+                break;
             }
 
             currentline = reader.readLine();
@@ -57,27 +62,32 @@ public class Storage {
 
     /**
      * After the user exits, the remaining tasks in the list will be kept inside a .txt file.
+     *
+     * @param ui       Ui object for printing to user.
      * @param alltasks TaskList object as argument.
-     * @throws IOException Error opening the file.
      */
-    public void store(TaskList alltasks) throws IOException {
-        String line = "";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
+    public void store(TaskList alltasks, Ui ui) {
+        try {
+            String line = "";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
 
-        // Iterate through the list and put data in .txt file
-        for (Task task : alltasks.getListOfTask()) {
-            if (task.getType().equals("[T]")) {
-                // Todo objects
-                line = "[T] " + task.getDesc();
-            } else {
-                // Deadline/Event objects
-                line = task.getType() + " " + task.getDesc() + " " + task.getDate();
+            // Iterate through the list and put data in .txt file
+            for (Task task : alltasks.getListOfTask()) {
+                if (task.getType().equals("[T]")) {
+                    // Todo objects
+                    line = "[T] " + task.getDesc();
+                } else {
+                    // Deadline/Event objects
+                    line = task.getType() + " " + task.getDesc() + " " + task.getDate();
+                }
+                writer.write(line);
+                writer.newLine();
+                line = "";
             }
-            writer.write(line);
-            writer.newLine();
-            line = "";
+            writer.close();
+        } catch (IOException ioex) {
+            ui.showErrorMessage(ioex.getMessage());
         }
-        writer.close();
     }
 
 }
