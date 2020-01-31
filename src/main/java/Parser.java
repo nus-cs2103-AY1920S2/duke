@@ -5,15 +5,13 @@ import DukeException.DukeMissingDescriptionException;
 import DukeException.DukeUnknownInputException;
 
 public class Parser {
-    static String command = "";
 
     public static String getCommandType(String command) {
-        command = command;
         String[] splitted = command.split(" ", 2);
         return splitted[0];
     }
 
-    public static int markDoneNum() {
+    public static int markDoneNum(String command) {
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Task number missing.");
         }
@@ -25,14 +23,14 @@ public class Parser {
         }
     }
 
-    public static String todoDescription() {
+    public static String todoDescription(String command) {
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Todo description missing.");
         }
         return command.substring(5);
     }
 
-    public static String[] deadlineParams() {
+    public static String[] deadlineParams(String command) {
         if (command.length() <= 9) {
             throw new DukeMissingDescriptionException("Deadline description and time missing.");
         }
@@ -52,7 +50,7 @@ public class Parser {
         return descriptionAndBy;
     }
 
-    public static String[] eventParams() {
+    public static String[] eventParams(String command) {
         if (command.length() <= 6) {
             throw new DukeMissingDescriptionException("Event description and time missing.");
         }
@@ -63,7 +61,7 @@ public class Parser {
         return splitted;
     }
 
-    public static int deleteNum() {
+    public static int deleteNum(String command) {
         if (command.length() <= 7) {
             throw new DukeMissingDescriptionException("Task number missing.");
         }

@@ -35,23 +35,23 @@ public class Duke {
                     ui.showList(tasks);
                     break;
                 case "todo":
-                    String description = parser.todoDescription();
+                    String description = parser.todoDescription(command);
                     ui.showAdded(tasks.addTodo(description), tasks.getLength());
                     break;
                 case "deadline":
-                    String[] descByWhen = parser.deadlineParams();
+                    String[] descByWhen = parser.deadlineParams(command);
                     ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
                     break;
                 case "event":
-                    String[] descAtWhen = parser.eventParams();
+                    String[] descAtWhen = parser.eventParams(command);
                     ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
                     break;
                 case "done":
-                    int doneNum = parser.markDoneNum();
+                    int doneNum = parser.markDoneNum(command);
                     ui.showMarkedDone(tasks.markDone(doneNum));
                     break;
                 case "delete":
-                    int deleteNum = parser.markDoneNum();
+                    int deleteNum = parser.markDoneNum(command);
                     ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
                     break;
                 default:
