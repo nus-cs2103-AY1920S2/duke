@@ -28,8 +28,9 @@ public class EventTest {
      */
     @Test
     public void testToString() {
-        assertEquals("[E][\u2718] New Event (at: Home)", new Event("New Event", "Home").toString());
-        assertEquals("[E][\u2713] Go for a run (at: 3-5pm)",
+        assertEquals("[E][\u2718] New Event (at: Home)", // cross mark
+                new Event("New Event", "Home").toString());
+        assertEquals("[E][\u2713] Go for a run (at: 3-5pm)", // tick mark
                 new Event("Go for a run", "3-5pm", true).toString());
     }
 }

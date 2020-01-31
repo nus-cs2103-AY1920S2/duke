@@ -28,7 +28,9 @@ public class ToDoTest {
      */
     @Test
     public void testToString() {
-        assertEquals("[T][\u2718] Another test ToDo", new ToDo("Another test ToDo").toString());
-        assertEquals("[T][\u2713] Go for a run", new ToDo("Go for a run", true).toString());
+        assertEquals("[T][\u2718] Another test ToDo", // cross mark
+                new ToDo("Another test ToDo").toString());
+        assertEquals("[T][\u2713] Go for a run", // tick mark
+                new ToDo("Go for a run", true).toString());
     }
 }
