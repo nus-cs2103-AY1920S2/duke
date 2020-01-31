@@ -18,6 +18,4 @@ public abstract class Task {
     public String getStatusIcon() {
         return (isDone? "[✓]" : "[✗]");
     }
-
-
 }
