@@ -1,0 +1,13 @@
+T|1|read book
+D|0|return book|June 6th
+E|0|project meeting|Aug 6th 2-4pm
+E|0|idk|2020-01-04 06:00
+D|0|idk2|01:00
+E|0|idk|2020-04-04
+E|0|idk2|2020-04-05 06:00
+E|0|idk3|2020-04-06
+E|0|idk3|18:00
+D|1|didk|2020-03-04
+D|0|didk2|2020-03-05 06:00
+D|0|didk3|2020-03-06
+D|0|didk3|18:00

@@ -43,6 +43,7 @@ public abstract class Task {
     }
 
     public abstract String printTask();
-
+    public abstract String toStringForm();
     public abstract boolean isDue(Date date);
+
 }

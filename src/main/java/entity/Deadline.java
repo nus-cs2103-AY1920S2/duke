@@ -66,4 +66,8 @@ public class Deadline extends Task {
     public boolean isDue(Date date) {
         return this.doByDate != null ? this.doByDate.compareTo(date) != 1 ? true : false : false;
     }
+
+    public String toStringForm() {
+        return "D|" +  (super.isDone() ? "1" : "0" ) + "|"+ super.getTaskName() + "|" + doBy;
+    }
 }

@@ -73,4 +73,8 @@ public class Event extends Task {
     public boolean isDue(Date date) {
         return this.heldAtDate != null ? this.heldAtDate.compareTo(date) != 1 ? true : false : false;
     }
+
+    public String toStringForm() {
+        return "E|" +  (super.isDone() ? "1" : "0" ) + "|"+ super.getTaskName() + "|" + heldAt;
+    }
 }
