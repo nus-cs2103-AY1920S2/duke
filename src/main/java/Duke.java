@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import DukeException.*;
 
 public class Duke {
 

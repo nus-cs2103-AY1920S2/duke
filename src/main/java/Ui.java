@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import DukeException.*;
 
 public class Ui {
     Scanner sc = new Scanner(System.in);
