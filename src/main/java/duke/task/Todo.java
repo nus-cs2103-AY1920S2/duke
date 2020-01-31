@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
 
     /** as good practice every class should have it's own private serialVersionUID */
