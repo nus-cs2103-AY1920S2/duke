@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
-import DukeException.*;
+import DukeException.DukeIOException;
 
 public class Storage {
     Path file;
