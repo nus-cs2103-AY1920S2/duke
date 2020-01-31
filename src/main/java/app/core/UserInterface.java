@@ -1,11 +1,22 @@
 package app.core;
 
+import java.util.Scanner;
+
 public class UserInterface {
     public static final int MAX_STRING_LENGTH = 60;
 
-    public UserInterface() {}
+    private Scanner scanner;
+    private boolean isClosed = false;
 
-    public void show(String message) {
+    public UserInterface() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public String listen() {
+        return this.scanner.nextLine();
+    }
+
+    public void render(String message) {
         System.out.println("    ____________________________________________________________");
 
         for (String str : message.split("\n")) {
@@ -20,5 +31,13 @@ public class UserInterface {
         }
         
         System.out.println("    ____________________________________________________________");
+    }
+
+    public boolean isClosed() {
+        return this.isClosed;
+    }
+
+    public void close() {
+        this.isClosed = true;
     }
 }
