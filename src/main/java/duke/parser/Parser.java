@@ -48,7 +48,7 @@ public class Parser {
                     command = new AddCommand(TaskTypes.EVENT, userArgs);
                     break;
                 default:
-                    throw new DukeException(ErrorCodes.MISSING_TASK_NAME);
+                    throw new DukeException(ErrorCodes.UNKNOWN_COMMAND);
                 };
             }
         return command;
