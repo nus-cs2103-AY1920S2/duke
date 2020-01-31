@@ -14,7 +14,6 @@ public class Task{
 
     public Task completeTask() {
         this.complete = new Complete(true);
-        System.out.println("Nice! I've marked this task as done:" + "\n" + this.toString());
         return this;
     }
 

@@ -7,235 +7,83 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * create a complete class
- * Todo: Regular task
- * Event: start and end time
- * Deadline: By a certain timing
- */
-
-
-public class TaskList{
-    private ArrayList<Task> taskList;
+public class TaskList {
+    private ArrayList<Task> taskArr;
     private String path = "data/duke.txt";
-    public TaskList(){
-        this.taskList = new ArrayList<>();
+
+    public TaskList() {
+        this.taskArr = new ArrayList<>();
     }
 
-    private void totalTask(){
-        System.out.println("You have " + (taskList.size()) + " task on your list.");
+    public TaskList(ArrayList<Task> taskArr){
+        this.taskArr = taskArr;
     }
 
-
-    private void addTodo(String task){
-        taskList.add(new Todo(task));
-        System.out.println("Affirmative. Adding a to-do task :) \n" + "added: " + task);
-        totalTask();
+    public ArrayList<Task> getTaskArr() {
+        return taskArr;
     }
 
-    private void addTodo(String task, boolean bool){
-        taskList.add(new Todo(task, bool));
+    private String totalTask() {
+        return "You have " + (taskArr.size()) + " task on your list.";
     }
 
-    private void addDead(String task, String timing){
-        taskList.add(new Deadline(task, timing));
-        System.out.println("Affirmative. Adding a task with a deadline. :) \n" + "added: " + task + " " + timing);
-        totalTask();
+    private String addTodo(String task) {
+        taskArr.add(new Todo(task));
+        return "Affirmative. Adding a to-do task :) \n" + "added: " + task + "\n" + totalTask();
     }
 
-    private void addDead(String task, String timing, boolean bool){
-        taskList.add(new Deadline(task, timing, bool));
+    private String addDead(String task, String timing) {
+        taskArr.add(new Deadline(task, timing));
+        return "Affirmative. Adding a task with Deadline :) \n" + "added: " + task + "\n" + totalTask();
     }
 
-    private void addEvent(String task, String timing){
-        taskList.add(new Event(task, timing));
-        System.out.println("Affirmative. Adding an event. :) \n" + "added: " + task + " " + timing);
-        totalTask();
+    private String addEvent(String task, String timing) {
+        taskArr.add(new Event(task, timing));
+        return "Affirmative. Adding an event :) \n" + "added: " + task + "\n" + totalTask();
     }
 
-    private void addEvent(String task, String timing, boolean bool){
-        taskList.add(new Event(task, timing, bool));
+    private String deleteTask(int index) {
+        taskArr.remove(index - 1);
+        return "Deleting this task. now you have less things to do :)" + "\n" + totalTask();
     }
 
-    private void deleteTask(int index){
-        System.out.println("Deleting this task. now you have less things to do :)");
-        taskList.remove(index - 1);
-        totalTask();
+    private String doneTask(int index){
+        taskArr.set(index - 1, taskArr.get(index - 1).completeTask());
+        return "Complete task! :)" + "\n" + totalTask();
     }
 
-    private String makeTask (String[] arr) throws Exception{
-        String task = "";
+    public String listToPrint() {
         int i = 1;
-        while(i < arr.length && !arr[i].startsWith("/")){
-            task += arr[i++] + " ";
+        String toPrint = "";
+        for (Task x : taskArr) {
+            toPrint += (i++) + "" + x.toString() + "\n";
         }
-        if(task.equals("")) throw new Exception();
-        else return task;
+        return toPrint;
     }
 
-    private String makeTiming(String[] arr){
-        String timing ="";
-        int i = 1;
-        while(i < arr.length){
-            if(arr[i].startsWith("/")){
-                timing += arr[i++].split("/")[1] + ":";
-                while(i < arr.length){
-                    timing += " " + arr[i];
-                    i++;
-                }
-                break;
-            }
-            i++;
-        }
-        return timing;
-    }
-
-    private void printList(){
-        int i = 1;
-        for(Task x: taskList){
-            if(x != null) {
-                System.out.println((i++) + "" + x);
-            }
-        }
-    }
-
-    public void inputLoop() {
-        Scanner sc = new Scanner(System.in);
-        while(true){
-            String input = sc.nextLine();
-            String[] inputAsArray = input.split(" ");
-            Command cmd = Command.convert(inputAsArray[0]);
-            switch(cmd){
-                case BYE:
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                case LIST:
-                    printList();
-                    break;
+    public String read(String input) {
+        try {
+            Command cmd = Parser.readCommand(input);
+            switch (cmd) {
                 case TODO:
-                    try{
-                        addTodo(makeTask(inputAsArray));
-                        save(toTxt());
-                    }catch(Exception e){
-                        System.out.println("Missing description. Describe abit more leh.");
-                    }
-                    break;
+                    return addTodo(Parser.readTask(input));
                 case DEADLINE:
-                    try{
-                        addDead(makeTask(inputAsArray), makeTiming(inputAsArray));
-                        save(toTxt());
-                    }catch(Exception e){
-                        System.out.println("Missing description. Describe abit more leh.");
-                    }
-                    break;
+                    return addDead(Parser.readTask(input), Parser.readTiming(input));
                 case EVENT:
-                    try{
-                        addEvent(makeTask(inputAsArray), makeTiming(inputAsArray));
-                        save(toTxt());
-                    }catch(Exception e){
-                        System.out.println("Missing description. Describe abit more leh.");
-                    }
-                    break;
+                    return addEvent(Parser.readTask(input), Parser.readTiming(input));
                 case DONE:
-                    int num = Integer.valueOf(inputAsArray[1]);
-                    taskList.set(num - 1, taskList.get(num - 1).completeTask());
-                    save(toTxt());
-                    break;
+                    return doneTask(Parser.readNum(input));
                 case DELETE:
-                    deleteTask(Integer.valueOf(inputAsArray[1]));
-                    save(toTxt());
-                    break;
+                    return deleteTask(Parser.readNum(input));
+                case LIST:
+                    return listToPrint();
+                case BYE:
+                    return "0";
                 default:
-                    System.out.println("What you talking? Me no understand your command :(");
-                    break;
+                    return "How did you end up here?";
             }
-            if(cmd == Command.BYE){break;}
+        }catch (Exception e) {
+            return "Cannot Compute :(";
         }
     }
-
-    private void fileToRun(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while(s.hasNextLine()){
-            String line = s.nextLine();
-            String [] taskArr = line.split("/");
-            Command type = Command.convert(taskArr[0]);
-            boolean completed = toBool(taskArr[1]);
-            String task = taskArr[2];
-            switch(type){
-                case TODO:
-                    try{
-                        addTodo(task, completed);
-                    }catch(Exception e){
-                        System.out.println("wrong input todo");
-                    }
-                    break;
-                case DEADLINE:
-                    try{
-                        addDead(task, taskArr[3], completed);
-                    }catch(Exception e){
-                        System.out.println("wrong input deadline");
-                    }
-                    break;
-                case EVENT:
-                    try{
-                        addEvent(task, taskArr[3], completed);
-                    }catch(Exception e){
-                        System.out.println("wrong input event");
-                    }
-                    break;
-            }
-        }
-    }
-
-    private static boolean toBool(String com){
-        if(com.equals("1")) return true;
-        else return false;
-    }
-
-    public void resumeSave(String filePath){
-        try{
-            fileToRun(filePath);
-        }catch(FileNotFoundException e){
-            System.out.println("File not found");
-        }
-    }
-
-    private String toTxt(){
-        String main = "";
-        for(Task x: taskList){
-            String type = "";
-            int complete = x.getComplete()? 1: 0;
-            String task = x.getTask();
-            if(x instanceof Todo){
-                type = "T";
-            }else if(x instanceof Deadline){
-                type = "D";
-                Deadline d = (Deadline) x;
-                task += "/" + d.getTiming();
-            }else if(x instanceof Event){
-                type = "E";
-                Event e = (Event) x;
-                task += "/" + e.getTiming();
-            }
-            main += type + "/" + complete + "/" + task +"\n";
-        }
-        return main;
-    }
-
-    private void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private void save(String textToAdd){
-        try{
-            writeToFile(path, textToAdd);
-        }catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-    }
-
-
 }

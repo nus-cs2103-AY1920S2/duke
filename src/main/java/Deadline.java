@@ -14,17 +14,14 @@ public class Deadline extends Task {
         //this.timeString = this.timing.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    private void convertTiming(){
-        try{
-            recordedDate = LocalDate.parse(timing.split(" ")[1]);
-        }catch(Exception e){
-            System.out.println("Wrong date input");
-        }
-    }
-
     public Deadline(String task, String timing, boolean bool){
         super(task, bool);
         this.timing = timing;
+        convertTiming();
+    }
+
+    private void convertTiming(){
+        this.recordedDate = LocalDate.parse(timing.split(" ")[1]);
     }
 
     public String getTiming(){
@@ -32,11 +29,11 @@ public class Deadline extends Task {
     }
 
     public String getTime(){
-        return this.recordedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return this.recordedDate.format(DateTimeFormatter.ofPattern("MM dd yyyy"));
     }
 
     @Override
     public String toString(){
-        return  ". " + "[D] " + complete + task + "(" + timing.split(" ")[1] + " " + getTime() + ")";
+        return  ". " + "[D] " + complete + task + "(" + timing.split( " ")[0].split("/")[0] + " " + getTime() + ")";
     }
 }
