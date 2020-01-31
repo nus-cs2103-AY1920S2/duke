@@ -54,6 +54,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
+        ui.shutDown();
     }
 
     /**

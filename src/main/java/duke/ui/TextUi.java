@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class TextUi implements Ui {
     private String lineBreak;
     private Scanner sc;
+
     public TextUi() {
         lineBreak = "===========================================================\n";
         sc = new Scanner(System.in);
@@ -33,6 +34,10 @@ public class TextUi implements Ui {
 
     public String getInput() {
         return sc.nextLine();
+    }
+
+    public void shutDown() {
+        sc.close();
     }
 
     private String formatReply(String str) {

@@ -82,4 +82,14 @@ public class Gui extends AnchorPane implements Ui {
         inputLock.release();
         return input;
     }
+
+    public void shutDown() {
+        try {
+            Thread.sleep(1000);
+            Platform.exit();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        
+    }
 }

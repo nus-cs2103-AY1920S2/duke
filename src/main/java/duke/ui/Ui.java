@@ -29,4 +29,9 @@ public interface Ui {
      * @return User input.
      */
     String getInput();
+
+    /**
+     * Closes Ui and performs cleanup operations.
+     */
+    void shutDown();
 }
