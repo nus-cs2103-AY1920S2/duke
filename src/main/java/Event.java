@@ -22,6 +22,6 @@ class Event extends Task {
         String status = super.getStatusIcon();
         String date = this.getDate();
 
-        return "[E]" + "[" + status + "] " + description + " - " + date;
+        return "[E]" + "[" + status + "] " + description + " : " + date;
     }
 }
