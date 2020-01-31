@@ -69,3 +69,15 @@ T |  ✘ | run
  [D] [✘] return book (by: Feb 3 2020 18:00)
  [T] [✘] sleep
  [T] [✘] run
+ [T] [✘] run away
+ [D] [✘] homework (by: Feb 3 2020 00:00)
+ [E] [✘] tutorial (at: Feb 5 2020 17:00)
+ [T] [✘] run
+ [D] [✘] suck (by: Feb 3 2020 00:00)
+ [D] [✘] kaka (by: Dec 2 2019 00:00)
+ [T] [✘] run
+ [D] [✘] running (by: Feb 3 2020 18:00)
+ [E] [✘] runnings (at: Feb 3 2020 17:00)
+ [T] [✘] sleep
+ [T] [✘] run
+ [T] [✘] sleep

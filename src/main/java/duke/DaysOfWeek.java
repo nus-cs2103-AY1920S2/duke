@@ -9,12 +9,12 @@ import java.util.HashMap;
 public class DaysOfWeek {
 
     /**
-     * The Hashmap associated with the days of the week
+     * The Hashmap associated with the days of the week.
      */
     HashMap<String, Integer> hm = new HashMap<>();
 
     /**
-     * Gets the hashmap
+     * Gets the hashmap.
      *
      * @return the hm
      */
@@ -23,7 +23,7 @@ public class DaysOfWeek {
     }
 
     /**
-     * Sets hashmap
+     * Sets hashmap.
      *
      * @param hm the hm
      */

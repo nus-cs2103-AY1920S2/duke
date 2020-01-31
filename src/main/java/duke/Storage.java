@@ -32,8 +32,9 @@ public class Storage {
      * @throws IOException the io exception
      */
     public void saveTask(Task task) throws IOException {
-
-        FileWriter fw = new FileWriter(this.filePath,true);
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        FileWriter fw = new FileWriter(file,true);
         fw.write(task.toString() + System.lineSeparator());
         fw.close();
     }

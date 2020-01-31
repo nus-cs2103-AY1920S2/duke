@@ -1,11 +1,16 @@
 package duke.command;
 
-import duke.*;
+
+import duke.Duke;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.task.TaskList;
+
 
 /**
  * Class which consists a command to terminate the program
- * When the user types "bye"
+ * When the user types "bye".
  */
 public class ByeCommand extends Command {
 
@@ -20,9 +25,8 @@ public class ByeCommand extends Command {
 
 
     /**
-     * Overwrites the execute method from Abstract class execute.
-     *
-     * Check against the user's input then pass it UI class to print the Bye Message
+     * Overwrites the execute method from Abstract class execute
+     * Check against the user's input then pass it UI class to print the Bye Message.
      *
      * @param storage  Deals with loading tasks from file.
      * @param ui       Deals with interactions with the user

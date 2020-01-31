@@ -1,13 +1,21 @@
 package duke.command;
 
-import duke.*;
-import duke.task.*;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 
 import java.io.IOException;
 
 /**
  * Class which consists of Tasks which adds to the List
- * Eg: Deadline, TO-DO, Event
+ * Eg: Deadline, TO-DO, Event.
  */
 public class AddCommand extends Command {
 
@@ -24,7 +32,6 @@ public class AddCommand extends Command {
 
     /**
      * Overwrites the execute method from Abstract class execute.
-     *
      * Check against the user's input then pass it to its respective task class.
      *
      * @param storage Deals with loading tasks from file.

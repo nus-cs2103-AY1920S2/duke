@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -55,24 +54,24 @@ public class Event extends Task {
     // Incorrect use of identifiers "../at" (More stringent check of formatting)
     // No deadline descriptors. Eg: "deadline /by Monday"
     // Same for TO-DO, duke.task.Deadline and duke.task.Event classes!
+    // throws exception when Eg: use ../by instead of ../at
     /**
      * From the input given by the user, filter out the commands (Event)
      * And returns the description of the string.
      * @param s the s
      * @return String without "event"
      * @throws DukeException when the user enters an empty description or use the wrong event format.
-     * Eg: use ../by instead of ../at
      */
 
     @Override
     public String formatTasks(String s) throws DukeException {
 
-        String[] splited_string = getDescription().split("event");
+        String[] splitedString = getDescription().split("event");
 
-        if(splited_string.length <1) {
+        if (splitedString.length < 1) {
             throw new DukeException("You cannot leave the description empty");
         } else {
-            try{
+            try {
                 return s.substring(s.indexOf("at")).replaceAll("at ", "");
 
             } catch (Exception e) {
@@ -83,34 +82,24 @@ public class Event extends Task {
 
     /**
      * Gets description of the task. WWithout the date and time .
-     *
-     * @return the deadline task description
+     * return the deadline task description
      */
     @Override
     public void setDescription(String s) throws DukeException {
 
         try {
-            String event_task = s.substring(s.indexOf("event"), s.indexOf("/"));
-            String event_name = event_task.replaceAll("event", "").trim();
-            super.setDescription(event_name);
+            String eventTask = s.substring(s.indexOf("event"), s.indexOf("/"));
+            String eventName = eventTask.replaceAll("event", "").trim();
+            super.setDescription(eventName);
         } catch (Exception e) {
             throw new DukeException("Please enter the correct format for an event ");
         }
     }
 
-    /**
-     * Gets task codes.
-     *
-     * @return the task codes
-     */
-    Task_Codes getTaskCodes() {
-        return Task_Codes.E;
-    }
-
     @Override
     public String toString() {
-        return " [" + Task_Codes.E + "]" + super.toString() + " (at: " +
-                // The format is to change the formatting patterns (Dec 2 2019 OR 2/12/2019)
-                d1.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        // The format is to change the formatting patterns (Dec 2 2019 OR 2/12/2019)
+        return " [" + TaskCode.E + "]" + super.toString() + " (at: "
+                + d1.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

@@ -1,13 +1,14 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-
 import java.io.IOException;
 
 /**
- * The type Delete command which deletes from the list
+ * The type Delete command which deletes from the list.
  */
 public class DeleteCommand extends Command {
 
@@ -23,7 +24,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Overwrites the execute method from Abstract class execute.
-     *
      * Check against the user's input then pass it to its respective task class.
      *
      * @param storage Deals with loading tasks from file.
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws IOException, DukeException {
-        if(userInput.contains("delete")) {
+        if (userInput.contains("delete")) {
             Task deletedTask = taskList.getList().get(splitDoneString(" ", userInput,taskList,ui));
             System.out.println("The deleted task is " + deletedTask);
             taskList.removeFromList(deletedTask);
@@ -43,15 +43,15 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private int splitDoneString(String regrexWanted, String userInput, TaskList taskList
-    , Ui ui) throws DukeException {
+    private int splitDoneString(String regrexWanted, String userInput, TaskList taskList,
+                                Ui ui) throws DukeException {
         String[] splittedString = userInput.split(regrexWanted);
         Integer arrayIndex = Integer.valueOf(splittedString[1]);
 
-        if(arrayIndex > taskList.sizeOfList()) {
+        if (arrayIndex > taskList.sizeOfList()) {
             ui.invalidNumberException();
         }
 
-        return arrayIndex-1;
+        return arrayIndex - 1;
     }
 }

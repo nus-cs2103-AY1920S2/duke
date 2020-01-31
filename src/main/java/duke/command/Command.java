@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * The abstract class Command handles all forms of Commands
- * AddCommand, ByeCommand, DeleteCommand, DoneCommand, ListCommand
+ * AddCommand, ByeCommand, DeleteCommand, DoneCommand, ListCommand.
  */
 public abstract class Command {
 

@@ -28,7 +28,7 @@ public class Duke {
      * @throws IOException   the io exception
      */
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke("/Users/joshua/Desktop/Schoolwork/Year 2 Sem 2/CS2103T/Individual_Project_Duke/data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 
     /**
@@ -36,6 +36,7 @@ public class Duke {
      *
      * @param filePath the file path
      */
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -51,8 +52,7 @@ public class Duke {
             String fullCommand = ui.readCommand(input);
             Command c = Parser.parse(fullCommand,input);
             c.execute(storage, ui,taskList);
-            //parser.understand_user_input(input);
-            if(breakChecker) {
+            if (breakChecker) {
                 break;
             }
         }

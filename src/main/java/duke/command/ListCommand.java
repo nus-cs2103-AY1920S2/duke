@@ -24,7 +24,6 @@ public class ListCommand extends Command {
 
     /**
      * Overwrites the execute method from Abstract class execute.
-     *
      * Check against the user's input then pass it to its respective task class.
      *
      * @param storage Deals with loading tasks from file.
@@ -35,9 +34,9 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(Storage storage, Ui ui, TaskList taskList) throws  DukeException {
-        try{
+        try {
             ui.printList(taskList);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
     }

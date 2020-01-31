@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.*;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,7 +23,6 @@ public class DoneCommand extends Command {
 
     /**
      * Overwrites the execute method from Abstract class execute.
-     *
      * Check against the user's input then pass it to its respective task class.
      *
      * @param storage Deals with loading tasks from file.
@@ -42,10 +44,10 @@ public class DoneCommand extends Command {
         String[] splittedString = userInput.split(regrexWanted);
         Integer arrayIndex = Integer.valueOf(splittedString[1]);
 
-        if(arrayIndex > taskList.sizeOfList()) {
+        if (arrayIndex > taskList.sizeOfList()) {
             ui.invalidNumberException();
         }
 
-        return arrayIndex-1;
+        return arrayIndex - 1;
     }
 }
