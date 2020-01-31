@@ -8,12 +8,15 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /** Common Strings used for enhancing UI with user */
+    /**
+     * Common Strings used for enhancing UI with user
+     */
     public final static String NEWLINE = System.lineSeparator();
     public final static String INDENT = "    ";
     public final static String BORDER = INDENT + "____________________________________________________________";
 
-    public Ui() { }
+    public Ui() {
+    }
 
     /**
      * Print welcome message upon boot up.
@@ -44,6 +47,7 @@ public class Ui {
 
     /**
      * Print loading error if an error occurs upon booting up Chatbot.
+     *
      * @param e DukeException class used to handle various specific Chatbot error.
      */
     public void showLoadingError(DukeException e) {
@@ -84,7 +88,7 @@ public class Ui {
      * Print message notifying user of task deleted from existing list of tasks.
      *
      * @param deletedTask Task object of the task removed from existing list.
-     * @param listSize Total number of remaining task left in the list.
+     * @param listSize    Total number of remaining task left in the list.
      */
     public void showDeleteMessage(Task deletedTask, int listSize) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -142,7 +146,7 @@ public class Ui {
      * list of user tasks.
      *
      * @param message String of Task describing it.
-     * @param size Number of tasks in the list after adding the current task.
+     * @param size    Number of tasks in the list after adding the current task.
      */
     public void showCustomiseMessage(String message, int size) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -159,7 +163,7 @@ public class Ui {
      * Print a message notifying user the task that have been mark as done.
      *
      * @param markedIcon String representing Task have been done.
-     * @param task Task object that have been marked as done.
+     * @param task       Task object that have been marked as done.
      */
     public void showDoneMessage(String markedIcon, Task task) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -179,7 +183,6 @@ public class Ui {
     public void showGoodByeMessage() {
         System.out.println(addBorder(INDENT + "  Goodbye and have a beautiful time!"));
     }
-
 
 
 }

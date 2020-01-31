@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kenny Ho
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected final String eventLogo = "E";
     private LocalDate time;
@@ -16,7 +16,7 @@ public class Event extends Task{
      * Constructor for Event class.
      *
      * @param description Description of the event.
-     * @param at LocalDate object of when event is happening.
+     * @param at          LocalDate object of when event is happening.
      */
     public Event(String description, LocalDate at) {
         super(description);

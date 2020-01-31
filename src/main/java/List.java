@@ -1,9 +1,7 @@
-/**
- *
- */
 public class List extends Command {
 
-    public List() {}
+    public List() {
+    }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

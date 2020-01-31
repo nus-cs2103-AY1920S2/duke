@@ -5,7 +5,7 @@
  * @author Kenny Ho
  */
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     protected final String toDoLogo = "T";
 
     /**

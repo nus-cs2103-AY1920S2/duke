@@ -4,7 +4,8 @@ public class Exit extends Command {
         super(task);
     }
 
-    public Exit() {}
+    public Exit() {
+    }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

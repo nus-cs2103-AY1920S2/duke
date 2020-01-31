@@ -20,7 +20,9 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** System separator used to standardise across OS platforms */
+    /**
+     * System separator used to standardise across OS platforms
+     */
     public final static String NEWLINE = System.lineSeparator();
 
     private final static String DONE = "1";
@@ -72,7 +74,7 @@ public class Storage {
      * @return ArrayList of tasks stored in storage text file.
      * @throws DukeException if abbreviation of Task read from storage does not match T, D or E.
      */
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -82,29 +84,29 @@ public class Storage {
                 String[] taskArr = nextLine.split(" \\| ");
                 CommandList taskAbbreviation = CommandList.get(taskArr[0]);
                 switch (taskAbbreviation) {
-                    case TODO:
-                        ToDo storeTask = new ToDo(taskArr[2]);
-                            if (taskArr[1].equals(DONE)) {
-                            storeTask.markAsDone();
-                        }
-                        tasks.add(storeTask);
-                        break;
-                    case EVENT:
-                        Event storeEvent = new Event(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
-                        if (taskArr[1].equals(DONE)) {
-                            storeEvent.markAsDone();
-                        }
-                        tasks.add(storeEvent);
-                        break;
-                    case DEADLINE:
-                        Deadline storeDeadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
-                        if (taskArr[1].equals(DONE)) {
-                            storeDeadline.markAsDone();
-                        }
-                        tasks.add(storeDeadline);
-                        break;
-                    default:
-                        throw new DukeException("Invalid abbreviation!", DukeErrorType.INVALID_ABBREVIATION);
+                case TODO:
+                    ToDo storeTask = new ToDo(taskArr[2]);
+                    if (taskArr[1].equals(DONE)) {
+                        storeTask.markAsDone();
+                    }
+                    tasks.add(storeTask);
+                    break;
+                case EVENT:
+                    Event storeEvent = new Event(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
+                    if (taskArr[1].equals(DONE)) {
+                        storeEvent.markAsDone();
+                    }
+                    tasks.add(storeEvent);
+                    break;
+                case DEADLINE:
+                    Deadline storeDeadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
+                    if (taskArr[1].equals(DONE)) {
+                        storeDeadline.markAsDone();
+                    }
+                    tasks.add(storeDeadline);
+                    break;
+                default:
+                    throw new DukeException("Invalid abbreviation!", DukeErrorType.INVALID_ABBREVIATION);
                 }
             }
         } catch (FileNotFoundException fileException) {
@@ -138,8 +140,7 @@ public class Storage {
                     } else if (eachTask instanceof Deadline) {
                         toBeWritten += "D | " + eachTask.getStatusNumber() + " | " + eachTask.getDescription() + " | "
                                 + ((Deadline) eachTask).getBy() + NEWLINE;
-                    }
-                    else {
+                    } else {
                         throw new IOException("Problem encountered while saving/writing to data file");
                     }
                 }

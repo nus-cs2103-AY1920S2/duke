@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kenny Ho
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected final String deadlineLogo = "D";
     private LocalDate by;
@@ -16,7 +16,7 @@ public class Deadline extends Task{
      * Constructor of DeadLine class.
      *
      * @param description Description describing the Deadline task.
-     * @param by LocalDate object of when the deadline is.
+     * @param by          LocalDate object of when the deadline is.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
