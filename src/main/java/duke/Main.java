@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import duke.ui.Gui;
 
 /**
- * A GUI for Duke using FXML.
+ * Main class called by Launcher to initialise Duke and Gui.
  */
 public class Main extends Application {
 

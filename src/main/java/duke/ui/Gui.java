@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
 import duke.Duke;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for the Main Window of the GUI for Duke.
  */
 public class Gui extends AnchorPane implements Ui {
     @FXML
@@ -27,8 +27,6 @@ public class Gui extends AnchorPane implements Ui {
     private Button sendButton;
 
     private Semaphore inputLock;
-
-    private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
@@ -47,8 +45,10 @@ public class Gui extends AnchorPane implements Ui {
         inputLock.release();
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Configures Duke to accept self as Ui and self's semaphore for synchronisation.
+     */
+    public void setDuke(Duke duke) {
         duke.useUi(this);
         duke.addSemaphore(inputLock);
     }
@@ -72,10 +72,10 @@ public class Gui extends AnchorPane implements Ui {
     @FXML
     public String getInput() {
         try {
-			inputLock.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+            inputLock.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String input = userInput.getText();
         Platform.runLater(() -> userInput.clear());
         Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage)));

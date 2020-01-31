@@ -1,7 +1,7 @@
 package duke;
 
-import java.io.IOException;
 import java.util.concurrent.Semaphore;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
 import duke.ui.Ui;
@@ -12,10 +12,16 @@ import duke.storage.TextStorage;
 import duke.commands.CommandHandler;
 import duke.exceptions.DukeException;
 
+/**
+ * Logic for Duke. Uses TextUi by default.
+ */
 public class Duke {
     private Semaphore inputLock;
     private Ui ui = new TextUi();
 
+    /**
+     * Runs the main loop of Duke.
+     */
     public void run() {
         String filePath = "data/tasks.txt";
         Storage storage = new TextStorage(filePath);
@@ -31,10 +37,12 @@ public class Duke {
         }
         CommandHandler handler = new CommandHandler(tasks, ui);
         while (handler.isActive()) {
-            try {
-                inputLock.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (inputLock != null) {
+                try {
+                    inputLock.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             handler.executeCmd(ui.getInput());
         }
@@ -48,10 +56,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Registers a semaphore for Duke to synchronise with other threads.
+     */
     public void addSemaphore(Semaphore sem) {
         inputLock = sem;
     }
 
+    /**
+     * Configures Duke to use a particular Ui.
+     */
     public void useUi(Ui ui) {
         this.ui = ui;
     }
