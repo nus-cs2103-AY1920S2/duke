@@ -3,4 +3,3 @@ T|X|meet friend
 T|X|kiss cat
 T|X|feed cat
 D|X|tutorial|2020-12-30
-E|X|birthday|2020-01-30

@@ -1,9 +1,9 @@
-import DukeExceptions.*;
-import List.DukeList;
-import Parser.DukeParser;
-import Storage.DukeStorage;
-import UI.DukeUI;
-import Command.DukeCommand;
+import dukeexceptions.*;
+import dukelist.DukeList;
+import dukeparser.DukeParser;
+import dukestorage.DukeStorage;
+import dukeui.DukeUI;
+import dukecommand.DukeCommand;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class Duke {
             dl = ds.load();
             ui = new DukeUI();
             parser = new DukeParser();
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
     }
@@ -32,13 +32,15 @@ public class Duke {
     public void run() {
         ui.showWelcomeMessage();
         String command;
+        boolean isMainExit = false;
 
-        while(true) {
+        while (!isMainExit) {
             try {
                 command = ui.readCommandString();
                 ui.printLine();
                 DukeCommand currCommand = parser.handleCommand(command);
                 currCommand.execute(dl, ds, ui);
+                isMainExit = currCommand.getIsExit();
                 ui.printLine();
             } catch (DukeException e) {
                 ui.showErrorMessage(e);
