@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -90,7 +91,7 @@ public class Duke {
                         if (by.length < 2) {
                             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
                         }
-                        list.add(new Deadline(by[0], by[1]));
+                        list.add(new Deadline(by[0], LocalDate.parse(by[1])));
                         Task.getTotalTasks();
                         break;
                     case "event":
@@ -101,7 +102,7 @@ public class Duke {
                         if (at.length < 2) {
                             throw new DukeException("☹ OOPS!!! The date of a event cannot be empty.");
                         }
-                        list.add(new Event(at[0], at[1]));
+                        list.add(new Event(at[0], LocalDate.parse(at[1])));
                         Task.getTotalTasks();
                         break;
                     default:
