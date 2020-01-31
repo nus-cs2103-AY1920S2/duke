@@ -1,3 +1,5 @@
+package duke;
+
 public enum CommandType {
     LIST_CMD("list"),
     DONE_CMD("done"),

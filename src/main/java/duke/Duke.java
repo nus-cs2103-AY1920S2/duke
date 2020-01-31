@@ -1,25 +1,22 @@
+package duke;
+
 import java.time.LocalDate;
 import java.io.IOException;
 
 public class Duke {
-    private Ui ui;
+    private static Ui ui;
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
 
     private static final String DUKE_TXT_FILE_PATH = "data/duke.txt";
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         parser = new Parser();
 
-        try {
-            storage = new Storage(filePath);
-            taskList = storage.load();
-        } catch (IOException e) {
-            System.out.println("Sorry, an error has occurred:");
-            e.printStackTrace();
-        }
+        storage = new Storage(filePath);
+        taskList = storage.load();
     }
 
     private  void addAndPrintTask(Task t, TaskList taskList) {
@@ -29,7 +26,7 @@ public class Duke {
                 + "Now, you have " + taskList.getNumTasks() + " item(s) in your list." + Ui.LF);
     }
 
-    public void run() {
+    public void run() throws IOException {
         ui.printWelcomeMsg();
 
         String str1;
@@ -40,9 +37,9 @@ public class Duke {
         int index;
 
         while (true) {
-            t = null;
             try {
-                Command command= parser.parse(ui.readCmd(), taskList);
+                t = null;
+                Command command = parser.parse(ui.readCmd(), taskList);
 
                 switch (command.getCommandType()) {
                     case LIST_CMD:
@@ -95,10 +92,6 @@ public class Duke {
                         ui.printByeMsg();
                         break;
                 }
-            } catch (IOException e){
-                ui.printLine("Sorry, an error has occurred:");
-                e.printStackTrace();
-                break;
             } catch (DukeException e) {
                 ui.printLine(e + Ui.LF);
             }
@@ -107,6 +100,11 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        new Duke(DUKE_TXT_FILE_PATH).run();
+        try {
+            System.out.println("edited");
+            new Duke(DUKE_TXT_FILE_PATH).run();
+        } catch (IOException e) {
+            ui.printLine("Sorry, an IO error has occurred:");
+        }
     }
 }
