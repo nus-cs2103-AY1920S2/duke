@@ -11,7 +11,7 @@ public class Parser {
         return (strArr.length == 2);
     }
 
-    private  boolean validId(String strId, TaskList tasks) {
+    private  boolean isValidId(String strId, TaskList tasks) {
         int id;
         try {
             id = Integer.parseInt(strId);
@@ -39,7 +39,7 @@ public class Parser {
 
             str1 = cmd.split("done\\s+")[1];
 
-            if (!validId(str1, tasks)) {
+            if (!isValidId(str1, tasks)) {
                 throw new DukeException("The task to mark done is not in the list");
             }
 
@@ -51,7 +51,7 @@ public class Parser {
 
             str1 = cmd.split("delete\\s+")[1];
 
-            if (!validId(str1, tasks)) {
+            if (!isValidId(str1, tasks)) {
                 throw new DukeException("The task to mark delete is not in the list");
             }
 
