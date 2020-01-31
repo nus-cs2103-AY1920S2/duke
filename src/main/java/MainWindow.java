@@ -42,8 +42,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = getResponse(input);
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label userText = new Label(input);
+        Label dukeText = new Label(response);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
@@ -53,6 +53,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return duke.processCommand(input);
     }
 }
