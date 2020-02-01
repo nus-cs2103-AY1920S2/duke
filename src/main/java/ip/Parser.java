@@ -31,10 +31,8 @@ public class Parser {
             }
             command = inputSc.next();
             switch (command) {
-                case "bye":
-                    return new ExitCommand();
-                case "list":
-                    return new ListCommand();
+                case "bye": return new ExitCommand();
+                case "list": return new ListCommand();
                 case "done":
                     if (!inputSc.hasNextInt()) {
                         throw new Duke.DukeException("The index of the task is missing :/");

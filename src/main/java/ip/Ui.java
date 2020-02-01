@@ -7,9 +7,10 @@ import ip.task.TaskList;
 public class Ui {
     private Scanner sc = new Scanner(System.in);
     private static final String LINE = "\t__________________________________________________________";
+
     private void printResponse(String... strs) {
         System.out.println(LINE);
-        for(String s: strs) {
+        for (String s: strs) {
             System.out.println("\t" + s);
         }
         System.out.println(LINE);
@@ -49,7 +50,8 @@ public class Ui {
      * @param numTasks the no. of tasks in the list currently
      */
     public void displayTaskAdded(Task t, int numTasks) {
-        printResponse("Got it, I've added this task:", t.toString(), "Now you have " + numTasks + " task(s) in the list.");
+        printResponse("Got it, I've added this task:", t.toString(),
+                        "Now you have " + numTasks + " task(s) in the list.");
     }
 
     /**
@@ -61,9 +63,10 @@ public class Ui {
             printResponse("There are no tasks in the list! Please add some :)");
             return;
         }
+
         String[] strList = new String[tasks.size()];
-        for (int i=0; i<tasks.size(); i++) {
-            strList[i] = "\t" + (i+1) + ": " + tasks.get(i).toString();
+        for (int i = 0; i < tasks.size(); i++) {
+            strList[i] = "\t" + (i + 1) + ": " + tasks.get(i).toString();
         }
         printResponse(strList);
     }
@@ -89,6 +92,7 @@ public class Ui {
      * @param numTasks the no. of tasks in the list currently
      */
     public void displayTaskDeleted(Task t, int numTasks) {
-        printResponse("Noted, I've removed this task: ", t.toString(), "Now you have " + numTasks + " task(s) in the list.");
+        printResponse("Noted, I've removed this task: ", t.toString(),
+                        "Now you have " + numTasks + " task(s) in the list.");
     }
 }

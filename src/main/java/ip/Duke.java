@@ -4,7 +4,6 @@ import ip.command.Command;
 import ip.task.TaskList;
 
 public class Duke {
-
     public static class DukeException extends Exception {
         public DukeException(String msg) {
             super(msg);
@@ -28,7 +27,9 @@ public class Duke {
             Command c = parser.parse(input);
             if (c != null) {
                 c.execute(tasks, ui);
-                if (c.isExit()) { break; }
+                if (c.isExit()) {
+                    break;
+                }
             }
         }
         storage.writeToFile(tasks);

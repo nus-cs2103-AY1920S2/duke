@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 
 public class Storage {
-    private final String FILENAME = "yourfile.txt";
+    private static final String FILENAME = "yourfile.txt";
 
     /**
      * Write all the user's tasks to local storage
