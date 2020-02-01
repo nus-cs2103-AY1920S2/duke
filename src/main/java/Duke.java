@@ -6,20 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    private List<Task> tasks;
+    private TaskList tasks;
+    private DukeUi ui;
     private Storage storage;
 
     private Duke() {
-        this.tasks = new ArrayList<>();
+        this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
+        this.ui = new DukeUi(System.in, System.out);
     }
 
-    private static void greet() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("By default, your list of tasks will be saved to \"tasks.txt\".");
-        System.out.println("What can I do for you?");
-        System.out.println();
-    }
+
 
     private void echo(Scanner sc) {
         String userCommand = sc.next();
@@ -27,21 +24,21 @@ public class Duke {
         try {
             switch (userCommand) {
             case "list":
-                System.out.println(this.printList());
+                System.out.println(tasks.printList());
                 System.out.println();
                 sc.useDelimiter("\\p{javaWhitespace}+");
-                storage.saveToFile(printList());
+                storage.saveToFile(tasks.printList());
                 echo(sc);
                 break;
 
             case "done":
                 int targetIdx = sc.nextInt() - 1;
-                this.tasks.get(targetIdx).markDone();
+                this.tasks.getTask(targetIdx).markDone();
                 System.out.println("Good job! I've marked this task as done:");
-                System.out.printf("%d. %s\n", targetIdx + 1, tasks.get(targetIdx).toString());
+                System.out.printf("%d. %s\n", targetIdx + 1, tasks.getTask(targetIdx).toString());
                 System.out.println();
                 sc.useDelimiter("\\p{javaWhitespace}+");
-                storage.saveToFile(printList());
+                storage.saveToFile(tasks.printList());
                 echo(sc);
                 break;
 
@@ -53,13 +50,13 @@ public class Duke {
                     throw new DukeException("Uh-oh! Description of todo cannot be empty!");
                 }
                 TodoTask todoTask = TodoTask.createTodoTask(userInput);
-                tasks.add(todoTask);
+                tasks.addTask(todoTask);
                 System.out.println("Added: " + todoTask.toString());
-                System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
+                System.out.printf("Now you have %d task(s) on your list.\n", tasks.getSize());
                 System.out.println();
                 //echo(new Scanner(System.in);
                 sc.useDelimiter("\\p{javaWhitespace}+");
-                storage.saveToFile(printList());
+                storage.saveToFile(tasks.printList());
                 echo(sc);
                 break;
 
@@ -69,9 +66,9 @@ public class Duke {
                 String dateInput = sc.next();
                 LocalDate byDate = LocalDate.parse(dateInput);
                 DeadlineTask deadlineTask = DeadlineTask.createDeadlineTask(action, byDate);
-                tasks.add(deadlineTask);
+                tasks.addTask(deadlineTask);
                 System.out.println("Added: " + deadlineTask.toString());
-                System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
+                System.out.printf("Now you have %d task(s) on your list.\n", tasks.getSize());
                 System.out.println();
                 sc.useDelimiter("\\p{javaWhitespace}+");
                 echo(sc);
@@ -83,28 +80,28 @@ public class Duke {
                 dateInput = sc.next();
                 LocalDate atDate = LocalDate.parse(dateInput);
                 EventTask eventTask = EventTask.createEventTask(action, atDate);
-                tasks.add(eventTask);
+                tasks.addTask(eventTask);
                 System.out.println("Added: " + eventTask.toString());
-                System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
+                System.out.printf("Now you have %d task(s) on your list.\n", tasks.getSize());
                 System.out.println();
                 sc.useDelimiter("\\p{javaWhitespace}+");
-                storage.saveToFile(printList());
+                storage.saveToFile(tasks.printList());
                 echo(sc);
                 break;
 
             case "bye":
-                Duke.printByeMsg();
+                ui.printByeMsg();
                 break;
 
             case "delete":
                 int delIdx = sc.nextInt() - 1;
-                if (delIdx >= tasks.size() || delIdx < 0) {
+                if (delIdx >= tasks.getSize() || delIdx < 0) {
                     throw new DukeException("Oops! Target object is out of bounds!");
                 }
-                Task delTask = tasks.get(delIdx);
-                tasks.remove(delIdx);
+                Task delTask = tasks.getTask(delIdx);
+                tasks.deleteTask(delIdx);
                 System.out.printf("Deleted: %s\n\n", delTask.toString());
-                storage.saveToFile(printList());
+                storage.saveToFile(tasks.printList());
                 echo(sc);
                 break;
 
@@ -120,26 +117,14 @@ public class Duke {
         }
     }
 
-    private String printList() {
-        String output = "";
-        output += ("Here is your list of tasks:\n");
-        for (int i = 0; i < tasks.size(); ++i) {
-            Task task = tasks.get(i);
-            output += String.format("%d. %s\n", i + 1, task.toString());
-        }
-        return output;
-    }
-
-    private static void printByeMsg() {
-        System.out.println("Bye. Hope to see you again soon! :)");
-    }
 
     public static void main(String[] args) {
 
         Duke duke  = new Duke();
 
-        Duke.greet();
+        duke.ui.greet();
 
         duke.echo(new Scanner(System.in));
     }
+
 }
