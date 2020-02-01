@@ -13,17 +13,29 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     public String pathName;
     public ArrayList<Task> taskList;
     public static final String FILE_PATH = "/Users/jadetay/duke/data/tasks.txt";
 
+    /**
+     * Constructor for creating new Storage object and creates new ArrayList to store Tasks.
+     * @param pathName This is the path name of where the file is being stored.
+     */
     public Storage(String pathName) {
         this.pathName = pathName;
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Load the files from txt into TaskList.
+     * @throws LoadException thrown when not able to load file.
+     * @return ArrayList<Task> with Tasks being loaded into an ArrayList.
+     */
     public ArrayList<Task> load() throws LoadException {
         try {
             File file = new File(FILE_PATH);
@@ -68,6 +80,12 @@ public class Storage {
         return this.taskList;
     }
 
+    /**
+     * Save tasks into txt file.
+     * @param tasks This is the ArrayList where the Task is being stored.
+     * @throws SaveException thrown when not able to save tasks into file.
+     * @return Nothing.
+     */
     public static void saveTasks(ArrayList<Task> tasks) throws SaveException {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
@@ -81,6 +99,11 @@ public class Storage {
 
     }
 
+    /**
+     * Save tasks into txt file.
+     * @param task This is the Task to be formatted to save into file.
+     * @return Formatted string.
+     */
     private static String formatSavedFile(Task task) {
         String toAdd = "";
         int isDone = 0;
