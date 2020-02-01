@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Constructor for creating new Event object.
+     *
      * @param description This is the description of the Event.
      * @param date This is the date the Event is on.
      * @param time This is the time the Event is on.
@@ -25,6 +26,7 @@ public class Event extends Task {
 
     /**
      * This method retrieves the date the Event is on.
+     *
      * @return date of the Event.
      */
     public LocalDate getDate() {
@@ -33,6 +35,7 @@ public class Event extends Task {
 
     /**
      * This method retrieves date and time of Event.
+     *
      * @return date and time the Event is on.
      */
     public String getEvent() {
@@ -41,6 +44,7 @@ public class Event extends Task {
 
     /**
      * Returns the String representation of Event.
+     *
      * @return String of the Event.
      */
     @Override

@@ -11,6 +11,7 @@ public class UnknownCommand extends Command {
 
     /**
      * Execute the UnknownCommand. Handles commands not understood by Parser.
+     *
      * @param tasks Unused.
      * @param ui This is to interact with the user interface, printing Unknown command message.
      * @param storage Unused.
@@ -24,6 +25,7 @@ public class UnknownCommand extends Command {
 
     /**
      * UnknownCommand does not cause the programme to exit.
+     *
      * @return boolean false since not ExitCommand.
      */
     @Override

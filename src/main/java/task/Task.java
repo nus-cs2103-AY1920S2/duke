@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Constructor for creating new Task object.
+     *
      * @param description This is the description of the Task.
      */
     public Task(String description) {
@@ -19,6 +20,7 @@ public class Task {
 
     /**
      * This method retrieves the status icon for a Task.
+     *
      * @return String of the icon.
      */
     public String getStatusIcon() {
@@ -27,6 +29,7 @@ public class Task {
 
     /**
      * Mark Task as done.
+     *
      * @return Nothing.
      */
     public void markAsDone() {
@@ -35,6 +38,7 @@ public class Task {
 
     /**
      * Check for done status of a Task.
+     *
      * @return boolean This checks Task is done.
      */
     public boolean isDone() {
@@ -43,6 +47,7 @@ public class Task {
 
     /**
      * Gets description of a Task.
+     *
      * @return String description of the Task.
      */
     public String getDescription() {
@@ -51,6 +56,7 @@ public class Task {
 
     /**
      * Returns the String representation of Task.
+     *
      * @return String of the Task.
      */
     public String toString() {

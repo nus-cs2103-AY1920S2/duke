@@ -26,6 +26,7 @@ public class Parser {
 
     /**
      * Takes in user command input and make sense of it to create the specific Task object and Command object.
+     *
      * @param fullCommand This is the command input of user.
      * @throws DukeException thrown when user input date/time is in the wrong format.
      * @return Command object specified by user input.
@@ -89,6 +90,7 @@ public class Parser {
 
     /**
      * Takes in user command input and make sense of it to create the specific Task object and Command object.
+     *
      * @param fullCommand This is the full command input of user.
      * @param command This is the identifier for the full command.
      * @param fullComArr This is the String array for the broken up full command.

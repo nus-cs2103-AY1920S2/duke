@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for creating new Deadline object.
+     *
      * @param description This is the description of the Deadline.
      * @param date This is the date the Deadline is on.
      * @param time This is the time the Deadline is on.
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 
     /**
      * This method retrieves the date the Deadline is on.
+     *
      * @return date the Deadline is on.
      */
     public LocalDate getDate() {
@@ -33,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * This method retrieves deadline of Deadline.
+     *
      * @return date and time the Deadline is on.
      */
     public String getDeadline() {
@@ -41,6 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the String representation of Deadline.
+     *
      * @return String of the Deadline.
      */
     @Override
