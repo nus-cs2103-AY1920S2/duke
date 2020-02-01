@@ -12,13 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog box consisting of an
  * ImageView to represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    @FXML public Label dialog;
+    @FXML public Text dialog;
     @FXML private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
@@ -30,8 +31,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        displayPicture.setImage(img);
+
         dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /** Flips the dialog box such that the ImageView is on the left and text on the right. */
