@@ -1,1 +1,2 @@
-this is duke
+T/1/borrow book 
+D/0/return book /by: 2019-01-01
