@@ -1,5 +1,7 @@
 [T][✘] aaaaaaaaaaaaaa
 [T][✓] boye
-[E][✘] c  (date: Oct 10 2019)
-[E][✓] d  (date: Feb 2 2019)
-[D][✘] f (by: Jan 1 0001)
+[E][✘] c   (date: Oct 10 2019)
+[E][✓] d   (date: Feb 2 2019)
+[D][✘] f  (by: Jan 1 0001)
+[T][✘] apples
+[E][✘] booooostah wolf (date: Jul 3 0737)

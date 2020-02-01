@@ -65,6 +65,11 @@ public class Ui {
         System.out.println("it's super effective!");
     }
 
+    public static void showFound(TaskList tasks) {
+        System.out.println("Charmander found the following tasks:");
+        System.out.println(tasks);
+    }
+
     public static void showAdd(Task task) {
         System.out.println("Charmander writes a task. You peek over and it says:");
         System.out.println(task);

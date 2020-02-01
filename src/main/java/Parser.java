@@ -33,11 +33,27 @@ public class Parser {
         int index = -1;
         try {
             index = Integer.parseInt(input.split(" ", 2)[1]);
-        } catch (NumberFormatException err) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException err) {
             throw new DukeException("Charmander needs a number!");
         }
 
         return index;
+    }
+
+    /**
+     * Takes user input and returns the word
+     * @param input the user input
+     * @return an int of the index
+     * @throws DukeException if the second word of the input isn't a number
+     */
+    public static String parseWord(String input) throws DukeException {
+        String word;
+        try {
+            word = input.split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException err) {
+            throw new DukeException("Charmander needs a word!");
+        }
+        return word;
     }
 
     /**

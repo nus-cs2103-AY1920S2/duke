@@ -60,6 +60,12 @@ public class Duke {
 
                     Ui.showDelete(deleted);
                     break;
+                case FIND:
+                    String keyword = Parser.parseWord(input);
+                    TaskList found = tasks.find(keyword);
+
+                    Ui.showFound(found);
+                    break;
                 default:
                     Task newTask = Parser.parseTask(input);
                     tasks.add(newTask);

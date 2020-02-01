@@ -64,6 +64,23 @@ public class TaskList {
         tasks.get(index).markAsDone();
     }
 
+    /**
+     * Returns a new TaskList with only tasks containing the keyword
+     * @param keyword keyword to search the tasks with
+     * @return new TaskList with only tasks containing the keyword
+     */
+    public TaskList find(String keyword) {
+        TaskList found = new TaskList();
+
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                found.add(task);
+            }
+        }
+
+        return found;
+    }
+
     @Override
     public String toString() {
         String toReturn = "\n";
