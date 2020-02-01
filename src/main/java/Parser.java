@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * A Parser object deals with making sense of the user commands and can add to or delete tasks from the
+ * A Parser object deals with making sense of the user commands and can find, add or delete tasks from the
  * <code>task list</code> it stores.
  */
 public class Parser {
@@ -77,12 +77,15 @@ public class Parser {
             ui.printList(taskList);
         } else if (command.contains("delete")) {
             String[] strArr = command.split(" ");
-                if (strArr.length == 1) {
-                    throw new DukeException(typeOfError.UNK_TASK_TO_DELETE.ordinal());
-                }
-                Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
-                taskList.remove(currTask);
-                ui.printRemainingList(currTask, taskList);
+            if (strArr.length == 1) {
+                throw new DukeException(typeOfError.UNK_TASK_TO_DELETE.ordinal());
+            }
+            Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
+            taskList.remove(currTask);
+            ui.printRemainingList(currTask, taskList);
+        } else if (command.contains("find")) {
+            String[] strArr = command.split(" ", 2);
+            ui.printTasksFound(taskList, strArr[1]);
         } else {
             throw new DukeException(typeOfError.OTHERS.ordinal());
         }

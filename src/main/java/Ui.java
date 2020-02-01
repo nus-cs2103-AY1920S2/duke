@@ -77,6 +77,21 @@ public class Ui {
     }
 
     /**
+     * Prints out all tasks in task list that contains the keyword the user has inputted.
+     *
+     * @param taskList task list that contains all tasks inputted by user.
+     * @param keyword keyword to find.
+     */
+    public void printTasksFound(ArrayList<Task> taskList, String keyword) {
+        System.out.println("I have found these matching items from your task list:");
+        for (Task task : taskList) {
+            if (task.getCommand().contains(keyword)) {
+                System.out.println(task);
+            }
+        }
+    }
+
+    /**
      * Prints out the whole task list thus far.
      *
      * @param taskList task list that contains all tasks inputted by user.
