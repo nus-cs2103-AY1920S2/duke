@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import duke.dukeException.DukeParseException;
 
+/**
+ * Consist of event description and period of time in which the event happens.
+ */
 public class Event extends Task {
 	private LocalDate date;
 	private String signature = "event";

@@ -7,6 +7,10 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 import duke.dukeException.DukeParseException;
 
+/**
+ * Abstract class Task, provide sharing codes for all task such as
+ * event, deadline, todo. 
+ */
 public abstract class Task {
 	protected String commandText;
 	protected String description;
@@ -58,6 +62,11 @@ public abstract class Task {
 		}
 	}
 
+	/**
+	 * Get task type from a string command. 
+	 * @param string command.
+	 * @return a task type.
+	 */
 	public static TaskType getType(String commandText) {
 		String[] tokens = commandText.split(" ");
 
