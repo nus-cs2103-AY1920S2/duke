@@ -21,7 +21,7 @@ public enum Command {
     TODO("todo"),
     SEARCH("search");
 
-    public final String word;
+    private final String word;
 
     /**
      * Constructor for a custom
@@ -32,5 +32,15 @@ public enum Command {
      */
     Command(String w) {
         this.word = w;
+    }
+
+    /**
+     * Gets the word that this Command represents
+     *
+     * @return Returns a String containing the word
+     * (without any whitespace)
+     */
+    public String getWord() {
+        return this.word;
     }
 }

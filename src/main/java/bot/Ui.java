@@ -205,9 +205,13 @@ public class Ui {
     /**
      * Displays the deleted message
      * (task deletion)
+     *
+     * @param deletedItem String representing the
+     *                    item that was deleted
      */
-    public void showDeleted() {
+    public void showDeleted(String deletedItem) {
         System.out.println(Ui.DELETED_MESSAGE);
+        System.out.println(deletedItem);
     }
 
     /**
@@ -238,7 +242,7 @@ public class Ui {
      * Prints a default message for storing a Task
      *
      * @param storeSize Number of Tasks already in
-     *                  the Storage
+     *                  the TaskStorage
      */
     public void showTaskStoreMessage(int storeSize) {
         System.out.println(Ui.STORE_MESSAGE_ONE + storeSize

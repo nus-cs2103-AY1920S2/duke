@@ -9,20 +9,15 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TodoTest {
-    @Test(expected = InadequateArgumentsException.class)
-    public void createTodo_noArguments_exceptionThrown() throws InadequateArgumentsException {
-        new Todo("todo");
-    }
-
     @Test
-    public void createTodo_withDescription_success() throws InadequateArgumentsException {
-        Todo td = new Todo("todo return book");
+    public void createTodo_withDescription_success() {
+        Todo td = new Todo("return book");
         assertEquals(td.getTaskDetails(), "return book");
     }
 
     @Test
-    public void markAsDone_newTodo_success() throws InadequateArgumentsException {
-        Todo td = new Todo("todo buy groceries");
+    public void markAsDone_newTodo_success() {
+        Todo td = new Todo("buy groceries");
         assertFalse(td.isDone());
         td.markAsDone();
         assertTrue(td.isDone());

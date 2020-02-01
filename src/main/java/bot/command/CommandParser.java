@@ -1,15 +1,62 @@
 package bot.command;
 
+import bot.command.exception.InadequateArgumentsException;
+import bot.command.exception.TooManyArgumentsException;
 import bot.command.exception.UnknownInstructionException;
+
+import bot.command.instruction.Instruction;
+import bot.command.instruction.ParsedInstruction;
+
+import bot.command.instruction.concrete.DeadlineInstruction;
+import bot.command.instruction.concrete.DeleteInstruction;
+import bot.command.instruction.concrete.EventInstruction;
+import bot.command.instruction.concrete.FindKeywordInstruction;
+import bot.command.instruction.concrete.HelloInstruction;
+import bot.command.instruction.concrete.HelpInstruction;
+import bot.command.instruction.concrete.ListInstruction;
+import bot.command.instruction.concrete.MarkDoneInstruction;
+import bot.command.instruction.concrete.MarkNotDoneInstruction;
+import bot.command.instruction.concrete.SearchTimeInstruction;
+import bot.command.instruction.concrete.TerminateInstruction;
+import bot.command.instruction.concrete.TodoInstruction;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Class to contain logic for commands
  * given to bot
- *
- * Todo: Move all parsing logic here
- * Todo: Use new class ParsedInstruction for parsed commands
  */
 public class CommandParser {
+    public static final Instruction[] ALL_INSTRUCTIONS =
+            {
+                    new DeadlineInstruction(Command.DEADLINE),
+                    new DeleteInstruction(Command.DELETE),
+                    new EventInstruction(Command.EVENT),
+                    new FindKeywordInstruction(Command.FIND),
+                    new HelloInstruction(Command.HELLO),
+                    new HelpInstruction(Command.HELP),
+                    new ListInstruction(Command.LIST),
+                    new MarkDoneInstruction(Command.DONE),
+                    new MarkNotDoneInstruction(Command.NOT_DONE),
+                    new SearchTimeInstruction(Command.SEARCH),
+                    new TerminateInstruction(
+                            Command.BYE,
+                            Command.EX,
+                            Command.EXI,
+                            Command.EXIT),
+                    new TodoInstruction(Command.TODO)
+            };
+
+    private static final HashMap<String, Instruction> instrMap =
+            new HashMap<String, Instruction>();
+    private static final HashMap<String, Command> commandMap =
+            new HashMap<String, Command>();
+
+    public CommandParser() {
+        CommandParser.updateMaps();
+    }
+
     /**
      * Main method to accept a command, and
      * generate the corresponding instruction
@@ -19,49 +66,33 @@ public class CommandParser {
      * @return Instruction to the bot, telling
      *         it what to do next
      */
-    public Instruction parse(String command) throws UnknownInstructionException {
+    public ParsedInstruction parse(String command)
+            throws InadequateArgumentsException, TooManyArgumentsException,
+            UnknownInstructionException
+    {
         String firstWord = command.split("\\s+", 2)[0];
-        if (firstWord.equals(Command.BYE.word)
-                || firstWord.equals(Command.EXIT.word)
-                || firstWord.equals(Command.EXI.word)
-                || firstWord.equals(Command.EX.word)
+        if (CommandParser.instrMap.containsKey(firstWord) &&
+                CommandParser.commandMap.containsKey(firstWord)
         ) {
-            return Instruction.TERMINATE;
-        } else if (firstWord.equals(Command.DELETE.word)) {
-            return Instruction.DELETE;
-        } else if (firstWord.equals(Command.DONE.word)) {
-            return Instruction.MARK_DONE;
-        } else if (firstWord.equals(Command.NOT_DONE.word)) {
-            return Instruction.MARK_NOT_DONE;
-        } else if (firstWord.equals(Command.LIST.word)) {
-            return Instruction.READ_STORAGE;
-        } else if (firstWord.equals(Command.DEADLINE.word)) {
-            return Instruction.STORE_DDL;
-        } else if (firstWord.equals(Command.EVENT.word)) {
-            return Instruction.STORE_EVENT;
-        } else if (firstWord.equals(Command.TODO.word)) {
-            return Instruction.STORE_TODO;
-        } else if (firstWord.equals(Command.SEARCH.word)) {
-            return Instruction.SEARCH_STORAGE;
-        } else if (firstWord.equals(Command.FIND.word)) {
-            return Instruction.FIND_KEYWORD;
-        } else if (firstWord.equals(Command.HELP.word)) {
-            return Instruction.HELP;
-        } else if (firstWord.equals(Command.HELLO.word)) {
-            return Instruction.HELLO;
+            return CommandParser.instrMap.get(firstWord)
+                    .parse(command, CommandParser.commandMap.get(firstWord));
         } else {
             throw new UnknownInstructionException(command);
         }
     }
 
-
     /**
-     * Method to throw a command back to
-     * the user
-     *
-     * @param command The command, as a String
+     * Updates the command map and instruction map based
+     * on which Commands are present in the Instructions
+     * within the static Instruction[] allInstructions
      */
-    public void echo(String command) {
-        System.out.println(command);
+    private static void updateMaps() {
+        for (Instruction inst : ALL_INSTRUCTIONS) {
+            Collection<Command> commands = inst.getCommandList();
+            for (Command com : commands) {
+                CommandParser.instrMap.put(com.getWord(), inst);
+                CommandParser.commandMap.put(com.getWord(), com);
+            }
+        }
     }
 }

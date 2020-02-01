@@ -16,15 +16,11 @@ public class Deadline extends Task {
     /**
      * Constructor for a Deadline Task
      *
-     * @param td String representing the lines after
-     *           the deadline instruction
-     *
-     * @throws InadequateArgumentsException When String
-     * td is supplied without the word "/by"
+     * @param td String representing the Deadline description
+     * @param tt String representing the Deadline time
      */
-    public Deadline(String td) throws InadequateArgumentsException {
-        super(Deadline.makeDesc(td.substring(Command.DEADLINE.word.length())),
-                Deadline.makeTime(td.substring(Command.DEADLINE.word.length())));
+    public Deadline(String td, String tt) {
+        this(td, new PrettyTime(tt));
     }
 
     /**
@@ -45,37 +41,5 @@ public class Deadline extends Task {
     @Override
     public String getTimeVerb(String rawTime) {
         return "(by: " + rawTime + ")";
-    }
-
-    /**
-     * Method to format the input String
-     * properly for a Deadline's description
-     *
-     * @param t The input String without
-     *          the "deadline" word
-     *
-     * @return The formatted String description
-     */
-    private static String makeDesc(String t) throws InadequateArgumentsException {
-        int indexFirst = t.indexOf(Deadline.BY);
-        if (indexFirst == -1) {
-            throw new InadequateArgumentsException(Command.DEADLINE.word);
-        }
-        return t.substring(0, indexFirst).stripTrailing().stripLeading();
-    }
-
-    /**
-     * Method to format the input String
-     * properly for a Deadline's time
-     *
-     * @param t The input String without
-     *          the "deadline" word
-     *
-     * @return The formatted PrettyTime
-     */
-    private static PrettyTime makeTime(String t) {
-        int indexLast = t.lastIndexOf(Deadline.BY);
-        return new PrettyTime(t.substring(indexLast + Deadline.BY.length())
-                .stripLeading());
     }
 }

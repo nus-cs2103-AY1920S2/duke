@@ -64,7 +64,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
                 );
                 isCompleted = getCompletionStatus(typeAndDone, Event.TYPE);
             } else if (typeAndDone.startsWith(Todo.TYPE)) {
-                currentTask = Todo.makeTodoRaw(io.nextLine());
+                currentTask = new Todo(io.nextLine());
                 io.nextLine();
                 isCompleted = getCompletionStatus(typeAndDone, Todo.TYPE);
             } else {
