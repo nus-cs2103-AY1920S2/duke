@@ -3,11 +3,13 @@ package ip.command;
 import ip.Ui;
 import ip.task.TaskList;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private int index;
+
     public DoneCommand(int i) {
         this.index = i;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui) {
         if (tasks.size() == 0) {
