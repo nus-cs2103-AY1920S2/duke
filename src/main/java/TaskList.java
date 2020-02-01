@@ -19,7 +19,11 @@ public class TaskList {
      * @return Array of tasks in Duke.
      */
     public ArrayList<Task> getTasks() {
-        return this.tasks;
+        ArrayList<Task> tasksCopy = new ArrayList<>();
+        for (Task t: this.tasks) {
+            tasksCopy.add(t.getCopy());
+        }
+        return tasksCopy;
     }
 
     /**
@@ -62,7 +66,7 @@ public class TaskList {
 
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> tasks = new ArrayList<>();
-        for (Task t: this.arrTasks) {
+        for (Task t: this.tasks) {
             if (t.getDescription().contains(keyword)) {
                 tasks.add(t.getCopy());
             }

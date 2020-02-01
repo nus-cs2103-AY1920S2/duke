@@ -12,3 +12,7 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+src/main/java/*.class
+src/main/java/META-INF/
+data/tasks.txt

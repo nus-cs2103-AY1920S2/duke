@@ -21,9 +21,12 @@ public class TaskListTest {
         this.tasks.addTask(this.deadline);
         this.tasks.addTask(this.event);
         ArrayList<Task> arrTasks = this.tasks.getTasks();
-        assertEquals(this.todo, arrTasks.get(0));
-        assertEquals(this.deadline, arrTasks.get(1));
-        assertEquals(this.event, arrTasks.get(2));
+        assertEquals(arrTasks.get(0) instanceof ToDo, true);
+        assertEquals(arrTasks.get(0).getDescription(), "test todo");
+        assertEquals(arrTasks.get(1) instanceof Deadline, true);
+        assertEquals(arrTasks.get(1).getDescription(), "test deadline");
+        assertEquals(arrTasks.get(2) instanceof Event, true);
+        assertEquals(arrTasks.get(2).getDescription(), "test event");
     }
 
     @Test
