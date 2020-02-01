@@ -9,7 +9,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.nio.file.Paths;
-import parser.Parser;
+import java.util.stream.Collectors;
+
 import storage.Storage;
 import task.Task;
 
@@ -63,14 +64,12 @@ public class Duke extends Application {
      * @param input trimmed user input
      * @throws DukeException Exceptions arising from incorrect user input
      */
-    private void dispatch(String input) throws DukeException {
+    private String dispatch(String input) throws DukeException {
         switch (input) {
             case "list":
-                UI.showList(this.taskList.getAllTaskString());
-                return;
+                return this.taskList.getAllTaskString().stream().collect(Collectors.joining(String.format("%n")));
             case "bye":
-                UI.showBye();
-                return;
+                return "Bye see you again soon!";
             default:
                 // as long as done/delete inside
                 if (Parser.isDoneDelete(input)) {
@@ -88,34 +87,31 @@ public class Duke extends Application {
                     }
                     if (input.contains("done")) {
                         this.taskList.markDone(taskIndex);
-                        UI.out2("Nice! I've marked this task as done:");
-                        UI.out3(this.taskList.getTask(taskIndex));
+                        return String.format("Nice! I've marked this task as done:%n%s", this.taskList.getTask(taskIndex));
                     } else {
                         Task removedTask = this.taskList.popTask(taskIndex);
-                        UI.out2("Noted. I've removed this task:");
-                        UI.out3(removedTask.toString());
-                        UI.out2(
-                                String.format(
-                                        "Now you have %d tasks in the list.",
-                                        this.taskList.size()));
+                        return String.format("Noted. I've removed this task:%n%s%nNow you have %d tasks in the list.",removedTask.toString(),this.taskList.size());
                     }
                 } else if (Parser.isFind(input)) {
                     if (this.taskList.isEmpty()) {
                         throw new DukeException("Task list is empty!");
                     }
                     String searchTerm = input.substring(5).trim();
-                    UI.showSearch(taskList.search(searchTerm));
+                    return taskList.search(searchTerm).stream().collect(Collectors.joining(String.format("%n")));
                 } else {
                     Task newTask = this.taskList.addTask(input);
-                    UI.out2("Got it. I've added this task: ");
-                    UI.out3(newTask.toString());
-                    UI.out2(
-                            String.format(
-                                    "Now you have %d %s in the list.",
-                                    this.taskList.size(),
-                                    this.taskList.size() > 1 ? "tasks" : "task"));
+                    return String.format("Got it. I've added this task:%n%s%nNow you have %d %s in the list,", newTask.toString(), this.taskList.size(), this.taskList.size() > 1 ? "tasks" : "task");
                 }
-                Duke.storage.update(this.taskList.getAllTask());
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            String output = dispatch(input);
+            Duke.storage.update(this.taskList.getAllTask());
+            return output;
+        } catch(DukeException err) {
+            return err.getMessage();
         }
     }
 }

@@ -7,10 +7,10 @@ plugins {
     id 'com.github.sherter.google-java-format' version '0.8'
 }
 
-// javafx {
-//     version = "11.0.2"
-//     modules = [ 'javafx.controls', 'javafx.fxml' ]
-// }
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 
 shadowJar {
     archiveBaseName = "duke"
@@ -69,7 +69,7 @@ repositories {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Main"
 }
 
 run {
