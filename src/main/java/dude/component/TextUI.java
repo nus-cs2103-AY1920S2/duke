@@ -6,13 +6,13 @@ import java.util.Scanner;
  * Console-based implementation of IUserInterface interface.
  * Input is obtained via a Scanner(System.in) and output uses System.out.println under the hood.
  */
-public class UI implements IUserInterface {
+public class TextUI implements IUserInterface {
     private Scanner input;
 
     /**
      * Initializes the Scanner used to read user input from System.in and greets the user.
      */
-    public UI() {
+    public TextUI() {
         this.input = new Scanner(System.in);
         respond("Wassup dude!");
     }

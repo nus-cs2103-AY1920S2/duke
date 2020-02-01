@@ -10,7 +10,7 @@
     <children>
         <Label fx:id="dialog" text="Hello world" wrapText="true">
          <font>
-            <Font name="Lucida Console" size="15.0" />
+            <Font name="Lucida Console" size="10.0" />
          </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>

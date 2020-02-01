@@ -1,4 +1,4 @@
-package dude;
+package dude.component;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ * Exposes input and output methods for application logic classes (i.e. GUI) to interact with.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -41,12 +42,28 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        DialogBox userMessage = DialogBox.getUserDialog(getInput(), userImage);
+        dialogContainer.getChildren().add(userMessage);
+        duke.serve();
         userInput.clear();
+    }
+
+    /**
+     * Obtains input from user.
+     *
+     * @return what user typed into TextField after pressing Send or hitting Enter.
+     */
+    public String getInput() {
+        return userInput.getText();
+    }
+
+    /**
+     * Creates DialogBox containing Duke's response and pushes it onto the dialogContainer.
+     *
+     * @param response the response to the user.
+     */
+    public void displayResponse(String response) {
+        DialogBox reply = DialogBox.getDukeDialog(response, dukeImage);
+        dialogContainer.getChildren().add(reply);
     }
 }

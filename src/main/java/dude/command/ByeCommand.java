@@ -28,8 +28,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, IUserInterface ui, IStorage storage) {
-        storage.saveSession(ui, tasks);
         ui.respond("See ya!");
-        ui.close();
     }
 }
