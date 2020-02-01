@@ -125,6 +125,12 @@ public class Duke {
 
             } catch (DukeException e) {
                 ui.showErrInvalidInput();
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showErrInvalidInput();
+            } catch (IndexOutOfBoundsException e) {
+                ui.showErrInvalidInput();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             getInput = sc.next();
         }
