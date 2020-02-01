@@ -13,6 +13,10 @@ public class Event extends Task {
         this.timePeriod = LocalDateTime.parse(timePeriod, formatter);
     }
 
+    public LocalDateTime getTimePeriod() {
+        return this.timePeriod;
+    }
+
     @Override
     public String toString() {
         return "Event: " + super.toString() + " (at: " + timePeriod + ")";

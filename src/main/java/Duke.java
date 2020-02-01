@@ -5,6 +5,7 @@ import task.Event;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -103,6 +104,37 @@ public class Duke {
                 }
                 catch (Exception e) {
                     System.out.println("\t\t" + "Please do not leave event description as empty.");
+                }
+                break;
+
+            case "whatsup":
+                try {
+                    String[] words = command.split("/on");
+                    LocalDate queryDate = LocalDate.parse(words[1].trim());
+                    ArrayList<Task> resultTasks = new ArrayList<>();
+                    for (Task task: taskList) {
+                        if (task instanceof Deadline &&
+                                ((Deadline) task).getDueDate().toLocalDate().equals(queryDate)) {
+                            resultTasks.add(task);
+                        } else if (task instanceof Event &&
+                                ((Event) task).getTimePeriod().toLocalDate().equals(queryDate)) {
+                            resultTasks.add(task);
+                        }
+                    }
+                    if (resultTasks.isEmpty()) {
+                        System.out.println("You have nothing assigned on that day.");
+                    } else {
+                        System.out.println("\t" + "The tasks you have on that day are:");
+                        for (Task task: resultTasks) {
+                            System.out.println("\t\t" + task);
+                        }
+                    }
+
+                } catch (DateTimeParseException e) {
+                    System.out.println("\t" + "Please write the date in this format:" +
+                            "YYYY-MM-DD");
+                } catch (Exception e) {
+                    System.out.println("Please do not leave the description as empty.");
                 }
                 break;
 

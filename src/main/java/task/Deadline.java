@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.dueDate = LocalDateTime.parse(dueDate, formatter);
     }
 
+    public LocalDateTime getDueDate() {
+        return this.dueDate;
+    }
+
     @Override
     public String toString() {
         return "Deadline: " + super.toString() + " (please complete by " + dueDate + ")";
