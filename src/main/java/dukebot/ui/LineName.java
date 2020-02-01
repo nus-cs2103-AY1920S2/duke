@@ -19,7 +19,6 @@ public enum LineName {
     FIND_SUCCESS,
     HELP,
     INVALID_COMMAND,
-    LIST,
     LIST_EMPTY,
     LIST_EXISTS,
     LOAD_FAIL,

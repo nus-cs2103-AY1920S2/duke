@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * Controller for dukebot.gui.MainWindow. Provides the layout for the other controls.

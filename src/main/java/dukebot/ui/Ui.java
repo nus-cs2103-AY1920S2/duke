@@ -1,25 +1,24 @@
 package dukebot.ui;
 
 import dukebot.gui.DukeExpression;
+import dukebot.gui.DukeVoice;
 import dukebot.tasklist.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LOGO = "*******   **     ** **   ** ********\n"
-            + "/**////** /**    /**/**  ** /**/////\n"
-            + "/**    /**/**    /**/** **  /**\n"
-            + "/**    /**/**    /**/****   /*******\n"
-            + "/**    /**/**    /**/**/**  /**////\n"
-            + "/**    ** /**    /**/**//** /**\n"
-            + "/*******  //******* /** //**/********\n"
-            + "///////    ///////  //   // //////// \n";
-    private boolean sayFirst = true;
+    private static final String LOGO = " ____, __   _, __  _, ____,\n" +
+            "(-|  \\(-|  |  (-|_/  (-|_, \n" +
+            " _|__/  |__|_, _| \\_, _|__,\n" +
+            "(             (      (    \n";
     private final Scanner sc;
     private final boolean withGui;
+    private boolean sayFirst = true;
     private StringBuilder guiOutput = new StringBuilder();
     private DukeExpression dukeExpression = DukeExpression.HAPPY;
+    private boolean hasVoice = true;
+    private DukeVoice dukeVoice = DukeVoice.NO_VOICE;
 
     /**
      * Generates the Ui with GUI.
@@ -50,7 +49,8 @@ public class Ui {
      * Prints welcome message for GUI.
      */
     public void showWelcomeGui() {
-        dukeSays("\nYahallo! Duke's name is \n" + LOGO);
+        dukeVoice = DukeVoice.HELLO;
+        dukeSays("Yahallo! Duke's name is \n" + LOGO);
         dukeSays("Master! Duke's so glad Master used Duke!");
         dukeSays("What will Master do to Duke today?");
     }
@@ -77,6 +77,7 @@ public class Ui {
         dukeExpression = DukeExpression.HAPPY;
         switch (lineName) {
         case HELP:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.WHAT_YOU_LIKE);
             dukeExpression = DukeExpression.BLUSH;
             dukeSays("Master wants to know more about Duke?");
             dukeSays("Exposing myself to master... Duke's so embarrassed...");
@@ -93,25 +94,25 @@ public class Ui {
             );
             break;
         case NO_INPUT:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.WHAT, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke can't hear anything... Is Master all right?");
             break;
         case SAY_DUKE:
             dukeSays("Master!");
             break;
-        case LIST:
+        case LIST_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
+            dukeSays("Huh there are no tasks! Master is so forgetful...");
+            break;
+        case LIST_EXISTS:
             dukeExpression = DukeExpression.SURPRISED;
             dukeSays("Master already forgotten what Master wanted to do?!");
             dukeSays("Duke has no choice but to remind Master then!");
             dukeSays("These are the tasks which Master forgot:");
             break;
-        case LIST_EMPTY:
-            dukeSays("Huh there are no tasks! Master is so forgetful...");
-            break;
-        case LIST_EXISTS:
-            dukeSays("These are the tasks which Master forgot:");
-            break;
         case DONE_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.WHAT, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't think Master has done anything yet...");
             break;
@@ -120,6 +121,7 @@ public class Ui {
             dukeSays("Duke can't seem to recall that item...");
             break;
         case DONE_ALREADY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
             dukeExpression = DukeExpression.SURPRISED;
             dukeSays("Didn't Master already do that?");
             break;
@@ -127,57 +129,71 @@ public class Ui {
             // use another function;
             break;
         case NOT_A_NUMBER:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.WHAT, DukeVoice.THING_YOURE_INTO);
             dukeExpression = DukeExpression.BLUSH;
             dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");
             break;
         case DELETE_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Master, please don't delete Duke...");
             break;
         case DELETE_OUT_OF_INDEX:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("That item already doesn't exist in Duke's memory...");
             break;
         case TODO_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't see any description of the todo...");
             break;
         case DEADLINE_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't see any deadline...");
             break;
         case DATE_TIME_PARSE_FAIL:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Master gave a date that Duke cannot read...");
             break;
         case DEADLINE_BY_MISSING:
-            dukeExpression = DukeExpression.SAD;
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
+            dukeExpression = DukeExpression.BLUSH;
             dukeSays("Master, use '/by' to indicate deadline, Duke wouldn't know otherwise...");
             break;
         case EVENT_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't see any start time...");
             break;
         case EVENT_AT_MISSING:
-            dukeExpression = DukeExpression.SAD;
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
+            dukeExpression = DukeExpression.BLUSH;
             dukeSays("Master, use '/at' to indicate starting time, Duke wouldn't know otherwise...");
             break;
         case FIND_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("There's nothing for Duke to find...");
             break;
         case FIND_FAIL:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("There isn't any tasks which matches Master's queries.");
             break;
         case FIND_SUCCESS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.HEY);
             dukeSays("Master! Duke found all these tasks!");
             break;
         case INVALID_COMMAND:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.WHAT, DukeVoice.OKAY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't understand Master...");
             break;
         case EXIT:
+            dukeVoice = DukeVoice.GOODBYE;
             dukeExpression = DukeExpression.SAD;
             dukeSays("Is Master leaving already?");
             dukeSays("Please come back and play with Duke soon...");
@@ -227,6 +243,8 @@ public class Ui {
      * @param task Task to use.
      */
     public void doneSuccess(Task task) {
+        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
+        dukeExpression = DukeExpression.HAPPY;
         dukeSays("So Master finally completed " + task + "?");
         dukeSays("Duke's really proud of Master!");
     }
@@ -237,6 +255,8 @@ public class Ui {
      * @param task Task to use.
      */
     public void newTask(Task task) {
+        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO, DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
+        dukeExpression = DukeExpression.BLUSH;
         dukeSays("So Master has " + task.getType() + ": " + task + "...");
     }
 
@@ -246,6 +266,7 @@ public class Ui {
      * @param task Task to use.
      */
     public void deleteSuccess(Task task) {
+        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO, DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
         dukeExpression = DukeExpression.BLUSH;
         dukeSays("For Master, Duke can forget anything, even the:");
         dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
@@ -287,5 +308,13 @@ public class Ui {
 
     public DukeExpression getDukeExpression() {
         return dukeExpression;
+    }
+
+    public DukeVoice getDukeVoice() {
+        if (hasVoice) {
+            return dukeVoice;
+        } else {
+            return DukeVoice.NO_VOICE;
+        }
     }
 }

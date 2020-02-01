@@ -33,6 +33,7 @@ public class Duke {
         storage = new Storage(PATH);
         ui = new Ui(true);
         ui.showWelcomeGui();
+        ui.getDukeVoice().playVoice();
         try {
             ArrayList<Task> taskArrayList = storage.loadFromFile();
             tasks = new TaskList(taskArrayList);
@@ -72,6 +73,7 @@ public class Duke {
                 }
             } ).start();
         }
+        ui.getDukeVoice().playVoice();
         return ui.getGuiOutput();
     }
 
