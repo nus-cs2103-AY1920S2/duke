@@ -1,8 +1,6 @@
 package duke.task;
 
-/**
- * Represents tasks without any date/time attached to it e.g., visit new theme park.
- */
+/** Represents tasks without any date/time attached to it e.g., visit new theme park. */
 public class Todo implements Task {
     protected String description;
     protected boolean isDone;
@@ -11,6 +9,12 @@ public class Todo implements Task {
         this(description, false);
     }
 
+    /**
+     * Returns a new Todo instance.
+     *
+     * @param description information about Todo
+     * @param isDone completion status of Todo
+     */
     public Todo(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -34,14 +38,15 @@ public class Todo implements Task {
 
     /**
      * Returns a String (Unicode Character) based on duke.task.Task completion status.
+     *
      * @return String representing Unicode character for check mark or cross
      */
     @Override
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return "\u2713"; // Check mark symbol
         } else {
-            return "\u2718";
+            return "\u2718"; // Cross mark symbol
         }
     }
 
@@ -58,6 +63,7 @@ public class Todo implements Task {
 
     /**
      * To return a String representation of duke.task.Todo instance
+     *
      * @return String representing task in save file
      */
     @Override

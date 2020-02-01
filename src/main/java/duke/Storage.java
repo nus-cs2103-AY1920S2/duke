@@ -21,22 +21,30 @@ import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
- * Saves files in a directory data under the project root path
+ * Saves files in a directory data under the project root path.
  */
 public class Storage {
-    protected final String FILE_SEPARATOR = File.separator;
+    protected String fileSeparator = File.separator;
     // Map project path to the directory from which you run your program
-    public final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
-    protected String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
+    protected String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    protected String dataDirectoryPath = projectRootPath + fileSeparator + "data";
     protected String saveFilePath;
 
+    /**
+     * Returns a new Storage instance.
+     *
+     * @param fileName file used to save user data
+     */
     public Storage(String fileName) {
-        saveFilePath = dataDirectoryPath + FILE_SEPARATOR + fileName;
+        saveFilePath = dataDirectoryPath + fileSeparator + fileName;
         // Setup data directory
         setupDataDirectory();
         createSaveFile();
     }
 
+    /**
+     * Creates the required directories for saving user data.
+     */
     protected void setupDataDirectory() {
         try {
             // Create directories along path if they don't exist
@@ -46,6 +54,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new save file in the path created and stored by the Storage constructor.
+     */
     protected void createSaveFile() {
         try {
             // Create a new file, exception will be thrown if file already exists
@@ -57,6 +68,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of Tasks that represent the tasks saved in the save file.
+     *
+     * @return list of Tasks saved in specified save file when the Storage instance is created
+     * @throws DukeException the given save file could not be loaded
+     */
     protected List<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader saveFile = new BufferedReader(new FileReader(saveFilePath))) {
@@ -97,6 +114,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the lists of Tasks stored in the save file.
+     *
+     * @param tasks list of Tasks to be saved
+     */
     public void updateSaveFile(TaskList tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(saveFilePath))) {
             // Write all tasks to file

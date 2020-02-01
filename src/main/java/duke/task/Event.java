@@ -17,6 +17,14 @@ public class Event implements Task {
         this(description, eventTime, false);
     }
 
+    /**
+     * Returns an Event instance.
+     *
+     * @param description details about Event
+     * @param eventTime time of Event
+     * @param isDone completion status of Event
+     * @throws DateTimeException given event time is not in a valid date format
+     */
     public Event(String description, String eventTime, boolean isDone) throws DateTimeException {
         this.description = description;
         this.eventTime = LocalDate.parse(eventTime);
@@ -29,14 +37,15 @@ public class Event implements Task {
 
     /**
      * Returns a String (Unicode Character) based on duke.task.Task completion status.
+     *
      * @return String representing Unicode character for check mark or cross
      */
     @Override
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return "\u2713"; // Check mark symbol
         } else {
-            return "\u2718";
+            return "\u2718"; // Cross mark symbol
         }
     }
 
@@ -72,6 +81,7 @@ public class Event implements Task {
 
     /**
      * To return a String representation of duke.task.Event instance
+     *
      * @return String representing task in save file
      */
     @Override

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represent tasks that need to be done before a specific date/time
- * e.g., submit report by 11/10/2019 5pm
+ * e.g., submit report by 11/10/2019 5pm.
  */
 public class Deadline implements Task {
     protected String description;
@@ -17,6 +17,14 @@ public class Deadline implements Task {
         this(description, deadline, false);
     }
 
+    /**
+     * Returns a new Deadline instance.
+     *
+     * @param description details about Deadline
+     * @param deadline due date of Deadline
+     * @param isDone completion status of Deadline
+     * @throws DateTimeException given deadline is not in a valid date format
+     */
     public Deadline(String description, String deadline, boolean isDone) throws DateTimeException {
         this.description = description;
         this.deadline = LocalDate.parse(deadline);
@@ -29,14 +37,15 @@ public class Deadline implements Task {
 
     /**
      * Returns a String (Unicode Character) based on duke.task.Task completion status.
+     *
      * @return String representing Unicode character for check mark or cross
      */
     @Override
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return "\u2713"; // Check mark symbol
         } else {
-            return "\u2718";
+            return "\u2718"; // Cross mark symbol
         }
     }
 
@@ -73,6 +82,7 @@ public class Deadline implements Task {
 
     /**
      * To return a String representation of duke.task.Deadline instance
+     *
      * @return String representing task in save file
      */
     @Override
