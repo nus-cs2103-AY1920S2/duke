@@ -51,4 +51,12 @@ public class Storage<T extends Task> {
 			this.containers.get(index).markAsDone();
 		}
 	}
+
+	public List<T> getSubset(List<Integer> needy) {
+		List result = new ArrayList<T>();
+		for (Integer index: needy) {
+			result.add(this.containers.get(index));
+		}
+		return result;
+	}
 }

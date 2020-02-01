@@ -14,13 +14,13 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
+import dukeException.DukeParseException;
 
 public class Duke {
 	static final String separation = "_________________________________________________";
 	static final String greetingMessage = "Salue! Je suis Duke. \nWhat can I do for you?";
 	static final String goodByeMessage = "Au revoir!";
 	static final String pathToData = "data/storage.txt";
-	
 
 	static Optional<List<Integer>> getDoneCommand(String command) {
 		String[] tokens = command.split(" ");
@@ -32,13 +32,16 @@ public class Duke {
 		}
 		List result = new ArrayList<Integer>();
 		for (int i = 1; i < tokens.length; i++) {
+			System.out.println(i);
 			try {
 				int index = Integer.parseInt(tokens[i]);
 				result.add(index - 1);
+				System.out.println(index);
 			} catch (NumberFormatException e) {
 				return Optional.empty();
 			}
 		}
+		System.out.println(result.size());
 		return Optional.of(result);
 	}
 
@@ -126,6 +129,7 @@ public class Duke {
 
 		Interpreter.printMessage(greetingMessage);
 		Storage storage = new Storage<Task>(getData());
+		Interpreter.printUsage();
 		Scanner cin = new Scanner(System.in);
 
 		while (true) {
@@ -145,20 +149,24 @@ public class Duke {
 
 				case ADD:
 					Function<String, Optional<Task>> getTask = (String text) -> {
-						TaskType taskType = Task.getType(text);
-						switch (taskType) {
-							case TODO:
-								return Optional.of(new ToDo(text));
-							case EVENT:
-								return Optional.of(new Event(text));
-							case DEADLINE:
-								return Optional.of(new Deadline(text));
-							default:
-								System.out.println("Adding command is wrong!");
-								return Optional.empty();
+						try {
+							TaskType taskType = Task.getType(text);
+							switch (taskType) {
+								case TODO:
+									return Optional.of(new ToDo(text));
+								case EVENT:
+									return Optional.of(new Event(text));
+								case DEADLINE:
+									return Optional.of(new Deadline(text));
+								default:
+									System.out.println("Adding command is wrong!");
+									return Optional.empty();
+							}
+						} catch (DukeParseException e) {
+							System.out.println(e);
+							return Optional.empty();
 						}
 					};
-
 					Optional<Task> currentTask = getTask.apply(commandText);
 					if (currentTask.isEmpty()) {
 						break;
@@ -182,6 +190,9 @@ public class Duke {
 					Optional<List<Integer>> indexes = getDoneCommand(commandText);
 					if (indexes.isPresent()) {
 						storage.markAsDone(indexes.get());
+						Interpreter.printDoneList(storage.getSubset(indexes.get()));
+					} else {
+						System.out.println("Done command is wrong");
 					}
 					break;
 				default:

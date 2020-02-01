@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
+import dukeException.DukeParseException;
 
 public abstract class Task {
 	protected String commandText;
@@ -12,7 +13,7 @@ public abstract class Task {
 	boolean isDone = false;
 	protected List<String> remainingTokens = new ArrayList<>();
 
-	public Task(String commandText) {
+	public Task(String commandText) throws DukeParseException {
 		this.commandText = commandText;
 
 		//Parse this task description
@@ -40,16 +41,20 @@ public abstract class Task {
 		}
 	}	
 
-	public Task(JSONObject data) throws Exception {
-		this.description = (String) data.get("description");
-		this.commandText = (String) data.get("commandText");
-		this.isDone = ((String) data.get("isDone")).equals("true") ? true : false;
-		JSONArray tokensJson = (JSONArray) data.get("tokens");
-		remainingTokens = new ArrayList<String>();
+	public Task(JSONObject data) throws DukeParseException {
+		try {
+			this.description = (String) data.get("description");
+			this.commandText = (String) data.get("commandText");
+			this.isDone = ((String) data.get("isDone")).equals("true") ? true : false;
+			JSONArray tokensJson = (JSONArray) data.get("tokens");
+			remainingTokens = new ArrayList<String>();
 
-		for (int i = 0; i < tokensJson.size(); i++) {
-			JSONObject record = (JSONObject) tokensJson.get(i);
-			remainingTokens.add((String) record.get("value"));
+			for (int i = 0; i < tokensJson.size(); i++) {
+				JSONObject record = (JSONObject) tokensJson.get(i);
+				remainingTokens.add((String) record.get("value"));
+			}
+		} catch (Exception e) {
+			throw new DukeParseException("Fail to parse json to a task at task class");
 		}
 	}
 
@@ -72,7 +77,7 @@ public abstract class Task {
 	}
 
 	public String getStatusIcon() {
-		return (isDone ? "[\u2713]" : "[\u2718] "); //return tick or X symbols
+		return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
 	}
 
 	public void markAsDone() {
@@ -97,6 +102,10 @@ public abstract class Task {
 		}
 		result.put("tokens", tokens);
 		return result;
+	}
+
+	protected List<String> getListRemainingTokens() {
+		return this.remainingTokens;
 	}
 
 	protected String getRemainingTokens() {
