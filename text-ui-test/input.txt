@@ -1,11 +1,17 @@
 Hello
 todo Go for a run
 event Go for CS2103 class /at Friday 2-4pm
-deadline Finish Week 2 IP /by Thursday 11:59pm
+deadline Finish Week 2 IP /by Thursday
 list
 done 1
 list
 todo Commit these changes
+list
+deadline Test this program /by 10/2/20 1600
+list
+help
+find run
+delete 2
 list
 Goodbye
 bye
