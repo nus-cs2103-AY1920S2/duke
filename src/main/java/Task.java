@@ -15,6 +15,13 @@ public class Task {
         this.done = false;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getDone() {
+        return this.done;
+    }
     /**
      * Toggle status of the done attribute of task
      */

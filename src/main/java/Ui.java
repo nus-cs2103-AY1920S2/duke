@@ -48,6 +48,15 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    public static void printFilteredList(ArrayList<Task> filteredList) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     Here are the matching tasks in your list:");
+        for (Task s : filteredList) {
+            System.out.println("     " + (filteredList.indexOf(s)+1) + ". " + s);
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
     /**
      * Print exception
      * @param e Exception to be printed

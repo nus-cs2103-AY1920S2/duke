@@ -25,6 +25,9 @@ public class Parser {
                     int taskNum = Integer.parseInt(inputArr[1]);
                     taskList.taskDone(taskNum);
                     storage.updateFile(taskList);
+                } else if (input.contains("find")) {
+                    String[] inputArr = input.split(" ", 2);
+                    taskList.findTasks(inputArr[1]);
                 } else if (input.contains("todo")) {
                     if (input.split(" ").length == 1) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");

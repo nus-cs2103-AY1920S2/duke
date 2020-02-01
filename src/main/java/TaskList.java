@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -37,5 +38,15 @@ public class TaskList {
     public void addList(Task task) {
         arrList.add(task);
         Ui.printAdd(task, arrList);
+    }
+
+    public void findTasks(String taskSubString) {
+        ArrayList<Task> filteredList = new ArrayList<Task>();
+        for (Task t : arrList) {
+            if (t.getName().contains(taskSubString)) {
+                filteredList.add(t);
+            }
+        }
+        Ui.printFilteredList(filteredList);
     }
 }
