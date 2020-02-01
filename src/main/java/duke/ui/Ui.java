@@ -3,6 +3,7 @@ package duke.ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+import org.w3c.dom.ls.LSException;
 
 import java.util.Scanner;
 
@@ -38,10 +39,12 @@ public class Ui {
      *
      * @param message message given
      */
-    private void showToUser(String... message) {
+    private String showToUser(String... message) {
+        StringBuilder formatted = new StringBuilder();
         for (String m : message) {
-            System.out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+            formatted.append(m).append(LS);
         }
+        return formatted.toString();
     }
 
     /**
@@ -63,8 +66,8 @@ public class Ui {
     /**
      * Show loading error to user.
      */
-    public void showLoadingError() {
-        showToUser(LOADING_ERROR);
+    public String showLoadingError() {
+        return showToUser(LOADING_ERROR);
     }
 
     /**
@@ -79,8 +82,8 @@ public class Ui {
      *
      * @param ex exception which contain error message
      */
-    public void showError(DukeException ex) {
-        showToUser(ex.getMessage());
+    public String showError(DukeException ex) {
+        return showToUser(ex.getMessage());
     }
 
     /**
@@ -89,8 +92,8 @@ public class Ui {
      * @param task new task
      * @param totalTasks current total task in integer
      */
-    public void showAddTask(Task task, int totalTasks) {
-        showToUser(ADD_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
+    public String showAddTask(Task task, int totalTasks) {
+        return showToUser(ADD_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
     }
 
     /**
@@ -99,8 +102,8 @@ public class Ui {
      * @param task deleted task
      * @param totalTasks current total task in integer
      */
-    public void showDeleteTask(Task task, int totalTasks) {
-        showToUser(DELETE_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
+    public String showDeleteTask(Task task, int totalTasks) {
+        return showToUser(DELETE_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
     }
 
     /**
@@ -108,15 +111,15 @@ public class Ui {
      *
      * @param task done task
      */
-    public void showDone(Task task) {
-        showToUser(DONE_TASK, task.toString());
+    public String showDone(Task task) {
+        return showToUser(DONE_TASK, task.toString());
     }
 
     /**
      * Show exit message to user.
      */
-    public void showExit() {
-        showToUser(EXIT_TASK);
+    public String showExit() {
+        return showToUser(EXIT_TASK);
     }
 
     /**
@@ -124,8 +127,8 @@ public class Ui {
      *
      * @param message message of invalid command
      */
-    public void showInvalid(String message) {
-        showToUser(INVALID_TASK, message);
+    public String showInvalid(String message) {
+        return showToUser(INVALID_TASK, message);
     }
 
     /**
@@ -133,8 +136,8 @@ public class Ui {
      *
      * @param tasks list of all tasks
      */
-    public void showAllTask(TaskList tasks) {
-        showToUser(getAllTaskForView(tasks));
+    public String showAllTask(TaskList tasks) {
+        return showToUser(getAllTaskForView(tasks));
     }
 
     /**
@@ -142,8 +145,8 @@ public class Ui {
      *
      * @param tasks list of find tasks
      */
-    public void showFindTask(TaskList tasks) {
-        showToUser(FIND_TASK, getAllTaskForView(tasks));
+    public String showFindTask(TaskList tasks) {
+        return showToUser(FIND_TASK, getAllTaskForView(tasks));
     }
 
     /**

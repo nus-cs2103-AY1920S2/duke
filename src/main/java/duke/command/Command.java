@@ -35,7 +35,7 @@ public class Command {
      *
      * @throws DukeException the exception for the unimplemented method
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         throw new DukeException("This method is to be implemented by child classes");
     }
 }

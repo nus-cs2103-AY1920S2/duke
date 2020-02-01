@@ -32,6 +32,10 @@ public class Duke {
         }
     }
 
+    public Duke() {
+
+    }
+
     /**
      * Run the program until termination.
      */
@@ -56,5 +60,20 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String temp = c.execute(tasks, ui, storage);
+            //System.out.println(temp);
+            return temp;
+        } catch (DukeException ex) {
+            return ui.showError(ex);
+        }
     }
 }
