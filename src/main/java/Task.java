@@ -39,7 +39,7 @@ public class Task implements Serializable {
      * @return tick or cross.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "O" : "X");
     }
 
     @Override
