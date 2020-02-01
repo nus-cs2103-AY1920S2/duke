@@ -5,16 +5,21 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks
+ * Represents a list of tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates an instance of TaskList.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
+     * Creates an instance of TaskList with existing tasks.
+     *
      * @param tasks list of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -70,7 +75,7 @@ public class TaskList {
      * @return deleted task
      * @throws DukeException exception for error while the given index not exist
      */
-    public Task deleteTaskByIndex(int index) throws DukeException{
+    public Task deleteTaskByIndex(int index) throws DukeException {
         try {
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException ex) {

@@ -9,10 +9,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType taskType;
-    protected final static DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    protected final static DateTimeFormatter OUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mm a");
+    protected static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected static final DateTimeFormatter OUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mm a");
 
     /**
+     * Creates an instances of Task.
+     *
      * @param description description of the task
      */
     public Task(String description) {
@@ -27,7 +29,7 @@ public class Task {
      * @return task status icon
      */
     public String getStatusIcon() {
-        return (isDone ? "[y]": "[n]");
+        return (isDone ? "[y]" : "[n]");
     }
 
     /**

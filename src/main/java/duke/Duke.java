@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
@@ -17,7 +17,9 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Setup the list of task based on the local file
+     * Setup the list of task based on the local file.
+     *
+     * @param filePath The filepath of the lacal file to store the tasks
      */
     public Duke(String filePath) {
         ui = new Ui();

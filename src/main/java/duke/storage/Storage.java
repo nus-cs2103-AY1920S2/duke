@@ -1,7 +1,11 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,11 +20,13 @@ import java.util.Scanner;
 /**
  * Represents the file used to store existing task list data.
  */
-public class Storage{
-    private final static DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+public class Storage {
+    private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private String filePath;
 
     /**
+     * Creates an instance of Storage.
+     *
      * @param filePath filepath of the local file to store data
      */
     public Storage(String filePath) {
@@ -118,7 +124,7 @@ public class Storage{
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
-                String temp[] = s.nextLine().split(" \\| ");
+                String[] temp = s.nextLine().split(" \\| ");
                 switch (temp[0]) {
 
                 case "T":
@@ -137,6 +143,9 @@ public class Storage{
                     Task deadline = new Deadline(temp[2], LocalDateTime.parse(temp[3], IN_FORMATTER));
                     checkMarkDone(deadline, temp[1]);
                     tasks.add(deadline);
+                    break;
+
+                default:
                     break;
                 }
             }

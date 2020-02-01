@@ -17,6 +17,8 @@ public class DeadlineCommand extends Command {
     private LocalDateTime dateTime;
 
     /**
+     * Create instance of DeadlineCommand.
+     *
      * @param description Description of the deadline task
      * @param dateTime Date and time of the deadline task
      */

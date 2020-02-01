@@ -8,7 +8,13 @@ import duke.ui.Ui;
  * Represents an exit/bye command. Upon execution, produces some feedback to the user.
  */
 public class ExitCommand extends Command {
-    public ExitCommand() {}
+
+    /**
+     * Create instance of ExitCommand.
+     */
+    public ExitCommand() {
+
+    }
 
     @Override
     public boolean isExit() {

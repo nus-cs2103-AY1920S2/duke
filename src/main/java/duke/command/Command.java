@@ -9,7 +9,13 @@ import duke.ui.Ui;
  * Represents an executable command.
  */
 public class Command {
-    public Command() {}
+
+    /**
+     * Create instance of Command.
+     */
+    public Command() {
+
+    }
 
     /**
      * Check and return whether the command is exit command.
@@ -26,6 +32,8 @@ public class Command {
      * @param tasks TaskList which contain all existing task
      * @param ui Ui which handle ui operation
      * @param storage Storage to perform read and write operation to the file
+     *
+     * @throws DukeException the exception for the unimplemented method
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         throw new DukeException("This method is to be implemented by child classes");

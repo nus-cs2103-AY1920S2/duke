@@ -13,6 +13,8 @@ public class DeleteCommand extends Command {
     private int index;
 
     /**
+     * Create instance of DeleteCommand.
+     *
      * @param index Index of the delete task
      */
     public DeleteCommand(int index) {

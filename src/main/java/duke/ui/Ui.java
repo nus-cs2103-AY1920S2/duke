@@ -6,13 +6,16 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Represent the user interface for the program.
+ */
 public class Ui {
     private static final String WELCOME_MESSAGE = " ____        _        \n"
-                                                + "|  _ \\ _   _| | _____ \n"
-                                                + "| | | | | | | |/ / _ \\\n"
-                                                + "| |_| | |_| |   <  __/\n"
-                                                + "|____/ \\__,_|_|\\_\\___|\n"
-                                                + "What can I do for you? :)\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n"
+            + "What can I do for you? :)\n";
     private static final String LINE_PREFIX = "  ";
     private static final String LS = System.lineSeparator();
     private static final String DIVIDER = "_________________________________________________________________________";
@@ -117,7 +120,7 @@ public class Ui {
     }
 
     /**
-     * Show invalid command message to user
+     * Show invalid command message to user.
      *
      * @param message message of invalid command
      */

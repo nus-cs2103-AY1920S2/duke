@@ -9,6 +9,8 @@ public class Event extends Task {
     private LocalDateTime dateTime;
 
     /**
+     * Creates an instances of Event.
+     *
      * @param description description of task
      * @param dateTime date and time of task
      */

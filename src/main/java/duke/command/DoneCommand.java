@@ -13,6 +13,8 @@ public class DoneCommand extends Command {
     private int index;
 
     /**
+     * Create instance of DoneCommand.
+     *
      * @param index Index of the done task
      */
     public DoneCommand(int index) {

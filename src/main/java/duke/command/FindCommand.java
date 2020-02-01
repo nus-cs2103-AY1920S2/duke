@@ -12,6 +12,8 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
+     * Create instance of FindCommand.
+     *
      * @param keyword keyword to find
      */
     public FindCommand(String keyword) {

@@ -9,6 +9,8 @@ public class Deadline extends Task {
     private LocalDateTime dateTime;
 
     /**
+     * Creates an instances of Deadline.
+     *
      * @param description description of task
      * @param dateTime date and time of task
      */

@@ -1,6 +1,16 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.EventCommand;
+import duke.command.DeadlineCommand;
+import duke.command.TodoCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,12 +19,12 @@ import java.time.format.DateTimeParseException;
  * Parses user input.
  */
 public class Parser {
-    private final static String UNKNOWN_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-    private final static String EXTRA_ERROR = "The command contains extra information!";
-    private final static String INCOMPLETE_ERROR = "The command is too short and incomplete!";
-    private final static String NUMBER_ERROR = "Please give the number of task!";
-    private final static String DATETIME_ERROR = "Please follow this format \"31/01/2020 2300\" for date and time!";
-    private final static DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final String UNKNOWN_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String EXTRA_ERROR = "The command contains extra information!";
+    private static final String INCOMPLETE_ERROR = "The command is too short and incomplete!";
+    private static final String NUMBER_ERROR = "Please give the number of task!";
+    private static final String DATETIME_ERROR = "Please follow this format \"31/01/2020 2300\" for date and time!";
+    private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Parse user input into command for execution.

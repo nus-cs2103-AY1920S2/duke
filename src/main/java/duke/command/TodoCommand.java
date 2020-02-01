@@ -14,6 +14,8 @@ public class TodoCommand extends Command {
     private String description;
 
     /**
+     * Create instance of TodoCommand.
+     *
      * @param description Description of the todo task
      */
     public TodoCommand(String description) {
