@@ -24,7 +24,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 ## Adding Gradle Support to Your Project 
 
-1. Pull the branch named `gradle`. Merge it to the `master` branch. This will add the Gradle wrapper to your project.
+1. Pull the branch named `gradle`. Merge it to the `master` branch. This willadd the Gradle wrapper to your project.
    ```
    git checkout --track origin/gradle
    git checkout master
