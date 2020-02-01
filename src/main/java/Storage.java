@@ -22,7 +22,7 @@ public class Storage {
      * @param taskElements Array consisting of the task type, task description and task date (if present).
      * @return A Task object representing the task stored in the file.
      */
-    private Task getNextTask(String[] taskElements) {
+    private Task getNextTask(String[] taskElements) throws LoadingException {
         Task t = null;
         switch (taskElements[0]) {
         case "T":
@@ -45,6 +45,8 @@ public class Storage {
                 t.setDone();
             }
             break;
+        default:
+            throw new LoadingException();
         }
         return t;
     }
