@@ -1,4 +1,3 @@
-import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class Task {

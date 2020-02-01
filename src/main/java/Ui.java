@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 
 public class Ui {
-    public Ui() {
-
-    }
 
     public void showWelcome() {
         System.out.println("Hi! I am Duke! What would you like to tell me today?:)");
