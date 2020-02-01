@@ -1,7 +1,7 @@
 package dukeparser;
 
-import dukecommand.*;
 import dukeexceptions.DukeException;
+import dukecommand.*;
 import dukeexceptions.InvalidFormatException;
 import dukeexceptions.MissingDescriptionException;
 import dukeexceptions.MissingTimingException;
@@ -15,11 +15,21 @@ import dukeui.DukeUI;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Used to parse in each command input and returns a corresponding command object
+ */
+
 public class DukeParser {
 
     public DukeParser() {
     }
 
+    /**
+     * Drives the main functioning of DukeParser
+     * Splits the input String by ' ' and obtains the Command
+     * For each command type, creates and returns their respective Command
+     * @param inputString String of user-typed command
+     */
     public DukeCommand handleCommand(String inputString) throws DukeException {
         String[] splitS = inputString.split(" ");
         String command = splitS[0];
@@ -84,7 +94,14 @@ public class DukeParser {
         return returnCommand;
     }
 
-    public LocalDate findDeadline(String inputString) throws MissingTimingException, InvalidFormatException {
+    /**
+     * Returns a LocalDate object from the /by or /at part of the input string
+     * @param inputString String of the user's input
+     * @return LocalDate representing the deadline of the Deadline task or the Event task
+     * @throws MissingTimingException Thrown when after /at or /by is empty
+     * @throws InvalidFormatException Thrown when the date is formatted wrongly
+     */
+    private LocalDate findDeadline(String inputString) throws MissingTimingException, InvalidFormatException {
         String[] curr = inputString.split("/");
         return findDeadlineHelper(curr[1]);
     }
@@ -110,7 +127,14 @@ public class DukeParser {
         }
     }
 
-    public String findTaskDes(String inputString) throws MissingDescriptionException {
+    /**
+     * Obtains the task description string
+     *
+     * @param inputString String of the user's input
+     * @return String comprising of task description
+     * @throws MissingDescriptionException Thrown when description is empty
+     */
+    private String findTaskDes(String inputString) throws MissingDescriptionException {
         if (inputString.indexOf("/") <= 0) {
             return findTaskDesHelper(inputString);
         } else {

@@ -53,7 +53,7 @@ public class DukeUI {
     /**
      * Returns the user's written command as a string
      *
-     * @return Input String
+     * @return User-typed input String
      */
     public String readCommandString() {
         return in.nextLine();

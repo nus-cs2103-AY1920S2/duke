@@ -14,6 +14,11 @@ import duketasks.Task;
 import duketasks.Todo;
 import dukelist.DukeList;
 
+/**
+ * Storage function used to save tasks whenever there is a change in the list items
+ * and load tasks when Duke program starts up
+ */
+
 public class DukeStorage {
     private static final String defaultPath = "data\\duke.txt";
 
@@ -26,6 +31,13 @@ public class DukeStorage {
     public DukeStorage() {
         this(defaultPath);
     }
+
+    /**
+     * Saves the input DukeList into a text file by first encoded each entry of the DukeList into
+     * a special format of 'T/D/E-X/O-eventDesc(-eventDeadline)'
+     *
+     * @param dl The DukeList that is to be saved
+     */
     public void save(DukeList dl) {
         ArrayList<Task> inputDL = dl.getListOfTasks();
         List<String> outputList = saveEncoder(inputDL);
@@ -44,6 +56,13 @@ public class DukeStorage {
         return output;
     }
 
+    /**
+     * Returns a DukeList regardless, content depends on whether the
+     * designated text file has previously saved tasks
+     *
+     * @return An empty DukeList if text file is empty, else a DukeList with previously saved tasks
+     * @throws IOException Thrown by Files.readAllLines
+     */
     public DukeList load() throws IOException {
         if (!Files.exists(path)) {
             return new DukeList();
@@ -65,13 +84,13 @@ public class DukeStorage {
             String isDoneString = input[1];
             String taskDesc = input[2];
             if (command.equals("T")) {
-                dl.loadAdd(new Todo(taskDesc, isDoneString));
+                dl.addTask(new Todo(taskDesc, isDoneString));
             } else if (command.equals("E")) {
                 LocalDate by = LocalDate.parse(input[3]);
-                dl.loadAdd((new Event(taskDesc, by, isDoneString)));
+                dl.addTask((new Event(taskDesc, by, isDoneString)));
             } else {
                 LocalDate by = LocalDate.parse(input[3]);
-                dl.loadAdd((new Deadline(taskDesc, by, isDoneString)));
+                dl.addTask((new Deadline(taskDesc, by, isDoneString)));
             }
         }
         return dl;

@@ -1,5 +1,9 @@
 package duketasks;
 
+/**
+ * Represents to-do object that the user has to complete. No deadline
+ */
+
 public class Todo extends Task {
     private static final String todoTaskCode = "T";
 
