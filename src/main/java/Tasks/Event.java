@@ -7,10 +7,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import duke.dukeException.DukeParseException;
 
+/**
+ * Consist of event description and period of time in which the event happens.
+ */
 public class Event extends Task {
 	private LocalDate date;
 	private String signature = "event";
-	private String sepapartor = "/at";
+	public static final String separator = "/at";
 
 	public Event(String commandText) throws DukeParseException {
 		super(commandText);
@@ -27,7 +30,7 @@ public class Event extends Task {
 
 	@Override
 	public String getSeparator() {
-		return this.sepapartor;
+		return Event.separator;
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class Event extends Task {
 		sb.append("  [E]")
 		  .append(super.getStatusIcon())
 		  .append(super.description)
-		  .append(" (by")
+		  .append(" (at")
 		  .append(super.getRemainingTokens())
 		  .append(")");
 		return sb.toString();

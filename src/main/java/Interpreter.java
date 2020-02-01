@@ -68,4 +68,13 @@ public class Interpreter {
 		System.out.println(e);
 		System.out.println(separation);
 	}
+
+	static public void printFind(List<Task> tasks, List<Integer> indexes) {
+		System.out.println(separation);
+		System.out.println("Here are the matching tasks in your list:");
+		for (Integer idx: indexes) {
+			System.out.println((idx + 1) + ". " + tasks.get(idx));
+		}
+		System.out.println(separation);
+	}
 }

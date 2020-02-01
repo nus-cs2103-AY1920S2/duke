@@ -7,6 +7,6 @@ public class TaskTest {
 	@Test
 	public void testParsing() throws DukeParseException {
 		Task task = new Deadline("deadline doing something /by 1999-12-30");
-		assertEquals("doing something ", task.description, "must parse description correctly");
+		assertEquals("doing something", task.description, "must parse description correctly");
 	}
 }
