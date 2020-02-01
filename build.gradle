@@ -2,13 +2,9 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
-
-checkstyle {
-    toolVersion = '8.23'
-}
-
 group 'seedu.duke'
 version '0.1.0'
 
@@ -21,8 +17,17 @@ application {
     mainClassName = "Duke"
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 test {
