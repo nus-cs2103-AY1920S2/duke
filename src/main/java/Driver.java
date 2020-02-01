@@ -2,6 +2,14 @@ import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeInvalidTaskFormatException;
 import duke.util.Ui;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 /*
  * Driver
  *
@@ -20,8 +28,7 @@ import duke.util.Ui;
  * @author Mario Lorenzo
  */
 
-public class Driver {
-
+public class Driver extends Application {
     /**
      * The main method runs the program.
      * @param args The command line arguments entered into the program.
@@ -47,6 +54,26 @@ public class Driver {
             userInterface.printLine();
         } finally {
             userInterface.close();
+        }
+    }
+
+    /**
+     * Starts the app's GUI by loading the resources from MainWindow.fxml.
+     * @param stage The stage of the GUI.
+     */
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(Duke.start());
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
+            System.err.println(e);
         }
     }
 }
