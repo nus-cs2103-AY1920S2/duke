@@ -3,11 +3,15 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke program.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -25,6 +29,10 @@ public class Duke {
             UI.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Duke () {
+        this("./data/duke.txt");
     }
 
     public static void main(String[] args) throws IOException {
@@ -96,5 +104,14 @@ public class Duke {
             input = sc.nextLine();
         }
         UI.goodbye();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
