@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -126,7 +128,7 @@ public class Duke {
                             descAndDate = commandAndRest[1].split(" /by ", 2);
                             desc = descAndDate[0];
                             date = descAndDate[1];
-                            Deadline newDeadline = new Deadline(desc, date);
+                            Deadline newDeadline = new Deadline(desc, LocalDate.parse(date));
                             charmanderList.add(newDeadline);
 
                             System.out.println("Charmander writes a Deadline. You peek over and it says:");
@@ -134,6 +136,8 @@ public class Duke {
                             System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
                         } catch (ArrayIndexOutOfBoundsException err) {
                             throw new DukeException("Charmander needs a description AND a date to write it down!");
+                        } catch (DateTimeParseException err) {
+                            throw new DukeException("Place date by yyyy-mm-dd format!");
                         }
                         break;
                     case EVENT:
@@ -144,7 +148,7 @@ public class Duke {
                             descAndDate = commandAndRest[1].split(" /by ", 2);
                             desc = descAndDate[0];
                             date = descAndDate[1];
-                            Event newEvent = new Event(desc, date);
+                            Event newEvent = new Event(desc, LocalDate.parse(date));
                             charmanderList.add(newEvent);
 
                             System.out.println("Charmander writes a Event. You peek over and it says:");
@@ -152,6 +156,8 @@ public class Duke {
                             System.out.println("Charmander holds out " + charmanderList.size() + " finger(s).");
                         } catch (ArrayIndexOutOfBoundsException err) {
                             throw new DukeException("Charmander needs a description AND a date to write it down!");
+                        } catch (DateTimeParseException err) {
+                            throw new DukeException("Place date by yyyy-mm-dd format!");
                         }
                         break;
                     default:
