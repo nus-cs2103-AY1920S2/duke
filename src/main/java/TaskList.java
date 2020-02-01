@@ -92,6 +92,16 @@ public class TaskList {
         System.out.println(t);
     }
 
+    public void find() {
+        ui.matchingTask();
+        String matching = description.substring(5);
+        for (int i = 0; i < store.size(); i++) {
+            if (store.get(i).getDescription().contains(matching)) {
+                System.out.println(store.get(i));
+            }
+        }
+    }
+
     public void printList() {
         ui.taskList();
         for (int i =0 ;i< store.size(); i++) {

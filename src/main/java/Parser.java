@@ -14,7 +14,12 @@ public class Parser {
         ui.greeting();
         String command = scan.nextLine();
         while (!command.equals("bye")) {
-            if (command.contains("delete")) {
+            if (command.contains("find")) {
+                TaskList task = new TaskList(command);
+                task.find();
+                command = scan.nextLine();
+
+            } else if (command.contains("delete")) {
                 TaskList task = new TaskList(command);
                 task.delete();
                 command = scan.nextLine();
