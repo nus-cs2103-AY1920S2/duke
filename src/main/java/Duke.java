@@ -58,15 +58,8 @@ public class Duke {
                     ui.showList(tempLst);
                     break;
                 case ADD:
-                    Task task = null;
                     String line = sc.nextLine();
-                    if (getInput.equals("todo")) {
-                        task = factory.createTodo(line);
-                    } else if (getInput.equals("deadline")) {
-                        task = factory.createDeadline(line);
-                    } else {
-                        task = factory.createEvent(line);
-                    }
+                    Task task = factory.buildTask(getInput, line);
                     lst.addTask(task);
                     ui.showAddTask(task, lst.getSize());
                     storage.save(lst);

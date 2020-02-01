@@ -4,13 +4,25 @@ import java.util.Scanner;
 /** Creates task objects. */
 public class Factory {
 
+    public Task buildTask(String taskName, String input) {
+        Task task = null;
+        if (taskName.equals("todo")) {
+            task = createTodo(input);
+        } else if (taskName.equals("deadline")) {
+            task = createDeadline(input);
+        } else {
+            task = createEvent(input);
+        }
+        return task;
+    }
+
     /**
      * Creates a Todo object.
      *
      * @param input user input string.
      * @return Todo object.
      */
-    public Todo createTodo(String input) {
+    private Todo createTodo(String input) {
         return new Todo(input);
     }
 
@@ -20,7 +32,7 @@ public class Factory {
      * @param input user input string.
      * @return Deadline object.
      */
-    public Deadline createDeadline(String input) {
+    private Deadline createDeadline(String input) {
         int indexCut = input.indexOf("/by");
         String desc = input.substring(0, indexCut - 1);
         String by = input.substring(indexCut + 4);
@@ -34,7 +46,7 @@ public class Factory {
      * @param input user input string.
      * @return Event object.
      */
-    public Event createEvent(String input) {
+    private Event createEvent(String input) {
         Event event = null;
         Scanner sc2 = new Scanner(System.in);
         TaskDate tdEnd = null;
@@ -61,7 +73,6 @@ public class Factory {
                 e.printStackTrace();
             }
         }
-
         return event;
     }
 
