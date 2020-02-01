@@ -1,11 +1,11 @@
 package duke;
 
 import duke.command.Command;
+import duke.gui.DialogParser;
 import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -30,7 +30,7 @@ public class Duke extends Application {
     private Storage storage;
     protected TaskList tasks;
     private Ui ui;
-    protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     /**
      * Returns a new Duke instance, uses duke.txt for save file.
@@ -84,6 +84,18 @@ public class Duke extends Application {
         ui.goodbye();
     }
 
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -101,7 +113,7 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //The container for the content of the chat to scroll.
+        // The container for the content of the chat to scroll
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -147,21 +159,11 @@ public class Duke extends Application {
 
         // Add functionality to handle user input
         sendButton.setOnMouseClicked((event -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            DialogParser.handleUserInput(this, this.dialogContainer, this.userInput);
         }));
-    }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textLabel = new Label(text);
-        textLabel.setWrapText(true);
-        return textLabel;
+        userInput.setOnAction((event -> {
+            DialogParser.handleUserInput(this, this.dialogContainer, this.userInput);
+        }));
     }
 }
