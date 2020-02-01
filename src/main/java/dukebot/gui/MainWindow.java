@@ -3,12 +3,13 @@ package dukebot.gui;
 import dukebot.Duke;
 import dukebot.gui.DialogBox;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+
 /**
  * Controller for dukebot.gui.MainWindow. Provides the layout for the other controls.
  */
@@ -26,10 +27,27 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_default.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke_happy.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/heart_background.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.widthProperty().addListener((o) -> {
+            Node vp = scrollPane.lookup(".viewport");
+            vp.setStyle("-fx-background-color:transparent;");
+        });
+        scrollPane.setBackground(new Background(
+                new BackgroundImage(backgroundImage,
+                        BackgroundRepeat.REPEAT,
+                        BackgroundRepeat.REPEAT,
+                        BackgroundPosition.DEFAULT,
+                        new BackgroundSize(BackgroundSize.AUTO,
+                                BackgroundSize.AUTO,
+                                false,
+                                false,
+                                false,
+                                true
+                        ))));
     }
 
     public void setDuke(Duke d) {
