@@ -22,10 +22,8 @@ package duke.exception;
 public class DukeException extends Exception {
 
     /**
-     * The toString method overrides the Object's toString method
-     * and it returns the error message so that the client is informed
-     * about the error.
-     * @return the String about the error message
+     * Constructs a DukeException instance.
+     * @param message The error message.
      */
 
     public DukeException(String message) {

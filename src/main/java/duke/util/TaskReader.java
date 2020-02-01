@@ -32,7 +32,7 @@ import java.util.HashMap;
 
 public class TaskReader {
     private String filename;
-    private final static HashMap<String, Keyword> KEYWORD = new HashMap<>() {
+    private static final HashMap<String, Keyword> KEYWORD = new HashMap<>() {
         {
             put("D", Keyword.DEADLINE);
             put("E", Keyword.EVENT);
@@ -83,28 +83,28 @@ public class TaskReader {
 
     public Task parseTask(String line, int counter) throws DukeInvalidTaskFormatException,
             DukeInvalidDateFormatException {
-        String[] line_splitted = line.split(" \\| ");
+        String[] lineSplitted = line.split(" \\| ");
         try {
-            Keyword keyword = getKeyword(line_splitted[0], line, counter);
-            boolean isDone = getStatus(line_splitted[1], line, counter);
+            Keyword keyword = getKeyword(lineSplitted[0], line, counter);
+            boolean isDone = getStatus(lineSplitted[1], line, counter);
             Task task;
             String description;
 
-            switch(keyword) {
+            switch (keyword) {
             case TODO:
-                description = line_splitted[2];
+                description = lineSplitted[2];
                 task = new Todo(description);
                 break;
 
             case DEADLINE:
-                description = line_splitted[2];
-                String dueDate = line_splitted[3];
+                description = lineSplitted[2];
+                String dueDate = lineSplitted[3];
                 task = new Deadline(description, dueDate);
                 break;
 
             default:
-                description = line_splitted[2];
-                String eventDate = line_splitted[3];
+                description = lineSplitted[2];
+                String eventDate = lineSplitted[3];
                 task = new Event(description, eventDate);
                 break;
             }
@@ -122,45 +122,45 @@ public class TaskReader {
 
     /**
      * Gets the corresponding type of task in form of Command enum from the string.
-     * @param command_string The command in form of string.
+     * @param commandString The command in form of string.
      * @param line The line describing the detail of the task.
      * @param counter The index of the line.
      * @return The corresponding Command enum representing the type of string.
      * @throws DukeInvalidTaskFormatException If the command cannot be found.
      */
 
-    private Keyword getKeyword(String command_string, String line, int counter) throws
+    private Keyword getKeyword(String commandString, String line, int counter) throws
             DukeInvalidTaskFormatException {
-        Keyword keyword = TaskReader.KEYWORD.get(command_string);
+        Keyword keyword = TaskReader.KEYWORD.get(commandString);
 
         if (keyword == null) {
-            throw new DukeInvalidTaskFormatException("OOPS! We cannot load " +
-                    "the task since the command is unknown.", line, counter);
+            throw new DukeInvalidTaskFormatException("OOPS! We cannot load "
+                    + "the task since the command is unknown.", line, counter);
         }
         return keyword;
     }
 
     /**
      * Gets the corresponding boolean of whether the task is done or not.
-     * @param status_string The status of the task.
+     * @param statusString The status of the task.
      * @param line The line describing the detail of the task.
      * @param counter The index of the line.
      * @return The boolean of whether the task is done or not.
      * @throws DukeInvalidTaskFormatException If the status is not properly formatted.
      */
 
-    private boolean getStatus(String status_string, String line, int counter) throws DukeInvalidTaskFormatException {
+    private boolean getStatus(String statusString, String line, int counter) throws DukeInvalidTaskFormatException {
         try {
-            int status = Integer.parseInt(status_string);
+            int status = Integer.parseInt(statusString);
             if (status != 0 && status != 1) {
-                throw new DukeInvalidTaskFormatException("OOPS! We cannot load " +
-                        "the task since the status of the task is invalid.", line, counter);
+                throw new DukeInvalidTaskFormatException("OOPS! We cannot load "
+                        + "the task since the status of the task is invalid.", line, counter);
             } else {
                 return status == 1;
             }
         } catch (NumberFormatException e) {
-            throw new DukeInvalidTaskFormatException("OOPS! We cannot load " +
-                    "the task since the status of the task is invalid.", line, counter);
+            throw new DukeInvalidTaskFormatException("OOPS! We cannot load "
+                    + "the task since the status of the task is invalid.", line, counter);
         }
     }
 }

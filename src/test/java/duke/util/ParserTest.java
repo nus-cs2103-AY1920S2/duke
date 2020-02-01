@@ -54,8 +54,8 @@ public class ParserTest {
                     new TaskListStub()));
             fail();
         } catch (DukeUnknownKeywordException | DukeInvalidArgumentFormatException | DukeInvalidDateFormatException e) {
-            assertEquals("☹ OOPS!!! " +
-                    "The argument for 'delete' command requires a number.", e.getMessage());
+            assertEquals("☹ OOPS!!! "
+                    + "The argument for 'delete' command requires a number.", e.getMessage());
         }
     }
 }

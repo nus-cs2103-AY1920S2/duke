@@ -12,7 +12,7 @@ package duke.util;
  */
 
 /**
- * TaskListInterface is an interface that defines TaskList
+ * TaskListInterface is an interface that defines TaskList.
  * @author Mario Lorenzo
  */
 

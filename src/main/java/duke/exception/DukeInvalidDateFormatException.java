@@ -13,7 +13,7 @@ package duke.exception;
 
 /**
  * <p>DukeInvalidDateFormatException class extends the DukeException
- * and it handles the invalid format of the date of event and deadline</p>
+ * and it handles the invalid format of the date of event and deadline.</p>
  * @author Mario Lorenzo
  */
 

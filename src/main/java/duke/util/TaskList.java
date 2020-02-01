@@ -38,8 +38,7 @@ public class TaskList implements TaskListInterface {
      * Verifies whether the index
      * provided is within the range or not.
      * @param index the index of the task
-     * @return the boolean value of whether the index given is
-     * within the valid range.
+     * @return the boolean value of whether the index given is within the valid range.
      */
 
     public boolean isNotInRange(int index) {
@@ -58,9 +57,9 @@ public class TaskList implements TaskListInterface {
         task.markAsDone();
         storage.rewriteTasksToFile(tasks);
 
-        return "Nice! I've marked this task as done: \n" +
-                String.format("   %s\n", task.toString()) +
-                String.format("Now you have %d task(s) in the list.", tasks.size());
+        return "Nice! I've marked this task as done: \n"
+                + String.format("   %s\n", task.toString())
+                + String.format("Now you have %d task(s) in the list.", tasks.size());
     }
 
     /**
@@ -107,8 +106,9 @@ public class TaskList implements TaskListInterface {
         tasks.add(task);
         boolean isAppendMode = tasks.size() != 1;
         storage.writeTask(task, isAppendMode);
-        return "Got it. I've added this task: \n" + String.format("    %s\n", task) +
-                String.format("Now you have %d task(s) in the list.", tasks.size());
+        return "Got it. I've added this task: \n"
+                + String.format("    %s\n", task)
+                + String.format("Now you have %d task(s) in the list.", tasks.size());
     }
 
     /**
@@ -121,8 +121,9 @@ public class TaskList implements TaskListInterface {
         Task task = getTask(index);
         tasks.remove(index - 1);
         storage.rewriteTasksToFile(tasks);
-        return "Noted. I've removed this task: \n " + String.format("    %s\n", task) +
-                String.format("Now you have %d task(s) in the list.", tasks.size());
+        return "Noted. I've removed this task: \n "
+                + String.format("    %s\n", task)
+                + String.format("Now you have %d task(s) in the list.", tasks.size());
     }
 
     /**

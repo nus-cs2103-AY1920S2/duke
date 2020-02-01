@@ -19,7 +19,7 @@ package duke.util;
 
 public enum Keyword {
     /**
-     * Keywords that can be used
+     * Keywords that can be used.
      * <li>LIST</li>
      * <li>DONE</li>
      * <li>TODO</li>

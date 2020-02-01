@@ -1,6 +1,11 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
@@ -57,20 +62,20 @@ public class Parser {
 
     public Command parse(String commandString, TaskListInterface taskList) throws DukeUnknownKeywordException,
             DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
-        String[] splitted_commands = commandString.split(" ");
-        String command_string = splitted_commands[0];
+        String[] splittedCommands = commandString.split(" ");
+        String commandStr = splittedCommands[0];
         /*
          If optional_command is empty, it means that the command is not found.
          Therefore, it will throw the exception to inform the client.
          */
 
-        Optional<Keyword> optionalKeyword = getOptionalKeyword(command_string);
+        Optional<Keyword> optionalKeyword = getOptionalKeyword(commandStr);
         Keyword keyword = optionalKeyword.orElseThrow(() ->
-                new DukeUnknownKeywordException("☹ OOPS!!! I'm sorry, " +
-                        "but I don't know what that means :-("));
-        String details = splitted_commands.length > 1 ?
-                commandString.split(" ", 2)[1] :
-                "";
+                new DukeUnknownKeywordException("☹ OOPS!!! I'm sorry, "
+                        + "but I don't know what that means :-("));
+        String details = splittedCommands.length > 1
+                ? commandString.split(" ", 2)[1]
+                : "";
 
         Command command;
         switch (keyword) {
@@ -121,8 +126,8 @@ public class Parser {
 
     private ListCommand checkValidListArgument(String details) throws DukeInvalidArgumentFormatException {
         if (!details.equals("")) {
-            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
-                    "The argument for 'list' command is invalid.");
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'list' command is invalid.");
         }
         return new ListCommand();
     }
@@ -142,8 +147,8 @@ public class Parser {
         try {
             index = Integer.parseInt(details);
         } catch (NumberFormatException e) {
-            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
-                    "The argument for 'done' command requires a number.");
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'done' command requires a number.");
         }
 
         if (index <= 0 || index > taskList.size()) {
@@ -167,8 +172,8 @@ public class Parser {
         try {
             index = Integer.parseInt(details);
         } catch (NumberFormatException e) {
-            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
-                    "The argument for 'delete' command requires a number.");
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'delete' command requires a number.");
         }
 
         if (index <= 0 || index > taskList.size()) {
@@ -188,8 +193,8 @@ public class Parser {
 
     private AddCommand checkValidTodoArgument(String details) throws DukeInvalidArgumentFormatException {
         if (details.equals("")) {
-            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
-                    "The argument for 'todo' command requires a description");
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'todo' command requires a description");
         }
         return new AddCommand(new Todo(details));
     }
@@ -212,9 +217,9 @@ public class Parser {
             caption = detailsWithSchedule[0];
             bySchedule = detailsWithSchedule[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
-                    "The argument for 'deadline' " +
-                    "command requires a description and a due date.");
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'deadline' "
+                    + "command requires a description and a due date.");
         }
 
         return new AddCommand(new Deadline(caption, bySchedule));
@@ -238,9 +243,9 @@ public class Parser {
             caption = detailsWithSchedule[0];
             atSchedule = detailsWithSchedule[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! " +
-                    "The argument for 'event' " +
-                    "command requires a description and an event date.");
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'event' "
+                    + "command requires a description and an event date.");
         }
 
         return new AddCommand(new Event(caption, atSchedule));

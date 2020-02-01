@@ -1,6 +1,10 @@
 package duke.util;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /*
  * TaskWriter
@@ -50,15 +54,18 @@ public class TaskWriter {
         }
 
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-        String[] data_array = new String[3];
+        String[] dataArray = new String[3];
 
-        data_array[0] = getCommandString(task);
-        data_array[1] = getStatus(task);
-        data_array[2] = getDetails(task);
+        dataArray[0] = getCommandString(task);
+        dataArray[1] = getStatus(task);
+        dataArray[2] = getDetails(task);
 
-        String task_string = String.join(" | ", data_array);
-        if (isAppendMode) writer.newLine();
-        writer.write(task_string);
+        String taskString = String.join(" | ", dataArray);
+        if (isAppendMode) {
+            writer.newLine();
+        }
+
+        writer.write(taskString);
         writer.close();
     }
 
