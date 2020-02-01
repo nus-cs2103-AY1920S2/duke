@@ -34,4 +34,12 @@ public class CheckCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
 }

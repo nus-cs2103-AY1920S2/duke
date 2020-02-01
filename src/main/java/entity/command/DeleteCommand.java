@@ -35,4 +35,12 @@ public class DeleteCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }

@@ -58,6 +58,7 @@ public class Event extends Task {
         this.heldAtTime = heldAtTime;
     }
 
+    @Override
     public String printTask() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
@@ -67,10 +68,12 @@ public class Event extends Task {
                         (heldAtDate != null ? dateFormat.format(heldAtDate) : (heldAtTime != null ? timeFormat.format(heldAtTime) : heldAt))) + ")";
     }
 
+    @Override
     public boolean isDue(Date date) {
         return this.heldAtDate != null ? this.heldAtDate.compareTo(date) != 1 ? true : false : false;
     }
 
+    @Override
     public String toStringForm() {
         return "E|" +  (super.isDone() ? "1" : "0" ) + "|"+ super.getTaskName() + "|" + heldAt;
     }

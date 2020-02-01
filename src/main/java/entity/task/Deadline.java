@@ -54,6 +54,7 @@ public class Deadline extends Task {
         this.doByTime = doByTime;
     }
 
+    @Override
     public String printTask() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
@@ -62,10 +63,12 @@ public class Deadline extends Task {
                         (doByDate != null ? dateFormat.format(doByDate) : (doByTime != null ? timeFormat.format(doByTime) : doBy))) + ")";
     }
 
+    @Override
     public boolean isDue(Date date) {
         return this.doByDate != null ? this.doByDate.compareTo(date) != 1 ? true : false : false;
     }
 
+    @Override
     public String toStringForm() {
         return "D|" +  (super.isDone() ? "1" : "0" ) + "|"+ super.getTaskName() + "|" + doBy;
     }

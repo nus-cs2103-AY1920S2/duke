@@ -34,7 +34,16 @@ public class DoneCommand extends Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

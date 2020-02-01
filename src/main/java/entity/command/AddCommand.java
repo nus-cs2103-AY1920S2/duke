@@ -33,4 +33,12 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public Task getNewTask() {
+        return newTask;
+    }
+
+    public void setNewTask(Task newTask) {
+        this.newTask = newTask;
+    }
 }
