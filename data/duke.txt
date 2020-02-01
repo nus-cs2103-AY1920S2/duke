@@ -1,4 +1,4 @@
 Todo~0~read book
 Todo~1~play chess
-Event~1~group meeting~5p.m.
-Deadline~1~CS2103T project~this weekend
+Deadline~0~go to bed~2020-02-01
+Event~1~group meeting~2020-03-15
