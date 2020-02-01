@@ -49,6 +49,12 @@ public class DeleteCommand extends Command {
         return false;
     }
 
+    /**
+     * Checks command for valid index number.
+     *
+     * @param tasks list of tasks.
+     * @throws DukeException if user input does not follow input format.
+     */
     public void checkDeleteException(TaskList tasks) throws DukeException {
         // list has 5 items, tasks.size() = 5, this.index max = 4
         if (tasks.size() <= this.index) {

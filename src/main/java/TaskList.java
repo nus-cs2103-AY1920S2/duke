@@ -122,4 +122,27 @@ public class TaskList {
         list.remove(index);
         storage.writeToFile(saveList());
     }
+
+    /**
+     * Searches and returns a list of tasks containing a keyword.
+     *
+     * @param keyword keyword specified by user.
+     */
+    public void find(String keyword) {
+        List<Task> matchedTasks = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).contains(keyword)) {
+                matchedTasks.add(list.get(i));
+            }
+        }
+
+        if (matchedTasks.isEmpty()) {
+            System.out.println("     There are no matching tasks in your list.");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                System.out.println("     " + (i + 1) + ". " + matchedTasks.get(i));
+            }
+        }
+    }
 }
