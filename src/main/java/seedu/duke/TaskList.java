@@ -181,6 +181,11 @@ public class TaskList {
         storage.deleteInStorage(index);
     }
 
+    /**
+     * Finds task(s) which contains a substring given by the user.
+     *
+     * @param desc a substring of a task that user wants to find
+     */
     public void findTask(String desc) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
