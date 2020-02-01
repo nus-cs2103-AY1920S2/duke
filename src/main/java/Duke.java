@@ -9,8 +9,8 @@ public class Duke extends Application {
     private UserText tasks;
     private DukeParser parser;
 
-    public Duke(String filePath) throws DukeException {
-        DukeUI.showWelcomeMessage();
+    public Duke() {
+        String filePath = "data/tasks.txt";
         storage = new DukeStorage(filePath);
         tasks = storage.readText();
         parser = new DukeParser(this.tasks);
@@ -20,10 +20,6 @@ public class Duke extends Application {
         DukeUI.showWelcomeMessage();
         this.tasks = parser.parseCommand();
         storage.saveTasks(tasks);
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke("data/tasks.txt").run();
     }
 
     @Override

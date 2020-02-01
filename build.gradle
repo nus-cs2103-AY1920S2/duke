@@ -1,8 +1,14 @@
 import org.gradle.api.plugins.internal.DefaultJavaApplication
+import org.gradle.internal.jvm.Jvm
 
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }
 
 group 'seedu.duke'
@@ -13,8 +19,7 @@ repositories {
 }
 
 final def application = application {
-    // Change this to your main class.
-    mainClassName = "Duke.class"
+    mainClassName = "Launcher"
 }
 application
 
