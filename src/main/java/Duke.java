@@ -7,6 +7,7 @@ import duke.Parser;
 import duke.commands.Command;
 import duke.exception.DukeException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
@@ -25,13 +26,20 @@ public class Duke {
      *
      * @param filePath path to file that stores a list of user's tasks.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            tasks = new TaskList(this.storage.load());
+        } catch (IOException e) {
+            ui.showLoadingError();
+            File file = new File("data");
+            if (!file.exists()) {
+                //create new data dir and duke.file
+                new File("data").mkdir();
+            }
+            new File(filePath).createNewFile();
+            tasks = new TaskList();
         }
     }
 
@@ -58,7 +66,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Duke("data/duke.txt").run();
     }
 }

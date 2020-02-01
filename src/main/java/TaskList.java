@@ -76,9 +76,13 @@ public class TaskList {
      * Prints all tasks in the task list.
      */
     public void printList() {
-        System.out.println("     Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + list.get(i));
+        if (list.size() <= 0) {
+            System.out.println("     There are no tasks in your list.");
+        } else {
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("     " + (i + 1) + ". " + list.get(i));
+            }
         }
     }
 
