@@ -1,8 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -10,9 +14,10 @@ public class Duke {
     /**
      * Constructor for the Duke Class.
      *
-     * @param filepath Path to file where the data for saved tasks are stored.
+     * //@param filepath Path to file where the data for saved tasks are stored.
      */
-    public Duke(String filepath) {
+    public Duke() {
+        String filepath = "data/duke.txt";
         ui = new Ui();
         storage = new Storage(filepath);
         try {
@@ -23,8 +28,15 @@ public class Duke {
         }
     }
 
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 
     /**
