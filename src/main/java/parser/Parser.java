@@ -73,6 +73,10 @@ public class Parser {
                 checkInput(fullCommand, command, temp);
                 String description = fullCommand.substring(command.length() + 1);
                 com = new SearchCommand(LocalDate.parse(description, inputDateFormat));
+            } else if (command.equals("find")) {
+                checkInput(fullCommand, command, temp);
+                String description = fullCommand.substring(command.length() + 1);
+                com = new FindCommand(description);
             } else if (command.equals("list")) {
                 com = new ListCommand();
             } else if (command.equals("bye")) {
@@ -107,8 +111,8 @@ public class Parser {
             if (!fullCommand.contains("/by")) {
                 throw new WrongInputException();
             } else {
-                String[] dt = fullComArr[fullComArr.length -1].split(" ");
-                if (dt.length < 2) {
+                String[] arr = fullCommand.split("/by");
+                if (arr[1].split(" ").length < 2) {
                     throw new WrongInputException();
                 }
             }
@@ -116,8 +120,8 @@ public class Parser {
             if (!fullCommand.contains("/at")) {
                 throw new WrongInputException();
             } else {
-                String[] dt = fullComArr[fullComArr.length -1].split(" ");
-                if (dt.length < 2) {
+                String[] arr = fullCommand.split("/at");
+                if (arr[1].split(" ").length < 2) {
                     throw new WrongInputException();
                 }
             }

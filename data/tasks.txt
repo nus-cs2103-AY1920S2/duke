@@ -3,3 +3,6 @@ D | 1 | project | 2020-02-15, 23:59
 T | 0 | buy bread
 D | 1 | submission | 2020-09-12, 17:00
 D | 0 | proj | 2020-02-28, 18:00
+T | 0 | read book
+E | 0 | book release event | 2020-03-03, 17:00
+D | 0 | book report | 2020-03-12, 23:59
