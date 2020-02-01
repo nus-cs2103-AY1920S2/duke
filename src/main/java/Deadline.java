@@ -39,6 +39,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + getDoneSymbol() + "] " + getCommand() + " (by: " + deadline + ")";
+        return "[D][" + getDoneSymbol() + "] " + getCommand() + "(by: " + deadline + ")";
     }
 }
