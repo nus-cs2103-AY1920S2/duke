@@ -101,7 +101,6 @@ public class Parser {
 
             // Create task
             Task newTask = new Deadline(taskName, dateTime);
-            taskList.addTask(newTask);
 
             command = new AddCommand(newTask);
 
@@ -125,7 +124,6 @@ public class Parser {
 
             // Create task
             Task newTask = new Event(taskName, dateTime);
-            taskList.addTask(newTask);
 
             command = new AddCommand(newTask);
 
