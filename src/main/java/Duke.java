@@ -67,7 +67,7 @@ public class Duke {
             // Check for any errors in the command
             // by passing command to Parser object
             // If no errors, method checkForError()
-            // returns true
+            // will returns true else return false
             if (new Parser(line, ui).checkForError(tasks))
                 // Assumption : To add things into the list, the user has to
                 // type a [command][description]. For example, to add
@@ -75,7 +75,7 @@ public class Duke {
                 // "todo read book" instead of just typing "read book"
                 // as typing "read book" will cause the code to throw an exception
                 execcommand(line, tasks, ui, storage);
-            // Wait for command
+            // Wait for next input command
             line = sc.nextLine();
         }
 
