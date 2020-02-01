@@ -31,10 +31,9 @@ class TaskList {
     /**
      * Passes a copy of the list of Tasks to Storage for saving.
      * @return a list of Tasks.
-     */
-    @SuppressWarnings("unchecked")
+     */    
     public ArrayList<Task> save() {
-        return ((ArrayList<Task>) lTasks.clone());
+        return new ArrayList<Task>(lTasks);
     }
 
     /**
@@ -119,4 +118,19 @@ class TaskList {
             String.format("Now you have %d tasks in the list.", lTasks.size())
         };
     }
+
+	public String[] find(String query) {
+        ArrayList<Task> search = new ArrayList<Task>(lTasks);
+        if (search.removeIf((Task t) -> t.toString().contains(query))) {
+            String[] result = new String[search.size() + 1];
+            result[0] = "Here are the matching tasks in your list:";
+            for (int i = 0; i < search.size(); i++) {
+                result[i + 1] = String.format("%d.%s", i + 1, search.get(i).toString());
+            }
+            return result;
+        } else {
+            String[] result = new String[]{"No result found for this query."};
+            return result;
+        }
+	}
 }
