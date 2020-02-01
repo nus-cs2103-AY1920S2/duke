@@ -2,8 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
+/** Entity class representing a task of type Deadline */
 public class Deadline extends Task {
     /** as good practice every class should have it's own private serialVersionUID */
     private static final long serialVersionUID = -5240102332818031942L;
@@ -17,8 +17,9 @@ public class Deadline extends Task {
         this.byTime = byTime;
     }
 
+    /** toString implementation */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s %s)", super.toString(), byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime);
+        return String.format("[D]%s (by: %s %s)", super.toString(), byDate.format(super.dateFormat), byTime);
     }
 }

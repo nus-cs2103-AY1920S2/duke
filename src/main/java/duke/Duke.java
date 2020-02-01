@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import duke.exceptions.IncorrectArgumentException;
 import duke.exceptions.InvalidCommandException;
 
+/**
+ * Duke class represents the main chatbot entity; it contains classes that manage different components of the chatbot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks = new TaskList();
@@ -14,7 +17,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Initializes Duke and loads the TaskList from the files in the save directory
+     * Public constructor initializes Duke by loading the TaskList from the files in the save directory
      * @param filePath
      */
     public Duke(Path filePath) {
@@ -23,6 +26,7 @@ public class Duke {
         parser = new Parser(storage, ui, tasks);
         try {
             storage.loadFromFile(tasks);
+            System.out.println("    Tasklist loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("    No prior tasklist found...");
         } catch (IOException e) {
@@ -37,7 +41,7 @@ public class Duke {
         new Duke(saveDir).run();
     }
 
-    /** Starts Duke */
+    /** Starts Duke and begins reading commands from input. */
     private void run() {       
         ui.out("Hello! I'm Duke", "What can I do for you?");
         boolean isShutdown = false;

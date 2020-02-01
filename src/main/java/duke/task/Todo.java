@@ -1,5 +1,7 @@
 package duke.task;
 
+
+/** Entity class representing a task of type Todo */
 public class Todo extends Task {
 
     /** as good practice every class should have it's own private serialVersionUID */
@@ -9,6 +11,7 @@ public class Todo extends Task {
         super(description.strip());
     }
 
+    /** toString implementation */
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
