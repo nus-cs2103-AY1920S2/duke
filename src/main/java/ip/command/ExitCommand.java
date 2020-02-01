@@ -4,7 +4,7 @@ import ip.Ui;
 import ip.task.TaskList;
 
 public class ExitCommand extends Command {
-    public ExitCommand(){
+    public ExitCommand() {
         this.isExit = true;
     }
     @Override

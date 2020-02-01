@@ -5,7 +5,7 @@ import ip.task.TaskList;
 
 public class DoneCommand extends Command{
     private int index;
-    public DoneCommand(int i){
+    public DoneCommand(int i) {
         this.index = i;
     }
     @Override

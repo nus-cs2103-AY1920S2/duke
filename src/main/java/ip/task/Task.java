@@ -8,14 +8,15 @@ public abstract class Task implements Serializable {
     public static DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     String name;
     boolean done = false;
-    public Task(String name){
+    public Task(String name) {
         this.name = name;
     }
-    public void markAsDone(){
+    public void markAsDone() {
         done = true;
     }
     @Override
-    public String toString(){
-        return "[" + (done ? "✓" : "✗") + "] " + name;
+    public String toString() {
+        return "[" + (done ? "v" : "x") + "] " + name;
+//        return "[" + (done ? "✓" : "✗") + "] " + name;
     }
 }

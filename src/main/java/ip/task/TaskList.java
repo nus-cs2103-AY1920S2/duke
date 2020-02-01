@@ -16,10 +16,10 @@ public class TaskList implements Serializable {
         t.markAsDone();
         return t;
     }
-    public int size(){
+    public int size() {
         return tasks.size();
     }
-    public Task get(int i){
+    public Task get(int i) {
         return tasks.get(i);
     }
 }

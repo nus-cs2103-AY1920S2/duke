@@ -1,11 +1,11 @@
 package ip.task;
 
 public class Todo extends Task {
-    public Todo(String name){
+    public Todo(String name) {
         super(name);
     }
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

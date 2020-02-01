@@ -6,7 +6,7 @@ import ip.task.TaskList;
 public class Duke {
 
     public static class DukeException extends Exception {
-        public DukeException(String msg){
+        public DukeException(String msg) {
             super(msg);
         }
     }
@@ -15,7 +15,7 @@ public class Duke {
         new Duke().start();
     }
 
-    private void start(){
+    private void start() {
         Storage storage = new Storage();
         TaskList tasks = storage.readFromFile();
         Parser parser = new Parser();
@@ -23,11 +23,13 @@ public class Duke {
         ui.initialGreeting();
 
         String input;
-        while (true){
+        while (true) {
             input = ui.getInput();
             Command c = parser.parse(input);
-            c.execute(tasks, ui);
-            if (c.isExit()) { break; }
+            if (c != null) {
+                c.execute(tasks, ui);
+                if (c.isExit()) { break; }
+            }
         }
         storage.writeToFile(tasks);
     }

@@ -5,7 +5,7 @@ import ip.task.TaskList;
 
 public class DeleteCommand extends Command {
     private int index;
-    public DeleteCommand(int i){
+    public DeleteCommand(int i) {
         this.index = i;
     }
     @Override

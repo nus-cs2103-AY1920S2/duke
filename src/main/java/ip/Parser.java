@@ -16,12 +16,15 @@ import java.util.Scanner;
 
 
 public class Parser {
-    public Command parse(String input){
+    public Command parse(String input) {
         Scanner inputSc;
         String command, name, datetime, rest;
         inputSc = new Scanner(input);
-        command = inputSc.next();
         try {
+            if (!inputSc.hasNext()) {
+                return null;
+            }
+            command = inputSc.next();
             switch (command) {
                 case "bye":
                     return new ExitCommand();
@@ -64,7 +67,7 @@ public class Parser {
                     try {
                         dl = new Deadline(name, LocalDate.parse(datetime));
                         return new AddCommand(dl);
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         dl = new Deadline(name, (datetime));
                         return new AddCommand(dl);
                     }
@@ -86,14 +89,14 @@ public class Parser {
                     try {
                         ev = new Event(name, LocalDate.parse(datetime));
                         return new AddCommand(ev);
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         ev = new Event(name, (datetime));
                         return new AddCommand(ev);
                     }
                 default:
                     throw new Duke.DukeException("I'm sorry, but I don't know what that means :-(");
             }
-        } catch (Duke.DukeException e){
+        } catch (Duke.DukeException e) {
             return new InvalidCommand(e.getMessage());
         }
     }
