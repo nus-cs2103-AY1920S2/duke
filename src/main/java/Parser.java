@@ -11,7 +11,7 @@ public class Parser {
      * @param task Type of task.
      * @param hasDescription Whether the task has a description.
      * @param elements Array to check.
-     * @throws DukeException
+     * @throws DukeException If given array has only 1 element.
      */
     private static void checkArr(String task, boolean hasDescription, String[] elements) throws DukeException {
         if (elements.length == 1) {

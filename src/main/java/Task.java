@@ -37,15 +37,17 @@ abstract class Task {
      * Returns the description of a task.
      * @return Description of task.
      */
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * Returns the type of the task.
      * @return Type of task.
      */
-    abstract public String getType();
+    public abstract String getType();
 
-    abstract public Task getCopy();
+    public abstract Task getCopy();
 
     @Override
     public String toString() {

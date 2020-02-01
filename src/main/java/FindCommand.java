@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
     String keyword;
+
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
