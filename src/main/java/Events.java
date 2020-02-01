@@ -21,7 +21,7 @@ public class Events implements Task {
 
     @Override
     public String getTaskType() {
-        return "[E]";
+        return "E";
     }
 
     public String getTaskTime() {
@@ -44,6 +44,6 @@ public class Events implements Task {
 
     @Override
     public String toString() {
-        return getTaskType() + getDoneString() + " " + getTaskName() + " (at: " + getTaskTime() + ")";
+        return "[" + getTaskType() + "]"  + getDoneString() + " " + getTaskName() + " (at: " + getTaskTime() + ")";
     }
 }

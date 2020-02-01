@@ -18,7 +18,7 @@ public class Todos implements Task {
 
     @Override
     public String getTaskType() {
-        return "[T]";
+        return "T";
     }
 
     @Override
@@ -31,12 +31,17 @@ public class Todos implements Task {
     }
 
     @Override
+    public String getTaskTime() {
+        return "@%";
+    }
+
+    @Override
     public void markAsDone() {
         this.done = true;
     }
 
     @Override
     public String toString() {
-        return getTaskType() + getDoneString() + " " + getTaskName();
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName();
     }
 }
