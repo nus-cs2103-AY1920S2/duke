@@ -21,7 +21,7 @@ public class EventObj extends Task {
     }
 
     /**
-     * Parses the.
+     * Parses the event.
      *
      * @param taskString the task string
      * @return the event obj
@@ -50,7 +50,7 @@ public class EventObj extends Task {
     }
 
     /**
-     * Prints the.
+     * Prints the event.
      *
      * @return the string
      */

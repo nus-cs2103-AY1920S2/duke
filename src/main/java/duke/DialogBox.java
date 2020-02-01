@@ -54,16 +54,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     *  Returns the dialog for displaying what the user has written .
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, false);
     }
 
+    /**
+     *  Returns the dialog for displaying replies from Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();
         return db;
     }
 
+
+    /**
+     *  Returns the text message without the avatar.
+     *  Ui: SimpleDialogBox.fxml
+     */
     public static DialogBox getTextDialog(String text) {
         var db = new DialogBox(text, null, true);
         db.flip();

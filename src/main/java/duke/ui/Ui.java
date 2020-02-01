@@ -26,6 +26,11 @@ public class Ui {
         return new Ui();
     }
 
+    /**
+     * Prints the application logo.
+     *
+     * @return logo string
+     */
     public static String logo() {
         StringBuilder sb = new StringBuilder();
         String logo = " ____        _        \n"

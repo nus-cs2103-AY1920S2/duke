@@ -38,7 +38,7 @@ public class Storage implements CheckTask {
     /**
      * Write to file.
      *
-     * @param myContent
+     * @param myContent stores the string format of the task
      */
     public void writeToFile(String myContent) {
         BufferedWriter writer = null;

@@ -5,6 +5,7 @@ plugins {
 }
 
 checkstyle {
+    sourceSets = []
     toolVersion = '8.23'
 }
 

@@ -84,7 +84,7 @@ public class TaskList {
      * @throws DukeException the duke exception
      */
     public Task addTask(String[] current, Storage storage) throws DukeException {
-        assert(storage != null);
+        assert (storage != null);
         String[] words = Arrays.stream(current).skip(1).toArray(String[]::new);
         String command = current[0];
 
@@ -145,14 +145,14 @@ public class TaskList {
             tasks.add(getSize(), t);
 
         } else {
-            assert(Arrays.stream(Operation.values()).noneMatch(o -> o.name().equals(command)));
+            assert (Arrays.stream(Operation.values()).noneMatch(o -> o.name().equals(command)));
         }
 
         StringBuilder sb = new StringBuilder();
         tasks.forEach(t -> sb.append(t.print() + "\n"));
 
         assert (storage != null);
-        assert(sb.toString().split("\\|").length > 1);
+        assert (sb.toString().split("\\|").length > 1);
         storage.writeToFile(sb.toString());
 
         return tasks.get(getSize() - 1);
