@@ -1,3 +1,7 @@
+package duke.utils;
+
+import duke.command.*;
+
 public class CommandParser {
 
     public static Command commandParser(String request) {

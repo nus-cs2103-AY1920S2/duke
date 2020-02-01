@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.utils.Constants;
+
 public class Duke {
 
     private Ui ui;

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.Date;
 
 public interface Task {

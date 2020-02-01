@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.main.Ui;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+
 public class UnknownCommand implements Command {
 
     @Override

@@ -1,16 +1,15 @@
+package duke.task;
+
 import java.util.Date;
 
-public class Deadlines implements Task {
+public class Todos implements Task {
 
     private boolean done = false;
     private String name;
-    private Date time;
 
-    public Deadlines(String name, Date time) {
+    public Todos(String name) {
         this.name = name;
-        this.time = time;
     }
-
     @Override
     public boolean isDone() {
         return done;
@@ -23,11 +22,7 @@ public class Deadlines implements Task {
 
     @Override
     public String getTaskType() {
-        return "D";
-    }
-
-    public Date getTaskTime() {
-        return time;
+        return "T";
     }
 
     @Override
@@ -40,13 +35,18 @@ public class Deadlines implements Task {
     }
 
     @Override
+    public Date getTaskTime() {
+        return null;
+
+    }
+
+    @Override
     public void markAsDone() {
         this.done = true;
     }
 
     @Override
     public String toString() {
-        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (by: " +
-                Parser.dateToString(getTaskTime()) + ")";
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName();
     }
 }

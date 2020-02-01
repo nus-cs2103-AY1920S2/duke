@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.main.Ui;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+
 import java.io.IOException;
 
 public class AddCommand implements Command {

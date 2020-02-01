@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.utils.Parser;
+
 import java.util.Date;
 
 public class Events implements Task {
