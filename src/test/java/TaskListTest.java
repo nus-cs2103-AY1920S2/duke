@@ -58,6 +58,4 @@ public class TaskListTest {
         taskList.add(new Todo("123"));
         assertEquals(taskList.size(), 1, "Adding to empty list should add the task.");
     }
-
-
 }

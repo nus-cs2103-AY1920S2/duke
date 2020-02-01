@@ -14,6 +14,9 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Create a duke program and load tasks list.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");

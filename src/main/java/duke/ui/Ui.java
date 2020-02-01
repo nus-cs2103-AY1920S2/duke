@@ -35,7 +35,7 @@ public class Ui {
      */
     private void prettyPrint(String line) {
         System.out.println(
-                        "    _____________________________DUKE___________________________\n"
+                "    _____________________________DUKE___________________________\n"
                         + "     "
                         + line
                         + "\n"
