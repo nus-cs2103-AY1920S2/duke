@@ -12,6 +12,9 @@ public class Event extends Task{
         this.timing = timing;
     }
 
+    /**
+     * @return return String timing
+     */
     public String getTiming(){
         return timing;
     }

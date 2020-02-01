@@ -14,15 +14,27 @@ public class Task{
         this.task = task;
     }
 
+    /**
+     * Converts Complete from true to False
+     * @return the task with complete as true
+     */
     public Task completeTask() {
         this.complete = new Complete(true);
         return this;
     }
 
+    /**
+     * Returns a boolean on whether the task is completed
+     * @return completed.isCompleted()
+     */
     public boolean getComplete(){
         return complete.isCompleted();
     }
 
+    /**
+     * Returns a String of task
+     * @return String task
+     */
     public String getTask(){
         return task;
     }

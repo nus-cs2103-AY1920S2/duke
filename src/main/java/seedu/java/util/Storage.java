@@ -1,6 +1,7 @@
 /**
+ * Handles loading and saving.
  * load()
- * save()
+ * save(ArrayList<Task>)
  */
 package seedu.java.util;
 
@@ -18,6 +19,11 @@ public class Storage{
         this.filePath = filePath;
     }
 
+    /**
+     * Infers from .txt file & returns an ArrayList<Task>
+     * @return ArrayList<Task>
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException{
         ArrayList<Task> arr = new ArrayList<>();
         File f = new File(filePath); // create a File for the given file path
@@ -55,6 +61,18 @@ public class Storage{
         return arr;
     }
 
+    /**
+     * Takes in an ArrayList<Task> & writes it onto a txt file
+     * @param taskArr, get from TaskList
+     */
+    public void save(ArrayList<Task> taskArr){
+        try{
+            writeToFile(toTxt(taskArr));
+        }catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     private static boolean toBool(String com){
         if(com.equals("1")) return true;
         else return false;
@@ -86,13 +104,5 @@ public class Storage{
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
-    }
-
-    public void save(ArrayList<Task> taskArr){
-        try{
-            writeToFile(toTxt(taskArr));
-        }catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
     }
 }

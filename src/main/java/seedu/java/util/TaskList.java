@@ -2,6 +2,13 @@ package seedu.java.util;
 
 import java.util.ArrayList;
 
+/**
+ * Handles Task and their operations.
+ *
+ * ArrayList<Task> getTaskArr()
+ * String listToPrint()
+ * String read()
+ */
 public class TaskList {
     private ArrayList<Task> taskArr;
     private String path = "data/duke.txt";
@@ -14,6 +21,10 @@ public class TaskList {
         this.taskArr = taskArr;
     }
 
+    /**
+     * Returns its ArrayList of Tasks
+     * @return taskArr
+     */
     public ArrayList<Task> getTaskArr() {
         return taskArr;
     }
@@ -47,6 +58,10 @@ public class TaskList {
         return "Complete task! :)" + "\n" + totalTask();
     }
 
+    /**
+     * Returns a String of its ArrayList of Tasks. intended for UI output
+     * @return String of List
+     */
     public String listToPrint() {
         int i = 1;
         String toPrint = "";
@@ -56,6 +71,11 @@ public class TaskList {
         return toPrint;
     }
 
+    /**
+     * Takes in the user input, parses it, perform operations, and returns a string for UI output
+     * @param user Input
+     * @return String outcome
+     */
     public String read(String input) {
         try {
             Command cmd = Parser.readCommand(input);
@@ -75,7 +95,7 @@ public class TaskList {
                 case BYE:
                     return "0";
                 default:
-                    return "How did you end up here?";
+                    return "Cannot compute command";
             }
         }catch (Exception e) {
             return "Cannot Compute :(";
