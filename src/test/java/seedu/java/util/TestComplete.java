@@ -1,4 +1,6 @@
-public class Complete{
+package seedu.java.util;
+
+public class TestComplete{
     private boolean YN;
 
     public Complete(boolean YN){

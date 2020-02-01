@@ -4,8 +4,9 @@
  * readTiming()
  * readNum()
  */
+package seedu.java.util;
 
-public class Parser{
+public class TestParser{
     public static Command readCommand(String input) throws Exception{
         return Command.convert(input.split(" ")[0]);
     }

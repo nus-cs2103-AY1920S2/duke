@@ -1,12 +1,8 @@
 package seedu.java.util;
 
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
-public class Duke {
+public class TestDuke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

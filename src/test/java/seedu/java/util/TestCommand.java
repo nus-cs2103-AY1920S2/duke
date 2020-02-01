@@ -1,4 +1,6 @@
-public enum Command{
+package seedu.java.util;
+
+public enum TestCommand{
     TASK, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE;
     public static Command convert(String cmd){
         if(cmd.equals("bye")){

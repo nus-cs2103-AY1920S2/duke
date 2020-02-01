@@ -1,4 +1,6 @@
-public class Task{
+package seedu.java.util;
+
+public class TestTask{
     protected Complete complete;
     protected String task;
 

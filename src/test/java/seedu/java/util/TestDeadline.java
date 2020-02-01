@@ -1,8 +1,10 @@
+package seedu.java.util;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class TestDeadline extends Task {
     private String timing;
     private LocalDate recordedDate;
 

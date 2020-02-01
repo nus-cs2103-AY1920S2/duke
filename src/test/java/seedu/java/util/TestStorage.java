@@ -2,6 +2,7 @@
  * load()
  * save()
  */
+package seedu.java.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage{
+public class TestStorage{
     String filePath;
 
     public Storage(String filePath){

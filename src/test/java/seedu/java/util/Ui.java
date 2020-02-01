@@ -3,10 +3,11 @@
  * showLoadingError()
  * inputLoop()
  */
+package seedu.java.util;
 
 import java.util.Scanner;
 
-public class Ui{
+public class TestUi{
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
