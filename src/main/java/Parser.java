@@ -56,31 +56,31 @@ public class Parser {
             desc = input.split(" ", 2)[1];
 
             switch (comm) {
-                case TODO:
-                    newTask = new Todo(desc);
-                    break;
-                case EVENT:
-                    try {
-                        time = desc.split(" /by ", 2)[1];
-                        desc = desc.split(" /by ", 2)[0];
-                        newTask = new Event(desc, LocalDate.parse(time));
-                    } catch (ArrayIndexOutOfBoundsException err) {
-                        throw new DukeException("Charmander needs a description AND a date to write it down!");
-                    } catch (DateTimeParseException err) {
-                        throw new DukeException("Place date by yyyy-mm-dd format!");
-                    }
-                    break;
-                default: // for DEADLINES
-                    try {
-                        time = desc.split(" /by ", 2)[1];
-                        desc = desc.split(" /by ", 2)[0];
-                        newTask = new Deadline(desc, LocalDate.parse(time));
-                    } catch (ArrayIndexOutOfBoundsException err) {
-                        throw new DukeException("Charmander needs a description AND a date to write it down!");
-                    } catch (DateTimeParseException err) {
-                        throw new DukeException("Place date by yyyy-mm-dd format!");
-                    }
-                    break;
+            case TODO:
+                newTask = new Todo(desc);
+                break;
+            case EVENT:
+                try {
+                    time = desc.split(" /by ", 2)[1];
+                    desc = desc.split(" /by ", 2)[0];
+                    newTask = new Event(desc, LocalDate.parse(time));
+                } catch (ArrayIndexOutOfBoundsException err) {
+                    throw new DukeException("Charmander needs a description AND a date to write it down!");
+                } catch (DateTimeParseException err) {
+                    throw new DukeException("Place date by yyyy-mm-dd format!");
+                }
+                break;
+            default: // for DEADLINES
+                try {
+                    time = desc.split(" /by ", 2)[1];
+                    desc = desc.split(" /by ", 2)[0];
+                    newTask = new Deadline(desc, LocalDate.parse(time));
+                } catch (ArrayIndexOutOfBoundsException err) {
+                    throw new DukeException("Charmander needs a description AND a date to write it down!");
+                } catch (DateTimeParseException err) {
+                    throw new DukeException("Place date by yyyy-mm-dd format!");
+                }
+                break;
             }
         } catch (ArrayIndexOutOfBoundsException err) {
             throw new DukeException("Charmander needs a todo description to write it down!");

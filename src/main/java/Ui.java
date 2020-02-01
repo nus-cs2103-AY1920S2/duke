@@ -49,8 +49,6 @@ public class Ui {
     }
 
     public static void showList(TaskList tasks) {
-        int listNo = 1;
-
         System.out.println("Charmander presents the list to you:");
         System.out.println(tasks);
         System.out.println("Charmander hopes you liked it!");

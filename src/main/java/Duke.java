@@ -37,36 +37,36 @@ public class Duke {
                 int index;
 
                 switch (comm) {
-                    case BYE:
-                        isLooping = false;
+                case BYE:
+                    isLooping = false;
 
-                        Ui.showExit();
-                        break;
-                    case LIST:
+                    Ui.showExit();
+                    break;
+                case LIST:
 
-                        Ui.showList(tasks);
-                        break;
-                    case DONE:
-                        index = Parser.parseIndex(input);
-                        tasks.done(index);
-                        storage.save(tasks);
+                    Ui.showList(tasks);
+                    break;
+                case DONE:
+                    index = Parser.parseIndex(input);
+                    tasks.done(index);
+                    storage.save(tasks);
 
-                        Ui.showDone(tasks.get(index));
-                        break;
-                    case DELETE:
-                        index = Parser.parseIndex(input);
-                        Task deleted = tasks.delete(index);
-                        storage.save(tasks);
+                    Ui.showDone(tasks.get(index));
+                    break;
+                case DELETE:
+                    index = Parser.parseIndex(input);
+                    Task deleted = tasks.delete(index);
+                    storage.save(tasks);
 
-                        Ui.showDelete(deleted);
-                        break;
-                    default:
-                        Task newTask = Parser.parseTask(input);
-                        tasks.add(newTask);
-                        storage.save(tasks);
+                    Ui.showDelete(deleted);
+                    break;
+                default:
+                    Task newTask = Parser.parseTask(input);
+                    tasks.add(newTask);
+                    storage.save(tasks);
 
-                        Ui.showAdd(newTask);
-                        break;
+                    Ui.showAdd(newTask);
+                    break;
                 }
             } catch (DukeException e) {
                 Ui.showError(e);
