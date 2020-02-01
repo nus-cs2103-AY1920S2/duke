@@ -1,7 +1,5 @@
 package duke;
 
-import task.Task;
-import storage.Storage;
 import exception.DukeException;
 import parser.Parser;
 
@@ -11,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.nio.file.Paths;
+import parser.Parser;
+import storage.Storage;
+import task.Task;
 
 public class Duke extends Application {
     private UserInterface UI;
@@ -37,10 +38,10 @@ public class Duke extends Application {
         bot.start();
     }
 
-    public String getResponse(String input) {
-        dispatch(input);
-    }
-
+    /**
+     * Keeps scanning for user input until bye command is input Also handles all DukeExceptions and
+     * outputs it
+     */
     public void start() {
         while (!UI.isExit()) {
             String input = UI.getInput();
@@ -55,6 +56,13 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * This is the main logic for handling user input , it dispatches actions based on the input and
+     * uses the Parser to handle more complex commands
+     *
+     * @param input trimmed user input
+     * @throws DukeException Exceptions arising from incorrect user input
+     */
     private void dispatch(String input) throws DukeException {
         switch (input) {
             case "list":
@@ -73,9 +81,10 @@ public class Duke extends Application {
                     String[] splitInput = input.split(" ");
                     int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
                     if (taskIndex >= this.taskList.size()) {
-                        throw new DukeException(String.format(
-                                "Please choose an index that is between 1 and %d (inclusive)",
-                                this.taskList.size()));
+                        throw new DukeException(
+                                String.format(
+                                        "Please choose an index that is between 1 and %d (inclusive)",
+                                        this.taskList.size()));
                     }
                     if (input.contains("done")) {
                         this.taskList.markDone(taskIndex);
@@ -85,8 +94,10 @@ public class Duke extends Application {
                         Task removedTask = this.taskList.popTask(taskIndex);
                         UI.out2("Noted. I've removed this task:");
                         UI.out3(removedTask.toString());
-                        UI.out2(String.format("Now you have %d tasks in the list.",
-                                this.taskList.size()));
+                        UI.out2(
+                                String.format(
+                                        "Now you have %d tasks in the list.",
+                                        this.taskList.size()));
                     }
                 } else if (Parser.isFind(input)) {
                     if (this.taskList.isEmpty()) {
@@ -98,8 +109,11 @@ public class Duke extends Application {
                     Task newTask = this.taskList.addTask(input);
                     UI.out2("Got it. I've added this task: ");
                     UI.out3(newTask.toString());
-                    UI.out2(String.format("Now you have %d %s in the list.", this.taskList.size(),
-                            this.taskList.size() > 1 ? "tasks" : "task"));
+                    UI.out2(
+                            String.format(
+                                    "Now you have %d %s in the list.",
+                                    this.taskList.size(),
+                                    this.taskList.size() > 1 ? "tasks" : "task"));
                 }
                 Duke.storage.update(this.taskList.getAllTask());
         }

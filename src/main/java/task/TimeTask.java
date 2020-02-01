@@ -1,9 +1,8 @@
 package task;
 
+import exception.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import exception.DukeException;
 import parser.Parser;
 
 public class TimeTask extends Task {
@@ -20,6 +19,7 @@ public class TimeTask extends Task {
         this.time = LocalTime.parse(fromMemory[4]);
     }
 
+    /** @return String returns string used to store task in txt file */
     @Override
     public String toStorable() {
         return String.format("%s|%s|%s", super.toStorable(), this.date, this.time);
