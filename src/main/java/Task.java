@@ -9,4 +9,6 @@ public interface Task {
     public String getDoneString();
 
     public void markAsDone();
+
+    public String getTaskTime();
 }

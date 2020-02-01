@@ -1,23 +1,37 @@
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class DukeWorker {
 
-    private List<Task> task = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
+
+    public void initializeWorker() {
+        try{
+            boolean fileExist = Storage.checkFileExistence(Constants.DUKE_FILE_PATH);
+            if (!fileExist) {
+                Storage.createStorage();
+            } else {
+                String data = Storage.loadStorage(Constants.DUKE_FILE_PATH);
+                tasks = Parser.storageToTask(data);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
     public String handleRequest(String request) {
         String[] token = request.split(" ", 2);
         if (token[0].equals("bye")) {
             return "Bye ciao adios";
         } else if (token[0].equals("list")) {
-            if (task.size() == 0) {
+            if (tasks.size() == 0) {
                 return "No scheduled task yet";
             }
-            String list = "1." + task.get(0);
-            for (int i = 2; i < task.size() + 1; i++) {
-                list = list + "\n" + i + "." + task.get(i-1);
+            String list = "1." + tasks.get(0);
+            for (int i = 2; i < tasks.size() + 1; i++) {
+                list = list + "\n" + i + "." + tasks.get(i-1);
             }
             return list;
         } else if (token[0].equals("done")) {
@@ -29,22 +43,27 @@ public class DukeWorker {
                 return "Please specify which task to mark as done";
             }
             int taskId = Integer.parseInt(indices[0]) - 1;
-            if (taskId >= task.size() || taskId < 0) {
+            if (taskId >= tasks.size() || taskId < 0) {
                 return "No such task number";
             }
-            task.get(taskId).markAsDone();
-            String response = "Nice! Task(s) marked as done(unknown task number ignored):\n " + task.get(taskId);
+            tasks.get(taskId).markAsDone();
+            try {
+                Storage.storeData(Parser.tasksToStorage(tasks), Constants.DUKE_FILE_PATH);
+            } catch (IOException e) {
+                System.out.println("Error in storing data");
+            }
+            String response = "Nice! Task(s) marked as done(unknown task number ignored):\n " + tasks.get(taskId);
 
             for (int i = 1; i < indices.length; i++) {
                 if (isNumeric(indices[i]) != true) {
                     continue;
                 } else {
                     taskId = Integer.parseInt(indices[i]) - 1;
-                    if (taskId >= task.size() || taskId < 0) {
+                    if (taskId >= tasks.size() || taskId < 0) {
                         continue;
                     }
-                    task.get(taskId).markAsDone();
-                    response = response + "\n " + task.get(taskId);
+                    tasks.get(taskId).markAsDone();
+                    response = response + "\n " + tasks.get(taskId);
                 }
             }
             return response;
@@ -68,21 +87,26 @@ public class DukeWorker {
             if (toBeDeleted.size() < 1) {
                 return "Please specify which task to delete";
             }
-            if (toBeDeleted.get(0) >= task.size() || toBeDeleted.get(toBeDeleted.size() - 1) < 0) {
+            if (toBeDeleted.get(0) >= tasks.size() || toBeDeleted.get(toBeDeleted.size() - 1) < 0) {
                 return "No such task number";
             }
             String response = "";
             for (int i = toBeDeleted.size() - 1; toBeDeleted.size() > 0 && i >= 0; i--) {
                 int taskId = toBeDeleted.get(i);
-                if (taskId >= task.size() || taskId < 0) {
+                if (taskId >= tasks.size() || taskId < 0) {
                     continue;
                 }
                 if (response.equals("")) {
-                    response = task.get(taskId) + response;
+                    response = tasks.get(taskId) + response;
                 } else {
-                    response = task.get(taskId) + "\n " + response;
+                    response = tasks.get(taskId) + "\n " + response;
                 }
-                task.remove(taskId);
+                tasks.remove(taskId);
+            }
+            try {
+                Storage.storeData(Parser.tasksToStorage(tasks), Constants.DUKE_FILE_PATH);
+            } catch (IOException e) {
+                System.out.println("Error in storing data");
             }
             response = "Nice! Deleted tasks(unknown task number ignored):\n " + response;
             return response;
@@ -91,8 +115,13 @@ public class DukeWorker {
                return "Adding task failed, task body cannot be empty";
            }
            if (addToList(token[1], token[0])) {
-               return "I've added this task to the list:\n " + task.get(task.size() - 1) + "\n" +
-                       "Now you have " + task.size() + " task(s) in the list";
+               try {
+                   Storage.storeData(Parser.tasksToStorage(tasks), Constants.DUKE_FILE_PATH);
+               } catch (IOException e) {
+                   System.out.println("Error in storing data");
+               }
+               return "I've added this task to the list:\n " + tasks.get(tasks.size() - 1) + "\n" +
+                       "Now you have " + tasks.size() + " task(s) in the list";
            } else {
                return "Adding task failed, either task body is empty or required time is not specified";
            }
@@ -113,7 +142,6 @@ public class DukeWorker {
         return true;
     }
 
-    //
     private boolean addToList(String item, String type) {
         Task newTask;
         if (type.equals("todo")) {
@@ -137,11 +165,11 @@ public class DukeWorker {
             }
             newTask = new Events(tokens[0].trim(), tokens[1].substring(2).trim());
         }
-        task.add(newTask);
+        tasks.add(newTask);
         return true;
     }
 
     private List<Task> getList() {
-        return task;
+        return tasks;
     }
 }

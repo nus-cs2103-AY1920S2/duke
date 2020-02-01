@@ -21,7 +21,7 @@ public class Deadlines implements Task {
 
     @Override
     public String getTaskType() {
-        return "[D]";
+        return "D";
     }
 
     public String getTaskTime() {
@@ -44,6 +44,6 @@ public class Deadlines implements Task {
 
     @Override
     public String toString() {
-        return getTaskType() + getDoneString() + " " + getTaskName() + " (by: " + getTaskTime() + ")";
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (by: " + getTaskTime() + ")";
     }
 }
