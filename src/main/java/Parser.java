@@ -1,9 +1,17 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input
+ */
 public class Parser {
 
-
+    /**
+     * Takes user input and returns the correct Command
+     * @param input the user input
+     * @return a Command enum
+     * @throws DukeException if the input doesn't match any Command enum
+     */
     public static Command parseCommand(String input) throws DukeException{
         Command comm;
         try {
@@ -15,6 +23,12 @@ public class Parser {
         return comm;
     }
 
+    /**
+     * Takes user input and returns the index
+     * @param input the user input
+     * @return an int of the index
+     * @throws DukeException if the second word of the input isn't a number
+     */
     public static int parseIndex(String input) throws DukeException {
         int index = -1;
         try {
@@ -26,6 +40,12 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Takes user input and returns the corresponding Task
+     * @param input the user input
+     * @return the Task created
+     * @throws DukeException if the user input isn't complete
+     */
     public static Task parseTask(String input) throws DukeException{
         Task newTask;
         Command comm = parseCommand(input);

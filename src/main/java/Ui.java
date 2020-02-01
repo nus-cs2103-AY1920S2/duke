@@ -1,3 +1,6 @@
+/**
+ * Outputs flavour text
+ */
 public class Ui {
 
     public static String charmander = "              _.--\"\"`-..\n" +

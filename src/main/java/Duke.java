@@ -6,6 +6,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Creates a Duke object to run the main program
+     * @param filePath specifies the save file of the list of tasks
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -16,6 +20,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main program
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
 

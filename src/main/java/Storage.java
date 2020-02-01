@@ -4,9 +4,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Saves and loads files as TaskList
+ */
 public class Storage {
     String filepath;
 
+    /**
+     * Creates a Storage object, which helps with saving and loading the list
+     * @param filepath path of the savefile
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -44,6 +51,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Loads a list of Tasks from the save file and returns it
+     * @return the loaded list of Tasks
+     * @throws DukeException if the save file doesn't exist
+     */
     public List<Task> load() throws DukeException{
         List<Task> taskList = new ArrayList<>();
 
@@ -63,6 +75,11 @@ public class Storage {
 
     }
 
+    /**
+     * Saves a list of Tasks onto the save file
+     * @param tasks the list of Tasks to save
+     * @throws DukeException if the save file doesn't exist
+     */
     public void save(TaskList tasks) throws DukeException{
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(filepath));

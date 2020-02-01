@@ -1,12 +1,22 @@
+/**
+ * Represents a task with a description String and an isDone boolean
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a Task object that stores a description String and an isDone boolean
+     * @param description a description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Marks the task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
