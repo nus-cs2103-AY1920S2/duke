@@ -16,7 +16,8 @@ public class Duke extends Application{
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException{
+    public Duke() throws IOException{
+        String filePath = "/Users/Simon/Desktop/Y2S2/CS2103T/duke/src/main/java/duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -56,9 +57,9 @@ public class Duke extends Application{
         stage.show(); // Render the stage.
     }
 
-    
+
     public static void main(String[] args) throws IOException{
-        new Duke("/Users/Simon/Desktop/Y2S2/CS2103T/duke/src/main/java/duke.txt").run();
+        new Duke().run();
     }
 
 
