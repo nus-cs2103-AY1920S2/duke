@@ -38,11 +38,24 @@ public class Duke {
                         t.setDone();
                         //print output
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("[" + t.getStatusIcon() + "] " + t.getDescription());
+                        System.out.println(t.toString());
                     } else {
                         throw new DukeException("☹ OOPS!!! Please specify which task you've done.");
                     }
-
+                } else if (firstWord.equals("delete")) {
+                    if (arr.length > 1) { //check for errors
+                        //which task to delete
+                        String secNum = arr[1];
+                        //delete task
+                        Task t = list.get(Integer.parseInt(secNum) - 1);
+                        list.remove(Integer.parseInt(secNum) - 1);
+                        //print output
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    } else {
+                        throw new DukeException("☹ OOPS!!! Please specify which task to delete.");
+                    }
                 } else if (firstWord.equals("todo")) {
                     if (arr.length > 1) { //check for errors
                         //add task to list
