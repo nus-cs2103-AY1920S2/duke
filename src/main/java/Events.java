@@ -2,9 +2,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 
+/**
+ * returns the toString of Events
+ */
 public class Events extends Task {
     protected String at;
 
+    /**
+     *
+     * @param description is the name of the task
+     * @param at to be done on this date
+     */
     public Events(String description, String at) {
         super(description);
         this.at = at;
@@ -14,6 +22,11 @@ public class Events extends Task {
         return this.at;
     }
 
+    /**
+     *
+     * @param at takes in the event's date
+     * @return it as MMM d yyyy
+     */
     String date(String at) {
         String s = "";
         try {

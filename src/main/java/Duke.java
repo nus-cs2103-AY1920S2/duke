@@ -1,9 +1,6 @@
-import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
 
@@ -12,6 +9,10 @@ public class Duke {
     TaskList tasklist;
     String allInst;
 
+    /**
+     * initialises Storage and TaskList classes
+     * @param filePath file to be read / written to
+     */
     public Duke(String filePath) {
         try {
             storage = new Storage(filePath); //reads txt file
@@ -22,6 +23,10 @@ public class Duke {
         }
     }
 
+    /**
+     *  parser.scan() will read inputs from user,
+     *  subsequently writes output into txt.file
+     */
     public void run() {
         try {
             parser.scan();

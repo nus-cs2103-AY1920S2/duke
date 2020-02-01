@@ -2,10 +2,18 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
 
+/**
+ * returns the toString of deadline
+ */
 public class Deadline extends Task {
 
     protected String by;
 
+    /**
+     *
+     * @param description is the name of the task
+     * @param by deadline date
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -15,7 +23,11 @@ public class Deadline extends Task {
         return this.by;
     }
 
-
+    /**
+     *
+     * @param at takes in the deadline date of the task
+     * @return it as MMM d yyyy
+     */
     String getDate(String at) {
         String s = "";
         try {

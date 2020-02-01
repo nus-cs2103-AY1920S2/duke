@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// TaskList reads and do all the instructions
+/**
+ * TaskList reads and do all the instructions, and returns them as Task
+ */
 
 public class TaskList {
 

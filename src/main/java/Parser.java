@@ -1,6 +1,8 @@
 import java.util.Scanner;
-import java.util.List;
 
+/**
+ *  makes sense of the user command
+ */
 public class Parser {
 
     Scanner scan;
@@ -10,6 +12,10 @@ public class Parser {
         this.scan = new Scanner(System.in);
     }
 
+    /**
+     * scanner scan task's instruction and run accordingly
+     * @throws DukeException when users input task which bot does not understand
+     */
     public void scan() throws DukeException {
         ui.greeting();
         String command = scan.nextLine();

@@ -8,9 +8,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-// contains all the instructions taken in by parser
-// and returns a list of tasks
-
+/**
+ *deals with loading tasks from the file and
+ * saving tasks in the file
+ */
 public class Storage {
 
     private List<String> allInstructions = new ArrayList<>();
@@ -18,7 +19,6 @@ public class Storage {
     private String filePath;
     private File file;
 
-    // reads the instructions from txt file
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -41,12 +41,16 @@ public class Storage {
         return taskL;
         }
 
+
     void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * run through all the tasks and prints it out in .txt file
+     */
     public void load() {
         try {
             String tasks = "";
