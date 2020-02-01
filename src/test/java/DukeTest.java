@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
+
     @Test
     @Order(1)
     public void testTaskName() {
@@ -19,8 +20,10 @@ public class DukeTest {
     @Order(2)
     public void testDoneStatus() {
         Deadline deadlineTest = new Deadline("test", LocalDate.parse("2020-01-01"));
-        assertEquals(false, deadlineTest.getDescription());
+        assertEquals(false, deadlineTest.getIsDone());
     }
+
+
 
 
 

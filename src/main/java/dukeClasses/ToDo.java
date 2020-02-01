@@ -7,7 +7,7 @@ import dukeClasses.Task;
  */
 public class ToDo extends Task {
 
-    protected ToDo(String desciption){
+    public ToDo(String desciption){
         super(desciption);
     }
 

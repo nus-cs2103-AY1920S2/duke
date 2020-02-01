@@ -163,4 +163,13 @@ public class TaskManager {
     public void echo(String textEntered){
         System.out.println(textEntered);
     }
+
+
+    /**
+     * Return list of Tasks
+     * @return listOfTasks
+     */
+    public ArrayList<Task> getListOfTasks(){
+        return listOfTasks;
+    }
 }

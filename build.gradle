@@ -47,3 +47,6 @@ shadowJar {
     archiveClassifier = null
     archiveAppendix = null
 }
+test {
+    useJUnitPlatform()
+}
