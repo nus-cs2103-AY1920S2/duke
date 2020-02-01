@@ -6,7 +6,7 @@ In this tutorial, we will be creating a GUI for Duke from scratch based on the f
 
 ## JavaFX controls
 
-Controls are reusable UI elements. Refer to the [JavaFX's official documentation](https://openjfx.io/javadoc/11/javafx.controls/javafx/scene/control/package-summary.html) for a list of controls available.
+Controls are reusable dukeui elements. Refer to the [JavaFX's official documentation](https://openjfx.io/javadoc/11/javafx.controls/javafx/scene/control/package-summary.html) for a list of controls available.
 From the mockup above, can you identify the controls that we will need to use? 
 
 Mockup | Control 
@@ -19,7 +19,7 @@ Mockup | Control
 
 ## Designing the Layout
 
-Now that we know what controls we need to implement our UI, let’s start programming! We quickly run into a problem: how do we show all of them on the screen at once? 
+Now that we know what controls we need to implement our dukeui, let’s start programming! We quickly run into a problem: how do we show all of them on the screen at once? 
 
 Each scene is initialized with a root `Node`. In the previous tutorial, our root `Node` was a `Label`.
 What happens when we need to display more than one `Node` on the `Scene`? For that, we need to understand the JavaFX hierarchy. Recall from the previous tutorial:
@@ -28,7 +28,7 @@ What happens when we need to display more than one `Node` on the `Scene`? For th
  
 From the diagram, you see that the root `Node` can contain many other `Nodes` and similarly, each of those `Nodes` can contain many other `Nodes`. This means that if we can find a _container_ to set as our root `Node`, we can place all our other `Nodes` in it.
 
-But how do we get the exact layout we want in the UI? JavaFX provides that functionality in the form of **layout panes** in `javafx.scene.layouts`. Each layout pane follows a _layout policy_ to decide how to arrange its children. For example, the `VBox` lays out its children in a single vertical column and its counterpart, the `HBox` lays out its children in a single horizontal row. 
+But how do we get the exact layout we want in the dukeui? JavaFX provides that functionality in the form of **layout panes** in `javafx.scene.layouts`. Each layout pane follows a _layout policy_ to decide how to arrange its children. For example, the `VBox` lays out its children in a single vertical column and its counterpart, the `HBox` lays out its children in a single horizontal row. 
 
 :bulb: A comprehensive list of layouts and how they behave is available here from the [official documentation](https://openjfx.io/javadoc/11/javafx.graphics/javafx/scene/layout/package-summary.html).
 

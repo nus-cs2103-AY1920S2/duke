@@ -1,4 +1,4 @@
-# Text UI Testing Tutorial
+# Text dukeui Testing Tutorial
 
 1. Create a folder `[project root]\text-ui-test`
 1. Add a `runtest.bat` (if you are on Windows) or `runtest.sh` (if you are on a *nix OS) into the folder, containing the script below.<br>
