@@ -5,6 +5,7 @@ import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -16,7 +17,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/** Driver for duke project. */
+/**
+ * Driver for duke project.
+ */
 public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -138,5 +141,27 @@ public class Duke extends Application {
         scene = new Scene(mainLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        // Scroll down to the end every time dialogContainer's height changes
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Add functionality to handle user input
+        sendButton.setOnMouseClicked((event -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        }));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textLabel = new Label(text);
+        textLabel.setWrapText(true);
+        return textLabel;
     }
 }
