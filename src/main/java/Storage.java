@@ -25,14 +25,14 @@ public class Storage {
         if (!this.file.exists()) {
             this.file.getParentFile().mkdirs();
             this.file.createNewFile();
-            this.file = new File( this.filePath);
+            this.file = new File(this.filePath);
         }
     }
 
     TaskList readFileContents() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
-        while(s.hasNextLine()) {
+        while (s.hasNextLine()) {
             String instruction = s.nextLine();
             allInstructions.add(instruction);
             }
@@ -54,21 +54,27 @@ public class Storage {
     public void load() {
         try {
             String tasks = "";
-            for (int i=0 ;i< doneTasks.size(); i++) {
+            for (int i = 0; i < doneTasks.size(); i++) {
 
                 Task t = doneTasks.get(i);
                 if (t instanceof Todo) {
-                    tasks += "T | " + t.getIsTaskDone() + " | " +  t.getDescription() + System.lineSeparator();
+                    tasks += "T | " + t.getIsTaskDone() + " | "
+                            +  t.getDescription()
+                            + System.lineSeparator();
                 }
 
                 if (t instanceof  Deadline) {
                     Deadline d = (Deadline) t;
-                    tasks += "D | " + t.getIsTaskDone() + " | " + t.getDescription() + " | " + d.getBy() + System.lineSeparator();
+                    tasks += "D | " + t.getIsTaskDone() + " | "
+                            + t.getDescription() + " | "
+                            + d.getBy() + System.lineSeparator();
                 }
 
                 if (t instanceof Events) {
                     Events e = (Events) t;
-                    tasks += "E | " + t.getIsTaskDone() + " | " + t.getDescription() + " | " + e.getAt() + System.lineSeparator();
+                    tasks += "E | " + t.getIsTaskDone() + " | "
+                            + t.getDescription() + " | "
+                            + e.getAt() + System.lineSeparator();
                 }
             }
             writeToFile(filePath, tasks);

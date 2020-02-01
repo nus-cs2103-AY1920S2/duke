@@ -25,10 +25,14 @@ public class Parser {
                 task.delete();
                 command = scan.nextLine();
 
-            } else if (!command.contains("todo") && !command.contains("deadline") &&
-                    !command.contains("event") && !command.contains("done") &&
-                    !command.contains("list") && !command.contains("delete")) {
-                throw new DukeException(" ))-: OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } else if (!command.contains("todo")
+                    && !command.contains("deadline")
+                    && !command.contains("event")
+                    && !command.contains("done")
+                    && !command.contains("list")
+                    && !command.contains("delete")) {
+                throw new DukeException(" ))-: OOPS!!! I'm sorry, "
+                        + "but I don't know what that means :-(");
 
             } else if (command.contains("todo")) {
                 TaskList task = new TaskList(command);

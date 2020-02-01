@@ -25,8 +25,8 @@ public class TaskList {
     }
 
     public String convertToString() {
-        String s ="";
-        for (int j =0; j<allInstructions.size(); j++) {
+        String s = "";
+        for (int j = 0; j < allInstructions.size(); j++) {
             s += allInstructions.get(j) + System.lineSeparator();
         }
         return s;
@@ -46,13 +46,13 @@ public class TaskList {
 
     public void delete() {
         int num = Integer.parseInt(description.split(" ")[1]);
-        ui.remove(store.get(num-1));
-        store.remove(num-1);
+        ui.remove(store.get(num - 1));
+        store.remove(num - 1);
         ui.storeSize(store.size());
     }
 
     public void toDo() throws DukeException {
-        if (description.split(" ").length > 1 ) {
+        if (description.split(" ").length > 1) {
             String todo = description.substring(5);
             Task taskDo = new Todo(todo);
             store.add(taskDo);
@@ -60,7 +60,8 @@ public class TaskList {
             System.out.println(taskDo);
             ui.storeSize(store.size());
         } else {
-            throw new DukeException( "))-: OOPS!!! The description of a todo cannot be empty. " );
+            throw new DukeException("))-: OOPS!!! The description of a todo"
+                    + " cannot be empty.");
         }
     }
 
@@ -88,7 +89,7 @@ public class TaskList {
 
     public void done() {
         int num = Integer.parseInt(description.split(" ")[1]);
-        Task t = store.get(num-1);
+        Task t = store.get(num - 1);
         t.markAsDone();
         ui.doneTask();
         System.out.println(t);
@@ -96,8 +97,8 @@ public class TaskList {
 
     public void printList() {
         ui.taskList();
-        for (int i =0 ;i< store.size(); i++) {
-            counter ++;
+        for (int i = 0; i < store.size(); i++) {
+            counter++;
             System.out.println(counter + ". " + store.get(i));
         }
     }
