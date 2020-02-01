@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ListCommand;
-import duke.command.ByeCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.WhatsupCommand;
-import duke.command.AddCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -110,6 +104,19 @@ public class Parser {
                     throw new DukeException("\t" + "Please do not leave the event description (partially) empty.");
                 }
                 return new AddCommand("deadline", deadlineName, dueDate);
+
+            case "find":
+                String[] findTokens = instruction.split(" ");
+                String keyWord;
+                try {
+                    keyWord = findTokens[1];
+                    if (keyWord.equals("")) {
+                        throw new DukeException("\t" + "Please enter a keyword when finding.");
+                    }
+                } catch (ArrayIndexOutOfBoundsException aiobe) {
+                    throw new DukeException("\t" + "Please do not leave the find description empty.");
+                }
+                return new FindCommand(keyWord);
 
             default:
                 throw new DukeException("\t" + "You have used an invalid instruction. " +
