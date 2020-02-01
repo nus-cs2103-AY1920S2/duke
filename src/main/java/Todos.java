@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Todos implements Task {
 
     private boolean done = false;
@@ -18,7 +20,7 @@ public class Todos implements Task {
 
     @Override
     public String getTaskType() {
-        return "[T]";
+        return "T";
     }
 
     @Override
@@ -31,12 +33,17 @@ public class Todos implements Task {
     }
 
     @Override
+    public Date getTaskTime() {
+        return null;
+    }
+
+    @Override
     public void markAsDone() {
         this.done = true;
     }
 
     @Override
     public String toString() {
-        return getTaskType() + getDoneString() + " " + getTaskName();
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName();
     }
 }

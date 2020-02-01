@@ -126,7 +126,11 @@ public class DukeWorker {
             if (!tokens[1].substring(0, 2).equals("by")) {
                 return false;
             }
-            newTask = new Deadlines(tokens[0].trim(), tokens[1].substring(2).trim());
+            String time = tokens[1].substring(2).trim();
+            if (!Parser.checkDateFormat(time)) {
+                return false;
+            }
+            newTask = new Deadlines(tokens[0].trim(), Parser.stringToDate(time));
         } else {
             String[] tokens = item.split("/", 2);
             if (tokens.length < 2) {
@@ -135,7 +139,11 @@ public class DukeWorker {
             if (!tokens[1].substring(0, 2).equals("at")) {
                 return false;
             }
-            newTask = new Events(tokens[0].trim(), tokens[1].substring(2).trim());
+            String time = tokens[1].substring(2).trim();
+            if (!Parser.checkDateFormat(time)) {
+                return false;
+            }
+            newTask = new Events(tokens[0].trim(), Parser.stringToDate(time));
         }
         task.add(newTask);
         return true;

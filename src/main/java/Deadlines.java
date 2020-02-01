@@ -1,10 +1,12 @@
+import java.util.Date;
+
 public class Deadlines implements Task {
 
     private boolean done = false;
     private String name;
-    private String time;
+    private Date time;
 
-    public Deadlines(String name, String time) {
+    public Deadlines(String name, Date time) {
         this.name = name;
         this.time = time;
     }
@@ -21,10 +23,10 @@ public class Deadlines implements Task {
 
     @Override
     public String getTaskType() {
-        return "[D]";
+        return "D";
     }
 
-    public String getTaskTime() {
+    public Date getTaskTime() {
         return time;
     }
 
@@ -44,6 +46,7 @@ public class Deadlines implements Task {
 
     @Override
     public String toString() {
-        return getTaskType() + getDoneString() + " " + getTaskName() + " (by: " + getTaskTime() + ")";
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (by: " +
+                Parser.dateToString(getTaskTime()) + ")";
     }
 }
