@@ -36,4 +36,13 @@ public class TaskList implements Serializable {
     public Task get(int i) {
         return tasks.get(i);
     }
+    public TaskList find(String keyword) {
+        TaskList found = new TaskList();
+        for (Task t: tasks) {
+            if (t.contains(keyword)) {
+                found.add(t);
+            }
+        }
+        return found;
+    }
 }

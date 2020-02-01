@@ -1,12 +1,6 @@
 package ip;
 
-import ip.command.Command;
-import ip.command.InvalidCommand;
-import ip.command.DoneCommand;
-import ip.command.DeleteCommand;
-import ip.command.AddCommand;
-import ip.command.ExitCommand;
-import ip.command.ListCommand;
+import ip.command.*;
 import ip.task.Deadline;
 import ip.task.Event;
 import ip.task.Todo;
@@ -33,6 +27,11 @@ public class Parser {
             switch (command) {
                 case "bye": return new ExitCommand();
                 case "list": return new ListCommand();
+                case "find":
+                    if (!inputSc.hasNext()){
+                        throw new Duke.DukeException("The keyword to search is missing :p");
+                    }
+                    return new FindCommand(inputSc.nextLine().trim());
                 case "done":
                     if (!inputSc.hasNextInt()) {
                         throw new Duke.DukeException("The index of the task is missing :/");

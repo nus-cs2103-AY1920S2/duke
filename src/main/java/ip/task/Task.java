@@ -21,4 +21,8 @@ public abstract class Task implements Serializable {
     public String toString() {
         return "[" + (done ? "v" : "x") + "] " + name;
     }
+
+    public boolean contains(String keyword) {
+        return name.contains(keyword);
+    }
 }

@@ -95,4 +95,16 @@ public class Ui {
         printResponse("Noted, I've removed this task: ", t.toString(),
                         "Now you have " + numTasks + " task(s) in the list.");
     }
+    public void displayFoundTasks(TaskList found) {
+        if (found.size() == 0){
+            printResponse("No matching tasks were found :/");
+            return;
+        }
+        String[] strList = new String[found.size() + 1];
+        strList[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < found.size(); i++) {
+            strList[i + 1] = "\t" + (i + 1) + ": " + found.get(i).toString();
+        }
+        printResponse(strList);
+    }
 }
