@@ -19,10 +19,12 @@ public class CommandParser {
         this.ui = ui;
     }
 
-    public boolean terminateUI(String command) {
-        return !command.equals("bye");
-    }
-
+    /**
+     * Parses the user input to determine which command to be created, together with required information to carry out task
+     *
+     * @param command next line of user input
+     * @return the Command object created based on user input
+     */
     public Command parse(String command) {
         int breakPoint = command.indexOf('/');
         String[] nextLine = command.split("\\s+");

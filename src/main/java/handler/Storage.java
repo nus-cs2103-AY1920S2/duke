@@ -35,6 +35,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks in string form from memory, before converting them into Task objects
+     *
+     * @return list of tasks saved in the file
+     */
     public List<Task> loadTaskFromMemory () throws FileNotFoundException {
         //System.out.println("Reading tasks from directory: " + this.filePath.toString());
         File file = new File(this.filePath.toString() + "\\" + this.fileName);
@@ -49,6 +54,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Converts the saved string format in the file to a format that the programme can use to create Task objects
+     *
+     * @return the Task that was created
+     */
     public Task parseTaskFromLine (String line) {
         Task task = null;
         //System.out.println("Parsing line: " + line);
@@ -81,6 +91,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Saves the list of task to memory after converting them to String format\
+     *
+     * @param tasks List of Task objects to be saved
+     */
     public void saveTasksToMemory (List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath.toString() + "\\" + this.fileName);
         String toWrite = "";
