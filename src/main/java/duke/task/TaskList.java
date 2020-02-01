@@ -3,7 +3,6 @@ package duke.task;
 import duke.exception.DukeException;
 import duke.exception.UnknownTaskException;
 import duke.main.Storage;
-import duke.main.Ui;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,10 +22,10 @@ public class TaskList implements Serializable {
     /**
      * deleteCommand Method deletes Tasks from the TaskList.
      *
-     * @param commandSuffix     is the additional String that accompanies two-step commands
+     * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownTaskException when an unknown/unformatted task number is passed in
      */
-    public void deleteTask(String commandSuffix) throws UnknownTaskException {
+    public String deleteTask(String commandSuffix) throws UnknownTaskException {
         try {
             int deleteTaskNo = Integer.parseInt(commandSuffix) - 1;
             Task deletedShadowTask = taskList.get(deleteTaskNo);
@@ -36,8 +35,8 @@ public class TaskList implements Serializable {
                 task.taskNo = taskList.indexOf(task) + 1;
             }
 
-            Ui.print("Noted. I've removed this task:\n\t" + deletedShadowTask
-                + "\nNow you have " + taskList.size() + " task(s) in the list.");
+            return "Noted. I've removed this task:\n\t" + deletedShadowTask
+                + "\nNow you have " + taskList.size() + " task(s) in the list.";
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new UnknownTaskException();
         }
@@ -46,14 +45,14 @@ public class TaskList implements Serializable {
     /**
      * doneCommand Method marks Tasks as done.
      *
-     * @param commandSuffix     is the additional String that accompanies two-step commands
+     * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownTaskException when an unknown/unformatted task number is passed in
      */
-    public void doneTask(String commandSuffix) throws UnknownTaskException {
+    public String doneTask(String commandSuffix) throws UnknownTaskException {
         try {
             int doneTaskNo = Integer.parseInt(commandSuffix) - 1;
             taskList.get(doneTaskNo).taskCompleted = true;
-            Ui.print("Nice! I've marked this task as done:\n\t[✓] " + taskList.get(doneTaskNo).taskName);
+            return "Nice! I've marked this task as done:\n\t[✓] " + taskList.get(doneTaskNo).taskName;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new UnknownTaskException();
         }

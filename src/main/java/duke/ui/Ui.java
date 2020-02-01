@@ -1,4 +1,4 @@
-package duke.main;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -7,8 +7,8 @@ public class Ui {
     static Scanner scanner = new Scanner(System.in);
 
     //Custom welcome Method to print a welcome message
-    static void welcome() {
-        print("Hello! I'm Duke\nWhat can I do for you?");
+    public static String welcome() {
+        return ("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /**

@@ -5,7 +5,6 @@ import duke.exception.MissingAtEventException;
 import duke.exception.MissingByDeadlineException;
 import duke.exception.MissingDetailsException;
 import duke.exception.UnknownDateTimeException;
-import duke.main.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -21,9 +20,8 @@ import java.util.List;
 
 public class Command {
     //Custom byeCommand Method to exit Duke
-    public static boolean byeCommand() {
-        Ui.print("Bye. Hope to see you again soon!");
-        return false;
+    public static String byeCommand() {
+        return ("BYE");
     }
 
     /**
@@ -34,18 +32,18 @@ public class Command {
      * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownDateTimeException when improperly formatted DateTime values are given
      */
-    public static void calendarCommand(TaskList taskList, String commandSuffix) throws UnknownDateTimeException {
+    public static String calendarCommand(TaskList taskList, String commandSuffix) throws UnknownDateTimeException {
         try {
             DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate calendarDate = LocalDate.parse(commandSuffix, dtFormat);
-            calendarFind(taskList, calendarDate);
+            return calendarFind(taskList, calendarDate);
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new UnknownDateTimeException();
         }
     }
 
     //Custom calendarFind Method to find and print the list with the horizontal borders + running index
-    static void calendarFind(TaskList taskList, LocalDate calendarDate) throws DateTimeParseException {
+    static String calendarFind(TaskList taskList, LocalDate calendarDate) throws DateTimeParseException {
         StringBuilder sb = new StringBuilder();
         List<String> calendarList = new ArrayList<>();
 
@@ -73,7 +71,7 @@ public class Command {
             sb.setLength(sb.length() - 1);
         }
 
-        Ui.print(sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -83,7 +81,7 @@ public class Command {
      * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws DukeException when multiple exceptions are caught (e.g. unfilled secondary input)
      */
-    public static void deadlineCommand(TaskList taskList, String commandSuffix) throws DukeException {
+    public static String deadlineCommand(TaskList taskList, String commandSuffix) throws DukeException {
         try {
             String[] byDeadline = commandSuffix.split(" /by ");
 
@@ -116,7 +114,7 @@ public class Command {
                     deadlineOutput = deadlineOutput + "\nPS: " + proTip;
                 }
 
-                Ui.print(deadlineOutput);
+                return deadlineOutput;
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new MissingByDeadlineException();
             }
@@ -132,13 +130,13 @@ public class Command {
      * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws DukeException when multiple exceptions are caught (e.g. unfilled secondary input)
      */
-    public static void eventCommand(TaskList taskList, String commandSuffix) throws DukeException {
+    public static String eventCommand(TaskList taskList, String commandSuffix) throws DukeException {
         try {
             String[] atEvent = commandSuffix.split(" /at ");
 
             try {
                 taskList.add(new Event(false, taskList.size(), atEvent[0], atEvent[1]));
-                Ui.print("Got it. I've added this task:\n\t[E][✗] "
+                return ("Got it. I've added this task:\n\t[E][✗] "
                     + atEvent[0] + " (at: " + atEvent[1] + ")"
                     + "\nNow you have " + taskList.size() + " task(s) in the list.");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -155,7 +153,7 @@ public class Command {
      * @param taskList      is the list of Tasks are saved and manipulated
      * @param commandSuffix is the additional String that accompanies two-step commands
      */
-    public static void findCommand(TaskList taskList, String commandSuffix) {
+    public static String findCommand(TaskList taskList, String commandSuffix) {
         StringBuilder sb = new StringBuilder();
         List<String> keywordList = new ArrayList<>();
 
@@ -179,15 +177,15 @@ public class Command {
             sb.setLength(sb.length() - 1);
         }
 
-        Ui.print(sb.toString());
+        return sb.toString();
     }
 
     /**
      * listCommand Method prints the list of Tasks (if not empty) running index.
      *
-     * @param taskList      is the list of Tasks are saved and manipulated
+     * @param taskList is the list of Tasks are saved and manipulated
      */
-    public static void listCommand(TaskList taskList) {
+    public static String listCommand(TaskList taskList) {
         StringBuilder sb = new StringBuilder();
 
         if (taskList.size() == 0) {
@@ -201,7 +199,7 @@ public class Command {
         }
 
         sb.setLength(sb.length() - 1);
-        Ui.print(sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -211,10 +209,10 @@ public class Command {
      * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws MissingDetailsException when unfilled secondary input is caught (empty commandSuffix)
      */
-    public static void todoCommand(TaskList taskList, String commandSuffix) throws MissingDetailsException {
+    public static String todoCommand(TaskList taskList, String commandSuffix) throws MissingDetailsException {
         try {
             taskList.add(new Todo(false, taskList.size(), commandSuffix));
-            Ui.print("Got it. I've added this task:\n\t[T][✗] "
+            return ("Got it. I've added this task:\n\t[T][✗] "
                 + commandSuffix + "\nNow you have " + taskList.size() + " task(s) in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MissingDetailsException();
