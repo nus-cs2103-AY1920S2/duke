@@ -35,11 +35,11 @@ public class Storage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             TaskList lstSaved = (TaskList) ois.readObject();
             ois.close();
-            System.out.println("    Retrieving my little boy's history..");
+            System.out.println(Ui.indent + "Retrieving my little boy's history..");
             res = lstSaved;
 
         } catch (FileNotFoundException e) {
-            System.out.println("    Initialising new list for my little boy..");
+            System.out.println(Ui.indent + "Initialising new list for my little boy..");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

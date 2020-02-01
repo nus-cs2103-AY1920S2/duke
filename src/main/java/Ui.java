@@ -10,8 +10,8 @@ public class Ui {
      * @param size current size of TaskList.
      */
     public void showAddTask(Task task, int size) {
-        System.out.println(dukeFormat("Sure I will add this task.\n    " + task +
-                "\n    Now you have " + String.valueOf(size) + " tasks."));
+        System.out.println(dukeFormat("Sure I will add this task.\n" + Ui.indent + task +
+                "\n" + Ui.indent + "Now you have " + String.valueOf(size) + " tasks."));
     }
 
     /**
@@ -20,7 +20,7 @@ public class Ui {
      * @param task task to be set to done.
      */
     public void showDoneTask(Task task) {
-        System.out.println(dukeFormat("Sure I will mark this task as done.\n    " + task));
+        System.out.println(dukeFormat("Sure I will mark this task as done.\n" + Ui.indent + task));
     }
 
     /**
@@ -30,8 +30,8 @@ public class Ui {
      * @param size current size of TaskList.
      */
     public void showDeleteTask(Task task, int size) {
-        System.out.println(dukeFormat("Sure I will delete this task.\n    " + task
-                + "\n    Now you have " + String.valueOf(size) + " tasks."));
+        System.out.println(dukeFormat("Sure I will delete this task.\n" + Ui.indent + task
+                + "\n" + Ui.indent + "Now you have " + String.valueOf(size) + " tasks."));
     }
 
     /**

@@ -34,14 +34,25 @@ public class TaskList implements Serializable {
      * Gets task from ArrayList based on index.
      *
      * @param index index of task in ArrayList.
-     * @return Task task identified.
+     * @return task identified.
      */
     public Task getTask(int index) {
+        return this.lst.get(index);
+    }
+
+    /**
+     * Gets task from ArrayList based on user input index.
+     *
+     * @param indexString String index of task in ArrayList.
+     * @return task identified.
+     */
+    public Task getTaskFromString(String indexString) {
+        int index = Integer.valueOf(indexString) - 1;
         Task task = null;
         try {
             task = this.lst.get(index);
         } catch (IndexOutOfBoundsException e) {
-            System.err.println("    Task index out of range.");
+            System.err.println(Ui.indent + "Task index out of range.");
         }
         return task;
     }
@@ -56,43 +67,37 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Sets a task to be done based on its index, and returns boolean to indicate if the function ran without errors.
+     * Sets a task to be done based on its index.
      *
-     * @param index index of task stored in TaskList.
-     * @return boolean to indicate if function was run successfully.
+     * @param indexString String index of task stored in TaskList.
      */
-    public boolean doneTask(int index) {
-        boolean isDone = false;
+    public void doneTask(String indexString) {
+        int index = Integer.valueOf(indexString) - 1;
         try {
             Task currTask = lst.get(index);
             currTask.setDone(true);
-            isDone = true;
         } catch (NumberFormatException e) {
-            System.err.println("    Please input an integer.");
+            System.err.println(Ui.indent + "Please input an integer.");
         } catch (IndexOutOfBoundsException e) {
-            System.err.println("    Please try again, your number is out of range.");
+            System.err.println(Ui.indent + "Please try again, your number is out of range.");
         }
-        return isDone;
     }
 
     /**
-     * Delete a task based on its index, and returns boolean to indicate if the function ran without errors.
+     * Delete a task based on its index.
      *
-     * @param index index of task stored in TaskList.
-     * @return boolean to indicate if function was run successfully.
+     * @param indexString String index of task stored in TaskList.
      */
-    public boolean deleteTask(int index) {
-        boolean isDone = false;
+    public void deleteTask(String indexString) {
+        int index = Integer.valueOf(indexString) - 1;
         try {
             Task currTask = lst.get(index);
             lst.remove(index);
-            isDone = true;
         } catch (NumberFormatException e) {
-            System.err.println("    Please input an integer.");
+            System.err.println(Ui.indent + "Please input an integer.");
         } catch (IndexOutOfBoundsException e) {
-            System.err.println("    Please try again, your number is out of range.");
+            System.err.println(Ui.indent + "Please try again, your number is out of range.");
         }
-        return isDone;
     }
 
     /**

@@ -8,6 +8,7 @@ public class Duke {
     private TaskList lst;
     private Ui ui;
     private Parser parser;
+    private Factory factory;
 
     /**
      * Constructor for Duke class. Ui handles user interaction. Storage stores and loads Tasklist from persistent storage.
@@ -20,6 +21,7 @@ public class Duke {
         this.storage = new Storage(filepath);
         this.lst = storage.load();
         this.parser = new Parser();
+        this.factory = new Factory();
     }
 
     public static void main(String[] args) {
@@ -53,70 +55,29 @@ public class Duke {
                     ui.showList(tempLst);
 
                 } else if (command.equals("add")) {
+                    Task task = null;
                     String line = sc.nextLine();
                     if (getInput.equals("todo")) {
-                        Todo todo = new Todo(line);
-                        lst.addTask(todo);
-                        ui.showAddTask(todo, lst.getSize());
+                        task = factory.createTodo(line);
                     } else if (getInput.equals("deadline")) {
-                        int indexCut = line.indexOf("/by");
-                        String desc = line.substring(0, indexCut - 1);
-                        String by = line.substring(indexCut + 4);
-                        TaskDate td = new TaskDate(by);
-                        Deadline deadline = new Deadline(desc, td);
-                        lst.addTask(deadline);
-                        ui.showAddTask(deadline, lst.getSize());
+                        task = factory.createDeadline(line);
                     } else {
-                        TaskDate tdEnd = null;
-
-                        boolean isValid = false;
-
-                        while (!isValid) {
-                            try {
-                                System.out.println("Event end date and time: ");
-                                String endDate = sc.nextLine();
-                                tdEnd = new TaskDate(endDate);
-                                isValid = true;
-
-                                int indexCut = line.indexOf("/at");
-                                String desc = line.substring(0, indexCut - 1);
-                                String at = line.substring(indexCut + 4);
-                                TaskDate tdStart = new TaskDate(at);
-                                Event event = new Event(desc, tdStart, tdEnd);
-                                lst.addTask(event);
-                                ui.showAddTask(event, lst.getSize());
-
-                            } catch(ArrayIndexOutOfBoundsException e) {
-                                System.err.println("Invalid input, please follow the format {dd/mm/yyyy hhmm}");
-                            } catch(DateTimeException e) {
-                                System.err.println("Invalid date!");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-
-
+                        task = factory.createEvent(line);
                     }
+                    lst.addTask(task);
+                    ui.showAddTask(task, lst.getSize());
                     storage.save(lst);
 
                 } else if (command.equals("done")) {
                     String getNumberString = sc.next();
-                    int getNumber = Integer.valueOf(getNumberString);
-                    if (lst.doneTask(getNumber - 1)) {
-                        Task task = lst.getTask(getNumber - 1);
-                        ui.showDoneTask(task);
-                    };
+                    lst.doneTask(getNumberString);
+                    ui.showDoneTask(lst.getTaskFromString(getNumberString));
                     storage.save(lst);
 
                 } else if (command.equals("delete")) {
                     String getNumberString = sc.next();
-                    int getNumber = Integer.valueOf(getNumberString);
-
-                    Task task = lst.getTask(getNumber - 1);
-                    if (lst.deleteTask(getNumber - 1)) {
-                        ui.showDeleteTask(task, lst.getSize());
-                    }
+                    ui.showDeleteTask(lst.getTaskFromString(getNumberString),lst.getSize() - 1);
+                    lst.deleteTask(getNumberString);
                     storage.save(lst);
 
                 } else {
