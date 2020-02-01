@@ -8,8 +8,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Entry point of the Duke application.
- * Initializes the application and starts the interaction with the user.
+ * Initializes the setting and prepare respond to user input.
  */
 public class Duke {
     private Storage storage;
@@ -27,7 +26,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -37,41 +35,15 @@ public class Duke {
     }
 
     /**
-     * Run the program until termination.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException ex) {
-                ui.showError(ex);
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.run();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Return the response based on user input.
+     *
+     * @param input user input from the GUI
+     * @return return the response from the system
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String temp = c.execute(tasks, ui, storage);
-            //System.out.println(temp);
-            return temp;
+            return c.execute(tasks, ui, storage);
         } catch (DukeException ex) {
             return ui.showError(ex);
         }

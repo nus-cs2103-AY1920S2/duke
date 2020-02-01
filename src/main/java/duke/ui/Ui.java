@@ -3,24 +3,12 @@ package duke.ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-import org.w3c.dom.ls.LSException;
-
-import java.util.Scanner;
 
 /**
- * Represent the user interface for the program.
+ * Represent the user interface for the program to prepare reply string to user.
  */
 public class Ui {
-    private static final String WELCOME_MESSAGE = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n"
-            + "What can I do for you? :)\n";
-    private static final String LINE_PREFIX = "  ";
     private static final String LS = System.lineSeparator();
-    private static final String DIVIDER = "_________________________________________________________________________";
-    private static final String LOADING_ERROR = "OOPS!!! There have some problem loading the existing duke.tasks.";
     private static final String NUM_OF_TASKS = "Now you have %d tasks in the list.";
     private static final String ADD_TASK = "Got it. I've added this task: ";
     private static final String DELETE_TASK = "Noted. I've removed this task: ";
@@ -28,14 +16,13 @@ public class Ui {
     private static final String EXIT_TASK = "Bye!!! See you again :)";
     private static final String INVALID_TASK = "Invalid command format!";
     private static final String FIND_TASK = "Here are the matching tasks in your list:";
-    private Scanner scanner;
 
     public Ui() {
-        scanner = new Scanner(System.in);
+
     }
 
     /**
-     * Show message to the user.
+     * Returns message to the user.
      *
      * @param message message given
      */
@@ -48,37 +35,7 @@ public class Ui {
     }
 
     /**
-     * Read command from user.
-     *
-     * @return string represent command
-     */
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Show welcome message to user.
-     */
-    public void showWelcome() {
-        showToUser(WELCOME_MESSAGE);
-    }
-
-    /**
-     * Show loading error to user.
-     */
-    public String showLoadingError() {
-        return showToUser(LOADING_ERROR);
-    }
-
-    /**
-     * Show a divider to user.
-     */
-    public void showLine() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
-     * Show error message based on the exception to user.
+     * Returns error message based on the exception to user.
      *
      * @param ex exception which contain error message
      */
@@ -87,7 +44,7 @@ public class Ui {
     }
 
     /**
-     * Show the information of added task to user.
+     * Returns the information of added task to user.
      *
      * @param task new task
      * @param totalTasks current total task in integer
@@ -97,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Show the information of deleted task to user.
+     * Returns the information of deleted task to user.
      *
      * @param task deleted task
      * @param totalTasks current total task in integer
@@ -107,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Show the information of done task to user.
+     * Returns the information of done task to user.
      *
      * @param task done task
      */
@@ -116,14 +73,14 @@ public class Ui {
     }
 
     /**
-     * Show exit message to user.
+     * Returns exit message to user.
      */
     public String showExit() {
         return showToUser(EXIT_TASK);
     }
 
     /**
-     * Show invalid command message to user.
+     * Returns invalid command message to user.
      *
      * @param message message of invalid command
      */
@@ -132,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Show all current tasks to user.
+     * Returns all current tasks to user.
      *
      * @param tasks list of all tasks
      */
@@ -141,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Show all find tasks to user.
+     * Returns all find tasks to user.
      *
      * @param tasks list of find tasks
      */
