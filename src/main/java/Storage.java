@@ -9,13 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class abstracts the I/O method of
+ * reading and writing tasks from a file.
+ */
 public class Storage {
 
     private static List<Task> tasks;
 
+    /**
+     * Constructs a Storage instance.
+     */
     public Storage() {
     }
 
+    /**
+     * Loads the tasks from the file.
+     *
+     * @return The List of all the tasks loaded from the file.
+     * @throws IOException If an I/O error occurred.
+     */
     public List<Task> loadFile() throws IOException {
         tasks = new ArrayList<>();
         Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
@@ -58,6 +71,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the List of tasks to the file.
+     *
+     * @param tasks The list of tasks.
+     * @throws IOException If an I/O error occurred.
+     */
     public void saveFile(List<Task> tasks) throws IOException {
         Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
         if (!Files.exists(path)) {

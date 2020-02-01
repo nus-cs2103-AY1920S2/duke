@@ -1,17 +1,37 @@
 import java.util.List;
 
+/**
+ * Handles the (command line) user interface provided to the user.
+ * The Ui class provides utility methods to show various message types.
+ * Messages will be displayed in standard output.
+ */
 public class Ui {
+
+    /**
+     * Constructs a Ui instance.
+     */
     public Ui() {
     }
 
+    /**
+     * Prints the string.
+     *
+     * @param s The string.
+     */
     private void print(String s) {
         System.out.println(s);
     }
 
+    /**
+     * Prints a horizontal line.
+     */
     private void printLine() {
         print("____________________________________________________________");
     }
 
+    /**
+     * Displays a greeting, separated by horizontal header lines.
+     */
     public void greet() {
         printLine();
         String logo = " ____        _        \n"
@@ -24,6 +44,12 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints all the tasks stored in the given list.
+     *
+     * @param tasks The list containing all the tasks.
+     * @throws DukeInvalidTaskException If the list of tasks is empty.
+     */
     public void displayTasks(List<Task> tasks) throws DukeInvalidTaskException {
         if (tasks.size() != 0) {
             print("Here are the tasks in your list:");
@@ -36,6 +62,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the list of all the tasks matching a string keyword.
+     *
+     * @param tasks The list containing all the tasks.
+     * @throws DukeInvalidTaskException If the task is not found.
+     */
     public void displayFoundTasks(List<Task> tasks) throws DukeInvalidTaskException {
         if (tasks.size() != 0) {
             print("Here are the matching tasks in your list:");
@@ -48,17 +80,28 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the error message.
+     *
+     * @param e The error that is being raised.
+     */
     public void printError(Exception e) {
         System.err.println(e);
         print("Please try again.");
     }
 
+    /**
+     * Prints the invalid date format error message.
+     */
     public void printInvalidDateFormatError() {
         System.err.println("Please enter the date as yyyy-mm-dd followed by the time e.g. 2020-01-01 2359");
         print("Try again.");
     }
 
-
+    /**
+     * Displays the goodbye message.
+     * followed by a horizontal line.
+     */
     public void printBye() {
         print("Bye. Hope to see you again soon!");
         printLine();
