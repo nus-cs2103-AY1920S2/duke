@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-=======
 import java.io.*;
->>>>>>> branch-level-7
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,6 +26,7 @@ public class Duke {
         Task task;
         String desc;
         String date;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
         if (type == 'T') {
             desc = string.substring(7);
 
@@ -38,14 +37,14 @@ public class Duke {
             date = date.substring(0, date.length() - 1); // remove ending bracket
             desc = desc.split("\\(by: ")[0];
 
-            task = new Deadline(desc, date);
+            task = new Deadline(desc, LocalDate.parse(date, format));
         } else {
             desc = string.substring(7);
             date = desc.split("\\(date: ")[1];
             date = date.substring(0, date.length() - 1); // remove ending bracket
             desc = desc.split("\\(date: ")[0];
 
-            task = new Event(desc, date);
+            task = new Event(desc, LocalDate.parse(date, format));
         }
 
         if (isDone) {

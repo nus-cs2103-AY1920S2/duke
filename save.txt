@@ -1,3 +1,4 @@
 [T][✘] aaaaaaaaaaaaaa
-[T][✘] boye
-[E][✓] go eat berries (date: maybe later)
+[T][✓] boye
+[E][✘] c (date: Oct 10 2019)
+[E][✓] d (date: Feb 2 2019)
