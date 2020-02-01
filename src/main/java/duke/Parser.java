@@ -47,6 +47,9 @@ class Parser {
         case "delete":
             isBye = delete(Integer.parseInt(cmd[1]));
             break;
+        case "find":
+            isBye = find(cmd[1]);
+            break;
         default:
             throw new InvalidCommandException("invalid command:\n      " + line + "\n    please try again");
         }
@@ -134,6 +137,11 @@ class Parser {
 
     public boolean delete(int i) {
         ui.out(tasks.delete(i));
+        return !SHUTDOWN;
+    }
+
+    private boolean find(String query) {
+        ui.out(tasks.find(query));
         return !SHUTDOWN;
     }
 
