@@ -28,10 +28,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new Deadline(description, dateTime);
         tasks.addTask(task);
         storage.saveSingle(task);
-        ui.showAddTask(task, tasks.getSize());
+        return ui.showAddTask(task, tasks.getSize());
     }
 }

@@ -22,9 +22,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task tempTask = tasks.deleteTaskByIndex(index);
         storage.saveAll(tasks);
-        ui.showDeleteTask(tempTask, tasks.getSize());
+        return ui.showDeleteTask(tempTask, tasks.getSize());
     }
 }
