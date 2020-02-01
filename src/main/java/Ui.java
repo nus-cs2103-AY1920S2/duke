@@ -48,6 +48,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Print out tasks in filteredList
+     * @param filteredList ArrayList to print tasks from
+     */
     public static void printFilteredList(ArrayList<Task> filteredList) {
         System.out.println("    ____________________________________________________________\n" +
                 "     Here are the matching tasks in your list:");

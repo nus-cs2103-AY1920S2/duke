@@ -40,6 +40,10 @@ public class TaskList {
         Ui.printAdd(task, arrList);
     }
 
+    /**
+     * Finds tasks with taskSubString in their name
+     * @param taskSubString String to be found in Task name
+     */
     public void findTasks(String taskSubString) {
         ArrayList<Task> filteredList = new ArrayList<Task>();
         for (Task t : arrList) {

@@ -21,7 +21,7 @@ public class Parser {
                 } else if (input.equals("list")) {
                     Ui.printList(taskList);
                 } else if (input.contains("done")) {
-                    String[] inputArr = input.split(" ");
+                    String[] inputArr = input.split(" ", 2);
                     int taskNum = Integer.parseInt(inputArr[1]);
                     taskList.taskDone(taskNum);
                     storage.updateFile(taskList);
