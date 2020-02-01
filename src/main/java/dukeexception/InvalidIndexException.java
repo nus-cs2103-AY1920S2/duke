@@ -1,3 +1,5 @@
+package dukeexception;
+
 public class InvalidIndexException extends DukeException {
     @Override
     public String getMessage() {

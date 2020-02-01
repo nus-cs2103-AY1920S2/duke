@@ -1,16 +1,17 @@
+package task;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
     protected LocalDate date;
     protected LocalTime time;
     static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
     static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
-        public Deadline(String description, LocalDate date, LocalTime time) {
+    public Event(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;
@@ -20,7 +21,7 @@ public class Deadline extends Task {
         return this.date;
     }
 
-    public String getDeadline() {
+    public String getEvent() {
         return this.date + ", " + this.time;
     }
 
@@ -28,7 +29,7 @@ public class Deadline extends Task {
     public String toString() {
         String formattedDate = this.date.format(dateFormatter);
         String formattedTime = this.time.format(timeFormatter);
-        return "[D][" + super.getStatusIcon() + "] " + super.toString() + " (by: " + formattedDate
+        return "[E][" + super.getStatusIcon() + "] " + super.toString() + " (at: " + formattedDate
                 + ", " + formattedTime + ")";
     }
 }

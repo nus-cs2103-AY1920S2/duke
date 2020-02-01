@@ -1,7 +1,4 @@
-D | 1 | project | 2020-02-25, 18:00
-T | 0 | read book
 E | 0 | capt day | 2020-12-03, 15:30
 D | 1 | project | 2020-02-15, 23:59
 T | 0 | buy bread
-D | 0 | submission | 2020-09-12, 17:00
-D | 0 | project | 2020-02-12, 12:34
+D | 1 | submission | 2020-09-12, 17:00

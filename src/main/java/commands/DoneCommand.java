@@ -1,3 +1,12 @@
+package commands;
+
+import dukeexception.DukeException;
+import dukeexception.InvalidIndexException;
+import storage.Storage;
+import task.Task;
+import tasklist.TaskList;
+import ui.Ui;
+
 public class DoneCommand extends Command {
     
     private int index;

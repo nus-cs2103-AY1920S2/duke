@@ -1,3 +1,5 @@
+package dukeexception;
+
 public class LoadException extends DukeException {
 
     @Override

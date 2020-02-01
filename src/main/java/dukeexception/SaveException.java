@@ -1,3 +1,5 @@
+package dukeexception;
+
 public class SaveException extends DukeException {
 
     @Override

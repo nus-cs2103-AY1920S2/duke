@@ -1,3 +1,5 @@
+package dukeexception;
+
 public class InvalidDateTimeException extends DukeException {
     @Override
     public String getMessage() {

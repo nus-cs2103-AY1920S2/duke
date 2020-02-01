@@ -1,3 +1,5 @@
+package dukeexception;
+
 public class WrongInputException extends DukeException {
 
     public String input;
