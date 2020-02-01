@@ -12,6 +12,7 @@ public class Duke {
 
     /**
      * Constructs a Duke object and initialises the Storage, Ui and TaskList.
+     *
      * @param filePath The file path where the tasks are stored.
      */
     public Duke(String filePath) {

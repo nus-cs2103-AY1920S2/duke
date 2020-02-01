@@ -14,6 +14,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a DoneCommand with the specified index.
+     *
      * @param index The index of the task to be marked as done.
      */
     public DoneCommand(int index) {
@@ -22,6 +23,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks the task at the specified index in the TaskList as done and prints an acknowledgement message.
+     *
      * @param tasks The TaskList where the task is to be marked as done.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.

@@ -13,10 +13,12 @@ import duke.task.Event;
  * Adds a task to the TaskList.
  */
 public class AddCommand extends Command {
-    String type, details;
+    String type;
+    String details;
 
     /**
      * Constructs an AddCommand with the specified type and details.
+     *
      * @param type The type of task for the command.
      * @param details The details of the command.
      */
@@ -27,6 +29,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds the task to the TaskList and prints an acknowledgement message.
+     *
      * @param tasks The TaskList where the task is to be added.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.

@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * Constructs a Task with the specified description.
+     *
      * @param description The description of the Task.
      */
     public Task(String description) {
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * Constructs a Task with the specified description and status.
+     *
      * @param description The description of the Task.
      * @param isDone Whether the Task is done.
      */
@@ -30,6 +32,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return The description of the task.
      */
     public String getDescription() {
@@ -38,15 +41,16 @@ public class Task {
 
     /**
      * Returns the status of the task.
+     *
      * @return Y if the task is done and N is the task is not done.
      */
     public String getStatusIcon() {
         return (isDone ? "Y" : "N");
-//        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
      * Marks the task as done.
+     *
      * @throws DukeException If the task is already marked as done.
      */
     public void markAsDone() throws DukeException {
@@ -58,6 +62,7 @@ public class Task {
 
     /**
      * Returns a string representation of the task for saving to the disk.
+     *
      * @return String representation of the task for saving to the disk.
      */
     public String formatToSave() {
@@ -66,6 +71,7 @@ public class Task {
 
     /**
      * Returns a string representation of the task for printing.
+     *
      * @return String representation of the task for printing.
      */
     @Override

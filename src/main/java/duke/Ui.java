@@ -19,6 +19,7 @@ public class Ui {
 
     /**
      * Returns the user input read.
+     *
      * @return The user input read.
      */
     public String readCommand() {
@@ -27,6 +28,7 @@ public class Ui {
 
     /**
      * Prints the message with indentation.
+     *
      * @param message The message to be printed.
      */
     public void print(String message) {
@@ -42,6 +44,7 @@ public class Ui {
 
     /**
      * Prints the message with indentation and horizontal line above and below.
+     *
      * @param message The message to be printed.
      */
     public void showToUser(String... message) {
@@ -76,6 +79,7 @@ public class Ui {
 
     /**
      * Prints the error message when an exception is thrown.
+     *
      * @param message The error message.
      */
     public void showError(String message) {
@@ -84,6 +88,7 @@ public class Ui {
 
     /**
      * Prints the tasks in the specified TaskList.
+     *
      * @param tasks The TaskList with the tasks to be printed.
      * @throws DukeException If the index is out of range (index < 1 || index > size()).
      */
@@ -113,6 +118,7 @@ public class Ui {
 
     /**
      * Prints a message to acknowledge that the task has been marked as done.
+     *
      * @param task The task marked as done.
      */
     public void showDoneTask(Task task) {
@@ -121,6 +127,7 @@ public class Ui {
 
     /**
      * Prints a message to acknowledge that the task has been delete from the TaskList.
+     *
      * @param task The task to be deleted from the TaskList.
      * @param tasks The TaskList where the task is deleted.
      */
@@ -131,6 +138,7 @@ public class Ui {
 
     /**
      * Prints the tasks in the specified TaskList.
+     *
      * @param tasks The TaskList that contains the tasks to be printed.
      */
     public void showMatchingTasks(TaskList tasks) {
@@ -149,6 +157,7 @@ public class Ui {
 
     /**
      * Prints the tasks on the specified date.
+     *
      * @param filteredTasks The TaskList that contains tasks on the specified date.
      */
     public void showGetTasks(TaskList filteredTasks) {
@@ -157,6 +166,7 @@ public class Ui {
 
     /**
      * Prints the tasks with the specified keyword.
+     *
      * @param filteredTasks The TaskList that contains tasks with the specified keyword.
      */
     public void showFindTasks(TaskList filteredTasks) {

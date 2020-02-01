@@ -18,6 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Saves the tasks in the TaskList to the data file and terminates the program with the exit message.
+     *
      * @param tasks The TaskList containing the tasks.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.

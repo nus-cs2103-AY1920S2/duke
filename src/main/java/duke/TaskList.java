@@ -23,6 +23,7 @@ public class TaskList {
 
     /**
      * Constructs a TaskList containing the elements of the specified list of tasks.
+     *
      * @param tasks The list whose elements are to be placed into this TaskList.
      */
     public TaskList(List<Task> tasks) {
@@ -31,6 +32,7 @@ public class TaskList {
 
     /**
      * Returns the task at the specified position in this TaskList.
+     *
      * @param index The 1-based index of the task to return.
      * @return The task at the specified position in the TaskList.
      * @throws DukeException If the index is out of range (index < 1 || index > size()).
@@ -45,6 +47,7 @@ public class TaskList {
 
     /**
      * Appends the specified task to the end of this TaskList.
+     *
      * @param task Task to be appended to this TaskList.
      */
     public void add(Task task) {
@@ -54,6 +57,7 @@ public class TaskList {
     /**
      * Removes the task at the specified position in this TaskList.
      * Shifts any subsequent tasks to the left (subtracts one from their indices).
+     *
      * @param index The 1-based index of the task to be removed.
      * @return The task that was removed from the TaskList.
      * @throws DukeException If the index is out of range (index < 1 || index > size()).
@@ -68,6 +72,7 @@ public class TaskList {
 
     /**
      * Returns a TaskList containing tasks on the specified date.
+     *
      * @param date The date to to filter.
      * @return A TaskList containing tasks on the specified date.
      */
@@ -84,6 +89,7 @@ public class TaskList {
 
     /**
      * Returns a TaskList containing tasks with the specified keyword.
+     *
      * @param keyword The keyword to search for.
      * @return A TaskList containing tasks with the specified keyword.
      */
@@ -99,6 +105,7 @@ public class TaskList {
 
     /**
      * Returns a list of all tasks in this TaskList.
+     *
      * @return A list of all tasks in the TaskList.
      */
     public List<Task> getTasks() {
@@ -107,6 +114,7 @@ public class TaskList {
 
     /**
      * Returns true if this TaskList contains no tasks.
+     *
      * @return true if this TaskList contains no tasks.
      */
     public boolean isEmpty() {
@@ -115,6 +123,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in this TaskList.
+     *
      * @return The number of tasks in the TaskList.
      */
     public int size() {

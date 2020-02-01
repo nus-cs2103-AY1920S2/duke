@@ -17,6 +17,7 @@ public class Event extends Task {
 
     /**
      * Constructs an Event with the specified description and date and time.
+     *
      * @param description The description of the event.
      * @param at The date and time of the event in yyyy-mm-dd hh:mm-hh:mm format.
      * @throws DukeException If the date or time is in the incorrect format.
@@ -39,6 +40,7 @@ public class Event extends Task {
 
     /**
      * Constructs an Event with the specified description, date and time and status.
+     *
      * @param description The description of the event.
      * @param at The date and time of the event in yyyy-mm-dd hh:mm-hh:mm format.
      * @param isDone Whether the event is done.
@@ -54,6 +56,7 @@ public class Event extends Task {
 
     /**
      * Returns the date of the event.
+     *
      * @return The date of the event.
      */
     public LocalDate getDate() {
@@ -62,6 +65,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of the event for saving to the disk.
+     *
      * @return String representation of the event for saving to the disk.
      */
     @Override
@@ -71,11 +75,12 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of the event for printing.
+     *
      * @return String representation of the event for printing.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " " + startTime + "-" + endTime + ")";
+        return "[E]" + super.toString() + " (at: "
+                + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " " + startTime + "-" + endTime + ")";
     }
 }
