@@ -44,21 +44,21 @@ public class TaskList {
 
     /**
      * marks the specified task as done.
-     * @param i the index of the task
+     * @param index the index of the task
      */
-    public void done(int i) {
-        newList.get(i).markAsDone();
+    public void done(int index) {
+        newList.get(index).markAsDone();
         ui.dukePrint("Nice! I've marked this task as done: \n"
-                + newList.get(i).toString() + "\n");
+                + newList.get(index).toString() + "\n");
     }
 
     /**
      * deletes the specified task.
-     * @param i the index of the task
+     * @param index the index of the task
      */
-    public void delete(int i) {
-        Task task = newList.get(i);
-        newList.remove(i);
+    public void delete(int index) {
+        Task task = newList.get(index);
+        newList.remove(index);
         ui.dukePrint("Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + newList.size() + " tasks in the list.\n");
     }

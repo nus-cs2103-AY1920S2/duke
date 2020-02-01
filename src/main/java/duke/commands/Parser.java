@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -40,10 +39,11 @@ public class Parser {
     private TaskList taskList;
 
     /**
-     * creates a new Parser object and gets Tasklist from DUke.
+     * creates a new Parser object and gets Tasklist from Duke.
+     * @param taskList the TaskList
      */
-    public Parser() {
-        this.taskList = Duke.taskList;
+    public Parser(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**

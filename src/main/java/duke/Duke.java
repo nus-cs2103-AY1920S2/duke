@@ -10,10 +10,10 @@ import duke.commands.Ui;
  */
 public class Duke {
 
+    private static Parser parser;
+    private static Storage storage;
+    private static TaskList taskList;
     private static Ui ui = new Ui();
-    public static TaskList taskList = new TaskList();
-    private static Storage storage = new Storage("duke.txt");
-    private static Parser parser = new Parser();
 
     /**
      * runs the programme.
@@ -21,7 +21,10 @@ public class Duke {
      */
     public static void main(String[] args) {
         ui.start();
+        taskList = new TaskList();
+        storage = new Storage("duke.txt", taskList);
         storage.retrieveInfo();
+        parser = new Parser(taskList);
         parser.parse();
         storage.updateInfo();
     }

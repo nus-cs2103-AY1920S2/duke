@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -27,15 +26,24 @@ public class Storage {
      * the TaskList.
      */
     private TaskList taskList;
+    /**
+     * index in arr containing the description.
+     */
+    private static final int DESC = 2;
+    /**
+     * index in arr containing the time.
+     */
+    private static final int TIME = 3;
 
     /**
      * creates new Storage.
      * @param filePath the path to the duke.txt file where previous user input
      *                 has been stored.
+     * @param taskList the TaskList
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, TaskList taskList) {
         this.filePath = filePath;
-        this.taskList = Duke.taskList;
+        this.taskList = taskList;
     }
 
     /**
@@ -50,12 +58,12 @@ public class Storage {
                 Task newTask = null;
 
                 if  (arr[0].trim().equals("T")) {
-                    newTask = new ToDo(arr[2].trim());
+                    newTask = new ToDo(arr[DESC].trim());
                 } else if (arr[0].trim().equals("D")) {
-                    newTask = new Deadline(arr[2].trim(), arr[3].trim(),
+                    newTask = new Deadline(arr[DESC].trim(), arr[TIME].trim(),
                             FORMATTER);
                 } else if (arr[0].trim().equals("E")) {
-                    newTask = new Event(arr[2].trim(), arr[3].trim(),
+                    newTask = new Event(arr[DESC].trim(), arr[TIME].trim(),
                             FORMATTER);
                 }
 

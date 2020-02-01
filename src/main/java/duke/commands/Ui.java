@@ -18,7 +18,7 @@ public class Ui {
     /**
      * lines to separate user input and programme output.
      */
-    private static final String HORIZONTAL_LINES = "__________________________________"
+    private static final String HORIZONTAL_LINES = "__________________________"
             + "____________________________________________________________\n";
 
     /**
