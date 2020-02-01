@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;

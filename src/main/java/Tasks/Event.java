@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -11,8 +11,6 @@ public class Event extends Task {
 	private LocalDate date;
 	private String signature = "event";
 	private String sepapartor = "/at";
-
-
 
 	public Event(String commandText) throws DukeParseException {
 		super(commandText);
