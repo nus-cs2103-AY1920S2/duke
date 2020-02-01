@@ -5,6 +5,11 @@ public class Parser {
     public Parser(Ui ui) {
     }
 
+    /**
+     * Method reads input from user and performs required actions
+     * @param taskList TaskList to store tasks
+     * @param storage Storage to update/write information to
+     * */
     public static void scan(TaskList taskList, Storage storage ) {
         Scanner sc = new Scanner(System.in);
         while (true) {

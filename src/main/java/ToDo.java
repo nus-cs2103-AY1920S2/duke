@@ -1,8 +1,16 @@
+/** ToDo is a child class of Task.
+ * Task without any date/time attached to it*/
+
 public class ToDo extends Task{
     String time;
 
-    public ToDo(String todo) {
-        super(todo);
+    /**
+     * Constructor that takes in 1 param.
+     *
+     * @param name Name of ToDo.
+     */
+    public ToDo(String name) {
+        super(name);
     }
 
     public String getName() {
@@ -13,6 +21,10 @@ public class ToDo extends Task{
         return this.done;
     }
 
+    /**
+     * Converts ToDo into a String to be saved to file
+     * @return String to be saved to file
+     */
     @Override
     public String toFile() {
         int doneInt = done ? 1 : 0;

@@ -1,16 +1,32 @@
+/**
+ * Parent class of Deadline, Event and ToDo
+ */
 public class Task {
     public boolean done;
     public String name;
 
+    /**
+     * Constructor. Initialise name and done status.
+     *
+     * @param name Name of task.
+     */
     public Task(String name) {
         this.name = name;
         this.done = false;
     }
 
+    /**
+     * Toggle status of the done attribute of task
+     */
     public void toggleDone() {
         this.done = !this.done;
     }
 
+    /**
+     * Converts Task into a String to be saved to file
+     * Overwritten by child classes
+     * @return String to be saved to file
+     */
     public String toFile() {
         int doneInt = done ? 1 : 0;
         return "Q , " + doneInt + " , " + name;
