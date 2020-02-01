@@ -24,7 +24,13 @@ public interface IUserInterface {
      *
      * @param responses a variable number of sentences for Dude to tell the user.
      */
-    void respond(String... responses);
+    default void respond(String... responses) {
+        respond(() -> {
+            for (String response : responses) {
+                speak(response);
+            }
+        });
+    }
 
     /**
      * Displays an error message to the user when an incorrect command is given.
@@ -33,7 +39,17 @@ public interface IUserInterface {
      * @param errorMsg A message describing the problem with the user's input.
      * @param usageMsgs variable number of strings describing the correct format of input.
      */
-    void respondParsingError(String errorMsg, String... usageMsgs);
+    default void respondParsingError(String errorMsg, String... usageMsgs) {
+        respond(() -> {
+            speak(errorMsg);
+            speak("Just tell me what you want to do like this:" + System.lineSeparator());
+            for (String usageMsg : usageMsgs) {
+                speak("  " + usageMsg);
+            }
+            speak("");
+            speak("Then we're chill");
+        });
+    }
 
     /**
      * Speaks a single sentence to the user.
@@ -42,9 +58,4 @@ public interface IUserInterface {
      * @param str the sentence to speak to the user.
      */
     void speak(String str);
-
-    /**
-     * Releases resources held by implementing classes to obtain input and/or display output.
-     */
-    void close();
 }

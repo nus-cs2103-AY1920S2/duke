@@ -2,7 +2,6 @@ package dude.command;
 
 import dude.task.Task;
 
-import dude.component.IStorage;
 import dude.component.IUserInterface;
 import dude.component.TaskList;
 
@@ -24,11 +23,9 @@ public class AddTaskCommand extends Command {
      *
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
-     * @param storage the IStorage from which the current session was loaded and to which the session will
-     *                be saved to on an exiting command.
      */
     @Override
-    public void execute(TaskList tasks, IUserInterface ui, IStorage storage) {
+    public void execute(TaskList tasks, IUserInterface ui) {
         tasks.addTask(this.task);
         ui.respond("I gotcha my dude. I've added this task:",
                 String.format("  %s", this.task),
