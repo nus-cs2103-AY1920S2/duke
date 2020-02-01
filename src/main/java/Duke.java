@@ -1,8 +1,11 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class Duke {
+
+    private final static String filepath =
+            "C:\\Users\\Dargo\\Documents\\NUS\\CS\\CS2103T Software Engineering\\CS2103 Duke\\src\\main\\java\\duke.txt";
+
     public static void main(String[] args) {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -26,7 +29,17 @@ public class Duke {
 
         InputStreamReader reader = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(reader);
+
         try {
+
+            File file = new File
+                    ("C:\\Users\\Dargo\\Documents\\NUS\\CS\\CS2103T Software Engineering\\CS2103 Duke\\src\\main\\java\\duke.txt");
+            if(file.length() != 0) {
+
+                FileInputStream fileIn = new FileInputStream(filepath);
+                ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+                tasks = (ArrayList<Task>) objectIn.readObject();
+            }
 
             String input = br.readLine();
             String[] command = input.split(" ");
@@ -115,6 +128,11 @@ public class Duke {
             }
 
             br.close();
+
+            FileOutputStream fileOut = new FileOutputStream(filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(tasks);
+            objectOut.close();
             System.out.println(exit);
         } catch(Exception e) {
             System.err.println(e);
