@@ -7,3 +7,4 @@ list
 event meeting /at Sunday 10am
 done 3
 list
+bye

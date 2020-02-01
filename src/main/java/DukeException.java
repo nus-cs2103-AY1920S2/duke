@@ -23,6 +23,8 @@ public class DukeException extends Exception {
                 return "Please let me know which task you are done with!:)";
             case 7: // for not specifying which task to delete
                 return "Please let me know which task you want to delete!:)";
+            case 8: // file loading error
+                return null;
         }
         return "ERROR";
     }
