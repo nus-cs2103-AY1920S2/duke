@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -68,7 +69,7 @@ public class Duke {
         } else {
             String type = parser.getType(command);
             if (type.equals("done") || type.equals("delete")) {
-                int taskNo = parser.getTaskNum(command);
+                int taskNo = parser.getTaskIndex(command);
                 if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
                     throw new DukeException("☹ OOPS!! Not a valid number");
                 } else {
@@ -81,6 +82,14 @@ public class Duke {
                         Task.totalTasks--;
                     }
                 }
+            } else if (type.equals("find")) {
+                ArrayList<Integer> taskFound = new ArrayList<>();
+                for (int i = 0; i < tasks.numOfTasks(); i++) {
+                    if (tasks.getTask(i).description.contains(command.split(" ")[1])) {
+                        taskFound.add(i);
+                    }
+                }
+                ui.printSelected(taskFound);
             } else {
                 // create new task -> add to tasks -> reply
                 Task task = tasks.createAndAddTask(type, command);

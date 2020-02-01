@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * The Ui class deals with interactions with the user.
  */
@@ -88,5 +90,21 @@ public class Ui {
      */
     public void showError(String msg) {
         System.out.println(msg);
+    }
+
+    public void printSelected(ArrayList<Integer> arr) {
+        if (arr.isEmpty()) {
+            System.out.println("No tasks found");
+        } else {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("        Here are the matching tasks in your list:");
+            int count = 1;
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.print("        " + count + ".");
+                (taskList.getTask(arr.get(i))).taskSummary();
+                count++;
+            }
+            System.out.println("    ____________________________________________________________");
+        }
     }
 }

@@ -18,7 +18,7 @@ public class Parser {
      * @param wholeCommand The user command.
      * @return The task number.
      */
-    public int getTaskNum(String wholeCommand) {
+    public int getTaskIndex(String wholeCommand) {
         return Integer.parseInt(wholeCommand.split(" ")[1]);
     }
 
