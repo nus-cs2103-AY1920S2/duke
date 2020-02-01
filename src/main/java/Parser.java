@@ -22,8 +22,8 @@ public class Parser {
         return sc.nextLine();
     }
 
-    public String trimCommand(String command) {
-        return command.replace("find", "").trim();
+    public String trimCommand(String excepted, String command) {
+        return command.replace(excepted, "").trim();
     }
 
 }

@@ -4,7 +4,7 @@ public class Ui {
     public Ui() {
     }
 
-    private static void print(String s) {
+    private void print(String s) {
         System.out.println(s);
     }
 
@@ -48,14 +48,14 @@ public class Ui {
         }
     }
 
-    public static void printError(Exception e) {
+    public void printError(Exception e) {
         System.err.println(e);
-        print("Try again later.");
+        print("Please try again.");
     }
 
-    public static void printInvalidDateFormatError() {
-        System.err.println("Please enter the date as yyyy-mm-dd followed by the time.");
-        print("Try again later.");
+    public void printInvalidDateFormatError() {
+        System.err.println("Please enter the date as yyyy-mm-dd followed by the time e.g. 2020-01-01 2359");
+        print("Try again.");
     }
 
 
@@ -64,7 +64,4 @@ public class Ui {
         printLine();
     }
 
-    public void printTerminated() {
-        print("Program terminated.");
-    }
 }

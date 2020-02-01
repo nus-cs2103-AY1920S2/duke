@@ -51,17 +51,17 @@ public class TaskList {
         command = command.substring(command.indexOf(" "));
         switch (taskType) {
         case "todo":
-            task = new ToDo(command);
+            task = new ToDo(command.trim());
             break;
         case "event":
-            task = new Event(command.split("/at ")[0],
-                    LocalDate.parse(command.split("/at ")[1].split(" ")[0]),
+            task = new Event(command.split("/at ")[0].trim(),
+                    LocalDate.parse(command.split("/at ")[1].trim().split(" ")[0]),
                     command.split("/at ")[1].split(" ")[1]);
             break;
         case "deadline":
-            task = new Deadline(command.split("/by ")[0],
-                    LocalDate.parse(command.split("/by ")[1].split(" ")[0]),
-                    command.split("/by ")[1].split(" ")[1]);
+            task = new Deadline(command.split("/by ")[0].trim(),
+                    LocalDate.parse(command.split("/by ")[1].trim().split(" ")[0]),
+                    command.split("/by ")[1].split(" ")[1].trim());
             break;
         }
         tasks.add(task);

@@ -5,39 +5,39 @@ import java.util.List;
 
 public class Duke {
 
-    private static Storage storage;
-    private static TaskList taskList;
     private static Ui uI;
     private static Parser parser;
 
     public Duke() {
-        storage = new Storage();
+        Storage storage = new Storage();
         uI = new Ui();
         parser = new Parser();
-        try {
-            uI.greet();
-            tasks = storage.loadFile();
-            run();
-            storage.saveFile(tasks);
-        } catch (IOException | DukeException e) {
-            uI.printError(e);
-        } catch (DateTimeParseException d) {
-            uI.printInvalidDateFormatError();
-        } finally {
-            uI.printTerminated();
+        uI.greet();
+        while (true) {
+            try {
+                tasks = storage.loadFile();
+                run();
+                storage.saveFile(tasks);
+                System.exit(0);
+            } catch (IOException | DukeException e) {
+                uI.printError(e);
+            } catch (DateTimeParseException d) {
+                uI.printInvalidDateFormatError();
+            }
         }
     }
+
 
     private static List<Task> tasks = new ArrayList<>();
 
     private static void run() throws DukeException, DateTimeParseException {
-        taskList = new TaskList(tasks);
+        TaskList taskList = new TaskList(tasks);
         String command = parser.getCommand();
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 uI.displayTasks(tasks);
             } else if (command.contains("find")) {
-                uI.displayFoundTasks(taskList.findTask(parser.trimCommand(command)));
+                uI.displayFoundTasks(taskList.findTask(parser.trimCommand("find", command)));
             } else {
                 switch (parser.checkCommand(command)) {
                 case "done":

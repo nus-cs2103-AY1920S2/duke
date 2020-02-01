@@ -68,12 +68,12 @@ public class Storage {
         FileWriter writer = new FileWriter(file);
         for (Task task : tasks) {
             if (task instanceof ToDo) {
-                writer.write("T/" + task.isDone + "/ " + task.description.trim() + "\n");
+                writer.write("T/" + task.isDone + "/" + task.description + "\n");
             } else if (task instanceof Deadline) {
-                writer.write("D/" + task.isDone + "/ " + task.description.trim() + " /by " + ((Deadline) task).date
+                writer.write("D/" + task.isDone + "/" + task.description + "/by " + ((Deadline) task).date
                         + " " + ((Deadline) task).time + "\n");
             } else if (task instanceof Event) {
-                writer.write("E/" + task.isDone + "/ " + task.description.trim() + " /at " + ((Event) task).date
+                writer.write("E/" + task.isDone + "/" + task.description + "/at " + ((Event) task).date
                         + " " + ((Event) task).time + "\n");
             }
         }
