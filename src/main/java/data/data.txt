@@ -2,4 +2,4 @@ T | ✓ | task1
 D | ✓ | task3 | 2019-01-28T14:00
 T | ✘ | task2
 E | ✘ | task4 | My House
-T | ✘ | task5
+T | ✓ | task5
