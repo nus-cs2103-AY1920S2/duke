@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    /** as good practice every class should have it's own private serialVersionUID */
+    /** as good practice every class should have it's own private serialVersionUID. */
     private static final long serialVersionUID = 7761205144753475365L;
     
     private LocalDate atDate;
@@ -19,6 +19,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s %s)", super.toString(), atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime);
+        return String.format(
+            "[E]%s (at: %s %s)",
+            super.toString(), atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime);
     }
 }

@@ -8,10 +8,10 @@ public abstract class Task implements Serializable {
     /** Serializable classes must include a serialVersionUID to identify the class. */
     private static final long serialVersionUID = 1561807677731348300L;
     
-    /** Description of the task */
+    /** Description of the task. */
     protected String description;
     
-    /** Status of the task (true represents a completed task, and vice versa) */
+    /** Status of the task (true represents a completed task, and vice versa). */
     protected boolean isDone = false;
 
     public Task(String description) {

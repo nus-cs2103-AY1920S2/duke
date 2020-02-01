@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    /** as good practice every class should have it's own private serialVersionUID */
+    /** as good practice every class should have it's own private serialVersionUID. */
     private static final long serialVersionUID = -5240102332818031942L;
     
     private LocalDate byDate;
@@ -19,6 +19,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s %s)", super.toString(), byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime);
+        return String.format(
+            "[D]%s (by: %s %s)", 
+            super.toString(), byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime);
     }
 }

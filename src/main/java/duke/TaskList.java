@@ -35,29 +35,28 @@ class TaskList {
      * Adds a Todo task to the Task List.
      * @param desc description of the Todo Task.
      * @return A string describing the Task that was added.
-     * @throws IncorrectArgumentException
      */
     public String[] addTodo(String desc) {
         return add(new Todo(desc));
     }
     
-    public String[] addDeadline (String desc, LocalDate date, LocalTime time) 
+    public String[] addDeadline(String desc, LocalDate date, LocalTime time) 
         throws IncorrectArgumentException {
         return add(new Deadline(desc, date, time));
     }
     
-    public String[] addEvent (String desc, LocalDate date, LocalTime time) 
-    throws IncorrectArgumentException {
+    public String[] addEvent(String desc, LocalDate date, LocalTime time) 
+        throws IncorrectArgumentException {
         return add(new Event(desc, date, time));
     }
 
     private String[] add(Task s) {
         lTasks.add(s);
         return new String[]{
-                "Got it. I've added this task:", 
-                "  " + s.toString(),
-                String.format("Now you have %d tasks in the list.", lTasks.size())
-            };
+            "Got it. I've added this task:", 
+            "  " + s.toString(),
+            String.format("Now you have %d tasks in the list.", lTasks.size())
+        };
     }
 
     public String[] list() {
@@ -78,9 +77,9 @@ class TaskList {
     public String[] delete(int i) {
         Task rem = lTasks.remove(i - 1);
         return new String[]{
-                "Noted. I've removed this task:", 
-                rem.toString(),
-                String.format("Now you have %d tasks in the list.", lTasks.size())
-            };
+            "Noted. I've removed this task:", 
+            rem.toString(),
+            String.format("Now you have %d tasks in the list.", lTasks.size())
+        };
     }
 }

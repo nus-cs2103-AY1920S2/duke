@@ -2,7 +2,7 @@ package duke;
 
 import java.util.Scanner;
 
-/** deals with interactions with the user */
+/** deals with interactions with the user. */
 public class Ui {
     Scanner in = new Scanner(System.in);
     String arguments;

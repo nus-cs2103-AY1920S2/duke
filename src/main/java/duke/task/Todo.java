@@ -2,7 +2,7 @@ package duke.task;
 
 public class Todo extends Task {
 
-    /** as good practice every class should have it's own private serialVersionUID */
+    /** as good practice every class should have it's own private serialVersionUID. */
     private static final long serialVersionUID = -1559261707306825517L;
 
     public Todo(String description) {
