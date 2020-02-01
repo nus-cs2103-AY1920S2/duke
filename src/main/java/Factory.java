@@ -17,6 +17,42 @@ public class Factory {
     }
 
     /**
+     * Create Todo object.
+     *
+     * @param desc Todo description
+     * @return Todo object
+     */
+    public Task buildTodoFromCloud(String desc) {
+        return createTodo(desc);
+    }
+
+    /**
+     * Create Deadline object.
+     *
+     * @param desc Deadline description.
+     * @param dateTimeStr Deadline due datetime.
+     * @return Deadline object.
+     */
+    public Task buildDeadlineFromCloud(String desc, String dateTimeStr) {
+        TaskDate td = new TaskDate(dateTimeStr);
+        return new Deadline(desc, td);
+    }
+
+    /**
+     * Create Event object.
+     *
+     * @param desc Event description.
+     * @param dateTimeStr1 Event start datetime.
+     * @param dateTimeStr2 Event end datetime
+     * @return Event object.
+     */
+    public Task buildEventFromCloud(String desc, String dateTimeStr1, String dateTimeStr2) {
+        TaskDate td = new TaskDate(dateTimeStr1);
+        TaskDate td2 = new TaskDate(dateTimeStr2);
+        return new Event(desc, td, td2);
+    }
+
+    /**
      * Creates a Todo object.
      *
      * @param input user input string.

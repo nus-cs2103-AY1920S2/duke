@@ -4,5 +4,9 @@ public enum Command {
     LIST,
     FIND,
     DONE,
-    DELETE
+    DELETE,
+    DEFAULT,
+    CREATEEVENT1,
+    CREATEEVENT2,
+    CREATEDEADLINE1,
 }
