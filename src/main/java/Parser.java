@@ -7,13 +7,22 @@ public class Parser {
      * @param getInput user keyword input.
      * @return command for next action.
      */
-    public String parse(String getInput) {
+    public Command parse(String getInput) {
+        Command command = null;
         if (getInput.equals("todo") || getInput.equals("deadline") || getInput.equals("event")) {
-            return "add";
-        } else {
-            return getInput;
+            command = Command.ADD;
+        } else if (getInput.equals("bye")) {
+            command = Command.BYE;
+        } else if (getInput.equals("list")) {
+            command = Command.LIST;
+        } else if (getInput.equals("find")) {
+            command = Command.FIND;
+        } else if (getInput.equals("done")) {
+            command = Command.DONE;
+        } else if (getInput.equals("delete")) {
+            command = Command.DELETE;
         }
-
+        return command;
     }
 
 }

@@ -4,12 +4,12 @@ class ParserTest {
     @Test
     public void runTest() {
         Parser parser = new Parser();
-        String todo = parser.parse("todo");
-        String deadline = parser.parse("deadline");
-        String event = parser.parse("event");
+        Command command1 = parser.parse("todo");
+        Command command2 = parser.parse("deadline");
+        Command command3 = parser.parse("event");
 
-        assert(todo.equals("add"));
-        assert(deadline.equals("add"));
-        assert(event.equals("add"));
+        assert(command1 == Command.ADD);
+        assert(command2 == Command.ADD);
+        assert(command3 == Command.ADD);
     }
 }

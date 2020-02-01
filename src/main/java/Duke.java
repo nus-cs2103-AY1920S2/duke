@@ -38,23 +38,25 @@ public class Duke {
         String getInput = null;
         getInput = sc.next();
 
-        while (true) {
+        boolean isRunning = true;
+
+        while (isRunning) {
             try {
-                String command = parser.parse(getInput);
-
-                if (command.equals("bye")) {
+                Command command = parser.parse(getInput);
+                switch (command) {
+                case BYE:
                     ui.showBye();
+                    isRunning = false;
                     break;
-
-                } else if (command.equals("list")) {
+                case LIST:
                     ui.showList(lst);
-
-                } else if (command.equals("find")) {
+                    break;
+                case FIND:
                     String toFind = sc.nextLine();
                     TaskList tempLst = lst.findMatchingTasks(toFind);
                     ui.showList(tempLst);
-
-                } else if (command.equals("add")) {
+                    break;
+                case ADD:
                     Task task = null;
                     String line = sc.nextLine();
                     if (getInput.equals("todo")) {
@@ -67,23 +69,22 @@ public class Duke {
                     lst.addTask(task);
                     ui.showAddTask(task, lst.getSize());
                     storage.save(lst);
-
-                } else if (command.equals("done")) {
-                    String getNumberString = sc.next();
-                    lst.doneTask(getNumberString);
-                    ui.showDoneTask(lst.getTaskFromString(getNumberString));
+                    break;
+                case DONE:
+                    String getDoneString = sc.next();
+                    lst.doneTask(getDoneString);
+                    ui.showDoneTask(lst.getTaskFromString(getDoneString));
                     storage.save(lst);
-
-                } else if (command.equals("delete")) {
-                    String getNumberString = sc.next();
-                    ui.showDeleteTask(lst.getTaskFromString(getNumberString),lst.getSize() - 1);
-                    lst.deleteTask(getNumberString);
+                    break;
+                case DELETE:
+                    String getDeleteString = sc.next();
+                    ui.showDeleteTask(lst.getTaskFromString(getDeleteString),lst.getSize() - 1);
+                    lst.deleteTask(getDeleteString);
                     storage.save(lst);
-
-                } else {
+                    break;
+                default:
                     throw new DukeException("Invalid Input");
                 }
-
             } catch (DukeException e) {
                 ui.showErrInvalidInput();
             } catch (StringIndexOutOfBoundsException e) {
@@ -93,7 +94,11 @@ public class Duke {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            getInput = sc.next();
+
+            if (isRunning) {
+                getInput = sc.next();
+            }
+
         }
     }
 }
