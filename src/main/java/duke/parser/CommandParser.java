@@ -49,6 +49,8 @@ public class CommandParser {
             }
         } else if (nextLine[0].equals("bye")) {
             return new ExitCommand();
+        } else if (nextLine[0].equals("find")) {
+            return new FindCommand(nextLine[1]);
         } else {
             if (nextLine[0].equals("todo")) {
                 return new AddCommand(new Todo(command.substring(5)));
