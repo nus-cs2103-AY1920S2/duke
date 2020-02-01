@@ -1,13 +1,19 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    static String filePath = "data/duke.txt";
+
+    public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         String welcome = "OwO Hello! I am your neckbeard chatbot! \n" + "What can I do for you senpai? *sweats profusely*";
         System.out.println(welcome);
 
         ArrayList<Task> taskList = new ArrayList<>();
+
+        readFile(filePath, taskList);
 
         while(input.hasNextLine()) {
             String taskDescription = input.nextLine();
@@ -18,6 +24,7 @@ public class Duke {
                 // BYE will terminate the program with a message
                 if (taskDescription.equals("bye")) {
 
+                    updateFile(taskList);
                     System.out.println("UwU gone so fast? You're a fat bitch anyway.");
                     break;
 
@@ -53,18 +60,21 @@ public class Duke {
                         ToDo newTask = new ToDo(oldTask.getDescription());
                         newTask.setStatusDone();
                         taskList.set(index - 1, newTask);
+                        updateFile(taskList);
                         System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
                     } else if (oldTask.getType() == "deadline") {
 
                         Deadline newTask = new Deadline(oldTask.getDescription(), oldTask.getBy());
                         newTask.setStatusDone();
                         taskList.set(index - 1, newTask);
+                        updateFile(taskList);
                         System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
                     } else if (oldTask.getType() == "event") {
 
                         Event newTask = new Event(oldTask.getDescription(), oldTask.getBy());
                         newTask.setStatusDone();
                         taskList.set(index - 1, newTask);
+                        updateFile(taskList);
                         System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
                     }
 
@@ -76,8 +86,11 @@ public class Duke {
                     int index = Integer.parseInt(indexString);
                     Task oldTask = taskList.get(index - 1);
                     taskList.remove(index - 1);
+                    updateFile(taskList);
                     System.out.println("Noted. I've removed this task: \n" + "  " + oldTask.toString() + "\n" +
                             "Now you have " + taskList.size() + " tasks in the list.");
+
+
 
 
                     // TODO will add a new todo task in the list, checkbox will automatically be [✗]
@@ -94,8 +107,11 @@ public class Duke {
                         } else {
                             ToDo newTask = new ToDo(taskDescString);
                             taskList.add(newTask);
+                            String taskMessage = "T | " + newTask.getStatus() + " |" + newTask.getDescription() + "\n";
+                            writeToFile(filePath, taskMessage);
                             System.out.println("Senpai I have added this task: \n" + "[T][✗] " + newTask.getDescription() + "\n"
                                     + "Now you have " + taskList.size() + " number of tasks in the list.");
+
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -126,6 +142,9 @@ public class Duke {
 
                     Deadline newDeadline = new Deadline(taskDescString, deadlineString);
                     taskList.add(newDeadline);
+                    String taskMessage = "D | " + newDeadline.getStatus() + " |" + newDeadline.getDescription()
+                            + " |" + deadlineString + "\n";
+                    writeToFile(filePath, taskMessage);
                     System.out.println("Senpai I have added this event: \n" + "[D][✗]" +
                             newDeadline.getDescription() + " (by:" + deadlineString + ")" + "\n"
                             + "Now you have " + taskList.size() + " number of tasks in the list.");
@@ -156,8 +175,11 @@ public class Duke {
 
                     Event newEvent = new Event(taskDescString, eventString);
                     taskList.add(newEvent);
+                    String taskMessage = "E | " + newEvent.getStatus() + " |" + newEvent.getDescription()
+                            + " |" + eventString + "\n";
+                    writeToFile(filePath, taskMessage);
                     System.out.println("Senpai I have added this event: \n" + "[E][✗]" +
-                            newEvent.getDescription() + " (by:" + eventString + ")" + "\n"
+                            newEvent.getDescription() + " (at:" + eventString + ")" + "\n"
                             + "Now you have " + taskList.size() + " number of tasks in the list.");
 
                 } else {
@@ -165,7 +187,7 @@ public class Duke {
                     throw new DukeException("☹ OWO!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-            catch (DukeException ex) {
+            catch (DukeException | IOException ex) {
 
                 System.out.println(ex.getMessage());
             }
@@ -173,4 +195,129 @@ public class Duke {
 
 
     }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+    private static void readFile(String filePath, ArrayList<Task> list) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+
+            String readTask = s.nextLine();
+            String[] readTaskArr = readTask.split(" ");
+
+
+
+            if (readTaskArr[0].equals("T")) {
+
+                String taskDesc = "";
+                for (int i = 4; i < readTaskArr.length; i ++) { // Extract the description of the task
+                    taskDesc += " " + readTaskArr[i];
+                }
+
+
+                ToDo newTask = new ToDo(taskDesc);
+
+                if (readTaskArr[2].equals("1")) { // Sets status as done if it is done
+                    newTask.setStatusDone();
+                }
+
+                list.add(newTask);
+
+
+
+
+            } else if (readTaskArr[0].equals("D")) {
+
+                String taskDesc = "";
+                int indexOfSlash = 0;
+                String timing = "";
+
+                for (int i = 4; i < readTaskArr.length; i++) {
+
+                    if (readTaskArr[i].equals("|")) {
+                        indexOfSlash += i;
+                        break;
+                    }
+                    taskDesc += " " + readTaskArr[i];
+                }
+
+                for (int i = indexOfSlash + 1; i < readTaskArr.length; i ++) {
+                    timing += " " + readTaskArr[i];
+                }
+
+                Deadline newTask = new Deadline(taskDesc, timing);
+
+                if (readTaskArr[2].equals("1")) { // Sets status as done if it is done
+                    newTask.setStatusDone();
+                }
+
+                list.add(newTask);
+
+
+
+
+
+            } else if (readTaskArr[0].equals("E")) {
+
+                String taskDesc = "";
+                int indexOfSlash = 0;
+                String timing = "";
+
+                for (int i = 4; i < readTaskArr.length; i++) {
+
+                    if (readTaskArr[i].equals("|")) {
+                        indexOfSlash += i;
+                        break;
+                    }
+                    taskDesc += " " + readTaskArr[i];
+                }
+
+                for (int i = indexOfSlash + 1; i < readTaskArr.length; i ++) {
+                    timing += " " + readTaskArr[i];
+                }
+
+                Event newTask = new Event(taskDesc, timing);
+
+                if (readTaskArr[2].equals("1")) { // Sets status as done if it is done
+                    newTask.setStatusDone();
+                }
+
+                list.add(newTask);
+
+            }
+        }
+    }
+
+    private static void updateFile(ArrayList<Task> list) throws IOException {
+
+        FileWriter fw = new FileWriter(filePath);
+
+        for (Task t : list) {
+            if (t.getType() == "todo") {
+
+                String taskMessage = "T | " + t.getStatus() + " |" + t.getDescription() + "\n";
+                writeToFile(filePath, taskMessage);
+
+            } else if (t.getType() == "deadline") {
+
+                String taskMessage = "D | " + t.getStatus() + " |" + t.getDescription()
+                        + " |" + t.getBy() + "\n";
+                writeToFile(filePath, taskMessage);
+
+            } else if (t.getType() == "event") {
+
+                String taskMessage = "E | " + t.getStatus() + " |" + t.getDescription()
+                        + " |" + t.getBy() + "\n";
+                writeToFile(filePath, taskMessage);
+
+            }
+        }
+
+        fw.close();
+    }
+
 }

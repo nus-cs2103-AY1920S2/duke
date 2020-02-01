@@ -23,9 +23,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (super.getStatus() == 0) {
-            return "[D][✗]" + super.toString() + " (by: " + by + ")";
+            return "[D][✗]" + super.toString() + " (by:" + by + ")";
         } else {
-            return "[D][✓]" + super.toString() + " (by: " + by + ")";
+            return "[D][✓]" + super.toString() + " (by:" + by + ")";
         }
     }
 }
