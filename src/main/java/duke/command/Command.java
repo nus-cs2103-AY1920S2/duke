@@ -3,18 +3,20 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+import java.io.IOException;
+
 public abstract class Command {
 
-    private boolean isQuitCommand;
+    protected boolean isByeCommand;
 
     public Command() {
-        this.isQuitCommand = false;
+        this.isByeCommand = false;
     }
 
-    protected abstract void execute(Storage storage, TaskList taskList);
+    public abstract String execute(Storage storage, TaskList taskList) throws IOException;
 
-    protected boolean isQuit() {
-        return this.isQuitCommand;
+    public boolean isBye() {
+        return this.isByeCommand;
     }
 
 }

@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
+import duke.command.*;
 
 import java.io.IOException;
 
@@ -11,19 +12,21 @@ import java.io.IOException;
 public class Parser {
 
     /**
-     * Interprets user input and executes the appropriate command.
+     * Interprets user input and creates the appropriate command.
      *
      * @param input    User input during runtime.
      * @param storage  Storage object to save the task list that is updated in this method.
      * @param taskList Task list object to store the tasks that are created from user command in this method.
-     * @return A boolean value to indicate whether to exit the program.
+     * @return An appropriate command.
      * @throws DukeException If there is an error in parsing user input
      * @throws IOException   If there is an error in saving task list.
      */
-    public static boolean parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException, IOException {
+    public static Command parseUserInput(String input, Storage storage, TaskList taskList) throws DukeException {
 
         String[] inputArr = input.split(" ");
         String instruction = inputArr[0];
+
+        Command command = null;
 
         switch (instruction) {
 
@@ -39,9 +42,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
             }
 
-            Task task = taskList.completeTask(taskNumber);
-
-            Ui.printMessage("Nice! I've marked this task as done: " + System.lineSeparator() + task.toString());
+            command = new DoneCommand(taskNumber);
 
             break;
         }
@@ -58,14 +59,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
             }
 
-            Task task = taskList.removeTask(taskNumber);
-
-            Ui.printMessage("Noted! I've removed this task: "
-                    + System.lineSeparator()
-                    + task.toString()
-                    + System.lineSeparator()
-                    + "Now you have " + taskList.getSize()
-                    + " tasks in the list.");
+            command = new DeleteCommand(taskNumber);
 
             break;
         }
@@ -76,20 +70,16 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please enter the descriptions for your to-do list!");
             }
 
+            // Pre-processing
             int idx = input.indexOf(" ");
             String taskInput = input.substring(idx + 1);
             String[] taskInputArr = taskInput.split("/");
 
+            // Create task
             String taskName = taskInputArr[0];
             Task newTask = new ToDo(taskName);
-            taskList.addTask(newTask);
 
-            Ui.printMessage("Got it. I've added this task: "
-                    + System.lineSeparator()
-                    + newTask.toString()
-                    + System.lineSeparator()
-                    + "Now you have " + taskList.getSize()
-                    + " tasks in the list.");
+            command = new AddCommand(newTask);
 
             break;
         }
@@ -100,6 +90,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please enter the descriptions for your to-do list!");
             }
 
+            // Pre-processing
             int idx = input.indexOf(" ");
             String taskInput = input.substring(idx + 1);
             String[] taskInputArr = taskInput.split("/");
@@ -108,15 +99,11 @@ public class Parser {
             idx = dateTime.indexOf(" ");
             dateTime = dateTime.substring(idx + 1);
 
+            // Create task
             Task newTask = new Deadline(taskName, dateTime);
             taskList.addTask(newTask);
 
-            Ui.printMessage("Got it. I've added this task: "
-                    + System.lineSeparator()
-                    + newTask.toString()
-                    + System.lineSeparator()
-                    + "Now you have " + taskList.getSize()
-                    + " tasks in the list.");
+            command = new AddCommand(newTask);
 
             break;
         }
@@ -127,6 +114,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please enter the descriptions for your to-do list!");
             }
 
+            // Pre-processing
             int idx = input.indexOf(" ");
             String taskInput = input.substring(idx + 1);
             String[] taskInputArr = taskInput.split("/");
@@ -135,15 +123,11 @@ public class Parser {
             idx = dateTime.indexOf(" ");
             dateTime = dateTime.substring(idx + 1);
 
+            // Create task
             Task newTask = new Event(taskName, dateTime);
             taskList.addTask(newTask);
 
-            Ui.printMessage("Got it. I've added this task: "
-                    + System.lineSeparator()
-                    + newTask.toString()
-                    + System.lineSeparator()
-                    + "Now you have " + taskList.getSize()
-                    + " tasks in the list.");
+            command = new AddCommand(newTask);
 
             break;
         }
@@ -154,22 +138,23 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please enter a keyword so that we can retrieve the appropriate task(s)!");
             }
 
+            // Pre-processing
             int idx = input.indexOf(" ");
             String keyword = input.substring(idx + 1);
 
-            Ui.printMessage("Here are the matching tasks in your list: " + System.lineSeparator() + taskList.searchTaskList(keyword));
+            command = new FindCommand(keyword);
 
             break;
         }
 
         case "list": {
-            Ui.printMessage("Here are the tasks in your list: " + System.lineSeparator() + taskList.getTaskList());
+            command = new ListCommand();
             break;
         }
 
         case "bye": {
-            Ui.printMessage("Bye. Hope to see you again soon!");
-            return true;
+            command = new ByeCommand();
+            break;
         }
 
         default: {
@@ -178,9 +163,8 @@ public class Parser {
 
         }
 
-        storage.saveTaskList(taskList);
+        return command;
 
-        return false;
     }
 
 }

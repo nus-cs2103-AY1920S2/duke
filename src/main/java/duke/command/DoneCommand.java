@@ -7,23 +7,20 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddCommand extends Command {
+public class DoneCommand extends Command {
 
-    private Task task;
+    private Integer taskNumber;
 
-    public AddCommand(Task task) {
+    public DoneCommand(Integer taskNumber) {
         super();
-        this.task = task;
+        this.taskNumber = taskNumber;
     }
 
     public String execute(Storage storage, TaskList taskList) throws IOException {
-        taskList.addTask(task);
-        String message = "Got it. I've added this task: "
+        Task task = taskList.completeTask(taskNumber);
+        String message = "Nice! I've marked this task as done: "
                 + System.lineSeparator()
-                + task.toString()
-                + System.lineSeparator()
-                + "Now you have " + taskList.getSize()
-                + " tasks in the list.";
+                + task.toString();
         Ui.printMessage(message);
         storage.saveTaskList(taskList);
         return message;

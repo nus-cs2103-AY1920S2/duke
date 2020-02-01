@@ -7,18 +7,18 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddCommand extends Command {
+public class DeleteCommand extends Command {
 
-    private Task task;
+    private Integer taskNumber;
 
-    public AddCommand(Task task) {
+    public DeleteCommand(Integer taskNumber) {
         super();
-        this.task = task;
+        this.taskNumber = taskNumber;
     }
 
     public String execute(Storage storage, TaskList taskList) throws IOException {
-        taskList.addTask(task);
-        String message = "Got it. I've added this task: "
+        Task task = taskList.removeTask(taskNumber);
+        String message = "Noted! I've removed this task: "
                 + System.lineSeparator()
                 + task.toString()
                 + System.lineSeparator()
