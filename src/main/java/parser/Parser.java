@@ -24,7 +24,7 @@ public class Parser {
             if (!Pattern.matches("^(done|delete)\\s+.*", input)) {
                 throw new DukeException("Action should be at the front");
             }
-            if (Pattern.matches("^(done|delete)\\s+\\d+.+$", input)) {
+            if (Pattern.matches("^(done|delete)\\s+\\d+\\D+$", input)) {
                 throw new DukeException("Must end with a number and provide only one number!");
             }
             if (!Pattern.matches("^(done|delete)\\s+\\d+$", input)) {
