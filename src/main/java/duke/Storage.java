@@ -1,70 +1,77 @@
-package cathulhu;
+package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import cathulhu.tasks.*;
+import duke.tasks.*;
 
 public class Storage {
 
-    /**
-     * Loads data from Input task file location, or creates an empty .txt file if the specified file do not exist yet
-     * @param TASKS_FILE File. file path to the data file
-     * @return TaskList. A TaskList object containing all parseable Task objects in the data file
-     * @throws IOException
-     */
-    public TaskList loadTasksFile(File TASKS_FILE) throws IOException {
+    private File tasksFile;
 
-        TASKS_FILE.mkdir();
-        boolean isCreated = TASKS_FILE.createNewFile();
+    public Storage() throws DukeException, IOException {
 
-        if (isCreated) {
-            return new TaskList();
+        File tasksFileDirectory = new File(System.getProperty("user.dir") + "/dukeData");
+        if (!tasksFileDirectory.isDirectory() && !tasksFileDirectory.mkdir()) {
+            throw new DukeException("Error creating tasks file directory");
         }
 
-        Scanner sc = new Scanner(TASKS_FILE);
+        this.tasksFile = new File(System.getProperty("user.dir") + "/dukeData/tasksFile.txt");
+        tasksFile.createNewFile();
+    }
+
+
+    /**
+     * Loads data from the tasks data file.
+     * @return TaskList. A TaskList object containing all parseable Task objects in the data file
+     * @throws FileNotFoundException if Scanner object is not able to find the tasks data file
+     */
+    public TaskList loadTasksFile() throws FileNotFoundException {
+
+        Scanner sc = new Scanner(tasksFile);
         TaskList taskData = new TaskList();
 
         while (sc.hasNextLine()) {
 
             String[] taskString = sc.nextLine().split(":;:");
-//            System.out.println(Arrays.asList(taskString));
+
             switch(taskString[0]) {
-                case "T":
-                    Task tdTask = new ToDo(taskString[2]);
+            case "T":
+                Task tdTask = new ToDo(taskString[2]);
+                if (taskString[1].equals("1")) {
+                    tdTask.markAsDone();
+                }
+                taskData.addTask(tdTask);
+                break;
+
+            case "D":
+                try {
+                    Task dlTask = new Deadline(taskString[2], taskString[3]);
                     if (taskString[1].equals("1")) {
-                        tdTask.markAsDone();
+                        dlTask.markAsDone();
                     }
-                    taskData.addTask(tdTask);
-                    break;
+                    taskData.addTask(dlTask);
+                } catch (DukeException e) {
+                    System.out.println("Error loading data from tasksFile.txt. Skipping the following line:");
+                    System.out.println(Arrays.asList(taskString).toString());
+                }
 
-                case "D":
-                    try {
-                        Task dlTask = new Deadline(taskString[2], taskString[3]);
-                        if (taskString[1].equals("1")) {
-                            dlTask.markAsDone();
-                        }
-                        taskData.addTask(dlTask);
-                    } catch (CathulhuException e) {
-                        System.out.println("Error loading data from TASKS_FILE. Skipping the following line:");
-                        System.out.println(Arrays.asList(taskString).toString());
-                    }
+                break;
 
-                    break;
+            case "E":
+                Task evTask = new Event(taskString[2], taskString[3]);
+                if (taskString[1].equals("1")) {
+                    evTask.markAsDone();
+                }
+                taskData.addTask(evTask);
+                break;
 
-                case "E":
-                    Task evTask = new Event(taskString[2], taskString[3]);
-                    if (taskString[1].equals("1")) {
-                        evTask.markAsDone();
-                    }
-                    taskData.addTask(evTask);
-                    break;
-
-                default:
-                    break;
+            default:
+                break;
             }
         }
         return taskData;
@@ -72,12 +79,11 @@ public class Storage {
 
     /**
      * Writes all Tasks in the TaskList object to the file at the specified file location
-     * @param TASKS_FILE File. path to the specified data file where Tasks are recorded
      * @param tasks TaskList. TaskList object storing all current Tasks.
-     * @throws IOException
+     * @throws IOException if FileWriter object do not work as expected
      */
-    public void writeTasksFile(File TASKS_FILE, TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(TASKS_FILE);
+    public void writeTasksFile(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(tasksFile);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTask(i);
             fw.write(task.toDataString() + "\n");

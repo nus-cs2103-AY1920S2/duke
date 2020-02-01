@@ -1,11 +1,11 @@
-package cathulhu.tasks;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
-import cathulhu.CathulhuException;
+import duke.DukeException;
 
 public class Deadline extends Task {
 
@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * @param description String containing the description of the task
      * @param by String setting the deadline for this task
      */
-    public Deadline(String description, String by) throws CathulhuException{
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         this.byString = by;
         DateTimeFormatter patternWithOptional = new DateTimeFormatterBuilder()
@@ -27,7 +27,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDateTime.parse(by.strip(), patternWithOptional);
         } catch (Exception e) {
-            throw new CathulhuException("\tInput date & time must follow the following format, mortal!"
+            throw new DukeException("\tInput date & time must follow the following format, mortal!"
                     + "\t  yyyy-MM-dd or yyyy-MM-dd HH:mm");
         }
     }

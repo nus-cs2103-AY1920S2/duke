@@ -1,22 +1,18 @@
-package cathulhu;
+package duke;
 
-import java.io.File;
 import java.io.IOException;
 
-import cathulhu.tasks.Task;
+public class Duke {
 
-public class Cathulhu {
-
-    private static final File TASKS_FILE = new File("./data/tasksFile.txt");
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Cathulhu() {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage();
         try{
-            this.tasks = storage.loadTasksFile(TASKS_FILE);
+            storage = new Storage();
+            this.tasks = storage.loadTasksFile();
         } catch (Exception e) {
             ui.printError(e);
         }
@@ -32,11 +28,11 @@ public class Cathulhu {
             ui.printLine1();
             try {
                 byebye = Parser.parse(tasks, ui);
-                storage.writeTasksFile(TASKS_FILE, tasks);
-            } catch (CathulhuException e) {
-                System.out.println(e.getMessage());
+                storage.writeTasksFile(tasks);
+            } catch (DukeException e) {
+                ui.printError(e);
             } catch (IOException e) {
-                System.err.println(e);
+                ui.printError(e);
                 break;
             }
             ui.printLine2();
@@ -46,6 +42,6 @@ public class Cathulhu {
 
 
     public static void main(String[] args) {
-        new Cathulhu().interact();
+        new Duke().interact();
     }
 }

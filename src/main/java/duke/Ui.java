@@ -1,4 +1,4 @@
-package cathulhu;
+package duke;
 
 import java.util.Scanner;
 

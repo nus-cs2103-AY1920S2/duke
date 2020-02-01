@@ -1,6 +1,6 @@
-package cathulhu.tasks;
+package duke.tasks;
 
-import cathulhu.CathulhuException;
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,7 @@ public class DeadlineTest {
             Deadline dl = new Deadline("CS2103 IP", "2020-01-28 23:59");
             dl.markAsDone();
             response = dl.toString();
-        } catch (CathulhuException e) {
+        } catch (DukeException e) {
             response = e.getMessage();
         }
         assertEquals("[D][Y] CS2103 IP (by: Jan 28 2020 23:59 )", response);
@@ -31,7 +31,7 @@ public class DeadlineTest {
         String response;
         try{
             response = new Deadline("CS2103", "2020-01-28").toDataString();
-        } catch (CathulhuException e) {
+        } catch (DukeException e) {
             response = e.getMessage();
         }
         assertEquals("D:;:0:;:CS2103:;:2020-01-28", response);

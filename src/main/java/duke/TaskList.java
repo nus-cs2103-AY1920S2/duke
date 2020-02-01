@@ -1,6 +1,6 @@
-package cathulhu;
+package duke;
 
-import cathulhu.tasks.Task;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 

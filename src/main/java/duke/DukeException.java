@@ -1,12 +1,12 @@
 package duke;
 
-public class CathulhuException extends Exception{
+public class DukeException extends Exception{
 
     /**
-     * Returns exceptions for invalid Cathulhu inputs
+     * Returns exceptions for invalid Duke inputs
      * @param message String message to be displayed
      */
-    public CathulhuException(String message) {
+    public DukeException(String message) {
         super(message);
     }
 }

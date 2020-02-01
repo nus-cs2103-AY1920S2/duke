@@ -1,4 +1,4 @@
-package cathulhu.tasks;
+package duke.tasks;
 
 public class Event extends Task {
 

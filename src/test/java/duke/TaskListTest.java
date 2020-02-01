@@ -1,6 +1,6 @@
-package cathulhu;
+package duke;
 
-import cathulhu.tasks.Task;
+import duke.tasks.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
