@@ -15,9 +15,10 @@ import duke.task.Todo;
 import java.time.DateTimeException;
 import java.util.HashMap;
 
-/** Deals with making sense of user commands. */
+/**
+ * Deals with making sense of user commands.
+ */
 public class Parser {
-    protected static HashMap<String, CommandType> validCommands;
     protected static HashMap<String, String> commandDelimiter;
     protected static HashMap<String, String> commandTypeFormatInfo;
 
@@ -29,7 +30,6 @@ public class Parser {
      * @throws DukeException when given input is not a valid command
      */
     public static Command parse(String fullCommand) throws DukeException {
-        setupValidCommands();
         setupCommandDelimiter();
         setupCommandTypeFormatInfo();
         // Remove leading and trailing whitespace
@@ -179,7 +179,7 @@ public class Parser {
     /**
      * Returns the due date information associated with the given command parameter.
      *
-     * @param command string representing user input
+     * @param command      string representing user input
      * @param commandWords list of words that make up command
      * @return String representing the due date component of command
      */
@@ -197,7 +197,7 @@ public class Parser {
     /**
      * Returns a String representing the description component of a given command parameter.
      *
-     * @param command string representing user input
+     * @param command      string representing user input
      * @param commandWords list of words that make up command
      * @return String representing the description component of command
      * @throws DukeException command is not in a valid format
@@ -241,17 +241,5 @@ public class Parser {
         commandDelimiter = new HashMap<>();
         commandDelimiter.put("deadline", "/by");
         commandDelimiter.put("event", "/at");
-    }
-
-    private static void setupValidCommands() {
-        validCommands = new HashMap<>();
-        validCommands.put("deadline", CommandType.DEADLINE);
-        validCommands.put("event", CommandType.EVENT);
-        validCommands.put("todo", CommandType.TODO);
-        validCommands.put("list", CommandType.LIST);
-        validCommands.put("bye", CommandType.BYE);
-        validCommands.put("done", CommandType.DONE);
-        validCommands.put("delete", CommandType.DELETE);
-        validCommands.put("find", CommandType.FIND);
     }
 }
