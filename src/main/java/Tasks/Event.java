@@ -1,4 +1,6 @@
 package task;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 public class Event extends Task {
 	private String timer;
@@ -7,6 +9,10 @@ public class Event extends Task {
 
 	public Event(String commandText) {
 		super(commandText);
+	}
+
+	public Event(JSONObject data) throws Exception {
+		super(data);
 	}
 
 	@Override

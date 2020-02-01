@@ -1,4 +1,6 @@
 package task;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 public class ToDo extends Task {
 	private String signature = "todo";
@@ -7,6 +9,10 @@ public class ToDo extends Task {
 	public ToDo(String commandText) {
 		super(commandText);
 	}
+
+	public ToDo(JSONObject data) throws Exception {
+		super(data);
+	} 
 
 	@Override
 	public String getSignature() {

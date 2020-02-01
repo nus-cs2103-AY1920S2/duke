@@ -1,4 +1,6 @@
 package task;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 public class Deadline extends Task {
 	private String date;
@@ -7,7 +9,11 @@ public class Deadline extends Task {
 
 	public Deadline(String commandText) {
 		super(commandText);
-	}	
+	}
+
+	public Deadline(JSONObject data) throws Exception {
+		super(data);
+	}
 
 	@Override
 	public String getSignature() {
@@ -22,7 +28,7 @@ public class Deadline extends Task {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("  [D]")
+		sb.append("  [D] ")
 		  .append(super.getStatusIcon())
 		  .append(" ")
 		  .append(super.description)

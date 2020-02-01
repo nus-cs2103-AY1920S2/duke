@@ -3,12 +3,23 @@ import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.function.*;
+import java.net.URL;
+import java.net.MalformedURLException;
 import task.*;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.File;
 
 public class Duke {
 	static final String separation = "_________________________________________________";
 	static final String greetingMessage = "Salue! Je suis Duke. \nWhat can I do for you?";
 	static final String goodByeMessage = "Au revoir!";
+	static final String pathToData = "data/storage.txt";
 	
 
 	static Optional<List<Integer>> getDoneCommand(String command) {
@@ -47,6 +58,64 @@ public class Duke {
 		}
 	}
 
+
+	public static void saveData(Storage storage) {
+		JSONObject data = storage.encodeContainers();
+		String str = data.toString();
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(pathToData, false));
+		    writer.append(str);
+		    writer.close();
+		} catch (IOException e) {
+			System.out.println("Cannot save data");
+		}
+	}
+
+
+	public static List<Task> getData() {
+		try {
+			File file = new File(pathToData);
+			Scanner scan = new Scanner(file);
+			StringBuilder sb = new StringBuilder();
+			while (scan.hasNextLine()) {
+				sb.append(scan.nextLine());
+			}
+			scan.close();
+			JSONParser parser = new JSONParser();
+			//System.out.println(sb.toString());
+			JSONObject result = (JSONObject) parser.parse(sb.toString());
+			JSONArray array = (JSONArray) result.get("containers");
+
+			List containers = new ArrayList<Task>();
+			for (int i = 0; i < array.size(); i++) {
+				JSONObject record = (JSONObject) array.get(i);
+				String type = (String) record.get("type");
+				try {
+					switch (type) {
+					case "todo":
+						containers.add(new ToDo(record));
+						break;
+					case "deadline":
+						containers.add(new Deadline(record));
+						break;
+					case "event":
+						containers.add(new Event(record));
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println("Cannot parse the " + i + "record");
+				}
+			}
+			return containers;
+		} catch (IOException e) {
+			System.out.println("Cannot read file");
+			return new ArrayList<Task>();
+		} catch (ParseException e) {
+			System.out.println("Cannot parse json string");
+			return new ArrayList<Task>();
+		}
+	}
+
 	public static void main(String[] args) {
 		String logo = " ____        _        \n"
 				+ "|  _ \\ _   _| | _____ \n"
@@ -56,9 +125,9 @@ public class Duke {
 		System.out.println("Hello from\n" + logo);
 
 		Interpreter.printMessage(greetingMessage);
-		Storage storage = new Storage<Task>();
-
+		Storage storage = new Storage<Task>(getData());
 		Scanner cin = new Scanner(System.in);
+
 		while (true) {
 			String commandText = cin.nextLine();
 			Command command = new Command(commandText);
@@ -67,6 +136,7 @@ public class Duke {
 			switch (type) {
 				case BYE: 
 					Interpreter.printMessage(goodByeMessage);
+					saveData(storage);
 					return;
 
 				case LIST:
@@ -117,6 +187,7 @@ public class Duke {
 				default:
 					System.out.println("I cannot understand you!");
 			}
+			
 		}
 	}
 }

@@ -8,7 +8,7 @@ public class Command {
 	}
 
 	private boolean isAddCommand() {
-		if (tokens.length < 3){
+		if (tokens.length < 2){
 			return false;
 		}
 		if (tokens[0].equals("event")) {
