@@ -78,6 +78,27 @@ public class Ui {
     }
 
     /**
+     * Displays acknowledgement whenever user tries to search for a task.
+     *
+     * @param keyWord A string representation of what the user is trying to search in the list of tasks.
+     */
+    public void printFind(String keyWord) {
+        int index = 1;
+        for (int i = 0; i < TaskList.size(); i++) {
+            if (TaskList.getList().get(i).getDescription().contains(keyWord)) {
+                if (index == 1) {
+                    System.out.println("\tHere are the matching tasks in your list:");
+                }
+                System.out.println("\t" + index + "." + TaskList.getList().get(i));
+                index++;
+            }
+        }
+        if (index == 1) {
+            System.out.println("\tThere are no matching tasks in your list! Please try something else!");
+        }
+    }
+
+    /**
      * Displays all the Task objects in the TaskList.
      *
      * @param tasks A TaskList object that contains ArrayList of Task.

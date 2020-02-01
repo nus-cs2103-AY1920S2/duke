@@ -4,3 +4,4 @@ T | 0 | join sports club
 D | 0 | ST2334 tutorial 2 | 8th Feb 2359
 E | 1 | bainian hahahah | 1st of February 2020, 4:00pm to 10:00pm
 D | 0 | go back NUS | 3rd of February 2020, 4:00pm
+T | 0 | book meeting room

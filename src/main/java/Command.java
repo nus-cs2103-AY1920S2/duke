@@ -106,6 +106,14 @@ public class Command {
                 ui.printDelete(toDelete);
             }
             break;
+        case "find":
+            if (command.length < 2 || command[1].trim().equals("")) {
+                System.out.println("\tOOPS! The description of a find cannot be empty.");
+            } else {
+                String keyWord = command[1].trim();
+                ui.printFind(keyWord);
+            }
+            break;
         default:
             try {
                 throw new DukeException("\tOOPS!!! I'm sorry, but I don't know what that means :-(");

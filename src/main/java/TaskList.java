@@ -30,7 +30,7 @@ public class TaskList {
      *
      * @return An ArrayList of Task.
      */
-    public ArrayList<Task> getList() {
+    public static ArrayList<Task> getList() {
         return tasks;
     }
 
