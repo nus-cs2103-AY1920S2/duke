@@ -5,31 +5,35 @@ plugins {
     id 'checkstyle'
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
-
 group 'seedu.duke'
 version '0.1.0'
 
-repositories {
-    mavenCentral()
+checkstyle {
+    toolVersion = '8.23'
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
-    //implementation 'org.junit.jupiter:junit-jupiter'
+
 }
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+
 
 application {
     // Change this to your main class.
@@ -41,12 +45,4 @@ run {
     standardInput = System.in
 }
 
-shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1"
-    archiveClassifier = null
-    archiveAppendix = null
-}
-test {
-    useJUnitPlatform()
-}
+
