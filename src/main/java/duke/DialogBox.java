@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,15 +18,12 @@ import javafx.scene.layout.HBox;
  * ImageView to represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    @FXML
-    public Label dialog;
-    @FXML
-    private ImageView displayPicture;
+    @FXML public Label dialog;
+    @FXML private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -37,11 +33,8 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
         dialog.setText(text);
     }
-    
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
+    /** Flips the dialog box such that the ImageView is on the left and text on the right. */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
