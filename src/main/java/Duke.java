@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.util.Scanner;
 
 /** Main class. */
@@ -66,13 +67,36 @@ public class Duke {
                         lst.addTask(deadline);
                         ui.showAddTask(deadline, lst.getSize());
                     } else {
-                        int indexCut = line.indexOf("/at");
-                        String desc = line.substring(0, indexCut - 1);
-                        String at = line.substring(indexCut + 4);
-                        TaskDate td = new TaskDate(at);
-                        Event event = new Event(desc, td);
-                        lst.addTask(event);
-                        ui.showAddTask(event, lst.getSize());
+                        TaskDate tdEnd = null;
+
+                        boolean isValid = false;
+
+                        while (!isValid) {
+                            try {
+                                System.out.println("Event end date and time: ");
+                                String endDate = sc.nextLine();
+                                tdEnd = new TaskDate(endDate);
+                                isValid = true;
+
+                                int indexCut = line.indexOf("/at");
+                                String desc = line.substring(0, indexCut - 1);
+                                String at = line.substring(indexCut + 4);
+                                TaskDate tdStart = new TaskDate(at);
+                                Event event = new Event(desc, tdStart, tdEnd);
+                                lst.addTask(event);
+                                ui.showAddTask(event, lst.getSize());
+
+                            } catch(ArrayIndexOutOfBoundsException e) {
+                                System.err.println("Invalid input, please follow the format {dd/mm/yyyy hhmm}");
+                            } catch(DateTimeException e) {
+                                System.err.println("Invalid date!");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+
                     }
                     storage.save(lst);
 

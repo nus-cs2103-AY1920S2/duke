@@ -18,12 +18,30 @@ public class TaskDate implements Serializable {
      */
     public TaskDate(String dateString) {
         this.dateString = dateString;
-        this.localDate = getLocalDate();
-        this.time = getTime();
-        this.date = getDate();
+        this.localDate = generateLocalDate();
+        this.time = generateTime();
+        this.date = generateDate();
     }
 
-    private LocalDate getLocalDate() {
+    /**
+     * Gets date.
+     *
+     * @return date.
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * Gets time.
+     *
+     * @return time.
+     */
+    public String getTime() {
+        return time;
+    }
+
+    private LocalDate generateLocalDate() {
         String[] dateArr = this.dateString.split("/");
         String day = dateArr[0];
         String month = dateArr[1];
@@ -31,7 +49,7 @@ public class TaskDate implements Serializable {
         return LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day));
     }
 
-    private String getDate() {
+    private String generateDate() {
         String res = "";
         Month month = this.localDate.getMonth();
         String monthString = month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
@@ -42,7 +60,7 @@ public class TaskDate implements Serializable {
         res += String.valueOf(this.localDate.getYear());
         return res;    }
 
-    private String getTime() {
+    private String generateTime() {
         int dateStringLen = this.dateString.length();
         String res = "";
         String time24 = this.dateString.substring(dateStringLen - 4);
