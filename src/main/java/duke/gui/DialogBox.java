@@ -2,69 +2,75 @@ package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-/** Represents the dialog box of GUI. */
+import java.io.IOException;
+import java.util.Collections;
+
+/**
+ * Custom control using FXML. This control represents a dialog box consisting of an
+ * ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    /**
-     * Returns a new DialogBox instance.
-     *
-     * @param label text response
-     * @param imageView display picture
-     */
-    public DialogBox(Label label, ImageView imageView) {
-        this.text = label;
-        this.displayPicture = imageView;
-        // Format label
-        this.text.setWrapText(true);
-        this.displayPicture.setFitWidth(100.0);
-        this.displayPicture.setFitHeight(100.0);
-        // Set alignment of instance
-        this.setAlignment(Pos.TOP_RIGHT);
-        // Add label and image
-        this.getChildren().addAll(text, displayPicture);
-        // Set spacing
-        this.setSpacing(10.0);
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
      * Returns a DialogBox instance representing User's input.
      *
-     * @param label contains text to be displayed
-     * @param imageView contains image to be displayed
+     * @param text contains text to be displayed
+     * @param img  contains image to be displayed
      * @return DialogBox instance representing user input
      */
-    public static DialogBox getUserDialog(Label label, ImageView imageView) {
-        return new DialogBox(label, imageView);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
     /**
      * Returns a flipped DialogBox instance representing Duke's response.
      *
-     * @param label contains text to be displayed
-     * @param imageView contains image to be displayed
+     * @param text contains text to be displayed
+     * @param img  contains image to be displayed
      * @return flipped DialogBox instance
      */
-    public static DialogBox getDukeDialog(Label label, ImageView imageView) {
-        DialogBox dialogBox = new DialogBox(label, imageView);
-        dialogBox.flip();
-        return dialogBox;
+    public static DialogBox getDukeDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.flip();
+        return db;
     }
 }
