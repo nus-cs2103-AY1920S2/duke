@@ -87,7 +87,7 @@ public class Parser {
     /**
      * Parses and tokenizes a String from the local hard disk.
      * 
-     * Unlike the {@code parseUserInput} method, this method does not throw any
+     * <p>Unlike the {@code parseUserInput} method, this method does not throw any
      * {@code DukeException} as the data stored on disk is guaranteed to be correct.
      * 
      * @param data the raw String data from the local hard disk

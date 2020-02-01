@@ -100,7 +100,7 @@ public class Storage {
      * Reads the file {@code filePath} and returns an {@code ArrayList<String>} of
      * each individual line read.
      * 
-     * If the file does not exist yet, {@code createNewFile} will be called to
+     * <p>If the file does not exist yet, {@code createNewFile} will be called to
      * create an empty file {@code filePath} to allow for subsequent writes to the
      * file.
      * 
