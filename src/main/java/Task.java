@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public interface Task {
 
     public boolean isDone();
@@ -8,7 +10,7 @@ public interface Task {
 
     public String getDoneString();
 
-    public void markAsDone();
+    public Date getTaskTime();
 
-    public String getTaskTime();
+    public void markAsDone();
 }

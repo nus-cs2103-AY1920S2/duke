@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Todos implements Task {
 
     private boolean done = false;
@@ -31,8 +33,9 @@ public class Todos implements Task {
     }
 
     @Override
-    public String getTaskTime() {
-        return "@%";
+    public Date getTaskTime() {
+        return null;
+
     }
 
     @Override

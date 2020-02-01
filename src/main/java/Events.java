@@ -1,10 +1,12 @@
+import java.util.Date;
+
 public class Events implements Task {
 
     private boolean done = false;
     private String name;
-    private String time;
+    private Date time;
 
-    public Events(String name, String time) {
+    public Events(String name, Date time) {
         this.name = name;
         this.time = time;
     }
@@ -24,7 +26,7 @@ public class Events implements Task {
         return "E";
     }
 
-    public String getTaskTime() {
+    public Date getTaskTime() {
         return time;
     }
 
@@ -44,6 +46,7 @@ public class Events implements Task {
 
     @Override
     public String toString() {
-        return "[" + getTaskType() + "]"  + getDoneString() + " " + getTaskName() + " (at: " + getTaskTime() + ")";
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (at: " +
+                Parser.dateToString(getTaskTime()) + ")";
     }
 }
