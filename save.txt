@@ -1,4 +1,5 @@
 [T][✘] aaaaaaaaaaaaaa
 [T][✓] boye
-[E][✘] c (date: Oct 10 2019)
-[E][✓] d (date: Feb 2 2019)
+[E][✘] c  (date: Oct 10 2019)
+[E][✓] d  (date: Feb 2 2019)
+[D][✘] f (by: Jan 1 0001)
