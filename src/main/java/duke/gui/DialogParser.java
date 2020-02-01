@@ -35,8 +35,8 @@ public class DialogParser {
         Label userText = new Label(userInput.getText());
         Label mrRobotText = new Label(getResponse(userInput.getText(), duke));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userIcon)),
-                new DialogBox(mrRobotText, new ImageView(mrRobotIcon))
+                DialogBox.getUserDialog(userText, new ImageView(userIcon)),
+                DialogBox.getDukeDialog(mrRobotText, new ImageView(mrRobotIcon))
         );
         userInput.clear();
     }
