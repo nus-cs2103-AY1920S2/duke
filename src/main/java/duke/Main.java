@@ -27,13 +27,14 @@ public class Main extends Application {
             Gui gui = fxmlLoader.<Gui>getController();
             gui.setDuke(duke);
             stage.setScene(scene);
-            stage.show();
+            stage.resizableProperty().setValue(false);
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent event) {
                     event.consume();
                     gui.bye();
                 }
             });
+            stage.show();
             new Thread(() -> {
                 duke.run();
             }).start();
