@@ -10,8 +10,10 @@ public class Ui {
      * @param size current size of TaskList.
      */
     public void showAddTask(Task task, int size) {
-        System.out.println(dukeFormat("Sure I will add this task.\n" + Ui.indent + task +
-                "\n" + Ui.indent + "Now you have " + String.valueOf(size) + " tasks."));
+        if (task != null) {
+            System.out.println(dukeFormat("Sure I will add this task.\n" + Ui.indent + task +
+                    "\n" + Ui.indent + "Now you have " + String.valueOf(size) + " tasks."));
+        }
     }
 
     /**
@@ -20,7 +22,9 @@ public class Ui {
      * @param task task to be set to done.
      */
     public void showDoneTask(Task task) {
-        System.out.println(dukeFormat("Sure I will mark this task as done.\n" + Ui.indent + task));
+        if (task != null) {
+            System.out.println(dukeFormat("Sure I will mark this task as done.\n" + Ui.indent + task));
+        }
     }
 
     /**
@@ -30,8 +34,10 @@ public class Ui {
      * @param size current size of TaskList.
      */
     public void showDeleteTask(Task task, int size) {
-        System.out.println(dukeFormat("Sure I will delete this task.\n" + Ui.indent + task
-                + "\n" + Ui.indent + "Now you have " + String.valueOf(size) + " tasks."));
+        if (task != null) {
+            System.out.println(dukeFormat("Sure I will delete this task.\n" + Ui.indent + task
+                    + "\n" + Ui.indent + "Now you have " + String.valueOf(size) + " tasks."));
+        }
     }
 
     /**
@@ -59,7 +65,11 @@ public class Ui {
      * Prints TaskList.
      */
     public void showList(TaskList lst) {
-        System.out.println(dukeFormatList(lst));
+        if (lst.getSize() > 0) {
+            System.out.println(dukeFormatList(lst));
+        } else {
+            System.out.println(dukeFormat("Your list is empty!"));
+        }
     }
 
     /**

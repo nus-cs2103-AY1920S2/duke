@@ -11,8 +11,9 @@ public class Duke {
     private Factory factory;
 
     /**
-     * Constructor for Duke class. Ui handles user interaction. Storage stores and loads Tasklist from persistent storage.
-     * TaskList stores tasks and provide functions to maintain these tasks. Parser parses input.
+     * Constructor for Duke class. Ui handles user interaction. Storage stores and loads Tasklist from
+     * persistent storage. TaskList stores tasks and provide functions to maintain these tasks.
+     * Parser parses input. Factory creates task objects.
      *
      * @param filepath path where TaskList is stored.
      */
@@ -90,6 +91,8 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showErrInvalidInput();
             } catch (IndexOutOfBoundsException e) {
+                ui.showErrInvalidInput();
+            } catch (NullPointerException e) {
                 ui.showErrInvalidInput();
             } catch (Exception e) {
                 e.printStackTrace();
