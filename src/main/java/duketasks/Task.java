@@ -9,6 +9,13 @@ public class Task {
     protected String taskName;
     protected String taskCode;
 
+    /**
+     * Constructor for Task objects.
+     *
+     * @param taskName String of task description
+     * @param taskCode String of the task code
+     */
+
     public Task(String taskName, String taskCode) {
         this.taskName = taskName;
         this.isDoneString = "X";

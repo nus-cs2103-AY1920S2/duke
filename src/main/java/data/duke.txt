@@ -3,4 +3,9 @@ T|X|meet friend
 T|X|kiss cat
 T|X|feed cat
 D|X|tutorial|2020-12-30
+<<<<<<< HEAD
 T|X|feed cat
+=======
+T|X|eat cat
+T|X|love cat
+>>>>>>> A-CodingStandard

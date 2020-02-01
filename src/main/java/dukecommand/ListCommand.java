@@ -35,9 +35,7 @@ public class ListCommand extends DukeCommand {
 
         } else {
             dui.printCustomMessage("    Here are the tasks in your list:");
-            for (String curr : toBePrinted) {
-                dui.printCustomMessage(curr);
-            }
+            dui.printListOfTasks(toBePrinted);
         }
 
     }

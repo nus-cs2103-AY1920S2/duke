@@ -107,4 +107,17 @@ public class DukeList {
     public ArrayList<Task> getListOfTasks() {
         return this.listOfTasks;
     }
+
+    /**
+     * Returns a boolean for whether the list is empty
+     *
+     * @return true if list is empty, else false
+     */
+    public boolean isEmpty() {
+        if(this.getNumOfTasks() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

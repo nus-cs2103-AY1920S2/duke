@@ -176,7 +176,10 @@ public class DukeParser {
             return DukeCommandEnums.HELP;
         } else if (enumString.equals("delete")) {
             return DukeCommandEnums.DELETE;
-        } else {
+        } else if (enumString.equals("find")) {
+            return DukeCommandEnums.FIND;
+        }
+        else {
             return DukeCommandEnums.UNKNOWN;
         }
     }

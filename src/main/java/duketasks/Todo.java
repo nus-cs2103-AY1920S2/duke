@@ -11,6 +11,12 @@ public class Todo extends Task {
         super(taskName, todoTaskCode);
     }
 
+    /**
+     * Constructs a new To-do object based on the task name and whether it's done.
+     *
+     * @param taskName String of task description
+     * @param isDone boolean of whether the task is done or not
+     */
     public Todo(String taskName, String isDone) {
         this(taskName);
         if (isDone.equals("O")) {

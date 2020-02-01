@@ -1,13 +1,15 @@
 package dukeui;
 
 import dukeexceptions.DukeException;
+import dukelist.DukeList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represents a minial UI program that is used to interact with the user
+ * Represents a minial UI program that is used to interact with the user.
  * Prints messages as well as obtains input when necessary
  */
 
@@ -40,7 +42,7 @@ public class DukeUI {
     }
 
     /**
-     * Prints the welcome message for Duke
+     * Prints the welcome message for Duke.
      */
     public void showWelcomeMessage() {
         printLine();
@@ -51,7 +53,7 @@ public class DukeUI {
     }
 
     /**
-     * Returns the user's written command as a string
+     * Returns the user's written command as a string.
      *
      * @return User-typed input String
      */
@@ -61,12 +63,18 @@ public class DukeUI {
 
 
     /**
-     * Prints out the error message from a DukeException
+     * Prints out the error message from a DukeException.
      *
      * @param e DukeException
      */
     public void showErrorMessage(DukeException e) {
         System.out.println("    " + e.getMessage());
         printLine();
+    }
+
+    public void printListOfTasks(ArrayList<String> inputList) {
+        for (String curr : inputList) {
+            this.printCustomMessage(curr);
+        }
     }
 }
