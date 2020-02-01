@@ -42,7 +42,7 @@ class Parser {
      * @throws InvalidCommandException when a command is entered that does not exist.
      * @throws IOException when the Storage object fails in saving the TaskList to file.
      */
-    public boolean parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException{
+    public boolean parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException {
         String[] cmd = line.split(" ", 2);
         boolean isBye = false;
         switch (cmd[0].toLowerCase()) {
@@ -163,14 +163,14 @@ class Parser {
     }
     
     /**
-     * Accepts a date according to the following 24H format: HHmm
+     * Accepts a date according to the following 24H format: HHmm.
      * @param s a string representing the time in 24H format
      * @return a LocalTime object representing the time given.
      * @throws DateTimeParseException when an invalid time is passed.
      */
     private static LocalTime toTime(String s) throws DateTimeParseException {
         int time = Integer.parseInt(s);
-        return LocalTime.of(time/100, time % 100);
+        return LocalTime.of(time / 100, time % 100);
     }
 
 }

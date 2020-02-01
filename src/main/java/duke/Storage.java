@@ -13,7 +13,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-/** Class which handles the underlying implementation of I/O from and to files.
+/** 
+ * Class which handles the underlying implementation of I/O from and to files.
  *      1. Reading of tasks from a file and updating the current TaskList object;
  *      2. Saving tasks from the current TaskList to the file in the filepath provided.
  */
@@ -33,7 +34,7 @@ class Storage {
      * @throws ClassNotFoundException if ObjectInputStream cannot convert the Object to an ArrayList<Task>
      */
     @SuppressWarnings("unchecked")
-    public boolean loadFromFile(final TaskList tasks) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public boolean loadFromFile(TaskList tasks) throws FileNotFoundException, IOException, ClassNotFoundException {
         FileInputStream fileIn = null;
         ObjectInputStream objIn = null;
         ArrayList<Task> savedTasks = null;
@@ -47,10 +48,10 @@ class Storage {
                 // @SuppressWarnings unchecked cast warning: no way to verify type of generic at runtime
                 savedTasks = (ArrayList<Task>) objIn.readObject(); 
             } finally {
-                if(fileIn != null) {
+                if (fileIn != null) {
                     fileIn.close();
                 }
-                if(objIn != null) {
+                if (objIn != null) {
                     objIn.close();
                 }
                 if (tasks != null && savedTasks != null && tasks.load(savedTasks)) {

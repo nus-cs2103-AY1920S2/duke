@@ -17,8 +17,8 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Public constructor initializes Duke by loading the TaskList from the files in the save directory
-     * @param filePath
+     * Initializes Duke and loads the TaskList from the files in the save directory.
+     * @param filePath the path where the saved Tasklist file is stored.
      */
     public Duke(Path filePath) {
         ui = new Ui();
@@ -50,7 +50,7 @@ public class Duke {
             try {
                 isShutdown = parser.parse(line);
                 storage.saveToFile(tasks);
-            } catch(InvalidCommandException | IncorrectArgumentException e) {
+            } catch (InvalidCommandException | IncorrectArgumentException e) {
                 ui.out(e.getMessage());
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
