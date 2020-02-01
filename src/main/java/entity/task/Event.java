@@ -1,4 +1,4 @@
-package entity;
+package entity.task;
 
 import parser.DateTimeParser;
 
@@ -17,7 +17,6 @@ public class Event extends Task {
         this.heldAt = heldAt;
 
         DateTimeParser dateTimeParser = new DateTimeParser();
-        System.out.println(heldAt);
         try {
             this.heldAtDate = dateTimeParser.parseDate(heldAt);
         } catch (ParseException e) {
@@ -29,8 +28,6 @@ public class Event extends Task {
         } catch (ParseException e) {
             this.heldAtTime = null;
         }
-        System.out.println(heldAtDate);
-        System.out.println(heldAtTime);
     }
 
     public String heldAt() {

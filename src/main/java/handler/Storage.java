@@ -1,35 +1,33 @@
 package handler;
 
-import entity.Deadline;
-import entity.Event;
-import entity.Task;
-import entity.Todo;
+import entity.task.Deadline;
+import entity.task.Event;
+import entity.task.Task;
+import entity.task.Todo;
 import exception.DirectoryNotFoundException;
-import exception.TaskStatusNotValidException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileHandler {
+public class Storage {
 
     private Path filePath;
     private String fileName;
 
-    public FileHandler() {
+    public Storage() {
 
     }
 
-    public FileHandler (Path filePath, String fileName) throws DirectoryNotFoundException {
+    public Storage(Path filePath, String fileName) throws DirectoryNotFoundException {
         boolean directoryExists = java.nio.file.Files.exists(filePath);
         if (directoryExists) {
-            System.out.println("Directory initialized: " + filePath.toString());
+            //System.out.println("Directory initialized: " + filePath.toString());
             this.filePath = filePath;
             this.fileName = fileName;
         } else {
@@ -38,7 +36,7 @@ public class FileHandler {
     }
 
     public List<Task> loadTaskFromMemory () throws FileNotFoundException {
-        System.out.println("Reading tasks from directory: " + this.filePath.toString());
+        //System.out.println("Reading tasks from directory: " + this.filePath.toString());
         File file = new File(this.filePath.toString() + "\\" + this.fileName);
         Scanner sc = new Scanner(file);
         List<Task> tasks = new ArrayList<>();
@@ -53,7 +51,7 @@ public class FileHandler {
 
     public Task parseTaskFromLine (String line) {
         Task task = null;
-        System.out.println("Parsing line: " + line);
+        //System.out.println("Parsing line: " + line);
         String[] wordArray = line.split("\\|");
         try {
             switch (wordArray[0]) {
@@ -70,11 +68,11 @@ public class FileHandler {
                     break;
 
                 default:
-                    System.out.println("Invalid task format: " + line);
+                    //System.out.println("Invalid task format: " + line);
                     break;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid task format: " + line);
+            //System.out.println("Invalid task format: " + line);
             return null;
         }
         if (task != null && wordArray[1].equals("1")) {

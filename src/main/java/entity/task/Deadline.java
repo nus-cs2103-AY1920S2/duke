@@ -1,4 +1,4 @@
-package entity;
+package entity.task;
 
 import parser.DateTimeParser;
 
@@ -28,7 +28,6 @@ public class Deadline extends Task {
         } catch (ParseException e) {
             this.doByTime = null;
         }
-
     }
 
     public String getDoBy() {

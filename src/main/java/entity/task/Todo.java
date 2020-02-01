@@ -1,4 +1,4 @@
-package entity;
+package entity.task;
 
 import java.util.Date;
 
