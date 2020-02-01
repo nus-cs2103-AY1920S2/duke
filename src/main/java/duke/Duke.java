@@ -17,6 +17,7 @@ import task.Task;
 public class Duke extends Application {
     private UserInterface UI;
     private TaskList taskList;
+    private Boolean isClosed = false;
 
     private static Storage storage = new Storage(Paths.get("storage", "file.txt"));
 
@@ -69,6 +70,7 @@ public class Duke extends Application {
             case "list":
                 return this.taskList.getAllTaskString().stream().collect(Collectors.joining(String.format("%n")));
             case "bye":
+                isClosed = true;
                 return "Bye see you again soon!";
             default:
                 // as long as done/delete inside
@@ -113,5 +115,9 @@ public class Duke extends Application {
         } catch(DukeException err) {
             return err.getMessage();
         }
+    }
+
+    public Boolean getIsClosed() {
+        return this.isClosed;
     }
 }
