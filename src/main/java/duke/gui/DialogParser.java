@@ -61,7 +61,7 @@ public class DialogParser {
             System.out.print(dukeException.getMessage());
         }
 
-        response = output.toString();
+        response = output.toString().trim();
         // Reset stdout for duke
         System.setOut(System.out);
         return response;
