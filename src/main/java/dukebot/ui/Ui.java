@@ -1,5 +1,6 @@
 package dukebot.ui;
 
+import dukebot.gui.DukeExpression;
 import dukebot.tasklist.Task;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Ui {
     private final Scanner sc;
     private final boolean withGui;
     private StringBuilder guiOutput = new StringBuilder();
+    private DukeExpression dukeExpression = DukeExpression.HAPPY;
 
     /**
      * Generates the Ui with GUI.
@@ -72,8 +74,10 @@ public class Ui {
      * @param lineName Line to say.
      */
     public void sayLine(LineName lineName) {
+        dukeExpression = DukeExpression.HAPPY;
         switch (lineName) {
         case HELP:
+            dukeExpression = DukeExpression.BLUSH;
             dukeSays("Master wants to know more about Duke?");
             dukeSays("Exposing myself to master... Duke's so embarrassed...");
             dukeSays("But if it's for Master... Duke'll do it!");
@@ -88,12 +92,14 @@ public class Ui {
             dukeSays("bye -- Exits this application");
             break;
         case NO_INPUT:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke can't hear anything... Is Master all right?");
             break;
         case SAY_DUKE:
             dukeSays("Master!");
             break;
         case LIST:
+            dukeExpression = DukeExpression.SURPRISED;
             dukeSays("Master already forgotten what Master wanted to do?!");
             dukeSays("Duke has no choice but to remind Master then!");
             dukeSays("These are the tasks which Master forgot:");
@@ -105,65 +111,83 @@ public class Ui {
             dukeSays("These are the tasks which Master forgot:");
             break;
         case DONE_EMPTY:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't think Master has done anything yet...");
             break;
         case DONE_OUT_OF_INDEX:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke can't seem to recall that item...");
             break;
         case DONE_ALREADY:
+            dukeExpression = DukeExpression.SURPRISED;
             dukeSays("Didn't Master already do that?");
             break;
         case DONE_SUCCESS:
             // use another function;
             break;
         case NOT_A_NUMBER:
+            dukeExpression = DukeExpression.BLUSH;
             dukeSays("Stop teasing Duke... Even Duke knows that isn't a number...");
             break;
         case DELETE_EMPTY:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Master, please don't delete Duke...");
             break;
         case DELETE_OUT_OF_INDEX:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("That item already doesn't exist in Duke's memory...");
             break;
         case TODO_EMPTY:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't see any description of the todo...");
             break;
         case DEADLINE_EMPTY:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't see any deadline...");
             break;
         case DATE_TIME_PARSE_FAIL:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Master gave a date that Duke cannot read...");
             break;
         case DEADLINE_BY_MISSING:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Master, use '/by' to indicate deadline, Duke wouldn't know otherwise...");
             break;
         case EVENT_EMPTY:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't see any start time...");
             break;
         case EVENT_AT_MISSING:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Master, use '/at' to indicate starting time, Duke wouldn't know otherwise...");
             break;
         case FIND_EMPTY:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("There's nothing for Duke to find...");
             break;
         case FIND_FAIL:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("There isn't any tasks which matches Master's queries.");
             break;
         case FIND_SUCCESS:
             dukeSays("Master! Duke found all these tasks!");
             break;
         case INVALID_COMMAND:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't understand Master...");
             break;
         case EXIT:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Is Master leaving already?");
             dukeSays("Please come back and play with Duke soon...");
             break;
         case SAVE_FAIL:
+            dukeExpression = DukeExpression.SAD;
             dukeSays("Duke feels dizzy...");
             dukeSays("It seems that Duke will forget everything when Master leaves...");
             break;
         case LOAD_FAIL:
+            dukeExpression = DukeExpression.BLUSH;
             dukeSays("There does not seem to be any existing save file.");
             dukeSays("Is this the first time Master has ever used Duke?");
             dukeSays("Type 'help' to see the list of commands.");
@@ -221,6 +245,7 @@ public class Ui {
      * @param task  Task to use.
      */
     public void deleteSuccess(Task task) {
+        dukeExpression = DukeExpression.BLUSH;
         dukeSays("For Master, Duke can forget anything, even the:");
         dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
     }
@@ -257,5 +282,9 @@ public class Ui {
         } else {
             return "";
         }
+    }
+
+    public DukeExpression getDukeExpression() {
+        return dukeExpression;
     }
 }

@@ -51,8 +51,8 @@ public class Duke {
     /**
      *  Gets the current UI output
      */
-    public String getUiOutput() {
-        return ui.getGuiOutput();
+    public Ui getUi() {
+        return ui;
     }
 
     /**
@@ -66,7 +66,7 @@ public class Duke {
         if (c.isExit()) {
             new Thread( new Runnable() {
                 public void run()  {
-                    try  { Thread.sleep( 2000 ); }
+                    try  { Thread.sleep( 1500 ); }
                     catch (InterruptedException ie)  {}
                     System.exit(0);
                 }

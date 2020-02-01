@@ -26,7 +26,6 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_default.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke_happy.png"));
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/heart_background.jpg"));
 
     @FXML
@@ -55,9 +54,9 @@ public class MainWindow extends AnchorPane {
     }
 
     public void printCurrentMessage() {
-        String currentMessage = duke.getUiOutput();
+        String currentMessage = duke.getUi().getGuiOutput();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(currentMessage, dukeImage)
+                DialogBox.getDukeDialog(currentMessage, duke.getUi().getDukeExpression().getDukeImage())
         );
     }
 
@@ -71,7 +70,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, duke.getUi().getDukeExpression().getDukeImage())
         );
         userInput.clear();
     }
