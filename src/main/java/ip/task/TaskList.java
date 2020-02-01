@@ -16,9 +16,20 @@ public class TaskList implements Serializable {
         t.markAsDone();
         return t;
     }
+
+    /**
+     * Returns the number of tasks in the list
+     * @return the number of tasks
+     */
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Returns a task at an index in the list
+     * @param i the index of the task
+     * @return
+     */
     public Task get(int i) {
         return tasks.get(i);
     }

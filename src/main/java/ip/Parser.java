@@ -16,6 +16,11 @@ import java.util.Scanner;
 
 
 public class Parser {
+    /**
+     * Parses a command entered in the command line and returns a command
+     * @param input the string to be parsed
+     * @return the command to be executed
+     */
     public Command parse(String input) {
         Scanner inputSc;
         String command, name, datetime, rest;
