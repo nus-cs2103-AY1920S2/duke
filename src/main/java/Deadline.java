@@ -4,7 +4,7 @@ import java.text.ParseException;
 
 public class Deadline extends Task {
 
-    protected String by;
+    private String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -22,7 +22,7 @@ public class Deadline extends Task {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
             DateFormat newFormat = new SimpleDateFormat("MMM d yyyy h a");
             s =  newFormat.format(df.parse(at));
-        }catch (ParseException pe) {
+        } catch (ParseException pe) {
             pe.printStackTrace();
         }
         return s;

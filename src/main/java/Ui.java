@@ -17,7 +17,7 @@ public class Ui {
     }
 
     public void remove(Task t) {
-        System.out.println("Noted. I've removed this task:\n " + t );
+        System.out.println("Noted. I've removed this task:\n " + t);
     }
 
     public void storeSize(int num) {

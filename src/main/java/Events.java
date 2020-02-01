@@ -20,7 +20,7 @@ public class Events extends Task {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
             DateFormat newFormat = new SimpleDateFormat("MMM d yyyy h a");
             s =  newFormat.format(df.parse(at));
-        }catch (ParseException pe) {
+        } catch (ParseException pe) {
             pe.printStackTrace();
         }
         return s;
