@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Ui {
 
     public static String charmander = "              _.--\"\"`-..\n" +

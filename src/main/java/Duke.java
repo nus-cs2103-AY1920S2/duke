@@ -5,15 +5,13 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e);
+            Ui.showError(e);
             tasks = new TaskList();
         }
     }
@@ -21,7 +19,7 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
 
-        ui.showStart();
+        Ui.showStart();
 
         boolean isLooping = true;
         while (isLooping) {
@@ -35,36 +33,36 @@ public class Duke {
                     case BYE:
                         isLooping = false;
 
-                        ui.showExit();
+                        Ui.showExit();
                         break;
                     case LIST:
 
-                        ui.showList(tasks);
+                        Ui.showList(tasks);
                         break;
                     case DONE:
                         index = Parser.parseIndex(input);
                         tasks.done(index);
                         storage.save(tasks);
 
-                        ui.showDone(tasks.get(index));
+                        Ui.showDone(tasks.get(index));
                         break;
                     case DELETE:
                         index = Parser.parseIndex(input);
                         Task deleted = tasks.delete(index);
                         storage.save(tasks);
 
-                        ui.showDelete(deleted);
+                        Ui.showDelete(deleted);
                         break;
                     default:
                         Task newTask = Parser.parseTask(input);
                         tasks.add(newTask);
                         storage.save(tasks);
 
-                        ui.showAdd(newTask);
+                        Ui.showAdd(newTask);
                         break;
                 }
             } catch (DukeException e) {
-                ui.showError(e);
+                Ui.showError(e);
             }
         }
     }
