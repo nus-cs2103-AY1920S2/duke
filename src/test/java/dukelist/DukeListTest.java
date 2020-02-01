@@ -1,8 +1,9 @@
 package dukelist;
 
+import duketasks.Event;
+import duketasks.Todo;
 import dukeexceptions.DukeException;
 import duketasks.Deadline;
-import duketasks.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

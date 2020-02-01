@@ -1,16 +1,19 @@
-import dukeexceptions.*;
+import dukecommand.DukeCommand;
+import dukeexceptions.DukeException;
 import dukelist.DukeList;
 import dukeparser.DukeParser;
 import dukestorage.DukeStorage;
 import dukeui.DukeUI;
-import dukecommand.DukeCommand;
 
 import java.io.IOException;
 
-// Handles the functioning of Duke
+/**
+ * Represents a Duke object that runs the main function of the program
+ * Will run until user inputs 'bye' command or force quits the program.
+ */
 public class Duke {
     private DukeList dl;
-    private DukeStorage ds = new DukeStorage();
+    private DukeStorage ds;
     private DukeUI ui;
     private DukeParser parser;
 
@@ -19,8 +22,13 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Constructor for Duke. Each instantiation will create a new
+     * DukeStorage, DukeList, DukeUI, DukeParser for the object.
+     */
     public Duke() {
         try {
+            ds = new DukeStorage();
             dl = ds.load();
             ui = new DukeUI();
             parser = new DukeParser();
@@ -29,6 +37,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Drives the body of the code.
+     */
     public void run() {
         ui.showWelcomeMessage();
         String command;

@@ -1,10 +1,14 @@
 package dukelist;
 
-import duketasks.*;
+import duketasks.Task;
 import dukeexceptions.EmptyListException;
 import dukeexceptions.InvalidEntryException;
 
 import java.util.ArrayList;
+
+/**
+ * Represents a list of tasks that the user needs to complete
+ */
 
 public class DukeList {
     private ArrayList<Task> listOfTasks;
@@ -17,22 +21,33 @@ public class DukeList {
     }
 
     /**
-     * @param currTask Takes in a Task and adds it into the list of Tasks
+     * Takes in a Task and adds it into the list of Tasks
+     * Increments the total number of tasks by 1
+     *
+     * @param currTask Task to be added to the list
      */
     public void addTask(Task currTask) {
         listOfTasks.add(currTask);
         numOfTasks++;
     }
 
+    /**
+     * Returns number of tasks in the list
+     *
+     * @return Total number of tasks in the list
+     */
     public int getNumOfTasks() {
         return this.numOfTasks;
     }
 
-    public void loadAdd(Task addTask) {
-        this.listOfTasks.add(addTask);
-        numOfTasks++;
-    }
-
+    /**
+     * Marks a certain task in the list as done according to the taskIndex
+     *
+     * @param taskIndex The current index of the tasks to be marked as done. Is 1-indexed.
+     * @return int representing numOfTasks
+     * @throws EmptyListException Thrown when list is empty
+     * @throws InvalidEntryException Thrown when index < 1 and when index > numOfTasks + 1
+     */
     public Task markTaskAsDone(int taskIndex) throws EmptyListException, InvalidEntryException {
         if (numOfTasks == 0) {
             throw new EmptyListException("List is empty! Which task can you complete?!");
@@ -49,6 +64,11 @@ public class DukeList {
         }
     }
 
+    /**
+     * Returns a formatted string of the list of tasks to be printed in the ListCommand
+     *
+     * @return Formatted string of the lists of tasks
+     */
     public ArrayList<String> getListForUI() {
         ArrayList<String> toBePrint = new ArrayList<>();
 
@@ -60,6 +80,14 @@ public class DukeList {
         return toBePrint;
     }
 
+    /**
+     * Deletes the task from the list if available and decrements the numOfTasks
+     *
+     * @param index Index of tasks in the list to be deleted. 1-indexed.
+     * @return The deleted task
+     * @throws InvalidEntryException Thrown when index < 1 or index > numOfTasks + 1
+     * @throws EmptyListException Thrown when list is empty
+     */
     public Task deleteTask(int index) throws InvalidEntryException, EmptyListException {
         if (numOfTasks == 0) {
             throw new EmptyListException("List is empty! How to delete?!");
