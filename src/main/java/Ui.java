@@ -35,4 +35,7 @@ public class Ui {
         System.out.println("Here are the tasks in your list: ");
     }
 
+    public void matchingTask() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
 }
