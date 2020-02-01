@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * dukeClasses.Deadline class is a child class of dukeClasses.Task that has a by variable which tells the user
- * when the deadline is
+ * dukeClasses.Deadline class is a child class of dukeClasses.Task that has a by
+ * variable which tells the user when the deadline is.
  */
 public class Deadline extends Task {
 
