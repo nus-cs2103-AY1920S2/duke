@@ -21,7 +21,7 @@ public class Duke {
      * Initialises Duke.
      */
     public Duke(boolean withGui) {
-        storage = new Storage(PATH);
+        storage = new Storage();
         ui = new Ui(withGui);
         parser = new Parser();
 

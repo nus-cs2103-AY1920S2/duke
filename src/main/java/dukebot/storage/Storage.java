@@ -16,24 +16,30 @@ import java.util.Arrays;
 
 public class Storage {
     private boolean saveAlreadyFailed = false;
-    private String storagePath;
-    private final String USER_DATA_DIRECTORY = "./user-data";
-    private final String TASK_LIST_FILEPATH = "./user-data/task-list.data";
-    private final String ALIAS_FILEPATH = "./user-data/alias.data";
-    private final String SMALL_TALK_FILEPATH = "./user-data/small-talk.data";
-    private final String CONFIG_FILEPATH = "./user-data/config.data";
+    private String storageDirectory;
+    private final String TASK_LIST_FILEPATH = "/task-list.data";
+    private final String ALIAS_FILEPATH = "/alias.data";
+    private final String SMALL_TALK_FILEPATH = "/small-talk.data";
+    private final String CONFIG_FILEPATH = "/config.data";
+
+    /**
+     * Generates the Storage with default directory.
+     */
+    public Storage() {
+        this.storageDirectory = "./user-data";
+    }
 
     /**
      * Generates the Storage.
      *
-     * @param storagePath  Path to save file.
+     * @param storageDirectory  Path to save file.
      */
-    public Storage(String storagePath) {
-        this.storagePath = storagePath;
+    public Storage(String storageDirectory) {
+        this.storageDirectory = storageDirectory;
     }
 
     private void mkDataDir() {
-        File directory = new File(USER_DATA_DIRECTORY);
+        File directory = new File(storageDirectory);
         if (! directory.exists()){
             directory.mkdir();
         }
@@ -49,7 +55,8 @@ public class Storage {
         ArrayList<Task> taskList = tasks.getTaskList();
         try {
             mkDataDir();
-            FileOutputStream writeData = new FileOutputStream(new File(this.TASK_LIST_FILEPATH));
+            File file = new File(storageDirectory + TASK_LIST_FILEPATH);
+            FileOutputStream writeData = new FileOutputStream(file);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             Task[] taskArr = taskList.toArray(new Task[0]);
             writeStream.writeObject(taskArr);
@@ -72,7 +79,7 @@ public class Storage {
      * @throws DukeException  If no data is found.
      */
     public ArrayList<Task> loadTaskArrayList() throws DukeException {
-        File file = new File(this.TASK_LIST_FILEPATH);
+        File file = new File(storageDirectory + TASK_LIST_FILEPATH);
         if (file.isFile()) {
             try {
                 FileInputStream readData = new FileInputStream(file);

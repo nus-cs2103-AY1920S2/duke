@@ -14,6 +14,5 @@ src/main/resources/docs/
 bin/
 
 # Store local data
-dukeStore.txt
-storageTest.txt
 user-data/
+testing-data/

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StorageTest {
     @Test
     void testListSavedIsListLoaded() {
-        Storage storage = new Storage("./storageTest.txt");
+        Storage storage = new Storage("./testing-data");
         LocalDateTime testTime = LocalDateTime.of(2020,1,2,0,0);
         ArrayList<Task> taskArrayList = new ArrayList<Task>();
         TaskList taskList = new TaskList(taskArrayList);
