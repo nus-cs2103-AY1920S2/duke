@@ -1,3 +1,5 @@
+import org.gradle.api.plugins.internal.DefaultJavaApplication
+
 plugins {
     id 'java'
     id 'application'
@@ -10,32 +12,34 @@ repositories {
     mavenCentral()
 }
 
-application {
+final def application = application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Duke.class"
 }
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
-}
+application
 
 test {
     useJUnitPlatform()
 }
 
-/*plugins {
-    id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
-}
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 
-repositories {
-    mavenCentral()
-}
+    String javaFxVersion = '11'
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}*/
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
 
 run {
     standardInput = System.in
