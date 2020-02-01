@@ -1,10 +1,7 @@
 package dukeparser;
 
-import dukeexceptions.DukeException;
+import dukeexceptions.*;
 import dukecommand.*;
-import dukeexceptions.InvalidFormatException;
-import dukeexceptions.MissingDescriptionException;
-import dukeexceptions.MissingTimingException;
 import duketasks.Deadline;
 import duketasks.Event;
 import duketasks.Todo;
@@ -80,6 +77,10 @@ public class DukeParser {
             case BYE:
                 returnCommand = new ByeCommand();
                 break;
+            case FIND:
+                String keyword = findKeyword(inputString);
+                returnCommand = new FindCommand(keyword);
+                break;
             case UNKNOWN:
                 returnCommand = new UnknownCommand();
                 break;
@@ -115,6 +116,19 @@ public class DukeParser {
             String dateString = help[1];
 
             return parseDate(dateString);
+        }
+    }
+
+    private String findKeyword(String inputString) throws InvalidEntryException {
+        String[] inputStrArr = inputString.split(" ");
+        int arrLen = inputStrArr.length;
+
+        if(arrLen > 2) {
+            throw new InvalidEntryException("Keyword can only be 1 word long. Please try again!");
+        } else if(arrLen < 2) {
+            throw new InvalidEntryException("Keyword can't be found. Please try again!");
+        } else {
+            return inputStrArr[1];
         }
     }
 
@@ -178,8 +192,7 @@ public class DukeParser {
             return DukeCommandEnums.DELETE;
         } else if (enumString.equals("find")) {
             return DukeCommandEnums.FIND;
-        }
-        else {
+        } else {
             return DukeCommandEnums.UNKNOWN;
         }
     }
