@@ -64,8 +64,13 @@ public class Duke {
         Command c = Parser.parse(input);
         c.execute(tasks, ui, storage);
         if (c.isExit()) {
-            // need to set timeout here somehow
-            System.exit(0);
+            new Thread( new Runnable() {
+                public void run()  {
+                    try  { Thread.sleep( 2000 ); }
+                    catch (InterruptedException ie)  {}
+                    System.exit(0);
+                }
+            } ).start();
         }
         return ui.getGuiOutput();
     }
