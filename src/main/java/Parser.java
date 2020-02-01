@@ -22,54 +22,64 @@ public class Parser {
         return s[0];
     }
 
-    public void todoTaskCommand(String command, ArrayList<Task> tasks,Ui uiDisplay,File f)throws Exception{
+    public String todoTaskCommand(String command, ArrayList<Task> tasks,Ui uiDisplay,File f)throws Exception{
         String [] s = command.split("todo ");
         tasks.add(new Task(s[1]));
-        uiDisplay.topTwoLine();
-        System.out.println("   "+tasks.get(tasks.size()-1).toString());
-        uiDisplay.bottomTwoLine(tasks);
+        String customeriseTopMes = uiDisplay.getTopTwoLine();
+        String taskMes = "   "+tasks.get(tasks.size()-1).toString();
+        String customeriseBottomMes = uiDisplay.getBottomTwoLine(tasks);
         fileStorage.writeFile("todo",s[1],f);
+        return uiDisplay.parserOutputMess(customeriseTopMes,taskMes,customeriseBottomMes);
     }
-    public void eventCommand(String command,ArrayList<Task> tasks,Ui uiDisplay,File f) throws Exception{
+
+    public String eventCommand(String command,ArrayList<Task> tasks,Ui uiDisplay,File f) throws Exception{
         String [] s = command.split("event ");
         String [] temp = s[1].split("/");
         String taskName = temp[0];
         String date = formatDate(temp[1].substring(3,temp[1].length()));
-        uiDisplay.topTwoLine();
+        String customeriseTopMes = uiDisplay.getTopTwoLine();
         tasks.add(new Deadline(taskName,date));
-        System.out.println("     "+tasks.get(tasks.size()-1).toString());
-        uiDisplay.bottomTwoLine(tasks);
+        String taskMes = "     "+tasks.get(tasks.size()-1).toString();
+        String customeriseBottomMes = uiDisplay.getBottomTwoLine(tasks);
         fileStorage.writeFile("deadline",taskName+date,f);
+        return uiDisplay.parserOutputMess(customeriseTopMes,taskMes,customeriseBottomMes);
     }
 
-    public void deadlineCommand(String command,ArrayList<Task> tasks,Ui uiDisplay,File f) throws Exception{
+    public String deadlineCommand(String command,ArrayList<Task> tasks,Ui uiDisplay,File f) throws Exception{
         String [] s = command.split("deadline ");
         String[] temp = s[1].split("/");
         String taskName = temp[0];
         String date = formatDate(temp[1].substring(3,temp[1].length()));
-        uiDisplay.topTwoLine();
+        String customeriseTopMes = uiDisplay.getTopTwoLine();
         tasks.add(new Event(taskName, date));
-        System.out.println("     " + tasks.get(tasks.size()-1).toString());
-        uiDisplay.bottomTwoLine(tasks);
+        String taskMes = "     " + tasks.get(tasks.size()-1).toString();
+        String customeriseBottomMes = uiDisplay.getBottomTwoLine(tasks);
         fileStorage.writeFile("deadline",taskName+date,f);
+        return uiDisplay.parserOutputMess(customeriseTopMes,taskMes,customeriseBottomMes);
     }
 
-    public void doneCommand(String command,ArrayList<Task> tasks,Ui uiDisplay){
-        String [] temp = command.split(" ");
-        int arrPos = Integer.parseInt(temp[1]);
-        tasks.get(arrPos-1).setDone();
-        uiDisplay.markDone();
-        System.out.println("    ["+tasks.get(arrPos-1).getStatusIcon()+"] "+tasks.get(arrPos-1).getDescription());
-        System.out.println("  -------------");
+    public String doneCommand(String command,ArrayList<Task> tasks,Ui uiDisplay){
+        if(tasks.size()>0){
+            String [] temp = command.split(" ");
+            int arrPos = Integer.parseInt(temp[1]);
+            tasks.get(arrPos-1).setDone();
+            String doneMesTop = uiDisplay.markAsDone();
+            String doneResult = "    ["+tasks.get(arrPos-1).getStatusIcon()+"] "+tasks.get(arrPos-1).getDescription();
+            String doneMesBot = "  -------------";
+            return uiDisplay.parserOutputMess(doneMesTop,doneResult,doneMesBot);
+        }else{
+            return "  Sorry there is no any task for you to do the command";
+        }
+
     }
 
     public void deleteCommand(String command,ArrayList<Task> tasks,Ui uiDisplay){
         String [] temp = command.split(" ");
         int arrPos = Integer.parseInt(temp[1]);
-        uiDisplay.removeMes();
+        uiDisplay.removeTaskMes();
         System.out.println("    "+tasks.get(arrPos-1).toString());
         tasks.remove(arrPos-1);
-        uiDisplay.bottomTwoLine(tasks);
+        uiDisplay.getBottomTwoLine(tasks);
     }
 
     public static String formatDate(String date) throws Exception{

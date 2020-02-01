@@ -1,33 +1,36 @@
 import java.util.ArrayList;
 
 public class Ui {
-    public Ui(){
+    public Ui() {
     }
 
-    public void topTwoLine (){
-        System.out.println("-----------------");
-        System.out.println("   Got it. I've added this task:");
+    public String getTopTwoLine() {
+        return "----------------- " + '\n' + "   Got it. I've added this task:";
     }
 
-    public void bottomTwoLine (ArrayList<Task> tList){
-        System.out.println("   Now you have "+ tList.size() +" tasks in the list.");
-        System.out.println("-----------------  ");
+    public String getBottomTwoLine(ArrayList<Task> tList) {
+        return "   Now you have " + tList.size() + " tasks in the list.\n" +
+                "-----------------  ";
     }
 
-    public void exitsMessage (){
-        System.out.println("  --------------");
-        System.out.println("     Bye. Hope to see you again");
-        System.out.println("  --------------");
+    public String returnExitsMessage() {
+        return "  --------------\n" +
+                "    Bye. Hope to see you again\n" +
+                "  --------------";
     }
 
-    public void markDone(){
-        System.out.println("  -------------");
-        System.out.println("    Nice! I've marked this task as done: ");
+    public String markAsDone() {
+        return "  --------------\n" +
+                "    Nice! I've marked this task as done: ";
     }
 
-    public void removeMes(){
-        System.out.println("-----------------");
-        System.out.println("   Got it. I've removed this task:");
+    public void removeTaskMes() {
+        System.out.println( "  --------------\n" +
+                "   Got it. I've removed this task:");
+    }
+
+    public String parserOutputMess(String topMessage, String output, String bottomMessage) {
+        return topMessage + "\n" + output + "\n" + bottomMessage;
     }
 
 }

@@ -31,7 +31,6 @@ public class Storage {
         br.write(command+" || "+task);
         br.newLine();
         br.close();
-//        fw.write(command+" || "+task);
         fw.close();
         try {
 
@@ -44,12 +43,6 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
-//    public static File createNewFile(){
-//        String filePath = "duke.txt";
-//        File f = new File(filePath);
-//        return f;
-//    }
 }
 
 
