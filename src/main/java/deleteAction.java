@@ -1,15 +1,22 @@
 public class deleteAction implements Action {
+    private int index;
+
+    public deleteAction(int index){
+        this.index = index;
+    }
     /**
      * For deleteAction doSomething deletes a task specified by an index from the next int of the global scanner
      * from the TaskList
      * @param tasks the TaskList to delete from
      */
-    public void doSomething(TaskList tasks) {
-        int index = GlobalScanner.sc.nextInt();
+    public String doSomething(TaskList tasks) {
+        if(index < 0){
+            return "Invalid Index found";
+        }
         try {
-            tasks.delete(index);
+            return tasks.delete(index);
         } catch (InvalidIndexException e) {
-            System.out.println(e);
+            return (e.toString());
         }
     }
 

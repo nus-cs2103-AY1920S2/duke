@@ -3,8 +3,8 @@ public class listAction implements Action {
      * Lists all the tasks in the task list
      * @param tasks
      */
-    public void doSomething(TaskList tasks) {
-        tasks.list();
+    public String doSomething(TaskList tasks) {
+        return tasks.list();
     }
 
     public boolean hasNextAction() {

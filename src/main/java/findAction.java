@@ -1,15 +1,23 @@
 import java.util.List;
 
 public class findAction implements Action {
-    public void doSomething(TaskList tasks) {
-        String keyword = GlobalScanner.sc.next();
+    private String keyword;
+
+    public findAction(String keyword){
+        this.keyword = keyword;
+    }
+    public String doSomething(TaskList tasks) {
+        if(keyword.equals("")){
+            return "I need a keyword";
+        }
         List<Task> tasksWithKeyword = tasks.find(keyword);
-        System.out.println("The tasks matching the keyword are:");
+        String myResponse = "The tasks matching the keyword are:\n";
         int numTasks = 1;
         for(Task task : tasksWithKeyword) {
-            System.out.println(numTasks + ". " + task);
+            myResponse += (numTasks + ". " + task + "\n");
             numTasks++;
         }
+        return myResponse;
 
     }
 

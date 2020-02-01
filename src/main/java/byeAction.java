@@ -3,8 +3,8 @@ public class byeAction implements Action {
      * Just does nothing
      * @param tasks
      */
-    public void doSomething(TaskList tasks) {
-
+    public String doSomething(TaskList tasks) {
+        return "Goodbye! Hope to see you soon!";
     }
 
     /**

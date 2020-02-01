@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> usrInputs = new ArrayList<>();
+    private List<Task> usrInputs;
 
 
     public TaskList() {
@@ -15,12 +15,14 @@ public class TaskList {
     /**
      * Lists all the tasks in the list of tasks
      */
-    public void list() {
+    public String list() {
+        String listString = "";
         int count = 1;
         for (Task usrTask : usrInputs) {
-            System.out.println(count + ". " + usrTask);
+            listString += (count + ". " + usrTask + "\n");
             count++;
         }
+        return listString;
     }
 
     /**
@@ -28,14 +30,14 @@ public class TaskList {
      * @param index
      * @throws InvalidIndexException
      */
-    public void done(int index) throws InvalidIndexException{
+    public String done(int index) throws InvalidIndexException{
         if(index > usrInputs.size()) {
             throw new InvalidIndexException();
 
         }
         Task completedTask = usrInputs.get(index - 1);
         completedTask.setDone();
-        System.out.println("Good job, mate. I have marked the following task as done.\n" + completedTask);
+        return ("Good job, mate. I have marked the following task as done.\n" + completedTask + "\n");
 
     }
 
@@ -44,13 +46,13 @@ public class TaskList {
      * @param index
      * @throws InvalidIndexException
      */
-    public void delete(int index) throws InvalidIndexException{
+    public String delete(int index) throws InvalidIndexException{
         if(index > usrInputs.size()) {
             throw new InvalidIndexException();
         }
 
         Task removedTask = usrInputs.remove(index - 1);
-        System.out.println("I have removed the following task\n" + removedTask);
+        return ("I have removed the following task\n" + removedTask + "\n");
 
     }
 
@@ -58,10 +60,10 @@ public class TaskList {
      * Adds the task to the list of tasks
      * @param task
      */
-    public void add(Task task){
+    public String add(Task task){
         usrInputs.add(task);
-        System.out.println("Got it! I've added the following task \n" + task +
-                "\nNow you have " + usrInputs.size() + " tasks");
+        return ("Got it! I've added the following task \n" + task +
+                "\nNow you have " + usrInputs.size() + " tasks\n" );
     }
 
     /**

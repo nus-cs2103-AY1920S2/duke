@@ -1,21 +1,31 @@
-public class newTaskAction implements Action {
-    private String command;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
-    public newTaskAction(String command){
-        this.command = command;
+public class newTaskAction implements Action {
+    private String input;
+
+    public newTaskAction(String input){
+        this.input = input;
     }
 
     /**
      * Attempts to create a new Task if possible and add it to the taskList if there is one
      * @param tasks taskList to add Task to
      */
-    public void doSomething(TaskList tasks) {
+    public String doSomething(TaskList tasks) {
         try {
-            String taskDescription = GlobalScanner.sc.nextLine();
+            Scanner sc = new Scanner(this.input);
+            String command = sc.next();
+            String taskDescription = "";
+            try{
+                taskDescription = sc.nextLine();
+            } catch (NoSuchElementException e){
+
+            }
             Task currentTask = TaskHandler.taskHandler(command, taskDescription);
-            tasks.add(currentTask);
+            return tasks.add(currentTask);
         } catch (InvalidInputException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 

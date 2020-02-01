@@ -118,7 +118,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        Parser parser = new Parser();
+        return parser.parse(input);
     }
 
     /**
@@ -129,7 +130,6 @@ public class Duke extends Application {
         Parser parser = new Parser();
         Ui.greet();
 
-        parser.parse();
 
         Ui.sayBye();
 
