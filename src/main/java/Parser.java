@@ -5,12 +5,12 @@ import java.util.ArrayList;
  * <code>task list</code> it stores.
  */
 public class Parser {
-    ArrayList<Task> taskList;
-    Ui ui;
+    protected ArrayList<Task> taskList;
+    protected Ui ui;
 
     public enum typeOfError {
-        TODO_NODESC, DEADLINE_NODESC, DEADLINE_NODEADLINE, EVENT_NODESC, EVENT_NODATEANDTIME, OTHERS, UNKTASKDONE,
-        UNKTASKTODELETE
+        TODO_NO_DESC, DEADLINE_NO_DESC, DEADLINE_NO_DEADLINE, EVENT_NO_DESC, EVENT_NO_DATE_AND_TIME, OTHERS,
+        UNK_TASK_DONE, UNK_TASK_TO_DELETE
     }
 
     public Parser(ArrayList<Task> taskList) {
@@ -24,11 +24,11 @@ public class Parser {
      * @param command user commands inputted by user through standard output.
      * @throws DukeException if information of a task provided is insufficient or if command is an unknown command.
      */
-    public void parse(String command) throws DukeException{
+    public void parse(String command) throws DukeException {
         if (command.contains("done")) {
             String[] strArr = command.split(" ");
                 if (strArr.length == 1) {
-                    throw new DukeException(typeOfError.UNKTASKDONE.ordinal());
+                    throw new DukeException(typeOfError.UNK_TASK_DONE.ordinal());
                 }
                 Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
                 currTask.setDone();
@@ -37,7 +37,7 @@ public class Parser {
             String[] strArr = command.split(" ", 2);
 
                 if (strArr.length == 1) {
-                    throw new DukeException(typeOfError.TODO_NODESC.ordinal());
+                    throw new DukeException(typeOfError.TODO_NO_DESC.ordinal());
                 }
                 Todo newTask = new Todo(strArr[1]);
                 taskList.add(newTask);
@@ -46,11 +46,11 @@ public class Parser {
             String[] strArr = command.split(" ", 2);
 
                 if (strArr.length == 1) {
-                    throw new DukeException(typeOfError.DEADLINE_NODESC.ordinal());
+                    throw new DukeException(typeOfError.DEADLINE_NO_DESC.ordinal());
                 }
                 String[] cmdArr = strArr[1].split("/", 2);
                     if (cmdArr.length == 1) {
-                        throw new DukeException(typeOfError.DEADLINE_NODEADLINE.ordinal());
+                        throw new DukeException(typeOfError.DEADLINE_NO_DEADLINE.ordinal());
                     }
                     command = cmdArr[0];
                     String deadline = cmdArr[1].split(" ", 2)[1];
@@ -62,11 +62,11 @@ public class Parser {
             String[] strArr = command.split(" ", 2);
 
                 if (strArr.length == 1) {
-                    throw new DukeException(typeOfError.EVENT_NODESC.ordinal());
+                    throw new DukeException(typeOfError.EVENT_NO_DESC.ordinal());
                 }
                 String[] cmdArr = strArr[1].split("/", 2);
                     if (cmdArr.length == 1) {
-                        throw new DukeException(typeOfError.EVENT_NODATEANDTIME.ordinal());
+                        throw new DukeException(typeOfError.EVENT_NO_DATE_AND_TIME.ordinal());
                     }
                     command = cmdArr[0];
                     String timing = cmdArr[1].split(" ", 2)[1];
@@ -78,7 +78,7 @@ public class Parser {
         } else if (command.contains("delete")) {
             String[] strArr = command.split(" ");
                 if (strArr.length == 1) {
-                    throw new DukeException(typeOfError.UNKTASKTODELETE.ordinal());
+                    throw new DukeException(typeOfError.UNK_TASK_TO_DELETE.ordinal());
                 }
                 Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
                 taskList.remove(currTask);

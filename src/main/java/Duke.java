@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -16,14 +18,14 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException | IOException e) {
-            ui.showLoadingError();
+        } catch (DukeException | IOException exception) {
+            ui.printLoadingError();
             tasks = new TaskList();
         }
     }
 
     public void run() throws IOException {
-        ui.showWelcome();
+        ui.printWelcome();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         Parser parser = new Parser(tasks.getList());
@@ -31,8 +33,8 @@ public class Duke {
             try {
                 parser.parse(command);
                 command = sc.nextLine();
-            } catch (DukeException e) {
-                ui.showError(e);
+            } catch (DukeException exception) {
+                ui.printError(exception);
                 command = sc.nextLine();
             }
         }
@@ -42,7 +44,7 @@ public class Duke {
             writer.write(task.updateFile() + "\n");
         }
         writer.flush();
-        ui.showExitLine();
+        ui.printExitLine();
     }
 
     public static void main(String[] args) throws IOException {

@@ -18,7 +18,7 @@ public class Event extends Task {
      * @return 1 if task is marked done, or 0 if the task is marked undone.
      */
     public int getDoneInt() {
-        return getDone() ? 1 : 0;
+        return isDone() ? 1 : 0;
     }
 
     /**

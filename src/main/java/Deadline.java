@@ -21,11 +21,11 @@ public class Deadline extends Task {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             Date deadlineTimeParsed = sdf.parse(deadlineTime);
-            SimpleDateFormat sdf2 = new SimpleDateFormat("hhmm aa");
+            SimpleDateFormat sdf_toFormat = new SimpleDateFormat("hhmm aa");
             this.deadline = LocalDate.parse(deadlineDate).format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                    + sdf2.format(deadlineTimeParsed);
-        } catch (ParseException e) {
-            e.printStackTrace();
+                    + sdf_toFormat.format(deadlineTimeParsed);
+        } catch (ParseException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      *
      * @return deadline date and the deadline time.
      */
-    public String assembleDeadlineDateAndTime() {
+    public String getDeadlineDateAndTime() {
         return deadlineDate + " " + deadlineTime;
     }
 
@@ -45,7 +45,7 @@ public class Deadline extends Task {
      * @return 1 if task is marked done, or 0 if the task is marked undone.
      */
     public int getDoneInt() {
-        return getDone() ? 1 : 0;
+        return isDone() ? 1 : 0;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Deadline extends Task {
      */
     @Override
     public String updateFile() {
-        return "D - " + getDoneInt() + " - " + getCommand() + " - " + assembleDeadlineDateAndTime();
+        return "D - " + getDoneInt() + " - " + getCommand() + " - " + getDeadlineDateAndTime();
     }
 
     @Override

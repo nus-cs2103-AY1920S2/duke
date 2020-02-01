@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -6,8 +9,8 @@ import java.util.ArrayList;
  * list or create a new file at.
  */
 public class Storage {
-    File file;
-    ArrayList<Task> taskList;
+    protected File file;
+    protected ArrayList<Task> taskList;
 
     public Storage(String filePath) {
         this.file = new File(filePath);
@@ -32,37 +35,34 @@ public class Storage {
             while (line != null) {
                 String[] strArr = line.split(" - ");
                 switch (strArr[0]) {
-                    case "T": {
-                        Todo newTask = new Todo(strArr[2]);
-                        taskList.add(newTask);
-                        if (strArr[1].equals("1")) {
-                            newTask.setDone();
-                        }
-                        break;
+                case "T":
+                    Todo newTodoTask = new Todo(strArr[2]);
+                    taskList.add(newTodoTask);
+                    if (strArr[1].equals("1")) {
+                        newTodoTask.setDone();
                     }
-                    case "D": {
-                        String[] deadlineArr = strArr[3].split(" ", 2);
-                        Deadline newTask = new Deadline(strArr[2], deadlineArr[0], deadlineArr[1]);
-                        taskList.add(newTask);
-                        if (strArr[1].equals("1")) {
-                            newTask.setDone();
-                        }
-                        break;
+                    break;
+                case "D":
+                    String[] deadlineArr = strArr[3].split(" ", 2);
+                    Deadline newDeadlineTask = new Deadline(strArr[2], deadlineArr[0], deadlineArr[1]);
+                    taskList.add(newDeadlineTask);
+                    if (strArr[1].equals("1")) {
+                        newDeadlineTask.setDone();
                     }
-                    case "E": {
-                        Event newTask = new Event(strArr[2], strArr[3]);
-                        taskList.add(newTask);
-                        if (strArr[1].equals("1")) {
-                            newTask.setDone();
-                        }
-                        break;
+                    break;
+                case "E":
+                    Event newEventTask = new Event(strArr[2], strArr[3]);
+                    taskList.add(newEventTask);
+                    if (strArr[1].equals("1")) {
+                        newEventTask.setDone();
                     }
+                    break;
                 }
                 line = br.readLine();
             }
             return taskList;
         } else {
-            file.createNewFile();
+            boolean isFileCreated = file.createNewFile();
             throw new DukeException(8);
         }
     }

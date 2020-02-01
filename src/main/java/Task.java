@@ -5,7 +5,7 @@ import static java.lang.Boolean.TRUE;
  */
 public class Task {
     protected String command;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String command) {
         this.command = command;
@@ -15,7 +15,7 @@ public class Task {
      * Marks a task as done.
      */
     protected void setDone() {
-        done = TRUE;
+        isDone = TRUE;
     }
 
     /**
@@ -23,8 +23,8 @@ public class Task {
      *
      * @return whether a task is marked as done.
      */
-    protected boolean getDone() {
-        return done;
+    protected boolean isDone() {
+        return isDone;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Task {
      * @return ✓ if task is done, or ✗ if task is not done.
      */
     protected String getDoneSymbol() {
-        return done ? "✓" : "✗" ;
+        return isDone ? "✓" : "✗" ;
     }
 
     /**
@@ -46,6 +46,6 @@ public class Task {
     }
 
     protected String updateFile() {
-        return "task";
+        return null;
     }
 }

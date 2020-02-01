@@ -7,30 +7,30 @@ public class Ui {
     /**
      * Prints welcome message when Duke is started.
      */
-    public void showWelcome() {
+    public void printWelcome() {
         System.out.println("Hi! I am Duke! What would you like to tell me today?:)");
     }
 
     /**
      * Prints message that task list is not found.
      */
-    public void showLoadingError() {
+    public void printLoadingError() {
         System.out.println("Task list not found! Creating one now...");
     }
 
     /**
      * Prints out respective exception.
      *
-     * @param e DukeException resulted from user's command input.
+     * @param exception DukeException resulted from user's command input.
      */
-    public void showError(Exception e) {
-       System.out.println(e.toString());
+    public void printError(Exception exception) {
+       System.out.println(exception.toString());
     }
 
     /**
      * Prints goodbye message when user says bye.
      */
-    public void showExitLine() {
+    public void printExitLine() {
         System.out.println("Okay then! Goodbye!");
     }
 
