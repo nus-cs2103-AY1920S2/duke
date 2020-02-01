@@ -1,3 +1,8 @@
+import Task.Task;
+import Task.Deadline;
+import Task.Event;
+import Task.Todo;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,7 +34,7 @@ public class Storage {
         fw.close();
     }
 
-    //get an extra piece of information if the Task is a Deadline or Event
+    //get an extra piece of information if the Task.Task is a Task.Deadline or Task.Event
     private String getSpecificDescription(Task t) {
         String text = t.getDescription();
         if (t instanceof Deadline) {
@@ -40,7 +45,7 @@ public class Storage {
         return text;
     }
 
-    //get a Task according to the text in the data file
+    //get a Task.Task according to the text in the data file
     private Task decode(String data) {
         StringTokenizer st = new StringTokenizer(data);
         String className = st.nextToken("~");
@@ -48,7 +53,7 @@ public class Storage {
         String description = st.nextToken("~");
         if (st.hasMoreTokens()) {
             String extra = st.nextToken("~");
-            if (className.equals("Deadline")) {
+            if (className.equals("Task.Deadline")) {
                 Deadline ddl =  new Deadline(description, extra);
                 if (status.equals("1")) {
                     ddl.markAsDone();

@@ -1,8 +1,9 @@
+import Task.Deadline;
+import Task.Event;
+import Task.Todo;
+
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.security.InvalidKeyException;
-import java.nio.file.Files;
-import java.io.FileWriter;
 import java.util.*;
 
 public class Duke {
