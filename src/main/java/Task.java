@@ -16,6 +16,15 @@ public class Task {
         this.status = "[✓]";
     }
 
+    public int getStatusBinary() {
+        if (this.status == "[✓]") {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
     public String getIcon() {
         if (this.type.equals("todo")) {
             return "[T]";
