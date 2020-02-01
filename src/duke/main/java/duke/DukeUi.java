@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -13,7 +15,7 @@ public class DukeUi {
     }
 
     public void greet() {
-        out.println("Hello! I'm Duke");
+        out.println("Hello! I'm duke.Duke");
         out.println("By default, your list of tasks will be saved to \"tasks.txt\".");
         out.println("What can I do for you?");
         out.println();

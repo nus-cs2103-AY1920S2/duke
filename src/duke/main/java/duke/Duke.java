@@ -1,9 +1,8 @@
-import java.io.IOException;
+package duke;
+
 import java.lang.String;
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Duke {
     private TaskList tasks;
@@ -15,8 +14,6 @@ public class Duke {
         storage = Storage.createSrorageFile();
         this.ui = new DukeUi(System.in, System.out);
     }
-
-
 
     private void echo(Scanner sc) {
         String userCommand = sc.next();

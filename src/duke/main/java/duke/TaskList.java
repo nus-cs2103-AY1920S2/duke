@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +45,7 @@ public class TaskList {
         output += ("Here is your list of tasks:\n");
         for (int i = 0; i < tasks.size(); ++i) {
             Task task = tasks.get(i);
-            output += String.format("%d. %s\n", i + 1, task.toString());
+            output = output.concat(String.format("%d. %s\n", i + 1, task.toString()));
         }
         return output;
     }

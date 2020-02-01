@@ -1,3 +1,4 @@
+package duke;
 public class TodoTask extends Task{
     private final TaskType taskType = TaskType.TODO;
 
