@@ -10,8 +10,6 @@ public class Deadline extends Task {
         super(task);
         this.timing = timing;
         convertTiming();
-        //this.timing = LocalDate.parse(timing);
-        //this.timeString = this.timing.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public Deadline(String task, String timing, boolean bool){
