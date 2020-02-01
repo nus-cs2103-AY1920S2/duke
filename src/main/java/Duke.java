@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -29,6 +32,8 @@ public class Duke {
                     break;
 
 
+
+
                     // LIST will list out all the tasks and show their done status
                 } else if (taskDescription.equals("list")) {
 
@@ -44,6 +49,9 @@ public class Duke {
                         }
 
                     }
+
+
+
 
 
                     // DONE will mark task as done with a ticked checkbox
@@ -79,6 +87,9 @@ public class Duke {
                     }
 
 
+
+
+
                     // DELETE will delete the task in the ArrayList according to index number
                 } else if (taskDesc[0].equals("delete")) {
 
@@ -89,6 +100,7 @@ public class Duke {
                     updateFile(taskList);
                     System.out.println("Noted. I've removed this task: \n" + "  " + oldTask.toString() + "\n" +
                             "Now you have " + taskList.size() + " tasks in the list.");
+
 
 
 
@@ -117,6 +129,9 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
 
+
+
+
                     // DEADLINE will add a new deadline task in the list, with a date and/or time attached to it
                 } else if (taskDesc[0].equals("deadline")) {
 
@@ -140,7 +155,8 @@ public class Duke {
                         deadlineString += " " + taskDesc[i];
                     }
 
-                    Deadline newDeadline = new Deadline(taskDescString, deadlineString);
+                    LocalDate deadline = LocalDate.parse(deadlineString.trim());
+                    Deadline newDeadline = new Deadline(taskDescString, deadline);
                     taskList.add(newDeadline);
                     String taskMessage = "D | " + newDeadline.getStatus() + " |" + newDeadline.getDescription()
                             + " |" + deadlineString + "\n";
@@ -148,6 +164,10 @@ public class Duke {
                     System.out.println("Senpai I have added this event: \n" + "[D][✗]" +
                             newDeadline.getDescription() + " (by:" + deadlineString + ")" + "\n"
                             + "Now you have " + taskList.size() + " number of tasks in the list.");
+                    System.out.println(deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+
+
+
 
 
                     // EVENT will add a new Event task to the list with a date and/or time attached to it
@@ -173,7 +193,8 @@ public class Duke {
                         eventString += " " + taskDesc[i];
                     }
 
-                    Event newEvent = new Event(taskDescString, eventString);
+                    LocalDate eventTiming = LocalDate.parse(eventString.trim());
+                    Event newEvent = new Event(taskDescString, eventTiming);
                     taskList.add(newEvent);
                     String taskMessage = "E | " + newEvent.getStatus() + " |" + newEvent.getDescription()
                             + " |" + eventString + "\n";
@@ -249,7 +270,9 @@ public class Duke {
                     timing += " " + readTaskArr[i];
                 }
 
-                Deadline newTask = new Deadline(taskDesc, timing);
+                LocalDate timingLocalDate = LocalDate.parse(timing);
+
+                Deadline newTask = new Deadline(taskDesc, timingLocalDate);
 
                 if (readTaskArr[2].equals("1")) { // Sets status as done if it is done
                     newTask.setStatusDone();
@@ -280,7 +303,9 @@ public class Duke {
                     timing += " " + readTaskArr[i];
                 }
 
-                Event newTask = new Event(taskDesc, timing);
+                LocalDate timingLocalDate = LocalDate.parse(timing);
+
+                Event newTask = new Event(taskDesc, timingLocalDate);
 
                 if (readTaskArr[2].equals("1")) { // Sets status as done if it is done
                     newTask.setStatusDone();

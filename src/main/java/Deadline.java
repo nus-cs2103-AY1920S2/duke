@@ -1,16 +1,20 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
     public String type;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
         this.type = "deadline";
     }
 
     @Override
-    public String getBy() {
+    public LocalDate getBy() {
 
         return by;
     }

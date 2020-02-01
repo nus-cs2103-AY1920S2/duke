@@ -1,0 +1,6 @@
+E | 1 | meet gerren | sunday
+D | 1 | return book | June 6th
+T | 1 | meet Kim
+E | 1 | play frisbee | field 6pm
+T | 1 | 2103
+E | 0 | this | 26 jan

@@ -1,17 +1,20 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task {
 
-    protected String by;
+    protected LocalDate by;
     public String type;
 
-    public Event(String description, String by) {
+    public Event(String description, LocalDate by) {
         super(description);
         this.by = by;
         this.type = "event";
     }
 
     @Override
-    public String getBy() {
-
+    public LocalDate getBy() {
         return by;
     }
 
