@@ -1,8 +1,17 @@
 import java.util.List;
 import task.*;
+import dukeException.DukeException;
 
 public class Interpreter {
 	static private final String separation = "_________________________________________________";
+
+	static public void printUsage() {
+		System.out.println("Usage of DUKE: \n");
+		System.out.println("1. todo ... ");
+		System.out.println("2. deadline ... /by yyyy-mm-dd");
+		System.out.println("3. event ... /at .....");
+		System.out.println(separation);
+	}
 
 	static public void printMessage(String message) {
 		System.out.println(separation);
@@ -35,12 +44,18 @@ public class Interpreter {
 		System.out.println(separation);
 	}
 
-	static public void printActionList(List<Task> list) {
+	static public void printDoneList(List<Task> list) {
 		System.out.println(separation);
 		System.out.println("Nice! I've marked this task as done:");
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("  " + list.get(i));
 		}
+		System.out.println(separation);
+	}
+
+	static public void printException(DukeException e) {
+		System.out.println(separation);
+		System.out.println(e);
 		System.out.println(separation);
 	}
 }

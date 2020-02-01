@@ -1,16 +1,17 @@
 package task;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import dukeException.DukeParseException;
 
 public class ToDo extends Task {
 	private String signature = "todo";
 	private String separator = "";
 
-	public ToDo(String commandText) {
+	public ToDo(String commandText) throws DukeParseException {
 		super(commandText);
 	}
 
-	public ToDo(JSONObject data) throws Exception {
+	public ToDo(JSONObject data) throws DukeParseException {
 		super(data);
 	} 
 
