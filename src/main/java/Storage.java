@@ -1,12 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
 import task.*;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+import java.net.URL;
+
 
 public class Storage<T extends Task> {
+	static final String pathToData = "./data/storage.txt";
 	private List<T> containers;
 
-	public Storage() {
-		containers = new ArrayList<>();
+	public JSONObject encodeContainers() {
+		JSONObject result = new JSONObject();
+		JSONArray parsedContainers = new JSONArray();
+		for (T current: containers) {
+			parsedContainers.add(current.parseToJson());
+		}
+		result.put("containers", parsedContainers);
+		return result;
+	}
+
+	public Storage(List<T> containers) {
+		this.containers = containers;
 	}
 
 	public void addAction(T action) {
