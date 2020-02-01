@@ -45,7 +45,7 @@ class NewTodoCommandTest {
         PowerMockito.whenNew(Todo.class).withArguments("test test2").thenReturn(testTodo);
 
         verify(taskListMock).addTask(testTodo);
-        verify(storageMock).saveToFile(taskListMock);
+        verify(storageMock).saveTaskList(taskListMock);
         verify(uiMock).newTask(testTodo);
 
         verifyNoMoreInteractions(uiMock);

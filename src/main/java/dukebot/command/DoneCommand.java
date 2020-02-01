@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
                     } else {
                         ui.doneSuccess(doneTask);
                         doneTask.setDone();
-                        storage.saveToFile(taskList);
+                        storage.saveTaskList(taskList);
                     }
                 }
             } catch (NumberFormatException e) {

@@ -33,7 +33,7 @@ public class Storage {
      * @param tasks The TaskList to save.
      * @throws DukeException  If save fails for the first time.
      */
-    public void saveToFile(TaskList tasks) throws DukeException {
+    public void saveTaskList(TaskList tasks) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         try {
             FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
@@ -58,7 +58,7 @@ public class Storage {
      * @return The saved TaskList.
      * @throws DukeException  If no data is found.
      */
-    public ArrayList<Task> loadFromFile() throws DukeException {
+    public ArrayList<Task> loadTaskArrayList() throws DukeException {
         File file = new File(this.storagePath);
         if (file.isFile()) {
             try {

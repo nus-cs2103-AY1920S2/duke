@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
                     ui.sayLine(LineName.DELETE_OUT_OF_INDEX);
                 } else {
                     ui.deleteSuccess(task);
-                    storage.saveToFile(taskList);
+                    storage.saveTaskList(taskList);
                 }
             } catch (NumberFormatException e) {
                 ui.sayLine(LineName.NOT_A_NUMBER);

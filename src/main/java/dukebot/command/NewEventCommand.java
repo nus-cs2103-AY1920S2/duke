@@ -50,7 +50,7 @@ public class NewEventCommand extends Command {
 
         try {
             taskList.addTask(event);
-            storage.saveToFile(taskList);
+            storage.saveTaskList(taskList);
             ui.newTask(event);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());

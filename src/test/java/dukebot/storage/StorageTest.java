@@ -24,8 +24,8 @@ class StorageTest {
         taskList.addTask(new Deadline("test deadline", testTime));
         taskList.addTask(new Event("test event", testTime));
         try {
-            storage.saveToFile(taskList);
-            assertEquals(taskArrayList, storage.loadFromFile());
+            storage.saveTaskList(taskList);
+            assertEquals(taskArrayList, storage.loadTaskArrayList());
         } catch (DukeException e) {
             assert false;
         }

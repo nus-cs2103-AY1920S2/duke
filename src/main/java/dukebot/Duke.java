@@ -3,23 +3,10 @@ package dukebot;
 import dukebot.command.Command;
 import dukebot.command.Parser;
 import dukebot.exception.DukeException;
-import dukebot.gui.DialogBox;
 import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -46,14 +33,14 @@ public class Duke {
         }
 
         try {
-            ArrayList<Task> taskArrayList = storage.loadFromFile();
+            ArrayList<Task> taskArrayList = storage.loadTaskArrayList();
             tasks = new TaskList(taskArrayList);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
             ArrayList<Task> taskArrayList = new ArrayList<>();
             tasks = new TaskList(taskArrayList);
             try {
-                storage.saveToFile(tasks);
+                storage.saveTaskList(tasks);
             } catch (DukeException g) {
                 ui.sayLine(g.getErrorLineName());
             }
