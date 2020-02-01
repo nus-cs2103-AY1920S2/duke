@@ -1,6 +1,7 @@
 /**
- * Duke Exception class
- * Custom Exception
+ * Duke Exception class.
+ * Custom Exception.
+ *
  * @author Amos Cheong
  */
 public class DukeException extends Exception{

@@ -56,7 +56,7 @@ public enum DukeCommand {
 
             try {
                 if (strarr[1].equals("")) {
-                    throw new Exception("Please enter Date and Time!");
+                    throw new DukeException("Please enter Date and Time!");
                 }
                 // Translating input date to the form of "MM d yyyy"
                 String[] inputdate = (strarr[1]).split("\\s+", 2);
@@ -68,19 +68,19 @@ public enum DukeCommand {
                 inputdate[0] = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
 
-                // Translating the time from 24-hour format to
-                // AM/PM format
+                // Time validation
                 if ((inputdate[1].toCharArray()).length != 4)
-                    throw new Exception("Please enter time in the form of 24 hour format!");
+                    throw new DukeException("Please enter time in the form of 24 hour format!");
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
                 // Check if the minute is valid
                 if ((timeTest > 60 || timeTest < 0) || (dateInt > 2359 || dateInt < 0))
-                    throw new Exception("Invalid time!");
+                    throw new DukeException("Invalid time!");
 
                 String time = "";
 
-                // Time validation
+                // Translating the time from 24-hour format to
+                // AM/PM format
                 if (dateInt < 1300){
                     time = timeTest < 10 ? time + "0" : time;
 
@@ -101,11 +101,10 @@ public enum DukeCommand {
                 list.add(new Deadline(s1.substring(9, limit), newstr));
 
             } catch (DateTimeParseException exception){
-                ui.showErrorMessage(exception.getMessage());
-                ui.showErrorMessage("Input date in the form of yyy-mm-dd and " +
+                ui.showErrorMessage(exception.getMessage() + "\n" +
+                        "Input date in the form of yyy-mm-dd and " +
                         "remember to add time in 24-hour format");
-                return;
-            } catch (Exception ex) {
+            } catch (DukeException ex) {
                 ui.showErrorMessage(ex.getMessage());
             }
 
@@ -125,7 +124,7 @@ public enum DukeCommand {
 
             try {
                 if (strarr[1].equals("")) {
-                    throw new Exception("Please enter date and time!");
+                    throw new DukeException("Please enter date and time!");
                 }
 
                 // Translating input date to the form of "MM d yyyy"
@@ -138,18 +137,19 @@ public enum DukeCommand {
                 inputdate[0] = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
 
-                // Translating the time from 24-hour format to
-                // AM/PM format
+                // Time Validation
                 if ((inputdate[1].toCharArray()).length != 4)
-                    throw new Exception("Please enter time in the form of 24 hour format!");
+                    throw new DukeException("Please enter time in the form of 24 hour format!");
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
                 // Check if the minute is valid
                 if ((timeTest > 60 || timeTest < 0) || (dateInt > 2359 || dateInt < 0))
-                    throw new Exception("Invalid time!");
+                    throw new DukeException("Invalid time!");
 
                 String time = "";
-                // Time validation
+
+                // Translating the time from 24-hour format to
+                // AM/PM format
                 if (dateInt < 1300){
                     time = timeTest < 10 ? time + "0" : time;
 
@@ -169,10 +169,9 @@ public enum DukeCommand {
                 list.add(new Event(s1.substring(6, limit), newstr));
 
             } catch (DateTimeParseException exception){
-                ui.showErrorMessage(exception.getMessage());
-                ui.showErrorMessage("Input date in the form of yyy-mm-dd and " +
+                ui.showErrorMessage(exception.getMessage() + "\n" +
+                        "Input date in the form of yyy-mm-dd and " +
                         "remember to add time in 24-hour format");
-                return;
             } catch (Exception ex) {
                 ui.showErrorMessage(ex.getMessage());
             }

@@ -31,6 +31,7 @@ public class Duke {
 
     /**
      * Find out the type of command and execute it.
+     *
      * @param input The line input by the user.
      * @param tasks TaskList object to acces to list of tasks.
      * @param storage Storage object.
@@ -44,6 +45,7 @@ public class Duke {
 
     /**
      * A method to get the file path from the Duke object.
+     *
      * @return String The path of the file or the file location.
      */
     public String getFilePath() {
@@ -77,7 +79,6 @@ public class Duke {
             line = sc.nextLine();
         }
 
-        storage.store(tasks, ui);
         // Say 'bye' to the user
         ui.exit();
     }

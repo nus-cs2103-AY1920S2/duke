@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 /**
  * Parser class.
@@ -30,6 +31,7 @@ public class Parser {
      * Minimally check if the main command make sense to the code.
      * However, it will parse to the DukeEnumEceptions to check for other errors
      * such as IndexOutOfBounds exception, etc.
+     *
      * @param tasklist Pass in the TaskList object as an argument.
      * @return boolean true when there is no error and return false if otherwise and throws an Exception.
      */
@@ -47,6 +49,9 @@ public class Parser {
         } catch (DukeException ex){
             ui.showErrorMessage(ex.getMessage());
             return false;
+        } catch (DateTimeParseException exception) {
+            ui.showErrorMessage("Input date in the form of yyy-mm-dd and " +
+                    "remember to add time in 24-hour format \n" + exception.getMessage());
         }
 
         return true;

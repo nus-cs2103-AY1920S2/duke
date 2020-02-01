@@ -61,7 +61,8 @@ public class Storage {
     }
 
     /**
-     * After the user exits, the remaining tasks in the list will be kept inside a .txt file.
+     * Whenever the tasklist is added or deleted, the store method will update the .txt file.
+     * The information stored in the .txt file are the tasks in the list.
      *
      * @param ui       Ui object for printing to user.
      * @param alltasks TaskList object as argument.

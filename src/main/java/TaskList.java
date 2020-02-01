@@ -23,6 +23,7 @@ public class TaskList {
 
     /**
      * Add a new task into the current list.
+     *
      * @param mytask Task to be added.
      */
     public void add(Task mytask) {
@@ -33,6 +34,7 @@ public class TaskList {
 
     /**
      * Deletes the task at the particular index of the list.
+     *
      * @param index index of the object in the list to be deleted.
      * @param storage Storage object to be used to store a task.
      */
@@ -48,6 +50,7 @@ public class TaskList {
     /**
      * Finds the task that has description which is similar to the word
      * that is passed in as argument.
+     *
      * @param word keyword to find in the list.
      */
     public void find(String word, Storage storage) {
@@ -64,6 +67,7 @@ public class TaskList {
 
     /**
      * This method returns the list to the caller.
+     *
      * @return List<Task> A list containing the Tasks.
      */
     public List<Task> getListOfTask() {
@@ -72,6 +76,7 @@ public class TaskList {
 
     /**
      * Returns the number of items in the list.
+     *
      * @return int number of items in the list.
      */
     public int getsize() {

@@ -15,7 +15,8 @@ public class Task {
     }
 
     /**
-     * Gets the status of this current task and gives the user
+     * Gets the status of this current task and gives the user.
+     *
      * @return String status of the current object.
      */
     public String getStatusIcon() {
@@ -24,12 +25,14 @@ public class Task {
 
     /**
      * Method to be overloaded by the subclasses.
+     *
      * @return String Empty String
      */
     public String getDesc() {return ""; }
 
     /**
      * Method to be overloaded by the subclasses.
+     *
      * @return String Empty String.
      */
     public String getDate() {return ""; }
@@ -43,6 +46,7 @@ public class Task {
 
     /**
      * Method to be overloaded by the subclasses.
+     *
      * @return String Empty String
      */
     public String getType() { return ""; }

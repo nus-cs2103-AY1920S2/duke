@@ -7,7 +7,7 @@
 public class Ui {
 
     /**
-     * A horizontal line
+     * A horizontal line.
      */
     public void HorizontalLine() {
         System.out.println("____________________________________________________________");
@@ -34,6 +34,7 @@ public class Ui {
 
     /**
      * Print error message to the user.
+     *
      * @param errormessage Message to inform the user of the error.
      */
     public void showErrorMessage(String errormessage) {
@@ -44,6 +45,7 @@ public class Ui {
 
     /**
      * Informs user that the task has been added.
+     *
      * @param listsize size of the tasklist.
      * @param mytask Task object. Able to take in objects of its subclasses.
      */
@@ -57,6 +59,7 @@ public class Ui {
 
     /**
      * Takes in a list of tasks and prints out all the tasks.
+     *
      * @param list TaskList object.
      */
     public void listAllTasks(TaskList list) {
@@ -71,6 +74,7 @@ public class Ui {
 
     /**
      * Tell the user that the task that they inputted is done.
+     *
      * @param doneTask The Task object that is set as done.
      */
     public void doneMessage(Task doneTask) {
@@ -82,6 +86,7 @@ public class Ui {
 
     /**
      * Tell the user that the task that they want to delete is already deleted.
+     *
      * @param num remaining number of tasks in the list.
      * @param deletedTask The Task object to be deleted.
      */
@@ -94,7 +99,7 @@ public class Ui {
     }
 
     /**
-     * Show user the list that matches to the input keyword
+     * Show user the list that matches to the input keyword.
      */
     public void foundMessage() {
         HorizontalLine();

@@ -33,6 +33,7 @@ public class Deadline extends Task {
     /**
      * Get the type of this object.
      * Used when outputting to user.
+     *
      * @return String The object type.
      */
     public String getType() {

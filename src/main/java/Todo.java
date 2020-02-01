@@ -12,6 +12,7 @@ public class Todo extends Task {
 
     /**
      * Get the description of this Todo object.
+     *
      * @return String description of this Todo object.
      */
     public String getDesc() {
@@ -21,6 +22,7 @@ public class Todo extends Task {
     /**
      * Get the type of this object.
      * Used when outputting to user.
+     *
      * @return String The object type.
      */
     public String getType() {

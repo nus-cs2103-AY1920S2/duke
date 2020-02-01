@@ -22,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Get the date and time of this Event object.
+     *
      * @return String date and time of this Event object.
      */
     public String getDate() {
@@ -31,6 +32,7 @@ public class Event extends Task {
     /**
      * Get the type of this object.
      * Used when outputting to user.
+     *
      * @return String The object type.
      */
     public String getType() {

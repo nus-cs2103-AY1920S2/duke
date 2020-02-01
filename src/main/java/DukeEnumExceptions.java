@@ -1,9 +1,9 @@
-/**
- * The enum class for checking for any errors of the input command
- *
- * @author Amos Cheong
- */
 public enum DukeEnumExceptions {
+    /**
+     * The enum class for checking for any errors of the input command
+     *
+     * @author Amos Cheong
+     */
     LIST {
         public void checkerror(String s1, String s2, TaskList list) throws DukeException {
             int numOfArgs = Integer.parseInt(s2);
@@ -38,21 +38,41 @@ public enum DukeEnumExceptions {
     DEADLINE {
         public void checkerror(String s1, String s2, TaskList list) throws DukeException {
             int limit = s1.lastIndexOf("/by") - 1;
-            if (s1.lastIndexOf(s2) == -1)
+
+            // The variable limit will be used as an argument for the method substring.
+            // If the limit is less than 9 in this case, the substring method won't work.
+            // Therefore, it is important to test if the limit is less than 9
+            if (s1.lastIndexOf(s2) == -1) {
                 throw new DukeException("Please add a '/by' and then add the date/time subsequently " +
-                        "in the form of [Deadline] [Description] /by [yyyy-mm-dd] [time in 24-hour]" );
-            else if (limit < 9)
+                        "in the form of [Deadline] [Description] /by [yyyy-mm-dd] [time in 24-hour]");
+            } else if (limit < 9) {
                 throw new DukeException("No description! Please add description to your deadline");
+            } else {
+                String stringTest = s1.substring(9, limit);
+                if ((stringTest.replaceAll("( )+", "")).equals("")) {
+                    throw new DukeException("No description! Please add description to your deadline");
+                }
+            }
         }
     },
     EVENT {
         public void checkerror(String s1, String s2, TaskList list) throws DukeException {
             int limit = s1.lastIndexOf("/at") - 1;
-            if (s1.lastIndexOf(s2) == -1)
+
+            // The variable limit will be used as an argument for the method substring.
+            // If the limit is less than 6 in this case, the substring method won't work.
+            // Therefore, it is important to test if the limit is less than 6
+            if (s1.lastIndexOf(s2) == -1) {
                 throw new DukeException("Please add a '/at' and then add the date/time subsequently " +
                         "in the form of [Event] [Description] /at [yyyy-mm-dd] [time in 24-hour]");
-            else if (limit < 6)
+            } else if (limit < 6) {
                 throw new DukeException("No description! Please add description to your event");
+            } else {
+                String stringTest = s1.substring(6, limit);
+                if ((stringTest.replaceAll("( )+", "")).equals("")) {
+                    throw new DukeException("No description! Please add description to your event");
+                }
+            }
         }
     },
     DELETE {
