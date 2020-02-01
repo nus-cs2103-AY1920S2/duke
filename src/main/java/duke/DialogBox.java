@@ -10,8 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+// import javafx.scene.image.Image;
+// import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -20,25 +20,27 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
-    @FXML
-    private ImageView displayPicture;
+    public Label dialog;
+    // @FXML
+    // private ImageView displayPicture;
 
     private DialogBox(String text) {
     // private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(Main.class.getResource("/view/DialogBox.fxml"));
+                    new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
+        System.out.println(text);
+        System.out.println("================================");
         // displayPicture.setImage(img);
+        dialog.setText(text);
     }
+    
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.

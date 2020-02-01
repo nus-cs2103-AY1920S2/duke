@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -20,6 +21,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Label botName;
 
     private Duke duke;
 
@@ -29,6 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        botName.setText("Duke is here");
     }
 
     public void setDuke(Duke d) {
