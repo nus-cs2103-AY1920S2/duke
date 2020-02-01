@@ -14,6 +14,9 @@ public enum DukeExpression {
         dukeImage = new Image(this.getClass().getResourceAsStream("/images/" + fileName));
     }
 
+    /**
+     * Gets the Image corresponding to the expression.
+     */
     public Image getDukeImage() {
         return dukeImage;
     }

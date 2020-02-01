@@ -29,6 +29,9 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Initialises Duke for GUI.
+     */
     public Duke() {
         storage = new Storage(PATH);
         ui = new Ui(true);
@@ -50,29 +53,33 @@ public class Duke {
     }
 
     /**
-     *  Gets the current UI output
+     * Gets the current UI text output.
      */
     public Ui getUi() {
         return ui;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates Response for GUI.
      */
     public String getResponse(String input) {
         ui.resetGuiOutput();
         Command c = Parser.parse(input);
         c.execute(tasks, ui, storage);
+
         if (c.isExit()) {
-            new Thread( new Runnable() {
-                public void run()  {
-                    try  { Thread.sleep( 1500 ); }
-                    catch (InterruptedException ie)  {}
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException ie) {
+                        System.exit(0);
+                    }
                     System.exit(0);
                 }
-            } ).start();
+            }).start();
         }
+
         ui.getDukeVoice().playVoice();
         return ui.getGuiOutput();
     }

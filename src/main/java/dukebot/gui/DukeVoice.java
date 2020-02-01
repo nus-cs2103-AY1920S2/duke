@@ -30,6 +30,9 @@ public enum DukeVoice {
         dukeVoicePlayer = new MediaPlayer(sound);
     }
 
+    /**
+     * Randomise voice to play for more excitement.
+     */
     public static DukeVoice randomVoice(boolean hasVoice, DukeVoice... dukeVoices) {
         if (hasVoice) {
             int randomIndex = generator.nextInt(dukeVoices.length + 1);
@@ -44,6 +47,9 @@ public enum DukeVoice {
     //     return dukeVoicePlayer;
     // }
 
+    /**
+     * Plays corresponding voice.
+     */
     public void playVoice() {
         if (this != NO_VOICE) {
             dukeVoicePlayer.play();

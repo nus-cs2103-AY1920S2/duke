@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LOGO = " ____, __   _, __  _, ____,\n" +
-            "(-|  \\(-|  |  (-|_/  (-|_, \n" +
-            " _|__/  |__|_, _| \\_, _|__,\n" +
-            "(             (      (    \n";
+    private static final String LOGO = " ____, __   _, __  _, ____,\n"
+            + "(-|  \\(-|  |  (-|_/  (-|_, \n"
+            + " _|__/  |__|_, _| \\_, _|__,\n"
+            + "(             (      (    \n";
     private final Scanner sc;
     private final boolean withGui;
     private boolean sayFirst = true;
@@ -82,15 +82,15 @@ public class Ui {
             dukeSays("Master wants to know more about Duke?");
             dukeSays("Exposing myself to master... Duke's so embarrassed...");
             dukeSays("But if it's for Master... Duke'll do it!");
-            dukeSays("Duke's precious secrets:\n\n" +
-                    "todo <name>\n-- Adds a todo to your task list.\n\n" +
-                    "deadline <name> /by <time>\n-- Adds a deadline to your task list.\n\n" +
-                    "event <name> /at <time>\n -- Adds a event to your task list.\n\n" +
-                    "list\n-- Displays your task list.\n\n" +
-                    "find <query>\n-- Finds a task which has <query> as a substring of the task's name.\n\n" +
-                    "done <task index>\n-- Marks the task as done.\n\n" +
-                    "delete <task index>\n-- Deletes the task.\n\n" +
-                    "bye\n-- Exits this application"
+            dukeSays("Duke's precious secrets:\n\n"
+                    + "todo <name>\n-- Adds a todo to your task list.\n\n"
+                    + "deadline <name> /by <time>\n-- Adds a deadline to your task list.\n\n"
+                    + "event <name> /at <time>\n -- Adds a event to your task list.\n\n"
+                    + "list\n-- Displays your task list.\n\n"
+                    + "find <query>\n-- Finds a task which has <query> as a substring of the task's name.\n\n"
+                    + "done <task index>\n-- Marks the task as done.\n\n"
+                    + "delete <task index>\n-- Deletes the task.\n\n"
+                    + "bye\n-- Exits this application"
             );
             break;
         case NO_INPUT:
@@ -255,7 +255,8 @@ public class Ui {
      * @param task Task to use.
      */
     public void newTask(Task task) {
-        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO, DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
+        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
+                DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
         dukeExpression = DukeExpression.BLUSH;
         dukeSays("So Master has " + task.getType() + ": " + task + "...");
     }
@@ -266,7 +267,8 @@ public class Ui {
      * @param task Task to use.
      */
     public void deleteSuccess(Task task) {
-        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO, DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
+        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
+                DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
         dukeExpression = DukeExpression.BLUSH;
         dukeSays("For Master, Duke can forget anything, even the:");
         dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
@@ -292,12 +294,18 @@ public class Ui {
         }
     }
 
+    /**
+     * Resets text output.
+     */
     public void resetGuiOutput() {
         if (withGui) {
             guiOutput = new StringBuilder();
         }
     }
 
+    /**
+     * Gets text output for GUI.
+     */
     public String getGuiOutput() {
         if (withGui) {
             return guiOutput.toString();
@@ -306,10 +314,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Gets Duke's expression.
+     */
     public DukeExpression getDukeExpression() {
         return dukeExpression;
     }
 
+    /**
+     * Get's Duke's voice.
+     */
     public DukeVoice getDukeVoice() {
         if (hasVoice) {
             return dukeVoice;
