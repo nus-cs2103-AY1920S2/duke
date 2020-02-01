@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.exception.CannotSaveFileException;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.DialogBox;
@@ -17,14 +18,15 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Duke extends Application {
     Storage storage;
     TaskList taskList;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -43,41 +45,6 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * main Method that begins the program.
-     *
-     * @param args are multiple inputs received from User's input
-     */
-    public static void main(String[] args) {
-        try {
-            new Duke().run();
-        } catch (DukeException e) {
-            Ui.print(e.getMessage());
-        }
-    }
-
-    /**
-     * run Method that executes the actual program.
-     *
-     * @throws DukeException when multiple exceptions are caught (e.g. unfilled secondary input)
-     */
-    public void run() throws DukeException {
-        //Duke Setup
-        boolean dukeRunning = true;
-
-        //Welcome Text
-        Ui.welcome();
-
-        //Main Program now in Switch, might need to turn cases into separate methods soon
-        while (dukeRunning) {
-            String input = Ui.getInput();
-            dukeRunning = Parser.parseCommand(input, taskList);
-        }
-
-        //Save new data to file before exiting
-        storage.save(taskList);
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -88,12 +55,12 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -129,13 +96,9 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -161,6 +124,28 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = Parser.parseCommand(input, taskList);
+
+        if (output.equals("BYE")) {
+            return exitDuke(taskList);
+        } else {
+            return output;
+        }
+    }
+
+    //Custom exitDuke Method to handle data saving and timed termination
+    private String exitDuke(TaskList taskList) {
+        //Save new data to file before exiting
+        try {
+            storage.save(taskList);
+        } catch (CannotSaveFileException e) {
+            return e.toString();
+        }
+
+        //Timed exit to terminate the program while allowing you to see the Bye Message
+        Executors.newSingleThreadScheduledExecutor()
+            .schedule(() -> System.exit(0), 2, TimeUnit.SECONDS);
+
+        return ("Bye. Hope to see you again soon!");
     }
 }

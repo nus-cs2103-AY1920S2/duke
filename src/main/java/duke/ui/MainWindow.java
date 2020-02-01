@@ -21,6 +21,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button startButton;
 
     private Duke duke;
 
@@ -30,6 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        startButton.fire();
     }
 
     public void setDuke(Duke d) {
@@ -49,5 +52,13 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    @FXML
+    //Custom startDuke Method to print the welcome message
+    private void startDuke() {
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(Ui.welcome(), dukeImage)
+        );
     }
 }

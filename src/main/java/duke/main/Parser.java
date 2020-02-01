@@ -6,7 +6,6 @@ import duke.exception.DukeException;
 import duke.exception.MissingDetailsException;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class Parser {
     /**
@@ -16,7 +15,7 @@ public class Parser {
      * @param taskList is the list of Tasks are saved and manipulated
      * @return value true only CommandType.BYE is registered to exit the program
      */
-    public static boolean parseCommand(String input, TaskList taskList) {
+    public static String parseCommand(String input, TaskList taskList) {
         String[] inputBreakdown = input.split(" ", 2);
         CommandType commandType;
         String commandSuffix = null;
@@ -43,44 +42,34 @@ public class Parser {
                 return Command.byeCommand();
 
             case CALENDAR:
-                Command.calendarCommand(taskList, commandSuffix);
-                break;
+                return Command.calendarCommand(taskList, commandSuffix);
 
             case DEADLINE:
-                Command.deadlineCommand(taskList, commandSuffix);
-                break;
+                return Command.deadlineCommand(taskList, commandSuffix);
 
             case DELETE:
-                taskList.deleteTask(commandSuffix);
-                break;
+                return taskList.deleteTask(commandSuffix);
 
             case DONE:
-                taskList.doneTask(commandSuffix);
-                break;
+                return taskList.doneTask(commandSuffix);
 
             case EVENT:
-                Command.eventCommand(taskList, commandSuffix);
-                break;
+                return Command.eventCommand(taskList, commandSuffix);
 
             case FIND:
-                Command.findCommand(taskList, commandSuffix);
-                break;
+                return Command.findCommand(taskList, commandSuffix);
 
             case LIST:
-                Command.listCommand(taskList);
-                break;
+                return Command.listCommand(taskList);
 
             case TODO:
-                Command.todoCommand(taskList, commandSuffix);
-                break;
+                return Command.todoCommand(taskList, commandSuffix);
 
             default:
-                break;
+                return new UnknownCommandException().toString();
             }
         } catch (DukeException e) {
-            Ui.print(e.toString());
+            return e.toString();
         }
-
-        return true;
     }
 }
