@@ -6,7 +6,7 @@
  */
 package seedu.java.util;
 
-public class TestParser{
+public class Parser{
     public static Command readCommand(String input) throws Exception{
         return Command.convert(input.split(" ")[0]);
     }

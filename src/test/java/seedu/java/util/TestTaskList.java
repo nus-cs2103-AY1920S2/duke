@@ -2,7 +2,7 @@ package seedu.java.util;
 
 import java.util.ArrayList;
 
-public class TestTaskList {
+public class TaskList {
     private ArrayList<Task> taskArr;
     private String path = "data/duke.txt";
 

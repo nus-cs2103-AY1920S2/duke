@@ -7,7 +7,7 @@ package seedu.java.util;
 
 import java.util.Scanner;
 
-public class TestUi{
+public class Ui{
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

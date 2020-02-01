@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TestStorage{
+public class Storage{
     String filePath;
 
     public Storage(String filePath){

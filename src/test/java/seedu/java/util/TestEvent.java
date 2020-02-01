@@ -1,6 +1,6 @@
 package seedu.java.util;
 
-public class TestEvent extends Task{
+public class Event extends Task{
      private String timing;
      public Event(String task, String timing){
          super(task);

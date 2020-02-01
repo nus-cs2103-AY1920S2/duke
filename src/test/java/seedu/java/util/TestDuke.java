@@ -2,7 +2,7 @@ package seedu.java.util;
 
 import java.util.Scanner;
 
-public class TestDuke {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

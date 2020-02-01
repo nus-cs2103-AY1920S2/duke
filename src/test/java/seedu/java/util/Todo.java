@@ -1,6 +1,6 @@
 package seedu.java.util;
 
-public class TestTodo extends Task {
+public class Todo extends Task {
     public Todo(String task){
         super(task);
     }
