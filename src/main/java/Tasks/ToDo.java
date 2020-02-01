@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-import dukeException.DukeParseException;
+import duke.dukeException.DukeParseException;
 
 public class ToDo extends Task {
 	private String signature = "todo";

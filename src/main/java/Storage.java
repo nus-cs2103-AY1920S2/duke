@@ -1,63 +1,84 @@
 package duke;
 import java.util.ArrayList;
 import java.util.List;
-import task.*;
+import java.util.Scanner;
+import duke.task.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 import java.net.URL;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
-
-public class Storage<T extends Task> {
-	static final String pathToData = "./data/storage.txt";
-	private List<T> containers;
-
-	public JSONObject encodeContainers() {
+public class Storage {
+	public JSONObject encodeContainers(List<Task> containers) {
 		JSONObject result = new JSONObject();
 		JSONArray parsedContainers = new JSONArray();
-		for (T current: containers) {
+		for (Task current: containers) {
 			parsedContainers.add(current.parseToJson());
 		}
 		result.put("containers", parsedContainers);
 		return result;
 	}
 
-	public Storage(List<T> containers) {
-		this.containers = containers;
-	}
+	public List<Task> getData(String pathToData) {
+		try {
+			File file = new File(pathToData);
+			Scanner scan = new Scanner(file);
+			StringBuilder sb = new StringBuilder();
+			while (scan.hasNextLine()) {
+				sb.append(scan.nextLine());
+			}
+			scan.close();
+			JSONParser parser = new JSONParser();
+			//System.out.println(sb.toString());
+			JSONObject result = (JSONObject) parser.parse(sb.toString());
+			JSONArray array = (JSONArray) result.get("containers");
 
-	public void addAction(T action) {
-		containers.add(action);
-	}
-
-	public void deleteAction(int position) {
-		containers.remove(position);
-	}
-
-	public List<T> getList() {
-		return this.containers;
-	} 
-
-	public T getTask(int index) {
-		return this.containers.get(index);
-	}
-
-	public int getNum() {
-		return containers.size();
-	}
-
-	public void markAsDone(List<Integer> needy) {
-		for (Integer index: needy) {
-			this.containers.get(index).markAsDone();
+			List containers = new ArrayList<Task>();
+			for (int i = 0; i < array.size(); i++) {
+				JSONObject record = (JSONObject) array.get(i);
+				String type = (String) record.get("type");
+				try {
+					switch (type) {
+					case "todo":
+						containers.add(new ToDo(record));
+						break;
+					case "deadline":
+						containers.add(new Deadline(record));
+						break;
+					case "event":
+						containers.add(new Event(record));
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println("Cannot parse the " + i + "record");
+				}
+			}
+			return containers;
+		} catch (IOException e) {
+			System.out.println("Cannot read file");
+			return new ArrayList<Task>();
+		} catch (ParseException e) {
+			System.out.println("Cannot parse json string");
+			return new ArrayList<Task>();
 		}
 	}
 
-	public List<T> getSubset(List<Integer> needy) {
-		List result = new ArrayList<T>();
-		for (Integer index: needy) {
-			result.add(this.containers.get(index));
+	public void saveData(TaskList storage, String pathToData) {
+		JSONObject data = this.encodeContainers(storage.getList());
+		String str = data.toString();
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(pathToData, false));
+		    writer.append(str);
+		    writer.close();
+		} catch (IOException e) {
+			System.out.println("Cannot save data");
 		}
-		return result;
 	}
+
+
 }

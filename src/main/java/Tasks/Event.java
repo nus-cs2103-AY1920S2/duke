@@ -5,7 +5,7 @@ import org.json.simple.JSONArray;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import dukeException.DukeParseException;
+import duke.dukeException.DukeParseException;
 
 public class Event extends Task {
 	private LocalDate date;
@@ -37,7 +37,7 @@ public class Event extends Task {
 		  .append(super.getStatusIcon())
 		  .append(super.description)
 		  .append(" (by")
-		  .append(this.date.toString())
+		  .append(super.getRemainingTokens())
 		  .append(")");
 		return sb.toString();
 	}

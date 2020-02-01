@@ -1,10 +1,19 @@
 package duke;
 import java.util.List;
-import task.*;
-import dukeException.DukeException;
+import duke.task.*;
+import duke.dukeException.DukeException;
 
 public class Interpreter {
 	static private final String separation = "_________________________________________________";
+	static private final String logo = " ____        _        \n"
+				+ "|  _ \\ _   _| | _____ \n"
+				+ "| | | | | | | |/ / _ \\\n"
+				+ "| |_| | |_| |   <  __/\n"
+				+ "|____/ \\__,_|_|\\_\\___|\n";
+	
+	static public void printGreeting() {
+		System.out.println("Hello from\n" + logo);
+	}
 
 	static public void printUsage() {
 		System.out.println("Usage of DUKE: \n");
@@ -20,7 +29,7 @@ public class Interpreter {
 		System.out.println(separation);
 	}
 
-	static public void printList(List<Object> list) {
+	static public void printList(List<Task> list) {
 		System.out.println(separation);
 		System.out.println("List of items: ");
 		for (int i = 0; i < list.size(); i++) {

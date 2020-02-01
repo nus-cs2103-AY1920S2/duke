@@ -5,7 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-import dukeException.DukeParseException;
+import duke.dukeException.DukeParseException;
 
 public abstract class Task {
 	protected String commandText;
