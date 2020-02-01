@@ -1,11 +1,16 @@
 package task;
 
-public class Event extends Task {
-    protected String timePeriod;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String identifier, String timePeriod) {
+public class Event extends Task {
+    protected LocalDateTime timePeriod;
+
+    public Event(String identifier, String timePeriod) throws DateTimeParseException{
         super(identifier);
-        this.timePeriod = timePeriod;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy H:m");
+        this.timePeriod = LocalDateTime.parse(timePeriod, formatter);
     }
 
     @Override

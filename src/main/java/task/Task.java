@@ -12,7 +12,7 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon() {
-        return (isCompleted ? "\u2713" : "\u2717");
+        return (isCompleted ? "Complete" : "Incomplete");
     }
 
     public boolean completeStatus() {

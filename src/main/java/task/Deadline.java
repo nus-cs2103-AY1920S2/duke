@@ -1,11 +1,16 @@
 package task;
 
-public class Deadline extends Task {
-    protected String dueDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String identifier, String dueDate) {
+public class Deadline extends Task {
+    protected LocalDateTime dueDate;
+
+    public Deadline(String identifier, String dueDate) throws DateTimeParseException {
         super(identifier);
-        this.dueDate = dueDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy H:m");
+        this.dueDate = LocalDateTime.parse(dueDate, formatter);
     }
 
     @Override
