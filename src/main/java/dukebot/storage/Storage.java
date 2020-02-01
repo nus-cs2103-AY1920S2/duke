@@ -17,6 +17,11 @@ import java.util.Arrays;
 public class Storage {
     private boolean saveAlreadyFailed = false;
     private String storagePath;
+    private final String USER_DATA_DIRECTORY = "./user-data";
+    private final String TASK_LIST_FILEPATH = "./user-data/task-list.data";
+    private final String ALIAS_FILEPATH = "./user-data/alias.data";
+    private final String SMALL_TALK_FILEPATH = "./user-data/small-talk.data";
+    private final String CONFIG_FILEPATH = "./user-data/config.data";
 
     /**
      * Generates the Storage.
@@ -25,6 +30,13 @@ public class Storage {
      */
     public Storage(String storagePath) {
         this.storagePath = storagePath;
+    }
+
+    private void mkDataDir() {
+        File directory = new File(USER_DATA_DIRECTORY);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
     }
 
     /**
@@ -36,7 +48,8 @@ public class Storage {
     public void saveTaskList(TaskList tasks) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         try {
-            FileOutputStream writeData = new FileOutputStream(new File(this.storagePath));
+            mkDataDir();
+            FileOutputStream writeData = new FileOutputStream(new File(this.TASK_LIST_FILEPATH));
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             Task[] taskArr = taskList.toArray(new Task[0]);
             writeStream.writeObject(taskArr);
@@ -59,7 +72,7 @@ public class Storage {
      * @throws DukeException  If no data is found.
      */
     public ArrayList<Task> loadTaskArrayList() throws DukeException {
-        File file = new File(this.storagePath);
+        File file = new File(this.TASK_LIST_FILEPATH);
         if (file.isFile()) {
             try {
                 FileInputStream readData = new FileInputStream(file);

@@ -16,3 +16,4 @@ bin/
 # Store local data
 dukeStore.txt
 storageTest.txt
+user-data/
