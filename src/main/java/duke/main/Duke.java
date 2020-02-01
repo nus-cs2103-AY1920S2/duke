@@ -2,21 +2,23 @@ package duke.main;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     Storage storage;
     TaskList taskList;
 
     /**
      * Duke Object that forms the backbone of the program.
-     *
-     * @param filepath  is the User's working directory for file reading/saving
-     * @throws DukeException    when multiple exceptions are caught (e.g. unfilled secondary input)
      */
-    public Duke(String filepath) throws DukeException {
+    public Duke() {
         //Try to read form saved data file and restore index, if not create a list to save later
         try {
+            String filepath = "data/duke.txt";
             storage = new Storage(filepath);
             taskList = new TaskList(storage);
         } catch (DukeException e) {
@@ -32,7 +34,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         try {
-            new Duke("data/duke.txt").run();
+            new Duke().run();
         } catch (DukeException e) {
             Ui.print(e.getMessage());
         }
@@ -58,5 +60,14 @@ public class Duke {
 
         //Save new data to file before exiting
         storage.save(taskList);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
