@@ -14,9 +14,9 @@ import dude.component.ParsingException;
 
 import dude.component.TaskList;
 
-public class Dude {
+public class Duke {
     public static void main(String[] args) {
-        Dude chatbot = new Dude();
+        Duke chatbot = new Duke();
         chatbot.serve();
     }
 
@@ -30,10 +30,14 @@ public class Dude {
      * TextStorage - contains file object to read previous data from.
      * TaskList - Is initialized with tasks from saved session from storage.
      */
-    public Dude() {
+    public Duke() {
         this.ui = new UI();
         this.storage = new TextStorage();
         this.tasks = this.storage.restoreSession(this.ui);
+    }
+
+    public String getResponse(String input) {
+        return "hey";
     }
 
     /**
