@@ -1,8 +1,16 @@
-public class ToDo  extends Task{
+public class ToDo extends Task{
     String time;
 
     public ToDo(String todo) {
         super(todo);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getDone() {
+        return this.done;
     }
 
     @Override

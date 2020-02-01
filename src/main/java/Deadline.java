@@ -11,6 +11,14 @@ public class Deadline extends Task{
         dateObj = LocalDate.parse(dateString);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getDone() {
+        return this.done;
+    }
+
     @Override
     public String toFile() {
         int doneInt = done ? 1 : 0;

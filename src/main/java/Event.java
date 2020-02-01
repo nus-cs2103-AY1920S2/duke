@@ -8,6 +8,14 @@ public class Event extends Task {
         this.dateString = dateString;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getDone() {
+        return this.done;
+    }
+
     @Override
     public String toFile() {
         int doneInt = done ? 1 : 0;
