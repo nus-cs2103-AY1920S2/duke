@@ -3,8 +3,8 @@ package duke.main;
 import duke.exceptions.InvalidArgumentException;
 import duke.task.Task;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TaskList class to handle all operations related to the lists of tasks

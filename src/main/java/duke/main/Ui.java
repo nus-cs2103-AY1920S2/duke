@@ -124,7 +124,8 @@ public class Ui {
      * @param lines String representation of the Deadlines and Events to be printed
      */
     public static void calendarDisplayItems(LocalDate calendarDate, List<String> lines) {
-        print("Here are the events/deadlines in your list on " + calendarDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ":");
+        print("Here are the events/deadlines in your list on " +
+            calendarDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ":");
         print(lines);
     }
 
