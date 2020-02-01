@@ -36,12 +36,20 @@ public class Storage {
         try {
             File savedFile = new File(filePath);
             // read from save file
-            FileInputStream readFile = new FileInputStream(savedFile);
-            ObjectInputStream readData = new ObjectInputStream(readFile);
-            Object object = readData.readObject();
-            result = (ArrayList<Task>) object;
-            readData.close();
-            readFile.close();
+            if (!savedFile.exists()) {
+                File directory = new File(savedFile.getParent());
+                if (!directory.exists()) {
+                    boolean mkdirs = directory.mkdirs();
+                }
+                boolean newFile = savedFile.createNewFile();
+            } else {
+                FileInputStream readFile = new FileInputStream(savedFile);
+                ObjectInputStream readData = new ObjectInputStream(readFile);
+                Object object = readData.readObject();
+                result = (ArrayList<Task>) object;
+                readData.close();
+                readFile.close();
+            }
         } catch (ClassNotFoundException e) {
             System.out.println("Class Name is not matching input!");
         } catch (IOException e) {
