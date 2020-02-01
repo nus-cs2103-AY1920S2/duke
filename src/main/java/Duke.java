@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello I'm Duke.");
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
@@ -49,7 +44,7 @@ public class Duke {
                 //print output
                 System.out.println("Got it. I've added this task:");
                 System.out.println(t.toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list");
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             } else if (firstWord.equals("deadline")) {
                 //separate task and deadline
                 String arr2[] = arr[1].split("/", 2);
