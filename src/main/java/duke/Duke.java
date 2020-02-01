@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
 
     private Storage storage;
@@ -16,7 +18,6 @@ public class Duke {
 
     public void run() {
         Ui.printWelcomeMessage();
-        Ui.printMessage("Greetings! I'm Duke!\n\tHow may I help you?");
 
         Parser.parse(storage, tasks, ui);
     }
