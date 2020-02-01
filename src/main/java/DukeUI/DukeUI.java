@@ -1,9 +1,11 @@
 package dukeui;
 
 import dukeexceptions.DukeException;
+import dukelist.DukeList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -68,5 +70,11 @@ public class DukeUI {
     public void showErrorMessage(DukeException e) {
         System.out.println("    " + e.getMessage());
         printLine();
+    }
+
+    public void printListOfTasks(ArrayList<String> inputList) {
+        for (String curr : inputList) {
+            this.printCustomMessage(curr);
+        }
     }
 }

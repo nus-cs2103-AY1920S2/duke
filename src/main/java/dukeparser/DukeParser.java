@@ -1,10 +1,7 @@
 package dukeparser;
 
 import dukecommand.*;
-import dukeexceptions.DukeException;
-import dukeexceptions.InvalidFormatException;
-import dukeexceptions.MissingDescriptionException;
-import dukeexceptions.MissingTimingException;
+import dukeexceptions.*;
 import duketasks.Deadline;
 import duketasks.Event;
 import duketasks.Todo;
@@ -152,7 +149,10 @@ public class DukeParser {
             return DukeCommandEnums.HELP;
         } else if (enumString.equals("delete")) {
             return DukeCommandEnums.DELETE;
-        } else {
+        } else if (enumString.equals("find")) {
+            return DukeCommandEnums.FIND;
+        }
+        else {
             return DukeCommandEnums.UNKNOWN;
         }
     }
