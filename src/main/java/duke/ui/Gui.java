@@ -90,6 +90,10 @@ public class Gui extends AnchorPane implements Ui {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-        
+    }
+
+    public void bye() {
+        userInput.setText("bye");
+        inputLock.release();
     }
 }
