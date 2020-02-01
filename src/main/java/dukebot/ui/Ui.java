@@ -26,7 +26,7 @@ public class Ui {
      */
     public Ui(boolean withGui) {
         this.withGui = withGui;
-        sc  = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -34,7 +34,7 @@ public class Ui {
      */
     public Ui() {
         withGui = false;
-        sc  = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -81,15 +81,16 @@ public class Ui {
             dukeSays("Master wants to know more about Duke?");
             dukeSays("Exposing myself to master... Duke's so embarrassed...");
             dukeSays("But if it's for Master... Duke'll do it!");
-            dukeSays("Duke's precious secrets:");
-            dukeSays("todo <name> -- Adds a todo to your task list.");
-            dukeSays("deadline <name> /by <time> -- Adds a dead line to your task list.");
-            dukeSays("event <name> /at <time> -- Adds a event to your task list.");
-            dukeSays("list -- Displays your task list.");
-            dukeSays("find <query> -- Finds a task which has <query> as a substring of the task's name.");
-            dukeSays("done <task index> -- Marks the task as done.");
-            dukeSays("delete <task index> -- Deletes the task.");
-            dukeSays("bye -- Exits this application");
+            dukeSays("Duke's precious secrets:\n\n" +
+                    "todo <name>\n-- Adds a todo to your task list.\n\n" +
+                    "deadline <name> /by <time>\n-- Adds a deadline to your task list.\n\n" +
+                    "event <name> /at <time>\n -- Adds a event to your task list.\n\n" +
+                    "list\n-- Displays your task list.\n\n" +
+                    "find <query>\n-- Finds a task which has <query> as a substring of the task's name.\n\n" +
+                    "done <task index>\n-- Marks the task as done.\n\n" +
+                    "delete <task index>\n-- Deletes the task.\n\n" +
+                    "bye\n-- Exits this application"
+            );
             break;
         case NO_INPUT:
             dukeExpression = DukeExpression.SAD;
@@ -206,12 +207,12 @@ public class Ui {
     /**
      * Prints array of tasks.
      *
-     * @param tasks  The array of tasks to print.
+     * @param tasks The array of tasks to print.
      */
     public void sayTasks(ArrayList<Task> tasks) {
         int i = 1;
         for (Task task : tasks) {
-            dukeSays(+ i + ". "
+            dukeSays(+i + ". "
                     + "[" + task.getType() + "] "
                     + task
                     + (task.getDone() ? " [Done!]" : "")
@@ -223,7 +224,7 @@ public class Ui {
     /**
      * Prints done success message.
      *
-     * @param task  Task to use.
+     * @param task Task to use.
      */
     public void doneSuccess(Task task) {
         dukeSays("So Master finally completed " + task + "?");
@@ -233,7 +234,7 @@ public class Ui {
     /**
      * Prints new task successfully made message.
      *
-     * @param task  Task to use.
+     * @param task Task to use.
      */
     public void newTask(Task task) {
         dukeSays("So Master has " + task.getType() + ": " + task + "...");
@@ -242,7 +243,7 @@ public class Ui {
     /**
      * Prints task successfully deleted message.
      *
-     * @param task  Task to use.
+     * @param task Task to use.
      */
     public void deleteSuccess(Task task) {
         dukeExpression = DukeExpression.BLUSH;
@@ -253,7 +254,7 @@ public class Ui {
     /**
      * Formats and prints the string input.
      *
-     * @param line  Line to print.
+     * @param line Line to print.
      */
     private void dukeSays(String line) {
         if (withGui) {
