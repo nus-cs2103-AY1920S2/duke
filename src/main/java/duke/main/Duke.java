@@ -1,5 +1,7 @@
 package duke.main;
 
+import duke.exceptions.UnknownCommandException;
+
 /**
  * Main application class for a To Do List Application
  */

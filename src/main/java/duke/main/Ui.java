@@ -144,5 +144,35 @@ public class Ui {
         print("Here are the tasks in your list:");
         print(lines);
     }
+    
+    /**
+     * Prints out the list of Tasks in TaskList which matches a search term
+     * @param lines String representation of the Tasks to be printed
+     */
+    public static void printFindResults(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            print("There are no matching tasks in your list");
+        } else {
+            print("Here are the matching tasks in your list:");
+            for (Task task : tasks) {
+                print(task);
+            }
+        }
+    }
 
+    /**
+     * Prints out the String representation of a DukeException
+     * @param ex DukeException object to be printed
+     */  
+    public static void printException(DukeException ex) {
+        print(ex);
+    }
+
+    /**
+     * Prints out the String representation of a DukeException
+     * @param ex Exception object to be printed
+     */  
+    public static void printException(Exception ex) {
+        print(ex);
+    }
 }

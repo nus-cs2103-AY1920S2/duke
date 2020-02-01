@@ -11,12 +11,14 @@ import java.util.List;
  */
 public class TaskList {
     List<Task> taskList;
+    Storage storage = null;
 
     /**
      * Default constructor for TaskList
      */
     public TaskList() {
         taskList = new ArrayList<>();
+        storage = new Storage("data/duke.txt");
     }
 
     /**
@@ -26,6 +28,7 @@ public class TaskList {
     public TaskList(Storage storage) {
         taskList = new ArrayList<>();
         taskList.addAll(storage.getTasks());
+        this.storage = storage;
     }
 
     /**
@@ -114,6 +117,15 @@ public class TaskList {
      */
     public boolean clearTasks() {
         taskList.clear();
+        return true;
+    }
+
+    public boolean saveTasks() {
+        try {
+            storage.save(taskList);
+        } catch (Exception ex) {
+            Ui.printException(ex);
+        }
         return true;
     }
 }

@@ -44,7 +44,7 @@ public class Storage {
         this();
         this.filepath = filepath;
     }
-
+  
     /**
      * Loads TaskList records from a specified file
      *
@@ -107,6 +107,10 @@ public class Storage {
             }
         }
         return taskList;
+    }
+
+    public void save(List<Task> taskList) {
+        saveFile(taskList);
     }
 
     /**

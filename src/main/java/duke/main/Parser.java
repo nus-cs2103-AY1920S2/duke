@@ -23,7 +23,7 @@ public class Parser {
      * @param taskList TaskList object containing list of Tasks
      * @return boolean true if ByeCommand is invoked by user
      */
-    static boolean parseCommand(String input, TaskList taskList) {
+    static boolean parseCommand(String input, TaskList taskList) throws UnknownCommandException {
         try {
             String param;
             String[] tokens = input.split(" ", 2);
@@ -47,7 +47,7 @@ public class Parser {
                 EventCommand.run(taskList, param);
                 break;
             case BYE:
-                ByeCommand.run();
+                ByeCommand.run(taskList);
                 return false;
             case LIST:
                 ListCommand.run(taskList);
@@ -61,10 +61,15 @@ public class Parser {
             case CALENDAR:
                 CalendarCommand.run(taskList, param);
                 break;
+            case FIND:
+                FindCommand.run(taskList, param);
+                break;
             default:
                 throw new UnknownCommandException();
             }
-        } catch (DukeException ex) {
+        } catch (IllegalArgumentException ex) {
+            throw new UnknownCommandException();
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         return true;
