@@ -1,15 +1,13 @@
+package duke.storage;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
-import duke.tasks.Task;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
@@ -41,8 +39,5 @@ public class StorageTest {
     @Test
     public void testLoadFromFile() throws DukeException {
         assertDoesNotThrow(() -> storage.load());
-        // tasks.getTaskList().forEach(item -> System.out.println(item.toString()));
-        // storage.load().forEach(item -> System.out.println(item.toString()));
-        // assertEquals(tasks.getTaskList(), storage.load());
     }
 }
