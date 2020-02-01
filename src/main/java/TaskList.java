@@ -45,7 +45,7 @@ public class TaskList {
         return temp;
     }
 
-    public List<Task> addTask(String command) throws DateTimeParseException {
+    public List<Task> addTask(String command) throws DateTimeParseException, DukeInvalidCommandException {
         Task task = null;
         String taskType = command.split(" ")[0];
         command = command.substring(command.indexOf(" "));
@@ -63,6 +63,8 @@ public class TaskList {
                     LocalDate.parse(command.split("/by ")[1].trim().split(" ")[0]),
                     command.split("/by ")[1].split(" ")[1].trim());
             break;
+        default:
+            throw new DukeInvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
         print("Got it. I've added this task:");
