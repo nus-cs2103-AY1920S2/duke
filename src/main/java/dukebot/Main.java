@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            stage.setTitle("Duke");
+            stage.setTitle("Waifu Simulator (Duke)");
             stage.getIcons().add(new Image("/images/duke_happy.png"));
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
