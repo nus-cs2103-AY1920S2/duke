@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.lang.String;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Duke {
             case "list":
                 System.out.println(this.printList());
                 System.out.println();
-                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                sc.useDelimiter("\\p{javaWhitespace}+");
                 storage.saveToFile(printList());
                 echo(sc);
                 break;
@@ -39,16 +40,16 @@ public class Duke {
                 System.out.println("Good job! I've marked this task as done:");
                 System.out.printf("%d. %s\n", targetIdx + 1, tasks.get(targetIdx).toString());
                 System.out.println();
-                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                sc.useDelimiter("\\p{javaWhitespace}+");
                 storage.saveToFile(printList());
                 echo(sc);
                 break;
 
             case "todo":
-                sc = sc.useDelimiter("\\n");
+                sc.useDelimiter("\\n");
                 String userInput = sc.nextLine();
                 if (userInput.equals("")) {
-                    sc = sc.reset();
+                    sc.reset();
                     throw new DukeException("Uh-oh! Description of todo cannot be empty!");
                 }
                 TodoTask todoTask = TodoTask.createTodoTask(userInput);
@@ -57,33 +58,36 @@ public class Duke {
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
                 //echo(new Scanner(System.in);
-                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                sc.useDelimiter("\\p{javaWhitespace}+");
                 storage.saveToFile(printList());
                 echo(sc);
                 break;
+
             case "deadline":
-                sc = sc.useDelimiter("\\s*/by\\s*|\\n");
-                String userInput1 = sc.next();
-                String userDue1 = sc.next();
-                DeadlineTask deadlineTask = DeadlineTask.createDeadlineTask(userInput1, userDue1);
+                sc.useDelimiter("\\s*/by\\s*|\\n");
+                String action = sc.next();
+                String dateInput = sc.next();
+                LocalDate byDate = LocalDate.parse(dateInput);
+                DeadlineTask deadlineTask = DeadlineTask.createDeadlineTask(action, byDate);
                 tasks.add(deadlineTask);
                 System.out.println("Added: " + deadlineTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                sc = sc.useDelimiter("\\p{javaWhitespace}+");
-                storage.saveToFile(printList());
+                sc.useDelimiter("\\p{javaWhitespace}+");
                 echo(sc);
                 break;
+
             case "event":
-                sc = sc.useDelimiter("\\s*/at\\s*|\\n");
-                String userInput2 = sc.next();
-                String userDue2 = sc.next();
-                EventTask eventTask = EventTask.createEventTask(userInput2, userDue2);
+                sc.useDelimiter("\\s*/at\\s*|\\n");
+                action = sc.next();
+                dateInput = sc.next();
+                LocalDate atDate = LocalDate.parse(dateInput);
+                EventTask eventTask = EventTask.createEventTask(action, atDate);
                 tasks.add(eventTask);
                 System.out.println("Added: " + eventTask.toString());
                 System.out.printf("Now you have %d task(s) on your list.\n", tasks.size());
                 System.out.println();
-                sc = sc.useDelimiter("\\p{javaWhitespace}+");
+                sc.useDelimiter("\\p{javaWhitespace}+");
                 storage.saveToFile(printList());
                 echo(sc);
                 break;
@@ -91,6 +95,7 @@ public class Duke {
             case "bye":
                 Duke.printByeMsg();
                 break;
+
             case "delete":
                 int delIdx = sc.nextInt() - 1;
                 if (delIdx >= tasks.size() || delIdx < 0) {
@@ -107,6 +112,7 @@ public class Duke {
                 throw new DukeException("Oops! Invalid commmand word, perhaps you would want to try on of the following: todo 2.deadline 3.event 4.list 5.done 6.bye");
 
             }
+
         } catch (DukeException ex) {
             System.err.println(ex.getMessage());
             System.out.println();
