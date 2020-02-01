@@ -2,12 +2,7 @@ package commands;
 
 import exceptions.DukeException;
 import processor.DukeProcessor;
-import processor.Ui;
 import tasks.EventTask;
-import tasks.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Command that handles creating and adding an "event" task to the processor's TaskList.
@@ -21,10 +16,16 @@ public class CommandEvent extends CommandTask {
      * @param args      The arguments as entered by the user.
      * @throws DukeException Throws an exception if the input format is incorrect.
      */
-    public void execute(DukeProcessor processor, String args) throws DukeException {
+    public String execute(DukeProcessor processor, String args) throws DukeException {
+
+        if (!args.contains(" /at ")) {
+            throw new DukeException("Your 'event' command is incorrect! Please follow the format: event <item> "
+                    + "/at <time> to <time>");
+        }
+
         String[] inputArgs = args.split(" ", 2)[1].split(" /at ");
 
-        if (!args.contains(" /at ") || inputArgs.length < 2) {
+        if (inputArgs.length < 2) {
             throw new DukeException("Your 'event' command is incorrect! Please follow the format: event <item> "
                     + "/at <time> to <time>");
         }
@@ -32,9 +33,11 @@ public class CommandEvent extends CommandTask {
         EventTask task = new EventTask(inputArgs[0], inputArgs[1]);
         processor.getTaskList().add(task);
 
-        Ui.print("I've got it! Added the following task:");
-        Ui.print(task.toString());
+        String output = String.format("%s\n%s\n%s\n", "I've got it! Added the following task:",
+                task.toString(),
+                "You've now got " + processor.getTaskList().size() + " tasks in your list.");
 
         super.execute(processor, args);
+        return output;
     }
 }

@@ -3,7 +3,6 @@ package commands;
 import exceptions.DukeException;
 import processor.DukeProcessor;
 import processor.Storage;
-import processor.Ui;
 
 /**
  * Parent class for the "todo", "deadline" and "event" commands.
@@ -16,13 +15,13 @@ public class CommandTask implements Command {
      * @param args      The arguments as entered by the user.
      * @throws DukeException Throws an exception when there is an error in adding a task.
      */
-    public void execute(DukeProcessor processor, String args) throws DukeException {
-        Ui.print("You've now got " + processor.getTaskList().size() + " tasks in your list.");
-
+    public String execute(DukeProcessor processor, String args) throws DukeException {
         try {
             Storage.saveTasks(processor);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return "";
     }
 }

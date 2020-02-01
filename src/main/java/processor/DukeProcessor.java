@@ -33,24 +33,24 @@ public class DukeProcessor {
      *
      * @param input User input.
      */
-    public void processInput(String input) {
+    public String processInput(String input) {
         Command command = Parser.parseInput(input);
         try {
-            command.execute(this, input);
+            return command.execute(this, input);
         } catch (DukeException e) {
-            Ui.print(e.toString());
+            return e.toString();
         }
     }
 
     /**
      * Says hello.
      */
-    private void sayHello() {
+    public String sayHello() {
         Command sayHello = Commander.createCommand(CommandType.HI);
         try {
-            sayHello.execute(this, "");
+            return sayHello.execute(this, "");
         } catch (DukeException e) {
-            e.printStackTrace();
+            return "";
         }
     }
 

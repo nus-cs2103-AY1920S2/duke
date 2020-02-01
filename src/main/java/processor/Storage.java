@@ -82,11 +82,6 @@ public class Storage {
             outputTaskList.add(task);
         }
 
-        if (outputTaskList.size() != 0) {
-            Ui.print(String.format("Looks like you've saved some tasks before! You have %d tasks in your list.",
-                    outputTaskList.size()));
-        }
-
         return outputTaskList;
     }
 

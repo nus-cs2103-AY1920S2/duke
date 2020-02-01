@@ -15,5 +15,5 @@ public interface Command {
      * @param args      The arguments as entered by the user.
      * @throws DukeException Throws an exception if the command being executed is unable to proceed.
      */
-    public void execute(DukeProcessor processor, String args) throws DukeException;
+    public String execute(DukeProcessor processor, String args) throws DukeException;
 }

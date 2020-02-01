@@ -52,9 +52,9 @@ public class Task {
     public String toString() {
         String marker = "";
         if (isDone) {
-            marker = "✓";
+            marker = "/";
         } else {
-            marker = "✗";
+            marker = "X";
         }
         return String.format("[%s] %s", marker, description);
     }

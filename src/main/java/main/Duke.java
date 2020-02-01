@@ -9,16 +9,20 @@ import java.util.Scanner;
  * Duke's main class, where he will start his processor and begin to process user input.
  */
 public class Duke {
+    DukeProcessor processor;
+
     /**
-     * Main method of Duke to instantiate Duke.
-     * @param args General arguments
+     * Constructor of Duke.
      */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        DukeProcessor processor = new DukeProcessor();
-        while (processor.isActive()) {
-            String input = sc.nextLine();
-            processor.processInput(input);
-        }
+    public Duke() {
+        processor = new DukeProcessor();
+    }
+
+    public String getResponse(String input) {
+        return processor.processInput(input);
+    }
+
+    public DukeProcessor getProcessor() {
+        return processor;
     }
 }

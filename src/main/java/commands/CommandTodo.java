@@ -2,12 +2,8 @@ package commands;
 
 import exceptions.DukeException;
 import processor.DukeProcessor;
-import processor.Ui;
-import tasks.Task;
 import tasks.TodoTask;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Command that handles creating and adding a "todo" task to the processor's TaskList.
@@ -21,7 +17,7 @@ public class CommandTodo extends CommandTask {
      * @param args      The arguments as entered by the user.
      * @throws DukeException Throws an exception if the input format is incorrect.
      */
-    public void execute(DukeProcessor processor, String args) throws DukeException {
+    public String execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
         if (argsArray.length < 2) {
             throw new DukeException("Your 'todo' command is incorrect! Please follow the following format: todo "
@@ -31,9 +27,11 @@ public class CommandTodo extends CommandTask {
         TodoTask task = new TodoTask(argsArray[1]);
         processor.getTaskList().add(task);
 
-        Ui.print("I've got it! Added the following task:");
-        Ui.print(task.toString());
+        String output = String.format("%s\n%s\n%s\n", "I've got it! Added the following task:",
+                task.toString(),
+                "You've now got " + processor.getTaskList().size() + " tasks in your list.");
 
         super.execute(processor, args);
+        return output;
     }
 }
