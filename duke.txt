@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 T | N | THE DUKE.TXT FOR GRADLE IS HERE
+=======
+T | N | read book
+T | N | return book
+>>>>>>> fd8c37c... A-Gradle
