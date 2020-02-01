@@ -5,7 +5,7 @@ import java.util.Scanner;
 import app.exceptions.BaseException;
 import app.exceptions.WrongCommandException;
 import app.core.UserInterface;
-import app.core.TaskManager;
+import app.core.tasks.TaskManager;
 
 public class Duke {
     public static final int MAX_TASKS = 100;

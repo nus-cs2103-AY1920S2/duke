@@ -1,3 +1,5 @@
+package app.util;
+
 public class Tokenizer {
     private Tokenizer() {}
 

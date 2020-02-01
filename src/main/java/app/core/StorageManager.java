@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class TaskStorageManager {
+import app.core.tasks.Task;
+
+public class StorageManager {
     public static final String STORAGE_DIR = "./data/";
     public static final String STORAGE_FILENAME = "tasks.txt";
     public static final String STORAGE_FILEPATH = STORAGE_DIR + STORAGE_FILENAME;

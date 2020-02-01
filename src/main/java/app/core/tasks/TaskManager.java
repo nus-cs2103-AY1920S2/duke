@@ -1,17 +1,18 @@
-package app.core;
+package app.core.tasks;
 
 import java.util.List;
 
 import app.util.Date;
+import app.core.StorageManager;
 import app.exceptions.WrongDateTimeFormatException;
 import app.exceptions.WrongUsageException;
 
 public class TaskManager{
     private List<Task> tasks;
-    private TaskStorageManager storageManager;
+    private StorageManager storageManager;
 
     public TaskManager(int maxTasks) {
-        this.storageManager = new TaskStorageManager();
+        this.storageManager = new StorageManager();
         this.tasks = this.storageManager.load();
     }
 

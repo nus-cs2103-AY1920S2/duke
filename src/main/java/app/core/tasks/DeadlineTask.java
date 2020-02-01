@@ -1,4 +1,4 @@
-package app.core;
+package app.core.tasks;
 
 import app.util.Date;
 
