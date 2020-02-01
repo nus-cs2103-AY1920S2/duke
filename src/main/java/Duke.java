@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class Duke {
                     System.out.println("Here are the tasks in your list!");
                     System.out.println("____________________________________________________________");
                     for(int i=0; i<tasksArr.size(); i++) {
-                        System.out.println("        "+ i+1 + " "+ tasksArr.get(i));
+                        System.out.println("        "+ (i+1) + " "+ tasksArr.get(i));
                     }
                     System.out.println("____________________________________________________________");
                 } else if (command.equals("done")) {
@@ -52,7 +54,9 @@ public class Duke {
                     String str = sc.nextLine();
                     if (str.split("").length > 1) {
                         String[] splitStr = str.split("/by");
-                        DeadLine t = new DeadLine(splitStr[0], splitStr[1]);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                        LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
+                        DeadLine t = new DeadLine(splitStr[0], dateTime);
                         tasksArr.add(t);
                         System.out.println("____________________________________________________________");
                         System.out.println("Got it! I have added this task: \n");
@@ -66,7 +70,9 @@ public class Duke {
                     String str = sc.nextLine();
                     if (str.split("").length > 1) {
                         String[] splitStr = str.split("/at");
-                        Event t = new Event(splitStr[0], splitStr[1]);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                        LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
+                        Event t = new Event(splitStr[0], dateTime);
                         tasksArr.add(t);
                         System.out.println("____________________________________________________________");
                         System.out.println("Got it! I have added this task: \n");
