@@ -1,8 +1,8 @@
-package entity.command;
+package duke.entity.command;
 
-import entity.TaskList;
-import handler.Storage;
-import handler.Ui;
+import duke.entity.TaskList;
+import duke.handler.Storage;
+import duke.handler.Ui;
 
 public class ExitCommand extends Command {
 

@@ -1,8 +1,7 @@
-package handler;
+package duke.handler;
 
-import entity.*;
-import entity.task.Task;
-import parser.CommandParser;
+import duke.entity.*;
+import duke.entity.task.Task;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Ui {
      * Say welcome to the user upon initializing programme
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
     }
 

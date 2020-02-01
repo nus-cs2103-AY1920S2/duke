@@ -1,6 +1,6 @@
-package entity.task;
+package duke.entity.task;
 
-import parser.DateTimeParser;
+import duke.parser.DateTimeParser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

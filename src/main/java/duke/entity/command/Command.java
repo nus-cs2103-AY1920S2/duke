@@ -1,8 +1,8 @@
-package entity.command;
+package duke.entity.command;
 
-import entity.TaskList;
-import handler.Storage;
-import handler.Ui;
+import duke.entity.TaskList;
+import duke.handler.Storage;
+import duke.handler.Ui;
 
 public abstract class Command {
 
@@ -11,7 +11,7 @@ public abstract class Command {
      *
      * @param taskList the current saved state of the TaskList
      * @param ui the interface responsible for interacting with the user
-     * @param storage the handler responsible for handling saving/loading from file
+     * @param storage the duke.handler responsible for handling saving/loading from file
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 

@@ -1,9 +1,9 @@
-package entity.command;
+package duke.entity.command;
 
-import entity.task.Task;
-import entity.TaskList;
-import handler.Storage;
-import handler.Ui;
+import duke.entity.task.Task;
+import duke.entity.TaskList;
+import duke.handler.Storage;
+import duke.handler.Ui;
 
 import java.util.ArrayList;
 import java.util.Date;

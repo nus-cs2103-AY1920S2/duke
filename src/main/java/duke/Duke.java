@@ -1,10 +1,12 @@
-import entity.*;
-import entity.command.Command;
-import handler.Ui;
+package duke;
 
-import exception.DirectoryNotFoundException;
-import handler.Storage;
-import parser.CommandParser;
+import duke.entity.*;
+import duke.entity.command.Command;
+import duke.handler.Ui;
+
+import duke.exception.DirectoryNotFoundException;
+import duke.handler.Storage;
+import duke.parser.CommandParser;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
