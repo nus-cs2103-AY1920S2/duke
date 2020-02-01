@@ -1,6 +1,4 @@
-package dukeClasses;
-
-import dukeClasses.Task;
+package dukeclasses;
 
 /**
  * Todo class is a child class of dukeClasses.Task

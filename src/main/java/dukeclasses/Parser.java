@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 public class Parser {
 

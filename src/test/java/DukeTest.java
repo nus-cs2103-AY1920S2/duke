@@ -1,5 +1,4 @@
-import dukeClasses.Deadline;
-import dukeClasses.Task;
+import dukeclasses.Deadline;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,5 @@
-import dukeClasses.Deadline;
-import dukeClasses.Event;
+import dukeclasses.Deadline;
+import dukeclasses.Event;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

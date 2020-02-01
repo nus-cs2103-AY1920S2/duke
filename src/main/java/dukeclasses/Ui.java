@@ -1,8 +1,4 @@
-package dukeClasses;
-
-import dukeClasses.DukeException;
-import dukeClasses.Storage;
-import dukeClasses.TaskManager;
+package dukeclasses;
 
 import java.time.DateTimeException;
 

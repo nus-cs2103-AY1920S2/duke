@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 /**
  * Contains a product name dukeClasses.Duke, a personal assistant chat bot that keeps track of various tasks that needs

@@ -1,8 +1,4 @@
-package dukeClasses;
-
-import dukeClasses.Deadline;
-import dukeClasses.Event;
-import dukeClasses.Task;
+package dukeclasses;
 
 import java.io.*;
 import java.nio.file.Paths;

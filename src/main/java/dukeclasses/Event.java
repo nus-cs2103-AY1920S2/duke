@@ -1,6 +1,4 @@
-package dukeClasses;
-
-import dukeClasses.Task;
+package dukeclasses;
 
 /**
  * dukeClasses.Event class is a child class of dukeClasses.Task that has a at variable which tells the user
