@@ -1,4 +1,8 @@
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
+import java.nio.file.Files;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Duke {
@@ -13,19 +17,22 @@ public class Duke {
         put("event", Message.EVENT);
     }};
 
+    public static String taskData = "./data/duke.txt";
+
     //to add horizontal line around the message and print it out
     public static void typeSetting(String s) {
         System.out.println(horizontalLine + s + "\n" + horizontalLine);
     }
 
     //get a list which listing all the tasks recorded
-    public static void gettingList(ArrayList<Task> list) {
+    public static String gettingList(List<Task> list) {
         int index = list.size();
         StringBuilder li = new StringBuilder("    \uD83D\uDCDC Here are the tasks in your list:\n");
         for (int i = 0; i < index; i++) {
             li.append("         ").append(i + 1).append(": ").append(list.get(i)).append("\n");
         }
         typeSetting(li.toString());
+        return li.toString();
     }
 
     //The specific way to split string (exclusive for deadline and event")
@@ -55,7 +62,7 @@ public class Duke {
     }
 
     //to process different requests which is decided by the first token of the message user entered
-    public static ArrayList<Task> processRequest(String str, ArrayList<Task> list)
+    public static List<Task> processRequest(String str, List<Task> list)
             throws InvalidKeyException, IllegalArgumentException, EmptyDescriptionException {
         if (str.equals("")) {
             throw new InvalidKeyException("Try to say something to me.");
@@ -129,15 +136,87 @@ public class Duke {
         return list;
     }
 
+    //to update the data file when any changes are made to the list of tasks
+    public static void rewriteFile(String filePath, List<Task> list) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        StringBuilder text = new StringBuilder();
+        for (Task t: list) {
+            List<String> details = new ArrayList<>() {{
+                add(t.getClass().getSimpleName());
+                add(t.getStatus());
+                add(getSpecificDescription(t));
+            }};
+            text.append(String.join("~", details)).append("\n");
+        }
+        fw.write(text.toString());
+        fw.close();
+    }
+
+    //get an extra piece of information if the Task is a Deadline or Event
+    public static String getSpecificDescription(Task t) {
+        String text = t.getDescription();
+        if (t instanceof Deadline) {
+            text += "~" + ((Deadline) t).getBy();
+        } else if (t instanceof Event) {
+            text += "~" + ((Event) t).getAt();
+        }
+        return text;
+    }
+
+    //get a Task according to the text in the data file
+    public static Task decode(String data) {
+        StringTokenizer st = new StringTokenizer(data);
+        String className = st.nextToken("~");
+        String status = st.nextToken("~");
+        String description = st.nextToken("~");
+        if (st.hasMoreTokens()) {
+            String extra = st.nextToken("~");
+            if (className.equals("Deadline")) {
+                Deadline ddl =  new Deadline(description, extra);
+                if (status.equals("1")) {
+                    ddl.markAsDone();
+                }
+                return ddl;
+            } else {
+                Event ev =  new Event(description, extra);
+                if (status.equals("1")) {
+                    ev.markAsDone();
+                }
+                return ev;
+            }
+        }
+        Todo td = new Todo(description);
+        if (status.equals("1")) {
+            td.markAsDone();
+        }
+        return td;
+    }
+
+    //load the list of tasks stored in hard disk
+    public static List<Task> start(String filePath) throws IOException {
+        List<Task> tasks = new ArrayList<>();
+        List<String> data = Files.readAllLines(Paths.get(filePath));
+        for (String s: data) {
+            tasks.add(decode(s));
+        }
+        return tasks;
+    }
+
     public static void main(String[] args) {
         //setting up
         Scanner sc = new Scanner(System.in);
         boolean exiting = false;
-        ArrayList<Task> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
+        try {
+            list = start(taskData);
+        } catch (IOException e) {
+            System.err.println(e);
+        }
 
-        //welcome message
+        //welcome message and showing the list to the user
         typeSetting("    Hello, I'm Bob. \uD83D\uDC76 \uD83D\uDC76 \uD83D\uDC76\n    " +
                 "What can I do for you? \uD83D\uDE03\n");
+        gettingList(list);
 
         //talking to Bob
         String str = sc.nextLine();
@@ -151,7 +230,9 @@ public class Duke {
                     //update the list of tasks
                     try {
                         list = processRequest(str, list);
-                    } catch (InvalidKeyException | IllegalArgumentException |  EmptyDescriptionException e) {
+                        rewriteFile(taskData, list);
+                    } catch (InvalidKeyException | IllegalArgumentException |  EmptyDescriptionException
+                            | IOException e) {
                         System.err.println(e);
                     }
                 }
