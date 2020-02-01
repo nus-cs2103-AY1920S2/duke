@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Constructor requiring a file path for reading and writing of data.
+     *
      * @param path path to file
      */
     public Storage(String path) {
@@ -25,6 +26,7 @@ public class Storage {
 
     /**
      * Helper function to convert string of "1" or "0" to boolean true and false.
+     *
      * @param value "1" or "0"
      * @return true or false
      */
@@ -40,9 +42,10 @@ public class Storage {
 
     /**
      * Loads data to be passed to a tasklist.
+     *
      * @return ArrayList of Tasks
      * @throws FileNotFoundException e
-     * @throws DukeException e
+     * @throws DukeException         e
      */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> arr = new ArrayList<>();
@@ -52,20 +55,20 @@ public class Storage {
             String task = sc.nextLine();
             String[] s = task.split(",", 0);
             switch (s[0].trim()) {
-                case ("T"):
-                    Task todo = new Todo(s[2].trim(), convertToBoolean(s[1].trim()));
-                    arr.add(todo);
-                    break;
-                case ("E"):
-                    Task ev = new Event(s[2].trim(), s[3].trim(), convertToBoolean(s[1].trim()));
-                    arr.add(ev);
-                    break;
-                case ("D"):
-                    Task dl = new Deadline(s[2].trim(), s[3].trim(), convertToBoolean(s[1].trim()));
-                    arr.add(dl);
-                    break;
-                default:
-                    throw new DukeException();
+            case ("T"):
+                Task todo = new Todo(s[2].trim(), convertToBoolean(s[1].trim()));
+                arr.add(todo);
+                break;
+            case ("E"):
+                Task ev = new Event(s[2].trim(), s[3].trim(), convertToBoolean(s[1].trim()));
+                arr.add(ev);
+                break;
+            case ("D"):
+                Task dl = new Deadline(s[2].trim(), s[3].trim(), convertToBoolean(s[1].trim()));
+                arr.add(dl);
+                break;
+            default:
+                throw new DukeException();
             }
         }
         return arr;
@@ -73,6 +76,7 @@ public class Storage {
 
     /**
      * Saves data to file.
+     *
      * @param data data
      * @throws IOException exception
      */

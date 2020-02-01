@@ -4,6 +4,7 @@ package duke;
  * UI class to abstract all UI related printing.
  */
 public class UI {
+
     /**
      * Commonly used beautifying line.
      */
@@ -18,6 +19,7 @@ public class UI {
 
     /**
      * Prints string s wrapped in lines.
+     *
      * @param s s
      */
     static void say(String s) {
@@ -28,6 +30,7 @@ public class UI {
 
     /**
      * Lists items in arr one by one.
+     *
      * @param arr arr
      */
     static void listHelper(TaskList arr) {
@@ -46,6 +49,7 @@ public class UI {
 
     /**
      * Feedback if a task is done.
+     *
      * @param curr curr
      */
     static void done(Task curr) {
@@ -54,6 +58,7 @@ public class UI {
 
     /**
      * Feedback if a task is added.
+     *
      * @param curr curr
      */
     static void added(Task curr) {
@@ -62,6 +67,7 @@ public class UI {
 
     /**
      * Feedback if a task is deleted.
+     *
      * @param curr curr
      */
     static void delete(Task curr) {

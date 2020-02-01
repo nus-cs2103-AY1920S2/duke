@@ -2,13 +2,13 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
 
     @Test
     void testToString() {
-        assertEquals("[D][\u2718] Blah (by: Oct 10 2019)", new Deadline("Blah", "2019-10-10").toString());
+        assertEquals("[D][✘] Blah (by: Oct 10 2019)", new Deadline("Blah", "2019-10-10").toString());
     }
 
     @Test

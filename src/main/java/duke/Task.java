@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Constructor method. Default value of isDone is false.
+     *
      * @param description desc
      */
     public Task(String description) {
@@ -19,8 +20,9 @@ public class Task {
 
     /**
      * Overloaded constructor specifying isDone value.
+     *
      * @param description desc
-     * @param mark mark
+     * @param mark        mark
      */
     public Task(String description, boolean mark) {
         this.description = description;
@@ -29,10 +31,11 @@ public class Task {
 
     /**
      * Helper method to get status as a special char symbol (tick or X).
+     *
      * @return String
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
     /**
@@ -44,6 +47,7 @@ public class Task {
 
     /**
      * Custom toString implementation.
+     *
      * @return String
      */
     @Override
@@ -53,6 +57,7 @@ public class Task {
 
     /**
      * Override saveFormat method to generate neatly formatted information for saving.
+     *
      * @return String
      */
     public String saveFormat() {

@@ -12,8 +12,9 @@ public class Deadline extends Task {
 
     /**
      * Deadline constructor.
+     *
      * @param description desc
-     * @param a a
+     * @param a           a
      */
     public Deadline(String description, String a) {
         super(description);
@@ -22,9 +23,10 @@ public class Deadline extends Task {
 
     /**
      * Overloaded deadline constructor.
+     *
      * @param description desc
-     * @param a a
-     * @param mark mark
+     * @param a           a
+     * @param mark        mark
      */
     public Deadline(String description, String a, boolean mark) {
         super(description, mark);
@@ -33,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * Custom toString implementation.
+     *
      * @return String
      */
     @Override
@@ -43,6 +46,7 @@ public class Deadline extends Task {
 
     /**
      * Override saveFormat method to generate neatly formatted information for saving.
+     *
      * @return String
      */
     @Override

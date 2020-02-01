@@ -12,8 +12,9 @@ public class Event extends Task {
 
     /**
      * Event constructor.
+     *
      * @param description desc
-     * @param at at
+     * @param at          at
      */
     public Event(String description, String at) {
         super(description);
@@ -22,9 +23,10 @@ public class Event extends Task {
 
     /**
      * Overloaded event constructor.
+     *
      * @param description desc
-     * @param at at
-     * @param mark mark
+     * @param at          at
+     * @param mark        mark
      */
     public Event(String description, String at, boolean mark) {
         super(description, mark);
@@ -33,6 +35,7 @@ public class Event extends Task {
 
     /**
      * Custom toString implementation.
+     *
      * @return String
      */
     @Override
@@ -43,6 +46,7 @@ public class Event extends Task {
 
     /**
      * Override saveFormat method to generate neatly formatted information for saving.
+     *
      * @return String
      */
     @Override

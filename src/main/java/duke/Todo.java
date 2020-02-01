@@ -4,8 +4,10 @@ package duke;
  * Class to represent tasks of the type to do.
  */
 public class Todo extends Task {
+
     /**
      * Constructor method.
+     *
      * @param description description
      */
     public Todo(String description) {
@@ -14,8 +16,9 @@ public class Todo extends Task {
 
     /**
      * Overloaded constructor in case of specified isDone value.
+     *
      * @param description description
-     * @param mark mark
+     * @param mark        mark
      */
     public Todo(String description, boolean mark) {
         super(description, mark);
@@ -23,6 +26,7 @@ public class Todo extends Task {
 
     /**
      * Custom toString implementation.
+     *
      * @return String
      */
     @Override
@@ -32,6 +36,7 @@ public class Todo extends Task {
 
     /**
      * Override saveFormat method to generate neatly formatted information for saving.
+     *
      * @return String
      */
     @Override

@@ -18,6 +18,7 @@ public class TaskList {
 
     /**
      * Overloaded constructor in the case of an existing collection of Tasks.
+     *
      * @param lst lst
      */
     public TaskList(ArrayList<Task> lst) {
@@ -26,6 +27,7 @@ public class TaskList {
 
     /**
      * Returns task at index.
+     *
      * @param index index
      * @return Task
      */
@@ -35,6 +37,7 @@ public class TaskList {
 
     /**
      * Adds task e to tasklist.
+     *
      * @param e element
      */
     public void add(Task e) {
@@ -43,6 +46,7 @@ public class TaskList {
 
     /**
      * Removes task at index.
+     *
      * @param e element
      */
     public void remove(int e) {
@@ -51,6 +55,7 @@ public class TaskList {
 
     /**
      * Gets number of tasks currently held.
+     *
      * @return int size
      */
     public int size() {
@@ -59,17 +64,24 @@ public class TaskList {
 
     /**
      * Converts and returns an ArrayList of Tasks.
+     *
      * @return ArrayList of Tasks
      */
     public ArrayList<Task> toArr() {
         return lst;
     }
 
+
+    /**
+     * Search function.
+     * @param s s
+     * @return Returns a TaskList obj
+     */
     public TaskList search(String s) {
         ArrayList<Task> res = new ArrayList<>();
-        for (Task t: lst) {
+        for (Task t : lst) {
             String[] arr = t.description.split(" ");
-            for (String part: arr) {
+            for (String part : arr) {
                 if (part.equals(s) && !res.contains(t)) {
                     res.add(t);
                 }
