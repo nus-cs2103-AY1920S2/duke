@@ -7,7 +7,11 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -35,8 +39,8 @@ public class Storage {
     /**
      * Load the files from txt into TaskList.
      *
+     * @return ArrayList<Task></Task> with Tasks being loaded into an ArrayList.
      * @throws LoadException thrown when not able to load file.
-     * @return ArrayList<Task> with Tasks being loaded into an ArrayList.
      */
     public ArrayList<Task> load() throws LoadException {
         try {
@@ -87,7 +91,6 @@ public class Storage {
      *
      * @param tasks This is the ArrayList where the Task is being stored.
      * @throws SaveException thrown when not able to save tasks into file.
-     * @return Nothing.
      */
     public static void saveTasks(ArrayList<Task> tasks) throws SaveException {
         try {

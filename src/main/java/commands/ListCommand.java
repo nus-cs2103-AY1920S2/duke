@@ -16,7 +16,6 @@ public class ListCommand extends Command {
      * @param tasks This is the TaskList where the Task is stored.
      * @param ui This is to interact with the user interface, printing all Tasks.
      * @param storage Unused.
-     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

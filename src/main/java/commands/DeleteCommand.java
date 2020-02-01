@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     private int index;
 
     /**
-     * Constructor for DeleteCommand
+     * Constructor for DeleteCommand.
      *
      * @param index the index of Task to be deleted from TaskList.
      */
@@ -30,7 +30,6 @@ public class DeleteCommand extends Command {
      * @param ui This is to interact with the user interface, printing message of Task being deleted.
      * @param storage This allows for TaskList to be updated.
      * @throws DukeException thrown when index is out of bounds.
-     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

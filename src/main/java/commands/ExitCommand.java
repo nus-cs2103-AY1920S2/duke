@@ -15,7 +15,6 @@ public class ExitCommand extends Command {
      * @param tasks Unused.
      * @param ui This is to interact with the user interface, printing Exit message.
      * @param storage Unused.
-     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
