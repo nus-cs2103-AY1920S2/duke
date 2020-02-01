@@ -2,6 +2,8 @@ package duke.main;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.DialogBox;
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,17 +18,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
+    Storage storage;
+    TaskList taskList;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    Storage storage;
-    TaskList taskList;
 
     /**
      * Duke Object that forms the backbone of the program.
@@ -46,7 +46,7 @@ public class Duke extends Application {
     /**
      * main Method that begins the program.
      *
-     * @param args  are multiple inputs received from User's input
+     * @param args are multiple inputs received from User's input
      */
     public static void main(String[] args) {
         try {
@@ -59,7 +59,7 @@ public class Duke extends Application {
     /**
      * run Method that executes the actual program.
      *
-     * @throws DukeException    when multiple exceptions are caught (e.g. unfilled secondary input)
+     * @throws DukeException when multiple exceptions are caught (e.g. unfilled secondary input)
      */
     public void run() throws DukeException {
         //Duke Setup
@@ -125,7 +125,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -150,8 +150,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(userText, new ImageView(user)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            DialogBox.getUserDialog(userText.toString(), new ImageView(user).getImage()),
+            DialogBox.getDukeDialog(dukeText.toString(), new ImageView(duke).getImage())
         );
         userInput.clear();
     }
@@ -160,7 +160,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
 }

@@ -5,7 +5,7 @@ import duke.exception.MissingAtEventException;
 import duke.exception.MissingByDeadlineException;
 import duke.exception.MissingDetailsException;
 import duke.exception.UnknownDateTimeException;
-import duke.main.Ui;
+import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -185,7 +185,7 @@ public class Command {
     /**
      * listCommand Method prints the list of Tasks (if not empty) running index.
      *
-     * @param taskList      is the list of Tasks are saved and manipulated
+     * @param taskList is the list of Tasks are saved and manipulated
      */
     public static void listCommand(TaskList taskList) {
         StringBuilder sb = new StringBuilder();

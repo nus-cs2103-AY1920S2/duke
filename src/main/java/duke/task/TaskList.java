@@ -3,7 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 import duke.exception.UnknownTaskException;
 import duke.main.Storage;
-import duke.main.Ui;
+import duke.ui.Ui;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class TaskList implements Serializable {
     /**
      * deleteCommand Method deletes Tasks from the TaskList.
      *
-     * @param commandSuffix     is the additional String that accompanies two-step commands
+     * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownTaskException when an unknown/unformatted task number is passed in
      */
     public void deleteTask(String commandSuffix) throws UnknownTaskException {
@@ -46,7 +46,7 @@ public class TaskList implements Serializable {
     /**
      * doneCommand Method marks Tasks as done.
      *
-     * @param commandSuffix     is the additional String that accompanies two-step commands
+     * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownTaskException when an unknown/unformatted task number is passed in
      */
     public void doneTask(String commandSuffix) throws UnknownTaskException {

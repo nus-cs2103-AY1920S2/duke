@@ -18,7 +18,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.main.Launcher"
+    mainClassName = "duke.Launcher"
 }
 
 dependencies {

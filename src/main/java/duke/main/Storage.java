@@ -25,8 +25,8 @@ public class Storage {
     /**
      * dataRead Method attemps to read saved data from file.
      *
-     * @return  the populated TaskList (if there is any readable data), if not null
-     * @throws CannotReadFileException  when the file cannot be found or the data within is unreadable
+     * @return the populated TaskList (if there is any readable data), if not null
+     * @throws CannotReadFileException when the file cannot be found or the data within is unreadable
      */
     public TaskList load() throws CannotReadFileException {
         try {
@@ -48,8 +48,8 @@ public class Storage {
     /**
      * dataSave Method attempts to save data to file.
      *
-     * @param taskList  the populated TaskList (if there is any readable data), if not null
-     * @throws CannotSaveFileException  when the file cannot be saved or the data cannot be written
+     * @param taskList the populated TaskList (if there is any readable data), if not null
+     * @throws CannotSaveFileException when the file cannot be saved or the data cannot be written
      */
     public void save(TaskList taskList) throws CannotSaveFileException {
         try {

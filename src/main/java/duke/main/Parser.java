@@ -6,14 +6,15 @@ import duke.exception.DukeException;
 import duke.exception.MissingDetailsException;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Parser {
     /**
      * parseCommand Method parses CommandTypes (if valid, and to perform the logic).
      *
-     * @param input     is the input passed in for parsing
-     * @param taskList  is the list of Tasks are saved and manipulated
-     * @return          value true only CommandType.BYE is registered to exit the program
+     * @param input    is the input passed in for parsing
+     * @param taskList is the list of Tasks are saved and manipulated
+     * @return value true only CommandType.BYE is registered to exit the program
      */
     public static boolean parseCommand(String input, TaskList taskList) {
         String[] inputBreakdown = input.split(" ", 2);
