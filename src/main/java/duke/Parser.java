@@ -121,9 +121,22 @@ public class Parser {
             }
             return new AddCommand("deadline", deadlineName, dueDate);
 
-        default:
-            throw new DukeException("\t" + "You have used an invalid instruction. " +
-                "I am too dumb to understand you.");
+            case "find":
+                String[] findTokens = instruction.split(" ");
+                String keyWord;
+                try {
+                    keyWord = findTokens[1];
+                    if (keyWord.equals("")) {
+                        throw new DukeException("\t" + "Please enter a keyword when finding.");
+                    }
+                } catch (ArrayIndexOutOfBoundsException aiobe) {
+                    throw new DukeException("\t" + "Please do not leave the find description empty.");
+                }
+                return new FindCommand(keyWord);
+
+            default:
+                throw new DukeException("\t" + "You have used an invalid instruction. " +
+                    "I am too dumb to understand you.");
         }
     }
 }

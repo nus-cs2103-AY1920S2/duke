@@ -123,4 +123,15 @@ public class Ui {
         System.out.println("\t" + "Awesome! I've added this " + identifier + " :");
         System.out.println("\t\t" + newTask);
     }
+
+    public void printFindMessage(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println("\t" + "There were no tasks matching what you said.");
+        } else {
+            System.out.println("\t" + "Here you go, this is probably what you were finding:");
+            for (Task task: tasks) {
+                System.out.println("\t\t" + task);
+            }
+        }
+    }
 }
