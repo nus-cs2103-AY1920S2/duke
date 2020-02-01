@@ -1,11 +1,11 @@
 package duke.main;
 
+import duke.exceptions.UnknownCommandException;
+
 public class Duke {
-    enum Command {
-        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, CALENDAR, CLEAR
-    }
     private Storage storage;
     private TaskList taskList;
+
     private Duke(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -15,12 +15,24 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-    public void run() {
-        Ui.start();
-        while (Parser.parseCommand(Ui.getInput(), taskList));
-    }
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
+    }
+
+    public void run() {
+        Ui.start();
+        boolean run = true;
+        while (run) {
+            try {
+                run = Parser.parseCommand(Ui.getInput(), taskList);
+            } catch (UnknownCommandException ex) {
+                Ui.printException(ex);
+            }
+        }
+    }
+
+    enum Command {
+        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, CALENDAR, CLEAR, FIND
     }
 }

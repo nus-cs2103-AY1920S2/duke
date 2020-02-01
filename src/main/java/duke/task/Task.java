@@ -1,8 +1,8 @@
 package duke.task;
 
 public class Task implements java.io.Serializable {
-    protected String description;
     protected boolean isDone;
+    private String description;
 
     public Task(String description) {
         this.description = description;
@@ -16,6 +16,10 @@ public class Task implements java.io.Serializable {
     public boolean markAsDone() {
         this.isDone = true;
         return true;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String toString() {

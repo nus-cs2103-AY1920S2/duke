@@ -8,14 +8,17 @@ import java.util.ArrayList;
 
 public class TaskList {
     List<Task> taskList;
+    Storage storage = null;
 
     public TaskList() {
         taskList = new ArrayList<>();
+        storage = new Storage("data/duke.txt");
     }
 
     public TaskList(Storage storage) {
         taskList = new ArrayList<>();
         taskList.addAll(storage.getTasks());
+        this.storage = storage;
     }
 
     public Task getTask(int index) {
@@ -65,6 +68,15 @@ public class TaskList {
 
     public boolean clearTasks() {
         taskList.clear();
+        return true;
+    }
+
+    public boolean saveTasks() {
+        try {
+            storage.save(taskList);
+        } catch (Exception ex) {
+            Ui.printException(ex);
+        }
         return true;
     }
 }

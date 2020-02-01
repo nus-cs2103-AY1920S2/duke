@@ -13,14 +13,17 @@ public class Storage {
     public Storage() {
         taskList = new ArrayList<>();
     }
+
     public Storage(String filepath) {
         this();
         this.filepath = filepath;
     }
+
     public Storage load() {
         loadFile();
         return this;
     }
+
     public List<Task> getTasks() {
         return this.taskList;
     }
@@ -65,7 +68,11 @@ public class Storage {
         return taskList;
     }
 
-    private void saveFile() {
+    public void save(List<Task> taskList) {
+        saveFile(taskList);
+    }
+
+    private void saveFile(List<Task> taskList) {
         FileOutputStream fi = null;
         ObjectOutputStream oi = null;
         File file = null;
@@ -99,5 +106,4 @@ public class Storage {
             }
         }
     }
-
 }

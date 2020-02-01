@@ -5,7 +5,7 @@ import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 
 public class Parser {
-    static boolean parseCommand(String input, TaskList taskList) {
+    static boolean parseCommand(String input, TaskList taskList) throws UnknownCommandException {
         try {
             String param;
             String[] tokens = input.split(" ", 2);
@@ -16,37 +16,42 @@ public class Parser {
                 param = "";
             }
             switch (command) {
-                case CLEAR:
-                    ClearCommand.run(taskList);
-                    break;
-                case TODO:
-                    TodoCommand.run(taskList, param);
-                    break;
-                case DEADLINE:
-                    DeadlineCommand.run(taskList, param);
-                    break;
-                case EVENT:
-                    EventCommand.run(taskList, param);
-                    break;
-                case BYE:
-                    ByeCommand.run();
-                    return false;
-                case LIST:
-                    ListCommand.run(taskList);
-                    break;
-                case DONE:
-                    DoneCommand.run(taskList, param);
-                    break;
-                case DELETE:
-                    DeleteCommand.run(taskList, param);
-                    break;
-                case CALENDAR:
-                    CalendarCommand.run(taskList, param);
-                    break;
-                default:
-                    throw new UnknownCommandException();
+            case CLEAR:
+                ClearCommand.run(taskList);
+                break;
+            case TODO:
+                TodoCommand.run(taskList, param);
+                break;
+            case DEADLINE:
+                DeadlineCommand.run(taskList, param);
+                break;
+            case EVENT:
+                EventCommand.run(taskList, param);
+                break;
+            case BYE:
+                ByeCommand.run(taskList);
+                return false;
+            case LIST:
+                ListCommand.run(taskList);
+                break;
+            case DONE:
+                DoneCommand.run(taskList, param);
+                break;
+            case DELETE:
+                DeleteCommand.run(taskList, param);
+                break;
+            case CALENDAR:
+                CalendarCommand.run(taskList, param);
+                break;
+            case FIND:
+                FindCommand.run(taskList, param);
+                break;
+            default:
+                throw new UnknownCommandException();
             }
-        } catch (DukeException ex) {
+        } catch (IllegalArgumentException ex) {
+            throw new UnknownCommandException();
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         return true;
