@@ -13,7 +13,7 @@ import java.io.PrintStream;
 
 /**
  * <h1>UiTest Class</h1>
- * Test for the Ui class
+ * Test for the Ui class.
  *
  * @author  Eng Xuan En
  */
@@ -62,12 +62,13 @@ public class UiTest {
      * Test if the method, replyDone, give the correct output to the user or not.
      */
     @Test
-    public void deleteTask_shouldGiveTheCorrectOutput() {
+    public void markTaskDone_shouldGiveTheCorrectOutput() {
         Ui ui = new Ui();
         Task task = new Todo("borrow book");
+        task.setStatusDone();
         String expected = "    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n"
-                + "         [T][\u2718] borrow book\n"
+                + "         [T][Y] borrow book\n"
                 + "    ____________________________________________________________\n";
         ui.replyDone(task);
         Assertions.assertEquals(expected, os.toString());

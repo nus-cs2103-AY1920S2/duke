@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * <h1>TaskTest Class</h1>
- * Test for the Task class
+ * Test for the Task class.
  *
  * @author Eng Xuan En
  */
@@ -36,7 +36,7 @@ public class TaskTest {
     @Test
     public void toString_shouldReturnInCorrectFormat() {
         Task task = new Task("Test");
-        String expected = "[\u2718] Test";
+        String expected = "[N] Test";
         Assertions.assertEquals(expected, task.toString());
     }
 }

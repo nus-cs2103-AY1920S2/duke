@@ -10,6 +10,9 @@ public class Ui {
     protected ReplyFormat message;
     protected static Scanner userInput;
 
+    /**
+     * Class Constructor of Ui.
+     */
     public Ui() {
         message = new ReplyFormat();
         userInput = new Scanner(System.in);
@@ -17,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Loop until user give input
+     * Loop until user give input.
      *
      * @return the sentence user inputs
      */
@@ -30,14 +33,14 @@ public class Ui {
     }
 
     /**
-     * Close all scanners if available
+     * Close all scanners if available.
      */
     public void closeScanner() {
         userInput.close();
     }
 
     /**
-     * Greet the user
+     * Greet the user.
      */
     public void greet() {
         String logo = " ____        _        \n"
@@ -54,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Print user command
+     * Print user command.
      *
      * @param command command to be printed
      */
@@ -74,7 +77,7 @@ public class Ui {
     }
 
     /**
-     * List out the listing to user
+     * List out the listing to user.
      *
      * @param tasks List of tasks in records
      */
@@ -90,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * List out the tasks that found with the keyword to user
+     * List out the tasks that found with the keyword to user.
      *
      * @param tasks List of tasks with keyword
      */
@@ -106,17 +109,17 @@ public class Ui {
     }
 
     /**
-     * Reply the user that respective task has been added to the list
+     * Reply the user that respective task has been added to the list.
      *
-     * @param AmtOfTask amount of tasks in records
+     * @param amtOfTask amount of tasks in records
      * @param task      task that being added
      */
-    public void replyAdded(int AmtOfTask, Task task) {
+    public void replyAdded(int amtOfTask, Task task) {
         message.clearMessage();
         message.addSentence("Got it. I've added this task:", 1);
         message.addSentence(task.toString(), 3);
-        if (AmtOfTask > 1) {
-            message.addSentence("Now you have " + AmtOfTask + " tasks in the list.", 1);
+        if (amtOfTask > 1) {
+            message.addSentence("Now you have " + amtOfTask + " tasks in the list.", 1);
         } else {
             message.addSentence("Now you have 1 task in the list.", 1);
         }
@@ -124,7 +127,7 @@ public class Ui {
     }
 
     /**
-     * Reply to the user that which task are being marked done
+     * Reply to the user that which task are being marked done.
      *
      * @param task task that being marked done
      */
@@ -136,7 +139,7 @@ public class Ui {
     }
 
     /**
-     * Reply the user that the task has deleted
+     * Reply the user that the task has deleted.
      *
      * @param task task that being deleted
      */

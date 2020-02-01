@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * <h1>TaskListTest Class</h1>
- * Test for the TaskList class
+ * Test for the TaskList class.
  *
  * @author Eng Xuan En
  */

@@ -8,28 +8,17 @@
 
      What can I do for you?
     ____________________________________________________________
-todo borrow book
-    ____________________________________________________________
-     Got it. I've added this task:
-       [T][✗] borrow book
-     Now you have 1 task in the list.
-    ____________________________________________________________
-list
-    ____________________________________________________________
-     Here are the tasks in your list:
-     1.[T][✗] borrow book
-    ____________________________________________________________
 deadline return book /by 2019-12-03
     ____________________________________________________________
      Got it. I've added this task:
-       [D][✗] return book (by: Dec 3 2019)
-     Now you have 2 tasks in the list.
+       [D][N] return book (by: Dec 3 2019)
+     Now you have 1 task in the list.
     ____________________________________________________________
 event project meeting /at 2020-03-25 1030
     ____________________________________________________________
      Got it. I've added this task:
-       [E][✗] project meeting (at: Mar 25 2020 1030)
-     Now you have 3 tasks in the list.
+       [E][N] project meeting (at: Mar 25 2020 1030)
+     Now you have 2 tasks in the list.
     ____________________________________________________________
 bye
     ____________________________________________________________

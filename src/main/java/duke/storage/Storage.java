@@ -100,6 +100,8 @@ public class Storage {
                     }
                     listing.add(task);
                     break;
+                default:
+                    throw new DukeException("Data corrupted! I am unable to determine which task it belongs to.");
                 }
             }
         } catch (NullPointerException e) {
@@ -109,7 +111,7 @@ public class Storage {
     }
 
     /**
-     * Close the scanner
+     * Close the scanner.
      */
     public void closeScanner() {
         taskScanner.close();
@@ -134,7 +136,7 @@ public class Storage {
     }
 
     /**
-     * Clear all contents inside the file at the path
+     * Clear all contents inside the file at the path.
      *
      * @param path file located at
      */
@@ -192,6 +194,8 @@ public class Storage {
             writeToHardDisk(taskType + " | " + status + " | " + taskDescription + " | " + period + "\n",
                     absolutePath, true);
             break;
+        default:
+            throw new DukeException("Warning! I do not know what format to save the task as!");
         }
     }
 

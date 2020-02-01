@@ -7,6 +7,7 @@ C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\DeleteCommand.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\DoneCommand.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\EventCommand.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\ExitCommand.java
+C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\FindCommand.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\ListCommand.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\command\TodoCommand.java
 C:\Users\engxu\IdeaProjects\duke\src\main\java\duke\parser\Parser.java

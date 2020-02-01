@@ -18,7 +18,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return the task details in [T][tick or cross] {description of the task} format.
+     * Return the task details in [T][Y or N] {description of the task} format.
      *
      * @return task details in String format
      */

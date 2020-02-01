@@ -11,7 +11,7 @@ public class ReplyFormat {
     protected int numOfIndentInFront;
 
     /**
-     * Initialise the reply message format
+     * Initialise the reply message format.
      */
     public ReplyFormat() {
         message = "";
@@ -20,7 +20,7 @@ public class ReplyFormat {
     }
 
     /**
-     * Adding one sentence to the reply
+     * Add one sentence to the reply.
      *
      * @param sentence    message required to add
      * @param numOfIndent number of additional indent required to add
@@ -30,7 +30,7 @@ public class ReplyFormat {
     }
 
     /**
-     * Change both outlines at top and bottom
+     * Change both outlines at top and bottom.
      *
      * @param outline the outline where wrap the message.
      */
@@ -39,7 +39,7 @@ public class ReplyFormat {
     }
 
     /**
-     * Adding outline with indentation
+     * Add outline with indentation.
      *
      * @return the outline with indentation
      */
@@ -48,7 +48,7 @@ public class ReplyFormat {
     }
 
     /**
-     * Adding paragraph to the reply
+     * Add paragraph to the reply.
      *
      * @param paragraph   paragraph to add
      * @param numOfIndent number of additional spaces required in front
@@ -61,14 +61,14 @@ public class ReplyFormat {
     }
 
     /**
-     * Adding empty line in between
+     * Add empty new line.
      */
     public void addEmptyLine() {
         addSentence("", 0);
     }
 
     /**
-     * Adding list of data to the reply
+     * Add list of data to the reply.
      *
      * @param listing listing to display
      */
@@ -81,7 +81,7 @@ public class ReplyFormat {
     }
 
     /**
-     * Add additional indent required
+     * Add additional indent required.
      *
      * @param numOfIndent number of indent required to add
      * @return the amount of spaces
@@ -95,7 +95,7 @@ public class ReplyFormat {
     }
 
     /**
-     * Set the amount of indentation in front of message
+     * Set the amount of indentation in front of message.
      *
      * @param numOfIndent number of indentation required
      */
@@ -108,14 +108,14 @@ public class ReplyFormat {
     }
 
     /**
-     * Clear message
+     * Clear message.
      */
     public void clearMessage() {
         message = "";
     }
 
     /**
-     * Reply message
+     * Reply message in String format.
      *
      * @return return outline with message
      */

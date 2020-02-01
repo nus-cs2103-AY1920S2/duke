@@ -42,7 +42,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get string in [D][tick or cross] {description of the task} (by: {due date of the task}) format.
+     * Get string in [D][Y or N] {description of the task} (by: {due date of the task}) format.
      *
      * @return String in certain format
      */

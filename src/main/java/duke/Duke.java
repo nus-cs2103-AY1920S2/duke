@@ -55,7 +55,7 @@ public class Duke {
     }
 
     /**
-     * The main programme runs here.
+     * Run main programme here.
      *
      * @param args input from the console
      */

@@ -35,12 +35,12 @@ public class Task {
     }
 
     /**
-     * Get status icon either a tick or cross.
+     * Get status icon either a Y or N.
      *
-     * @return status icon tick if is done, cross if it is not done
+     * @return status icon Y if is done, N if it is not done
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? "Y" : "N";
     }
 
     /**

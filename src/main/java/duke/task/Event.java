@@ -53,7 +53,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get string in [E][tick or cross] {description of the task} (at: {duration of the task}) format.
+     * Get string in [E][Y or N] {description of the task} (at: {duration of the task}) format.
      *
      * @return String in certain format
      */

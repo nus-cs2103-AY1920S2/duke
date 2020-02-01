@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * <h1>CommandTest Class</h1>
- * Test for the command class
+ * Test for the command class.
  *
  * @author Eng Xuan En
  */
@@ -33,7 +33,7 @@ public class CommandTest {
      * Test if the exit command will return true when call isExitLoop method.
      */
     @Test
-    public void ExitCommand_shouldExit() {
+    public void exitCommand_shouldExit() {
         Command command = new ExitCommand(CommandType.BYE);
         Assertions.assertTrue(command.isExitLoop());
     }
