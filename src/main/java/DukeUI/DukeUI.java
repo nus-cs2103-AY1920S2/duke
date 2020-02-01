@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * Represents a minial UI program that is used to interact with the user
+ * Represents a minial UI program that is used to interact with the user.
  * Prints messages as well as obtains input when necessary
  */
 
@@ -40,7 +40,7 @@ public class DukeUI {
     }
 
     /**
-     * Prints the welcome message for Duke
+     * Prints the welcome message for Duke.
      */
     public void showWelcomeMessage() {
         printLine();
@@ -51,7 +51,7 @@ public class DukeUI {
     }
 
     /**
-     * Returns the user's written command as a string
+     * Returns the user's written command as a string.
      *
      * @return Input String
      */
@@ -61,7 +61,7 @@ public class DukeUI {
 
 
     /**
-     * Prints out the error message from a DukeException
+     * Prints out the error message from a DukeException.
      *
      * @param e DukeException
      */
