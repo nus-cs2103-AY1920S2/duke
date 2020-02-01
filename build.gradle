@@ -69,7 +69,7 @@ repositories {
 }
 
 application {
-    mainClassName = "duke.Main"
+    mainClassName = "duke.Launcher"
 }
 
 run {
