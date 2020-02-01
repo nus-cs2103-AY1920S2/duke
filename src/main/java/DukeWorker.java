@@ -8,7 +8,7 @@ public class DukeWorker {
     private List<Task> tasks = new ArrayList<>();
 
     public void initializeWorker() {
-        try{
+        try {
             boolean fileExist = Storage.checkFileExistence(Constants.DUKE_FILE_PATH);
             if (!fileExist) {
                 Storage.createStorage();
@@ -31,7 +31,7 @@ public class DukeWorker {
             }
             String list = "1." + tasks.get(0);
             for (int i = 2; i < tasks.size() + 1; i++) {
-                list = list + "\n" + i + "." + tasks.get(i-1);
+                list = list + "\n" + i + "." + tasks.get(i - 1);
             }
             return list;
         } else if (token[0].equals("done")) {
