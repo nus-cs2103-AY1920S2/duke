@@ -1,6 +1,5 @@
 package dude.command;
 
-import dude.component.IStorage;
 import dude.component.IUserInterface;
 import dude.component.TaskList;
 
@@ -20,10 +19,8 @@ public abstract class Command {
      *
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
-     * @param storage the IStorage from which the current session was loaded and to which the session will
-     *                be saved to on an exiting command.
      * @throws CommandExecutionException if command is an impossible task.
      */
-    public abstract void execute(TaskList tasks, IUserInterface ui, IStorage storage)
+    public abstract void execute(TaskList tasks, IUserInterface ui)
             throws CommandExecutionException;
 }

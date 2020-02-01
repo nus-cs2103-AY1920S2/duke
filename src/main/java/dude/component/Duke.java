@@ -18,24 +18,27 @@ public class Duke {
      * TaskList - Is initialized with tasks from saved session from storage.
      */
     public Duke(MainWindow mainWindow) {
-        this.ui = new GUI(mainWindow);
+        this.ui = new Gui(mainWindow);
         this.storage = new TextStorage();
         this.tasks = this.storage.restoreSession(this.ui);
     }
 
+    /**
+     * Saves the current TaskList by calling saveSession from the IStorage class used.
+     */
     public void saveState() {
         this.storage.saveSession(ui, tasks);
     }
 
     /**
      * Takes user input and responds to commands appropriately.
-     * Stops when "bye" is given as input.
+     * Closes app when "bye" is given as input.
      */
     public void serve() {
         try {
             String msg = ui.readCommand();
             Command command = Parser.parse(msg);
-            command.execute(tasks, ui, storage);
+            command.execute(tasks, ui);
             if (command.isExit()) {
                 Platform.exit();
             }

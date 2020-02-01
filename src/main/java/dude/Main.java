@@ -14,7 +14,6 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
     private Duke duke;
 
     @Override
@@ -27,7 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
 
             // Wire up Duke class (main application logic) and UI components
-            MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
+            MainWindow mainWindow = fxmlLoader.getController();
             this.duke = new Duke(mainWindow);
             mainWindow.setDuke(duke);
 
@@ -38,21 +37,13 @@ public class Main extends Application {
     }
 
     /**
-     * This method is called when the application should stop, and provides a
-     * convenient place to prepare for application exit and destroy resources.
-     *
-     * <p>
-     * The implementation of this method provided by the Application class does nothing.
-     * </p>
-     *
-     * <p>
-     * NOTE: This method is called on the JavaFX Application Thread.
-     * </p>
-     *
-     * @throws Exception if something goes wrong
+     * Saves state (calls duke#saveState which calls IStorage#saveSession) before quitting.
+     * However, since UI could already be closed when this method is called, unlikely to report errors
+     * while saving state.
+     * Does not throw exception.
      */
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         this.duke.saveState();
     }
 }

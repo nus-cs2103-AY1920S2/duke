@@ -1,13 +1,28 @@
 package dude.component;
 
-public class GUI implements IUserInterface {
-
+/**
+ * A class to handle dependencies/ownership between Duke which contains our application logic,
+ * and the JavaFX Application/actual GUI components.
+ * Duke has ownership of the Gui class, which holds reference to MainWindow which exposes methods to read input
+ * and display output but does not own it (MainWindow is owned by JavaFX Application).
+ * Duke and MainWindow thus contain references to each other without owning each other.
+ */
+public class Gui implements IUserInterface {
     private MainWindow mainWindow;
     private StringBuilder responseBuilder;
 
-    public GUI(MainWindow mainWindow) {
+    /**
+     * Initializes the Gui component of the Duke class that handles communication with the actual GUI from
+     * within the Duke class.
+     * Greets the user.
+     *
+     * @param mainWindow a reference to the MainWindow controller class so Gui can perform input/output by calling
+     *                   the public methods exposed by the controller class.
+     */
+    public Gui(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         this.responseBuilder = new StringBuilder();
+        respond("Wassup dude!");
     }
 
     /**
@@ -36,41 +51,6 @@ public class GUI implements IUserInterface {
     }
 
     /**
-     * Displays variable number of sentences to the user.
-     * Exposes a more pleasant API than respond(Runnable r) when full flexibility is not needed.
-     *
-     * @param responses a variable number of sentences for Dude to tell the user.
-     */
-    @Override
-    public void respond(String... responses) {
-        respond(() -> {
-            for (String response : responses) {
-                speak(response);
-            }
-        });
-    }
-
-    /**
-     * Displays an error message to the user when an incorrect command is given.
-     * Tells the user what was wrong and gives the proper usage of the command.
-     *
-     * @param errorMsg A message describing the problem with the user's input.
-     * @param usageMsgs variable number of strings describing the correct format of input.
-     */
-    @Override
-    public void respondParsingError(String errorMsg, String... usageMsgs) {
-        respond(() -> {
-            speak(errorMsg);
-            speak("Just tell me what you want to do like this:" + System.lineSeparator());
-            for (String usageMsg : usageMsgs) {
-                speak("  " + usageMsg);
-            }
-            speak("");
-            speak("Then we're chill");
-        });
-    }
-
-    /**
      * Speaks a single sentence to the user.
      * The only primitive exposed to construct a response to pass to respond(Runnable r).
      * In GUI, speak adds the sentence to a buffer which is cleared when one of the respond methods are called
@@ -81,12 +61,5 @@ public class GUI implements IUserInterface {
     @Override
     public void speak(String str) {
         responseBuilder.append(str).append('\n');
-    }
-
-    /**
-     * No Op. GUI holds on to no extra resources.
-     */
-    @Override
-    public void close() {
     }
 }
