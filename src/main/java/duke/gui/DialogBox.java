@@ -30,6 +30,8 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         // Add label and image
         this.getChildren().addAll(text, displayPicture);
+        // Set spacing
+        this.setSpacing(10.0);
     }
 
     /**
