@@ -25,18 +25,26 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final String PATH = "./dukeStore.txt";
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
+    private final Parser parser;
 
     /**
-     * Initialises Duke for GUI.
+     * Initialises Duke.
      */
-    public Duke() {
+    public Duke(boolean withGui) {
         storage = new Storage(PATH);
-        ui = new Ui(true);
-        ui.showWelcomeGui();
-        ui.getDukeVoice().playVoice();
+        ui = new Ui(withGui);
+        parser = new Parser();
+
+        if (withGui) {
+            ui.showWelcomeGui();
+            ui.getDukeVoice().playVoice();
+        } else {
+            ui.showWelcome();
+        }
+
         try {
             ArrayList<Task> taskArrayList = storage.loadFromFile();
             tasks = new TaskList(taskArrayList);
@@ -53,7 +61,7 @@ public class Duke {
     }
 
     /**
-     * Gets the current UI text output.
+     * Gets the current UI for text output.
      */
     public Ui getUi() {
         return ui;
@@ -64,7 +72,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         ui.resetGuiOutput();
-        Command c = Parser.parse(input);
+        Command c = parser.parse(input);
         c.execute(tasks, ui, storage);
 
         if (c.isExit()) {
@@ -88,33 +96,15 @@ public class Duke {
      * Main method for command prompt.
      */
     public static void main(String[] args) {
-        run();
+        Duke duke = new Duke(false);
+        duke.run();
     }
 
-    private static void run() {
-        Storage storage = new Storage(PATH);
-        Ui ui = new Ui();
-        ui.showWelcome();
-
-        TaskList tasks;
-        try {
-            ArrayList<Task> taskArrayList = storage.loadFromFile();
-            tasks = new TaskList(taskArrayList);
-        } catch (DukeException e) {
-            ui.sayLine(e.getErrorLineName());
-            ArrayList<Task> taskArrayList = new ArrayList<>();
-            tasks = new TaskList(taskArrayList);
-            try {
-                storage.saveToFile(tasks);
-            } catch (DukeException g) {
-                ui.sayLine(g.getErrorLineName());
-            }
-        }
-
+    private void run() {
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
+            Command c = parser.parse(fullCommand);
             c.execute(tasks, ui, storage);
             isExit = c.isExit();
         }

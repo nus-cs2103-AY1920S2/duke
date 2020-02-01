@@ -19,15 +19,15 @@ public enum DukeVoice {
     NO_VOICE();
 
     private static final Random generator = new Random();
-    private final MediaPlayer dukeVoicePlayer;
+    private final Media dukeSound;
 
     DukeVoice() {
-        dukeVoicePlayer = null;
+        dukeSound = null;
     }
 
     DukeVoice(String fileName) {
-        Media sound = new Media(new File("src/main/resources/sound/" + fileName + ".wav").toURI().toString());
-        dukeVoicePlayer = new MediaPlayer(sound);
+        dukeSound = new Media(new File("src/main/resources/sound/" + fileName + ".wav").toURI().toString());
+        // dukeVoicePlayer = new MediaPlayer(sound);
     }
 
     /**
@@ -52,7 +52,7 @@ public enum DukeVoice {
      */
     public void playVoice() {
         if (this != NO_VOICE) {
-            dukeVoicePlayer.play();
+            new MediaPlayer(dukeSound).play();
         }
     }
 }
