@@ -11,6 +11,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Responsible for storing and reading list data into/from disk respectively.
+ *<code>filePath</code> is the location of the file with the list data.
+ */
 public class Storage {
     private String filePath;
 
@@ -18,6 +22,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves list data of Duke application into disk whenever bye command is executed.
+     * @param list The list of tasks inputted by user.
+     */
     public void save(ArrayList<Task> list) {
         try {
             FileOutputStream savedFile = new FileOutputStream(new File(filePath));
@@ -30,6 +38,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Used when starting the Duke Application.
+     * @return List of Tasks stored in disk.
+     * @throws DukeException when filePath is incorrect.
+     */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
@@ -51,7 +64,7 @@ public class Storage {
                 readFile.close();
             }
         } catch (ClassNotFoundException e) {
-            System.out.println("Class Name is not matching input!");
+            throw new DukeException("Class Name is not matching input!");
         } catch (IOException e) {
             throw new DukeException("There is no save file to load.");
         }

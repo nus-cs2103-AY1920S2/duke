@@ -2,6 +2,9 @@ package duke.task;
 
 import java.io.Serializable;
 
+/**
+ * Represents the parent class of various types of features the user inputs.
+ */
 public class Task implements Serializable {
     protected String identifier;
     protected boolean isCompleted;
