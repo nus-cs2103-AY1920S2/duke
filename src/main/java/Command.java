@@ -2,10 +2,24 @@ public class Command {
 
     private String[] command;
 
+
+    /**
+     * Creates a Command object
+     *
+     * @param input A string representation of user's command.
+     */
     public Command(String input) {
         this.command = input.split("\\s", 2);
     }
 
+
+    /**
+     * Executes the user's command accordingly.
+     *
+     * @param tasks TaskList object containing list of tasks.
+     * @param ui Ui object that aid interaction with the user.
+     * @param storage Storage object that stores a file with tasks.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (command[0].toLowerCase()) {
         case "bye":
@@ -101,6 +115,11 @@ public class Command {
         }
     }
 
+    /**
+     * Gets a boolean (true/false) depending on user's command.
+     *
+     * @return true if user's command is "bye".
+     */
     public boolean isExit() {
         boolean flag = false;
         if (command.equals("bye")) {

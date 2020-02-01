@@ -2,12 +2,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Parser class that handles processing of the user's date/time input.
+ */
 public class Parser {
 
+    /**
+     * Gets a Command object.
+     *
+     * @param command A string representation of the user's command.
+     * @return A new Command object.
+     */
     public static Command parse(String command) {
         return new Command(command);
     }
 
+    /**
+     * Returns the string representation of a date by converting from dd/mm/yyyy hhmm to
+     * English sentences that is easier to read.
+     *
+     * @param time A string representation of date in form of dd/mm/yyyy hhmm.
+     * @return A string representation of date in English sentences.
+     */
     public static String convertDateAndTime(String time) { // in the form of dd/mm/yyyy hhmm
         String[] array = time.split(" ");
         String day = "";
