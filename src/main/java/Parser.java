@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * A Parser object deals with making sense of the user commands and can add to or delete tasks from the
+ * <code>task list</code> it stores.
+ */
 public class Parser {
     ArrayList<Task> taskList;
     Ui ui;
@@ -14,6 +18,12 @@ public class Parser {
         this.ui = new Ui();
     }
 
+    /**
+     * Makes sense of the user commands.
+     *
+     * @param command user commands inputted by user through standard output.
+     * @throws DukeException if information of a task provided is insufficient or if command is an unknown command.
+     */
     public void parse(String command) throws DukeException{
         if (command.contains("done")) {
             String[] strArr = command.split(" ");

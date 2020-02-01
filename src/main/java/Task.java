@@ -1,5 +1,8 @@
 import static java.lang.Boolean.TRUE;
 
+/**
+ * A Task object can be a Todo task, a Deadline task or a Event task.
+ */
 public class Task {
     protected String command;
     protected boolean done;
@@ -8,18 +11,36 @@ public class Task {
         this.command = command;
     }
 
+    /**
+     * Marks a task as done.
+     */
     protected void setDone() {
         done = TRUE;
     }
 
+    /**
+     * Returns whether a task has been marked as done.
+     *
+     * @return whether a task is marked as done.
+     */
     protected boolean getDone() {
         return done;
     }
 
+    /**
+     * Returns the symbol to show whether a task has been marked as done.
+     *
+     * @return ✓ if task is done, or ✗ if task is not done.
+     */
     protected String getDoneSymbol() {
         return done ? "✓" : "✗" ;
     }
 
+    /**
+     * Returns the description of a task.
+     *
+     * @return description of a task.
+     */
     protected String getCommand() {
         return command;
     }

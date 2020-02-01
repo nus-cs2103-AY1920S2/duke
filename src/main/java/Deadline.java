@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * Represents a task to be completed.
+ * A <code>Deadline</code> object contains description of a task e.g., <code>Assignment 1</code>, the deadline date
+ * e.g., <code>2020-02-01</code> and the deadline time e.g., <code>1000</code> of the task.
+ */
 public class Deadline extends Task {
     protected String deadlineDate;
     protected String deadlineTime;
@@ -24,14 +29,31 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the deadline date and time of a Deadline task.
+     *
+     * @return deadline date and the deadline time.
+     */
     public String assembleDeadlineDateAndTime() {
         return deadlineDate + " " + deadlineTime;
     }
 
+    /**
+     * Returns whether a task is marked done in int form instead of symbol form, to be displayed in the file
+     * saved in hard disk.
+     *
+     * @return 1 if task is marked done, or 0 if the task is marked undone.
+     */
     public int getDoneInt() {
         return getDone() ? 1 : 0;
     }
 
+    /**
+     * Returns information about a task, stating that it is D(Deadline) task, whether it is marked done, the
+     * description of the task and the deadline date and time, for the updating of the file saved in hard disk.
+     *
+     * @return information about the task.
+     */
     @Override
     public String updateFile() {
         return "D - " + getDoneInt() + " - " + getCommand() + " - " + assembleDeadlineDateAndTime();

@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * A Storage object contains a <code>filePath</code>, the location that can be used to find the file storing the task
+ * list or create a new file at.
+ */
 public class Storage {
     File file;
     ArrayList<Task> taskList;
@@ -14,6 +18,13 @@ public class Storage {
         return file;
     }
 
+    /**
+     * Returns task list stored in file on hard disk or throw an exception and create a new file to store task list.
+     *
+     * @return task list saved in hard disk.
+     * @throws DukeException if file is not found and cannot be loaded.
+     * @throws IOException if there is error reading data from a file.
+     */
     public ArrayList<Task> load() throws DukeException, IOException {
         if (file.exists()) {
             BufferedReader br = new BufferedReader(new FileReader(file));

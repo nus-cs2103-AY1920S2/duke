@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -13,6 +12,11 @@ public class TaskList {
         System.out.println("Task list created!");
     }
 
+    /**
+     * Returns the task list.
+     *
+     * @return task list.
+     */
     public ArrayList<Task> getList() {
         return taskList;
     }

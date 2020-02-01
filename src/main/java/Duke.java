@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * The Duke program implements an application that is able to keep track of a task list. A user can populate the list
+ * with tasks inputted through the standard output, mainly Todo tasks, Deadline tasks and Event tasks, or delete tasks
+ * from the list.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
