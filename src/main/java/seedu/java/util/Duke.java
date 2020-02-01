@@ -6,8 +6,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
     public static String CLOSE = "0";
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -34,7 +34,6 @@ public class Duke {
             }
         }
     }
-
 
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
