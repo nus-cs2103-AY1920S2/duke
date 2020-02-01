@@ -1,15 +1,33 @@
 package duke.main;
 
-import duke.command.*;
+import duke.command.ClearCommand;
+import duke.command.TodoCommand;
+import duke.command.DeadlineCommand;
+import duke.command.ByeCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.CalendarCommand;
+import duke.command.DoneCommand;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 
+/**
+ * Class that parses user inputs into executed commands
+ */
 public class Parser {
+    /**
+     * Parses user input to run respective commands
+     * @param input String user input
+     * @param taskList TaskList object containing list of Tasks
+     * @return boolean true if ByeCommand is invoked by user
+     */
     static boolean parseCommand(String input, TaskList taskList) throws UnknownCommandException {
         try {
             String param;
             String[] tokens = input.split(" ", 2);
-            Duke.Command command = Duke.Command.valueOf(tokens[0].toUpperCase());
+            Command.CommandType command = Command.CommandType.valueOf(tokens[0].toUpperCase());
             if (tokens.length > 1) {
                 param = tokens[1];
             } else {
