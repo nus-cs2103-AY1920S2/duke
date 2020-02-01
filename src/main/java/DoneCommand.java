@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     /**
      * Creates a new DoneCommand.
      *
-     * @param index index position of task that user wants to mark as completed
+     * @param index index position of task that user wants to mark as completed.
      */
     public DoneCommand(int index) {
         this.index = index;
@@ -26,10 +26,10 @@ public class DoneCommand extends Command {
     /**
      * Executes the done command. Marks specified task from the task list as completed.
      *
-     * @param tasks list of tasks
-     * @param ui user interface
-     * @param storage makeshift database for tasks
-     * @throws DukeException if user input does not follow input format
+     * @param tasks list of tasks.
+     * @param ui user interface.
+     * @param storage makeshift database for tasks.
+     * @throws DukeException if user input does not follow input format.
      * @throws IOException named file exists but is a directory rather than a regular file,
      * does not exist but cannot be created, or cannot be open for any other reason.
      */

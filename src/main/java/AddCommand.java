@@ -1,10 +1,10 @@
 package duke.commands;
 
+import duke.commands.Command;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.commands.Command;
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
@@ -46,11 +46,11 @@ public class AddCommand extends Command {
             t = new Todo(description);
             tasks.add(t);
         } else if (this.type.equals("deadline")) {
-            checkDate("deadline");
+            checkDateException("deadline");
             t = new Deadline(description);
             tasks.add(t);
         } else if (this.type.equals("event")) {
-            checkDate("event");
+            checkDateException("event");
             t = new Event(description);
             tasks.add(t);
         }
@@ -76,18 +76,18 @@ public class AddCommand extends Command {
      *                        presence of date in task.
      * @throws DukeException if user input does not follow input format.
      */
-    public void checkDate(String deadlineOrEvent) throws DukeException {
+    public void checkDateException(String deadlineOrEvent) throws DukeException {
         if (deadlineOrEvent.equals("deadline")) {
             String[] arr = description.split(" /by ");
             // error: task is missing deadline
             if (arr.length <= 1) {
-                throw new DukeException("     ☹ OOPS!!! Deadline of a task cannot be empty.\n");
+                throw new DukeException("Deadline of a task cannot be empty.");
             }
         } else if (deadlineOrEvent.equals("event")) {
             String[] arr = description.split(" /at ");
             // error: event is missing time
             if (arr.length <= 1) {
-                throw new DukeException("     ☹ OOPS!!! Time of an event cannot be empty.\n");
+                throw new DukeException("Time of an event cannot be empty.");
             }
         }
     }

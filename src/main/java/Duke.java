@@ -7,7 +7,6 @@ import duke.Parser;
 import duke.commands.Command;
 import duke.exception.DukeException;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
@@ -24,7 +23,7 @@ public class Duke {
     /**
      * Creates a Duke chatbot that helps a person to keep track of various things.
      *
-     * @param filePath Path to file that stores a list of user's tasks.
+     * @param filePath path to file that stores a list of user's tasks.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -34,11 +33,6 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-
-//        catch (DukeException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
     }
 
     /**
