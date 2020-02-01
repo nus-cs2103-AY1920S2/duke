@@ -5,7 +5,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
             if (inputParsed.length <= 1) {
@@ -13,12 +13,12 @@ public class DoneCommand extends Command {
             }
             Task task = list.getTask(Integer.parseInt(inputParsed[1]));
             if (task.getDone()) {
-                ui.prettyPrinting("Task already set done!");
+                return ui.prettyPrinting("Task already set done!");
             } else {
                 task.setDone();
-                ui.prettyPrinting("Task set to done!");
+                storage.writeToFile(list.getTaskList());
+                return ui.prettyPrinting("Task set to done!");
             }
-            storage.writeToFile(list.getTaskList());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I believe you have an incorrect task number, try again!");
         }

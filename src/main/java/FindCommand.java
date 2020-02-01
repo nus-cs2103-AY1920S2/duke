@@ -22,7 +22,7 @@ public class FindCommand extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public void execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
         String[] inputParsed = this.getInputCommand().trim().split(" ");
         if (inputParsed.length == 1) {
             throw new DukeException("Keyword cannot be empty!");
@@ -44,6 +44,6 @@ public class FindCommand extends Command {
                 count++;
             }
         }
-        ui.prettyPrinting(result);
+        return ui.prettyPrinting(result);
     }
 }

@@ -20,7 +20,7 @@ public class AddToDoCommand  extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public void execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
         String[] inputParsed = (this.getInputCommand()).trim().split(" ");
         if (inputParsed.length == 1) {
             throw new DukeException("ToDo description cannot be empty!");
@@ -34,7 +34,7 @@ public class AddToDoCommand  extends Command {
         }
         ToDo newToDo = new ToDo(taskName.toString());
         list.addTask(newToDo); //add to task list
-        ui.prettyPrinting(taskName.toString() + " added!");
         storage.writeToFile(list.getTaskList()); //save to file
+        return ui.prettyPrinting(taskName.toString() + " added!");
     }
 }

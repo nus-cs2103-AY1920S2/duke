@@ -15,7 +15,15 @@ public class ChatBot {
     private Storage storage = new Storage();
     private Parser parser = new Parser();
 
+
+    public ChatBot() {
+
+    }
+
     // constructor for chat-bot to initialise the file that was saved, if does not exist, then create new one
+    public ChatBot(TaskList list) {
+        this.taskLists = list;
+    }
 
     /**
      * Function to run chat-bot and terminate when needed.
@@ -24,8 +32,7 @@ public class ChatBot {
     public void runChatBot(Scanner sc) {
         String inputCommand;
         this.ui.greetUser();
-        ArrayList<Task> tasks = this.storage.getTaskFromStorage();
-        this.taskLists = new TaskList(tasks);
+        this.updateTaskList();
         while (sc.hasNextLine()) {
             inputCommand = sc.nextLine();
             Command command = parser.respondToUser(inputCommand, this.ui, this.taskLists);
@@ -40,4 +47,24 @@ public class ChatBot {
         }
     }
 
+    public void updateTaskList() {
+        ArrayList<Task> tasks = this.storage.getTaskFromStorage();
+        this.taskLists = new TaskList(tasks);
+    }
+
+    public Parser getParser() {
+        return this.parser;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
+
+    public UI getUI() {
+        return this.ui;
+    }
+
+    public TaskList getTaskLists() {
+        return this.taskLists;
+    }
 }

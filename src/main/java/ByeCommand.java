@@ -20,7 +20,7 @@ public class ByeCommand extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public void execute(UI ui, TaskList list, Storage storage) throws DukeException {
-        ui.prettyPrinting("Bye. Hope to see you again soon!");
+    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+        return ui.prettyPrinting("Bye. Hope to see you again soon!");
     }
 }

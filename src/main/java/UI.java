@@ -32,10 +32,15 @@ public class UI {
      * Function to print any message using some decorations.
      * @param message message to be printed.
      */
-    public void prettyPrinting(String message) {
+    public String prettyPrinting(String message) {
         System.out.println(this.decoration);
         System.out.println("\t" + message);
         System.out.println(this.decoration);
+        return message;
+    }
+
+    public String getDukeLogo() {
+        return this.greetings;
     }
 
 }

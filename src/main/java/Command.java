@@ -30,7 +30,7 @@ public abstract class Command {
      * @param storage storage that writes to file.
      * @throws DukeException exception.
      */
-    public abstract void execute(UI ui, TaskList list, Storage storage) throws DukeException;
+    public abstract String execute(UI ui, TaskList list, Storage storage) throws DukeException;
 
     /**
      * Return whether to exit or not.

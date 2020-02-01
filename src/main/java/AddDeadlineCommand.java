@@ -8,7 +8,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
             if (!this.getInputCommand().contains("/by")) {
@@ -24,8 +24,8 @@ public class AddDeadlineCommand extends Command {
             Deadline.validDate(dateTime.toString());
             Deadline deadline = new Deadline(taskName.toString(), dateTime.toString());
             list.addTask(deadline);
-            ui.prettyPrinting(taskName.toString() + " added!");
             storage.writeToFile(list.getTaskList());
+            return ui.prettyPrinting(taskName.toString() + " added!");
         } catch (DukeException e) {
             throw new DukeException("Deadline description cannot be empty or must conatins [/by]!");
         } catch (Exception e) {
