@@ -14,6 +14,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class Storage {
+	private String pathToData;
+
+	public Storage(String pathToData) {
+		this.pathToData = pathToData;
+	}
+
 	public JSONObject encodeContainers(List<Task> containers) {
 		JSONObject result = new JSONObject();
 		JSONArray parsedContainers = new JSONArray();
@@ -24,7 +30,7 @@ public class Storage {
 		return result;
 	}
 
-	public List<Task> getData(String pathToData) {
+	public List<Task> getData() {
 		try {
 			File file = new File(pathToData);
 			Scanner scan = new Scanner(file);
@@ -68,7 +74,7 @@ public class Storage {
 		}
 	}
 
-	public void saveData(TaskList storage, String pathToData) {
+	public void saveData(TaskList storage) {
 		JSONObject data = this.encodeContainers(storage.getList());
 		String str = data.toString();
 		try {

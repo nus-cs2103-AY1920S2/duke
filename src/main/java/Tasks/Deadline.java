@@ -14,7 +14,7 @@ import java.util.Locale;
 public class Deadline extends Task {
 	private LocalDate date;
 	private String signature = "deadline";
-	private final String separator = "/by";
+	public static final String separator = "/by";
 
 	private void parseTime() throws DukeParseException {
 		try {

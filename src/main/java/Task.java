@@ -13,7 +13,7 @@ import duke.dukeException.DukeParseException;
  */
 public abstract class Task {
 	protected String commandText;
-	protected String description;
+	public String description;
 	boolean isDone = false;
 	protected List<String> remainingTokens = new ArrayList<>();
 
@@ -33,12 +33,14 @@ public abstract class Task {
 				okay = true;
 				break;
 			}
-			builder.append(tokens[start]).append(" ");
+			if (start != 1) {
+				builder.append(" ");
+			}
+			builder.append(tokens[start]);
 		}
 		if (!okay) {
 			this.description = builder.toString();
 		}
-
 		remainingTokens = new ArrayList<String>();
 		for (start = start + 1; start < tokens.length; start++) {
 			remainingTokens.add(tokens[start]);
@@ -60,29 +62,6 @@ public abstract class Task {
 		} catch (Exception e) {
 			throw new DukeParseException("Fail to parse json to a task at task class");
 		}
-	}
-
-	/**
-	 * Get task type from a string command. 
-	 * @param string command.
-	 * @return a task type.
-	 */
-	public static TaskType getType(String commandText) {
-		String[] tokens = commandText.split(" ");
-
-		if (tokens.length >= 2 && tokens[0].equals("todo")) {
-			return TaskType.TODO;
-		}
-
-		if (tokens.length > 2 && tokens[0].equals("deadline")) {
-			return TaskType.DEADLINE;
-		}
-
-		if (tokens.length > 2 && tokens[0].equals("event")) {
-			return TaskType.EVENT;
-		}
-
-		return TaskType.UNDEFINED;
 	}
 
 	public String getStatusIcon() {
