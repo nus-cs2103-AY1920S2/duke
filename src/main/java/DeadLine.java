@@ -15,4 +15,8 @@ public class DeadLine extends Task {
         return String.format("[D]%s (by: %s)", super.toString(), this.dateTime.format(DateTimeFormatter.ofPattern("" +
                 "MMM d yyyy, h:mm a")));
     }
+    public String toFileString() {
+        return "D " + super.toFileString() + " | " + this.dateTime.format(DateTimeFormatter.ofPattern("" +
+                "MMM d yyyy, h:mm a");
+    }
 }

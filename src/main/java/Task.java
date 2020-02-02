@@ -19,4 +19,9 @@ public class Task {
         String icon = (isDone ? "\u2713" : "\u2718");
         return "["+ icon + "]" + " " + this.description;
     }
+
+    public String toFileString() {
+        int status = (isDone? 1 : 0);
+        return " | " + status + " | " + this.description;
+    }
 }
