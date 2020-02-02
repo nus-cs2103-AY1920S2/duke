@@ -1,7 +1,13 @@
 package duke.main;
 
-import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.CalendarCommand;
 import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.MissingDetailsException;
 import duke.exception.UnknownCommandException;
@@ -39,31 +45,31 @@ public class Parser {
 
             switch (commandType) {
             case BYE:
-                return Command.byeCommand();
+                return ByeCommand.run();
 
             case CALENDAR:
-                return Command.calendarCommand(taskList, commandSuffix);
+                return CalendarCommand.run(taskList, commandSuffix);
 
             case DEADLINE:
-                return Command.deadlineCommand(taskList, commandSuffix);
+                return DeadlineCommand.run(taskList, commandSuffix);
 
             case DELETE:
-                return taskList.deleteTask(commandSuffix);
+                return taskList.delete(commandSuffix);
 
             case DONE:
-                return taskList.doneTask(commandSuffix);
+                return taskList.done(commandSuffix);
 
             case EVENT:
-                return Command.eventCommand(taskList, commandSuffix);
+                return EventCommand.run(taskList, commandSuffix);
 
             case FIND:
-                return Command.findCommand(taskList, commandSuffix.split(" "));
+                return FindCommand.run(taskList, commandSuffix.split(" "));
 
             case LIST:
-                return Command.listCommand(taskList);
+                return ListCommand.run(taskList);
 
             case TODO:
-                return Command.todoCommand(taskList, commandSuffix);
+                return TodoCommand.run(taskList, commandSuffix);
 
             default:
                 return new UnknownCommandException().toString();

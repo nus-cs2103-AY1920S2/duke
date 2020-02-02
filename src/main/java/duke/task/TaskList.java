@@ -25,7 +25,7 @@ public class TaskList implements Serializable {
      * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownTaskException when an unknown/unformatted task number is passed in
      */
-    public String deleteTask(String commandSuffix) throws UnknownTaskException {
+    public String delete(String commandSuffix) throws UnknownTaskException {
         try {
             int deleteTaskNo = Integer.parseInt(commandSuffix) - 1;
             Task deletedShadowTask = taskList.get(deleteTaskNo);
@@ -48,7 +48,7 @@ public class TaskList implements Serializable {
      * @param commandSuffix is the additional String that accompanies two-step commands
      * @throws UnknownTaskException when an unknown/unformatted task number is passed in
      */
-    public String doneTask(String commandSuffix) throws UnknownTaskException {
+    public String done(String commandSuffix) throws UnknownTaskException {
         try {
             int doneTaskNo = Integer.parseInt(commandSuffix) - 1;
             taskList.get(doneTaskNo).taskCompleted = true;

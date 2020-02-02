@@ -47,7 +47,7 @@ public class DialogBox extends HBox {
      * getDukeDialog Method which displays both Duke's output text and profile picture (image).
      *
      * @param text of the output that Duke generates
-     * @param img of Duke's profile picture (image)
+     * @param img  of Duke's profile picture (image)
      * @return the actually display of Duke's part of the UI but flipped
      */
     public static DialogBox getDukeDialog(String text, Image img) {
