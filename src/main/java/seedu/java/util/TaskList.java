@@ -10,7 +10,7 @@ public class TaskList {
         this.taskArr = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> taskArr){
+    public TaskList(ArrayList<Task> taskArr) {
         this.taskArr = taskArr;
     }
 
@@ -42,11 +42,20 @@ public class TaskList {
         return "Deleting this task. now you have less things to do :)" + "\n" + totalTask();
     }
 
-    private String doneTask(int index){
+    /**
+     * Completes a task and returns a string to be printed by the UI.
+     * @param index - the task that you want printed
+     * @return String to print
+     */
+    private String doneTask(int index) {
         taskArr.set(index - 1, taskArr.get(index - 1).completeTask());
         return "Complete task! :)" + "\n" + totalTask();
     }
 
+    /**
+     * Returns a String of list of Task.
+     * @return String of list
+     */
     public String listToPrint() {
         int i = 1;
         String toPrint = "";
@@ -56,28 +65,33 @@ public class TaskList {
         return toPrint;
     }
 
+    /**
+     * Reads an input from UI, performs an operation, and returns a string to be printed.
+     * @param input from user
+     * @return String to print for confirmation
+     */
     public String read(String input) {
         try {
             Command cmd = Parser.readCommand(input);
             switch (cmd) {
-                case TODO:
-                    return addTodo(Parser.readTask(input));
-                case DEADLINE:
-                    return addDead(Parser.readTask(input), Parser.readTiming(input));
-                case EVENT:
-                    return addEvent(Parser.readTask(input), Parser.readTiming(input));
-                case DONE:
-                    return doneTask(Parser.readNum(input));
-                case DELETE:
-                    return deleteTask(Parser.readNum(input));
-                case LIST:
-                    return listToPrint();
-                case BYE:
-                    return "0";
-                default:
-                    return "How did you end up here?";
+            case TODO:
+                return addTodo(Parser.readTask(input));
+            case DEADLINE:
+                return addDead(Parser.readTask(input), Parser.readTiming(input));
+            case EVENT:
+                return addEvent(Parser.readTask(input), Parser.readTiming(input));
+            case DONE:
+                return doneTask(Parser.readNum(input));
+            case DELETE:
+                return deleteTask(Parser.readNum(input));
+            case LIST:
+                return listToPrint();
+            case BYE:
+                return "0";
+            default:
+                return "How did you end up here?";
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             return "Cannot Compute :(";
         }
     }

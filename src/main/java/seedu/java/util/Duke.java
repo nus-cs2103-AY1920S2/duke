@@ -8,6 +8,10 @@ public class Duke {
     private Ui ui;
     public static String CLOSE = "0";
 
+    /**
+     * A Duke constructor that loads up a file based on a file path.
+     * @param filePath - a path to take data from, .txt format
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,16 +23,19 @@ public class Duke {
         }
     }
 
-    public void run(){
+    /**
+     * Boots the program, interacts with the user & auto-save to storage.
+     */
+    public void run() {
         ui.intro();
         ui.output(tasks.listToPrint());
         while (true) {
             String userInput = ui.input();
             String dukeReply = tasks.read(userInput);
-            if(dukeReply.equals(CLOSE)){
+            if (dukeReply.equals(CLOSE)) {
                 ui.output("Bye. See you soon! :)");
                 break;
-            }else{
+            } else {
                 ui.output(dukeReply);
                 storage.save(tasks.getTaskArr());
             }

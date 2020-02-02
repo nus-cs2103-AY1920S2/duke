@@ -1,23 +1,29 @@
 package seedu.java.util;
 
-public enum Command{
+public enum Command {
     TASK, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE;
-    public static Command convert(String cmd){
-        if(cmd.equals("bye")){
+
+    /**
+     * Converts String input into Command enum.
+     * @param cmd - a piece of text
+     * @return Command
+     */
+    public static Command convert(String cmd) {
+        if (cmd.equals("bye")) {
             return BYE;
-        }else if(cmd.equals("list")){
+        } else if (cmd.equals("list")) {
             return LIST;
-        }else if(cmd.equals("done")){
+        } else if (cmd.equals("done")) {
             return DONE;
-        }else if(cmd.equals("todo")||cmd.equals("T")){
+        } else if (cmd.equals("todo") || cmd.equals("T")) {
             return TODO;
-        }else if(cmd.equals("deadline")||cmd.equals("D")){
+        } else if (cmd.equals("deadline") || cmd.equals("D")) {
             return DEADLINE;
-        }else if(cmd.equals("event")||cmd.equals("E")){
+        } else if (cmd.equals("event") || cmd.equals("E")) {
             return EVENT;
-        }else if(cmd.equals("delete")) {
+        } else if (cmd.equals("delete")) {
             return DELETE;
-        }else{
+        } else {
             return TASK;
         }
     }

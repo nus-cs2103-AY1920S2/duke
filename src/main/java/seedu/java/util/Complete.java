@@ -1,18 +1,18 @@
 package seedu.java.util;
 
-public class Complete{
-    private boolean YN;
+public class Complete {
+    private boolean yesOrNo;
 
-    public Complete(boolean YN){
-        this.YN = YN;
+    public Complete(boolean yesOrNo) {
+        this.yesOrNo = yesOrNo;
     }
 
-    public boolean isCompleted(){
-        return YN;
+    public boolean isCompleted() {
+        return yesOrNo;
     }
 
     @Override
-    public String toString(){
-        return YN ? "[Finished!] " : "[Incomplete. Do lahhhhh] ";
+    public String toString() {
+        return yesOrNo ? "[Finished!] " : "[Incomplete] ";
     }
 }
