@@ -13,8 +13,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# VSCode Files
 .classpath
 .project
+.vscode
 
 *.class
 *.txt
