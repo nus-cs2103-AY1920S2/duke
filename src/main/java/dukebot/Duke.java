@@ -92,14 +92,6 @@ public class Duke {
     }
 
     /**
-     * Main method for command prompt.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke(false);
-        duke.run();
-    }
-
-    /**
      * Runs duke without GUI.
      */
     public void run() {
