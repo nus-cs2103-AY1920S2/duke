@@ -5,7 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Deadlines extends Tasks {
+
     private LocalDate date;
+
     Deadlines(Message msg) {
         super(msg);
         super.logo = "[D]";

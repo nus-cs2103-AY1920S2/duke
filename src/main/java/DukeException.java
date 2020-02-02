@@ -3,17 +3,17 @@ package packagedirectory.test;
 import packagedirectory.test.Message;
 
 public class DukeException extends Exception {
-    private String type;
+    private String errorMsg;
 
-    public DukeException(String s) {
-        super(s);
-        type = s;
+    public DukeException(String errorMsg) {
+        super(errorMsg);
+        this.errorMsg = errorMsg;
     }
 
     @Override
     public String toString() {
         return  Message.lines
-                + type
+                + errorMsg
                 + "\n"
                 + Message.lines;
     }
