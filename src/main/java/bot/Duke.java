@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -36,6 +37,12 @@ import java.util.Scanner;
  * primary loop that awaits input from the user
  */
 public class Duke extends Application {
+    private ScrollPane scroll;
+    private VBox dialog;
+    private TextField input;
+    private Button enterButton;
+    private Scene scene;
+
     /**
      * Main program of 4LC3N-BOT
      *
@@ -107,11 +114,50 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+        scroll = new ScrollPane();
+        dialog = new VBox();
+        scroll.setContent(dialog);
+
+        input = new TextField();
+        enterButton = new Button("Enter");
+
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         helloWorld.fontProperty().set(Font.font("Monospaced", 50));
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(helloWorld, scroll, input, enterButton);
+
+        Scene scene = new Scene(mainLayout); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
+
+        stage.setTitle("4LC3N-BOT");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+        scroll.setPrefSize(385, 535);
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scroll.setVvalue(1.0);
+        scroll.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialog.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        input.setPrefWidth(325.0);
+
+        enterButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scroll, 1.0);
+
+        AnchorPane.setBottomAnchor(enterButton, 1.0);
+        AnchorPane.setRightAnchor(enterButton, 1.0);
+
+        AnchorPane.setLeftAnchor(input, 1.0);
+        AnchorPane.setBottomAnchor(input, 1.0);
     }
 }
