@@ -41,7 +41,7 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println("\nYahallo! Duke's name is \n" + LOGO);
-        dukeSays("Master! Duke's so glad Master used Duke!");
+        dukeSays("Duke's so glad Master used Duke!");
         dukeSays("What will Master do to Duke today?");
     }
 
@@ -51,7 +51,7 @@ public class Ui {
     public void showWelcomeGui() {
         dukeVoice = DukeVoice.HELLO;
         dukeSays("Yahallo! Duke's name is \n" + LOGO);
-        dukeSays("Master! Duke's so glad Master used Duke!");
+        dukeSays("Duke's so glad Master used Duke!");
         dukeSays("What will Master do to Duke today?");
     }
 
@@ -205,10 +205,9 @@ public class Ui {
             break;
         case LOAD_FAIL:
             dukeExpression = DukeExpression.BLUSH;
-            dukeSays("There does not seem to be any existing save file.");
-            dukeSays("Is this the first time Master has ever used Duke?");
+            dukeSays("There seem to be not existing save file.");
+            dukeSays("Is this the first time Master has used Duke?");
             dukeSays("Type 'help' to see the list of commands.");
-            dukeSays("Thanks for using Duke. Duke is really happy.");
             break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment
