@@ -1,28 +1,33 @@
 package duke.main;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
 import duke.commands.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.tasks.Todo;
 import duke.ui.Parser;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Represents a Duke program that stores user-inputted tasks.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /**
      * Constructs a Duke class.
@@ -39,6 +44,37 @@ public class Duke {
             storage.updateStorage(tasks);
         }
     }
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("./data/tasks.txt");
+        try {
+            tasks = storage.buildTaskList();
+        } catch (DukeException e) {
+            ui.showError(e);
+            tasks = new TaskList();
+            storage.updateStorage(tasks);
+        }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     /**
      * Executes the main function of Duke.
