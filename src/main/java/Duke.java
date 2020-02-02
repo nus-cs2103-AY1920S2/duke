@@ -109,6 +109,12 @@ public class Duke {
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Deadline"));
                     }
+                } else if (arrString[0].equalsIgnoreCase("Find")) {
+                    try {
+                        tasks.findTask(arrString[1]);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        throw new DukeException(ui.incompleteCommand("Find"));
+                    }
                 } else {
                     throw new DukeException(ui.invalidCommand());
                 }
@@ -121,7 +127,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        
+
         new Duke("./out.txt").run();
     }
 }
