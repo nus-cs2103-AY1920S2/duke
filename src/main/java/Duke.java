@@ -13,8 +13,8 @@ import java.util.Scanner;
  * Duke is a command line application that lets users store tasks they wish to track.
  * We have here our driver class which initialize other main components of the app.
  */
-public class Duke {
-//extends Application
+public class Duke  {
+// extends Application
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -59,7 +59,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("data\\duke.txt").run();
-        //launch();
+        // launch();
     }
 
 //    /**
