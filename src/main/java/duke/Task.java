@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Task contains information about a given task, including its description and done status.
  */
