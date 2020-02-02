@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.storage.CSV;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -41,6 +40,11 @@ public class TaskList {
         return this.lst;
     }
 
+    /**
+     * search for tasks
+     * @param searchStr = strings to search for among task names
+     * @return list of tasks which name matches the search strings
+     */
     public List<Task> find(String... searchStr) {
         Stream<Task> ans = new ArrayList<>(this.lst).stream();
         for (String str : searchStr) {
