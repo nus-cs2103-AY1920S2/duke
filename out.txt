@@ -1,0 +1,7 @@
+[T][✓] event
+[T][✘] read
+[T][✘] run
+[T][✘] hello
+[D][✘] event (by: Sunday)
+[D][✘] event (by: sunday)
+[E][✓] hello (at: friday)
