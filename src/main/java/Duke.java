@@ -1,6 +1,10 @@
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,109 +22,126 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
 
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String arr[] = input.split(" ", 2);
-            //Task t = new Task(input);
+        try {
+            File file = new File("../../../data/duke.txt");
 
-            if (input.equals("bye")) {
-                System.out.println("    -------------------------------------------------\n"
-                        + "      Bye. Hope to see you again soon! :)\n"
-                        + "    -------------------------------------------------");
-                System.exit(0);
+            if (file.length() != 0) {
+                FileInputStream fin = new FileInputStream("../../../data/duke.txt");
+                ObjectInputStream oit = new ObjectInputStream(fin);
+                //taskList.add((Task) oit.readObject());
+                taskList = (ArrayList<Task>) oit.readObject();
+            }
 
-            } else if (input.equals("list")) {
-                System.out.println("    -------------------------------------------------\n"
-                        + "      Here are the tasks in your list:");
-                for (int i = 1; i < taskList.size() + 1; i++) {
-                    Task current = taskList.get(i - 1);
-                    System.out.println("      " + i + ". " + current);
-                }
-                System.out.println("    -------------------------------------------------");
+            while (sc.hasNext()) {
+                String input = sc.nextLine();
+                String arr[] = input.split(" ", 2);
+                //Task t = new Task(input);
 
-            } else if (arr[0].equals("done")) {
+                if (input.equals("bye")) {
+                    FileOutputStream fout = new FileOutputStream("../../../data/duke.txt");
+                    ObjectOutputStream oot = new ObjectOutputStream(fout);
+                    oot.writeObject(taskList);
+                    oot.close();
+                    System.out.println("    -------------------------------------------------\n"
+                            + "      Bye. Hope to see you again soon! :)\n"
+                            + "    -------------------------------------------------");
+                    System.exit(0);
 
-                try {
-                    checkNum(arr.length);
+                } else if (input.equals("list")) {
+                    System.out.println("    -------------------------------------------------\n"
+                            + "      Here are the tasks in your list:");
+                    for (int i = 1; i < taskList.size() + 1; i++) {
+                        Task current = taskList.get(i - 1);
+                        System.out.println("      " + i + ". " + current);
+                    }
+                    System.out.println("    -------------------------------------------------");
 
-                    int taskNum = Integer.parseInt(arr[1]) - 1;
-                    if (taskList.size() > taskNum) {
-                        Task current = taskList.get(taskNum);
-                        current.markDone();
-                        System.out.println("    -------------------------------------------------\n"
-                                + "      Nice! I've marked this task as done:\n "
-                                + "        " + current + "\n"
-                                + "    -------------------------------------------------");
-                    } else {
-                        System.out.println("    -------------------------------------------------\n"
-                                + "      Sorry, this task does not exist :(\n"
-                                + "    -------------------------------------------------");
+                } else if (arr[0].equals("done")) {
+
+                    try {
+                        checkNum(arr.length);
+
+                        int taskNum = Integer.parseInt(arr[1]) - 1;
+                        if (taskList.size() > taskNum) {
+                            Task current = taskList.get(taskNum);
+                            current.markDone();
+                            System.out.println("    -------------------------------------------------\n"
+                                    + "      Nice! I've marked this task as done:\n "
+                                    + "        " + current + "\n"
+                                    + "    -------------------------------------------------");
+                        } else {
+                            System.out.println("    -------------------------------------------------\n"
+                                    + "      Sorry, this task does not exist :(\n"
+                                    + "    -------------------------------------------------");
+                        }
+
+                    } catch (DukeException ex) {
+                        System.out.println(ex.getMessage());
                     }
 
-                } catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                }
+                } else if (arr[0].equals("delete")) {
 
-            } else if (arr[0].equals("delete")) {
+                    try {
+                        checkNum(arr.length);
 
-                try {
-                    checkNum(arr.length);
+                        int taskNum = Integer.parseInt(arr[1]) - 1;
+                        if (taskList.size() > taskNum) {
+                            Task current = taskList.get(taskNum);
+                            taskList.remove(taskNum);
+                            System.out.println("    -------------------------------------------------\n"
+                                    + "      I've removed this task:\n "
+                                    + "        " + current + "\n"
+                                    + "      Now you have " + taskList.size() + " tasks in the list.\n"
+                                    + "    -------------------------------------------------");
+                        } else {
+                            System.out.println("    -------------------------------------------------\n"
+                                    + "      Sorry, this task does not exist :(\n"
+                                    + "    -------------------------------------------------");
+                        }
 
-                    int taskNum = Integer.parseInt(arr[1]) - 1;
-                    if (taskList.size() > taskNum) {
-                        Task current = taskList.get(taskNum);
-                        taskList.remove(taskNum);
+                    } catch (DukeException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                } else {
+                    try {
+                        checkAction(arr[0]);
+                        checkDescription(arr.length);
+                        Task newTask = new Task("task");
+
+                        if (arr[0].equals("todo")) {
+                            newTask = new ToDo(arr[1]);
+                            taskList.add(newTask);
+
+                        } else if (arr[0].equals("deadline")) {
+                            String[] temp = arr[1].split("/by");
+                            String task = temp[0];
+                            String date = temp[1];
+                            newTask = new Deadline(task, date);
+                            taskList.add(newTask);
+
+                        } else if (arr[0].equals("event")) {
+                            String[] temp = arr[1].split("/at");
+                            String task = temp[0];
+                            String time = temp[1];
+                            newTask = new Event(task, time);
+                            taskList.add(newTask);
+                        }
+
                         System.out.println("    -------------------------------------------------\n"
-                                + "      I've removed this task:\n "
-                                + "        " + current + "\n"
+                                + "      Got it. I've added this task:\n"
+                                + "        " + newTask + "\n"
                                 + "      Now you have " + taskList.size() + " tasks in the list.\n"
                                 + "    -------------------------------------------------");
-                    } else {
-                        System.out.println("    -------------------------------------------------\n"
-                                + "      Sorry, this task does not exist :(\n"
-                                + "    -------------------------------------------------");
+
+                    } catch (DukeException ex) {
+                        System.out.println(ex.getMessage());
                     }
 
-                } catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
                 }
-
-            } else {
-                try {
-                    checkAction(arr[0]);
-                    checkDescription(arr.length);
-                    Task newTask = new Task("task");
-
-                    if (arr[0].equals("todo")) {
-                        newTask = new ToDo(arr[1]);
-                        taskList.add(newTask);
-
-                    } else if (arr[0].equals("deadline")) {
-                        String[] temp = arr[1].split("/by");
-                        String task = temp[0];
-                        String date = temp[1];
-                        newTask = new Deadline(task, date);
-                        taskList.add(newTask);
-
-                    } else if (arr[0].equals("event")) {
-                        String[] temp = arr[1].split("/at");
-                        String task = temp[0];
-                        String time = temp[1];
-                        newTask = new Event(task, time);
-                        taskList.add(newTask);
-                    }
-
-                    System.out.println("    -------------------------------------------------\n"
-                            + "      Got it. I've added this task:\n"
-                            + "        " + newTask + "\n"
-                            + "      Now you have " + taskList.size() + " tasks in the list.\n"
-                            + "    -------------------------------------------------");
-
-                } catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                }
-
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
