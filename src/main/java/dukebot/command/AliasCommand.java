@@ -10,15 +10,15 @@ import java.util.HashMap;
 
 public class AliasCommand extends Command {
     private String[] inpArr;
-    private Parser parser;
+    private HashMap<String, CommandList> aliasMap;
 
     /**
      * Generates the command.
      *
      * @param inpArr  The input entered by user split by space
      */
-    public AliasCommand(String[] inpArr, Parser parser) {
-        this.parser = parser;
+    public AliasCommand(String[] inpArr, HashMap<String, CommandList> aliasMap) {
+        this.aliasMap = aliasMap;
         this.inpArr = inpArr;
     }
 
@@ -27,12 +27,20 @@ public class AliasCommand extends Command {
         if (inpArr.length >= 3) {
             String currentAlias = inpArr[1];
             String newAlias = inpArr[2];
-            try {
-                HashMap<String, CommandList> aliasMap = parser.updateAliasMap(currentAlias, newAlias);
-                storage.saveAlias(aliasMap);
+            if (!aliasMap.containsKey(currentAlias)) {
+                ui.sayLine(LineName.ALIAS_DOES_NOT_EXIST);
+            } else if (aliasMap.containsKey(newAlias)) {
+                ui.sayLine(LineName.ALIAS_ALREADY_EXISTS);
+            } else {
+                CommandList command = aliasMap.get(currentAlias);
+                aliasMap.remove(currentAlias);
+                aliasMap.put(newAlias, command);
+                try {
+                    storage.saveAlias(aliasMap);
+                } catch (DukeException e) {
+                    ui.sayLine(e.getErrorLineName());
+                }
                 ui.aliasSuccess(currentAlias, newAlias);
-            } catch (DukeException e) {
-                ui.sayLine(e.getErrorLineName());
             }
         } else {
             ui.sayLine(LineName.ALIAS_COMMAND_FAIL);

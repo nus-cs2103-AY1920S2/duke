@@ -35,19 +35,6 @@ public class Parser {
         }
     }
 
-    protected HashMap<String, CommandList> updateAliasMap(String currentAlias, String newAlias) throws DukeException {
-        if (!aliasMap.containsKey(currentAlias)) {
-            throw new DukeException(LineName.ALIAS_DOES_NOT_EXIST);
-        } else if (aliasMap.containsKey(newAlias)) {
-            throw new DukeException(LineName.ALIAS_ALREADY_EXISTS);
-        } else {
-            CommandList command = aliasMap.get(currentAlias);
-            aliasMap.remove(currentAlias);
-            aliasMap.put(newAlias, command);
-            return aliasMap;
-        }
-    }
-
     /**
      * Returns command object based on input string.
      *
@@ -60,7 +47,7 @@ public class Parser {
         if (aliasMap.containsKey(command)) {
             switch (aliasMap.get(command)) {
             case ALIAS:
-                return new AliasCommand(inpArr, this);
+                return new AliasCommand(inpArr, aliasMap);
             case BYE:
                 return new ExitCommand();
             case HELP:
