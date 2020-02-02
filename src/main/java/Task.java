@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class Task {
 
     // task = Full input line
@@ -7,6 +9,9 @@ public class Task {
     String task;
     String type;
     boolean isDone = false;
+    static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
 
     // Tasks represented by their initials
     private final static String TODO = "T";

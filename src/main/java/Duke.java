@@ -64,7 +64,9 @@ public class Duke {
                     String type = command[0];
                     try {
                         // Test string to see if exception should be thrown
-                        String test = command[1];
+                        if(command.length <= 1) {
+                            throw new DukeException(type);
+                        }
 
                         if(command[0].equals("todo)")) {
                             Task new_Task = new Todo(type, input);
@@ -88,8 +90,12 @@ public class Duke {
                         // Reset for new command
                         input = br.readLine();
                         command = input.split(" ");
+                    } catch (DukeException dukeException) {
+                        System.out.println(dukeException);
+                        input = br.readLine();
+                        command = input.split(" ");
                     } catch (Exception e) {
-                        System.out.println(new DukeException(type));
+                        System.out.println(e);
                         input = br.readLine();
                         command = input.split(" ");
                     }
