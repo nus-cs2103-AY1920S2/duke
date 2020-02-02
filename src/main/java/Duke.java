@@ -12,7 +12,7 @@ public class Duke {
     }
 
     public String greet() {
-        return "Hello, I am Duke " + new String(Character.toChars(0x1F481)) + ", your personal assistant.";
+        return "Hello, I am Duke, your personal assistant.";
     }
 
     private void initialise() {
@@ -42,9 +42,7 @@ public class Duke {
             parser.parseUserInput(userInput);
             Command command = parser.getCommand();
 
-            if (command == Command.EXIT_DUKE) {
-                return this.exit();
-            } else if (command == Command.LIST_TASKS) {
+            if (command == Command.LIST_TASKS) {
                 return this.taskList.listTasks();
             } else if (command == Command.ADD_TODO) {
                 Todo todo = new Todo(parser.getDescription(), false);
@@ -76,9 +74,5 @@ public class Duke {
             return e.getMessage();
         }
         return null;
-    }
-
-    private String exit() {
-        return "Bye! " + new String(Character.toChars(0x1F44B));
     }
 }
