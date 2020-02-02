@@ -1,7 +1,12 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -56,36 +61,34 @@ public class Duke {
             }
 
             if (splitStr[0].toLowerCase().equals("deadline")) {
-             try {   String date = "";
+             try {
+                 LocalDate d1 = LocalDate.now().minus(1,ChronoUnit.MONTHS);
                 String deadline = "";
                 for (int i = 1; i < splitStr.length; i++) {
                     if ((splitStr[i].equals("/by"))) {
-                        for (int j = i + 1; j < splitStr.length; j++) {
-                            date += splitStr[j] + " ";
-                        }
+                        d1 = LocalDate.parse(splitStr[i+1]);
                         break;
                     } else {
                         deadline += splitStr[i] + " ";
                     }
                 }
                 deadline = deadline.substring(0, deadline.length() - 1);
-                date = date.substring(0,date.length() - 1);
 
-                if (date.equals("")) {
-                    throw new DukeException("☹ OOPS!!! When is this due????? use /by to tell me! ☹ OOPS!!!");
+                if (d1.isBefore(LocalDate.now())) {
+                    throw new DukeException("☹ OOPS!!! You cannot set a date that is in the past! ☹ OOPS!!!");
                 } else {
-                    Deadline d = new Deadline(deadline, date);
+                    Deadline d = new Deadline(deadline, d1);
                     listOfText.add(d);
                     System.out.println("Got you covered! Added this task to the list:");
                     System.out.println(d);
                     System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
                 }
                 } catch (DukeException e) {
-                 System.out.println(e);
+                System.out.println(e);
 
-                } finally {
-                 continue;
-                }
+            } finally {
+                continue;
+            }
 
             }
 
