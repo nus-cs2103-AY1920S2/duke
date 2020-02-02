@@ -1,12 +1,23 @@
 package commands;
 
+import dukeexception.DukeException;
 import storage.Storage;
 import task.Task;
 import tasklist.TaskList;
 import ui.Ui;
 
+/**
+ * List out all Tasks in the TaskList.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Execute the ListCommand. It marks Task as done.
+     * @param tasks This is the TaskList where the Task is stored.
+     * @param ui This is to interact with the user interface, printing all Tasks.
+     * @param storage Unused.
+     * @return Nothing.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "Here are the tasks in your list:";
@@ -17,6 +28,10 @@ public class ListCommand extends Command {
         ui.printMsg(msg);
     }
 
+    /**
+     * List Command does not cause the programme to exit.
+     * @return boolean false since not ExitCommand.
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -6,14 +6,29 @@ import task.Task;
 import tasklist.TaskList;
 import ui.Ui;
 
+/**
+ * Adds a Task to the TaskList.
+ */
 public class AddCommand extends Command {
 
     private Task task;
 
+    /**
+     * Constructor for AddCommand
+     * @param t t is the Task to be added into TaskList.
+     */
     public AddCommand(Task t) {
         this.task = t;
     }
 
+    /**
+     * Execute the AddCommand. Adds task into TaskList.
+     * @param tasks This is the TaskList new Task is being added to.
+     * @param ui This is to interact with the user interface, printing message of Task being added.
+     * @param storage This allows for TaskList to be updated with new Task.
+     * @throws SaveException thrown when not able to save file.
+     * @return Nothing.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws SaveException {
         tasks.addTask(this.task);
@@ -24,6 +39,10 @@ public class AddCommand extends Command {
         ui.printMsg(msg);
     }
 
+    /**
+     * AddCommand does not cause the programme to exit.
+     * @return boolean false since not ExitCommand.
+     */
     @Override
     public boolean isExit() {
         return false;
