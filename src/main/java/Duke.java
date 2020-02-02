@@ -1,7 +1,38 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static void updateFile(ArrayList<Task> listOfInputs) throws IOException {
+        try {
+            File f = new File("data/duke.txt");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            for (Task task : listOfInputs) {
+                bw.append(task.toString());
+                bw.append("\n");
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong with updateFromFile " + e.getMessage());
+        }
+
+    }
+
+    private static void onStartUp() throws IOException {
+        File f = new File("data/duke.txt");
+        if (!(f.exists())) {
+            f.getParentFile().mkdirs();
+        }
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String text;
+        System.out.println("Currently, there are these tasks left in hard drive");
+        while ((text = br.readLine()) != null) {
+            System.out.println(text);
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -16,6 +47,12 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String exitCommand = "bye";
         ArrayList<Task> listOfText = new ArrayList<Task>();
+        try {
+            onStartUp();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("====================================================================================");
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
@@ -42,6 +79,11 @@ public class Duke {
                 currentTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done and dusted:");
                 System.out.println(currentTask);
+                try {
+                    updateFile(listOfText);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong with doneUpdateFile " + e.getMessage());
+                }
                 continue;
             }
 
@@ -52,39 +94,48 @@ public class Duke {
                 System.out.println("Bye bye Task! I've removed this task:");
                 System.out.println(currentTask);
                 System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                try {
+                    updateFile(listOfText);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong with deleteLineFromFile " + e.getMessage());
+                }
                 continue;
             }
 
             if (splitStr[0].toLowerCase().equals("deadline")) {
-             try {   String date = "";
-                String deadline = "";
-                for (int i = 1; i < splitStr.length; i++) {
-                    if ((splitStr[i].equals("/by"))) {
-                        for (int j = i + 1; j < splitStr.length; j++) {
-                            date += splitStr[j] + " ";
+                try {
+                    String date = "";
+                    String deadline = "";
+                    for (int i = 1; i < splitStr.length; i++) {
+                        if ((splitStr[i].equals("/by"))) {
+                            for (int j = i + 1; j < splitStr.length; j++) {
+                                date += splitStr[j] + " ";
+                            }
+                            break;
+                        } else {
+                            deadline += splitStr[i] + " ";
                         }
-                        break;
-                    } else {
-                        deadline += splitStr[i] + " ";
                     }
-                }
-                deadline = deadline.substring(0, deadline.length() - 1);
-                date = date.substring(0,date.length() - 1);
+                    deadline = deadline.substring(0, deadline.length() - 1);
+                    date = date.substring(0, date.length() - 1);
 
-                if (date.equals("")) {
-                    throw new DukeException("☹ OOPS!!! When is this due????? use /by to tell me! ☹ OOPS!!!");
-                } else {
-                    Deadline d = new Deadline(deadline, date);
-                    listOfText.add(d);
-                    System.out.println("Got you covered! Added this task to the list:");
-                    System.out.println(d);
-                    System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
-                }
+                    if (date.equals("")) {
+                        throw new DukeException("☹ OOPS!!! When is this due????? use /by to tell me! ☹ OOPS!!!");
+                    } else {
+                        Deadline d = new Deadline(deadline, date);
+                        listOfText.add(d);
+                        System.out.println("Got you covered! Added this task to the list:");
+                        System.out.println(d);
+                        System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                        updateFile(listOfText);
+
+                    }
                 } catch (DukeException e) {
-                 System.out.println(e);
-
+                    System.out.println(e);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong with updateFile " + e.getMessage());
                 } finally {
-                 continue;
+                    continue;
                 }
 
             }
@@ -104,7 +155,7 @@ public class Duke {
                         }
                     }
                     if (at.equals("")) {
-                    throw new DukeException("☹ OOPS!!! Where is this event????? use /at to tell me! ☹ OOPS!!!");
+                        throw new DukeException("☹ OOPS!!! Where is this event????? use /at to tell me! ☹ OOPS!!!");
                     } else {
                         event = event.substring(0, event.length() - 1);
                         at = at.substring(0, at.length() - 1);
@@ -114,10 +165,12 @@ public class Duke {
                         System.out.println("Got you covered! Added this task to the list: ");
                         System.out.println(e);
                         System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                        updateFile(listOfText);
                     }
-                } catch (DukeException e){
+                } catch (DukeException e) {
                     System.out.println(e);
-
+                } catch (IOException e) {
+                    System.out.println("Something went wrong with updateFile " + e.getMessage());
                 } finally {
                     continue;
                 }
@@ -138,21 +191,23 @@ public class Duke {
                         System.out.println("Got you covered! Added this task to the list: ");
                         System.out.println(t);
                         System.out.println("Now you have " + listOfText.size() + " tasks in the list.");
+                        updateFile(listOfText);
                     }
                 } catch (DukeException m) {
                     System.out.println(m);
-
+                } catch (IOException e) {
+                    System.out.println("Something went wrong with updateFile " + e.getMessage());
                 } finally {
                     continue;
                 }
             }
 
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
-    }
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
+        }
 
         System.out.println("\n");
         System.out.println("====================================================================================");
         System.out.println("Bye bye! Thank you for using me! Hope to see you again soon.");
 
-}
+    }
 }
