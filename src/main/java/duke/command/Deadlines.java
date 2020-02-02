@@ -1,13 +1,10 @@
-package command;
+package duke.command;
 
-/**
- * Tasks that start at a specific time and ends at a specific time e.g., team project meeting on
- * 2/10/2019 2-4pm
- */
-public class Events extends Task {
+/** Tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm */
+public class Deadlines extends Task {
   protected String datetime = "";
 
-  public Events(String description, String datetime) {
+  public Deadlines(String description, String datetime) {
     super(description);
     this.datetime = datetime;
   }
@@ -15,9 +12,9 @@ public class Events extends Task {
   /**
    * @param isDone Whether the task is completed by the user
    * @param description The activity description
-   * @param datetime The date and time described in /at command
+   * @param datetime The date and time described in /by command
    */
-  public Events(boolean isDone, String description, String datetime) {
+  public Deadlines(boolean isDone, String description, String datetime) {
     super(description);
     this.isDone = isDone;
     this.datetime = datetime;
@@ -25,13 +22,13 @@ public class Events extends Task {
 
   @Override
   public String toString() {
-    return "[E]" + "[" + getStatusIcon() + "] " + this.description + " (at: " + this.datetime + ")";
+    return "[D]" + "[" + getStatusIcon() + "] " + this.description + " (by: " + this.datetime + ")";
   }
 
   /** @return String to be stored in task text file */
   @Override
   public String fileString() {
-    return "E|" + getStatusIcon() + "|" + this.description + "|" + this.datetime;
+    return "D|" + getStatusIcon() + "|" + this.description + "|" + this.datetime;
   }
 
   @Override

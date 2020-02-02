@@ -1,3 +1,4 @@
-T|✕|sleep
-T|✓|kill lin
 E|✕|fireworks|10 Dec. 2020 09:00am to 20 Dec. 2020 09:10am
+T|✓|sleep
+D|✕|do homework|10 Feb. 2019 09:00am
+T|✕|hi

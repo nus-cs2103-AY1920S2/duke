@@ -1,9 +1,9 @@
-package tool;
+package duke.tool;
 
-import command.Deadlines;
-import command.Events;
-import command.Task;
-import command.ToDos;
+import duke.command.Deadlines;
+import duke.command.Events;
+import duke.command.Task;
+import duke.command.ToDos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

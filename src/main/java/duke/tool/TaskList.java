@@ -1,6 +1,6 @@
-package tool;
+package duke.tool;
 
-import command.Task;
+import duke.command.Task;
 
 import java.util.ArrayList;
 import java.util.List;

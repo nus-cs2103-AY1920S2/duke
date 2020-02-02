@@ -1,4 +1,4 @@
-package command;
+package duke.command;
 
 /** Tasks without any date/time attached to it e.g., visit new theme park */
 public class ToDos extends Task {

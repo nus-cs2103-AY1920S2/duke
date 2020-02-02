@@ -1,4 +1,4 @@
-package command;
+package duke.command;
 
 /** Parent class of ToDos, Events and Deadlines */
 public class Task {

@@ -1,4 +1,4 @@
-package tool;
+package duke.tool;
 
 /** Deals with making sense of the user command */
 public class Parser {
