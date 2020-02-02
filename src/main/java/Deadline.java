@@ -3,11 +3,18 @@ public class Deadline extends Task {
     protected String connector;
     protected String datetime;
 
-    public Deadline(String description, String connector, String datetime) {
-        super(description);
-        this.description = description;
+    public Deadline(String description, String connector, String datetime, boolean isDone) {
+        super(description, isDone);
         this.connector = connector;
         this.datetime = datetime;
+    }
+
+    public Deadline(String description, String connector, String datetime) {
+        this(description, connector, datetime, false);
+    }
+
+    public String getFileString() {
+        return "D|" + isDone + "|" + description + "|" + connector + "|" + datetime;
     }
 
     @Override

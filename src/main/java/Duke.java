@@ -1,5 +1,4 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.application.Application; import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -10,7 +9,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke extends Application {
 
@@ -19,7 +27,9 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private ArrayList<Task> listing = new ArrayList<>();
+    private ArrayList<Task> listing;
+    private String fileLoc;
+    private File file;
 
     //private Image user = new Image(this.getClass().getResourceAsStream("/src/main/resources/images/DaUser.png"));
 //    private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.png"));
@@ -81,6 +91,27 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        listing = new ArrayList<>();
+        fileLoc = "./src/main/data/duke.txt";
+        Path path = Paths.get(fileLoc);
+        try {
+            Files.createFile(path);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        File file = new File(fileLoc);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            if (!file.createNewFile()) {
+                String st;
+                while ((st = br.readLine()) != null) {
+                    listing.add(parseList(st));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         dialogContainer.getChildren().add(getDialogLabel("Hello! I'm Duke\nWhat can I do for you?"));
 
@@ -100,6 +131,18 @@ public class Duke extends Application {
 
     }
 
+    private Task parseList(String s) {
+        String[] params = s.split("\\|");
+
+        if (params[0].equals("D")) {
+            return new Deadline(params[2], params[3], params[4], !params[1].equals("false"));
+        } else if (params[0].equals("E")) {
+            return new Event(params[2], params[3], params[4], !params[1].equals("false"));
+        } else {
+            return new Task(params[2], !params[1].equals("false"));
+        }
+    }
+
     private int handleUserInput() {
 
         String curText = userInput.getText();
@@ -111,14 +154,14 @@ public class Duke extends Application {
         try {
             if (curText.equals("bye")) {
 
-    //          exit the program
+                //          exit the program
 
                 curText = "Bye. Hope to see you again soon!";
                 needExit = 1;
 
             } else if (curText.equals("list")) {
 
-    //            query the list of task
+                //            query the list of task
 
                 curText = "Here are the tasks in your list:\n";
                 for (int i = 0; i < listing.size(); i++) {
@@ -128,7 +171,7 @@ public class Duke extends Application {
 
             } else if (isSubstringEqual(curText, "done")) {
 
-    //            done doing task
+                //            done doing task
 
                 int taskNum = Integer.parseInt(curText.substring(4).trim()) - 1;
                 curText = "Nice! I've marked this task as done:\n";
@@ -179,15 +222,25 @@ public class Duke extends Application {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+
             dialogContainer.getChildren().add(getDialogLabel(curText));
-            userInput.clear();
         } catch (DukeException e) {
             dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
-            userInput.clear();
         } catch (Exception e) {
             dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+        } finally {
+            try {
+                FileWriter fileWriter = new FileWriter(fileLoc);
+                for (Task i : listing) {
+                    fileWriter.write(i.getFileString() + "\n");
+                }
+                fileWriter.close();
+            } catch (IOException e) {
+                dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+            }
             userInput.clear();
         }
+
         return needExit;
     }
 
