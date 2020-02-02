@@ -1,4 +1,3 @@
-import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +14,7 @@ public class Event extends Task {
         this.date = LocalDate.parse(at);
     }
 
+    @Override
     public String toLine() {
         int num;
         if (super.done) {
@@ -22,7 +22,7 @@ public class Event extends Task {
         } else {
             num = 0;
         }
-        return "D/" + num + "/" + this.task + "/" + at;
+        return "E/" + num + "/" + this.task + "/" + at;
     }
 
     @Override

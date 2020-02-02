@@ -1,8 +1,8 @@
-import java.io.*;
-import java.util.*;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
- * Main class representing the chat bot, Duke.
+ * Duke, representing a personal assistant chat bot that helps to track the user's task list.
  */
 public class Duke {
 
@@ -12,7 +12,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, ui);
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -21,32 +21,32 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chat bot, Duke, while users key in various command inputs.
+     */
     public void run() {
         ui.showWelcome();
-        while (ui.hasInputs()) {
-            String input = ui.readInput();
-            String[] inputArr = Parser.parse(input);
-            if (input.equals("bye")) {
-                ui.endDuke();
-                break;
-            } else if (input.equals("list")) {
-                ui.printList(tasks);
-            } else if (inputArr[0].equals("done")) {
-                int option = Integer.parseInt(inputArr[1]);
-                tasks.markAsDone(option);
-                storage.writeFile(tasks);
-            } else if (inputArr[0].equals("delete")) {
-                int option = Integer.parseInt(inputArr[1]);
-                tasks.deleteTask(option);
-                storage.writeFile(tasks);
-            } else if (inputArr[0].equals("find")) {
-                tasks.findTask(inputArr[1]);
-            } else {
-                tasks.addAndWriteTask(inputArr, storage);
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (DateTimeParseException e) {
+                ui.showDateError();
+            } catch (IndexOutOfBoundsException e) {
+                ui.showIndexError();
             }
         }
     }
 
+    /**
+     * Main method which initiates the start of the system to run Duke.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

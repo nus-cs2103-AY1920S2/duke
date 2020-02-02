@@ -6,9 +6,11 @@ import java.util.ArrayList;
  */
 public class Storage {
     public String filePath;
+    public Ui ui;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     /**
@@ -69,7 +71,8 @@ public class Storage {
                     data.add(task);
                 }
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            ui.showFileNotFoundError();
         }
         return data;
     }

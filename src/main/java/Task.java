@@ -1,7 +1,5 @@
-import java.util.*;
-
 /**
- * Represents a task that is input by the user to Duke.
+ * Represents a task defined from input by the user to Duke.
  */
 public abstract class Task {
     protected String task;
@@ -12,16 +10,32 @@ public abstract class Task {
         this.done = false;
     }
 
+    /**
+     * Sets the status of a task to be done.
+     */
     public void setDone() {
         this.done = true; //✓
     }
 
+    /**
+     * Returns a corresponding symbol showing the status of the task depending on whether it is done or not.
+     * @return String symbol of either a tick or a cross.
+     */
     public String getStatusIcon() {
         return (done ? "\u2713" : "\u2718");  //return tick or X symbols
     }
 
+    /**
+     * Returns a formatted string representing a task to be written into the storage file.
+     * Abstract method that is formatted differently by different tasks.
+     * @return
+     */
     public abstract String toLine();
 
+    /**
+     * Returns a formatted string for the task to be printed.
+     * @return
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.task;

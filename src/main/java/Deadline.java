@@ -1,4 +1,3 @@
-import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +14,7 @@ public class Deadline extends Task {
         this.date = LocalDate.parse(by);
     }
 
+    @Override
     public String toLine() {
         int num;
         if (super.done) {

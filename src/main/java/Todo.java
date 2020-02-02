@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * Specific form of a todo task that is input by the user to Duke.
  */
@@ -9,6 +7,7 @@ public class Todo extends Task {
         super(task);
     }
 
+    @Override
     public String toLine() {
         int num;
         if (super.done) {
