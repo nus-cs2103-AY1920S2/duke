@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private final static String filepath =
-            "..\\..\\..\\duke.txt";
+            "C:\\Users\\Dargo\\Documents\\NUS\\CS\\CS2103T Software Engineering\\CS2103 Duke\\src\\main\\java\\duke.txt";
 
     public static void main(String[] args) {
 
@@ -33,7 +33,7 @@ public class Duke {
         try {
 
             File file = new File
-                    ("..\\..\\..\\duke.txt");
+                    ("C:\\Users\\Dargo\\Documents\\NUS\\CS\\CS2103T Software Engineering\\CS2103 Duke\\src\\main\\java\\duke.txt");
             if(file.length() != 0) {
 
                 FileInputStream fileIn = new FileInputStream(filepath);
