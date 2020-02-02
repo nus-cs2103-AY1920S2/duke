@@ -35,8 +35,6 @@ public class Duke {
 
     /**
      * This method is used to run the application and start the chat bot.
-     *
-     * @return Nothing.
      */
     public void run() {
         ui.showWelcome();
@@ -60,7 +58,6 @@ public class Duke {
      * This is the main method which makes use of static run method.
      *
      * @param args Unused.
-     * @return Nothing.
      */
     public static void main(String[] args) {
         new Duke("/Users/jadetay/duke/data/tasks.txt").run();

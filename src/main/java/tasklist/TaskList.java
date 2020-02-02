@@ -12,7 +12,7 @@ public class TaskList {
     private ArrayList<Task> tasksList;
 
     /**
-     * Constructor for creating new TaskList object and ArrayList<Task> when there is no existing file.
+     * Constructor for creating new TaskList object and ArrayList<Task></Task> when there is no existing file.
      */
     public TaskList() {
         this.tasksList = new ArrayList<>();
@@ -49,7 +49,6 @@ public class TaskList {
      * This method adds a new Task into TaskList.
      *
      * @param t This is the Task to be added into TaskList.
-     * @return Nothing.
      */
     public void addTask(Task t) {
         this.tasksList.add(t);

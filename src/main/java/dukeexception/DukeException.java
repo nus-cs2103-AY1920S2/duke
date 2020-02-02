@@ -8,7 +8,8 @@ public class DukeException extends Exception {
     /**
      * Empty constructor for DukeException.
      */
-    public DukeException() { }
+    public DukeException() {
+    }
 
     /**
      * Constructor for DukeException.
