@@ -1,13 +1,13 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.DukeException;
-import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 /**
  * Adds a task to the TaskList.
@@ -26,14 +26,15 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the task to the TaskList and prints an acknowledgement message.
+     * Adds the task to the TaskList and returns an acknowledgement message.
      * @param tasks The TaskList where the task is to be added.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
+     * @return A string with the message to be printed.
      * @throws DukeException If the details is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         switch (type) {
         case "todo":
@@ -72,6 +73,7 @@ public class AddCommand extends Command {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
-        ui.showAddTask(task, tasks);
+        return ui.showToUser("Got it. I've added this task:", "  " + task,
+                "Now you have " + tasks.size() + " tasks in the list.");
     }
 }
