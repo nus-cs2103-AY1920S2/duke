@@ -45,19 +45,17 @@ public class Duke {
                     ObjectOutputStream oot = new ObjectOutputStream(fout);
                     oot.writeObject(taskList);
                     oot.close();
-                    System.out.println("    -------------------------------------------------\n"
-                            + "      Bye. Hope to see you again soon! :)\n"
-                            + "    -------------------------------------------------");
+                    System.out.println(format + "      Bye. Hope to see you again soon! :)\n" + format);
                     System.exit(0);
 
                 } else if (input.equals("list")) {
-                    System.out.println("    -------------------------------------------------\n"
-                            + "      Here are the tasks in your list:");
+                    System.out.println(format + "      Here are the tasks in your list:");
+
                     for (int i = 1; i < taskList.size() + 1; i++) {
                         Task current = taskList.get(i - 1);
                         System.out.println("      " + i + ". " + current);
                     }
-                    System.out.println("    -------------------------------------------------");
+                    System.out.println(format);
 
                 } else if (arr[0].equals("done")) {
 
@@ -174,7 +172,7 @@ public class Duke {
         if (size < 2) {
             throw new DukeException("    -----------------------------------------------------------------\n"
                     + "      Please enter a Task description!\n"
-                    + "    -----------------------------------------------------------------");
+                    + "    -----------------------------------------------------------------\n");
         }
     }
 
@@ -184,7 +182,7 @@ public class Duke {
         if (arr.length > 1) {
             throw new DukeException("    -----------------------------------------------------------------\n"
                     + "      Please enter a only one Task number!\n"
-                    + "    -----------------------------------------------------------------");
+                    + "    -----------------------------------------------------------------\n");
         }
     }
 
@@ -192,7 +190,7 @@ public class Duke {
         if (size < 2) {
             throw new DukeException("    -----------------------------------------------------------------\n"
                     + "      Please enter a Task number!\n"
-                    + "    -----------------------------------------------------------------");
+                    + "    -----------------------------------------------------------------\n");
         }
     }
 
@@ -200,7 +198,7 @@ public class Duke {
         if (!action.equals("todo") && !action.equals("deadline") && !action.equals("event")) {
             throw new DukeException("    -----------------------------------------------------------------\n"
                     + "      Sorry, I didn't understand that :( Please try again.\n"
-                    + "    -----------------------------------------------------------------");
+                    + "    -----------------------------------------------------------------\n");
         }
     }
 }
