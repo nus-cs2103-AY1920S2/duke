@@ -11,14 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ *  contains methods which deal with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * constructs a Storage to save and load Tasks.
+     * @param filePath a String indicates where the tasks are going to be saved.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    //to update the data file when any changes are made to the list of tasks
+    /**
+     * updates the data file when any changes are made to the list of tasks.
+     * @param taskList the TaskList being updated.
+     * @throws IOException if the file path cannot be found.
+     */
     public void rewriteFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         StringBuilder text = new StringBuilder();
@@ -34,7 +45,11 @@ public class Storage {
         fw.close();
     }
 
-    //get an extra piece of information if the Task.Task is a Task.Deadline or Task.Event
+    /**
+     * gets an extra piece of information if the Task is a Deadline or Event
+     * @param t the Task we are dealing with.
+     * @return the description of the Task and extra information if applicable.
+     */
     private String getSpecificDescription(Task t) {
         String text = t.getDescription();
         if (t instanceof Deadline) {
@@ -45,7 +60,11 @@ public class Storage {
         return text;
     }
 
-    //get a Task.Task according to the text in the data file
+    /**
+     * decode the String gotten from the data file into a Task.
+     * @param data a String gotten from the data file
+     * @return the Task after decoding the String.
+     */
     private Task decode(String data) {
         StringTokenizer st = new StringTokenizer(data);
         String className = st.nextToken("~");
@@ -74,7 +93,11 @@ public class Storage {
         return td;
     }
 
-    //load the list of tasks stored in hard disk
+    /**
+     * loads the list of tasks stored in hard disk.
+     * @return a list of Tasks gotten from the hard disk.
+     * @throws IOException if the file path cannot be found.
+     */
     public ArrayList<Task> start() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         List<String> data = Files.readAllLines(Paths.get(this.filePath));
