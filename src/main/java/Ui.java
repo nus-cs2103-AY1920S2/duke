@@ -18,17 +18,20 @@ public class Ui {
      * Prints welcome message.
      */
     public static void showWelcome() {
-        String logo = "      ____        _\n"
-                + "     |  _ \\ _   _| | _____\n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
+        String tinga = "       _    _  \n"
+                + "     _| |_ (_)\n"
+                + "    |_   _\\ _  _ __   ____   __ _\n"
+                + "      | |  | \\| '  \\ / _  \\ / _` |\n"
+                + "      | |  | || || || |_| || (_| |\n"
+                + "      |_|  |_||_||_| \\__  | \\__,_|\n"
+                + "                     /\\_| |\n"
+                + "                     \\____/\n";
         showLine();
-        System.out.println(logo);
-        showLine();
-        System.out.println("    Hey there! I'm Duke");
+        System.out.println(tinga);
+        System.out.println("    Hey there! I'm tinga :)");
         System.out.println("    What can I do for you?");
         showLine();
+
     }
 
     /**
