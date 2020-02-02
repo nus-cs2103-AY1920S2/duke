@@ -69,7 +69,12 @@ public class Duke {
         }
     }
 
-    public String runOnGui(String input) {
+    /**
+     * Handles a user input command through duke and returns a message to be displayed on GUI.
+     * @param input The input string of user command.
+     * @return The message to be displayed on GUI.
+     */
+    private String runOnGui(String input) {
         try {
             Command c = Parser.parse(input);
             ui.showGoodbye();
@@ -88,13 +93,18 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Obtains the output string to be displayed on GUI of a particular user command.
+     * @param input The input string of user command.
+     * @return The message to be displayed on GUI.
      */
     public String getResponse(String input) {
         return runOnGui(input);
     }
 
+    /**
+     * Obtains the output string to be displayed on GUI of the welcoming message when initiating Duke.
+     * @return The welcoming message to be displayed on GUI.
+     */
     public String getWelcomeMessage() {
         return ui.getWelcomeMessage();
     }

@@ -51,6 +51,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Creates a dialog box of Duke to greet the user.
+     */
     public void greetUser() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
     }
