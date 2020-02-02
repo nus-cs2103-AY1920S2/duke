@@ -5,7 +5,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-group 'seedu.duke'
+group 'bot'
 version '0.1.0'
 
 repositories {
@@ -14,7 +14,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "bot.Duke"
+    mainClassName = "bot.Launcher"
 }
 
 run {
