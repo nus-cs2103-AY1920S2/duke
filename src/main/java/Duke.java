@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Duke is a Personal Assistant Chatbot that helps a person keep track of various things.
+ * Duke is a Personal Assistant Chatbot that helps a person keep track of various types of tasks.
+ * It can add/delete/list tasks, as well as, mark tasks as done when completed. Upon exit, the tasks
+ * will be saved to a data file. 
  */
 public class Duke {
 
