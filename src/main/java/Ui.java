@@ -24,6 +24,7 @@ public class Ui {
 
     public void emptyList() {
         System.out.println("You currently do not have anything in your list");
+        showLine();
     }
 
     public void doneTask() {
@@ -62,6 +63,7 @@ public class Ui {
     
     public void taskInList(int listSize){
         System.out.println("You have " + listSize + " task(s) in your list.");
+        showLine();
     }
 
 
