@@ -37,16 +37,21 @@ public class Storage {
         Scanner readFile = new Scanner(file);
 
         while (readFile.hasNext()) {
-            String task = readFile.nextLine();
-            char taskType = task.charAt(1);
-            char isDone = task.charAt(4);
-            String description = task.substring(7);
+            String input = readFile.nextLine();
+            String inputs[] = input.split("\\|");
+
+            for (int i = 0; i < inputs.length; i++) {
+                System.out.println(inputs[i]);
+            }
+
+            String taskType = inputs[0];
+            String isDone = inputs[1];
+            String description = inputs[2];
 
             switch (taskType) {
-            case 'D':
-                int position = description.indexOf(" by ");
-                String date = description.substring(position + 4, position + 15);
-                String time = description.substring(position + 16);
+            case "D":
+                String date = inputs[3];
+                String time = inputs[4];
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate localDate = LocalDate.parse(date, formatter);
@@ -54,19 +59,16 @@ public class Storage {
                 formatter = DateTimeFormatter.ofPattern("hh:mm a");
                 LocalTime localTime = LocalTime.parse(time, formatter);
 
-                description = description.substring(0, position);
-
-                if (isDone == 'X') {
+                if (isDone.equals("X")) {
                     tasks.add(new Deadline(description, taskType, localDate, localTime, false));
                 } else {
                     tasks.add(new Deadline(description, taskType, localDate, localTime, true));
                 }
 
                 break;
-            case 'E':
-                int pos = description.indexOf(" at ");
-                String eventDate = description.substring(pos + 4, pos + 15);
-                String eventTime = description.substring(pos + 16);
+            case "E":
+                String eventDate = inputs[3];
+                String eventTime = inputs[4];
 
                 DateTimeFormatter forFormatting = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate localEventDate = LocalDate.parse(eventDate, forFormatting);
@@ -74,9 +76,7 @@ public class Storage {
                 forFormatting = DateTimeFormatter.ofPattern("hh:mm a");
                 LocalTime localEventTime = LocalTime.parse(eventTime, forFormatting);
 
-                description = description.substring(0, pos);
-
-                if (isDone == 'X') {
+                if (isDone.equals("X")) {
                     tasks.add(new Event(description, taskType, localEventDate, localEventTime, false));
                 } else {
                     tasks.add(new Event(description, taskType, localEventDate, localEventTime, true));
@@ -84,7 +84,7 @@ public class Storage {
 
                 break;
             default:
-                if (isDone == 'X') {
+                if (isDone.equals("X")) {
                     tasks.add(new ToDo(description, taskType, false));
                 } else {
                     tasks.add(new ToDo(description, taskType, true));
@@ -104,10 +104,12 @@ public class Storage {
     public void updateFile(TaskList tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath, false);
 
-        writer.write(tasks.getTask(0).obtainTaskInfo());
+        if (tasks.getSize() != 0) {
+            writer.write(tasks.getTask(0).formatForFile());
 
-        for (int i = 1; i < tasks.getSize(); i++) {
-            writer.write(System.lineSeparator() + tasks.getTask(i).obtainTaskInfo());
+            for (int i = 1; i < tasks.getSize(); i++) {
+                writer.write(System.lineSeparator() + tasks.getTask(i).formatForFile());
+            }
         }
 
         writer.close();

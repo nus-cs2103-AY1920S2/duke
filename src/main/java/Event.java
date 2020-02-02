@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param date Date of event.
      * @param timing Timing of event.
      */
-    public Event(String description, char taskType, LocalDate date, LocalTime timing) {
+    public Event(String description, String taskType, LocalDate date, LocalTime timing) {
         super(description, taskType);
         this.date = date;
         this.timing = timing;
@@ -33,7 +33,7 @@ public class Event extends Task {
      * @param timing Timing of event.
      * @param isDone Status of event, whether done or not.
      */
-    public Event(String description, char taskType, LocalDate date, LocalTime timing, boolean isDone) {
+    public Event(String description, String taskType, LocalDate date, LocalTime timing, boolean isDone) {
         super(description, taskType, isDone);
         this.date = date;
         this.timing = timing;
@@ -58,12 +58,22 @@ public class Event extends Task {
     }
 
     /**
-     * Returns all information about the task formatted in a single string.
+     * Returns all information about event formatted in a single string.
      *
-     * @return Information about task.
+     * @return Information about event.
      */
     public String obtainTaskInfo() {
         String taskInfo = super.obtainTaskInfo();
         return taskInfo + " at " + this.getDate() + " " + this.getTiming();
+    }
+
+    /**
+     * Returns all information about the event formatted for storage in file.
+     *
+     * @return Information about event.
+     */
+    public String formatForFile() {
+        String taskInfo = super.formatForFile();
+        return taskInfo + "|" + this.getDate() + "|" + this.getTiming();
     }
 }

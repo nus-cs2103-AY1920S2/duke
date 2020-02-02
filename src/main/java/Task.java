@@ -4,7 +4,7 @@
 public class Task {
 
     private String description;
-    private char taskType;
+    private String taskType;
     private boolean isDone;
 
     /**
@@ -13,7 +13,7 @@ public class Task {
      * @param description Task description.
      * @param taskType Type of task: deadline, event, to-do.
      */
-    public Task(String description, char taskType) {
+    public Task(String description, String taskType) {
         this.description = description;
         this.taskType = taskType;
         this.isDone = false;
@@ -26,7 +26,7 @@ public class Task {
      * @param taskType Type of task: deadline, event, to-do.
      * @param isDone Status of task, whether completed or not.
      */
-    public Task(String description, char taskType, boolean isDone) {
+    public Task(String description, String taskType, boolean isDone) {
         this.description = description;
         this.taskType = taskType;
         this.isDone = isDone;
@@ -59,7 +59,7 @@ public class Task {
      *
      * @return Type of task.
      */
-    public char getTaskType() {
+    public String getTaskType() {
         return taskType;
     }
 
@@ -78,5 +78,14 @@ public class Task {
     public String obtainTaskInfo() {
         return "[" + this.getTaskType() + "]["
                 + this.getStatusIcon() + "] " + this.getDescription();
+    }
+
+    /**
+     * Returns all information about task formatted for storage in file.
+     *
+     * @return All information about task.
+     */
+    public String formatForFile() {
+        return this.getTaskType() + "|" + this.getStatusIcon() + "|" + this.getDescription();
     }
 }

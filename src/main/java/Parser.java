@@ -29,9 +29,14 @@ public class Parser {
     /**
      * Return index of task to be deleted/marked as done.
      *
+     * @param size Number of tasks in the list.
      * @return Index of task to be deleted/marked as done.
      */
-    public int getTaskIndex() {
+    public int getTaskIndex(int size) throws DukeException {
+        if (Integer.valueOf(inputs[1]) > size) {
+            throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but you have entered an invalid index.\n");
+        }
+
         return Integer.valueOf(inputs[1]);
     }
 

@@ -84,19 +84,27 @@ public class Duke {
                 response = ui.getList(tasks);
                 break;
             case "done":
-                int completedTask = parser.getTaskIndex();
-                tasks.getTask(completedTask - 1).setDone();
+                try {
+                    int completedTask = parser.getTaskIndex(tasks.getSize());
+                    tasks.getTask(completedTask - 1).setDone();
 
-                response = ui.getDoneSuccess(tasks, completedTask - 1);
+                    response = ui.getDoneSuccess(tasks, completedTask - 1);
+                } catch (DukeException e) {
+                    response = ui.getExceptionMessage(e);
+                }
 
                 break;
             case "delete":
-                int removeTask = parser.getTaskIndex();
+                try {
+                    int removeTask = parser.getTaskIndex(tasks.getSize());
 
-                response = ui.getDeleteSuccess(tasks, removeTask - 1);
+                    response = ui.getDeleteSuccess(tasks, removeTask - 1);
 
-                tasks.deleteTask(removeTask - 1);
-                response = response.concat(ui.getStatusUpdate(tasks));
+                    tasks.deleteTask(removeTask - 1);
+                    response = response.concat(ui.getStatusUpdate(tasks));
+                } catch (DukeException e) {
+                    response = ui.getExceptionMessage(e);
+                }
 
                 break;
             case "find":
@@ -142,7 +150,7 @@ public class Duke {
     public void addTask(Parser parser) throws DukeException {
         if (parser.getIdentifier().equals("todo")) {
             String toDo = parser.getDescription();
-            tasks.addTask(new ToDo(toDo, 'T', false));
+            tasks.addTask(new ToDo(toDo, "T", false));
         } else if (parser.getIdentifier().equals("event") || parser.getIdentifier().equals("deadline")) {
             String description = parser.getDescription();
 
@@ -150,9 +158,9 @@ public class Duke {
             LocalTime timing = parser.getTime();
 
             if (parser.getIdentifier().equals("event")) {
-                tasks.addTask(new Event(description, 'E', date, timing, false));
+                tasks.addTask(new Event(description, "E", date, timing, false));
             } else {
-                tasks.addTask(new Deadline(description, 'D', date, timing, false));
+                tasks.addTask(new Deadline(description, "D", date, timing, false));
             }
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");

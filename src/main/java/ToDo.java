@@ -9,7 +9,7 @@ public class ToDo extends Task {
      * @param description Task description.
      * @param taskType type of task: to-do.
      */
-    public ToDo(String description, char taskType) {
+    public ToDo(String description, String taskType) {
         super(description, taskType);
     }
 
@@ -20,7 +20,7 @@ public class ToDo extends Task {
      * @param taskType Type of task: to-do.
      * @param isDone Status of task, whether completed or not.
      */
-    public ToDo(String description, char taskType, boolean isDone) {
+    public ToDo(String description, String taskType, boolean isDone) {
         super(description, taskType, isDone);
     }
 }
