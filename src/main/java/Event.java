@@ -23,7 +23,7 @@ public class Event extends Task {
     }
 
     /**
-     * Overrides the Object's toString method
+     * Overrides the Task's toString method
      * and it contains the mark, the description, as well as
      * the due date and time of the event.
      *
@@ -31,7 +31,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-                time + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + time + ")";
     }
 }

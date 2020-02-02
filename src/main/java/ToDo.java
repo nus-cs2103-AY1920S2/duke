@@ -13,7 +13,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Overrides the Object's toString method
+     * Overrides the Task's toString method
      * and it contains the mark and the description of the
      * todo.
      *

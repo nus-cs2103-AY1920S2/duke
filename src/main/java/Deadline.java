@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overrides the Object's toString method
+     * Overrides the Task's toString method
      * and it contains the mark, the description, as well as
      * the due date and time of the deadline.
      *
@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-                time + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + time + ")";
     }
 }

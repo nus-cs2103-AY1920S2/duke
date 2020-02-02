@@ -35,7 +35,6 @@ public class Duke {
         }
     }
 
-
     private static List<Task> tasks = new ArrayList<>();
 
     /**
