@@ -3,10 +3,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Saver {
+public class Storage {
+    String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+
     public static String taskParser(Task task) {
         String taskString;
         String isDone = task.getIsDone() ? "1" : "0";
@@ -17,9 +23,9 @@ public class Saver {
         return taskString;
     }
 
-    public static void fullSaver(ArrayList<Task> taskList) throws IOException {
+    public void save(ArrayList<Task> taskList, String filePath) throws IOException {
         try {
-            File file = new File("savedata.txt");
+            File file = new File(filePath);
             FileWriter writer = new FileWriter(file);
 
             for (Task task : taskList) {
@@ -34,9 +40,11 @@ public class Saver {
         }
     }
 
-    public static void loader(ArrayList<Task> taskList) throws IOException {
+    public ArrayList<Task> load() throws IOException {
+        ArrayList<Task> taskList = new ArrayList<Task>();
+
         try {
-            File file = new File("savedata.txt");
+            File file = new File(filePath);
             FileReader reader = new FileReader(file);
             Scanner scanner = new Scanner(file);
 
@@ -66,6 +74,8 @@ public class Saver {
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
+
+        return taskList;
     }
 
 }
