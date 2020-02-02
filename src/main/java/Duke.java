@@ -8,12 +8,7 @@ import duke.exception.BadDateException;
 import duke.exception.BadDescriptionException;
 import duke.exception.DukeDescriptionException;
 import duke.exception.InvalidCommandException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;
 
