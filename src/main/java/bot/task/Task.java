@@ -89,8 +89,8 @@ public abstract class Task {
      * @param rawTime The original String
      *                representing Task time
      * @return String representing time with
-     * the appropriate formatting for the
-     * type of Task
+     *     the appropriate formatting for the
+     *     type of Task
      */
     public abstract String getTimeVerb(String rawTime);
 
@@ -98,7 +98,7 @@ public abstract class Task {
      * Gives the time of the current Task
      *
      * @return PrettyTime representing time
-     * of the Task
+     *     of the Task
      */
     public PrettyTime getPrettyTime() {
         return this.taskTime;

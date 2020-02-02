@@ -67,7 +67,7 @@ public class Duke {
         botUi.showAwaiting();
 
         // main bot system loop
-        while(input.hasNext()) {
+        while (input.hasNext()) {
             String command = input.nextLine();
             // parse the command
             ParsedInstruction next;

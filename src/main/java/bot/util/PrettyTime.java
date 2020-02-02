@@ -92,7 +92,7 @@ public class PrettyTime implements Comparable<PrettyTime> {
      * representation.
      *
      * @return True, if there exists the LocalDate
-     * representation.
+     *     representation.
      */
     public boolean hasLocalDate() {
         return this.date.isPresent();
@@ -104,7 +104,7 @@ public class PrettyTime implements Comparable<PrettyTime> {
      * can only exist if the LocalDate exists
      *
      * @return True, if there exists a time (which
-     * would also imply that the date exists)
+     *     would also imply that the date exists)
      */
     public boolean hasTime() {
         return this.time.isPresent();
@@ -117,13 +117,13 @@ public class PrettyTime implements Comparable<PrettyTime> {
      * the LocalDate representation exists)
      *
      * @return String representing date and time
-     * in DD-MM-YYYY-tttt format, if possible
+     *     in DD-MM-YYYY-tttt format, if possible
      */
     public String toRaw() {
         return this.date.map(
-                date -> date.format(DateTimeFormatter.ofPattern("dd-MM-y"))
-                        + this.time.map(t -> "-" + String.format("%04d", t))
-                        .orElse("")
+            date -> date.format(DateTimeFormatter.ofPattern("dd-MM-y"))
+                    + this.time.map(t -> "-" + String.format("%04d", t))
+                    .orElse("")
         ).orElseGet(
                 () -> this.rawText.orElse("")
         );
@@ -177,7 +177,7 @@ public class PrettyTime implements Comparable<PrettyTime> {
      *
      * @param pt The PrettyTime to match to
      * @return True, if both PrettyTimes have the
-     * same date
+     *     same date
      */
     public boolean matchDate(PrettyTime pt) {
         if (this.hasLocalDate() && pt.hasLocalDate()) {
@@ -192,9 +192,9 @@ public class PrettyTime implements Comparable<PrettyTime> {
     @Override
     public String toString() {
         return this.date.map(
-                date -> date.format(DateTimeFormatter.ofPattern("d MMMM y"))
-                        + this.time.map(t -> ", at " + String.format("%04d", t))
-                        .orElse("")
+            date -> date.format(DateTimeFormatter.ofPattern("d MMMM y"))
+                    + this.time.map(t -> ", at " + String.format("%04d", t))
+                    .orElse("")
         ).orElseGet(
                 () -> this.rawText.orElse("")
         );
