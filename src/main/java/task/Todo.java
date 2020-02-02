@@ -4,6 +4,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for creating new Todo object.
+     *
      * @param description This is the description of the Todo.
      */
     public Todo(String description) {
@@ -12,6 +13,7 @@ public class Todo extends Task {
 
     /**
      * Returns the String representation of Todo.
+     *
      * @return String of the Todo.
      */
     @Override

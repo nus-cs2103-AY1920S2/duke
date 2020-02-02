@@ -4,6 +4,7 @@ public class SaveException extends DukeException {
 
     /**
      * Return message of the Thrown SaveException.
+     *
      * @return String to be printed.
      */
     @Override

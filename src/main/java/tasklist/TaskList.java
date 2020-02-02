@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Constructor for creating new TaskList object taking in an existing tasksList.
+     *
      * @param tasksList ArrayList containing Tasks.
      */
     public TaskList(ArrayList<Task> tasksList) {
@@ -28,6 +29,7 @@ public class TaskList {
 
     /**
      * This method retrieves the Task in TaskList.
+     *
      * @return required Tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -36,6 +38,7 @@ public class TaskList {
 
     /**
      * This method retrieves the total number of Tasks in TaskList.
+     *
      * @return total number of Tasks in TaskList.
      */
     public int getNumTasks() {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * This method adds a new Task into TaskList.
+     *
      * @param t This is the Task to be added into TaskList.
      * @return Nothing.
      */
@@ -53,6 +57,7 @@ public class TaskList {
 
     /**
      * This method removed Task from TaskList.
+     *
      * @param index This is the index of the Task in TaskList to be removed.
      * @return Task to be removed from TaskList.
      */
@@ -64,6 +69,7 @@ public class TaskList {
 
     /**
      * This method mark a Task in TaskList as done.
+     *
      * @param index This is the index of the Task in TaskList to be marked as done.
      * @return Task marked as done in TaskList.
      */

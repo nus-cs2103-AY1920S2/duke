@@ -4,6 +4,7 @@ public class LoadException extends DukeException {
 
     /**
      * Return message of the Thrown LoadException.
+     *
      * @return String to be printed.
      */
     @Override

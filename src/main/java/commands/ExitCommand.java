@@ -1,6 +1,5 @@
 package commands;
 
-import dukeexception.DukeException;
 import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
@@ -12,6 +11,7 @@ public class ExitCommand extends Command {
 
     /**
      * Execute the ExitCommand. Causes chat bot to terminate.
+     *
      * @param tasks Unused.
      * @param ui This is to interact with the user interface, printing Exit message.
      * @param storage Unused.
@@ -25,6 +25,7 @@ public class ExitCommand extends Command {
 
     /**
      * Cause programme to terminate and exit.
+     *
      * @return boolean true.
      */
     @Override
