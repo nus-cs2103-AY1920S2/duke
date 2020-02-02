@@ -149,7 +149,7 @@ public class Duke {
             if (find.isEmpty()) {
                 throw new DukeDescriptionException("Empty Description");
             }
-            TaskList outputList = new TaskList(taskList.find(find.substring(1)));
+            TaskList outputList = new TaskList(taskList.find(find.substring(1).split(" ")));
             System.out.println("Here are the matching tasks in your list:");
             outputList.printTask();
             break;
