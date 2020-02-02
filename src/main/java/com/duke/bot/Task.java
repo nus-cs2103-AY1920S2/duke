@@ -35,7 +35,8 @@ public class Task {
      * @return a symbol.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        //return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "Done" : "Not Done");
     }
 
     /**
