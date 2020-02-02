@@ -40,27 +40,29 @@ public class TaskList {
      * Adds task to the task list.
      *
      * @param task the task to add.
+     * @return acknowledgement message by Duke.
      */
-    public void addTask(Task task) {
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + task);
+    public String addTask(Task task) {
+        String output = "     Got it. I've added this task:\n";
+        output += "       " + task + "\n";
         tasks.add(task);
-        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+        output += "     Now you have " + tasks.size() + " tasks in the list.";
+        return output;
     }
 
     /**
      * Deletes task from the task list.
      *
      * @param taskNo the index to delete from the ArrayList of tasks.
+     * @return acknowledgement message by Duke.
      * @throws DukeException if the given index is out of bound of the ArrayList.
      */
-    public void deleteTask(int taskNo) throws DukeException {
+    public String deleteTask(int taskNo) throws DukeException {
         try {
             Task task = tasks.get(taskNo);
             tasks.remove(task);
-            System.out.println("     Noted. I've removed this task:");
-            System.out.println("       " + task);
-            System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+            return "     Noted. I've removed this task:\n       " + task
+                    + "\n     Now you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! Do you have this task number?");
         }
@@ -70,25 +72,30 @@ public class TaskList {
      * Finds and lists all tasks that contains the keyword in the description.
      *
      * @param keyword the keyword to search for.
+     * @return the list of tasks that contains the keyword.
      */
-    public void find(String keyword) {
-        System.out.println("     Here are the matching tasks in your list:");
+    public String find(String keyword) {
+        String output = "     Here are the matching tasks in your list:";
         int counter = 1;
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
-                System.out.println("     " + counter + ". " + task);
+                output += "\n     " + counter + ". " + task;
                 counter++;
             }
         }
+        return output;
     }
 
     /**
      * Lists all the tasks.
+     *
+     * @return the list of tasks.
      */
-    public void listTasks() {
-        System.out.println("     Here are the tasks in your list:");
+    public String listTasks() {
+        String output = "     Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + tasks.get(i));
+            output += "\n     " + (i + 1) + ". " + tasks.get(i);
         }
+        return output;
     }
 }

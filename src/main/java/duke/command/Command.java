@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents an executable command.
@@ -21,7 +20,7 @@ public abstract class Command {
         this.isExit = isExit;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Returns a boolean on whether the command is an exit command.

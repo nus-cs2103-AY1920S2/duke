@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Marks task as done.
@@ -26,14 +25,14 @@ public class DoneCommand extends Command {
      * Executes DoneCommand by marking the task as done.
      *
      * @param tasks   TaskList of Duke.
-     * @param ui      The user interface.
      * @param storage To load from and save to the disk.
+     * @return Acknowledgement message sent by Duke.
      * @throws DukeException if the given task number is out of bound of the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            tasks.getTasks().get(taskNo).markAsDone();
+            return tasks.getTasks().get(taskNo).markAsDone();
         } catch (Exception e) {
             throw new DukeException("OOPS!!! Which task is done?");
         }

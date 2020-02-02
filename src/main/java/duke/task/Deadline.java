@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Constructs a Deadline object.
      *
      * @param description the title of the task.
-     * @param by the deadline of the task in yyyy-MM-dd format.
+     * @param by          the deadline of the task in yyyy-MM-dd format.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -25,8 +25,8 @@ public class Deadline extends Task {
      * Constructs a Deadline object when loading from disk.
      *
      * @param description the title of the task.
-     * @param isDone whether the task has been completed
-     * @param by the deadline of the task.
+     * @param isDone      whether the task has been completed
+     * @param by          the deadline of the task.
      */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
@@ -50,6 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 }
