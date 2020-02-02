@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class InvalidCommandException extends DukeException{
+    public InvalidCommandException(String message) {
+        super(message);
+    }
 
-public class InvalidCommandException {
+    @Override
+    public String toString() {
+        return "Uhh... You're gonna have to say that again, Red.";
+    }
 }
