@@ -5,25 +5,11 @@ import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
 
-/**
- * Creates a new Command object according to user input.
- */
 public abstract class Command {
 
-    /**
-     * Execute the respective command.
-     * @param tasks This is the TaskList being loaded.
-     * @param ui This is to interact with the user to see the output.
-     * @param storage This allows for TaskList to be updated and stored in hard drive.
-     * @throws DukeException depending on command, different child class exception is thrown.
-     * @return Nothing.
-     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    /**
-     * Check for Exit Command and exit programme if returns false.
-     * @return boolean This checks if command is Exit Command.
-     */
     public abstract boolean isExit();
 
+    public static final String LINE = "____________________________________________________________\n";
 }
