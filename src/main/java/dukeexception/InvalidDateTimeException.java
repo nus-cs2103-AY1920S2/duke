@@ -4,7 +4,6 @@ public class InvalidDateTimeException extends DukeException {
 
     /**
      * Return message of the Thrown InvalidDateTimeException.
-     *
      * @return String to be printed.
      */
     @Override

@@ -16,7 +16,6 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand
-     *
      * @param index the index of Task to be marked as done from TaskList.
      */
     public DoneCommand(int index) {
@@ -25,7 +24,6 @@ public class DoneCommand extends Command {
 
     /**
      * Execute the DoneCommand. It marks Task as done.
-     *
      * @param tasks This is the TaskList where the Task is stored.
      * @param ui This is to interact with the user interface, printing message of Task being marked as done.
      * @param storage This allows for TaskList to be updated with new Task status.
@@ -47,7 +45,6 @@ public class DoneCommand extends Command {
 
     /**
      * DoneCommand does not cause the programme to exit.
-     *
      * @return boolean false since not ExitCommand.
      */
     @Override

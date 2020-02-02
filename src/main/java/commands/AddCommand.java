@@ -15,7 +15,6 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand
-     *
      * @param t t is the Task to be added into TaskList.
      */
     public AddCommand(Task t) {
@@ -24,7 +23,6 @@ public class AddCommand extends Command {
 
     /**
      * Execute the AddCommand. Adds task into TaskList.
-     *
      * @param tasks This is the TaskList new Task is being added to.
      * @param ui This is to interact with the user interface, printing message of Task being added.
      * @param storage This allows for TaskList to be updated with new Task.
@@ -43,7 +41,6 @@ public class AddCommand extends Command {
 
     /**
      * AddCommand does not cause the programme to exit.
-     *
      * @return boolean false since not ExitCommand.
      */
     @Override

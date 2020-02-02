@@ -4,7 +4,6 @@ public class InvalidIndexException extends DukeException {
 
     /**
      * Return message of the Thrown InvalidIndexException.
-     *
      * @return String to be printed.
      */
     @Override

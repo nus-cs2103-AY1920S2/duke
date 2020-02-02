@@ -16,7 +16,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand
-     *
      * @param index the index of Task to be deleted from TaskList.
      */
     public DeleteCommand(int index) {
@@ -25,7 +24,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Execute the DeleteCommand. Delete Task from TaskList.
-     *
      * @param tasks This is the TaskList Task is being deleted from.
      * @param ui This is to interact with the user interface, printing message of Task being deleted.
      * @param storage This allows for TaskList to be updated.
@@ -47,7 +45,6 @@ public class DeleteCommand extends Command {
 
     /**
      * DeleteCommand does not cause the programme to exit.
-     *
      * @return boolean false since not ExitCommand.
      */
     @Override

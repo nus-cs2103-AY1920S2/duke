@@ -24,7 +24,6 @@ public class Storage {
 
     /**
      * Constructor for creating new Storage object and creates new ArrayList to store Tasks.
-     *
      * @param pathName This is the path name of where the file is being stored.
      */
     public Storage(String pathName) {
@@ -34,7 +33,6 @@ public class Storage {
 
     /**
      * Load the files from txt into TaskList.
-     *
      * @throws LoadException thrown when not able to load file.
      * @return ArrayList<Task> with Tasks being loaded into an ArrayList.
      */
@@ -84,7 +82,6 @@ public class Storage {
 
     /**
      * Save tasks into txt file.
-     *
      * @param tasks This is the ArrayList where the Task is being stored.
      * @throws SaveException thrown when not able to save tasks into file.
      * @return Nothing.
@@ -99,11 +96,11 @@ public class Storage {
         } catch (IOException e) {
             throw new SaveException();
         }
+
     }
 
     /**
      * Save tasks into txt file.
-     *
      * @param task This is the Task to be formatted to save into file.
      * @return Formatted string.
      */

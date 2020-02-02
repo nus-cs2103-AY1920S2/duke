@@ -19,7 +19,6 @@ public class Duke {
 
     /**
      * Constructor for Duke class.
-     *
      * @param filePath  File path of the text file to be loaded/saved.
      */
     public Duke(String filePath) {
@@ -35,7 +34,6 @@ public class Duke {
 
     /**
      * This method is used to run the application and start the chat bot.
-     *
      * @return Nothing.
      */
     public void run() {
@@ -58,7 +56,6 @@ public class Duke {
 
     /**
      * This is the main method which makes use of static run method.
-     *
      * @param args Unused.
      * @return Nothing.
      */

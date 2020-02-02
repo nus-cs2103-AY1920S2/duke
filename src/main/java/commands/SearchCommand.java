@@ -1,5 +1,6 @@
 package commands;
 
+import dukeexception.DukeException;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
@@ -8,6 +9,7 @@ import tasklist.TaskList;
 import ui.Ui;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Search Task by date and list Task.
@@ -15,10 +17,10 @@ import java.time.LocalDate;
 public class SearchCommand extends Command {
 
     private LocalDate date;
+    private LocalTime time;
 
     /**
      * Constructor for DeleteCommand
-     *
      * @param date This is the date of Tasks we are searching for.
      */
     public SearchCommand(LocalDate date) {
@@ -27,7 +29,6 @@ public class SearchCommand extends Command {
 
     /**
      * Execute the SearchCommand. It searches for Tasks of an user input date.
-     *
      * @param tasks This is the TaskList where the Task is stored.
      * @param ui This is to interact with the user interface, printing message of Task having the required date.
      * @param storage Unused.
@@ -53,7 +54,6 @@ public class SearchCommand extends Command {
 
     /**
      * SearchCommand does not cause the programme to exit.
-     *
      * @return boolean false since not ExitCommand.
      */
     @Override
