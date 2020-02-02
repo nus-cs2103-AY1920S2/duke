@@ -76,8 +76,8 @@ public class com.duke.Duke extends Application {
 
 Note how we have created a `Label` to contain the text that we want to show. We then create the `Scene` and set its content. Finally, we set the stage and show it. 
 
-Next, we create another Java class, `com.duke.util.Launcher`, as an entry point to our application.
-The `com.duke.util.Launcher` class is reproduced below in its entirety.
+Next, we create another Java class, `com.duke.Launcher`, as an entry point to our application.
+The `com.duke.Launcher` class is reproduced below in its entirety.
 
 ```java
 import com.duke.Duke;import javafx.application.Application;
@@ -85,14 +85,14 @@ import com.duke.Duke;import javafx.application.Application;
 /**
  * A launcher class to workaround classpath issues.
  */
-public class com.duke.util.Launcher {
+public class com.duke.Launcher {
     public static void main(String[] args) {
         Application.launch(Duke.class, args);
     }
 }
 ```
 
-Run `com.duke.util.Launcher` and you should see something like this:
+Run `com.duke.Launcher` and you should see something like this:
 
 ![Hello World](assets/HelloWorld.png) 
 

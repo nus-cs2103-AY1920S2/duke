@@ -1,6 +1,6 @@
-package com.duke.util;
+package com.duke;
 
-import com.duke.util.Main;
+import com.duke.Main;
 import javafx.application.Application;
 
 /**

@@ -1,4 +1,4 @@
-package com.duke.util;
+package com.duke.ui;
 
 import com.duke.Duke;
 
@@ -49,5 +49,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    public void greetUser() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
     }
 }
