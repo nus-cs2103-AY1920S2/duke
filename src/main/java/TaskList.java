@@ -5,24 +5,49 @@ public class TaskList {
 
     public ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param tasks ArrayList for TaskList.
+     */
     public TaskList(ArrayList tasks) {
         this.tasks = tasks;
     }
-    
-    public void addTask(Task task){
+
+    /**
+     * Adds task to TaskList.
+     *
+     * @param task Task to be added to TaskList.
+     */
+    public void addTask(Task task) {
         tasks.add(task);
     }
-    public int getTaskListSize(){
+
+    /**
+     * Get number of tasks in TaskList.
+     *
+     * @return Number of tasks in TaskList.
+     */
+    public int getTaskListSize() {
         return tasks.size();
     }
-    
-    public Task getTask(int taskNumber){
+
+    /**
+     * Get specified task in TaskList.
+     *
+     * @param taskNumber Task number in TaskList .
+     * @return Task specified.
+     */
+    public Task getTask(int taskNumber) {
         return tasks.get(taskNumber);
     }
-    
-    public void deleteTask(int taskNumber){
+
+    /**
+     * Deletes specified task in TaskList.
+     *
+     * @param taskNumber Task number in TaskList.
+     */
+    public void deleteTask(int taskNumber) {
         tasks.remove(taskNumber);
     }
-    
-
 }

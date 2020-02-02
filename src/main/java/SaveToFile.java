@@ -7,12 +7,24 @@ import java.util.Scanner;
 
 
 public class SaveToFile {
+    /**
+     * Saves tasks to out.txt.
+     *
+     * @param list TaskList to write to out.txt.
+     * @throws IOException If file not available.
+     */
     public static void usingFileWriter(String list) throws IOException {
         FileWriter fileWriter = new FileWriter("./out.txt");
         fileWriter.write(list);
         fileWriter.close();
     }
 
+    /**
+     * Loads saved TaskList to Duke.
+     *
+     * @param filePath File path for duke's task list.
+     * @return ArrayList of saved TaskList if not new ArrayList would be returned.
+     */
     public ArrayList<Task> loadList(String filePath) {
         ArrayList<Task> arr = new ArrayList<>();
         try {

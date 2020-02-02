@@ -6,6 +6,13 @@ public class Event extends Task {
     protected String at;
     protected LocalDate formattedDate;
 
+    /**
+     * Constructor for Event class
+     *
+     * @param description Description for event.
+     * @param at          Date of event
+     * @throws DukeException If date/description not specified.
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         if (at.equalsIgnoreCase("")) {
@@ -20,8 +27,13 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
-    
-    public String saveToList(){
+
+    /**
+     * Same as toString.
+     *
+     * @return Event toString.
+     */
+    public String saveToList() {
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 }

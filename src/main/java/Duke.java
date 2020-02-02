@@ -10,6 +10,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for duke.
+     *
+     * @param filePath File path for duke's task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         saveToFile = new SaveToFile();
@@ -17,6 +22,9 @@ public class Duke {
         tasks = new TaskList(saveToFile.loadList(filePath));
     }
 
+    /**
+     * Run duke
+     */
     public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
@@ -121,7 +129,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        
+
         new Duke("./out.txt").run();
     }
 }
