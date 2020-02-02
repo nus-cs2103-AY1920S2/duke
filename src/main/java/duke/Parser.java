@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -31,7 +33,7 @@ public class Parser {
                 int taskNumber = Integer.parseInt(inputs[1].trim()) - 1;
                 if (inputs[0].equals("done")) {
                     if (tasks.get(taskNumber).isTaskDone()) {
-                        ui.exceptionMessage(new DukeException("☹ OOPS!!! Task is already done!"));
+                        ui.exceptionMessage(new DukeException("☹ OOPS!!! duke.Task is already done!"));
                     }
                     tasks.get(taskNumber).markAsDone();
                     ui.userMessage("Nice! I've marked this task as done:\n    " + tasks.get(taskNumber));
