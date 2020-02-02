@@ -7,6 +7,12 @@ package dukeclasses;
  */
 public class Duke {
 
+    /**
+     * The main method to start Duke.
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
 
         FastReader fr = new FastReader();//Handles input by the user
@@ -18,9 +24,9 @@ public class Duke {
 
         String textEntered = fr.nextLine();
 
-        while(!ui.hasEnded){
+        while (!ui.hasEnded) {
             ui.handleInputs(textEntered);
-            if (textEntered.equals("bye")){
+            if (textEntered.equals("bye")) {
                 break;
             }
             textEntered = fr.nextLine();

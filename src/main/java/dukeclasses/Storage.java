@@ -30,7 +30,7 @@ public class Storage {
             if (!success) {
                 throw new IOException("Failed to create directory ");
             }
-        }else {
+        } else {
             System.out.println("Connecting to Stark's secure database...");
         }
     }
@@ -42,14 +42,14 @@ public class Storage {
      */
     public void checkFile() throws IOException {
         File dataFile = new File(Paths.get(dataDirPath.concat("data.txt")).toUri());
-        if (!dataFile.exists()){
+        if (!dataFile.exists()) {
             boolean fileCreated = dataFile.createNewFile();
-            if (fileCreated){
+            if (fileCreated) {
                 System.out.println("New file created successfully");
-            }else{
+            } else {
                 System.out.println("Cannot create file");
             }
-        }else{
+        } else {
             System.out.println("Data file found! Proceeding to load existing data!");
         }
     }
@@ -100,8 +100,8 @@ public class Storage {
 
         } catch (FileNotFoundException ex) {
             System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
+                    "Unable to open file '"
+                           + fileName + "'");
         } catch (IOException ex) {
             System.out.println(
                     "Error reading file '"
@@ -127,15 +127,15 @@ public class Storage {
             // Always wrap FileWriter in BufferedWriter.
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for(int i = 0 ; i < list.size() ; i++){
+            for (int i = 0; i < list.size(); i++) {
                 Task t = list.get(i);
-                if(t instanceof ToDo){
+                if (t instanceof ToDo) {
                     bufferedWriter.write(((ToDo) t).saveData());
                     bufferedWriter.newLine();
-                }else if(t instanceof Deadline){
+                }else if (t instanceof Deadline) {
                     bufferedWriter.write(((Deadline) t).saveData());
                     bufferedWriter.newLine();
-                }else{
+                } else {
                     bufferedWriter.write(((Event) t).saveData());
                     bufferedWriter.newLine();
                 }

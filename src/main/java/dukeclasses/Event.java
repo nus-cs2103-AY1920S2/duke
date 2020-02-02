@@ -19,7 +19,8 @@ public class Event extends Task {
      * @return returns a String containing the description of the object, used to print out
      */
     @Override
-    public String toString(){
+    public String toString() {
+
         return "[E]" + super.toString() + "(at: " + at + ")";
     }
 
