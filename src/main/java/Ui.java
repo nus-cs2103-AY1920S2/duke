@@ -35,17 +35,22 @@ public class Ui {
      * Message when TaskList is empty.
      */
     public void emptyList() {
+        showLine();
         System.out.println("You currently do not have anything in your list");
         showLine();
     }
 
     /**
-     * Message when Task is done.
+     * Done task command
+     *
+     * @param taskList   Current TaskList
+     * @param taskNumber Specified task number in TaskList
      */
-    public void doneTask() {
+    public void doneTask(TaskList taskList, int taskNumber) {
         showLine();
         System.out.println("Consider it done.");
-
+        taskList.getTask(taskNumber).doneTask();
+        System.out.println(taskList.getTask(taskNumber).toString());
     }
 
     /**
@@ -54,15 +59,23 @@ public class Ui {
     public void invalidTask() {
         showLine();
         System.out.println("Invalid task number");
+        showLine();
 
     }
 
     /**
-     * Message when task is deleted.
+     * Deletes task command.
+     *
+     * @param taskList   Current TaskList.
+     * @param taskNumber Task number to be deleted from Task List.
      */
-    public void deletedTask() {
+    public void deletedTask(TaskList taskList, int taskNumber) {
         showLine();
         System.out.println("Consider it deleted.");
+        System.out.println(taskList.getTask(taskNumber).toString());
+        taskList.deleteTask(taskNumber);
+        taskInList(taskList.getTaskListSize());
+        showLine();
     }
 
     /**
@@ -99,6 +112,7 @@ public class Ui {
     public void addedCommand() {
         showLine();
         System.out.println("Duke: added your command. \n");
+
     }
 
     /**
@@ -108,6 +122,15 @@ public class Ui {
      */
     public void taskInList(int listSize) {
         System.out.println("You have " + listSize + " task(s) in your list.");
+        showLine();
+    }
+
+    public void listCommand(TaskList taskList, StringBuilder sb) {
+        showLine();
+        for (int i = 0; i < taskList.getTaskListSize(); i++) {
+            System.out.println(i + 1 + ". " + taskList.getTask(i).toString());
+            sb.append(taskList.getTask(i).saveToList() + "\n");
+        }
         showLine();
     }
 

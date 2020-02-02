@@ -1,5 +1,3 @@
-import java.io.File;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -35,25 +33,18 @@ public class Duke {
                     ui.goodbyeMessage();
                     break;
                 } else if (arrString[0].equalsIgnoreCase("list")) {
-                    ui.showLine();
                     if (tasks.getTaskListSize() == 0) {
                         ui.emptyList();
                     } else {
                         StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i < tasks.getTaskListSize(); i++) {
-                            System.out.println(i + 1 + ". " + tasks.getTask(i).toString());
-                            sb.append(tasks.getTask(i).saveToList() + "\n");
-                        }
+                        ui.listCommand(tasks, sb);
                         saveToFile.usingFileWriter(sb.toString());
-                        ui.showLine();
                     }
                 } else if (arrString[0].equalsIgnoreCase("done")) {
                     try {
                         int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
                         if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
-                            tasks.getTask(taskNumber).doneTask();
-                            ui.doneTask();
-                            System.out.println(tasks.getTask(taskNumber).toString());
+                            ui.doneTask(tasks, taskNumber);
                         } else {
                             ui.invalidTask();
                         }
@@ -66,14 +57,10 @@ public class Duke {
                     try {
                         int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
                         if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
-                            ui.deletedTask();
-                            System.out.println(tasks.getTask(taskNumber).toString());
-                            tasks.deleteTask(taskNumber);
-                            ui.taskInList(tasks.getTaskListSize());
+                            ui.deletedTask(tasks, taskNumber);
                         } else {
                             ui.invalidTask();
                         }
-                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.missingTaskNumber());
                     }
@@ -94,8 +81,6 @@ public class Duke {
                         String[] eventString = arrString[1].split("/");
                         Event event = new Event(eventString[0].strip(), eventString[1].substring(2).strip());
                         tasks.addTask(event);
-                        ui.addedCommand();
-                        System.out.println(event.toString());
                         ui.taskInList(tasks.getTaskListSize());
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Event"));
@@ -105,8 +90,6 @@ public class Duke {
                         String[] deadlineString = arrString[1].split("/");
                         Deadline deadline = new Deadline(deadlineString[0].strip(), deadlineString[1].substring(2).strip());
                         tasks.addTask(deadline);
-                        ui.addedCommand();
-                        System.out.println(deadline.toString());
                         ui.taskInList(tasks.getTaskListSize());
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Deadline"));

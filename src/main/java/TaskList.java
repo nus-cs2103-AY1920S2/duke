@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-
+    Ui ui = new Ui();
     public ArrayList<Task> tasks = new ArrayList<>();
 
     Ui ui = new Ui();
@@ -22,6 +22,8 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        ui.addedCommand();
+        System.out.println(task.toString());
     }
 
     /**
