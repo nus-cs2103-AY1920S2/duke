@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: dukebot.Duke
+Main-Class: dukebot.Launcher
 

@@ -9,6 +9,7 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Duke {
     private static final String PATH = "./dukeStore.txt";
@@ -23,7 +24,18 @@ public class Duke {
     public Duke(boolean withGui) {
         storage = new Storage();
         ui = new Ui(withGui);
-        parser = new Parser();
+
+        HashMap<String, String> loadedAliasMap = null;
+        try {
+            loadedAliasMap = storage.loadAlias();
+        } catch (DukeException e) {
+            ui.sayLine(e.getErrorLineName());
+        }
+        if (loadedAliasMap == null) {
+            parser = new Parser();
+        } else {
+            parser = new Parser(loadedAliasMap);
+        }
 
         if (withGui) {
             ui.showWelcomeGui();

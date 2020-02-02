@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_default.png"));
-    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/heart_background.jpg"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/user_default.png"));
+    private Image backgroundImage = new Image(getClass().getResourceAsStream("/images/heart_background.jpg"));
 
     /**
      * Init the GUI.

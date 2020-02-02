@@ -1,18 +1,15 @@
 package dukebot.storage;
 
+import dukebot.command.CommandList;
 import dukebot.exception.DukeException;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Storage {
     private boolean saveAlreadyFailed = false;
@@ -90,6 +87,64 @@ public class Storage {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 // e.printStackTrace();
+            }
+        }
+        throw new DukeException(LineName.LOAD_FAIL);
+    }
+
+    /**
+     * Saves data to drive.
+     *
+     * @param aliasMap The aliasMap to save.
+     * @throws DukeException  If save fails for the first time.
+     */
+    public void saveAlias(HashMap<String, CommandList> aliasMap) throws DukeException {
+        try {
+            mkDataDir();
+            File file = new File(storageDirectory + ALIAS_FILEPATH);
+            FileOutputStream writeData = new FileOutputStream(file);
+            OutputStreamWriter writeStream = new OutputStreamWriter(writeData);
+            for (String alias : aliasMap.keySet()) {
+                String command = aliasMap.get(alias).getDefaultCommand();
+                writeStream.write(command + " " + alias + "\n");
+            }
+            writeStream.flush();
+            writeStream.close();
+        } catch (IOException e) {
+            // e.printStackTrace();
+            if (!saveAlreadyFailed) {
+                saveAlreadyFailed = true;
+                throw new DukeException(LineName.SAVE_FAIL);
+            }
+        }
+    }
+
+    /**
+     * Loads aliasMap from drive.
+     *
+     * @return The saved aliasMap with key default command and value alias.
+     * @throws DukeException  If no data is found.
+     */
+    public HashMap<String, String> loadAlias() throws DukeException {
+        File file = new File(storageDirectory + ALIAS_FILEPATH);
+        if (file.isFile()) {
+            try {
+                FileReader fr = new FileReader(file);   //reads the file
+                BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
+                String line = br.readLine();
+
+                HashMap<String, String> aliasMap = new HashMap<String, String>();
+                while(line != null) {
+                    String[] lineArr = line.split(" ");
+                    if (lineArr.length >= 2) {
+                        aliasMap.put(lineArr[0], lineArr[1]);
+                    }
+                    line = br.readLine();
+                }
+                fr.close();    //closes the stream and release the resources
+                return aliasMap;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         throw new DukeException(LineName.LOAD_FAIL);

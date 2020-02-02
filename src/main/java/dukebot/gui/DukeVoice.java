@@ -1,9 +1,11 @@
 package dukebot.gui;
 
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.Random;
 
 public enum DukeVoice {
@@ -19,15 +21,20 @@ public enum DukeVoice {
     NO_VOICE();
 
     private static final Random generator = new Random();
-    private final Media dukeSound;
+    private Media dukeSound;
 
     DukeVoice() {
         dukeSound = null;
     }
 
     DukeVoice(String fileName) {
-        dukeSound = new Media(new File("src/main/resources/sound/" + fileName + ".wav").toURI().toString());
-        // dukeVoicePlayer = new MediaPlayer(sound);
+        try {
+            String uri = DukeVoice.class.getResource("/sound/" + fileName + ".wav").toURI().toString();
+            dukeSound = new Media(uri);
+        } catch (URISyntaxException | MediaException e) {
+            dukeSound = null;
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -51,7 +58,7 @@ public enum DukeVoice {
      * Plays corresponding voice.
      */
     public void playVoice() {
-        if (this != NO_VOICE) {
+        if (dukeSound != null) {
             new MediaPlayer(dukeSound).play();
         }
     }

@@ -1,58 +1,52 @@
 package dukebot.command;
 
+import dukebot.exception.DukeException;
 import dukebot.ui.LineName;
 
 import java.util.HashMap;
 
 public class Parser {
-    private enum CommandList {
-        BYE("bye"),
-        HELP("help"),
-        LIST("list"),
-        FIND("find"),
-        DONE("done"),
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event"),
-        DELETE("delete");
-
-        private final String defaultCommand;
-        CommandList(String defaultCommand) {
-            this.defaultCommand = defaultCommand;
-        }
-
-        protected String getDefaultCommand() {
-            return defaultCommand;
-        }
-    }
-    private HashMap<String, CommandList> parseMap;
+    private HashMap<String, CommandList> aliasMap;
 
     /**
      * Use default commands for parser.
      */
     public Parser() {
-        parseMap = new HashMap<>();
+        aliasMap = new HashMap<>();
         for (CommandList command: CommandList.values()) {
-            parseMap.put(command.getDefaultCommand(), command);
+            aliasMap.put(command.getDefaultCommand(), command);
         }
     }
 
-    // /**
-    //  * Use saved aliases for parser.
-    //  *
-    //  * @param aliasMap  Key is the default command, value is alias.
-    //  */
-    // public Parser(HashMap<String, String> aliasMap) {
-    //     parseMap = new HashMap<>();
-    //     for (CommandList command: CommandList.values()) {
-    //         String defaultValue = command.getDefaultCommand();
-    //         if (aliasMap.containsKey(defaultValue)) {
-    //             parseMap.put(aliasMap.get(defaultValue), command);
-    //         } else {
-    //             parseMap.put(command.getDefaultCommand(), command);
-    //         }
-    //     }
-    // }
+    /**
+     * Use saved aliases for parser.
+     *
+     * @param loadedAliasMap  Key is the default command, value is alias.
+     */
+    public Parser(HashMap<String, String> loadedAliasMap) {
+        aliasMap = new HashMap<>();
+        for (CommandList command: CommandList.values()) {
+            String defaultValue = command.getDefaultCommand();
+            if (loadedAliasMap.containsKey(defaultValue)) {
+                aliasMap.put(loadedAliasMap.get(defaultValue), command);
+            } else {
+                aliasMap.put(command.getDefaultCommand(), command);
+            }
+        }
+    }
+
+    protected HashMap<String, CommandList> updateAliasMap(String currentAlias, String newAlias) throws DukeException {
+        if (!aliasMap.containsKey(currentAlias)) {
+            throw new DukeException(LineName.ERROR_PLACEHOLDER);
+        } else if (aliasMap.containsKey(newAlias)) {
+            throw new DukeException(LineName.ERROR_PLACEHOLDER);
+        } else {
+            CommandList command = aliasMap.get(currentAlias);
+            aliasMap.remove(currentAlias);
+            aliasMap.put(newAlias, command);
+            return aliasMap;
+        }
+    }
 
     /**
      * Returns command object based on input string.
@@ -63,8 +57,10 @@ public class Parser {
     public Command parse(String input) {
         String[] inpArr = input.split(" ");
         String command = inpArr[0].toLowerCase();
-        if (parseMap.containsKey(command)) {
-            switch (parseMap.get(command)) {
+        if (aliasMap.containsKey(command)) {
+            switch (aliasMap.get(command)) {
+            case ALIAS:
+                return new AliasCommand(inpArr, this);
             case BYE:
                 return new ExitCommand();
             case HELP:
