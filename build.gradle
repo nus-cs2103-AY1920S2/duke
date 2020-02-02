@@ -19,3 +19,12 @@ application {
 run {
     standardInput = System.in
 }
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testCompile 'junit:junit:4.13'
+}
+
+test {
+    useJUnitPlatform()
+}
