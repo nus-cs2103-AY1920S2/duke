@@ -1,11 +1,6 @@
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.io.File;
-import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -14,10 +9,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Konnichiwa! I am Duke the cat! What can I do for you? meow~ (^.___.^)");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasksArr = new ArrayList<>();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage(taskList);
+        Ui ui = new Ui(taskList);
+        Parser parser = new Parser(storage, ui, taskList, sc);
 
         try {
-            load(tasksArr);
+            storage.load();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -25,95 +23,11 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 String command = sc.next();
-                if (command.equals("list")) {
-                    System.out.println("Here are the tasks in your list!");
-                    System.out.println("____________________________________________________________");
-                    for (int i = 0; i < tasksArr.size(); i++) {
-                        System.out.println("        " + (i + 1) + " " + tasksArr.get(i));
-                    }
-                    System.out.println("____________________________________________________________");
-                } else if (command.equals("done")) {
-                    int index = sc.nextInt() - 1;
-                    if (index < 0 || index > tasksArr.size() - 1) {
-                        throw new DukeException("done");
-                    } else {
-                        tasksArr.get(index).markAsDone();
-                        save(tasksArr);
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Good job! I have marked the task as done! meow~ \n");
-                        System.out.println("        " + tasksArr.get(index));
-                        System.out.println("____________________________________________________________");
-                    }
-                } else if (command.equals("todo")) {
-                    String str = sc.nextLine();
-                    if (str.split("").length > 1) {
-                        ToDo t = new ToDo(str.trim());
-                        tasksArr.add(t);
-                        save(tasksArr);
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Got it! I have added this task: \n");
-                        System.out.println("        " + t + "\n");
-                        System.out.println("Now you have " + tasksArr.size() + " tasks in the list! [^._.^]ﾉ");
-                        System.out.println("____________________________________________________________");
-                    } else {
-                        throw new DukeException("todo");
-                    }
-                } else if (command.equals("deadline")) {
-                    String str = sc.nextLine();
-                    if (str.split("").length > 1) {
-                        String[] splitStr = str.split("/by");
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                        LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
-                        DeadLine t = new DeadLine(splitStr[0].trim(), dateTime);
-                        tasksArr.add(t);
-                        save(tasksArr);
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Got it! I have added this task: \n");
-                        System.out.println("        " + t + "\n");
-                        System.out.println("Now you have " + tasksArr.size() + " tasks in the list! [^._.^]ﾉ");
-                        System.out.println("____________________________________________________________");
-                    } else {
-                        throw new DukeException("deadline");
-                    }
-                } else if (command.equals("event")) {
-                    String str = sc.nextLine();
-                    if (str.split("").length > 1) {
-                        String[] splitStr = str.split("/at");
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                        LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
-                        Event t = new Event(splitStr[0].trim(), dateTime);
-                        tasksArr.add(t);
-                        save(tasksArr);
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Got it! I have added this task: \n");
-                        System.out.println("        " + t + "\n");
-                        System.out.println("Now you have " + tasksArr.size() + " tasks in the list! [^._.^]ﾉ");
-                        System.out.println("____________________________________________________________");
-                    } else {
-                        throw new DukeException("event");
-                    }
-                } else if (command.equals("delete")) {
-                    int index = sc.nextInt() - 1;
-                    if (index < 0 || index > tasksArr.size() - 1) {
-                        throw new DukeException("delete");
-                    } else {
-                        Task t = tasksArr.get(index);
-                        tasksArr.remove(index);
-                        save(tasksArr);
-                        System.out.println("____________________________________________________________");
-                        System.out.println("Noted! I have removed this task: \n");
-                        System.out.println("        " + t + "\n");
-                        System.out.println("Now you have " + tasksArr.size() + " tasks in the list![^._.^]ﾉ");
-                        System.out.println("____________________________________________________________");
-                    }
-                } else if (command.equals("bye")) {
-                    System.out.println("Sayonara~");
-                    System.out.println(" (_＼ヽ\n" + "　 ＼＼ .Λ＿Λ.\n" + "　　 ＼(　ˇωˇ)　\n" + "　　　 >　⌒ヽ\n" + "　　　/ 　 へ＼\n"
-                            + "　　 /　　/　＼＼\n" + "　　 ﾚ　ノ　　 ヽ_つ\n" + "　　/　/\n" + "　 /　/|\n" + "　(　(ヽ\n" + "　|　|、＼\n"
-                            + "　| 丿 ＼ ⌒)\n" + "　| |　　) /\n" + "`ノ ) 　 Lﾉ\n" + "(_／");
+                if (command.equals("bye")) {
+                    ui.printBye();
                     break;
                 } else {
-                    throw new DukeException("invalid");
+                    parser.parse(command);
                 }
             } catch (DukeException e) {
                 System.out.println(e);
@@ -121,44 +35,5 @@ public class Duke {
                 System.out.println(e);
             }
         }
-    }
-
-    public static void load(ArrayList<Task> tasksArr) throws FileNotFoundException {
-        String filePath = "Data/Duke.txt";
-        File file = new File(filePath);
-        Scanner sc = new Scanner(file);
-        while (sc.hasNext()) {
-            String str = sc.nextLine();
-            String[] splitStr = str.split("\\s+" + "\\|" + "\\s+");
-            String taskType = splitStr[0];
-            String taskStatus = splitStr[1];
-            if (taskType.equals("T")) {
-                ToDo t = new ToDo(splitStr[2]);
-                tasksArr.add(t);
-            } else if (taskType.equals("E")) {
-                LocalDateTime dateTime = LocalDateTime.parse(splitStr[3].trim());
-                Event t = new Event(splitStr[2], dateTime);
-                tasksArr.add(t);
-            } else if (taskType.equals("D")) {
-                LocalDateTime dateTime = LocalDateTime.parse(splitStr[3].trim());
-                DeadLine t = new DeadLine(splitStr[2], dateTime);
-                tasksArr.add(t);
-            }
-
-            if (taskStatus.equals("1")) {
-                tasksArr.get(tasksArr.size() - 1).markAsDone();
-            }
-        }
-
-    }
-
-    public static void save(ArrayList<Task> tasksArr) throws IOException {
-        String filePath = "Data/Duke.txt";
-        FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < tasksArr.size(); i++) {
-            Task t = tasksArr.get(i);
-            fw.write(t.toFileString() + "\n");
-        }
-        fw.close();
     }
 }
