@@ -1,88 +1,90 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
- * DialogBox class for making Duke chat/command & response presentable.
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-
-    /**
-     * Text for the chat box.
-     */
-    private Label text;
-
-    /**
-     * Display picture for identification in the chat box.
-     */
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    /**
-     * Constructor for DialogBox.
-     *
-     * @param l the label to represent as text.
-     * @param iv the profile photo for identification.
-     */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        // Set Label and ImageView.
+        dialog.setText(text);
+        ImageView iv = new ImageView(img);
+        iv.setClip(new Circle(50, 50, 50));
+        displayPicture.setImage(img);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
      * Produces a DialogBox to represent the user's command.
      *
-     * @param l the label to include as text.
-     * @param iv the profile photo for user identification.
+     * @param text the label to include as text.
+     * @param img the profile photo for user identification.
      * @return DialogBox representing user command.
      */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
+    public static DialogBox getUserDialog(String text, Image img) {
 
-        DialogBox db = new DialogBox(l, iv);
+        DialogBox db = new DialogBox(text, img);
 
         // Special Effect: For user, command chats are blue in colour.
         db.setStyle("-fx-background-color:POWDERBLUE");
 
         return db;
+
     }
 
     /**
      * Produces a DialogBox to represent Duke's response.
      *
-     * @param l the label to include as text.
-     * @param iv the profile photo for Duke.
+     * @param text the label to include as text.
+     * @param img the profile photo for Duke.
      * @return DialogBox representing Duke's response.
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    public static DialogBox getDukeDialog(String text, Image img) {
 
-        DialogBox db = new DialogBox(l, iv);
+        DialogBox db = new DialogBox(text, img);
 
         // Special Effect: For Duke, response chats are on the left of the chatbox.
         db.flip();
 
         return db;
     }
-
 }
