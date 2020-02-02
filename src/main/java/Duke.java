@@ -14,7 +14,7 @@ public class Duke {
         ui = new Ui();
         saveToFile = new SaveToFile();
         ArrayList<Task> arr = new ArrayList<>();
-        tasks = new TaskList(saveToFile.loadList());
+        tasks = new TaskList(saveToFile.loadList(filePath));
     }
 
     public void run() {
@@ -121,7 +121,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-
+        
         new Duke("./out.txt").run();
     }
 }

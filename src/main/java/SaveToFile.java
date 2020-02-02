@@ -13,10 +13,10 @@ public class SaveToFile {
         fileWriter.close();
     }
 
-    public ArrayList<Task> loadList() {
+    public ArrayList<Task> loadList(String filePath) {
         ArrayList<Task> arr = new ArrayList<>();
         try {
-            Scanner s = new Scanner(new File("./out.txt"));
+            Scanner s = new Scanner(new File(filePath));
             while (s.hasNext()) {
                 String fileInput = s.nextLine();
                 String[] fileStringArr = fileInput.split("\\[");
