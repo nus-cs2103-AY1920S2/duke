@@ -16,7 +16,7 @@ import main.java.ToDoTask;
 import main.java.EventTask;
 import main.java.DeadLineTask;
 
-import main.java.NoDescriptionException;
+import main.java.exceptions.NoDescriptionException;
 
 public class Duke {
 
@@ -168,25 +168,32 @@ public class Duke {
         }
         else if (this.isTodoKey(input)){
             String description = this.findDescription(todoPattern, input);
-            if ("".equals(description)) {
-                System.out.println(line + "OOPS!!! The description of a todo cannot be empty.\n" + line);
-            } else {
+            try {
                 ToDoTask currentTask = new ToDoTask(description);
                 this.appendList(currentTask);
+            } catch (NoDescriptionException e) {
+                System.out.println(e.getMessage());
             }
         }
         else if (this.isDeadLineKey(input)){
             String description = this.findDescription(deadlinePattern, input);
             String by = this.findEndTime(deadlinePattern, input);
-            DeadLineTask currentTask = new DeadLineTask(description, by);
-            this.appendList(currentTask);
+            try {
+                DeadLineTask currentTask = new DeadLineTask(description, by);
+                this.appendList(currentTask);
+            } catch (NoDescriptionException e) {
+                System.out.println(e.getMessage());
+            }
         }
         else if (this.isEventKey(input)){
             String description = this.findDescription(eventPattern, input);
             String at = this.findEndTime(eventPattern, input);
-            EventTask currentTask = new EventTask(description, at);
-            this.appendList(currentTask);
-
+            try {
+                EventTask currentTask = new EventTask(description, at);
+                this.appendList(currentTask);
+            } catch (NoDescriptionException e) {
+                System.out.println(e.getMessage());
+            }
         }
         else {
             System.out.println(line + "OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);

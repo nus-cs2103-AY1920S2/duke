@@ -2,12 +2,13 @@ package main.java;
 
 import main.java.Task;
 
+import main.java.exceptions.NoDescriptionException;
 
 public class DeadLineTask extends Task {
     protected String by;
 
-    public DeadLineTask(String description, String by) {
-        super(description);
+    public DeadLineTask(String description, String by) throws NoDescriptionException {
+        super(description, "deadline task");
         this.by = by;
     }
 

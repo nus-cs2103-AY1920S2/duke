@@ -2,12 +2,13 @@ package main.java;
 
 import main.java.Task;
 
+import main.java.exceptions.NoDescriptionException;
 
 public class EventTask extends Task{
     protected String at;
 
-    public EventTask(String description, String at) {
-        super(description);
+    public EventTask(String description, String at) throws NoDescriptionException {
+        super(description, "event task");
         this.at = at;
     }
 

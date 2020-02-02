@@ -1,10 +1,20 @@
 package main.java;
 
+import main.java.exceptions.NoDescriptionException;
+
 public class Task {
+    protected String taskType;
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    static String line = "____________________________________________________________\n";
+
+    public Task(String description, String taskType) throws NoDescriptionException {
+        this.taskType = taskType;
+        if ("".equals(description)) {
+            throw new NoDescriptionException(line + "OOPS!!! The description of a " +
+                    this.taskType + " cannot be empty.\n" + line );
+        }
         this.description = description;
         this.isDone = false;
     }
