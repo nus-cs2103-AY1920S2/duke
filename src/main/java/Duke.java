@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private final static String filepath =
-            "C:\\Users\\Dargo\\Documents\\NUS\\CS\\CS2103T Software Engineering\\CS2103 Duke\\src\\main\\java\\duke.txt";
+            "..\\..\\..\\duke.txt";
 
     public static void main(String[] args) {
 
@@ -33,7 +33,7 @@ public class Duke {
         try {
 
             File file = new File
-                    ("C:\\Users\\Dargo\\Documents\\NUS\\CS\\CS2103T Software Engineering\\CS2103 Duke\\src\\main\\java\\duke.txt");
+                    ("..\\..\\..\\duke.txt");
             if(file.length() != 0) {
 
                 FileInputStream fileIn = new FileInputStream(filepath);
@@ -77,7 +77,9 @@ public class Duke {
                     String type = command[0];
                     try {
                         // Test string to see if exception should be thrown
-                        String test = command[1];
+                        if(command.length <= 1) {
+                            throw new DukeException(type);
+                        }
 
                         if(command[0].equals("todo)")) {
                             Task new_Task = new Todo(type, input);
@@ -101,8 +103,12 @@ public class Duke {
                         // Reset for new command
                         input = br.readLine();
                         command = input.split(" ");
+                    } catch (DukeException dukeException) {
+                        System.out.println(dukeException);
+                        input = br.readLine();
+                        command = input.split(" ");
                     } catch (Exception e) {
-                        System.out.println(new DukeException(type));
+                        System.out.println(e);
                         input = br.readLine();
                         command = input.split(" ");
                     }
