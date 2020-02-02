@@ -102,23 +102,14 @@ public class Storage {
      * @param tasks List of tasks to be saved.
      */
     public void updateFile(TaskList tasks) throws IOException {
-        FileWriter writer = new FileWriter(filePath);
-
-        if (tasks.getSize() == 0) {
-            writer.write("");
-            writer.close();
-            return;
-        }
+        FileWriter writer = new FileWriter(filePath, false);
 
         writer.write(tasks.getTask(0).obtainTaskInfo());
-        writer.close();
-
-        FileWriter appender = new FileWriter(filePath, true);
 
         for (int i = 1; i < tasks.getSize(); i++) {
-            appender.write(System.lineSeparator() + tasks.getTask(i).obtainTaskInfo());
+            writer.write(System.lineSeparator() + tasks.getTask(i).obtainTaskInfo());
         }
 
-        appender.close();
+        writer.close();
     }
 }
