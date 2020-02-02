@@ -30,7 +30,8 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return super.toString().concat(String.format(" at %s", due.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
+        return super.toString().concat(String.format(" at %s", due.format(
+                DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
     }
 
     /**
