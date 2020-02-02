@@ -13,7 +13,7 @@ public class Parser {
     /**
      * Parses the String user input from the Ui
      * Then checks the kind of Task: todo, event, deadline
-     * and also the commands: list, bye, delete, done, find
+     * and also the commands: list, bye, delete, done
      *
      * @param input string user input from Ui
      * @throws DukeException  If description is empty, or if the input is none of the commands
