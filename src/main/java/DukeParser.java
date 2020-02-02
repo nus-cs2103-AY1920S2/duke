@@ -48,7 +48,7 @@ public class DukeParser {
                 } else if (action.equalsIgnoreCase(("todo"))) {
                     DukeUI.showCreationMsg();
                     if (command_broken.length == 1) {
-                        throw new DukeException("Ooops! The description of a ToDo cannot be empty.");
+                        throw new DukeException("THE DESCRIPTION OF TODO CANNOT BE EMPTY");
                     }
                     tasks.addInput(new ToDos(command_broken[1], false));
 
@@ -69,7 +69,7 @@ public class DukeParser {
                     }
 
                 } else {
-                    throw new DukeException("Ooops! I'm sorry, i don't know what it means");
+                    throw new DukeException("UNABLE TO COMPREHEND");
                 }
 
             } catch (DukeException exception) {

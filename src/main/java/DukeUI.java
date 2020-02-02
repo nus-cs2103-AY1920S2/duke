@@ -12,7 +12,6 @@ public class DukeUI {
                 + "| |_____| |_| |_/ / |___| |\\ \\  | |   | |   | |   | |\\ \\ _| |_| |  | || |___\n"
                 + "\\_____/\\___/\\____/\\____/\\_| \\_| \\_/   \\_/   \\_|   \\_| \\_|\\___/\\_|  |_/\\____/\n";
         System.out.println(logo);
-        System.out.println("LIBERTY PRIME IS ONLINE");
         System.out.println("DEMOCRACY IS NON NEGOTIABLE");
     }
 
@@ -32,10 +31,12 @@ public class DukeUI {
     }
 
     public static void showDeleteMsg() {
-        System.out.println("OBSTRUCTION DETECTED. PROBABILITY OF DETERENCE: 0%");
+        System.out.println("OBSTRUCTION ELIMINATED");
     }
 
     public static void showFindMsg() {
         System.out.println("TARGET FOUND");
     }
+
+    public static void showCurrentListSize(int size) {System.out.println("NOW YOU HAVE " + size + " TARGETS TO ELIMINATE");}
 }

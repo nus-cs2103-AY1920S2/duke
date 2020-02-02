@@ -12,15 +12,14 @@ public class Deadlines extends Task{
     }
 
     public String getDeadline() {
-        return this.by.toString();
+        return this.by;
     }
 
     @Override
     public String toString() {
         LocalDate date = LocalDate.parse(by);
-        Format formatter = new SimpleDateFormat("MMM");
         String simpleMonth = date.getMonth().toString().substring(0,3);
         String formattedDate = simpleMonth + " " + date.getDayOfMonth() + " " + date.getYear();
-        return "[D]" + super.toString() + "(by:" + formattedDate + ")";
+        return "[D]" + super.toString() + " (By: " + formattedDate + ")";
     }
 }

@@ -8,6 +8,7 @@ public class Launcher {
         Application.launch(Duke.class, args);
         Duke duke = new Duke();
         duke.run();
+
     }
 }
 

@@ -35,8 +35,9 @@ public class Task {
         return isDone;
     }
 
+    //returns "O" if done, "X" if not
     public String getStatusIcon() {
-        return (isDone ? "O" : "X"); //return tick or X symbols
+        return (isDone ? "O" : "X");
     }
 
     public String getDescription() {

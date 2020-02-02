@@ -24,7 +24,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Label helloWorld = new Label("LIBERTY PRIME IS ONLINE"); // Creating a new Label control
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
