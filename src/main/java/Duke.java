@@ -1,5 +1,6 @@
-package duke;
-
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.data.Calender;
 import duke.data.TaskList;
 import duke.enums.Command;
