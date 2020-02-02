@@ -68,12 +68,20 @@ public class Parser {
             if (userInputSplit.length == 1) {
                 throw new DukeException("Sorry! Please input a task number.");
             }
-            this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+            try {
+                this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+            } catch (NumberFormatException ex) {
+                throw new DukeException("Sorry! Please enter a valid number.");
+            }
         } else if (this.command == Command.DELETE_TASK) {
             if (userInputSplit.length == 1) {
                 throw new DukeException("Sorry! Please input a task number.");
             }
-            this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+            try {
+                this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+            } catch (NumberFormatException ex) {
+                throw new DukeException("Sorry! Please enter a valid number.");
+            }
         } else if (this.command == Command.NOT_FOUND) {
             throw new DukeException("Sorry! I don't know what you mean!");
         } else if (this.command == Command.FIND_TASKS) {
