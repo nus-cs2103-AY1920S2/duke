@@ -3,7 +3,6 @@ package com.duke.bot;
 public class Task {
     protected String taskName;
     protected boolean isDone;
-    protected TaskType taskType = TaskType.OTHER;
 
     protected Task(String taskName, boolean isDone) {
         this.taskName = taskName;
@@ -19,11 +18,8 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
-    }
-
-    public TaskType getTaskType() {
-        return taskType;
+        //return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "Done" : "Not Done");
     }
 
     public void markDone() {
