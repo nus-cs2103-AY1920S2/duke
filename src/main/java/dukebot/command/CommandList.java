@@ -3,16 +3,18 @@ package dukebot.command;
 public enum CommandList {
     ALIAS("alias"),
     BYE("bye"),
+    DEADLINE("deadline"),
+    DELETE("delete"),
+    DONE("done"),
+    EVENT("event"),
+    FIND("find"),
     HELP("help"),
     LIST("list"),
-    FIND("find"),
-    DONE("done"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
-    DELETE("delete");
+    RESET("reset"),
+    TODO("todo");
 
     private final String defaultCommand;
+
     CommandList(String defaultCommand) {
         this.defaultCommand = defaultCommand;
     }

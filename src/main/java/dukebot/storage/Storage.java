@@ -51,6 +51,20 @@ public class Storage {
     }
 
     /**
+     * Deletes all data files.
+     *
+     * @throws DukeException If save fails for the first time.
+     */
+    public void clearStorage() {
+        mkDataDir();
+        String[] fileNames = new String[] {TASK_LIST_FILEPATH, ALIAS_FILEPATH};
+        for (String fileName : fileNames) {
+            File file = new File(storageDirectory + fileName);
+            file.delete();
+        }
+    }
+
+    /**
      * Saves data to drive.
      *
      * @param tasks The TaskList to save.

@@ -107,7 +107,8 @@ public class Ui {
                     + "find <query>\n-- Finds a task which has <query> as a substring of the task's name.\n\n"
                     + "done <task index>\n-- Marks the task as done.\n\n"
                     + "delete <task index>\n-- Deletes the task.\n\n"
-                    + "bye\n-- Exits this application"
+                    + "bye\n-- Exits this application."
+                    + "reset\n-- The forbidden Command. Please never use it... Duke'll forget everything."
             );
             break;
         case NO_INPUT:
@@ -225,6 +226,20 @@ public class Ui {
             dukeSays("There seem to be not existing save file.");
             dukeSays("Is this the first time Master has used Duke?");
             dukeSays("Type 'help' to see the list of commands.");
+            break;
+        case RESET_STORAGE_INIT:
+            dukeVoice = DukeVoice.WHAT;
+            dukeExpression = DukeExpression.SAD;
+            dukeSays("Master wants to wipe Duke's memories? Please don't say yes...");
+            break;
+        case RESET_STORAGE_FAIL:
+            dukeVoice = DukeVoice.LAUGHTER;
+            dukeSays("Duke'll pretend Master didn't say that.");
+            break;
+        case RESET_STORAGE_SUCCESS:
+            dukeVoice = DukeVoice.GOODBYE;
+            dukeExpression = DukeExpression.SAD;
+            dukeSays("It was nice knowing Master... Duke'll go somewhere far away now...");
             break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment

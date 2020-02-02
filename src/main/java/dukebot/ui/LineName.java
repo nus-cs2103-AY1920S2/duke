@@ -27,6 +27,9 @@ public enum LineName {
     LOAD_FAIL,
     NOT_A_NUMBER,
     NO_INPUT,
+    RESET_STORAGE_INIT,
+    RESET_STORAGE_SUCCESS,
+    RESET_STORAGE_FAIL,
     SAVE_FAIL,
     SAY_DUKE,
     TODO_EMPTY;
