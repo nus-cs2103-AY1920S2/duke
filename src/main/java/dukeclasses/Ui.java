@@ -61,18 +61,18 @@ public class Ui {
             int indexOfTaskDone = parser.handleDoneCommands(textEntered);
             try {
                 manager.setTaskAsDone(indexOfTaskDone);
-            } catch(ArrayIndexOutOfBoundsException ex) {
+            } catch (ArrayIndexOutOfBoundsException ex) {
                 System.out.println("Done must be followed by a number");
             } catch (IndexOutOfBoundsException ex) {
                 System.out.println("There is no task with that index! ");
             }
-        }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
+        } else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
                 || textEntered.contains("event")) {//create a task
             try {
                 manager.addTask(textEntered);
-            } catch (DukeException ex){
+            } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
-            } catch (DateTimeException ex){
+            } catch (DateTimeException ex) {
                 System.out.println("Please enter dates in this format YYYY-MM_DD");
             }
         } else if (textEntered.contains("delete")) {
@@ -81,9 +81,9 @@ public class Ui {
                 Parser parse = new Parser();
                 int indexOfTaskDeleted = parse.handleDeleteCommands(textEntered);
                 manager.deleteTask(indexOfTaskDeleted);
-            } catch (DukeException ex){
+            } catch (DukeException ex) {
                 System.out.println(ex);
-            } catch (IndexOutOfBoundsException ex){
+            } catch (IndexOutOfBoundsException ex) {
                 System.out.println(ex);
             }
         } else if (textEntered.contains("bye")) {
@@ -92,18 +92,18 @@ public class Ui {
         } else if (textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
             Parser parse = new Parser();
             String[] temp = parse.handleFindCommands(textEntered);
-            try{
+            try {
                  if (temp.length == 1) {
                     throw new DukeException("Find must be followed by a keyword and cannot be empty.");
                  }
                  manager.findTask(temp[1]);
-            } catch (DukeException ex){
+            } catch (DukeException ex) {
                 System.out.println(ex);
             }
         } else { //nonsense input
-            try{
+            try {
                 manager.nonsenseInput();
-            } catch (DukeException ex){
+            } catch (DukeException ex) {
                 System.out.println(ex);
             }
         }

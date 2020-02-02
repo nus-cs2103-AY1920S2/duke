@@ -41,8 +41,8 @@ public class TaskManager {
      */
     public void findTask(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < listOfTasks.size(); i++){
-            if(listOfTasks.get(i).description.contains(keyword)) {
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            if (listOfTasks.get(i).description.contains(keyword)) {
                 System.out.println("  " + (i + 1) +  ". " + this.listOfTasks.get(i).toString());
             }
         }
@@ -53,7 +53,7 @@ public class TaskManager {
      */
     public void listAllTasks() {
         System.out.println("Here are your tasks in your list: ");
-        for(int j = 0; j < this.listOfTasks.size(); j++) {
+        for (int j = 0; j < this.listOfTasks.size(); j++) {
             System.out.println("  " + (j + 1) +  ". " + this.listOfTasks.get(j).toString());
         }
     }
@@ -80,9 +80,9 @@ public class TaskManager {
 
         Task newTask;
 
-        if(textEntered.contains("todo")) { //Handles dukeClasses.Task that are dukeClasses.ToDos
+        if (textEntered.contains("todo")) { //Handles dukeClasses.Task that are dukeClasses.ToDos
 
-            if(textEntered.split(" ").length == 1) {
+            if (textEntered.split(" ").length == 1) {
                 throw new DukeException("The description of a todo cannot be empty");
             } else {
                 newTask = new ToDo(textEntered.substring(5));
@@ -109,11 +109,11 @@ public class TaskManager {
 
             }
 
-        }else { //Handles task that is dukeClasses.Event
+        } else { //Handles task that is dukeClasses.Event
 
-            if(textEntered.split(" ").length == 1) {
+            if (textEntered.split(" ").length == 1) {
                 throw new DukeException("The description of an event cannot be empty");
-            }else {
+            } else {
                 textEntered = textEntered.substring(6);
                 String[] temp = (textEntered.split("/"));
                 newTask = new Event(temp[0], temp[1].substring(3));
