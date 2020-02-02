@@ -5,6 +5,14 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': "Duke"
+        )
+    }
+}
+
 checkstyle {
     toolVersion = '8.23'
 }
@@ -40,3 +48,4 @@ shadowJar {
     archiveClassifier = null
     archiveAppendix = null
 }
+
