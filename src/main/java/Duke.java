@@ -169,6 +169,7 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         
         AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
 
