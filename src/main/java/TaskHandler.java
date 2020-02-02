@@ -16,27 +16,6 @@ public class TaskHandler {
         print(greeting);
     }
 
-    public void event(String task) {
-        String[] split = task.split("/", 2);
-        Event newTask = new Event(split[0], split[1]);
-        taskList.add(newTask);
-        print("added: " + task);
-    }
-
-    public void deadline(String task) {
-        String[] split = task.split("/", 2);
-        Deadline newTask = new Deadline(split[0], split[1]);
-        print(newTask.toString());
-        taskList.add(newTask);
-        print("added: " + task);
-    }
-
-    public void todo(String task) {
-        Todo newTask = new Todo(task);
-        taskList.add(newTask);
-        print("added: " + task);
-    }
-
     public void list() {
         taskList.forEach(task -> TaskHandler.print(String.format(
                 "%d. %s",
@@ -46,19 +25,7 @@ public class TaskHandler {
                 "That's %d in the list.", taskList.size()));
     }
 
-    public void done(int taskIndex) {
-        Task task = taskList.get(taskIndex - 1);
-        task.markAsDone();
-        print("That's another one down. That'll be: ");
-        print(task.toString());
-    }
 
-    public void delete(int taskIndex) {
-        Task task = taskList.get(taskIndex - 1);
-        taskList.remove(taskIndex - 1);
-        print("Don't need this here anymore eh? Off it goes.");
-        print(task.toString());
-    }
 
     public void exit() throws IOException {
         Saver.fullSaver(this.taskList);
@@ -70,9 +37,7 @@ public class TaskHandler {
         System.out.println(toPrint);
     }
 
-    public void handle() throws IOException {
-        Saver.loader(taskList);
-
+    public void handle() throws DukeException {
         Scanner scanner = new Scanner(System.in);
         ExceptionHandler exceptionHandler = new ExceptionHandler();
         boolean loop = true;

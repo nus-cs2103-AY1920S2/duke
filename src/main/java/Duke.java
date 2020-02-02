@@ -1,20 +1,29 @@
+import Storage.Storage;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        TaskHandler taskHandler = new TaskHandler();
-        // Saver saver = new Saver();
-        taskHandler.greet();
-        taskHandler.handle();
-        // saver.fullSaver(taskHandler.taskList);
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+
+    }
+
+    public static void main(String[] args) throws IOException {
     }
 }
