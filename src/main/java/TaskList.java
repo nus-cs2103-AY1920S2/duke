@@ -29,7 +29,6 @@ public class TaskList {
     public void delete(String str) throws IllegalArgumentException {
         Parser parser = new Parser();
         Ui ui = new Ui();
-        int index = this.tasks.size();
         int num = Integer.parseInt(str.substring(7));
         if (!parser.inRange(num, this.tasks.size())) {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");

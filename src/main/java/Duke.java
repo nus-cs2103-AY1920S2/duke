@@ -4,7 +4,8 @@ import Task.Todo;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
-import java.util.*;
+import java.util.StringTokenizer;
+import java.util.Scanner;
 
 /**
  * Represents a Duke bot. This is also the main class of duke project.
@@ -49,38 +50,38 @@ public class Duke {
         String first = st.nextToken(" ");
 
         switch (parser.getMessage(first)) {
-            case DONE:
-                parser.checkDescription(str, "done".length());
-                taskList.markDone(str);
-                break;
+        case DONE:
+            parser.checkDescription(str, "done".length());
+            taskList.markDone(str);
+            break;
 
-            case DELETE:
-                parser.checkDescription(str, "delete".length());
-                taskList.delete(str);
-                break;
+        case DELETE:
+            parser.checkDescription(str, "delete".length());
+            taskList.delete(str);
+            break;
 
-            case TODO:
-                parser.checkDescription(str, "todo".length());
-                Todo td = new Todo(st.nextToken("").substring(1));
-                taskList.addTask(td);
-                break;
+        case TODO:
+            parser.checkDescription(str, "todo".length());
+            Todo td = new Todo(st.nextToken("").substring(1));
+            taskList.addTask(td);
+            break;
 
-            case DEADLINE:
-                parser.checkDescription(str, "deadline".length());
-                String[] strings = parser.stringSplitting(st);
-                Deadline ddl = new Deadline(strings[0], strings[1]);
-                taskList.addTask(ddl);
-                break;
+        case DEADLINE:
+            parser.checkDescription(str, "deadline".length());
+            String[] strings = parser.stringSplitting(st);
+            Deadline ddl = new Deadline(strings[0], strings[1]);
+            taskList.addTask(ddl);
+            break;
 
-            case EVENT:
-                parser.checkDescription(str, "event".length());
-                String[] strings2 = parser.stringSplitting(st);
-                Event ev = new Event(strings2[0], strings2[1]);
-                taskList.addTask(ev);
-                break;
+        case EVENT:
+            parser.checkDescription(str, "event".length());
+            String[] strings2 = parser.stringSplitting(st);
+            Event ev = new Event(strings2[0], strings2[1]);
+            taskList.addTask(ev);
+            break;
 
-            default:
-                throw new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        default:
+            throw new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -89,12 +90,12 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        boolean exiting = false;
+        boolean isexiting = false;
 
         this.ui.greet(taskList);
 
         String str = sc.nextLine();
-        while (!exiting) {
+        while (!isexiting) {
             //check if the user want to exit
             while (!str.equals("bye")) {
                 if (str.equals("list")) {
@@ -105,7 +106,7 @@ public class Duke {
                     try {
                         processRequest(str);
                         this.storage.rewriteFile(taskList);
-                    } catch (InvalidKeyException | IllegalArgumentException |  EmptyDescriptionException
+                    } catch (InvalidKeyException | IllegalArgumentException | EmptyDescriptionException
                             | IOException e) {
                         System.err.println(e);
                     }
@@ -118,7 +119,7 @@ public class Duke {
 
             if (sc.nextLine().equals("y")) {
                 //confirm to leave and leaving message
-                exiting = true;
+                isexiting = true;
                 ui.typeSetting("    Bye. Hope to see you again soon! \uD83D\uDE1E\n");
             } else {
                 //not leaving and continue to interact with Bob

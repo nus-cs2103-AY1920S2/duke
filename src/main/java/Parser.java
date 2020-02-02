@@ -21,8 +21,8 @@ public class Parser {
     }
 
     //To check whether the input for description is empty or not
-    public void checkDescription(String str, int i) throws EmptyDescriptionException {
-        if (str.length() <= i + 1) {
+    public void checkDescription(String str, int length) throws EmptyDescriptionException {
+        if (str.length() <= length + 1) {
             throw new EmptyDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
     }

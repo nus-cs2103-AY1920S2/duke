@@ -21,28 +21,28 @@ public class Storage {
     //to update the data file when any changes are made to the list of tasks
     public void rewriteFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        StringBuilder text = new StringBuilder();
+        StringBuilder textToWrite = new StringBuilder();
         for (Task t: taskList.getTasks()) {
             List<String> details = new ArrayList<>() {{
                 add(t.getClass().getSimpleName());
                 add(t.getStatus());
                 add(getSpecificDescription(t));
             }};
-            text.append(String.join("~", details)).append("\n");
+            textToWrite.append(String.join("~", details)).append("\n");
         }
-        fw.write(text.toString());
+        fw.write(textToWrite.toString());
         fw.close();
     }
 
     //get an extra piece of information if the Task.Task is a Task.Deadline or Task.Event
     private String getSpecificDescription(Task t) {
-        String text = t.getDescription();
+        String description = t.getDescription();
         if (t instanceof Deadline) {
-            text += "~" + ((Deadline) t).getBy();
+            description += "~" + ((Deadline) t).getBy();
         } else if (t instanceof Event) {
-            text += "~" + ((Event) t).getAt();
+            description += "~" + ((Event) t).getAt();
         }
-        return text;
+        return description;
     }
 
     //get a Task.Task according to the text in the data file
