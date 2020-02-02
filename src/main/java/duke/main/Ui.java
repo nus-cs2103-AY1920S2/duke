@@ -70,7 +70,7 @@ public class Ui {
             + "                 ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n";
         System.out.println(logo);
         System.out.println(Constant.LINE);
-        System.out.println(Constant.SPACE + "Arghhhh... It'scanner you again.");
+        System.out.println(Constant.SPACE + "Arghhhh... It's you again.");
         System.out.println(Constant.LINE);
     }
 }
