@@ -18,7 +18,6 @@ public class Event extends Task {
     }
 
     public String toFileString() {
-        return "E " + super.toFileString() + " | " +
-                this.dateTime.format(DateTimeFormatter.ofPattern("" + "MMM d yyyy, h:mm a");
+        return "E " + super.toFileString() + " | " + this.dateTime;
     }
 }

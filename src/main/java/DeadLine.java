@@ -16,7 +16,6 @@ public class DeadLine extends Task {
                 "MMM d yyyy, h:mm a")));
     }
     public String toFileString() {
-        return "D " + super.toFileString() + " | " + this.dateTime.format(DateTimeFormatter.ofPattern("" +
-                "MMM d yyyy, h:mm a");
+        return "D " + super.toFileString() + " | " + this.dateTime;
     }
 }

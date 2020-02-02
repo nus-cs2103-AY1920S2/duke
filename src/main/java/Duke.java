@@ -47,7 +47,7 @@ public class Duke {
                 } else if (command.equals("todo")) {
                     String str = sc.nextLine();
                     if (str.split("").length > 1) {
-                        ToDo t = new ToDo(str);
+                        ToDo t = new ToDo(str.trim());
                         tasksArr.add(t);
                         save(tasksArr);
                         System.out.println("____________________________________________________________");
@@ -64,7 +64,7 @@ public class Duke {
                         String[] splitStr = str.split("/by");
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                         LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
-                        DeadLine t = new DeadLine(splitStr[0], dateTime);
+                        DeadLine t = new DeadLine(splitStr[0].trim(), dateTime);
                         tasksArr.add(t);
                         save(tasksArr);
                         System.out.println("____________________________________________________________");
@@ -81,7 +81,7 @@ public class Duke {
                         String[] splitStr = str.split("/at");
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                         LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
-                        Event t = new Event(splitStr[0], dateTime);
+                        Event t = new Event(splitStr[0].trim(), dateTime);
                         tasksArr.add(t);
                         save(tasksArr);
                         System.out.println("____________________________________________________________");
@@ -136,10 +136,12 @@ public class Duke {
                 ToDo t = new ToDo(splitStr[2]);
                 tasksArr.add(t);
             } else if (taskType.equals("E")) {
-                Event t = new Event(splitStr[2], splitStr[3]);
+                LocalDateTime dateTime = LocalDateTime.parse(splitStr[3].trim());
+                Event t = new Event(splitStr[2], dateTime);
                 tasksArr.add(t);
             } else if (taskType.equals("D")) {
-                DeadLine t = new DeadLine(splitStr[2], splitStr[3]);
+                LocalDateTime dateTime = LocalDateTime.parse(splitStr[3].trim());
+                DeadLine t = new DeadLine(splitStr[2], dateTime);
                 tasksArr.add(t);
             }
 

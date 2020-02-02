@@ -1,4 +1,5 @@
 T  | 0 | read book
-D  | 0 | return book | June 6th
-E  | 0 | project meeting | Aug 6th 2-4pm
+D  | 0 | do math homework | 2015-02-20T06:30
+E  | 0 | join swimming club  | 2015-02-20T06:30
 T  | 0 | join sports club
+D  | 0 | submission | 2013-08-07T17:00
