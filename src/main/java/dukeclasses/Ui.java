@@ -11,7 +11,7 @@ public class Ui {
     protected TaskManager manager;
     protected String horizontalLine = "**************************************************************";
 
-    public Ui(TaskManager manager){
+    public Ui(TaskManager manager) {
         this.hasEnded = false;
         this.manager = manager;
     }
@@ -19,7 +19,7 @@ public class Ui {
     /**
      * Prints out the introduction text.
      */
-    public void introduction(){
+    public void introduction() {
 
         System.out.println(horizontalLine);
         //To run using gradle go and search in Help > Delegate Run > build tools > gradle
@@ -35,7 +35,7 @@ public class Ui {
             Storage store = new Storage();
             store.checkFileDir();
             store.checkFile();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
 
@@ -54,42 +54,42 @@ public class Ui {
 
         System.out.println(horizontalLine);
 
-        if(textEntered.equals("list")) {
+        if (textEntered.equals("list")) {
             manager.listAllTasks();
-        }else if(textEntered.contains("done")) {
+        } else if (textEntered.contains("done")) {
             Parser parser = new Parser();
             int indexOfTaskDone = parser.handleDoneCommands(textEntered);
             try {
                 manager.setTaskAsDone(indexOfTaskDone);
-            } catch(ArrayIndexOutOfBoundsException ex){
+            } catch(ArrayIndexOutOfBoundsException ex) {
                 System.out.println("Done must be followed by a number");
-            } catch (IndexOutOfBoundsException ex){
+            } catch (IndexOutOfBoundsException ex) {
                 System.out.println("There is no task with that index! ");
             }
         }else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
                 || textEntered.contains("event")) {//create a task
             try {
                 manager.addTask(textEntered);
-            }catch (DukeException ex){
+            } catch (DukeException ex){
                 System.out.println(ex.getMessage());
             } catch (DateTimeException ex){
                 System.out.println("Please enter dates in this format YYYY-MM_DD");
             }
-        }else if (textEntered.contains("delete")) {
+        } else if (textEntered.contains("delete")) {
 
             try {
                 Parser parse = new Parser();
                 int indexOfTaskDeleted = parse.handleDeleteCommands(textEntered);
                 manager.deleteTask(indexOfTaskDeleted);
-            }catch (DukeException ex){
+            } catch (DukeException ex){
                 System.out.println(ex);
             } catch (IndexOutOfBoundsException ex){
                 System.out.println(ex);
             }
-        }else if(textEntered.contains("bye")) {
+        } else if (textEntered.contains("bye")) {
             manager.saveExistingData();
             this.hasEnded = true;
-        }else if(textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
+        } else if (textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
             Parser parse = new Parser();
             String[] temp = parse.handleFindCommands(textEntered);
             try{
@@ -100,15 +100,15 @@ public class Ui {
             } catch (DukeException ex){
                 System.out.println(ex);
             }
-        }else { //nonsense input
+        } else { //nonsense input
             try{
                 manager.nonsenseInput();
-            }catch (DukeException ex){
+            } catch (DukeException ex){
                 System.out.println(ex);
             }
         }
 
-        if(!textEntered.contains("bye")) {
+        if (!textEntered.contains("bye")) {
             System.out.println(horizontalLine);
         }
     }
@@ -116,7 +116,7 @@ public class Ui {
     /**
      * Prints the goodbye message for the user.
      */
-    public void printGoodbyeMessage(){
+    public void printGoodbyeMessage() {
         System.out.println("Data has been saved! Goodbye Mr.Stark!!!!");
         System.out.println(horizontalLine);
     }

@@ -10,7 +10,7 @@ public class Duke {
     /**
      * The main method to start Duke.
      *
-     * @param args
+     * @param args args to pass in.
      */
 
     public static void main(String[] args) {

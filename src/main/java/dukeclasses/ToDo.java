@@ -5,7 +5,7 @@ package dukeclasses;
  */
 public class ToDo extends Task {
 
-    public ToDo(String desciption){
+    public ToDo(String desciption) {
         super(desciption);
     }
 
@@ -15,7 +15,7 @@ public class ToDo extends Task {
      * @return returns a String containing the description of the object, used to print out
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 

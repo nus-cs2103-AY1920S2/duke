@@ -8,7 +8,7 @@ public class Task{
     protected String description;
     protected boolean isDone;
 
-    public Task(String s){
+    public Task(String s) {
         this.description = s;
         this.isDone = false;
     }
@@ -19,11 +19,11 @@ public class Task{
      * @return returns a string containing the details
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    public String getStatusIcon(){
+    public String getStatusIcon() {
 
         return isDone? "\u2713" : "\u2718";
     }
@@ -31,7 +31,7 @@ public class Task{
     /**
      * Used to change the isDone boolean of a dukeClasses.Task.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -40,14 +40,14 @@ public class Task{
      *
      * @return the description of the task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
     /**
      * gets the isDone boolean for a task.
      */
-    public boolean getIsDone(){
+    public boolean getIsDone() {
 
         return this.isDone;
     }

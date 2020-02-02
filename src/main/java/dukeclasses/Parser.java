@@ -26,7 +26,7 @@ public class Parser {
      * @param textEntered user's input
      * @return index of task to be deleted
      */
-    public int handleDeleteCommands(String textEntered){
+    public int handleDeleteCommands(String textEntered) {
         String[] temporary = textEntered.split(" ");
         int indexOfTaskToDelete = Integer.parseInt(temporary[1]);
         return indexOfTaskToDelete;

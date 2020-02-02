@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 /**
- * Handles all the issues related to Tasks!
+ * Handles all the issues related to Tasks.
  * Similar to TaskList
  */
 public class TaskManager {
@@ -13,7 +13,7 @@ public class TaskManager {
     protected ArrayList<Task> listOfTasks;
     protected Storage storage;
 
-    public TaskManager(){
+    public TaskManager() {
         listOfTasks = new ArrayList<>();
         storage = new Storage();
     }
@@ -21,7 +21,7 @@ public class TaskManager {
     /**
      * loads existing data from data.txt.
      */
-    public void loadExistingData(){
+    public void loadExistingData() {
 
         listOfTasks = storage.loadExistingData();
     }
@@ -41,19 +41,19 @@ public class TaskManager {
      */
     public void findTask(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
-        for(int i = 0 ; i < listOfTasks.size() ; i ++){
-            if(listOfTasks.get(i).description.contains(keyword)){
+        for (int i = 0; i < listOfTasks.size(); i++){
+            if(listOfTasks.get(i).description.contains(keyword)) {
                 System.out.println("  " + (i + 1) +  ". " + this.listOfTasks.get(i).toString());
             }
         }
     }
 
     /**
-     * lists down all tasks
+     * lists down all tasks.
      */
     public void listAllTasks() {
         System.out.println("Here are your tasks in your list: ");
-        for(int j = 0 ; j < this.listOfTasks.size() ; j++){
+        for(int j = 0; j < this.listOfTasks.size(); j++) {
             System.out.println("  " + (j + 1) +  ". " + this.listOfTasks.get(j).toString());
         }
     }
@@ -64,10 +64,10 @@ public class TaskManager {
      * @param index index of dukeClasses.Task to be set as Done (isDone = True)
      */
     public void setTaskAsDone(int index) {
-        listOfTasks.get(index-1).markAsDone();
+        listOfTasks.get(index - 1).markAsDone();
         storage.saveExistingData(listOfTasks);
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + listOfTasks.get(index-1).toString());
+        System.out.println("  " + listOfTasks.get(index - 1).toString());
     }
 
     /**
@@ -80,20 +80,20 @@ public class TaskManager {
 
         Task newTask;
 
-        if(textEntered.contains("todo")){ //Handles dukeClasses.Task that are dukeClasses.ToDos
+        if(textEntered.contains("todo")) { //Handles dukeClasses.Task that are dukeClasses.ToDos
 
-            if(textEntered.split(" ").length == 1){
+            if(textEntered.split(" ").length == 1) {
                 throw new DukeException("The description of a todo cannot be empty");
-            }else {
+            } else {
                 newTask = new ToDo(textEntered.substring(5));
                 this.listOfTasks.add(newTask);
             }
 
-        }else if(textEntered.contains("deadline")) { //Handles dukeClasses.Task that are dukeClasses.Deadline
+        } else if (textEntered.contains("deadline")) { //Handles dukeClasses.Task that are dukeClasses.Deadline
 
-            if(textEntered.split(" ").length == 1){ //No input date
+            if (textEntered.split(" ").length == 1) { //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
-            }else{
+            } else {
                 textEntered = textEntered.substring(9);
                 String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
                 String tempDate = temp[1];
@@ -102,7 +102,7 @@ public class TaskManager {
                     date = LocalDate.parse(tempDate);
                     newTask = new Deadline(temp[0], date);
                     this.listOfTasks.add(newTask);
-                } catch (DateTimeException ex){
+                } catch (DateTimeException ex) {
 
                     throw new DateTimeException(ex.getMessage());
                 }
@@ -131,7 +131,7 @@ public class TaskManager {
      *
      * @throws DukeException Telling user that there is no such exception
      */
-    public void nonsenseInput() throws DukeException{
+    public void nonsenseInput() throws DukeException {
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
 
     }
@@ -145,13 +145,13 @@ public class TaskManager {
      */
     public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException {
 
-        if(listOfTasks.size() == 0){
+        if (listOfTasks.size() == 0) {
             throw new DukeException("Nothing to delete because list is empty.");
         }
         indexOfTaskToDelete = indexOfTaskToDelete - 1;
-        if(listOfTasks.get(indexOfTaskToDelete) == null) {
+        if (listOfTasks.get(indexOfTaskToDelete) == null) {
             throw new DukeException("Cannot delete because the task do not exist.");
-        }else {
+        } else {
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + listOfTasks.get(indexOfTaskToDelete).toString());
             System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
@@ -165,7 +165,8 @@ public class TaskManager {
      *
      * @param textEntered the user's input
      */
-    public void echo(String textEntered){
+    public void echo(String textEntered) {
+
         System.out.println(textEntered);
     }
 
@@ -175,7 +176,7 @@ public class TaskManager {
      *
      * @return listOfTasks
      */
-    public ArrayList<Task> getListOfTasks(){
+    public ArrayList<Task> getListOfTasks() {
 
         return listOfTasks;
     }

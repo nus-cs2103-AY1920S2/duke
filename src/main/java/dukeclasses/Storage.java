@@ -132,7 +132,7 @@ public class Storage {
                 if (t instanceof ToDo) {
                     bufferedWriter.write(((ToDo) t).saveData());
                     bufferedWriter.newLine();
-                }else if (t instanceof Deadline) {
+                } else if (t instanceof Deadline) {
                     bufferedWriter.write(((Deadline) t).saveData());
                     bufferedWriter.newLine();
                 } else {
@@ -143,7 +143,7 @@ public class Storage {
 
             // Always close files.
             bufferedWriter.close();
-        } catch(IOException i) {
+        } catch (IOException i) {
             i.printStackTrace();
         }
     }
