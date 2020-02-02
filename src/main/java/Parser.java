@@ -13,6 +13,8 @@ public class Parser {
             command = Command.ADD;
         } else if (getInput.equals("bye")) {
             command = Command.BYE;
+        } else if (getInput.equals("help")) {
+            command = Command.HELP;
         } else if (getInput.equals("list")) {
             command = Command.LIST;
         } else if (getInput.equals("find")) {

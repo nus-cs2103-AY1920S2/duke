@@ -1,6 +1,7 @@
 public enum Command {
     ADD,
     BYE,
+    HELP,
     LIST,
     FIND,
     DONE,

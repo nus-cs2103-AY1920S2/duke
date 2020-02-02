@@ -1,19 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 /** Main class. */
 public class Duke {
 
@@ -91,10 +78,13 @@ public class Duke {
                 Command command = parser.parse(getInput);
                 switch (command) {
                 case BYE:
-                    res = uiV2.sendBye();
+                    res = "Bye little kid, have  fun in school!";
                     break;
                 case LIST:
                     res = uiV2.sendList(lst);
+                    break;
+                case HELP:
+                    res = uiV2.sendInstructions();
                     break;
                 case ADD:
                     this.globalCommand = Command.ADD;
@@ -107,11 +97,11 @@ public class Duke {
                     break;
                 case DONE:
                     this.globalCommand = Command.DONE;
-                    res = "Enter the task number you want to mark as done. :D";
+                    res = "Enter the task number you want to mark as done.\n" + uiV2.sendList(lst) ;
                     break;
                 case DELETE:
                     this.globalCommand = Command.DELETE;
-                    res = "Enter the task number you want to delete. :o";
+                    res = "Enter the task number you want to delete.\n" + uiV2.sendList(lst);
                     break;
                 default:
                     throw new DukeException("Invalid Input");

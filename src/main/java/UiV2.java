@@ -48,14 +48,21 @@ public class UiV2 {
      * Prints initial greeting.
      */
     public String sendGreeting() {
-        return ("Hello I'm your mum. What can I do for you?");
+        return ("Hello I'm your mum. What can I do for you? Send 'help' for instructions.");
     }
 
     /**
-     * Prints goodbye message.
+     * Prints instructions.
      */
-    public String sendBye() {
-        return("Bye, have a good day!");
+    public String sendInstructions() {
+        return ("Here are the commands you can use!"
+                + "\ntodo - adds a simple task "
+                + "\ndeadline - adds a task specifying a deadline"
+                + "\nevent - adds a task specifying a starting and ending date/time"
+                + "\nfind - I will compile all tasks with the specified keyword/s"
+                + "\nlist - I will display all your tasks"
+                + "\ndone - marks a chosen task as done"
+                + "\ndelete - deletes a chosen task");
     }
 
     /**
