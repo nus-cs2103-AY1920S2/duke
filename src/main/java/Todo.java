@@ -1,7 +1,3 @@
-package duke.tasks;
-
-import duke.tasks.Task;
-
 /**
  * Todo class represents a todo task.
  */

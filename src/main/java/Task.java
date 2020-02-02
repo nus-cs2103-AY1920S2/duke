@@ -1,5 +1,3 @@
-package duke.tasks;
-
 /**
  * Task class represents a task indicated by user.
  */

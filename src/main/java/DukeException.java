@@ -1,5 +1,3 @@
-package duke.exception;
-
 /**
  * DukeException class handles errors in user input.
  */

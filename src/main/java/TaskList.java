@@ -1,9 +1,3 @@
-package duke;
-
-import duke.tasks.Task;
-import duke.Storage;
-import duke.exception.DukeException;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
