@@ -57,7 +57,7 @@ public class Parser {
                 return Command.eventCommand(taskList, commandSuffix);
 
             case FIND:
-                return Command.findCommand(taskList, commandSuffix);
+                return Command.findCommand(taskList, commandSuffix.split(" "));
 
             case LIST:
                 return Command.listCommand(taskList);

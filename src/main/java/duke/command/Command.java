@@ -153,14 +153,16 @@ public class Command {
      * @param taskList      is the list of Tasks are saved and manipulated
      * @param commandSuffix is the additional String that accompanies two-step commands
      */
-    public static String findCommand(TaskList taskList, String commandSuffix) {
+    public static String findCommand(TaskList taskList, String... commandSuffix) {
         StringBuilder sb = new StringBuilder();
         List<String> keywordList = new ArrayList<>();
 
-        if (!commandSuffix.equals("") && !commandSuffix.isEmpty()) {
-            for (Task task : taskList.getTasks()) {
-                if (task.getTaskName().contains(commandSuffix)) {
-                    keywordList.add(task.toString());
+        for (String suffix : commandSuffix) {
+            if (!suffix.equals("")) {
+                for (Task task : taskList.getTasks()) {
+                    if (task.getTaskName().toLowerCase().contains(suffix.toLowerCase())) {
+                        keywordList.add(task.toString());
+                    }
                 }
             }
         }
