@@ -90,7 +90,6 @@ class ListCommand extends Command {
 class ExitCommand extends Command {
     private static final String type = "exit";
 
-
     @Override
     public boolean execute(Storage storageController, ArrayList<Task> storage) {
         Ui.goodbye();
