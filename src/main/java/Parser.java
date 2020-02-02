@@ -29,7 +29,7 @@ public class Parser {
     }
 
     /**
-     * Parses the sentence.
+     * Parses the input and returns the respective command object.
      *
      * @param saved Saved status.
      * @param sentence Input line.
