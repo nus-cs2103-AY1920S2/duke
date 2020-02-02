@@ -10,7 +10,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Construct a new `Duke` instance.
+     * Constructs a new `Duke` instance.
      * This sets up a `Scanner` to standard input, and loads task data from file.
      */
     public Duke() {
@@ -29,7 +29,7 @@ public class Duke {
     }
     
     /**
-     * Main loop of the application.
+     * Runs the main loop of the application.
      * First greets the user, then reads command lines, responding to each.
      * If an exit command is entered, it is processed,
      * then the goodbye message is printed and the program exits from the loop.
@@ -66,6 +66,9 @@ public class Duke {
         }
     }
     
+    /**
+     * Constructs and runs an instance of the Duke application.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 group 'duke'
@@ -38,4 +39,8 @@ apply plugin: 'java'
 javadoc {
     source = sourceSets.main.allJava
     classpath = configurations.compile
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }

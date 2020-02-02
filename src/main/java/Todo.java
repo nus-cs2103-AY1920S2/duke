@@ -1,5 +1,5 @@
 /**
- * Encapsulates a todo task which has a description
+ * Encapsulates a todo task which has a description.
  */
 public class Todo extends Task {
     /**

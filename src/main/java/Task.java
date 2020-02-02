@@ -31,7 +31,7 @@ public abstract class Task implements Serializable {
     }
     
     /**
-     * Returns the description of the task
+     * Returns the description of the task.
      * @return Task description
      */
     public String description() {

@@ -17,7 +17,7 @@ public class Parser {
     private String command;
     
     /**
-     * Constructs a new `Parser` instance from a command string
+     * Constructs a new `Parser` instance from a command string.
      * @param command Command string
      */
     public Parser(String command) {

@@ -13,7 +13,7 @@ interface Command {
     public void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Returns if Duke should exit after this command
+     * Returns if Duke should exit after this command.
      * @return boolean, true if the command is an exit command
      */
     public boolean isExit();

@@ -5,7 +5,7 @@ import java.util.Scanner;
  * The `Ui` class provides utility methods to show various message types.
  * Messages will be displayed in standard output.
  *
- * Most of the methods do not print any header line, with the exception of `greet()`
+ * <p>Most of the methods do not print any header line, with the exception of `greet()`
  */
 public class Ui {
     Scanner sc;
@@ -28,14 +28,14 @@ public class Ui {
     }
     
     /**
-     * Displays a horizontal line
+     * Displays a horizontal line.
      */
     public void showLine() {
         PrintUtil.printHeaderLine();
     }
     
     /**
-     * Displays a numbered task
+     * Displays a numbered task.
      * @param index Index of the task
      * @param task Task to be displayed
      */
@@ -52,7 +52,7 @@ public class Ui {
     }
     
     /**
-     * Displays a message that the task list could not be found
+     * Displays a message that the task list could not be found.
      * @param savePath Intended path of the file
      */
     public void showSaveNotFoundMessage(String savePath) {
@@ -113,7 +113,7 @@ public class Ui {
     }
     
     /**
-     * Displays an error message when a command is not recognized
+     * Displays an error message when a command is not recognized.
      * @param command Command string
      */
     public void showUnknownCommandMessage(String command) {

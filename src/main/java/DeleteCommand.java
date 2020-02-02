@@ -22,7 +22,7 @@ public class DeleteCommand implements Command {
         try {
             Task task = tasks.removeTask(taskIndex - 1);
             ui.showRemoveTaskMessage(task, tasks.size());
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number must be within the range of current tasks");
         }
     }

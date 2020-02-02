@@ -24,7 +24,7 @@ public class DoneCommand implements Command {
             tasks.markTaskAsDone(taskIndex - 1);
             
             ui.showDoneTaskMessage(task);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number must be within the range of current tasks");
         }
     }
