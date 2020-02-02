@@ -60,6 +60,11 @@ public class Duke {
             taskList.delete(str);
             break;
 
+        case FIND:
+            parser.checkDescription(str, "find".length());
+            taskList.find(str);
+            break;
+
         case TODO:
             parser.checkDescription(str, "todo".length());
             Todo td = new Todo(st.nextToken("").substring(1));

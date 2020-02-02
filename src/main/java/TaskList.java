@@ -58,6 +58,23 @@ public class TaskList {
         ui.deleteMessage(num, t, this.tasks.size());
     }
 
+    /**
+     * finds the tasks which contain the keyword given by the user and construct a TaskList by the resulting tasks.
+     * @param str a String represents the input of the user.
+     */
+    public void find(String str) {
+        Ui ui = new Ui();
+        String keyWord = str.substring(5);
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t.getDescription().contains(keyWord)) {
+                matchingTasks.add(t);
+            }
+        }
+        TaskList matchingResults = new TaskList(matchingTasks);
+        ui.getMatchingTasks(matchingResults);
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
