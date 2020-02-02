@@ -5,6 +5,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Interpreter;
 import duke.dukeException.DukeParseException;
+import duke.DukeResponse;
 
 public class AddCommand extends Command {
 	private Task task;
@@ -14,9 +15,9 @@ public class AddCommand extends Command {
 	}
 
 	@Override 
-	public void execute(Storage storage, TaskList taskList) throws DukeParseException {
+	public DukeResponse execute(Storage storage, TaskList taskList) throws DukeParseException {
 		taskList.addAction(this.task);
-		Interpreter.printAdd(this.task, taskList.getNum());
+		return Interpreter.printAdd(this.task, taskList.getNum());
 	}
 
 	@Override 

@@ -6,6 +6,7 @@ import duke.Storage;
 import duke.TaskList;
 import java.util.List;
 import java.util.ArrayList;
+import duke.DukeResponse;
 
 public class DoneCommand extends Command {
 	public DoneCommand(String commandText) {
@@ -30,10 +31,10 @@ public class DoneCommand extends Command {
 	}
 
 	@Override
-	public void execute(Storage storage, TaskList taskList) throws DukeParseException {
+	public DukeResponse execute(Storage storage, TaskList taskList) throws DukeParseException {
 		List<Integer> indexes = getDoneCommand(super.commandText);
 		taskList.markAsDone(indexes);
-		Interpreter.printDoneList(taskList.getSubset(indexes));
+		return Interpreter.printDoneList(taskList.getSubset(indexes));
 	}
 
 	@Override

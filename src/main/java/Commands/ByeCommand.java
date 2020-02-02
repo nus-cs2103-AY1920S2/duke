@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Interpreter;
+import duke.DukeResponse;
 
 public class ByeCommand extends Command {
 	static final String goodByeMessage = "Au revoir!";
@@ -11,9 +12,10 @@ public class ByeCommand extends Command {
 	}
 
 	@Override
-	public void execute(Storage storage, TaskList taskList) {
-		Interpreter.printMessage(goodByeMessage);
+	public DukeResponse execute(Storage storage, TaskList taskList) {
+		DukeResponse result = Interpreter.printMessage(goodByeMessage);
 		storage.saveData(taskList);
+		return result;
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import duke.Interpreter;
 import duke.task.Task;
+import duke.DukeResponse;
 
 public class FindCommand extends Command {
 	private String keyWord;
@@ -17,7 +18,7 @@ public class FindCommand extends Command {
 	}
 
 	@Override 
-	public void execute(Storage storage, TaskList taskList) throws DukeParseException {
+	public DukeResponse execute(Storage storage, TaskList taskList) throws DukeParseException {
 		List<Integer> candidates = new ArrayList<>();
 		List<Task> tasks = taskList.getList();
 		for (int i = 0; i < tasks.size(); i++) {
@@ -25,7 +26,7 @@ public class FindCommand extends Command {
 				candidates.add(i);
 			}
 		}
-		Interpreter.printFind(taskList.getList(), candidates);
+		return Interpreter.printFind(taskList.getList(), candidates);
 	}
 
 	@Override 
