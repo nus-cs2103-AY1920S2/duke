@@ -40,35 +40,39 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
-        String[] task_date;
+        String[] taskDate;
+        String[] messages;
         switch (type) {
         case "todo":
             task = new ToDo(description);
             tasks.addTask(task);
-            ui.showMessages(new String[] {"Got it. I've added this task:", " " + task.toString(),
-                    "Now you have " + tasks.getSize() + " tasks in the list."});
+            messages = new String[] {"Got it. I've added this task:", " " + task.toString(),
+                                        "Now you have " + tasks.getSize() + " tasks in the list."};
+            ui.showMessages(messages);
             break;
         case "deadline":
-            task_date = description.split(" /by ");
-            if (task_date.length == 1 || task_date[0].trim().equals("")
-                    || task_date[1].trim().equals("")) {
+            taskDate = description.split(" /by ");
+            if (taskDate.length == 1 || taskDate[0].trim().equals("")
+                    || taskDate[1].trim().equals("")) {
                 throw new DukeException("OOPS!!! The description or by of a deadline cannot be empty.");
             }
-            task = new Deadline(task_date[0], task_date[1]);
+            task = new Deadline(taskDate[0], taskDate[1]);
             tasks.addTask(task);
-            ui.showMessages(new String[] {"Got it. I've added this task:", " " + task.toString(),
-                    "Now you have " + tasks.getSize() + " tasks in the list."});
+            messages = new String[] {"Got it. I've added this task:", " " + task.toString(),
+                                        "Now you have " + tasks.getSize() + " tasks in the list."};
+            ui.showMessages(messages);
             break;
         case "event":
-            task_date = description.split(" /at ");
-            if (task_date.length == 1 || task_date[0].trim().equals("")
-                    || task_date[1].trim().equals("")) {
+            taskDate = description.split(" /at ");
+            if (taskDate.length == 1 || taskDate[0].trim().equals("")
+                    || taskDate[1].trim().equals("")) {
                 throw new DukeException("OOPS!!! The description or at of an event cannot be empty.");
             }
-            task = new Event(task_date[0], task_date[1]);
+            task = new Event(taskDate[0], taskDate[1]);
             tasks.addTask(task);
-            ui.showMessages(new String[] {"Got it. I've added this task:", " " + task.toString(),
-                    "Now you have " + tasks.getSize() + " tasks in the list."});
+            messages = new String[] {"Got it. I've added this task:", " " + task.toString(),
+                                        "Now you have " + tasks.getSize() + " tasks in the list."};
+            ui.showMessages(messages);
             break;
         default:
             break;

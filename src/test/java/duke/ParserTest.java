@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     @Test
-    public void parse_wrongCommand_exceptionThrown(){
+    public void parse_wrongCommand_exceptionThrown() {
         //wrong delete command
         try {
             Parser.parse("delete");

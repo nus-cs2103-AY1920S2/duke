@@ -23,7 +23,7 @@ public class EventTest {
                     new Event("meeting", "2020-08-07 13:").toString());
             fail();
         } catch (DukeException e) {
-           assertEquals("OOPS!!! Format is yyyy-mm-dd HH:mm. Time is optional.", e.getMessage());
+            assertEquals("OOPS!!! Format is yyyy-mm-dd HH:mm. Time is optional.", e.getMessage());
         }
     }
 
