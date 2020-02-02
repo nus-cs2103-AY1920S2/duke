@@ -33,13 +33,17 @@ public class Duke {
 
     /**
      * Class constructor.
-     *
      */
     public Duke() {
         ui = new GuiUi();
         storage = new Storage("data/duke.txt");
     }
 
+    /**
+     * Loads the tasks saved during the previous session into a new TaskList upon start-up.
+     *
+     * @return Error message.
+     */
     public String prepareList() {
         String response = "";
 
@@ -52,17 +56,19 @@ public class Duke {
 
             try {
                 file.createNewFile();
-                response.concat("File created\n");
             } catch (Exception e) {
                 e.printStackTrace();
+                response = response.concat(e.getMessage());
             }
         }
         return response;
     }
 
     /**
-     * Runner of Duke.
-     * Triggered upon start-up.
+     * Executes user commands and returns a response required depending on user command.
+     *
+     * @param input User command.
+     * @return Response to be printed on GUI depending on user command.
      */
     public String run(String input) {
 
@@ -161,9 +167,10 @@ public class Duke {
     }
 
     /**
-     * Prints list of tasks that contains keyword.
+     * Returns list of tasks that contains keyword.
      *
      * @param parser Parser to interpret user input command.
+     * @return List of tasks that contains keyword.
      * @throws DukeException Thrown when description and hence keyword is empty.
      */
     public String findTarget(Parser parser) throws DukeException {
@@ -175,8 +182,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns Duke's response to a given user command.
+     *
+     * @param input User command.
+     * @return Duke's response to the command.
      */
     String getResponse(String input) {
         return this.run(input);
