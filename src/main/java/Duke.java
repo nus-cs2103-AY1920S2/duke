@@ -3,19 +3,27 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * The Duke class is the main class,
  * where the command processing happens.
  */
-public class Duke {
+
+public class Duke extends Application {
 
     private static Ui uI;
     private static Parser parser;
 
+    /* */
+
     /**
      * Construct a new Duke instance.
      * First greets the user and then loads the task data from file.
-     */
+     *//*
     public Duke() {
         Storage storage = new Storage();
         uI = new Ui();
@@ -33,6 +41,14 @@ public class Duke {
                 uI.printInvalidDateFormatError();
             }
         }
+    }*/
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     private static List<Task> tasks = new ArrayList<>();
