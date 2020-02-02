@@ -27,14 +27,6 @@ public class TaskList {
     }
 
     /**
-     * Set our task to what was loaded from our file.
-     * @param tasks Tasks that were loaded from file.
-     */
-    public void importTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    /**
      * Returns a list of tasks.
      * @return Tasks.
      */
@@ -104,17 +96,22 @@ public class TaskList {
     public void addNewTask(String[] instArr) {
         List instList = Arrays.asList(instArr);
         if (instArr[0].equals("todo")) {
+            if (instArr.length == 1) {
+                throw new InvalidFormatException("Description should not be empty");
+            }
             String description = String.join(" ", Arrays.copyOfRange(instArr, 1, instArr.length));
             Task newTask = new ToDo(description);
             addTaskHelper(newTask);
         } else if (instArr[0].equals("deadline")) {
             // exception to handle non existence of /by and correspondingly /at
-            int seperator = instList.indexOf("/by");
-            if (seperator == -1) {
+            int separator = instList.indexOf("/by");
+            if (separator == -1) {
                 throw new InvalidFormatException("correct format: deadline task /by date");
+            } else if (separator == 1) {
+                throw new InvalidFormatException("Description should not be empty");
             }
-            String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, seperator));
-            String dateTime = String.join(" ", Arrays.copyOfRange(instArr, seperator + 1, instArr.length));
+            String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, separator));
+            String dateTime = String.join(" ", Arrays.copyOfRange(instArr, separator + 1, instArr.length));
             try {
                 LocalDateTime by = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 Task newTask = new Deadline(description, by);
@@ -126,6 +123,9 @@ public class TaskList {
             int separator = instList.indexOf("/at");
             if (separator == -1) {
                 throw new InvalidFormatException("correct format: event task /at place");
+            } else if (instArr.length == separator
+                    || separator == 1) {
+                throw new InvalidFormatException("Description and place cannot be empty");
             }
             String description =  String.join(" ", Arrays.copyOfRange(instArr, 1, separator));
             String at = String.join(" ", Arrays.copyOfRange(instArr, separator + 1, instArr.length));
