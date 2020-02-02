@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "bot.Duke"
+}
+
+run {
+    standardInput = System.in
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testCompile 'junit:junit:4.13'
+}
+
+test {
+    useJUnitPlatform()
+}
