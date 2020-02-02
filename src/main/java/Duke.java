@@ -23,7 +23,6 @@ public class Duke {
 
     /**
      * Creates a Duke chatbot that helps a person to keep track of various things.
-     *
      * @param filePath path to file that stores a list of user's tasks.
      */
     public Duke(String filePath) throws IOException {

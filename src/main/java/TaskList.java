@@ -15,7 +15,7 @@ public class TaskList {
     private List<Task> list;
 
     /**
-     * Creates an empty task list
+     * Creates an empty task list.
      */
     public TaskList() {
         this.list = new ArrayList<>();;
@@ -23,7 +23,6 @@ public class TaskList {
 
     /**
      * Creates a task list.
-     *
      * @param list list of tasks to be stored in the task list.
      */
     public TaskList(List<Task> list) {
@@ -32,7 +31,6 @@ public class TaskList {
 
     /**
      * Adds task to the task list.
-     *
      * @param task task to be added to the task list.
      */
     public void add(Task task) {
@@ -41,7 +39,6 @@ public class TaskList {
 
     /**
      * Returns task in task list requested by user.
-     *
      * @param index index position of task in the task list.
      * @return Task requested by user.
      */
@@ -51,7 +48,6 @@ public class TaskList {
 
     /**
      * Return formatted string that contains all tasks in the task list.
-     *
      * @return formatted string message containing all tasks in task list.
      */
     public String saveList() {
@@ -65,7 +61,6 @@ public class TaskList {
 
     /**
      * Returns number of tasks in the task list.
-     *
      * @return integer representing number of tasks in task list.
      */
     public int size() {
@@ -95,11 +90,10 @@ public class TaskList {
 
     /**
      * Marks task in task list as completed.
-     *
      * @param index index position of task in task list to be marked as completed.
      * @param storage makeshift database for tasks.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public void done(int index, Storage storage) throws IOException {
         list.get(index).markDone();
@@ -110,11 +104,10 @@ public class TaskList {
 
     /**
      * Deletes task from task list.
-     *
      * @param index index position of task to be deleted from task list.
      * @param storage makeshift database for tasks.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      * @throws DukeException if user input does not follow input format.
      */
     public void delete(int index, Storage storage) throws IOException, DukeException {
@@ -129,7 +122,6 @@ public class TaskList {
 
     /**
      * Searches and returns a list of tasks containing a keyword.
-     *
      * @param keyword keyword specified by user.
      */
     public void find(String keyword) {

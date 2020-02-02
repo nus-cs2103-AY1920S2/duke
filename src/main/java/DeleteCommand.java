@@ -17,7 +17,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a new DeleteCommand.
-     *
      * @param index index position of task that user wants to delete.
      */
     public DeleteCommand(int index) {
@@ -26,23 +25,20 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command. Deletes specified task from the task list.
-     *
      * @param tasks list of tasks.
      * @param ui user interface.
      * @param storage makeshift database for tasks.
      * @throws DukeException if user input does not follow input format.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-
         tasks.delete(this.index, storage);
         tasks.printSize();
     }
 
     /**
      * Returns boolean true if command exits the program, false if otherwise.
-     *
      * @return boolean.
      */
     public boolean isExit() {
@@ -51,7 +47,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Checks command for valid index number.
-     *
      * @param tasks list of tasks.
      * @throws DukeException if user input does not follow input format.
      */

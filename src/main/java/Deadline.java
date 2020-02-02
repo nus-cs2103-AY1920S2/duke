@@ -15,7 +15,6 @@ public class Deadline extends Task {
 
     /**
      * Creates an incomplete deadline task with given description.
-     *
      * @param description description of task.
      */
     public Deadline(String description) {
@@ -29,7 +28,6 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline task.
-     *
      * @param description description of task.
      * @param done boolean indicating if task is completed.
      */
@@ -44,7 +42,6 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline task.
-     *
      * @param description description of task.
      * @param done boolean indicating if task is completed.
      * @param date deadline of task.
@@ -59,7 +56,6 @@ public class Deadline extends Task {
 
     /**
      * Formats deadline task for save to database.
-     *
      * @return formatted string that represents task.
      */
     public String toPrint() {
@@ -74,7 +70,6 @@ public class Deadline extends Task {
 
     /**
      * Formats deadline task for printing.
-     *
      * @return formatted string that represents task.
      */
     public String toString() {

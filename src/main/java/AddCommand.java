@@ -21,7 +21,6 @@ public class AddCommand extends Command {
 
     /**
      * Creates a new AddCommand.
-     *
      * @param type type of task (todo, deadline, event).
      * @param description description of task.
      */
@@ -32,28 +31,33 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command. Creates a task according to the task type and adds it to the task list.
-     *
      * @param tasks list of tasks.
      * @param ui user interface.
      * @param storage makeshift database for tasks.
      * @throws DukeException if user input does not follow input format.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         Task t = new Task(description);
-        if (this.type.equals("todo")) {
+        switch (type) {
+        case "todo":
             t = new Todo(description);
             tasks.add(t);
-        } else if (this.type.equals("deadline")) {
+            break;
+        case "deadline":
             checkDateException("deadline");
             t = new Deadline(description);
             tasks.add(t);
-        } else if (this.type.equals("event")) {
+            break;
+        case "event":
             checkDateException("event");
             t = new Event(description);
             tasks.add(t);
+            break;
+        default:
         }
+
         storage.writeToFile(tasks.saveList());
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + t);
@@ -62,7 +66,6 @@ public class AddCommand extends Command {
 
     /**
      * Returns a boolean that determines if command exits the program.
-     *
      * @return boolean.
      */
     public boolean isExit() {
@@ -71,24 +74,27 @@ public class AddCommand extends Command {
 
     /**
      * Checks task (deadline or event) for the presence of date.
-     *
      * @param deadlineOrEvent indicates whether method checks the event or deadline for
      *                        presence of date in task.
      * @throws DukeException if user input does not follow input format.
      */
     public void checkDateException(String deadlineOrEvent) throws DukeException {
-        if (deadlineOrEvent.equals("deadline")) {
-            String[] arr = description.split(" /by ");
+        switch (deadlineOrEvent) {
+        case "deadline":
+            String[] deadlineArr = description.split(" /by ");
             // error: task is missing deadline
-            if (arr.length <= 1) {
+            if (deadlineArr.length <= 1) {
                 throw new DukeException("Deadline of a task cannot be empty.");
             }
-        } else if (deadlineOrEvent.equals("event")) {
-            String[] arr = description.split(" /at ");
+            break;
+        case "event":
+            String[] eventArr = description.split(" /at ");
             // error: event is missing time
-            if (arr.length <= 1) {
+            if (eventArr.length <= 1) {
                 throw new DukeException("Time of an event cannot be empty.");
             }
+            break;
+        default:
         }
     }
 }

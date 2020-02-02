@@ -9,7 +9,6 @@ public class Task {
 
     /**
      * Creates an incomplete task.
-     *
      * @param description description of task.
      */
     public Task(String description) {
@@ -19,7 +18,6 @@ public class Task {
 
     /**
      * Creates a task.
-     *
      * @param description description of task.
      * @param done boolean indicating if task is completed.
      */
@@ -34,7 +32,6 @@ public class Task {
 
     /**
      * Returns true of description of task contains keyword, and false if otherwise.
-     *
      * @param keyword keyword specified by user.
      * @return boolean indicating if description contains keyword.
      */
@@ -44,7 +41,6 @@ public class Task {
 
     /**
      * Formats task for save to database.
-     *
      * @return formatted string that represents task.
      */
     public String toPrint() {
@@ -64,7 +60,6 @@ public class Task {
 
     /**
      * Formats task for printing.
-     *
      * @return formatted string that represents task.
      */
     public String toString() {

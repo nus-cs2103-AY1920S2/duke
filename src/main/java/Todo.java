@@ -9,7 +9,6 @@ public class Todo extends Task {
 
     /**
      * Creates an incomplete todo task with given description.
-     *
      * @param description description of task.
      */
     public Todo(String description) {
@@ -18,7 +17,6 @@ public class Todo extends Task {
 
     /**
      * Creates a todo task.
-     *
      * @param description description of task.
      * @param done boolean indicating if task is completed.
      */
@@ -27,8 +25,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Formats to do task for save to database.
-     *
+     * Formats todo task for save to database.
      * @return formatted string that represents task.
      */
     public String toPrint() {
@@ -40,8 +37,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Formats to do task for printing.
-     *
+     * Formats todo task for printing.
      * @return formatted string that represents task.
      */
     public String toString() {

@@ -42,7 +42,6 @@ public class Ui {
 
     /**
      * Returns true if scanner has a next line, and false if otherwise.
-     *
      * @return boolean.
      */
     public boolean hasNextLine() {
@@ -51,7 +50,6 @@ public class Ui {
 
     /**
      * Reads user input.
-     *
      * @return string of user's input.
      */
     public String readCommand() {

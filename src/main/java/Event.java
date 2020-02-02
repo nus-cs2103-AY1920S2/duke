@@ -14,7 +14,6 @@ public class Event extends Task {
 
     /**
      * Creates an incomplete event task with given description.
-     *
      * @param description description of task.
      */
     public Event(String description) {
@@ -27,7 +26,6 @@ public class Event extends Task {
 
     /**
      * Creates an event task.
-     *
      * @param description description of task.
      * @param done boolean indicating if task is completed.
      */
@@ -41,7 +39,6 @@ public class Event extends Task {
 
     /**
      * Creates an event task.
-     *
      * @param description description of task.
      * @param done boolean indicating if task is completed.
      * @param date date of event.
@@ -56,27 +53,29 @@ public class Event extends Task {
 
     /**
      * Formats event task for save to database.
-     *
      * @return formatted string that represents task.
      */
     public String toPrint() {
         if (this.isDone) {
-            return "E | " + 1 + " | " + this.description + " | " + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return "E | " + 1 + " | " + this.description + " | "
+                    + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
-            return "E | " + 0 + " | " + this.description + " | " + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return "E | " + 0 + " | " + this.description + " | "
+                    + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
     }
 
     /**
      * Formats event task for printing.
-     *
      * @return formatted string that represents task.
      */
     public String toString() {
         if (this.isDone) {
-            return "[E][✓] " + this.description + " (at: " + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[E][✓] " + this.description + " (at: "
+                    + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
-            return "[E][✗] " + this.description + " (at: " + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[E][✗] " + this.description + " (at: "
+                    + this.localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
 }

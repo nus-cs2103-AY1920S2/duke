@@ -23,7 +23,6 @@ public class Storage {
 
     /**
      * Creates a makeshift database in file at specified filepath.
-     *
      * @param filePath path to file that stores the task list.
      */
     public Storage(String filePath) {
@@ -32,7 +31,6 @@ public class Storage {
 
     /**
      * Loads list of tasks from the database.
-     *
      * @return list of tasks.
      * @throws FileNotFoundException if file annot be found.
      */
@@ -43,13 +41,17 @@ public class Storage {
 
         while (s.hasNext()) {
             String[] parts = s.nextLine().split(" \\| ");
-
-            if (parts[0].equals("T")) {
+            switch (parts[0]) {
+            case "T":
                 list.add(new Todo(parts[2], Integer.parseInt(parts[1])));
-            } else if (parts[0].equals("D")) {
+                break;
+            case "D":
                 list.add(new Deadline(parts[2], Integer.parseInt(parts[1]), convertDateFormat(parts[3])));
-            } else if (parts[0].equals("E")) {
+                break;
+            case "E":
                 list.add(new Event(parts[2], Integer.parseInt(parts[1]), convertDateFormat(parts[3])));
+                break;
+            default:
             }
         }
 
@@ -58,34 +60,34 @@ public class Storage {
 
     /**
      * Converts string indicating month to its corresponding integer as a string.
-     *
      * @param month string of month.
      * @return integer of month formatted as a string.
      */
     public String convertMonthToInt(String month) {
-        if (month.equals("Jan")) {
+        switch (month) {
+        case "Jan":
             return "01";
-        } else if (month.equals("Feb")) {
+        case "Feb":
             return "02";
-        } else if (month.equals("Mar")) {
+        case "Mar":
             return "03";
-        } else if (month.equals("Apr")) {
+        case "Apr":
             return "04";
-        } else if (month.equals("May")) {
+        case "May":
             return "05";
-        } else if (month.equals("Jun")) {
+        case "Jun":
             return "06";
-        } else if (month.equals("Jul")) {
+        case "Jul":
             return "07";
-        } else if (month.equals("Aug")) {
+        case "Aug":
             return "08";
-        } else if (month.equals("Sep")) {
+        case "Sep":
             return "09";
-        } else if (month.equals("Oct")) {
+        case "Oct":
             return "10";
-        } else if (month.equals("Nov")) {
+        case "Nov":
             return "11";
-        } else {
+        default:
             return "12";
         }
     }
@@ -106,10 +108,9 @@ public class Storage {
 
     /**
      * Writes string to file.
-     *
      * @param textToAdd test to be written to file.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public void writeToFile(String textToAdd) throws IOException  {
         FileWriter fw = new FileWriter(this.filePath);
@@ -119,10 +120,9 @@ public class Storage {
 
     /**
      * Formats and write task list to file.
-     *
      * @param list list of tasks.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public void rewriteFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -135,10 +135,9 @@ public class Storage {
 
     /**
      * Appends string to the back of file.
-     *
      * @param textToAppend string to be added to back of file.
      * @throws IOException named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be open for any other reason.
+     *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);

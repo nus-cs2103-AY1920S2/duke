@@ -1,2 +1,2 @@
-T | 0 | hehehe 
-D | 0 | jdjd | Mar 5 2020
+T | 0 | read book
+D | 0 | finish cs3230 assignment | Feb 6 2020
