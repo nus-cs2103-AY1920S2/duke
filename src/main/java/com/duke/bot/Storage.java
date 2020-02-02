@@ -1,4 +1,4 @@
-package duke;
+package com.duke.bot;
 
 import java.io.File;
 import java.io.FileWriter;

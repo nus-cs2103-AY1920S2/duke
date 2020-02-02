@@ -1,4 +1,4 @@
-package duke;
+package com.duke.bot;
 
 import java.util.ArrayList;
 import java.util.List;

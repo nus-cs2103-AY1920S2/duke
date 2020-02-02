@@ -1,4 +1,4 @@
-package duke;
+package com.duke.bot;
 
 import java.io.InputStream;
 import java.io.OutputStream;

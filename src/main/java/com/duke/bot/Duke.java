@@ -1,4 +1,4 @@
-package duke;
+package com.duke.bot;
 
 import java.lang.String;
 import java.time.LocalDate;

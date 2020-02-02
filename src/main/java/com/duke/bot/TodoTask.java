@@ -1,4 +1,4 @@
-package duke;
+package com.duke.bot;
 public class TodoTask extends Task{
     private final TaskType taskType = TaskType.TODO;
 

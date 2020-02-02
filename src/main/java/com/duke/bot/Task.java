@@ -1,4 +1,4 @@
-package duke;
+package com.duke.bot;
 
 public class Task {
     protected String taskName;
