@@ -74,20 +74,6 @@ public class Ui {
         }
         
         return sb.toString();
-        
-//        ArrayList<Task> list = tasks.getList();
-//        
-//        System.out.println("\tHere are your tasks:");
-//
-//        if (list.isEmpty()) {
-//            System.out.println("\t<No tasks have been added>");
-//        }
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.format("\t%d.%s%n", i + 1, list.get(i));
-//        }
-//
-//        System.out.println();
     }
     
     /**
@@ -112,9 +98,6 @@ public class Ui {
         sb.append(String.format("\t%s%n%n", task));
 
         return sb.toString();
-        
-//        System.out.println("\tNoted. I have marked this task as done:");
-//        System.out.format("\t\t%s%n%n", task);
     }
 
     /**
@@ -132,11 +115,6 @@ public class Ui {
                 taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks"));
         
         return sb.toString();
-        
-//        System.out.println("\tAlright! The following task has been added:");
-//        System.out.format("\t\t%s%n", task);
-//        System.out.format("\tYou now have %d %s in the list.%n%n",
-//                taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks");
     }
 
     /**
@@ -154,11 +132,6 @@ public class Ui {
                 taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks"));
 
         return sb.toString();
-        
-//        System.out.println("\tNoted. I have removed this task:");
-//        System.out.format("\t\t%s%n", task);
-//        System.out.format("\tYou now have %d %s in the list.%n%n",
-//                taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks");
     }
 
     /**
