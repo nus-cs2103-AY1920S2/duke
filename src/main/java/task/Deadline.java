@@ -11,7 +11,7 @@ public class Deadline extends Task {
     static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
     static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
-        public Deadline(String description, LocalDate date, LocalTime time) {
+    public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;

@@ -1,7 +1,13 @@
 package parser;
 
-import commands.*;
-import dukeexception.DukeException;
+import commands.AddCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.SearchCommand;
+import commands.ListCommand;
+import commands.ExitCommand;
+import commands.UnknownCommand;import dukeexception.DukeException;
 import dukeexception.InvalidDateTimeException;
 import dukeexception.WrongInputException;
 import task.Deadline;
@@ -16,7 +22,8 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public Parser() { }
+    public Parser() {
+    }
 
     public static Command parse(String fullCommand) throws DukeException {
         Command com = null;
@@ -82,8 +89,10 @@ public class Parser {
     }
 
     private static void checkInput(String fullCommand, String command, int noOfArg) throws DukeException {
-        if (command.equals("done") || command.equals("delete") ||
-                command.equals("todo") || command.equals("search")) {
+        if (command.equals("done")
+                || command.equals("delete")
+                || command.equals("todo")
+                || command.equals("search")) {
             if (noOfArg <= 1) {
                 throw new WrongInputException(fullCommand);
             }

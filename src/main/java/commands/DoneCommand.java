@@ -10,6 +10,7 @@ import ui.Ui;
 public class DoneCommand extends Command {
     
     private int index;
+
     public DoneCommand(int index) {
         this.index = index;
     }
