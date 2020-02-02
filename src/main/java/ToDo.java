@@ -4,6 +4,13 @@ public class ToDo extends Task {
 
     public String type;
 
+    /**
+     * Constructor for ToDo class
+     * Takes in a description and sets it as the Task description
+     *
+     * @param description description of the ToDo task
+     */
+
     public ToDo(String description) {
         super(description);
         this.type = "todo";

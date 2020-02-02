@@ -10,13 +10,23 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the String user input from the Ui
+     * Then checks the kind of Task: todo, event, deadline
+     * and also the commands: list, bye, delete, done
+     *
+     * @param input string user input from Ui
+     * @throws DukeException  If description is empty, or if the input is none of the commands
+     * @throws IOException If file cannot be written to storage
+     */
+
     public void parse(String input) {
 
-        String[] taskDesc = input.split(" ");
+        String[] taskDescription = input.split(" ");
 
         try {
 
-            switch (taskDesc[0]) {
+            switch (taskDescription[0]) {
 
 
 
@@ -55,33 +65,41 @@ public class Parser {
                 // DONE will mark task as done with a ticked checkbox
                 case "done": {
 
-                    String indexString = taskDesc[1];
+                    String indexString = taskDescription[1];
                     int index = Integer.parseInt(indexString);
                     if (index > TaskList.getSize()) {
                         throw new DukeException("There is no task " + index + "!!!");
                     }
                     Task oldTask = TaskList.getTask(index - 1);
-                    if (oldTask.getType() == "todo") {
 
-                        ToDo newTask = new ToDo(oldTask.getDescription());
-                        newTask.setStatusDone();
-                        TaskList.set(index - 1, newTask);
-                        Storage.updateFile(TaskList.taskList);
-                        System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
-                    } else if (oldTask.getType() == "deadline") {
+                    switch (oldTask.getType()) {
+                        case "todo": {
 
-                        Deadline newTask = new Deadline(oldTask.getDescription(), oldTask.getBy());
-                        newTask.setStatusDone();
-                        TaskList.set(index - 1, newTask);
-                        Storage.updateFile(TaskList.taskList);
-                        System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
-                    } else if (oldTask.getType() == "event") {
+                            ToDo newTask = new ToDo(oldTask.getDescription());
+                            newTask.setStatusDone();
+                            TaskList.set(index - 1, newTask);
+                            Storage.updateFile(TaskList.taskList);
+                            System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
+                            break;
+                        }
+                        case "deadline": {
 
-                        Event newTask = new Event(oldTask.getDescription(), oldTask.getBy());
-                        newTask.setStatusDone();
-                        TaskList.set(index - 1, newTask);
-                        Storage.updateFile(TaskList.taskList);
-                        System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
+                            Deadline newTask = new Deadline(oldTask.getDescription(), oldTask.getBy());
+                            newTask.setStatusDone();
+                            TaskList.set(index - 1, newTask);
+                            Storage.updateFile(TaskList.taskList);
+                            System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
+                            break;
+                        }
+                        case "event": {
+
+                            Event newTask = new Event(oldTask.getDescription(), oldTask.getBy());
+                            newTask.setStatusDone();
+                            TaskList.set(index - 1, newTask);
+                            Storage.updateFile(TaskList.taskList);
+                            System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
+                            break;
+                        }
                     }
 
                     break;
@@ -92,7 +110,7 @@ public class Parser {
                 // DELETE will delete the task in the ArrayList according to index number
                 case "delete": {
 
-                    String indexString = taskDesc[1];
+                    String indexString = taskDescription[1];
                     int index = Integer.parseInt(indexString);
                     Task oldTask = TaskList.getTask(index - 1);
                     TaskList.deleteTask(index - 1);
@@ -108,16 +126,16 @@ public class Parser {
                 // TODO will add a new todo task in the list, checkbox will automatically be [✗]
                 case "todo":
                     try {
-                        String taskDescString = "";
-                        for (int i = 1; i < taskDesc.length; i++) {
-                            taskDescString += " " + taskDesc[i];
+                        String taskDescriptionString = "";
+                        for (int i = 1; i < taskDescription.length; i++) {
+                            taskDescriptionString += " " + taskDescription[i];
                         }
 
-                        if (taskDescString.equals("")) {
+                        if (taskDescriptionString.equals("")) {
 
                             throw new DukeException("☹ OWO!!!! Descriptions of TODOs cannot be empty!");
                         } else {
-                            ToDo newTask = new ToDo(taskDescString);
+                            ToDo newTask = new ToDo(taskDescriptionString);
                             TaskList.addTask(newTask);
                             String taskMessage = "T | " + newTask.getStatus() + " |" + newTask.getDescription() + "\n";
                             Storage.writeToFile(taskMessage);
@@ -135,35 +153,45 @@ public class Parser {
                 // DEADLINE will add a new deadline task in the list, with a date and/or time attached to it
                 case "deadline": {
 
-                    String taskDescString = "";
-                    String deadlineString = "";
-                    int indexOfSlash = 0;
+                    try {
+                        String taskDescriptionString = "";
+                        String deadlineString = "";
+                        int indexOfSlash = 0;
 
-                    // For loop to get the task descriptions until /by is reached
-                    for (int i = 1; i < taskDesc.length; i++) {
+                        // For loop to get the task descriptions until /by is reached
+                        for (int i = 1; i < taskDescription.length; i++) {
 
-                        if (taskDesc[i].equals("/by")) {
-                            indexOfSlash += i;
-                            break;
+                            if (taskDescription[i].equals("/by")) {
+                                indexOfSlash += i;
+                                break;
+                            }
+                            taskDescriptionString += " " + taskDescription[i];
                         }
-                        taskDescString += " " + taskDesc[i];
+
+                        if (taskDescriptionString.equals("")) {
+                            throw new DukeException("☹ OWO!!!! Descriptions of Deadlines cannot be empty!");
+
+                        } else {
+
+                            // For loop to get the due date
+                            for (int i = indexOfSlash + 1; i < taskDescription.length; i++) {
+
+                                deadlineString += " " + taskDescription[i];
+                            }
+
+                            LocalDate deadline = LocalDate.parse(deadlineString.trim());
+                            Deadline newDeadline = new Deadline(taskDescriptionString, deadline);
+                            TaskList.addTask(newDeadline);
+                            String taskMessage = "D | " + newDeadline.getStatus() + " |" + newDeadline.getDescription()
+                                    + " | " + deadline + "\n";
+                            Storage.writeToFile(taskMessage);
+                            System.out.println("Senpai I have added this event: \n" + "[D][✗]" +
+                                    newDeadline.getDescription() + " (by:" + deadlineString + ")" + "\n"
+                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     }
-
-                    // For loop to get the due date
-                    for (int i = indexOfSlash + 1; i < taskDesc.length; i++) {
-
-                        deadlineString += " " + taskDesc[i];
-                    }
-
-                    LocalDate deadline = LocalDate.parse(deadlineString.trim());
-                    Deadline newDeadline = new Deadline(taskDescString, deadline);
-                    TaskList.addTask(newDeadline);
-                    String taskMessage = "D | " + newDeadline.getStatus() + " |" + newDeadline.getDescription()
-                            + " | " + deadline + "\n";
-                    Storage.writeToFile(taskMessage);
-                    System.out.println("Senpai I have added this event: \n" + "[D][✗]" +
-                            newDeadline.getDescription() + " (by:" + deadlineString + ")" + "\n"
-                            + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
 
                     break;
                 }
@@ -173,35 +201,69 @@ public class Parser {
                 // EVENT will add a new Event task to the list with a date and/or time attached to it
                 case "event": {
 
-                    String taskDescString = "";
-                    String eventString = "";
-                    int indexOfSlash = 0;
+                    try {
 
-                    // For loop to get the task descriptions until /by is reached
-                    for (int i = 1; i < taskDesc.length; i++) {
+                        String taskDescriptionString = "";
+                        String eventString = "";
+                        int indexOfSlash = 0;
 
-                        if (taskDesc[i].equals("/at")) {
-                            indexOfSlash += i;
-                            break;
+                        // For loop to get the task descriptions until /by is reached
+                        for (int i = 1; i < taskDescription.length; i++) {
+
+                            if (taskDescription[i].equals("/at")) {
+                                indexOfSlash += i;
+                                break;
+                            }
+                            taskDescriptionString += " " + taskDescription[i];
                         }
-                        taskDescString += " " + taskDesc[i];
+
+                        if (taskDescriptionString.equals("")) {
+                            throw new DukeException("☹ OWO!!!! Descriptions of Events cannot be empty!");
+
+                        } else {
+                            // For loop to get the due date
+                            for (int i = indexOfSlash + 1; i < taskDescription.length; i++) {
+
+                                eventString += " " + taskDescription[i];
+                            }
+
+                            LocalDate eventTiming = LocalDate.parse(eventString.trim());
+                            Event newEvent = new Event(taskDescriptionString, eventTiming);
+                            TaskList.addTask(newEvent);
+                            String taskMessage = "E | " + newEvent.getStatus() + " |" + newEvent.getDescription()
+                                    + " | " + eventTiming + "\n";
+                            Storage.writeToFile(taskMessage);
+                            System.out.println("Senpai I have added this event: \n" + "[E][✗]" +
+                                    newEvent.getDescription() + " (at:" + eventString + ")" + "\n"
+                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
+
+                        }
+
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     }
 
-                    // For loop to get the due date
-                    for (int i = indexOfSlash + 1; i < taskDesc.length; i++) {
+                    break;
+                }
 
-                        eventString += " " + taskDesc[i];
+                case "find": {
+
+                    ArrayList<Task> searchResults = new ArrayList<>();
+                    int incrementer = 1;
+
+                    for (Task task : TaskList.taskList) {
+
+                        if (task.getDescription().contains(taskDescription[1])) {
+                            searchResults.add(task);
+                        }
                     }
 
-                    LocalDate eventTiming = LocalDate.parse(eventString.trim());
-                    Event newEvent = new Event(taskDescString, eventTiming);
-                    TaskList.addTask(newEvent);
-                    String taskMessage = "E | " + newEvent.getStatus() + " |" + newEvent.getDescription()
-                            + " | " + eventTiming + "\n";
-                    Storage.writeToFile(taskMessage);
-                    System.out.println("Senpai I have added this event: \n" + "[E][✗]" +
-                            newEvent.getDescription() + " (at:" + eventString + ")" + "\n"
-                            + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
+                    System.out.println("Here are the matching tasks in your list:");
+
+                    for (Task printingTask : searchResults) {
+                        System.out.println(incrementer + "." + printingTask);
+                        incrementer++;
+                    }
 
                     break;
                 }
