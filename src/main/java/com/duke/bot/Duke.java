@@ -110,7 +110,9 @@ public class Duke {
                 break;
 
             default:
-                throw new DukeException("Oops! Invalid commmand word, perhaps you would want to try on of the following: todo 2.deadline 3.event 4.list 5.done 6.bye");
+                throw new DukeException(
+                        "Oops! Invalid commmand word, perhaps you would want to try on of the following: " +
+                                "1. todo 2.deadline 3.event 4.list 5.done 6.bye");
 
             }
 

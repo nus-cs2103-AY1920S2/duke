@@ -26,11 +26,11 @@ public class DeadlineTask extends Task{
 
     @Override
     public String toString() {
-        return super.toString().concat(String.format(" by %s", due.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
+        return super.toString().concat(String.format(
+                " by %s", due.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
     }
 
     /**returns the status icon of a deadline task, which is 'D'.
-     *
      */
     @Override
     public String getTaskIcon() {
