@@ -3,15 +3,23 @@ package com.duke.bot;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents tasks that has a deadline.
+ */
 public class DeadlineTask extends Task{
     private LocalDate due;
-    private final TaskType taskType = TaskType.TODO;
 
     private DeadlineTask(String taskName, LocalDate due) {
         super(taskName, false);
         this.due = due;
     }
 
+    /**
+     * Creates a DeadlineTask.
+     * @param taskName The name of the deadline task.
+     * @param due the due date of the deadline task.
+     * @return A deadlineTask
+     */
     public static DeadlineTask createDeadlineTask(String taskName, LocalDate due) {
         return new DeadlineTask(taskName, due);
     }
@@ -21,6 +29,9 @@ public class DeadlineTask extends Task{
         return super.toString().concat(String.format(" by %s", due.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
     }
 
+    /**returns the status icon of a deadline task, which is 'D'.
+     *
+     */
     @Override
     public String getTaskIcon() {
         return "D";

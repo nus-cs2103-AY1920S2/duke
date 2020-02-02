@@ -4,6 +4,9 @@ import java.lang.String;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Represents the Duke bot that manages the tasks of the users.
+ */
 public class Duke {
     private TaskList tasks;
     private DukeUi ui;
@@ -15,7 +18,11 @@ public class Duke {
         this.ui = new DukeUi(System.in, System.out);
     }
 
-    private void echo(Scanner sc) {
+    /**
+     * Takes the user's input and decides the action to be taken by Duke bot.
+     * @param sc Source of user input.
+     */
+    public void echo(Scanner sc) {
         String userCommand = sc.next();
 
         try {
