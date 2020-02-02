@@ -3,7 +3,7 @@ package dukeclasses;
 import java.time.DateTimeException;
 
 /**
- * Handles all the user inputs
+ * Handles all the user inputs.
  */
 public class Ui {
 
@@ -17,7 +17,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the introduction text
+     * Prints out the introduction text.
      */
     public void introduction(){
 
@@ -46,16 +46,17 @@ public class Ui {
     }
 
     /**
-     * Handles all the different kinds of inputs the user can have
+     * Handles all the different kinds of inputs the user can have.
+     *
      * @param textEntered textEntered represents whatever the user types
      */
-    public void handleInputs(String textEntered){
+    public void handleInputs(String textEntered) {
 
         System.out.println(horizontalLine);
 
-        if(textEntered.equals("list")){
+        if(textEntered.equals("list")) {
             manager.listAllTasks();
-        }else if(textEntered.contains("done")){
+        }else if(textEntered.contains("done")) {
             Parser parser = new Parser();
             int indexOfTaskDone = parser.handleDoneCommands(textEntered);
             try {
@@ -99,7 +100,7 @@ public class Ui {
             } catch (DukeException ex){
                 System.out.println(ex);
             }
-        }else{ //nonsense input
+        }else { //nonsense input
             try{
                 manager.nonsenseInput();
             }catch (DukeException ex){
@@ -107,13 +108,13 @@ public class Ui {
             }
         }
 
-        if(!textEntered.contains("bye")){
+        if(!textEntered.contains("bye")) {
             System.out.println(horizontalLine);
         }
     }
 
     /**
-     * Prints the goodbye message for the user
+     * Prints the goodbye message for the user.
      */
     public void printGoodbyeMessage(){
         System.out.println("Data has been saved! Goodbye Mr.Stark!!!!");

@@ -5,62 +5,55 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/**
+ * This class handles reading in the input faster.
+ * It is slightly faster than Scanner.
+ */
 public class FastReader {
     BufferedReader br;
     StringTokenizer st;
 
-    public FastReader()
-    {
+    public FastReader() {
         br = new BufferedReader(
                 new InputStreamReader(System.in));
     }
 
-    String next()
-    {
-        while (st == null || !st.hasMoreElements())
-        {
-            try
-            {
+    String next() {
+        while (st == null || !st.hasMoreElements()) {
+            try {
                 st = new StringTokenizer(br.readLine());
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return st.nextToken();
     }
 
-    int nextInt()
-    {
+    int nextInt() {
 
         return Integer.parseInt(next());
     }
 
-    double nextDouble()
-    {
+    double nextDouble() {
 
         return Double.parseDouble(next());
     }
 
 
-    long nextLong()
-    {
+    long nextLong() {
 
         return Long.parseLong(next());
     }
 
 
 
-    String nextLine()
-    {
+    String nextLine() {
+
         String str = "";
-        try
-        {
+        try {
             str = br.readLine();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return str;

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 /**
  * Handles all the issues related to Tasks!
+ * Similar to TaskList
  */
 public class TaskManager {
 
@@ -18,25 +19,27 @@ public class TaskManager {
     }
 
     /**
-     * loads existing data from data.txt
+     * loads existing data from data.txt.
      */
     public void loadExistingData(){
+
         listOfTasks = storage.loadExistingData();
     }
 
     /**
      * saves current data into data.txt
      */
-    public void saveExistingData(){
+    public void saveExistingData() {
         storage.saveExistingData(listOfTasks);
 
     }
 
     /**
-     * Used for Level-9. find keyword that appears in each dukeClasses.Task in listOfTasks
+     * Used for Level-9. find keyword that appears in each dukeClasses.Task in listOfTasks.
+     *
      * @param keyword keyword to search
      */
-    public void findTask(String keyword){
+    public void findTask(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         for(int i = 0 ; i < listOfTasks.size() ; i ++){
             if(listOfTasks.get(i).description.contains(keyword)){
@@ -48,7 +51,7 @@ public class TaskManager {
     /**
      * lists down all tasks
      */
-    public void listAllTasks(){
+    public void listAllTasks() {
         System.out.println("Here are your tasks in your list: ");
         for(int j = 0 ; j < this.listOfTasks.size() ; j++){
             System.out.println("  " + (j + 1) +  ". " + this.listOfTasks.get(j).toString());
@@ -56,10 +59,11 @@ public class TaskManager {
     }
 
     /**
-     * change the boolean isDone? of a dukeClasses.Task
+     * change the boolean isDone? of a dukeClasses.Task.
+     *
      * @param index index of dukeClasses.Task to be set as Done (isDone = True)
      */
-    public void setTaskAsDone(int index){
+    public void setTaskAsDone(int index) {
         listOfTasks.get(index-1).markAsDone();
         storage.saveExistingData(listOfTasks);
         System.out.println("Nice! I've marked this task as done:");
@@ -67,11 +71,12 @@ public class TaskManager {
     }
 
     /**
-     * Adds a new task and saves it in data
+     * Adds a new task and saves it in data.
+     *
      * @param textEntered includes the type of task, description, and /by or /at
      * @throws DukeException Must have deadline and date for dukeClasses.Deadline and Events
      */
-    public void addTask(String textEntered) throws DukeException{
+    public void addTask(String textEntered) throws DukeException {
 
         Task newTask;
 
@@ -84,7 +89,7 @@ public class TaskManager {
                 this.listOfTasks.add(newTask);
             }
 
-        }else if(textEntered.contains("deadline")){ //Handles dukeClasses.Task that are dukeClasses.Deadline
+        }else if(textEntered.contains("deadline")) { //Handles dukeClasses.Task that are dukeClasses.Deadline
 
             if(textEntered.split(" ").length == 1){ //No input date
                 throw new DukeException("The description of a deadline cannot be empty");
@@ -104,9 +109,9 @@ public class TaskManager {
 
             }
 
-        }else{ //Handles task that is dukeClasses.Event
+        }else { //Handles task that is dukeClasses.Event
 
-            if(textEntered.split(" ").length == 1){
+            if(textEntered.split(" ").length == 1) {
                 throw new DukeException("The description of an event cannot be empty");
             }else {
                 textEntered = textEntered.substring(6);
@@ -123,6 +128,7 @@ public class TaskManager {
 
     /**
      * Handles it when user types in nonsense inputs.
+     *
      * @throws DukeException Telling user that there is no such exception
      */
     public void nonsenseInput() throws DukeException{
@@ -131,18 +137,19 @@ public class TaskManager {
     }
 
     /**
-     * Deletes task from listOfTasks and saves the data
+     * Deletes task from listOfTasks and saves the data.
+     *
      * @param indexOfTaskToDelete index of task to delete
      * @throws DukeException Cannot delete nothing
      * @throws IndexOutOfBoundsException Incase if user inputs something that is out of array bound
      */
-    public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException{
+    public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException {
 
         if(listOfTasks.size() == 0){
             throw new DukeException("Nothing to delete because list is empty.");
         }
         indexOfTaskToDelete = indexOfTaskToDelete - 1;
-        if(listOfTasks.get(indexOfTaskToDelete) == null){
+        if(listOfTasks.get(indexOfTaskToDelete) == null) {
             throw new DukeException("Cannot delete because the task do not exist.");
         }else {
             System.out.println("Noted. I've removed this task:");
@@ -154,7 +161,8 @@ public class TaskManager {
     }
 
     /**
-     * used for Level 1 and 2. Redundant now
+     * used for Level 1 and 2. Redundant now.
+     *
      * @param textEntered the user's input
      */
     public void echo(String textEntered){
@@ -163,10 +171,12 @@ public class TaskManager {
 
 
     /**
-     * Return list of Tasks
+     * Return list of Tasks.
+     *
      * @return listOfTasks
      */
     public ArrayList<Task> getListOfTasks(){
+
         return listOfTasks;
     }
 }

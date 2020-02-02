@@ -1,8 +1,9 @@
 package dukeclasses;
 
+/**
+ * This class handles the parsing of strings.
+ */
 public class Parser {
-
-
 
     public Parser(){
     }

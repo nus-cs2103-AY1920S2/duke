@@ -1,9 +1,9 @@
 package dukeclasses;
 
 /**
- * Contains a product name dukeClasses.Duke, a personal assistant chat bot that keeps track of various tasks that needs
+ * Contains a product name dukeClasses.Duke, a personal assistant chat bot that keeps track of various tasks that needs,
  * to be done. It classifies tasks into deadline, todo and event.
- * It can add, delete, list all the tasks, find task with a keyword and mark them as done
+ * It can add, delete, list all the tasks, find task with a keyword and mark them as done.
  */
 public class Duke {
 

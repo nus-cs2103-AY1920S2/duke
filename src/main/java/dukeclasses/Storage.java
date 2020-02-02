@@ -9,14 +9,16 @@ import java.util.ArrayList;
  * This class handles the saving and loading of data from data.txt
  */
 public class Storage {
+
     protected ArrayList<Task> listOfTasks = new ArrayList<>();
     protected String dataDirPath = "data/";
 
-    public Storage(){
+    public Storage() {
     }
 
     /**
-     * Create a folder to store user's data
+     * Create a folder to store user's data.
+     *
      * @throws IOException If the folder cannot be created, inform the user.
      */
     public void checkFileDir() throws IOException { //check if data folder exists, if not create it
@@ -34,7 +36,8 @@ public class Storage {
     }
 
     /**
-     * Create a file called data.txt to store user's data
+     * Create a file called data.txt to store user's data.
+     *
      * @throws IOException throws exception if file is not found
      */
     public void checkFile() throws IOException {
@@ -52,7 +55,8 @@ public class Storage {
     }
 
     /**
-     * helps with loading data when starting up program again. Data is stored in data.txt
+     * helps with loading data when starting up program again. Data is stored in data.txt.
+     *
      * @return returns an array List with the data filled in from data.txt
      */
     public ArrayList<Task> loadExistingData() {
@@ -108,12 +112,13 @@ public class Storage {
 
 
     /**
-     * saves data in data.txt before program exits
+     * saves data in data.txt before program exits.
+     *
      * @param list list contains the ArrayList filled with all the data up till now.
      *             It will be saved in data.txt
      */
 
-    public void saveExistingData(ArrayList<Task> list){
+    public void saveExistingData(ArrayList<Task> list) {
         String fileName = "data/data.txt";
         try {
             // Assume default encoding.
