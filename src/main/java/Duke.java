@@ -1,15 +1,23 @@
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
-        Squirtle squirtle = new Squirtle();
+        Squirtle ui = new Squirtle();
         Storage storage = new Storage("../data/tasks.txt");
-        squirtle.start();
-        squirtle.setStorage(storage);
+        TaskList taskList = new TaskList(storage.load());
+        ui.start();
         Scanner sc = new Scanner(System.in);
-        while (squirtle.isRunning()) {
-            String userInput = sc.nextLine();
-            squirtle.passInput(userInput);
-
+        Boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String userInput = sc.nextLine();
+                Command cmd = Parser.parseInput(userInput);
+                isRunning = cmd.execute(storage, taskList, ui);
+                ui.promptMsg();
+            }
+            catch(DukeException e) {
+                ui.errorMsg(e);
+                ui.promptMsg();
+            }
         }
         sc.close();
     }

@@ -36,70 +36,56 @@ public class Parser {
         }
     }
 
-    public static Command parseInput(String input) {
-        input = input.trim(); // trim any opening and trailing whitespace
-        if (input.equals("bye")) { // parse exit command
-            return new ExitCommand();
-        }
-        else if (input.equals("list")) { // parse list command
-            return new ListCommand();
-        }
-        else if (input.startsWith("done")) { // parse done command
-            try {
+    public static Command parseInput(String input) throws DukeException {
+        try {
+            input = input.trim(); // trim any opening and trailing whitespace
+            if (input.equals("bye")) { // parse exit command
+                return new ExitCommand();
+            }
+            else if (input.equals("list")) { // parse list command
+                return new ListCommand();
+            }
+            else if (input.startsWith("done")) { // parse done command
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 return new DoneCommand(taskNumber);
             }
-            catch(IndexOutOfBoundsException e) { // catch exception - trying to access number higher than number of tasks
-                System.out.println(new DukeException(DukeError.NUMBER));
-            }
-        }
-        else if (input.startsWith("delete")) { // parse delete command
-            try {
+            else if (input.startsWith("delete")) { // parse delete command
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 return new DeleteCommand(taskNumber);
             }
-            catch(IndexOutOfBoundsException e) { // catch exception - trying to access number higher than number of tasks
-                System.out.println(new DukeException(DukeError.NUMBER));
+            else { // parse task command
+                    String[] split = input.split(" ", 2);
+                    TaskType taskType = TaskType.valueOf(split[0].toUpperCase());
+                    String taskDetails = split[1];
+                    Task task = new Task();
+                    switch (taskType) {
+                        case TODO:
+                            task = new ToDo(taskDetails);
+                            break;
+                        case EVENT:
+                            String[] eventDetails = taskDetails.split("/at");
+                            String eventDescription = eventDetails[0].trim();
+                            String eventTime = eventDetails[1].trim();
+                            task = new Event(eventDescription, eventTime);
+                            break;
+                        case DEADLINE:
+                            String[] deadlineDetails = taskDetails.split("/by");
+                            String deadlineDescription = deadlineDetails[0].trim();
+                            String deadline = deadlineDetails[1].trim();
+                            task = new Deadline(deadlineDescription, deadline);
+                            break;
+                    }
+
+                    return new AddCommand(task);
+
             }
         }
-        else { // parse task command
-            try {
-                input = input.toUpperCase();
-                String[] split = input.split(" ", 2);
-                TaskType taskType = TaskType.valueOf(split[0]);
-                String taskDetails = split[1];
-                Task task;
-                switch (taskType) {
-                    case TODO:
-                        task = new ToDo(taskDetails);
-                        break;
-                    case EVENT:
-                        String[] eventDetails = taskDetails.split("/at");
-                        String eventDescription = eventDetails[0];
-                        String eventTime = eventDetails[1];
-                        task = new Event(eventDescription, eventTime);
-                        break;
-                    case DEADLINE:
-                        String[] deadlineDetails = taskDetails.split("/by");
-                        String deadlineDescription = deadlineDetails[0];
-                        String deadline = deadlineDetails[1];
-                        task = new Deadline(deadlineDescription, deadline);
-                        break;
-                    default: // if no task detected, throw DukeException
-                        throw new DukeException(DukeError.COMMAND);
-                }
-                return new AddCommand(task);
-
-            }
-            catch(IndexOutOfBoundsException e) { // catch insufficient commands
-                System.out.println(new DukeException(DukeError.INSUFFICIENT));
-            }
-            catch(DukeException e) { // catch wrong command given
-                System.out.println(e);
-            }
-
+        catch(IndexOutOfBoundsException e) { // catch insufficient commands given
+            throw new DukeException(DukeError.INSUFFICIENT);
+        }
+        catch(IllegalArgumentException e) { // catch wrong command given
+            throw new DukeException(DukeError.COMMAND);
         }
     }
-
 
 }

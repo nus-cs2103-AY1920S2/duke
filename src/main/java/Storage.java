@@ -10,7 +10,7 @@ public class Storage {
         this.parser = new Parser();
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() { // load all tasks from hard disk into an ArrayList of tasks
         ArrayList<Task> lst = new ArrayList<>();
         try {
             File file = new File(path);
@@ -37,7 +37,7 @@ public class Storage {
         return lst;
     }
 
-    public void update(ArrayList<Task> lst) {
+    public void update(ArrayList<Task> lst) { // update the file in the hard disk whenever the task list changes
         try {
             File file = new File(path);
             if (!file.exists()) {
