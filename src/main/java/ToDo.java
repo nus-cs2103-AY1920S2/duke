@@ -20,6 +20,7 @@ public class ToDo extends Task {
         return type;
     }
 
+
     @Override
     public String toString() {
         if (super.getStatus() == 0) {
