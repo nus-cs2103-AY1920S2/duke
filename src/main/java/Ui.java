@@ -1,6 +1,10 @@
 import java.util.Scanner;
-import DukeException.*;
+import DukeException.DukeException;
 
+/**
+ * Deals with interactions with the user.
+ * Methods with System.out.print for every possible messages user will see.
+ */
 public class Ui {
     Scanner sc = new Scanner(System.in);
 
@@ -49,12 +53,6 @@ public class Ui {
                 + "Noted. I've removed this task:\n"
                 + task + "\n"
                 + "Now you have " + numOfTasks + " tasks in the list.\n"
-                + "____________________________________________________________");
-    }
-
-    public void showMissingTxtFile() {
-        System.out.println("____________________________________________________________\n"
-                + "duke.txt file doesn't exist, please create one in the file path\n"
                 + "____________________________________________________________");
     }
 

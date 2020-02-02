@@ -4,13 +4,29 @@ import java.time.format.DateTimeParseException;
 import DukeException.DukeMissingDescriptionException;
 import DukeException.DukeUnknownInputException;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Gets the type of command aka what the user wants like add or delete tasks.
+     * @param command The user command.
+     * @return The type of the command.
+     */
     public static String getCommandType(String command) {
         String[] splitted = command.split(" ", 2);
         return splitted[0];
     }
 
+    /**
+     * Gets the task number from the user command to be marked done.
+     *
+     * @param command User command.
+     * @return The task number to be marked done.
+     * @throws DukeMissingDescriptionException When there is no task number given.
+     * @thows DukeUnknownInputException When what user gives is not a number.
+     */
     public static int markDoneNum(String command) {
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Task number missing.");
@@ -23,6 +39,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the description for the To Do task.
+     *
+     * @param command User command.
+     * @return The description of the To Do task.
+     * @throws DukeMissingDescriptionException If there is no description given.
+     */
     public static String todoDescription(String command) {
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Todo description missing.");
@@ -30,13 +53,21 @@ public class Parser {
         return command.substring(5);
     }
 
+    /**
+     * Gives the description and deadline of the Deadline task.
+     *
+     * @param command User command.
+     * @return A String[] where 0 index contains the description and 1 index contains the deadline.
+     * @throws DukeMissingDescriptionException When no description of deadline is given by user.
+     * @throws DukeUnknownInputException When /by is missing in command.
+     */
     public static String[] deadlineParams(String command) {
         if (command.length() <= 9) {
             throw new DukeMissingDescriptionException("Deadline description and time missing.");
         }
         String[] splitted = command.substring(9).split(" /by ", 2);
         if (splitted.length < 2) {
-            throw new DukeUnknownInputException("Need format deadline <description> /by <time>.");
+            throw new DukeUnknownInputException("Need give/format deadline <description> /by <time>.");
         }
         // Check if date is parsable
         String byWhen;
@@ -50,6 +81,14 @@ public class Parser {
         return descriptionAndBy;
     }
 
+    /**
+     * Gives the description and time of the Event task.
+     *
+     * @param command User command.
+     * @return A String[] where 0 index contains the description and 1 index contains the time of event.
+     * @throws DukeMissingDescriptionException When no description of event is given by user.
+     * @throws DukeUnknownInputException When /at is missing in command.
+     */
     public static String[] eventParams(String command) {
         if (command.length() <= 6) {
             throw new DukeMissingDescriptionException("Event description and time missing.");
@@ -61,6 +100,14 @@ public class Parser {
         return splitted;
     }
 
+    /**
+     * Gets the task number of the task to be deleted from user command.
+     *
+     * @param command User Command.
+     * @return An integer that is the task number to be deleted.
+     * @throws DukeMissingDescriptionException When no number is given.
+     * @throws DukeUnknownInputException When what user give is not a number.
+     */
     public static int deleteNum(String command) {
         if (command.length() <= 7) {
             throw new DukeMissingDescriptionException("Task number missing.");

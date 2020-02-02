@@ -4,6 +4,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import DukeException.DukeException;
 
+/**
+ * Contains the task list, which is an ArrayList of tasks.
+ *  It has operations to add/delete tasks in the list.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
@@ -23,8 +27,15 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Marks a task in the list as done.
+     *
+     * @param taskNum The task number on the list.
+     * @return The task after being marks as done.
+     * @throws DukeException If taskNum is bigger than size of list or < 0
+     */
     public Task markDone(int taskNum) {
-        if (taskNum > tasks.size()) {
+        if (taskNum > tasks.size() || taskNum < 0) {
             throw new DukeException("Task for this number doesn't exist.");
         }
         int index = taskNum - 1;
@@ -34,41 +45,54 @@ public class TaskList {
         return currTask;
     }
 
+    /**
+     * Adds a ToDo task into the list.
+     *
+     * @param todo The description of the ToDo task.
+     * @return The To Do task constructed.
+     */
     public Task addTodo(String todo) {
         Task todoTask = new Todo(todo);
         tasks.add(todoTask);
         return todoTask;
     }
 
+    /**
+     * Adds a Deadline task into the list.
+     *
+     * @param deadline The description of the deadline task.
+     * @param byWhen When the task is due by.
+     * @return The Deadline task constructed.
+     */
     public Task addDeadline(String deadline, String byWhen) {
         Task deadlineTask = new Deadline(deadline, byWhen);
         tasks.add(deadlineTask);
         return deadlineTask;
     }
 
+    /**
+     * Adds an Event task into the list.
+     *
+     * @param event The description of the event task.
+     * @param atWhen When the task is at.
+     * @return The Event task constructed.
+     */
     public Task addEvent(String event, String atWhen) {
         Task eventTask = new Event(event, atWhen);
         tasks.add(eventTask);
         return eventTask;
     }
 
+    /**
+     * Deletes a task in the list.
+     *
+     * @param taskNum The task number in the list to be deleted.
+     * @return The task that was deleted from the list.
+     */
     public Task delete(int taskNum) {
         int index = taskNum - 1;
         Task deletedTask = tasks.get(index);
         tasks.remove(index);
         return deletedTask;
-    }
-
-    public void saveTask() {
-        Path file = java.nio.file.Paths.get("/Users/Min Suk/IdeaProjects/duke/data/duke.txt");
-        ArrayList<String> tasksForFile = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            tasksForFile.add(tasks.get(i) + "\n");
-        }
-        try {
-            Files.write(file, tasksForFile);
-        } catch (IOException e) {
-            System.out.println("duke.txt file doesn't exist, please create one in /duke/data");
-        }
     }
 }

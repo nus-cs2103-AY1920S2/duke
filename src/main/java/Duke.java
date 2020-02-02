@@ -1,6 +1,10 @@
 import DukeException.DukeException;
 import DukeException.DukeUnknownInputException;
 
+/**
+ * Duke class uses Storage to load and unload data from and to files, TaskList to contain and operate on
+ * the lit of tasks, Ui to interact with the user, and Parser to decipher the user command.
+ */
 public class Duke {
 
     private Storage storage;
@@ -8,6 +12,12 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor of Duke.
+     * Attempts to load tasks from file, if fail start with empty list of tasks.
+     *
+     * @param filePath The path to the file to load tasks from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -20,6 +30,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A continuous loop of getting the user command, parsing to make sense of it and executing the command.
+     * Stops when the user command is "bye.
+     * @throws DukeException for any exceptions that occur during this run.
+     */
     public void run() {
         ui.showHello();
         while (true) {
@@ -51,7 +66,7 @@ public class Duke {
                     ui.showMarkedDone(tasks.markDone(doneNum));
                     break;
                 case "delete":
-                    int deleteNum = parser.markDoneNum(command);
+                    int deleteNum = parser.deleteNum(command);
                     ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
                     break;
                 default:

@@ -7,13 +7,29 @@ import java.util.Scanner;
 import DukeException.DukeException;
 import DukeException.DukeIOException;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     static Path file;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filePath The file path to the file to load the tasks in from.
+     */
     public Storage(String filePath) {
         file = java.nio.file.Paths.get(filePath);
     }
 
+    /**
+     * Reads line by line the tasks in the file, constructs the Task Object.
+     * Returns an ArrayList of the Task objects constructed.
+     *
+     * @return ArrayList of the tasks read.
+     * @throws DukeIOException If the file path cannot be read.
+     * @throws DukeException If there is a task that does not make sense.
+     */
     public static ArrayList<Task> load() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
@@ -37,6 +53,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the file in the path with the current tasks.
+     *
+     * @param tasks TaskList object containing all the tasks to use to update file.
+     * @param numOfTasks Number of tasks in the TaskList currently.
+     * @throws DukeIOException If path cannot be read e.g. due to missing file.
+     */
     public static void updateFile(TaskList tasks, int numOfTasks) {
         ArrayList<String> tasksForFile = new ArrayList<>();
         for (int i = 0; i < numOfTasks; i++) {
@@ -49,6 +72,15 @@ public class Storage {
         }
     }
 
+    /**
+     * To construct the task after line has been read from file.
+     *
+     * @param code The first letter in the task to tell the type of task.
+     * @param args String where it's everything after the initial [X][X].
+     * @param isDone The second letter in the task to tell if the task has been completed.
+     * @return Task constructed.
+     * @throws DukeIOException If the code does not match T, D or E.
+     */
     public static Task buildTask(String code, String args, boolean isDone) {
         if (code.equals("T")) {
             // args lik "borrow book"
