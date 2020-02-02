@@ -37,9 +37,9 @@ public class Parser {
 
     protected HashMap<String, CommandList> updateAliasMap(String currentAlias, String newAlias) throws DukeException {
         if (!aliasMap.containsKey(currentAlias)) {
-            throw new DukeException(LineName.ERROR_PLACEHOLDER);
+            throw new DukeException(LineName.ALIAS_DOES_NOT_EXIST);
         } else if (aliasMap.containsKey(newAlias)) {
-            throw new DukeException(LineName.ERROR_PLACEHOLDER);
+            throw new DukeException(LineName.ALIAS_ALREADY_EXISTS);
         } else {
             CommandList command = aliasMap.get(currentAlias);
             aliasMap.remove(currentAlias);

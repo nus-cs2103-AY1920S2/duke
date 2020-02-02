@@ -30,11 +30,12 @@ public class AliasCommand extends Command {
             try {
                 HashMap<String, CommandList> aliasMap = parser.updateAliasMap(currentAlias, newAlias);
                 storage.saveAlias(aliasMap);
-                ui.sayLine(LineName.ERROR_PLACEHOLDER);
+                ui.aliasSuccess(currentAlias, newAlias);
             } catch (DukeException e) {
                 ui.sayLine(e.getErrorLineName());
             }
+        } else {
+            ui.sayLine(LineName.ALIAS_COMMAND_FAIL);
         }
-        ui.sayLine(LineName.ERROR_PLACEHOLDER);
     }
 }

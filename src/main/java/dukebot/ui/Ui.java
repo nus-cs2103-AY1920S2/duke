@@ -76,6 +76,22 @@ public class Ui {
     public void sayLine(LineName lineName) {
         dukeExpression = DukeExpression.HAPPY;
         switch (lineName) {
+        case ALIAS_ALREADY_EXISTS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.ACTUALLY);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("That command already exists... Duke can't replace it...");
+            break;
+        case ALIAS_COMMAND_FAIL:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.WHAT);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("Duke doesn't know what should replace what...");
+            dukeSays("The command for new alias is: alias <old> <new>");
+            break;
+        case ALIAS_DOES_NOT_EXIST:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.WHAT);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("Huh? Duke doesn't know what command Master is talking about...");
+            break;
         case HELP:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.WHAT_YOU_LIKE);
             dukeExpression = DukeExpression.BLUSH;
@@ -83,6 +99,7 @@ public class Ui {
             dukeSays("Exposing myself to master... Duke's so embarrassed...");
             dukeSays("But if it's for Master... Duke'll do it!");
             dukeSays("Duke's precious secrets:\n\n"
+                    + "alias <old> <new>\n-- Changes the name of a command.\n\n"
                     + "todo <name>\n-- Adds a todo to your task list.\n\n"
                     + "deadline <name> /by <time>\n-- Adds a deadline to your task list.\n\n"
                     + "event <name> /at <time>\n -- Adds a event to your task list.\n\n"
@@ -271,6 +288,16 @@ public class Ui {
         dukeExpression = DukeExpression.BLUSH;
         dukeSays("For Master, Duke can forget anything, even the:");
         dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
+    }
+
+    /**
+     * Prints task successfully deleted message.
+     */
+    public void aliasSuccess(String oldAlias, String newAlias) {
+        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
+                DukeVoice.WHAT_YOU_LIKE, DukeVoice.LAUGHTER);
+        dukeExpression = DukeExpression.BLUSH;
+        dukeSays("Duke has successfully changed the name of <" + oldAlias + "> into <" + newAlias + ">!");
     }
 
     /**

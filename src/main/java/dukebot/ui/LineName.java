@@ -1,6 +1,9 @@
 package dukebot.ui;
 
 public enum LineName {
+    ALIAS_ALREADY_EXISTS,
+    ALIAS_COMMAND_FAIL,
+    ALIAS_DOES_NOT_EXIST,
     DATE_TIME_PARSE_FAIL,
     DEADLINE_BY_MISSING,
     DEADLINE_EMPTY,
