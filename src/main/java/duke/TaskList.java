@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> tasks;
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public void list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -26,9 +30,5 @@ public class TaskList {
 
     public Task remove(int taskNumber) {
         return tasks.remove(taskNumber);
-    }
-
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
     }
 }
