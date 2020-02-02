@@ -48,6 +48,15 @@ public class TaskList {
     }
 
     /**
+     * Checks if the TaskList contains a specified Task.
+     * @param task the task to be checked for.
+     * @return boolean whether the list has the specified Task.
+     */
+    public boolean hasTask(Task task) {
+        return tasks.contains(task);
+    }
+
+    /**
      * Prints the list of task systematically.
      * Includes index of task based on (array index + 1).
      */
@@ -57,11 +66,13 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> find(String str) {
+    public ArrayList<Task> find(String ... keywords) {
         ArrayList<Task> outputList = new ArrayList<>();
         for (Task task: tasks) {
-            if (task.getTask().contains(str)) {
-                outputList.add(task);
+            for (String str: keywords) {
+                if (task.getTask().contains(str) && !outputList.contains(task)) {
+                    outputList.add(task);
+                }
             }
         }
         return outputList;
