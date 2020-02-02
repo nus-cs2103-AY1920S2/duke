@@ -4,9 +4,9 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list of tasks.
@@ -128,5 +128,21 @@ public class TaskList {
      */
     public int size() {
         return tasks.size();
+    }
+
+    /**
+     * Returns a string representation of the TaskList.
+     * @return A String representation of the TaskList.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= tasks.size(); i++) {
+            sb.append(i + "." + tasks.get(i - 1));
+            if (i != tasks.size()) {
+                sb.append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
     }
 }

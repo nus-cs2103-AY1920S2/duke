@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.DukeException;
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Marks a task in the TaskList as done.
@@ -22,17 +22,17 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks the task at the specified index in the TaskList as done and prints an acknowledgement message.
-     *
+     * Marks the task at the specified index in the TaskList as done and returns an acknowledgement message.
      * @param tasks The TaskList where the task is to be marked as done.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
+     * @return A string with the message to be printed.
      * @throws DukeException If the index is out of range (index < 1 || index > size()).
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.get(index);
         task.markAsDone();
-        ui.showDoneTask(task);
+        return ui.showToUser("Nice! I've marked this task as done: ", "  " + task);
     }
 }

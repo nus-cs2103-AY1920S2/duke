@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.DukeException;
+import duke.ui.Ui;
 
 /**
  * Terminates the program.
@@ -22,14 +22,15 @@ public class ExitCommand extends Command {
      * @param tasks The TaskList containing the tasks.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
+     * @return A string with the message to be printed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             storage.save(tasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
-        ui.showExit();
+        return ui.showExit();
     }
 }

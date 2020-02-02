@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Find tasks from the TaskList with the specified keyword.
@@ -20,15 +20,19 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds tasks with the specified keyword and prints the tasks.
-     *
+     * Finds tasks with the specified keyword and returns a string representation of the tasks.
      * @param tasks The TaskList containing the tasks.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
+     * @return A string with the message to be printed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = tasks.find(keyword);
-        ui.showFindTasks(filteredTasks);
+        if (filteredTasks.isEmpty()) {
+            return ui.showToUser("There are no matching tasks in your list.");
+        } else {
+            return ui.showToUser("Here are the matching tasks in your list:", filteredTasks.toString());
+        }
     }
 }

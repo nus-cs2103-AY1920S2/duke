@@ -2,10 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 
@@ -25,15 +22,19 @@ public class GetCommand extends Command {
     }
 
     /**
-     * Gets tasks on the specified date and prints the tasks.
-     *
+     * Gets tasks on the specified date and returns a string representation the tasks.
      * @param tasks The TaskList containing the tasks.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
+     * @return A string with the message to be printed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = tasks.find(date);
-        ui.showGetTasks(filteredTasks);
+        if (filteredTasks.isEmpty()) {
+            return ui.showToUser("There are no matching tasks in your list.");
+        } else {
+            return ui.showToUser("Here are the matching tasks in your list:", filteredTasks.toString());
+        }
     }
 }
