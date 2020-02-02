@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,9 +17,9 @@ import javafx.scene.image.ImageView;
 /**
  * Main class for the entire program, Duke is the chatbot and this is the driver class.
  */
-public class Duke extends Application {
+public class Duke<clip> extends Application {
 
-    // JavaFX Supporting Variables.
+    // GUI Members: JavaFX Support.
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -28,7 +29,117 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    // Duke Functionality Variables.
+    /**
+     * Starts the Duke application for GUI.
+     * Creates the Root Node, Places this Root Node in a Scene, Sets the Stage scene, and runs the Stage show.
+     *
+     * @param stage the primary stage provided by JavaFX.
+     */
+    @Override
+    public void start(Stage stage) {
+
+        // Step 1. Setting up required components.
+        // Scroll pane and chat box.
+        scrollPane = new ScrollPane(); // whole pane that can contain scroll bar.
+        dialogContainer = new VBox(); // box for chat.
+        scrollPane.setContent(dialogContainer);
+        // Additional controls to put into the main container.
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        // Putting the above controls into one container layout pane.
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        // Setting the scene to be our container layout pane.
+        scene = new Scene(mainLayout);
+        // Setting the stage to show our screen.
+        stage.setScene(scene);
+        // Render the stage.
+        stage.show();
+
+        //Step 2. Set-up Initial Window: Formatting the window to look as expected.
+
+        // Set Window Size.
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+        // Set Scene Size.
+        mainLayout.setPrefSize(400.0, 600.0);
+        // Screen consists of a scrollPane chat box, userInput text box, and a sendButton.
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0); // correctly position scrollPane initially.
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // Step 3. Add functionality to handle user input.
+        // for clicking send button.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+        // for pressing enter in textfield.
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        // Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(getUserResponse(userInput.getText()));
+        Label dukeText = new Label(getDukeResponse(userInput.getText()));
+        ImageView userImageView = new ImageView(user);
+        ImageView dukeImageView = new ImageView(duke);
+        userImageView.setClip(new Circle(50, 50, 50));
+        dukeImageView.setClip(new Circle(50, 50, 50));
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, userImageView),
+                DialogBox.getDukeDialog(dukeText, dukeImageView)
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Generates a response for Duke to the user input.
+     */
+    private String getDukeResponse(String input) {
+        return "Duke: " + input;
+    }
+
+    /**
+     * Provides user input with user as the author.
+     */
+    private String getUserResponse(String input) {
+        return "You: " + input;
+    }
+
+    // Below are Non-GUI members.
+
+    // Non-GUI Variables.
 
     /**
      * TaskList to store all the Tasks for Duke.
@@ -45,6 +156,8 @@ public class Duke extends Application {
      */
     private Ui ui;
 
+    // Non-GUI Methods.
+
     /**
      * Constructor for Duke.
      */
@@ -52,129 +165,6 @@ public class Duke extends Application {
         this.allTasks = new TaskList();
         this.ui = new Ui();
         this.file = new Storage();
-    }
-
-    /**
-     * Starts the Duke application for GUI.
-     * Creates the Root Node, Places this Root Node in a Scene, Sets the Stage scene, and runs the Stage show.
-     *
-     * @param stage the primary stage provided by JavaFX.
-     */
-    @Override
-    public void start(Stage stage) {
-
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        // Additional controls to put into the main container.
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        // Putting multiple controls into one container layout pane.
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        // Setting the scene to be our container layout pane.
-        scene = new Scene(mainLayout);
-
-        // Setting the stage to show our screen.
-        stage.setScene(scene);
-        // Render the stage.
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
