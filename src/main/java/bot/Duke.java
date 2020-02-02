@@ -2,6 +2,7 @@ package bot;
 
 import bot.command.instruction.ParsedInstruction;
 
+import bot.gui.DialogueBox;
 import bot.loadsave.DummyLoader;
 import bot.loadsave.LoadAndSave;
 import bot.loadsave.TasksToDisk;
@@ -20,7 +21,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -37,6 +41,10 @@ import java.util.Scanner;
  * primary loop that awaits input from the user
  */
 public class Duke extends Application {
+    private Image user =
+            new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke =
+            new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private ScrollPane scroll;
     private VBox dialog;
     private TextField input;
@@ -121,11 +129,8 @@ public class Duke extends Application {
         input = new TextField();
         enterButton = new Button("Enter");
 
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        helloWorld.fontProperty().set(Font.font("Monospaced", 50));
-
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(helloWorld, scroll, input, enterButton);
+        mainLayout.getChildren().addAll(scroll, input, enterButton);
 
         Scene scene = new Scene(mainLayout); // Setting the scene to be our Label
 
@@ -159,5 +164,63 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(input, 1.0);
         AnchorPane.setBottomAnchor(input, 1.0);
+
+        enterButton.setOnMouseClicked(event -> {
+            dialog.getChildren().add(getDialogLabel(input.getText()));
+            input.clear();
+        });
+
+        input.setOnAction(event -> {
+            handleUserInput();
+        });
+
+        // Scroll down every time height changes
+        dialog.heightProperty().addListener(observable -> scroll.setVvalue(1.0));
+    }
+
+
+    /**
+     * A method to format a Label for 4LC3N-BOT GUI.
+     *
+     * @param text The text to create a Label of
+     * @return Returns a Label that contains that text,
+     *     with text wrap enabled
+     */
+    private Label getDialogLabel(String text) {
+        Label dialogLabel = new Label(text);
+        dialogLabel.setWrapText(true);
+        dialogLabel.fontProperty().set(Font.font("Monospaced", 50));
+        return dialogLabel;
+    }
+
+    /**
+     * A method to be called to generate the
+     * DialogueBoxes in the GUI for the user
+     * and the bot
+     */
+    private void handleUserInput() {
+        Label userText = getDialogLabel(input.getText());
+        Label dukeText = getDialogLabel(getResponse(input.getText()));
+        HBox space1 = new HBox();
+        space1.setMinHeight(10.0);
+        HBox space2 = new HBox();
+        space2.setMinHeight(10.0);
+        dialog.getChildren().addAll(
+                DialogueBox.getUserBox(userText, new ImageView(user)),
+                space1,
+                DialogueBox.getBotBox(dukeText, new ImageView(duke)),
+                space2
+        );
+        input.clear();
+    }
+
+    /**
+     * Formats the response given by the bot
+     *
+     * @param input The raw text input by the user
+     * @return Formatted response
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
