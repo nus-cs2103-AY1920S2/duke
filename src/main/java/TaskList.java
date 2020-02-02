@@ -57,34 +57,33 @@ public class TaskList {
      * 
      * @return {@code ArrayList<String>} of the tasks
      */
-    public ArrayList<String> listTasks() {
-        ArrayList<String> lines = new ArrayList<>();
+    public String listTasks() {
+        String lines = "";
         if (taskList.isEmpty()) {
-            lines.add("Nothing in the list, good job! " + new String(Character.toChars(0x1F60A)));
+            lines += "Nothing in the list, good job! " + new String(Character.toChars(0x1F60A));
         } else {
             for (int i = 0; i < this.taskList.size(); i++) {
-                lines.add((i + 1) + ". " + this.taskList.get(i).getFullDescription());
+                lines += (i + 1) + ". " + this.taskList.get(i).getFullDescription() + "\n";
             }
         }
-        return lines;
+        return lines.trim();
     }
 
-    public ArrayList<String> findTasks(String description) {
-        ArrayList<String> lines = new ArrayList<>();
+    public String findTasks(String description) {
+        String lines = "";
         if (taskList.isEmpty()) {
-            lines.add("Sorry, you have no tasks.");
+            lines += "Sorry, you have no tasks.";
         } else {
             int index = 1;
             for (Task task : this.taskList) {
                 if (task.getDescription().contains(description)) {
-                    lines.add((index) + ". " + task.getFullDescription());
-                    index++;
+                    lines += index + ". " + task.getFullDescription() + "\n";
                 }
             }
             if (lines.isEmpty()) {
-                lines.add("Sorry, nothing found.");
+                lines += "Sorry, nothing found.";
             }
         }
-        return lines;
+        return lines.trim();
     }
 }
