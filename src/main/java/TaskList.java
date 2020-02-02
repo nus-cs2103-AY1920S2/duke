@@ -17,16 +17,14 @@ public class TaskList {
         print("added new todo: " + task);
     }
 
-    public void addEvent(String task) {
-        String[] split = Parser.prepareDeadlineEvent(task);
-        Event newTask = new Event(split[0], split[1]);
+    public void addEvent(String[] task) {
+        Event newTask = new Event(task[0], task[1]);
         tasks.add(newTask);
         print("added new event: " + task);
     }
 
-    public void addDeadline(String task) {
-        String[] split = Parser.prepareDeadlineEvent(task);
-        Deadline newTask = new Deadline(split[0], split[1]);
+    public void addDeadline(String[] task) {
+        Deadline newTask = new Deadline(task[0], task[1]);
         print(newTask.toString());
         tasks.add(newTask);
         print("added new deadline: " + task);
