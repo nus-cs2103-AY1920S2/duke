@@ -35,6 +35,14 @@ public class Duke {
                 System.out.println(userCommand.doneCommand(mesInput, arrTask, uiDisplay));
             } else if (mesInput.contains("delete") && !mesInput.equalsIgnoreCase("delete")) {
                 userCommand.deleteCommand(mesInput, arrTask, uiDisplay);
+            } else if (userCommand.getCommandType(mesInput).equals("find")) {
+                if (arrTask.size() > 0) {
+                    userCommand.findCommand(mesInput, arrTask, uiDisplay);
+
+                } else {
+                    System.out.println("There is no task in the list");
+                }
+
             } else if (mesInput.equalsIgnoreCase("todo")) {
                 try {
                     throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");

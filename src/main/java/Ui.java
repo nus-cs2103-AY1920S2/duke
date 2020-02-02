@@ -33,4 +33,9 @@ public class Ui {
         return topMessage + "\n" + output + "\n" + bottomMessage;
     }
 
+    public String findTaskMes(){
+        return "  --------------\n" +
+                "    Here are the matching tasks in your list: ";
+    }
+
 }

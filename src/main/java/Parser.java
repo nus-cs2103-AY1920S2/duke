@@ -147,6 +147,21 @@ public class Parser {
         uiDisplay.getBottomTwoLine(tasks); // print out the ui message
     }
 
+    public void findCommand(String command, ArrayList<Task> tasks, Ui uiDisplay) {
+        ArrayList<String> matchResult = new ArrayList<String>();
+        String searchWord = command.substring(5);;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(searchWord)) {
+                matchResult.add(tasks.get(i).toString());
+            }
+        }
+        uiDisplay.findTaskMes();
+        for(int j = 0 ; j < matchResult.size(); j++){
+            System.out.println(" "+(j+1)+". "+matchResult.get(j).toString());
+        }
+        System.out.println("--------------");
+    }
+
     /**
      * This method helps to format date and time format that entered by user
      *
