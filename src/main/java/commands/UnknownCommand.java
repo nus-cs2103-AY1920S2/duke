@@ -17,9 +17,10 @@ public class UnknownCommand extends Command {
      * @param storage Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "I do not understand what you mean!!! :(";
         ui.printMsg(msg);
+        return msg;
     }
 
     /**

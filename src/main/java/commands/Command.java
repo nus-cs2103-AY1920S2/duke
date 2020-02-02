@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage This allows for TaskList to be updated and stored in hard drive.
      * @throws DukeException depending on command, different child class exception is thrown.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check for Exit Command and exit programme if returns false.

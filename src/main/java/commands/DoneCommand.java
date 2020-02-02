@@ -11,7 +11,7 @@ import ui.Ui;
  * Mark a Task in the TaskList as done.
  */
 public class DoneCommand extends Command {
-    
+
     private int index;
 
     /**
@@ -32,13 +32,14 @@ public class DoneCommand extends Command {
      * @throws DukeException thrown when index is out of bounds.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.markTaskAsDone(this.index - 1);
             storage.saveTasks(tasks.getTasks());
             String msg = "Wow you finally completed something: \n";
             msg += t;
             ui.printMsg(msg);
+            return msg;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();
         }

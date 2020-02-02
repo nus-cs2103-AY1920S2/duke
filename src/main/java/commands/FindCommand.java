@@ -1,9 +1,6 @@
 package commands;
 
-import dukeexception.SaveException;
 import storage.Storage;
-import task.Deadline;
-import task.Event;
 import task.Task;
 import tasklist.TaskList;
 import ui.Ui;
@@ -32,7 +29,7 @@ public class FindCommand extends Command {
      * @param storage Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "Here are the matching tasks in your list:";
         int counter = 0;
         for (Task t : tasks.getTasks()) {
@@ -42,6 +39,7 @@ public class FindCommand extends Command {
             }
         }
         ui.printMsg(msg);
+        return msg;
     }
 
     /**

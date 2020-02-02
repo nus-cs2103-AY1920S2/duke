@@ -33,7 +33,7 @@ public class SearchCommand extends Command {
      * @param storage Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "Here are the tasks on " + this.date + ":";
         for (Task t : tasks.getTasks()) {
             if (t instanceof Deadline) {
@@ -47,6 +47,7 @@ public class SearchCommand extends Command {
             }
         }
         ui.printMsg(msg);
+        return msg;
     }
 
     /**

@@ -17,6 +17,7 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+
     /**
      * This method prints the chat bot's welcome message.
      */
@@ -36,7 +37,6 @@ public class Ui {
      */
     public String readCommand() {
         return this.sc.nextLine();
-
     }
 
     /**

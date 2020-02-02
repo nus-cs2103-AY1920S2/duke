@@ -1,5 +1,6 @@
 import commands.Command;
 import dukeexception.DukeException;
+import dukeexception.SaveException;
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
@@ -17,10 +18,21 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+
+    public Duke() {
+        try {
+            storage = new Storage("/Users/jadetay/duke/data/tasks.txt");
+            tasks = new TaskList(storage.load());
+            ui = new Ui();
+        } catch (DukeException e) {
+            e.getMessage();
+        }
+    }
+
     /**
      * Constructor for Duke class.
      *
-     * @param filePath  File path of the text file to be loaded/saved.
+     * @param filePath File path of the text file to be loaded/saved.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -54,6 +66,15 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * This is the main method which makes use of static run method.
      *
@@ -62,4 +83,7 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("/Users/jadetay/duke/data/tasks.txt").run();
     }
+
+
+
 }
