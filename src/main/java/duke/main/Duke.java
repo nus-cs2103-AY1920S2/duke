@@ -5,6 +5,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.DialogBox;
 import duke.ui.Ui;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -120,8 +121,7 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * getResponse performs the tasks as necessary, and returns response to userInput.
      */
     public String getResponse(String input) {
         String output = Parser.parseCommand(input, taskList);
