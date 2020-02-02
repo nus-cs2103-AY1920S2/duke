@@ -76,6 +76,29 @@ public class TaskList {
         return toPrint;
     }
 
+    private String listToPrint(ArrayList<Task> tasks) {
+        int i = 1;
+        String toPrint = "";
+        for (Task x : tasks) {
+            toPrint += (i++) + "" + x.toString() + "\n";
+        }
+        return toPrint;
+    }
+
+    private String findTask(String keyword) {
+        ArrayList<Task> matchedTask = new ArrayList<>();
+        for (Task x: taskArr) {
+            if(x.getTask().contains(keyword)) {
+                matchedTask.add(x);
+            }
+        }
+        if (matchedTask.isEmpty()) {
+            return "I'm sorry, but your search garners no results";
+        } else {
+            return listToPrint(matchedTask);
+        }
+    }
+
     /**
      * Reads an input from UI, performs an operation, and returns a string to be printed.
      * @param input from user
@@ -99,6 +122,8 @@ public class TaskList {
                 return listToPrint();
             case BYE:
                 return "0";
+            case FIND:
+                return findTask(Parser.readTask(input));
             default:
                 return "Cannot compute";
             }
