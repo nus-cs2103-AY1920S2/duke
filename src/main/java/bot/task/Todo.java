@@ -18,7 +18,7 @@ public class Todo extends Task {
      * @param td String representing raw command with
      *           instruction
      * @throws InadequateArgumentsException If no description
-     * is found for this To-do Task
+     *     is found for this To-do Task
      */
     public Todo(String td) throws InadequateArgumentsException {
         super(Todo.checkForNonEmpty(

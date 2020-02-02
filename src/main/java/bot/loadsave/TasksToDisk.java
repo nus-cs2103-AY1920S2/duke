@@ -30,7 +30,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
      * @param fn Name of the file in the directory
      *
      * @throws FileNotFoundException When file directory
-     * or file name is invalid
+     *     or file name is invalid
      */
     public TasksToDisk(String fd, String fn) throws FileNotFoundException {
         super(fd, fn);

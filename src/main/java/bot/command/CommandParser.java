@@ -6,7 +6,7 @@ import bot.command.exception.UnknownInstructionException;
  * Class to contain logic for commands
  * given to bot
  *
- * Todo: Move all parsing logic here
+ * <p>Todo: Move all parsing logic here
  * Todo: Use new class ParsedInstruction for parsed commands
  */
 public class CommandParser {

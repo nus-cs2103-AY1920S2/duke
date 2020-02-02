@@ -62,7 +62,7 @@ public class Duke {
         botUi.showAwaiting();
 
         // main bot system loop
-        while(input.hasNext()) {
+        while (input.hasNext()) {
             String command = input.nextLine();
             // parse the command
             Instruction next;
@@ -131,14 +131,13 @@ public class Duke {
                 }
                 store.searchStorage(searchTerm)
                         .ifPresentOrElse(
-                                taskIds -> {
-                                    botUi.showFoundTask();
-                                    for (Integer id : taskIds) {
-                                        System.out.println(store.retrieve(id));
-                                    }
-                                },
-                                () -> botUi.showFailedToFind()
-                        );
+                            taskIds -> {
+                                botUi.showFoundTask();
+                                for (Integer id : taskIds) {
+                                    System.out.println(store.retrieve(id));
+                                }
+                            },
+                            () -> botUi.showFailedToFind());
             } else if (next == Instruction.STORE_DDL) {
                 Deadline ddl;
                 try {
@@ -185,14 +184,13 @@ public class Duke {
                 }
                 store.findInDesc(searchTerm)
                         .ifPresentOrElse(
-                                taskIds -> {
-                                    botUi.showFoundTask();
-                                    for (Integer id : taskIds) {
-                                        System.out.println(store.retrieve(id));
-                                    }
-                                },
-                                () -> botUi.showFailedToFind()
-                        );
+                            taskIds -> {
+                                botUi.showFoundTask();
+                                for (Integer id : taskIds) {
+                                    System.out.println(store.retrieve(id));
+                                }
+                            },
+                            () -> botUi.showFailedToFind());
             } else if (next == Instruction.HELP) {
                 botUi.showHelpMessage();
             } else if (next == Instruction.HELLO) {
@@ -226,8 +224,7 @@ public class Duke {
      */
     private static int getListIndex(String rawCommand, Command com)
         throws InadequateArgumentsException, NumberFormatException,
-            TooManyArgumentsException
-    {
+            TooManyArgumentsException {
         return Integer.parseInt(getSecondTerm(rawCommand, com));
     }
 
@@ -241,8 +238,7 @@ public class Duke {
      * @return String representing the second term
      */
     private static String getSecondTerm(String rawCommand, Command com)
-            throws InadequateArgumentsException, TooManyArgumentsException
-    {
+            throws InadequateArgumentsException, TooManyArgumentsException {
         String[] words = rawCommand.split("\\s+");
         if (words.length == 2) {
             return words[1];

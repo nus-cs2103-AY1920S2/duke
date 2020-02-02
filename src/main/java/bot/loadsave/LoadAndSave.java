@@ -28,7 +28,7 @@ public abstract class LoadAndSave<T> {
      * @param fn Name of the file in the directory
      *
      * @throws FileNotFoundException When file directory
-     * or file name is invalid
+     *     or file name is invalid
      */
     public LoadAndSave(String fd, String fn) throws FileNotFoundException {
         this.fileDirectory = fd;
@@ -112,7 +112,7 @@ public abstract class LoadAndSave<T> {
      * the given file directory and file name
      *
      * @return String representing full relative
-     * file address
+     *     file address
      */
     public String getRelativeAddress() {
         return LoadAndSave.getFullFileAddress(this.fileDirectory, this.fileName);

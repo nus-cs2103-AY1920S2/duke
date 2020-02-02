@@ -20,7 +20,7 @@ public class Deadline extends Task {
      *           the deadline instruction
      *
      * @throws InadequateArgumentsException When String
-     * td is supplied without the word "/by"
+     *     td is supplied without the word "/by"
      */
     public Deadline(String td) throws InadequateArgumentsException {
         super(Deadline.makeDesc(td.substring(Command.DEADLINE.word.length())),

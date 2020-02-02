@@ -20,7 +20,7 @@ public class Event extends Task {
      *           the event instruction
      *
      * @throws InadequateArgumentsException When String
-     * td is supplied without the word "/at"
+     *     td is supplied without the word "/at"
      */
     public Event(String td) throws InadequateArgumentsException {
         super(Event.makeDesc(td.substring(Command.EVENT.word.length())),
