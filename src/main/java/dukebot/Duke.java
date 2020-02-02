@@ -29,7 +29,8 @@ public class Duke {
         try {
             loadedAliasMap = storage.loadAlias();
         } catch (DukeException e) {
-            ui.sayLine(e.getErrorLineName());
+            // Can ignore
+            // ui.sayLine(e.getErrorLineName());
         }
         if (loadedAliasMap == null) {
             parser = new Parser();
@@ -37,16 +38,15 @@ public class Duke {
             parser = new Parser(loadedAliasMap);
         }
 
-        if (withGui) {
-            ui.showWelcomeGui();
-            ui.getDukeVoice().playVoice();
-        } else {
-            ui.showWelcome();
-        }
-
         try {
             ArrayList<Task> taskArrayList = storage.loadTaskArrayList();
             tasks = new TaskList(taskArrayList);
+            if (withGui) {
+                ui.showWelcomeGui();
+                ui.getDukeVoice().playVoice();
+            } else {
+                ui.showWelcome();
+            }
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
             ArrayList<Task> taskArrayList = new ArrayList<>();

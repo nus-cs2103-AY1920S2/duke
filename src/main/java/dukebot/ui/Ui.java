@@ -107,7 +107,7 @@ public class Ui {
                     + "find <query>\n-- Finds a task which has <query> as a substring of the task's name.\n\n"
                     + "done <task index>\n-- Marks the task as done.\n\n"
                     + "delete <task index>\n-- Deletes the task.\n\n"
-                    + "bye\n-- Exits this application."
+                    + "bye\n-- Exits this application.\n\n"
                     + "reset\n-- The forbidden Command. Please never use it... Duke'll forget everything."
             );
             break;
@@ -223,9 +223,8 @@ public class Ui {
             break;
         case LOAD_FAIL:
             dukeExpression = DukeExpression.BLUSH;
-            dukeSays("There seem to be not existing save file.");
-            dukeSays("Is this the first time Master has used Duke?");
-            dukeSays("Type 'help' to see the list of commands.");
+            dukeSays("Yahallo! Duke's name is \n" + LOGO);
+            dukeSays("Is this the first time Master has used Duke?\nType 'help' for the list of commands.");
             break;
         case RESET_STORAGE_INIT:
             dukeVoice = DukeVoice.WHAT;
