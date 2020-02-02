@@ -30,9 +30,8 @@ public class Ui {
      * Method to print the completion of a task.
      * @param task Task to be marked as done.
      */
-    public void printDone(Task task) {
-        System.out.println("You have completed this task.");
-        System.out.println(task);
+    public String printDone(Task task) {
+        return ("You have completed this task.\n" + task.toString());
     }
 
     /**
@@ -40,9 +39,8 @@ public class Ui {
      * @param task Task to be deleted.
      * @param newListSize New size of the task list.
      */
-    public void printDelete(Task task, int newListSize) {
-        System.out.println(task + " has been removed.");
-        System.out.println("Number of items in the list: " + newListSize);
+    public String printDelete(Task task, int newListSize) {
+        return (task.toString() + " has been removed.\n" + "Number of items in the list: " + newListSize);
     }
 
 
@@ -51,26 +49,22 @@ public class Ui {
      * @param task Task to be added.
      * @param listSize Size of the task list.
      */
-    public void printAdd(Task task, int listSize) {
-        System.out.println("Understood. I have added: " + task);
-        System.out.println("Number of items in the list: " + listSize);
+    public String printAdd(Task task, int listSize) {
+        return ("Understood. I have added: " + task.toString() + "\n" + "Number of items in the list: " + listSize);
     }
 
     /**
      * Method to print a farewell message before closing the Duke bot.
      */
-    public void printBye() {
-        System.out.println("It was my pleasure to help you.\n");
+    public String printBye() {
+        return ("It was my pleasure to help you.\n");
     }
 
     /**
      * Method to print all the matched tasks.
      * @param matchedTasks ArrayList of all matched tasks.
      */
-    public void printFind(ArrayList<Task> matchedTasks) {
-        System.out.println("These are the tasks that matched what you were looking for.");
-        for (Task tasks : matchedTasks) {
-            System.out.println(tasks);
-        }
+    public String printFind(TaskList matchedTasks) {
+        return ("These are the tasks that matched what you were looking for.\n" + matchedTasks.printList());
     }
 }
