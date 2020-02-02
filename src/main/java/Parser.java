@@ -36,6 +36,7 @@ public class Parser {
      * This method takers in user's input and arrayList of task and Ui class to
      * handle the todo task command and write it into file,
      * it return the desired string output to user
+     *
      * @param command   command and task that entered by user
      * @param tasks     arrayList that used to store task created
      * @param uiDisplay class object that deals with the interaction with user.
@@ -57,6 +58,7 @@ public class Parser {
      * This method takers in user's input and arrayList of task and Ui class to
      * handle event task command and write it into file
      * it return the desired string output to user
+     *
      * @param command   command and task that entered by user
      * @param tasks     arrayList that used to store task created
      * @param uiDisplay class object that deals with the interaction with user.
@@ -101,9 +103,11 @@ public class Parser {
         fileStorage.writeFile("deadline", taskName + date, f);  // create task into file
         return uiDisplay.parserOutputMess(customeriseTopMes, taskMes, customeriseBottomMes); // parse the string and return to Duke class
     }
+
     /**
      * This method takers in user's input and arrayList of task and Ui class to handle done command
      * and return the desired string output to user
+     *
      * @param command   command and task that entered by user
      * @param tasks     arrayList that used to store task created
      * @param uiDisplay class object that deals with the interaction with user.
@@ -127,6 +131,7 @@ public class Parser {
     /**
      * This method handle delete task command
      * and return the desired string output to user
+     *
      * @param command   command and task that entered by user
      * @param tasks     arrayList that used to store task created
      * @param uiDisplay class object that deals with the interaction with user.
@@ -144,6 +149,7 @@ public class Parser {
 
     /**
      * This method helps to format date and time format that entered by user
+     *
      * @param date
      * @return Date in format Tue 12, 2019
      * @throws Exception

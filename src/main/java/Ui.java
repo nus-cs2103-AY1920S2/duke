@@ -25,7 +25,7 @@ public class Ui {
     }
 
     public void removeTaskMes() {
-        System.out.println( "  --------------\n" +
+        System.out.println("  --------------\n" +
                 "   Got it. I've removed this task:");
     }
 
