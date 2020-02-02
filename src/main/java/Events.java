@@ -7,6 +7,10 @@ public class Events extends Task {
         this.at = at;
     }
 
+    public String getType() { return "E"; }
+
+    public String getDetails() { return at; }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
