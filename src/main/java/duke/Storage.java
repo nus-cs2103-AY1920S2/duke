@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Constructs a Storage with the specified file path.
+     *
      * @param filePath The file path where the tasks are stored.
      */
     public Storage(String filePath) {
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Loads the tasks from the data file.
+     *
      * @return A list of tasks from the data file.
      * @throws DukeException If the data in the data file is not in the correct format.
      */
@@ -67,6 +69,7 @@ public class Storage {
 
     /**
      * Creates the data file.
+     *
      * @throws DukeException If the data file cannot be created.
      */
     private void createFile() throws DukeException {
@@ -84,6 +87,7 @@ public class Storage {
 
     /**
      * Saves the tasks into the data file.
+     *
      * @param tasks The tasks to be saved.
      * @throws DukeException If the tasks cannot be saved.
      */

@@ -13,6 +13,7 @@ public abstract class Command {
 
     /**
      * Returns true if the command terminates the program.
+     *
      * @return true if the command terminates the program.
      */
     public boolean isExit() {
@@ -21,6 +22,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @param tasks The TaskList containing the tasks.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.

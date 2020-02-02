@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline with the specified description and due date and time.
+     *
      * @param description The description of the deadline.
      * @param by The due date and time of the deadline in yyyy-mm-dd hh:mm format.
      * @throws DukeException If the date or time is in the incorrect format.
@@ -33,6 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline with the specified description, due date and time and status.
+     *
      * @param description The description of the deadline.
      * @param by The due date and time of the deadline in yyyy-mm-dd hh:mm format.
      * @param isDone Whether the deadline is done.
@@ -46,6 +48,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the date of the deadline.
+     *
      * @return The date of the deadline.
      */
     public LocalDate getDate() {
@@ -54,6 +57,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of the deadline for saving to the disk.
+     *
      * @return String representation of the deadline for saving to the disk.
      */
     @Override
@@ -63,11 +67,12 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of the deadline for printing.
+     *
      * @return String representation of the deadline for printing.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " " + time + ")";
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " " + time + ")";
     }
 }

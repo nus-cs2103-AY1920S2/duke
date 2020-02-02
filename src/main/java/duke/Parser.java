@@ -18,6 +18,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * Parses the specified command and returns the corresponding Command object.
+     *
      * @param command The command to be parsed.
      * @return The corresponding Command object.
      * @throws DukeException If the command is not supported.
@@ -25,7 +26,7 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         Command cmd;
         String[] commandArr = command.split(" ", 2);
-        switch(commandArr[0]) {
+        switch (commandArr[0]) {
         case "todo":
             try {
                 cmd = new AddCommand(commandArr[0], commandArr[1]);

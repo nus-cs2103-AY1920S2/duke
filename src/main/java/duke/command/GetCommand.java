@@ -17,6 +17,7 @@ public class GetCommand extends Command {
 
     /**
      * Constructs a GetCommand with the specified date.
+     *
      * @param date The date for the command.
      */
     public GetCommand(LocalDate date) {
@@ -25,6 +26,7 @@ public class GetCommand extends Command {
 
     /**
      * Gets tasks on the specified date and prints the tasks.
+     *
      * @param tasks The TaskList containing the tasks.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
