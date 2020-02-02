@@ -17,27 +17,37 @@ public class UserInterface {
     }
 
     public void render(String message) {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(UserInterface.createLinedMessage(message));
+    }
+    
+    public void renderError(String message) {
+        System.err.println(UserInterface.createLinedMessage(message));
+    }
+    
+    public boolean isClosed() {
+        return this.isClosed;
+    }
+    
+    public void close() {
+        this.isClosed = true;
+    }
+
+    private static String createLinedMessage(String message) {
+        StringBuilder output = new StringBuilder();
+        output.append("    ____________________________________________________________\n");
 
         for (String str : message.split("\n")) {
             int index = 0;
             while (index < str.length()) {
-                String indentation = "      ";
                 int print_length = Math.min(str.length() - index, MAX_STRING_LENGTH - 2);
-
-                System.out.println(indentation + str.substring(index, index + print_length));
+                String formattedString = String.format("      %s\n", str.substring(index, index + print_length));
+                
+                output.append(formattedString);
                 index += print_length;
             }
         }
         
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public boolean isClosed() {
-        return this.isClosed;
-    }
-
-    public void close() {
-        this.isClosed = true;
+        output.append("    ____________________________________________________________\n");
+        return output.toString();
     }
 }
