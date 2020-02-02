@@ -1,14 +1,6 @@
 package parser;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.SearchCommand;
-import commands.FindCommand;
-import commands.ListCommand;
-import commands.ExitCommand;
-import commands.UnknownCommand;
+import commands.*;
 import dukeexception.DukeException;
 import dukeexception.InvalidDateTimeException;
 import dukeexception.WrongInputException;
@@ -30,15 +22,14 @@ public class Parser {
     /**
      * Constructor for creating new Parser object.
      */
-    public Parser() {
-    }
+    public Parser() { }
 
     /**
      * Takes in user command input and make sense of it to create the specific Task object and Command object.
      *
      * @param fullCommand This is the command input of user.
-     * @return Command object specified by user input.
      * @throws DukeException thrown when user input date/time is in the wrong format.
+     * @return Command object specified by user input.
      */
     public static Command parse(String fullCommand) throws DukeException {
         Command com = null;
@@ -107,14 +98,12 @@ public class Parser {
      * @param fullCommand This is the full command input of user.
      * @param command This is the identifier for the full command.
      * @param fullComArr This is the String array for the broken up full command.
-     * @return Nothing.
      * @throws DukeException thrown when user input is missing information.
+     * @return Nothing.
      */
     private static void checkInput(String fullCommand, String command, String[] fullComArr) throws DukeException {
-        if (command.equals("done")
-                || command.equals("delete")
-                || command.equals("todo")
-                || command.equals("search")) {
+        if (command.equals("done") || command.equals("delete") ||
+                command.equals("todo") || command.equals("search")) {
             if (fullComArr.length <= 1) {
                 throw new WrongInputException();
             }

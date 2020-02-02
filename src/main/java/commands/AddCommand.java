@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Constructor for AddCommand.
+     * Constructor for AddCommand
      *
      * @param t t is the Task to be added into TaskList.
      */
@@ -29,6 +29,7 @@ public class AddCommand extends Command {
      * @param ui This is to interact with the user interface, printing message of Task being added.
      * @param storage This allows for TaskList to be updated with new Task.
      * @throws SaveException thrown when not able to save file.
+     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws SaveException {

@@ -17,7 +17,7 @@ public class SearchCommand extends Command {
     private LocalDate date;
 
     /**
-     * Constructor for SearchCommand.
+     * Constructor for DeleteCommand
      *
      * @param date This is the date of Tasks we are searching for.
      */
@@ -31,6 +31,7 @@ public class SearchCommand extends Command {
      * @param tasks This is the TaskList where the Task is stored.
      * @param ui This is to interact with the user interface, printing message of Task having the required date.
      * @param storage Unused.
+     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -40,7 +41,8 @@ public class SearchCommand extends Command {
                 if (((Deadline) t).getDate().isEqual(date)) {
                     msg += "\n" + t;
                 }
-            } else if (t instanceof Event) {
+            }
+            else if (t instanceof Event) {
                 if (((Event) t).getDate().isEqual(date)) {
                     msg += "\n" + t;
                 }

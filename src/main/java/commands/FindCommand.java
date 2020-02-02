@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     private String str;
 
     /**
-     * Constructor for FindCommand.
+     * Constructor for FindCommand
      *
      * @param str This is the String of keyword used to find Task.
      */
@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      * @param tasks This is the TaskList where the Task is stored.
      * @param ui This is to interact with the user interface, printing Tasks with keyword.
      * @param storage Unused.
+     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

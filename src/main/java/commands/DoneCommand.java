@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
     private int index;
 
     /**
-     * Constructor for DoneCommand.
+     * Constructor for DoneCommand
      *
      * @param index the index of Task to be marked as done from TaskList.
      */
@@ -30,6 +30,7 @@ public class DoneCommand extends Command {
      * @param ui This is to interact with the user interface, printing message of Task being marked as done.
      * @param storage This allows for TaskList to be updated with new Task status.
      * @throws DukeException thrown when index is out of bounds.
+     * @return Nothing.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
