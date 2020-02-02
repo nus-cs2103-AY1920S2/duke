@@ -76,6 +76,23 @@ public class TaskList {
     }
 
     /**
+     * Returns formatted list of all tasks in the task list.
+     * @return string indicating completion of the list command.
+     */
+    public String printListString() {
+        String printString = "";
+        if (list.size() <= 0) {
+            printString += "There are no tasks in your list.\n";
+        } else {
+            printString += "Here are the tasks in your list:\n";
+            for (int i = 0; i < list.size(); i++) {
+                printString += (i + 1) + ". " + list.get(i) + "\n";
+            }
+        }
+        return printString;
+    }
+
+    /**
      * Prints the number of tasks present in task list.
      */
     public void printSize() {
@@ -83,42 +100,57 @@ public class TaskList {
     }
 
     /**
+     * Returns a string indicating size of task list.
+     * @return string containing size of task list.
+     */
+    public String printSizeString() {
+        return "Now you have " + list.size() + " tasks in the list.";
+    }
+
+    /**
      * Marks task in task list as completed.
      * @param index index position of task in task list to be marked as completed.
      * @param storage makeshift database for tasks.
+     * @return string indicating completion of the done command.
      * @throws IOException named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be open for any other reason.
      */
-    public void done(int index, Storage storage) throws IOException {
+    public String done(int index, Storage storage) throws IOException {
         list.get(index).markDone();
         storage.writeToFile(saveList());
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + list.get(index));
+        String doneResult = "Nice! I've marked this task as done:\n"
+                + list.get(index);
+        return doneResult;
     }
 
     /**
      * Deletes task from task list.
      * @param index index position of task to be deleted from task list.
      * @param storage makeshift database for tasks.
+     * @return string indicating completion of the delete command.
      * @throws IOException named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be open for any other reason.
      * @throws DukeException if user input does not follow input format.
      */
-    public void delete(int index, Storage storage) throws IOException, DukeException {
+    public String delete(int index, Storage storage) throws IOException, DukeException {
         if (size() <= index) {
             throw new DukeException("There is no task " + (index + 1) + ".");
         }
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + list.get(index));
+        String deleteResult = "";
+        deleteResult += "Noted. I've removed this task:\n";
+        deleteResult += list.get(index) + "\n";
         list.remove(index);
         storage.writeToFile(saveList());
+        return deleteResult;
+
     }
 
     /**
      * Searches and returns a list of tasks containing a keyword.
      * @param keyword keyword specified by user.
+     * @return string indicating completion of the find command.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         List<Task> matchedTasks = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).contains(keyword)) {
@@ -126,13 +158,16 @@ public class TaskList {
             }
         }
 
+        String findResult = "";
         if (matchedTasks.isEmpty()) {
-            System.out.println("     There are no matching tasks in your list.");
+            findResult += "There are no matching tasks in your list.";
         } else {
-            System.out.println("     Here are the matching tasks in your list:");
+            findResult += "Here are the matching tasks in your list:";
             for (int i = 0; i < matchedTasks.size(); i++) {
-                System.out.println("     " + (i + 1) + ". " + matchedTasks.get(i));
+                findResult += (i + 1) + ". " + matchedTasks.get(i);
             }
         }
+        return findResult;
+
     }
 }

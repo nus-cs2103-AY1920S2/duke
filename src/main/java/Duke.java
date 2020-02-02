@@ -166,11 +166,23 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
         });
     }
 
@@ -193,7 +205,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException, DukeException {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -207,8 +219,11 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) throws DukeException, IOException {
+        Command command = Parser.parse(input);
+        String result = command.execute(tasks, ui, storage);
+
+        return result;
     }
 
 }

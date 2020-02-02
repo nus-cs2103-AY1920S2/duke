@@ -22,11 +22,13 @@ public class AddCommand extends Command {
      * @param tasks list of tasks.
      * @param ui user interface.
      * @param storage makeshift database for tasks.
+     * @return string indicating completion of the add command.
      * @throws DukeException if user input does not follow input format.
      * @throws IOException named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be open for any other reason.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        String result = "";
         Task t = new Task(description);
         switch (type) {
         case "todo":
@@ -46,10 +48,15 @@ public class AddCommand extends Command {
         default:
         }
 
+        if (result.equals("")) {
+            storage.writeToFile(tasks.saveList());
+            result = "Got it. I've added this task:\n"
+                    + t + "\n" + tasks.printSizeString();
+        }
         storage.writeToFile(tasks.saveList());
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + t);
-        tasks.printSize();
+        result = "Got it. I've added this task:\n"
+                + t + "\n" + tasks.printSizeString();
+        return result;
     }
 
     /**
@@ -72,7 +79,7 @@ public class AddCommand extends Command {
             String[] deadlineArr = description.split(" /by ");
             // error: task is missing deadline
             if (deadlineArr.length <= 1) {
-                throw new DukeException("Deadline of a task cannot be empty.");
+                throw new DukeException("Time of an event cannot be empty.");
             }
             break;
         case "event":
