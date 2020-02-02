@@ -34,6 +34,10 @@ public class Task {
         return "O";
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] [%s]%s", getTaskIcon(), getStatusIcon(), taskName);

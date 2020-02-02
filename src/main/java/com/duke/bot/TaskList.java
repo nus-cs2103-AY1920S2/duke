@@ -26,14 +26,14 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task getTask(int index) {
+    public Task getTask(int index) throws IndexOutOfBoundsException {
         return tasks.get(index);
     }
 
-    public void deleteTask(int delIdx) throws DukeException {
+    public void deleteTask(int delIdx) throws IndexOutOfBoundsException {
         --delIdx;
         if (delIdx >= tasks.size() || delIdx < 0) {
-            throw new DukeException("Oops! Target object is out of bounds!");
+            throw new IndexOutOfBoundsException("Oops! Target object is out of bounds!");
         }
         Task delTask = tasks.get(delIdx);
         tasks.remove(delIdx);
