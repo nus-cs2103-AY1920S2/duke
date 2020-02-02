@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public enum TaskType {
     TODO("T"),
     EVENT("E"),

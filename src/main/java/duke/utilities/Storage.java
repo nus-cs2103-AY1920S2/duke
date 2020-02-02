@@ -1,3 +1,7 @@
+package duke.utilities;
+
+import duke.tasks.Task;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -5,7 +9,7 @@ public class Storage {
     String path;
     Parser parser;
 
-    Storage(String path) {
+    public Storage(String path) {
         this.path = path;
         this.parser = new Parser();
     }

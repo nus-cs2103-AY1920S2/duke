@@ -1,12 +1,14 @@
-/**
+package duke.utilities; /**
  * a class to store, delete and add new tasks
  */
+import duke.tasks.Task;
+import duke.exceptions.*;
 import java.util.ArrayList;
 
 public class TaskList {
     protected ArrayList<Task> taskList;
 
-    TaskList(ArrayList<Task> taskList) { // initialise the task list with data loaded from storage
+    public TaskList(ArrayList<Task> taskList) { // initialise the task list with files loaded from storage
         this.taskList = taskList;
     }
 
@@ -19,7 +21,7 @@ public class TaskList {
         }
     }
 
-    public Task doneTask(int index) throws DukeException{ // marks the task at the index provided as done, and returns the done task
+    public Task doneTask(int index) throws DukeException { // marks the task at the index provided as done, and returns the done task
         try {
             Task task;
             task = taskList.get(index);

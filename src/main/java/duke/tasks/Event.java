@@ -1,15 +1,18 @@
+package duke.tasks;
+
 import java.time.LocalDate;
+import duke.utilities.TimeParser;
 
 public class Event extends Task implements TimeParser {
     protected LocalDate eventTime;
 
-    Event(String description, String eventTime) { // constructor for creating new event
+    public Event(String description, String eventTime) { // constructor for creating new event
         super(description);
         this.eventTime = TimeParser.parseDate(eventTime);
         super.TYPE = TaskType.EVENT;
     }
 
-    Event(String status, String description, String eventTime) { // constructor for parsing tasks from hard disk
+    public Event(String status, String description, String eventTime) { // constructor for parsing tasks from hard disk
         super(status, description);
         super.TYPE = TaskType.EVENT;
         this.eventTime = TimeParser.parseDate(eventTime);

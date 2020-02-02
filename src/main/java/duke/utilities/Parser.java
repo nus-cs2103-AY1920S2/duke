@@ -1,7 +1,15 @@
-import java.util.Arrays;
+package duke.utilities;
+
+import duke.commands.*;
+import duke.tasks.*;
+import duke.exceptions.*;
 import java.util.regex.Pattern;
 
 public class Parser {
+    public Parser() {
+
+    }
+
     public static String parseTask(Task task) { // parses task into string to load into storage
         String parsed;
         TaskType taskType = task.getTaskType();
@@ -16,7 +24,7 @@ public class Parser {
                 parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Deadline) task).getTaskTime();
                 break;
             default:
-                parsed = ""; // TODO add error message, change DukeException to such task exists
+                parsed = ""; // TODO add error message, change duke.exceptions.DukeException to such task exists
         }
         return parsed;
     }
@@ -31,7 +39,7 @@ public class Parser {
             case "D":
                 return new Deadline(split[1], split[2], split[3]);
             default:
-                System.out.println("Error in parser parse method"); // TODO add error message and DukeException
+                System.out.println("Error in parser parse method"); // TODO add error message and duke.exceptions.DukeException
                 return null;
         }
     }

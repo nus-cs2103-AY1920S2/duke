@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Task {
     protected TaskType TYPE;
     protected String description;
@@ -7,12 +9,12 @@ public class Task {
 
     }
 
-    public Task(String description) { // constructor for Task when creating new Task
+    public Task(String description) { // constructor for duke.tasks.Task when creating new duke.tasks.Task
         this.description = description.trim();
         this.isDone = false;
     }
 
-    public Task(String status, String description) { // constructor for Task, if need to specify status (when parsing tasks from hard disk)
+    public Task(String status, String description) { // constructor for duke.tasks.Task, if need to specify status (when parsing tasks from hard disk)
         this.isDone = status.equals("1");
         this.description = description;
     }

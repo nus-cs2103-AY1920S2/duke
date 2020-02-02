@@ -1,5 +1,11 @@
+package duke.commands;
+import duke.utilities.*;
+import duke.Ui;
+
 public class ExitCommand extends Command {
-    ExitCommand() {}
+    public ExitCommand() {
+
+    }
 
     @Override
     public boolean execute(Storage storage, TaskList taskList, Ui ui) {
