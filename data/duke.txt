@@ -1,3 +1,3 @@
-D | 0 | cs3230 assignment | Feb 6 2020
+D | 1 | cs3230 assignment | Feb 6 2020
 E | 1 | finish week 4 iP | Feb 2 2020
 T | 0 | javafx
