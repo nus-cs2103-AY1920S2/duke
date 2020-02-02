@@ -30,12 +30,27 @@ public class Duke {
     }
 
     /**
+     * The entry point of application.
+     *
+     * @param args the input arguments.
+     */
+    public static void main(String[] args) {
+
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    /**
      * Starts the chatbot.
      */
     public void run() {
-        storage.loadTasks(taskList);
-        ui.printLogo();
-        ui.printGreeting();
+        try {
+            storage.loadTasks(taskList);
+            ui.printLogo();
+            ui.printGreeting();
+        } catch (InvalidArgumentAelitaException e) {
+            e.printStackTrace();
+        }
 
         while (true) {
             try {
@@ -49,7 +64,7 @@ public class Duke {
                     if (descriptionTokens[0].toLowerCase().equals("bye")) {
                         try {
                             storage.saveTasks(taskList);
-                        } catch (IOAelitaException e) {
+                        } catch (IoAelitaException e) {
                             ui.printResponse(Response.IO_ERROR);
                         }
                         ui.printResponse(Response.GOODBYE);
@@ -113,7 +128,8 @@ public class Duke {
                         ui.printTask(task);
                         ui.printResponse(Response.TASK_COUNT);
 
-                    } else if (descriptionTokens[0].toLowerCase().equals("deadline") || descriptionTokens[0].toLowerCase().equals("event")) {
+                    } else if (descriptionTokens[0].toLowerCase().equals("deadline")
+                            || descriptionTokens[0].toLowerCase().equals("event")) {
                         if (descriptionTokens.length == 1) {
                             //Description is missing
                             throw new InsufficientArgumentAelitaException("description");
@@ -184,6 +200,7 @@ public class Duke {
                 case "end time":
                     ui.printResponse(Response.MISSING_END_TIME);
                     break;
+                default:
                 }
             } catch (EmptyListAelitaException e) {
                 ui.printResponse(Response.NO_TASK);
@@ -250,16 +267,5 @@ public class Duke {
             builder.append(descriptionTokens[i]);
         }
         return builder.toString();
-    }
-
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments.
-     */
-    public static void main(String[] args) {
-
-        Duke duke = new Duke();
-        duke.run();
     }
 }

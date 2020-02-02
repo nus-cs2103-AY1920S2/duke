@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
 
@@ -26,7 +26,7 @@ class TaskTest {
     void getStatusIcon_notDone() {
         assertEquals(0, Task.totalTaskCount);
         Task task = new Task("test");
-        assertEquals("\u2718", task.getStatusIcon());
+        assertEquals("✘", task.getStatusIcon());
         Task.totalTaskCount = 0;
     }
 
@@ -35,7 +35,7 @@ class TaskTest {
         assertEquals(0, Task.totalTaskCount);
         Task task = new Task("test");
         task.isDone = true;
-        assertEquals("\u2713", task.getStatusIcon());
+        assertEquals("✓", task.getStatusIcon());
         Task.totalTaskCount = 0;
     }
 
@@ -45,7 +45,7 @@ class TaskTest {
         Task task = new Task("test");
         try {
             task.markAsDone();
-            assertEquals("\u2713", task.getStatusIcon());
+            assertEquals("✓", task.getStatusIcon());
         } catch (DuplicateMarkAelitaException e) {
             Assertions.fail();
         } finally {
@@ -62,7 +62,7 @@ class TaskTest {
             task.markAsDone();
             Assertions.fail();
         } catch (DuplicateMarkAelitaException e) {
-            assertEquals("\u2713", task.getStatusIcon());
+            assertEquals("✓", task.getStatusIcon());
         } finally {
             Task.totalTaskCount = 0;
         }
@@ -98,7 +98,7 @@ class TaskTest {
     void testToString() {
         assertEquals(0, Task.totalTaskCount);
         Task test = new Task("Test 1");
-        assertEquals("[\u2718] Test 1", test.toString());
+        assertEquals("[✘] Test 1", test.toString());
         Task.totalTaskCount = 0;
     }
 }

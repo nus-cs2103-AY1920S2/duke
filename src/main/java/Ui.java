@@ -143,6 +143,7 @@ public class Ui {
         case TASK_NOT_FOUND:
             message += "There is no task matching your keyword";
             break;
+        default:
         }
         System.out.println(message);
     }
@@ -164,6 +165,7 @@ public class Ui {
      * @param task the specified task.
      */
     public void printTask(Task task) {
+
         System.out.println("  " + task);
     }
 }
