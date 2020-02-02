@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+application {
+    mainClassName = "com.nus.duke.Duke"
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.0.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
