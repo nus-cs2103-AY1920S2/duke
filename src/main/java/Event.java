@@ -25,8 +25,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" +
+                super.toString() +
+                " (at: " +
+                formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                ")";
     }
+
 
     /**
      * Same as toString.
@@ -34,6 +39,10 @@ public class Event extends Task {
      * @return Event toString.
      */
     public String saveToList() {
-        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
+        return "[E]" +
+                super.toString() +
+                " (at: " +
+                formattedDate +
+                ")";
     }
 }

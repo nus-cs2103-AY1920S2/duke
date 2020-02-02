@@ -25,7 +25,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" +
+                super.toString() +
+                " (by: " +
+                formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                ")";
     }
 
     /**
@@ -34,6 +38,10 @@ public class Deadline extends Task {
      * @return Deadline toString.
      */
     public String saveToList() {
-        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
+        return "[D]" +
+                super.toString() +
+                " (by: " +
+                formattedDate +
+                ")";
     }
 }

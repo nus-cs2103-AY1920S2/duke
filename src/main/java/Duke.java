@@ -4,8 +4,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-
-
     private SaveToFile saveToFile;
     private Ui ui;
     private TaskList tasks;
@@ -40,7 +38,6 @@ public class Duke {
                     ui.showLine();
                     if (tasks.getTaskListSize() == 0) {
                         ui.emptyList();
-                        ui.showLine();
                     } else {
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < tasks.getTaskListSize(); i++) {
@@ -89,7 +86,6 @@ public class Duke {
                         System.out.println(todo.toString());
                         int listSize = tasks.getTaskListSize();
                         ui.taskInList(listSize);
-                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Todo"));
                     }
@@ -101,7 +97,6 @@ public class Duke {
                         ui.addedCommand();
                         System.out.println(event.toString());
                         ui.taskInList(tasks.getTaskListSize());
-                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Event"));
                     }
@@ -113,7 +108,6 @@ public class Duke {
                         ui.addedCommand();
                         System.out.println(deadline.toString());
                         ui.taskInList(tasks.getTaskListSize());
-                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Deadline"));
                     }
