@@ -21,8 +21,7 @@ public class Ui {
      * Prints greeting upon start up.
      */
     public void printGreeting() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?\n");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you\n");
     }
 
     /**

@@ -1,3 +1,17 @@
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,80 +29,89 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private GuiUi ui;
 
     /**
      * Class constructor.
-     *
-     * @param filePath Path to file where tasks are saved on hard disk.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        ui = new GuiUi();
+        storage = new Storage("data/duke.txt");
+    }
+
+    /**
+     * Loads the tasks saved during the previous session into a new TaskList upon start-up.
+     *
+     * @return Error message.
+     */
+    public String prepareList() {
+        String response = "";
 
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException exception) {
-            ui.showLoadingError();
             tasks = new TaskList();
 
-            File file = new File(filePath);
+            File file = new File("data/duke.txt");
 
             try {
                 file.createNewFile();
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
+                response = response.concat(e.getMessage());
             }
         }
+        return response;
     }
 
     /**
-     * Runner of Duke.
-     * Triggered upon start-up.
+     * Executes user commands and returns a response required depending on user command.
+     *
+     * @param input User command.
+     * @return Response to be printed on GUI depending on user command.
      */
-    public void run() {
-        ui.printGreeting();
-        String input = ui.readTask();
+    public String run(String input) {
 
-        while (!input.equals("bye")) {
+        if (!input.equals("bye")) {
             Parser parser = new Parser(input);
+            String response = "";
 
             switch (parser.getIdentifier()) {
 
             case "list":
-                ui.printList(tasks);
+                response = ui.getList(tasks);
                 break;
             case "done":
                 int completedTask = parser.getTaskIndex();
                 tasks.getTask(completedTask - 1).setDone();
 
-                ui.printDoneSuccess(tasks, completedTask - 1);
+                response = ui.getDoneSuccess(tasks, completedTask - 1);
 
                 try {
                     storage.updateFile(tasks);
                 } catch (IOException exception) {
-                    ui.printUpdateError(exception);
+                    response = ui.getUpdateError(exception);
                 }
                 break;
             case "delete":
                 int removeTask = parser.getTaskIndex();
 
-                ui.printDeleteSuccess(tasks, removeTask - 1);
+                response = ui.getDeleteSuccess(tasks, removeTask - 1);
 
                 tasks.deleteTask(removeTask - 1);
-                ui.printStatusUpdate(tasks);
+                response = response.concat(ui.getStatusUpdate(tasks));
 
                 try {
                     storage.updateFile(tasks);
                 } catch (IOException exception) {
-                    ui.printUpdateError(exception);
+                    response = ui.getUpdateError(exception);
                 }
                 break;
             case "find":
                 try {
-                    this.findTarget(parser);
+                    response = this.findTarget(parser);
                 } catch (DukeException exception) {
-                    ui.printException(exception);
+                    response = ui.getExceptionMessage(exception);
                 }
 
                 break;
@@ -96,24 +119,24 @@ public class Duke {
                 try {
                     this.addTask(parser);
 
-                    ui.printAddSuccess(tasks);
-                    ui.printStatusUpdate(tasks);
+                    response = ui.getAddSuccess(tasks);
+                    response = response.concat(ui.getStatusUpdate(tasks));
 
                     try {
                         storage.updateFile(tasks);
                     } catch (IOException exception) {
-                        ui.printUpdateError(exception);
+                        response = ui.getUpdateError(exception);
                     }
                 } catch (DukeException exception) {
-                    ui.printException(exception);
+                    response = ui.getExceptionMessage(exception);
                 }
                 break;
             }
 
-            input = ui.readTask();
+            return response;
         }
 
-        ui.printExit();
+        return ui.getExitGreeting();
     }
 
     /**
@@ -144,20 +167,27 @@ public class Duke {
     }
 
     /**
-     * Prints list of tasks that contains keyword.
+     * Returns list of tasks that contains keyword.
      *
      * @param parser Parser to interpret user input command.
+     * @return List of tasks that contains keyword.
      * @throws DukeException Thrown when description and hence keyword is empty.
      */
-    public void findTarget(Parser parser) throws DukeException {
+    public String findTarget(Parser parser) throws DukeException {
         String keyword = parser.getDescription();
 
         ArrayList<String> targets = tasks.findTargets(keyword);
 
-        ui.printTargets(targets);
+        return ui.getTargets(targets);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    /**
+     * Returns Duke's response to a given user command.
+     *
+     * @param input User command.
+     * @return Duke's response to the command.
+     */
+    String getResponse(String input) {
+        return this.run(input);
     }
 }
