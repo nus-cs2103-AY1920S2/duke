@@ -3,15 +3,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected LocalDate on;
+    protected LocalDate at;
 
-    public Event(String description, LocalDate on) {
+    public Event(String description, LocalDate at) {
         super(description);
-        this.on = on;
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (on: " + on.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
