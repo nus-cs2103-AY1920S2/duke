@@ -7,6 +7,7 @@ public class Parser {
     public static HashMap<String, Message> availableMessage = new HashMap<>() {{
         put("done", Message.DONE);
         put("delete", Message.DELETE);
+        put("find", Message.FIND);
         put("todo", Message.TODO);
         put("deadline", Message.DEADLINE);
         put("event", Message.EVENT);

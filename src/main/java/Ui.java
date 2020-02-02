@@ -57,4 +57,18 @@ public class Ui {
         }
         typeSetting(li.toString());
     }
+
+    /**
+     * an slightly altered version of gettingList. (exclusively used in findTask method in TaskList class)
+     * @param taskList the TaskList we are dealing with.
+     */
+    public void getMatchingTasks(TaskList taskList) {
+        List<Task> list = taskList.getTasks();
+        int index = list.size();
+        StringBuilder li = new StringBuilder("    \uD83D\uDCDC Here are the matching tasks in your list:\n");
+        for (int i = 0; i < index; i++) {
+            li.append("         ").append(i + 1).append(": ").append(list.get(i)).append("\n");
+        }
+        typeSetting(li.toString());
+    }
 }

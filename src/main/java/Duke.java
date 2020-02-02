@@ -49,38 +49,43 @@ public class Duke {
         String first = st.nextToken(" ");
 
         switch (parser.getMessage(first)) {
-            case DONE:
-                parser.checkDescription(str, "done".length());
-                taskList.markDone(str);
-                break;
+        case DONE:
+            parser.checkDescription(str, "done".length());
+            taskList.markDone(str);
+            break;
 
-            case DELETE:
-                parser.checkDescription(str, "delete".length());
-                taskList.delete(str);
-                break;
+        case DELETE:
+            parser.checkDescription(str, "delete".length());
+            taskList.delete(str);
+            break;
 
-            case TODO:
-                parser.checkDescription(str, "todo".length());
-                Todo td = new Todo(st.nextToken("").substring(1));
-                taskList.addTask(td);
-                break;
+        case FIND:
+            parser.checkDescription(str, "find".length());
+            taskList.find(str);
+            break;
 
-            case DEADLINE:
-                parser.checkDescription(str, "deadline".length());
-                String[] strings = parser.stringSplitting(st);
-                Deadline ddl = new Deadline(strings[0], strings[1]);
-                taskList.addTask(ddl);
-                break;
+        case TODO:
+            parser.checkDescription(str, "todo".length());
+            Todo td = new Todo(st.nextToken("").substring(1));
+            taskList.addTask(td);
+            break;
 
-            case EVENT:
-                parser.checkDescription(str, "event".length());
-                String[] strings2 = parser.stringSplitting(st);
-                Event ev = new Event(strings2[0], strings2[1]);
-                taskList.addTask(ev);
-                break;
+        case DEADLINE:
+            parser.checkDescription(str, "deadline".length());
+            String[] strings = parser.stringSplitting(st);
+            Deadline ddl = new Deadline(strings[0], strings[1]);
+            taskList.addTask(ddl);
+            break;
 
-            default:
-                throw new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case EVENT:
+            parser.checkDescription(str, "event".length());
+            String[] strings2 = parser.stringSplitting(st);
+            Event ev = new Event(strings2[0], strings2[1]);
+            taskList.addTask(ev);
+            break;
+
+        default:
+            throw new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

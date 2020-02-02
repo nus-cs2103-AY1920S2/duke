@@ -29,13 +29,29 @@ public class TaskList {
     public void delete(String str) throws IllegalArgumentException {
         Parser parser = new Parser();
         Ui ui = new Ui();
-        int index = this.tasks.size();
         int num = Integer.parseInt(str.substring(7));
         if (!parser.inRange(num, this.tasks.size())) {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
         }
         Task t = tasks.remove(num - 1);
         ui.deleteMessage(num, t, this.tasks.size());
+    }
+
+    /**
+     * finds the tasks which contain the keyword given by the user and construct a TaskList by the resulting tasks.
+     * @param str a String represents the input of the user.
+     */
+    public void find(String str) {
+        Ui ui = new Ui();
+        String keyWord = str.substring(5);
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t.getDescription().contains(keyWord)) {
+                matchingTasks.add(t);
+            }
+        }
+        TaskList matchingResults = new TaskList(matchingTasks);
+        ui.getMatchingTasks(matchingResults);
     }
 
     public ArrayList<Task> getTasks() {
