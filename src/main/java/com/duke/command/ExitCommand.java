@@ -19,4 +19,9 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showGoodbye();
     }
+
+    @Override
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getGoodbyeMessage();
+    }
 }

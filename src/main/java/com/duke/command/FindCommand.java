@@ -23,4 +23,9 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showFind(tasks.findTask(keyword));
     }
+
+    @Override
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getFindMessage(tasks.findTask(keyword));
+    }
 }

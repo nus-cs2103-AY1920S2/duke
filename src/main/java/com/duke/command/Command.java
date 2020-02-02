@@ -25,4 +25,6 @@ public abstract class Command {
      * @throws DukeException happens when there is a problem executing the command.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    public abstract String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

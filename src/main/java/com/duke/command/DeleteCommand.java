@@ -32,4 +32,15 @@ public class DeleteCommand extends Command {
             throw new DukeException("OOPS!!! Data Save Failed");
         }
     }
+
+    @Override
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task t = tasks.deleteTask(index);
+            storage.save(tasks);
+            return ui.getDeleteMessage(t, tasks.tasks.size());
+        } catch (IOException e) {
+            throw new DukeException("OOPS!!! Data Save Failed");
+        }
+    }
 }

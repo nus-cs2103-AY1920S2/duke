@@ -6,6 +6,18 @@ import com.duke.util.DukeException;
 import com.duke.util.Parser;
 import com.duke.util.Storage;
 import com.duke.util.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.FileNotFoundException;
 
@@ -13,10 +25,19 @@ import java.io.FileNotFoundException;
  * Driver class of the Duke program. To start a new session,
  * instantiate a new <code>Duke</code> object with the data file path and call run();
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Instantiate a new <code>Duke</code> object with the data file path
@@ -33,6 +54,10 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Duke() {
+
     }
 
     /**
@@ -56,186 +81,126 @@ public class Duke {
         }
     }
 
+    public String runOnGui(String input) {
+        try {
+            Command c = Parser.parse(input);
+            ui.showGoodbye();
+            String message = c.executeOnGui(tasks, ui, storage);
+            message = ui.getLine() + "\n" + message + "\n";
+            return message;
+        } catch (DukeException e) {
+            String message = ui.gerErrorMessage(e.getMessage());
+            message = ui.getLine() + "\n" + message + "\n";
+            return message;
+        }
+    }
+
+
 
     public static void main(String[] args) {
         new Duke("../duke/data/duke.txt").run();
 
     }
-}
 
 
+    @Override
+    public void start(Stage stage) {
+        Duke session = new Duke("../duke/data/duke.txt");
 
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
+        userInput = new TextField();
+        sendButton = new Button("Send");
 
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+        scene = new Scene(mainLayout);
 
+        stage.setScene(scene);
 
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
 
+        mainLayout.setPrefSize(400.0, 600.0);
 
-/*
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
 
-public class com.duke.Duke {
-    static String space = "     ";
-    static String line = space + "_____________________________________________";
-    static List<com.duke.task.Task> tasks;
-    static int count = 0;
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-    public static void main(String[] args) {
+        userInput.setPrefWidth(325.0);
 
-        try {
-            tasks = loadTask();
-            count = tasks.size();
-        } catch (FileNotFoundException f) {
-            System.out.println("DATA FILE NOT FOUND");
-        }
+        sendButton.setPrefWidth(55.0);
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        introduce();
-        Scanner scanner = new Scanner(System.in);
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
 
-        while (true) {
-            String next = scanner.nextLine();
-            if (next.equals("bye")) {
-                respond("Bye. Hope to see you again soon!");
-                break;
-            } else {
-                try {
-                    process(next);
-                    saveTask();
-                } catch (com.duke.util.DukeException dd) {
-                    System.out.println(dd.getMessage());
-                } catch (FileNotFoundException e) {
-                    System.out.println("File Saving failed");
-                } catch (IOException e) {
-                    System.out.println("File Saving failed");
-                }
-            }
-        }
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+        stage.show();
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                new Label(session.ui.getWelcomeMessage()), new ImageView(duke)));
+
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        sendButton.setOnMouseClicked((event) -> {
+            session.handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            session.handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
 
-
-
-    public static void process(String next) throws com.duke.util.DukeException {
-        StringTokenizer st = new StringTokenizer(next);
-        String first_token = st.nextToken();
-
-
-        if (next.equals("list")){
-            print_list();
-        } else if (first_token.equals("delete")) {
-            try {
-                int index = Integer.parseInt(next.substring(7)) - 1;
-                markRemove(index);
-            } catch (com.duke.util.DukeException d) {
-                throw d;
-            } catch (Exception e) {
-                throw new com.duke.util.DukeException("OOPS! delete should follow by a number");
-            }
-        }
-
-        else if (first_token.equals("done")) {
-            try {
-                int index = Integer.parseInt(next.substring(5)) - 1;
-                com.duke.task.Task temp = tasks.get(index);
-                markDone(temp);
-            } catch (Exception e) {
-                throw new com.duke.util.DukeException("OOPS! done should follow by a number");
-            }
-
-        } else {
-            com.duke.task.Task itemToAdd = null;
-
-            if (first_token.equals("deadline")) {
-                try {
-                    next = next.substring(9);
-                    String[] temp = next.split(" /by ");
-                    itemToAdd = new com.duke.task.Deadline(temp[0], temp[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new com.duke.util.DukeException("OOPS!!! Wrong input format for deadline");
-                } catch (DateTimeParseException e) {
-                    throw new com.duke.util.DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
-                }
-
-
-            } else if (first_token.equals("event")) {
-                try {
-                    next = next.substring(6);
-                    String[] temp = next.split(" /at ");
-                    itemToAdd = new com.duke.task.Event(temp[0], temp[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new com.duke.util.DukeException("OOPS!!! Wrong input format for event");
-                } catch (DateTimeParseException e) {
-                    throw new com.duke.util.DukeException("OOPS!!! Wrong format of time, try yyyy-mm-dd");
-                }
-            } else if (first_token.equals("todo")) {
-                try {
-                    next = next.substring(5);
-                    itemToAdd = new com.duke.task.Todo(next);
-                    if (next.equals("")) {
-                        throw new Exception("empty todo");
-                    }
-                } catch (Exception e) {
-                    throw new com.duke.util.DukeException("OOPS!!! The description of a todo cannot be empty.");
-                }
-            }
-
-            if (itemToAdd != null) {
-                tasks.add(itemToAdd);
-                String out = line + "\n" + space + "Got it. I've added this task: " + "\n" + space
-                        + "  " + itemToAdd + "\n" + space + "Now you have " + (count+1) +
-                        " tasks in your list." + "\n" + line;
-                System.out.println(out);
-                count++;
-            } else {
-                throw new com.duke.util.DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        }
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 
-    public static void respond(String in) {
-        String output = line + "\n" + space + in + "\n" + line;
-        System.out.println(output);
-    }
-
-    public static void introduce() {
-        String intro_message = "Hello! I'm com.duke.Duke" + "\n" + space + "What can I do for you?";
-        respond(intro_message);
-    }
-    public static void print_list() {
-        String output = line + "\n" + space + "Here are the tasks in your list: ";
-        for (int i = 0; i < count; i++) {
-            int index = i+1;
-            output += "\n" + space + index + ". " + tasks.get(i);
-        }
-        output += "\n" + line;
-        System.out.println(output);
-    }
-
-    public static void markDone(com.duke.task.Task t) {
-        t.markAsDone();
-        String output = line + "\n" + space + "Nice! I've marked this task as done: "
-                + "\n" + space + t + "\n" + line;
-        System.out.println(output);
-    }
-
-    public static void markRemove(int index) throws com.duke.util.DukeException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new com.duke.util.DukeException("OOPS!!! Invalid task index to delete");
-        }
-        com.duke.task.Task i = tasks.remove(index);
-        count--;
-        String output = line + "\n" + space + "Noted. I've removed this task: "
-                + "\n" + space + "  " + i + "\n" + space + "Now you have " + count +
-                " tasks in your list." + "\n" + line;
-        System.out.println(output);
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return runOnGui(input);
     }
 
 }
-*/

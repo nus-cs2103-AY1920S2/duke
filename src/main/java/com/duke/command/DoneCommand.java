@@ -33,4 +33,15 @@ public class DoneCommand extends Command {
             throw new DukeException("OOPS!!! Data Save Failed");
         }
     }
+
+    @Override
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task t = tasks.markTask(index);
+            storage.save(tasks);
+            return ui.getDoneMessage(t);
+        } catch (IOException e) {
+            throw new DukeException("OOPS!!! Data Save Failed");
+        }
+    }
 }

@@ -1,3 +1,4 @@
 D|0|drink|2009-12-20
 T|1|maldfa
-E|0|lallala|2020-01-02
+E|1|lallala|2020-01-02
+D|0|safmasfa|2020-02-02

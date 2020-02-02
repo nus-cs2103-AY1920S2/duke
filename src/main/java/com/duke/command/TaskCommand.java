@@ -39,6 +39,17 @@ public class TaskCommand extends Command {
             throw new DukeException("OOPS!!! Data Save Failed");
         }
     }
+
+    @Override
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            tasks.addTask(task);
+            storage.save(tasks);
+            return ui.getAddMessage(task, tasks.tasks.size());
+        } catch (IOException e) {
+            throw new DukeException("OOPS!!! Data Save Failed");
+        }
+    }
 }
 
 

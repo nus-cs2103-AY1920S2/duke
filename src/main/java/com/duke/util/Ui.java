@@ -23,6 +23,10 @@ public class Ui {
         System.out.println(space + "OOPS! There is a problem loading save file");
     }
 
+    public String getLoadingErrorMessage() {
+        return space + "OOPS! There is a problem loading save file";
+    }
+
     /**
      * Prints the welcome message when Duke starts up.
      */
@@ -37,11 +41,25 @@ public class Ui {
 
     }
 
+    public String getWelcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String out = "Hello from\n" + logo + "\n" + "Hello! I'm Duke" + "\n" + space + "What can I do for you?";
+        return out;
+    }
+
     /**
      * Prints a line which is used for the formatting of the user interface.
      */
     public void showLine() {
         System.out.println(line);
+    }
+
+    public String getLine() {
+        return line;
     }
 
     /**
@@ -52,6 +70,10 @@ public class Ui {
      */
     public void showError(String msg) {
         System.out.println(space + msg);
+    }
+
+    public String gerErrorMessage(String msg) {
+        return space + msg;
     }
 
     /**
@@ -68,6 +90,10 @@ public class Ui {
      */
     public void showGoodbye() {
         System.out.println(space + "Bye. Hope to see you again soon!");
+    }
+
+    public String getGoodbyeMessage() {
+        return space + "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -87,6 +113,16 @@ public class Ui {
         System.out.println(output);
     }
 
+    public String getListMessage(TaskList tasks) {
+        String output = space + "Here are the tasks in your list: ";
+        int noOfTasks = tasks.tasks.size();
+        for (int i = 0; i < noOfTasks; i++) {
+            int index = i + 1;
+            output += "\n" + space + index + ". " + tasks.tasks.get(i);
+        }
+        return output;
+    }
+
     /**
      * Prints the message that the <code>Task</code> t is successfully marked as done.
      *
@@ -96,6 +132,12 @@ public class Ui {
         String output = space + "Nice! I've marked this task as done: "
                 + "\n" + space + t;
         System.out.println(output);
+    }
+
+    public String getDoneMessage(Task t) {
+        String output = space + "Nice! I've marked this task as done: "
+                + "\n" + space + t;
+        return output;
     }
 
     /**
@@ -112,6 +154,13 @@ public class Ui {
         System.out.println(output);
     }
 
+    public String getDeleteMessage(Task t, int count) {
+        String output = space + "Noted. I've removed this task: "
+                + "\n" + space + "  " + t + "\n" + space + "Now you have " + count
+                + " tasks in your list.";
+        return output;
+    }
+
     /**
      * Prints the message that a task t is added to the task list, and
      * indicate the number of task on the list.
@@ -124,6 +173,13 @@ public class Ui {
                 + "  " + t + "\n" + space + "Now you have " + count
                 + " tasks in your list.";
         System.out.println(out);
+    }
+
+    public String getAddMessage(Task t, int count) {
+        String out = space + "Got it. I've added this task: " + "\n" + space
+                + "  " + t + "\n" + space + "Now you have " + count
+                + " tasks in your list.";
+        return out;
     }
 
     /**
@@ -139,5 +195,15 @@ public class Ui {
             index++;
         }
         System.out.println(out);
+    }
+
+    public String getFindMessage(ArrayList<Task> tasks) {
+        String out = space + "Here are the matching tasks in your list: ";
+        int index = 1;
+        for (Task t : tasks) {
+            out += "\n" + space + index + ". " + t;
+            index++;
+        }
+        return out;
     }
 }
