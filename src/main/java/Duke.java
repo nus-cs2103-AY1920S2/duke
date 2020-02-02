@@ -15,6 +15,10 @@ public class Duke {
         return "Hello, I am Duke, your personal assistant.";
     }
 
+    /**
+     * Initialises Duke by reading the stored data from disk and storing the tasks
+     * in {@code TaskList}.
+     */
     private void initialise() {
         ArrayList<String> lines = this.storage.readFromDisk();
         for (String line : lines) {
@@ -35,6 +39,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Relays the user input string {@code userInput} to a {@code Parser} object and
+     * uses the parsed tokens to manipulate tasks and generate a response String.
+     * 
+     * @param userInput the raw String input from the user
+     * @return the actual String response of Duke
+     */
     public String getResponse(String userInput) {
         userInput = userInput.trim();
         try {
