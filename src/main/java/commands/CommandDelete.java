@@ -16,7 +16,7 @@ public class CommandDelete implements Command {
      * @param processor The instantiated DukeProcessor object.
      * @param args      The arguments as entered by the user.
      * @throws DukeException Throws an exception if the input format is incorrect, or if the task at the index is not
-     *      found
+     *                       found
      */
     public String execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
@@ -24,7 +24,7 @@ public class CommandDelete implements Command {
             throw new DukeException("Your 'delete' command is incorrect! Use the following format: delete <number>");
         } else if (Integer.parseInt(argsArray[1]) > processor.getTaskList().size()) {
             throw new DukeException("You've selected a non-existent task to delete! Please try again!");
-        } else if(Integer.parseInt(argsArray[1]) < 0) {
+        } else if (Integer.parseInt(argsArray[1]) < 0) {
             throw new DukeException("You've entered an index below the number of tasks in the list! Please try again!");
         }
 

@@ -23,7 +23,7 @@ public class CommandDeadline extends CommandTask {
         }
         String[] inputArgs = args.split(" ", 2)[1].split(" /by ");
 
-        if(inputArgs.length < 2) {
+        if (inputArgs.length < 2) {
             throw new DukeException("Your deadline command is incorrect! Please follow the format: deadline <item> "
                     + "/by <time>");
         }
