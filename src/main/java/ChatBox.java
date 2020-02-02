@@ -10,20 +10,20 @@ import java.util.Scanner;
 
 public class ChatBox {
     private Folder folder;
-    private boolean toClose;
+    private boolean hasClosed;
     private String location;
 
     public ChatBox(String location) {
         this.folder = new Folder();
-        this.toClose = true;
+        this.hasClosed = true;
         this.location = location;
     }
 
     public void load() throws FileNotFoundException {
-        File f = new File(location);
-        Scanner s = new Scanner(f);
-        while (s.hasNextLine()) {
-            String[] ms = s.nextLine().split("=");
+        File file = new File(location);
+        Scanner data = new Scanner(file);
+        while (data.hasNextLine()) {
+            String[] ms = data.nextLine().split("=");
             String key = ms[0];
             String status = ms[1];
             Message message = new Message(ms[2]);
@@ -48,47 +48,47 @@ public class ChatBox {
         String key = msg[0];
         try {
             switch (key) {
-                case "bye":
-                    Message.end();
-                    toClose = false;
-                    break;
-                case "list":
-                    folder.show();
-                    break;
-                case "done":
-                    int i = Integer.parseInt(msg[1]);
-                    folder.finishTasks(i);
-                    save();
-                    break;
-                case "delete":
-                    int b = Integer.parseInt(msg[1]);
-                    folder.deleteTasks(b);
-                    save();
-                    break;
-                case "find":
-                    folder.find(msg[1]);
-                    break;
-                default:
-                    Tasks tasks;
-                    if (key.equals("todo")) {
-                        String s = input.getMsg().split("todo ")[1];
-                        tasks = new ToDos(new Message(s));
-                    } else if (key.equals("deadline")) {
-                        String s1 = input.getMsg().split("deadline ")[1];
-                        String s2 = s1.split("/by")[0];
-                        String s3 = s1.split("/by")[1];
-                        tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
-                    } else if (key.equals("event")) {
-                        String s1 = input.getMsg().split("event ")[1];
-                        String s2 = s1.split("/at")[0];
-                        String s3 = s1.split("/at")[1];
-                        tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
-                    } else {
-                        throw new IllegalArgumentException("wrong liao");
-                    }
-                    folder.add(tasks);
-                    tasks.added();
-                    save();
+            case "bye":
+                Message.end();
+                hasClosed = false;
+                break;
+            case "list":
+                folder.show();
+                break;
+            case "done":
+                int i = Integer.parseInt(msg[1]);
+                folder.finishTasks(i);
+                save();
+                break;
+            case "delete":
+                int b = Integer.parseInt(msg[1]);
+                folder.deleteTasks(b);
+                save();
+                break;
+            case "find":
+                folder.find(msg[1]);
+                break;
+            default:
+                Tasks tasks;
+                if (key.equals("todo")) {
+                    String data = input.getMsg().split("todo ")[1];
+                    tasks = new ToDos(new Message(data));
+                } else if (key.equals("deadline")) {
+                    String s1 = input.getMsg().split("deadline ")[1];
+                    String s2 = s1.split("/by")[0];
+                    String s3 = s1.split("/by")[1];
+                    tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
+                } else if (key.equals("event")) {
+                    String s1 = input.getMsg().split("event ")[1];
+                    String s2 = s1.split("/at")[0];
+                    String s3 = s1.split("/at")[1];
+                    tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
+                } else {
+                    throw new IllegalArgumentException("wrong liao");
+                }
+                folder.add(tasks);
+                tasks.added();
+                save();
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -108,7 +108,7 @@ public class ChatBox {
             Message.welcome();
             load();
             Scanner scan = new Scanner(System.in);
-            while (toClose && scan.hasNextLine()) {
+            while (hasClosed && scan.hasNextLine()) {
                 Message input = new Message();
                 String msg = scan.nextLine();
                 input.add(msg);

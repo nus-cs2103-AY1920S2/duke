@@ -9,5 +9,6 @@ public class TasksTest {
     public void testStringConversion() {
         Message msg = new Message("read book");
         assertEquals("[x] read book\n", new Tasks(msg).toString());
+        //assertEquals("THis test something",2.0, 2.0);
     }
 }
