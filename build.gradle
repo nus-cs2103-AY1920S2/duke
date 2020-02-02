@@ -2,10 +2,15 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 group 'seedu.duke'
 version '0.1.0'
+
+checkstyle {
+    toolVersion = '8.23'
+}
 
 repositories {
     mavenCentral()

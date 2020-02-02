@@ -39,13 +39,13 @@ public class TaskListTest {
             TaskList tasks = new TaskList();
             tasks.removeTask(0);
             fail();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Index is out of bounds.", e.getMessage());
         }
     }
 
     @Test
-    public void getTask_validIndex_success() throws DukeException{
+    public void getTask_validIndex_success() throws DukeException {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("read book"));
         Task task = tasks.getTask(0);

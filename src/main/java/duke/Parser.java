@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 
 /**
  * Represents a Parser in Duke application.
@@ -15,7 +21,7 @@ public class Parser {
      * @return The appropriate Command object.
      * @throws DukeException If the command is invalid or in wrong format.
      */
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("list")) {
             return new ListCommand();
         } else if (fullCommand.equals("bye")) {
@@ -46,7 +52,7 @@ public class Parser {
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        return command;
+            return command;
         }
 
     }

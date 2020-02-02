@@ -52,7 +52,7 @@ public class TaskList {
      * @return The task that was removed from the list.
      * @throws DukeException If the index is out of range.
      */
-    public Task removeTask(int index) throws DukeException{
+    public Task removeTask(int index) throws DukeException {
         try {
             return tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
