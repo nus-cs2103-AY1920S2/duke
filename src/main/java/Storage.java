@@ -24,14 +24,14 @@ public class Storage {
             String[] elements = str.split(" \\| ");
             Task t = new Task();
             switch (elements[0]) {
-                case "T":
-                    t = new Todo(elements[2]);
-                    break;
-                case "E":
-                    t = new Event(elements[2], elements[3]);
-                    break;
-                case "D":
-                    t = new Deadline(elements[2], elements[3]);
+            case "T":
+                t = new Todo(elements[2]);
+                break;
+            case "E":
+                t = new Event(elements[2], elements[3]);
+                break;
+            case "D":
+                t = new Deadline(elements[2], elements[3]);
             }
             if (Integer.parseInt(elements[1]) == 1)
                 t.markAsDone();
