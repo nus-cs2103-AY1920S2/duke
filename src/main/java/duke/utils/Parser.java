@@ -13,14 +13,10 @@ import java.util.List;
 
 public class Parser {
 
-    public static Date stringToDate(String text) {
-        Date date = null;
+    public static Date stringToDate(String text) throws ParseException{
+        Date date;
         SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
-        try {
-            date = formatter.parse(text);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        date = formatter.parse(text);
         return date;
     }
 
@@ -61,7 +57,7 @@ public class Parser {
         return data;
     }
 
-    public static List<Task> storageToTask(String data) {
+    public static List<Task> storageToTask(String data) throws ParseException{
         List<Task> tasks= new ArrayList<>();
         String[] lines = data.split("\n");
         for (int i = 0; i < lines.length; i++) {

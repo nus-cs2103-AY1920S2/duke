@@ -2,10 +2,12 @@ package duke.command;
 
 import duke.main.Ui;
 import duke.utils.Parser;
+import duke.utils.FileStorage;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class AddCommand implements Command {
 
@@ -16,18 +18,22 @@ public class AddCommand implements Command {
             ui.setResponse("Adding task failed, task body cannot be empty");
             return;
         }
-        if (taskList.addToList(token[1], token[0])) {
-            try {
-                storage.storeData(Parser.tasksToStorage(taskList.getList()));
-            } catch (IOException e) {
-                System.out.println("Error in storing data");
+        try {
+            if (taskList.addToList(token[1], token[0])) {
+                try {
+                    storage.storeData(Parser.tasksToStorage(taskList.getList()));
+                } catch (IOException e) {
+                    System.out.println("Error in storing data");
+                }
+                ui.setResponse("I've added this task to the list:\n " + taskList.getList().get(taskList.size() - 1) + "\n" +
+                        "Now you have " + taskList.size() + " task(s) in the list");
+                return;
+            } else {
+                ui.setResponse("Adding task failed, either task body is empty or required time is not specified");
+                return;
             }
-            ui.setResponse("I've added this task to the list:\n " + taskList.getList().get(taskList.size() - 1) + "\n" +
-                    "Now you have " + taskList.size() + " task(s) in the list");
-            return;
-        } else {
-            ui.setResponse("Adding task failed, either task body is empty or required time is not specified");
-            return;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

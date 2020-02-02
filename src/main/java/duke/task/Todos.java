@@ -10,6 +10,7 @@ public class Todos implements Task {
     public Todos(String name) {
         this.name = name;
     }
+
     @Override
     public boolean isDone() {
         return done;

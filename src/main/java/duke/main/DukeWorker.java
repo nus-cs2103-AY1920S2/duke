@@ -4,19 +4,28 @@ import duke.command.Command;
 import duke.task.Task;
 import duke.utils.CommandParser;
 import duke.utils.Parser;
-import duke.utils.Storage;
+import duke.utils.FileStorage;
 import duke.utils.TaskList;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 public class DukeWorker {
 
-    private Storage storage;
+    private FileStorage storage;
     private TaskList taskList;
 
+    public FileStorage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
     public DukeWorker(String storagePath) {
-        storage = new Storage(storagePath);
+        storage = new FileStorage(storagePath);
         taskList = new TaskList();
     }
 
@@ -31,7 +40,9 @@ public class DukeWorker {
                 taskList = new TaskList(tasks);
             }
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

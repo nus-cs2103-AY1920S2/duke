@@ -31,6 +31,10 @@ public class Ui {
         return request;
     }
 
+    public String getResponse() {
+        return response;
+    }
+
     public void displayResponse() {
         System.out.println(Constants.ANSI_RED + this.response + Constants.ANSI_RESET);
     }

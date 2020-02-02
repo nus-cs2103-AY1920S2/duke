@@ -5,6 +5,7 @@ import duke.task.Events;
 import duke.task.Task;
 import duke.task.Todos;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TaskList {
         tasks.remove(taskId);
     }
 
-    public boolean addToList(String item, String type) {
+    public boolean addToList(String item, String type) throws ParseException {
         Task newTask;
         if (type.equals("todo")) {
             newTask = new Todos(item);
