@@ -2,11 +2,19 @@ import Task.Task;
 
 import java.util.List;
 
+/**
+ * Ui class has specific methods that deal with interactions with the user.
+ */
 public class Ui {
-    //set a horizontal line
+    /**
+     * sets a horizontal line.
+     */
     public StringBuilder horizontalLine = new StringBuilder("   ").append("\u02DC".repeat(80)).append("\n");
 
-    //to add horizontal line around the message and print it out
+    /**
+     * adds horizontal line around the message and print it out.
+     * @param s the message intended to wrap up.
+     */
     public void typeSetting(String s) {
         System.out.println(horizontalLine + s + "\n" + horizontalLine);
     }

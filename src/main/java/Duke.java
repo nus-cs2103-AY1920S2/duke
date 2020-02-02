@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.util.*;
 
+/**
+ * Represents a Duke bot. This is also the main class of duke project.
+ */
 public class Duke {
     public static String taskData = "./data/duke.txt";
     private Storage storage;
@@ -13,6 +16,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * constructs a Duke bot instance.
+     * @param filePath the file path where the bot stores its data collected from the user in.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
@@ -24,7 +31,13 @@ public class Duke {
         }
     }
 
-    //to process different requests which is decided by the first token of the message user entered
+    /**
+     * processes different requests which is decided by the first token of the message user entered.
+     * @param str the first token of the message user entered.
+     * @throws InvalidKeyException if the first token entered is not a valid command.
+     * @throws IllegalArgumentException if the tokens entered after the first token are not correctly formatted.
+     * @throws EmptyDescriptionException if the user only entered the first token.
+     */
     public void processRequest(String str)
             throws InvalidKeyException, IllegalArgumentException, EmptyDescriptionException {
 
@@ -36,7 +49,6 @@ public class Duke {
         String first = st.nextToken(" ");
 
         switch (parser.getMessage(first)) {
-            //decide which action to be done by the first token
             case DONE:
                 parser.checkDescription(str, "done".length());
                 taskList.markDone(str);
@@ -72,17 +84,15 @@ public class Duke {
         }
     }
 
+    /**
+     * sets up the bot, shows greeting messages and then the user is able to interact with the bot.
+     */
     public void run() {
-        //setting up
         Scanner sc = new Scanner(System.in);
         boolean exiting = false;
 
-        //welcome message and showing the list to the user
-        this.ui.typeSetting("    Hello, I'm Bob. \uD83D\uDC76 \uD83D\uDC76 \uD83D\uDC76\n    " +
-                "What can I do for you? \uD83D\uDE03\n");
-        this.ui.gettingList(taskList);
+        this.ui.greet(taskList);
 
-        //talking to Bob
         String str = sc.nextLine();
         while (!exiting) {
             //check if the user want to exit
@@ -118,6 +128,9 @@ public class Duke {
         }
     }
 
+    /**
+     * runs the whole program.
+     */
     public static void main(String[] args) {
         new Duke(taskData).run();
     }
