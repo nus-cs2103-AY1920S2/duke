@@ -54,34 +54,12 @@ public class TaskList {
     }
 
     /**
-     * Adds a to-do task to the list.
+     * Adds a task to the list.
      *
-     * @param description Description of to-do task.
+     * @param task Task to be added to the list.
      */
-    public void addToDo(String description) {
-        tasks.add(new ToDo(description, 'T'));
-    }
-
-    /**
-     * Adds an event to the list.
-     *
-     * @param description Description of event.
-     * @param date Date of event.
-     * @param time Time of event.
-     */
-    public void addEvent(String description, LocalDate date, LocalTime time) {
-        tasks.add(new Event(description, 'E', date, time));
-    }
-
-    /**
-     * Adds a deadline task to the list.
-     *
-     * @param description Description of deadline task.
-     * @param date Date of deadline of task.
-     * @param time Time of deadline of task.
-     */
-    public void addDeadline(String description, LocalDate date, LocalTime time) {
-        tasks.add(new Deadline(description, 'D', date, time));
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     /**

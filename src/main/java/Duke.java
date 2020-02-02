@@ -25,7 +25,7 @@ import java.util.Scanner;
 /**
  * Duke is a Personal Assistant Chatbot that helps a person keep track of various types of tasks.
  * It can add/delete/list tasks, as well as, mark tasks as done when completed. Upon exit, the tasks
- * will be saved to a data file. 
+ * will be saved to a data file.
  */
 public class Duke {
 
@@ -89,11 +89,6 @@ public class Duke {
 
                 response = ui.getDoneSuccess(tasks, completedTask - 1);
 
-                try {
-                    storage.updateFile(tasks);
-                } catch (IOException exception) {
-                    response = ui.getUpdateError(exception);
-                }
                 break;
             case "delete":
                 int removeTask = parser.getTaskIndex();
@@ -103,11 +98,6 @@ public class Duke {
                 tasks.deleteTask(removeTask - 1);
                 response = response.concat(ui.getStatusUpdate(tasks));
 
-                try {
-                    storage.updateFile(tasks);
-                } catch (IOException exception) {
-                    response = ui.getUpdateError(exception);
-                }
                 break;
             case "find":
                 try {
@@ -124,15 +114,16 @@ public class Duke {
                     response = ui.getAddSuccess(tasks);
                     response = response.concat(ui.getStatusUpdate(tasks));
 
-                    try {
-                        storage.updateFile(tasks);
-                    } catch (IOException exception) {
-                        response = ui.getUpdateError(exception);
-                    }
                 } catch (DukeException exception) {
                     response = ui.getExceptionMessage(exception);
                 }
                 break;
+            }
+
+            try {
+                storage.updateFile(tasks);
+            } catch (IOException exception) {
+                response = ui.getUpdateError(exception);
             }
 
             return response;
@@ -151,7 +142,7 @@ public class Duke {
     public void addTask(Parser parser) throws DukeException {
         if (parser.getIdentifier().equals("todo")) {
             String toDo = parser.getDescription();
-            tasks.addToDo(toDo);
+            tasks.addTask(new ToDo(toDo, 'T', false));
         } else if (parser.getIdentifier().equals("event") || parser.getIdentifier().equals("deadline")) {
             String description = parser.getDescription();
 
@@ -159,9 +150,9 @@ public class Duke {
             LocalTime timing = parser.getTime();
 
             if (parser.getIdentifier().equals("event")) {
-                tasks.addEvent(description, date, timing);
+                tasks.addTask(new Event(description, 'E', date, timing, false));
             } else {
-                tasks.addDeadline(description, date, timing);
+                tasks.addTask(new Deadline(description, 'D', date, timing, false));
             }
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
