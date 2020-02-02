@@ -23,7 +23,11 @@ public class Task {
         this.task = task;
     }
 
-    public Task completeTask()  {
+    /**
+     * Converts Complete from true to False
+     * @return the task with complete as true
+     */
+    public Task completeTask() {
         this.complete = new Complete(true);
         return this;
     }

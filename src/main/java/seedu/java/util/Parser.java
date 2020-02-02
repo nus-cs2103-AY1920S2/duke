@@ -1,6 +1,19 @@
 package seedu.java.util;
 
+/**
+ * All static method. Handles input from user.
+ * readCommand(String)
+ * readTask(String)
+ * readTiming(String)
+ * readNum(String)
+ */
 public class Parser {
+    /**
+     * Static method. Returns a Command (inferred instruction)
+     * @param input from UI
+     * @return Command
+     * @throws Exception
+     */
     public static Command readCommand(String input) throws Exception {
         return Command.convert(input.split(" ")[0]);
     }
@@ -49,6 +62,11 @@ public class Parser {
         return timing;
     }
 
+    /**
+     * Static method. Returns a number (inferred index to locate task on tasklist)
+     * @param input from UI
+     * @return integer
+     */
     public static int readNum(String input) {
         return Integer.valueOf(input.split(" ")[1]);
     }
