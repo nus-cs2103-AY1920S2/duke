@@ -22,6 +22,10 @@ public class Ui {
             this.sc = inputSc;
         }
 
+        /**
+         * To start responding to user, open the responding window
+         * @param initials = optional imitial respond to user
+         */
         public void start(String... initials) {
             assert !this.isOpen : "illegal usage of responder";
             System.out.print(resSpace);
@@ -37,6 +41,10 @@ public class Ui {
             this.isOpen = true;
         }
 
+        /**
+         * Respond the lines to user, need to start responding first
+         * @param respondStr = lines to respond
+         */
         void respondLine(String... respondStr) {
             respondLine(Arrays.asList(respondStr));
         }
@@ -53,6 +61,10 @@ public class Ui {
             }
         }
 
+        /**
+         * To stop responding to user, close the respond window
+         * @param remarks = any ending respond before closing
+         */
         public void over(String... remarks) {
             Scanner sc2;
             for (String str : remarks) {
@@ -72,16 +84,28 @@ public class Ui {
             respond(Arrays.asList(respondStr));
         }
 
+        /**
+         * Shortcut function to open respond window, respond to user with the strings given, then close window
+         * @param respondStr = strings to respond
+         */
         public void respond(List<String> respondStr) {
             start();
             respondLine(respondStr);
             over();
         }
 
+        /**
+         * User has next input line?
+         * @return User has next input line?
+         */
         public boolean hasNextLine() {
             return this.sc.hasNextLine();
         }
 
+        /**
+         * Similar to Scanner nextLine();
+         * @return Next line from input
+         */
         public String nextLine() {
             return this.sc.nextLine();
         }

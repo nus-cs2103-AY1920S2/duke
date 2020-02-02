@@ -12,18 +12,34 @@ public abstract class Task implements CSVParsable {
         this.type = type;
     }
 
+    /**
+     * getter for done
+     * @return done
+     */
     public boolean isDone() {
         return this.done;
     }
 
+    /**
+     * set done to true
+     * @return true
+     */
     public boolean setToDone() {
         return this.done = true;
     }
 
+    /**
+     * getter for name
+     * @return name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * getter for task type
+     * @return type
+     */
     public TaskType getType() {
         return this.type;
     }
@@ -40,6 +56,11 @@ public abstract class Task implements CSVParsable {
         return new CSV(new CSV("T"), new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
+    /**
+     * Parse tasks from csv object
+     * @param csv = csv that described the task (parsed from local file)
+     * @return previously saved task
+     */
     public static Task parseFromCSV(CSV csv) {
         switch (csv.getStr(0)) {
         case ToDoTask.TYPE_STR:

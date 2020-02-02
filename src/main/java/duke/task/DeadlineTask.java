@@ -12,6 +12,12 @@ public class DeadlineTask extends Task {
     String prepos;
     String dateLine;
 
+    /**
+     * Main constructor used when creating this type of task
+     * @param name = task name
+     * @param prepos = preposition to describe the time (eg. by , on...)
+     * @param time = string inputted by user that describe the time
+     */
     public DeadlineTask(String name, String prepos, String time) {
         this(name, prepos, time, false);
     }
@@ -37,16 +43,27 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Convert all the relevant data to CSV in order to save to local file
+     */
     @Override
     public CSV toCSV() {
         return new CSV(new CSV(DeadlineTask.TYPE_STR), new CSV(this.prepos), new CSV(this.dateLine),
                 new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
+    /**
+     * Load task from local file
+     * @param csv = csv file parsed from local file
+     * @return previously saved task
+     */
     public static DeadlineTask parseFromCSV(CSV csv) {
         return new DeadlineTask(csv.getStr(4), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)));
     }
 
+    /**
+     * String that describe the task when listing all the tasks
+     */
     @Override
     public String toString() {
         return sqB(DeadlineTask.TYPE_STR) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";

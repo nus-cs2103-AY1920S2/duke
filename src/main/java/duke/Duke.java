@@ -7,20 +7,24 @@ import duke.ui.*;
 import java.util.Scanner;
 
 /**
- * Main UI method
+ * Main UI method.
  */
 public class Duke {
-    /**
-     * Main functional object Duke
-     */
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * If no file path specified, default path is assumed
+     */
     public Duke() {
         this(Storage.DEFAULT_PATH);
     }
 
+    /**
+     * constructor to specify file path of the last saved data
+     * @param filePath = path of last saved data file
+     */
     public Duke(String filePath) {
         ui = new Ui(new Scanner(System.in));
         storage = new Storage(filePath);
@@ -36,6 +40,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method.
+     */
     public void run() {
         ui.respond(Ui.greetings);
         Command cmd;

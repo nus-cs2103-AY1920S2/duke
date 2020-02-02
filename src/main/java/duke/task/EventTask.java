@@ -12,6 +12,12 @@ public class EventTask extends Task {
     String prepos;
     String time;
 
+    /**
+     * Main constructor used when creating this type of task
+     * @param name = task name
+     * @param prepos = preposition to describe the time (eg. by , on...)
+     * @param time = string inputted by user that describe the time
+     */
     public EventTask(String name, String prepos, String time) {
         this(name, prepos, time, false);
     }
@@ -28,12 +34,20 @@ public class EventTask extends Task {
         }
     }
 
+    /**
+     * Convert all the relevant data to CSV in order to save to local file
+     */
     @Override
     public CSV toCSV() {
         return new CSV(new CSV(EventTask.TYPE_STR), new CSV(this.prepos), new CSV(this.time),
                 new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
+    /**
+     * Load task from local file
+     * @param csv = csv file parsed from local file
+     * @return previously saved task
+     */
     public static EventTask parseFromCSV(CSV csv) {
         return new EventTask(csv.getStr(4), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)));
     }
@@ -47,6 +61,9 @@ public class EventTask extends Task {
         }
     }
 
+    /**
+     * String that describe the task when listing all the tasks
+     */
     @Override
     public String toString() {
         return sqB(EventTask.TYPE_STR) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
