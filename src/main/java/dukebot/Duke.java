@@ -99,7 +99,10 @@ public class Duke {
         duke.run();
     }
 
-    private void run() {
+    /**
+     * Runs duke without GUI.
+     */
+    public void run() {
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();

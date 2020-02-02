@@ -11,6 +11,11 @@ public class Launcher {
      * Launches the GUI.
      */
     public static void main(String[] args) {
-        Application.launch(Main.class, args);
+        if (args.length >= 1 && args[0].equals("text")) {
+            Duke duke = new Duke(false);
+            duke.run();
+        } else {
+            Application.launch(Main.class, args);
+        }
     }
 }
