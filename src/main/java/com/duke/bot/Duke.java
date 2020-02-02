@@ -9,10 +9,16 @@ public class Duke {
     private DukeUi ui;
     private Storage storage;
 
-    private Duke() {
+    public Duke() {
         this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
         this.ui = new DukeUi(System.in, System.out);
+    }
+
+    public Duke(DukeUi ui) {
+        this.tasks = TaskList.createTaskList();
+        storage = Storage.createSrorageFile();
+        this.ui = ui;
     }
 
     private void echo() {
@@ -68,11 +74,12 @@ public class Duke {
                 ui.print(String.format("Now you have %d task(s) on your list.\n", tasks.getSize()));
                 ui.printEmptyLine();
                 ui.setToken("\\p{javaWhitespace}+");
+                storage.saveToFile(tasks.printList());
                 echo();
                 break;
 
             case "event":
-                ui.setToken("\\s*/by\\s*|\\n");
+                ui.setToken("\\s*/at\\s*|\\n");
                 action = ui.getNext();
                 dateInput = ui.getNext();
                 LocalDate atDate = LocalDate.parse(dateInput);
@@ -92,9 +99,11 @@ public class Duke {
                 for (int i = 0; i < tasks.getSize(); ++i) {
                     Task task = tasks.getTask(i);
                     if (task.getTaskName().contains(keyword)) {
-                        ui.print(task.toString());
+                        ui.print( (i + 1) + ". " + task.toString());
                     }
                 }
+                echo();
+                break;
 
             case "bye":
                 ui.printByeMsg();
