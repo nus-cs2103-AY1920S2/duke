@@ -6,7 +6,7 @@ import java.io.FileReader;
 /**
  * The UI class for Duke
  **/
-public class Squirtle {
+public class Ui {
     protected String logoPath = "logo.txt";
     protected String waterDroplets = "\uD83D\uDCA6";
     protected Storage storage;
@@ -32,7 +32,7 @@ public class Squirtle {
     }
 
     public void exitMsg() {
-        this.defaultMsg("Squirtle says bye bye!!!");
+        this.defaultMsg("Ui says bye bye!!!");
     }
 
     public void listMsg(ArrayList<Task> lst) {
@@ -43,16 +43,16 @@ public class Squirtle {
     }
 
     public void taskMsg(Task task, int lstSize) {
-        this.defaultMsg("adding: " + task.toString() + "\nSquirtle now has "
+        this.defaultMsg("adding: " + task.toString() + "\nUi now has "
                     + lstSize + " thing(s) to do!!");
     }
 
     public void deleteMsg(Task task) {
-        this.defaultMsg("Squirtle will forget: " + task.toString() + " ~~");
+        this.defaultMsg("Ui will forget: " + task.toString() + " ~~");
     }
 
     public void doneMsg(Task task) {
-        this.defaultMsg("Squirtle used water gun on: " + task.toString() + "!\n\tIt is super effective!!");
+        this.defaultMsg("Ui used water gun on: " + task.toString() + "!\n\tIt is super effective!!");
     }
 
     public void lineBreak() {
@@ -63,16 +63,16 @@ public class Squirtle {
     public void errorMsg(DukeException e) {
         switch(e.error) {
             case NUMBER: // error in accessing list, no such task exists
-                System.out.println("Squirtle cannot find task!!");
+                System.out.println("Ui cannot find task!!");
                 break;
             case INSUFFICIENT:
-                System.out.println("Squirtle needs more info!!");
+                System.out.println("Ui needs more info!!");
                 break;
             case COMMAND:
-                System.out.println("Squirtle doesn't understand!!");
+                System.out.println("Ui doesn't understand!!");
                 break;
             default:
-                System.out.println("Squirtle says error!");
+                System.out.println("Ui says error!");
         }
     }
 

@@ -6,7 +6,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute (Storage storage, TaskList taskList, Squirtle ui) {
+    public boolean execute (Storage storage, TaskList taskList, Ui ui) {
         taskList.addTask(task);
         storage.update(taskList.getTaskList());
         ui.taskMsg(task, taskList.getListSize());

@@ -5,7 +5,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean execute(Storage storage, TaskList taskList, Squirtle ui) throws DukeException {
+    public boolean execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
         Task task = taskList.doneTask(this.taskNumber);
         storage.update(taskList.getTaskList());
         ui.doneMsg(task);

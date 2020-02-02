@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
-        Squirtle ui = new Squirtle();
+        Ui ui = new Ui();
         Storage storage = new Storage("../data/tasks.txt");
         TaskList taskList = new TaskList(storage.load());
         ui.start();
