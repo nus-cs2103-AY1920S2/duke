@@ -4,7 +4,6 @@ public class Task {
 
     public String description;
     public int status = 0;
-    public String type;
 
     public Task (String description) {
 
