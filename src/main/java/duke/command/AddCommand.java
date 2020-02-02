@@ -3,7 +3,6 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Adds a task to the task list.
@@ -25,12 +24,12 @@ public class AddCommand extends Command {
     /**
      * Executes AddCommand by adding the task to the task list.
      *
-     * @param tasks TaskList of Duke.
-     * @param ui The user interface.
+     * @param tasks   TaskList of Duke.
      * @param storage To load from and save to the disk.
+     * @return Acknowledgement message sent by Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(this.task);
+    public String execute(TaskList tasks, Storage storage) {
+        return tasks.addTask(this.task);
     }
 }

@@ -14,7 +14,7 @@ public class Event extends Task {
      * Constructs an Event object.
      *
      * @param description the title of the event.
-     * @param at the date of the event in yyyy-MM-dd format.
+     * @param at          the date of the event in yyyy-MM-dd format.
      */
     public Event(String description, LocalDate at) {
         super(description);
@@ -25,8 +25,8 @@ public class Event extends Task {
      * Constructs an Event object when loading from disk.
      *
      * @param description the title of the event.
-     * @param isDone whether the event is over.
-     * @param at the date of the event.
+     * @param isDone      whether the event is over.
+     * @param at          the date of the event.
      */
     public Event(String description, boolean isDone, LocalDate at) {
         super(description, isDone);
@@ -50,6 +50,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 }

@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Deletes task from the task list.
@@ -26,12 +25,12 @@ public class DeleteCommand extends Command {
      * Executes the DeleteCommand by deleting the given task number from the task list.
      *
      * @param tasks   TaskList of Duke.
-     * @param ui      The user interface.
      * @param storage To load from and save to the disk.
+     * @return Acknowledgement message sent by Duke.
      * @throws DukeException thrown from deleteTask in the class TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.deleteTask(taskNo);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return tasks.deleteTask(taskNo);
     }
 }
