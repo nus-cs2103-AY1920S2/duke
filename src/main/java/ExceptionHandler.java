@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class ExceptionHandler {
     public void checkEmptyField(String[] taskStringArr, String type) throws EmptyFieldException {
         if (type.equals("todo") || type.equals("deadline") || type.equals("event")) {
@@ -19,7 +17,7 @@ public class ExceptionHandler {
         }
     }
 
-    public void checkWrongCommand(String type) throws WrongCommandException{
+    public void checkWrongCommand(String type) throws WrongCommandException {
         if (!(type.equals("todo")
                 || type.equals("deadline")
                 || type.equals("event")

@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -6,6 +5,10 @@ public class TaskList {
 
     public TaskList() {
         this.tasks = new ArrayList<Task>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void addTodo(String task) {

@@ -13,7 +13,7 @@ public class Ui {
     }
 
     public void listTasks(TaskList taskList) {
-        taskList.tasks.forEach(task -> TaskHandler.print(String.format(
+        taskList.tasks.forEach(task -> System.out.println(String.format(
                 "%d. %s",
                 (taskList.tasks.indexOf(task) + 1),
                 task.toString())));

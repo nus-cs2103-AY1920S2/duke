@@ -1,8 +1,4 @@
-import Storage.Storage;
-
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
@@ -14,16 +10,20 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
+        } catch (IOException ioe) {
+            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     public void run() {
-
+        ui.printLogo();
+        ui.greetDuke();
+        Parser.handle(tasks, ui);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        Duke duke = new Duke("savedata.txt");
+        duke.run();
     }
 }

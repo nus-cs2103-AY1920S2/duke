@@ -1,12 +1,11 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Parser {
-    public static void handle(TaskList taskList, Ui ui) throws DukeException {
+    public static void handle(TaskList taskList, Ui ui) {
         Scanner scanner = new Scanner(System.in);
         ExceptionHandler exceptionHandler = new ExceptionHandler();
         boolean loop = true;
-        try {
+        do {
             String input = scanner.nextLine();
             String[] inputSplit = prepareHandle(input, exceptionHandler);
 
@@ -38,17 +37,17 @@ public class Parser {
                     //change to exception handler
                     break;
                 }
-            } catch(DukeException ex) {
-            System.err.println(ex);
-        }
+            } //catch(DukeException ex) {
+            //System.err.println(ex);
+        //}
 
         while (loop);
     }
 
-    public static String[] prepareHandle(String input, ExceptionHandler exceptionHandler) throws DukeException {
+    public static String[] prepareHandle(String input, ExceptionHandler exceptionHandler) {
         String[] inputSplit = input.split(" ", 2);
-        exceptionHandler.checkWrongCommand(inputSplit[0]);
-        exceptionHandler.checkEmptyField(inputSplit, inputSplit[0]);
+        //exceptionHandler.checkWrongCommand(inputSplit[0]);
+        //exceptionHandler.checkEmptyField(inputSplit, inputSplit[0]);
 
         return inputSplit;
     }
