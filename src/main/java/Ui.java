@@ -58,7 +58,7 @@ public class Ui {
      */
     public void invalidTask() {
         showLine();
-        System.out.println("Invalid task number");
+        System.out.println("Invalid task number.");
         showLine();
 
     }
