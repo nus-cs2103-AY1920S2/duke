@@ -1,7 +1,3 @@
-[T][✓] event
-[T][✘] read
-[T][✘] run
 [T][✘] hello
-[D][✘] event (by: Sunday)
-[D][✘] event (by: sunday)
-[E][✓] hello (at: friday)
+[T][✘] testing
+[E][✘] ball (at: 2019-09-02)

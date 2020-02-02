@@ -20,4 +20,8 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+    
+    public String saveToList(){
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
+    }
 }

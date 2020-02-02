@@ -19,8 +19,7 @@ public class Task {
     public void isDone(String doneStatus) {
         if (doneStatus.equalsIgnoreCase("\u2713]")) {
             this.isDone = true;
-        }
-        else{
+        } else {
             this.isDone = false;
         }
     }
@@ -34,4 +33,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    public String saveToList() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
 }
