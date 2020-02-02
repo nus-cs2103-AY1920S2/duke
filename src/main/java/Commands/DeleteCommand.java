@@ -4,6 +4,7 @@ import duke.dukeException.DukeParseException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Interpreter;
+import duke.DukeResponse;
 
 public class DeleteCommand extends Command {
 	public DeleteCommand(String commandText) {
@@ -24,11 +25,12 @@ public class DeleteCommand extends Command {
 	}
 
 	@Override
-	public void execute(Storage storage, TaskList taskList) throws DukeParseException {
+	public DukeResponse execute(Storage storage, TaskList taskList) throws DukeParseException {
 		int index = getDeleteCommand(commandText);
 		int realIndex = index - 1;
-		Interpreter.printDelete(taskList.getTask(realIndex), taskList.getNum());
+		DukeResponse result = Interpreter.printDelete(taskList.getTask(realIndex), taskList.getNum());
 		taskList.deleteAction(realIndex);
+		return result;
 	}
 
 	@Override 

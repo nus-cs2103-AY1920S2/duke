@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Interpreter;
 import duke.Storage;
 import duke.TaskList;
+import duke.DukeResponse;
 
 public class ListCommand extends Command {
 	public ListCommand(String commandText) {
@@ -10,8 +11,8 @@ public class ListCommand extends Command {
 	}
 
 	@Override
-	public void execute(Storage storage, TaskList taskList) {
-		Interpreter.printList(taskList.getList());
+	public DukeResponse execute(Storage storage, TaskList taskList) {
+		return Interpreter.printList(taskList.getList());
 	}
 
 	@Override

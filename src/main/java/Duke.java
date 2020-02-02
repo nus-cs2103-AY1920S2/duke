@@ -23,6 +23,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import duke.DialogBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;	
+import javafx.application.Platform;
+import duke.DukeResponse;
 
 public class Duke extends Application {
 	static final String separation = "_________________________________________________";
@@ -36,11 +42,62 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 	public Duke() {
 		storage = new Storage(pathToData);
 		taskList = new TaskList(storage.getData());
 		parser = new Parser();
+	}
+
+	/**
+	 * Iteration 2:
+	 * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+	 * the dialog container. Clears the user input after processing.
+	 */
+	private void handleUserInput() {
+		String userCommand = userInput.getText();
+
+	    Label userText = new Label(userCommand);
+	    Label dukeText = new Label(getResponse(userCommand));
+	    dialogContainer.getChildren().addAll(
+	            DialogBox.getUserDialog(userText, new ImageView(user)),
+	            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+	    );
+
+	    if (userCommand.equals("bye")) {
+	    	Platform.exit();
+	    	System.exit(0);
+	    }
+	    userInput.clear();
+	}
+
+	private void printGreeting() {
+		Interpreter.printGreeting();
+		Interpreter.printMessage(greetingMessage);
+		Interpreter.printUsage();
+		String text = Interpreter.printGreeting().getMessage() + "\n" 
+						+ Interpreter.printMessage(greetingMessage).getMessage() +  "\n" 
+						+ Interpreter.printUsage().getMessage() +  "\n"; 
+		Label dukeText = new Label(text);
+		dialogContainer.getChildren().addAll(
+	            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+	    );
+	}
+
+	/**
+	 * You should have your own function to generate a response to user input.
+	 * Replace this stub with your completed method.
+	 */
+	private String getResponse(String userCommand) {
+	    try {
+	    	Command current = parser.parse(userCommand);
+			DukeResponse result = current.execute(storage, taskList);
+			return result.getMessage();
+	    } catch (DukeParseException e) {
+	    	return e.getMessage();
+	    } 
 	}
 
 	public void run() {
@@ -66,10 +123,13 @@ public class Duke extends Application {
 
 	@Override
     public void start(Stage stage) {
+
+        //Step 1. Setting up required components
+         
+        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
      
@@ -77,7 +137,12 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-     	stage.setTitle("Duke");
+     
+        stage.setScene(scene);
+        stage.show();
+        // more code to be added here later
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -104,10 +169,40 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         
         AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-        stage.setScene(scene);
-        stage.show();
+
+        //Step 3. Add functionality to handle user input.
+
+        printGreeting();
+
+	    sendButton.setOnMouseClicked((event) -> {
+	        handleUserInput();
+	    });
+
+	    userInput.setOnAction((event) -> {
+	        handleUserInput();
+	    });
+
+	    stage.setOnCloseRequest(e -> {
+	    	storage.saveData(taskList);
+       	    Platform.exit();
+            System.exit(0);
+        });
+
+	    dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
+
+    /**
+	 * Iteration 1:
+	 * Creates a label with the specified text and adds it to the dialog container.
+	 * @param text String containing text to add
+	 * @return a label with the specified text that has word wrap enabled.
+	*/
+	private Label getDialogLabel(String text) {
+	    Label textToAdd = new Label(text);
+	    textToAdd.setWrapText(true);
+
+	    return textToAdd;
+	}
 
 	public static void main(String[] args) {
 		new Duke().run();

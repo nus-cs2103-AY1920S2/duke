@@ -2,6 +2,7 @@ package duke;
 import java.util.List;
 import duke.task.*;
 import duke.dukeException.DukeException;
+import duke.DukeResponse;
 
 public class Interpreter {
 	static private final String separation = "_________________________________________________";
@@ -11,70 +12,83 @@ public class Interpreter {
 				+ "| |_| | |_| |   <  __/\n"
 				+ "|____/ \\__,_|_|\\_\\___|\n";
 	
-	static public void printGreeting() {
-		System.out.println("Hello from\n" + logo);
+	static public DukeResponse printGreeting() {
+		return new DukeResponse("Hello from\n" + logo);
 	}
 
-	static public void printUsage() {
-		System.out.println("Usage of DUKE: \n");
-		System.out.println("1. todo ... ");
-		System.out.println("2. deadline ... /by yyyy-mm-dd");
-		System.out.println("3. event ... /at .....");
-		System.out.println(separation);
+	static public DukeResponse printUsage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Usage of DUKE: \n")
+		  .append("1. todo ... ")  
+		  .append("\n")
+		  .append("2. deadline ... /by yyyy-mm-dd")
+		  .append("\n")
+		  .append("3. event ... /at .....")
+		  .append("\n");
+		return new DukeResponse(sb.toString());
 	}
 
-	static public void printMessage(String message) {
-		System.out.println(separation);
-		System.out.println(message);
-		System.out.println(separation);
+	static public DukeResponse printMessage(String message) {
+		return new DukeResponse(message);
 	}
 
-	static public void printList(List<Task> list) {
-		System.out.println(separation);
-		System.out.println("List of items: ");
+	static public DukeResponse printList(List<Task> list) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("List of items: ").append("\n");
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println((i + 1) + ". " + list.get(i));
+			sb.append(Integer.toString(i + 1))
+			  .append(". ")
+			  .append(list.get(i).toString())
+			  .append("\n");
 		}
-		System.out.println(separation);
+		return new DukeResponse(sb.toString());
 	}
 
-	static public void printAdd(Task task, int numberOfCurrentTasks) {
-		System.out.println(separation);
-		System.out.println("Got it. I've added this task:");
-		System.out.println(task);
-		System.out.println("Now you have " + numberOfCurrentTasks + " in the list!");
-		System.out.println(separation);
+	static public DukeResponse printAdd(Task task, int numberOfCurrentTasks) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Got it. I've added this task: ").append("\n");
+		sb.append(task.toString())
+		  .append("Now you have ")
+		  .append(Integer.toString(numberOfCurrentTasks))
+		  .append(" in the list!")
+		  .append("\n");
+		return new DukeResponse(sb.toString());
 	}
 
-	static public void printDelete(Task task, int numberOfCurrentTasks) {
-		System.out.println(separation);
-		System.out.println("Noted. I've removed this task:");
-		System.out.println(task);
-		System.out.println("Now you have " + numberOfCurrentTasks + " in the list!");
-		System.out.println(separation);
+	static public DukeResponse printDelete(Task task, int numberOfCurrentTasks) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Noted. I've removed this task:").append("\n");
+		sb.append(task.toString()).append("\n");
+		sb.append("Now you have ")
+		  .append(Integer.toString(numberOfCurrentTasks))
+		  .append(" in the list!")
+		  .append("\n");
+		return new DukeResponse(sb.toString());
 	}
 
-	static public void printDoneList(List<Task> list) {
-		System.out.println(separation);
-		System.out.println("Nice! I've marked this task as done:");
+	static public DukeResponse printDoneList(List<Task> list) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Nice! I've marked this task as done:").append("\n");
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println("  " + list.get(i));
+			sb.append("   ").append(list.get(i).toString()).append("\n");
 		}
-		System.out.println(separation);
+		return new DukeResponse(sb.toString());
 	}
 
-	static public void printException(DukeException e) {
-		System.out.println(separation);
-		System.out.println(e);
-		System.out.println(separation);
+
+	static public DukeResponse printException(DukeException e) {
+		return new DukeResponse(e.getMessage());
 	}
 
-	static public void printFind(List<Task> tasks, List<Integer> indexes) {
-		System.out.println(separation);
-		System.out.println("Here are the matching tasks in your list:");
+	static public DukeResponse printFind(List<Task> tasks, List<Integer> indexes) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Here are the matching tasks in your list: \n");
 		for (Integer idx: indexes) {
-			System.out.println((idx + 1) + ". " + tasks.get(idx));
+			sb.append(Integer.toString(idx + 1))
+			  .append(". ")
+			  .append(tasks.get(idx))
+			  .append("\n");
 		}
-		System.out.println(separation);
+		return new DukeResponse(sb.toString());
 	}
 }
