@@ -17,6 +17,9 @@ public enum CommandList {
         this.defaultCommand = defaultCommand;
     }
 
+    /**
+     * Gets the default command.
+     */
     public String getDefaultCommand() {
         return defaultCommand;
     }

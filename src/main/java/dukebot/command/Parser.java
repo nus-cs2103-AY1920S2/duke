@@ -79,6 +79,8 @@ public class Parser {
                 return new NewEventCommand(inpArr);
             case DELETE:
                 return new DeleteCommand(inpArr);
+            default:
+                break;
             }
         } else {
             switch (command) {
@@ -89,6 +91,8 @@ public class Parser {
             case "Master":
             case "master":
                 return new UiOnlyCommand(LineName.SAY_DUKE);
+            default:
+                break;
             }
         }
         return new UiOnlyCommand(LineName.INVALID_COMMAND);
