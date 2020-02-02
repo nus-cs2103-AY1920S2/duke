@@ -1,6 +1,5 @@
 package dukebot.command;
 
-import dukebot.exception.DukeException;
 import dukebot.ui.LineName;
 
 import java.util.HashMap;

@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 public class DateTimeParse {
+    // TODO: Think of a good way to use custom defined localDateTimeProvider for testing purpose
     // private static LocalDateTime localDateTimeProvider = LocalDateTime.now();
 
     private static final DateTimeFormatter[] formats = {
@@ -26,6 +27,8 @@ public class DateTimeParse {
                     .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
                     .parseDefaulting(ChronoField.YEAR, ZonedDateTime.now().getYear())
+                    // Bad, only generates time at code start time,
+                    // need to edit while making sure it continues to run efficiently.
                     .toFormatter(),
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
             new DateTimeFormatterBuilder()
@@ -40,9 +43,6 @@ public class DateTimeParse {
                     .toFormatter(),
             DateTimeFormatter.ofPattern("yyyy/M/d HHmm")
     };
-    //    private static final DateTimeFormatter format_ddMMyyyy = DateTimeFormatter.ofPattern("dd MM yyyy");
-    //    private static final DateTimeFormatter format_ddMMyyyyHHmm = DateTimeFormatter.ofPattern("dd MM yyyy HHmm");
-    //    private static final DateTimeFormatter format_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
 
     /**
      * Parse the input string as a LocalDateTime if possible.
