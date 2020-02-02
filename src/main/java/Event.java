@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     protected String at;
+    protected LocalDate formattedDate;
 
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -8,10 +12,12 @@ public class Event extends Task {
             throw new DukeException("No date");
         }
         this.at = at;
+        LocalDate eventDate = LocalDate.parse(at);
+        this.formattedDate = eventDate;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
