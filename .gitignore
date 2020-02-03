@@ -14,3 +14,4 @@ src/main/resources/docs/
 bin/
 
 src/main/data/duke\.txt
+*.jar
