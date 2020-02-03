@@ -33,8 +33,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Creates a Duke Bot object.
@@ -51,6 +51,8 @@ public class Duke extends Application {
         // Step 1
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        Label dukeText = new Label(ui.greet());
+        dialogContainer.getChildren().add(new DialogBox(dukeText, new ImageView(dukeImage)));
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -112,8 +114,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                new DialogBox(userText, new ImageView(userImage)),
+                new DialogBox(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
     }
@@ -134,7 +136,7 @@ public class Duke extends Application {
         try {
             output = Parser.parse(commandWord, new DukeUi(restOfStr), storage, tasks);
         } catch (DukeException e) {
-            ui.print(e.getMessage());
+            return e.getMessage();
         }
 
         return output;

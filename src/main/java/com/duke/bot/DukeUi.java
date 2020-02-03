@@ -37,11 +37,10 @@ public class DukeUi {
     /**
      * Prints a message that greets the user when DukeBot starts.
      */
-    public void greet() {
-        out.println("Hello! I'm duke.Duke");
-        out.println("By default, your list of tasks will be saved to \"tasks.txt\".");
-        out.println("What can I do for you?");
-        out.println();
+    public String greet() {
+        return "Hello! I'm duke.Duke\n"
+        + "By default, your list of tasks will be saved to \"tasks.txt\".\n"
+        + "What can I do for you?\n\n";
     }
 
 
