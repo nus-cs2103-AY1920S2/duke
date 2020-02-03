@@ -29,14 +29,16 @@ public class Ui {
      * @param tasks TaskList class created in Duke.
      * @throws IOException Throws away the exception.
      */
-    public void readCommand(String command, TaskList tasks) throws IOException {
+    public String readCommand(String command, TaskList tasks) throws IOException {
         String commandArr = parser.makeSenseOfUserCommand(command);
 
         if (commandArr.equals(LIST)) {
-            tasks.listTheList();
+            String list = tasks.listTheList();
+            return list;
         } else if (commandArr.equals(DONE)) {
             try {
-                tasks.completeTask(command);
+                String result = tasks.completeTask(command);
+                return result;
             } catch (GrapieExceptions grapieExceptions) {
                 System.out.println("    #__________________________________________________________# \n");
                 System.out.println("      " + grapieExceptions);
@@ -44,30 +46,44 @@ public class Ui {
             }
         } else if (commandArr.equals(ADD)) {
             try {
-                tasks.addToList(command);
+                String result = tasks.addToList(command);
+                return result;
             } catch (GrapieExceptions grapieExceptions) {
-                System.out.println("    #__________________________________________________________# \n");
-                System.out.println("      " + grapieExceptions);
-                System.out.println("    #__________________________________________________________#");
+//                System.out.println("    #__________________________________________________________# \n");
+//                System.out.println("      " + grapieExceptions);
+//                System.out.println("    #__________________________________________________________#");
+                String ha = "" + grapieExceptions;
+                return ha;
             }
         } else if (commandArr.equals(DELETE)) {
             try {
-                tasks.deleteTask(command);
+                String result = tasks.deleteTask(command);
+                return  result;
             } catch (GrapieExceptions grapieExceptions) {
-                System.out.println("    #__________________________________________________________# \n");
-                System.out.println("      " + grapieExceptions);
-                System.out.println("    #__________________________________________________________#");
+                //System.out.println("    #__________________________________________________________# \n");
+                //System.out.println("      " + grapieExceptions);
+
+                String ha = "" + grapieExceptions;
+                return ha;
+                //System.out.println("    #__________________________________________________________#");
             }
         } else if (commandArr.equals(FIND)) {
             //find
             try {
-                tasks.findFromList(command);
+                String result = tasks.findFromList(command);
+                return result;
             } catch (GrapieExceptions grapieExceptions) {
-                System.out.println("    #__________________________________________________________# \n");
-                System.out.println("      " + grapieExceptions);
-                System.out.println("    #__________________________________________________________#");
+//                System.out.println("    #__________________________________________________________# \n");
+//                System.out.println("      " + grapieExceptions);
+//                System.out.println("    #__________________________________________________________#");
+
+                String ha = "" + grapieExceptions;
+                return ha;
             }
         }
+
+        return "OOPS!!! I do not understand you :(";
     }
+
 
 }

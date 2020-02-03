@@ -48,27 +48,30 @@ public class Duke { //extends Application {
      *
      * @throws IOException Throws away exception.
      */
-    public void runDuke() throws IOException {
-        greetings();
+    public String runDuke(String input) throws IOException {
+        //greetings();
 
         //Scanner class for input
-        Scanner sc = new Scanner(System.in);
-        String nextStr = sc.nextLine();
+        //Scanner sc = new Scanner(System.in);
+        //String nextStr = sc.nextLine();
 
         //loop
-        while (!nextStr.equals("bye")) { //check for ending input
-            ui.readCommand(nextStr, tasks);
-            nextStr = sc.nextLine();
+        if (!input.equals("bye")) { //check for ending input
+            String result = ui.readCommand(input, tasks);
+            return result;
+            //nextStr = sc.nextLine();
+        } else {
+            return sayonara();
         }
 
-        sayonara();
+        //sayonara();
     }
 
 
     /**
      * Greet the user.
      */
-    public void greetings() {
+    public String greetings() {
         String intro = "Hello! I'm Grapie! \n"
                 + "   _____                 _      \n"
                 + "  / ____|               (_)     \n"
@@ -82,14 +85,17 @@ public class Duke { //extends Application {
 
                 + "What do ya need from me?\n";
 
-        TaskList.formattingDivider(intro);
+        //TaskList.formattingDivider(intro);
+
+        return intro;
     }
 
     /**
      * Returns goodbye to the user.
      */
-    public void sayonara() {
-        TaskList.formattingDivider("Okie!! Goodbye!");
+    public String sayonara() {
+        //TaskList.formattingDivider("Okie!! Goodbye!");
+        return "Okie!! Goodbye!";
     }
 
     /**
@@ -98,17 +104,17 @@ public class Duke { //extends Application {
      * @param args The main method.
      * @throws IOException Throws away exception.
      */
-    public static void main(String[] args) throws IOException {
-        Duke duke = null;
-        try {
-            duke = new Duke();
-        } catch (GrapieExceptions grapieExceptions) {
-            System.out.println("    #__________________________________________________________# \n");
-            System.out.println("      " + grapieExceptions);
-            System.out.println("    #__________________________________________________________#");
-        }
-        duke.runDuke();
-    }
+//    public static void main(String[] args) throws IOException {
+//        Duke duke = null;
+//        try {
+//            duke = new Duke();
+//        } catch (GrapieExceptions grapieExceptions) {
+//            System.out.println("    #__________________________________________________________# \n");
+//            System.out.println("      " + grapieExceptions);
+//            System.out.println("    #__________________________________________________________#");
+//        }
+//        //duke.runDuke();
+//    }
 
     /**
      * Iteration 1:
@@ -128,9 +134,16 @@ public class Duke { //extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
+    String getResponse(String input) throws IOException {
         //input is the user input
+        String result = "";
+        if (!input.equals("bye")) { //check for ending input
+            result = ui.readCommand(input, tasks);
+            //nextStr = sc.nextLine();
+        } else {
+            result = sayonara();
+        }
 
-        return "Duke heard: " + input;
+        return "Duke: " + result;
     }
 }

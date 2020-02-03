@@ -8,7 +8,7 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      *
-     * @param load the arrayList obtained from Storage class's load method. Contains task from hard disk.
+     * @param load    the arrayList obtained from Storage class's load method. Contains task from hard disk.
      * @param storage Storage class previously created from Duke.
      */
     public TaskList(List<Task> load, Storage storage) {
@@ -17,35 +17,36 @@ public class TaskList {
         this.storage = storage;
     }
 
-    /**
-     * Format the output.
-     *
-     * @param contentStr The string to be formatted.
-     */
-    public static void formattingDivider(String contentStr) {
-        System.out.println("    #__________________________________________________________#");
-        String[] lines = contentStr.split("\\r?\\n");
-
-        for (int i = 0; i < lines.length; i++) {
-            System.out.println("      " + lines[i]);
-        }
-
-        //System.out.println(contentStr);
-        System.out.println("    #__________________________________________________________# \n");
-
-    }
+//    /**
+//     * Format the output.
+//     *
+//     * @param contentStr The string to be formatted.
+//     */
+//    public static void formattingDivider(String contentStr) {
+//        System.out.println("    #__________________________________________________________#");
+//        String[] lines = contentStr.split("\\r?\\n");
+//
+//        for (int i = 0; i < lines.length; i++) {
+//            System.out.println("      " + lines[i]);
+//        }
+//
+//        //System.out.println(contentStr);
+//        System.out.println("    #__________________________________________________________# \n");
+//
+//    }
 
     /**
      * Format for printing the task added.
      *
      * @param task The task to be formatted.
      */
-    public void printAddingTask(Task task) {
+    public String printAddingTask(Task task) {
         String printStr = "Alrighty. I've added this task: \n"
                 + task + "\n"
                 + "Now you have " + storingList.size() + " tasks in the list.";
 
-        formattingDivider(printStr);
+        //formattingDivider(printStr);
+        return printStr;
     }
 
     /**
@@ -54,9 +55,9 @@ public class TaskList {
      *
      * @param inputStr the user input.
      * @throws GrapieExceptions Errors thrown.
-     * @throws IOException Throws away the exception.
+     * @throws IOException      Throws away the exception.
      */
-    public void addToList(String inputStr) throws GrapieExceptions, IOException {
+    public String addToList(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.contains("todo")) {
             if (inputStr.substring(0, 4).equals("todo") && inputStr.length() > 5) {
                 String detailsStr = inputStr.substring(5, inputStr.length());
@@ -68,10 +69,13 @@ public class TaskList {
                 } else {
                     Task todo = new Todo(detailsStr);
                     storingList.add(todo);
-                    printAddingTask(todo);
+                    String result = printAddingTask(todo);
+
 
                     //store into hard disk
                     storage.convertToHardDiskFormatAndStore(todo, "T", "");
+
+                    return result;
                 }
             } else {
                 throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
@@ -89,10 +93,11 @@ public class TaskList {
                     storingList.add(event);
 
                     //printing
-                    printAddingTask(event);
+                    String result = printAddingTask(event);
 
                     //store into hard disk
                     storage.convertToHardDiskFormatAndStore(event, "E", eventAndTime[1]);
+                    return result;
                 }
             } else {
                 throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
@@ -108,12 +113,14 @@ public class TaskList {
                     storingList.add(deadline);
 
                     //print
-                    printAddingTask(deadline);
+                    String result = printAddingTask(deadline);
 
                     //store into hard disk
                     storage.convertToHardDiskFormatAndStore(deadline, "D", eventAndTime[1]);
+                    return result;
                 } else {
-                    //"OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD TTTT"
+                    //"OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD
+                    // TTTT"
                     throw new GrapieExceptions(ErrorMsg.deadlineFormatError);
                 }
             } else {
@@ -146,9 +153,9 @@ public class TaskList {
      *
      * @param doneTaskStr Task the user wants to be marked as complete.
      * @throws GrapieExceptions Invalid task number, or already completed task thrown as error.
-     * @throws IOException Throws away the exception.
+     * @throws IOException      Throws away the exception.
      */
-    public void completeTask(String doneTaskStr) throws GrapieExceptions, IOException {
+    public String completeTask(String doneTaskStr) throws GrapieExceptions, IOException {
         if (doneTaskStr.length() <= 5) {
             //no number behind
             throw new GrapieExceptions(ErrorMsg.invalidNumberError);
@@ -170,13 +177,14 @@ public class TaskList {
                         storingList.get(numDone - 1).isDone = true;
                         //storingList.set(taskNum - 1, updatedTask);
 
-                        String printStr = "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
-                        formattingDivider(printStr);
-
-                        //update hard disk :(
+                        String printStr =
+                                "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
+                        //formattingDivider(printStr);
                         storage.replaceLineFromHardDisk(numDone);
-                    }
 
+                        return printStr;
+
+                    }
                 } else {
                     throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numDone));
                 }
@@ -192,13 +200,13 @@ public class TaskList {
      *
      * @param inputStr User's input, delete command and task to be deleted.
      * @throws GrapieExceptions Error if the task number to be deleted do not exist.
-     * @throws IOException Throws away the exception.
+     * @throws IOException      Throws away the exception.
      */
-    public void deleteTask(String inputStr) throws GrapieExceptions, IOException {
+    public String deleteTask(String inputStr) throws GrapieExceptions, IOException {
         if (inputStr.length() <= 7) {
             throw new GrapieExceptions(ErrorMsg.invalidNumberError);
         } else {
-            if (!inputStr.substring(6,7).equals(" ")) {
+            if (!inputStr.substring(6, 7).equals(" ")) {
                 throw new GrapieExceptions(ErrorMsg.noSpaceError);
             } else {
                 String strNumberDeleted = inputStr.substring(7, inputStr.length());
@@ -217,10 +225,11 @@ public class TaskList {
                                 + "\n Now you have " + newSize + " tasks in the list.";
 
                         storingList.remove(numToDelete - 1);
-
-                        formattingDivider(toPrint);
-                        //delete from hard disk
                         storage.deleteLineFromHardDisk(numToDelete);
+                        return toPrint;
+                        //formattingDivider(toPrint);
+                        //delete from hard disk
+
 
                     } else {
                         throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
@@ -238,7 +247,7 @@ public class TaskList {
      * @param command The user input.
      * @throws GrapieExceptions Throws grapieExceptions.
      */
-    public void findFromList(String command) throws GrapieExceptions {
+    public String findFromList(String command) throws GrapieExceptions {
         if (command.length() <= 5) {
             throw new GrapieExceptions(ErrorMsg.emptyKeywordError);
         } else {
@@ -246,24 +255,27 @@ public class TaskList {
             String keyword = command.substring(5, command.length());
 
             int counter = 1;
-            System.out.println("    #__________________________________________________________# \n");
-            System.out.println("    Here are the matching tasks in your list:");
+            // System.out.println("    #__________________________________________________________# \n");
+            //System.out.println("    Here are the matching tasks in your list:");
+            String finalStr = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < storingList.size(); i++) {
                 Task task = storingList.get(i);
 
                 if (task.description.contains(keyword)) {
-                    System.out.println("      " + counter + "." + task);
+                    finalStr += counter + "." + task + "\n";
                     counter++;
                 }
             }
-            System.out.println("    #__________________________________________________________# \n");
+
+            return finalStr;
+            //System.out.println("    #__________________________________________________________# \n");
         }
     }
 
     /**
      * List the tasks in task list.
      */
-    public void listTheList() {
+    public String listTheList() {
         int sizeOfList = storingList.size();
         String stringList = "Here are the tasks in your list: \n";
 
@@ -271,7 +283,8 @@ public class TaskList {
             stringList = stringList + "" + i + ". " + storingList.get(i - 1) + "\n"; //add tasks
         }
 
-        formattingDivider(stringList);
+        return stringList;
+        //formattingDivider(stringList);
     }
 
 }
