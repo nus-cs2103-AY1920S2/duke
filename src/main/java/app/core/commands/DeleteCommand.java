@@ -23,7 +23,9 @@ final class DeleteCommand extends Command {
             String output = taskManager.deleteTask(this.taskIndex);
             userInterface.render(output);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException("Invalid task index. Please refer to the 'list' command for available indices.");
+            throw new InvalidTaskIndexException(
+                "Invalid task index. Please refer to the 'list' command for available indices."
+            );
         }
     }
 }

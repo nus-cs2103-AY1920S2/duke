@@ -39,11 +39,11 @@ public final class UserInterface {
         for (String str : message.split("\n")) {
             int index = 0;
             while (index < str.length()) {
-                int print_length = Math.min(str.length() - index, MAX_STRING_LENGTH - 2);
-                String formattedString = String.format("      %s\n", str.substring(index, index + print_length));
+                int printLength = Math.min(str.length() - index, MAX_STRING_LENGTH - 2);
+                String formattedString = String.format("      %s\n", str.substring(index, index + printLength));
                 
                 output.append(formattedString);
-                index += print_length;
+                index += printLength;
             }
         }
         
