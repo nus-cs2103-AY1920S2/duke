@@ -15,3 +15,8 @@ bin/
 
 # Java class files
 *.class
+
+# VSC files
+.classpath
+.project
+org.eclipse.buildship.core.prefs
