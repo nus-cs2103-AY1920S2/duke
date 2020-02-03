@@ -17,13 +17,13 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        TaskList manager = new TaskList();
+        TaskList taskList = new TaskList();
         Storage storage = new Storage("../../DataFile.txt");
 
-        manager.addStorage(storage);
-        storage.addManager(manager);
+        taskList.addStorage(storage);
+        storage.addTaskList(taskList);
         storage.loadFile();
-        Ui ui = new Ui(manager);
+        Ui ui = new Ui(storage, taskList);
         ui.frontDesk();
 
     }

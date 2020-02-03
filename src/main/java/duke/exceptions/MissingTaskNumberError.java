@@ -8,8 +8,13 @@ package duke.exceptions;
  */
 public class MissingTaskNumberError extends Exceptions {
 
+    /**
+     * Constructor.
+     */
     public MissingTaskNumberError() {
+
         super(null);
+
     }
 
     /**
@@ -19,6 +24,8 @@ public class MissingTaskNumberError extends Exceptions {
      */
     @Override
     public String errorMessage() {
+
         return "\nOOPS! I'm sorry, the task number is missing.";
+
     }
 }

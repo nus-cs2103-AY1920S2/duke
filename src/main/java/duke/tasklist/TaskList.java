@@ -9,7 +9,6 @@ import duke.task.Event;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -67,7 +66,8 @@ public class TaskList {
      * @return Task added to taskList and Storage.
      * @throws IOException as a result of updateFile throwing exception.
      */
-    public Task addTask(String taskDescription, LocalDateTime[] dateTime, Task.Types type) throws IOException {
+    public Task addTask(String taskDescription, LocalDateTime[] dateTime,
+                        Task.Types type) throws IOException {
 
         System.out.println("Got it. I've added this task:");
         Task task = null;
@@ -106,8 +106,8 @@ public class TaskList {
      * @param status refers to the status of the task.
      * @return Task added to taskList.
      */
-    public Task addTask(String taskDescription, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd,
-                        Task.Types type, Task.Status status)  {
+    public Task addTask(String taskDescription, LocalDateTime dateTimeStart,
+                        LocalDateTime dateTimeEnd, Task.Types type, Task.Status status)  {
 
         LocalDateTime[] dateTime = new LocalDateTime[2];
         dateTime[0] = dateTimeStart;
@@ -161,6 +161,7 @@ public class TaskList {
 
     /**
      * Prints out tasks in taskList with words corresponding to keyword.
+     *
      * @param keyword corresponds to the tasks with same word.
      */
     public void findTask(String keyword) {

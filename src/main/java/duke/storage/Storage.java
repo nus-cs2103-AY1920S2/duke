@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class Storage {
 
     String path;
-    TaskList manager;
+    TaskList taskList;
 
     /**
      * Constructor.
@@ -36,11 +36,11 @@ public class Storage {
     /**
      * Adds TaskList to file storage.
      *
-     * @param manager refers to the TaskList object that will manage taskList.
+     * @param taskList refers to the TaskList object that will manage taskList.
      */
-    public void addManager(TaskList manager) {
+    public void addTaskList(TaskList taskList) {
 
-        this.manager = manager;
+        this.taskList = taskList;
 
     }
 
@@ -72,12 +72,12 @@ public class Storage {
 
                     if (status.equals("Y")) {
 
-                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                        taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
                                 LocalDateTime.parse(contentArr[4]),Task.Types.ToDo, Task.Status.Y);
 
                     } else {
 
-                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                        taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
                                 LocalDateTime.parse(contentArr[4]),Task.Types.ToDo, Task.Status.N);
 
                     }
@@ -87,12 +87,12 @@ public class Storage {
 
                     if (status.equals("Y")) {
 
-                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                        taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
                                 LocalDateTime.parse(contentArr[4]),Task.Types.Deadline, Task.Status.Y);
 
                     } else {
 
-                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                        taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
                                 LocalDateTime.parse(contentArr[4]),Task.Types.Deadline, Task.Status.N);
 
                     }
@@ -102,20 +102,19 @@ public class Storage {
 
                     if (status.equals("Y")) {
 
-                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                        taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
                                 LocalDateTime.parse(contentArr[4]),Task.Types.Event, Task.Status.Y);
 
 
                     } else {
 
-                        manager.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
+                        taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
                                 LocalDateTime.parse(contentArr[4]),Task.Types.Event, Task.Status.N);
 
                     }
                     break;
 
                 default:
-
                     System.out.println("Task type does not exists!");
                     break;
                 }
@@ -136,14 +135,14 @@ public class Storage {
      */
     public void updateFile(String operation) throws IOException {
 
-        ArrayList<Task> taskList = manager.getList();
+        ArrayList<Task> list = taskList.getList();
 
         FileWriter writer = new FileWriter(new File(path));
         String input = null;
 
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
 
-            input = generateInput((Task)taskList.get(i));
+            input = generateInput((Task)list.get(i));
             writer.write(input);
             writer.flush();
 

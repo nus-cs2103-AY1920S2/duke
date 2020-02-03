@@ -2,6 +2,24 @@
 <checkstyle version="8.23">
 <file name="/Users/xpxp/Desktop/duke/src/main/java/Duke.java">
 </file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/AddCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/Command.java">
+<error line="17" severity="error" message="Abbreviation in name &apos;HEADER&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="17" column="28" severity="error" message="Member name &apos;HEADER&apos; must match pattern &apos;^[a-z][a-z0-9][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck"/>
+<error line="18" severity="error" message="Abbreviation in name &apos;FOOTER&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="18" column="28" severity="error" message="Member name &apos;FOOTER&apos; must match pattern &apos;^[a-z][a-z0-9][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck"/>
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/DeleteCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/DoneCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/ExitCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/FindCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/ListCommand.java">
+</file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/EmptyDateError.java">
 </file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/EmptyDescriptionError.java">
@@ -31,5 +49,7 @@
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/tasklist/TaskList.java">
 </file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/ui/Ui.java">
+<error line="46" severity="error" message="Abbreviation in name &apos;HEADER&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="47" severity="error" message="Abbreviation in name &apos;FOOTER&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
 </file>
 </checkstyle>

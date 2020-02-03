@@ -12,7 +12,9 @@ public class MissingKeywordError extends Exceptions {
      * Constructor.
      */
     public MissingKeywordError() {
+
         super(null);
+
     }
 
     /**
@@ -22,6 +24,8 @@ public class MissingKeywordError extends Exceptions {
      */
     @Override
     public String errorMessage() {
+
         return "\nOOPS! I'm sorry, the keyword is missing.";
+
     }
 }

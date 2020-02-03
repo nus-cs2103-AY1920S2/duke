@@ -1,13 +1,19 @@
 package duke.ui;
 
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exceptions.Exceptions;
 import duke.parser.Parser;
-import duke.task.Task;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.time.LocalDateTime;
 
 /**
  * The Ui program gets user input, interprets it and calls relevant methods.
@@ -17,15 +23,18 @@ import java.time.LocalDateTime;
  */
 public class Ui {
 
-    TaskList manager;
+    Storage storage;
+    TaskList taskList;
 
     /**
      * Constructor.
-     * @param manager refers to TaskList object required to manage the taskList.
+     *
+     * @param taskList refers to TaskList object required to manage the taskList.
      */
-    public Ui(TaskList manager) {
+    public Ui(Storage storage, TaskList taskList) {
 
-        this.manager = manager;
+        this.storage = storage;
+        this.taskList = taskList;
 
     }
 
@@ -34,21 +43,20 @@ public class Ui {
      */
     public void frontDesk() {
 
-        final String header = "____________________________________________________________\n";
-        final String footer = "____________________________________________________________\n";
+        final String HEADER = "____________________________________________________________\n";
+        final String FOOTER = "____________________________________________________________\n";
 
         try {
-            String greetings = header
+            String greetings = HEADER
                     + "\nHello! I'm Chu Chu \n"
                     + "What can I do for you ? \n"
-                    + footer;
+                    + FOOTER;
             System.out.println(greetings);
 
             InputStreamReader rd = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(rd);
             String input = null;
             String[] taskDescriptionArr = null;
-            LocalDateTime[] dateTime = null;
             Parser parser = new Parser();
 
             while (true) {
@@ -56,66 +64,38 @@ public class Ui {
                 try {
                     input = br.readLine();
                     taskDescriptionArr = parser.parseUserInput(input);
+                    Command c = null;
 
                     if (taskDescriptionArr[0].equals("bye")) {
 
-                        System.out.println(header);
-                        System.out.println("Bye. I hope you liked the service and hope to see you soon !");
-                        System.out.println(footer);
+                        c = new ExitCommand(null, null);
+                        c.executeCommand(taskDescriptionArr);
                         break;
 
                     } else if (taskDescriptionArr[0].equals("list")) {
 
-                        System.out.print(header);
-                        manager.list();
-                        System.out.print(footer + "\n");
+                        c = new ListCommand(null, taskList);
+                        c.executeCommand(taskDescriptionArr);
 
                     } else if (taskDescriptionArr[0].equals("done")) {
 
-                        Task t = manager.getTask(Integer.parseInt(taskDescriptionArr[1]));
-                        System.out.println(header);
-                        System.out.println(manager.markDone(t));
-                        System.out.println(footer);
+                        c = new DoneCommand(storage, taskList);
+                        c.executeCommand(taskDescriptionArr);
 
                     } else if (taskDescriptionArr[0].equals("delete")) {
 
-                        System.out.println(header);
-                        System.out.println(manager.deleteTask(Integer.parseInt(taskDescriptionArr[1])));
-                        System.out.println(manager.reportTotal());
-                        System.out.println(footer);
+                        c = new DeleteCommand(storage, taskList);
+                        c.executeCommand(taskDescriptionArr);
 
                     } else if (taskDescriptionArr[0].equals("find")) {
 
-                        System.out.println(header);
-                        manager.findTask(taskDescriptionArr[1]);
-                        System.out.println(footer);
+                        c = new FindCommand(null, taskList);
+                        c.executeCommand(taskDescriptionArr);
 
                     } else {
 
-                        dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
-
-                        if (taskDescriptionArr[0].equals("todo")) {
-
-                            System.out.println(header);
-                            System.out.println(manager.addTask(taskDescriptionArr[1], dateTime, Task.Types.ToDo));
-                            System.out.println(manager.reportTotal());
-                            System.out.println(footer);
-
-                        } else if (taskDescriptionArr[0].equals("deadline")) {
-
-                            System.out.println(header);
-                            System.out.println(manager.addTask(taskDescriptionArr[1], dateTime, Task.Types.Deadline));
-                            System.out.println(manager.reportTotal());
-                            System.out.println(footer);
-
-                        } else if (taskDescriptionArr[0].equals("event")) {
-
-                            System.out.println(header);
-                            System.out.println(manager.addTask(taskDescriptionArr[1], dateTime, Task.Types.Event));
-                            System.out.println(manager.reportTotal());
-                            System.out.println(footer);
-
-                        }
+                        c = new AddCommand(storage, taskList);
+                        c.executeCommand(taskDescriptionArr);
                     }
                 } catch (Exception e) {
 
