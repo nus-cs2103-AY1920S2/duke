@@ -1,14 +1,28 @@
 package duke;
 
+/**
+ * The Lister Class parses commands and references TaskList and Storage Classes to store and retrieve Tasks
+ * @author qiujingying
+ * @version 1.0
+ */
 public class Lister {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Creates a Lister object to reference to TaskList and Storage objects
+     * @param tasks initial TaskList stores Tasks
+     * @param storage initial storage with filepath to store data
+     */
     public Lister(TaskList tasks, Storage storage) {
         this.taskList = tasks;
         this.storage = storage;
     }
 
+    /**
+     * Parses commands from command line
+     * @param command input to identify relevant Task objects to create and their description
+     */
     public void record(String command) {
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list:");

@@ -26,6 +26,8 @@ public class Storage {
                     break;
                 case EVENT:
                     sb.append("E | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
+                    System.out.println("curr time " + curr.time);
+                    System.out.println("curr description " + curr.description);
                     break;
                 case DEADLINE:
                     sb.append("D | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
