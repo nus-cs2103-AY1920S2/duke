@@ -33,7 +33,7 @@ public class Task {
      * @return ✓ if task is done, or ✗ if task is not done.
      */
     protected String getDoneSymbol() {
-        return isDone ? "✓" : "✗" ;
+        return isDone ? "✓" : "✗";
     }
 
     /**

@@ -6,22 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    public void TodoTest() {
+    public void todoTest() {
         Todo newTask = new Todo("sleep");
         newTask.setDone();
         assertEquals(1, newTask.getDoneInt());
     }
 
     @Test
-    public void EventTest() {
+    public void eventTest() {
         Event newTask = new Event("meeting", "Sunday 1pm");
         newTask.setDone();
-        assertEquals("E - 1 - meeting - Sunday 1pm" , newTask.updateFile());
+        assertEquals("E - 1 - meeting - Sunday 1pm", newTask.updateFile());
     }
 
     @Test
-    public void DeadlineTest() throws DukeException {
+    public void deadlineTest() {
         Deadline newTask = new Deadline("Assignment 1", "2019-01-01", "1000");
-        assertEquals("2019-01-01 1000" , newTask.assembleDeadlineDateAndTime());
+        assertEquals("2019-01-01 1000", newTask.getDeadlineDateAndTime());
     }
 }

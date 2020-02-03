@@ -14,6 +14,13 @@ public class Deadline extends Task {
     protected String deadlineTime;
     protected String deadline;
 
+    /**
+     * A Deadline object has a description of the Deadline task as well as the date and time at which the task is due.
+     *
+     * @param command description of the Deadline task
+     * @param deadlineDate date when the Deadline task is due
+     * @param deadlineTime time when the Deadline task is due
+     */
     public Deadline(String command, String deadlineDate, String deadlineTime) {
         super(command);
         this.deadlineDate = deadlineDate;
@@ -21,9 +28,9 @@ public class Deadline extends Task {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             Date deadlineTimeParsed = sdf.parse(deadlineTime);
-            SimpleDateFormat sdf_toFormat = new SimpleDateFormat("hhmm aa");
+            SimpleDateFormat sdftoFormat = new SimpleDateFormat("hhmm aa");
             this.deadline = LocalDate.parse(deadlineDate).format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                    + sdf_toFormat.format(deadlineTimeParsed);
+                    + sdftoFormat.format(deadlineTimeParsed);
         } catch (ParseException exception) {
             exception.printStackTrace();
         }

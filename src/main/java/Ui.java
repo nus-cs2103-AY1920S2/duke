@@ -24,7 +24,7 @@ public class Ui {
      * @param exception DukeException resulted from user's command input.
      */
     public void printError(Exception exception) {
-       System.out.println(exception.toString());
+        System.out.println(exception.toString());
     }
 
     /**

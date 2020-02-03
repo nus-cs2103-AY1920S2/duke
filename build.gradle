@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
 group 'seedu.duke'
@@ -12,7 +13,16 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+dependencies{
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.1")
+    compile 'org.apiguardian:apiguardian-api:1.0.0'
 }
 
 run {

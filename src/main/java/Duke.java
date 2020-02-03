@@ -13,6 +13,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Ui object to deal with user interaction , a Storage object to deal with loading or saving tasks and a
+     * new TaskList object, loaded with the file storing the task list, if the file exists.
+     *
+     * @param filePath location where file which contains task list is found or created
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +30,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     *
+     * @throws IOException if there is error handling data in the file.
+     */
     public void run() throws IOException {
         ui.printWelcome();
         Scanner sc = new Scanner(System.in);
