@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Ui {
 
-    void showLoadingError() {
-        System.out.println("Loading error");
+    String showLoadingError() {
+        return "Loading error";
     }
 
-    void showWelcome() {
-        System.out.println("____________________________________________________________\n "
+    String showWelcome() {
+        return "____________________________________________________________\n "
                 + "Hello! I'm Duke\n What can I do for you?\n"
-                + "____________________________________________________________");
+                + "____________________________________________________________";
     }
 
     String readCommand() {
@@ -17,21 +17,17 @@ public class Ui {
         return sc.nextLine();
     }
 
-    void printString(String s) {
-        System.out.println(s);
+    String showLine() {
+        return "____________________________________________________________";
     }
 
-    void showLine() {
-        System.out.println("____________________________________________________________");
+    String showError(String s) {
+        return s;
     }
 
-    void showError(String s) {
-        System.out.println(s);
-    }
-
-    void printTask(int number, TaskList tasks) {
+    String printTask(int number, TaskList tasks) {
         Task ob = tasks.getList().get(number - 1);
-        System.out.println(ob.toString());
+        return ob.toString();
     }
 
 }

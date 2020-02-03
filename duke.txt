@@ -1,1 +1,5 @@
-T|1|hi
+T|0|crap
+T|0|this
+T|0|hey
+E|0|bruh|2020-02-02 1900
+T|0|chavi

@@ -12,12 +12,12 @@ public class Done extends Command {
      * @param ui UI object.
      * @param storage Storage object.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int number = Integer.valueOf(num);
         Task ob = tasks.getList().get(number - 1);
         ob.setDone();
-        ui.printString("Nice! I've marked this task as done:");
-        ui.printTask(number,tasks);
+        return "Nice! I've marked this task as done:\n"
+                + ui.printTask(number,tasks);
     }
 
     boolean isExit() {

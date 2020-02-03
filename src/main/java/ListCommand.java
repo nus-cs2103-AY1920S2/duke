@@ -11,13 +11,14 @@ public class ListCommand extends Command {
      * @param ui UI object.
      * @param storage Storage object.
      */
-    void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString("Here are the tasks in your list:");
+    String execute(TaskList tasks, Ui ui, Storage storage) {
+        String s = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.list.size(); i++) {
             Task ob = tasks.list.get(i);
             String tick = (ob.getDone() == 0) ? "[N]" : "[Y]";
-            ui.printString(i + 1 + ". " + ob.toString());
+            s = s + (i + 1 + ". " + ob.toString() + "\n");
         }
+        return s;
     }
 
     boolean isExit() {
