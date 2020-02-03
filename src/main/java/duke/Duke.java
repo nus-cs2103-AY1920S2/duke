@@ -11,6 +11,8 @@ import parser.Parser;
 import storage.Storage;
 import task.Task;
 
+// TODO remove all old parts of Duke and keep only parts that are required for JavaFx
+
 public class Duke extends Application {
     private UserInterface UI;
     private TaskList taskList;
@@ -78,8 +80,8 @@ public class Duke extends Application {
                     if (this.taskList.isEmpty()) {
                         throw new DukeException("Task list is empty!");
                     }
-                    // Shift to parser to check for length
-                    String[] splitInput = input.split(" ");
+                    // TODO shift to parser for getting taskIndex
+                    String[] splitInput = input.split("\\s+");
                     int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
                     if (taskIndex >= this.taskList.size()) {
                         throw new DukeException(
@@ -102,11 +104,13 @@ public class Duke extends Application {
                     if (this.taskList.isEmpty()) {
                         throw new DukeException("Task list is empty!");
                     }
+                    // TODO shift to parser for getting serachTerm
                     String searchTerm = input.substring(5).trim();
                     return taskList.search(searchTerm)
                             .stream()
                             .collect(Collectors.joining(String.format("%n")));
                 } else {
+                    // TODO create task here then addTask to this.taskList as a Task Object
                     Task newTask = this.taskList.addTask(input);
                     return String.format(
                             "Got it. I've added this task:%n%s%nNow you have %d %s in the list,",
