@@ -1,6 +1,6 @@
-package main.java;
+package main.java.model;
 
-import main.java.Task;
+import main.java.model.Task;
 
 import main.java.exceptions.NoDescriptionException;
 

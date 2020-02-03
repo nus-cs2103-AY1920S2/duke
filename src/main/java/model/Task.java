@@ -1,4 +1,4 @@
-package main.java;
+package main.java.model;
 
 import main.java.exceptions.NoDescriptionException;
 
