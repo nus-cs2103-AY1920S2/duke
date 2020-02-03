@@ -2,6 +2,9 @@ package duke.utils;
 
 import duke.command.*;
 
+/**
+ * Parser to parse commands made by user
+ */
 public class CommandParser {
 
     public static Command commandParser(String request) {

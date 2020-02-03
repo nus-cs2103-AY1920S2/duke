@@ -11,8 +11,17 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parser to parse various stuff
+ */
 public class Parser {
 
+    /**
+     * Parse string into date object
+     * @param text
+     * @return date object from string
+     * @throws ParseException
+     */
     public static Date stringToDate(String text) throws ParseException{
         Date date;
         SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
@@ -20,6 +29,11 @@ public class Parser {
         return date;
     }
 
+    /**
+     * Check date format to see if it is in the form of yyyy-MM-dd
+     * @param text
+     * @return boolean
+     */
     public static boolean checkDateFormat(String text) {
         String[] tokens = text.split("-");
         if (tokens[0].length() != 4) {
@@ -34,12 +48,22 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Convert date object to string in the format MMM dd yyyy
+     * @param date
+     * @return string
+     */
     public static String dateToString(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_2);
         String text = formatter.format(date);
         return text;
     }
 
+    /**
+     * convert list of task to string to be stored
+     * @param tasks
+     * @return string to be stored
+     */
     public static String tasksToStorage(List<Task> tasks) {
         String data = "";
         SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
@@ -57,6 +81,12 @@ public class Parser {
         return data;
     }
 
+    /**
+     * Convert string data loaded to list of tasks
+     * @param data
+     * @return list of tasks
+     * @throws ParseException
+     */
     public static List<Task> storageToTask(String data) throws ParseException{
         List<Task> tasks= new ArrayList<>();
         String[] lines = data.split("\n");

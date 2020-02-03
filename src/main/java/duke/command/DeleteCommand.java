@@ -8,8 +8,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Delete command implementing command interface
+ */
 public class DeleteCommand implements Command {
 
+    /**
+     * attempt to delete task from task list and set ui response to the
+     * appropriate one
+     * @param task
+     * @param ui
+     * @param storage
+     * @param taskList
+     */
     @Override
     public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
         String[] token = task.split(" ", 2);
