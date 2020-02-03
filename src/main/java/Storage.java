@@ -57,6 +57,8 @@ public class Storage {
                         newEventTask.setDone();
                     }
                     break;
+                default:
+                    break;
                 }
                 line = br.readLine();
             }

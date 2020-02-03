@@ -1,12 +1,13 @@
 public class DukeException extends Exception {
-    private int i;
+    private int index;
 
     public DukeException(int i) {
-        this.i = i;
+        this.index = i;
     }
 
+    @Override
     public String toString() {
-        switch (i) {
+        switch (index) {
         case 0: // todo task needs a description
             return "Oh no! :( The description of todo cannot be empty.";
         case 1: // deadline task needs a description
@@ -25,7 +26,8 @@ public class DukeException extends Exception {
             return "Please let me know which task you want to delete!:)";
         case 8: // file loading error
             return null;
+        default:
+            return "Error!";
         }
-        return "ERROR";
     }
 }
