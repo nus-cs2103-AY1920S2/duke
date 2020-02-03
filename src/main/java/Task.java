@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "DONE" : "NOT YET DONE"); //return tick or X symbols
+        return (isDone ? "DONE" : "UNDONE");
     }
 
     public String getDescription() {
