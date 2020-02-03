@@ -6,7 +6,17 @@ import app.util.StringPair;
 import app.exceptions.BaseException;
 import app.exceptions.WrongCommandException;
 
+/**
+ * This class contains all the data and functions related to Commands
+ */
 public final class CommandManager {
+    /**
+     * Parses a user input and returns the corresponding command 
+     * @param userInput User Input
+     * @return A Command object that can be executed
+     * @throws BaseException If any error occurs during the parsing 
+     * of the user input
+     */
     public Command getCommand(String userInput) throws BaseException {
         StringPair tokens = Parser.parse(userInput);
         String command = tokens.getFirstValue();

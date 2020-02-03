@@ -10,11 +10,22 @@ import java.util.ArrayList;
 
 import app.core.tasks.Task;
 
+/**
+ * This class manages all storage related tasks in Duke
+ */
 public final class StorageManager {
+    /**
+     * Default Storage Directory
+     */
     public static final String STORAGE_DIR = "./data/";
     public static final String STORAGE_FILENAME = "tasks.txt";
     private static final String STORAGE_FILEPATH = STORAGE_DIR + STORAGE_FILENAME;
 
+    /**
+     * Saves a list of tasks in storage
+     * @param tasks The list of tasks
+     * @return True if the process is successful, False otherwise
+     */
     public boolean save(List<Task> tasks) {
         try {
             File outputDir = new File(STORAGE_DIR);
@@ -34,6 +45,10 @@ public final class StorageManager {
         }
     }
 
+    /**
+     * Loads a list of tasks from the storage
+     * @return a parsed list of tasks
+     */
     public List<Task> load() {
         try {
             List<Task> output = new ArrayList<>();

@@ -5,23 +5,50 @@ import java.util.List;
 import app.util.Date;
 import app.core.StorageManager;
 
+/**
+ * This class stores and handles all the data related to 
+ * tasks in Duke
+ */
 public class TaskManager{
     private List<Task> taskList;
     private StorageManager storageManager;
 
+    /**
+     * Initializes a new task manager. The method will attempt
+     * to load from the storage if data is present.
+     */
     public TaskManager() {
         this.storageManager = new StorageManager();
         this.taskList = this.storageManager.load();
     }
 
+    /**
+     * Adds a todo task in the manager
+     * @param description The description of the task
+     * @return The output to be presented in the UI
+     */
     public String addTodoTask(String description) {
         return this.add(new Task(description));
     }
 
+    /**
+     * Adds a deadline task in the manager
+     * @param description The description of the task
+     * @param deadline A Date object representing the deadline 
+     * of the task
+     * @return The output to be presented in the UI
+     */
     public String addDeadlineTask(String description, Date deadline) {
         return this.add(new DeadlineTask(description, deadline));
     }
 
+    /**
+     * Adds an event task in the manager
+     * @param description The description of the task
+     * @param when A Date object representing the date of 
+     * the event
+     * @return The output to be presented in the UI
+     */
     public String addEventTask(String description, Date when) {
         return this.add(new EventTask(description, when));
     }
@@ -36,6 +63,13 @@ public class TaskManager{
         );
     }
 
+    /**
+     * Sets a task as done
+     * @param index The index of the task in the task manager
+     * @return The output to be presented in the UI
+     * @throws IndexOutOfBoundsException If the index is out of the bounds
+     * of the task maanger
+     */
     public String setTaskDone(int index) throws IndexOutOfBoundsException {
         Task task = this.taskList.get(index - 1);
         task.setDone();
@@ -46,6 +80,13 @@ public class TaskManager{
         );
     }
 
+    /**
+     * Deletes a task from the task manager
+     * @param index The index of the task in the task manager
+     * @return The output to be presented in the UI
+     * @throws IndexOutOfBoundsException If the index is out of the bounds 
+     * of the task manager
+     */
     public String deleteTask(int index) throws IndexOutOfBoundsException {
         Task task = this.taskList.remove(index - 1);
         this.storageManager.save(this.taskList);
@@ -57,6 +98,10 @@ public class TaskManager{
         );
     }
 
+    /**
+     * Returns a String representation of the list of tasks
+     * @return The string representation of the list of tasks
+     */
     @Override
     public String toString() {
         if (this.taskList.size() == 0) {

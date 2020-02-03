@@ -3,6 +3,9 @@ package app.core.tasks;
 import app.util.Date;
 import app.exceptions.WrongDateTimeFormatException;
 
+/**
+ * This class contains the information of a Task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,6 +23,11 @@ public class Task {
         this.isDone = true;
     }
     
+    /**
+     * Creates a Task based on the format stored in storage
+     * @param data Storage data
+     * @return A new Task object
+     */
     public static Task fromStorage(String data) {
         try {
             String[] parsedArgs = data.split(",");
@@ -46,10 +54,18 @@ public class Task {
         }
     }
     
+    /**
+     * Returns a String in the format used to save the task in storage
+     * @return a String in the storage format
+     */
     public String toStorage() {
         return String.format("T,%s,%b", this.description, this.isDone);
     }
 
+    /**
+     * Returns a String representation of the Task
+     * @return a String representation of the Task
+     */
     @Override
     public String toString() {
         return String.format("[T][%s] %s", this.getStatusIcon(), this.description);
