@@ -3,6 +3,11 @@ import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import duke.command.Command;
 
 import duke.dukeexception.DukeException;
@@ -15,11 +20,15 @@ import duke.task.TaskList;
 
 import duke.ui.Ui;
 
-public class Duke {
+public class Duke extends Application{
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    public Duke() throws IOException{
+        this("data/duke.txt");
+    }
 
     public Duke(String filePath) throws IOException {
         ui = new Ui();
@@ -36,6 +45,15 @@ public class Duke {
             new File(filePath).createNewFile();
             tasks = new TaskList();
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     public void run() {
@@ -61,6 +79,6 @@ public class Duke {
         }
     }
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }
