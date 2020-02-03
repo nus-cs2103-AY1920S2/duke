@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.ArrayList;
+
 /**
  * Interpret and process user inputs.
  */
@@ -52,7 +54,7 @@ public class Parser {
                         tasks.get(taskNumber).markAsDone();
                     } catch (DukeException e) {
                         ui.exceptionMessage(e);
-                        return true;
+                        break;
                     }
                     ui.userMessage("Nice! I've marked this task as done:\n    " + tasks.get(taskNumber));
                 } else {
@@ -121,6 +123,17 @@ public class Parser {
                 }
             } catch (IndexOutOfBoundsException e) {
                 ui.exceptionMessage(new DukeException("☹ OOPS!!! The description of a event cannot be empty."));
+            }
+            break;
+        case "find":
+            ArrayList<Task> result = tasks.find(inputs[1]);
+            if (result.size() == 0) {
+                ui.userMessage("No match found.");
+                break;
+            }
+            ui.userMessage("Here are the matching tasks in your list:");
+            for (int i = 0; i < result.size(); i++) {
+                ui.userMessage(i + 1 + "." + result.get(i));
             }
             break;
         default:

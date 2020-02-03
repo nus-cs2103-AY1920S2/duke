@@ -61,4 +61,14 @@ public class TaskList {
     public Task remove(int taskNumber) {
         return tasks.remove(taskNumber);
     }
+
+    public ArrayList<Task> find(String text) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(text)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
 }

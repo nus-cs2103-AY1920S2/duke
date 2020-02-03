@@ -40,6 +40,10 @@ public class Task {
         }
     }
 
+    public String getDescription() {
+        return description;
+    }
+    
     /**
      * Concatenate the status icon with the description.
      */
