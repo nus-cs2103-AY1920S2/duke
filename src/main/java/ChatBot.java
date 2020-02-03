@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -7,8 +7,8 @@ public class ChatBot {
     public static Scanner lineScanner;
     public static Scanner sc;
 
-    protected void run() {
-        List<Task> history = new ArrayList<>();
+    protected void run() throws FileNotFoundException, NoSuchElementException {
+        List<Task> history = new IOFromHardDisk().getAllTasksFromFile(); // get from database
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -32,13 +32,14 @@ public class ChatBot {
                     history.get(taskNumber).markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(history.get(taskNumber));
+                    
                 } else if (userInput.startsWith("todo")) {
                     lineScanner = new Scanner(userInput);
-                    lineScanner.next();
+                    lineScanner.next(); // skip todo word
                     try {
-                        Task task = new Todo(lineScanner.nextLine().substring(1));
-                        System.out.println("ab");
-                        history.add(new Todo(lineScanner.nextLine().substring(1)));
+                        Task task = new Todo(lineScanner.nextLine().substring(1)); // skip space
+                        history.add(task);
+                        new IOFromHardDisk().saveAllTasksToFile(history);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(task);
                         System.out.println("Now you have " + history.size() + " tasks in the list.");
@@ -52,6 +53,7 @@ public class ChatBot {
                         String theRest = lineScanner.nextLine();
                         Task task = new Deadline(theRest.split("/")[0].substring(1), theRest.split("/")[1]);
                         history.add(task);
+                        new IOFromHardDisk().saveAllTasksToFile(history);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(task);
                         System.out.println("Now you have " + history.size() + " tasks in the list.");
@@ -65,6 +67,7 @@ public class ChatBot {
                         String theRest = lineScanner.nextLine();
                         Task task = new Event(theRest.split("/")[0].substring(1), theRest.split("/")[1]);
                         history.add(task);
+                        new IOFromHardDisk().saveAllTasksToFile(history);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(task);
                         System.out.println("Now you have " + history.size() + " tasks in the list.");
