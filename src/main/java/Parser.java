@@ -18,13 +18,13 @@ public class Parser {
                         taskList.addDeadline(prepareDeadline(inputSplit));
                         break;
                     case "event":
-                        taskList.addEvent(inputSplit);
+                        taskList.addEvent(prepareEvent(inputSplit));
                         break;
                     case "done":
-                        taskList.markDone(prepareDoneDelete(inputSplit));
+                        taskList.markDone(prepareDoneDelete(inputSplit[1]));
                         break;
                     case "delete":
-                        taskList.deleteTask(prepareDoneDelete(inputSplit));
+                        taskList.deleteTask(prepareDoneDelete(inputSplit[1]));
                         break;
                     case "list":
                         ui.listTasks(taskList);
@@ -34,11 +34,10 @@ public class Parser {
                         loop = false;
                         break;
                     default:
-                        //ui.print("Uhh... You're gonna have to say that again, Red.");
-                        //change to exception handler
-                        break;
-                }
-            } catch (InvalidCommandException ex) {
+                        throw new InvalidCommandException("");
+                    }
+            } catch (InvalidCommandException | InvalidTodoException
+                    | InvalidDeadlineException | InvalidEventException ex) {
                 System.out.println(ex);
             }
         } while (loop);

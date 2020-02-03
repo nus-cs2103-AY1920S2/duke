@@ -1,5 +1,5 @@
 public class ExceptionHandler {
-    public void checkEmptyField(String[] taskStringArr, String type) throws EmptyFieldException {
+    public static void checkEmptyField(String[] taskStringArr, String type) throws EmptyFieldException {
         if (type.equals("todo") || type.equals("deadline") || type.equals("event")) {
             if (taskStringArr.length != 2) {
                 throw new EmptyFieldException(
@@ -17,7 +17,7 @@ public class ExceptionHandler {
         }
     }
 
-    public void checkWrongCommand(String type) throws WrongCommandException {
+    public static void checkInvalidCommand(String type) throws InvalidCommandException {
         if (!(type.equals("todo")
                 || type.equals("deadline")
                 || type.equals("event")
@@ -25,8 +25,7 @@ public class ExceptionHandler {
                 || type.equals("done")
                 || type.equals("delete")
                 || type.equals("bye"))) {
-            throw new WrongCommandException(
-                    "Uhh... You're gonna have to say that again, Red.");
+            throw new InvalidCommandException("");
         }
     }
 }
