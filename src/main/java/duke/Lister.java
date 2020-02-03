@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The Lister Class parses commands and references TaskList and Storage Classes to store and retrieve Tasks
+ * The Lister Class parses commands and references TaskList and Storage Classes to store and retrieve Tasks.
  * @author qiujingying
  * @version 1.0
  */
@@ -10,7 +10,7 @@ public class Lister {
     private Storage storage;
 
     /**
-     * Creates a Lister object to reference to TaskList and Storage objects
+     * Creates a Lister object to reference to TaskList and Storage objects.
      * @param tasks initial TaskList stores Tasks
      * @param storage initial storage with filepath to store data
      */
@@ -20,7 +20,7 @@ public class Lister {
     }
 
     /**
-     * Parses commands from command line
+     * Parses commands from command line.
      * @param command input to identify relevant Task objects to create and their description
      */
     public void record(String command) {
@@ -83,7 +83,8 @@ public class Lister {
                         System.out.println((i + 1) + "." + tempList.retrieveTask(i).toString());
                     }
                     break;
-
+                default:
+                    throw new IllegalStateException("Unexpected value: " + command.substring(0, x));
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

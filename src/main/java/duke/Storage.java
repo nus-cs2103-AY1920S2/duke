@@ -15,21 +15,27 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Stores data through storage class.
+     * @param t task list
+     */
     public void storeData(TaskList t) {
         store = t.getStore();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < store.size(); i++) {
             Task curr = store.get(i);
             switch (curr.getType()) {
-                case TODO:
-                    sb.append("T | " + (curr.isDone ? 1 : 0) + " | " + curr.description + "\n");
-                    break;
-                case EVENT:
-                    sb.append("E | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
-                    break;
-                case DEADLINE:
-                    sb.append("D | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
-                    break;
+            case TODO:
+                sb.append("T | " + (curr.isDone ? 1 : 0) + " | " + curr.description + "\n");
+                break;
+            case EVENT:
+                sb.append("E | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
+                break;
+            case DEADLINE:
+                sb.append("D | " + (curr.isDone ? 1 : 0) + " | " + curr.description + " | " + curr.time + "\n");
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + curr.getType());
             }
         }
 
@@ -43,19 +49,23 @@ public class Storage {
 
     }
 
+    /**
+     * Loads data from store.
+     * @return ArrayList of tasks
+     */
     public ArrayList loadData() {
         store = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader( new FileReader(filePath));
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = br.readLine()) != null) {
                 int x = line.indexOf('|');
-                String command = line.substring(0, x-1);
+                String command = line.substring(0, x - 1);
                 switch (command) {
                 case "T":
                     ToDo task = new ToDo(line.substring(8), "");
                     if (line.substring(4, 5).equals("1")) {
-                        task.markAsDone() ;
+                        task.markAsDone();
                     }
                     this.store.add(task);
                     break;
@@ -63,9 +73,9 @@ public class Storage {
                     String details = line.substring(8);
                     int y = details.indexOf('|');
                     System.out.println(details);
-                    Event event = new Event(details.substring(0, y-1), details.substring(y+2));
+                    Event event = new Event(details.substring(0, y - 1), details.substring(y + 2));
                     if (line.substring(4, 5).equals("1")) {
-                        event.markAsDone() ;
+                        event.markAsDone();
                     }
                     this.store.add(event);
                     break;
@@ -73,12 +83,14 @@ public class Storage {
                     String detail = line.substring(8);
                     int z = detail.indexOf('|');
                     System.out.println(detail);
-                    Deadline deadline = new Deadline(detail.substring(0, z-1), detail.substring(z+2));
+                    Deadline deadline = new Deadline(detail.substring(0, z - 1), detail.substring(z + 2));
                     if (line.substring(4, 5).equals("1")) {
-                        deadline.markAsDone() ;
+                        deadline.markAsDone();
                     }
                     this.store.add(deadline);
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + command);
                 }
             }
         } catch (Exception e) {
