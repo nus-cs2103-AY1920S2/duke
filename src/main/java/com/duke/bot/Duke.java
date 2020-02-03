@@ -2,6 +2,7 @@ package com.duke.bot;
 
 import java.lang.String;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -32,11 +33,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    /*
-    private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
-
-     */
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Creates a Duke Bot object.
@@ -92,27 +90,54 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
-        userInput.setOnAction( (event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+        userInput.setOnAction((event) -> {
+            handleUserInput();
         });
-
     }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
 
     private Label getDialogLabel(String text) {
         Label label = new Label(text);
         label.setWrapText(true);
 
         return label;
+    }
+
+    private String getResponse(String input) {
+        String output = "";
+        Scanner sc = new Scanner(input);
+        String commandWord = sc.next();
+        String restOfStr = sc.hasNext() ? sc.nextLine() : "";
+        try {
+            output = Parser.parse(commandWord, new DukeUi(restOfStr), storage, tasks);
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
+        }
+
+        return output;
     }
 
     public Duke(DukeUi ui) {
@@ -139,10 +164,10 @@ public class Duke extends Application {
      * @param args The arguments written by the user in the command line.
      */
     public static void main(String[] args) {
-
         Duke duke  = new Duke(new DukeUi());
 
         duke.ui.greet();
+        //System.out.println(System.getProperty("user.dir"));
 
         try {
             duke.echo();

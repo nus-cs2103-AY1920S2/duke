@@ -24,6 +24,11 @@ public class DukeUi {
         this.out = out;
     }
 
+    public DukeUi(String input) {
+        this.in = new Scanner(input);
+        this.out = System.out;
+    }
+
     public DukeUi() {
         this.in = new Scanner(System.in);
         this.out = System.out;
