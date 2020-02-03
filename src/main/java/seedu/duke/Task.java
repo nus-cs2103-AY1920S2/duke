@@ -3,7 +3,7 @@ package seedu.duke;
 import java.time.LocalDate;
 
 /**
- * Superclass of Deadline, Event, and Todo class.
+ * Represents a Task object.
  */
 public abstract class Task {
     protected String description;
@@ -40,7 +40,7 @@ public abstract class Task {
      *
      * @return true if a task is marked as done
      */
-    public boolean getDoneStatus() {
+    public boolean isDone() {
         return isDone;
     }
 

@@ -8,9 +8,9 @@ public class TaskTest {
     @Test
     public void testMarkAsDone() {
         Task testTodo = new Todo("test todo");
-        assertEquals(false, testTodo.getDoneStatus());
+        assertEquals(false, testTodo.isDone());
         testTodo.markAsDone();
-        assertEquals(true, testTodo.getDoneStatus());
+        assertEquals(true, testTodo.isDone());
     }
 
     @Test

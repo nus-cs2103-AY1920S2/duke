@@ -1,3 +1,4 @@
 E | Y | read book | 2020-04-04
 D | N | tutorial 1 | 2020-01-01
 T | Y | study java
+E | N | sleep | 2020-02-02

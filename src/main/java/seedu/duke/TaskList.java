@@ -17,8 +17,8 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      *
-     * @param tasks the list of tasks
-     * @param storage the hard disk for storage of data
+     * @param tasks The list of tasks.
+     * @param storage The hard disk for storage of data.
      */
     public TaskList(List<Task> tasks, Storage storage) {
         this.tasks = tasks;
@@ -28,9 +28,9 @@ public class TaskList {
     /**
      * Adds the user input of todo task into the task list.
      *
-     * @param desc the details of the todo task
-     * @param doneStatus an indicator which shows whether a todo task has been completed or not
-     * @throws IOException if an input or output exception occurred
+     * @param desc The details of the todo task.
+     * @param doneStatus An indicator which shows whether a todo task has been completed or not.
+     * @throws IOException If an input or output exception occurred.
      */
     protected void addTodo(String desc, String doneStatus) throws IOException {
         Task todo = new Todo(desc);
@@ -47,11 +47,11 @@ public class TaskList {
     /**
      * Adds the user input of deadline task into the task list.
      *
-     * @param desc the details of the deadline task
-     * @param doneStatus an indicator which shows whether a deadline task has been completed or not
-     * @throws InvalidTaskInputException if an invalid task command is input
-     * @throws IOException if an input or output exception occurred
-     * @throws InvalidDateException if a date is input in a wrong format
+     * @param desc The details of the deadline task.
+     * @param doneStatus An indicator which shows whether a deadline task has been completed or not.
+     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws IOException If an input or output exception occurred.
+     * @throws InvalidDateException If a date is input in a wrong format.
      */
     protected void addDeadline(String desc, String doneStatus)
             throws InvalidTaskInputException, IOException, InvalidDateException {
@@ -83,11 +83,11 @@ public class TaskList {
     /**
      * Adds the user input of event task into the task list.
      *
-     * @param desc the details of the event task
-     * @param doneStatus an indicator which shows whether an event task has been completed or not
-     * @throws InvalidTaskInputException if an invalid task command is input
-     * @throws IOException if an input or output exception occurred
-     * @throws InvalidDateException if a date is input in a wrong format
+     * @param desc The details of the event task.
+     * @param doneStatus An indicator which shows whether an event task has been completed or not.
+     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws IOException If an input or output exception occurred.
+     * @throws InvalidDateException If a date is input in a wrong format.
      */
     protected void addEvent(String desc, String doneStatus)
             throws InvalidTaskInputException, IOException, InvalidDateException {
@@ -119,10 +119,10 @@ public class TaskList {
     /**
      * Checks if an input date is written in a valid date format.
      *
-     * @param inDate the input date
-     * @return true if the input date is written in a valid date format
+     * @param inDate The input date.
+     * @return true if the input date is written in a valid date format.
      */
-    public boolean isValidDate(String inDate) {
+    private boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateFormat.setLenient(false);
         try {
@@ -136,7 +136,7 @@ public class TaskList {
     /**
      * Prints the list of tasks the user has.
      */
-    public void printList(List<Task> currTasks) {
+    private void printList(List<Task> currTasks) {
         if (currTasks.size() == 0) {
             System.out.println("You currently don't have any task. Start listing now!");
         } else {
@@ -147,7 +147,7 @@ public class TaskList {
         }
     }
 
-    public void printList() {
+    protected void printList() {
         printList(tasks);
     }
 
@@ -155,10 +155,10 @@ public class TaskList {
      * Marks the task as done by changing the done status from "N" to "Y".
      * It also updates the done status in the hard disk storage list accordingly.
      *
-     * @param index the index number of the task that is marked as done
-     * @throws IOException if an input or output exception occurred
+     * @param index The index number of the task that is marked as done.
+     * @throws IOException If an input or output exception occurred.
      */
-    public void markTaskAsDone(int index) throws IOException {
+    protected void markTaskAsDone(int index) throws IOException {
         Task task = tasks.get(index - 1);
         task.markAsDone();
         storage.changeToStorage(index);
@@ -169,10 +169,10 @@ public class TaskList {
     /**
      * Deletes the task from the task list and the hard disk storage list accordingly.
      *
-     * @param index the index number of the task that is being deleted
-     * @throws IOException if an input or output exception occurred
+     * @param index The index number of the task that is being deleted.
+     * @throws IOException If an input or output exception occurred.
      */
-    public void deleteTask(int index) throws IOException {
+    protected void deleteTask(int index) throws IOException {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         printRemoveTask();
@@ -184,9 +184,9 @@ public class TaskList {
     /**
      * Finds task(s) which contains a substring given by the user.
      *
-     * @param desc a substring of a task that user wants to find
+     * @param desc A substring of a task that user wants to find.
      */
-    public void findTask(String desc) {
+    protected void findTask(String desc) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(desc)) {
@@ -202,11 +202,11 @@ public class TaskList {
         }
     }
 
-    public void printFoundTask() {
+    private void printFoundTask() {
         System.out.println("Here are the matching tasks in your list:");
     }
 
-    public void printNoFoundTask() {
+    private void printNoFoundTask() {
         System.out.println("Sorry I can't find what you are looking for....");
     }
 

@@ -1,37 +1,85 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 public class Parser {
     public Parser() {
 
     }
 
     /**
-     * Deals with making sense of the user commands.
-     *
-     * @param command user's command input
-     * @return the processed command
+     * Adds, changes, and deletes the content of the list according to the user's command input.
      */
-    public String processCommand(String command) {
+    public void handleCommands(String[] inputs, TaskList taskList) {
+        String command = inputs[0].trim();
         try {
-            if (command.equalsIgnoreCase("todo")) {
-                return Ui.TODO;
-            } else if (command.equalsIgnoreCase("deadline")) {
-                return Ui.DEADLINE;
-            } else if (command.equalsIgnoreCase("event")) {
-                return Ui.EVENT;
-            } else if (command.equalsIgnoreCase("list")) {
-                return Ui.LIST;
-            } else if (command.equalsIgnoreCase("find")) {
-                return Ui.FIND;
-            } else if (command.equalsIgnoreCase("done")) {
-                return Ui.DONE;
-            } else if (command.equalsIgnoreCase("delete")) {
-                return Ui.DELETE;
+            if (command.equals("todo")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addTodo(desc, "N");
+            } else if (command.equals("deadline")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addDeadline(desc, "N");
+            } else if (command.equals("event")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addEvent(desc, "N");
+            } else if (command.equals("list")) {
+                taskList.printList();
+            } else if (command.equals("done")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                } else if (!isNumeric(inputs[1])) {
+                    throw new InvalidTaskInputException();
+                }
+                int index = Integer.parseInt(inputs[1]);
+                if (index < 1 || index > TaskList.tasks.size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
+                taskList.markTaskAsDone(index);
+            } else if (command.equals("delete")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                } else if (!isNumeric(inputs[1])) {
+                    throw new InvalidTaskInputException();
+                }
+                int index = Integer.parseInt(inputs[1]);
+                if (index < 1 || index > TaskList.tasks.size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
+                taskList.deleteTask(index);
+            } else if (command.equals("find")) {
+                String desc = inputs[1];
+                taskList.findTask(desc);
             } else {
                 throw new InvalidCommandException();
             }
-        } catch (DukeException e) {
-            return e.toString();
+        } catch (DukeException | IOException e) {
+            System.out.println(e.toString());
         }
+    }
+
+    /**
+     * Checks if a string can be converted to an integer.
+     * @param strNum the string to be checked
+     * @return true if the string can be converted to an integer
+     */
+    private boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int intNum = Integer.parseInt(strNum);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
