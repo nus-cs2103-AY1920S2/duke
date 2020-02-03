@@ -1,19 +1,26 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 class Deadline extends Task {
     private LocalDate deadline;
 
-    public Deadline(String task) {
-        // Split the input task string by the delimiter \by
+    public Deadline(String task) throws DateTimeParseException {
+        // Split the input task string by the delimiter /by
         // first element in arr will be the description of the task, second elem will be the deadline, both are String
         // Pass the description as the argument to the constructor
         super(task.split("/by")[0]);
         String[] arr = task.split("/by");
-        this.deadline = LocalDate.parse(arr[1].trim());
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+            this.deadline = LocalDate.parse(arr[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
+
     }
 
-    public String getDeadline(){
+    public String getDeadline() {
         return this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
@@ -23,7 +30,7 @@ class Deadline extends Task {
         String status = super.getStatusIcon();
         String deadline = this.getDeadline();
 
-        return "[D]" + "[" + status + "] " + description + " : " + deadline;
+        return "[D]" + "[" + status + "] " + description + "by: " + deadline;
 
     }
 }

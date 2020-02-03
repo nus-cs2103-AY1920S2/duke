@@ -1,2 +1,0 @@
-[D][✘] return book  - Oct 15 2019
-[E][✓] meeting  - Nov 22 2019

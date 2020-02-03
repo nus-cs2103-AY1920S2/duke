@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Duke {
     private Ui ui;
     private Storage store;
@@ -12,7 +10,7 @@ public class Duke {
         // Initialize storage
         this.store = new Storage(fileName);
         // Initialize taskList
-        this.taskList =  new TaskList(this.store.loadArrayListStringFromFile());
+        this.taskList =  new TaskList(this.store.loadFromFilePath());
         this.parser = new Parser();
     }
 
@@ -25,15 +23,15 @@ public class Duke {
                 Command command = parser.parse(input);
                 command.execute(taskList, ui, store);
                 endInput = command.isExit();
-            } catch (DukeException e){
+            } catch (DukeException e) {
+                // Print any error that is thrown
+                ui.printLine();
                 System.out.println(e.getMessage());
+                ui.printLine();
+            } catch (NullPointerException ne) {
+                ui.flagWrongCommand();
             }
         }
-        // Create Scanner object to read for user input
-        Scanner sc = new Scanner(System.in);
-
-        // Only read and write to the file whenever there is a modification to the task
-
         ui.sayBye();
     }
     public static void main(String[] args) {

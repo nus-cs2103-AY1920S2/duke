@@ -4,6 +4,5 @@ public class ByeCommand extends Command {
     }
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         super.setExit();
-        ui.sayBye();
     }
 }

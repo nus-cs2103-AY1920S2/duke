@@ -4,7 +4,6 @@ class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
     public String getDescription() {
@@ -22,7 +21,7 @@ class Task {
     }
 
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
