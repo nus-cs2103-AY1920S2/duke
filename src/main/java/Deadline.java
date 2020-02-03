@@ -15,9 +15,7 @@ public class Deadline extends Task {
 
         try {
             String[] deadline = task.substring(task.indexOf("/")).split(" ");
-            for(int i = 0; i < deadline.length; i++) {
-                System.out.println(deadline[i]);
-            }
+
             if(deadline.length != 3) {
                 throw new DukeException("dateTime");
             }

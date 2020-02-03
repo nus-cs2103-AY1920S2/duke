@@ -14,9 +14,6 @@ public class Event extends Task {
 
         try {
             String[] event = task.substring(task.indexOf("/")).split(" ");
-            for(int i = 0; i < event.length; i++) {
-                System.out.println(event[i]);
-            }
             if(event.length != 3) {
                 throw new DukeException("dateTime");
             }
@@ -36,7 +33,19 @@ public class Event extends Task {
     @Override
     public String toString() {
 
-        return super.toString();
+        String checkmark = "N";
+
+        if (this.isDone == true) {
+            checkmark = "Y";
+        }
+
+        String output = "[" + this.type + "]" + "[" + checkmark + "] ";
+
+        String task_Name2 = task.substring(task.indexOf(" "), task.indexOf("/") - 1);
+        output += task_Name2 + " (by: " + eventDate.format(
+                DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + eventTime.format(
+                DateTimeFormatter.ofPattern("h:mm a")) + ")";
+        return output;
     }
 }
 
