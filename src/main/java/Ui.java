@@ -20,7 +20,7 @@ public class Ui {
      * Prints the introduction exit message when duke exit
      */
     public void printEnding() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope not to see you again soon!");
     }
 
     /**
