@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import app.util.Date;
 import app.core.StorageManager;
 
-public class TaskManager{
+public class TaskManager {
     private List<Task> taskList;
     private StorageManager storageManager;
 
@@ -32,10 +32,9 @@ public class TaskManager{
     private String add(Task task) {
         this.taskList.add(task);
         this.storageManager.save(this.taskList);
-        return String.format(
-            "Got it. I've added this task:\n" +
-            "  %s\n" +
-            "Now you have %d tasks in the list.\n", task, this.taskList.size()
+        return String.format("Got it. I've added this task:\n"
+            + "  %s\n"
+            + "Now you have %d tasks in the list.\n", task, this.taskList.size()
         );
     }
 
@@ -57,10 +56,9 @@ public class TaskManager{
         Task task = this.taskList.remove(index - 1);
         this.storageManager.save(this.taskList);
 
-        return String.format(
-            "Noted. I've removed this task: \n" +
-            "  %s\n" +
-            "Now you have %d tasks in the list.\n", task, this.taskList.size()
+        return String.format("Noted. I've removed this task: \n"
+            + "  %s\n"
+            + "Now you have %d tasks in the list.\n", task, this.taskList.size()
         );
     }
 

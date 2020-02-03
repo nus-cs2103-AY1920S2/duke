@@ -23,7 +23,9 @@ final class DoneCommand extends Command {
             String output = taskManager.setTaskDone(this.taskIndex);
             userInterface.render(output);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException("Invalid task index. Please refer to the 'list' command for available indices.");
+            throw new InvalidTaskIndexException(
+                "Invalid task index. Please refer to the 'list' command for available indices."
+            );
         }
     }
 }

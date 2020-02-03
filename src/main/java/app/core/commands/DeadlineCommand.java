@@ -12,7 +12,9 @@ final class DeadlineCommand extends Command {
 
     DeadlineCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
         String[] splitArgs = args.split("/by");
-        if (splitArgs.length != 2) throw new WrongUsageException("Usage: deadline <description> /by <deadline>");
+        if (splitArgs.length != 2) {
+            throw new WrongUsageException("Usage: deadline <description> /by <deadline>");
+        }
 
         this.description = splitArgs[0].trim();
         this.deadline = Date.fromFormat(splitArgs[1].trim(), Date.DEFAULT_INPUT_FORMAT);
