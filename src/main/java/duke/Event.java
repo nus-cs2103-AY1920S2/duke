@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  * One of the tasks that could be created by user.
  */
 public class Event extends Task {
-
     protected LocalDate at;
 
     /**

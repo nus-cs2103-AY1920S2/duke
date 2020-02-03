@@ -62,10 +62,16 @@ public class TaskList {
         return tasks.remove(taskNumber);
     }
 
-    public ArrayList<Task> find(String text) {
+    /**
+     * Retrieves a list of tasks that matches with the keyword entered by user.
+     *
+     * @param keyword The keyword for the tasks to be matched against.
+     * @return Returns the list of tasks with found matches.
+     */
+    public ArrayList<Task> find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : tasks) {
-            if (t.description.contains(text)) {
+            if (t.getDescription().contains(keyword)) {
                 result.add(t);
             }
         }
