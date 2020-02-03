@@ -22,7 +22,7 @@ public class TaskStorage {
         Scanner scanner = new Scanner(this.file);
         while (scanner.hasNext()) {
             try {
-                taskList.add(TaskDispatch.dispatchTask(scanner.nextLine().split(" ")));
+                taskList.add(TaskDispatch.dispatchTaskFromStorage(scanner.nextLine().split(" ")));
             } catch (IllegalCommandException e) {
                 // Assumption is that data is checked to be valid before adding to the file
                 // Hence, when reading from it, the data should result in valid Task objects
@@ -40,60 +40,81 @@ public class TaskStorage {
         this.taskList.add(newTask);
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            fw.write(nextInput);
+            if (this.taskList.size()!=1) {
+                fw.write(System.lineSeparator());
+            }
+            fw.write(newTask.toString());
             fw.close();
         } catch (IOException e) {
             // default behaviour is that nothing happens
         }
     }
 
-    // nb: current code does not support task done. remember to fix it.
-    /*
-    public void modifyTaskList(Task oldTask, Task newTask) {
-        for (int i = 0; i< taskList.size(); i++) {
-            if (taskList.get(i).equals(oldTask)) {
-                taskList.set(i, newTask);
-                break;
-            }
-        }
-    }
-    */
-
-    public void deleteFromTaskList(int taskNumber) {
-        this.taskList.remove(taskNumber - 1);
-
-        // Add all lines except line to be removed in an auxillary array
-        ArrayList<String> temp = new ArrayList<String>();
-        int tempCounter = 1;
+    public void markTaskAsDone(int taskNumber) {
+        this.taskList.get(taskNumber - 1).markAsDone();
+        ArrayList<String> tempArray = new ArrayList<>();
+        int tempCounter = 0;
         Scanner scanner = null;
         try {
             scanner = new Scanner(this.file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while (scanner.hasNext()) {
+
+        while (scanner.hasNextLine()) {
+            tempCounter++;
+            if (tempCounter == taskNumber) {
+                String lineToModify = scanner.nextLine();
+                tempArray.add(lineToModify.replace(Task.CROSS, Task.TICK));
+                continue;
+            }
+            tempArray.add(scanner.nextLine());
+        }
+
+        // add the contents of auxillary array to the file
+        replaceTasksInFile(tempArray);
+
+    }
+
+    public void deleteFromTaskList(int taskNumber) {
+        this.taskList.remove(taskNumber - 1);
+        // Add all lines except line to be removed in an auxillary array
+        ArrayList<String> tempArray = new ArrayList<>();
+        int tempCounter = 0;
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(this.file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (scanner.hasNextLine()) {
+            tempCounter++;
             if (tempCounter == taskNumber) {
                 scanner.nextLine();
                 continue;
             }
-            temp.add(scanner.nextLine());
-            tempCounter++;
+            tempArray.add(scanner.nextLine());
         }
 
         // add the contents of auxillary array to the file
+        replaceTasksInFile(tempArray);
+    }
+
+    private void replaceTasksInFile(ArrayList<String> tasksArray) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            fw.write(temp.get(0));
+            fw.write(tasksArray.get(0));
             fw.close();
 
             fw = new FileWriter(filePath, true);
-            for (int i = 1; i < temp.size(); i++) {
-                fw.write(temp.get(i));
+            for (int i = 1; i < tasksArray.size(); i++) {
+                fw.write(System.lineSeparator());
+                fw.write(tasksArray.get(i));
             }
             fw.close();
         } catch (IOException e) {
-            // default behaviour is that nothing happens
+            // default behavior is that nothing happens
         }
-
     }
 }

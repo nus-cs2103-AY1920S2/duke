@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     // attributes
@@ -42,8 +41,6 @@ public class Duke {
             }
             // Handle List command if any
             if (nextInput.equals("list")) {
-                // fflush
-                //System.out.println("");
                 handleCommandList();
                 continue;
             }
@@ -67,7 +64,7 @@ public class Duke {
             // Handle Add Command
             Task t = null;
             try {
-                t = TaskDispatch.dispatchTask(commandArgs);
+                t = TaskDispatch.dispatchTaskFromInput(commandArgs);
             } catch (IllegalArgumentException e1){
                 System.out.println("    " + e1.getMessage());
                 continue;
@@ -91,8 +88,8 @@ public class Duke {
     private void handleCommandList() {
         System.out.println("    Here are the tasks in your list:");
         int counter = 1;
-        for (Task s : this.taskStorage.getTaskList()) {
-            System.out.println("    " + counter + ". " + s);
+        for (Task task : this.taskStorage.getTaskList()) {
+            System.out.println("    " + counter + ". " + task);
             counter++;
         }
     }
@@ -105,7 +102,7 @@ public class Duke {
     }
 
     private void handleCommandDone(int taskNumber) {
-        this.taskStorage.getTaskList().get(taskNumber - 1).markAsDone();
+        this.taskStorage.markTaskAsDone(taskNumber);
         System.out.println("Nice! I've marked this task as done:\n"
                 + "    " + this.taskStorage.getTaskList().get(taskNumber - 1));
     }

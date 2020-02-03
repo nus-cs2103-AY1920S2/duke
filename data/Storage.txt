@@ -1,1 +1,3 @@
-todo lol
+[T][✘] climb everest
+[E][✓] event project meeting (at: Mon 2-4pm)
+[T][✘] kill billworthson
