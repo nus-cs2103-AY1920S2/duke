@@ -20,6 +20,12 @@ public class Duke {
         ui.printLogo();
         ui.greetDuke();
         Parser.handle(tasks, ui);
+
+        try {
+            storage.save(tasks);
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
     }
 
     public static void main(String[] args) {

@@ -23,12 +23,12 @@ public class Storage {
         return taskString;
     }
 
-    public void save(ArrayList<Task> taskList, String filePath) throws IOException {
+    public void save(TaskList taskList) throws IOException {
         try {
             File file = new File(filePath);
             FileWriter writer = new FileWriter(file);
 
-            for (Task task : taskList) {
+            for (Task task : taskList.tasks) {
                 String data = taskParser(task);
                 System.out.println(data);
                 writer.write(data + "\n");
