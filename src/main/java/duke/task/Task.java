@@ -26,12 +26,6 @@ public interface Task {
     public String getTaskType();
 
     /**
-     * get string to represent task state
-     * @return task state string
-     */
-    public String getDoneString();
-
-    /**
      * get task time
      * @return task time
      */

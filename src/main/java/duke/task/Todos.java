@@ -3,9 +3,9 @@ package duke.task;
 import java.util.Date;
 
 /**
- * Todo object implementing task interface
+ * Todos object extending from ExecutableTask
  */
-public class Todos implements Task {
+public class Todos extends ExecutableTask {
 
     private boolean done = false;
     private String name;
@@ -43,19 +43,6 @@ public class Todos implements Task {
     @Override
     public String getTaskType() {
         return "T";
-    }
-
-    /**
-     * get done string
-     * @return string to represent task state
-     */
-    @Override
-    public String getDoneString() {
-        if (isDone()) {
-            return "[✓]";
-        } else {
-            return "[✗]";
-        }
     }
 
     /**

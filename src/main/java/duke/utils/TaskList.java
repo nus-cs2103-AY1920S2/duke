@@ -66,35 +66,45 @@ public class TaskList {
      * @throws ParseException
      */
     public boolean addToList(String item, String type) throws ParseException {
+
         Task newTask;
-        if (type.equals("todo")) {
-            newTask = new Todos(item);
-        } else if (type.equals("deadline")) {
-            String[] tokens = item.split("/", 2);
-            if (tokens.length < 2) {
-                return false;
-            }
-            if (!tokens[1].substring(0, 2).equals("by")) {
-                return false;
-            }
-            String time = tokens[1].substring(2).trim();
-            if (!Parser.checkDateFormat(time)) {
-                return false;
-            }
-            newTask = new Deadlines(tokens[0].trim(), Parser.stringToDate(time));
-        } else {
-            String[] tokens = item.split("/", 2);
-            if (tokens.length < 2) {
-                return false;
-            }
-            if (!tokens[1].substring(0, 2).equals("at")) {
-                return false;
-            }
-            String time = tokens[1].substring(2).trim();
-            if (!Parser.checkDateFormat(time)) {
-                return false;
-            }
-            newTask = new Events(tokens[0].trim(), Parser.stringToDate(time));
+        String[] tokens;
+        String time;
+
+        switch (type) {
+            case "todo":
+                newTask = new Todos(item);
+                break;
+            case "deadline":
+                tokens = item.split("/", 2);
+                if (tokens.length < 2) {
+                    return false;
+                }
+                if (!tokens[1].substring(0, 2).equals("by")) {
+                    return false;
+                }
+                time = tokens[1].substring(2).trim();
+                if (!Parser.checkDateFormat(time)) {
+                    return false;
+                }
+                newTask = new Deadlines(tokens[0].trim(), Parser.stringToDate(time));
+                break;
+            case "event":
+                tokens = item.split("/", 2);
+                if (tokens.length < 2) {
+                    return false;
+                }
+                if (!tokens[1].substring(0, 2).equals("at")) {
+                    return false;
+                }
+                time = tokens[1].substring(2).trim();
+                if (!Parser.checkDateFormat(time)) {
+                    return false;
+                }
+                newTask = new Events(tokens[0].trim(), Parser.stringToDate(time));
+                break;
+            default:
+                newTask = null;
         }
         tasks.add(newTask);
         return true;
