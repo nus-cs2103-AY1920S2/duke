@@ -1,5 +1,6 @@
 package dukeproj;
 
+import dukeproj.enums.SayType;
 import dukeproj.gui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -82,6 +83,8 @@ public class GuiApp extends Application {
         dialogContainer.heightProperty().addListener((observable -> {
             scrollPane.setVvalue(1.0);
         }));
+
+        dukeSay(duke.getUi().say(SayType.INTRO));
     }
 
     public void dukeSay(String str) {
@@ -115,6 +118,7 @@ public class GuiApp extends Application {
 
     private void closeApp() {
         try {
+            duke.getUi().say(SayType.EXIT);
             stop();
         } catch (Exception e) {
             dukeSay("Oh dear! I cant seem to close, please alt+F4");
@@ -122,7 +126,7 @@ public class GuiApp extends Application {
     }
 
     public GuiApp() {
-        duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt");
+        duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt", true);
     }
 
 }
