@@ -6,10 +6,10 @@ import java.util.ArrayList;
  */
 public class Parser {
     /**
-     * Converts String of tasks read from storage to TaskList
+     * Converts String of tasks read from storage to TaskList.
      * 
-     * @param s String object of tasks read from memory on disk
-     * @return Returns a TaskList of tasks corresponding to the String object s
+     * @param s String object of tasks read from memory on disk.
+     * @return TaskList of tasks corresponding to the String object s.
      */
     public static TaskList storageToTaskList(String s) {
         TaskList tl = new TaskList(new ArrayList<Task>());

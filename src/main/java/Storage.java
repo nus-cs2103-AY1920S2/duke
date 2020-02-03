@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Handles the writing and reading to file on disk, also handles deletion of
@@ -12,10 +11,10 @@ import java.util.ArrayList;
  */
 public class Storage {
     /**
-     * Writes task to the file myfile.txt
+     * Writes task to the file myfile.txt.
      * 
-     * @param s String object to be written to file
-     * @throws IOException Handles errors if file is not found
+     * @param s String object to be written to file.
+     * @throws IOException Handles errors if file is not found.
      */
     public void writeToFile(String s) throws IOException {
         File file = new File("./myfile.txt");
@@ -30,11 +29,10 @@ public class Storage {
     }
 
     /**
-     * Reads from storage and returns tasks as a String
+     * Reads from storage and returns tasks as a String.
      * 
-     * @return Returns a String object after reading the text file of saved tasks
-     *         from disk.
-     * @throws IOException Handles errors if file is not found
+     * @return String object after reading the text file of saved tasks from disk.
+     * @throws IOException Handles errors if file is not found.
      */
     public String readFromFile() throws IOException {
         File file = new File("./myfile.txt");
@@ -54,11 +52,11 @@ public class Storage {
     }
 
     /**
-     * Removes a line in storage file when user deletes a task
+     * Removes a line in storage file when user deletes a task.
      * 
-     * @param tasks String of tasks
-     * @param index Index of task to be removed
-     * @throws IOException Handles errors if file is not found
+     * @param tasks String of tasks.
+     * @param index Index of task to be removed.
+     * @throws IOException Handles errors if file is not found.
      */
     public void removeLine(String tasks, int index) throws IOException {
         File file = new File("./myfile.txt");
@@ -78,11 +76,11 @@ public class Storage {
     }
 
     /**
-     * Changes task from undone to done when user marks a tasks as done
+     * Changes task from undone to done when user marks a tasks as done.
      * 
-     * @param tasks String of tasks
-     * @param index Index of task to be marked as done
-     * @throws IOException Handles errors if file is not found
+     * @param tasks String of tasks.
+     * @param index Index of task to be marked as done.
+     * @throws IOException Handles errors if file is not found.
      */
     public void changeToDone(String tasks, int index) throws IOException {
         File file = new File("./myfile.txt");
@@ -101,6 +99,13 @@ public class Storage {
 
     }
 
+    /**
+     * Finds list of tasks that contain the keyword.
+     * 
+     * @param tasks   String of tasks.
+     * @param keyword Required keyword to find.
+     * @return String object of tasks that contain keyword.
+     */
     public String findTask(String tasks, String keyword) {
         String found = "";
         String[] lines = tasks.split("\\r?\\n");

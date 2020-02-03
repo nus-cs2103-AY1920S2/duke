@@ -10,11 +10,11 @@ public class Duke {
     /**
      * Main logic of Duke, handles all possible commands and certain input errors.
      * 
-     * @param sc       Scanner object to scan for user input
-     * @param taskList TaskList of Task objects
-     * @param tasks    String object of tasks, read from disk memory
-     * @throws DukeException Handles invalid input
-     * @throws IOException   Handles file reading and writing errors
+     * @param sc       Scanner object to scan for user input.
+     * @param taskList TaskList of Task objects.
+     * @param tasks    String object of tasks, read from disk memory.
+     * @throws DukeException Handles invalid input.
+     * @throws IOException   Handles file reading and writing errors.
      */
     public static void run(Scanner sc, TaskList taskList, String tasks) throws DukeException, IOException {
 
@@ -84,7 +84,7 @@ public class Duke {
             ui.print("Got it. I've added this task: \n" + t + "\nNow you have " + numOfTask + " task(s) in the list.");
 
             storage.writeToFile("E | 0 | " + desc + " | " + time);
-        
+
         } else if (command.equals("find")) {
             String keyword = split[1];
             tasks = storage.readFromFile();
@@ -100,8 +100,8 @@ public class Duke {
     /**
      * Main driver of Duke program.
      * 
-     * @param args Arguments for main method
-     * @throws IOException Handles file reading and writing errors
+     * @param args Arguments for main method.
+     * @throws IOException Handles file reading and writing errors.
      */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
