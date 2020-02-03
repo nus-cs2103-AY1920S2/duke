@@ -18,14 +18,21 @@ public class Ui {
     /**
      * Displays welcome message at the start of the program.
      */
-    public void welcome() {
-        String logo = " ____        _        \n"
+    public String welcome() {
+        /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Greetings from\n" + logo);
-        System.out.println("Is that anything that I can do for you?");
+        System.out.println("Is that anything that I can do for you?");*/
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String greetings = "Greetings from\n" + logo + "Is there anything that I can do for you?";
+        return greetings;
     }
 
     /**

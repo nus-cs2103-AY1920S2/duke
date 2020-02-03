@@ -16,32 +16,31 @@ import javafx.scene.image.ImageView;
 /**
  * Duke is the main class of the Duke chatbot.
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
-    private ScrollPane scrollPane;
+    /*private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));*/
 
     public Duke() {
 
     }
 
-    @Override
-    public void start(Stage stage) {
-        /*Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+    public String testing() {
+        return "test";
+    }
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage. */
+    /*@Override
+    public void start(Stage stage) {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -91,15 +90,6 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
-        /*sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });*/
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -111,7 +101,7 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
+    }*/
 
     /**
      * Iteration 1:
@@ -142,7 +132,7 @@ public class Duke extends Application {
         userInput.clear();
     }*/
 
-    private void handleUserInput() {
+    /*private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -150,14 +140,17 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-    }
+    }*/
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws IOException, DukeException {
+        return "Duke: " + input;
+        //new Duke("data/tasks.txt").run();
+        //return new Duke("data/tasks.txt").run();
+
     }
 
     public Duke(String filePath) {
@@ -173,10 +166,11 @@ public class Duke extends Application {
         }
     }
 
-    public static void main(String[] args) throws IOException, DukeException {
+    /*public static void main(String[] args) throws IOException, DukeException {
         new Duke("data/tasks.txt").run();
-    }
+    }*/
 
+    //public String run() throws IOException, DukeException {
     public void run() throws IOException, DukeException {
         ui.welcome();
         String fullCommand = ui.readCommand();
@@ -211,6 +205,7 @@ public class Duke extends Application {
                         if (num != -1) {
                             tasks.markDone(num);
                             ui.printMarkDone(tasks, num);
+
                         }
                         break;
                     case DELETE:
@@ -280,6 +275,12 @@ public class Duke extends Application {
 
         storage.writeData(tasks);
         ui.goodbye();
+        //getResponse("byeee");
+        //return "baibai";
+    }
+
+    public Ui getUi() {
+        return ui;
     }
 }
 
