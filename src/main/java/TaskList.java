@@ -73,9 +73,9 @@ public class TaskList {
         int size = tasks.size();
         int cnt = 0;
         System.out.println("Here are the matching tasks in your list:");
-        for(int i = 0; i < size; ++i) {
+        for (int i = 0; i < size; ++i) {
             Task temp = tasks.get(i);
-            if(temp.description.contains(str)) {
+            if (temp.description.contains(str)) {
                 System.out.println("\t" + ++cnt + ". " + temp);
             }
         }
