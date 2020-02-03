@@ -33,6 +33,7 @@ public class Event extends Task {
     public String getDate() {
         return this.date.toString();
     }
+
     public String formatDate() {
         DateTimeFormatter myformat = DateTimeFormatter.ofPattern("d MMM uuuu");
         String converted = this.date.format(myformat);
@@ -43,8 +44,8 @@ public class Event extends Task {
     public String toString() {
         String myword = "";
         myword = myword + "[" + this.getTaskType() + "]"
-                + " [" + super.getStatusIcon() + "] " + super.description +
-                " (" + this.formatDate() + ")";
+                + " [" + super.getStatusIcon() + "] " + super.description
+                + " (" + this.formatDate() + ")";
 
         return myword;
     }

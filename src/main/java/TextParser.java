@@ -9,7 +9,7 @@ public class TextParser {
      * @return String[]
      */
     public static String[] myFirstParser(String line) {
-        String[] arrSplit = line.split(" " , 2);
+        String[] arrSplit = line.split(" ", 2);
         return arrSplit;
     }
 
