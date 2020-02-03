@@ -22,6 +22,10 @@ public class Ui {
         return (this.parseInput())[1];
     }
 
+    public String getNumber() {
+        return (this.parseInput())[1];
+    }
+
     public void showList() {
         System.out.println("Here are the tasks in your list: ");
     }
@@ -32,7 +36,7 @@ public class Ui {
 
     public void doneTask(Task task) {
         System.out.println("-------------------------------------------------------------\nNice I have marked this task as done\n" +
-        task.getStatusIcon() + " " + task.getDescription() + "\n-------------------------------------------------------------");
+        " " + task.getDescription() + "\n-------------------------------------------------------------");
     }
 
     public void addedTask(Task todo) {

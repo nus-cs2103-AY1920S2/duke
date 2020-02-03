@@ -2,6 +2,9 @@ package main.java;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,6 +36,24 @@ public class Storage{
         }
     }
 
+    public void increaseSize(String filepath) throws IOException {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filepath)); 
+            FileWriter writer = new FileWriter(filepath);
+            
+    
+            for (int i = 0; i < 1; i++) {
+                int prev = reader.read();
+                int now = prev + 1;
+                writer.write(now);
+            } 
+            reader.close();
+            writer.close();
+        } finally {
+        
+        }
+    }
+
     /**
      * retrieve task from storage
      * @param lineContent
@@ -45,6 +66,13 @@ public class Storage{
         return Files.lines(file.toPath())
                     .filter(line -> line.contains(lineContent))
                     .reduce("", (x,y) -> x+y+'\n');
+    }
+
+    public String getTaskFromNumber(String num, String filepath) throws IOException {
+        File file = new File(filepath);
+        return Files.lines(file.toPath())
+            .filter(line -> !line.substring(0,1).equals(num))
+            .reduce("", (x,y) -> x+y+'\n');
     }
 
     /**
@@ -73,7 +101,7 @@ public class Storage{
      * @throws IOException
      */
     public void writeToFile(String filepath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filepath, true);
+        FileWriter fw = new FileWriter(filepath);
         fw.write(textToAdd);
         fw.close(); 
     }

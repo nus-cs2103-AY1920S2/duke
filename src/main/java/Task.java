@@ -9,7 +9,11 @@ public class Task {
      * @param description
      */
     public Task(String description) {
-        this.description = description;
+        if(description.contains("["+"\u2713"+"]") || description.contains("["+"\u2718"+"]"))
+         this.description = description;
+        else 
+        this.description = "["+"\u2718"+"]" + description;
+        
         this.isDone = false;
     }
 
@@ -25,15 +29,16 @@ public class Task {
      * getter for status icon
      * @return String status icon
      */
-    public String getStatusIcon() {
-        return (isDone ? "["+"\u2713"+"]" : "["+"\u2718"+"]"); //return tick or X symbols
-    }
+    //public String getStatusIcon() {
+      //  return (isDone ? "["+"\u2713"+"]" : "["+"\u2718"+"]"); //return tick or X symbols
+    //}
 
     /**
      * Marks this task as done
      */
     public void markAsDone() {
         this.isDone = true;
+        this.description = this.description.replace("["+"\u2718"+"]", "["+"\u2713"+"]");
         Ui ui = new Ui(this.getDescription());
         ui.doneTask(this);
     }
@@ -49,7 +54,7 @@ public class Task {
 
     
     public String toString() {
-        return this.getStatusIcon() + " " + description;
+        return description;
     }
 
     //...
