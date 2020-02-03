@@ -8,7 +8,7 @@ import duke.task.TaskList;
 import duke.exception.InvalidCommandException;
 
 /**
- * Main Class for Duke
+ * Main class for the Duke chatbot application.
  */
 public class Duke {
     private TaskList tasks;
@@ -17,6 +17,10 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Constructs a fresh Duke instance with a supplied file storing the task list.
+     * @param fileName Path to the file storing the task list.
+     */
     public Duke(String fileName) {
         this.fileName = fileName;
         storage = new Storage(fileName);

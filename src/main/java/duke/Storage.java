@@ -12,13 +12,24 @@ import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
 
+/**
+ * Represents a manager to handle all storage related functionality.
+ */
 public class Storage {
     private String fileName;
 
+    /**
+     * Constructs a fresh Storage instance, with a supplied path for the file storing the task list.
+     * @param fileName
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Loads tasks from the input file, and returns them in an ArrayList.
+     * @return An ArrayList of all stored tasks.
+     */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(fileName);
@@ -51,6 +62,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes data to the file.
+     * @param fileName The file containing all tasks.
+     * @param data The data to be written.
+     */
     public void writeToFile(String fileName, String data) {
         try {
             FileWriter fw = new FileWriter(fileName, true);
@@ -62,6 +78,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Modifies the task in the task list file to mark it as done.
+     * @param idx The index of the task in the task list.
+     */
     public void doTask(int idx) {
         File originalFile = new File(this.fileName);
         File tempFile = new File("src/main/data/temp.txt");
@@ -94,6 +114,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes the task from the task list file.
+     * @param idx The index of the task in the task list.
+     */
     public void deleteTask(int idx) {
         File originalFile = new File(this.fileName);
         File tempFile = new File("src/main/data/temp.txt");
