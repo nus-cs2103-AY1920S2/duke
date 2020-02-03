@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import app.core.tasks.Task;
+import app.exceptions.StorageFileException;
 
 /**
  * This class manages all storage related tasks in Duke
@@ -26,7 +27,7 @@ public final class StorageManager {
      * @param tasks The list of tasks
      * @return True if the process is successful, False otherwise
      */
-    public boolean save(List<Task> tasks) {
+    public void save(List<Task> tasks) throws StorageFileException {
         try {
             File outputDir = new File(STORAGE_DIR);
             if (!outputDir.exists()) {
@@ -39,9 +40,11 @@ public final class StorageManager {
                 writer.write("\n");
             }
             writer.close();
-            return true;
         } catch (IOException e) {
-            return false;
+            throw new StorageFileException(String.format("An error was found while writing to the storage file!\n"
+                + "The file may be corrupted. "
+                + "Please check the file at %s"
+            , STORAGE_FILEPATH));
         }
     }
 

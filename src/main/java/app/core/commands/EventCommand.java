@@ -3,6 +3,7 @@ package app.core.commands;
 import app.core.UserInterface;
 import app.core.tasks.TaskManager;
 import app.util.Date;
+import app.exceptions.StorageFileException;
 import app.exceptions.WrongDateTimeFormatException;
 import app.exceptions.WrongUsageException;
 
@@ -21,7 +22,7 @@ final class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) {
+    public void execute(TaskManager taskManager, UserInterface userInterface) throws StorageFileException {
         String output = taskManager.addEventTask(this.description, this.when);
         userInterface.render(output);
     }

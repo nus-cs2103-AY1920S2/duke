@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import app.util.Date;
 import app.core.StorageManager;
+import app.exceptions.StorageFileException;
 
 /**
  * This class stores and handles all the data related to 
@@ -28,7 +29,7 @@ public class TaskManager{
      * @param description The description of the task
      * @return The output to be presented in the UI
      */
-    public String addTodoTask(String description) {
+    public String addTodoTask(String description) throws StorageFileException {
         return this.add(new Task(description));
     }
 
@@ -39,7 +40,7 @@ public class TaskManager{
      * of the task
      * @return The output to be presented in the UI
      */
-    public String addDeadlineTask(String description, Date deadline) {
+    public String addDeadlineTask(String description, Date deadline) throws StorageFileException {
         return this.add(new DeadlineTask(description, deadline));
     }
 
@@ -50,11 +51,11 @@ public class TaskManager{
      * the event
      * @return The output to be presented in the UI
      */
-    public String addEventTask(String description, Date when) {
+    public String addEventTask(String description, Date when) throws StorageFileException {
         return this.add(new EventTask(description, when));
     }
 
-    private String add(Task task) {
+    private String add(Task task) throws StorageFileException {
         this.taskList.add(task);
         this.storageManager.save(this.taskList);
         return String.format("Got it. I've added this task:\n"
@@ -70,7 +71,7 @@ public class TaskManager{
      * @throws IndexOutOfBoundsException If the index is out of the bounds
      * of the task maanger
      */
-    public String setTaskDone(int index) throws IndexOutOfBoundsException {
+    public String setTaskDone(int index) throws IndexOutOfBoundsException, StorageFileException {
         Task task = this.taskList.get(index - 1);
         task.setDone();
         this.storageManager.save(this.taskList);
@@ -87,7 +88,7 @@ public class TaskManager{
      * @throws IndexOutOfBoundsException If the index is out of the bounds 
      * of the task manager
      */
-    public String deleteTask(int index) throws IndexOutOfBoundsException {
+    public String deleteTask(int index) throws IndexOutOfBoundsException, StorageFileException {
         Task task = this.taskList.remove(index - 1);
         this.storageManager.save(this.taskList);
 

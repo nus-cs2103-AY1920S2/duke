@@ -4,6 +4,7 @@ import app.core.UserInterface;
 import app.core.tasks.TaskManager;
 
 import app.exceptions.InvalidTaskIndexException;
+import app.exceptions.StorageFileException;
 import app.exceptions.WrongUsageException;
 
 final class DeleteCommand extends Command {
@@ -18,7 +19,7 @@ final class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) throws InvalidTaskIndexException {
+    public void execute(TaskManager taskManager, UserInterface userInterface) throws InvalidTaskIndexException, StorageFileException {
         try {
             String output = taskManager.deleteTask(this.taskIndex);
             userInterface.render(output);
