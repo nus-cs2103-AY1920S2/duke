@@ -16,3 +16,6 @@ bin/
 .settings/
 .classpath
 .project
+
+.vscode/
+libraries/
