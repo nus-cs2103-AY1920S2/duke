@@ -25,7 +25,7 @@ import javafx.scene.image.ImageView;
  * to be done. It classifies tasks into deadline, todo and event.
  * It can add, delete, list all the tasks, find task with a keyword and mark them as done.
  */
-public class Duke extends Application {
+public class Duke  {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -69,8 +69,9 @@ public class Duke extends Application {
 
     }
 
-
+    /*
     @Override
+
     public void start(Stage stage) {
         //Step 1. Setting up required components
 
@@ -147,6 +148,8 @@ public class Duke extends Application {
         });
 
     }
+    */
+
 
 
     /**
@@ -163,11 +166,13 @@ public class Duke extends Application {
         return textToAdd;
     }
 
+
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    /*
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -177,12 +182,15 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
+    */
+
+
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    protected String getResponse(String input) {
         return "Duke heard: " + input;
     }
 
