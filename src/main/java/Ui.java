@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import DukeException.DukeException;
+import dukeexception.DukeException;
 
 /**
  * Deals with interactions with the user.
@@ -16,7 +16,7 @@ public class Ui {
         System.out.println("____________________________________________________________\n"
                 + "Here are the tasks in your list:");
         for (int i = 0; i < tasks.getLength(); i++) {
-            System.out.println(i+1 + "." + tasks.getTask(i));
+            System.out.println(i + 1 + "." + tasks.getTask(i));
         }
         System.out.println("____________________________________________________________");
     }

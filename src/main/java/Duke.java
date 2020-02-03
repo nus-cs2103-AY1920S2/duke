@@ -1,5 +1,5 @@
-import DukeException.DukeException;
-import DukeException.DukeUnknownInputException;
+import dukeexception.DukeException;
+import dukeexception.DukeUnknownInputException;
 
 /**
  * Duke class uses Storage to load and unload data from and to files, TaskList to contain and operate on

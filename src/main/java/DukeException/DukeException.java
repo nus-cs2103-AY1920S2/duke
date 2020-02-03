@@ -1,4 +1,4 @@
-package DukeException;
+package dukeexception;
 
 public class DukeException extends RuntimeException {
     protected String message;

@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import DukeException.DukeException;
-import DukeException.DukeIOException;
+import dukeexception.DukeException;
+import dukeexception.DukeIoException;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -27,7 +27,7 @@ public class Storage {
      * Returns an ArrayList of the Task objects constructed.
      *
      * @return ArrayList of the tasks read.
-     * @throws DukeIOException If the file path cannot be read.
+     * @throws DukeIoException If the file path cannot be read.
      * @throws DukeException If there is a task that does not make sense.
      */
     public static ArrayList<Task> load() {
@@ -35,19 +35,19 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                 String line = sc.nextLine();
-                 if (line.equals("")) {
-                     continue;
-                 }
-                 String code = line.substring(1, 2);
-                 boolean isDone = line.substring(4, 5).equals("Y");
-                 String taskArgs = line.substring(7);
-                 Task task = buildTask(code, taskArgs, isDone);
-                 listOfTasks.add(task);
+                String line = sc.nextLine();
+                if (line.equals("")) {
+                    continue;
+                }
+                String code = line.substring(1, 2);
+                boolean isDone = line.substring(4, 5).equals("Y");
+                String taskArgs = line.substring(7);
+                Task task = buildTask(code, taskArgs, isDone);
+                listOfTasks.add(task);
             }
             return listOfTasks;
         } catch (IOException e) {
-            throw new DukeIOException("File does not exist in file path, load from file failed.");
+            throw new DukeIoException("File does not exist in file path, load from file failed.");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Do not understand task(s) in file, load from file failed");
         }
@@ -58,7 +58,7 @@ public class Storage {
      *
      * @param tasks TaskList object containing all the tasks to use to update file.
      * @param numOfTasks Number of tasks in the TaskList currently.
-     * @throws DukeIOException If path cannot be read e.g. due to missing file.
+     * @throws DukeIoException If path cannot be read e.g. due to missing file.
      */
     public static void updateFile(TaskList tasks, int numOfTasks) {
         ArrayList<String> tasksForFile = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Storage {
         try {
             Files.write(file, tasksForFile);
         } catch (IOException e) {
-            throw new DukeIOException("File does not exist in file path, file update failed.");
+            throw new DukeIoException("File does not exist in file path, file update failed.");
         }
     }
 
@@ -79,7 +79,7 @@ public class Storage {
      * @param args String where it's everything after the initial [X][X].
      * @param isDone The second letter in the task to tell if the task has been completed.
      * @return Task constructed.
-     * @throws DukeIOException If the code does not match T, D or E.
+     * @throws DukeIoException If the code does not match T, D or E.
      */
     public static Task buildTask(String code, String args, boolean isDone) {
         if (code.equals("T")) {
@@ -101,7 +101,7 @@ public class Storage {
             Event event = new Event(description, atWhen, isDone);
             return event;
         } else {
-            throw new DukeIOException("Do not understand task(s) in file, load from file failed");
+            throw new DukeIoException("Do not understand task(s) in file, load from file failed");
         }
     }
 }
