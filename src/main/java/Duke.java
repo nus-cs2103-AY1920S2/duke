@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.time.DateTimeException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 /**
  * Represents a Personal Assistant Chatbot named EXE that
  * helps a person to keep track of various things.
@@ -8,8 +12,7 @@ import java.time.DateTimeException;
  * @author Kenny Ho
  * @since 2020-01-20
  */
-public class Duke {
-
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -33,6 +36,10 @@ public class Duke {
         } catch (IOException io) {
             ui.showStorageError();
         }
+    }
+
+    public Duke() {
+        this("data" + System.getProperty("file.separator") + "duke.txt");
     }
 
     /**
@@ -65,5 +72,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data" + System.getProperty("file.separator") + "duke.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
