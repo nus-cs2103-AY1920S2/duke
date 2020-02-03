@@ -1,3 +1,10 @@
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,6 +17,25 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     /**
      * The constructor for the Duke class.
