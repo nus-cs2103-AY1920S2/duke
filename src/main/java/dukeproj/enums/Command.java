@@ -1,4 +1,4 @@
-package duke.enums;
+package dukeproj.enums;
 
 /**
  * Enumerates all the possible commands that can be read by DukeProject.

@@ -1,7 +1,7 @@
-package duke;
+package dukeproj;
 
-import duke.data.Calender;
-import duke.tasks.Task;
+import dukeproj.data.Calender;
+import dukeproj.tasks.Task;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

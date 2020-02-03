@@ -1,13 +1,14 @@
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
-import duke.data.Calender;
-import duke.data.TaskList;
-import duke.enums.Command;
-import duke.exception.BadDateException;
-import duke.exception.BadDescriptionException;
-import duke.exception.DukeDescriptionException;
-import duke.exception.InvalidCommandException;
+package dukeproj;
+
+import dukeproj.data.Calender;
+import dukeproj.data.TaskList;
+import dukeproj.enums.Command;
+import dukeproj.exception.BadDateException;
+import dukeproj.exception.BadDescriptionException;
+import dukeproj.exception.DukeDescriptionException;
+import dukeproj.exception.InvalidCommandException;
+
+import javafx.application.Application;
 
 import java.util.Scanner;
 import java.io.File;
@@ -16,12 +17,6 @@ import java.io.File;
  * Represents the main working class of DukeProject.
  */
 public class Duke {
-    /** Primary data structure to store the tasks. */
-    private TaskList taskList;
-    /** Storage to read/write task list from/into files. */
-    private Storage storage;
-    /** Data structure to store tasks aligned by dates.*/
-    private Calender calender;
     /** Object that handles user interface and communicating with user. */
     private Ui ui;
     /** Primary I/O object used. */
@@ -43,7 +38,7 @@ public class Duke {
             }
             else {
                 try {
-                    ui.lineBreak();
+                    ui.printLineBreak();
                     Command command = Parser.commandParser(next);
                     parser.readCommand(command);
                 } catch (InvalidCommandException e) {
@@ -54,10 +49,10 @@ public class Duke {
                 } catch (BadDescriptionException e) {
                     System.out.println("OOPS! " + e.getMessage());
                 } catch (BadDateException e) {
-                    System.out.println("Sorry I don't recognise this date format!\n" +
-                            "Please make sure the format is: dd mm yy");
+                    System.out.println("Sorry I don't recognise this date format!\n"
+                            + "Please make sure the format is: dd mm yy");
                 } finally {
-                    ui.lineBreak();
+                    ui.printLineBreak();
                 }
             }
         }
@@ -70,15 +65,16 @@ public class Duke {
      */
     public Duke(String filepath) {
         ui = new Ui();
-        calender = new Calender();
-        storage = new Storage(filepath);
-        taskList = new TaskList(storage.printFileIntoList(calender));
+        Calender calender = new Calender();
+        Storage storage = new Storage(filepath);
+        TaskList taskList = new TaskList(storage.printFileIntoList(calender));
         sc = new Scanner(System.in);
         parser = new Parser(taskList, calender, storage, sc);
     }
 
     public static void main(String[] args) {
-        new Duke("." + File.separator + "data" +
-                File.separator + "Task.txt").run();
+        Application.launch(Ui.class, args);
+        //new Duke("." + File.separator + "data" +
+                //File.separator + "Task.txt").run();
     }
 }

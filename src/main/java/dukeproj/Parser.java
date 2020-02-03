@@ -1,16 +1,16 @@
-package duke;
+package dukeproj;
 
-import duke.data.Calender;
-import duke.data.TaskList;
-import duke.enums.Command;
-import duke.exception.BadDateException;
-import duke.exception.BadDescriptionException;
-import duke.exception.DukeDescriptionException;
-import duke.exception.InvalidCommandException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import dukeproj.data.Calender;
+import dukeproj.data.TaskList;
+import dukeproj.enums.Command;
+import dukeproj.exception.BadDateException;
+import dukeproj.exception.BadDescriptionException;
+import dukeproj.exception.DukeDescriptionException;
+import dukeproj.exception.InvalidCommandException;
+import dukeproj.tasks.Deadline;
+import dukeproj.tasks.Event;
+import dukeproj.tasks.Task;
+import dukeproj.tasks.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,10 +21,10 @@ import java.util.Scanner;
  * Represents a parser with static methods to interpret Strings into actionable data for DukeProject.
  */
 public class Parser {
-    /** Date formatter when reading (to print from Duke) the date. */
+    /** Date formatter when reading (to print from dukeproj.Duke) the date. */
     public static DateTimeFormatter DATE_READ_FORMATTER =
             DateTimeFormatter.ofPattern("dd MMM uuuu");
-    /** Date formatter when writing (to write into Duke) the date.*/
+    /** Date formatter when writing (to write into dukeproj.Duke) the date.*/
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MM uu");
 

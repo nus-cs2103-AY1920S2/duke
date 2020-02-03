@@ -1,8 +1,8 @@
-package duke;
+package dukeproj;
 
-import duke.enums.Command;
-import duke.exception.BadDateException;
-import duke.exception.InvalidCommandException;
+import dukeproj.enums.Command;
+import dukeproj.exception.BadDateException;
+import dukeproj.exception.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

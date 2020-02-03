@@ -1,11 +1,11 @@
-package duke;
+package dukeproj;
 
-import duke.data.Calender;
-import duke.exception.BadDateException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import dukeproj.data.Calender;
+import dukeproj.exception.BadDateException;
+import dukeproj.tasks.Deadline;
+import dukeproj.tasks.Event;
+import dukeproj.tasks.Task;
+import dukeproj.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
