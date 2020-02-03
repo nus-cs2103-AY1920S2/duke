@@ -12,8 +12,8 @@ import tasks.TaskList;
  */
 
 public class Ui {
-//    private static final String STRING= "    ____________________________________________________________";
-//    private static final String SPACE = "     ";
+    private static final String STRING= "    ____________________________________________________________";
+    private static final String SPACE = "     ";
     private Scanner sc;
     private String response;
 

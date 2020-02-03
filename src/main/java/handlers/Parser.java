@@ -8,6 +8,7 @@ import commands.DoneCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 
+import exceptions.DeleteException;
 import exceptions.DoneException;
 import exceptions.EmptyException;
 import exceptions.UnknownException;
@@ -30,7 +31,7 @@ public class Parser {
         this.ui = new Ui();
     }
 
-    public static Command parse(String command) throws UnknownException, DoneException, EmptyException {
+    public static Command parse(String command) throws UnknownException, DoneException, EmptyException, DeleteException {
         String[] str = command.split(" ");
         if (command.equals("list")) {
             ListCommand listCommand = new ListCommand(command);
@@ -90,7 +91,7 @@ public class Parser {
             }
         } else if (str[0].equals("delete")) {
             if (command.length() <= 6) {
-                throw new EmptyException();
+                throw new DeleteException();
             } else {
                 int num = Integer.parseInt(str[1]);
 

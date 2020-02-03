@@ -1,10 +1,7 @@
 import commands.Command;
 
-import exceptions.DoneException;
-import exceptions.DukeException;
+import exceptions.*;
 
-import exceptions.EmptyException;
-import exceptions.UnknownException;
 import tasks.TaskList;
 
 import handlers.Parser;
@@ -170,6 +167,8 @@ public class Duke extends Application {
         } catch (EmptyException e) {
             ui.showError(e.toString());
         } catch (UnknownException e) {
+            ui.showError(e.toString());
+        } catch (DeleteException e) {
             ui.showError(e.toString());
         }
         return ui.getResponse();
