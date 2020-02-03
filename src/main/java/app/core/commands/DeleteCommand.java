@@ -6,10 +6,10 @@ import app.core.tasks.TaskManager;
 import app.exceptions.InvalidTaskIndexException;
 import app.exceptions.WrongUsageException;
 
-public class DeleteCommand extends Command {
+final class DeleteCommand extends Command {
     private int taskIndex;
 
-    public DeleteCommand(String args) throws WrongUsageException {
+    DeleteCommand(String args) throws WrongUsageException {
         try {
             this.taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException e) {

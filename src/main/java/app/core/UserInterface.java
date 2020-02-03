@@ -2,7 +2,7 @@ package app.core;
 
 import java.util.Scanner;
 
-public class UserInterface {
+public final class UserInterface {
     public static final int MAX_STRING_LENGTH = 60;
 
     private Scanner scanner;

@@ -6,10 +6,10 @@ import app.core.tasks.TaskManager;
 import app.exceptions.InvalidTaskIndexException;
 import app.exceptions.WrongUsageException;
 
-public class DoneCommand extends Command {
+final class DoneCommand extends Command {
     private int taskIndex;
 
-    public DoneCommand(String args) throws WrongUsageException {
+    DoneCommand(String args) throws WrongUsageException {
         try {
             this.taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException e) {

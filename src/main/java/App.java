@@ -1,6 +1,6 @@
 import app.Duke;
 
-public class App {
+final class App {
     public static void main(String[] args) {
         (new Duke()).start();
     }

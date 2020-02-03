@@ -1,6 +1,6 @@
 package app.util;
 
-public class Parser {
+public final class Parser {
     public static StringPair parse(String input) {
         String command = input;
         String args = "";

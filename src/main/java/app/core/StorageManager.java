@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 import app.core.tasks.Task;
 
-public class StorageManager {
+public final class StorageManager {
     public static final String STORAGE_DIR = "./data/";
     public static final String STORAGE_FILENAME = "tasks.txt";
-    public static final String STORAGE_FILEPATH = STORAGE_DIR + STORAGE_FILENAME;
+    private static final String STORAGE_FILEPATH = STORAGE_DIR + STORAGE_FILENAME;
 
     public boolean save(List<Task> tasks) {
         try {

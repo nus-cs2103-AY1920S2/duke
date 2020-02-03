@@ -2,10 +2,10 @@ package app.core.tasks;
 
 import app.util.Date;
 
-public class DeadlineTask extends Task {
+final class DeadlineTask extends Task {
     private Date deadline;
 
-    public DeadlineTask(String description, Date deadline) {
+    DeadlineTask(String description, Date deadline) {
         super(description);
         this.deadline = deadline;
     }

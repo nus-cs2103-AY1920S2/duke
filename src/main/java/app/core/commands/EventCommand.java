@@ -6,11 +6,11 @@ import app.util.Date;
 import app.exceptions.WrongDateTimeFormatException;
 import app.exceptions.WrongUsageException;
 
-public class EventCommand extends Command {
+final class EventCommand extends Command {
     private String description;
     private Date when;
 
-    public EventCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
+    EventCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
         String[] splitArgs = args.split("/at");
         if (splitArgs.length != 2) throw new WrongUsageException("Usage: event <description> /at <when>");
 

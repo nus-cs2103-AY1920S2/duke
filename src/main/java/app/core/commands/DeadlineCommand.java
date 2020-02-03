@@ -6,11 +6,11 @@ import app.util.Date;
 import app.exceptions.WrongDateTimeFormatException;
 import app.exceptions.WrongUsageException;
 
-public class DeadlineCommand extends Command {
+final class DeadlineCommand extends Command {
     private String description;
     private Date deadline;
 
-    public DeadlineCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
+    DeadlineCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
         String[] splitArgs = args.split("/by");
         if (splitArgs.length != 2) throw new WrongUsageException("Usage: deadline <description> /by <deadline>");
 

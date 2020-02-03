@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import app.exceptions.WrongDateTimeFormatException;
 
-public class Date {
+public final class Date {
     private LocalDateTime date;
     private DateTimeFormatter formatter;
 

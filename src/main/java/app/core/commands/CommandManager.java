@@ -6,7 +6,7 @@ import app.util.StringPair;
 import app.exceptions.BaseException;
 import app.exceptions.WrongCommandException;
 
-public class CommandManager {
+public final class CommandManager {
     public Command getCommand(String userInput) throws BaseException {
         StringPair tokens = Parser.parse(userInput);
         String command = tokens.getFirstValue();

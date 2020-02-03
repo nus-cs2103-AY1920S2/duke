@@ -5,10 +5,10 @@ import app.core.tasks.TaskManager;
 
 import app.exceptions.WrongUsageException;
 
-public class TodoCommand extends Command {
+final class TodoCommand extends Command {
     private String description;
 
-    public TodoCommand(String args) throws WrongUsageException {
+    TodoCommand(String args) throws WrongUsageException {
         if (args.equals("")) {
             throw new WrongUsageException("Usage: todo <description>");
         }

@@ -6,7 +6,7 @@ import app.core.commands.Command;
 import app.core.commands.CommandManager;
 import app.core.tasks.TaskManager;
 
-public class Duke {
+public final class Duke {
     public static final String WELCOME_MESSAGE = "Wussup Dawggg! I'm Dukeee\nWhat you want me do?";
     public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
 
