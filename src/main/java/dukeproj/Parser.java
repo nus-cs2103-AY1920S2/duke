@@ -2,7 +2,7 @@ package dukeproj;
 
 import dukeproj.data.Calender;
 import dukeproj.data.TaskList;
-import dukeproj.enums.Command;
+import dukeproj.enums.CommandType;
 import dukeproj.exception.BadDateException;
 import dukeproj.exception.BadDescriptionException;
 import dukeproj.exception.DukeDescriptionException;
@@ -60,25 +60,47 @@ public class Parser {
      * @return command in enum class Command format.
      * @throws InvalidCommandException String entered does not coincide with any command in enum class Command.
      */
-    public static Command commandParser(String str) throws InvalidCommandException {
+    public static CommandType commandParser(String str) throws InvalidCommandException {
         try {
-            return Command.valueOf(str.toUpperCase());
+            return CommandType.valueOf(str.toUpperCase());
         } catch (IllegalArgumentException e){
             throw new InvalidCommandException(str + " is an invalid command");
+        }
+    }
+
+    public String getCommandResponse(CommandType commandType, String description)
+            throws DukeDescriptionException, BadDescriptionException, BadDateException {
+        switch (commandType) {
+        case LIST:
+            break;
+        case DONE:
+            break;
+        case TODO:
+            break;
+        case EVENT:
+            break;
+        case DEADLINE:
+            break;
+        case DELETE:
+            break;
+        case SEARCH:
+            break;
+        case FIND:
+            break;
         }
     }
 
     /**
      * Execute commands to manipulate task list and calender. The method will create/delete task objects as required
      * and store/remove them from all data structures as needed.
-     * @param command Command to be executed.
+     * @param commandType Command to be executed.
      * @throws DukeDescriptionException If command requires a description and it not given.
      * @throws BadDescriptionException If description provided does not match the format required by command.
      * @throws BadDateException If date provided does not match format required by command.
      */
-    public void readCommand(Command command) throws DukeDescriptionException,
+    public void readCommand(CommandType commandType) throws DukeDescriptionException,
             BadDescriptionException, BadDateException {
-        switch (command) {
+        switch (commandType) {
         case LIST:
             System.out.println("Here are all your tasks:");
             taskList.printTask();
