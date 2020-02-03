@@ -1,4 +1,5 @@
 package duke.task;
+
 import duke.storage.CSV;
 import duke.storage.CSVParsable;
 
@@ -14,6 +15,7 @@ public abstract class Task implements CSVParsable {
 
     /**
      * getter for done
+     *
      * @return done
      */
     public boolean isDone() {
@@ -22,6 +24,7 @@ public abstract class Task implements CSVParsable {
 
     /**
      * set done to true
+     *
      * @return true
      */
     public boolean setToDone() {
@@ -30,6 +33,7 @@ public abstract class Task implements CSVParsable {
 
     /**
      * getter for name
+     *
      * @return name
      */
     public String getName() {
@@ -38,6 +42,7 @@ public abstract class Task implements CSVParsable {
 
     /**
      * getter for task type
+     *
      * @return type
      */
     public TaskType getType() {
@@ -58,19 +63,21 @@ public abstract class Task implements CSVParsable {
 
     /**
      * Parse tasks from csv object
+     *
      * @param csv = csv that described the task (parsed from local file)
      * @return previously saved task
      */
     public static Task parseFromCSV(CSV csv) {
         switch (csv.getStr(0)) {
-        case ToDoTask.TYPE_STR:
-            return ToDoTask.parseFromCSV(csv);
-        case DeadlineTask.TYPE_STR:
-            return DeadlineTask.parseFromCSV(csv);
-        case EventTask.TYPE_STR:
-            return EventTask.parseFromCSV(csv);
-        default:
-            return new Task(csv.getStr(csv.size()), TaskType.TODO_TASK) {};
+            case ToDoTask.TYPE_STR:
+                return ToDoTask.parseFromCSV(csv);
+            case DeadlineTask.TYPE_STR:
+                return DeadlineTask.parseFromCSV(csv);
+            case EventTask.TYPE_STR:
+                return EventTask.parseFromCSV(csv);
+            default:
+                return new Task(csv.getStr(csv.size()), TaskType.TODO_TASK) {
+                };
         }
     }
 }

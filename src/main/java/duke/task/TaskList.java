@@ -42,6 +42,7 @@ public class TaskList {
 
     /**
      * search for tasks
+     *
      * @param searchStr = strings to search for among task names
      * @return list of tasks which name matches the search strings
      */

@@ -27,6 +27,7 @@ public class Storage {
 
     /**
      * Load csv objects from csv file
+     *
      * @return list of csv object
      */
     public List<CSV> loadCSVList() {
@@ -48,6 +49,7 @@ public class Storage {
 
     /**
      * Save all csv parsable object into local csv file specified by originFl
+     *
      * @param lst = all objects to save
      */
     public void save(List<? extends CSVParsable> lst) {

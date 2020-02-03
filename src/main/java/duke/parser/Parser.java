@@ -1,4 +1,5 @@
 package duke.parser;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -7,6 +8,7 @@ public class Parser {
 
     /**
      * Parse new Command object based on one command
+     *
      * @param cmdLine = user command
      * @return new Command object
      */

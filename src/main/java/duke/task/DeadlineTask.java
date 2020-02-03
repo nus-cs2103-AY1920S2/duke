@@ -1,4 +1,5 @@
 package duke.task;
+
 import duke.storage.CSV;
 
 import java.time.LocalDate;
@@ -14,9 +15,10 @@ public class DeadlineTask extends Task {
 
     /**
      * Main constructor used when creating this type of task
-     * @param name = task name
+     *
+     * @param name   = task name
      * @param prepos = preposition to describe the time (eg. by , on...)
-     * @param time = string inputted by user that describe the time
+     * @param time   = string inputted by user that describe the time
      */
     public DeadlineTask(String name, String prepos, String time) {
         this(name, prepos, time, false);
@@ -54,6 +56,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Load task from local file
+     *
      * @param csv = csv file parsed from local file
      * @return previously saved task
      */

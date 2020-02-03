@@ -23,10 +23,11 @@ public class Command {
 
     /**
      * Add new user task into task list
-     * @param first = task type specified by user
-     * @param terms = subsequent terms specified by to define the task
-     * @param tasks = task list
-     * @param ui = ui for responding to user after adding the new task
+     *
+     * @param first   = task type specified by user
+     * @param terms   = subsequent terms specified by to define the task
+     * @param tasks   = task list
+     * @param ui      = ui for responding to user after adding the new task
      * @param storage = save to local file after every changes to task list
      * @return task successfully added?
      */
@@ -90,8 +91,9 @@ public class Command {
 
     /**
      * execute the command with the given elements
-     * @param tasks = tasklist
-     * @param ui = ui to respond to user
+     *
+     * @param tasks   = tasklist
+     * @param ui      = ui to respond to user
      * @param storage = to store data to local file
      * @return task successfully executed?
      */

@@ -1,4 +1,5 @@
 package duke.task;
+
 import duke.storage.CSV;
 
 public class ToDoTask extends Task {
@@ -6,9 +7,10 @@ public class ToDoTask extends Task {
 
     /**
      * Main constructor used when creating this type of task
-     * @param name = task name
+     *
+     * @param name   = task name
      * @param prepos = preposition to describe the time (eg. by , on...)
-     * @param time = string inputted by user that describe the time
+     * @param time   = string inputted by user that describe the time
      */
     public ToDoTask(String name) {
         this(name, false);
@@ -29,6 +31,7 @@ public class ToDoTask extends Task {
 
     /**
      * Load task from local file
+     *
      * @param csv = csv file parsed from local file
      * @return previously saved task
      */

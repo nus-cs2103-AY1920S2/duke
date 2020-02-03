@@ -1,5 +1,5 @@
 package duke.storage;
 
 public interface CSVParsable {
-	public CSV toCSV();
+    public CSV toCSV();
 }

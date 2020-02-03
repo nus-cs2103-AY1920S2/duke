@@ -1,4 +1,5 @@
 package duke;
+
 import duke.parser.*;
 import duke.storage.Storage;
 import duke.task.*;
@@ -23,12 +24,13 @@ public class Duke {
 
     /**
      * constructor to specify file path of the last saved data
+     *
      * @param filePath = path of last saved data file
      */
     public Duke(String filePath) {
         ui = new Ui(new Scanner(System.in));
         storage = new Storage(filePath);
-        if(storage.fileExist()) {
+        if (storage.fileExist()) {
             try {
                 tasks = TaskList.fromCSVList(storage.loadCSVList());
             } catch (Exception e) {
@@ -46,14 +48,14 @@ public class Duke {
     public void run() {
         ui.respond(Ui.greetings);
         Command cmd;
-        while(ui.hasNextLine()) {
+        while (ui.hasNextLine()) {
             cmd = Parser.parse(ui.nextLine());
             cmd.execute(this.tasks, this.ui, this.storage);
         }
     }
 
     public static void main(String[] args) {
-        if(args.length > 0) {
+        if (args.length > 0) {
             new Duke(args[0]).run();
         } else {
             new Duke().run();
