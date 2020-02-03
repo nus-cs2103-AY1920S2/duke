@@ -1,4 +1,5 @@
 E | Y | read book | 2020-04-04
-D | N | tutorial 1 | 2020-01-01
+D | Y | tutorial 1 | 2020-01-01
 T | Y | study java
-E | N | sleep | 2020-02-02
+E | N | capt ball | 2020-02-03
+D | Y | assg 1 | 2020-04-05

@@ -38,18 +38,11 @@ public class Duke {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] inputs = input.split(" ", 2);
-            String command = inputs[0];
-            if (command.equalsIgnoreCase("bye")) {
-                sayBye();
+            parser.handleCommands(inputs, taskList);
+            if (!parser.hasNextCommand()) {
                 break;
-            } else {
-                parser.handleCommands(inputs, taskList);
             }
         }
-    }
-
-    private void sayBye() {
-        System.out.println("Stop procrastinating. See you!");
     }
 
     /**

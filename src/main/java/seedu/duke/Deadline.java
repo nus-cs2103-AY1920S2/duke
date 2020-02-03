@@ -32,8 +32,7 @@ public class Deadline extends Task {
         return "D";
     }
 
-    @Override
-    public LocalDate getTime() {
+    public LocalDate getDateBy() {
         return deadlineTime;
     }
 }

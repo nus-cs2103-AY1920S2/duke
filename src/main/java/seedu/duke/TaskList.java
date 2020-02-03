@@ -11,8 +11,9 @@ import java.util.List;
  * Contains the task list and operations to add, delete, and change the list.
  */
 public class TaskList {
-    static List<Task> tasks;
-    protected Storage storage;
+    protected List<Task> tasks;
+    private Storage storage;
+    private Ui ui;
 
     /**
      * Constructor for TaskList.
@@ -23,8 +24,12 @@ public class TaskList {
     public TaskList(List<Task> tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
+        ui = new Ui();
     }
 
+    protected List<Task> getTasks() {
+        return tasks;
+    }
     /**
      * Adds the user input of todo task into the task list.
      *
@@ -40,7 +45,7 @@ public class TaskList {
         tasks.add(todo);
         storage.addToStorage(todo);
         printAddToList();
-        System.out.println(todo.toString());
+        ui.print(todo.toString());
         printNumTask();
     }
 
@@ -76,7 +81,7 @@ public class TaskList {
         tasks.add(deadline);
         storage.addToStorage(deadline);
         printAddToList();
-        System.out.println(deadline.toString());
+        ui.print(deadline.toString());
         printNumTask();
     }
 
@@ -112,7 +117,7 @@ public class TaskList {
         tasks.add(event);
         storage.addToStorage(event);
         printAddToList();
-        System.out.println(event.toString());
+        ui.print(event.toString());
         printNumTask();
     }
 
@@ -138,9 +143,9 @@ public class TaskList {
      */
     private void printList(List<Task> currTasks) {
         if (currTasks.size() == 0) {
-            System.out.println("You currently don't have any task. Start listing now!");
+            ui.print("You currently don't have any task. Start listing now!");
         } else {
-            System.out.println("Stop procrastinating. Do it now!");
+            ui.print("Stop procrastinating. Do it now!");
             for (int i = 0; i < currTasks.size(); i++) {
                 System.out.printf("%d. %s\n", i + 1, currTasks.get(i).toString());
             }
@@ -162,8 +167,8 @@ public class TaskList {
         Task task = tasks.get(index - 1);
         task.markAsDone();
         storage.changeToStorage(index);
-        System.out.println("Good job! One off your chest!");
-        System.out.println(task.toString());
+        ui.print("Good job! One off your chest!");
+        ui.print(task.toString());
     }
 
     /**
@@ -176,7 +181,7 @@ public class TaskList {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         printRemoveTask();
-        System.out.println(task.toString());
+        ui.print(task.toString());
         printNumTask();
         storage.deleteInStorage(index);
     }
@@ -203,19 +208,19 @@ public class TaskList {
     }
 
     private void printFoundTask() {
-        System.out.println("Here are the matching tasks in your list:");
+        ui.print("Here are the matching tasks in your list:");
     }
 
     private void printNoFoundTask() {
-        System.out.println("Sorry I can't find what you are looking for....");
+        ui.print("Sorry I can't find what you are looking for....");
     }
 
-    private static void printRemoveTask() {
-        System.out.println("Okay, I have removed this task for you:");
+    private void printRemoveTask() {
+        ui.print("Okay, I have removed this task for you:");
     }
 
     private void printAddToList() {
-        System.out.println("Gotcha. Added this to your list:");
+        ui.print("Gotcha. Added this to your list:");
     }
 
     private void printNumTask() {

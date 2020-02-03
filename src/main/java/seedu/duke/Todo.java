@@ -24,9 +24,4 @@ public class Todo extends Task {
     public String getType() {
         return "T";
     }
-
-    @Override
-    public LocalDate getTime() {
-        return null;
-    }
 }
