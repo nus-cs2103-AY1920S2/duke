@@ -11,6 +11,7 @@ import dukeproj.exception.InvalidCommandException;
 
 import javafx.application.Application;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -31,7 +32,7 @@ public class Duke {
      * @return response by Duke.
      */
     public String getResponse(String input) {
-        String[] inputs = input.split(" ", 1);
+        String[] inputs = input.split(" ", 2);
         try {
             return parser.getCommandResponse(Parser.commandParser(inputs[0]), inputs[1]);
         } catch (InvalidCommandException e) {
@@ -94,8 +95,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Application.launch(GuiApp.class, args);
-        //new Duke("." + File.separator + "data" +
-                //File.separator + "Task.txt").run();
+        if (args.length > 0 && args[0].toUpperCase().equals("text")) {
+            new Duke("." + File.separator + "data" + File.separator + "Task.txt").run();
+        } else {
+            Application.launch(GuiApp.class, args);
+        }
     }
 }
