@@ -7,16 +7,16 @@ public class Todo extends Task {
 
     public Todo(String desc, boolean isDone) {
         super(desc);
-        super.isDone = isDone;
+        super.setStatus(isDone);
     }
 
     @Override
     public String generateSaveFileEntry() {
-        return String.format("T | %d | %s\n", this.getStatusAsInt(), this.description);
+        return String.format("T | %d | %s\n", this.getStatusAsInt(), this.getDescription());
     }
 
     @Override
     public String toString() {
-        return String.format("[T] [%s] %s", this.getStatus(), this.description);
+        return String.format("[T] [%s] %s", this.getStatus(), this.getDescription());
     }
 }

@@ -13,19 +13,19 @@ public class Event extends Task {
 
     public Event(String desc, LocalDate duration, boolean isDone) {
         super(desc);
-        super.isDone = isDone;
+        super.setStatus(isDone);
         this.duration = duration;
 
     }
 
     @Override
     public String generateSaveFileEntry() {
-        return String.format("E | %d | %s | %s\n", this.getStatusAsInt(), this.description, this.duration.toString());
+        return String.format("E | %d | %s | %s\n", this.getStatusAsInt(), this.getDescription(), this.duration.toString());
     }
 
     @Override
     public String toString() {
-        return String.format("[E] [%s] %s (at: %s)", this.getStatus(), this.description,
+        return String.format("[E] [%s] %s (at: %s)", this.getStatus(), this.getDescription(),
                 this.duration.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

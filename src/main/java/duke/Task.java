@@ -2,8 +2,8 @@ package duke;
 
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String desc) {
         this.description = desc;
@@ -12,6 +12,14 @@ public abstract class Task {
 
     public String getStatus() {
         return isDone ? "V" : "X";
+    }
+
+    public void setStatus(boolean status) {
+        this.isDone = status;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public int getStatusAsInt() {

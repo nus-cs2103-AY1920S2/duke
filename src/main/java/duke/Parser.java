@@ -2,6 +2,8 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Parser {
     public static void parse(Storage storage, TaskList tasks, Ui ui) {
@@ -18,6 +20,13 @@ public class Parser {
                 case BYE:
                     Ui.printMessage("Bye! Hope you visit again soon!");
                     isRunning = false;
+                    break;
+                case FIND:
+                    if (inputSplit.length < 2) {
+                        throw new InsufficientArgumentsException("☹ OOPS!!! FIND requires something to search for.");
+                    } else {
+                        Ui.printMessage(tasks.findTask(inputSplit[1]));
+                    }
                     break;
                 case LIST:
                     tasks.displayTasks();
