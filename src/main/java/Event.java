@@ -1,21 +1,21 @@
 import java.time.LocalDate;
 
 public class Event extends Task {
-    protected LocalDate by;
+    protected LocalDate date;
 
-    public Event(String description, String by) {
+    public Event(String description, LocalDate date) {
         super(description);
-        this.by = convertToLocalDate(by);
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        String newBy = String.format("%d %s %d", this.by.getDayOfMonth(), this.by.getMonth(), this.by.getYear());
-        return "[D]" + super.toString() + " (at: " + newBy + ")";
+        String newdate = String.format("%d %s %d", this.date.getDayOfMonth(), this.date.getMonth(), this.date.getYear());
+        return "[D]" + super.toString() + " (at: " + newdate + ")";
     }
 
     @Override
     public String toFileFormat() {
-        return String.format("%s | %d | %s | %s", "D", this.isDone ? 1 : 0, this.description, this.by);
+        return String.format("%s | %d | %s | %s", "D", this.isDone ? 1 : 0, this.description, convertDateToString(this.date));
     }
 }

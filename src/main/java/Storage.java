@@ -6,20 +6,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+public class Storage {
     private Path filePath;
     private File file;
 
-    public Store(Path filePath) {
+    public Storage(Path filePath) {
         this.filePath = filePath;
         this.file = new File(this.filePath.toString());
     }
 
-    public void update(ArrayList<Task> tasks) {
+    public void update(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(file);
-            for (Task t : tasks) {
-                fw.write(String.format("%s%n", t.toFileFormat()));
+            for (int i = 0; i < tasks.getSize(); i++) {
+                fw.write(String.format("%s%n", tasks.getTask(i + 1).toFileFormat()));
             }
             fw.close();
         } catch (IOException e) {
@@ -27,7 +27,7 @@ public class Store {
         }
     }
 
-    public ArrayList<Task> getStoredTasks() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tempList = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(this.filePath);
@@ -41,7 +41,7 @@ public class Store {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException(e.getMessage());
         }
         return tempList;
     }

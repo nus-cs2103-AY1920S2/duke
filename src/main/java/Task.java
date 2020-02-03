@@ -10,6 +10,7 @@ public class Task {
         this.isDone = false;
     }
 
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -23,11 +24,11 @@ public class Task {
 
         switch(splitted[0]) {
             case "T":
-                return new ToDo(splitted[1]);
+                return new ToDo(splitted[2]);
             case "D":
-                return new Deadline(splitted[1], splitted[2]);
+                return new Deadline(splitted[2], convertToLocalDate(splitted[3]));
             case "E":
-                return new Event(splitted[1], splitted[2]);
+                return new Event(splitted[2], convertToLocalDate(splitted[3]));
             default:
                 throw new DukeException("Invalid file. File may have been corrupted.");
         }
@@ -40,9 +41,26 @@ public class Task {
     public String toFileFormat() {
         return String.format("%s | %d | %s", "T", this.isDone ? 1 : 0, this.description);
     }
-    
+
     public static LocalDate convertToLocalDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         return LocalDate.parse(input, formatter);
+    }
+
+    public static String convertDateToString(LocalDate date) {
+        StringBuilder sb = new StringBuilder();
+        int day = date.getDayOfMonth();
+        int month = date.getMonthValue();
+        int year = date.getYear();
+        if (day < 10) {
+            sb.append("0");
+        }
+        sb.append(String.valueOf(day) + "/");
+
+        if (month < 10) {
+            sb.append("0");
+        }
+        sb.append(String.valueOf(month) + "/" + year);
+        return sb.toString();
     }
 }

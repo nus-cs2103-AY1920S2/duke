@@ -1,21 +1,21 @@
- java.time.LocalDate;
+import java.time.LocalDate;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate date;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = convertToLocalDate(by);
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        String newBy = String.format("%d %s %d", this.by.getDayOfMonth(), this.by.getMonth(), this.by.getYear());
-        return "[D]" + super.toString() + " (by: " + newBy + ")";
+        String newdate = String.format("%d %s %d", this.date.getDayOfMonth(), this.date.getMonth(), this.date.getYear());
+        return "[D]" + super.toString() + " (date: " + newdate + ")";
     }
 
     @Override
     public String toFileFormat() {
-        return String.format("%s | %d | %s | %s", "D", this.isDone ? 1 : 0, this.description, this.by);
+        return String.format("%s | %d | %s | %s", "D", this.isDone ? 1 : 0, this.description, convertDateToString(this.date));
     }
 }
