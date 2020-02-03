@@ -15,7 +15,8 @@ run {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion("8.23")
+    ignoreFailures(true)
 }
 
 dependencies {
@@ -34,8 +35,6 @@ test {
 repositories {
     mavenCentral()
 }
-
-
 
 shadowJar {
     archiveBaseName = "duke"
