@@ -20,7 +20,8 @@ public class Event extends Task {
 
     @Override
     public String generateSaveFileEntry() {
-        return String.format("E | %d | %s | %s\n", this.getStatusAsInt(), this.getDescription(), this.duration.toString());
+        return String.format("E | %d | %s | %s\n", this.getStatusAsInt(), this.getDescription(),
+                this.duration.toString());
     }
 
     @Override

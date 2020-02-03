@@ -19,7 +19,8 @@ public class Deadline extends Task {
 
     @Override
     public String generateSaveFileEntry() {
-        return String.format("D | %d | %s | %s\n", this.getStatusAsInt(), this.getDescription(), this.dueDate.toString());
+        return String.format("D | %d | %s | %s\n", this.getStatusAsInt(), this.getDescription(),
+                this.dueDate.toString());
     }
 
     @Override
