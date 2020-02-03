@@ -1,9 +1,16 @@
+package duke.Parser;
+
+import duke.Ui;
+import duke.command.*;
+import duke.task.Task;
+
 import java.util.Optional;
 
 public class Parser {
     public static Optional<Command> parse(String input) {
         String[] arr = input.split("\\s");
         int index = 0;
+
         switch (arr[0].toLowerCase()) {
         case "bye":
             if (arr.length > 1) {
@@ -11,11 +18,12 @@ public class Parser {
             }
             return Optional.of(new ExitCommand());
 
-        case "list":
-            if (arr.length > 1) {
-                Ui.printError(new Exception("A word of list is enough"));
+        case "delete":
+            index = Integer.parseInt(arr[1]) - 1;
+            if (arr.length > 2) {
+                Ui.printError(new Exception("More content than needed for delete task"));
             }
-            return Optional.of(new ListCommand());
+            return Optional.of(new DeleteCommand(index));
 
         case "done":
             index = Integer.parseInt(arr[1]) - 1;
@@ -24,12 +32,11 @@ public class Parser {
             }
             return Optional.of(new DoneCommand(index));
 
-        case "delete":
-            index = Integer.parseInt(arr[1]) - 1;
-            if (arr.length > 2) {
-                Ui.printError(new Exception("More content than needed for delete task"));
+        case "list":
+            if (arr.length > 1) {
+                Ui.printError(new Exception("A word of list is enough"));
             }
-            return Optional.of(new DeleteCommand(index));
+            return Optional.of(new ListCommand());
 
         default:
             try {

@@ -1,16 +1,17 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.Parser.Parser;
+import duke.command.Command;
+
 import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
     private String filePath;
-    private ArrayList<Task> storage;
     private Storage storageController;
-    private Ui ui;
     private Controller controller;
 
     public Duke(String filePath) {
-        Ui ui = new Ui();
         this.filePath = filePath;
         this.storageController = new Storage(this.filePath);
         this.controller = new Controller(storageController);
@@ -19,7 +20,7 @@ public class Duke {
     private void run() {
         Scanner scan = new Scanner(System.in);
         Ui.greet();
-        Controller.printTaskList();
+        Ui.printTaskList();
         while (scan.hasNext()) {
             Optional<Command> parsed = Parser.parse(scan.nextLine());
             if (parsed.isPresent()) {
@@ -32,7 +33,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke("src/main/data/data.csv");
+        Duke bot = new Duke("src/data/data.csv");
         bot.run();
     }
 
