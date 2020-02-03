@@ -9,6 +9,7 @@ public class Parser {
         NORMAL,
         CONFIRM_RESET_STORAGE;
     }
+
     private HashMap<String, CommandList> aliasMap;
     private ParserState parserState = ParserState.NORMAL;
 
@@ -40,19 +41,20 @@ public class Parser {
     }
 
     /**
-     * Returns command object based on input string.
+     * Returns command object based on parser state.
      *
      * @param input  Command to parse.
      * @return Command to execute.
      */
     public Command parse(String input) {
         switch (parserState) {
-        case NORMAL:
-            return parseNormal(input);
         case CONFIRM_RESET_STORAGE:
             return parseConfirmation(input, new ResetStorageCommand(), new UiOnlyCommand(LineName.RESET_STORAGE_FAIL));
+        case NORMAL:
+            // fallthrough
         default:
-            return new UiOnlyCommand(LineName.INVALID_COMMAND);
+            // Should never be default but just in case
+            return parseNormal(input);
         }
     }
 

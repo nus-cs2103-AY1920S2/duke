@@ -288,7 +288,7 @@ public class Ui {
         dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
                 DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
         dukeExpression = DukeExpression.BLUSH;
-        dukeSays("So Master has " + task.getType() + ": " + task + "...");
+        dukeSays("So Master has " + task.getType() + ":\n" + task + "...");
     }
 
     /**
