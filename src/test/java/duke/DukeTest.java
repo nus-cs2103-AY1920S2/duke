@@ -12,7 +12,7 @@ public class DukeTest {
     public void dummyTest() {
         assertEquals(2, 2);
     }
-    
+
     @Test
     public void handleDone_exceptionThrown() {
         Duke duke = new Duke();
@@ -24,10 +24,5 @@ public class DukeTest {
         Duke duke = new Duke();
         assertThrows(MissingTimeException.class, () -> duke.handleEvent("my event"));
         assertThrows(TimeFormatException.class, () -> duke.handleEvent("my event /at 1998/03/01 13"));
-    }
-
-    @Test
-    public void parserTests() {
-        new ParserTest().stringToTimeTest();
     }
 }

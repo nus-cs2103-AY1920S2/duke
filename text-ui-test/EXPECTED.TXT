@@ -3,7 +3,7 @@ Hello I'm your task manager!
 ----------------------------
 
     -----
-    Here are the tasks in your list:
+    Tasks loaded from disk:
     1. [D][✓] return book (by: 15:30, Mar 15 2020)
     2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
     3. [T][✗] your butt
@@ -124,6 +124,16 @@ What tasks do you have dude?
     Got it. I've added this task:
     [T][✗] your butt
     Now you have 3 tasks in the list.
+    -----
+    -----
+    Here are the tasks that contains 'book' in your list:
+    1. [D][✓] return book (by: 15:30, Mar 15 2020)
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Search
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Search
     -----
     -----
     Bye bye friend!

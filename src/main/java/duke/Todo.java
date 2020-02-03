@@ -1,32 +1,33 @@
 package duke;
 
-/**
- * Class representing todo task.
- */
+/** Class representing todo task. */
 public class Todo extends Task {
-  /**
-   *
-   * @param todo String containing what to do.
-   */
-  Todo(String todo) {
-    super(todo);
-  }
+    /**
+     * Creates a Todo object
+     *
+     * @param task String containing what to do.
+     */
+    Todo(String task) {
+        super(task);
+    }
 
-  /**
-   *
-   * @return String representation of the todo task to print.
-   */
-  @Override
-  public String toString() {
-    return "[T]" + super.toString();
-  }
+    /**
+     * Returns String representation of Todo object to print.
+     *
+     * @return String representation of the todo task to print.
+     */
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
 
-  /**
-   *
-   * @return String representation of the todo task to save.
-   */
-  @Override
-  public java.lang.String toSaveString() {
-    return String.format("%s || todo || %s", super.toSaveString(), this.task);
-  }
+    /**
+     * Returns String representation of Todo object to save.
+     *
+     * @return String representation of the todo task to save.
+     */
+    @Override
+    public java.lang.String toSaveString() {
+        return String.format("%s || todo || %s", super.toSaveString(), this.task);
+    }
 }

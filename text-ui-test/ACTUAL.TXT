@@ -126,7 +126,7 @@ What tasks do you have dude?
     Now you have 3 tasks in the list.
     -----
     -----
-    Here are the tasks that has 'book' in your list:
+    Here are the tasks that contains 'book' in your list:
     1. [D][✓] return book (by: 15:30, Mar 15 2020)
     -----
     -----
