@@ -3,7 +3,12 @@ import java.time.DateTimeException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 /**
@@ -17,6 +22,12 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /**
      * A constructor to initialise Storage, TaskList and Ui class
@@ -77,17 +88,27 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        helloWorld.setFont(new Font("Arial", 50));
+        //Step 1. Setting up required components
 
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        userInput = new TextField();
+        sendButton = new Button("Send");
 
-        Scene anotherScene = new Scene(new Label("Another scene here"));
-        Stage anotherStage = new Stage();
-        anotherStage.setScene(anotherScene);
-        anotherStage.show();
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+//
+//        Scene anotherScene = new Scene(new Label("Another scene here"));
+//        Stage anotherStage = new Stage();
+//        anotherStage.setScene(anotherScene);
+//        anotherStage.show();
     }
 }
