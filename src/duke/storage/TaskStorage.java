@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.command.IllegalCommandException;
+import duke.task.Task;
+import duke.task.TaskDispatch;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -25,7 +31,7 @@ public class TaskStorage {
                 taskList.add(TaskDispatch.dispatchTaskFromStorage(scanner.nextLine().split(" ")));
             } catch (IllegalCommandException e) {
                 // Assumption is that data is checked to be valid before adding to the file
-                // Hence, when reading from it, the data should result in valid Task objects
+                // Hence, when reading from it, the data should result in valid duke.task.Task objects
                 e.printStackTrace();
             }
         }

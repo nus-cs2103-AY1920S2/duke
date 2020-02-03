@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Deadline extends Task {
     protected String by;
 
@@ -6,7 +8,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    // Todo: Handle exceptional cases
+    // duke.task.Todo: Handle exceptional cases
     public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
         String description = "";
         String by = "";

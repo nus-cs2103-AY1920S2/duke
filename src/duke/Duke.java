@@ -1,3 +1,11 @@
+package duke;
+
+import duke.Ui.Ui;
+import duke.command.IllegalCommandException;
+import duke.storage.TaskStorage;
+import duke.task.Task;
+import duke.task.TaskDispatch;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -44,13 +52,13 @@ public class Duke {
             String[] commandArgs = nextInput.split(" ");
 
             if (commandArgs[0].equals("done")) {
-                // Todo: Add exception handling
+                // duke.task.Todo: Add exception handling
                 handleCommandDone(Integer.parseInt(commandArgs[1]));
                 continue;
             }
 
             if (commandArgs[0].equals("delete")) {
-                // Todo: Add exception handling
+                // duke.task.Todo: Add exception handling
                 handleCommandDelete(Integer.parseInt(commandArgs[1]));
                 continue;
             }
@@ -71,13 +79,13 @@ public class Duke {
         }
     }
 
-    // Print a closing message before stopping Duke
+    // Print a closing message before stopping duke.Duke
     private static void stopDuke() {
         String closingMessage = "Bye. Hope to see you again soon!";
         System.out.println("    " + closingMessage);
     }
 
-    // Todo: abstract away the following logic from main via new interface for command handlers
+    // duke.task.Todo: abstract away the following logic from main via new interface for command handlers
 
     private void handleCommandList() {
         System.out.println("    Here are the tasks in your list:");

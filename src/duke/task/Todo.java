@@ -1,10 +1,12 @@
+package duke.task;
+
 public class Todo extends Task {
 
     public Todo(String description) {
         super(description);
     }
 
-    // Todo: Handle exceptional cases if any
+    // duke.task.Todo: Handle exceptional cases if any
     public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
         String description = "";
         for (String s : commandArgs) {
@@ -14,7 +16,7 @@ public class Todo extends Task {
             description += s + " ";
         }
 
-        // Todo cannot be empty
+        // duke.task.Todo cannot be empty
         if (description.equals("")) {
             throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
         }

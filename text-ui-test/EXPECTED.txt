@@ -4,7 +4,7 @@
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 hello
     Got it. I've added this task:

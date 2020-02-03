@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
 
     protected String at;
@@ -7,7 +9,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    // Todo: Handle exceptional cases
+    // duke.task.Todo: Handle exceptional cases
     public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
         String description = "";
         String at = "";

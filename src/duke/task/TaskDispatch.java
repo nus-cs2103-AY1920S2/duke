@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.command.IllegalCommandException;
+
 public interface TaskDispatch {
 
     public static Task dispatchTaskFromInput(String[] commandArgs) throws IllegalCommandException {
@@ -42,7 +46,7 @@ public interface TaskDispatch {
                 throw new IllegalCommandException();
         }
 
-        // Complete the Task if Done
+        // Complete the duke.task.Task if Done
         if (inputStrings[0].toCharArray()[4] == Task.TICK) {
             t.markAsDone();
         }
