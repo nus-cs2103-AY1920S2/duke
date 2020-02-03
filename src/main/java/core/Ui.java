@@ -12,50 +12,53 @@ public class Ui {
     /**
      * Constructor to initialize the scanner.
      */
-    public Ui(){
-        sc=new Scanner(System.in);
+    public Ui() {
+        sc = new Scanner(System.in);
     }
 
     /**
      * Gets the user input.
+     *
      * @return the user input in string.
      */
-    public String getInput(){
+    public String getInput() {
         return sc.nextLine();
     }
 
     /**
      * Displays the welcome message to the user.
      */
-    public void preLog(){
+    public void preLog() {
         display(UiMessage.GREETING.getMsg());
     }
 
     /**
      * Displays the exiting message to the user.
      */
-    public void endLog(){
+    public void endLog() {
         display(UiMessage.FAREWELL.getMsg());
     }
 
     /**
      * Displays the error message to the user.
+     *
      * @param error is the error message.
      */
-    public void errorLog(String error){
+    public void errorLog(String error) {
         display(error);
     }
 
     /**
      * Displays text to the user under the standard format.
+     *
      * @param msg is the text to be displayed.
      */
-    public void display(String... msg){
-        System.out.println("\t________________________________________________________________________________________________________________________");
-        for(String str:msg) {
+    public void display(String... msg) {
+        System.out.println("\t_________________________________________________________________________________");
+        for (String str : msg) {
             System.out.println("\t" + str);
         }
-        System.out.println("\t________________________________________________________________________________________________________________________");
+        System.out.println("\t_________________________________________________________________________________");
     }
 
 }

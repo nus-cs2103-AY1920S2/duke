@@ -12,12 +12,13 @@ public enum UiMessage {
 
     String[] msg;
 
-    UiMessage(String... msg){
-        this.msg=msg;
+    UiMessage(String... msg) {
+        this.msg = msg;
     }
 
     /**
      * Gets the message of the operation.
+     *
      * @return the message of the operation in string array.
      */
     public String[] getMsg() {

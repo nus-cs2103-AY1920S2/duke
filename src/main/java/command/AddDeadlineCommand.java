@@ -11,11 +11,12 @@ public class AddDeadlineCommand extends AddTaskCommand {
 
     /**
      * Constructor for command that add a deadline task.
+     *
      * @param description contains the description of the deadline task.
-     * @param time contains the deadline of the task.
+     * @param time        contains the deadline of the task.
      */
-    public AddDeadlineCommand(String description, LocalDate time){
-        super(new Deadline(description,time));
+    public AddDeadlineCommand(String description, LocalDate time) {
+        super(new Deadline(description, time));
     }
 
 }

@@ -1,6 +1,15 @@
 package core;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -19,7 +28,10 @@ public class DataParser {
 
     private Gson gson;
 
-    public DataParser(){
+    /**
+     * Initiates the parser with capabilities to parse local date and task.
+     */
+    public DataParser() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .registerTypeAdapter(Task.class, new TaskAdapter())
@@ -28,20 +40,22 @@ public class DataParser {
 
     /**
      * Parses task from task to string of standard data format.
+     *
      * @param task task to be saved.
      * @return string of standard data format.
      */
-    public String parseToString(Task task){
+    public String parseToString(Task task) {
         return gson.toJson(task);
     }
 
     /**
      * Parses string of standard data format to task.
+     *
      * @param data string from the storage file.
      * @return task object.
      */
-    public Task parseToTask(String data){
-        return gson.fromJson(data,Task.class);
+    public Task parseToTask(String data) {
+        return gson.fromJson(data, Task.class);
     }
 
     /**
@@ -55,7 +69,8 @@ public class DataParser {
         }
 
         @Override
-        public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+        public LocalDate deserialize(JsonElement json, Type type,
+                                     JsonDeserializationContext context) throws JsonParseException {
             return LocalDate.parse(json.getAsJsonPrimitive().getAsString());
         }
     }
@@ -63,7 +78,7 @@ public class DataParser {
     /**
      * Enables the parser to serialize and deserialize Task and its sub-class.
      */
-    private static class TaskAdapter implements JsonSerializer<Task>, JsonDeserializer<Task>{
+    private static class TaskAdapter implements JsonSerializer<Task>, JsonDeserializer<Task> {
 
         private static Map<String, Class> map = new TreeMap<>();
 
@@ -76,7 +91,7 @@ public class DataParser {
         @Override
         public JsonElement serialize(Task src, Type typeOfSrc,
                                      JsonSerializationContext context) {
-            Class c=map.get(src.getTypeIcon().charAt(1));
+            Class c = map.get(src.getTypeIcon().charAt(1));
             if (c == null) {
                 throw new RuntimeException("Unknow class: " + src.getTypeIcon().charAt(1));
             }
@@ -85,10 +100,10 @@ public class DataParser {
 
         @Override
         public Task deserialize(JsonElement json, Type typeOfT,
-                                   JsonDeserializationContext context) throws JsonParseException  {
-            JsonObject jsonObject=json.getAsJsonObject();
+                                JsonDeserializationContext context) throws JsonParseException {
+            JsonObject jsonObject = json.getAsJsonObject();
             String type = jsonObject.get("typeIcon").getAsString();
-            Class c=map.get(type);
+            Class c = map.get(type);
             if (c == null) {
                 throw new RuntimeException("Unknow class: " + type);
             }

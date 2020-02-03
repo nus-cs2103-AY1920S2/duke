@@ -18,16 +18,17 @@ public enum DateUtil {
 
     String string;
 
-    DateUtil(String string){
-        this.string=string;
+    DateUtil(String string) {
+        this.string = string;
     }
 
     /**
-     * convert the date to standard format
+     * Converts the date to standard format.
+     *
      * @param time date
      * @return the standard format of date in string
      */
-    public static String standardFormat(LocalDate time){
+    public static String standardFormat(LocalDate time) {
         return time.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 

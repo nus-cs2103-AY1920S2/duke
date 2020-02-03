@@ -8,12 +8,13 @@ import dukexception.DukeException;
 /**
  * Specific command that reset the storage.
  */
-public class ResetCommand extends Command{
+public class ResetCommand extends Command {
 
     /**
      * Executes to reset the temporal and permanent data storage.
+     *
      * @param common to clear the data storage.
-     * @param ui to display the response text of successful reset.
+     * @param ui     to display the response text of successful reset.
      * @throws DukeException when the reading and saving of the data is unsuccessful.
      */
     @Override

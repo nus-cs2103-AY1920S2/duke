@@ -7,12 +7,13 @@ import dukexception.DukeException;
 /**
  * Specific command that display the list of task.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes to display the list of task in the storage.
+     *
      * @param common to retrieve the data from storage.
-     * @param ui to display the list of task.
+     * @param ui     to display the list of task.
      * @throws DukeException when the list is empty.
      */
     @Override

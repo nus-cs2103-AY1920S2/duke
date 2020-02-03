@@ -9,9 +9,10 @@ public class AddToDoCommand extends AddTaskCommand {
 
     /**
      * Constructor for command that add a to do task.
+     *
      * @param description contains the description of the to do task.
      */
-    public AddToDoCommand(String description){
+    public AddToDoCommand(String description) {
         super(new ToDo(description));
     }
 

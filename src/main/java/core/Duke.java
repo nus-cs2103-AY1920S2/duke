@@ -17,12 +17,12 @@ public class Duke {
     /**
      * Constructor to initialize essential components of the program.
      */
-    public Duke(){
-        ui=new Ui();
+    public Duke() {
+        ui = new Ui();
         try {
             parser = new Parser();
             common = new Common();
-        }catch (DukeException e){
+        } catch (DukeException e) {
             ui.errorLog(e.getMessage());
         }
     }
@@ -30,18 +30,18 @@ public class Duke {
     /**
      * runs the program.
      */
-    public void run(){
+    public void run() {
         ui.preLog();
 
-        boolean isExit=false;
+        boolean isExit = false;
 
-        while(!isExit){
-            String userInput=ui.getInput();
+        while (!isExit) {
+            String userInput = ui.getInput();
             try {
                 Command command = parser.parse(userInput);
-                command.execute(common,ui);
-                isExit=command.isExit();
-            }catch (DukeException e){
+                command.execute(common, ui);
+                isExit = command.isExit();
+            } catch (DukeException e) {
                 ui.errorLog(e.getMessage());
             }
         }
@@ -57,6 +57,7 @@ public class Duke {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
