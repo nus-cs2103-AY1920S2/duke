@@ -14,7 +14,9 @@ public class TaskList {
         }
     }
 
-    public TaskList() {}
+    public TaskList() {
+        storage = new ArrayList<>();
+    }
 
     public ArrayList<Task> getStore() {
         return storage;

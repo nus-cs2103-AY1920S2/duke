@@ -61,6 +61,29 @@ public class Lister {
                     taskList.addTask(newToDo);
                     printTask(newToDo);
                     break;
+                case "find":
+                    TaskList tempList = new TaskList();
+                    String description = command.substring(x + 1);
+                    for (int i = 0; i < taskList.getSize(); i++) {
+                        Task tempTask = taskList.retrieveTask(i);
+                        if (tempTask.description.equals(description)) {
+                            tempList.addTask(tempTask);
+                        }
+                    }
+
+                    try {
+                        tempList.retrieveTask(0);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Sorry there are no such tasks.");
+                        break;
+                    }
+
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int i = 0; i < tempList.getSize(); i++) {
+                        System.out.println((i + 1) + "." + tempList.retrieveTask(i).toString());
+                    }
+                    break;
+
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
