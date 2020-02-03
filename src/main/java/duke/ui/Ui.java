@@ -22,4 +22,16 @@ public interface Ui {
      * @param error Error to be displayed.
      */
     void showError(String error);
+
+    /**
+     * Gets user input.
+     * 
+     * @return User input.
+     */
+    String getInput();
+
+    /**
+     * Closes Ui and performs cleanup operations.
+     */
+    void shutDown();
 }
