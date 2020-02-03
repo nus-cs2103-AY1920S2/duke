@@ -38,6 +38,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Get greeting message and display it
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(greeting(), mrRobotIcon));
+    }
+
+    /**
+     * Returns a String representing the GUI's greeting message.
+     *
+     * @return String used for greeting user
+     */
+    public String greeting() {
+        String newline = System.lineSeparator();
+        return "Hello friend. Hello friend?" + newline
+                + "That's lame. Maybe I should give you a name." + newline
+                + "But that's a slippery slope, you're only in my head," + newline
+                + "we have to remember that.";
     }
 
     public void setDuke(Duke d) {

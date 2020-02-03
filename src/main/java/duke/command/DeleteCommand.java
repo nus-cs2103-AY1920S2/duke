@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
@@ -27,8 +28,13 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         // Task number given starts from 1
-        Task removedTask = tasks.remove(taskNumber - 1);
-        ui.printTaskDeletion(removedTask, tasks.size());
-        storage.updateSaveFile(tasks);
+        try {
+            Task removedTask = tasks.remove(taskNumber - 1);
+            ui.printTaskDeletion(removedTask, tasks.size());
+            storage.updateSaveFile(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            // Invalid task number given
+            ui.showExceptionMessage(new DukeException("Invalid task number given for deletion..."));
+        }
     }
 }
