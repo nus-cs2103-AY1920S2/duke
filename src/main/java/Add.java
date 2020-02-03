@@ -7,14 +7,16 @@ public class Add extends Command {
         this.saved = saved;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.list.add(ob);
         String k = ob.toString();
         if (saved == 0) {
-            ui.printString("Got it. I've added this task:\n  "
+            return "Got it. I've added this task:\n  "
                             + k + "\nNow you have " + tasks.list.size()
-                            + " tasks in the list.");
+                            + " tasks in the list.";
         }
+        else
+            return "";
     }
 
     boolean isExit() {

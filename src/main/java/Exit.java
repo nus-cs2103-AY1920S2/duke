@@ -13,9 +13,9 @@ public class Exit extends Command {
      * @param storage Storage object.
      * @throws IOException Throws IOException.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        ui.printString("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         storage.save(tasks);
+        return "Bye. Hope to see you again soon!";
     }
 
     boolean isExit() {
