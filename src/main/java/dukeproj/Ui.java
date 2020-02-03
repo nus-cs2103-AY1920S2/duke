@@ -13,23 +13,20 @@ public class Ui {
         switch (type) {
         case INTRO:
             return getIntroduction();
-            break;
         case EXIT:
             return getExit();
-            break;
         case LIST:
-            return ""
-            break;
+            return "Here are all your tasks: ";
         case ADD:
-            break;
+            return "Okay! I have added the following task: ";
         case DONE:
-            break;
+            return "Okay! I have marked the following task as done: ";
         case DELETE:
-            break;
+            return "Okay! I have deleted the following task: ";
         case FIND:
-            break;
+            return "Here are your matching tasks: ";
         case SEARCH:
-            break;
+            return "Here are your tasks on the date of ";
         case INVALID_COMMAND:
             return "Sorry! I do not know what this command means!";
         case EMPTY_DESCRIPTION:
@@ -39,7 +36,7 @@ public class Ui {
         case BAD_DESCRIPTION:
             return "OOPS! ";
         default:
-            break;
+            return "";
         }
     }
 
@@ -48,10 +45,6 @@ public class Ui {
      */
     public String getIntroduction() {
         return lineBreak + "\nHello I am \n" + logo + "\nWhat can I do for you?\n" + lineBreak;
-        /*System.out.println(lineBreak);
-        System.out.println("Hello I am \n" + logo
-                + "\nWhat can I do for you?");
-        System.out.println(lineBreak);*/
     }
 
     /**
@@ -59,9 +52,6 @@ public class Ui {
      */
     public String getExit() {
         return lineBreak + "\nBye! Hope to see you again soon!\n" + lineBreak;
-/*        System.out.println(lineBreak);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(lineBreak);*/
     }
 
     /**
