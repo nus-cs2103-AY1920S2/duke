@@ -9,14 +9,14 @@ public class Main {
 
     private Storage storage;
     private TaskList tasks;
-    private Duke ui;
+    private Eevee ui;
 
     /**
      * Creates a Main object from a filepath
      * @param filepath
      */
     public Main(String filepath) {
-        ui = new Duke();
+        ui = new Eevee();
         storage = new Storage(filepath);
         try {
             tasks = new TaskList(storage.loadData());
