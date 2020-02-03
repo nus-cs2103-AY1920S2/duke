@@ -7,10 +7,10 @@ public class Delete extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {
         Task deletedTask = tasks.deleteTask(taskNumber);
-        ui.showDeleteMessage(deletedTask, tasks.getSize());
         storage.save(tasks);
+        return ui.showDeleteMessage(deletedTask, tasks.getSize());
     }
 
     @Override

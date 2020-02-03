@@ -5,6 +5,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -19,6 +23,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private boolean isStartUp = true;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -30,6 +35,14 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    // todo try to find a way to load this upon start-up
+    public void loadStartUp(Ui ui) {
+        String welcome = ui.showWelcome();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcome, dukeImage)
+        );
     }
 
     /**
@@ -45,5 +58,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals(duke.getUi().showGoodByeMessage())) {
+            // Todo try find a way to handle close of app.
+        }
     }
+
+
 }

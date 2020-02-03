@@ -1,9 +1,6 @@
 import java.io.IOException;
 import java.time.DateTimeException;
 
-import javafx.scene.image.Image;
-
-
 /**
  * Represents a Personal Assistant Chatbot named EXE that
  * helps a person to keep track of various things.
@@ -45,20 +42,23 @@ public class Duke {
      * Execute the start-up, message shown, and main functions of the chatbot
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(ui.addBorder(ui.showWelcome()));
+        String response = "";
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();
             try {
                 Command currentCommand = Parser.parse(fullCommand);
-                currentCommand.execute(tasks, ui, storage);
+                response = currentCommand.execute(tasks, ui, storage);
                 isExit = currentCommand.isExit();
             } catch (DukeException dukeEx) {
-                ui.showStandardError(dukeEx);
+                response = ui.showStandardError(dukeEx);
             } catch (DateTimeException dateEx) {
-                ui.showDateTimeException();
+                response = ui.showDateTimeException();
             } catch (IndexOutOfBoundsException indexEx) {
-                ui.showIndexOutOfBoundException(tasks.getSize());
+                response = ui.showIndexOutOfBoundException(tasks.getSize());
+            } finally {
+                System.out.println(ui.addBorder(response));
             }
         }
     }
@@ -79,7 +79,22 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        // Todo implement duke functionality here
-        return "Duke heard: " + input;
+        String response = "";
+        try {
+            Command currentCommand = Parser.parse(input);
+            response = currentCommand.execute(tasks, ui, storage);
+        } catch (DukeException dukeEx) {
+            response = ui.showStandardError(dukeEx);
+        } catch (DateTimeException dateEx) {
+            response = ui.showDateTimeException();
+        } catch (IndexOutOfBoundsException indexEx) {
+            response = ui.showIndexOutOfBoundException(tasks.getSize());
+        }
+
+        return response;
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 }

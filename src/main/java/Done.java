@@ -7,10 +7,10 @@ public class Done extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.getTask(taskNumber).markAsDone();
-        ui.showDoneMessage(tasks.getTask(taskNumber).getStatusIcon(), tasks.getTask(taskNumber));
         storage.save(tasks);
+        return ui.showDoneMessage(tasks.getTask(taskNumber).getStatusIcon(), tasks.getTask(taskNumber));
     }
 
     @Override

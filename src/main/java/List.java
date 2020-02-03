@@ -4,8 +4,8 @@ public class List extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showListMessage(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showListMessage(tasks);
     }
 
     @Override

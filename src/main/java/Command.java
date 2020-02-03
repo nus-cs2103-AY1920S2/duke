@@ -44,7 +44,7 @@ public abstract class Command {
      * @param ui      Ui object providing command the ability to call Ui methods.
      * @param storage Storage object providing command the ability to call Storage methods.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Should set boolean to true if command is an exit command otherwise

@@ -8,8 +8,8 @@ public class Exit extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodByeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showGoodByeMessage();
     }
 
     @Override

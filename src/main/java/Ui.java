@@ -21,18 +21,18 @@ public class Ui {
     /**
      * Print welcome message upon boot up.
      */
-    public void showWelcome() {
+    public String showWelcome() {
+        StringBuilder stringBuilder = new StringBuilder();
         String logo = INDENT + "  _____  __    __  _____" + NEWLINE
                 + INDENT + " |  ___||  \\  /  ||  ___|" + NEWLINE
                 + INDENT + " | |__   \\  \\/  / | |__" + NEWLINE
                 + INDENT + " |  __|   |    |  |  __|" + NEWLINE
                 + INDENT + " | |___  /  /\\  \\ | |___" + NEWLINE
                 + INDENT + " |_____||__/  \\__\\|_____|" + NEWLINE;
-        System.out.println(BORDER);
-        System.out.println(logo);
-        System.out.println(INDENT + "  Hello! I'm EXE, I'll execute anything on your command! :)");
-        System.out.println(INDENT + "  What do you want to exe?");
-        System.out.println(BORDER);
+        stringBuilder.append(logo);
+        stringBuilder.append(INDENT + "  Hello! I'm EXE, I'll execute anything on your command! :)" + NEWLINE);
+        stringBuilder.append(INDENT + "  What do you want to exe?");
+        return stringBuilder.toString();
     }
 
     /**
@@ -58,8 +58,8 @@ public class Ui {
      * Print error message when user give wrong Date Time format.
      * Error message states the correct format user supposed to give.
      */
-    public void showDateTimeException() {
-        System.out.println(addBorder(INDENT + "Please type date in this format yyyy-MM-dd," + " including dashes"));
+    public String showDateTimeException() {
+        return (INDENT + "Please type date in this format yyyy-MM-dd," + " including dashes");
     }
 
     /**
@@ -69,8 +69,8 @@ public class Ui {
      *
      * @param listSize Size of actual user tasks list.
      */
-    public void showIndexOutOfBoundException(int listSize) {
-        System.out.println(addBorder(INDENT + "List only have " + listSize + " of tasks, please choose within range."));
+    public String showIndexOutOfBoundException(int listSize) {
+        return (INDENT + "List only have " + listSize + " of tasks, please choose within range.");
     }
 
     /**
@@ -80,8 +80,8 @@ public class Ui {
      *
      * @param dukeEx DukeException targetted at specific error faced using Chatbot.
      */
-    public void showStandardError(DukeException dukeEx) {
-        System.out.println(addBorder(dukeEx.toString()));
+    public String showStandardError(DukeException dukeEx) {
+        return (dukeEx.toString());
     }
 
     /**
@@ -90,12 +90,12 @@ public class Ui {
      * @param deletedTask Task object of the task removed from existing list.
      * @param listSize    Total number of remaining task left in the list.
      */
-    public void showDeleteMessage(Task deletedTask, int listSize) {
+    public String showDeleteMessage(Task deletedTask, int listSize) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("      Noted. I've removed this task:\n");
         stringBuilder.append(INDENT + "   " + deletedTask.toString() + "\n");
         stringBuilder.append(String.format("      Now you have %d task(s) in the list.", listSize));
-        System.out.println(addBorder(stringBuilder.toString()));
+        return (stringBuilder.toString());
     }
 
     /**
@@ -126,7 +126,7 @@ public class Ui {
      *
      * @param listOfTask TaskList object of user existing tasks.
      */
-    public void showListMessage(TaskList listOfTask) {
+    public String showListMessage(TaskList listOfTask) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + "  Here are the tasks in your list:" + NEWLINE);
         Task currentTask;
@@ -138,7 +138,7 @@ public class Ui {
         stringBuilder
                 .append(String.format("%s  In case you can't count! you have %d task(s) in your list",
                         INDENT, listOfTask.getSize()));
-        System.out.println(addBorder(stringBuilder.toString()));
+        return (stringBuilder.toString());
     }
 
     /**
@@ -148,7 +148,7 @@ public class Ui {
      * @param message String of Task describing it.
      * @param size    Number of tasks in the list after adding the current task.
      */
-    public void showCustomiseMessage(String message, int size) {
+    public String showCustomiseMessage(String message, int size) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + " ");
         stringBuilder.append(" Got it. I've added this task:" + NEWLINE);
@@ -156,7 +156,7 @@ public class Ui {
         stringBuilder.append("  " + message + NEWLINE);
         stringBuilder.append(INDENT + " ");
         stringBuilder.append(String.format(" Now you have %d tasks in list.", size));
-        System.out.println(addBorder(stringBuilder.toString()));
+        return (stringBuilder.toString());
     }
 
     /**
@@ -165,23 +165,21 @@ public class Ui {
      * @param markedIcon String representing Task have been done.
      * @param task       Task object that have been marked as done.
      */
-    public void showDoneMessage(String markedIcon, Task task) {
+    public String showDoneMessage(String markedIcon, Task task) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(BORDER + NEWLINE);
         stringBuilder.append(INDENT);
         stringBuilder.append("  Very productive! I've slayed this task:" + NEWLINE);
         stringBuilder.append(INDENT);
         stringBuilder
-                .append(String.format("   [%s] %s" + NEWLINE, markedIcon, task.getDescription() + " " + task.getTime()));
-        stringBuilder.append(BORDER);
-        System.out.println(stringBuilder.toString());
+                .append(String.format("   [%s] %s", markedIcon, task.getDescription() + " " + task.getTime()));
+        return stringBuilder.toString();
     }
 
     /**
      * Print a Good bye message when user exiting Chatbot.
      */
-    public void showGoodByeMessage() {
-        System.out.println(addBorder(INDENT + "  Goodbye and have a beautiful time!"));
+    public String showGoodByeMessage() {
+        return (INDENT + "  Goodbye and have a beautiful time!");
     }
 
 
