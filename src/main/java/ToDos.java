@@ -17,7 +17,7 @@ public class ToDos extends Task {
      * Constructor that takes in 2 params.
      *
      * @param todo Name of the task.
-     * @param i    Defines the done status of the task. Reads either 1 (complete) or 0 (incomplete).
+     * @param strDoneStatus    Defines the done status of the task. Reads either 1 (complete) or 0 (incomplete).
      */
     public ToDos(String todo, String strDoneStatus) {
         super(todo);

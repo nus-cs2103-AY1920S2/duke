@@ -12,7 +12,7 @@ public class UI {
     }
 
     /**
-     * String of asterisks for design purposes
+     * String of asterisks for design purposes.
      */
     static String horizontalLine = "***********************************************";
 
@@ -69,6 +69,10 @@ public class UI {
         System.out.println(output);
     }
 
+    /**
+     * Prints out the tasks found.
+     * @param list Takes in a list to print out.
+     */
     public static void printFoundTasks(ArrayList<Task> list) {
         System.out.println(horizontalLine);
         if (list.isEmpty()) {

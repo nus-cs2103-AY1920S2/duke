@@ -34,17 +34,17 @@ public class TaskList {
                 split[i] = currString.trim();
             }
             switch (split[0]) {
-                case "E":
-                    taskList.add(new Event(split[2], split[3], split[1]));
-                    break;
-                case "D":
-                    taskList.add(new Deadline(split[2], split[3], split[1]));
-                    break;
-                case "T":
-                    taskList.add(new ToDos(split[2], split[1]));
-                    break;
-                default:
-                    break;
+            case "E":
+                taskList.add(new Event(split[2], split[3], split[1]));
+                break;
+            case "D":
+                taskList.add(new Deadline(split[2], split[3], split[1]));
+                break;
+            case "T":
+                taskList.add(new ToDos(split[2], split[1]));
+                break;
+            default:
+                break;
             }
         }
     }

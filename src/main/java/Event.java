@@ -27,7 +27,7 @@ public class Event extends Task {
      *
      * @param event Name of the event.
      * @param by    Date of the event.
-     * @param i     Defines the done status of the event. Reads either 1 (complete) or 0 (incomplete).
+     * @param strDoneStatus     Defines the done status of the event. Reads either 1 (complete) or 0 (incomplete).
      */
     public Event(String event, String by, String strDoneStatus) {
         super(event);
