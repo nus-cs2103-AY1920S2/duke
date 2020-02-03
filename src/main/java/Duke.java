@@ -3,7 +3,7 @@ import java.io.IOException;
 
 /**
  * Represents Duke, the task tracking smart bot
- * @author Goh Boon Hee SHaun
+ * @author Goh Boon Hee Shaun
  * @version 0.1
  *
  * Command input formats:
