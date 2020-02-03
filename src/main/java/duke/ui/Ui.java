@@ -17,6 +17,15 @@ public class Ui {
         System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
     }
     /**
+     * Welcome message formatted tos string.
+     * @return The welcome message.
+     */
+    public String showWelcomeString(){
+//        String line = "    ____________________________________________________________" + "\n";
+        String fiveSpaces = "      ";
+        return fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n";
+    }
+    /**
      * Reads the command entered by the user.
      * @return The text representation of the command entered by the user.
      */
