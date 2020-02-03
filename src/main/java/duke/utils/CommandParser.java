@@ -19,6 +19,8 @@ public class CommandParser {
             return new DeleteCommand();
         } else if (token[0].equals("todo") || token[0].equals("deadline") || token[0].equals("event")) {
             return new AddCommand();
+        } else if (token[0].equals("find")) {
+            return new FindCommand();
         } else {
             return new UnknownCommand();
         }

@@ -7,6 +7,7 @@ import duke.task.Todos;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,6 +57,22 @@ public class TaskList {
      */
     public void removeTask(int taskId) {
         tasks.remove(taskId);
+    }
+
+    /**
+     * Find tasks from task list with a given keyword
+     * @param word
+     * @return list of tasks with given keyword
+     */
+    public List<Task> findTasksByKeyword(String word) {
+        List<Task> searchedTask = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            String[] tokens = tasks.get(i).getTaskName().split(" ");
+            if(Arrays.asList(tokens).contains(word)) {
+                searchedTask.add(tasks.get(i));
+            }
+        }
+        return searchedTask;
     }
 
     /**
