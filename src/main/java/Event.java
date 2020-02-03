@@ -1,15 +1,31 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represent a task with event
+ * Extends the Task class
+ */
 public class Event extends Task {
 
     protected LocalDate date;
 
+    /**
+     * Constructor for Event
+     * @param description of the event
+     * @param date to be completed
+     */
     public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
+    /**
+     * Get the type of task
+     * D for Deadline
+     * T for To-do
+     * E for Event
+     * @return the type of task
+     */
     public String getTaskType() {
         return "E";
     }

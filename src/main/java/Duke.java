@@ -1,19 +1,29 @@
 import java.util.Scanner;
 import java.time.LocalDate;
 
-
+/**
+ * Represent the main driving class Duke
+ */
 public class Duke {
 
     protected Ui ui;
     protected Storage storage;
     protected Tasklist tasklist;
 
-    public Duke(String file) {
+    /**
+     * Constructor of Duke
+     * @param filepath of the file to be used in storage
+     * Initialise Ui, Storage, Tasklist
+     */
+    public Duke(String filepath) {
         this.ui = new Ui();
-        this.storage = new Storage(file);
+        this.storage = new Storage(filepath);
         this.tasklist = new Tasklist(storage.readFile());
     }
 
+    /**
+     * The main logic of the chatbot
+     */
     public void run() {
         this.ui.printIntro();
         Scanner myScanner = new Scanner(System.in);
@@ -70,6 +80,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("./list.txt").run();
     }
