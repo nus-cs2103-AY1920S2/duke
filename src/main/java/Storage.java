@@ -25,6 +25,7 @@ public class Storage {
                 tasks.add(task);
             }
         } catch (FileNotFoundException e) {
+            new File("data").mkdir(); // Create directory
             deleteContent(); // Create file
             readFile(tasks);
         }
