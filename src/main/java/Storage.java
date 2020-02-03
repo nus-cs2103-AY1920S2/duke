@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Loads and saves Duke data file.
  */
 public class Storage {
-    private final String path;
+    private String path;
 
     /**
      * Construct a Storage with given file path.
@@ -70,7 +70,7 @@ public class Storage {
         default:
             return null;
         }
-        if (Integer.valueOf(words[1]) == 1) {
+        if (Integer.parseInt(words[1]) == 1) {
             currTask.markAsDone();
         }
         return currTask;
