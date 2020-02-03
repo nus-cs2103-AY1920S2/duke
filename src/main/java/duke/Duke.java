@@ -1,8 +1,7 @@
+package duke;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import java.util.ArrayList;
-
 
 public class Duke {
     private Storage storage;
