@@ -7,16 +7,30 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    static String line = "____________________________________________________________\n";
+    public Task(String taskType) {
+        this.taskType = taskType;
+    };
 
     public Task(String description, String taskType) throws NoDescriptionException {
         this.taskType = taskType;
         if ("".equals(description)) {
-            throw new NoDescriptionException(line + "OOPS!!! The description of a " +
-                    this.taskType + " cannot be empty.\n" + line );
+            throw new NoDescriptionException("OOPS!!! The description of a " +
+                    this.taskType + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
+    }
+
+    public void setDescription(String description) throws NoDescriptionException {
+        if ("".equals(description)) {
+            throw new NoDescriptionException("OOPS!!! The description of a " +
+                    this.taskType + " cannot be empty.\n");
+        }
+        this.description = description;
+    }
+
+    public void setParams(String... params) throws NoDescriptionException {
+        this.setDescription(params[0]);
     }
 
     public void markAsDone() {

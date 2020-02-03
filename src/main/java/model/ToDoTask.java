@@ -6,10 +6,14 @@ import main.java.exceptions.NoDescriptionException;
 
 public class ToDoTask extends Task {
 
+    public ToDoTask() {
+        super("todo task");
+    }
+
     public ToDoTask(String description) throws NoDescriptionException {
         super(description, "todo task");
     }
-
+    
     @Override
     public String toString() {
         return "[T]" + super.toString();
