@@ -63,6 +63,9 @@ public class Duke {
                     int idx = Integer.parseInt(split[1]);
                     tasks.doTask(idx - 1);
                     storage.doTask(idx);
+                } else if (parser.parseCommand(command, "find")) {
+                    String results = tasks.findKeyword(input);
+                    Ui.printLines(results);
                 } else if (parser.parseCommand(command, "todo")) {
                     tasks.manageTodo(storage, input, fileName);
                 } else if (parser.parseCommand(command, "event")) {

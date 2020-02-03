@@ -66,6 +66,32 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks with descriptions containing the specified keyword.
+     * @param input User input containing the keyword.
+     * @return String containing all tasks matching the keyword.
+     */
+    public String findKeyword(String input) {
+        String keyword = input.substring(5).trim();
+        ArrayList<String> searchResults = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                searchResults.add(task.toString());
+            }
+        }
+        
+        String results = "";
+        for (int i = 0; i < searchResults.size(); i++) {
+            String result = searchResults.get(i);
+            results += (i + 1) + ".";
+            results += result;
+            if (i < searchResults.size() - 1) {
+                results += "\n" + "     ";
+            }
+        }
+        return results;
+    }
+
+    /**
      * Manages a Todo task by parsing user input and storing it into the task list.
      * @param storage The Storage instance used to write the task into the task list file.
      * @param input The given user input.
