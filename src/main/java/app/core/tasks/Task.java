@@ -15,6 +15,10 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
+
+    public String getDescription() {
+        return this.description;
+    }
     
     protected void setDone() {
         this.isDone = true;
