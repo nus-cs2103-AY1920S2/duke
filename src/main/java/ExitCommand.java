@@ -3,7 +3,6 @@
  * terminate the program when user inputs "bye".
  */
 class ExitCommand extends Command {
-
     /**
      * Prints a goodbye message and terminates Duke.
      *
