@@ -1,11 +1,7 @@
 public class Todo extends Task {
-    public Todo(String description) {
-        super(description, "");
-    }
 
-    @Override
-    public String getTypeName() {
-        return "T";
+    public Todo(String description) {
+        super(description, "2099-12-31");
     }
 
     @Override

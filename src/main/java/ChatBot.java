@@ -86,7 +86,33 @@ public class ChatBot {
                     catch (IndexOutOfBoundsException error) {
                         System.out.println("This item is not valid to remove.");
                     }
-                } else {
+                } else if (userInput.startsWith("find")) { //find {date/month/year} {value}
+                    String criterion = userInput.split(" ")[1];
+                    if (criterion.equals("month")) {
+                        int month = Integer.parseInt(userInput.split(" ")[2]);
+                        List<Task> filteredTasks = new TaskQueries().filterBySpecificMonth(history, month);
+                        System.out.println("Here are the tasks in the month " + month);
+                        for (int i = 0; i < filteredTasks.size(); i++) {
+                            System.out.println((i + 1) + "." + filteredTasks.get(i).toString());
+                        }
+                    } else if (criterion.equals("year")) {
+                        int year = Integer.parseInt(userInput.split(" ")[2]);
+                        List<Task> filteredTasks = new TaskQueries().filterBySpecificYear(history, year);
+                        System.out.println("Here are the tasks in the year " + year);
+                        for (int i = 0; i < filteredTasks.size(); i++) {
+                            System.out.println((i + 1) + "." + filteredTasks.get(i).toString());
+                        }
+                    } else if (criterion.equals("date")) {
+                        String date = userInput.split(" ")[2];
+                        List<Task> filteredTasks = new TaskQueries().filterBySpecificDate(history, date);
+                        System.out.println("Here are the tasks on date " + date);
+                        for (int i = 0; i < filteredTasks.size(); i++) {
+                            System.out.println((i + 1) + "." + filteredTasks.get(i).toString());
+                        }
+                    }
+                }
+
+                else {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 System.out.println("____________________________________________________________");
