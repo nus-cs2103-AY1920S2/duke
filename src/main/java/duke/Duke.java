@@ -1,7 +1,15 @@
+package duke;
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
+import duke.task.TaskList;
+import duke.exception.InvalidCommandException;
+
+/**
+ * Main Class for Duke
+ */
 public class Duke {
     private TaskList tasks;
     private Storage storage;
@@ -39,7 +47,7 @@ public class Duke {
                 String command = split[0];
 
                 if (parser.parseCommand(command, "list")) {
-                    System.out.println(tasks);
+                    System.err.println(tasks);
                 } else if (parser.parseCommand(command, "bye")) {
                     ui.printGoodbye();
                     break;

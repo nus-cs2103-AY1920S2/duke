@@ -1,7 +1,9 @@
-public class Event extends Task {
+package duke.task;
+
+public class Deadline extends Task {
     protected String time;
 
-    public Event(String description, boolean isDone, String time) {
+    public Deadline(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = time;
     }
@@ -12,14 +14,14 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String str = "[E]";
+        String str = "[D]";
         if (this.isDone) {
             str += "[O] ";
         } else {
             str += "[X] ";
         }
         str += this.description;
-        str += " (at: " + this.time + ")";
+        str += " (by: " + this.time + ")";
         return str;
     }
 }

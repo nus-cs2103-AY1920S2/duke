@@ -1,3 +1,5 @@
+package duke.exception;
+
 import java.lang.Exception;
 
 public class EmptyDescriptionException extends Exception {
