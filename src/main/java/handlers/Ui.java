@@ -105,9 +105,9 @@ public class Ui {
     }
 
     public void showError(String error) {
-        //System.out.println(error);
         clearResponse();
         setResponse(error);
+        System.out.println(this.response);
     }
 
     public void showLoadingError() {
