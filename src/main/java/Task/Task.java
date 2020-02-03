@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * defines Task class with basic properties and is set to be not done initally.
@@ -24,7 +24,7 @@ public class Task {
      * marks the Task as done.
      */
     public void markAsDone() {
-       this.isDone = true;
+        this.isDone = true;
     }
 
     /**

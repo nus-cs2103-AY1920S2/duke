@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * Todo class extends from Task class.

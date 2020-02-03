@@ -1,4 +1,4 @@
-import Task.Task;
+import task.Task;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class Ui {
     /**
      * sets a horizontal line.
      */
-    public StringBuilder horizontalLine = new StringBuilder("   ").append("\u02DC".repeat(80)).append("\n");
+    public StringBuilder horizontalLine = new StringBuilder("   ").append("˜".repeat(80)).append("\n");
 
     /**
      * adds horizontal line around the message and print it out.
@@ -25,8 +25,8 @@ public class Ui {
      */
     public void greet(TaskList taskList) {
         //welcome message and showing the list to the user
-        typeSetting("    Hello, I'm Bob. \uD83D\uDC76 \uD83D\uDC76 \uD83D\uDC76\n    " +
-                "What can I do for you? \uD83D\uDE03\n");
+        typeSetting("    Hello, I'm Bob. 👶 👶 👶\n    "
+                + "What can I do for you? 😃\n");
         gettingList(taskList);
     }
 
@@ -34,7 +34,7 @@ public class Ui {
      * shows exiting message.
      */
     public void bye() {
-        typeSetting("    Are you sure you want to leave me alone? \uD83E\uDD7A (y/n)\n");
+        typeSetting("    Are you sure you want to leave me alone? 🥺 (y/n)\n");
     }
 
     /**
@@ -43,7 +43,7 @@ public class Ui {
      * @param list the list of Tasks which we are dealing with.
      */
     public void doneMessage(int num, List<Task> list) {
-        typeSetting("    \uD83D\uDC4D Nice! I've marked this task as done: " + num
+        typeSetting("    👍 Nice! I've marked this task as done: " + num
                 + "\n" + "      " + list.get(num - 1));
     }
 
@@ -54,9 +54,9 @@ public class Ui {
      * @param index the number of tasks in the list after deleting.
      */
     public void deleteMessage(int num, Task t, int index) {
-        typeSetting("    \uD83D\uDC4C Noted. I've removed this task: " + num
-                + "\n" + "      " + t + "\n" +
-                "    Now you have " + index + " tasks in the list.");
+        typeSetting("    👌 Noted. I've removed this task: " + num
+                + "\n" + "      " + t + "\n"
+                + "    Now you have " + index + " tasks in the list.");
     }
 
     /**
@@ -65,9 +65,9 @@ public class Ui {
      * @param index the number of Tasks in the list after adding.
      */
     public void addMessage(Task t, int index) {
-        typeSetting("    \uD83D\uDFE2 Got it. I've added this task: \n      " +
-                t + "\n" +
-                "    Now you have " + index + " tasks in the list.");
+        typeSetting("    🟢 Got it. I've added this task: \n      "
+                + t + "\n"
+                + "    Now you have " + index + " tasks in the list.");
     }
 
     /**
@@ -77,7 +77,7 @@ public class Ui {
     public void gettingList(TaskList taskList) {
         List<Task> list = taskList.getTasks();
         int index = list.size();
-        StringBuilder li = new StringBuilder("    \uD83D\uDCDC Here are the tasks in your list:\n");
+        StringBuilder li = new StringBuilder("    📜 Here are the tasks in your list:\n");
         for (int i = 0; i < index; i++) {
             li.append("         ").append(i + 1).append(": ").append(list.get(i)).append("\n");
         }
@@ -91,7 +91,7 @@ public class Ui {
     public void getMatchingTasks(TaskList taskList) {
         List<Task> list = taskList.getTasks();
         int index = list.size();
-        StringBuilder li = new StringBuilder("    \uD83D\uDCDC Here are the matching tasks in your list:\n");
+        StringBuilder li = new StringBuilder("    📜 Here are the matching tasks in your list:\n");
         for (int i = 0; i < index; i++) {
             li.append("         ").append(i + 1).append(": ").append(list.get(i)).append("\n");
         }
