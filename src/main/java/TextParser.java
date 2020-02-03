@@ -2,7 +2,7 @@
 public class TextParser {
 
     public static String[] myFirstParser(String line) {
-        String[] arrSplit = line.split(" " , 2);
+        String[] arrSplit = line.split(" ", 2);
         return arrSplit;
     }
 

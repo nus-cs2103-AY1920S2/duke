@@ -34,6 +34,8 @@ public class Storage {
                     case "E":
                         currentTask = new Event(parsed[2], LocalDate.parse(parsed[3]));
                         break;
+                    default:
+                        break;
                 }
 
                 if (parsed[1].equals("1")) { // 1 means done
@@ -55,12 +57,12 @@ public class Storage {
             writer = new FileWriter(filepath);
             for (Task current : taskList) {
                 if (current instanceof Todo) {
-                    writer.write("T" + "/" + current.checkDone() + "/" + current.getTask() +
-                            System.lineSeparator());
+                    writer.write("T" + "/" + current.checkDone() + "/" + current.getTask()
+                            + System.lineSeparator());
                 } else if (current instanceof Deadline) {
-                    writer.write("D" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
-                            ((Deadline) current).getDate() + System.lineSeparator());
-                } else if (current instanceof Event){
+                    writer.write("D" + "/" + current.checkDone() + "/" + current.getTask() + "/"
+                            + ((Deadline) current).getDate() + System.lineSeparator());
+                } else if (current instanceof Event) {
                     writer.write("E" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
                             ((Event) current).getDate() + System.lineSeparator());
                 }

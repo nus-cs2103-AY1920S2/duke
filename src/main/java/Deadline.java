@@ -28,9 +28,8 @@ public class Deadline extends Task {
     public String toString() {
         String myword = "";
         myword = myword + "[" + this.getTaskType() + "]"
-                + " [" + super.getStatusIcon() + "] " + super.description +
-                " (" + this.formatDate() + ")";
-
+                + " [" + super.getStatusIcon() + "] " + super.description
+                + " (" + this.formatDate() + ")";
         return myword;
     }
 }
