@@ -10,17 +10,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.java.Task;
-import main.java.ToDoTask;
-import main.java.EventTask;
-import main.java.DeadLineTask;
+import main.java.model.TaskList;
+import main.java.model.Task;
+import main.java.model.ToDoTask;
+import main.java.model.EventTask;
+import main.java.model.DeadLineTask;
 
 import main.java.exceptions.NoDescriptionException;
 
 public class Duke {
 
     protected String user_name;
-    protected ArrayList<Task> taskList;
+    protected TaskList taskList;
 
     static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -32,7 +33,6 @@ public class Duke {
 
     static String greeting = "I'm Duke.\n What can I do for you?\n";
     static String viewListGreeting = "Here are the tasks in your list:\n";
-    static String taskCompleteCongrats = "Nice! I've marked this task as done:\n";
     static String exitGreeting = "Bye. Hope to see you again soon!\n";
     static String addTaskStart = "Got it. I've added this task:\n";
     static String deleteTaskStart = "Noted. I have removed this task:\n";
@@ -54,12 +54,12 @@ public class Duke {
 
     public Duke () {
         this.user_name = "";
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new TaskList();
     }
 
     public Duke (String user_name) {
         this.user_name = user_name;
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new TaskList();
     }
 
     public void setUserName(String user_name) {
@@ -113,22 +113,6 @@ public class Duke {
         return matcher.group(4).trim();
     }
 
-    private void appendList(Task task) {
-        this.taskList.add(task);
-        StringBuilder addTaskEnd = new StringBuilder("Now you have  tasks in the list.\n");
-
-        String addTaskEndStr = addTaskEnd.insert(13, this.taskList.size()).toString();
-        System.out.println(line + addTaskStart + task.toString() + "\n" +
-                addTaskEndStr + line);
-    }
-
-    private void deleteElementFromList(Integer position) {
-        Task deletedTask = this.taskList.get(position);
-        taskList.remove(position-1);
-        System.out.println(line + deleteTaskStart + " " + deletedTask.toString() + "\n" +
-                "Now you have " + Integer.toString(this.taskList.size()) + " tasks in the list.\n" + line);
-    }
-
     public void greet() {
         System.out.println(line + "Hello "+ this.user_name + "! " + greeting + line);
     }
@@ -143,33 +127,21 @@ public class Duke {
             this.exit();
         }
         else if (this.isViewListKey(input)) {
-            String listOverView = line + viewListGreeting;
-            for (int i = 0; i < this.taskList.size(); i++) {
-                if (this.taskList.get(i) == null) {
-                    continue;
-                }
-                listOverView = listOverView + Integer.toString(i + 1) + "."
-                        + taskList.get(i).toString() + "\n";
-            }
-            listOverView = listOverView + line;
-            System.out.println(listOverView);
+            System.out.println(this.taskList.toString());
         }
         else if (this.isDeleteKey(input)) {
             int deletedTaskIndex = this.findIndex(deletePattern, input);
-            this.deleteElementFromList(deletedTaskIndex);
+            this.taskList.remove(deletedTaskIndex);
         }
         else if (this.isFinishKey(input)) {
             int finishedTaskIndex = this.findIndex(finishPattern, input);
-            Task finishedTask = this.taskList.get(finishedTaskIndex);
-            finishedTask.markAsDone();
-
-            System.out.println(line + taskCompleteCongrats + " " + finishedTask.toString() + "\n" + line);
+            this.taskList.markTaskAsDone(finishedTaskIndex);
         }
         else if (this.isTodoKey(input)){
             String description = this.findDescription(todoPattern, input);
             try {
                 ToDoTask currentTask = new ToDoTask(description);
-                this.appendList(currentTask);
+                this.taskList.add(currentTask);
             } catch (NoDescriptionException e) {
                 System.out.println(e.getMessage());
             }
@@ -179,7 +151,7 @@ public class Duke {
             String by = this.findEndTime(deadlinePattern, input);
             try {
                 DeadLineTask currentTask = new DeadLineTask(description, by);
-                this.appendList(currentTask);
+                this.taskList.add(currentTask);
             } catch (NoDescriptionException e) {
                 System.out.println(e.getMessage());
             }
@@ -189,7 +161,7 @@ public class Duke {
             String at = this.findEndTime(eventPattern, input);
             try {
                 EventTask currentTask = new EventTask(description, at);
-                this.appendList(currentTask);
+                this.taskList.add(currentTask);
             } catch (NoDescriptionException e) {
                 System.out.println(e.getMessage());
             }
