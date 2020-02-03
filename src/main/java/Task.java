@@ -15,4 +15,12 @@ public class Task{
     public void markDone(){
         this.isDone = true;
     }
+
+    public String toString(){
+        return "[" + this.getStatus() + "] " + this.getDescription();
+    }
+
+    public String getWhen() {
+        return "";
+    }
 }
