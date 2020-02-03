@@ -3,7 +3,7 @@ package dukeclasses;
 /**
  * This class is the parent class of deadline,todo and event.
  */
-public class Task{
+public class Task {
 
     protected String description;
     protected boolean isDone;
@@ -25,7 +25,7 @@ public class Task{
 
     public String getStatusIcon() {
 
-        return isDone? "\u2713" : "\u2718";
+        return isDone ? "\u2713" : "\u2718";
     }
 
     /**

@@ -25,7 +25,7 @@ public class ToDo extends Task {
      * @return the state of dukeClasses.ToDo, to be saved in data.txt
      */
     public String saveData() {
-        String isItDone = this.isDone? "1" : "0";
+        String isItDone = this.isDone ? "1" : "0";
         //1 is done, 0 is not done
         return "dukeClasses.ToDo" + "|" + isItDone + "|" + this.description;
     }

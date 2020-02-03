@@ -39,7 +39,7 @@ public class Ui {
             System.out.println(ex);
         }
 
-        System.out.println("Hello!! My name is Edith. Tony Stark's Personal Assistant"+ "\n"
+        System.out.println("Hello!! My name is Edith. Tony Stark's Personal Assistant" + "\n"
                 + "What can I do for you?");
         System.out.println(horizontalLine);
 
@@ -67,7 +67,7 @@ public class Ui {
                 System.out.println("There is no task with that index! ");
             }
         } else if (textEntered.contains("todo") || (textEntered.contains("deadline"))
-                || textEntered.contains("event")) {//create a task
+                || textEntered.contains("event")) { //create a task
             try {
                 manager.addTask(textEntered);
             } catch (DukeException ex) {
@@ -89,14 +89,14 @@ public class Ui {
         } else if (textEntered.contains("bye")) {
             manager.saveExistingData();
             this.hasEnded = true;
-        } else if (textEntered.contains("find")) {//contains 1 keyword only, as stated in the question
+        } else if (textEntered.contains("find")) { //contains 1 keyword only, as stated in the question
             Parser parse = new Parser();
             String[] temp = parse.handleFindCommands(textEntered);
             try {
-                 if (temp.length == 1) {
+                if (temp.length == 1) {
                     throw new DukeException("Find must be followed by a keyword and cannot be empty.");
-                 }
-                 manager.findTask(temp[1]);
+                }
+                manager.findTask(temp[1]);
             } catch (DukeException ex) {
                 System.out.println(ex);
             }

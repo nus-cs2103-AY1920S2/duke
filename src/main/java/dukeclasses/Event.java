@@ -30,7 +30,7 @@ public class Event extends Task {
      * @return the state of dukeClasses.Event, to be saved in data.txt
      */
     public String saveData() {
-        String isItDone = this.isDone? "1" : "0"; //1 is done, 0 is not done
+        String isItDone = this.isDone ? "1" : "0"; //1 is done, 0 is not done
         return "dukeClasses.Event" + "|" + isItDone + "|" + this.description + "|" + this.at;
     }
 }

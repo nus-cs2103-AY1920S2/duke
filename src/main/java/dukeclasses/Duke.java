@@ -76,10 +76,13 @@ public class Duke  {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
+
+    PrintStream helper;
+
     protected String getResponse(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
-        PrintStream old = System.out;
+        helper = System.out;
         System.setOut(ps);
         //FastReader fr = new FastReader();//Handles input by the user
         TaskManager manager = new TaskManager();
@@ -87,16 +90,16 @@ public class Duke  {
         //ui.introduction();
         manager.loadExistingData();
 
-        if(input.contains("bye")){
+        if (input.contains("bye")) {
             ui.printGoodbyeMessage();
 
-        }else {
+        } else {
             ui.handleInputs(input);
         }
 
 
         System.out.flush();
-        System.setOut(old);
+        System.setOut(helper);
 
         return "Duke heard: " + baos.toString();
     }

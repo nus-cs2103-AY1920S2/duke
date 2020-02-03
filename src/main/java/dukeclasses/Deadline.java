@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @return the state of dukeClasses.Deadline, to be saved in data.txt
      */
     public String saveData() {
-        String isItDone = this.isDone? "1" : "0"; //1 is done, 0 is not done
+        String isItDone = this.isDone ? "1" : "0"; //1 is done, 0 is not done
         return "dukeClasses.Deadline" + "|" + isItDone + "|" + this.description + "|" + this.by;
     }
 }

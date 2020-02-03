@@ -53,6 +53,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * This gets the text of what is Duke going to say.
+     *
+     * @param text input text
+     * @param img image of duke
+     * @return returns a Dialog box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
