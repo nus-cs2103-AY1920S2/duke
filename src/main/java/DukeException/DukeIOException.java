@@ -1,7 +1,7 @@
-package DukeException;
+package dukeexception;
 
-public class DukeIOException extends DukeException {
-    public DukeIOException(String message){
+public class DukeIoException extends DukeException {
+    public DukeIoException(String message) {
         super(message);
     }
 }

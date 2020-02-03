@@ -1,5 +1,5 @@
-import DukeException.DukeException;
-import DukeException.DukeUnknownInputException;
+import dukeexception.DukeException;
+import dukeexception.DukeUnknownInputException;
 
 public class Duke {
 

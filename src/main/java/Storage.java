@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import DukeException.DukeException;
-import DukeException.DukeIOException;
+import dukeexception.DukeException;
+import dukeexception.DukeIoException;
 
 public class Storage {
     static Path file;
@@ -19,19 +19,19 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                 String line = sc.nextLine();
-                 if (line.equals("")) {
-                     continue;
-                 }
-                 String code = line.substring(1, 2);
-                 boolean isDone = line.substring(4, 5).equals("Y");
-                 String taskArgs = line.substring(7);
-                 Task task = buildTask(code, taskArgs, isDone);
-                 listOfTasks.add(task);
+                String line = sc.nextLine();
+                if (line.equals("")) {
+                    continue;
+                }
+                String code = line.substring(1, 2);
+                boolean isDone = line.substring(4, 5).equals("Y");
+                String taskArgs = line.substring(7);
+                Task task = buildTask(code, taskArgs, isDone);
+                listOfTasks.add(task);
             }
             return listOfTasks;
         } catch (IOException e) {
-            throw new DukeIOException("File does not exist in file path, load from file failed.");
+            throw new DukeIoException("File does not exist in file path, load from file failed.");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Do not understand task(s) in file, load from file failed");
         }
@@ -45,7 +45,7 @@ public class Storage {
         try {
             Files.write(file, tasksForFile);
         } catch (IOException e) {
-            throw new DukeIOException("File does not exist in file path, file update failed.");
+            throw new DukeIoException("File does not exist in file path, file update failed.");
         }
     }
 
@@ -69,7 +69,7 @@ public class Storage {
             Event event = new Event(description, atWhen, isDone);
             return event;
         } else {
-            throw new DukeIOException("Do not understand task(s) in file, load from file failed");
+            throw new DukeIoException("Do not understand task(s) in file, load from file failed");
         }
     }
 }

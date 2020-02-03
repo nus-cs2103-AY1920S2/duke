@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import DukeException.DukeMissingDescriptionException;
-import DukeException.DukeUnknownInputException;
+import dukeexception.DukeMissingDescriptionException;
+import dukeexception.DukeUnknownInputException;
 
 public class Parser {
 
@@ -18,7 +18,7 @@ public class Parser {
         String num = command.substring(5);
         try {
             return Integer.valueOf(num);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeUnknownInputException("Need task NUMBER.");
         }
     }
@@ -68,7 +68,7 @@ public class Parser {
         String num = command.substring(7);
         try {
             return Integer.valueOf(num);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeUnknownInputException("Need task NUMBER.");
         }
     }
