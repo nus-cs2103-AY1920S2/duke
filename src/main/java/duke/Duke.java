@@ -1,50 +1,60 @@
 package duke;
 
+import duke.command.Command;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.MainWindow;
-
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
-import java.io.IOException;
+import duke.ui.Ui;
 
 /**
- * A GUI for Duke using FXML.
+ * Entry point of the non-GUI Duke application.
+ * Initialises the program and starts the interaction with the user.
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     /**
-     * Starts the Duke application.
+     * Constructs Duke, initialise the Ui, storage and task list.
      *
-     * @param stage the primary stage for this application, onto which the application scene can be set.
+     * @param filePath to store the list of tasks in the disk.
      */
-    @Override
-    public void start(Stage stage) {
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            stage.setOnCloseRequest(new EventHandler<>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    event.consume();
-                    fxmlLoader.<MainWindow>getController().closeWindowButtonClicked();
-                }
-            });
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
+    /**
+     * Runs the program until "bye" command is received.
+     */
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showTopLine();
+                Command c = Parser.parse(fullCommand);
+                String acknowledgement = c.execute(tasks, ui, storage);
+                ui.showAcknowledgement(acknowledgement);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showBottomLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
 }
