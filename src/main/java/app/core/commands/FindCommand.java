@@ -4,10 +4,10 @@ import app.core.tasks.TaskManager;
 import app.core.UserInterface;
 import app.exceptions.WrongUsageException;
 
-public class FindCommand extends Command {
+final class FindCommand extends Command {
     private String toMatch;
 
-    public FindCommand(String args) throws WrongUsageException {
+    FindCommand(String args) throws WrongUsageException {
         if (args.equals("")) {
             throw new WrongUsageException("Usage: find <string_to_match>");
         }
