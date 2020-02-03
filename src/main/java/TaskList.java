@@ -92,4 +92,21 @@ public class TaskList {
         tasks.remove(index);
         return deletedTask;
     }
+
+    /**
+     * Gets a list of tasks that contains the word user is finding.
+     *
+     * @param word The word user wants to find.
+     * @return List of tasks that contains ward.
+     */
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask.toString().contains(word)) {
+                tasksFound.add(currTask);
+            }
+        }
+        return tasksFound;
+    }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import dukeexception.DukeException;
 
@@ -60,5 +61,14 @@ public class Ui {
         System.out.println("____________________________________________________________\n"
                 + e.getMessage() + "\n"
                 + "____________________________________________________________");
+    }
+
+    public void showFound(ArrayList<Task> tasksFound) {
+        System.out.println("____________________________________________________________\n"
+                + "Here are the tasks in your list:");
+        for (int i = 0; i < tasksFound.size(); i++) {
+            System.out.println(i + 1 + "." + tasksFound.get(i));
+        }
+        System.out.println("____________________________________________________________");
     }
 }

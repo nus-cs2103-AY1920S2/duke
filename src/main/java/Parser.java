@@ -119,4 +119,18 @@ public class Parser {
             throw new DukeUnknownInputException("Need task NUMBER.");
         }
     }
+
+    /**
+     * Gets the word to find from user command.
+     *
+     * @param command User Command.
+     * @return Word to find in String format.
+     * @throws DukeMissingDescriptionException When nothing is given to find by user.
+     */
+    public static String findWord(String command) {
+        if (command.length() <= 5) {
+            throw new DukeMissingDescriptionException("Word to find missing.");
+        }
+        return command.substring(5);
+    }
 }
