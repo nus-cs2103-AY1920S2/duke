@@ -31,6 +31,10 @@ public class Duke extends Application{
         stage.show();
     }
 
+    public Duke() {
+
+    }
+
     /**
      * Constructor for Duke object.
      * @param filePath path of file
