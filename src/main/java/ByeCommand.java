@@ -4,5 +4,4 @@ public class ByeCommand extends Command {
         super();
         this.command = "bye";
     }
-
 }

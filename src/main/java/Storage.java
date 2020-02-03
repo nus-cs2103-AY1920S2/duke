@@ -3,10 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
 public class Storage {
-    // deals with loading tasks from the file and saving tasks in the file
-    // loading and saving methods goes here
     private File f;
 
     public Storage(String filePath) {
@@ -86,7 +83,7 @@ public class Storage {
         }
     }
 
-    private LocalDate dateConverter(String date){
+    private LocalDate dateConverter(String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         LocalDate localDate = LocalDate.parse(date, dateTimeFormatter);
         return localDate;
@@ -104,7 +101,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error when saving file. " + e.getMessage());
         }
-
 
     }
 

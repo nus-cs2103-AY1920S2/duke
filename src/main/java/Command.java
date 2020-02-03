@@ -6,6 +6,7 @@ public abstract class Command {
     public String getCommand() {
         return this.command;
     }
+
     public int getIndex() {
         return this.index;
     }
@@ -13,6 +14,4 @@ public abstract class Command {
     public Task getTask() {
         return this.task;
     }
-
-
 }

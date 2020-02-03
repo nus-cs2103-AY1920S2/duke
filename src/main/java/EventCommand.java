@@ -5,5 +5,4 @@ public class EventCommand extends Command {
         this.command = "event";
         this.task = e;
     }
-
 }

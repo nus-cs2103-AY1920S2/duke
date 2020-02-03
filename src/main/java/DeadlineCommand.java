@@ -5,5 +5,4 @@ public class DeadlineCommand extends Command {
         this.command = "deadline";
         this.task = d;
     }
-
 }

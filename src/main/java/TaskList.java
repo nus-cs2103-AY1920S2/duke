@@ -1,14 +1,10 @@
-//  contains the task list e.g., it has operations to add/delete tasks in the list
-// and methods to edit task lists
-// and run Task.
-
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> listOfTexts;
 
     public TaskList(ArrayList<Task> listOfTasks) {
-        this.listOfTexts = listOfTasks; // need to implement storage
+        this.listOfTexts = listOfTasks;
     }
 
     public TaskList() {
@@ -35,7 +31,6 @@ public class TaskList {
     }
 
     public void runCommand(Command command) {
-
         try {
             switch (command.getCommand()) {
                 case "bye": {
@@ -84,9 +79,5 @@ public class TaskList {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
-
-
 }

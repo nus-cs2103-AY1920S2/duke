@@ -5,6 +5,4 @@ public class DeleteCommand extends Command {
         this.command = "delete";
         this.index = index;
     }
-
-
 }

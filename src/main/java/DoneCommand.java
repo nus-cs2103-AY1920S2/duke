@@ -5,6 +5,4 @@ public class DoneCommand extends Command {
         this.command = "done";
         this.index = index;
     }
-
-
 }

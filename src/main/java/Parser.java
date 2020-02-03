@@ -1,14 +1,10 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-// Parser handles what command to generate based on the user input
-// what command should occur based on the what the user input
-// makes sense of the text
 
 public class Parser {
     static String exitInput = "bye";
 
     static Command parse(String text) {
-
         if (text.toLowerCase().equals(exitInput)) {
             return new ByeCommand();
         }
@@ -100,7 +96,6 @@ public class Parser {
             }
 
         }
-        // need to return a null command
         return null;
     }
 }
