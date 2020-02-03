@@ -24,7 +24,7 @@ public class Duke {
             System.out.println(ex);
             isProblem = true;
         }
-
+        //test 123
         while(!userInput.equals("bye")){
             if(isProblem) {
                 isProblem = false;
