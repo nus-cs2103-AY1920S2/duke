@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represent a storage object to handle storing of the list into files
+ * Represent a storage object to handle storing of the list into files.
  */
 public class Storage {
 
     protected String filepath;
 
     /**
-     * Constructor for storage
+     * Constructor for storage.
      * @param filepath of the file
      */
     public Storage(String filepath) {
@@ -22,8 +22,8 @@ public class Storage {
     }
 
     /**
-     * Read the file and convert into a arraylist of tasks
-     * @return ArrayList<Task>
+     * Read the file and convert into a arraylist of tasks.
+     * @return ArrayList</Task>
      */
     public ArrayList<Task> readFile() {
         ArrayList<Task> list = new ArrayList<>();
@@ -63,8 +63,8 @@ public class Storage {
     }
 
     /**
-     * Writes the arraylist of task into the file
-     * @param taskList ArrayList<Task>
+     * Writes the arraylist of task into the file.
+     * @param taskList ArrayList</Task>
      */
     public void writeFile(ArrayList<Task> taskList) {
         FileWriter writer = null;

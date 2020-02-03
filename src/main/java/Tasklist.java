@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 /**
- * Represent an Tasklist containing a list of Task objects
+ * Represent an Tasklist containing a list of Task objects.
  */
 public class Tasklist {
 
     protected ArrayList<Task> mylist;
 
     /**
-     * Constructor for Tasklist
+     * Constructor for Tasklist.
      * @param list An arraylist of Task
      */
     public Tasklist(ArrayList<Task> list) {
@@ -16,7 +16,7 @@ public class Tasklist {
     }
 
     /**
-     * Add a task into the tail of the list
+     * Add a task into the tail of the list.
      * @param task a task to do
      */
     public void addTask(Task task) {
@@ -24,7 +24,7 @@ public class Tasklist {
     }
 
     /**
-     * Remove the task positioned in the index from the arraylist
+     * Remove the task positioned in the index from the arraylist.
      * @param index the position
      */
     public void removeTask(int index) {
@@ -32,7 +32,7 @@ public class Tasklist {
     }
 
     /**
-     * Mark the task positioned in the index as done from the arraylist
+     * Mark the task positioned in the index as done from the arraylist.
      * @param index the position
      */
     public void markDone(int index) {
@@ -41,7 +41,7 @@ public class Tasklist {
     }
 
     /**
-     * Returns the task positioned in the index from the arraylist
+     * Returns the task positioned in the index from the arraylist.
      * @param index the position
      * @return the selected task from the list
      */
@@ -50,15 +50,15 @@ public class Tasklist {
     }
 
     /**
-     * Returns the size of arraylist
-     * @return int size of arraylist
+     * Returns the size of arraylist.
+     * @return int
      */
     public int getSize() {
         return mylist.size();
     }
 
     /**
-     * Returns the arraylist
+     * Returns the arraylist.
      * @return arraylist
      */
     public ArrayList<Task> getList() {
@@ -66,7 +66,7 @@ public class Tasklist {
     }
 
     /**
-     * Prints the arraylist of task
+     * Prints the arraylist of task.
      */
     public void printList() {
         for (int i = 0; i < mylist.size(); i++) {
@@ -74,6 +74,10 @@ public class Tasklist {
         }
     }
 
+    /**
+     * Print the list of tasks with the keyword inside.
+     * @param keyword String
+     */
     public void findKeyword(String keyword) {
         int j = 1;
         for (int i = 0; i < mylist.size(); i++) {

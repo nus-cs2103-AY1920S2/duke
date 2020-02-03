@@ -1,10 +1,10 @@
 /**
- * Represent a to-do task
+ * Represent a to-do task.
  * Extends the Task class
  */
 public class Todo extends Task {
     /**
-     * Constructor for to-do task
+     * Constructor for to-do task.
      * @param description of the task
      */
     public Todo(String description) {
@@ -12,7 +12,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Get the type of task
+     * Get the type of task.
      * D for Deadline
      * T for To-do
      * E for Event

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 /**
- * Represent the main driving class Duke
+ * Represent the main driving class Duke.
  */
 public class Duke {
 
@@ -11,9 +11,9 @@ public class Duke {
     protected Tasklist tasklist;
 
     /**
-     * Constructor of Duke
+     * Constructor of Duke.
+     * Initialise Ui, Storage and Tasklist
      * @param filepath of the file to be used in storage
-     * Initialise Ui, Storage, Tasklist
      */
     public Duke(String filepath) {
         this.ui = new Ui();
@@ -22,7 +22,7 @@ public class Duke {
     }
 
     /**
-     * The main logic of the chatbot
+     * The main logic of the chatbot.
      */
     public void run() {
         this.ui.printIntro();
@@ -83,8 +83,8 @@ public class Duke {
     }
 
     /**
-     * The main method
-     * @param args
+     * The main method.
+     * @param args argument
      */
     public static void main(String[] args) {
         new Duke("./list.txt").run();

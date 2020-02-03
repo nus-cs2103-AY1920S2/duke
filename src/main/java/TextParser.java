@@ -1,10 +1,10 @@
 /**
- * Represent a class to handle the parsing of the text for processing of commands
+ * Represent a class to handle the parsing of the text for processing of commands.
  */
 public class TextParser {
 
     /**
-     * Parse a string into array using String.split(" ", 2)
+     * Parse a string into array using String.split(" ", 2).
      * @param line to be parsed
      * @return String[]
      */
@@ -14,7 +14,7 @@ public class TextParser {
     }
 
     /**
-     * Parse a string into array using String.split("/", 2)
+     * Parse a string into array using String.split("/", 2).
      * @param line to be parsed
      * @return String[]
      */
@@ -24,7 +24,7 @@ public class TextParser {
     }
 
     /**
-     * Parse a string into array using String.split("/")
+     * Parse a string into array using String.split("/").
      * no limits
      * @param line to be parsed
      * @return String[]

@@ -1,12 +1,12 @@
 /**
- * Represent a task to do
+ * Represent a task to do.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for Task to do
+     * Constructor for Task to do.
      * @param description of the activity
      */
     public Task(String description) {
@@ -15,7 +15,7 @@ public class Task {
     }
 
     /**
-     * Returns a tick or cross icon depending on the task completion status
+     * Returns a tick or cross icon depending on the task completion status.
      * @return String representing a tick or cross
      */
     public String getStatusIcon() {
@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Returns a description of the task
+     * Returns a description of the task.
      * @return String of the task
      */
     public String getTask() {
@@ -31,7 +31,7 @@ public class Task {
     }
 
     /**
-     * Returns the completion status of the task
+     * Returns the completion status of the task.
      * @return 1 for true 0 for false
      */
     public String checkDone() {
@@ -39,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;

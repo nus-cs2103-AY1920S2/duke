@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represent a task with deadline
+ * Represent a task with deadline.
  * Extends the Task class
  */
 public class Deadline extends Task {
@@ -10,7 +10,7 @@ public class Deadline extends Task {
     protected LocalDate date;
 
     /**
-     * Constructor for Deadline
+     * Constructor for Deadline.
      * @param description of the task
      * @param date to be completed
      */
@@ -20,7 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the type of task
+     * Get the type of task.
      * D for Deadline
      * T for To-do
      * E for Event
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the task's date to be completed
+     * Get the task's date to be completed.
      * @return date
      */
     public String getDate() {
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Formats the date of string from YYYY-MM-DD to D MMM YYYY
+     * Formats the date of string from YYYY-MM-DD to D MMM YYYY.
      * Eg: 2009-12-03 to 3 DEC 2009
      * @return String of formatted date
      */
