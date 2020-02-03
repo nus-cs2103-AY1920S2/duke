@@ -7,14 +7,30 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * A class representing a find command.
+ */
 public class FindCommand extends Command {
     private static final String type = "find";
     private String keyword;
 
+    /**
+     * Constructs the FindCommand object with a specified keyword.
+     *
+     * @param keyword a String value for the keyword.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Displays the list of tasks that contain the query keyword. The list is consistent with data stored in the record
+     * specified by the file path in the current Duke instance.
+     *
+     * @param storageController a Storage object
+     * @param storage           an ArrayList collection of Task objects for processing in-program.
+     * @return false
+     */
     @Override
     public boolean execute(Storage storageController, ArrayList<Task> storage) {
         try {
