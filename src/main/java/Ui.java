@@ -14,7 +14,7 @@ public class Ui {
     }
 
     public void printEnding() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope not to see you again soon!");
     }
 
     public void printMessage(String message) {
