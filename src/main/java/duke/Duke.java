@@ -75,46 +75,7 @@ public class Duke {
                 System.out.print("> ");
             }
         }
-
         storage.update(tasks);
         ui.showExitMessage();
     }
-
-//    public static void doInstructions(String input) throws DukeException {
-//        String command = getCommand(input);
-//
-//        if (command.equals("list")) {
-//            // show list from ui
-//        } else if (command.equals("done")) {
-//            int taskNum = Integer.parseInt(input.split(" ")[1]);
-//            // check for
-//            // 1. invalid task num
-//            // 2. empty task num
-//            // 3. if task is already done?
-//            // implement ui class? if have time to print out done statement
-//            tasks.get(taskNum - 1).markAsDone();
-//            ui.showDone(tasks.get(taskNum - 1));
-//        } else if (command.equals("delete")) {
-//            int taskNum = Integer.parseInt(input.split(" ")[1]);
-//            String desc = tasks.get(taskNum - 1).toString();
-//            tasks.remove(taskNum - 1);
-//            numTasks -= 1;
-//            // show deleted from ui
-//        } else {
-//            Task newTask;
-//            // check for
-//            // 1. no description
-//            // 2. no time
-//            if (command.equals("todo")) {
-//                newTask = new ToDo(getDescription(input));
-//            } else if (command.equals("deadline")) {
-//                newTask = new Deadline(getDescription(input), getTime(input));
-//            } else { // (command.equals("event")) {
-//                newTask = new Event(getDescription(input), getTime(input));
-//            }
-//
-//            tasks.add(newTask);
-//            // show added from ui
-//        }
-//    }
 }
