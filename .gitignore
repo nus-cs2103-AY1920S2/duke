@@ -12,3 +12,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+text-ui-test/ACTUAL.TXT
+data/duke.txt
+.project
+.settings
