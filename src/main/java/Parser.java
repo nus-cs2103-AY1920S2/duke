@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
@@ -28,6 +29,9 @@ public class Parser {
                         break;
                     case "list":
                         ui.listTasks(taskList);
+                        break;
+                    case "find":
+                        taskList.findTask(inputSplit[1]);
                         break;
                     case "bye":
                         ui.exitDuke();
@@ -91,6 +95,7 @@ public class Parser {
                 || type.equals("deadline")
                 || type.equals("event")
                 || type.equals("list")
+                || type.equals("find")
                 || type.equals("done")
                 || type.equals("delete")
                 || type.equals("bye")) {
@@ -109,7 +114,8 @@ public class Parser {
     }
 
     public static boolean checkValidDeadline(String[] input) {
-        if (input.length == 3) {
+        Arrays.toString(input);
+        if (input.length == 2) {
             return true;
         } else {
             return false;
@@ -117,7 +123,7 @@ public class Parser {
     }
 
     public static boolean checkValidEvent(String[] input) {
-        if (input.length == 3) {
+        if (input.length == 2) {
             return true;
         } else {
             return false;
