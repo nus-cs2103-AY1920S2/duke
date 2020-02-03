@@ -12,7 +12,7 @@ shadowJar {
     archiveAppendix = null
 }
 
-group 'seedu.duke'
+group 'seedu.Duke'
 version '0.1.0'
 
 repositories {
@@ -21,7 +21,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Duke.Duke"
 }
 
 run {

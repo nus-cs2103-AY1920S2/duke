@@ -1,7 +1,0 @@
-todo read book
-done 1
-deadline return book /by 02/03/2019 2300
-event project meeting /at 09/09/2012 0500
-list
-done 3
-todo join sports club
