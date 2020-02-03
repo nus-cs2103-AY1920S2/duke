@@ -2,13 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.2.0'
-}
-
-//group 'duke'
-//version '0.1.1'
-
-repositories {
-    mavenCentral()
+    id 'checkstyle'
 }
 
 application {
@@ -19,6 +13,29 @@ application {
 run {
     standardInput = System.in
 }
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.0'
+}
+
+group 'duke'
+version '0.1'
+
+// JUnit configuration
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+
 
 shadowJar {
     archiveBaseName = "duke"
