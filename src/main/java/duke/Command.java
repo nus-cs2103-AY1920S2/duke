@@ -1,16 +1,18 @@
 package duke;
 
 public abstract class Command {
-    String input;
+  String input;
 
-    Command(String input) {
-        this.input = input;
-    }
+  Command(String input) {
+    this.input = input;
+  }
 
-    protected abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+  protected abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    protected boolean isExit() {
-        return false;
-    }
+  protected abstract String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage)
+      throws DukeException;
 
+  protected boolean isExit() {
+    return false;
+  }
 }
