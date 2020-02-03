@@ -1,5 +1,6 @@
 package dukeproj;
 
+import dukeproj.command.*;
 import dukeproj.data.Calender;
 import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
@@ -36,6 +37,8 @@ public class Parser {
     private Calender calender;
     /** Primary I/O object used. */
     private Scanner sc;
+    /** User Interface to return user-input*/
+    private Ui ui;
 
     /**
      * Returns the date in LocalDate form parsed from the String entered.
@@ -70,24 +73,33 @@ public class Parser {
 
     public String getCommandResponse(CommandType commandType, String description)
             throws DukeDescriptionException, BadDescriptionException, BadDateException {
+        Command command = new ListCommand(); //default command
         switch (commandType) {
-        case LIST:
-            break;
         case DONE:
+            command = new DoneCommand(description);
             break;
         case TODO:
-            break;
+            //fallthrough
         case EVENT:
-            break;
+            //fallthrough
         case DEADLINE:
+            command = new AddCommand(description, commandType);
             break;
         case DELETE:
+            command = new DeleteCommand(description);
             break;
         case SEARCH:
+            command = new SearchCommand(description);
             break;
         case FIND:
+            command = new FindCommand(description);
+            break;
+        case LIST:
+            //fallthrough
+        default:
             break;
         }
+        return command.execute(ui, taskList, storage, calender);
     }
 
     /**
@@ -201,7 +213,7 @@ public class Parser {
             LocalDate date = Parser.dateParser(search.substring(1));
             System.out.println("Here are the events on " +
                     date.format(Parser.DATE_READ_FORMATTER) + ":");
-            calender.searchDate(date);
+            System.out.println(calender.searchDate(date));
             break;
         case FIND:
             String find = sc.nextLine();
@@ -215,6 +227,10 @@ public class Parser {
         default:
             break;
         }
+    }
+
+    public Parser(Ui ui, TaskList taskList, Calender calender, Storage storage) {
+
     }
 
     public Parser(TaskList taskList, Calender calender, Storage storage, Scanner sc) {
