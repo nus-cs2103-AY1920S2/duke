@@ -1,51 +1,26 @@
-import java.util.Scanner;
-
 /**
  * Text Ui of Duke.
  */
 public class Ui {
-    private Scanner reader;
-
-    public Ui() {
-        this.reader = new Scanner(System.in);
-    }
-
-    /**
-     * Gets user input.
-     *
-     * @return String of next user input.
-     */
-    public String getInput() {
-        return reader.nextLine();
-    }
-
-    /**
-     * Shows line break.
-     */
-    public void printBreak() {
-        System.out.println("    ______________________________________________________________");
-    }
 
     /**
      * Shows Duke logo.
      */
-    public void printLogo() {
+    public String showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printBreak();
+        return "Hello from\n" + logo;
     }
 
     /**
      * Shows greeting message.
      */
-    public void printGreet() {
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        printBreak();
+    public String showGreet() {
+        return "Hello! I'm Duke! What can I do for you?\n"
+                + "You may type \'help\' to see more functions.\n";
     }
 
     /**
@@ -53,14 +28,13 @@ public class Ui {
      *
      * @param tasks Task list.
      */
-    public void list(TaskList tasks) {
-        printBreak();
-        System.out.println("    Here are the tasks in your list:");
+    public String showList(TaskList tasks) {
+        String str = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.getTaskNumber(); i++) {
             Task currTask = tasks.getTask(i - 1);
-            System.out.println("    " + i + "." + currTask);
+            str = str.concat("  " + i + "." + currTask + "\n");
         }
-        printBreak();
+        return str;
     }
 
     /**
@@ -69,13 +43,10 @@ public class Ui {
      * @param t New Task to be added.
      * @param tasks Task list.
      */
-    public void add(Task t, TaskList tasks) {
-        printBreak();
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + t);
+    public String showAdd(Task t, TaskList tasks) {
         tasks.addTask(t);
-        System.out.println("    Now you have " + tasks.getTaskNumber() + " tasks in the list.");
-        printBreak();
+        return "Got it. I've added this task:\n  " + t + "\nNow you have "
+                + tasks.getTaskNumber() + " tasks in the list.\n";
     }
 
     /**
@@ -83,12 +54,9 @@ public class Ui {
      *
      * @param currTask Task that be marked.
      */
-    public void markDone(Task currTask) {
-        printBreak();
-        System.out.println("    Nice! I've marked this task as done:");
+    public String ShowMarkDone(Task currTask) {
         currTask.markAsDone();
-        System.out.println("      " + currTask);
-        printBreak();
+        return "Nice! I've marked this task as done:\n" + "  " + currTask + "\n";
     }
 
     /**
@@ -97,22 +65,31 @@ public class Ui {
      * @param currTask Target Task to delete.
      * @param tasks Task list.
      */
-    public void delete(Task currTask, TaskList tasks) {
-        printBreak();
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("      " + currTask);
+    public String ShowDelete(Task currTask, TaskList tasks) {
+        String str = "Noted. I've removed this task:\n  " + currTask + "\n";
         tasks.removeTask(currTask);
-        System.out.println("    sNow you have " + tasks.getTaskNumber() + " tasks in the list.");
-        printBreak();
+        str = str.concat("Now you have " + tasks.getTaskNumber() + " tasks in the list.\n");
+        return str;
     }
 
     /**
      * Shows exiting message.
      */
-    public void printExit() {
-        printBreak();
-        System.out.println("    Bye. Hope to see you again soon!");
-        printBreak();
+    public String showExit() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    public String showHelp() {
+        return "Here are my functions that you can try: \n" +
+                "- help: show my functions. \n" +
+                "- list: list your tasks.\n" +
+                "- todo [task description]: add a todo task.\n" +
+                "- deadline [task description] /by [yyyy-mm-dd]: add a task with deadline.\n" +
+                "- event [task description] /at [yyyy-mm-dd]: add an event with time.\n" +
+                "- done [task number]: mark this task as done.\n" +
+                "- delete [task number]: delete this task from your list.\n" +
+                "- find [keywords]: find all tasks containing the keywords.\n" +
+                "- exit: say goodbye!\n";
     }
 
     /**
@@ -120,10 +97,8 @@ public class Ui {
      *
      * @param message Exception message.
      */
-    public void printException(String message) {
-        printBreak();
-        System.out.println(message);
-        printBreak();
+    public String showException(String message) {
+        return message;
     }
 
     /**
@@ -132,21 +107,19 @@ public class Ui {
      * @param keyWord String of key word.
      * @param tasks Task list.
      */
-    public void find(String keyWord, TaskList tasks) {
-        printBreak();
-        System.out.println("    Here are the matching tasks in your list:");
+    public String showFind(String keyWord, TaskList tasks) {
+        String str = "Here are the matching tasks in your list:\n";
         boolean isfailed = true;
         for (int i = 1; i <= tasks.getTaskNumber(); i++) {
             Task currTask = tasks.getTask(i - 1);
             if (currTask.getDescription().contains(keyWord)) {
-                System.out.println("    " + i + "." + currTask);
+                str = str.concat("  " + i + "." + currTask + "\n");
                 isfailed = false;
             }
         }
         if (isfailed) {
-            System.out.println("    None.");
+            str = str.concat("  None.\n");
         }
-        printBreak();
+        return str;
     }
-
 }
