@@ -20,7 +20,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showSaveNotFoundMessage(storage.savePath);
+            ui.showSaveNotFoundMessage(storage.STORAGE_SAVE_PATH);
             tasks = new TaskList();
         } catch (DukeException e) {
             ui.showError(e);
@@ -37,8 +37,8 @@ public class Duke {
     private void run() {
         ui.greet();
         
-        boolean running = true;
-        while (running) {
+        boolean isRunning = true;
+        while (isRunning) {
             String commandString = ui.readCommandString();
             
             ui.showLine();
@@ -47,7 +47,7 @@ public class Duke {
                 if (c.isPresent()) {
                     Command cmd = c.get();
                     cmd.execute(tasks, ui, storage);
-                    running = running && !cmd.isExit();
+                    isRunning = isRunning && !cmd.isExit();
                 } else {
                     ui.showUnknownCommandMessage(commandString);
                 }

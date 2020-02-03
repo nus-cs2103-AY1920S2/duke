@@ -14,7 +14,7 @@ import java.nio.file.Files;
  * Encapsulates serialization and external storage of the task list state.
  */
 public class Storage {
-    public static final String savePath = "data/duke.txt";
+    public static final String STORAGE_SAVE_PATH = "data/duke.txt";
     
     public Storage() {
     }
@@ -22,7 +22,7 @@ public class Storage {
     @SuppressWarnings("unchecked")
     private ArrayList<Task> loadTaskState()
         throws IOException, ClassNotFoundException, ClassCastException {
-        FileInputStream f = new FileInputStream(savePath);
+        FileInputStream f = new FileInputStream(STORAGE_SAVE_PATH);
         ObjectInputStream o = new ObjectInputStream(f);
         
         ArrayList<Task> tasks = (ArrayList<Task>)o.readObject();
@@ -32,7 +32,7 @@ public class Storage {
     }
     
     /**
-     * Loads the `ArrayList` of `Task`s from the path specified in `savePath`.
+     * Loads the `ArrayList` of `Task`s from the path specified in `STORAGE_SAVE_PATH`.
      * @return List of tasks
      * @throws FileNotFoundException  if the file containing the task lists does not exist
      * @throws DukeException if the task list is malformed, or if an I/O error occured
@@ -49,17 +49,17 @@ public class Storage {
 
     private void saveTaskState(ArrayList<Task> tasks) throws IOException {
         //recursively create directories to save path if they don't exist
-        Files.createDirectories(Paths.get(savePath).getParent());
+        Files.createDirectories(Paths.get(STORAGE_SAVE_PATH).getParent());
         
         //save to file
-        FileOutputStream f = new FileOutputStream(savePath);
+        FileOutputStream f = new FileOutputStream(STORAGE_SAVE_PATH);
         ObjectOutputStream o = new ObjectOutputStream(f);
         o.writeObject(tasks);
         o.close();
     }
     
     /**
-     * Saves the `ArrayList` of `Task`s to the path specified in `savePath`.
+     * Saves the `ArrayList` of `Task`s to the path specified in `STORAGE_SAVE_PATH`.
      * @param tasks List of tasks
      * @throws DukeException if the `tasks` list cannot be saved to file
      */
