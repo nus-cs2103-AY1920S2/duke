@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
+/**
+ * Parser class to process input.
+ */
 public class Parser {
+
+    /**
+     * Handles various permitted commands by calling relevant methods to process after parsing.
+     *
+     * @param taskList TaskList that contains ArrayList<Task>.
+     * @param ui Ui to print out user interface text.
+     */
     public static void handle(TaskList taskList, Ui ui) {
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -43,6 +53,14 @@ public class Parser {
         } while (loop);
     }
 
+    /**
+     * Processes command line input to obtain the command's type
+     * and throws an Exception if the command is invalid.
+     *
+     * @param input String of the initial command line input.
+     * @return String representing the command type.
+     * @throws InvalidCommandException DukeException for invalid commands.
+     */
     public static String extractCommandType(String input) throws InvalidCommandException{
         String[] inputSplit = input.split(" ", 2);
         boolean isValidCommand = checkValidCommand(inputSplit[0]);
@@ -54,6 +72,13 @@ public class Parser {
         return inputSplit[0];
     }
 
+    /**
+     * Processes String array of input to check if it is valid for Todo task.
+     *
+     * @param input String array of the command line input after splitting by " ".
+     * @return String of description for Todo task.
+     * @throws InvalidTodoException DukeException for invalid Todo tasks.
+     */
     public static String prepareTodo(String[] input) throws InvalidTodoException {
         if (!checkValidTodo(input)) {
             throw new InvalidTodoException("");
@@ -62,6 +87,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes String array of input to check if it is valid for Deadline task.
+     *
+     * @param input String array of the command line input after splitting by " ".
+     * @return String array of description and date for Deadline task.
+     * @throws InvalidDeadlineException DukeException for invalid Deadline task.
+     */
     public static String[] prepareDeadline(String[] input) throws InvalidDeadlineException {
         String[] fieldDetails = input[1].split("/", 2);
 
@@ -72,6 +104,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes String array of input to check if it is valid for Event task.
+     * @param input String array of the command line input after splitting by " ".
+     * @return String array of description and date for Event task.
+     * @throws InvalidEventException DukeException for invalid Event task.
+     */
     public static String[] prepareEvent(String[] input) throws InvalidEventException {
         String[] fieldDetails = input[1].split("/", 2);
 
@@ -82,10 +120,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes String input for purpose of Done or Delete commands
+     *
+     * @param input String of command line input after splitting by " ".
+     * @return int value representing index + 1 of desired item to be marked as done or deleted.
+     */
     public static int prepareDoneDelete(String input) {
         return Integer.parseInt(input);
     }
 
+    /**
+     * Checks if input is of valid command type.
+     *
+     * @param type String representing command type.
+     * @return boolean dictating if command is valid or invalid.
+     */
     public static boolean checkValidCommand(String type) {
         if (type.equals("todo")
                 || type.equals("deadline")
@@ -100,6 +150,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if input array is two elements long and thus a valid Todo task.
+     *
+     * @param input String array containing task's type and description.
+     * @return boolean dictating if array has enough elements for a valid Todo task.
+     */
     public static boolean checkValidTodo(String[] input) {
         if (input.length == 2) {
             return true;
@@ -108,6 +164,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if input array is three elements long and thus a valid Deadline task.
+     *
+     * @param input String array containing task's type, description, and do by date.
+     * @return boolean dictating if array has enough elements for a valid Deadline task.
+     */
     public static boolean checkValidDeadline(String[] input) {
         if (input.length == 3) {
             return true;
@@ -116,6 +178,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if input array is three elements long and thus a valid Event task.
+     *
+     * @param input String array containing task's type, description, and do at date.
+     * @return boolean dictating if array has enough elements for a valid Event task.
+     */
     public static boolean checkValidEvent(String[] input) {
         if (input.length == 3) {
             return true;
