@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * defines Task class with basic properties and is set to be not done initally.

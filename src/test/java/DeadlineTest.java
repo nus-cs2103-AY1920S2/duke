@@ -1,4 +1,4 @@
-import Task.Deadline;
+import task.Deadline;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
