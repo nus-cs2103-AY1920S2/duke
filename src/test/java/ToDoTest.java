@@ -3,10 +3,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TodoTest {
+public class ToDoTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[T][✘] return book", new Todo("return book"));
+        assertEquals("[T][✘] return book", new ToDo("return book"));
     }
 }
