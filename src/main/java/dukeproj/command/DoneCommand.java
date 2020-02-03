@@ -15,7 +15,6 @@ public class DoneCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
             throws BadDescriptionException, DukeDescriptionException {
-        String output = "";
         try {
             if (description.isEmpty()) {
                 throw new DukeDescriptionException("Empty Description");
@@ -31,11 +30,9 @@ public class DoneCommand extends Command {
             taskList.getTask(done - 1).setDone(true);
             storage.writeListIntoFile(taskList.getList());
 
-            output = ui.say(SayType.DONE) + "\n  " + taskList.getTask(done - 1);
+            return ui.say(SayType.DONE) + "\n  " + taskList.getTask(done - 1);
         } catch (NumberFormatException e) {
-            throw new BadDescriptionException("Non-Integer");
-        } finally {
-            return output;
+            throw new BadDescriptionException("Description for done cannot be Non-Integer");
         }
     }
 
