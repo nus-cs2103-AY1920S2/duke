@@ -4,8 +4,8 @@ import duke.commands.Parser;
 import duke.commands.Storage;
 import duke.commands.TaskList;
 import duke.commands.Ui;
-
 import duke.exceptions.DukeException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,7 +27,7 @@ import java.util.Scanner;
 /**
  * the class containing the main function to run the programme.
  */
-public class Duke extends Application{
+public class Duke extends Application {
 
     private static Parser parser;
     private static Storage storage;
@@ -41,8 +41,10 @@ public class Duke extends Application{
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * runs the programme.
@@ -52,7 +54,13 @@ public class Duke extends Application{
         ui.start();
         taskList = new TaskList();
         storage = new Storage("duke.txt", taskList);
-        storage.retrieveInfo();
+        storage = new Storage("duke.txt", taskList);
+        try {
+            storage.retrieveInfo();
+        } catch (FileNotFoundException e) {
+            ui.dukePrint("Something went wrong: " + e.getMessage());
+            return;
+        }
         parser = new Parser(taskList);
         String command = scanner.nextLine();
         while (scanner.hasNextLine()) {
@@ -108,7 +116,7 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         Label dukeText = new Label(ui.start()); //system.out
@@ -124,14 +132,13 @@ public class Duke extends Application{
             storage.retrieveInfo();
         } catch (FileNotFoundException e) {
             output = ("Something went wrong: " + e.getMessage());
-            return;
-        }
-        if (!output.equals("")) {
-            dukeText = new Label(output); //system.out
+            dukeText = new Label(output);
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(dukeText, new ImageView(duke))
             );
+            return;
         }
+
 
         parser = new Parser(taskList);
 
@@ -145,12 +152,14 @@ public class Duke extends Application{
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane
+                .setVvalue(1.0));
     }
 
     /**
      * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
+     * Creates a label with the specified text and adds it to the dialog
+     * container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -164,29 +173,13 @@ public class Duke extends Application{
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other
+     * containing Duke's reply and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText()); //system.in
-        String command = userInput.getText();
-        String output = "";
-
-        try {
-            output += parser.parse(command); //get strings from system.out
-        } catch (DukeException e) {
-            output += ("☹ OOPS!!! " + e.getMessage() + "\n");
-        }
-
-        if (command.equals("bye")) {
-            try {
-                storage.updateInfo();
-            } catch (IOException e) {
-                output += ("Something went wrong: " + e.getMessage());
-            }
-        }
-
-        Label dukeText = new Label(output); //system.out
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -197,8 +190,23 @@ public class Duke extends Application{
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * @param command the user input
+     * @return Duke's response
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    private String getResponse(String command) {
+        if (command.equals("bye")) {
+            try {
+                storage.updateInfo();
+                return ("Bye. Hope to see you again soon!\n");
+            } catch (IOException e) {
+                return ("Something went wrong: " + e.getMessage());
+            }
+        } else {
+            try {
+                return parser.parse(command); //get strings from system.out
+            } catch (DukeException e) {
+                return ("☹ OOPS!!! " + e.getMessage() + "\n");
+            }
+        }
     }
 }

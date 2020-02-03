@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * lists out all the tasks currently available in the Tasklist.
+     * @return response to "list" command
      */
     public String list() {
         String output = "";
@@ -37,7 +38,6 @@ public class TaskList {
             for (int i = 0; i < newList.size(); i += 1) {
                 output += ((i + 1) + ". " + newList.get(i).toString() + "\n");
             }
-            //output += (ui.horizontalLines());
         }
         return output;
     }
@@ -45,6 +45,7 @@ public class TaskList {
     /**
      * marks the specified task as done.
      * @param index the index of the task
+     * @return  response to "done" command
      */
     public String done(int index) {
         newList.get(index).markAsDone();
@@ -55,6 +56,7 @@ public class TaskList {
     /**
      * deletes the specified task.
      * @param index the index of the task
+     * @return response to "delete" command
      */
     public String delete(int index) {
         Task task = newList.get(index);
@@ -68,6 +70,7 @@ public class TaskList {
      * @param newTask the new task to be added
      * @param command whether to notify the user that the task has been added
      *                or not
+     * @return response to "add" command
      */
     public String add(Task newTask, String command) {
         newList.add(newTask);
@@ -77,7 +80,7 @@ public class TaskList {
                     + "Now you have " + newList.size() + " tasks in the list."
                     + "\n");
         } else {
-            return "";
+            return null;
         }
     }
 
@@ -102,6 +105,7 @@ public class TaskList {
      * returns a list of tasks that contain the patterns string in their
      * description.
      * @param pattern the pattern to find
+     * @return response to "find" command
      */
     public String find(String pattern) {
         if (newList.size() == 0) {
@@ -120,7 +124,7 @@ public class TaskList {
             if (count == 0) {
                 return ("There are no matching tasks in your list\n");
             } else {
-               return "Here are the matching tasks in your list:\n + output";
+               return "Here are the matching tasks in your list:\n" + output;
             }
         }
     }

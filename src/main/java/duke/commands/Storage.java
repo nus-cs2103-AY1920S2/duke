@@ -51,28 +51,26 @@ public class Storage {
      * adds them to the TaskList.
      */
     public void retrieveInfo() throws FileNotFoundException {
-        //try {
-            Scanner scanner = new Scanner(new File(filePath));
-            while (scanner.hasNextLine()) {
-                String[] arr  = scanner.nextLine().split("[|]");
-                Task newTask = null;
+        Scanner scanner = new Scanner(new File(filePath));
+        while (scanner.hasNextLine()) {
+            String[] arr  = scanner.nextLine().split("[|]");
+            Task newTask = null;
 
-                if  (arr[0].trim().equals("T")) {
-                    newTask = new ToDo(arr[DESC].trim());
-                } else if (arr[0].trim().equals("D")) {
-                    newTask = new Deadline(arr[DESC].trim(), arr[TIME].trim(),
-                            FORMATTER);
-                } else if (arr[0].trim().equals("E")) {
-                    newTask = new Event(arr[DESC].trim(), arr[TIME].trim(),
-                            FORMATTER);
-                }
-
-                if (arr[1].trim().equals("Y")) {
-                    newTask.markAsDone();
-                }
-                taskList.add(newTask, "");
+            if  (arr[0].trim().equals("T")) {
+                newTask = new ToDo(arr[DESC].trim());
+            } else if (arr[0].trim().equals("D")) {
+                newTask = new Deadline(arr[DESC].trim(), arr[TIME].trim(),
+                        FORMATTER);
+            } else if (arr[0].trim().equals("E")) {
+                newTask = new Event(arr[DESC].trim(), arr[TIME].trim(),
+                        FORMATTER);
             }
-        //}
+
+            if (arr[1].trim().equals("Y")) {
+                newTask.markAsDone();
+            }
+            taskList.add(newTask, "");
+        }
     }
 
     /**
@@ -83,12 +81,9 @@ public class Storage {
         for (int i = 0; i < taskList.size(); i += 1) {
             fileString += taskList.get(i).fileString() + "\n";
         }
-
-        //try {
-            new File(filePath).createNewFile();
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(fileString);
-            fw.close();
-        //}
+        new File(filePath).createNewFile();
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(fileString);
+        fw.close();
     }
 }

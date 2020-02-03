@@ -6,7 +6,6 @@ import duke.tasks.Event;
 import duke.tasks.ToDo;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 /**
  * deals with making sense of the user command.
@@ -24,11 +23,6 @@ public class Parser {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("MMM d yyyy ha");
 
-
-    /**
-     * scans user input.
-     */
-    //private Scanner sc = new Scanner(System.in);
     /**
      * creates a new Ui object to access functions.
      */
@@ -49,54 +43,48 @@ public class Parser {
     /**
      * scans user input until a bye command is reached. parses each line
      * entered in by the user
+     * @param command user command
+     * @return Duke's response to user command
      */
     public String parse(String command) throws DukeException {
-        if (!command.equals("bye")) {
-            //try {
-                if (command.equals("list")) {
-                    return taskList.list();
+        if (command.equals("list")) {
+            return taskList.list();
 
-                } else if (command.startsWith("done")) {
-                    ui.checkCommand(command, "done", taskList.size());
-                    return taskList.done(Integer.valueOf(command.split(" ")[1]) - 1);
+        } else if (command.startsWith("done")) {
+            ui.checkCommand(command, "done", taskList.size());
+            return taskList.done(Integer.valueOf(command.split(" ")[1]) - 1);
 
-                } else if (command.startsWith("delete")) {
-                    ui.checkCommand(command, "delete", taskList.size());
-                    return taskList.delete(Integer.valueOf(command.split(" ")[1]) - 1);
-                } else {
-                    String[] arr = command.split("/");
-                    String[] description = (arr[0].split(" ", 2));
+        } else if (command.startsWith("delete")) {
+            ui.checkCommand(command, "delete", taskList.size());
+            return taskList.delete(Integer.valueOf(command.split(" ")[1]) - 1);
+        } else {
+            String[] arr = command.split("/");
+            String[] description = (arr[0].split(" ", 2));
 
-                    if (command.startsWith("todo")) {
-                        ui.checkDescription(description, "todo");
-                        return taskList.add(new ToDo(description[1]), "print");
+            if (command.startsWith("todo")) {
+                ui.checkDescription(description, "todo");
+                return taskList.add(new ToDo(description[1]), "print");
 
-                    } else if (command.startsWith("deadline")) {
-                        ui.checkDescription(description, "deadline");
-                        ui.checkTime(arr, "deadline");
-                        return taskList.add(new Deadline(description[1],
-                                arr[1].split(" ", 2)[1], PARSER), "print");
+            } else if (command.startsWith("deadline")) {
+                ui.checkDescription(description, "deadline");
+                ui.checkTime(arr, "deadline");
+                return taskList.add(new Deadline(description[1],
+                        arr[1].split(" ", 2)[1], PARSER), "print");
 
-                    } else if (command.startsWith("event")) {
-                        ui.checkDescription(description, "event");
-                        ui.checkTime(arr, "event");
-                        return taskList.add(new Event(description[1],
-                                arr[1].split(" ", 2)[1], PARSER), "print");
+            } else if (command.startsWith("event")) {
+                ui.checkDescription(description, "event");
+                ui.checkTime(arr, "event");
+                return taskList.add(new Event(description[1],
+                        arr[1].split(" ", 2)[1], PARSER), "print");
 
-                    } else if (command.startsWith("find")) {
-                        return taskList.find(description[1]);
+            } else if (command.startsWith("find")) {
+                return taskList.find(description[1]);
 
-                    } else {
-                        throw new DukeException("I'm sorry, but I don't know "
-                                + "what that means :-(");
-                    }
+            } else {
+                throw new DukeException("I'm sorry, but I don't know "
+                        + "what that means :-(");
+            }
 
-                }
-            //}
-            //catch (DukeException e) {
-                //output += ui.dukePrint("☹ OOPS!!! " + e.getMessage() + "\n");
-            //}
         }
-        return ("Bye. Hope to see you again soon!\n");
     }
 }

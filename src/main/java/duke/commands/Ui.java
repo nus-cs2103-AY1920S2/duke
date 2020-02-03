@@ -23,6 +23,7 @@ public class Ui {
 
     /**
      * Says hi to the user and includes the logo.
+     * @return Duke's introduction
      */
     public String start() {
         String output = "Hello from\n" + LOGO;
