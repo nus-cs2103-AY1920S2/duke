@@ -51,7 +51,7 @@ dependencies {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Modify your `Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `duke.Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -59,7 +59,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class duke.Duke extends Application {
     
     // ...
 
@@ -76,8 +76,8 @@ public class Duke extends Application {
 
 Note how we have created a `Label` to contain the text that we want to show. We then create the `Scene` and set its content. Finally, we set the stage and show it. 
 
-Next, we create another Java class, `Launcher`, as an entry point to our application.
-The `Launcher` class is reproduced below in its entirety.
+Next, we create another Java class, `duke.gui.Launcher`, as an entry point to our application.
+The `duke.gui.Launcher` class is reproduced below in its entirety.
 
 ```java
 import javafx.application.Application;
@@ -85,14 +85,14 @@ import javafx.application.Application;
 /**
  * A launcher class to workaround classpath issues.
  */
-public class Launcher {
+public class duke.gui.Launcher {
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(duke.Duke.class, args);
     }
 }
 ```
 
-Run `Launcher` and you should see something like this:
+Run `duke.gui.Launcher` and you should see something like this:
 
 ![Hello World](assets/HelloWorld.png) 
 

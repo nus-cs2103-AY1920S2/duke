@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents most of the exception generated when user give
  * wrong input format or invalid command.
@@ -10,12 +12,12 @@ public class DukeException extends Exception {
     protected String commandName;
 
     /**
-     * Constructor for DukeException class. Used if error message should include command
+     * Constructor for duke.DukeException class. Used if error message should include command
      * name to be printed.
      *
      * @param message     String object which represents the message user want to display without using toString method.
      * @param errorType   An Enum class categorising which error type encountered.
-     * @param commandName Command name of the command given by user.
+     * @param commandName duke.command.Command name of the command given by user.
      */
     public DukeException(String message, DukeErrorType errorType, String commandName) {
         super(message);
@@ -24,7 +26,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Another constructor for DukeException class. Used if error message do not require
+     * Another constructor for duke.DukeException class. Used if error message do not require
      * command name to be printed
      *
      * @param message   String object which represents the message user want to display without using toString method.

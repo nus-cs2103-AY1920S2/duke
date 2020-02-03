@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.CommandList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -72,7 +81,7 @@ public class Storage {
      * further processing.
      *
      * @return ArrayList of tasks stored in storage text file.
-     * @throws DukeException if abbreviation of Task read from storage does not match T, D or E.
+     * @throws DukeException if abbreviation of duke.task.Task read from storage does not match T, D or E.
      */
     public ArrayList<Task> load() throws DukeException {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
@@ -115,7 +124,7 @@ public class Storage {
                 createDataPath(ABSOLUTE_PATH);
             } catch (IOException io) {
                 System.out.println("Unable to create storage file/directory\n" +
-                        "Please create a data directory and Duke.txt in it");
+                        "Please create a data directory and duke.Duke.txt in it");
             }
         }
         return tasks;
@@ -123,7 +132,7 @@ public class Storage {
 
     /**
      * Write back to storage text file for any changes made by user such as
-     * adding new Task, deleting existing Task and updating Task status.
+     * adding new duke.task.Task, deleting existing duke.task.Task and updating duke.task.Task status.
      *
      * @param updatedList Updated list of tasks after certain user command.
      */

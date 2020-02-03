@@ -1,27 +1,37 @@
+package duke.task;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
- * Represents a task which is a user todo task with description of it
- * tagged.
+ * Represents a task which is a user's duke.task.Deadline task given by user.
  *
  * @author Kenny Ho
  */
+public class Deadline extends Task {
 
-public class ToDo extends Task {
-    protected final String toDoLogo = "T";
+    protected final String deadlineLogo = "D";
+    private LocalDate by;
+    private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
-     * Constructor that stores the description of todo task.
+     * Constructor of DeadLine class.
      *
-     * @param description description of task.
+     * @param description Description describing the duke.task.Deadline task.
+     * @param by          LocalDate object of when the deadline is.
      */
-    public ToDo(String description) {
+    public Deadline(String description, LocalDate by) {
         super(description);
+        this.by = by;
     }
 
     /**
-     * An empty constructor.
+     * Return a String object of the task deadline.
+     *
+     * @return Date of task deadline in the format of MMM-dd-YYYY.
      */
-    public ToDo() {
-        super("");
+    public String getBy() {
+        return by.format(outputFormat);
     }
 
     /**
@@ -47,6 +57,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s", toDoLogo, super.toString());
+        String formattedDate = by.format((outputFormat));
+        return String.format("[%s]%s (by: %s)", deadlineLogo, super.toString(), formattedDate);
     }
 }

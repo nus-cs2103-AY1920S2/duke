@@ -1,3 +1,5 @@
+import duke.task.Deadline;
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
 import java.time.DateTimeException;

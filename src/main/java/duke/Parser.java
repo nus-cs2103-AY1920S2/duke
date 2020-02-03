@@ -1,3 +1,16 @@
+package duke;
+
+import duke.command.Add;
+import duke.command.Command;
+import duke.command.CommandList;
+import duke.command.Delete;
+import duke.command.Done;
+import duke.command.Exit;
+import duke.command.List;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,21 +28,21 @@ public class Parser {
     public final static DateTimeFormatter USER_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
-     * Return a Command object with respect to user input.
+     * Return a duke.command.Command object with respect to user input.
      * If user input consist of keyword todo, event or deadline
-     * a Add object will be returned.
-     * If user input consist of keyword delete, a Delete object
+     * a duke.command.Add object will be returned.
+     * If user input consist of keyword delete, a duke.command.Delete object
      * will be returned.
-     * If user input consist of keyword done, a Done object will be returned.
-     * If user input consist of keyword list, a List object will be returned.
-     * IF user input consist of keyword bye, a Exit object will be returned.
-     * else a DukeException will be thrown with invalid command tagged to it.
+     * If user input consist of keyword done, a duke.command.Done object will be returned.
+     * If user input consist of keyword list, a duke.command.List object will be returned.
+     * IF user input consist of keyword bye, a duke.command.Exit object will be returned.
+     * else a duke.DukeException will be thrown with invalid command tagged to it.
      *
      * @param fullCommand String object of input given by user.
-     * @return Command object that represents the command of the user input.
-     * @throws DukeException             if user input is empty, invalid or Command description is empty.
+     * @return duke.command.Command object that represents the command of the user input.
+     * @throws DukeException             if user input is empty, invalid or duke.command.Command description is empty.
      * @throws DateTimeException         if Date format is not in yyyy-mm-dd.
-     * @throws IndexOutOfBoundsException if index accessing is more than amount of Task exist or negative index.
+     * @throws IndexOutOfBoundsException if index accessing is more than amount of duke.task.Task exist or negative index.
      */
     public static Command parse(String fullCommand) throws DukeException, DateTimeException, IndexOutOfBoundsException {
         String[] inputArr = fullCommand.split(" ");
@@ -47,7 +60,7 @@ public class Parser {
         case TODO:
             String[] todoArr = fullCommand.split("todo");
             if (todoArr.length == 0 || todoArr[1].trim().length() == 0) {
-                throw new DukeException("Empty ToDo description", DukeErrorType.EMPTY_DESCRIPTION, command);
+                throw new DukeException("Empty duke.task.ToDo description", DukeErrorType.EMPTY_DESCRIPTION, command);
             } else {
                 String todoDescription = todoArr[1].trim();
                 return new Add(new ToDo(todoDescription));
@@ -58,9 +71,9 @@ public class Parser {
             String[] descriptionArr = eventDetails[0].split("event");
             String eventDescription = descriptionArr[1].trim();
             if (eventDetails.length == 0) {
-                throw new DukeException("Empty Event time", DukeErrorType.EMPTY_TIME, command);
+                throw new DukeException("Empty duke.task.Event time", DukeErrorType.EMPTY_TIME, command);
             } else if (descriptionArr.length == 0 || eventDescription.length() == 0) {
-                throw new DukeException("Empty Event description", DukeErrorType.EMPTY_DESCRIPTION, command);
+                throw new DukeException("Empty duke.task.Event description", DukeErrorType.EMPTY_DESCRIPTION, command);
             } else {
                 return new Add(new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
             }

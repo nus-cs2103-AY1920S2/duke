@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.Ui;
+
 /**
  * Represents as an outline what a command carried about by
  * Chatbot should be able to do.
@@ -22,10 +29,10 @@ public abstract class Command {
     }
 
     /**
-     * Getter method to retrieve Task object if command
-     * requires a Task object to be created.
+     * Getter method to retrieve duke.task.Task object if command
+     * requires a duke.task.Task object to be created.
      *
-     * @return Task object.
+     * @return duke.task.Task object.
      */
     public Task getTask() {
         return task;
@@ -33,16 +40,16 @@ public abstract class Command {
 
     /**
      * Provide the ability any command to:
-     * 1) call respective TaskList method if command requires
-     * any form of functionality provided by TaskList class.
-     * 2) call respective Ui method if command requires any
+     * 1) call respective duke.task.TaskList method if command requires
+     * any form of functionality provided by duke.task.TaskList class.
+     * 2) call respective duke.Ui method if command requires any
      * form of interaction with user.
-     * 3) call respective Storage method if command requires
-     * any form of functionality provided by Storage class.
+     * 3) call respective duke.Storage method if command requires
+     * any form of functionality provided by duke.Storage class.
      *
-     * @param tasks   TaskList object providing command the ability to call TaskList methods.
-     * @param ui      Ui object providing command the ability to call Ui methods.
-     * @param storage Storage object providing command the ability to call Storage methods.
+     * @param tasks   duke.task.TaskList object providing command the ability to call duke.task.TaskList methods.
+     * @param ui      duke.Ui object providing command the ability to call duke.Ui methods.
+     * @param storage duke.Storage object providing command the ability to call duke.Storage methods.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 

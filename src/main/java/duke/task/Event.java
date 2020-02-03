@@ -1,35 +1,37 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task which is a user's Deadline task given by user.
+ * Represent a task which is a user's duke.task.Event task given by user.
  *
  * @author Kenny Ho
  */
-public class Deadline extends Task {
+public class Event extends Task {
 
-    protected final String deadlineLogo = "D";
-    private LocalDate by;
+    protected final String eventLogo = "E";
+    private LocalDate time;
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
-     * Constructor of DeadLine class.
+     * Constructor for duke.task.Event class.
      *
-     * @param description Description describing the Deadline task.
-     * @param by          LocalDate object of when the deadline is.
+     * @param description Description of the event.
+     * @param at          LocalDate object of when event is happening.
      */
-    public Deadline(String description, LocalDate by) {
+    public Event(String description, LocalDate at) {
         super(description);
-        this.by = by;
+        this.time = at;
     }
 
     /**
-     * Return a String object of the task deadline.
+     * Return a String object of when the event is happening.
      *
-     * @return Date of task deadline in the format of MMM-dd-YYYY.
+     * @return Date of when the event is happening in the format of MMM-dd-YYYY.
      */
-    public String getBy() {
-        return by.format(outputFormat);
+    public String getTime() {
+        return time.format(outputFormat);
     }
 
     /**
@@ -55,7 +57,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String formattedDate = by.format((outputFormat));
-        return String.format("[%s]%s (by: %s)", deadlineLogo, super.toString(), formattedDate);
+        String formattedDate = time.format(outputFormat);
+        return String.format("[%s]%s (by: %s)", eventLogo, super.toString(), formattedDate);
     }
 }

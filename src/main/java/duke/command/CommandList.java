@@ -1,31 +1,33 @@
+package duke.command;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Represents the available command Chatbot EXE recognise with
- * an abbreviation tag to command that will generate a Task object.
+ * an abbreviation tag to command that will generate a duke.task.Task object.
  *
  * @author Kenny Ho
  */
 public enum CommandList {
     /**
-     * Deadline command with D as abbreviation.
+     * duke.task.Deadline command with D as abbreviation.
      */
     DEADLINE("D"),
     /**
-     * Delete command with no abbreviation.
+     * duke.command.Delete command with no abbreviation.
      */
     DELETE(""),
     /**
-     * Done command with no abbreviation.
+     * duke.command.Done command with no abbreviation.
      */
     DONE(""),
     /**
-     * Event command with E as abbreviation.
+     * duke.task.Event command with E as abbreviation.
      */
     EVENT("E"),
     /**
-     * List command with no abbreviation.
+     * duke.command.List command with no abbreviation.
      */
     LIST(""),
     /**
@@ -60,10 +62,10 @@ public enum CommandList {
     }
 
     /**
-     * Returns CommandList object by passing it's corresponding abbreviation.
+     * Returns duke.command.CommandList object by passing it's corresponding abbreviation.
      *
      * @param abbreviation Abbreviation in the form of string representing the command.
-     * @return CommandList object correspond to the abbreviation passed in as param.
+     * @return duke.command.CommandList object correspond to the abbreviation passed in as param.
      */
     public static CommandList get(String abbreviation) {
         return lookup.get(abbreviation);

@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 
@@ -14,7 +19,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * A constructor to initialise Storage, TaskList and Ui class
+     * A constructor to initialise duke.Storage, duke.task.TaskList and duke.Ui class
      * which is responsible for loading and saving tasks, containing
      * the task list with additional operations and
      * interaction with the user respectively.
@@ -64,7 +69,7 @@ public class Duke {
     }
 
     /**
-     * Create a Duke object which is used to invoke start-up of Chatbot.
+     * Create a duke.Duke object which is used to invoke start-up of Chatbot.
      *
      * @param args Unused.
      */

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents all the foreseen type of error Chatbot EXE will face.
  *
@@ -14,7 +16,7 @@ public enum DukeErrorType {
      */
     INVALID_ABBREVIATION,
     /**
-     * Task do not have an description.
+     * duke.task.Task do not have an description.
      */
     EMPTY_DESCRIPTION,
     /**

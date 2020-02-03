@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 /**
@@ -42,13 +47,13 @@ public class Ui {
      */
     public void showStorageError() {
         System.out.println(addBorder("Unable to create storage file/directory\n" +
-                "Please create a data directory and Duke.txt in it."));
+                "Please create a data directory and duke.Duke.txt in it."));
     }
 
     /**
      * Print loading error if an error occurs upon booting up Chatbot.
      *
-     * @param e DukeException class used to handle various specific Chatbot error.
+     * @param e duke.DukeException class used to handle various specific Chatbot error.
      */
     public void showLoadingError(DukeException e) {
         System.out.println(addBorder(e.toString()));
@@ -70,7 +75,7 @@ public class Ui {
      * @param listSize Size of actual user tasks list.
      */
     public String showIndexOutOfBoundException(int listSize) {
-        return (INDENT + "List only have " + listSize + " of tasks, please choose within range.");
+        return (INDENT + "duke.command.List only have " + listSize + " of tasks, please choose within range.");
     }
 
     /**
@@ -78,7 +83,7 @@ public class Ui {
      * Error message describes the problem with input and prompts user
      * to input in correct format.
      *
-     * @param dukeEx DukeException targetted at specific error faced using Chatbot.
+     * @param dukeEx duke.DukeException targetted at specific error faced using Chatbot.
      */
     public String showStandardError(DukeException dukeEx) {
         return (dukeEx.toString());
@@ -87,7 +92,7 @@ public class Ui {
     /**
      * Print message notifying user of task deleted from existing list of tasks.
      *
-     * @param deletedTask Task object of the task removed from existing list.
+     * @param deletedTask duke.task.Task object of the task removed from existing list.
      * @param listSize    Total number of remaining task left in the list.
      */
     public String showDeleteMessage(Task deletedTask, int listSize) {
@@ -120,11 +125,11 @@ public class Ui {
     }
 
     /**
-     * Print all the Task objects in the List and numbering them according
+     * Print all the duke.task.Task objects in the duke.command.List and numbering them according
      * to the order of task being added into the list. First in first out
      * format.
      *
-     * @param listOfTask TaskList object of user existing tasks.
+     * @param listOfTask duke.task.TaskList object of user existing tasks.
      */
     public String showListMessage(TaskList listOfTask) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -142,10 +147,10 @@ public class Ui {
     }
 
     /**
-     * Print a customised message whenever user adds a Task into the
+     * Print a customised message whenever user adds a duke.task.Task into the
      * list of user tasks.
      *
-     * @param message String of Task describing it.
+     * @param message String of duke.task.Task describing it.
      * @param size    Number of tasks in the list after adding the current task.
      */
     public String showCustomiseMessage(String message, int size) {
@@ -162,8 +167,8 @@ public class Ui {
     /**
      * Print a message notifying user the task that have been mark as done.
      *
-     * @param markedIcon String representing Task have been done.
-     * @param task       Task object that have been marked as done.
+     * @param markedIcon String representing duke.task.Task have been done.
+     * @param task       duke.task.Task object that have been marked as done.
      */
     public String showDoneMessage(String markedIcon, Task task) {
         StringBuilder stringBuilder = new StringBuilder();

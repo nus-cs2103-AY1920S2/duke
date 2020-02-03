@@ -1,35 +1,29 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package duke.task;
 
 /**
- * Represent a task which is a user's Event task given by user.
+ * Represents a task which is a user todo task with description of it
+ * tagged.
  *
  * @author Kenny Ho
  */
-public class Event extends Task {
 
-    protected final String eventLogo = "E";
-    private LocalDate time;
-    private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+public class ToDo extends Task {
+    protected final String toDoLogo = "T";
 
     /**
-     * Constructor for Event class.
+     * Constructor that stores the description of todo task.
      *
-     * @param description Description of the event.
-     * @param at          LocalDate object of when event is happening.
+     * @param description description of task.
      */
-    public Event(String description, LocalDate at) {
+    public ToDo(String description) {
         super(description);
-        this.time = at;
     }
 
     /**
-     * Return a String object of when the event is happening.
-     *
-     * @return Date of when the event is happening in the format of MMM-dd-YYYY.
+     * An empty constructor.
      */
-    public String getTime() {
-        return time.format(outputFormat);
+    public ToDo() {
+        super("");
     }
 
     /**
@@ -55,7 +49,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String formattedDate = time.format(outputFormat);
-        return String.format("[%s]%s (by: %s)", eventLogo, super.toString(), formattedDate);
+        return String.format("[%s]%s", toDoLogo, super.toString());
     }
 }

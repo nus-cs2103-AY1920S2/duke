@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class TaskList {
     /**
      * A constructor used to wrap the ArrayList of tasks.
      *
-     * @param listOfTask List of user tasks.
+     * @param listOfTask duke.command.List of user tasks.
      */
     public TaskList(List<Task> listOfTask) {
         this.userTasksList = listOfTask;
@@ -40,10 +42,10 @@ public class TaskList {
     }
 
     /**
-     * Returns the Task object which is located at the index given.
+     * Returns the duke.task.Task object which is located at the index given.
      *
-     * @param taskNumber Index of which task is located in the List.
-     * @return Task located at the list of the index given.
+     * @param taskNumber Index of which task is located in the duke.command.List.
+     * @return duke.task.Task located at the list of the index given.
      */
     public Task getTask(int taskNumber) {
         return userTasksList.get(taskNumber);
@@ -52,26 +54,26 @@ public class TaskList {
     /**
      * Returns the exact copy of existing user list of tasks.
      *
-     * @return List of Task objects
+     * @return duke.command.List of duke.task.Task objects
      */
     public List<Task> getListOfTasks() {
         return userTasksList;
     }
 
     /**
-     * Adds Task object given in the existing a Task list.
+     * Adds duke.task.Task object given in the existing a duke.task.Task list.
      *
-     * @param task Task object to be added into the user list of tasks.
+     * @param task duke.task.Task object to be added into the user list of tasks.
      */
     public void addTask(Task task) {
         userTasksList.add(task);
     }
 
     /**
-     * Deletes Task object given in the existing Task list.
+     * Deletes duke.task.Task object given in the existing duke.task.Task list.
      *
-     * @param taskNumber Index of Task object in the list of Task object(s).
-     * @return Task object that have been removed.
+     * @param taskNumber Index of duke.task.Task object in the list of duke.task.Task object(s).
+     * @return duke.task.Task object that have been removed.
      * @throws IndexOutOfBoundsException if given parameter taskNumber is out of bound.
      */
     public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {
