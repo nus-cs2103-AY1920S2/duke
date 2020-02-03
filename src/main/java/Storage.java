@@ -35,10 +35,10 @@ public class Storage {
         StringBuilder textToWrite = new StringBuilder();
         for (Task t: taskList.getTasks()) {
             List<String> details = new ArrayList<>() {{
-                add(t.getClass().getSimpleName());
-                add(t.getStatus());
-                add(getSpecificDescription(t));
-            }};
+                    add(t.getClass().getSimpleName());
+                    add(t.getStatus());
+                    add(getSpecificDescription(t));
+                }};
             textToWrite.append(String.join("~", details)).append("\n");
         }
         fw.write(textToWrite.toString());
@@ -46,7 +46,7 @@ public class Storage {
     }
 
     /**
-     * gets an extra piece of information if the Task is a Deadline or Event
+     * gets an extra piece of information if the Task is a Deadline or Event.
      * @param t the Task we are dealing with.
      * @return the description of the Task and extra information if applicable.
      */

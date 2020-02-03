@@ -125,10 +125,10 @@ public class Duke {
             if (sc.nextLine().equals("y")) {
                 //confirm to leave and leaving message
                 isexiting = true;
-                ui.typeSetting("    Bye. Hope to see you again soon! \uD83D\uDE1E\n");
+                ui.typeSetting("    Bye. Hope to see you again soon! 😔\n");
             } else {
                 //not leaving and continue to interact with Bob
-                ui.typeSetting("    I know you are the best! \uD83D\uDE06\n    Then, what's next?\n");
+                ui.typeSetting("    I know you are the best! 😆\n    Then, what's next?\n");
                 str = sc.nextLine();
             }
         }

@@ -8,16 +8,16 @@ import java.util.StringTokenizer;
  */
 public class Parser {
     public static HashMap<String, Message> availableMessage = new HashMap<>() {{
-        put("done", Message.DONE);
-        put("delete", Message.DELETE);
-        put("find", Message.FIND);
-        put("todo", Message.TODO);
-        put("deadline", Message.DEADLINE);
-        put("event", Message.EVENT);
-    }};
+            put("done", Message.DONE);
+            put("delete", Message.DELETE);
+            put("find", Message.FIND);
+            put("todo", Message.TODO);
+            put("deadline", Message.DEADLINE);
+            put("event", Message.EVENT);
+        }};
 
     /**
-     * splits the string given in a specific way (exclusive for deadline and event")
+     * splits the string given in a specific way. (exclusive for deadline and event")
      * @param st the string being split
      * @return an array of Stings, containing parts the original String is split into.
      */
