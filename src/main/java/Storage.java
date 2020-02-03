@@ -16,7 +16,7 @@ public class Storage {
     /**
      * Construct a Storage with given file path.
      *
-     * @param path
+     * @param path The past of data file.
      */
     public Storage(String path) {
         this.path = path;
@@ -58,17 +58,17 @@ public class Storage {
         String[] words = line.split("\\|");
         Task currTask;
         switch (words[0]) {
-            case "T":
-                currTask = new Todo(words[2]);
-                break;
-            case "D":
-                currTask = new Deadline(words[2], LocalDate.parse(words[3]));
-                break;
-            case "E":
-                currTask = new Event(words[2], LocalDate.parse(words[3]));
-                break;
-            default:
-                return null;
+        case "T":
+            currTask = new Todo(words[2]);
+            break;
+        case "D":
+            currTask = new Deadline(words[2], LocalDate.parse(words[3]));
+            break;
+        case "E":
+            currTask = new Event(words[2], LocalDate.parse(words[3]));
+            break;
+        default:
+            return null;
         }
         if (Integer.valueOf(words[1]) == 1) {
             currTask.markAsDone();

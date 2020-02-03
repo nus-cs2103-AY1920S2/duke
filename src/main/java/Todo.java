@@ -1,19 +1,19 @@
 /**
- * This is a subclass of task which simulates todo tasks.
+ * This is a subclass of task which simulates Todotasks.
  */
 public class Todo extends Task {
 
     /**
      * Class constructor inherits Task constructor.
      *
-     * @param description Description of this todo task.
+     * @param description Description of this Todotask.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Override String representation of todo tasks.
+     * Override String representation of Todotasks.
      *
      * @return Type T and its description.
      */
