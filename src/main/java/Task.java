@@ -3,7 +3,7 @@ public class Task{
     private String item;
     private boolean isCompleted;
 
-    public Task(String item){
+    public Task(String item) {
         this.item = item;
         isCompleted = false;
         System.out.println(item + " has been added to list");
@@ -15,6 +15,12 @@ public class Task{
 
     public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+
+    public void setCompleted(String string) {
+        if(string.equals("\u2713")) {
+            this.isCompleted = true;
+        }
     }
 
     public String getStatusIcon() {

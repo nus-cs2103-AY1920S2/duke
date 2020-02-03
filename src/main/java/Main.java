@@ -1,10 +1,13 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws DukeException{
 
         Scanner sc = new Scanner(System.in);
-        List list = new List();
+        MyList list = new MyList();
+        Storage storage = new Storage();
+        storage.loadFile(list);
 
         System.out.println("Hello Master\nWhat can I do for you today?");
 
@@ -40,6 +43,7 @@ public class Main {
                     Deadline deadline = new Deadline(retrieveTaskArray[1], retrieveDateArray[1]);
                     list.setListArray(deadline);
                     list.printCounter();
+                    storage.saveToFile(deadline.toString());
                 }
 
                 else if(word.contains("event")){
@@ -51,6 +55,7 @@ public class Main {
                     Event event = new Event(retrieveTaskArray[1], retrieveDateArray[1]);
                     list.setListArray(event);
                     list.printCounter();
+                    storage.saveToFile(event.toString());
                 }
 
                 else if(word.contains("todo")){
@@ -61,6 +66,7 @@ public class Main {
                     Todo todo = new Todo(retrieveTaskArray[1]);
                     list.setListArray(todo);
                     list.printCounter();
+                    storage.saveToFile(todo.toString());
                 }
 
                 else if(word.contains("delete")){
@@ -73,7 +79,7 @@ public class Main {
                 else {
                     throw new DukeException("I'm sorry, but I do not understand what you mean");
                 }
-            } catch(DukeException e) {
+            } catch(DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -81,10 +87,6 @@ public class Main {
 
         sc.close();
 
-    }
-
-    static public void printLines(){
-        System.out.println("_______________________________________________");
     }
 
 }

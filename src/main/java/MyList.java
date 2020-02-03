@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
-public class List{
+public class MyList {
 
-    public List(){}
+    public MyList(){}
 
     private ArrayList<Task> listArray = new ArrayList<>();
     private int counter = 0;
