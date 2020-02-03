@@ -4,18 +4,34 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Interpret and process user inputs.
+ */
 public class Parser {
 
     protected TaskList tasks;
     protected Storage storage;
     protected Ui ui;
 
+    /**
+     * Saves tasks, storage and ui class.
+     *
+     * @param tasks The TaskList class.
+     * @param storage The Storage class.
+     * @param ui The Ui class.
+     */
     public Parser(TaskList tasks, Storage storage, Ui ui) {
         this.tasks = tasks;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Processes the user input.
+     *
+     * @param userInput The commands issued to duke by the user.
+     * @return Returns false when user wants to terminate the program.
+     */
     public boolean parse(String userInput) {
         if (userInput.equals("bye")) {
             return false;
@@ -32,10 +48,12 @@ public class Parser {
             try {
                 int taskNumber = Integer.parseInt(inputs[1].trim()) - 1;
                 if (inputs[0].equals("done")) {
-                    if (tasks.get(taskNumber).isTaskDone()) {
-                        ui.exceptionMessage(new DukeException("☹ OOPS!!! duke.Task is already done!"));
+                    try {
+                        tasks.get(taskNumber).markAsDone();
+                    } catch (DukeException e) {
+                        ui.exceptionMessage(e);
+                        return true;
                     }
-                    tasks.get(taskNumber).markAsDone();
                     ui.userMessage("Nice! I've marked this task as done:\n    " + tasks.get(taskNumber));
                 } else {
                     Task deletedTask = tasks.remove(taskNumber);

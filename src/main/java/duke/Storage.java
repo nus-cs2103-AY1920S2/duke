@@ -13,15 +13,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Creates, loads and stores the program data of duke.
+ */
 public class Storage {
     File file;
     Ui ui;
 
+    /**
+     * Initialize the file with the filepath specified by user and saves the ui class.
+     *
+     * @param filepath The location where the program data will be saved or loaded from.
+     * @param ui The Storage class.
+     */
     public Storage(String filepath, Ui ui) {
         file = new File(new File(filepath).getAbsolutePath());
         this.ui = ui;
     }
 
+    /**
+     * Loads program data from the filepath specified by the user.
+     * A new file will be created if no existing data is found.
+     *
+     * @return An ArrayList containing existing data, if any.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -60,6 +75,27 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes data to the end of the file.
+     *
+     * @param data Data to be written.
+     */
+    public void writeToFile(String data) {
+        try {
+            FileWriter fw = new FileWriter(file, true);
+            fw.write(data);
+            fw.close();
+        } catch (IOException e) {
+            ui.exceptionMessage(new DukeException("☹ OOPS!!! Error writing to file."));
+        }
+    }
+
+    /**
+     * Overloaded method which modifies the file content according to the user's request.
+     *
+     * @param command Specify the operation to be done on the file.
+     * @param taskNumber Which task to perform the operation on.
+     */
     public void writeToFile(String command, int taskNumber) {
         List<String> lines = new ArrayList<>();
         int i = 0;
@@ -85,16 +121,6 @@ public class Storage {
             }
             bw.close();
         } catch (Exception e) {
-            ui.exceptionMessage(new DukeException("☹ OOPS!!! Error writing to file."));
-        }
-    }
-
-    public void writeToFile(String data) {
-        try {
-            FileWriter fw = new FileWriter(file, true);
-            fw.write(data);
-            fw.close();
-        } catch (IOException e) {
             ui.exceptionMessage(new DukeException("☹ OOPS!!! Error writing to file."));
         }
     }
