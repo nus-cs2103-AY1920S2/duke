@@ -1,8 +1,8 @@
 T|1|read book|
-D|0|return book|June 6th
-E|0|project meeting|Aug 6th 2-4pm
+D|0|return book|2020-01-01
+E|0|project meeting|2020-12-01
 T|1|join sports club|
 T|0|sleep|
 T|0|die|
-D|0|return book |by Sunday
-E|0|project meeting |at Mon 2-4pm
+D|0|return book |2021-01-01
+E|0|project meeting |2021-01-03
