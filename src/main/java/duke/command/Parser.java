@@ -8,7 +8,7 @@ import duke.exception.InvalidCommandException;
  */
 public class Parser {
     /**
-     * Parse the user input into the respective command.
+     * Parses the user input into the respective command.
      *
      * @param input the command input.
      * @return The respective command if given a valid command input.
