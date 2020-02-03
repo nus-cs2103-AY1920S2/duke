@@ -18,14 +18,35 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Class constructor of Duke.
-     *
-     * @param filePath the location where the tasks being stored
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public Duke(String filePath) {
+    public String getResponse(String input) {
+        String response;
+        try {
+            Command command = Parser.parse(input);
+            response = command.executeWithoutReply(taskList, storage, ui);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Give greeting message.
+     * @return Return greeting message in String format
+     */
+    public String getGreeting() {
+        return ui.greetWithoutPrint();
+    }
+
+    /**
+     * Class constructor of Duke.
+     */
+    public Duke() {
         ui = new Ui();
         try {
-            storage = new Storage(filePath);
+            storage = new Storage("data/tasks.txt");
             taskList = new TaskList(storage.getTaskListing());
         } catch (DukeException e) {
             ui.reply(e.getMessage());
@@ -37,6 +58,7 @@ public class Duke {
      * type bye.
      */
     public void run() {
+        ui.setOutline();
         ui.greet();
         boolean isExitLoop = false;
         while (!isExitLoop) {
@@ -55,11 +77,11 @@ public class Duke {
     }
 
     /**
-     * Run main programme here.
+     * The main programme runs here.
      *
      * @param args input from the console
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 }

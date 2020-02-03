@@ -40,9 +40,11 @@ public class Ui {
     }
 
     /**
-     * Greet the user.
+     * Provides greeting message to print in String format.
+     *
+     * @return Return the greeting message back
      */
-    public void greet() {
+    public String greetWithoutPrint() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -53,7 +55,15 @@ public class Ui {
         message.addParagraph(logo, 15);
         message.addEmptyLine();
         message.addSentence("What can I do for you?", 1);
-        System.out.print(message.replyMessage());
+//        System.out.print(message.replyMessage());
+        return message.replyMessage();
+    }
+
+    /**
+     * Greet the user and print the greeting message.
+     */
+    public void greet() {
+        System.out.print(greetWithoutPrint());
     }
 
     /**
@@ -66,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * duke.Duke reply one sentence to the user
+     * Reply the message back to user.
      *
      * @param sentence message reply to user
      */
@@ -77,11 +87,24 @@ public class Ui {
     }
 
     /**
-     * List out the listing to user.
+     * Reply the message back in String format.
+     *
+     * @param sentence message reply to user
+     * @return Return the message in String format
+     */
+    public String replyInString(String sentence) {
+        message.clearMessage();
+        message.addSentence(sentence, 1);
+        return message.replyMessage();
+    }
+
+    /**
+     * Reply the listing back in String format
      *
      * @param tasks List of tasks in records
+     * @return Reply the list back
      */
-    public void replyListing(List<Task> tasks) {
+    public String replyListing(List<Task> tasks) {
         message.clearMessage();
         if (tasks.isEmpty()) {
             message.addSentence("Horray! You do not have any task now!", 1);
@@ -89,15 +112,16 @@ public class Ui {
             message.addSentence("Here are the tasks in your list:", 1);
             message.addList(tasks);
         }
-        System.out.print(message.replyMessage());
+        return message.replyMessage();
     }
 
     /**
-     * List out the tasks that found with the keyword to user.
+     * List out the tasks that found with the keyword back in String format.
      *
      * @param tasks List of tasks with keyword
+     * @return Return message back
      */
-    public void replyTaskFound(List<Task> tasks) {
+    public String replyTaskFound(List<Task> tasks) {
         message.clearMessage();
         if (tasks.isEmpty()) {
             message.addSentence("No task with the keyword! Find another keyword?", 1);
@@ -105,16 +129,17 @@ public class Ui {
             message.addSentence("Here are the tasks found with the keyword:", 1);
             message.addList(tasks);
         }
-        System.out.print(message.replyMessage());
+        return message.replyMessage();
     }
 
     /**
-     * Reply the user that respective task has been added to the list.
+     * Reply the respective task has been added to the list in String format.
      *
      * @param amtOfTask amount of tasks in records
      * @param task      task that being added
+     * @return reply the message back in String format
      */
-    public void replyAdded(int amtOfTask, Task task) {
+    public String replyAdded(int amtOfTask, Task task) {
         message.clearMessage();
         message.addSentence("Got it. I've added this task:", 1);
         message.addSentence(task.toString(), 3);
@@ -123,30 +148,39 @@ public class Ui {
         } else {
             message.addSentence("Now you have 1 task in the list.", 1);
         }
-        System.out.print(message.replyMessage());
+        return message.replyMessage();
     }
 
     /**
-     * Reply to the user that which task are being marked done.
+     * Reply the message which the task are being marked done in String format.
      *
      * @param task task that being marked done
+     * @return Reply the message back in String format
      */
-    public void replyDone(Task task) {
+    public String replyDone(Task task) {
         message.clearMessage();
         message.addSentence("Nice! I've marked this task as done:", 1);
         message.addSentence(task.toString(), 5);
-        System.out.print(message.replyMessage());
+        return message.replyMessage();
     }
 
     /**
-     * Reply the user that the task has deleted.
+     * Reply that the task has deleted in String format.
      *
      * @param task task that being deleted
+     * @return Reply the message back in String format
      */
-    public void replyDelete(Task task) {
+    public String replyDelete(Task task) {
         message.clearMessage();
         message.addSentence("Noted. I've removed this task:", 1);
         message.addSentence("  " + task.toString(), 3);
-        System.out.print(message.replyMessage());
+        return message.replyMessage();
+    }
+
+    /**
+     * Set the outline of the reply message.
+     */
+    public void setOutline() {
+        message.setOutline();
     }
 }

@@ -30,19 +30,20 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Add new todo into taskList and update the hard disk. Furthermore, trigger ui
-     * to reply to the user that the task has been added.
+     * Add new todo into taskList and update the hard disk. Furthermore, return the reply message
+     * back in String format.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
-     * @throws DukeException throws when problem saving task to hard disk
+     * @return Return message back
+     * @throws DukeException  throws when problem saving task to hard disk and invalid date/time format
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task task = new Todo(details.get(1));
         taskList.addTask(task);
         storage.saveTasks(taskList);
-        ui.replyAdded(taskList.getAmountOfTask(), task);
+        return ui.replyAdded(taskList.getAmountOfTask(), task);
     }
 }

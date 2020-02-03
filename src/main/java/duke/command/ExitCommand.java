@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -24,14 +23,15 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Trigger ui to reply to the user that the task has been added.
+     * Return goodbye message back in String format.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
+     * @return Return goodbye message back
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        ui.reply("Alright! See you next time!");
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) {
+        return ui.replyInString("Alright! See you next time!");
     }
 }

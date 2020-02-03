@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -23,14 +22,15 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Trigger ui to list the tasks in the taskListing to the user.
+     * Return the list back in String format
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
+     * @return Return list back
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        ui.replyListing(taskList.getListing());
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) {
+        return ui.replyListing(taskList.getListing());
     }
 }

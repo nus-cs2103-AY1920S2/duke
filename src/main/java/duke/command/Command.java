@@ -60,7 +60,7 @@ public class Command {
     }
 
     /**
-     * Execute the command based on the type of the command.
+     * Execute the command based on the type of the command and reply the relevant message.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit
@@ -68,6 +68,18 @@ public class Command {
      * @throws DukeException occurs when the method is called as parent class
      */
     public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        System.out.print(executeWithoutReply(taskList, storage, ui));
+    }
+
+    /**
+     * Execute the command based on the type of the command.
+     *
+     * @param taskList Stored the tasks when the program runs
+     * @param storage  Stored the tasks when task listing being edit
+     * @param ui       Print the message out to console
+     * @throws DukeException occurs when the method is called as parent class
+     */
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException{
         throw new DukeException("To be implemented in child class");
     }
 

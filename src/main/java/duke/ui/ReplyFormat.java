@@ -5,10 +5,11 @@ import duke.task.Task;
 import java.util.List;
 
 public class ReplyFormat {
-    protected String indentationInFront;
-    protected String message;
-    protected String outline = "____________________________________________________________";
-    protected int numOfIndentInFront;
+    private String indentationInFront;
+    private String message;
+    private String outline = "____________________________________________________________";
+    private int numOfIndentInFront;
+    private boolean hasOutline;
 
     /**
      * Initialise the reply message format.
@@ -17,6 +18,7 @@ public class ReplyFormat {
         message = "";
         numOfIndentInFront = 0;
         indentationInFront = "";
+        hasOutline = false;
     }
 
     /**
@@ -108,6 +110,13 @@ public class ReplyFormat {
     }
 
     /**
+     * Set the outline of the reply message.
+     */
+    public void setOutline() {
+        hasOutline = true;
+    }
+
+    /**
      * Clear message.
      */
     public void clearMessage() {
@@ -120,6 +129,8 @@ public class ReplyFormat {
      * @return return outline with message
      */
     public String replyMessage() {
-        return addOutlineWithIndentation() + message + addOutlineWithIndentation();
+        return hasOutline
+                ? addOutlineWithIndentation() + message + addOutlineWithIndentation()
+                : message;
     }
 }

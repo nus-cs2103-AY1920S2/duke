@@ -27,21 +27,22 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark the task as done in the taskList and update the hard disk. Furthermore, trigger ui
-     * to reply to the user that the task has been marked done.
+     * Mark the task as done in the taskList and update the hard disk. Furthermore, return the
+     * message back in String format.
      *
      * @param taskList Stored the tasks when the program runs
-     * @param storage Stored the tasks when task listing being edit
-     * @param ui Print the message out to console
-     * @throws DukeException throws when problem saving task to hard disk and invalid index where the task located
+     * @param storage  Stored the tasks when task listing being edit
+     * @param ui       Print the message out to console
+     * @return Reply message to user
+     * @throws DukeException  throws when problem saving task to hard disk and invalid index where the task located
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         try {
             int num = Integer.parseInt(details.get(1));
             taskList.markDone(num);
             storage.saveTasks(taskList);
-            ui.replyDone(taskList.getTask(num));
+            return ui.replyDone(taskList.getTask(num));
         } catch (NumberFormatException e) {
             throw new DukeException("Please input in this format: done [number]");
         }

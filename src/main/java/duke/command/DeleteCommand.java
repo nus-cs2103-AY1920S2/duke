@@ -29,22 +29,23 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task in the taskList and update the hard disk. Furthermore, trigger ui
-     * to reply to the user that the task has been deleted.
+     * Delete the task in the taskList and update the hard disk. Furthermore, return the
+     * message back in String format.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
+     * @return Reply message to user
      * @throws DukeException throws when problem saving task to hard disk and invalid index of the task
      *                       located in taskList
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         try {
             int num = Integer.parseInt(details.get(1));
             Task task = taskList.deleteTask(num);
             storage.saveTasks(taskList);
-            ui.replyDelete(task);
+            return ui.replyDelete(task);
         } catch (NumberFormatException e) {
             throw new DukeException("Please give a valid number in this format: delete [number]");
         }

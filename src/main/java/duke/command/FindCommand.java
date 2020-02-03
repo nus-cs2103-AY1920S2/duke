@@ -26,15 +26,16 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Search any task with the keyword and list it out to the user via ui.
+     * Search any task with the keyword and return list back in String
      *
-     * @param taskList list where the task stored at
-     * @param storage  save tasks to the file in hard disk
-     * @param ui       display the list of tasks with the keyword to user
+     * @param taskList Stored the tasks when the program runs
+     * @param storage  Stored the tasks when task listing being edit
+     * @param ui       Print the message out to console
+     * @return Return list back
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) {
         List<Task> result = taskList.findTask(details.get(1));
-        ui.replyTaskFound(result);
+        return ui.replyTaskFound(result);
     }
 }

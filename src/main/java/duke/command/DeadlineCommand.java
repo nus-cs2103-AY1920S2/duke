@@ -30,19 +30,20 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Add new Deadline into taskList and update the hard disk. Furthermore, trigger ui
-     * to reply to the user that the task has been added.
+     * Add new Deadline into taskList and update the hard disk. Furthermore, return the
+     * message back in String format.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
+     * @return Reply message to user
      * @throws DukeException throws when problem saving task to hard disk and invalid date format
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task task = new Deadline(details.get(1), details.get(2));
         taskList.addTask(task);
         storage.saveTasks(taskList);
-        ui.replyAdded(taskList.getAmountOfTask(), task);
+        return ui.replyAdded(taskList.getAmountOfTask(), task);
     }
 }
