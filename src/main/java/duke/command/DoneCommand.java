@@ -5,8 +5,19 @@ import duke.utils.*;
 
 import java.io.IOException;
 
+/**
+ * Done command implementing command interface
+ */
 public class DoneCommand implements Command {
 
+    /**
+     * Attempt to mark specified tasks as done and set ui response to
+     * the appropriate one
+     * @param task
+     * @param ui
+     * @param storage
+     * @param taskList
+     */
     @Override
     public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
         String[] token = task.split(" ", 2);

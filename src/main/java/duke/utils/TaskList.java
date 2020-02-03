@@ -9,44 +9,62 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Task List class to represent a list of task and handle
+ * task list operations
+ */
 public class TaskList {
 
     private List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Task List constructor
+     * @param tasks list of tasks
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Task list constructor with empty list
+     */
     public TaskList() { }
 
     public List<Task> getList() {
         return tasks;
     }
 
-    @Override
-    public String toString() {
-        if (tasks.size() == 0) {
-            return "No scheduled task yet";
-        }
-        String list = "1." + tasks.get(0);
-        for (int i = 2; i < tasks.size() + 1; i++) {
-            list = list + "\n" + i + "." + tasks.get(i - 1);
-        }
-        return list;
-    }
-
+    /**
+     * Get size of task list
+     * @return size of task list
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Mark task at certain index as done
+     * @param taskId to be marked as done
+     */
     public void markTaskAsDone(int taskId) {
         tasks.get(taskId).markAsDone();
     }
 
+    /**
+     * remove task at certain index
+     * @param taskId to be removed
+     */
     public void removeTask(int taskId) {
         tasks.remove(taskId);
     }
 
+    /**
+     * Add item to task list
+     * @param item name
+     * @param type of item
+     * @return whether addition is successful or not
+     * @throws ParseException
+     */
     public boolean addToList(String item, String type) throws ParseException {
         Task newTask;
         if (type.equals("todo")) {
@@ -80,5 +98,17 @@ public class TaskList {
         }
         tasks.add(newTask);
         return true;
+    }
+
+    @Override
+    public String toString() {
+        if (tasks.size() == 0) {
+            return "No scheduled task yet";
+        }
+        String list = "1." + tasks.get(0);
+        for (int i = 2; i < tasks.size() + 1; i++) {
+            list = list + "\n" + i + "." + tasks.get(i - 1);
+        }
+        return list;
     }
 }
