@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.exception.DukeException;
 import duke.task.DeadlineEventHash;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -18,7 +19,7 @@ public class Ui {
     /**
      * The Lines.
      */
-    String lines = "        ____________________________________________________________";
+    String lines = "        ________________________________________________________";
     /**
      * The Space.
      */
@@ -47,7 +48,7 @@ public class Ui {
     /**
      * Show welcome.
      */
-    void showWelcome() {
+    public void showWelcome() {
         String welcomeMessage = "____________________________________________________________\n"
                 + "Hello! I'm Duke\n" + "What can I do for you today?\n"
                 + "____________________________________________________________";
@@ -60,11 +61,9 @@ public class Ui {
     /**
      * Print bye.
      */
-    public void printBye() {
-        System.out.println(lines);
-        System.out.println("        Bye. Hope to see you again soon");
-        System.out.println(lines);
-
+    public String printBye() {
+        return lines + System.lineSeparator() + "        Bye. Hope to see you again soon"
+                + System.lineSeparator() + lines;
     }
 
 
@@ -73,10 +72,8 @@ public class Ui {
      *
      * @param taskList the task list
      */
-    public void printList(TaskList taskList) {
-        System.out.println(lines);
-        taskList.print_elements();
-        System.out.println(lines);
+    public String printList(TaskList taskList) {
+        return lines + System.lineSeparator() + taskList.print_elements() + lines + System.lineSeparator();
     }
 
     /**
@@ -89,18 +86,20 @@ public class Ui {
         throw new DukeException("You have entered an invalid number!");
     }
 
+    public String invalidAddTaskException() throws DukeException {
+        return "You have entered a wrong AddTaskCommand";
+    }
+
     /**
      * Print done.
      *
      * @param finishedTask the finished task
      */
     // Tells the user that the task is done.
-    public void printDone(Task finishedTask) {
-        System.out.println(lines);
-        System.out.println(space + "Nice! I've marked this task as done");
-        System.out.println(space + " [" + finishedTask.getStatusIcon() + "]"
-                + " " + finishedTask.getDescription());
-        System.out.println(lines);
+    public String printDone(Task finishedTask) {
+        return lines + System.lineSeparator() + space + "Nice! I've marked this task as done" + System.lineSeparator()
+                + space + " [" + finishedTask.getStatusIcon() + "]" + " " + finishedTask.getDescription()
+                + System.lineSeparator() + lines + System.lineSeparator();
     }
 
     /**
@@ -109,26 +108,23 @@ public class Ui {
      * @param task the task
      * @param list the list
      */
-    public void printTasks(Task task, ArrayList<Task> list) {
-        System.out.println(lines);
-        System.out.println(space + " Got it. I've added this task: ");
-        System.out.println(space + task);
-        System.out.println(space + " Now you have " + (list.size()) + " tasks in the list.");
-        System.out.println(lines);
+    public String printTasks(Task task, ArrayList<Task> list) {
+        return lines + System.lineSeparator() + space + " Got it. I've added this task: " + System.lineSeparator()
+                + space + task + System.lineSeparator() + space + " Now you have " + list.size() + " tasks in the list."
+                + System.lineSeparator() + lines;
     }
 
     /**
      * Print delete.
      *
      * @param deletedTask the deleted task
-     * @param taskList     the task list
+     * @param taskList    the task list
      */
-    public void printDelete(Task deletedTask, TaskList taskList) {
-        System.out.println(lines);
-        System.out.println(space + "Noted. I've removed this task:");
-        System.out.println(space + deletedTask);
-        System.out.println(space + "Now you have " + taskList.sizeOfList() + " tasks in the list.");
-        System.out.println(lines);
+    public String printDelete(Task deletedTask, TaskList taskList) {
+        return "The deleted task is " + deletedTask + System.lineSeparator() + lines + System.lineSeparator()
+                + space + "Noted. I've removed this task:" + System.lineSeparator() + space + deletedTask
+                + System.lineSeparator() + space + "Now you have " + taskList.sizeOfList() + " tasks in the list."
+                + System.lineSeparator() + lines + System.lineSeparator();
     }
 
     /**
@@ -160,7 +156,7 @@ public class Ui {
      * @throws DukeException the duke exception
      */
     // Reads the commands
-    String readCommand(String command) throws DukeException {
+    public String readCommand(String command) throws DukeException {
         if (command.contains("todo") || command.contains("deadline")
                 || command.contains("event")) {
             return "duke.command.AddCommand";
@@ -177,6 +173,10 @@ public class Ui {
         } else {
             throw new DukeException("You have entered a wrong command");
         }
+    }
+
+    public String printTest(String s) {
+        return s + lines + "\n" + "        Bye. Hope to see you again soon" + "\n" + lines;
     }
 
 }

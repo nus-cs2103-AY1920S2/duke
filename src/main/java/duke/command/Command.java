@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -36,5 +36,5 @@ public abstract class Command {
      * @throws DukeException Main exception method I have created
      * @throws IOException For any potential Input/Output exceptions from incorrect file
      */
-    public abstract void execute(Storage storage, Ui ui, TaskList tasklist) throws IOException, DukeException;
+    public abstract String execute(Storage storage, Ui ui, TaskList tasklist) throws IOException, DukeException;
 }

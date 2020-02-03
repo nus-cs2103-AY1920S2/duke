@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ public class DaysOfWeek {
      *
      * @return the hm
      */
-    public HashMap<String, Integer> getHm() {
+    HashMap<String, Integer> getHm() {
         return hm;
     }
 
@@ -34,7 +34,7 @@ public class DaysOfWeek {
     /**
      * Instantiates a new Days of week.
      */
-    public DaysOfWeek() {
+    DaysOfWeek() {
         hm.put("SUNDAY", 7);
         hm.put("SUN", 7);
         hm.put("MONDAY", 1);

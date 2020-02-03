@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList tasklist) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList tasklist) throws DukeException {
         String description = splitDoneString("find ", this.userInput);
         TaskList foundTasks = new TaskList();
 
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
         if (foundTasks.getList().isEmpty()) {
             throw new DukeException("There are no tasks with this keyword :'( ");
         } else {
-            ui.printList(foundTasks);
+            return ui.printList(foundTasks);
         }
 
     }

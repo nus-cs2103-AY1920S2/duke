@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 import java.io.IOException;
@@ -34,13 +34,11 @@ public class DeleteCommand extends Command {
      */
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws IOException, DukeException {
-        if (userInput.contains("delete")) {
-            Task deletedTask = taskList.getList().get(splitDoneString(" ", userInput,taskList,ui));
-            System.out.println("The deleted task is " + deletedTask);
-            taskList.removeFromList(deletedTask);
-            ui.printDelete(deletedTask, taskList);
-        }
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws IOException, DukeException {
+        Task deletedTask = taskList.getList().get(splitDoneString(" ", userInput,taskList,ui));
+        taskList.removeFromList(deletedTask);
+        return ui.printDelete(deletedTask, taskList);
+
     }
 
     private int splitDoneString(String regrexWanted, String userInput, TaskList taskList,

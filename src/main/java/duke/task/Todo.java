@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * The type To-do.

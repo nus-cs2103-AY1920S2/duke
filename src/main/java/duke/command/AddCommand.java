@@ -1,9 +1,9 @@
 package duke.command;
 
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
      * @throws IOException For any potential Input/Output exceptions from incorrect file
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException, IOException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException, IOException {
         if (userInput.contains("deadline")) {
             Deadline newDeadLine = new Deadline(userInput);
             newDeadLine.setDescription(userInput);
@@ -50,13 +50,13 @@ public class AddCommand extends Command {
             taskList.addToList(newDeadLine);
             storage.saveTask(newDeadLine);
             //  deadline_event_hash.addToHashMap(newDeadLine.d1.toLocalDate().toString(), newDeadLine);
-            ui.printTasks(newDeadLine, taskList.getList());
+            return ui.printTasks(newDeadLine, taskList.getList());
         } else if (userInput.contains("todo")) {
             Task newTodoTask = new Todo(userInput);
             newTodoTask.setDescription(newTodoTask.formatTasks("todo"));
             taskList.addToList(newTodoTask);
             storage.saveTask(newTodoTask);
-            ui.printTasks(newTodoTask, taskList.getList());
+            return ui.printTasks(newTodoTask, taskList.getList());
         } else if (userInput.contains("event")) {
             Event newEvent = new Event(userInput);
             newEvent.setDescription(userInput);
@@ -65,7 +65,9 @@ public class AddCommand extends Command {
             taskList.addToList(newEvent);
             //deadline_event_hash.addToHashMap(newEvent.d1.toLocalDate().toString(), newEvent);
             storage.saveTask(newEvent);
-            ui.printTasks(newEvent, taskList.getList());
+            return ui.printTasks(newEvent, taskList.getList());
+        } else {
+            return ui.invalidAddTaskException();
         }
     }
 

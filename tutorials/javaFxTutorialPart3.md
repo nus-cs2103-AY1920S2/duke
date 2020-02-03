@@ -8,7 +8,7 @@ Rather than to do everything in one try, let’s iterate and build up towards ou
 
 JavaFX has an _event-driven architecture style_. As such, we programmatically define _handler_ methods to execute as a response to certain _events_. When an event is detected, JavaFX will call the respective handlers.
 
-For duke.Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
+For duke.duke.Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
 
 For now, let’s have the application add a new `Label` with the text from the `TextField`. Update the `Main` class as follows. You'll need to add an `import javafx.scene.control.Label;` too.
 ```java
@@ -103,7 +103,7 @@ import javafx.scene.image.ImageView;
 ```
 
 Next, add two images to the `main/resources/images` folder.
-For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and duke.Duke's avatar respectively but you can use any image you want.
+For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and duke.duke.Duke's avatar respectively but you can use any image you want.
 
 Image|Filename
 ---|---
@@ -112,7 +112,7 @@ Image|Filename
 
 
 ```java
-public class duke.Duke extends Application {
+public class duke.duke.Duke extends Application {
     // ...
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -134,7 +134,7 @@ private void handleUserInput() {
 }
 
 private String getResponse(String input) {
-    return "duke.Duke heard: " + input;
+    return "duke.duke.Duke heard: " + input;
 }
 ```
 
@@ -162,7 +162,7 @@ Run the program and see how it works.
 
 ## Iteration 3 – Adding custom behavior to DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and duke.Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and duke.duke.Duke’s output.
 
 ```java
 
@@ -214,7 +214,7 @@ Run the application and play around with it.
 ![DialogBoxes Iteration 3](assets/DialogBoxesIteration3.png)
 
 Congratulations! 
-You have successfully implemented a fully functional GUI for duke.Duke!  
+You have successfully implemented a fully functional GUI for duke.duke.Duke!  
 
 ## Exercises
 

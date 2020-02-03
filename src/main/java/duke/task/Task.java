@@ -1,7 +1,6 @@
 package duke.task;
 
-import duke.DaysOfWeek;
-import duke.DukeException;
+import duke.exception.DukeException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -15,7 +14,7 @@ public class Task {
     /**
      * The type d1.
      *
-     * @param d1 Formatted date and time which is being passed by the user
+     * d1 Formatted date and time which is being passed by the user
      */
     LocalDateTime d1;
     private String description;

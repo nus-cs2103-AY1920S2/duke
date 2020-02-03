@@ -1,11 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.Ui;
-
-import java.io.IOException;
+import duke.ui.Ui;
 
 
 /**
@@ -33,9 +31,9 @@ public class ListCommand extends Command {
      */
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws  DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws  DukeException {
         try {
-            ui.printList(taskList);
+            return ui.printList(taskList);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

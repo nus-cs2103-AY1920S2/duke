@@ -1,9 +1,9 @@
 package duke.command;
 
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -32,10 +32,11 @@ public class DoneCommand extends Command {
      */
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         Task finishedTask = taskList.getList().get(splitDoneString(" ", userInput, taskList, ui));
         finishedTask.setDone(true);
-        ui.printDone(finishedTask);
+        String answer = ui.printDone(finishedTask);
+        return answer;
     }
 
     // To split the string coming in from done

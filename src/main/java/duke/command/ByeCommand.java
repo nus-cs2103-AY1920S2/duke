@@ -1,10 +1,10 @@
 package duke.command;
 
 
-import duke.Duke;
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.duke.Duke;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.task.TaskList;
 
 
@@ -34,12 +34,13 @@ public class ByeCommand extends Command {
      * @throws DukeException Main exception method I have created
      */
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
 
         try {
-            ui.printBye();
+            String ans = ui.printBye();
             taskList.getList().clear();
             Duke.breakChecker = true;
+            return ans;
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

@@ -1,6 +1,7 @@
-package duke;
+package duke.parser;
 
 
+import duke.exception.DukeException;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -22,7 +23,7 @@ public class Parser {
      * @return the associated command
      * @throws DukeException the duke exception
      */
-    static Command parse(String fullCommand, String userInput) throws DukeException {
+    public static Command parse(String fullCommand, String userInput) throws DukeException {
         if (fullCommand.contains("Add")) {
             return new AddCommand(userInput);
         } else if (fullCommand.contains("Bye")) {

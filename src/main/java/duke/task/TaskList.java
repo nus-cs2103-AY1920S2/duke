@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -62,10 +62,11 @@ public class TaskList {
      * Print elements.
      */
     // To print out every element in the list
-    public void print_elements() {
+    public String print_elements() {
+        String space = "";
         for (int i = 0; i < list.size(); i++) {
-            String space = "        ";
-            System.out.println(space + (i + 1) + "." + list.get(i));
+            space += i + 1 + "." + list.get(i) + System.lineSeparator();
         }
+        return space;
     }
 }
