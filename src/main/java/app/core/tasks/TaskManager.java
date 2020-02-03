@@ -97,8 +97,13 @@ public class TaskManager{
         );
     }
 
-    // -----------------------------------------------------------------------------------------
-    // Read
+    /**
+     * Finds a list of tasks that contains a String and returns
+     * a String representation of this list of tasks.
+     * @param toMatch The string to match in task descriptions
+     * @return The string representation of the list of filtered tasks
+     * that matches the input string
+     */
     public String findMatchingTasks(String toMatch) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : this.taskList) {
