@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -59,7 +60,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.equals(duke.getUi().showGoodByeMessage())) {
-            // Todo try find a way to handle close of app.
+            Platform.exit();
         }
     }
 
