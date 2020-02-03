@@ -230,7 +230,10 @@ public class Parser {
     }
 
     public Parser(Ui ui, TaskList taskList, Calender calender, Storage storage) {
-
+        this.ui = ui;
+        this.taskList = taskList;
+        this.calender = calender;
+        this.storage = storage;
     }
 
     public Parser(TaskList taskList, Calender calender, Storage storage, Scanner sc) {
