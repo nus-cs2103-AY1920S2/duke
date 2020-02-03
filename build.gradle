@@ -7,7 +7,7 @@ plugins {
 
 javafx {
     version = "11.0.2"
-    module = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 checkstyle {
@@ -46,7 +46,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "dukeproj.Duke"
 }
 
 run {
