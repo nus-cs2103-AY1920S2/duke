@@ -1,4 +1,4 @@
 T@1@read book
-D@0@return book@June 6th
-E@1@project meeting@Aug 6th 2-4pm
+D@0@return book@2019-12-01T10:15:30
+E@1@project meeting@2019-12-02T17:30:00
 T@1@join sports club
