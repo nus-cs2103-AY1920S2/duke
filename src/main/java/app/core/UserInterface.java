@@ -37,7 +37,7 @@ public final class UserInterface {
      * @param message The message to be printed
      */
     public void render(String message) {
-        System.out.println(UserInterface.createLinedMessage(message));
+        System.out.println(UserInterface.createBorderedMessage(message));
     }
     
     /**
@@ -45,7 +45,7 @@ public final class UserInterface {
      * @param message The message to be printed
      */
     public void renderError(String message) {
-        System.err.println(UserInterface.createLinedMessage(message));
+        System.err.println(UserInterface.createBorderedMessage(message));
     }
     
     /**
@@ -62,12 +62,14 @@ public final class UserInterface {
      */
     public void close() {
         this.isClosed = true;
+        this.scanner.close();
     }
 
-    private static String createLinedMessage(String message) {
+    private static String createBorderedMessage(String message) {
         StringBuilder output = new StringBuilder();
-        output.append("    ____________________________________________________________\n");
-
+        String border = createBordersOfLength(MAX_STRING_LENGTH);
+        output.append(String.format("    %s\n", border));
+        
         for (String str : message.split("\n")) {
             int index = 0;
             while (index < str.length()) {
@@ -79,7 +81,15 @@ public final class UserInterface {
             }
         }
         
-        output.append("    ____________________________________________________________\n");
+        output.append(String.format("    %s\n", border));
+        return output.toString();
+    }
+
+    private static String createBordersOfLength(int length) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            output.append("_");
+        }
         return output.toString();
     }
 }
