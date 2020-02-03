@@ -97,7 +97,7 @@ public class Duke{
             }
             //Error handling when user type words that are not the intended instructions
             if(!input.contains("done") && !input.contains("list") && !input.contains("todo") &&  !input.contains("deadline")
-                    && !input.contains("event")){
+                    && !input.contains("event") && !input.contains("delete")){
                 System.out.println("OPPS!!! I'm sorry, but I don't know what that means :-( ");
             }
             if(input.contains("done")){
@@ -106,6 +106,19 @@ public class Duke{
                 itemPos-- ;
                 list.get(itemPos).markDone();
                 System.out.println("[" + list.get(itemPos).getStatus() + "]" + list.get(itemPos).getDescription());
+            }
+            if(input.contains("delete")){
+                System.out.println("Noted. I've removed this task: ");
+                int itemPos = Integer.parseInt(input.replaceAll("[^0-9]" , ""));
+                itemPos-- ;
+
+
+                System.out.println("[" + type.get(itemPos) + "][" + list.get(itemPos).getStatus() + "] " +
+                        list.get(itemPos).getDescription() + list.get(itemPos).getWhen());
+
+                list.remove(itemPos);
+                type.remove(itemPos);
+                System.out.println("Now you have "+ list.size() + " tasks in the list.");
             }
             if(input.equals("list")){
                 count = 1;
