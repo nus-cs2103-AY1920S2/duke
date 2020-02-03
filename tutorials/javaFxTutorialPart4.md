@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `duke.Main` need to know that `DialogBox` needs a `Label`? 
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -18,7 +18,7 @@ While we have produced a fully functional prototype, there are a few major probl
 1. The code is untidy and long:
    Why is all the code in one place?
 
-   The `Main` class attempts to do it all. 
+   The `duke.Main` class attempts to do it all. 
    Code for visual tweaks, listeners and even utility methods are all in one file.
    This makes it difficult to find and make changes to existing code.
 
@@ -29,7 +29,7 @@ FXML is a XML-based language that allows us to define our user interface. Proper
 
 The FXML snippet define a TextField similar to the one that we programmatically defined previous in Tutorial 2. Notice how concise FXML is compared to the plain Java version.
 
-Let's return to Duke and convert it to use FXML instead.
+Let's return to duke.Duke and convert it to use FXML instead.
 
 # Rebuilding the Scene using FXML
 
@@ -101,7 +101,7 @@ We will get to that later.
 
 ## Using Controllers
 
-As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
+As part of the effort to separate the code handling duke.Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
 We call these UI classes _controllers_. 
 
 Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private duke.Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -138,12 +138,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(duke.Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -168,9 +168,9 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `duke.Main` class as the bridge between the existing logic in `duke.Duke` and the UI in `MainWindow`.
 
-**Main.java**
+**duke.Main.java**
 ```java
 @Override
 import java.io.IOException;
@@ -182,16 +182,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for duke.Duke using FXML.
  */
-public class Main extends Application {
+public class duke.Main extends Application {
 
-    private Duke duke = new Duke();
+    private duke.Duke duke = new duke.Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(duke.Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
@@ -278,7 +278,7 @@ The last change that we have to make is to point our `Launcher` class in the rig
 In `Launcher.java`
 ```java
 //...    
-Application.launch(Main.class, args);
+Application.launch(duke.Main.class, args);
 //...
 ```
 [todo]: # (Discussion on the fx:root pattern.)

@@ -4,10 +4,10 @@ public class Main {
 
     private Storage storage;
     private TaskList tasks;
-    private Duke ui;
+    private Eevee ui;
 
     public Main(String filepath) {
-        ui = new Duke();
+        ui = new Eevee();
         storage = new Storage(filepath);
         try {
             tasks = new TaskList(storage.loadData());

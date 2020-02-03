@@ -33,7 +33,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Main"
+    mainClassName = "duke.Main"
 }
 
 run {
