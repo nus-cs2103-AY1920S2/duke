@@ -24,27 +24,10 @@ public class Ui {
     /**
      * Says hi to the user and includes the logo.
      */
-    public void start() {
-        System.out.println("Hello from\n" + LOGO);
-        dukePrint("Hello! I'm Duke\nWhat can I do for you?\n");
-    }
-
-    /**
-     * used to print out horizontal lines.
-     * @return outputs horizontal lines
-     */
-    public String horizontalLines() {
-        return this.HORIZONTAL_LINES;
-    }
-
-    /**
-     * prints output in a more user friendly format.
-     * @param input the string to be outputted
-     */
-    public void dukePrint(String input) {
-        System.out.print(horizontalLines());
-        System.out.print(input);
-        System.out.print(horizontalLines());
+    public String start() {
+        String output = "Hello from\n" + LOGO;
+        output += "Hello! I'm Duke\nWhat can I do for you?\n";
+        return output;
     }
 
     /**

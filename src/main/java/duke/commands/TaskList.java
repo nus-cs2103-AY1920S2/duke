@@ -28,27 +28,27 @@ public class TaskList {
     /**
      * lists out all the tasks currently available in the Tasklist.
      */
-    public void list() {
+    public String list() {
+        String output = "";
         if (newList.size() == 0) {
-            ui.dukePrint("You currently have no tasks in your list\n");
+            output += ("You currently have no tasks in your list\n");
         } else {
-            System.out.print(ui.horizontalLines() + "Here are the tasks in your"
-                    + " list:\n");
+            output += "Here are the tasks in your list:\n";
             for (int i = 0; i < newList.size(); i += 1) {
-                System.out.print((i + 1) + ". " + newList.get(i).toString()
-                        + "\n");
+                output += ((i + 1) + ". " + newList.get(i).toString() + "\n");
             }
-            System.out.print(ui.horizontalLines());
+            //output += (ui.horizontalLines());
         }
+        return output;
     }
 
     /**
      * marks the specified task as done.
      * @param index the index of the task
      */
-    public void done(int index) {
+    public String done(int index) {
         newList.get(index).markAsDone();
-        ui.dukePrint("Nice! I've marked this task as done: \n"
+        return ("Nice! I've marked this task as done: \n"
                 + newList.get(index).toString() + "\n");
     }
 
@@ -56,10 +56,10 @@ public class TaskList {
      * deletes the specified task.
      * @param index the index of the task
      */
-    public void delete(int index) {
+    public String delete(int index) {
         Task task = newList.get(index);
         newList.remove(index);
-        ui.dukePrint("Noted. I've removed this task:\n" + task.toString() + "\n"
+        return ("Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + newList.size() + " tasks in the list.\n");
     }
 
@@ -69,13 +69,15 @@ public class TaskList {
      * @param command whether to notify the user that the task has been added
      *                or not
      */
-    public void add(Task newTask, String command) {
+    public String add(Task newTask, String command) {
         newList.add(newTask);
         if (command.equals("print")) {
-            ui.dukePrint("Got it. I've added this task:\n"
+            return ("Got it. I've added this task:\n"
                     + newList.get(newList.size() - 1).toString() + "\n"
                     + "Now you have " + newList.size() + " tasks in the list."
                     + "\n");
+        } else {
+            return "";
         }
     }
 
@@ -101,9 +103,9 @@ public class TaskList {
      * description.
      * @param pattern the pattern to find
      */
-    public void find(String pattern) {
+    public String find(String pattern) {
         if (newList.size() == 0) {
-            ui.dukePrint("You currently have no tasks in your list\n");
+            return ("You currently have no tasks in your list\n");
         } else {
             String output = "";
             int count = 0;
@@ -116,12 +118,9 @@ public class TaskList {
                 }
             }
             if (count == 0) {
-                ui.dukePrint("There are no matching tasks in your list\n");
+                return ("There are no matching tasks in your list\n");
             } else {
-                System.out.print(ui.horizontalLines() + "Here are the matching "
-                        + "tasks in your list:\n");
-                System.out.println(output);
-                System.out.print(ui.horizontalLines());
+               return "Here are the matching tasks in your list:\n + output";
             }
         }
     }

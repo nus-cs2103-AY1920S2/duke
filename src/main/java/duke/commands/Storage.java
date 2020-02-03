@@ -50,8 +50,8 @@ public class Storage {
      * retrieves all the tasks entered previously by the user from duke.txt and
      * adds them to the TaskList.
      */
-    public void retrieveInfo() {
-        try {
+    public void retrieveInfo() throws FileNotFoundException {
+        //try {
             Scanner scanner = new Scanner(new File(filePath));
             while (scanner.hasNextLine()) {
                 String[] arr  = scanner.nextLine().split("[|]");
@@ -72,28 +72,23 @@ public class Storage {
                 }
                 taskList.add(newTask, "");
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-            return;
-        }
+        //}
     }
 
     /**
      * stores all the tasks the user has entered into the Tasklist in duke.txt.
      */
-    public  void  updateInfo() {
+    public  void  updateInfo() throws IOException {
         String  fileString = "";
         for (int i = 0; i < taskList.size(); i += 1) {
             fileString += taskList.get(i).fileString() + "\n";
         }
 
-        try {
+        //try {
             new File(filePath).createNewFile();
             FileWriter fw = new FileWriter(filePath);
             fw.write(fileString);
             fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+        //}
     }
 }

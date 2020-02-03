@@ -5,6 +5,7 @@ import duke.commands.Storage;
 import duke.commands.TaskList;
 import duke.commands.Ui;
 
+import duke.exceptions.DukeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 /**
@@ -42,13 +46,13 @@ public class Duke extends Application{
      * runs the programme.
      * @param args arguments
      */
-    public static void main(String[] args) {
-        ui.start();
+    public static void main(String[] args) throws IOException {
+        ui.start(); //done
         taskList = new TaskList();
         storage = new Storage("duke.txt", taskList);
         storage.retrieveInfo();
         parser = new Parser(taskList);
-        parser.parse();
+        //parser.parse();
         storage.updateInfo();
     }
 
@@ -102,6 +106,30 @@ public class Duke extends Application{
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        Label dukeText = new Label(ui.start()); //system.out
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+
+        taskList = new TaskList();
+
+        storage = new Storage("duke.txt", taskList);
+        String output = "";
+        try {
+            storage.retrieveInfo();
+        } catch (FileNotFoundException e) {
+            output = ("Something went wrong: " + e.getMessage());
+            return;
+        }
+        if (!output.equals("")) {
+            dukeText = new Label(output); //system.out
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+        }
+
+        parser = new Parser(taskList);
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -135,8 +163,25 @@ public class Duke extends Application{
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label userText = new Label(userInput.getText()); //system.in
+        String command = userInput.getText();
+        String output = "";
+
+        try {
+            output += parser.parse(command); //get strings from system.out
+        } catch (DukeException e) {
+            output += ("☹ OOPS!!! " + e.getMessage() + "\n");
+        }
+
+        if (command.equals("bye")) {
+            try {
+                storage.updateInfo();
+            } catch (IOException e) {
+                output += ("Something went wrong: " + e.getMessage());
+            }
+        }
+
+        Label dukeText = new Label(output); //system.out
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))

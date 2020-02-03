@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 T | N | THE DUKE.TXT FOR GRADLE IS HERE
 =======
 T | N | read book
 T | N | return book
 >>>>>>> fd8c37c... A-Gradle
+=======
+T | N | read book
+>>>>>>> 068ec0a... GUI mostly works except for storage
