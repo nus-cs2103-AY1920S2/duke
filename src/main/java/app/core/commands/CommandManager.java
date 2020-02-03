@@ -23,6 +23,8 @@ public class CommandManager {
             return new DeadlineCommand(args);
         case "list":
             return new ListCommand();
+        case "find":
+            return new FindCommand(args);
         case "done":
             return new DoneCommand(args);
         case "delete":
