@@ -66,6 +66,10 @@ public class Duke {
                     tasks.deleteFromTasks(delTaskNum);
                     ui.showDeletedTask(tasks, toBeDeleted);
                     break;
+                case FIND:
+                    String searchTerm = instruction.getParameter();
+                    ui.showFoundTasks(tasks.findTasks(searchTerm));
+                    break;
                 default:
                     ;
                 }

@@ -33,6 +33,17 @@ public class TaskList {
         return tasks.get(taskNum - 1);
     }
 
+    public TaskList findTasks(String searchTerm) {
+        TaskList temp = new TaskList();
+
+        for (Task t : this.tasks) {
+            if (t.getDescription().contains(searchTerm)) {
+                temp.addToTasks(t);
+            }
+        }
+        return temp;
+    }
+
     public String toString() {
         if (tasks.isEmpty()) {
             return "No tasks have been added!";
