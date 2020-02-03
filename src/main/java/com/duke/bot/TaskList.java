@@ -26,6 +26,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks stored in the Task List.
+     *
      * @return The number of tasks stored in the Task List.
      */
     public int getSize() {
@@ -34,6 +35,7 @@ public class TaskList {
 
     /**
      * Adds a task into the Task List.
+     *
      * @param task The task being added into the Task List.
      */
     public void addTask(Task task) {
@@ -42,10 +44,11 @@ public class TaskList {
 
     /**
      * Returns the task that is located at a specific index in the Task List.
+     *
      * @param index the index of the targeted task being retrieved from the Task List.
      * @return The task located at the specified index in the Task List.
      * @throws IndexOutOfBoundsException If the index is smaller than 0 or larger than
-     * or equal to the number of tasks in the Task List.
+     *     or equal to the number of tasks in the Task List.
      */
     public Task getTask(int index) throws IndexOutOfBoundsException {
         return tasks.get(index);
@@ -53,6 +56,7 @@ public class TaskList {
 
     /**
      * Deletes a task located at the a certain index number of the Task List.
+     *
      * @param delIdx The index number of the task being deleted.
      * @throws IndexOutOfBoundsException If the index in out of range of the Task List.
      */
@@ -68,6 +72,7 @@ public class TaskList {
 
     /**
      * Returns a text containing all the tasks in the Task List in order.
+     *
      * @return A string containing all the tasks in the Task List in order.
      */
     public String printList() {

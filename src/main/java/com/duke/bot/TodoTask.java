@@ -1,16 +1,17 @@
 package com.duke.bot;
 
 /**
- *Represents tasks that neither has a deadline nor event date.
+ * Represents tasks that neither has a deadline nor event date.
  */
-public class TodoTask extends Task{
+public class TodoTask extends Task {
 
     private TodoTask(String taskName) {
         super(taskName, false);
     }
 
     /**
-     * Creates a TodoTask
+     * Creates a TodoTask.
+     *
      * @param taskName name of the TodoTask.
      * @return TodoTask object.
      */
@@ -20,6 +21,7 @@ public class TodoTask extends Task{
 
     /**
      * Returns the icon for TodoTask.
+     *
      * @return A letter 'T'.
      */
     @Override

@@ -2,7 +2,6 @@ package com.duke.bot;
 
 import java.lang.String;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 /**
  * Represents the Duke bot that manages the tasks of the users.
@@ -12,6 +11,9 @@ public class Duke {
     private DukeUi ui;
     private Storage storage;
 
+    /**
+     * Creates a Duke Bot object.
+     */
     public Duke() {
         this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
@@ -20,10 +22,9 @@ public class Duke {
 
     /**
      * Takes the user's input and decides the action to be taken by Duke bot.
-     * @param sc Source of user input.
+     *
+     * @param ui Tha user interface used by the Duke Bot to interact with the user.
      */
-    public void echo(Scanner sc) {
-        String userCommand = sc.next();
     public Duke(DukeUi ui) {
         this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
@@ -108,7 +109,7 @@ public class Duke {
                 for (int i = 0; i < tasks.getSize(); ++i) {
                     Task task = tasks.getTask(i);
                     if (task.getTaskName().contains(keyword)) {
-                        ui.print( (i + 1) + ". " + task.toString());
+                        ui.print((i + 1) + ". " + task.toString());
                     }
                 }
                 echo();
@@ -132,8 +133,8 @@ public class Duke {
 
             default:
                 throw new DukeException(
-                        "Oops! Invalid commmand word, perhaps you would want to try on of the following: " +
-                                "1. todo 2.deadline 3.event 4.list 5.done 6.bye");
+                        "Oops! Invalid commmand word, perhaps you would want to try on of the following: "
+                                + "1. todo 2.deadline 3.event 4.list 5.done 6.bye");
 
             }
 
@@ -145,6 +146,11 @@ public class Duke {
     }
 
 
+    /**
+     * The main method to simulate and run Duke Bot.
+     *
+     * @param args The arguments written by the user in the command line.
+     */
     public static void main(String[] args) {
 
         Duke duke  = new Duke();

@@ -1,7 +1,6 @@
 package com.duke.bot;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -15,6 +14,7 @@ public class DukeUi {
 
     /**
      * Constructs a DukeUi object.
+     *
      * @param in Source of user input.
      * @param out Destination of output stream.
      */

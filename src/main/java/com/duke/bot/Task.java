@@ -15,6 +15,7 @@ public class Task {
 
     /**
      * Factory method for creating a Task object.
+     *
      * @param taskName The name of the task.
      * @return a task object.
      */
@@ -24,7 +25,6 @@ public class Task {
 
     /**
      * Returns the name of the task.
-     *
      */
     public String getTaskName() {
         return taskName;
@@ -32,6 +32,7 @@ public class Task {
 
     /**
      * Returns the icon indicating if the task is a completed.
+     *
      * @return a symbol.
      */
     public String getStatusIcon() {
@@ -48,14 +49,16 @@ public class Task {
 
     /**
      * Returns the icon that represents the type of task.
-     * @return Either a 'T', 'D' or 'E'.
+     *
+     * @return A character 'O'..
      */
     public String getTaskIcon() {
         return "O";
     }
 
     /**
-     * returns the completeness of the task.
+     * Returns the completeness of the task.
+     *
      * @return The boolean value that represents if the task is completed.
      */
     public boolean isDone() {
@@ -64,6 +67,7 @@ public class Task {
 
     /**
      * Prints the completeness, task type and the name of the task.
+     *
      * @return the String containing the the information of the task.
      */
     @Override

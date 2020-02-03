@@ -9,11 +9,12 @@ import java.io.IOException;
  */
 public class Storage {
     private static final String DESTINATION_PATH = "C:\\tasks.txt";
+
     private Storage() {
     }
 
     /**
-     * Creates a Storage File
+     * Creates a Storage File.
      */
     public static Storage createSrorageFile() {
         return new Storage();
@@ -21,6 +22,7 @@ public class Storage {
 
     /**
      * Saves the input into a .txt file.
+     *
      * @param input The message to be saved.
      */
     public void saveToFile(String input) {
@@ -29,7 +31,7 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             fw.write(input);
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }

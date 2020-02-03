@@ -16,6 +16,7 @@ public class EventTask extends Task {
 
     /**
      * Creates an Event Task.
+     *
      * @param taskName The name of the Event Task.
      * @param due The date of happening of the Event Task.
      * @return an Event Task object.
@@ -26,6 +27,7 @@ public class EventTask extends Task {
 
     /**
      * Creates a message containing the name and due date of the task.
+     *
      * @return A string that contains the name and due date of the task.
      */
     @Override
@@ -36,6 +38,7 @@ public class EventTask extends Task {
 
     /**
      * Returns the task icon of the Event Task.
+     *
      * @return A string 'E'.
      */
     @Override
