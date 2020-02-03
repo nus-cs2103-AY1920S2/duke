@@ -84,6 +84,14 @@ public class GuiApp extends Application {
         }));
     }
 
+    public void dukeSay(String str) {
+        Label text = new Label(str);
+
+        text.setWrapText(true);
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(text, new ImageView(dukeIm)));
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and appends them to
      * dialog container. Clears user input upon processing.
@@ -99,7 +107,18 @@ public class GuiApp extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(userIm)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeIm))
         );
+        if (userInput.getText().toUpperCase().equals("BYE")) {
+            closeApp();
+        }
         userInput.clear();
+    }
+
+    private void closeApp() {
+        try {
+            stop();
+        } catch (Exception e) {
+            dukeSay("Oh dear! I cant seem to close, please alt+F4");
+        }
     }
 
     public GuiApp() {
