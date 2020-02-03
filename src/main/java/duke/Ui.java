@@ -23,6 +23,14 @@ public class Ui {
         System.out.printf("You now have %d tasks in your list\n", size);
     }
 
+    public static void printFindPre(String str) {
+        System.out.printf("Tasks that contain %s in your list\n", str);
+    }
+
+    public static void printFindPost(int size) {
+        System.out.printf("%d %s in total.\n", size, size > 1 ? "entries" : "entry");
+    }
+
     public static void printError(Exception e) {
         System.out.println(e.getMessage());
     }
@@ -35,7 +43,8 @@ public class Ui {
         System.out.println("3. todo [description] at yyyy-mm-dd hhmm : add a new todo");
         System.out.println("4. done [index] : complete the task at given index");
         System.out.println("5. delete [index] : delete the task at given index");
-        System.out.println("6. bye : say goodbye and quit");
+        System.out.println("6. find [one single keyword] : find records that contain the specified keyword");
+        System.out.println("7. bye : say goodbye and quit");
     }
 
 
