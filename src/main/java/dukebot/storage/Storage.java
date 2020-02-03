@@ -61,7 +61,7 @@ public class Storage {
      */
     public void clearStorage() {
         if (mkDataDir()) {
-            String[] fileNames = new String[] {TASK_LIST_FILEPATH, ALIAS_FILEPATH};
+            String[] fileNames = new String[]{TASK_LIST_FILEPATH, ALIAS_FILEPATH};
             for (String fileName : fileNames) {
                 File file = new File(storageDirectory + fileName);
                 // Nobody cares if delete fails as file might not exist in the first place.
@@ -78,7 +78,7 @@ public class Storage {
      */
     public void saveTaskList(TaskList tasks) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
-        if(!mkDataDir() && !saveAlreadyFailed){
+        if (!mkDataDir() && !saveAlreadyFailed) {
             saveAlreadyFailed = true;
             throw new DukeException(LineName.SAVE_FAIL);
         }

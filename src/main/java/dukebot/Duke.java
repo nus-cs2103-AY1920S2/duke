@@ -15,7 +15,6 @@ import java.util.HashMap;
  * Main logic.
  */
 public class Duke {
-    private static final String PATH = "./dukeStore.txt";
     private final Storage storage;
     private final Ui ui;
     private TaskList tasks;
@@ -30,6 +29,7 @@ public class Duke {
         storage = new Storage();
         ui = new Ui(withGui);
 
+        // Load Aliases
         HashMap<String, String> loadedAliasMap = null;
         try {
             loadedAliasMap = storage.loadAlias();
@@ -43,6 +43,7 @@ public class Duke {
             parser = new Parser(loadedAliasMap);
         }
 
+        // Load TaskList
         try {
             ArrayList<Task> taskArrayList = storage.loadTaskArrayList();
             tasks = new TaskList(taskArrayList);
@@ -85,6 +86,7 @@ public class Duke {
         c.execute(tasks, ui, storage);
 
         if (c.isExit()) {
+            // Hack to delay program close.
             new Thread(new Runnable() {
                 public void run() {
                     try {
