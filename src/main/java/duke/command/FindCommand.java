@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a FindCommand.
@@ -25,20 +24,17 @@ public class FindCommand extends Command {
      * Executes the find command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
-     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
+     * @return The program's output.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String relevantTasks = tasks.findTasksBySearchPhrase(arg);
 
-        ui.printDividerLine();
         if (relevantTasks.equals("")) {
-            ui.printMessageNoDivider("     There are no matching tasks in your list.\n");
+            return "There are no matching tasks in your list.";
         } else {
-            ui.printMessageNoDivider("     Here are the matching tasks in your list:\n");
-            ui.printMessageNoDivider(relevantTasks);
+            return "Here are the matching tasks in your list:\n" + relevantTasks;
         }
-        ui.printDividerLine();
     }
 }

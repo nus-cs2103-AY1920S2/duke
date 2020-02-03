@@ -8,7 +8,7 @@ import duke.exception.InvalidCommandException;
  */
 public class Parser {
     /**
-     * Parse the user input into the respective command.
+     * Parses the user input into the respective command.
      *
      * @param input the command input.
      * @return The respective command if given a valid command input.
@@ -31,14 +31,14 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(commandLine[1]));
         case TODO:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("     ☹ OOPS!!! The description of a "
+                throw new InvalidCommandException("OOPS!!! The description of a "
                         + "todo cannot be empty.");
             } else {
                 return new TodoCommand(commandLine[1]);
             }
         case DEADLINE:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("     ☹ OOPS!!!"
+                throw new InvalidCommandException("OOPS!!!"
                         + " The description of a deadline cannot be empty.");
             } else {
                 String[] deadlineDescriptionDate = commandLine[1].split(" /by ");
@@ -46,7 +46,7 @@ public class Parser {
             }
         case EVENT:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("     ☹ OOPS!!! The description of a "
+                throw new InvalidCommandException("OOPS!!! The description of a "
                         + "event cannot be empty.");
             } else {
                 String[] eventDescriptionDate = commandLine[1].split(" /at ");
@@ -54,12 +54,12 @@ public class Parser {
             }
         case FIND:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("     ☹ OOPS!!! Please state what you want to find.");
+                throw new InvalidCommandException("OOPS!!! Please state what you want to find.");
             } else {
                 return new FindCommand(commandLine[1]);
             }
         default:
-            throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

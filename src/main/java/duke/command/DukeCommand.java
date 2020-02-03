@@ -33,7 +33,7 @@ public enum DukeCommand {
         } else if (command.equals("find")) {
             return DukeCommand.FIND;
         } else {
-            throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

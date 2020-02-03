@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.InvalidCommandException;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -28,25 +27,25 @@ public class DoneCommand extends Command {
      * Executes the done command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
-     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
+     * @return The program's output.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             //set the desired task as done
             tasks.setAsDone(index);
 
-            //print success message
-            ui.printMessage(String.format("     Nice! I've marked this task as done:\n"
-                    + "     %s\n", tasks.getTask(index)));
-
             //update save file
             storage.saveTasks(tasks.getList());
+
+            //print success message
+            return String.format("Nice! I've marked this task as done:\n"
+                    + "%s\n", tasks.getTask(index));
         } catch (InvalidCommandException e) {
-            ui.printException(e);
+            return e.getMessage();
         } catch (IOException e) {
-            ui.printMessage("     Sorry, I could not write to the save file.");
+            return "Sorry, I could not write to the save file.";
         }
 
     }

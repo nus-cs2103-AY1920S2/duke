@@ -39,7 +39,7 @@ public class TaskList {
      */
     public void setAsDone(int index) throws InvalidCommandException {
         if (index > tasks.size() || index <= 0) {
-            throw new InvalidCommandException("     ☹ OOPS!!! I cannot set a "
+            throw new InvalidCommandException("OOPS!!! I cannot set a "
                     + "non-existent task to be done.");
         }
 
@@ -57,7 +57,7 @@ public class TaskList {
     public Task deleteTask(int index) throws InvalidCommandException {
         //check if index is valid
         if (index > tasks.size() || index <= 0) {
-            throw new InvalidCommandException("     ☹ OOPS!!! I cannot delete a "
+            throw new InvalidCommandException("OOPS!!! I cannot delete a "
                     + "non-existent task.");
         }
 
@@ -86,7 +86,7 @@ public class TaskList {
         String relevantTasksRepresentation = "";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(searchPhrase)) {
-                relevantTasksRepresentation += String.format("     %d. %s\n", (i + 1), tasks.get(i));
+                relevantTasksRepresentation += String.format("%d. %s\n", (i + 1), tasks.get(i));
             }
         }
         return relevantTasksRepresentation;
@@ -119,7 +119,7 @@ public class TaskList {
     public String toString() {
         String listRepresentation = "";
         for (int i = 0; i < tasks.size(); i++) {
-            listRepresentation += String.format("     %d. %s\n", (i + 1), tasks.get(i));
+            listRepresentation += String.format("%d. %s\n", (i + 1), tasks.get(i));
         }
         return listRepresentation;
     }

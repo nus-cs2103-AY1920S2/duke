@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a Command.
@@ -14,8 +13,8 @@ public abstract class Command {
      * Must be overridden.
      *
      * @param tasks TaskList object that contains the tasks of the application.
-     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
+     * @return The program's output.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage);
 }
