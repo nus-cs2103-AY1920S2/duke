@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import app.exceptions.WrongDateTimeFormatException;
+import app.exceptions.InvalidDateTimeFormatException;
 
 /**
  * This class represents the dates that are present in Duke
@@ -28,13 +28,13 @@ public final class Date {
      */
     public static final String DEFAULT_STORAGE_FORMAT = "yyyyMMddHHmmss";
 
-    private Date(String dateTimeStr, String format) throws WrongDateTimeFormatException {
+    private Date(String dateTimeStr, String format) throws InvalidDateTimeFormatException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
             this.date = LocalDateTime.parse(dateTimeStr, formatter);
             this.formatter = DateTimeFormatter.ofPattern(DEFAULT_OUTPUT_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new WrongDateTimeFormatException("Accepted Date Time Format: " + format);
+            throw new InvalidDateTimeFormatException("Accepted Date Time Format: " + format);
         }
     }
 
@@ -47,10 +47,10 @@ public final class Date {
      * Parses and creates a new Date object using the DEFAULT_INPUT_FORMAT
      * @param dateTimeStr Input string 
      * @return A new Date object
-     * @throws WrongDateTimeFormatException If input string's format does not 
+     * @throws InvalidDateTimeFormatException If input string's format does not 
      * match DEFAULT_INPUT_FORMAT
      */
-    public static Date from(String dateTimeStr) throws WrongDateTimeFormatException {
+    public static Date from(String dateTimeStr) throws InvalidDateTimeFormatException {
         return new Date(dateTimeStr, DEFAULT_INPUT_FORMAT);
     }
 
@@ -60,10 +60,10 @@ public final class Date {
      * @param dateTimeStr Input string
      * @param format Custom format based on DateTimeFormatter
      * @return A new Date object
-     * @throws WrongDateTimeFormatException If input string's format does not 
+     * @throws InvalidDateTimeFormatException If input string's format does not 
      * match the param format.
      */
-    public static Date fromFormat(String dateTimeStr, String format) throws WrongDateTimeFormatException {
+    public static Date fromFormat(String dateTimeStr, String format) throws InvalidDateTimeFormatException {
         return new Date(dateTimeStr, format);
     }
 
@@ -71,10 +71,10 @@ public final class Date {
      * Parses and creates a new Date object using the DEFAULT_STORAGE_FORMAT
      * @param dateTimeStr Input string 
      * @return A new Date object
-     * @throws WrongDateTimeFormatException If input string's format does not 
+     * @throws InvalidDateTimeFormatException If input string's format does not 
      * match DEFAULT_STORAGE_FORMAT
      */
-    public static Date fromStorage(String dateTimeStr) throws WrongDateTimeFormatException {
+    public static Date fromStorage(String dateTimeStr) throws InvalidDateTimeFormatException {
         return new Date(dateTimeStr, DEFAULT_STORAGE_FORMAT);
     }
 

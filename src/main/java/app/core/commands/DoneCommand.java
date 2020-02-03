@@ -5,16 +5,16 @@ import app.core.tasks.TaskManager;
 
 import app.exceptions.InvalidTaskIndexException;
 import app.exceptions.StorageFileException;
-import app.exceptions.WrongUsageException;
+import app.exceptions.InvalidUsageException;
 
 final class DoneCommand extends Command {
     private int taskIndex;
 
-    DoneCommand(String args) throws WrongUsageException {
+    DoneCommand(String args) throws InvalidUsageException {
         try {
             this.taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException e) {
-            throw new WrongUsageException("Usage: done <task_index>");
+            throw new InvalidUsageException("Usage: done <task_index>");
         }
     }
 

@@ -4,17 +4,17 @@ import app.core.UserInterface;
 import app.core.tasks.TaskManager;
 import app.util.Date;
 import app.exceptions.StorageFileException;
-import app.exceptions.WrongDateTimeFormatException;
-import app.exceptions.WrongUsageException;
+import app.exceptions.InvalidDateTimeFormatException;
+import app.exceptions.InvalidUsageException;
 
 final class EventCommand extends Command {
     private String description;
     private Date when;
 
-    EventCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
+    EventCommand(String args) throws InvalidUsageException, InvalidDateTimeFormatException {
         String[] splitArgs = args.split("/at");
         if (splitArgs.length != 2) {
-            throw new WrongUsageException("Usage: event <description> /at <when>");
+            throw new InvalidUsageException("Usage: event <description> /at <when>");
         }
 
         this.description = splitArgs[0].trim();

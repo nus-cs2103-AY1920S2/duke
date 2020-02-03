@@ -1,7 +1,7 @@
 package app.core.tasks;
 
 import app.util.Date;
-import app.exceptions.WrongDateTimeFormatException;
+import app.exceptions.InvalidDateTimeFormatException;
 
 /**
  * This class contains the information of a Task.
@@ -53,7 +53,7 @@ public class Task {
             }
             
             return output;
-        } catch (WrongDateTimeFormatException e) {
+        } catch (InvalidDateTimeFormatException e) {
             return null;
         }
     }

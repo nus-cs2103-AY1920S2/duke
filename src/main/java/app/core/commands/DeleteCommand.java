@@ -5,16 +5,16 @@ import app.core.tasks.TaskManager;
 
 import app.exceptions.InvalidTaskIndexException;
 import app.exceptions.StorageFileException;
-import app.exceptions.WrongUsageException;
+import app.exceptions.InvalidUsageException;
 
 final class DeleteCommand extends Command {
     private int taskIndex;
 
-    DeleteCommand(String args) throws WrongUsageException {
+    DeleteCommand(String args) throws InvalidUsageException {
         try {
             this.taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException e) {
-            throw new WrongUsageException("Usage: delete <task_index>");
+            throw new InvalidUsageException("Usage: delete <task_index>");
         }
     }
 

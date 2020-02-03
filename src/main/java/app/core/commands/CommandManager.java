@@ -4,7 +4,7 @@ import app.util.Parser;
 import app.util.StringPair;
 
 import app.exceptions.BaseException;
-import app.exceptions.WrongCommandException;
+import app.exceptions.InvalidCommandException;
 
 /**
  * This class contains all the data and functions related to Commands
@@ -40,7 +40,7 @@ public final class CommandManager {
         case "delete":
             return new DeleteCommand(args);
         default:
-            throw new WrongCommandException(String.format("The command '%s' is not supported", command));
+            throw new InvalidCommandException(String.format("The command '%s' is not supported", command));
         }
     }
 }

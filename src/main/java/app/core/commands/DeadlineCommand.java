@@ -4,17 +4,17 @@ import app.core.UserInterface;
 import app.core.tasks.TaskManager;
 import app.util.Date;
 import app.exceptions.StorageFileException;
-import app.exceptions.WrongDateTimeFormatException;
-import app.exceptions.WrongUsageException;
+import app.exceptions.InvalidDateTimeFormatException;
+import app.exceptions.InvalidUsageException;
 
 final class DeadlineCommand extends Command {
     private String description;
     private Date deadline;
 
-    DeadlineCommand(String args) throws WrongUsageException, WrongDateTimeFormatException {
+    DeadlineCommand(String args) throws InvalidUsageException, InvalidDateTimeFormatException {
         String[] splitArgs = args.split("/by");
         if (splitArgs.length != 2) {
-            throw new WrongUsageException("Usage: deadline <description> /by <deadline>");
+            throw new InvalidUsageException("Usage: deadline <description> /by <deadline>");
         }
 
         this.description = splitArgs[0].trim();

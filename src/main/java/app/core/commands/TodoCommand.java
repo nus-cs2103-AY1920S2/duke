@@ -3,14 +3,14 @@ package app.core.commands;
 import app.core.UserInterface;
 import app.core.tasks.TaskManager;
 import app.exceptions.StorageFileException;
-import app.exceptions.WrongUsageException;
+import app.exceptions.InvalidUsageException;
 
 final class TodoCommand extends Command {
     private String description;
 
-    TodoCommand(String args) throws WrongUsageException {
+    TodoCommand(String args) throws InvalidUsageException {
         if (args.equals("")) {
-            throw new WrongUsageException("Usage: todo <description>");
+            throw new InvalidUsageException("Usage: todo <description>");
         }
 
         this.description = args;
