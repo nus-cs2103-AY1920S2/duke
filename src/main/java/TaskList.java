@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * This represents a list of Tasks
+ * This represents a list of Tasks.
  */
 public class TaskList {
     ArrayList<Task> list;

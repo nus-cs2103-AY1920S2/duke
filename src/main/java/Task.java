@@ -1,5 +1,5 @@
 /**
- * Represents a task that users can input
+ * Represents a task that users can input.
  */
 public class Task {
     String desc;
