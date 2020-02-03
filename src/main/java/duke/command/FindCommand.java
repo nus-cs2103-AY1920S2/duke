@@ -5,8 +5,6 @@ import duke.task.TaskList;
 import duke.task.Task;
 import duke.util.Storage;
 
-import java.util.ArrayList;
-
 /**
  * Represents the Command for the "find" input by the user.
  * It shows all task items that contain the subsequent keyword from the user.
@@ -17,6 +15,10 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
 
     private String keyword;
+
+    public FindCommand() {
+
+    }
 
     /**
      * FindCommand constructor.
@@ -62,5 +64,10 @@ public class FindCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "find <keyword> - Shows all tasks that match a given keyword/phrase";
     }
 }

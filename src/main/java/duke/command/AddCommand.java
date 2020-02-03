@@ -19,6 +19,10 @@ public class AddCommand extends Command {
     private String toAdd;
     private Task.TaskType taskType;
 
+    public AddCommand() {
+
+    }
+
     /**
      * AddCommand constructor.
      * @param toAdd string name of new task.
@@ -50,5 +54,10 @@ public class AddCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "todo/deadline/event - Add a new task to your list.";
     }
 }

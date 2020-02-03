@@ -5,13 +5,13 @@ import duke.interaction.Ui;
 import duke.util.Storage;
 
 /**
- * Represents the Command for the "list" input by the user.
- * It displays all task items in the task list.
+ * Represents the Command for the "help" input by the user.
+ * It displays all possible commands available.
  *
  * @author  Hardy Shein
  * @version 0.1
  */
-public class ListCommand extends Command {
+public class HelpCommand extends Command {
 
     /**
      * Executes List behaviour of showing all tasks in collection.
@@ -19,7 +19,8 @@ public class ListCommand extends Command {
      * @param storage to access save-load functionality.
      */
     public void execute(TaskList taskList, Storage storage) {
-        Ui.showAllTasks(taskList);
+        Ui.showAllCommands(new AddCommand(), new ListCommand(), new DateCommand(), new DeleteCommand(),
+                new DoneCommand(), new ExitCommand(), new FindCommand(), this);
     }
 
     /**
@@ -32,6 +33,6 @@ public class ListCommand extends Command {
 
     @Override
     public String toString() {
-        return "list - Shows all tasks currently on the list.";
+        return "help - Shows all possible commands available.";
     }
 }

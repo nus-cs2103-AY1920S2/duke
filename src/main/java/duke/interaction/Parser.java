@@ -8,6 +8,7 @@ import duke.command.DoneCommand;
 import duke.command.DateCommand;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.task.Task;
 import duke.util.DukeException;
 
@@ -51,6 +52,8 @@ public class Parser {
                 return new DateCommand(in.nextLine().trim());
             case "find":
                 return new FindCommand((in.hasNextLine() ? in.nextLine().trim() : ""));
+            case "help":
+                return new HelpCommand();
             default:
                 if (in.hasNextLine()) {
                     in.nextLine();

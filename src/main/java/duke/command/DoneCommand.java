@@ -1,11 +1,8 @@
 package duke.command;
 
 import duke.interaction.Ui;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
-
-import java.util.ArrayList;
 
 /**
  * Represents the Command for the "done" input by the user.
@@ -17,6 +14,10 @@ import java.util.ArrayList;
 public class DoneCommand extends Command {
 
     int doneIndex;
+
+    public DoneCommand() {
+
+    }
 
     /**
      * DoneCommand constructor.
@@ -46,5 +47,10 @@ public class DoneCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "done <index> - Updates the task at the given index to \"Done\" status.";
     }
 }

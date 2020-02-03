@@ -2,6 +2,7 @@ package duke.interaction;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.command.Command;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -163,5 +164,21 @@ public class Ui {
 
     public static void setLatestResponse(String response) {
         latestResponse = response;
+    }
+
+    /**
+     * Prints the commands provided by the application.
+     * @param commands varargs representing all commands to be printed.
+     */
+    public static void showAllCommands(Command... commands) {
+        latestResponse = "";
+        int count = 0;
+        showLine();
+        for (Command c : commands) {
+            count++;
+            latestResponse += count + ". " + c.toString() + "\n";
+            printWithIndent(count + ". " + c.toString());
+        }
+        showLine();
     }
 }

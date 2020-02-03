@@ -1,10 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
-
-import java.util.ArrayList;
 
 /**
  * Represents the Command for the "bye" input by the user.
@@ -26,5 +23,10 @@ public class ExitCommand extends Command {
      */
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "bye - Quits the program. I don't wanna go :'(";
     }
 }

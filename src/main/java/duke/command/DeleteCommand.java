@@ -15,6 +15,10 @@ public class DeleteCommand extends Command {
 
     int indexToDelete;
 
+    public DeleteCommand() {
+
+    }
+
     /**
      * DeleteCommand constructor.
      * @param index of the task in collection to be deleted.
@@ -45,5 +49,10 @@ public class DeleteCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "delete <index> - Deletes a task at the given index in your task list.";
     }
 }

@@ -22,6 +22,10 @@ public class DateCommand extends Command {
 
     private String dateStr;
 
+    public DateCommand() {
+
+    }
+
     /**
      * DateCommand constructor.
      * @param dateStr of the date user wants to check.
@@ -78,5 +82,10 @@ public class DateCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "date yyyy-MM-dd - Shows all tasks on the given date";
     }
 }
