@@ -1,7 +1,7 @@
-package dukeapp.parse;
+package dukeApp.parse;
 
 import org.junit.jupiter.api.Test;
-import dukeapp.files.*;
+import dukeApp.files.*;
 
 import java.util.ArrayList;
 

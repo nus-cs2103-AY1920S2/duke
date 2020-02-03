@@ -50,13 +50,11 @@ public class TaskList {
         }
     }
 
-<<<<<<< HEAD
     /**
      * Call to action for the different task type
      * @param taskType string indicating task type
      * @param statement task description
      */
-=======
     public void find(String statement) {
         Find f = new Find(statement, aList);
         ArrayList<Task> matchTask = f.match();
@@ -70,7 +68,6 @@ public class TaskList {
     }
 
     //call to actions for different task type
->>>>>>> branch-Level-9
     public void add(String taskType, String statement) {
         Task t;
         statement = statement.substring(statement.indexOf(" "));

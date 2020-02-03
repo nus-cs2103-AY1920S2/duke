@@ -15,7 +15,7 @@ public class Storage {
     }
 
     /**
-     * Load date from file and store in an ArrayList
+     * Load data from file and store in an ArrayList
      * @return task list
      * @throws FileNotFoundException if the file does not exist
      */
