@@ -3,13 +3,40 @@ package com.duke.bot;
 import java.lang.String;
 import java.time.LocalDate;
 
+import javafx.application.Application;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 /**
  * Represents the Duke bot that manages the tasks of the users.
  */
-public class Duke {
+public class Duke extends Application {
     private TaskList tasks;
     private DukeUi ui;
     private Storage storage;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    /*
+    private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
+
+     */
 
     /**
      * Creates a Duke Bot object.
@@ -20,131 +47,91 @@ public class Duke {
         this.ui = new DukeUi(System.in, System.out);
     }
 
-    /**
-     * Takes the user's input and decides the action to be taken by Duke bot.
-     *
-     * @param ui Tha user interface used by the Duke Bot to interact with the user.
-     */
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        // Step 1
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        //Step 2
+        stage.setTitle("duke.Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Step 3
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction( (event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+    }
+
+    private Label getDialogLabel(String text) {
+        Label label = new Label(text);
+        label.setWrapText(true);
+
+        return label;
+    }
+
     public Duke(DukeUi ui) {
         this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
         this.ui = ui;
     }
 
-    private void echo() {
+    /**
+     * Takes the user's input and decides the action to be taken by Duke bot.
+     */
+    public void echo() throws DukeException {
         String userCommand = ui.getNext();
-
-        try {
-            switch (userCommand) {
-            case "list":
-                ui.print(tasks.printList());
-                ui.printEmptyLine();
-                ui.setToken("\\p{javaWhitespace}+");
-                storage.saveToFile(tasks.printList());
-                echo();
-                break;
-
-            case "done":
-                int targetIdx = ui.getNextInt() - 1;
-                this.tasks.getTask(targetIdx).markDone();
-                ui.print("Good job! I've marked this task as done:");
-                ui.print(String.format("%d. %s\n", targetIdx + 1, tasks.getTask(targetIdx).toString()));
-                ui.print("\n");
-                ui.setToken("\\p{javaWhitespace}+");
-                storage.saveToFile(tasks.printList());
-                echo();
-                break;
-
-            case "todo":
-                ui.setToken("\\n");
-                String userInput = ui.getNextLine();
-                if (userInput.equals("")) {
-                    ui.resetScanner();
-                    throw new DukeException("Uh-oh! Description of todo cannot be empty!");
-                }
-                TodoTask todoTask = TodoTask.createTodoTask(userInput);
-                tasks.addTask(todoTask);
-                ui.print("Added: " + todoTask.toString());
-                ui.print(String.format("Now you have %d task(s) on your list.\n", tasks.getSize()));
-                ui.printEmptyLine();
-                //echo(new Scanner(System.in);
-                ui.setToken("\\p{javaWhitespace}+");
-                storage.saveToFile(tasks.printList());
-                echo();
-                break;
-
-            case "deadline":
-                ui.setToken("\\s*/by\\s*|\\n");
-                String action = ui.getNext();
-                String dateInput = ui.getNext();
-                LocalDate byDate = LocalDate.parse(dateInput);
-                DeadlineTask deadlineTask = DeadlineTask.createDeadlineTask(action, byDate);
-                tasks.addTask(deadlineTask);
-                ui.print("Added: " + deadlineTask.toString());
-                ui.print(String.format("Now you have %d task(s) on your list.\n", tasks.getSize()));
-                ui.printEmptyLine();
-                ui.setToken("\\p{javaWhitespace}+");
-                storage.saveToFile(tasks.printList());
-                echo();
-                break;
-
-            case "event":
-                ui.setToken("\\s*/at\\s*|\\n");
-                action = ui.getNext();
-                dateInput = ui.getNext();
-                LocalDate atDate = LocalDate.parse(dateInput);
-                EventTask eventTask = EventTask.createEventTask(action, atDate);
-                tasks.addTask(eventTask);
-                ui.print("Added: " + eventTask.toString());
-                ui.print(String.format("Now you have %d task(s) on your list.\n", tasks.getSize()));
-                ui.printEmptyLine();
-                ui.setToken("\\p{javaWhitespace}+");
-                storage.saveToFile(tasks.printList());
-                echo();
-                break;
-
-            case "find":
-                ui.resetScanner();
-                String keyword = ui.getNextLine();
-                for (int i = 0; i < tasks.getSize(); ++i) {
-                    Task task = tasks.getTask(i);
-                    if (task.getTaskName().contains(keyword)) {
-                        ui.print((i + 1) + ". " + task.toString());
-                    }
-                }
-                echo();
-                break;
-
-            case "bye":
-                ui.printByeMsg();
-                break;
-
-            case "delete":
-                int delIdx = ui.getNextInt() - 1;
-                if (delIdx >= tasks.getSize() || delIdx < 0) {
-                    throw new DukeException("Oops! Target object is out of bounds!");
-                }
-                Task delTask = tasks.getTask(delIdx);
-                tasks.deleteTask(delIdx);
-                ui.print(String.format("Deleted: %s\n\n", delTask.toString()));
-                storage.saveToFile(tasks.printList());
-                echo();
-                break;
-
-            default:
-                throw new DukeException(
-                        "Oops! Invalid commmand word, perhaps you would want to try on of the following: "
-                                + "1. todo 2.deadline 3.event 4.list 5.done 6.bye");
-
-            }
-
-        } catch (DukeException ex) {
-            ui.printError(ex.getMessage());
-            ui.printEmptyLine();
+        String output = Parser.parse(userCommand, ui, storage, tasks);
+        ui.print(output);
+        if (!userCommand.equals("bye")) {
             echo();
         }
     }
-
 
     /**
      * The main method to simulate and run Duke Bot.
@@ -153,11 +140,17 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        Duke duke  = new Duke();
+        Duke duke  = new Duke(new DukeUi());
 
         duke.ui.greet();
 
-        duke.echo();
+        try {
+            duke.echo();
+        } catch (DukeException e) {
+            duke.ui.print(e.getMessage());
+        }
+
+        System.exit(0);
     }
 
 }

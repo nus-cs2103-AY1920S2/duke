@@ -9,9 +9,10 @@ import java.util.regex.Pattern;
  * Represents the UI that handles the interaction between users and Duke Bot.
  */
 public class DukeUi {
+    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon! :)";
+
     private Scanner in;
     private PrintStream out;
-
     /**
      * Constructs a DukeUi object.
      *
@@ -21,6 +22,11 @@ public class DukeUi {
     public DukeUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+    }
+
+    public DukeUi() {
+        this.in = new Scanner(System.in);
+        this.out = System.out;
     }
 
     /**
@@ -39,6 +45,7 @@ public class DukeUi {
      */
     public void printByeMsg() {
         System.out.println("Bye. Hope to see you again soon! :)");
+        out.print(BYE_MESSAGE);
     }
 
     public void print(String output) {
