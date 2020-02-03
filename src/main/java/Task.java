@@ -1,3 +1,8 @@
+/**
+ * Represents a Task in the TaskList.
+ * A Task is described by its <code>String</code> description and
+ * a <code>boolean</code> isDone to indicate whether a Task is completed.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -11,10 +16,9 @@ public class Task {
         return (isDone ? "DONE" : "UNDONE");
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
+    /**
+     * Sets the Task as Done.
+     */
     public void markAsDone() {
         isDone = true;
     }

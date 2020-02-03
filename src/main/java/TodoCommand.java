@@ -1,3 +1,6 @@
+/**
+ * Represents a "todo" command given to TaskList.
+ */
 public class TodoCommand extends Command {
 
     public TodoCommand(Todo t) {

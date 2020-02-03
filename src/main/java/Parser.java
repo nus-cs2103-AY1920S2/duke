@@ -1,12 +1,17 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-// Parser handles what command to generate based on the user input
-// what command should occur based on the what the user input
-// makes sense of the text
 
+/**
+ * Parser handles what command to generate based on the user input.
+ * Parser makes sense of the text that is being input to Duke.
+ */
 public class Parser {
     static String exitInput = "bye";
-
+    /**
+     * Returns a Command for Duke to run on.
+     * @param text Input from user.
+     * @return Command to run. Returns null when no input matches the correct Commands.
+     */
     static Command parse(String text) {
 
         if (text.toLowerCase().equals(exitInput)) {
