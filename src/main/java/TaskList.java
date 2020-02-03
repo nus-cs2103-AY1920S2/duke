@@ -71,4 +71,15 @@ public class TaskList {
             System.out.println("duke.txt file doesn't exist, please create one in /duke/data");
         }
     }
+
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask.toString().contains(word)) {
+                tasksFound.add(currTask);
+            }
+        }
+        return tasksFound;
+    }
 }

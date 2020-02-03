@@ -51,8 +51,12 @@ public class Duke {
                     ui.showMarkedDone(tasks.markDone(doneNum));
                     break;
                 case "delete":
-                    int deleteNum = parser.markDoneNum(command);
+                    int deleteNum = parser.deleteNum(command);
                     ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
+                    break;
+                case "find":
+                    String findWord = parser.findWord(command);
+                    ui.showFound(tasks.find(findWord));
                     break;
                 default:
                     throw new DukeUnknownInputException("Sorry but I do not recognise your command.");

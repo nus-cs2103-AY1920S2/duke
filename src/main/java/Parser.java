@@ -72,4 +72,11 @@ public class Parser {
             throw new DukeUnknownInputException("Need task NUMBER.");
         }
     }
+
+    public static String findWord(String command) {
+        if (command.length() <= 5) {
+            throw new DukeMissingDescriptionException("Word to find missing.");
+        }
+        return command.substring(5);
+    }
 }
