@@ -1,12 +1,5 @@
 package duke;
-
-/**
- * The Ui class than handles display of the Duke program.
- */
 public class Ui {
-    /**
-     * Prints a greeting message.
-     */
     public static void greet() {
         System.out.println("Greeting, traveler. My name is Andrew. What can I do for you?");
     }
@@ -51,6 +44,22 @@ public class Ui {
         System.out.printf("You now have %d tasks in your list\n", size);
     }
 
+    /*
+     * Prints a message when a find command is initiated.
+     * @param str the keyword provided
+     */
+    public static void printFindPre(String str) {
+        System.out.printf("Tasks that contain %s in your list\n", str);
+    }
+
+    /**
+     * Prints a message showing the number of matches found.
+     * @param size the number of matches
+     */
+    public static void printFindPost(int size) {
+        System.out.printf("%d %s in total.\n", size, size > 1 ? "entries" : "entry");
+    }
+
     /**
      * Prints a message error.
      *
@@ -70,7 +79,8 @@ public class Ui {
         System.out.println("3. todo [description] at yyyy-mm-dd hhmm : add a new todo");
         System.out.println("4. done [index] : complete the task at given index");
         System.out.println("5. delete [index] : delete the task at given index");
-        System.out.println("6. bye : say goodbye and quit");
+        System.out.println("6. find [one single keyword] : find records that contain the specified keyword");
+        System.out.println("7. bye : say goodbye and quit");
     }
 
 

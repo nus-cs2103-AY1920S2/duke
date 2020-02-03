@@ -29,12 +29,16 @@ public class Duke {
         Ui.greet();
         Ui.printTaskList();
         while (scan.hasNext()) {
-            Optional<Command> parsed = Parser.parse(scan.nextLine());
-            if (parsed.isPresent()) {
-                Command command = parsed.get();
-                if (controller.execute(command)) {
-                    break;
+            try {
+                Optional<Command> parsed = Parser.parse(scan.nextLine());
+                if (parsed.isPresent()) {
+                    Command command = parsed.get();
+                    if (controller.execute(command)) {
+                        break;
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
     }
