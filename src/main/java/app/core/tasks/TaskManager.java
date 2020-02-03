@@ -1,6 +1,7 @@
 package app.core.tasks;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import app.util.Date;
 import app.core.StorageManager;
@@ -14,6 +15,8 @@ public class TaskManager{
         this.taskList = this.storageManager.load();
     }
 
+    // -----------------------------------------------------------------------------------------
+    // Create
     public String addTodoTask(String description) {
         return this.add(new Task(description));
     }
@@ -36,6 +39,8 @@ public class TaskManager{
         );
     }
 
+    // -----------------------------------------------------------------------------------------
+    // Update
     public String setTaskDone(int index) throws IndexOutOfBoundsException {
         Task task = this.taskList.get(index - 1);
         task.setDone();
@@ -46,6 +51,8 @@ public class TaskManager{
         );
     }
 
+    // -----------------------------------------------------------------------------------------
+    // Delete
     public String deleteTask(int index) throws IndexOutOfBoundsException {
         Task task = this.taskList.remove(index - 1);
         this.storageManager.save(this.taskList);
@@ -55,6 +62,27 @@ public class TaskManager{
             "  %s\n" +
             "Now you have %d tasks in the list.\n", task, this.taskList.size()
         );
+    }
+
+    // -----------------------------------------------------------------------------------------
+    // Read
+    public String findMatchingTasks(String toMatch) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(toMatch)) {
+                filteredTasks.add(task);
+            }
+        }
+
+        if (filteredTasks.size() == 0) {
+            return "There are no matching tasks";
+        }
+
+        StringBuilder sb = new StringBuilder("Here are the matching tasks: \n");
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            sb.append(String.format("%d. %s\n", i + 1, filteredTasks.get(i)));
+        }
+        return sb.toString();
     }
 
     @Override
