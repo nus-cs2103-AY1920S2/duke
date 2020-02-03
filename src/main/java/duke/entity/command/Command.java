@@ -6,6 +6,7 @@ import duke.handler.Ui;
 
 public abstract class Command {
 
+
     /**
      * Executes the task based on the eventual type
      *
