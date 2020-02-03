@@ -50,7 +50,7 @@ public class Parser {
 
         switch (command) {
             case "bye":
-                return Command.dateE;
+                return Command.BYE;
             case "done":
                 return Command.DONE;
             case "todo":

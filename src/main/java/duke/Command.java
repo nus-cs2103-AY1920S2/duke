@@ -1,5 +1,7 @@
+package duke;
+
 public enum Command {
-    dateE,
+    BYE,
     DONE,
     TODO,
     DEADLINE,

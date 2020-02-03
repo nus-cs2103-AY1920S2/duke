@@ -35,7 +35,7 @@ public class Duke {
                 Command command = instruction.getCommand();
 
                 switch (command) {
-                case dateE:
+                case BYE:
                     break loop;
                 case DONE:
                     int doneTaskNum = Integer.parseInt(instruction.getParameter());
