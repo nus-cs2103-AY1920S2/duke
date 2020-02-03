@@ -74,4 +74,8 @@ public class Ui {
         System.out.println("\t_____________________________________\n\n");
     }
 
+    public void horizontalLine() {
+        System.out.println("\t____________________________________________________________");
+    }
+
 }

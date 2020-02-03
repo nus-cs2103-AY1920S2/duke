@@ -37,7 +37,7 @@ public class Duke {
         String input = ui.getInput();
         while (!input.equalsIgnoreCase("Bye")) {
             try {
-                System.out.println("\t____________________________________________________________");
+                ui.horizontalLine();
                 if (input.equalsIgnoreCase("list")) {
                     tasks.list();
                 } else if (input.startsWith("done")) {
@@ -61,26 +61,26 @@ public class Duke {
                         throw new InvalidRequestException();
                     }
                 }
-                System.out.println("\t____________________________________________________________");
+                ui.horizontalLine();
                 input = ui.getInput();
             } catch (EmptyTaskException empty) {
                 System.out.println("\t" + empty.toString());
-                System.out.println("\t____________________________________________________________");
+                ui.horizontalLine();
                 input = ui.getInput();
             } catch (InvalidRequestException invalid) {
                 System.out.println("\t" + invalid.toString());
-                System.out.println("\t____________________________________________________________");
+                ui.horizontalLine();
                 input = ui.getInput();
             }
         }
-        System.out.println("\t____________________________________________________________");
+        ui.horizontalLine();
         System.out.println("\tBye. Hope to see you again soon!");
         try {
             storage.addTasksToFile(tasks.tasks);
         } catch (IOException e) {
             System.out.println("Error in saving to file");
         }
-        System.out.println("\t____________________________________________________________");
+        ui.horizontalLine();
     }
 
     public static void main(String[] args) {
