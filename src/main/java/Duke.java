@@ -1,11 +1,3 @@
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,14 +15,6 @@ public class Duke {
     private static Storage storage;
     private Ui ui;
     private TaskList tasks;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * The constructor for Duke takes in a String that contains the file path of the txt file
@@ -69,11 +53,10 @@ public class Duke {
                 isExit = c.isExit();
             } catch (IOException e) {
                 ui.showError(e.getMessage());
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
-                if (isExit) {
-                    break;
-                }
             }
         }
     }
@@ -89,21 +72,6 @@ public class Duke {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    /*private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new Image(user)),
-                DialogBox.getDukeDialog(dukeText, new Image(duke))
-        );
-        userInput.clear();
-    }*/
-
-    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
@@ -114,8 +82,8 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, storage);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (IOException | DukeException e) {
+            ui.showError(e.getMessage());
         }
         reply = formattedOutput.toString();
         while (reply.contains(Duke.LINE)) {
@@ -126,16 +94,4 @@ public class Duke {
         return reply;
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
 }

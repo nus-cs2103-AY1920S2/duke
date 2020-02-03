@@ -8,13 +8,8 @@ class Ui {
     /**
      * Shows the Duke logo when the Duke program is started.
      */
-    void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I am \n" + logo + "\n" + "What can I do for you?");
+    String showWelcome() {
+        return "Hello! I am Duke. What can I do for you today?";
     }
 
     /**
@@ -36,7 +31,8 @@ class Ui {
     }
 
     void showByeMessage() {
-        System.out.println("Bye-bye! See you again, my friend!");
+        System.out.println("Bye-bye! See you again, my friend! " +
+                "Please close this window if you do not wish to continue this session.");
     }
 
     void showDoneMessage() {
