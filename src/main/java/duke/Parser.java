@@ -19,8 +19,8 @@ import java.util.HashMap;
  * Deals with making sense of user commands.
  */
 public class Parser {
-    protected static HashMap<String, String> commandDelimiter;
-    protected static HashMap<String, String> commandTypeFormatInfo;
+    protected static HashMap<String, String> commandDelimiter = setupCommandDelimiter();
+    protected static HashMap<String, String> commandTypeFormatInfo = setupCommandTypeFormatInfo();;
 
     /**
      * Creates a new command based on given input string.
@@ -30,8 +30,6 @@ public class Parser {
      * @throws DukeException when given input is not a valid command
      */
     public static Command parse(String fullCommand) throws DukeException {
-        setupCommandDelimiter();
-        setupCommandTypeFormatInfo();
         // Remove leading and trailing whitespace
         fullCommand = fullCommand.trim();
         String[] commandWords = fullCommand.split("\\s+");
@@ -226,8 +224,8 @@ public class Parser {
         return description;
     }
 
-    private static void setupCommandTypeFormatInfo() {
-        commandTypeFormatInfo = new HashMap<>();
+    private static HashMap<String, String> setupCommandTypeFormatInfo() {
+        HashMap<String, String> commandTypeFormatInfo = new HashMap<>();
         commandTypeFormatInfo.put("event", "Incorrect event format given... Correct format: event "
                 + "[description] /at [event time in yyyy-mm-dd]");
         commandTypeFormatInfo.put("deadline", "Incorrect deadline task format given... Correct "
@@ -235,11 +233,13 @@ public class Parser {
                 + "[due date in yyyy-mm-dd]");
         commandTypeFormatInfo.put("todo", "Incorrect todo task format given... Correct format: todo "
                 + "[description]");
+        return commandTypeFormatInfo;
     }
 
-    private static void setupCommandDelimiter() {
-        commandDelimiter = new HashMap<>();
+    private static HashMap<String, String> setupCommandDelimiter() {
+        HashMap<String, String> commandDelimiter = new HashMap<>();
         commandDelimiter.put("deadline", "/by");
         commandDelimiter.put("event", "/at");
+        return commandDelimiter;
     }
 }
