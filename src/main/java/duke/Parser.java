@@ -211,8 +211,8 @@ public class Parser {
         } else if (commandType.equals("todo") || commandType.equals("find")) {
             description = command.substring(commandType.length() + 1);
         } else if (commandType.equals("deadline") || commandType.equals("event")) {
-            // Check if required delimiter exists
-            if (commandDelimiter.containsKey(commandType)) {
+            // Check if required delimiter exists and there are at least 3 arguments
+            if (commandDelimiter.containsKey(commandType) && commandWords.length >= 4) {
                 String delimiter = commandDelimiter.get(commandType);
                 int delimiterIndex = command.indexOf(delimiter);
                 int delimiterLength = delimiter.length();
@@ -231,7 +231,7 @@ public class Parser {
         commandTypeFormatInfo.put("event", "Incorrect event format given... Correct format: event "
                 + "[description] /at [event time in yyyy-mm-dd]");
         commandTypeFormatInfo.put("deadline", "Incorrect deadline task format given... Correct "
-                + "format: duke.task.Deadline task format: deadline [description] /by "
+                + "format: deadline [description] /by "
                 + "[due date in yyyy-mm-dd]");
         commandTypeFormatInfo.put("todo", "Incorrect todo task format given... Correct format: todo "
                 + "[description]");

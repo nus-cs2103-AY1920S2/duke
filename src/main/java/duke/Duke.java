@@ -4,15 +4,26 @@ import duke.command.Command;
 import duke.task.TaskList;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 
-/** Driver for duke project. */
+/**
+ * Driver for duke project.
+ */
 public class Duke {
     private Storage storage;
     protected TaskList tasks;
     private Ui ui;
-    protected static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    /**
+     * Returns a new Duke instance, uses duke.txt for save file.
+     */
+    public Duke() {
+        this("duke.txt");
+    }
 
     /**
      * Return a new instance of Duke class.
@@ -57,5 +68,51 @@ public class Duke {
             }
         }
         ui.goodbye();
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
+    /**
+     * Returns a response to a given input String command.
+     *
+     * @param input command String to be executed
+     * @return String response
+     */
+    public String getResponse(String input) {
+        String response;
+        // Change stdout for duke
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, ui, storage);
+        } catch (DukeException dukeException) {
+            // Display error message
+            System.out.print(dukeException.getMessage());
+        }
+        response = output.toString();
+        // Remove all horizontal divider present
+        String indentation = Ui.INDENTATION;
+        String horizontalBar = Ui.HORIZONTAL_BAR;
+        while (response.contains(indentation)) {
+            response = response.replace(indentation, "");
+        }
+        while (response.contains(horizontalBar)) {
+            response = response.replace(horizontalBar, "");
+        }
+        response = response.trim();
+        // Reset stdout for duke
+        System.setOut(System.out);
+        return response;
     }
 }
