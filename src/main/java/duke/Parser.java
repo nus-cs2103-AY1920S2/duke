@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.ArrayList;
+
 public class Parser {
 
     protected TaskList tasks;
@@ -103,6 +105,17 @@ public class Parser {
                 }
             } catch (IndexOutOfBoundsException e) {
                 ui.exceptionMessage(new DukeException("☹ OOPS!!! The description of a event cannot be empty."));
+            }
+            break;
+        case "find":
+            ArrayList<Task> result = tasks.find(inputs[1]);
+            if (result.size() == 0) {
+                ui.userMessage("No match found.");
+                break;
+            }
+            ui.userMessage("Here are the matching tasks in your list:");
+            for (int i = 0; i < result.size(); i++) {
+                ui.userMessage(i + 1 + "." + result.get(i));
             }
             break;
         default:
