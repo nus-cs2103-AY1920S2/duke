@@ -3,10 +3,12 @@ import java.util.Scanner;
 
 public class Duke {
     // attributes
-    public TaskStorage taskStorage;
+    private TaskStorage taskStorage;
+    private Ui ui;
 
     public Duke(String filePath) {
         try {
+            this.ui = new Ui();
             this.taskStorage = new TaskStorage(filePath);
         } catch (FileNotFoundException e) {
             System.out.println(filePath);
@@ -15,22 +17,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-
-        Duke duke = new Duke("./data/Storage.txt");
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-
-        duke.runDuke();
+        new Duke("./data/Storage.txt").runDuke();
     }
 
     // Carry out Add, List, Done commands if entered by user
     // Terminates when user gives exit signal
     private void runDuke() {
+        ui.showWelcome();
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String nextInput = scanner.nextLine();
