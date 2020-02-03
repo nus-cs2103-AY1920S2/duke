@@ -22,7 +22,8 @@ public class Duke {
 
     /**
      * Constructor of Duke.
-     * @param filePath
+     *
+     * @param filePath String representing file path of save file of tasks.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -46,7 +47,8 @@ public class Duke {
 
     /**
      * Main method of Duke.
-     * @param args
+     *
+     * @param args String array from System input.
      */
     public static void main(String[] args) {
         Duke duke = new Duke("savedata.txt");
