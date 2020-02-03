@@ -1,119 +1,53 @@
 package dukeproj;
 
-import dukeproj.gui.DialogBox;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import dukeproj.enums.SayType;
 
 /**
  * Represents the User Interface in DukeProject.
  */
-public class Ui extends Application {
+public class Ui {
     private String logo;
     private String lineBreak;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    @Override
-    public void start(Stage stage) {
-        // Set up components
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        // Format window
-        stage.setTitle("I AM DUKE");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        // Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event -> {
-            handleUserInput();
-        }));
-        userInput.setOnAction((event -> {
-            handleUserInput();
-        }));
-        // Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable -> {
-            scrollPane.setVvalue(1.0);
-        }));
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing dukeproj.Duke's reply and appends them to
-     * dialog container. Clears user input upon processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-
-        userText.setWrapText(true);
-        dukeText.setWrapText(true);
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String say(SayType type) {
+        switch (type) {
+        case INTRO:
+            return getIntroduction();
+            break;
+        case EXIT:
+            return getExit();
+            break;
+        case LIST:
+            return ""
+            break;
+        case ADD:
+            break;
+        case DONE:
+            break;
+        case DELETE:
+            break;
+        case FIND:
+            break;
+        case SEARCH:
+            break;
+        case INVALID_COMMAND:
+            return "Sorry! I do not know what this command means!";
+        case EMPTY_DESCRIPTION:
+            return "OOPS! You forgot to include a description!";
+        case BAD_DATE:
+            return "Sorry I don't recognise this date format!\nPlease make sure the format is: dd mm yy";
+        case BAD_DESCRIPTION:
+            return "OOPS! ";
+        default:
+            break;
+        }
     }
 
     /**
      * Prints out the introductory message for DukeProject.
      */
-    public void getIntroduction() {
-        Label dukeText = new Label(lineBreak + "\nHello I am \n" + logo
-                + "\n What can I do for you?\n" + lineBreak);
-
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+    public String getIntroduction() {
+        return lineBreak + "\nHello I am \n" + logo + "\nWhat can I do for you?\n" + lineBreak;
         /*System.out.println(lineBreak);
         System.out.println("Hello I am \n" + logo
                 + "\nWhat can I do for you?");
@@ -123,11 +57,9 @@ public class Ui extends Application {
     /**
      * Prints out the exit message for DukeProject.
      */
-    public void exit() {
-        Label dukeText = new Label(lineBreak + "\nBye! Hope to see you again soon!\n" + lineBreak);
-
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
-        /*System.out.println(lineBreak);
+    public String getExit() {
+        return lineBreak + "\nBye! Hope to see you again soon!\n" + lineBreak;
+/*        System.out.println(lineBreak);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lineBreak);*/
     }
