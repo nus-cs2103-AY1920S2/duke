@@ -1,0 +1,6 @@
+package dukeproj.enums;
+
+public enum SayType {
+    LIST, DELETE, ADD, DONE, FIND, SEARCH, INTRO, EXIT,
+    INVALID_COMMAND, EMPTY_DESCRIPTION, BAD_DESCRIPTION, BAD_DATE;
+}
