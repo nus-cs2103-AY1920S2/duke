@@ -3,9 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
     Ui ui = new Ui();
     public ArrayList<Task> tasks = new ArrayList<>();
-
-    Ui ui = new Ui();
-
+    
     /**
      * Constructor for TaskList.
      *

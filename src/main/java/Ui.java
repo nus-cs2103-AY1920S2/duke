@@ -51,6 +51,7 @@ public class Ui {
         System.out.println("Consider it done.");
         taskList.getTask(taskNumber).doneTask();
         System.out.println(taskList.getTask(taskNumber).toString());
+        showLine();
     }
 
     /**
@@ -75,7 +76,6 @@ public class Ui {
         System.out.println(taskList.getTask(taskNumber).toString());
         taskList.deleteTask(taskNumber);
         taskInList(taskList.getTaskListSize());
-        showLine();
     }
 
     /**

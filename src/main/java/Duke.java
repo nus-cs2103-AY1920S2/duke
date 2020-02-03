@@ -48,7 +48,6 @@ public class Duke {
                         } else {
                             ui.invalidTask();
                         }
-                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.missingTaskNumber());
                     }
@@ -69,10 +68,7 @@ public class Duke {
                     try {
                         Todo todo = new Todo(arrString[1]);
                         tasks.addTask(todo);
-                        ui.addedCommand();
-                        System.out.println(todo.toString());
                         ui.taskInList(tasks.getTaskListSize());
-                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Todo"));
                     }
