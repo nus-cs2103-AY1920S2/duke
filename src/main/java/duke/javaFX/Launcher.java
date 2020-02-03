@@ -1,4 +1,4 @@
-package duke.Launcher;
+package duke.javaFX;
 
 import duke.Duke;
 
