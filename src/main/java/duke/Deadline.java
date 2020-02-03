@@ -3,14 +3,22 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Deadline Class extends the Task Class to store objects with a description with a time and date attached
+ * @author qiujingying
+ * @version 1.0
+ */
 public class Deadline extends Task {
-    //tasks that need to be done before a specific date/time
-    // e.g., submit report by 11/10/2019 5pm
 
     protected String time;
     protected LocalDateTime ldt;
     private static TaskType type = TaskType.DEADLINE;
 
+    /**
+     * Creates a Deadline object with a description and specific start and end time and date
+     * @param description details of the Deadline
+     * @param time start and end time and date
+     */
     public Deadline(String description, String time) {
         super(description, time);
         this.time = time;
@@ -18,6 +26,10 @@ public class Deadline extends Task {
         ldt = tp.getTime();
     }
 
+    /**
+     * Returns the type of the Task
+     * @return TaskType.DEADLINE
+     */
     public TaskType getType () {
         return type;
     }

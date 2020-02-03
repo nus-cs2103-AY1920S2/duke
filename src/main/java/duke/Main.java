@@ -1,11 +1,20 @@
 package duke;
 
+/**
+ * The Main Class initialises all important objects for the program to run
+ * @author qiujingying
+ * @version 1.0
+ */
 public class Main {
 
     private Storage storage;
     private TaskList tasks;
     private Eevee ui;
 
+    /**
+     * Creates a Main object from a filepath
+     * @param filepath
+     */
     public Main(String filepath) {
         ui = new Eevee();
         storage = new Storage(filepath);

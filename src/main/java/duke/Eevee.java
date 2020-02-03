@@ -2,6 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * UI Class
+ * @author qiujingying
+ * @version 1.0
+ */
 public class Eevee {
     public void echo(TaskList tasks, Storage storage) {
         Scanner sc = new Scanner(System.in);
