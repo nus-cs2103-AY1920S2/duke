@@ -1,4 +1,4 @@
-E|✕|fireworks|10 Dec. 2020 09:00am to 20 Dec. 2020 09:10am
-T|✓|sleep
-D|✕|do homework|10 Feb. 2019 09:00am
-T|✕|hi
+E|X|fireworks|10 Dec. 2020 09:00am to 20 Dec. 2020 09:10am
+T|X|sleep
+D|X|do homework|10 Feb. 2019 09:00am
+T|V|hi
