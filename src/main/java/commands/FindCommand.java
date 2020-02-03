@@ -20,6 +20,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.clearResponse();
         for (Task t : tasks.getTasks()) {
             if (t.contains(this.keyword)) {
                 this.matching.add(t);

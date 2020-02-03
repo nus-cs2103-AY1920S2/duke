@@ -13,16 +13,19 @@ import handlers.Ui;
 
 public class DoneCommand extends Command {
     protected Task doneTask;
+    protected int taskToBeDone;
 
-    public DoneCommand(String command) {
+    public DoneCommand(String command, int taskToBeDone) {
         this.command = command;
+        this.taskToBeDone = taskToBeDone;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int num = Integer.parseInt(this.command);
-        this.doneTask = tasks.get(num - 1);
+        //int num = Integer.parseInt(this.command);
+        this.doneTask = tasks.get(taskToBeDone - 1);
         tasks.completedTask(doneTask);
+        ui.clearResponse();
         ui.showDoneTask(doneTask);
     }
 

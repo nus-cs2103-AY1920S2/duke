@@ -12,74 +12,102 @@ import tasks.TaskList;
  */
 
 public class Ui {
-    private static final String STRING= "    ____________________________________________________________";
-    private static final String SPACE = "     ";
-    Scanner sc;
+//    private static final String STRING= "    ____________________________________________________________";
+//    private static final String SPACE = "     ";
+    private Scanner sc;
+    private String response;
 
     public Ui() {
-        sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
+        this.response = "";
     }
 
-    public void showLine() {
-        System.out.println(STRING);
-    }
-
-    public void showWelcome() {
-        String greeting = STRING + "\n"+ SPACE +
-                "Hello! I'm Duke\n" + SPACE +
-                "What can I do for you?\n" +
-                STRING;
-        System.out.println(greeting);
-    }
+//    public void showLine() {
+//        setResponse(STRING);
+//    }
+//
+//    public void showWelcome() {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        setResponse("Hello from");
+//        setResponse(logo);
+//        setResponse("Hello! I'm Duke");
+//        setResponse("What can I do for you?");
+//        System.out.println(this.response);
+//    }
 
     public void showFarewell() {
-        String bye = SPACE + "Bye. Hope to see you again soon!";
-        System.out.println(bye);
+        this.sc.close();
+        String bye = "Bye. Hope to see you again soon!";
+        setResponse(bye);
+        System.out.println(this.response);
     }
 
     public void showAddedTask(Task taskAdded, int numOfTasks) {
-        System.out.println(SPACE + "Got it. I've added this task:");
-        System.out.println(SPACE + "  " + taskAdded.toString());
+        setResponse("Got it. I've added this task:");
+        setResponse("  " + taskAdded.toString());
         if (numOfTasks == 1 || numOfTasks == 0) {
-            System.out.println(SPACE + "Now you have " + numOfTasks + " task in the list");
+            setResponse("Now you have " + numOfTasks + " task in the list");
         } else {
-            System.out.println(SPACE + "Now you have " + numOfTasks + " tasks in the list");
+            setResponse("Now you have " + numOfTasks + " tasks in the list");
         }
+        System.out.println(this.response);
     }
 
     public void showDeletedTask(Task taskDeleted, int numOfTasks) {
-        System.out.println(SPACE + "Noted. I've removed this task: ");
-        System.out.println(SPACE + "  " + taskDeleted.toString());
+        setResponse("Noted. I've removed this task: ");
+        setResponse("  " + taskDeleted.toString());
         if (numOfTasks == 1 || numOfTasks == 0) {
-            System.out.println(SPACE + "Now you have " + numOfTasks + " task in the list");
+            setResponse("Now you have " + numOfTasks + " task in the list");
         } else {
-            System.out.println(SPACE + "Now you have " + numOfTasks + " tasks in the list");
+            setResponse("Now you have " + numOfTasks + " tasks in the list");
         }
+        System.out.println(this.response);
     }
 
     public void showList(ArrayList<Task> tasks) {
-        System.out.println(SPACE + "Here are the tasks in your list:");
+        setResponse("Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
             Task t = tasks.get(i - 1);
-            System.out.println(SPACE + i + "." + t);
+            setResponse(i + "." + t);
         }
+        System.out.println(this.response);
     }
 
     public void showDoneTask(Task taskDone) {
-        System.out.println(SPACE + "Nice! I've marked this done as done: ");
-        System.out.println(SPACE + "  " + taskDone.toString());
+        setResponse("Nice! I've marked this done as done: ");
+        setResponse("  " + taskDone.toString());
+        System.out.println(this.response);
     }
 
     public void showFindTasks(TaskList matching) {
-        System.out.println(SPACE + "Here are the matching tasks in your list:");
+        setResponse("Here are the matching tasks in your list:");
         for (int j = 1; j <= matching.numOfTasks(); j++) {
             Task t = matching.get(j - 1);
-            System.out.println(SPACE + j + "." + t);
+            setResponse(j + "." + t);
         }
+        System.out.println(this.response);
+    }
+
+    public void setResponse(String line) {
+        this.response += line + "\n";
+    }
+
+    public String getResponse() {
+        return this.response;
+    }
+
+    public void clearResponse() {
+        this.response = "";
     }
 
     public void showError(String error) {
-        System.out.println(error);
+        //System.out.println(error);
+        clearResponse();
+        setResponse(error);
     }
 
     public void showLoadingError() {

@@ -1,7 +1,10 @@
 import commands.Command;
 
+import exceptions.DoneException;
 import exceptions.DukeException;
 
+import exceptions.EmptyException;
+import exceptions.UnknownException;
 import tasks.TaskList;
 
 import handlers.Parser;
@@ -40,17 +43,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/KoalaChibi.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/CatChibi.png"));
 
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -59,24 +51,6 @@ public class Duke extends Application {
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-//           } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
         }
     }
 
@@ -173,15 +147,6 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-//    private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -196,11 +161,21 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Cat replies: " + input;
-    }
-
-//    public static void main(String[] args) {
-//        new Duke(filePath).run();
+//    public String getResponse(String input) {
+//        return "Cat replies: " + input;
 //    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DoneException e) {
+            ui.showError(e.toString());
+        } catch (EmptyException e) {
+            ui.showError(e.toString());
+        } catch (UnknownException e) {
+            ui.showError(e.toString());
+        }
+        return ui.getResponse();
+    }
 }
