@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 /**
@@ -32,6 +33,7 @@ public class Duke extends Application{
     private static Storage storage;
     private static TaskList taskList;
     private static Ui ui = new Ui();
+    private static Scanner scanner = new Scanner(System.in);
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -46,13 +48,16 @@ public class Duke extends Application{
      * runs the programme.
      * @param args arguments
      */
-    public static void main(String[] args) throws IOException {
-        ui.start(); //done
+    public static void main(String[] args) throws IOException, DukeException {
+        ui.start();
         taskList = new TaskList();
         storage = new Storage("duke.txt", taskList);
         storage.retrieveInfo();
         parser = new Parser(taskList);
-        //parser.parse();
+        String command = scanner.nextLine();
+        while (scanner.hasNextLine()) {
+            ui.dukePrint(parser.parse(command));
+        }
         storage.updateInfo();
     }
 

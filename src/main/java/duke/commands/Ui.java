@@ -31,6 +31,24 @@ public class Ui {
     }
 
     /**
+     * used to print out horizontal lines.
+     * @return outputs horizontal lines
+     */
+    public String horizontalLines() {
+        return this.HORIZONTAL_LINES;
+    }
+
+    /**
+     * prints output in a more user friendly format.
+     * @param input the string to be outputted
+     */
+    public void dukePrint(String input) {
+        System.out.print(horizontalLines());
+        System.out.print(input);
+        System.out.print(horizontalLines());
+    }
+
+    /**
      * checks whether done/delete command entered by used is valid.
      * @param command the line input by the user
      * @param insert the name of the command (either done or delete)

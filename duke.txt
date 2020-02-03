@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 T | N | THE DUKE.TXT FOR GRADLE IS HERE
 =======
 T | N | read book
@@ -8,3 +9,12 @@ T | N | return book
 =======
 T | N | read book
 >>>>>>> 068ec0a... GUI mostly works except for storage
+=======
+T | Y | read book
+E | Y | project meeting  | Apr 13 2020 6PM
+T | Y | join sports club
+T | N | borrow book
+D | N | return book  | Jun 5 2020 2PM
+E | N | project meeting  | Aug 17 2020 10AM
+D | N | do homework  | Oct 29 2020 12PM
+>>>>>>> 63ba398... GUI works now I think (do more testing if have time)
