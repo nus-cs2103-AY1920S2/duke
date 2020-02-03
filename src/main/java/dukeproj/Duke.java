@@ -2,7 +2,8 @@ package dukeproj;
 
 import dukeproj.data.Calender;
 import dukeproj.data.TaskList;
-import dukeproj.enums.Command;
+import dukeproj.enums.CommandType;
+import dukeproj.enums.SayType;
 import dukeproj.exception.BadDateException;
 import dukeproj.exception.BadDescriptionException;
 import dukeproj.exception.DukeDescriptionException;
@@ -11,7 +12,6 @@ import dukeproj.exception.InvalidCommandException;
 import javafx.application.Application;
 
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * Represents the main working class of DukeProject.
@@ -25,12 +25,33 @@ public class Duke {
     private Parser parser;
 
     /**
+     * Generates a response from a user input String from the GUI.
+     *
+     * @param input input provided by user from GUI.
+     * @return response by Duke.
+     */
+    public String getResponse(String input) {
+        String[] inputs = input.split(" ", 1);
+        try {
+            return parser.getCommandResponse(Parser.commandParser(inputs[0]), inputs[1]);
+        } catch (InvalidCommandException e) {
+            return ui.say(SayType.INVALID_COMMAND);
+        } catch (DukeDescriptionException e) {
+            return ui.say(SayType.EMPTY_DESCRIPTION);
+        } catch (BadDateException e) {
+            return ui.say(SayType.BAD_DATE);
+        } catch (BadDescriptionException e) {
+            return ui.say(SayType.BAD_DESCRIPTION) + e.getMessage();
+        }
+    }
+
+    /**
      * Generates DukeProject. This method will run the main interface of the DukeProject.
      * It will read commands given by the system using a scanner and store results in a task list before writing it
      * into storage.
      */
     public void run() {
-        ui.getIntroduction();
+        System.out.println(ui.getIntroduction());
         while (sc.hasNext()) {
             String next = sc.next();
             if (next.equals("bye")) {
@@ -39,8 +60,8 @@ public class Duke {
             else {
                 try {
                     ui.printLineBreak();
-                    Command command = Parser.commandParser(next);
-                    parser.readCommand(command);
+                    CommandType commandType = Parser.commandParser(next);
+                    parser.readCommand(commandType);
                 } catch (InvalidCommandException e) {
                     System.out.println("Sorry I do not know what that means!");
                     sc.nextLine();
@@ -56,7 +77,7 @@ public class Duke {
                 }
             }
         }
-        ui.exit();
+        System.out.println(ui.getExit());
     }
 
     /**
@@ -73,7 +94,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Application.launch(Ui.class, args);
+        Application.launch(GuiApp.class, args);
         //new Duke("." + File.separator + "data" +
                 //File.separator + "Task.txt").run();
     }
