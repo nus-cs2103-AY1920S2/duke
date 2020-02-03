@@ -21,7 +21,7 @@ public class TaskList {
      * @param str a string which tells us which Task we will be dealing with.
      * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
      */
-    public void markDone(String str) throws IllegalArgumentException {
+    public String markDone(String str) throws IllegalArgumentException {
         int num = Integer.parseInt(str.substring(5));
         Parser parser = new Parser();
         Ui ui = new Ui();
@@ -29,17 +29,17 @@ public class TaskList {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
         }
         this.tasks.get(num - 1).markAsDone();
-        ui.doneMessage(num, this.tasks);
+        return ui.doneMessage(num, this.tasks);
     }
 
     /**
      * adds a Task to the TaskList.
      * @param t the Task being added.
      */
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         Ui ui = new Ui();
         tasks.add(t);
-        ui.addMessage(t, tasks.size());
+        return ui.addMessage(t, tasks.size());
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskList {
      * @param str the String being parsed into an integer
      * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
      */
-    public void delete(String str) throws IllegalArgumentException {
+    public String delete(String str) throws IllegalArgumentException {
         Parser parser = new Parser();
         Ui ui = new Ui();
         int num = Integer.parseInt(str.substring(7));
@@ -55,14 +55,14 @@ public class TaskList {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
         }
         Task t = tasks.remove(num - 1);
-        ui.deleteMessage(num, t, this.tasks.size());
+        return ui.deleteMessage(num, t, this.tasks.size());
     }
 
     /**
      * finds the tasks which contain the keyword given by the user and construct a TaskList by the resulting tasks.
      * @param str a String represents the input of the user.
      */
-    public void find(String str) {
+    public String find(String str) {
         Ui ui = new Ui();
         String keyWord = str.substring(5);
         ArrayList<Task> matchingTasks = new ArrayList<>();
@@ -72,7 +72,7 @@ public class TaskList {
             }
         }
         TaskList matchingResults = new TaskList(matchingTasks);
-        ui.getMatchingTasks(matchingResults);
+        return ui.getMatchingTasks(matchingResults);
     }
 
     public ArrayList<Task> getTasks() {

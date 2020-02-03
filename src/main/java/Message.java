@@ -4,5 +4,6 @@ public enum Message {
     FIND,
     TODO,
     DEADLINE,
-    EVENT;
+    EVENT,
+    LIST;
 }
