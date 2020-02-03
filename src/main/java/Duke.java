@@ -30,42 +30,76 @@ public class Duke{
         while (!input.equals("bye")) {
             if(!input.equals("list") && !input.contains("done")){ //adding item to list
 
-                if(input.contains("todo")){
-                    String taskDescription = input.replaceAll("todo ", "");
-                    Todo t = new Todo(taskDescription);
-                    list.add(t);
-                    type.add("T");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("[T][X] "+ taskDescription);
-                    System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+                if(input.contains("todo")) {
+                    int numOfWords = 0;
+                    for (String inputDisect : input.split(" ")) {
+                        numOfWords++;
+                    }
+                    if (numOfWords > 1) {
+                        String taskDescription = input.replaceAll("todo ", "");
+                        Todo t = new Todo(taskDescription);
+                        list.add(t);
+                        type.add("T");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("[T][X] " + taskDescription);
+                        System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+
+                    }
+                    //Error handling when todo doesnt have descriptions
+                    else
+                        System.out.println("OOPS!!! The description of todo cannot be empty.");
                 }
 
-                if(input.contains("deadline")){
-                    String taskDescription = input.replaceAll("deadline ", "");
-                    String[]strArray = taskDescription.split("/by ");
+                if(input.contains("deadline")) {
 
-                    Deadline t = new Deadline(strArray[0], strArray[1]);
-                    list.add(t);
-                    type.add("D");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(t.toString());
-                    System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+                    int numOfWords = 0;
+                    for (String inputDisect : input.split(" ")) {
+                        numOfWords++;
+                    }
+                    if (numOfWords > 1) {
+                        String taskDescription = input.replaceAll("deadline ", "");
+                        String[] strArray = taskDescription.split("/by ");
+
+                        Deadline t = new Deadline(strArray[0], strArray[1]);
+                        list.add(t);
+                        type.add("D");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+
+                    }
+                    //Error handling when deadline doesnt have descriptions
+                    else
+                        System.out.println("OOPS!!! The description of deadline cannot be empty.");
                 }
-                if(input.contains("event")){
-                    String taskDescription = input.replaceAll("event ", "");
-                    String[]strArray = taskDescription.split("/at ");
+                if(input.contains("event")) {
+                    int numOfWords = 0;
+                    for (String inputDisect : input.split(" ")) {
+                        numOfWords++;
+                    }
+                    if (numOfWords > 1) {
+                        String taskDescription = input.replaceAll("event ", "");
+                        String[] strArray = taskDescription.split("/at ");
 
-                    event t = new event(strArray[0], strArray[1]);
-                    list.add(t);
-                    type.add("E");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(t.toString());
-                    System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+                        event t = new event(strArray[0], strArray[1]);
+                        list.add(t);
+                        type.add("E");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(t.toString());
+                        System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+                    }
+                    //Error handling when deadline doesnt have descriptions
+                    else
+                        System.out.println("OOPS!!! The description of deadline cannot be empty.");
                 }
 
 
             }
-
+            //Error handling when user type words that are not the intended instructions
+            if(!input.contains("done") && !input.contains("list") && !input.contains("todo") &&  !input.contains("deadline")
+                    && !input.contains("event")){
+                System.out.println("OPPS!!! I'm sorry, but I don't know what that means :-( ");
+            }
             if(input.contains("done")){
                 System.out.println("Nice! I've marked this task as done:");
                 int itemPos = Integer.parseInt(input.replaceAll("[^0-9]" , ""));
