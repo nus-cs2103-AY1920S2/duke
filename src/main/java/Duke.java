@@ -36,8 +36,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/IMG_0996.jpeg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/IMG_1032.jpeg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/thumb-350-1017001.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/thumb-350-1017002.jpg"));
 
     @Override
     public void start(Stage stage) {
