@@ -31,7 +31,6 @@ public class Duke {
      * runs the program.
      */
     public void run() {
-
         ui.preLog();
 
         boolean isExit = false;
@@ -54,18 +53,29 @@ public class Duke {
         duke.run();
     }
 
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        try {
-            Command command = parser.parse(input);
-            command.execute(common, ui);
-            return ui.getResponse();
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
+        return "Core.Duke heard: " + input;
     }
 
 
