@@ -37,4 +37,18 @@ public class TaskList {
         }
         Ui.printMessage(result.toString());
     }
+
+    public String findTask(String searchTerm) {
+        int i = 0;
+        StringBuilder result = new StringBuilder("Here's the matching tasks in your list:");
+        for (Task task : tasks) {
+            if (task.getDescription().contains(searchTerm)) {
+                result.append(String.format("\n\t%d. %s", ++i, task.toString()));
+            }
+        }
+        if (i == 0) {
+            return "No results matching your search was found!";
+        }
+        return result.toString();
+    }
 }

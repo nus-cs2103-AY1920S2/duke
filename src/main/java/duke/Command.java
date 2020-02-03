@@ -1,12 +1,14 @@
 package duke;
 
 public enum Command {
-    BYE, LIST, DONE, DELETE, DEADLINE, EVENT, TODO;
+    BYE, FIND, LIST, DONE, DELETE, DEADLINE, EVENT, TODO;
 
     public static Command getCommand(String cmd) throws InvalidCommandException {
         cmd = cmd.toLowerCase();
         if (cmd.equals("bye")) {
             return Command.BYE;
+        } else if (cmd.equals("find")) {
+            return Command.FIND;
         } else if (cmd.equals("list")) {
             return Command.LIST;
         } else if (cmd.equals("done")) {
