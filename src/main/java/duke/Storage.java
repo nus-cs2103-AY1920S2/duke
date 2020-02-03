@@ -54,13 +54,15 @@ public class Storage {
                         }
                         tasks.add(todo);
                     } else if (taskType.equals("D")) {
-                        Task deadline = new Deadline(task[2].trim(), LocalDate.parse(task[3].trim(), DateTimeFormatter.ofPattern("MMM d yyyy")));
+                        Task deadline = new Deadline(task[2].trim(),
+                                LocalDate.parse(task[3].trim(), DateTimeFormatter.ofPattern("MMM d yyyy")));
                         if (isDone) {
                             deadline.markAsDone();
                         }
                         tasks.add(deadline);
                     } else {
-                        Task event = new Event(task[2].trim(), LocalDate.parse(task[3].trim(), DateTimeFormatter.ofPattern("MMM d yyyy")));
+                        Task event = new Event(task[2].trim(),
+                                LocalDate.parse(task[3].trim(), DateTimeFormatter.ofPattern("MMM d yyyy")));
                         if (isDone) {
                             event.markAsDone();
                         }

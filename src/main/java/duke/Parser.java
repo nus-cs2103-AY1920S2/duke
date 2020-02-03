@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * Interpret and process user inputs.
  */
 public class Parser {
-
     protected TaskList tasks;
     protected Storage storage;
     protected Ui ui;
@@ -89,14 +88,17 @@ public class Parser {
                     LocalDate date = LocalDate.parse(taskDetails[1]);
                     Task deadline = new Deadline(taskDetails[0].trim(), date);
                     tasks.add(deadline);
-                    data = "D | 0 | " + taskDetails[0].trim() + " | " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+                    data = "D | 0 | " + taskDetails[0].trim() + " | "
+                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
                     storage.writeToFile(data);
-                    ui.userMessage("Got it. I've added this task:\n    " +
-                            deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
+                    ui.userMessage("Got it. I've added this task:\n    "
+                            + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
                 } catch (DateTimeParseException e) {
-                    ui.exceptionMessage(new DukeException("☹ OOPS!!! Please provide a valid date with the format yyyy-mm-dd."));
+                    ui.exceptionMessage(new DukeException(
+                            "☹ OOPS!!! Please provide a valid date with the format yyyy-mm-dd."));
                 } catch (Exception e) {
-                    ui.exceptionMessage(new DukeException("☹ OOPS!!! Please provide a date using '/by ' with the format yyyy-mm-dd."));
+                    ui.exceptionMessage(new DukeException(
+                            "☹ OOPS!!! Please provide a date using '/by ' with the format yyyy-mm-dd."));
                 }
             } catch (IndexOutOfBoundsException e) {
                 ui.exceptionMessage(new DukeException("☹ OOPS!!! The description of a deadline cannot be empty."));
@@ -112,28 +114,35 @@ public class Parser {
                     LocalDate date = LocalDate.parse(taskDetails[1]);
                     Task event = new Event(taskDetails[0].trim(), date);
                     tasks.add(event);
-                    data = "E | 0 | " + taskDetails[0].trim() + " | " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+                    data = "E | 0 | " + taskDetails[0].trim() + " | "
+                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
                     storage.writeToFile(data);
-                    ui.userMessage("Got it. I've added this task:\n    " +
-                            event + "\nNow you have " + tasks.size() + " tasks in the list.");
+                    ui.userMessage("Got it. I've added this task:\n    "
+                            + event + "\nNow you have " + tasks.size() + " tasks in the list.");
                 } catch (DateTimeParseException e) {
-                    ui.exceptionMessage(new DukeException("☹ OOPS!!! Please provide a valid date with the format yyyy-mm-dd."));
+                    ui.exceptionMessage(new DukeException(
+                            "☹ OOPS!!! Please provide a valid date with the format yyyy-mm-dd."));
                 } catch (Exception e) {
-                    ui.exceptionMessage(new DukeException("☹ OOPS!!! Please provide a date using '/at ' with the format yyyy-mm-dd.."));
+                    ui.exceptionMessage(new DukeException(
+                            "☹ OOPS!!! Please provide a date using '/at ' with the format yyyy-mm-dd.."));
                 }
             } catch (IndexOutOfBoundsException e) {
                 ui.exceptionMessage(new DukeException("☹ OOPS!!! The description of a event cannot be empty."));
             }
             break;
         case "find":
-            ArrayList<Task> result = tasks.find(inputs[1]);
-            if (result.size() == 0) {
-                ui.userMessage("No match found.");
-                break;
-            }
-            ui.userMessage("Here are the matching tasks in your list:");
-            for (int i = 0; i < result.size(); i++) {
-                ui.userMessage(i + 1 + "." + result.get(i));
+            try {
+                ArrayList<Task> result = tasks.find(inputs[1]);
+                if (result.size() == 0) {
+                    ui.userMessage("No match found.");
+                    break;
+                }
+                ui.userMessage("Here are the matching tasks in your list:");
+                for (int i = 0; i < result.size(); i++) {
+                    ui.userMessage(i + 1 + "." + result.get(i));
+                }
+            } catch (IndexOutOfBoundsException e) {
+                ui.exceptionMessage(new DukeException("☹ OOPS!!! The keyword for find cannot be empty."));
             }
             break;
         default:
