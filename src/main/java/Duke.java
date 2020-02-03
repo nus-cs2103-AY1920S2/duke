@@ -41,6 +41,8 @@ public class Duke {
                     this.ui.printMessage("" + this.tasklist.getTask(taskNumber));
                     this.tasklist.removeTask(taskNumber);
                     this.ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
+                } else if (keyword.equals("find")) {
+                    this.tasklist.findKeyword(parsed[1]);
                 } else if (keyword.equals("todo") || keyword.equals("deadline") || keyword.equals("event")) {
                     if (parsed.length <= 1) {
                         throw new DukeException("I think u need more arguments");

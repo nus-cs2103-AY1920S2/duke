@@ -38,4 +38,14 @@ public class Tasklist {
             System.out.println(i + 1 + ". " + mylist.get(i));
         }
     }
+
+    public void findKeyword(String keyword) {
+        int j = 1;
+        for (int i = 0; i < mylist.size(); i++) {
+            if (mylist.get(i).description.contains(keyword)) {
+                System.out.println(j + ". " + mylist.get(i));
+                j++;
+            }
+        }
+    }
 }
