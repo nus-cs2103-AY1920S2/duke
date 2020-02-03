@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 /**
  * Contains a product name dukeClasses.Duke, a personal assistant chat bot that keeps track of various tasks that needs,
@@ -67,6 +70,35 @@ public class Duke  {
         //This line is needed after I add javaFX. I need to force the System.exit
         System.exit(0);
 
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        //FastReader fr = new FastReader();//Handles input by the user
+        TaskManager manager = new TaskManager();
+        Ui ui = new Ui(manager);
+        //ui.introduction();
+        manager.loadExistingData();
+
+        if(input.contains("bye")){
+            ui.printGoodbyeMessage();
+
+        }else {
+            ui.handleInputs(input);
+        }
+
+
+        System.out.flush();
+        System.setOut(old);
+
+        return "Duke heard: " + baos.toString();
     }
 
     /*
@@ -186,13 +218,7 @@ public class Duke  {
 
 
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    protected String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+
 
 
 
