@@ -4,7 +4,9 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-/** Represents a command that has empty user input. */
+/**
+ * Represents a command that has empty user input.
+ */
 public class EmptyInputCommand extends Command {
 
     public EmptyInputCommand() {

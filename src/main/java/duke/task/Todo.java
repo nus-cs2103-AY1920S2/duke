@@ -1,6 +1,8 @@
 package duke.task;
 
-/** Represents tasks without any date/time attached to it e.g., visit new theme park. */
+/**
+ * Represents tasks without any date/time attached to it e.g. visit new theme park.
+ */
 public class Todo implements Task {
     protected String description;
     protected boolean isDone;

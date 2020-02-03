@@ -6,7 +6,9 @@ import duke.task.TaskList;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-/** Deals with user interactions. */
+/**
+ * Deals with user interactions.
+ */
 public class Ui {
     public static final String HORIZONTAL_BAR =
             "____________________________________________________________";

@@ -5,7 +5,9 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-/** Represents a command used to find a task by searching for a keyword. */
+/**
+ * Represents a command used to find a task by searching for a keyword.
+ */
 public class FindCommand extends Command {
     protected String keyword;
 

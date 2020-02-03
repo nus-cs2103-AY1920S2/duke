@@ -9,7 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-/** Controller for MainWindow. Provides the layout for the other controls. */
+/**
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
 public class MainWindow extends AnchorPane {
     // @FXML annotation marks a private or protected member and makes it accessible
     // to FXML despite its modifier. Without the annotation, we will have to make
