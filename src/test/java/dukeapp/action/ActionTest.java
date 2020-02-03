@@ -11,6 +11,6 @@ public class ActionTest {
     public void checkNumTest() {
         ArrayList<Task> arrList = new ArrayList<Task>();
         arrList.add(new Todo(""));
-        assertEquals(0, new Action(2, arrList).checkNum());
+        assertEquals(false, new Action(2, arrList).checkNum());
     }
 }

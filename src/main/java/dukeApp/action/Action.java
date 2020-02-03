@@ -16,12 +16,12 @@ public class Action {
      *
      * @return 0 if it does not exist, and 1 otherwise.
      */
-    public int checkNum() {
+    public boolean checkNum() {
         if (num > arrList.size() || num == 0) {
-            return 0;
+            return false;
         }
         else {
-            return 1;
+            return true;
         }
     }
 

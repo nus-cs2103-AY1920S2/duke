@@ -36,7 +36,7 @@ public class TaskList {
     public void deleteDone(int rank, String dd) {
         Action action = new Action(rank, aList);
 
-        if (action.checkNum() == 0) {
+        if (action.checkNum() == true) {
             DukeException error = new DukeException();
             System.out.println(error.outOfBound());
             System.out.println("");
