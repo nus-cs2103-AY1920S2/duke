@@ -21,32 +21,6 @@ public class Ui {
         parser = new Parser();
     }
 
-    /**
-     * Greet the user.
-     */
-    public void greetings() {
-        String intro = "Hello! I'm Grapie! \n"
-                + "   _____                 _      \n"
-                + "  / ____|               (_)     \n"
-                + " | |  __ _ __ __ _ _ __  _  ___ \n"
-                + " | | |_ | '__/ _` | '_ \\| |/ _ \\ \n"
-                + " | |__| | | | (_| | |_) | |  __/ \n"
-                + "  \\_____|_|  \\__,_| .__/|_|\\___| \n"
-                + "                  | |           \n"
-                + "                  |_|           \n"
-
-
-                + "What do ya need from me?\n";
-
-        TaskList.formattingDivider(intro);
-    }
-
-    /**
-     * Returns goodbye to the user.
-     */
-    public void sayonara() {
-        TaskList.formattingDivider("Okie!! Goodbye!");
-    }
 
     /**
      * Use Parser to read user's command to call correct method, and prints out any error encountered.
