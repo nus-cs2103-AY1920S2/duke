@@ -7,8 +7,25 @@ public class task {
         this.status = "✗";
     }
 
+    public String getName() {
+        return this.Name;
+    }
+
+    public boolean isDone() {
+        if (this.status.equals("✗")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void markDone() {
         this.status = "✓";
+    }
+
+    public String toSave() {
+        String s = "";
+        return s;
     }
 
     @Override
