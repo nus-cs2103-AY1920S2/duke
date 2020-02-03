@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
     private LocalDate by;
@@ -12,7 +11,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStore() {
-        return "[E]" + super.toStore() + " (at: " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        return "[D]" + super.toStore() + " (at: " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
     }
 
     @Override
