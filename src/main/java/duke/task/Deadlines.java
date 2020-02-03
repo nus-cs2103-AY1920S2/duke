@@ -4,7 +4,7 @@ import duke.utils.Parser;
 
 import java.util.Date;
 
-public class Deadlines implements Task {
+public class Deadlines extends ExecutableTask {
 
     private boolean done = false;
     private String name;
@@ -32,15 +32,6 @@ public class Deadlines implements Task {
 
     public Date getTaskTime() {
         return time;
-    }
-
-    @Override
-    public String getDoneString() {
-        if (isDone()) {
-            return "[✓]";
-        } else {
-            return "[✗]";
-        }
     }
 
     @Override

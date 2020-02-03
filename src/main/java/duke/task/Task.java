@@ -10,8 +10,6 @@ public interface Task {
 
     public String getTaskType();
 
-    public String getDoneString();
-
     public Date getTaskTime();
 
     public void markAsDone();

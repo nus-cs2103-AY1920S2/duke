@@ -16,7 +16,6 @@ public class Duke {
         worker.initializeWorker();
         ui.welcomeMessage();
         String request = "";
-        //while (!request.split(" ")[0].toLowerCase().equals("bye")) {
         while (!ui.isExit()) {
             request = ui.requestInput().trim().toLowerCase();
             worker.handleRequest(request, ui);
