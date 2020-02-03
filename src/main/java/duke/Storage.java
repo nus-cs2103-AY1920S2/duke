@@ -20,7 +20,7 @@ public class Storage {
 
     /**
      * Constructs a fresh Storage instance, with a supplied path for the file storing the task list.
-     * @param fileName
+     * @param fileName The file path for the task list file.
      */
     public Storage(String fileName) {
         this.fileName = fileName;
