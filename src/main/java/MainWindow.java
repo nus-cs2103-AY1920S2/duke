@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,7 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import org.w3c.dom.Text;
 
+
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -44,18 +47,19 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeException {
+    private void handleUserInput() throws IOException, DukeException, InterruptedException {
         String input = userInput.getText();
-        String response = duke.getResponse("bru");
+        String response = duke.run(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
     }
 
 
-    public void iniMsg() {
+    public void initialiseMsg() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getUi().welcome(), dukeImage)
         );

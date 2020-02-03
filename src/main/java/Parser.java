@@ -73,6 +73,7 @@ public class Parser {
             return newString;
         } catch (DukeException e) {
             System.out.println(e);
+            //return e.toString();
         }
 
         return null;

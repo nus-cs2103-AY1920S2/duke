@@ -21,6 +21,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+    private boolean isGoodbye = false;
 
     /*private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -170,8 +171,8 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }*/
 
-    //public String run() throws IOException, DukeException {
-    public void run() throws IOException, DukeException {
+
+    /*public void run() throws IOException, DukeException {
         ui.welcome();
         String fullCommand = ui.readCommand();
         String newString = "";
@@ -277,10 +278,143 @@ public class Duke {
         ui.goodbye();
         //getResponse("byeee");
         //return "baibai";
+    } */
+
+    public String run(String input) throws IOException, DukeException {
+        String fullCommand = input;
+        String newString = "";
+        String[] splitBySpace;
+        int num;
+        Task t;
+        String desc;
+        String by;
+
+        if (fullCommand.equals("bye")) {
+            storage.writeData(tasks);
+            isGoodbye = true;
+            return ui.goodbye();
+        }
+
+
+        try {
+            Command cmd = parser.parseCommand(fullCommand);
+            newString = "";
+            desc = "";
+            by = "";
+
+            if (cmd != null) {
+                switch (cmd) {
+                    case LIST:
+                        if (tasks.getSize() == 0) {
+                            //System.out.println("The list is empty.");
+                            return "The list is empty.";
+                        } else {
+                            String tmpList = "";
+                            for (int i = 0; i < tasks.getDukeList().size(); i++) {
+                                //System.out.println((i + 1) + "." + tasks.getDukeList().get(i));
+                                tmpList = tmpList + (i + 1) + "." + tasks.getDukeList().get(i) + "\n";
+                            }
+                            return tmpList;
+                        }
+                        //break;
+                    case DONE:
+                        num = parser.parseNum(fullCommand, tasks);
+
+                        if (num != -1) {
+                            tasks.markDone(num);
+                            //ui.printMarkDone(tasks, num);
+                            return ui.printMarkDone(tasks, num);
+
+                        }
+                        break;
+                    case DELETE:
+                        num = parser.parseNum(fullCommand, tasks);
+
+                        if (num != -1) {
+                            Task taskToRemove = tasks.getDukeList().get(num - 1);
+                            tasks.removeTask(num);
+                            return ui.printTaskRemoved(taskToRemove, num, tasks);
+                            //ui.printTaskRemoved(tasks, num);
+                            //tasks.removeTask(num);
+                        }
+
+                        //break;
+                    case TODO:
+                        String tmp = parser.parseDescription(fullCommand);
+                        t = new ToDo(tmp);
+                        tasks.addTask(t);
+                        //ui.printTaskAdded(tasks, t);
+                        return ui.printTaskAdded(tasks, t);
+
+                        //break;
+                    case EVENT:
+                        desc = parser.parseDescOfEventDeadline(fullCommand);
+                        by = parser.parseBy(fullCommand);
+
+                        if (desc != null && by != null) {
+                            t = new Event(desc, by);
+                            tasks.addTask(t);
+                            //ui.printTaskAdded(tasks, t);
+                            return ui.printTaskAdded(tasks, t);
+                        }
+
+                        break;
+                    case DEADLINE:
+                        desc = parser.parseDescOfEventDeadline(fullCommand);
+                        by = parser.parseBy(fullCommand);
+
+                        if (desc != null && by != null) {
+                            t = new Deadline(desc, by);
+                            tasks.addTask(t);
+                            //ui.printTaskAdded(tasks, t);
+                            return ui.printTaskAdded(tasks, t);
+                        }
+
+                        break;
+                    case FIND:
+                        String find = parser.parseDescription(fullCommand);
+                        String taskL = "";
+
+                        for (int i = 0; i < tasks.getSize(); i++) {
+                            Task cur = tasks.getDukeList().get(i);
+
+                            if (cur.getDescription().contains(find)) {
+                                taskL = taskL + (i+1) + "." + tasks.getDukeList().get(i) + "\n";
+                            }
+                        }
+
+                        return ui.printMatchingTask(taskL.trim(), find);
+
+                        //break;
+                    default:
+                        break;
+                }
+            }
+        } catch (DukeException e) {
+            //System.out.println(e);
+            return e.toString();
+        }
+
+        return "0";
+
+
+
+        //storage.writeData(tasks);
+        //ui.goodbye();
+        //getResponse("byeee");
+        //return "baibai";
     }
 
     public Ui getUi() {
         return ui;
+    }
+
+    public boolean toClose() {
+        if (isGoodbye) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

@@ -49,9 +49,12 @@ public class Ui {
      * @param t List of tasks.
      * @param num Task number.
      */
-    public void printMarkDone(TaskList t, int num) {
-        System.out.println("Got it. I've marked task #" + num + ": 「" + t.getDukeList().get(num - 1) + "」 as done.");
-        System.out.println("You currently have " + t.getSize() + " task(s) in your list.");
+    public String printMarkDone(TaskList t, int num) {
+        //System.out.println("Got it. I've marked task #" + num + ": 「" + t.getDukeList().get(num - 1) + "」 as done.");
+        //System.out.println("You currently have " + t.getSize() + " task(s) in your list.");
+        String msg = "Got it. I've marked task #" + num + ": 「" + t.getDukeList().get(num - 1) + "」 as done." + "\n"
+                + "You currently have " + t.getSize() + " task(s) in your list.";
+        return msg;
     }
 
     /**
@@ -59,10 +62,12 @@ public class Ui {
      * @param tList List of tasks.
      * @param t Specific task.
      */
-    public void printTaskAdded(TaskList tList, Task t) {
-        System.out.println("Got it. I've added 「" + t + "」 to your task(s).");
-        System.out.println("You currently have " + tList.getSize() + " task(s) in your list.");
-
+    public String printTaskAdded(TaskList tList, Task t) {
+        //System.out.println("Got it. I've added 「" + t + "」 to your task(s).");
+        //System.out.println("You currently have " + tList.getSize() + " task(s) in your list.");
+        String msg = "Got it. I've added 「" + t + "」 to your task(s)." + "\n"
+                + "You currently have " + tList.getSize() + " task(s) in your list.";
+        return msg;
     }
 
     /**
@@ -70,9 +75,16 @@ public class Ui {
      * @param t List of tasks.
      * @param num Number in the list to be removed.
      */
-    public void printTaskRemoved(TaskList t, int num) {
+    /*public void printTaskRemoved(TaskList t, int num) {
         System.out.println("Got it. I've removed task #" + num + ": 「" + t.getDukeList().get(num - 1) + "」.");
         System.out.println("You currently have " + (t.getSize()-1) + " task(s) in your list.");
+    }*/
+    public String printTaskRemoved(Task t, int num, TaskList taskList) {
+        String msg = "Got it. I've removed task #" + num + ": 「" + t + "」." + "\n"
+                + "You currently have " + taskList.getSize() + " task(s) in your list.";
+        return msg;
+        //System.out.println("Got it. I've removed task #" + num + ": 「" + t + "」.");
+        //System.out.println("You currently have " + taskList.getSize() + " task(s) in your list.");
     }
 
     /**
@@ -80,20 +92,25 @@ public class Ui {
      * @param list List of matching tasks.
      * @param keyword Keyword entered by the user.
      */
-    public void printMatchingTask(String list, String keyword) {
+    public String printMatchingTask(String list, String keyword) {
         if (list.equals("")) {
-            System.out.println("We have found nothing related to your search.");
+            return "We have found nothing related to your search.";
+            //System.out.println("We have found nothing related to your search.");
         } else {
-            System.out.println("Here are some matching tasks in your list: 「" + keyword + "」");
-            System.out.println(list);
+            String msg = "Here are some matching tasks in your list: 「" + keyword + "」" + "\n" +
+                    list;
+            //System.out.println("Here are some matching tasks in your list: 「" + keyword + "」");
+            //System.out.println(list);
+            return msg;
         }
     }
 
     /**
      * Prints goodbye message to the user.
      */
-    public void goodbye() {
-        System.out.println("さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/");
+    public String goodbye() {
+        //System.out.println("さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/");
+        return "さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/";
     }
 
 }
