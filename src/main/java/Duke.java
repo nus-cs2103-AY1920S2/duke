@@ -47,10 +47,9 @@ public class Duke {
      * @return the actual String response of Duke
      */
     public String getResponse(String userInput) {
-        userInput = userInput.trim();
         try {
             Parser parser = new Parser();
-            parser.parseUserInput(userInput);
+            parser.parseUserInput(userInput.trim());
             Command command = parser.getCommand();
 
             if (command == Command.LIST_TASKS) {
