@@ -1,6 +1,3 @@
-dukeClasses.ToDo|0|grwrwgreg
-dukeClasses.Deadline|1| fewfew |2020-04-11
-dukeClasses.Deadline|0|efefewew |2020-04-11
-dukeClasses.ToDo|0|homework
-dukeClasses.ToDo|0|heow
-dukeClasses.Deadline|0|ff |2020-04-11
+dukeClasses.ToDo|1|borrow book
+dukeClasses.ToDo|1|fwwefwef
+dukeClasses.Deadline|1| fewfew |2020-08-13

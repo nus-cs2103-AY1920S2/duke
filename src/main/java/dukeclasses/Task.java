@@ -23,9 +23,15 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Returns whether is it completed or not.
+     *
+     * @return Completed or Incomplete.
+     */
     public String getStatusIcon() {
 
-        return isDone ? "\u2713" : "\u2718";
+        //return isDone ? "\u2713" : "\u2718";
+        return isDone ? "Completed" : "Incomplete";
     }
 
     /**
