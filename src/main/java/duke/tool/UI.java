@@ -17,58 +17,25 @@ public class UI {
     }
 
     /**
-     * Receives user command.
-     *
-     * @param stringScanner Used to scan input string in testing
-     * @param isTest        True in testing
-     * @return The command String of the user
-     */
-    public String readCommand(Scanner stringScanner, boolean isTest) {
-        if (stringScanner.hasNextLine()) {
-            return stringScanner.nextLine();
-        } else {
-            if (!isTest) {
-                return userScanner.nextLine();
-            } else {
-                return "bye";
-            }
-        }
-    }
-
-    /**
      * UI prints the welcome message.
      */
-    public void printWelcomeMessage() {
-        String logo =
-                indent
-                        + " ____        _        \n"
-                        + indent
-                        + "|  _ \\ _   _| | _____ \n"
-                        + indent
-                        + "| | | | | | | |/ / _ \\\n"
-                        + indent
-                        + "| |_| | |_| |   <  __/\n"
-                        + indent
-                        + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(
-                line
-                        + "\n"
-                        + indent
-                        + "Hello! I'm Snow\n"
-                        + indent
-                        + "What can I do for you?\n"
-                        + logo
-                        + line);
+    public String printWelcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        return "Hello! I'm Snow\nWhat can I do for you?\n" + logo + "\n";
     }
 
-    public void printLine() {
-        System.out.println(line);
+    public String printLine() {
         UIString += line + "\n";
+        return line + "\n";
     }
 
-    public void print(String message) {
-        System.out.println(indent + message);
-        UIString += indent + message + "\n";
+    public String print(String message) {
+        UIString += message + "\n";
+        return message + "\n";
     }
 
     /**
@@ -76,10 +43,8 @@ public class UI {
      *
      * @param message The message String to be printed
      */
-    public void printError(String message) {
-        System.out.println(line);
-        System.out.println(indent + message);
-        System.out.println(line);
-        UIString += line + "\n" + indent + message + "\n" + line;
+    public String printError(String message) {
+        UIString += message + "\n";
+        return message + "\n";
     }
 }

@@ -41,7 +41,7 @@ public class Storage {
                 String taskString = s.nextLine();
                 String[] split = taskString.split("\\|");
                 String taskType = split[0];
-                boolean isDone = split[1].equals("✓");
+                boolean isDone = split[1].equals("V");
                 String taskDescription = split[2];
 
                 switch (taskType) {

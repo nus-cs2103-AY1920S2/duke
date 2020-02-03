@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Task;
 import duke.tool.Command;
 import duke.tool.Parser;
 import duke.tool.Storage;
@@ -25,6 +26,11 @@ import javafx.scene.image.ImageView;
  * Main engine.
  */
 public class Duke extends Application{
+    private Parser parser;
+    private Storage storage;
+    private TaskList taskList;
+    private UI ui;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -39,6 +45,15 @@ public class Duke extends Application{
 
     @Override
     public void start(Stage stage) {
+        UI.UIString = "";
+        taskList = new TaskList();
+        storage = new Storage("tasks.txt", taskList);
+        ui = new UI(storage);
+
+        storage.readFromFile();
+
+        parser = new Parser(ui, taskList);
+
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -100,6 +115,13 @@ public class Duke extends Application{
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        String welcomeMessage = ui.printWelcomeMessage();
+        Label dukeText = new Label(welcomeMessage);
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
     }
 
     /**
@@ -108,8 +130,13 @@ public class Duke extends Application{
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        Command c = parser.parse(userInput.getText());
+        String responseString = c.execute(taskList, ui);
+        storage.saveToFile();
+
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(responseString);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -117,54 +144,6 @@ public class Duke extends Application{
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run("", false);
-    }
 
-    /**
-     * Runs The engine.
-     *
-     * @param inputString User input string used in testing
-     * @param isTest      True in testing
-     * @return The output showin in the UI
-     */
-    public String run(String inputString, boolean isTest) {
-        UI.UIString = "";
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage("tasks.txt", taskList);
-        UI ui = new UI(storage);
-
-        if (!isTest) {
-            storage.readFromFile();
-        }
-
-        Parser parser = new Parser(ui, taskList);
-
-        ui.printWelcomeMessage();
-        boolean isExit = false;
-        Scanner stringScanner = new Scanner(inputString);
-
-        while (!isExit) {
-            String fullCommand = ui.readCommand(stringScanner, isTest);
-            ui.printLine(); // show the divider line ("_______")
-            Command c = parser.parse(fullCommand);
-            isExit = c.execute(taskList, ui);
-            ui.printLine();
-
-            if (!isTest) {
-                storage.saveToFile();
-            }
-        }
-
-        return UI.UIString;
-    }
 }
