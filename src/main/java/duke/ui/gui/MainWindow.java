@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.ui.gui;
 
 import duke.DukeException;
 import duke.command.Command;
@@ -6,6 +6,8 @@ import duke.command.ExitCommand;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+
+import duke.ui.Ui;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -34,6 +36,7 @@ public class MainWindow extends AnchorPane {
     private String horizontalLine = "\n    ________________________________________________________\n";
 
     private Storage storage;
+    private Ui ui;
     private TaskList tasks;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
@@ -44,6 +47,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        ui = new Ui();
         storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
@@ -61,7 +65,7 @@ public class MainWindow extends AnchorPane {
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         String output = horizontalLine;
         ExitCommand c = new ExitCommand();
-        output += c.execute(tasks, storage) + horizontalLine;
+        output += c.execute(tasks, ui, storage) + horizontalLine;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(output, dukeImage));
         pause.setOnFinished(event -> {
             Platform.exit();
@@ -81,7 +85,7 @@ public class MainWindow extends AnchorPane {
         boolean isExit = false;
         try {
             Command c = Parser.parse(input);
-            output += c.execute(tasks, storage);
+            output += c.execute(tasks, ui, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
             output += "     " + e.getMessage();

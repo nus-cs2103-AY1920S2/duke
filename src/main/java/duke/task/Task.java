@@ -35,7 +35,7 @@ public abstract class Task {
     public abstract String formatSavingName();
 
     /**
-     * Get the string representation of whether the task has been completed.
+     * Gets the string representation of whether the task has been completed.
      *
      * @return [Y] if task is completed, [N] if task is not completed.
      */
@@ -57,7 +57,7 @@ public abstract class Task {
     }
 
     /**
-     * For printing of the Task object.
+     * Generates the String representation of Task.
      *
      * @return the string representation of Task.
      */
