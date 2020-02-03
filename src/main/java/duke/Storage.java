@@ -17,6 +17,10 @@ public class Storage {
         this.file = Paths.get(workingDir, filePath);
     }
 
+    public static boolean parseTaskStatusFromString(String status) {
+        return status.equals("1") ? true : false;
+    }
+
     public List<Task> loadTasks() {
         List<Task> retrievedTasks = new ArrayList<Task>();
 
@@ -61,9 +65,5 @@ public class Storage {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    public static boolean parseTaskStatusFromString(String status) {
-        return status.equals("1") ? true : false;
     }
 }
