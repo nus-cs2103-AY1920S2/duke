@@ -45,31 +45,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes Add behaviour of adding a new task
-     * and returns the result as a String
-     * @param taskList to access collection of tasks.
-     * @param storage to access save-load functionality.
-     * @return a String representing the output.
-     */
-    public String executeWithBotResponse(TaskList taskList, Storage storage) {
-        String output = "";
-        String addedTask = null;
-
-        try {
-            addedTask = taskList.addTask(toAdd, taskType, storage);
-            int total = taskList.getList().size();
-            output = "Got it. I've added this task:\n"
-                    + addedTask + "\n"
-                    + "Now you have " + total + " task"
-                    + (total != 1 ? "s" : "") + " in the list.";
-        } catch (Exception e) {
-            output = e.getMessage();
-        }
-
-        return output;
-    }
-
-    /**
      * Inform if command is an exit command.
      * @return boolean indicating if command is an exit command.
      */

@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class Ui {
     private static String indentation = "    ";
     private static String hori_line = "______________________________________";
+    private static String latestResponse = ""; // For GUI to read from
 
     /**
      * Prints the input with a set indentation.
@@ -46,8 +47,9 @@ public class Ui {
      * Prints exiting presentation for user.
      */
     public static void sayBye() {
+        latestResponse = "Bye. Hope to see you again soon!";
         showLine();
-        printWithIndent("Bye. Hope to see you again soon!");
+        printWithIndent(latestResponse);
         showLine();
     }
 
@@ -56,6 +58,7 @@ public class Ui {
      * @param e of the exception that occurred.
      */
     public static void showError(Exception e) {
+        latestResponse = e.getMessage();
         showLine();
         printWithIndent(e.getMessage());
         showLine();
@@ -68,6 +71,11 @@ public class Ui {
      * @param total new count of tasks.
      */
     public static void showTaskAdded(String added, int total) {
+        latestResponse = "Got it. I've added this task:\n";
+        latestResponse += added + "\n";
+        latestResponse += "Now you have " + total + " task"
+                + (total != 1 ? "s" : "") + " in the list.";
+
         showLine();
         printWithIndent("Got it. I've added this task:");
         printWithIndent(added);
@@ -81,14 +89,17 @@ public class Ui {
      * @param taskList for access to the collection of Task objects.
      */
     public static void showAllTasks(TaskList taskList) {
+        latestResponse = "";
         showLine();
         ArrayList<Task> listToShow = taskList.getList();
         if (!listToShow.isEmpty()) {
             for (int i = 1; i <= listToShow.size(); i++) {
+                latestResponse += i + "." + listToShow.get(i - 1).toString() + "\n";
                 printWithIndent(i + "." + listToShow.get(i - 1).toString());
             }
         } else {
-            printWithIndent("Empty List. You are currently free! Upz lah!");
+            latestResponse = "Empty List. You are currently free! Upz lah!";
+            printWithIndent(latestResponse);
         }
         showLine();
     }
@@ -98,6 +109,8 @@ public class Ui {
      * @param done task to be print.
      */
     public static void showTaskDone(Task done) {
+        latestResponse = "Nice! I've marked this task as done:\n";
+        latestResponse += done.toString();
         showLine();
         printWithIndent("Nice! I've marked this task as done:");
         printWithIndent(done.toString());
@@ -111,6 +124,11 @@ public class Ui {
      * @param total new count of tasks.
      */
     public static void showTaskDelete(String deleted, int total) {
+        latestResponse = "Noted! I've removed this task:\n";
+        latestResponse += deleted + "\n";
+        latestResponse += "Now you have " + total
+                + " task" + (total != 1 ? "s" : "") + " in the list.";
+
         showLine();
         printWithIndent("Noted! I've removed this task:");
         printWithIndent(deleted);
@@ -123,8 +141,10 @@ public class Ui {
      * Prints to the user that the task of interest was not found.
      */
     public static void showTaskNotFound() {
+        latestResponse = "Sorry, mate! No such task.";
+
         showLine();
-        printWithIndent("Sorry, mate! No such task.");
+        printWithIndent(latestResponse);
         showLine();
     }
 
@@ -135,5 +155,13 @@ public class Ui {
     public static String readCommand() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
+    }
+
+    public static String getLatestResponse() {
+        return latestResponse;
+    }
+
+    public static void setLatestResponse(String response) {
+        latestResponse = response;
     }
 }

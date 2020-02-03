@@ -65,7 +65,7 @@ public class Duke {
                 c.execute(taskList, storage);
                 isExiting = c.isExit();
             } catch (DukeException.InvalidCommand invalidCommand) {
-
+                Ui.showError(invalidCommand);
             }
         } while (!isExiting);
 
@@ -83,7 +83,8 @@ public class Duke {
 
         try {
             c = Parser.parse(input);
-            output = c.executeWithBotResponse(taskList, storage);
+            c.execute(taskList, storage);
+            output = Ui.getLatestResponse();
             isExiting = c.isExit();
 
             if (isExiting) {

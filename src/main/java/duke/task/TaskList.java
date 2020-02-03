@@ -72,7 +72,7 @@ public class TaskList {
      * @param storage for saving the new task to file.
      * @return a String representing the task that was added, else an error message.
      */
-    public String addTask(String newTask, Task.TaskType taskType, Storage storage) throws Exception{
+    public String addTask(String newTask, Task.TaskType taskType, Storage storage) throws Exception {
         String[] strArr;
         String taskName;
         try {

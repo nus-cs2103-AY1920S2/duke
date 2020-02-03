@@ -28,7 +28,7 @@ public class DukeException {
 
     public static class NoDeadlineTime extends Exception {
         public NoDeadlineTime() {
-            super("Whoa there! I need to know when is the deadline! E.g. \"deadline quiz /by 4 July");
+            super("Whoa there! I need to know when is the deadline! E.g. \"deadline quiz /by 2019-07-09");
         }
     }
 
@@ -40,7 +40,7 @@ public class DukeException {
 
     public static class NoEventDatetime extends Exception {
         public NoEventDatetime() {
-            super("Whoa there! I need to know when is the event! E.g. \"event Party /at 4 July 2-4pm");
+            super("Whoa there! I need to know when is the event! E.g. \"event Party /at 2020-07-10 17:30");
         }
     }
 

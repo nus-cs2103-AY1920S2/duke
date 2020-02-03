@@ -32,49 +32,28 @@ public class FindCommand extends Command {
      * @param storage to access save-load functionality.
      */
     public void execute(TaskList taskList, Storage storage) {
+        String latestResponse = "";
+
         Ui.showLine();
         if (keyword.isBlank()) {
-            Ui.printWithIndent("Sorry, I need a keyword.");
+            latestResponse = "Sorry, I need a keyword.";
+            Ui.printWithIndent(latestResponse);
         } else {
             int count = 0;
             for (Task t: taskList.getList()) {
                 if (t.getName().contains(keyword)) {
                     count++;
+                    latestResponse += count + "." + t.toString() + "\n";
                     Ui.printWithIndent(count + "." + t.toString());
                 }
             }
+            latestResponse += "You have " + count + " matching task" + (count != 1 ? "s" : "")
+                    + " for keyword: " + keyword;
+            Ui.setLatestResponse(latestResponse);
             Ui.printWithIndent("You have " + count + " matching task" + (count != 1 ? "s" : "")
                     + " for keyword: " + keyword);
         }
         Ui.showLine();
-    }
-
-    /**
-     * Executes Find behaviour of finding all tasks containing a keyword
-     * and returns the result as a String
-     * @param taskList to access collection of tasks.
-     * @param storage to access save-load functionality.
-     * @return a String representing the output.
-     */
-    public String executeWithBotResponse(TaskList taskList, Storage storage) {
-        String output = "";
-        ArrayList<Task> listToShow = taskList.getList();
-
-        if (keyword.isBlank()) {
-            output = "Sorry, I need a keyword.";
-        } else {
-            int count = 0;
-            for (Task t: taskList.getList()) {
-                if (t.getName().contains(keyword)) {
-                    count++;
-                    output += count + "." + t.toString() + "\n";
-                }
-            }
-            output += "You have " + count + " matching task"
-                    + (count != 1 ? "s" : "") + " for keyword: " + keyword;
-        }
-
-        return output;
     }
 
     /**

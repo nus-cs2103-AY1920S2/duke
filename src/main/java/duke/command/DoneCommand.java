@@ -41,27 +41,6 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes Done behaviour of setting given task to Done
-     * and returns the result as a String
-     * @param taskList to access collection of tasks.
-     * @param storage to access save-load functionality.
-     * @return a String representing the output.
-     */
-    public String executeWithBotResponse(TaskList taskList, Storage storage) {
-        String output = "";
-
-        if (taskList.doneTask(doneIndex)) {
-            storage.saveTaskListToFile(taskList);
-            output = "Nice! I've marked this task as done:\n"
-                    + taskList.getList().get(doneIndex).toString();
-        } else {
-            output = "Sorry, mate! No such task.";
-        }
-
-        return output;
-    }
-
-    /**
      * Inform if command is an exit command.
      * @return boolean indicating if command is an exit command.
      */

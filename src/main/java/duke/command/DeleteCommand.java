@@ -40,32 +40,6 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes Delete behaviour of deleted task at given index
-     * and returns the result as a String
-     * @param taskList to access collection of tasks.
-     * @param storage to access save-load functionality.
-     * @return a String representing the output.
-     */
-    public String executeWithBotResponse(TaskList taskList, Storage storage) {
-        String output = "";
-        String taskToRemove = taskList.deleteTask(indexToDelete);
-
-        if (taskToRemove != null) {
-            storage.saveTaskListToFile(taskList);
-            int total = taskList.getList().size();
-
-            output = "Noted! I've removed this task:\n"
-                    + taskToRemove + "\n"
-                    + "Now you have " + total
-                    + " task" + (total != 1 ? "s" : "") + " in the list.";
-        } else {
-            output = "Sorry, mate! No such task.";
-        }
-
-        return output;
-    }
-
-    /**
      * Inform if command is an exit command.
      * @return boolean indicating if command is an exit command.
      */

@@ -21,18 +21,6 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Represents the Command for the "bye" input by the user
-     * and returns the result as a String
-     * @param taskList to access collection of tasks.
-     * @param storage to access save-load functionality.
-     * @return a String representing the output.
-     */
-    public String executeWithBotResponse(TaskList taskList, Storage storage) {
-        // TODO: further finalize the "bye" behaviour
-        return "";
-    }
-
-    /**
      * Inform if command is an exit command.
      * @return boolean indicating if command is an exit command.
      */
