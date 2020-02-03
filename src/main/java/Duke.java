@@ -52,7 +52,14 @@ public class Duke extends Application {
     }
 
     public Duke() {
-
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public void run() {
@@ -193,7 +200,7 @@ public class Duke extends Application {
         return "Cat replies: " + input;
     }
 
-    public static void main(String[] args) {
-        new Duke(filePath).run();
-    }
+//    public static void main(String[] args) {
+//        new Duke(filePath).run();
+//    }
 }
