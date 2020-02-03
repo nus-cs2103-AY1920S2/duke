@@ -16,6 +16,8 @@ public enum DukeExpression {
 
     /**
      * Gets the Image corresponding to the expression.
+     *
+     * @return An image representing Duke;
      */
     public Image getDukeImage() {
         return dukeImage;

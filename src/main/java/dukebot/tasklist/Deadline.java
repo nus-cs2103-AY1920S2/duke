@@ -2,6 +2,9 @@ package dukebot.tasklist;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Deadline.
+ */
 public class Deadline extends Task {
 
     /**

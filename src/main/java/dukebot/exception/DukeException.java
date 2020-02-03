@@ -2,11 +2,16 @@ package dukebot.exception;
 
 import dukebot.ui.LineName;
 
+/**
+ * Generic exception.
+ */
 public class DukeException extends Throwable {
     private LineName errorLineName;
 
     /**
      * Error with LineName.
+     *
+     * @param errorLineName The LineName of the line with the error message.
      */
     public DukeException(LineName errorLineName) {
         super("Duke Error");
@@ -15,6 +20,8 @@ public class DukeException extends Throwable {
 
     /**
      * Gets the LineName passed to the Exception.
+     *
+     * @return The LineName stored in this exception.
      */
     public LineName getErrorLineName() {
         return errorLineName;

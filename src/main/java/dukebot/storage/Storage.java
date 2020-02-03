@@ -35,7 +35,7 @@ public class Storage {
     }
 
     /**
-     * Generates the Storage.
+     * Generates the Storage with custom directory.
      *
      * @param storageDirectory Path to save file.
      */
@@ -43,24 +43,30 @@ public class Storage {
         this.storageDirectory = storageDirectory;
     }
 
-    private void mkDataDir() {
+    /**
+     * Ensure that storageDirectory exists.
+     *
+     * @return Whether storageDirectory exists.
+     */
+    private boolean mkDataDir() {
         File directory = new File(storageDirectory);
         if (!directory.exists()) {
-            directory.mkdir();
+            return directory.mkdir();
         }
+        return true;
     }
 
     /**
      * Deletes all data files.
-     *
-     * @throws DukeException If save fails for the first time.
      */
     public void clearStorage() {
-        mkDataDir();
-        String[] fileNames = new String[] {TASK_LIST_FILEPATH, ALIAS_FILEPATH};
-        for (String fileName : fileNames) {
-            File file = new File(storageDirectory + fileName);
-            file.delete();
+        if (mkDataDir()) {
+            String[] fileNames = new String[] {TASK_LIST_FILEPATH, ALIAS_FILEPATH};
+            for (String fileName : fileNames) {
+                File file = new File(storageDirectory + fileName);
+                // Nobody cares if delete fails as file might not exist in the first place.
+                file.delete();
+            }
         }
     }
 
@@ -72,8 +78,11 @@ public class Storage {
      */
     public void saveTaskList(TaskList tasks) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
+        if(!mkDataDir() && !saveAlreadyFailed){
+            saveAlreadyFailed = true;
+            throw new DukeException(LineName.SAVE_FAIL);
+        }
         try {
-            mkDataDir();
             File file = new File(storageDirectory + TASK_LIST_FILEPATH);
             FileOutputStream writeData = new FileOutputStream(file);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
@@ -81,7 +90,6 @@ public class Storage {
             writeStream.writeObject(taskArr);
             writeStream.flush();
             writeStream.close();
-
         } catch (IOException e) {
             // e.printStackTrace();
             if (!saveAlreadyFailed) {
@@ -155,7 +163,7 @@ public class Storage {
                 BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
                 String line = br.readLine();
 
-                HashMap<String, String> aliasMap = new HashMap<String, String>();
+                HashMap<String, String> aliasMap = new HashMap<>();
                 while (line != null) {
                     String[] lineArr = line.split(" ");
                     if (lineArr.length >= 2) {

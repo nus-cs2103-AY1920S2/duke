@@ -5,6 +5,9 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
+/**
+ * Command to reset storage.
+ */
 public class ResetStorageCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

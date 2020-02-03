@@ -7,6 +7,9 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
+/**
+ * Command to set task as done.
+ */
 public class DoneCommand extends Command {
     private String[] inpArr;
 

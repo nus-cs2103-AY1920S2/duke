@@ -8,6 +8,9 @@ import dukebot.ui.Ui;
 
 import java.util.HashMap;
 
+/**
+ * Changes phrase mapping of command.
+ */
 public class AliasCommand extends Command {
     private String[] inpArr;
     private HashMap<String, CommandList> aliasMap;

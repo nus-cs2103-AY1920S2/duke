@@ -7,8 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 public class DateTimeParse {
-    // TODO: Think of a good way to use custom defined localDateTimeProvider for testing purpose
-    // private static LocalDateTime localDateTimeProvider = LocalDateTime.now();
 
     private static String[] dateTimeRegexps = {
         "^\\d{4}/\\d{1,2}/\\d{1,2}$", // yyyy/M/d

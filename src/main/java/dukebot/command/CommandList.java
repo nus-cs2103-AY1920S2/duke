@@ -1,5 +1,8 @@
 package dukebot.command;
 
+/**
+ * List of commands.
+ */
 public enum CommandList {
     ALIAS("alias"),
     BYE("bye"),

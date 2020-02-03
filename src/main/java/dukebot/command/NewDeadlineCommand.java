@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * Command to create a deadline.
+ */
 public class NewDeadlineCommand extends Command {
     private String[] inpArr;
 

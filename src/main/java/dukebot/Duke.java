@@ -11,6 +11,9 @@ import dukebot.ui.Ui;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Main logic.
+ */
 public class Duke {
     private static final String PATH = "./dukeStore.txt";
     private final Storage storage;
@@ -20,6 +23,8 @@ public class Duke {
 
     /**
      * Initialises Duke.
+     *
+     * @param withGui Whether GUI mode is used.
      */
     public Duke(boolean withGui) {
         storage = new Storage();
@@ -61,6 +66,8 @@ public class Duke {
 
     /**
      * Gets the current UI for text output.
+     *
+     * @return The Ui being used.
      */
     public Ui getUi() {
         return ui;
@@ -68,6 +75,9 @@ public class Duke {
 
     /**
      * Generates Response for GUI.
+     *
+     * @param input The input string to parse.
+     * @return String to say.
      */
     public String getResponse(String input) {
         ui.resetGuiOutput();

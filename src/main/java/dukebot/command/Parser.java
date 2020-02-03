@@ -4,6 +4,9 @@ import dukebot.ui.LineName;
 
 import java.util.HashMap;
 
+/**
+ * Class which contains the input parser.
+ */
 public class Parser {
     private enum ParserState {
         NORMAL,

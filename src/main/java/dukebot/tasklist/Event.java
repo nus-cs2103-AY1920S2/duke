@@ -2,6 +2,9 @@ package dukebot.tasklist;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an Event.
+ */
 public class Event extends Task {
 
     /**

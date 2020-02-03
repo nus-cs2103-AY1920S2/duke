@@ -1,5 +1,8 @@
 package dukebot.tasklist;
 
+/**
+ * Represents a Todo.
+ */
 public class Todo extends Task {
 
     /**

@@ -10,6 +10,9 @@ import dukebot.ui.Ui;
 
 import java.util.Arrays;
 
+/**
+ * Command to create a new todo.
+ */
 public class NewTodoCommand extends Command {
     private String[] inpArr;
 

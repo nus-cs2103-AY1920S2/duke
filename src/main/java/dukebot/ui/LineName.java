@@ -1,5 +1,8 @@
 package dukebot.ui;
 
+/**
+ * Name of lines to say.
+ */
 public enum LineName {
     ALIAS_ALREADY_EXISTS,
     ALIAS_COMMAND_FAIL,

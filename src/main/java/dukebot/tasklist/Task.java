@@ -3,10 +3,14 @@ package dukebot.tasklist;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
+/**
+ * Abstract class for tasks to inherit from.
+ */
 public abstract class Task implements Serializable {
     private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
-    private LocalDateTime localDateTimeProvider = LocalDateTime.now();
+    // private LocalDateTime localDateTimeProvider = LocalDateTime.now();
     protected final String description;
 
     private boolean isDone;
@@ -65,11 +69,12 @@ public abstract class Task implements Serializable {
      * @return DateTime string to be displayed.
      */
     public String dateTimeToString() {
+        // Think of a way to use custom datetime.
         if (dateTime == null) {
             return "";
-        } else if (dateTime.toLocalDate().equals(localDateTimeProvider.now().toLocalDate())) {
+        } else if (dateTime.toLocalDate().equals(LocalDateTime.now().toLocalDate())) {
             return "Today " + dateTime.toLocalTime().toString();
-        } else if (dateTime.compareTo(localDateTimeProvider.now()) < 0) {
+        } else if (dateTime.compareTo(LocalDateTime.now()) < 0) {
             return this.dateTime.format(DEFAULT_FORMAT) + " [Over]";
         } else {
             return this.dateTime.format(DEFAULT_FORMAT);
@@ -86,15 +91,9 @@ public abstract class Task implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
             Task task = (Task) obj;
-            if (taskType.equals(task.taskType)) {
-                if (description.equals(task.description)) {
-                    if ((dateTime == null && task.dateTime == null) || dateTime.equals(task.dateTime)) {
-                        if (isDone == task.isDone) {
-                            return true;
-                        }
-                    }
-                }
-            }
+            return taskType.equals(task.taskType)
+                    && description.equals(task.description)
+                    && Objects.equals(dateTime, task.dateTime);
         }
         return false;
     }

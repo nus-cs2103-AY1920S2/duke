@@ -5,6 +5,9 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
+/**
+ * Command output a line.
+ */
 public class UiOnlyCommand extends Command {
     private LineName toSay;
 

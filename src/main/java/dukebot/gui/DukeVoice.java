@@ -4,10 +4,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Random;
 
+/**
+ * Class to manage voice acting.
+ */
 public enum DukeVoice {
     ACTUALLY("02-actually"),
     GOODBYE("02-goodbye"),
@@ -39,6 +41,10 @@ public enum DukeVoice {
 
     /**
      * Randomise voice to play for more excitement.
+     *
+     * @param hasVoice Returns NO_VOICE if set to false.
+     * @param dukeVoices Voices to use.
+     * @return Voice to use.
      */
     public static DukeVoice randomVoice(boolean hasVoice, DukeVoice... dukeVoices) {
         if (hasVoice) {

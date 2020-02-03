@@ -2,11 +2,16 @@ package dukebot.tasklist;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the task list.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
      * Generates a new TaskList.
+     *
+     * @param taskList The task list to use.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -33,6 +38,7 @@ public class TaskList {
     /**
      * Gets TaskList.
      *
+     * @return The stored task list.
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
@@ -41,6 +47,7 @@ public class TaskList {
     /**
      * Adds Task to end of TaskList.
      *
+     * @param task Task to add.
      */
     public void addTask(Task task) {
         this.taskList.add(task);

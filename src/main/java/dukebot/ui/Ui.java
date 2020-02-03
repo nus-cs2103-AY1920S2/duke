@@ -7,6 +7,9 @@ import dukebot.tasklist.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles output to use.
+ */
 public class Ui {
     private static final String LOGO = " ____, __   _, __  _, ____,\n"
             + "(-|  \\(-|  |  (-|_/  (-|_, \n"

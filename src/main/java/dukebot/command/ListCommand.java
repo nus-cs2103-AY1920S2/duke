@@ -5,6 +5,9 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
 import dukebot.ui.Ui;
 
+/**
+ * Command to list all tasks.
+ */
 public class ListCommand extends Command {
 
     @Override

@@ -1,5 +1,8 @@
 package dukebot.tasklist;
 
+/**
+ * The task types used.
+ */
 public enum TaskType {
     TODO("Todo"),
     DEADLINE("Deadline"),

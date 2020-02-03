@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+// import javafx.scene.layout.Priority;
 
 /**
  * An example of a custom control using FXML.
@@ -53,6 +53,10 @@ public class DialogBox extends HBox {
 
     /**
      * Creates DialogBox for user.
+     *
+     * @param text Input line by user.
+     * @param img The user's image.
+     * @return The DialogBox.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
@@ -60,6 +64,10 @@ public class DialogBox extends HBox {
 
     /**
      * Creates DialogBox for Duke.
+     *
+     * @param text output line.
+     * @param img The duke's image.
+     * @return The DialogBox.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

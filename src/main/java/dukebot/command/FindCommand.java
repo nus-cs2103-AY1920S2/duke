@@ -9,6 +9,9 @@ import dukebot.ui.Ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Command to find a substring in a task's description.
+ */
 public class FindCommand extends Command {
     private String[] inpArr;
 

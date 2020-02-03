@@ -4,6 +4,9 @@ import dukebot.storage.Storage;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.Ui;
 
+/**
+ * Command abstract class.
+ */
 public abstract class Command {
     /**
      * Executes the command.
