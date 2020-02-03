@@ -5,7 +5,7 @@ import ip.task.TaskList;
 
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.displayAllTasks(tasks);
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.displayAllTasks(tasks);
     }
 }

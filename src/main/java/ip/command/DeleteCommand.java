@@ -11,15 +11,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         if (tasks.size() == 0) {
-            new InvalidCommand("There are no tasks in the list :(").execute(tasks, ui);
-            return;
+            return new InvalidCommand("There are no tasks in the list :(").execute(tasks, ui);
         }
         if (index < 0 || index >= tasks.size()) {
-            new InvalidCommand("Please enter a valid index, from 1 to " + tasks.size()).execute(tasks, ui);
-            return;
+            return new InvalidCommand("Please enter a valid index, from 1 to " + tasks.size()).execute(tasks, ui);
         }
-        ui.displayTaskDeleted(tasks.delete(index), tasks.size());
+        return ui.displayTaskDeleted(tasks.delete(index), tasks.size());
     }
 }
