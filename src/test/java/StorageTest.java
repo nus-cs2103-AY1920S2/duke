@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageTest {
     @Test
     public void testWriteFile() {
-        Storage storage = new Storage("data/duke.txt");
+        Ui ui = new Ui();
+        Storage storage = new Storage("data/duke.txt", ui);
         TaskList taskList = new TaskList(new ArrayList<>());
         Task task = new Todo("read book");
         taskList.arr.add(new Todo("read book"));
