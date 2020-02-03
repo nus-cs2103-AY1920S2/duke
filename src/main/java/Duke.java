@@ -2,7 +2,9 @@
 import java.util.Scanner;
 import java.util.*;
 
+
 public class Duke{
+
 
     static Scanner sc = new Scanner(System.in);
 
@@ -15,7 +17,7 @@ public class Duke{
 
     public static void main(String[] args) {
 
-        ArrayList<String> list = new ArrayList<String>(); // Creating arraylist
+        ArrayList<Task> list = new ArrayList<Task>(); // Creating arraylist
 
         printGreetings();
         String input = sc.nextLine();
@@ -25,19 +27,33 @@ public class Duke{
 
 
         while (!input.equals("bye")) {
-            if(!input.equals("list")){
+            if(!input.equals("list") && !input.contains("done")){ //adding item to list
+
+                Task t = new Task(input);
+                list.add(t);
                 System.out.println("____________________________________________________________\n" + "added: " + input
                         + "\n____________________________________________________________\n");
-                list.add(input);
+            }
+            if(input.contains("done")){
+                System.out.println("Nice! I've marked this task as done:");
+                int itemPos = Integer.parseInt(input.replaceAll("[^0-9]" , ""));
+                itemPos-- ;
+                list.get(itemPos).markDone();
+                System.out.println("[" + list.get(itemPos).getStatus() + "]" + list.get(itemPos).getDescription());
             }
             if(input.equals("list")){
                 count = 1;
                 System.out.println("____________________________________________________________\n");
 
-                for(String obj: list){
-                    System.out.println(count + ". " + obj);
+
+                for(int i = 0 ; i < list.size();i++){
+                    String icon = list.get(i).getStatus();
+
+                    System.out.println(count + ".[" + icon + "] " + list.get(i).getDescription() );
                     count++;
+
                 }
+
                 System.out.println("____________________________________________________________\n");
 
 
