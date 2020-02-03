@@ -18,12 +18,24 @@ public class TaskList {
                 newTask = new ToDo(taskDesc);
             } else if (taskType.equals("deadline")) {
                 String[] in = taskDesc.split("/",2);
-                newTask = new Deadline(in[0], in[1]);
+                String task = in[0].trim();
+                String dateAndPreposition = in[1];
+                String[] res = dateAndPreposition.split(" ", 2);
+                String preposition = res[0];
+                String dateTime = res[1];
+                newTask = new Deadline(task, preposition, dateTime);
             } else {
                 String[] in = taskDesc.split("/", 2);
-                newTask = new Event(in[0], in[1]);
+                String task = in[0].trim();
+                String dateAndPreposition = in[1];
+                String[] res = dateAndPreposition.split(" ", 2);
+                String preposition = res[0];
+                String dateTime = res[1];
+                newTask = new Event(task, preposition, dateTime);
             }
+
             taskList.add(newTask);
+
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.println("     Now you have " + taskList.size() + " tasks in the list.");

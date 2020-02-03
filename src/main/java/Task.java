@@ -5,6 +5,6 @@ public interface Task extends Serializable {
         return task.equals("todo") || task.equals("event") || task.equals("deadline");
     }
 
-    public void markDone();
+    public boolean markDone();
 
 }

@@ -14,8 +14,9 @@ public abstract class AbstractTask implements Task {
 
     }
 
-    public void markDone(){
+    public boolean markDone(){
         this.isDone = true;
+        return this.isDone;
     }
 
 }

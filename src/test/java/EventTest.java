@@ -1,25 +1,29 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class EventTest {
+
+    private Event newEvent() {
+        return new Event("reading event", "at", "2019-02-13");
+    }
 
     @Test
     void taskStateString() {
-        assertEquals("[✗]", new ToDo("read").taskStateString());
+        assertEquals("[✗]", newEvent().taskStateString());
     }
 
     @Test
     void markDone() {
-        ToDo test = new ToDo("read");
-        assertEquals(false, test.isDone);
-        test.markDone();
-        assertEquals(true, test.isDone);
+        assertEquals(true, newEvent().markDone());
+    }
+
+    @Test
+    void formattedDate() {
+        assertEquals("Feb 13 2019", newEvent().formattedDate());
     }
 
     @Test
     void testToString() {
-        assertEquals("[T][✗] read", new ToDo("read").toString());
+        assertEquals("[E][✗] reading event at Feb 13 2019", newEvent().toString());
     }
 }

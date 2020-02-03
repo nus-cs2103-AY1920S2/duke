@@ -1,24 +1,24 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 class ToDoTest {
+
+    private ToDo newToDo() {
+        return new ToDo("read");
+    }
 
     @Test
     void taskStateString() {
-        assertEquals("[✗]", new ToDo("read").taskStateString());
+        assertEquals("[✗]", newToDo().taskStateString());
     }
 
     @Test
     void markDone() {
-        ToDo test = new ToDo("read");
-        assertEquals(false, test.isDone);
-        test.markDone();
-        assertEquals(true, test.isDone);
+        assertEquals(true, newToDo().markDone());
     }
 
     @Test
     void testToString() {
-        assertEquals("[T][✗] read", new ToDo("read").toString());
+        assertEquals("[T][✗] read", newToDo().toString());
     }
 }

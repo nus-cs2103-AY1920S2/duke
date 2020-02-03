@@ -5,13 +5,15 @@ public class Deadline extends AbstractTask {
     LocalDate date;
     String time;
     String[] parseDateTime;
+    String preposition;
 
-    public Deadline(String taskName, String dateTime){
+    public Deadline(String taskName, String preposition, String dateTime){
         super(taskName);
-        parseDateTime = dateTime.split(" ",  3);
-        this.date = LocalDate.parse(parseDateTime[1]);
-        if (parseDateTime.length > 2){
-            this.time = parseDateTime[2];
+        parseDateTime = dateTime.split(" ",  2);
+        this.date = LocalDate.parse(parseDateTime[0]);
+        this.preposition = preposition;
+        if (parseDateTime.length > 1){
+            this.time = parseDateTime[1];
         }
     }
 
@@ -21,8 +23,8 @@ public class Deadline extends AbstractTask {
 
     @Override
     public String toString(){
-        return (this.time != null) ? "[D]" + taskStateString() + " " + this.taskName + parseDateTime[0] + " " + formattedDate() + " " + this.time
-                : "[D]" + taskStateString() + " " + this.taskName + parseDateTime[0] + " " + formattedDate();
+        return (this.time != null) ? "[D]" + taskStateString() + " " + this.taskName + " " + this.preposition + " " + formattedDate() + " " + this.time
+                : "[D]" + taskStateString() + " " + this.taskName + " " + this.preposition + " " + formattedDate();
     }
 
 }
