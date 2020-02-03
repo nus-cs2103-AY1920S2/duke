@@ -33,18 +33,25 @@ public class Storage {
             while (sc.hasNext()) {
                 String str = sc.nextLine();
                 String[] parts = str.split("\\|");
-                if (parts[0].equals("T")) {
+                switch (parts[0]) {
+                case "T": {
                     Task task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
                     tasks.add(task);
                     calender.addDate(task);
-                } else if (parts[0].equals("E")) {
+                    break;
+                }
+                case "E": {
                     Task task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
                     calender.addDate(task);
-                } else if (parts[0].equals("D")) {
+                    break;
+                }
+                case "D": {
                     Task task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
                     calender.addDate(task);
+                    break;
+                }
                 }
             }
             return tasks;
