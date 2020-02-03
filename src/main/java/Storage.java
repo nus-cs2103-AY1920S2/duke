@@ -10,22 +10,29 @@ public class Storage {
 
     /**
      * Adds all tasks found in storage to input tasks.
+     *
      * @param tasks TaskList to add read tasks to
      * @throws FileNotFoundException Thrown when file is not found
      */
-    public static void readFile(TaskList tasks) throws FileNotFoundException {
-        File f = new File(FILE_PATH);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            Parser parse = new Parser(line, true);
-            Task task = parse.createTask();
-            tasks.add(task);
+    public static void readFile(TaskList tasks) throws IOException {
+        try {
+            File f = new File(FILE_PATH);
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                Parser parse = new Parser(line, true);
+                Task task = parse.createTask();
+                tasks.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            deleteContent(); // Create file
+            readFile(tasks);
         }
     }
 
     /**
      * Writes task to storage.
+     *
      * @param task Task to store in storage
      * @throws IOException Thrown when I/O error occurs
      */
@@ -37,6 +44,7 @@ public class Storage {
 
     /**
      * Delete task from storage.
+     *
      * @param index Index of task to remove from storage
      * @throws IOException Thrown when I/O error occurs
      */
@@ -62,6 +70,7 @@ public class Storage {
 
     /**
      * Perform task in storage.
+     *
      * @param index Index of the task to perform
      * @throws IOException Thrown when I/O error occurs
      */
