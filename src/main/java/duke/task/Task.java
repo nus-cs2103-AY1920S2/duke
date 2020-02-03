@@ -15,9 +15,9 @@ public class Task {
 
     public String getIsDone() {
         if (this.isDone) {
-            return "[\u2713] ";
+            return "[O] ";
         } else {
-            return "[\u2718] ";
+            return "[X] ";
         }
     }
 

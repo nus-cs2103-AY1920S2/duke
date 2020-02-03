@@ -27,7 +27,8 @@ public class TaskList {
 
     public void addTask(Task task) {
         this.tasks.add(task);
-        Ui.printLines("Added: " + task.toString() + "\n     Now you have " + this.tasks.size() + " task(s) in the list.");
+        Ui.printLines("Added: " + task.toString() 
+            + "\n     Now you have " + this.tasks.size() + " task(s) in the list.");
     }
 
     public void deleteTask(int idx) {
@@ -35,8 +36,8 @@ public class TaskList {
             Task task = this.tasks.get(idx);
             this.tasks.remove(idx);
             Ui.printLines("Noted. I've removed this task:\n     "
-            + task.toString()
-            + "\n     Now you have " + this.tasks.size() + " tasks in the list.");
+                + task.toString()
+                + "\n     Now you have " + this.tasks.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             Ui.printLines("Task index is invalid. Try again!");
         }
@@ -125,7 +126,7 @@ public class TaskList {
         }
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = this.tasks.get(i);
-            String str = "\n     " + (i+1) + ".";
+            String str = "\n     " + (i + 1) + ".";
             str += task.toString();
             result += str;
         }
