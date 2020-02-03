@@ -34,7 +34,12 @@ public class Duke {
     public String getResponse(String input) {
         String[] inputs = input.split(" ", 2);
         try {
-            return parser.getCommandResponse(Parser.commandParser(inputs[0]), inputs[1]);
+            CommandType commandType = Parser.commandParser(inputs[0]);
+            if (inputs.length < 2) {
+                return parser.getCommandResponse(commandType, "");
+            } else {
+                return parser.getCommandResponse(commandType, inputs[1]);
+            }
         } catch (InvalidCommandException e) {
             return ui.say(SayType.INVALID_COMMAND);
         } catch (DukeDescriptionException e) {
@@ -82,21 +87,32 @@ public class Duke {
     }
 
     /**
+     * @return User Interface.
+     */
+    public Ui getUi() {
+        return ui;
+    }
+
+    /**
      * Constructs a Duke object with a filepath to store the task list.
      * @param filepath Filepath of the Duke storage.
      */
-    public Duke(String filepath) {
+    public Duke(String filepath, boolean isGui) {
         ui = new Ui();
         Calender calender = new Calender();
         Storage storage = new Storage(filepath);
         TaskList taskList = new TaskList(storage.printFileIntoList(calender));
-        sc = new Scanner(System.in);
-        parser = new Parser(taskList, calender, storage, sc);
+        if (isGui) {
+            parser = new Parser(ui, taskList, calender, storage);
+        } else {
+            sc = new Scanner(System.in);
+            parser = new Parser(taskList, calender, storage, sc);
+        }
     }
 
     public static void main(String[] args) {
         if (args.length > 0 && args[0].toUpperCase().equals("text")) {
-            new Duke("." + File.separator + "data" + File.separator + "Task.txt").run();
+            new Duke("." + File.separator + "data" + File.separator + "Task.txt", false).run();
         } else {
             Application.launch(GuiApp.class, args);
         }
