@@ -6,16 +6,30 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represents a command that adds item to list. A <code>AddCommand</code> object
  * corresponds to a command represented by the command and a description e.g.,
  * <code>"deadline", "read /by 2019-05-10 1800"</code>
  */
-public class Duke {
+public class Duke extends Application{
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+    }
 
     /**
      * Constructor for Duke object.
