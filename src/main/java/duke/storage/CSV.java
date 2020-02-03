@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class CSV implements Comparable<CSV> {
     String s;
     ArrayList<CSV> arr;
-    // private int type;
 
     public static void main(String[] args) {
         if (args.length > 0) {
