@@ -84,8 +84,8 @@ public class Duke {
                         tasks.addTask(todo);
                         ui.addedCommand();
                         System.out.println(todo.toString());
-                        int listSize = tasks.getTaskListSize();
-                        ui.taskInList(listSize);
+                        ui.taskInList(tasks.getTaskListSize());
+                        ui.showLine();
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException(ui.incompleteCommand("Todo"));
                     }
