@@ -38,54 +38,57 @@ public class Storage {
 
         FileReader in = new FileReader (filePath);
         BufferedReader br = new BufferedReader (in);
-
-        String loadTask = br.readLine();
-        while (loadTask != null) {
-            String type = loadTask.substring (0,1);
-            int indexOfDescription = loadTask.indexOf ("||");
-            switch (type) {
-                case "T":
-                    String descriptionOfLoadedTask = loadTask.substring (indexOfDescription + 2);
-                    Todo loadedT = new Todo (descriptionOfLoadedTask);
-                    if (loadTask.substring (2,3).equals ("1")) {
-                        loadedT.markAsDone();
-                        Duke.pendingTask--;
-                    }
-                    lst.add(loadedT);
-                    Duke.pendingTask++;
-                    break;
-                case "D":
-                case "E":
-                    int timeIndex = loadTask.indexOf ("|||");
-                    String loadedDescription = loadTask.substring(indexOfDescription + 2, timeIndex);
-                    if (type.equals ("D")) {
-                        LocalDate loadedDDate = LocalDate.parse (loadTask.substring (timeIndex + 3));
-                        Deadline loadedD = new Deadline (loadedDescription, loadedDDate);
-                        if (loadTask.substring (2,3).equals ("1")) {
-                            loadedD.markAsDone();
+        try {
+            String loadTask = br.readLine();
+            while (loadTask != null) {
+                String type = loadTask.substring(0, 1);
+                int indexOfDescription = loadTask.indexOf("||");
+                switch (type) {
+                    case "T":
+                        String descriptionOfLoadedTask = loadTask.substring(indexOfDescription + 2);
+                        Todo loadedT = new Todo(descriptionOfLoadedTask);
+                        if (loadTask.substring(2, 3).equals("1")) {
+                            loadedT.markAsDone();
                             Duke.pendingTask--;
                         }
-                        lst.add(loadedD);
+                        lst.add(loadedT);
                         Duke.pendingTask++;
-                    } else {
-                        LocalDate loadedEDate = LocalDate.parse (loadTask.substring (timeIndex + 3, timeIndex + 13));
-                        LocalTime loadedStart = LocalTime.parse (loadTask.substring (timeIndex + 14, timeIndex + 19));
-                        LocalTime loadedEnd   = LocalTime.parse (loadTask.substring (timeIndex + 20));
-                        Event loadedE = new Event (loadedDescription, loadedEDate, loadedStart, loadedEnd);
-                        if (loadTask.substring (2,3).equals ("1")) {
-                            loadedE.markAsDone();
-                            Duke.pendingTask--;
+                        break;
+                    case "D":
+                    case "E":
+                        int timeIndex = loadTask.indexOf("|||");
+                        String loadedDescription = loadTask.substring(indexOfDescription + 2, timeIndex);
+                        if (type.equals("D")) {
+                            LocalDate loadedDDate = LocalDate.parse(loadTask.substring(timeIndex + 3));
+                            Deadline loadedD = new Deadline(loadedDescription, loadedDDate);
+                            if (loadTask.substring(2, 3).equals("1")) {
+                                loadedD.markAsDone();
+                                Duke.pendingTask--;
+                            }
+                            lst.add(loadedD);
+                            Duke.pendingTask++;
+                        } else {
+                            LocalDate loadedEDate = LocalDate.parse(loadTask.substring(timeIndex + 3, timeIndex + 13));
+                            LocalTime loadedStart = LocalTime.parse(loadTask.substring(timeIndex + 14, timeIndex + 19));
+                            LocalTime loadedEnd = LocalTime.parse(loadTask.substring(timeIndex + 20));
+                            Event loadedE = new Event(loadedDescription, loadedEDate, loadedStart, loadedEnd);
+                            if (loadTask.substring(2, 3).equals("1")) {
+                                loadedE.markAsDone();
+                                Duke.pendingTask--;
+                            }
+                            lst.add(loadedE);
+                            Duke.pendingTask++;
                         }
-                        lst.add (loadedE);
-                        Duke.pendingTask++;
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
+                loadTask = br.readLine();
             }
-            loadTask = br.readLine();
+            br.close();
+        } catch (NullPointerException e) {
+
         }
-        br.close();
         return lst;
     }
 
@@ -98,7 +101,13 @@ public class Storage {
     public void saveFiles (TaskList taskList) throws IOException {
         ArrayList<Task> lst = taskList.getList();
         File file         = new File (filePath);
-        FileWriter fr     = new FileWriter (file, false);
+        FileWriter fr;
+        if (file.exists()) {
+            fr = new FileWriter (file, false);
+        } else {
+            file.createNewFile();
+            fr = new FileWriter(file);
+        }
         BufferedWriter bw = new BufferedWriter (fr);
         for (int i = 0; i < lst.size(); i++) {
             Task savedTask = lst.get(i);

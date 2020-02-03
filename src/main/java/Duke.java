@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents Duke, the task tracking smart bot
@@ -40,7 +41,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadFiles());
         } catch (Exception e) {
-            System.out.println("error somewhere");
+            tasks = new TaskList(new ArrayList<Task>());
         }
     }
 
