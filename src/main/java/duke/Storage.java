@@ -52,33 +52,33 @@ public class Storage {
                 int x = line.indexOf('|');
                 String command = line.substring(0, x-1);
                 switch (command) {
-                    case "T":
-                        ToDo task = new ToDo(line.substring(8), "");
-                        if (line.substring(4, 5).equals("1")) {
-                            task.markAsDone() ;
-                        }
-                        this.store.add(task);
-                        break;
-                    case "E":
-                        String details = line.substring(8);
-                        int y = details.indexOf('|');
-                        System.out.println(details);
-                        Event event = new Event(details.substring(0, y-1), details.substring(y+2));
-                        if (line.substring(4, 5).equals("1")) {
-                            event.markAsDone() ;
-                        }
-                        this.store.add(event);
-                        break;
-                    case "D":
-                        String detail = line.substring(8);
-                        int z = detail.indexOf('|');
-                        System.out.println(detail);
-                        Deadline deadline = new Deadline(detail.substring(0, z-1), detail.substring(z+2));
-                        if (line.substring(4, 5).equals("1")) {
-                            deadline.markAsDone() ;
-                        }
-                        this.store.add(deadline);
-                        break;
+                case "T":
+                    ToDo task = new ToDo(line.substring(8), "");
+                    if (line.substring(4, 5).equals("1")) {
+                        task.markAsDone() ;
+                    }
+                    this.store.add(task);
+                    break;
+                case "E":
+                    String details = line.substring(8);
+                    int y = details.indexOf('|');
+                    System.out.println(details);
+                    Event event = new Event(details.substring(0, y-1), details.substring(y+2));
+                    if (line.substring(4, 5).equals("1")) {
+                        event.markAsDone() ;
+                    }
+                    this.store.add(event);
+                    break;
+                case "D":
+                    String detail = line.substring(8);
+                    int z = detail.indexOf('|');
+                    System.out.println(detail);
+                    Deadline deadline = new Deadline(detail.substring(0, z-1), detail.substring(z+2));
+                    if (line.substring(4, 5).equals("1")) {
+                        deadline.markAsDone() ;
+                    }
+                    this.store.add(deadline);
+                    break;
                 }
             }
         } catch (Exception e) {
