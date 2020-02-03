@@ -6,9 +6,18 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * A class that represents a task with a deadline.
+ */
 class DeadlineTask extends Task {
     protected LocalDateTime time;
 
+    /**
+     * Constructs an DeadlineTask object.
+     *
+     * @param inputArr a String array that represents the input.
+     * @throws Exception if there is not enough information or wrong format is given.
+     */
     public DeadlineTask(String[] inputArr) throws Exception {
         this.type = "deadline";
         if (inputArr.length < 2) {
@@ -38,6 +47,12 @@ class DeadlineTask extends Task {
         }
     }
 
+
+    /**
+     * Returns the String representation of this DeadlineTask object.
+     *
+     * @return the String representation of this DeadlineTask object.
+     */
     @Override
     public String toString() {
         return " DEADLINE" + super.toString();

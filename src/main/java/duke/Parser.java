@@ -1,15 +1,23 @@
-package duke.Parser;
+package duke;
 
-import duke.Ui;
 import duke.command.*;
 import duke.task.Task;
 
 import java.util.Optional;
 
+/**
+ * The Parser class that parses user inputs
+ */
 public class Parser {
+    /**
+     * Parses a string input and returns a corresponding Command object.
+     *
+     * @param input the user input with type String.
+     * @return a Command object.
+     */
     public static Optional<Command> parse(String input) {
         String[] arr = input.split("\\s");
-        int index = 0;
+        int index;
 
         switch (arr[0].toLowerCase()) {
         case "bye":

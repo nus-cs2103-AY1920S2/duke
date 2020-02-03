@@ -10,13 +10,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * The Storage class that handles storage related businesses for the Duke program.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filePath the file path to the file that stores data for the Duke program.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Scans the file specified by the file path and output a list of Task objects.
+     *
+     * @return An ArrayList collection of Task objects.
+     */
     public ArrayList<Task> generateTaskList() {
         ArrayList<Task> lst = new ArrayList<>();
         try (Scanner scan = new Scanner(new File(filePath))) {
@@ -38,6 +51,11 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Writes the list of Task objects into the file specified by the file path.
+     *
+     * @param lst An ArrayList collection of Task objects.
+     */
     public void writeTask(ArrayList<Task> lst) {
         try (FileWriter writer = new FileWriter(filePath)) {
             String str = lst.stream()

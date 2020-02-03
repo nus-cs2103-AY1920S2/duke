@@ -1,4 +1,2 @@
-event,1,T
-event,get milk,T
-event,get a mobile phone,F
-deadline,get laptop by Mar 3 2020 08:30PM,F
+event,get milk at Feb 2 2020 08:20PM,F
+todo,get some milk,F

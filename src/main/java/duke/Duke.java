@@ -1,16 +1,23 @@
 package duke;
 
-import duke.Parser.Parser;
 import duke.command.Command;
 
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * The Duke program
+ */
 public class Duke {
     private String filePath;
     private Storage storageController;
     private Controller controller;
 
+    /**
+     * Constructs a Duke instance with the specified file path
+     *
+     * @param filePath a String value of the file path.
+     */
     public Duke(String filePath) {
         this.filePath = filePath;
         this.storageController = new Storage(this.filePath);

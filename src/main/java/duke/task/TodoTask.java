@@ -1,47 +1,32 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * A task to be done that has no time attribute.
+ */
 class TodoTask extends Task {
-    protected LocalDateTime time;
 
-    public TodoTask(String[] inputArr) throws Exception {
+    /**
+     * Constructs an TodoTask object.
+     *
+     * @param inputArr a String array that represents the input.
+     */
+    public TodoTask(String[] inputArr) {
         this.type = "todo";
-        if (inputArr.length < 2) {
-            throw new Exception("Todo tasks must have a non-empty description!");
-        }
+        size++;
         this.description = Arrays.stream(inputArr)
-                .map(str -> str.toLowerCase().equals("todo") ? "" : str.equals("/at") ? "at" : str)
+                .map(str -> str.toLowerCase().equals("todo") ? "" : str)
                 .collect(Collectors.joining(" "));
 
-        if (!this.description.contains("at")) {
-            throw new Exception("Missing @t");
-        }
-        int lastAt = description.lastIndexOf(" at ");
-        if (lastAt == -1) {
-            throw new Exception("Keyword \"by\" missing");
-        } else {
-            try {
-                this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
-                        DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));
-            } catch (DateTimeParseException e) {
-                try {
-                    this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
-                            DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
-                } catch (DateTimeParseException e2) {
-                    throw new Exception("Error: unable to decipher date & time input.");
-                }
-            }
-            this.description = this.description.substring(0, lastAt + 3) + ' '
-                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
-
-        }
     }
 
+    /**
+     * Returns the String representation of this TodoTask object.
+     *
+     * @return the String representation of this TodoTask object.
+     */
     @Override
     public String toString() {
         return " TODO" + super.toString();
