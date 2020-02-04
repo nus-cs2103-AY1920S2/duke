@@ -25,6 +25,19 @@ public class Tracker {
         this.totalTasks--;
     }
 
+    public Tracker find(String keyword) {
+        Tracker matchingTasks = new Tracker();
+
+        for (Task task : this.list) {
+            String taskDescription = task.getContent();
+            if (taskDescription.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
+    }
+
     public LinkedList<Task> showList() {
         return this.list;
     }

@@ -13,6 +13,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getContent() {
+        return this.content;
+    }
+
     public String toStore() {
         if (isDone) {
             return "[\u2713] " + content;

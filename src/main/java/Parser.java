@@ -5,7 +5,8 @@ public class Parser {
 
     public Parser(String command) throws DukeException {
         if (command.equals("bye")|command.equals("list")|command.equals("done")|command.equals("todo")
-                |command.equals("deadline")|command.equals("event")|command.equals("delete")) {
+                |command.equals("deadline")|command.equals("event")|command.equals("delete")
+                |command.equals("find")) {
             this.cmd = command.toLowerCase();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I dont know what that means :-(");
@@ -47,6 +48,10 @@ public class Parser {
 
     public boolean isDelete() {
         return this.cmd.equals("delete");
+    }
+
+    public boolean isFind() {
+        return this.cmd.equals("find");
     }
 
     public String getCommand() {

@@ -18,7 +18,7 @@ public class Ui {
     }
 
     public void showList(Tracker tracker) {
-        System.out.println("Here are the tasks in your list");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tracker.getTotalTasks(); i++) {
             int itemNo = i + 1;
             Task task = tracker.showList().get(i);
@@ -43,6 +43,17 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + content.getTask());
         System.out.println("Now you have " + tracker.getTotalTasks() + " task(s) in the list.");
+    }
+
+    public void showSearchResults(Tracker tracker, String keyword) {
+        Tracker results = tracker.find(keyword);
+
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < results.getTotalTasks(); i++) {
+            int itemNo = i + 1;
+            Task task = results.showList().get(i);
+            System.out.println(itemNo + "." + task);
+        }
     }
 
     public void showError(Exception exception) {
