@@ -1,19 +1,7 @@
-import java.util.Scanner;
-
 /**
  * Represents a ui object that deals with interactions with the user.
  */
 public class Ui {
-
-    Scanner sc;
-
-    /**
-     * Constructor for ui object.
-     */
-    public Ui() {
-        Scanner scanner = new Scanner(System.in);
-        this.sc = scanner;
-    }
 
     /**
      * Generates intro message.
