@@ -25,8 +25,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     private Storage storage;
     private TaskList tasks;
@@ -113,7 +113,7 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.sayHi()), new ImageView(duke)));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.sayHi()), new ImageView(duke)), new Label(Constant.LINE));
 
         // while (!isExit) {
         //     try {
@@ -155,9 +155,10 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label("\nUser: " + userInput.getText());
+        
         Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)), new Label(Constant.LINE),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke)), new Label(Constant.LINE));
         userInput.clear();
     }
 
