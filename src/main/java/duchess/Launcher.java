@@ -21,9 +21,9 @@ public class Launcher {
         final List<String> arguments = Arrays.asList(args);
         final int modeIndex = arguments.indexOf("-mode");
         final String mode = modeIndex == -1 ? "gui" : arguments.get(modeIndex + 1);
-        if ("console".equals(mode)) {
+        if ("console".equals(mode.toLowerCase())) {
             runConsole();
-        } else if ("gui".equals(mode)) {
+        } else if ("gui".equals(mode.toLowerCase())) {
             Application.launch(Main.class, args);
         } else {
             System.err.println("Bad mode: " + mode);
