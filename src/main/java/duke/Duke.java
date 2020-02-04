@@ -4,10 +4,11 @@ import duke.command.Command;
 
 import duke.exception.DukeException;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Duke {
+    // Duke components
+
     /** The save/loading mechanism. */
     private Storage storage;
     /** The list of tasks. */
@@ -29,6 +30,13 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList(); // Start a brand new task list if file cannot be found/opened.
         }
+    }
+
+    /**
+     * Constructs a new chat-bot Duke with the default save file location.
+     */
+    public Duke() {
+        this(getDefaultPath());
     }
 
     /** Call this to begin using the chat-bot. */
@@ -53,12 +61,27 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        // TODO: modify this method to behave like run()
+        return "Duke heard: " + input;
+    }
+
     /** The main entry point of the program. */
     public static void main(String[] args) {
-        // Save file named "tasks.txt"
-        // Located in "data" folder, found in the root of this working directory.
-        // Platform independent file directory
-        Path path = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt");
-        new Duke(path.toString()).run();
+        new Duke(getDefaultPath()).run();
+    }
+
+    /**
+     * Returns the os-dependent directory to the default save file location.
+     * This default save file location is {folder_enclosing_duke_program}->data->tasks.txt.
+     *
+     * @return the os-dependent directory to the default save file location.
+     */
+    private static String getDefaultPath() {
+        return Paths.get(System.getProperty("user.dir"), "data", "tasks.txt").toString();
     }
 }
