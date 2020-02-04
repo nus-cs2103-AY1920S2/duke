@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -109,13 +108,13 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -128,18 +127,18 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-    private void handleUserInput() {
-        String userTextInput = userInput.getText();
-        Label userText = new Label(userTextInput);
-        Label dukeText = new Label(getResponse(userTextInput));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
+//    private void handleUserInput() {
+//        String userTextInput = userInput.getText();
+//        Label userText = new Label(userTextInput);
+//        Label dukeText = new Label(getResponse(userTextInput));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userTextInput, new ImageView(user)),
+//                DialogBox.getDukeDialog(getResponse(userTextInput), new ImageView(duke))
+//        );
+//        userInput.clear();
+//    }
 
-    private String getResponse(String fullCommand) {
+    public String getResponse(String fullCommand) {
         String response = ui.divider("") + "\n";
         try {
             response += ui.divider("");
