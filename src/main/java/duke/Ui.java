@@ -65,7 +65,7 @@ public class Ui {
         System.out.println(lineBreak);
     }
 
-    public void errorMsg(DukeException e) {
+    public void errorMsg(DukeException e) { // error responses
         switch(e.error) {
             case NUMBER: // error in accessing list, no such task exists
                 System.out.println("SQUIRTLE cannot find task!!");
@@ -76,8 +76,9 @@ public class Ui {
             case COMMAND:
                 System.out.println("SQUIRTLE doesn't understand!!");
                 break;
-            default:
-                System.out.println("SQUIRTLE error!");
+            case DATEFORMAT:
+                System.out.println("SQUIRTLE doesn't understand this date!!");
+                break;
         }
     }
 

@@ -1,18 +1,20 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.utilities.TimeParser;
 
 public class Deadline extends Task implements TimeParser {
     protected LocalDate deadline;
 
-    public Deadline(String description, String deadline) { // constructor for creating new deadline
+    public Deadline(String description, String deadline) throws DateTimeParseException { // constructor for creating new deadline
         super(description);
         this.deadline = TimeParser.parseDate(deadline);
         super.TYPE = TaskType.DEADLINE;
     }
 
-    public Deadline(String status, String description, String deadline) { // constructor when parsing tasks from hard disk
+    public Deadline(String status, String description, String deadline) throws DateTimeParseException{ // constructor when parsing tasks from hard disk
         super(status, description);
         super.TYPE = TaskType.DEADLINE;
         this.deadline = TimeParser.parseDate(deadline);

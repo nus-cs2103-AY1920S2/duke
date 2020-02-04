@@ -3,6 +3,8 @@ package duke.utilities;
 import duke.commands.*;
 import duke.tasks.*;
 import duke.exceptions.*;
+
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public class Parser {
@@ -93,6 +95,9 @@ public class Parser {
         }
         catch(IllegalArgumentException e) { // catch wrong command given
             throw new DukeException(DukeError.COMMAND);
+        }
+        catch(DateTimeParseException e) { // catch wrong date format given
+            throw new DukeException(DukeError.DATEFORMAT);
         }
     }
 
