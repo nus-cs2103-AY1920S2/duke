@@ -115,6 +115,7 @@ public class Duke extends Application {
             System.out.println(e.getMessage());
         }
 
+
         dialogContainer.getChildren().add(getDialogLabel("Hello! I'm Duke\nWhat can I do for you?"));
 
         //step 3
