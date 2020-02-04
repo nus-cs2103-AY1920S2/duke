@@ -1,5 +1,6 @@
 package duke.javaFX;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -47,6 +48,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        System.out.println("HELLELELEO");
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -54,5 +56,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if(response.equals("     See ya later alligator!\n")){
+            new Thread( () -> {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ie) {
+                    ; //exception handling code
+                } finally {
+                    Platform.exit();
+                }
+            }).start();
+        }
     }
 }

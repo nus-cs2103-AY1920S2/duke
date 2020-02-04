@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,5 +32,10 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        TimeUnit.MILLISECONDS.sleep(50);
     }
 }
