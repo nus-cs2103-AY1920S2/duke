@@ -5,13 +5,19 @@ import dukeparser.DukeParser;
 import dukestorage.DukeStorage;
 import dukeui.DukeUI;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+
 import java.io.IOException;
 
 /**
  * Represents a Duke object that runs the main function of the program
  * Will run until user inputs 'bye' command or force quits the program.
  */
-public class Duke {
+public class Duke extends Application {
     private DukeList dl;
     private DukeStorage ds;
     private DukeUI ui;
@@ -57,5 +63,14 @@ public class Duke {
                 ui.showErrorMessage(e);
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
