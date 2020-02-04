@@ -10,11 +10,21 @@ public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Constructs a storage.
+     * @param filePath is the path to file.
+     * @throws IOException for file exceptions.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Saves the tasks into targeted file.
+     * @param tasks list of tasks.
+     * @throws IOException file exceptions.
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task task: tasks.getTasks()) {
@@ -23,6 +33,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads existing tasks in the file into array list of tasks.
+     * @return an arraylist of current tasks stored in file.
+     * @throws FileNotFoundException if the filePath is wrong.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         ArrayList<Task> taskList = new ArrayList<>();

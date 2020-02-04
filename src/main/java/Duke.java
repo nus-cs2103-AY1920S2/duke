@@ -8,7 +8,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-
+    /**
+     * Initializes Duke with its UI and file and load tasks into storage.
+     * @param filePath the file where tasks are loaded and saved to.
+     * @throws IOException if there are file exceptions.
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,8 +24,11 @@ public class Duke {
         }
     }
 
-
-    public void run () throws IOException {
+    /**
+     * Performs all functionalities of Duke chatbot.
+     * @throws IOException if there are file exceptions.
+     */
+    public void run() throws IOException {
         ui.print();
 
         while (ui.hasNextInput()) {

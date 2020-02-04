@@ -1,18 +1,18 @@
 public class Task {
     private String task;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void finishTask() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public boolean getStatus() {
-        return this.done;
+        return this.isDone;
     }
 
     public String getTask() {
@@ -21,7 +21,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return String.format("[^] %s", this.task);
         } else {
             return String.format("[x] %s", this.task);

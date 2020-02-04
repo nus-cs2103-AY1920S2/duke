@@ -12,28 +12,39 @@ public class Parser {
         this.input = input;
     }
 
-
-
+    /**
+     * Returns the command such as "todo", "deadline", "event".
+     * @return String command.
+     */
     public String getCommand() {
         inputs = input.split(" ");
         command = inputs[0];
         return command;
     }
 
+    /**
+     * Gets the task depending on the command.
+     * @return String representing task.
+     */
     public String getTask() {
         switch (command) {
         case "todo":
-            case "find":
-                return inputs[1];
+            return inputs[1];
+        case "find":
+            return inputs[1];
         case "deadline":
             return input.split(" /by")[0].split(" ", 2)[1];
         case "event":
             return input.split(" /at")[0].split(" ", 2)[1];
-            default:
+        default:
             return "";
         }
     }
 
+    /**
+     * Gets the date depending on whether task is "deadline" or "event".
+     * @return LocalDateTime object.
+     */
     public LocalDateTime getDate() {
         if (inputs[0].equals("deadline")) {
             String time = input.split(" /by")[1].substring(1);
@@ -48,6 +59,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the index for commands "done" and "delete".
+     * @param tasks is the list of tasks.
+     * @return an index integer for which task to manipulate.
+     * @throws EmptyDescriptionException if command lacks index description.
+     */
     public int getIndex(TaskList tasks) throws EmptyDescriptionException {
         if (input.split(" ").length == 1) {
             throw new EmptyDescriptionException("You forgot to mention the index!");
