@@ -2,6 +2,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import CustomException.DukeException;
 
 // These are not Strings; they are constant variables
 /* enum Op {
@@ -127,12 +128,6 @@ class Event extends Task {
     }
 }
 
-class DukeException extends Exception {
-    DukeException() {
-        super();
-    }
-}
-
 class Storage {
     private File database;
 
@@ -177,30 +172,32 @@ class TaskList {
     }
 
     private void load(ArrayList<String> contents) throws DukeException {
-        for (String str : contents) {
-            char type = str.charAt(0);
-            boolean done = Boolean.parseBoolean(str.substring(4, 5));
-            String description;
-            String byAt;
+        try {
+            for (String str : contents) {
+                char type = str.charAt(0);
+                boolean done = Boolean.parseBoolean(str.substring(4, 5));
+                String description;
+                String byAt;
 
-            // To Do
-            if (type == 'T') {
-                description = str.substring(8);
-                list.add(new ToDo(description, done));
-            } else {
-                int lastIndex = findThirdStrike(str) - 1;
-                description = str.substring(8, lastIndex);
-                byAt = str.substring(lastIndex + 3);
+                // To Do
+                if (type == 'T') {
+                    description = str.substring(8);
+                    list.add(new ToDo(description, done));
+                } else {
+                    int lastIndex = findThirdStrike(str) - 1;
+                    description = str.substring(8, lastIndex);
+                    byAt = str.substring(lastIndex + 3);
 
-                if (type == 'D') {
-                    list.add(new Deadline(description, done, LocalDate.parse(byAt)));
-                } else if (type == 'E') {
-                    list.add(new Event(description, done, LocalDate.parse(byAt)));
+                    if (type == 'D') {
+                        list.add(new Deadline(description, done, LocalDate.parse(byAt)));
+                    } else if (type == 'E') {
+                        list.add(new Event(description, done, LocalDate.parse(byAt)));
+                    }
                 }
             }
+        } catch (Exception e) {
+            throw new DukeException();
         }
-
-        throw new DukeException();
     }
 
     public void save(Storage storage) throws IOException {
@@ -364,6 +361,7 @@ class Ui {
                     System.out.println("Noted. I've removed this task: ");
                     System.out.println("\t" + rm.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    tasks.save(storage);
                 } catch (Exception e) {
                     System.out.println("Error: invalid (out of bounds) or non-integer entered");
                 }
