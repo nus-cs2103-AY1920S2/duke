@@ -1,9 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    protected String at;
+    protected LocalDate taskDate;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        if(at.contains("/")){
+            at = at.replaceAll("/", "-");
+        }
+        this.taskDate = LocalDate.parse(at);
     }
 
     public void printInit(){
@@ -16,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
