@@ -117,22 +117,31 @@ public class Duke {
         totalTasksCount++;
     }
 
-   // public static void writeFile(String message, String path) throws IOException {
-       // FileWriter writeFile = new FileWriter(path);
-       // writeFile.write(message);
-       // writeFile.close();
-        //try {
-            //writeFile("testing 123", PATH);
-        //} catch (IOException e) {
-            // could not write file
-        //}
-   // }
+   public static void writeFile() throws IOException {
+        FileWriter fw = new FileWriter(PATH);
+        int i = 0;
+        while (i < totalTasksCount){
+            fw.write(totalTasks[i].toString() + System.lineSeparator());
+            i++;
+        }
+        fw.close();
+    }
 
     public static void readFile() throws FileNotFoundException {
         File savedTaskList = new File(PATH);
         Scanner scanSavedTaskList = new Scanner(savedTaskList);
         while (scanSavedTaskList.hasNext()){
-            System.out.println(scanSavedTaskList.nextLine());
+            String content =  scanSavedTaskList.nextLine();
+
+            if (content.contains("[T]")) {
+                toDo("todo" + content.substring(content.indexOf(" ")));
+            } else if (content.contains("[D]")) {
+                deadline("deadline" + content.substring(content.indexOf(" "), content.indexOf("by:") - 1)
+                + "/by " + content.substring(content.indexOf("by:") + 4, content.length() - 1));
+            } else {
+                event("event" + content.substring(content.indexOf(" "), content.indexOf("at:") - 1)
+                        + "/at " + content.substring(content.indexOf("at:") + 4, content.length() - 1));
+            }
         }
     }
 
@@ -155,12 +164,35 @@ public class Duke {
                     done2();
                 } else if (userInput.contains("delete")){
                     delete(userInput);
+                    try {
+                        writeFile();
+                    } catch (IOException e) {
+                        System.out.println("Cannot write file");
+                    }
                 } else if (userInput.contains("todo")) {
                     toDo(userInput);
+                    totalTasks[totalTasksCount-1].printInit();
+                    try {
+                        writeFile();
+                    } catch (IOException e) {
+                        System.out.println("Cannot write file");
+                    }
                 } else if (userInput.contains("deadline")) {
                     deadline(userInput);
+                    totalTasks[totalTasksCount-1].printInit();
+                    try {
+                        writeFile();
+                    } catch (IOException e) {
+                        System.out.println("Cannot write file");
+                    }
                 } else {
                     event(userInput);
+                    totalTasks[totalTasksCount-1].printInit();
+                    try {
+                        writeFile();
+                    } catch (IOException e) {
+                        System.out.println("Cannot write file");
+                    }
                 }
             }
             userInput = input();
