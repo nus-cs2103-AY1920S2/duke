@@ -1,8 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.io.Serializer;
-import duke.io.Ui;
 import duke.task.TaskList;
 
 public class ExitCommand extends Command {
@@ -12,12 +10,11 @@ public class ExitCommand extends Command {
      * Serializes the input TaskList to file, and print a goodbye message.
      *
      * @param taskList The TaskList to serialize to file.
-     * @param ui The Ui used to print any notifications.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(TaskList taskList) {
         Serializer.serialize(taskList);
-        ui.printGoodbyeMessage();
+        System.out.println("Bye. Hope to never see you again!");
     }
 
     @Override

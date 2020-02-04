@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.AddCommand;
 import duke.exception.DukeException;
-import duke.io.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
@@ -36,27 +35,25 @@ public class DukeTest {
     @Test
     public void addCommandTest() throws DukeException {
         TaskList taskList = new TaskList();
-        Ui ui = new Ui(System.in);
         assertEquals(taskList.size(), 0);
-        new AddCommand(Task.TaskType.TASK_TYPE_TODO, "Test Todo").execute(taskList, ui);
+        new AddCommand(Task.TaskType.TASK_TYPE_TODO, "Test Todo").execute(taskList);
         assertEquals(taskList.size(), 1);
-        new AddCommand(Task.TaskType.TASK_TYPE_EVENT, "Test Event /at Test Location").execute(taskList, ui);
+        new AddCommand(Task.TaskType.TASK_TYPE_EVENT, "Test Event /at Test Location").execute(taskList);
         assertEquals(taskList.size(), 2);
-        new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, "Test Deadline /by 2020-01-01").execute(taskList, ui);
+        new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, "Test Deadline /by 2020-01-01").execute(taskList);
         assertEquals(taskList.size(), 3);
     }
 
     @Test
     public void dateTimeTest() throws DukeException {
         TaskList taskList = new TaskList();
-        Ui ui = new Ui(System.in);
-        new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, "Test Deadline /by 2020-01-01").execute(taskList, ui);
+        new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, "Test Deadline /by 2020-01-01").execute(taskList);
         assertEquals(taskList.size(), 1);
 
         boolean assertionThrown = false;
 
         try {
-            new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, "Test Deadline /by 2020991-01").execute(taskList, ui);
+            new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, "Test Deadline /by 2020991-01").execute(taskList);
         } catch (DukeException e) {
             assertionThrown = true;
         }

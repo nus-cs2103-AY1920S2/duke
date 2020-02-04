@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.io.Ui;
 import duke.task.TaskList;
 
 public class DoneCommand extends Command {
@@ -20,15 +19,14 @@ public class DoneCommand extends Command {
     /**
      *
      * @param taskList The TaskList to select task from.
-     * @param ui The Ui used to print any notifications.
      * @throws DukeException If the index to mark is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList) throws DukeException {
         DukeException.throwIf(!taskList.isIndexValid(indexToMarkAsDone), "The input index is out of bounds!");
         taskList.markAsDone(indexToMarkAsDone);
 
         // Temp for visualization. TODO: remove this.
-        new ListCommand().execute(taskList, ui);
+        new ListCommand().execute(taskList);
     }
 }

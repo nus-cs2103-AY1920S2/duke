@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.io.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -22,11 +21,10 @@ public class DeleteCommand extends Command {
      * Deletes the task in the input TaskList that matches the index that the user has requested to be deleted.
      *
      * @param taskList The TaskList to delete from.
-     * @param ui The Ui used to print any notifications.
      * @throws DukeException If the index to delete is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList) throws DukeException {
         DukeException.throwIf(!taskList.isIndexValid(indexToDelete), "The input index is out of bounds!");
         Task deletedTask = taskList.removeAtIndex(indexToDelete);
         System.out.println("You have removed the following task:\n" + deletedTask.toString());

@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.io.Ui;
 import duke.task.TaskList;
 
 import java.util.List;
@@ -24,11 +23,10 @@ public class FindCommand extends Command {
      * All matching tasks will be printed.
      *
      * @param taskList The TaskList to search.
-     * @param ui The Ui used to print results.
      * @throws DukeException If the search query is empty.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList) throws DukeException {
         DukeException.throwIf(searchQuery.equals(""), "The search term cannot be empty!");
         System.out.println("Here are the tasks matching your search query '" + searchQuery + "':");
         List<String> names = taskList.findTasks(this.searchQuery);

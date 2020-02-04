@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.io.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -29,11 +28,10 @@ public class AddCommand extends Command {
      * Adds a new task to the taskList, and output a notification through the ui.
      *
      * @param taskList The TaskList to add the new Task into.
-     * @param ui The Ui used to print any notifications.
      * @throws DukeException If an unsupported task type is found.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList) throws DukeException {
         DukeException.throwIf(inputArgs.equals(""), String.format("The description of a task cannot be empty!"));
         Task taskToAdd = null;
 
