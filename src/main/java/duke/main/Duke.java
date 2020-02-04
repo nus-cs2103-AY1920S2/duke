@@ -129,19 +129,30 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userTextInput = userInput.getText();
+        Label userText = new Label(userTextInput);
+        Label dukeText = new Label(getResponse(userTextInput));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    private String getResponse(String fullCommand) {
+        String response = ui.divider("") + "\n";
+        try {
+            response += ui.divider("");
+            Command c = Parser.parseCommand(fullCommand);
+            response += c.execute(tasks, storage, ui);
+            storage.updateStorage(tasks);
+        } catch (DukeException e) {
+            response += ui.showError(e);
+        } finally {
+            response += "\n" + ui.divider("");
+        }
+        return response;
     }
-
 
     /**
      * Executes the main function of Duke.

@@ -1,7 +1,8 @@
 package duke.ui;
 
-import java.util.Scanner;
 import duke.exception.DukeException;
+
+import java.util.Scanner;
 
 public class Ui {
     private Scanner scan = new Scanner(System.in);
@@ -13,7 +14,7 @@ public class Ui {
      */
     public void welcomeUser() {
         System.out.println("Hello, I am \n" + dukeLogo + "your personal buddy. What's up?\n"
-                + "____________________________________________________________\n");
+                + "______________________________________________________\n");
     }
 
     /**
@@ -28,13 +29,11 @@ public class Ui {
      * Prints out input String within two divider lines. If input string is empty, prints out single line.
      * @param s String to be wrapped by two divider lines.
      */
-    public void divider(String s) {
+    public String divider(String s) {
         if (s.length() == 0) {
-            System.out.println("____________________________________________________________\n");
+            return "";
         } else {
-            System.out.println("____________________________________________________________\n" + s + "\n"
-                    + "____________________________________________________________\n");
-            return;
+            return s;
         }
     }
 
@@ -51,16 +50,18 @@ public class Ui {
      * Prints input String.
      * @param s Input String.
      */
-    public void showMessage(String s) {
+    public String showMessage(String s) {
         System.out.println(s);
+        return s;
     }
 
     /**
      * Prints given DukeException.
      * @param e Input DukeException.
      */
-    public void showError(DukeException e) {
+    public String showError(DukeException e) {
         System.out.println(e.toString());
+        return e.toString();
     }
 
 }
