@@ -1,17 +1,15 @@
-public class Todo extends Item {
+package duke.task;
 
-    public Todo(String name) {
-        super(name);
-    }
+public class Todo extends Task {
 
-    public Todo(String name, boolean done) {
-        super(name, done);
+    public Todo(boolean isDone, String description) {
+        super(isDone, description);
     }
 
     public String toSaveFormat() {
         return String.format("T | %s", super.toSaveFormat());
     }
-
+    
     @Override
     public String toString() {
         return "[T]" + super.toString();
