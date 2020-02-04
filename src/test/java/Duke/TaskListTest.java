@@ -10,7 +10,7 @@ public class TaskListTest {
     public void testTaskListAddTask() {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("Borrow book"));
-        Assertions.assertEquals(tasks.get(0).toString(), "[T][x] Borrow book");
+        Assertions.assertEquals(tasks.get(0).toString(), "[T][" + "\u2718" + "] Borrow book");
     }
 
     @Test
