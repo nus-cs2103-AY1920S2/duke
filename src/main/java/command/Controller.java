@@ -9,7 +9,7 @@ import tasks.Todo;
 import java.time.LocalDate;
 
 public class Controller {
-    public static String readInput(String input) {
+    public static String readInput(String input) throws DukeException {
         String[] parsedInput = input.split(" ", 2);
         try {
             switch (parsedInput[0]) {
@@ -37,6 +37,12 @@ public class Controller {
                     int doneTaskNumber = Integer.parseInt(parsedInput[1]);
                     Task taskDone = TaskList.markAsDone(doneTaskNumber);
                     return UI.DONE + taskDone;
+                case "find":
+                    if (parsedInput.length < 2) {
+                        throw new DukeException("\tPlease indicate a keyword.");
+                    }
+                    String keyword = parsedInput[1];
+                    return TaskList.findTaskContainingKeyword(keyword);
                 case "todo":
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");

@@ -58,6 +58,18 @@ public class TaskList {
         }
     }
 
+    public static String findTaskContainingKeyword(String keyword) {
+        String printedList = "";
+        int taskNumber = 1;
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
+                taskNumber++;
+            }
+        }
+        return printedList;
+    }
+
     public static String printList() {
         String printedList = "";
         int taskNumber = 1;

@@ -1,4 +1,7 @@
-import command.*;
+import command.Controller;
+import command.DukeException;
+import command.Storage;
+import command.UI;
 
 import java.util.Scanner;
 
@@ -13,11 +16,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        boolean isRunning = true;
         System.out.println(UI.START);
         printOutput(UI.HELLO);
         Scanner sc = new Scanner(System.in);
         Storage.readFromFile();
+        boolean isRunning = true;
 
         while (isRunning) {
             try {
