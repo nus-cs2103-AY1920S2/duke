@@ -7,6 +7,7 @@ public class ToDoTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[T][✘] return book", new ToDo("return book"));
+        assertEquals("[T][✘] return book",
+                new ToDo("return book").toString());
     }
 }
