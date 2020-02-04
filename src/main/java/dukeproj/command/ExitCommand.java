@@ -11,4 +11,9 @@ public class ExitCommand extends Command {
     public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender) {
         return ui.say(SayType.EXIT);
     }
+
+    @Override
+    public boolean isExit() {
+        return true;
+    }
 }

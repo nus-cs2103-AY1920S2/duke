@@ -13,4 +13,7 @@ public abstract class Command {
     public abstract String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
             throws BadDescriptionException, DukeDescriptionException, BadDateException;
 
+    public boolean isExit() {
+        return false;
+    }
 }
