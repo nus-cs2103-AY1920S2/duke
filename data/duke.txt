@@ -1,5 +1,4 @@
 T | 1 | read book
-E | 0 | meeting | 2pm | 2020-02-06
 D | 0 | submit quiz | 3pm | 2020-02-06
-T | 0 | doodle
+T | 1 | doodle
 T | 0 | bloobloop
