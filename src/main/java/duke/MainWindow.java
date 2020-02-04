@@ -41,12 +41,12 @@ public class MainWindow extends AnchorPane {
         duke = d;
 
         if (!d.isLoaded()) {
-            dialogContainer.getChildren().add(
+            addDialogBox(
                     DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage)
             );
         }
 
-        dialogContainer.getChildren().add(
+        addDialogBox(
                 DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
         );
     }
@@ -58,13 +58,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        dialogContainer.getChildren().add(
+        addDialogBox(
                 DialogBox.getUserDialog(input, userImage)
         );
 
         if (!duke.isExit()) {
             String response = duke.getResponse(input);
-            dialogContainer.getChildren().add(
+            addDialogBox(
                     DialogBox.getDukeDialog(response, dukeImage)
             );
         }
@@ -72,11 +72,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    /*
-    TODO: Replace adding dialog boxes with a varags method
-
+    /**
+     * Adds a list of dialog boxes.
+     *
+     * @param dialogBoxes a list of dialog boxes.
+     */
     private void addDialogBox(DialogBox... dialogBoxes) {
         dialogContainer.getChildren().addAll(dialogBoxes);
     }
-    */
 }
