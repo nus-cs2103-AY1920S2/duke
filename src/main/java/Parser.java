@@ -37,14 +37,6 @@ public class Parser {
         return command.split(" ")[0];
     }
 
-    /**
-     * Returns the next command entered by the client.
-     *
-     * @return The String, regarding the command entered.
-     */
-    public String getCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Removes redundant blank spaces before and/or after a string command.

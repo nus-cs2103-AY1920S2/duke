@@ -26,7 +26,7 @@ public class Ui {
      * Prints a horizontal line.
      */
     private void printLine() {
-        print("____________________________________________________________");
+        print("____________________________________________________");
     }
 
     /**
@@ -105,6 +105,7 @@ public class Ui {
     public void printBye() {
         print("Bye. Hope to see you again soon!");
         printLine();
+        System.exit(0);
     }
 
 }
