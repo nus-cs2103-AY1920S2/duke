@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Ellipse;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -34,9 +35,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+        double width = displayPicture.getFitWidth();
+        double height = displayPicture.getFitHeight();
+        Ellipse ellipse = new Ellipse(width / 2, height / 2, width / 2, height / 2);
+        displayPicture.setClip(ellipse);
     }
 
     /**
@@ -46,7 +50,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
     }
 
     /**
