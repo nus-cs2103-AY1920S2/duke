@@ -49,7 +49,6 @@ public class Duke extends Application {
     private VBox dialog;
     private TextField input;
     private Button enterButton;
-    private Scene scene;
 
     /**
      * Main program of 4LC3N-BOT
