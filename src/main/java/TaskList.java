@@ -169,6 +169,8 @@ public class TaskList {
         }
     }
 
+    // Temporary method for GUI.
+    // TODO: Refactor this to something nicer
     public String findToString(String args) {
 
         TaskList matches = new TaskList();
