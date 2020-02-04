@@ -5,7 +5,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-// deals with making sense of the user command
+
+/**
+ * <h1> Parser</h1>
+ * The Parser class handles directly the user's commmand. After parsing the command, the Parser object will call the
+ * relevant methods in response to the command.
+ * <p> A Parser object has Storage, Ui, TaskList and Scanner objects as its attribute</p>
+ */
 public class Parser {
     private Storage storage;
     private Ui ui;
@@ -19,6 +25,12 @@ public class Parser {
         this.sc = sc;
     }
 
+    /**
+     * This method makes sense of the user's command and calls the appropriate methods in response to the user's command
+     * @param command This is the user's command
+     * @throws DukeException
+     * @throws IOException
+     */
     public void parse(String command) throws DukeException, IOException {
         if (command.equals("list")) {
             this.ui.printList();
