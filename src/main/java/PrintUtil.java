@@ -4,16 +4,24 @@ import java.io.PrintStream;
  * Class containing static methods for printing formatted text to the UI.
  */
 public class PrintUtil {
-    private static final int PRINT_INDENT_LEVELS = 4;
+    private static int indentLevel = 4;
     private static String buffer = ""; //TODO: replace with char buffer
+    
+    /**
+     * Sets the indentation level of indented lines printed.
+     * @param indentLevel Number of spaces of indentation
+     */
+    public static void setIndentLevel(int indentLevel) {
+        PrintUtil.indentLevel = indentLevel;
+    }
     
     private static String indentString(String s) {
         //https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
-        return s.replaceAll("(?m)^", " ".repeat(PRINT_INDENT_LEVELS));
+        return s.replaceAll("(?m)^", " ".repeat(indentLevel));
     }
     
     /**
-     * Prints each line of the provided string indented with `PRINT_INDENT_LEVELS` spaces,
+     * Prints each line of the provided string indented with `indentLevel` spaces,
      * followed by a new line.
      * @param s String to print
      */
@@ -34,7 +42,7 @@ public class PrintUtil {
     }
     
     /**
-     * Prints the header line indented with `PRINT_INDENT_LEVELS` spaces.
+     * Prints the header line indented with `indentLevel` spaces.
      * This is needed for printing the boxes seen in the UI.
      */
     public static void printHeaderLine() {

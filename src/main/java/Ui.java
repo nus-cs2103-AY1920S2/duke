@@ -91,4 +91,9 @@ interface Ui {
      * This method only prints the header message.
      */
     public void showMatchingTasksMessage();
+    
+    /**
+     * Closes and cleans up resources held by the UI.
+     */
+    public void close();
 }

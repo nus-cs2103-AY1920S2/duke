@@ -1,4 +1,4 @@
-//import javafx.application.Application;
+import javafx.application.Application;
 
 public class Launcher {
     /**
@@ -8,15 +8,15 @@ public class Launcher {
      * </a>
      */
     public static void main(String[] args) {
-        //
-        Duke duke = new Duke();
         /*
-        Application.launch(Gui.class, duke, args); //does this accept arbitrary arguments?
+        Duke duke = new Duke();
+        Application.launch(Gui.class, args); //does this accept arbitrary arguments?
         
         //after GUI terminates??
+        //duke.run();
+        
         duke.saveTasks();
         */
-        duke.run();
-        duke.saveTasks();
+        Application.launch(Duke.class, args);
     }
 }

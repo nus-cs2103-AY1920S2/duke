@@ -141,5 +141,12 @@ public class Cli implements Ui {
     public void showMatchingTasksMessage() {
         PrintUtil.indentedPrintln("Here are the matching tasks in your list:");
     }
+    
+    /**
+     * Closes and cleans up resources held by the UI.
+     * This method does nothing for the command-line interface.
+     */
+    public void close() {
+    }
 }
 
