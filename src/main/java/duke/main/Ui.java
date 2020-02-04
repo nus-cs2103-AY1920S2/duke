@@ -13,6 +13,7 @@ import java.util.Scanner;
  * Can be expanded to handle internationalisation
  */
 public class Ui {
+    static String buffer = "";
     /**
      * Scanner object to get User input
      */
@@ -22,14 +23,14 @@ public class Ui {
      * Display message of error that occurred during loading
      */
     public static void showLoadingError() {
-        System.out.println("Error loading Storage module. Your tasks may not be loaded or saved.");
+        print("Error loading Storage module. Your tasks may not be loaded or saved.");
     }
 
     /**
      * Prints out initial prompt
      */
     public static void start() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        print("Hello! I'm Duke\nWhat can I do for you?");
 
     }
 
@@ -37,7 +38,7 @@ public class Ui {
      * Prints out ending prompt
      */
     public static void end() {
-        System.out.println("Bye. Hope to see you again soon!");
+        print("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -53,7 +54,7 @@ public class Ui {
      * @param object Object to be printed
      */
     public static void print(Object object) {
-        System.out.println(object);
+        buffer += "\n" + object.toString();
     }
 
     /**
@@ -61,7 +62,7 @@ public class Ui {
      * @param line String to be printed
      */
     public static void print(String line) {
-        System.out.println(line);
+        buffer += "\n" + line;
     }
 
     /**
@@ -70,7 +71,7 @@ public class Ui {
      */
     public static void print(List<String> lines) {
         for (String line : lines) {
-            System.out.println(line);
+            print(line);
         }
     }
 
@@ -174,5 +175,11 @@ public class Ui {
      */  
     public static void printException(Exception ex) {
         print(ex);
+    }
+
+    public static String getBuffer() {
+        String buffer = Ui.buffer;
+        Ui.buffer = "";
+        return buffer;
     }
 }

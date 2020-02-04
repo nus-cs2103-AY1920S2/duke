@@ -116,7 +116,7 @@ public class Storage {
     /**
      * Saves TaskLists to a specified file
      */
-    private void saveFile() {
+    private void saveFile(List<Task> taskList) {
         FileOutputStream fi = null;
         ObjectOutputStream oi = null;
         File file = null;
