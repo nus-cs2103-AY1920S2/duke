@@ -1,3 +1,4 @@
+import javafx.fxml.FXML;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,6 +16,8 @@ public class Duke {
 
     private String FilePath;
 
+    public Duke() {}
+
     public Duke(String filePath) {
         // Initialize the taskList from Storage class
         FilePath = filePath;
@@ -28,6 +31,14 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    @FXML
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     /**
      * Find out the type of command and execute it.
