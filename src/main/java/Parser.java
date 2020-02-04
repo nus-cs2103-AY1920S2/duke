@@ -28,7 +28,8 @@ public class Parser {
         if (command.split(" ").length == 1) {
             String wrongCmd = command.split(" ")[0];
             if (wrongCmd.equals("todo") || wrongCmd.equals("deadline") || wrongCmd.equals("event")) {
-                throw new DukeInvalidCommandException("☹ OOPS!!! The description of a " + wrongCmd + " cannot be empty.");
+                throw new DukeInvalidCommandException("☹ OOPS!!! The description of a " + wrongCmd
+                        + " cannot be " + "empty.");
             } else {
                 throw new DukeInvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -36,14 +37,6 @@ public class Parser {
         return command.split(" ")[0];
     }
 
-    /**
-     * Returns the next command entered by the client.
-     *
-     * @return The String, regarding the command entered.
-     */
-    public String getCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Removes redundant blank spaces before and/or after a string command.

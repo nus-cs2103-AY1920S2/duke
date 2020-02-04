@@ -1,4 +1,6 @@
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,32 +9,47 @@ import java.util.List;
  * The Duke class is the main class,
  * where the command processing happens.
  */
+
 public class Duke {
 
-    private static Ui uI;
-    private static Parser parser;
+    private static Ui uI = new Ui();
+    private static Parser parser = new Parser();
+    private static Storage storage = new Storage();
 
     /**
      * Construct a new Duke instance.
-     * First greets the user and then loads the task data from file.
      */
     public Duke() {
-        Storage storage = new Storage();
-        uI = new Ui();
-        parser = new Parser();
-        uI.greet();
-        while (true) {
-            try {
-                tasks = storage.loadFile();
-                run();
-                storage.saveFile(tasks);
-                System.exit(0);
-            } catch (IOException | DukeException e) {
-                uI.printError(e);
-            } catch (DateTimeParseException d) {
-                uI.printInvalidDateFormatError();
-            }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    PrintStream helper;
+    Boolean hasStart = false;
+
+    protected String getResponse(String input) throws DukeException, DateTimeParseException, IOException {
+
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        tasks = storage.loadFile();
+        if (!hasStart) {
+            uI.greet();
+            hasStart = true;
         }
+        if (input.contains("bye")) {
+            uI.printBye();
+        } else {
+            run(input);
+        }
+        return baos.toString();
     }
 
     private static List<Task> tasks = new ArrayList<>();
@@ -52,35 +69,27 @@ public class Duke {
      * @throws DukeException If the command is invalid or the task enquired doesn't exists.
      * @throws DateTimeParseException If the date of the deadline or event is not formatted properly.
      */
-    private static void run() throws DukeException, DateTimeParseException {
+    private static void run(String input) throws DukeException, DateTimeParseException, IOException {
         TaskList taskList = new TaskList(tasks);
-        String command = parser.getCommand();
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                uI.displayTasks(tasks);
-            } else if (command.contains("find")) {
-                uI.displayFoundTasks(taskList.findTask(parser.trimCommand("find", command)));
-            } else {
-                switch (parser.checkCommand(command)) {
-                case "done":
-                    tasks = taskList.markAsDone(command);
-                    break;
-                case "delete":
-                    tasks = taskList.deleteTask(command);
-                    break;
-                default:
-                    tasks = taskList.addTask(command);
-                    break;
-                }
+        String command = input;
+        if (command.equals("list")) {
+            uI.displayTasks(tasks);
+        } else if (command.contains("find")) {
+            uI.displayFoundTasks(taskList.findTask(parser.trimCommand("find", command)));
+        } else {
+            switch (parser.checkCommand(command)) {
+            case "done":
+                tasks = taskList.markAsDone(command);
+                break;
+            case "delete":
+                tasks = taskList.deleteTask(command);
+                break;
+            default:
+                tasks = taskList.addTask(command);
+                break;
             }
-            command = parser.getCommand();
         }
-        uI.printBye();
+        storage.saveFile(tasks);
     }
-
-    public static void main(String[] args) {
-        new Duke();
-    }
-
 }
 

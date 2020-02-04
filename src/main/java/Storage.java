@@ -66,6 +66,8 @@ public class Storage {
                 }
                 tasks.add(event);
                 break;
+            default:
+                break;
             }
         }
         return tasks;
