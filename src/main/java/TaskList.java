@@ -12,6 +12,10 @@ public class TaskList {
 
     }
 
+    public List<Task> getList(){
+        return usrInputs;
+    }
+
     /**
      * Lists all the tasks in the list of tasks
      */

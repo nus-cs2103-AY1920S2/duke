@@ -107,8 +107,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -122,19 +122,5 @@ public class Duke extends Application {
         return parser.parse(input);
     }
 
-    /**
-     * Greets the user. Passes control to parser to deal with user inputs until the user is done. Then says bye.
-     * @param args
-     */
-    public static void main(String[] args) {
-        Parser parser = new Parser();
-        Ui.greet();
 
-
-        Ui.sayBye();
-
-
-
-
-    }
 }

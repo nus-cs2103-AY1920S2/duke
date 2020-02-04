@@ -1,9 +1,16 @@
+import java.io.IOException;
+
 public class byeAction implements Action {
     /**
      * Just does nothing
      * @param tasks
      */
     public String doSomething(TaskList tasks) {
+        try {
+            Storage.storeIntoFile(tasks.getList());
+        } catch(IOException e){
+            System.err.println(e);
+        }
         return "Goodbye! Hope to see you soon!";
     }
 
