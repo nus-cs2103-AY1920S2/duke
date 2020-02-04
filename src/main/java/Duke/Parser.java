@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * <h1> Parser</h1>
- * The Parser class handles directly the user's commmand. After parsing the command, the Parser object will call the
+ * The Parser class handles directly the user's command. After parsing the command, the Parser object will call the
  * relevant methods in response to the command.
  * <p> A Parser object has Storage, Ui, TaskList and Scanner objects as its attribute</p>
  */
