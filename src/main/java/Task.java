@@ -7,7 +7,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.taskNo++;
+        taskNo++;
     }
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -25,7 +25,7 @@ public abstract class Task {
     public abstract void printInit();
 
     public String toString(){
-        if(isDone == true) {
+        if(isDone) {
             reply = "\u2713";
         } else {
             reply = "\u2718";
