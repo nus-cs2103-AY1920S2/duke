@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * <h1> Storage </h1>
+ * The Storage class handles the loading of tasks from the disk and saving tasks to the disk. The Storage class contains
+ * a TaskList object as its attribute. This class has two methods: load() and save().
+ */
 public class Storage {
     private TaskList taskList;
 
@@ -14,6 +19,10 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /**
+     * This method loads the existing tasks from disk into the TaskList object.
+     * @throws FileNotFoundException
+     */
     public void load() throws FileNotFoundException {
         String filePath = "Data/Duke.txt";
         File file = new File(filePath);
@@ -41,6 +50,10 @@ public class Storage {
         }
     }
 
+    /**
+     * This method loads the tasks from the TaskList object into the disk
+     * @throws IOException
+     */
     public void save() throws IOException {
         String filePath = "Data/Duke.txt";
         FileWriter fw = new FileWriter(filePath);
