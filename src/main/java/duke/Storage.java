@@ -34,7 +34,7 @@ public class Storage {
             while (s.hasNextLine()) {
                 String curr = s.nextLine();
                 String type = curr.substring(0, 1);
-                String isDone = curr.substring(2,3);
+                String isDone = curr.substring(2, 3);
                 Task add;
                 if (type.equals("T")) {
                     add = new ToDo(curr.substring(4), isDone.equals("0") ? false : true);
@@ -60,6 +60,7 @@ public class Storage {
     /**
      * Update information to the file specified for this Storage
      * by adding on a new task object.
+     *
      * @param updatedTask Task to be updated
      **/
     static void updateDrive(Task updatedTask) {
@@ -71,13 +72,14 @@ public class Storage {
             writer.newLine();
             writer.close();
         } catch (IOException e) {
-            //System.out.println("Cannot find file");
+            System.out.println("File duke.txt to be updated cannot be found");
         }
     }
 
     /**
      * Update information to the file specified for this Storage
      * by removing on a new task object.
+     *
      * @param size The order of the task that are to be removed
      **/
     static void deleteDrive(int size) {
@@ -105,7 +107,11 @@ public class Storage {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-        } catch (IOException ie) { }
+            System.out.println("File duke.txt to be updated cannot be found");
+        } catch (IOException ie) {
+            System.out.println("File duke.txt to be updated cannot be found");
+        }
     }
-
 }
+
+

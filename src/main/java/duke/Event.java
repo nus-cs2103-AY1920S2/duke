@@ -35,8 +35,8 @@ public class Event extends Task {
      * @return The string of event task to be displayed to user.
      */
     public String toString() {
-        return "[E]" + super.toString() + "(at: " +
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
+        return "[E]" + super.toString() + "(at: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
     }
 
     /**
@@ -44,8 +44,8 @@ public class Event extends Task {
      * @return The string of event task to be written to the file and saved.
      */
     public String writeDrive() {
-        return "E|" + (super.isDone() ? "1|" : "0|") + this.name + "|" +
-                date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
+        return "E|" + (super.isDone() ? "1|" : "0|") + this.name + "|"
+                + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
     }
 
     /**
