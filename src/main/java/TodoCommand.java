@@ -8,6 +8,4 @@ public class TodoCommand extends Command {
         this.command = "todo";
         this.task = t;
     }
-
-
 }

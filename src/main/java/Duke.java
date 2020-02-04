@@ -4,7 +4,6 @@
  *
  */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -34,16 +33,16 @@ public class Duke {
         boolean isFinished = false;
         while (!(isFinished)) {
             try {
-            String inputFromUser = ui.handleInput();
-               Command c = Parser.parse(inputFromUser);
-            if (c == null) {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
-            }
-               tasks.runCommand(c);
-            if (c.getCommand().equals("bye")) {
-                isFinished = true;
-            }
-        } catch (DukeException e) {
+                String inputFromUser = ui.handleInput();
+                Command c = Parser.parse(inputFromUser);
+                if (c == null) {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
+                }
+                tasks.runCommand(c);
+                if (c.getCommand().equals("bye")) {
+                    isFinished = true;
+                }
+            } catch (DukeException e) {
                 System.out.println("Invalid command received: " + e.getMessage());
             } finally {
                 this.storage.save(tasks);
@@ -51,7 +50,6 @@ public class Duke {
         }
         ui.terminateMessage();
     }
-
 
     public static void main(String[] args) {
         Duke duke = new Duke("./data/duke.txt");

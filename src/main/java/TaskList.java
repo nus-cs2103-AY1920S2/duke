@@ -8,7 +8,7 @@ public class TaskList {
     private ArrayList<Task> listOfTexts;
 
     public TaskList(ArrayList<Task> listOfTasks) {
-        this.listOfTexts = listOfTasks; // need to implement storage
+        this.listOfTexts = listOfTasks;
     }
 
     public TaskList() {
@@ -43,7 +43,6 @@ public class TaskList {
      * @param command Type of Command described by .getCommand() which return a <code>String</code> description.
      */
     public void runCommand(Command command) {
-
         try {
             switch (command.getCommand()) {
                 case "bye": {
@@ -92,9 +91,5 @@ public class TaskList {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
-
-
 }

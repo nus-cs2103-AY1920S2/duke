@@ -7,5 +7,4 @@ public class ListCommand extends Command {
         super();
         this.command = "list";
     }
-
 }

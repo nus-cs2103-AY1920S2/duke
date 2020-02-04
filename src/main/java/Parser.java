@@ -13,7 +13,6 @@ public class Parser {
      * @return Command to run. Returns null when no input matches the correct Commands.
      */
     static Command parse(String text) {
-
         if (text.toLowerCase().equals(exitInput)) {
             return new ByeCommand();
         }
@@ -105,7 +104,6 @@ public class Parser {
             }
 
         }
-        // need to return a null command
         return null;
     }
 }
