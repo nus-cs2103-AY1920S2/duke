@@ -49,30 +49,31 @@ public class ChatBox {
         fw.close();
     }
 
-    public void reply(Message input) {
+    public String reply(Message input) {
+        String replyMsg = "";
         String[] msg = input.getMsg().split(" ");
         String key = msg[0];
         try {
             switch (key) {
             case "bye":
-                Message.end();
+                replyMsg = Message.end();
                 hasClosed = false;
                 break;
             case "list":
-                folder.show();
+                replyMsg = folder.show();
                 break;
             case "done":
                 int i = Integer.parseInt(msg[1]);
-                folder.finishTasks(i);
+                replyMsg = folder.finishTasks(i);
                 save();
                 break;
             case "delete":
                 int b = Integer.parseInt(msg[1]);
-                folder.deleteTasks(b);
+                replyMsg = folder.deleteTasks(b);
                 save();
                 break;
             case "find":
-                folder.find(msg[1]);
+                replyMsg = folder.find(msg[1]);
                 break;
             default:
                 Tasks tasks;
@@ -93,9 +94,8 @@ public class ChatBox {
                     throw new IllegalArgumentException("wrong liao");
                 }
                 folder.add(tasks);
-                tasks.added();
+                replyMsg = tasks.added();
                 save();
-
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             String er = "OOPS!! The description of a " + key + " cannot be empty";
@@ -107,6 +107,7 @@ public class ChatBox {
             String er = "OOPS!!! No such directory to save the file...";
             System.out.println(new DukeException(er));
         }
+        return replyMsg;
     }
 
     public void initialise() {

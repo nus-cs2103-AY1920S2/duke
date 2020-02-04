@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import packagedirectory.test.ChatBox;
+import packagedirectory.test.Message;
 
 public class Duke extends Application {
 
@@ -119,7 +120,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-
+        //String output = chatBox.reply(new Message(input));
         return "Duke heard: " + input;
     }
 }
