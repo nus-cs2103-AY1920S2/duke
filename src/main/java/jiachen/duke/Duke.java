@@ -75,7 +75,9 @@ public class Duke {
     new Duke("./data/duke.txt").run();
   }
 
-  /** the Main entry point into the Duke program */
+  /**
+   * the Main entry point into the Duke program
+   */
   public void run() {
 
     ui.printHeader();
