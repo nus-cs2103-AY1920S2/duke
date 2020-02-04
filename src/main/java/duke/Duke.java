@@ -7,6 +7,7 @@ import duke.exception.DukeNoSuchInputException;
 import duke.exception.DukeProgramTerminatedException;
 import duke.storage.Storage;
 import duke.ui.Gui;
+import duke.ui.TextUi;
 import duke.ui.Ui;
 import duke.utils.TaskList;
 
@@ -18,8 +19,8 @@ public class Duke {
     private TaskList tasks;
     private boolean hasTerminated;
 
-    private Duke() {
-        this.ui = new Gui();
+    private Duke(boolean useCli) {
+        this.ui = (useCli) ? new TextUi() : new Gui();
         this.storage = new Storage();
         this.hasTerminated = false;
         try {
@@ -30,8 +31,12 @@ public class Duke {
     }
 
     public static Duke getProgram() {
+        return Duke.getProgram(new String[0]);
+    }
+
+    private static Duke getProgram(String[] args) {
         if (Duke.program == null) {
-            Duke.program = new Duke();
+            Duke.program = new Duke(args.length == 1 && args[0].equals("-t"));
         }
         return Duke.program;
     }
@@ -88,7 +93,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke.getProgram().run();
+        Duke.getProgram(args).run();
         System.exit(0);
     }
 }
