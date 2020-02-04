@@ -35,23 +35,24 @@ public class Command {
         return this.isExit;
     }
 
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        String result = "";
         switch (this.commandWord) {
         case "bye":
-            ui.showMessage("Aww okay, see you next time!");
+            result += ui.showMessage("Aww okay, see you next time!");
             this.isExit = true;
             break;
         case "list":
             if (taskList.getTaskList().size() < 1) {
-                ui.showMessage("no tasks");
+                result += ui.showMessage("no tasks");
                 break;
             } else {
-                System.out.println("Here are the tasks in your list:");
+                result += ("Here are the tasks in your list:\n");
                 int index = 1;
                 String output = "";
                 for (Task t : taskList.getTaskList()) {
                     output = index + ". " + t.toString();
-                    System.out.println(output);
+                    result += output + "\n";
                     index++;
                 }
             }
@@ -71,7 +72,7 @@ public class Command {
 
             int taskNum = Integer.parseInt(this.elements[1]);
             taskList.getTaskList().get(taskNum - 1).setDone();
-            ui.showMessage(
+            result += ui.showMessage(
                     "Nice! I've marked this task as done:\n" + taskList.getTaskList().get(taskNum - 1).toString());
             break;
         }
@@ -90,8 +91,9 @@ public class Command {
             }
 
             int taskNum = Integer.parseInt(elements[1]);
-            System.out.println(
-                    "Boi. I've went and deleted that task \n" + taskList.getTaskList().get(taskNum - 1).toString());
+            result += (
+                    "Boi. I've went and deleted that task \n" + taskList.getTaskList().get(taskNum - 1).toString())
+                    + "\n";
             taskList.getTaskList().remove(taskNum - 1);
             break;
         }
@@ -102,7 +104,7 @@ public class Command {
             }
             Task task = new Todo(this.fullInput.substring(5)); // stores input to storedText List
             TaskList.addTask(task, taskList);
-            ui.showMessage("I've added the todo to the list!");
+            result += ui.showMessage("I've added the todo to the list!");
             break;
 
         case "deadline": {
@@ -114,7 +116,7 @@ public class Command {
             String by = deadlineElements[1].substring(1);
             Task deadline = new Deadline(deadlineDescription, by);
             TaskList.addTask(deadline, taskList);
-            ui.showMessage("I've added the deadline to the list!");
+            result += ui.showMessage("I've added the deadline to the list!");
             break;
         }
 
@@ -128,7 +130,7 @@ public class Command {
             String at = eventElements[1].substring(1);
             Task event = new Event(eventDescription, at);
             TaskList.addTask(event, taskList);
-            ui.showMessage("I've added the event to the list!");
+            result += ui.showMessage("I've added the event to the list!");
             break;
         }
 
@@ -142,12 +144,12 @@ public class Command {
                     if (t.toString().contains(findElement)) {
                         hasAtLeastOne = true;
                         output = index + ". " + t.toString();
-                        ui.showMessage(output);
+                        result += ui.showMessage(output) + "\n";
                     }
                     index++;
                 }
                 if (!hasAtLeastOne) {
-                    ui.showMessage("Couldn't find any related tasks! Sorry.");
+                    result += ui.showMessage("Couldn't find any related tasks! Sorry.");
                 }
             } catch (Exception e) {
                 throw new DukeException("Need more arguments boi");
@@ -158,5 +160,6 @@ public class Command {
         default:
             throw new DukeException("unknown command!!!");
         }
+        return result;
     }
 }
