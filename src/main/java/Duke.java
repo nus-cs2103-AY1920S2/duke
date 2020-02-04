@@ -1,8 +1,4 @@
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 import static java.lang.Integer.*;
 
