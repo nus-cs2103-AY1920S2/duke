@@ -30,7 +30,7 @@ public class Ui {
         System.out.print(bar);
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + list.get(i));
+            System.out.println("    " + (i + 1) + " " + list.get(i));
         }
         System.out.println(bar);
     }

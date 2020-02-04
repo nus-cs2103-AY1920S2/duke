@@ -1,15 +1,21 @@
-// java imports
-import java.util.Scanner;
-import java.io.FileNotFoundException;
-
 // packages imports
 import tasks.TaskList;
 import ui.Ui;
 
+// java imports
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+
+// javafx imports
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Main class of the chat bot program.
  */
-public class Duke {
+public class Duke extends Application{
     /** User interface class with formatted outputs. */
     private Ui ui;
     /** Allows for persistent data. */
@@ -56,5 +62,13 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    public void start(Stage stage) {
+        Label helloWorld = new Label("hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage
     }
 }
