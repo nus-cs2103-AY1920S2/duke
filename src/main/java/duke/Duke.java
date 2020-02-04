@@ -4,6 +4,7 @@ package duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -20,6 +21,7 @@ public class Duke extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/DaIcon.png")));
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

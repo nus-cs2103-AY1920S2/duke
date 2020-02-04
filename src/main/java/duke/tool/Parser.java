@@ -30,6 +30,8 @@ public class Parser {
                 return new Command("done", input.replaceFirst("done ", ""));
             } else if (input.split(" ")[0].equals("delete")) {
                 return new Command("delete", input.replaceFirst("delete ", ""));
+            } else if (input.split(" ")[0].equals("help")) {
+                return new Command("help", input.replaceFirst("help ", ""));
             } else if (input.split(" ")[0].equals("todo")) {
                 return new Command("todo", input.replaceFirst("todo ", ""));
             } else if (input.split(" ")[0].equals("deadline")) {

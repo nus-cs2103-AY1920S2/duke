@@ -35,6 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
         UI.UIString = "";
         taskList = new TaskList();
         storage = new Storage("tasks.txt", taskList);
@@ -69,6 +70,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        String response = getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
+
+        if (response.equals("Bye. Hope to see you again soon!\n")){
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Sends the help command to Duke.
+     */
+    @FXML
+    private void handleHelpInput() {
+        String input = "help";
         String response = getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

@@ -1,4 +1,9 @@
-E|X|fireworks|10 Dec. 2020 09:00am to 20 Dec. 2020 09:10am
 T|V|sleep
 D|V|do homework|10 Feb. 2019 09:00am
-T|X|sleep yay
+D|V|watch show|10 Sep. 2019 09:00am
+T|X|watch fireworks
+T|X|todo
+T|X|yay
+T|X|wepfomwpfm
+T|X|awpdomwpdm
+T|X|event

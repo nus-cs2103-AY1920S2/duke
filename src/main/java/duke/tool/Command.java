@@ -98,21 +98,23 @@ public class Command {
                     outputString += ui.printError("=( OOPS!!! Enter a valid number after done command");
                 }
                 return outputString;
+            case "help":
+                outputString += ui.print("List of available commands: todo, event, deadline, list, find, done, delete, bye");
+                return outputString;
             case "todo":
-                Task newToDo = new ToDos(arguments);
-                taskList.add(newToDo);
-                outputString += ui.print("Got it. I've added this task:");
-                outputString += ui.print(newToDo.toString());
-                outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println("Arguments:" + arguments);
+                if (arguments.equals("todo")){
+                    outputString += ui.printError("=( OOPS!!! A ToDo cannot be empty.");
+                } else {
+                    Task newToDo = new ToDos(arguments);
+                    taskList.add(newToDo);
+                    outputString += ui.print("Got it. I've added this task:");
+                    outputString += ui.print(newToDo.toString());
+                    outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                }
                 return outputString;
             case "deadline":
-                if (!arguments.contains("/by ")) {
-                    outputString += ui.printError("=( OOPS!!! The /by of a deadline cannot be empty.");
-                } else if (arguments.split(" ").length < 4) {
-                    outputString += ui.printError(
-                            "=( OOPS!!! Follow the format: deadline [activity] "
-                                    + "/by [year]-[month]-[day] [hour]:[minute]");
-                } else {
+                try {
                     String description = arguments.split("/")[0].trim();
                     String datetime = arguments.split("/")[1].replaceFirst("by ", "");
 
@@ -131,16 +133,14 @@ public class Command {
                     outputString += ui.print("Got it. I've added this task:");
                     outputString += ui.print(newDeadline.toString());
                     outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                } catch (Exception e){
+                    outputString += ui.printError(
+                            "=( OOPS!!! Follow the format: deadline [activity] "
+                                    + "/by [year]-[month]-[day] [hour]:[minute]");
                 }
                 return outputString;
             case "event":
-                if (!arguments.contains("/at ")) {
-                    outputString += ui.printError("=( OOPS!!! The /at of an event cannot be empty.");
-                } else if (arguments.split(" ").length < 7) {
-                    outputString += ui.printError(
-                            "=( OOPS!!! Follow the format: event [activity] /at [year]-[month]-[day]"
-                                    +  " [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]");
-                } else {
+                try {
                     String description = arguments.split("/")[0].trim();
                     String datetime = arguments.split("/")[1].replaceFirst("at ", "");
 
@@ -173,6 +173,10 @@ public class Command {
                     outputString += ui.print("Got it. I've added this task:");
                     outputString += ui.print(newTask.toString());
                     outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                } catch (Exception e){
+                    outputString += ui.printError(
+                        "=( OOPS!!! Follow the format: event [activity] /at [year]-[month]-[day]"
+                                +  " [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]");
                 }
                 return outputString;
             default:
