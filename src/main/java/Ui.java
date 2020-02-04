@@ -22,10 +22,15 @@ public class Ui {
     /**
      * Display welcome message to the user.
      */
-    public void showWelcome() {
+    public String showWelcome() {
+
+        String welcomeMessage = "Hello! I'm Duke\n"
+                + "     What can I do for you?";
 
         System.out.println("Hello! I'm Duke\n"
                 + "     What can I do for you?");
+
+        return welcomeMessage;
 
     }
 
@@ -44,7 +49,7 @@ public class Ui {
      * Print formatting lines.
      */
     public void printFormatting() {
-        System.out.println("     ____________________________________________________________");
+        System.out.println("     __________________________________________________");
     }
 
     /**

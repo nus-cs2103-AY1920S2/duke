@@ -9,7 +9,7 @@ public class ParserTest {
 
 
     @Test
-    public void testcheckMessageType() throws DukeException{
+    public void testcheckMessageType() throws DukeException {
 
         assertEquals("todo", new Parser().checkMessageType("todo run"));
 
@@ -21,8 +21,8 @@ public class ParserTest {
         try {
             assertEquals(0, new Parser().checkMessageType("random"));
             fail();
-        } catch (DukeException ex){
-            assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n", ex.getMessage());
+        } catch (DukeException ex) {
+            assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(", ex.getMessage());
 
         }
 
