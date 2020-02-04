@@ -24,6 +24,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -41,6 +45,10 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Starts running the Duke object
+     * @throws IOException
+     */
     public void run() throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
