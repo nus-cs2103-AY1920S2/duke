@@ -2,39 +2,47 @@ package bot.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+
 import javafx.geometry.Pos;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
+
+import java.io.IOException;
 
 public class DialogueBox extends HBox {
-
+    @FXML
     private Label text;
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Constructor for a custom HBox, for use
      * in 4LC3N-BOT's GUI
      *
-     * @param l The label containing dialogue text
-     * @param iv Image of an user who generated
+     * @param text The label containing dialogue text
+     * @param img Image of an user who generated
      *           the dialogue
      */
-    public DialogueBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    public DialogueBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/DialogueBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        // displayPicture.setFitWidth(100.0);
-        // displayPicture.setFitHeight(100.0);
-        displayPicture.setClip(
-                new Circle(50.0, 50.0, 50.0)
-        );
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.text.setText(text);
+        this.displayPicture.setImage(img);
     }
 
     /**
@@ -51,24 +59,24 @@ public class DialogueBox extends HBox {
      * Formats this DialogueBox to the right. To be used
      * for user input
      *
-     * @param l The label containing dialogue text
-     * @param iv Image of the user
+     * @param s The string containing dialogue text
+     * @param im Image of the user
      * @return A new DialogBox, formatted to the right
      */
-    public static DialogueBox getUserBox(Label l, ImageView iv) {
-        return new DialogueBox(l, iv);
+    public static DialogueBox getUserBox(String s, Image im) {
+        return new DialogueBox(s, im);
     }
 
     /**
      * Formats this DialogueBox to the left. To be used
      * for bot output
      *
-     * @param l The label containing dialogue text
-     * @param iv Image of the bot
+     * @param s The String containing dialogue text
+     * @param im Image of the bot
      * @return A new DialogBox, formatted to the left
      */
-    public static DialogueBox getBotBox(Label l, ImageView iv) {
-        DialogueBox db = new DialogueBox(l, iv);
+    public static DialogueBox getBotBox(String s, Image im) {
+        DialogueBox db = new DialogueBox(s, im);
         db.flip();
         return db;
     }
