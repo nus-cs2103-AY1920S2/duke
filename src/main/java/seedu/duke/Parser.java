@@ -34,16 +34,24 @@ class Parser {
                 toReturn = new ListCommand();
                 break;
             case done:
+                isSplitInputLengthLargerThanOne(splitInput);
                 selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
                 toReturn = new DoneCommand(selectedTaskIndex);
                 break;
             case delete:
+                isSplitInputLengthLargerThanOne(splitInput);
                 selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
                 toReturn = new DeleteCommand(selectedTaskIndex);
                 break;
-            case find:
             case todo:
-                toReturn = createFindOrTodoCommand(splitInput, commandString);
+                isSplitInputLengthLargerThanOne(splitInput);
+                String taskDescription = fullCommand.substring(Command.Type.todo.getCommand().length()).strip();
+                toReturn = new AddCommand(Command.Type.todo, taskDescription);
+                break;
+            case find:
+                isSplitInputLengthLargerThanOne(splitInput);
+                String[] keywords = Arrays.copyOfRange(splitInput, 1, splitInput.length);
+                toReturn = new FindCommand(keywords);
                 break;
             case deadline:
             case event:
@@ -63,20 +71,6 @@ class Parser {
         if (splitInput.length == 1) {
             throw new DukeEmptyDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
-    }
-
-    private static Command createFindOrTodoCommand(String[] splitInput, String commandString)
-            throws DukeEmptyDescriptionException {
-        // TODO
-        isSplitInputLengthLargerThanOne(splitInput);
-
-        String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);
-        // empty string array would become empty string
-        String taskDescription = String.join(" ", inputWithoutCommand);
-
-        return commandString.equals(Command.Type.find.getCommand())
-                ? new FindCommand(taskDescription)
-                : new AddCommand(Command.Type.todo, taskDescription);
     }
 
     private static Command createDeadLineOrEventCommand(String[] splitInput, String commandString)

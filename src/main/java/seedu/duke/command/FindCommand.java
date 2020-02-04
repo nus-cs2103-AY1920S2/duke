@@ -9,7 +9,7 @@ public class FindCommand extends Command {
 
     private final String[] keywords;
 
-    public FindCommand(String ... keywords) {
+    public FindCommand(String[] keywords) {
         this.keywords = keywords;
     }
 

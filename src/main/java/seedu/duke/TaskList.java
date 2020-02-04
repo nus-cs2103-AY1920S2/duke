@@ -111,7 +111,7 @@ public class TaskList {
     /**
      * Returns a TaskList object, which contains the tasks that matches with the given keyword.
      *
-     * @param keyword Keyword to match.
+     * @param keywords Keywords to match.
      * @return Immutable TaskList object.
      */
     public TaskList find(String[] keywords) {
@@ -120,14 +120,11 @@ public class TaskList {
 
         for (Task task : tasks) {
             for (String keyword : keywords) {
-                if (task.getTaskDescription().contains(keyword)) {
+                if (task.getTaskDescription().contains(keyword) && !taskSet.contains(task)) {
                     taskSet.add(task);
+                    viewToReturn.add(task);
                 }
             }
-        }
-
-        for (Task task : taskSet) {
-            viewToReturn.add(task);
         }
 
         return viewToReturn;
