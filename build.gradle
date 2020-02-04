@@ -2,6 +2,11 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }
 
 shadowJar {
@@ -16,6 +21,15 @@ version '0.1.0'
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:6.9.6'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 application {
