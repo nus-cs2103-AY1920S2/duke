@@ -13,7 +13,7 @@ public class ByeCommand implements Command {
      * Prints the goodbye message in the UI.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.bye();
+        ui.showBye();
     }
     
     /**

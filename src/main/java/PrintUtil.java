@@ -5,6 +5,7 @@ import java.io.PrintStream;
  */
 public class PrintUtil {
     private static final int PRINT_INDENT_LEVELS = 4;
+    private static String buffer = ""; //TODO: replace with char buffer
     
     private static String indentString(String s) {
         //https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
@@ -17,7 +18,8 @@ public class PrintUtil {
      * @param s String to print
      */
     public static void indentedPrintln(String s) {
-        System.out.println(indentString(s));
+        //System.out.println(indentString(s));
+        buffer += indentString(s) + "\n";
     }
     
     /**
@@ -27,7 +29,8 @@ public class PrintUtil {
      * @param args Arguments for format string
      */
     public static void indentedPrintf(String format, Object... args) {
-        System.out.print(indentString(String.format(format, args)));
+        //System.out.print(indentString(String.format(format, args)));
+        buffer += indentString(String.format(format, args));
     }
     
     /**
@@ -36,6 +39,16 @@ public class PrintUtil {
      */
     public static void printHeaderLine() {
         indentedPrintln("____________________________________________________________");
+    }
+
+    /**
+     * Flushes and returns the original contents of the internal buffer.
+     * @return Content of buffer
+     */
+    public static String flushBuffer() {
+        String output = buffer;
+        buffer = "";
+        return output;
     }
 }
 
