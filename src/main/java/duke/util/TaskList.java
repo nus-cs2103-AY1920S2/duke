@@ -13,12 +13,12 @@ public class TaskList {
      * @param storedItems
      * @throws OutOfBoundMarkingRequestException
      */
-    public static void markItemAsDone(int pos, ArrayList<Task> storedItems) throws OutOfBoundMarkingRequestException {
+    public static String markItemAsDone(int pos, ArrayList<Task> storedItems) throws OutOfBoundMarkingRequestException {
         if (pos >= storedItems.size() || pos < 0)
             throw new OutOfBoundMarkingRequestException(pos+1);
 
         storedItems.get(pos).markDone();
-        Ui.markItemAsDone(pos, storedItems);
+        return Ui.markItemAsDone(pos, storedItems);
     }
 
     /**
@@ -27,12 +27,12 @@ public class TaskList {
      * @param storedItems
      * @throws OutOfBoundMarkingRequestException
      */
-    public static void deleteItem(int pos, ArrayList<Task> storedItems) throws OutOfBoundMarkingRequestException {
+    public static String deleteItem(int pos, ArrayList<Task> storedItems) throws OutOfBoundMarkingRequestException {
         if (pos >= storedItems.size() || pos < 0)
             throw new OutOfBoundMarkingRequestException(pos+1);
 
         Task t = storedItems.remove(pos);
-        Ui.deleteItem(t, storedItems);
+        return Ui.deleteItem(t, storedItems);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param str
      * @param storedItems
      */
-    public static void findItem(String str, ArrayList<Task> storedItems) {
+    public static String findItem(String str, ArrayList<Task> storedItems) {
         ArrayList<Task> foundList = new ArrayList<>();
 
         Scanner sc = new Scanner(str);
@@ -56,6 +56,6 @@ public class TaskList {
                 foundList.add(cur);
         }
 
-        Ui.printFoundList(foundList);
+        return Ui.printFoundList(foundList);
     }
 }

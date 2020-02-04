@@ -20,7 +20,8 @@ public class Duke {
     public static final String LIST_COMMAND = "list";
     public static final String BYE_COMMAND = "bye";
 
-    private String PADDING = "       ";
+    //    private static String PADDING = "       ";
+    private static String PADDING = "";
     private String USELESS_LINE = "-------------------------------------------------------------------------------------";
     private String ADDED_PHRASE = "added: ";
     private ArrayList<Task> storedItems;
@@ -41,8 +42,8 @@ public class Duke {
     /**
      * Let the bot greet, calls to Ui method
      */
-    public void greet() {
-        Ui.greet();
+    public String greet() {
+        return Ui.greet();
     }
 
     /**
@@ -52,23 +53,24 @@ public class Duke {
      * @throws OutOfBoundMarkingRequestException
      * @throws TaskErrorException
      */
-    public void processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException, TaskErrorException {
+    public String processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException, TaskErrorException {
         if (str.equals("")) {
-            Ui.blankInput();
-            return;
+            return Ui.blankInput();
+//            return;
         }
 
         if (parser.isFindRequest(str)) {
-            TaskList.findItem(str, storedItems);
-            return;
+            return TaskList.findItem(str, storedItems);
+//            return;
         }
 
         int markPos = parser.isMarkingTaskRequest(str);
         int delPos = parser.isDeleteTaskRequest(str);
+        String ret = "";
 
         if (markPos != -2) {
             try {
-                TaskList.markItemAsDone(markPos, storedItems);
+                ret = TaskList.markItemAsDone(markPos, storedItems);
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("markPos error\n%s%s\n%s%s\n%s%s",
@@ -76,7 +78,7 @@ public class Duke {
             }
         } else if (delPos != -2) {
             try {
-                TaskList.deleteItem(delPos, storedItems);
+                ret = TaskList.deleteItem(delPos, storedItems);
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("delPos error\n%s%s\n%s%s\n%s%s",
@@ -87,13 +89,13 @@ public class Duke {
                 Task.TaskType type = parser.commandType(str);
                 switch (type) {
                     case TODO:
-                        handleToDo(str);
+                        ret = handleToDo(str);
                         break;
                     case DEADLINE:
-                        handleDeadline(str);
+                        ret = handleDeadline(str);
                         break;
                     case EVENT:
-                        handleEvent(str);
+                        ret = handleEvent(str);
                         break;
                     default:
                         throw new InvalidCommandException(str);
@@ -107,23 +109,25 @@ public class Duke {
             }
         }
 
-        storage.writeData(storedItems);
+//        storage.writeData(storedItems);
+        return ret;
     }
 
     // Not very optimal handling these 3 methods are...
     // But usable hmm
 
-    private void handleToDo(String str) throws TaskErrorException {
+    private String handleToDo(String str) throws TaskErrorException {
         Scanner sc = new Scanner(str);
         sc.next();
         if (!sc.hasNext())
             throw new TaskErrorException("Missing ToDo description");
         Task todo = new ToDo(sc.nextLine().trim());
-        storeUserInput(todo);
+//        storeUserInput(todo);
         sc.close();
+        return storeUserInput(todo);
     }
 
-    private void handleDeadline(String str) throws TaskErrorException, InvalidCommandException {
+    private String handleDeadline(String str) throws TaskErrorException, InvalidCommandException {
         Scanner sc = new Scanner(str);
         sc.next();
         String[] parts = sc.nextLine().trim().split("/");
@@ -136,11 +140,12 @@ public class Duke {
             throw new TaskErrorException("Missing Deadline description");
 
         Task deadline = new Deadline(parts[0], parts[1]);
-        storeUserInput(deadline);
+//        storeUserInput(deadline);
         sc.close();
+        return storeUserInput(deadline);
     }
 
-    private void handleEvent(String str) throws TaskErrorException, InvalidCommandException {
+    private String handleEvent(String str) throws TaskErrorException, InvalidCommandException {
         Scanner sc = new Scanner(str);
         sc.next();
         String[] parts = sc.nextLine().trim().split("/");
@@ -153,27 +158,29 @@ public class Duke {
             throw new TaskErrorException("Missing Event description");
 
         Task event = new Event(parts[0], parts[1]);
-        storeUserInput(event);
+//        storeUserInput(event);
         sc.close();
+        return storeUserInput(event);
     }
 
-    private void storeUserInput(Task task) {
+    private String storeUserInput(Task task) {
         storedItems.add(task);
-        Ui.storeUserInput(task, storedItems);
+        storage.writeData(storedItems);
+        return Ui.storeUserInput(task, storedItems);
     }
 
     /**
      * Calls Ui method to list tasks saved
      */
-    public void listStoredItems() {
-        Ui.listStoredItems(storedItems);
+    public String listStoredItems() {
+        return Ui.listStoredItems(storedItems);
     }
 
     /**
      * Bot says goodbye, also calls Ui method
      */
-    public void byeBye() {
+    public String byeBye() {
         storage.writeData(storedItems);
-        Ui.byeBye();
+        return Ui.byeBye();
     }
 }
