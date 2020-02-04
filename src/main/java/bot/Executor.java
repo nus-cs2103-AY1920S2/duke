@@ -1,6 +1,7 @@
 package bot;
 
 import bot.command.instruction.Instruction;
+import bot.command.instruction.ParsedInstruction;
 
 import bot.command.instruction.concrete.DeadlineInstruction;
 import bot.command.instruction.concrete.EventInstruction;
@@ -34,6 +35,16 @@ public class Executor {
     private final Ui ui;
     private final LoadAndSave<Task> storageLocation;
 
+    /**
+     * Constructs a new Executor, handling execution
+     * of instructions for the bot
+     *
+     * @param store The Task storage of the bot
+     * @param ui The UI of the bot
+     * @param storeLoc The LoadAndSave representing file
+     *                 directory and file name of the
+     *                 storage file on disk
+     */
     public Executor(Storage<Task> store, Ui ui, LoadAndSave<Task> storeLoc) {
         this.storage = store;
         this.ui = ui;
@@ -43,26 +54,28 @@ public class Executor {
     /**
      * Executes a given Instruction
      *
-     * @param parsed The Instruction to execute
-     * @param arguments The arguments required by
-     *                  the Executor
+     * @param parsed The ParsedInstruction to execute
+     *               (Instruction wrapped with its
+     *               required arguments)
      *
      * @return Returns false, if the program is to
-     * be terminated. If the program is to
-     * continue, returns true.
+     *     be terminated. If the program is to
+     *     continue, returns true.
      */
     @SuppressWarnings("unchecked")
-    public boolean execute(Instruction parsed, ArrayList<String> arguments) {
+    public boolean execute(ParsedInstruction parsed) {
+        Instruction inst = parsed.getInstruction();
+        ArrayList<String> arguments = parsed.getArguments();
         if (parsed instanceof NotStorable) {
-            return this.executeNotStorable((NotStorable) parsed, arguments);
+            return this.executeNotStorable((NotStorable) inst, arguments);
         } else if (parsed instanceof StorageModifying) {
-            return this.executeModifying((StorageModifying<Task>) parsed, arguments);
+            return this.executeModifying((StorageModifying<Task>) inst, arguments);
         } else if (parsed instanceof StorageReading) {
-            return this.executeReading((StorageReading<Task>) parsed, arguments);
+            return this.executeReading((StorageReading<Task>) inst, arguments);
         } else if (parsed instanceof StorageSearching) {
-            return this.executeSearching((StorageSearching<Task>) parsed, arguments);
+            return this.executeSearching((StorageSearching<Task>) inst, arguments);
         } else if (parsed instanceof StorageWriting) {
-            return this.executeWriting((StorageWriting<Task>) parsed, arguments);
+            return this.executeWriting((StorageWriting<Task>) inst, arguments);
         } else {
             return false;
         }

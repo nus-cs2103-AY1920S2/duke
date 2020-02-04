@@ -42,7 +42,6 @@ public class Duke {
         botUi.showLoading();
 
         // initialise CommandParser
-        Scanner input = new Scanner(System.in);
         CommandParser parser = new CommandParser();
 
         // initialise TaskStorage
@@ -62,6 +61,7 @@ public class Duke {
 
         // initialise instruction Executor
         Executor executor = new Executor(store, botUi, botStore);
+        Scanner input = new Scanner(System.in);
 
         botUi.showInitial();
         botUi.showAwaiting();
@@ -80,7 +80,7 @@ public class Duke {
                 continue;
             }
 
-            if (!executor.execute(next.getInstruction(), next.getArguments())) {
+            if (!executor.execute(next)) {
                 break;
             }
             botUi.showAwaiting();
