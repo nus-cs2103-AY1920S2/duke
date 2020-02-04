@@ -12,8 +12,8 @@ public class Event extends Task {
      * @param description
      * @param time
      */
-    public Event(String description, String time) {
-        super(description);
+    public Event(String description, String time, boolean isDone) {
+        super(description, isDone);
         this.time = time;
     }
 
@@ -24,5 +24,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format("(at: %s)", this.time);
+    }
+
+    public String toFile() {
+        return "E | " + super.toFile() + " | " + time;
     }
 }
