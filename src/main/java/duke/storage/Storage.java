@@ -130,10 +130,9 @@ public class Storage {
     /**
      * Updates file with respect to the operations performed to taskList.
      *
-     * @param operation refers to the updates on taskList.
      * @throws IOException when file writer encounters error.
      */
-    public void updateFile(String operation) throws IOException {
+    public void updateFile() throws IOException {
 
         ArrayList<Task> list = taskList.getList();
 

@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      *                           of task.
      */
     @Override
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
         try {
 
@@ -45,37 +45,33 @@ public class AddCommand extends Command {
 
             if (taskDescriptionArr[0].equals("todo")) {
 
-                System.out.println(HEADER);
-                System.out.println(taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.ToDo));
-                System.out.println(taskList.reportTotal());
-                System.out.println(FOOTER);
+                return taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.ToDo)
+                        + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("deadline")) {
 
-                System.out.println(HEADER);
-                System.out.println(taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Deadline));
-                System.out.println(taskList.reportTotal());
-                System.out.println(FOOTER);
+                return taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Deadline)
+                        + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("event")) {
 
-                System.out.println(HEADER);
-                System.out.println(taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Event));
-                System.out.println(taskList.reportTotal());
-                System.out.println(FOOTER);
+                return taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Event)
+                        + taskList.reportTotal();
 
             }
+
         } catch (Exception e) {
 
             if (e instanceof Exceptions) {
 
-                System.out.println(((Exceptions) e).errorMessage());
+             return ((Exceptions)e).errorMessage();
 
             } else {
 
-                System.out.println(e);
+               return e.toString();
 
             }
         }
+        return "";
     }
 }

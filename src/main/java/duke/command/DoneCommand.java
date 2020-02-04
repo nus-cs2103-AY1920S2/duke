@@ -34,19 +34,23 @@ public class DoneCommand extends Command {
      *                           of task.
      */
     @Override
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
         try {
 
             Task t = taskList.getTask(Integer.parseInt(taskDescriptionArr[1]));
-            System.out.println(HEADER);
+           /* System.out.println(HEADER);
             System.out.println(taskList.markDone(t));
-            System.out.println(FOOTER);
+            System.out.println();
+           */
+
+            return "Nice! I've marked this task as done:\n"+ taskList.markDone(t);
 
         } catch (IOException e) {
 
-            System.out.println(e);
+           return e.toString();
 
         }
+
     }
 }

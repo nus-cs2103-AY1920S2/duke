@@ -29,11 +29,14 @@ public class ExitCommand extends Command {
      * @param taskDescriptionArr is null.
      */
     @Override
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
-        System.out.println(HEADER);
+       /* System.out.println(HEADER);
         System.out.println("Bye. I hope you liked the service and hope to see you soon !");
-        System.out.println(FOOTER);
+        System.out.println();
+        */
+
+        return "Bye. I hope you liked the service and hope to see you soon !";
 
     }
 }

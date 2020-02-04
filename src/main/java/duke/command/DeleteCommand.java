@@ -32,18 +32,23 @@ public class DeleteCommand extends Command {
      *                           of task.
      */
     @Override
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
         try {
 
-            System.out.println(HEADER);
+           /* System.out.println(HEADER);
             System.out.println(taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1])));
             System.out.println(taskList.reportTotal());
-            System.out.println(FOOTER);
+            System.out.println();
+            */
+
+            return taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
+                    + taskList.reportTotal();
+
 
         } catch (IOException e) {
 
-            System.out.println(e);
+           return e.toString();
 
         }
     }

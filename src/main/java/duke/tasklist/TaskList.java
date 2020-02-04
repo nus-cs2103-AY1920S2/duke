@@ -46,15 +46,15 @@ public class TaskList {
     /**
      * Prints all the tasks in taskList.
      */
-    public void list() {
+    public String list() {
 
-        String start = "\nHere are the tasks in your list:";
-        System.out.println(start);
+        String output = "Here are the tasks in your list:\n";
 
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + "." + taskList.get(i).toString());
+           output = output + (i + 1) + "." + taskList.get(i).toString() + "\n" ;
         }
 
+        return output;
     }
 
     /**
@@ -91,7 +91,7 @@ public class TaskList {
 
         taskList.add(task);
 
-        storage.updateFile("add");
+        storage.updateFile();
 
         return task;
     }
@@ -152,7 +152,7 @@ public class TaskList {
     public Task deleteTask(int index) throws IOException {
 
         Task task = taskList.remove(index - 1);
-        storage.updateFile("delete");
+        storage.updateFile();
         System.out.println("Noted. I've removed this task:");
         return task;
 
@@ -164,9 +164,9 @@ public class TaskList {
      *
      * @param keyword corresponds to the tasks with same word.
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
 
-        System.out.println("Here are the matching tasks in your list:");
+        String output = "Here are the matching tasks in your list:\n";
 
         String taskString = null;
         int numOfMatchingTask = 0;
@@ -177,9 +177,11 @@ public class TaskList {
 
             if (taskString.contains(keyword)) {
                 numOfMatchingTask++;
-                System.out.println(numOfMatchingTask + "." + taskString);
+                output = output + numOfMatchingTask + "." + taskString + "\n";
             }
         }
+
+        return output;
 
     }
 
@@ -227,9 +229,7 @@ public class TaskList {
     public Task markDone(Task task) throws IOException {
 
         task.changeStatus(Task.Status.Y);
-        storage.updateFile("done");
-        String action = "Nice! I've marked this task as done:";
-        System.out.println(action);
+        storage.updateFile();
         return task;
 
     }

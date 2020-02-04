@@ -12,8 +12,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 /**
  * The Ui program gets user input, interprets it and calls relevant methods.
@@ -40,82 +38,58 @@ public class Ui {
 
     /**
      * Takes in user input and calls relevant method.
+     *
+     * @param input is user input.
      */
-    public void frontDesk() {
+    public String frontDesk(String input) {
 
-        final String HEADER = "____________________________________________________________\n";
-        final String FOOTER = "____________________________________________________________\n";
-
-        try {
-            String greetings = HEADER
-                    + "\nHello! I'm Chu Chu \n"
-                    + "What can I do for you ? \n"
-                    + FOOTER;
-            System.out.println(greetings);
-
-            InputStreamReader rd = new InputStreamReader(System.in);
-            BufferedReader br = new BufferedReader(rd);
-            String input = null;
             String[] taskDescriptionArr = null;
             Parser parser = new Parser();
 
-            while (true) {
-
                 try {
-                    input = br.readLine();
                     taskDescriptionArr = parser.parseUserInput(input);
                     Command c = null;
 
                     if (taskDescriptionArr[0].equals("bye")) {
 
                         c = new ExitCommand(null, null);
-                        c.executeCommand(taskDescriptionArr);
-                        break;
 
                     } else if (taskDescriptionArr[0].equals("list")) {
 
                         c = new ListCommand(null, taskList);
-                        c.executeCommand(taskDescriptionArr);
 
                     } else if (taskDescriptionArr[0].equals("done")) {
 
                         c = new DoneCommand(storage, taskList);
-                        c.executeCommand(taskDescriptionArr);
 
                     } else if (taskDescriptionArr[0].equals("delete")) {
 
                         c = new DeleteCommand(storage, taskList);
-                        c.executeCommand(taskDescriptionArr);
 
                     } else if (taskDescriptionArr[0].equals("find")) {
 
                         c = new FindCommand(null, taskList);
-                        c.executeCommand(taskDescriptionArr);
 
                     } else {
 
                         c = new AddCommand(storage, taskList);
-                        c.executeCommand(taskDescriptionArr);
                     }
+
+                    return c.executeCommand(taskDescriptionArr);
+
                 } catch (Exception e) {
 
                     if (e instanceof Exceptions) {
 
-                        System.out.println(((Exceptions) e).errorMessage());
+                     return ((Exceptions) e).errorMessage();
 
                     } else {
 
-                        System.out.println(e);
+                  return e.toString();
 
                     }
-                    continue;
 
                 }
-            }
-
-        } catch (Exception e) {
-
-            System.out.print(e);
 
         }
 
@@ -123,4 +97,3 @@ public class Ui {
     }
 
 
-}

@@ -28,7 +28,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 checkstyle {
     toolVersion = '8.23'

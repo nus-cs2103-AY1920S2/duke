@@ -31,11 +31,9 @@ public class ListCommand extends Command {
      *                           of task.
      */
     @Override
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
-        System.out.print(HEADER);
-        taskList.list();
-        System.out.print(FOOTER + "\n");
+        return taskList.list();
 
     }
 }

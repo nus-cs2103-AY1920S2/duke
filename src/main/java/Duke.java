@@ -18,12 +18,9 @@ import javafx.scene.layout.VBox;
  */
 public class Duke {
 
-    /**
-     * Main method.
-     *
-     * @param args unused.
-     */
-    public static void main(String[] args) {
+    Ui Ui ;
+
+    public void setup() {
 
         TaskList taskList = new TaskList();
         Storage storage = new Storage("../../DataFile.txt");
@@ -32,12 +29,12 @@ public class Duke {
         storage.addTaskList(taskList);
         storage.loadFile();
         Ui ui = new Ui(storage, taskList);
-        ui.frontDesk();
+        this.Ui = ui;
 
     }
 
     String getResponse(String input) {
-        return "ChuChu heard: " + input;
+        return Ui.frontDesk(input);
     }
 
 }
