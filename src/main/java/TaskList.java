@@ -25,7 +25,7 @@ public class TaskList {
      * @param taskType Type of task to be added.
      * @param taskDescription Description of task to be added.
      */
-    public void add(String taskType, String taskDescription) {
+    public String add(String taskType, String taskDescription) {
         Task temp = new Task("random");
         if (taskType.equals("deadline")) {
             try {
@@ -45,22 +45,23 @@ public class TaskList {
             temp = new ToDo(taskDescription);
             tasks.add(temp);
         }
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t" + temp);
-        System.out.println("\tNow you have " + tasks.size() + " tasks in your list.");
-        System.out.println("\t____________________________________________________________");
+        String output = "Got it. I've added this task:\n";
+        output = output + temp + "\n";
+        output = "Now you have " + tasks.size() + " tasks in your list.\n";
+        return output;
     }
 
     /**
      * Prints list of tasks.
      */
-    public void list() {
+    public String list() {
+        String output;
         int size = tasks.size();
-        System.out.println("\tHere are the tasks in your list:");
+        output = "Here are the tasks in your list:\n";
         for (int i = 0; i < size; ++i) {
-            System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+            output = output + (i + 1) + ". " + tasks.get(i) + "\n";
         }
+        return output;
     }
 
 
@@ -69,16 +70,18 @@ public class TaskList {
      *
      * @param str Substring to be found.
      */
-    public void find(String str) {
+    public String find(String str) {
+        String output;
         int size = tasks.size();
         int cnt = 0;
-        System.out.println("Here are the matching tasks in your list:");
+        output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < size; ++i) {
             Task temp = tasks.get(i);
             if (temp.description.contains(str)) {
-                System.out.println("\t" + ++cnt + ". " + temp);
+                output = output + ++cnt + ". " + temp + "\n";
             }
         }
+        return output;
     }
 
     /**
@@ -86,29 +89,33 @@ public class TaskList {
      *
      * @param n Task to be marked as done.
      */
-    public void done(int n) {
+    public String done(int n) {
+        String output;
         if (n > tasks.size()) {
-            System.out.println("\tThere is no such task");
+            output = "There is no such task\n";
         } else {
-            System.out.println("\tNice! I've marked this task as done:");
+            output = "Nice! I've marked this task as done:\n";
             tasks.get(n - 1).markAsDone();
-            System.out.println("\t" + tasks.get(n - 1));
+            output = tasks.get(n - 1) + "\n";
         }
+        return output;
     }
 
     /**
      * Task to be deleted.
      * @param n Task to be deleted.
      */
-    public void delete(int n) {
-        if (n > tasks.size()) {
-            System.out.println("\tThere is no such task");
+    public String delete(int n) {
+        String output;
+        if (n > tasks.size() || n < 1) {
+            output = "There is no such task\n";
         } else {
-            System.out.println("\tNoted. I have removed this task:");
-            System.out.println("\t" + tasks.get(n - 1));
+            output = "Noted. I have removed this task:\n";
+            output = output + tasks.get(n - 1) + "\n";
             tasks.remove(n - 1);
-            System.out.println("\tYou now have " + tasks.size() + " tasks in the list.");
+            output = output + "You now have " + tasks.size() + " tasks in the list.\n";
         }
+        return output;
     }
 
 }

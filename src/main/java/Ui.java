@@ -17,12 +17,9 @@ public class Ui {
     /**
      * Greetings to be printed.
      */
-    public void greetings() {
-        //Greeting
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello from\n\t" + logo);
-        System.out.println("\tWhat can I do for you?");
-        System.out.println("\t____________________________________________________________");
+    public String greetings() {
+        String output = "Hello from\n\t" + logo + "\n";
+        return output + "What can I do for you?\n";
     }
 
     public String getInput() {
@@ -30,52 +27,35 @@ public class Ui {
     }
 
     /**
-     * Prints error while saving.
-     */
-    public void show_error_while_saving() {
-        System.out.println("\t_____________________________________");
-        System.out.println("\tCouldn't save file.");
-        System.out.println("\t_____________________________________");
-    }
-
-    /**
      * Prints error when there is no description.
      */
-    public void descriptionError() {
-        System.out.println("\t_____________________________________");
-        System.out.println("\tDescription needs a '/' before by/at");
-        System.out.println("\t_____________________________________");
+    public String descriptionError() {
+        return "Command has the incorrect format\n";
     }
 
     /**
      * Printing goodbye messages.
      */
-    public void goodbye() {
-        System.out.println("\t_____________________________________");
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("\t_____________________________________");
+    public String goodbye() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Print error in the command.
      */
-    public void commandError() {
-        System.out.println("\t_____________________________________");
-        System.out.println("\tPlease enter a valid command: todo, deadline, event, list, bye, find, delete.");
-        System.out.println("\t_____________________________________");
+    public String commandError() {
+        return "Please enter a valid command: todo, deadline, event, list, bye, find, delete.\n";
     }
 
     /**
      * Print error message when task is invalid.
      */
-    public void invalidTaskError() {
-        System.out.println("\t_____________________________________");
-        System.out.println("\tTask doesn't exist. Please choose another.");
-        System.out.println("\t_____________________________________\n\n");
+    public String invalidTaskError() {
+        return "Task doesn't exist. Please choose another.\n";
     }
 
-    public void horizontalLine() {
-        System.out.println("\t____________________________________________________________");
+    public String horizontalLine() {
+        return "____________________________________________________________\n";
     }
 
 }
