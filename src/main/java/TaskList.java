@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * Method to get array list.
+     * Gets array list.
      * @return Array list
      */
     public ArrayList<Task> getRecord() {
@@ -32,93 +32,126 @@ public class TaskList {
     }
 
     /**
-     * Method to add to do task to list.
+     * Adds to do task to list.
      * @param record description of to do task
      */
-    public void addToDo(String record) {
+    public String addToDo(String record) {
         Task task = new ToDo(record);
         this.record.add(task);
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("piaked in: " + record);
-        System.out.println(" " + task);
-        System.out.println("You has " + this.record.size() + " tasks in the list");
-        System.out.println("--------------------------------------------------\n");
+        String output = "--------------------------------------------------\n"
+                + "piaked in: " + record + "\n" + task + "\n"
+                + "You has " + this.record.size() + " tasks in the list\n"
+                + "--------------------------------------------------\n";
+
+        return output;
     }
 
     /**
-     * Method to add deadline task to list.
+     * Adds deadline task to list.
      * @param record description of task
      * @param by deadline of task
      */
-    public void addDeadline(String record, String by) {
+    public String addDeadline(String record, String by) {
         Task task = new Deadline(record, by);
         this.record.add(task);
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("piaked in: " + record);
-        System.out.println(" " + task);
-        System.out.println("You has " + this.record.size() + " tasks in the list");
-        System.out.println("--------------------------------------------------\n");
+        String output = "--------------------------------------------------\n"
+                + "piaked in: " + record + "\n" + task + "\n"
+                + "You has " + this.record.size() + " tasks in the list\n"
+                + "--------------------------------------------------\n";
+
+        return output;
     }
 
     /**
-     * Method to add event task to list.
+     * Adds event task to list.
      * @param record description of task
      * @param at location of task
      */
-    public void addEvent(String record, String at) {
+    public String addEvent(String record, String at) {
         Task task = new Event(record, at);
         this.record.add(task);
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("piaked in: " + record);
-        System.out.println(" " + task);
-        System.out.println("You has " + this.record.size() + " tasks in the list");
-        System.out.println("--------------------------------------------------\n");
+        String output = "--------------------------------------------------\n"
+                + "piaked in: " + record + "\n" + task + "\n"
+                + "You has " + this.record.size() + " tasks in the list\n"
+                + "--------------------------------------------------\n";
+
+        return output;
     }
 
     /**
-     * Method to list tasks added.
+     * Lists tasks added.
      */
-    public void listRecord() {
-        System.out.println("--------------------------------------------------");
+    public String listRecord() {
+        String str = "";
+        String output = "--------------------------------------------------\n";
 
         for (int i = 0; i < record.size(); i++) {
             int j = i + 1;
             Task current = record.get(i);
-            System.out.print(j + "." + current + "\n");
+            str = str + (j + "." + current + "\n");
         }
 
-        System.out.println("--------------------------------------------------\n");
+        output = output + str + "--------------------------------------------------\n";
+
+        return output;
     }
 
     /**
-     * Method to delete task from list.
+     * Deletes task from list.
      * @param num number of the task to be deleted
      */
-    public void delete(int num) {
+    public String delete(int num) {
         Task task = record.remove(num - 1);
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("Destroyed: ");
-        System.out.println(" " + task);
-        System.out.println("You has " + this.record.size() + " tasks in the list");
-        System.out.println("--------------------------------------------------\n");
+        String output = "--------------------------------------------------\n"
+                + "Destroyed:\n" + " " + task + "\n"
+                + "You has " + this.record.size() + " tasks in the list\n"
+                + "--------------------------------------------------\n";
+
+        return output;
     }
 
     /**
-     * Method to set task as done.
+     * Sets task as done.
      * @param num number of the task to be set to done
      */
-    public void setDone(int num) {
+    public String setDone(int num) {
         Task task = record.get(num - 1);
 
         task.setIsDone();
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("Next time do yourself la! No paper meh?");
-        System.out.println(task);
-        System.out.println("--------------------------------------------------\n");
+        String output = "--------------------------------------------------\n"
+                + "Next time do yourself la! No paper meh?\n" + task + "\n"
+                + "--------------------------------------------------\n";
+
+        return output;
+    }
+
+    /**
+     * Finds tasks containing the description given.
+     * @param description The keyword used to find tasks
+     * @return A string containing the list of tasks found
+     */
+    public String find(String description) {
+        String list = "";
+
+        for (int i = 0; i < record.size(); i++) {
+            Task current = record.get(i);
+
+            if (current.getDescription().contains(description)) {
+                list = list + (i + 1) + "." + current.toString() + "\n";
+            } else {
+                //do nothing
+            }
+        }
+
+        String output = "--------------------------------------------------\n"
+                + "Here are the matching tasks in your list: \n" + list
+                + "--------------------------------------------------\n";
+
+        return output;
     }
 }

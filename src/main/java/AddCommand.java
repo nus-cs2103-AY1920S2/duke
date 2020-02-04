@@ -15,34 +15,39 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes command actions.
+     * Executes add command actions.
      * @param tasks TaskList object
      * @param ui Ui object
      * @param storage Storage object
+     * @return A string containing output message
      * @throws DukeException throws a DukeException if description is not added
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String output = "";
+
         if (command.equals("todo")) {
             if (description.equals("")) {
                 throw new DukeException("todo");
             } else {
-                tasks.addToDo(description);
+                output = tasks.addToDo(description);
             }
         } else if (command.equals("deadline")) {
             if (description.equals("")) {
                 throw new DukeException("deadline");
             } else {
                 String[] array = description.split(" /by ");
-                tasks.addDeadline(array[0], array[1]);
+                output = tasks.addDeadline(array[0], array[1]);
             }
         } else {
             if (description.equals("")) {
                 throw new DukeException("event");
             } else {
                 String[] array = description.split(" /at ");
-                tasks.addEvent(array[0], array[1]);
+                output = tasks.addEvent(array[0], array[1]);
             }
         }
+
+        return output;
     }
 }

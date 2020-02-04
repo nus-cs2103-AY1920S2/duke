@@ -16,16 +16,21 @@ public class ExitCommand extends Command {
         super(command, description);
     }
 
+    /**
+     * Writes list into text file and says goodbye to user.
+     * @param tasks TaskList object
+     * @param ui Ui object
+     * @param storage Storage object
+     * @returnA A string containing the output
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        isExit = true;
-
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             storage.write(tasks);
         } catch (IOException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
 
-        ui.goodBye();
+        return ui.goodBye();
     }
 }

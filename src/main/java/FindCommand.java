@@ -15,28 +15,16 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Method for finding tasks containing keyword and listing them out.
+     * Generates a string of tasks containing keyword.
      * @param tasks TaskList object
      * @param ui Ui object
      * @param storage Storage object
+     * @return A string containing the output
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String list = "";
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = tasks.find(description);
 
-        for (int i = 0; i < tasks.getRecord().size(); i++) {
-            Task current = tasks.getRecord().get(i);
-
-            if (current.getDescription().contains(description)) {
-                list = list + (i + 1) + "." + current.toString() + "\n";
-            } else {
-                //do nothing
-            }
-        }
-
-        System.out.println("--------------------------------------------------");
-        System.out.println("Here are the matching tasks in your list: ");
-        System.out.println(list);
-        System.out.println("--------------------------------------------------\n");
+        return output;
     }
 }

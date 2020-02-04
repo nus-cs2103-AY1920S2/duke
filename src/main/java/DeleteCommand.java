@@ -11,21 +11,30 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes delete command.
+     * Executes delete command, updates storage and returns output to user.
      * @param tasks TaskList object
      * @param ui Ui object
      * @param storage Storage object
+     * @return A string containing the output
+     * @throws DukeException throws a DukeException if description is not added
+     *
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int num = Integer.parseInt(description);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (description.equals("")) {
+            throw new DukeException("delete");
+        } else {
+            int num = Integer.parseInt(description);
 
-        tasks.delete(num);
+            String output = tasks.delete(num);
 
-        try {
-            storage.write(tasks);
-        } catch (IOException e) {
-            ui.showError(e);
+            try {
+                storage.write(tasks);
+            } catch (IOException e) {
+                return ui.showError(e);
+            }
+
+            return output;
         }
     }
 }

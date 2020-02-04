@@ -14,8 +14,16 @@ public class ListCommand extends Command {
         super(command, description);
     }
 
+    /**
+     * Generates a string containing the list of tasks.
+     * @param tasks TaskList object
+     * @param ui Ui object
+     * @param storage Storage object
+     * @return A string containing the list of tasks
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.listRecord();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
+        return tasks.listRecord();
     }
 }

@@ -16,49 +16,44 @@ public class Ui {
     }
 
     /**
-     * Method to print intro message.
+     * Generates intro message.
+     * @return A string containing the intro message
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String intro = "--------------------------------------------------\n" +
                 "Wassup! Wo shi bot \n" +
                 "You want what? \n" +
                 "--------------------------------------------------\n";
 
-        System.out.print(intro);
+        return intro;
     }
 
     /**
-     * Method to print termination message.
+     * Generates goodbye message.
+     * @return A string containing the goodbye message
      */
-    public void goodBye() {
+    public String goodBye() {
         String goodbye = "--------------------------------------------------\n" +
                 "Why you so ba...bot has been killed\n" +
                 "--------------------------------------------------\n";
 
-        System.out.print(goodbye);
+        return goodbye;
     }
 
     /**
-     * Method to print loading file error.
+     * Generates loading error message.
+     * @return A string containing the loading error message
      */
-    public void showLoadingError() {
-        System.out.println("Error loading file");
+    public String showLoadingError() {
+       return "Error loading file";
     }
 
     /**
-     * Method to print exception error message.
-     * @param e exception
+     * Generates exception error message.
+     * @return A string containing exception error message
      */
-    public void showError(Exception e) {
-        System.out.println(e.toString());
+    public String showError(Exception e) {
+       return e.toString();
     }
 
-    /**
-     * Method to read input from user.
-     * @return input read
-     */
-    public String readInput() {
-        String input = sc.nextLine();
-        return input;
-    }
 }

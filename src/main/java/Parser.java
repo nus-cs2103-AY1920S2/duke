@@ -11,7 +11,7 @@ public class Parser {
     }
 
     /**
-     * Method for making sense of the user command.
+     * Parses user commands and executes them accordingly.
      * @param fullCommand user input
      * @return Command object of the user input
      * @throws DukeException throws an exception if command is undefined
@@ -28,8 +28,6 @@ public class Parser {
             }
             description = description + arr[arr.length - 1];
         }
-
-        System.out.println(description);
 
         if (command.equals("bye")) {
             return new ExitCommand(command, description);

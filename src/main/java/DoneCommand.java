@@ -19,11 +19,19 @@ public class DoneCommand extends Command {
      * @param tasks TaskList object
      * @param ui Ui object
      * @param storage Storage object
+     * @return A string containing the output
+     * @throws DukeException throws a DukeException if description is not added
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int num = Integer.parseInt(description);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (description.equals("")) {
+            throw new DukeException("done");
+        } else {
+            int num = Integer.parseInt(description);
 
-        tasks.setDone(num);
+            String output = tasks.setDone(num);
+
+            return output;
+        }
     }
 }
