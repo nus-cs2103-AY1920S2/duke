@@ -26,6 +26,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     *
+     * @param text the String to include as text.
+     * @param img the profile photo for user identification.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -38,9 +44,9 @@ public class DialogBox extends HBox {
 
         // Set Label and ImageView.
         dialog.setText(text);
-        ImageView iv = new ImageView(img);
-        iv.setClip(new Circle(50, 50, 50));
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 50));
+
     }
 
     /**
@@ -56,7 +62,7 @@ public class DialogBox extends HBox {
     /**
      * Produces a DialogBox to represent the user's command.
      *
-     * @param text the label to include as text.
+     * @param text the String to include as text.
      * @param img the profile photo for user identification.
      * @return DialogBox representing user command.
      */
@@ -71,10 +77,10 @@ public class DialogBox extends HBox {
 
     }
 
-    /**
+    /** EDIT THIS FOR DUKE TO MAKE A NEW RESPONSE!!! MUST BE SAME DUKE!!!
      * Produces a DialogBox to represent Duke's response.
      *
-     * @param text the label to include as text.
+     * @param text the String to include as text.
      * @param img the profile photo for Duke.
      * @return DialogBox representing Duke's response.
      */

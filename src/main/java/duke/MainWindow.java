@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
  * Controller for duke.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    // GUI Controls.
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -21,8 +23,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-
+    // GUI support.
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -30,6 +31,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+
+    // Non-GUI members.
+
+    private Duke duke;
 
     public void setDuke(Duke d) {
         duke = d;

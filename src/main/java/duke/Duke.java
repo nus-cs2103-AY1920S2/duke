@@ -5,10 +5,6 @@ package duke;
  */
 public class Duke {
 
-    // Below are Non-GUI members.
-
-    // Non-GUI Variables.
-
     /**
      * TaskList to store all the Tasks for Duke.
      */
@@ -23,8 +19,6 @@ public class Duke {
      * Handles the User Interactions/Formalities.
      */
     private Ui ui;
-
-    // Non-GUI Methods.
 
     /**
      * Constructor for Duke.
