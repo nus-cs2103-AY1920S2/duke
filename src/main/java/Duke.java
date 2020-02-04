@@ -131,6 +131,14 @@ public class Duke extends Application {
 
     }
 
+    /**
+     * Returns Task object from string.
+     * String example: D|true|read book|by|2019-02-10
+     *
+     * @param s string for object parameters.
+     * @return Task of string.
+     */
+
     private Task parseList(String s) {
         String[] params = s.split("\\|");
 
