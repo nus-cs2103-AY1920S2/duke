@@ -15,6 +15,10 @@ public class Duke {
     private TaskList tasks;
     /** The user interface for console displays. */
     private Ui ui;
+    /** True if the chat-bot has ended, otherwise false. */
+    private boolean isExit;
+    /** True if the chat-bot loaded from a save file, otherwise false. */
+    private boolean isLoaded;
 
     /**
      * Constructs a new chat-bot Duke.
@@ -26,10 +30,12 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load()); // Load from file if possible
+            isLoaded = true;
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList(); // Start a brand new task list if file cannot be found/opened.
+            isLoaded = false;
         }
+        isExit = false;
     }
 
     /**
@@ -39,40 +45,60 @@ public class Duke {
         this(getDefaultPath());
     }
 
-    /** Call this to begin using the chat-bot. */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        TaskList taskList = tasks;
-
-        // Keep receiving user input until the exit command is entered
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                taskList = c.execute(taskList, ui, storage); // Update the task list
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    /**
+     * Returns the response from Duke after parsing and executing the user input.
+     * If an error is thrown, Duke will respond with its own custom error message.
+     *
+     * @param input the user input.
+     * @return the response from Duke after parsing and executing the user input.
+     */
+    public String getResponse(String input) {
+        // TODO: Fix immutability of Ui
+        try {
+            ui.clear();
+            Command c = Parser.parse(input);
+            tasks = c.execute(tasks, ui, storage); // Update the task list
+            isExit = c.isExit();
+            return ui.getResponse();
+        } catch (DukeException e) {
+            return ui.getError(e);
         }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns whether the chat-bot has ended or not.
+     *
+     * @return true if the chat-bot has ended, otherwise false.
      */
-    public String getResponse(String input) {
-        // TODO: modify this method to behave like run()
-        return "Duke heard: " + input;
+    public boolean isExit() {
+        return isExit;
     }
 
-    /** The main entry point of the program. */
-    public static void main(String[] args) {
-        new Duke(getDefaultPath()).run();
+    /**
+     * Returns whether the chat-bot was loaded from a save file.
+     *
+     * @return true if the chat-bot was loaded from a save file, otherwise false.
+     */
+    public boolean isLoaded() {
+        return isLoaded;
+    }
+
+    /**
+     * Returns the welcome message.
+     *
+     * @return the welcome message.
+     */
+    public String getWelcome() {
+        return ui.getWelcome();
+    }
+
+    /**
+     * Returns the loading error message.
+     *
+     * @return the loading error message.
+     */
+    public String getLoadingError() {
+        return ui.getLoadingError();
     }
 
     /**

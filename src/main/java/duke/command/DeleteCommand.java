@@ -30,6 +30,7 @@ public class DeleteCommand extends Command {
             TaskList newList = tasks.deleteTask(taskId);
 
             ui.showDelete(deletedTask);
+            ui.showLineBreak(2);
             ui.showTaskCount(newList);
 
             // Save immediately

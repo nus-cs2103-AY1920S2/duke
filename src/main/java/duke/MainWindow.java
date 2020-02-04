@@ -32,8 +32,23 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the chat-bot for this main window.
+     *
+     * @param d the chat-bot instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
+
+        if (!d.isLoaded()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage)
+            );
+        }
+
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
+        );
     }
 
     /**
@@ -43,11 +58,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(input, userImage)
         );
+
+        if (!duke.isExit()) {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
+
         userInput.clear();
     }
+
+    /*
+    TODO: Replace adding dialog boxes with a varags method
+
+    private void addDialogBox(DialogBox... dialogBoxes) {
+        dialogContainer.getChildren().addAll(dialogBoxes);
+    }
+    */
 }

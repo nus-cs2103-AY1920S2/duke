@@ -1,9 +1,9 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Ui {
     /** The logo for Duke. */
@@ -13,134 +13,153 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    /** For user input. */
-    private Scanner sc;
+    /** The previous response from Duke. */
+    private String response;
 
     /** Constructs a new Ui object for console input and output. */
     public Ui() {
-        sc = new Scanner(System.in);
+        this("");
+    }
+
+    /** Constructs a new Ui object for console input and output. */
+    private Ui(String response) {
+        this.response = response;
+    }
+
+    /** Clears the log of responses from Duke. */
+    public void clear() {
+        response = "";
     }
 
     /**
-     * Reads and returns a line of user input.
+     * Returns the latest response from Duke.
      *
-     * @return a line of user input.
+     * @return the latest response from Duke.
      */
-    public String readCommand() {
-        return sc.nextLine();
+    public String getResponse() {
+        return response;
     }
 
     /**
-     * Displays a message in the console.
-     * All lines will be indented 5 spaces to the right.
+     * Displays a welcome message in the chat-bot.
      *
-     * @param message the message to display in the console.
+     * @return a welcome message in the chat-bot.
      */
-    public void echo(String message) {
-        System.out.println(indent(message + "\n", 5));
-    }
-
-    /** Displays a welcome message in the console. */
-    public void showWelcome() {
-        String header = indent("\nHello from\n" + LOGO, 4);
-        System.out.println(header);
+    public String getWelcome() {
+        String header = indent("Hello from\n" + LOGO, 4);
+        return header;
     }
 
     /**
-     * Displays in the console a task that has been added to the list.
+     * Displays an error message in the chat-bot.
+     *
+     * @param e the error encountered.
+     * @return an error message in the chat-bot.
+     */
+    public String getError(DukeException e) {
+        String message = "☹ OOPS!!!\n";
+        return message + e.getMessage();
+    }
+
+    /**
+     * Displays the loading error message in the chat-bot.
+     *
+     * @return the loading error message in the chat-bot.
+     */
+    public String getLoadingError() {
+        return "Sorry... the task list could not be loaded from a save file.\n\n"
+                + "Here's a new task list for you to use.";
+    }
+
+    /**
+     * Logs a task that has been added to the list.
      *
      * @param task the tasks that has been added to the list.
      */
     public void showAdd(Task task) {
-        String confirmation = "Okie! I've added this task:\n";
-        echo(confirmation + indent(task.toString(), 2));
+        String confirmation = "Okie! I've added this task:\n\n";
+        response += confirmation + indent(task.toString(), 2);
     }
 
     /**
-     * Displays a completed task in the console.
+     * Logs a completed task.
      *
      * @param task the completed task.
      */
     public void showDone(Task task) {
-        String praise = "Good job completing this task!"
-                + " Here's a tick for completing it!\n";
+        String praise = "Good job completing this task!\n"
+                + "Here's a tick for completing it!\n\n";
 
-        echo(praise + indent(task.toString(), 2));
+        response += praise + indent(task.toString(), 2);
     }
 
     /**
-     * Lists all tasks in the console.
+     * Logs a list of all tasks.
      *
      * @param tasks the list of tasks to display.
      */
     public void showList(TaskList tasks) {
-        String title = "Here are the tasks in your list:\n";
-        echo(title + tasks.toString());
+        String title = "Here are the tasks in your list:\n\n";
+        response += title + tasks.toString();
     }
 
     /**
-     * Displays a deleted task in the console.
+     * Logs a deleted task.
      *
      * @param task the deleted task.
      */
     public void showDelete(Task task) {
-        String comment = "Alright! I'll remove this task:\n";
-        echo(comment + indent(task.toString(), 2));
+        String comment = "Alright! I'll remove this task:\n\n";
+        response += comment + indent(task.toString(), 2);
     }
 
     /**
-     * Displays the number of tasks in the list in the console.
+     * Logs the number of tasks in the list.
      *
      * @param tasks the task list to count and display.
      */
     public void showTaskCount(TaskList tasks) {
         String count = "There are now " + tasks.getNumTasks() + " tasks in the list.";
-        echo(count);
+        response += count;
     }
 
-    /** Farewells the user. */
+    /** Logs a farewell to the user. */
     public void showGoodbye() {
-        echo("Bye! Please give a review if you like this program!");
-    }
-
-    /** Displays a line in the console. */
-    public void showLine() {
-        int lineWidth = 60;
-        String lineSymbol = "-";
-
-        System.out.println(indent(lineSymbol.repeat(lineWidth), 4));
+        response += "Bye! Please give a review if you like this program!";
     }
 
     /**
-     * Displays an error message in the console.
+     * Logs a search result.
      *
-     * @param error the error message to display.
+     * @param tasks the list of tasks that was searched.
+     * @param taskIds the list of ids in the task list matching the search criteria.
      */
-    public void showError(String error) {
-        String message = "☹ OOPS!!!\n";
-        echo(message + error);
-    }
-
-    /** Displays a loading error message in the console. */
-    public void showLoadingError() {
-        String message = "Sorry... the task list could not be loaded from a save file.\n"
-                + "Here's a new task list for you to use.";
-
-        showLine();
-        echo(message);
-        showLine();
-    }
-
-    /** Displays a loading error message in the console. */
     public void showFind(TaskList tasks, List<Integer> taskIds) {
-        String title = "Here are the matching tasks in your list:\n";
+        String title = "Here are the matching tasks in your list:\n\n";
         StringBuilder foundTasks = new StringBuilder();
 
         for (int i = 0; i < taskIds.size(); i++) {
             int taskId = taskIds.get(i);
             foundTasks.append(tasks.getFormattedTask(taskId)).append("\n");
         }
-        echo(title + foundTasks.toString());
+        response += title + foundTasks.toString();
+    }
+
+    /** Displays a line in the chat-bot. */
+    public void showLine() {
+        int lineWidth = 60;
+        String lineSymbol = "-";
+
+        response += indent(lineSymbol.repeat(lineWidth), 4);
+    }
+
+    /**
+     * Displays a line break in the chat-bot.
+     *
+     * @param numLines the number of line breaks to display.
+     */
+    public void showLineBreak(int numLines) {
+        response += "\n".repeat(numLines);
     }
 
     /**
