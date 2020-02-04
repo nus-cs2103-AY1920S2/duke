@@ -45,6 +45,7 @@ public class UiTest {
     @Test
     public void greetMethod_shouldProduceExpectedMessage() {
         Ui ui = new Ui();
+        ui.setOutline();
         String expected = "    ____________________________________________________________\n"
                 + "     Hello! I'm \n"
                 + "                    ____        _        \n"
@@ -64,13 +65,13 @@ public class UiTest {
     @Test
     public void markTaskDone_shouldGiveTheCorrectOutput() {
         Ui ui = new Ui();
+        ui.setOutline();
         Task task = new Todo("borrow book");
         task.setStatusDone();
         String expected = "    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n"
                 + "         [T][Y] borrow book\n"
                 + "    ____________________________________________________________\n";
-        ui.replyDone(task);
-        Assertions.assertEquals(expected, os.toString());
+        Assertions.assertEquals(expected, ui.replyDone(task));
     }
 }
