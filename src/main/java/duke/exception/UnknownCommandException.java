@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.main.Constant;
-
 public class UnknownCommandException extends DukeException {
     @Override
     public String toString() {

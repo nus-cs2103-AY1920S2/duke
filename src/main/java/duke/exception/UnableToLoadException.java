@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.main.Constant;
-
 public class UnableToLoadException extends DukeException {
 
     @Override

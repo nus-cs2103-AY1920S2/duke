@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.main.Constant;
-
 public class NoNumberDeleteException extends DukeException {
 
     @Override
