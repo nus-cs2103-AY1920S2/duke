@@ -86,7 +86,7 @@ public class Ui {
      * @param e The error that is being raised.
      */
     public void printError(Exception e) {
-        System.err.println(e);
+        print(e.toString());
         print("Please try again.");
     }
 
@@ -94,18 +94,7 @@ public class Ui {
      * Prints the invalid date format error message.
      */
     public void printInvalidDateFormatError() {
-        System.err.println("Please enter the date as yyyy-mm-dd followed by the time e.g. 2020-01-01 2359");
+        print("Please enter the date as yyyy-mm-dd followed by the time e.g. 2020-01-01 2359");
         print("Try again.");
     }
-
-    /**
-     * Displays the goodbye message.
-     * followed by a horizontal line.
-     */
-    public void printBye() {
-        print("Bye. Hope to see you again soon!");
-        printLine();
-        System.exit(0);
-    }
-
 }

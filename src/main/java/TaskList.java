@@ -98,7 +98,7 @@ public class TaskList {
                     command.split("/by ")[1].split(" ")[1].trim());
             break;
         default:
-            throw new DukeInvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
         print("Got it. I've added this task:");

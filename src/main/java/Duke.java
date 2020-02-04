@@ -12,24 +12,30 @@ import java.util.List;
 
 public class Duke {
 
-    private static Ui uI = new Ui();
-    private static Parser parser = new Parser();
-    private static Storage storage = new Storage();
+    public static Ui uI;
+    private static Parser parser;
+    private static Storage storage;
 
     /**
      * Construct a new Duke instance.
      */
     public Duke() {
+        uI = new Ui();
+        parser = new Parser();
+        storage = new Storage();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    PrintStream helper;
-    Boolean hasStart = false;
 
-    protected String getResponse(String input) throws DukeException, DateTimeParseException, IOException {
+    private Boolean hasStart = false;
+
+    /**
+     * Function to generate a response to user input.
+     *
+     * @param input Command entered by the user
+     * @return String representing Duke's response to the input command.
+     * @throws IOException If the file is corrupted or some error occurred during reading the data.
+     */
+    protected String getResponse(String input) throws IOException {
 
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -45,9 +51,15 @@ public class Duke {
             hasStart = true;
         }
         if (input.contains("bye")) {
-            uI.printBye();
+            System.exit(0);
         } else {
-            run(input);
+            try {
+                run(input);
+            } catch (DukeException d) {
+                uI.printError(d);
+            } catch (DateTimeParseException d) {
+                uI.printInvalidDateFormatError();
+            }
         }
         return baos.toString();
     }
@@ -55,7 +67,7 @@ public class Duke {
     private static List<Task> tasks = new ArrayList<>();
 
     /**
-     * Parses the input entered by the client.
+     * Parses the input entered by the user.
      * The following are valid commands that Duke can process:
      * list - lists all the tasks that are stored.
      * done [index] - marks the task of a particular index as done.
@@ -63,11 +75,11 @@ public class Duke {
      * todo [description] - adds the Todo task to the list.
      * deadline [description] /by [date] [time] - adds the Deadline task to the list.
      * event [description] /at [date] [time] - adds the Event task to the list.
-     * If an exit command is entered, it is processed,
-     * then the goodbye message is printed and the program exits from the loop.
      *
+     * @param input Command entered by the user.
      * @throws DukeException If the command is invalid or the task enquired doesn't exists.
      * @throws DateTimeParseException If the date of the deadline or event is not formatted properly.
+     * @throws IOException If the file is corrupted or some error occurred during reading the data.
      */
     private static void run(String input) throws DukeException, DateTimeParseException, IOException {
         TaskList taskList = new TaskList(tasks);

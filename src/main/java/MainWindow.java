@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeException, DateTimeParseException {
+    private void handleUserInput() throws IOException, DateTimeParseException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
