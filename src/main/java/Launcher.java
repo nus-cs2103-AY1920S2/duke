@@ -5,7 +5,6 @@ public class Launcher {
         Duke chatbot = new Duke("Data/Duke.txt");
         Ui.loadingCompleted();
         Ui.initiateGreetings();
-        //Application.launch(Duke.class, args);
         Application.launch(Main.class, args);
         chatbot.run();
     }

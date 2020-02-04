@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = this.getResponse(input); //potential bug
-        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:black");
+        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb907");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
