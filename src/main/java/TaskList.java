@@ -33,6 +33,18 @@ public class TaskList {
             counter++;
         }
     }
+    public void showSearch(String stringToSearch) {
+        ArrayList<Task> searchList = new ArrayList<>();
+
+        for (int i = 0; i < listOfTexts.size(); i++) {
+            String taskDescription = listOfTexts.get(i).getDescription();
+            if (taskDescription.contains(stringToSearch)) {
+                searchList.add(listOfTexts.get(i));
+            }
+        }
+        Ui.printBeforeSearch();
+        Ui.printSearch(searchList);
+    }
 
     public void runCommand(Command command) {
 
@@ -43,6 +55,10 @@ public class TaskList {
                 }
                 case "list": {
                     showCurrentTasks();
+                    break;
+                }
+                case "find": {
+                    showSearch(command.getTaskToSearch());
                     break;
                 }
                 case "done": {

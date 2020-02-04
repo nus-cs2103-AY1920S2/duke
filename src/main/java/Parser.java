@@ -19,6 +19,11 @@ public class Parser {
 
         String[] splitStr = text.split("\\s+");
 
+        if (splitStr[0].toLowerCase().equals("find")) {
+            String taskToFind = text.substring(5);
+            return new FindCommand(taskToFind);
+        }
+
         if (splitStr[0].toLowerCase().equals("done")) {
             int index = Integer.parseInt(splitStr[1]) - 1;
             return new DoneCommand(index);
