@@ -75,7 +75,7 @@ public class TaskList {
      * @param num The corresponding number of the task.
      */
     public static void doneAction(int num) {
-        Task currTask = taskList.get(num);
+        Task currTask = taskList.get(num - 1);
         UI.wrapper(
                 "I have marked "
                         + currTask.getTaskName()

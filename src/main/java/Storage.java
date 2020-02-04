@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class Storage {
 
     private String filePath;
-    private File file;
+    private static File file;
     private BufferedReader br;
-    private FileWriter fw;
+    private static FileWriter fw;
 
     /**
      * Constructor. Initialises the file if it exists. Creates the file the file does not exist.
@@ -57,7 +57,7 @@ public class Storage {
      *
      * @throws IOException Throws an error if there is some sort of I/O error.
      */
-    public void writeList() throws IOException {
+    public static void writeList() throws IOException {
         fw = new FileWriter(file);
         for (Task t : TaskList.getTaskList()) {
             //            System.out.println(t);

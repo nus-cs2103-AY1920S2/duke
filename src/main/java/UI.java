@@ -14,7 +14,7 @@ public class UI {
     /**
      * String of asterisks for design purposes.
      */
-    static String horizontalLine = "***********************************************";
+    static String horizontalLine = "**********************************************";
 
     /**
      * Prints the introduction logo when program is first started.

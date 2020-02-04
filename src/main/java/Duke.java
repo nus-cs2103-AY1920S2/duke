@@ -70,7 +70,7 @@ public class Duke extends Application {
         try {
             parser.scan();
             // Write the list into output
-            storage.writeList();
+//            storage.writeList();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -182,6 +182,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return input;
     }
 }
