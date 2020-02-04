@@ -36,11 +36,11 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        loadStartUp(d.getUi());
     }
 
-    // todo try to find a way to load this upon start-up
     public void loadStartUp(Ui ui) {
-        String welcome = ui.showWelcome();
+        String welcome = ui.showGuiWelcome();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)
         );
