@@ -67,23 +67,31 @@ public class Parser {
             }
         case EVENT:
             String[] eventDetails = fullCommand.split("/at");
+            if (eventDetails.length <= 1) {
+                throw new DukeException("Empty duke.task.Event time", DukeErrorType.EMPTY_TIME, command);
+            }
             String eventTime = eventDetails[1].trim();
             String[] descriptionArr = eventDetails[0].split("event");
             String eventDescription = descriptionArr[1].trim();
-            if (eventDetails.length == 0) {
-                throw new DukeException("Empty duke.task.Event time", DukeErrorType.EMPTY_TIME, command);
-            } else if (descriptionArr.length == 0 || eventDescription.length() == 0) {
+            if (descriptionArr.length == 0 || eventDescription.length() == 0) {
                 throw new DukeException("Empty duke.task.Event description", DukeErrorType.EMPTY_DESCRIPTION, command);
             } else {
                 return new Add(new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
             }
         case DEADLINE:
             String[] deadlineDetails = fullCommand.split("/by");
+            if (deadlineDetails.length <= 1) {
+                throw new DukeException("Empty duke.task.Deadline time", DukeErrorType.EMPTY_TIME, command);
+            }
             String deadlineTime = deadlineDetails[1].trim();
             String deadlineDescription = "";
             String[] descriptionArrDeadLine = deadlineDetails[0].split("deadline");
             deadlineDescription = descriptionArrDeadLine[1].trim();
-            return new Add(new Deadline(deadlineDescription, LocalDate.parse(deadlineTime, USER_FORMAT)));
+            if (descriptionArrDeadLine.length == 0 || deadlineDescription.length() == 0) {
+                throw new DukeException("Empty duke.task.Deadline description", DukeErrorType.EMPTY_DESCRIPTION, command);
+            } else {
+                return new Add(new Deadline(deadlineDescription, LocalDate.parse(deadlineTime, USER_FORMAT)));
+            }
         case DELETE:
             int deleteTaskNumber = Integer.parseInt(inputArr[1]) - 1;
             return new Delete(deleteTaskNumber);
