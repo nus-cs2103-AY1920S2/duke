@@ -1,3 +1,6 @@
+import exception.CommandNotFoundException;
+import exception.InvalidIndexException;
+
 import java.util.Scanner;
 
 public class Ui {

@@ -1,3 +1,5 @@
+import exception.DukeException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -58,7 +60,7 @@ public class Duke {
                     storage.save(tasks);
                 } else if (p.getCommand().equals("find")) {
                     ui.acknowledgeFound(tasks, p.getTask());
-                }   else {
+                } else {
                     ui.printUnknownCommand();
                 }
             } catch (DukeException ex) {
