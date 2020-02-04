@@ -105,7 +105,7 @@ public class Ui {
                     .mapToObj(i -> {
                         Pair<Task, Integer> pair = filteredTaskList.get(i);
                         return (i + 1) + ".\t" + pair.getFirst()
-                                + "\n\t\t[REF INDEX FOR DELETE/DONE: " + (pair.getSecond() + 1) + "]";
+                                + "\n\t[REF INDEX FOR DELETE/DONE: " + (pair.getSecond() + 1) + "]";
                     })
                     .collect(Collectors.toList());
             result.add(0, "Not bad, I found the following:");
@@ -134,7 +134,7 @@ public class Ui {
      * @return The deletion message {@code String}.
      */
     public String printTaskDeleted(Task task, int size) {
-        return this.print("Great! One less thing for me to track for you.", "\t" + task + " [DELETED]",
+        return this.print("Great! One less thing for me to track for you.", task + " [DELETED]",
                 "Now I'm tracking " + size + " " + (size == 1 ? "task" : "tasks") + " for you.");
     }
 
@@ -177,18 +177,18 @@ public class Ui {
         return this.print("Is this the first time I'm talking with you?",
                 "I can't do everything for you, you know? Here's what I do:",
                 new String(new char[65]).replace("\0", "-"),
-                "list \t\t\t\t\t\t\tView current tasks.",
-                "todo [desc.] \t\t\t\t\tCreate ToDo.",
+                "list \t\t\t\t\tView current tasks.",
+                "todo [desc.] \t\t\t\tCreate ToDo.",
                 "event [desc.] /at [time] \t\tCreate Event.",
-                "deadline [desc.] /by [time] \tCreate Deadline.",
-                "done [index] \t\t\t\t\tComplete task at index.",
-                "find [word(s)] \t\t\t\t\tFind tasks with said word(s).",
-                "delete [index] \t\t\t\t\tDelete task at index.",
-                "bye \t\t\t\t\t\t\tBid farewell (sounds great!).",
-                "help \t\t\t\t\t\t\tSee this message again.",
+                "deadline [desc.] /by [time] \t\tCreate Deadline.",
+                "done [index] \t\t\t\tComplete task at index.",
+                "find [word(s)] \t\t\t\tFind tasks with said word(s).",
+                "delete [index] \t\t\t\tDelete task at index.",
+                "bye \t\t\t\t\tBid farewell (sounds great!).",
+                "help \t\t\t\t\tSee this message again.",
                 new String(new char[65]).replace("\0", "-"),
                 "Accepted time formats are:",
-                "d/m/YY \t\t\t\t\t\t\td/m/YY HHmm",
+                "d/m/YY \t\t\t\t\td/m/YY HHmm",
                 "Today/Tonight/Tomorrow \t\t\tMonday/Tuesday etc.");
     }
 
