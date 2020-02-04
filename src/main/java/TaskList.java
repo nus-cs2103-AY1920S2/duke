@@ -1,9 +1,9 @@
-//  contains the task list e.g., it has operations to add/delete tasks in the list
-// and methods to edit task lists
-// and run Task.
-
 import java.util.ArrayList;
 
+/**
+ * TaskList contains the task list and all its operations to add/delete tasks in the list.
+ * Contains a .run() method as well.
+ */
 public class TaskList {
     private ArrayList<Task> listOfTexts;
 
@@ -23,6 +23,9 @@ public class TaskList {
         return this.listOfTexts;
     }
 
+    /**
+     * Prints out all tasks currently in the to do list.
+     */
     public void showCurrentTasks() {
         int counter = 1;
         if (listOfTexts.size() == 0) {
@@ -34,6 +37,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Applies the action on the TaskList as indicated by the type of Command.
+     *
+     * @param command Type of Command described by .getCommand() which return a <code>String</code> description.
+     */
     public void runCommand(Command command) {
 
         try {

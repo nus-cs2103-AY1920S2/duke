@@ -1,10 +1,10 @@
-// deals with interactions with the user
-// what the user type in
-// what will be shown to the user
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Ui Class deals with interaction with the user.
+ * Includes logos and all messages that is sent to the user.
+ */
 public class Ui {
     Scanner scanner;
 
@@ -12,6 +12,9 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * print message with logo on startup.
+     */
     void welcomeMessage() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -25,6 +28,9 @@ public class Ui {
         System.out.println("====================================================================================");
     }
 
+    /**
+     * print when a "bye" Command is run.
+     */
     void terminateMessage() {
         System.out.println("\n");
         System.out.println("====================================================================================");
@@ -39,6 +45,9 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * Error message of no existing file at the current <code>filePath</code>.
+     */
     void showLoadingError() {
         System.out.println("There is no saved To Do List on your Hard disk!");
     }

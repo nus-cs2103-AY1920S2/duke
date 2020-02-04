@@ -1,9 +1,18 @@
+/**
+ * Duke is a chat bot program that builds a to do list. Current functions include:
+ * list, delete, done, todo, deadline, event, bye.
+ *
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for main class for the program.
+     * @param filePath relative path of the file that the data of to do list is saved in.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -15,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main driver for Duke program.
+     */
     public void run() {
         ui.welcomeMessage();
         tasks.showCurrentTasks();
@@ -44,7 +56,5 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("./data/duke.txt");
         duke.run();
-
-
     }
 }

@@ -3,19 +3,31 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
+/**
+ * Storage loads tasks from the file at <code>filePath</code> upon startup
+ * and saves tasks into the file at <code>filePath</code>
+ * every time there is changes to the to do list.
+ *
+ */
 public class Storage {
-    // deals with loading tasks from the file and saving tasks in the file
-    // loading and saving methods goes here
     private File f;
-
+    /**
+     * Constructor for Storage class.
+     * @param filePath relative directory of the file.
+     */
     public Storage(String filePath) {
         this.f = new File(filePath);
     }
 
+    /**
+     * Load the data from the saved file into the current to do list. load() is called upon startup.
+     * The file is read as <code>String</code> and being translated into a <code>Task</code>.
+     * @return ArrayList that contains all Task in the current saved file.
+     * @throws DukeException Exception is thrown when there is no file with the <code>filePath</code>.
+     */
     public ArrayList<Task> load() throws DukeException {
         if ((!f.exists())) {
-            throw new DukeException("☹ OOPS!!! There is no previous file stored! ☹ OOPS!!!");
+            throw new DukeException("☹ OOPS!!! Error: There is no previous file stored! ☹ OOPS!!!");
         } else {
             ArrayList<String> stringTasks = new ArrayList<String>();
             ArrayList<Task> tasks = new ArrayList<Task>();
@@ -92,6 +104,11 @@ public class Storage {
         return localDate;
     }
 
+    /**
+     * Saves the current to do list into the file at <code>filePath</code>.
+     * save(Tasklist tasklist) is called every time a new Command is run.
+     * @param tasklist Tasklist containing all the tasks and methods to modify the list.
+     */
     public void save(TaskList tasklist) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
