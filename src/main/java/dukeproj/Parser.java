@@ -37,8 +37,6 @@ public class Parser {
     private Calender calender;
     /** Primary I/O object used. */
     private Scanner sc;
-    /** User Interface to return user-input*/
-    private Ui ui;
 
     /**
      * Returns the date in LocalDate form parsed from the String entered.
@@ -71,10 +69,12 @@ public class Parser {
         }
     }
 
-    public String getCommandResponse(CommandType commandType, String description)
-            throws DukeDescriptionException, BadDescriptionException, BadDateException {
+    public Command getCommand(CommandType commandType, String description) {
         Command command = new ListCommand(); //default command
         switch (commandType) {
+        case BYE:
+            command = new ExitCommand();
+            break;
         case DONE:
             command = new DoneCommand(description);
             break;
@@ -99,7 +99,7 @@ public class Parser {
         default:
             break;
         }
-        return command.execute(ui, taskList, storage, calender);
+        return command;
     }
 
     /**
@@ -229,11 +229,7 @@ public class Parser {
         }
     }
 
-    public Parser(Ui ui, TaskList taskList, Calender calender, Storage storage) {
-        this.ui = ui;
-        this.taskList = taskList;
-        this.calender = calender;
-        this.storage = storage;
+    public Parser() {
     }
 
     public Parser(TaskList taskList, Calender calender, Storage storage, Scanner sc) {
