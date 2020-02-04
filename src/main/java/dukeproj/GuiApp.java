@@ -21,18 +21,28 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Represents the GUI Application which handles the user's input and Duke's response.
+ */
 public class GuiApp extends Application {
-
+    /** A Local duke variable that contains all the quintessential duke data structures. */
     private Duke duke;
-
+    /** Handles the creation and modification of the scroll pane in the GUI. */
     private ScrollPane scrollPane;
+    /** Represents the dialog container in the GUI. */
     private VBox dialogContainer;
+    /** Represents the user's input box inside the GUI. */
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+    /** Stores the user's image. */
     private Image userIm = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    /** Stores Duke's image. */
     private Image dukeIm = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Starts the GUI application. Required method from Application abstract class.
+     *
+     * @param stage The stage that the GUI will run on.
+     */
     @Override
     public void start(Stage stage) {
         // Set up components
@@ -41,11 +51,10 @@ public class GuiApp extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -91,6 +100,11 @@ public class GuiApp extends Application {
         dukeSay(duke.getUi().say(SayType.INTRO));
     }
 
+    /**
+     * Echoes a string into the GUI by Duke.
+     *
+     * @param str String to be echoed into the GUI by Duke.
+     */
     public void dukeSay(String str) {
         Label text = new Label(str);
 
@@ -131,6 +145,9 @@ public class GuiApp extends Application {
         userInput.clear();
     }
 
+    /**
+     * Closes the GUI Application.
+     */
     private void closeApp() {
         try {
             Platform.exit();
@@ -139,6 +156,9 @@ public class GuiApp extends Application {
         }
     }
 
+    /**
+     * Constructs a GUI app with a predetermined Duke variable.
+     */
     public GuiApp() {
         duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt", true);
     }
