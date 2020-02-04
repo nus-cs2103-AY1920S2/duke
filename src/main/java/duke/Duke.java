@@ -1,11 +1,13 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Initializes the setting and prepare respond to user input.
@@ -43,6 +45,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            if (c instanceof ExitCommand) {
+                Platform.exit(); // statement to exit the JavaFX application
+            }
             return c.execute(tasks, ui, storage);
         } catch (DukeException ex) {
             return ui.showError(ex);

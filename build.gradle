@@ -39,7 +39,7 @@ shadowJar {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 run {

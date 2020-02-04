@@ -1,3 +1,4 @@
 T | 1 | hello
-D | 0 | testing | 20/02/2020 1900
-E | 0 | finish tutorial 2 | 03/02/2020 2000
+D | 1 | testing | 20/02/2020 1900
+E | 1 | finish tutorial 2 | 03/02/2020 2000
+T | 0 | fukup

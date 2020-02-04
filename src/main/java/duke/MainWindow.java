@@ -21,6 +21,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    private static final String WELCOME_MESSAGE = "Welcome to Duke Application!!! \n";
+
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -29,6 +31,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
