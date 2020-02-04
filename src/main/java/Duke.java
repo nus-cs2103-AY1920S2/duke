@@ -1,6 +1,9 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 
 public class Duke {
     enum TaskList {
@@ -99,7 +102,8 @@ public class Duke {
                                 spli = readtext.split("deadline")[1];
                                 des = spli.split("/by")[0];
                                 fin = spli.split("/by")[1];
-                                t = new Deadline(des, fin);
+                                LocalDateTime deadlineTime = convertToDate(fin);
+                                t = new Deadline(des, deadlineTime);
                                 todo.add(t);
                                 try {
                                     //saving file as object
@@ -144,5 +148,12 @@ public class Duke {
         }catch (DukeException ex){
             System.out.print(ex);
         }
+    }
+
+    private static LocalDateTime convertToDate(String fin) {
+        fin = fin.trim();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(fin, dateFormat);
+        return dateTime;
     }
 }
