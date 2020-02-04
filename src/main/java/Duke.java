@@ -28,12 +28,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (IOException ioe) {
-            //ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
     }
 
     /**
@@ -42,13 +37,9 @@ public class Duke {
     public void run() {
         ui.printLogo();
         ui.greetDuke();
-        Parser.handle(tasks, ui);
+        Parser.handleTasks(tasks, ui);
 
-        try {
-            storage.save(tasks);
-        } catch (IOException ioe) {
-            System.out.println(ioe);
-        }
+        storage.save(tasks);
     }
 
     /**

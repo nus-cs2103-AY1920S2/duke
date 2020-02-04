@@ -12,7 +12,7 @@ public class Parser {
      * @param taskList TaskList that contains ArrayList<Task>.
      * @param ui Ui to print out user interface text.
      */
-    public static void handle(TaskList taskList, Ui ui) {
+    public static void handleTasks(TaskList taskList, Ui ui) {
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
         do {
@@ -67,7 +67,7 @@ public class Parser {
      */
     public static String extractCommandType(String input) throws InvalidCommandException{
         String[] inputSplit = input.split(" ", 2);
-        boolean isValidCommand = checkValidCommand(inputSplit[0]);
+        boolean isValidCommand = isValidCommand(inputSplit[0]);
 
         if (!isValidCommand) {
             throw new InvalidCommandException("");
@@ -84,7 +84,7 @@ public class Parser {
      * @throws InvalidTodoException DukeException for invalid Todo tasks.
      */
     public static String prepareTodo(String[] input) throws InvalidTodoException {
-        if (!checkValidTodo(input)) {
+        if (!isValidTodo(input)) {
             throw new InvalidTodoException("");
         } else {
             return input[1];
@@ -101,7 +101,7 @@ public class Parser {
     public static String[] prepareDeadline(String[] input) throws InvalidDeadlineException {
         String[] fieldDetails = input[1].split("/", 2);
 
-        if (!checkValidDeadline(fieldDetails)) {
+        if (!isValidDeadline(fieldDetails)) {
             throw new InvalidDeadlineException("");
         } else {
             return fieldDetails;
@@ -117,7 +117,7 @@ public class Parser {
     public static String[] prepareEvent(String[] input) throws InvalidEventException {
         String[] fieldDetails = input[1].split("/", 2);
 
-        if (!checkValidEvent(fieldDetails)) {
+        if (!isValidEvent(fieldDetails)) {
             throw new InvalidEventException("");
         } else {
             return fieldDetails;
@@ -134,13 +134,14 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
+
     /**
      * Checks if input is of valid command type.
      *
      * @param type String representing command type.
      * @return boolean dictating if command is valid or invalid.
      */
-    public static boolean checkValidCommand(String type) {
+    public static boolean isValidCommand(String type) {
         if (type.equals("todo")
                 || type.equals("deadline")
                 || type.equals("event")
@@ -161,12 +162,8 @@ public class Parser {
      * @param input String array containing task's type and description.
      * @return boolean dictating if array has enough elements for a valid Todo task.
      */
-    public static boolean checkValidTodo(String[] input) {
-        if (input.length == 2) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean isValidTodo(String[] input) {
+        return input.length == 2;
     }
 
     /**
@@ -175,14 +172,9 @@ public class Parser {
      * @param input String array containing task's type, description, and do by date.
      * @return boolean dictating if array has enough elements for a valid Deadline task.
      */
-    public static boolean checkValidDeadline(String[] input) {
-        Arrays.toString(input);
-        if (input.length == 2) {
-            return true;
-        } else {
-            return false;
+    public static boolean isValidDeadline(String[] input) {
+        return input.length == 2;
         }
-    }
 
     /**
      * Checks if input array is three elements long and thus a valid Event task.
@@ -190,12 +182,8 @@ public class Parser {
      * @param input String array containing task's type, description, and do at date.
      * @return boolean dictating if array has enough elements for a valid Event task.
      */
-    public static boolean checkValidEvent(String[] input) {
-        if (input.length == 2) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean isValidEvent(String[] input) {
+        return input.length == 2;
     }
 }
 

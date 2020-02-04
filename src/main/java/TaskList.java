@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class TaskList {
     public ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> tasks) {
@@ -20,14 +23,14 @@ public class TaskList {
     public void addEvent(String[] task) {
         Event newTask = new Event(task[0], task[1]);
         tasks.add(newTask);
-        print("added new event: " + task);
+        print("added new event: " + task.toString());
     }
 
     public void addDeadline(String[] task) {
         Deadline newTask = new Deadline(task[0], task[1]);
         print(newTask.toString());
         tasks.add(newTask);
-        print("added new deadline: " + task);
+        print("added new deadline: " + task.toString());
     }
 
     public void markDone(int taskIndex) {

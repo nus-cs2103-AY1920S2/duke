@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Storage {
         return taskString;
     }
 
-    public void save(TaskList taskList) throws IOException {
+    public void save(TaskList taskList) {
         try {
             File file = new File(filePath);
             FileWriter writer = new FileWriter(file);
@@ -40,8 +41,8 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws IOException {
-        ArrayList<Task> taskList = new ArrayList<Task>();
+    public ArrayList<Task> load() {
+        ArrayList<Task> taskList = new ArrayList<>();
 
         try {
             File file = new File(filePath);
@@ -64,8 +65,10 @@ public class Storage {
                         task = new Event(lineSplit[2], lineSplit[3]);
                         break;
                     default:
-                        throw new IllegalStateException("Unexpected value: " + lineSplit[0]);
+                        throw new IllegalStateException("Unexpected value: "
+                                + lineSplit[0]);
                 }
+
                 if (lineSplit[1].equals("1")) {task.markAsDone();}
                 taskList.add(task);
             }
