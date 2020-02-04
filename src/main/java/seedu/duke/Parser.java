@@ -13,7 +13,6 @@ import seedu.duke.exception.DukeNoKeywordException;
 import seedu.duke.exception.DukeWrongCommandException;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 class Parser {
@@ -50,12 +49,16 @@ class Parser {
                 break;
             case find:
                 isSplitInputLengthLargerThanOne(splitInput);
-                String[] keywords = Arrays.copyOfRange(splitInput, 1, splitInput.length);
+                String[] keywords = fullCommand
+                        .substring(Command.Type.find.getCommand().length())
+                        .strip()
+                        .split(Pattern.quote(" "));
                 toReturn = new FindCommand(keywords);
                 break;
             case deadline:
             case event:
-                toReturn = createDeadLineOrEventCommand(splitInput, commandString);
+                isSplitInputLengthLargerThanOne(splitInput);
+                toReturn = createDeadLineOrEventCommand(fullCommand, commandString);
                 break;
             default:
                 break;
@@ -73,26 +76,22 @@ class Parser {
         }
     }
 
-    private static Command createDeadLineOrEventCommand(String[] splitInput, String commandString)
-            throws DukeNoKeywordException, DukeEmptyDescriptionException {
-        isSplitInputLengthLargerThanOne(splitInput);
+    private static Command createDeadLineOrEventCommand(String fullCommand, String commandString)
+            throws DukeNoKeywordException {
+        Command.Type type = Command.Type.valueOf(commandString);
+        Command.Type keyword = type == Command.Type.deadline
+                ? Command.Type.deadline_by
+                : Command.Type.event_at;
 
-        String keyword = commandString.equals(Command.Type.deadline.getCommand())
-                ? Command.Type.deadline_by.getCommand()
-                : Command.Type.event_at.getCommand();
-        int keywordIndex = Arrays.asList(splitInput).indexOf(keyword);
+        int keywordIndex = fullCommand.indexOf(keyword.getCommand());
         if (keywordIndex == -1) {
             throw new DukeNoKeywordException("OOPS!!! The description must contain a keyword.");
         }
 
-        String taskDescription = String.join(" ",
-                Arrays.copyOfRange(splitInput, 1, keywordIndex));
-        String deadlineOrTime = String.join(" ",
-                Arrays.copyOfRange(splitInput, keywordIndex + 1, splitInput.length));
+        String taskDescription = fullCommand.substring(type.getCommand().length(), keywordIndex).strip();
+        String deadlineOrTime = fullCommand.substring(keywordIndex + keyword.getCommand().length()).strip();
         LocalDate date = LocalDate.parse(deadlineOrTime);
 
-        return commandString.equals(Command.Type.deadline.getCommand())
-                ? new AddCommand(Command.Type.deadline, taskDescription, date)
-                : new AddCommand(Command.Type.event, taskDescription, date);
+        return new AddCommand(type, taskDescription, date);
     }
 }
