@@ -1,4 +1,4 @@
-package test;
+package sampletest;
 /**
  * CS2103 Individual Project
  * @author Wei Cheng

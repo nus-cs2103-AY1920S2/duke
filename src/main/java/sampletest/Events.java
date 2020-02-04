@@ -1,4 +1,4 @@
-package test;
+package sampletest;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * Event is a subclass of task which takes an additional variable time
  */
 
-public class Events extends test.Task{
+public class Events extends Task{
     private LocalDate date;
 
     /**

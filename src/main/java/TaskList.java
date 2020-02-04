@@ -1,5 +1,5 @@
 
-import test.Task;
+import sampletest.Task;
 import java.util.ArrayList;
 
 /**

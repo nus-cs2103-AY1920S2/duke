@@ -1,5 +1,8 @@
-package test;
 
+
+import sampletest.Task;
+import sampletest.Events;
+import sampletest.Deadlines;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +17,7 @@ public class JunitTest {
      */
     @Test
     public void initiateTaskTest(){
-        test.Task sample = new test.Task("Code java");
+        Task sample = new Task("Code java");
         String expectedDescription = "Code java";
         String actualDescription = sample.getDescription();
         String expectedStatus = "No";
@@ -26,7 +29,8 @@ public class JunitTest {
      * Test the Event class
      */
     @Test
-    public void initiateEventTest(){ test.Events sample = new test.Events("Java for Life","2020-01-29");
+    public void initiateEventTest(){
+        Events sample = new Events("Java for Life","2020-01-29");
         String expectedDate = "29 JANUARY 2020";
         String actualDate = sample.getTime();
         assertEquals(expectedDate,actualDate);
@@ -35,7 +39,8 @@ public class JunitTest {
      * Test the Deadlines class
      */
     @Test
-    public void initiateDeadlinesTest(){ test.Deadlines sample = new test.Deadlines("Java for Life","2020-01-30");
+    public void initiateDeadlinesTest(){
+        Deadlines sample = new Deadlines("Java for Life","2020-01-30");
         String expectedDate = "30 JANUARY 2020";
         String actualDate = sample.getTime();
         assertEquals(expectedDate,actualDate);

@@ -1,7 +1,7 @@
 
-import test.Task;
-import test.Events;
-import test.Deadlines;
+import sampletest.Task;
+import sampletest.Events;
+import sampletest.Deadlines;
 import java.util.Scanner;
 import java.util.ArrayList;
 /**

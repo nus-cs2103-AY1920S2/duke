@@ -6,9 +6,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import test.Task;
-import test.Events;
-import test.Deadlines;
+
+import sampletest.Task;
+import sampletest.Events;
+import sampletest.Deadlines;
 
 /**
  * CS2103 Individual Project

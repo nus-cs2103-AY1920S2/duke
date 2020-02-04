@@ -1,4 +1,4 @@
-package test;
+package sampletest;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * @author Wei Cheng
  * Deadlines is a subclass of task which takes an additional variable time
  */
-public class Deadlines extends test.Task{
+public class Deadlines extends Task{
     private LocalDate date;
     /**
      * Constructor for the Deadlines by taking in
