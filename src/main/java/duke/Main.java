@@ -20,6 +20,10 @@ public class Main extends Application {
     public Main() throws IOException {
     }
 
+    /**
+     * Starts the scene builder.
+     * @param stage The stage for the scene.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -33,7 +37,10 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Terminates the scene builder.
+     * @throws Exception
+     */
     @Override
     public void stop() throws Exception {
         TimeUnit.MILLISECONDS.sleep(50);
