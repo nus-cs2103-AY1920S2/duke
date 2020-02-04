@@ -1,36 +1,31 @@
 package duke;
 
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 /**
- * The Main Class initialises all important objects for the program to run.
- * @author qiujingying
- * @version 1.0
+ * A GUI for Duke using FXML.
  */
-public class Main {
+public class Main extends Application {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Eevee ui;
+    private Duke duke = new Duke();
 
-    /**
-     * Creates a Main object from a filepath.
-     * @param filepath filepath
-     */
-    public Main(String filepath) {
-        ui = new Eevee();
-        storage = new Storage(filepath);
+    @Override
+    public void start(Stage stage) {
         try {
-            tasks = new TaskList(storage.loadData());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    public void run() {
-        ui.echo(tasks, storage);
-    }
-
-    public static void main(String[] args) {
-        new Main("../../../data/duke.txt").run();
     }
 }

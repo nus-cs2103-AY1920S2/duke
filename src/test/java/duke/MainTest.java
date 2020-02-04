@@ -11,7 +11,7 @@ public class MainTest {
     private ArrayList<Task> dummy;
 
     @Test
-    public void dukeTaskTest(){
+    public void dukeTaskTest() {
         dummy = new ArrayList<>();
         dummy.add(new Task("read book", ""));
 
