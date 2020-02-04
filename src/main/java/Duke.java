@@ -1,9 +1,17 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
+
+    public Duke() {
+
+    }
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -79,5 +87,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // setting the scene to be our label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show();
     }
 }
