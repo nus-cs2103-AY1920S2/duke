@@ -12,7 +12,7 @@ import java.io.FileReader;
  * The UI class for duke.Duke
  **/
 public class Ui {
-    protected String logoPath = "duke/files/logo.txt";
+    protected String logoPath = "../resources/logo.txt";
     protected String waterDroplets = "\uD83D\uDCA6";
     protected Storage storage;
 
