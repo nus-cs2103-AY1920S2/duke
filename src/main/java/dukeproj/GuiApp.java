@@ -1,8 +1,12 @@
 package dukeproj;
 
+import dukeproj.command.Command;
+import dukeproj.command.ListCommand;
 import dukeproj.enums.SayType;
+import dukeproj.exception.InvalidCommandException;
 import dukeproj.gui.DialogBox;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -98,10 +102,20 @@ public class GuiApp extends Application {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and appends them to
      * dialog container. Clears user input upon processing.
+     * The method will also check whether the command given by user is an exit command and responses appropriately.
      */
     private void handleUserInput() {
+        String dukeResponse = "";
+        Command command = new ListCommand(); //default command
+        try {
+            command = duke.getCommandResponse(userInput.getText());
+            dukeResponse = duke.getResponse(command);
+        } catch (InvalidCommandException e) {
+            dukeResponse = duke.getUi().say(SayType.INVALID_COMMAND);
+        }
+
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(duke.getResponse(userInput.getText()));
+        Label dukeText = new Label(dukeResponse);
 
         userText.setWrapText(true);
         dukeText.setWrapText(true);
@@ -110,7 +124,8 @@ public class GuiApp extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(userIm)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeIm))
         );
-        if (userInput.getText().toUpperCase().equals("BYE")) {
+
+        if (command.isExit()) {
             closeApp();
         }
         userInput.clear();
@@ -118,8 +133,7 @@ public class GuiApp extends Application {
 
     private void closeApp() {
         try {
-            duke.getUi().say(SayType.EXIT);
-            stop();
+            Platform.exit();
         } catch (Exception e) {
             dukeSay("Oh dear! I cant seem to close, please alt+F4");
         }
