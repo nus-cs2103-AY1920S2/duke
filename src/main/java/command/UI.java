@@ -1,3 +1,5 @@
+package command;
+
 public class UI {
     public static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
