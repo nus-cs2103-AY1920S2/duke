@@ -1,4 +1,7 @@
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class TaskList {
     List<Task> taskList;
@@ -9,11 +12,11 @@ public class TaskList {
         this.taskList = storage.loadTask();
     }
 
-    public void addTask(String taskName){
+    public void addTask(String taskName) {
         try {
             String taskType = taskName.split(" ", 2)[0];
             String taskDesc = taskName.split(" ", 2)[1];
-            Task newTask;
+            Task newTask = null;
             if (taskType.equals("todo")) {
                 newTask = new ToDo(taskDesc);
             } else if (taskType.equals("deadline")) {
@@ -23,22 +26,48 @@ public class TaskList {
                 String[] res = dateAndPreposition.split(" ", 2);
                 String preposition = res[0];
                 String dateTime = res[1];
-                newTask = new Deadline(task, preposition, dateTime);
-            } else {
+                try {
+                    String[] parseDateTime = dateTime.split(" ",  2);
+                    LocalDate localDate = LocalDate.parse(parseDateTime[0]);
+                    if(parseDateTime.length > 1) {
+                        String time = parseDateTime[1];
+                        newTask = new Deadline(task, preposition, localDate, time);
+                    } else {
+                        newTask = new Deadline(task, preposition, localDate);
+                    }
+                } catch (DateTimeParseException e) {
+                    System.err.println("Error parsing date and time. Please input date and time as YYYY-mm-dd hh:mm");
+                }
+
+            } else { //case when taskType is "event"
                 String[] in = taskDesc.split("/", 2);
                 String task = in[0].trim();
                 String dateAndPreposition = in[1];
                 String[] res = dateAndPreposition.split(" ", 2);
                 String preposition = res[0];
                 String dateTime = res[1];
-                newTask = new Event(task, preposition, dateTime);
+                try {
+                    String[] parseDateTime = dateTime.split(" ",  2);
+                    LocalDate localDate = LocalDate.parse(parseDateTime[0]);
+                    if(parseDateTime.length > 1) {
+                        String time = parseDateTime[1];
+                        newTask = new Event(task, preposition, localDate, time);
+                    } else {
+                        newTask = new Event(task, preposition, localDate);
+                    }
+                } catch (DateTimeParseException e) {
+                    System.err.println("Error parsing date and time. Please input date and time as YYYY-mm-dd hh:mm");
+                }
             }
 
-            taskList.add(newTask);
-
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + newTask);
-            System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+            if (Objects.isNull(newTask)){
+                System.err.println("Attempting to add invalid task. Operation aborted.");
+            } else {
+                taskList.add(newTask);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("       " + newTask);
+                System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+            }
         } catch (IndexOutOfBoundsException e){
             System.err.println("     ☹ OOPS!!! The description of a task cannot be empty.");
         } finally {
