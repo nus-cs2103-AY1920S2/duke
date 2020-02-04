@@ -14,27 +14,11 @@ public class Duke {
      * Start the chat bot by first retrieving saved file from hard disk then
      * obtaining input from the user. Saves the task list into the storage file
      * when user terminates the programme.
-     *
      * @param args user input.
      */
     public void start() {
         Storage.readFromFile();
         Storage.readFromFile();
-        boolean isRunning = true;
-/**
- while (isRunning) {
- try {
- String input = sc.nextLine();
- String output = Controller.readInput(input);
- if (output.equals(UI.BYE)) {
- isRunning = false;
- }
-                printOutput(output);
-            } catch (DukeException e) {
-                System.err.println(e);
-            }
-        }
- */
         Storage.saveFile();
     }
 }
