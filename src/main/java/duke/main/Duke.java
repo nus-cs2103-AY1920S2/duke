@@ -27,6 +27,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Stage stage;
 
     private Storage storage;
     private TaskList tasks;
@@ -46,6 +47,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+        this.stage = stage;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -140,12 +142,13 @@ public class Duke extends Application {
         Label userText = new Label("\nUser: " + userInput.getText());
         
         String response = "";
+        Boolean isExit = false;
 
         try {
             String input = userInput.getText();
             Command command = parser.parse(input);
             response = command.execute(tasks, ui, storage);
-            //isExit = command.isExit();
+            isExit = command.isExit();
         } catch (DukeException e) {
             response = ui.showDukeError(e);
         } catch (DateTimeParseException e) {
@@ -156,6 +159,10 @@ public class Duke extends Application {
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)), new Label(Constant.LINE),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke)), new Label(Constant.LINE));
         userInput.clear();
+
+        if(isExit){
+            stage.close();
+        }
     }
 
     /**
