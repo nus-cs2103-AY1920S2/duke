@@ -76,7 +76,7 @@ public class TaskList {
      */
     public void delete (int taskNum) {
         try {
-            if (taskNum <= this.taskList.size()) {
+            if (taskNum <= this.size) {
                 Task deletedTask = this.taskList.get (taskNum - 1);
                 String status = deletedTask.getStatus();
                 if (status.equals ("Not Done")) {
@@ -86,6 +86,7 @@ public class TaskList {
                 System.out.println ("Noted. I've removed this task:\n" + deletedTask
                         + "\nNow you have " + Duke.pendingTask + " tasks in the list.");
                 this.taskList.remove (taskNum - 1);
+                this.size--;
             } else {
                 System.out.println ("Sorry, there is no such task!");
             }
@@ -110,6 +111,7 @@ public class TaskList {
                     Todo todo = new Todo(task1);
                     this.taskList.add(todo);
                     Duke.pendingTask++;
+                    this.size++;
                     System.out.println ("Got it. I've added the following task:\n" +
                             todo + "\nYou now have " + Duke.pendingTask + " task in the list");
                 }
@@ -125,6 +127,7 @@ public class TaskList {
                 Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
                 this.taskList.add(deadline);
                 Duke.pendingTask++;
+                this.size++;
                 System.out.println ("Got it. I've added the following task:\n" +
                         deadline + "\nYou now have " + Duke.pendingTask + " task in the list");
             } catch (Exception e) {
@@ -142,6 +145,7 @@ public class TaskList {
                 Event event = new Event(input.substring(6, taskIndex), date, start, end);
                 this.taskList.add(event);
                 Duke.pendingTask++;
+                this.size++;
                 System.out.println ("Got it. I've added the following task:\n" +
                         event + "\nYou now have " + Duke.pendingTask + " task in the list");
             } catch (Exception e) {
@@ -158,7 +162,7 @@ public class TaskList {
     public void find (String keyWord) {
         System.out.println ("Here are the matching tasks in your list:\n");
         int j = 0;
-        for (int i = 0; i < this.taskList.size(); i++) {
+        for (int i = 0; i < this.size; i++) {
             String description = this.taskList.get(i).toString();
             if (description.contains (keyWord)) {
                 System.out.println((i + 1) + "." + description);
