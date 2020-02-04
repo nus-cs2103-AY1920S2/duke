@@ -15,3 +15,5 @@ bin/
 text-ui-test/ACTUAL.TXT
 text-ui-test/data/*.txt
 data/*.txt
+gradlew
+gradlew.bat
