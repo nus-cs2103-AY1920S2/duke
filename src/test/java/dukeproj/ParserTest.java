@@ -1,6 +1,6 @@
 package dukeproj;
 
-import dukeproj.enums.Command;
+import dukeproj.enums.CommandType;
 import dukeproj.exception.BadDateException;
 import dukeproj.exception.InvalidCommandException;
 import org.junit.jupiter.api.Test;
@@ -30,13 +30,13 @@ public class ParserTest {
 
     @Test
     public void commandParser_success() throws InvalidCommandException {
-        assertEquals(Command.TODO, Parser.commandParser("todo"));
+        assertEquals(CommandType.TODO, Parser.commandParser("todo"));
     }
 
     @Test
     public void commandParser_exceptionThrown() {
         try {
-            assertEquals(Command.TODO, Parser.commandParser("td"));
+            assertEquals(CommandType.TODO, Parser.commandParser("td"));
             fail();
         } catch (InvalidCommandException e) {
             assertEquals("td is an invalid command", e.getMessage());
