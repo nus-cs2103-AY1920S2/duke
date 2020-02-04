@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.command.Command;
 import duke.command.ClearCommand;
 import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
@@ -9,6 +10,7 @@ import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.command.CalendarCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
