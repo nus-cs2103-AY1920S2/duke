@@ -63,7 +63,7 @@ public class TaskList {
     /**
      * Adds an event task to the TaskList.
      *
-     * @param desc description of event provided.
+     * @param desc   description of event provided.
      * @param timing timing for the event provided.
      */
     public void newEvent(String desc, String timing) {
@@ -74,7 +74,7 @@ public class TaskList {
      * Adds a deadline task to the TaskList.
      *
      * @param desc description of deadline provided.
-     * @param by due date for the deadline.
+     * @param by   due date for the deadline.
      */
     public void newDeadline(String desc, String by) {
         listOfTasks.add(new Deadline(desc, by));
@@ -92,7 +92,7 @@ public class TaskList {
     public TaskList getMatches(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (int i = 0; i < listOfTasks.size(); i++) {
-            String descSplit[] = listOfTasks.get(i).getDescription().split(" ");
+            String[] descSplit = listOfTasks.get(i).getDescription().split(" ");
             for (int j = 0; j < descSplit.length; j++) {
                 if (descSplit[j].equals(keyword)) {
                     matchingTasks.add(listOfTasks.get(i));

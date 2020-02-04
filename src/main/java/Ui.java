@@ -67,7 +67,7 @@ public class Ui {
      * Prints out updated message when task is marked as done in the TaskList.
      *
      * @param listOfTasks List of all saved tasks.
-     * @param index Index at which the task is to be marked as done.
+     * @param index       Index at which the task is to be marked as done.
      * @throws DukeException when index is out of bounds of the TaskList.
      */
     public void printOutDoneTask(TaskList listOfTasks, int index) throws DukeException {
@@ -106,7 +106,7 @@ public class Ui {
     public void printOutFound(TaskList listOfTasks) {
         System.out.println("Here are the matching tasks in your list:");
         int i = 1;
-        for(Task task : listOfTasks.getTaskList()) {
+        for (Task task : listOfTasks.getTaskList()) {
             System.out.printf("%d.%s\n", i, task);
             i++;
         }

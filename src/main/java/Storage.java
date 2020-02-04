@@ -31,7 +31,7 @@ public class Storage {
         if (listOfTasks.getNumOfTasks() < 1) {
             return;
         }
-        FileWriter taskAdd = new FileWriter(path,true);
+        FileWriter taskAdd = new FileWriter(path, true);
         for (int i = 0; i < listOfTasks.getNumOfTasks(); i++) {
             try {
                 taskAdd.write(listOfTasks.getTask(i) + "\n");
@@ -70,9 +70,9 @@ public class Storage {
 
             } else if (initial == 'D') {
                 String[] subStringy = desc.split(" \\(by: ");
-                String day = subStringy[1].substring(0,2);
-                String month = subStringy[1].substring(3,5);
-                String year = subStringy[1].substring(6,10);
+                String day = subStringy[1].substring(0, 2);
+                String month = subStringy[1].substring(3, 5);
+                String year = subStringy[1].substring(6, 10);
                 String timing = subStringy[1].substring(11, 15);
                 String reString = year + "-" + month + "-" + day + " " + timing;
                 listOfTasks.add(new Deadline(subStringy[0], reString));
