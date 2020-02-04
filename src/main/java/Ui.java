@@ -27,7 +27,7 @@ public class Ui {
         //welcome message and showing the list to the user
         String s = typeSetting("    Hello, I'm Bob. 👶 👶 👶\n    " +
                 "What can I do for you? 😃\n");
-        return s + gettingList(taskList);
+        return s + getList(taskList);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Ui {
      * gets a list which listing all the tasks recorded.
      * @param taskList the TaskList which contains all the Tasks recorded.
      */
-    public String gettingList(TaskList taskList) {
+    public String getList(TaskList taskList) {
         List<Task> list = taskList.getTasks();
         int index = list.size();
         StringBuilder li = new StringBuilder("    📜 Here are the tasks in your list:\n");

@@ -109,7 +109,11 @@ public class Duke {
             break;
 
         case LIST:
-            output += this.ui.gettingList(taskList);
+            output += this.ui.getList(taskList);
+            break;
+
+        case HEY:
+            output += this.ui.greet(taskList);
             break;
 
         default:
@@ -117,57 +121,4 @@ public class Duke {
         }
         return output;
     }
-
-//    /**
-//     * sets up the bot, shows greeting messages and then the user is able to interact with the bot.
-//     */
-//    public String run(String str) {
-//        //Scanner sc = new Scanner(System.in);
-//        boolean isexiting = false;
-//        String output = "";
-//        this.ui.greet(taskList);
-//
-//        //String str = sc.nextLine();
-//        while (!isexiting) {
-//            //check if the user want to exit
-//            while (!str.equals("bye")) {
-//                if (str.equals("list")) {
-//                    //print out the whole list
-//                    return this.ui.gettingList(taskList);
-//                } else {
-//                    //update the list of tasks
-//                    try {
-//                        output += processRequest(str);
-//                        this.storage.rewriteFile(taskList);
-//                        return output;
-//                    } catch (InvalidKeyException | IllegalArgumentException | EmptyDescriptionException
-//                            | IOException e) {
-//                        System.err.println(e);
-//                    }
-//                }
-//                //str = sc.nextLine();
-//            }
-//
-//            //exit confirmation
-//            ui.bye();
-//
-//            if (str.equals("y")) {
-//                //confirm to leave and leaving message
-//                isexiting = true;
-//                return ui.typeSetting("    Bye. Hope to see you again soon! \uD83D\uDE1E\n");
-//            } else {
-//                //not leaving and continue to interact with Bob
-//                return ui.typeSetting("    I know you are the best! \uD83D\uDE06\n    Then, what's next?\n");
-//                //str = sc.nextLine();
-//            }
-//        }
-//        return output;
-//    }
-
-//    /**
-//     * runs the whole program.
-//     */
-    //public static void main(String[] args) {
-    //    new Duke(taskData).run();
-    //}
 }

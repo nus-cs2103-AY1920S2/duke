@@ -5,5 +5,6 @@ public enum Message {
     TODO,
     DEADLINE,
     EVENT,
-    LIST;
+    LIST,
+    HEY;
 }

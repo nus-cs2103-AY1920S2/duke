@@ -15,6 +15,7 @@ public class Parser {
         put("deadline", Message.DEADLINE);
         put("event", Message.EVENT);
         put("list", Message.LIST);
+        put("hey", Message.HEY);
     }};
 
     /**
