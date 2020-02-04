@@ -11,7 +11,7 @@ public class Parser {
     private String command;
 
     /**
-     * Constructor which takes in a string by the user to be interpreted.
+     * Constructs a Parser which takes in a string by the user to be interpreted.
      **/
     Parser(String next) {
         this.command = next;

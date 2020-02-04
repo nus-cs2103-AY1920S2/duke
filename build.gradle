@@ -19,6 +19,10 @@ dependencies {
     implementation 'junit:junit:4.12'
 }
 
+dependencies {
+    implementation 'junit:junit:4.12'
+}
+
 application {
     // Change this to your main class.
     mainClassName = "duke.Duke"
@@ -54,5 +58,4 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-\
 }

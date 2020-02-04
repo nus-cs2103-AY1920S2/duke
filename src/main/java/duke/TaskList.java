@@ -2,7 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import java.util.List;
 
 /**
  * This class wraps around the class ArrayList from Java
@@ -13,14 +12,14 @@ public class TaskList {
 
 
     /**
-     * Constructor for an empty array list.
+     * Constructs an empty array list.
      **/
     TaskList() {
         ArrayList<Task> taskList = new ArrayList<Task>();
     }
 
     /**
-     * Private constructor of a non-empty array list.
+     * Constructs a of a non-empty array list using a private constructor.
      * @param taskList The ArrayList of this self-implemented TaskList.
      **/
     TaskList(ArrayList<Task> taskList) {
@@ -28,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Set an object into the ArrayList at a specific index
+     * Sets an object into the ArrayList at a specific index
      * following the set() method of Java's ArrayList.
      * @param t The task to be added
      * @param i The index to be inserted
@@ -38,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * Get a task object from the ArrayList following the get() method of Java's ArrayList.
+     * Gets a task object from the ArrayList following the get() method of Java's ArrayList.
      * @param i The indec of the task to be taken
      **/
     public Task get(int i) {
@@ -46,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Remove an object into the ArrayList following the remove() method of Java's ArrayList.
+     * Removes an object into the ArrayList following the remove() method of Java's ArrayList.
      * @param t The task to be added
      **/
     public void remove(Task t) {
@@ -54,14 +53,14 @@ public class TaskList {
     }
 
     /**
-     * Calculate the size of the ArrayList following the size() method of Java's ArrayList.
+     * Calculates the size of the ArrayList following the size() method of Java's ArrayList.
      **/
     public int size() {
         return this.taskList.size();
     }
 
     /**
-     * Add an object into the ArrayList following the add() method of Java's ArrayList.
+     * Adds an object into the ArrayList following the add() method of Java's ArrayList.
      * @param t The task to be added
      **/
     public void add(Task t) {
@@ -69,7 +68,7 @@ public class TaskList {
     }
 
     /**
-     * Obtain the list embedded in this TaskList.
+     * Obtains the list embedded in this TaskList.
      * @return An ArrayList of this TaksList
      **/
     public ArrayList<Task> getTasks() {
@@ -77,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Filter the list of task to the one that contains a certain string.
+     * Filters the list of task to the one that contains a certain string.
      * @return A TaskList that has been filtered
      **/
     public TaskList filter(String s) {

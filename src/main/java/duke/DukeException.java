@@ -5,7 +5,7 @@ package duke;
  */
 public class DukeException extends Exception {
     /**
-     * Constructor for a exception specific to Duke.
+     * Constructs an a exception specific to Duke.
      * @param message The message of the exception
      */
     DukeException(String message) {
@@ -13,7 +13,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * String to be printed when there is an exception.
+     * Prints the exception message when there is an exception.
      * @return The string of the message of the exception.
      */
     public String toString() {

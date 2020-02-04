@@ -1,13 +1,8 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -52,7 +47,7 @@ public class Duke {
 
 
     /**
-     * Constructor which takes in a file path
+     * Constructs a Duke object, it takes in a file path
      * to obtain information from the file.
      * @param filePath The file path to the file to be modified
      **/
@@ -61,7 +56,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (IOException e) {
             ui.showLoadingError(e);
             tasks = new TaskList();
         }
@@ -71,14 +66,14 @@ public class Duke {
     }
 
     /**
-     * The main method to run the chatbot.
+     * Calls the run method to run the chatbot.
      **/
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
 
     /**
-     * This run method.
+     * Runs Duke chatbot.
      **/
     public void run() {
         ui.greetUser();
@@ -86,7 +81,7 @@ public class Duke {
     }
 
     /**
-     * Method to process the input from user.
+     * Processes the input from user.
      **/
     public void processInput() {
         Scanner sc = new Scanner(System.in);
@@ -165,7 +160,7 @@ public class Duke {
     }
 
     /**
-     * Method to add a task to the list.
+     * Adds a task to the list.
      **/
     void addTask(Task newTask) {
         tasks.add(newTask);

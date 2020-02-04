@@ -10,7 +10,7 @@ public class Event extends Task {
     private LocalDateTime date;
 
     /**
-     * Constructor for an event task, which is not done.
+     * Constructs an event task, which is not done.
      * @param name The name of event task
      * @param date The date of event task
      */
@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for an event task, in which the done status can be specified.
+     * Constructs an event task, in which the done status can be specified.
      * @param name The name of event task
      * @param date The date of event task
      * @param isDone The done status of event task
@@ -31,7 +31,7 @@ public class Event extends Task {
     }
 
     /**
-     * String to be displayed for an event task.
+     * Displays string for an event task.
      * @return The string of event task to be displayed to user.
      */
     public String toString() {
@@ -40,7 +40,7 @@ public class Event extends Task {
     }
 
     /**
-     * String to be returned when written and saved to drive for an event task.
+     * Returns string to be written and saved to drive for an event task.
      * @return The string of event task to be written to the file and saved.
      */
     public String writeDrive() {
@@ -49,7 +49,7 @@ public class Event extends Task {
     }
 
     /**
-     * A new event object with done property being set.
+     * Sets an event object to done status being done.
      * @return A new event object.
      */
     public Event setDone() {
