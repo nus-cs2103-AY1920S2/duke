@@ -15,6 +15,10 @@ import CustomException.DukeException;
     BYE
 } */
 
+/**
+ * Represents a chatbot to store list of things to do. A <code>Duke</code> object corresponds to
+ * a chatbot that stores a list of things to do.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -49,6 +53,10 @@ public class Duke {
     }
 }
 
+/**
+ * Represents a task to be done. It stores the description of the task and whether it has been
+ * done or not.
+ */
 class Task {
     protected String description;
     protected boolean isDone;
@@ -58,25 +66,46 @@ class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns a symbol representing whether the task has been completed
+     *
+     * @return a tick (if done) or a cross (if not done)
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Marks the task as done
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Returns a string representation of the task
+     *
+     * @return a string representation of the task in the format "[X] Description"
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Returns a string representation of the in the database format
+     *
+     * @return a string in the form "| 1 | description"
+     */
     public String convert() {
         int done = isDone ? 1 : 0;
         return " | " + done + " | " + description;
     }
 }
 
+/**
+ * Represents an Event Task. A <code>Event</code> object corresponds to an Event to attend
+ */
 class Event extends Task {
     protected LocalDate at;
 
@@ -85,16 +114,29 @@ class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns a string representation of the in the database format
+     *
+     * @return a string in the form "| 1 | description (at: 20-08-09)"
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+    /**
+     * Returns a string representation of the in the database format
+     *
+     * @return a string in the form "| 1 | description | 2020-08-09"
+     */
     public String convert() {
         return "E" + super.convert() + " | " + at;
     }
 }
 
+/**
+ * Represents a wrapper for a File database. A <code>Storage</code> object corresponds to a database
+ */
 class Storage {
     private File database;
 
@@ -102,6 +144,12 @@ class Storage {
         database = new File(fileName);
     }
 
+    /**
+     * Returns an array of String of all tasks read from the database
+     *
+     * @return an array of String
+     * @throws IOException
+     */
     // returns an array of String
     public ArrayList<String> load() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(database));
@@ -115,6 +163,12 @@ class Storage {
         return contents;
     }
 
+    /**
+     * Writes from memory to the database
+     *
+     * @param list
+     * @throws IOException
+     */
     public void save(ArrayList<Task> list) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(database));
 
@@ -126,6 +180,9 @@ class Storage {
     }
 }
 
+/**
+ * Represents the task list in memory. A <code>TaskList</code> object corresponds to a task list
+ */
 class TaskList {
     private ArrayList<Task> list;
 
@@ -138,6 +195,12 @@ class TaskList {
         load(contents);
     }
 
+    /**
+     * Parse all information read from the database into memory
+     *
+     * @param contents
+     * @throws DukeException
+     */
     private void load(ArrayList<String> contents) throws DukeException {
         try {
             for (String str : contents) {
@@ -226,6 +289,9 @@ class TaskList {
     }
 }
 
+/**
+ * Represents the main UI for communicating with user. A <code>Ui</code> object corresponds to a UI
+ */
 class Ui {
     private Scanner sc;
 
@@ -233,16 +299,30 @@ class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints when an exception is caught during loading
+     */
     public void showLoadingError() {
         System.out.println("Loading Error");
     }
 
+    /**
+     * Prints the task added when a task has been successfully added to the task list
+     * @param tasks
+     */
     private void printAdded(TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + tasks.get(tasks.size() - 1).toString());
         System.out.println("Now you have " + tasks.size() + "tasks in the list.");
     }
 
+    /**
+     * Main loop of the chatbot, continuously loops to ask for input until user inputs "bye"
+     *
+     * @param storage
+     * @param tasks
+     * @throws IOException
+     */
     public void prompt(Storage storage, TaskList tasks) throws IOException {
         while (true) {
             boolean isBye = false;
@@ -345,10 +425,20 @@ class Ui {
     }
 }
 
+/**
+ * All static methods for parsing data are contained in this class
+ */
 class Parser {
     public Parser() {
     }
 
+    /**
+     * Returns a String of the first token input by the user
+     *
+     * @param input
+     * @return String of first token input by user
+     * @throws DukeException if firstWord is not recognised
+     */
     public static String getFirstWord(String input) throws DukeException{
         int firstSpaceIndex = -1;
 
@@ -380,16 +470,38 @@ class Parser {
         }
     }
 
+    /**
+     * Returns description of the task given an input and the starting index of the description
+     *
+     * @param input
+     * @param start
+     * @return description of the task
+     * @throws DukeException
+     */
     public static String getDescription(String input, int start) throws DukeException {
         int slashIndex = Parser.getSlash(input);
         return input.substring(start, slashIndex - 1);
     }
 
+    /**
+     * Returns the date in LocalDate format given an input
+     *
+     * @param input
+     * @return date in LocalDate format
+     * @throws DukeException
+     */
     public static LocalDate getDate(String input) throws DukeException {
         int slashIndex = Parser.getSlash(input);
         return LocalDate.parse(input.substring(slashIndex + 1));
     }
 
+    /**
+     * Returns the index of the slash in the input given an input
+     *
+     * @param input
+     * @return index of the slash which indicates the start of the date
+     * @throws DukeException if there is no slash in input
+     */
     private static int getSlash(String input) throws DukeException {
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '/') {
@@ -400,6 +512,14 @@ class Parser {
         throw new DukeException();
     }
 
+    /**
+     * Returns the index of the task in the list
+     *
+     * @param input
+     * @param type
+     * @return int index of the task in the list
+     * @throws DukeException
+     */
     public static int getIndex(String input, String type) throws DukeException {
         int startPos = type.equals("done") ? 5: 7; // type will only either be "done" or "delete"
 
