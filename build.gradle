@@ -18,6 +18,10 @@ application {
     mainClassName = "Launcher"
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 run {
     standardInput = System.in
 }

@@ -4,7 +4,11 @@ import parser.*;
 import storage.*;
 import task.*;
 import ui.*;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,7 +53,6 @@ public class Duke extends Application{
         while (!isExit) {
             try {
                 String fullCommand = ui.readInput();
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parseCommand(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -105,8 +108,27 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        // Create stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+        // Saving old System.out
+        PrintStream old = System.out;
+        // Telling java to use special stream
+        System.setOut(printStream);
+        try {
+            Command c = Parser.parseCommand(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.displayError(e.getMessage());
+        } catch (IOException e) {
+            ui.displaySaveError();
+        }
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
     }
+
+
 
 
     public static void main(String[] args) throws IOException{
