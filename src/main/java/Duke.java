@@ -11,7 +11,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load(), storage.getStorageNo());
         } catch (FileNotFoundException | ParseException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -30,13 +30,15 @@ public class Duke {
                     Ui.list(this.tasks);
                 } else if (userInput.equals("done 2")) {
                     Ui.done2(this.tasks);
-                } else if (userInput.contains("delete")){
+                } else if (userInput.contains("delete")) {
                     this.tasks.delete(userInput);
                     try {
                         storage.save(tasks);
                     } catch (IOException e) {
                         System.out.println("Cannot write file");
                     }
+                }else if (userInput.contains("find")){
+                    this.tasks.find(userInput);
                 } else if (userInput.contains("todo")) {
                     this.tasks.toDo(userInput);
                     TaskList.totalTasks[TaskList.totalTasksCount -1].printInit();
@@ -47,7 +49,7 @@ public class Duke {
                     }
                 } else if (userInput.contains("deadline")) {
                     this.tasks.deadline(userInput);
-                    TaskList.totalTasks[TaskList.totalTasksCount -1].printInit();
+                    TaskList.totalTasks[TaskList.totalTasksCount - 1].printInit();
                     try {
                         storage.save(tasks);
                     } catch (IOException e) {

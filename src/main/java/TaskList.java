@@ -9,14 +9,15 @@ public class TaskList {
         totalTasksCount = 0;
     }
 
-    public TaskList(String[] totalTasks) throws ParseException {
-        for(int i = 0; i < totalTasks.length; i++) {
+    public TaskList(String[] totalTasks, int storageNo) throws ParseException {
+        for(int i = 0; i < storageNo; i++) {
             if (totalTasks[i].contains("[T]")) {
                 this.toDo("todo" + totalTasks[i].substring(totalTasks[i].indexOf(" ")));
             } else if (totalTasks[i].contains("[D]")) {
                 String temp = totalTasks[i].substring(totalTasks[i].indexOf("by:") + 4, totalTasks[i].length() - 1);
-                String part1 = temp.substring(0, totalTasks[i].indexOf(" "));
-                String part2 = temp.substring(4, totalTasks[i].indexOf(" "));
+                String part1 = temp.substring(0, 4);
+                String part2 = temp.substring(4);
+                part2 = part2.substring(0, part2.indexOf(" "));
                 String part3 = temp.substring(temp.length()-4, temp.length());
 
                 switch(part1){
@@ -30,44 +31,47 @@ public class TaskList {
                         part1 = "10";
                         break;
                     case("Sep"):
-                        part1 = "9";
+                        part1 = "09";
                         break;
                     case("Aug"):
-                        part1 = "8";
+                        part1 = "08";
                         break;
                     case("Jul"):
-                        part1 = "7";
+                        part1 = "07";
                         break;
                     case("Jun"):
-                        part1 = "6";
+                        part1 = "06";
                         break;
                     case("May"):
-                        part1 = "5";
+                        part1 = "05";
                         break;
                     case("Apr"):
-                        part1 = "4";
+                        part1 = "04";
                         break;
                     case("Mar"):
-                        part1 = "3";
+                        part1 = "03";
                         break;
                     case("Feb"):
-                        part1 = "2";
+                        part1 = "02";
                         break;
                     default:
-                        part1 = "1";
+                        part1 = "01";
+                }
+                if (part2.length() < 2){
+                    part2 = "0" + part2;
                 }
                 temp = part3 + "-" + part1 + "-" + part2;
-                System.out.println(temp);
-                System.out.println("deadline" + totalTasks[i].substring(totalTasks[i].indexOf(" "), totalTasks[i].indexOf("by:") - 1)
+                this.deadline("deadline" + totalTasks[i].substring(totalTasks[i].indexOf(" "), totalTasks[i].indexOf("by:") - 1)
                         + "/by " + temp);
-                //this.deadline("deadline" + totalTasks[i].substring(totalTasks[i].indexOf(" "), totalTasks[i].indexOf("by:") - 1)
-                        //+ "/by " + temp);
 
             } else {
                 String temp = totalTasks[i].substring(totalTasks[i].indexOf("at:") + 4, totalTasks[i].length() - 1);
-                String part1 = temp.substring(0, totalTasks[i].indexOf(" "));
-                String part2 = temp.substring(4, totalTasks[i].indexOf(" "));
+                String part1 = temp.substring(0, 4);
+                String part2 = temp.substring(4);
+                part2 = part2.substring(0, part2.indexOf(" "));
                 String part3 = temp.substring(temp.length()-4, temp.length());
+
+
 
                 switch(part1){
                     case("Dec"):
@@ -80,31 +84,34 @@ public class TaskList {
                         part1 = "10";
                         break;
                     case("Sep"):
-                        part1 = "9";
+                        part1 = "09";
                         break;
                     case("Aug"):
-                        part1 = "8";
+                        part1 = "08";
                         break;
                     case("Jul"):
-                        part1 = "7";
+                        part1 = "07";
                         break;
                     case("Jun"):
-                        part1 = "6";
+                        part1 = "06";
                         break;
                     case("May"):
-                        part1 = "5";
+                        part1 = "05";
                         break;
                     case("Apr"):
-                        part1 = "4";
+                        part1 = "04";
                         break;
                     case("Mar"):
-                        part1 = "3";
+                        part1 = "03";
                         break;
                     case("Feb"):
-                        part1 = "2";
+                        part1 = "02";
                         break;
                     default:
-                        part1 = "1";
+                        part1 = "01";
+                }
+                if (part2.length() < 2){
+                    part2 = "0" + part2;
                 }
                 temp = part3 + "-" + part1 + "-" + part2;
                 System.out.println(temp);
@@ -150,5 +157,18 @@ public class TaskList {
         Task t = new Event(contentTasks, taskTime);
         totalTasks[totalTasksCount] = t;
         totalTasksCount++;
+    }
+    public void find(String userInput){
+        String keyword = userInput.substring(5);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+        int i = 1;
+        for(int j = 0; j < totalTasksCount; j++) {
+            if(totalTasks[j].getDescription().contains(keyword)){
+                System.out.println("     " + i + "." + totalTasks[j].toString());
+                i++;
+            }
+        }
+        System.out.println("    ____________________________________________________________");
     }
 }

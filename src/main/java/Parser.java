@@ -16,7 +16,7 @@ public class Parser {
     public void testMessage(String userInput) throws DukeException {
         if (!userInput.contains("bye") && !userInput.contains("list") && !userInput.contains("done 2")
                 && !userInput.contains("delete") && !userInput.contains("todo")
-                && !userInput.contains("deadline") && !userInput.contains("event")) {
+                && !userInput.contains("deadline") && !userInput.contains("event") && !userInput.contains("find")) {
             System.out.println("    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________\n");

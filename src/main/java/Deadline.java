@@ -8,7 +8,9 @@ public class Deadline extends Task {
         super(description);
         if(by.contains("/")){
             by = by.replaceAll("/", "-");
+            System.out.println(by);
         }
+
         this.taskDate = LocalDate.parse(by);
     }
 

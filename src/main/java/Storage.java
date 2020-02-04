@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Storage {
     File savedTaskList;
     String filePath;
+    static int StorageNo = 0;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -19,9 +20,14 @@ public class Storage {
         int i = 0;
         while (scanSavedTaskList.hasNext()) {
             totalTasks[i] = scanSavedTaskList.nextLine();
+            StorageNo++;
             i++;
         }
         return totalTasks;
+    }
+
+    public int getStorageNo() {
+        return StorageNo;
     }
 
     public void save(TaskList newList) throws IOException {
