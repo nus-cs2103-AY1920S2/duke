@@ -17,13 +17,10 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
 
-import java.net.Inet4Address;
-
 /**
  * Represents the class which parses each command given by the user.
  * It see which command is given, and returns the corresponding command.
  */
-
 public class Parser {
     private Ui ui;
 
@@ -32,6 +29,8 @@ public class Parser {
     }
 
     public static Command parse(String command) throws UnknownException, DoneException, EmptyException, DeleteException {
+        assert command != null : "Command should not be null!";
+
         String[] str = command.split(" ");
         if (command.equals("list")) {
             ListCommand listCommand = new ListCommand(command);

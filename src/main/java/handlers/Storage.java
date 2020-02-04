@@ -24,8 +24,8 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         try {
-            wr = new BufferedWriter(new FileWriter(this.filePath));
-            reader = new BufferedReader(new FileReader(this.filePath));
+           wr = new BufferedWriter(new FileWriter(this.filePath));
+           reader = new BufferedReader(new FileReader(this.filePath));
         } catch (IOException err) {
             err.printStackTrace();
         }
@@ -33,7 +33,6 @@ public class Storage {
 
     public void save(ArrayList<Task> tasks) {
         try {
-            //BufferedWriter wr =
             for (Task t : tasks) {
                 wr.write(t.saveString());
                 wr.newLine();

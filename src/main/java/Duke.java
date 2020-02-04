@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+// can add a IndexOutOfBound exception for delete task and done task
 /**
  * The main class that runs the whole Task manager
  */
@@ -44,6 +44,9 @@ public class Duke extends Application {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+            assert ui != null : "Ui not initialised";
+            assert storage != null : "Storage not initialised";
+
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();

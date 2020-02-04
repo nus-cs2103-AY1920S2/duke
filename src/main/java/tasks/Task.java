@@ -29,15 +29,11 @@ public class Task {
     }
 
     public boolean contains(String keyword) {
-        if (this.description.contains(keyword)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.description.contains(keyword);
     }
 
     public void setStatus(String status) {
-        this.isDone = (status.equals("0") ? false : true);
+        this.isDone = (!status.equals("0"));
     }
 
     public String getDescription() {
