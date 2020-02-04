@@ -1,5 +1,7 @@
 package duke.pack;
 
+import java.util.ArrayList;
+
 /**
  * Represents a command to list all tasks.
  */
@@ -16,6 +18,17 @@ public class ListCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.printList();
+    }
+
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+        ArrayList<Task> list = tasks.getList();
+        String resp = "Here are your tasks: \n";
+
+        for (int i = 1; i <= list.size(); i++) {
+            resp = resp + "    " + i + ". " + list.get(i - 1) + "\n";
+        }
+
+        return resp;
     }
 
     /**

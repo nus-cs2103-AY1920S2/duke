@@ -28,6 +28,18 @@ public class DoneCommand extends Command {
 
     }
 
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (taskNum > tasks.getSize()) {
+            throw new DukeException("Oh no! That task does not exist!");
+        }
+        Task task = tasks.markAsDone(taskNum);
+        storage.save(tasks);
+
+        String resp = "Fantastic job! I have marked this task as done: \n" + task;
+
+        return resp;
+    }
+
     /**
      * indicates whether command is exit
      * @return boolean true if it is an exit command, else false

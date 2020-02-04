@@ -5,21 +5,7 @@ import duke.pack.Storage;
 import duke.pack.TaskList;
 import duke.pack.Ui;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * Represents the chatbot
@@ -28,7 +14,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Parser parser;
 
     public Duke() {
     }
@@ -37,7 +22,6 @@ public class Duke {
         // following code from module website
 
         ui = new Ui();
-        parser = new Parser();
 
         try {
             storage = new Storage(filePath);
@@ -53,9 +37,18 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    @FXML
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String resp = "";
+
+        try {
+            Command comm = Parser.parseCommand(input);
+            resp = comm.getResponse(tasks, ui, storage);
+
+        } catch (DukeException e) {
+            resp = e.toString();
+        }
+
+        return resp;
     }
 
     /**
@@ -71,7 +64,7 @@ public class Duke {
             try {
                 String command = ui.receiveInput();
                 ui.showLine();
-                Command comm = parser.parseCommand(command);
+                Command comm = Parser.parseCommand(command);
                 comm.execute(tasks, ui, storage);
                 isExit = comm.isExit();
 

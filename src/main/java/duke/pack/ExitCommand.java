@@ -20,6 +20,12 @@ public class ExitCommand extends Command {
         ui.exit();
     }
 
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String resp = "See you later! :)";
+
+        return resp;
+    }
+
 
     /**
      * indicates whether command is exit
