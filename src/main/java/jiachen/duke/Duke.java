@@ -333,8 +333,6 @@ public class Duke extends Application {
     });
 
     dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
   }
 
 }
