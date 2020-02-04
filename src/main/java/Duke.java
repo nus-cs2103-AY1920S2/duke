@@ -16,20 +16,22 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
-                String[] inputs = input.split(" ",2);
+                String[] inputs = input.split(" ", 2);
                 String command = inputs[0];
                 char[] inputArr = input.toCharArray();
                 if (command.equals("todo")) { //create todo
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
-                    };
+                    }
+                    ;
                     String info = Todo.generateTodoDesc(inputArr);
                     Todo task = new Todo(info);
                     Task.addTask(task);
                 } else if (command.equals("event")) { //create event
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
-                    };
+                    }
+                    ;
                     String date, desc;
                     date = Event.getEventDate(inputs[1]);
                     desc = Event.getEventDesc(inputArr);
@@ -38,7 +40,8 @@ public class Duke {
                 } else if (command.equals("deadline")) { //create deadline
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
-                    };
+                    }
+                    ;
                     String by, desc;
                     by = Deadline.getDate(inputs[1]);
                     desc = Deadline.getDesc(inputArr);
@@ -46,14 +49,16 @@ public class Duke {
                     Task.addTask(task);
                 } else if (command.equals("list")) { //list command
                     Task.showTasks();
-                } else if (command.equals("done")){ //done command
+                } else if (command.equals("done")) { //done command
                     Task.taskDone(input);
                 } else if (command.equals("bye")) { //bye command
                     Task.saveToFile();
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
-                } else if(command.equals("delete")) { //delete command
+                } else if (command.equals("delete")) { //delete command
                     Task.deleteTask(inputs[1]);
+                } else if (command.equals("find")) {
+                    Task.find(inputs[1]);
                 } else {
                     throw new InvalidCommandException();
                 }
