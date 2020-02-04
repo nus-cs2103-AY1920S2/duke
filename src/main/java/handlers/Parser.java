@@ -22,11 +22,7 @@ import tasks.Todo;
  * It see which command is given, and returns the corresponding command.
  */
 public class Parser {
-    private Ui ui;
-
-    public Parser() {
-        this.ui = new Ui();
-    }
+    public Parser() {}
 
     public static Command parse(String command) throws UnknownException, DoneException, EmptyException, DeleteException {
         assert command != null : "Command should not be null!";
