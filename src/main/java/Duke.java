@@ -77,39 +77,6 @@ class Task {
     }
 }
 
-class ToDo extends Task {
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-
-    public String convert() {
-        return "T" + super.convert();
-    }
-}
-
-class Deadline extends Task {
-    protected LocalDate by;
-
-    public Deadline(String description, boolean isDone, LocalDate by) {
-        super(description, isDone);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
-
-    public String convert() {
-        return "D" + super.convert() + " | " + by;
-    }
-}
-
 class Event extends Task {
     protected LocalDate at;
 
