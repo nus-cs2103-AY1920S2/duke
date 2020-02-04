@@ -1,10 +1,20 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.HashMap;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<>();
+    static HashMap<String, Command> commands = new HashMap<>();
+    static {
+        commands.put("bye", Command.BYE);
+        commands.put("list", Command.LIST);
+        commands.put("done", Command.DONE);
+        commands.put("todo", Command.TODO);
+        commands.put("deadline", Command.DEADLINE);
+        commands.put("event", Command.EVENT);
+        commands.put("delete", Command.DELETE);
+    }
 
     public static void main(String[] args) {
         String greetings = "Hello! I'm Duke\n" +
@@ -17,33 +27,34 @@ public class Duke {
             while (!exit) {
                 String line = sc.nextLine();
                 StringTokenizer st = new StringTokenizer(line);
-                String command = st.nextToken();
+                String str = st.nextToken();
+                Command command = commands.get(str);
                 switch (command) {
-                    case "bye":
+                    case BYE:
                         exit = true;
                         System.out.println("See you next time! xD");
                         break;
-                    case "list":
+                    case LIST:
                         displayTasks(tasks);
                         break;
-                    case "done":
+                    case DONE:
                         int taskNum = Integer.parseInt(st.nextToken());
                         Task t = tasks.get(taskNum - 1);
                         t.markAsDone();
                         System.out.println("Nice! Congratulations for completing this task:\n" + t);
                         break;
-                    case "todo":
+                    case TODO:
                         String todoStuff = st.nextToken("").trim();
-                        if (todoStuff.equals("")) {
-                            throw new IndexOutOfBoundsException("OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        Todo todo = new Todo(st.nextToken("").trim());
+//                        if (todoStuff.equals("")) {
+//                            throw new IndexOutOfBoundsException("OOPS!!! The description of a todo cannot be empty.");
+//                        }
+                        Todo todo = new Todo(todoStuff);
                         tasks.add(todo);
                         String todoMsg = "Got it. I've added this task:\n" + todo
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(todoMsg);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         String ddlStuff = st.nextToken("/").trim();
                         String ddlTime = st.nextToken("/").trim().substring(3);
                         Deadline ddl = new Deadline(ddlStuff, ddlTime);
@@ -52,7 +63,7 @@ public class Duke {
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(ddlMsg);
                         break;
-                    case "event":
+                    case EVENT:
                         String eventStuff = st.nextToken("/").trim();
                         String eventTime = st.nextToken("/").trim().substring(3);
                         Event event = new Event(eventStuff, eventTime);
@@ -61,10 +72,13 @@ public class Duke {
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(eventMsg);
                         break;
-                    case "delete":
+                    case DELETE:
                         int num = Integer.parseInt(st.nextToken());
-                        tasks.remove(num - 1);
-                        System.out.printf("now you have %d tasks in your list.", tasks.size());
+                        Task del = tasks.get(num - 1);
+                        tasks.remove(del);
+                        String deleteMsg = "Noted. I've removed this task:\n" + del
+                                + String.format("\nnow you have %d tasks in the list.", tasks.size());
+                        System.out.println(deleteMsg);
                         break;
                     default:
                         throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
