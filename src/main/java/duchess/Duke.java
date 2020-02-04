@@ -23,9 +23,10 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
+    private String loadingErrorMessage;
 
     /**
-     * Initialises a newly created {@code Duchess} object that uses the
+     * Initialises a newly created {@code Duke} object that uses the
      * provided {@code filePath} as the location of the JSON save file.
      *
      * @param filePath A {@code String} denoting the location of the JSON
@@ -43,23 +44,51 @@ public class Duke {
     }
 
     /**
-     * Begins the Duchess program. Upon calling the run() method, the user
-     * can begin to interact with the program.
+     * Initialises a newly created {@code Duke} object that uses the
+     * provided {@code filePath} as the location of the JSON save file.
+     * This is an overloaded constructor for GUI that stores any error
+     * messages encountered when starting up so as to print subsequently.
+     *
+     * @param filePath A {@code String} denoting the location of the JSON
+     *                 save file.
+     * @param isGui    A {@code boolean} denoting whether the program is in
+     *                 Gui mode.
+     */
+    public Duke(String filePath, boolean isGui) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            this.taskList = new TaskList(this.storage.load());
+        } catch (DuchessException e) {
+            if (isGui) {
+                this.loadingErrorMessage = this.ui.printLoadingError(e.getMessage());
+            } else {
+                this.ui.printLoadingError(e.getMessage());
+            }
+            this.taskList = new TaskList();
+        }
+    }
+
+    /**
+     * Begins the console version of the Duchess program. Upon calling
+     * the run() method, the user can begin to interact with the program.
      */
     public void run() {
-        this.ui.printWelcome();
+        this.ui.printToConsole(this.ui.printConsoleWelcome());
+        ui.printLine();
         boolean isRunning = true;
         while (isRunning) {
             try {
-                String fullCommand = ui.readCommand();
-                ui.printLine();
+                String fullCommand = this.ui.readCommand();
+                this.ui.printLine();
                 Command command = Parser.parse(fullCommand);
-                command.execute.apply(fullCommand, this.taskList, this.ui, this.storage);
+                String response = command.execute.apply(fullCommand, this.taskList, this.ui, this.storage);
+                this.ui.printToConsole(response);
                 if (command == Command.BYE) {
                     isRunning = false;
                 }
             } catch (DuchessException e) {
-                ui.printError(e.getMessage());
+                this.ui.printToConsole(this.ui.printError(e.getMessage()));
             } finally {
                 ui.printLine();
             }
@@ -67,12 +96,30 @@ public class Duke {
     }
 
     /**
-     * Starts up the Duchess program.
+     * Returns a Duke response to the given input.
      *
-     * @param args Not used.
+     * @param input User input.
+     * @return Duke response.
      */
-    public static void main(String[] args) {
-        Duke duchess = new Duke("data/tasks.json");
-        duchess.run();
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute.apply(input, this.taskList, this.ui, this.storage);
+        } catch (DuchessException e) {
+            return ui.printError(e.getMessage());
+        }
+    }
+
+    /**
+     * Returns the welcome message for GUI mode.
+     *
+     * @return Welcome message {@code String} for GUI mode.
+     */
+    public String getWelcomeMessage() {
+        if (this.loadingErrorMessage != null && !this.loadingErrorMessage.isEmpty()) {
+            return this.ui.printWelcome() + this.loadingErrorMessage;
+        } else {
+            return this.ui.printWelcome();
+        }
     }
 }
