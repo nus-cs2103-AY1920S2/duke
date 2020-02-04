@@ -16,8 +16,8 @@ public class MyList {
         return listArray.size();
     }
 
-    public String printTaskAdded(Task task) {
-        return "added: " + task;
+    public void printTaskAdded(Task task) {
+        System.out.println("added: " + task.toString());
     }
 
     public Task getTask(int num) {

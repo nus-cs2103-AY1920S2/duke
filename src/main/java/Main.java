@@ -42,7 +42,6 @@ public class Main {
                     }
                     String[] retrieveTaskArray = retrieveDateArray[0].split(" ", 2);
                     Deadline deadline = new Deadline(retrieveTaskArray[1], retrieveDateArray[1]);
-                    deadline.printItemAdded();
                     list.setListArray(deadline);
                     list.printTaskAdded(deadline);
                     list.printCounter();
@@ -56,7 +55,6 @@ public class Main {
                     }
                     String[] retrieveTaskArray = retrieveDateArray[0].split(" ", 2);
                     Event event = new Event(retrieveTaskArray[1], retrieveDateArray[1]);
-                    event.printItemAdded();
                     list.setListArray(event);
                     list.printTaskAdded(event);
                     list.printCounter();
@@ -69,7 +67,6 @@ public class Main {
                         throw new DukeException("Sorry, the description of a todo cannot be empty");
                     }
                     Todo todo = new Todo(retrieveTaskArray[1]);
-                    todo.printItemAdded();
                     list.setListArray(todo);
                     list.printTaskAdded(todo);
                     list.printCounter();
