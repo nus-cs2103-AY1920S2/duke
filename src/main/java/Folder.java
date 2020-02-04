@@ -1,5 +1,7 @@
 package packagedirectory.test;
 
+import packagedirectory.test.Tasks;
+import packagedirectory.test.Message;
 import java.util.ArrayList;
 
 public class Folder {

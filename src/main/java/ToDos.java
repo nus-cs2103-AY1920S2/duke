@@ -1,5 +1,8 @@
 package packagedirectory.test;
 
+import packagedirectory.test.Message;
+import packagedirectory.test.Tasks;
+
 public class ToDos extends Tasks {
     //private String logo = "[T]";
     public ToDos(Message msg) {

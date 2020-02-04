@@ -1,5 +1,8 @@
 package packagedirectory.test;
 
+import packagedirectory.test.Message;
+import packagedirectory.test.Tasks;
+
 public class Events extends Tasks {
     //private String logo = "[E]";
     Events(Message msg) {

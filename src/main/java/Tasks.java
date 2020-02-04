@@ -1,5 +1,7 @@
 package packagedirectory.test;
 
+import packagedirectory.test.Message;
+
 public class Tasks {
 
     protected Message msg;
