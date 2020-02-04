@@ -87,7 +87,6 @@ public class Duke {
                 System.out.print("> ");
             }
         }
-
         storage.update(tasks);
         ui.showExitMessage();
     }
