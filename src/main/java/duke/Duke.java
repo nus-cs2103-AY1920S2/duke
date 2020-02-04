@@ -7,7 +7,14 @@ import duke.exception.DukeException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Duke {
+import javafx.application.Application;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+
+import javafx.stage.Stage;
+
+public class Duke extends Application {
     /** The save/loading mechanism. */
     private Storage storage;
     /** The list of tasks. */
@@ -29,6 +36,13 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList(); // Start a brand new task list if file cannot be found/opened.
         }
+    }
+
+    /**
+     * Constructs a new chat-bot Duke with the default save file location.
+     */
+    public Duke() {
+        this(getDefaultPath());
     }
 
     /** Call this to begin using the chat-bot. */
@@ -53,12 +67,30 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     /** The main entry point of the program. */
     public static void main(String[] args) {
         // Save file named "tasks.txt"
         // Located in "data" folder, found in the root of this working directory.
         // Platform independent file directory
-        Path path = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt");
-        new Duke(path.toString()).run();
+        new Duke(getDefaultPath()).run();
+    }
+
+    /**
+     * Returns the os-dependent directory to the default save file location.
+     * This default save file location is {folder_enclosing_duke_program}->data->tasks.txt.
+     *
+     * @return the os-dependent directory to the default save file location.
+     */
+    private static String getDefaultPath() {
+        return Paths.get(System.getProperty("user.dir"), "data", "tasks.txt").toString();
     }
 }
