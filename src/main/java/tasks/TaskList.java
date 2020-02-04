@@ -20,7 +20,6 @@ public class TaskList {
 
     /**
      * Retrieve this task list.
-     *
      * @return this task list.
      */
     public static ArrayList<Task> getList() {
@@ -29,7 +28,6 @@ public class TaskList {
 
     /**
      * Add task to this task list.
-     *
      * @param taskToAdd task to add to the list.
      */
     public static void addTask(Task taskToAdd) {
@@ -38,7 +36,6 @@ public class TaskList {
 
     /**
      * Delete task with the specified task number from this task list.
-     *
      * @param taskNumber task to be deleted.
      * @return deleted task.
      */
@@ -60,7 +57,6 @@ public class TaskList {
 
     /**
      * Mark task with specified task number as done.
-     *
      * @param taskNumber task to be marked as done.
      * @return task marked as done.
      */
@@ -74,7 +70,6 @@ public class TaskList {
 
     /**
      * Return total number of tasks in this task list.
-     *
      * @return total number of tasks in this task list.
      */
     public static int getTotalTasks() {
@@ -83,7 +78,6 @@ public class TaskList {
 
     /**
      * Checks if this task list is empty.
-     *
      * @return true if task list is empty and false otherwise.
      */
     public static boolean isEmpty() {
@@ -92,7 +86,6 @@ public class TaskList {
 
     /**
      * Return information on the number of tasks in the list.
-     *
      * @return the string of the total number of tasks in the list.
      */
     public static String printTotalTasks() {
@@ -106,8 +99,22 @@ public class TaskList {
     }
 
     /**
+     * Print all tasks in this task list containing the keyword in a numbered order.
+     * @return the string of all tasks containing the keyword in this task list.
+     */
+    public static String findTaskContainingKeyword(String keyword) {
+        String printedList = "";
+        int taskNumber = 1;
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
+                taskNumber++;
+            }
+        }
+        return printedList;
+    }
+    /**
      * Print all tasks in this task list in a numbered order.
-     *
      * @return the string of all tasks in this task list.
      */
     public static String printList() {
