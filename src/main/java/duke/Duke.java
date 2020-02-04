@@ -15,11 +15,26 @@ public class Duke {
 
     /**
      * Duke constructor.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/duke.txt");
+        try {
+            tasks = new TaskList(storage.load());
+            this.isLoadedFromStorage = true;
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Duke constructor.
      * Attempts to load tasks from duke.txt specified in filePath into a TaskList instance.
      * Creates an empty TaskList instance if the file cannot be found.
      *
      * @param filePath Path to the duke.txt containing the saved tasks.
      */
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -61,5 +76,24 @@ public class Duke {
      */
     public static void main(final String[] args) {
         new Duke("data/duke.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, ui, storage);
+            // TODO: If exit command, close application?
+            // if (c.isExit()) {
+                //     isActive = false;
+            // }
+        } catch (Exception e) {
+            output = e.getMessage();
+        }
+        return output;
     }
 }

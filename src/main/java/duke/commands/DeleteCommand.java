@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException(ErrorCodes.INVALID_TASK_INDEX);
         } else {
@@ -26,6 +26,11 @@ public class DeleteCommand extends Command {
                 "\n",
                 tasks.printTasksTotal()});
             storage.save(tasks);
+            return "Aaaaand deleted! Don't kill me if it's the wrong one, boss"
+                + "\n"
+                + deletedTask.toString()
+                + "\n"
+                + tasks.printTasksTotal();
         }
     }
 

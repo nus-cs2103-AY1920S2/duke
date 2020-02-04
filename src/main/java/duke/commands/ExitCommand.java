@@ -11,8 +11,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.dukePrompt("Good bye, boss! Call me if you need me. I'll be waiting!");
+        return "Good bye, boss! Call me if you need me. I'll be waiting!";
     }
 
     @Override
