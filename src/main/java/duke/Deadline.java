@@ -35,8 +35,8 @@ public class Deadline extends Task {
      * @return The string of deadline task to be displayed to user.
      */
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
     }
 
     /**
@@ -44,8 +44,8 @@ public class Deadline extends Task {
      * @return The string of deadline task to be written to the file and saved.
      */
     public String writeDrive() {
-        return "D|" + (super.isDone() ? "1|" : "0|") + this.name + "|" +
-                date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
+        return "D|" + (super.isDone() ? "1|" : "0|") + this.name + "|"
+                + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
     }
 
     /**

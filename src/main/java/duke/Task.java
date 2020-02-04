@@ -31,7 +31,7 @@ public abstract class Task {
      * @return The string of the task.
      */
     public String toString() {
-        String done = isDone ? "\u2713" : "\u2718";
+        String done = isDone ? "0xE2 0x9C 0x93" : "0xE2 0x9C 0x97";
         return "[" + done + "] " + name;
     }
 
