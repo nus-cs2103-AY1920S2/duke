@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = null;
         String taskPrompt = "";
 
@@ -48,6 +48,11 @@ public class AddCommand extends Command {
             "\n",
             tasks.printTasksTotal()});
         storage.save(tasks);
+        return taskPrompt
+            + "\n"
+            + newTask.toString()
+            + "\n"
+            + tasks.printTasksTotal();
     }
 
     @Override

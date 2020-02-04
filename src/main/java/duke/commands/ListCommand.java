@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] temp;
         if (tasks.getSize() == 0) {
             temp = new String[]{"Boss, my notepad is empty. You sure you told me anything?"};
@@ -23,6 +23,7 @@ public class ListCommand extends Command {
             }
         }
         ui.dukePrompt(temp);
+        return String.join("\n", temp);
     }
 
     @Override

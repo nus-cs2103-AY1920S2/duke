@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException(ErrorCodes.INVALID_TASK_INDEX);
         } else {
@@ -27,6 +27,11 @@ public class DoneCommand extends Command {
                 "\n",
                 tasks.printTasksTotal()});
             storage.save(tasks);
+            return "Got it boss! Just to confirm, this is the one I marked as done"
+                + "\n"
+                + currentTask.toString()
+                + "\n"
+                + tasks.printTasksTotal();
         }
     }
 
