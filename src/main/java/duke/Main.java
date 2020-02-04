@@ -28,6 +28,7 @@ public class Main extends Application {
             stage.getIcons().add(new Image("/images/icon.jpg"));
             stage.setTitle("Megumin");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
