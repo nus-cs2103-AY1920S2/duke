@@ -11,23 +11,21 @@ public class ChatBot {
     private Storage storage;
     private final String FILE_NAME = "./data/duke.txt";
     private TaskList tasks;
+    private Ui ui = new Ui();
 
     protected void run() throws FileNotFoundException, NoSuchElementException {
         storage = new Storage(FILE_NAME);
         tasks = new TaskList(storage);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("I am here to help you with anything you need!");
         sc = new Scanner(System.in);
-            while (sc.hasNext()) {
+
+        ui.showWelcomeMessage();
+
+        while (sc.hasNext()) {
                 String userInput = sc.nextLine();
-                System.out.println("____________________________________________________________");
+                ui.showLineOfUnderscores();
+
                 if (userInput.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                    ui.showGoodbyeMessage();
                 } else if (userInput.equals("list")) {
                     tasks.printTasks();
                 } else if (userInput.startsWith("done")) {
@@ -40,29 +38,28 @@ public class ChatBot {
                         tasks.addTask(task);
                         storage.saveAllTasksToFile(tasks);
                     } catch (NoSuchElementException error) {
-                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
+                        ui.showEmptyDescription("todo");                 }
                 } else if (userInput.startsWith("deadline")) {
+                    lineScanner = new Scanner(userInput);
+                    lineScanner.next();
+                    String theRest = lineScanner.nextLine();
                     try {
-                        lineScanner = new Scanner(userInput);
-                        lineScanner.next();
-                        String theRest = lineScanner.nextLine();
                         Task task = new Deadline(theRest.split("/")[0].substring(1), theRest.split("/")[1]);
                         tasks.addTask(task);
                         storage.saveAllTasksToFile(tasks);
                     } catch (NoSuchElementException error) {
-                        System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        ui.showEmptyDescription("deadline");
                     }
                 } else if (userInput.startsWith("event")) {
-                    try {
                         lineScanner = new Scanner(userInput);
                         lineScanner.next();
                         String theRest = lineScanner.nextLine();
+                    try {
                         Task task = new Event(theRest.split("/")[0].substring(1), theRest.split("/")[1]);
                         tasks.addTask(task);
                         storage.saveAllTasksToFile(tasks);
                     } catch (NoSuchElementException error) {
-                        System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                        ui.showEmptyDescription("event");
                     }
                 } else if (userInput.startsWith("delete")) {
                     try {
@@ -71,36 +68,28 @@ public class ChatBot {
                         tasks.deleteTask(taskNumber);
                     }
                     catch (IndexOutOfBoundsException error) {
-                        System.out.println("This item is not valid to remove.");
+                        ui.showInvalidRemoval();
                     }
-                } else if (userInput.startsWith("filter")) { //find {date/month/year} {value}
-                    String criterion = userInput.split(" ")[1];
-                    if (criterion.equals("month")) {
-                        int month = Integer.parseInt(userInput.split(" ")[2]);
-                        TaskList filteredTasks = tasks.filterBySpecificMonth(month);
-                        System.out.println("Here are the tasks in the month " + month);
-                        for (int i = 0; i < filteredTasks.getTasksLength(); i++) {
-                            System.out.println((i + 1) + "." + filteredTasks.getTask(i).toString());
+                } else if (userInput.startsWith("filter")) { //filter {date/month/year} {value}
+                    try {
+                        String criterion = userInput.split(" ")[1];
+                        if (criterion.equals("month")) {
+                            int month = Integer.parseInt(userInput.split(" ")[2]);
+                            tasks.showFilteredBySpecificMonth(month);
+                        } else if (criterion.equals("year")) {
+                            int year = Integer.parseInt(userInput.split(" ")[2]);
+                            tasks.showFilteredBySpecificYear(year);
+                        } else if (criterion.equals("date")) {
+                            String date = userInput.split(" ")[2];
+                            tasks.showFilteredBySpecificDate(date);
                         }
-                    } else if (criterion.equals("year")) {
-                        int year = Integer.parseInt(userInput.split(" ")[2]);
-                        TaskList filteredTasks = tasks.filterBySpecificYear(year);
-                        System.out.println("Here are the tasks in the year " + year);
-                        for (int i = 0; i < filteredTasks.getTasksLength(); i++) {
-                            System.out.println((i + 1) + "." + filteredTasks.getTask(i).toString());
-                        }
-                    } else if (criterion.equals("date")) {
-                        String date = userInput.split(" ")[2];
-                        TaskList filteredTasks = tasks.filterBySpecificDate(date);
-                        System.out.println("Here are the tasks on date " + date);
-                        for (int i = 0; i < filteredTasks.getTasksLength(); i++) {
-                            System.out.println((i + 1) + "." + filteredTasks.getTask(i).toString());
-                        }
+                    } catch (NoSuchElementException e) {
+                        ui.showMissingParemeters();
                     }
                 } else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    ui.showCommandNotFound();
                 }
-                System.out.println("____________________________________________________________");
+                ui.showLineOfUnderscores();
             }
     }
 }

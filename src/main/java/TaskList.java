@@ -52,20 +52,30 @@ public class TaskList {
 
     public void printTasks() {
         System.out.println("Here are the tasks in your list: ");
+        this.printTasksOnly();
+    }
+
+    public void printTasksOnly() {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
     }
 
-    public TaskList filterBySpecificDate(String date) {
-        return new TaskList(tasks.stream().filter(task -> task.getDate().equals(LocalDate.parse(date))).collect(Collectors.toList()));
+    public void showFilteredBySpecificDate(String date) {
+        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().equals(LocalDate.parse(date))).collect(Collectors.toList()));
+        System.out.println("Here are the tasks on date " + date);
+        this.printTasksOnly();
     }
 
-    public TaskList filterBySpecificYear(int year) {
-        return new TaskList(tasks.stream().filter(task -> task.getDate().getYear() == year).collect(Collectors.toList()));
+    public void showFilteredBySpecificYear(int year) {
+        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getYear() == year).collect(Collectors.toList()));
+        System.out.println("Here are the tasks in the year " + year);
+        this.printTasksOnly();
     }
 
-    public TaskList filterBySpecificMonth(int month) {
-        return new TaskList(tasks.stream().filter(task -> task.getDate().getMonthValue() == month).collect(Collectors.toList()));
+    public void showFilteredBySpecificMonth(int month) {
+        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getMonthValue() == month).collect(Collectors.toList()));
+        System.out.println("Here are the tasks in the month " + month);
+        this.printTasksOnly();
     }
 }
