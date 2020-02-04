@@ -79,4 +79,17 @@ public class Ui {
         System.out.println(e);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
+    static void printBeforeSearch() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+    static void printSearch(ArrayList<Task> searchList) {
+        int counter = 1;
+        if (searchList.size() == 0) {
+            System.out.println("No match on your search! Are you sure you've added it?");
+        }
+        for (int i = 0; i < searchList.size(); i++) {
+            System.out.println(counter + ". " + searchList.get(i));
+            counter++;
+        }
+    }
 }
