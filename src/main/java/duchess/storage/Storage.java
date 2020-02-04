@@ -83,18 +83,11 @@ public class Storage {
             }
             return result;
         } catch (IOException e) {
-            String[] paths = this.filePath.split("/");
-            for (int i = 0; i < paths.length - 1; i++) {
-                File folder = new File(paths[i].trim());
-                if (!folder.exists() || !folder.isDirectory()) {
-                    boolean isDirectoryCreated = folder.mkdir();
-                    if (isDirectoryCreated) {
-                        paths[i + 1] = paths[i] + "/" + paths[i + 1];
-                    } else {
-                        throw new DuchessException("Failed to load save file! "
-                                + "You will also not be able to save.");
-                    }
-                }
+            File file = new File(this.filePath);
+            File directories = file.getParentFile();
+            if (!directories.exists() && !directories.mkdirs()) {
+                throw new DuchessException("Failed to load save file! "
+                        + "You will also not be able to save.");
             }
             throw new DuchessException("Failed to load save file! Creating new save file.");
         }
