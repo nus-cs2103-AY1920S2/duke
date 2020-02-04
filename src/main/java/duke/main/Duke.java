@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -71,7 +72,8 @@ public class Duke extends Application {
 
 
     /**
-     * Function to run Duke object
+     * Function to run Duke object through GUI
+     * @param input String input from GUI
      */
     public void runCommand(String input) {
         try {

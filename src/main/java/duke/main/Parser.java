@@ -2,6 +2,8 @@ package duke.main;
 
 import duke.command.Command;
 import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.FindCommand;
 import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
 import duke.command.ByeCommand;
@@ -64,7 +66,7 @@ public class Parser {
                 CalendarCommand.run(taskList, param);
                 break;
             case FIND:
-                FindCommand.run(taskList, param);
+                FindCommand.run(taskList, param.split(" "));
                 break;
             default:
                 throw new UnknownCommandException();
