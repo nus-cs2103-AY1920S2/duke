@@ -3,6 +3,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 checkstyle {
@@ -27,10 +28,14 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Ui"
+    mainClassName = "seedu.duke.Launcher"
 }
 
 run {
