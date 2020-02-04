@@ -34,6 +34,8 @@ public class Parser {
         } else if (this.command == Command.DEADLINE || this.command == Command.EVENT) {
             this.description = getFirstParameter(input);
             this.date = getDate(input);
+        } else if (this.command == Command.FIND) {
+            this.parameter = getFirstParameter(input);
         }
     }
 
@@ -99,6 +101,8 @@ public class Parser {
                 return Command.LIST;
             case "delete":
                 return Command.DELETE;
+            case "find":
+                return Command.FIND;
             default:
                 throw new DukeException("Invalid Command.");
         }

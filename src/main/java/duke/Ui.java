@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -85,6 +86,18 @@ public class Ui {
         System.out.println(DELIMITER);
         System.out.println("> I've finally done this task:");
         System.out.println(task);
+        System.out.println(DELIMITER);
+        System.out.print("> ");
+    }
+
+    /**
+     * Prints out message showing task(s) that the user searched for.
+     * @param tasks The task(s) that the user searched for
+     */
+    public void showFoundTasks(TaskList tasks) {
+        System.out.println(DELIMITER);
+        System.out.println("Here are the matching tasks in your list: ");
+        System.out.println(tasks);
         System.out.println(DELIMITER);
         System.out.print("> ");
     }

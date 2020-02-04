@@ -70,6 +70,17 @@ public class TaskList {
         return tasks.get(taskNum - 1);
     }
 
+    public TaskList findTasks(String searchTerm) {
+        TaskList temp = new TaskList();
+
+        for (Task t : this.tasks) {
+            if (t.getDescription().contains(searchTerm)) {
+                temp.addToTasks(t);
+            }
+        }
+        return temp;
+    }
+
     /**
      * Returns the string representation of a TaskList.
      * @return String representation of TaskList.

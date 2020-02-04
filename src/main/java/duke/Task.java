@@ -20,12 +20,17 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Returns the icon associated with the done status of the task.
      * Check for done and cross for undone.
      *
      * @return Done status icon.
      */
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
