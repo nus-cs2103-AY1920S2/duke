@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -60,18 +59,14 @@ public class MainWindow extends AnchorPane {
 
         //exit the program if required.
         if (input.equals("bye")) {
-            Stage stage = (Stage) userInput.getScene().getWindow();
-            Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }
-                        stage.close();
-                    }
-                });
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+                Platform.exit();
+            }).start();
         }
     }
 }
