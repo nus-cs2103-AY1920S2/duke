@@ -1,4 +1,3 @@
-E | 1 | project meeting | May 20 2020
-D | 1 | 2103T | May 05 2020
-T | 1 | eat veges
-T | 1 | 2101
+T | 0 | run
+E | 1 | project meeting | Feb 03 2020
+D | 0 | submission | Mar 05 2020

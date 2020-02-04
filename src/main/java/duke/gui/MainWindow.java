@@ -2,6 +2,8 @@ package duke.gui;
 
 import duke.Duke;
 import duke.Ui;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -36,11 +38,11 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        loadStartUp(d.getUi());
     }
 
-    // todo try to find a way to load this upon start-up
     public void loadStartUp(Ui ui) {
-        String welcome = ui.showWelcome();
+        String welcome = ui.showGuiWelcome();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)
         );
@@ -60,7 +62,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.equals(duke.getUi().showGoodByeMessage())) {
-            // Todo try find a way to handle close of app.
+            Platform.exit();
         }
     }
 

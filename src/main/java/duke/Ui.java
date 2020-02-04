@@ -40,6 +40,14 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    public String showGuiWelcome() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Hello! I'm EXE, I'll execute anything on your command! :)"
+                + NEWLINE);
+        stringBuilder.append("What do you want to exe?");
+        return stringBuilder.toString();
+    }
+
     /**
      * Print error message whenever storage text file or directory cannot be
      * automatically generated.
