@@ -10,6 +10,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 
 public class Duke extends Application {
 
@@ -21,9 +25,34 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public static void main(String[] args) {
+    String filePath;
+    Storage storage;
+    TaskList taskList;
 
+
+    public Duke() {
+        filePath = "data/duke.txt";
+        storage = new Storage(filePath);
+        try {
+            taskList = storage.getTaskList(); // initialise from text file
+//            Parser.scan(taskList, storage);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
+
+//    public static void main(String[] args) {
+//        Ui.printHello();
+//        String filePath = "data/duke.txt";
+//        Storage storage = new Storage(filePath);
+//        TaskList taskList;
+//        try {
+//            taskList = storage.getTaskList(); // initialise from text file
+//            Parser.scan(taskList, storage);
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -122,6 +151,20 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        Parser.read(input, taskList, storage);
+
+
+        System.out.flush();
+        System.setOut(old);
+
+        return "Duke heard: " + baos.toString();
     }
 }
