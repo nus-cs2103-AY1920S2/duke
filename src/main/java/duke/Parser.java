@@ -76,7 +76,8 @@ public class Parser {
             if (descriptionArr.length == 0 || eventDescription.length() == 0) {
                 throw new DukeException("Empty duke.task.Event description", DukeErrorType.EMPTY_DESCRIPTION, command);
             } else {
-                return new Add(new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
+                return new Add(
+                        new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
             }
         case DEADLINE:
             String[] deadlineDetails = fullCommand.split("/by");
@@ -88,9 +89,12 @@ public class Parser {
             String[] descriptionArrDeadLine = deadlineDetails[0].split("deadline");
             deadlineDescription = descriptionArrDeadLine[1].trim();
             if (descriptionArrDeadLine.length == 0 || deadlineDescription.length() == 0) {
-                throw new DukeException("Empty duke.task.Deadline description", DukeErrorType.EMPTY_DESCRIPTION, command);
+                throw new DukeException("Empty duke.task.Deadline description",
+                        DukeErrorType.EMPTY_DESCRIPTION,
+                        command);
             } else {
-                return new Add(new Deadline(deadlineDescription, LocalDate.parse(deadlineTime, USER_FORMAT)));
+                return new Add(
+                        new Deadline(deadlineDescription, LocalDate.parse(deadlineTime, USER_FORMAT)));
             }
         case DELETE:
             int deleteTaskNumber = Integer.parseInt(inputArr[1]) - 1;
