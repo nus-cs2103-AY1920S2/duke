@@ -5,14 +5,22 @@ import duke.pack.Storage;
 import duke.pack.TaskList;
 import duke.pack.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represents the chatbot
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+
+    public Duke() {
+    }
 
     public Duke(String filePath) {
         // following code from module website
@@ -27,6 +35,15 @@ public class Duke {
             ui.showError(e);
             tasks = new TaskList();
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
