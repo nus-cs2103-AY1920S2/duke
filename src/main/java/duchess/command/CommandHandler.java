@@ -32,6 +32,9 @@ public class CommandHandler {
     static String handleTodoCommand(String command, TaskList taskList,
                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        if (commands.size() < 2) {
+            throw new DuchessException("Your todo content cannot be empty! Type help if you need help.");
+        }
         Task newTask = new ToDo(commands.get(1).trim());
         taskList.addTask(newTask);
         storage.save(taskList);
@@ -51,6 +54,9 @@ public class CommandHandler {
     static String handleEventCommand(String command, TaskList taskList,
                                      Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        if (commands.size() < 2) {
+            throw new DuchessException("Your event content cannot be empty! Type help if you need help.");
+        }
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split("/at")));
         if (details.size() < 2) {
             throw new DuchessException("I don't know when is your event! Please use /at [time here].");
@@ -75,6 +81,9 @@ public class CommandHandler {
     static String handleDeadlineCommand(String command, TaskList taskList,
                                         Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        if (commands.size() < 2) {
+            throw new DuchessException("Your deadline content cannot be empty! Type help if you need help.");
+        }
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split("/by")));
         if (details.size() < 2) {
             throw new DuchessException("I don't know when is your deadline! Please use /by [deadline here].");
