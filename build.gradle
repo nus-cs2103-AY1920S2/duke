@@ -12,7 +12,7 @@ repositories {
 }
 
 sourceSets.main.java.srcDirs = ['src']
-mainClassName = "Duke"
+mainClassName = "Launcher"
 
 javafx {
     version = "11.0.2"
