@@ -45,7 +45,9 @@ public class DukeException extends Exception {
             return "Unable to mark task #" + num + " as done. Please try again with a valid task number.";
         } else if (tmp3.equals("no slash")) {
             return "Please provide a valid deadline. For example, 「" + tmp + " read book " + "/by 2020-09-20」.";
-        //If exception is command that the bot understands but exception thrown due to invalid arguments
+            //If exception is command that the bot understands but exception thrown due to invalid arguments
+        } else if (tmp.equals("enter command")) {
+            return "Please enter a command.";
         } else {
             return "The description of 「" + tmp + "」 cannot be empty!!";
         }

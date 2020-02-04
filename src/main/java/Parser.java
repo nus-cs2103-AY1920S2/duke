@@ -18,36 +18,29 @@ public class Parser {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
 
-        try {
-            if (fullCommand.equals("")) {
-                throw new NullPointerException("");
-            }
-
-            switch (splitBySpace[0]) {
-            case "list":
-                return Command.LIST;
-            case "done":
-                return Command.DONE;
-            case "delete":
-                return Command.DELETE;
-            case "todo":
-                return Command.TODO;
-            case "event":
-                return Command.EVENT;
-            case "deadline":
-                return Command.DEADLINE;
-            case "find":
-                return Command.FIND;
-            default:
-                throw new DukeException("Don't understand");
-            }
-        } catch (DukeException e) {
-            System.out.println(e);
-        } catch (NullPointerException e) {
-            System.out.println("Please enter a command.");
+        if (fullCommand.equals("")) {
+            return Command.ENTERCOMMAND;
         }
 
-        return null;
+        switch (splitBySpace[0]) {
+        case "list":
+            return Command.LIST;
+        case "done":
+            return Command.DONE;
+        case "delete":
+            return Command.DELETE;
+        case "todo":
+            return Command.TODO;
+        case "event":
+            return Command.EVENT;
+        case "deadline":
+            return Command.DEADLINE;
+        case "find":
+            return Command.FIND;
+        default:
+            return Command.DONTUNDERSTAND;
+        }
+
     }
 
     /**
@@ -60,23 +53,16 @@ public class Parser {
         splitBySpace = fullCommand.split(" ");
         String newString = "";
 
-        try {
-            if (splitBySpace.length == 1) {
-                throw new DukeException(splitBySpace[0]);
-            }
-
-            for (int i = 1; i < splitBySpace.length - 1; i++) {
-                newString = newString + splitBySpace[i] + " ";
-            }
-            newString = newString + splitBySpace[splitBySpace.length - 1];
-
-            return newString;
-        } catch (DukeException e) {
-            System.out.println(e);
-            //return e.toString();
+        if (splitBySpace.length == 1) {
+            return "-1Error:0b9d4e";
         }
 
-        return null;
+        for (int i = 1; i < splitBySpace.length - 1; i++) {
+            newString = newString + splitBySpace[i] + " ";
+        }
+        newString = newString + splitBySpace[splitBySpace.length - 1];
+
+        return newString;
     }
 
     /**
@@ -90,7 +76,22 @@ public class Parser {
         splitBySpace = fullCommand.split(" ");
         String newString = "";
 
-        try {
+        if (splitBySpace.length == 1) {
+            return "-1Error:21006a";
+        }
+
+        splitBySlash = fullCommand.split("/");
+
+        String[] splitBySpace2 = splitBySlash[0].split(" ");
+
+        for (int i = 1; i < splitBySpace2.length - 1; i++) {
+            newString = newString + splitBySpace2[i] + " ";
+        }
+        newString = newString + splitBySpace2[splitBySpace2.length - 1];
+
+        return newString;
+
+        /*try {
             if (splitBySpace.length == 1) {
                 throw new DukeException(splitBySpace[0]);
             }
@@ -109,7 +110,7 @@ public class Parser {
             System.out.println(e);
         }
 
-        return null;
+        return null;*/
     }
 
     /**
@@ -124,7 +125,14 @@ public class Parser {
         splitBySpace = fullCommand.split(" ");
         String newString = "";
 
-        try {
+        splitBySlash = fullCommand.split("/");
+        if (splitBySlash.length != 2) {
+            return "-2error:21f3ad";
+        }
+
+        return splitBySlash[1];
+
+        /*try {
             splitBySlash = fullCommand.split("/");
             if (splitBySlash.length != 2) {
                 throw new DukeException(splitBySlash[0], "", "no slash");
@@ -136,7 +144,7 @@ public class Parser {
             System.out.println(e);
         }
 
-        return null;
+        return null;*/
     }
 
     /**
@@ -147,40 +155,27 @@ public class Parser {
      * @throws DukeException Exception is thrown if the criteria does not fit what delete or done command
      * is looking for.
      */
-    public int parseNum(String fullCommand, TaskList tasks) throws DukeException {
+    public int parseNum(String fullCommand, TaskList tasks) {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
 
-        try {
-            if (splitBySpace.length == 1) {
-                if (splitBySpace[0].equals("done")) {
-                    throw new DukeException("done");
-                } else if (splitBySpace[0].equals("delete")) {
-                    throw new DukeException("delete");
-                }
-            } else if (splitBySpace.length != 2) {
-                if (splitBySpace[0].equals("done")) {
-                    throw new DukeException("done argument too much");
-                } else if (splitBySpace[0].equals("delete")) {
-                    throw new DukeException("delete argument not found");
-                }
+        if (splitBySpace.length == 1) {
+            if (splitBySpace[0].equals("done")) {
+                return -1;
+            } else if (splitBySpace[0].equals("delete")) {
+                return -1;
             }
-
-            int num = Integer.parseInt(splitBySpace[1]);
-            if (num == 0 || num > tasks.getSize()) {
-                if (splitBySpace[0].equals("done")) {
-                    throw new DukeException("unable to mark done", num);
-                } else if (splitBySpace[0].equals("delete")) {
-                    throw new DukeException("unable to delete from list", num);
-                }
+        } else if (splitBySpace.length != 2) {
+            if (splitBySpace[0].equals("done")) {
+                return -2;
+            } else if (splitBySpace[0].equals("delete")) {
+                return -2;
             }
-
-            return num;
-        } catch (DukeException e) {
-            System.out.println(e);
         }
 
-        return -1;
+        int num = Integer.parseInt(splitBySpace[1]);
+
+        return num;
     }
 
 
