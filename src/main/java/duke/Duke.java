@@ -3,11 +3,16 @@ package duke;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is a task-management system. It accept user commands to add/delete tasks, mark tasks as done and list all tasks.
  * Upon exit, tasks will be saved and kept in a file for the next run.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -15,9 +20,9 @@ public class Duke {
     /**
      * Constructs a Duke object. An attempt will be made to load in tasks from the file specified. If the file
      * does not exist or cannot be accessed, an empty task list will be loaded.
-     * @param filePath Path of file containing saved data.
      */
-    public Duke(Path filePath) {
+    public Duke() {
+        Path filePath = Paths.get("data", "duke.txt");
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -28,8 +33,17 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     public static void main(String[] args) {
-        Duke newDuke = new Duke(Paths.get("data", "duke.txt"));
+        Duke newDuke = new Duke();
         newDuke.run();
     }
 
