@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
 public class Ui {
     private TaskList taskList;
 
-    public Ui (TaskList taskList) {
+    public Ui(TaskList taskList) {
         this.taskList = taskList;
     }
 
@@ -39,6 +39,7 @@ public class Ui {
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list![^._.^]ﾉ");
         System.out.println("____________________________________________________________");
     }
+
     public void printBye() {
         System.out.println("Sayonara~");
         System.out.println(" (_＼ヽ\n" + "　 ＼＼ .Λ＿Λ.\n" + "　　 ＼(　ˇωˇ)　\n" + "　　　 >　⌒ヽ\n" + "　　　/ 　 へ＼\n"

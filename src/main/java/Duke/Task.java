@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Task {
     protected String description;
@@ -19,11 +19,11 @@ public class Task {
 
     public String toString() {
         String icon = (isDone ? "\u2713" : "\u2718");
-        return "["+ icon + "]" + " " + this.description;
+        return "[" + icon + "]" + " " + this.description;
     }
 
     public String toFileString() {
-        int status = (isDone? 1 : 0);
+        int status = (isDone ? 1 : 0);
         return " | " + status + " | " + this.description;
     }
 }
