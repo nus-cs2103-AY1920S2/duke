@@ -12,7 +12,7 @@ public class Ui {
     public String say(SayType type) {
         switch (type) {
         case INTRO:
-            return getIntroduction();
+            return "Hello! I am\n" + logo + "\nWhat can I do for you today?";
         case EXIT:
             return getExit();
         case LIST:
