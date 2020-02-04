@@ -10,7 +10,7 @@ class Parser {
      * @param command The user's String input is parsed to call different Commands.
      * @return A Command based on input.
      */
-    static Command parse(String command) throws DukeException {
+    static Command parse(String command) {
         if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("list")) {
@@ -29,9 +29,7 @@ class Parser {
             return new DeleteCommand(command);
         } else if (command.startsWith("find")) {
             return new FindCommand(command);
-        } else {
-            throw new DukeException("That was an invalid input. Please try again.");
         }
-
+        return null;
     }
 }

@@ -15,7 +15,7 @@ class ListCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println("list");
         ui.showLine();
-        System.out.println("Here are your tasks!");
+        System.out.println("\n" + "Here are your tasks!");
         for (int i = 0; i < tasks.getTaskList().size(); i++) {
             System.out.println(i + 1 + ". " + tasks.getTaskList().get(i));
         }

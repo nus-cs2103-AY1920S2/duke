@@ -32,7 +32,7 @@ class Ui {
 
     void showByeMessage() {
         System.out.println("Bye-bye! See you again, my friend! " +
-                "Please wait for the window to be automatically closed. Thank you!");
+                "Please close this window if you do not wish to continue this session.");
     }
 
     void showDoneMessage() {
