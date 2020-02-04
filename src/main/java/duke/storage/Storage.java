@@ -9,6 +9,11 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Storage class represents a .csv file
+ * loadCSVList() returns a list of .csv lines represented in CSV objects in the particular .csv file
+ * which path was specified in argument of Storage constructor
+ */
 public class Storage {
     public static final String DEFAULT_PATH = "./data/duke.txt";
     File originFl;

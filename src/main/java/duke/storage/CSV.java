@@ -8,6 +8,10 @@ import java.util.Arrays;
 
 import java.util.stream.Collectors;
 
+/**
+ * CSV class represents a line in a typical .csv file
+ * CSV.parse(line) converts a .csv line String to CSV object
+ */
 public class CSV implements Comparable<CSV> {
     String s;
     ArrayList<CSV> arr;
