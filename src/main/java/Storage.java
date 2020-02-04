@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -64,8 +65,10 @@ public class Storage {
                         task = new Event(lineSplit[2], lineSplit[3]);
                         break;
                     default:
-                        throw new IllegalStateException("Unexpected value: " + lineSplit[0]);
+                        throw new IllegalStateException("Unexpected value: "
+                                + lineSplit[0]);
                 }
+
                 if (lineSplit[1].equals("1")) {task.markAsDone();}
                 taskList.add(task);
             }

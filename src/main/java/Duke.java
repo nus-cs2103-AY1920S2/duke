@@ -19,7 +19,7 @@ public class Duke {
     public void run() {
         ui.printLogo();
         ui.greetDuke();
-        Parser.handle(tasks, ui);
+        Parser.handleTasks(tasks, ui);
     }
 
     public static void main(String[] args) {

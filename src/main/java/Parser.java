@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Parser {
-    public static void handle(TaskList taskList, Ui ui) {
+    public static void handleTasks(TaskList taskList, Ui ui) {
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
         do {
@@ -45,7 +45,7 @@ public class Parser {
 
     public static String extractCommandType(String input) throws InvalidCommandException{
         String[] inputSplit = input.split(" ", 2);
-        boolean isValidCommand = checkValidCommand(inputSplit[0]);
+        boolean isValidCommand = isValidCommand(inputSplit[0]);
 
         if (!isValidCommand) {
             throw new InvalidCommandException("");
@@ -55,7 +55,7 @@ public class Parser {
     }
 
     public static String prepareTodo(String[] input) throws InvalidTodoException {
-        if (!checkValidTodo(input)) {
+        if (!isValidTodo(input)) {
             throw new InvalidTodoException("");
         } else {
             return input[1];
@@ -65,7 +65,7 @@ public class Parser {
     public static String[] prepareDeadline(String[] input) throws InvalidDeadlineException {
         String[] fieldDetails = input[1].split("/", 2);
 
-        if (!checkValidDeadline(fieldDetails)) {
+        if (!isValidDeadline(fieldDetails)) {
             throw new InvalidDeadlineException("");
         } else {
             return fieldDetails;
@@ -75,7 +75,7 @@ public class Parser {
     public static String[] prepareEvent(String[] input) throws InvalidEventException {
         String[] fieldDetails = input[1].split("/", 2);
 
-        if (!checkValidEvent(fieldDetails)) {
+        if (!isValidEvent(fieldDetails)) {
             throw new InvalidEventException("");
         } else {
             return fieldDetails;
@@ -86,7 +86,7 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
-    public static boolean checkValidCommand(String type) {
+    public static boolean isValidCommand(String type) {
         if (type.equals("todo")
                 || type.equals("deadline")
                 || type.equals("event")
@@ -100,7 +100,7 @@ public class Parser {
         }
     }
 
-    public static boolean checkValidTodo(String[] input) {
+    public static boolean isValidTodo(String[] input) {
         if (input.length == 2) {
             return true;
         } else {
@@ -108,7 +108,7 @@ public class Parser {
         }
     }
 
-    public static boolean checkValidDeadline(String[] input) {
+    public static boolean isValidDeadline(String[] input) {
         if (input.length == 3) {
             return true;
         } else {
@@ -116,7 +116,7 @@ public class Parser {
         }
     }
 
-    public static boolean checkValidEvent(String[] input) {
+    public static boolean isValidEvent(String[] input) {
         if (input.length == 3) {
             return true;
         } else {
