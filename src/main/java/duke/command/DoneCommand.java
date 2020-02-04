@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
      * @param index The index of the task to be marked as done.
      */
     public DoneCommand(int index) {
-        this.indexToMarkAsDone = Math.max(0, index);
+        this.indexToMarkAsDone = index;
     }
 
     /**

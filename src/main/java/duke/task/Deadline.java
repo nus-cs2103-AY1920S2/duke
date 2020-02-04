@@ -24,7 +24,7 @@ public class Deadline extends Task {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeException("The input '/by' argument is invalid.\n" +
-                    "\tExpected ISO-LOCAL-DATE format (e.g.: yyyy-mm-dd, or 2020-08-25)");
+                    "Expected ISO-LOCAL-DATE format (e.g.: yyyy-mm-dd, or 2020-08-25)");
         }
     }
 
