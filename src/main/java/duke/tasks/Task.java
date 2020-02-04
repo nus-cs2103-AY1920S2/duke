@@ -34,10 +34,4 @@ public abstract class Task {
     public String getStatus() {
         return isDone ? "\u2713" : "\u2718";
     }
-
-    /**
-     * @return String representation of the <code>Task</code>
-     */
-    @Override
-    abstract public String toString();
 }

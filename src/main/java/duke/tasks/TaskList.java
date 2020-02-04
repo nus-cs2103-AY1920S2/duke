@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Adds multiple <code>Task</code>s to the TaskList.
+     * Adds multiple <code>Tasks</code> to the TaskList.
      * 
      * @param moreTasks Tasks to be added.
      */

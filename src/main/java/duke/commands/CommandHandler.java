@@ -30,7 +30,6 @@ public class CommandHandler {
         commands.put("event", new CreateEvent());
         commands.put("delete", new DeleteTask());
         commands.put("find", new FindTasks());
-        isActive = true;
     }
 
     /**
