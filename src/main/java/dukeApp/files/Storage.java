@@ -27,20 +27,25 @@ public class Storage {
 
         while (s.hasNext()) {
             String c = s.next();
+            isDone = (s.nextInt())==1;
             if (c.equals("T")) {
-                isDone = (s.nextInt())==1;
                 t = new Todo(s.nextLine());
                 arrList.add(t);
             }
-            else if (c.equals("E")) {
-                isDone = (s.nextInt())==1;
-                t = new Event(s.nextLine());
-                arrList.add(t);
-            }
             else {
-                isDone = (s.nextInt())==1;
-                t = new Deadline(s.nextLine());
-                arrList.add(t);
+                String statement = s.nextLine();
+                String des = statement.split("\\(")[0];
+                String date = statement.split("\\(")[1];
+                String dateLine = date.substring(date.indexOf(" ") + 1, date.length()-1);
+                String newDate = dateLine.split(" ")[0];
+                String time = dateLine.split(" ")[1];
+                if (c.equals("E")) {
+                    t = new Event(des, newDate, time);
+                    arrList.add(t);
+                } else {
+                    t = new Deadline(des, newDate, time);
+                    arrList.add(t);
+                }
             }
             if (isDone) {
                 t.markAsDone();
@@ -64,6 +69,7 @@ public class Storage {
                         .append(newList.get(i).getDescription());
             }
             else if ((newList.get(i).getType()).equals("E")) {
+                ((Event)newList.get(i)).changeDate();
                 s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
                         .append(newList.get(i).toString());
             }

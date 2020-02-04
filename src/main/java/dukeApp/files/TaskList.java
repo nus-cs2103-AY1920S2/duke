@@ -69,17 +69,44 @@ public class TaskList {
         Task t;
         statement = statement.substring(statement.indexOf(" "));
         if (!taskType.equals("todo")) {
-            if (taskType.equals("event")) {
-                t = new Event(statement);
-            } else {
-                t = new Deadline(statement);
+            String description = statement.split("\\(")[0];
+            String date = statement.split("\\(")[1];
+            String dateLine = date.substring(date.indexOf(" ") + 1, date.length()-1);
+            String newDate = dateLine.split(" ")[0];
+            String time = dateLine.split(" ")[1];
+            try {
+                checkDate(newDate);
+                if (taskType.equals("event")) {
+                    t = new Event(description, newDate, time);
+                    aList.add(t);
+                    printAdded(t, aList); //print msg task added
+                } else {
+                    t = new Deadline(description, newDate, time);
+                    aList.add(t);
+                    printAdded(t, aList); //print msg task added
+                }
+            } catch(DukeException e) {
+                System.out.println(e);
             }
+
         }
         else {
             t = new Todo(statement);
+            aList.add(t);
+            printAdded(t, aList); //print msg task added
         }
-        aList.add(t);
-        printAdded(t, aList); //print msg task added
+    }
+
+    /**
+     * Checks if the date string is in the correct format
+     * @param date user input date
+     * @throws DukeException if date is in wrong format
+     */
+    public void checkDate(String date) throws DukeException{
+        if (!date.contains("-") || date.split("-")[0].length()<4
+                || Integer.parseInt(date.split("-")[1])>12) {
+            throw new DukeException("Invalid date format. Format should be YYYY-MM-DD.\n");
+        }
     }
 
     /**

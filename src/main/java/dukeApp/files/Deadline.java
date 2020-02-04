@@ -3,19 +3,14 @@ package dukeApp.files;
 public class Deadline extends Task {
     protected String date;
     protected String time;
-    protected String dateLine;
     protected String originalDate;
     DateTime dt = new DateTime();
 
-    public Deadline(String s) {
+    public Deadline(String s, String date, String time) {
         super(s);
-        description = s.split("\\(")[0];
-        date = s.split("\\(")[1];
-        dateLine = date.substring(date.indexOf(" ") + 1, date.length()-1);
-        date = dateLine.split(" ")[0];
-        time = dateLine.split(" ")[1];
         originalDate = date;
-        date = dt.convertDate(date);
+        this.date = dt.convertDate(date);
+        this.time = time;
     }
 
     /**

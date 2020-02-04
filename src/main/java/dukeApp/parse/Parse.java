@@ -28,6 +28,9 @@ public class Parse {
                     if (taskArray[0].equals("todo") || taskArray[0].equals("deadline") || taskArray[0].equals("event")) {
                         throw new DukeException("☹ OOPS!!! The description of a " +taskArray[0]+ " cannot be empty.\n");
                     }
+                    else if (taskArray[0].equals("delete") || taskArray[0].equals("done")) {
+                        throw new DukeException("☹ OOPS!!! The task index is missing.\n");
+                    }
                     else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     }

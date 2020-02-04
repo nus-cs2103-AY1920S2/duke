@@ -2,12 +2,22 @@ package dukeApp.files;
 
 public class Event extends Task {
     protected String date;
+    protected String originalDate;
+    DateTime dt = new DateTime();
+    protected String time;
 
-    public Event(String s) {
+    public Event(String s, String date, String time) {
         super(s);
-        description = s.split("\\(")[0];
-        date = s.split("\\(")[1];
-        date = date.substring(date.indexOf(" ") + 1, date.length()-1);
+        originalDate = date;
+        this.date = dt.convertDate(date);
+        this.time = time;
+    }
+
+    /**
+     * Change the date in the original format to write to file
+     */
+    public void changeDate() {
+        date = originalDate;
     }
 
     /**
@@ -34,6 +44,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return description + "(at: " +date+ ")";
+        return description + "(at: " +date+ " " +time+ ")";
     }
 }
