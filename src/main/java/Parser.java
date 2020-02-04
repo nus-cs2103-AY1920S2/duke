@@ -163,6 +163,20 @@ public class Parser {
      * @return boolean dictating if array has enough elements for a valid Todo task.
      */
     public static boolean isValidTodo(String[] input) {
+        if (input.length == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if input array is two elements long and thus a valid Todo task.
+     *
+     * @param input String array containing task's type and description.
+     * @return boolean dictating if array has enough elements for a valid Todo task.
+     */
+    public static boolean isValidTodo(String[] input) {
         return input.length == 2;
     }
 
@@ -174,7 +188,7 @@ public class Parser {
      */
     public static boolean isValidDeadline(String[] input) {
         return input.length == 2;
-        }
+    }
 
     /**
      * Checks if input array is three elements long and thus a valid Event task.
