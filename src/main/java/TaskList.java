@@ -169,4 +169,28 @@ public class TaskList {
         }
     }
 
+    // Temporary method for GUI.
+    // TODO: Refactor this to something nicer
+    public String findToString(String args) {
+
+        TaskList matches = new TaskList();
+        for (Task task: tasks) {
+            if (task.toString().contains(args)) matches.add(task);
+        }
+
+        if (matches.size() == 0)  {
+            return "No matches found";
+        } else {
+            return matches.toString();
+        }
+    }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.size(); i++) {
+            String current = (i + 1) + ". " + this.get(i).toString() + "\n";
+            sb.append(current);
+        }
+        return sb.toString();
+    }
+
 }
