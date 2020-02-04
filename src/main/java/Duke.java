@@ -1,10 +1,22 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.HashMap;
 
 public class Duke {
+    private static String taskDataPath = "./data/duke.txt";
     static ArrayList<Task> tasks = new ArrayList<>();
+    static {
+        try {
+            tasks = loadTasks(taskDataPath);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
     static HashMap<String, Command> commands = new HashMap<>();
     static {
         commands.put("bye", Command.BYE);
@@ -14,6 +26,60 @@ public class Duke {
         commands.put("deadline", Command.DEADLINE);
         commands.put("event", Command.EVENT);
         commands.put("delete", Command.DELETE);
+    }
+
+    static ArrayList<Task> loadTasks(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (s.hasNextLine()) {
+            tasks.add(parseText(s.nextLine()));
+        }
+        return tasks;
+    }
+
+    private static Task parseText(String text) {
+        String[] taskElements = text.split(" - ");
+        Task task;
+        switch (taskElements[0]) {
+            case "T":
+                task = new Todo(taskElements[2]);
+                break;
+            case "D":
+                task = new Deadline(taskElements[2], taskElements[3]);
+                break;
+            case "E":
+                task = new Event(taskElements[2], taskElements[3]);
+                break;
+            default:
+                task = new Task("default");
+        }
+        if (taskElements[1].equals("1")) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    private static void writeToFile(String filePath, String text) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(text);
+        fw.close();
+    }
+
+    private static String tasksToString(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : tasks) {
+            sb.append(task.toStringInFile()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    private static void updateTaskData(String filePath, ArrayList<Task> tasks) {
+        try {
+            writeToFile(filePath, tasksToString(tasks));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     public static void main(String[] args) {
@@ -42,6 +108,7 @@ public class Duke {
                         Task t = tasks.get(taskNum - 1);
                         t.markAsDone();
                         System.out.println("Nice! Congratulations for completing this task:\n" + t);
+                        updateTaskData(taskDataPath, tasks);
                         break;
                     case TODO:
                         String todoStuff = st.nextToken("").trim();
@@ -53,6 +120,7 @@ public class Duke {
                         String todoMsg = "Got it. I've added this task:\n" + todo
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(todoMsg);
+                        updateTaskData(taskDataPath, tasks);
                         break;
                     case DEADLINE:
                         String ddlStuff = st.nextToken("/").trim();
@@ -62,6 +130,7 @@ public class Duke {
                         String ddlMsg = "Got it. I've added this task:\n" + ddl
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(ddlMsg);
+                        updateTaskData(taskDataPath, tasks);
                         break;
                     case EVENT:
                         String eventStuff = st.nextToken("/").trim();
@@ -71,6 +140,7 @@ public class Duke {
                         String eventMsg = "Got it. I've added this task:\n" + event
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(eventMsg);
+                        updateTaskData(taskDataPath, tasks);
                         break;
                     case DELETE:
                         int num = Integer.parseInt(st.nextToken());
@@ -79,6 +149,7 @@ public class Duke {
                         String deleteMsg = "Noted. I've removed this task:\n" + del
                                 + String.format("\nnow you have %d tasks in the list.", tasks.size());
                         System.out.println(deleteMsg);
+                        updateTaskData(taskDataPath, tasks);
                         break;
                     default:
                         throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
