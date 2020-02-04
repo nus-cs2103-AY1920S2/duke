@@ -1,6 +1,0 @@
-[T][✘] borrow book
-[D][✘] return book (by: Sunday)
-[E][✘] project meeting (at: Mon 2-4pm)
-[T][✘] borrow book
-[D][✘] return book (by: Sunday)
-[E][✘] project meeting (at: Mon 2-4pm)
