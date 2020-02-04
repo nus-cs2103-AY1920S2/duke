@@ -1,5 +1,6 @@
 package dukeproj;
 
+import dukeproj.command.Command;
 import dukeproj.data.Calender;
 import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
@@ -24,24 +25,32 @@ public class Duke {
     private Scanner sc;
     /** Parser to read commands. */
     private Parser parser;
+    /** Storage to read and store Duke into a file. */
+    private Storage storage;
+    /** List of tasks in Duke. */
+    private TaskList taskList;
+    /** Calender of tasks stored according to their dates. */
+    private Calender calender;
 
     /**
-     * Generates a response from a user input String from the GUI.
+     * Generates a command as a response to a user input String from the GUI.
      *
      * @param input input provided by user from GUI.
-     * @return response by Duke.
+     * @return Command that is parsed from the input.
      */
-    public String getResponse(String input) {
+    public Command getCommandResponse(String input) throws InvalidCommandException {
         String[] inputs = input.split(" ", 2);
+        CommandType commandType = Parser.commandParser(inputs[0]);
+        if (inputs.length < 2) {
+            return parser.getCommand(commandType, "");
+        } else {
+            return parser.getCommand(commandType, inputs[1]);
+        }
+    }
+
+    public String getResponse(Command command) {
         try {
-            CommandType commandType = Parser.commandParser(inputs[0]);
-            if (inputs.length < 2) {
-                return parser.getCommandResponse(commandType, "");
-            } else {
-                return parser.getCommandResponse(commandType, inputs[1]);
-            }
-        } catch (InvalidCommandException e) {
-            return ui.say(SayType.INVALID_COMMAND);
+            return command.execute(ui, taskList, storage, calender);
         } catch (DukeDescriptionException e) {
             return ui.say(SayType.EMPTY_DESCRIPTION);
         } catch (BadDateException e) {
@@ -99,11 +108,11 @@ public class Duke {
      */
     public Duke(String filepath, boolean isGui) {
         ui = new Ui();
-        Calender calender = new Calender();
-        Storage storage = new Storage(filepath);
-        TaskList taskList = new TaskList(storage.printFileIntoList(calender));
+        calender = new Calender();
+        storage = new Storage(filepath);
+        taskList = new TaskList(storage.printFileIntoList(calender));
         if (isGui) {
-            parser = new Parser(ui, taskList, calender, storage);
+            parser = new Parser();
         } else {
             sc = new Scanner(System.in);
             parser = new Parser(taskList, calender, storage, sc);
