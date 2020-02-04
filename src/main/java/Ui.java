@@ -21,6 +21,7 @@ public class Ui {
                 "That's %d in the list.", taskList.tasks.size()));
     }
 
+
     public void exitDuke() {
         System.out.println("Guess that's enough for now. I've got your back, so you keep me close.");
     }

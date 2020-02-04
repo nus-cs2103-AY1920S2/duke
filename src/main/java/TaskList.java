@@ -44,6 +44,16 @@ public class TaskList {
         print(task.toString());
     }
 
+    public void findTask(String keyword) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                foundTasks.tasks.add(task);
+            }
+        }
+        foundTasks.tasks.forEach(task -> print(task.toString()));
+    }
+
     public void print(String string) {
         System.out.println(string);
     }
