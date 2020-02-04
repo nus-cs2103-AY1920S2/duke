@@ -31,7 +31,7 @@ public class Duke extends Application {{
         }
     }
 
-    public void run() {
+    public void run(){
         String userInput = ui.input();
         Parser newInput = new Parser(userInput);
 
