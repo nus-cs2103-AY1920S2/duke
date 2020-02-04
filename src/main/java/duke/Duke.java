@@ -3,11 +3,20 @@ package duke;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Duke is a task-management system. It accept user commands to add/delete tasks, mark tasks as done and list all tasks.
+ * Upon exit, tasks will be saved and kept in a file for the next run.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructs a Duke object. An attempt will be made to load in tasks from the file specified. If the file
+     * does not exist or cannot be accessed, an empty task list will be loaded.
+     * @param filePath Path of file containing saved data.
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +33,9 @@ public class Duke {
         newDuke.run();
     }
 
+    /**
+     * Starts Duke. User will be able to input commands to perform actions.
+     */
     public void run() {
         ui.showGreeting();
 
@@ -79,42 +91,4 @@ public class Duke {
         storage.update(tasks);
         ui.showExitMessage();
     }
-
-//    public static void doInstructions(String input) throws DukeException {
-//        String command = getCommand(input);
-//
-//        if (command.equals("list")) {
-//            // show list from ui
-//        } else if (command.equals("done")) {
-//            int taskNum = Integer.parseInt(input.split(" ")[1]);
-//            // check for
-//            // 1. invalid task num
-//            // 2. empty task num
-//            // 3. if task is already done?
-//            // implement ui class? if have time to print out done statement
-//            tasks.get(taskNum - 1).markAsDone();
-//            ui.showDone(tasks.get(taskNum - 1));
-//        } else if (command.equals("delete")) {
-//            int taskNum = Integer.parseInt(input.split(" ")[1]);
-//            String desc = tasks.get(taskNum - 1).toString();
-//            tasks.remove(taskNum - 1);
-//            numTasks -= 1;
-//            // show deleted from ui
-//        } else {
-//            Task newTask;
-//            // check for
-//            // 1. no description
-//            // 2. no time
-//            if (command.equals("todo")) {
-//                newTask = new ToDo(getDescription(input));
-//            } else if (command.equals("deadline")) {
-//                newTask = new Deadline(getDescription(input), getTime(input));
-//            } else { // (command.equals("event")) {
-//                newTask = new Event(getDescription(input), getTime(input));
-//            }
-//
-//            tasks.add(newTask);
-//            // show added from ui
-//        }
-//    }
 }
