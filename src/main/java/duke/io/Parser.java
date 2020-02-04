@@ -70,7 +70,7 @@ public class Parser {
             return new DoneCommand(operationIndex);
         default:
             throw new DukeException("'" + command + "' is not a recognized command." +
-                    "\n\tYou are advised to stop trying to break the system.");
+                    "\nYou are advised to stop trying to break the system.");
         }
     }
 }

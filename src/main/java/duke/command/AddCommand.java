@@ -58,10 +58,7 @@ public class AddCommand extends Command {
         assert (taskToAdd != null);
 
         taskList.addTask(taskToAdd);
-        ui.stylizedPrint(
-                "New task added:",
-                "\t" + taskToAdd.toString(),
-                String.format("You now have %d task(s) in the list.", taskList.size())
-        );
+        System.out.println("New task added:\n" + taskToAdd.toString());
+        System.out.println(String.format("You now have %d task(s) in the list.", taskList.size()));
     }
 }

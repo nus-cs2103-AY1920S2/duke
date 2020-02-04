@@ -15,14 +15,15 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui) {
         if (taskList.size() <= 0) {
-            ui.stylizedPrint("There are currently no tasks.");
+            System.out.println("There are currently no tasks.");
             return;
         }
 
         String[] names = taskList.getNames();
+        String output = "";
         for (int i = 0; i < names.length; ++i) {
-            names[i] = (i + 1) + ". " + names[i];
+            output += (i + 1) + ". " + names[i] + "\n";
         }
-        ui.stylizedPrint(names);
+        System.out.println(output);
     }
 }
