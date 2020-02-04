@@ -24,33 +24,33 @@ public class Duke {
                         throw new EmptyDescriptionException();
                     };
                     String info = Todo.generateTodoDesc(inputArr);
-                    Todo task = Todo.createTodo(info);
+                    Todo task = new Todo(info);
                     Task.addTask(task);
                 } else if (command.equals("event")) { //create event
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     };
                     String date, desc;
-                    date = Event.getEventDate(inputArr);
+                    date = Event.getEventDate(inputs[1]);
                     desc = Event.getEventDesc(inputArr);
-                    Event task = Event.createEvent(desc, date);
+                    Event task = new Event(desc, date);
                     Task.addTask(task);
                 } else if (command.equals("deadline")) { //create deadline
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     };
                     String by, desc;
-                    by = Deadline.getBy(inputArr);
+                    by = Deadline.getDate(inputs[1]);
                     desc = Deadline.getDesc(inputArr);
-                    Deadline task = Deadline.createDeadline(desc, by);
+                    Deadline task = new Deadline(desc, by);
                     Task.addTask(task);
                 } else if (command.equals("list")) { //list command
                     Task.showTasks();
                 } else if (command.equals("done")){ //done command
                     Task.taskDone(input);
                 } else if (command.equals("bye")) { //bye command
-                    System.out.println("Bye. Hope to see you again soon!");
                     Task.saveToFile();
+                    System.out.println("Bye. Hope to see you again soon!");
                     break;
                 } else if(command.equals("delete")) { //delete command
                     Task.deleteTask(inputs[1]);

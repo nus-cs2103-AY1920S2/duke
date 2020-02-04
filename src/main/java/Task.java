@@ -4,11 +4,10 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.IOException;
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.io.ObjectInputStream;
-import java.io.FileInputStream;
+import java.time.LocalDate;
 import java.util.Scanner;
-
 
 public class Task implements Serializable {
     protected String description;
@@ -113,22 +112,25 @@ public class Task implements Serializable {
                 String[] inputs = input.split(" - ");
                 String command = inputs[0];
                 String status = inputs[1];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
                 if (command.equals("D")) {
-                    Task t = Deadline.createDeadline(inputs[2], inputs[3]);
+                    LocalDate date = LocalDate.parse(inputs[3], formatter);
+                    Task t = new Deadline(inputs[2], date.toString());
                     taskArrList.add(t);
                     taskCounter++;
                     if (status.equals("1")) {
                         t.isDone = true;
                     }
                 } else if (command.equals("E")) {
-                    Task t = Event.createEvent(inputs[2], inputs[3]);
+                    LocalDate date = LocalDate.parse(inputs[3], formatter);
+                    Task t = new Event(inputs[2], date.toString());
                     taskArrList.add(t);
                     taskCounter++;
                     if (status.equals("1")) {
                         t.isDone = true;
                     }
                 } else if (command.equals("T")) {
-                    Task t = Todo.createTodo(inputs[2]);
+                    Task t = new Todo(inputs[2]);
                     taskArrList.add(t);
                     taskCounter++;
                     if (status.equals("1")) {
@@ -137,7 +139,7 @@ public class Task implements Serializable {
                 }
             }
         } else {
-            System.out.println("Starting fresh list.");
+            System.out.println("Starting fresh task list.");
         }
     }
 

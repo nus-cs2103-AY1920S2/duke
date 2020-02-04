@@ -1,9 +1,13 @@
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 public class Deadline extends Task{
-    protected String by;
+    protected LocalDate date;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.date = LocalDate.parse(by);
     }
 
     public static String getDesc(char[] input) {
@@ -18,35 +22,29 @@ public class Deadline extends Task{
         return desc;
     }
 
-    public static String getBy(char[] input) {
-        int marker = 0;
-        String by = "";
-        for (int i = input.length - 1; (input[i] != '/'); i--) {
-            marker = i;
-        }
-        for (int i = marker + 3; i < input.length; i++) {
-            by += input[i];
-        }
-        return by;
+    public static String getDate(String input) {
+        String[] tmp = input.split(" /by ");
+        String[] inputs = tmp[1].split(" ");
+        return inputs[0];
     }
 
-    public static Deadline createDeadline(String desc, String by) {
-        return new Deadline(desc, by);
+    public String formatDate() {
+        return date.format(DateTimeFormatter.ofPattern("d-MMM-yyyy"));
     }
 
     @Override
     public String saveToText() {
         String output;
         if(this.isDone) {
-            output = "D - 1 - " + this.getDescription() + " - " + this.by;
+            output = "D - 1 - " + this.getDescription() + " - " + formatDate();
         } else {
-            output = "D - 0 - " + this.getDescription() + " - " + this.by;
+            output = "D - 0 - " + this.getDescription() + " - " + formatDate();
         }
         return output;
     }
 
     @Override
     public String toString(){
-        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.by + ")";
+        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + formatDate() + ")";
     }
 }

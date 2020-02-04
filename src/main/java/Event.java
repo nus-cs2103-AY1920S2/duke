@@ -1,23 +1,19 @@
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class Event extends Task{
-    protected String date;
+    protected LocalDate date;
 
     public Event(String description, String date) {
         super(description);
-        this.date = date;
+        this.date = LocalDate.parse(date);
     }
 
-    public static String getEventDate(char[] input) {
-        String date = "";
-        int marker = 0;
-        for (int i = input.length - 1; (input[i] != '/'); i--) {
-            marker = i;
-        }
-        for (int i = marker + 3; i < input.length; i++) {
-            date += input[i];
-        }
-        return date;
+    public static String getEventDate(String input) {
+        String[] tmp = input.split(" /at ");
+        String[] inputs = tmp[1].split(" ");
+        return inputs[0];
     }
 
     public static String getEventDesc(char[] input) {
@@ -32,24 +28,24 @@ public class Event extends Task{
         return desc;
     }
 
-    public static Event createEvent(String desc, String date) {
-        return new Event(desc, date);
+    public String formatDate() {
+        return date.format(DateTimeFormatter.ofPattern("d-MMM-yyyy"));
     }
 
     @Override
     public String saveToText() {
         String output;
         if(this.isDone) {
-            output = "E - 1 -" + this.getDescription() + " - " + this.date;
+            output = "E - 1 - " + this.getDescription() + " - " + formatDate();
         } else {
-            output = "E - 0 - " + this.getDescription() + " - " + this.date;
+            output = "E - 0 - " + this.getDescription() + " - " + formatDate();
         }
         return output;
     }
 
     @Override
     public String toString(){
-        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.date + ")";
+        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + formatDate() + ")";
     }
 
 }
