@@ -26,40 +26,49 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case DONE:
-            return new DoneCommand(Integer.parseInt(commandLine[1]));
+            if (commandLine.length < 2) {
+                throw new InvalidCommandException("HEY!!! I need to know what task you want mark as done!");
+            } else {
+                return new DoneCommand(Integer.parseInt(commandLine[1]));
+            }
         case DELETE:
-            return new DeleteCommand(Integer.parseInt(commandLine[1]));
+            if (commandLine.length < 2) {
+                throw new InvalidCommandException("HEY!!! I need to know what task to target my explosion."
+                        + " Perhaps I will just target Beldia's castle...");
+            } else {
+                return new DeleteCommand(Integer.parseInt(commandLine[1]));
+            }
         case TODO:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("OOPS!!! The description of a "
-                        + "todo cannot be empty.");
+                throw new InvalidCommandException("HEY!!! The description of a todo cannot be empty."
+                        + " Maybe I will name it ChunChunMaru for you! Just kidding, please don't hit me!");
             } else {
                 return new TodoCommand(commandLine[1]);
             }
         case DEADLINE:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("OOPS!!!"
-                        + " The description of a deadline cannot be empty.");
+                throw new InvalidCommandException("HEY!!! The description of a deadline cannot be empty."
+                        + " Maybe I will name it Chomusuke for you! Just kidding, please don't hit me!");
             } else {
                 String[] deadlineDescriptionDate = commandLine[1].split(" /by ");
                 return new DeadlineCommand(deadlineDescriptionDate);
             }
         case EVENT:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("OOPS!!! The description of a "
-                        + "event cannot be empty.");
+                throw new InvalidCommandException("HEY!!! The description of an event cannot be empty."
+                        + " Maybe I will name it Hyoizaburoo for you! Just kidding, please don't hit me!");
             } else {
                 String[] eventDescriptionDate = commandLine[1].split(" /at ");
                 return new EventCommand(eventDescriptionDate);
             }
         case FIND:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("OOPS!!! Please state what you want to find.");
+                throw new InvalidCommandException("HEY!!! Please state what you want to find.");
             } else {
                 return new FindCommand(commandLine[1]);
             }
         default:
-            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("HEY!!! I don't know what that means :-(");
         }
     }
 }

@@ -39,7 +39,7 @@ public class TaskList {
      */
     public void setAsDone(int index) throws InvalidCommandException {
         if (index > tasks.size() || index <= 0) {
-            throw new InvalidCommandException("OOPS!!! I cannot set a "
+            throw new InvalidCommandException("HEY!!! I cannot set a "
                     + "non-existent task to be done.");
         }
 
@@ -57,7 +57,7 @@ public class TaskList {
     public Task deleteTask(int index) throws InvalidCommandException {
         //check if index is valid
         if (index > tasks.size() || index <= 0) {
-            throw new InvalidCommandException("OOPS!!! I cannot delete a "
+            throw new InvalidCommandException("HEY!!! I cannot destroy a "
                     + "non-existent task.");
         }
 

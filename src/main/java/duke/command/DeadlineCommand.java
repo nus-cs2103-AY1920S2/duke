@@ -37,7 +37,7 @@ public class DeadlineCommand extends Command {
         try {
             //check if the argument length required is correct
             if (args.length < 2) {
-                throw new InvalidCommandException("☹ OOPS!!!"
+                throw new InvalidCommandException("HEY!!!"
                         + " The date of a deadline cannot be empty.");
             }
 
@@ -54,7 +54,7 @@ public class DeadlineCommand extends Command {
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the save file.";
+            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
         }
     }
 }

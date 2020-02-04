@@ -41,11 +41,11 @@ public class DoneCommand extends Command {
 
             //print success message
             return String.format("Nice! I've marked this task as done:\n"
-                    + "%s\n", tasks.getTask(index));
+                    + "%s\n" + "Hope we get loads of Eris for this!\n", tasks.getTask(index));
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the save file.";
+            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
         }
 
     }

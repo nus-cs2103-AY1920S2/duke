@@ -41,12 +41,13 @@ public class DeleteCommand extends Command {
             storage.saveTasks(tasks.getList());
 
             //print success message
-            return String.format("Noted. I've removed this task:\n    %s\n"
+            return String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
+                    + "I have successfully eradicated this task:\n    %s\n"
                     + "Now you have %d tasks in the list.\n", taskToDelete, tasks.getSize());
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the save file.";
+            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
         }
     }
 }

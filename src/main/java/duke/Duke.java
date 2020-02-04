@@ -21,8 +21,9 @@ public class Duke {
     private Storage storage;
     /** TaskList object to store the task list. */
     private TaskList tasks;
-    /** Ui object to interact with the user. */
-    private String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
+    /** Welcome message of the application. */
+    private String welcomeMessage = "Hello! My name is Megumin, user of the finest magic crimson demons possess.\n"
+            + "What can I explo- I mean do for you?";
 
     /**
      * Constructs Duke with the default save directory.

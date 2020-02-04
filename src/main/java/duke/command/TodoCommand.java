@@ -45,7 +45,7 @@ public class TodoCommand extends Command {
             return String.format("Got it. I've added this task:\n  %s\n"
                     + "Now you have %d tasks in the list.\n", newTodoTask,tasks.getSize());
         } catch (IOException e) {
-            return "Sorry, I could not write to the save file.";
+            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
         }
     }
 }

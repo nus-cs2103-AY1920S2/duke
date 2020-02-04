@@ -20,7 +20,7 @@ public class ListCommand extends Command {
         if (tasks.getSize() > 0) {
             return "Here are the tasks in your list:\n" + tasks;
         } else {
-            return "You do not have any task in your list.";
+            return "I may or may not have exploded all your tasks in your list as it is empty.";
         }
     }
 }
