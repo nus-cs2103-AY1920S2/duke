@@ -1,7 +1,7 @@
 /** ToDo is a child class of Task.
  * Task without any date/time attached to it*/
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     String time;
 
     /**
@@ -22,7 +22,7 @@ public class ToDo extends Task{
     }
 
     /**
-     * Converts ToDo into a String to be saved to file
+     * Converts ToDo into a String to be saved to file.
      * @return String to be saved to file
      */
     @Override

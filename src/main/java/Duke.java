@@ -1,6 +1,10 @@
 import java.io.IOException;
 
 public class Duke {
+    /**
+     * Main Duke class to run the chat bot.
+     * @param args Arguments taken in are not used
+     */
     public static void main(String[] args) {
         Ui.printHello();
         String filePath = "data/duke.txt";

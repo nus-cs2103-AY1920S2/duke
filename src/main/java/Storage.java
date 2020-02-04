@@ -8,7 +8,6 @@ public class Storage {
 
     /**
      * Constructor. Links this storage object to a specific file path.
-     *
      * @param filePath Path of the file.
      */
     public Storage(String filePath) {
@@ -16,7 +15,7 @@ public class Storage {
     }
 
     /**
-     * Generate TaskList from file obtained from filePath
+     * Generate TaskList from file obtained from filePath.
      * @return TaskList generated from file obtained from filePath
      * @throws IOException Throws error when there is error with I/O
      */
@@ -31,7 +30,7 @@ public class Storage {
     }
 
     /**
-     * Helper method to parse each line into a Task
+     * Helper method to parse each line into a Task.
      * @param taskString Line of input to be parsed
      * @param taskList TaskList to add the Task to
      */
@@ -62,7 +61,7 @@ public class Storage {
     }
 
     /**
-     * Updates the file contents based on the taskList given
+     * Updates the file contents based on the taskList given.
      * @param taskList TaskList to be written into the file
      * @throws IOException Throws error when there is error with I/O
      */

@@ -5,14 +5,14 @@ public class TaskList {
     public ArrayList<Task> arrList;
 
     /**
-     * Constructor. To create and bind an arrayList
+     * Constructor. To create and bind an arrayList.
      */
     public TaskList() {
         arrList = new ArrayList<Task>();
     }
 
     /**
-     * Delete task at index taskNum
+     * Delete task at index taskNum.
      * @param taskNum index at which to delete task
      */
     public void deleteTask(int taskNum) {
@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Marks task at index taskNum as done
+     * Marks task at index taskNum as done.
      * @param taskNum index at which to mark the task
      */
     public void taskDone(int taskNum) {
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to TaskList
+     * Adds a Task to TaskList.
      * @param task Task to be added
      */
     public void addList(Task task) {
@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks with taskSubString in their name
+     * Finds tasks with taskSubString in their name.
      * @param taskSubString String to be found in Task name
      */
     public void findTasks(String taskSubString) {

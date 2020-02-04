@@ -1,5 +1,5 @@
 /**
- * Parent class of Deadline, Event and ToDo
+ * Parent class of Deadline, Event and ToDo.
  */
 public class Task {
     public boolean done;
@@ -22,15 +22,16 @@ public class Task {
     public boolean getDone() {
         return this.done;
     }
+
     /**
-     * Toggle status of the done attribute of task
+     * Toggle status of the done attribute of task.
      */
     public void toggleDone() {
         this.done = !this.done;
     }
 
     /**
-     * Converts Task into a String to be saved to file
+     * Converts Task into a String to be saved to file.
      * Overwritten by child classes
      * @return String to be saved to file
      */
