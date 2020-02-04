@@ -101,7 +101,6 @@ public class Parser {
             if (!input.substring(0, input.indexOf(' ')).equals("todo") &&
                     !input.substring(0, input.indexOf(' ')).equals("deadline") &&
                     !input.substring(0, input.indexOf(' ')).equals("event") &&
-                    !input.substring(0, input.indexOf(' ')).equals("list") &&
                     !input.substring(0, input.indexOf(' ')).equals("delete") &&
                     !input.substring(0, input.indexOf(' ')).equals("done") &&
                     !input.substring(0, input.indexOf(' ')).equals("find")) {

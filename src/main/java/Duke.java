@@ -53,10 +53,7 @@ public class Duke {
             input = sc.nextLine();
         }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> A-CodingStandard
         ui.printGoodbye();
 
     }

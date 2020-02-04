@@ -17,7 +17,6 @@ public class Storage {
 //    }
 
     public TaskList load() throws FileNotFoundException {
-        System.out.println("HERE");
         File f = new File(dataPath);
         Scanner s = new Scanner(f);
         TaskList tasks = new TaskList(new ArrayList<Task>());
@@ -38,7 +37,7 @@ public class Storage {
                 by = taskString.substring(taskString.indexOf("(by:") + 5, taskString.length() - 1);
                 LocalDate d = LocalDate.parse(by);
                 d.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
-                Deadline deadline = new Deadline(desc, by);
+                Deadline deadline = new Deadline(desc, d.toString());
                 tasks.add(deadline);
             } else if (type.equals("[E]")) {
                 desc = taskString.substring(taskString.indexOf(" ") + 1, taskString.indexOf(" (at"));
