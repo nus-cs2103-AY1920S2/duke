@@ -2,8 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Parser {
     public static void parse(Storage storage, TaskList tasks, Ui ui) {
