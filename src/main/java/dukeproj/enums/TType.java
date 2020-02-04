@@ -1,4 +1,4 @@
-package duke.enums;
+package dukeproj.enums;
 
 /**
  * Enumerates the different type of tasks in the DukeProject.

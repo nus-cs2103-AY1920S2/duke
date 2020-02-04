@@ -1,16 +1,17 @@
-package duke;
+package dukeproj;
 
-import duke.data.Calender;
-import duke.data.TaskList;
-import duke.enums.Command;
-import duke.exception.BadDateException;
-import duke.exception.BadDescriptionException;
-import duke.exception.DukeDescriptionException;
-import duke.exception.InvalidCommandException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import dukeproj.command.*;
+import dukeproj.data.Calender;
+import dukeproj.data.TaskList;
+import dukeproj.enums.CommandType;
+import dukeproj.exception.BadDateException;
+import dukeproj.exception.BadDescriptionException;
+import dukeproj.exception.DukeDescriptionException;
+import dukeproj.exception.InvalidCommandException;
+import dukeproj.tasks.Deadline;
+import dukeproj.tasks.Event;
+import dukeproj.tasks.Task;
+import dukeproj.tasks.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,10 +22,10 @@ import java.util.Scanner;
  * Represents a parser with static methods to interpret Strings into actionable data for DukeProject.
  */
 public class Parser {
-    /** Date formatter when reading (to print from Duke) the date. */
+    /** Date formatter when reading (to print from dukeproj.Duke) the date. */
     public static DateTimeFormatter DATE_READ_FORMATTER =
             DateTimeFormatter.ofPattern("dd MMM uuuu");
-    /** Date formatter when writing (to write into Duke) the date.*/
+    /** Date formatter when writing (to write into dukeproj.Duke) the date.*/
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MM uu");
 
@@ -60,25 +61,58 @@ public class Parser {
      * @return command in enum class Command format.
      * @throws InvalidCommandException String entered does not coincide with any command in enum class Command.
      */
-    public static Command commandParser(String str) throws InvalidCommandException {
+    public static CommandType commandParser(String str) throws InvalidCommandException {
         try {
-            return Command.valueOf(str.toUpperCase());
+            return CommandType.valueOf(str.toUpperCase());
         } catch (IllegalArgumentException e){
             throw new InvalidCommandException(str + " is an invalid command");
         }
     }
 
+    public Command getCommand(CommandType commandType, String description) {
+        Command command = new ListCommand(); //default command
+        switch (commandType) {
+        case BYE:
+            command = new ExitCommand();
+            break;
+        case DONE:
+            command = new DoneCommand(description);
+            break;
+        case TODO:
+            //fallthrough
+        case EVENT:
+            //fallthrough
+        case DEADLINE:
+            command = new AddCommand(description, commandType);
+            break;
+        case DELETE:
+            command = new DeleteCommand(description);
+            break;
+        case SEARCH:
+            command = new SearchCommand(description);
+            break;
+        case FIND:
+            command = new FindCommand(description);
+            break;
+        case LIST:
+            //fallthrough
+        default:
+            break;
+        }
+        return command;
+    }
+
     /**
      * Execute commands to manipulate task list and calender. The method will create/delete task objects as required
      * and store/remove them from all data structures as needed.
-     * @param command Command to be executed.
+     * @param commandType Command to be executed.
      * @throws DukeDescriptionException If command requires a description and it not given.
      * @throws BadDescriptionException If description provided does not match the format required by command.
      * @throws BadDateException If date provided does not match format required by command.
      */
-    public void readCommand(Command command) throws DukeDescriptionException,
+    public void readCommand(CommandType commandType) throws DukeDescriptionException,
             BadDescriptionException, BadDateException {
-        switch (command) {
+        switch (commandType) {
         case LIST:
             System.out.println("Here are all your tasks:");
             taskList.printTask();
@@ -179,7 +213,7 @@ public class Parser {
             LocalDate date = Parser.dateParser(search.substring(1));
             System.out.println("Here are the events on " +
                     date.format(Parser.DATE_READ_FORMATTER) + ":");
-            calender.searchDate(date);
+            System.out.println(calender.searchDate(date));
             break;
         case FIND:
             String find = sc.nextLine();
@@ -193,6 +227,9 @@ public class Parser {
         default:
             break;
         }
+    }
+
+    public Parser() {
     }
 
     public Parser(TaskList taskList, Calender calender, Storage storage, Scanner sc) {

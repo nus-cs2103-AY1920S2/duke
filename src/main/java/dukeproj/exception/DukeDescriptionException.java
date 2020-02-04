@@ -1,4 +1,4 @@
-package duke.exception;
+package dukeproj.exception;
 
 /**
  * Represents a description exception, whereby the description is empty.

@@ -1,16 +1,16 @@
-package duke.tasks;
+package dukeproj.tasks;
 
-import duke.Parser;
-import duke.enums.TType;
-import duke.exception.BadDateException;
+import dukeproj.Parser;
+import dukeproj.enums.TType;
+import dukeproj.exception.BadDateException;
 
 import java.time.LocalDate;
 
 /**
- * Represents a task with a deadline.
+ * Represents an event, which is a task to attend to on a certain date.
  */
-public class Deadline extends Task {
-    /** Date to finish task by, in LocalDate format. */
+public class Event extends Task {
+    /** Date of event, in LocalDate format. */
     private LocalDate date;
 
     /**
@@ -24,28 +24,28 @@ public class Deadline extends Task {
      * @return type of task in TType format.
      */
     public TType getType() {
-        return TType.DEADLINE;
+        return TType.EVENT;
     }
 
     /**
-     * Constructs a deadline task with default false isDone.
-     * @param task Description of task.
-     * @param date Date to be done by, in String form.
+     * Constructs an event with default false isDone.
+     * @param task Description of event.
+     * @param date Date of event, in String form.
      * @throws BadDateException If date format is wrong.
      */
-    public Deadline(String task, String date) throws BadDateException {
+    public Event(String task, String date) throws BadDateException {
         super(task);
         this.date = Parser.dateParser(date);
     }
 
     /**
-     * Constructs a deadline task with user defined isDone.
-     * @param isDone Whether the task is done.
-     * @param task Description of task.
-     * @param date Date to be done by, in String form.
+     * Constructs an event with user defined isDone.
+     * @param isDone Whether the event is done.
+     * @param task Description of event.
+     * @param date Date of event, in String form.
      * @throws BadDateException If date format is wrong.
      */
-    public Deadline(boolean isDone, String task, String date) throws BadDateException {
+    public Event(boolean isDone, String task, String date) throws BadDateException {
         super(isDone, task);
         this.date = Parser.dateParser(date);
     }
@@ -56,10 +56,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (isDone) {
-            return  "[D][✓] " + task + " (by: " +
+            return  "[E][✓] " + task + " (at: " +
                     date.format(Parser.DATE_READ_FORMATTER) + ")";
         } else {
-            return "[D][✗] " + task + " (by: " +
+            return "[E][✗] " + task + " (at: " +
                     date.format(Parser.DATE_READ_FORMATTER) + ")";
         }
     }

@@ -1,11 +1,11 @@
-package duke;
+package dukeproj;
 
-import duke.data.Calender;
-import duke.exception.BadDateException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import dukeproj.data.Calender;
+import dukeproj.exception.BadDateException;
+import dukeproj.tasks.Deadline;
+import dukeproj.tasks.Event;
+import dukeproj.tasks.Task;
+import dukeproj.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,18 +33,25 @@ public class Storage {
             while (sc.hasNext()) {
                 String str = sc.nextLine();
                 String[] parts = str.split("\\|");
-                if (parts[0].equals("T")) {
+                switch (parts[0]) {
+                case "T": {
                     Task task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
                     tasks.add(task);
                     calender.addDate(task);
-                } else if (parts[0].equals("E")) {
+                    break;
+                }
+                case "E": {
                     Task task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
                     calender.addDate(task);
-                } else if (parts[0].equals("D")) {
+                    break;
+                }
+                case "D": {
                     Task task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
                     calender.addDate(task);
+                    break;
+                }
                 }
             }
             return tasks;

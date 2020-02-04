@@ -1,6 +1,6 @@
-package duke.data;
+package dukeproj.data;
 
-import duke.tasks.Task;
+import dukeproj.tasks.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,16 +28,19 @@ public class Calender {
     }
 
     /**
-     * Searches for a specific date in the calender and prints out all tasks due on that date.
+     * Searches for a specific date in the calender and returns all tasks due on that date.
      * @param date date to be searched for.
+     * @return a string of the tasks found in the specific date.
      */
-    public void searchDate(LocalDate date) {
+    public String searchDate(LocalDate date) {
+        StringBuilder sb = new StringBuilder();
         if (mapOfDates.containsKey(date)) {
             ArrayList<Task> tasks = mapOfDates.get(date);
             for (Task task : tasks) {
-                System.out.println("  " + task);
+                sb.append("  ").append(task).append("\n");
             }
         }
+        return sb.toString();
     }
 
     /**

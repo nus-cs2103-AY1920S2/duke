@@ -1,6 +1,6 @@
-package duke.data;
+package dukeproj.data;
 
-import duke.tasks.Task;
+import dukeproj.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -59,6 +59,8 @@ public class TaskList {
     /**
      * Prints the list of task systematically.
      * Includes index of task based on (array index + 1).
+     *
+     * @return String that has a list of tasks.
      */
     public void printTask() {
         for (int i = 1; i <= tasks.size(); i++) {
@@ -91,5 +93,14 @@ public class TaskList {
      */
     public TaskList() {
         tasks = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 1; i <= tasks.size(); i++) {
+            output.append(i).append(".").append(tasks.get(i - 1)).append("\n");
+        }
+        return output.toString();
     }
 }
