@@ -12,6 +12,10 @@ public class TaskList {
         this.taskList = storage.loadTask();
     }
 
+    /**
+     * Adds task of taskName to taskList.
+     * @param taskName Task to be added to taskList
+     */
     public void addTask(String taskName) {
         try {
             String taskType = taskName.split(" ", 2)[0];
@@ -29,7 +33,7 @@ public class TaskList {
                 try {
                     String[] parseDateTime = dateTime.split(" ",  2);
                     LocalDate localDate = LocalDate.parse(parseDateTime[0]);
-                    if(parseDateTime.length > 1) {
+                    if (parseDateTime.length > 1) {
                         String time = parseDateTime[1];
                         newTask = new Deadline(task, preposition, localDate, time);
                     } else {
@@ -49,7 +53,7 @@ public class TaskList {
                 try {
                     String[] parseDateTime = dateTime.split(" ",  2);
                     LocalDate localDate = LocalDate.parse(parseDateTime[0]);
-                    if(parseDateTime.length > 1) {
+                    if (parseDateTime.length > 1) {
                         String time = parseDateTime[1];
                         newTask = new Event(task, preposition, localDate, time);
                     } else {
@@ -60,7 +64,7 @@ public class TaskList {
                 }
             }
 
-            if (Objects.isNull(newTask)){
+            if (Objects.isNull(newTask)) {
                 System.err.println("Attempting to add invalid task. Operation aborted.");
             } else {
                 taskList.add(newTask);
@@ -68,14 +72,18 @@ public class TaskList {
                 System.out.println("       " + newTask);
                 System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
             }
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.err.println("     ☹ OOPS!!! The description of a task cannot be empty.");
         } finally {
             storage.saveTask(taskList);
         }
     }
 
-    public void deleteTask(String taskName){
+    /**
+     * Deletes task of taskName from taskList.
+     * @param taskName Task to be deleted
+     */
+    public void deleteTask(String taskName) {
         try {
             String taskNum = taskName.split(" ", 2)[1];
             Task currTask = taskList.get(Integer.parseInt(taskNum) - 1);
@@ -83,7 +91,7 @@ public class TaskList {
             System.out.println("     Noted. I've removed this task: ");
             System.out.println("       " + currTask);
             System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.err.println("     ☹ OOPS!!! Please input a valid number in the range of the task list to delete.");
         } catch (NumberFormatException e) { // when non-int arg provided
             System.err.println("OOPS!!! Delete must take a valid integer in the range of the task list.");
@@ -91,24 +99,32 @@ public class TaskList {
             storage.saveTask(taskList);
         }
     }
-    public void printList(){
+
+    /**
+     * Prints every item in taskList.
+     */
+    public void printList() {
         System.out.println("     Here are the tasks in your list:");
         int i = 1;
-        for(Task task : taskList){
+        for (Task task : taskList) {
             System.out.println("     " + i + "." + task);
             i++;
         }
     }
 
-    public void printDone(String in){
-        try{
+    /**
+     * Prints out that task is done, and marks task done.
+     * @param in Task in String form
+     */
+    public void printDone(String in) {
+        try {
             int num = Integer.parseInt(in.substring(5));
             System.out.println("     Nice! I've marked this task as done: ");
             Task taskDone = taskList.get(num - 1);
             taskDone.markDone();
             String out =  "       " + taskDone;
             System.out.println(out);
-        } catch (IndexOutOfBoundsException e){ // when no int arg provided
+        } catch (IndexOutOfBoundsException e) { // when no int arg provided
             System.err.println("OOPS!!! Done must take a valid number in the range of the task list.");
         } catch (NumberFormatException e) { // when non-int arg provided
             System.err.println("OOPS!!! Done must take a valid integer in the range of the task list.");
