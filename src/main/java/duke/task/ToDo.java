@@ -11,7 +11,7 @@ public class ToDo extends Task {
      */
     public ToDo(String name) {
         super(name);
-        type = TaskType.toDo;
+        type = TaskType.TODO;
     }
 
     /**

@@ -15,6 +15,6 @@ public class DeadlineTest {
     @Test
     public void typeTest() {
         duke.task.Deadline test = new Deadline("~`48dgsfd", true, "by 2020-02-01");
-        assertEquals(Task.TaskType.deadline, test.getTaskType());
+        assertEquals(Task.TaskType.DEADLINE, test.getTaskType());
     }
 }

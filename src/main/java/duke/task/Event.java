@@ -16,7 +16,7 @@ public class Event extends Task {
     public Event(String name, String atTime) {
         super(name);
         this.atTime = atTime;
-        type = TaskType.event;
+        type = TaskType.EVENT;
         convertDateTime(atTime);
     }
 
@@ -27,7 +27,7 @@ public class Event extends Task {
     public Event(String name, boolean isDone, String atTime) {
         super(name, isDone);
         this.atTime = atTime;
-        type = TaskType.event;
+        type = TaskType.EVENT;
         convertDateTime(atTime);
     }
 

@@ -15,6 +15,6 @@ public class ToDoTest {
     @Test
     public void typeTest() {
         duke.task.ToDo test = new ToDo(".....", true);
-        assertEquals(Task.TaskType.toDo, test.getTaskType());
+        assertEquals(Task.TaskType.TODO, test.getTaskType());
     }
 }

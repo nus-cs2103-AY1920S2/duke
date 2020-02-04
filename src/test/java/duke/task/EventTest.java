@@ -15,6 +15,6 @@ public class EventTest {
     @Test
     public void typeTest() {
         duke.task.Event test = new Event("~`48dgsfd", true, "at 2020-02-01");
-        assertEquals(Task.TaskType.event, test.getTaskType());
+        assertEquals(Task.TaskType.EVENT, test.getTaskType());
     }
 }

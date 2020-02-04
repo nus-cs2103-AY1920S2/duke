@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static final String botName = "Duke";
-    public static final String listCommand = "list";
-    public static final String byeCommand = "bye";
+    public static final String BOT_NAME = "Duke";
+    public static final String LIST_COMMAND = "list";
+    public static final String BYE_COMMAND = "bye";
 
-    private String padding = "       ";
-    private String uselessLine = "-------------------------------------------------------------------------------------";
-    private String addedPhrase = "added: ";
+    private String PADDING = "       ";
+    private String USELESS_LINE = "-------------------------------------------------------------------------------------";
+    private String ADDED_PHRASE = "added: ";
     private ArrayList<Task> storedItems;
     private Storage storage;
     private Parser parser;
@@ -72,7 +72,7 @@ public class Duke {
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("markPos error\n%s%s\n%s%s\n%s%s",
-                                padding, uselessLine, padding, e, padding, uselessLine));
+                                PADDING, USELESS_LINE, PADDING, e, PADDING, USELESS_LINE));
             }
         } else if (delPos != -2) {
             try {
@@ -80,19 +80,19 @@ public class Duke {
             } catch (OutOfBoundMarkingRequestException e) {
                 System.out.println(
                         String.format("delPos error\n%s%s\n%s%s\n%s%s",
-                                padding, uselessLine, padding, e, padding, uselessLine));
+                                PADDING, USELESS_LINE, PADDING, e, PADDING, USELESS_LINE));
             }
         } else {
             try {
                 Task.TaskType type = parser.commandType(str);
                 switch (type) {
-                    case toDo:
+                    case TODO:
                         handleToDo(str);
                         break;
-                    case deadline:
+                    case DEADLINE:
                         handleDeadline(str);
                         break;
-                    case event:
+                    case EVENT:
                         handleEvent(str);
                         break;
                     default:
@@ -100,10 +100,10 @@ public class Duke {
                 }
             } catch (InvalidCommandException e) {
                 System.out.println(String.format("%s%s\n%s%s\n%sPlease type something legit\n%s%s",
-                        padding, uselessLine, padding, e, padding, padding, uselessLine));
+                        PADDING, USELESS_LINE, PADDING, e, PADDING, PADDING, USELESS_LINE));
             } catch (TaskErrorException e) {
                 System.out.println(String.format("%s%s\n%s%s\n%s%s",
-                        padding, uselessLine, padding, e, padding, uselessLine));
+                        PADDING, USELESS_LINE, PADDING, e, PADDING, USELESS_LINE));
             }
         }
 

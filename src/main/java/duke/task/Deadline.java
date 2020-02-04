@@ -20,7 +20,7 @@ public class Deadline extends Task {
     public Deadline(String name, String byTime) {
         super(name);
         this.byTime = byTime;
-        type = TaskType.deadline;
+        type = TaskType.DEADLINE;
         convertDateTime(byTime);
     }
 
@@ -37,7 +37,7 @@ public class Deadline extends Task {
     public Deadline(String name, boolean isDone, String byTime) {
         super(name, isDone);
         this.byTime = byTime;
-        type = TaskType.deadline;
+        type = TaskType.DEADLINE;
         convertDateTime(byTime);
     }
 

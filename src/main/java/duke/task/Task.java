@@ -2,7 +2,7 @@ package duke.task;
 
 public class Task {
     public enum TaskType {
-        toDo, deadline, event, unknown;
+        TODO, DEADLINE, EVENT, UNKNOWN;
     }
 
     public static final String doneSymbol = "\u2714";

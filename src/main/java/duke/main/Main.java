@@ -28,12 +28,12 @@ public class Main {
 
         String userInput = "";
 
-        while (!userInput.equals(Duke.byeCommand)) {
+        while (!userInput.equals(Duke.BYE_COMMAND)) {
             userInput = scanner.nextLine();
 
-            if (userInput.equals(Duke.byeCommand))
+            if (userInput.equals(Duke.BYE_COMMAND))
                 break;
-            if (userInput.equals(Duke.listCommand)) {
+            if (userInput.equals(Duke.LIST_COMMAND)) {
                 bot.listStoredItems();
                 continue;
             }

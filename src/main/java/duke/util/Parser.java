@@ -63,17 +63,17 @@ public class Parser {
      * @return TaskType toDo, deadline, event, or unknown
      */
     public Task.TaskType commandType(String str) {
-        Task.TaskType ret = Task.TaskType.unknown;
+        Task.TaskType ret = Task.TaskType.UNKNOWN;
         Scanner sc = new Scanner(str);
 
         while (sc.hasNext()) {
             String ss = sc.next();
             if (ss.equals(Task.toDoCommand))
-                ret = Task.TaskType.toDo;
+                ret = Task.TaskType.TODO;
             else if (ss.equals(Task.deadlineCommand))
-                ret = Task.TaskType.deadline;
+                ret = Task.TaskType.DEADLINE;
             else if (ss.equals(Task.eventCommand))
-                ret = Task.TaskType.event;
+                ret = Task.TaskType.EVENT;
             break;
         }
 
