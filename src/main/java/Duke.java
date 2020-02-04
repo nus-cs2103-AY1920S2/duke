@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@SuppressWarnings("checkstyle:CommentsIndentation")
 public class Duke extends Application {
 
     private ScrollPane scrollPane;
@@ -31,8 +32,9 @@ public class Duke extends Application {
     private String fileLoc;
     private File file;
 
-    //private Image user = new Image(this.getClass().getResourceAsStream("/src/main/resources/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.png"));
+    //  private Image user = new Image(this.getClass().getResourceAsStream("/src/main/resources/images/DaUser.png"));
+
+    //  private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.png"));
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
