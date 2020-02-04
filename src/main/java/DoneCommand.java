@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
      *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        checkDoneException(tasks);
         return tasks.done(this.index, storage);
     }
 
@@ -34,6 +35,18 @@ public class DoneCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Checks command for valid index number.
+     * @param tasks list of tasks.
+     * @throws DukeException if user input does not follow input format.
+     */
+    public void checkDoneException(TaskList tasks) throws DukeException {
+        // list has 5 items, tasks.size() = 5, this.index max = 4
+        if (tasks.size() <= this.index) {
+            throw new DukeException("☹ OOPS!!! Task " + this.index + " does not exist.\n");
+        }
     }
 
 }

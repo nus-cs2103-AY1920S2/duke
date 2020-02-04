@@ -220,8 +220,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) throws DukeException, IOException {
-        Command command = Parser.parse(input);
-        String result = command.execute(tasks, ui, storage);
+        String result = "";
+        try {
+            Command command = Parser.parse(input);
+            result = command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            result = e.getMessage();
+        }
 
         return result;
     }

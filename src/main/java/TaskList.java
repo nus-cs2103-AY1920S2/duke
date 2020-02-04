@@ -134,7 +134,7 @@ public class TaskList {
      */
     public String delete(int index, Storage storage) throws IOException, DukeException {
         if (size() <= index) {
-            throw new DukeException("There is no task " + (index + 1) + ".");
+            throw new DukeException("☹ OOPS!!! There is no task " + (index + 1) + ".");
         }
         String deleteResult = "";
         deleteResult += "Noted. I've removed this task:\n";

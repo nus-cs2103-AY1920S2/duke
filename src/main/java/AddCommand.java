@@ -53,9 +53,6 @@ public class AddCommand extends Command {
             result = "Got it. I've added this task:\n"
                     + t + "\n" + tasks.printSizeString();
         }
-        storage.writeToFile(tasks.saveList());
-        result = "Got it. I've added this task:\n"
-                + t + "\n" + tasks.printSizeString();
         return result;
     }
 
@@ -79,14 +76,14 @@ public class AddCommand extends Command {
             String[] deadlineArr = description.split(" /by ");
             // error: task is missing deadline
             if (deadlineArr.length <= 1) {
-                throw new DukeException("Time of an event cannot be empty.");
+                throw new DukeException("☹ OOPS!!! Deadline of task cannot be empty.");
             }
             break;
         case "event":
             String[] eventArr = description.split(" /at ");
             // error: event is missing time
             if (eventArr.length <= 1) {
-                throw new DukeException("Time of an event cannot be empty.");
+                throw new DukeException("☹ OOPS!!! Time of an event cannot be empty.");
             }
             break;
         default:

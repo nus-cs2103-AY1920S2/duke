@@ -27,7 +27,6 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         return tasks.delete(this.index, storage);
-
     }
 
     /**
@@ -46,7 +45,7 @@ public class DeleteCommand extends Command {
     public void checkDeleteException(TaskList tasks) throws DukeException {
         // list has 5 items, tasks.size() = 5, this.index max = 4
         if (tasks.size() <= this.index) {
-            throw new DukeException("     ☹ OOPS!!! Task" + this.index + "does not exist.\n");
+            throw new DukeException("☹ OOPS!!! Task " + this.index + " does not exist.\n");
         }
     }
 

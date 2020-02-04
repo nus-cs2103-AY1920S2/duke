@@ -31,7 +31,24 @@ public class Ui {
         System.out.println("    Hey there! I'm tinga :)");
         System.out.println("    What can I do for you?");
         showLine();
+    }
 
+    /**
+     * Returns string with welcome message.
+     * @return string containing welcome message.
+     */
+    public static String showWelcomeString() {
+        String tinga = "       _    _  \n"
+                + "     _| |_ (_)\n"
+                + "    |_   _\\ _  _ __   ____   __ _\n"
+                + "      | |  | \\| '  \\ / _  \\ / _` |\n"
+                + "      | |  | || || || |_| || (_| |\n"
+                + "      |_|  |_||_||_| \\__  | \\__,_|\n"
+                + "                     /\\_| |\n"
+                + "                     \\____/\n";
+        tinga += "Hey there! I'm tinga :)\n";
+        tinga += "What can I do for you?\n";
+        return tinga;
     }
 
     /**

@@ -16,7 +16,7 @@ public class ByeCommand extends Command {
      *     does not exist but cannot be created, or cannot be open for any other reason.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        return "    Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

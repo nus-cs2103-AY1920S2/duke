@@ -36,7 +36,7 @@ public class Parser {
             checkInputException(split, commandType);
             return new AddCommand(commandType, split[1]);
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -53,13 +53,13 @@ public class Parser {
             switch (commandType) {
             case "done":
             case "delete":
-                throw new DukeException("Task number cannot be empty.");
+                throw new DukeException("☹ OOPS!!! Task number cannot be empty.");
             case "todo":
             case "deadline":
             case "event":
-                throw new DukeException("Task description cannot be empty.");
+                throw new DukeException("☹ OOPS!!! Task description cannot be empty.");
             case "find":
-                throw new DukeException("Search keyword cannot be empty.");
+                throw new DukeException("☹ OOPS!!! Search keyword cannot be empty.");
             default:
             }
         }
