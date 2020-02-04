@@ -22,7 +22,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Return the list back in String format
+     * Return the list back in String format.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit

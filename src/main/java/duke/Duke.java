@@ -18,8 +18,23 @@ public class Duke {
     private Ui ui;
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Class constructor of Duke.
+     */
+    public Duke() {
+        ui = new Ui();
+        try {
+            storage = new Storage("data/tasks.txt");
+            taskList = new TaskList(storage.getTaskListing());
+        } catch (DukeException e) {
+            ui.reply(e.getMessage());
+        }
+    }
+
+    /**
+     * Return the reply message back to display in GUI.
+     *
+     * @param input input from the user
+     * @return reply message in String format
      */
     public String getResponse(String input) {
         String response;
@@ -38,19 +53,6 @@ public class Duke {
      */
     public String getGreeting() {
         return ui.greetWithoutPrint();
-    }
-
-    /**
-     * Class constructor of Duke.
-     */
-    public Duke() {
-        ui = new Ui();
-        try {
-            storage = new Storage("data/tasks.txt");
-            taskList = new TaskList(storage.getTaskListing());
-        } catch (DukeException e) {
-            ui.reply(e.getMessage());
-        }
     }
 
     /**

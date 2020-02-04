@@ -11,12 +11,18 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A GUI for duke.Duke using FXML.
+ * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * This is where the program run when startup for the GUI. It set up the components such as Scene and ArchorPane
+     * before start the window. Print any exception occurs.
+     *
+     * @param stage window for the other components to set up and display to user
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -31,6 +37,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Delay 800ms to close window when an exit request received.
+     *
+     * @throws Exception Occurs when sleep method being interrupted
+     */
     @Override
     public void stop() throws Exception {
         TimeUnit.MILLISECONDS.sleep(800);

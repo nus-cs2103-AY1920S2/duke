@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Search any task with the keyword and return list back in String
+     * Search any task with the keyword and return list back in String.
      *
      * @param taskList Stored the tasks when the program runs
      * @param storage  Stored the tasks when task listing being edit

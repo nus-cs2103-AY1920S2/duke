@@ -37,7 +37,7 @@ public class TodoCommand extends Command {
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
      * @return Return message back
-     * @throws DukeException  throws when problem saving task to hard disk and invalid date/time format
+     * @throws DukeException throws when problem saving task to hard disk and invalid date/time format
      */
     @Override
     public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException {

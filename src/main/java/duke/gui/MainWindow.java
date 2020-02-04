@@ -23,24 +23,33 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private duke.Duke duke;
+    private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialise the scrollPane.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set Duke object to current duke and print the display message to the user with the dukeImage.
+     *
+     * @param d Duke object to be stored
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(d.getGreeting(), dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
+     * Finally exit the window if response equals to the goodbye message.
      */
     @FXML
     private void handleUserInput() {

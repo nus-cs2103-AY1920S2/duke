@@ -13,13 +13,14 @@ import java.util.List;
  * hard disk by calling storage.saveTask(taskList). Trigger ui to reply to the user
  * that the task has been marked done.
  *
- * @author  Eng Xuan En
+ * @author Eng Xuan En
  */
 public class DoneCommand extends Command {
 
     /**
      * Class constructor for DoneCommand which using command type and List of Strings.
-     * @param type type of the command
+     *
+     * @param type    type of the command
      * @param details index where the task is located in taskList to be marked done
      */
     public DoneCommand(CommandType type, List<String> details) {
@@ -34,7 +35,7 @@ public class DoneCommand extends Command {
      * @param storage  Stored the tasks when task listing being edit
      * @param ui       Print the message out to console
      * @return Reply message to user
-     * @throws DukeException  throws when problem saving task to hard disk and invalid index where the task located
+     * @throws DukeException throws when problem saving task to hard disk and invalid index where the task located
      */
     @Override
     public String executeWithoutReply(TaskList taskList, Storage storage, Ui ui) throws DukeException {

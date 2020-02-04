@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -25,6 +24,13 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Load the style from DialogBox.fxml and set the controller to this instance and load it. Set the text and image
+     * based on the arguments into the dialog box. Print out any IOException occurs in the terminal.
+     *
+     * @param text text to display in dialog box
+     * @param img  image to display in dialog box
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Return user Dialog Box with the text and image in it.
+     *
+     * @param text text to be print out in dialog box
+     * @param img  image to be display in dialog box
+     * @return DialogBox with the text and image in it
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Return Duke Dialog Box with the text and image in it. Invert the dialog object around the vertical axis.
+     *
+     * @param text text to be print out in dialog box
+     * @param img  image to be display in dialog box
+     * @return DialogBox with the text and image in it
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

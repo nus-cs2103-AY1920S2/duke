@@ -55,7 +55,6 @@ public class Ui {
         message.addParagraph(logo, 15);
         message.addEmptyLine();
         message.addSentence("What can I do for you?", 1);
-//        System.out.print(message.replyMessage());
         return message.replyMessage();
     }
 
@@ -99,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Reply the listing back in String format
+     * Reply the listing back in String format.
      *
      * @param tasks List of tasks in records
      * @return Reply the list back
