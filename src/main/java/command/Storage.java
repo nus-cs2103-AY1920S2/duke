@@ -13,6 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import tasks.Task;
 import tasks.TaskList;
 
+/**
+ * Handle the loading and saving of task lists to the hard disk.
+ */
 public class Storage {
     static Gson gson = new GsonBuilder()
             .enableComplexMapKeySerialization()
@@ -21,6 +24,10 @@ public class Storage {
 
     static String userDirectory = System.getProperty("user.dir");
 
+    /**
+     * Search for an existing file with a previous task list store.
+     * If no such file found, create a new task list.
+     */
     public static void readFromFile() {
         try {
             FileReader fileReader = new FileReader(userDirectory + "/data.json");
@@ -31,6 +38,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Write task list into hard drive.
+     */
     public static void saveFile() {
         try {
             FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");

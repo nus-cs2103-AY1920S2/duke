@@ -8,7 +8,16 @@ import tasks.Todo;
 
 import java.time.LocalDate;
 
+/**
+ * Parse user input and instruct corresponding classes to perform specified tasks.
+ */
 public class Controller {
+    /**
+     * Parse user input and determine specified instructions to execute.
+     *
+     * @param input input received from user.
+     * @return output to be displayed to user.
+     */
     public static String readInput(String input) {
         String[] parsedInput = input.split(" ", 2);
         try {
@@ -63,6 +72,7 @@ public class Controller {
                     }
                     TaskList.addTask(new Event(at[0], LocalDate.parse(at[1])));
                     return TaskList.printTotalTasks();
+
                 default:
                     throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
