@@ -18,7 +18,6 @@ public class Duke {
      */
     public void start() {
         Storage.readFromFile();
-        Storage.readFromFile();
         Storage.saveFile();
     }
 }

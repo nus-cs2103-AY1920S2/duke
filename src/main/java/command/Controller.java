@@ -51,7 +51,7 @@ public class Controller {
                         throw new DukeException("\tPlease indicate a keyword.");
                     }
                     String keyword = parsedInput[1];
-                    return TaskList.findTaskContainingKeyword(keyword);
+                    return UI.LIST + TaskList.findTaskContainingKeyword(keyword);
                 case "todo":
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
