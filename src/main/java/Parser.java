@@ -3,9 +3,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public String input;
-    public String command;
-    public String[] inputs;
+    private String input;
+    private String command;
+    private String[] inputs;
 
     public Parser(String input) {
         this.input = input;
