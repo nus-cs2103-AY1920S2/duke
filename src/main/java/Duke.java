@@ -11,8 +11,6 @@ public class Duke {
 
     /**
      * Constructor for the Duke Class.
-     * <p>
-     * //@param filepath Path to file where the data for saved tasks are stored.
      */
     public Duke() {
         String filepath = "data/duke.txt";
@@ -87,8 +85,8 @@ public class Duke {
                     try {
                         tasks.newDeadline(parser.getDescription(), parser.getTiming());
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("Invalid date format for deadline used! " +
-                                "Please re-try using the date format 'yyyy-mm-dd HHMM'");
+                        throw new DukeException("Invalid date format for deadline used! "
+                                + "Please re-try using the date format 'yyyy-mm-dd HHMM'");
                     }
                 } else if (parser.getCommand().equals("todo")) {
                     tasks.newToDo(parser.getDescription());

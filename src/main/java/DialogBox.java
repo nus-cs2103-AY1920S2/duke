@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the User's Dialogbox.
+     *
+     * @param text User input.
+     * @param img visual representation of the User.
+     * @return the dialogbox belonging to the User.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the Duke's Dialogbox.
+     *
+     * @param text dialog spoken by the Duke.
+     * @param img image of the Duke.
+     * @return the dialogbox beonging to Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

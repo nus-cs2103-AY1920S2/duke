@@ -89,6 +89,12 @@ public class Gui {
         return toReturn;
     }
 
+    /**
+     * Prints out all the tasks which contain the specified keyword.
+     *
+     * @param listOfTasks ArrayList of tasks matching specified keyword.
+     * @return listOfTasks.
+     */
     public String printOutFound(TaskList listOfTasks) {
         String toReturn = "Here are the matching tasks in your list:\n";
         int i = 1;

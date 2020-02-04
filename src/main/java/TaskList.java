@@ -89,6 +89,13 @@ public class TaskList {
         return listOfTasks;
     }
 
+
+    /**
+     * Returns an TaskList with all the tasks containing the keyword.
+     *
+     * @param keyword word specified by user to search all tasks for.
+     * @return TaskList of all tasks containing the keyword.
+     */
     public TaskList getMatches(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (int i = 0; i < listOfTasks.size(); i++) {

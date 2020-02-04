@@ -103,6 +103,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out the list of tasks which match the keyword specified by user.
+     *
+     * @param listOfTasks Tasklist containing all the tasks that contain the keyword.
+     */
     public void printOutFound(TaskList listOfTasks) {
         System.out.println("Here are the matching tasks in your list:");
         int i = 1;
