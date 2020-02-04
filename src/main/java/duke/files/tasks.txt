@@ -1,3 +1,0 @@
-T|0|this
-T|0|that
-T|0|blah
