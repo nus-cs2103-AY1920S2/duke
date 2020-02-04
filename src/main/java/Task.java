@@ -1,17 +1,17 @@
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String typeD;
     protected String timeD;
 
-    public Task(String description,String typeD) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.typeD = typeD;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "Y" : "N"); //return tick or X symbols
     }
 
     public void doAct() {
@@ -26,11 +26,12 @@ public class Task {
         this.timeD = time;
     }
 
+    public String getTime() {
+        return this.timeD;
+    }
+
     public String getType() {
         return this.typeD;
     }
 
-    public String getTime() {
-        return this.timeD;
-    }
 }

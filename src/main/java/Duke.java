@@ -18,7 +18,7 @@ public class Duke {
                     int counter = 1;
                     System.out.println("    ____________________________________________________________");
                     for (int i = 0; i < lst.size(); i++) {
-                        if (!lst.get(i).getType().equals("todo")) {
+                        if (!(lst.get(i) instanceof Todo)) {
                             System.out.println("      " + counter + ".[" + initialsT(lst.get(i).getType()) + "]" +"[" + lst.get(i).getStatusIcon() + "] " +lst.get(i).getD() + "(" + breakDate(lst.get(i).getTime() +")") +")");
                         } else {
                             System.out.println("      " + counter + ".[" + initialsT(lst.get(i).getType()) + "]" +"[" + lst.get(i).getStatusIcon() + "] " +lst.get(i).getD() );
@@ -40,7 +40,7 @@ public class Duke {
                     Task task = lst.get(i);
                     lst.remove(i);
                     tasks--;
-                    if (task.getType().equals("todo")) {
+                    if (task instanceof Todo) {
                         System.out.println("    ____________________________________________________________");
                         System.out.println("      Noted.I've removed this task:");
                         System.out.println("        [" + initialsT(task.getType()) + "][" + task.getStatusIcon() + "] "+ task.getD());
@@ -56,21 +56,27 @@ public class Duke {
                 } else {
                     tasks++;
                     String typeD = output.split(" ")[0];
-                    if (!typeD.equals("todo")) {
+                    if (!(typeD.equals("todo"))) {
                         String[] temp = output.split("/");
                         String name = convertN(temp[0]);
                         String time = temp[1];
-                        Task task = new Task(name,typeD);
-                        task.setTime(time);
-                        lst.add(task);
+                        if (typeD.equals("deadline")) {
+                            Deadline task = new Deadline(name);
+                            task.setTime(time);
+                            lst.add(task);
+                        } else {
+                            Event task = new Event(name);
+                            task.setTime(time);
+                            lst.add(task);
+                        }
                         System.out.println("    ____________________________________________________________");
                         System.out.println("      Got it. I added this task: ");
-                        System.out.println("        [" + initialsT(typeD) + "][" + task.getStatusIcon() + "] "+ name + "(" + breakDate(time) +")");
+                        System.out.println("        [" + initialsT(typeD) + "][" + "X" + "] "+ name + "(" + breakDate(time) +")");
                         System.out.println("      Now you have " + tasks + " tasks in the list.");
                         System.out.println("    ____________________________________________________________");
                     } else {
                         String name = convertN(output);
-                        Task task = new Task(name,typeD);
+                        Todo task = new Todo(name);
                         lst.add(task);
                         System.out.println("    ____________________________________________________________");
                         System.out.println("      Got it. I added this task: ");
