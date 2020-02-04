@@ -4,8 +4,9 @@ public class Parser {
     private Task task;
 
     public Parser(String command) throws DukeException {
-        if (command.equals("bye")|command.equals("list")|command.equals("done")|command.equals("todo")
-                |command.equals("deadline")|command.equals("event")|command.equals("delete")) {
+        if (command.equals("bye")|command.equals("list")|command.equals("done")
+                |command.equals("todo")|command.equals("deadline")
+                |command.equals("event")|command.equals("delete")) {
             this.cmd = command.toLowerCase();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I dont know what that means :-(");
