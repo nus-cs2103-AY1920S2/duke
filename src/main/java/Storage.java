@@ -104,17 +104,21 @@ public class Storage {
         FileWriter fr;
         if (file.exists()) {
             fr = new FileWriter (file, false);
+            BufferedWriter bw = new BufferedWriter (fr);
+            for (int i = 0; i < lst.size(); i++) {
+                Task savedTask = lst.get(i);
+                bw.write (savedTask.saveFile() + "\n");
+                bw.close();
+                fr.close();
+            }
         } else {
-            file.createNewFile();
-            fr = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(new FileWriter("duke.txt"));
+            for (int i = 0; i < lst.size(); i++) {
+                Task savedTask = lst.get(i);
+                bw.write (savedTask.saveFile() + "\n");
+                bw.close();
+            }
         }
-        BufferedWriter bw = new BufferedWriter (fr);
-        for (int i = 0; i < lst.size(); i++) {
-            Task savedTask = lst.get(i);
-            bw.write (savedTask.saveFile() + "\n");
-        }
-        bw.close();
-        fr.close();
     }
 
 }
