@@ -11,9 +11,9 @@ public class Ui {
         System.out.println("______________________________________________________________" );
     }
 
-    public void displayIntro() {
+    public String displayIntro() {
         String hi = "Hello! I'm Duke\n" + "What can I do for you?";
-        System.out.println(hi);
+        return hi;
     }
 
     public String readInput() {
