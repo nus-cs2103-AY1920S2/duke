@@ -56,10 +56,22 @@ public class DialogBox extends HBox {
         this.setBackground(new Background(new BackgroundFill(Color.GOLD, null, null)));
     }
 
+    /**
+     * Outputs the dialog box that are produced by the user's input.
+     * @param text The text input from the user.
+     * @param img The user's image display.
+     * @return DialogBox object of the user's dialog with the text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Outputs the dialog box that are produced by the chat bot.
+     * @param text The text input from the user.
+     * @param img The user's image display.
+     * @return DialogBox object of the user's dialog with the text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
