@@ -10,6 +10,9 @@ import static java.nio.file.StandardOpenOption.CREATE;
 public class Storage {
     Path path;
 
+    /**
+     * Creates a Storage object that deals with loading and saving tasks to and from a file.
+     */
     public Storage() {
         String currentDirectory = System.getProperty("user.dir");
         Path dataDirectory = java.nio.file.Paths.get(currentDirectory, "data");
@@ -24,6 +27,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given list to duke.txt.
+     * @param list List to save.
+     */
     public void saveData(LinkedList<Task> list) {
         try {
             java.nio.file.Files.deleteIfExists(path);
@@ -45,6 +52,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads previous list data from duke.txt, if any.
+     * @param tracker Tracker to add previous list data to.
+     */
     public void loadData(Tracker tracker) {
         try (InputStream in = Files.newInputStream(this.path);
              BufferedReader reader =
@@ -84,6 +95,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns true if previous list data exists, false if no.
+     * @return Boolean depending on previous data existence.
+     */
     public boolean hasPreviousData() {
         return java.nio.file.Files.exists(this.path);
     }

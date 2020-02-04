@@ -3,6 +3,11 @@ public class Parser {
     private String cmd;
     private Task task;
 
+    /**
+     * Creates a parser object to make sense of the user command.
+     * @param command Command given by user.
+     * @throws DukeException If command is not bye/list/done/todo/deadline/event/delete.
+     */
     public Parser(String command) throws DukeException {
         if (command.equals("bye")|command.equals("list")|command.equals("done")|command.equals("todo")
                 |command.equals("deadline")|command.equals("event")|command.equals("delete")) {
@@ -12,6 +17,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a parser object to organise the details of the task provided by user.
+     * @param content Description of task given by user.
+     * @param command Command given by user.
+     * @throws DukeException If description given by user is empty.
+     */
     public Parser(String content, Parser command) throws DukeException {
         if (content.equals(new String())) {
             throw new DukeException("☹ OOPS!!! The description of a "

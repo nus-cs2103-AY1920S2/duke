@@ -4,31 +4,54 @@ public class Tracker {
     private LinkedList<Task> list;
     private int totalTasks;
 
+    /**
+     * Creates a new Tracker object for tracking tasks in a list.
+     */
     public Tracker() {
         this.list = new LinkedList();
         this.totalTasks = 0;
     }
 
+    /**
+     * Adds the given task into list for tracking.
+     * @param task Task to add into list.
+     */
     public void add(Task task) {
         this.totalTasks++;
         this.list.add(task);
     }
 
+    /**
+     * Marks the given task as done.
+     * @param index Index of task to be marked as done.
+     */
     public void markDone(int index) {
         Task task = this.list.get(index);
         task.setDone();
     }
 
+    /**
+     * Deletes the given task from the tracking list.
+     * @param index Index of the task to be deleted.
+     */
     public void delete(int index) {
         Task task = this.list.get(index);
         this.list.remove(index);
         this.totalTasks--;
     }
 
+    /**
+     * Returns list of tasks being tracked.
+     * @return List of tasks.
+     */
     public LinkedList<Task> showList() {
         return this.list;
     }
 
+    /**
+     * Returns the total number of tasks in the list.
+     * @return Total number of tasks to be tracked.
+     */
     public int getTotalTasks() {
         return this.totalTasks;
     }
