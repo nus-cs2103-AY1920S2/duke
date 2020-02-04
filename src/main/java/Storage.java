@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +44,7 @@ public class Storage {
         return tasks;
     }
 
-    public void saveAllTasksToFile(@NotNull TaskList tasks) throws FileNotFoundException {
+    public void saveAllTasksToFile(TaskList tasks) throws FileNotFoundException {
             PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
             for (Task task : tasks.getTasks()) {
                 int isDone = (task.isTaskDone()) ? 1 : 0;
