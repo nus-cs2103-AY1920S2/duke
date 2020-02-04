@@ -13,7 +13,8 @@ import duke.utils.TaskList;
 public class FindCommandMethod implements CommandMethod {
     public static final String NAME = "find";
 
-    public void execute(Duke program, Command command) throws DukeException {
+    public void execute(Command command) throws DukeException {
+        Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(command.getCommandName());
@@ -30,7 +31,8 @@ public class FindCommandMethod implements CommandMethod {
                 results.addTask(t);
             }
         }
-        program.getUi().print(String.format("Tasks with '%s':", query));
-        program.getUi().print(results.toString());
+        String message = String.format("Tasks with '%s':\n%s", query,
+                results.toString());
+        program.getUi().print(message);
     }
 }

@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Duke;
-// import duke.command.method.*;
 import duke.command.method.ByeCommandMethod;
 import duke.command.method.CommandMethod;
 import duke.command.method.DeadlineCommandMethod;
@@ -89,8 +87,8 @@ public class Command {
         return String.join(" ", arguments);
     }
 
-    public void execute(Duke program) throws DukeException {
-        method.execute(program, this);
+    public void execute() throws DukeException {
+        method.execute(this);
     }
 
     @Override

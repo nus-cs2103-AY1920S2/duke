@@ -15,7 +15,8 @@ import duke.task.DeadlineTask;
 public class DeadlineCommandMethod implements CommandMethod {
     public static final String NAME = "deadline";
 
-    public void execute(Duke program, Command command) throws DukeException {
+    public void execute(Command command) throws DukeException {
+        Duke program = Duke.getProgram();
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(DeadlineCommandMethod.NAME);
         }

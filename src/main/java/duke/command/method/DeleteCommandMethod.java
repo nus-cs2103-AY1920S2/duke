@@ -12,7 +12,8 @@ import duke.utils.TaskList;
 public class DeleteCommandMethod implements CommandMethod {
     public static final String NAME = "delete";
 
-    public void execute(Duke program, Command command) throws DukeException {
+    public void execute(Command command) throws DukeException {
+        Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(command.getCommandName());

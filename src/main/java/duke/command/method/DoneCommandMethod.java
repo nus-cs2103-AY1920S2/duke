@@ -13,7 +13,8 @@ import duke.utils.TaskList;
 public class DoneCommandMethod implements CommandMethod {
     public static final String NAME = "done";
 
-    public void execute(Duke program, Command command) throws DukeException {
+    public void execute(Command command) throws DukeException {
+        Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(command.getCommandName());

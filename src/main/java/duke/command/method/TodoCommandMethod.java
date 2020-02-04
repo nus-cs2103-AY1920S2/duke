@@ -10,7 +10,8 @@ import duke.task.TodoTask;
 public class TodoCommandMethod implements CommandMethod {
     public static final String NAME = "todo";
 
-    public void execute(Duke program, Command command) throws DukeException {
+    public void execute(Command command) throws DukeException {
+        Duke program = Duke.getProgram();
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(TodoCommandMethod.NAME);
         }

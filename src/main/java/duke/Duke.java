@@ -6,28 +6,42 @@ import duke.exception.DukeNoCommandException;
 import duke.exception.DukeNoSuchInputException;
 import duke.exception.DukeProgramTerminatedException;
 import duke.storage.Storage;
+import duke.ui.Gui;
 import duke.ui.Ui;
 import duke.utils.TaskList;
 
 public class Duke {
+    private static Duke program;
+
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
+    private boolean hasTerminated;
 
-    public Duke() {
-        this.ui = new Ui();
+    private Duke() {
+        this.ui = new Gui();
         this.storage = new Storage();
+        this.hasTerminated = false;
         try {
             this.tasks = storage.loadTaskList();
-            ui.printLoadSuccess(storage.getFilePath());
         } catch (DukeException e) {
             this.tasks = new TaskList();
-            ui.printLoadFail(e, storage.getFilePath());
         }
+    }
+
+    public static Duke getProgram() {
+        if (Duke.program == null) {
+            Duke.program = new Duke();
+        }
+        return Duke.program;
     }
 
     public Ui getUi() {
         return ui;
+    }
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     public TaskList getTaskList() {
@@ -38,28 +52,43 @@ public class Duke {
         return storage;
     }
 
+    public boolean hasTerminated() {
+        return hasTerminated;
+    }
+
+    public void setAsTerminated() {
+        hasTerminated = true;
+    }
+
+    public void handleUserInput(String input) {
+        try {
+            Command command = Command.createCommand(input);
+            command.execute();
+        } catch (DukeProgramTerminatedException e) {
+            setAsTerminated();
+        } catch (DukeNoCommandException e) {
+            return;
+        } catch (DukeException e) {
+            ui.printException(e);
+        }
+    }
+
     private void run() {
-        ui.printWelcome();
-        while (true) {
+        ui.start();
+        while (!hasTerminated) {
             try {
                 String input = ui.readInput();
-                Command command = Command.createCommand(input);
-                command.execute(this);
-            } catch (DukeNoSuchInputException
-                    | DukeProgramTerminatedException e) {
+                handleUserInput(input);
+            } catch (DukeNoSuchInputException e) {
+                hasTerminated = true;
                 break;
-            } catch (DukeNoCommandException e) {
-                continue;
-            } catch (DukeException e) {
-                ui.printException(e);
             }
         }
-        ui.printGoodbye();
-        ui.close();
+        ui.exit();
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        Duke.getProgram().run();
         System.exit(0);
     }
 }
