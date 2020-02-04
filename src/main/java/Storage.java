@@ -1,12 +1,18 @@
+import java.awt.desktop.SystemEventListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
 
     String filePath = "data/duke.txt";
+    SimpleDateFormat dateInput = new SimpleDateFormat("dd MMM yyyy");
+    SimpleDateFormat dateOutput = new SimpleDateFormat("yyyy-MM-dd");
 
     public void loadFile(MyList myList) {
         try {
@@ -26,17 +32,23 @@ public class Storage {
                           break;
                 case "D": String[] deadlineArray = name.split(" \\(by: ");
                           String deadlineDate = deadlineArray[1].substring(0, deadlineArray[1].indexOf(")"));
-                          Deadline deadline = new Deadline(deadlineArray[0], deadlineDate);
+                          Date parseDeadlineDate = dateInput.parse(deadlineDate);
+                          String formatDeadlineDate = dateOutput.format(parseDeadlineDate);
+                          Deadline deadline = new Deadline(deadlineArray[0], formatDeadlineDate);
+                          deadline.setCompleted(status);
                           myList.setListArray(deadline);
                           break;
                 case "E": String[] eventArray = name.split(" \\(at: ");
                           String eventDate = eventArray[1].substring(0, eventArray[1].indexOf(")"));
-                          Event event = new Event(eventArray[0], eventDate);
+                          Date parseEventDate = dateInput.parse(eventDate);
+                          String formatEventDate = dateOutput.format(parseEventDate);
+                          Event event = new Event(eventArray[0], formatEventDate);
+                          event.setCompleted(status);
                           myList.setListArray(event);
                           break;
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ParseException e) {
             e.printStackTrace();
         }
     }
@@ -45,6 +57,15 @@ public class Storage {
         File file = new File(filePath);
         FileWriter fileWriter = new FileWriter(file, true);
         fileWriter.write(string + "\n");
+        fileWriter.close();
+    }
+
+    public void newSave(MyList list) throws IOException {
+        File file = new File(filePath);
+        FileWriter fileWriter = new FileWriter(file, false);
+        for(int i = 1; i <= list.getArraySize(); i++) {
+            fileWriter.write(list.getTask(i).toString());
+        }
         fileWriter.close();
     }
 

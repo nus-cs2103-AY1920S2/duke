@@ -6,10 +6,13 @@ public class Task{
     public Task(String item) {
         this.item = item;
         isCompleted = false;
-        System.out.println(item + " has been added to list");
     }
 
-    public String getItem(){
+    public String printItemAdded() {
+        return item + " has been added to list";
+    }
+
+    public String getItem() {
         return this.item;
     }
 
@@ -28,7 +31,7 @@ public class Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + item;
     }
 
