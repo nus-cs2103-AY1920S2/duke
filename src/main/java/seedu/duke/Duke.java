@@ -67,6 +67,16 @@ public class Duke {
     }
 
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response = "";
+
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            response = String.join("\n", ui.getLastResponse());
+        } catch (DukeException e) {
+            response = e.getLocalizedMessage();
+        }
+
+        return response;
     }
 }

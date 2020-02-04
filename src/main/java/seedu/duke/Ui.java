@@ -20,6 +20,12 @@ public class Ui {
     private static final String FORMAT_STRING_FOR_CONTENT =
             OUTPUT_INDENTATION + "|  %-" + (HORIZONTAL_LINE.length() - 2) + "s|";
 
+    List<String> lastResponse;
+
+    public List<String> getLastResponse() {
+        return lastResponse;
+    }
+
     void print(String s) {
         List<String> temp = new ArrayList<>();
         temp.add(s);
@@ -27,6 +33,7 @@ public class Ui {
     }
 
     void print(List<String> stringList) {
+        lastResponse = stringList;
 
         System.out.println(String.format(FORMAT_STRING_FOR_H_LINE, HORIZONTAL_LINE));
         for (String s : stringList) {
