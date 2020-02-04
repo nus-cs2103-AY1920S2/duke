@@ -1,75 +1,117 @@
 import java.util.Optional;
 import java.io.FileNotFoundException;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**
  * Main class of this application.
  */
-public class Duke {
+public class Duke extends Application {
     private TaskList tasks;
-    private Ui ui;
+    private Gui ui;
     private Storage storage;
+    private boolean isRunning = true;
 
     /**
      * Constructs a new `Duke` instance.
-     * This sets up a `Scanner` to standard input, and loads task data from file.
+     * This sets up the UI, and loads task data from file.
+     * For the command-line frontend, this attaches a `Scanner` to standard input.
      */
     public Duke() {
-        ui = new Ui();
+        //ui = new Cli();
+        ui = new Gui(this);
         storage = new Storage();
         
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
+            ui.startMessage();
             ui.showSaveNotFoundMessage(storage.STORAGE_SAVE_PATH);
+            ui.endMessage();
             tasks = new TaskList();
         } catch (DukeException e) {
+            ui.startMessage();
             ui.showError(e);
+            ui.endMessage();
             tasks = new TaskList();
         }
     }
     
-    /**
-     * Runs the main loop of the application.
-     * First greets the user, then reads command lines, responding to each.
-     * If an exit command is entered, it is processed,
-     * then the goodbye message is printed and the program exits from the loop.
-     */
-    private void run() {
-        ui.greet();
-        
-        boolean isRunning = true;
-        while (isRunning) {
-            String commandString = ui.readCommandString();
-            
-            ui.showLine();
-            try {
-                Optional<Command> c = new Parser(commandString).parse();
-                if (c.isPresent()) {
-                    Command cmd = c.get();
-                    cmd.execute(tasks, ui, storage);
-                    isRunning = isRunning && !cmd.isExit();
-                } else {
-                    ui.showUnknownCommandMessage(commandString);
-                }
-            } catch (DukeException e) {
-                ui.showError(e);
+    protected void processCommand(String command) {
+        ui.startMessage();
+        try {
+            Optional<Command> c = new Parser(command).parse();
+            if (c.isPresent()) {
+                Command cmd = c.get();
+                cmd.execute(tasks, ui, storage);
+                isRunning = isRunning && !cmd.isExit();
+            } else {
+                ui.showUnknownCommandMessage(command);
             }
-            ui.showLine();
+        } catch (DukeException e) {
+            ui.showError(e);
         }
-        
+        ui.endMessage();
+
+        //We have to move the cleanup code here because `Gui` doesn't use `Duke#run()`
+        if (!isRunning) {
+            cleanup();
+        }
+    }
+    
+    protected void cleanup() {
         try {
             storage.save(tasks.getTaskState());
         } catch (DukeException e) {
-            ui.showLine();
+            ui.startMessage();
             ui.showError(e);
-            ui.showLine();
+            ui.endMessage();
+        }
+        
+        ui.close();
+    }
+    
+    /**
+     * Runs the main loop of the command-line application.
+     * This function is not called in the graphical front-end.
+     *
+     * <p>First greets the user, then reads command lines, responding to each.
+     * If an exit command is entered, it is processed,
+     * then the goodbye message is displayed and the program exits from the loop.
+     */
+    public void run() {
+        ui.startMessage();
+        ui.showGreeting();
+        ui.endMessage();
+        
+        while (isRunning) {
+            String command = ui.readCommandString();
+            processCommand(command);
         }
     }
     
     /**
-     * Constructs and runs an instance of the Duke application.
+     * Saves the tasks in the internal `TaskList` to a file.
+     * Displays an error message on failure.
      */
-    public static void main(String[] args) {
-        new Duke().run();
+    public void saveTasks() {
+        try {
+            storage.save(tasks.getTaskState());
+        } catch (DukeException e) {
+            ui.startMessage();
+            ui.showError(e);
+            ui.endMessage();
+        }
+    }
+    
+    @Override
+    public void start(Stage stage) {
+        ui.start(stage);
+    }
+
+    @Override
+    public void stop() {
+        cleanup();
     }
 }

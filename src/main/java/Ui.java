@@ -1,126 +1,99 @@
 import java.util.Scanner;
 
 /**
- * Encapsulates the (command line) user interface provided to the user.
- * The `Ui` class provides utility methods to show various message types.
- * Messages will be displayed in standard output.
- *
- * <p>Most of the methods do not print any header line, with the exception of `greet()`
+ * Encapsulates an abstract user interface provided to the user.
+ * The `Ui` interface specifies methods displaying messages to the user.
+ * Implementations of the `Ui` interface are not required to buffer the printed message,
+ * but the whole message must be printed after Ui#endMessage() is called.
  */
-public class Ui {
-    Scanner sc;
+interface Ui {
+    //TODO: create and store a Message object instead of using a static buffer
     
     /**
-     * Construct a new `Ui` instance.
-     * This constructor creates a new `Scanner` reading from standard input,
-     * so race conditions may be possible if other `Scanner` objects also read from standard input.
+     * Denotes the start of a new message to be printed.
      */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
+    public void startMessage();
+    
+    /**
+     * Denotes the end of a new message to be printed.
+     */
+    public void endMessage();
     
     /**
      * Reads a single-line command string from the user.
      * @return command string
      */
-    public String readCommandString() {
-        return sc.nextLine();
-    }
+    public String readCommandString();
     
     /**
      * Displays a horizontal line.
      */
-    public void showLine() {
-        PrintUtil.printHeaderLine();
-    }
+    public void showLine();
     
     /**
      * Displays a numbered task.
      * @param index Index of the task
      * @param task Task to be displayed
      */
-    public void showNumberedEntry(int index, Task task) {
-        PrintUtil.indentedPrintf("%d.%s\n", index, task);
-    }
+    public void showNumberedEntry(int index, Task task);
     
     /**
      * Displays the message of the provided `DukeException`.
      * @param e exception of type DukeException
      */
-    public void showError(DukeException e) {
-        PrintUtil.indentedPrintf("Error: %s\n",e.getMessage());
-    }
+    public void showError(DukeException e);
     
     /**
      * Displays a message that the task list could not be found.
      * @param savePath Intended path of the file
      */
-    public void showSaveNotFoundMessage(String savePath) {
-        PrintUtil.printHeaderLine();
-        PrintUtil.indentedPrintln("Error: Task list not found");
-        PrintUtil.indentedPrintf("       Duke will create a new task list file at %s\n", savePath);
-        PrintUtil.printHeaderLine();
-    }
+    public void showSaveNotFoundMessage(String savePath);
     
     /**
-     * Displays a greeting, separated by horizontal header lines.
+     * Displays a greeting.
      */
-    public void greet() {
-        PrintUtil.printHeaderLine();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        PrintUtil.indentedPrintln("Hello from\n" + logo);
-        PrintUtil.printHeaderLine();
-    }
+    public void showGreeting();
     
     /**
      * Displays the goodbye message.
-     * Header lines are NOT printed.
+     * Header lines are not printed.
      */
-    public void bye() {
-        PrintUtil.indentedPrintln("Goodbye");
-    }
+    public void showBye();
     
     /**
      * Displays a message when a task is added.
      * @param task Task added
      * @param remainingCount New number of tasks
      */
-    public void showAddTaskMessage(Task task, int remainingCount) {
-        PrintUtil.indentedPrintf("Added task:\n  %s\n", task);
-        PrintUtil.indentedPrintf("Now you have %d task(s).\n", remainingCount);
-    }
+    public void showAddTaskMessage(Task task, int remainingCount);
     
     /**
      * Displays a message when a task is removed.
      * @param task Task added
      * @param remainingCount New number of tasks
      */
-    public void showRemoveTaskMessage(Task task, int remainingCount) {
-        PrintUtil.indentedPrintf("Removed task:\n  %s\n", task);
-        PrintUtil.indentedPrintf("Now you have %d task(s).\n", remainingCount);
-    }
+    public void showRemoveTaskMessage(Task task, int remainingCount);
     
     /**
      * Displays a message when a task is marked as completed.
      * @param task Task marked as complete
      */
-    public void showDoneTaskMessage(Task task) {
-        PrintUtil.indentedPrintf("Marked task as done:\n  %s\n", task);
-    }
+    public void showDoneTaskMessage(Task task);
     
     /**
      * Displays an error message when a command is not recognized.
      * @param command Command string
      */
-    public void showUnknownCommandMessage(String command) {
-        PrintUtil.indentedPrintf("Error: Unknown command: %s\n", command);
-    }
+    public void showUnknownCommandMessage(String command);
     
-    public void showMatchingTasksMessage() {
-        PrintUtil.indentedPrintln("Here are the matching tasks in your list:");
-    }
+    /**
+     * Displays a header message to indicate matching tasks from a query.
+     * This method only prints the header message.
+     */
+    public void showMatchingTasksMessage();
+    
+    /**
+     * Closes and cleans up resources held by the UI.
+     */
+    public void close();
 }
