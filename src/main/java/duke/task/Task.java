@@ -1,5 +1,9 @@
+package duke.task;
+
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+
+import duke.DukeException;
 
 public class Task implements Serializable {
 
@@ -21,11 +25,11 @@ public class Task implements Serializable {
 
     public Task(String type, String task) {
 
-        if(type.equals("todo")) {
+        if (type.equals("todo")) {
             this.type = TODO;
-        } else if(type.equals("deadline")) {
+        } else if (type.equals("deadline")) {
             this.type = DEADLINE;
-        } else if(type.equals("event")) {
+        } else if (type.equals("event")) {
             this.type = EVENT;
         }
 

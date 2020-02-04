@@ -1,6 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.DukeException;
 
 public class Deadline extends Task {
 
@@ -16,7 +20,7 @@ public class Deadline extends Task {
         try {
             String[] deadline = task.substring(task.indexOf("/")).split(" ");
 
-            if(deadline.length != 3) {
+            if (deadline.length != 3) {
                 throw new DukeException("dateTime");
             }
 
@@ -25,7 +29,7 @@ public class Deadline extends Task {
             this.deadlineDate = LocalDate.parse(this.deadlineDateString, dateFormatter);
             this.deadlineTime = LocalTime.parse(this.deadlineTimeString, timeFormatter);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException("dateTime");
         }
 

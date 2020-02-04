@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.ArrayList;
+package duke;
 
 public class Duke {
 

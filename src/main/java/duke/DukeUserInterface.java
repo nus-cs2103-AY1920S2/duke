@@ -1,12 +1,16 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import duke.command.Parser;
+import duke.task.TaskList;
 
 public class DukeUserInterface {
 
-    private static final String line = "    ____________________________________________________________";
-    private static final String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?";
-    private static final String exitClosing = line + "\n" + "     Bye. Hope to see you again soon!" + "\n" + line;
+    private static final String LINE = "    ____________________________________________________________";
+    private static final String OPENING_GREETING = "     Hello! I'm Duke\n" + "     What can I do for you?";
+    private static final String FAREWELL_CLOSING = LINE + "\n" + "     Bye. Hope to see you again soon!" + "\n" + LINE;
 
     private InputStreamReader stringReader;
     private BufferedReader commandReader;
@@ -24,7 +28,7 @@ public class DukeUserInterface {
 
     public DukeUserInterface(String filePath) throws DukeException{
         System.out.println("Hello from\n" + logo);
-        System.out.println(line + "\n" + greeting + "\n" + line);
+        System.out.println(LINE + "\n" + OPENING_GREETING + "\n" + LINE);
 
         this.stringReader = new InputStreamReader(System.in);
         this.commandReader = new BufferedReader(this.stringReader);
@@ -38,16 +42,15 @@ public class DukeUserInterface {
         try {
             String input = commandReader.readLine();
 
-            while(!input.equals("bye")) {
+            while (!input.equals("bye")) {
                 commandParser.executeCommand(input);
                 input = commandReader.readLine();
             }
 
             this.internalStorage.save(this.listOfTasks.getData());
-            System.out.println(exitClosing);
+            System.out.println(FAREWELL_CLOSING);
         } catch(Exception e) {
             System.out.println(e);
         }
     }
-
 }

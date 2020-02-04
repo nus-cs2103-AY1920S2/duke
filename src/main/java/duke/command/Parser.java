@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.DukeException;
+
 public class Parser {
 
     private TaskList listOfTasks;
@@ -20,12 +25,12 @@ public class Parser {
             // Checks the task as 'Done'
             this.listOfTasks.done(commandSplit[1]);
 
-        } else if(basicCommand.equals("todo") || basicCommand.equals("deadline") || basicCommand.equals("event")) {
+        } else if (basicCommand.equals("todo") || basicCommand.equals("deadline") || basicCommand.equals("event")) {
 
             String type = commandSplit[0];
             try {
                 // Test string to see if exception should be thrown
-                if(commandSplit.length <= 1) {
+                if (commandSplit.length <= 1) {
                     throw new DukeException(type);
                 }
 
@@ -37,7 +42,7 @@ public class Parser {
             } catch (Exception e) {
                 System.out.println(e);
             }
-        } else if(basicCommand.equals("delete")) {
+        } else if (basicCommand.equals("delete")) {
 
             // Deletes the task
             this.listOfTasks.delete(commandSplit[1]);
