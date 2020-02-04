@@ -4,7 +4,7 @@ public class Command {
 
 
     /**
-     * Creates a Command object
+     * Creates a Command object.
      *
      * @param input A string representation of user's command.
      */

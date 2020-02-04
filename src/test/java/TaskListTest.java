@@ -13,6 +13,7 @@ public class TaskListTest {
         assertEquals(1, TaskList.size());
     }
 
+    @Test
     public void delete() {
         Task task = new Todo("do tutorials");
         TaskList tasks = new TaskList(new ArrayList<Task>());

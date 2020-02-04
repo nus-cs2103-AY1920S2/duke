@@ -76,6 +76,7 @@ public class Parser {
                 case "12":
                     day = day + " of December ";
                     break;
+                default:
                 }
                 day = day + dateArray[2] + ", ";
                 try {

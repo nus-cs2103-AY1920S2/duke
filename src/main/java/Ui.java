@@ -52,7 +52,8 @@ public class Ui {
     public void printAdd(Task t) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + t);
-        System.out.println("\tNow you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println("\tNow you have " + TaskList.size() + " "
+                + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
     /**
@@ -63,7 +64,8 @@ public class Ui {
     public void printDelete(Task toDelete) {
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t\t" + toDelete);
-        System.out.println("\tNow you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println("\tNow you have " + TaskList.size() + " "
+                + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
     /**

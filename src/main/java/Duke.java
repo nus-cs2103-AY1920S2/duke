@@ -1,5 +1,5 @@
 /**
- * The Duke class
+ * The Duke class.
  */
 public class Duke {
 

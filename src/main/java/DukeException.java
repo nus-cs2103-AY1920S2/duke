@@ -4,7 +4,7 @@
 public class DukeException extends Exception {
 
     /**
-     * Creates a DukeException object
+     * Creates a DukeException object.
      *
      * @param msg A string representation of the exception.
      */
