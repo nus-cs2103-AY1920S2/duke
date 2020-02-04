@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -49,5 +51,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (response.startsWith("Bye-bye!")) {
+            Ui ui = new Ui();
+            new Thread(() -> {
+                try{
+                    Thread.sleep(88);
+                }
+                catch(InterruptedException exc) {
+                    ui.showError(exc.getMessage());
+                }
+                Platform.exit();
+            }).start();
+        }
     }
+
 }
