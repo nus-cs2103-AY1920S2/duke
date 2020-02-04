@@ -115,11 +115,11 @@ public class Gui implements Ui {
         endMessage();
         
         sendButton.setOnMouseClicked((event) -> {
-            duke.processCommand(readCommandString()); //TODO: get reference to Duke instance
+            duke.processCommand(readCommandString());
         });
 
         userInput.setOnAction((event) -> {
-            duke.processCommand(readCommandString()); //TODO: get reference to Duke instance
+            duke.processCommand(readCommandString());
         });
         
         //Scroll down to the end every time dialogContainer's height changes.

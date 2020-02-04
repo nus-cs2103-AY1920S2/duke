@@ -1,5 +1,10 @@
 import javafx.application.Application;
 
+/**
+ * This class launches the GUI frontend of Duke.
+ * This class is needed to avoid classpath issues
+ * (since JavaFX expects the `Application` subclass to be available as a module, instead of a .jar)
+ */
 public class Launcher {
     /**
      * Constructs and runs an instance of the Duke application.
@@ -8,15 +13,6 @@ public class Launcher {
      * </a>
      */
     public static void main(String[] args) {
-        /*
-        Duke duke = new Duke();
-        Application.launch(Gui.class, args); //does this accept arbitrary arguments?
-        
-        //after GUI terminates??
-        //duke.run();
-        
-        duke.saveTasks();
-        */
         Application.launch(Duke.class, args);
     }
 }

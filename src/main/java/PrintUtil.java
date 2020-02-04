@@ -26,7 +26,6 @@ public class PrintUtil {
      * @param s String to print
      */
     public static void indentedPrintln(String s) {
-        //System.out.println(indentString(s));
         buffer += indentString(s) + "\n";
     }
     
@@ -37,7 +36,6 @@ public class PrintUtil {
      * @param args Arguments for format string
      */
     public static void indentedPrintf(String format, Object... args) {
-        //System.out.print(indentString(String.format(format, args)));
         buffer += indentString(String.format(format, args));
     }
     
