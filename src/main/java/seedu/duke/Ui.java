@@ -32,6 +32,14 @@ public class Ui {
         print(temp);
     }
 
+    void print(String ... strings) {
+        List<String> temp = new ArrayList<>();
+        for (String s : strings) {
+            temp.add(s);
+        }
+        print(temp);
+    }
+
     void print(List<String> stringList) {
         lastResponse = stringList;
 
@@ -43,10 +51,7 @@ public class Ui {
     }
 
     void greet() {
-        List<String> outputStreamBuffer = new ArrayList<>();
-        outputStreamBuffer.add("Hello! I'm Alfred!");
-        outputStreamBuffer.add("How may I help you today?");
-        print(outputStreamBuffer);
+        print("Hello! I'm Alfred!", "How may I help you today?");
     }
 
     /**
@@ -113,11 +118,10 @@ public class Ui {
      * @param selectedTask Task to be marked as done.
      */
     public void printDoneMessage(TaskList tasks, Task selectedTask) {
-        List<String> outputStreamBuffer = new ArrayList<>();
-        outputStreamBuffer.add("Nice! I've marked this task as done: ");
-        outputStreamBuffer.add("  " + selectedTask);
-        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
-        print(outputStreamBuffer);
+        print("Nice! I've marked this task as done: ",
+                "  " + selectedTask,
+                String.format("Now you have %d tasks in the list.", tasks.size())
+        );
     }
 
     /**
@@ -127,11 +131,10 @@ public class Ui {
      * @param selectedTask Task to be deleted.
      */
     public void printDeleteMessage(TaskList tasks, Task selectedTask) {
-        List<String> outputStreamBuffer = new ArrayList<>();
-        outputStreamBuffer.add("Noted. I've removed this task: ");
-        outputStreamBuffer.add("  " + selectedTask);
-        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
-        print(outputStreamBuffer);
+        print("Noted. I've removed this task: ",
+                "  " + selectedTask,
+                String.format("Now you have %d tasks in the list.", tasks.size())
+        );
     }
 
     /**
@@ -141,10 +144,9 @@ public class Ui {
      * @param newTask Task object to be added.
      */
     public void printAddMessage(TaskList tasks, Task newTask) {
-        List<String> outputStreamBuffer = new ArrayList<>();
-        outputStreamBuffer.add("Got it. I've added this task: ");
-        outputStreamBuffer.add("  " + newTask);
-        outputStreamBuffer.add(String.format("Now you have %d tasks in the list.", tasks.size()));
-        print(outputStreamBuffer);
+        print("Got it. I've added this task: ",
+                "  " + newTask,
+                String.format("Now you have %d tasks in the list.", tasks.size())
+        );
     }
 }
