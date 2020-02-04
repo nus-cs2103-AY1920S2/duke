@@ -23,9 +23,9 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i=1; i <= aList.size(); i++) {
             t = aList.get(i-1);
-            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
+            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString());
         }
-        System.out.println();
+        System.out.println("");
     }
 
     /**
@@ -33,13 +33,11 @@ public class TaskList {
      * @param rank task number in the list
      * @param dd string indicating delete or done action
      */
-    public void deleteDone(int rank, String dd) {
+    public void deleteDone(int rank, String dd) throws DukeException {
         Action action = new Action(rank, aList);
 
-        if (action.checkNum() == true) {
-            DukeException error = new DukeException();
-            System.out.println(error.outOfBound());
-            System.out.println("");
+        if (!action.checkNum()) {
+            throw new DukeException("No such task exist.\n");
         }
         else {
             if (dd.equals("delete")) {
@@ -52,7 +50,6 @@ public class TaskList {
 
     /**
      * Call to action for the different task type
-     * @param taskType string indicating task type
      * @param statement task description
      */
     public void find(String statement) {
@@ -62,9 +59,9 @@ public class TaskList {
         System.out.println("Here are the matching tasks in your list:");
         for (int i=1; i <= matchTask.size(); i++) {
             t = matchTask.get(i-1);
-            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.getTask());
+            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString()+"\n");
         }
-        System.out.println();
+        System.out.println("");
     }
 
     //call to actions for different task type
@@ -87,29 +84,28 @@ public class TaskList {
 
     /**
      * Actions to be executed if delete is called
-     * @param rank task nummber in the list
+     * @param rank task number in the list
      * @param tempList task list
      */
     public void deleteAction(int rank, ArrayList<Task> tempList) {
         Delete delete = new Delete(rank, tempList);
-        String deleteAction = delete.printAction();
-        System.out.println(delete.deleteTask());
-        System.out.println(deleteAction);
-        System.out.println("Now you have " + tempList.size() + " tasks in the list.");
-        System.out.println("");
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(delete);
+        delete.deleteTask();
+        System.out.println("Now you have " + tempList.size() + " tasks in the list.\n");
     }
 
     /**
      * Actions to be executed if done is called
-     * @param rank task nummber in the list
+     * @param rank task number in the list
      * @param tempList task list
      */
     public void doneAction(int rank, ArrayList<Task> tempList) {
         Done done = new Done(rank, tempList);
-        System.out.println(done.markDone());
-        System.out.println(done.printAction());
-        System.out.println("Now you have " + tempList.size() + " tasks in the list.");
-        System.out.println("");
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(done);
+        done.markDone();
+        System.out.println("Now you have " + tempList.size() + " tasks in the list.\n");
     }
 
     /**
@@ -119,8 +115,7 @@ public class TaskList {
      */
     public void printAdded(Task t, ArrayList<Task> tempList) {
         System.out.println("Got it. I've added this task:");
-        System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.getTask());
-        System.out.println("Now you have " + tempList.size() + " tasks in the list.");
-        System.out.println();
+        System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.toString());
+        System.out.println("Now you have " + tempList.size() + " tasks in the list.\n");
     }
 }

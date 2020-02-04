@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Action {
     protected int num;
-    protected ArrayList<Task> arrList = new ArrayList<>();
+    protected ArrayList<Task> arrList;
 
     public Action(int num, ArrayList<Task> arrList) {
         this.num = num;
@@ -30,8 +30,9 @@ public class Action {
      *
      * @return task statement
      */
-    public String printAction() {
+    @Override
+    public String toString() {
         return "  [" +arrList.get(num-1).getType()+ "][" + arrList.get(num-1).getStatusIcon()
-                + "]" + arrList.get(num-1).getTask();
+                + "]" + arrList.get(num-1).toString();
     }
 }

@@ -15,23 +15,6 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the task date description
-     *
-     * @return task date description
-     */
-    public String getTask() {
-        return description;
-    }
-
-    public String getDate() {
-        return "";
-    }
-
-    public String getWord() {
-        return "";
-    }
-
-    /**
      * Returns only the task description without the date
      * @return task description
      */
@@ -39,15 +22,13 @@ public class Todo extends Task {
         return description;
     }
 
-    public String changeDate() {
-        return "";
-    }
-
-    public String changeTime() {
-        return "";
-    }
-
-    public String getTime() {
-        return "";
+    /**
+     * Returns the task date description
+     *
+     * @return task date description
+     */
+    @Override
+    public String toString() {
+        return description;
     }
 }

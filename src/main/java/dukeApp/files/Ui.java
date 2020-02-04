@@ -4,20 +4,20 @@ import java.util.Scanner;
 
 public class Ui {
     Scanner sc;
-    String errorMsg;
 
     public Ui() {}
-
     /**
      * Accept user inputs
      * @param tasks list of task retrieved from file
      */
-    public void input(TaskList tasks) {
+    public void input(TaskList tasks) throws DukeException {
         sc = new Scanner(System.in);
-        Parse parse = new Parse(sc.nextLine());
+        String statement = sc.nextLine();
 
-        while (!parse.decode(tasks)) {
-            parse = new Parse(sc.nextLine());
+        while (!statement.equals("bye")) {
+            Parse parse = new Parse(statement);
+            parse.decode(tasks);
+            statement = sc.nextLine();
         }
     }
 

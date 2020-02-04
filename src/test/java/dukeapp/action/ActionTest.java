@@ -1,7 +1,7 @@
 package dukeApp.action;
 
+import javafx.concurrent.Task;
 import org.junit.jupiter.api.Test;
-import dukeApp.files.Task;
 import dukeApp.files.Todo;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;

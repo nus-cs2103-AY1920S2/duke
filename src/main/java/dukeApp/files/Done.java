@@ -12,8 +12,7 @@ public class Done extends Action {
      *
      * @return a statement indicating a task has been marked as done
      */
-    public String markDone() {
+    public void markDone() {
         arrList.get(num-1).markAsDone();
-        return "Nice! I've marked this task as done: ";
     }
 }

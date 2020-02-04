@@ -1,5 +1,6 @@
 package dukeApp.duke;
 import dukeApp.files.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -9,10 +10,10 @@ public class Duke {
     private Storage storage;
 
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
 
         try {
+            ui = new Ui();
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
@@ -24,7 +25,7 @@ public class Duke {
      * Run the app by reading user commands and writing to file to save changes
      *
      */
-    public void run() {
+    public void run() throws DukeException {
         ui.input(tasks);
         try {
             storage.appendToFile(tasks.aList);
@@ -34,8 +35,8 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
+    public static void main(String[] args) throws DukeException {
+        final String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"

@@ -56,26 +56,27 @@ public class Storage {
      * @throws IOException if there is an error with the inputs from newList or output when writing to file
      */
     public void appendToFile(ArrayList<Task> newList) throws IOException {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < newList.size(); i++) {
             if ((newList.get(i).getType()).equals("T")) {
-                s += newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getWord()
-                        + newList.get(i).getDescription();
+                s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
+                        .append(newList.get(i).getDescription());
             }
             else if ((newList.get(i).getType()).equals("E")) {
-                s += newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription()
-                        + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate();
+                s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
+                        .append(newList.get(i).toString());
             }
             else {
-                s += newList.get(i).getType() + " " + newList.get(i).getDone() + newList.get(i).getDescription()
-                        + "/" + newList.get(i).getWord() + " " + newList.get(i).getDate()+ " " +newList.get(i).getTime();
+                ((Deadline)newList.get(i)).changeDate();
+                s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
+                        .append(newList.get(i).toString());
             }
             if (i != newList.size()-1) {
-                s += System.lineSeparator();
+                s.append(System.lineSeparator());
             }
         }
-        fw.write(s);
+        fw.write(s.toString());
         fw.close();
     }
 }

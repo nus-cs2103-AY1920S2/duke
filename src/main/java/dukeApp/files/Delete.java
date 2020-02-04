@@ -12,8 +12,7 @@ public class Delete extends Action {
      *
      * @return a String statement indicating a task has been removed
      */
-    public String deleteTask() {
+    public void deleteTask() {
         arrList.remove(num-1);
-        return "Noted. I've removed this task:";
     }
 }
