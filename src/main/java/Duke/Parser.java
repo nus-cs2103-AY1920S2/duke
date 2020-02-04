@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -18,6 +18,13 @@ public class Parser {
     private TaskList taskList;
     private Scanner sc;
 
+    /**
+     * Constructor for the Parser class. Takes in Storage, Ui, TaskList and Scanner as its input.
+     * @param storage Storage object specific to this parser
+     * @param ui Ui object specific to this parser
+     * @param taskList TaskList object specific to this parser
+     * @param sc Scanner object specific to this parser
+     */
     public Parser(Storage storage, Ui ui, TaskList taskList, Scanner sc) {
         this.storage = storage;
         this.ui = ui;
@@ -26,7 +33,7 @@ public class Parser {
     }
 
     /**
-     * This method makes sense of the user's command and calls the appropriate methods in response to the user's command
+     * This method makes sense of the user's command and calls the appropriate methods in response.
      * @param command This is the user's command
      * @throws DukeException
      * @throws IOException

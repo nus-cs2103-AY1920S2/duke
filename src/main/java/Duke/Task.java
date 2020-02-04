@@ -1,9 +1,11 @@
-package Duke;
+package duke;
+
 /**
- * The Task class represents the task the user inputs into the Duke program. Its attributes contain a boolean value,
- * which tracks whether the task has been completed or not, and a String object, which contains the description of the
- *  task.
+ * The Task class represents the task the user inputs into the Duke program.
+ * Its attributes contain a boolean value, which tracks whether the task has been completed.
+ * And a String object, which contains the description of the task.
  */
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -14,7 +16,7 @@ public class Task {
     }
 
     /**
-     * The getStatusIcon returns a string that contains the icon depending on the boolean value of the "isDone" attribute
+     * The getStatusIcon returns a string that contains the icon depending on the value of the "isDone" attribute.
      * @return String the icon representing the "isDone" boolean value
      */
     public String getStatusIcon() {
@@ -30,11 +32,11 @@ public class Task {
 
     public String toString() {
         String icon = (isDone ? "\u2713" : "\u2718");
-        return "["+ icon + "]" + " " + this.description;
+        return "[" + icon + "]" + " " + this.description;
     }
 
     public String toFileString() {
-        int status = (isDone? 1 : 0);
+        int status = (isDone ? 1 : 0);
         return " | " + status + " | " + this.description;
     }
 }

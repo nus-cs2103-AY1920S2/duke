@@ -12,6 +12,10 @@ shadowJar {
     archiveAppendix = null
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 group 'seedu.Duke'
 version '0.1.0'
 
@@ -21,7 +25,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 run {

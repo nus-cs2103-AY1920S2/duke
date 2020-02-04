@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class Storage {
 
     /**
      * This method loads the existing tasks from disk into the TaskList object.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Error in file path
      */
     public void load() throws FileNotFoundException {
         String filePath = "Data/Duke.txt";
@@ -51,8 +51,8 @@ public class Storage {
     }
 
     /**
-     * This method loads the tasks from the TaskList object into the disk
-     * @throws IOException
+     * This method loads the tasks from the TaskList object into the disk.
+     * @throws IOException IOException
      */
     public void save() throws IOException {
         String filePath = "Data/Duke.txt";

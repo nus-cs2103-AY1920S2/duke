@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.ArrayList;
 
@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    public TaskList() { }
+    public TaskList() {
+
+    }
 
     /**
-     * Adds the task to the list
+     * Adds the task to the list.
      * @param t The task being added to the list
      */
     public void addTask(Task t) {
@@ -19,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task at index in the list
+     * Delete task at index in the list.
      * @param index the position of the task needed to be deleted
      */
     public void deleteTask(int index) {
@@ -27,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     *returns the size of the list
+     * returns the size of the list.
      * @return the size of the list
      */
     public int size() {
@@ -35,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * returns the task at position index
+     * returns the task at position index.
      * @param index the position of the desired task
      * @return the required task
      */

@@ -1,18 +1,18 @@
-package Duke;
+package duke;
 
 /**
- * The Ui class handles most of the interaction with the user. It contains methods: printList, markAsDone, printTask,
- * printDeletedTask and printBye.
+ * The Ui class handles most of the interaction with the user.
+ * It contains methods: printList, markAsDone, printTask, printDeletedTask and printBye.
  */
 public class Ui {
     private TaskList taskList;
 
-    public Ui (TaskList taskList) {
+    public Ui(TaskList taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * This method prints out all the tasks on the list
+     * This method prints out all the tasks on the list.
      */
     public void printList() {
         System.out.println("Here are the tasks in your list!");
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * This method prints out a confirmation text that the task at position index has been marked as done
+     * This method prints out a confirmation text that the task at position index has been marked as done.
      * @param index the position of the task being marked done
      */
     public void markAsDone(int index) {
@@ -36,7 +36,7 @@ public class Ui {
     }
 
     /**
-     * This method prints out a confirmation text that task t has been added to the list
+     * This method prints out a confirmation text that task t has been added to the list.
      * @param t the task being added
      */
     public void printTask(Task t) {
@@ -48,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * This method prints out a confirmation text that task t has been deleted from the list
+     * This method prints out a confirmation text that task t has been deleted from the list.
      * @param t the task required to be deleted
      */
     public void printDeletedTask(Task t) {
@@ -58,6 +58,10 @@ public class Ui {
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list![^._.^]ﾉ");
         System.out.println("____________________________________________________________");
     }
+
+    /**
+     * This method prints the bye statement.
+     */
     public void printBye() {
         System.out.println("Sayonara~");
         System.out.println(" (_＼ヽ\n" + "　 ＼＼ .Λ＿Λ.\n" + "　　 ＼(　ˇωˇ)　\n" + "　　　 >　⌒ヽ\n" + "　　　/ 　 へ＼\n"

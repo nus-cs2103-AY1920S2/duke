@@ -1,10 +1,28 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Duke class represents a chatbot that keeps tracks of tasks.
+ * Three unique commands can be given to the chatbot: "todo", "event and "deadline"
+ * After each command, a description must be given.
+ * In the case of the "event" class, after the description, the timing and date must be given after inputting "/at".
+ * eg. event sister's birthday /at 08/06/2020 1700./
+ * Date and timing must be given in this specific format (dd/mm/yyyy hhmm).
+ * The same applies to deadline, but changing the "/at" to "/by".
+ * eg. deadline math homework /by 07/08/2020 2359.
+ * Other function includes marking the task as done and removing it from the list.
+ * eg. done 3
+ * delete 3
+ * use "list" to printout the exising tasks on the list
+ */
 public class Duke {
+    /**
+     * This is the main class.
+     * @param args args
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
