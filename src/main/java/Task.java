@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String reply;
@@ -21,6 +21,9 @@ public class Task {
     public String getDescription(){
         return description;
     }
+
+    public abstract void printInit();
+
     public String toString(){
         if(isDone == true) {
             reply = "\u2713";
