@@ -110,7 +110,7 @@ public class Storage {
     }
 
     public void save(List<Task> taskList) {
-        saveFile(taskList);
+        saveFile();
     }
 
     /**

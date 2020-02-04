@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 
 /**
@@ -20,7 +21,7 @@ public class Duke {
      * Constructor for Duke class
      * @param filePath Path to file used for persistent storage
      */
-    private Duke(String filePath) {
+    public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
@@ -35,8 +36,13 @@ public class Duke {
      */
     public void run() {
         Ui.start();
-        while (Parser.parseCommand(Ui.getInput(), taskList)) {
-            ;
+        boolean run = true;
+        while (run) {
+            try {
+                run = Parser.parseCommand(Ui.getInput(), taskList);
+            } catch (DukeException ex) {
+                Ui.printException(ex);
+            }
         }
     }
 

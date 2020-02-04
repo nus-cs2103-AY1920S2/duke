@@ -12,7 +12,6 @@ public class Task implements java.io.Serializable {
      * Boolean to indicate true if task is Done
      */
     protected boolean isDone;
-    private String description;
 
     /**
      * Constructor of Task class, creates a Task object with given description

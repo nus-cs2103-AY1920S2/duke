@@ -8,11 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindCommand extends Command {
-    public static boolean run(TaskList taskList, String searchTerm) {
+    public static boolean run(TaskList taskList, String... searchTerms) {
         List<Task> tasks = new ArrayList<>();
-        for (Task task : taskList.getTasks()) {
-            if (task.getDescription().contains(searchTerm)) {
-                tasks.add(task);
+        for (String searchTerm : searchTerms) {
+            for (Task task : taskList.getTasks()) {
+                if (task.getDescription().contains(searchTerm)) {
+                    if (!tasks.contains(task)) {
+                        tasks.add(task);
+                    }
+                }
             }
         }
         Ui.printFindResults(tasks);

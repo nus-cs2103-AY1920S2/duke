@@ -8,6 +8,6 @@ public abstract class Command {
      * Enum of valid commands
      */
     public enum CommandType {
-        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, CALENDAR, CLEAR
+        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO, CALENDAR, CLEAR, FIND
     }
 }
