@@ -20,7 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@SuppressWarnings("checkstyle:CommentsIndentation")
 public class Duke extends Application {
 
     private ScrollPane scrollPane;
