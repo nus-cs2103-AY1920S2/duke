@@ -45,4 +45,13 @@ public class Ui {
                 + "　　 /　　/　＼＼\n" + "　　 ﾚ　ノ　　 ヽ_つ\n" + "　　/　/\n" + "　 /　/|\n" + "　(　(ヽ\n" + "　|　|、＼\n"
                 + "　| 丿 ＼ ⌒)\n" + "　| |　　) /\n" + "`ノ ) 　 Lﾉ\n" + "(_／");
     }
+
+    public void printMatchingTasks(TaskList tL) {
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tL.size(); i++) {
+            System.out.println("        " + (i + 1) + " " + tL.get(i));
+        }
+        System.out.println("____________________________________________________________");
+    }
 }

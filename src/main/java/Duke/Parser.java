@@ -84,6 +84,16 @@ public class Parser {
                 this.storage.save();
                 this.ui.printDeletedTask(t);
             }
+        } else if (command.equals("find")){
+            String keyWord = sc.next();
+            TaskList tempTaskList = new TaskList();
+            for(int i = 0; i < taskList.size(); i ++) {
+                Task t = taskList.get(i);
+                if(t.contains(keyWord)) {
+                    tempTaskList.addTask(t);
+                }
+            }
+            this.ui.printMatchingTasks(tempTaskList);
         } else {
             throw new DukeException("invalid");
         }

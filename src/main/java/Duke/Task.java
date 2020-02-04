@@ -22,6 +22,10 @@ public class Task {
         return "["+ icon + "]" + " " + this.description;
     }
 
+    public boolean contains(String keyWord) {
+        return this.description.contains(keyWord);
+    }
+
     public String toFileString() {
         int status = (isDone? 1 : 0);
         return " | " + status + " | " + this.description;
