@@ -1,7 +1,6 @@
 package duke.gui;
 
 import duke.Duke;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A GUI for duke.Duke using FXML.
@@ -29,5 +29,10 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        TimeUnit.MILLISECONDS.sleep(800);
     }
 }
