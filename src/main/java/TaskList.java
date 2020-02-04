@@ -160,11 +160,11 @@ public class TaskList {
 
         String findResult = "";
         if (matchedTasks.isEmpty()) {
-            findResult += "There are no matching tasks in your list.";
+            findResult += "There are no matching tasks in your list.\n";
         } else {
-            findResult += "Here are the matching tasks in your list:";
+            findResult += "Here are the matching tasks in your list:\n";
             for (int i = 0; i < matchedTasks.size(); i++) {
-                findResult += (i + 1) + ". " + matchedTasks.get(i);
+                findResult += (i + 1) + ". " + matchedTasks.get(i) + "\n";
             }
         }
         return findResult;
