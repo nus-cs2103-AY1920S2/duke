@@ -73,9 +73,6 @@ public class Duke {
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
                 continue;
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-                continue;
             }
         }
     }
