@@ -19,6 +19,7 @@ public class Duke extends Application{
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -45,6 +46,7 @@ public class Duke extends Application{
     public Duke() {
         String filePath = "/Users/gerrenseow/Documents/Gerren/MODULES/Y2S2/CS2103T/Individual_Project/duke/src/main/java/data/data.txt";
         ui = new Ui();
+        parser = new Parser();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -173,7 +175,18 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
+
         return "Duke heard: " + input;
+    }
+
+    public String commandReceived(String command) {
+        String output = "";
+        try {
+            output = parser.commandHandler2(command, tasks.tasks, storage.filepath);
+        } catch (DukeException e) {
+            output = e.getMessage();
+        }
+        return output;
     }
 
     /**
