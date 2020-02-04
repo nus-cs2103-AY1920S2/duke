@@ -4,116 +4,78 @@ package jiachen.duke;
  * The Ui class handles the view and presentation layer of the app
  */
 public class Ui {
-  /**
-   * Print header.
-   */
-  public void printHeader() {
-    String logo =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+    public String formatHeader() {
+        String logo =
+                " ____        _        \n"
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
 
-    System.out.println("\t____________________________________________________________");
-    System.out.println("\tHello! I'm Duke");
-    System.out.println("\tWhat can I do for you?");
-    System.out.println("\t____________________________________________________________");
-  }
+        StringBuilder builder = new StringBuilder(logo);
+        builder.append("\t______________________________________________________");
+        builder.append("\tHello! I'm Duke");
+        builder.append("\tWhat can I do for you?");
 
-  /**
-   * Generic print function used to print any kind of messages to the screen
-   *
-   * @param message the message
-   */
-  public void print(String message) {
-    printSeparator();
-    System.out.println("\t" + message);
-    printSeparator();
-  }
 
-  /**
-   * Print error.
-   *
-   * @param errorMessage the error message
-   */
-  public void printError(String errorMessage) {
-    print(errorMessage);
-  }
-
-  /**
-   * Print notification after removing task
-   *
-   * @param task the task
-   */
-  public void printRemoveTask(Task task) {
-    printSeparator();
-    System.out.println("\t Noted. I've removed this task: ");
-    System.out.println("\t\t" + task);
-    printSeparator();
-  }
-
-  /**
-   * Print notification after finishing task
-   *
-   * @param task the task
-   */
-  public void printDoneTask(Task task) {
-    printSeparator();
-    System.out.println("\t Nice! I've marked this task as done: ");
-    System.out.println("\t\t" + task);
-    printSeparator();
-  }
-
-  /**
-   * List all tasks in order
-   *
-   * @param tasks the tasks
-   */
-  public void printTasks(TaskList tasks) {
-    printSeparator();
-    for (int i = 1; i <= tasks.getList().size(); i++) {
-      System.out.println("\t " + i + ". " + tasks.get(i - 1));
+        builder.append("\t______________________________________________________");
+        return builder.toString();
     }
-    printSeparator();
-  }
 
-  /**
-   * Print notification after adding new task
-   *
-   * @param task       the task
-   * @param numOfTasks the num of tasks
-   */
-  public void printNewTask(Task task, int numOfTasks) {
-    printSeparator();
-    System.out.println(
-            "\t Got it. I've added this task: \n"
-                    + "\t\t"
-                    + task
-                    + "\n"
-                    + "\t Now you have "
-                    + numOfTasks
-                    + " tasks in the list.");
-    printSeparator();
-  }
-
-  /**
-   * Print loading error.
-   */
-  public void printLoadingError() {
-    System.out.println("\tERR: unable to load file from disk!\n");
-  }
-
-  private void printSeparator() {
-    System.out.println("\t____________________________________________________________");
-  }
-
-  public void printFilteredTasks(TaskList tasks) {
-    printSeparator();
-    System.out.println("\tHere are the matching tasks in your list:");
-    for (int i = 1; i <= tasks.getList().size(); i++) {
-      System.out.println("\t " + i + ". " + tasks.get(i - 1));
+    public String format(String message) {
+        return formatSeparator() + "\t" + message + "\n" + formatSeparator();
     }
-    printSeparator();
-  }
+
+
+    public String formatError(String errorMessage) {
+        return errorMessage;
+    }
+
+    public String formatRemoveTask(Task task) {
+        return formatSeparator() + "\t Noted. I've removed this task:\t\t" + task + "\n" + formatSeparator();
+    }
+
+    public String formatDoneTask(Task task) {
+        return formatSeparator() + "\t Nice! I've marked this task as done: \n\t\t" + task + formatSeparator();
+    }
+
+    public String formatTasks(TaskList tasks) {
+        StringBuilder builder = new StringBuilder(formatSeparator());
+        for (int i = 1; i <= tasks.getList().size(); i++) {
+            builder.append("\t ").append(i).append(". ").append(tasks.get(i - 1)).append("\n");
+        }
+        builder.append(formatSeparator());
+        return builder.toString();
+    }
+
+
+    public String formatNewTask(Task task, int numOfTasks) {
+        return formatSeparator() + "\t Got it. I've added this task: \n"
+                + "\t\t"
+                + task
+                + "\n"
+                + "\t Now you have "
+                + numOfTasks
+                + " tasks in the list.\n" + formatSeparator();
+    }
+
+    public String formatLoadingError() {
+        return "\tERR: unable to load file from disk!\n";
+    }
+
+    private String formatSeparator() {
+        return "\t_____________________________________________________";
+    }
+
+    public String formatFilteredTasks(TaskList tasks) {
+        StringBuilder builder = new StringBuilder(formatSeparator());
+        builder.append("\n\tHere are the matching tasks in your list:\n");
+
+        for (int i = 1; i <= tasks.getList().size(); i++) {
+            builder.append("\t ").append(i).append(". ").append(tasks.get(i - 1)).append("\n");
+        }
+        builder.append(formatSeparator());
+        return builder.toString();
+    }
+
 }
