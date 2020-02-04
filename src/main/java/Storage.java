@@ -24,11 +24,15 @@ public class Storage {
     /**
      * This method add items to tasklist based based on the txt file.
      */
-    public void loadTxt(TaskList list, Ui ui) throws DateTimeParseException {
+    public TaskList loadTxt(Ui ui) throws DateTimeParseException {
+        TaskList list = new TaskList();
         try {
             BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
             String line;
             while ((line = file.readLine()) != null) {
+                if (line.equals("")) {
+                    continue;
+                }
                 line = line.trim();
                 boolean done;
                 String[] splitted;
@@ -60,6 +64,7 @@ public class Storage {
         } catch (IOException e) {
             ui.printIOErr();
         }
+        return list;
     }
 
     /**

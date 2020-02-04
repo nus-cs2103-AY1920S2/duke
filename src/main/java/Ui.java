@@ -3,59 +3,46 @@
  */
 public class Ui {
     String space = "     ";
-    String line = space + "____________________________________________________________";
-
     public Ui() {}
 
     /**
      * This method prints the greeting string at the start of the program.
      */
-    public void greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String greeting = line + "\n" + space + " Hello! I'm Duke\n" + space + " What can I do for you?\n" + line + "\n";
-        System.out.print(greeting);
+    public String greeting() {
+        String greeting = " Hello! I'm Duke\n" + space + " What can I do for you?\n";
+        return greeting;
+    }
+
+    public String instruction() {
+        String instruction = "Try add a task by:\n" + space + "1. todo xxxx\n" + space + "2. deadline xxxx /by YYYY-MM-DD\n"
+                + space + "3. event xxxx /at YYYY-MM-DD\n" + "or enter 'list' to display all items\n" +"or 'delete/done index' for deletion/marked as done\n"
+                + "or find xxxx for search";
+        return instruction;
     }
 
     /**
      * This method prints the string at the end of the program.
      */
-    public void bye() {
-        String bye = line + "\n" + space + " Bye. Hope to see you again soon!\n" + line;
-        System.out.print(bye);
+    public String bye() {
+        String bye = space + " Bye. Hope to see you again soon!\n";
+        return bye;
     }
 
-    public String removeTask(TaskList list, int index, int count) {
-        return (line + "\n" + space + "Noted. I've removed this task:\n" + space + list.items.get(index) + space + "Now you have " + count + " task");
+    public String removeTask(TaskList list, int index) {
+        return ("Noted. I've removed this task:\n" + space + list.items.get(index) + space + "Now you have " + list.count + " task");
     }
 
     public String searchTask() {
-        return (line + "\n" + space + "Here are the matching tasks in your list:\n");
+        return "\n" + space + "Here are the matching tasks in your list:\n";
     }
 
-    public String addTask(TaskList list, int count) {
-        return (line + "\n" + space + " Got it. I've added this task:\n" + space + list.items.get(list.items.size()-1)
-                + space + " Now you have " + count + " task");
+    public String addTask(TaskList list) {
+        return (" Got it. I've added this task:\n" + space + list.items.get(list.items.size()-1)
+                + space + " Now you have " + list.count + " task");
     }
 
-    public void markDone(Item item) {
-        System.out.println(line + "\n" + space + "Nice! I've marked this task as done:\n" + space + item + line);
-    }
-
-    public void throwErr(String err) {
-        throw new IllegalInstructionException(space + err);
-    }
-
-    public void throwDescriptionErr() {
-        throw new IllegalInstructionException(space+"☹ OOPS!!! The description of a task cannot be empty.");
-    }
-
-    public void throwTimeErr() {
-        throw new IllegalInstructionException(space+"☹ OOPS!!! The time/description of a task cannot be empty.");
+    public String markDone(Item item) {
+        return space + "Nice! I've marked this task as done:\n" + space + item;
     }
 
     public void printIOErr() {

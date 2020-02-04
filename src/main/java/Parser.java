@@ -24,59 +24,66 @@ public class Parser {
     /**
      * This method parses user input and executes the required instruction.
      */
-    public void parse(Ui ui, TaskList list, Storage storage, String temp) {
+    public String parse(Ui ui, TaskList list, Storage storage, String temp) {
         try {
             String[] tmp = temp.split(" ");
             String task = append(tmp);
             if (temp.equals("list")) {
-                System.out.println(ui.line + "\n" + list);
+                return ui.space + list.toString();
+            } else if (temp.equals("bye")) {
+                return ui.bye();
             } else if (tmp[0].equals("done") || tmp[0].equals("delete")) {
                 if (tmp.length < 2) {
-                    ui.throwErr("☹ OOPS!!! The index of a task cannot be empty.");
+                    return ("☹ OOPS!!! The index of a task cannot be empty.");
                 } else if (Integer.parseInt(tmp[1]) > list.items.size()) {
-                    ui.throwErr("☹ OOPS!!! The index of a task is out of range.");
+                    return ("☹ OOPS!!! The index of a task is out of range.");
                 }
                 int index = Integer.parseInt(tmp[1]);
                 if (tmp[0].equals("done")) {
                     list.items.get(index - 1).markDone();
                     storage.updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).now(), ui);
+                    return ui.markDone(list.items.get(index-1));
                 } else {
                     storage.updateTxt(list.items.get(index - 1).now(), "", ui);
                     list.delete(index - 1);
+                    return ui.removeTask(list, index);
                 }
             } else if (tmp[0].equals("todo")) {
                 if (task.equals("")) {
-                    ui.throwDescriptionErr();
+                    return "Description cannot be empty";
                 }
                 Todo todo = new Todo(task);
                 list.addItem(todo);
                 storage.addTxt(todo.now(), ui);
+                return ui.addTask(list);
             } else if (tmp[0].equals("event")) {
                 if (task.equals("")) {
-                    ui.throwDescriptionErr();
+                    return "Description cannot be empty";
                 }
                 String[] e = task.split(" /at ");
                 if (e.length < 2) {
-                    ui.throwTimeErr();
+                    return "Time cannot be empty";
                 }
                 Event event = new Event(e[0], LocalDate.parse(e[1]));
                 list.addItem(event);
                 storage.addTxt(event.now(), ui);
+                return ui.addTask(list);
             } else if (tmp[0].equals("deadline")) {
                 if (task.equals("")) {
-                    ui.throwDescriptionErr();
+                    return "Description cannot be empty";
                 }
                 String[] d = task.split(" /by ");
                 if (d.length < 2) {
-                    ui.throwTimeErr();
+                    return "Time cannot be empty";
                 }
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                 list.addItem(ddl);
                 storage.addTxt(ddl.now(), ui);
+                return ui.addTask(list);
             }  else if (tmp[0].equals("find")) {
-                list.search(task);
+                return ui.searchTask() + list.search(task);
             } else {
-                ui.throwErr("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalInstructionException e) {
             System.err.println(e.getMessage());
@@ -87,5 +94,6 @@ public class Parser {
         } catch (DateTimeParseException e) {
             ui.printDateErr();
         }
+        return "Task completed";
     }
 }

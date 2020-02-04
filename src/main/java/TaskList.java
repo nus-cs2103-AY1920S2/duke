@@ -5,11 +5,10 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Item> items = new ArrayList<Item>();
     Ui ui = new Ui();
-    int count = 0;
+    int count;
 
     public TaskList() {
-        this.items = items;
-        this.count = count;
+        this.count = 0;
     }
 
     /**
@@ -18,13 +17,6 @@ public class TaskList {
     public void addItem(Item item) {
         this.items.add(item);
         this.count ++;
-        String response = ui.addTask(this, count);
-        if (this.count > 1) {
-            response += "s";
-        }
-            response += " in the list.\n";
-        response += ui.line;
-        System.out.println(response);
     }
 
     /**
@@ -32,37 +24,33 @@ public class TaskList {
      */
     public TaskList delete(int index) {
         count--;
-        String response = ui.removeTask(this, index, count);
-        if (this.count > 1) {
-            response += "s";
-        }
-        response += " in the list.\n";
-        response += ui.line;
-        System.out.println(response);
         this.items.remove(index);
         return this;
     }
 
-    public void search(String task) {
-        System.out.println(ui.searchTask());
+    public String search(String task) {
+        String temp = "";
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).toString().toLowerCase().contains(task.toLowerCase())) {
-                System.out.print(ui.space + items.get(i));
+                temp += ui.space + items.get(i);
             }
         }
-        System.out.println(ui.line);
+        return temp;
     }
 
     @Override
     public String toString() {
-        String temp = ui.space + " Here are the tasks in your list:\n";
-        for (int i = 0; i < count; i++) {
-            temp += ui.space;
-            temp += " ";
-            temp += Integer.toString(i+1);
-            temp += this.items.get(i);
+        if (count < 1) {
+            return "No current task in the list";
+        } else {
+            String temp = ui.space + " Here are the tasks in your list:\n";
+            for (int i = 0; i < count; i++) {
+                temp += ui.space;
+                temp += " ";
+                temp += Integer.toString(i + 1);
+                temp += this.items.get(i);
+            }
+            return temp;
         }
-        temp += ui.line;
-        return temp;
     }
 }
