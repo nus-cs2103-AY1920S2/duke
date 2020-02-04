@@ -33,11 +33,9 @@ public class Duke extends Application {
     private Ui ui;
     private Parser parser;
 
-    public Duke(){}
-
-    public Duke(String filePath) {
+    public Duke(){
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(System.getProperty("user.dir"));
         parser = new Parser();
         try {
             tasks = new TaskList(storage.loadFromSave());
@@ -45,30 +43,6 @@ public class Duke extends Application {
             ui.showDukeError(e);
             storage.retryLocation(ui.getInput());
         }
-    }
-
-    public void run() {
-        // initialise scanner
-        ui.sayHi();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.getCommand();
-                Command command = parser.parse(input);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showDukeError(e);
-            } catch (DateTimeParseException e) {
-                ui.showDateTimeError();
-            }
-        }
-
-    }
-
-    public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir")).run();
     }
 
     @Override
@@ -138,6 +112,25 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.sayHi()), new ImageView(duke)));
+
+        // while (!isExit) {
+        //     try {
+        //         String input = ui.getCommand();
+        //         Command command = parser.parse(input);
+        //         command.execute(tasks, ui, storage);
+        //         isExit = command.isExit();
+        //     } catch (DukeException e) {
+        //         ui.showDukeError(e);
+        //     } catch (DateTimeParseException e) {
+        //         ui.showDateTimeError();
+        //     }
+        // }
+
+        // Label start = new Label(getResponse(userInput.getText()));
+        // dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
+        //         DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
 
     /**
@@ -161,7 +154,7 @@ public class Duke extends Application {
      * the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+        Label userText = new Label("\nUser: " + userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
@@ -173,6 +166,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "\nDuke heard: " + input; 
     }
 }
