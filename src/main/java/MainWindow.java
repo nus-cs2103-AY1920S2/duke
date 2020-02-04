@@ -1,10 +1,8 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -27,6 +25,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -38,7 +37,7 @@ public class MainWindow extends AnchorPane {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) { // temp change to public
-        return "Duke heard <3: " + input;
+        return "\n" + " 연인 <3: " + input;
     }
 
     /**
@@ -49,6 +48,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = this.getResponse(input); //potential bug
+        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:black");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

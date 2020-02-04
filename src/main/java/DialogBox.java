@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -23,6 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -32,9 +35,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setStyle("-fx-border-color:crismson; -fx-padding:3px;-fx-background-color:skyblue");
         dialog.setText(text);
+        dialog.setTextFill(Color.CRIMSON);
         displayPicture.setImage(img);
+        Circle circle = new Circle(35, 40, 35);
+        displayPicture.setImage(img);
+        displayPicture.setClip(circle);
+        displayPicture.setStyle("-fx-border-color: #ff4567");
     }
 
     /**
@@ -45,6 +53,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        this.setStyle("-fx-background-color:DARKGRAY");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
