@@ -7,15 +7,15 @@ import seedu.duke.exception.DukeIoException;
 
 public class FindCommand extends Command {
 
-    private final String keyword;
+    private final String[] keywords;
 
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String ... keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIoException {
-        TaskList matchedTasks = tasks.find(keyword);
+        TaskList matchedTasks = tasks.find(keywords);
         ui.printMatchedTaskList(matchedTasks);
     }
 }

@@ -67,6 +67,7 @@ class Parser {
 
     private static Command createFindOrTodoCommand(String[] splitInput, String commandString)
             throws DukeEmptyDescriptionException {
+        // TODO
         isSplitInputLengthLargerThanOne(splitInput);
 
         String[] inputWithoutCommand = Arrays.copyOfRange(splitInput, 1, splitInput.length);

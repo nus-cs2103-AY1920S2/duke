@@ -7,7 +7,9 @@ import seedu.duke.task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -112,13 +114,22 @@ public class TaskList {
      * @param keyword Keyword to match.
      * @return Immutable TaskList object.
      */
-    public TaskList find(String keyword) {
+    public TaskList find(String[] keywords) {
         TaskList viewToReturn = new TaskList();
+        Set<Task> taskSet = new HashSet<>();
+
         for (Task task : tasks) {
-            if (task.getTaskDescription().contains(keyword)) {
-                viewToReturn.add(task);
+            for (String keyword : keywords) {
+                if (task.getTaskDescription().contains(keyword)) {
+                    taskSet.add(task);
+                }
             }
         }
+
+        for (Task task : taskSet) {
+            viewToReturn.add(task);
+        }
+
         return viewToReturn;
     }
 }
