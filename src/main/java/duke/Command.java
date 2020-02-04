@@ -3,6 +3,12 @@ package duke;
 public enum Command {
     BYE, FIND, LIST, DONE, DELETE, DEADLINE, EVENT, TODO;
 
+    /**
+     * The Command enum represents the various commands Duke can respond to.
+     * @param cmd The input string
+     * @return A Command enum
+     * @throws InvalidCommandException
+     */
     public static Command getCommand(String cmd) throws InvalidCommandException {
         cmd = cmd.toLowerCase();
         if (cmd.equals("bye")) {

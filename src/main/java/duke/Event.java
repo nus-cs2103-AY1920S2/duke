@@ -11,6 +11,12 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    /**
+     * Constructs a new Event task from a description, duration and status.
+     * @param desc The description of the Event
+     * @param duration The duration of the Event
+     * @param isDone The status of the Event
+     */
     public Event(String desc, LocalDate duration, boolean isDone) {
         super(desc);
         super.setStatus(isDone);
