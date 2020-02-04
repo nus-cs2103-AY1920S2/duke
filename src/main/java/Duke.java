@@ -23,11 +23,7 @@ public class Duke {
     public Duke (String user_name) {
         this.user_name = user_name;
     }
-
-    public void setUserName(String user_name) {
-        this.user_name = user_name;
-    }
-
+    
     private void start() {
         this.taskList = new TaskList();
         this.parser = new Parser();
