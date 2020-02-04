@@ -107,6 +107,10 @@ class Task {
                 + " | "
                 + description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
 
 /**
@@ -273,6 +277,14 @@ class TaskList {
         }
     }
 
+    public void display(ArrayList<Integer> indices) {
+        System.out.println("Here are the matching tasks in your list:");
+
+        for (int i = 0; i < indices.size(); i++) {
+            System.out.println((i + 1) + ". " + list.get(indices.get(i)).toString());
+        }
+    }
+
     public void add(String description, boolean isDone) {
         list.add(new ToDo(description, isDone));
     }
@@ -301,6 +313,19 @@ class TaskList {
 
     public Task delete(int index) {
         return list.remove(index);
+    }
+
+    public void find(String key) {
+        ArrayList<Integer> indices = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            String desc = list.get(i).getDescription();
+            if (desc.contains(key)) {
+                indices.add(i);
+            }
+        }
+
+        display(indices);
     }
 }
 
@@ -428,6 +453,14 @@ class Ui {
                     System.out.println("Error: invalid (out of bounds) or non-integer entered");
                 }
                 break;
+            case "find":
+                if (input.length() > 5) {
+                    String key = input.substring(5);
+                    tasks.find(key);
+                } else {
+                    System.out.println("No search string specified!");
+                }
+                break;
             default:
                 System.out.println("Oops!! I'm sorry, but I don't know what that means :(");
                 break;
@@ -477,7 +510,8 @@ class Parser {
                 !firstWord.equals("list") &&
                 !firstWord.equals("done") &&
                 !firstWord.equals("delete") &&
-                !firstWord.equals("bye")) {
+                !firstWord.equals("bye") &&
+                !firstWord.equals("find")) {
             throw new DukeException();
         }
         else {
@@ -536,7 +570,13 @@ class Parser {
      * @throws DukeException
      */
     public static int getIndex(String input, String type) throws DukeException {
-        int startPos = type.equals("done") ? 5: 7; // type will only either be "done" or "delete"
+        int startPos;
+
+        if (type.equals("done")) {
+            startPos = 5;
+        } else {
+            startPos = 7;
+        }
 
         try {
             String num = input.substring(startPos);
