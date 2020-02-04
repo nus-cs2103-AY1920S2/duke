@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
      * @throws NoSuchDeleteException   If task to be deleted does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws NoNumberDeleteException, NoSuchDeleteException, UnableToSaveException {
         if (inputArr.length < 2) {
             throw new NoNumberDeleteException();
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
                 String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
                 tasks.removeTask(taskToDelete - 1);
                 storage.saveToSave(tasks);
-                ui.reply("Okcan. I will remove this task:\n" + Constant.SPACE + "  " + whichTaskDelete + "\n"
+                return ui.reply("Okcan. I will remove this task:\n" + Constant.SPACE + "  " + whichTaskDelete + "\n"
                         + Constant.SPACE + "But you still have " + tasks.size() + " task(s) in the list.");
             }
         }

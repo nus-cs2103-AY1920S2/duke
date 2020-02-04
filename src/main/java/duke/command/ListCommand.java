@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * @param storage Storage to save tasks in local storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String reply = "";
 
         if (inputArr.length == 1) {
@@ -49,7 +49,7 @@ public class ListCommand extends Command {
                 }
             }
         }
-        ui.reply(reply);
+        return ui.reply(reply);
     }
 
     @Override

@@ -26,9 +26,9 @@ public class CreateTodoCommand extends Command {
      * @throws UnableToSaveException  If unable to save to storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException {
         int arrLength = inputArr.length;
-        String saveReply = "Saving now....:\n     ";
+        String saveReply = "Saving now....\n     ";
         String nameOfEvent = combineString(inputArr, 1, arrLength);
         if (nameOfEvent.equals("")) {
             throw new NoDescriptionException();
@@ -37,7 +37,7 @@ public class CreateTodoCommand extends Command {
         tasks.add(newT);
         saveReply += newT.toString();
         storage.saveToSave(tasks);
-        ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
+        return ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
     }
 
     @Override

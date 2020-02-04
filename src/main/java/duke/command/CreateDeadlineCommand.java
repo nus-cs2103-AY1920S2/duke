@@ -28,7 +28,7 @@ public class CreateDeadlineCommand extends Command {
      * @throws NoDateException        If no date is specified.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws NoDescriptionException, UnableToSaveException, NoDateException {
         int arrLength = inputArr.length;
         int pointer = findIndex("/by", inputArr);
@@ -42,10 +42,10 @@ public class CreateDeadlineCommand extends Command {
         String date = combineString(inputArr, pointer + 1, arrLength);
         Task newD = new Deadline(nameOfEvent, date);
         tasks.add(newD);
-        String saveReply = "Saving now....:\n     ";
+        String saveReply = "Saving now....\n     ";
         saveReply += newD.toString();
         storage.saveToSave(tasks);
-        ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
+        return ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
     }
 
     @Override

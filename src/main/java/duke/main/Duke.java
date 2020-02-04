@@ -41,7 +41,6 @@ public class Duke extends Application {
             tasks = new TaskList(storage.loadFromSave());
         } catch (UnableToLoadException e) {
             ui.showDukeError(e);
-            storage.retryLocation(ui.getInput());
         }
     }
 
@@ -115,22 +114,6 @@ public class Duke extends Application {
 
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.sayHi()), new ImageView(duke)), new Label(Constant.LINE));
 
-        // while (!isExit) {
-        //     try {
-        //         String input = ui.getCommand();
-        //         Command command = parser.parse(input);
-        //         command.execute(tasks, ui, storage);
-        //         isExit = command.isExit();
-        //     } catch (DukeException e) {
-        //         ui.showDukeError(e);
-        //     } catch (DateTimeParseException e) {
-        //         ui.showDateTimeError();
-        //     }
-        // }
-
-        // Label start = new Label(getResponse(userInput.getText()));
-        // dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
-        //         DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
 
     /**
@@ -156,7 +139,20 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label("\nUser: " + userInput.getText());
         
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String response = "";
+
+        try {
+            String input = userInput.getText();
+            Command command = parser.parse(input);
+            response = command.execute(tasks, ui, storage);
+            //isExit = command.isExit();
+        } catch (DukeException e) {
+            response = ui.showDukeError(e);
+        } catch (DateTimeParseException e) {
+            response = ui.showDateTimeError();
+        }
+    
+        Label dukeText = new Label(getResponse(response));
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)), new Label(Constant.LINE),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke)), new Label(Constant.LINE));
         userInput.clear();
@@ -167,6 +163,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "\nDuke heard: " + input; 
+        return "\nDuke: " + input; 
     }
 }

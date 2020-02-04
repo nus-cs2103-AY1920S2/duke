@@ -18,7 +18,7 @@ public class FindCommand extends Command {
      * @param storage Storage to save tasks in local storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String toFind = inputArr[1];
         String reply = "Here are the tasks with the keyword you asked for..";
         int numbering = 1;
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
                 reply += (tasks.getTask(i));
             }
         }
-        ui.reply(reply);
+        return ui.reply(reply);
     }
 
     @Override

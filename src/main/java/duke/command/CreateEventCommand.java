@@ -28,7 +28,7 @@ public class CreateEventCommand extends Command {
      * @throws NoDateTimeException    If no date and time is specified.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws NoDescriptionException, UnableToSaveException, NoDateTimeException {
         int arrLength = inputArr.length;
         int pointer = findIndex("/at", inputArr);
@@ -42,10 +42,10 @@ public class CreateEventCommand extends Command {
         String dateTime = combineString(inputArr, pointer + 1, arrLength);
         Task newE = new Event(nameOfEvent, dateTime);
         tasks.add(newE);
-        String saveReply = "Saving now....:\n     ";
+        String saveReply = "Saving now....\n     ";
         saveReply += newE.toString();
         storage.saveToSave(tasks);
-        ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
+        return ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
     }
 
     @Override
