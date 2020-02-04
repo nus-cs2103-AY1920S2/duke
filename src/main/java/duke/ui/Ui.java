@@ -1,7 +1,8 @@
 package duke.ui;
 
-import java.util.Scanner;
 import duke.exception.DukeException;
+
+import java.util.Scanner;
 
 public class Ui {
     private Scanner scan = new Scanner(System.in);
