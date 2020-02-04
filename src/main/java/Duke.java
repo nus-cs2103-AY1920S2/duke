@@ -89,7 +89,10 @@ class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "["
+                + getStatusIcon()
+                + "] "
+                + description;
     }
 
     /**
@@ -99,7 +102,10 @@ class Task {
      */
     public String convert() {
         int done = isDone ? 1 : 0;
-        return " | " + done + " | " + description;
+        return " | "
+                + done
+                + " | "
+                + description;
     }
 }
 
@@ -121,7 +127,11 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]"
+                + super.toString()
+                + " (at: "
+                + at
+                + ")";
     }
 
     /**
@@ -130,7 +140,10 @@ class Event extends Task {
      * @return a string in the form "| 1 | description | 2020-08-09"
      */
     public String convert() {
-        return "E" + super.convert() + " | " + at;
+        return "E"
+                + super.convert()
+                + " | "
+                + at;
     }
 }
 
@@ -254,7 +267,9 @@ class TaskList {
         System.out.println("Here are the tasks in your list:");
 
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i).toString());
+            System.out.println((i + 1)
+                    + ". "
+                    + list.get(i).toString());
         }
     }
 
@@ -313,7 +328,9 @@ class Ui {
     private void printAdded(TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + tasks.get(tasks.size() - 1).toString());
-        System.out.println("Now you have " + tasks.size() + "tasks in the list.");
+        System.out.println("Now you have "
+                + tasks.size()
+                + "tasks in the list.");
     }
 
     /**
@@ -364,7 +381,6 @@ class Ui {
                         tasks.add('D', description, false, date);
                         printAdded(tasks);
                         tasks.save(storage);
-
                     } catch (Exception e) {
                         System.out.println("Error: incorrect format to add deadline task");
                     }
@@ -381,7 +397,6 @@ class Ui {
                         tasks.add('E', description, false, date);
                         printAdded(tasks);
                         tasks.save(storage);
-
                     } catch (Exception e) {
                         System.out.println("Error: incorrect format to add deadline task");
                     }
