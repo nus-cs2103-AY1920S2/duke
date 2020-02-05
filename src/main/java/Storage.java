@@ -11,8 +11,14 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the list of tasks from data.txt.
+     *
+     * @return ArrayList <Task> This returns the contents of the data.txt file.
+     */
+
     public ArrayList <Task> load() {
-        // returns the list of tasks from the duke.txt
+        // returns the list of tasks from the data.txt
         ArrayList <Task> arr = new ArrayList <Task>();
         try {
             Scanner sc = new Scanner(new File (filePath));
@@ -62,6 +68,12 @@ public class Storage {
 
     }
 
+    /**
+     * Updates the data.txt file with the information provided by the user.
+     * @param dataFile This is the file path for data.txt
+     * @param arr this is the most updated ArrayList <Task>
+     */
+
     public static void fileUpdate(File dataFile, ArrayList <Task> arr) {
         try {
             writeToFile("I love you baby\n");
@@ -74,6 +86,12 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
+
+    /**
+     * Appends a line of strings to the data.txt file.
+     * @param textToAdd This is the line of strings to add to data.txt
+     * @throws IOException On input error
+     */
 
     public static void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter("./" + "data/duke.txt",true);

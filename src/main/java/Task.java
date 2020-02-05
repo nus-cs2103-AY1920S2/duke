@@ -43,6 +43,12 @@ public class Task {
         }
     }
 
+    /**
+     * Processes the user input date into a localdate format.
+     *
+     * @return String This returns the formatted form of the localdate.
+     */
+
     public String getProcessedDate() {
         String dateFormatted = "";
         this.date.split("\\s");

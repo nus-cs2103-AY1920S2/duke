@@ -22,6 +22,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program by writing and loading from data.txt.
+     *
+     */
+
     public void run() {
         Scanner sc = new Scanner(System.in);
         String userInput = "";
