@@ -44,42 +44,12 @@ public class Duke {
                 ui.showBye();
                 break;
             }
-            String commandType = parser.getCommandType(command);
             try {
-                switch (commandType) {
-                case "list":
-                    ui.showList(tasks);
-                    break;
-                case "todo":
-                    String description = parser.todoDescription(command);
-                    ui.showAdded(tasks.addTodo(description), tasks.getLength());
-                    break;
-                case "deadline":
-                    String[] descByWhen = parser.deadlineParams(command);
-                    ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
-                    break;
-                case "event":
-                    String[] descAtWhen = parser.eventParams(command);
-                    ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
-                    break;
-                case "done":
-                    int doneNum = parser.markDoneNum(command);
-                    ui.showMarkedDone(tasks.markDone(doneNum));
-                    break;
-                case "delete":
-                    int deleteNum = parser.deleteNum(command);
-                    ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
-                    break;
-                case "find":
-                    String findWord = parser.findWord(command);
-                    ui.showFound(tasks.find(findWord));
-                    break;
-                default:
-                    throw new DukeUnknownInputException("Sorry but I do not recognise your command.");
-                }
-                storage.updateFile(tasks, tasks.getLength());
+                parser.executedCommand(tasks, command, ui);
             } catch (DukeException e) {
                 ui.showError(e);
+            } finally {
+                storage.updateFile(tasks, tasks.getLength());
             }
         }
     }

@@ -134,4 +134,39 @@ public class Parser {
         }
         return command.substring(5);
     }
+
+    public static void executedCommand(TaskList tasks, String command, Ui ui) {
+        String commandType = getCommandType(command);
+        switch (commandType) {
+        case "list":
+            ui.showList(tasks);
+            break;
+        case "todo":
+            String description = todoDescription(command);
+            ui.showAdded(tasks.addTodo(description), tasks.getLength());
+            break;
+        case "deadline":
+            String[] descByWhen = deadlineParams(command);
+            ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
+            break;
+        case "event":
+            String[] descAtWhen = eventParams(command);
+            ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
+            break;
+        case "done":
+            int doneNum = markDoneNum(command);
+            ui.showMarkedDone(tasks.markDone(doneNum));
+            break;
+        case "delete":
+            int deleteNum = deleteNum(command);
+            ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
+            break;
+        case "find":
+            String findWord = findWord(command);
+            ui.showFound(tasks.find(findWord));
+            break;
+        default:
+            throw new DukeUnknownInputException("Sorry but I do not recognise your command.");
+        }
+    }
 }
