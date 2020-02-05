@@ -1,3 +1,6 @@
+/**
+ * Represents a Task object which description is a String representing the task to do.
+ */
 class ToDo extends Task {
     public ToDo(String task) {
         super(task);

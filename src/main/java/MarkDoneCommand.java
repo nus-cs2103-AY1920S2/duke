@@ -1,3 +1,6 @@
+/**
+ * Represents the Command object that is created when the user inputs the command to mark a particular task as done.
+ */
 public class MarkDoneCommand extends Command {
     private int taskNumber;
 
@@ -6,6 +9,13 @@ public class MarkDoneCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Sets the task in the task list, indicated by taskNumber, as done.
+     * @param tasks TaskList object from the driver Duke object.
+     * @param ui Ui object from the driver Duke object.
+     * @param storage Storage object from the driver Duke object.
+     * @throws DukeException Exception thrown when the task to be marked done does not exist in the task list.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // Mark the task as done

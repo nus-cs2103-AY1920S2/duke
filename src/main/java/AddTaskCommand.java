@@ -1,7 +1,9 @@
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Command object that will be created when the user inputs the command to add a task.
+ */
 public class AddTaskCommand extends Command {
-    private boolean isExit;
     private String input;
 
     public AddTaskCommand(String command, String input) {
@@ -9,6 +11,14 @@ public class AddTaskCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes the command to add a Task object to the task list, by creating a task object from the input attribute of this object.
+     * If the input string is not in the correct format of todo, event, deadline, an error will be thrown.
+     * @param tasks TaskList object from the driver Duke object.
+     * @param ui Ui object from the driver Duke object.
+     * @param storage Storage object from the driver Duke object.
+     * @throws DukeException Exception thrown by the method generateTask if the given input string is of the wrong format.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
           try {
               // create and add the task to the task list
@@ -23,6 +33,12 @@ public class AddTaskCommand extends Command {
           }
     }
 
+    /**
+     * Returns a Task object generated from the input String.
+     * @param input a String of input from the user.
+     * @return a Task object of the type corresponding to the input string that was given by the user.
+     * @throws DukeException If input is not prepended with todo, deadline or event, or if the body of the task is empty.
+     */
     public Task generateTask(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];

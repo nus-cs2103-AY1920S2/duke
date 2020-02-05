@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Task object with a set date to be completed by, denoted by the attribute LocalDate deadline.
+ */
 class Deadline extends Task {
     private LocalDate deadline;
 
@@ -20,6 +23,10 @@ class Deadline extends Task {
 
     }
 
+    /**
+     * Returns the date of the deadline as a String in the format of MMM d yyyy.
+     * @return String of the deadline of the task.
+     */
     public String getDeadline() {
         return this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

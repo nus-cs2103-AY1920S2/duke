@@ -1,3 +1,6 @@
+/**
+ * Represents a Task object with a set location that the event is occurring at, denoted by the attribute String place.
+ */
 class Event extends Task {
     private String place;
 

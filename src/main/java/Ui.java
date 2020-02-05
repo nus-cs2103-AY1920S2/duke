@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Represents an object that handles user input and user interaction through prompts such as welcome and farewell messages,
+ * as well as indicating success of task addition and deletion and flagging to the user when an input of the wrong format is entered.
+ */
 public class Ui {
     private Scanner sc;
 

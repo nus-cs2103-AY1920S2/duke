@@ -1,5 +1,16 @@
+/**
+ * Represents a object that makes sense of the user input into the program.
+ */
 public class Parser {
 
+    /**
+     * Returns a Command object that is generated from the user's input into the program.
+     * The type of Command object that is returned depends on the user's input.
+     * Throws a NullPointerException if the user's input is not of the correct format.
+     * @param input the input String from the user into the program.
+     * @return a Command object based on the user's input.
+     * @throws NullPointerException thrown if the user input is not in the correct format.
+     */
     public Command parse(String input) throws NullPointerException {
         String[] splitInput = input.split(" ");
         String cmd = splitInput[0];
