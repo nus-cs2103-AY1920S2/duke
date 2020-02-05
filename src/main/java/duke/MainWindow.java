@@ -51,11 +51,25 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         Parser parser = new Parser();
         String input = userInput.getText();
-        String response = parser.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        String response;
+        if (input.equals("bye")) {
+            response = ui.ending();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+
+        } else {
+            response = parser.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+
+        }
         userInput.clear();
+
+
     }
 }

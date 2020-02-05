@@ -21,10 +21,11 @@ public class Ui {
      * Print the closing statements
      */
 
-    protected void ending() {
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+    protected String ending() {
+        String output = printLine();
+        output += "Bye. Hope to see you again soon!\n";
+        output += printLine();
+        return output;
     }
 
     /***
