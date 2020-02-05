@@ -6,40 +6,30 @@ import duke.storage.TaskStorage;
 import duke.task.Task;
 import duke.task.TaskDispatch;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Duke extends Application {
+public class Duke {
     // attributes
     private TaskStorage taskStorage;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         try {
             this.ui = new Ui();
-            this.taskStorage = new TaskStorage(filePath);
+            this.taskStorage = new TaskStorage("./data/Storage.txt");
         } catch (FileNotFoundException e) {
-            System.out.println(filePath);
+            System.out.println("./data/Storage.txt");
             System.out.println("File not found");
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("./data/Storage.txt").runDuke();
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     // Carry out Add, List, Done commands if entered by user
@@ -128,5 +118,9 @@ public class Duke extends Application {
                 + "    " + this.taskStorage.getTaskList().get(taskNumber - 1));
         this.taskStorage.deleteFromTaskList(taskNumber);
         System.out.println("    Now you have " + this.taskStorage.getTaskList().size() + " tasks in the list.");
+    }
+
+    public static void main(String[] args) {
+        new Duke().runDuke();
     }
 }
