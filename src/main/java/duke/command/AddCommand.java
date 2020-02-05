@@ -38,7 +38,8 @@ public class AddCommand extends Command {
      * @param description The description of the task.
      * @param details The details specific to the task type.
      */
-    public AddCommand(TaskType type, String description, HashMap<String, Object> details) {
+    public AddCommand(TaskType type, String description,
+            HashMap<String, Object> details) {
         this.type = type;
         this.description = description;
         this.details = details;
@@ -48,7 +49,8 @@ public class AddCommand extends Command {
      * Executes the command. Check for the type of task to be added, and add
      * the relevant task to task list. The current list of tasks are then saved.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
         Task task;
 
         switch (this.type) {
@@ -56,10 +58,12 @@ public class AddCommand extends Command {
             task = new Todo(false, description);
             break;
         case DEADLINE:
-            task = new Deadline(false, description, (LocalDateTime)details.get("datetime"));
+            task = new Deadline(false, description,
+                    (LocalDateTime) details.get("datetime"));
             break;
         case EVENT:
-            task = new Event(false, description, (LocalDateTime)details.get("datetime"));
+            task = new Event(false, description,
+                    (LocalDateTime) details.get("datetime"));
             break;
         default:
             throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);

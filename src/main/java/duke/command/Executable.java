@@ -7,5 +7,6 @@ import duke.task.TaskList;
 
 public interface Executable {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException;
 }

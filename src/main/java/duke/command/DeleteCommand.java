@@ -20,7 +20,8 @@ public class DeleteCommand extends Command {
      * Executes the command and deletes the task with the given index.
      * Then, displays the response to the user.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
         if (index < 1 || index > tasks.getLength()) {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
         }

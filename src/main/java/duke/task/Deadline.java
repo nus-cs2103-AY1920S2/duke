@@ -7,7 +7,13 @@ public class Deadline extends Task {
 
     private LocalDateTime datetime;
 
-    public Deadline(boolean isDone, String description, LocalDateTime datetime) {
+    /**
+     * Contsructor of the deadline object.
+     * @param description The task description.
+     * @param deadline  The deadline date/time.
+     */
+    public Deadline(boolean isDone, String description,
+            LocalDateTime datetime) {
         super(isDone, description);
         this.datetime = datetime;
     }
@@ -18,7 +24,9 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(),
-                datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")));
+        DateTimeFormatter format = 
+                DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+        return String.format("[D]%s (by: %s)", super.toString(), 
+                datetime.format(format));
     }
 }
