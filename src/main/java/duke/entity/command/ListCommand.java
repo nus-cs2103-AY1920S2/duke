@@ -1,8 +1,11 @@
-package duke.entity.command;
+package main.java.duke.entity.command;
 
-import duke.entity.TaskList;
-import duke.handler.Storage;
-import duke.handler.Ui;
+import javafx.collections.ObservableList;
+import main.java.duke.entity.TaskList;
+import main.java.duke.gui.TaskModel;
+import main.java.duke.gui.view.UiController;
+import main.java.duke.handler.Storage;
+import main.java.duke.handler.Ui;
 
 public class ListCommand extends Command {
 
@@ -18,5 +21,9 @@ public class ListCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    public String execute(TaskList taskList, Ui ui, Storage storage, ObservableList<TaskModel> taskData, UiController uiController) {
+        return uiController.listAllTasks(taskList);
     }
 }

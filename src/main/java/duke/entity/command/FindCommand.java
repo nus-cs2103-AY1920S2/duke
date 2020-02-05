@@ -1,9 +1,12 @@
-package duke.entity.command;
+package main.java.duke.entity.command;
 
-import duke.entity.TaskList;
-import duke.entity.task.Task;
-import duke.handler.Storage;
-import duke.handler.Ui;
+import javafx.collections.ObservableList;
+import main.java.duke.entity.TaskList;
+import main.java.duke.entity.task.Task;
+import main.java.duke.gui.TaskModel;
+import main.java.duke.gui.view.UiController;
+import main.java.duke.handler.Storage;
+import main.java.duke.handler.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
 public class FindCommand extends Command {
 
     private String keyword;
-
+    private List<Task> result;
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
@@ -20,7 +23,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasks();
-        List<Task> result = new ArrayList<>();
+        result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getTaskName().contains(keyword)) {
                 result.add(tasks.get(i));
@@ -32,5 +35,10 @@ public class FindCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    public String execute(TaskList taskList, Ui ui, Storage storage, ObservableList<TaskModel> taskData, UiController uiController) {
+        this.execute(taskList, ui, storage);
+        return uiController.listFoundTasks(result);
     }
 }
