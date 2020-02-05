@@ -4,6 +4,8 @@ package duchess.task;
  * The {@code ToDo} class extends from {@code Task}.
  */
 public class ToDo extends Task {
+    private static final String TO_DO_SYMBOL = "[T]";
+
     /**
      * Initialises the {@code ToDo} instance with its description.
      *
@@ -26,6 +28,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TO_DO_SYMBOL + super.toString();
     }
 }

@@ -5,6 +5,7 @@ package duchess.task;
  * the setting of a {@code String timeFrame}.
  */
 public class Event extends Task {
+    private static final String EVENT_SYMBOL = "[E]";
     private String timeFrame;
 
     /**
@@ -43,6 +44,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.timeFrame + ")";
+        return EVENT_SYMBOL + super.toString() + " (at: " + this.timeFrame + ")";
     }
 }

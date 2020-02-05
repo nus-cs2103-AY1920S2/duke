@@ -4,17 +4,15 @@ package duchess.task;
  * The {@code Task} class creates a task with a description and isCompleted state.
  */
 public class Task {
-    private boolean isCompleted;
-
-
-    private String description;
+    protected boolean isCompleted;
+    protected String description;
 
     /**
      * Initialises the {@code Task} instance with its description.
      *
      * @param description Written description of the task.
      */
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isCompleted = false;
     }
@@ -25,7 +23,7 @@ public class Task {
      * @param description Written description of the task.
      * @param isCompleted {@code boolean} value indicating whether the task is completed.
      */
-    Task(String description, boolean isCompleted) {
+    public Task(String description, boolean isCompleted) {
         this.description = description;
         this.isCompleted = isCompleted;
     }

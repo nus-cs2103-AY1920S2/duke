@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
  * the setting of a {@code LocalDateTime deadline}.
  */
 public class Deadline extends Task {
+    private static final String DEADLINE_SYMBOL = "[D]";
     private LocalDateTime deadline;
 
     /**
@@ -47,8 +48,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + DateTimeStringFormatter.formatDateTime(this.deadline, this.isCompleted())
+        return DEADLINE_SYMBOL + super.toString() + " (by: "
+                + DateTimeStringFormatter.formatDateTime(this.deadline, this.isCompleted)
                 + ")";
     }
 }
