@@ -65,7 +65,7 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("/Users/HuiTing/duke/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
