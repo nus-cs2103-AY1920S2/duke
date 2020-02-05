@@ -56,11 +56,14 @@ public class Ui {
     }
 
     public void flagWrongCommand() {
-        String sorryStr = "Sorry! You've entered a wrong command, please try again!\n";
+        this.printLine();
+        String sorryStr = "\t Sorry! You've entered a wrong command, please try again!\n";
         String helpStr = "\t List of commands: \n" + "\t  todo\n" + "\t  event\n"
                 + "\t  deadline\n" + "\t  list\n";
         System.out.println(sorryStr + helpStr);
+        this.printLine();
     }
+
 
     public void printLine() {
         System.out.println("\t____________________________________________________________");

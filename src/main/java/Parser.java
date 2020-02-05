@@ -31,6 +31,9 @@ public class Parser {
             int taskNumberDelete = Integer.parseInt(splitInput[1]);
             command = new DeleteCommand(cmd, taskNumberDelete);
             break;
+        case "find":
+            command = new FindCommand(input);
+            break;
         case "todo":
         case "deadline":
         case "event":
