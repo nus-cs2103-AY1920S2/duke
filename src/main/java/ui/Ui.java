@@ -29,24 +29,22 @@ public class Ui {
     /**
      * Prints a huge Duke logo and greets user.
      */
-    public void showWelcome() {
-        System.out.println(LOGO);
-        System.out.println(WELCOME_MESSAGE);
-        showLine();
+    public String getWelcomeMessage() {
+        return LOGO + "\n" + WELCOME_MESSAGE;
     }
 
     /**
      * Prints a divider to for better visuals.
      */
-    public void showLine() {
-        System.out.println(DIVIDER);
+    public String getLine() {
+        return DIVIDER;
     }
 
     /**
      * Bids user farewell.
      */
-    public void showExit() {
-        System.out.println(EXIT_MESSAGE);
+    public String getExitMessage() {
+        return EXIT_MESSAGE;
     }
 
     /**

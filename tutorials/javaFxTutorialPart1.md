@@ -51,7 +51,7 @@ dependencies {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Create a new `HelloWorld.java` class in the `duke.seedu` package. Have the class extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Create a new `Launcher.java` class in the `duke.seedu` package. Have the class extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -59,7 +59,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class HelloWorld extends Application {
+public class Launcher extends Application {
 
     public static void main(String[] args) {
         launch();
@@ -80,13 +80,13 @@ Note how we have created a `Label` to contain the text that we want to show. We 
 
 Run the program and you should see something like this:
 
-![Hello World](assets/HelloWorld.png) 
+![Hello World](assets/Launcher.png) 
 
 Congratulations! You have created your first GUI application!
 
 ## Exercises
 
-1. We mentioned that `Node`s are the fundamental building blocks of JavaFX and used a `Label` as our root node in the HelloWorld application.
+1. We mentioned that `Node`s are the fundamental building blocks of JavaFX and used a `Label` as our root node in the Launcher application.
    1. What are some of the other types of `Node`s?
    1. How does JavaFX group them?
 

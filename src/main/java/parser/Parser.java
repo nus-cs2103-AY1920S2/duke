@@ -13,29 +13,32 @@ public class Parser {
      * @param text String of text describing our command.
      * @param tasks The existing list of tasks.
      */
-    public void handleTaskCommand(String text, TaskList tasks) {
+    public String handleTaskCommand(String text, TaskList tasks) {
         String[] textArray = text.split(" ");
         String instruction = textArray[0];
+        String response = "";
         try {
             if (instruction.equals("list")) {
-                tasks.printTaskList();
+                return tasks.getTasksAsString();
             } else if (instruction.equals("done")) {
-                tasks.setDone(textArray[1]);
+                return tasks.setDone(textArray[1]);
             } else if (instruction.equals("delete")) {
-                tasks.deleteTask(textArray[1]);
+                return tasks.deleteTask(textArray[1]);
             } else if (instruction.equals("find")) {
-                tasks.getListOfMatch(textArray[1]).printTaskList();
+                tasks.getListOfMatch(textArray[1]).getTasksAsString();
             } else if ((instruction.equals("todo")
                     || instruction.equals("deadline")
                     || instruction.equals("event"))) {
                 tasks.addNewTask(textArray);
+                return "OK. Added your task.";
             } else {
                 throw new InvalidInstructionException("You have entered invalid input.");
             }
         } catch (InvalidInstructionException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (InvalidFormatException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
+        return response;
     }
 }

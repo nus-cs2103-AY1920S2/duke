@@ -46,12 +46,11 @@ public class TaskList {
      * Marks a task as done.
      * @param num Position of a task in the list.
      */
-    public void setDone(String num) {
+    public String setDone(String num) {
         try {
             Task completedTask = this.tasks.get(Integer.parseInt(num) - 1);
             completedTask.isDone = true;
-            System.out.print("Nice, I've marked this as done:");
-            System.out.println(completedTask);
+            return "Nice, I've marked this as done: " + completedTask;
         } catch (Exception e) {
             throw new InvalidFormatException("Enter \"done number\", make sure number exists in list!");
         }
@@ -61,12 +60,10 @@ public class TaskList {
      * Removes an existing task from our list.
      * @param num Position of a task in the list.
      */
-    public void deleteTask(String num) {
+    public String deleteTask(String num) {
         try {
             Task deletedTask = this.tasks.remove(Integer.parseInt(num) - 1);
-            System.out.print("Deleted: ");
-            System.out.println(deletedTask);
-            System.out.format("You now have %d tasks in the list\n", getTaskCount());
+            return "Deleted:\n" + deletedTask + "\nYou now have " + getTaskCount() + " tasks in the list";
         } catch (Exception e) {
             throw new InvalidFormatException("Enter \"delete number\", make sure number exists in list!");
         }
@@ -76,16 +73,18 @@ public class TaskList {
      * Prints all our existing tasks, and their details.
      * Behavior when tasks is empty depends on whether the list was created from loading file.
      */
-    public void printTaskList() {
+    public String getTasksAsString() {
         if (this.tasks.isEmpty()) {
-            System.out.println(
+            return (
                     isLoadedList
                     ? "Nothing at the moment, you're all good."
                     : "No existing tasks has description that fits the keyword.");
         } else {
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < this.tasks.size(); i++) {
-                System.out.format("%s." + this.tasks.get(i) + '\n', String.valueOf(i + 1));
+                sb.append(String.valueOf(i + 1) + " " + this.tasks.get(i));
             }
+            return sb.toString();
         }
     }
 
