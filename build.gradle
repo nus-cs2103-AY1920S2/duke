@@ -48,18 +48,21 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 apply plugin: 'java'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'Duke'
+        attributes 'Main-Class': 'Launcher'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
-
-run {
-    standardInput = System.in
-}
+//
+//run {
+//    standardInput = System.in
+//}
