@@ -9,10 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -21,7 +22,7 @@ public class ChatBox extends HBox {
     private static Image BOT_IMAGE;
 
     @FXML
-    private Label text;
+    private Text text;
     @FXML
     private ImageView displayPicture;
 
@@ -44,7 +45,7 @@ public class ChatBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        // give this ChatBox its text and image
         this.text.setText(text);
         this.displayPicture.setImage(img);
     }
