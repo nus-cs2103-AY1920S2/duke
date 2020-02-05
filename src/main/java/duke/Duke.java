@@ -11,6 +11,14 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object given the name of the bot, 
+     * and the save file path. New ui will be instantiated from
+     * the name, and storage will be instantiated form the file
+     * path. The tasklist will obtain the saved task, if available.
+     * @param botName The name of the bot.
+     * @param filePath The path of the save file.
+     */
     public Duke(String botName, String filePath) {
         ui = new Ui(botName);
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot with an interface.
+     */
     public void run() {
         ui.showWelcome();
         ui.showMessage(Message.GREET);

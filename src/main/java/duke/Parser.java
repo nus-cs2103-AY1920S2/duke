@@ -15,6 +15,12 @@ import duke.task.TaskType;
 
 public class Parser {
 
+    /**
+     * Parses a string into LocalDateTime object.
+     * @param datetime The string to be parsed.
+     * @return A LocalDateTime object.
+     * @throws DukeException Error when parsing the date.
+     */
     static LocalDateTime parseDate(String datetime) throws DukeException {
         try {
             return LocalDateTime.parse(datetime.replace(' ', 'T'));
@@ -23,6 +29,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses some details to obtain an AddCommand object of todo type.
+     * @param details The details of the command.
+     * @return An AddCommand object with the details.
+     * @throws DukeException Error when parsing the todo.
+     */
     static Command parseTodo(String details) throws DukeException {
         if (details.length() <= 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
@@ -31,6 +43,12 @@ public class Parser {
         return new AddCommand(TaskType.TODO, details);
     }
 
+    /**
+     * Parses some details to obtain an AddCommand object of deadline type.
+     * @param details The details of the command.
+     * @return An AddCommand object with the details.
+     * @throws DukeException Error when parsing the deadline.
+     */
     static Command parseDeadline(String details) throws DukeException {
         if (details.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
@@ -56,6 +74,12 @@ public class Parser {
         return new AddCommand(TaskType.DEADLINE, description, values);
     }
 
+    /**
+     * Parses some details to obtain an AddCommand object of event type.
+     * @param details The details of the command.
+     * @return An AddCommand object with the details.
+     * @throws DukeException Error when parsing the event.
+     */
     static Command parseEvent(String details) throws DukeException {
         if (details.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
@@ -81,6 +105,12 @@ public class Parser {
         return new AddCommand(TaskType.DEADLINE, description, values);
     }
 
+    /**
+     * Parses some details to obtain a MarkCommand object.
+     * @param details The details of the command.
+     * @return A MarkCommand with an index in the list to be marked.
+     * @throws DukeException Error when parsing the done command.
+     */
     static Command parseDone(String details) throws DukeException {
         int index;
 
@@ -97,6 +127,12 @@ public class Parser {
         return new MarkCommand(index);
     }
 
+    /**
+     * Parses some details to obtain a DeleteCommand object.
+     * @param details The details of the command.
+     * @return A DeleteCommand with an index in the list to be deleted.
+     * @throws DukeException Error when parsing the delete command.
+     */
     static Command parseDelete(String details) throws DukeException {
         int index;
 
@@ -113,6 +149,12 @@ public class Parser {
         return new DeleteCommand(index);
     }
 
+    /**
+     * Parses the user command to return the appropriate Command object.
+     * @param userCommand The raw command from the user.
+     * @return A Command object which represents the user's command.
+     * @throws DukeException Error when parsing the command.
+     */
     public static Command parse(String userCommand) throws DukeException {
 
         String instruction = "";

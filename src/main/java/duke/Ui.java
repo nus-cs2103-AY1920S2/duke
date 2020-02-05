@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * The user interface of the application. Displays messages to the user.
+ */
 public class Ui {
 
     private String botName;
@@ -25,22 +28,39 @@ public class Ui {
         System.out.println("Hello from\n" + logo + comment);
     }
 
+    /**
+     * Displays a response message from the Duke bot.
+     * @param message The response message.
+     */
     public void showMessage(String message) {
         System.out.println(botName + ": " + message);
     }
 
+    /**
+     * Displays the prompt before user enters command.
+     */
     public void showPrompt() {
         System.out.print("You: ");
     }
 
+    /**
+     * Displays a new line.
+     */
     public void newLine() {
         System.out.println();
     }
 
+    /**
+     * Reads a line of command from the input.
+     * @return the String of the command read.
+     */
     public String readCommand() {
         return in.nextLine().strip();
     }
 
+    /**
+     * Closes the scanner.
+     */
     public void close() {
         in.close();
     }
