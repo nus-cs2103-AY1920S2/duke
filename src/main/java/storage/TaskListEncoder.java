@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListEncoder {
-    static final String separator = " | ";
+    static final String SEPARATOR = " | ";
+    static final String FINISHED_STATUS = "1";
+    static final String UNFINISHED_STATUS = "0";
 
     public static List<String> encodeTask(TaskList taskList) {
         final List<String> encodedPersons = new ArrayList();
@@ -21,13 +23,13 @@ public class TaskListEncoder {
     private static String encodeTaskToString(Task task) {
         final StringBuilder taskStringBuilder = new StringBuilder();
 
-        taskStringBuilder.append(separator);
+        taskStringBuilder.append(SEPARATOR);
 
         taskStringBuilder.append(task.getTaskType());
-        taskStringBuilder.append(separator);
-        taskStringBuilder.append(task.isDone() ? "1" : "0");
-        taskStringBuilder.append(separator);
-        taskStringBuilder.append(String.join(separator, task.getDetails()));
+        taskStringBuilder.append(SEPARATOR);
+        taskStringBuilder.append(task.isDone() ? FINISHED_STATUS : UNFINISHED_STATUS);
+        taskStringBuilder.append(SEPARATOR);
+        taskStringBuilder.append(String.join(SEPARATOR, task.getDetails()));
 
         return taskStringBuilder.toString();
     }

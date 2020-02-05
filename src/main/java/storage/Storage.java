@@ -1,6 +1,9 @@
 package main.java.storage;
 
 import main.java.exceptions.InvalidStorageFilePathException;
+import main.java.exceptions.NoDescriptionException;
+import main.java.exceptions.StorageOperationException;
+import main.java.model.Task;
 import main.java.model.TaskList;
 
 import java.io.IOException;
@@ -32,5 +35,14 @@ public class Storage {
     public void save(TaskList taskList) throws IOException{
         List<String> encodedTaskList = TaskListEncoder.encodeTask(taskList);
         Files.write(path, encodedTaskList);
+    }
+
+    public TaskList load() throws StorageOperationException, IOException, NoDescriptionException {
+        //TODO: throw new exception
+        if (!Files.exists(path) || !Files.isRegularFile(path)) {
+            return new TaskList();
+        }
+
+        return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
     }
 }

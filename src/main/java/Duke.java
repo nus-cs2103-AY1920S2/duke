@@ -5,6 +5,7 @@ import main.java.Parser.ExitCommand;
 import main.java.Parser.Parser;
 import main.java.exceptions.InvalidStorageFilePathException;
 import main.java.exceptions.NoCommandException;
+import main.java.exceptions.StorageOperationException;
 import main.java.model.TaskList;
 
 
@@ -36,15 +37,21 @@ public class Duke {
     private void start() {
         this.ui = new Ui();
         try {
-            this.taskList = new TaskList();
             this.parser = new Parser();
             this.storage = new Storage();
+            this.taskList = storage.load();
             ui.askForName();
             ui.greet();
         } catch (InvalidStorageFilePathException e) {
             ui.printErrorMessage(e.getMessage());
-
             throw new RuntimeException(e);
+        } catch(StorageOperationException soe) {
+            ui.printErrorMessage(soe.getMessage());
+        } catch(IOException ioe) {
+            ui.printErrorMessage(ioe.getMessage());
+            throw new RuntimeException(ioe);
+        } catch (NoDescriptionException nde) {
+            ui.printErrorMessage(nde.getMessage());
         }
     }
 
