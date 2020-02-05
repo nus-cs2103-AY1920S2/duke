@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<javafx.scene.layout.HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ChatBox">
+  <children>
+    <Label fx:id="dialog" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non feugiat massa. Etiam sed tincidunt tellus, non pellentesque nunc. Donec aliquam porttitor interdum. Cras est risus, ultrices a est sed, finibus pellentesque est. Cras ut mattis erat. Duis eget ante turpis. Praesent a vehicula orci. Etiam dolor erat, consectetur semper ultrices eu, luctus et quam. Nullam vel ullamcorper purus, ac tempor elit. Praesent nec ornare eros, id congue lorem. Mauris at lorem volutpat dui finibus sagittis nec nec purus. Cras at auctor ex. Sed faucibus tincidunt eros. Nam tristique, nibh cursus dignissim tempus, felis risus maximus ipsum, sit amet semper nibh dui ac ex. Praesent ornare non massa eget imperdiet. Phasellus ultrices feugiat tortor, at malesuada odio laoreet eu." wrapText="true" />
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/UserPlaceholder.jpg" />
+         </image></ImageView>
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+  </padding>
+</javafx.scene.layout.HBox>
