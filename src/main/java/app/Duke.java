@@ -21,6 +21,7 @@ public final class Duke {
      * Goodbye message that is printed right before the program exits
      */
     public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
+    public static final String UNEXPECTED_ERROR_MESSAGE = "Caught some other exception! Notify developer!";
 
     private CommandManager commandManager;
     private TaskManager taskManager;
@@ -55,7 +56,7 @@ public final class Duke {
             } catch (BaseException e) {
                 console.renderError(e.getMessage());
             } catch (Exception e) {
-                console.renderError("Caught some other exception! Notify developer!");
+                console.renderError(UNEXPECTED_ERROR_MESSAGE);
                 console.renderError(e.getMessage());
             }
         }
