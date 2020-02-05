@@ -49,11 +49,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         sb.append("Below is your task list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append("\t");
-            sb.append(i + 1);
-            sb.append(".");
-            sb.append(tasks.get(i));
-            sb.append("\n");
+            sb.append("\t").append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
         System.out.print(sb);
         printSeparator();
@@ -106,10 +102,9 @@ public class TaskList {
             if (taskNum < 1 || taskNum > size) {
                 throw new InvalidIndexException(taskNum, size);
             }
-            sb.append("Nice! I've marked this task as done:\n\t");
             Task t = tasks.get(taskNum - 1);
             t.markAsDone();
-            sb.append(t);
+            sb.append("Nice! I've marked this task as done:\n\t").append(t);
             System.out.println(sb);
             printSeparator();
         } else {
@@ -196,8 +191,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(temp[1])) {
-                sb.append(tasks.get(i));
-                sb.append("\n\t");
+                sb.append(tasks.get(i)).append("\n\t");
             }
         }
         System.out.println(sb.toString().trim());

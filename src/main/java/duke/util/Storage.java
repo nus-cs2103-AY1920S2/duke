@@ -118,11 +118,7 @@ public class Storage {
      */
     protected void updateData() throws IOException {
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (i != 0) {
-                saveTask(this.tasks.get(i), true);
-            } else {
-                saveTask(this.tasks.get(i), false);
-            }
+            saveTask(this.tasks.get(i), i != 0);
         }
     }
 }
