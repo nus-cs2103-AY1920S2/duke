@@ -1,4 +1,5 @@
-import javafx.application.Application; import javafx.scene.Scene;
+import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,16 +33,15 @@ public class Duke extends Application {
     private String fileLoc;
     private File file;
 
-    //  private Image user = new Image(this.getClass().getResourceAsStream("/src/main/resources/images/DaUser.png"));
-
-    //  private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.png"));
+    private Image user;
+    private Image duke;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
     }
 
@@ -89,7 +90,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         listing = new ArrayList<>();
@@ -114,6 +115,9 @@ public class Duke extends Application {
             System.out.println(e.getMessage());
         }
 
+        user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+
+        duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
         dialogContainer.getChildren().add(getDialogLabel("Hello! I'm Duke\nWhat can I do for you?"));
 
@@ -153,14 +157,39 @@ public class Duke extends Application {
         }
     }
 
+    private boolean isSubstringEqual(String oriString, String checkString) {
+        return (oriString.substring(0, Math.min(oriString.length(), checkString.length())).equals(checkString));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
     private int handleUserInput() {
 
         String curText = userInput.getText();
         int needExit = 0;
 
-        boolean isTodo = false, isDeadline = false, isEvent = false;
+        boolean isTodo = false;
+        boolean isDeadline = false;
+        boolean isEvent = false;
 
-        dialogContainer.getChildren().add(getDialogLabel(curText));
+        Label userText = new Label(userInput.getText());
+        //Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().add( new DialogBox(userText, new ImageView(user)));
+        //dialogContainer.getChildren().add(getDialogLabel(curText));
+        userInput.clear();
         try {
             if (curText.equals("bye")) {
 
@@ -188,8 +217,8 @@ public class Duke extends Application {
                 curText += listing.get(taskNum).done();
 
             } else if ((isTodo = isSubstringEqual(curText, "todo")) ||
-                    (isDeadline = isSubstringEqual(curText, "deadline")) ||
-                    (isEvent = isSubstringEqual(curText, "event"))) {
+                (isDeadline = isSubstringEqual(curText, "deadline")) ||
+                (isEvent = isSubstringEqual(curText, "event"))) {
 
                 //          add task to do
 
@@ -201,7 +230,7 @@ public class Duke extends Application {
                         if (curText.equals("")) {
                             throw new Exception();
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         throw new DukeException("☹ OOPS!!! The description of a " + tmp.getClass().getSimpleName() + " is not well formatted.");
                     }
                 } else {
@@ -233,11 +262,14 @@ public class Duke extends Application {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
-            dialogContainer.getChildren().add(getDialogLabel(curText));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(curText), new ImageView(duke)));
+            //dialogContainer.getChildren().add(getDialogLabel(curText));
         } catch (DukeException e) {
-            dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+            //dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
         } catch (Exception e) {
-            dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
+//            dialogContainer.getChildren().add(getDialogLabel( new DialogBox(new Label(e.getMessage()), new ImageView(duke))));
         } finally {
             try {
                 FileWriter fileWriter = new FileWriter(fileLoc);
@@ -246,30 +278,20 @@ public class Duke extends Application {
                 }
                 fileWriter.close();
             } catch (IOException e) {
-                dialogContainer.getChildren().add(getDialogLabel(e.getMessage()));
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
+//                dialogContainer.getChildren().add(new DialogBox(getDialogLabel(e.getMessage()), new ImageView(duke)));
+//                dialogContainer.getChildren().add(getDialogLabel( new DialogBox(new Label(e.getMessage()), new ImageView(duke))));
             }
-            userInput.clear();
         }
 
         return needExit;
     }
-
-    private boolean isSubstringEqual(String oriString, String checkString){
-        return (oriString.substring(0, Math.min(oriString.length(), checkString.length())).equals(checkString));
-    }
-
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 }
