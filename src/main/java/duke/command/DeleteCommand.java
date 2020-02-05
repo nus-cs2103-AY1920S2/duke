@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
             //print success message
             return String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
-                    + "I have successfully eradicated this task:\n    %s\n"
+                    + "I have successfully eradicated this task:\n  %s\n"
                     + "Now you have %d tasks in the list.\n", taskToDelete, tasks.getSize());
         } catch (InvalidCommandException e) {
             return e.getMessage();

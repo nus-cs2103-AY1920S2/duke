@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
 
             //print success message
             return String.format("Nice! I've marked this task as done:\n"
-                    + "%s\n" + "Hope we get loads of Eris for this!\n", tasks.getTask(index));
+                    + "  %s\n" + "Hope we get loads of Eris for this!\n", tasks.getTask(index));
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
