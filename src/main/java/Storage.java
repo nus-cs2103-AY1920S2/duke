@@ -1,11 +1,17 @@
-import java.io.*;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 /**
  * This class loads, stores and updates user's todo-list in a local txt file.
  */
+
 public class Storage {
-    public Storage() {}
+    public Storage() {
+    }
 
     /**
      * This method add a new item to the txt file.
@@ -17,7 +23,7 @@ public class Storage {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            ui.printIOErr();
+            ui.printIOerr();
         }
     }
 
@@ -62,7 +68,7 @@ public class Storage {
         } catch (DateTimeParseException e) {
             ui.printDateErr();
         } catch (IOException e) {
-            ui.printIOErr();
+            ui.printIOerr();
         }
         return list;
     }
@@ -86,7 +92,7 @@ public class Storage {
             fileOut.write(inputStr.getBytes());
             fileOut.close();
         } catch (IOException e) {
-            ui.printIOErr();
+            ui.printIOerr();
         }
     }
 }

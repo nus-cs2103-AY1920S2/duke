@@ -3,8 +3,10 @@ import java.time.format.DateTimeFormatter;
 /**
  * This class deals with events with a specific date.
  */
+
 public class Event extends Item {
     LocalDate date;
+
     Event(String name, LocalDate date) {
         super(name, false);
         this.date = date;
@@ -15,21 +17,26 @@ public class Event extends Item {
         this.date = date;
     }
 
+    /**
+     * Returns the string of the event item.
+     */
     public String toString() {
-        String temp = "   [E]" + super.toString() + " (at: "+ date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")\n";
+        String temp = "   [E]" + super.toString() + " (at: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")\n";
         return temp;
     }
 
     /**
-     * This method returns the string before it is marked done, used for string substitution in the txt file when it is marked done.
+     * Returns the string before it is marked done, used for string substitution
+     * in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [E][✗] " + super.getName() + " (at: "+ date + ")\n";
+        String temp = "   [E][✗] " + super.getName() + " (at: " + date + ")\n";
         return temp;
     }
 
     /**
-     * This method returns the string corresponds to the current item.
+     * Returns the string corresponds to the current item.
      */
     public String now() {
         String temp = "   [E]" + super.toString() + " (at: " + date + ")\n";

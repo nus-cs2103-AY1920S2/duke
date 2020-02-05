@@ -3,7 +3,9 @@
  */
 public class Ui {
     String space = "     ";
-    public Ui() {}
+
+    public Ui() {
+    }
 
     /**
      * This method prints the greeting string at the start of the program.
@@ -13,9 +15,14 @@ public class Ui {
         return greeting;
     }
 
+    /**
+     * This method prints the string for instruction.
+     */
     public String instruction() {
-        String instruction = "Try add a task by:\n" + space + "1. todo xxxx\n" + space + "2. deadline xxxx /by YYYY-MM-DD\n"
-                + space + "3. event xxxx /at YYYY-MM-DD\n" + "or enter 'list' to display all items\n" +"or 'delete/done index' for deletion/marked as done\n"
+        String instruction = "Try add a task by:\n" + space + "1. todo xxxx\n" + space
+                + "2. deadline xxxx /by YYYY-MM-DD\n"
+                + space + "3. event xxxx /at YYYY-MM-DD\n" + "or enter 'list' to display all items\n"
+                + "or 'delete/done index' for deletion/marked as done\n"
                 + "or find xxxx for search";
         return instruction;
     }
@@ -29,7 +36,8 @@ public class Ui {
     }
 
     public String removeTask(TaskList list, int index) {
-        return ("Noted. I've removed this task:\n" + space + list.items.get(index) + space + "Now you have " + list.count + " task");
+        return ("Noted. I've removed this task:\n" + space + list.items.get(index) + space
+                + "Now you have " + list.count + " task");
     }
 
     public String searchTask() {
@@ -37,7 +45,7 @@ public class Ui {
     }
 
     public String addTask(TaskList list) {
-        return (" Got it. I've added this task:\n" + space + list.items.get(list.items.size()-1)
+        return (" Got it. I've added this task:\n" + space + list.items.get(list.items.size() - 1)
                 + space + " Now you have " + list.count + " task");
     }
 
@@ -45,16 +53,16 @@ public class Ui {
         return space + "Nice! I've marked this task as done:\n" + space + item;
     }
 
-    public void printIOErr() {
-        System.err.println(space+"☹ OOPS!!! The format of IO is wrong.");
+    public void printIOerr() {
+        System.err.println(space + "☹ The format of io is wrong.");
     }
 
     public void printDateErr() {
-        System.err.println(space+"☹ OOPS!!! The format of date is wrong (yyyy-MM-dd).");
+        System.err.println(space + "☹ OOPS!!! The format of date is wrong (yyyy-MM-dd).");
     }
 
     public void printLoad() {
-        System.out.println(space+"Past data successfully loaded.");
+        System.out.println(space + "Past data successfully loaded.");
     }
     
     public void printIndexErr() {

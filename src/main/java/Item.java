@@ -5,11 +5,15 @@ public abstract class Item {
     Ui ui = new Ui();
     private String name;
     private boolean done;
+
     Item(String name, boolean done) {
         this.name = name;
         this.done = done;
     }
 
+    /**
+     * Returns a string representing the item.
+     */
     public String toString() {
         String temp = "[";
         if (this.done) {
@@ -17,10 +21,13 @@ public abstract class Item {
         } else {
             temp += "✗";
         }
-        temp += "] "+this.name;
+        temp += "] " + this.name;
         return temp;
     }
 
+    /**
+     * Returns the item after being marked as done.
+     */
     public Item markDone() {
         this.done = true;
         ui.markDone(this);

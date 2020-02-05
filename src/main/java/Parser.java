@@ -4,11 +4,13 @@ import java.time.format.DateTimeParseException;
 /**
  * This class parses user's input to a command.
  */
+
 public class Parser {
-    public Parser() {}
+    public Parser() {
+    }
 
     /**
-     * This method returns the appended string without the first word in the input.
+     * Returns the appended string without the first word in the input.
      */
     public String append(String[] tmp) {
         String task = "";
@@ -42,7 +44,7 @@ public class Parser {
                 if (tmp[0].equals("done")) {
                     list.items.get(index - 1).markDone();
                     storage.updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).now(), ui);
-                    return ui.markDone(list.items.get(index-1));
+                    return ui.markDone(list.items.get(index - 1));
                 } else {
                     storage.updateTxt(list.items.get(index - 1).now(), "", ui);
                     list.delete(index - 1);
@@ -90,7 +92,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             ui.printIndexErr();
         } catch (IOException e) {
-            ui.printIOErr();
+            ui.printIOerr();
         } catch (DateTimeParseException e) {
             ui.printDateErr();
         }

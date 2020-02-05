@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -23,6 +24,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
 
+
+    /**
+     * Initialize the dialogBox.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -31,6 +36,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Initialize duke.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(

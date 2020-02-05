@@ -2,6 +2,7 @@ import java.util.ArrayList;
 /**
  * This class contains a list of todo items.
  */
+
 public class TaskList {
     ArrayList<Item> items = new ArrayList<Item>();
     Ui ui = new Ui();
@@ -16,7 +17,7 @@ public class TaskList {
      */
     public void addItem(Item item) {
         this.items.add(item);
-        this.count ++;
+        this.count++;
     }
 
     /**
@@ -28,6 +29,9 @@ public class TaskList {
         return this;
     }
 
+    /**
+     * Returns the string of the search result.
+     */
     public String search(String task) {
         String temp = "";
         for (int i = 0; i < items.size(); i++) {

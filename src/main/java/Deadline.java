@@ -19,24 +19,29 @@ public class Deadline extends Item {
         this.date = date;
     }
 
+    /**
+     * Returns the string of the deadline item.
+     */
     public String toString() {
-        String temp = "   [D]" + super.toString() + " (by: "+ date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")\n";
+        String temp = "   [D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")\n";
         return temp;
     }
 
     /**
-     * This method returns the string before it is marked done, used for string substitution in the txt file when it is marked done.
+     * Returns the string before it is marked done,
+     * used for string substitution in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [D][✗] " + super.getName() + " (by: "+ date + ")\n";
+        String temp = "   [D][✗] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 
     /**
-     * This method returns the string corresponds to the current item.
+     * Returns the string corresponds to the current item.
      */
     public String now() {
-        String temp = "   [D]" + super.toString() + " (by: "+ date + ")\n";
+        String temp = "   [D]" + super.toString() + " (by: " + date + ")\n";
         return temp;
     }
 }
