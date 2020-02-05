@@ -4,6 +4,6 @@
  */
 public class DukeExceptionDateFormat extends DukeException {
     public DukeExceptionDateFormat() {
-        super.errorMsg = "☹ OOPS!!! The date must be in the format yyyy-mm-dd";
+        super.errorMsg = "The dates need to be in yyyy-mm-dd format.";
     }
 }

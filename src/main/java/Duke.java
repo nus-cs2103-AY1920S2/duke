@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -9,43 +8,26 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Loads the tasks from Path.
-     * @param filePath Path containing the text file to be read from.
+     * Creates a new Duke object which initializes the Storage, TaskList and Ui.
      */
-    public Duke(Path filePath) {
-        ui = new Ui();
-        try {
-            storage = new Storage(filePath);
-            tasks = storage.load();
+    public Duke() {
+        String homeDir = System.getProperty("user.home");
+        String fileName = "duke.txt";
+        Path path  = Paths.get(homeDir, "duke", "data", fileName);
 
-        } catch (IOException e) {
-            System.out.println("File loading error");
+        try {
+            storage = new Storage(path);
+            tasks = storage.load();
+            ui = new Ui(tasks, storage);
+        } catch (DukeException error) {
+            System.out.println(error);
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Starts the program.
-     */
-    public void run() {
-        tasks = ui.takeInput(tasks);
-        try {
-            storage.save(tasks);
 
-        } catch (IOException e) {
-            System.out.println("File saving error");
-        }
+    String getResponse(String input) {
+        return ui.getOutput(input);
     }
 
-    /**
-     * Main method.
-     * @param args Main method.
-     */
-    public static void main(String[] args) {
-        String homeDir = System.getProperty("user.home");
-        String fileName = "duke.txt";
-        Path path = Paths.get(homeDir, "duke", "data", fileName);
-
-        new Duke(path).run();
-    }
 }

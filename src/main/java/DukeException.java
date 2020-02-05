@@ -7,9 +7,9 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-        String text = "    ____________________________________________________________\n"
-                + "     " + errorMsg + "\n"
-                + "    ____________________________________________________________\n";
+        String text = "                    -~~o~~-\n"
+                + errorMsg + "\n"
+                + "                    -~~o~~-\n";
         return text;
     }
 }

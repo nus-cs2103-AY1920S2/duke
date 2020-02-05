@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
-    private Commands com;
+    private Commands command;
     private int indexOfTaskAffected = -1;
     private Task newTask;
     private String keyword;
@@ -22,90 +22,103 @@ public class Parser {
      * @throws DukeException If there was an invalid user input.
      */
     public Parser(String line, int size) throws DukeException {
-        if (line.equals("bye")) {
-            com = Commands.BYE;
+        switch (line) {
+        case "bye":
+            command = Commands.BYE;
+            break;
 
-        } else if (line.equals("list")) {
-            com = Commands.LIST_TASKS;
+        case "list":
+            command = Commands.LIST_TASKS;
+            break;
 
-        } else {
+        default:
             String[] comArs = line.split("\\s", 2);
-            if (comArs[0].equals("done")) {
+            String inputCommand = comArs[0];
+            int index;
+            String details;
+            String[] msgAndDate;
+
+            switch (inputCommand) {
+            case "done":
                 if (comArs.length == 1) {
                     throw new DukeExceptionIndex("done");
                 }
-                int index = Integer.parseInt(comArs[1]) - 1;
+                index = Integer.parseInt(comArs[1]) - 1;
                 if (index > size - 1) {
                     throw new DukeExceptionIndex("done");
                 }
 
-                com = Commands.DONE;
+                command = Commands.DONE;
                 indexOfTaskAffected = index;
+                break;
 
-            } else if (comArs[0].equals("delete")) {
+            case "delete":
                 if (comArs.length == 1) {
                     throw new DukeExceptionIndex("delete");
                 }
-                int index = Integer.parseInt(comArs[1]) - 1;
+                index = Integer.parseInt(comArs[1]) - 1;
                 if (index > size - 1) {
                     throw new DukeExceptionIndex("delete");
                 }
 
-                com = Commands.DEL_TASK;
+                command = Commands.DEL_TASK;
                 indexOfTaskAffected = index;
+                break;
 
-            } else {
-                if (comArs[0].equals("todo")) {
-                    String details = line.substring(4, line.length());
-                    if (details.isBlank()) {
-                        throw new DukeExceptionDescription("todo");
-                    }
-                    com = Commands.NEW_TASK;
-                    newTask = new ToDo(details);
-
-                } else if (comArs[0].equals("event")) {
-                    String details = line.substring(5, line.length());
-                    if (details.isBlank()) {
-                        throw new DukeExceptionDescription("event");
-                    }
-                    String[] msgDate = details.split(" /at ", 2);
-                    if (msgDate.length == 1) {
-                        throw new DukeExceptionDate("event");
-                    }
-
-                    try {
-                        LocalDate date = LocalDate.parse(msgDate[1]);
-                        com = Commands.NEW_TASK;
-                        newTask = new Event(msgDate[0], date);
-                    } catch (DateTimeParseException e) {
-                        throw new DukeExceptionDateFormat();
-                    }
-
-                } else if (comArs[0].equals("deadline")) {
-                    String details = line.substring(8, line.length());
-                    if (details.isBlank()) {
-                        throw new DukeExceptionDescription("deadline");
-                    }
-                    String[] msgDate = details.split(" /by ", 2);
-                    if (msgDate.length == 1) {
-                        throw new DukeExceptionDate("deadline");
-                    }
-
-                    try {
-                        LocalDate date = LocalDate.parse(msgDate[1]);
-                        com = Commands.NEW_TASK;
-                        newTask = new Deadline(msgDate[0], date);
-                    } catch (DateTimeParseException e) {
-                        throw new DukeExceptionDateFormat();
-                    }
-
-                } else if (comArs[0].equals("find")) {
-                    com = Commands.FIND;
-                    keyword = line.substring(4, line.length());
-
-                } else {
-                    throw new DukeExceptionCommand();
+            case "todo":
+                details = line.substring(4, line.length());
+                if (details.isBlank()) {
+                    throw new DukeExceptionDescription("todo");
                 }
+                command = Commands.NEW_TASK;
+                newTask = new ToDo(details);
+                break;
+
+            case "event":
+                details = line.substring(5, line.length());
+                if (details.isBlank()) {
+                    throw new DukeExceptionDescription("event");
+                }
+                msgAndDate = details.split(" /at ", 2);
+                if (msgAndDate.length == 1) {
+                    throw new DukeExceptionDate("event");
+                }
+
+                try {
+                    LocalDate date = LocalDate.parse(msgAndDate[1]);
+                    command = Commands.NEW_TASK;
+                    newTask = new Event(msgAndDate[0], date);
+                } catch (DateTimeParseException e) {
+                    throw new DukeExceptionDateFormat();
+                }
+                break;
+
+            case "deadline":
+                details = line.substring(8, line.length());
+                if (details.isBlank()) {
+                    throw new DukeExceptionDescription("deadline");
+                }
+                msgAndDate = details.split(" /by ", 2);
+                if (msgAndDate.length == 1) {
+                    throw new DukeExceptionDate("deadline");
+                }
+
+                try {
+                    LocalDate date = LocalDate.parse(msgAndDate[1]);
+                    command = Commands.NEW_TASK;
+                    newTask = new Deadline(msgAndDate[0], date);
+                } catch (DateTimeParseException e) {
+                    throw new DukeExceptionDateFormat();
+                }
+                break;
+
+            case "find":
+                command = Commands.FIND;
+                keyword = line.substring(4, line.length());
+                break;
+
+            default:
+                throw new DukeExceptionCommand();
             }
         }
     }
@@ -119,7 +132,7 @@ public class Parser {
     }
 
     public Commands getCommand() {
-        return com;
+        return command;
     }
 
     public int getIndexAffected() {

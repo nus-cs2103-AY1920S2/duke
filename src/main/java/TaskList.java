@@ -26,19 +26,6 @@ public class TaskList {
         return output;
     }
 
-    /**
-     * Prints the tasks that contains the String sequence.
-     * @param sequence String that the tasks will be searched for.
-     */
-    public void printTasksContaining(String sequence) {
-        for (int i = 1; i <= size; i++) {
-            Task task = tasks.get(i - 1);
-            if (task.getDetails().contains(sequence)) {
-                System.out.println("     " + i + "." + task);
-            }
-        }
-    }
-
     public void addTask(Task t) {
         tasks.add(t);
         size++;
@@ -59,16 +46,6 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return tasks;
-    }
-
-    /**
-     * Prints the tasks in the task list.
-     */
-    public void printTaskList() {
-        for (int i = 1; i <= size; i++) {
-            String item = "     " + i + "." + tasks.get(i - 1);
-            System.out.println(item);
-        }
     }
 
     public int getSize() {

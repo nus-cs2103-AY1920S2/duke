@@ -1,5 +1,9 @@
+
+/**
+ * Generates an error message for the situation where the description of the task was not given.
+ */
 public class DukeExceptionDescription extends DukeException {
     public DukeExceptionDescription(String task) {
-        super.errorMsg = "☹ OOPS!!! The description of a " + task + " cannot be empty.";
+        super.errorMsg = "More details for the " + task + " please?";
     }
 }

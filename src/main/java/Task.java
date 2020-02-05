@@ -14,11 +14,11 @@ public class Task {
     public Task(String msg) {
         this.msg = msg;
         this.type = "";
-        status = "✗";
+        status = "X";
     }
 
     public void markDone() {
-        status = "✓";
+        status = "O";
     }
 
     public String getDetails() {

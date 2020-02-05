@@ -12,41 +12,57 @@ public class Storage {
 
     private Path path;
 
-    public Storage(Path path) throws IOException {
+    public Storage(Path path) throws DukeException {
         this.path = path;
     }
 
     /**
      * Loads the tasks from Path into TaskList.
      * @return Updated TaskList.
-     * @throws IOException If Path is not accessible.
+     * @throws DukeException Error resulting from loading Tasks.
      */
-    public TaskList load() throws IOException {
-        List<String> lines = Files.readAllLines(path);
+    public TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
+        try {
+            List<String> lines = Files.readAllLines(path);
 
-        for (int i = 0; i < lines.size(); i++) {
-            String curLine = lines.get(i);
-            String[] components = curLine.split(" , ");
+            for (int i = 0; i < lines.size(); i++) {
+                String curLine = lines.get(i);
+                String[] components = curLine.split(" , ");
 
-            if (components.length < 3) {
-                continue;
+                if (components.length < 3) {
+                    continue;
+                }
+
+                String commandType = components[0];
+                Task newTask;
+                switch (commandType) {
+                case "T":
+                    newTask = new ToDo(" " + components[2]);
+                    newTask.setStatus(components[1]);
+                    tasks.addTask(newTask);
+                    break;
+
+                case "D":
+                    newTask = new Deadline(" " + components[2], LocalDate.parse(components[3]));
+                    newTask.setStatus(components[1]);
+                    tasks.addTask(newTask);
+                    break;
+
+                case "E":
+                    newTask = new Event(" " + components[2], LocalDate.parse(components[3]));
+                    newTask.setStatus(components[1]);
+                    tasks.addTask(newTask);
+                    break;
+
+                default:
+                    throw new DukeExceptionLoad("format");
+                }
             }
-            if (components[0].equals("T")) {
-                Task t = new ToDo(" " + components[2]);
-                t.setStatus(components[1]);
-                tasks.addTask(t);
-            } else if (components[0].equals("D")) {
-                Task t = new Deadline(" " + components[2], LocalDate.parse(components[3]));
-                t.setStatus(components[1]);
-                tasks.addTask(t);
-            } else if (components[0].equals("E")) {
-                Task t = new Event(" " + components[2], LocalDate.parse(components[3]));
-                t.setStatus(components[1]);
-                tasks.addTask(t);
-            } else {
-                System.err.print("Wrong File Structure");
-            }
+        } catch (IOException error) {
+            throw new DukeExceptionLoad("filetype");
+        } catch (DukeException error) {
+            throw error;
         }
         return tasks;
     }
@@ -54,13 +70,17 @@ public class Storage {
     /**
      * Saves the current TaskList into Path.
      * @param tasks Current TaskList.
-     * @throws IOException If Path is not accessible.
+     * @throws DukeException Error from saving Tasks.
      */
-    public void save(TaskList tasks) throws IOException {
-        String savedString = tasks.tasksToString();
-        BufferedWriter writer = Files.newBufferedWriter(path);
-        writer.write(savedString);
-        writer.flush();
+    public void save(TaskList tasks) throws DukeException {
+        try {
+            String savedString = tasks.tasksToString();
+            BufferedWriter writer = Files.newBufferedWriter(path);
+            writer.write(savedString);
+            writer.flush();
+        } catch (IOException error) {
+            throw new DukeExceptionSave();
+        }
     }
 
 }

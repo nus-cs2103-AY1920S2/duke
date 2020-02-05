@@ -2,29 +2,19 @@
  * Consists of designs that will be used to respond to user input.
  */
 public enum UiDesign {
-    BORDER("    ____________________________________________________________\n"),
-    LOGO("      ____        _        \n"
-            + "     |  _ \\ _   _| | _____ \n"
-            + "     | | | | | | | |/ / _ \\\n"
-            + "     | |_| | |_| |   <  __/\n"
-            + "     |____/ \\__,_|_|\\_\\___|\n"),
-    BYE("    ____________________________________________________________\n"
-            + "     Bye. Hope to see you again soon!\n"
-            + "    ____________________________________________________________\n"),
-    GREET("    ____________________________________________________________\n"
-            + LOGO.getString()
-            + "\n     Hello! I'm Duke\n     What can I do for you?\n"
-            + "    ____________________________________________________________\n"),
-    DONE_TOP_PART("    ____________________________________________________________\n"
-            + "     Nice! I've marked this task as done: \n"),
-    REMOVE_TOP_PART("    ____________________________________________________________\n"
-            + "     Noted. I've removed this task: \n"),
-    LIST_TOP_PART("    ____________________________________________________________\n"
-            + "     Here are the tasks in your list: \n"),
-    ADD_TOP_PART("    ____________________________________________________________\n"
-            + "     Got it. I've added this task: \n"),
-    FIND_TOP_PART("    ____________________________________________________________\n"
-            + "     Here are the matching tasks in your list:\n")
+    BORDER("                    -~~o~~- \n"),
+    LOGO(" _   _   ____  ____  ____\n"
+            + "//  /_\\  ||_|| || || || ||\n"
+            + "\\\\ //\\ \\ ||    ||_|| ||_||\n"),
+    BYE("Bye! See you soon. \n"
+            + BORDER.getString()),
+    GREET("Hello, I'm Dory!\nWhat do you want to do today? \n"
+            + BORDER.getString()),
+    DONE_TOP_PART("Great job! I've marked it as done: \n"),
+    REMOVE_TOP_PART("I've removed it: \n"),
+    LIST_TOP_PART("Just keep swimming, swimming, swimming... \n"),
+    ADD_TOP_PART("I will try to remember it: \n"),
+    FIND_TOP_PART("Here's what I've found amongst all the marine litter: \n")
     ;
 
     private final String text;
