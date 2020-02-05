@@ -16,10 +16,6 @@ public class Task {
         task = description;
     }
 
-    public String getTask() {
-        return task;
-    }
-
     public boolean isDone() {
         return isDone;
     }
@@ -44,6 +40,10 @@ public class Task {
         } else {
             isDone = "F";
         }
-        return isDone + "//" + getTask();
+        return isDone + "//" + getDescription();
+    }
+
+    public String getDescription() {
+        return task;
     }
 }
