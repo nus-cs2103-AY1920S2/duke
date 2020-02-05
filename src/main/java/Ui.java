@@ -1,13 +1,14 @@
 import java.util.Scanner;
 
 /**
- * Represents the user interface that interacts with the user and acts as a view.
+ * Represents the CLI user interface that interacts with the user and acts as a view.
  */
 public class Ui {
     /**
      * The input channel.
      */
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+    private String message = "";
 
     /**
      * Displays a message indicating an error in loading the task list save file.
@@ -119,7 +120,13 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    private void say(String speech) {
+
+    protected String getResponse() {
+        return message;
+    }
+
+    protected void say(String speech) {
+        message = speech;
         String separator = "\t============================================================\n";
 
         String[] lines = speech.split("\n");
