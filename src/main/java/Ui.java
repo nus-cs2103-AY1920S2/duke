@@ -1,171 +1,223 @@
-import java.util.Scanner;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
- * The UI of the program. It is responsible for interacting with the user.
+ * The UI of the application.
  */
-public class Ui {
+public class Ui extends AnchorPane {
+
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox dialogContainer;
+    @FXML
+    private TextField userInput;
+    @FXML
+    private Button sendButton;
+
+    private Duke duke;
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * The scanner object to get user input.
+     * Initializes the scroll pane to bind to the dialog container. Also prints out the welcome message on the chat.
      */
-    protected Scanner sc;
+    @FXML
+    public void initialize() {
 
-    /**
-     * Constructs a new instance of the UI.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        printGreeting();
     }
 
     /**
-     * Gets the user input command from the console using Scanner class.
+     * Initializes duke.
      *
-     * @return the user input command.
+     * @param d the duke
      */
-    public String getCommand() {
-        return sc.nextLine();
+    public void setDuke(Duke d) {
+
+        duke = d;
     }
 
     /**
-     * Prints a divider line.
+     * Obtains the input command from the text field and creates a user dialog box containing the command. Clears the
+     * text field after creating the dialog box. The command is passed to Duke and processed to get the appropriate
+     * response, which is used to create another dialog box and appended to the dialog container.
      */
-    public void printDivider() {
-        System.out.println("--------------------------------------------------------");
+    @FXML
+    private void handleUserInput() {
+
+        String command = userInput.getText();
+
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(command, userImage));
+        userInput.clear();
+
+        printResponse(duke.executeCommand(command));
     }
 
     /**
-     * Prints the greeting message.
+     * Prints the welcoming message in the chat.
      */
     public void printGreeting() {
-        System.out.println("> Hi! I'm Aelita, guardian of Lyoko.");
-        System.out.println("  How can I help you?");
-        printDivider();
+
+        String greeting = "Hi! I'm Duke.\nHow can I help you?";
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 
     /**
-     * Prints the logo.
-     */
-    public void printLogo() {
-        final String logo = "     __             _   _     _\n"
-                + "    /  \\           | | / \\   | |\n"
-                + "   / /\\ \\     ___  | | \\_/ __| |__   ___ _\n"
-                + "  / /__\\ \\   / _ \\ | |  _ |__   __| / _ | |\n"
-                + " / ______ \\ |  __/ | | | |   | |   | |_|  |\n"
-                + "/_/      \\_\\ \\___\\ |_| |_|   |_|    \\___/\\_\\";
-        System.out.println(logo);
-        System.out.println("============================================");
-    }
-
-    /**
-     * Prints the relevant response.
+     * Creates a dialog box containing the relevant response and append it onto the dialog container.
+     * Will call for exit if bye is received.
      *
      * @param response the response.
      */
-    public void printResponse(Response response) {
-        String message = "> ";
-        switch (response) {
+    private void printResponse(Response response) {
+
+        String message = "";
+        switch (response.getMessage()) {
         case ADD_TASK:
-            message += "I've got your back. Adding the new task:";
+            message = "I've got your back. Adding the new task:\n";
+            message += "    " + response.getArgument().toString();
             break;
+
         case COMMAND_NOT_RECOGNIZED:
-            message += "I don't understand your request.";
+            message = "I don't understand your request.";
             break;
+
         case DATE_NOT_RECOGNIZED:
-            message += "Sorry. I only recognize date in the format YYYY-MM-DD";
+            message = "Sorry. I only recognize date in the format YYYY-MM-DD";
             break;
+
         case DELETE:
-            message += "The task has been removed.";
+            message = "The task has been removed.\n";
+            message += "    " + response.getArgument().toString();
             break;
+
         case DONE:
-            message += "Another task off the list. Good job!";
+            message = "Another task off the list. Good job!\n";
+            message += "    " + duke.getTaskList().get((int) response.getArgument());
             break;
+
         case EMPTY_COMMAND:
-            message += "Aren't you a quiet type.";
+            message = "Aren't you a quiet type.";
             break;
+
         case GOODBYE:
-            message += "It's nice talking to you. See you soon! ;)";
+            message = "It's nice talking to you. See you soon! ;)";
             break;
+
         case IO_ERROR:
-            message += "Opps. Something went wrong when saving your tasks.";
+            message = "Opps. Something went wrong when saving your tasks.";
             break;
+
         case INDEX_NAN:
-            message += "The index is not a number.";
+            message = "The index is not a number.";
             break;
+
         case INVALID_ARGUMENT:
-            message += "You cannot set task count to less than zero.";
+            message = "You cannot set task count to less than zero.";
             break;
+
         case ITEM_NOT_FOUND:
-            message += "That item is not on your list.";
+            message = "That item is not on your list.";
             break;
+
         case LIST:
-            message += "Here's your list:";
+            message = "Here's your list:\n";
+
+            TaskList list = (TaskList) response.getArgument();
+
+            for (int i = 0; i < list.getSize(); i++) {
+                message += "    " + (i + 1) + "." + list.get(i) + "\n";
+            }
+
             break;
+
         case MISSING_DATE:
-            message += "The date is missing.";
+            message = "The date is missing.";
             break;
+
         case MISSING_DATE_TIME:
-            message += "Either the date or time is missing.";
+            message = "Either the date or time is missing.";
             break;
+
         case MISSING_DEADLINE:
-            message += "When is the deadline?";
+            message = "When is the deadline?";
             break;
+
         case MISSING_DELETE_INDEX:
-            message += "Which task do you want to delete?";
+            message = "Which task do you want to delete?";
             break;
+
         case MISSING_DESCRIPTION:
-            message += "What is the task about?";
+            message = "What is the task about?";
             break;
+
         case MISSING_DONE_INDEX:
-            message += "Which task have you completed?";
+            message = "Which task have you completed?";
             break;
+
         case MISSING_END_TIME:
-            message += "When does the event end?";
+            message = "When does the event end?";
             break;
+
         case NO_TASK:
-            message += "You have nothing to do today.";
+            message = "You have nothing to do today.";
             break;
+
         case NO_TASK_ON_DATE:
-            message += "You have nothing to do on that day.";
+            message = "You have nothing to do on that day.";
             break;
+
         case TASK_COMPLETED:
-            message += "You have already done that task.";
+            message = "You have already done that task.";
             break;
+
         case TASK_COUNT:
             if (Task.getTotalTaskCount() == 0) {
-                message += "You have no more task today.";
+                message = "You have no more task today.";
+
             } else {
-                message += "Now you've " + Task.getTotalTaskCount() + " task(s) in your list";
+                message = "Now you've " + Task.getTotalTaskCount() + " task(s) in your list";
             }
             break;
+
         case TASK_FOUND:
-            message += "These are the tasks you are looking for:";
+            message = "These are the tasks you are looking for:\n";
+
+            TaskList results = (TaskList) response.getArgument();
+
+            for (int i = 0; i < results.getSize(); i++) {
+                message += "    " + (i + 1) + "." + results.get(i) + "\n";
+            }
             break;
+
         case TASK_NOT_FOUND:
-            message += "There is no task matching your keyword";
+            message = "There is no task matching your keyword";
             break;
+
         default:
+            //Do nothing
         }
-        System.out.println(message);
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(message, dukeImage));
+
+        if (response.getMessage().equals(Message.GOODBYE)) {
+
+            try {
+                Platform.exit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
-    /**
-     * Prints the specified task together with it's index in the TaskList.
-     * Used only by TaskList to list out all tasks within the list.
-     *
-     * @param task  the specified task.
-     * @param index the respective index.
-     */
-    protected void printTask(Task task, int index) {
-        System.out.println("  " + index + "." + task);
-    }
-
-    /**
-     * Prints the specified task on the user interface.
-     *
-     * @param task the specified task.
-     */
-    public void printTask(Task task) {
-
-        System.out.println("  " + task);
-    }
 }

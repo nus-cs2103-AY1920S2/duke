@@ -8,6 +8,8 @@ public class DuplicateMarkAelitaException extends AelitaException {
      * Constructs a new instance of DuplicateMarkAelitaException.
      */
     public DuplicateMarkAelitaException() {
+
         super();
     }
+
 }

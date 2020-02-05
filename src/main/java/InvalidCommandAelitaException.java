@@ -8,6 +8,8 @@ public class InvalidCommandAelitaException extends AelitaException {
      * Constructs a new instance of InvalidCommandAelitaException.
      */
     public InvalidCommandAelitaException() {
+
         super();
     }
+
 }

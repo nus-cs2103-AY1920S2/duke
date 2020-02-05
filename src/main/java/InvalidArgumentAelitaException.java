@@ -8,6 +8,8 @@ public class InvalidArgumentAelitaException extends AelitaException {
      * Constructs a new instance of InvalidArgumentAelitaException.
      */
     public InvalidArgumentAelitaException() {
+
         super();
     }
+
 }

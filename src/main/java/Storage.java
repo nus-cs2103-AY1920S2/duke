@@ -21,15 +21,16 @@ public class Storage {
      * @param path the file path string.
      */
     public Storage(Path path) {
+
         this.path = path;
     }
 
     /**
-     * Load tasks from the associated file and populate the supplied TaskList.
+     * Loads tasks from the associated file and populate the supplied TaskList.
      *
      * @param taskList the task list.
      */
-    public void loadTasks(TaskList taskList) throws InvalidArgumentAelitaException {
+    public void loadTasks(TaskList taskList) {
 
         try {
             File file = new File(path.toString());
@@ -40,18 +41,24 @@ public class Storage {
                 case "T":
                     taskList.add(new Todo(task[2]));
                     break;
+
                 case "D":
                     taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
                     break;
+
                 case "E":
                     taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
                     break;
+
                 default:
-                    throw new InvalidArgumentAelitaException();
+                    //Do nothing.
+
                 }
                 if (task[1].equals("true")) {
+
                     try {
                         taskList.get(taskList.getSize() - 1).markAsDone();
+
                     } catch (DuplicateMarkAelitaException e) {
                         //Not possible. Do nothing
                     }
@@ -71,26 +78,34 @@ public class Storage {
      * @throws IoAelitaException if FileWriter cannot be created.
      */
     public void saveTasks(TaskList taskList) throws IoAelitaException {
+
         try {
             if (!Files.exists(path)) {
                 Files.createDirectories(path.getParent());
                 Files.createFile(path);
             }
+
             FileWriter writer = new FileWriter(path.toString(), false);
+
             for (int i = 0; i < taskList.getSize(); i++) {
 
                 if (taskList.get(i) instanceof Todo) {
                     writer.write("T/" + taskList.get(i).isDone + "/" + taskList.get(i).description + "\n");
+
                 } else if (taskList.get(i) instanceof Deadline) {
                     writer.write("D/" + taskList.get(i).isDone + "/" + taskList.get(i).description + "/"
-                            + ((Deadline) taskList.get(i)).by + "\n");
+
+                            + ((Deadline) taskList.get(i)).getDate() + "\n");
+
                 } else if (taskList.get(i) instanceof Event) {
                     writer.write("E/" + taskList.get(i).isDone + "/" + taskList.get(i).description + "/"
-                            + ((Event) taskList.get(i)).date + "/" + ((Event) taskList.get(i)).startTime + "/"
-                            + ((Event) taskList.get(i)).endTime + "\n");
+                            + ((Event) taskList.get(i)).date + "/" + ((Event) taskList.get(i)).startTime
+                            + "/" + ((Event) taskList.get(i)).endTime + "\n");
+
                 }
             }
             writer.close();
+
         } catch (IOException e) {
             throw new IoAelitaException();
         }

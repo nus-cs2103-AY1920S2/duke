@@ -8,6 +8,7 @@ public class EmptyInputAelitaException extends AelitaException {
      * Constructs a new instance of EmptyInputAelitaException.
      */
     public EmptyInputAelitaException() {
+
         super();
     }
 

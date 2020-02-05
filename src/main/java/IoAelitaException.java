@@ -8,6 +8,7 @@ public class IoAelitaException extends AelitaException {
      * Constructs a new instance of IoAelitaException.
      */
     public IoAelitaException() {
+
         super();
     }
 

@@ -7,6 +7,7 @@ public class AelitaException extends Exception {
      * Constructs a new AelitaException with null as message.
      */
     public AelitaException() {
+
         super();
     }
 
@@ -16,6 +17,8 @@ public class AelitaException extends Exception {
      * @param msg the specified message details.
      */
     public AelitaException(String msg) {
+
         super(msg);
     }
+
 }

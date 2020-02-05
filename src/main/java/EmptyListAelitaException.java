@@ -8,6 +8,8 @@ public class EmptyListAelitaException extends AelitaException {
      * Constructs a new EmptyListAelitaException.
      */
     public EmptyListAelitaException() {
+
         super();
     }
+
 }
