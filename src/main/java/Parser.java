@@ -70,7 +70,7 @@ public class Parser {
             throw new DukeUnknownInputException("Need give/format deadline <description> /by <time>.");
         }
         // Check if date is parsable
-        String byWhen= "";
+        String byWhen = "";
         try {
             LocalDate date = LocalDate.parse(splitted[1]);
             byWhen = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -135,7 +135,15 @@ public class Parser {
         return command.substring(5);
     }
 
-    public static void executedCommand(TaskList tasks, String command, Ui ui) {
+    /**
+     * Executes the command given by the user.
+     *
+     * @param tasks TaskList object to be edited based on the command.
+     * @param command User Command.
+     * @param ui Ui to handle the output depending on command type.
+     * @throws DukeUnknownInputException When the command type is not recognized.
+     */
+    public static void executeCommand(TaskList tasks, String command, Ui ui)  throws DukeUnknownInputException {
         String commandType = getCommandType(command);
         switch (commandType) {
         case "list":

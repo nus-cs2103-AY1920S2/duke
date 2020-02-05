@@ -1,6 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
+
 import dukeexception.DukeException;
+
+import task.Task;
 
 /**
  * Deals with interactions with the user.

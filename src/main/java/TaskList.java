@@ -1,5 +1,11 @@
 import java.util.ArrayList;
+
 import dukeexception.DukeException;
+
+import task.Task;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 
 /**
  * Contains the task list, which is an ArrayList of tasks.
@@ -31,7 +37,7 @@ public class TaskList {
      * @return The task after being marks as done.
      * @throws DukeException If taskNum is bigger than size of list or < 0
      */
-    public Task markDone(int taskNum) {
+    public Task markDone(int taskNum) throws DukeException {
         if (taskNum > tasks.size() || taskNum < 0) {
             throw new DukeException("Task for this number doesn't exist.");
         }

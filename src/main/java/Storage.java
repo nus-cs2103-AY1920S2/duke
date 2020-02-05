@@ -7,6 +7,11 @@ import java.util.Scanner;
 import dukeexception.DukeException;
 import dukeexception.DukeIoException;
 
+import task.Task;
+import task.Deadline;
+import task.Event;
+import task.Todo;
+
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
@@ -30,7 +35,7 @@ public class Storage {
      * @throws DukeIoException If the file path cannot be read.
      * @throws DukeException If there is a task that does not make sense.
      */
-    public static ArrayList<Task> load() {
+    public static ArrayList<Task> load() throws DukeException, DukeIoException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(filePath);
@@ -60,7 +65,7 @@ public class Storage {
      * @param numOfTasks Number of tasks in the TaskList currently.
      * @throws DukeIoException If path cannot be read e.g. due to missing file.
      */
-    public static void updateFile(TaskList tasks, int numOfTasks) {
+    public static void updateFile(TaskList tasks, int numOfTasks) throws DukeIoException {
         ArrayList<String> tasksForFile = new ArrayList<>();
         for (int i = 0; i < numOfTasks; i++) {
             tasksForFile.add(tasks.getTask(i) + "\n");
@@ -81,7 +86,7 @@ public class Storage {
      * @return Task constructed.
      * @throws DukeIoException If the code does not match T, D or E.
      */
-    public static Task buildTask(String code, String args, boolean isDone) {
+    public static Task buildTask(String code, String args, boolean isDone) throws DukeIoException {
         if (code.equals("T")) {
             // args lik "borrow book"
             Todo todo = new Todo(args, isDone);
