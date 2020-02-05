@@ -1,3 +1,9 @@
+package duke.mission;
+
+import duke.util.Ui;
+import duke.util.Storage;
+import duke.util.TaskList;
+
 public class FindMission extends Mission {
     public FindMission(String input) {
         super(input);

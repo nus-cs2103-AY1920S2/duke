@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This is a simulation of tasks.
  */

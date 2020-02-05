@@ -1,5 +1,23 @@
+package duke.util;
+
+import duke.mission.AddMission;
+import duke.mission.DeleteMission;
+import duke.mission.ExitMission;
+import duke.mission.FindMission;
+import duke.mission.HelpMission;
+import duke.mission.InvalidMission;
+import duke.mission.ListMission;
+import duke.mission.MarkDoneMission;
+import duke.mission.Mission;
+
 public class Parser {
 
+    /**
+     * Generates correspond Mission based on user inputs.
+     *
+     * @param input User input string.
+     * @return a Mission that Duke needs to run.
+     */
     public static Mission parse(String input) {
         if (input.equals("bye")) {
             return new ExitMission();

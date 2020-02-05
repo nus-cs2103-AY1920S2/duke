@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.Task;
+
 /**
  * Text Ui of Duke.
  */
@@ -5,6 +9,8 @@ public class Ui {
 
     /**
      * Shows Duke logo.
+     *
+     * @return A string of logo.
      */
     public String showLogo() {
         String logo = " ____        _        \n"
@@ -17,6 +23,8 @@ public class Ui {
 
     /**
      * Shows greeting message.
+     *
+     * @return A string of greeting sentences.
      */
     public String showGreet() {
         return "Hello! I'm Duke! What can I do for you?\n"
@@ -27,6 +35,7 @@ public class Ui {
      * Shows all tasks in the list.
      *
      * @param tasks Task list.
+     * @return A string that list our all tasks.
      */
     public String showList(TaskList tasks) {
         String str = "Here are the tasks in your list:\n";
@@ -42,6 +51,7 @@ public class Ui {
      *
      * @param t New Task to be added.
      * @param tasks Task list.
+     * @return A string shows successful addition of tasks.
      */
     public String showAdd(Task t, TaskList tasks) {
         tasks.addTask(t);
@@ -53,8 +63,9 @@ public class Ui {
      * Shows marking as done message.
      *
      * @param currTask Task that be marked.
+     * @return A string shows successful marking done.
      */
-    public String ShowMarkDone(Task currTask) {
+    public String showMarkDone(Task currTask) {
         currTask.markAsDone();
         return "Nice! I've marked this task as done:\n" + "  " + currTask + "\n";
     }
@@ -64,8 +75,9 @@ public class Ui {
      *
      * @param currTask Target Task to delete.
      * @param tasks Task list.
+     * @return A string shows successful deletion.
      */
-    public String ShowDelete(Task currTask, TaskList tasks) {
+    public String showDelete(Task currTask, TaskList tasks) {
         String str = "Noted. I've removed this task:\n  " + currTask + "\n";
         tasks.removeTask(currTask);
         str = str.concat("Now you have " + tasks.getTaskNumber() + " tasks in the list.\n");
@@ -74,28 +86,36 @@ public class Ui {
 
     /**
      * Shows exiting message.
+     *
+     * @return A string shows exiting sentences.
      */
     public String showExit() {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Shows user guidance.
+     *
+     * @return A string of all functions in Duke.
+     */
     public String showHelp() {
-        return "Here are my functions that you can try: \n" +
-                "- help: show my functions. \n" +
-                "- list: list your tasks.\n" +
-                "- todo [task description]: add a todo task.\n" +
-                "- deadline [task description] /by [yyyy-mm-dd]: add a task with deadline.\n" +
-                "- event [task description] /at [yyyy-mm-dd]: add an event with time.\n" +
-                "- done [task number]: mark this task as done.\n" +
-                "- delete [task number]: delete this task from your list.\n" +
-                "- find [keywords]: find all tasks containing the keywords.\n" +
-                "- exit: say goodbye!\n";
+        return "Here are my functions that you can try: \n"
+                + "- help: show my functions. \n"
+                + "- list: list your tasks.\n"
+                + "- todo [task description]: add a todo task.\n"
+                + "- deadline [task description] /by [yyyy-mm-dd]: add a task with deadline.\n"
+                + "- event [task description] /at [yyyy-mm-dd]: add an event with time.\n"
+                + "- done [task number]: mark this task as done.\n"
+                + "- delete [task number]: delete this task from your list.\n"
+                + "- find [keywords]: find all tasks containing the keywords.\n"
+                + "- exit: say goodbye!\n";
     }
 
     /**
      * Shows Exception message.
      *
      * @param message Exception message.
+     * @return A string description of the exception.
      */
     public String showException(String message) {
         return message;
@@ -106,6 +126,7 @@ public class Ui {
      *
      * @param keyWord String of key word.
      * @param tasks Task list.
+     * @return A string of all found tasks.
      */
     public String showFind(String keyWord, TaskList tasks) {
         String str = "Here are the matching tasks in your list:\n";
