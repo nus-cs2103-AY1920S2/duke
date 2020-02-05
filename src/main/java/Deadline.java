@@ -12,7 +12,7 @@ class Deadline extends Task {
         super(task.split("/by")[0]);
         String[] arr = task.split("/by");
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
             this.deadline = LocalDate.parse(arr[1].trim(), formatter);
         } catch (DateTimeParseException e) {
             throw e;
