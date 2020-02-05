@@ -84,10 +84,10 @@ public class Parser {
      * @throws InvalidTodoException DukeException for invalid Todo tasks.
      */
     public static String prepareTodo(String[] input) throws InvalidTodoException {
-        if (!isValidTodo(input)) {
-            throw new InvalidTodoException("");
-        } else {
+        if (isValidTodo(input)) {
             return input[1];
+        } else {
+            throw new InvalidTodoException("");
         }
     }
 
@@ -150,20 +150,6 @@ public class Parser {
                 || type.equals("done")
                 || type.equals("delete")
                 || type.equals("bye")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if input array is two elements long and thus a valid Todo task.
-     *
-     * @param input String array containing task's type and description.
-     * @return boolean dictating if array has enough elements for a valid Todo task.
-     */
-    public static boolean isValidTodo(String[] input) {
-        if (input.length == 2) {
             return true;
         } else {
             return false;
