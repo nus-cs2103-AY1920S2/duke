@@ -34,11 +34,9 @@ public class Task {
     public String getIcon() {
         if (this.type.equals("todo")) {
             return "[T]";
-        }
-        else if (this.type.equals("deadline")) {
+        } else if (this.type.equals("deadline")) {
             return "[D]";
-        }
-        else {                  // event
+        } else {                  // event
             return "[E]";
         }
     }
@@ -55,8 +53,7 @@ public class Task {
         for (int i = 1; i < this.date.split("\\s").length; i++) {
             if (i == 1) {
                 dateFormatted += this.date.split("\\s")[i];
-            }
-            else {
+            } else {
                 dateFormatted += " " + this.date.split("\\s")[i];
             }
         }
@@ -106,8 +103,7 @@ public class Task {
     public String getDescription() {
         if (this.type.equals("todo")) {
             return this.name;
-        }
-        else if (this.type.equals("deadline")) {
+        } else if (this.type.equals("deadline")) {
 //            String dateFormatted = "";
 //            this.date.split("\\s");
 //            for (int i = 1; i < this.date.split("\\s").length; i++) {
@@ -125,8 +121,7 @@ public class Task {
             } else {
                 return this.name + " (by: " + this.fileDate + ")";
             }
-        }
-        else {                  // event
+        } else {                  // event
             if (this.hasProcessedDate == false) {
                 return this.name + " (at: " + this.getProcessedDate() + ")";
             } else {

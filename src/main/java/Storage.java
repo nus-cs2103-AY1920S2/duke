@@ -61,8 +61,7 @@ public class Storage {
                 }
             }
             return arr;
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e){
             return new ArrayList <Task>();
         }
 

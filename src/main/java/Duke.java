@@ -55,8 +55,7 @@ public class Duke {
                 case ("todo"):
                     if (userInput.split("\\s").length == 1) {
                         System.out.println("&#x2639; OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    else {
+                    } else {
                         String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
                         String taskDescription = "";
                         for (int i = 0; i < taskRequest.length; i++) {
@@ -105,8 +104,7 @@ public class Duke {
                 case ("event"):
                     if (userInput.split("\\s").length == 1) {
                         System.out.println("&#x2639; OOPS!!! The description of an event cannot be empty.");
-                    }
-                    else {
+                    } else {
                         String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
                         String taskDescriptionDate = "";
                         for (int i = 0; i < taskRequest.length; i++) {
