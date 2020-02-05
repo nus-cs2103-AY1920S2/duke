@@ -3,6 +3,11 @@ package duchess.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static duchess.util.MagicStrings.BLANK;
+import static duchess.util.MagicStrings.DATE_TIME_OVERDUE;
+import static duchess.util.MagicStrings.DATE_TIME_TODAY;
+import static duchess.util.MagicStrings.DATE_TIME_TOMORROW;
+import static duchess.util.MagicStrings.DATE_TIME_YESTERDAY;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
@@ -17,6 +22,11 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * object is dated today.
  */
 public class DateTimeStringFormatter {
+    private static final DateTimeFormatter HOUR_MINUTES = DateTimeFormatter.ofPattern("h:mm a");
+    private static final DateTimeFormatter MONTH_HOUR_MINUTES = DateTimeFormatter.ofPattern("MMM d h:mm a");
+    private static final DateTimeFormatter MONTH_YEAR_HOUR_MINUTES = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a");
+    private static final DateTimeFormatter WEEKDAY_HOUR_MINUTES = DateTimeFormatter.ofPattern("EEE h:mm a");
+
     /**
      * Formats {@code LocalDateTime} objects into meaningful {@code String}s.
      *
@@ -29,34 +39,31 @@ public class DateTimeStringFormatter {
         long differenceInDays = DAYS.between(dateTime.toLocalDate(), currentDateTime.toLocalDate());
         if (dateTime.isBefore(currentDateTime)) {
             if (differenceInDays == 0) {
-                return "Today "
-                        + dateTime.format(DateTimeFormatter.ofPattern("h:mm a"))
-                        + (isCompleted ? "" : " [OVERDUE]");
+                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)
+                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
             } else {
                 if (differenceInDays == 1) {
-                    return "Yesterday "
-                            + dateTime.format(DateTimeFormatter.ofPattern("h:mm a"))
-                            + (isCompleted ? "" : " [OVERDUE]");
+                    return DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)
+                            + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
                 }
                 if (dateTime.getYear() != currentDateTime.getYear()) {
-                    return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"))
-                            + (isCompleted ? "" : " [OVERDUE]");
+                    return dateTime.format(MONTH_YEAR_HOUR_MINUTES)
+                            + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
                 }
-                return dateTime.format(DateTimeFormatter.ofPattern("MMM d h:mm a"))
-                        + (isCompleted ? "" : " [OVERDUE]");
+                return dateTime.format(MONTH_HOUR_MINUTES) + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
             }
         } else {
             if (differenceInDays == 0) {
-                return "Today " + dateTime.format(DateTimeFormatter.ofPattern("h:mm a"));
+                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES);
             } else if (differenceInDays == -1) {
-                return "Tomorrow " + dateTime.format(DateTimeFormatter.ofPattern("h:mm a"));
+                return DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES);
             } else if (differenceInDays > -7) {
-                return dateTime.format(DateTimeFormatter.ofPattern("EEE h:mm a"));
+                return dateTime.format(WEEKDAY_HOUR_MINUTES);
             } else {
                 if (dateTime.getYear() != currentDateTime.getYear()) {
-                    return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"));
+                    return dateTime.format(MONTH_YEAR_HOUR_MINUTES);
                 }
-                return dateTime.format(DateTimeFormatter.ofPattern("MMM d h:mm a"));
+                return dateTime.format(MONTH_HOUR_MINUTES);
             }
         }
     }
