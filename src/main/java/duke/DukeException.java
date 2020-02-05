@@ -1,10 +1,13 @@
 package duke;
 
+/**
+ * DukeException occurs when commands pertaining to the Duke program are invalid.
+ */
 public class DukeException extends Exception{
 
     private String error;
 
-    private final static String line = "    ____________________________________________________________";
+    private final static String LINE = "    ____________________________________________________________";
 
     public DukeException(String error) {
         super(error);
@@ -13,7 +16,7 @@ public class DukeException extends Exception{
 
     @Override
     public String toString() {
-        String output = line + "\n";
+        String output = LINE + "\n";
         if (this.error.equals("todo") || this.error.equals("deadline") || this.error.equals("event")) {
             output += "     :(  OOPS! The description of a " + this.error + " cannot be empty." + "\n";
         } else if (this.error.equals("dateTime")) {
@@ -22,7 +25,7 @@ public class DukeException extends Exception{
         } else {
             output += "     :(  OOPS! I'm sorry, but I don't know what that means :(" + "\n";
         }
-        output += line;
+        output += LINE;
 
         return output;
     }

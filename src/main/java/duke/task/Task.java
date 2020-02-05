@@ -5,6 +5,13 @@ import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
 
+/**
+ * Duke helps to serve as a reminder/scheduler.
+ * The user's tasks are be keyed into Duke, and will be held by Duke.
+ * The task class represents the task objects that will be keyed into Duke.
+ *
+ * @author Dargo
+ */
 public class Task implements Serializable {
 
     // task = Full input line
@@ -23,6 +30,13 @@ public class Task implements Serializable {
     private final static String DEADLINE = "D";
     private final static String EVENT = "E";
 
+    /**
+     * Task is the representation of a task that someone inputs into Duke.
+     * A task is classified into 3 types: todo, deadline and event.
+     *
+     * @param type Type of task.
+     * @param task Input command for the task.
+     */
     public Task(String type, String task) {
 
         if (type.equals("todo")) {
@@ -36,10 +50,20 @@ public class Task implements Serializable {
         this.task = task;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void taskDone() {
         this.isDone = true;
     }
 
+    /**
+     * Formats the string that is outputted by the program.
+     * Follows the style set by CS2103T website.
+     *
+     * @return Formatted string representing the task in question.
+     * @throws DukeException If any of the task classes do not have an appropriate command input.
+     */
     public String print_Format() throws DukeException {
         try {
             String checkmark = "N";
@@ -69,6 +93,11 @@ public class Task implements Serializable {
         }
     }
 
+    /**
+     * Returns the formatted string.
+     *
+     * @return Formatted string of task object in question.
+     */
     @Override
     public String toString() {
 

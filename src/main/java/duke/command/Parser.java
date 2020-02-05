@@ -3,14 +3,31 @@ package duke.command;
 import duke.task.TaskList;
 import duke.DukeException;
 
+/**
+ * Acts as the parser for Duke program commands.
+ * Makes sense of user commands and helps to execute it in Duke.
+ *
+ * @author Dargo
+ */
 public class Parser {
 
     private TaskList listOfTasks;
 
+    /**
+     * Identifies user input to pinpoint specific command given.
+     * Executes the command in the TaskList object.
+     *
+     * @param listOfTasks TaskList of current Duke program
+     */
     public Parser(TaskList listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
 
+    /**
+     * Executes the command on TaskList based on user input given.
+     *
+     * @param inputCommand String command given by user.
+     */
     public void executeCommand(String inputCommand) {
 
         String[] commandSplit = inputCommand.split(" ");

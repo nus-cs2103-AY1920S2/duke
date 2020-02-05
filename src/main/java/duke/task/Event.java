@@ -6,6 +6,13 @@ import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
 
+/**
+ * Event is a subtype of Task.
+ * Event is meant to be for when an event is going to happen.
+ * Eg. Dargo's Birthday 19/01
+ *
+ * @author Dargo
+ */
 public class Event extends Task {
 
     private String eventDateString;
@@ -13,6 +20,13 @@ public class Event extends Task {
     private LocalDate eventDate;
     private LocalTime eventTime;
 
+    /**
+     * Event subtype of Task.
+     *
+     * @param type Type of task.
+     * @param task Input command for the task.
+     * @throws DukeException When input command is not valid.
+     */
     public Event(String type, String task) throws DukeException {
         super(type, task);
 
@@ -32,8 +46,11 @@ public class Event extends Task {
         }
     }
 
-
-
+    /**
+     * Returns the formatted string.
+     *
+     * @return Formatted string of task object in question.
+     */
     @Override
     public String toString() {
 
