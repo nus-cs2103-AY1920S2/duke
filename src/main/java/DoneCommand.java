@@ -9,12 +9,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.markTaskAsDone(this.idx);
             storage.save(tasks.getTasks());
             String response = "Nice! I've marked this task as done:\n" + t;
-            ui.showMsg(response);
+            return response;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();
         }

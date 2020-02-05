@@ -3,9 +3,9 @@
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String farewell = "Good day my friend! I'm here anytime you need me :)";
-        ui.showMsg(farewell);
+        return farewell;
     }
 
     @Override

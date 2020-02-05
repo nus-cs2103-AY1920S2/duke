@@ -9,7 +9,7 @@ public abstract class Command {
      * @param storage Handler of tasks stored in file.
      * @throws DukeException If error occurs during execution of command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns whether the command requires exiting Duke.

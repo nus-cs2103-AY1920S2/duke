@@ -4,47 +4,43 @@
  */
 public class Duke {
 
+    private static final String filePath = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {}
+
+    public String init() {
         ui = new Ui();
         storage = new Storage(filePath);
+        String response = ui.getWelcome();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            response = ui.getLoadingError();
             tasks = new TaskList();
         }
+        return response;
     }
 
     /**
-     * Executes Duke and waits for user input before executing it.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
+    public String getResponse(String input) {
+        boolean isExit;
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            if (isExit) {
+                System.exit(0);
             }
+        } catch (DukeException e) {
+            response = ui.getError(e.getMessage());
         }
-    }
-
-    /**
-     * Initialises Duke with known filepath.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        return response;
     }
 }

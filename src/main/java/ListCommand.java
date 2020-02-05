@@ -3,7 +3,7 @@
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String response = "Here are the tasks in your list:\n";
         int counter = 1;
         for (Task t : tasks.getTasks()) {
@@ -12,7 +12,7 @@ public class ListCommand extends Command {
             counter++;
         }
         response = response.substring(0, response.length() - 1);
-        ui.showMsg(response);
+        return response;
     }
 
     @Override
