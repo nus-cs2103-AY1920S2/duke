@@ -73,7 +73,7 @@ public class Parser {
         return eventMatcher.find();
     }
 
-    public Command parseCommand(String userInput) throws NoCommandException {
+    public Command parseCommand(String userInput) throws NoCommandException, NoDescriptionException {
         if (this.isExitKey(userInput)) {
             return new ExitCommand();
         }

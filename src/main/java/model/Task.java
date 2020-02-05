@@ -3,19 +3,17 @@ package main.java.model;
 import main.java.exceptions.NoDescriptionException;
 
 public class Task {
-    protected String taskType;
     protected String description;
     protected boolean isDone;
 
-    public Task(String taskType) {
-        this.taskType = taskType;
-    };
+    static final String TASK_TYPE_STRING = "task";
 
-    public Task(String description, String taskType) throws NoDescriptionException {
-        this.taskType = taskType;
+    public Task() {}
+
+    public Task(String description) throws NoDescriptionException {
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    this.taskType + " cannot be empty.\n");
+                    TASK_TYPE_STRING + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -24,13 +22,17 @@ public class Task {
     public void setDescription(String description) throws NoDescriptionException {
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    this.taskType + " cannot be empty.\n");
+                    TASK_TYPE_STRING + " cannot be empty.\n");
         }
         this.description = description;
     }
 
     public void setParams(String... params) throws NoDescriptionException {
         this.setDescription(params[0]);
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public void markAsDone() {
