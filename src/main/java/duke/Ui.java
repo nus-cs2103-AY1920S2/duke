@@ -75,15 +75,15 @@ public class Ui {
     }
 
     public String showValidError() {
-        return format + "      Please enter a only one Task number!\n" + format;
+        return format + "      Please enter a only one duke.Task number!\n" + format;
     }
 
     public String showNumError() {
-        return format + "      Please enter a Task number!\n" + format;
+        return format + "      Please enter a duke.Task number!\n" + format;
     }
 
     public String showDescriptionError() {
-        return format + "      Please enter a Task description!\n" + format;
+        return format + "      Please enter a duke.Task description!\n" + format;
     }
 
     public String showActionError() {
