@@ -10,60 +10,61 @@ public class Parser {
     private Scanner sc;
     private boolean bye = false;
 
-    public void parse() throws Exception {
-        while (sc.hasNext()) {
-            String str = sc.nextLine();
+    public String parse(String input) throws Exception {
+        String reply;
+        //while (sc.hasNext()) {
+            //String str = sc.nextLine();
+        String str = input;
 
-            if (str.isEmpty()) {
-                continue;
-            }
-
-            System.out.println(ui.lineBarrier());
-            parseCommands(str);
-            if (bye) {
-                break;
-            }
-
+        if (str.isEmpty()) {
+            return "Please enter a command :D";
         }
+        reply = parseCommands(str);
+        if (bye) {
+            return reply;
+        }
+        return reply;
     }
+
 
     public Parser(TaskList tasklist) {
         this.tasklist = tasklist;
         this.sc = new Scanner(System.in);
         this.ui = new Ui();
     }
-    public void parseCommands(String str) throws Exception {
+    public String parseCommands(String str) throws Exception {
+
+        String reply = ui.lineBarrier();
 
         if (str.equals("bye")) {
-            tasklist.bye();
+            reply = tasklist.bye();
             bye = true;
-            return;
 
         } else if (str.equals("list")) {
-            tasklist.printList();
+            reply = tasklist.printList();
 
         } else if (str.contains("done")) {
-            tasklist.done(str);
+            reply = tasklist.done(str);
 
         } else if (str.contains("todo")) {
-            tasklist.todo(str);
+            reply = tasklist.todo(str);
 
         } else if (str.contains("deadline")) {
-            tasklist.deadline(str);
+            reply = tasklist.deadline(str);
 
         } else if (str.contains("event")) {
-            tasklist.event(str);
+            reply = tasklist.event(str);
 
         } else if (str.contains("delete")) {
-            tasklist.delete(str);
+            reply = tasklist.delete(str);
 
         } else if (str.contains("find")) {
-            tasklist.find(str);
+            reply = tasklist.find(str);
 
         } else {
-            System.out.println(ui.unknownCommand());
+            reply = ui.unknownCommand();
         }
-        System.out.println(ui.lineBarrier() + "\n\n");
+        return reply + ui.lineBarrier() + "\n\n";
     }
 }
 

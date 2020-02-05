@@ -11,21 +11,27 @@ public class Storage {
     private int latest_index = 0;
     private BufferedWriter bw;
 
-    public ArrayList<Task> readFile() throws Exception {
+    public ArrayList<Task> readFile() {
         ArrayList<Task> list = new ArrayList<>();
+        String line;
+        BufferedReader br;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            br = new BufferedReader(new FileReader(fileName));
+            try {
+                while ((line = br.readLine()) != null) {
+                    list = processLines(line, list);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         } catch (FileNotFoundException e) {
-            File file = new File(fileName);
-            file.createNewFile();
-        }
-
-        BufferedReader br = new BufferedReader(new FileReader(fileName));
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            list = processLines(line,list);
+            try {
+                File file = new File(fileName);
+                file.createNewFile();
+            } catch (Exception f) {
+                System.out.println(f);
+            }
         }
         return list;
     }
