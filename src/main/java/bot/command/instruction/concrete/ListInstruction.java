@@ -12,8 +12,8 @@ import bot.command.instruction.parse.OneWordInstruction;
 import bot.task.Task;
 
 public class ListInstruction extends OneWordInstruction
-        implements StorageReading<Task>
-{
+        implements StorageReading<Task> {
+
     public ListInstruction(Command... commands) {
         super(commands);
     }
@@ -23,8 +23,19 @@ public class ListInstruction extends OneWordInstruction
         // Prints out all the stored items,
         // in order which they were stored
         int length = store.getSize();
-        for (int i = 0; i < length; i++) {
-            System.out.println(store.retrieve(i + 1));
+        if (length == 0) {
+            ui.showNoTasksMessage();
+        } else {
+            StringBuilder tasks = new StringBuilder();
+            for (int i = 0; i < length; i++) {
+                if (i == 0) {
+                    tasks.append(store.retrieve(i + 1));
+                } else {
+                    // add a new line for multiple tasks
+                    tasks.append("\n").append(store.retrieve(i + 1));
+                }
+            }
+            ui.showCustomMessage(tasks.toString());
         }
     }
 }

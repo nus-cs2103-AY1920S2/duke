@@ -12,8 +12,8 @@ import bot.command.instruction.parse.TwoWordsInstruction;
 import bot.task.Task;
 
 public class DeleteInstruction extends TwoWordsInstruction
-        implements StorageModifying<Task>
-{
+        implements StorageModifying<Task> {
+
     public DeleteInstruction(Command... commands) {
         super(commands);
     }

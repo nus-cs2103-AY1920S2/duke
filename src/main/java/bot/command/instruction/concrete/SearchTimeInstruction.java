@@ -15,8 +15,8 @@ import bot.util.PrettyTime;
 import java.util.ArrayList;
 
 public class SearchTimeInstruction extends TextInstruction
-        implements StorageSearching<Task>
-{
+        implements StorageSearching<Task> {
+
     public SearchTimeInstruction(Command... commands) {
         super(commands);
     }
@@ -42,13 +42,27 @@ public class SearchTimeInstruction extends TextInstruction
             }
         }
 
+        printTasksToUi(store, ui, indexes);
+    }
+
+    /**
+     * Prints a message to the UI, given a list of
+     * indexes of a task
+     *
+     * @param store The store which contains the Tasks
+     * @param ui The UI to print to
+     * @param indexes The ArrayList of Task indexes
+     */
+    public static void printTasksToUi(Storage<Task> store, Ui ui, ArrayList<Integer> indexes) {
         if (indexes.isEmpty()) {
             ui.showFailedToFind();
         } else {
-            ui.showFoundTask();
+            StringBuilder tasks = new StringBuilder();
             for (Integer id : indexes) {
-                System.out.println(store.retrieve(id));
+                tasks.append(store.retrieve(id)).append("\n");
             }
+            // remove extra new line character
+            ui.showFoundTask(tasks.deleteCharAt(tasks.length() - 1).toString());
         }
     }
 }

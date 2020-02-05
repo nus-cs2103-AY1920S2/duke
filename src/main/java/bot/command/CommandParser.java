@@ -68,11 +68,11 @@ public class CommandParser {
      */
     public ParsedInstruction parse(String command)
             throws InadequateArgumentsException, TooManyArgumentsException,
-            UnknownInstructionException
-    {
+            UnknownInstructionException {
+
         String firstWord = command.split("\\s+", 2)[0];
-        if (CommandParser.instrMap.containsKey(firstWord) &&
-                CommandParser.commandMap.containsKey(firstWord)
+        if (CommandParser.instrMap.containsKey(firstWord)
+                && CommandParser.commandMap.containsKey(firstWord)
         ) {
             return CommandParser.instrMap.get(firstWord)
                     .parse(command, CommandParser.commandMap.get(firstWord));

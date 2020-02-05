@@ -19,13 +19,14 @@ public abstract class TwoWordsInstruction extends Instruction {
 
     @Override
     public ParsedInstruction parse(String rawCommand, Command command)
-            throws InadequateArgumentsException, TooManyArgumentsException
-    {
-        assert(rawCommand.startsWith(command.getWord()));
+            throws InadequateArgumentsException, TooManyArgumentsException {
+
+        assert (rawCommand.startsWith(command.getWord()));
         String[] words = rawCommand.split("\\s+");
         if (words.length == 2) {
             return new ParsedInstruction(this, words[1]);
         } else if (words.length < 2) {
+            System.out.println(command.getWord());
             throw new InadequateArgumentsException(command.getWord());
         } else {
             throw new TooManyArgumentsException(command.getWord());

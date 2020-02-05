@@ -13,8 +13,8 @@ import bot.task.Deadline;
 import bot.task.Task;
 
 public class DeadlineInstruction extends AddTaskInstruction
-        implements StorageWriting<Task>
-{
+        implements StorageWriting<Task> {
+
     public DeadlineInstruction(Command... commands) {
         super(commands);
     }
