@@ -29,15 +29,15 @@ public class SearchTimeInstruction extends TextInstruction
         int size = store.getSize();
 
         if (pt.hasTime()) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 1; i <= size; i++) {
                 if (store.get(i).getPrettyTime().equals(pt)) {
-                    indexes.add(i + 1);
+                    indexes.add(i);
                 }
             }
         } else {
-            for (int i = 0; i < size; i++) {
+            for (int i = 1; i <= size; i++) {
                 if (store.get(i).getPrettyTime().matchDate(pt)) {
-                    indexes.add(i + 1);
+                    indexes.add(i);
                 }
             }
         }

@@ -81,7 +81,7 @@ public class TaskStorage implements Storage<Task> {
      */
     @Override
     public Task get(int index) {
-        if (index < 0 || index > this.getSize()) {
+        if (index <= 0 || index > this.getSize()) {
             // a placeholder task
             return new Todo("index out of bounds");
         } else {

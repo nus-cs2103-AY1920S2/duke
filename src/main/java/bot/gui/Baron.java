@@ -79,7 +79,7 @@ public class Baron {
         }
 
         // execute the instruction
-        if (!executor.execute(instr.getInstruction(), instr.getArguments())) {
+        if (!executor.execute(instr)) {
             // exit after 0.5 seconds
             Executors.newScheduledThreadPool(1)
                     .schedule(() -> System.exit(0),750, TimeUnit.MILLISECONDS);

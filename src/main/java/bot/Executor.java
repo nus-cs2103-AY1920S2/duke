@@ -66,15 +66,15 @@ public class Executor {
     public boolean execute(ParsedInstruction parsed) {
         Instruction inst = parsed.getInstruction();
         ArrayList<String> arguments = parsed.getArguments();
-        if (parsed instanceof NotStorable) {
+        if (inst instanceof NotStorable) {
             return this.executeNotStorable((NotStorable) inst, arguments);
-        } else if (parsed instanceof StorageModifying) {
+        } else if (inst instanceof StorageModifying) {
             return this.executeModifying((StorageModifying<Task>) inst, arguments);
-        } else if (parsed instanceof StorageReading) {
+        } else if (inst instanceof StorageReading) {
             return this.executeReading((StorageReading<Task>) inst, arguments);
-        } else if (parsed instanceof StorageSearching) {
+        } else if (inst instanceof StorageSearching) {
             return this.executeSearching((StorageSearching<Task>) inst, arguments);
-        } else if (parsed instanceof StorageWriting) {
+        } else if (inst instanceof StorageWriting) {
             return this.executeWriting((StorageWriting<Task>) inst, arguments);
         } else {
             return false;
