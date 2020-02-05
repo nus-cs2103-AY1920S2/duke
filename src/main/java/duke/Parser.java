@@ -8,6 +8,7 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.common.ErrorMessage;
@@ -48,10 +49,10 @@ public class Parser {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
-        LocalDateTime deadline = parseDate(details.substring(keyPosition + 5));
+        LocalDateTime datetime = parseDate(details.substring(keyPosition + 5));
 
         HashMap<String, Object> values = new HashMap<>();
-        values.put("deadline", deadline);
+        values.put("datetime", datetime);
 
         return new AddCommand(TaskType.DEADLINE, description, values);
     }
@@ -95,6 +96,20 @@ public class Parser {
         }
 
         return new MarkCommand(index);
+    }
+
+    /**
+     * Parses the find command with its details.
+     * @param details The search string of the find command.
+     * @return The FindCommand object with its search string.
+     * @throws DukeException Error when parsing the command.
+     */
+    static Command parseFind(String details) throws DukeException {
+        if (details.length() == 0) {
+            throw new DukeException(ErrorMessage.EMPTY_SEARCH);
+        }
+
+        return new FindCommand(details);
     }
 
     static Command parseDelete(String details) throws DukeException {
@@ -141,6 +156,8 @@ public class Parser {
             return new ListCommand();
         case "DONE":
             return parseDone(details);
+        case "FIND":
+            return parseFind(details);
         case "DELETE":
             return parseDelete(details);
         case "BYE":

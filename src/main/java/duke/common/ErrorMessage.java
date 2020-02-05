@@ -13,6 +13,8 @@ public class ErrorMessage {
 
     public static String EMPTY_INDEX = "A list index is required.";
 
+    public static String EMPTY_SEARCH = "I find that you are annoying.";
+
     public static String INVALID_DATETIME = "The date/time format is invalid.";
 
     public static String INVALID_INDEX = "The list index is invalid.";

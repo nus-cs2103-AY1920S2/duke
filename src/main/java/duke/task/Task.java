@@ -25,6 +25,14 @@ public abstract class Task implements Saveable {
     }
 
     /**
+     * Gets the description of the task.
+     * @return The description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Formats to vertical bar seperated values.
      * @return The string to be used in file saving.
      */
