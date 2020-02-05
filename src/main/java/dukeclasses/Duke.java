@@ -28,15 +28,15 @@ import java.io.PrintStream;
  * to be done. It classifies tasks into deadline, todo and event.
  * It can add, delete, list all the tasks, find task with a keyword and mark them as done.
  */
-public class Duke  {
+public class Duke {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/tonystark.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/thanos.jpg"));
 
 
 
@@ -97,11 +97,10 @@ public class Duke  {
             ui.handleInputs(input);
         }
 
-
         System.out.flush();
         System.setOut(helper);
 
-        return "Duke heard: " + baos.toString();
+        return baos.toString();
     }
 
     /*
