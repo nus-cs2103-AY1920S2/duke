@@ -1,34 +1,30 @@
-import java.util.Scanner;
-
 /**
  *  makes sense of the user command
  */
 public class Parser {
 
-    Scanner scan;
     Ui ui = new Ui();
 
     public Parser() {
-        this.scan = new Scanner(System.in);
     }
 
     /**
      * scanner scan task's instruction and run accordingly
      * @throws DukeException when users input task which bot does not understand
      */
-    public void scan() throws DukeException {
-        ui.greeting();
-        String command = scan.nextLine();
-        while (!command.equals("bye")) {
-            if (command.contains("find")) {
+    public String scan(String command) throws DukeException {
+        String toPrint = "";
+
+            if(command.contains(("bye"))) {
+                toPrint = ui.bye();
+            }
+            else if (command.contains("find")) {
                 TaskList task = new TaskList(command);
-                task.find();
-                command = scan.nextLine();
+                toPrint =task.find();
 
             } else if (command.contains("delete")) {
                 TaskList task = new TaskList(command);
-                task.delete();
-                command = scan.nextLine();
+                toPrint = task.delete();
 
             } else if (!command.contains("todo")
                     && !command.contains("deadline")
@@ -41,31 +37,26 @@ public class Parser {
 
             } else if (command.contains("todo")) {
                 TaskList task = new TaskList(command);
-                task.toDo();
-                command = scan.nextLine();
+                toPrint = task.toDo();
 
             } else if (command.contains("deadline")) {
                 TaskList task = new TaskList(command);
-                task.deadLine();
-                command = scan.nextLine();
+                toPrint = task.deadLine();
 
             } else if (command.contains("event")) {
                 TaskList task = new TaskList(command);
-                task.event();
-                command = scan.nextLine();
+                toPrint = task.event();
 
             } else if (command.contains("done")) {
                 TaskList task = new TaskList(command);
-                task.done();
-                command = scan.nextLine();
+                toPrint = task.done();
 
             } else if (command.equals("list")) {
                 TaskList task = new TaskList(command);
-                task.printList();
-                command = scan.nextLine();
+                toPrint = task.printList();
+
 
             }
-        }
-        ui.bye();
+        return toPrint;
     }
 }

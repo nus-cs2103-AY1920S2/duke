@@ -1,9 +1,6 @@
 import java.io.IOException;
 
-import java.util.List;
-
 public class Duke {
-
     private Storage storage;
     private Parser parser = new Parser();
     TaskList tasklist;
@@ -23,22 +20,25 @@ public class Duke {
         }
     }
 
+    public Duke() {
+
+    }
+
     /**
-     *  parser.scan() will read inputs from user,
-     *  subsequently writes output into txt.file
+     * takes in user input as string and output it as task
+     * @param input takes in user input
+     * @return the reply by bot in task
      */
-    public void run() {
+    public String getResponse(String input) {
+        String s = "";
         try {
-            parser.scan();
-            List<Task> task = tasklist.getDoneTasks();
-            storage.setDoneTasks(task);
-            storage.load();
+            s = parser.scan(input);
+            return s;
         } catch (Exception e) {
             System.err.println(e);
         }
+        return s;
     }
-
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
-    }
+//    }
 }
+

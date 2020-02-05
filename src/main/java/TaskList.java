@@ -44,73 +44,82 @@ public class TaskList {
         this.allInstructions = i;
     }
 
-    public void delete() {
+    public String delete() {
         int num = Integer.parseInt(description.split(" ")[1]);
-        ui.remove(store.get(num - 1));
+        String toPrint = ui.remove(store.get(num - 1)) + "\n";
         store.remove(num - 1);
-        ui.storeSize(store.size());
+        toPrint += ui.storeSize(store.size());
+        return toPrint;
     }
 
-    public void toDo() throws DukeException {
+    public String toDo() throws DukeException {
         if (description.split(" ").length > 1) {
             String todo = description.substring(5);
             Task taskDo = new Todo(todo);
             store.add(taskDo);
-            ui.gotIt();
-            System.out.println(taskDo);
-            ui.storeSize(store.size());
+            String toPrint = ui.gotIt() + "\n";
+            toPrint += taskDo.toString() + "\n";
+            toPrint += ui.storeSize(store.size());
+            return toPrint;
         } else {
             throw new DukeException("))-: OOPS!!! The description of a todo"
                     + " cannot be empty.");
         }
     }
 
-    public void deadLine() {
+    public String deadLine() {
         String by = description.split("/")[1].substring(3);
         by += "/" +description.split("/")[2] + "/" + description.split("/")[3];
         String d = description.split("/")[0].substring(9);
         Task deadline = new Deadline(d, by);
         store.add(deadline);
-        ui.gotIt();
-        System.out.println(deadline);
-        ui.storeSize(store.size());
+        String toPrint = ui.gotIt() + "\n";
+        toPrint += deadline.toString() + "\n";
+        toPrint += ui.storeSize(store.size());
+        return toPrint;
     }
 
-    public void event() {
+    public String event() {
         String at = description.split("/")[1].substring(3);
         at += "/" +description.split("/")[2] + "/" + description.split("/")[3];
         String d = description.split("/")[0].substring(6);
         Task event = new Events(d, at);
         store.add(event);
-        ui.gotIt();
-        System.out.println(event);
-        ui.storeSize(store.size());
+        String toPrint = ui.gotIt() + "\n";
+        toPrint += event.toString();
+        toPrint += "\n" + ui.storeSize(store.size());
+        return toPrint;
     }
 
-    public void done() {
+    public String done() {
         int num = Integer.parseInt(description.split(" ")[1]);
         Task t = store.get(num - 1);
         t.markAsDone();
-        ui.doneTask();
-        System.out.println(t);
+        String toPrint = ui.doneTask() + "\n";
+        toPrint += t.toString();
+        return toPrint;
     }
 
-    public void find() {
+    public String find() {
         ui.matchingTask();
         String matching = description.substring(5);
+        String toPrint = "";
         for (int i = 0; i < store.size(); i++) {
             if (store.get(i).getDescription().contains(matching)) {
-                System.out.println(store.get(i));
+                toPrint = store.get(i).toString();
             }
         }
+        return toPrint;
     }
 
-    public void printList() {
+    public String printList() {
         ui.taskList();
+        String toPrint = "";
         for (int i = 0; i < store.size(); i++) {
             counter++;
-            System.out.println(counter + ". " + store.get(i));
+            toPrint += "\n" + counter + ". " + store.get(i).toString();
         }
+        return toPrint;
     }
 
 }

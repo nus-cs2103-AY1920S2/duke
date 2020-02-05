@@ -7,35 +7,38 @@ public class Ui {
 
     }
 
-    public void greeting() {
-        System.out.println("Hello! I'm Duke\n  " +  "What can i do for you?");
+    public String greeting() {
+        return "Hello! I'm Duke\n What can i do for you?";
     }
 
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void gotIt() {
-        System.out.println("Got it. I've added this task:");
+    public String gotIt() {
+        return "Got it. I've added this task:";
     }
 
-    public void remove(Task t) {
-        System.out.println("Noted. I've removed this task:\n " + t);
+    public String remove(Task t) {
+        return "Noted. I've removed this task:\n " + t;
     }
 
-    public void storeSize(int num) {
-        System.out.println("Now you have " + num + " tasks in the list.");
+    public String storeSize(int num) {
+
+        return "Now you have " + num + " tasks in the list.";
     }
 
-    public void doneTask() {
-        System.out.println("Nice! I've marked this task as done: ");
+    public String doneTask() {
+
+        return "Nice! I've marked this task as done: ";
     }
 
-    public void taskList() {
-        System.out.println("Here are the tasks in your list: ");
+    public String taskList() {
+
+        return "Here are the tasks in your list: ";
     }
 
-    public void matchingTask() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String matchingTask() {
+        return "Here are the matching tasks in your list:";
     }
 }
