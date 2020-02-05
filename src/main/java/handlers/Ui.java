@@ -78,7 +78,7 @@ public class Ui {
     }
 
     public void showDoneTask(Task taskDone) {
-        setResponse("Nice! I've marked this done as done: ");
+        setResponse("Nice! I've marked this task as done: ");
         setResponse("  " + taskDone.toString());
         System.out.println(this.response);
     }
