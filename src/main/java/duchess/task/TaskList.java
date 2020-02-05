@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static duchess.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duchess.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
+
 /**
  * The {@code TaskList} object helps to store and manage {@code Task}s.
  */
@@ -57,7 +60,7 @@ public class TaskList {
         try {
             this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new DuchessException("You're referring to a task which does not exist!");
+            throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         }
     }
 
@@ -72,7 +75,7 @@ public class TaskList {
         try {
             return this.tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new DuchessException("You're referring to a task which does not exist!");
+            throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         }
     }
 
@@ -85,8 +88,8 @@ public class TaskList {
      */
     public Task completeTask(int index) throws DuchessException {
         Task taskToComplete = this.getTask(index);
-        if (taskToComplete.isCompleted()) {
-            throw new DuchessException("You have already completed this task!");
+        if (taskToComplete.isCompleted) {
+            throw new DuchessException(ERROR_TASK_ALREADY_COMPLETED);
         }
         taskToComplete.toggleIsCompleted();
         return taskToComplete;
@@ -113,7 +116,7 @@ public class TaskList {
     public ArrayList<Pair<Task, Integer>> find(String searchWords) {
         return IntStream.range(0, this.tasks.size())
                 .mapToObj(i -> new Pair<>(this.tasks.get(i), i))
-                .filter(p -> p.getFirst().getDescription().toLowerCase().contains(searchWords.toLowerCase()))
+                .filter(p -> p.getFirst().description.toLowerCase().contains(searchWords.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

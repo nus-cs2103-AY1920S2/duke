@@ -19,6 +19,14 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static duchess.util.MagicStrings.ERROR_FAIL_TO_LOAD;
+import static duchess.util.MagicStrings.ERROR_FAIL_TO_LOAD_AND_SAVE;
+import static duchess.util.MagicStrings.ERROR_FAIL_TO_SAVE;
+import static duchess.util.MagicStrings.GSON_ATTR_DEADLINE;
+import static duchess.util.MagicStrings.GSON_ATTR_DESCRIPTION;
+import static duchess.util.MagicStrings.GSON_ATTR_IS_COMPLETED;
+import static duchess.util.MagicStrings.GSON_ATTR_TIME_FRAME;
+
 /**
  * The {@code Storage} class helps to save and load @{code ArrayList}s of
  * {@code Task}s from a given File Path.
@@ -51,7 +59,7 @@ public class Storage {
             fileWriter.write(this.gson.toJson(taskArray, Task[].class));
             fileWriter.close();
         } catch (IOException e) {
-            throw new DuchessException("Facing difficulties saving your tasks right now.");
+            throw new DuchessException(ERROR_FAIL_TO_SAVE);
         }
     }
 
@@ -68,17 +76,18 @@ public class Storage {
             ArrayList<Task> result = new ArrayList<>();
             for (int i = 0; i < array.size(); i++) {
                 JsonObject taskToCheck = (JsonObject) array.get(i);
-                if (taskToCheck.has("deadline")) {
-                    result.add(new Deadline(this.gson.fromJson(taskToCheck.get("description"), String.class),
-                            this.gson.fromJson(taskToCheck.get("deadline"), LocalDateTime.class),
-                            this.gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
-                } else if (taskToCheck.has("timeFrame")) {
-                    result.add(new Event(this.gson.fromJson(taskToCheck.get("description"), String.class),
-                            this.gson.fromJson(taskToCheck.get("timeFrame"), String.class),
-                            this.gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
+                if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
+                    result.add(new Deadline(this.gson.fromJson(
+                            taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+                } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {
+                    result.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
                 } else {
-                    result.add(new ToDo(this.gson.fromJson(taskToCheck.get("description"), String.class),
-                            this.gson.fromJson(taskToCheck.get("isCompleted"), boolean.class)));
+                    result.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
                 }
             }
             return result;
@@ -86,10 +95,9 @@ public class Storage {
             File file = new File(this.filePath);
             File directories = file.getParentFile();
             if (!directories.exists() && !directories.mkdirs()) {
-                throw new DuchessException("Failed to load save file! "
-                        + "You will also not be able to save.");
+                throw new DuchessException(ERROR_FAIL_TO_LOAD_AND_SAVE);
             }
-            throw new DuchessException("Failed to load save file! Creating new save file.");
+            throw new DuchessException(ERROR_FAIL_TO_LOAD);
         }
     }
 }

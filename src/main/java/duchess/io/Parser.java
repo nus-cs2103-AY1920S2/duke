@@ -3,6 +3,8 @@ package duchess.io;
 import duchess.command.Command;
 import duchess.exception.DuchessException;
 
+import static duchess.util.MagicStrings.ERROR_INVALID_COMMAND;
+
 /**
  * The {@code Parser} class helps to parse given user inputs
  * into a {@code Command} of the appropriate type.
@@ -20,7 +22,7 @@ public class Parser {
         try {
             return Command.valueOf(command.split("\\s", 2)[0].toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new DuchessException("I don't see what I can do with what you just told me.");
+            throw new DuchessException(ERROR_INVALID_COMMAND);
         }
     }
 }

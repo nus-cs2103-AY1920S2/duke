@@ -14,6 +14,13 @@ import duchess.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static duchess.util.MagicStrings.ERROR_DEADLINE_MISSING_CONTENT;
+import static duchess.util.MagicStrings.ERROR_DEADLINE_MISSING_DEADLINE;
+import static duchess.util.MagicStrings.ERROR_EVENT_MISSING_CONTENT;
+import static duchess.util.MagicStrings.ERROR_EVENT_MISSING_TIME_FRAME;
+import static duchess.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duchess.util.MagicStrings.ERROR_TODO_MISSING_CONTENT;
+
 /**
  * The {@code CommandHandler} class contains all static methods to handle
  * commands given the same arguments of command, taskList, ui and storage.
@@ -33,7 +40,7 @@ public class CommandHandler {
                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() < 2) {
-            throw new DuchessException("Your todo content cannot be empty! Type help if you need help.");
+            throw new DuchessException(ERROR_TODO_MISSING_CONTENT);
         }
         Task newTask = new ToDo(commands.get(1).trim());
         taskList.addTask(newTask);
@@ -55,11 +62,11 @@ public class CommandHandler {
                                      Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() < 2) {
-            throw new DuchessException("Your event content cannot be empty! Type help if you need help.");
+            throw new DuchessException(ERROR_EVENT_MISSING_CONTENT);
         }
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split("/at")));
         if (details.size() < 2) {
-            throw new DuchessException("I don't know when is your event! Please use /at [time here].");
+            throw new DuchessException(ERROR_EVENT_MISSING_TIME_FRAME);
         }
         Task newTask = new Event(details.get(0).trim(), details.get(1).trim());
         taskList.addTask(newTask);
@@ -82,11 +89,11 @@ public class CommandHandler {
                                         Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() < 2) {
-            throw new DuchessException("Your deadline content cannot be empty! Type help if you need help.");
+            throw new DuchessException(ERROR_DEADLINE_MISSING_CONTENT);
         }
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split("/by")));
         if (details.size() < 2) {
-            throw new DuchessException("I don't know when is your deadline! Please use /by [deadline here].");
+            throw new DuchessException(ERROR_DEADLINE_MISSING_DEADLINE);
         }
         String timeDetails = details.get(1).trim().toLowerCase();
         Task newTask = new Deadline(details.get(0).trim(), DateTimeParser.parseDateTime(timeDetails));
@@ -124,7 +131,7 @@ public class CommandHandler {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
         if (indexAsInt < 0 || indexAsInt > taskList.size()) {
-            throw new DuchessException("You're referring to a task that does not exist!");
+            throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         } else {
             Task taskCompleted = taskList.completeTask(indexAsInt - 1);
             storage.save(taskList);
@@ -164,7 +171,7 @@ public class CommandHandler {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
         if (indexAsInt < 0 || indexAsInt > taskList.size()) {
-            throw new DuchessException("You're referring to a task that does not exist!");
+            throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         } else {
             Task taskToComplete = taskList.getTask(indexAsInt - 1);
             taskList.removeTask(indexAsInt - 1);

@@ -10,6 +10,8 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
+import static duchess.util.MagicStrings.ERROR_WRONG_FORMAT;
+
 /**
  * The {@code DateTimeParser} is a helper class with static
  * methods to parse user provided inputs into {@code LocalDateTime}
@@ -39,12 +41,11 @@ public class DateTimeParser {
         return getDateTimeFromWords(dateTimeString)
                 .or(() -> getDateTimeUsingDateTimePattern(dateTimeString)
                         .or(() -> getDateTimeUsingDatePattern(dateTimeString)))
-                .orElseThrow(() -> new DuchessException("Your input is of the wrong format.\n"
-                        + "\tType help to view the accepted formats."));
+                .orElseThrow(() -> new DuchessException(ERROR_WRONG_FORMAT));
     }
 
     private static Optional<LocalDateTime> getDateTimeFromWords(String dateTimeString) {
-        switch (dateTimeString) {
+        switch (dateTimeString.toLowerCase()) {
         case "today":
             return Optional.of(LocalDate.now().atTime(17, 0));
         case "tonight":
