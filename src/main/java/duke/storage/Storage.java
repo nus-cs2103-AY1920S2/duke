@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * The Storage program loads and updates the file. It interprets the content of
  * file in order to do so. It also contains TaskList.
  *
- * @version 1.0
- * @since 2020-01-28
+ * @version 1.1
+ * @since 4/2/2020
  */
 public class Storage {
 

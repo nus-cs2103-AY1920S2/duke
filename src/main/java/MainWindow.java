@@ -24,12 +24,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/LuLu.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ChuChu.jpg"));
 
+    /**
+     * Initialises the window.
+     */
     @FXML
     public void initialize() {
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Chu Chu \n What can I do for you ? \n"
-                , dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Chu Chu \n What can I do for you ? \n",
+                dukeImage));
     }
 
     public void setDuke(Duke d) {

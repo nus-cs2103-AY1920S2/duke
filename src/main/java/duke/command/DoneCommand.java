@@ -39,16 +39,12 @@ public class DoneCommand extends Command {
         try {
 
             Task t = taskList.getTask(Integer.parseInt(taskDescriptionArr[1]));
-           /* System.out.println(HEADER);
-            System.out.println(taskList.markDone(t));
-            System.out.println();
-           */
 
-            return "Nice! I've marked this task as done:\n"+ taskList.markDone(t);
+            return "Nice! I've marked this task as done:\n" + taskList.markDone(t);
 
         } catch (IOException e) {
 
-           return e.toString();
+            return e.toString();
 
         }
 

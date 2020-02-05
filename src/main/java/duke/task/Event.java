@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * and is able to return the type of task it is.
  *
  * @version 1.0
- * @since 2020-01-28
+ * @since 28/1/2020
  */
 public class Event extends Task {
 

@@ -6,9 +6,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 /**
  * The AddCommand program call method to add task into the taskList.
@@ -48,18 +46,18 @@ public class AddCommand extends Command {
 
             if (taskDescriptionArr[0].equals("todo")) {
 
-                return  "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.TODO)
-                        + "\n" + taskList.reportTotal();
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1],
+                        dateTime, Task.Types.TODO) + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("deadline")) {
 
-                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.DEADLINE)
-                        + "\n" + taskList.reportTotal();
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1],
+                        dateTime, Task.Types.DEADLINE) + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("event")) {
 
-                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.EVENT)
-                        + "\n" + taskList.reportTotal();
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1],
+                        dateTime, Task.Types.EVENT) + "\n" + taskList.reportTotal();
 
             }
 
@@ -67,11 +65,11 @@ public class AddCommand extends Command {
 
             if (e instanceof Exceptions) {
 
-             return ((Exceptions)e).errorMessage();
+                return ((Exceptions) e).errorMessage();
 
             } else {
 
-               return e.toString();
+                return e.toString();
 
             }
         }

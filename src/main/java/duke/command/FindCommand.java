@@ -1,10 +1,7 @@
 package duke.command;
 
-import com.sun.net.httpserver.Headers;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * The FindCommand calls method to find tasks with relevant keyword.
@@ -36,6 +33,6 @@ public class FindCommand extends Command {
     @Override
     public String executeCommand(String[] taskDescriptionArr) {
 
-     return taskList.findTask(taskDescriptionArr[1]);
+        return taskList.findTask(taskDescriptionArr[1]);
     }
 }

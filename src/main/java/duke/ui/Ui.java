@@ -12,14 +12,11 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
-import java.util.Arrays;
-
-
 /**
  * The Ui program gets user input, interprets it and calls relevant methods.
  *
- * @version 1.0
- * @since 2020-01-28
+ * @version 1.1
+ * @since 4/2/2020
  */
 public class Ui {
 
@@ -42,60 +39,61 @@ public class Ui {
      * Takes in user input and calls relevant method.
      *
      * @param input is user input.
+     * @return message relevant to command.
      */
     public String frontDesk(String input) {
 
-            String[] taskDescriptionArr = null;
-            Parser parser = new Parser();
+        String[] taskDescriptionArr = null;
+        Parser parser = new Parser();
 
-                try {
-                    taskDescriptionArr = parser.parseUserInput(input);
-                    Command c = null;
+        try {
+            taskDescriptionArr = parser.parseUserInput(input);
+            Command c = null;
 
-                    if (taskDescriptionArr[0].equals("bye")) {
+            if (taskDescriptionArr[0].equals("bye")) {
 
-                        c = new ExitCommand(null, null);
+                c = new ExitCommand(null, null);
 
-                    } else if (taskDescriptionArr[0].equals("list")) {
+            } else if (taskDescriptionArr[0].equals("list")) {
 
-                        c = new ListCommand(null, taskList);
+                c = new ListCommand(null, taskList);
 
-                    } else if (taskDescriptionArr[0].equals("done")) {
+            } else if (taskDescriptionArr[0].equals("done")) {
 
-                        c = new DoneCommand(storage, taskList);
+                c = new DoneCommand(storage, taskList);
 
-                    } else if (taskDescriptionArr[0].equals("delete")) {
+            } else if (taskDescriptionArr[0].equals("delete")) {
 
-                        c = new DeleteCommand(storage, taskList);
+                c = new DeleteCommand(storage, taskList);
 
-                    } else if (taskDescriptionArr[0].equals("find")) {
+            } else if (taskDescriptionArr[0].equals("find")) {
 
-                        c = new FindCommand(null, taskList);
+                c = new FindCommand(null, taskList);
 
-                    } else {
+            } else {
 
-                        c = new AddCommand(storage, taskList);
-                    }
+                c = new AddCommand(storage, taskList);
+            }
 
-                    return c.executeCommand(taskDescriptionArr);
+            return c.executeCommand(taskDescriptionArr);
 
-                } catch (Exception e) {
+        } catch (Exception e) {
 
-                    if (e instanceof Exceptions) {
+            if (e instanceof Exceptions) {
 
-                     return ((Exceptions) e).errorMessage();
+                return ((Exceptions) e).errorMessage();
 
-                    } else {
+            } else {
 
-                  return e.toString();
+                return e.toString();
 
-                    }
-
-                }
+            }
 
         }
 
-
     }
+
+
+}
 
 

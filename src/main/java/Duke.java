@@ -13,13 +13,17 @@ import javafx.scene.layout.VBox;
 /**
  * The Duke Program setup needed object to run the program and gets responses from Ui.
  *
- * @version 1.0
- * @since 2020-01-28
+ * @version 1.1
+ * @since 5/2/2020
  */
 public class Duke {
 
-    Ui Ui ;
+    Ui ui;
 
+    /**
+     * Creates objects needed for the program and
+     * calls relevant method to set up the objects.
+     */
     public void setup() {
 
         TaskList taskList = new TaskList();
@@ -29,13 +33,19 @@ public class Duke {
         storage.addTaskList(taskList);
         storage.loadFile();
         Ui ui = new Ui(storage, taskList);
-        this.Ui = ui;
+        this.ui = ui;
 
     }
 
+    /**
+     * Gets response based on user input.
+     *
+     * @param input refers to user input.
+     * @return response in string form.
+     */
     String getResponse(String input) {
 
-        return Ui.frontDesk(input);
+        return ui.frontDesk(input);
     }
 
 }

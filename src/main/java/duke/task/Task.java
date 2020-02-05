@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * The Task program is a general task class that other tasks inherits from.
  *
  * @version 1.0
- * @since 2020-01-28
+ * @since 28/1/2020
  */
 public class Task {
 
