@@ -1,5 +1,7 @@
 package bot;
 
+import java.util.ArrayList;
+
 /**
  * Class that represents the UI of 4LC3N-BOT
  */
@@ -177,17 +179,25 @@ public class Ui {
     /**
      * Displays the done message
      * (task completion)
+     *
+     * @param doneTask The Task that was done, as
+     *                 a String to be printed
      */
-    public void showDone() {
+    public void showDone(String doneTask) {
         System.out.println(Ui.DONE_MESSAGE);
+        System.out.println(doneTask);
     }
 
     /**
      * Displays the not done message
      * (task set to "not done")
+     *
+     * @param undoneTask The Task that was set to not done,
+     *                   as a String to be printed
      */
-    public void showNotDone() {
+    public void showNotDone(String undoneTask) {
         System.out.println(Ui.NOT_DONE_MESSAGE);
+        System.out.println(undoneTask);
     }
 
 
@@ -225,9 +235,13 @@ public class Ui {
     /**
      * Displays the found task message
      * (search found something)
+     *
+     * @param tasks String representing Tasks
+     *              that were found
      */
-    public void showFoundTask() {
+    public void showFoundTask(String tasks) {
         System.out.println(Ui.FOUND_TASK_MESSAGE);
+        System.out.println(tasks);
     }
 
     /**
@@ -247,6 +261,25 @@ public class Ui {
     public void showTaskStoreMessage(int storeSize) {
         System.out.println(Ui.STORE_MESSAGE_ONE + storeSize
                 + Ui.STORE_MESSAGE_TWO);
+    }
+
+    /**
+     * When no Tasks are found by a ListInstruction,
+     * this method will be called to show a message
+     */
+    public void showNoTasksMessage() {
+        // default: no message
+        System.out.println();
+    }
+
+    /**
+     * Prints a custom message to the UI.
+     *
+     * @param message The custom message to be
+     *                printed
+     */
+    public void showCustomMessage(String message) {
+        System.out.println(message);
     }
 
     /**

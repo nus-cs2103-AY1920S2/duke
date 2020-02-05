@@ -12,8 +12,8 @@ import bot.command.instruction.parse.TextInstruction;
 import bot.task.Task;
 
 public class TodoInstruction extends TextInstruction
-        implements StorageWriting<Task>
-{
+        implements StorageWriting<Task> {
+
     public TodoInstruction(Command... commands) {
         super(commands);
     }

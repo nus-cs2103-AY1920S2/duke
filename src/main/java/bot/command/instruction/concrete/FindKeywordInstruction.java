@@ -14,8 +14,8 @@ import bot.task.Task;
 import java.util.ArrayList;
 
 public class FindKeywordInstruction extends TextInstruction
-        implements StorageSearching<Task>
-{
+        implements StorageSearching<Task> {
+
     public FindKeywordInstruction(Command... commands) {
         super(commands);
     }
@@ -29,14 +29,6 @@ public class FindKeywordInstruction extends TextInstruction
                 indexes.add(i + 1);
             }
         }
-
-        if (indexes.isEmpty()) {
-            ui.showFailedToFind();
-        } else {
-            ui.showFoundTask();
-            for (Integer id : indexes) {
-                System.out.println(store.retrieve(id));
-            }
-        }
+        SearchTimeInstruction.printTasksToUi(store, ui, indexes);
     }
 }

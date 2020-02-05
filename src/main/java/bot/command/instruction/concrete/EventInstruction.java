@@ -15,8 +15,8 @@ import bot.task.Task;
 import java.util.ArrayList;
 
 public class EventInstruction extends AddTaskInstruction
-        implements StorageWriting<Task>
-{
+        implements StorageWriting<Task> {
+
     public EventInstruction(Command... commands) {
         super(commands);
     }

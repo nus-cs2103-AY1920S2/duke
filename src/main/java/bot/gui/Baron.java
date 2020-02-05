@@ -1,7 +1,7 @@
 package bot.gui;
 
 import bot.Executor;
-import bot.Storage;
+import bot.TaskStorage;
 
 import bot.command.CommandParser;
 
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Baron {
     private final CommandParser parser;
-    private final Storage<Task> botStore;
+    private final TaskStorage botStore;
     private final LoadAndSave<Task> diskFile;
     private final Executor executor;
     private final GraphicalUi graphUi;
@@ -41,7 +41,7 @@ public class Baron {
      */
     public Baron(
             CommandParser comParse,
-            Storage<Task> store,
+            TaskStorage store,
             LoadAndSave<Task> disk,
             GraphicalUi gui
     ) {
@@ -50,6 +50,10 @@ public class Baron {
         this.diskFile = disk;
         this.graphUi = gui;
         this.executor = new Executor(this.botStore, this.graphUi, this.diskFile);
+        // show welcome message
+        this.graphUi.showInitial();
+        // load stored items
+        this.botStore.importTasks(disk.loadFromDisk());
     }
 
     /**

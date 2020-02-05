@@ -9,8 +9,8 @@ import bot.command.instruction.execute.NotStorable;
 import bot.command.instruction.parse.OneWordInstruction;
 
 public class TerminateInstruction extends OneWordInstruction
-        implements NotStorable
-{
+        implements NotStorable {
+
     public TerminateInstruction(Command... commands) {
         super(commands);
     }

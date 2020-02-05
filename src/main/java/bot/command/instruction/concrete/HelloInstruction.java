@@ -8,8 +8,8 @@ import bot.command.instruction.execute.NotStorable;
 import bot.command.instruction.parse.OneWordInstruction;
 
 public class HelloInstruction extends OneWordInstruction
-        implements NotStorable
-{
+        implements NotStorable {
+
     public HelloInstruction(Command... commands) {
         super(commands);
     }

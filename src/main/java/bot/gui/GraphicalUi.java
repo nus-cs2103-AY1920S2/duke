@@ -21,11 +21,13 @@ public class GraphicalUi extends Ui {
     private static final String INITIAL_MESSAGE =
             "4LC3N-BOT initialised.\nGreetings, humans!";
     private static final String AWAITING_MESSAGE = "\n> ENTER your input:";
-    private static final String DONE_MESSAGE = "You have completed: ";
+    private static final String DONE_MESSAGE = "You have completed:\n";
     private static final String NOT_DONE_MESSAGE =
-            "Status of task has been set to not done:";
+            "Status of task has been set to not done:\n";
     private static final String FAILED_TO_FIND_MESSAGE =
             "Sorry, could not find anything matching that!";
+    private static final String NO_TASKS_MESSAGE =
+            "You have no tasks to show!";
     private static final String FOUND_TASK_MESSAGE =
             "I have found these tasks!\n";
     private static final String STORE_MESSAGE_ONE = "I have stored this task in my memory. Use"
@@ -69,15 +71,14 @@ public class GraphicalUi extends Ui {
     }
 
     @Override
-    public void showDone() {
-        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.DONE_MESSAGE));
+    public void showDone(String doneTask) {
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.DONE_MESSAGE + doneTask));
     }
 
     @Override
-    public void showNotDone() {
-        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.NOT_DONE_MESSAGE));
+    public void showNotDone(String undoneTask) {
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.NOT_DONE_MESSAGE + undoneTask));
     }
-
 
     @Override
     public void showError(Exception e) {
@@ -96,8 +97,8 @@ public class GraphicalUi extends Ui {
     }
 
     @Override
-    public void showFoundTask() {
-        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.FOUND_TASK_MESSAGE));
+    public void showFoundTask(String tasks) {
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.FOUND_TASK_MESSAGE + tasks));
     }
 
     @Override
@@ -109,6 +110,16 @@ public class GraphicalUi extends Ui {
     public void showTaskStoreMessage(int storeSize) {
         this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.STORE_MESSAGE_ONE
                 + storeSize + GraphicalUi.STORE_MESSAGE_TWO));
+    }
+
+    @Override
+    public void showNoTasksMessage() {
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.NO_TASKS_MESSAGE));
+    }
+
+    @Override
+    public void showCustomMessage(String message) {
+        this.chatWindow.add(ChatBox.getBotBox(message));
     }
 
     @Override
