@@ -39,7 +39,7 @@ public class Duke {
     }
 
     private static Task parseText(String text) {
-        String[] taskElements = text.split(" - ");
+        String[] taskElements = text.split(" # ");
         Task task;
         switch (taskElements[0]) {
             case "T":
