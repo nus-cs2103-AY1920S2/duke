@@ -1,7 +1,8 @@
 package dukeApp.parse;
-import dukeApp.files.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+import dukeApp.files.DukeException;
+import dukeApp.files.TaskList;
+import dukeApp.files.Ui;
 
 public class Parse {
     String statement;

@@ -1,9 +1,10 @@
 package dukeApp.action;
 
-import org.junit.jupiter.api.Test;
 import dukeApp.files.Task;
 import dukeApp.files.Todo;
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ActionTest {

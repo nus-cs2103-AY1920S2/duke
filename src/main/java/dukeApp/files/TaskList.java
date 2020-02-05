@@ -1,5 +1,7 @@
 package dukeApp.files;
+
 import dukeApp.action.Action;
+
 import java.util.ArrayList;
 
 public class TaskList {

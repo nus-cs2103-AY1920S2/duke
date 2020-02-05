@@ -57,7 +57,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Changes the date into a specified format by passing into DateTime
+     * Changes the date into a specified format by passing into dukeApp.files.DateTime
      * @return changed date format
      */
     public String changeDate() {
@@ -66,7 +66,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Changes the time into a specified format by passing into DateTime
+     * Changes the time into a specified format by passing into dukeApp.files.DateTime
      * @return changed time format
      */
     public String changeTime() {
