@@ -39,49 +39,49 @@ public class Duke {
                 Command command = parser.parse(ui.readCmd(), taskList);
 
                 switch (command.getCommandType()) {
-                    case LIST_CMD:
-                        ui.printTaskList(taskList);
-                        break;
-                    case DONE_CMD:
-                        index = extractTaskIndexFromCmdParam(command);
+                case LIST_CMD:
+                    ui.printTaskList(taskList);
+                    break;
+                case DONE_CMD:
+                    index = extractTaskIndexFromCmdParam(command);
 
-                        t = taskList.getTask(index);
-                        taskList.markAsDone(index);
-                        ui.printTaskMarkedDone(t);
+                    t = taskList.getTask(index);
+                    taskList.markAsDone(index);
+                    ui.printTaskMarkedDone(t);
 
-                        storage.saveTasksToFile(taskList);
-                        break;
-                    case DELETE_CMD:
-                        index = extractTaskIndexFromCmdParam(command);
+                    storage.saveTasksToFile(taskList);
+                    break;
+                case DELETE_CMD:
+                    index = extractTaskIndexFromCmdParam(command);
 
-                        t = taskList.getTask(index);
-                        taskList.deleteTask(index);
+                    t = taskList.getTask(index);
+                    taskList.deleteTask(index);
 
-                        ui.printTaskDeleted(t, taskList);
+                    ui.printTaskDeleted(t, taskList);
 
-                        storage.saveTasksToFile(taskList);
-                        break;
-                    case TODO_CMD:
-                        t = new Todo(command.getParams()[0]);
-                        addAndPrintTask(t, taskList);
+                    storage.saveTasksToFile(taskList);
+                    break;
+                case TODO_CMD:
+                    t = new Todo(command.getParams()[0]);
+                    addAndPrintTask(t, taskList);
 
-                        storage.saveTasksToFile(taskList);
-                        break;
-                    case DEADLINE_CMD:
-                        t = new Deadline(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
-                        addAndPrintTask(t, taskList);
+                    storage.saveTasksToFile(taskList);
+                    break;
+                case DEADLINE_CMD:
+                    t = new Deadline(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
+                    addAndPrintTask(t, taskList);
 
-                        storage.saveTasksToFile(taskList);
-                        break;
-                    case EVENT_CMD:
-                        t = new Event(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
-                        addAndPrintTask(t, taskList);
+                    storage.saveTasksToFile(taskList);
+                    break;
+                case EVENT_CMD:
+                    t = new Event(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
+                    addAndPrintTask(t, taskList);
 
-                        storage.saveTasksToFile(taskList);
-                        break;
-                    case BYE_CMD:
-                        ui.printByeMsg();
-                        return;
+                    storage.saveTasksToFile(taskList);
+                    break;
+                case BYE_CMD:
+                    ui.printByeMsg();
+                    return;
                 }
             } catch (DukeException e) {
                 ui.printLine(e + Ui.LF);
