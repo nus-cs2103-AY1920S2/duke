@@ -2,7 +2,7 @@ package app;
 
 import app.exceptions.BaseException;
 import app.util.Pair;
-import app.core.UserInterface;
+import app.core.ConsoleInterface;
 import app.core.commands.Command;
 import app.core.commands.CommandManager;
 import app.core.tasks.TaskManager;
@@ -37,30 +37,30 @@ public final class Duke {
      * Starts Duke
      */
     public void start() {
-        UserInterface userInterface = new UserInterface();
-        userInterface.render(WELCOME_MESSAGE);
+        ConsoleInterface console = new ConsoleInterface();
+        console.render(WELCOME_MESSAGE);
           
-        while (!userInterface.isClosed()) {
+        while (!console.isClosed()) {
             try {
-                String input = userInterface.listen();
+                String input = console.listen();
                 Pair output = this.executeInput(input);
                 String message = (String) output.getFirstValue();
                 Boolean shutdown = (boolean) output.getSecondValue();
 
                 if (!shutdown) {
-                    userInterface.render(message);
+                    console.render(message);
                 } else {
-                    userInterface.close();
+                    console.close();
                 }
             } catch (BaseException e) {
-                userInterface.renderError(e.getMessage());
+                console.renderError(e.getMessage());
             } catch (Exception e) {
-                userInterface.renderError("Caught some other exception! Notify developer!");
-                userInterface.renderError(e.getMessage());
+                console.renderError("Caught some other exception! Notify developer!");
+                console.renderError(e.getMessage());
             }
         }
 
-        userInterface.render(GOODBYE_MESSAGE);
+        console.render(GOODBYE_MESSAGE);
     }
 
     public Pair executeInput(String input) throws BaseException {

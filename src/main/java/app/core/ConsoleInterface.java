@@ -7,7 +7,7 @@ import java.util.Scanner;
  * program. The class provides methods to render text on 
  * a custom output.
  */
-public final class UserInterface {
+public final class ConsoleInterface {
     /**
      * The maximum length of the string before word wrapping
      * occurs
@@ -20,7 +20,7 @@ public final class UserInterface {
     /**
      * Initializes a new User Interface object
      */
-    public UserInterface() {
+    public ConsoleInterface() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -37,7 +37,7 @@ public final class UserInterface {
      * @param message The message to be printed
      */
     public void render(String message) {
-        System.out.println(UserInterface.createBorderedMessage(message));
+        System.out.println(ConsoleInterface.createBorderedMessage(message));
     }
     
     /**
@@ -45,7 +45,7 @@ public final class UserInterface {
      * @param message The message to be printed
      */
     public void renderError(String message) {
-        System.err.println(UserInterface.createBorderedMessage(message));
+        System.err.println(ConsoleInterface.createBorderedMessage(message));
     }
     
     /**
