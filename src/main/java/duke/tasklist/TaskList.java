@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * The TaskList program manages the taskList. It is able to add, delete, list and mark tasks in
  * taskList as done. It also contains Storage.
  *
- * @version 1.0
- * @since 2020-01-28
+ * @version 1.1
+ * @since 4/2/2020
  */
 public class TaskList {
 
@@ -45,13 +45,15 @@ public class TaskList {
 
     /**
      * Prints all the tasks in taskList.
+     *
+     * @return String list of task in string format.
      */
     public String list() {
 
         String output = "Here are the tasks in your list:\n";
 
         for (int i = 0; i < taskList.size(); i++) {
-           output = output + (i + 1) + "." + taskList.get(i).toString() + "\n" ;
+            output = output + (i + 1) + "." + taskList.get(i).toString() + "\n";
         }
 
         return output;
@@ -161,6 +163,7 @@ public class TaskList {
      * Prints out tasks in taskList with words corresponding to keyword.
      *
      * @param keyword corresponds to the tasks with same word.
+     * @return String list of tasks with relevant keywords in string format.
      */
     public String findTask(String keyword) {
 

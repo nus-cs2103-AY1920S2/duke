@@ -4,7 +4,7 @@ package duke.exceptions;
  * The EmptyDescriptionError program is an error thrown when user input is missing required description.
  *
  * @version 1.0
- * @since 2020-01-28
+ * @since 28/1/2020
  */
 public class EmptyDescriptionError extends Exceptions {
 

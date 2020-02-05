@@ -4,7 +4,7 @@ package duke.exceptions;
  * The EmptyDateError program is an error thrown when user input is missing required date.
  *
  * @version 1.0
- * @since 2020-01-28
+ * @since 28/1/2020
  */
 public class EmptyDateError extends Exceptions {
 

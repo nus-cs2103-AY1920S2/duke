@@ -36,13 +36,12 @@ public class DeleteCommand extends Command {
 
         try {
 
-            return  "Noted. I've removed this task: \n" + taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
+            return "Noted. I've removed this task: \n" + taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
                     + "\n" + taskList.reportTotal();
-
 
         } catch (IOException e) {
 
-           return e.toString();
+            return e.toString();
 
         }
     }
