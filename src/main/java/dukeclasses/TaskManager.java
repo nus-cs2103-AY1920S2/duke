@@ -64,6 +64,10 @@ public class TaskManager {
      * @param index index of dukeClasses.Task to be set as Done (isDone = True)
      */
     public void setTaskAsDone(int index) {
+
+        //To enable intellJ to run w assert go run > edit config > add the -ea under VM option
+        assert index > 0 : "index must be bigger than 0";
+
         listOfTasks.get(index - 1).markAsDone();
         storage.saveExistingData(listOfTasks);
         System.out.println("Nice! I've marked this task as done:");
