@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Represents the object that stores the user's task list as a static ArrayList of Task objects.
+ * Supports operations to manipulate it's taskList.
+ */
 public class TaskList {
     private static ArrayList<Task> taskList;
 
@@ -12,13 +16,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds the specified task object to it's taskList.
+     * @param task The Task object to be added to the taskList.
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
     /**
-     * Marks the given task number in the task list as done
-     * @param taskNumber the task number to be marked as done
+     * Marks the given task number in the task list as done.
+     * @param taskNumber the task number to be marked as done.
      */
     public Task markTaskDone(int taskNumber) throws DukeException {
         try {
@@ -31,6 +39,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes the specified task from the taskList
+     * @param taskNumber The index number of the task to be deleted from the taskList.
+     * @return The Task that was deleted.
+     * @throws DukeException
+     */
     public Task deleteTask(int taskNumber) throws DukeException {
         try {
             Task taskRemoved = taskList.get(taskNumber - 1);
@@ -43,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * Generates and returns a task given a task string, read from the save file
+     * Generates and returns a task given a task string that is read from the save file.
      * Returns null if the task string is not in a valid format.
      * @param taskString a single line task in a String format read from file
      * @return Task generated from a TaskString

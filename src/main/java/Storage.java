@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents an object that stores the save file of the user's task list, and handles the saving and update of the task list.
+ */
 public class Storage {
     private Path filePath;
     private File file;
@@ -33,6 +36,10 @@ public class Storage {
         return this.file;
     }
 
+    /**
+     * Returns an ArrayList<String> from reading the lines from the user's task list file of the format .txt
+     * @return ArrayList<String> representing the user's task list, where each element corresponds to one task.
+     */
     public ArrayList<String> loadFromFilePath() {
         List<String> lines = new ArrayList<>();
         try {
@@ -46,6 +53,10 @@ public class Storage {
         return new ArrayList<>(lines);
     }
 
+    /**
+     * Saves and updates the user's .txt task list.
+     * @param taskList The ArrayList<Task> that represents the updated list of tasks to be saved to the .txt file.
+     */
     public void saveFile(ArrayList<Task> taskList) {
         try {
             File file = new File(this.filePath.toString());

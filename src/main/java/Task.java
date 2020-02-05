@@ -1,6 +1,10 @@
+/**
+ * Represents a parent Task object from which tasks of different categories inherit from.
+ * Each Task object and it's children will have a description String, as well as a boolean isDone to indicate if the task is completed.
+ */
 class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;

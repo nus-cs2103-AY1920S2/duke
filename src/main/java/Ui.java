@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Represents an object that handles user input and user interaction through prompts such as welcome and farewell messages,
+ * as well as indicating success of task addition and deletion and flagging to the user when an input of the wrong format is entered.
+ */
 public class Ui {
     private Scanner sc;
 
@@ -46,7 +50,7 @@ public class Ui {
 
     public void printMarkDoneSuccess(Task task) {
         this.printLine();
-        System.out.println("\t Alrighty! I've marked this task as done:");
+        System.out.println("\t Alright! I've marked this task as done:");
         System.out.println("\t " + task);
         this.printLine();
     }

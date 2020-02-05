@@ -1,3 +1,7 @@
+/**
+ * The driver class for the Duke program.
+ * Reads user input and adds, deletes, updates and saves the user's tasks accordingly.
+ */
 public class Duke {
     private Ui ui;
     private Storage store;
