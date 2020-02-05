@@ -10,7 +10,7 @@ public class Deadline extends Task {
     /**
      * Contsructor of the deadline object.
      * @param description The task description.
-     * @param deadline  The deadline date/time.
+     * @param datetime The deadline date/time.
      */
     public Deadline(boolean isDone, String description,
             LocalDateTime datetime) {

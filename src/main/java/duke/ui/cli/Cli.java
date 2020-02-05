@@ -1,16 +1,18 @@
-package duke;
+package duke.ui.cli;
+
+import duke.ui.Ui;
 
 import java.util.Scanner;
 
 /**
  * The user interface of the application. Displays messages to the user.
  */
-public class Ui {
+public class Cli extends Ui {
 
     private String botName;
     private Scanner in;
 
-    public Ui(String botName) {
+    public Cli(String botName) {
         this.botName = botName;
         this.in = new Scanner(System.in);
     }

@@ -4,24 +4,20 @@ import duke.DukeException;
 import duke.command.Command;
 import duke.common.Message;
 import duke.task.TaskList;
+import duke.ui.cli.Cli;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
-     * Creates a Duke object given the name of the bot, 
-     * and the save file path. New ui will be instantiated from
-     * the name, and storage will be instantiated form the file
-     * path. The tasklist will obtain the saved task, if available.
-     * @param botName The name of the bot.
+     * Creates a Duke object given the save file path. 
+     * The tasklist will obtain the saved task, if available.
      * @param filePath The path of the save file.
      */
-    public Duke(String botName, String filePath) {
-        ui = new Ui(botName);
-        storage = new Storage(filePath);
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -31,28 +27,29 @@ public class Duke {
 
     /**
      * Runs the Duke bot with an interface.
+     * @param cli The command line interface.
      */
-    public void run() {
-        ui.showWelcome();
-        ui.showMessage(Message.GREET);
-        ui.newLine();
+    public void run(Cli cli) {
+        cli.showWelcome();
+        cli.showMessage(Message.GREET);
+        cli.newLine();
 
         boolean isExit = false;
         while (!isExit) {
             try {
-                ui.showPrompt();
-                String userCommand = ui.readCommand();
-                ui.newLine();
+                cli.showPrompt();
+                String userCommand = cli.readCommand();
+                cli.newLine();
 
                 Command command = Parser.parse(userCommand);
-                command.execute(tasks, ui, storage);
+                command.execute(tasks, cli, storage);
                 isExit = command.isExit();
             } catch (Exception e) {
-                ui.showMessage(e.getMessage());
+                cli.showMessage(e.getMessage());
             }
-            ui.newLine();
+            cli.newLine();
         }
 
-        ui.close();
+        cli.close();
     }
 }
