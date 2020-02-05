@@ -44,6 +44,7 @@ public class Event extends DateTask {
 
     @Override
     public String toString() {
+//        String date = this.startAtDate.toString();
         String date = this.startAtDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String dateTime = this.startAtTime != null
                 ? this.startAtTime + ", " + date

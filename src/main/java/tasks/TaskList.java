@@ -37,6 +37,11 @@ public class TaskList {
         ui.printNewTask(t, this.size());
     }
 
+    public String addToString(Task t) {
+        this.list.add(t);
+        return "Added + t";
+    }
+
     /**
      * Saves task into the save file.
      *
@@ -57,6 +62,12 @@ public class TaskList {
         ui.printDelete(t, this.size());
     }
 
+    public String deleteToString(int index) {
+        Task t = this.list.get(index);
+        this.list.remove(index);
+        return "Deleted " + t;
+    }
+
     /**
      * Marks index task as done.
      *
@@ -67,6 +78,14 @@ public class TaskList {
         t.markAsDone();
         ui.printDone(t);
     }
+
+    public String markAsDoneToString(int index) {
+        Task t = this.list.get(index);
+        t.markAsDone();
+        return t + " marked as done";
+    }
+
+
 
     /**
      * Concatenate all tasks into format used in save file.
@@ -98,6 +117,19 @@ public class TaskList {
             }
         }
         ui.printList(dateTasks);
+    }
+
+    public String searchDateTaskToString(LocalDate date) {
+        ArrayList<Task> dateTasks = new ArrayList<>();
+
+        for (Task t : this.list) {
+            if (t instanceof DateTask) {
+                if (date.equals(((DateTask) t).getDate())) {
+                    dateTasks.add(t);
+                }
+            }
+        }
+        return dateTasks.toString();
     }
 
     /**

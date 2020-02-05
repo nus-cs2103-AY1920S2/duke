@@ -42,6 +42,12 @@ public class Parser {
         this.sc = sc;
     }
 
+    public Parser(TaskList taskList, Storage storage, Ui ui) {
+        this.taskList = taskList;
+        this.storage = storage;
+        this.ui = ui;
+    }
+
     /**
      * Splits the input into actions and arguments (if any).
      * Run the respective actions and outputs feedback from the action taken.
@@ -164,6 +170,109 @@ public class Parser {
                     + "You may input '-' to omit either the time or date");
         } catch (EmptySearchException ex) {
             ui.printFormattedOutput(ex.toString());
+        }
+    }
+
+    public String parseToString(String input) {
+        String action = input.split(" ")[0];
+        try {
+            switch (action) {
+            case "list":
+                return taskList.toString();
+            case "done":
+                int taskNumber = Integer.parseInt(input.split(" ")[1]);
+                if (taskNumber < 1 || taskNumber > taskList.size()) {
+                    throw new InvalidTaskNumberException(taskList.size());
+                }
+                return taskList.markAsDoneToString(taskNumber - 1);
+            case "delete":
+                taskNumber = Integer.parseInt(input.split(" ")[1]);
+                if (taskNumber < 1 || taskNumber > taskList.size()) {
+                    throw new InvalidTaskNumberException(taskList.size());
+                }
+                return taskList.deleteToString(taskNumber - 1);
+            case "todo":
+                try {
+                    String[] fields = input.split("todo ");
+                    if (fields.length < 2) {
+                        throw new EmptyDescriptionException("todo");
+                    }
+                    Task newTodo = new Todo(fields[1]);
+                    return taskList.addToString(newTodo);
+                } catch (EmptyDescriptionException ex) {
+                    return ex.toString();
+                }
+            case "event":
+            case "deadline":
+                try {
+                    String[] fields = input.split(action + " ");
+                    if (fields.length < 2) {
+                        throw new EmptyDescriptionException(action);
+                    }
+
+                    fields = action.equals("event")
+                            ? fields[1].split(" /at ")
+                            : fields[1].split(" /by ");
+                    if (fields.length < 2) {
+                        throw new EmptyTimeException(action, fields);
+                    }
+
+                    Task newTask = action.equals("event")
+                            ? new Event(fields[0], fields[1])
+                            : new Deadline(fields[0], fields[1]);
+
+                    return taskList.addToString(newTask);
+                } catch (EmptyDescriptionException ex) {
+                   return ex.toString();
+                } catch (EmptyTimeException ex) {
+//                    String message = ex.toString()
+//                            + "\n    Type in the time/date or press enter to stop creating task";
+//                    ui.printFormattedOutput(message);
+//                    System.out.print(ex.stringifyFields());
+//                    input = sc.nextLine();
+//                    if (!input.equals("")) {
+//                        String[] fields = ex.getFields();
+//                        Task newTask = action.equals("event")
+//                                ? new Event(fields[0], input)
+//                                : new Deadline(fields[0], input);
+//                        taskList.add(newTask);
+//                    } else {
+//                        return "Stopped creating task.";
+//                    }
+                    return ex.toString();
+                }
+            case "date":
+                try {
+                    String[] fields = input.split(" ");
+                    LocalDate date = LocalDate.parse(fields[1]);
+                    return taskList.searchDateTaskToString(date);
+                } catch (DateTimeException ex) {
+                    return "Sorry, I don't recognize this date format. "
+                            + "Try to follow this format: 2020-12-31";
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    return "Please input a date!";
+                }
+            case "find":
+                String[] fields = input.split(" ");
+                if (fields.length < 2) {
+                    throw new EmptySearchException();
+                }
+                String searchWord = fields[1];
+                ArrayList<Task> searchList = taskList.search(searchWord);
+                return searchList.toString();
+            default:
+                throw new InvalidActionException();
+            }
+        } catch (InvalidActionException ex) {
+            return ex.toString();
+        } catch (InvalidTaskNumberException ex) {
+            return ex.toString();
+        } catch (DateTimeException ex) {
+            return "You have entered an invalid time/date format.\n    "
+                    + "Please follow the following format: 23:59 2020-12-31\n    "
+                    + "You may input '-' to omit either the time or date";
+        } catch (EmptySearchException ex) {
+            return ex.toString();
         }
     }
 }

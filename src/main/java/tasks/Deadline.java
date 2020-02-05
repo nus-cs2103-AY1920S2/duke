@@ -42,6 +42,7 @@ public class Deadline extends DateTask {
 
     @Override
     public String toString() {
+//        String date = this.finishByDate.toString();
         String date = this.finishByDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String dateTime = this.finishByTime != null
                 ? this.finishByTime + ", " + date

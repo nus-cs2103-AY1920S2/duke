@@ -1,2 +1,3 @@
-T | 0 | eat dinner
-T | 0 | eat supper
+T | 0 | eat
+T | 0 | return book
+E | 0 | project meeting | 16:00 2019-01-29

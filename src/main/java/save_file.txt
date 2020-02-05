@@ -1,5 +1,5 @@
-D | 1 | presentation | 12:00 2020-01-29
-E | 1 | meeting | - 2020-12-03
-T | 0 | read book
-T | 0 | return book
-T | 1 | eat
+T | 1 | return book
+E | 0 | project meeting | 12:00 2019-01-28
+D | 1 | homework | 13:00 2019-01-30
+E | 0 | lunch with friends | 12:30 2019-01-28
+D | 0 | quiz by | - 2019-01-28
