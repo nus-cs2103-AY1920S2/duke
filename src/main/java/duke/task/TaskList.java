@@ -4,23 +4,46 @@ import java.util.ArrayList;
 
 import duke.DukeException;
 
+/**
+ * Holds all the tasks that have been input into the Duke program.
+ * Execution of commands happen here.
+ * Commands include: list, find, add, delete and done.
+ *
+ * @author Dargo
+ */
 public class TaskList {
 
     private ArrayList<Task> storageData;
     private final static String LINE = "    ____________________________________________________________";
     private final static String LIST_HEADER = "     Here are the tasks in your list:";
+    private final static String FIND_HEADER = "     Here are the matching tasks in your list:";
     private final static String TASK_DONE_MESSAGE = "     Nice! I've marked this task as done:";
     private final static String TASK_ADD_MESSAGE = "     Got it. I've added this task:";
     private final static String DELETE_MESSAGE = "     Noted. I've removed this task:";
 
+    /**
+     * TaskList holds the list of tasks that are in the Duke program.
+     * TaskList is also the class that executes the given commands.
+     *
+     * @param storageData Data of the current Duke program.
+     * @throws DukeException Storage data is invalid.
+     */
     public TaskList(ArrayList<Task> storageData) throws DukeException{
         this.storageData = storageData;
     }
 
+    /**
+     * Get the ArrayList of tasks of the current Duke program.
+     *
+     * @return Current ArrayList of tasks of Duke.
+     */
     public ArrayList<Task> getData() {
         return this.storageData;
     }
 
+    /**
+     * List out the tasks in Duke at the moment.
+     */
     public void list() {
         System.out.println(LINE);
         System.out.println(LIST_HEADER);
@@ -31,6 +54,32 @@ public class TaskList {
         System.out.println(LINE);
     }
 
+    /**
+     * Find the tasks with the given keyword and list them out.
+     *
+     * @param keyword
+     */
+    public void find(String keyword) {
+        System.out.println(LINE);
+        System.out.println(FIND_HEADER);
+        int counter = 1;
+        for (int i = 0; i < storageData.size(); i++) {
+            Task task = storageData.get(i);
+            String taskFullInput = task.task;
+            if(taskFullInput.contains(keyword)) {
+                System.out.println("     " + counter + "." + task);
+                counter++;
+            }
+        }
+        System.out.println(LINE);
+    }
+
+    /**
+     * Add tasks into the Duke program.
+     *
+     * @param type Type of task.
+     * @param inputCommand Full input command.
+     */
     public void add(String type, String inputCommand) {
 
         try {
@@ -59,6 +108,11 @@ public class TaskList {
         System.out.println(output);
     }
 
+    /**
+     * Deletes a task from Duke.
+     *
+     * @param position Position of the task in the list.
+     */
     public void delete(String position) {
 
         // Identify index to remove task from
@@ -76,6 +130,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param position Position of the task in the list.
+     */
     public void done(String position) {
         int task_Done = Integer.parseInt(position);
 

@@ -64,6 +64,10 @@ public class Parser {
             // Deletes the task
             this.listOfTasks.delete(commandSplit[1]);
 
+        } else if (basicCommand.equals("find")) {
+
+            // Finds task with keywords.
+            this.listOfTasks.find(commandSplit[1]);
         } else {
             System.out.println(new DukeException("error"));
         }
