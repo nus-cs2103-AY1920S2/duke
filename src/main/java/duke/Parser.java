@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     protected String input;
     protected TaskList taskList;
@@ -12,7 +14,7 @@ public class Parser {
         String arr[] = this.input.split(" ", 2);
 
         if (input.equals("bye")) {
-            Storage storage = new Storage("../../../data/duke.txt");
+            Storage storage = new Storage("data/duke.txt");
             storage.store(taskList);
             ui.showGoodbye();
             System.exit(0);
