@@ -1,3 +1,5 @@
+package helper;
+
 import exception.IncorrectInputException;
 import task.Task;
 
@@ -5,6 +7,10 @@ import java.util.ArrayList;
 
 public class Ui {
     public Ui() {
+    }
+
+    public String welcomeMessage(){
+        return "  Welcome to Duke Program";
     }
 
     public String getTopTwoLine() {
@@ -27,9 +33,9 @@ public class Ui {
                 "    Nice! I've marked this task as done: ";
     }
 
-    public void removeTaskMes() {
-        System.out.println("  --------------\n" +
-                "   Got it. I've removed this task:");
+    public String removeTaskMes() {
+        return "  --------------\n" +
+                "   Got it. I've removed this task:";
     }
 
     public String parserOutputMess(String topMessage, String output, String bottomMessage) {
@@ -51,6 +57,15 @@ public class Ui {
         System.out.println("-----------------");
         System.out.println("   "+message);
         System.out.println("-----------------");
+    }
+
+    public String printTaskList(ArrayList<Task> tList){
+        String outputString = "";
+        for (int i = 0; i < tList.size(); i++) {
+            String temp = ((i + 1) + ". " + tList.get(i).toString())+"\n";
+            outputString += temp;
+        }
+        return outputString;
     }
 
 }

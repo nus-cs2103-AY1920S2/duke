@@ -1,3 +1,5 @@
+package helper;
+
 import task.Task;
 
 import java.util.ArrayList;
@@ -18,9 +20,16 @@ public class TaskList {
     /**
      * this method printout all the task stored in arrayList when user enterd list command
      */
-    public void printTaskList() {
+    public String printTaskList() {
+        String outputString = "";
         for (int i = 0; i < arrTask.size(); i++) {
-            System.out.println((i + 1) + ". " + arrTask.get(i).toString());
+            String temp = ((i + 1) + ". " + arrTask.get(i).toString())+"\n";
+            outputString += temp;
         }
+        return outputString;
+    }
+
+    public int getSize(){
+        return this.arrTask.size();
     }
 }
