@@ -61,6 +61,8 @@ public class Ui {
     /**
      * Prints desired message with dividers.
      * Note that that message string should have newline character at the end.
+     *
+     * @param message The message to be printed.
      */
     public void printMessage(String message) {
         printDividerLine();
@@ -71,6 +73,8 @@ public class Ui {
     /**
      * Prints desired message without dividers.
      * Note that that message string should have newline character at the end.
+     *
+     * @param message The message to be printed.
      */
     public void printMessageNoDivider(String message) {
         System.out.print(message);
@@ -78,6 +82,8 @@ public class Ui {
 
     /**
      * Prints the String representation of a Task.
+     *
+     * @param task The task to be printed.
      */
     public void printTask(Task task) {
         System.out.println(task);
@@ -85,6 +91,8 @@ public class Ui {
 
     /**
      * Prints the exception message.
+     *
+     * @param e The exception to be printed.
      */
     public void printException(DukeException e) {
         printDividerLine();
