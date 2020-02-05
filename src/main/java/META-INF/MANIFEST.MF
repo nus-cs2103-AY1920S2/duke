@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: duke.Duke
+dukeApp.duke.Main-Class: dukeApp.duke.Duke
 

@@ -1,5 +1,7 @@
 package dukeApp.parse;
-import dukeApp.files.*;
+
+import dukeApp.files.DukeException;
+import dukeApp.files.TaskList;
 
 public class Parse {
     String statement;
