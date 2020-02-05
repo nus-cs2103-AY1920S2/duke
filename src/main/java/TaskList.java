@@ -31,7 +31,13 @@ public class TaskList {
         if (this.taskList.isEmpty()) {
             ui.printEmptyListMessage();
         } else {
-            ui.printTasks(this.taskList);
+            ui.loadMachinePrompt();
+            ui.printTaskMessage();
+            for (int i = 1; i <= this.taskList.size(); i++) {
+                Task task = this.taskList.get(i - 1);
+                ui.printTask(i, task);
+            }
+            ui.loadUserPrompt();
         }
     }
 
@@ -64,5 +70,17 @@ public class TaskList {
 
     public void deleteTask(int deleteIndex) {
         this.taskList.remove(deleteIndex );
+    }
+
+    public void findTask(Ui ui, String keyword) {
+        ui.loadMachinePrompt();
+        ui.printFoundTaskMessage();
+        for (int i = 1; i <= this.taskList.size(); i++) {
+            Task task = this.taskList.get(i - 1);
+            if (task.getDescription().contains(keyword)) {
+                ui.printTask(i, task);
+            }
+        }
+        ui.loadUserPrompt();
     }
 }
