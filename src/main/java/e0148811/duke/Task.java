@@ -1,8 +1,8 @@
 package e0148811.duke;
 
 public class Task {
-    static String TICK = "\u2714";
-    static String CROSS = "\u2718";
+    static String TICK = "✔";
+    static String CROSS = "✘";
     private boolean isDone;
     private String task;
 

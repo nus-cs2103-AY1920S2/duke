@@ -43,7 +43,7 @@ public class Duke {
             String[] instructionByWord = parser.breakIntoWords();
             try {
                 int lengthOfArray = instructionByWord.length;
-                String actionWord = instructionByWord[0];
+                String actionWord = instructionByWord[0].toLowerCase();
                 switch (actionWord) {
                 case "list":
                     printList(lengthOfArray);

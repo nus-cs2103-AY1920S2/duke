@@ -1,7 +1,6 @@
 package e0148811.duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TaskList {
