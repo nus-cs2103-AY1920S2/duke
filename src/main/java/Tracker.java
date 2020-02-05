@@ -41,6 +41,24 @@ public class Tracker {
     }
 
     /**
+     * Returns a tracker that tracks a list of tasks containing the provided keyword.
+     * @param keyword Keyword to search for.
+     * @return Tracker that tracks the tasks containing the keyword.
+     */
+    public Tracker find(String keyword) {
+        Tracker matchingTasks = new Tracker();
+
+        for (Task task : this.list) {
+            String taskDescription = task.getContent();
+            if (taskDescription.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
+    }
+
+    /**
      * Returns list of tasks being tracked.
      * @return List of tasks.
      */

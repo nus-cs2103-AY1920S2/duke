@@ -32,6 +32,9 @@ public class Duke {
                     int index = scanner.nextInt() - 1;
                     ui.showDelete(tracker, index);
                     data.saveData(tracker.showList());
+                } else if (command.isFind()) {
+                    String keyword = scanner.nextLine();
+                    ui.showSearchResults(tracker, keyword);
                 } else {
                     Parser content;
 
