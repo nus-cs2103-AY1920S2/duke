@@ -1,6 +1,6 @@
-package test.java.duke.parser;
+package main.java.test.java.duke.parser;
 
-import duke.parser.DateTimeParser;
+import main.java.duke.parser.DateTimeParser;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;

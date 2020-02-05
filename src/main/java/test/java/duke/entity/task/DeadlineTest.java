@@ -1,6 +1,6 @@
-package test.java.duke.entity.task;
+package main.java.test.java.duke.entity.task;
 
-import duke.entity.task.Deadline;
+import main.java.duke.entity.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

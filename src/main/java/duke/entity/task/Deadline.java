@@ -1,6 +1,6 @@
-package duke.entity.task;
+package main.java.duke.entity.task;
 
-import duke.parser.DateTimeParser;
+import main.java.duke.parser.DateTimeParser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,8 +11,11 @@ public class Deadline extends Task {
     private String doBy;
     private Date doByDate;
     private Date doByTime;
+    private final SimpleDateFormat TIMEFORMAT = new SimpleDateFormat("hh:mm aaa");
+    private final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("EEE, d MMM yyyy");
 
     public Deadline(String taskName, String doBy) {
+
         super(taskName);
         this.doBy = doBy;
         DateTimeParser dateTimeParser = new DateTimeParser();
@@ -28,6 +31,8 @@ public class Deadline extends Task {
         } catch (ParseException e) {
             this.doByTime = null;
         }
+        String addedInfo = (doByDate == null ? "" : DATEFORMAT.format(doByDate) + " ") + (doByTime == null ? "" : TIMEFORMAT.format(doByTime));
+        super.setAddedInfo(addedInfo.equals("") ? doBy : addedInfo);
     }
 
     public String getDoBy() {
@@ -56,11 +61,9 @@ public class Deadline extends Task {
 
     @Override
     public String printTask() {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
         return "[D][" + (super.isDone() ? "\u2713" : "\u2718" ) + "] "+ super.getTaskName() + " (by: " +
-                (doByDate != null && doByTime != null ? dateFormat.format(doByDate) + " " + timeFormat.format(doByTime) :
-                        (doByDate != null ? dateFormat.format(doByDate) : (doByTime != null ? timeFormat.format(doByTime) : doBy))) + ")";
+                (doByDate != null && doByTime != null ? DATEFORMAT.format(doByDate) + " " + TIMEFORMAT.format(doByTime) :
+                        (doByDate != null ? DATEFORMAT.format(doByDate) : (doByTime != null ? TIMEFORMAT.format(doByTime) : doBy))) + ")";
     }
 
     @Override

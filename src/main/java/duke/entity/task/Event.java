@@ -1,6 +1,6 @@
-package duke.entity.task;
+package main.java.duke.entity.task;
 
-import duke.parser.DateTimeParser;
+import main.java.duke.parser.DateTimeParser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +11,9 @@ public class Event extends Task {
     private String heldAt;
     private Date heldAtDate;
     private Date heldAtTime;
+    private SimpleDateFormat TIMEFORMAT = new SimpleDateFormat("hh:mm aaa");
+    private SimpleDateFormat DATEFORMAT = new SimpleDateFormat("EEE, d MMM yyyy");
+
 
     public Event(String taskName, String heldAt) {
         super(taskName);
@@ -28,6 +31,8 @@ public class Event extends Task {
         } catch (ParseException e) {
             this.heldAtTime = null;
         }
+        String addedInfo = (heldAtDate == null ? "" : DATEFORMAT.format(heldAtDate) + " ") + (heldAtTime == null ? "" : TIMEFORMAT.format(heldAtTime));
+        super.setAddedInfo(addedInfo.equals("") ? heldAt : addedInfo);
     }
 
     public String heldAt() {
@@ -60,12 +65,10 @@ public class Event extends Task {
 
     @Override
     public String printTask() {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
 
         return "[E][" +  (super.isDone() ? "\u2713" : "\u2718" ) + "] "+ super.getTaskName() + " (at: " +
-                (heldAtDate != null && heldAtTime != null ? dateFormat.format(heldAtDate) + " " + timeFormat.format(heldAtTime) :
-                        (heldAtDate != null ? dateFormat.format(heldAtDate) : (heldAtTime != null ? timeFormat.format(heldAtTime) : heldAt))) + ")";
+                (heldAtDate != null && heldAtTime != null ? DATEFORMAT.format(heldAtDate) + " " + TIMEFORMAT.format(heldAtTime) :
+                        (heldAtDate != null ? DATEFORMAT.format(heldAtDate) : (heldAtTime != null ? TIMEFORMAT.format(heldAtTime) : heldAt))) + ")";
     }
 
     @Override

@@ -1,22 +1,20 @@
-package duke.parser;
+package main.java.duke.parser;
 
-import duke.entity.command.*;
-import duke.entity.task.Deadline;
-import duke.entity.task.Event;
-import duke.entity.task.Todo;
-import duke.handler.Ui;
+import main.java.duke.entity.command.*;
+import main.java.duke.entity.task.Deadline;
+import main.java.duke.entity.task.Event;
+import main.java.duke.entity.task.Todo;
+import main.java.duke.handler.Ui;
 
 import java.text.ParseException;
 import java.util.Date;
 
 public class CommandParser {
 
-    private DateTimeParser dateTimeParser;
-    private Ui ui;
+    private DateTimeParser dateTimeParser = new DateTimeParser();
+    private Ui ui = new Ui();
 
-    public CommandParser(Ui ui) {
-        this.dateTimeParser = new DateTimeParser();
-        this.ui = ui;
+    public CommandParser() {
     }
 
     /**

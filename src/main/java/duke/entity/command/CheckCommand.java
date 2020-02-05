@@ -1,9 +1,12 @@
-package duke.entity.command;
+package main.java.duke.entity.command;
 
-import duke.entity.task.Task;
-import duke.entity.TaskList;
-import duke.handler.Storage;
-import duke.handler.Ui;
+import javafx.collections.ObservableList;
+import main.java.duke.entity.task.Task;
+import main.java.duke.entity.TaskList;
+import main.java.duke.gui.TaskModel;
+import main.java.duke.gui.view.UiController;
+import main.java.duke.handler.Storage;
+import main.java.duke.handler.Ui;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +15,7 @@ import java.util.List;
 public class CheckCommand extends Command {
 
     private Date dueDate;
-
+    private List<Task> dueTasks;
     public CheckCommand(Date date) {
         this.dueDate = date;
     }
@@ -21,7 +24,6 @@ public class CheckCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasks();
-        List<Task> dueTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).isDue(dueDate)) {
                 dueTasks.add(tasks.get(i));
@@ -29,7 +31,10 @@ public class CheckCommand extends Command {
         }
         ui.listDueTasks(dueTasks, dueDate);
     }
-
+    public String execute(TaskList taskList, Ui ui, Storage storage, ObservableList<TaskModel> taskData, UiController uiController) {
+        this.execute(taskList, ui, storage);
+        return uiController.listDueTasks(dueTasks, dueDate);
+    }
     @Override
     public boolean isExit() {
         return false;

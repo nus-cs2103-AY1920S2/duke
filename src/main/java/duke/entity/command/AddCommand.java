@@ -1,9 +1,12 @@
-package duke.entity.command;
+package main.java.duke.entity.command;
 
-import duke.entity.task.Task;
-import duke.entity.TaskList;
-import duke.handler.Storage;
-import duke.handler.Ui;
+import javafx.collections.ObservableList;
+import main.java.duke.entity.task.Task;
+import main.java.duke.entity.TaskList;
+import main.java.duke.gui.TaskModel;
+import main.java.duke.gui.view.UiController;
+import main.java.duke.handler.Storage;
+import main.java.duke.handler.Ui;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +20,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         List<Task> tasks = taskList.getTasks();
         tasks.add(newTask);
         try {
@@ -26,8 +29,20 @@ public class AddCommand extends Command {
         } catch (IOException e) {
             tasks.remove(tasks.size() - 1);
             ui.errorSavingChanges();
+            throw new IOException();
         }
     }
+
+    public String execute(TaskList taskList, Ui ui, Storage storage, ObservableList<TaskModel> taskData, UiController uiController) {
+        try {
+            this.execute(taskList, ui, storage);
+            taskData.add(new TaskModel(newTask));
+        } catch (IOException e) {
+            return uiController.errorSavingChanges();
+        }
+        return uiController.confirmAddTask(newTask, taskList);
+    }
+
 
     @Override
     public boolean isExit() {

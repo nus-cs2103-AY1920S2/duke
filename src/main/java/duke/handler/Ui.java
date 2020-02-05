@@ -1,7 +1,7 @@
-package duke.handler;
+package main.java.duke.handler;
 
-import duke.entity.*;
-import duke.entity.task.Task;
+import main.java.duke.entity.*;
+import main.java.duke.entity.task.Task;
 
 import java.util.Date;
 import java.util.List;

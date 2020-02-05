@@ -1,8 +1,13 @@
-package duke.entity.command;
+package main.java.duke.entity.command;
 
-import duke.entity.TaskList;
-import duke.handler.Storage;
-import duke.handler.Ui;
+import javafx.collections.ObservableList;
+import main.java.duke.entity.TaskList;
+import main.java.duke.gui.TaskModel;
+import main.java.duke.gui.view.UiController;
+import main.java.duke.handler.Storage;
+import main.java.duke.handler.Ui;
+
+import java.io.IOException;
 
 public abstract class Command {
 
@@ -14,7 +19,7 @@ public abstract class Command {
      * @param ui the interface responsible for interacting with the user
      * @param storage the duke.handler responsible for handling saving/loading from file
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
     /**
      * Determines whether a program should terminate
@@ -22,5 +27,8 @@ public abstract class Command {
      * @return whether to exit program after command has been run
      */
     public abstract boolean isExit();
+
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage, ObservableList<TaskModel> taskData, UiController uiController);
+
 
 }

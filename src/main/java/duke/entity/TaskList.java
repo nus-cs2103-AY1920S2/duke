@@ -1,6 +1,6 @@
-package duke.entity;
+package main.java.duke.entity;
 
-import duke.entity.task.Task;
+import main.java.duke.entity.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
