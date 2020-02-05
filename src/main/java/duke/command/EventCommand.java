@@ -5,7 +5,6 @@ import duke.task.Event;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -30,15 +29,15 @@ public class EventCommand extends Command {
      * Executes the event command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
-     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
+     * @return The program's output.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             //check if the argument length required is correct
             if (args.length < 2) {
-                throw new InvalidCommandException("     ☹ OOPS!!! The date of a "
+                throw new InvalidCommandException("HEY!!! The date of an "
                         + "event cannot be empty.");
             }
 
@@ -46,16 +45,16 @@ public class EventCommand extends Command {
             Task newEventTask = new Event(args[0], args[1]);
             tasks.addTask(newEventTask);
 
-            //print success message
-            ui.printMessage(String.format("     Got it. I've added this task:\n       %s\n"
-                    + "     Now you have %d tasks in the list.\n", newEventTask,tasks.getSize()));
-
             //update save file
             storage.saveTasks(tasks.getList());
+
+            //print success message
+            return String.format("Got it. I've added this task:\n  %s\n"
+                    + "Now you have %d tasks in the list.\n", newEventTask,tasks.getSize());
         } catch (InvalidCommandException e) {
-            ui.printException(e);
+            return e.getMessage();
         } catch (IOException e) {
-            ui.printMessage("     Sorry, I could not write to the save file.");
+            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
         }
     }
 }
