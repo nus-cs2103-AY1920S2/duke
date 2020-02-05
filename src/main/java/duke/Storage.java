@@ -45,10 +45,12 @@ public class Storage {
                     tasks.add(new Todo(isDone, description));
                     break;
                 case "D":
-                    tasks.add(new Deadline(isDone, description, LocalDateTime.parse(details[3])));
+                    tasks.add(new Deadline(isDone, description,
+                            LocalDateTime.parse(details[3])));
                     break;
                 case "E":
-                    tasks.add(new Event(isDone, description, LocalDateTime.parse(details[3])));
+                    tasks.add(new Event(isDone, description,
+                            LocalDateTime.parse(details[3])));
                     break;
                 default:
                     continue;
@@ -73,7 +75,8 @@ public class Storage {
             file.delete();
         }
 
-        // create directory parent directory of file if it does not exist
+        // create directory parent directory of file if 
+        // it does not exist
         new File(file.getParent()).mkdirs();
 
         try {

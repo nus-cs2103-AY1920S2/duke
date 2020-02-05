@@ -19,7 +19,8 @@ public class Parser {
         try {
             return LocalDateTime.parse(datetime.replace(' ', 'T'));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date should be in the format of yyyy-MM-dd HH:mm");
+            throw new DukeException("Date should be in the format of "
+                    + "yyyy-MM-dd HH:mm");
         }
     }
 
