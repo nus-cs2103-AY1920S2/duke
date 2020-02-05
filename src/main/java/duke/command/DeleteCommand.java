@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 /**
@@ -23,20 +23,19 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-
     /**
-     * Removes the task from the list of tasks and print relevant messages.
+     * Removes the task from the list of tasks and returns relevant messages.
      *
      * @param tasks The TaskList that contains list of tasks.
      * @param ui The Ui that deals with interactions with user.
      * @param storage The Storage deals with loading and saving tasks in file.
+     * @return The relevant messages in the form of String.
      * @throws DukeException If index of out of range of the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.removeTask(index);
-        String[] messages = new String[] {"Noted. I've removed this task:", " " + task.toString(),
-                                          "Now you have " + tasks.getSize() + " tasks in the list."};
-        ui.showMessages(messages);
+        String[] details = new String[] {" " + task.toString(), tasks.getSize() + ""};
+        return ui.showDeleteMessages(details);
     }
 }

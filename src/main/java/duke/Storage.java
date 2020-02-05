@@ -44,22 +44,22 @@ public class Storage {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
-                String[] task = s.nextLine().split(" \\| ");
+                String[] currentTask = s.nextLine().split(" \\| ");
                 Task temp = null;
-                switch (task[0]) {
+                switch (currentTask[0]) {
                 case "T":
-                    temp = new ToDo(task[2]);
+                    temp = new ToDo(currentTask[2]);
                     break;
                 case "D":
-                    temp = new Deadline(task[2], task[3]);
+                    temp = new Deadline(currentTask[2], currentTask[3]);
                     break;
                 case "E":
-                    temp = new Event(task[2], task[3]);
+                    temp = new Event(currentTask[2], currentTask[3]);
                     break;
                 default:
                     break;
                 }
-                if (task[1].equals("1")) {
+                if (currentTask[1].equals("1")) {
                     temp.markAsDone();
                 }
                 list.add(temp);
