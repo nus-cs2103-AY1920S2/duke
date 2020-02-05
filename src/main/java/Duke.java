@@ -19,7 +19,6 @@ import javafx.scene.layout.VBox;
 public class Duke {
 
     Ui Ui ;
-    boolean isExit;
 
     public void setup() {
 
@@ -36,16 +35,7 @@ public class Duke {
 
     String getResponse(String input) {
 
-        if(input.equals("bye")) {
-            isExit = true;
-        }
-
         return Ui.frontDesk(input);
-    }
-
-    public boolean getIsExit() {
-
-        return isExit;
     }
 
 }
