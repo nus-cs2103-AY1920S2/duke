@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    private static Scanner scanner;
-    private static String indent;
+    private Scanner scanner;
+    private String indent;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
