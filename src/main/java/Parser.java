@@ -27,6 +27,8 @@ public class Parser {
             }
             this.setSearchQuery(searchQuery);
             return "find";
+        } else if (userInput.split("\\s")[0].equals("bye")) {
+            return "bye";
         } else {
             return "error";
         }

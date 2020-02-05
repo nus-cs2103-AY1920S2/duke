@@ -150,6 +150,9 @@ public class Duke {
                         System.out.println(j + "." + foundTasks.get(i).getIcon() + foundTasks.get(i).status + " " + foundTasks.get(i).getDescription());
                     }
                     break;
+                case ("bye"):
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
                 default:
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
