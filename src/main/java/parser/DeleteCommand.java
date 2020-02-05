@@ -3,9 +3,6 @@ package main.java.Parser;
 public class DeleteCommand extends Command {
     protected Integer position;
 
-
-    public DeleteCommand() { }
-
     public DeleteCommand(Integer position) {
         this.position = position;
     }

@@ -30,9 +30,9 @@ public class TaskList implements Iterable<Task> {
         return addTaskStart + task.toString() + "\n" + addTaskEndStr;
     }
 
-    public String remove(Integer position) {
-        Task deletedTask = this.internalList.get(position);
-        this.internalList.remove(position-1);
+    public String remove(int position) {
+        Task deletedTask = internalList.get(position);
+        internalList.remove(position);
         return deleteTaskStart + " " + deletedTask.toString() + "\n" +
                 "Now you have " + Integer.toString(this.internalList.size()) + " tasks in the list.\n";
     }

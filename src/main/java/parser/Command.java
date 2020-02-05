@@ -4,7 +4,7 @@ import main.java.exceptions.NoDescriptionException;
 import main.java.model.TaskList;
 
 public class Command {
-    protected TaskList taskList = new TaskList();
+    protected TaskList taskList;
 
     public Command() {}
 
