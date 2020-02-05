@@ -1,3 +1,2 @@
 T | false | read book
-E | false | meeting | 2019-12-12 1800
 T | false | borrow book
