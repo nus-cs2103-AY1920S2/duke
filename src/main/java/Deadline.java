@@ -20,7 +20,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toStore() {
-        return "[D]" + super.toStore() + " (at: " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        return "[D]" + super.toStore() + " (at: "
+                + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
     }
 
     /**
@@ -29,6 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ")";
     }
 }

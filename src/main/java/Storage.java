@@ -1,6 +1,8 @@
 import java.io.*;
-import java.nio.file.Path;
+
 import java.util.LinkedList;
+
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
@@ -58,8 +60,8 @@ public class Storage {
      */
     public void loadData(Tracker tracker) {
         try (InputStream in = Files.newInputStream(this.path);
-             BufferedReader reader =
-                     new BufferedReader(new InputStreamReader(in))) {
+             BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(in))) {
             String line = null;
             int index = 0;
 
@@ -75,12 +77,14 @@ public class Storage {
                 case "E":
                     String[] eventArray = content.split(" \\(at: ");
                     int eContentLength = eventArray[1].length();
-                    tracker.add(new Event(eventArray[0], eventArray[1].substring(0, eContentLength - 1)));
+                    tracker.add(new Event(eventArray[0],
+                            eventArray[1].substring(0, eContentLength - 1)));
                     break;
                 case "D":
                     String[] deadlineArray = content.split(" \\(by: ");
                     int dContentLength = deadlineArray[1].length();
-                    tracker.add(new Deadline(deadlineArray[0], deadlineArray[1].substring(0, dContentLength - 1)));
+                    tracker.add(new Deadline(deadlineArray[0],
+                            deadlineArray[1].substring(0, dContentLength - 1)));
                     break;
                 }
 
