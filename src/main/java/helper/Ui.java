@@ -1,3 +1,6 @@
+import exception.IncorrectInputException;
+import task.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -33,9 +36,21 @@ public class Ui {
         return topMessage + "\n" + output + "\n" + bottomMessage;
     }
 
-    public String findTaskMes(){
+    public String findTaskMes() {
         return "  --------------\n" +
                 "    Here are the matching tasks in your list: ";
+    }
+    public void checkIsTaskEmpty(String input) throws IncorrectInputException {
+        String [] commandArray = input.split(" ");
+        if(commandArray.length == 1 ){
+            throw new IncorrectInputException("☹ OOPS!!! The description of a "+ commandArray[0] +" cannot be empty.");
+        }
+    }
+
+    public void printError(String message){
+        System.out.println("-----------------");
+        System.out.println("   "+message);
+        System.out.println("-----------------");
     }
 
 }

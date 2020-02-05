@@ -1,10 +1,13 @@
+import exception.IncorrectInputException;
+import task.Task;
+
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.File;
 
 /**
- * takes in user's command and
+ * takes in user's command and parser it.
  */
 public class Parser {
     private String command;
@@ -21,8 +24,7 @@ public class Parser {
     }
 
     /**
-     * parse user's command into "todo" , "event" and "deadline"
-     *
+     * parse user's command into "todo" , "event" and "deadline".
      * @param command
      * @return command type "todo" , "event" and "deadline"
      */
@@ -33,31 +35,31 @@ public class Parser {
     }
 
     /**
-     * This method takers in user's input and arrayList of task and Ui class to
+     * This method takers in user's input and arrayList of task and Ui class to,
      * handle the todo task command and write it into file,
-     * it return the desired string output to user
-     *
+     * it return the desired string output to user.
      * @param command   command and task that entered by user
      * @param tasks     arrayList that used to store task created
      * @param uiDisplay class object that deals with the interaction with user.
      * @param f         File object to write task into file.
      * @return output
-     * @throws Exception
+     * @throws Exception it will
      */
-    public String todoTaskCommand(String command, ArrayList<Task> tasks, Ui uiDisplay, File f) throws Exception {
+    public String todoTaskCommand(String command, ArrayList<Task> tasks, Ui uiDisplay, File f) throws Exception, IncorrectInputException {
         String[] s = command.split("todo "); // split the user's input with todo commadn to get the task
-        tasks.add(new Task(s[1])); // initialize Task
+        tasks.add(new Task(s[1])); // initialize task.Task
         String customeriseTopMes = uiDisplay.getTopTwoLine(); // assign user interaction string message
         String taskMes = "   " + tasks.get(tasks.size() - 1).toString(); // the assign return task message
         String customeriseBottomMes = uiDisplay.getBottomTwoLine(tasks); // assign user interaction string message
         fileStorage.writeFile("todo", s[1], f); // create task into file
-        return uiDisplay.parserOutputMess(customeriseTopMes, taskMes, customeriseBottomMes); // parse the string and return to Duke class
+        // parse the string and return to Duke class
+        return uiDisplay.parserOutputMess(customeriseTopMes, taskMes, customeriseBottomMes);
     }
 
     /**
-     * This method takers in user's input and arrayList of task and Ui class to
-     * handle event task command and write it into file
-     * it return the desired string output to user
+     * This method takers in user's input and arrayList of task and Ui class to,
+     * handle event task command and write it into file,
+     * it return the desired string output to user.
      *
      * @param command   command and task that entered by user
      * @param tasks     arrayList that used to store task created
@@ -69,10 +71,10 @@ public class Parser {
     public String eventCommand(String command, ArrayList<Task> tasks, Ui uiDisplay, File f) throws Exception {
         String[] s = command.split("event "); // split the user's input with event command to get the task
         String[] temp = s[1].split("/"); // split the string to get date and time
-        String taskName = temp[0]; // assign Task name
+        String taskName = temp[0]; // assign task.Task name
         String date = formatDate(temp[1].substring(3, temp[1].length())); // formating the date
         String customeriseTopMes = uiDisplay.getTopTwoLine(); //  assign user interaction string message
-        tasks.add(new Deadline(taskName, date)); // add deadline into arrayList of Task
+        tasks.add(new task.Deadline(taskName, date)); // add deadline into arrayList of task.Task
         String taskMes = "     " + tasks.get(tasks.size() - 1).toString(); // assign return deadline message
         String customeriseBottomMes = uiDisplay.getBottomTwoLine(tasks); // assign user interaction string message
         fileStorage.writeFile("deadline", taskName + date, f); // create task into file
@@ -94,10 +96,10 @@ public class Parser {
     public String deadlineCommand(String command, ArrayList<Task> tasks, Ui uiDisplay, File f) throws Exception {
         String[] s = command.split("deadline "); // split the user's input with event command to get the task
         String[] temp = s[1].split("/"); // split the string to get date and time
-        String taskName = temp[0]; // assign Task name
+        String taskName = temp[0]; // assign task.Task name
         String date = formatDate(temp[1].substring(3, temp[1].length())); // formating the date
         String customeriseTopMes = uiDisplay.getTopTwoLine(); //  assign user interaction string message
-        tasks.add(new Event(taskName, date));  // add deadline into arrayList of Task
+        tasks.add(new task.Event(taskName, date));  // add deadline into arrayList of task.Task
         String taskMes = "     " + tasks.get(tasks.size() - 1).toString(); // assign return deadline message
         String customeriseBottomMes = uiDisplay.getBottomTwoLine(tasks); // assign user interaction string message
         fileStorage.writeFile("deadline", taskName + date, f);  // create task into file
@@ -149,15 +151,16 @@ public class Parser {
 
     public void findCommand(String command, ArrayList<Task> tasks, Ui uiDisplay) {
         ArrayList<String> matchResult = new ArrayList<String>();
-        String searchWord = command.substring(5);;
+        String searchWord = command.substring(5);
+        ;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(searchWord)) {
                 matchResult.add(tasks.get(i).toString());
             }
         }
         uiDisplay.findTaskMes();
-        for(int j = 0 ; j < matchResult.size(); j++){
-            System.out.println(" "+(j+1)+". "+matchResult.get(j).toString());
+        for (int j = 0; j < matchResult.size(); j++) {
+            System.out.println(" " + (j + 1) + ". " + matchResult.get(j).toString());
         }
         System.out.println("--------------");
     }
