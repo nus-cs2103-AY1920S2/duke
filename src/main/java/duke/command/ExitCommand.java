@@ -11,6 +11,9 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    /**
+     * Executes the command and display an exit message.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showMessage(Message.EXIT_MESSAGE);
     }

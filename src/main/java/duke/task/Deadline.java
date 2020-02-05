@@ -7,11 +7,6 @@ public class Deadline extends Task {
 
     private LocalDateTime datetime;
 
-    /**
-     * Contsructor of the deadline object.
-     * @param description The task description.
-     * @param deadline  The deadline date/time.
-     */
     public Deadline(boolean isDone, String description, LocalDateTime datetime) {
         super(isDone, description);
         this.datetime = datetime;
