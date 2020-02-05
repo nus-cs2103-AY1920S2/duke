@@ -16,10 +16,11 @@ public class DeleteCommand extends Command {
      * @param storage Storage where the updated list is saved into.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showDeletedTask(tasks, option);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String s = ui.showDeletedTask(tasks, option);
         tasks.deleteTask(option);
         storage.writeFile(tasks);
+        return s;
     }
 
     /**

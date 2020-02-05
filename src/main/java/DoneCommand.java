@@ -16,10 +16,11 @@ public class DoneCommand extends Command {
      * @param storage Storage where the updated list is saved into.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.markAsDone(option);
-        ui.showDoneTask(tasks.arr.get(option - 1));
+        String s = ui.showDoneTask(tasks.arr.get(option - 1));
         storage.writeFile(tasks);
+        return s;
     }
 
     /**

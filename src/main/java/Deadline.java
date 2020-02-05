@@ -8,6 +8,11 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
 
+    /**
+     * Creates a deadline with the specific task and date to complete the task by.
+     * @param task Task to complete within deadline.
+     * @param by Date to complete the task.
+     */
     public Deadline(String task, String by) {
         super(task);
         this.by = by;

@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +27,8 @@ public class Storage {
             writer.write(line);
             writer.newLine();
             writer.close();
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            ui.showFileNotFoundError();
         }
     }
 
@@ -41,7 +45,8 @@ public class Storage {
                 writer.newLine();
             }
             writer.close();
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            ui.showFileNotFoundError();
         }
     }
 
@@ -55,19 +60,27 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while (true) {
                 String str = br.readLine();
-                if (str == null) break;
+                if (str == null) {
+                    break;
+                }
                 String[] arr = str.split("/");
                 if (arr[0].equals("T")) {
                     Todo task = new Todo(arr[2]);
-                    if (arr[1].equals("1")) task.setDone();
+                    if (arr[1].equals("1")) {
+                        task.setDone();
+                    }
                     data.add(task);
                 } else if (arr[0].equals("D")) {
                     Deadline task = new Deadline(arr[2], arr[3]);
-                    if (arr[1].equals("1")) task.setDone();
+                    if (arr[1].equals("1")) {
+                        task.setDone();
+                    }
                     data.add(task);
                 } else { //event
                     Event task = new Event(arr[2], arr[3]);
-                    if (arr[1].equals("1")) task.setDone();
+                    if (arr[1].equals("1")) {
+                        task.setDone();
+                    }
                     data.add(task);
                 }
             }

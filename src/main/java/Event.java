@@ -8,6 +8,11 @@ public class Event extends Task {
     protected String at;
     protected LocalDate date;
 
+    /**
+     * Creates an event with the specific task and date to complete the task by.
+     * @param task Task to complete within deadline.
+     * @param at Date to complete the task.
+     */
     public Event(String task, String at) {
         super(task);
         this.at = at;

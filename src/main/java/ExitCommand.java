@@ -12,8 +12,8 @@ public class ExitCommand extends Command {
      * @param storage Storage where the updated list is saved into.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.endDuke();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.endDuke();
     }
 
     /**

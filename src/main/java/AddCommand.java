@@ -16,10 +16,11 @@ public class AddCommand extends Command {
      * @param storage Storage where the updated list is saved into.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String s = ui.showAddedTask(task, tasks);
         tasks.addTask(task);
-        ui.showAddedTask(task, tasks);
         storage.appendFile(task);
+        return s;
     }
 
     /**

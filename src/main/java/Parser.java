@@ -23,11 +23,11 @@ public class Parser {
             if (arr.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
-                String[] dArr = arr[1].split(" /by ", 2);
-                if (dArr.length == 1) {
+                String[] deadlineArr = arr[1].split(" /by ", 2);
+                if (deadlineArr.length == 1) {
                     throw new DukeException("☹ OOPS!!! You forgot to specify a date/time for the deadline.");
                 } else {
-                    Task task = new Deadline(dArr[0], dArr[1]);
+                    Task task = new Deadline(deadlineArr[0], deadlineArr[1]);
                     return new AddCommand(task);
                 }
             }
@@ -35,11 +35,11 @@ public class Parser {
             if (arr.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             } else {
-                String[] eArr = arr[1].split(" /at ", 2);
-                if (eArr.length == 1) {
+                String[] eventArr = arr[1].split(" /at ", 2);
+                if (eventArr.length == 1) {
                     throw new DukeException("☹ OOPS!!! You forgot to specify a date/time for the event.");
                 } else {
-                    Task task = new Event(eArr[0], eArr[1]);
+                    Task task = new Event(eventArr[0], eventArr[1]);
                     return new AddCommand(task);
                 }
             }
@@ -51,7 +51,7 @@ public class Parser {
             return new ListCommand();
         } else if (command.equals("find")) {
             return new FindCommand(arr[1]);
-        } else if (command.equals("bye")){
+        } else if (command.equals("bye")) {
             return new ExitCommand();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
