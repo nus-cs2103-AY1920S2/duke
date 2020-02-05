@@ -5,7 +5,7 @@ public class Parser {
     public Parser() {
     }
 
-    private  boolean canSplitStr(String str, String regex) {
+    private boolean canSplitStr(String str, String regex) {
         String[] strArr = str.split(regex);
 
         return (strArr.length == 2);
@@ -19,11 +19,7 @@ public class Parser {
             return false;
         }
 
-        if ((id - 1) > tasks.getNumTasks() - 1 || (id - 1) < 0) {
-            return false;
-        }
-
-        return true;
+        return (!((id - 1) > tasks.getNumTasks() - 1 || (id - 1) < 0));
     }
 
     public Command parse(String cmd, TaskList tasks) throws DukeException {
