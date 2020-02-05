@@ -8,6 +8,11 @@ import java.util.Collections;
 public class TaskList {
     private static ArrayList<Task> taskList;
 
+    /**
+     * Constructor for a TaskList object that initializes an ArrayList of Tasks.
+     * @param taskListString ArrayList of Strings representing the task Strings that are read
+     *                       from the save file.
+     */
     public TaskList(ArrayList<String> taskListString) {
         taskList = new ArrayList<>();
         for (String taskString: taskListString) {
@@ -40,10 +45,10 @@ public class TaskList {
     }
 
     /**
-     * Removes the specified task from the taskList
+     * Removes the specified task from the taskList.
      * @param taskNumber The index number of the task to be deleted from the taskList.
      * @return The Task that was deleted.
-     * @throws DukeException
+     * @throws DukeException Exception thrown if the task does not exist.
      */
     public Task deleteTask(int taskNumber) throws DukeException {
         try {
@@ -71,7 +76,7 @@ public class TaskList {
         //check if the char is Done symbol
         boolean isDone = temp.get(0).charAt(4) == '\u2713';
 
-        switch (type){
+        switch (type) {
         case 'T':
             // case for ToDo
             StringBuilder sbt = new StringBuilder();

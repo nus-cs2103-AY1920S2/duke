@@ -1,5 +1,6 @@
 /**
- * Represents a Command object that will be created when the user inputs the command to delete a task from the task list.
+ * Represents a Command object that will be created when
+ * the user inputs the command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
     int taskNumber;
@@ -16,7 +17,8 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList object from the driver Duke object.
      * @param ui Ui object from the driver Duke object.
      * @param storage Storage object from the driver Duke object.
-     * @throws DukeException Exception thrown by the method deleteTask if the task list is empty, or the task to delete does not exist.
+     * @throws DukeException Exception thrown by the method deleteTask if the task list is empty,
+     *     or the task to delete does not exist.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

@@ -1,17 +1,29 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represents an object that stores the save file of the user's task list, and handles the saving and update of the task list.
+ * Represents an object that stores the save file of the user's task list,
+ * and handles the saving and update of the task list.
  */
 public class Storage {
     private Path filePath;
     private File file;
 
+    /**
+     * Constructor for a Storage object that takes in a String
+     * representing the name of the task list save file.
+     * @param fileName String of the task list save file name.
+     */
     public Storage(String fileName) {
         // Load the file
         String currDir = System.getProperty("user.dir");
@@ -37,8 +49,10 @@ public class Storage {
     }
 
     /**
-     * Returns an ArrayList<String> from reading the lines from the user's task list file of the format .txt
-     * @return ArrayList<String> representing the user's task list, where each element corresponds to one task.
+     * Returns an ArrayList of String from reading the lines
+     * from the user's task list file of the format .txt
+     * @return ArrayList of String representing the user's task list,
+     *     where each element corresponds to one task.
      */
     public ArrayList<String> loadFromFilePath() {
         List<String> lines = new ArrayList<>();
@@ -55,7 +69,8 @@ public class Storage {
 
     /**
      * Saves and updates the user's .txt task list.
-     * @param taskList The ArrayList<Task> that represents the updated list of tasks to be saved to the .txt file.
+     * @param taskList The ArrayList of Tasks that represents the updated list of tasks
+     *                 to be saved to the .txt file.
      */
     public void saveFile(ArrayList<Task> taskList) {
         try {

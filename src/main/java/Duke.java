@@ -8,6 +8,11 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Constructor for Duke that takes in a String representing the
+     * name of the save file for the user's task list.
+     * @param fileName String of the save file of the user's task list.
+     */
     public Duke(String fileName) {
         // Initialize Ui
         this.ui = new Ui();
@@ -18,6 +23,9 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * Driver function that runs the Duke program.
+     */
     public void run() {
         ui.sayHello();
         boolean endInput = false;
@@ -38,6 +46,7 @@ public class Duke {
         }
         ui.sayBye();
     }
+
     public static void main(String[] args) {
         new Duke("list.txt").run();
     }
