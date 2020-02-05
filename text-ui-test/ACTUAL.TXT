@@ -1,4 +1,4 @@
-Hello I am duke.Duke.
+Hello I am Duke.
 What can I do for you?
 Got it. I've added this task:
 [T][✘] borrow book

@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * The Task Class is the parent class to ToDo, Deadline and Event Classes.
  * @author qiujingying
