@@ -50,7 +50,7 @@ public class Ui {
 
     public void printMarkDoneSuccess(Task task) {
         this.printLine();
-        System.out.println("\t Alrighty! I've marked this task as done:");
+        System.out.println("\t Alright! I've marked this task as done:");
         System.out.println("\t " + task);
         this.printLine();
     }
