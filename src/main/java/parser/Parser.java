@@ -1,4 +1,4 @@
-package main.java.Parser;
+package main.java.parser;
 
 import main.java.exceptions.NoCommandException;
 import main.java.exceptions.NoDescriptionException;

@@ -1,4 +1,4 @@
-package main.java.Parser;
+package main.java.parser;
 
 public class FinishCommand extends Command{
     protected Integer position;

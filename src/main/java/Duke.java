@@ -1,8 +1,8 @@
 package main.java;
 
-import main.java.Parser.Command;
-import main.java.Parser.ExitCommand;
-import main.java.Parser.Parser;
+import main.java.parser.Command;
+import main.java.parser.ExitCommand;
+import main.java.parser.Parser;
 import main.java.exceptions.NoCommandException;
 import main.java.model.TaskList;
 

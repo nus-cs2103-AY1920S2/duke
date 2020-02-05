@@ -1,4 +1,4 @@
-package main.java.Parser;
+package main.java.parser;
 
 public class ExitCommand extends Command {
 

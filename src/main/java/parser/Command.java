@@ -1,4 +1,4 @@
-package main.java.Parser;
+package main.java.parser;
 
 import main.java.exceptions.NoDescriptionException;
 import main.java.model.TaskList;
