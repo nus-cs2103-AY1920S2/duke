@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents the type of command entered by the user.
+ */
 public enum CommandType {
     LIST_CMD("list"),
     DONE_CMD("done"),

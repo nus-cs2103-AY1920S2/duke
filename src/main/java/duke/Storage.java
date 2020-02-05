@@ -6,6 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Interfaces with the Java File IO API, to open, read, and write to the data (text) file.
+ */
 public class Storage {
     private File file;
     private Scanner scanner;
@@ -15,6 +18,12 @@ public class Storage {
 
     public static final String DUKE_TXT_FILE_PATH = "data/duke.txt";
 
+    /**
+     * Constructs a new Storage object. Opens the file if it exists, else creates a new one.
+     *
+     * @param filePath The relative file path of the data (text) file on the computer.
+     * @throws IOException If there are any IO-related exceptions while trying to open or create a file.
+     */
     public Storage(String filePath) throws IOException {
         file = new File(filePath);
 
@@ -26,6 +35,11 @@ public class Storage {
         scanner = new Scanner(this.file);
     }
 
+    /**
+     * Reads data (Tasks) from text file and converts them to a task-list array.
+     *
+     * @return The task-list containing all read Tasks from the data (text) file.
+     */
     public TaskList load() {
         Task t;
         String[] strArr;
@@ -55,6 +69,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the current Tasks in the task-list to the data (text) file, overwriting current file contents.
+     *
+     * @param taskList The task-list containing all currently added Tasks.
+     * @throws IOException If there are any IO-related exception, while trying to write to file.
+     */
     public void saveTasksToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(file);
 
