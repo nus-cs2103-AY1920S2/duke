@@ -25,6 +25,7 @@ public class Duke {
 
         // load saved tasks from file
         try {
+            // todo: create data folder first if does not exist
             storage = new Storage("data/tasks.txt");
             tasks = new TaskList(storage.loadTasks());
         } catch (IOException e) {
