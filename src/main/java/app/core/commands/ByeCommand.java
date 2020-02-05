@@ -1,11 +1,11 @@
 package app.core.commands;
 
 import app.core.tasks.TaskManager;
-import app.core.UserInterface;
+import app.util.Pair;
 
 final class ByeCommand extends Command {
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) {
-        userInterface.close();
+    public Pair execute(TaskManager taskManager) {
+        return new Pair(null, true);
     }
 }

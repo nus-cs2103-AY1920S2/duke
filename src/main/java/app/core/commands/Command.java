@@ -2,7 +2,7 @@ package app.core.commands;
 
 import app.core.tasks.TaskManager;
 import app.exceptions.BaseException;
-import app.core.UserInterface;
+import app.util.Pair;
 
 /**
  * An abstract class that defines abstract methods
@@ -16,5 +16,5 @@ public abstract class Command {
      * @param userInterface The desired user interface
      * @throws BaseException If any error occurs during the execution of the command.
      */
-    public abstract void execute(TaskManager taskManager, UserInterface userInterface) throws BaseException;
+    public abstract Pair execute(TaskManager taskManager) throws BaseException;
 }

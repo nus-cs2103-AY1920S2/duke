@@ -1,7 +1,7 @@
 package app.core.commands;
 
 import app.core.tasks.TaskManager;
-import app.core.UserInterface;
+import app.util.Pair;
 import app.exceptions.InvalidUsageException;
 
 final class FindCommand extends Command {
@@ -16,8 +16,8 @@ final class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) {
+    public Pair execute(TaskManager taskManager) {
         String output = taskManager.findMatchingTasks(this.toMatch);
-        userInterface.render(output);
+        return new Pair(output, false);
     }
 }

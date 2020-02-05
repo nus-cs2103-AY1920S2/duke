@@ -1,6 +1,7 @@
 package app;
 
 import app.exceptions.BaseException;
+import app.util.Pair;
 import app.core.UserInterface;
 import app.core.commands.Command;
 import app.core.commands.CommandManager;
@@ -21,7 +22,6 @@ public final class Duke {
      */
     public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
 
-    private UserInterface userInterface;
     private CommandManager commandManager;
     private TaskManager taskManager;
 
@@ -29,7 +29,6 @@ public final class Duke {
      * Initializes a new instance of Duke.
      */
     public Duke() {
-        this.userInterface = new UserInterface();
         this.commandManager = new CommandManager();
         this.taskManager = new TaskManager();
     }
@@ -38,21 +37,35 @@ public final class Duke {
      * Starts Duke
      */
     public void start() {
-        this.userInterface.render(WELCOME_MESSAGE);
+        UserInterface userInterface = new UserInterface();
+        userInterface.render(WELCOME_MESSAGE);
           
-        while (!this.userInterface.isClosed()) {
+        while (!userInterface.isClosed()) {
             try {
-                String input = this.userInterface.listen();
-                Command command = this.commandManager.getCommand(input);
-                command.execute(this.taskManager, this.userInterface);
+                String input = userInterface.listen();
+                Pair output = this.executeInput(input);
+                String message = (String) output.getFirstValue();
+                Boolean shutdown = (boolean) output.getSecondValue();
+
+                if (!shutdown) {
+                    userInterface.render(message);
+                } else {
+                    userInterface.close();
+                }
             } catch (BaseException e) {
-                this.userInterface.renderError(e.getMessage());
+                userInterface.renderError(e.getMessage());
             } catch (Exception e) {
-                this.userInterface.renderError("Caught some other exception! Notify developer!");
-                this.userInterface.renderError(e.getMessage());
+                userInterface.renderError("Caught some other exception! Notify developer!");
+                userInterface.renderError(e.getMessage());
             }
         }
 
-        this.userInterface.render(GOODBYE_MESSAGE);
+        userInterface.render(GOODBYE_MESSAGE);
+    }
+
+    public Pair executeInput(String input) throws BaseException {
+        Command command = this.commandManager.getCommand(input);
+        Pair output = command.execute(this.taskManager);
+        return output;
     }
 }

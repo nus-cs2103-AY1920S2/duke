@@ -1,12 +1,12 @@
 package app.core.commands;
 
 import app.core.tasks.TaskManager;
-import app.core.UserInterface;
+import app.util.Pair;
 
 final class ListCommand extends Command {
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) {
+    public Pair execute(TaskManager taskManager) {
         String output = taskManager.toString();
-        userInterface.render(output);
+        return new Pair(output, false);
     }
 }

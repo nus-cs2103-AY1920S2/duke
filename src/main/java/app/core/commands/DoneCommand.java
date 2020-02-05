@@ -1,8 +1,7 @@
 package app.core.commands;
 
-import app.core.UserInterface;
 import app.core.tasks.TaskManager;
-
+import app.util.Pair;
 import app.exceptions.InvalidTaskIndexException;
 import app.exceptions.StorageFileException;
 import app.exceptions.InvalidUsageException;
@@ -19,10 +18,10 @@ final class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) throws InvalidTaskIndexException, StorageFileException {
+    public Pair execute(TaskManager taskManager) throws InvalidTaskIndexException, StorageFileException {
         try {
             String output = taskManager.setTaskDone(this.taskIndex);
-            userInterface.render(output);
+            return new Pair(output, false);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException(
                 "Invalid task index. Please refer to the 'list' command for available indices."

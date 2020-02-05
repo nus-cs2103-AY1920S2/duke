@@ -1,7 +1,7 @@
 package app.core.commands;
 
-import app.core.UserInterface;
 import app.core.tasks.TaskManager;
+import app.util.Pair;
 import app.exceptions.StorageFileException;
 import app.exceptions.InvalidUsageException;
 
@@ -17,8 +17,8 @@ final class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, UserInterface userInterface) throws StorageFileException {
+    public Pair execute(TaskManager taskManager) throws StorageFileException {
         String output = taskManager.addTodoTask(this.description);
-        userInterface.render(output);
+        return new Pair(output, false);
     }
 }
