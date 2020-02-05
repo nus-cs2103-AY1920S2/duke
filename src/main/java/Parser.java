@@ -26,39 +26,37 @@ public class Parser {
      * @throws DukeException If any error occurs during parsing of the user input.
      */
     public static Command parse(String input) throws DukeException {
+        if (input.equals("bye")) {
+            return new ExitCommand();
+        } else if (input.equals("list")) {
+            return new ListCommand();
+        }
+
         Command c;
         String[] inputElements = input.split(" ", 2);
         String command = inputElements[0];
+
         try {
-            if (command.equals("bye")) {
-                c = new ExitCommand();
-            } else if (command.equals("list")) {
-                c = new ListCommand();
-            } else if (command.equals("todo")) {
-                Parser.checkArr(command, false, inputElements);
+            Parser.checkArr(command, false, inputElements);
+            if (command.equals("todo")) {
                 c = new AddCommand(new ToDo(inputElements[1]));
             } else if (command.equals("deadline")) {
-                Parser.checkArr(command, false, inputElements);
                 String[] descElements = inputElements[1].split(" /by ", 2);
                 Parser.checkArr(command, true, descElements);
                 LocalDate date = LocalDate.parse(descElements[1]);
                 c = new AddCommand(new Deadline(descElements[0], date));
             } else if (command.equals("event")) {
-                Parser.checkArr(command, false, inputElements);
                 String[] descElements = inputElements[1].split(" /at ", 2);
                 Parser.checkArr(command, true, descElements);
                 LocalDate date = LocalDate.parse(descElements[1]);
                 c = new AddCommand(new Event(descElements[0], date));
             } else if (command.equals("delete")) {
-                Parser.checkArr(command, false, inputElements);
                 int i = Integer.parseInt(inputElements[1]);
                 c = new DeleteCommand(i - 1);
             } else if (command.equals("done")) {
-                Parser.checkArr(command, false, inputElements);
                 int i = Integer.parseInt(inputElements[1]);
                 c = new DoneCommand(i - 1);
             } else if (command.equals("find")) {
-                Parser.checkArr(command, false, inputElements);
                 c = new FindCommand(inputElements[1]);
             } else {
                 c = new UnknownCommand();
@@ -68,6 +66,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidIndexException();
         }
+
         return c;
     }
 }

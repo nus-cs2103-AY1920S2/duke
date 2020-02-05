@@ -8,7 +8,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> reqTasks = tasks.find(this.keyword);
         String response = "";
         if (reqTasks.size() == 0) {
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
             }
             response = response.substring(0, response.length() - 1);
         }
-        ui.showMsg(response);
+        return response;
     }
 
     @Override
