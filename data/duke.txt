@@ -1,4 +1,4 @@
 T | 1 | read book
 D | 0 | submit quiz | 3pm | 2020-02-06
-T | 1 | doodle
-T | 0 | bloobloop
+T | 1 | bloobloop
+E | 0 | lunch | 12pm | 2020-02-05
