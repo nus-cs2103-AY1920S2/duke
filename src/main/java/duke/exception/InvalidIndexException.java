@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * InvalidIndexException
  *
- * CS2103T AY19/20 Semester 2
+ * <p>CS2103T AY19/20 Semester 2
  * Individual project
  * Duke project
  *
@@ -32,7 +32,8 @@ public class InvalidIndexException extends DukeException {
      */
     @Override
     public String toString() {
-        String back = "You currently have " + size + (size < 2 ? " task." : " tasks.") + "\nPlease enter a number in the range 1 to " + size;
+        String back = "You currently have " + size + (size < 2 ? " task." : " tasks.")
+                + "\nPlease enter a number in the range 1 to " + size;
         if (num < 1) {
             return "Index supplied is too small. " + back;
         }

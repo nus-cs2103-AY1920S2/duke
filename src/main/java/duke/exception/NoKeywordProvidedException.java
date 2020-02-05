@@ -1,5 +1,16 @@
 package duke.exception;
 
+/**
+ * NoKeywordProvided Exception
+ *
+ * <p>CS2103T AY19/20 Semester 2
+ * Individual project
+ * Duke project
+ *
+ * 29 Jan 2020
+ *
+ * @author Jel
+ */
 public class NoKeywordProvidedException extends DukeException {
     /**
      * Overrides the Object's toString method

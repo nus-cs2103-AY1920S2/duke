@@ -1,14 +1,21 @@
 package duke.util;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 /**
  * Storage
  *
- * CS2103T AY19/20 Semester 2
+ * <p>CS2103T AY19/20 Semester 2
  * Individual project
  * Duke project
  *
@@ -73,7 +80,7 @@ public class Storage {
             String details = arr[2];
             Task getFromDisk;
 
-            switch(arr[0]) {
+            switch (arr[0]) {
             case "T":
                 getFromDisk = new Todo(details);
                 break;

@@ -3,7 +3,7 @@ package duke.util;
 /**
  * Task
  *
- * CS2103T AY19/20 Semester 2
+ * <p>CS2103T AY19/20 Semester 2
  * Individual project
  * Duke project
  *

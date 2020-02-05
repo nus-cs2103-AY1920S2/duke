@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Parser
  *
- * CS2103T AY19/20 Semester 2
+ * <p>CS2103T AY19/20 Semester 2
  * Individual project
  * Duke project
  *
@@ -42,7 +42,7 @@ public class Parser {
         String descAndDate;
 
         try {
-            switch(cmd) {
+            switch (cmd) {
             case "bye":
                 ui.bye();
                 return;
