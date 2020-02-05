@@ -11,15 +11,15 @@ import dukeexception.DukeIoException;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    static Path file;
+    static Path filePath;
 
     /**
      * Constructor for Storage class.
      *
      * @param filePath The file path to the file to load the tasks in from.
      */
-    public Storage(String filePath) {
-        file = java.nio.file.Paths.get(filePath);
+    public Storage(Path filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Storage {
     public static ArrayList<Task> load() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(filePath);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (line.equals("")) {
@@ -66,14 +66,14 @@ public class Storage {
             tasksForFile.add(tasks.getTask(i) + "\n");
         }
         try {
-            Files.write(file, tasksForFile);
+            Files.write(filePath, tasksForFile);
         } catch (IOException e) {
             throw new DukeIoException("File does not exist in file path, file update failed.");
         }
     }
 
     /**
-     * To construct the task after line has been read from file.
+     * Constructs the task after line has been read from file.
      *
      * @param code The first letter in the task to tell the type of task.
      * @param args String where it's everything after the initial [X][X].

@@ -70,15 +70,16 @@ public class Parser {
             throw new DukeUnknownInputException("Need give/format deadline <description> /by <time>.");
         }
         // Check if date is parsable
-        String byWhen;
+        String byWhen= "";
         try {
             LocalDate date = LocalDate.parse(splitted[1]);
             byWhen = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (DateTimeParseException e) {
             byWhen = splitted[1];
+        } finally {
+            String[] descriptionAndBy = {splitted[0], byWhen};
+            return descriptionAndBy;
         }
-        String[] descriptionAndBy = {splitted[0], byWhen};
-        return descriptionAndBy;
     }
 
     /**

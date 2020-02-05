@@ -1,5 +1,6 @@
 import dukeexception.DukeException;
 import dukeexception.DukeUnknownInputException;
+import java.nio.file.Path;
 
 /**
  * Duke class uses Storage to load and unload data from and to files, TaskList to contain and operate on
@@ -18,7 +19,7 @@ public class Duke {
      *
      * @param filePath The path to the file to load tasks from.
      */
-    public Duke(String filePath) {
+    public Duke(Path filePath) {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -84,6 +85,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:/Users/Min Suk/IdeaProjects/duke/data/tasks.txt").run();
+        String home = System.getProperty("user.home");
+        Path path = java.nio.file.Paths.get(home, "IdeaProjects", "duke", "data", "tasks.txt");
+        new Duke(path).run();
     }
 }
