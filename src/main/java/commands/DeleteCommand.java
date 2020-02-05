@@ -1,10 +1,13 @@
 package commands;
 
+import exceptions.DukeException;
 import tasks.Task;
 import tasks.TaskList;
 
 import handlers.Storage;
 import handlers.Ui;
+
+import java.io.IOException;
 
 /**
  * Handles the command when the user wants a task deleted.
@@ -20,10 +23,18 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskRemoved = tasks.remove(this.taskToDelete);
-        ui.clearResponse();
-        ui.showDeletedTask(taskRemoved, tasks.numOfTasks());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {
+        try {
+            if (this.taskToDelete > tasks.numOfTasks()) {
+                throw new DukeException("☹ OOPS!!! No task to be deleted found!");
+            } else {
+                Task taskRemoved = tasks.remove(this.taskToDelete);
+                ui.clearResponse();
+                ui.showDeletedTask(taskRemoved, tasks.numOfTasks());
+            }
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
     }
 
     @Override

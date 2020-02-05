@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.DukeException;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -21,12 +22,19 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        //int num = Integer.parseInt(this.command);
-        this.doneTask = tasks.get(taskToBeDone - 1);
-        tasks.completedTask(doneTask);
-        ui.clearResponse();
-        ui.showDoneTask(doneTask);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {
+        try {
+            if (this.taskToBeDone > tasks.numOfTasks()) {
+                throw new DukeException("☹ OOPS!!! No task to be done found!");
+            } else {
+                this.doneTask = tasks.get(taskToBeDone - 1);
+                tasks.completedTask(doneTask);
+                ui.clearResponse();
+                ui.showDoneTask(doneTask);
+            }
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
     }
 
     @Override
