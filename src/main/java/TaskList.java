@@ -10,12 +10,14 @@ public class TaskList {
     private Ui ui;
     private int latest_index;
     private Storage storage;
+    private StringBuilder sb;
 
     public TaskList(ArrayList<Task> list, int latest_index, Storage storage) {
         this.list = list;
         this.ui = new Ui();
         this.latest_index = latest_index;
         this.storage = storage;
+
     }
 
     public int getLatest_index() {
@@ -37,38 +39,39 @@ public class TaskList {
      * informs the user if there is no such position in the list or if the input is not a number.
      * @param input the input, normally a number, that is entered
      */
-    public void delete(String input) {
+    public String delete(String input) {
+        sb = new StringBuilder();
         input = input.replace("delete","");
         input = input.trim();
 
         if (input.equals("all")) {
             list.clear();
             latest_index = 0;
-            System.out.println(ui.deleteAll());
-            return;
+            return ui.deleteAll();
         }
 
         try {
             int i = Integer.parseInt(input) - 1;
 
             if (!list.get(i).isDone) {
-                System.out.println(ui.unfinishedTask() + list.get(i).toString());
+                sb.append(ui.unfinishedTask() + list.get(i).toString() + "\n");
             } else {
-                System.out.println(ui.finishedTask() + list.get(i).toString());
+                sb.append(ui.finishedTask() + list.get(i).toString() + "\n");
             }
 
             list.remove(i);
             updateIndex();
             latest_index--;
 
-            System.out.println("\nNow you have a total of " + latest_index + " Tasks in your list");
+            sb.append("\nNow you have a total of " + latest_index + " Tasks in your list");
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(ui.nosuchNumber());
+            sb.append(ui.nosuchNumber());
 
         } catch (NumberFormatException e) {
-            System.out.println(ui.inputNumber());
+            sb.append(ui.inputNumber());
         }
+        return sb.toString();
     }
 
 
@@ -79,24 +82,24 @@ public class TaskList {
      *
      * @param input the description of the todo task that is inputted by the user
      */
-    public void todo(String input) {
+    public String todo(String input) {
 
         int repeat = checkRepeats(input,"todo");
 
         if (repeat > 1) {
-            System.out.println(ui.oneCommand());
-            return;
+            return ui.oneCommand();
         }
         input = input.replace("todo", "");
         input = input.trim();
 
         if (checkEmpty(input)) {
-            return;
+            return "";
         }
         Todo todo = new Todo(input, ++latest_index);
         list.add(todo);
-        System.out.println("Got it. I have added this task:\n" + todo.toString() +
-                "\nNow you have a total of " + latest_index + " Tasks in your list");
+        return "Got it. I have added this task:\n" + todo.toString() +
+                "\nNow you have a total of " + latest_index + " Tasks in your list";
+
     }
 
     /**
@@ -106,7 +109,7 @@ public class TaskList {
      *
      * @param input the description of the task that is inputted by the user
      */
-    public void done(String input) {
+    public String done(String input) {
         input = input.replace("done","");
         input = input.trim();
         try {
@@ -114,18 +117,18 @@ public class TaskList {
 
             if (!list.get(i).isDone) {
                 list.get(i).isDone = true;
-                System.out.println("Nice! You have done this:\n" + list.get(i).toString());
+                return "Nice! You have done this:\n" + list.get(i).toString();
             } else {
-                System.out.println("You have already done\n" + list.get(i).toString() + "\nNo need to do it again!");
+                return "You have already done\n" + list.get(i).toString() + "\nNo need to do it again!";
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(ui.nosuchNumber());
+            return ui.nosuchNumber();
 
         } catch (NumberFormatException e) {
-            System.out.println(ui.inputNumber());
+            return ui.inputNumber();
 
         } catch (Exception e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
@@ -138,13 +141,12 @@ public class TaskList {
      *
      * @param input the description of the deadline task that is inputted by the user
      */
-    public void deadline(String input) {
+    public String deadline(String input) {
 
         int repeat = checkRepeats(input,"/by");
 
         if (repeat > 1) {
-            System.out.println(ui.oneCommand());
-            return;
+            return ui.oneCommand();
         }
 
         input = input.replace("deadline","");
@@ -154,21 +156,21 @@ public class TaskList {
 
         try {
             if (checkEmpty(strings[0])) {
-                return;
+                return "";
             }
 
             Deadline deadline = new Deadline(strings[0], strings[1],++latest_index);
             list.add(deadline);
 
 
-            System.out.println("Got it. I have added this task:\n" + deadline.toString() +
-                    "\nNow you have a total of " + latest_index + " Tasks in your list");
+            return "Got it. I have added this task:\n" + deadline.toString() +
+                    "\nNow you have a total of " + latest_index + " Tasks in your list";
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(ui.inputByCmd());
+            return ui.inputByCmd();
 
         } catch (Exception e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
@@ -180,12 +182,12 @@ public class TaskList {
      *
      * @param desc a string of the Description of the task the user wants to find
      */
-    public void find(String desc) {
+    public String find(String desc) {
         desc = desc.replace("find","");
         desc = desc.trim();
         boolean at_least_one = false;
         int count = 1;
-        StringBuilder sb = new StringBuilder();
+        sb = new StringBuilder();
 
         for (Task task : list) {
             if (task.description.contains(desc)) {
@@ -196,10 +198,10 @@ public class TaskList {
         }
 
         if (!at_least_one) {
-            System.out.println(ui.noMatchingTasks());
+            return ui.noMatchingTasks();
         } else {
-            System.out.println(ui.matchingTasks());
-            System.out.println(sb.toString());
+            sb.append(ui.matchingTasks() + "\n");
+            return sb.toString();
         }
     }
 
@@ -212,13 +214,12 @@ public class TaskList {
      *
      * @param input the description of the task that is inputted by the user
      */
-    public void event(String input) {
+    public String event(String input) {
 
         int repeat = checkRepeats(input,"/at");
 
         if (repeat > 1) {
-            System.out.println(ui.oneCommand());
-            return;
+            return ui.oneCommand();
         }
 
         input = input.replace("event","");
@@ -228,21 +229,21 @@ public class TaskList {
 
         try {
             if (checkEmpty(strings[0])) {
-                return;
+                return "";
             }
 
             Event event = new Event(strings[0],strings[1],++latest_index);
             list.add(event);
 
 
-            System.out.println("Got it. I have added this task:\n" + event.toString() +
-                    "\nNow you have a total of " + latest_index + " Tasks in your list");
+            return "Got it. I have added this task:\n" + event.toString() +
+                    "\nNow you have a total of " + latest_index + " Tasks in your list";
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(ui.inputAtCmd());
+            return ui.inputAtCmd();
 
         } catch (Exception e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 
@@ -288,10 +289,9 @@ public class TaskList {
      *
      * @throws Exception If any issue with any function
      */
-    public void bye() throws Exception {
-        // store
-        System.out.println(ui.sayBye());
+    public String bye() throws Exception {
         storage.writeFile(list);
+        return ui.sayBye();
     }
 
 
@@ -300,14 +300,15 @@ public class TaskList {
      * the overloaded toString function.
      *
      */
-    public void printList() {
-
+    public String printList() {
+        sb = new StringBuilder();
         if (latest_index == 0) {
-            System.out.println(ui.emptyList());
+            sb.append(ui.emptyList());
         }
 
         for (Task task : list) {
-            System.out.println(task.get_Index() + ". " + task.toString());
+            sb.append(task.get_Index() + ". " + task.toString() + "\n");
         }
+        return sb.toString();
     }
 }
