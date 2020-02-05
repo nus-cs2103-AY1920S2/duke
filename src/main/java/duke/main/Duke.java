@@ -3,7 +3,7 @@ package duke.main;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.util.ui.Ui;
 import duke.exception.InvalidCommandException;
 import duke.exception.OutOfBoundMarkingRequestException;
 import duke.exception.TaskErrorException;
@@ -182,5 +182,15 @@ public class Duke {
     public String byeBye() {
         storage.writeData(storedItems);
         return Ui.byeBye();
+    }
+
+    public String getResponse(String userInput) throws OutOfBoundMarkingRequestException, TaskErrorException, InvalidCommandException {
+        if (userInput.equals(Duke.BYE_COMMAND))
+            return byeBye();
+        if (userInput.equals(Duke.LIST_COMMAND)) {
+            return listStoredItems();
+        }
+
+        return processUserInput(userInput);
     }
 }

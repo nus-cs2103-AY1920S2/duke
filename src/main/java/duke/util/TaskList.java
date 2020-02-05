@@ -2,6 +2,8 @@ package duke.util;
 
 import duke.exception.OutOfBoundMarkingRequestException;
 import duke.task.Task;
+import duke.util.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
