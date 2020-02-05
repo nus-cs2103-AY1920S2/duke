@@ -18,6 +18,7 @@ import bot.command.instruction.concrete.MarkDoneInstruction;
 import bot.command.instruction.concrete.MarkNotDoneInstruction;
 import bot.command.instruction.concrete.SearchTimeInstruction;
 import bot.command.instruction.concrete.TerminateInstruction;
+import bot.command.instruction.concrete.ThanksInstruction;
 import bot.command.instruction.concrete.TodoInstruction;
 
 import java.util.Collection;
@@ -28,25 +29,25 @@ import java.util.HashMap;
  * given to bot
  */
 public class CommandParser {
-    public static final Instruction[] ALL_INSTRUCTIONS =
-            {
-                    new DeadlineInstruction(Command.DEADLINE),
-                    new DeleteInstruction(Command.DELETE),
-                    new EventInstruction(Command.EVENT),
-                    new FindKeywordInstruction(Command.FIND),
-                    new HelloInstruction(Command.HELLO),
-                    new HelpInstruction(Command.HELP),
-                    new ListInstruction(Command.LIST),
-                    new MarkDoneInstruction(Command.DONE),
-                    new MarkNotDoneInstruction(Command.NOT_DONE),
-                    new SearchTimeInstruction(Command.SEARCH),
-                    new TerminateInstruction(
-                            Command.BYE,
-                            Command.EX,
-                            Command.EXI,
-                            Command.EXIT),
-                    new TodoInstruction(Command.TODO)
-            };
+    public static final Instruction[] ALL_INSTRUCTIONS = {
+        new DeadlineInstruction(Command.DEADLINE),
+        new DeleteInstruction(Command.DELETE),
+        new EventInstruction(Command.EVENT),
+        new FindKeywordInstruction(Command.FIND),
+        new HelloInstruction(Command.HELLO),
+        new HelpInstruction(Command.HELP),
+        new ListInstruction(Command.LIST),
+        new MarkDoneInstruction(Command.DONE),
+        new MarkNotDoneInstruction(Command.NOT_DONE),
+        new SearchTimeInstruction(Command.SEARCH),
+        new TerminateInstruction(
+                Command.BYE,
+                Command.EX,
+                Command.EXI,
+                Command.EXIT),
+        new ThanksInstruction(Command.THANKS),
+        new TodoInstruction(Command.TODO)
+    };
 
     private static final HashMap<String, Instruction> instrMap =
             new HashMap<String, Instruction>();

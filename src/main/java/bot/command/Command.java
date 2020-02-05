@@ -19,6 +19,7 @@ public enum Command {
     DEADLINE("deadline"),
     EVENT("event"),
     TODO("todo"),
+    THANKS("thanks"),
     SEARCH("search");
 
     private final String word;
@@ -38,7 +39,7 @@ public enum Command {
      * Gets the word that this Command represents
      *
      * @return Returns a String containing the word
-     * (without any whitespace)
+     *     (without any whitespace)
      */
     public String getWord() {
         return this.word;

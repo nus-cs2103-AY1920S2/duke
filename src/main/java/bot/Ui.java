@@ -79,6 +79,8 @@ public class Ui {
 
     public static final String LOAD_FROM_DISK_FAIL_MESSAGE =
             "Could not find local storage";
+    public static final String THANKS_MESSAGE =
+            "You are very welcome!";
     public static final String HELP_MESSAGE =
             "Here is a list of words that I understand:\n\n"
             + "bye                        | Terminates the bot\n"
@@ -125,6 +127,9 @@ public class Ui {
             + "list                       | Shows the list of tasks\n"
             + "\n"
             + "notdone <number>           | Marks a task as NOT done\n"
+            + "\n"
+            + "thanks                     | It's good to be\n"
+            + "                           | appreciated!\n"
             + "\n"
             + "todo <text>                | Creates a new to-do with\n"
             + "                           | description <text>\n"
@@ -295,6 +300,13 @@ public class Ui {
     public void showHelloMessage() {
         System.out.println(Ui.WAVE);
         System.out.println(Ui.GREETINGS_MESSAGE);
+    }
+
+    /**
+     * Prints the thanks response to the interface
+     */
+    public void showThanksMessage() {
+        System.out.println(Ui.THANKS_MESSAGE);
     }
 
     /**

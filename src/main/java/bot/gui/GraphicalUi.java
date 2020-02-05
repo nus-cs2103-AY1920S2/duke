@@ -37,6 +37,8 @@ public class GraphicalUi extends Ui {
     private static final String GOODBYE_MESSAGE = "Goodbye! You will be missed";
     private static final String LOAD_FROM_DISK_FAIL_MESSAGE =
             "Could not find local storage";
+    private static final String THANKS_MESSAGE =
+            Ui.THANKS_MESSAGE;
     private static final String HELP_MESSAGE =
             "Here is a list of words that I understand:\n\n"
             + "bye      | Terminates the bot\n"
@@ -88,9 +90,6 @@ public class GraphicalUi extends Ui {
             + "notdone  | Marks a task with index\n"
             + "<n>      | n as NOT done\n"
             + "\n"
-            + "todo     | Creates a new to-do with\n"
-            + "<text>   | description <text>\n"
-            + "\n"
             + "search   | Finds tasks with that date\n"
             + "<date>   |\n"
             + "         | Date can be given in\n"
@@ -101,6 +100,12 @@ public class GraphicalUi extends Ui {
             + "         | 24-hour format\n"
             + "         |\n"
             + "         | or this format: DD-MM-YYYY\n"
+            + "\n"
+            + "thanks   | It's good to be\n"
+            + "         | appreciated!\n"
+            + "\n"
+            + "todo     | Creates a new to-do with\n"
+            + "<text>   | description <text>\n"
             + "\n";
 
     private ObservableList<Node> chatWindow;
@@ -200,7 +205,12 @@ public class GraphicalUi extends Ui {
 
     @Override
     public void showGoodbye() {
-        this.chatWindow.add(ChatBox.getBotBox(GOODBYE_MESSAGE));
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.GOODBYE_MESSAGE));
+    }
+
+    @Override
+    public void showThanksMessage() {
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.THANKS_MESSAGE));
     }
 
     /**
