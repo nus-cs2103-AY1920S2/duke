@@ -19,13 +19,12 @@ public class AddCommand extends Command {
      * @param storage
      * @param taskList
      * @param ui
-     * @return true to indicate that this is not an ExitCommand
+     * @return String add message
      */
     @Override
-    public boolean execute(Storage storage, TaskList taskList, Ui ui) {
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
         taskList.addTask(task);
         storage.update(taskList.getTaskList());
-        ui.taskMsg(task, taskList.getListSize());
-        return true;
+        return ui.taskMsg(task, taskList.getListSize());
     }
 }

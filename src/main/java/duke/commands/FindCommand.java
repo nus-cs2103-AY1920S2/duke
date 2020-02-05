@@ -21,10 +21,10 @@ public class FindCommand extends Command {
      * @param storage
      * @param taskList
      * @param ui
-     * @return true to indicate that this is not an ExitCommand
+     * @return String find command message
      */
     @Override
-    public boolean execute(Storage storage, TaskList taskList, Ui ui) {
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
         ArrayList<Task> lst = taskList.getTaskList();
         ArrayList<Task> found = new ArrayList<>();
         for (Task task : lst) {
@@ -32,7 +32,6 @@ public class FindCommand extends Command {
                 found.add(task);
             }
         }
-        ui.findMsg(found, this.keyword);
-        return true;
+        return ui.findMsg(found, this.keyword);
     }
 }

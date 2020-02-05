@@ -16,11 +16,10 @@ public class ListCommand extends Command {
      * @param storage
      * @param taskList
      * @param ui
-     * @return true to indicate that this is not an ExitCommand
+     * @return String list of tasks
      */
     @Override
-    public boolean execute(Storage storage, TaskList taskList, Ui ui) { // print out the task list
-        ui.listMsg(taskList.getTaskList());
-        return true;
+    public String execute(Storage storage, TaskList taskList, Ui ui) { // print out the task list
+        return ui.listMsg(taskList.getTaskList());
     }
 }

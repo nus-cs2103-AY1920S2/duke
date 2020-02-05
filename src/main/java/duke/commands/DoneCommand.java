@@ -20,14 +20,13 @@ public class DoneCommand extends Command {
      * @param storage
      * @param taskList
      * @param ui
-     * @return true to indicate that this is not an ExitCommand
+     * @return String done message
      * @throws DukeException
      */
     @Override
-    public boolean execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
         Task task = taskList.doneTask(this.taskNumber);
         storage.update(taskList.getTaskList());
-        ui.doneMsg(task);
-        return true;
+        return ui.doneMsg(task);
     }
 }
