@@ -25,19 +25,24 @@ public class Ui {
     }
 
     public String exitMsg() {
-        return this.defaultMsg("SQUIRTLE shall retreat!!");
+        return "SQUIRTLE shall return to pokeball!!";
     }
 
     public String findMsg(ArrayList<Task> lst, String keyword) {
         if (lst.size() == 0) { // no task containing the keyword found
-            return this.defaultMsg("Uh oh! SQUIRTLE could not find anything with " + keyword + "!!");
+            return "Uh oh! SQUIRTLE could not find anything with " + keyword + "!!";
         } else {
-            return this.defaultMsg("SQUIRTLE discovered " + lst.size() + " thing(s) containing " + keyword + ": ") + this.printList(lst);
+            return "SQUIRTLE discovered " + lst.size() + " thing(s) containing " + keyword + ": \n" + this.printList(lst);
         }
     }
 
     public String listMsg(ArrayList<Task> lst) {
-        return this.defaultMsg("SQUIRTLE has to attack: ") + this.printList(lst);
+        if (lst.size() == 0) {
+            return "SQUIRTLE has nothing to do ~~";
+        }
+        else {
+            return "SQUIRTLE has to attack: \n" + this.printList(lst);
+        }
     }
 
     public String printList(ArrayList<Task> lst) {
@@ -49,16 +54,16 @@ public class Ui {
     }
 
     public String taskMsg(Task task, int lstSize) {
-        return this.defaultMsg("adding: " + task.toString() + "\nSQUIRTLE now has "
-                + lstSize + " thing(s) to do!!");
+        return "SQUIRTLE is adding: " + task.toString() + "!!" + "\nSQUIRTLE now has "
+                + lstSize + " thing(s) to do!!";
     }
 
     public String deleteMsg(Task task) {
-        return this.defaultMsg("SQUIRTLE will forget: " + task.toString() + " ~~");
+        return "SQUIRTLE will forget: " + task.toString() + " ~~";
     }
 
     public String doneMsg(Task task) {
-        return this.defaultMsg("SQUIRTLE used water gun on: " + task.toString() + "!\n\tIt is super effective!!");
+        return "SQUIRTLE used water gun on: \n\t" + task.toString() + "!\n\nIt is super effective!!";
     }
 
     public String lineBreak() {
@@ -84,12 +89,7 @@ public class Ui {
     }
 
     public String welcomeMsg() {
-        return " SQUIRTLE!! I'M HERE TO HELP!! SQUIRTLE!!";
+        return "SQUIRTLE!! I'M HERE TO HELP!! SQUIRTLE!!";
     }
-
-    public String defaultMsg(String message) {
-        return " SQUIRTLE!!" + "\t" + message;
-    }
-
 
 }

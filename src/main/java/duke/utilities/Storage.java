@@ -10,16 +10,13 @@ import java.util.ArrayList;
  * Storage class to load and add tasks to tasks.txt.
  */
 public class Storage {
-    String path;
+    String path = "tasks.txt";
     Parser parser;
 
     /**
      * Constructor for Storage.
-     *
-     * @param path the String representation of the path to tasks.txt, passed to Storage in Duke class.
      */
-    public Storage(String path) {
-        this.path = path;
+    public Storage() {
         this.parser = new Parser();
     }
 
@@ -31,13 +28,9 @@ public class Storage {
     public ArrayList<Task> load() { // load all tasks from hard disk into an ArrayList of tasks
         ArrayList<Task> lst = new ArrayList<>();
         try {
-            File file = new File(path);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
+            File file = this.getFile();
 
-            FileReader fr = new FileReader(path);
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
             String line;
@@ -46,7 +39,7 @@ public class Storage {
                 line = line.replaceAll("[^\\x00-\\x7F]", "");
                 lst.add(Parser.parseFile(line));
             }
-
+            br.close();
 
         } catch (IOException e) {
             System.err.println(e);
@@ -62,25 +55,24 @@ public class Storage {
      */
     public void update(ArrayList<Task> lst) { // update the file in the hard disk whenever the task list changes
         try {
-            File file = new File(path);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-
-            FileOutputStream outputStream = new FileOutputStream(path);
+            File file = this.getFile();
+            FileOutputStream outputStream = new FileOutputStream(file);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
             BufferedWriter bw = new BufferedWriter(outputStreamWriter);
 
             for (Task task : lst) {
                 bw.write(Parser.parseTask(task));
                 bw.newLine();
-                bw.flush();
             }
 
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public File getFile() throws IOException{
+        File file = new File(getClass().getClassLoader().getResource(this.path).getFile());
+        return file;
     }
 }

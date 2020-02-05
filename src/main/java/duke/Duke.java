@@ -38,9 +38,8 @@ public class Duke extends Application {
 
 
     private Ui ui = new Ui();
-    private Storage storage = new Storage("../resources/tasks.txt");
+    private Storage storage = new Storage();
     private TaskList taskList = new TaskList(storage.load());
-    private boolean isRunning;
 //    public static void main(String[] args) {
 //        Ui ui = new Ui();
 //        Storage storage = new Storage("../resources/tasks.txt");
@@ -66,7 +65,6 @@ public class Duke extends Application {
     public void start(Stage stage) {
         //Step 1. Setting up required components
         ui.start();
-        isRunning = true;
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
