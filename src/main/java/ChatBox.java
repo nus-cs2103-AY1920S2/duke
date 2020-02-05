@@ -20,9 +20,14 @@ public class ChatBox {
     private String location;
 
     public ChatBox(String location) {
-        this.folder = new Folder();
-        this.hasClosed = true;
-        this.location = location;
+        try {
+            this.folder = new Folder();
+            this.hasClosed = true;
+            this.location = location;
+            load();
+        } catch (FileNotFoundException errorMsg) {
+            System.out.println("Error with file location\n");
+        }
     }
 
     public void load() throws FileNotFoundException {
@@ -58,6 +63,7 @@ public class ChatBox {
             case "bye":
                 replyMsg = Message.end();
                 hasClosed = false;
+                save();
                 break;
             case "list":
                 replyMsg = folder.show();

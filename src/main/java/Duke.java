@@ -22,8 +22,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
     private ChatBox chatBox = new ChatBox("./src/main/duke.txt");
 
     /*public static void main(String[] args) {
@@ -39,7 +39,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
 
-        chatBox.initialise();
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -86,6 +85,11 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Initialise the chat
+        Label initMsg = new Label(Message.welcome());
+        dialogContainer.getChildren().add(new DialogBox(initMsg, new ImageView(dukeImage)));
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -101,7 +105,6 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -109,8 +112,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
     }
@@ -120,7 +123,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        //String output = chatBox.reply(new Message(input));
-        return "Duke heard: " + input;
+        String output = chatBox.reply(new Message(input));
+        return "Duke heard: " + output;
     }
 }
