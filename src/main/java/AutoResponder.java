@@ -1,3 +1,10 @@
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +22,7 @@ import java.util.stream.Collectors;
  */
 public class AutoResponder {
     private final List<Task> taskList;
-    private final StringBuilder toPrint;
+    private StringBuilder toPrint;
     private final Ui ui;
     static Pattern PATTERN_DEADLINE = Pattern.compile("^deadline (.+) /by (.+)");
     static Pattern PATTERN_EVENT = Pattern.compile("^event (.+) /at (.+)");
@@ -24,11 +31,23 @@ public class AutoResponder {
     static Pattern PATTERN_DELETE = Pattern.compile("^delete (\\d+)");
     static Pattern PATTERN_EMPTY_COMMAND = Pattern.compile("^(todo|event|deadline|find|done|delete)\\s*$");
     static Pattern PATTERN_LIST = Pattern.compile("^list\\s*$");
-    static Pattern PATTERN_FIND = Pattern.compile("^save\\s*$");
-    static Pattern pFind = Pattern.compile("^find (.+)");
+    static Pattern PATTERN_SAVE = Pattern.compile("^save\\s*$");
+    static Pattern PATTERN_FIND = Pattern.compile("^find (.+)");
+    static Pattern PATTERN_BYE = Pattern.compile("^bye\\s*$");
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
-    private AutoResponder() {
+    /**
+     * Initialiser for empty AutoResponder object.
+     */
+    public AutoResponder() {
         this.taskList = new ArrayList<>();
         this.toPrint = new StringBuilder();
         this.ui = new Ui();
@@ -40,17 +59,19 @@ public class AutoResponder {
         this.ui = new Ui();
     }
 
-    private AutoResponder printToConsole() {
-        ui.printToConsole(toPrint.toString());
-        return new AutoResponder(taskList, new StringBuilder());
+    private String printToConsole() {
+        String output = toPrint.toString();
+        this.toPrint = new StringBuilder();
+        return output;
     }
 
     /**
      * Reads input from UI, and processes commands accordingly.
+     *
      * @param input String to be processed from System.in
      * @return new AutoResponder object with corresponding command to be processed
      */
-    public AutoResponder readInput(String input) {
+    public String readInput(String input) {
         String lowerInput = input.toLowerCase();
         if (PATTERN_LIST.matcher(lowerInput).find()) {
             return this.processList();
@@ -64,15 +85,15 @@ public class AutoResponder {
             m.find();
             int index = Integer.parseInt(m.group(1)) - 1;
             return this.deleteTask(index);
-        } else if (PATTERN_FIND.matcher(lowerInput).find()) {
+        } else if (PATTERN_SAVE.matcher(lowerInput).find()) {
             return this.saveList();
         } else if (PATTERN_EMPTY_COMMAND.matcher(lowerInput).find()) {
             Matcher m = PATTERN_EMPTY_COMMAND.matcher(lowerInput);
             m.find();
-            throw new IllegalArgumentException("☹ OOPS!!! The description of a "
+            throw new IllegalArgumentException("OOPS!!! The description of a "
                     + m.group(1) + " cannot be empty.");
-        } else if (pFind.matcher(input).find()) {
-            Matcher m = pFind.matcher(input);
+        } else if (PATTERN_FIND.matcher(input).find()) {
+            Matcher m = PATTERN_FIND.matcher(input);
             m.find();
             return this.findTask(m.group(1));
         } else if (PATTERN_DEADLINE.matcher(input).find()) {
@@ -87,20 +108,22 @@ public class AutoResponder {
             Matcher m = PATTERN_TODO.matcher(input);
             m.find();
             return this.addTodo(m.group(1));
+        } else if (PATTERN_BYE.matcher(input).find()) {
+            System.exit(0);
+            return "";
         } else {
-            throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private AutoResponder processList() {
-        StringBuilder sb = new StringBuilder(toPrint);
+    private String processList() {
         for (int i = 1; i <= taskList.size(); ++i) {
-            sb.append(i).append(". ").append(taskList.get(i - 1)).append("\n");
+            toPrint.append(i).append(". ").append(taskList.get(i - 1)).append("\n");
         }
-        return new AutoResponder(taskList, sb).printToConsole();
+        return printToConsole();
     }
 
-    private AutoResponder saveList() {
+    private String saveList() {
         StringBuilder writeContents = new StringBuilder();
         for (Task v : taskList) {
             writeContents.append(v.writeFormat());
@@ -125,7 +148,7 @@ public class AutoResponder {
         return this.printToConsole();
     }
 
-    private AutoResponder loadList() {
+    private String loadList() {
         try {
             File f = new File("./data/duke.txt");
             Scanner sc = new Scanner(f);
@@ -153,35 +176,31 @@ public class AutoResponder {
         return this.printToConsole();
     }
 
-    private AutoResponder markTaskDone(int index) {
-        StringBuilder sb = new StringBuilder(toPrint);
-        List<Task> tl = new ArrayList<>(taskList);
+    private String markTaskDone(int index) {
         if (index < 0 || index >= taskList.size()) {
             throw new IndexOutOfBoundsException("Index of " + (index + 1)
                     + " does not correspond to task list of size " + taskList.size());
         } else {
-            tl.set(index, taskList.get(index).makeCompleted());
-            sb.append("Nice! I've marked this task as done:\n\t");
-            sb.append(tl.get(index)).append("\n");
+            taskList.get(index).makeCompleted();
+            toPrint.append("Nice! I've marked this task as done:\n\t");
+            toPrint.append(taskList.get(index)).append("\n");
         }
-        return new AutoResponder(tl, sb).printToConsole();
+        return printToConsole();
     }
 
-    private AutoResponder deleteTask(int index) {
-        StringBuilder sb = new StringBuilder(toPrint);
-        List<Task> tl = new ArrayList<>(taskList);
+    private String deleteTask(int index) {
         if (index < 0 || index >= taskList.size()) {
             throw new IndexOutOfBoundsException("Index of " + (index + 1)
                     + " does not correspond to task list of size " + taskList.size());
         } else {
-            sb.append("Noted! I've removed this task:\n\t");
-            sb.append(tl.get(index)).append("\n");
-            tl.remove(index);
+            toPrint.append("Noted! I've removed this task:\n\t");
+            toPrint.append(taskList.get(index)).append("\n");
+            taskList.remove(index);
         }
-        return new AutoResponder(tl, sb).printToConsole();
+        return printToConsole();
     }
 
-    private AutoResponder findTask(String description) {
+    private String findTask(String description) {
         String s = taskList.stream().map(Object::toString)
                 .filter(string -> string.contains(description))
                 .collect(Collectors.joining());
@@ -192,77 +211,28 @@ public class AutoResponder {
         } else {
             toPrint.append("There are no matching tasks in your list.\n");
         }
-        return this.printToConsole();
+        return printToConsole();
     }
 
-    private AutoResponder addDeadline(String name, String date) {
-        List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Deadline(name, Parser.parseDateTime(date)));
-        return new AutoResponder(tl, toPrint).taskAdded();
+    private String addDeadline(String name, String date) {
+        taskList.add(new Deadline(name, Parser.parseDateTime(date)));
+        return taskAdded();
     }
 
-    private AutoResponder addEvent(String name, String date) {
-        List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Event(name, Parser.parseDateTime(date)));
-        return new AutoResponder(tl, toPrint).taskAdded();
+    private String addEvent(String name, String date) {
+        taskList.add(new Event(name, Parser.parseDateTime(date)));
+        return taskAdded();
     }
 
-    private AutoResponder addTodo(String name) {
-        List<Task> tl = new ArrayList<>(taskList);
-        tl.add(new Todo(name));
-        return new AutoResponder(tl, toPrint).taskAdded();
+    private String addTodo(String name) {
+        taskList.add(new Todo(name));
+        return taskAdded();
     }
 
-    private AutoResponder taskAdded() {
-        StringBuilder sb = new StringBuilder(toPrint);
-        sb.append("Got it. I've added this task:\n\t");
-        sb.append(taskList.get(taskList.size() - 1));
-        sb.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.\n");
-        return new AutoResponder(taskList, sb).printToConsole();
+    private String taskAdded() {
+        toPrint.append("Got it. I've added this task:\n\t");
+        toPrint.append(taskList.get(taskList.size() - 1));
+        toPrint.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.\n");
+        return printToConsole();
     }
-
-    /**
-     * Initialises a new AutoResponder to be created, printing its landing page and loading a list
-     * from the usual location (./data/duke.txt).
-     * @return AutoResponder object being run
-     */
-    public static AutoResponder initialise() {
-        AutoResponder ar = new AutoResponder();
-        ar.ui.printLandingPage();
-        ar = ar.loadList();
-        return ar.run();
-    }
-
-    /**
-     * Starts the AutoResponder from accepting input via UI and processing commands.
-     * @return the state of each AutoResponder after each run, or shutdown if the bye
-     *     command is passed into it.
-     */
-    public AutoResponder run() {
-        AutoResponder ar = this;
-        while (ui.hasCommand()) {
-            String input = ui.receiveCommand();
-            if (input.matches("bye\\s*")) {
-                return ar.shutdown();
-            }
-
-            try {
-                ar = ar.readInput(input);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return ar.run();
-    }
-
-    /**
-     * Shuts AutoResponder down and prints goodbye screen.
-     * @return AutoResponder in shut down mode
-     */
-    public AutoResponder shutdown() {
-        ui.printGoodbye();
-        return this;
-    }
-
 }
-

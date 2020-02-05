@@ -5,21 +5,21 @@ import java.util.stream.Collectors;
 
 public class Todo implements Task {
     private final String name;
-    private final boolean completed;
+    private final boolean isCompleted;
 
     public Todo(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
-    public Todo(String name, boolean completed) {
+    public Todo(String name, boolean isCompleted) {
         this.name = name;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
-    public Todo(Todo t, boolean completed) {
+    public Todo(Todo t, boolean isCompleted) {
         this.name = t.getName();
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     public String getName() {
@@ -27,7 +27,7 @@ public class Todo implements Task {
     }
 
     public boolean getCompletion() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     public Todo makeCompleted() {
@@ -35,7 +35,7 @@ public class Todo implements Task {
     }
 
     public String writeFormat() {
-        return "T|" + name + "|" + (completed ? "1" : "0");
+        return "T|" + name + "|" + (isCompleted ? "1" : "0");
     }
 
     /**
@@ -53,6 +53,6 @@ public class Todo implements Task {
 
     @Override
     public String toString() {
-        return "[T][" + (completed ? "✓" : "✗") + "] " + name;
+        return "[T][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name;
     }
 }

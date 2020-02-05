@@ -4,16 +4,6 @@ public class Ui {
     static Scanner sc = new Scanner(System.in);
 
     /**
-     * Prints output string into console.
-     * @param output string to be printed
-     */
-    public void printToConsole(String output) {
-        System.out.println("--------------------------------------------");
-        System.out.print(output);
-        System.out.println("--------------------------------------------");
-    }
-
-    /**
      * Prints landing page with name of program.
      */
     public void printLandingPage() {

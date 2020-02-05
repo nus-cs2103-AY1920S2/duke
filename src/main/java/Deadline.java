@@ -81,7 +81,7 @@ public class Deadline implements Task {
 
     @Override
     public String toString() {
-        return "[D][" + (isCompleted ? "✓" : "✗") + "] " + name + " (by: "
+        return "[D][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (by: "
                 + deadline.format(formatter) + ")";
     }
 }

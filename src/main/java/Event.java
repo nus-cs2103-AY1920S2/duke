@@ -81,7 +81,7 @@ public class Event implements Task {
 
     @Override
     public String toString() {
-        return "[E][" + (isCompleted ? "✓" : "✗") + "] " + name + " (at: "
+        return "[E][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (at: "
                 + deadline.format(formatter) + ")";
     }
 }
