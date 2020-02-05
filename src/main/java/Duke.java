@@ -140,8 +140,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
-//        return ui.parseInput(input);
+//        return "Duke heard: " + input;
+        return ui.parseInput(input);
     }
 
     public static void main(String[] args) {

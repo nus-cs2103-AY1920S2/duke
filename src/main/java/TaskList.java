@@ -132,4 +132,132 @@ public class TaskList {
             storage.saveTask(taskList);
         }
     }
+
+    /**
+     * Adds task of taskName to taskList.
+     * @param taskName Task to be added to taskList
+     */
+    public String getAddString(String taskName) {
+        String out;
+        try {
+            String taskType = taskName.split(" ", 2)[0];
+            String taskDesc = taskName.split(" ", 2)[1];
+            Task newTask = null;
+            if (taskType.equals("todo")) {
+                newTask = new ToDo(taskDesc);
+            } else if (taskType.equals("deadline")) {
+                String[] in = taskDesc.split("/",2);
+                String task = in[0].trim();
+                String dateAndPreposition = in[1];
+                String[] res = dateAndPreposition.split(" ", 2);
+                String preposition = res[0];
+                String dateTime = res[1];
+                try {
+                    String[] parseDateTime = dateTime.split(" ",  2);
+                    LocalDate localDate = LocalDate.parse(parseDateTime[0]);
+                    if (parseDateTime.length > 1) {
+                        String time = parseDateTime[1];
+                        newTask = new Deadline(task, preposition, localDate, time);
+                    } else {
+                        newTask = new Deadline(task, preposition, localDate);
+                    }
+                } catch (DateTimeParseException e) {
+                    out = "Error parsing date and time. Please input date and time as YYYY-mm-dd hh:mm";
+                    return out;
+                }
+
+            } else { //case when taskType is "event"
+                String[] in = taskDesc.split("/", 2);
+                String task = in[0].trim();
+                String dateAndPreposition = in[1];
+                String[] res = dateAndPreposition.split(" ", 2);
+                String preposition = res[0];
+                String dateTime = res[1];
+                try {
+                    String[] parseDateTime = dateTime.split(" ",  2);
+                    LocalDate localDate = LocalDate.parse(parseDateTime[0]);
+                    if (parseDateTime.length > 1) {
+                        String time = parseDateTime[1];
+                        newTask = new Event(task, preposition, localDate, time);
+                    } else {
+                        newTask = new Event(task, preposition, localDate);
+                    }
+                } catch (DateTimeParseException e) {
+                    out = "Error parsing date and time. Please input date and time as YYYY-mm-dd hh:mm";
+                    return out;
+                }
+            }
+
+            if (Objects.isNull(newTask)) {
+                out = "Attempting to add invalid task. Operation aborted.";
+            } else {
+                taskList.add(newTask);
+                out = "Got it. I've added this task:\n" + newTask + "\n" + "Now you have "
+                        + taskList.size() + " tasks in the list.";
+            }
+        } catch (IndexOutOfBoundsException e) {
+            out = "☹ OOPS!!! The description of a task cannot be empty.";
+            return out;
+        } finally {
+            storage.saveTask(taskList);
+        }
+        return out;
+    }
+
+    /**
+     * Deletes task of taskName from taskList.
+     * @param taskName Task to be deleted
+     */
+    public String getDeleteString(String taskName) {
+        String out;
+        try {
+            String taskNum = taskName.split(" ", 2)[1];
+            Task currTask = taskList.get(Integer.parseInt(taskNum) - 1);
+            taskList.remove(currTask);
+            out = "Noted. I've removed this task:\n" +  currTask + "\nNow you have " + taskList.size() +
+                    " tasks in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            out = "☹ OOPS!!! Please input a valid number in the range of the task list to delete.";
+        } catch (NumberFormatException e) { // when non-int arg provided
+            out = "OOPS!!! Delete must take a valid integer in the range of the task list.";
+        } finally {
+            storage.saveTask(taskList);
+        }
+        return out;
+    }
+
+    /**
+     * String of every item in taskList.
+     */
+    public String getListString() {
+        String out = "Here are the tasks in your list:\n";
+        int i = 1;
+        for (Task task : taskList) {
+            out += "     " + i + "." + task + "\n";
+            i++;
+        }
+        return out;
+    }
+
+    /**
+     * Prints out that task is done, and marks task done.
+     * @param in Task in String form
+     */
+    public String getDoneString(String in) {
+        String out;
+        try {
+            int num = Integer.parseInt(in.substring(5));
+            out = "Nice! I've marked this task as done:\n";
+            Task taskDone = taskList.get(num - 1);
+            taskDone.markDone();
+            out +=  "       " + taskDone;
+        } catch (IndexOutOfBoundsException e) { // when no int arg provided
+            out = "OOPS!!! Done must take a valid number in the range of the task list.";
+        } catch (NumberFormatException e) { // when non-int arg provided
+            out = "OOPS!!! Done must take a valid integer in the range of the task list.";
+        } finally {
+            storage.saveTask(taskList);
+        }
+        return out;
+    }
 }

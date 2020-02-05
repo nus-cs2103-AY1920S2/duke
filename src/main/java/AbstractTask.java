@@ -1,6 +1,5 @@
 
 public abstract class AbstractTask implements Task {
-
     String taskName;
     boolean isDone;
 
