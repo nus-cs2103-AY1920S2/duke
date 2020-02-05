@@ -27,3 +27,4 @@ text-ui-test/sources.txt
 data/duke.txt
 src/test/java/e0148811/duke/DeadlineTest.java
 src/test/java/e0148811/duke/TaskListTest.java
+src/main/java/META-INF/MANIFEST.MF
