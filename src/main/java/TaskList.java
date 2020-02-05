@@ -78,7 +78,7 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
-            result += i + "."
+            result += (i + 1) + "."
                     + tasks.get(i) + "\n";
         }
 
