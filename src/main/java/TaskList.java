@@ -19,4 +19,12 @@ public class TaskList {
     public void clear() {
         arr.clear();
     }
+
+    public ArrayList <String> getNames(ArrayList <Task> arr) {
+        ArrayList <String> namesAL = new ArrayList <String> ();
+        for (int i = 0; i < arr.size(); i++) {
+            namesAL.add(arr.get(i).name);
+        }
+        return namesAL;
+    }
 }

@@ -36,6 +36,8 @@ public class Duke {
             Parser parser = new Parser();
             String parserOutput = parser.parse(userInput);                // gives parser the user command
             ArrayList <Task> arr = tasks.getArraylist(); // returns the arraylist form of the tasklist
+            ArrayList <String> taskNames = tasks.getNames(arr);
+            ArrayList <Task> foundTasks = new ArrayList <Task>();
             switch (parserOutput) {
 
                 case ("list"):
@@ -134,8 +136,22 @@ public class Duke {
                     System.out.println("Now you have " + arr.size() + " tasks in the list.");
                     storage.fileUpdate(dataFile, arr);
                     break;
+                case ("find"):
+                    for (int i = 0; i < taskNames.size(); i++) {
+                        String[] currentTaskName = taskNames.get(i).split("\\s");
+                        for (int j = 0; j < currentTaskName.length; j++) {
+                            if (currentTaskName[j].equals(parser.getSearchQuery())) {
+                                foundTasks.add(arr.get(i));
+                            }
+                        }
+                    }
+                    for (int i = 0; i < foundTasks.size(); i++) {
+                        int j = i + 1;
+                        System.out.println(j + "." + foundTasks.get(i).getIcon() + foundTasks.get(i).status + " " + foundTasks.get(i).getDescription());
+                    }
+                    break;
                 default:
-                    System.out.println("&#x2639; OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } while (!userInput.equals("bye"));
     }

@@ -65,7 +65,7 @@ public class Task {
     }
 
     public String addProcessedDate(String dateFormatted) {
-        System.out.println(dateFormatted);
+        //System.out.println(dateFormatted);
         int month = 0;
         int day = Integer.parseInt(dateFormatted.split("\\s")[1]);
         int year = Integer.parseInt(dateFormatted.split("\\s")[2]);
