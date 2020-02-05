@@ -9,21 +9,29 @@ public class Deadline extends Task {
     /**
      * The deadline.
      */
-    protected LocalDate by;
+    protected LocalDate date;
 
     /**
      * Constructs a new instance of Deadline.
      *
      * @param description the description of the task.
-     * @param by          the deadline of the task.
+     * @param date        the deadline of the task.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate date) {
+
         super(description);
-        this.by = by;
+        this.date = date;
+    }
+
+    public LocalDate getDate() {
+
+        return date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
 }

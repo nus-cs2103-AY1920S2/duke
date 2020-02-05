@@ -8,6 +8,7 @@ public class InvalidListItemAelitaException extends AelitaException {
      * Constructs a new instance of InvalidListItemAelitaException.
      */
     public InvalidListItemAelitaException() {
+
         super();
     }
 

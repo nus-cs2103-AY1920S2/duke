@@ -7,201 +7,209 @@ import java.time.format.DateTimeParseException;
  */
 public class Duke {
 
-    /**
-     * The Ui object for printing the console UI.
-     */
-    protected Ui ui;
-    /**
-     * The Storage object for loading saved tasks and saving the existing tasks in tasklist.
-     */
-    protected Storage storage;
-    /**
-     * The list of task.
-     */
-    protected TaskList taskList;
+    private Storage storage;
+    private TaskList taskList;
 
     /**
      * Constructs a new instance of Duke.
+     *
+     * @param taskList the task list
      */
-    public Duke() {
-        ui = new Ui();
+    public Duke(TaskList taskList) {
+
         storage = new Storage(Paths.get(System.getProperty("user.home"), "data", "duke.txt"));
-        taskList = new TaskList();
+        this.taskList = taskList;
+        storage.loadTasks(taskList);
     }
 
     /**
-     * Starts the chatbot.
+     * Gets Duke's task list.
+     *
+     * @return Duke's task list.
      */
-    public void run() {
-        storage.loadTasks(taskList);
-        ui.printLogo();
-        ui.printGreeting();
+    public TaskList getTaskList() {
 
-        while (true) {
-            try {
-                //Split the input line into description and time portions
-                String[] inputTokens = Parser.parse(ui.getCommand(), "/");
-                ui.printDivider();
-                //Further split the description for command checking
-                String[] descriptionTokens = Parser.parse(inputTokens[0], " ");
+        return taskList;
+    }
 
-                if (inputTokens.length < 2) {  //Regular commands and Todo
-                    if (descriptionTokens[0].toLowerCase().equals("bye")) {
-                        try {
-                            storage.saveTasks(taskList);
-                        } catch (IOAelitaException e) {
-                            ui.printResponse(Response.IO_ERROR);
-                        }
-                        ui.printResponse(Response.GOODBYE);
-                        break;
+    /**
+     * Executes the command.
+     *
+     * @param command the string command supplied by the user.
+     * @return the relevant response after processing the command.
+     */
+    public Response executeCommand(String command) {
 
-                    } else if (descriptionTokens[0].toLowerCase().equals("list")) {
-                        //List all task on the specified date
-                        if (descriptionTokens.length == 2) {
-                            //The command consist of 2 parts: the command and the date
-                            LocalDate date = LocalDate.parse(descriptionTokens[1]);
-                            taskList.list(date, ui);
-                        } else {
-                            //List all the task in the list
-                            taskList.list(ui);
-                        }
-                    } else if (descriptionTokens[0].toLowerCase().equals("done")) {
-                        if (descriptionTokens.length < 2) {
-                            throw new InsufficientArgumentAelitaException("done");
-                        } else {
-                            int index = Integer.parseInt(descriptionTokens[1]) - 1;
-                            taskList.complete(index);
-                            ui.printResponse(Response.DONE);
-                            ui.printTask(taskList.get(index));
-                        }
+        try {
+            //Split the command tokens into description and time portions
+            String[] commandTokens = Parser.parse(command, "/");
 
-                    } else if (descriptionTokens[0].toLowerCase().equals("delete")) {
-                        if (descriptionTokens.length < 2) {
-                            throw new InsufficientArgumentAelitaException("delete");
-                        }
+            //Further split description into words for command checking
+            String[] descriptionTokens = Parser.parse(commandTokens[0], " ");
 
-                        int index = Integer.parseInt(descriptionTokens[1]) - 1;
-                        ui.printResponse(Response.DELETE);
-                        ui.printTask(taskList.remove(index));
-                        ui.printResponse(Response.TASK_COUNT);
+            if (commandTokens.length < 2) { //Regular commands and todo
 
-                    } else if (descriptionTokens[0].toLowerCase().equals("find")) {
-                        boolean hasTask = false;
-                        for (int i = 0; i < taskList.getSize(); i++) {
-                            String[] words = Parser.parse(taskList.get(i).getDescription(), " ");
-                            for (String word : words) {
-                                if (word.toLowerCase().equals(descriptionTokens[1].toLowerCase())) {
-                                    if (!hasTask) {
-                                        ui.printResponse(Response.TASK_FOUND);
-                                    }
-                                    ui.printTask(taskList.get(i), i + 1);
-                                    hasTask = true;
-                                }
-                            }
-                        }
-                        if (!hasTask) {
-                            ui.printResponse(Response.TASK_NOT_FOUND);
-                        }
-                    } else if (descriptionTokens[0].toLowerCase().equals("todo")) {
-                        if (descriptionTokens.length == 1) {
-                            throw new InsufficientArgumentAelitaException("description");
-                        }
+                switch (descriptionTokens[0].toLowerCase()) {
+                case "bye":
+                    storage.saveTasks(taskList);
+                    return new Response(Message.GOODBYE, null);
 
-                        Task task = new Todo(reconstructDescription(descriptionTokens));
-                        taskList.add(task);
-                        ui.printResponse(Response.ADD_TASK);
-                        ui.printTask(task);
-                        ui.printResponse(Response.TASK_COUNT);
-
-                    } else if (descriptionTokens[0].toLowerCase().equals("deadline") || descriptionTokens[0].toLowerCase().equals("event")) {
-                        if (descriptionTokens.length == 1) {
-                            //Description is missing
-                            throw new InsufficientArgumentAelitaException("description");
-                        } else {
-                            //Date is missing
-                            throw new InsufficientArgumentAelitaException("date");
-                        }
-
-                    } else {
-                        //Command is not recognized
-                        throw new InvalidCommandAelitaException();
-
-                    }
-                } else {
-                    if (descriptionTokens.length < 2) {
-                        //Not enough arguments on the description side
-                        throw new InsufficientArgumentAelitaException("description");
-                    }
-                    //Concat the description tokens back to one string
-                    String description = reconstructDescription(descriptionTokens);
-
-                    //Check what type of task
-                    if (descriptionTokens[0].toLowerCase().equals("deadline")) {
-
-                        LocalDate date = LocalDate.parse(inputTokens[1].substring(3));
-                        Task task = new Deadline(description, date);
-                        taskList.add(task);
-                        ui.printResponse(Response.ADD_TASK);
-                        ui.printTask(task);
-                        ui.printResponse(Response.TASK_COUNT);
-
-                    } else if (descriptionTokens[0].toLowerCase().equals("event")) {
-
-                        String[] dateTime = extractDateTime(inputTokens[1]);
-                        LocalDate date = LocalDate.parse(dateTime[0]);
-
-                        Task task = new Event(description, date, dateTime[1], dateTime[2]);
-                        taskList.add(task);
-                        ui.printResponse(Response.ADD_TASK);
-                        ui.printTask(task);
-                        ui.printResponse(Response.TASK_COUNT);
-
-                    } else {
-                        throw new InvalidCommandAelitaException();
-                    }
-                }
-            } catch (EmptyInputAelitaException e) {
-                ui.printResponse(Response.EMPTY_COMMAND);
-            } catch (InvalidCommandAelitaException e) {
-                ui.printResponse(Response.COMMAND_NOT_RECOGNIZED);
-            } catch (InsufficientArgumentAelitaException e) {
-                switch (e.getMessage()) {
-                case "date":
-                    ui.printResponse(Response.MISSING_DATE);
-                    break;
-                case "date-time":
-                    ui.printResponse(Response.MISSING_DATE_TIME);
-                    break;
                 case "delete":
-                    ui.printResponse(Response.MISSING_DELETE_INDEX);
-                    break;
-                case "description":
-                    ui.printResponse(Response.MISSING_DESCRIPTION);
-                    break;
+                    //Check if there are sufficient tokens
+                    checkSufficientTokens(descriptionTokens, "delete");
+
+                    int index = Integer.parseInt(descriptionTokens[1]) - 1;
+                    return new Response(Message.DELETE, taskList.remove(index));
+
                 case "done":
-                    ui.printResponse(Response.MISSING_DONE_INDEX);
-                    break;
-                case "end time":
-                    ui.printResponse(Response.MISSING_END_TIME);
-                    break;
+                    //Check if there are sufficient tokens
+                    checkSufficientTokens(descriptionTokens, "done");
+
+                    int indx = Integer.parseInt(descriptionTokens[1]) - 1;
+                    taskList.complete(indx);
+                    return new Response(Message.DONE, indx);
+
+                case "find":
+                    //Check if there are sufficient tokens
+                    checkSufficientTokens(descriptionTokens, "find");
+
+                    TaskList results = taskList.list(descriptionTokens[1].toLowerCase());
+                    if (results.getSize() > 0) {
+                        return new Response(Message.TASK_FOUND, results);
+                    } else {
+                        return new Response(Message.TASK_NOT_FOUND, null);
+                    }
+
+                case "list":
+                    if (taskList.getSize() > 0) {
+                        if (descriptionTokens.length == 2) {
+                            //Date is provided
+                            LocalDate date = LocalDate.parse(descriptionTokens[1]);
+                            TaskList tmp = taskList.list(date);
+                            if (tmp.getSize() > 0) {
+                                return new Response(Message.TASK_FOUND, tmp);
+                            } else {
+                                return new Response(Message.NO_TASK_ON_DATE, null);
+                            }
+                        } else {
+                            return new Response(Message.LIST, taskList);
+                        }
+                    } else {
+                        return new Response(Message.NO_TASK, null);
+                    }
+
+                case "todo":
+                    checkSufficientTokens(descriptionTokens, "todo");
+
+                    Task task = new Todo(reconstructDescription(descriptionTokens));
+                    taskList.add(task);
+                    return new Response(Message.ADD_TASK, task);
+
+                case "deadline":
+                    //Fallthrough
+                case "event":
+                    //Check if description is present. Throws exception if description missing.
+                    checkSufficientTokens(descriptionTokens, "deadline");
+                    //Date portion is missing as size commandToken array is 1.
+                    throw new InsufficientArgumentAelitaException("date");
+
+                default:
+                    //No command matches input.
+                    throw new InvalidCommandAelitaException();
                 }
-            } catch (EmptyListAelitaException e) {
-                ui.printResponse(Response.NO_TASK);
-            } catch (DuplicateMarkAelitaException e) {
-                ui.printResponse(Response.TASK_COMPLETED);
-            } catch (InvalidListItemAelitaException e) {
-                ui.printResponse(Response.ITEM_NOT_FOUND);
-            } catch (DateTimeParseException e) {
-                ui.printResponse(Response.DATE_NOT_RECOGNIZED);
-            } catch (NumberFormatException e) {
-                ui.printResponse(Response.INDEX_NAN);
-            } catch (InvalidArgumentAelitaException e) {
-                ui.printResponse(Response.INVALID_ARGUMENT);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            } finally {
-                ui.printDivider();
+
+            } else {
+                //Check if there are descriptions. Throws exception if there isn't.
+                checkSufficientTokens(descriptionTokens, "deadline");
+
+                //Concat the description tokens back to one string
+                String description = reconstructDescription(descriptionTokens);
+
+                switch (descriptionTokens[0].toLowerCase()) {
+                case "deadline":
+                    LocalDate deadlineDate = LocalDate.parse(commandTokens[1].substring(3));
+                    Task deadline = new Deadline(description, deadlineDate);
+                    taskList.add(deadline);
+                    return new Response(Message.ADD_TASK, deadline);
+
+                case "event":
+                    String[] dateTime = extractDateTime(commandTokens[1]);
+                    LocalDate eventDate = LocalDate.parse(dateTime[0]);
+
+                    Task event = new Event(description, eventDate, dateTime[1], dateTime[2]);
+                    taskList.add(event);
+                    return new Response(Message.ADD_TASK, event);
+
+                default:
+                    //No command matches input.
+                    throw new InvalidCommandAelitaException();
+                }
+
             }
+        } catch (EmptyInputAelitaException e) {
+            return new Response(Message.EMPTY_COMMAND, null);
+
+        } catch (IoAelitaException e) {
+            return new Response(Message.IO_ERROR, null);
+
+        } catch (InsufficientArgumentAelitaException e) {
+            switch (e.getMessage()) {
+            case "date":
+                return new Response(Message.MISSING_DATE, null);
+
+            case "date-time":
+                return new Response(Message.MISSING_DATE_TIME, null);
+
+            case "deadline":
+                //Fallthrough
+            case "todo":
+                return new Response(Message.MISSING_DESCRIPTION, null);
+
+            case "delete":
+                return new Response(Message.MISSING_DELETE_INDEX, null);
+
+            case "done":
+                return new Response(Message.MISSING_DONE_INDEX, null);
+
+            case "end time":
+                return new Response(Message.MISSING_END_TIME, null);
+
+            case "find":
+                return new Response(Message.MISSING_FIND_INDEX, null);
+
+            default:
+                //Will not reach here
+                return null;
+            }
+
+        } catch (InvalidListItemAelitaException e) {
+            return new Response(Message.ITEM_NOT_FOUND, null);
+
+        } catch (DuplicateMarkAelitaException e) {
+            return new Response(Message.TASK_COMPLETED, null);
+
+        } catch (InvalidCommandAelitaException e) {
+            return new Response(Message.COMMAND_NOT_RECOGNIZED, null);
+
+        } catch (InvalidArgumentAelitaException e) {
+            return new Response(Message.INVALID_ARGUMENT, null);
+
+        } catch (DateTimeParseException e) {
+            return new Response(Message.DATE_NOT_RECOGNIZED, null);
+
+        } catch (NumberFormatException e) {
+            return new Response(Message.INDEX_NAN, null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void checkSufficientTokens(String[] tokens, String context) throws InsufficientArgumentAelitaException {
+
+        if (tokens.length < 2) {
+            throw new InsufficientArgumentAelitaException(context);
         }
     }
 
@@ -244,7 +252,9 @@ public class Duke {
      * @return The string form of the description.
      */
     private String reconstructDescription(String[] descriptionTokens) {
+
         StringBuilder builder = new StringBuilder(descriptionTokens[1]);
+
         for (int i = 2; i < descriptionTokens.length; i++) {
             builder.append(" ");
             builder.append(descriptionTokens[i]);
@@ -252,14 +262,4 @@ public class Duke {
         return builder.toString();
     }
 
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments.
-     */
-    public static void main(String[] args) {
-
-        Duke duke = new Duke();
-        duke.run();
-    }
 }

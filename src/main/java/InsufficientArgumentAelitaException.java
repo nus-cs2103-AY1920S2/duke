@@ -10,6 +10,7 @@ public class InsufficientArgumentAelitaException extends AelitaException {
      * @param context the context that threw the exception.
      */
     public InsufficientArgumentAelitaException(String context) {
+
         super(context);
     }
 

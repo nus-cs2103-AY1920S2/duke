@@ -20,7 +20,7 @@ public class Event extends Task {
     protected String endTime;
 
     /**
-     * Construct a new instance of Event.
+     * Constructs a new instance of Event.
      *
      * @param description the description.
      * @param date        the date.
@@ -28,14 +28,28 @@ public class Event extends Task {
      * @param endTime     the end time.
      */
     public Event(String description, LocalDate date, String startTime, String endTime) {
+
         super(description);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * Gets the date of this event.
+     *
+     * @return the date of this event.
+     */
+    public LocalDate getDate() {
+
+        return date;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + startTime + "-" + endTime + ")";
+
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + startTime + "-" + endTime + ")";
     }
+
 }
