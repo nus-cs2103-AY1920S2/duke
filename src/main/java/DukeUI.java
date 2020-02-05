@@ -24,19 +24,19 @@ public class DukeUI {
     }
 
     public static void showDoneMsg() {
-        System.out.println("TASK COMPLETED. DEMOCRACY IS NON-NEGOTIABLE");
+        System.out.println("TASK COMPLETED");
     }
     public static void showCreationMsg() {
-        System.out.println("UNDERSTOOD. CHANCE OF FAILURE: 0%");
+        System.out.println("UNDERSTOOD");
     }
 
     public static void showDeleteMsg() {
-        System.out.println("OBSTRUCTION ELIMINATED");
+        System.out.println("TASK DELETED");
     }
 
     public static void showFindMsg() {
         System.out.println("TARGET FOUND");
     }
 
-    public static void showCurrentListSize(int size) {System.out.println("NOW YOU HAVE " + size + " TARGETS TO ELIMINATE");}
+    public static void showCurrentListSize(int size) {System.out.println("NOW YOU HAVE " + size + " TASKS");}
 }

@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class DukeParser {
 
     Scanner scanner;
-    UserText tasks;
+    TaskList tasks;
 
-    public DukeParser(UserText tasks) {
+    public DukeParser(TaskList tasks) {
         this.scanner = new Scanner(System.in);
         this.tasks = tasks;
     }
 
-    public UserText parseCommand() {
+    public TaskList parseCommand() {
 
         while(true) {
             String command = scanner.nextLine();

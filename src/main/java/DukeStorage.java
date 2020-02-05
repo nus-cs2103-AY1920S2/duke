@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DukeStorage {
@@ -12,7 +11,7 @@ public class DukeStorage {
         this.filePath = filePath;
     }
 
-    public void saveTasks(UserText tasks) {
+    public void saveTasks(TaskList tasks) {
         List<Task> allTasks = tasks.getAllTasks();
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Task task: allTasks) {
@@ -36,8 +35,8 @@ public class DukeStorage {
         }
     }
 
-    public UserText readText() {
-        UserText tasks = new UserText();
+    public TaskList readText() {
+        TaskList tasks = new TaskList();
         try {
             BufferedReader bufferedreader = new BufferedReader(new FileReader(filePath));
             String s;

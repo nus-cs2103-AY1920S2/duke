@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Wrapper class for the list of tasks
-public class UserText {
+public class TaskList {
     private List<Task> allTasks;
 
-    public UserText() {
+    public TaskList() {
         allTasks = new ArrayList<>();
     }
 
