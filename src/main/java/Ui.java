@@ -17,17 +17,17 @@ public class Ui {
      * Displays a string to bid goodbye to the user and exits the program.
      */
     public String showBye() {
-        return "\tBye~ Hope to see you again soon!";
+        return "Bye~ Hope to see you again soon!";
     }
 
     /**
      * Displays acknowledgement whenever a task is added.
      *
-     * @param t Task that will be added.
+     * @param toAdd Task that will be added.
      */
-    public String printAdd(Task t) {
-        String temp = "\tGot it. I've added this task:" + "\n" + "\t\t" + t + "\n"
-                + "\tNow you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks")
+    public String printAdd(Task toAdd) {
+        String temp = "Got it. I've added this task:" + "\n" + toAdd + "\n"
+                + "Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks")
                 + " in the list.";
         return temp;
     }
@@ -38,8 +38,8 @@ public class Ui {
      * @param toDelete Task that will be deleted.
      */
     public String printDelete(Task toDelete) {
-        String temp = "\tNoted. I've removed this task:" + "\n" + "\t\t" + toDelete + "\n"
-                + "\tNow you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks")
+        String temp = "Noted. I've removed this task:" + "\n" + toDelete + "\n"
+                + "Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks")
                 + " in the list.";
         return temp;
     }
@@ -51,7 +51,7 @@ public class Ui {
      * @param tasks A TaskList object that contains ArrayList of Task.
      */
     public String printDone(int number, TaskList tasks) {
-        String temp = "\tNice! I've marked this task as done:" + "\n" + "\t\t"
+        String temp = "Nice! I've marked this task as done:" + "\n" + "\t"
                 + tasks.getList().get(number - 1);
         return temp;
     }
@@ -65,16 +65,16 @@ public class Ui {
         int index = 1;
         String temp = "";
         for (int i = 0; i < TaskList.size(); i++) {
-            if (TaskList.getList().get(i).getDescription().contains(keyWord)) {
+            if (TaskList.getList().get(i).getDescription().toLowerCase().contains(keyWord)) {
                 if (index == 1) {
-                    temp += "\tHere are the matching tasks in your list:\n";
+                    temp += "Here are the matching tasks in your list:\n";
                 }
-                temp += "\t" + index + "." + TaskList.getList().get(i) + "\n";
+                temp += index + "." + TaskList.getList().get(i) + "\n";
                 index++;
             }
         }
         if (index == 1) {
-            temp += "\tThere are no matching tasks in your list! Please try something else!\n";
+            temp += "There are no matching tasks in your list! Please try something else!";
         }
         return temp;
     }
@@ -85,9 +85,9 @@ public class Ui {
      * @param tasks A TaskList object that contains ArrayList of Task.
      */
     public String listTask(TaskList tasks) {
-        String temp = "\tHere are the " + (tasks.getList().size() == 1 ? "task" : "tasks") + " in your list:\n";
+        String temp = "Here are the " + (tasks.getList().size() == 1 ? "task" : "tasks") + " in your list:\n";
         for (int i = 1; i <= tasks.getList().size(); i++) {
-            temp += "\t\t" + i + "." + tasks.getList().get(i - 1) + "\n";
+            temp += i + "." + tasks.getList().get(i - 1) + "\n";
         }
         return temp;
     }
