@@ -94,14 +94,16 @@ public class Ui {
         loadUserPrompt();
     }
 
-    public void printTasks(ArrayList<Task> taskList) {
-        loadMachinePrompt();
+    public void printTaskMessage() {
         System.out.println("Here's your list of tasks dude:");
-        for (int i = 1; i <= taskList.size(); i++) {
-            Task task = taskList.get(i-1);
-            System.out.println(indent + i + ". " + task);
-        }
-        loadUserPrompt();
+    }
+
+    public void printFoundTaskMessage() {
+        System.out.println("Okay dude here are what I found:");
+    }
+
+    public void printTask(int i, Task task) {
+        System.out.println(indent + i + ". " + task);
     }
 
     public void exit() {

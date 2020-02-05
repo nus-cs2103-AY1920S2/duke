@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Parser {
 
     private static ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("list", "done", "delete", "todo", "event", "deadline", "bye"));
+            Arrays.asList("list", "done", "delete", "find", "todo", "event", "deadline", "bye"));
 
     public Parser() {
     }
@@ -24,6 +24,9 @@ public class Parser {
             case "delete":
                 int deleteIndex = Integer.parseInt(commands[1]);
                 return new DeleteCommand(commandWord, deleteIndex);
+            case "find":
+                String keyword = commands[1];
+                return new FindCommand(commandWord, keyword);
             default:
                 return new AddCommand(commandWord, commands);
         }
