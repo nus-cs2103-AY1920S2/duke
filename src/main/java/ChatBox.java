@@ -20,31 +20,30 @@ public class ChatBox {
     private String location;
 
     public ChatBox(String location) {
-        try {
-            this.folder = new Folder();
-            this.hasClosed = true;
-            this.location = location;
-            load();
-        } catch (FileNotFoundException errorMsg) {
-            System.out.println("Error with file location\n");
-        }
+        this.folder = new Folder();
+        this.hasClosed = true;
+        this.location = location;
     }
 
-    public void load() throws FileNotFoundException {
-        File file = new File(location);
-        Scanner data = new Scanner(file);
-        while (data.hasNextLine()) {
-            String[] ms = data.nextLine().split("=");
-            String key = ms[0];
-            String status = ms[1];
-            Message message = new Message(ms[2]);
-            if(key.equals("[T]")) {
-                folder.add(new ToDos(message, status));
-            } else if (key.equals("[E]")) {
-                folder.add(new Events(message, status));
-            } else if (key.equals("[D]")) {
-                folder.add(new Deadlines(message, status));
+    public void load() throws DukeException {
+        try {
+            File file = new File(location);
+            Scanner data = new Scanner(file);
+            while (data.hasNextLine()) {
+                String[] ms = data.nextLine().split("=");
+                String key = ms[0];
+                String status = ms[1];
+                Message message = new Message(ms[2]);
+                if(key.equals("[T]")) {
+                    folder.add(new ToDos(message, status));
+                } else if (key.equals("[E]")) {
+                    folder.add(new Events(message, status));
+                } else if (key.equals("[D]")) {
+                    folder.add(new Deadlines(message, status));
+                }
             }
+        } catch (FileNotFoundException errorMsg) {
+            throw new DukeException(errorMsg.getMessage());
         }
     }
 
@@ -116,21 +115,15 @@ public class ChatBox {
         return replyMsg;
     }
 
-    public void initialise() {
+    public String initialise() {
         try {
-            Message.welcome();
+            String output;
+            output = Message.welcome();
             load();
-            Scanner scan = new Scanner(System.in);
-            while (hasClosed && scan.hasNextLine()) {
-                Message input = new Message();
-                String msg = scan.nextLine();
-                input.add(msg);
-                reply(input);
-            }
-            scan.close();
-        } catch (FileNotFoundException e) {
-            String er = "OOPS!! History is not loaded correctly, check the file location...";
-            System.out.println(new DukeException(er));
+            return output;
+        } catch (DukeException errorMsg) {
+            String error = "OOPS!! History is not loaded correctly, check the file location...";
+            return error;
         }
     }
 }
