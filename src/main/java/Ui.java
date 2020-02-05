@@ -10,8 +10,8 @@ public class Ui {
      * Constructor for Ui class.
      */
     public Ui() {
-        sc = new Scanner(System.in);
-        parser = new Parser();
+        this.sc = new Scanner(System.in);
+        this.parser = new Parser();
         System.out.println("Hello from " + logo);
     }
 
@@ -30,5 +30,13 @@ public class Ui {
             in = sc.nextLine();
         }
         System.out.println("     Bye. Hope to see you again soon!");
+    }
+
+    /**
+     * Parses user input for Duke GUI.
+     * @param string user input in GUI
+     */
+    public void parseInput(String string) {
+        parser.getInput(string);
     }
 }
