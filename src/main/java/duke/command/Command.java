@@ -14,9 +14,6 @@ public class Command {
     protected Storage storage;
     protected TaskList taskList;
 
-    protected final String HEADER = "____________________________________________________________\n";
-    protected final String FOOTER = "____________________________________________________________\n";
-
     /**
      * Constructor.
      *
@@ -37,9 +34,9 @@ public class Command {
      *                           contains information such as date
      *                           of task.
      */
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
-        this.executeCommand(taskDescriptionArr);
+        return this.executeCommand(taskDescriptionArr);
 
     }
 }

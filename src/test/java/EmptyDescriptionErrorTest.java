@@ -19,9 +19,9 @@ public class EmptyDescriptionErrorTest {
     @Test
     public void test() {
 
-        EmptyDescriptionError error = new EmptyDescriptionError("ToDo");
+        EmptyDescriptionError error = new EmptyDescriptionError("TODO");
         String output = error.errorMessage();
-        String expected = "\nOPPS! The description of a " + Task.Types.ToDo + " cannot be empty";
+        String expected = "\nOPPS! The description of a " + Task.Types.TODO + " cannot be empty";
 
         assertEquals(expected, output);
     }

@@ -68,48 +68,48 @@ public class Storage {
 
                 switch (type) {
 
-                case "ToDo":
+                case "TODO":
 
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.ToDo, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.TODO, Task.Status.Y);
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.ToDo, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.TODO, Task.Status.N);
 
                     }
                     break;
 
-                case "Deadline":
+                case "DEADLINE":
 
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.Deadline, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.DEADLINE, Task.Status.Y);
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.Deadline, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.DEADLINE, Task.Status.N);
 
                     }
                     break;
 
-                case "Event":
+                case "EVENT":
 
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.Event, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.EVENT, Task.Status.Y);
 
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.Event, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.EVENT, Task.Status.N);
 
                     }
                     break;
@@ -130,10 +130,9 @@ public class Storage {
     /**
      * Updates file with respect to the operations performed to taskList.
      *
-     * @param operation refers to the updates on taskList.
      * @throws IOException when file writer encounters error.
      */
-    public void updateFile(String operation) throws IOException {
+    public void updateFile() throws IOException {
 
         ArrayList<Task> list = taskList.getList();
 

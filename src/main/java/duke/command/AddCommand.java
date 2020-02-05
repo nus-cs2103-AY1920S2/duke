@@ -6,7 +6,9 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /**
  * The AddCommand program call method to add task into the taskList.
@@ -36,46 +38,43 @@ public class AddCommand extends Command {
      *                           of task.
      */
     @Override
-    public void executeCommand(String[] taskDescriptionArr) {
+    public String executeCommand(String[] taskDescriptionArr) {
 
         try {
 
             Parser parser = new Parser();
             LocalDateTime[] dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
 
+
             if (taskDescriptionArr[0].equals("todo")) {
 
-                System.out.println(HEADER);
-                System.out.println(taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.ToDo));
-                System.out.println(taskList.reportTotal());
-                System.out.println(FOOTER);
+                return  "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.TODO)
+                        + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("deadline")) {
 
-                System.out.println(HEADER);
-                System.out.println(taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Deadline));
-                System.out.println(taskList.reportTotal());
-                System.out.println(FOOTER);
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.DEADLINE)
+                        + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("event")) {
 
-                System.out.println(HEADER);
-                System.out.println(taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Event));
-                System.out.println(taskList.reportTotal());
-                System.out.println(FOOTER);
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.EVENT)
+                        + "\n" + taskList.reportTotal();
 
             }
+
         } catch (Exception e) {
 
             if (e instanceof Exceptions) {
 
-                System.out.println(((Exceptions) e).errorMessage());
+             return ((Exceptions)e).errorMessage();
 
             } else {
 
-                System.out.println(e);
+               return e.toString();
 
             }
         }
+        return "";
     }
 }

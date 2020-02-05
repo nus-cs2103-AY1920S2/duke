@@ -9,6 +9,7 @@ package duke.exceptions;
 public class InvalidInputError extends Exceptions {
 
     public InvalidInputError() {
+
         super(null);
     }
 
@@ -19,6 +20,7 @@ public class InvalidInputError extends Exceptions {
      */
     @Override
     public String errorMessage() {
-        return "OOPS! I'm sorry, but I don't know what that means.";
+
+        return "\nOOPS! I'm sorry, but I don't know what that means.";
     }
 }

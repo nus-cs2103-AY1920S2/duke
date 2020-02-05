@@ -21,7 +21,7 @@ public class ToDoTest {
 
         Task todo = new ToDo(null, "borrow book");
         String str = todo.toString();
-        assertEquals("[ToDo][N] borrow book", str);
+        assertEquals("[TODO][N] borrow book", str);
     }
 
 }
