@@ -20,20 +20,20 @@ public class Tasks {
         return msg;
     }
 
-    public void added() {
+    public String added() {
         String output = Message.lines + "added: " + msg.getMsg() + "\n" + Message.lines;
-        System.out.println(output);
+        return output;
     }
 
-    public void done() {
+    public String done() {
         status = "[o]";
         Message output = new Message("Nice! I've finish this task:\n" + status + " " + msg.getMsg());
-        System.out.println(output);
+        return output.getMsg();
     }
 
-    public void removed() {
+    public String removed() {
         Message output = new Message("Noted. I've removed this task:\n" + status + " " + msg.getMsg());
-        System.out.println(output);
+        return output.getMsg();
     }
 
     @Override

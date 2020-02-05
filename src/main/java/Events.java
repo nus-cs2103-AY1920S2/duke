@@ -17,25 +17,25 @@ public class Events extends Tasks {
     }
 
     @Override
-    public void done() {
+    public String done() {
         status = "[o]";
         Message output = new Message("Nice! I've finish this task:\n" + logo + status + " " + msg.getMsg());
-        System.out.println(output);
+        return output.getMsg();
     }
 
     @Override
-    public void removed() {
+    public String removed() {
         count--;
         Message output = new Message("Noted. I've removed this tasks:\n"
                 + logo
                 + status
                 + " " + msg.getMsg() +
                 "\nNow you have " + count + " tasks in the list.\n");
-        System.out.println(output);
+        return output.getMsg();
     }
 
     @Override
-    public void added() {
+    public String added() {
         String output = Message.lines
                 + "Got it. I've added this task:\n"
                 + this + "\n"
@@ -43,7 +43,7 @@ public class Events extends Tasks {
                 + count
                 + " tasks in the list.\n"
                 + Message.lines;
-        System.out.println(output);
+        return output;
     }
 
     @Override

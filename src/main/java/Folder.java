@@ -15,12 +15,12 @@ public class Folder {
         listTasks.add(tasks);
     }
 
-    public void finishTasks(int i) {
-        listTasks.get(i-1).done();
+    public String finishTasks(int i) {
+        return listTasks.get(i-1).done();
     }
 
-    public void deleteTasks(int i) {
-        listTasks.remove(i-1).removed();
+    public String deleteTasks(int i) {
+        return listTasks.remove(i-1).removed();
     }
 
     public String getText() {
@@ -33,7 +33,7 @@ public class Folder {
         return output;
     }
 
-    public void find(String word) {
+    public String find(String word) {
         int i = 1;
         String output = Message.lines + "Here are the tasks in your list:\n";
         for(Tasks x: listTasks) {
@@ -43,10 +43,10 @@ public class Folder {
             }
         }
         output += Message.lines;
-        System.out.println(output);
+        return output;
     }
 
-    public void show() {
+    public String show() {
         int i = 1;
         String output = Message.lines + "Here are the tasks in your list:\n";
         for(Tasks x: listTasks) {
@@ -54,6 +54,6 @@ public class Folder {
             i++;
         }
         output += Message.lines;
-        System.out.println(output);
+        return output;
     }
 }

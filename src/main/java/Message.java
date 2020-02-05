@@ -46,17 +46,17 @@ public class Message {
      * This method welcomes the user during input.
      */
 
-    public static void welcome() {
-        System.out.println(lines + "Hello Edmond! How can i help you?\n"
-                + "What can I do for you?\n" + lines);
+    public static String welcome() {
+        return lines + "Hello Edmond! How can i help you?\n"
+                + "What can I do for you?\n" + lines;
     }
 
     /**
      * This method provides a good bye message.
      */
 
-    public static void end() {
-        System.out.println(lines + "Bye. See you next time!\n" + lines);
+    public static String end() {
+        return lines + "Bye. See you next time!\n" + lines;
     }
 
     @Override
