@@ -34,9 +34,9 @@ public class Ui {
 
     /**
      * Parses user input for Duke GUI.
-     * @param string user input in GUI
+     * @param input user input in GUI
      */
-    public void parseInput(String string) {
-        parser.getInput(string);
+    String parseInput(String input) {
+        return parser.getOutputString(input);
     }
 }
