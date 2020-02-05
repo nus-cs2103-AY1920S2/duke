@@ -14,9 +14,4 @@ public enum TaskType {
     public String getCode() {
         return this.code;
     }
-
-    @Override
-    public String toString() {
-        return this.toString();
-    }
 }
