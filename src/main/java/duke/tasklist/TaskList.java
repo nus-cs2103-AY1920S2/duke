@@ -69,23 +69,22 @@ public class TaskList {
     public Task addTask(String taskDescription, LocalDateTime[] dateTime,
                         Task.Types type) throws IOException {
 
-        System.out.println("Got it. I've added this task:");
         Task task = null;
         switch (type) {
-        case ToDo:
+        case TODO:
             ToDo task1 = new ToDo(dateTime, taskDescription);
             task = task1;
             break;
-        case Deadline:
+        case DEADLINE:
             Deadline task2 = new Deadline(dateTime, taskDescription);
             task = task2;
             break;
-        case Event:
+        case EVENT:
             Event task3 = new Event(dateTime, taskDescription);
             task = task3;
             break;
         default:
-            System.out.println("Task type does'nt exist");
+            System.out.println("Task type doesn't exist");
             break;
         }
 
@@ -114,20 +113,20 @@ public class TaskList {
         dateTime[1] = dateTimeEnd;
         Task task = null;
         switch (type) {
-        case ToDo:
+        case TODO:
             ToDo task1 = new ToDo(dateTime, taskDescription);
             task = task1;
             break;
-        case Deadline:
+        case DEADLINE:
             Deadline task2 = new Deadline(dateTime, taskDescription);
             task = task2;
             break;
-        case Event:
+        case EVENT:
             Event task3 = new Event(dateTime, taskDescription);
             task = task3;
             break;
         default:
-            System.out.println("Task type does'nt exist");
+            System.out.println("Task type doesn't exist");
             break;
         }
 
@@ -153,7 +152,6 @@ public class TaskList {
 
         Task task = taskList.remove(index - 1);
         storage.updateFile();
-        System.out.println("Noted. I've removed this task:");
         return task;
 
     }

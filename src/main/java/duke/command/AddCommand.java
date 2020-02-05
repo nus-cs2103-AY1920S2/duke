@@ -6,7 +6,9 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /**
  * The AddCommand program call method to add task into the taskList.
@@ -43,20 +45,21 @@ public class AddCommand extends Command {
             Parser parser = new Parser();
             LocalDateTime[] dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
 
+
             if (taskDescriptionArr[0].equals("todo")) {
 
-                return taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.ToDo)
-                        + taskList.reportTotal();
+                return  "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.TODO)
+                        + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("deadline")) {
 
-                return taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Deadline)
-                        + taskList.reportTotal();
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.DEADLINE)
+                        + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("event")) {
 
-                return taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.Event)
-                        + taskList.reportTotal();
+                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1], dateTime, Task.Types.EVENT)
+                        + "\n" + taskList.reportTotal();
 
             }
 

@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 
 
 /**
- * The Duke Program contains main method.
+ * The Duke Program setup needed object to run the program and gets responses from Ui.
  *
  * @version 1.0
  * @since 2020-01-28
@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 public class Duke {
 
     Ui Ui ;
+    boolean isExit;
 
     public void setup() {
 
@@ -34,7 +35,17 @@ public class Duke {
     }
 
     String getResponse(String input) {
+
+        if(input.equals("bye")) {
+            isExit = true;
+        }
+
         return Ui.frontDesk(input);
+    }
+
+    public boolean getIsExit() {
+
+        return isExit;
     }
 
 }

@@ -35,7 +35,7 @@ public class Event extends Task {
         String dateStart = super.getDateTime()[0].format(format);
         String dateEnd = super.getDateTime()[1].format(format);
 
-        return "[" + Types.Event + "]"
+        return "[" + Types.EVENT + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
                 + "(at:" + dateStart + " to " + dateEnd + ")";
@@ -49,7 +49,7 @@ public class Event extends Task {
     @Override
     public Types getType() {
 
-        return Types.Event;
+        return Types.EVENT;
 
     }
 }

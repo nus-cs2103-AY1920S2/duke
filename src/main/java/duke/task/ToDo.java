@@ -30,7 +30,7 @@ public class ToDo extends Task {
     @Override
     public String toString() {
 
-        return "[" + Types.ToDo + "]"
+        return "[" + Types.TODO + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription();
     }
@@ -43,7 +43,7 @@ public class ToDo extends Task {
     @Override
     public Types getType() {
 
-        return Types.ToDo;
+        return Types.TODO;
 
     }
 }

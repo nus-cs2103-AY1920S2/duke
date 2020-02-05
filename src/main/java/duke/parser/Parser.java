@@ -8,8 +8,10 @@ import duke.exceptions.MissingKeywordError;
 import duke.exceptions.MissingTaskNumberError;
 
 import java.lang.String;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 /**
  * The Parser program passes user input, date and time related to a task.

@@ -15,7 +15,7 @@ public class Task {
     protected Status isDone;
 
     public enum Types {
-        ToDo, Deadline, Event;
+        TODO, DEADLINE, EVENT;
     }
 
     public enum Status {

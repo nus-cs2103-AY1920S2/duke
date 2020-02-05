@@ -12,6 +12,8 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+import java.util.Arrays;
+
 
 /**
  * The Ui program gets user input, interprets it and calls relevant methods.

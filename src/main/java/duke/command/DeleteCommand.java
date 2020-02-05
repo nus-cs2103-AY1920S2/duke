@@ -36,14 +36,8 @@ public class DeleteCommand extends Command {
 
         try {
 
-           /* System.out.println(HEADER);
-            System.out.println(taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1])));
-            System.out.println(taskList.reportTotal());
-            System.out.println();
-            */
-
-            return taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
-                    + taskList.reportTotal();
+            return  "Noted. I've removed this task: \n" + taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
+                    + "\n" + taskList.reportTotal();
 
 
         } catch (IOException e) {

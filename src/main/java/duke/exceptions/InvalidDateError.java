@@ -20,13 +20,13 @@ public class InvalidDateError extends Exceptions {
     @Override
     public String errorMessage() {
 
-        if (type.equals("deadline")) {
+        if (type.equals("DEADLINE")) {
 
-            return "Date should be in d/MM/yyyy HH:mm format";
+            return "\nDate should be in d/MM/yyyy HH:mm format";
 
         } else {
 
-            return "Date should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
+            return "\nDate should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
 
         }
     }

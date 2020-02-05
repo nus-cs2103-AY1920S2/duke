@@ -31,11 +31,6 @@ public class ExitCommand extends Command {
     @Override
     public String executeCommand(String[] taskDescriptionArr) {
 
-       /* System.out.println(HEADER);
-        System.out.println("Bye. I hope you liked the service and hope to see you soon !");
-        System.out.println();
-        */
-
         return "Bye. I hope you liked the service and hope to see you soon !";
 
     }

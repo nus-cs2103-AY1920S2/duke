@@ -34,7 +34,7 @@ public class Deadline extends Task {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String date = super.getDateTime()[0].format(format);
 
-        return "[" + Types.Deadline + "]"
+        return "[" + Types.DEADLINE + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
                 + "(by:" + date + ")";
@@ -48,7 +48,7 @@ public class Deadline extends Task {
     @Override
     public Types getType() {
 
-        return Types.Deadline;
+        return Types.DEADLINE;
 
     }
 }
