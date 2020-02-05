@@ -2,11 +2,15 @@ package main.java.model;
 
 import main.java.exceptions.NoDescriptionException;
 
-public class Task {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    static final String TASK_TYPE_STRING = "task";
+    static String TASK_TYPE_STRING;
+    static String TASK_TYPE_CHA;
 
     public Task() {}
 
@@ -31,13 +35,7 @@ public class Task {
         this.setDescription(params[0]);
     }
 
-    public boolean isDone() {
-        return this.isDone;
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-    }
+    public abstract String getTaskType();
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -45,6 +43,18 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public ArrayList<String> getDetails() {
+        return new ArrayList<String>(Arrays.asList(this.description));
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     public String toString() {
