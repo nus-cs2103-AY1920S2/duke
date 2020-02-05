@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -61,10 +60,19 @@ public class ChatBox extends HBox {
     }
 
     /**
+     * Gets the Text element of this ChatBox
+     *
+     * @return Text element
+     */
+    public Text getText() {
+        return this.text;
+    }
+
+    /**
      * Formats this ChatBox to the right. To be used
      * for user input
      *
-     * @param s The string containing dialogue text
+     * @param s The string containing the text
      * @return A new ChatBox, formatted to the right
      */
     public static ChatBox getUserBox(String s) {
@@ -75,7 +83,7 @@ public class ChatBox extends HBox {
      * Formats this ChatBox to the left. To be used
      * for bot output
      *
-     * @param s The String containing dialogue text
+     * @param s The String containing the text
      * @return A new ChatBox, formatted to the left
      */
     public static ChatBox getBotBox(String s) {

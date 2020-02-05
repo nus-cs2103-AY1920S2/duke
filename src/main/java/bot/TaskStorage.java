@@ -1,6 +1,7 @@
 package bot;
 
 import bot.task.Task;
+import bot.task.Todo;
 
 import bot.util.PrettyTime;
 
@@ -80,7 +81,12 @@ public class TaskStorage implements Storage<Task> {
      */
     @Override
     public Task get(int index) {
-        return this.storedTasks.get(index - 1);
+        if (index < 0 || index > this.getSize()) {
+            // a placeholder task
+            return new Todo("index out of bounds");
+        } else {
+            return this.storedTasks.get(index - 1);
+        }
     }
 
     /**
@@ -95,7 +101,12 @@ public class TaskStorage implements Storage<Task> {
      */
     @Override
     public String retrieve(int i) {
-        return i + ". " + this.get(i);
+        if (i <= 0 || i > this.getSize()) {
+            // index out of bounds
+            return "";
+        } else {
+            return i + ". " + this.get(i);
+        }
     }
 
     /**
@@ -117,7 +128,10 @@ public class TaskStorage implements Storage<Task> {
      */
     @Override
     public void delete(int i) {
-        this.storedTasks.remove(i - 1);
+        if (i > 0 && i <= this.getSize()) {
+            // index not out of bounds
+            this.storedTasks.remove(i - 1);
+        }
     }
 
     /**

@@ -19,11 +19,12 @@ public abstract class TextInstruction extends Instruction {
 
     @Override
     public ParsedInstruction parse(String rawCommand, Command command)
-            throws InadequateArgumentsException
-    {
-        assert(rawCommand.startsWith(command.getWord()));
+            throws InadequateArgumentsException {
+
+        assert (rawCommand.startsWith(command.getWord()));
         return new ParsedInstruction(this, TextInstruction.checkForNonEmpty(
-                rawCommand.substring(command.getWord().length()).stripLeading()));
+                rawCommand.substring(command.getWord().length()).stripLeading(),
+                command));
     }
 
     /**
@@ -32,15 +33,17 @@ public abstract class TextInstruction extends Instruction {
      * (only contains whitespace)
      *
      * @param rawCommand The String to be checked
+     * @param orig The original Command identified
+     *             by the CommandParser
      * @return Returns the same String, unchanged
      * @throws InadequateArgumentsException When the String
      *         is an empty String
      */
-    private static String checkForNonEmpty(String rawCommand)
-            throws InadequateArgumentsException
-    {
+    private static String checkForNonEmpty(String rawCommand, Command orig)
+            throws InadequateArgumentsException {
+
         if (rawCommand.isBlank()) {
-            throw new InadequateArgumentsException("todo");
+            throw new InadequateArgumentsException(orig.getWord());
         } else {
             return rawCommand;
         }

@@ -5,6 +5,7 @@ import bot.Ui;
 import javafx.collections.ObservableList;
 
 import javafx.scene.Node;
+import javafx.scene.text.Font;
 
 /**
  * A class that is used by the internal bot classes,
@@ -36,8 +37,71 @@ public class GraphicalUi extends Ui {
     private static final String GOODBYE_MESSAGE = "Goodbye! You will be missed";
     private static final String LOAD_FROM_DISK_FAIL_MESSAGE =
             "Could not find local storage";
-    private static final String HELP_MESSAGE = Ui.HELP_MESSAGE;
-
+    private static final String HELP_MESSAGE =
+            "Here is a list of words that I understand:\n\n"
+            + "bye      | Terminates the bot\n"
+            + "\n"
+            + "deadline | Creates a new deadline with\n"
+            + "<text>   | description <text> and date\n"
+            + "/by      | <date>.\n"
+            + "<date>   |\n"
+            + "         | Date can be given in\n"
+            + "         | this format: \n"
+            + "         |\n"
+            + "         | DD-MM-YYYY-tttt\n"
+            + "         | where tttt is the time in\n"
+            + "         | 24-hour format\n"
+            + "         |\n"
+            + "         | or this format: DD-MM-YYYY\n"
+            + "\n"
+            + "delete   | Deletes task on the list\n"
+            + "<n>      | with index n\n"
+            + "\n"
+            + "done     | Marks a task with index\n"
+            + "<n>      | n as done\n"
+            + "\n"
+            + "event    | Creates a new event with\n"
+            + "<text>   | description <text> and date\n"
+            + "/at      | <date>.\n"
+            + "<date>   |\n"
+            + "         | Date can be given in\n"
+            + "         | this format: \n"
+            + "         |\n"
+            + "         | DD-MM-YYYY-tttt\n"
+            + "         | where tttt is the time in\n"
+            + "         | 24-hour format\n"
+            + "         |\n"
+            + "         | or this format: DD-MM-YYYY\n"
+            + "\n"
+            + "ex/exi/  | Terminates the bot.\n"
+            + "exit     | \"i\" and \"it\" optional\n"
+            + "\n"
+            + "find     | Finds tasks with that word\n"
+            + "<word>   | in the description\n"
+            + "\n"
+            + "hello    | Hello!\n"
+            + "\n"
+            + "help     | Shows this help message\n"
+            + "\n"
+            + "list     | Shows the list of tasks\n"
+            + "\n"
+            + "notdone  | Marks a task with index\n"
+            + "<n>      | n as NOT done\n"
+            + "\n"
+            + "todo     | Creates a new to-do with\n"
+            + "<text>   | description <text>\n"
+            + "\n"
+            + "search   | Finds tasks with that date\n"
+            + "<date>   |\n"
+            + "         | Date can be given in\n"
+            + "         | this format: \n"
+            + "         |\n"
+            + "         | DD-MM-YYYY-tttt\n"
+            + "         | where tttt is the time in\n"
+            + "         | 24-hour format\n"
+            + "         |\n"
+            + "         | or this format: DD-MM-YYYY\n"
+            + "\n";
 
     private ObservableList<Node> chatWindow;
 
@@ -124,7 +188,9 @@ public class GraphicalUi extends Ui {
 
     @Override
     public void showHelpMessage() {
-        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.HELP_MESSAGE));
+        ChatBox helpBox = ChatBox.getBotBox(GraphicalUi.HELP_MESSAGE);
+        helpBox.getText().fontProperty().set(Font.font("Monospaced", 11));
+        this.chatWindow.add(helpBox);
     }
 
     @Override
