@@ -16,7 +16,10 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
-public class DialogueBox extends HBox {
+public class ChatBox extends HBox {
+    private static Image USER_IMAGE;
+    private static Image BOT_IMAGE;
+
     @FXML
     private Label text;
     @FXML
@@ -26,14 +29,15 @@ public class DialogueBox extends HBox {
      * Constructor for a custom HBox, for use
      * in 4LC3N-BOT's GUI
      *
-     * @param text The label containing dialogue text
-     * @param img Image of an user who generated
-     *           the dialogue
+     * @param text String representing text to be
+     *             shown in the ChatBox
+     * @param img Image of the user who would
+     *            generate the text
      */
-    public DialogueBox(String text, Image img) {
+    public ChatBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
-                    MainWindow.class.getResource("/view/DialogueBox.fxml"));
+                    MainWindow.class.getResource("/view/ChatBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -46,7 +50,7 @@ public class DialogueBox extends HBox {
     }
 
     /**
-     * Moves this DialogueBox to the left instead
+     * Moves this ChatBox to the left instead
      */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
@@ -56,28 +60,44 @@ public class DialogueBox extends HBox {
     }
 
     /**
-     * Formats this DialogueBox to the right. To be used
+     * Formats this ChatBox to the right. To be used
      * for user input
      *
      * @param s The string containing dialogue text
-     * @param im Image of the user
-     * @return A new DialogBox, formatted to the right
+     * @return A new ChatBox, formatted to the right
      */
-    public static DialogueBox getUserBox(String s, Image im) {
-        return new DialogueBox(s, im);
+    public static ChatBox getUserBox(String s) {
+        return new ChatBox(s, ChatBox.USER_IMAGE);
     }
 
     /**
-     * Formats this DialogueBox to the left. To be used
+     * Formats this ChatBox to the left. To be used
      * for bot output
      *
      * @param s The String containing dialogue text
-     * @param im Image of the bot
-     * @return A new DialogBox, formatted to the left
+     * @return A new ChatBox, formatted to the left
      */
-    public static DialogueBox getBotBox(String s, Image im) {
-        DialogueBox db = new DialogueBox(s, im);
-        db.flip();
-        return db;
+    public static ChatBox getBotBox(String s) {
+        ChatBox chat = new ChatBox(s, ChatBox.BOT_IMAGE);
+        chat.flip();
+        return chat;
+    }
+
+    /**
+     * Sets the user's image for all ChatBoxes
+     * @param img The image to be set as the
+     *           user image
+     */
+    public static void setUserImage(Image img) {
+        ChatBox.USER_IMAGE = img;
+    }
+
+    /**
+     * Sets the bot's image for all ChatBoxes
+     * @param img The image to be set as the
+     *           bot image
+     */
+    public static void setBotImage(Image img) {
+        ChatBox.BOT_IMAGE = img;
     }
 }

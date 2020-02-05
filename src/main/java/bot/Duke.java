@@ -2,6 +2,8 @@ package bot;
 
 import bot.command.instruction.ParsedInstruction;
 
+import bot.gui.Launcher;
+
 import bot.gui.DialogueBox;
 import bot.loadsave.DummyLoader;
 import bot.loadsave.LoadAndSave;
@@ -37,8 +39,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Main driver class for 4LC3N-BOT, containing the
- * primary loop that awaits input from the user
+ * Main driver class for 4LC3N-BOT, also containing the
+ * primary loop that awaits input from the user (for
+ * the command line application)
  */
 public class Duke extends Application {
     private Image user =
@@ -51,64 +54,20 @@ public class Duke extends Application {
     private Button enterButton;
 
     /**
-     * Main program of 4LC3N-BOT
+     * Main program of 4LC3N-BOT. Run 4LC3N-BOT with a
+     * command line interface by executing
+     * <code>java bot/Duke cli</code>
      *
-     * @param args Command line arguments, can be
-     *             safely ignored
+     * @param args Command line arguments, if only "cli"
+     *             is given as the argument, then the
+     *             command line interface is started
      */
     public static void main(String[] args) {
-        // initialise UI
-        Ui botUi = new Ui();
-        botUi.showVersion();
-        botUi.showGreetings();
-        botUi.showLoading();
-
-        // initialise CommandParser
-        CommandParser parser = new CommandParser();
-
-        // initialise TaskStorage
-        String fileDirectory = "../user/data";
-        String fileName = "tasks.botstore";
-        TaskStorage store = new TaskStorage();
-
-        LoadAndSave<Task> botStore;
-        try {
-            botStore = new TasksToDisk(fileDirectory, fileName);
-        } catch (FileNotFoundException e) {
-            botUi.showError(e);
-            botStore = new DummyLoader<Task>();
+        if (args.length == 1 && args[0].equals("cli")) {
+            Duke.startCommandLineUi();
+        } else {
+            Duke.startGraphicalUi(args);
         }
-
-        store.importTasks(botStore.loadFromDisk());
-
-        // initialise instruction Executor
-        Executor executor = new Executor(store, botUi, botStore);
-
-        Scanner input = new Scanner(System.in);
-
-        botUi.showInitial();
-        botUi.showAwaiting();
-
-        // main bot system loop
-        while (input.hasNext()) {
-            String command = input.nextLine();
-            // parse the command
-            ParsedInstruction next;
-            try {
-                next = parser.parse(command);
-            } catch (InadequateArgumentsException | TooManyArgumentsException
-                    | UnknownInstructionException e
-            ) {
-                botUi.showError(e);
-                continue;
-            }
-
-            if (!executor.execute(next.getInstruction(), next.getArguments())) {
-                break;
-            }
-            botUi.showAwaiting();
-        }
-        input.close();
     }
 
     static {
@@ -221,5 +180,15 @@ public class Duke extends Application {
      */
     private String getResponse(String input) {
         return "Duke heard: " + input;
+    }
+
+    /**
+     * Program to start 4LC3N-BOT in the graphical
+     * interface (in a new window)
+     *
+     * @param args Command line arguments
+     */
+    private static void startGraphicalUi(String[] args) {
+        Launcher.start(args);
     }
 }
