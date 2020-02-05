@@ -20,14 +20,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke duke = new Duke();
+    private Ui ui = new Ui();
+    private Storage storage = new Storage();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/nobita.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/doraemon.png"));
 
     @FXML
     public void initialize() {
+        storage.startReading();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String start = ui.opening();
+        dialogContainer.getChildren().addAll(
+
+                DialogBox.getDukeDialog(start, dukeImage)
+        );
+
     }
 
     public void setDuke(Duke d) {
@@ -40,8 +49,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        Parser parser = new Parser();
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = parser.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

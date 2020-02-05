@@ -4,26 +4,29 @@ public class TaskList {
     /***
      * print the list of current tasks
      */
-    public static void printList() {
+    public static String printList() {
+        String output= "";
         if (Duke.commandList.size() > 0) {
-            System.out.println("Here are the tasks in your list:");
+            output += "Here are the tasks in your list:\n";
             for (int i = 0; i < Duke.commandList.size(); i++) {
                 int a = i + 1;
-                System.out.print(a + ". " + Duke.commandList.get(i));
+                output+= a + ". " + Duke.commandList.get(i);
             }
         } else {
-            System.out.println("☹ OOPS!!! I'm sorry, I can't find any task in your list");
+            output = "☹ OOPS!!! I'm sorry, I can't find any task in your list\n";
         }
+
+        return output;
     }
 
     /***
      * Mark a task as done
      * @param task
      */
-    public static void doneTask(Task task) {
+    public static String doneTask(Task task) {
         task.setDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.print(task);
+        String output = "Nice! I've marked this task as done: \n";
+        return output+task;
     }
 
     /***
@@ -31,11 +34,12 @@ public class TaskList {
      * @param task
      */
 
-    public static void deleteTask(Task task) {
+    public static String deleteTask(Task task) {
         Duke.commandList.remove(task);
-        System.out.println("Noted. I've removed this task: ");
-        System.out.print(task);
-        System.out.println("Now you have "+ Duke.commandList.size() + " tasks in the list.");
+        String output = "Noted. I've removed this task: \n";
+        output += task;
+        output += "Now you have "+ Duke.commandList.size() + " tasks in the list.\n";
+        return output;
     }
 
     /***
@@ -43,10 +47,11 @@ public class TaskList {
      * @param task
      */
 
-    public static void addTask(Task task) {
+    public static String addTask(Task task) {
         Duke.commandList.add(task);
-        System.out.print("Got it. I've added this task: \n");
-        System.out.print(task);
-        System.out.print("Now you have " + Duke.commandList.size() + " tasks in the list.\n");
+        String output = "Got it. I've added this task: \n";
+        output += task;
+        output += "Now you have " + Duke.commandList.size() + " tasks in the list.\n";
+        return output;
     }
 }
