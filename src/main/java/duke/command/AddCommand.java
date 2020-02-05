@@ -74,7 +74,7 @@ public class AddCommand extends Command {
         
         String output = Message.TASK_ADDED + "\n"
                 + Message.DIVIDER + "\n"
-                + task + "\n"
+                + "  " + task + "\n"
                 + Message.DIVIDER + "\n"
                 + Message.showNumberOfTasks(tasks.getLength());
         ui.showMessage(output);

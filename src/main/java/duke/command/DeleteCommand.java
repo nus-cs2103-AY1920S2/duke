@@ -32,8 +32,9 @@ public class DeleteCommand extends Command {
         
         String output = Message.DELETE_MESSAGE + "\n"
                 + Message.DIVIDER + "\n"
-                + task + "\n"
-                + Message.DIVIDER + "\n";
+                + "  " + task + "\n"
+                + Message.DIVIDER + "\n"
+                + Message.showNumberOfTasks(tasks.getLength()) + "\n";
         ui.showMessage(output);
     }
 }

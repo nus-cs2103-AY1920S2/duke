@@ -9,6 +9,8 @@ public class Message {
 
     public static final String EXIT_MESSAGE = "Bye, see you never!";
 
+    public static final String FIND_MESSAGE = "Who am I? Your secretary?";
+
     public static final String GREET = "I'm busy. What do you want?";
 
     public static final String LIST_MESSAGE = "This is your useless list.";
@@ -25,5 +27,14 @@ public class Message {
      */
     public static String showNumberOfTasks(int number) {
         return "You have " + number + " tasks in your list. :(";
+    }
+
+    /**
+     * Obtain the message for number of tasks found given the number.
+     * @param number The number of tasks that was found.
+     * @return The messsage for number of tasks found.
+     */
+    public static String showNumberOfTasksFound(int number) {
+        return "Found " + number + " tasks that matches.";
     }
 }

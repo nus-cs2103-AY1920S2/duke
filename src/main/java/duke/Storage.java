@@ -59,7 +59,7 @@ public class Storage {
 
             scanner.close();
         } catch (FileNotFoundException e) {
-            // no save file found
+            throw new DukeException("Problem with reading save file.");
         }
 
         return tasks;
@@ -87,7 +87,7 @@ public class Storage {
             writer.write(tasks.toSaveFormat());
             writer.close();
         } catch (IOException e) {
-            // unable to create file
+            throw new DukeException("Problem writing into save file.");
         }
     }
 }
