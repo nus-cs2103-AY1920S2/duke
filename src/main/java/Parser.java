@@ -20,7 +20,7 @@ public class Parser {
      * @throws IOException If file cannot be written to storage
      */
 
-    public void parse(String input) {
+    public String parse(String input) {
 
         String[] taskDescription = input.split(" ");
 
@@ -34,31 +34,30 @@ public class Parser {
                 case "bye":
 
                     Storage.updateFile(TaskList.taskList);
-                    System.out.println("UwU gone so fast? You're a fat bitch anyway.");
+                    return "UwU gone so fast? You're a fat bitch anyway.";
 
-
-
-                    break;
 
 
 
                 // LIST will list out all the tasks and show their done status
                 case "list":
 
-                    System.out.println("UwU you got some nice tasks:");
+                    String output = "";
+                    output += "UwU you got some nice tasks:";
 
                     for (int i = 0; i < TaskList.getSize(); i++) {
                         int indexNumber = i + 1;
 
                         if (TaskList.getTask(i).getStatus() == 0) {
-                            System.out.println(indexNumber + "." + TaskList.getTask(i).toString());
+                            output += indexNumber + "." + TaskList.getTask(i).toString();
                         } else {
-                            System.out.println(indexNumber + "." + TaskList.getTask(i).toString());
+                            output += indexNumber + "." + TaskList.getTask(i).toString();
                         }
 
                     }
 
-                    break;
+                    return output;
+
 
 
 
@@ -79,8 +78,8 @@ public class Parser {
                             newTask.setStatusDone();
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
-                            System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
-                            break;
+                            return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
+
                         }
                         case "deadline": {
 
@@ -88,8 +87,8 @@ public class Parser {
                             newTask.setStatusDone();
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
-                            System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
-                            break;
+                            return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
+
                         }
                         case "event": {
 
@@ -97,8 +96,8 @@ public class Parser {
                             newTask.setStatusDone();
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
-                            System.out.println("I... I've marked this as done... notice me pls: \n" + newTask.toString());
-                            break;
+                            return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
+
                         }
                     }
 
@@ -115,10 +114,10 @@ public class Parser {
                     Task oldTask = TaskList.getTask(index - 1);
                     TaskList.deleteTask(index - 1);
                     Storage.updateFile(TaskList.taskList);
-                    System.out.println("Noted. I've removed this task: \n" + "  " + oldTask.toString() + "\n" +
-                            "Now you have " + TaskList.getSize() + " tasks in the list.");
+                    return "Noted. I've removed this task: \n" + "  " + oldTask.toString() + "\n" +
+                            "Now you have " + TaskList.getSize() + " tasks in the list.";
 
-                    break;
+
                 }
 
 
@@ -139,8 +138,8 @@ public class Parser {
                             TaskList.addTask(newTask);
                             String taskMessage = "T | " + newTask.getStatus() + " |" + newTask.getDescription() + "\n";
                             Storage.writeToFile(taskMessage);
-                            System.out.println("Senpai I have added this task: \n" + "[T][✗] " + newTask.getDescription() + "\n"
-                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
+                            return "Senpai I have added this task: \n" + "[T][✗] " + newTask.getDescription() + "\n"
+                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.";
 
                         }
                     } catch (DukeException e) {
@@ -185,15 +184,15 @@ public class Parser {
                             String taskMessage = "D | " + newDeadline.getStatus() + " |" + newDeadline.getDescription()
                                     + " | " + deadline + "\n";
                             Storage.writeToFile(taskMessage);
-                            System.out.println("Senpai I have added this event: \n" + "[D][✗]" +
+                            return "Senpai I have added this event: \n" + "[D][✗]" +
                                     newDeadline.getDescription() + " (by:" + deadlineString + ")" + "\n"
-                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
+                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.";
                         }
                     } catch (DukeException e) {
-                        System.out.println(e.getMessage());
+                        return e.getMessage();
                     }
 
-                    break;
+
                 }
 
 
@@ -233,17 +232,17 @@ public class Parser {
                             String taskMessage = "E | " + newEvent.getStatus() + " |" + newEvent.getDescription()
                                     + " | " + eventTiming + "\n";
                             Storage.writeToFile(taskMessage);
-                            System.out.println("Senpai I have added this event: \n" + "[E][✗]" +
+                            return "Senpai I have added this event: \n" + "[E][✗]" +
                                     newEvent.getDescription() + " (at:" + eventString + ")" + "\n"
-                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.");
+                                    + "Now you have " + TaskList.getSize() + " number of tasks in the list.";
 
                         }
 
                     } catch (DukeException e) {
-                        System.out.println(e.getMessage());
+                        return e.getMessage();
                     }
 
-                    break;
+
                 }
 
                 case "find": {
@@ -258,14 +257,15 @@ public class Parser {
                         }
                     }
 
-                    System.out.println("Here are the matching tasks in your list:");
 
                     for (Task printingTask : searchResults) {
-                        System.out.println(incrementer + "." + printingTask);
                         incrementer++;
+                        return incrementer + "." + printingTask;
                     }
 
-                    break;
+                    return "Here are the matching tasks in your list:";
+
+
                 }
                 default:
 
@@ -274,9 +274,12 @@ public class Parser {
         }
         catch (DukeException | IOException ex) {
 
-            System.out.println(ex.getMessage());
+            return ex.getMessage();
         }
+
+        return "";
     }
+
 
 
 }
