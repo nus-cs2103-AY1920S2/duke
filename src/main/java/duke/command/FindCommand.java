@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -25,15 +25,16 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Filter the list of tasks that match keyword and print relevant messages.
+     * Filter the list of tasks that match keyword and returns relevant messages.
      *
      * @param tasks The TaskList that contains list of tasks.
      * @param ui The Ui that deals with interactions with user.
      * @param storage The Storage deals with loading and saving tasks in file.
+     * @return The relevant messages in the form of String.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> matchingList = tasks.find(keyword);
-        ui.showMatchingList(matchingList);
+        return ui.showMatchingList(matchingList);
     }
 }

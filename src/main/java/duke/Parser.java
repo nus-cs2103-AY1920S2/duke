@@ -27,27 +27,28 @@ public class Parser {
         } else if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else {
-            String[] temp = fullCommand.split(" ", 2);
-            String cmd = temp[0];
+            //Splitting the full command into command and details.
+            String[] cmdAndDetails = fullCommand.split(" ", 2);
+            String cmd = cmdAndDetails[0];
             Command command = null;
             switch (cmd) {
             case "delete":
-                command = createDeleteCommand(temp);
+                command = createDeleteCommand(cmdAndDetails);
                 break;
             case "done":
-                command = createDoneCommand(temp);
+                command = createDoneCommand(cmdAndDetails);
                 break;
             case "todo":
-                command = createAddCommand(temp);
+                command = createAddCommand(cmdAndDetails);
                 break;
             case "deadline":
-                command = createAddCommand(temp);
+                command = createAddCommand(cmdAndDetails);
                 break;
             case "event":
-                command = createAddCommand(temp);
+                command = createAddCommand(cmdAndDetails);
                 break;
             case "find":
-                command = createFindCommand(temp);
+                command = createFindCommand(cmdAndDetails);
                 break;
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -60,17 +61,17 @@ public class Parser {
     /**
      * Returns the Command object of DeleteCommand type.
      *
-     * @param temp The array containing command and description of the command.
+     * @param cmdAndDetails The array containing command and description of the command.
      * @return The Command object of DeleteCommand type.
      * @throws DukeException If the command has missing information or in wrong format.
      */
-    private static Command createDeleteCommand(String[] temp) throws DukeException {
+    private static Command createDeleteCommand(String[] cmdAndDetails) throws DukeException {
         try {
-            if (temp[1].trim().equals("")) {
+            if (cmdAndDetails[1].trim().equals("")) {
                 throw new DukeException("OOPS!!! The description of delete cannot be empty.");
             }
-            String body = temp[1].trim();
-            return new DeleteCommand(Integer.parseInt(body) - 1);
+            String deleteTaskDescription = cmdAndDetails[1].trim();
+            return new DeleteCommand(Integer.parseInt(deleteTaskDescription) - 1);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description of delete cannot be empty.");
         } catch (NumberFormatException e) {
@@ -81,17 +82,17 @@ public class Parser {
     /**
      * Returns the Command object of DoneCommand type.
      *
-     * @param temp The array containing command and description of the command.
+     * @param cmdAndDetails The array containing command and description of the command.
      * @return The Command object of DoneCommand type.
      * @throws DukeException If the command has missing information or in wrong format.
      */
-    private static Command createDoneCommand(String[] temp) throws DukeException {
+    private static Command createDoneCommand(String[] cmdAndDetails) throws DukeException {
         try {
-            if (temp[1].trim().equals("")) {
+            if (cmdAndDetails[1].trim().equals("")) {
                 throw new DukeException("OOPS!!! The description of done cannot be empty.");
             }
-            String body = temp[1].trim();
-            return new DoneCommand(Integer.parseInt(body) - 1);
+            String doneTaskDescription = cmdAndDetails[1].trim();
+            return new DoneCommand(Integer.parseInt(doneTaskDescription) - 1);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description of done cannot be empty.");
         } catch (NumberFormatException e) {
@@ -102,17 +103,17 @@ public class Parser {
     /**
      * Returns the Command object of AddCommand type.
      *
-     * @param temp The array containing command and description of the command.
+     * @param cmdAndDetails The array containing command and description of the command.
      * @return The Command object of AddCommand type.
      * @throws DukeException If the command has missing information or in wrong format.
      */
-    private static Command createAddCommand(String[] temp) throws DukeException {
+    private static Command createAddCommand(String[] cmdAndDetails) throws DukeException {
         try {
-            String body = temp[1];
-            if (body.trim().equals("")) {
+            String taskDescription = cmdAndDetails[1];
+            if (taskDescription.trim().equals("")) {
                 throw new DukeException("OOPS!!! The description of a task cannot be empty.");
             }
-            return new AddCommand(temp[0], temp[1]);
+            return new AddCommand(cmdAndDetails[0], cmdAndDetails[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description of a task cannot be empty.");
         }
@@ -121,17 +122,17 @@ public class Parser {
     /**
      * Returns the Command object of FindCommand type.
      *
-     * @param temp The array containing command and description of the command
+     * @param cmdAndDetails The array containing command and description of the command
      * @return The Command object of FindCommand type.
      * @throws DukeException If the command has missing information or in wrong format.
      */
-    private static Command createFindCommand(String[] temp) throws DukeException {
+    private static Command createFindCommand(String[] cmdAndDetails) throws DukeException {
         try {
-            String body = temp[1];
-            if (body.trim().equals("")) {
+            String findTaskDescription = cmdAndDetails[1];
+            if (findTaskDescription.trim().equals("")) {
                 throw new DukeException("OOPS!!! The description of find cannot be empty.");
             }
-            return new FindCommand(body);
+            return new FindCommand(findTaskDescription);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description of find cannot be empty.");
         }

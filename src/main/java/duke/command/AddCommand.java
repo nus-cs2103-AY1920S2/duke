@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -30,25 +30,26 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the task to the list of tasks and print the relevant messages.
+     * Adds the task to the list of tasks and returns the relevant messages.
      *
      * @param tasks The TaskList that contains list of tasks.
      * @param ui The Ui that deals with interactions with user.
      * @param storage The Storage deals with loading and saving tasks in file.
+     * @return The relevant messages in the form of String.
      * @throws DukeException If description of the task is missing or in wrong format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         String[] taskDate;
-        String[] messages;
+        String[] details;
+        String output = "OOPS!!! Something went wrong.";
         switch (type) {
         case "todo":
             task = new ToDo(description);
             tasks.addTask(task);
-            messages = new String[] {"Got it. I've added this task:", " " + task.toString(),
-                                        "Now you have " + tasks.getSize() + " tasks in the list."};
-            ui.showMessages(messages);
+            details = new String[] {" " + task.toString(), "" + tasks.getSize()};
+            output = ui.showAddMessages(details);
             break;
         case "deadline":
             taskDate = description.split(" /by ");
@@ -58,9 +59,8 @@ public class AddCommand extends Command {
             }
             task = new Deadline(taskDate[0], taskDate[1]);
             tasks.addTask(task);
-            messages = new String[] {"Got it. I've added this task:", " " + task.toString(),
-                                        "Now you have " + tasks.getSize() + " tasks in the list."};
-            ui.showMessages(messages);
+            details = new String[] {" " + task.toString(), "" + tasks.getSize()};
+            output = ui.showAddMessages(details);
             break;
         case "event":
             taskDate = description.split(" /at ");
@@ -70,12 +70,13 @@ public class AddCommand extends Command {
             }
             task = new Event(taskDate[0], taskDate[1]);
             tasks.addTask(task);
-            messages = new String[] {"Got it. I've added this task:", " " + task.toString(),
-                                        "Now you have " + tasks.getSize() + " tasks in the list."};
-            ui.showMessages(messages);
+            details = new String[] {" " + task.toString(), "" + tasks.getSize()};
+            output = ui.showAddMessages(details);
             break;
         default:
             break;
         }
+
+        return output;
     }
 }
