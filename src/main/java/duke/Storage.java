@@ -25,9 +25,9 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks given a path to the save file.
-     * @param path The path of the save file.
-     * @return The Tasklist object with tasks loaded.
+     * Loads the tasks data from the file.
+     * @return A list of tasks.
+     * @throws DukeException Error when reading the file.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -45,10 +45,12 @@ public class Storage {
                     tasks.add(new Todo(isDone, description));
                     break;
                 case "D":
-                    tasks.add(new Deadline(isDone, description, LocalDateTime.parse(details[3])));
+                    tasks.add(new Deadline(isDone, description,
+                            LocalDateTime.parse(details[3])));
                     break;
                 case "E":
-                    tasks.add(new Event(isDone, description, LocalDateTime.parse(details[3])));
+                    tasks.add(new Event(isDone, description,
+                            LocalDateTime.parse(details[3])));
                     break;
                 default:
                     continue;
@@ -66,6 +68,7 @@ public class Storage {
     /**
      * Saves the tasks to the given file path.
      * @param tasks The tasks to be saved.
+     * @throws DukeException Error when writing to the file.
      */
     public void save(TaskList tasks) throws DukeException {
         // remove existing file
@@ -73,7 +76,8 @@ public class Storage {
             file.delete();
         }
 
-        // create directory parent directory of file if it does not exist
+        // create directory parent directory of file if 
+        // it does not exist
         new File(file.getParent()).mkdirs();
 
         try {

@@ -17,7 +17,11 @@ public abstract class Task implements Saveable {
         this.isDone = true;
     }
 
-    public String getStatusIcon() {
+    /**
+     * Obtains the status icon to indicate done or not.
+     * @return A tick or a cross.
+     */
+    String getStatusIcon() {
         if (!isDone) {
             return "✗";
         }

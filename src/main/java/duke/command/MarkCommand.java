@@ -14,8 +14,13 @@ public class MarkCommand extends Command {
     public MarkCommand(int index) {
         this.index = index;
     }
-
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    
+    /**
+     * Executes the command and mark the index in the list as done.
+     * Then, displays the response to the user.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
         if (index < 1 || index > tasks.getLength()) {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
         }
