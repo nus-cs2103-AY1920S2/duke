@@ -1,0 +1,7 @@
+T -1 -read book
+T -1 -read newspaper 
+D -1 -Eat lunch -Tomorrow afternoon
+D -1 -project meeting -Aug 6th 2-4pm
+T -1 -wash clothes
+T -1 -eat insects
+T -1 -eateateat

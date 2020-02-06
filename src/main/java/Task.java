@@ -7,7 +7,7 @@ public class Task{
         this.isDone = false;
     }
     public String getStatus(){
-        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbol
+        return (isDone ? "Tick" : "Untick"); // return tick or X symbol
     }
     public String getDescription(){
         return this.description;
@@ -21,6 +21,9 @@ public class Task{
     }
 
     public String getWhen() {
+        return "";
+    }
+    public String extraInfo(){
         return "";
     }
 }

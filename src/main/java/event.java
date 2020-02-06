@@ -14,6 +14,9 @@ public class event extends Task {
         return "(at: " + this.when + ")";
 
     }
+    public String extraInfo(){
+        return this.when;
+    }
 
 
 }

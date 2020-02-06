@@ -1,12 +1,30 @@
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.File;
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class Duke{
 
 
     static Scanner sc = new Scanner(System.in);
+
+    // reading contents from taskList.txt and add them to tempTaskList arrayList
+    private static void readFileContent(String filePath, ArrayList<String> tempTaskList ) throws FileNotFoundException{
+        File f = new File(filePath); // create a file for the given file path
+        Scanner s = new Scanner(f);// create a scanner using the File as the source
+        while(s.hasNext()){
+            tempTaskList.add(s.nextLine());
+        }
+    }
+    static void appendToFile(String filePath, String textToAdd) throws IOException{
+        FileWriter fw = new FileWriter(filePath , true);
+        fw.write(textToAdd);
+        fw.close();
+    }
 
     static void printGreetings() {
         System.out.print("____________________________________________________________ \n" + "Hello! I'm Duke \n"
@@ -15,10 +33,112 @@ public class Duke{
         );
     }
 
+
+    static void overWriteFile(String filePath, String textToAdd) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void editFileContent (String filePath, String taskDescription , String taskType, String extraInfo) throws FileNotFoundException{
+
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<String> tempTaskList = new ArrayList<String>();
+
+        String taskLine;
+        while(s.hasNext()){
+            taskLine = s.next();
+            if(taskLine.contains(taskDescription)){
+                taskLine = taskType + " ** 1 ** " + taskDescription;
+
+                if (!extraInfo.equals("")){
+                    taskLine += " ** " + extraInfo;
+                }
+            }
+            tempTaskList.add(taskLine);
+        }
+
+        // overwrite taskList.txt into nothing
+        try{
+            overWriteFile("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt" ,"");
+        }
+        catch (IOException e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
+        for(int i = 0 ; i < tempTaskList.size();i++){
+            try{
+                appendToFile("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt" , tempTaskList.get(i)  );
+            }
+            catch (IOException e){
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+
+    }
+
+
+
+
     public static void main(String[] args) {
+
+        /*File f = new File("data/taskList.txt");
+        System.out.println("Full path: " + f.getAbsolutePath());
+        System.out.println("file exists? : " + f.exists());
+        System.out.println("is Directory?:" + f.isDirectory());
+        */
 
         ArrayList<Task> list = new ArrayList<Task>(); // Creating arraylist for list of things
         ArrayList<String> type = new ArrayList<String>(); // arraylist for list type
+        ArrayList<String> tempTaskList = new ArrayList<String>(); // arraylist for each line of taskList.txt
+
+
+        // reading from taskList.txt anad transfer each line to  arraylist tempTaskList
+        try{
+            readFileContent("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt", tempTaskList);
+            for(int i = 0 ; i <tempTaskList.size();i++){
+
+
+                String tempTask ;
+                tempTask = tempTaskList.get(i);
+                System.out.println(tempTaskList.get(i) );
+                String [] strArray = tempTask.split(" -");
+
+                switch(strArray[0]){
+                    case "T":   type.add("T");
+                                Todo t = new Todo(strArray[2]);
+                                list.add(t);
+                                if(strArray[1].contains("1")){
+                                    list.get(i).markDone();
+                                }
+                                break;
+
+                    case "D":   type.add("D");
+                                Deadline s = new Deadline(strArray[2], strArray[3]);
+                                list.add(s);
+                                if(strArray[1].contains("1")){
+                                    list.get(i).markDone();
+                                }
+                                break;
+                    case "E":   type.add("E");
+                                event e = new event(strArray[2], strArray[3]);
+                                list.add(e);
+                                if(strArray[1].contains("1")){
+                                    list.get(i).markDone();
+                                }
+                                break;
+                }
+
+
+            }
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }
+
+        String filePath = "C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt";
+
 
         printGreetings();
         String input = sc.nextLine();
@@ -44,6 +164,14 @@ public class Duke{
                         System.out.println("[T][X] " + taskDescription);
                         System.out.println("Now you have " + (list.size()) + " tasks in the list.");
 
+                        //writing to the file
+                        try{
+                            appendToFile(filePath, System.lineSeparator() +"T -0 -" + taskDescription);
+                        }
+                        catch(IOException e){
+                            System.out.println("Something went wrong: " + e.getMessage());
+                        }
+
                     }
                     //Error handling when todo doesnt have descriptions
                     else
@@ -67,6 +195,13 @@ public class Duke{
                         System.out.println(t.toString());
                         System.out.println("Now you have " + (list.size()) + " tasks in the list.");
 
+                        //writing to the file
+                        try{
+                            appendToFile(filePath, System.lineSeparator() +"D -0 -" + strArray[0] + " -" + strArray[1] );
+                        }
+                        catch(IOException e){
+                            System.out.println("Something went wrong: " + e.getMessage());
+                        }
                     }
                     //Error handling when deadline doesnt have descriptions
                     else
@@ -87,6 +222,14 @@ public class Duke{
                         System.out.println("Got it. I've added this task:");
                         System.out.println(t.toString());
                         System.out.println("Now you have " + (list.size()) + " tasks in the list.");
+
+                        //writing to the file
+                        try{
+                            appendToFile(filePath, System.lineSeparator() + "D -0 -" + strArray[0] + " -" + strArray[1] );
+                        }
+                        catch(IOException e){
+                            System.out.println("Something went wrong: " + e.getMessage());
+                        }
                     }
                     //Error handling when deadline doesnt have descriptions
                     else
@@ -106,6 +249,28 @@ public class Duke{
                 itemPos-- ;
                 list.get(itemPos).markDone();
                 System.out.println("[" + list.get(itemPos).getStatus() + "]" + list.get(itemPos).getDescription());
+
+                //overwrite the file with new list whenever there is a task is done
+                try{
+                    overWriteFile(filePath, "");
+                    for(int k = 0 ; k < list.size();k++) {
+                        String statusToNumber = "0";
+                        if (list.get(k).getStatus().equals("Tick")) {
+                            statusToNumber = "1";
+                        }
+                        if(type.get(k).equals("T")){
+                            appendToFile(filePath,   type.get(k) + " -" + statusToNumber + " -" +
+                                    list.get(k).getDescription() + System.lineSeparator());
+                        }
+                        if(type.get(k).equals("D") || type.get(k).equals("E")) {
+                            appendToFile(filePath, type.get(k) + " -" + statusToNumber + " -" +
+                                    list.get(k).getDescription() + " -" + list.get(k).extraInfo() + System.lineSeparator());
+                        }
+                    }
+                }
+                catch(IOException e){
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
             }
             if(input.contains("delete")){
                 System.out.println("Noted. I've removed this task: ");
@@ -119,6 +284,28 @@ public class Duke{
                 list.remove(itemPos);
                 type.remove(itemPos);
                 System.out.println("Now you have "+ list.size() + " tasks in the list.");
+
+                //overwrite the file with new list whenever there is a task is done
+                try{
+                    overWriteFile(filePath, "");
+                    for(int k = 0 ; k < list.size();k++) {
+                        String statusToNumber = "0";
+                        if (list.get(k).getStatus().equals("Tick")) {
+                            statusToNumber = "1";
+                        }
+                        if(type.get(k).equals("T")){
+                            appendToFile(filePath,   type.get(k) + " -" + statusToNumber + " -" +
+                                    list.get(k).getDescription() + System.lineSeparator());
+                        }
+                        if(type.get(k).equals("D") || type.get(k).equals("E")) {
+                            appendToFile(filePath, type.get(k) + " -" + statusToNumber + " -" +
+                                    list.get(k).getDescription() + " -" + list.get(k).extraInfo() + System.lineSeparator());
+                        }
+                    }
+                }
+                catch(IOException e){
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
             }
             if(input.equals("list")){
                 count = 1;
