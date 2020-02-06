@@ -2,7 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * Storage class is for database I/O.
+ * Methods to load Tasks from database and save Tasks to database are available.
+ */
 public class Storage {
     /**
      * referenced from

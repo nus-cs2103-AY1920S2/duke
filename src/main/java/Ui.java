@@ -1,3 +1,7 @@
+/**
+ * Class Ui to handle the user interface of our ChatBot.
+ * Currently, Ui is mainly responsible for System.out.println statements to our output.
+ */
 public class Ui {
     private final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
