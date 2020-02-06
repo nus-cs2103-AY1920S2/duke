@@ -8,6 +8,15 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    public DialogBox(Label l) {
+        text = l;
+
+        text.setWrapText(true);
+
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.getChildren().addAll(text);
+    }
+
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
