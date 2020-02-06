@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /** Class representation of Task. */
 public class Task {

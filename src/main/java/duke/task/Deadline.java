@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param task String containing what to do.
      * @param time LocalDateTime object representing time that task must be completed by.
      */
-    Deadline(String task, LocalDateTime time) {
+    public Deadline(String task, LocalDateTime time) {
         super(task);
         this.time = time;
     }

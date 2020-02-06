@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -118,7 +120,8 @@ public class Ui {
      */
     public void showUnknownException(Exception e) {
         printSmallLine();
-        System.out.printf("    I don't know this error homie, take a look:\n    %s\n", e);
+        System.out.printf("    I don't know this error homie, take a look:\n    %s\n", e.toString());
+        e.printStackTrace();
         printSmallLine();
     }
 }

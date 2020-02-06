@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 /** Class representing todo task. */
 public class Todo extends Task {
@@ -7,7 +9,7 @@ public class Todo extends Task {
      *
      * @param task String containing what to do.
      */
-    Todo(String task) {
+    public Todo(String task) {
         super(task);
     }
 

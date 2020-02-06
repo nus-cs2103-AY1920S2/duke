@@ -1,10 +1,12 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /** Class representing task list. */
 public class TaskList {
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Creates a TaskList object.

@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +15,7 @@ public class Event extends Task {
      * @param task String representing the task that needs to be done
      * @param time LocalDateTime representing the time event is at.
      */
-    Event(String task, LocalDateTime time) {
+    public Event(String task, LocalDateTime time) {
         super(task);
         this.time = time;
     }
