@@ -84,7 +84,6 @@ public class Storage {
                 }
             }
         }
-
         return storingList; //return the filled list
     }
 
@@ -97,7 +96,6 @@ public class Storage {
      * @throws IOException Throws exception.
      */
     public void convertToHardDiskFormatAndStore(Task task, String type, String time) throws IOException {
-
         String doneOrNotDone = "";
         if (task.isDone) {
             doneOrNotDone += "O";
@@ -124,8 +122,6 @@ public class Storage {
             fr.write("\n" + newDescription);
         }
 
-        //System.out.println("size of list is: " + storingList.size());
-        //Scanner myReader = new Scanner(file);
         fr.close();
     }
 

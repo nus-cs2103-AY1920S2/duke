@@ -1,5 +1,6 @@
 package Grapie;
 
+import Grapie.Exceptions.ErrorMsg;
 import Grapie.Exceptions.GrapieExceptions;
 
 import java.io.IOException;
@@ -12,7 +13,8 @@ public class TaskList {
     /**
      * Constructor for Grapie.TaskList.
      *
-     * @param load    the arrayList obtained from Grapie.Storage class's load method. Contains task from hard disk.
+     * @param load    the arrayList obtained from Grapie.Storage class's load method. Contains task from
+     *                hard disk.
      * @param storage Grapie.Storage class previously created from Duke.
      */
     public TaskList(List<Task> load, Storage storage) {
@@ -48,6 +50,8 @@ public class TaskList {
                 String detailsStr = inputStr.substring(5, inputStr.length());
                 String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s", "");
 
+                assert(checkIfTodoIsEmpty.length() >= 0);
+
                 if (checkIfTodoIsEmpty.length() == 0) {
                     //That means it is empty behing todo
                     throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
@@ -67,7 +71,10 @@ public class TaskList {
 
         } else if (inputStr.contains("event")) {
             if (inputStr.substring(0, 5).equals("event") && inputStr.length() > 6) {
+                inputStr = inputStr.trim();
                 String[] eventAndTime = inputStr.substring(6, inputStr.length()).split(" /at ");
+
+                assert(eventAndTime.length >= 0);
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
@@ -90,7 +97,10 @@ public class TaskList {
         } else if (inputStr.contains("deadline")) {
             if (inputStr.substring(0, 8).equals("deadline") && inputStr.length() > 9) {
 
+                inputStr.trim();
                 String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
+
+                assert(eventAndTime.length >= 0);
 
                 if (eventAndTime.length > 1) {
                     Deadline deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
@@ -123,40 +133,27 @@ public class TaskList {
      * @throws IOException      Throws away the exception.
      */
     public String completeTask(String doneTaskStr) throws GrapieExceptions, IOException {
-        if (doneTaskStr.length() <= 5) {
-            //no number behind
-            throw new GrapieExceptions(ErrorMsg.invalidNumberError);
-        } else {
-            //remember to add check for already completed task
-            String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
-            strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
+        //remember to add check for already completed task
+        String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
+        strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
 
-            boolean isANumber = Parser.isNumber(strNumberDone);
-
-            if (isANumber) {
-                int numDone = Integer.parseInt(strNumberDone); //convert to number
-                if (storingList.size() >= numDone && numDone != 0) {
-                    if (storingList.get(numDone - 1).isDone) {
-                        //if already true
-                        throw new GrapieExceptions(ErrorMsg.taskNumIsAlreadyDone(numDone));
-                    } else {
-
-                        storingList.get(numDone - 1).isDone = true;
-                        //storingList.set(taskNum - 1, updatedTask);
-
-                        String printStr =
-                                "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
-                        storage.replaceLineFromHardDisk(numDone);
-
-                        return printStr;
-                    }
-                } else {
-                    throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numDone));
-                }
+        int numDone = Integer.parseInt(strNumberDone); //convert to number
+        if (storingList.size() >= numDone && numDone != 0) {
+            if (storingList.get(numDone - 1).isDone) {
+                throw new GrapieExceptions(ErrorMsg.taskNumIsAlreadyDone(numDone));
             } else {
-                throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                storingList.get(numDone - 1).isDone = true;
+
+                String printStr =
+                        "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
+                storage.replaceLineFromHardDisk(numDone);
+                return printStr;
             }
+        } else {
+            throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numDone));
         }
+
+
     }
 
     /**
@@ -168,38 +165,28 @@ public class TaskList {
      * @throws IOException      Throws away the exception.
      */
     public String deleteTask(String inputStr) throws GrapieExceptions, IOException {
-        if (inputStr.length() <= 7) {
-            throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+        String strNumberDeleted = inputStr.substring(7, inputStr.length());
+        strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
+
+        int numToDelete = Integer.parseInt(strNumberDeleted);
+
+        if (storingList.size() >= numToDelete) {
+            int newSize = storingList.size() - 1;
+            assert (newSize >= 0) ;
+
+            String toPrint = " Alrighty. I've removed this task: \n"
+                    + storingList.get(numToDelete - 1)
+                    + "\n Now you have " + newSize + " tasks in the list.";
+
+            storingList.remove(numToDelete - 1);
+            storage.deleteLineFromHardDisk(numToDelete);
+            return toPrint;
         } else {
-            if (!inputStr.substring(6, 7).equals(" ")) {
-                throw new GrapieExceptions(ErrorMsg.noSpaceError);
-            } else {
-                String strNumberDeleted = inputStr.substring(7, inputStr.length());
-                strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
+            throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
 
-                boolean isANumber = Parser.isNumber(strNumberDeleted);
-
-                if (isANumber) {
-                    int numToDelete = Integer.parseInt(strNumberDeleted);
-
-                    if (storingList.size() >= numToDelete) {
-
-                        int newSize = storingList.size() - 1;
-                        String toPrint = " Alrighty. I've removed this task: \n"
-                                + storingList.get(numToDelete - 1)
-                                + "\n Now you have " + newSize + " tasks in the list.";
-
-                        storingList.remove(numToDelete - 1);
-                        storage.deleteLineFromHardDisk(numToDelete);
-                        return toPrint;
-                    } else {
-                        throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
-                    }
-                } else {
-                    throw new GrapieExceptions(ErrorMsg.invalidNumberError);
-                }
-            }
         }
+
+
     }
 
     /**
@@ -209,24 +196,21 @@ public class TaskList {
      * @throws GrapieExceptions Throws grapieExceptions.
      */
     public String findFromList(String command) throws GrapieExceptions {
-        if (command.length() <= 5) {
-            throw new GrapieExceptions(ErrorMsg.emptyKeywordError);
-        } else {
-            //remember to add check for already completed task
-            String keyword = command.substring(5, command.length());
+        //remember to add check for already completed task
+        String keyword = command.substring(5, command.length());
 
-            int counter = 1;
-            String finalStr = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < storingList.size(); i++) {
-                Task task = storingList.get(i);
+        int counter = 1;
+        String finalStr = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < storingList.size(); i++) {
+            Task task = storingList.get(i);
 
-                if (task.description.contains(keyword)) {
-                    finalStr += counter + "." + task + "\n";
-                    counter++;
-                }
+            if (task.description.contains(keyword)) {
+                finalStr += counter + "." + task + "\n";
+                counter++;
             }
-            return finalStr;
         }
+        return finalStr;
+
     }
 
     /**

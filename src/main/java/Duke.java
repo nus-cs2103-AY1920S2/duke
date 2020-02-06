@@ -56,7 +56,6 @@ public class Duke {
         } else {
             return sayonara();
         }
-
     }
 
 
@@ -77,8 +76,6 @@ public class Duke {
 
                 + "What do ya need from me?\n";
 
-        //Grapie.TaskList.formattingDivider(intro);
-
         return intro;
     }
 
@@ -86,7 +83,6 @@ public class Duke {
      * Returns goodbye to the user.
      */
     public String sayonara() {
-        //Grapie.TaskList.formattingDivider("Okie!! Goodbye!");
         return "Okie!! Goodbye!";
     }
 
@@ -108,7 +104,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws IOException, GrapieExceptions {
+    String getResponse(String input) throws IOException {
         //input is the user input
         String result = "";
         if (!input.equals("bye")) { //check for ending input
@@ -118,6 +114,6 @@ public class Duke {
             result = sayonara();
         }
 
-        return "Duke: " + result;
+        return result;
     }
 }

@@ -1,6 +1,7 @@
 package Grapie;
 
 
+import Grapie.Exceptions.ErrorMsg;
 import Grapie.Exceptions.GrapieExceptions;
 
 public class Parser {
@@ -26,7 +27,8 @@ public class Parser {
     /**
      * Returns the corresponding command for the user's input.
      * Aims to sort user command into List, Delete, Done and Add.
-     * Add consist of everything else, including illegal commands, which will be handled in the Grapie.TaskList class.
+     * Add consist of everything else, including illegal commands, which will be handled in the Grapie
+     * .TaskList class.
      *
      * @param command The user's input.
      * @return Returns a string stating if its a list, done, delete, or add (todo, event, deadline) command.
@@ -39,15 +41,45 @@ public class Parser {
         } else {
             //ADD, DONE, DELETE,
             if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
-                if (isNumber("4")) {
+                if (command.length() <= 5) {
+                    //no number behind
                     throw new GrapieExceptions(ErrorMsg.invalidNumberError);
                 } else {
-                    return Ui.DONE;
+                    String strNumberDone = command.substring(5, command.length());
+                    strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
+
+                    boolean isANumber = isNumber(strNumberDone);
+
+                    if (isANumber) {
+                        return Ui.DONE;
+                    } else {
+                        throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                    }
                 }
             } else if (command.length() >= 4 && command.substring(0, 4).equals("find")) {
-                return  Ui.FIND;
+                if (command.length() <= 5) {
+                    throw new GrapieExceptions(ErrorMsg.emptyKeywordError);
+                } else {
+                    return Ui.FIND;
+                }
             } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")) {
-                return Ui.DELETE;
+                if (command.length() <= 7) {
+                    throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                } else {
+                    if (!command.substring(6, 7).equals(" ")) {
+                        throw new GrapieExceptions(ErrorMsg.noSpaceError);
+                    } else {
+                        String strNumberDeleted = command.substring(7, command.length());
+                        strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
+
+                        boolean isANumber = isNumber(strNumberDeleted);
+                        if (isANumber) {
+                            return Ui.DELETE;
+                        } else {
+                            throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                        }
+                    }
+                }
             } else {
                 return Ui.ADD;
             }

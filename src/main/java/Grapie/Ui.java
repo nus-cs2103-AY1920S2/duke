@@ -14,7 +14,6 @@ public class Ui {
     public static final String DONE = "done";
     public static final String FIND = "find";
 
-
     /**
      * Constructor for Grapie.Ui.
      */
@@ -28,52 +27,34 @@ public class Ui {
      * Use Grapie.Parser to read user's command to call correct method, and prints out any error encountered.
      *
      * @param command User's input.
-     * @param tasks Grapie.TaskList class created in Duke.
+     * @param tasks   Grapie.TaskList class created in Duke.
      * @throws IOException Throws away the exception.
      */
-    public String readCommand(String command, TaskList tasks) throws IOException, GrapieExceptions {
-        String commandArr = parser.makeSenseOfUserCommand(command);
+    public String readCommand(String command, TaskList tasks) throws IOException {
+        try {
+            String commandArr = parser.makeSenseOfUserCommand(command);
 
-        if (commandArr.equals(LIST)) {
-            String list = tasks.listTheList();
-            return list;
-        } else if (commandArr.equals(DONE)) {
-            try {
+            if (commandArr.equals(LIST)) {
+                String list = tasks.listTheList();
+                return list;
+            } else if (commandArr.equals(DONE)) {
                 String result = tasks.completeTask(command);
                 return result;
-            } catch (GrapieExceptions grapieExceptions) {
-                String ha = "" + grapieExceptions;
-                return ha;
-            }
-        } else if (commandArr.equals(ADD)) {
-            try {
+            } else if (commandArr.equals(ADD)) {
                 String result = tasks.addToList(command);
                 return result;
-            } catch (GrapieExceptions grapieExceptions) {
-                String ha = "" + grapieExceptions;
-                return ha;
-            }
-        } else if (commandArr.equals(DELETE)) {
-            try {
+            } else if (commandArr.equals(DELETE)) {
                 String result = tasks.deleteTask(command);
-                return  result;
-            } catch (GrapieExceptions grapieExceptions) {
-                String ha = "" + grapieExceptions;
-                return ha;
-            }
-        } else if (commandArr.equals(FIND)) {
-            //find
-            try {
+                return result;
+            } else if (commandArr.equals(FIND)) {
                 String result = tasks.findFromList(command);
                 return result;
-            } catch (GrapieExceptions grapieExceptions) {
-                String ha = "" + grapieExceptions;
-                return ha;
             }
+        } catch (GrapieExceptions grapieExceptions) {
+            return grapieExceptions.toString();
         }
 
         return "OOPS!!! I do not understand you :(";
     }
-
 
 }
