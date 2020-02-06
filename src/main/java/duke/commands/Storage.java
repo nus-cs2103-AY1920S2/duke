@@ -39,13 +39,16 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    public static final int DESC = 2;
+    public static final int TIME = 3;
+
     /**
      * Retrieves all the tasks entered previously by the user from duke.txt and
      * adds them to the TaskList.
+     *
+     * @throws FileNotFoundException if the file cannot be found
      */
     public void retrieveInfo() throws FileNotFoundException {
-        final int DESC = 2;
-        final int TIME = 3;
 
         Scanner scanner = new Scanner(new File(filePath));
         while (scanner.hasNextLine()) {
@@ -73,6 +76,8 @@ public class Storage {
 
     /**
      * Stores all the tasks the user has entered into the Tasklist in duke.txt.
+     *
+     * @throws IOException if the file cannot be written
      */
     public  void  updateInfo() throws IOException {
         String  fileString = "";

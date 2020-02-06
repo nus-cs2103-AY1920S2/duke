@@ -51,8 +51,10 @@ public class Duke extends Application {
      * Runs the programme.
      *
      * @param args arguments
+     * @throws DukeException if the command cannot be parsed
+     * @throws IOException if the file cannot be updated
      */
-    public static void main(String[] args) throws IOException, DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         ui.start();
         taskList = new TaskList();
         storage = new Storage("duke.txt", taskList);

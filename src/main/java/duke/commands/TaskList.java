@@ -64,9 +64,9 @@ public class TaskList {
      */
     public String delete(int index) {
         assert newList.size() > 0 : "No tasks in list";
-        Task task = newList.get(index);
         assert newList.get(index) != null : "No task to delete";
         assert newList.get(index).getDescription() != null : "No description for this task";
+        Task task = newList.get(index);
         newList.remove(index);
         return ("Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + newList.size() + " tasks in the list.\n");
@@ -139,7 +139,7 @@ public class TaskList {
             if (count == 0) {
                 return ("There are no matching tasks in your list\n");
             } else {
-               return "Here are the matching tasks in your list:\n" + output;
+                return "Here are the matching tasks in your list:\n" + output;
             }
         }
     }

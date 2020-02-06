@@ -47,6 +47,7 @@ public class Parser {
      *
      * @param command user command
      * @return Duke's response to user command
+     * @throws DukeException if the command cannot be parsed properly
      */
     public String parse(String command) throws DukeException {
         if (command.equals("list")) {
