@@ -27,22 +27,20 @@ public class ShowCommand extends Command {
      * @param ui       Overall Ui handling the ui of Duke
      * @param storage  Storage handling the storage of the Tasks in TaskList
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         switch (instruction) {
         case "date":
-            taskList.showTaskOnDate(replyArr);
-            break;
+            return taskList.showTaskOnDate(replyArr);
         case "list":
-            taskList.listTasks();
-            break;
+            return taskList.listTasks();
         case "done":
-            taskList.markTaskAsDone(replyArr);
-            break;
+            return taskList.markTaskAsDone(replyArr);
         case "find":
-            taskList.findTaskByKeyword(replyArr);
-            break;
+            return taskList.findTaskByKeyword(replyArr);
         default:
-            System.out.println("    Sorry! I don't understand what is " + instruction);
+            String msg = "    Sorry! I don't understand what is " + instruction;
+            System.out.println(msg);
+            return msg;
         }
     }
 }

@@ -47,12 +47,13 @@ public class TaskList {
     /**
      * Prints out all the Tasks in the current TaskList.
      */
-    public void listTasks() {
+    public String listTasks() {
         String completeList = "    Task(s) in your list:";
         for (Task task : taskList) {
             completeList += "\n    " + ((taskList.indexOf(task) + 1) + "." + task.toString());
         }
         System.out.println(completeList);
+        return completeList;
     }
 
     /**
@@ -61,7 +62,7 @@ public class TaskList {
      * @param replyArr Array of the command + details of the command after splitting it by " "
      * @throws DukeException If the input date is invalid (i.e. incorrect format)
      */
-    public void showTaskOnDate(String[] replyArr) throws DukeException {
+    public String showTaskOnDate(String[] replyArr) throws DukeException {
         if (DATE_VALIDATOR.isValidDate(replyArr[1])) {
             LocalDate date = LocalDate.parse(replyArr[1], DATE_FORMATTER);
             String taskOnDate = "";
@@ -74,10 +75,11 @@ public class TaskList {
             }
             String tasksToday = "    The task(s) you have on " + replyArr[1] + ":" + taskOnDate;
             System.out.println(tasksToday);
+            return tasksToday;
         } else {
-            Ui.throwDateInputError();
+//            Ui.throwDateInputError();
+            return Ui.dateInputError();
         }
-
     }
 
     /**
@@ -87,15 +89,17 @@ public class TaskList {
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. done 5 when there is only 4
      *                       tasks)
      */
-    public void markTaskAsDone(String[] replyArr) throws DukeException {
+    public String markTaskAsDone(String[] replyArr) throws DukeException {
         int taskNum = Integer.parseInt(replyArr[1]) - 1;
         if (taskNum > taskList.size() - 1) {
-            Ui.throwDoneInputError();
+//            Ui.throwDoneInputError();
+            return Ui.doneInputError();
         } else {
             Task currTask = taskList.get(taskNum);
             currTask.isDone = true;
             String doneMsg = "    Nice! Task marked as done: \n    " + currTask.toString();
             System.out.println(doneMsg);
+            return doneMsg;
         }
     }
 
@@ -106,7 +110,7 @@ public class TaskList {
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. delete 5 when there is only 4
      *                       tasks)
      */
-    public void deleteTask(String[] replyArr) throws DukeException {
+    public String deleteTask(String[] replyArr) throws DukeException {
         try {
             int taskNum = Integer.parseInt(replyArr[1]) - 1;
             Task currTask = taskList.get(taskNum);
@@ -114,12 +118,18 @@ public class TaskList {
                     + (taskList.size() - 1) + " task(s) in your list!";
             System.out.println(deleteMsg);
             taskList.remove(taskNum);
+            return deleteMsg;
         } catch (IndexOutOfBoundsException ex) {
-            Ui.throwDeleteInputError();
+//            Ui.throwDeleteInputError();
+            return Ui.deleteInputError();
         }
     }
 
-    public void findTaskByKeyword(String[] replyArr) {
+    /**
+     * Finds and prints out tasks with a certain keyword.
+     * @param replyArr Array of the find command & the specified keyword
+     */
+    public String findTaskByKeyword(String[] replyArr) {
         String keyword = replyArr[1];
         String taskWithKeyword = "";
         for(Task task: taskList) {
@@ -127,7 +137,9 @@ public class TaskList {
                 taskWithKeyword += "    " + task.toString() + "\n";
             }
         }
-        System.out.println("    Task(s) with keyword " + replyArr[1] + ":\n" + taskWithKeyword);
+        String msg = "    Task(s) with keyword " + replyArr[1] + ":\n" + taskWithKeyword;
+        System.out.println(msg);
+        return msg;
     }
 
 }

@@ -37,15 +37,18 @@ public class Ui {
      *
      * @param errMessage Error message
      */
-    public void showError(String errMessage) {
+    public String showError(String errMessage) {
         System.out.println(errMessage);
+        return errMessage;
     }
 
     /**
      * Prints out the loading error.
      */
-    public void showLoadingError() {
-        System.out.println("    No task list found! Creating new task list...");
+    public String showLoadingError() {
+        String print = "    No task list found! Creating new task list...";
+        System.out.println(print);
+        return print;
     }
 
     /**
@@ -54,9 +57,11 @@ public class Ui {
      * @param task     The added task
      * @param taskList TaskList to add the task into
      */
-    public static void showTaskAdded(Task task, TaskList taskList) {
-        System.out.println("    Alright! Task added:\n      " + task.toString() + "\n    Now you have "
-                + taskList.getSize() + " task(s) in your list!");
+    public static String showTaskAdded(Task task, TaskList taskList) {
+        String print = "    Alright! Task added:\n      " + task.toString() + "\n    Now you have "
+                + taskList.getSize() + " task(s) in your list!";
+        System.out.println(print);
+        return print;
     }
 
     /**
@@ -65,9 +70,10 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the deadline command
      */
     public static void throwDeadlineInputError() throws DukeException {
-        throw new DukeException("    Invalid date and/or time format! \n"
+        String msg = "    Invalid date and/or time format! \n"
                 + "    Specify deadline with: /at <YYYY/MM/DD> <HH:MM>\n"
-                + "    i.e. deadline Project Meeting /by 2020/01/28 18:00");
+                + "    i.e. deadline Project Meeting /by 2020/01/28 18:00";
+        throw new DukeException(msg);
     }
 
     /**
@@ -76,9 +82,10 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the event command
      */
     public static void throwEventInputError() throws DukeException {
-        throw new DukeException("    Invalid date and/or time format! \n"
+        String msg = "    Invalid date and/or time format! \n"
                 + "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n"
-                + "    i.e. event Project Meeting /at 2020/01/28 18:00");
+                + "    i.e. event Project Meeting /at 2020/01/28 18:00";
+        throw new DukeException(msg);
     }
 
     /**
@@ -131,9 +138,80 @@ public class Ui {
      * @param message Message to be printed between 2 border lines
      */
     public static void printWithBorder(String message) {
-        System.out.println("    ###################################################\n"
-                + "    " + message + "\n"
-                + "    ###################################################\n");
+        showLine();
+        System.out.println(message + "\n");
+        showLine();
     }
+
+    //For GUI
+    /**
+     * Returns an error message when there is an invalid input for the deadline command.
+     */
+    public static String deadlineInputError() {
+        String msg = "    Invalid date and/or time format! \n"
+                + "    Specify deadline with: /at <YYYY/MM/DD> <HH:MM>\n"
+                + "    i.e. deadline Project Meeting /by 2020/01/28 18:00";
+        System.out.println(msg);
+        return(msg);
+    }
+
+    /**
+     * Returns an error messagen when there is an invalid input for the event command.
+     *
+     */
+    public static String eventInputError() {
+        String msg = "    Invalid date and/or time format! \n"
+                + "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n"
+                + "    i.e. event Project Meeting /at 2020/01/28 18:00";
+        System.out.println(msg);
+        return(msg);
+    }
+
+    /**
+     * Returns an error message when there is an invalid input for the todo command.
+     *
+     */
+    public static String todoInputError() {
+        String msg = "    Specify your todo \n" + "    i.e. todo Complete tutorials ";
+        System.out.println(msg);
+        return msg;
+    }
+
+    /**
+     * Returns an error message when there is an invalid input for the date command.
+     *
+     */
+    public static String dateInputError() {
+        String msg ="    Please enter a valid date in <YYYY/M/D> format\n"
+                + "    i.e. 2020/10/28";
+        System.out.println(msg);
+        return msg;
+    }
+
+    /**
+     * Returns an error message when there is an invalid input for the done command.
+     *
+     */
+    public static String doneInputError() {
+        String msg = "    Task doesn't exist!";
+        System.out.println(msg);
+        return msg;
+    }
+
+    /**
+     * Returns an error message when there is an invalid input for the delete command.
+     *
+     */
+    public static String deleteInputError() {
+        String msg = "    Task doesn't exist! Add a new task!";
+        System.out.println(msg);
+        return msg;
+    }
+
+
+
+
+
+
 }
 
