@@ -1,23 +1,26 @@
 package duke;
 
-abstract class Task {
+public abstract class Task {
     protected final String description;
-    private final boolean isDone;
+    protected final boolean isCompleted;
 
-    Task(String description) {
+    protected Task(String description, boolean isCompleted) {
         this.description = description;
-        this.isDone = false;
+        this.isCompleted = isCompleted;
     }
 
-    protected Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     public abstract Task complete();
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "\u2713" : "\u2718", description);
+        return String.format("[%s] %s", isCompleted ? "\u2713" : "\u2718", description);
     }
 }

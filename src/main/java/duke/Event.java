@@ -1,15 +1,15 @@
 package duke;
 
-class Event extends Task {
-    private final String time;
+public class Event extends Task {
+    protected final String time;
 
-    Event(String description, String time) {
-        super(description);
+    public Event(String description, String time) {
+        super(description, false);
         this.time = time;
     }
 
-    private Event(String description, String time, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, String time, boolean isCompleted) {
+        super(description, isCompleted);
         this.time = time;
     }
 

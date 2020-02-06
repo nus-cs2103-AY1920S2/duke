@@ -1,12 +1,12 @@
 package duke;
 
-class Todo extends Task {
-    Todo(String description) {
-        super(description);
+public class Todo extends Task {
+    public Todo(String description) {
+        super(description, false);
     }
 
-    private Todo(String description, boolean isDone) {
-        super(description, isDone);
+    public Todo(String description, boolean isCompleted) {
+        super(description, isCompleted);
     }
 
     @Override
