@@ -21,6 +21,9 @@ public class Parser {
         } else if (input.split(" ")[0].equals("delete")) {
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             taskList.delete(taskNum);
+        } else if (input.split(" ")[0].equals("find")) {
+            String query = input.split(" ")[1];
+            taskList.find(query);
         } else {
             throw new DukeException();
         }
