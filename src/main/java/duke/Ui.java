@@ -9,6 +9,26 @@ import duke.tasks.Task;
 public class Ui {
 
     /**
+     * Welcomes the user with a message.
+     */
+    public static void welcome() {
+        printLine();
+        print("Hello, duke.Duke here! :D \n"
+                + "I'm feeling good and ready to go! "
+                + "What can I do for you?");
+        printLine();
+    }
+
+    /**
+     * Says goodbye to the user.
+     */
+    public static void goodbye() {
+        printLine();
+        print("====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D");
+        printLine();
+    }
+
+    /**
      * Prints removal of a given task, of its index then and the current number of Tasks remaining.
      *
      * @param index index of current Task to remove.
@@ -59,26 +79,6 @@ public class Ui {
     public static void printTaskFromStored(int i, TaskList allTasks) {
         String tickOrCross = allTasks.getTask(i).obtainStatusIcon();
         print(String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.getTask(i));
-    }
-
-    /**
-     * Welcomes the user with a message.
-     */
-    public static void welcome() {
-        printLine();
-        print("Hello, duke.Duke here! :D \n"
-                + "I'm feeling good and ready to go! "
-                + "What can I do for you?");
-        printLine();
-    }
-
-    /**
-     * Says goodbye to the user.
-     */
-    public static void goodbye() {
-        printLine();
-        print("====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D");
-        printLine();
     }
 
     /**

@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
 
     // Non-GUI members.
 
+    // We can use this Duke to perform as a chat engine.
     private Duke duke;
 
     public void setDuke(Duke d) {
@@ -58,17 +59,19 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Generates a response for Duke to the user input.
-     */
-    private String getDukeResponse(String input) {
-        return "Duke: " + input;
-    }
-
-    /**
      * Provides user input with user as the author.
      */
     private String getUserResponse(String input) {
         return "You: " + input;
     }
+
+    /**
+     * Generates a response for Duke to the user input.
+     */
+    private String getDukeResponse(String input) {
+        return "Duke: " + EDIT THIS;
+}
+    ///////////////////////// EDIT THIS ////////////////////////////////////
+
 
 }

@@ -316,6 +316,11 @@ public class TaskList {
         return allTasks.get(i);
     }
 
+    /**
+     * Checks whether current TaskList is empty.
+     *
+     * @return whether the current TaskList object is empty.
+     */
     public boolean isEmpty() {
         return allTasks.isEmpty();
     }
