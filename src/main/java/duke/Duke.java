@@ -4,6 +4,7 @@ import duke.task.TaskList;
 import duke.exception.DukeException;
 import duke.command.Command;
 
+
 /**
  * Represents the main logic flow of the Duke Application.
  * A <code>Storage</code> object stores all list data into disk.
@@ -25,6 +26,9 @@ public class Duke {
             this.ui.showLoadingError();
             this.tasks = new TaskList();
         }
+    }
+
+    public Duke() {
     }
 
     /**
@@ -49,5 +53,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data\\duke.txt").run();
+    }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
