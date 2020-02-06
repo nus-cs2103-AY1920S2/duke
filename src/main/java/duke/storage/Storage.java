@@ -6,10 +6,10 @@ package duke.storage;
 
 import duke.task.Deadline;
 import duke.task.EventObj;
-import duke.task.TaskList;
-import duke.task.Todo;
 import duke.task.SearchTask;
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +21,8 @@ import java.util.Arrays;
 
 
 /**
- * The Class Storage.
+ * The Class Storage handles all the file related operations performed to
+ * act on a task.
  */
 public class Storage implements CheckTask {
     public String filePath;
@@ -36,7 +37,8 @@ public class Storage implements CheckTask {
     }
 
     /**
-     * Write to file.
+     * Populate the file with the updated lists of tasks overwriting existing
+     * content each time.
      *
      * @param myContent stores the string format of the task
      */
@@ -67,7 +69,9 @@ public class Storage implements CheckTask {
     }
 
     /**
-     * Load tasks.
+     * Load tasks from the file, if the file does not exist, create it and use
+     * it to store created tasks
+     * Parses the tasks based on tasks type enum specified in Operation.java
      *
      * @return the task list
      */

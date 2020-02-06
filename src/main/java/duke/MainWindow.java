@@ -29,9 +29,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets up the javafx ui widgets.
-     *
      */
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

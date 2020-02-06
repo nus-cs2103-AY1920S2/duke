@@ -7,7 +7,6 @@ package duke.task;
 import duke.DukeException;
 import duke.command.Operation;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,14 +18,12 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
     private List<Task> tasks;
-    private Ui ui;
 
     /**
      * Instantiates a new task list.
      */
     public TaskList() {
         tasks = new ArrayList<>();
-        ui = new Ui();
     }
 
     /**
@@ -39,13 +36,13 @@ public class TaskList {
     }
 
     /**
-     * Gets the.
+     * Gets the task with its index.
      *
-     * @param v the v
+     * @param id the task id
      * @return the task
      */
-    public Task get(int v) {
-        return tasks.get(v);
+    public Task get(int id) {
+        return tasks.get(id);
     }
 
     /**
@@ -60,7 +57,7 @@ public class TaskList {
     /**
      * Adds the task.
      *
-     * @param t the t
+     * @param t the task
      */
     public void addTask(Task t) {
         tasks.add(t);
@@ -70,7 +67,7 @@ public class TaskList {
      * Adds the task.
      *
      * @param pos the pos
-     * @param t   the t
+     * @param t   the task
      */
     public void addTask(int pos, Task t) {
         tasks.add(pos, t);
@@ -92,7 +89,10 @@ public class TaskList {
             throw new DukeException("☹ OOPS!!! The description of a "
                     + command + " cannot be empty.");
         }
-        if (command.equalsIgnoreCase(Operation.DEADLINE.toString())) {
+        Task t = null;
+        Operation operation = Operation.valueOf(command.toUpperCase());
+        switch (operation) {
+        case DEADLINE:
             int position = 0;
             boolean specifyDate = false;
             for (String w : words) {
@@ -100,31 +100,31 @@ public class TaskList {
                     String description = String.join(" ", List.of(words).subList(0, position));
                     String date = List.of(words).stream().skip(position + 1)
                             .collect(Collectors.joining(" "));
-                    Task t = new Deadline(description, date);
+                    t = new Deadline(description, date);
                     tasks.add(getSize(), t);
                     specifyDate = true;
                     break;
                 } else {
                     position++;
                 }
-
             }
 
             if (!specifyDate) {
                 String description = String.join(" ", words);
-                Task t = new Deadline(description, "");
+                t = new Deadline(description, "");
                 tasks.add(getSize(), t);
             }
+            break;
 
-        } else if (command.equalsIgnoreCase(Operation.EVENT.toString())) {
-            int position = 0;
-            boolean specifyDate = false;
+        case EVENT:
+            position = 0;
+            specifyDate = false;
             for (String w : words) {
                 if (w.equals("/at")) {
                     String description = String.join(" ", List.of(words).subList(0, position));
                     String datetime = List.of(words).stream().skip(position + 1)
                             .collect(Collectors.joining(" "));
-                    Task t = new EventObj(description, datetime);
+                    t = new EventObj(description, datetime);
                     tasks.add(getSize(), t);
                     specifyDate = true;
                     break;
@@ -136,22 +136,24 @@ public class TaskList {
 
             if (!specifyDate) {
                 String description = String.join(" ", words);
-                Task t = new EventObj(description, "");
+                t = new EventObj(description, "");
                 tasks.add(getSize(), t);
             }
+            break;
 
-        } else if (command.equalsIgnoreCase(Operation.TODO.toString())) {
-            Task t = new Todo(String.join(" ", words));
+        case TODO:
+            t = new Todo(String.join(" ", words));
             tasks.add(getSize(), t);
-
-        } else {
             assert (Arrays.stream(Operation.values()).noneMatch(o -> o.name().equals(command)));
+            break;
+
+        default:
+            break;
         }
 
         StringBuilder sb = new StringBuilder();
-        tasks.forEach(t -> sb.append(t.print() + "\n"));
+        tasks.forEach(task -> sb.append(task.print()).append("\n"));
 
-        assert (storage != null);
         assert (sb.toString().split("\\|").length > 1);
         storage.writeToFile(sb.toString());
 
@@ -171,7 +173,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
 
         if (tasks.size() > 0) {
-            tasks.forEach(t -> sb.append(t.print() + "\n"));
+            tasks.forEach(t -> sb.append(t.print()).append("\n"));
 
         }
         storage.writeToFile(sb.toString());

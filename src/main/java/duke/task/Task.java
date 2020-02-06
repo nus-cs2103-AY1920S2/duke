@@ -14,13 +14,9 @@ import java.time.format.DateTimeFormatter;
 public abstract class Task implements TaskPrintable, Parseable {
 
     protected String description;
-
     protected boolean isDone;
-
     protected String type;
-
     protected String userKeyedDateString;
-
     protected java.time.LocalDate datetime;
 
     /**
@@ -48,8 +44,8 @@ public abstract class Task implements TaskPrintable, Parseable {
     /**
      * Instantiates a new task.
      *
-     * @param description the description
-     * @param datetime    the datetime
+     * @param description description
+     * @param datetime    datetime
      */
     public Task(String description, String datetime) {
         this.userKeyedDateString = datetime;
@@ -60,8 +56,8 @@ public abstract class Task implements TaskPrintable, Parseable {
     /**
      * Instantiates a new task.
      *
-     * @param isDone      the is done
-     * @param description the description
+     * @param isDone      1 if the task is done
+     * @param description description
      */
     private Task(boolean isDone, String description) {
         this.description = description;
@@ -119,7 +115,7 @@ public abstract class Task implements TaskPrintable, Parseable {
     }
 
     /**
-     * Checks if is done.
+     * Checks if the task has been marked done, false when newly created.
      *
      * @return true, if is done
      */
@@ -128,7 +124,7 @@ public abstract class Task implements TaskPrintable, Parseable {
     }
 
     /**
-     * Gets the description.
+     * Gets the description describing the task entered by the user.
      *
      * @return the description
      */
@@ -180,7 +176,7 @@ public abstract class Task implements TaskPrintable, Parseable {
     }
 
     /**
-     * Prints the.
+     * Prints the task string.
      *
      * @return the string
      */

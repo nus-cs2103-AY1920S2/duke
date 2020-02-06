@@ -21,7 +21,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Parses the.
+     * Parses the deadline object from a task string stored in the file
+     * e.g. D | 1 | Borrow book
      *
      * @param taskString the task string
      * @return the deadline
@@ -30,17 +31,17 @@ public class Deadline extends Task {
         assert (!taskString.isEmpty());
         String[] parts = taskString.split("\\|");
         String desc = parts[2];
-        Deadline t = new Deadline(desc, "");
+        Deadline dl = new Deadline(desc, "");
         if (parts.length > 3) {
-            t = new Deadline(desc, parts[3]);
+            dl = new Deadline(desc, parts[3]);
         }
-        t.isDone = parts[1].trim().equals("1");
+        dl.isDone = parts[1].trim().equals("1");
 
-        return t;
+        return dl;
     }
 
     /**
-     * To string.
+     * Returns the task string e.g. 1. Deadline (by: 20 May 2020)
      *
      * @return the string
      */
@@ -50,7 +51,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Prints the.
+     * Similar to the toString method.
      *
      * @return the string
      */

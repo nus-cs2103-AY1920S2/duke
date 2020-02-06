@@ -45,24 +45,14 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
-    /**
-     *  Returns the dialog for displaying what the user has written .
+     * Returns the dialog for displaying what the user has written .
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, false);
     }
 
     /**
-     *  Returns the dialog for displaying replies from Duke.
+     * Returns the dialog for displaying replies from Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
@@ -70,14 +60,23 @@ public class DialogBox extends HBox {
         return db;
     }
 
-
     /**
-     *  Returns the text message without the avatar.
-     *  Ui: SimpleDialogBox.fxml
+     * Returns the text message without the avatar.
+     * Ui: SimpleDialogBox.fxml
      */
     public static DialogBox getTextDialog(String text) {
         var db = new DialogBox(text, null, true);
         db.flip();
         return db;
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 }

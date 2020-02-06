@@ -35,19 +35,9 @@ public class Todo extends Task {
     }
 
     /**
-     * To string.
+     * Prints they task string e.g. T | 1 | Borrow book
      *
-     * @return the string
-     */
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    /**
-     * Prints the.
-     *
-     * @return the string
+     * @return the task string
      */
     @Override
     public String print() {

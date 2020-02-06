@@ -5,7 +5,7 @@
 package duke.task;
 
 /**
- * The Class EventObj.
+ * The Class EventObj has datetime property in addition to properties of a normal task.
  */
 public class EventObj extends Task {
 
@@ -40,7 +40,7 @@ public class EventObj extends Task {
     }
 
     /**
-     * To string.
+     * Returns the task string e.g. Project meeting (at: 20 May 2020)
      *
      * @return the string
      */
