@@ -22,7 +22,11 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Duke: Personal Assistant");
             stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(625);
+            stage.setMinHeight(400);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

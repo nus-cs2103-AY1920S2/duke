@@ -55,8 +55,11 @@ public class TaskList {
             // Exceptions will be thrown respectively
             switch (commandType) {
 
-            case "bye":
+            case "help":
                 return Ui.welcome();
+
+            case "bye":
+                return Ui.goodbye();
 
             case "list":
                 return Ui.listAllTasksMessage(this);
