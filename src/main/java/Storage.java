@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -84,8 +83,8 @@ public class Storage {
     void save(TaskList tasks)throws IOException {
         try (FileWriter fw = new FileWriter(path,false)) {
             String s = "";
-            for (int i = 0; i < tasks.list.size(); i++) {
-                Task ob = tasks.list.get(i);
+            for (int i = 0; i < tasks.getList().size(); i++) {
+                Task ob = tasks.getList().get(i);
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 switch (ob.getType()) {
                 case "deadline":

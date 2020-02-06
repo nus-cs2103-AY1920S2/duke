@@ -10,13 +10,13 @@ public class Delete extends Command {
      * It executes the delete command.
      *
      * @param tasks Object of type TaskList.
-     * @param ui Object of task Ui.
      * @param storage Object of type Storage.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         int num = Integer.valueOf(str);
-        tasks.list.remove(num - 1);
-        return "Noted. I've removed this task:\n"+ ui.printTask(num,tasks)
+        String s = tasks.getList().get(num - 1).toString();
+        tasks.getList().remove(num - 1);
+        return "Noted. I've removed this task:\n" + s
                 + "\nNow you have " + (tasks.getList().size()) + " tasks in the list.";
     }
 

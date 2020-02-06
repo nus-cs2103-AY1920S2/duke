@@ -4,7 +4,7 @@ public abstract class Command {
     Command(){
     }
 
-    abstract String execute(TaskList task, Ui ui, Storage storage) throws IOException;
+    abstract String execute(TaskList task, Storage storage) throws IOException;
 
     abstract boolean isExit();
 }

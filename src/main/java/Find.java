@@ -10,26 +10,25 @@ public class Find extends Command {
      * It executes the find command.
      *
      * @param tasks Object of type TaskList.
-     * @param ui Object of task Ui.
      * @param storage Object of type Storage.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String s = "Here are the matching tasks in your list:";
-        int foundcount = 0;
+    public String execute(TaskList tasks, Storage storage) {
+        StringBuilder s = new StringBuilder("Here are the matching tasks in your list:\n");
+        int count = 0;
         if (tasks.getList().size() > 0) {
             for (int i = 0; i < tasks.getList().size(); i++) {
                 if (tasks.getList().get(i).getTaskName().contains(str)) {
-                    s = s + (i + 1) + "." + tasks.getList().get(i);
-                    foundcount++;
+                    s = s.append((i + 1) + "." + tasks.getList().get(i) + "\n");
+                    count++;
                 }
             }
-            if (foundcount == 0) {
-                s = s + "Nothing Available with : " + str;
+            if (count == 0) {
+                s = s.append("Nothing Available with : " + str + "\n");
             }
         } else {
-            s = s + "NoTasks available";
+            s = s.append("NoTasks available\n");
         }
-        return s;
+        return s.toString();
     }
 
     boolean isExit() {

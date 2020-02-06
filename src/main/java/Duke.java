@@ -5,7 +5,6 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Constructor for Duke.
@@ -15,13 +14,11 @@ public class Duke {
         int ind = filePath.lastIndexOf("/");
         String path = filePath.substring(0, ind + 1);
         filePath = path.concat("duke.txt");
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             //if file is empty
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -34,9 +31,9 @@ public class Duke {
     public String getResponse(String fullCommand) throws IOException {
         try {
             Command c = Parser.parse(0,fullCommand,0);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 }
