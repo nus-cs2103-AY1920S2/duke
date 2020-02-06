@@ -24,4 +24,10 @@ public class ExitCommand extends Command {
         Ui.goodbye();
         return true;
     }
+
+    @Override
+    public void executeGui(Storage storageController, ArrayList<Task> storage) {
+        System.out.println("asdas");
+        Ui.goodbye();
+    }
 }

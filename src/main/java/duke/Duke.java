@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import gui.GuiController;
 import gui.components.DialogBox;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -28,7 +27,6 @@ import java.util.Scanner;
  */
 public class Duke extends Application {
     private Controller controller;
-    private GuiController guiController;
 
     private Image user;
     private Image duke;
@@ -41,10 +39,10 @@ public class Duke extends Application {
     public Duke(String filePath) {
         Storage storageController = new Storage(filePath);
         this.controller = new Controller(storageController);
-        this.guiController = new GuiController(storageController);
     }
 
     public Duke() {
+        this("src/data/data.csv");
         try {
             user = SwingFXUtils.toFXImage(ImageIO.read(new File("src/main/resources/images/ricky.png")), null);
             duke = SwingFXUtils.toFXImage(ImageIO.read(new File("src/main/resources/images/andrew.png")), null);
@@ -52,6 +50,7 @@ public class Duke extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void main(String[] args) {
@@ -76,24 +75,12 @@ public class Duke extends Application {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    private String runGui(String input) throws Exception {
-
-        Optional<Command> parsed = Parser.parse(input);
-        if (parsed.isPresent()) {
-            Command command = parsed.get();
-            return guiController.executeGui(command);
-        } else {
-            return "Sorry I do not understand you";
-        }
-
+        System.exit(0);
 
     }
-
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         ScrollPane scrollPane = new ScrollPane();
         VBox dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -139,6 +126,15 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        String initialLine = "";
+        Ui.greet();
+        initialLine += Ui.getContent() + "\n";
+        Ui.printTaskList();
+        initialLine += Ui.getContent();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(initialLine), new ImageView(duke))
+        );
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(userInput, dialogContainer);
         });
@@ -146,6 +142,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput(userInput, dialogContainer);
         });
+
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
@@ -159,15 +156,28 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        if (controller.getStatus()) {
+            try {
+                this.stop();
+            } catch (Exception e) {
+                Controller.raiseException(e);
+            }
+        }
     }
 
     private String getResponse(String text) {
         try {
-            return this.runGui(text);
-
+            Optional<Command> parsed = Parser.parse(text);
+            System.out.println(parsed.isPresent());
+            if (parsed.isPresent()) {
+                System.out.println(parsed.get());
+                controller.execute(parsed.get());
+            }
         } catch (Exception e) {
             return e.getMessage();
         }
+        return Ui.getContent();
     }
 
 

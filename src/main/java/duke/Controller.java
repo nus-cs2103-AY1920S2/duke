@@ -2,11 +2,13 @@ package duke;
 
 import duke.command.Command;
 
+
 /**
  * The Controller class that facilitates execution of the Duke program
  */
 public class Controller {
-    private Storage storageController;
+    protected Storage storageController;
+    private boolean hasReachedExit = false;
 
     /**
      * Constructs a Controller object with the specified Storage object
@@ -21,7 +23,6 @@ public class Controller {
         Ui.printError(e);
     }
 
-
     /**
      * Executes the parametric Command object.
      *
@@ -29,6 +30,11 @@ public class Controller {
      * @return a boolean value that is returned by the method call execute() to the Command object.
      */
     public boolean execute(Command command) {
-        return command.execute(storageController, storageController.generateTaskList());
+        hasReachedExit = command.execute(storageController, storageController.generateTaskList());
+        return hasReachedExit;
+    }
+
+    public boolean getStatus() {
+        return hasReachedExit;
     }
 }

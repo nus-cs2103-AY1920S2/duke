@@ -82,8 +82,11 @@ public abstract class Task {
             return new DeadlineTask(inputAsArray);
         }
         default:
-            throw new Exception("You might have not chosen a valid task type! Valid types are events, todos, and deadlines");
+            throw new Exception("You might have not chosen a valid task type! " +
+                    "Valid types are events, todos, and deadlines");
         }
+
+
     }
 }
 

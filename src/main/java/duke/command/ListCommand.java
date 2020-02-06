@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Controller;
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -23,12 +24,20 @@ public class ListCommand extends Command {
     @Override
     public boolean execute(Storage storageController, ArrayList<Task> storage) {
         try {
+            String lst = "";
             for (int i = 0; i < storage.size(); i++) {
-                System.out.printf("\t%d -%s\n", i + 1, storage.get(i));
+                lst += String.format("\t%d -%s\n", i + 1, storage.get(i));
             }
+            Ui.printList(lst);
+
         } catch (Exception e) {
             Controller.raiseException(e);
         }
         return false;
+    }
+
+    @Override
+    public void executeGui(Storage storageController, ArrayList<Task> storage) {
+        execute(storageController, storage);
     }
 }

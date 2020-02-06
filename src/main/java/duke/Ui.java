@@ -88,15 +88,20 @@ public class Ui {
      * Prints all the available commands that the Duke program can understand.
      */
     public static void printTaskList() {
-        System.out.println("Commands available:");
-        System.out.println("1. event [description] : add a new event");
-        System.out.println("2. deadline [description] by yyyy-mm-dd hhmm : add a new deadline");
-        System.out.println("3. todo [description] at yyyy-mm-dd hhmm : add a new todo");
-        System.out.println("4. done [index] : complete the task at given index");
-        System.out.println("5. delete [index] : delete the task at given index");
-        System.out.println("6. find [one single keyword] : find records that contain the specified keyword");
-        System.out.println("7. bye : say goodbye and quit");
+        content = "Commands available:"
+                + "\n1. event [description] : add a new event"
+                + "\n2. deadline [description] by yyyy-mm-dd hhmm : add a new deadline"
+                + "\n3. todo [description] at yyyy-mm-dd hhmm : add a new todo"
+                + "\n4. done [index] : complete the task at given index"
+                + "\n5. delete [index] : delete the task at given index"
+                + "\n6. find [one single keyword] : find records that contain the specified keyword"
+                + "\n7. bye : say goodbye and quit";
+        System.out.println(content);
     }
 
 
+    public static void printList(String lst) {
+        content = lst;
+        System.out.println(lst);
+    }
 }

@@ -17,5 +17,7 @@ public abstract class Command {
      * @return true if the Command is an ExitCommand, false otherwise.
      */
     public abstract boolean execute(Storage storageController, ArrayList<Task> storage);
+
+    public abstract void executeGui(Storage storageController, ArrayList<Task> storage);
 }
 
