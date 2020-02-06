@@ -14,11 +14,5 @@ public class DeadlineTest {
         assertEquals(expected, deadline.getTypeIcon());
     }
 
-    @Test
-    public void testToString_deadlineTask_hasCorrectDescription() {
-        String expected = "[D] [\u2718] read book (by: 2020-01-01)";
-        Deadline deadline = new Deadline("read book", LocalDate.of(2020, 1, 1));
-        assertEquals(expected, deadline.toString());
-    }
 }
 

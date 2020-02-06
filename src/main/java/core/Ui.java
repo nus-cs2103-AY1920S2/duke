@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Platform to interact with the user.
  */
 public class Ui {
-    private String response="";
+    private String response = "";
     private Scanner sc;
 
     /**
@@ -53,21 +53,14 @@ public class Ui {
      *
      * @param msg is the text to be displayed.
      */
-//    public void display(String... msg) {
-//        System.out.println("\t_________________________________________________________________________________");
-//        for (String str : msg) {
-//            System.out.println("\t" + str);
-//        }
-//        System.out.println("\t_________________________________________________________________________________");
-//    }
-
-    public void display(String... msg){
-        response="";
-        for(String str:msg){
-            response+=str+"\n";
+    public void display(String... msg) {
+        response = "";
+        for (String str : msg) {
+            response += str + "\n";
         }
     }
-    public String getResponse(){
+
+    public String getResponse() {
         return response;
     }
 

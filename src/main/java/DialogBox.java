@@ -53,8 +53,9 @@ public class DialogBox extends HBox {
 
     /**
      * ??.
+     *
      * @param text ??.
-     * @param img ??.
+     * @param img  ??.
      * @return ??.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
