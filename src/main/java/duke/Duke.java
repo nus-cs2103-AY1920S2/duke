@@ -31,6 +31,7 @@ public class Duke {
         ui.printWelcomeMsg();
 
         Task t;
+        TaskList foundTaskList;
         int index;
 
         while (true) {
@@ -78,6 +79,11 @@ public class Duke {
                         addAndPrintTask(t, taskList);
 
                         storage.saveTasksToFile(taskList);
+                        break;
+                    case FIND_CMD:
+                        foundTaskList = taskList.findByKeyword(command.getParams()[0]);
+
+                        ui.printFoundTaskList(foundTaskList);
                         break;
                     case BYE_CMD:
                         ui.printByeMsg();

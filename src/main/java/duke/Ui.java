@@ -53,6 +53,19 @@ public class Ui {
         this.printLine();
     }
 
+    public void printFoundTaskList(TaskList taskList) {
+        this.printLine("Here are the matching task(s) your list:");
+
+        int len = taskList.getNumTasks();
+
+        for (int i = 0; i < len; ++i) {
+            Task t = taskList.getTask(i);
+            this.printLine("    " + (i + 1) + ". " + t);
+        }
+
+        this.printLine();
+    }
+
     public void printTaskMarkedDone(Task t) {
         this.printLine("Nice! I've marked this task as done:" + Ui.LF + "    " + t + Ui.LF);
     }

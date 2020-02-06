@@ -7,6 +7,7 @@ public enum CommandType {
     TODO_CMD("todo"),
     DEADLINE_CMD("deadline"),
     EVENT_CMD("event"),
+    FIND_CMD("find"),
     BYE_CMD("bye");
 
     private String name;
