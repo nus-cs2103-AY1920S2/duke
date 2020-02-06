@@ -1,17 +1,23 @@
 package main.java;
 
+import main.java.exceptions.IllegalDateTimeFormatException;
 import main.java.parser.Command;
 import main.java.parser.ExitCommand;
 import main.java.parser.Parser;
+import main.java.exceptions.InvalidStorageFilePathException;
 import main.java.exceptions.NoCommandException;
+import main.java.exceptions.StorageOperationException;
 import main.java.model.TaskList;
 
-
 import main.java.exceptions.NoDescriptionException;
+import main.java.storage.Storage;
+
+import java.io.IOException;
 
 public class Duke {
 
     protected String user_name;
+    protected Storage storage;
     protected TaskList taskList;
     protected Parser parser;
     protected Ui ui;
@@ -25,11 +31,19 @@ public class Duke {
     }
     
     private void start() {
-        this.taskList = new TaskList();
-        this.parser = new Parser();
         this.ui = new Ui();
-        ui.askForName();
-        ui.greet();
+        try {
+            this.parser = new Parser();
+            this.storage = new Storage();
+            this.taskList = storage.load();
+            ui.askForName();
+            ui.greet();
+        } catch (InvalidStorageFilePathException | IOException e) {
+            ui.printErrorMessage(e.getMessage());
+            throw new RuntimeException(e);
+        } catch(StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
+            ui.printErrorMessage(err.getMessage());
+        }
     }
 
     private void exit() {
@@ -47,8 +61,12 @@ public class Duke {
                 command.setTaskList(this.taskList);
                 String commandResult = command.execute();
                 ui.printCommandResult(commandResult);
-            } catch (NoDescriptionException | NoCommandException e) {
+                storage.save(taskList);
+            } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
                 ui.printErrorMessage(e.getMessage());
+            } catch (IOException e) {
+                ui.printErrorMessage(e.getMessage());
+                throw new RuntimeException(e);
             }
         }
         this.exit();

@@ -1,29 +1,39 @@
 package main.java.model;
 
 import main.java.model.Task;
-
 import main.java.exceptions.NoDescriptionException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 public class EventTask extends Task{
-    protected String at;
+    static final String TASK_TYPE_STRING = "event task";
+    static final String TASK_TYPE_CHA = "E";
 
-    public EventTask() {
-        super("event task");
-    }
+    protected LocalDateTime at;
 
-    public EventTask(String description, String at) throws NoDescriptionException {
-        super(description, "event task");
+    public EventTask(String description, LocalDateTime at) throws NoDescriptionException {
+        super(description);
         this.at = at;
     }
 
     @Override
-    public void setParams(String... params) throws NoDescriptionException {
-        this.setDescription(params[0]);
-        this.at = params[1];
+    public ArrayList<String> getDetails() {
+        return new ArrayList<String>(Arrays.asList(
+                this.description,
+                this.at.format(DATE_TIME_FORMAT)));
+    }
+
+    @Override
+    public String getTaskType() {
+        return TASK_TYPE_CHA;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[" + TASK_TYPE_CHA + "]"  + super.toString() + " (at: " + at.format(DATE_TIME_FORMAT) + ")";
     }
 }

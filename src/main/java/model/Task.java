@@ -2,20 +2,23 @@ package main.java.model;
 
 import main.java.exceptions.NoDescriptionException;
 
-public class Task {
-    protected String taskType;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String taskType) {
-        this.taskType = taskType;
-    };
+    static String TASK_TYPE_STRING;
+    static String TASK_TYPE_CHA;
 
-    public Task(String description, String taskType) throws NoDescriptionException {
-        this.taskType = taskType;
+    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public Task(String description) throws NoDescriptionException {
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    this.taskType + " cannot be empty.\n");
+                    TASK_TYPE_STRING + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -24,7 +27,7 @@ public class Task {
     public void setDescription(String description) throws NoDescriptionException {
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    this.taskType + " cannot be empty.\n");
+                    TASK_TYPE_STRING + " cannot be empty.\n");
         }
         this.description = description;
     }
@@ -33,9 +36,7 @@ public class Task {
         this.setDescription(params[0]);
     }
 
-    public void markAsDone() {
-        this.isDone = true;
-    }
+    public abstract String getTaskType();
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -43,6 +44,18 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public ArrayList<String> getDetails() {
+        return new ArrayList<String>(Arrays.asList(this.description));
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     public String toString() {
