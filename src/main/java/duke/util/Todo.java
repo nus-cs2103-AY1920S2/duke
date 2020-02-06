@@ -26,7 +26,7 @@ public class Todo extends Task {
      */
 
     public Todo(String description) {
-        super(description);
+        super(description, "T");
     }
 
     /**
@@ -38,6 +38,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T] [%s] %s", getStatusIcon(), this.description);
+        return String.format("[%s] [%s] %s", this.type, getStatusIcon(), this.description);
     }
 }

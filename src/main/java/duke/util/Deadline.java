@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
 
     public Deadline(String description, String bySchedule) throws DukeInvalidDateFormatException {
-        super(description);
+        super(description, "D");
         this.bySchedule = TaskSchedule.parseSchedule(bySchedule);
 
     }
@@ -55,6 +55,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         assert bySchedule != null : "The due date should be entered to this task.";
-        return String.format("[D] [%s] %s (by: %s)", getStatusIcon(), this.description, this.bySchedule);
+        return String.format("[%s] [%s] %s (by: %s)", this.type, getStatusIcon(), this.description, this.bySchedule);
     }
 }
