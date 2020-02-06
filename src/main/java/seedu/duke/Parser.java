@@ -14,7 +14,7 @@ public class Parser {
     }
 
     /**
-     * Adds, changes, and deletes the content of the list according to the user's command input.
+     * Displays, modifies, and finds the content of the list according to the user's command input.
      */
     public void handleCommands(String[] inputs, TaskList taskList) {
         String command = inputs[0].trim();
@@ -23,7 +23,6 @@ public class Parser {
                 taskList.printList();
             } else if (command.equals("bye")) {
                 hasNextCommand = false;
-                sayBye();
             } else if (command.equals("todo")) {
                 if (inputs.length == 1) {
                     throw new EmptyDescriptionException();
@@ -82,8 +81,8 @@ public class Parser {
 
     /**
      * Checks if a string can be converted to an integer.
-     * @param strNum the string to be checked
-     * @return true if the string can be converted to an integer
+     * @param strNum The string to be checked.
+     * @return true if the string can be converted to an integer.
      */
     private boolean isNumeric(String strNum) {
         if (strNum == null) {
@@ -95,9 +94,5 @@ public class Parser {
             return false;
         }
         return true;
-    }
-
-    private void sayBye() {
-        System.out.println("Stop procrastinating. See you!");
     }
 }

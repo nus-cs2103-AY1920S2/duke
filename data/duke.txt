@@ -1,6 +1,6 @@
 E | Y | read book | 2020-04-04
 E | Y | capt ball | 2020-02-03
 D | Y | assg 1 | 2020-04-05
-T | N | sleeping
+T | Y | sleeping
 D | N | submission | 2020-03-03
-T | N | tutorial
+T | N | quiz

@@ -41,12 +41,13 @@ public class TaskList {
         Task todo = new Todo(desc);
         if (doneStatus.equalsIgnoreCase("Y")) {
             todo.markAsDone();
+            assert todo.isDone();
         }
         tasks.add(todo);
         storage.addToStorage(todo);
-        printAddToList();
+        ui.printAddToList();
         ui.print(todo.toString());
-        printNumTask();
+        ui.printNumTask(tasks);
     }
 
     /**
@@ -66,23 +67,24 @@ public class TaskList {
         }
 
         String deadlineDesc = descs[0].trim();
-        String deadlineTime = descs[1].trim();
-        LocalDate formattedDeadlineTime = null;
-        if (isValidDate(deadlineTime)) {
-            formattedDeadlineTime = LocalDate.parse(deadlineTime);
+        String deadlineDate = descs[1].trim();
+        LocalDate formattedDeadlineDate = null;
+        if (isValidDate(deadlineDate)) {
+            formattedDeadlineDate = LocalDate.parse(deadlineDate);
         } else {
             throw new InvalidDateException();
         }
-        Task deadline = new Deadline(deadlineDesc, formattedDeadlineTime);
+        Task deadline = new Deadline(deadlineDesc, formattedDeadlineDate);
 
         if (doneStatus.equalsIgnoreCase("Y")) {
             deadline.markAsDone();
+            assert deadline.isDone();
         }
         tasks.add(deadline);
         storage.addToStorage(deadline);
-        printAddToList();
+        ui.printAddToList();
         ui.print(deadline.toString());
-        printNumTask();
+        ui.printNumTask(tasks);
     }
 
     /**
@@ -101,24 +103,25 @@ public class TaskList {
             throw new InvalidTaskInputException();
         }
         String eventDesc = descs[0].trim();
-        String eventTime = descs[1].trim();
-        LocalDate formattedEventTime = null;
-        if (isValidDate(eventTime)) {
-            formattedEventTime = LocalDate.parse(eventTime);
+        String eventDate = descs[1].trim();
+        LocalDate formattedEventDate = null;
+        if (isValidDate(eventDate)) {
+            formattedEventDate = LocalDate.parse(eventDate);
         } else {
             throw new InvalidDateException();
         }
-        Task event = new Event(eventDesc, formattedEventTime);
+        Task event = new Event(eventDesc, formattedEventDate);
 
         if (doneStatus.equalsIgnoreCase("Y")) {
             event.markAsDone();
+            assert event.isDone();
         }
 
         tasks.add(event);
         storage.addToStorage(event);
-        printAddToList();
+        ui.printAddToList();
         ui.print(event.toString());
-        printNumTask();
+        ui.printNumTask(tasks);
     }
 
     /**
@@ -138,22 +141,8 @@ public class TaskList {
         return true;
     }
 
-    /**
-     * Prints the list of tasks the user has.
-     */
-    private void printList(List<Task> currTasks) {
-        if (currTasks.size() == 0) {
-            ui.print("You currently don't have any task. Start listing now!");
-        } else {
-            ui.print("Stop procrastinating. Do it now!");
-            for (int i = 0; i < currTasks.size(); i++) {
-                System.out.printf("%d. %s\n", i + 1, currTasks.get(i).toString());
-            }
-        }
-    }
-
     protected void printList() {
-        printList(tasks);
+        ui.printList(tasks);
     }
 
     /**
@@ -166,8 +155,9 @@ public class TaskList {
     protected void markTaskAsDone(int index) throws IOException {
         Task task = tasks.get(index - 1);
         task.markAsDone();
+        assert task.isDone();
         storage.changeToStorage(index);
-        ui.print("Good job! One off your chest!");
+        ui.printTaskDone();
         ui.print(task.toString());
     }
 
@@ -180,9 +170,9 @@ public class TaskList {
     protected void deleteTask(int index) throws IOException {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
-        printRemoveTask();
+        ui.printRemoveTask();
         ui.print(task.toString());
-        printNumTask();
+        ui.printNumTask(tasks);
         storage.deleteInStorage(index);
     }
 
@@ -200,36 +190,11 @@ public class TaskList {
         }
 
         if (foundTasks.size() == 0) {
-            printNoFoundTask();
+            ui.printNoFoundTask();
         } else {
-            printFoundTask();
-            printList(foundTasks);
+            assert foundTasks.size() > 0 : foundTasks.size();
+            ui.printFoundTask();
+            ui.printList(foundTasks);
         }
-    }
-
-    private void printFoundTask() {
-        ui.print("Here are the matching tasks in your list:");
-    }
-
-    private void printNoFoundTask() {
-        ui.print("Sorry I can't find what you are looking for....");
-    }
-
-    private void printRemoveTask() {
-        ui.print("Okay, I have removed this task for you:");
-    }
-
-    private void printAddToList() {
-        ui.print("Gotcha. Added this to your list:");
-    }
-
-    private void printNumTask() {
-        String taskWord;
-        if (tasks.size() <= 1) {
-            taskWord = "task";
-        } else {
-            taskWord = "tasks";
-        }
-        System.out.printf("Now you got %d %s in your list!\n", tasks.size(), taskWord);
     }
 }

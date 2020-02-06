@@ -20,10 +20,4 @@ public class TaskTest {
         testTodo.markAsDone();
         assertEquals("Y", testTodo.getStatusIcon());
     }
-
-    @Test
-    public void testGetType() {
-        Task testTodo = new Todo("test todo");
-        assertEquals("T", testTodo.getType());
-    }
 }

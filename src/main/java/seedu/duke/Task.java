@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.time.LocalDate;
-
 /**
  * Represents a Task object.
  */
@@ -12,7 +10,7 @@ public abstract class Task {
     /**
      * Creates a task based on the description input by the user.
      *
-     * @param description the details of the task created
+     * @param description The details of the task created.
      */
     public Task(String description) {
         this.description = description;
@@ -22,7 +20,7 @@ public abstract class Task {
     /**
      * Prints the done status of a task.
      *
-     * @return "Y" if the task is marked done, "N" otherwise
+     * @return "Y" if the task is marked done, "N" otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
@@ -38,7 +36,7 @@ public abstract class Task {
     /**
      * Checks if a task is marked as done.
      *
-     * @return true if a task is marked as done
+     * @return true if a task is marked as done.
      */
     public boolean isDone() {
         return isDone;
@@ -52,6 +50,4 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
-
-    public abstract String getType();
 }

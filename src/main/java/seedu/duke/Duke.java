@@ -42,6 +42,7 @@ public class Duke {
             String[] inputs = input.split(" ", 2);
             parser.handleCommands(inputs, taskList);
             if (!parser.hasNextCommand()) {
+                ui.sayBye();
                 break;
             }
         }

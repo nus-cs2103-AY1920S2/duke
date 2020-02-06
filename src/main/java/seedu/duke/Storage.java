@@ -73,6 +73,7 @@ public class Storage {
         Task todo = new Todo(desc);
         if (doneStatus.equalsIgnoreCase("Y")) {
             todo.markAsDone();
+            assert todo.isDone();
         }
         tasks.add(todo);
     }
@@ -93,16 +94,16 @@ public class Storage {
         }
 
         String deadlineDesc = descs[0].trim();
-        String deadlineTime = descs[1].trim();
-        LocalDate formattedDeadlineTime = null;
+        String deadlineDate = descs[1].trim();
+        LocalDate formattedDeadlineDate = null;
 
-        if (isValidDate(deadlineTime)) {
-            formattedDeadlineTime = LocalDate.parse(deadlineTime);
+        if (isValidDate(deadlineDate)) {
+            formattedDeadlineDate = LocalDate.parse(deadlineDate);
         } else {
             throw new InvalidDateException();
         }
 
-        Task deadline = new Deadline(deadlineDesc, formattedDeadlineTime);
+        Task deadline = new Deadline(deadlineDesc, formattedDeadlineDate);
 
         if (doneStatus.equalsIgnoreCase("Y")) {
             deadline.markAsDone();
@@ -125,14 +126,14 @@ public class Storage {
             throw new InvalidTaskInputException();
         }
         String eventDesc = descs[0].trim();
-        String eventTime = descs[1].trim();
-        LocalDate formattedEventTime = null;
-        if (isValidDate(eventTime)) {
-            formattedEventTime = LocalDate.parse(eventTime);
+        String eventDate = descs[1].trim();
+        LocalDate formattedEventDate = null;
+        if (isValidDate(eventDate)) {
+            formattedEventDate = LocalDate.parse(eventDate);
         } else {
             throw new InvalidDateException();
         }
-        Task event = new Event(eventDesc, formattedEventTime);
+        Task event = new Event(eventDesc, formattedEventDate);
 
         if (doneStatus.equalsIgnoreCase("Y")) {
             event.markAsDone();
@@ -207,6 +208,7 @@ public class Storage {
             if (counter == 1) {
                 data += line;
             } else {
+                assert counter > 1 : counter;
                 data += "\n" + line;
             }
             counter++;
@@ -238,6 +240,7 @@ public class Storage {
                     data += line;
                     isFirstUndeletedLine = false;
                 } else {
+                    assert !isFirstUndeletedLine;
                     data += "\n" + line;
                 }
             }
