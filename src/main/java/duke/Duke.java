@@ -7,21 +7,15 @@ import java.nio.file.Paths;
 
 import duke.exceptions.IncorrectArgumentException;
 import duke.exceptions.InvalidCommandException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 
-import duke.ui.View;
 
 /**
  * Duke class represents the main chatbot entity; it contains classes that manage different components of the chatbot.
  */
-public class Duke extends Application {
+public class Duke {
     /** the path where the saved Tasklist file is stored. */
     private static final Path filePath = Paths.get(System.getProperty("user.dir"), "data.duke");
 
-    private View view;
     private Storage storage;
     private TaskList tasks = new TaskList();
     private Ui ui;
@@ -32,26 +26,9 @@ public class Duke extends Application {
     }
 
     /**
-     * Adapted from JavaFX tutorial.
-     * @param stage this is the primary stage that JavaFX provides.
-     */
-    @Override
-    public void start(Stage stage) {
-        Region mainLayout = view.initialize();
-        Scene scene = new Scene(mainLayout); // Set the scene to be the mainLayout
-    
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-
-        view.format(stage, mainLayout);
-        view.setEventListeners();
-    }
-
-    /**
      * Initializes Duke and loads the TaskList from the files in the save directory.
      */
     public Duke() {
-        view = new View();
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser(storage, ui, tasks);
