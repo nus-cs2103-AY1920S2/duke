@@ -1,14 +1,13 @@
 package duke.task;
 
 import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
 
 /** Class defining the minimal methods required to be implemented by a Task entity */
 public abstract class Task implements Serializable {
     
     /** Serializable classes must include a serialVersionUID to identify the class. */
     private static final long serialVersionUID = 1561807677731348300L;
-    protected final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected final String dateFormat = "MMM d yyyy";
     
     /** Description of the task. */
     protected String description;

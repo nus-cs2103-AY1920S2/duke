@@ -70,8 +70,8 @@ class Storage {
      */
     public boolean saveToFile(final TaskList tasks) throws IOException {
         // read serialized object from file as a String
-        final FileOutputStream  fileOut = new FileOutputStream(new File(dir.toString()));
-        final ObjectOutputStream  objOut = new ObjectOutputStream(fileOut);
+        final FileOutputStream fileOut = new FileOutputStream(new File(dir.toString()));
+        final ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
         objOut.writeObject(tasks.save());
         fileOut.close();
         objOut.close();

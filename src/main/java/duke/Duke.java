@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import duke.exceptions.IncorrectArgumentException;
 import duke.exceptions.InvalidCommandException;
+import duke.exceptions.ShutdownException;
 
 
 /**
@@ -49,19 +50,35 @@ public class Duke {
         ui.out("Hello! I'm Duke", "What can I do for you?");
         boolean isShutdown = false;
         while (!isShutdown) {
-            String line = ui.getLine();
+            String input = ui.getLine();
             try {
-                isShutdown = parser.parse(line);
+                ui.out(parser.parse(input));
                 storage.saveToFile(tasks);
             } catch (InvalidCommandException | IncorrectArgumentException e) {
                 ui.out(e.getMessage());
             } catch (IOException | NumberFormatException e) {
                 e.printStackTrace();
+            } catch (ShutdownException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response; 
+        try {
+            response = ui.respond(parser.parse(input));
+            storage.saveToFile(tasks);
+        } catch (InvalidCommandException | IncorrectArgumentException e) {
+            response = e.getMessage();
+            System.out.println(e.getMessage());
+        } catch (IOException | NumberFormatException e) {
+            response = e.getMessage();
+            e.printStackTrace();
+        } catch (ShutdownException e) {
+            System.out.println(e.getMessage());
+            response = "Bye command given";
+        }
+        return response;
     }
 }

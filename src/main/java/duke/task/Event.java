@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /** Entity class representing a task of type Event */
 public class Event extends Task {
@@ -22,6 +23,6 @@ public class Event extends Task {
     public String toString() {
         return String.format(
             "[E]%s (at: %s %s)",
-            super.toString(), atDate.format(super.dateFormat), atTime);
+            super.toString(), atDate.format(DateTimeFormatter.ofPattern(super.dateFormat)), atTime);
     }
 }
