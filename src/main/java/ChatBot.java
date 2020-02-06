@@ -86,6 +86,13 @@ public class ChatBot {
                     } catch (NoSuchElementException e) {
                         ui.showMissingParemeters();
                     }
+                } else if (userInput.startsWith("find")) {
+                    try {
+                        String word = userInput.split(" ")[1];
+                        tasks.showFilteredByName(word);
+                    } catch (NoSuchElementException e) {
+                        ui.showMissingParemeters();
+                    }
                 } else {
                     ui.showCommandNotFound();
                 }
