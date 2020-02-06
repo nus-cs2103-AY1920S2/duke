@@ -40,10 +40,6 @@ public class Storage {
             String input = readFile.nextLine();
             String inputs[] = input.split("\\|");
 
-            for (int i = 0; i < inputs.length; i++) {
-                System.out.println(inputs[i]);
-            }
-
             String taskType = inputs[0];
             String isDone = inputs[1];
             String description = inputs[2];
