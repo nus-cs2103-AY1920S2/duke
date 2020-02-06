@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * TaskList class which mainly stores all the Tasks in an ArrayList of Tasks and handles related methods.
@@ -29,6 +28,10 @@ public class TaskList {
      */
     private ArrayList<Task> allTasks;
 
+
+    // Parser to make sense of various commands
+    Parser logic = new Parser();
+
     /**
      * Constructor for TaskList.
      */
@@ -38,64 +41,43 @@ public class TaskList {
 
     /**
      * Serves the user to do the bulk of the work in process individual commands.
+     *
+     * @param command the full command entered by the user.
      */
-    public void serveUser(String command) {
+    public String serveUser(String command) {
 
-        // Parser to make sense of various commands
-        Parser logic = new Parser();
+        String commandType = logic.findKeywordFromString(command);
+        String[] commandWords = logic.getCommandWords(command);
 
         try {
-            // Split String command to find the intention of the user (first word)
-            String[] commandWords = command.split("\\s");
 
             // Depending on command, we process the command
             // Exceptions will be thrown respectively
-            switch (commandWords[0]) {
+            switch (commandType) {
 
             case "bye":
-                return;
+                return Ui.welcome();
 
             case "list":
-                Ui.printAllTasks(this);
-                break;
+                return Ui.listAllTasksMessage(this);
 
             case "delete":
-                deleteTask(command);
-                break;
+                return deleteTask(command);
 
             case "done":
-                // user inputs will be "done _____"
-                // Take only the very next token which must be an integer
-                if (logic.satisfiesMinimumDoneCommandLength(commandWords)) {
-                    // this is a valid command
-                    if (logic.determineIfValidDoneCommand(commandWords, this.sizeOf())) {
-                        // this valid command has a valid number, so, mark as done
-                        doTask(Integer.parseInt(commandWords[1]));
-                    } else {
-                        // invalid input: attempting to do a non-existent task
-                        throw new InputUnclearException("");
-                    }
-                } else {
-                    // invalid input
-                    throw new DoneException("");
-                }
-                break;
+                return doneTask(command);
 
             case "todo":
-                addNewToDo(command);
-                break;
+                return addNewToDo(command);
 
             case "deadline":
-                addNewDeadline(command);
-                break;
+                return addNewDeadline(command);
 
             case "event":
-                addNewEvent(command);
-                break;
+                return addNewEvent(command);
 
             case "find":
-                findTask(command);
-                break;
+                return findTask(command);
 
             default:
                 throw new InputUnclearException("");
@@ -103,9 +85,28 @@ public class TaskList {
             }
         } catch (DoneException | DeadlineException | DeleteException | EmptyTaskListException
             | EventException | InputUnclearException | ToDoException e) {
-            Ui.printExceptionMessage(e.toString());
+            return Ui.exceptionMessage(e.toString());
         }
 
+    }
+
+    private String doneTask(String command) throws DoneException, InputUnclearException {
+        // user inputs will be "done _____"
+        // Take only the very next token which must be an integer
+        String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
+        if (logic.satisfiesMinimumDoneCommandLength(commandWords)) {
+            // this is a valid command
+            if (logic.determineIfValidDoneCommand(commandWords, this.sizeOf())) {
+                // this valid command has a valid number, so, mark as done
+                return doTask(Integer.parseInt(commandWords[1]));
+            } else {
+                // invalid input: attempting to do a non-existent task
+                throw new InputUnclearException("");
+            }
+        } else {
+            // invalid input
+            throw new DoneException("");
+        }
     }
 
     /**
@@ -113,28 +114,31 @@ public class TaskList {
      *
      * @param command the full command entered by the user.
      */
-    private void findTask(String command) throws EmptyTaskListException {
-
-        // Find the keyword for search
-        String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
-        String keywords = commandWords[1];
-        for (int i = 2; i < commandWords.length; i++) {
-            keywords = " " + commandWords[i];
-        }
-        keywords = keywords.toLowerCase();
-
-        // For temporary storage and printing
-        TaskList result = new TaskList();
-
-        // Search
-        for (Task t : allTasks) {
-            if (t.getCommand().toLowerCase().contains(keywords)) {
-                result.addSavedTaskToStored(t);
+    private String findTask(String command) throws EmptyTaskListException {
+        try {
+            // Find the keyword for search
+            String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
+            String keywords = commandWords[1];
+            for (int i = 2; i < commandWords.length; i++) {
+                keywords = " " + commandWords[i];
             }
-        }
+            keywords = keywords.toLowerCase();
 
-        // Print all options
-        Ui.printAllTasks(result);
+            // For temporary storage and printing
+            TaskList result = new TaskList();
+
+            // Search
+            for (Task t : allTasks) {
+                if (t.getCommand().toLowerCase().contains(keywords)) {
+                    result.addSavedTaskToStored(t);
+                }
+            }
+
+            // Print all options
+            return Ui.listAllTasksMessage(result);
+        } catch (Exception e) {
+            throw new EmptyTaskListException("");
+        }
 
     }
 
@@ -142,14 +146,14 @@ public class TaskList {
      * Deletes the given Task based on the command's keyword (a number representing index in ArrayList).
      *
      * @param command raw text containing all information given to delete the Task.
-     * @throws InputUnclearException where deleting task not possible due to incorrect command/index entered by user.
+     * @throws DeleteException where deleting task not possible due to incorrect command/index entered by user.
      */
-    private void deleteTask(String command) throws DeleteException {
+    private String deleteTask(String command) throws DeleteException {
         try {
             int indexToRemove = Integer.parseInt(command.substring("delete ".length())) - 1; // due to zero-indexing
             Task removedTask = allTasks.remove(indexToRemove);
             Storage.saveChanges(this);
-            Ui.printTaskRemoval(indexToRemove, removedTask, this);
+            return Ui.taskRemovalMessage(indexToRemove, removedTask, this);
         } catch (Exception e) {
             throw new DeleteException("");
         }
@@ -160,9 +164,10 @@ public class TaskList {
      *
      * @param t Task to be stored.
      */
-    private void addTaskToStored(Task t) {
+    private String addTaskToStored(Task t) {
         allTasks.add(t);
-        Ui.print(t.taskAddedMessage());
+        Storage.saveChanges(this);
+        return Ui.customMessage(t.taskAddedMessage());
     }
 
     /**
@@ -171,13 +176,12 @@ public class TaskList {
      * @param command basic raw information entered to create the Task.
      * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs.
      */
-    private void addNewToDo(String command) throws ToDoException {
+    private String addNewToDo(String command) throws ToDoException {
         if (command.length() < 6) {
             throw new ToDoException("");
         }
         String toDoCommand = command.substring("todo".length() + 1);
-        addTaskToStored(new ToDo(toDoCommand));
-        Storage.saveChanges(this);
+        return addTaskToStored(new ToDo(toDoCommand));
     }
 
     /**
@@ -186,7 +190,7 @@ public class TaskList {
      * @param command basic raw information entered to create the Task.
      * @throws DeadlineException Exception arising from creating Deadline Task due to wrong inputs.
      */
-    private void addNewDeadline(String command) throws DeadlineException {
+    private String addNewDeadline(String command) throws DeadlineException {
         try {
             // need to identify deadline limit
             String dateDetails = getRestriction("/by", command);
@@ -195,8 +199,7 @@ public class TaskList {
             // filter to obtain command
             String deadlineCommand = getCommand("deadline", "/by", command);
 
-            addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
-            Storage.saveChanges(this);
+            return addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
         } catch (Exception e) {
             throw new DeadlineException("");
         }
@@ -208,7 +211,7 @@ public class TaskList {
      * @param command basic raw information entered to create the Task.
      * @throws EventException Exception arising from Event Task creation due to wrong inputs.
      */
-    private void addNewEvent(String command) throws EventException {
+    private String addNewEvent(String command) throws EventException {
         try {
             // need to identify event time
             String dateDetails = getRestriction("/at", command);
@@ -217,8 +220,7 @@ public class TaskList {
             // filter to obtain command
             String eventCommand = getCommand("event", "/at", command);
 
-            addTaskToStored(new Event(eventCommand, eventTime));
-            Storage.saveChanges(this);
+            return addTaskToStored(new Event(eventCommand, eventTime));
         } catch (Exception e) {
             throw new EventException("");
         }
@@ -280,11 +282,11 @@ public class TaskList {
      *
      * @param i Index of the Task to be done.
      */
-    private void doTask(int i) {
+    private String doTask(int i) {
         Task t = allTasks.get(i - 1); // due to 0 indexing
-        Ui.printTaskComplete(t);
         t.doTask(); // task marked as complete
         Storage.saveChanges(this);
+        return Ui.taskCompleteMessage(t);
     }
 
     /**

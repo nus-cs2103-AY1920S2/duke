@@ -1,9 +1,22 @@
 package duke;
 
+import java.util.Arrays;
+
 /**
  * Logical brain of processing information given in a raw format, mainly through the use of useful methods.
  */
 public class Parser {
+
+    // Command method
+    public String findKeywordFromString(String command) {
+        // Split String command to find the intention of the user (first word)
+        String[] commandWords = command.split("\\s");
+        return commandWords[0];
+    }
+
+    public String[] getCommandWords(String command) {
+        return command.split("\\s");
+    }
 
     // Storage methods
 

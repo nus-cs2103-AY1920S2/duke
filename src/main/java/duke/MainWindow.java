@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Scanner;
+
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
  */
@@ -29,7 +31,15 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+
+        // set size constraints
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // set visual cues for users to begin using program
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.welcome(), dukeImage)
+        );
+
     }
 
     // Non-GUI members.
@@ -48,13 +58,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
 
+        // User and Duke query and response come as a pair.
         String userText = getUserResponse(userInput.getText());
         String dukeText = getDukeResponse(userInput.getText());
 
+        // Adding both into a container (VBox) which presents visually their messages.
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
+
+        // Clear the user input.
         userInput.clear();
     }
 
@@ -69,9 +83,8 @@ public class MainWindow extends AnchorPane {
      * Generates a response for Duke to the user input.
      */
     private String getDukeResponse(String input) {
-        return "Duke: " + EDIT THIS;
-}
-    ///////////////////////// EDIT THIS ////////////////////////////////////
-
+        String result = (input.equals("bye")) ? Ui.goodbye() : duke.run(input);
+        return "Duke: " + result;
+    }
 
 }

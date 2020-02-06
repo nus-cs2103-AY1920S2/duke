@@ -11,21 +11,30 @@ public class Ui {
     /**
      * Welcomes the user with a message.
      */
-    public static void welcome() {
-        printLine();
-        print("Hello, duke.Duke here! :D \n"
-                + "I'm feeling good and ready to go! "
-                + "What can I do for you?");
-        printLine();
+    public static String welcome() {
+        return Constant.FORMAT_LINE
+            + "Hello, duke.Duke here! :D \n"
+            + "I'm feeling good and ready to go!\n"
+            + "What can I do for you?\n"
+            + "Here, you can do the following:\n"
+            + "todo <task name>\n"
+            + "event <event name> /at <event date>\n"
+            + "deadline <deadlined task name> /by <deadline date>"
+            + "list\n"
+            + "done <task number>\n"
+            + "delete <task number>\n"
+            + "find <keyword>\n"
+            + "bye\n"
+            + Constant.FORMAT_LINE;
     }
 
     /**
      * Says goodbye to the user.
      */
-    public static void goodbye() {
-        printLine();
-        print("====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D");
-        printLine();
+    public static String goodbye() {
+        return Constant.FORMAT_LINE
+            + "====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D"
+            + Constant.FORMAT_LINE;
     }
 
     /**
@@ -33,26 +42,23 @@ public class Ui {
      *
      * @param index index of current Task to remove.
      */
-    public static void printTaskRemoval(int index, Task removedTask, TaskList allTasks) {
-        printLine();
-        print("Removed Task #" + (index + 1) + ": " + removedTask
-                + "\nHope it's worth it!\nYou are now left with "
-                + allTasks.sizeOf() + " tasks.");
-        printLine();
+    public static String taskRemovalMessage(int index, Task removedTask, TaskList allTasks) {
+        return Constant.FORMAT_LINE
+                + "Removed Task #" + (index + 1) + ": " + removedTask
+                + "\nHope it's worth it!\nYou are now left with " + allTasks.sizeOf() + " tasks."
+                + Constant.FORMAT_LINE;
     }
 
     /**
      * Prints all tasks, their number order, and their completion for list command.
      */
-    public static void printAllTasks(TaskList allTasks) throws EmptyTaskListException {
-        printLine();
-        if (allTasks.isEmpty()) {
-            throw new EmptyTaskListException("");
-        }
+    public static String listAllTasksMessage(TaskList allTasks) {
+        String result = Constant.FORMAT_LINE;
         for (int i = 0; i < allTasks.sizeOf(); i++) {
-            printTaskFromStored(i, allTasks);
+            result += obtainTaskFromStoredMessage(i, allTasks) + "\n";
         }
-        printLine();
+        result += Constant.FORMAT_LINE;
+        return result;
     }
 
     /**
@@ -60,25 +66,26 @@ public class Ui {
      *
      * @param t Task that has been completed via doTask method.
      */
-    public static void printTaskComplete(Task t) {
-        printLine();
+    public static String taskCompleteMessage(Task t) {
+        String result = Constant.FORMAT_LINE;
         if (t.getIsDone()) {
-            print("That's already done, try another. Or did you make a careless mistake? XD");
+            result += "That's already done, try another. Or did you make a careless mistake? XD";
         } else {
-            print("Nice! The following task has been marked completed:\n"
-                    + "===> [V] " + t + " <===");
+            result += "Nice! The following task has been marked completed:\n"
+                    + "===> [V] " + t + " <===";
         }
-        printLine();
+        result += Constant.FORMAT_LINE;
+        return result;
     }
 
     /**
-     * Prints individual task with current completion status.
+     * Prints individual task with current completion status, without formatting lines.
      *
      * @param i index of storage of the Task in the container/collection.
      */
-    public static void printTaskFromStored(int i, TaskList allTasks) {
+    public static String obtainTaskFromStoredMessage(int i, TaskList allTasks) {
         String tickOrCross = allTasks.getTask(i).obtainStatusIcon();
-        print(String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.getTask(i));
+        return String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.getTask(i);
     }
 
     /**
@@ -86,17 +93,8 @@ public class Ui {
      *
      * @param e String to be printed.
      */
-    public static void printExceptionMessage(String e) {
-        printLine();
-        print(e);
-        printLine();
-    }
-
-    /**
-     * Prints a horizontal formatting line.
-     */
-    public static void printLine() {
-        print(Constant.FORMAT_LINE);
+    public static String exceptionMessage(String e) {
+        return Constant.FORMAT_LINE + e + "\n" + Constant.FORMAT_LINE;
     }
 
     /**
@@ -104,8 +102,8 @@ public class Ui {
      *
      * @param s String to be printed.
      */
-    public static void print(String s) {
-        System.out.println(s);
+    public static String customMessage(String s) {
+        return s;
     }
 
 }

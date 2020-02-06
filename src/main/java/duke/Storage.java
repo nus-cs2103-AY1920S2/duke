@@ -107,7 +107,7 @@ public class Storage {
 
             }
         } catch (FileNotFoundException fnfe) {
-            print(fnfe.getMessage());
+            print("File is not found, but I gotcha back bro; will create one for you to save your tasks.");
         }
     }
 

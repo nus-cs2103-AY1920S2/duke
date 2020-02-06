@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Main class for the entire program, Duke is the chatbot and this is the driver class.
  */
@@ -26,73 +24,30 @@ public class Duke {
      * Constructor for Duke.
      */
     public Duke() {
+
+        // Assignment of objects
         this.allTasks = new TaskList();
         this.ui = new Ui();
         this.file = new Storage();
-    }
 
-    /**
-     * Main driver method.
-     *
-     * @param args standard argument.
-     */
-    public static void main(String[] args) {
-
-        // Welcomes the user
-        Ui.welcome();
-
-        // Initialise duke.Duke program
-        Duke duke = new Duke();
-        duke.initialisePastUserData();
-
-        // Run main program
-        duke.run();
-
-        // User is done
-        Ui.goodbye();
-
+        // Initialise Duke with any last saved user data
+        this.initialisePastUserData();
     }
 
     /**
      * Runs TaskList to serve the user.
      */
-    private void run() {
-        // Scanner object to take in user input
-        Scanner io = new Scanner(System.in);
-
-
-        // Accept and Respond to User Input
-        while (io.hasNextLine()) {
-            String command = io.nextLine();
-            // Begins accepting input commands
-            allTasks.serveUser(command);
-        }
-    }
-
-    /**
-     * Constructs new duke.Duke, and uses past user data if any.
-     */
-    private void initialisePastUserData() {
-        // Loads previous Tasks if any
-        load();
+    public String run(String command) {
+        return allTasks.serveUser(command);
     }
 
     /**
      * Loads previously saved files if any.
      * Creates new file otherwise.
      */
-    private void load() {
+    public void initialisePastUserData() {
         // Take information from file to update allTasks to last saved preferences
         file.readFromLastSavedFile(allTasks);
-    }
-
-    /**
-     * Prints a given String.
-     *
-     * @param s String to be printed.
-     */
-    private void print(String s) {
-        System.out.println(s);
     }
 
 }
