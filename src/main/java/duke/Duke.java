@@ -65,9 +65,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        boolean isShutdown = false;
         try {
-            isShutdown = parser.parse(input);
+            parser.parse(input);
             storage.saveToFile(tasks);
         } catch (InvalidCommandException | IncorrectArgumentException e) {
             return e.getMessage();
