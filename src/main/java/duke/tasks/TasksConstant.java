@@ -8,6 +8,6 @@ public class TasksConstant {
     /**
      * Utilised in printing.
      */
-    public static final String FORMAT_LINE = "_____________________________________________________";
+    public static final String FORMAT_LINE = "";
 
 }

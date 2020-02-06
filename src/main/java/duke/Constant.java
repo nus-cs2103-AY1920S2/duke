@@ -8,6 +8,6 @@ public class Constant {
     /**
      * Utilised in printing.
      */
-    public static final String FORMAT_LINE = "_____________________________________________________\n";
+    public static final String FORMAT_LINE = "";
 
 }

@@ -32,6 +32,7 @@ public class Duke {
 
         // Initialise Duke with any last saved user data
         this.initialisePastUserData();
+
     }
 
     /**
