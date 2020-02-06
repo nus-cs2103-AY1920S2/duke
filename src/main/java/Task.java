@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
  * Abstract class Task to represent a Task. A Task in our ChatBot
  * can be a Todo, Deadline, or Event.
  */
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
     protected LocalDate time;
@@ -79,7 +79,9 @@ public abstract class Task {
         return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    public abstract String getTypeName();
+    public String getTypeName() {
+        return "Task";
+    }
 
     /**
      * returns a String representation of a Task instance.
