@@ -40,7 +40,7 @@ public class ReminderCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        return "test";
+        return taskList.listReminder();
     }
 
     /**

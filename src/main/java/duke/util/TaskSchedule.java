@@ -23,7 +23,7 @@ import java.time.format.DateTimeParseException;
  * @author Mario Lorenzo
  */
 
-public class TaskSchedule {
+public class TaskSchedule implements Comparable<TaskSchedule> {
     private LocalDateTime date;
     private static final String INPUT_DATE_FORMAT = "dd-MM-yyyy HH:mm";
     private static final String OUTPUT_DATE_FORMAT = "dd-MM-yyyy HH:mm";
@@ -74,5 +74,16 @@ public class TaskSchedule {
     @Override
     public String toString() {
         return this.date.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT));
+    }
+
+    /**
+     * Overrides the compareTo's Comparable interface method.
+     * @param taskSchedule A TaskSchedule instance that wants to be compared.
+     * @return The resulting integer from comparing the elements.
+     */
+
+    @Override
+    public int compareTo(TaskSchedule taskSchedule) {
+        return this.date.compareTo(taskSchedule.date);
     }
 }
