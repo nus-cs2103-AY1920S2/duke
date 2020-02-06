@@ -15,8 +15,8 @@ import java.io.ObjectOutputStream;
 
 /** 
  * Class which handles the underlying implementation of I/O from and to files.
- *      1. Reading of tasks from a file and updating the current TaskList object;
- *      2. Saving tasks from the current TaskList to the file in the filepath provided.
+ * <li> Reading of tasks from a file and updating the current TaskList object;
+ * <li> Saving tasks from the current TaskList to the file in the filepath provided.
  */
 class Storage {
     Path dir = null;
