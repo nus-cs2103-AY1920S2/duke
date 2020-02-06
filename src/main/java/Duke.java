@@ -1,21 +1,20 @@
 import java.io.IOException;
-import java.util.Scanner;
 
-import javafx.application.Application;
+import Grapie.Exceptions.GrapieExceptions;
+import Grapie.Storage;
+import Grapie.TaskList;
+import Grapie.Ui;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-public class Duke { //extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -34,7 +33,7 @@ public class Duke { //extends Application {
      * Main constructor for Duke.
      *
      * @throws IOException Throws away the exception.
-     * @throws GrapieExceptions Throws GrapieExceptions.
+     * @throws GrapieExceptions Throws Grapie.Exceptions.GrapieExceptions.
      */
     public Duke() throws IOException, GrapieExceptions {
         String filePath = "data/dukeStorage.txt";
@@ -48,13 +47,7 @@ public class Duke { //extends Application {
      *
      * @throws IOException Throws away exception.
      */
-    public String runDuke(String input) throws IOException {
-        //greetings();
-
-        //Scanner class for input
-        //Scanner sc = new Scanner(System.in);
-        //String nextStr = sc.nextLine();
-
+    public String runDuke(String input) throws IOException, GrapieExceptions {
         //loop
         if (!input.equals("bye")) { //check for ending input
             String result = ui.readCommand(input, tasks);
@@ -64,7 +57,6 @@ public class Duke { //extends Application {
             return sayonara();
         }
 
-        //sayonara();
     }
 
 
@@ -85,7 +77,7 @@ public class Duke { //extends Application {
 
                 + "What do ya need from me?\n";
 
-        //TaskList.formattingDivider(intro);
+        //Grapie.TaskList.formattingDivider(intro);
 
         return intro;
     }
@@ -94,27 +86,9 @@ public class Duke { //extends Application {
      * Returns goodbye to the user.
      */
     public String sayonara() {
-        //TaskList.formattingDivider("Okie!! Goodbye!");
+        //Grapie.TaskList.formattingDivider("Okie!! Goodbye!");
         return "Okie!! Goodbye!";
     }
-
-    /**
-     * The main method.
-     *
-     * @param args The main method.
-     * @throws IOException Throws away exception.
-     */
-//    public static void main(String[] args) throws IOException {
-//        Duke duke = null;
-//        try {
-//            duke = new Duke();
-//        } catch (GrapieExceptions grapieExceptions) {
-//            System.out.println("    #__________________________________________________________# \n");
-//            System.out.println("      " + grapieExceptions);
-//            System.out.println("    #__________________________________________________________#");
-//        }
-//        //duke.runDuke();
-//    }
 
     /**
      * Iteration 1:
@@ -134,7 +108,7 @@ public class Duke { //extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws IOException {
+    String getResponse(String input) throws IOException, GrapieExceptions {
         //input is the user input
         String result = "";
         if (!input.equals("bye")) { //check for ending input

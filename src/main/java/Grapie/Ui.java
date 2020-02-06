@@ -1,3 +1,7 @@
+package Grapie;
+
+import Grapie.Exceptions.GrapieExceptions;
+
 import java.io.IOException;
 
 public class Ui {
@@ -12,24 +16,22 @@ public class Ui {
 
 
     /**
-     * Constructor for Ui.
+     * Constructor for Grapie.Ui.
      */
     public Ui() {
         //deals with interactions with the user
-        //this.userInput = userInput;
-
         parser = new Parser();
     }
 
 
     /**
-     * Use Parser to read user's command to call correct method, and prints out any error encountered.
+     * Use Grapie.Parser to read user's command to call correct method, and prints out any error encountered.
      *
      * @param command User's input.
-     * @param tasks TaskList class created in Duke.
+     * @param tasks Grapie.TaskList class created in Duke.
      * @throws IOException Throws away the exception.
      */
-    public String readCommand(String command, TaskList tasks) throws IOException {
+    public String readCommand(String command, TaskList tasks) throws IOException, GrapieExceptions {
         String commandArr = parser.makeSenseOfUserCommand(command);
 
         if (commandArr.equals(LIST)) {
@@ -40,18 +42,14 @@ public class Ui {
                 String result = tasks.completeTask(command);
                 return result;
             } catch (GrapieExceptions grapieExceptions) {
-                System.out.println("    #__________________________________________________________# \n");
-                System.out.println("      " + grapieExceptions);
-                System.out.println("    #__________________________________________________________#");
+                String ha = "" + grapieExceptions;
+                return ha;
             }
         } else if (commandArr.equals(ADD)) {
             try {
                 String result = tasks.addToList(command);
                 return result;
             } catch (GrapieExceptions grapieExceptions) {
-//                System.out.println("    #__________________________________________________________# \n");
-//                System.out.println("      " + grapieExceptions);
-//                System.out.println("    #__________________________________________________________#");
                 String ha = "" + grapieExceptions;
                 return ha;
             }
@@ -60,12 +58,8 @@ public class Ui {
                 String result = tasks.deleteTask(command);
                 return  result;
             } catch (GrapieExceptions grapieExceptions) {
-                //System.out.println("    #__________________________________________________________# \n");
-                //System.out.println("      " + grapieExceptions);
-
                 String ha = "" + grapieExceptions;
                 return ha;
-                //System.out.println("    #__________________________________________________________#");
             }
         } else if (commandArr.equals(FIND)) {
             //find
@@ -73,10 +67,6 @@ public class Ui {
                 String result = tasks.findFromList(command);
                 return result;
             } catch (GrapieExceptions grapieExceptions) {
-//                System.out.println("    #__________________________________________________________# \n");
-//                System.out.println("      " + grapieExceptions);
-//                System.out.println("    #__________________________________________________________#");
-
                 String ha = "" + grapieExceptions;
                 return ha;
             }

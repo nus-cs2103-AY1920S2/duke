@@ -1,14 +1,18 @@
+package Grapie;
+
+import Grapie.Exceptions.GrapieExceptions;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    String time;
-    LocalDate localDate;
+    private String time;
+    private LocalDate localDate;
 
     /**
-     * Constructor for Event object.
+     * Constructor for Grapie.Event object.
      *
-     * @param description Event's description.
+     * @param description Grapie.Event's description.
      * @param time The time and date for the event.
      * @throws GrapieExceptions Throws error for incorrect formatting.
      */

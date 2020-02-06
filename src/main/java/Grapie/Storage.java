@@ -1,3 +1,7 @@
+package Grapie;
+
+import Grapie.Exceptions.GrapieExceptions;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
@@ -8,10 +12,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
-     * Constructor for Storage class.
+     * Constructor for Grapie.Storage class.
      *
      * @param filePath The filepath to get the Hard Disk data from.
      * @throws IOException Throws exception.
@@ -24,9 +28,9 @@ public class Storage {
     }
 
     /**
-     * Load hard disk information into an ArrayList for TaskList class to use.
+     * Load hard disk information into an ArrayList for Grapie.TaskList class to use.
      *
-     * @return Returns an ArrayList of Task, loaded from the Hard Disk.
+     * @return Returns an ArrayList of Grapie.Task, loaded from the Hard Disk.
      * @throws FileNotFoundException Throws exception.
      * @throws GrapieExceptions Throws exception.
      */
@@ -51,7 +55,6 @@ public class Storage {
             for (int i = 0; i < dataSplited.length; i++) {
                 dataSplited[i] = dataSplited[i].trim();
             }
-            //System.out.println(dataSplited.length);
 
             if (dataSplited.length == 3) {
                 //is a todo
@@ -89,7 +92,7 @@ public class Storage {
      * Convert task into correct format, and store in dukeStorage.txt file.
      *
      * @param task The task to be converted into the new format.
-     * @param type Todo, Event or Deadline.
+     * @param type Grapie.Todo, Grapie.Event or Grapie.Deadline.
      * @param time The date and time for the Tasks.
      * @throws IOException Throws exception.
      */
@@ -172,7 +175,7 @@ public class Storage {
         Scanner myReader = new Scanner(myObj);
 
         String newData = "";
-        boolean firstLineDone = false;
+        boolean isFirstLineDone = false;
         int counter = 1;
 
         while (myReader.hasNextLine()) {
@@ -181,9 +184,9 @@ public class Storage {
             if (counter == lineNumber) {
                 counter++;
             } else {
-                if (!firstLineDone) {
+                if (!isFirstLineDone) {
                     newData += data;
-                    firstLineDone = true;
+                    isFirstLineDone = true;
                 } else {
                     newData += "\n" + data;
                 }
@@ -191,7 +194,6 @@ public class Storage {
                 counter++;
             }
         }
-
 
         FileOutputStream fileOut = new FileOutputStream(filePath);
         fileOut.write(newData.getBytes());

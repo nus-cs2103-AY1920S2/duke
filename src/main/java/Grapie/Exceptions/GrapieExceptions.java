@@ -1,3 +1,5 @@
+package Grapie.Exceptions;
+
 public class GrapieExceptions extends Exception {
 
     /**

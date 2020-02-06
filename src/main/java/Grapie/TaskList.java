@@ -1,39 +1,25 @@
+package Grapie;
+
+import Grapie.Exceptions.GrapieExceptions;
+
 import java.io.IOException;
 import java.util.List;
 
 public class TaskList {
     private List<Task> storingList;
-    Storage storage;
+    private Storage storage;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for Grapie.TaskList.
      *
-     * @param load    the arrayList obtained from Storage class's load method. Contains task from hard disk.
-     * @param storage Storage class previously created from Duke.
+     * @param load    the arrayList obtained from Grapie.Storage class's load method. Contains task from hard disk.
+     * @param storage Grapie.Storage class previously created from Duke.
      */
     public TaskList(List<Task> load, Storage storage) {
         //contains the task list e.g., it has operations to add/delete tasks in the list
         storingList = load;
         this.storage = storage;
     }
-
-//    /**
-//     * Format the output.
-//     *
-//     * @param contentStr The string to be formatted.
-//     */
-//    public static void formattingDivider(String contentStr) {
-//        System.out.println("    #__________________________________________________________#");
-//        String[] lines = contentStr.split("\\r?\\n");
-//
-//        for (int i = 0; i < lines.length; i++) {
-//            System.out.println("      " + lines[i]);
-//        }
-//
-//        //System.out.println(contentStr);
-//        System.out.println("    #__________________________________________________________# \n");
-//
-//    }
 
     /**
      * Format for printing the task added.
@@ -45,7 +31,6 @@ public class TaskList {
                 + task + "\n"
                 + "Now you have " + storingList.size() + " tasks in the list.";
 
-        //formattingDivider(printStr);
         return printStr;
     }
 
@@ -70,7 +55,6 @@ public class TaskList {
                     Task todo = new Todo(detailsStr);
                     storingList.add(todo);
                     String result = printAddingTask(todo);
-
 
                     //store into hard disk
                     storage.convertToHardDiskFormatAndStore(todo, "T", "");
@@ -119,8 +103,6 @@ public class TaskList {
                     storage.convertToHardDiskFormatAndStore(deadline, "D", eventAndTime[1]);
                     return result;
                 } else {
-                    //"OOPS!!! Deadline in wrong format. Please use: deadline your_deadline /by YYYY-MM-DD
-                    // TTTT"
                     throw new GrapieExceptions(ErrorMsg.deadlineFormatError);
                 }
             } else {
@@ -133,25 +115,10 @@ public class TaskList {
     }
 
     /**
-     * Check if a valid number is inputted in String form.
-     *
-     * @param numStr the string to be checked.
-     * @return Boolean stating if the String is a valid number.
-     */
-    public boolean isNumber(String numStr) {
-        try {
-            Integer.parseInt(numStr);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    /**
      * Help mark a task as completed (O).
      * Also checks if its a valid task number or if the task is already completed.
      *
-     * @param doneTaskStr Task the user wants to be marked as complete.
+     * @param doneTaskStr Grapie.Task the user wants to be marked as complete.
      * @throws GrapieExceptions Invalid task number, or already completed task thrown as error.
      * @throws IOException      Throws away the exception.
      */
@@ -164,7 +131,7 @@ public class TaskList {
             String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
             strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
 
-            boolean isANumber = isNumber(strNumberDone);
+            boolean isANumber = Parser.isNumber(strNumberDone);
 
             if (isANumber) {
                 int numDone = Integer.parseInt(strNumberDone); //convert to number
@@ -179,11 +146,9 @@ public class TaskList {
 
                         String printStr =
                                 "Nice! I've marked this task as done: \n" + storingList.get(numDone - 1);
-                        //formattingDivider(printStr);
                         storage.replaceLineFromHardDisk(numDone);
 
                         return printStr;
-
                     }
                 } else {
                     throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numDone));
@@ -212,7 +177,7 @@ public class TaskList {
                 String strNumberDeleted = inputStr.substring(7, inputStr.length());
                 strNumberDeleted.replaceAll("\\s+", ""); //remove all white spaces
 
-                boolean isANumber = isNumber(strNumberDeleted);
+                boolean isANumber = Parser.isNumber(strNumberDeleted);
 
                 if (isANumber) {
                     int numToDelete = Integer.parseInt(strNumberDeleted);
@@ -227,10 +192,6 @@ public class TaskList {
                         storingList.remove(numToDelete - 1);
                         storage.deleteLineFromHardDisk(numToDelete);
                         return toPrint;
-                        //formattingDivider(toPrint);
-                        //delete from hard disk
-
-
                     } else {
                         throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
                     }
@@ -255,8 +216,6 @@ public class TaskList {
             String keyword = command.substring(5, command.length());
 
             int counter = 1;
-            // System.out.println("    #__________________________________________________________# \n");
-            //System.out.println("    Here are the matching tasks in your list:");
             String finalStr = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < storingList.size(); i++) {
                 Task task = storingList.get(i);
@@ -266,9 +225,7 @@ public class TaskList {
                     counter++;
                 }
             }
-
             return finalStr;
-            //System.out.println("    #__________________________________________________________# \n");
         }
     }
 
@@ -284,7 +241,5 @@ public class TaskList {
         }
 
         return stringList;
-        //formattingDivider(stringList);
     }
-
 }

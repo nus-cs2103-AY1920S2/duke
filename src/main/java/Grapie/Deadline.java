@@ -1,17 +1,20 @@
-import java.text.ParseException;
+package Grapie;
+
+import Grapie.Exceptions.GrapieExceptions;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    LocalDate localDate;
-    LocalTime localTime;
+    private LocalDate localDate;
+    private LocalTime localTime;
 
     String time;
     boolean haveTime;
 
     /**
-     * Constructor to create Deadline object.
+     * Constructor to create Grapie.Deadline object.
      *
      * @param description The description for deadline.
      * @param time        The time for the deadline task.

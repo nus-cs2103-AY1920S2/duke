@@ -1,6 +1,8 @@
+package Grapie;
+
 public class Todo extends Task {
     /**
-     * Constructor for Todo.
+     * Constructor for Grapie.Todo.
      *
      * @param description The description for the todo task.
      */
