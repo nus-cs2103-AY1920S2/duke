@@ -51,7 +51,7 @@ public abstract class Task {
 		try {
 			this.description = (String) data.get("description");
 			this.commandText = (String) data.get("commandText");
-			this.isDone = ((String) data.get("isDone")).equals("true") ? true : false;
+			this.isDone = ((String) data.get("isDone")).equals("true");
 			JSONArray tokensJson = (JSONArray) data.get("tokens");
 			remainingTokens = new ArrayList<String>();
 

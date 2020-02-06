@@ -12,6 +12,8 @@ public class Parser {
 			throw new DukeParseException("A command requires at least 1 token!");
 		}
 
+
+		assert(tokens.length >= 1);
 		if (tokens[0].equals("bye")) {
 			if (tokens.length > 1) {
 				throw new DukeParseException("If you want to say good-bye, please type bye");

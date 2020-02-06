@@ -33,6 +33,7 @@ public class TaskList {
 	} 
 
 	public Task getTask(int index) {
+		assert(index >= 0);
 		return this.containers.get(index);
 	}
 
@@ -42,6 +43,7 @@ public class TaskList {
 
 	public void markAsDone(List<Integer> needy) {
 		for (Integer index: needy) {
+			assert(index >= 0);
 			this.containers.get(index).markAsDone();
 		}
 	}
