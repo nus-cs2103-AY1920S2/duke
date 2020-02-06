@@ -1,6 +1,10 @@
 package duke;
 import java.util.List;
-import duke.task.*;
+import java.util.Collections;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.dukeException.DukeException;
 import duke.DukeResponse;
 
@@ -59,6 +63,19 @@ public class Interpreter {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Noted. I've removed this task:").append("\n");
 		sb.append(task.toString()).append("\n");
+		sb.append("Now you have ")
+		  .append(Integer.toString(numberOfCurrentTasks))
+		  .append(" in the list!")
+		  .append("\n");
+		return new DukeResponse(sb.toString());
+	}
+
+	static public DukeResponse printMultipleDelete(List<Task> tasks, int numberOfCurrentTasks) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Noted. I've removed these tasks:").append("\n");
+		for (int i = 0; i < tasks.size(); i++) {
+			sb.append("   ").append(tasks.get(i).toString()).append("\n");
+		}
 		sb.append("Now you have ")
 		  .append(Integer.toString(numberOfCurrentTasks))
 		  .append(" in the list!")
