@@ -9,7 +9,7 @@ version '0.1.0'
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Launcher"
+    mainClassName = "Launcher"
 }
 
 test {
