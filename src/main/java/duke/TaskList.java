@@ -39,81 +39,73 @@ public class TaskList {
     /**
      * Serves the user to do the bulk of the work in process individual commands.
      */
-    public void serveUser() {
-
-        // Scanner object to take in user input
-        Scanner io = new Scanner(System.in);
+    public void serveUser(String command) {
 
         // Parser to make sense of various commands
         Parser logic = new Parser();
 
-        // Accept and Respond to User Input
-        while (io.hasNextLine()) {
+        try {
+            // Split String command to find the intention of the user (first word)
+            String[] commandWords = command.split("\\s");
 
-            try {
-                // obtain String command and split it to find the intention of the user (first word)
-                String command = io.nextLine();
-                String[] commandWords = command.split("\\s");
+            // Depending on command, we process the command
+            // Exceptions will be thrown respectively
+            switch (commandWords[0]) {
 
-                // Depending on command, we process the command
-                // Exceptions will be thrown respectively
-                switch (commandWords[0]) {
+            case "bye":
+                return;
 
-                case "bye":
-                    return;
+            case "list":
+                Ui.printAllTasks(this);
+                break;
 
-                case "list":
-                    Ui.printAllTasks(this);
-                    break;
+            case "delete":
+                deleteTask(command);
+                break;
 
-                case "delete":
-                    deleteTask(command);
-                    break;
-
-                case "done":
-                    // user inputs will be "done _____"
-                    // Take only the very next token which must be an integer
-                    if (logic.satisfiesMinimumDoneCommandLength(commandWords)) {
-                        // this is a valid command
-                        if (logic.determineIfValidDoneCommand(commandWords, this.sizeOf())) {
-                            // this valid command has a valid number, so, mark as done
-                            doTask(Integer.parseInt(commandWords[1]));
-                        } else {
-                            // invalid input: attempting to do a non-existent task
-                            throw new InputUnclearException("");
-                        }
+            case "done":
+                // user inputs will be "done _____"
+                // Take only the very next token which must be an integer
+                if (logic.satisfiesMinimumDoneCommandLength(commandWords)) {
+                    // this is a valid command
+                    if (logic.determineIfValidDoneCommand(commandWords, this.sizeOf())) {
+                        // this valid command has a valid number, so, mark as done
+                        doTask(Integer.parseInt(commandWords[1]));
                     } else {
-                        // invalid input
-                        throw new DoneException("");
+                        // invalid input: attempting to do a non-existent task
+                        throw new InputUnclearException("");
                     }
-                    break;
-
-                case "todo":
-                    addNewToDo(command);
-                    break;
-
-                case "deadline":
-                    addNewDeadline(command);
-                    break;
-
-                case "event":
-                    addNewEvent(command);
-                    break;
-
-                case "find":
-                    findTask(command);
-                    break;
-
-                default:
-                    throw new InputUnclearException("");
-
+                } else {
+                    // invalid input
+                    throw new DoneException("");
                 }
-            } catch (DoneException | DeadlineException | DeleteException | EmptyTaskListException
-                | EventException | InputUnclearException | ToDoException e) {
-                Ui.printExceptionMessage(e.toString());
-            }
+                break;
 
+            case "todo":
+                addNewToDo(command);
+                break;
+
+            case "deadline":
+                addNewDeadline(command);
+                break;
+
+            case "event":
+                addNewEvent(command);
+                break;
+
+            case "find":
+                findTask(command);
+                break;
+
+            default:
+                throw new InputUnclearException("");
+
+            }
+        } catch (DoneException | DeadlineException | DeleteException | EmptyTaskListException
+            | EventException | InputUnclearException | ToDoException e) {
+            Ui.printExceptionMessage(e.toString());
         }
+
     }
 
     /**
@@ -304,8 +296,6 @@ public class TaskList {
     public void addSavedTaskToStored(Task t) {
         allTasks.add(t);
     }
-
-
 
     /**
      * Returns size of the TaskList's ArrayList.

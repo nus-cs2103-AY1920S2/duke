@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Scanner;
+
 /**
  * Main class for the entire program, Duke is the chatbot and this is the driver class.
  */
@@ -41,7 +43,7 @@ public class Duke {
 
         // Initialise duke.Duke program
         Duke duke = new Duke();
-        duke.initialise();
+        duke.initialisePastUserData();
 
         // Run main program
         duke.run();
@@ -55,14 +57,22 @@ public class Duke {
      * Runs TaskList to serve the user.
      */
     private void run() {
-        // Begins accepting input commands
-        allTasks.serveUser();
+        // Scanner object to take in user input
+        Scanner io = new Scanner(System.in);
+
+
+        // Accept and Respond to User Input
+        while (io.hasNextLine()) {
+            String command = io.nextLine();
+            // Begins accepting input commands
+            allTasks.serveUser(command);
+        }
     }
 
     /**
      * Constructs new duke.Duke, and uses past user data if any.
      */
-    private void initialise() {
+    private void initialisePastUserData() {
         // Loads previous Tasks if any
         load();
     }
