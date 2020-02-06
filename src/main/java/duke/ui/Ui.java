@@ -16,7 +16,7 @@ public class Ui {
     public static String dunno = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static String loadingErrorMsg = "File not exist";
     private boolean isOpen = false;
-    private Scanner sc;
+    protected Scanner sc;
 
     public Ui(Scanner inputSc) {
         this.sc = inputSc;
