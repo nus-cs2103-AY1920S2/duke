@@ -2,6 +2,7 @@ package dukebot.ui;
 
 /**
  * Name of lines to say.
+ * Names with _WT (with task) suffix are to be used with the with task function.
  */
 public enum LineName {
     ALIAS_ALREADY_EXISTS,
@@ -10,11 +11,11 @@ public enum LineName {
     DATE_TIME_PARSE_FAIL,
     DEADLINE_BY_MISSING,
     DEADLINE_EMPTY,
+    DEFAULT_OUT_OF_INDEX,
     DELETE_EMPTY,
     DELETE_OUT_OF_INDEX,
     DONE_ALREADY,
     DONE_EMPTY,
-    DONE_OUT_OF_INDEX,
     DONE_SUCCESS,
     ERROR_PLACEHOLDER,
     EVENT_AT_MISSING,
@@ -30,6 +31,10 @@ public enum LineName {
     LOAD_FAIL,
     NOT_A_NUMBER,
     NO_INPUT,
+    RESCHEDULE_EMPTY,
+    RESCHEDULE_BAD_TASK_WT,
+    RESCHEDULE_OUT_OF_INDEX,
+    RESCHEDULE_SUCCESS_WT,
     RESET_STORAGE_INIT,
     RESET_STORAGE_SUCCESS,
     RESET_STORAGE_FAIL,

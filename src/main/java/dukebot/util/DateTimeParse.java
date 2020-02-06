@@ -1,4 +1,4 @@
-package dukebot.command;
+package dukebot.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
+/**
+ * Class containing DateTime parser.
+ */
 public class DateTimeParse {
 
     private static String[] dateTimeRegexps = {
@@ -72,6 +75,7 @@ public class DateTimeParse {
     public static LocalDateTime parseDateWithCustomDateTime(String dateTime, LocalDateTime localDateTime)
             throws DateTimeParseException {
         dateTime = dateTime.replaceAll("[\\\\/\\-]+", "/");
+        dateTime = dateTime.replaceAll(":", "");
         for (int i = 0; i < dateTimeRegexps.length; i++) {
             if (dateTime.matches(dateTimeRegexps[i])) {
                 try {

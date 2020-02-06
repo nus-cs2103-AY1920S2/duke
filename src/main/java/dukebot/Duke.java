@@ -87,15 +87,13 @@ public class Duke {
 
         if (c.isExit()) {
             // Hack to delay program close.
-            new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException ie) {
-                        System.exit(0);
-                    }
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException ie) {
                     System.exit(0);
                 }
+                System.exit(0);
             }).start();
         }
 

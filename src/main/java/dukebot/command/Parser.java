@@ -105,6 +105,8 @@ public class Parser {
                 return new UiOnlyCommand(LineName.HELP);
             case LIST:
                 return new ListCommand();
+            case RESCHEDULE:
+                return new RescheduleCommand(inpArr);
             case RESET:
                 parserState = ParserState.CONFIRM_RESET_STORAGE;
                 return new UiOnlyCommand(LineName.RESET_STORAGE_INIT);

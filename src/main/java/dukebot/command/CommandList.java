@@ -13,6 +13,7 @@ public enum CommandList {
     FIND("find"),
     HELP("help"),
     LIST("list"),
+    RESCHEDULE("reschedule"),
     RESET("reset"),
     TODO("todo");
 

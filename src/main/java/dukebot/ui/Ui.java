@@ -110,6 +110,7 @@ public class Ui {
                     + "find <query>\n-- Finds a task which has <query> as a substring of the task's name.\n\n"
                     + "done <task index>\n-- Marks the task as done.\n\n"
                     + "delete <task index>\n-- Deletes the task.\n\n"
+                    + "reschedule <task index> <time>\n-- Reschedules the task.\n\n"
                     + "bye\n-- Exits this application.\n\n"
                     + "reset\n-- The forbidden Command. Please never use it... Duke'll forget everything."
             );
@@ -132,14 +133,14 @@ public class Ui {
             dukeSays("Duke has no choice but to remind Master then!");
             dukeSays("These are the tasks which Master forgot:");
             break;
+        case DEFAULT_OUT_OF_INDEX:
+            dukeExpression = DukeExpression.SAD;
+            dukeSays("Duke can't seem to recall that item...");
+            break;
         case DONE_EMPTY:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.WHAT, DukeVoice.HEY);
             dukeExpression = DukeExpression.SAD;
             dukeSays("Duke doesn't think Master has done anything yet...");
-            break;
-        case DONE_OUT_OF_INDEX:
-            dukeExpression = DukeExpression.SAD;
-            dukeSays("Duke can't seem to recall that item...");
             break;
         case DONE_ALREADY:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
@@ -229,6 +230,13 @@ public class Ui {
             dukeSays("Yahallo! Duke's name is \n" + LOGO);
             dukeSays("Is this the first time Master has used Duke?\nType 'help' for the list of commands.");
             break;
+        case RESCHEDULE_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.WHAT, DukeVoice.HEY);
+            dukeExpression = DukeExpression.SAD;
+            dukeSays("What exactly does Master want Duke to reschedule?");
+            dukeSays("Master has to say the magic command:");
+            dukeSays("Reschedule <task index> <time>");
+            break;
         case RESET_STORAGE_INIT:
             dukeVoice = DukeVoice.WHAT;
             dukeExpression = DukeExpression.SAD;
@@ -243,11 +251,17 @@ public class Ui {
             dukeExpression = DukeExpression.SAD;
             dukeSays("It was nice knowing Master... Duke'll go somewhere far away now...");
             break;
+        case RESCHEDULE_SUCCESS_WT:
+        case RESCHEDULE_BAD_TASK_WT:
+            // Should never be called in deployment
+            dukeSays("Error, no tasks given...");
+            break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment
             // Fallthrough
         default:
             // Purely for testing, should never be called in deployment
+            assert false;
             dukeSays("There is an unexpected error :(");
             break;
         }
@@ -267,6 +281,40 @@ public class Ui {
                     + (task.getDone() ? " [Done!]" : "")
             );
             i += 1;
+        }
+    }
+
+    /**
+     * Prints message based on LineName with task information.
+     *
+     * @param lineName Line to say.
+     * @param task Task to use.
+     */
+    public void sayLineWithTask(LineName lineName, Task task) {
+        switch (lineName) {
+        case RESCHEDULE_SUCCESS_WT:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
+            dukeExpression = DukeExpression.HAPPY;
+            dukeSays("Duke has rescheduled task:\n" + task.getDescription());
+            dukeSays("to be at:\n" + task.dateTimeToString());
+            dukeSays("Try not to forget it Master!");
+            break;
+        case RESCHEDULE_BAD_TASK_WT:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("Is Master teasing Duke?");
+            dukeSays("The task: " + task.getDescription());
+            dukeSays("is a: " + task.getType());
+            dukeSays("which does not have a scheduled time.");
+            break;
+        case ERROR_PLACEHOLDER:
+            // Purely for testing, should never be called in deployment
+            // Fallthrough
+        default:
+            // Purely for testing, should never be called in deployment
+            assert false;
+            dukeSays("There is an unexpected error :(");
+            break;
         }
     }
 

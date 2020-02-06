@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
             try {
                 int taskInd = Integer.parseInt(inpArr[1]) - 1;
                 if (taskInd >= taskList.size() || taskInd < 0) {
-                    ui.sayLine(LineName.DONE_OUT_OF_INDEX);
+                    ui.sayLine(LineName.DEFAULT_OUT_OF_INDEX);
                 } else {
                     Task doneTask = taskList.getTask(taskInd);
                     if (doneTask.getDone()) {

@@ -29,9 +29,12 @@ public class TaskList {
     /**
      * Gets task at specified index.
      *
-     * @param taskInd  Index of task.
+     * @param taskInd Index of task.
      */
     public Task getTask(int taskInd) {
+        if (taskInd >= taskList.size() || taskInd < 0) {
+            return null;
+        }
         return this.taskList.get(taskInd);
     }
 
@@ -56,7 +59,7 @@ public class TaskList {
     /**
      * Deletes task at specified index.
      *
-     * @param taskInd  Index of task.
+     * @param taskInd Index of task.
      */
     public Task deleteTask(int taskInd) {
         if (taskInd >= size() || taskInd < 0) {
@@ -71,7 +74,7 @@ public class TaskList {
     /**
      * Finds all Tasks whose names contain toFind.
      *
-     * @param toFind  Task to find.
+     * @param toFind Task to find.
      * @return ArrayList of tasks found.
      */
     public ArrayList<Task> findAll(String toFind) {

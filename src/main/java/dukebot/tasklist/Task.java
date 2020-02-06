@@ -9,13 +9,14 @@ import java.util.Objects;
  * Abstract class for tasks to inherit from.
  */
 public abstract class Task implements Serializable {
-    private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private static final DateTimeFormatter DEFAULT_FORMAT_NO_TIME = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
     // private LocalDateTime localDateTimeProvider = LocalDateTime.now();
     protected final String description;
 
     private boolean isDone;
     protected final TaskType taskType;
-    protected final LocalDateTime dateTime;
+    protected LocalDateTime dateTime;
 
     protected Task(String description, TaskType taskType, LocalDateTime dateTime) {
         this.taskType = taskType;
@@ -32,6 +33,17 @@ public abstract class Task implements Serializable {
     // }
 
     /**
+     * Sets dateTime of task.
+     *
+     * @param dateTime DateTime to set.
+     */
+    public void setDateTime(LocalDateTime dateTime) {
+        if (dateTime != null) {
+            this.dateTime = dateTime;
+        }
+    }
+
+    /**
      * Sets task as done.
      */
     public void setDone() {
@@ -41,7 +53,7 @@ public abstract class Task implements Serializable {
     /**
      * Get done status of task.
      *
-     * @return  Done status of task
+     * @return Done status of task
      */
     public boolean getDone() {
         return this.isDone;
@@ -57,10 +69,19 @@ public abstract class Task implements Serializable {
     /**
      * Get type of task.
      *
-     * @return  String of taskType
+     * @return String of taskType
      */
     public String getType() {
         return this.taskType.toString();
+    }
+
+    /**
+     * Gets datetime associated with task.
+     *
+     * @return Time of task or null if it does not have a time.
+     */
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
     }
 
     /**
@@ -76,6 +97,8 @@ public abstract class Task implements Serializable {
             return "Today " + dateTime.toLocalTime().toString();
         } else if (dateTime.compareTo(LocalDateTime.now()) < 0) {
             return this.dateTime.format(DEFAULT_FORMAT) + " [Over]";
+        } else if (dateTime.getHour() == 0 && dateTime.getMinute() == 0) {
+            return this.dateTime.format(DEFAULT_FORMAT_NO_TIME);
         } else {
             return this.dateTime.format(DEFAULT_FORMAT);
         }
