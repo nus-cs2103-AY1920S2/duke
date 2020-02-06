@@ -65,6 +65,21 @@ public class Ui {
     }
 
     /**
+     * Method prints list of tasks found with matching keyword.
+     *
+     * @param taskList
+     */
+    public void showFound(ArrayList<Task> taskList) {
+        System.out.println(format + "      Here are the matching tasks in your list:");
+
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            Task current = taskList.get(i - 1);
+            System.out.println("      " + i + ". " + current);
+        }
+        System.out.println(format);
+    }
+
+    /**
      * Method prints error message when user enters invalid task number.
      */
     public void showTaskError() {

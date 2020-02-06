@@ -126,6 +126,24 @@ public class TaskList {
     }
 
     /**
+     * Method to find tasks with matching keywords.
+     *
+     * @param arr
+     */
+    public void find(String[] arr) {
+        String input = arr[1];
+        ArrayList<Task> temp = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = this.tasks.get(i);
+            if (task.description.contains(input)) {
+                temp.add(task);
+            }
+        }
+        ui.showFound(temp);
+    }
+
+    /**
      * Method to check if user has entered task description.
      *
      * @param size

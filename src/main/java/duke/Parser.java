@@ -34,6 +34,9 @@ public class Parser {
         } else if (input.equals("list")) {
             ui.showList(taskList);
 
+        } else if (arr[0].equals("find")) {
+            taskList.find(arr);
+
         } else if (arr[0].equals("done")) {
             taskList.done(arr);
 
