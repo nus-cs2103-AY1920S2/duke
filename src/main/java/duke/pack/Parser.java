@@ -16,7 +16,7 @@ public class Parser {
      * @return a Command that indicates what the user wants
      * @throws DukeException if command is not correctly inputted
      */
-    public Command parseCommand(String command) throws DukeException {
+    public static Command parseCommand(String command) throws DukeException {
         String[] comm = command.split(" ");
 
         if (command.equals("list")) {

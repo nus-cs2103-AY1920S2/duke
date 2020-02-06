@@ -1,5 +1,7 @@
 package duke.pack;
 
+import java.util.ArrayList;
+
 /**
  * Represents a command to add a task.
  */
@@ -22,6 +24,15 @@ public class AddCommand extends Command {
         storage.save(tasks);
         ui.showAdd(task);
         ui.showCount(tasks);
+    }
+
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addTask(task);
+        storage.save(tasks);
+
+        String resp = "Alright! I have added: \n" + task;
+
+        return resp;
     }
 
     /**

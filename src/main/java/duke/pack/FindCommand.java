@@ -32,6 +32,23 @@ public class FindCommand extends Command {
         }
     }
 
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String resp = "I have found these matching tasks! \n";
+
+        ArrayList<Task> list = tasks.getList();
+
+        int i = 1;
+
+        for (Task t: list) {
+            if (t.getFullDesc().contains(query)) {
+                resp = resp + "    " + i + "." + t + "\n";
+            }
+            i++;
+        }
+
+        return resp;
+    }
+
     public Boolean isExit() {
         return false;
     }

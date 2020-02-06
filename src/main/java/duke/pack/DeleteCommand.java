@@ -28,6 +28,18 @@ public class DeleteCommand extends Command {
         ui.showCount(tasks);
     }
 
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (taskNum > tasks.getSize()) {
+            throw new DukeException("Oh no! That task does not exist!");
+        }
+        Task task = tasks.deleteTask(taskNum);
+        storage.save(tasks);
+
+        String resp = "Yeet! I have tossed the task: \n" + task;
+
+        return resp;
+    }
+
     /**
      * indicates whether command is exit
      * @return boolean true if it is an exit command, else false
