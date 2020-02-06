@@ -1,6 +1,7 @@
 /**
  *  Exception class for Duke exceptions related to improper argument(s) provided.
  */
+
 package duke.exception;
 
 public class DukeArgumentException extends DukeException {

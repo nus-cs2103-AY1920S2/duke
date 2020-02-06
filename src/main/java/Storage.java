@@ -22,7 +22,7 @@ public class Storage {
     /**
      * Reads file specified in filepath and converts file content into a TaskList.
      * @return TaskList.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Throws exception if file is not found in the specified file path.
      */
     public TaskList getTaskFromMemory() throws FileNotFoundException {
         TaskList taskList = new TaskList();

@@ -35,7 +35,7 @@ public class Parser {
                 } else {
                     throw new DukeArgumentException("Please specify which task to be deleted.");
                 }
-            } else if (commandArray[0].toLowerCase().equals("find")){
+            } else if (commandArray[0].toLowerCase().equals("find")) {
                 if (commandArray.length >= 2) {
                     findTask(taskList, commandArray[1]);
                 } else {
@@ -72,7 +72,7 @@ public class Parser {
      * @param taskList User's TaskList.
      * @param input Input provided by the user.
      * @param type Type of Task ("T" for Todo, "D" for Deadline, "E" for Event).
-     * @throws DukeTaskException
+     * @throws DukeTaskException Throws exception related to Duke Task class.
      */
     public static void addTask(TaskList taskList, String input, String type) throws DukeTaskException {
         String str = "\nCurrent number of task(s): ";
@@ -92,11 +92,11 @@ public class Parser {
                     LocalDate deadlineDate = LocalDate.parse(by);
                     Deadline deadline = new Deadline(description, deadlineDate);
                     taskList.add(deadline);
-                    Ui.printWithBorder("The following task has been added:\n" +
-                            "    " + deadline.toString() + str + taskList.size());
+                    Ui.printWithBorder("The following task has been added:\n"
+                            + "    " + deadline.toString() + str + taskList.size());
                 } else {
-                    throw new DukeTaskException("Invalid date format detected. " +
-                            "Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
+                    throw new DukeTaskException("Invalid date format detected. "
+                            + "Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
                 }
             } else {
                 throw new DukeTaskException("\'/by\' field is missing.");
@@ -111,11 +111,11 @@ public class Parser {
                     LocalDate eventDate = LocalDate.parse(at);
                     Event event = new Event(description, eventDate);
                     taskList.add(event);
-                    Ui.printWithBorder("The following task has been added:\n" +
-                            "    " + event.toString() + str + taskList.size());
+                    Ui.printWithBorder("The following task has been added:\n"
+                            + "    " + event.toString() + str + taskList.size());
                 } else {
-                    throw new DukeTaskException("Invalid date format detected. " +
-                            "Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
+                    throw new DukeTaskException("Invalid date format detected. "
+                            + "Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
                 }
             } else {
                 throw new DukeTaskException("\'/at\' field is missing.");
@@ -141,7 +141,7 @@ public class Parser {
      * Marks the specified task as done.
      * @param taskList User's TaskList.
      * @param userIndex Index of Task to be marked as done.
-     * @throws DukeArgumentException
+     * @throws DukeArgumentException Throws exception related to invalid argument provided.
      */
     public void markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
@@ -161,7 +161,7 @@ public class Parser {
      * Deletes the specified task.
      * @param taskList User's TaskList.
      * @param userIndex Index of Task to be deleted.
-     * @throws DukeArgumentException
+     * @throws DukeArgumentException Throws exception related to invalid argument provided.
      */
     public void deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;

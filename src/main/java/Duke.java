@@ -5,6 +5,10 @@ public class Duke {
     private TaskList taskList;
     private boolean newUser;
 
+    /**
+     * Constructor for Duke class.
+     * @param filepath File path of .txt file for memory storage.
+     */
     public Duke(String filepath) {
         storage = new Storage(filepath);
         try {
@@ -38,6 +42,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../../data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }
