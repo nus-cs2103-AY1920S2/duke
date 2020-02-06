@@ -1,8 +1,10 @@
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Class ChatBot to handle the main logic of our bot.
+ */
 public class ChatBot {
 
     public static Scanner lineScanner;
