@@ -64,18 +64,24 @@ public class TaskList {
     public void showFilteredBySpecificDate(String date) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().equals(LocalDate.parse(date))).collect(Collectors.toList()));
         System.out.println("Here are the tasks on date " + date);
-        this.printTasksOnly();
+        filteredTasks.printTasksOnly();
     }
 
     public void showFilteredBySpecificYear(int year) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getYear() == year).collect(Collectors.toList()));
         System.out.println("Here are the tasks in the year " + year);
-        this.printTasksOnly();
+        filteredTasks.printTasksOnly();
     }
 
     public void showFilteredBySpecificMonth(int month) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getMonthValue() == month).collect(Collectors.toList()));
         System.out.println("Here are the tasks in the month " + month);
-        this.printTasksOnly();
+        filteredTasks.printTasksOnly();
+    }
+
+    public void showFilteredByName(String word) {
+        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDescription().contains(word)).collect(Collectors.toList()));
+        System.out.println("Here are the matching tasks in your list:");
+        filteredTasks.printTasksOnly();
     }
 }
