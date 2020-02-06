@@ -20,7 +20,7 @@
                 <DropShadow />
             </effect>
         </Label>
-        <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 10px;-fx-border-radius: 8; -fx-border-color: #fbf3f3#fbf3f3;" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

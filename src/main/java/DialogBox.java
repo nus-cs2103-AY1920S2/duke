@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.shape.Circle;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -35,6 +35,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        final Circle clip = new Circle(25, 25, 25);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -59,5 +61,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-    
+
 }
