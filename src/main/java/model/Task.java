@@ -13,7 +13,7 @@ public abstract class Task {
     static String TASK_TYPE_STRING;
     static String TASK_TYPE_CHA;
 
-    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Task(String description) throws NoDescriptionException {
         if ("".equals(description)) {
