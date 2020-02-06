@@ -13,6 +13,7 @@ import java.util.Collections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -36,7 +37,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setWrapText(true);
+//        dialog.setWrapText(true);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 
