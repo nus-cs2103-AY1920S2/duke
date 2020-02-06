@@ -17,9 +17,9 @@ public class ListCommand extends Command {
     /**
      * List all the tasks in the task list that was saved on the disk, and display to user.
      *
-     * @param  tasks   the task list
-     * @param   storage the storage object to save the list
-     * @param   ui  the ui object to interact with user
+     * @param tasks the task list
+     * @param storage the storage object to save the list
+     * @param ui the ui object to interact with user
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -32,8 +32,9 @@ public class ListCommand extends Command {
     /**
      * Get a list of tasks that occurs at/ needs to be fulfilled by a certain date.
      *
-     * @param  tasks   the list of tasks to be filtered
-     * @param  dateString    the date criteria in string format
+     * @param tasks the list of tasks to be filtered
+     * @param dateString the date criteria in string format
+     * @return the filtered tasklist
      */
     public static TaskList filterTasksByDate(TaskList tasks, String dateString) {
         TaskList filteredTasks;

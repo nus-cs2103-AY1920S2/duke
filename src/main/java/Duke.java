@@ -46,7 +46,7 @@ public class Duke extends Application {
     /**
      * Create a duke program and load tasks list.
      *
-     * @param   filePath  File path to saved task list
+     * @param filePath File path to saved task list
      */
     public Duke(String filePath) {
         ui = new Ui();

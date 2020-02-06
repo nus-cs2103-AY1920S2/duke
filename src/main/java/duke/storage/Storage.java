@@ -23,7 +23,7 @@ public class Storage {
     /**
      * Create a storage object with given file path.
      *
-     * @param  filePath   the file path to saved task list
+     * @param filePath the file path to saved task list
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -32,8 +32,8 @@ public class Storage {
     /**
      * Get the string format of a list of task objects.
      *
-     * @param  tasks   the list of task objects
-     * @return  listString    the list of tasks in string format
+     * @param tasks the list of task objects
+     * @return listString the list of tasks in string format
      */
     public String convertListToString(TaskList tasks) {
         String tasksString = "";
@@ -74,9 +74,9 @@ public class Storage {
     /**
      * Get a list of tasks from the string format of list.
      *
-     * @param  tasksString   the list of tasks in string format
-     * @return  list    the list of task objects
-     * @throws  DukeException   if the data cannot be parsed into a list of tasks
+     * @param tasksString the list of tasks in string format
+     * @return list the list of task objects
+     * @throws DukeException if the data cannot be parsed into a list of tasks
      */
     public List<Task> convertStringToList(String tasksString) throws DukeException {
         List<Task> tasks = new ArrayList<>();
@@ -128,8 +128,8 @@ public class Storage {
     /**
      * Save the list of tasks to file on the disk.
      *
-     * @param   tasks    the list of tasks to be saved
-     * @return  isSuccessful   whether save to file is successful
+     * @param tasks the list of tasks to be saved
+     * @return isSuccessful whether save to file is successful
      */
     public boolean save(TaskList tasks) {
         String listString = convertListToString(tasks);
@@ -151,8 +151,8 @@ public class Storage {
     /**
      * Get the list of tasks from file saved on disk.
      *
-     * @return  list   the list of tasks from file
-     * @throws  DukeException   if the list cannot be loaded from disk or data is corrupted
+     * @return list the list of tasks from file
+     * @throws DukeException if the list cannot be loaded from disk or data is corrupted
      */
     public List<Task> load() throws DukeException {
         File dataPath = new File(System.getProperty("user.dir"));

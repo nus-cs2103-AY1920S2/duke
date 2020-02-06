@@ -58,7 +58,7 @@ public class TaskList {
     /**
      * Add the task to the task list.
      *
-     * @param   task the task to be added
+     * @param task the task to be added
      */
     public void add(Task task) {
         tasks.add(task);
@@ -67,8 +67,8 @@ public class TaskList {
     /**
      * Try to make a new to-do task from the input.
      *
-     * @param  taskString   the input which contains the to-do task information
-     * @return  task    the new to-do task
+     * @param taskString the input which contains the to-do task information
+     * @return task the new to-do task
      */
     public Todo makeNewTodoTask(String taskString) throws DukeException {
         String[] todoTokens = taskString.split(" ");
@@ -84,8 +84,8 @@ public class TaskList {
     /**
      * Try to make a new event task from the input.
      *
-     * @param  taskString   the input which contains the event task information
-     * @return  task    the new event task
+     * @param taskString the input which contains the event task information
+     * @return task the new event task
      */
     public Event makeNewEventTask(String taskString) throws DukeException {
         String[] eventTokens = taskString.split(" /at ");
@@ -97,7 +97,7 @@ public class TaskList {
 
             // If there is a date and time
             if (dateOrTimeTokens.length <= 1) {
-                throw new DukeException("☹ OOPS!!! duke.task.Event tasks require a specific time and date.");
+                throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
             }
 
             try {
@@ -109,15 +109,15 @@ public class TaskList {
             }
         }
 
-        throw new DukeException("☹ OOPS!!! duke.task.Event tasks require a description, "
+        throw new DukeException("☹ OOPS!!! Event tasks require a description, "
                 + "and a specific time and date (e.g. 2019-12-12 2-4pm).");
     }
 
     /**
      * Try to make a new deadline task from the input.
      *
-     * @param  taskString   the input which contains the deadline task information
-     * @return  task    the new deadline task
+     * @param taskString the input which contains the deadline task information
+     * @return task the new deadline task
      */
     public Deadline makeNewDeadlineTask(String taskString) throws DukeException {
         String[] deadlineTokens = taskString.split(" /by ");
@@ -129,7 +129,7 @@ public class TaskList {
 
             // If there is a date and time
             if (dateOrTimeTokens.length <= 1) {
-                throw new DukeException("☹ OOPS!!! duke.task.Deadline tasks require a specific time and date.");
+                throw new DukeException("☹ OOPS!!! Deadline tasks require a specific time and date.");
             }
 
             try {
@@ -142,7 +142,7 @@ public class TaskList {
             }
         }
 
-        throw new DukeException("☹ OOPS!!! duke.task.Deadline tasks require a description, "
+        throw new DukeException("☹ OOPS!!! Deadline tasks require a description, "
                 + "and a specific time and date (e.g. 2019-12-12 1800).");
     }
 }

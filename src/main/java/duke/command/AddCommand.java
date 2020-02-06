@@ -14,9 +14,9 @@ public class AddCommand extends Command {
     /**
      * Add a Deadline/ Event/ To-do task to the task list, save the list to disk and display to user.
      *
-     * @param  tasks   the task list
-     * @param   storage the storage object to save the list
-     * @param   ui  the ui object to interact with user
+     * @param tasks the task list
+     * @param storage the storage object to save the list
+     * @param ui the ui object to interact with user
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

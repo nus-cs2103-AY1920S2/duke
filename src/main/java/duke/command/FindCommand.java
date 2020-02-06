@@ -38,9 +38,9 @@ public class FindCommand extends Command {
     /**
      * Find tasks that contain the keyword.
      *
-     * @param  tasks   the task list
-     * @param   filter the keyword to filter with
-     * @return  list    the filtered task list
+     * @param tasks the task list
+     * @param filter the keyword to filter with
+     * @return list the filtered task list
      */
     public TaskList filterByString(TaskList tasks, String filter) {
         TaskList filteredTasks = new TaskList();

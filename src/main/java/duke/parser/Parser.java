@@ -14,9 +14,9 @@ public class Parser {
     /**
      * Parse the command entered by user into a Command object if command exists.
      *
-     * @param  command  the input by the user
-     * @return  the parsed command
-     * @throws  DukeException   if command doesn't exist
+     * @param command the input by the user
+     * @return the parsed command
+     * @throws DukeException   if command doesn't exist
      */
     public static Command parse(String command) throws DukeException {
         String[] commandTokens = command.split(" ");

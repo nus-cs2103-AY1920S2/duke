@@ -27,7 +27,7 @@ public class Task {
     /**
      * Set the done status of the task to true or false.
      *
-     * @param   isDone whether the task is done or not
+     * @param isDone whether the task is done or not
      */
     public void markAsDone(Boolean isDone) {
         this.isDone = isDone;
