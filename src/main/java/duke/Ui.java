@@ -74,12 +74,30 @@ public class Ui {
     }
 
     /**
-     * Prints all Tasks found in the task-list.
+     * Prints all Tasks in the task-list.
      *
      * @param taskList The current task-list containing all Tasks.
      */
     public void printTaskList(TaskList taskList) {
         this.printLine("Here are your task(s):");
+
+        int len = taskList.getNumTasks();
+
+        for (int i = 0; i < len; ++i) {
+            Task t = taskList.getTask(i);
+            this.printLine("    " + (i + 1) + ". " + t);
+        }
+
+        this.printLine();
+    }
+
+    /**
+     * Prints all Tasks found in the task-list.
+     *
+     * @param taskList The current task-list containing all Tasks.
+     */
+    public void printFoundTaskList(TaskList taskList) {
+        this.printLine("Here are the matching task(s) your list:");
 
         int len = taskList.getNumTasks();
 

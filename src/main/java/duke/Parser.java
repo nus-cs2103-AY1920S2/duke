@@ -124,6 +124,14 @@ public class Parser {
             String at = strArr[1];
 
             return new Command(CommandType.DEADLINE_CMD, new String[] { name, at });
+        } else if (cmd.startsWith(CommandType.FIND_CMD.toString())) {
+            if (!canSplitStr(cmd, "find\\s+")) {
+                throw new DukeException("The description of a todo cannot be empty");
+            }
+
+            str1  = cmd.split("find\\s+")[1];
+
+            return new Command(CommandType.FIND_CMD, new String[] { str1 });
         } else if (cmd.equals(CommandType.BYE_CMD.toString())) {
             return new Command(CommandType.BYE_CMD, null);
         } else {
