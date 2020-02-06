@@ -141,6 +141,11 @@ public class Parser {
         return (Integer.parseInt(str[1]) - 1);
     }
 
+    /**
+     * Method to return the String to find.
+     * @param command The entire find command given by the user.
+     * @return String which user wants to find all matching tasks.
+     */
     public String getFind(String command) {
         assert command != null : "Command cannot be null";
         String[] str = command.split(" ");
