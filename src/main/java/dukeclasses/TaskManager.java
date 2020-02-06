@@ -100,6 +100,7 @@ public class TaskManager {
             } else {
                 textEntered = textEntered.substring(9);
                 String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
+                assert temp.length > 1 : "Deadline format must be (deadline homework /by YYYY-MM_DD)";
                 String tempDate = temp[1];
                 LocalDate date;
                 try {
@@ -107,7 +108,6 @@ public class TaskManager {
                     newTask = new Deadline(temp[0], date);
                     this.listOfTasks.add(newTask);
                 } catch (DateTimeException ex) {
-
                     throw new DateTimeException(ex.getMessage());
                 }
 
@@ -120,6 +120,7 @@ public class TaskManager {
             } else {
                 textEntered = textEntered.substring(6);
                 String[] temp = (textEntered.split("/"));
+                assert temp.length > 1 : "Event format must be (event party /at location)";
                 newTask = new Event(temp[0], temp[1].substring(3));
                 this.listOfTasks.add(newTask);
             }

@@ -15,6 +15,7 @@ public class Parser {
      * @return indexOfTask done
      */
     public int handleDoneCommands(String textEntered) {
+        assert textEntered.length() > 4 : "Must include a number after done.";
         String[] temporary = textEntered.split(" ");
         int indexOfTaskDone = Integer.parseInt(temporary[1]);
         return indexOfTaskDone;
