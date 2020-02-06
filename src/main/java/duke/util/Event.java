@@ -53,7 +53,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        assert atSchedule != null : "The event date should be entered to this task.";
         return String.format("[E] [%s] %s (at: %s)", getStatusIcon(), this.description, this.atSchedule);
     }
 }
