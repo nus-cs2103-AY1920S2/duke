@@ -1,17 +1,37 @@
 package duke;
 
+/**
+ * Helps to parse and handle raw user commands from the user to commands 'understandable' by the rest of Duke.
+ */
 public class Parser {
 
+    /**
+     * Creates a new Parser object.
+     */
     public Parser() {
     }
 
+    /**
+     * Determines if a string can be split (into 2 parts), based on a certain delimiter.
+     *
+     * @param str The string which is to be split.
+     * @param regex The delimiter or regex to split the string by.
+     * @return True if string can be split, false otherwise.
+     */
     private boolean canSplitStr(String str, String regex) {
         String[] strArr = str.split(regex);
 
         return (strArr.length == 2);
     }
 
-    private  boolean isValidId(String strId, TaskList tasks) {
+    /**
+     * Checks if the integer ID for accessing the Task in the task-list is valid.
+     *
+     * @param strId Integer ID in String format.
+     * @param tasks The task-list.
+     * @return True if the string represents a valid ID, false otherwise.
+     */
+    private boolean isValidId(String strId, TaskList tasks) {
         int id;
         try {
             id = Integer.parseInt(strId);
@@ -22,6 +42,14 @@ public class Parser {
         return (!((id - 1) > tasks.getNumTasks() - 1 || (id - 1) < 0));
     }
 
+    /**
+     * Does the main work of parsing raw commands from user input.
+     *
+     * @param cmd The raw command entered by user.
+     * @param tasks The current task-list.
+     * @return Command object representing the parsed user command.
+     * @throws DukeException If the command is invalid or if there were errors parsing the command.
+     */
     public Command parse(String cmd, TaskList tasks) throws DukeException {
         String[] strArr;
         String str1;
