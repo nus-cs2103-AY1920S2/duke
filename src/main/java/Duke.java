@@ -301,6 +301,25 @@ public class Duke extends Application {
                 }
             case "bye":
                 return ui.printBye();
+            case "snooze":
+                int taskNo = parser.getTaskNo(command);
+                try {
+                    int noDays = parser.getSnoozeNo(command);
+                    assert tasks.getTask(taskNo) != null : "Tasklist contains valid tasks.";
+                    if (tasks.getTask(taskNo) instanceof ToDo) {
+                        throw new DukeException("ToDo cannot be snoozed.");
+                    } else if (tasks.getTask(taskNo) instanceof Deadline) {
+                        Deadline deadline = (Deadline) tasks.getTask(taskNo);
+                        deadline.snooze(noDays);
+                        return ui.printSnooze(deadline, noDays);
+                    } else {
+                        Event event = (Event) tasks.getTask(taskNo);
+                        event.snooze(noDays);
+                        return ui.printSnooze(event, noDays);
+                    }
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
             default:
                 return "Invalid command, please try again.";
             }

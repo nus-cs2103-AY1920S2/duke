@@ -50,6 +50,8 @@ public class Parser {
             return "event";
         } else if (command.contains("todo")) {
             return "todo";
+        } else if (command.contains("snooze")) {
+            return "snooze";
         } else {
             throw new DukeException("Invalid command. Please try again.");
         }
@@ -135,10 +137,27 @@ public class Parser {
      * @param command User provided command.
      * @return Index of task number based on zero-based indexing.
      */
-    public int getTaskNo(String command) {
+    public int getTaskNo(String command) throws DukeException {
         assert command != null : "Command cannot be null";
         String[] str = command.split(" ");
+        if (str.length < 2) {
+            throw new DukeException("The command is too short. Please tell me which task you are referring to.");
+        }
         return (Integer.parseInt(str[1]) - 1);
+    }
+
+    /**
+     * Method to return the number of days to snooze the task.
+     * @param command User provided command.
+     * @return Integer number of days to snooze the task.
+     */
+    public int getSnoozeNo(String command) throws DukeException {
+        assert command != null : "Command cannot be null";
+        String[] str = command.split(" ");
+        if (str.length < 3) {
+            throw new DukeException("The command is too short. Please provide how many days to snooze by.");
+        }
+        return (Integer.parseInt(str[2]));
     }
 
     /**

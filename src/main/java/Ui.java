@@ -67,4 +67,11 @@ public class Ui {
     public String printFind(TaskList matchedTasks) {
         return ("These are the tasks that matched what you were looking for.\n" + matchedTasks.printList());
     }
+
+    /**
+     * Method to print which task has been snoozed and for how many days.
+     */
+    public String printSnooze(Task task, int noDays) {
+        return (task + " has been snoozed for " + noDays + " days.\n");
+    }
 }

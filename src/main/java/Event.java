@@ -1,8 +1,9 @@
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * An Event task that extends from the Task class.
@@ -13,8 +14,6 @@ import java.util.Date;
 public class Event extends Task {
 
     protected LocalDate date;
-    protected DateTimeFormatter dateConverter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-    protected DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d YYYY");
 
     /**
      * Constructor for Event class.
@@ -35,6 +34,18 @@ public class Event extends Task {
      */
     public LocalDate getAt() {
         return this.date;
+    }
+
+    /**
+     * Method to postpone event for the number of days specified by the user.
+     * @param noDays Number of days to postpone said event.
+     */
+    public void snooze(int noDays) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
+        cal.add(cal.DATE, noDays);
+        Date calendarDate = cal.getTime();
+        date = new java.sql.Date(calendarDate.getTime()).toLocalDate();
     }
 
     /**

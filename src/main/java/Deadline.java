@@ -1,6 +1,8 @@
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A Deadline task that extends from the Task class.
@@ -11,8 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDate date;
-    protected DateTimeFormatter dateConverter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-    protected DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d YYYY");
+    protected Calendar cal;
 
     /**
      * Constructor for Deadline class.
@@ -20,7 +21,7 @@ public class Deadline extends Task {
      * @param date The date which the deadline is due.
      * @throws ParseException If the date cannot be parsed, i.e is in the wrong format.
      */
-    public Deadline(String description, String date) throws ParseException {
+    public Deadline(String description, String date) {
         super(description);
         assert description != null : "description cannot be null";
         assert date != null : "date cannot be null";
@@ -33,6 +34,18 @@ public class Deadline extends Task {
      */
     public LocalDate getBy() {
         return this.date;
+    }
+
+    /**
+     * Method to postpone event for the number of days specified by the user.
+     * @param noDays Number of days to postpone said event.
+     */
+    public void snooze(int noDays) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
+        cal.add(cal.DATE, noDays);
+        Date calendarDate = cal.getTime();
+        date = new java.sql.Date(calendarDate.getTime()).toLocalDate();
     }
 
     /**

@@ -19,7 +19,7 @@ public class ParserTest {
     }
 
     @Test
-    public void getTaskNoTest() {
+    public void getTaskNoTest() throws DukeException {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(sc);
         String command = "delete 2";
