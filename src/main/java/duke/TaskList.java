@@ -5,14 +5,27 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * TaskList handles list of tasks in an ArrayList.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
     protected Ui ui = new Ui();
 
+    /**
+     * Constructor that takes in list of tasks.
+     *
+     * @param tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Method to add task into task list.
+     *
+     * @param arr
+     */
     public void add(String[] arr) {
         try {
             String taskType = arr[0];
@@ -62,6 +75,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to delete task in task list.
+     *
+     * @param arr
+     */
     public void delete(String[] arr) {
         try {
             checkNum(arr.length);
@@ -82,6 +100,37 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to mark task as done.
+     *
+     * @param arr
+     */
+    public void done(String[] arr) {
+        try {
+            checkNum(arr.length);
+            checkValid(arr[1]);
+            int taskNum = Integer.parseInt(arr[1]) - 1;
+
+            if (this.tasks.size() > taskNum) {
+                Task current = this.tasks.get(taskNum);
+                current.markDone();
+                ui.showDone(current);
+
+            } else {
+                ui.showTaskError();
+            }
+
+        } catch (DukeException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    /**
+     * Method to check if user has entered task description.
+     *
+     * @param size
+     * @throws DukeException
+     */
     public static void checkDescription(int size) throws DukeException {
         Ui ui = new Ui();
 
@@ -90,6 +139,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to check if user has entered only 1 task number.
+     *
+     * @param input
+     * @throws DukeException
+     */
     public static void checkValid(String input) throws DukeException {
         String[] arr = input.split(" ");
         Ui ui = new Ui();
@@ -99,6 +154,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to check if user has entered a task number.
+     *
+     * @param size
+     * @throws DukeException
+     */
     public static void checkNum(int size) throws DukeException {
         Ui ui = new Ui();
 

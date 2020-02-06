@@ -1,15 +1,27 @@
 package duke;
 
+/**
+ * Parser handles user input.
+ */
 public class Parser {
     protected String input;
     protected TaskList taskList;
     protected Ui ui = new Ui();
 
+    /**
+     * Constructor that takes in user input and loaded task list.
+     *
+     * @param input
+     * @param taskList
+     */
     public Parser(String input, TaskList taskList) {
         this.input = input;
         this.taskList = taskList;
     }
 
+    /**
+     * Method to determine action based on user input.
+     */
     public void readCommand() {
         String arr[] = this.input.split(" ", 2);
 
@@ -23,24 +35,8 @@ public class Parser {
             ui.showList(taskList);
 
         } else if (arr[0].equals("done")) {
+            taskList.done(arr);
 
-            try {
-                checkNum(arr.length);
-                checkValid(arr[1]);
-                int taskNum = Integer.parseInt(arr[1]) - 1;
-
-                if (taskList.tasks.size() > taskNum) {
-                    Task current = taskList.tasks.get(taskNum);
-                    current.markDone();
-                    ui.showDone(current);
-
-                } else {
-                    ui.showTaskError();
-                }
-
-            } catch (DukeException ex) {
-                System.out.println(ex.getMessage());
-            }
         } else if (arr[0].equals("delete")) {
             taskList.delete(arr);
 
@@ -54,23 +50,12 @@ public class Parser {
         }
     }
 
-    public static void checkValid(String input) throws DukeException {
-        String[] arr = input.split(" ");
-        Ui ui = new Ui();
-
-        if (arr.length > 1) {
-            throw new DukeException(ui.showValidError());
-        }
-    }
-
-    public static void checkNum(int size) throws DukeException {
-        Ui ui = new Ui();
-
-        if (size < 2) {
-            throw new DukeException(ui.showNumError());
-        }
-    }
-
+    /**
+     * Method to check if user enters a valid input.
+     *
+     * @param action
+     * @throws DukeException
+     */
     public static void checkAction(String action) throws DukeException {
         Ui ui = new Ui();
 
