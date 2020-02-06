@@ -23,8 +23,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("DaDuke.png"));
 
     protected Ui ui;
     protected Storage storage;
@@ -156,7 +156,17 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+     /*  //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
 
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+    */
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -191,12 +201,17 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
 
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
     private String getResponse(String input) {
         return "Duke heard: " + input;
     }
