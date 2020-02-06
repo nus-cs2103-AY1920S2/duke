@@ -2,10 +2,14 @@ package main.java.model;
 
 import main.java.exceptions.NoDescriptionException;
 
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String taskType;
     protected String description;
     protected boolean isDone;
+
+    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public Task(String taskType) {
         this.taskType = taskType;

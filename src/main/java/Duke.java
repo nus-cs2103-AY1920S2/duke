@@ -1,5 +1,6 @@
 package main.java;
 
+import main.java.exceptions.IllegalDateTimeFormatException;
 import main.java.parser.Command;
 import main.java.parser.ExitCommand;
 import main.java.parser.Parser;
@@ -47,7 +48,7 @@ public class Duke {
                 command.setTaskList(this.taskList);
                 String commandResult = command.execute();
                 ui.printCommandResult(commandResult);
-            } catch (NoDescriptionException | NoCommandException e) {
+            } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
                 ui.printErrorMessage(e.getMessage());
             }
         }

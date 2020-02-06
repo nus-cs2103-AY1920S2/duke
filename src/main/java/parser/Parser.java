@@ -1,11 +1,16 @@
 package main.java.parser;
 
+import main.java.exceptions.IllegalDateTimeFormatException;
 import main.java.exceptions.NoCommandException;
 import main.java.exceptions.NoDescriptionException;
 import main.java.model.DeadLineTask;
 import main.java.model.EventTask;
 import main.java.model.ToDoTask;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,8 +20,10 @@ public class Parser {
     static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
     static final String FINISH_KEY = "(done)(\\s+)(\\d+)";
     static final String TODO_KEY = "(todo)(.*)";
-    static final String DEADLINE_KEY = "(deadline)(.*)(\\/by)(.*)";
-    static final String EVENT_KEY = "(event)(.*)(\\/at)(.*)";
+    static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*\\/by\\s*(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
+    static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*\\/at\\s*(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
+
+    static final String DEFAULT_TIME = "23:59";
 
     static final Pattern DELETE_PATTERN = Pattern.compile(DELETE_KEY);
     static final Pattern FINISH_PATTERN = Pattern.compile(FINISH_KEY);
@@ -38,10 +45,23 @@ public class Parser {
         return matcher.group(2).trim();
     }
 
-    private String findEndTime(Pattern pattern, String input) {
+    private LocalDateTime findDateTime(Pattern pattern, String input) throws IllegalDateTimeFormatException {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
-        return matcher.group(4).trim();
+        String dateString = matcher.group(3);
+        String timeString = matcher.group(4);
+
+        //TODO: add a notification
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            LocalTime time = LocalTime.parse(timeString == null ? DEFAULT_TIME: timeString);
+            LocalDateTime dateTime = date.atTime(time);
+            return dateTime;
+        } catch (DateTimeParseException dte) {
+
+            //TODO: change the error message
+            throw new IllegalDateTimeFormatException(dte.getMessage() + '\n');
+        }
     }
 
     private static boolean isExitKey(String input) { return EXIT_KEY.equals(input); }
@@ -73,7 +93,7 @@ public class Parser {
         return eventMatcher.find();
     }
 
-    public Command parseCommand(String userInput) throws NoCommandException {
+    public Command parseCommand(String userInput) throws NoCommandException, IllegalDateTimeFormatException {
         if (this.isExitKey(userInput)) {
             return new ExitCommand();
         }
@@ -90,20 +110,17 @@ public class Parser {
         }
         else if (this.isTodoKey(userInput)){
             String description = this.findDescription(TODO_PATTERN, userInput);
-            ToDoTask taskToAdd = new ToDoTask();
-            return new AddCommand(taskToAdd, description);
+            return new AddToDoCommand(description);
         }
         else if (this.isDeadLineKey(userInput)){
             String description = this.findDescription(DEADLINE_PATTERN, userInput);
-            String by = this.findEndTime(DEADLINE_PATTERN, userInput);
-            DeadLineTask taskToAdd = new DeadLineTask();
-            return new AddCommand(taskToAdd, description, by);
+            LocalDateTime by = this.findDateTime(DEADLINE_PATTERN, userInput);
+            return new AddDeadlineCommand(description, by);
         }
         else if (this.isEventKey(userInput)){
             String description = this.findDescription(EVENT_PATTERN, userInput);
-            String at = this.findEndTime(EVENT_PATTERN, userInput);
-            EventTask taskToAdd = new EventTask();
-            return new AddCommand(taskToAdd, description, at);
+            LocalDateTime at = this.findDateTime(EVENT_PATTERN, userInput);
+            return new AddEventCommand(description, at);
         }
         else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");

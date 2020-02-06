@@ -4,31 +4,22 @@ import main.java.model.Task;
 
 import main.java.exceptions.NoDescriptionException;
 
+import java.time.LocalDateTime;
+
 public class DeadLineTask extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     public DeadLineTask() {
         super("deadline task");
     }
 
-    public DeadLineTask(String description, String by) throws NoDescriptionException {
+    public DeadLineTask(String description, LocalDateTime by) throws NoDescriptionException {
         super(description, "deadline task");
         this.by = by;
     }
 
-    public DeadLineTask(String... params) throws NoDescriptionException {
-        super(params[0], "deadline task");
-        this.by = params[1];
-    }
-
-    @Override
-    public void setParams(String... params) throws NoDescriptionException {
-        this.setDescription(params[0]);
-        this.by = params[1];
-    }
-
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DATE_TIME_FORMAT) + ")";
     }
 }
