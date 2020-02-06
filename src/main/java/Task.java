@@ -31,11 +31,14 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public boolean isTaskDone() { return isDone; }
+    public boolean isTaskDone() {
+        return isDone;
+    }
 
     public LocalDate getDate() {
         return time;
     }
+
     public String getTime() {
         return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
@@ -46,13 +49,13 @@ public class Task {
 
     @Override
     public String toString() {
-        String timeOptional = (time.equals(""))? "" : ", " + time;
+        String timeOptional = (time.equals("")) ? "" : ", " + time;
         return "[" + getStatusIcon() + "]" + " " + description + timeOptional;
     }
 
     public String toStringFile() {
-        int isDoneInt = (isDone)? 1 : 0;
+        int isDoneInt = (isDone) ? 1 : 0;
         String timeOptional = (time.equals(LocalDate.parse("2099-12-31"))) ? "" : ", " + getTime();
         return isDoneInt + " | " + description + timeOptional;
-    }   
+    }
 }

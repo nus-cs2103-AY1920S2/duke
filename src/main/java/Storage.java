@@ -1,13 +1,12 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
     /**
-        referenced from
-        https://crunchify.com/java-saving-and-loading-data-from-a-file-simple-production-ready-utility-for-file-readwrite-operation/
+     * referenced from
+     * https://crunchify.com/java-saving-and-loading-data-from-a-file-simple-production-ready-utility-for-file-readwrite-operation/
      */
 
     //String fileName = "./data/duke.txt"; // relative path
@@ -45,17 +44,17 @@ public class Storage {
     }
 
     public void saveAllTasksToFile(TaskList tasks) throws FileNotFoundException {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
-            for (Task task : tasks.getTasks()) {
-                int isDone = (task.isTaskDone()) ? 1 : 0;
+        PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
+        for (Task task : tasks.getTasks()) {
+            int isDone = (task.isTaskDone()) ? 1 : 0;
 
-                pw.println(
-                        task.getTypeName() + "|"
-                                + isDone + "|"
-                                + task.getDescription() + "|"
-                                + task.getTime()
-                );
-            }
-            pw.close();
+            pw.println(
+                    task.getTypeName() + "|"
+                            + isDone + "|"
+                            + task.getDescription() + "|"
+                            + task.getTime()
+            );
+        }
+        pw.close();
     }
 }
