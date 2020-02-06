@@ -16,9 +16,21 @@ public class Greetings {
                                                 + "Goodbye\n"
                                                 + "-----------------------------\n";
 
+    private static final String UNDEFINED       = "-----------------------------\n"
+                                                + "Input is undefined. Try again\n"
+                                                + "-----------------------------\n";
+
     public static void init() {
         System.out.println(WELCOME_LOGO);
         System.out.println(WELCOME_TEXT);
+    }
+
+    public static void tearDown() {
+        System.out.println(EXIT_TEXT);
+    }
+
+    public static void handleUndefined() {
+        System.out.println(UNDEFINED);
     }
 
     public static String prettyPrint(String s) {
