@@ -32,14 +32,14 @@ public class Storage {
             }
             fw.close();
         } catch (IOException ioe) {
-            print(ioe.getMessage());
+            // no need for follow-up action, as the file is not found - we will simply create a new one.
         }
     }
 
     /**
      * Reads in from the lastSavedTasks.txt file if it exists, and updates duke.Duke allTasks list of Tasks.
      *
-     * @param allTasks List of Tasks for duke.Duke.
+     * @param allTasks List of Tasks for Duke.
      */
     public void readFromLastSavedFile(TaskList allTasks) {
 

@@ -22,7 +22,9 @@ public class Event extends Task {
     }
 
     /**
-     * Prints a message indicating the Event Task has been added.
+     * Gives a message indicating the Event Task has been added.
+     *
+     * @return String indicating the Event Task has been added.
      */
     @Override
     public String taskAddedMessage() {

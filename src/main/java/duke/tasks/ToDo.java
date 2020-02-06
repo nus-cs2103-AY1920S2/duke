@@ -15,7 +15,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Prints a message indicating that the Task has been added.
+     * Gives a message indicating that the To-Do Task has been added.
+     *
+     * @return String indicating that the To-Do Task has been added.
      */
     @Override
     public String taskAddedMessage() {

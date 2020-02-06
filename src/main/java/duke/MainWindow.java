@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class MainWindow extends AnchorPane {
 
-    // GUI Controls.
+    // GUI Controls
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,10 +25,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    // GUI support.
+    // Supporting Images for Duke and User display photos
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialises the Main Window for the Application, prompting user to use Duke.
+     */
     @FXML
     public void initialize() {
 
@@ -42,11 +45,14 @@ public class MainWindow extends AnchorPane {
 
     }
 
-    // Non-GUI members.
-
-    // We can use this Duke to perform as a chat engine.
+    // We can use this Duke to perform as a chatbot.
     private Duke duke;
 
+    /**
+     * Sets the Duke of choice to be the Duke chatbot handling the user inputs.
+     *
+     * @param d Duke chosen to handle user inputs.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -74,13 +80,19 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Provides user input with user as the author.
+     *
+     * @param input input entered by the user.
+     * @return String to represent input entered by the user.
      */
     private String getUserResponse(String input) {
         return "You: " + input;
     }
 
     /**
-     * Generates a response for Duke to the user input.
+     * Generates a response for Duke to process the user input.
+     *
+     * @param input user input entered for Duke to respond to.
+     * @return Duke's response after processing the user input.
      */
     private String getDukeResponse(String input) {
         String result = (input.equals("bye")) ? Ui.goodbye() : duke.run(input);

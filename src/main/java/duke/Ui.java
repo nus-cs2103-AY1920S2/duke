@@ -1,15 +1,17 @@
 package duke;
 
-import duke.exceptions.EmptyTaskListException;
 import duke.tasks.Task;
 
 /**
  * User Interface class which is centred about a strong user experience and its associated methods.
+ * Mainly provides public static methods to represent Strings for easy identification and usage.
  */
 public class Ui {
 
     /**
-     * Welcomes the user with a message.
+     * Gives the String to greet the user with instructions on how to use Duke.
+     *
+     * @return String to greet the user with instructions on how to use Duke.
      */
     public static String welcome() {
         return Constant.FORMAT_LINE
@@ -29,7 +31,9 @@ public class Ui {
     }
 
     /**
-     * Says goodbye to the user.
+     * Gives the String to say farewell to the user, for now.
+     *
+     * @return String to say farewell to the user, for now.
      */
     public static String goodbye() {
         return Constant.FORMAT_LINE
@@ -38,9 +42,12 @@ public class Ui {
     }
 
     /**
-     * Prints removal of a given task, of its index then and the current number of Tasks remaining.
+     * Gives String indicating removal of a given task, of its index then and the current number of Tasks remaining.
      *
-     * @param index index of current Task to remove.
+     * @param index index of the Task to remove.
+     * @param removedTask the Task which we are to remove.
+     * @param allTasks TaskList containing all the Tasks in Duke.
+     * @return String indicating removal of a given Task, of its index then and the current number of Tasks remaining.
      */
     public static String taskRemovalMessage(int index, Task removedTask, TaskList allTasks) {
         return Constant.FORMAT_LINE
@@ -50,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Prints all tasks, their number order, and their completion for list command.
+     * Gives the String for all Tasks, their number order, and their completion status for the list command.
      */
     public static String listAllTasksMessage(TaskList allTasks) {
         String result = Constant.FORMAT_LINE;
@@ -62,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Prints a response to the done command after doTask completes.
+     * Gives a String response to indicate Task is done, especially after the done command after doTask() completes.
      *
      * @param t Task that has been completed via doTask method.
      */
@@ -79,9 +86,11 @@ public class Ui {
     }
 
     /**
-     * Prints individual task with current completion status, without formatting lines.
+     * Gives the String representing an individual Task with current completion status, without formatting lines.
      *
      * @param i index of storage of the Task in the container/collection.
+     * @param allTasks TaskList containing all the non-deleted Tasks for Duke.
+     * @return String representing an individual Task with current completion status, without formatting lines.
      */
     public static String obtainTaskFromStoredMessage(int i, TaskList allTasks) {
         String tickOrCross = allTasks.getTask(i).obtainStatusIcon();
@@ -89,18 +98,18 @@ public class Ui {
     }
 
     /**
-     * Prints a given String.
+     * Gives an exception message for an Exception.
      *
-     * @param e String to be printed.
+     * @param e String for the exception message.
      */
     public static String exceptionMessage(String e) {
         return Constant.FORMAT_LINE + e + "\n" + Constant.FORMAT_LINE;
     }
 
     /**
-     * Prints a given String.
+     * Provides a given String.
      *
-     * @param s String to be printed.
+     * @param s String of interest.
      */
     public static String customMessage(String s) {
         return s;

@@ -16,6 +16,11 @@ public class Main extends Application {
     // This is the only Duke instance created, to handle everything.
     private Duke duke = new Duke();
 
+    /**
+     * Creates the Window and Scenes to represent the Graphical User Interface (GUI).
+     *
+     * @param stage Stage for the GUI to present the user with visuals.
+     */
     @Override
     public void start(Stage stage) {
         try {

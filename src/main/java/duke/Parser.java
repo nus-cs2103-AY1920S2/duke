@@ -1,22 +1,9 @@
 package duke;
 
-import java.util.Arrays;
-
 /**
  * Logical brain of processing information given in a raw format, mainly through the use of useful methods.
  */
 public class Parser {
-
-    // Command method
-    public String findKeywordFromString(String command) {
-        // Split String command to find the intention of the user (first word)
-        String[] commandWords = command.split("\\s");
-        return commandWords[0];
-    }
-
-    public String[] getCommandWords(String command) {
-        return command.split("\\s");
-    }
 
     // Storage methods
 
@@ -69,9 +56,21 @@ public class Parser {
     // TaskList methods
 
     /**
+     * Gives String representing the keywords of a command without the command type.
+     *
+     * @param command String representing all the words typed by the user.
+     * @return String representing the keywords of a command without the command type.
+     */
+    public String findKeywordFromString(String command) {
+        // Split String command to find the intention of the user (first word)
+        String[] commandWords = command.split("\\s");
+        return commandWords[0];
+    }
+
+    /**
      * Checks if this is capable of being a valid done command based on the criteria of length being more than 1.
      *
-     * @param command array representing each word in the String.
+     * @param command String array representing each word in the String.
      * @return whether this can be a possible done command.
      */
     public boolean satisfiesMinimumDoneCommandLength(String[] command) {

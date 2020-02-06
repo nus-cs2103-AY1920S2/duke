@@ -6,7 +6,8 @@ package duke.exceptions;
 public class ExceptionsConstant {
 
     /**
-     * Utilised in printing.
+     * Formats the Strings wherever it is used for better neatness/debugging.
+     * Can be left as an empty String.
      */
     public static final String FORMAT_LINE = "";
 

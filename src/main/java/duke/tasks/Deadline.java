@@ -22,13 +22,15 @@ public class Deadline extends Task {
     }
 
     /**
-     * Prints a message indicating the Deadline Task has been added.
+     * Gives a message indicating the Deadline Task has been added.
+     *
+     * @return String indicating the Deadline Task has been added.
      */
     @Override
     public String taskAddedMessage() {
         return TasksConstant.FORMAT_LINE + "\n"
-        + "==> Added unique Deadline task: " + this + "\n"
-        + TasksConstant.FORMAT_LINE;
+            + "==> Added unique Deadline task: " + this + "\n"
+            + TasksConstant.FORMAT_LINE;
     }
 
     /**

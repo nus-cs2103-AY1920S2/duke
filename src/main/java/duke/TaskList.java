@@ -24,12 +24,14 @@ import java.util.ArrayList;
 public class TaskList {
 
     /**
-     * for storing Tasks.
+     * For storing Tasks.
      */
     private ArrayList<Task> allTasks;
 
 
-    // Parser to make sense of various commands
+    /**
+     * Parser to make sense of various commands.
+     */
     Parser logic = new Parser();
 
     /**
@@ -40,14 +42,13 @@ public class TaskList {
     }
 
     /**
-     * Serves the user to do the bulk of the work in process individual commands.
+     * Gives a String reply for each time it is called to Serve the user in processing individual commands.
      *
-     * @param command the full command entered by the user.
+     * @param command the full, unedited command entered by the user.
      */
     public String serveUser(String command) {
 
         String commandType = logic.findKeywordFromString(command);
-        String[] commandWords = logic.getCommandWords(command);
 
         try {
 
@@ -93,6 +94,14 @@ public class TaskList {
 
     }
 
+    /**
+     * Gives a String representation of the result of completing a selected Task, and marks the Task as done.
+     *
+     * @param command the full, unedited command entered by the user.
+     * @return String representation of a message indicating the selected Task is completed.
+     * @throws DoneException possible Exception when running a done command.
+     * @throws InputUnclearException an Exception given when the input is unfitting.
+     */
     private String doneTask(String command) throws DoneException, InputUnclearException {
         // user inputs will be "done _____"
         // Take only the very next token which must be an integer
@@ -113,9 +122,11 @@ public class TaskList {
     }
 
     /**
-     * Finds the tasks which contain the keyword.
+     * Gives a String representation of the result of a find command and finds the Tasks which contain the keyword.
      *
-     * @param command the full command entered by the user.
+     * @param command the full, unedited command entered by the user.
+     * @return String representation of the result of finding Tasks with given keyword(s).
+     * @throws EmptyTaskListException an Exception given when TaskList is empty.
      */
     private String findTask(String command) throws EmptyTaskListException {
         try {
@@ -146,9 +157,11 @@ public class TaskList {
     }
 
     /**
-     * Deletes the given Task based on the command's keyword (a number representing index in ArrayList).
+     * Gives String representation of the result of a delete command and Deletes the given Task.
+     * This is based on the command's keyword (a number representing index in ArrayList).
      *
-     * @param command raw text containing all information given to delete the Task.
+     * @param command the full, unedited command entered by the user.
+     * @return String representation of the result of a delete command.
      * @throws DeleteException where deleting task not possible due to incorrect command/index entered by user.
      */
     private String deleteTask(String command) throws DeleteException {
@@ -163,9 +176,11 @@ public class TaskList {
     }
 
     /**
-     * Adds the Task to store in the ArrayList, and prints added message. This is a helper method for adding Tasks.
+     * Gives the result of adding a Task and adds the Task to store in the ArrayList, and prints added message.
+     * This is a helper method for adding Tasks.
      *
      * @param t Task to be stored.
+     * @return String result for adding a Task.
      */
     private String addTaskToStored(Task t) {
         allTasks.add(t);
@@ -174,10 +189,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Task for user to do, specifying the actual action as Task command.
+     * Gives the String to indicate adding a new Task and adds the new Task for user to do.
      *
-     * @param command basic raw information entered to create the Task.
-     * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs.
+     * @param command the full, unedited command entered by the user.
+     * @return String to indicate adding a new Task.
+     * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs.     *
      */
     private String addNewToDo(String command) throws ToDoException {
         if (command.length() < 6) {
@@ -188,9 +204,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Deadline Task, specifying the actual Task command and time limit.
+     * Gives a String to indicate adding a Deadline Task and adds the new Deadline Task.
+     * There is a need to specify the actual Task command and time limit.
      *
-     * @param command basic raw information entered to create the Task.
+     * @param command the full, unedited command entered by the user.
+     * @return String to indicate adding a Deadline Task.
      * @throws DeadlineException Exception arising from creating Deadline Task due to wrong inputs.
      */
     private String addNewDeadline(String command) throws DeadlineException {
@@ -209,9 +227,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a new Event Task, specifying the actual Task command and the time duration.
+     * Gives a String to indicate adding a new Event Task and adds the new Event Task.
+     * There is a need to specify the actual Task command and the time duration.
      *
-     * @param command basic raw information entered to create the Task.
+     * @param command the full, unedited command entered by the user.
+     * @return String to indicate adding a new Event Task.
      * @throws EventException Exception arising from Event Task creation due to wrong inputs.
      */
     private String addNewEvent(String command) throws EventException {
@@ -231,6 +251,9 @@ public class TaskList {
 
     /**
      * Provides the date in a presentable, "Month (in English) Day Year" format.
+     *
+     * @param dateDetails date in the form YYYY-MM-DD.
+     * @return a more presentable form of date in Month Day, Year.
      */
     private String getPresentableDate(String dateDetails) {
         String punctuation = String.valueOf(dateDetails.charAt(4)); // due to "/at " or "/by "
@@ -247,7 +270,7 @@ public class TaskList {
      * The result is simply the time/date in a String.
      *
      * @param keyword a String beginning with "/" and a keyword which separates the Task and Restriction of Time.
-     * @param command basic raw information entered to create the Task.
+     * @param command the full, unedited command entered by the user.
      * @return the String representing the Restriction on the Task.
      */
     private String getRestriction(String keyword, String command) {
@@ -260,7 +283,7 @@ public class TaskList {
      *
      * @param taskType type of task.
      * @param keyword a String beginning with "/" and a keyword which separates the Task and Restriction of Time.
-     * @param command basic raw information entered to create the Task.
+     * @param command the full, unedited command entered by the user.
      * @return String representation of description of the command of the Task.
      */
     private String getCommand(String taskType, String keyword, String command) {
@@ -270,7 +293,7 @@ public class TaskList {
     }
 
     /**
-     * Finds the first occurrence of keywords in a search space.
+     * Finds the first occurrence index of keywords in a search space.
      *
      * @param keyword a String beginning with "/" and a keyword which separates the Task and Restriction of Time.
      * @param searchSpace the full String to search from.
@@ -281,9 +304,10 @@ public class TaskList {
     }
 
     /**
-     * Marks task complete and prints completion message.
+     * Marks task complete and gives a completion message.
      *
      * @param i Index of the Task to be done.
+     * @return String to indicate the Task is done.
      */
     private String doTask(int i) {
         Task t = allTasks.get(i - 1); // due to 0 indexing
@@ -293,8 +317,9 @@ public class TaskList {
     }
 
     /**
-     * Adds the Task (previously saved) without printing the added message.
-     * Can also be used to simply to add without announcing, from one TaskList to another such as a temporary one.
+     * Adds the Task (previously saved) without giving any message indication.
+     * Can be used to simply to add without announcing, from one TaskList to another such as a temporary one.
+     * Useful in reading in Tasks from last save.
      *
      * @param t Task to be stored.
      */

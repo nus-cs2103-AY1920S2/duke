@@ -34,6 +34,8 @@ public abstract class Task {
 
     /**
      * Indicates that the Task's command has been added.
+     *
+     * @return String indicating that the current Task has been added.
      */
     public abstract String taskAddedMessage();
 
