@@ -14,29 +14,22 @@ import java.util.Scanner;
 import static duke.commands.Parser.FORMATTER;
 
 /**
- * deals with loading tasks from the file and saving tasks in the file.
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
     /**
-     * the path where duke.txt is located.
+     * The path where duke.txt is located.
      */
     private String filePath;
     /**
-     * the TaskList.
+     * The TaskList.
      */
     private TaskList taskList;
-    /**
-     * index in arr containing the description.
-     */
-    private static final int DESC = 2;
-    /**
-     * index in arr containing the time.
-     */
-    private static final int TIME = 3;
 
     /**
-     * creates new Storage.
+     * Creates a new Storage.
+     *
      * @param filePath the path to the duke.txt file where previous user input
      *                 has been stored.
      * @param taskList the TaskList
@@ -47,10 +40,13 @@ public class Storage {
     }
 
     /**
-     * retrieves all the tasks entered previously by the user from duke.txt and
+     * Retrieves all the tasks entered previously by the user from duke.txt and
      * adds them to the TaskList.
      */
     public void retrieveInfo() throws FileNotFoundException {
+        final int DESC = 2;
+        final int TIME = 3;
+
         Scanner scanner = new Scanner(new File(filePath));
         while (scanner.hasNextLine()) {
             String[] arr  = scanner.nextLine().split("[|]");
@@ -69,17 +65,21 @@ public class Storage {
             if (arr[1].trim().equals("Y")) {
                 newTask.markAsDone();
             }
-            taskList.add(newTask, "");
+            taskList.add(newTask, false);
+            assert newTask != null : "No task to retrieve";
+            assert newTask.getDescription() != null : "No description for this task";
         }
     }
 
     /**
-     * stores all the tasks the user has entered into the Tasklist in duke.txt.
+     * Stores all the tasks the user has entered into the Tasklist in duke.txt.
      */
     public  void  updateInfo() throws IOException {
         String  fileString = "";
         for (int i = 0; i < taskList.size(); i += 1) {
             fileString += taskList.get(i).fileString() + "\n";
+            assert taskList.get(i) != null : "No task to update";
+            assert taskList.get(i).getDescription() != null : "No description for this task";
         }
         new File(filePath).createNewFile();
         FileWriter fw = new FileWriter(filePath);

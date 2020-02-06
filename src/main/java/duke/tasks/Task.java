@@ -16,15 +16,18 @@ public abstract class Task {
 
     /**
      * creates a new Task.
+     *
      * @param description the description of the task
      */
     public Task(String description) {
         this.description = description;
+        assert description != null : "No description for this task";
         this.isDone = false;
     }
 
     /**
      * returns the status icon.
+     *
      * @return Y or N depending on whether isDone is true or false
      */
     public String getStatusIcon() {
@@ -41,24 +44,29 @@ public abstract class Task {
 
     /**
      * returns output string.
+     *
      * @return String to be output to the user
      */
     @Override
     public String toString() {
+        assert description != null : "No description for this task";
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
     /**
      * returns file data string.
+     *
      * @return String for the file format
      */
     public abstract String fileString();
 
     /**
      *returns the description of this task.
+     *
      * @return the description
      */
     public String getDescription() {
+        assert description != null : "No description for this task";
         return this.description;
     }
 }

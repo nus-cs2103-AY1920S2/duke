@@ -22,10 +22,11 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 /**
- * the class containing the main function to run the programme.
+ * Contains the main function to run the programme.
  */
 public class Duke extends Application {
 
@@ -47,7 +48,8 @@ public class Duke extends Application {
             .getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * runs the programme.
+     * Runs the programme.
+     *
      * @param args arguments
      */
     public static void main(String[] args) throws IOException, DukeException {
@@ -70,7 +72,7 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws InterruptedException {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -119,9 +121,9 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        Label dukeText = new Label(ui.start()); //system.out
+        String dukeText = (ui.start()); //system.out
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, duke)
         );
 
         taskList = new TaskList();
@@ -132,9 +134,9 @@ public class Duke extends Application {
             storage.retrieveInfo();
         } catch (FileNotFoundException e) {
             output = ("Something went wrong: " + e.getMessage());
-            dukeText = new Label(output);
+            dukeText = (output);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                    DialogBox.getDukeDialog(dukeText, duke)
             );
             return;
         }
@@ -144,11 +146,19 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput(stage);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput(stage);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -160,6 +170,7 @@ public class Duke extends Application {
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog
      * container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -177,23 +188,28 @@ public class Duke extends Application {
      * containing Duke's reply and then appends them to the dialog container.
      * Clears the user input after processing.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    private void handleUserInput(Stage stage) throws InterruptedException {
+        String userText = (userInput.getText());
+        String dukeText = (getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, (user)),
+                DialogBox.getDukeDialog(dukeText, (duke))
         );
+        if (userInput.getText().equals("bye")) {
+            TimeUnit.SECONDS.sleep(1);
+            stage.close();
+        }
         userInput.clear();
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     *
      * @param command the user input
      * @return Duke's response
      */
-    private String getResponse(String command) {
+    String getResponse(String command) {
         if (command.equals("bye")) {
             try {
                 storage.updateInfo();
@@ -205,7 +221,7 @@ public class Duke extends Application {
             try {
                 return parser.parse(command); //get strings from system.out
             } catch (DukeException e) {
-                return ("☹ OOPS!!! " + e.getMessage() + "\n");
+                return ("OOPS!!! " + e.getMessage() + "\n");
             }
         }
     }

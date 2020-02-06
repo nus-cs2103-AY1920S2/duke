@@ -8,32 +8,33 @@ import duke.tasks.ToDo;
 import java.time.format.DateTimeFormatter;
 
 /**
- * deals with making sense of the user command.
+ * Deals with making sense of the user command.
  */
 public class Parser {
 
     /**
-     * the formatter used to parse user input.
+     * The formatter used to parse user input.
      */
     public static final DateTimeFormatter PARSER = DateTimeFormatter
             .ofPattern("d-M-yyyy HHmm");
     /**
-     * the formatter used for the file data format.
+     * The formatter used for the file data format.
      */
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("MMM d yyyy ha");
 
     /**
-     * creates a new Ui object to access functions.
+     * Creates a new Ui object to access functions.
      */
     private Ui ui = new Ui();
     /**
-     * the Tasklist.
+     * The Tasklist.
      */
     private TaskList taskList;
 
     /**
-     * creates a new Parser object and gets Tasklist from Duke.
+     * Creates a new Parser object and gets Tasklist from Duke.
+     *
      * @param taskList the TaskList
      */
     public Parser(TaskList taskList) {
@@ -41,8 +42,9 @@ public class Parser {
     }
 
     /**
-     * scans user input until a bye command is reached. parses each line
+     * Scans user input until a bye command is reached. parses each line
      * entered in by the user
+     *
      * @param command user command
      * @return Duke's response to user command
      */
@@ -63,19 +65,19 @@ public class Parser {
 
             if (command.startsWith("todo")) {
                 ui.checkDescription(description, "todo");
-                return taskList.add(new ToDo(description[1]), "print");
+                return taskList.add(new ToDo(description[1]), true);
 
             } else if (command.startsWith("deadline")) {
                 ui.checkDescription(description, "deadline");
                 ui.checkTime(arr, "deadline");
                 return taskList.add(new Deadline(description[1],
-                        arr[1].split(" ", 2)[1], PARSER), "print");
+                        arr[1].split(" ", 2)[1], PARSER), true);
 
             } else if (command.startsWith("event")) {
                 ui.checkDescription(description, "event");
                 ui.checkTime(arr, "event");
                 return taskList.add(new Event(description[1],
-                        arr[1].split(" ", 2)[1], PARSER), "print");
+                        arr[1].split(" ", 2)[1], PARSER), true);
 
             } else if (command.startsWith("find")) {
                 return taskList.find(description[1]);

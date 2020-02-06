@@ -3,12 +3,12 @@ package duke.commands;
 import duke.exceptions.DukeException;
 
 /**
- *  deals with interactions with the user.
+ *  Deals with interactions with the user.
  */
 public class Ui {
 
     /**
-     * the DUKE logo.
+     * The DUKE logo.
      */
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -23,6 +23,7 @@ public class Ui {
 
     /**
      * Says hi to the user and includes the logo.
+     *
      * @return Duke's introduction
      */
     public String start() {
@@ -32,7 +33,8 @@ public class Ui {
     }
 
     /**
-     * used to print out horizontal lines.
+     * Used to print out horizontal lines.
+     *
      * @return outputs horizontal lines
      */
     public String horizontalLines() {
@@ -40,7 +42,8 @@ public class Ui {
     }
 
     /**
-     * prints output in a more user friendly format.
+     * Prints output in a more user friendly format.
+     *
      * @param input the string to be outputted
      */
     public void dukePrint(String input) {
@@ -50,7 +53,8 @@ public class Ui {
     }
 
     /**
-     * checks whether done/delete command entered by used is valid.
+     * Checks whether done/delete command entered by used is valid.
+     *
      * @param command the line input by the user
      * @param insert the name of the command (either done or delete)
      * @param listSize the current size of Tasklist
@@ -69,7 +73,8 @@ public class Ui {
     }
 
     /**
-     * checks if the description for the task entered by the user is valid.
+     * Checks if the description for the task entered by the user is valid.
+     *
      * @param description the input
      * @param insert the type of task (either todo, deadline or event)
      * @throws DukeException throws an exception is the command is invalid
@@ -83,7 +88,8 @@ public class Ui {
     }
 
     /**
-     * checks if the time for the task entered by the user is valid.
+     * Checks if the time for the task entered by the user is valid.
+     *
      * @param arr the input
      * @param insert the type of task (either deadline or event)
      * @throws DukeException throws an exception is the command is invalid

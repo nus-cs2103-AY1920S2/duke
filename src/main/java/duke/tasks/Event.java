@@ -18,30 +18,39 @@ public class Event extends Task {
 
     /**
      * creates a new Event.
+     *
      * @param description the description of the event
      * @param at the time of the event
      * @param format the format to be used to parse this
      */
     public Event(String description, String at, DateTimeFormatter format) {
         super(description);
+        assert description != null : "No description for this event";
         this.at = LocalDateTime.parse(at, format);
+        assert at != null : "No timing for this event";
     }
 
     /**
      * returns output string.
+     *
      * @return String to be output to the user
      */
     @Override
     public String toString() {
+        assert this.getDescription() != null : "No description for this event";
+        assert this.at != null : "No timing for this event";
         return "[E]" + super.toString() + " (at: " + at.format(FORMATTER) + ")";
     }
 
     /**
      * returns file data string.
+     *
      * @return String for the file format
      */
     @Override
     public String fileString() {
+        assert this.getDescription() != null : "No description for this event";
+        assert this.at != null : "No timing for this event";
         return "E | " + this.getStatusIcon() + " | " + getDescription() + " | "
                 + at.format(FORMATTER);
     }

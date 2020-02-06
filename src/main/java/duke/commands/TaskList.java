@@ -5,28 +5,25 @@ import duke.tasks.Task;
 import java.util.ArrayList;
 
 /**
- *  contains the task list.
+ *  Contains the task list.
  */
 public class TaskList {
 
     /**
-     * the list containing all the tasks.
+     * The list containing all the tasks.
      */
     private ArrayList<Task> newList;
-    /**
-     * creates a new Ui object to access functions.
-     */
-    private Ui ui = new Ui();
 
     /**
-     * creates a new TaskList object.
+     * Creates a new TaskList.
      */
     public TaskList() {
         this.newList = new ArrayList<>();
     }
 
     /**
-     * lists out all the tasks currently available in the Tasklist.
+     * Lists out all the tasks currently available in the Tasklist.
+     *
      * @return response to "list" command
      */
     public String list() {
@@ -37,46 +34,59 @@ public class TaskList {
             output += "Here are the tasks in your list:\n";
             for (int i = 0; i < newList.size(); i += 1) {
                 output += ((i + 1) + ". " + newList.get(i).toString() + "\n");
+                assert newList.get(i) != null : "No task to list out";
+                assert newList.get(i).getDescription() != null : "No description for this task";
             }
         }
         return output;
     }
 
     /**
-     * marks the specified task as done.
+     * Marks the specified task as done.
+     *
      * @param index the index of the task
-     * @return  response to "done" command
+     * @return response to "done" command
      */
     public String done(int index) {
+        assert newList.size() > 0 : "No tasks in list";
         newList.get(index).markAsDone();
+        assert newList.get(index) != null : "No task to mark as done";
+        assert newList.get(index).getDescription() != null : "No description for this task";
         return ("Nice! I've marked this task as done: \n"
                 + newList.get(index).toString() + "\n");
     }
 
     /**
-     * deletes the specified task.
+     * Deletes the specified task.
+     *
      * @param index the index of the task
      * @return response to "delete" command
      */
     public String delete(int index) {
+        assert newList.size() > 0 : "No tasks in list";
         Task task = newList.get(index);
+        assert newList.get(index) != null : "No task to delete";
+        assert newList.get(index).getDescription() != null : "No description for this task";
         newList.remove(index);
         return ("Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + newList.size() + " tasks in the list.\n");
     }
 
     /**
-     * add a new task to the Tasklist.
+     * Add a new task to the Tasklist.
+     *
      * @param newTask the new task to be added
-     * @param command whether to notify the user that the task has been added
-     *                or not
+     * @param print whether to print out the notification that the task has been
+     *              added or not
      * @return response to "add" command
      */
-    public String add(Task newTask, String command) {
+    public String add(Task newTask, boolean print) {
         newList.add(newTask);
-        if (command.equals("print")) {
+        assert newTask != null : "No task to add";
+        assert newTask.getDescription() != null : "No description for this task";
+        if (print) {
             return ("Got it. I've added this task:\n"
-                    + newList.get(newList.size() - 1).toString() + "\n"
+                    + newTask.toString() + "\n"
                     + "Now you have " + newList.size() + " tasks in the list."
                     + "\n");
         } else {
@@ -85,7 +95,8 @@ public class TaskList {
     }
 
     /**
-     * returns the total number of tasks in Tasklist.
+     * Returns the total number of tasks in Tasklist.
+     *
      * @return the current number of tasks in the Tasklist
      */
     public int size() {
@@ -93,17 +104,21 @@ public class TaskList {
     }
 
     /**
-     * retrieve a specific Task from the Tasklist.
+     * Retrieve a specific Task from the Tasklist.
+     *
      * @param index the index of the Task
      * @return the Task that was specified
      */
     public Task get(int index) {
+        assert newList.get(index) != null : "No task to get";
+        assert newList.get(index).getDescription() != null : "No description for this task";
         return newList.get(index);
     }
 
     /**
-     * returns a list of tasks that contain the patterns string in their
+     * Returns a list of tasks that contain the patterns string in their
      * description.
+     *
      * @param pattern the pattern to find
      * @return response to "find" command
      */
