@@ -22,6 +22,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date) throws ParseException {
         super(description);
+        assert description != null : "description cannot be null";
+        assert date != null : "date cannot be null";
         this.date = LocalDate.parse(date);
     }
 

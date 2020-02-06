@@ -33,6 +33,7 @@ public class Parser {
      * @throws DukeException If the string does not contain any recognised command types.
      */
     public String getCommandType(String command) throws DukeException {
+        assert command != null : "Command cannot be null";
         if (command.contains("list")) {
             return "list";
         } else if (command.contains("find")) {
@@ -62,6 +63,7 @@ public class Parser {
      * @throws ParseException If the deadline date cannot be processed.
      */
     public Deadline getDeadline(String str) throws DukeException, ParseException {
+        assert str != null : "String cannot be null";
         String[] splitStr = str.split("/by ");
 
         if (splitStr.length < 2) {
@@ -89,7 +91,8 @@ public class Parser {
      * @throws DukeException If the Event command does not specify the due date.
      * @throws ParseException If the Event date cannot be processed.
      */
-    public Event getEvent(String str) throws DukeException, ParseException {
+    public Event getEvent(String str) throws DukeException {
+        assert str != null : "String cannot be null";
         String[] splitStr = str.split("/at ");
 
         if (splitStr.length < 2) {
@@ -116,6 +119,7 @@ public class Parser {
      * @throws DukeException If the ToDo command does not provide a description.
      */
     public ToDo getToDo(String str) throws DukeException {
+        assert str != null : "String cannot be null";
         String[] splitStr = str.split("todo ");
 
         if (splitStr.length == 1) {
@@ -132,11 +136,13 @@ public class Parser {
      * @return Index of task number based on zero-based indexing.
      */
     public int getTaskNo(String command) {
+        assert command != null : "Command cannot be null";
         String[] str = command.split(" ");
         return (Integer.parseInt(str[1]) - 1);
     }
 
     public String getFind(String command) {
+        assert command != null : "Command cannot be null";
         String[] str = command.split(" ");
         return str[1];
     }

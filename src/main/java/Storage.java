@@ -19,6 +19,7 @@ public class Storage {
      * @param filepath Filepath of the file to load tasks from.
      */
     public Storage(String filepath) {
+        assert filepath != null : "Filepath cannot be null";
         this.file = new File(filepath);
     }
 
@@ -81,6 +82,7 @@ public class Storage {
      * @param taskList ArrayList of tasks that contains all tasks to be saved.
      */
     public void saveFile(ArrayList<Task> taskList) {
+        assert taskList != null : "Tasklist cannot be null";
         try {
             FileWriter writer = new FileWriter(file);
             for (Task task : taskList) {

@@ -9,6 +9,7 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+        assert description != null : "Description cannot be null";
     }
 
     /**

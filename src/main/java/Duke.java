@@ -114,7 +114,7 @@ public class Duke extends Application {
                         tasks.addTask(event);
                         storage.saveFile(tasks.getTaskList());
                         ui.printAdd(event, tasks.getSize());
-                    } catch (DukeException | ParseException e) {
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
@@ -246,7 +246,7 @@ public class Duke extends Application {
      * @param command String input from the user.
      */
     protected String getResponse(String command) {
-        //return "Duke heard " + input;
+
         try {
             String commandType = parser.getCommandType(command);
             switch (commandType) {
@@ -287,7 +287,7 @@ public class Duke extends Application {
                     tasks.addTask(event);
                     storage.saveFile(tasks.getTaskList());
                     return ui.printAdd(event, tasks.getSize());
-                } catch (DukeException | ParseException e) {
+                } catch (DukeException e) {
                     return (e.getMessage());
                 }
             case "todo":

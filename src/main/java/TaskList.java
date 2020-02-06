@@ -20,6 +20,7 @@ public class TaskList {
      * @param taskList ArrayList of tasks.
      */
     public TaskList(ArrayList<Task> taskList) {
+        assert taskList != null : "Tasklist cannot be null";
         this.taskList = taskList;
     }
 
@@ -28,6 +29,7 @@ public class TaskList {
      * @return Integer that represented size of task list.
      */
     public int getSize() {
+        assert taskList != null : "TaskList must exist";
         return taskList.size();
     }
 
@@ -36,6 +38,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
+        assert task != null : "Task to add cannot be null";
         taskList.add(task);
     }
 
@@ -44,6 +47,7 @@ public class TaskList {
      * @param index Index which task to be removed from.
      */
     public void deleteTask(int index) {
+        assert index < taskList.size() : "Index must be within range of tasklist.";
         taskList.remove(index);
     }
 
@@ -53,6 +57,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is larger than the size of the ArrayList.
      */
     public void setDone(int index) throws IndexOutOfBoundsException {
+        assert index < taskList.size() : "Index must be within range of tasklist.";
         taskList.get(index).markAsDone();
     }
 
@@ -62,6 +67,7 @@ public class TaskList {
      * @return Task to be returned.
      */
     public Task getTask(int index) {
+        assert index < taskList.size() : "Index must be within range of tasklist.";
         return taskList.get(index);
     }
 
