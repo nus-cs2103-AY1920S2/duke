@@ -2,6 +2,8 @@
  * The Todo object extends the Task object in creating a task of type todo.
  */
 
+package duke;
+
 public class Todo extends Task {
     /**
      * Constructor for a new Todo object.

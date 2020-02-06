@@ -3,6 +3,8 @@
  * contains a set of available commands available for the user to use.
  */
 
+package duke;
+
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.HashSet;
@@ -186,7 +188,7 @@ public class Parser {
     public static String findCommand(String[] command, TaskList tasklist) {
         TaskList query = new TaskList();
         for (Task thisTask : tasklist.getList()) {
-            if (thisTask.getTaskName().toLowerCase().contains(command[1].toLowerCase())) {
+            if (command.length > 1 && thisTask.getTaskName().toLowerCase().contains(command[1].toLowerCase())) {
                 query.add(thisTask);
             }
         }

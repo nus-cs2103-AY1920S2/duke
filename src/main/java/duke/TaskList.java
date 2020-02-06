@@ -2,6 +2,9 @@
  * The TaskList class is a class that encapsulates a list containing various tasks, and handles methods relating
  * to creating and deleting tasks.
  */
+
+package duke;
+
 import java.util.ArrayList;
 
 public class TaskList {

@@ -2,6 +2,8 @@
  * The Event object extends the Task object in creating a task of type event.
  */
 
+package duke;
+
 public class Event extends Task {
     /**
      * Constructor for a new Event object.

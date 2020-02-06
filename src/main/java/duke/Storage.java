@@ -4,6 +4,8 @@
  * recent version of the TaskList object when the method is called.
  */
 
+package duke;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
@@ -27,11 +29,13 @@ public class Storage {
 
         try {
             if (thisLoc.mkdir()) {
-                System.out.println("No save directory found. Creating new directory at " + thisLoc.toString() + " ...");
+                System.out.println("No save directory found.\n" +
+                        "Creating new directory at " + thisLoc.toString() + " ...");
             }
 
             if (savedData.createNewFile()) {
-                System.out.println("No save file found. Creating new file 'duke.txt' ...");
+                System.out.println("No save file found.\n" +
+                        "Creating new file 'duke.txt' ...");
             }
 
             FileReader fr = new FileReader(savedData);

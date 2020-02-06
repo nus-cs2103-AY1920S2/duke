@@ -2,6 +2,8 @@
  * The Deadline object extends the Task object in creating a task of type deadline.
  */
 
+package duke;
+
 public class Deadline extends Task {
     /**
      * Constructor for a new Deadline object.

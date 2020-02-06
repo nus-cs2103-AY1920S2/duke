@@ -3,11 +3,13 @@
  * is done. This object also handles any editing to the contents of the Task.
  */
 
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Task {
+abstract class Task {
     private char taskType;
     private boolean isDone;
     private String taskName;
