@@ -19,15 +19,15 @@ public class Storage {
     /**
      * Reflects all Tasks in allTasks list to be saved in a lastSavedTasks.txt file.
      *
-     * @param allTasks List of Tasks for duke.Duke.
+     * @param taskList List of Tasks for duke.Duke.
      */
-    public static void saveChanges(TaskList allTasks) {
+    public static void saveChanges(TaskList taskList) {
         // Note: The whole list will be iterated everytime an update is needed for the file.
         try {
             FileWriter fw = new FileWriter("lastSavedTasks.txt");
-            for (int i = 0; i < allTasks.sizeOf(); i++) {
-                String tickOrCross = allTasks.getTask(i).obtainStatusIcon();
-                String currentLine = String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.getTask(i);
+            for (int i = 0; i < taskList.sizeOf(); i++) {
+                String tickOrCross = taskList.getTask(i).obtainStatusIcon();
+                String currentLine = String.valueOf(i + 1) + ". [" + tickOrCross + "] " + taskList.getTask(i);
                 fw.write(currentLine + "\n");
             }
             fw.close();

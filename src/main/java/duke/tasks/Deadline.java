@@ -25,10 +25,10 @@ public class Deadline extends Task {
      * Prints a message indicating the Deadline Task has been added.
      */
     @Override
-    public void taskAddedMessage() {
-        printLine();
-        print("==> Added unique Deadline task: " + this);
-        printLine();
+    public String taskAddedMessage() {
+        return TasksConstant.FORMAT_LINE + "\n"
+        + "==> Added unique Deadline task: " + this + "\n"
+        + TasksConstant.FORMAT_LINE;
     }
 
     /**

@@ -35,7 +35,7 @@ public abstract class Task {
     /**
      * Indicates that the Task's command has been added.
      */
-    public abstract void taskAddedMessage();
+    public abstract String taskAddedMessage();
 
     /**
      * Marks the Task as completed.

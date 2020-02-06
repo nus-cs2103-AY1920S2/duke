@@ -63,7 +63,7 @@ public class TaskList {
                     return;
 
                 case "list":
-                    printAllTasks();
+                    Ui.printAllTasks(this);
                     break;
 
                 case "delete":
@@ -142,7 +142,7 @@ public class TaskList {
         }
 
         // Print all options
-        result.printAllTasks();
+        Ui.printAllTasks(result);
 
     }
 
@@ -156,11 +156,21 @@ public class TaskList {
         try {
             int indexToRemove = Integer.parseInt(command.substring("delete ".length())) - 1; // due to zero-indexing
             Task removedTask = allTasks.remove(indexToRemove);
-            printTaskRemoval(indexToRemove, removedTask);
             Storage.saveChanges(this);
+            Ui.printTaskRemoval(indexToRemove, removedTask, this);
         } catch (Exception e) {
             throw new DeleteException("");
         }
+    }
+
+    /**
+     * Adds the Task to store in the ArrayList, and prints added message. This is a helper method for adding Tasks.
+     *
+     * @param t Task to be stored.
+     */
+    private void addTaskToStored(Task t) {
+        allTasks.add(t);
+        Ui.print(t.taskAddedMessage());
     }
 
     /**
@@ -280,19 +290,9 @@ public class TaskList {
      */
     private void doTask(int i) {
         Task t = allTasks.get(i - 1); // due to 0 indexing
-        printTaskComplete(t);
+        Ui.printTaskComplete(t);
         t.doTask(); // task marked as complete
         Storage.saveChanges(this);
-    }
-
-    /**
-     * Adds the Task to store in the ArrayList, and prints added message.
-     *
-     * @param t Task to be stored.
-     */
-    private void addTaskToStored(Task t) {
-        allTasks.add(t);
-        t.taskAddedMessage();
     }
 
     /**
@@ -305,74 +305,7 @@ public class TaskList {
         allTasks.add(t);
     }
 
-    /**
-     * Prints removal of a given task, of its index then and the current number of Tasks remaining.
-     *
-     * @param index index of current Task to remove.
-     */
-    private void printTaskRemoval(int index, Task removedTask) {
-        printLine();
-        print("Removed Task #" + (index + 1) + ": " + removedTask
-                + "\nHope it's worth it!\nYou are now left with "
-                + allTasks.size() + " tasks.");
-        printLine();
-    }
 
-    /**
-     * Prints all tasks, their number order, and their completion for list command.
-     */
-    private void printAllTasks() throws EmptyTaskListException {
-        printLine();
-        if (allTasks.isEmpty()) {
-            throw new EmptyTaskListException("");
-        }
-        for (int i = 0; i < allTasks.size(); i++) {
-            printTaskFromStored(i);
-        }
-        printLine();
-    }
-
-    /**
-     * Prints a response to the done command after doTask completes.
-     *
-     * @param t Task that has been completed via doTask method.
-     */
-    private void printTaskComplete(Task t) {
-        printLine();
-        if (t.getIsDone()) {
-            print("That's already done, try another. Or did you make a careless mistake? XD");
-        } else {
-            print("Nice! The following task has been marked completed:\n"
-                    + "===> [V] " + t + " <===");
-        }
-        printLine();
-    }
-
-    /**
-     * Prints individual task with current completion status.
-     *
-     * @param i index of storage of the Task in the container/collection.
-     */
-    private void printTaskFromStored(int i) {
-        String tickOrCross = allTasks.get(i).obtainStatusIcon();
-        print(String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.get(i));
-    }
-
-    /**
-     * Prints a horizontal formatting line.
-     */
-    private void printLine() {
-        print(Constant.FORMAT_LINE);
-    }
-
-    /**
-     * Prints a given String.
-     *
-     * @param s String to be printed.
-     */
-    private void print(String s) {
-        System.out.println(s);
-    }
 
     /**
      * Returns size of the TaskList's ArrayList.
@@ -391,6 +324,10 @@ public class TaskList {
      */
     public Task getTask(int i) {
         return allTasks.get(i);
+    }
+
+    public boolean isEmpty() {
+        return allTasks.isEmpty();
     }
 
 }

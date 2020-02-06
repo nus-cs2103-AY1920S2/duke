@@ -25,10 +25,10 @@ public class Event extends Task {
      * Prints a message indicating the Event Task has been added.
      */
     @Override
-    public void taskAddedMessage() {
-        printLine();
-        print("==> Added unique Event: " + this);
-        printLine();
+    public String taskAddedMessage() {
+        return TasksConstant.FORMAT_LINE + "\n"
+                + "==> Added unique Event: " + this + "\n"
+                + TasksConstant.FORMAT_LINE;
     }
 
     /**
