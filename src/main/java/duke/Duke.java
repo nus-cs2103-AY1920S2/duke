@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -125,6 +126,13 @@ public class Duke extends Application {
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
         stage.show();
+
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        //this.dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
     }
 /*
     @Override
@@ -165,6 +173,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
@@ -187,13 +196,6 @@ public class Duke extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
+    }*/
 
 }
