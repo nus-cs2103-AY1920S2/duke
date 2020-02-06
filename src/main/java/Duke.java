@@ -2,18 +2,21 @@ import exception.DukeException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+
     /**
      * Initializes Duke with its UI and file and load tasks into storage.
-     * @param filePath the file where tasks are loaded and saved to.
      * @throws IOException if there are file exceptions.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke() throws IOException {
         ui = new Ui();
+        String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -76,8 +79,15 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }
