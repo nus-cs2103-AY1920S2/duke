@@ -1,13 +1,26 @@
 package duke.ui;
 
+import duke.Duke;
+import duke.parser.Command;
+import duke.parser.Parser;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Gui extends Ui{
+public class Gui implements UiText {
     VBox dialogContainer;
     TextField userInput;
 
@@ -15,7 +28,6 @@ public class Gui extends Ui{
     private StringBuilder tempText;
 
     public Gui(VBox dialogContainer, TextField userInput) {
-        super(new Scanner(""));
         this.dialogContainer = dialogContainer;
         this.userInput = userInput;
     }
@@ -33,15 +45,20 @@ public class Gui extends Ui{
         this.tempText.append("\n");
     }
 
-    public void respond(String text) {
-        this.dialogContainer.getChildren().add(getDialogLabel(text));
+    public void respond(String... text) {
+        respond(Arrays.asList(text));
+    }
+
+    public void respond(List<String> text) {
+        start();
+        respondLine(text);
+        over();
     }
 
     public void start(String... initials) {
         assert !this.isOpen : "illegal usage of responder";
         this.tempText = new StringBuilder();
         outPrint(resSpace);
-        outPrintln(line);
         Scanner sc2;
         for (String str : initials) {
             sc2 = new Scanner(str);
@@ -75,9 +92,8 @@ public class Gui extends Ui{
             }
         }
         outPrint(resSpace);
-        outPrintln(line);
         outPrintln();
-        respond(this.tempText.toString());
+        this.dialogContainer.getChildren().add(getDialogLabel(this.tempText.toString()));
         this.isOpen = false;
     }
 
@@ -85,8 +101,12 @@ public class Gui extends Ui{
         this.userInput.clear();
     }
 
-    public String getUserInputText() {
+    public String nextLine() {
         return this.userInput.getText();
+    }
+
+    public boolean hasNextLine() {
+        return this.userInput.getText().isEmpty();
     }
 
     private Label getDialogLabel(String text) {

@@ -14,6 +14,6 @@
               spacing="10">
         </VBox>
     </ScrollPane>
-    <TextField fx:id="userInput" prefWidth="100.0" AnchorPane.leftAnchor="1.0" AnchorPane.bottomAnchor="1.0"/>
+    <TextField fx:id="userInput" prefWidth="100.0" AnchorPane.leftAnchor="1.0" AnchorPane.bottomAnchor="1.0" onAction="#handleUserInputOnAction"/>
     <Button fx:id="sendButton" text="send" AnchorPane.rightAnchor="1.0" AnchorPane.bottomAnchor="1.0" onMouseClicked="#handleSendButtonAction"/>
 </AnchorPane>

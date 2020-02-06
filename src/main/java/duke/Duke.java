@@ -1,6 +1,7 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,10 +36,9 @@ public class Duke extends Application {
     @FXML
     private TextField userInput;
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private Gui gui;
+    public Storage storage;
+    public TaskList tasks;
+    public UiText ui;
 
     /**
      * If no file path specified, default path is assumed
@@ -70,9 +70,10 @@ public class Duke extends Application {
         } else {
             tasks = new TaskList();
         }
+        /*
         if (gui) {
             this.gui = new Gui(this.dialogContainer, this.userInput);
-        }
+        }*/
     }
 
     /**
@@ -97,9 +98,20 @@ public class Duke extends Application {
 
     @FXML
     protected void handleSendButtonAction(MouseEvent event) {
-        Command cmd = Parser.parse(gui.getUserInputText());
-        cmd.execute(this.tasks, this.gui, this.storage);
-        this.gui.clearUserInput();
+        try {
+            Command cmd = Parser.parse(this.userInput.getText());
+            cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
+            this.ui.clearUserInput();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void handleUserInputOnAction(Event event) {
+        Command cmd = Parser.parse(this.userInput.getText());
+        cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
+        this.ui.clearUserInput();
     }
 
     @Override
