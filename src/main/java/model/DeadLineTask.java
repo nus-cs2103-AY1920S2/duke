@@ -1,25 +1,36 @@
 package main.java.model;
 
-import main.java.model.Task;
-
 import main.java.exceptions.NoDescriptionException;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DeadLineTask extends Task {
+    static final String TASK_TYPE_STRING = "deadline task";
+    static final String TASK_TYPE_CHA = "D";
+
     protected LocalDateTime by;
 
-    public DeadLineTask() {
-        super("deadline task");
-    }
-
     public DeadLineTask(String description, LocalDateTime by) throws NoDescriptionException {
-        super(description, "deadline task");
+        super(description);
         this.by = by;
     }
 
     @Override
+    public String getTaskType() {
+        return TASK_TYPE_CHA;
+    }
+
+    @Override
+    public ArrayList<String> getDetails() {
+        return new ArrayList<String>(Arrays.asList(
+                this.description,
+                this.by.format(DATE_TIME_FORMAT)));
+    }
+
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DATE_TIME_FORMAT) + ")";
+        return "[" + TASK_TYPE_CHA + "]" + super.toString() + " (by: " + by.format(DATE_TIME_FORMAT) + ")";
     }
 }

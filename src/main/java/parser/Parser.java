@@ -15,13 +15,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    static final String EXIT_KEY = "bye";
-    static final String  VIEW_LIST_KEY = "list";
-    static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
-    static final String FINISH_KEY = "(done)(\\s+)(\\d+)";
-    static final String TODO_KEY = "(todo)(.*)";
-    static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*\\/by\\s*(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
-    static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*\\/at\\s*(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
+    public static final String EXIT_KEY = "bye";
+    public static final String  VIEW_LIST_KEY = "list";
+    public static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
+    public static final String FINISH_KEY = "(done)(\\s+)(\\d+)";
+    public static final String TODO_KEY = "(todo)(.*)";
+    public static final String DATE_TIME_KEY = "(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
+    public static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*\\/by\\s*" + DATE_TIME_KEY;
+    public static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*\\/at\\s*" + DATE_TIME_KEY;
 
     static final String DEFAULT_TIME = "23:59";
 
@@ -31,7 +32,19 @@ public class Parser {
     static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
     static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
 
-    public Parser() { }
+    public static LocalDateTime parseDateTime(String dateString, String timeString) throws IllegalDateTimeFormatException {
+        //TODO: add a notification
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            LocalTime time = LocalTime.parse(timeString == null ? DEFAULT_TIME: timeString);
+            LocalDateTime dateTime = date.atTime(time);
+            return dateTime;
+        } catch (DateTimeParseException dte) {
+
+            //TODO: change the error message
+            throw new IllegalDateTimeFormatException(dte.getMessage() + '\n');
+        }
+    }
 
     private int findIndex(Pattern pattern, String input) {
         Matcher matcher = pattern.matcher(input);
@@ -51,17 +64,7 @@ public class Parser {
         String dateString = matcher.group(3);
         String timeString = matcher.group(4);
 
-        //TODO: add a notification
-        try {
-            LocalDate date = LocalDate.parse(dateString);
-            LocalTime time = LocalTime.parse(timeString == null ? DEFAULT_TIME: timeString);
-            LocalDateTime dateTime = date.atTime(time);
-            return dateTime;
-        } catch (DateTimeParseException dte) {
-
-            //TODO: change the error message
-            throw new IllegalDateTimeFormatException(dte.getMessage() + '\n');
-        }
+        return parseDateTime(dateString, timeString);
     }
 
     private static boolean isExitKey(String input) { return EXIT_KEY.equals(input); }
@@ -93,7 +96,8 @@ public class Parser {
         return eventMatcher.find();
     }
 
-    public Command parseCommand(String userInput) throws NoCommandException, IllegalDateTimeFormatException {
+    public Command parseCommand(String userInput) throws
+            NoCommandException, IllegalDateTimeFormatException{
         if (this.isExitKey(userInput)) {
             return new ExitCommand();
         }

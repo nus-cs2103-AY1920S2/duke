@@ -13,5 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+<<<<<<< HEAD
 src/exp.java
 
+=======
+tasks.txt
+>>>>>>> 04be4d57a86746c14e9f333a675db93a2ee36c01
