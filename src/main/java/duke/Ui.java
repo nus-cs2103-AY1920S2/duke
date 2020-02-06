@@ -35,6 +35,16 @@ public class Ui {
         System.out.println(format);
     }
 
+    public void showFound(ArrayList<Task> taskList) {
+        System.out.println(format + "      Here are the matching tasks in your list:");
+
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            Task current = taskList.get(i - 1);
+            System.out.println("      " + i + ". " + current);
+        }
+        System.out.println(format);
+    }
+
     public void showDone(Task task) {
         System.out.println(format
                 + "      Nice! I've marked this task as done:\n "

@@ -82,6 +82,19 @@ public class TaskList {
         }
     }
 
+    public void find(String[] arr) {
+        String input = arr[1];
+        ArrayList<Task> temp = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = this.tasks.get(i);
+            if (task.description.contains(input)) {
+                temp.add(task);
+            }
+        }
+        ui.showFound(temp);
+    }
+
     public static void checkDescription(int size) throws DukeException {
         Ui ui = new Ui();
 
