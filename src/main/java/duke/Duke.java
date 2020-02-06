@@ -42,6 +42,7 @@ public class Duke extends Application {
         stage.show(); // Render the stage.
 
         view.format(stage, mainLayout);
+        view.setEventListeners();
     }
 
     /**
