@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
+import duke.view.View;
+
 /**
  * Duke class represents the main chatbot entity; it contains classes that manage different components of the chatbot.
  */
